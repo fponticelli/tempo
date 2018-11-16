@@ -1,0 +1,85 @@
+{
+  "name": "mood",
+  "version": "0.0.1",
+  "main": "lib",
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/fponticelli/mood",
+  "bugs": {
+    "url": "https://github.com/fponticelli/mood/issues"
+  },
+  "author": {
+    "name": "Franco Ponticelli",
+    "email": "franco.ponticelli@gmail.com",
+    "url": "https://github.com/fponticelli"
+  },
+  "description": "ui framework for TypeScript",
+  "keywords": [
+    "typescript",
+    "ui",
+    "dom",
+    "mood architecture"
+  ],
+  "devDependencies": {
+    "@types/jest": "^23.3.5",
+    "@types/node": "^10.12.0",
+    "jest": "^23.6.0",
+    "ts-jest": "^23.10.4",
+    "ts-node": "^7.0.1",
+    "tslint": "^5.11.0",
+    "typedoc": "^0.13.0",
+    "typescript": "^3.1.6"
+  },
+  "directories": {
+    "doc": "docs",
+    "lib": "src",
+    "test": "test"
+  },
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/fponticelli/mood.git"
+  },
+  "scripts": {
+    "build": "rm -rf lib && tsc",
+    "doc": "rm -rf docs && typedoc --out docs --ignoreCompilerErrors --theme minimal --name mood ./src",
+    "lint": "tslint --fix --project .",
+    "prep": "yarn test-coverage && yarn build && yarn doc",
+    "test": "jest",
+    "test-coverage": "jest --coverage",
+    "watch": "jest --watch --coverage"
+  },
+  "eslint.packageManager": "yarn",
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.ts"
+    ],
+    "coveragePathIgnorePatterns": [
+      "<rootDir>/node_modules"
+    ],
+    "coverageReporters": [
+      "json",
+      "lcov",
+      "text"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 100,
+        "functions": 100,
+        "lines": 100,
+        "statements": 100
+      }
+    },
+    "transform": {
+      "^.+\\.tsx?$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testMatch": [
+      "**/*.spec.ts"
+    ],
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json"
+    ]
+  }
+}

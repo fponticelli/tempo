@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "lib": ["es6", "es7"],
+    "sourceRoot": "./src",
+    "sourceMap": true,
+    "declaration": true,
+    "outDir": "./lib",
+    "target": "es5",
+    "moduleResolution": "node",
+    "strict": true
+  },
+  "exclude": [
+    "./node_modules/",
+    "./lib/",
+    "./test/",
+    "./**/*.spec.ts"
+  ]
+}
