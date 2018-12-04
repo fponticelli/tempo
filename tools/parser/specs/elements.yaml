@@ -1,0 +1,36 @@
+- name: a
+  interface: HTMLAnchorElement
+  category: transparent
+  permitted-content: [flow, phrasing]
+  aria-roles: [button, checkbox, menuitem, menuitemcheckbox, menuitemradio, option, radio, switch, tab, treeitem]
+  attributes: ['@global', download, href, hreflang, ping, referrerpolicy, rel, target, type, charset, obs-coords, name, rev, shape]
+  events: ['@global']
+- name: abbr
+  interface: HTMLElement
+  permitted-content: [phrasing]
+  aria-roles: ['@all']
+  attributes: ['@global']
+  events: ['@global']
+- name: acronym
+  interface: HTMLElement
+  permitted-content: [phrasing]
+  aria-roles: ['@all']
+  tags: obsolete
+  attributes: ['@global']
+  events: ['@global']
+- name: address
+  interface: HTMLSpanElement
+  permitted-content: [flow] # no nested address, h1 ... h6, article ...
+  attributes: ['@global']
+  events: ['@global']
+- name: area
+  interface: HTMLAreaElement
+  permitted-content: none
+  attributes: ['@global', alt, coords, download, href, hreflang, obs-name, nohref, ping, referrerpolicy, rel, shape, tabindex, target, obs-type]
+  events: ['@global']
+- name: article
+  interface: HTMLElement
+  permitted-content: [flow]
+  aria-roles: [application, document, feed, main, presentation, region]
+  attributes: ['@global']
+  events: ['@global']

@@ -1,0 +1,216 @@
+import { stringValue, ValueDecoder, objectValue, arrayValue, decodeValue, literalValue } from 'partsing/value'
+import { success, failure } from 'partsing/core/result'
+import { Decoder } from 'partsing/core/decoder'
+import {
+  AttributeType,
+  Attribute,
+  stringType,
+  booleanType,
+  enumeratedBooleanType,
+  classType,
+  styleType,
+  Tag,
+  integerType,
+  spaceSeparatedType,
+  EnumType
+} from './attribute'
+import { DecodeError, Entity } from 'partsing/error'
+import { Element, Category, contentCategories, noContent } from './element'
+
+function camelize(str: string) {
+  const words = str.split(/[-:_\s]+/)
+  if (words.length === 0)
+    return ''
+  else if (words.length === 1)
+    return words[0]
+  else
+    return [words[0]].concat(words.slice(1).map(v => v.substring(0, 1).toUpperCase() + v.substring(1))).join('')
+}
+
+const attributeType: ValueDecoder<AttributeType> =
+  objectValue(
+    { enum: arrayValue(stringValue) },
+    []
+  )
+  .map(v => v.enum)
+  .map(v => new EnumType(v))
+  .or(
+    stringValue.flatMap(type => Decoder.of(input => {
+      switch (type) {
+        case 'bool': return success(input, booleanType)
+        case 'boolean': return success(input, booleanType)
+        case 'class': return success(input, classType)
+        case 'ebool': return success(input, enumeratedBooleanType)
+        case 'eboolean': return success(input, enumeratedBooleanType)
+        case 'int': return success(input, integerType)
+        case 'integer': return success(input, integerType)
+        case 'string': return success(input, stringType)
+        case 'style': return success(input, styleType)
+        case 'space-separated': return success(input, spaceSeparatedType)
+        default: return failure(
+          input,
+          ...[
+            'bool',
+            'boolean',
+            'class',
+            'ebool',
+            'eboolean',
+            'int',
+            'integer',
+            'string',
+            'style',
+            'space-separated'
+          ].
+            map(t => DecodeError.expectedMatch(Entity.STRING, t))
+        )
+      }
+  }))
+  )
+
+const tagValue: ValueDecoder<Tag> = stringValue.flatMap(type => Decoder.of(input => {
+  switch (type) {
+    case 'deprecated': return success(input, Tag.deprecated)
+    case 'experimental': return success(input, Tag.experimental)
+    case 'experimental-supported': return success(input, Tag.experimentalSupported)
+    case 'experimentalSupported': return success(input, Tag.experimentalSupported)
+    case 'ms-extension': return success(input, Tag.msExtension)
+    case 'msExtension': return success(input, Tag.msExtension)
+    case 'obsolete': return success(input, Tag.obsolete)
+    default: return failure(
+      input,
+      ...[
+        'deprecated',
+        'experimental',
+        'experimental-supported',
+        'experimentalSupported',
+        'ms-extension',
+        'msExtension',
+        'obsolete'
+      ].map(t => DecodeError.expectedMatch(Entity.STRING, t))
+    )
+  }
+}))
+
+const attribute: ValueDecoder<Attribute> = objectValue(
+  {
+    'name': stringValue,
+    'code-name': stringValue,
+    'dom-name': stringValue,
+    'type': arrayValue(attributeType).or(attributeType.map(v => [v])),
+    'tags': arrayValue(tagValue).or(tagValue.map(v => [v]))
+  },
+  ['code-name', 'dom-name', 'type', 'tags']
+).map(o => new Attribute(
+  o.name,
+  o['code-name'] || camelize(o.name),
+  o['dom-name'] || o['code-name'] || o.name,
+  o.type || [stringType],
+  o.tags || []
+))
+
+const attributes: ValueDecoder<Attribute[]> = arrayValue(attribute)
+
+export const parseAttributes = decodeValue(attributes)
+
+const collection = objectValue(
+  {
+    name: stringValue,
+    type: literalValue('attributes').or(literalValue('events'), literalValue('aria-role')),
+    values: arrayValue(stringValue)
+  },
+  []
+)
+
+const collections = arrayValue(collection).map(colls => {
+  return colls.reduce(
+    (acc, coll) => {
+      acc.set(`${coll.type}:${coll.name}`, coll.values)
+      return acc
+    },
+    new Map<string, string[]>()
+  )
+})
+
+export const parseCollections = decodeValue(collections)
+
+const event = objectValue(
+  {
+    name: stringValue
+  },
+  []
+)
+
+const events = arrayValue(event)
+
+export const parseEvents = decodeValue(events)
+
+const categoryValue: ValueDecoder<Category> = stringValue
+  .flatMap(value =>
+    Decoder.of(input => {
+      switch (value) {
+        case 'transparent': return success(input, Category.transparent)
+        case 'flow': return success(input, Category.flow)
+        case 'phrasing': return success(input, Category.phrasing)
+        case 'metadata': return success(input, Category.metadata)
+        case 'sectioning': return success(input, Category.sectioning)
+        case 'heading': return success(input, Category.heading)
+        case 'embedded': return success(input, Category.embedded)
+        case 'interactive': return success(input, Category.interactive)
+        case 'palpable': return success(input, Category.palpable)
+        case 'formAssociated': return success(input, Category.formAssociated)
+        case 'scriptSupporting': return success(input, Category.scriptSupporting)
+
+        default: return failure(
+          input,
+          ...[
+            'transparent',
+            'flow',
+            'phrasing',
+            'metadata',
+            'sectioning',
+            'heading',
+            'embedded',
+            'interactive',
+            'palpable',
+            'formAssociated',
+            'scriptSupporting'
+          ].map(t => DecodeError.expectedMatch(Entity.STRING, t))
+        )
+      }
+    })
+  )
+
+const permittedContentValue = arrayValue(categoryValue)
+  .map(contentCategories)
+  .or(literalValue('none').withResult(noContent))
+
+const element = objectValue(
+  {
+    name: stringValue,
+    'code-name': stringValue,
+    'dom-name': stringValue,
+    interface: stringValue,
+    tags: arrayValue(tagValue).or(tagValue.map(v => [v])),
+    'aria-roles': arrayValue(stringValue),
+    'permitted-content': permittedContentValue,
+    category: categoryValue,
+    attributes: arrayValue(stringValue)
+  },
+  ['code-name', 'dom-name', 'tags', 'aria-roles', 'permitted-content', 'category']
+).map(o => {
+  return new Element(
+    o.name,
+    o['code-name'] || camelize(o.name),
+    o['dom-name'] || o.name,
+    o.interface,
+    o.tags || [],
+    o['aria-roles'] || [],
+    o['permitted-content'] || noContent,
+    o.category,
+    o.attributes
+  )
+})
+
+const elements = arrayValue(element)
+
+export const parseElements = decodeValue(elements)

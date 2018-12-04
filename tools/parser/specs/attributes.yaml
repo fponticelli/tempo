@@ -1,0 +1,93 @@
+- name: accesskey
+- name: alt
+- name: autocapitalize
+  type: { enum: ['off', none, 'on', sentences, words, characters] }
+- name: charset
+  tags: obsolete
+- name: class
+  code-name: className
+  type: class
+- name: contenteditable
+  type: ebool # '' is also acceptable for 'true'
+- name: contextmenu
+  tags: obsolete
+- name: obs-coords
+  code-name: coords
+  dom-name: coords
+  tags: obsolete
+- name: coords
+# not sure what to do with data
+# - name: data-*
+- name: download
+- name: dir
+  type: { enum: [ltr, rtl, auto] }
+- name: draggable
+  type: ebool
+- name: dropzone
+  type: { enum: [copy, move, link] }
+  tags: experimental
+- name: hidden
+  type: bool
+- name: href
+- name: hreflang
+- name: id
+  type: string
+- name: inputmode
+  type: { enum: [none, text, tel, url, email, numeric, decimal, search] }
+  vendor-names: { firefox: x-inputmode }
+- name: is
+- name: itemid
+- name: itemprop
+- name: itemref
+- name: itemscope
+  type: boolean
+- name: itemtype
+- name: lang
+- name: obs-name
+  code-name: name
+  dom-name: name
+  tags: obsolete
+- name: nohref
+  tags: obsolete
+- name: ping
+  type: space-separated
+- name: referrerpolicy
+  type: { enum: [no-referrer, no-referrer-when-downgrade, origin, origin-when-cross-origin, strict-origin-when-cross-origin, unsafe-url] }
+  tags: experimental
+- name: rel
+  type: space-separated
+- name: rev
+  tags: obsolete
+- name: shape
+- name: slot
+  tags: experimental
+- name: spellcheck
+  type: eboolean
+  tags: experimental-supported
+- name: target
+  type: [{ enum: [_self, _blank, _parent, _top] }, string]
+- name: shape
+  type: { enum: [circle, default, polygon, rect] }
+  tags: obsolete
+- name: style
+  type: style
+- name: tabindex
+  type: integer
+- name: title
+- name: obs-type
+  dom-name: type
+  code-name: type
+  tags: obsolete
+- name: type
+- name: translate
+  tags: experimental
+  type: { enum: ['', 'yes', 'no'] }
+- name: xml:lang
+  tags: deprecated
+- name: xml:base
+  tags: deprecated
+- name: x-ms-acceleratorkey
+  tags: ms-extension
+- name: x-ms-format-detection
+  type: { enum: [all, none, phone] }
+  tags: ms-extension

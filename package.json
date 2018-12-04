@@ -35,8 +35,8 @@
     "test": "test"
   },
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/fponticelli/mood.git"
+    "type": "git",
+    "url": "https://github.com/fponticelli/mood.git"
   },
   "scripts": {
     "build": "rm -rf lib && tsc",
@@ -81,5 +81,8 @@
       "jsx",
       "json"
     ]
+  },
+  "dependencies": {
+
   }
 }
