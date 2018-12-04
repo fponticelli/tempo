@@ -1,16 +1,41 @@
 - name: accesskey
+- name: alink
+  tags: obsolete
 - name: alt
 - name: autocapitalize
   type: { enum: ['off', none, 'on', sentences, words, characters] }
+- name: autocomplete
+  type: { enum: ['', 'off'] }
+  tags: non-standard
+- name: autofocus
+  type: bool
+- name: autoplay
+  type: bool
+- name: background
+  tags: obsolete
+- name: bgcolor
+  tags: obsolete
+- name: bottommargin
+  tags: obsolete
+- name: button-type
+  dom-name: type
+  code-name: type
+  type: { enum: [submit, reset, button] }
 - name: charset
   tags: obsolete
+- name: cite
 - name: class
   code-name: className
   type: class
+- name: clear
+  type: bool
+  tags: obsolete
 - name: contenteditable
   type: ebool # '' is also acceptable for 'true'
 - name: contextmenu
   tags: obsolete
+- name: controls
+  type: bool
 - name: obs-coords
   code-name: coords
   dom-name: coords
@@ -18,14 +43,28 @@
 - name: coords
 # not sure what to do with data
 # - name: data-*
-- name: download
+- name: crossorigin
+  type: { enum: [anonymous, use-credentials] }
+- name: disabled
+  type: bool
 - name: dir
   type: { enum: [ltr, rtl, auto] }
+- name: download
 - name: draggable
   type: ebool
 - name: dropzone
   type: { enum: [copy, move, link] }
   tags: experimental
+- name: form
+- name: formaction
+- name: formenctype
+  type: { enum: ['application/x-www-form-urlencoded', 'multipart/form-data', 'text/plain'] }
+- name: formmethod
+  type: { enum: [post, get] }
+- name: formnovalidate
+  type: bool
+- name: formtarget
+  type: [{ enum: [_self, _blank, _parent, _top] }, string]
 - name: hidden
   type: bool
 - name: href
@@ -43,14 +82,25 @@
   type: boolean
 - name: itemtype
 - name: lang
+- name: leftmargin
+  tags: obsolete
+- name: link
+  tags: obsolete
+- name: loop
+  type: bool # or ebool?
+- name: name
+- name: muted
+  type: bool # or ebool?
+- name: nohref
+  tags: obsolete
 - name: obs-name
   code-name: name
   dom-name: name
   tags: obsolete
-- name: nohref
-  tags: obsolete
 - name: ping
   type: space-separated
+- name: preload
+  type: { enum: ['', none, metadata, auto] }
 - name: referrerpolicy
   type: { enum: [no-referrer, no-referrer-when-downgrade, origin, origin-when-cross-origin, strict-origin-when-cross-origin, unsafe-url] }
   tags: experimental
@@ -58,12 +108,15 @@
   type: space-separated
 - name: rev
   tags: obsolete
+- name: rightmargin
+  tags: obsolete
 - name: shape
 - name: slot
   tags: experimental
 - name: spellcheck
   type: eboolean
   tags: experimental-supported
+- name: src
 - name: target
   type: [{ enum: [_self, _blank, _parent, _top] }, string]
 - name: shape
@@ -73,15 +126,22 @@
   type: style
 - name: tabindex
   type: integer
+- name: text
+  tags: obsolete
 - name: title
 - name: obs-type
   dom-name: type
   code-name: type
   tags: obsolete
+- name: topmargin
+  tags: obsolete
 - name: type
 - name: translate
   tags: experimental
   type: { enum: ['', 'yes', 'no'] }
+- name: value
+- name: vlink
+  tags: obsolete
 - name: xml:lang
   tags: deprecated
 - name: xml:base

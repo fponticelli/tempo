@@ -15,7 +15,7 @@ import {
   EnumType
 } from './attribute'
 import { DecodeError, Entity } from 'partsing/error'
-import { Element, Category, contentCategories, noContent } from './element'
+import { Element, Category, noContent, elementContent, contentCategory } from './element'
 
 function camelize(str: string) {
   const words = str.split(/[-:_\s]+/)
@@ -76,6 +76,8 @@ const tagValue: ValueDecoder<Tag> = stringValue.flatMap(type => Decoder.of(input
     case 'ms-extension': return success(input, Tag.msExtension)
     case 'msExtension': return success(input, Tag.msExtension)
     case 'obsolete': return success(input, Tag.obsolete)
+    case 'non-standard': return success(input, Tag.nonStandard)
+    case 'nonStandard': return success(input, Tag.nonStandard)
     default: return failure(
       input,
       ...[
@@ -85,19 +87,23 @@ const tagValue: ValueDecoder<Tag> = stringValue.flatMap(type => Decoder.of(input
         'experimentalSupported',
         'ms-extension',
         'msExtension',
-        'obsolete'
+        'obsolete',
+        'non-standard',
+        'nonStandard'
       ].map(t => DecodeError.expectedMatch(Entity.STRING, t))
     )
   }
 }))
 
+const tags = arrayValue(tagValue).or(tagValue.map(v => [v]))
+
 const attribute: ValueDecoder<Attribute> = objectValue(
   {
-    'name': stringValue,
+    name: stringValue,
     'code-name': stringValue,
     'dom-name': stringValue,
-    'type': arrayValue(attributeType).or(attributeType.map(v => [v])),
-    'tags': arrayValue(tagValue).or(tagValue.map(v => [v]))
+    type: arrayValue(attributeType).or(attributeType.map(v => [v])),
+    tags: tags
   },
   ['code-name', 'dom-name', 'type', 'tags']
 ).map(o => new Attribute(
@@ -135,9 +141,10 @@ export const parseCollections = decodeValue(collections)
 
 const event = objectValue(
   {
-    name: stringValue
+    name: stringValue,
+    tags: tags
   },
-  []
+  ['tags']
 )
 
 const events = arrayValue(event)
@@ -180,8 +187,11 @@ const categoryValue: ValueDecoder<Category> = stringValue
     })
   )
 
-const permittedContentValue = arrayValue(categoryValue)
-  .map(contentCategories)
+const permittedContentValue =
+  arrayValue(
+    categoryValue.map(contentCategory)
+      .or(objectValue({ els: arrayValue(stringValue) }, []).map(o => o.els).map(elementContent))
+  )
   .or(literalValue('none').withResult(noContent))
 
 const element = objectValue(
@@ -190,24 +200,26 @@ const element = objectValue(
     'code-name': stringValue,
     'dom-name': stringValue,
     interface: stringValue,
-    tags: arrayValue(tagValue).or(tagValue.map(v => [v])),
+    tags: tags,
     'aria-roles': arrayValue(stringValue),
     'permitted-content': permittedContentValue,
     category: categoryValue,
-    attributes: arrayValue(stringValue)
+    attributes: arrayValue(stringValue),
+    events: arrayValue(stringValue)
   },
-  ['code-name', 'dom-name', 'tags', 'aria-roles', 'permitted-content', 'category']
+  ['code-name', 'dom-name', 'interface', 'tags', 'aria-roles', 'permitted-content', 'category', 'attributes', 'events']
 ).map(o => {
   return new Element(
     o.name,
     o['code-name'] || camelize(o.name),
     o['dom-name'] || o.name,
-    o.interface,
+    o.interface || 'HTMLElement',
     o.tags || [],
     o['aria-roles'] || [],
     o['permitted-content'] || noContent,
     o.category,
-    o.attributes
+    o.attributes || ['@global'],
+    o.events || ['@global']
   )
 })
 

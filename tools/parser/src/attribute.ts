@@ -84,7 +84,8 @@ export enum Tag {
   experimental = 'experimental',
   experimentalSupported = 'experimental-supported',
   msExtension = 'ms-extension',
-  obsolete = 'obsolete'
+  obsolete = 'obsolete',
+  nonStandard = 'non-standard'
 }
 
 export class Attribute {

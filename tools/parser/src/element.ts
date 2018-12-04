@@ -14,16 +14,21 @@ export enum Category {
   scriptSupporting = 'script-supporting'
 }
 
-export class ContentCategories {
-  readonly kind: 'content-categories' = 'content-categories'
-  constructor(readonly categories: Category[]) {}
+export class ContentCategory {
+  readonly kind: 'content-category' = 'content-category'
+  constructor(readonly category: Category) {}
+}
+export class ElementContent {
+  readonly kind: 'element-content' = 'element-content'
+  constructor(readonly elements: string[]) {}
 }
 export class NoContent {
   readonly kind: 'np-content' = 'np-content'
 }
-export type PermittedContent = ContentCategories | NoContent
+export type PermittedContent = NoContent | (ContentCategory | ElementContent)[]
 
-export const contentCategories = (categories: Category[]): PermittedContent => new ContentCategories(categories)
+export const contentCategory = (category: Category) => new ContentCategory(category)
+export const elementContent = (elements: string[]) => new ElementContent(elements)
 export const noContent = new NoContent() as PermittedContent
 
 export class Element {
@@ -36,6 +41,7 @@ export class Element {
     readonly ariaRoles: string[],
     readonly permittedContent: PermittedContent,
     readonly category: Category | undefined,
-    readonly attributes: string[]
+    readonly attributes: string[],
+    readonly events: string[]
   ) {}
 }

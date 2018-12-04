@@ -3,34 +3,78 @@
   category: transparent
   permitted-content: [flow, phrasing]
   aria-roles: [button, checkbox, menuitem, menuitemcheckbox, menuitemradio, option, radio, switch, tab, treeitem]
-  attributes: ['@global', download, href, hreflang, ping, referrerpolicy, rel, target, type, charset, obs-coords, name, rev, shape]
-  events: ['@global']
+  attributes: ['@global', download, href, hreflang, ping, referrerpolicy, rel, target, type, charset, obs-coords, obs-name, rev, shape]
 - name: abbr
-  interface: HTMLElement
   permitted-content: [phrasing]
   aria-roles: ['@all']
-  attributes: ['@global']
-  events: ['@global']
 - name: acronym
-  interface: HTMLElement
   permitted-content: [phrasing]
   aria-roles: ['@all']
   tags: obsolete
-  attributes: ['@global']
-  events: ['@global']
 - name: address
   interface: HTMLSpanElement
   permitted-content: [flow] # no nested address, h1 ... h6, article ...
-  attributes: ['@global']
-  events: ['@global']
 - name: area
   interface: HTMLAreaElement
   permitted-content: none
   attributes: ['@global', alt, coords, download, href, hreflang, obs-name, nohref, ping, referrerpolicy, rel, shape, tabindex, target, obs-type]
-  events: ['@global']
 - name: article
-  interface: HTMLElement
   permitted-content: [flow]
   aria-roles: [application, document, feed, main, presentation, region]
-  attributes: ['@global']
-  events: ['@global']
+- name: aside
+  permitted-content: [flow]
+  aria-roles: [feed, note, presentation, region, search]
+- name: audio
+  interface: HTMLAudioElement
+  permitted-content: [{ els: ['source', 'track'] }, transparent]
+  aria-roles: [application]
+  attributes: ['@global', autoplay, controls, crossorigin, loop, muted, preload, src]
+- name: b
+  permitted-content: [phrasing]
+  aria-roles: ['@all']
+- name: base
+  permitted-content: none
+  interface: HTMLBaseElement
+  attributes: ['@global', href, target]
+- name: basefont
+  permitted-content: none
+  attributes: ['@global', color, face, size]
+  tags: obsolete
+- name: bdi
+  permitted-content: [phrasing]
+  aria-roles: ['@all']
+- name: bdo
+  permitted-content: [phrasing]
+  aria-roles: ['@all']
+  interface: HTMLSpanElement
+- name: bgsound
+  tags: [obsolete, non-standard]
+  attributes: ['@global', balance, loop, src, volume]
+- name: big
+  tags: obsolete
+  permitted-content: [phrasing]
+  interface: HTMLSpanElement
+- name: blink
+  tags: [deprecated, obsolete]
+  permitted-content: [phrasing]
+  interface: HTMLUnknownElement
+- name: blockquote
+  permitted-content: [flow]
+  aria-roles: ['@all']
+  interface: HTMLQuoteElement
+  attributes: ['@global', cite]
+- name: body
+  permitted-content: [flow]
+  interface: HTMLBodyElement
+  attributes: ['@global', alink, background, bgcolor, bottommargin, leftmargin, link, rightmargin, text, topmargin, vlink]
+  events: ['@global', onafterprint, onbeforeprint, onbeforeunload, onblur, onerror, onfocus, onhashchange, onlanguagechange, onload, onmessage, onoffline, ononline, onpopstate, onredo, onresize, onstorage, onundo, onunload]
+- name: br
+  permitted-content: none
+  attributes: ['@global', clear]
+  aria-roles: ['@all']
+  interface: HTMLBRElement
+- name: button
+  permitted-content: [phrasing]
+  attributes: ['@global', autofocus, autocomplete, disabled, form, formaction, formenctype, formmethod, formnovalidate, formtarget, name, button-type, value]
+  aria-roles: [checkbox, link, menuitem, menuitemcheckbox, menuitemradio, radio, switch, tab]
+  interface: HTMLButtonElement

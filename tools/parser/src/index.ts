@@ -2,6 +2,7 @@ import { loader } from './loader'
 import { parseAttributes, parseCollections, parseEvents, parseElements } from './parser'
 import { DecodeResult } from 'partsing/core/result'
 import { Attribute, Tag } from './attribute'
+import { Element } from './element'
 import { Project } from './project'
 
 async function loadDecode<T>(path: string, decoder: (input: any) => DecodeResult<any, T, string>) {
@@ -35,9 +36,9 @@ export const resolveGroups = (collections: Map<string, string[]>, groupName: str
   )
 }
 
-const excludeTags = [Tag.deprecated, Tag.experimental, Tag.msExtension, Tag.obsolete]
+const excludeTags = [Tag.deprecated, Tag.experimental, Tag.msExtension, Tag.obsolete, Tag.nonStandard]
 
-const excludeAttribute = (attr: Attribute) => {
+const exclude = (attr: Attribute | Element) => {
   return attr.tags.findIndex(val => excludeTags.indexOf(val) >= 0) < 0
 }
 
@@ -62,7 +63,7 @@ async function f() {
   let project = Project.empty('./gen/')
 
   const allAttributes = attributes
-    .filter(excludeAttribute)
+    .filter(exclude)
     .map(attributeToStringField)
     .join('\n  ')
 
@@ -75,25 +76,27 @@ export interface DOMAttributes<State> {
 `
   project = project.addFile(`dom_attributes.ts`, domAttributesContent)
 
-  elements.forEach(el => {
-    const attrType = `${ucFirst(el.codeName)}Attributes`
-    const attributeNames =  Array.from(new Set(resolveGroups(collections, 'attributes', el.attributes)))
-    const attributes = attributeNames.reduce(
-      (acc, attr) => {
-        if (attributesMap.has(attr)) {
-          acc = acc.concat([attributesMap.get(attr)!])
-        } else {
-          console.error(`Not Found Attribute: ${attr}`)
-        }
-        return acc
-      },
-      [] as Attribute[]
-    )
-    .filter(excludeAttribute)
-    .map(attributeToStringField)
-    .join('\n  ')
+  elements
+    .filter(exclude)
+    .forEach(el => {
+      const attrType = `${ucFirst(el.codeName)}Attributes`
+      const attributeNames =  Array.from(new Set(resolveGroups(collections, 'attributes', el.attributes)))
+      const attributes = attributeNames.reduce(
+        (acc, attr) => {
+          if (attributesMap.has(attr)) {
+            acc = acc.concat([attributesMap.get(attr)!])
+          } else {
+            console.error(`Not Found Attribute: ${el.name}.${attr}`)
+          }
+          return acc
+        },
+        [] as Attribute[]
+      )
+      .filter(exclude)
+      .map(attributeToStringField)
+      .join('\n  ')
 
-    const content = `
+      const content = `
 import { DOMChild } from '../dom_child'
 import { DOMValue } from '../dom_value'
 import { el } from '../dom_element'
@@ -107,8 +110,8 @@ export const ${el.codeName} = <State, Action>(attributes: ${attrType}<State>, ..
 }
 `
 
-    project = project.addFile(`els/${el.name}.ts`, content)
-  })
+      project = project.addFile(`els/${el.name}.ts`, content)
+    })
 
   await project.cleanAndSave()
 }
