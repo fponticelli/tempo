@@ -12,7 +12,8 @@ import {
   Tag,
   integerType,
   spaceSeparatedType,
-  EnumType
+  EnumType,
+  lengthType
 } from './attribute'
 import { DecodeError, Entity } from 'partsing/error'
 import { Element, Category, noContent, elementContent, contentCategory } from './element'
@@ -28,43 +29,41 @@ function camelize(str: string) {
 }
 
 const attributeType: ValueDecoder<AttributeType> =
-  objectValue(
-    { enum: arrayValue(stringValue) },
-    []
-  )
-  .map(v => v.enum)
-  .map(v => new EnumType(v))
-  .or(
-    stringValue.flatMap(type => Decoder.of(input => {
-      switch (type) {
-        case 'bool': return success(input, booleanType)
-        case 'boolean': return success(input, booleanType)
-        case 'class': return success(input, classType)
-        case 'ebool': return success(input, enumeratedBooleanType)
-        case 'eboolean': return success(input, enumeratedBooleanType)
-        case 'int': return success(input, integerType)
-        case 'integer': return success(input, integerType)
-        case 'string': return success(input, stringType)
-        case 'style': return success(input, styleType)
-        case 'space-separated': return success(input, spaceSeparatedType)
-        default: return failure(
-          input,
-          ...[
-            'bool',
-            'boolean',
-            'class',
-            'ebool',
-            'eboolean',
-            'int',
-            'integer',
-            'string',
-            'style',
-            'space-separated'
-          ].
-            map(t => DecodeError.expectedMatch(Entity.STRING, t))
-        )
-      }
-  }))
+  objectValue({ enum: arrayValue(stringValue) }, [])
+    .map(v => v.enum)
+    .map(v => new EnumType(v))
+    .or(
+      stringValue.flatMap(type => Decoder.of(input => {
+        switch (type) {
+          case 'bool': return success(input, booleanType)
+          case 'boolean': return success(input, booleanType)
+          case 'class': return success(input, classType)
+          case 'ebool': return success(input, enumeratedBooleanType)
+          case 'eboolean': return success(input, enumeratedBooleanType)
+          case 'int': return success(input, integerType)
+          case 'integer': return success(input, integerType)
+          case 'length': return success(input, lengthType)
+          case 'string': return success(input, stringType)
+          case 'style': return success(input, styleType)
+          case 'space-separated': return success(input, spaceSeparatedType)
+          default: return failure(
+            input,
+            ...[
+              'bool',
+              'boolean',
+              'class',
+              'ebool',
+              'eboolean',
+              'int',
+              'integer',
+              'length',
+              'string',
+              'style',
+              'space-separated'
+            ].map(t => DecodeError.expectedMatch(Entity.STRING, t))
+          )
+        }
+      }))
   )
 
 const tagValue: ValueDecoder<Tag> = stringValue.flatMap(type => Decoder.of(input => {

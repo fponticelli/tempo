@@ -78,3 +78,137 @@
   attributes: ['@global', autofocus, autocomplete, disabled, form, formaction, formenctype, formmethod, formnovalidate, formtarget, name, button-type, value]
   aria-roles: [checkbox, link, menuitem, menuitemcheckbox, menuitemradio, radio, switch, tab]
   interface: HTMLButtonElement
+- name: canvas
+  permitted-content: [phrasing]
+  aria-roles: ['@all']
+  interface: HTMLCanvasElement
+  attributes: ['@global', height, moz-opaque, width]
+- name: caption
+  permitted-content: [flow]
+  interface: HTMLTableCaptionElement
+  attributes: ['@global', align]
+- name: center
+  permitted-content: [phrasing]
+  tags: obsolete
+  interface: HTMLSpanElement
+- name: cite
+  permitted-content: [phrasing]
+  aria-roles: ['@all']
+  interface: HTMLSpanElement
+- name: code
+  permitted-content: [phrasing]
+  aria-roles: ['@all']
+  interface: HTMLSpanElement
+- name: del
+  permitted-content: [phrasing]
+  aria-roles: ['@all']
+  attributes: ['@global', cite, datetime]
+  interface: HTMLSpanElement
+- name: dfn
+  permitted-content: [phrasing]
+  aria-roles: ['@all']
+  interface: HTMLElement
+- name: div
+  permitted-content: [flow]
+  aria-roles: ['@all']
+  interface: HTMLDivElement
+- name: em
+  permitted-content: [phrasing]
+  aria-roles: ['@all']
+  interface: HTMLSpanElement
+- name: h1
+  permitted-content: [phrasing]
+  aria-roles: [tab, presentation]
+  interface: HTMLHeadingElement
+- name: h2
+  permitted-content: [phrasing]
+  aria-roles: [tab, presentation]
+  interface: HTMLHeadingElement
+- name: h3
+  permitted-content: [phrasing]
+  aria-roles: [tab, presentation]
+  interface: HTMLHeadingElement
+- name: h4
+  permitted-content: [phrasing]
+  aria-roles: [tab, presentation]
+  interface: HTMLHeadingElement
+- name: h5
+  permitted-content: [phrasing]
+  aria-roles: [tab, presentation]
+  interface: HTMLHeadingElement
+- name: h6
+  permitted-content: [phrasing]
+  aria-roles: [tab, presentation]
+  interface: HTMLHeadingElement
+- name: i
+  permitted-content: [phrasing]
+  aria-roles: ['@all']
+  interface: HTMLSpanElement
+- name: ins
+  permitted-content: [phrasing]
+  aria-roles: ['@all']
+  attributes: ['@global', cite, datetime]
+  interface: HTMLModElement
+- name: kbd
+  permitted-content: [phrasing]
+  aria-roles: ['@all']
+  interface: HTMLElement
+- name: legend
+  permitted-content: [phrasing]
+  interface: HTMLLegendElement
+- name: main
+  permitted-content: [flow]
+  aria-roles: [main, presentation]
+  interface: HTMLElement
+- name: mark
+  permitted-content: [phrasing]
+  aria-roles: ['@all']
+  interface: HTMLElement
+- name: p
+  permitted-content: [phrasing]
+  aria-roles: ['@all']
+  interface: HTMLParagraphElement
+- name: q
+  permitted-content: [phrasing]
+  aria-roles: ['@all']
+  interface: HTMLQuoteElement
+  attributes: ['@global', cite]
+- name: s
+  permitted-content: [phrasing]
+  aria-roles: ['@all']
+  interface: HTMLElement
+- name: samp
+  permitted-content: [phrasing]
+  aria-roles: ['@all']
+  interface: HTMLElement
+- name: small
+  permitted-content: [phrasing]
+  aria-roles: ['@all']
+  interface: HTMLElement
+- name: span
+  permitted-content: [phrasing]
+  aria-roles: ['@all']
+  interface: HTMLSpanElement
+- name: strong
+  permitted-content: [phrasing]
+  aria-roles: ['@all']
+  interface: HTMLElement
+- name: sub
+  permitted-content: [phrasing]
+  aria-roles: ['@all']
+  interface: HTMLElement
+- name: sup
+  permitted-content: [phrasing]
+  aria-roles: ['@all']
+  interface: HTMLElement
+- name: time
+  permitted-content: [phrasing]
+  aria-roles: ['@all']
+  interface: HTMLTimeElement
+  attributes: ['@global', dateortime]
+- name: var
+  dom-name: var
+  code-name: var_
+  permitted-content: [phrasing]
+  aria-roles: ['@all']
+  interface: HTMLElement

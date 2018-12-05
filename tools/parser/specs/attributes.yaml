@@ -1,4 +1,7 @@
 - name: accesskey
+- name: align
+  tags: obsolete
+  type: { enum: [left, top, right, bottom] }
 - name: alink
   tags: obsolete
 - name: alt
@@ -34,6 +37,12 @@
   type: ebool # '' is also acceptable for 'true'
 - name: contextmenu
   tags: obsolete
+- name: dateortime
+  dom-name: datetime
+  code-name: datetime
+  # type: dateortime
+- name: datetime
+  # type: datetime
 - name: controls
   type: bool
 - name: obs-coords
@@ -65,6 +74,8 @@
   type: bool
 - name: formtarget
   type: [{ enum: [_self, _blank, _parent, _top] }, string]
+- name: height
+  type: length
 - name: hidden
   type: bool
 - name: href
@@ -88,6 +99,9 @@
   tags: obsolete
 - name: loop
   type: bool # or ebool?
+- name: moz-opaque
+  tags: [non-standard, deprecated]
+  type: bool
 - name: name
 - name: muted
   type: bool # or ebool?
@@ -142,6 +156,8 @@
 - name: value
 - name: vlink
   tags: obsolete
+- name: width
+  type: length
 - name: xml:lang
   tags: deprecated
 - name: xml:base

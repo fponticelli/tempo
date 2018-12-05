@@ -209,10 +209,10 @@ mkdirp@^0.5.1:
   dependencies:
     minimist "0.0.8"
 
-partsing@^0.4.1:
-  version "0.4.1"
-  resolved "https://registry.yarnpkg.com/partsing/-/partsing-0.4.1.tgz#c0f85a4c6e124598c27ae619ee6a47d42261f3db"
-  integrity sha512-7uSyrlGg7oLFRlsIMmpHh6xmEnFY7733IE4U6BKnbCN7pLvLNycX5obytALExdpG2ULA2kEJsZbh2ShWF/Efqw==
+partsing@^0.5.0:
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/partsing/-/partsing-0.5.0.tgz#4f29abd6c09de2d1224b3b1579057064786ad5c8"
+  integrity sha512-yWYyz8Xw0TI5rmXZTKqvSRYoNlQvgDlfXBq2IvzVwfKwaG0hJrIWMlmViPlj0xaW6QzwNvX3fc8VWJ1AvqDy+w==
 
 prettier@^1.15.3:
   version "1.15.3"

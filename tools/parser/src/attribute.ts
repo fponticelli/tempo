@@ -1,5 +1,5 @@
 export abstract class TypeBase {
-  abstract readonly kind: 'string' | 'integer' | 'boolean' | 'eboolean' | 'class' | 'style' | 'enum' | 'space-separated'
+  abstract readonly kind: 'string' | 'integer' | 'length' | 'boolean' | 'eboolean' | 'class' | 'style' | 'enum' | 'space-separated'
   toString() {
     return this.kind
   }
@@ -15,6 +15,12 @@ export class StringType extends TypeBase {
 }
 export class IntegerType extends TypeBase {
   readonly kind: 'integer' = 'integer'
+  toTSString() {
+    return 'number'
+  }
+}
+export class LengthType extends TypeBase {
+  readonly kind: 'length' = 'length'
   toTSString() {
     return 'number'
   }
@@ -63,6 +69,7 @@ export class EnumType extends TypeBase {
 
 export type AttributeType = StringType
   | IntegerType
+  | LengthType
   | BooleanType
   | EnumeratedBooleanType
   | ClassType
@@ -72,6 +79,7 @@ export type AttributeType = StringType
 
 export const stringType: AttributeType = new StringType()
 export const integerType: AttributeType = new IntegerType()
+export const lengthType: AttributeType = new LengthType()
 export const booleanType: AttributeType = new BooleanType()
 export const enumeratedBooleanType: AttributeType = new EnumeratedBooleanType()
 export const classType: AttributeType = new ClassType()
@@ -96,4 +104,14 @@ export class Attribute {
     readonly type: AttributeType[],
     readonly tags: Tag[]
   ) {}
+
+  append(other: Attribute) {
+    return new Attribute(
+      this.name,
+      this.codeName,
+      this.domName,
+      this.type.concat(other.type),
+      Array.from(new Set([...this.tags, ...other.tags]))
+    )
+  }
 }

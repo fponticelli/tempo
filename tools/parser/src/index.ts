@@ -42,6 +42,22 @@ const exclude = (attr: Attribute | Element) => {
   return attr.tags.findIndex(val => excludeTags.indexOf(val) >= 0) < 0
 }
 
+const combineAttributes = () => {
+  const map = new Map<string, { attr: Attribute, index: number }>()
+  return (attributes: Attribute[], curr: Attribute) => {
+    if (!map.has(curr.codeName)) {
+      map.set(curr.codeName, { attr: curr, index: attributes.length })
+      attributes.push(curr)
+    } else {
+      const stored = map.get(curr.codeName)!
+      const attr = stored.attr.append(curr)
+      map.set(curr.codeName, { attr, index: stored.index })
+      attributes[stored.index] = attr
+    }
+    return attributes
+  }
+}
+
 const attributeToStringField = (attr: Attribute) => {
   return `${attr.codeName}?: DOMValue<State, ${attr.type.map(t => t.toTSString()).join(' | ')}>`
 }
@@ -64,7 +80,9 @@ async function f() {
 
   const allAttributes = attributes
     .filter(exclude)
+    .reduce(combineAttributes(), [])
     .map(attributeToStringField)
+    .sort()
     .join('\n  ')
 
   const domAttributesContent = `
