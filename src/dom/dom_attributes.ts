@@ -1,6 +1,6 @@
 import { DOMValue } from './dom_value'
 
-export interface DOMAttributes<State> {
+export interface DOMAttributes<State, Action> {
   accesskey?: DOMValue<State, string>
   alt?: DOMValue<State, string>
   autocapitalize?: DOMValue<State, 'off' | 'none' | 'on' | 'sentences' | 'words' | 'characters'>

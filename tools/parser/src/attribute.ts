@@ -1,5 +1,14 @@
 export abstract class TypeBase {
-  abstract readonly kind: 'string' | 'integer' | 'length' | 'boolean' | 'eboolean' | 'class' | 'style' | 'enum' | 'space-separated'
+  abstract readonly kind
+    : 'string'
+    | 'integer'
+    | 'length'
+    | 'boolean'
+    | 'eboolean'
+    | 'class'
+    | 'style'
+    | 'enum'
+    | 'space-separated'
   toString() {
     return this.kind
   }

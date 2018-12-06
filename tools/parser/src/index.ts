@@ -1,7 +1,7 @@
 import { loader } from './loader'
 import { parseAttributes, parseCollections, parseEvents, parseElements } from './parser'
 import { DecodeResult } from 'partsing/core/result'
-import { Attribute, Tag } from './attribute'
+import { Attribute, Tag, StringType, AttributeType } from './attribute'
 import { Element } from './element'
 import { Project } from './project'
 
@@ -62,6 +62,19 @@ const attributeToStringField = (attr: Attribute) => {
   return `${attr.codeName}?: DOMValue<State, ${attr.type.map(t => t.toTSString()).join(' | ')}>`
 }
 
+const setterToString = (types: AttributeType[]) => {
+  if (types.length !== 1) {
+    throw 'deal with this'
+  } else {
+    switch (types[0].kind) {
+      case 'boolean': return 'setBoolAttribute'
+      case 'eboolean': return 'setEnumBoolAttribute'
+      case 'space-separated': return 'setCommaSeparated'
+      default: throw `deal with this as well: ${types[0].kind}`
+    }
+  }
+}
+
 async function f() {
   const attributes = await loadDecode('./specs/attributes.yaml', parseAttributes)
   const collections = await loadDecode('./specs/collections.yaml', parseCollections)
@@ -78,21 +91,51 @@ async function f() {
 
   let project = Project.empty('./gen/')
 
-  const allAttributes = attributes
+  const filteredAttributes = attributes
     .filter(exclude)
     .reduce(combineAttributes(), [])
+
+  const allAttributes = filteredAttributes
     .map(attributeToStringField)
     .sort()
-    .join('\n  ')
 
   const domAttributesContent = `
 import { DOMValue } from './dom_value'
 
-export interface DOMAttributes<State> {
-  ${allAttributes}
+export interface DOMAttributes<State, Action> {
+  ${allAttributes.join('\n  ')}
 }
 `
   project = project.addFile(`dom_attributes.ts`, domAttributesContent)
+
+  const attributeNames = filteredAttributes
+    .filter(attr => attr.codeName !== attr.domName)
+    .map(attr => `${attr.codeName}: ${attr.domName}`)
+    .sort()
+
+  const regularAttributeTypes = ['string', 'integer', 'length', 'class', 'style', 'enum']
+
+  const attributeApplication = filteredAttributes
+    .filter(attr => attr.type.length === 1 && regularAttributeTypes.indexOf(attr.type[0].kind) < 0)
+    .map(attr => `${attr.codeName}: ${setterToString(attr.type)}`)
+    .sort()
+
+  const attributeMapperContent = `
+/* istanbul ignore next */
+import { setBoolAttribute, setCommaSeparated, setEnumBoolAttribute } from './set_attribute'
+
+/* istanbul ignore next */
+export const attributeNameMap: Record<string, string> = {
+  ${attributeNames.join(',\n  ')}
+}
+
+/* istanbul ignore next */
+export const attributeMap: Record<string, (el: Element, name: string, value: any) => void> = {
+  ${attributeApplication.join(',\n  ')}
+}
+`
+
+  project = project.addFile(`attributes_mapper.ts`, attributeMapperContent)
 
   elements
     .filter(exclude)
@@ -123,7 +166,8 @@ export interface ${attrType}<State> {
   ${attributes}
 }
 
-export const ${el.codeName} = <State, Action>(attributes: ${attrType}<State>, ...children: DOMChild<State, Action>[]) => {
+export const ${el.codeName} = <State, Action>
+    (attributes: ${attrType}<State>, ...children: DOMChild<State, Action>[]) => {
   return el<State, Action>('${el.domName}', attributes, children)
 }
 `
