@@ -3,8 +3,8 @@
         "align": [
             true,
             "parameters",
-            "arguments",
-            "statements"
+            "statements",
+            "members"
         ],
         "ban": true,
         "class-name": true,
@@ -21,7 +21,7 @@
         "jsx-no-lambda": false,
         "jsx-no-multiline-js": false,
         "label-position": true,
-        "max-line-length": [ true, 140 ],
+        "max-line-length": [ true, 120 ],
         "member-ordering": [
           true,
           {
@@ -73,11 +73,11 @@
             "check-open-brace",
             "check-whitespace"
         ],
-        "quotemark": [true, "single", "jsx-double"],
+        "quotemark": [true, "single", "jsx-double", "avoid-escape"],
         "radix": true,
         "semicolon": [true, "never"],
         "switch-default": true,
-  
+
         "trailing-comma": [
           true,
           {
@@ -91,7 +91,7 @@
           }
         ],
         "no-inferrable-types": [true],
-  
+
         "triple-equals": [ true, "allow-null-check" ],
         "typedef": [
             true,
@@ -123,4 +123,3 @@
         ]
     }
   }
-  

@@ -4,22 +4,23 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
-    "@stoplight/json-ref-resolver": "^1.2.0",
-    "@types/prettier": "^1.15.2",
-    "fs-extra-promise": "^1.0.1",
-    "js-yaml": "^3.12.0",
-    "partsing": "^0.5.0",
-    "prettier": "^1.15.3",
-    "tslib": "^1.9.3",
-    "urijs": "^1.19.1"
+    "@stoplight/json-ref-resolver": "1.2.0",
+    "@types/prettier": "1.15.2",
+    "fs-extra-promise": "1.0.1",
+    "js-yaml": "3.12.0",
+    "partsing": "0.5.0",
+    "prettier": "1.15.3",
+    "tslib": "1.9.3",
+    "urijs": "1.19.1"
   },
   "devDependencies": {
-    "@types/fs-extra-promise": "^1.0.7",
-    "@types/js-yaml": "^3.11.2",
-    "@types/node": "^10.12.10",
-    "@types/urijs": "^1.15.38",
-    "ts-node": "^7.0.1",
-    "typescript": "^3.1.6"
+    "@types/fs-extra-promise": "1.0.7",
+    "@types/js-yaml": "3.11.2",
+    "@types/node": "10.12.10",
+    "@types/urijs": "1.15.38",
+    "ts-node": "7.0.1",
+    "tslint": "5.11.0",
+    "typescript": "3.2.1"
   },
   "scripts": {
     "build": "tsc",

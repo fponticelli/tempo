@@ -1,6 +1,5 @@
 {
   "name": "mood",
-  "version": "0.0.1",
   "main": "lib",
   "license": "Apache-2.0",
   "homepage": "https://github.com/fponticelli/mood",
@@ -19,15 +18,19 @@
     "dom",
     "mood architecture"
   ],
+  "dependencies": {
+  },
   "devDependencies": {
-    "@types/jest": "^23.3.5",
-    "@types/node": "^10.12.0",
-    "jest": "^23.6.0",
-    "ts-jest": "^23.10.4",
-    "ts-node": "^7.0.1",
-    "tslint": "^5.11.0",
-    "typedoc": "^0.13.0",
-    "typescript": "^3.1.6"
+    "@types/jest": "23.3.5",
+    "@types/node": "10.12.0",
+    "jest": "23.6.0",
+    "prettier": "1.15.3",
+    "ts-jest": "23.10.4",
+    "ts-node": "7.0.1",
+    "tslint": "5.11.0",
+    "typedoc": "0.13.0",
+    "typedoc-plugin-external-module-name": "^1.1.3",
+    "typescript": "3.2.1"
   },
   "directories": {
     "doc": "docs",
@@ -39,13 +42,18 @@
     "url": "https://github.com/fponticelli/mood.git"
   },
   "scripts": {
-    "build": "rm -rf lib && tsc",
-    "doc": "rm -rf docs && typedoc --out docs --ignoreCompilerErrors --theme minimal --name mood ./src",
+    "build": "rm -rf lib && tsc && cp package.npm.json lib/package.json && cp {*.md,LICENSE} lib/",
+    "docs": "rm -rf docs && typedoc --options typedoc.js ./src",
+    "serve-doc": "rm -rf docs && compodoc src -s",
     "lint": "tslint --fix --project .",
-    "prep": "yarn test-coverage && yarn build && yarn doc",
+    "fix-lint": "tslint --fix \"./{src,test}/**/*.ts\"",
+    "prettier": "prettier --list-different \"./{src,test}/**/*.ts\"",
+    "fix-prettier": "prettier --write \"./{src,test}/**/*.ts\"",
+    "prep": "yarn test-coverage && yarn lint && yarn prettier && yarn build && yarn docs",
     "test": "jest",
     "test-coverage": "jest --coverage",
-    "watch": "jest --watch --coverage"
+    "watch": "jest --watch --coverage",
+    "npm-publish": "yarn prep && ( cd lib && yarn publish --access public )"
   },
   "eslint.packageManager": "yarn",
   "jest": {
@@ -81,8 +89,5 @@
       "jsx",
       "json"
     ]
-  },
-  "dependencies": {
-
   }
 }
