@@ -99,6 +99,34 @@
   permitted-content: [phrasing]
   aria-roles: ['@all']
   interface: HTMLSpanElement
+- name: col
+  permitted-content: none
+  aria-roles: []
+  interface: HTMLTableColElement
+  attributes: ['@global', text-align, non-standard-bgcolor, char, charoff, span, valign, col-width]
+- name: colgroup
+  permitted-content: [{ els: 'col' }]
+  aria-roles: []
+  interface: HTMLTableColElement
+  attributes: ['@global', text-align, non-standard-bgcolor, char, charoff, span, valign, col-width]
+- name: content
+  tags: obsolete
+  permitted-content: [flow]
+  interface: HTMLContentElement
+  attributes: ['@global', select]
+- name: data
+  permitted-content: [phrasing]
+  interface: HTMLDataElement
+  aria-roles: []
+  attributes: ['@global', value]
+- name: datalist
+  permitted-content: [phrasing, { els: [option] }]
+  interface: HTMLDataListElement
+  aria-roles: []
+- name: dd
+  permitted-content: [flow]
+  aria-roles: []
+  attributes: ['@global', nowrap]
 - name: del
   permitted-content: [phrasing]
   aria-roles: ['@all']

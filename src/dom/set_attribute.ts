@@ -15,7 +15,7 @@ export const setEvent = <Action>(dispatch: (action: Action) => void) => {
     } else {
       anyEl[name] = (e: Event) => {
         const r = value(e)
-        if (r !== void 0) dispatch(r)
+        if (r != null) dispatch(r)
       }
     }
   }
@@ -30,22 +30,22 @@ export const setAttribute = (el: Element, name: string, value: any) => {
   }
 }
 
-export const setProperty = (el: Element, name: string, value: any | undefined) => {
-  if (value == null) {
-    delete (el as any)[name]
-    return
-  }
-  if ((el as any)[name] !== value) (el as any)[name] = value
-}
+// export const setProperty = (el: Element, name: string, value: any | undefined) => {
+//   if (value == null) {
+//     delete (el as any)[name]
+//     return
+//   }
+//   if ((el as any)[name] !== value) (el as any)[name] = value
+// }
 
-export const setBoolProperty = (el: Element, name: string, value: boolean | undefined) => {
-  if (value == null) {
-    delete (el as any)[name]
-    return
-  }
-  const bool = Boolean(value)
-  if ((el as any)[name] !== bool) (el as any)[name] = bool
-}
+// export const setBoolProperty = (el: Element, name: string, value: boolean | undefined) => {
+//   if (value == null) {
+//     delete (el as any)[name]
+//     return
+//   }
+//   const bool = Boolean(value)
+//   if ((el as any)[name] !== bool) (el as any)[name] = bool
+// }
 
 export const setEnumBoolAttribute = (el: Element, name: string, value: boolean | undefined) => {
   if (value == null) el.removeAttribute(name)

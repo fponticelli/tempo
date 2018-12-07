@@ -14,3 +14,17 @@ export const createContext = (): DOMContext => {
     parent: document.body
   }
 }
+
+export const createDiv = () => {
+  return getWindow().document.createElement('div')
+}
+
+export const createA = () => {
+  return getWindow().document.createElement('a')
+}
+
+export const createTextInput = () => {
+  const input = getWindow().document.createElement('input')
+  input.type = 'text'
+  return input
+}

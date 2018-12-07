@@ -27,7 +27,8 @@ export const processAttribute = <State, Action>(
   name = attributeNameMap[name as keyof (typeof attributeNameMap)] || name
 
   let set: (el: HTMLElement, name: string, value: any) => void
-  if (name.startsWith('on')) {
+  let isEvent = name.startsWith('on')
+  if (isEvent) {
     // events
     set = setEvent(dispatch)
   } else if (name.startsWith('$')) {
@@ -39,7 +40,7 @@ export const processAttribute = <State, Action>(
     set = attributeMap[name] || setAttribute
   }
 
-  if (typeof value === 'function') {
+  if (typeof value === 'function' && !isEvent) {
     const f = (state: State) => set(el, name, (value as DOMValueFunction<State, Action>)(state))
     return {
       dynamics: acc.dynamics.concat([f]),

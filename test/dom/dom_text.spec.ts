@@ -1,4 +1,4 @@
-import { createContext } from './util'
+import { createContext } from './common'
 import { DOMText } from '../../src/dom/dom_text'
 import { DynamicView } from '../../src/core/view'
 

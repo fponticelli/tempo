@@ -2,6 +2,11 @@
 - name: align
   tags: obsolete
   type: { enum: [left, top, right, bottom] }
+- name: text-align
+  dom-name: align
+  code-name: align
+  tags: [obsolete, deprecated]
+  type: { enum: [left, center, right, justify, char] }
 - name: alink
   tags: obsolete
 - name: alt
@@ -18,12 +23,21 @@
   tags: obsolete
 - name: bgcolor
   tags: obsolete
+- name: non-standard-bgcolor
+  dom-name: bgcolor
+  code-name: bgcolor
+  type: color
+  tags: [non-standard]
 - name: bottommargin
   tags: obsolete
 - name: button-type
   dom-name: type
   code-name: type
   type: { enum: [submit, reset, button] }
+- name: char
+  tags: [deprecated, obsolete]
+- name: charoff
+  tags: [deprecated, obsolete]
 - name: charset
   tags: obsolete
 - name: cite
@@ -34,6 +48,7 @@
   type: bool
   tags: obsolete
 - name: contenteditable
+  codeName: contentEditable
   type: ebool # '' is also acceptable for 'true'
 - name: contextmenu
   tags: obsolete
@@ -103,13 +118,16 @@
   tags: [non-standard, deprecated]
   type: bool
 - name: name
-- name: muted
-  type: bool # or ebool?
-- name: nohref
-  tags: obsolete
 - name: obs-name
   code-name: name
   dom-name: name
+  tags: obsolete
+- name: nowrap
+  type: { enum: ['yes', 'no'] }
+  tags: non-standard
+- name: muted
+  type: bool # or ebool?
+- name: nohref
   tags: obsolete
 - name: ping
   type: space-separated
@@ -133,9 +151,14 @@
 - name: src
 - name: target
   type: [{ enum: [_self, _blank, _parent, _top] }, string]
+- name: select
+  tags: obsolete
+  type: comma-separated
 - name: shape
   type: { enum: [circle, default, polygon, rect] }
   tags: obsolete
+- name: span
+  type: non-zero-positive-integer
 - name: style
   type: style
 - name: tabindex
@@ -154,7 +177,15 @@
   tags: experimental
   type: { enum: ['', 'yes', 'no'] }
 - name: value
+- name: valign
+  type: { enum: [baseline, bottom, middle, top]}
+  tags: [deprecated, obsolete]
 - name: vlink
+  tags: obsolete
+- name: col-width
+  dom-name: width
+  code-name: width
+  type: string
   tags: obsolete
 - name: width
   type: length
