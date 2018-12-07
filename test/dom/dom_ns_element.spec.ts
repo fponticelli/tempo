@@ -13,26 +13,9 @@ describe('dom_ns_element', () => {
   })
   it('static nested-element', () => {
     const ctx = createContext()
-    const nodeUndefined = new DOMNSElement(
-      'svg',
-      'svg',
-      {},
-      [
-        new DOMNSElement(
-          'svg',
-          'g',
-          {},
-          [
-            new DOMNSElement(
-              'svg',
-              'rect',
-              {},
-              []
-            )
-          ]
-        )
-      ]
-    ).render(ctx, 1, () => {})
+    const nodeUndefined = new DOMNSElement('svg', 'svg', {}, [
+      new DOMNSElement('svg', 'g', {}, [new DOMNSElement('svg', 'rect', {}, [])])
+    ]).render(ctx, 1, () => {})
     expect(ctx.doc.body.innerHTML).toEqual('<svg><g><rect></rect></g></svg>')
     nodeUndefined.destroy()
     expect(ctx.doc.body.innerHTML).toEqual('')
@@ -48,17 +31,30 @@ describe('dom_ns_element', () => {
 
   it('dynamic attribute', () => {
     const ctx = createContext()
-    const node = new DOMNSElement(
-      'svg',
-      'svg',
-      { id: (v: string | undefined) => v },
-      []
-    ).render(ctx, 'abc', () => {}) as DynamicView<string | undefined>
+    const node = new DOMNSElement('svg', 'svg', { id: (v: string) => v }, []).render(
+      ctx,
+      'abc',
+      () => {}
+    ) as DynamicView<string | undefined>
     expect(ctx.doc.body.innerHTML).toEqual('<svg id="abc"></svg>')
     node.change('xyz')
     expect(ctx.doc.body.innerHTML).toEqual('<svg id="xyz"></svg>')
     node.change(undefined)
     expect(ctx.doc.body.innerHTML).toEqual('<svg></svg>')
+    node.destroy()
+    expect(ctx.doc.body.innerHTML).toEqual('')
+  })
+
+  it('dynamic child', () => {
+    const ctx = createContext()
+    const node = new DOMNSElement('svg', 'svg', { id: (v: string) => v }, [
+      new DOMNSElement('svg', 'a', { href: (v: string) => v && `#${v}` }, [])
+    ]).render(ctx, 'abc', () => {}) as DynamicView<string | undefined>
+    expect(ctx.doc.body.innerHTML).toEqual('<svg id="abc"><a href="#abc"></a></svg>')
+    node.change('xyz')
+    expect(ctx.doc.body.innerHTML).toEqual('<svg id="xyz"><a href="#xyz"></a></svg>')
+    node.change(undefined)
+    expect(ctx.doc.body.innerHTML).toEqual('<svg><a></a></svg>')
     node.destroy()
     expect(ctx.doc.body.innerHTML).toEqual('')
   })

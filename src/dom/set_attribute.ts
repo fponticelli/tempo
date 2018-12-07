@@ -8,16 +8,16 @@ export const setOneStyle = (el: HTMLElement, name: string, value: any) => {
 }
 
 export const setEvent = <Action>(dispatch: (action: Action) => void) => {
-  return (el: Element, name: string, value: any) => {
+  return (el: Element, name: string, value: (e: Event) => Action | undefined) => {
     const anyEl = el as any
-    if (value == null) {
-      anyEl[name] = null
-    } else {
-      anyEl[name] = (e: Event) => {
-        const r = value(e)
-        if (r != null) dispatch(r)
-      }
+    // if (value == null) {
+    //   anyEl[name] = null
+    // } else {
+    anyEl[name] = (e: Event) => {
+      const r = value(e)
+      if (r != null) dispatch(r)
     }
+    // }
   }
 }
 
@@ -26,7 +26,9 @@ export const setAttribute = (el: Element, name: string, value: any) => {
     el.removeAttribute(name)
   } else {
     const s = String(value)
-    if (s !== el.getAttribute(name)) el.setAttribute(name, s)
+    if (s !== el.getAttribute(name)) {
+      el.setAttribute(name, s)
+    }
   }
 }
 

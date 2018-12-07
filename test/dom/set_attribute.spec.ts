@@ -14,7 +14,9 @@ describe('set_attribute', () => {
     expect(el.id).toEqual('main')
     setAttribute(el, 'id', null)
     expect(el.id).toEqual('')
-    setAttribute(el, 'id', 'main')
+    setAttribute(el, 'id', 'a')
+    setAttribute(el, 'id', 'a')
+    expect(el.id).toEqual('a')
     setAttribute(el, 'id', undefined)
     expect(el.id).toEqual('')
   })
@@ -28,16 +30,15 @@ describe('set_attribute', () => {
     expect(el.style.backgroundColor).toEqual('')
   })
 
-  // TODO content editable on JSDOM seems finnicky
-  // it('setEnumBoolAttribute', () => {
-  //   const el = createDiv()
-  //   setEnumBoolAttribute(el, 'contentEditable', true)
-  //   expect(el.contentEditable).toEqual('true')
-  //   setEnumBoolAttribute(el, 'contentEditable', undefined)
-  //   expect(el.contentEditable).toEqual('false')
-  //   setEnumBoolAttribute(el, 'contentEditable', false)
-  //   expect(el.contentEditable).toEqual('false')
-  // })
+  it('setEnumBoolAttribute', () => {
+    const el = createDiv()
+    setEnumBoolAttribute(el, 'draggable', true)
+    expect(el.draggable).toEqual(true)
+    setEnumBoolAttribute(el, 'draggable', undefined)
+    expect(el.draggable).toEqual(false)
+    setEnumBoolAttribute(el, 'draggable', false)
+    expect(el.draggable).toEqual(false)
+  })
 
   it('setBoolAttribute', () => {
     const el = createTextInput()
