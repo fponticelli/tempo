@@ -1,10 +1,10 @@
-import { DOMTemplate } from './dom_template'
+import { DOMTemplate, DOMChild } from './dom_template'
 import { DOMContext } from './dom_context'
 import { View } from '../core/view'
 import { DOMAttributes } from './dom_attributes'
-import { Acc, processAttribute, filterDynamics } from './utils'
+import { Acc, processAttribute, filterDynamics, domChildToTemplate } from './utils'
 import { DOMDynamicNodeView, DOMStaticNodeView } from './dom_node_view'
-import { DOMValue } from './dom_value'
+import { DOMAttribute } from './dom_value'
 
 export class DOMElement<State, Action> implements DOMTemplate<State, Action> {
   constructor(
@@ -21,7 +21,7 @@ export class DOMElement<State, Action> implements DOMTemplate<State, Action> {
 
     const { statics, dynamics } = keys.reduce(
       (acc: Acc<State>, key: AttributeName) =>
-        processAttribute(el, key, attributes[key] as DOMValue<State, any>, dispatch, acc),
+        processAttribute(el, key, attributes[key] as DOMAttribute<State, any>, dispatch, acc),
       { statics: [], dynamics: [] }
     )
 
@@ -46,3 +46,11 @@ export class DOMElement<State, Action> implements DOMTemplate<State, Action> {
     }
   }
 }
+
+export const el = <State, Action>(
+    name: string,
+    attributes: DOMAttributes<State, Action>,
+    ...children: DOMChild<State, Action>[]
+  ) => {
+    return new DOMElement<State, Action>(name, attributes, children.map(domChildToTemplate))
+  }

@@ -39,3 +39,5 @@ export class DOMText<State, Action> implements DOMTemplate<State, Action> {
     }
   }
 }
+
+export const text = <State, Action>(content: DOMTextValue<State>) => new DOMText<State, Action>(content)

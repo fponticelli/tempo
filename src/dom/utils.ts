@@ -3,6 +3,8 @@ import { DOMAttribute, DOMEvent, DOMProperty } from './dom_value'
 import { attributeNameMap, attributeMap } from './attributes_mapper'
 import { setEvent, setAttribute, setOneStyle } from './set_attribute'
 import { UnwrappedDerivedValue, WrappedDerivedValue } from '../core/value'
+import { DOMChild, DOMTemplate } from './dom_template'
+import { text } from './dom_text'
 
 export const removeNode = (node: Node) => {
   if (node && node.parentElement) {
@@ -12,6 +14,12 @@ export const removeNode = (node: Node) => {
 
 export const filterDynamics = <State>(children: View<State>[]): DynamicView<State>[] =>
   children.filter(child => child.kind === 'dynamic').map(child => child as DynamicView<State>)
+
+export const domChildToTemplate = <State, Action>(dom: DOMChild<State, Action>): DOMTemplate<State, Action> => {
+  if (typeof dom === 'string' || typeof dom === 'function') return text(dom)
+  else if (dom == null) return text('')
+  else return dom
+}
 
 export type Acc<State> = {
   statics: (() => void)[]
@@ -42,7 +50,7 @@ export const processAttribute = <State, Action>(
   }
 
   const anyValue = value as any
-  if (anyValue.kind && anyValue.kind === 'derived') {
+  if (anyValue && anyValue.kind && anyValue.kind === 'derived') {
     const derived = anyValue as WrappedDerivedValue<State, Action>
     const f = (state: State) => set(el, name, derived.resolve(state))
     return {
