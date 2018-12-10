@@ -6,6 +6,7 @@ export abstract class TypeBase {
     | 'boolean'
     | 'eboolean'
     | 'class'
+    | 'color'
     | 'style'
     | 'enum'
     | 'space-separated'
@@ -22,6 +23,14 @@ export class StringType extends TypeBase {
     return 'string'
   }
 }
+
+export class ColorType extends TypeBase {
+  readonly kind: 'color' = 'color'
+  toTSString() {
+    return 'string'
+  }
+}
+
 export class IntegerType extends TypeBase {
   readonly kind: 'integer' = 'integer'
   toTSString() {
@@ -82,11 +91,13 @@ export type AttributeType = StringType
   | BooleanType
   | EnumeratedBooleanType
   | ClassType
+  | ColorType
   | StyleType
   | EnumType
   | SpaceSeparatedType
 
 export const stringType: AttributeType = new StringType()
+export const colorType: AttributeType = new ColorType()
 export const integerType: AttributeType = new IntegerType()
 export const lengthType: AttributeType = new LengthType()
 export const booleanType: AttributeType = new BooleanType()

@@ -59,7 +59,7 @@ const combineAttributes = () => {
 }
 
 const attributeToStringField = (attr: Attribute) => {
-  return `${attr.codeName}?: DOMValue<State, ${attr.type.map(t => t.toTSString()).join(' | ')}>`
+  return `${attr.codeName}?: DOMAttribute<State, ${attr.type.map(t => t.toTSString()).join(' | ')}>`
 }
 
 const setterToString = (types: AttributeType[]) => {
@@ -100,7 +100,7 @@ async function f() {
     .sort()
 
   const domAttributesContent = `
-import { DOMValue } from './dom_value'
+import { DOMAttribute } from './dom_value'
 
 export interface DOMAttributes<State, Action> {
   ${allAttributes.join('\n  ')}
@@ -159,7 +159,7 @@ export const attributeMap: Record<string, (el: Element, name: string, value: any
 
       const content = `
 import { DOMChild } from '../dom_child'
-import { DOMValue } from '../dom_value'
+import { DOMAttribute } from '../dom_value'
 import { el } from '../dom_element'
 
 export interface ${attrType}<State> {

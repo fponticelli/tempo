@@ -1,55 +1,56 @@
-import { DOMValue } from './dom_value'
+import { DOMAttribute } from './dom_value'
 
 export interface DOMAttributes<State, Action> {
-  accesskey?: DOMValue<State, string>
-  alt?: DOMValue<State, string>
-  autocapitalize?: DOMValue<State, 'off' | 'none' | 'on' | 'sentences' | 'words' | 'characters'>
-  autofocus?: DOMValue<State, boolean>
-  autoplay?: DOMValue<State, boolean>
-  cite?: DOMValue<State, string>
-  className?: DOMValue<State, string>
-  contenteditable?: DOMValue<State, boolean>
-  controls?: DOMValue<State, boolean>
-  coords?: DOMValue<State, string>
-  crossorigin?: DOMValue<State, 'anonymous' | 'use-credentials'>
-  datetime?: DOMValue<State, string | string>
-  dir?: DOMValue<State, 'ltr' | 'rtl' | 'auto'>
-  disabled?: DOMValue<State, boolean>
-  download?: DOMValue<State, string>
-  draggable?: DOMValue<State, boolean>
-  form?: DOMValue<State, string>
-  formaction?: DOMValue<State, string>
-  formenctype?: DOMValue<State, 'application/x-www-form-urlencoded' | 'multipart/form-data' | 'text/plain'>
-  formmethod?: DOMValue<State, 'post' | 'get'>
-  formnovalidate?: DOMValue<State, boolean>
-  formtarget?: DOMValue<State, '_self' | '_blank' | '_parent' | '_top' | string>
-  height?: DOMValue<State, number>
-  hidden?: DOMValue<State, boolean>
-  href?: DOMValue<State, string>
-  hreflang?: DOMValue<State, string>
-  id?: DOMValue<State, string>
-  inputmode?: DOMValue<State, 'none' | 'text' | 'tel' | 'url' | 'email' | 'numeric' | 'decimal' | 'search'>
-  is?: DOMValue<State, string>
-  itemid?: DOMValue<State, string>
-  itemprop?: DOMValue<State, string>
-  itemref?: DOMValue<State, string>
-  itemscope?: DOMValue<State, boolean>
-  itemtype?: DOMValue<State, string>
-  lang?: DOMValue<State, string>
-  loop?: DOMValue<State, boolean>
-  muted?: DOMValue<State, boolean>
-  name?: DOMValue<State, string>
-  ping?: DOMValue<State, string[]>
-  preload?: DOMValue<State, '' | 'none' | 'metadata' | 'auto'>
-  rel?: DOMValue<State, string[]>
-  shape?: DOMValue<State, string>
-  spellcheck?: DOMValue<State, boolean>
-  src?: DOMValue<State, string>
-  // style?: DOMValue<State, DOMStyles>
-  tabindex?: DOMValue<State, number>
-  target?: DOMValue<State, '_self' | '_blank' | '_parent' | '_top' | string>
-  title?: DOMValue<State, string>
-  type?: DOMValue<State, 'submit' | 'reset' | 'button' | string>
-  value?: DOMValue<State, string>
-  width?: DOMValue<State, number>
+  accesskey?: DOMAttribute<State, string>
+  alt?: DOMAttribute<State, string>
+  autocapitalize?: DOMAttribute<State, 'off' | 'none' | 'on' | 'sentences' | 'words' | 'characters'>
+  autofocus?: DOMAttribute<State, boolean>
+  autoplay?: DOMAttribute<State, boolean>
+  cite?: DOMAttribute<State, string>
+  className?: DOMAttribute<State, string>
+  contenteditable?: DOMAttribute<State, boolean>
+  controls?: DOMAttribute<State, boolean>
+  coords?: DOMAttribute<State, string>
+  crossorigin?: DOMAttribute<State, 'anonymous' | 'use-credentials'>
+  datetime?: DOMAttribute<State, string | string>
+  dir?: DOMAttribute<State, 'ltr' | 'rtl' | 'auto'>
+  disabled?: DOMAttribute<State, boolean>
+  download?: DOMAttribute<State, string>
+  draggable?: DOMAttribute<State, boolean>
+  form?: DOMAttribute<State, string>
+  formaction?: DOMAttribute<State, string>
+  formenctype?: DOMAttribute<State, 'application/x-www-form-urlencoded' | 'multipart/form-data' | 'text/plain'>
+  formmethod?: DOMAttribute<State, 'post' | 'get'>
+  formnovalidate?: DOMAttribute<State, boolean>
+  formtarget?: DOMAttribute<State, '_self' | '_blank' | '_parent' | '_top' | string>
+  height?: DOMAttribute<State, number>
+  hidden?: DOMAttribute<State, boolean>
+  href?: DOMAttribute<State, string>
+  hreflang?: DOMAttribute<State, string>
+  id?: DOMAttribute<State, string>
+  inputmode?: DOMAttribute<State, 'none' | 'text' | 'tel' | 'url' | 'email' | 'numeric' | 'decimal' | 'search'>
+  is?: DOMAttribute<State, string>
+  itemid?: DOMAttribute<State, string>
+  itemprop?: DOMAttribute<State, string>
+  itemref?: DOMAttribute<State, string>
+  itemscope?: DOMAttribute<State, boolean>
+  itemtype?: DOMAttribute<State, string>
+  lang?: DOMAttribute<State, string>
+  loop?: DOMAttribute<State, boolean>
+  muted?: DOMAttribute<State, boolean>
+  name?: DOMAttribute<State, string>
+  ping?: DOMAttribute<State, string[]>
+  preload?: DOMAttribute<State, '' | 'none' | 'metadata' | 'auto'>
+  rel?: DOMAttribute<State, string[]>
+  shape?: DOMAttribute<State, string>
+  span?: DOMAttribute<State, number>
+  spellcheck?: DOMAttribute<State, boolean>
+  src?: DOMAttribute<State, string>
+  style?: DOMAttribute<State, string>
+  tabindex?: DOMAttribute<State, number>
+  target?: DOMAttribute<State, '_self' | '_blank' | '_parent' | '_top' | string>
+  title?: DOMAttribute<State, string>
+  type?: DOMAttribute<State, 'submit' | 'reset' | 'button' | string>
+  value?: DOMAttribute<State, string>
+  width?: DOMAttribute<State, number>
 }

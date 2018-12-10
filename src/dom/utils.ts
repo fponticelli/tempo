@@ -1,7 +1,8 @@
 import { View, DynamicView } from '../core/view'
-import { DOMValue, DOMValueFunction } from './dom_value'
+import { DOMAttribute, DOMEvent, DOMProperty } from './dom_value'
 import { attributeNameMap, attributeMap } from './attributes_mapper'
 import { setEvent, setAttribute, setOneStyle } from './set_attribute'
+import { UnwrappedDerivedValue, WrappedDerivedValue } from '../core/value'
 
 export const removeNode = (node: Node) => {
   if (node && node.parentElement) {
@@ -20,7 +21,7 @@ export type Acc<State> = {
 export const processAttribute = <State, Action>(
   el: HTMLElement,
   name: string,
-  value: DOMValue<State, Action>,
+  value: DOMAttribute<State, Action> | DOMEvent<State, Action> | DOMProperty<State, Action>,
   dispatch: (action: Action) => void,
   acc: Acc<State>
 ): Acc<State> => {
@@ -40,8 +41,16 @@ export const processAttribute = <State, Action>(
     set = attributeMap[name] || setAttribute
   }
 
-  if (typeof value === 'function' && !isEvent) {
-    const f = (state: State) => set(el, name, (value as DOMValueFunction<State, Action>)(state))
+  const anyValue = value as any
+  if (anyValue.kind && anyValue.kind === 'derived') {
+    const derived = anyValue as WrappedDerivedValue<State, Action>
+    const f = (state: State) => set(el, name, derived.resolve(state))
+    return {
+      dynamics: acc.dynamics.concat([f]),
+      statics: acc.statics
+    }
+  } else if (!isEvent && typeof value === 'function') {
+    const f = (state: State) => set(el, name, (value as UnwrappedDerivedValue<State, Action>)(state))
     return {
       dynamics: acc.dynamics.concat([f]),
       statics: acc.statics

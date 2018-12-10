@@ -2,6 +2,7 @@ import { createContext } from './common'
 import { DOMElement } from '../../src/dom/dom_element'
 import { DOMText } from '../../src/dom/dom_text'
 import { DynamicView } from '../../src/core/view'
+import { derived } from '../../src/dom/dom_value'
 
 describe('dom_element', () => {
   it('static empty-element', () => {
@@ -94,6 +95,38 @@ describe('dom_element', () => {
     expect(count).toEqual(0)
     el.click()
     expect(count).toEqual(1)
+    node.destroy()
+    expect(ctx.doc.body.innerHTML).toEqual('')
+  })
+
+  it('derived event that doesn\'t dispatches', () => {
+    const ctx = createContext()
+    let count = 0
+    const onclick = derived(s => undefined)
+    const node = new DOMElement<number, number>('div', { onclick: onclick } as any, []).render(ctx, 1, (c: number) => {
+      count = c
+    })
+    expect(ctx.doc.body.innerHTML).toEqual('<div></div>')
+    const el = ctx.doc.body.firstElementChild as HTMLDivElement
+    expect(count).toEqual(0)
+    el.click()
+    expect(count).toEqual(0)
+    node.destroy()
+    expect(ctx.doc.body.innerHTML).toEqual('')
+  })
+
+  it('derived event that dispatch', () => {
+    const ctx = createContext()
+    let count = 0
+    const onclick = derived((s: number) => (e: Event) => s + 1)
+    const node = new DOMElement<number, number>('div', { onclick: onclick } as any, []).render(ctx, 1, (c: number) => {
+      count = c
+    })
+    expect(ctx.doc.body.innerHTML).toEqual('<div></div>')
+    const el = ctx.doc.body.firstElementChild as HTMLDivElement
+    expect(count).toEqual(0)
+    el.click()
+    expect(count).toEqual(2)
     node.destroy()
     expect(ctx.doc.body.innerHTML).toEqual('')
   })

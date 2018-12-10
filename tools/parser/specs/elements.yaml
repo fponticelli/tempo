@@ -105,7 +105,7 @@
   interface: HTMLTableColElement
   attributes: ['@global', text-align, non-standard-bgcolor, char, charoff, span, valign, col-width]
 - name: colgroup
-  permitted-content: [{ els: 'col' }]
+  permitted-content: [{ els: ['col'] }]
   aria-roles: []
   interface: HTMLTableColElement
   attributes: ['@global', text-align, non-standard-bgcolor, char, charoff, span, valign, col-width]

@@ -3,7 +3,7 @@ import { DOMAttributes } from './dom_attributes'
 import { DOMContext } from './dom_context'
 import { processAttribute, Acc, filterDynamics } from './utils'
 import { DOMDynamicNodeView, DOMStaticNodeView } from './dom_node_view'
-import { DOMValue } from './dom_value'
+import { DOMAttribute } from './dom_value'
 
 export class DOMNSElement<State, Action> implements DOMTemplate<State, Action> {
   constructor(
@@ -21,7 +21,7 @@ export class DOMNSElement<State, Action> implements DOMTemplate<State, Action> {
 
     const { statics, dynamics } = keys.reduce(
       (acc: Acc<State>, key: AttributeName) =>
-        processAttribute(el, key, this.attributes[key] as DOMValue<State, any>, dispatch, acc),
+        processAttribute(el, key, this.attributes[key] as DOMAttribute<State, any>, dispatch, acc),
       { statics: [], dynamics: [] }
     ) as Acc<State>
     // apply attributes attributes

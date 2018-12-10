@@ -13,7 +13,8 @@ import {
   integerType,
   spaceSeparatedType,
   EnumType,
-  lengthType
+  lengthType,
+  colorType
 } from './attribute'
 import { DecodeError, Entity } from 'partsing/error'
 import { Element, Category, noContent, elementContent, contentCategory } from './element'
@@ -38,10 +39,12 @@ const attributeType: ValueDecoder<AttributeType> =
           case 'bool': return success(input, booleanType)
           case 'boolean': return success(input, booleanType)
           case 'class': return success(input, classType)
+          case 'color': return success(input, colorType)
           case 'ebool': return success(input, enumeratedBooleanType)
           case 'eboolean': return success(input, enumeratedBooleanType)
           case 'int': return success(input, integerType)
           case 'integer': return success(input, integerType)
+          case 'non-zero-positive-integer': return success(input, integerType)
           case 'length': return success(input, lengthType)
           case 'string': return success(input, stringType)
           case 'style': return success(input, styleType)

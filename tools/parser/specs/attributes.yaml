@@ -153,7 +153,7 @@
   type: [{ enum: [_self, _blank, _parent, _top] }, string]
 - name: select
   tags: obsolete
-  type: comma-separated
+  type: space-separated # comma?
 - name: shape
   type: { enum: [circle, default, polygon, rect] }
   tags: obsolete
