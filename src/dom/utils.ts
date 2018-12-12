@@ -1,10 +1,10 @@
 import { View, DynamicView } from '../core/view'
-import { DOMAttribute, DOMEvent, DOMProperty } from './dom_value'
+import { DOMAttribute, DOMEvent, DOMProperty } from './value'
 import { attributeNameMap, attributeMap } from './attributes_mapper'
 import { setEvent, setAttribute, setOneStyle } from './set_attribute'
 import { UnwrappedDerivedValue, WrappedDerivedValue } from '../core/value'
-import { DOMChild, DOMTemplate } from './dom_template'
-import { text } from './dom_text'
+import { DOMChild, DOMTemplate } from './template'
+import { text } from './text'
 
 export const removeNode = (node: Node) => {
   if (node && node.parentElement) {

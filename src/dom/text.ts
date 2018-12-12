@@ -1,9 +1,9 @@
-import { DOMTemplate } from './dom_template'
-import { DOMContext } from './dom_context'
+import { DOMTemplate } from './template'
+import { DOMContext } from './context'
 import { View } from '../core/view'
-import { DOMStaticNodeView, DOMDynamicNodeView } from './dom_node_view'
+import { DOMStaticNodeView, DOMDynamicNodeView } from './node_view'
 import { UnwrappedLiteralValue, UnwrappedDerivedValue } from '../core/value'
-import { DOMTextValue } from './dom_value'
+import { DOMTextValue } from './value'
 
 const renderLiteral = <State>(ctx: DOMContext, value: UnwrappedLiteralValue<string>): View<State> => {
   const node = ctx.doc.createTextNode(value || '')

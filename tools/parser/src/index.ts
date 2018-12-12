@@ -106,7 +106,7 @@ export interface DOMAttributes<State, Action> {
   ${allAttributes.join('\n  ')}
 }
 `
-  project = project.addFile(`dom_attributes.ts`, domAttributesContent)
+  project = project.addFile(`attributes.ts`, domAttributesContent)
 
   const attributeNames = filteredAttributes
     .filter(attr => attr.codeName !== attr.domName)

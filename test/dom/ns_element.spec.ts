@@ -1,5 +1,5 @@
 import { createContext } from './common'
-import { DOMNSElement } from '../../src/dom/dom_ns_element'
+import { DOMNSElement } from '../../src/dom/ns_element'
 import { DynamicView } from '../../src/core/view'
 
 describe('dom_ns_element', () => {

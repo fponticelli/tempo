@@ -1,9 +1,9 @@
-import { DOMTemplate } from './dom_template'
-import { DOMAttributes } from './dom_attributes'
-import { DOMContext } from './dom_context'
+import { DOMTemplate } from './template'
+import { DOMAttributes } from './attributes'
+import { DOMContext } from './context'
 import { processAttribute, Acc, filterDynamics } from './utils'
-import { DOMDynamicNodeView, DOMStaticNodeView } from './dom_node_view'
-import { DOMAttribute } from './dom_value'
+import { DOMDynamicNodeView, DOMStaticNodeView } from './node_view'
+import { DOMAttribute } from './value'
 
 export class DOMNSElement<State, Action> implements DOMTemplate<State, Action> {
   constructor(

@@ -1,6 +1,6 @@
 import { Template } from '../core/template'
-import { DOMContext } from './dom_context'
-import { DOMTextValue } from './dom_value'
+import { DOMContext } from './context'
+import { DOMTextValue } from './value'
 
 export interface DOMTemplate<State, Action> extends Template<State, Action, DOMContext> {}
 

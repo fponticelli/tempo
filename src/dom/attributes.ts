@@ -1,4 +1,4 @@
-import { DOMAttribute } from './dom_value'
+import { DOMAttribute } from './value'
 
 export interface DOMAttributes<State, Action> {
   accesskey?: DOMAttribute<State, string>
