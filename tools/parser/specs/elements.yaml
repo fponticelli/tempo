@@ -132,18 +132,79 @@
   aria-roles: ['@all']
   attributes: ['@global', cite, datetime]
   interface: HTMLSpanElement
+- name: details
+  permitted-content: [{ els: [summary] }, flow]
+  aria-roles: []
+  interface: HTMLDetailsElement
+  attributes: ['@global', open]
+  events: ['@global', toggle]
 - name: dfn
   permitted-content: [phrasing]
   aria-roles: ['@all']
   interface: HTMLElement
+- name: dialog
+  permitted-content: flow
+  aria-roles: [alertdialog]
+  interface: HTMLDialogElement
+  attributes: ['@global', open]
+- name: dir
+  permitted-content: [flow]
+  aria-roles: []
+  interface: HTMLDirectoryElement
+  tag: [obsolete]
+  attributes: ['@global', compact]
 - name: div
   permitted-content: [flow]
   aria-roles: ['@all']
   interface: HTMLDivElement
+- name: dl
+  permitted-content: [{ els: [dt, dd, div, script, template] }]
+  aria-roles: [group, presentation]
+  attributes: ['@global']
+  interface: HTMLDListElement
+- name: dt
+  permitted-content: [flow]
+  aria-roles: []
+  attributes: ['@global', nowrap]
+  interface: HTMLSpanElement
 - name: em
   permitted-content: [phrasing]
   aria-roles: ['@all']
   interface: HTMLSpanElement
+- name: embed
+  permitted-content: none
+  aria-roles: [application, document, img, presentation]
+  interface: HTMLEmbedElement
+  attributes: ['@global', height, src, type, width]
+- name: fieldset
+  permitted-content: [{ els: [legend] }, flow]
+  aria-roles: [group, presentation]
+  interface: HTMLFieldSetElement
+  attributes: ['@global', disabled, form, name]
+- name: figcaption
+  permitted-content: [{ els: [figcaption] }, flow]
+  aria-roles: [group, presentation]
+- name: figure
+  permitted-content: [flow]
+  aria-roles: [group, presentation]
+- name: footer
+  permitted-content: [flow]
+  aria-roles: [group, presentation]
+- name: form
+  permitted-content: [flow]
+  aria-roles: [group, presentation]
+  interface: HTMLFormElement
+  attributes: ['@global', accept, accept-charset, action, autocapitalize, autocomplete, enctype, method, name, novalidate, target]
+- name: frame
+  tags: deprecated
+  permitted-content: none
+  aria-roles: []
+  attributes: ['@global', src, name, noresize, scrolling, marginheight, marginwidth, framebuffer]
+- name: frameset
+  tags: deprecated
+  permitted-content: [{ else: [frame] }]
+  aria-roles: []
+  attributes: ['@global', cols, rows]
 - name: h1
   permitted-content: [phrasing]
   aria-roles: [tab, presentation]
@@ -168,10 +229,42 @@
   permitted-content: [phrasing]
   aria-roles: [tab, presentation]
   interface: HTMLHeadingElement
+- name: head
+  permitted-content: [metadata]
+  aria-roles: []
+  interface: HTMLHeadElement
+  attributes: ['@global', profile]
+- name: header
+  permitted-content: [flow]
+  aria-roles: [group, presentation]
+  attributes: ['@global', profile]
+- name: hgroup
+  permitted-content: [{ els: [h1, h2, h3, h4, h5, h6] }]
+  aria-roles: [tab, presentation]
+- name: hr
+  permitted-content: none
+  attributes: ['@global', clear]
+  aria-roles: ['presentation']
+  interface: HTMLHRElement
+- name: html
+  permitted-content: [{ els: [head, body] }]
+  aria-roles: []
+  interface: HTMLHtmlElement
+  attributes: ['@global', manifest, version, xmlns]
 - name: i
   permitted-content: [phrasing]
   aria-roles: ['@all']
   interface: HTMLSpanElement
+- name: iframe
+  permitted-content: [flow]
+  aria-roles: [application, document, img]
+  attributes: ['@global', allow, allowfullscreen, allowpaymentrequest, csp, height, importance, name, referrerpolicy, sandbox, src, srcdoc, width, align, frameborder, longdesc, marginheight, marginwidth, scrolling, mozbrowser]
+  interface: HTMLIFrameElement
+- name: img
+  permitted-content: none
+  aria-roles: ['@all']
+  interface: HTMLImageElement
+  attributes: ['@global', alt, crossorigin, decoding, height, importance, intrinsicsize, ismap, referrerpolicy, sizes, src, srcset, width, usemap, align, border, hspace, longdesc, obs-name, vspace]
 - name: ins
   permitted-content: [phrasing]
   aria-roles: ['@all']

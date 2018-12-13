@@ -1,7 +1,24 @@
 - name: accesskey
+- name: action
+- name: accept
+  type: comma-separated
+  tags: depracated
+- name: accept-charset
+  dom-name: accept-charset
+  code-name: acceptCharset
+  type: space-separated | comma-separated
 - name: align
-  tags: obsolete
-  type: { enum: [left, top, right, bottom] }
+  tags: [deprecated, obsolete]
+  type: { enum: [left, top, middle, right, bottom] }
+- name: allow
+  tags: experimental
+- name: allowfullscreen
+  tags: legacy
+- name: allowpaymentrequest
+  tags: legacy
+- name: autocapitalize
+  tags: non-standard
+  type: { enum: [none, sentences, words, characters] }
 - name: text-align
   dom-name: align
   code-name: align
@@ -13,7 +30,7 @@
 - name: autocapitalize
   type: { enum: ['off', none, 'on', sentences, words, characters] }
 - name: autocomplete
-  type: { enum: ['', 'off'] }
+  type: { enum: ['', 'on', 'off'] }
   tags: non-standard
 - name: autofocus
   type: bool
@@ -23,6 +40,9 @@
   tags: obsolete
 - name: bgcolor
   tags: obsolete
+- name: border
+  type: length
+  tags: deprecated
 - name: non-standard-bgcolor
   dom-name: bgcolor
   code-name: bgcolor
@@ -47,8 +67,14 @@
 - name: clear
   type: bool
   tags: obsolete
+- name: color
+  tags: non-standard
+- name: cols
+  tags: deprecated
+- name: compact
+  tags: deprecated
 - name: contenteditable
-  codeName: contentEditable
+  code-name: contentEditable
   type: ebool # '' is also acceptable for 'true'
 - name: contextmenu
   tags: obsolete
@@ -60,6 +86,8 @@
   # type: datetime
 - name: controls
   type: bool
+- name: csp
+  tags: experimental
 - name: obs-coords
   code-name: coords
   dom-name: coords
@@ -69,6 +97,8 @@
 # - name: data-*
 - name: crossorigin
   type: { enum: [anonymous, use-credentials] }
+- name: decoding
+  type: { enum: [sync, async, auto] }
 - name: disabled
   type: bool
 - name: dir
@@ -79,6 +109,8 @@
 - name: dropzone
   type: { enum: [copy, move, link] }
   tags: experimental
+- name: enctype
+  type: { enum: ['application/x-www-form-urlencoded', 'multipart/form-data', 'text/plain'] }
 - name: form
 - name: formaction
 - name: formenctype
@@ -89,18 +121,29 @@
   type: bool
 - name: formtarget
   type: [{ enum: [_self, _blank, _parent, _top] }, string]
+- name: frameborder
+  tags: [deprecated, obsolete]
 - name: height
   type: length
 - name: hidden
   type: bool
 - name: href
 - name: hreflang
+- name: hspace
+  tags: deprecated
 - name: id
   type: string
 - name: inputmode
   type: { enum: [none, text, tel, url, email, numeric, decimal, search] }
   vendor-names: { firefox: x-inputmode }
+- name: importance
+  tags: experimental
+  type: { enum: [auto, high, low] }
+- name: intrinsicsize
+  tags: experimental
 - name: is
+- name: ismap
+  type: bool
 - name: itemid
 - name: itemprop
 - name: itemref
@@ -112,12 +155,22 @@
   tags: obsolete
 - name: link
   tags: obsolete
+- name: longdesc
+  tags: obsolete
 - name: loop
   type: bool # or ebool?
+- name: method
+  type: { enum: [post, get, dialog] }
+- name: mozbrowser
+  tags: non-standard
 - name: moz-opaque
   tags: [non-standard, deprecated]
   type: bool
 - name: name
+- name: noresize
+  tags: deprecated
+- name: noshade
+  tags: deprecated
 - name: obs-name
   code-name: name
   dom-name: name
@@ -125,14 +178,32 @@
 - name: nowrap
   type: { enum: ['yes', 'no'] }
   tags: non-standard
+- name: manifest
+  tags: obsolete
+- name: marginheight
+  tags: deprecated
+- name: marginwidth
+  tags: deprecated
 - name: muted
   type: bool # or ebool?
 - name: nohref
   tags: obsolete
+- name: novalidate
+  type: bool
+- name: obs-width
+  dom-name: width
+  code-name: width
+  type: length
+  tags: obsolete
+- name: open
+  type: bool # or ebool?
 - name: ping
   type: space-separated
 - name: preload
   type: { enum: ['', none, metadata, auto] }
+- name: profile
+  type: space-separated
+  tags: obsolete
 - name: referrerpolicy
   type: { enum: [no-referrer, no-referrer-when-downgrade, origin, origin-when-cross-origin, strict-origin-when-cross-origin, unsafe-url] }
   tags: experimental
@@ -142,13 +213,26 @@
   tags: obsolete
 - name: rightmargin
   tags: obsolete
+- name: rows
+  tags: deprecated
+- name: sandbox
+  type: [{ enum: [allow-forms, allow-modals, allow-orientation-lock, allow-pointer-lock, allow-popups, allow-popups-to-escape-sandbox, allow-presentation, allow-same-origin, allow-scripts, allow-top-navigation, allow-top-navigation-by-user-activation] }]
+- name: scrolling
+  tags: deprecated
 - name: shape
+- name: size
+  tags: deprecated
+- name: sizes
+  type: comma-separated
 - name: slot
   tags: experimental
 - name: spellcheck
   type: eboolean
   tags: experimental-supported
 - name: src
+- name: srcdoc
+- name: srcset
+  type: comma-separated
 - name: target
   type: [{ enum: [_self, _blank, _parent, _top] }, string]
 - name: select
@@ -176,12 +260,17 @@
 - name: translate
   tags: experimental
   type: { enum: ['', 'yes', 'no'] }
+- name: usemap
 - name: value
 - name: valign
   type: { enum: [baseline, bottom, middle, top]}
   tags: [deprecated, obsolete]
+- name: version
+  tags: obsolete
 - name: vlink
   tags: obsolete
+- name: vspace
+  tags: deprecated
 - name: col-width
   dom-name: width
   code-name: width
@@ -193,6 +282,7 @@
   tags: deprecated
 - name: xml:base
   tags: deprecated
+- name: xmlns
 - name: x-ms-acceleratorkey
   tags: ms-extension
 - name: x-ms-format-detection
