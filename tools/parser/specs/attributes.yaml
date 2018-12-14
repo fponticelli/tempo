@@ -2,11 +2,11 @@
 - name: action
 - name: accept
   type: comma-separated
-  tags: depracated
+  tags: deprecated
 - name: accept-charset
   dom-name: accept-charset
   code-name: acceptCharset
-  type: space-separated | comma-separated
+  type: [space-separated, comma-separated]
 - name: align
   tags: [deprecated, obsolete]
   type: { enum: [left, top, middle, right, bottom] }
@@ -19,11 +19,10 @@
 - name: autocapitalize
   tags: non-standard
   type: { enum: [none, sentences, words, characters] }
-- name: text-align
-  dom-name: align
-  code-name: align
-  tags: [obsolete, deprecated]
-  type: { enum: [left, center, right, justify, char] }
+- name: autocomplete
+  type: { enum: ['off', 'on', name, honorific-prefix, given-name, additional-name, family-name, honorific-suffix, nickname, email, username, new-password, current-password, organization-title, organization, street-address, address-line1, address-line2, address-line3, address-level1, address-level2, address-level3, address-level4, country, country-name, postal-code, cc-name, cc-given-name, cc-additional-name, cc-family-name, cc-number, cc-exp, cc-exp-month, cc-exp-year, cc-csc, cc-type, transaction-currency, transaction-amount, langiage, bday, bday-day, bday-month, bday-year, sex, tel, tel-country-code, tel-national, tel-area-code, tel-local, tel-extension, impp, url, photo ] }
+- name: autofocus
+  type: bool
 - name: alink
   tags: obsolete
 - name: alt
@@ -38,6 +37,8 @@
   type: bool
 - name: background
   tags: obsolete
+- name: behavior
+  type: { enum: [scroll, slide, alternate] }
 - name: bgcolor
   tags: obsolete
 - name: border
@@ -54,6 +55,7 @@
   dom-name: type
   code-name: type
   type: { enum: [submit, reset, button] }
+- name: challenge
 - name: char
   tags: [deprecated, obsolete]
 - name: charoff
@@ -84,6 +86,9 @@
   # type: dateortime
 - name: datetime
   # type: datetime
+- name: direction
+- name: disabled
+  type: bool
 - name: controls
   type: bool
 - name: csp
@@ -136,6 +141,10 @@
 - name: inputmode
   type: { enum: [none, text, tel, url, email, numeric, decimal, search] }
   vendor-names: { firefox: x-inputmode }
+- name: input-type
+  dom-name: type
+  code-name: type
+  type: { enum: [button, checkbox, color, date, datetime-local, email, file, hidden, image, month, number, password, radio, range, reset, search, submit, tel, text, time, url, week] }
 - name: importance
   tags: experimental
   type: { enum: [auto, high, low] }
@@ -150,15 +159,25 @@
 - name: itemscope
   type: boolean
 - name: itemtype
+- name: keytype
 - name: lang
 - name: leftmargin
   tags: obsolete
 - name: link
   tags: obsolete
+- name: list
+- name: li-type
+  type: { enum: [a, A, i, I, '1'] }
+  tags: deprecated
 - name: longdesc
   tags: obsolete
 - name: loop
   type: bool # or ebool?
+- name: marquee-loop
+  dom-name: loop
+  code-name: loop
+  tags: deprecated
+  type: integer
 - name: method
   type: { enum: [post, get, dialog] }
 - name: mozbrowser
@@ -199,16 +218,20 @@
   type: bool # or ebool?
 - name: ping
   type: space-separated
+- name: placeholder
 - name: preload
   type: { enum: ['', none, metadata, auto] }
 - name: profile
   type: space-separated
   tags: obsolete
+- name: prompt
 - name: referrerpolicy
   type: { enum: [no-referrer, no-referrer-when-downgrade, origin, origin-when-cross-origin, strict-origin-when-cross-origin, unsafe-url] }
   tags: experimental
 - name: rel
   type: space-separated
+- name: required
+  type: bool
 - name: rev
   tags: obsolete
 - name: rightmargin
@@ -217,6 +240,10 @@
   tags: deprecated
 - name: sandbox
   type: [{ enum: [allow-forms, allow-modals, allow-orientation-lock, allow-pointer-lock, allow-popups, allow-popups-to-escape-sandbox, allow-presentation, allow-same-origin, allow-scripts, allow-top-navigation, allow-top-navigation-by-user-activation] }]
+- name: scrollamount
+  type: number
+- name: scrolldelay
+  type: number
 - name: scrolling
   tags: deprecated
 - name: shape
@@ -249,6 +276,11 @@
   type: integer
 - name: text
   tags: obsolete
+- name: text-align
+  dom-name: align
+  code-name: align
+  tags: [obsolete, deprecated]
+  type: { enum: [left, center, right, justify, char] }
 - name: title
 - name: obs-type
   dom-name: type
@@ -260,6 +292,8 @@
 - name: translate
   tags: experimental
   type: { enum: ['', 'yes', 'no'] }
+- name: truespeed
+  type: number
 - name: usemap
 - name: value
 - name: valign
@@ -283,6 +317,8 @@
 - name: xml:base
   tags: deprecated
 - name: xmlns
+- name: x-mox-errormessage
+  tags: non-standard
 - name: x-ms-acceleratorkey
   tags: ms-extension
 - name: x-ms-format-detection

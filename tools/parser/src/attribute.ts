@@ -2,6 +2,7 @@ export abstract class TypeBase {
   abstract readonly kind
     : 'string'
     | 'integer'
+    | 'number'
     | 'length'
     | 'boolean'
     | 'eboolean'
@@ -9,6 +10,7 @@ export abstract class TypeBase {
     | 'color'
     | 'style'
     | 'enum'
+    | 'comma-separated'
     | 'space-separated'
   toString() {
     return this.kind
@@ -33,6 +35,12 @@ export class ColorType extends TypeBase {
 
 export class IntegerType extends TypeBase {
   readonly kind: 'integer' = 'integer'
+  toTSString() {
+    return 'number'
+  }
+}
+export class NumberType extends TypeBase {
+  readonly kind: 'number' = 'number'
   toTSString() {
     return 'number'
   }
@@ -67,6 +75,12 @@ export class StyleType extends TypeBase {
     return 'DOMStyles'
   }
 }
+export class CommaSeparatedType extends TypeBase {
+  readonly kind: 'comma-separated' = 'comma-separated'
+  toTSString() {
+    return 'string[]'
+  }
+}
 export class SpaceSeparatedType extends TypeBase {
   readonly kind: 'space-separated' = 'space-separated'
   toTSString() {
@@ -87,6 +101,7 @@ export class EnumType extends TypeBase {
 
 export type AttributeType = StringType
   | IntegerType
+  | NumberType
   | LengthType
   | BooleanType
   | EnumeratedBooleanType
@@ -94,16 +109,19 @@ export type AttributeType = StringType
   | ColorType
   | StyleType
   | EnumType
+  | CommaSeparatedType
   | SpaceSeparatedType
 
 export const stringType: AttributeType = new StringType()
 export const colorType: AttributeType = new ColorType()
 export const integerType: AttributeType = new IntegerType()
+export const numberType: AttributeType = new NumberType()
 export const lengthType: AttributeType = new LengthType()
 export const booleanType: AttributeType = new BooleanType()
 export const enumeratedBooleanType: AttributeType = new EnumeratedBooleanType()
 export const classType: AttributeType = new ClassType()
 export const styleType: AttributeType = new StyleType()
+export const commaSeparatedType: AttributeType = new CommaSeparatedType()
 export const spaceSeparatedType: AttributeType = new SpaceSeparatedType()
 export const enumType = (values: string[]): AttributeType => new EnumType(values)
 
@@ -113,7 +131,8 @@ export enum Tag {
   experimentalSupported = 'experimental-supported',
   msExtension = 'ms-extension',
   obsolete = 'obsolete',
-  nonStandard = 'non-standard'
+  nonStandard = 'non-standard',
+  legacy = 'legacy'
 }
 
 export class Attribute {

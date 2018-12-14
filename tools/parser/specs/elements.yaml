@@ -101,12 +101,12 @@
   interface: HTMLSpanElement
 - name: col
   permitted-content: none
-  aria-roles: []
+  aria-roles: none
   interface: HTMLTableColElement
   attributes: ['@global', text-align, non-standard-bgcolor, char, charoff, span, valign, col-width]
 - name: colgroup
   permitted-content: [{ els: ['col'] }]
-  aria-roles: []
+  aria-roles: none
   interface: HTMLTableColElement
   attributes: ['@global', text-align, non-standard-bgcolor, char, charoff, span, valign, col-width]
 - name: content
@@ -117,15 +117,15 @@
 - name: data
   permitted-content: [phrasing]
   interface: HTMLDataElement
-  aria-roles: []
+  aria-roles: none
   attributes: ['@global', value]
 - name: datalist
   permitted-content: [phrasing, { els: [option] }]
   interface: HTMLDataListElement
-  aria-roles: []
+  aria-roles: none
 - name: dd
   permitted-content: [flow]
-  aria-roles: []
+  aria-roles: none
   attributes: ['@global', nowrap]
 - name: del
   permitted-content: [phrasing]
@@ -134,7 +134,7 @@
   interface: HTMLSpanElement
 - name: details
   permitted-content: [{ els: [summary] }, flow]
-  aria-roles: []
+  aria-roles: none
   interface: HTMLDetailsElement
   attributes: ['@global', open]
   events: ['@global', toggle]
@@ -143,13 +143,13 @@
   aria-roles: ['@all']
   interface: HTMLElement
 - name: dialog
-  permitted-content: flow
+  permitted-content: [flow]
   aria-roles: [alertdialog]
   interface: HTMLDialogElement
   attributes: ['@global', open]
 - name: dir
   permitted-content: [flow]
-  aria-roles: []
+  aria-roles: none
   interface: HTMLDirectoryElement
   tag: [obsolete]
   attributes: ['@global', compact]
@@ -164,7 +164,7 @@
   interface: HTMLDListElement
 - name: dt
   permitted-content: [flow]
-  aria-roles: []
+  aria-roles: none
   attributes: ['@global', nowrap]
   interface: HTMLSpanElement
 - name: em
@@ -198,12 +198,12 @@
 - name: frame
   tags: deprecated
   permitted-content: none
-  aria-roles: []
+  aria-roles: none
   attributes: ['@global', src, name, noresize, scrolling, marginheight, marginwidth, framebuffer]
 - name: frameset
   tags: deprecated
-  permitted-content: [{ else: [frame] }]
-  aria-roles: []
+  permitted-content: [{ els: [frame] }]
+  aria-roles: none
   attributes: ['@global', cols, rows]
 - name: h1
   permitted-content: [phrasing]
@@ -231,7 +231,7 @@
   interface: HTMLHeadingElement
 - name: head
   permitted-content: [metadata]
-  aria-roles: []
+  aria-roles: none
   interface: HTMLHeadElement
   attributes: ['@global', profile]
 - name: header
@@ -248,7 +248,7 @@
   interface: HTMLHRElement
 - name: html
   permitted-content: [{ els: [head, body] }]
-  aria-roles: []
+  aria-roles: none
   interface: HTMLHtmlElement
   attributes: ['@global', manifest, version, xmlns]
 - name: i
@@ -265,22 +265,66 @@
   aria-roles: ['@all']
   interface: HTMLImageElement
   attributes: ['@global', alt, crossorigin, decoding, height, importance, intrinsicsize, ismap, referrerpolicy, sizes, src, srcset, width, usemap, align, border, hspace, longdesc, obs-name, vspace]
+- name: input
+  permitted-content: none
+  aria-roles: [link, menuitem, menuitemcheckbox, menuitemradio, radio, switch, tab, button, menuitemcheckbox, option, switch, link, menuitem, menuitemcheckbox, menuitemradio, radio, switch, menuitemradio]
+  attributes: ['@global', input-type, autocomplete, autofocus, disabled, form, list, name, placeholder, required, tabindex, type, value, x-mox-errormessage]
+  interface: HTMLInputElement
 - name: ins
   permitted-content: [phrasing]
   aria-roles: ['@all']
   attributes: ['@global', cite, datetime]
   interface: HTMLModElement
+- name: isindex
+  tags: obsolete
+  attributes: ['@global', prompt, action]
 - name: kbd
   permitted-content: [phrasing]
   aria-roles: ['@all']
   interface: HTMLElement
+- name: keygen
+  tags: [deprecated]
+  permitted-content: none
+  aria-roles: none
+  interface: HTMLKeygenElement
+  attributes: ['@global', autofocus, challenge, disabled, form, keytype, name]
+- name: label
+  permitted-content: [phrasing]
+  aria-roles: none
+  attributes: ['@global', for, form]
+  interface: HTMLLabelElement
 - name: legend
   permitted-content: [phrasing]
   interface: HTMLLegendElement
+- name: li
+  permitted-content: [flow]
+  aria-roles: [menuitem, menuitemcheckbox, menuitemradio, option, presentation, radio, separator, tab, treeitem]
+  attributes: ['@global', value, li-type]
+  interface: HTMLLIElement
+- name: link
+  permitted-content: none
+  aria-roles: none
+  attributes: ['@global', as, crossorigin, href, hreflang, importance, integrity, media, referrerpolicy, rel, sizes, title, type, disabled, methods, prefetch, target, charset, rev]
+  interface: HTMLLinkElement
+- name: listing
+  tags: obsolete
+  permitted-content: [flow]
 - name: main
   permitted-content: [flow]
   aria-roles: [main, presentation]
   interface: HTMLElement
+- name: map
+  permitted-content: [transparent]
+  aria-roles: none
+  interface: HTMLMapElement
+  attributes: ['@global', name]
+- name: marquee
+  tags: obsolete
+  permitted-content: none
+  aria-roles: none
+  interface: HTMLMarqueeElement
+  attributes: ['@global', behavior, bgcolor, direction, height, hspace, marquee-loop, scrollamount, scrolldelay, truespeed, vspace, width]
+  events: [onbounce, onfinish, onstart]
 - name: mark
   permitted-content: [phrasing]
   aria-roles: ['@all']

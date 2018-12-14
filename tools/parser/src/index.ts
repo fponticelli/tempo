@@ -36,7 +36,7 @@ export const resolveGroups = (collections: Map<string, string[]>, groupName: str
   )
 }
 
-const excludeTags = [Tag.deprecated, Tag.experimental, Tag.msExtension, Tag.obsolete, Tag.nonStandard]
+const excludeTags = [Tag.deprecated, Tag.experimental, Tag.msExtension, Tag.obsolete, Tag.nonStandard, Tag.legacy]
 
 const exclude = (attr: Attribute | Element) => {
   return attr.tags.findIndex(val => excludeTags.indexOf(val) >= 0) < 0
@@ -69,7 +69,9 @@ const setterToString = (types: AttributeType[]) => {
     switch (types[0].kind) {
       case 'boolean': return 'setBoolAttribute'
       case 'eboolean': return 'setEnumBoolAttribute'
-      case 'space-separated': return 'setCommaSeparated'
+      case 'space-separated': return 'setSpaceSeparated'
+      case 'comma-separated': return 'setCommaSeparated'
+      case 'number': return 'setAttribute'
       default: throw `deal with this as well: ${types[0].kind}`
     }
   }

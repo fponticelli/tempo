@@ -14,7 +14,9 @@ import {
   spaceSeparatedType,
   EnumType,
   lengthType,
-  colorType
+  colorType,
+  commaSeparatedType,
+  numberType
 } from './attribute'
 import { DecodeError, Entity } from 'partsing/error'
 import { Element, Category, noContent, elementContent, contentCategory } from './element'
@@ -44,10 +46,12 @@ const attributeType: ValueDecoder<AttributeType> =
           case 'eboolean': return success(input, enumeratedBooleanType)
           case 'int': return success(input, integerType)
           case 'integer': return success(input, integerType)
+          case 'number': return success(input, numberType)
           case 'non-zero-positive-integer': return success(input, integerType)
           case 'length': return success(input, lengthType)
           case 'string': return success(input, stringType)
           case 'style': return success(input, styleType)
+          case 'comma-separated': return success(input, commaSeparatedType)
           case 'space-separated': return success(input, spaceSeparatedType)
           default: return failure(
             input,
@@ -75,6 +79,7 @@ const tagValue: ValueDecoder<Tag> = stringValue.flatMap(type => Decoder.of(input
     case 'experimental': return success(input, Tag.experimental)
     case 'experimental-supported': return success(input, Tag.experimentalSupported)
     case 'experimentalSupported': return success(input, Tag.experimentalSupported)
+    case 'legacy': return success(input, Tag.legacy)
     case 'ms-extension': return success(input, Tag.msExtension)
     case 'msExtension': return success(input, Tag.msExtension)
     case 'obsolete': return success(input, Tag.obsolete)
@@ -203,7 +208,7 @@ const element = objectValue(
     'dom-name': stringValue,
     interface: stringValue,
     tags: tags,
-    'aria-roles': arrayValue(stringValue),
+    'aria-roles':  literalValue('none').map(_ => []).or(arrayValue(stringValue)),
     'permitted-content': permittedContentValue,
     category: categoryValue,
     attributes: arrayValue(stringValue),
