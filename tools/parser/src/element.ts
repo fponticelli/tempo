@@ -1,6 +1,8 @@
 import { Tag } from './attribute'
 
 export enum Category {
+  all = 'all',
+  text = 'text',
   transparent = 'transparent',
   flow = 'flow',
   phrasing = 'phrasing',

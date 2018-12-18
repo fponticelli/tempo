@@ -21,7 +21,17 @@ export const setEvent = <Action>(dispatch: (action: Action) => void) => {
   }
 }
 
-export const setAttribute = (el: Element, name: string, value: any) => {
+export const setAttribute = (el: Element, name: string, value: string) => {
+  if (value == null) {
+    el.removeAttribute(name)
+  } else {
+    if (value !== el.getAttribute(name)) {
+      el.setAttribute(name, value)
+    }
+  }
+}
+
+export const setNumberAttribute = (el: Element, name: string, value: number) => {
   if (value == null) {
     el.removeAttribute(name)
   } else {
@@ -60,6 +70,11 @@ export const setBoolAttribute = (el: Element, name: string, value: boolean | und
 }
 
 export const setCommaSeparated = (el: Element, name: string, values: string[] | undefined) => {
+  if (values == null || values.length === 0) el.removeAttribute(name)
+  else el.setAttribute(name, values.join(', '))
+}
+
+export const setSpaceSeparated = (el: Element, name: string, values: string[] | undefined) => {
   if (values == null || values.length === 0) el.removeAttribute(name)
   else el.setAttribute(name, values.join(' '))
 }

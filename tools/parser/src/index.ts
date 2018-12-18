@@ -71,7 +71,7 @@ const setterToString = (types: AttributeType[]) => {
       case 'eboolean': return 'setEnumBoolAttribute'
       case 'space-separated': return 'setSpaceSeparated'
       case 'comma-separated': return 'setCommaSeparated'
-      case 'number': return 'setAttribute'
+      case 'number': return 'setNumberAttribute'
       default: throw `deal with this as well: ${types[0].kind}`
     }
   }
@@ -102,7 +102,7 @@ async function f() {
     .sort()
 
   const domAttributesContent = `
-import { DOMAttribute } from './dom_value'
+import { DOMAttribute } from './value'
 
 export interface DOMAttributes<State, Action> {
   ${allAttributes.join('\n  ')}
@@ -112,7 +112,7 @@ export interface DOMAttributes<State, Action> {
 
   const attributeNames = filteredAttributes
     .filter(attr => attr.codeName !== attr.domName)
-    .map(attr => `${attr.codeName}: ${attr.domName}`)
+    .map(attr => `${attr.codeName}: '${attr.domName}'`)
     .sort()
 
   const regularAttributeTypes = ['string', 'integer', 'length', 'class', 'style', 'enum']
@@ -124,7 +124,13 @@ export interface DOMAttributes<State, Action> {
 
   const attributeMapperContent = `
 /* istanbul ignore next */
-import { setBoolAttribute, setCommaSeparated, setEnumBoolAttribute } from './set_attribute'
+import {
+  setBoolAttribute,
+  setCommaSeparated,
+  setSpaceSeparated,
+  setNumberAttribute,
+  setEnumBoolAttribute
+} from './set_attribute'
 
 /* istanbul ignore next */
 export const attributeNameMap: Record<string, string> = {
@@ -160,9 +166,9 @@ export const attributeMap: Record<string, (el: Element, name: string, value: any
       .join('\n  ')
 
       const content = `
-import { DOMChild } from '../dom_child'
-import { DOMAttribute } from '../dom_value'
-import { el } from '../dom_element'
+import { DOMChild } from '../template'
+import { DOMAttribute } from '../value'
+import { el } from '../element'
 
 export interface ${attrType}<State> {
   ${attributes}

@@ -3,7 +3,7 @@
   category: transparent
   permitted-content: [flow, phrasing]
   aria-roles: [button, checkbox, menuitem, menuitemcheckbox, menuitemradio, option, radio, switch, tab, treeitem]
-  attributes: ['@global', download, href, hreflang, ping, referrerpolicy, rel, target, type, charset, obs-coords, obs-name, rev, shape]
+  attributes: ['@global', download, href, hreflang, ping, referrerpolicy, rel, target, type, obs-charset, obs-coords, obs-name, rev, shape]
 - name: abbr
   permitted-content: [phrasing]
   aria-roles: ['@all']
@@ -38,7 +38,7 @@
   attributes: ['@global', href, target]
 - name: basefont
   permitted-content: none
-  attributes: ['@global', color, face, size]
+  attributes: ['@global', color, face, deprecated-size]
   tags: obsolete
 - name: bdi
   permitted-content: [phrasing]
@@ -66,7 +66,7 @@
 - name: body
   permitted-content: [flow]
   interface: HTMLBodyElement
-  attributes: ['@global', alink, background, bgcolor, bottommargin, leftmargin, link, rightmargin, text, topmargin, vlink]
+  attributes: ['@global', alink, background, bgcolor, bottommargin, leftmargin, link, rightmargin, obs-text, topmargin, vlink]
   events: ['@global', onafterprint, onbeforeprint, onbeforeunload, onblur, onerror, onfocus, onhashchange, onlanguagechange, onload, onmessage, onoffline, ononline, onpopstate, onredo, onresize, onstorage, onundo, onunload]
 - name: br
   permitted-content: none
@@ -204,7 +204,7 @@
   tags: deprecated
   permitted-content: [{ els: [frame] }]
   aria-roles: none
-  attributes: ['@global', cols, rows]
+  attributes: ['@global', deprecated-cols, deprecated-rows]
 - name: h1
   permitted-content: [phrasing]
   aria-roles: [tab, presentation]
@@ -304,7 +304,7 @@
 - name: link
   permitted-content: none
   aria-roles: none
-  attributes: ['@global', as, crossorigin, href, hreflang, importance, integrity, media, referrerpolicy, rel, sizes, title, type, disabled, methods, prefetch, target, charset, rev]
+  attributes: ['@global', as, crossorigin, href, hreflang, importance, integrity, media, referrerpolicy, rel, sizes, title, type, disabled, methods, prefetch, target, obs-charset, rev]
   interface: HTMLLinkElement
 - name: listing
   tags: obsolete
@@ -329,15 +329,111 @@
   permitted-content: [phrasing]
   aria-roles: ['@all']
   interface: HTMLElement
+- name: menu
+  tags: experimental
+  permitted-content: [flow, { els: [li, script, template, menu, menuitem, hr]}]
+  aria-roles: none
+  interface: HTMLMenuElement
+  attributes: ['@global', deprecated-label, menu-type]
+- name: menuitem
+  tags: deprecated
+  permitted-content: none
+  aria-roles: none
+  interface: HTMLMenuItemElement
+  attributes: ['@global', checked, command, default, disabled, icon, label, radiogroup, menuitem-type, ]
+- name: meta
+  permitted-content: none
+  aria-roles: none
+  interface: HTMLMetaElement
+  attributes: ['@global', charset, content, http-equiv, name, meta-name, scheme]
+- name: meter
+  permitted-content: [phrasing]
+  aria-roles: none
+  interface: HTMLMeterElement
+  attributes: ['@global', number-value, number-min, number-max, number-low, number-high, number-optimum, form]
+- name: nav
+  permitted-content: [flow]
+  aria-roles: none
+- name: nobr
+  tags: [obsolete, non-standard]
+  permitted-content: none
+  aria-roles: none
+- name: noframes
+  tags: [obsolete]
+  permitted-content: none
+  aria-roles: none
+- name: noscript
+  permitted-content: [{ els: [link, style, meta] }, flow]
+  aria-roles: none
+- name: object
+  permitted-content: [{ els: [param] }, transparent]
+  aria-roles: [application, document, image]
+  interface: HTMLObjectElement
+  attributes: ['@global', archive, border, classid, codebase, codetype, data, declare, form, height, name, standby, tabindex, type, typemustmatch, usemap, width]
+- name: ol
+  permitted-content: [{ els: [li] }]
+  aria-roles: [directory, group, listbox, menu, menubar, radiogroup, tablist, toolbar, tree, presentation]
+  attributes: ['@global', compact, reversed, list-start, list-type]
+  interface: HTMLOListElement
+- name: optgroup
+  permitted-content: [{ els: [option] }]
+  aria-roles: none
+  interface: HTMLOptGroupElement
+  attributes: ['@global', disabled, label]
+- name: option
+  permitted-content: [text]
+  aria-roles: none
+  interface: HTMLOptionElement
+  attributes: ['@global', disabled, label, selected, value]
+- name: output
+  permitted-content: [phrasing]
+  aria-roles: ['@all']
+  interface: HTMLOutputElement
+  attributes: ['@global', for, form, name]
 - name: p
   permitted-content: [phrasing]
   aria-roles: ['@all']
   interface: HTMLParagraphElement
+- name: param
+  permitted-content: none
+  aria-roles: none
+  interface: HTMLParamElement
+  attributes: ['@global', name, value, obs-type, obs-valuetype]
+- name: picture
+  permitted-content: [{ els: [source, img] }, script-supporting]
+  aria-roles: none
+  interface: HTMLPictureElement
+- name: plaintext
+  tags: [deprecated, obsolete]
+  permitted-content: [text]
+  aria-roles: none
+- name: pre
+  permitted-content: [flow, palpable]
+  aria-roles: ['@all']
+  interface: HTMLPreElement
+  attributes: ['@global', obs-cols, obs-width, non-standard-wrap]
+- name: progress
+  permitted-content: [phrasing]
+  aria-roles: none
+  interface: HTMLProgressElement
+  attributes: ['@global', number-max, number-value]
 - name: q
   permitted-content: [phrasing]
   aria-roles: ['@all']
   interface: HTMLQuoteElement
   attributes: ['@global', cite]
+- name: rp
+  permitted-content: [text]
+  aria-roles: ['@all']
+- name: rt
+  permitted-content: [{ els: [ruby] }]
+  aria-roles: ['@all']
+- name: rtc
+  permitted-content: [{ els: [ruby] }]
+  aria-roles: ['@all']
+- name: ruby
+  permitted-content: [phrasing]
+  aria-roles: ['@all']
 - name: s
   permitted-content: [phrasing]
   aria-roles: ['@all']
@@ -346,6 +442,8 @@
   permitted-content: [phrasing]
   aria-roles: ['@all']
   interface: HTMLElement
+- name: scheme
+  tags: obsolete
 - name: small
   permitted-content: [phrasing]
   aria-roles: ['@all']
@@ -354,26 +452,149 @@
   permitted-content: [phrasing]
   aria-roles: ['@all']
   interface: HTMLSpanElement
+- name: script
+  permitted-content: [text]
+  aria-roles: none
+  interface: HTMLScriptElement
+  attributes: ['@global', async, crossorigin, defer, integrity, nomodule, nonce, src, text, script-type, deprecated-charset, language]
+- name: section
+  permitted-content: [flow]
+  aria-roles: [alert, alertdialog, application, banner, complementary, contentinfo, dialog, document, feed, log, main, marquee, navigation, search, status, tabpanel]
+- name: select
+  permitted-content: [{ els: [option, optgroup] }]
+  aria-roles: [menu]
+  interface: HTMLSelectElement
+  attributes: ['@global', autocomplete, autofocus, disabled, form, multiple, name, required, size]
+- name: shadow
+  tags: deprecated
+  permitted-content: [flow]
+  aria-roles: none
+  interface: HTMLShadowElement
+- name: slot
+  tags: experimental
+  permitted-content: [transparent]
+  aria-roles: none
+  interface: HTMLSlotElement
+  attributes: ['@global', name]
+- name: small
+  permitted-content: [phrasing]
+  aria-roles: ['@all']
+- name: source
+  permitted-content: none
+  aria-roles: none
+  interface: HTMLSourceElement
+  attributes: ['@global', sizes, src, experimental-srcset, mime-type, media]
+- name: spacer
+  tags: [non-standard, obsolete]
+  permitted-content: none
+  aria-roles: none
+  attributes: ['@global', type, size, width, height, align]
+- name: strike
+  tags: obsolete
+  permitted-content: [phrasing]
+  aria-roles: none
 - name: strong
   permitted-content: [phrasing]
   aria-roles: ['@all']
   interface: HTMLElement
+- name: style
+  permitted-content: [text]
+  aria-roles: none
+  interface: HTMLStyleElement
+  attributes: ['@global', style-type, media, nonce, title, scoped]
 - name: sub
   permitted-content: [phrasing]
   aria-roles: ['@all']
   interface: HTMLElement
+- name: summary
+  permitted-content: [phrasing, heading]
+  aria-roles: [button]
 - name: sup
   permitted-content: [phrasing]
   aria-roles: ['@all']
   interface: HTMLElement
+- name: table
+  permitted-content: [{ els: [caption, colgroup, thead, tbody, tr, tfoot ]}]
+  aria-roles: ['@all']
+  interface: HTMLTableElement
+  attributes: ['@global', align, bgcolor, border, cellpadding, cellspacing, frame, rules, summary, deprecated-width]
+- name: tbody
+  permitted-content: [{ els: [tr] }]
+  aria-roles: ['@all']
+  interface: HTMLTableSectionElement
+  attributes: ['@global', align, bgcolor, char, charoff, valign]
+- name: td
+  permitted-content: [flow]
+  aria-roles: ['@all']
+  interface: HTMLTableDataCellElement
+  attributes: ['@global', abbr, align, axis, bgcolor, char, charoff, colspan, headers, deprecated-height, rowspan, valign, deprecated-width]
+- name: template
+  permitted-content: ['@all']
+  aria-roles: none
+  interface: HTMLTemplateElement
+- name: textarea
+  permitted-content: [text]
+  aria-roles: none
+  interface: HTMLTextAreaElement
+  attributes: ['@global', autocapitalize, autocomplete, autofocus, cols, disabled, form, maxlength, minlength, name, placeholder, readonly, required, rows, experimental-supported-spellcheck, wrap]
+- name: tfoot
+  permitted-content: [{ els: [tr] }]
+  aria-roles: ['@all']
+  interface: HTMLTableSectionElement
+  attributes: ['@global', align, bgcolor, char, charoff, valign]
+- name: th
+  permitted-content: [flow]
+  aria-roles: ['@all']
+  interface: HTMLTableHeaderCellElement
+  attributes: ['@global', abbr, align, axis, bgcolor, char, charoff, colspan, headers, deprecated-height, rowspan, th-scope, valign, deprecated-width]
+- name: thead
+  permitted-content: [{ els: [tr] }]
+  aria-roles: ['@all']
+  interface: HTMLTableSectionElement
+  attributes: ['@global', align, bgcolor, char, charoff, valign]
+- name: title
+  permitted-content: [text]
+  aria-roles: none
+  interface: HTMLTitleElement
+- name: tr
+  permitted-content: [{ els: [td, th, script, template] }]
+  aria-roles: ['@all']
+  interface: HTMLTableRowElement
+  attributes: ['@global', align, bgcolor, char, charoff, valign]
+- name: track
+  permitted-content: none
+  aria-roles: none
+  interface: HTMLTrackElement
+  attributes: ['@global', default, track-kind, label, src, srclang]
 - name: time
   permitted-content: [phrasing]
   aria-roles: ['@all']
   interface: HTMLTimeElement
   attributes: ['@global', dateortime]
+- name: u
+  permitted-content: [flow, phrasing, palpable]
+  aria-roles: ['@all']
+  attributes: ['@global']
+- name: ul
+  permitted-content: [{ els: [li] }]
+  aria-roles: [directory, group, listbox, menu, menubar, radiogroup, tablist, toolbar, tree, presentation]
+  attributes: ['@global', compact, deprecated-type]
+  interface: HTMLUListElement
 - name: var
   dom-name: var
   code-name: var_
   permitted-content: [phrasing]
   aria-roles: ['@all']
   interface: HTMLElement
+- name: video
+  permitted-content: [{ els: [track, video, source] }]
+  aria-roles: [application]
+  interface: HTMLVideoElement
+  attributes: ['@global', autoplay, controls, crossorigin, height, loop, muted, preload, intrinsicsize, poster, src, width, playsinline]
+- name: wbr
+  permitted-content: none
+  aria-roles: ['@all']
+- name: xmp
+  tags: obsolete
+  permitted-content: none
+  aria-roles: none

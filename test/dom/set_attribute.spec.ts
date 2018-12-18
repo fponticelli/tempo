@@ -3,7 +3,7 @@ import {
   setAttribute,
   setOneStyle,
   setEnumBoolAttribute,
-  setCommaSeparated,
+  setSpaceSeparated,
   setBoolAttribute
 } from '../../src/dom/set_attribute'
 
@@ -51,15 +51,15 @@ describe('set_attribute', () => {
     expect(el.autofocus).toEqual(false)
   })
 
-  it('setCommaSeparated', () => {
+  it('setSpaceSeparated', () => {
     // ping
     const el = createA()
     expect(el.rel).toEqual('')
-    setCommaSeparated(el, 'rel', ['a', 'b', 'c'])
+    setSpaceSeparated(el, 'rel', ['a', 'b', 'c'])
     expect(el.rel).toEqual('a b c')
-    setCommaSeparated(el, 'rel', [])
+    setSpaceSeparated(el, 'rel', [])
     expect(el.rel).toEqual('')
-    setCommaSeparated(el, 'rel', undefined)
+    setSpaceSeparated(el, 'rel', undefined)
     expect(el.rel).toEqual('')
   })
 })

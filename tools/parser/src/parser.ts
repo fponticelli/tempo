@@ -46,6 +46,7 @@ const attributeType: ValueDecoder<AttributeType> =
           case 'eboolean': return success(input, enumeratedBooleanType)
           case 'int': return success(input, integerType)
           case 'integer': return success(input, integerType)
+          case 'positive-integer': return success(input, integerType)
           case 'number': return success(input, numberType)
           case 'non-zero-positive-integer': return success(input, integerType)
           case 'length': return success(input, lengthType)
@@ -162,6 +163,8 @@ const categoryValue: ValueDecoder<Category> = stringValue
   .flatMap(value =>
     Decoder.of(input => {
       switch (value) {
+        case '@all': return success(input, Category.all)
+        case 'text': return success(input, Category.text)
         case 'transparent': return success(input, Category.transparent)
         case 'flow': return success(input, Category.flow)
         case 'phrasing': return success(input, Category.phrasing)
@@ -171,8 +174,8 @@ const categoryValue: ValueDecoder<Category> = stringValue
         case 'embedded': return success(input, Category.embedded)
         case 'interactive': return success(input, Category.interactive)
         case 'palpable': return success(input, Category.palpable)
-        case 'formAssociated': return success(input, Category.formAssociated)
-        case 'scriptSupporting': return success(input, Category.scriptSupporting)
+        case 'form-associated': return success(input, Category.formAssociated)
+        case 'script-supporting': return success(input, Category.scriptSupporting)
 
         default: return failure(
           input,
