@@ -25,6 +25,7 @@
   "scripts": {
     "build": "tsc",
     "go": "node lib/index.js",
-    "build-go": "yarn build && yarn go"
+    "build-go": "yarn build && yarn go",
+    "copy": "cp -R gen/* ../../src/dom/"
   }
 }

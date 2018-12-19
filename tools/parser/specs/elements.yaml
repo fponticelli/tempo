@@ -268,7 +268,7 @@
 - name: input
   permitted-content: none
   aria-roles: [link, menuitem, menuitemcheckbox, menuitemradio, radio, switch, tab, button, menuitemcheckbox, option, switch, link, menuitem, menuitemcheckbox, menuitemradio, radio, switch, menuitemradio]
-  attributes: ['@global', input-type, autocomplete, autofocus, disabled, form, list, name, placeholder, required, tabindex, type, value, x-mox-errormessage]
+  attributes: ['@global', input-type, autocomplete, autofocus, checked, disabled, form, list, name, placeholder, required, tabindex, value, x-mox-errormessage]
   interface: HTMLInputElement
 - name: ins
   permitted-content: [phrasing]
@@ -345,7 +345,7 @@
   permitted-content: none
   aria-roles: none
   interface: HTMLMetaElement
-  attributes: ['@global', charset, content, http-equiv, name, meta-name, scheme]
+  attributes: ['@global', charset, content, http-equiv, meta-name, scheme]
 - name: meter
   permitted-content: [phrasing]
   aria-roles: none
@@ -476,9 +476,6 @@
   aria-roles: none
   interface: HTMLSlotElement
   attributes: ['@global', name]
-- name: small
-  permitted-content: [phrasing]
-  aria-roles: ['@all']
 - name: source
   permitted-content: none
   aria-roles: none
@@ -536,7 +533,7 @@
   permitted-content: [text]
   aria-roles: none
   interface: HTMLTextAreaElement
-  attributes: ['@global', autocapitalize, autocomplete, autofocus, cols, disabled, form, maxlength, minlength, name, placeholder, readonly, required, rows, experimental-supported-spellcheck, wrap]
+  attributes: ['@global', autocapitalize, autocomplete, autofocus, cols, disabled, form, maxlength, minlength, name, placeholder, readonly, required, rows, wrap]
 - name: tfoot
   permitted-content: [{ els: [tr] }]
   aria-roles: ['@all']
@@ -582,7 +579,7 @@
   interface: HTMLUListElement
 - name: var
   dom-name: var
-  code-name: var_
+  code-name: htmlVar
   permitted-content: [phrasing]
   aria-roles: ['@all']
   interface: HTMLElement

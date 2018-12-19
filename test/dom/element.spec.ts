@@ -2,6 +2,7 @@ import { createContext } from './common'
 import { el } from '../../src/dom/element'
 import { DynamicView } from '../../src/core/view'
 import { derived } from '../../src/dom/value'
+import { div, span, a } from '../../src/dom/els'
 
 describe('dom_element', () => {
   it('static empty-element', () => {
@@ -139,5 +140,13 @@ describe('dom_element', () => {
     expect(count).toEqual(0)
     domEl.click()
     expect(count).toEqual(0)
+    node.destroy()
+  })
+
+  it('generated elements', () => {
+    const view = div({}, span({}, 'hello ', a({ href: '#you' }, (s) => `#${s}`)))
+    const ctx = createContext()
+    view.render(ctx, 1, () => {})
+    expect(ctx.doc.body.innerHTML).toEqual('<div><span>hello <a href="#you">#1</a></span></div>')
   })
 })

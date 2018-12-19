@@ -19,7 +19,7 @@
 - name: allowpaymentrequest
   tags: legacy
 - name: as
-  code-name: as_
+  code-name: asAttr
   dom-name: as
 - name: async
   type: bool # TODO ebool?
@@ -73,6 +73,9 @@
 - name: charoff
   tags: [deprecated, obsolete]
 - name: charset
+- name: checked
+  type: bool
+  is-property: true
 - name: cite
 - name: class
   code-name: className
@@ -175,11 +178,6 @@
   code-name: sizes
   dom-name: sizes
   type: comma-separated
-- name: experimental-supported-spellcheck
-  dom-name: spellcheck
-  code-name: spellcheck
-  type: eboolean
-  tags: experimental-supported
 - name: experimental-srcset
   code-name: srcset
   dom-name: srcset
@@ -275,8 +273,10 @@
   type: integer
 - name: multiple
   type: bool
+  is-property: true
 - name: muted
   type: bool # or ebool?
+  is-property: true
 - name: media
 - name: methods
   tags: non-standard
@@ -324,6 +324,7 @@
   dom-name: value
   code-name: value
   type: number
+  is-property: true # TODO validate it is the case
 - name: number-min
   dom-name: min
   code-name: min
@@ -454,6 +455,7 @@
   type: space-separated # comma?
 - name: selected
   type: bool
+  is-property: true
 - name: shape
   type: { enum: [circle, default, polygon, rect] }
   tags: obsolete
@@ -500,6 +502,7 @@
   type: number
 - name: usemap
 - name: value
+  is-property: true
 - name: valign
   type: { enum: [baseline, bottom, middle, top]}
   tags: [deprecated, obsolete]

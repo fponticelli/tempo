@@ -17,6 +17,10 @@ export abstract class TypeBase {
   }
 
   abstract toTSString(): string
+
+  equals(other: AttributeType) {
+    return this.kind === other.kind
+  }
 }
 
 export class StringType extends TypeBase {
@@ -97,9 +101,23 @@ export class EnumType extends TypeBase {
   toTSString() {
     return this.values.map(v => `'${v}'`).join(' | ')
   }
+
+  equals(other: AttributeType) {
+    if (!super.equals(other)) return false
+    const values = (other as EnumType).values
+    if (this.values.length !== values.length) return false
+    const copy = [...values]
+    for (const v of values) {
+      const index = copy.indexOf(v)
+      if (index < 0) return false
+      copy.splice(index, 1)
+    }
+    return copy.length === 0
+  }
 }
 
-export type AttributeType = StringType
+export type AttributeType =
+  | StringType
   | IntegerType
   | NumberType
   | LengthType
@@ -135,13 +153,33 @@ export enum Tag {
   legacy = 'legacy'
 }
 
+const combineTags = (a: Tag[], b: Tag[]) => {
+  const buff = [...a]
+  b.forEach(t => {
+    if (buff.indexOf(t) < 0)
+      buff.push(t)
+  })
+  return buff
+}
+
+const combineTypes = (a: AttributeType[], b: AttributeType[]) => {
+  const buff = [...a]
+  b.forEach(t => {
+    if (buff.findIndex(v => v.equals(t)) < 0) {
+      buff.push(t)
+    }
+  })
+  return buff
+}
+
 export class Attribute {
   constructor(
     readonly name: string,
     readonly codeName: string,
     readonly domName: string,
     readonly type: AttributeType[],
-    readonly tags: Tag[]
+    readonly tags: Tag[],
+    readonly isProperty: boolean
   ) {}
 
   append(other: Attribute) {
@@ -149,8 +187,9 @@ export class Attribute {
       this.name,
       this.codeName,
       this.domName,
-      this.type.concat(other.type),
-      Array.from(new Set([...this.tags, ...other.tags]))
+      combineTypes(this.type, other.type),
+      combineTags(this.tags, other.tags),
+      this.isProperty
     )
   }
 }

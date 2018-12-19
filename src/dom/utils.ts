@@ -1,5 +1,5 @@
 import { View, DynamicView } from '../core/view'
-import { DOMAttribute, DOMEvent, DOMProperty } from './value'
+import { DOMAttribute, DOMEventHandler, DOMProperty } from './value'
 import { attributeNameMap, attributeMap } from './attributes_mapper'
 import { setEvent, setAttribute, setOneStyle } from './set_attribute'
 import { UnwrappedDerivedValue, WrappedDerivedValue } from '../core/value'
@@ -29,7 +29,7 @@ export type Acc<State> = {
 export const processAttribute = <State, Action>(
   el: HTMLElement,
   name: string,
-  value: DOMAttribute<State, Action> | DOMEvent<State, Action> | DOMProperty<State, Action>,
+  value: DOMAttribute<State, Action> | DOMEventHandler<State, any, Action> | DOMProperty<State, Action>,
   dispatch: (action: Action) => void,
   acc: Acc<State>
 ): Acc<State> => {

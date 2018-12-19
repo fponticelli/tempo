@@ -2,9 +2,12 @@
 import { UnwrappedValue, UnwrappedLiteralValue, WrappedDerivedValue } from '../core/value'
 
 export type DOMAttribute<S, V> = UnwrappedValue<S, V>
-export type DOMEvent<S, V> = UnwrappedLiteralValue<V> | WrappedDerivedValue<S, V>
+export type DOMEventHandler<S, E, Action> =
+  | UnwrappedLiteralValue<(event: E) => Action>
+  | WrappedDerivedValue<S, (event: E) => Action>
 export type DOMProperty<S, V> = DOMAttribute<S, V>
 export type DOMTextValue<S> = DOMAttribute<S, string>
+export type DOMStyles = Record<string, string> // TODO
 
 /* istanbul ignore next */
 export { derived } from '../core/value'

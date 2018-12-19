@@ -1,3 +1,5 @@
+import { DOMStyles } from './value'
+
 export const setOneStyle = (el: HTMLElement, name: string, value: any) => {
   const anyStyle = el.style as any
   if (value == null) {
@@ -25,16 +27,6 @@ export const setAttribute = (el: Element, name: string, value: string) => {
   if (value == null) {
     el.removeAttribute(name)
   } else {
-    if (value !== el.getAttribute(name)) {
-      el.setAttribute(name, value)
-    }
-  }
-}
-
-export const setNumberAttribute = (el: Element, name: string, value: number) => {
-  if (value == null) {
-    el.removeAttribute(name)
-  } else {
     const s = String(value)
     if (s !== el.getAttribute(name)) {
       el.setAttribute(name, s)
@@ -42,22 +34,32 @@ export const setNumberAttribute = (el: Element, name: string, value: number) => 
   }
 }
 
-// export const setProperty = (el: Element, name: string, value: any | undefined) => {
-//   if (value == null) {
-//     delete (el as any)[name]
-//     return
-//   }
-//   if ((el as any)[name] !== value) (el as any)[name] = value
-// }
+export const setProperty = (el: Element, name: string, value: any | undefined) => {
+  if (value == null) {
+    delete (el as any)[name]
+    return
+  }
+  if ((el as any)[name] !== value) (el as any)[name] = value
+}
 
-// export const setBoolProperty = (el: Element, name: string, value: boolean | undefined) => {
-//   if (value == null) {
-//     delete (el as any)[name]
-//     return
-//   }
-//   const bool = Boolean(value)
-//   if ((el as any)[name] !== bool) (el as any)[name] = bool
-// }
+export const setStyleAttribute = (el: Element, name: string, value: DOMStyles | undefined) => {
+  const html = el as HTMLElement
+  if (value == null) {
+    html.style.cssText = ''
+  } else {
+    const s = Object.keys(value).map(k => `${k}: ${value[k]};`).join('')
+    html.style.cssText = s
+  }
+}
+
+export const setBoolProperty = (el: Element, name: string, value: boolean | undefined) => {
+  if (value == null) {
+    delete (el as any)[name]
+    return
+  }
+  const bool = Boolean(value)
+  if ((el as any)[name] !== bool) (el as any)[name] = bool
+}
 
 export const setEnumBoolAttribute = (el: Element, name: string, value: boolean | undefined) => {
   if (value == null) el.removeAttribute(name)

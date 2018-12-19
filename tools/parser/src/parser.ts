@@ -1,4 +1,11 @@
-import { stringValue, ValueDecoder, objectValue, arrayValue, decodeValue, literalValue } from 'partsing/value'
+import { stringValue,
+  ValueDecoder,
+  objectValue,
+  arrayValue,
+  decodeValue,
+  literalValue,
+  booleanValue
+} from 'partsing/value'
 import { success, failure } from 'partsing/core/result'
 import { Decoder } from 'partsing/core/decoder'
 import {
@@ -20,6 +27,7 @@ import {
 } from './attribute'
 import { DecodeError, Entity } from 'partsing/error'
 import { Element, Category, noContent, elementContent, contentCategory } from './element'
+import { Event } from './event'
 
 function camelize(str: string) {
   const words = str.split(/[-:_\s]+/)
@@ -111,15 +119,17 @@ const attribute: ValueDecoder<Attribute> = objectValue(
     'code-name': stringValue,
     'dom-name': stringValue,
     type: arrayValue(attributeType).or(attributeType.map(v => [v])),
-    tags: tags
+    tags: tags,
+    'is-property': booleanValue
   },
-  ['code-name', 'dom-name', 'type', 'tags']
+  ['code-name', 'dom-name', 'type', 'tags', 'is-property']
 ).map(o => new Attribute(
   o.name,
   o['code-name'] || camelize(o.name),
   o['dom-name'] || o['code-name'] || o.name,
   o.type || [stringType],
-  o.tags || []
+  o.tags || [],
+  o['is-property'] || false
 ))
 
 const attributes: ValueDecoder<Attribute[]> = arrayValue(attribute)
@@ -150,10 +160,19 @@ export const parseCollections = decodeValue(collections)
 const event = objectValue(
   {
     name: stringValue,
+    type: arrayValue(stringValue).or(stringValue.map(v => [v])),
+    'code-name': stringValue,
+    'dom-name': stringValue,
     tags: tags
   },
-  ['tags']
-)
+  ['code-name', 'dom-name', 'type', 'tags']
+).map(o => new Event(
+  o.name,
+  o['code-name'] || 'on' + camelize(o.name),
+  o['dom-name'] || o['code-name'] || 'on' + o.name,
+  o.type || ['Event'],
+  o.tags || []
+))
 
 const events = arrayValue(event)
 

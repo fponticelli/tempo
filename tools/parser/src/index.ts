@@ -3,6 +3,7 @@ import { parseAttributes, parseCollections, parseEvents, parseElements } from '.
 import { DecodeResult } from 'partsing/core/result'
 import { Attribute, Tag, StringType, AttributeType } from './attribute'
 import { Element } from './element'
+import { Event } from './event'
 import { Project } from './project'
 
 async function loadDecode<T>(path: string, decoder: (input: any) => DecodeResult<any, T, string>) {
@@ -38,7 +39,7 @@ export const resolveGroups = (collections: Map<string, string[]>, groupName: str
 
 const excludeTags = [Tag.deprecated, Tag.experimental, Tag.msExtension, Tag.obsolete, Tag.nonStandard, Tag.legacy]
 
-const exclude = (attr: Attribute | Element) => {
+const exclude = (attr: Attribute | Element | Event) => {
   return attr.tags.findIndex(val => excludeTags.indexOf(val) >= 0) < 0
 }
 
@@ -62,17 +63,34 @@ const attributeToStringField = (attr: Attribute) => {
   return `${attr.codeName}?: DOMAttribute<State, ${attr.type.map(t => t.toTSString()).join(' | ')}>`
 }
 
-const setterToString = (types: AttributeType[]) => {
-  if (types.length !== 1) {
-    throw 'deal with this'
+const eventToStringField = (event: Event) => {
+  return `${event.codeName}?: DOMEventHandler<State, ${event.type.join(' | ')}, Action>`
+}
+
+const setterToString = (types: AttributeType[], isProperty: boolean) => {
+  if (types.length < 1) {
+    throw `deal with empty types`
+  } else if (isProperty) {
+    switch (types[0].kind) {
+      case 'string': return 'setProperty'
+      case 'boolean': return 'setBoolProperty'
+      case 'number': return 'setProperty'
+      default: throw `deal with this property as well: ${types[0].kind}`
+    }
   } else {
     switch (types[0].kind) {
+      case 'enum': return 'setAttribute'
+      case 'string': return 'setAttribute'
+      case 'style': return 'setStyleAttribute'
+      case 'length': return 'setAttribute'
+      case 'class': return 'setAttribute'
       case 'boolean': return 'setBoolAttribute'
       case 'eboolean': return 'setEnumBoolAttribute'
       case 'space-separated': return 'setSpaceSeparated'
       case 'comma-separated': return 'setCommaSeparated'
-      case 'number': return 'setNumberAttribute'
-      default: throw `deal with this as well: ${types[0].kind}`
+      case 'number': return 'setAttribute'
+      case 'integer': return 'setAttribute'
+      default: throw `deal with this attribute as well: ${types[0].kind}`
     }
   }
 }
@@ -93,16 +111,23 @@ async function f() {
 
   let project = Project.empty('./gen/')
 
+  const filteredEvents = events
+    .filter(exclude)
+
   const filteredAttributes = attributes
     .filter(exclude)
     .reduce(combineAttributes(), [])
 
+  const filteredElements = elements
+    .filter(exclude)
+
   const allAttributes = filteredAttributes
     .map(attributeToStringField)
     .sort()
+    .concat(filteredEvents.map(eventToStringField))
 
   const domAttributesContent = `
-import { DOMAttribute } from './value'
+import { DOMAttribute, DOMEventHandler, DOMStyles } from './value'
 
 export interface DOMAttributes<State, Action> {
   ${allAttributes.join('\n  ')}
@@ -115,11 +140,18 @@ export interface DOMAttributes<State, Action> {
     .map(attr => `${attr.codeName}: '${attr.domName}'`)
     .sort()
 
-  const regularAttributeTypes = ['string', 'integer', 'length', 'class', 'style', 'enum']
+  const regularAttributeTypes = ['string', 'length', 'class', 'number', 'integer', 'enum']
 
   const attributeApplication = filteredAttributes
-    .filter(attr => attr.type.length === 1 && regularAttributeTypes.indexOf(attr.type[0].kind) < 0)
-    .map(attr => `${attr.codeName}: ${setterToString(attr.type)}`)
+    .filter(attr =>
+      // attr.type.length === 1 &&
+      attr.type.length > 0 &&
+      (
+        attr.isProperty ||
+        regularAttributeTypes.indexOf(attr.type[0].kind) < 0
+      )
+    )
+    .map(attr => `${attr.codeName}: ${setterToString(attr.type, attr.isProperty)}`)
     .sort()
 
   const attributeMapperContent = `
@@ -127,9 +159,11 @@ export interface DOMAttributes<State, Action> {
 import {
   setBoolAttribute,
   setCommaSeparated,
+  setEnumBoolAttribute,
   setSpaceSeparated,
-  setNumberAttribute,
-  setEnumBoolAttribute
+  setStyleAttribute,
+  setBoolProperty,
+  setProperty
 } from './set_attribute'
 
 /* istanbul ignore next */
@@ -145,15 +179,24 @@ export const attributeMap: Record<string, (el: Element, name: string, value: any
 
   project = project.addFile(`attributes_mapper.ts`, attributeMapperContent)
 
-  elements
-    .filter(exclude)
+  filteredElements
     .forEach(el => {
       const attrType = `${ucFirst(el.codeName)}Attributes`
-      const attributeNames =  Array.from(new Set(resolveGroups(collections, 'attributes', el.attributes)))
+      const attributeNames = Array.from(new Set(resolveGroups(collections, 'attributes', el.attributes)))
+      const map = new Map<string, { index: number, attr: Attribute }>()
       const attributes = attributeNames.reduce(
         (acc, attr) => {
           if (attributesMap.has(attr)) {
-            acc = acc.concat([attributesMap.get(attr)!])
+            const inst = attributesMap.get(attr)!
+            if (map.has(inst.domName)) {
+              const ex = map.get(inst.domName)!
+              console.log(`CONFLICTING: ${JSON.stringify(ex.attr)} VS ${JSON.stringify(inst)}`)
+              map.set(inst.domName, { index: ex.index, attr: inst })
+              acc[ex.index] = inst
+            } else {
+              map.set(inst.domName, { index: acc.length, attr: inst })
+              acc.push(inst)
+            }
           } else {
             console.error(`Not Found Attribute: ${el.name}.${attr}`)
           }
@@ -163,25 +206,29 @@ export const attributeMap: Record<string, (el: Element, name: string, value: any
       )
       .filter(exclude)
       .map(attributeToStringField)
+      .sort()
+      .concat(filteredEvents.map(eventToStringField))
       .join('\n  ')
 
       const content = `
 import { DOMChild } from '../template'
-import { DOMAttribute } from '../value'
+import { DOMAttribute, DOMStyles, DOMEventHandler } from '../value'
 import { el } from '../element'
 
-export interface ${attrType}<State> {
+export interface ${attrType}<State, Action> {
   ${attributes}
 }
 
 export const ${el.codeName} = <State, Action>
-    (attributes: ${attrType}<State>, ...children: DOMChild<State, Action>[]) => {
-  return el<State, Action>('${el.domName}', attributes, children)
-}
+    (attributes: ${attrType}<State, Action>, ...children: DOMChild<State, Action>[]) =>
+      el<State, Action>('${el.domName}', attributes, ...children)
 `
 
       project = project.addFile(`els/${el.name}.ts`, content)
     })
+
+  const indexContent = filteredElements.map(el => `export { ${el.codeName} } from './${el.name}'`).join('\n')
+  project = project.addFile(`els/index.ts`, indexContent)
 
   await project.cleanAndSave()
 }
