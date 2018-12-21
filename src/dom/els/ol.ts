@@ -1,5 +1,7 @@
 import { DOMChild } from '../template'
-import { DOMAttribute, DOMStyles, DOMEventHandler } from '../value'
+import { DOMAttribute, DOMEventHandler } from '../value'
+import { DOMElement } from '../element'
+import { CSSAttributes, CSSProperties } from '../css_properties'
 import { el } from '../element'
 
 export interface OlAttributes<State, Action> {
@@ -22,7 +24,7 @@ export interface OlAttributes<State, Action> {
   reversed?: DOMAttribute<State, boolean>
   spellcheck?: DOMAttribute<State, 'default' | 'true' | 'false'>
   start?: DOMAttribute<State, number>
-  style?: DOMAttribute<State, DOMStyles>
+  style?: DOMAttribute<State, CSSProperties>
   tabindex?: DOMAttribute<State, number>
   title?: DOMAttribute<State, string>
   onabort?: DOMEventHandler<State, UIEvent | Event, Action>
@@ -119,5 +121,9 @@ export interface OlAttributes<State, Action> {
   onwheel?: DOMEventHandler<State, WheelEvent, Action>
 }
 
-export const ol = <State, Action>(attributes: OlAttributes<State, Action>, ...children: DOMChild<State, Action>[]) =>
-  el<State, Action>('ol', attributes, ...children)
+export function ol<State, Action>(
+  attributes: OlAttributes<State, Action> & CSSAttributes<State>,
+  ...children: DOMChild<State, Action>[]
+): DOMElement<State, Action> {
+  return el<State, Action>('ol', attributes, ...children)
+}

@@ -144,9 +144,17 @@ describe('dom_element', () => {
   })
 
   it('generated elements', () => {
-    const view = div({}, span({}, 'hello ', a({ href: '#you' }, (s) => `#${s}`)))
+    const view = div({}, span({}, 'hello ', a({ href: '#you' }, s => `#${s}`)))
     const ctx = createContext()
     view.render(ctx, 1, () => {})
     expect(ctx.doc.body.innerHTML).toEqual('<div><span>hello <a href="#you">#1</a></span></div>')
+  })
+
+  it('generated elements with style', () => {
+    const view = div({ $backgroundColor: 'rgb(200, 200, 200)' }, 'hello')
+    const ctx = createContext()
+    view.render(ctx, 1, () => {})
+    expect(ctx.doc.body.innerHTML)
+      .toEqual('<div style="background-color: rgb(200, 200, 200);">hello</div>')
   })
 })

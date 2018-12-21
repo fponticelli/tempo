@@ -28,6 +28,7 @@ import {
 import { DecodeError, Entity } from 'partsing/error'
 import { Element, Category, noContent, elementContent, contentCategory } from './element'
 import { Event } from './event'
+import { CSSProperty } from './cssproperty'
 
 function camelize(str: string) {
   const words = str.split(/[-:_\s]+/)
@@ -126,7 +127,7 @@ const attribute: ValueDecoder<Attribute> = objectValue(
 ).map(o => new Attribute(
   o.name,
   o['code-name'] || camelize(o.name),
-  o['dom-name'] || o['code-name'] || o.name,
+  o['dom-name'] || o.name,
   o.type || [stringType],
   o.tags || [],
   o['is-property'] || false
@@ -135,6 +136,23 @@ const attribute: ValueDecoder<Attribute> = objectValue(
 const attributes: ValueDecoder<Attribute[]> = arrayValue(attribute)
 
 export const parseAttributes = decodeValue(attributes)
+
+const cssproperty: ValueDecoder<CSSProperty> = objectValue(
+  {
+    name: stringValue,
+    'dom-name': stringValue,
+    'code-name': stringValue
+  },
+  ['dom-name', 'code-name']
+).map(o => new CSSProperty(
+  o.name,
+  o['code-name'] || camelize(o.name),
+  o['dom-name'] || o.name
+))
+
+const cssproperties: ValueDecoder<CSSProperty[]> = arrayValue(attribute)
+
+export const parseCSSProperties = decodeValue(cssproperties)
 
 const collection = objectValue(
   {

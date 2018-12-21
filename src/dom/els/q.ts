@@ -1,5 +1,7 @@
 import { DOMChild } from '../template'
-import { DOMAttribute, DOMStyles, DOMEventHandler } from '../value'
+import { DOMAttribute, DOMEventHandler } from '../value'
+import { DOMElement } from '../element'
+import { CSSAttributes, CSSProperties } from '../css_properties'
 import { el } from '../element'
 
 export interface QAttributes<State, Action> {
@@ -21,7 +23,7 @@ export interface QAttributes<State, Action> {
   itemtype?: DOMAttribute<State, string>
   lang?: DOMAttribute<State, string>
   spellcheck?: DOMAttribute<State, 'default' | 'true' | 'false'>
-  style?: DOMAttribute<State, DOMStyles>
+  style?: DOMAttribute<State, CSSProperties>
   tabindex?: DOMAttribute<State, number>
   title?: DOMAttribute<State, string>
   onabort?: DOMEventHandler<State, UIEvent | Event, Action>
@@ -118,5 +120,9 @@ export interface QAttributes<State, Action> {
   onwheel?: DOMEventHandler<State, WheelEvent, Action>
 }
 
-export const q = <State, Action>(attributes: QAttributes<State, Action>, ...children: DOMChild<State, Action>[]) =>
-  el<State, Action>('q', attributes, ...children)
+export function q<State, Action>(
+  attributes: QAttributes<State, Action> & CSSAttributes<State>,
+  ...children: DOMChild<State, Action>[]
+): DOMElement<State, Action> {
+  return el<State, Action>('q', attributes, ...children)
+}

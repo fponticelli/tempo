@@ -1,5 +1,7 @@
 import { DOMChild } from '../template'
-import { DOMAttribute, DOMStyles, DOMEventHandler } from '../value'
+import { DOMAttribute, DOMEventHandler } from '../value'
+import { DOMElement } from '../element'
+import { CSSAttributes, CSSProperties } from '../css_properties'
 import { el } from '../element'
 
 export interface ParamAttributes<State, Action> {
@@ -21,7 +23,7 @@ export interface ParamAttributes<State, Action> {
   lang?: DOMAttribute<State, string>
   name?: DOMAttribute<State, string>
   spellcheck?: DOMAttribute<State, 'default' | 'true' | 'false'>
-  style?: DOMAttribute<State, DOMStyles>
+  style?: DOMAttribute<State, CSSProperties>
   tabindex?: DOMAttribute<State, number>
   title?: DOMAttribute<State, string>
   value?: DOMAttribute<State, string>
@@ -119,7 +121,9 @@ export interface ParamAttributes<State, Action> {
   onwheel?: DOMEventHandler<State, WheelEvent, Action>
 }
 
-export const param = <State, Action>(
-  attributes: ParamAttributes<State, Action>,
+export function param<State, Action>(
+  attributes: ParamAttributes<State, Action> & CSSAttributes<State>,
   ...children: DOMChild<State, Action>[]
-) => el<State, Action>('param', attributes, ...children)
+): DOMElement<State, Action> {
+  return el<State, Action>('param', attributes, ...children)
+}

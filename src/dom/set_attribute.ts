@@ -1,4 +1,4 @@
-import { DOMStyles } from './value'
+import { CSSProperties } from './css_properties'
 
 export const setOneStyle = (el: HTMLElement, name: string, value: any) => {
   const anyStyle = el.style as any
@@ -42,12 +42,12 @@ export const setProperty = (el: Element, name: string, value: any | undefined) =
   if ((el as any)[name] !== value) (el as any)[name] = value
 }
 
-export const setStyleAttribute = (el: Element, name: string, value: DOMStyles | undefined) => {
+export const setStyleAttribute = (el: Element, name: string, value: CSSProperties | undefined) => {
   const html = el as HTMLElement
   if (value == null) {
     html.style.cssText = ''
   } else {
-    const s = Object.keys(value).map(k => `${k}: ${value[k]};`).join('')
+    const s = Object.keys(value).map(k => `${k}: ${(value as any)[k]!};`).join('')
     html.style.cssText = s
   }
 }

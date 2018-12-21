@@ -1,5 +1,7 @@
 import { DOMChild } from '../template'
-import { DOMAttribute, DOMStyles, DOMEventHandler } from '../value'
+import { DOMAttribute, DOMEventHandler } from '../value'
+import { DOMElement } from '../element'
+import { CSSAttributes, CSSProperties } from '../css_properties'
 import { el } from '../element'
 
 export interface TableAttributes<State, Action> {
@@ -20,7 +22,7 @@ export interface TableAttributes<State, Action> {
   itemtype?: DOMAttribute<State, string>
   lang?: DOMAttribute<State, string>
   spellcheck?: DOMAttribute<State, 'default' | 'true' | 'false'>
-  style?: DOMAttribute<State, DOMStyles>
+  style?: DOMAttribute<State, CSSProperties>
   tabindex?: DOMAttribute<State, number>
   title?: DOMAttribute<State, string>
   onabort?: DOMEventHandler<State, UIEvent | Event, Action>
@@ -117,7 +119,9 @@ export interface TableAttributes<State, Action> {
   onwheel?: DOMEventHandler<State, WheelEvent, Action>
 }
 
-export const table = <State, Action>(
-  attributes: TableAttributes<State, Action>,
+export function table<State, Action>(
+  attributes: TableAttributes<State, Action> & CSSAttributes<State>,
   ...children: DOMChild<State, Action>[]
-) => el<State, Action>('table', attributes, ...children)
+): DOMElement<State, Action> {
+  return el<State, Action>('table', attributes, ...children)
+}

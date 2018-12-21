@@ -1,5 +1,7 @@
 import { DOMChild } from '../template'
-import { DOMAttribute, DOMStyles, DOMEventHandler } from '../value'
+import { DOMAttribute, DOMEventHandler } from '../value'
+import { DOMElement } from '../element'
+import { CSSAttributes, CSSProperties } from '../css_properties'
 import { el } from '../element'
 
 export interface AudioAttributes<State, Action> {
@@ -27,7 +29,7 @@ export interface AudioAttributes<State, Action> {
   preload?: DOMAttribute<State, '' | 'none' | 'metadata' | 'auto'>
   spellcheck?: DOMAttribute<State, 'default' | 'true' | 'false'>
   src?: DOMAttribute<State, string>
-  style?: DOMAttribute<State, DOMStyles>
+  style?: DOMAttribute<State, CSSProperties>
   tabindex?: DOMAttribute<State, number>
   title?: DOMAttribute<State, string>
   onabort?: DOMEventHandler<State, UIEvent | Event, Action>
@@ -124,7 +126,9 @@ export interface AudioAttributes<State, Action> {
   onwheel?: DOMEventHandler<State, WheelEvent, Action>
 }
 
-export const audio = <State, Action>(
-  attributes: AudioAttributes<State, Action>,
+export function audio<State, Action>(
+  attributes: AudioAttributes<State, Action> & CSSAttributes<State>,
   ...children: DOMChild<State, Action>[]
-) => el<State, Action>('audio', attributes, ...children)
+): DOMElement<State, Action> {
+  return el<State, Action>('audio', attributes, ...children)
+}

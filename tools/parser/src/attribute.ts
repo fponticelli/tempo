@@ -76,7 +76,7 @@ export class ClassType extends TypeBase {
 export class StyleType extends TypeBase {
   readonly kind: 'style' = 'style'
   toTSString() {
-    return 'DOMStyles'
+    return 'CSSProperties'
   }
 }
 export class CommaSeparatedType extends TypeBase {

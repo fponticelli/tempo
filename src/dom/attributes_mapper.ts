@@ -13,6 +13,8 @@ import {
 export const attributeNameMap: Record<string, string> = {
   acceptCharset: 'accept-charset',
   asAttr: 'as',
+  className: 'class',
+  contentEditable: 'contenteditable',
   httpEquiv: 'http-equiv'
 }
 

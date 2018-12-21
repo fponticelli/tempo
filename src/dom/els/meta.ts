@@ -1,5 +1,7 @@
 import { DOMChild } from '../template'
-import { DOMAttribute, DOMStyles, DOMEventHandler } from '../value'
+import { DOMAttribute, DOMEventHandler } from '../value'
+import { DOMElement } from '../element'
+import { CSSAttributes, CSSProperties } from '../css_properties'
 import { el } from '../element'
 
 export interface MetaAttributes<State, Action> {
@@ -38,7 +40,7 @@ export interface MetaAttributes<State, Action> {
     | 'viewport'
   >
   spellcheck?: DOMAttribute<State, 'default' | 'true' | 'false'>
-  style?: DOMAttribute<State, DOMStyles>
+  style?: DOMAttribute<State, CSSProperties>
   tabindex?: DOMAttribute<State, number>
   title?: DOMAttribute<State, string>
   onabort?: DOMEventHandler<State, UIEvent | Event, Action>
@@ -135,7 +137,9 @@ export interface MetaAttributes<State, Action> {
   onwheel?: DOMEventHandler<State, WheelEvent, Action>
 }
 
-export const meta = <State, Action>(
-  attributes: MetaAttributes<State, Action>,
+export function meta<State, Action>(
+  attributes: MetaAttributes<State, Action> & CSSAttributes<State>,
   ...children: DOMChild<State, Action>[]
-) => el<State, Action>('meta', attributes, ...children)
+): DOMElement<State, Action> {
+  return el<State, Action>('meta', attributes, ...children)
+}

@@ -1,5 +1,7 @@
 import { DOMChild } from '../template'
-import { DOMAttribute, DOMStyles, DOMEventHandler } from '../value'
+import { DOMAttribute, DOMEventHandler } from '../value'
+import { DOMElement } from '../element'
+import { CSSAttributes, CSSProperties } from '../css_properties'
 import { el } from '../element'
 
 export interface CanvasAttributes<State, Action> {
@@ -21,7 +23,7 @@ export interface CanvasAttributes<State, Action> {
   itemtype?: DOMAttribute<State, string>
   lang?: DOMAttribute<State, string>
   spellcheck?: DOMAttribute<State, 'default' | 'true' | 'false'>
-  style?: DOMAttribute<State, DOMStyles>
+  style?: DOMAttribute<State, CSSProperties>
   tabindex?: DOMAttribute<State, number>
   title?: DOMAttribute<State, string>
   width?: DOMAttribute<State, number>
@@ -119,7 +121,9 @@ export interface CanvasAttributes<State, Action> {
   onwheel?: DOMEventHandler<State, WheelEvent, Action>
 }
 
-export const canvas = <State, Action>(
-  attributes: CanvasAttributes<State, Action>,
+export function canvas<State, Action>(
+  attributes: CanvasAttributes<State, Action> & CSSAttributes<State>,
   ...children: DOMChild<State, Action>[]
-) => el<State, Action>('canvas', attributes, ...children)
+): DOMElement<State, Action> {
+  return el<State, Action>('canvas', attributes, ...children)
+}

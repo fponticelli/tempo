@@ -1,5 +1,7 @@
 import { DOMChild } from '../template'
-import { DOMAttribute, DOMStyles, DOMEventHandler } from '../value'
+import { DOMAttribute, DOMEventHandler } from '../value'
+import { DOMElement } from '../element'
+import { CSSAttributes, CSSProperties } from '../css_properties'
 import { el } from '../element'
 
 export interface ColgroupAttributes<State, Action> {
@@ -21,7 +23,7 @@ export interface ColgroupAttributes<State, Action> {
   lang?: DOMAttribute<State, string>
   span?: DOMAttribute<State, number>
   spellcheck?: DOMAttribute<State, 'default' | 'true' | 'false'>
-  style?: DOMAttribute<State, DOMStyles>
+  style?: DOMAttribute<State, CSSProperties>
   tabindex?: DOMAttribute<State, number>
   title?: DOMAttribute<State, string>
   onabort?: DOMEventHandler<State, UIEvent | Event, Action>
@@ -118,7 +120,9 @@ export interface ColgroupAttributes<State, Action> {
   onwheel?: DOMEventHandler<State, WheelEvent, Action>
 }
 
-export const colgroup = <State, Action>(
-  attributes: ColgroupAttributes<State, Action>,
+export function colgroup<State, Action>(
+  attributes: ColgroupAttributes<State, Action> & CSSAttributes<State>,
   ...children: DOMChild<State, Action>[]
-) => el<State, Action>('colgroup', attributes, ...children)
+): DOMElement<State, Action> {
+  return el<State, Action>('colgroup', attributes, ...children)
+}

@@ -1,5 +1,7 @@
 import { DOMChild } from '../template'
-import { DOMAttribute, DOMStyles, DOMEventHandler } from '../value'
+import { DOMAttribute, DOMEventHandler } from '../value'
+import { DOMElement } from '../element'
+import { CSSAttributes, CSSProperties } from '../css_properties'
 import { el } from '../element'
 
 export interface ProgressAttributes<State, Action> {
@@ -21,7 +23,7 @@ export interface ProgressAttributes<State, Action> {
   lang?: DOMAttribute<State, string>
   max?: DOMAttribute<State, number>
   spellcheck?: DOMAttribute<State, 'default' | 'true' | 'false'>
-  style?: DOMAttribute<State, DOMStyles>
+  style?: DOMAttribute<State, CSSProperties>
   tabindex?: DOMAttribute<State, number>
   title?: DOMAttribute<State, string>
   value?: DOMAttribute<State, number>
@@ -119,7 +121,9 @@ export interface ProgressAttributes<State, Action> {
   onwheel?: DOMEventHandler<State, WheelEvent, Action>
 }
 
-export const progress = <State, Action>(
-  attributes: ProgressAttributes<State, Action>,
+export function progress<State, Action>(
+  attributes: ProgressAttributes<State, Action> & CSSAttributes<State>,
   ...children: DOMChild<State, Action>[]
-) => el<State, Action>('progress', attributes, ...children)
+): DOMElement<State, Action> {
+  return el<State, Action>('progress', attributes, ...children)
+}

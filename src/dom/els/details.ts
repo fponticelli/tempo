@@ -1,5 +1,7 @@
 import { DOMChild } from '../template'
-import { DOMAttribute, DOMStyles, DOMEventHandler } from '../value'
+import { DOMAttribute, DOMEventHandler } from '../value'
+import { DOMElement } from '../element'
+import { CSSAttributes, CSSProperties } from '../css_properties'
 import { el } from '../element'
 
 export interface DetailsAttributes<State, Action> {
@@ -21,7 +23,7 @@ export interface DetailsAttributes<State, Action> {
   lang?: DOMAttribute<State, string>
   open?: DOMAttribute<State, boolean>
   spellcheck?: DOMAttribute<State, 'default' | 'true' | 'false'>
-  style?: DOMAttribute<State, DOMStyles>
+  style?: DOMAttribute<State, CSSProperties>
   tabindex?: DOMAttribute<State, number>
   title?: DOMAttribute<State, string>
   onabort?: DOMEventHandler<State, UIEvent | Event, Action>
@@ -118,7 +120,9 @@ export interface DetailsAttributes<State, Action> {
   onwheel?: DOMEventHandler<State, WheelEvent, Action>
 }
 
-export const details = <State, Action>(
-  attributes: DetailsAttributes<State, Action>,
+export function details<State, Action>(
+  attributes: DetailsAttributes<State, Action> & CSSAttributes<State>,
   ...children: DOMChild<State, Action>[]
-) => el<State, Action>('details', attributes, ...children)
+): DOMElement<State, Action> {
+  return el<State, Action>('details', attributes, ...children)
+}

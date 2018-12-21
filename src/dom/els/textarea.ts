@@ -1,5 +1,7 @@
 import { DOMChild } from '../template'
-import { DOMAttribute, DOMStyles, DOMEventHandler } from '../value'
+import { DOMAttribute, DOMEventHandler } from '../value'
+import { DOMElement } from '../element'
+import { CSSAttributes, CSSProperties } from '../css_properties'
 import { el } from '../element'
 
 export interface TextareaAttributes<State, Action> {
@@ -31,7 +33,7 @@ export interface TextareaAttributes<State, Action> {
   required?: DOMAttribute<State, boolean>
   rows?: DOMAttribute<State, string>
   spellcheck?: DOMAttribute<State, 'default' | 'true' | 'false'>
-  style?: DOMAttribute<State, DOMStyles>
+  style?: DOMAttribute<State, CSSProperties>
   tabindex?: DOMAttribute<State, number>
   title?: DOMAttribute<State, string>
   wrap?: DOMAttribute<State, 'hard' | 'soft' | 'off'>
@@ -129,7 +131,9 @@ export interface TextareaAttributes<State, Action> {
   onwheel?: DOMEventHandler<State, WheelEvent, Action>
 }
 
-export const textarea = <State, Action>(
-  attributes: TextareaAttributes<State, Action>,
+export function textarea<State, Action>(
+  attributes: TextareaAttributes<State, Action> & CSSAttributes<State>,
   ...children: DOMChild<State, Action>[]
-) => el<State, Action>('textarea', attributes, ...children)
+): DOMElement<State, Action> {
+  return el<State, Action>('textarea', attributes, ...children)
+}

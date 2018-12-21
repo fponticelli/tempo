@@ -1,5 +1,7 @@
 import { DOMChild } from '../template'
-import { DOMAttribute, DOMStyles, DOMEventHandler } from '../value'
+import { DOMAttribute, DOMEventHandler } from '../value'
+import { DOMElement } from '../element'
+import { CSSAttributes, CSSProperties } from '../css_properties'
 import { el } from '../element'
 
 export interface EmbedAttributes<State, Action> {
@@ -22,7 +24,7 @@ export interface EmbedAttributes<State, Action> {
   lang?: DOMAttribute<State, string>
   spellcheck?: DOMAttribute<State, 'default' | 'true' | 'false'>
   src?: DOMAttribute<State, string>
-  style?: DOMAttribute<State, DOMStyles>
+  style?: DOMAttribute<State, CSSProperties>
   tabindex?: DOMAttribute<State, number>
   title?: DOMAttribute<State, string>
   type?: DOMAttribute<State, string>
@@ -121,7 +123,9 @@ export interface EmbedAttributes<State, Action> {
   onwheel?: DOMEventHandler<State, WheelEvent, Action>
 }
 
-export const embed = <State, Action>(
-  attributes: EmbedAttributes<State, Action>,
+export function embed<State, Action>(
+  attributes: EmbedAttributes<State, Action> & CSSAttributes<State>,
   ...children: DOMChild<State, Action>[]
-) => el<State, Action>('embed', attributes, ...children)
+): DOMElement<State, Action> {
+  return el<State, Action>('embed', attributes, ...children)
+}

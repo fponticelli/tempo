@@ -1,5 +1,7 @@
 import { DOMChild } from '../template'
-import { DOMAttribute, DOMStyles, DOMEventHandler } from '../value'
+import { DOMAttribute, DOMEventHandler } from '../value'
+import { DOMElement } from '../element'
+import { CSSAttributes, CSSProperties } from '../css_properties'
 import { el } from '../element'
 
 export interface MapAttributes<State, Action> {
@@ -21,7 +23,7 @@ export interface MapAttributes<State, Action> {
   lang?: DOMAttribute<State, string>
   name?: DOMAttribute<State, string>
   spellcheck?: DOMAttribute<State, 'default' | 'true' | 'false'>
-  style?: DOMAttribute<State, DOMStyles>
+  style?: DOMAttribute<State, CSSProperties>
   tabindex?: DOMAttribute<State, number>
   title?: DOMAttribute<State, string>
   onabort?: DOMEventHandler<State, UIEvent | Event, Action>
@@ -118,5 +120,9 @@ export interface MapAttributes<State, Action> {
   onwheel?: DOMEventHandler<State, WheelEvent, Action>
 }
 
-export const map = <State, Action>(attributes: MapAttributes<State, Action>, ...children: DOMChild<State, Action>[]) =>
-  el<State, Action>('map', attributes, ...children)
+export function map<State, Action>(
+  attributes: MapAttributes<State, Action> & CSSAttributes<State>,
+  ...children: DOMChild<State, Action>[]
+): DOMElement<State, Action> {
+  return el<State, Action>('map', attributes, ...children)
+}

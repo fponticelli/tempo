@@ -1,5 +1,7 @@
 import { DOMChild } from '../template'
-import { DOMAttribute, DOMStyles, DOMEventHandler } from '../value'
+import { DOMAttribute, DOMEventHandler } from '../value'
+import { DOMElement } from '../element'
+import { CSSAttributes, CSSProperties } from '../css_properties'
 import { el } from '../element'
 
 export interface FormAttributes<State, Action> {
@@ -26,7 +28,7 @@ export interface FormAttributes<State, Action> {
   name?: DOMAttribute<State, string>
   novalidate?: DOMAttribute<State, boolean>
   spellcheck?: DOMAttribute<State, 'default' | 'true' | 'false'>
-  style?: DOMAttribute<State, DOMStyles>
+  style?: DOMAttribute<State, CSSProperties>
   tabindex?: DOMAttribute<State, number>
   target?: DOMAttribute<State, '_self' | '_blank' | '_parent' | '_top' | string>
   title?: DOMAttribute<State, string>
@@ -124,7 +126,9 @@ export interface FormAttributes<State, Action> {
   onwheel?: DOMEventHandler<State, WheelEvent, Action>
 }
 
-export const form = <State, Action>(
-  attributes: FormAttributes<State, Action>,
+export function form<State, Action>(
+  attributes: FormAttributes<State, Action> & CSSAttributes<State>,
   ...children: DOMChild<State, Action>[]
-) => el<State, Action>('form', attributes, ...children)
+): DOMElement<State, Action> {
+  return el<State, Action>('form', attributes, ...children)
+}

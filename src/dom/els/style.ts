@@ -1,5 +1,7 @@
 import { DOMChild } from '../template'
-import { DOMAttribute, DOMStyles, DOMEventHandler } from '../value'
+import { DOMAttribute, DOMEventHandler } from '../value'
+import { DOMElement } from '../element'
+import { CSSAttributes, CSSProperties } from '../css_properties'
 import { el } from '../element'
 
 export interface StyleAttributes<State, Action> {
@@ -22,7 +24,7 @@ export interface StyleAttributes<State, Action> {
   media?: DOMAttribute<State, string>
   nonce?: DOMAttribute<State, string>
   spellcheck?: DOMAttribute<State, 'default' | 'true' | 'false'>
-  style?: DOMAttribute<State, DOMStyles>
+  style?: DOMAttribute<State, CSSProperties>
   tabindex?: DOMAttribute<State, number>
   title?: DOMAttribute<State, string>
   type?: DOMAttribute<State, string>
@@ -120,7 +122,9 @@ export interface StyleAttributes<State, Action> {
   onwheel?: DOMEventHandler<State, WheelEvent, Action>
 }
 
-export const style = <State, Action>(
-  attributes: StyleAttributes<State, Action>,
+export function style<State, Action>(
+  attributes: StyleAttributes<State, Action> & CSSAttributes<State>,
   ...children: DOMChild<State, Action>[]
-) => el<State, Action>('style', attributes, ...children)
+): DOMElement<State, Action> {
+  return el<State, Action>('style', attributes, ...children)
+}

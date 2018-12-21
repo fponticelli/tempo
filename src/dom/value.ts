@@ -7,7 +7,6 @@ export type DOMEventHandler<S, E, Action> =
   | WrappedDerivedValue<S, (event: E) => Action>
 export type DOMProperty<S, V> = DOMAttribute<S, V>
 export type DOMTextValue<S> = DOMAttribute<S, string>
-export type DOMStyles = Record<string, string> // TODO
 
 /* istanbul ignore next */
 export { derived } from '../core/value'

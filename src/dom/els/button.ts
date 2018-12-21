@@ -1,5 +1,7 @@
 import { DOMChild } from '../template'
-import { DOMAttribute, DOMStyles, DOMEventHandler } from '../value'
+import { DOMAttribute, DOMEventHandler } from '../value'
+import { DOMElement } from '../element'
+import { CSSAttributes, CSSProperties } from '../css_properties'
 import { el } from '../element'
 
 export interface ButtonAttributes<State, Action> {
@@ -29,7 +31,7 @@ export interface ButtonAttributes<State, Action> {
   lang?: DOMAttribute<State, string>
   name?: DOMAttribute<State, string>
   spellcheck?: DOMAttribute<State, 'default' | 'true' | 'false'>
-  style?: DOMAttribute<State, DOMStyles>
+  style?: DOMAttribute<State, CSSProperties>
   tabindex?: DOMAttribute<State, number>
   title?: DOMAttribute<State, string>
   type?: DOMAttribute<State, 'submit' | 'reset' | 'button'>
@@ -128,7 +130,9 @@ export interface ButtonAttributes<State, Action> {
   onwheel?: DOMEventHandler<State, WheelEvent, Action>
 }
 
-export const button = <State, Action>(
-  attributes: ButtonAttributes<State, Action>,
+export function button<State, Action>(
+  attributes: ButtonAttributes<State, Action> & CSSAttributes<State>,
   ...children: DOMChild<State, Action>[]
-) => el<State, Action>('button', attributes, ...children)
+): DOMElement<State, Action> {
+  return el<State, Action>('button', attributes, ...children)
+}

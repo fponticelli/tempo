@@ -1,5 +1,7 @@
 import { DOMChild } from '../template'
-import { DOMAttribute, DOMStyles, DOMEventHandler } from '../value'
+import { DOMAttribute, DOMEventHandler } from '../value'
+import { DOMElement } from '../element'
+import { CSSAttributes, CSSProperties } from '../css_properties'
 import { el } from '../element'
 
 export interface NoscriptAttributes<State, Action> {
@@ -20,7 +22,7 @@ export interface NoscriptAttributes<State, Action> {
   itemtype?: DOMAttribute<State, string>
   lang?: DOMAttribute<State, string>
   spellcheck?: DOMAttribute<State, 'default' | 'true' | 'false'>
-  style?: DOMAttribute<State, DOMStyles>
+  style?: DOMAttribute<State, CSSProperties>
   tabindex?: DOMAttribute<State, number>
   title?: DOMAttribute<State, string>
   onabort?: DOMEventHandler<State, UIEvent | Event, Action>
@@ -117,7 +119,9 @@ export interface NoscriptAttributes<State, Action> {
   onwheel?: DOMEventHandler<State, WheelEvent, Action>
 }
 
-export const noscript = <State, Action>(
-  attributes: NoscriptAttributes<State, Action>,
+export function noscript<State, Action>(
+  attributes: NoscriptAttributes<State, Action> & CSSAttributes<State>,
   ...children: DOMChild<State, Action>[]
-) => el<State, Action>('noscript', attributes, ...children)
+): DOMElement<State, Action> {
+  return el<State, Action>('noscript', attributes, ...children)
+}

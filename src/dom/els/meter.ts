@@ -1,5 +1,7 @@
 import { DOMChild } from '../template'
-import { DOMAttribute, DOMStyles, DOMEventHandler } from '../value'
+import { DOMAttribute, DOMEventHandler } from '../value'
+import { DOMElement } from '../element'
+import { CSSAttributes, CSSProperties } from '../css_properties'
 import { el } from '../element'
 
 export interface MeterAttributes<State, Action> {
@@ -26,7 +28,7 @@ export interface MeterAttributes<State, Action> {
   min?: DOMAttribute<State, number>
   optimum?: DOMAttribute<State, number>
   spellcheck?: DOMAttribute<State, 'default' | 'true' | 'false'>
-  style?: DOMAttribute<State, DOMStyles>
+  style?: DOMAttribute<State, CSSProperties>
   tabindex?: DOMAttribute<State, number>
   title?: DOMAttribute<State, string>
   value?: DOMAttribute<State, number>
@@ -124,7 +126,9 @@ export interface MeterAttributes<State, Action> {
   onwheel?: DOMEventHandler<State, WheelEvent, Action>
 }
 
-export const meter = <State, Action>(
-  attributes: MeterAttributes<State, Action>,
+export function meter<State, Action>(
+  attributes: MeterAttributes<State, Action> & CSSAttributes<State>,
   ...children: DOMChild<State, Action>[]
-) => el<State, Action>('meter', attributes, ...children)
+): DOMElement<State, Action> {
+  return el<State, Action>('meter', attributes, ...children)
+}

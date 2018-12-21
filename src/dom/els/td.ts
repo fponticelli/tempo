@@ -1,5 +1,7 @@
 import { DOMChild } from '../template'
-import { DOMAttribute, DOMStyles, DOMEventHandler } from '../value'
+import { DOMAttribute, DOMEventHandler } from '../value'
+import { DOMElement } from '../element'
+import { CSSAttributes, CSSProperties } from '../css_properties'
 import { el } from '../element'
 
 export interface TdAttributes<State, Action> {
@@ -23,7 +25,7 @@ export interface TdAttributes<State, Action> {
   lang?: DOMAttribute<State, string>
   rowspan?: DOMAttribute<State, number>
   spellcheck?: DOMAttribute<State, 'default' | 'true' | 'false'>
-  style?: DOMAttribute<State, DOMStyles>
+  style?: DOMAttribute<State, CSSProperties>
   tabindex?: DOMAttribute<State, number>
   title?: DOMAttribute<State, string>
   onabort?: DOMEventHandler<State, UIEvent | Event, Action>
@@ -120,5 +122,9 @@ export interface TdAttributes<State, Action> {
   onwheel?: DOMEventHandler<State, WheelEvent, Action>
 }
 
-export const td = <State, Action>(attributes: TdAttributes<State, Action>, ...children: DOMChild<State, Action>[]) =>
-  el<State, Action>('td', attributes, ...children)
+export function td<State, Action>(
+  attributes: TdAttributes<State, Action> & CSSAttributes<State>,
+  ...children: DOMChild<State, Action>[]
+): DOMElement<State, Action> {
+  return el<State, Action>('td', attributes, ...children)
+}

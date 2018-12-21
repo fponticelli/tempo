@@ -1,5 +1,7 @@
 import { DOMChild } from '../template'
-import { DOMAttribute, DOMStyles, DOMEventHandler } from '../value'
+import { DOMAttribute, DOMEventHandler } from '../value'
+import { DOMElement } from '../element'
+import { CSSAttributes, CSSProperties } from '../css_properties'
 import { el } from '../element'
 
 export interface ImgAttributes<State, Action> {
@@ -28,7 +30,7 @@ export interface ImgAttributes<State, Action> {
   spellcheck?: DOMAttribute<State, 'default' | 'true' | 'false'>
   src?: DOMAttribute<State, string>
   srcset?: DOMAttribute<State, string[]>
-  style?: DOMAttribute<State, DOMStyles>
+  style?: DOMAttribute<State, CSSProperties>
   tabindex?: DOMAttribute<State, number>
   title?: DOMAttribute<State, string>
   usemap?: DOMAttribute<State, string>
@@ -127,5 +129,9 @@ export interface ImgAttributes<State, Action> {
   onwheel?: DOMEventHandler<State, WheelEvent, Action>
 }
 
-export const img = <State, Action>(attributes: ImgAttributes<State, Action>, ...children: DOMChild<State, Action>[]) =>
-  el<State, Action>('img', attributes, ...children)
+export function img<State, Action>(
+  attributes: ImgAttributes<State, Action> & CSSAttributes<State>,
+  ...children: DOMChild<State, Action>[]
+): DOMElement<State, Action> {
+  return el<State, Action>('img', attributes, ...children)
+}

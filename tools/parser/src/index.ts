@@ -1,5 +1,5 @@
 import { loader } from './loader'
-import { parseAttributes, parseCollections, parseEvents, parseElements } from './parser'
+import { parseAttributes, parseCollections, parseEvents, parseElements, parseCSSProperties } from './parser'
 import { DecodeResult } from 'partsing/core/result'
 import { Attribute, Tag, StringType, AttributeType } from './attribute'
 import { Element } from './element'
@@ -100,6 +100,7 @@ async function f() {
   const collections = await loadDecode('./specs/collections.yaml', parseCollections)
   const events = await loadDecode('./specs/events.yaml', parseEvents)
   const elements = await loadDecode('./specs/elements.yaml', parseElements)
+  const cssProperties = await loadDecode('./specs/css-properties.yaml', parseCSSProperties)
 
   const attributesMap = attributes.reduce(
     (acc, attr) => {
@@ -125,9 +126,11 @@ async function f() {
     .map(attributeToStringField)
     .sort()
     .concat(filteredEvents.map(eventToStringField))
+    .concat(cssProperties.map(p => `$${p.codeName}?: DOMAttribute<State, string>`))
 
   const domAttributesContent = `
-import { DOMAttribute, DOMEventHandler, DOMStyles } from './value'
+import { DOMAttribute, DOMEventHandler } from './value'
+import { CSSProperties } from './css_properties'
 
 export interface DOMAttributes<State, Action> {
   ${allAttributes.join('\n  ')}
@@ -212,16 +215,21 @@ export const attributeMap: Record<string, (el: Element, name: string, value: any
 
       const content = `
 import { DOMChild } from '../template'
-import { DOMAttribute, DOMStyles, DOMEventHandler } from '../value'
+import { DOMAttribute, DOMEventHandler } from '../value'
+import { DOMElement } from '../element'
+import { CSSAttributes, CSSProperties } from '../css_properties'
 import { el } from '../element'
 
 export interface ${attrType}<State, Action> {
   ${attributes}
 }
 
-export const ${el.codeName} = <State, Action>
-    (attributes: ${attrType}<State, Action>, ...children: DOMChild<State, Action>[]) =>
-      el<State, Action>('${el.domName}', attributes, ...children)
+export function ${el.codeName}<State, Action>(
+  attributes: ${attrType}<State, Action> & CSSAttributes<State>,
+  ...children: DOMChild<State, Action>[]
+): DOMElement<State, Action> {
+  return el<State, Action>('${el.domName}', attributes, ...children)
+}
 `
 
       project = project.addFile(`els/${el.name}.ts`, content)
@@ -229,6 +237,26 @@ export const ${el.codeName} = <State, Action>
 
   const indexContent = filteredElements.map(el => `export { ${el.codeName} } from './${el.name}'`).join('\n')
   project = project.addFile(`els/index.ts`, indexContent)
+
+  const cssPropertiesContent = cssProperties.map(p => `${p.codeName}?: string`).join('\n  ')
+  // const cssPropertiesMapContent = cssProperties
+  //   .filter(p => p.codeName !== p.domName)
+  //   .map(p => `${p.codeName}: '${p.domName}'`).join(',\n  ')
+  const cssAttributesContent = cssProperties.map(p => `$${p.codeName}?: DOMAttribute<State, string>`).join('\n  ')
+
+  const cssContent = `
+import { DOMAttribute } from './value'
+
+export interface CSSProperties {
+  ${cssPropertiesContent}
+}
+
+export interface CSSAttributes<State> {
+  ${cssAttributesContent}
+}
+`
+
+  project = project.addFile(`css_properties.ts`, cssContent)
 
   await project.cleanAndSave()
 }
