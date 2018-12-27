@@ -1,4 +1,4 @@
-/* istanbul ignore next */
+/* istanbul ignore file */
 import {
   setBoolAttribute,
   setCommaSeparated,
@@ -9,7 +9,6 @@ import {
   setProperty
 } from './set_attribute'
 
-/* istanbul ignore next */
 export const attributeNameMap: Record<string, string> = {
   acceptCharset: 'accept-charset',
   asAttr: 'as',
@@ -18,7 +17,6 @@ export const attributeNameMap: Record<string, string> = {
   httpEquiv: 'http-equiv'
 }
 
-/* istanbul ignore next */
 export const attributeMap: Record<string, (el: Element, name: string, value: any) => void> = {
   acceptCharset: setSpaceSeparated,
   async: setBoolAttribute,

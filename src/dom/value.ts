@@ -3,8 +3,8 @@ import { UnwrappedValue, UnwrappedLiteralValue, WrappedDerivedValue } from '../c
 
 export type DOMAttribute<S, V> = UnwrappedValue<S, V>
 export type DOMEventHandler<S, E, Action> =
-  | UnwrappedLiteralValue<(event: E) => Action>
-  | WrappedDerivedValue<S, (event: E) => Action>
+  | UnwrappedLiteralValue<(event: E) => (Action | undefined)>
+  | WrappedDerivedValue<S, (event: E) => (Action | undefined)>
 export type DOMProperty<S, V> = DOMAttribute<S, V>
 export type DOMTextValue<S> = DOMAttribute<S, string>
 

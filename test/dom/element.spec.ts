@@ -154,7 +154,6 @@ describe('dom_element', () => {
     const view = div({ $backgroundColor: 'rgb(200, 200, 200)' }, 'hello')
     const ctx = createContext()
     view.render(ctx, 1, () => {})
-    expect(ctx.doc.body.innerHTML)
-      .toEqual('<div style="background-color: rgb(200, 200, 200);">hello</div>')
+    expect(ctx.doc.body.innerHTML).toEqual('<div style="background-color: rgb(200, 200, 200);">hello</div>')
   })
 })

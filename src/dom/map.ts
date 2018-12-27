@@ -18,7 +18,7 @@ export const mapState = <OuterState, InnerState, Action>(
   )
 
 export const mapAction = <State, OuterAction, InnerAction>(
-  opts: { map: (value: InnerAction) => OuterAction | undefined },
+  opts: { map: (value: InnerAction) => (OuterAction | undefined) },
   ...children: DOMChild<State, InnerAction>[]
 ) =>
   control<State, State, OuterAction, InnerAction>(
