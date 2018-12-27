@@ -33,7 +33,7 @@ export class DOMControlView<OuterState, InnerState, OuterAction, InnerAction> im
         this.destroy()
         return
       }
-      if (this.latestState !== void 0) {
+      if (this.latestState != null) {
         this.dynamics.forEach(view => view.change(this.latestState!))
         this.latestState = undefined
       }
@@ -43,7 +43,7 @@ export class DOMControlView<OuterState, InnerState, OuterAction, InnerAction> im
     )
   }
   destroy() {
-    if (this.views !== void 0) {
+    if (this.views != null) {
       this.controlDestroy(() => {
         this.views!.forEach(view => view.destroy())
       })
@@ -53,7 +53,7 @@ export class DOMControlView<OuterState, InnerState, OuterAction, InnerAction> im
   }
   change(state: OuterState) {
     if (this.destroyed) return
-    if (this.dynamics === void 0) {
+    if (this.dynamics == null) {
       this.controlChange(state, (state: InnerState) => {
         this.latestState = state
       })
@@ -125,7 +125,7 @@ export class DOMRefControlView<OuterState, InnerState, OuterAction, InnerAction>
         this.destroy()
         return
       }
-      if (this.latestState !== void 0) {
+      if (this.latestState != null) {
         this.dynamics.forEach(view => view.change(this.latestState!))
         this.latestState = undefined
       }
@@ -135,23 +135,24 @@ export class DOMRefControlView<OuterState, InnerState, OuterAction, InnerAction>
     )
   }
   destroy() {
-    if (this.views !== void 0) {
+    if (this.destroyed) return
+    if (this.views != null) {
       this.controlDestroy(() => {
         this.views!.forEach(view => view.destroy())
-        removeNode(this.ref)
       })
     } else {
       this.destroyed = true
     }
+    removeNode(this.ref)
   }
   change(state: OuterState) {
+    console.log('control.change', this)
     if (this.destroyed) return
-    if (this.dynamics === void 0) {
+    if (this.dynamics == null) {
       this.controlChange(state, (state: InnerState) => {
         this.latestState = state
       })
     } else {
-      if (this.dynamics.length === 0) return
       this.controlChange(state, (state: InnerState) => {
         this.dynamics!.forEach(child => child.change(state))
       })
@@ -165,7 +166,7 @@ export class DOMRefControlView<OuterState, InnerState, OuterAction, InnerAction>
 }
 
 export class DOMRefControl<OuterState, InnerState, OuterAction, InnerAction>
-  implements DOMTemplate<OuterState, OuterAction> {
+    implements DOMTemplate<OuterState, OuterAction> {
   constructor(
     readonly controlRender: (
       ctx: DOMContext,
@@ -176,18 +177,19 @@ export class DOMRefControl<OuterState, InnerState, OuterAction, InnerAction>
     ) => void,
     readonly controlChange: (state: OuterState, change: (state: InnerState) => void) => void,
     readonly controlDestroy: (destroy: () => void) => void,
-    readonly children: DOMTemplate<InnerState, InnerAction>[]
+    readonly children: DOMTemplate<InnerState, InnerAction>[],
+    readonly id: string = String(refCounter)
   ) {}
 
   render(ctx: DOMContext, state: OuterState, dispatch: (action: OuterAction) => void) {
-    const ref = ctx.doc.createComment(`md:control:${refCounter++}`)
+    const ref = ctx.doc.createComment(`md:control:${this.id}`)
     ctx.append(ref)
-    const appendChild = (node: Node) => {
+    const append = (node: Node) => {
       if (ref.parentElement) ref.parentElement.insertBefore(node, ref)
     }
     return new DOMRefControlView<OuterState, InnerState, OuterAction, InnerAction>(
       ref,
-      { ...ctx, append: appendChild },
+      { ...ctx, append },
       state,
       dispatch,
       this.controlRender,
@@ -202,6 +204,7 @@ const controlDestroy = (destroy: () => void) => destroy()
 
 export interface ControlOpts<OuterState, InnerState, OuterAction, InnerAction> {
   withReference: boolean
+  id?: string
   controlRender: (
     ctx: DOMContext,
     state: OuterState,
@@ -246,6 +249,7 @@ const controlChange = <State, Action>(state: State, change: (state: State) => vo
 
 export interface ControlFlowOpts<State, Action> {
   withReference: boolean
+  id: string | undefined
   controlRender?: (
     ctx: DOMContext,
     state: State,
@@ -266,7 +270,8 @@ export const controlFlow = <State, Action>(
       opts.controlRender || controlRender,
       opts.controlChange || controlChange,
       opts.controlDestroy || controlDestroy,
-      children.map(domChildToTemplate)
+      children.map(domChildToTemplate),
+      opts.id
     )
   } else {
     return new DOMControl<State, State, Action, Action>(
