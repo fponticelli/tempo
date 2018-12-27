@@ -1,16 +1,19 @@
-import { CSSProperties } from './css_properties'
+import { CSSProperties, cssMapper } from './css_properties'
 
 export const setOneStyle = (el: HTMLElement, name: string, value: any) => {
   const anyStyle = el.style as any
   if (value == null) {
     anyStyle[name] = null
   } else {
-    anyStyle[name] = String(value)
+    const s = String(value)
+    if (s !== anyStyle[name]) {
+      anyStyle[name] = String(value)
+    }
   }
 }
 
 export const setEvent = <Action>(dispatch: (action: Action) => void) => {
-  return (el: Element, name: string, value: (e: Event) => Action | undefined) => {
+  return (el: Element, name: string, value: (e: Event) => (Action | undefined)) => {
     const anyEl = el as any
     if (value == null) {
       anyEl[name] = null
@@ -36,47 +39,48 @@ export const setAttribute = (el: Element, name: string, value: string) => {
 
 export const setProperty = (el: Element, name: string, value: any | undefined) => {
   if (value == null) {
-    delete (el as any)[name]
-    return
+    (el as any)[name] = null
+  } else {
+    if ((el as any)[name] !== value) (el as any)[name] = value
   }
-  if ((el as any)[name] !== value) (el as any)[name] = value
 }
 
 export const setStyleAttribute = (el: Element, name: string, value: CSSProperties | undefined) => {
   const html = el as HTMLElement
   if (value == null) {
-    html.style.cssText = ''
+    html.removeAttribute(name)
   } else {
-    const s = Object.keys(value).map(k => `${k}: ${(value as any)[k]!};`).join('')
-    html.style.cssText = s
+    const s = Object.keys(value)
+      .map(k => {
+        const cssName = cssMapper[k as keyof (typeof cssMapper)] || k
+        return `${cssName}: ${(value as any)[k]!};`
+      })
+      .join(' ')
+    setAttribute(el, name, s.length && s || null as any)
   }
 }
 
 export const setBoolProperty = (el: Element, name: string, value: boolean | undefined) => {
   if (value == null) {
-    delete (el as any)[name]
-    return
+    (el as any)[name] = null
+  } else {
+    const bool = Boolean(value)
+    if ((el as any)[name] !== bool) (el as any)[name] = bool
   }
-  const bool = Boolean(value)
-  if ((el as any)[name] !== bool) (el as any)[name] = bool
 }
 
 export const setEnumBoolAttribute = (el: Element, name: string, value: boolean | undefined) => {
-  if (value == null) el.removeAttribute(name)
-  else el.setAttribute(name, value ? 'true' : 'false')
+  setAttribute(el, name, value === true ? 'true' : (value === false ? 'false' : null as any))
 }
 
 export const setBoolAttribute = (el: Element, name: string, value: boolean | undefined) => {
-  if (value == null || !value) el.removeAttribute(name)
-  else el.setAttribute(name, '')
+  setAttribute(el, name, value === true ? '' : null as any)
 }
 
 export const setCommaSeparated = (el: Element, name: string, values: string[] | undefined) => {
-  if (values == null || values.length === 0) el.removeAttribute(name)
-  else el.setAttribute(name, values.join(', '))
+  setAttribute(el, name, values && values.length > 0 && values.join(', ') || null as any)
 }
 
 export const setSpaceSeparated = (el: Element, name: string, values: string[] | undefined) => {
-  if (values == null || values.length === 0) el.removeAttribute(name)
-  else el.setAttribute(name, values.join(' '))
+  setAttribute(el, name, values && values.length > 0 && values.join(' ') || null as any)
 }

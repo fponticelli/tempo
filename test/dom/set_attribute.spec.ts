@@ -1,10 +1,14 @@
-import { createDiv, createTextInput, createA } from './common'
+import { createDiv, createTextInput, createA, createImg, createInput } from './common'
 import {
   setAttribute,
   setOneStyle,
   setEnumBoolAttribute,
+  setCommaSeparated,
   setSpaceSeparated,
-  setBoolAttribute
+  setBoolAttribute,
+  setBoolProperty,
+  setStyleAttribute,
+  setProperty
 } from '../../src/dom/set_attribute'
 
 describe('set_attribute', () => {
@@ -12,18 +16,20 @@ describe('set_attribute', () => {
     const el = createDiv()
     setAttribute(el, 'id', 'main')
     expect(el.id).toEqual('main')
-    setAttribute(el, 'id', null)
+    setAttribute(el, 'id', null as any)
     expect(el.id).toEqual('')
     setAttribute(el, 'id', 'a')
     setAttribute(el, 'id', 'a')
     expect(el.id).toEqual('a')
-    setAttribute(el, 'id', undefined)
+    setAttribute(el, 'id', undefined as any)
     expect(el.id).toEqual('')
   })
 
   it('seOneStyle', () => {
     const el = createDiv()
     expect(el.style.backgroundColor).toEqual('')
+    setOneStyle(el, 'backgroundColor', 'rgb(204, 204, 204)')
+    expect(el.style.backgroundColor).toEqual('rgb(204, 204, 204)')
     setOneStyle(el, 'backgroundColor', 'rgb(204, 204, 204)')
     expect(el.style.backgroundColor).toEqual('rgb(204, 204, 204)')
     setOneStyle(el, 'backgroundColor', undefined)
@@ -52,7 +58,6 @@ describe('set_attribute', () => {
   })
 
   it('setSpaceSeparated', () => {
-    // ping
     const el = createA()
     expect(el.rel).toEqual('')
     setSpaceSeparated(el, 'rel', ['a', 'b', 'c'])
@@ -61,5 +66,54 @@ describe('set_attribute', () => {
     expect(el.rel).toEqual('')
     setSpaceSeparated(el, 'rel', undefined)
     expect(el.rel).toEqual('')
+  })
+
+  it('setCommaSeparated', () => {
+    const el = createImg()
+    setCommaSeparated(el, 'srcset', ['a', 'b', 'c'])
+    expect(el.srcset).toEqual('a, b, c')
+    setCommaSeparated(el, 'srcset', null as any)
+    expect(el.srcset).toEqual('null') // this seems like a limitation in JSDom
+  })
+
+  it('setBoolProperty', () => {
+    const el = createInput('checkbox')
+    expect(el.checked).toEqual(false)
+    setBoolProperty(el, 'checked', true)
+    expect(el.checked).toEqual(true)
+    setBoolProperty(el, 'checked', true)
+    expect(el.checked).toEqual(true)
+    setBoolProperty(el, 'checked', false)
+    expect(el.checked).toEqual(false)
+    setBoolProperty(el, 'checked', null as any)
+    expect(el.checked).toEqual(false)
+  })
+
+  it('setProperty', () => {
+    const el = createInput('text')
+    expect(el.value).toEqual('')
+    setProperty(el, 'value', 'a')
+    expect(el.value).toEqual('a')
+    setProperty(el, 'value', 'a')
+    expect(el.value).toEqual('a')
+    setProperty(el, 'value', 'b')
+    expect(el.value).toEqual('b')
+    setProperty(el, 'value', null as any)
+    expect(el.value).toEqual('')
+  })
+
+  it('setStyle', () => {
+    const el = createDiv()
+    expect(el.getAttribute('style')).toBeNull()
+    setStyleAttribute(el, 'style', null as any)
+    expect(el.getAttribute('style')).toBeNull()
+    setStyleAttribute(el, 'style', {})
+    expect(el.getAttribute('style')).toBeNull()
+    setStyleAttribute(el, 'style', { backgroundColor: 'rgb(1,2,3)' })
+    expect(el.getAttribute('style')).toEqual('background-color: rgb(1,2,3);')
+    setStyleAttribute(el, 'style', { fontWeight: 'bold', fontSize: '10px', border: '1px solid red' })
+    expect(el.getAttribute('style')).toEqual('font-weight: bold; font-size: 10px; border: 1px solid red;')
+    setStyleAttribute(el, 'style', null as any)
+    expect(el.getAttribute('style')).toBeNull()
   })
 })

@@ -1,4 +1,6 @@
+/* istanbul ignore file */
 import { DOMAttribute, DOMEventHandler } from './value'
+
 import { CSSProperties } from './css_properties'
 
 export interface DOMAttributes<State, Action> {

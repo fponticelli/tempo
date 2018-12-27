@@ -15,8 +15,7 @@ export class DOMRepeatView<Element, State extends Element[], Action> implements 
   ) {}
   destroy(): void {
     removeNode(this.ref)
-    if (this.childrenView)
-      this.childrenView.forEach(e => e.forEach(c => c.destroy()))
+    if (this.childrenView) this.childrenView.forEach(e => e.forEach(c => c.destroy()))
   }
 
   change(state: State): void {
@@ -47,19 +46,15 @@ export class DOMRepeatView<Element, State extends Element[], Action> implements 
 
 export class DOMRepeat<Element, State extends Element[], Action> implements DOMTemplate<State, Action> {
   constructor(
+    readonly opts: { id?: string },
     readonly children: DOMTemplate<Element, Action>[]
   ) {}
 
-  render(
-    ctx: DOMContext,
-    state: State,
-    dispatch: (action: Action) => void
-  ): DynamicView<State> {
-    const ref = ctx.doc.createComment(`md:repeat:${refCounter++}`)
+  render(ctx: DOMContext, state: State, dispatch: (action: Action) => void): DynamicView<State> {
+    const ref = ctx.doc.createComment(`md:repeat:${this.opts.id || refCounter++}`)
     ctx.append(ref)
     const appendChild = (node: Node) => {
-      if (ref.parentElement)
-        ref.parentElement.insertBefore(node, ref)
+      if (ref.parentElement) ref.parentElement.insertBefore(node, ref)
     }
     const view = new DOMRepeatView<Element, State, Action>(
       ref,
@@ -73,5 +68,7 @@ export class DOMRepeat<Element, State extends Element[], Action> implements DOMT
 }
 
 export const repeat = <Element, State extends Element[], Action>(
+  opts: { id?: string },
   ...children: DOMChild<Element, Action>[]
-) => new DOMRepeat<Element, State, Action>(children.map(domChildToTemplate))
+) =>
+  new DOMRepeat<Element, State, Action>(opts, children.map(domChildToTemplate))

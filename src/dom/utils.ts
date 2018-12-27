@@ -17,7 +17,6 @@ export const filterDynamics = <State>(children: View<State>[]): DynamicView<Stat
 
 export const domChildToTemplate = <State, Action>(dom: DOMChild<State, Action>): DOMTemplate<State, Action> => {
   if (typeof dom === 'string' || typeof dom === 'function') return text(dom)
-  else if (dom == null) return text('')
   else return dom
 }
 

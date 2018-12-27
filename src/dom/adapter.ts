@@ -16,7 +16,7 @@ export class DOMAdapterView<OuterState, InnerState, OuterAction, InnerAction> im
 
   change(stateUp: OuterState): void {
     const newState = this.mergeStates(stateUp, this.child.state)
-    if (newState === void 0) return
+    if (newState == null) return
     this.child.change(newState)
   }
 }
