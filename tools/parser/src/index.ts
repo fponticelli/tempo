@@ -129,7 +129,9 @@ async function f() {
     .concat(cssProperties.map(p => `$${p.codeName}?: DOMAttribute<State, string>`))
 
   const domAttributesContent = `
+/* istanbul ignore file */
 import { DOMAttribute, DOMEventHandler } from './value'
+
 import { CSSProperties } from './css_properties'
 
 export interface DOMAttributes<State, Action> {
@@ -158,7 +160,7 @@ export interface DOMAttributes<State, Action> {
     .sort()
 
   const attributeMapperContent = `
-/* istanbul ignore next */
+  /* istanbul ignore file */
 import {
   setBoolAttribute,
   setCommaSeparated,
@@ -169,12 +171,10 @@ import {
   setProperty
 } from './set_attribute'
 
-/* istanbul ignore next */
 export const attributeNameMap: Record<string, string> = {
   ${attributeNames.join(',\n  ')}
 }
 
-/* istanbul ignore next */
 export const attributeMap: Record<string, (el: Element, name: string, value: any) => void> = {
   ${attributeApplication.join(',\n  ')}
 }
@@ -214,6 +214,7 @@ export const attributeMap: Record<string, (el: Element, name: string, value: any
       .join('\n  ')
 
       const content = `
+/* istanbul ignore file */
 import { DOMChild } from '../template'
 import { DOMAttribute, DOMEventHandler } from '../value'
 import { DOMElement } from '../element'
@@ -239,12 +240,13 @@ export function ${el.codeName}<State, Action>(
   project = project.addFile(`els/index.ts`, indexContent)
 
   const cssPropertiesContent = cssProperties.map(p => `${p.codeName}?: string`).join('\n  ')
-  // const cssPropertiesMapContent = cssProperties
-  //   .filter(p => p.codeName !== p.domName)
-  //   .map(p => `${p.codeName}: '${p.domName}'`).join(',\n  ')
+  const cssPropertiesMapContent = cssProperties
+    .filter(p => p.codeName !== p.domName)
+    .map(p => `${p.codeName}: '${p.domName}'`).join(',\n  ')
   const cssAttributesContent = cssProperties.map(p => `$${p.codeName}?: DOMAttribute<State, string>`).join('\n  ')
 
   const cssContent = `
+/* istanbul ignore file */
 import { DOMAttribute } from './value'
 
 export interface CSSProperties {
@@ -253,6 +255,10 @@ export interface CSSProperties {
 
 export interface CSSAttributes<State> {
   ${cssAttributesContent}
+}
+
+export const cssMapper = {
+  ${cssPropertiesMapContent}
 }
 `
 

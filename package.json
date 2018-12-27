@@ -52,6 +52,7 @@
     "fix-prettier": "prettier --write \"./{src,test}/**/*.ts\"",
     "prep": "yarn test-coverage && yarn lint && yarn prettier && yarn build && yarn docs",
     "test": "jest",
+    "jest-clear-cache": "jest --clearCache",
     "test-coverage": "jest --coverage",
     "watch": "jest --watch --coverage",
     "npm-publish": "yarn prep && ( cd lib && yarn publish --access public )"
@@ -59,7 +60,8 @@
   "eslint.packageManager": "yarn",
   "jest": {
     "collectCoverageFrom": [
-      "src/**/*.ts"
+      "src/**/*.ts",
+      "!src/dom/els/*.ts"
     ],
     "coveragePathIgnorePatterns": [
       "<rootDir>/node_modules"

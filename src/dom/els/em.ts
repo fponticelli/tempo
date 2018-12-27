@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 import { DOMChild } from '../template'
 import { DOMAttribute, DOMEventHandler } from '../value'
 import { DOMElement } from '../element'
