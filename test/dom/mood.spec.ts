@@ -48,7 +48,6 @@ describe('Mood', () => {
     expect(result[0]).toEqual('')
     expect(result[1]).toEqual('')
     view.dispatch('foo')
-    console.log(result)
     expect(result[0]).toEqual('FOO')
     expect(result[1]).toEqual('foo')
   })

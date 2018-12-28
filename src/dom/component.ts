@@ -1,10 +1,10 @@
-import { DOMFragmentView } from './fragment'
+import { DOMDynamicFragmentView } from './fragment'
 import { View, DynamicView } from '../core/view'
 import { DOMTemplate, DOMChild } from './template'
 import { DOMContext } from './context'
 import { filterDynamics, domChildToTemplate } from './utils'
 
-export class DOMComponentView<State, Action> extends DOMFragmentView<State, Action> {
+export class DOMComponentView<State, Action> extends DOMDynamicFragmentView<State> {
   constructor(
     public state: State,
     readonly dispatch: (action: Action) => void,

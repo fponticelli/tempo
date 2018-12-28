@@ -1,32 +1,34 @@
 import { View, StaticView, DynamicView } from '../core/view'
 import { filterDynamics } from './utils'
 
-export class DOMBaseFragmentView<State, Action> {
-  constructor(readonly children: View<State>[]) {}
+export class DOMBaseFragmentView {
+  constructor(readonly views: View<any>[]) {}
 
   destroy(): void {
-    this.children.forEach(child => child.destroy())
+    this.views.forEach(view => view.destroy())
   }
 }
 
-export class DOMStaticFragmentView<State, Action> extends DOMBaseFragmentView<State, Action> implements StaticView {
+export class DOMStaticFragmentView extends DOMBaseFragmentView implements StaticView {
   readonly kind = 'static'
 }
 
-export class DOMFragmentView<State, Action> extends DOMBaseFragmentView<State, Action> implements DynamicView<State> {
+export class DOMDynamicFragmentView<State>
+    extends DOMBaseFragmentView
+    implements DynamicView<State> {
   readonly kind = 'dynamic'
-  constructor(children: View<State>[], readonly change: (state: State) => void) {
-    super(children)
+  constructor(views: View<any>[], readonly change: (state: State) => void) {
+    super(views)
   }
 }
 
-export const fragmentView = <State, Action>(children: View<State>[]) => {
-  const dynamics = filterDynamics(children)
+export const fragmentView = <State>(views: View<State>[]) => {
+  const dynamics = filterDynamics(views)
   if (dynamics.length > 0) {
-    return new DOMFragmentView<State, Action>(children, (state: State) =>
+    return new DOMDynamicFragmentView<State>(views, (state: State) =>
       dynamics.forEach(child => child.change(state))
     )
   } else {
-    return new DOMStaticFragmentView<State, Action>(children)
+    return new DOMStaticFragmentView(views)
   }
 }

@@ -3,8 +3,6 @@ import { DOMContext } from './context'
 import { DOMTemplate, DOMChild } from './template'
 import { removeNode, filterDynamics, domChildToTemplate } from './utils'
 
-let refCounter = 0
-
 export class DOMRepeatView<Element, State extends Element[], Action> implements DynamicView<State> {
   readonly kind = 'dynamic'
   constructor(
@@ -51,7 +49,7 @@ export class DOMRepeat<Element, State extends Element[], Action> implements DOMT
   ) {}
 
   render(ctx: DOMContext, state: State, dispatch: (action: Action) => void): DynamicView<State> {
-    const ref = ctx.doc.createComment(`md:repeat:${this.opts.id || refCounter++}`)
+    const ref = ctx.doc.createComment(this.opts.id || 'md:repeat')
     ctx.append(ref)
     const appendChild = (node: Node) => {
       if (ref.parentElement) ref.parentElement.insertBefore(node, ref)
