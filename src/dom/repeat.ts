@@ -65,8 +65,8 @@ export class DOMRepeat<Element, State extends Element[], Action> implements DOMT
   }
 }
 
-export const repeat = <Element, State extends Element[], Action>(
+export const repeat = <State extends any[], Action>(
   opts: { id?: string },
-  ...children: DOMChild<Element, Action>[]
+  ...children: DOMChild<State[number], Action>[]
 ) =>
-  new DOMRepeat<Element, State, Action>(opts, children.map(domChildToTemplate))
+  new DOMRepeat<State[number], State, Action>(opts, children.map(domChildToTemplate))
