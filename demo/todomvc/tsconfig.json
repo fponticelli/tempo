@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "lib": ["es6", "dom", "es2015"],
+    "sourceMap": false,
+    "declaration": false,
+    "target": "es5",
+    "module": "amd",
+    "moduleResolution": "node",
+    "removeComments": false,
+    "strict": true,
+    "outDir": "build"
+  },
+  "include": [
+    "src"
+  ]
+}
