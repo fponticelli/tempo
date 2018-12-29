@@ -3,7 +3,7 @@ import { DOMContext } from './context'
 import { DOMTemplate, DOMChild } from './template'
 import { removeNode, filterDynamics, domChildToTemplate } from './utils'
 
-export class DOMRepeatView<Element, State extends Element[], Action> implements DynamicView<State> {
+export class DOMElementsView<Element, State extends Element[], Action> implements DynamicView<State> {
   readonly kind = 'dynamic'
   constructor(
     readonly ref: Node,
@@ -42,7 +42,7 @@ export class DOMRepeatView<Element, State extends Element[], Action> implements 
   private childrenView: View<Element>[][] = []
 }
 
-export class DOMRepeat<Element, State extends Element[], Action> implements DOMTemplate<State, Action> {
+export class DOMElementsTemplate<Element, State extends Element[], Action> implements DOMTemplate<State, Action> {
   constructor(
     readonly opts: { refId?: string },
     readonly children: DOMTemplate<Element, Action>[]
@@ -54,7 +54,7 @@ export class DOMRepeat<Element, State extends Element[], Action> implements DOMT
     const appendChild = (node: Node) => {
       if (ref.parentElement) ref.parentElement.insertBefore(node, ref)
     }
-    const view = new DOMRepeatView<Element, State, Action>(
+    const view = new DOMElementsView<Element, State, Action>(
       ref,
       { ...ctx, append: appendChild },
       dispatch,
@@ -65,8 +65,8 @@ export class DOMRepeat<Element, State extends Element[], Action> implements DOMT
   }
 }
 
-export const repeat = <State extends any[], Action>(
+export const elements = <State extends any[], Action>(
   opts: { refId?: string },
   ...children: DOMChild<State[number], Action>[]
 ) =>
-  new DOMRepeat<State[number], State, Action>(opts, children.map(domChildToTemplate))
+  new DOMElementsTemplate<State[number], State, Action>(opts, children.map(domChildToTemplate))

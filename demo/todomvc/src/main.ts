@@ -15,7 +15,7 @@ import {
   ul,
   derived,
   DOMEventHandler,
-  repeat,
+  elements,
   mapState,
   when,
   div
@@ -94,7 +94,7 @@ const view =  component(
                   }
                 })
           },
-          repeat<TodoWEditing[], Action>(
+          elements<TodoWEditing[], Action>(
             {},
             li(
               {
