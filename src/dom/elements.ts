@@ -1,7 +1,7 @@
 import { DynamicView, View } from '../core/view'
 import { DOMContext } from './context'
 import { DOMTemplate, DOMChild } from './template'
-import { removeNode, filterDynamics, domChildToTemplate } from './utils'
+import { removeNode, filterDynamics, domChildToTemplate, insertBefore } from './utils'
 
 export class DOMElementsView<Element, State extends Element[], Action> implements DynamicView<State> {
   readonly kind = 'dynamic'
@@ -51,12 +51,9 @@ export class DOMElementsTemplate<Element, State extends Element[], Action> imple
   render(ctx: DOMContext, state: State, dispatch: (action: Action) => void): DynamicView<State> {
     const ref = ctx.doc.createComment(this.opts.refId || 'md:repeat')
     ctx.append(ref)
-    const appendChild = (node: Node) => {
-      if (ref.parentElement) ref.parentElement.insertBefore(node, ref)
-    }
     const view = new DOMElementsView<Element, State, Action>(
       ref,
-      { ...ctx, append: appendChild },
+      { ...ctx, append: insertBefore(ref) },
       dispatch,
       this.children
     )

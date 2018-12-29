@@ -9,13 +9,14 @@ import { wrapLiteral, WrappedValue } from '../core/value'
 
 const applyMood = <State>(el: HTMLElement, attr: WrappedValue<State, (el: any) => void>) => (state: State) => {
   const f = attr.resolve(state)
-  if (f)
+  if (f != null) {
     f(el)
+  }
 }
 
 const maybeApplyMood = <State>(el: HTMLElement, attr: WrappedValue<State, (el: any) => void> | undefined) =>
     (state: State) => {
-  if (attr) {
+  if (attr != null) {
     applyMood(el, attr)(state)
   }
 }

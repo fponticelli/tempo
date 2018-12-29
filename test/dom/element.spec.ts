@@ -144,16 +144,50 @@ describe('dom_element', () => {
   })
 
   it('generated elements', () => {
-    const view = div({}, span({}, 'hello ', a({ href: '#you' }, s => `#${s}`)))
+    const template = div({}, span({}, 'hello ', a({ href: '#you' }, s => `#${s}`)))
     const ctx = createContext()
-    view.render(ctx, 1, () => {})
+    template.render(ctx, 1, () => {})
     expect(ctx.doc.body.innerHTML).toEqual('<div><span>hello <a href="#you">#1</a></span></div>')
   })
 
   it('generated elements with style', () => {
-    const view = div({ $backgroundColor: 'rgb(200, 200, 200)' }, 'hello')
+    const template = div({ $backgroundColor: 'rgb(200, 200, 200)' }, 'hello')
     const ctx = createContext()
-    view.render(ctx, 1, () => {})
+    template.render(ctx, 1, () => {})
     expect(ctx.doc.body.innerHTML).toEqual('<div style="background-color: rgb(200, 200, 200);">hello</div>')
+  })
+
+  it('respect lifecycle sequence', () => {
+    const ctx = createContext()
+    const sequence = [] as string[]
+    const template = div({
+      moodAfterRender: el => sequence.push('moodAfterRender'),
+      moodBeforeChange: el => sequence.push('moodBeforeChange'),
+      moodAfterChange: el => sequence.push('moodAfterChange'),
+      moodBeforeDestroy: () => sequence.push('moodBeforeDestroy')
+    })
+    const view = template.render(ctx, 'A', () => {}) as DynamicView<string>
+    expect(sequence).toEqual(['moodAfterRender'])
+    view.change('B')
+    expect(sequence).toEqual(['moodAfterRender', 'moodBeforeChange', 'moodAfterChange'])
+    view.destroy()
+    expect(sequence).toEqual(['moodAfterRender', 'moodBeforeChange', 'moodAfterChange', 'moodBeforeDestroy'])
+  })
+
+  it('respect lifecycle sequence with dereived', () => {
+    const ctx = createContext()
+    const sequence = [] as string[]
+    const template = div({
+      moodAfterRender: derived((state: string) => (el: HTMLDivElement) => sequence.push(`AR:${state}:${el.tagName}`)),
+      moodBeforeChange: derived((state: string) => (el: HTMLDivElement) => sequence.push(`BC:${state}:${el.tagName}`)),
+      moodAfterChange: derived((state: string) => (el: HTMLDivElement) => sequence.push(`AC:${state}:${el.tagName}`)),
+      moodBeforeDestroy: () => sequence.push('BD')
+    })
+    const view = template.render(ctx, 'A', () => {}) as DynamicView<string>
+    expect(sequence).toEqual(['AR:A:DIV'])
+    view.change('B')
+    expect(sequence).toEqual(['AR:A:DIV', 'BC:B:DIV', 'AC:B:DIV'])
+    view.destroy()
+    expect(sequence).toEqual(['AR:A:DIV', 'BC:B:DIV', 'AC:B:DIV', 'BD'])
   })
 })

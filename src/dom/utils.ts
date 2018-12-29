@@ -16,6 +16,12 @@ export const removeNode = (node: Node) => {
   }
 }
 
+export const insertBefore = (ref: Node) => (node: Node) => {
+  if (ref.parentElement != null) {
+    ref.parentElement.insertBefore(node, ref)
+  }
+}
+
 export const filterDynamics = <State>(children: View<State>[]): DynamicView<State>[] =>
   children.filter(child => child.kind === 'dynamic').map(child => child as DynamicView<State>)
 

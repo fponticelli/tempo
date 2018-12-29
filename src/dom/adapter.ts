@@ -64,6 +64,7 @@ export const adapter = <OuterState, InnerState, OuterAction, InnerAction>(
 ) =>
   new DOMAdapter(
     opts.mergeStates || ((_u: OuterState, _d: InnerState) => undefined),
+    /* istanbul ignore next */
     opts.propagate ||
       ((
         _m: InnerAction,
