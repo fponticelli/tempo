@@ -20,11 +20,10 @@ import {
   when,
   div
 } from '../../../src/dom'
-import { State, createTodo, Filter, Todo } from './state'
+import { State, Filter, Todo } from './state'
 import { Action } from './action'
 import { Store } from './store'
-
-const STORE_KEY = 'todomvc-mood'
+import { update } from './update'
 
 const changeF = (filter: Filter): DOMEventHandler<State, MouseEvent, Action> => {
   return derived((state: State) => {
@@ -48,69 +47,10 @@ const filterF = (filter: Filter) => {
 
 const selectedF = (filter: Filter) => (state: State) => state.filter === filter ? 'selected' : undefined
 
-const update = (state: State, action: Action) => {
-  let newState = { ...state }
-  switch (action.kind) {
-    case 'adding-todo':
-      if (action.title) {
-        newState.adding = action.title
-      } else {
-        delete newState.adding
-      }
-      break
-    case 'create-todo':
-      newState.todos = [...state.todos, createTodo(action.title)]
-      delete newState.adding
-      break
-    case 'editing-todo':
-      newState.editing = { id: action.id, title: action.title }
-      break
-    case 'cancel-adding-todo':
-      delete newState.adding
-      break
-    case 'cancel-editing-todo':
-      delete newState.editing
-      break
-    case 'clear-completed':
-      newState.todos = state.todos.filter(v => !v.completed)
-      break
-    case 'remove-todo':
-      newState.todos = state.todos.filter(v => v.id !== action.id)
-      break
-    case 'toggle-completed':
-      const index = state.todos.findIndex(v => v.id === action.id)
-      const current = state.todos[index]
-      const todo = { ...current, completed: !current.completed }
-      newState.todos = [...state.todos.slice(0, index), todo, ...state.todos.slice(index + 1)]
-      break
-    case 'toggle-filter':
-      newState.filter = action.filter
-      break
-    case 'update-todo':
-      delete newState.editing
-      const index2 = state.todos.findIndex(o => o.id === action.id)
-      if (index2 >= 0) {
-        const updated = { id: action.id, title: action.title, completed: state.todos[index2].completed }
-        newState.todos = [
-          ...state.todos.slice(0, index2),
-          updated,
-          ...state.todos.slice(index2 + 1)
-        ]
-      }
-      break
-    default:
-      throw 'unreacheable code'
-  }
-  Store.set(STORE_KEY, newState)
-  return newState
-}
-
-const state: State = Store.get(STORE_KEY)
-
 type TodoWEditing = Todo & { editing: boolean }
 
 const view =  component(
-  { state, update },
+  { state: Store.get(), update },
   section(
     { className: 'todoapp' },
     header(
