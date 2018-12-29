@@ -3,6 +3,9 @@ const path = require('path');
 module.exports = {
   entry: './src/main.ts',
   mode: 'production',
+  optimization: {
+    usedExports: true
+  },
   module: {
     rules: [
       {

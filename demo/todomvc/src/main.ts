@@ -58,28 +58,29 @@ const update = (state: State, action: Action) => {
         delete newState.adding
       }
       break
-    case 'add-todo':
+    case 'create-todo':
       newState.todos = [...state.todos, createTodo(action.title)]
       delete newState.adding
       break
     case 'editing-todo':
       newState.editing = { id: action.id, title: action.title }
       break
-    case 'cancel-add-todo':
+    case 'cancel-adding-todo':
       delete newState.adding
       break
-    case 'cancel-update-todo':
+    case 'cancel-editing-todo':
       delete newState.editing
       break
     case 'clear-completed':
       newState.todos = state.todos.filter(v => !v.completed)
       break
     case 'remove-todo':
-      newState.todos = state.todos.filter(v => v.id !== action.todo.id)
+      newState.todos = state.todos.filter(v => v.id !== action.id)
       break
     case 'toggle-completed':
-      const index = state.todos.findIndex(v => v.id === action.todo.id)
-      const todo = { ...action.todo, completed: !action.todo.completed }
+      const index = state.todos.findIndex(v => v.id === action.id)
+      const current = state.todos[index]
+      const todo = { ...current, completed: !current.completed }
       newState.todos = [...state.todos.slice(0, index), todo, ...state.todos.slice(index + 1)]
       break
     case 'toggle-filter':
@@ -120,7 +121,7 @@ const view =  component(
         placeholder: 'What needs to be done?',
         autofocus: (state: State) => state.editing == null,
         value: (state: State) => state.adding,
-        onkeydown: (e: KeyboardEvent): Action | undefined => {
+        onKeyDown: (e: KeyboardEvent): Action | undefined => {
           const input = e.target as HTMLInputElement
           if (e.keyCode === 13) {
             return Action.addTodo(input.value.trim())
@@ -171,34 +172,39 @@ const view =  component(
                   className: 'toggle',
                   type: 'checkbox',
                   checked: todo => todo.completed,
-                  onchange: derived((todo: TodoWEditing) => (_: Event) => Action.toggleCompleted(todo))
+                  onChange: derived((todo: TodoWEditing) => (_: Event) => Action.toggleCompleted(todo.id))
                 }),
                 label(
-                  { ondblclick: derived(todo => (_: MouseEvent) => Action.editingTodo(todo.id, todo.title)) },
+                  { onDblClick: derived(todo => (_: MouseEvent) => Action.editingTodo(todo.id, todo.title)) },
                   todo => todo.title
                 ),
                 button({
                   className: 'destroy',
-                  onclick: derived(todo => (_: Event) => Action.removeTodo(todo))
+                  onClick: derived(todo => (_: Event) => Action.removeTodo(todo.id))
                 })
               ),
               when(
                 { condition: todo => todo.editing },
                 input({
-                  autofocus: true,
+                  moodAfterRender: el => el.focus(),
                   className: 'edit',
                   value: todo => todo.title,
-                  onkeyup: derived((todo: TodoWEditing) => (e: KeyboardEvent): Action | undefined => {
+                  onKeyPress: derived((todo: TodoWEditing) => (e: KeyboardEvent): Action | undefined => {
                     const input = e.target as HTMLInputElement
                     if (e.keyCode === 13) {
-                      return Action.updateTodo(todo.id, input.value.trim())
+                      const value = input.value.trim()
+                      if (value) {
+                        return Action.updateTodo(todo.id, value)
+                      } else {
+                        return Action.removeTodo(todo.id)
+                      }
                     } else if (e.keyCode === 27) {
                       return Action.cancelUpdateTodo
                     } else {
                       return Action.editingTodo(todo.id, input.value)
                     }
                   }),
-                  onblur: derived((todo: TodoWEditing) => (e: FocusEvent): Action | undefined => {
+                  onBlur: derived((todo: TodoWEditing) => (e: FocusEvent): Action | undefined => {
                     const input = e.target as HTMLInputElement
                     return Action.updateTodo(todo.id, input.value.trim())
                   })
@@ -217,17 +223,17 @@ const view =  component(
         li({}, a({
           href: '#/',
           className: selectedF(Filter.All),
-          onclick: changeF(Filter.All)
+          onClick: changeF(Filter.All)
         }, 'All')),
         li({}, a({
           href: '#/active',
           className: selectedF(Filter.Active),
-          onclick: changeF(Filter.Active)
+          onClick: changeF(Filter.Active)
         }, 'Active')),
         li({}, a({
           href: '#/completed',
           className: selectedF(Filter.Completed),
-          onclick: changeF(Filter.Completed)
+          onClick: changeF(Filter.Completed)
         }, 'Completed'))
       ),
       when(
@@ -239,7 +245,7 @@ const view =  component(
         button(
           {
             className: 'clear-completed',
-            onclick: (_: MouseEvent) => Action.clearCompleted
+            onClick: (_: MouseEvent) => Action.clearCompleted
           },
           'Clear completed'
         )

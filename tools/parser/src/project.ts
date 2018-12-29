@@ -26,7 +26,8 @@ export class Project {
   }
 
   async clean() {
-    await fs.emptyDir(this.basePath)
+    fs.emptyDirSync(this.basePath)
+    // await fs.emptyDir(this.basePath)
   }
 
   async save() {
@@ -34,7 +35,7 @@ export class Project {
     const promises = this.files.map(async file => {
       const filePath = path.join(this.basePath, file.filePath)
       const dir = path.dirname(filePath)
-      await fs.mkdirp(dir)
+      await fs.ensureDir(dir)
       const formatted = prettier.format(file.content, options || undefined)
       return fs.writeFile(filePath, formatted, { encoding: 'utf8' })
     })

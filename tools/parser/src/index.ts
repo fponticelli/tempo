@@ -5,6 +5,7 @@ import { Attribute, Tag, StringType, AttributeType } from './attribute'
 import { Element } from './element'
 import { Event } from './event'
 import { Project } from './project'
+import { moodAttributes } from './mood_attribute'
 
 async function loadDecode<T>(path: string, decoder: (input: any) => DecodeResult<any, T, string>) {
   const content = await loader(path)
@@ -127,10 +128,11 @@ async function f() {
     .sort()
     .concat(filteredEvents.map(eventToStringField))
     .concat(cssProperties.map(p => `$${p.codeName}?: DOMAttribute<State, string>`))
+    .concat(moodAttributes.map(a => a.pairToString('any')))
 
   const domAttributesContent = `
 /* istanbul ignore file */
-import { DOMAttribute, DOMEventHandler } from './value'
+import { DOMAttribute, DOMEventHandler, MoodAttribute } from './value'
 
 import { CSSProperties } from './css_properties'
 
@@ -219,6 +221,7 @@ import { DOMChild } from '../template'
 import { DOMAttribute, DOMEventHandler } from '../value'
 import { DOMElement } from '../element'
 import { CSSAttributes, CSSProperties } from '../css_properties'
+import { MoodAttributes } from '../mood_attributes'
 import { el } from '../element'
 
 export interface ${attrType}<State, Action> {
@@ -226,7 +229,7 @@ export interface ${attrType}<State, Action> {
 }
 
 export function ${el.codeName}<State, Action>(
-  attributes: ${attrType}<State, Action> & CSSAttributes<State>,
+  attributes: ${attrType}<State, Action> & CSSAttributes<State> & MoodAttributes<State, ${el.domInterface}>,
   ...children: DOMChild<State, Action>[]
 ): DOMElement<State, Action> {
   return el<State, Action>('${el.domName}', attributes, ...children)
@@ -263,6 +266,19 @@ export const cssMapper = {
 `
 
   project = project.addFile(`css_properties.ts`, cssContent)
+
+  const moodAttributeContent = moodAttributes.map(a => a.pairToString('El')).join(',\n  ')
+
+  const moodContent = `
+/* istanbul ignore file */
+import { MoodAttribute }   from './value'
+
+export interface MoodAttributes<State, El> {
+  ${moodAttributeContent}
+}
+`
+
+  project = project.addFile(`mood_attributes.ts`, moodContent)
 
   await project.cleanAndSave()
 }

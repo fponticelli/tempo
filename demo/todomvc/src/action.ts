@@ -5,18 +5,18 @@ export class AddingTodo {
   constructor(readonly title: string) {}
 }
 
-export class AddTodo {
-  readonly kind = 'add-todo'
+export class CreateTodo {
+  readonly kind = 'create-todo'
   constructor(readonly title: string) {}
 }
 
-export class CancelAddTodo {
-  readonly kind = 'cancel-add-todo'
+export class CancelAddingTodo {
+  readonly kind = 'cancel-adding-todo'
   constructor() {}
 }
 
-export class CancelUpdateTodo {
-  readonly kind = 'cancel-update-todo'
+export class CancelEditingTodo {
+  readonly kind = 'cancel-editing-todo'
   constructor() {}
 }
 
@@ -32,7 +32,7 @@ export class EditingTodo {
 
 export class RemoveTodo {
   readonly kind = 'remove-todo'
-  constructor(readonly todo: Todo) {}
+  constructor(readonly id: string) {}
 }
 
 export class ToggleFilter {
@@ -42,7 +42,7 @@ export class ToggleFilter {
 
 export class ToggleCompleted {
   readonly kind = 'toggle-completed'
-  constructor(readonly todo: Todo) {}
+  constructor(readonly id: string) {}
 }
 
 export class UpdateTodo {
@@ -52,9 +52,9 @@ export class UpdateTodo {
 
 export type Action =
   | AddingTodo
-  | AddTodo
-  | CancelAddTodo
-  | CancelUpdateTodo
+  | CreateTodo
+  | CancelAddingTodo
+  | CancelEditingTodo
   | ClearCompleted
   | EditingTodo
   | RemoveTodo
@@ -64,13 +64,13 @@ export type Action =
 
 export const Action  = {
   adddingTodo: (title: string): Action => new AddingTodo(title),
-  addTodo: (title: string): Action => new AddTodo(title),
-  cancelAddTodo: new CancelAddTodo(),
-  cancelUpdateTodo: new CancelUpdateTodo(),
-  clearCompleted: (new ClearCompleted() as Action),
+  addTodo: (title: string): Action => new CreateTodo(title),
+  cancelAddTodo: new CancelAddingTodo() as Action,
+  cancelUpdateTodo: new CancelEditingTodo() as Action,
+  clearCompleted: new ClearCompleted() as Action,
   editingTodo: (id: string, title: string): Action => new EditingTodo(id, title),
-  removeTodo: (todo: Todo): Action => new RemoveTodo(todo),
-  toggleCompleted: (todo: Todo): Action => new ToggleCompleted(todo),
+  removeTodo: (id: string): Action => new RemoveTodo(id),
+  toggleCompleted: (id: string): Action => new ToggleCompleted(id),
   toggleFilter: (filter: Filter): Action => new ToggleFilter(filter),
   updateTodo: (id: string, title: string): Action => new UpdateTodo(id, title)
 }

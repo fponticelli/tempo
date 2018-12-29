@@ -4,7 +4,21 @@ import { View } from '../core/view'
 import { DOMAttributes } from './attributes'
 import { Acc, processAttribute, filterDynamics, domChildToTemplate } from './utils'
 import { DOMDynamicNodeView, DOMStaticNodeView } from './node_view'
-import { DOMAttribute } from './value'
+import { DOMAttribute, MoodAttribute } from './value'
+import { wrapLiteral, WrappedValue } from '../core/value'
+
+const applyMood = <State>(el: HTMLElement, attr: WrappedValue<State, (el: any) => void>) => (state: State) => {
+  const f = attr.resolve(state)
+  if (f)
+    f(el)
+}
+
+const maybeApplyMood = <State>(el: HTMLElement, attr: WrappedValue<State, (el: any) => void> | undefined) =>
+    (state: State) => {
+  if (attr) {
+    applyMood(el, attr)(state)
+  }
+}
 
 export class DOMElement<State, Action> implements DOMTemplate<State, Action> {
   constructor(
@@ -16,7 +30,19 @@ export class DOMElement<State, Action> implements DOMTemplate<State, Action> {
   render(ctx: DOMContext, state: State, dispatch: (action: Action) => void): View<State> {
     type AttributeName = keyof (typeof attributes)
     const el = ctx.doc.createElement(this.name)
-    const attributes = this.attributes
+    const attributes = {...this.attributes}
+
+    const afterRender = attributes.moodAfterRender && wrapLiteral(attributes.moodAfterRender)
+    const beforeChange = attributes.moodBeforeChange && wrapLiteral(attributes.moodBeforeChange)
+    const afterChange = attributes.moodAfterChange && wrapLiteral(attributes.moodAfterChange)
+    const beforeDestroyf = attributes.moodBeforeDestroy
+    const beforeDestroy = beforeDestroyf && (() => beforeDestroyf(el))
+
+    delete attributes.moodAfterRender
+    delete attributes.moodBeforeChange
+    delete attributes.moodAfterChange
+    delete attributes.moodBeforeDestroy
+
     const keys = Object.keys(attributes) as AttributeName[]
 
     const { statics, dynamics } = keys.reduce(
@@ -34,15 +60,32 @@ export class DOMElement<State, Action> implements DOMTemplate<State, Action> {
 
     // children
     const appendChild = (n: Node) => el.appendChild(n)
-    const viewdChildren = this.children.map(child =>
+    const views = this.children.map(child =>
       child.render({ ...ctx, parent: el, append: appendChild }, state, dispatch)
     )
-    const dynamicChildren = filterDynamics(viewdChildren).map(child => (state: State) => child.change(state))
-    const allDynamics = dynamics.concat(dynamicChildren)
+
+    maybeApplyMood(el, afterRender)(state)
+
+    const dynamicChildren = filterDynamics(views).map(child => (state: State) => child.change(state))
+
+    let allDynamics = dynamics.concat(dynamicChildren)
+
+    if (beforeChange) {
+      allDynamics.unshift(applyMood(el, beforeChange))
+    }
+    if (afterChange) {
+      allDynamics.push(applyMood(el, afterChange))
+    }
+
     if (allDynamics.length > 0) {
-      return new DOMDynamicNodeView(el, viewdChildren, (state: State) => allDynamics.forEach(f => f(state)))
+      return new DOMDynamicNodeView(
+        el,
+        views,
+        (state: State) => allDynamics.forEach(f => f(state)),
+        beforeDestroy
+      )
     } else {
-      return new DOMStaticNodeView(el, viewdChildren)
+      return new DOMStaticNodeView(el, views, beforeDestroy)
     }
   }
 }

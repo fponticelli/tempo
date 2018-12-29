@@ -29,7 +29,18 @@ export class WrappedDerivedValue<State, Value> extends WrappedValueBase<State, V
 
 export type WrappedValue<S, V> = WrappedLiteralValue<S, V> | WrappedDerivedValue<S, V>
 
+export type WrappedOrUnwrappedValue<S, V> = UnwrappedValue<S, V> | WrappedValue<S, V>
+
 export const derived = <State, Value>(map: UnwrappedDerivedValue<State, Value>): WrappedDerivedValue<State, Value> =>
   new WrappedDerivedValue(map)
 export const literal = <State, Value>(value: UnwrappedLiteralValue<Value>): WrappedValue<State, Value> =>
   new WrappedLiteralValue(value)
+
+export const wrapLiteral = <State, Value>
+    (value: UnwrappedLiteralValue<Value> | WrappedDerivedValue<State, Value>): WrappedValue<State, Value> => {
+    if ((value as any).kind === 'derived') {
+      return value as WrappedDerivedValue<State, Value>
+    } else {
+      return literal(value as UnwrappedLiteralValue<Value>)
+    }
+}

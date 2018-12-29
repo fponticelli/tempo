@@ -7,6 +7,10 @@ import { DOMChild, DOMTemplate } from './template'
 import { text } from './text'
 
 export const removeNode = (node: Node) => {
+  const el = node as HTMLElement
+  if (el && el.onblur) {
+    el.onblur = null
+  }
   if (node && node.parentElement) {
     node.parentElement.removeChild(node)
   }
@@ -38,6 +42,7 @@ export const processAttribute = <State, Action>(
   let isEvent = name.startsWith('on')
   if (isEvent) {
     // events
+    name = name.toLowerCase()
     set = setEvent(dispatch)
   } else if (name.startsWith('$')) {
     // pseudo-styles

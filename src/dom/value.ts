@@ -7,6 +7,9 @@ export type DOMEventHandler<S, E, Action> =
   | WrappedDerivedValue<S, (event: E) => (Action | undefined)>
 export type DOMProperty<S, V> = DOMAttribute<S, V>
 export type DOMTextValue<S> = DOMAttribute<S, string>
+export type MoodAttribute<S, El> =
+  | UnwrappedLiteralValue<(el: El) => void>
+  | WrappedDerivedValue<S, (el: El) => void>
 
 /* istanbul ignore next */
 export { derived } from '../core/value'

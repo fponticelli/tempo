@@ -40,6 +40,11 @@ function camelize(str: string) {
     return [words[0]].concat(words.slice(1).map(v => v.substring(0, 1).toUpperCase() + v.substring(1))).join('')
 }
 
+function ucFirst(str: string) {
+  if (str.length < 0) return str
+  return str.substring(0, 1).toUpperCase() + str.substring(1)
+}
+
 const attributeType: ValueDecoder<AttributeType> =
   objectValue({ enum: arrayValue(stringValue) }, [])
     .map(v => v.enum)
@@ -186,7 +191,7 @@ const event = objectValue(
   ['code-name', 'dom-name', 'type', 'tags']
 ).map(o => new Event(
   o.name,
-  o['code-name'] || 'on' + camelize(o.name),
+  (o['code-name'] && 'on' + ucFirst(o['code-name'])) || 'on' + ucFirst(camelize(o.name)),
   o['dom-name'] || o['code-name'] || 'on' + o.name,
   o.type || ['Event'],
   o.tags || []

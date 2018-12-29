@@ -3,6 +3,7 @@ import { DOMChild } from '../template'
 import { DOMAttribute, DOMEventHandler } from '../value'
 import { DOMElement } from '../element'
 import { CSSAttributes, CSSProperties } from '../css_properties'
+import { MoodAttributes } from '../mood_attributes'
 import { el } from '../element'
 
 export interface DatalistAttributes<State, Action> {
@@ -26,102 +27,102 @@ export interface DatalistAttributes<State, Action> {
   style?: DOMAttribute<State, CSSProperties>
   tabindex?: DOMAttribute<State, number>
   title?: DOMAttribute<State, string>
-  onabort?: DOMEventHandler<State, UIEvent | Event, Action>
-  onafterprint?: DOMEventHandler<State, Event, Action>
-  onanimationend?: DOMEventHandler<State, AnimationEvent, Action>
-  onanimationiteration?: DOMEventHandler<State, AnimationEvent, Action>
-  onanimationstart?: DOMEventHandler<State, AnimationEvent, Action>
-  onautocomplete?: DOMEventHandler<State, Event, Action>
-  onautocompleteerror?: DOMEventHandler<State, Event, Action>
-  onbeforeprint?: DOMEventHandler<State, Event, Action>
-  onbeforeunload?: DOMEventHandler<State, Event, Action>
-  onblur?: DOMEventHandler<State, FocusEvent, Action>
-  oncompositionend?: DOMEventHandler<State, CompositionEvent, Action>
-  oncompositionstart?: DOMEventHandler<State, CompositionEvent, Action>
-  oncompositionupdate?: DOMEventHandler<State, CompositionEvent, Action>
-  oncancel?: DOMEventHandler<State, Event, Action>
-  oncanplay?: DOMEventHandler<State, Event, Action>
-  oncanplaythrough?: DOMEventHandler<State, Event, Action>
-  onchange?: DOMEventHandler<State, Event, Action>
-  onclick?: DOMEventHandler<State, MouseEvent, Action>
-  onclose?: DOMEventHandler<State, Event, Action>
-  oncopy?: DOMEventHandler<State, ClipboardEvent, Action>
-  oncontextmenu?: DOMEventHandler<State, Event, Action>
-  oncuechange?: DOMEventHandler<State, Event, Action>
-  oncut?: DOMEventHandler<State, ClipboardEvent, Action>
-  ondblclick?: DOMEventHandler<State, MouseEvent, Action>
-  ondrag?: DOMEventHandler<State, DragEvent, Action>
-  ondragend?: DOMEventHandler<State, DragEvent, Action>
-  ondragenter?: DOMEventHandler<State, DragEvent, Action>
-  ondragexit?: DOMEventHandler<State, DragEvent, Action>
-  ondragleave?: DOMEventHandler<State, DragEvent, Action>
-  ondragover?: DOMEventHandler<State, DragEvent, Action>
-  ondragstart?: DOMEventHandler<State, DragEvent, Action>
-  ondrop?: DOMEventHandler<State, DragEvent, Action>
-  ondurationchange?: DOMEventHandler<State, Event, Action>
-  onemptied?: DOMEventHandler<State, Event, Action>
-  onended?: DOMEventHandler<State, Event, Action>
-  onerror?: DOMEventHandler<State, UIEvent | Event, Action>
-  onfocus?: DOMEventHandler<State, FocusEvent, Action>
-  onfocusin?: DOMEventHandler<State, FocusEvent, Action>
-  onfocusout?: DOMEventHandler<State, FocusEvent, Action>
-  onhashchange?: DOMEventHandler<State, Event, Action>
-  oninput?: DOMEventHandler<State, Event, Action>
-  oninvalid?: DOMEventHandler<State, Event, Action>
-  onkeydown?: DOMEventHandler<State, KeyboardEvent, Action>
-  onkeypress?: DOMEventHandler<State, KeyboardEvent, Action>
-  onkeyup?: DOMEventHandler<State, KeyboardEvent, Action>
-  onload?: DOMEventHandler<State, UIEvent, Action>
-  onloadeddata?: DOMEventHandler<State, Event, Action>
-  onloadedmetadata?: DOMEventHandler<State, Event, Action>
-  onloadstart?: DOMEventHandler<State, Event, Action>
-  onmessage?: DOMEventHandler<State, Event, Action>
-  onmousedown?: DOMEventHandler<State, MouseEvent, Action>
-  onmouseenter?: DOMEventHandler<State, MouseEvent, Action>
-  onmouseleave?: DOMEventHandler<State, MouseEvent, Action>
-  onmousemove?: DOMEventHandler<State, MouseEvent, Action>
-  onmouseout?: DOMEventHandler<State, MouseEvent, Action>
-  onmouseover?: DOMEventHandler<State, MouseEvent, Action>
-  onmouseup?: DOMEventHandler<State, MouseEvent, Action>
-  onmousewheel?: DOMEventHandler<State, MouseEvent, Action>
-  onoffline?: DOMEventHandler<State, Event, Action>
-  ononline?: DOMEventHandler<State, Event, Action>
-  onpaste?: DOMEventHandler<State, ClipboardEvent, Action>
-  onpause?: DOMEventHandler<State, Event, Action>
-  onplay?: DOMEventHandler<State, Event, Action>
-  onplaying?: DOMEventHandler<State, Event, Action>
-  onpopstate?: DOMEventHandler<State, Event, Action>
-  onprogress?: DOMEventHandler<State, Event, Action>
-  onratechange?: DOMEventHandler<State, Event, Action>
-  onredo?: DOMEventHandler<State, Event, Action>
-  onreset?: DOMEventHandler<State, Event, Action>
-  onresize?: DOMEventHandler<State, UIEvent, Action>
-  onscroll?: DOMEventHandler<State, UIEvent, Action>
-  onseeked?: DOMEventHandler<State, Event, Action>
-  onseeking?: DOMEventHandler<State, Event, Action>
-  onselect?: DOMEventHandler<State, UIEvent | Event, Action>
-  onshow?: DOMEventHandler<State, Event, Action>
-  onsort?: DOMEventHandler<State, Event, Action>
-  onstalled?: DOMEventHandler<State, Event, Action>
-  onstorage?: DOMEventHandler<State, Event, Action>
-  onsubmit?: DOMEventHandler<State, Event, Action>
-  onsuspend?: DOMEventHandler<State, Event, Action>
-  ontimeupdate?: DOMEventHandler<State, Event, Action>
-  ontoggle?: DOMEventHandler<State, Event, Action>
-  ontouchcancel?: DOMEventHandler<State, TouchEvent, Action>
-  ontouchend?: DOMEventHandler<State, TouchEvent, Action>
-  ontouchmove?: DOMEventHandler<State, TouchEvent, Action>
-  ontouchstart?: DOMEventHandler<State, TouchEvent, Action>
-  ontransitionend?: DOMEventHandler<State, AnimationEvent, Action>
-  onundo?: DOMEventHandler<State, Event, Action>
-  onunload?: DOMEventHandler<State, UIEvent | Event, Action>
-  onvolumechange?: DOMEventHandler<State, Event, Action>
-  onwaiting?: DOMEventHandler<State, Event, Action>
-  onwheel?: DOMEventHandler<State, WheelEvent, Action>
+  onAbort?: DOMEventHandler<State, UIEvent | Event, Action>
+  onAfterPrint?: DOMEventHandler<State, Event, Action>
+  onAnimationEnd?: DOMEventHandler<State, AnimationEvent, Action>
+  onAnimationIteration?: DOMEventHandler<State, AnimationEvent, Action>
+  onAnimationStart?: DOMEventHandler<State, AnimationEvent, Action>
+  onAutocomplete?: DOMEventHandler<State, Event, Action>
+  onAutocompleteerror?: DOMEventHandler<State, Event, Action>
+  onBeforePrint?: DOMEventHandler<State, Event, Action>
+  onBeforeUnload?: DOMEventHandler<State, Event, Action>
+  onBlur?: DOMEventHandler<State, FocusEvent, Action>
+  onCompositionEnd?: DOMEventHandler<State, CompositionEvent, Action>
+  onCompositionStart?: DOMEventHandler<State, CompositionEvent, Action>
+  onCompositionUpdate?: DOMEventHandler<State, CompositionEvent, Action>
+  onCancel?: DOMEventHandler<State, Event, Action>
+  onCanPlay?: DOMEventHandler<State, Event, Action>
+  onCanPlayThrough?: DOMEventHandler<State, Event, Action>
+  onChange?: DOMEventHandler<State, Event, Action>
+  onClick?: DOMEventHandler<State, MouseEvent, Action>
+  onClose?: DOMEventHandler<State, Event, Action>
+  onCopy?: DOMEventHandler<State, ClipboardEvent, Action>
+  onContextMenu?: DOMEventHandler<State, Event, Action>
+  onCueChange?: DOMEventHandler<State, Event, Action>
+  onCut?: DOMEventHandler<State, ClipboardEvent, Action>
+  onDblClick?: DOMEventHandler<State, MouseEvent, Action>
+  onDrag?: DOMEventHandler<State, DragEvent, Action>
+  onDragEnd?: DOMEventHandler<State, DragEvent, Action>
+  onDragEnter?: DOMEventHandler<State, DragEvent, Action>
+  onDragExit?: DOMEventHandler<State, DragEvent, Action>
+  onDragLeave?: DOMEventHandler<State, DragEvent, Action>
+  onDragOver?: DOMEventHandler<State, DragEvent, Action>
+  onDragStart?: DOMEventHandler<State, DragEvent, Action>
+  onDrop?: DOMEventHandler<State, DragEvent, Action>
+  onDurationChange?: DOMEventHandler<State, Event, Action>
+  onEmptied?: DOMEventHandler<State, Event, Action>
+  onEnded?: DOMEventHandler<State, Event, Action>
+  onError?: DOMEventHandler<State, UIEvent | Event, Action>
+  onFocus?: DOMEventHandler<State, FocusEvent, Action>
+  onFocusIn?: DOMEventHandler<State, FocusEvent, Action>
+  onFocusOut?: DOMEventHandler<State, FocusEvent, Action>
+  onHashChange?: DOMEventHandler<State, Event, Action>
+  onInput?: DOMEventHandler<State, Event, Action>
+  onInvalid?: DOMEventHandler<State, Event, Action>
+  onKeyDown?: DOMEventHandler<State, KeyboardEvent, Action>
+  onKeyPress?: DOMEventHandler<State, KeyboardEvent, Action>
+  onKeyUp?: DOMEventHandler<State, KeyboardEvent, Action>
+  onLoad?: DOMEventHandler<State, UIEvent, Action>
+  onLoadeddata?: DOMEventHandler<State, Event, Action>
+  onLoadedMetadata?: DOMEventHandler<State, Event, Action>
+  onLoadStart?: DOMEventHandler<State, Event, Action>
+  onMessage?: DOMEventHandler<State, Event, Action>
+  onMouseDown?: DOMEventHandler<State, MouseEvent, Action>
+  onMouseEnter?: DOMEventHandler<State, MouseEvent, Action>
+  onMouseLeave?: DOMEventHandler<State, MouseEvent, Action>
+  onMouseMove?: DOMEventHandler<State, MouseEvent, Action>
+  onMouseOut?: DOMEventHandler<State, MouseEvent, Action>
+  onMouseOver?: DOMEventHandler<State, MouseEvent, Action>
+  onMouseUp?: DOMEventHandler<State, MouseEvent, Action>
+  onMouseWheel?: DOMEventHandler<State, MouseEvent, Action>
+  onOffline?: DOMEventHandler<State, Event, Action>
+  onOnline?: DOMEventHandler<State, Event, Action>
+  onPaste?: DOMEventHandler<State, ClipboardEvent, Action>
+  onPause?: DOMEventHandler<State, Event, Action>
+  onPlay?: DOMEventHandler<State, Event, Action>
+  onPlaying?: DOMEventHandler<State, Event, Action>
+  onPopstate?: DOMEventHandler<State, Event, Action>
+  onProgress?: DOMEventHandler<State, Event, Action>
+  onRateChange?: DOMEventHandler<State, Event, Action>
+  onRedo?: DOMEventHandler<State, Event, Action>
+  onReset?: DOMEventHandler<State, Event, Action>
+  onResize?: DOMEventHandler<State, UIEvent, Action>
+  onScroll?: DOMEventHandler<State, UIEvent, Action>
+  onSeeked?: DOMEventHandler<State, Event, Action>
+  onSeeking?: DOMEventHandler<State, Event, Action>
+  onSelect?: DOMEventHandler<State, UIEvent | Event, Action>
+  onShow?: DOMEventHandler<State, Event, Action>
+  onSort?: DOMEventHandler<State, Event, Action>
+  onStalled?: DOMEventHandler<State, Event, Action>
+  onStorage?: DOMEventHandler<State, Event, Action>
+  onSubmit?: DOMEventHandler<State, Event, Action>
+  onSuspend?: DOMEventHandler<State, Event, Action>
+  onTimeUpdate?: DOMEventHandler<State, Event, Action>
+  onToggle?: DOMEventHandler<State, Event, Action>
+  onTouchCancel?: DOMEventHandler<State, TouchEvent, Action>
+  onTouchEnd?: DOMEventHandler<State, TouchEvent, Action>
+  onTouchMove?: DOMEventHandler<State, TouchEvent, Action>
+  onTouchStart?: DOMEventHandler<State, TouchEvent, Action>
+  onTransitionEnd?: DOMEventHandler<State, AnimationEvent, Action>
+  onUndo?: DOMEventHandler<State, Event, Action>
+  onUnload?: DOMEventHandler<State, UIEvent | Event, Action>
+  onVolumeChange?: DOMEventHandler<State, Event, Action>
+  onWaiting?: DOMEventHandler<State, Event, Action>
+  onWheel?: DOMEventHandler<State, WheelEvent, Action>
 }
 
 export function datalist<State, Action>(
-  attributes: DatalistAttributes<State, Action> & CSSAttributes<State>,
+  attributes: DatalistAttributes<State, Action> & CSSAttributes<State> & MoodAttributes<State, HTMLDataListElement>,
   ...children: DOMChild<State, Action>[]
 ): DOMElement<State, Action> {
   return el<State, Action>('datalist', attributes, ...children)

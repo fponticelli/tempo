@@ -97,7 +97,7 @@ describe('adapter', () => {
           }
         },
         div(
-          { onclick: (_: MouseEvent) => 1 },
+          { onClick: (_: MouseEvent) => 1 },
           'inner: ',
           s => s.inner,
           ', outer: ',
