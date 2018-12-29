@@ -5,7 +5,7 @@ import { domChildToTemplate, filterDynamics, removeNode } from './utils'
 
 export interface WhenOptions<State> {
   condition: (state: State) => boolean
-  id?: string
+  refId?: string
 }
 
 export class DOMWhenView<State, Action> implements DynamicView<State> {
@@ -58,7 +58,7 @@ export class DOMWhen<State, Action> implements DOMTemplate<State, Action> {
     state: State,
     dispatch: (action: Action) => void
   ): DOMWhenView<State, Action> {
-    const ref = ctx.doc.createComment(this.opts.id || 'md:when')
+    const ref = ctx.doc.createComment(this.opts.refId || 'md:when')
     ctx.append(ref)
     const parent = ref.parentElement!
     const view = new DOMWhenView(
@@ -87,7 +87,7 @@ export const unless = <State, Action>(
 ) => new DOMWhen<State, Action>(
   {
     condition: (v: State) => !opts.condition(v),
-    id: opts.id || 'md:unless'
+    refId: opts.refId || 'md:unless'
   },
   children
 )

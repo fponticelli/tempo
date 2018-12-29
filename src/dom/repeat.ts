@@ -44,12 +44,12 @@ export class DOMRepeatView<Element, State extends Element[], Action> implements 
 
 export class DOMRepeat<Element, State extends Element[], Action> implements DOMTemplate<State, Action> {
   constructor(
-    readonly opts: { id?: string },
+    readonly opts: { refId?: string },
     readonly children: DOMTemplate<Element, Action>[]
   ) {}
 
   render(ctx: DOMContext, state: State, dispatch: (action: Action) => void): DynamicView<State> {
-    const ref = ctx.doc.createComment(this.opts.id || 'md:repeat')
+    const ref = ctx.doc.createComment(this.opts.refId || 'md:repeat')
     ctx.append(ref)
     const appendChild = (node: Node) => {
       if (ref.parentElement) ref.parentElement.insertBefore(node, ref)
@@ -66,7 +66,7 @@ export class DOMRepeat<Element, State extends Element[], Action> implements DOMT
 }
 
 export const repeat = <State extends any[], Action>(
-  opts: { id?: string },
+  opts: { refId?: string },
   ...children: DOMChild<State[number], Action>[]
 ) =>
   new DOMRepeat<State[number], State, Action>(opts, children.map(domChildToTemplate))

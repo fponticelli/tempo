@@ -5,7 +5,7 @@ describe('when', () => {
   it('always true', () => {
     const ctx = createContext()
     const template = when(
-      { condition: _ => true, id: 'A' },
+      { condition: _ => true, refId: 'A' },
       div({}, 'a')
     )
     const view = template.render(ctx, 1, () => {})

@@ -21,7 +21,7 @@ describe('repeat', () => {
 
   it('repeat starting full', () => {
     const ctx = createContext()
-    const template = repeat({ id: 'A' }, div({}, String))
+    const template = repeat({ refId: 'A' }, div({}, String))
     const view = template.render(ctx, [1, 2, 3], () => {})
     expect(ctx.doc.body.innerHTML).toEqual('<div>1</div><div>2</div><div>3</div><!--A-->')
     view.change([4, 5])
