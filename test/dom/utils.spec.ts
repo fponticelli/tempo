@@ -1,5 +1,5 @@
 import { removeNode, insertBefore } from '../../src/dom/utils'
-import { createInput, createDiv, createContext } from './common';
+import { createContext } from './common'
 
 describe('utils', () => {
   it('removeNode odd scenarios', () => {

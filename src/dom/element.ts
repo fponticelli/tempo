@@ -4,7 +4,7 @@ import { View } from '../core/view'
 import { DOMAttributes } from './attributes'
 import { Acc, processAttribute, filterDynamics, domChildToTemplate } from './utils'
 import { DOMDynamicNodeView, DOMStaticNodeView } from './node_view'
-import { DOMAttribute, MoodAttribute } from './value'
+import { DOMAttribute } from './value'
 import { wrapLiteral, WrappedValue } from '../core/value'
 
 const applyMood = <State>(el: HTMLElement, attr: WrappedValue<State, (el: any) => void>) => (state: State) => {

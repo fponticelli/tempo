@@ -1,5 +1,5 @@
 import { createContext } from './common'
-import { Mood, component, span, portalWithSelector, headPortal, style, bodyPortal, elements, div } from '../../src/dom'
+import { elements, div } from '../../src/dom'
 
 describe('repeat', () => {
   it('repeat starting empty', () => {
