@@ -10,7 +10,7 @@ export class MapStateTemplate<OuterState, InnerState, Action> implements DOMTemp
     readonly children: DOMTemplate<InnerState, Action>[]
   ) {}
   render(
-    ctx: DOMContext,
+    ctx: DOMContext<Action>,
     state: OuterState,
     dispatch: (action: Action) => void
   ): View<OuterState> {
@@ -45,7 +45,7 @@ export class MapActionTemplate<State, OuterAction, InnerAction> implements DOMTe
   ) {}
 
   render(
-    ctx: DOMContext,
+    ctx: DOMContext<OuterAction>,
     state: State,
     dispatch: (action: OuterAction) => void
   ): View<State> {
@@ -55,7 +55,7 @@ export class MapActionTemplate<State, OuterAction, InnerAction> implements DOMTe
       if (action != null)
         dispatch(action)
     }
-    const views = children.map(c => c.render(ctx, state, innerDispatch))
+    const views = children.map(c => c.render(ctx.conditionalMapAction(this.map), state, innerDispatch))
     return fragmentView(views)
   }
 }

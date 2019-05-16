@@ -5,7 +5,7 @@ import { DOMStaticNodeView, DOMDynamicNodeView } from './node_view'
 import { UnwrappedLiteralValue, UnwrappedDerivedValue } from '../core/value'
 import { DOMTextValue } from './value'
 
-const renderLiteral = <State>(ctx: DOMContext, value: UnwrappedLiteralValue<string>): View<State> => {
+const renderLiteral = <State>(ctx: DOMContext<never>, value: UnwrappedLiteralValue<string>): View<State> => {
   const node = ctx.doc.createTextNode(value || '')
   const view = new DOMStaticNodeView(node, [])
   ctx.append(node)
@@ -13,7 +13,7 @@ const renderLiteral = <State>(ctx: DOMContext, value: UnwrappedLiteralValue<stri
 }
 
 const renderFunction = <State>(
-  ctx: DOMContext,
+  ctx: DOMContext<never>,
   state: State,
   map: UnwrappedDerivedValue<State, string>
 ): View<State> => {
@@ -31,7 +31,7 @@ const renderFunction = <State>(
 export class DOMText<State, Action> implements DOMTemplate<State, Action> {
   constructor(readonly content: DOMTextValue<State>) {}
 
-  render(ctx: DOMContext, state: State, _: (action: Action) => void): View<State> {
+  render(ctx: DOMContext<Action>, state: State, _: (action: Action) => void): View<State> {
     if (typeof this.content === 'function') {
       return renderFunction(ctx, state, this.content)
     } else {

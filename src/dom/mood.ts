@@ -1,4 +1,5 @@
 import { DOMComponent } from './component'
+import { DOMContext } from './context'
 
 export interface MoodView<State, Action> {
   destroy(): void
@@ -20,7 +21,12 @@ export const Mood = {
     const append = (node: Node) => el.appendChild(node)
 
     const view = component.render(
-      { doc, parent: el, append },
+      new DOMContext(
+        doc,
+        append,
+        el,
+        dispatch
+      ),
       component.state,
       dispatch
     )

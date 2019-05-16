@@ -27,7 +27,7 @@ export class DOMComponent<State, Action> implements DOMTemplate<State, Action> {
     readonly children: DOMTemplate<State, Action>[]
   ) {}
 
-  render(ctx: DOMContext, state: State, dispatch: (action: Action) => void) {
+  render(ctx: DOMContext<Action>, state: State, dispatch: (action: Action) => void) {
     const { update } = this
     function innerDispatch(action: Action) {
       view.state = update(view.state, action, innerDispatch)

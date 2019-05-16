@@ -13,7 +13,7 @@ export class DOMNSElement<State, Action> implements DOMTemplate<State, Action> {
     readonly children: DOMTemplate<State, Action>[]
   ) {}
 
-  render(ctx: DOMContext, state: State, dispatch: (action: Action) => void) {
+  render(ctx: DOMContext<Action>, state: State, dispatch: (action: Action) => void) {
     type AttributeName = keyof (typeof attributes)
     const attributes = this.attributes
     const el = ctx.doc.createElementNS(this.ns, this.name) as HTMLElement
@@ -34,7 +34,7 @@ export class DOMNSElement<State, Action> implements DOMTemplate<State, Action> {
     // children
     const appendChild = (n: Node) => el.appendChild(n)
     const viewChildren = this.children.map(child =>
-      child.render({ ...ctx, parent: el, append: appendChild }, state, dispatch)
+      child.render(ctx.withAppend(appendChild).withParent(el), state, dispatch)
     )
     const dynamicChildren = filterDynamics(viewChildren).map(child => (state: State) => child.change(state))
     const allDynamics = dynamics.concat(dynamicChildren)

@@ -7,7 +7,7 @@ export class DOMElementsView<Element, State extends Element[], Action> implement
   readonly kind = 'dynamic'
   constructor(
     readonly ref: Node,
-    readonly ctx: DOMContext,
+    readonly ctx: DOMContext<Action>,
     readonly dispatch: (action: Action) => void,
     readonly children: DOMTemplate<Element, Action>[]
   ) {}
@@ -48,12 +48,12 @@ export class DOMElementsTemplate<Element, State extends Element[], Action> imple
     readonly children: DOMTemplate<Element, Action>[]
   ) {}
 
-  render(ctx: DOMContext, state: State, dispatch: (action: Action) => void): DynamicView<State> {
+  render(ctx: DOMContext<Action>, state: State, dispatch: (action: Action) => void): DynamicView<State> {
     const ref = ctx.doc.createComment(this.opts.refId || 'md:repeat')
     ctx.append(ref)
     const view = new DOMElementsView<Element, State, Action>(
       ref,
-      { ...ctx, append: insertBefore(ref) },
+      ctx.withAppend(insertBefore(ref)),
       dispatch,
       this.children
     )

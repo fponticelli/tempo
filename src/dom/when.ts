@@ -12,7 +12,7 @@ export class DOMWhenView<State, Action> implements DynamicView<State> {
   readonly kind = 'dynamic'
   constructor(
     readonly condition: (state: State) => boolean,
-    readonly ctx: DOMContext,
+    readonly ctx: DOMContext<Action>,
     readonly dispatch: (action: Action) => void,
     readonly removeNode: () => void,
     readonly children: DOMTemplate<State, Action>[]
@@ -54,7 +54,7 @@ export class DOMWhen<State, Action> implements DOMTemplate<State, Action> {
     readonly children: DOMChild<State, Action>[]
     ) {}
   render(
-    ctx: DOMContext,
+    ctx: DOMContext<Action>,
     state: State,
     dispatch: (action: Action) => void
   ): DOMWhenView<State, Action> {
@@ -63,10 +63,7 @@ export class DOMWhen<State, Action> implements DOMTemplate<State, Action> {
     const parent = ref.parentElement!
     const view = new DOMWhenView(
       this.opts.condition,
-      {
-        ...ctx,
-        append: (node: Node) => parent.insertBefore(node, ref)
-      },
+      ctx.withAppend((node: Node) => parent.insertBefore(node, ref)),
       dispatch,
       () => removeNode(ref),
       this.children.map(domChildToTemplate)

@@ -1,7 +1,7 @@
 import { createContext } from './common'
 import { el } from '../../src/dom/element'
 import { DynamicView } from '../../src/core/view'
-import { derived } from '../../src/dom/value'
+import { handle, lifecycle } from '../../src/dom/value'
 import { div, span, a } from '../../src/dom/els'
 
 describe('dom_element', () => {
@@ -97,10 +97,10 @@ describe('dom_element', () => {
     expect(ctx.doc.body.innerHTML).toEqual('')
   })
 
-  it("derived event that doesn't dispatches", () => {
+  it("handler event that doesn't dispatches", () => {
     const ctx = createContext()
     let count = 0
-    const onclick = derived(s => undefined)
+    const onclick = handle(s => undefined)
     const node = el<number, number>('div', { onclick } as any).render(ctx, 1, (c: number) => {
       count = c
     })
@@ -113,10 +113,10 @@ describe('dom_element', () => {
     expect(ctx.doc.body.innerHTML).toEqual('')
   })
 
-  it('derived event that dispatch', () => {
+  it('handler event that dispatch', () => {
     const ctx = createContext()
     let count = 0
-    const onclick = derived((s: number) => (e: Event) => s + 1)
+    const onclick = handle((s: number) => (e: Event) => s + 1)
     const node = el<number, number>('div', { onclick } as any).render(ctx, 1, (c: number) => {
       count = c
     })
@@ -178,9 +178,12 @@ describe('dom_element', () => {
     const ctx = createContext()
     const sequence = [] as string[]
     const template = div({
-      moodAfterRender: derived((state: string) => (el: HTMLDivElement) => sequence.push(`AR:${state}:${el.tagName}`)),
-      moodBeforeChange: derived((state: string) => (el: HTMLDivElement) => sequence.push(`BC:${state}:${el.tagName}`)),
-      moodAfterChange: derived((state: string) => (el: HTMLDivElement) => sequence.push(`AC:${state}:${el.tagName}`)),
+      moodAfterRender:
+        lifecycle((state: string) => (el: HTMLDivElement) => sequence.push(`AR:${state}:${el.tagName}`)),
+      moodBeforeChange:
+        lifecycle((state: string) => (el: HTMLDivElement) => sequence.push(`BC:${state}:${el.tagName}`)),
+      moodAfterChange:
+        lifecycle((state: string) => (el: HTMLDivElement) => sequence.push(`AC:${state}:${el.tagName}`)),
       moodBeforeDestroy: () => sequence.push('BD')
     })
     const view = template.render(ctx, 'A', () => {}) as DynamicView<string>

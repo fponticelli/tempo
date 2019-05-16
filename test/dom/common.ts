@@ -6,13 +6,16 @@ export const getWindow = (): Window => {
   return dom.window
 }
 
-export const createContext = (): DOMContext => {
+export const createContext = <Action>(): DOMContext<Action> => {
   const { document } = getWindow()
-  return {
-    append: (node: Node) => document.body.appendChild(node),
-    doc: document,
-    parent: document.body
-  }
+  return new DOMContext(
+    document,
+    (node: Node) => document.body.appendChild(node),
+    document.body,
+    (action: Action) => {
+      console.log(action)
+    }
+  )
 }
 
 export const createDiv = () => {

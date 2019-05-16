@@ -10,11 +10,14 @@ export class DOMPortal<State, Action> implements DOMTemplate<State, Action> {
     readonly children: DOMTemplate<State, Action>[]
   ) {}
 
-  render(ctx: DOMContext, state: State, dispatch: (action: Action) => void) {
-    const append = (node: Node) => this.append(ctx.doc, node)
-    const viewChildren = this.children.map(child =>
-      child.render({ ...ctx, append, parent: this.getParent(ctx.doc) }, state, dispatch)
-    )
+  render(ctx: DOMContext<Action>, state: State, dispatch: (action: Action) => void) {
+    const doc = ctx.doc
+    const append = (node: Node) => this.append(doc, node)
+    const parent = this.getParent(doc)
+    const viewChildren = this.children.map(child => {
+      const newCtx = ctx.withAppend(append).withParent(parent)
+      return child.render(newCtx, state, dispatch)
+    })
     return fragmentView(viewChildren)
   }
 }

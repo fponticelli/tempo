@@ -28,7 +28,7 @@ export class DOMElement<State, Action> implements DOMTemplate<State, Action> {
     readonly children: DOMTemplate<State, Action>[]
   ) {}
 
-  render(ctx: DOMContext, state: State, dispatch: (action: Action) => void): View<State> {
+  render(ctx: DOMContext<Action>, state: State, dispatch: (action: Action) => void): View<State> {
     type AttributeName = keyof (typeof attributes)
     const el = ctx.doc.createElement(this.name)
     const attributes = {...this.attributes}
@@ -62,7 +62,7 @@ export class DOMElement<State, Action> implements DOMTemplate<State, Action> {
     // children
     const appendChild = (n: Node) => el.appendChild(n)
     const views = this.children.map(child =>
-      child.render({ ...ctx, parent: el, append: appendChild }, state, dispatch)
+      child.render(ctx.withAppend(appendChild).withParent(el), state, dispatch)
     )
 
     maybeApplyMood(el, afterRender)(state)
