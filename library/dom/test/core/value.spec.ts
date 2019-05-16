@@ -1,4 +1,4 @@
-import { derived, literal } from '../../src/core/value'
+import { derived, literal } from '../../../core/src/value'
 
 describe('value', () => {
   it('resolve', () => {
