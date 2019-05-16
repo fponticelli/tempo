@@ -4,7 +4,7 @@ import { adapter, component } from '../../src/dom'
 
 describe('adapter', () => {
   it('noOptions', () => {
-    type InnerState = { inner: string, outer: string }
+    type InnerState = { inner: string; outer: string }
 
     const ctx = createContext(() => {})
     const template = adapter(
@@ -32,7 +32,7 @@ describe('adapter', () => {
 
   it('mergeStates', () => {
     type OuterState = { outer: string }
-    type InnerState = { inner: string, outer: string }
+    type InnerState = { inner: string; outer: string }
 
     const ctx = createContext(() => {})
     const template = adapter(
@@ -62,7 +62,7 @@ describe('adapter', () => {
 
   it('propagate', () => {
     type OuterState = { outer: string }
-    type InnerState = { inner: string, outer: string }
+    type InnerState = { inner: string; outer: string }
     let counter = 0
     const ctx = createContext((v: number) => {
       counter = v
@@ -99,13 +99,7 @@ describe('adapter', () => {
             }
           }
         },
-        div(
-          { onClick: (_: MouseEvent) => 1 },
-          'inner: ',
-          s => s.inner,
-          ', outer: ',
-          s => s.outer
-        )
+        div({ onClick: (_: MouseEvent) => 1 }, 'inner: ', s => s.inner, ', outer: ', s => s.outer)
       )
     )
 

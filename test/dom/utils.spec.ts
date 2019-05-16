@@ -7,7 +7,7 @@ describe('utils', () => {
     expect(removeNode({} as any)).toBeUndefined()
   })
 
-  it('element blur doesn\'t prevent node removal', () => {
+  it("element blur doesn't prevent node removal", () => {
     const ctx = createContext()
     const input = ctx.doc.createElement('input')
     let triggered = 0

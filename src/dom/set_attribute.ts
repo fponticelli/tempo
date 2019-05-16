@@ -13,7 +13,7 @@ export const setOneStyle = (el: HTMLElement, name: string, value: any) => {
 }
 
 export const setEvent = <Action>(dispatch: (action: Action) => void) => {
-  return (el: Element, name: string, value: (e: Event) => (Action | undefined)) => {
+  return (el: Element, name: string, value: (e: Event) => Action | undefined) => {
     const anyEl = el as any
     if (value == null) {
       anyEl[name] = null
@@ -39,7 +39,7 @@ export const setAttribute = (el: Element, name: string, value: string) => {
 
 export const setProperty = (el: Element, name: string, value: any | undefined) => {
   if (value == null) {
-    (el as any)[name] = null
+    ;(el as any)[name] = null
   } else {
     if ((el as any)[name] !== value) (el as any)[name] = value
   }
@@ -56,13 +56,13 @@ export const setStyleAttribute = (el: Element, name: string, value: CSSPropertie
         return `${cssName}: ${(value as any)[k]!};`
       })
       .join(' ')
-    setAttribute(el, name, s.length && s || null as any)
+    setAttribute(el, name, (s.length && s) || (null as any))
   }
 }
 
 export const setBoolProperty = (el: Element, name: string, value: boolean | undefined) => {
   if (value == null) {
-    (el as any)[name] = null
+    ;(el as any)[name] = null
   } else {
     const bool = Boolean(value)
     if ((el as any)[name] !== bool) (el as any)[name] = bool
@@ -70,17 +70,17 @@ export const setBoolProperty = (el: Element, name: string, value: boolean | unde
 }
 
 export const setEnumBoolAttribute = (el: Element, name: string, value: boolean | undefined) => {
-  setAttribute(el, name, value === true ? 'true' : (value === false ? 'false' : null as any))
+  setAttribute(el, name, value === true ? 'true' : value === false ? 'false' : (null as any))
 }
 
 export const setBoolAttribute = (el: Element, name: string, value: boolean | undefined) => {
-  setAttribute(el, name, value === true ? '' : null as any)
+  setAttribute(el, name, value === true ? '' : (null as any))
 }
 
 export const setCommaSeparated = (el: Element, name: string, values: string[] | undefined) => {
-  setAttribute(el, name, values && values.length > 0 && values.join(', ') || null as any)
+  setAttribute(el, name, (values && values.length > 0 && values.join(', ')) || (null as any))
 }
 
 export const setSpaceSeparated = (el: Element, name: string, values: string[] | undefined) => {
-  setAttribute(el, name, values && values.length > 0 && values.join(' ') || null as any)
+  setAttribute(el, name, (values && values.length > 0 && values.join(' ')) || (null as any))
 }

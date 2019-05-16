@@ -42,19 +42,12 @@ export class DOMElementsView<Element, State extends Element[], Action> implement
 }
 
 export class DOMElementsTemplate<Element, State extends Element[], Action> implements DOMTemplate<State, Action> {
-  constructor(
-    readonly opts: { refId?: string },
-    readonly children: DOMTemplate<Element, Action>[]
-  ) {}
+  constructor(readonly opts: { refId?: string }, readonly children: DOMTemplate<Element, Action>[]) {}
 
   render(ctx: DOMContext<Action>, state: State): DynamicView<State> {
     const ref = ctx.doc.createComment(this.opts.refId || 'md:repeat')
     ctx.append(ref)
-    const view = new DOMElementsView<Element, State, Action>(
-      ref,
-      ctx.withAppend(insertBefore(ref)),
-      this.children
-    )
+    const view = new DOMElementsView<Element, State, Action>(ref, ctx.withAppend(insertBefore(ref)), this.children)
     view.change(state)
     return view
   }
@@ -63,5 +56,4 @@ export class DOMElementsTemplate<Element, State extends Element[], Action> imple
 export const elements = <State extends any[], Action>(
   opts: { refId?: string },
   ...children: DOMChild<State[number], Action>[]
-) =>
-  new DOMElementsTemplate<State[number], State, Action>(opts, children.map(domChildToTemplate))
+) => new DOMElementsTemplate<State[number], State, Action>(opts, children.map(domChildToTemplate))

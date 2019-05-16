@@ -5,14 +5,8 @@ import { domChildToTemplate, filterDynamics } from './utils'
 import { DOMStaticFragmentView, DOMDynamicFragmentView, fragmentView } from './fragment'
 
 export class MapStateTemplate<OuterState, InnerState, Action> implements DOMTemplate<OuterState, Action> {
-  constructor(
-    readonly map: (value: OuterState) => InnerState,
-    readonly children: DOMTemplate<InnerState, Action>[]
-  ) {}
-  render(
-    ctx: DOMContext<Action>,
-    state: OuterState
-  ): View<OuterState> {
+  constructor(readonly map: (value: OuterState) => InnerState, readonly children: DOMTemplate<InnerState, Action>[]) {}
+  render(ctx: DOMContext<Action>, state: OuterState): View<OuterState> {
     const { children, map } = this
     const innerState = map(state)
     const views = children.map(c => c.render(ctx, innerState))
@@ -21,13 +15,10 @@ export class MapStateTemplate<OuterState, InnerState, Action> implements DOMTemp
     if (dynamics.length === 0) {
       return new DOMStaticFragmentView(views)
     } else {
-      return new DOMDynamicFragmentView<OuterState>(
-        views,
-        (state: OuterState) => {
-          const innerState = map(state)
-          dynamics.forEach(d => d.change(innerState))
-        }
-      )
+      return new DOMDynamicFragmentView<OuterState>(views, (state: OuterState) => {
+        const innerState = map(state)
+        dynamics.forEach(d => d.change(innerState))
+      })
     }
   }
 }
@@ -39,14 +30,11 @@ export const mapState = <OuterState, InnerState, Action>(
 
 export class MapActionTemplate<State, OuterAction, InnerAction> implements DOMTemplate<State, OuterAction> {
   constructor(
-    readonly map: (value: InnerAction) => (OuterAction | undefined),
+    readonly map: (value: InnerAction) => OuterAction | undefined,
     readonly children: DOMTemplate<State, InnerAction>[]
   ) {}
 
-  render(
-    ctx: DOMContext<OuterAction>,
-    state: State
-  ): View<State> {
+  render(ctx: DOMContext<OuterAction>, state: State): View<State> {
     const { children, map } = this
     const views = children.map(c => c.render(ctx.conditionalMapAction(this.map), state))
     return fragmentView(views)
@@ -54,6 +42,6 @@ export class MapActionTemplate<State, OuterAction, InnerAction> implements DOMTe
 }
 
 export const mapAction = <State, OuterAction, InnerAction>(
-  opts: { map: (value: InnerAction) => (OuterAction | undefined) },
+  opts: { map: (value: InnerAction) => OuterAction | undefined },
   ...children: DOMChild<State, InnerAction>[]
 ) => new MapActionTemplate<State, OuterAction, InnerAction>(opts.map, children.map(domChildToTemplate))

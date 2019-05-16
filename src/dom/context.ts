@@ -16,43 +16,24 @@ export class DOMContext<Action> {
   ) {}
 
   mapAction<OtherAction>(f: (action: OtherAction) => Action) {
-    return new DOMContext<OtherAction>(
-      this.doc,
-      this.append,
-      this.parent,
-      (action: OtherAction) => this.dispatch(f(action))
+    return new DOMContext<OtherAction>(this.doc, this.append, this.parent, (action: OtherAction) =>
+      this.dispatch(f(action))
     )
   }
 
   conditionalMapAction<OtherAction>(f: (action: OtherAction) => Action | undefined) {
-    return new DOMContext<OtherAction>(
-      this.doc,
-      this.append,
-      this.parent,
-      (action: OtherAction) => {
-        let newAction = f(action)
-        if (newAction !== undefined)
-          this.dispatch(newAction)
-      }
-    )
+    return new DOMContext<OtherAction>(this.doc, this.append, this.parent, (action: OtherAction) => {
+      let newAction = f(action)
+      if (newAction !== undefined) this.dispatch(newAction)
+    })
   }
 
   withAppend(append: (node: Node) => void) {
-    return new DOMContext<Action>(
-      this.doc,
-      append,
-      this.parent,
-      this.dispatch
-    )
+    return new DOMContext<Action>(this.doc, append, this.parent, this.dispatch)
   }
 
   withParent(parent: Element) {
-    return new DOMContext<Action>(
-      this.doc,
-      this.append,
-      parent,
-      this.dispatch
-    )
+    return new DOMContext<Action>(this.doc, this.append, parent, this.dispatch)
   }
 
   // withDoc(doc: Document) {
@@ -65,11 +46,6 @@ export class DOMContext<Action> {
   // }
 
   withDispatch<OtherAction>(dispatch: (action: OtherAction) => void) {
-    return new DOMContext<OtherAction>(
-      this.doc,
-      this.append,
-      this.parent,
-      dispatch
-    )
+    return new DOMContext<OtherAction>(this.doc, this.append, this.parent, dispatch)
   }
 }

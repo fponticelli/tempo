@@ -176,12 +176,11 @@ describe('dom_element', () => {
     const ctx = createContext()
     const sequence = [] as string[]
     const template = div({
-      moodAfterRender:
-        lifecycle((state: string) => (el: HTMLDivElement) => sequence.push(`AR:${state}:${el.tagName}`)),
-      moodBeforeChange:
-        lifecycle((state: string) => (el: HTMLDivElement) => sequence.push(`BC:${state}:${el.tagName}`)),
-      moodAfterChange:
-        lifecycle((state: string) => (el: HTMLDivElement) => sequence.push(`AC:${state}:${el.tagName}`)),
+      moodAfterRender: lifecycle((state: string) => (el: HTMLDivElement) => sequence.push(`AR:${state}:${el.tagName}`)),
+      moodBeforeChange: lifecycle((state: string) => (el: HTMLDivElement) =>
+        sequence.push(`BC:${state}:${el.tagName}`)
+      ),
+      moodAfterChange: lifecycle((state: string) => (el: HTMLDivElement) => sequence.push(`AC:${state}:${el.tagName}`)),
       moodBeforeDestroy: () => sequence.push('BD')
     })
     const view = template.render(ctx, 'A') as DynamicView<string>

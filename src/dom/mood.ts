@@ -20,15 +20,7 @@ export const Mood = {
     const dispatch = observe == null ? (_: Action) => {} : (action: Action) => observe(view.state, action)
     const append = (node: Node) => el.appendChild(node)
 
-    const view = component.render(
-      new DOMContext(
-        doc,
-        append,
-        el,
-        dispatch
-      ),
-      component.state
-    )
+    const view = component.render(new DOMContext(doc, append, el, dispatch), component.state)
     return view
   }
 }

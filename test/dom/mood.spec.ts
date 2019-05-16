@@ -37,13 +37,13 @@ describe('Mood', () => {
     )
 
     const view = Mood.render({
-        el: ctx.doc.body,
-        component: comp,
-        document: ctx.doc,
-        observe: (s: string, a: string) => {
-          result[0] = s
-          result[1] = a
-        }
+      el: ctx.doc.body,
+      component: comp,
+      document: ctx.doc,
+      observe: (s: string, a: string) => {
+        result[0] = s
+        result[1] = a
+      }
     })
     expect(result[0]).toEqual('')
     expect(result[1]).toEqual('')

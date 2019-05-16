@@ -49,14 +49,8 @@ export class DOMWhenView<State, Action> implements DynamicView<State> {
 }
 
 export class DOMWhen<State, Action> implements DOMTemplate<State, Action> {
-  constructor(
-    readonly opts: WhenOptions<State>,
-    readonly children: DOMChild<State, Action>[]
-    ) {}
-  render(
-    ctx: DOMContext<Action>,
-    state: State
-  ): DOMWhenView<State, Action> {
+  constructor(readonly opts: WhenOptions<State>, readonly children: DOMChild<State, Action>[]) {}
+  render(ctx: DOMContext<Action>, state: State): DOMWhenView<State, Action> {
     const ref = ctx.doc.createComment(this.opts.refId || 'md:when')
     ctx.append(ref)
     const parent = ref.parentElement!
@@ -72,18 +66,14 @@ export class DOMWhen<State, Action> implements DOMTemplate<State, Action> {
   }
 }
 
-export const when = <State, Action>(
-  opts: WhenOptions<State>,
-  ...children: DOMChild<State, Action>[]
-) => new DOMWhen<State, Action>(opts, children)
+export const when = <State, Action>(opts: WhenOptions<State>, ...children: DOMChild<State, Action>[]) =>
+  new DOMWhen<State, Action>(opts, children)
 
-export const unless = <State, Action>(
-  opts: WhenOptions<State>,
-  ...children: DOMChild<State, Action>[]
-) => new DOMWhen<State, Action>(
-  {
-    condition: (v: State) => !opts.condition(v),
-    refId: opts.refId || 'md:unless'
-  },
-  children
-)
+export const unless = <State, Action>(opts: WhenOptions<State>, ...children: DOMChild<State, Action>[]) =>
+  new DOMWhen<State, Action>(
+    {
+      condition: (v: State) => !opts.condition(v),
+      refId: opts.refId || 'md:unless'
+    },
+    children
+  )

@@ -14,8 +14,9 @@ const applyMood = <State>(el: HTMLElement, attr: WrappedValue<State, (el: any) =
   }
 }
 
-const maybeApplyMood = <State>(el: HTMLElement, attr: WrappedValue<State, (el: any) => void> | undefined) =>
-    (state: State) => {
+const maybeApplyMood = <State>(el: HTMLElement, attr: WrappedValue<State, (el: any) => void> | undefined) => (
+  state: State
+) => {
   if (attr != null) {
     applyMood(el, attr)(state)
   }
@@ -31,7 +32,7 @@ export class DOMElement<State, Action> implements DOMTemplate<State, Action> {
   render(ctx: DOMContext<Action>, state: State): View<State> {
     type AttributeName = keyof (typeof attributes)
     const el = ctx.doc.createElement(this.name)
-    const attributes = {...this.attributes}
+    const attributes = { ...this.attributes }
 
     const afterRender = attributes.moodAfterRender && wrapLiteral(attributes.moodAfterRender)
     const beforeChange = attributes.moodBeforeChange && wrapLiteral(attributes.moodBeforeChange)
@@ -61,9 +62,7 @@ export class DOMElement<State, Action> implements DOMTemplate<State, Action> {
 
     // children
     const appendChild = (n: Node) => el.appendChild(n)
-    const views = this.children.map(child =>
-      child.render(ctx.withAppend(appendChild).withParent(el), state)
-    )
+    const views = this.children.map(child => child.render(ctx.withAppend(appendChild).withParent(el), state))
 
     maybeApplyMood(el, afterRender)(state)
 
@@ -79,12 +78,7 @@ export class DOMElement<State, Action> implements DOMTemplate<State, Action> {
     }
 
     if (allDynamics.length > 0) {
-      return new DOMDynamicNodeView(
-        el,
-        views,
-        (state: State) => allDynamics.forEach(f => f(state)),
-        beforeDestroy
-      )
+      return new DOMDynamicNodeView(el, views, (state: State) => allDynamics.forEach(f => f(state)), beforeDestroy)
     } else {
       return new DOMStaticNodeView(el, views, beforeDestroy)
     }

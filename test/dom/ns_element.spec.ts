@@ -31,10 +31,9 @@ describe('dom_ns_element', () => {
 
   it('dynamic attribute', () => {
     const ctx = createContext()
-    const node = new DOMNSElement('svg', 'svg', { id: (v: string) => v }, []).render(
-      ctx,
-      'abc'
-    ) as DynamicView<string | undefined>
+    const node = new DOMNSElement('svg', 'svg', { id: (v: string) => v }, []).render(ctx, 'abc') as DynamicView<
+      string | undefined
+    >
     expect(ctx.doc.body.innerHTML).toEqual('<svg id="abc"></svg>')
     node.change('xyz')
     expect(ctx.doc.body.innerHTML).toEqual('<svg id="xyz"></svg>')

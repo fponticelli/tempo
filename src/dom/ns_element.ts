@@ -33,9 +33,7 @@ export class DOMNSElement<State, Action> implements DOMTemplate<State, Action> {
 
     // children
     const appendChild = (n: Node) => el.appendChild(n)
-    const viewChildren = this.children.map(child =>
-      child.render(ctx.withAppend(appendChild).withParent(el), state)
-    )
+    const viewChildren = this.children.map(child => child.render(ctx.withAppend(appendChild).withParent(el), state))
     const dynamicChildren = filterDynamics(viewChildren).map(child => (state: State) => child.change(state))
     const allDynamics = dynamics.concat(dynamicChildren)
     if (allDynamics.length > 0) {

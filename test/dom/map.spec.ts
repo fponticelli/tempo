@@ -47,7 +47,7 @@ describe('map', () => {
       'div',
       {},
       mapAction(
-        { map: (v: string): (string | undefined) => undefined },
+        { map: (v: string): string | undefined => undefined },
         el<string, string>('div', { onclick } as any, s => s)
       )
     )

@@ -2,11 +2,7 @@ import { DynamicView, StaticView, View } from '../core/View'
 import { removeNode, filterDynamics } from './utils'
 
 export class DOMBaseNodeView<State> {
-  constructor(
-    readonly node: Node,
-    readonly children: View<State>[],
-    readonly beforeDestroy?: () => void
-  ) {}
+  constructor(readonly node: Node, readonly children: View<State>[], readonly beforeDestroy?: () => void) {}
   destroy() {
     if (this.beforeDestroy) this.beforeDestroy()
     removeNode(this.node)
@@ -23,7 +19,7 @@ export class DOMDynamicNodeView<State> extends DOMBaseNodeView<State> implements
   constructor(
     readonly node: Node,
     readonly children: View<State>[],
-    readonly change: ((state: State) => void),
+    readonly change: (state: State) => void,
     readonly beforeDestroy?: () => void
   ) {
     super(node, children, beforeDestroy)

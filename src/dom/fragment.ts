@@ -13,9 +13,7 @@ export class DOMStaticFragmentView extends DOMBaseFragmentView implements Static
   readonly kind = 'static'
 }
 
-export class DOMDynamicFragmentView<State>
-    extends DOMBaseFragmentView
-    implements DynamicView<State> {
+export class DOMDynamicFragmentView<State> extends DOMBaseFragmentView implements DynamicView<State> {
   readonly kind = 'dynamic'
   constructor(views: View<any>[], readonly change: (state: State) => void) {
     super(views)
@@ -25,9 +23,7 @@ export class DOMDynamicFragmentView<State>
 export const fragmentView = <State>(views: View<State>[]) => {
   const dynamics = filterDynamics(views)
   if (dynamics.length > 0) {
-    return new DOMDynamicFragmentView<State>(views, (state: State) =>
-      dynamics.forEach(child => child.change(state))
-    )
+    return new DOMDynamicFragmentView<State>(views, (state: State) => dynamics.forEach(child => child.change(state)))
   } else {
     return new DOMStaticFragmentView(views)
   }

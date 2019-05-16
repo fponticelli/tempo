@@ -1,5 +1,5 @@
 export type UnwrappedLiteralValue<Value> = Value
-export type UnwrappedDerivedValue<State, Value> = (state: State) => (Value | undefined)
+export type UnwrappedDerivedValue<State, Value> = (state: State) => Value | undefined
 export type UnwrappedValue<S, V> = UnwrappedLiteralValue<V> | UnwrappedDerivedValue<S, V>
 
 abstract class WrappedValueBase<State, Value> {
@@ -36,11 +36,12 @@ export const derived = <State, Value>(map: UnwrappedDerivedValue<State, Value>):
 export const literal = <State, Value>(value: UnwrappedLiteralValue<Value>): WrappedValue<State, Value> =>
   new WrappedLiteralValue(value)
 
-export const wrapLiteral = <State, Value>
-    (value: UnwrappedLiteralValue<Value> | WrappedDerivedValue<State, Value>): WrappedValue<State, Value> => {
-    if ((value as any).kind === 'derived') {
-      return value as WrappedDerivedValue<State, Value>
-    } else {
-      return literal(value as UnwrappedLiteralValue<Value>)
-    }
+export const wrapLiteral = <State, Value>(
+  value: UnwrappedLiteralValue<Value> | WrappedDerivedValue<State, Value>
+): WrappedValue<State, Value> => {
+  if ((value as any).kind === 'derived') {
+    return value as WrappedDerivedValue<State, Value>
+  } else {
+    return literal(value as UnwrappedLiteralValue<Value>)
+  }
 }

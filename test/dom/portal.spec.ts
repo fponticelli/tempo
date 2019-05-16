@@ -10,10 +10,7 @@ describe('portal', () => {
         state: 'hello',
         update: (_: string, a: string) => a
       },
-      portalWithSelector(
-        { selector: '#container' },
-        span({ className: s => s })
-      )
+      portalWithSelector({ selector: '#container' }, span({ className: s => s }))
     )
     const view = Mood.render({
       el: ctx.doc.getElementById('main')!,
@@ -34,9 +31,7 @@ describe('portal', () => {
         state: 'background-color: red',
         update: (_: string, a: string) => a
       },
-      headPortal(
-        style({}, s => s)
-      )
+      headPortal(style({}, s => s))
     )
     const view = Mood.render({
       el: ctx.doc.body!,
@@ -57,9 +52,7 @@ describe('portal', () => {
         state: 'background-color: red',
         update: (_: string, a: string) => a
       },
-      bodyPortal(
-        style({}, s => s)
-      )
+      bodyPortal(style({}, s => s))
     )
     const view = Mood.render({
       el: ctx.doc.body!,

@@ -4,10 +4,7 @@ import { createContext } from './common'
 describe('when', () => {
   it('always true', () => {
     const ctx = createContext()
-    const template = when(
-      { condition: _ => true, refId: 'A' },
-      div({}, 'a')
-    )
+    const template = when({ condition: _ => true, refId: 'A' }, div({}, 'a'))
     const view = template.render(ctx, 1)
     expect(ctx.doc.body.innerHTML).toEqual('<div>a</div><!--A-->')
     view.change(2)
@@ -18,10 +15,7 @@ describe('when', () => {
 
   it('always false', () => {
     const ctx = createContext()
-    const template = when(
-      { condition: _ => false },
-      div({}, 'a')
-    )
+    const template = when({ condition: _ => false }, div({}, 'a'))
     const view = template.render(ctx, 1)
     expect(ctx.doc.body.innerHTML).toEqual('<!--md:when-->')
     view.change(2)
@@ -32,10 +26,7 @@ describe('when', () => {
 
   it('unless', () => {
     const ctx = createContext()
-    const template = unless(
-      { condition: _ => false },
-      div({}, 'a')
-    )
+    const template = unless({ condition: _ => false }, div({}, 'a'))
     const view = template.render(ctx, 1)
     expect(ctx.doc.body.innerHTML).toEqual('<div>a</div><!--md:unless-->')
     view.change(2)
@@ -47,10 +38,7 @@ describe('when', () => {
   it('alternate start with true', () => {
     const ctx = createContext()
     let condition = true
-    const template = when(
-      { condition: _ => condition },
-      div({}, 'a')
-    )
+    const template = when({ condition: _ => condition }, div({}, 'a'))
     const view = template.render(ctx, 1)
     expect(ctx.doc.body.innerHTML).toEqual('<div>a</div><!--md:when-->')
     condition = false
@@ -66,10 +54,7 @@ describe('when', () => {
   it('alternate start with false', () => {
     const ctx = createContext()
     let condition = false
-    const template = when(
-      { condition: _ => condition },
-      div({}, 'a')
-    )
+    const template = when({ condition: _ => condition }, div({}, 'a'))
     const view = template.render(ctx, 1)
     expect(ctx.doc.body.innerHTML).toEqual('<!--md:when-->')
     condition = true
