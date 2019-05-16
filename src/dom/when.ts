@@ -22,7 +22,7 @@ export class DOMWhenView<State, Action> implements DynamicView<State> {
     if (this.condition(value)) {
       if (this.views == null) {
         // it has never been rendered before
-        this.views = this.children.map(c => c.render(this.ctx, value, this.dispatch))
+        this.views = this.children.map(c => c.render(this.ctx, value))
         this.dynamics = filterDynamics(this.views)
       } else {
         this.dynamics!.forEach(d => d.change(value))
@@ -55,8 +55,7 @@ export class DOMWhen<State, Action> implements DOMTemplate<State, Action> {
     ) {}
   render(
     ctx: DOMContext<Action>,
-    state: State,
-    dispatch: (action: Action) => void
+    state: State
   ): DOMWhenView<State, Action> {
     const ref = ctx.doc.createComment(this.opts.refId || 'md:when')
     ctx.append(ref)
@@ -64,7 +63,7 @@ export class DOMWhen<State, Action> implements DOMTemplate<State, Action> {
     const view = new DOMWhenView(
       this.opts.condition,
       ctx.withAppend((node: Node) => parent.insertBefore(node, ref)),
-      dispatch,
+      ctx.dispatch,
       () => removeNode(ref),
       this.children.map(domChildToTemplate)
     )

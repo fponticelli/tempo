@@ -8,7 +8,7 @@ describe('when', () => {
       { condition: _ => true, refId: 'A' },
       div({}, 'a')
     )
-    const view = template.render(ctx, 1, () => {})
+    const view = template.render(ctx, 1)
     expect(ctx.doc.body.innerHTML).toEqual('<div>a</div><!--A-->')
     view.change(2)
     expect(ctx.doc.body.innerHTML).toEqual('<div>a</div><!--A-->')
@@ -22,7 +22,7 @@ describe('when', () => {
       { condition: _ => false },
       div({}, 'a')
     )
-    const view = template.render(ctx, 1, () => {})
+    const view = template.render(ctx, 1)
     expect(ctx.doc.body.innerHTML).toEqual('<!--md:when-->')
     view.change(2)
     expect(ctx.doc.body.innerHTML).toEqual('<!--md:when-->')
@@ -36,7 +36,7 @@ describe('when', () => {
       { condition: _ => false },
       div({}, 'a')
     )
-    const view = template.render(ctx, 1, () => {})
+    const view = template.render(ctx, 1)
     expect(ctx.doc.body.innerHTML).toEqual('<div>a</div><!--md:unless-->')
     view.change(2)
     expect(ctx.doc.body.innerHTML).toEqual('<div>a</div><!--md:unless-->')
@@ -51,7 +51,7 @@ describe('when', () => {
       { condition: _ => condition },
       div({}, 'a')
     )
-    const view = template.render(ctx, 1, () => {})
+    const view = template.render(ctx, 1)
     expect(ctx.doc.body.innerHTML).toEqual('<div>a</div><!--md:when-->')
     condition = false
     view.change(2)
@@ -70,7 +70,7 @@ describe('when', () => {
       { condition: _ => condition },
       div({}, 'a')
     )
-    const view = template.render(ctx, 1, () => {})
+    const view = template.render(ctx, 1)
     expect(ctx.doc.body.innerHTML).toEqual('<!--md:when-->')
     condition = true
     view.change(2)

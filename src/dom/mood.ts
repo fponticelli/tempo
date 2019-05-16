@@ -27,8 +27,7 @@ export const Mood = {
         el,
         dispatch
       ),
-      component.state,
-      dispatch
+      component.state
     )
     return view
   }

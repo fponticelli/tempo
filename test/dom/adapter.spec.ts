@@ -6,7 +6,7 @@ describe('adapter', () => {
   it('noOptions', () => {
     type InnerState = { inner: string, outer: string }
 
-    const ctx = createContext()
+    const ctx = createContext(() => {})
     const template = adapter(
       {},
       component(
@@ -22,7 +22,7 @@ describe('adapter', () => {
         s => s.outer
       )
     )
-    const view = template.render(ctx, { outer: 'out' }, () => {})
+    const view = template.render(ctx, { outer: 'out' })
     expect(ctx.doc.body.innerHTML).toEqual('inner: in, outer: out')
     view.change({ outer: 'OUT' })
     expect(ctx.doc.body.innerHTML).toEqual('inner: in, outer: out')
@@ -34,7 +34,7 @@ describe('adapter', () => {
     type OuterState = { outer: string }
     type InnerState = { inner: string, outer: string }
 
-    const ctx = createContext()
+    const ctx = createContext(() => {})
     const template = adapter(
       {
         mergeStates: (outer: OuterState, inner: InnerState) => {
@@ -54,7 +54,7 @@ describe('adapter', () => {
         s => s.outer
       )
     )
-    const view = template.render(ctx, { outer: 'out' }, () => {})
+    const view = template.render(ctx, { outer: 'out' })
     expect(ctx.doc.body.innerHTML).toEqual('inner: in, outer: out')
     view.change({ outer: 'OUT' })
     expect(ctx.doc.body.innerHTML).toEqual('inner: in, outer: OUT')
@@ -64,7 +64,10 @@ describe('adapter', () => {
     type OuterState = { outer: string }
     type InnerState = { inner: string, outer: string }
     let counter = 0
-    const ctx = createContext()
+    const ctx = createContext((v: number) => {
+      counter = v
+    })
+
     const template = adapter(
       {
         propagate: (
@@ -106,7 +109,7 @@ describe('adapter', () => {
       )
     )
 
-    const view = template.render(ctx, { outer: 'out' }, (v: number) => { counter = v })
+    const view = template.render(ctx, { outer: 'out' })
     expect(counter).toEqual(0)
     expect(ctx.doc.body.innerHTML).toEqual('<div>inner: in, outer: notout</div>')
 

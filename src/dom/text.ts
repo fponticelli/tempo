@@ -31,7 +31,7 @@ const renderFunction = <State>(
 export class DOMText<State, Action> implements DOMTemplate<State, Action> {
   constructor(readonly content: DOMTextValue<State>) {}
 
-  render(ctx: DOMContext<Action>, state: State, _: (action: Action) => void): View<State> {
+  render(ctx: DOMContext<Action>, state: State): View<State> {
     if (typeof this.content === 'function') {
       return renderFunction(ctx, state, this.content)
     } else {

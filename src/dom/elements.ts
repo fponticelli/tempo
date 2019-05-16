@@ -8,7 +8,6 @@ export class DOMElementsView<Element, State extends Element[], Action> implement
   constructor(
     readonly ref: Node,
     readonly ctx: DOMContext<Action>,
-    readonly dispatch: (action: Action) => void,
     readonly children: DOMTemplate<Element, Action>[]
   ) {}
   destroy(): void {
@@ -26,7 +25,7 @@ export class DOMElementsView<Element, State extends Element[], Action> implement
       }
       for (let i = viewLength; i < stateLength; i++) {
         const val = state[i]
-        this.childrenView.push(this.children.map(el => el.render(this.ctx, val, this.dispatch)))
+        this.childrenView.push(this.children.map(el => el.render(this.ctx, val)))
       }
     } else {
       for (let i = 0; i < stateLength; i++) {
@@ -48,13 +47,12 @@ export class DOMElementsTemplate<Element, State extends Element[], Action> imple
     readonly children: DOMTemplate<Element, Action>[]
   ) {}
 
-  render(ctx: DOMContext<Action>, state: State, dispatch: (action: Action) => void): DynamicView<State> {
+  render(ctx: DOMContext<Action>, state: State): DynamicView<State> {
     const ref = ctx.doc.createComment(this.opts.refId || 'md:repeat')
     ctx.append(ref)
     const view = new DOMElementsView<Element, State, Action>(
       ref,
       ctx.withAppend(insertBefore(ref)),
-      dispatch,
       this.children
     )
     view.change(state)

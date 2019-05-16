@@ -27,14 +27,15 @@ export class DOMComponent<State, Action> implements DOMTemplate<State, Action> {
     readonly children: DOMTemplate<State, Action>[]
   ) {}
 
-  render(ctx: DOMContext<Action>, state: State, dispatch: (action: Action) => void) {
+  render(ctx: DOMContext<Action>, state: State) {
     const { update } = this
     function innerDispatch(action: Action) {
       view.state = update(view.state, action, innerDispatch)
       view.change(view.state)
-      dispatch(action)
+      ctx.dispatch(action)
     }
-    const viewChildren = this.children.map(child => child.render(ctx, state, innerDispatch))
+    const newCtx = ctx.withDispatch(innerDispatch)
+    const viewChildren = this.children.map(child => child.render(newCtx, state))
     const dynamics = filterDynamics(viewChildren)
     const view = new DOMComponentView<State, Action>(state, innerDispatch, viewChildren, dynamics)
     return view

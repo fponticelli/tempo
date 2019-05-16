@@ -11,12 +11,11 @@ export class MapStateTemplate<OuterState, InnerState, Action> implements DOMTemp
   ) {}
   render(
     ctx: DOMContext<Action>,
-    state: OuterState,
-    dispatch: (action: Action) => void
+    state: OuterState
   ): View<OuterState> {
     const { children, map } = this
     const innerState = map(state)
-    const views = children.map(c => c.render(ctx, innerState, dispatch))
+    const views = children.map(c => c.render(ctx, innerState))
     const dynamics = filterDynamics(views)
 
     if (dynamics.length === 0) {
@@ -46,16 +45,10 @@ export class MapActionTemplate<State, OuterAction, InnerAction> implements DOMTe
 
   render(
     ctx: DOMContext<OuterAction>,
-    state: State,
-    dispatch: (action: OuterAction) => void
+    state: State
   ): View<State> {
     const { children, map } = this
-    const innerDispatch = (innerAction: InnerAction) => {
-      const action = map(innerAction)
-      if (action != null)
-        dispatch(action)
-    }
-    const views = children.map(c => c.render(ctx.conditionalMapAction(this.map), state, innerDispatch))
+    const views = children.map(c => c.render(ctx.conditionalMapAction(this.map), state))
     return fragmentView(views)
   }
 }

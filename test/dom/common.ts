@@ -6,15 +6,13 @@ export const getWindow = (): Window => {
   return dom.window
 }
 
-export const createContext = <Action>(): DOMContext<Action> => {
+export const createContext = <Action>(dispatch?: (action: Action) => void): DOMContext<Action> => {
   const { document } = getWindow()
   return new DOMContext(
     document,
     (node: Node) => document.body.appendChild(node),
     document.body,
-    (action: Action) => {
-      console.log(action)
-    }
+    dispatch || (() => {})
   )
 }
 

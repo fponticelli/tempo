@@ -1,11 +1,10 @@
 import { View } from './view'
 
-export type TemplateRender<State, Action, Context> = (
+export type TemplateRender<State, Context> = (
   ctx: Context,
-  state: State,
-  dispatch: (action: Action) => void
+  state: State
 ) => View<State>
 
-export interface Template<State, Action, Context> {
-  render: TemplateRender<State, Action, Context>
+export interface Template<State, Context> {
+  render: TemplateRender<State, Context>
 }

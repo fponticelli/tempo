@@ -6,7 +6,7 @@ describe('dom_ns_element', () => {
   it('static empty-element', () => {
     const ctx = createContext()
     // this is not the correct namespace but it is the way to make it work with JSDOM
-    const nodeUndefined = new DOMNSElement('svg', 'svg', {}, []).render(ctx, 1, () => {})
+    const nodeUndefined = new DOMNSElement('svg', 'svg', {}, []).render(ctx, 1)
     expect(ctx.doc.body.innerHTML).toEqual('<svg></svg>')
     nodeUndefined.destroy()
     expect(ctx.doc.body.innerHTML).toEqual('')
@@ -15,7 +15,7 @@ describe('dom_ns_element', () => {
     const ctx = createContext()
     const nodeUndefined = new DOMNSElement('svg', 'svg', {}, [
       new DOMNSElement('svg', 'g', {}, [new DOMNSElement('svg', 'rect', {}, [])])
-    ]).render(ctx, 1, () => {})
+    ]).render(ctx, 1)
     expect(ctx.doc.body.innerHTML).toEqual('<svg><g><rect></rect></g></svg>')
     nodeUndefined.destroy()
     expect(ctx.doc.body.innerHTML).toEqual('')
@@ -23,7 +23,7 @@ describe('dom_ns_element', () => {
 
   it('static attribute', () => {
     const ctx = createContext()
-    const node = new DOMNSElement('svg', 'svg', { id: 'main' }, []).render(ctx, 1, () => {})
+    const node = new DOMNSElement('svg', 'svg', { id: 'main' }, []).render(ctx, 1)
     expect(ctx.doc.body.innerHTML).toEqual('<svg id="main"></svg>')
     node.destroy()
     expect(ctx.doc.body.innerHTML).toEqual('')
@@ -33,8 +33,7 @@ describe('dom_ns_element', () => {
     const ctx = createContext()
     const node = new DOMNSElement('svg', 'svg', { id: (v: string) => v }, []).render(
       ctx,
-      'abc',
-      () => {}
+      'abc'
     ) as DynamicView<string | undefined>
     expect(ctx.doc.body.innerHTML).toEqual('<svg id="abc"></svg>')
     node.change('xyz')
@@ -49,7 +48,7 @@ describe('dom_ns_element', () => {
     const ctx = createContext()
     const node = new DOMNSElement('svg', 'svg', { id: (v: string) => v }, [
       new DOMNSElement('svg', 'a', { href: (v: string) => v && `#${v}` }, [])
-    ]).render(ctx, 'abc', () => {}) as DynamicView<string | undefined>
+    ]).render(ctx, 'abc') as DynamicView<string | undefined>
     expect(ctx.doc.body.innerHTML).toEqual('<svg id="abc"><a href="#abc"></a></svg>')
     node.change('xyz')
     expect(ctx.doc.body.innerHTML).toEqual('<svg id="xyz"><a href="#xyz"></a></svg>')
