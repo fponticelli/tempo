@@ -13,12 +13,13 @@ import {
   section,
   span,
   ul,
-  derived,
+  handler,
   DOMEventHandler,
   elements,
   mapState,
   when,
-  div
+  div,
+  stateHandler
 } from '../../../src/dom'
 import { State, Filter, Todo } from './state'
 import { Action } from './action'
@@ -26,7 +27,7 @@ import { Store } from './store'
 import { update } from './update'
 
 const changeF = (filter: Filter): DOMEventHandler<State, MouseEvent, Action> => {
-  return derived((state: State) => {
+  return handler((state: State) => {
     if (state.filter === filter) {
       return undefined
     } else {
@@ -49,7 +50,7 @@ const selectedF = (filter: Filter) => (state: State) => state.filter === filter 
 
 type TodoWEditing = Todo & { editing: boolean }
 
-const view =  component(
+const view = component(
   { state: Store.get(), update },
   section(
     { className: 'todoapp' },
@@ -59,9 +60,9 @@ const view =  component(
       input({
         className: 'new-todo',
         placeholder: 'What needs to be done?',
-        autofocus: (state: State) => state.editing == null,
-        value: (state: State) => state.adding,
-        onKeyDown: (e: KeyboardEvent): Action | undefined => {
+        autofocus: state => state.editing == null,
+        value: state => state.adding,
+        onKeyDown: e => {
           const input = e.target as HTMLInputElement
           if (e.keyCode === 13) {
             return Action.addTodo(input.value.trim())
@@ -83,10 +84,10 @@ const view =  component(
       ul(
         { className: 'todo-list' },
         mapState(
-          { map: (state: State): TodoWEditing[] =>
+          { map: state =>
               state.todos
                 .filter(filterF(state.filter))
-                .map((todo: Todo): TodoWEditing => {
+                .map(todo => {
                   if (state.editing && state.editing.id === todo.id) {
                     return { ...todo, editing: true, title: state.editing.title }
                   } else {
@@ -108,28 +109,28 @@ const view =  component(
               },
               div(
                 { className: 'view' },
-                input({
+                input<TodoWEditing, Action>({
                   className: 'toggle',
                   type: 'checkbox',
                   checked: todo => todo.completed,
-                  onChange: derived((todo: TodoWEditing) => (_: Event) => Action.toggleCompleted(todo.id))
+                  onChange: stateHandler(todo => Action.toggleCompleted(todo.id))
                 }),
                 label(
-                  { onDblClick: derived(todo => (_: MouseEvent) => Action.editingTodo(todo.id, todo.title)) },
+                  { onDblClick: stateHandler(todo => Action.editingTodo(todo.id, todo.title)) },
                   todo => todo.title
                 ),
                 button({
                   className: 'destroy',
-                  onClick: derived(todo => (_: Event) => Action.removeTodo(todo.id))
+                  onClick: stateHandler(todo => Action.removeTodo(todo.id))
                 })
               ),
               when(
                 { condition: todo => todo.editing },
-                input({
+                input<TodoWEditing, Action>({
                   moodAfterRender: el => el.focus(),
                   className: 'edit',
                   value: todo => todo.title,
-                  onKeyPress: derived((todo: TodoWEditing) => (e: KeyboardEvent): Action | undefined => {
+                  onKeyPress: handler(todo => e => {
                     const input = e.target as HTMLInputElement
                     if (e.keyCode === 13) {
                       const value = input.value.trim()
@@ -144,7 +145,7 @@ const view =  component(
                       return Action.editingTodo(todo.id, input.value)
                     }
                   }),
-                  onBlur: derived((todo: TodoWEditing) => (e: FocusEvent): Action | undefined => {
+                  onBlur: handler(todo => e => {
                     const input = e.target as HTMLInputElement
                     return Action.updateTodo(todo.id, input.value.trim())
                   })

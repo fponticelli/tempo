@@ -8,7 +8,9 @@
     "moduleResolution": "node",
     "removeComments": false,
     "strict": true,
-    "outDir": "build"
+    "outDir": "build",
+    "jsx": "react",
+    "jsxFactory": "el"
   },
   "include": [
     "src"
