@@ -38,10 +38,11 @@ export const setAttribute = (el: Element, name: string, value: string) => {
 }
 
 export const setProperty = (el: Element, name: string, value: any | undefined) => {
+  const anyEl = el as any
   if (value == null) {
-    ;(el as any)[name] = null
-  } else {
-    if ((el as any)[name] !== value) (el as any)[name] = value
+    anyEl[name] = null
+  } else if (anyEl[name] !== value) {
+    anyEl[name] = value
   }
 }
 
@@ -61,11 +62,14 @@ export const setStyleAttribute = (el: Element, name: string, value: CSSPropertie
 }
 
 export const setBoolProperty = (el: Element, name: string, value: boolean | undefined) => {
+  const anyEl = el as any
   if (value == null) {
-    ;(el as any)[name] = null
+    anyEl[name] = null
   } else {
     const bool = Boolean(value)
-    if ((el as any)[name] !== bool) (el as any)[name] = bool
+    if (anyEl[name] !== bool) {
+      anyEl[name] = bool
+    }
   }
 }
 
