@@ -46,7 +46,7 @@
     "build": "rm -rf lib && tsc && cp package.npm.json lib/package.json && cp {*.md,LICENSE} lib/",
     "docs": "rm -rf docs && typedoc --options typedoc.js ./src",
     "serve-doc": "rm -rf docs && compodoc src -s",
-    "lint": "tslint --fix --project .",
+    "lint": "tslint \"./{src,test}/**/*.ts\"",
     "fix-lint": "tslint --fix \"./{src,test}/**/*.ts\"",
     "prettier": "prettier --list-different \"./{src,test}/**/*.ts\"",
     "fix-prettier": "prettier --write \"./{src,test}/**/*.ts\"",

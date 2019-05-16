@@ -24,6 +24,25 @@ describe('portal', () => {
     expect(ctx.doc.body.innerHTML).toEqual('<div id="main"></div><div id="container"></div>')
   })
 
+  it('portalWithSelector throws if element is not found', () => {
+    const ctx = createContext()
+    ctx.doc.body.innerHTML = '<div id="main"></div><div id="container"></div>'
+    const comp = component(
+      {
+        state: 'hello',
+        update: (_: string, a: string) => a
+      },
+      portalWithSelector({ selector: '#doesnotexist' }, span({ className: s => s }))
+    )
+    expect(() => {
+      Mood.render({
+        el: ctx.doc.getElementById('main')!,
+        component: comp,
+        document: ctx.doc
+      })
+    }).toThrow()
+  })
+
   it('headPortal', () => {
     const ctx = createContext()
     const comp = component(

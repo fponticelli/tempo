@@ -9,6 +9,7 @@ import { wrapLiteral, WrappedValue } from '../core/value'
 
 const applyMood = <State>(el: HTMLElement, attr: WrappedValue<State, (el: any) => void>) => (state: State) => {
   const f = attr.resolve(state)
+  /* istanbul ignore next */
   if (f != null) {
     f(el)
   }

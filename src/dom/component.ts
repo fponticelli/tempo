@@ -5,6 +5,7 @@ import { DOMContext } from './context'
 import { filterDynamics, domChildToTemplate } from './utils'
 
 export class DOMComponentView<State, Action> extends DOMDynamicFragmentView<State> {
+  /* istanbul ignore next */
   constructor(
     public state: State,
     readonly dispatch: (action: Action) => void,

@@ -12,7 +12,7 @@ export class DOMElementsView<Element, State extends Element[], Action> implement
   ) {}
   destroy(): void {
     removeNode(this.ref)
-    if (this.childrenView) this.childrenView.forEach(e => e.forEach(c => c.destroy()))
+    this.childrenView.forEach(e => e.forEach(c => c.destroy()))
   }
 
   change(state: State): void {

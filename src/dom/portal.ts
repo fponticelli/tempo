@@ -35,12 +35,16 @@ export const portalWithSelector = <State, Action>(opts: { selector: string }, ..
     {
       getParent: (doc: Document) => {
         const el = doc.querySelector(opts.selector)
-        if (!el) throw new Error(`selector doesn't match any element: "${opts.selector}"`)
+        if (!el) {
+          throw new Error(`selector doesn't match any element: "${opts.selector}"`)
+        }
         return el
       },
       append: (doc: Document, node: Node) => {
-        const parent = doc.querySelector(opts.selector)
-        if (parent) parent.appendChild(node)
+        // Parent should always be available given the guarantee from `getParent`.
+        // If parent has been removed from unsafe manipulation of the dom, an exception will occurr.
+        const parent = doc.querySelector(opts.selector)!
+        parent.appendChild(node)
       }
     },
     ...children

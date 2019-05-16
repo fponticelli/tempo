@@ -1,7 +1,7 @@
 import { createContext } from './common'
 import { el } from '../../src/dom/element'
 import { DynamicView } from '../../src/core/view'
-import { handle, lifecycle } from '../../src/dom/value'
+import { handler, lifecycle, stateHandler } from '../../src/dom/value'
 import { div, span, a } from '../../src/dom/els'
 
 describe('dom_element', () => {
@@ -31,10 +31,14 @@ describe('dom_element', () => {
 
   it('dynamic attribute', () => {
     const ctx = createContext()
-    const node = el('div', { id: (v: string) => v }).render(ctx, 'abc') as DynamicView<string | undefined>
+    const node = el('div', {
+      id: (v: string) => (v !== 'X' ? v : undefined)
+    }).render(ctx, 'abc') as DynamicView<string | undefined>
     expect(ctx.doc.body.innerHTML).toEqual('<div id="abc"></div>')
     node.change('xyz')
     expect(ctx.doc.body.innerHTML).toEqual('<div id="xyz"></div>')
+    node.change('X')
+    expect(ctx.doc.body.innerHTML).toEqual('<div></div>')
     node.change(undefined)
     expect(ctx.doc.body.innerHTML).toEqual('<div></div>')
     node.destroy()
@@ -95,12 +99,12 @@ describe('dom_element', () => {
     expect(ctx.doc.body.innerHTML).toEqual('')
   })
 
-  it("handler event that doesn't dispatches", () => {
+  it("handle event that doesn't dispatch", () => {
     const ctx = createContext((c: number) => {
       count = c
     })
     let count = 0
-    const onclick = handle(s => undefined)
+    const onclick = handler(s => undefined)
     const node = el<number, number>('div', { onclick } as any).render(ctx, 1)
     expect(ctx.doc.body.innerHTML).toEqual('<div></div>')
     const domEl = ctx.doc.body.firstElementChild as HTMLDivElement
@@ -111,12 +115,28 @@ describe('dom_element', () => {
     expect(ctx.doc.body.innerHTML).toEqual('')
   })
 
-  it('handler event that dispatch', () => {
+  it('handle event that dispatch', () => {
     const ctx = createContext((c: number) => {
       count = c
     })
     let count = 0
-    const onclick = handle((s: number) => (e: Event) => s + 1)
+    const onclick = handler((s: number) => (e: Event) => s + 1)
+    const node = el<number, number>('div', { onclick } as any).render(ctx, 1)
+    expect(ctx.doc.body.innerHTML).toEqual('<div></div>')
+    const domEl = ctx.doc.body.firstElementChild as HTMLDivElement
+    expect(count).toEqual(0)
+    domEl.click()
+    expect(count).toEqual(2)
+    node.destroy()
+    expect(ctx.doc.body.innerHTML).toEqual('')
+  })
+
+  it('handle event conditionally on state', () => {
+    const ctx = createContext((c: number) => {
+      count = c
+    })
+    let count = 0
+    const onclick = stateHandler((s: number) => s + 1)
     const node = el<number, number>('div', { onclick } as any).render(ctx, 1)
     expect(ctx.doc.body.innerHTML).toEqual('<div></div>')
     const domEl = ctx.doc.body.firstElementChild as HTMLDivElement

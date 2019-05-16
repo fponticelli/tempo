@@ -1,7 +1,8 @@
 export class DOMContext<Action> {
   static fromElement<Action>(element: Element, dispatch: (action: Action) => void): DOMContext<Action> {
     return new DOMContext<Action>(
-      element.ownerDocument || document,
+      /* istanbul ignore next */
+      element.ownerDocument || (window && window.document),
       (node: Node) => element.appendChild(node),
       element,
       dispatch
@@ -35,15 +36,6 @@ export class DOMContext<Action> {
   withParent(parent: Element) {
     return new DOMContext<Action>(this.doc, this.append, parent, this.dispatch)
   }
-
-  // withDoc(doc: Document) {
-  //   return new DOMContext<Action>(
-  //     doc,
-  //     this.append,
-  //     this.parent,
-  //     this.dispatch
-  //   )
-  // }
 
   withDispatch<OtherAction>(dispatch: (action: OtherAction) => void) {
     return new DOMContext<OtherAction>(this.doc, this.append, this.parent, dispatch)
