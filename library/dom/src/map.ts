@@ -1,5 +1,5 @@
 import { DOMChild, DOMTemplate } from './template'
-import { View } from '../core/view'
+import { View } from '@mood/core/view'
 import { DOMContext } from './context'
 import { domChildToTemplate, filterDynamics } from './utils'
 import { DOMStaticFragmentView, DOMDynamicFragmentView, fragmentView } from './fragment'
@@ -36,7 +36,7 @@ export class MapActionTemplate<State, OuterAction, InnerAction> implements DOMTe
 
   render(ctx: DOMContext<OuterAction>, state: State): View<State> {
     const { children, map } = this
-    const views = children.map(c => c.render(ctx.conditionalMapAction(this.map), state))
+    const views = children.map(c => c.render(ctx.conditionalMapAction(map), state))
     return fragmentView(views)
   }
 }

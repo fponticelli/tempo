@@ -1,8 +1,8 @@
-import { View, DynamicView } from '../core/view'
+import { View, DynamicView } from '@mood/core/view'
 import { DOMAttribute, DOMEventHandler, DOMProperty } from './value'
 import { attributeNameMap, attributeMap } from './attributes_mapper'
 import { setEvent, setAttribute, setOneStyle } from './set_attribute'
-import { UnwrappedDerivedValue, WrappedDerivedValue } from '../core/value'
+import { UnwrappedDerivedValue, WrappedDerivedValue } from '@mood/core/value'
 import { DOMChild, DOMTemplate } from './template'
 import { text } from './text'
 

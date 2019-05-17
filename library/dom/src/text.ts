@@ -1,8 +1,8 @@
 import { DOMTemplate } from './template'
 import { DOMContext } from './context'
-import { View } from '../core/view'
+import { View } from '@mood/core/view'
 import { DOMStaticNodeView, DOMDynamicNodeView } from './node_view'
-import { UnwrappedLiteralValue, UnwrappedDerivedValue } from '../core/value'
+import { UnwrappedLiteralValue, UnwrappedDerivedValue } from '@mood/core/value'
 import { DOMTextValue } from './value'
 
 const renderLiteral = <State>(ctx: DOMContext<never>, value: UnwrappedLiteralValue<string>): View<State> => {

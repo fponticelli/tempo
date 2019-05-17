@@ -1,6 +1,6 @@
 import { DOMChild, DOMTemplate } from './template'
 import { DOMContext } from './context'
-import { View, DynamicView } from '../core/view'
+import { View, DynamicView } from '@mood/core/view'
 import { domChildToTemplate, filterDynamics, removeNode } from './utils'
 
 export interface WhenOptions<State> {

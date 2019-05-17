@@ -1,11 +1,11 @@
 import { DOMTemplate, DOMChild } from './template'
 import { DOMContext } from './context'
-import { View } from '../core/view'
+import { View } from '@mood/core/view'
 import { DOMAttributes } from './attributes'
 import { Acc, processAttribute, filterDynamics, domChildToTemplate } from './utils'
 import { DOMDynamicNodeView, DOMStaticNodeView } from './node_view'
 import { DOMAttribute } from './value'
-import { wrapLiteral, WrappedValue } from '../core/value'
+import { wrapLiteral, WrappedValue } from '@mood/core/value'
 
 const applyMood = <State>(el: HTMLElement, attr: WrappedValue<State, (el: any) => void>) => (state: State) => {
   const f = attr.resolve(state)

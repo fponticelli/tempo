@@ -1,5 +1,5 @@
 /* istanbul ignore next */
-import { UnwrappedValue, UnwrappedLiteralValue, WrappedDerivedValue, derived } from '../core/value'
+import { UnwrappedValue, UnwrappedLiteralValue, WrappedDerivedValue, derived } from '@mood/core/value'
 
 export type DOMAttribute<S, V> = UnwrappedValue<S, V>
 export type DOMEventHandler<S, E, Action> =

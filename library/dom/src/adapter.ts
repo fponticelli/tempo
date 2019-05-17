@@ -1,4 +1,4 @@
-import { DynamicView } from '../core/view'
+import { DynamicView } from '@mood/core/view'
 import { DOMComponentView, DOMComponent } from './component'
 import { DOMTemplate } from './template'
 import { DOMContext } from './context'

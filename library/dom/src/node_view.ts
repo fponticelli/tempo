@@ -1,5 +1,5 @@
-import { DynamicView, StaticView, View } from '../core/View'
-import { removeNode, filterDynamics } from './utils'
+import { DynamicView, StaticView, View } from '@mood/core/view'
+import { removeNode } from './utils'
 
 export class DOMBaseNodeView<State> {
   constructor(readonly node: Node, readonly children: View<State>[], readonly beforeDestroy?: () => void) {}

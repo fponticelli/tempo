@@ -1,4 +1,4 @@
-import { DynamicView, View } from '../core/view'
+import { DynamicView, View } from '@mood/core/view'
 import { DOMContext } from './context'
 import { DOMTemplate, DOMChild } from './template'
 import { removeNode, filterDynamics, domChildToTemplate, insertBefore } from './utils'

@@ -1,96 +1,18 @@
 {
-  "name": "mood",
-  "main": "lib",
-  "license": "Apache-2.0",
-  "homepage": "https://github.com/fponticelli/mood",
-  "bugs": {
-    "url": "https://github.com/fponticelli/mood/issues"
-  },
-  "author": {
-    "name": "Franco Ponticelli",
-    "email": "franco.ponticelli@gmail.com",
-    "url": "https://github.com/fponticelli"
-  },
-  "description": "ui framework for TypeScript",
-  "keywords": [
-    "typescript",
-    "ui",
-    "dom",
-    "mood architecture"
-  ],
-  "dependencies": {},
-  "devDependencies": {
-    "@types/jest": "23.3.5",
-    "@types/jsdom": "^12.2.3",
-    "@types/node": "12.0.2",
-    "jest": "23.6.0",
-    "jsdom": "^15.1.0",
-    "prettier": "1.17.1",
-    "ts-jest": "23.10.4",
-    "ts-node": "8.1.0",
-    "tslint": "5.16.0",
-    "typedoc": "0.14.2",
-    "typedoc-plugin-external-module-name": "^2.1.0",
-    "typescript": "^3.4.5"
-  },
-  "directories": {
-    "doc": "docs",
-    "lib": "src",
-    "test": "test"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/fponticelli/mood.git"
-  },
+  "name": "@mood/lib_dom",
+  "version": "1.0.0",
+  "description": "",
+  "license": "UNLICENSED",
   "scripts": {
-    "build": "rm -rf lib && tsc && cp package.npm.json lib/package.json && cp {*.md,LICENSE} lib/",
-    "docs": "rm -rf docs && typedoc --options typedoc.js ./src",
-    "serve-doc": "rm -rf docs && compodoc src -s",
-    "lint": "tslint \"./{src,test}/**/*.ts\"",
-    "fix-lint": "tslint --fix \"./{src,test}/**/*.ts\"",
-    "prettier": "prettier --list-different \"./{src,test}/**/*.ts\"",
-    "fix-prettier": "prettier --write \"./{src,test}/**/*.ts\"",
-    "prep": "yarn test-coverage && yarn lint && yarn prettier && yarn build && yarn docs",
-    "test": "jest",
-    "jest-clear-cache": "jest --clearCache",
-    "test-coverage": "jest --coverage",
-    "watch": "jest --watch --coverage",
-    "npm-publish": "yarn prep && ( cd lib && yarn publish --access public )"
+    "build": "rm -rf ../../packages/dom/* &&tsc && cp package.prod.json ../../packages/dom/package.json"
   },
-  "eslint.packageManager": "yarn",
-  "jest": {
-    "collectCoverageFrom": [
-      "src/**/*.ts",
-      "!src/dom/els/*.ts"
-    ],
-    "coveragePathIgnorePatterns": [
-      "<rootDir>/node_modules"
-    ],
-    "coverageReporters": [
-      "json",
-      "lcov",
-      "text"
-    ],
-    "coverageThreshold": {
-      "global": {
-        "branches": 100,
-        "functions": 100,
-        "lines": 100,
-        "statements": 100
-      }
-    },
-    "transform": {
-      "^.+\\.tsx?$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
-    },
-    "testMatch": [
-      "**/*.spec.ts"
-    ],
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "jsx",
-      "json"
-    ]
+  "author": "Franco Ponticelli <franco.ponticelli@gmail.com>",
+  "dependencies": {
+    "@mood/core": "1.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^3.4.3",
+    "tslint": "^5.15.0",
+    "prettier": "^1.15.3"
   }
 }

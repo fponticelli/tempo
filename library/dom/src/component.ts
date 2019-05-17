@@ -1,5 +1,5 @@
 import { DOMDynamicFragmentView } from './fragment'
-import { View, DynamicView } from '../core/view'
+import { View, DynamicView } from '@mood/core/view'
 import { DOMTemplate, DOMChild } from './template'
 import { DOMContext } from './context'
 import { filterDynamics, domChildToTemplate } from './utils'
