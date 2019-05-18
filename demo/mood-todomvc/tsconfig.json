@@ -1,0 +1,15 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "jsx": "react",
+    "lib": ["dom", "es2015"],
+    "rootDir": "./src",
+    "sourceMap": false,
+    "composite": true,
+    "target": "es5",
+    "module": "amd",
+    "moduleResolution": "node",
+    "removeComments": false,
+    "outDir": "build"
+  }
+}

@@ -16,10 +16,10 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: [ '.tsx', '.ts', '.js' ]
+    extensions: [ '.ts' ]
   },
   output: {
-    filename: 'index.js',
+    filename: 'www/index.js',
     path: __dirname
   }
 };

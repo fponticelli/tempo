@@ -26,6 +26,6 @@
     "build": "tsc",
     "go": "node lib/index.js",
     "build-go": "yarn build && yarn go",
-    "copy": "cp -R gen/* ../../src/dom/"
+    "copy": "cp -R gen/* ../../library/dom/src/"
   }
 }

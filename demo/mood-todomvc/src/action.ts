@@ -1,4 +1,4 @@
-import { Filter, Todo } from './state'
+import { Filter } from './state'
 
 export class AddingTodo {
   readonly kind = 'adding-todo'

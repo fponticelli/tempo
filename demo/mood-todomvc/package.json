@@ -3,12 +3,14 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
-    "todomvc-app-css": "^2.1.2",
+    "@mood/core": "1.0.0",
+    "@mood/dom": "1.0.0",
+    "todomvc-app-css": "^2.2.0",
     "todomvc-common": "^1.0.5"
   },
   "devDependencies": {
     "ts-loader": "^5.3.2",
-    "typescript": "^3.2.2",
+    "typescript": "^3.4.3",
     "webpack": "^4.28.1",
     "webpack-cli": "^3.1.2",
     "webpack-serve": "^2.0.3"

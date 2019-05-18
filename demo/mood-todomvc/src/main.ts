@@ -20,7 +20,7 @@ import {
   when,
   div,
   stateHandler
-} from '../../../src/dom'
+} from '@mood/dom'
 import { State, Filter, Todo } from './state'
 import { Action } from './action'
 import { Store } from './store'
