@@ -8,7 +8,7 @@
     "libraries:build": "(cd libraries/core && yarn build) && (cd libraries/dom && yarn build)",
     "demo:build": "(cd demo/todomvc && yarn build)",
     "all:build": "yarn libraries:build && yarn demo:build",
-    "node:clean": "rimraf ./**/node_modules ./**/yarn.lock",
+    "node:clean": "rimraf ./**/node_modules ./**/yarn.lock ./**/yarn-error.log",
     "libs:clean": "rimraf ./packages && mkdir packages",
     "tslint:check": "tslint \"./{library,demo}/*/{src,test}/**/*.{ts,tsx}\"",
     "tslint:fix": "tslint --fix \"./{library,demo}/*/{src,test}/**/*.{ts,tsx}\"",

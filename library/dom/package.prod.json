@@ -4,6 +4,6 @@
   "description": "",
   "author": "Franco Ponticelli <franco.ponticelli@gmail.com>",
   "dependencies": {
-    "@mood/core": "1.0.0"
+    "@mood/core": "file:../core"
   }
 }
