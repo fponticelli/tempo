@@ -1,6 +1,0 @@
-[submodule "ext/typsy"]
-	path = ext/typsy
-	url = sso://edge-internal/tsnow/typsy
-[submodule "tools/parser/ext/gecko-dev"]
-	path = tools/parser/ext/gecko-dev
-	url = git@github.com:mozilla/gecko-dev.git

@@ -1,0 +1,21 @@
+{
+  "name": "@mood/demo.todomvc",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "@mood/core": "1.0.0",
+    "@mood/dom": "1.0.0",
+    "todomvc-app-css": "2.2.0",
+    "todomvc-common": "1.0.5"
+  },
+  "devDependencies": {
+    "parcel-bundler": "1.12.3",
+    "typescript": "3.4.3"
+  },
+  "scripts": {
+    "compile": "NODE_ENV=production && parcel build src/index.html",
+    "clean": "rm -rf dist/*",
+    "build": "npm run clean && npm run compile",
+    "watch": "parcel src/index.html"
+  }
+}

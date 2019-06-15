@@ -1,9 +1,0 @@
-{
-  "name": "@mood/dom",
-  "version": "1.0.0",
-  "description": "",
-  "author": "Franco Ponticelli <franco.ponticelli@gmail.com>",
-  "dependencies": {
-    "@mood/core": "file:../core"
-  }
-}

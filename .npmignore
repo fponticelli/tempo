@@ -1,8 +1,0 @@
-coverage/
-docs/
-node_modules/
-src/
-test/
-tsconfig.json
-tslint.json
-yarn.lock

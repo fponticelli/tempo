@@ -1,31 +1,16 @@
 {
   "private": true,
-  "workspaces": [
-    "packages/*",
-    "demo/*"
-  ],
   "scripts": {
-    "libraries:build": "(cd libraries/core && yarn build) && (cd libraries/dom && yarn build)",
-    "demo:build": "(cd demo/todomvc && yarn build)",
-    "all:build": "yarn libraries:build && yarn demo:build",
-    "node:clean": "rimraf ./**/node_modules ./**/yarn.lock ./**/yarn-error.log",
-    "libs:clean": "rimraf ./packages && mkdir packages",
-    "tslint:check": "tslint \"./{library,demo}/*/{src,test}/**/*.{ts,tsx}\"",
-    "tslint:fix": "tslint --fix \"./{library,demo}/*/{src,test}/**/*.{ts,tsx}\"",
-    "prettier:check": "prettier --list-different \"./{library,demo}/*/{src,test}/**/*.{ts,tsx}\"",
-    "prettier:fix": "prettier --write \"./{library,demo}/*/{src,test}/**/*.{ts,tsx}\"",
-    "test": "jest --notify",
-    "test:watch": "jest --watchAll --notify",
-    "test:coverage": "yarn test -- --coverage=true"
+
   },
   "devDependencies": {
-    "@types/jest": "^23.3.12",
-    "jest": "^23.6.0",
-    "prettier": "^1.15.3",
-    "rimraf": "^2.6.3",
-    "ts-jest": "^23.10.5",
-    "tslint": "^5.15.0",
-    "typescript": "^3.4.3"
+    "@types/jest": "23.3.12",
+    "jest": "23.6.0",
+    "prettier": "1.15.3",
+    "rimraf": "2.6.3",
+    "ts-jest": "23.10.5",
+    "tslint": "5.15.0",
+    "typescript": "3.4.3"
   },
   "jest": {
     "rootDir": ".",

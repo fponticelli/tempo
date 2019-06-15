@@ -1,5 +1,7 @@
 {
   "compilerOptions": {
+    "composite": true,
+
     "module": "commonjs",
     "declarationMap": true,
     "esModuleInterop": true,
@@ -21,12 +23,7 @@
     "noUnusedParameters": false,
     "skipLibCheck": true,
     "removeComments": false,
-    "preserveConstEnums": true,
-
-    "paths": {
-      "@mood/core/*": ["./packages/core/*"],
-      "@mood/dom/*": ["./packages/dom/*"]
-    }
+    "preserveConstEnums": true
   },
   "exclude": [
     "node_modules",
