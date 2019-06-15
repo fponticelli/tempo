@@ -5,8 +5,5 @@
     "lib": ["dom", "es2015"],
     "rootDir": "src",
     "outDir": "lib"
-  },
-  "references": [
-    { "path": "../core/" }
-  ]
+  }
 }
