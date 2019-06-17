@@ -3,19 +3,19 @@ import { DOMContext } from './context'
 import { DOMTemplate, DOMChild } from './template'
 import { removeNode, filterDynamics, domChildToTemplate, insertBefore } from './utils'
 
-export class DOMElementsView<Element, State extends Element[], Action> implements DynamicView<State> {
+export class DOMForEachView<Item, Action> implements DynamicView<Item[]> {
   readonly kind = 'dynamic'
   constructor(
     readonly ref: Node,
     readonly ctx: DOMContext<Action>,
-    readonly children: DOMTemplate<Element, Action>[]
+    readonly children: DOMTemplate<Item, Action>[]
   ) {}
   destroy(): void {
     removeNode(this.ref)
     this.childrenView.forEach(e => e.forEach(c => c.destroy()))
   }
 
-  change(state: State): void {
+  change(state: Item[]): void {
     const stateLength = state.length
     const viewLength = this.childrenView.length
     if (stateLength > viewLength) {
@@ -38,22 +38,22 @@ export class DOMElementsView<Element, State extends Element[], Action> implement
       this.childrenView = this.childrenView.slice(0, stateLength)
     }
   }
-  private childrenView: View<Element>[][] = []
+  private childrenView: View<Item>[][] = []
 }
 
-export class DOMElementsTemplate<Element, State extends Element[], Action> implements DOMTemplate<State, Action> {
-  constructor(readonly opts: { refId?: string }, readonly children: DOMTemplate<Element, Action>[]) {}
+export class DOMForEachTemplate<Item, State extends Item[], Action> implements DOMTemplate<State, Action> {
+  constructor(readonly opts: { refId?: string }, readonly children: DOMTemplate<Item, Action>[]) {}
 
   render(ctx: DOMContext<Action>, state: State): DynamicView<State> {
-    const ref = ctx.doc.createComment(this.opts.refId || 'md:repeat')
+    const ref = ctx.doc.createComment(this.opts.refId || 'md:for_each')
     ctx.append(ref)
-    const view = new DOMElementsView<Element, State, Action>(ref, ctx.withAppend(insertBefore(ref)), this.children)
+    const view = new DOMForEachView<Item, Action>(ref, ctx.withAppend(insertBefore(ref)), this.children)
     view.change(state)
     return view
   }
 }
 
-export const elements = <State extends any[], Action>(
+export const forEach = <State extends any[], Action>(
   opts: { refId?: string },
   ...children: DOMChild<State[number], Action>[]
-) => new DOMElementsTemplate<State[number], State, Action>(opts, children.map(domChildToTemplate))
+) => new DOMForEachTemplate<State[number], State, Action>(opts, children.map(domChildToTemplate))
