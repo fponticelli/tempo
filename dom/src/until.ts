@@ -33,12 +33,14 @@ export class DOMUntilView<OuterState, InnerState, Action> implements DynamicView
       count++
     }
     let i = count
-    while (i++ < currentViewLength) {
+    while (i < currentViewLength) {
       // remove extra nodes
       this.childrenView[i].forEach(child => child.destroy())
+      i++
     }
     this.childrenView = this.childrenView.slice(0, count)
   }
+
   private childrenView: View<InnerState>[][] = []
 }
 

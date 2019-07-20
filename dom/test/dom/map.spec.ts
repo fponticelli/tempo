@@ -1,7 +1,7 @@
-import { el } from '../../src/dom/element'
-import { mapState, mapAction } from '../../src/dom/map'
+import { el } from '../../src'
+import { mapState, mapAction } from '../../src'
 import { createContext } from './common'
-import { DynamicView } from '../../src/core/view'
+import { DynamicView } from '@mood/core'
 
 describe('map', () => {
   it('mapState', () => {

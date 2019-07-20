@@ -4,5 +4,6 @@
     "lib": ["dom", "es2015"],
     "rootDir": "src",
     "outDir": "lib"
-  }
+  },
+  "exclude": ["node_modules", "lib"]
 }

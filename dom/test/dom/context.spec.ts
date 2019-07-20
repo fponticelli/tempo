@@ -1,4 +1,4 @@
-import { div, when, unless, DOMContext } from '../../src/dom'
+import { DOMContext } from '../../src'
 import { createContext, getWindow } from './common'
 
 describe('context', () => {

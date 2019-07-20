@@ -9,7 +9,7 @@ import {
   setBoolProperty,
   setStyleAttribute,
   setProperty
-} from '../../src/dom/set_attribute'
+} from '../../src/utils'
 
 describe('set_attribute', () => {
   it('setAttribute', () => {

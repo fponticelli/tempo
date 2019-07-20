@@ -1,6 +1,6 @@
 import { createContext } from './common'
-import { div } from '../../src/dom/els'
-import { adapter, component } from '../../src/dom'
+import { div } from '../../src/els'
+import { adapter, component } from '../../src'
 
 describe('adapter', () => {
   it('noOptions', () => {
@@ -103,7 +103,7 @@ describe('adapter', () => {
       )
     )
 
-    const view = template.render(ctx, { outer: 'out' })
+    template.render(ctx, { outer: 'out' })
     expect(counter).toEqual(0)
     expect(ctx.doc.body.innerHTML).toEqual('<div>inner: in, outer: notout</div>')
 

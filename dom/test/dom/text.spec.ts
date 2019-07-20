@@ -1,6 +1,6 @@
 import { createContext } from './common'
-import { DOMText } from '../../src/dom/text'
-import { DynamicView } from '../../src/core/view'
+import { DOMText } from '../../src/text'
+import { DynamicView } from '@mood/core'
 
 describe('dom_text', () => {
   it('create static undefined', () => {
@@ -31,7 +31,7 @@ describe('dom_text', () => {
     expect(ctx.doc.body.innerHTML).toEqual('xyz')
     node.destroy()
     expect(ctx.doc.body.innerHTML).toEqual('')
-    const nodeUndefined = new DOMText((r: string) => r).render(ctx, undefined as any) as DynamicView<string | undefined>
+    new DOMText((r: string) => r).render(ctx, undefined as any) as DynamicView<string | undefined>
     expect(ctx.doc.body.innerHTML).toEqual('')
   })
 })

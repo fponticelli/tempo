@@ -1,5 +1,5 @@
 import { createContext } from './common'
-import { Mood, component, span, portalWithSelector, headPortal, style, bodyPortal } from '../../src/dom'
+import { Mood, component, span, portalWithSelector, headPortal, style, bodyPortal } from '../../src'
 
 describe('portal', () => {
   it('portalWithSelector', () => {
@@ -12,7 +12,7 @@ describe('portal', () => {
       },
       portalWithSelector({ selector: '#container' }, span({ className: s => s }))
     )
-    const view = Mood.render({
+    const view = Mood.renderComponent({
       el: ctx.doc.getElementById('main')!,
       component: comp,
       document: ctx.doc
@@ -35,7 +35,7 @@ describe('portal', () => {
       portalWithSelector({ selector: '#doesnotexist' }, span({ className: s => s }))
     )
     expect(() => {
-      Mood.render({
+      Mood.renderComponent({
         el: ctx.doc.getElementById('main')!,
         component: comp,
         document: ctx.doc
@@ -52,7 +52,7 @@ describe('portal', () => {
       },
       headPortal(style({}, s => s))
     )
-    const view = Mood.render({
+    const view = Mood.renderComponent({
       el: ctx.doc.body!,
       component: comp,
       document: ctx.doc
@@ -73,7 +73,7 @@ describe('portal', () => {
       },
       bodyPortal(style({}, s => s))
     )
-    const view = Mood.render({
+    const view = Mood.renderComponent({
       el: ctx.doc.body!,
       component: comp,
       document: ctx.doc

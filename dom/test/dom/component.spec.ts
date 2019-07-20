@@ -1,5 +1,5 @@
-import { div, when, unless, DOMContext, component, text } from '../../src/dom'
-import { createContext, getWindow } from './common'
+import { div, component, text } from '../../src'
+import { createContext } from './common'
 
 describe('component', () => {
   it('fromElements sets-up the right defaults', () => {

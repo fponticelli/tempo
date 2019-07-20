@@ -1,5 +1,5 @@
 import { createContext } from './common'
-import { Mood, component, div } from '../../src/dom'
+import { Mood, component, div } from '../../src'
 
 describe('Mood', () => {
   it('render', () => {
@@ -11,7 +11,7 @@ describe('Mood', () => {
       },
       div({}, a => a)
     )
-    const view = Mood.render({
+    const view = Mood.renderComponent({
       el: ctx.doc.body,
       component: comp,
       document: ctx.doc
@@ -36,7 +36,7 @@ describe('Mood', () => {
       div({}, a => a)
     )
 
-    const view = Mood.render({
+    const view = Mood.renderComponent({
       el: ctx.doc.body,
       component: comp,
       document: ctx.doc,
