@@ -2,15 +2,16 @@
 
 - [x] repeat -> elements ?
 - [x] id -> refId
-- [ ] restore generator and add to rush projects
+- [x] restore generator and add to rush projects
+- [ ] update ns_element to support mood attributes
+- [ ] make nodes that do not depend on DOM abstracted on context and action so that they can be reused in non-dom contexts
+- [ ] consider to change all element names to capitalized first
 - [ ] use anonymous classes for view instances
 - [ ] unify fragment and node_view
 - [ ] cleanup element implementation
-- [ ] update ns_element to support mood attributes
-- [ ] consider to change all element names to capitalized first
-- [ ] make nodes that do not depend on DOM abstracted on context and action so that they can be reused in non-dom contexts
 - [x] express `forEach` in terms of `until`?
-- [ ] re-enable tests
+- [x] re-enable tests
+- [ ] add code coverage
 - [x] add `until`
 - [ ] add svg elements
 - [ ] add styling components
