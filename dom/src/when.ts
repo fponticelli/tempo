@@ -1,7 +1,7 @@
 import { DOMChild, DOMTemplate } from './template'
 import { DOMContext } from './context'
 import { View, DynamicView } from '@mood/core'
-import { domChildToTemplate, filterDynamics, removeNode } from './utils'
+import { domChildToTemplate, filterDynamics, removeNode } from './utils/dom'
 
 export interface WhenOptions<State> {
   condition: (state: State) => boolean

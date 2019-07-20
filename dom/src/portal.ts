@@ -1,7 +1,7 @@
 import { DOMTemplate, DOMChild } from './template'
 import { DOMContext } from './context'
 import { fragmentView } from './fragment'
-import { domChildToTemplate } from './utils'
+import { domChildToTemplate } from './utils/dom'
 
 export class DOMPortal<State, Action> implements DOMTemplate<State, Action> {
   constructor(

@@ -1,9 +1,9 @@
 import { DOMTemplate, DOMChild } from './template'
 import { DOMContext } from './context'
 import { View, wrapLiteral, WrappedValue } from '@mood/core'
-import { DOMAttributes } from './attributes'
-import { Acc, processAttribute, filterDynamics, domChildToTemplate } from './utils'
-import { DOMDynamicNodeView, DOMStaticNodeView } from './node_view'
+import { DOMAttributes } from './utils/attributes'
+import { Acc, processAttribute, filterDynamics, domChildToTemplate } from './utils/dom'
+import { DOMDynamicNodeView, DOMStaticNodeView } from './utils/node_view'
 import { DOMAttribute } from './value'
 
 const applyMood = <State>(el: HTMLElement, attr: WrappedValue<State, (el: any) => void>) => (state: State) => {
@@ -57,7 +57,7 @@ export class DOMElement<State, Action> implements DOMTemplate<State, Action> {
     statics.forEach(f => f())
     dynamics.forEach(f => f(state))
 
-    // TODO append before or after children
+    // TODO append before or after children?
     ctx.append(el)
 
     // children
@@ -68,11 +68,12 @@ export class DOMElement<State, Action> implements DOMTemplate<State, Action> {
 
     const dynamicChildren = filterDynamics(views).map(child => (state: State) => child.change(state))
 
-    let allDynamics = dynamics.concat(dynamicChildren)
+    const allDynamics = dynamics.concat(dynamicChildren)
 
     if (beforeChange) {
       allDynamics.unshift(applyMood(el, beforeChange))
     }
+
     if (afterChange) {
       allDynamics.push(applyMood(el, afterChange))
     }

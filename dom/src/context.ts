@@ -24,8 +24,10 @@ export class DOMContext<Action> {
 
   conditionalMapAction<OtherAction>(f: (action: OtherAction) => Action | undefined) {
     return new DOMContext<OtherAction>(this.doc, this.append, this.parent, (action: OtherAction) => {
-      let newAction = f(action)
-      if (newAction !== undefined) this.dispatch(newAction)
+      const newAction = f(action)
+      if (newAction !== undefined) {
+        this.dispatch(newAction)
+      }
     })
   }
 

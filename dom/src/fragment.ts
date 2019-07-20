@@ -1,5 +1,5 @@
 import { View, StaticView, DynamicView } from '@mood/core'
-import { filterDynamics } from './utils'
+import { filterDynamics } from './utils/dom'
 
 export class DOMBaseFragmentView {
   constructor(readonly views: View<any>[]) {}
@@ -15,7 +15,10 @@ export class DOMStaticFragmentView extends DOMBaseFragmentView implements Static
 
 export class DOMDynamicFragmentView<State> extends DOMBaseFragmentView implements DynamicView<State> {
   readonly kind = 'dynamic'
-  constructor(views: View<any>[], readonly change: (state: State) => void) {
+  constructor(
+    views: View<any>[],
+    readonly change: (state: State) => void
+  ) {
     super(views)
   }
 }

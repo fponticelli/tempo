@@ -2,7 +2,7 @@ import { DOMDynamicFragmentView } from './fragment'
 import { View, DynamicView } from '@mood/core'
 import { DOMTemplate, DOMChild } from './template'
 import { DOMContext } from './context'
-import { filterDynamics, domChildToTemplate } from './utils'
+import { filterDynamics, domChildToTemplate } from './utils/dom'
 
 export class DOMComponentView<State, Action> extends DOMDynamicFragmentView<State> {
   /* istanbul ignore next */

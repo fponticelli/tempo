@@ -1,11 +1,15 @@
 import { DOMChild, DOMTemplate } from './template'
 import { View } from '@mood/core'
 import { DOMContext } from './context'
-import { domChildToTemplate, filterDynamics } from './utils'
+import { domChildToTemplate, filterDynamics } from './utils/dom'
 import { DOMStaticFragmentView, DOMDynamicFragmentView, fragmentView } from './fragment'
 
 export class MapStateTemplate<OuterState, InnerState, Action> implements DOMTemplate<OuterState, Action> {
-  constructor(readonly map: (value: OuterState) => InnerState, readonly children: DOMTemplate<InnerState, Action>[]) {}
+  constructor(
+    readonly map: (value: OuterState) => InnerState,
+    readonly children: DOMTemplate<InnerState, Action>[]
+  ) {}
+
   render(ctx: DOMContext<Action>, state: OuterState): View<OuterState> {
     const { children, map } = this
     const innerState = map(state)

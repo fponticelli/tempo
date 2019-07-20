@@ -3,7 +3,7 @@ import { DOMComponentView, DOMComponent } from './component'
 import { DOMTemplate } from './template'
 import { DOMContext } from './context'
 
-export class DOMAdapterView<OuterState, InnerState, OuterAction, InnerAction> implements DynamicView<OuterState> {
+export class DOMAdapterView<OuterState, InnerState, InnerAction> implements DynamicView<OuterState> {
   readonly kind = 'dynamic'
   constructor(
     readonly mergeStates: (outerState: OuterState, innerState: InnerState) => InnerState | undefined,

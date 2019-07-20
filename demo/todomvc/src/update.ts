@@ -3,7 +3,7 @@ import { Action } from './action'
 import { Store } from './store'
 
 export const update = (state: State, action: Action) => {
-  let newState = { ...state }
+  const newState = { ...state }
   switch (action.kind) {
     case 'adding-todo':
       if (action.title) {

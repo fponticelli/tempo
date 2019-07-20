@@ -1,8 +1,8 @@
-import { DOMTemplate } from './template'
-import { DOMAttributes } from './attributes'
+import { DOMTemplate, DOMChild } from './template'
+import { DOMAttributes } from './utils/attributes'
 import { DOMContext } from './context'
-import { processAttribute, Acc, filterDynamics } from './utils'
-import { DOMDynamicNodeView, DOMStaticNodeView } from './node_view'
+import { processAttribute, Acc, filterDynamics, domChildToTemplate } from './utils/dom'
+import { DOMDynamicNodeView, DOMStaticNodeView } from './utils/node_view'
 import { DOMAttribute } from './value'
 
 export class DOMNSElement<State, Action> implements DOMTemplate<State, Action> {
@@ -42,4 +42,18 @@ export class DOMNSElement<State, Action> implements DOMTemplate<State, Action> {
       return new DOMStaticNodeView(el, viewChildren)
     }
   }
+}
+
+export const defaultNamespaces: Record<string, string> = {
+  // TODO add here SVG and friends
+}
+
+export const nsEl = <State, Action>(
+  ns: string,
+  name: string,
+  attributes: DOMAttributes<State, Action>,
+  ...children: DOMChild<State, Action>[]
+) => {
+  const namespace = defaultNamespaces[ns] || ns
+  return new DOMNSElement<State, Action>(namespace, name, attributes, children.map(domChildToTemplate))
 }
