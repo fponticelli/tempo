@@ -1,5 +1,8 @@
+
+
 # To Do:
 
+- [ ] add proper readme
 - [x] repeat -> elements ?
 - [x] id -> refId
 - [x] restore generator and add to rush projects
@@ -19,7 +22,7 @@
 - [ ] add webgl (three.js) abstraction
 - [ ] add canvas (paper.js) abstraction
 - [ ] add types for editor/input?
-      `data InputState<V, S, E> = Valid<V> | Invalid<S, E> | Input<S>`
+      `data InputState<V, I, E> = Valid<V> | Invalid<I, E> | Input<I>`
 - [ ] add ui framework? Material/Bulma?
 - [ ] add benchmarks
 - [ ] TodoMVC: implement 'x item(s) left'
