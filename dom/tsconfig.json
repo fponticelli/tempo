@@ -1,9 +1,25 @@
 {
   "extends": "../tsconfig.json",
   "compilerOptions": {
-    "lib": ["dom", "es2015"],
-    "rootDir": "src",
-    "outDir": "lib"
+    "sourceMap": false,
+    "jsx": "preserve",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "rootDir": "./src",
+    "outDir": "./lib",
+    "declarationMap": false,
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "module": "esnext",
+    "resolveJsonModule": true,
+    "declaration": false,
+    "isolatedModules": true,
+    "noEmit": true
   },
-  "exclude": ["node_modules", "lib"]
+  "include": [
+    "src"
+  ]
 }

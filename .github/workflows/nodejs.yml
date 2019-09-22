@@ -17,11 +17,13 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - name: rush update
+    - name: rush setup
       run: |
-        npm i -g @microsoft/rush
-        rush update
-        export NODE_NO_WARNINGS=1 && rush build
+        node common/scripts/install-run-rush.js install
+        rush change -v
+        rush install --no-link
+        rush link
+        export NODE_NO_WARNINGS=1 && rush rebuild --ship --verbose
       env:
         CI: true
     - name: rush test

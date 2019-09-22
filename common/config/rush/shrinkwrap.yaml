@@ -8,6 +8,7 @@ dependencies:
   '@types/jest': 24.0.15
   '@types/js-yaml': 3.11.2
   '@types/jsdom': 12.2.4
+  '@types/node': 10.12.18
   '@types/prettier': 1.15.2
   '@types/urijs': 1.15.38
   fs-extra-promise: 1.0.1
@@ -26,6 +27,8 @@ dependencies:
   ts-jest: 24.0.2
   ts-node: 7.0.1
   tslib: 1.9.3
+  tslint: 5.15.0
+  typescript: 3.4.3
   urijs: 1.19.1
 packages:
   /@babel/code-frame/7.0.0:
@@ -1275,10 +1278,6 @@ packages:
     dev: false
     resolution:
       integrity: sha512-q+De3S/Ri6U9uPx89YA1XuC+QIBgndIfvBaaJG0pRT8Oqa75k4Mr7G9CRZjIvlbLGIukO/31DFGFJYlQBmXf/A==
-  /@types/node/10.12.10:
-    dev: false
-    resolution:
-      integrity: sha512-8xZEYckCbUVgK8Eg7lf5Iy4COKJ5uXlnIOnePN0WUwSQggy9tolM+tDJf7wMOnT/JT/W9xDYIaYggt3mRV2O5w==
   /@types/node/10.12.18:
     dev: false
     resolution:
@@ -6779,19 +6778,29 @@ packages:
     dev: false
     resolution:
       integrity: sha512-4krF8scpejhaOgqzBEcGM7yDIEfi0/8+8zDRZhNZZ2kjmHJ4hv3zCbQWxoJGz1iw5U0Jl0nma13xzHXcncMavQ==
-  /tslint/5.11.0/typescript@3.2.1:
+  /tslint/5.15.0:
     dependencies:
-      tsutils: /tsutils/2.29.0/typescript@3.2.1
-      typescript: 3.2.1
+      babel-code-frame: 6.26.0
+      builtin-modules: 1.1.1
+      chalk: 2.4.2
+      commander: 2.20.0
+      diff: 3.5.0
+      glob: 7.1.4
+      js-yaml: 3.13.1
+      minimatch: 3.0.4
+      mkdirp: 0.5.1
+      resolve: 1.11.0
+      semver: 5.7.0
+      tslib: 1.10.0
+      tsutils: 2.29.0
     dev: false
     engines:
       node: '>=4.8.0'
     hasBin: true
-    id: registry.npmjs.org/tslint/5.11.0
     peerDependencies:
-      typescript: '>=2.1.0 || >=2.1.0-dev || >=2.2.0-dev || >=2.3.0-dev || >=2.4.0-dev || >=2.5.0-dev || >=2.6.0-dev || >=2.7.0-dev || >=2.8.0-dev || >=2.9.0-dev'
+      typescript: '>=2.1.0 || >=2.1.0-dev || >=2.2.0-dev || >=2.3.0-dev || >=2.4.0-dev || >=2.5.0-dev || >=2.6.0-dev || >=2.7.0-dev || >=2.8.0-dev || >=2.9.0-dev || >=3.0.0-dev || >= 3.1.0-dev || >= 3.2.0-dev'
     resolution:
-      integrity: sha1-mPMMAurjzecAYgHkwzywi0hYHu0=
+      integrity: sha512-6bIEujKR21/3nyeoX2uBnE8s+tMXCQXhqMmaIPJpHmXJoBJPTLcI7/VHRtUwMhnLVdwLqqY3zmd8Dxqa5CVdJA==
   /tslint/5.15.0/typescript@3.4.3:
     dependencies:
       babel-code-frame: 6.26.0
@@ -6817,11 +6826,10 @@ packages:
       typescript: '>=2.1.0 || >=2.1.0-dev || >=2.2.0-dev || >=2.3.0-dev || >=2.4.0-dev || >=2.5.0-dev || >=2.6.0-dev || >=2.7.0-dev || >=2.8.0-dev || >=2.9.0-dev || >=3.0.0-dev || >= 3.1.0-dev || >= 3.2.0-dev'
     resolution:
       integrity: sha512-6bIEujKR21/3nyeoX2uBnE8s+tMXCQXhqMmaIPJpHmXJoBJPTLcI7/VHRtUwMhnLVdwLqqY3zmd8Dxqa5CVdJA==
-  /tsutils/2.29.0/typescript@3.2.1:
+  /tsutils/2.29.0:
     dependencies:
-      typescript: 3.2.1
+      tslib: 1.10.0
     dev: false
-    id: registry.npmjs.org/tsutils/2.29.0
     peerDependencies:
       typescript: '>=2.1.0 || >=2.1.0-dev || >=2.2.0-dev || >=2.3.0-dev || >=2.4.0-dev || >=2.5.0-dev || >=2.6.0-dev || >=2.7.0-dev || >=2.8.0-dev || >=2.9.0-dev || >= 3.0.0-dev || >= 3.1.0-dev'
     resolution:
@@ -6862,13 +6870,6 @@ packages:
     dev: false
     resolution:
       integrity: sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
-  /typescript/3.2.1:
-    dev: false
-    engines:
-      node: '>=4.2.0'
-    hasBin: true
-    resolution:
-      integrity: sha512-jw7P2z/h6aPT4AENXDGjcfHTu5CSqzsbZc6YlUIebTyBAq8XaKp78x7VcSh30xwSCcsu5irZkYZUSFP1MrAMbg==
   /typescript/3.4.3:
     dev: false
     engines:
@@ -7265,7 +7266,7 @@ packages:
       lodash: 4.17.15
       prettier: 1.15.3
       request: 2.88.0
-      request-promise-core: 1.1.2
+      request-promise-core: /request-promise-core/1.1.2/request@2.88.0
       request-promise-native: /request-promise-native/1.0.7/request@2.88.0
       stealthy-require: 1.0.0
       ts-jest: /ts-jest/24.0.2/jest@24.8.0
@@ -7282,7 +7283,7 @@ packages:
       '@stoplight/json-ref-resolver': 1.2.0
       '@types/fs-extra-promise': 1.0.7
       '@types/js-yaml': 3.11.2
-      '@types/node': 10.12.10
+      '@types/node': 10.12.18
       '@types/prettier': 1.15.2
       '@types/urijs': 1.15.38
       fs-extra-promise: 1.0.1
@@ -7291,13 +7292,13 @@ packages:
       prettier: 1.15.3
       ts-node: 7.0.1
       tslib: 1.9.3
-      tslint: /tslint/5.11.0/typescript@3.2.1
-      typescript: 3.2.1
+      tslint: /tslint/5.15.0/typescript@3.4.3
+      typescript: 3.4.3
       urijs: 1.19.1
     dev: false
     name: '@rush-temp/generator.dom'
     resolution:
-      integrity: sha512-OZXtxIcsal79I+ZflTPkqsQRdRuSwEHu9Nyizrjahzd1RzpXIUmZuOyjN1nM/M0KnsD4aojAQEemgMtqqlMEKg==
+      integrity: sha512-EBPR/oojwS6zm162TzPHJh9dJXz5Xh9VrucFrrrwq+/59gQ3OQpPg4C11vHgBWEuEKl/jyR9RTXwMSvOzfFJ3A==
       tarball: 'file:projects/generator.dom.tgz'
     version: 0.0.0
 registry: 'https://registry.npmjs.org/'
@@ -7313,6 +7314,7 @@ specifiers:
   '@types/jest': 24.0.15
   '@types/js-yaml': 3.11.2
   '@types/jsdom': 12.2.4
+  '@types/node': 10.12.18
   '@types/prettier': 1.15.2
   '@types/urijs': 1.15.38
   fs-extra-promise: 1.0.1
@@ -7331,4 +7333,6 @@ specifiers:
   ts-jest: 24.0.2
   ts-node: 7.0.1
   tslib: 1.9.3
+  tslint: 5.15.0
+  typescript: 3.4.3
   urijs: 1.19.1

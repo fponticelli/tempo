@@ -16,16 +16,17 @@
   "devDependencies": {
     "@types/fs-extra-promise": "1.0.7",
     "@types/js-yaml": "3.11.2",
-    "@types/node": "10.12.10",
+    "@types/node": "10.12.18",
     "@types/urijs": "1.15.38",
     "ts-node": "7.0.1",
-    "tslint": "5.11.0",
-    "typescript": "3.2.1"
+    "tslint": "5.15.0",
+    "typescript": "3.4.3"
   },
   "scripts": {
     "compile": "tsc",
     "generate": "node lib/index.js",
     "build": "npm run compile && npm run generate && npm run copy",
-    "copy": "rm -rf ../../dom/src/els/* rm ../../dom/src/utils/attributes_mapper.ts ../../dom/src/utils/attributes.ts ../../dom/src/utils/css_properties.ts && cp -R generated/* ../../dom/src/"
+    "copy": "rm -rf ../../dom/src/els/* rm ../../dom/src/utils/attributes_mapper.ts ../../dom/src/utils/attributes.ts ../../dom/src/utils/css_properties.ts && cp -R generated/* ../../dom/src/",
+    "test": "echo 'no tests yet'"
   }
 }
