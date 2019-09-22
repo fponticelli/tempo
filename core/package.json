@@ -13,9 +13,9 @@
   "author": "Franco Ponticelli <franco.ponticelli@gmail.com>",
   "devDependencies": {
     "@types/node": "10.12.18",
-    "typescript": "3.4.3",
-    "tslint": "5.15.0",
-    "prettier": "1.15.3"
+    "typescript": "3.6.3",
+    "tslint": "5.20.0",
+    "prettier": "1.18.2"
   },
   "files": [
     "lib/*"

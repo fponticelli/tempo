@@ -9,8 +9,7 @@
     "fs-extra-promise": "1.0.1",
     "js-yaml": "3.12.0",
     "partsing": "0.5.0",
-    "prettier": "1.15.3",
-    "tslib": "1.9.3",
+    "tslib": "1.10.0",
     "urijs": "1.19.1"
   },
   "devDependencies": {
@@ -18,9 +17,9 @@
     "@types/js-yaml": "3.11.2",
     "@types/node": "10.12.18",
     "@types/urijs": "1.15.38",
-    "ts-node": "7.0.1",
-    "tslint": "5.15.0",
-    "typescript": "3.4.3"
+    "typescript": "3.6.3",
+    "tslint": "5.20.0",
+    "prettier": "1.18.2"
   },
   "scripts": {
     "compile": "tsc",

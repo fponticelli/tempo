@@ -45,7 +45,7 @@ function ucFirst(str: string) {
   return str.substring(0, 1).toUpperCase() + str.substring(1)
 }
 
-const attributeType: ValueDecoder<AttributeType> =
+const attributeType =
   objectValue({ enum: arrayValue(stringValue) }, [])
     .map(v => v.enum)
     .map(v => new EnumType(v))
@@ -86,7 +86,7 @@ const attributeType: ValueDecoder<AttributeType> =
           )
         }
       }))
-  )
+  ) as ValueDecoder<AttributeType>
 
 const tagValue: ValueDecoder<Tag> = stringValue.flatMap(type => Decoder.of(input => {
   switch (type) {
