@@ -23,11 +23,11 @@ jobs:
         rush change -v
         rush install --no-link
         rush link
-        export NODE_NO_WARNINGS=1 && rush rebuild --ship --verbose
+        rush rebuild --ship --verbose
       env:
         CI: true
     - name: rush test
       run: |
-        export NODE_NO_WARNINGS=1 && rush test
+        rush test
       env:
         CI: true
