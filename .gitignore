@@ -69,4 +69,4 @@ package-deps.json
 
 **/tsconfig.tsbuildinfo
 
-*/generated
+**/generated/
