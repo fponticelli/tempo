@@ -1,4 +1,4 @@
-export * from './els'
+export * from './html'
 export * from './adapter'
 export * from './component'
 export * from './context'

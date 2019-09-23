@@ -245,11 +245,11 @@ export function ${el.codeName}<State, Action>(
 }
 `
 
-    project = project.addFile(`els/${el.name}.ts`, content)
+    project = project.addFile(`html/${el.name}.ts`, content)
   })
 
   const indexContent = filteredElements.map(el => `export { ${el.codeName} } from './${el.name}'`).join('\n')
-  project = project.addFile(`els/index.ts`, indexContent)
+  project = project.addFile(`html/index.ts`, indexContent)
 
   const cssPropertiesContent = cssProperties.map(p => `${p.codeName}?: string`).join('\n  ')
   const cssPropertiesMapContent = cssProperties
