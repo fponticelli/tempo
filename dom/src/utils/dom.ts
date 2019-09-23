@@ -35,7 +35,7 @@ export type Acc<State> = {
 }
 
 export const processAttribute = <State, Action>(
-  el: HTMLElement,
+  el: Element,
   name: string,
   value: DOMAttribute<State, Action> | DOMEventHandler<State, any, Action> | DOMProperty<State, Action>,
   dispatch: (action: Action) => void,
@@ -43,7 +43,7 @@ export const processAttribute = <State, Action>(
 ): Acc<State> => {
   name = attributeNameMap[name as keyof (typeof attributeNameMap)] || name
 
-  let set: (el: HTMLElement, name: string, value: any) => void
+  let set: (el: Element, name: string, value: any) => void
   const isEvent = name.startsWith('on')
   if (isEvent) {
     // events

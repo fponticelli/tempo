@@ -1,46 +1,15 @@
 import { DOMTemplate, DOMChild } from './template'
-import { DOMContext } from './context'
-import { View, wrapLiteral, WrappedValue } from '@mood/core'
 import { DOMAttributes } from './utils/attributes'
-import { Acc, processAttribute, filterDynamics, domChildToTemplate } from './utils/dom'
+import { DOMContext } from './context'
+import { processAttribute, Acc, filterDynamics, domChildToTemplate } from './utils/dom'
 import { DOMDynamicNodeView, DOMStaticNodeView } from './utils/node_view'
 import { DOMAttribute } from './value'
+import { prepareAttributes, maybeApplyMood, applyMood } from './element'
+import { View } from '@mood/core'
 
-export const applyMood = <State>(el: Element, attr: WrappedValue<State, (el: any) => void>) => (state: State) => {
-  const f = attr.resolve(state)
-  /* istanbul ignore next */
-  if (f != null) {
-    f(el)
-  }
-}
-
-export const maybeApplyMood = <State>(el: Element, attr: WrappedValue<State, (el: any) => void> | undefined) => (
-  state: State
-) => {
-  if (attr != null) {
-    applyMood(el, attr)(state)
-  }
-}
-
-export const prepareAttributes = <State, Action>(attrs: DOMAttributes<State, Action>) => {
-  const attributes = { ...attrs }
-
-  const afterRender = attributes.moodAfterRender && wrapLiteral(attributes.moodAfterRender)
-  const beforeChange = attributes.moodBeforeChange && wrapLiteral(attributes.moodBeforeChange)
-  const afterChange = attributes.moodAfterChange && wrapLiteral(attributes.moodAfterChange)
-  const beforeDestroyf = attributes.moodBeforeDestroy
-  const beforeDestroy = beforeDestroyf && (() => beforeDestroyf(el))
-
-  delete attributes.moodAfterRender
-  delete attributes.moodBeforeChange
-  delete attributes.moodAfterChange
-  delete attributes.moodBeforeDestroy
-
-  return { attributes, afterRender, beforeChange, afterChange, beforeDestroy }
-}
-
-export class DOMElement<State, Action> implements DOMTemplate<State, Action> {
+export class DOMElementNS<State, Action> implements DOMTemplate<State, Action> {
   constructor(
+    readonly ns: string,
     readonly name: string,
     readonly attributes: DOMAttributes<State, Action>,
     readonly children: DOMTemplate<State, Action>[]
@@ -48,7 +17,7 @@ export class DOMElement<State, Action> implements DOMTemplate<State, Action> {
 
   render(ctx: DOMContext<Action>, state: State): View<State> {
     type AttributeName = keyof (typeof attributes)
-    const el = ctx.doc.createElement(this.name)
+    const el = ctx.doc.createElementNS(this.ns, this.name)
 
     const { attributes, afterRender, beforeChange, afterChange, beforeDestroy } = prepareAttributes(this.attributes)
 
@@ -93,10 +62,16 @@ export class DOMElement<State, Action> implements DOMTemplate<State, Action> {
   }
 }
 
-export const el = <State, Action>(
+export const defaultNamespaces: Record<string, string> = {
+  // TODO add here SVG and friends
+}
+
+export const elNS = <State, Action>(
+  ns: string,
   name: string,
   attributes: DOMAttributes<State, Action>,
   ...children: DOMChild<State, Action>[]
 ) => {
-  return new DOMElement<State, Action>(name, attributes, children.map(domChildToTemplate))
+  const namespace = defaultNamespaces[ns] || ns
+  return new DOMElementNS<State, Action>(namespace, name, attributes, children.map(domChildToTemplate))
 }

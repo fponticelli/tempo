@@ -1,7 +1,7 @@
 import { CSSProperties, cssMapper } from './css_properties'
 
-export const setOneStyle = (el: HTMLElement, name: string, value: any) => {
-  const anyStyle = el.style as any
+export const setOneStyle = (el: Element, name: string, value: any) => {
+  const anyStyle = (el as HTMLElement).style as any
   if (value == null) {
     anyStyle[name] = null
   } else {

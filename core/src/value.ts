@@ -39,7 +39,7 @@ export const literal = <State, Value>(value: UnwrappedLiteralValue<Value>): Wrap
 export const wrapLiteral = <State, Value>(
   value: UnwrappedLiteralValue<Value> | WrappedDerivedValue<State, Value>
 ): WrappedValue<State, Value> => {
-  if ((value as any).kind === 'derived') {
+  if (value && (value as any).kind === 'derived') {
     return value as WrappedDerivedValue<State, Value>
   } else {
     return literal(value as UnwrappedLiteralValue<Value>)
