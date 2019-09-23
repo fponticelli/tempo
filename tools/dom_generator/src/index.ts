@@ -115,19 +115,21 @@ const setterToString = (types: AttributeType[], isProperty: boolean) => {
   }
 }
 
-async function f() {
-  const attributes = await loadDecode('./specs/attributes.yaml', parseAttributes)
-  const collections = await loadDecode('./specs/collections.yaml', parseCollections)
-  const events = await loadDecode('./specs/events.yaml', parseEvents)
-  const elements = await loadDecode('./specs/elements.yaml', parseElements)
-  const cssProperties = await loadDecode('./specs/css-properties.yaml', parseCSSProperties)
+async function generate(src: string) {
+  const csrc = src.toUpperCase()
+
+  const attributes = await loadDecode(`./specs/${src}/attributes.yaml`, parseAttributes)
+  const collections = await loadDecode(`./specs/${src}/collections.yaml`, parseCollections)
+  const events = await loadDecode(`./specs/${src}/events.yaml`, parseEvents)
+  const elements = await loadDecode(`./specs/${src}/elements.yaml`, parseElements)
+  const cssProperties = await loadDecode(`./specs/${src}/css-properties.yaml`, parseCSSProperties)
 
   const attributesMap = attributes.reduce((acc, attr) => {
     acc.set(attr.name, attr)
     return acc
   }, new Map<string, Attribute>())
 
-  let project = Project.empty('./generated/')
+  let project = Project.empty(`./generated/${src}`)
 
   const filteredEvents = events.filter(exclude)
 
@@ -144,15 +146,15 @@ async function f() {
 
   const domAttributesContent = `
 /* istanbul ignore file */
-import { DOMAttribute, DOMEventHandler, MoodAttribute } from '../value'
+import { DOMAttribute, DOMEventHandler, MoodAttribute } from '../../value'
 
-import { CSSProperties } from './css_properties'
+import { ${csrc}CSSProperties as CSSProperties } from './${src}_css_properties'
 
 export interface DOMAttributes<State, Action> {
   ${allAttributes.join('\n  ')}
 }
 `
-  project = project.addFile(`utils/attributes.ts`, domAttributesContent)
+  project = project.addFile(`common/${src}_attributes.ts`, domAttributesContent)
 
   const attributeNames = filteredAttributes
     .filter(attr => attr.codeName !== attr.domName)
@@ -180,18 +182,18 @@ import {
   setStyleAttribute,
   setBoolProperty,
   setProperty
-} from './set_attribute'
+} from '../../utils/set_attribute'
 
-export const attributeNameMap: Record<string, string> = {
+export const ${src}AttributeNameMap: Record<string, string> = {
   ${attributeNames.join(',\n  ')}
 }
 
-export const attributeMap: Record<string, (el: Element, name: string, value: any) => void> = {
+export const ${src}AttributeMap: Record<string, (el: Element, name: string, value: any) => void> = {
   ${attributeApplication.join(',\n  ')}
 }
 `
 
-  project = project.addFile(`utils/attributes_mapper.ts`, attributeMapperContent)
+  project = project.addFile(`common/${src}_attributes_mapper.ts`, attributeMapperContent)
 
   filteredElements.forEach(el => {
     const attrType = `${ucFirst(el.codeName)}Attributes`
@@ -229,8 +231,8 @@ export const attributeMap: Record<string, (el: Element, name: string, value: any
 import { DOMChild } from '../template'
 import { DOMAttribute, DOMEventHandler } from '../value'
 import { DOMElement } from '../element'
-import { CSSAttributes, CSSProperties } from '../utils/css_properties'
-import { MoodAttributes } from '../utils/mood_attributes'
+import { ${csrc}CSSAttributes as CSSAttributes, ${csrc}CSSProperties as CSSProperties } from './common/${src}_css_properties'
+import { ${csrc}MoodAttributes as MoodAttributes } from './common/${src}_mood_attributes'
 import { el } from '../element'
 
 export interface ${attrType}<State, Action> {
@@ -245,11 +247,14 @@ export function ${el.codeName}<State, Action>(
 }
 `
 
-    project = project.addFile(`html/${el.name}.ts`, content)
+    project = project.addFile(`./${el.name}.ts`, content)
   })
 
-  const indexContent = filteredElements.map(el => `export { ${el.codeName} } from './${el.name}'`).join('\n')
-  project = project.addFile(`html/index.ts`, indexContent)
+  const indexContent = filteredElements
+    .map(el => `export { ${el.codeName} } from './${el.name}'`)
+    .concat(`export * from './common'`)
+    .join('\n')
+  project = project.addFile(`./index.ts`, indexContent)
 
   const cssPropertiesContent = cssProperties.map(p => `${p.codeName}?: string`).join('\n  ')
   const cssPropertiesMapContent = cssProperties
@@ -260,37 +265,46 @@ export function ${el.codeName}<State, Action>(
 
   const cssContent = `
 /* istanbul ignore file */
-import { DOMAttribute } from '../value'
+import { DOMAttribute } from '../../value'
 
-export interface CSSProperties {
+export interface ${csrc}CSSProperties {
   ${cssPropertiesContent}
 }
 
-export interface CSSAttributes<State> {
+export interface ${csrc}CSSAttributes<State> {
   ${cssAttributesContent}
 }
 
-export const cssMapper = {
+export const ${src}CssMapper = {
   ${cssPropertiesMapContent}
 }
 `
 
-  project = project.addFile(`utils/css_properties.ts`, cssContent)
+  project = project.addFile(`common/${src}_css_properties.ts`, cssContent)
 
   const moodAttributeContent = moodAttributes.map(a => a.pairToString('El')).join(',\n  ')
 
   const moodContent = `
 /* istanbul ignore file */
-import { MoodAttribute }   from '../value'
+import { MoodAttribute }   from '../../value'
 
-export interface MoodAttributes<State, El> {
+export interface ${csrc}MoodAttributes<State, El> {
   ${moodAttributeContent}
 }
 `
 
-  project = project.addFile(`./utils/mood_attributes.ts`, moodContent)
+  project = project.addFile(`./common/${src}_mood_attributes.ts`, moodContent)
+
+  const indexCommonContent = `
+export * from './${src}_attributes_mapper'
+export * from './${src}_attributes'
+export * from './${src}_css_properties'
+export * from './${src}_mood_attributes'
+`
+
+  project = project.addFile(`./common/index.ts`, indexCommonContent)
 
   await project.cleanAndSave()
 }
 
-f().catch(e => console.error(e))
+generate('html').catch(e => console.error(e))

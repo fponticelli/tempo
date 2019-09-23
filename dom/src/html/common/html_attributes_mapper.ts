@@ -7,9 +7,9 @@ import {
   setStyleAttribute,
   setBoolProperty,
   setProperty
-} from './set_attribute'
+} from '../../utils/set_attribute'
 
-export const attributeNameMap: Record<string, string> = {
+export const htmlAttributeNameMap: Record<string, string> = {
   acceptCharset: 'accept-charset',
   asAttr: 'as',
   className: 'class',
@@ -17,7 +17,7 @@ export const attributeNameMap: Record<string, string> = {
   httpEquiv: 'http-equiv'
 }
 
-export const attributeMap: Record<string, (el: Element, name: string, value: any) => void> = {
+export const htmlAttributeMap: Record<string, (el: Element, name: string, value: any) => void> = {
   acceptCharset: setSpaceSeparated,
   async: setBoolAttribute,
   autofocus: setBoolAttribute,

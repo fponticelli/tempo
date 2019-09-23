@@ -1,4 +1,4 @@
-import { CSSProperties, cssMapper } from './css_properties'
+import { HTMLCSSProperties as CSSProperties, htmlCssMapper as cssMapper } from '../html/common/html_css_properties'
 
 export const setOneStyle = (el: Element, name: string, value: any) => {
   const anyStyle = (el as HTMLElement).style as any

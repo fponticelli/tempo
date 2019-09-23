@@ -1,7 +1,7 @@
 /* istanbul ignore file */
-import { MoodAttribute } from '../value'
+import { MoodAttribute } from '../../value'
 
-export interface MoodAttributes<State, El> {
+export interface HTMLMoodAttributes<State, El> {
   moodAfterRender?: MoodAttribute<State, El>
   moodAfterChange?: MoodAttribute<State, El>
   moodBeforeChange?: MoodAttribute<State, El>

@@ -1,5 +1,4 @@
 import { DOMTemplate, DOMChild } from './template'
-import { DOMAttributes } from './utils/attributes'
 import { DOMContext } from './context'
 import { processAttribute, Acc, filterDynamics, domChildToTemplate } from './utils/dom'
 import { DOMDynamicNodeView, DOMStaticNodeView } from './utils/node_view'
@@ -11,7 +10,7 @@ export class DOMElementNS<State, Action> implements DOMTemplate<State, Action> {
   constructor(
     readonly ns: string,
     readonly name: string,
-    readonly attributes: DOMAttributes<State, Action>,
+    readonly attributes: Record<string, DOMAttribute<State, Action>>,
     readonly children: DOMTemplate<State, Action>[]
   ) {}
 
@@ -69,7 +68,7 @@ export const defaultNamespaces: Record<string, string> = {
 export const elNS = <State, Action>(
   ns: string,
   name: string,
-  attributes: DOMAttributes<State, Action>,
+  attributes: Record<string, DOMAttribute<State, Action>>,
   ...children: DOMChild<State, Action>[]
 ) => {
   const namespace = defaultNamespaces[ns] || ns

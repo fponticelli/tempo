@@ -2,8 +2,8 @@
 import { DOMChild } from '../template'
 import { DOMAttribute, DOMEventHandler } from '../value'
 import { DOMElement } from '../element'
-import { CSSAttributes, CSSProperties } from '../utils/css_properties'
-import { MoodAttributes } from '../utils/mood_attributes'
+import { HTMLCSSAttributes as CSSAttributes, HTMLCSSProperties as CSSProperties } from './common/html_css_properties'
+import { HTMLMoodAttributes as MoodAttributes } from './common/html_mood_attributes'
 import { el } from '../element'
 
 export interface FigureAttributes<State, Action> {

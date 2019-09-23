@@ -1,7 +1,7 @@
 /* istanbul ignore file */
-import { DOMAttribute, DOMEventHandler, MoodAttribute } from '../value'
+import { DOMAttribute, DOMEventHandler, MoodAttribute } from '../../value'
 
-import { CSSProperties } from './css_properties'
+import { HTMLCSSProperties as CSSProperties } from './html_css_properties'
 
 export interface DOMAttributes<State, Action> {
   acceptCharset?: DOMAttribute<State, string[] | string[]>

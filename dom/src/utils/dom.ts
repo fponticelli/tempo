@@ -1,6 +1,6 @@
 import { View, DynamicView, UnwrappedDerivedValue, WrappedDerivedValue } from '@mood/core'
 import { DOMAttribute, DOMEventHandler, DOMProperty } from '../value'
-import { attributeNameMap, attributeMap } from './attributes_mapper'
+import { htmlAttributeNameMap as attributeNameMap, htmlAttributeMap as attributeMap } from '../html/common/html_attributes_mapper'
 import { setEvent, setAttribute, setOneStyle } from './set_attribute'
 import { DOMChild, DOMTemplate } from '../template'
 import { text } from '../text'

@@ -1,7 +1,7 @@
 /* istanbul ignore file */
-import { DOMAttribute } from '../value'
+import { DOMAttribute } from '../../value'
 
-export interface CSSProperties {
+export interface HTMLCSSProperties {
   additiveSymbols?: string
   alignContent?: string
   alignItems?: string
@@ -354,7 +354,7 @@ export interface CSSProperties {
   zoom?: string
 }
 
-export interface CSSAttributes<State> {
+export interface HTMLCSSAttributes<State> {
   $additiveSymbols?: DOMAttribute<State, string>
   $alignContent?: DOMAttribute<State, string>
   $alignItems?: DOMAttribute<State, string>
@@ -707,7 +707,7 @@ export interface CSSAttributes<State> {
   $zoom?: DOMAttribute<State, string>
 }
 
-export const cssMapper = {
+export const htmlCssMapper = {
   additiveSymbols: 'additive-symbols',
   alignContent: 'align-content',
   alignItems: 'align-items',
