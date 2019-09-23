@@ -12,18 +12,22 @@
    */
   "commands": [
     {
-      /**
-       * (Required) Determines the type of custom command.
-       * Rush's "bulk" commands are invoked separately for each project.  Rush will look in
-       * each project's package.json file for a "scripts" entry whose name matches the
-       * command name.  By default, the command will run for every project in the repo,
-       * according to the dependency graph (similar to how "rush build" works).
-       * The set of projects can be restricted e.g. using the "--to" or "--from" parameters.
-       */
       "commandKind": "bulk",
       "name": "test",
       "summary": "Run `npm run test` on each project.",
       "description": "Run `npm run test` on each project.",
+      "enableParallelism": true
+    }, {
+      "commandKind": "bulk",
+      "name": "tslint",
+      "summary": "Run `tslint` on each project.",
+      "description": "Run `tslint` on each project.",
+      "enableParallelism": true
+    }, {
+      "commandKind": "bulk",
+      "name": "prettier",
+      "summary": "Run `prettier` on each project.",
+      "description": "Run `prettier` on each project.",
       "enableParallelism": true
     }
     // {

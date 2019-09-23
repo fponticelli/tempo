@@ -25,6 +25,12 @@ jobs:
         rush rebuild --verbose
       env:
         CI: true
+    - name: code style
+      run: |
+        rush tslint
+        rush prettier
+      env:
+        CI: true
     - name: rush test
       run: |
         rush test

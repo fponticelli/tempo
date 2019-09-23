@@ -56,7 +56,12 @@ export class DOMUntilTemplate<OuterState, InnerState, Action> implements DOMTemp
   render(ctx: DOMContext<Action>, state: OuterState): DynamicView<OuterState> {
     const ref = ctx.doc.createComment(this.opts.refId || 'md:until')
     ctx.append(ref)
-    const view = new DOMUntilView<OuterState, InnerState, Action>(ref, this.opts.repeatUntil, ctx.withAppend(insertBefore(ref)), this.children)
+    const view = new DOMUntilView<OuterState, InnerState, Action>(
+      ref,
+      this.opts.repeatUntil,
+      ctx.withAppend(insertBefore(ref)),
+      this.children
+    )
     view.change(state)
     return view
   }

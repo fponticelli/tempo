@@ -45,11 +45,7 @@ export const update = (state: State, action: Action) => {
       const index2 = state.todos.findIndex(o => o.id === action.id)
       if (index2 >= 0) {
         const updated = { id: action.id, title: action.title, completed: state.todos[index2].completed }
-        newState.todos = [
-          ...state.todos.slice(0, index2),
-          updated,
-          ...state.todos.slice(index2 + 1)
-        ]
+        newState.todos = [...state.todos.slice(0, index2), updated, ...state.todos.slice(index2 + 1)]
       }
       break
     default:

@@ -10,13 +10,18 @@
   },
   "devDependencies": {
     "parcel-bundler": "1.12.3",
-    "typescript": "3.6.3"
+    "typescript": "3.6.3",
+    "tslint": "5.20.0",
+    "prettier": "1.18.2"
   },
   "scripts": {
     "compile": "NODE_ENV=production && parcel build src/index.html",
     "clean": "rm -rf dist/*",
     "build": "npm run clean && npm run compile",
     "watch": "parcel src/index.html",
+    "tslint": "tslint -p ./tslint.json",
+    "prettier": "prettier -c src/**/*.ts",
+    "prettier-fix": "prettier --write src/**/*.ts",
     "test": "echo 'no tests yet'"
   }
 }

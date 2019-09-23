@@ -1,8 +1,5 @@
 export class MoodAttribute {
-  constructor(
-    readonly name: string,
-    readonly typeToString: (elInterface: string) => string
-  ) {}
+  constructor(readonly name: string, readonly typeToString: (elInterface: string) => string) {}
 
   pairToString(elInterface: string): string {
     const nameCapitalized = this.name.substring(0, 1).toUpperCase() + this.name.substring(1)

@@ -62,7 +62,7 @@ export type Action =
   | ToggleFilter
   | UpdateTodo
 
-export const Action  = {
+export const Action = {
   adddingTodo: (title: string): Action => new AddingTodo(title),
   addTodo: (title: string): Action => new CreateTodo(title),
   cancelAddTodo: new CancelAddingTodo() as Action,

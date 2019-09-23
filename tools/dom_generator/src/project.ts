@@ -3,26 +3,17 @@ import * as path from 'path'
 import * as prettier from 'prettier'
 
 export class FileContent {
-  constructor(
-    readonly filePath: string,
-    readonly content: string
-  ) {}
+  constructor(readonly filePath: string, readonly content: string) {}
 }
 
 export class Project {
   static empty(basePath: string) {
     return new Project(basePath, [])
   }
-  constructor(
-    readonly basePath: string,
-    readonly files: FileContent[]
-  ) {}
+  constructor(readonly basePath: string, readonly files: FileContent[]) {}
 
   addFile(filePath: string, content: string) {
-    return new Project(
-      this.basePath,
-      this.files.concat([new FileContent(filePath, content)])
-    )
+    return new Project(this.basePath, this.files.concat([new FileContent(filePath, content)]))
   }
 
   async clean() {

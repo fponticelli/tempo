@@ -31,7 +31,8 @@ describe('dom_text', () => {
     expect(ctx.doc.body.innerHTML).toEqual('xyz')
     node.destroy()
     expect(ctx.doc.body.innerHTML).toEqual('')
-    new DOMText((r: string) => r).render(ctx, undefined as any) as DynamicView<string | undefined>
+    const t = new DOMText((r: string) => r)
+    t.render(ctx, undefined as any)
     expect(ctx.doc.body.innerHTML).toEqual('')
   })
 })

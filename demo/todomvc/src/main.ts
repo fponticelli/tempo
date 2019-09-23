@@ -46,7 +46,7 @@ const filterF = (filter: Filter) => {
   }
 }
 
-const selectedF = (filter: Filter) => (state: State) => state.filter === filter ? 'selected' : undefined
+const selectedF = (filter: Filter) => (state: State) => (state.filter === filter ? 'selected' : undefined)
 
 type TodoWEditing = Todo & { editing: boolean }
 
@@ -55,7 +55,7 @@ const view = component(
   section(
     { className: 'todoapp' },
     header(
-      { className: 'header'},
+      { className: 'header' },
       h1({}, 'todos'),
       input({
         className: 'new-todo',
@@ -77,23 +77,19 @@ const view = component(
     section(
       { className: 'main' },
       input({ id: 'toggle-all', className: 'toggle-all', type: 'checkbox' }),
-      label(
-        { for: 'toggle-all' },
-        'Mark all as complete'
-      ),
+      label({ for: 'toggle-all' }, 'Mark all as complete'),
       ul(
         { className: 'todo-list' },
         mapState(
-          { map: state =>
-              state.todos
-                .filter(filterF(state.filter))
-                .map(todo => {
-                  if (state.editing && state.editing.id === todo.id) {
-                    return { ...todo, editing: true, title: state.editing.title }
-                  } else {
-                    return { ...todo, editing: false }
-                  }
-                })
+          {
+            map: state =>
+              state.todos.filter(filterF(state.filter)).map(todo => {
+                if (state.editing && state.editing.id === todo.id) {
+                  return { ...todo, editing: true, title: state.editing.title }
+                } else {
+                  return { ...todo, editing: false }
+                }
+              })
           },
           elements<TodoWEditing[], Action>(
             {},
@@ -101,9 +97,9 @@ const view = component(
               {
                 className: todo => {
                   const classes = [
-                                    todo.completed ? 'completed' : undefined,
-                                    todo.editing ? 'editing' : undefined
-                                  ].filter(v => v != null)
+                    todo.completed ? 'completed' : undefined,
+                    todo.editing ? 'editing' : undefined
+                  ].filter(v => v != null)
                   return classes.join(' ') || undefined
                 }
               },
@@ -161,21 +157,39 @@ const view = component(
       span({ className: 'todo-count' }),
       ul(
         { className: 'filters' },
-        li({}, a({
-          href: '#/',
-          className: selectedF(Filter.All),
-          onClick: changeF(Filter.All)
-        }, 'All')),
-        li({}, a({
-          href: '#/active',
-          className: selectedF(Filter.Active),
-          onClick: changeF(Filter.Active)
-        }, 'Active')),
-        li({}, a({
-          href: '#/completed',
-          className: selectedF(Filter.Completed),
-          onClick: changeF(Filter.Completed)
-        }, 'Completed'))
+        li(
+          {},
+          a(
+            {
+              href: '#/',
+              className: selectedF(Filter.All),
+              onClick: changeF(Filter.All)
+            },
+            'All'
+          )
+        ),
+        li(
+          {},
+          a(
+            {
+              href: '#/active',
+              className: selectedF(Filter.Active),
+              onClick: changeF(Filter.Active)
+            },
+            'Active'
+          )
+        ),
+        li(
+          {},
+          a(
+            {
+              href: '#/completed',
+              className: selectedF(Filter.Completed),
+              onClick: changeF(Filter.Completed)
+            },
+            'Completed'
+          )
+        )
       ),
       when(
         {

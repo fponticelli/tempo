@@ -1,6 +1,6 @@
 export abstract class TypeBase {
-  abstract readonly kind
-    : 'string'
+  abstract readonly kind:
+    | 'string'
     | 'integer'
     | 'number'
     | 'length'
@@ -93,9 +93,7 @@ export class SpaceSeparatedType extends TypeBase {
 }
 export class EnumType extends TypeBase {
   readonly kind: 'enum' = 'enum'
-  constructor(
-    readonly values: string[]
-  ) {
+  constructor(readonly values: string[]) {
     super()
   }
   toTSString() {
@@ -156,8 +154,7 @@ export enum Tag {
 const combineTags = (a: Tag[], b: Tag[]) => {
   const buff = [...a]
   b.forEach(t => {
-    if (buff.indexOf(t) < 0)
-      buff.push(t)
+    if (buff.indexOf(t) < 0) buff.push(t)
   })
   return buff
 }
