@@ -4,7 +4,7 @@ import * as path from 'path'
 import { merge, resolveExposure, markAsDeprecated, mapToArray } from './tslib/helpers'
 // import { Flavor, emitWebIdl } from './tslib/emitter'
 import { convert } from './tslib/widlprocess'
-import { getElementTypes as generateTypes } from './expose'
+import { generateTypes } from './expose'
 // import { getExposedTypes } from './tslib/expose'
 
 // function mergeNamesakes(filtered: Browser.WebIdl) {
@@ -201,8 +201,12 @@ function emitElements() {
   // console.log(webidl.interfaces.interface.HTMLElement)
   // console.log(webidl.interfaces.interface.HTMLInputElement)
 
+  // mergeNamesakes(webidl)
+
   const ts = generateTypes(webidl, new Set(knownTypes.Window))
+  // fs.writeFileSync(path.join(__dirname, '..', 'generated', 'info.json'), JSON.stringify(webidl, null, 2), 'utf-8')
   fs.writeFileSync(path.join(__dirname, '..', 'generated', 'web.ts'), ts, 'utf-8')
+
   // emitDomWeb(webidl, tsWebOutput, new Set(knownTypes.Window))
   // emitDomWorker(webidl, tsWorkerOutput, new Set(knownTypes.Worker))
   // emitES6DomIterators(webidl, tsWebIteratorsOutput)
@@ -240,3 +244,13 @@ function emitElements() {
 }
 
 emitElements()
+
+/*
+- missing style attribute/property
+- missing style $properties
+- missing doom attributes
+- generate css html_attributes_mapper
+- generate css html_attributes
+- generate css html_css_properties
+- generate elNs when ns is not html
+*/

@@ -63,6 +63,7 @@ export class DOMElementNS<State, Action> implements DOMTemplate<State, Action> {
 
 export const defaultNamespaces: Record<string, string> = {
   // TODO add here SVG and friends
+  'svg': 'TODO'
 }
 
 export const elNS = <State, Action>(
