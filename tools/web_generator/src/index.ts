@@ -2,53 +2,54 @@ import * as Browser from './tslib/types'
 import * as fs from 'fs'
 import * as path from 'path'
 import { merge, resolveExposure, markAsDeprecated, mapToArray } from './tslib/helpers'
-import { Flavor, emitWebIdl } from './tslib/emitter'
+// import { Flavor, emitWebIdl } from './tslib/emitter'
 import { convert } from './tslib/widlprocess'
-import { getExposedTypes } from './tslib/expose'
+import { getElementTypes } from './expose'
+// import { getExposedTypes } from './tslib/expose'
 
-function mergeNamesakes(filtered: Browser.WebIdl) {
-  const targets = [
-    ...Object.values(filtered.interfaces!.interface),
-    ...Object.values(filtered.mixins!.mixin),
-    ...filtered.namespaces!
-  ]
-  for (const i of targets) {
-    if (!i.properties || !i.properties.namesakes) {
-      continue
-    }
-    const { property } = i.properties!
-    for (const [prop] of Object.values(i.properties.namesakes)) {
-      if (prop && !(prop.name in property)) {
-        property[prop.name] = prop
-      }
-    }
-  }
-}
+// function mergeNamesakes(filtered: Browser.WebIdl) {
+//   const targets = [
+//     ...Object.values(filtered.interfaces!.interface),
+//     ...Object.values(filtered.mixins!.mixin),
+//     ...filtered.namespaces!
+//   ]
+//   for (const i of targets) {
+//     if (!i.properties || !i.properties.namesakes) {
+//       continue
+//     }
+//     const { property } = i.properties!
+//     for (const [prop] of Object.values(i.properties.namesakes)) {
+//       if (prop && !(prop.name in property)) {
+//         property[prop.name] = prop
+//       }
+//     }
+//   }
+// }
 
-function emitDomWorker(webidl: Browser.WebIdl, tsWorkerOutput: string, forceKnownWorkerTypes: Set<string>) {
-  const worker = getExposedTypes(webidl, 'Worker', forceKnownWorkerTypes)
-  mergeNamesakes(worker)
-  const result = emitWebIdl(worker, Flavor.Worker)
-  fs.writeFileSync(tsWorkerOutput, result)
-  return
-}
+// function emitDomWorker(webidl: Browser.WebIdl, tsWorkerOutput: string, forceKnownWorkerTypes: Set<string>) {
+//   const worker = getExposedTypes(webidl, 'Worker', forceKnownWorkerTypes)
+//   mergeNamesakes(worker)
+//   const result = emitWebIdl(worker, Flavor.Worker)
+//   fs.writeFileSync(tsWorkerOutput, result)
+//   return
+// }
 
-function emitDomWeb(webidl: Browser.WebIdl, tsWebOutput: string, forceKnownWindowTypes: Set<string>) {
-  const browser = getExposedTypes(webidl, 'Window', forceKnownWindowTypes)
-  mergeNamesakes(browser)
-  const result = emitWebIdl(browser, Flavor.Web)
-  fs.writeFileSync(tsWebOutput, result)
-  return
-}
+// function emitDomWeb(webidl: Browser.WebIdl, tsWebOutput: string, forceKnownWindowTypes: Set<string>) {
+//   const browser = getExposedTypes(webidl, 'Window', forceKnownWindowTypes)
+//   mergeNamesakes(browser)
+//   const result = emitWebIdl(browser, Flavor.Web)
+//   fs.writeFileSync(tsWebOutput, result)
+//   return
+// }
 
-function emitES6DomIterators(webidl: Browser.WebIdl, tsWebIteratorsOutput: string) {
-  fs.writeFileSync(tsWebIteratorsOutput, emitWebIdl(webidl, Flavor.ES6Iterators))
-}
+// function emitES6DomIterators(webidl: Browser.WebIdl, tsWebIteratorsOutput: string) {
+//   fs.writeFileSync(tsWebIteratorsOutput, emitWebIdl(webidl, Flavor.ES6Iterators))
+// }
 
-function emitDom() {
-  const __SOURCE_DIRECTORY__ = __dirname
-  const inputFolder = path.join(__SOURCE_DIRECTORY__, '../', 'inputfiles')
-  const outputFolder = path.join(__SOURCE_DIRECTORY__, '../', 'generated')
+function emitElements() {
+  const __SOURCE_DIRECTORY__ = path.join(__dirname, '..', 'extern', 'TSJS-lib-generator')
+  const inputFolder = path.join(__SOURCE_DIRECTORY__, 'inputfiles')
+  const outputFolder = path.join(__dirname, '..', 'generated')
 
   // ${name} will be substituted with the name of an interface
   const removeVerboseIntroductions: [RegExp, string][] = [
@@ -65,9 +66,9 @@ function emitDom() {
       fs.mkdirSync(outputFolder)
   }
 
-  const tsWebOutput = path.join(outputFolder, 'dom.generated.d.ts')
-  const tsWebIteratorsOutput = path.join(outputFolder, 'dom.iterable.generated.d.ts')
-  const tsWorkerOutput = path.join(outputFolder, 'webworker.generated.d.ts')
+  // const tsWebOutput = path.join(outputFolder, 'dom.generated.d.ts')
+  // const tsWebIteratorsOutput = path.join(outputFolder, 'dom.iterable.generated.d.ts')
+  // const tsWorkerOutput = path.join(outputFolder, 'webworker.generated.d.ts')
 
   const overriddenItems = require(path.join(inputFolder, 'overridingTypes.json'))
   const addedItems = require(path.join(inputFolder, 'addedTypes.json'))
@@ -181,46 +182,60 @@ function emitDom() {
   webidl = merge(webidl, overriddenItems)
   webidl = merge(webidl, comments)
   for (const name in webidl.interfaces!.interface) {
-      const i = webidl.interfaces!.interface[name]
-      if (i['override-exposed']) {
-          resolveExposure(i, i['override-exposed']!, true)
-      }
+    const i = webidl.interfaces!.interface[name]
+    if (i['override-exposed']) {
+      resolveExposure(i, i['override-exposed']!, true)
+    }
   }
 
-  emitDomWeb(webidl, tsWebOutput, new Set(knownTypes.Window))
-  emitDomWorker(webidl, tsWorkerOutput, new Set(knownTypes.Worker))
-  emitES6DomIterators(webidl, tsWebIteratorsOutput)
+  // console.log(webidl.mixins.mixin.GlobalEventHandlers)
+  // console.log(webidl.mixins.mixin.DocumentAndElementEventHandlers)
+  // console.log(webidl.mixins.mixin.ElementContentEditable)
+  // console.log(webidl.mixins.mixin.HTMLOrSVGElement)
+  // console.log(webidl.mixins.mixin.ElementCSSInlineStyle)
+
+  // console.log(webidl.interfaces.interface.Object)
+  // console.log(webidl.interfaces.interface.EventTarget)
+  // console.log(webidl.interfaces.interface.Node)
+  // console.log(webidl.interfaces.interface.Element) //
+  // console.log(webidl.interfaces.interface.HTMLElement)
+  // console.log(webidl.interfaces.interface.HTMLInputElement)
+
+  getElementTypes(webidl, new Set(knownTypes.Window))
+  // emitDomWeb(webidl, tsWebOutput, new Set(knownTypes.Window))
+  // emitDomWorker(webidl, tsWorkerOutput, new Set(knownTypes.Worker))
+  // emitES6DomIterators(webidl, tsWebIteratorsOutput)
 
   function prune(obj: Browser.WebIdl, template: Partial<Browser.WebIdl>): Browser.WebIdl {
-      return filterByNull(obj, template)
+    return filterByNull(obj, template)
 
-      function filterByNull(obj: any, template: any) {
-          if (!template) return obj
-          const filtered = { ...obj }
-          for (const k in template) {
-              if (!obj[k]) {
-                  console.warn(`removedTypes.json has a redundant field ${k} in ${JSON.stringify(template)}`)
-              } else if (Array.isArray(template[k])) {
-                  if (!Array.isArray(obj[k])) {
-                      throw new Error(`Removal template ${k} is an array but the original field is not`)
-                  }
-                  // template should include strings
-                  filtered[k] = obj[k].filter((item: any) => {
-                      const name = typeof item === 'string' ? item : (item.name || item['new-type'])
-                      return !template[k].includes(name)
-                  })
-                  if (filtered[k].length === obj[k].length) {
-                      console.warn(`removedTypes.json has a redundant array item in ${JSON.stringify(template[k])}`)
-                  }
-              } else if (template[k] !== null) {
-                  filtered[k] = filterByNull(obj[k], template[k])
-              } else {
-                  delete filtered[k]
-              }
+    function filterByNull(obj: any, template: any) {
+      if (!template) return obj
+      const filtered = { ...obj }
+      for (const k in template) {
+        if (!obj[k]) {
+          console.warn(`removedTypes.json has a redundant field ${k} in ${JSON.stringify(template)}`)
+        } else if (Array.isArray(template[k])) {
+          if (!Array.isArray(obj[k])) {
+            throw new Error(`Removal template ${k} is an array but the original field is not`)
           }
-          return filtered
+          // template should include strings
+          filtered[k] = obj[k].filter((item: any) => {
+            const name = typeof item === 'string' ? item : (item.name || item['new-type'])
+            return !template[k].includes(name)
+          })
+          if (filtered[k].length === obj[k].length) {
+            console.warn(`removedTypes.json has a redundant array item in ${JSON.stringify(template[k])}`)
+          }
+        } else if (template[k] !== null) {
+          filtered[k] = filterByNull(obj[k], template[k])
+        } else {
+          delete filtered[k]
+        }
       }
+      return filtered
+    }
   }
 }
 
-emitDom()
+emitElements()
