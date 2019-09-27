@@ -12,22 +12,28 @@ export const getElementTypes = (webidl: Browser.WebIdl, forceKnownTypes: Set<str
   const elements = Object.values(records)
     .filter(extendsElement(records))
     .filter(e => !!e.element)
-  const result = elements.map(interfaceTemplate(webidl)).join('\n\n')
+  const result = [
+    importsContent(),
+    elements.map(interfaceTemplate(webidl)).join('\n\n')
+  ].join('\n')
   console.log(result.split('\n').length)
   return result
 }
 
 export const elementTemplate = (inter: Browser.Interface) => (el: Browser.Element) => {
-  // const ns = el.namespace || 'HTML'
+  const ns = el.namespace || 'HTML'
+  const lcns = ns.toLowerCase()
   const name = el.name
-  const fname = name
+  const fname = mapElementFnName(name)
   const attributesTypeName = getAttributesTypeName(inter)
 
-  const content = `export function ${fname}<State, Action>(
-  attributes: ${attributesTypeName}<State, Action> & CSSAttributes<State> & MoodAttributes<State, {el.domInterface}>,
-  ...children: DOMChild<State, Action>[]
-): DOMElement<State, Action> {
-  return el<State, Action>('{el.domName}', attributes, ...children)
+  const content = `export module ${lcns} {
+    export function ${fname}<State, Action>(
+    attributes: ${attributesTypeName}<State, Action>,
+    ...children: DOMChild<State, Action>[]
+  ): DOMElement<State, Action> {
+    return el<State, Action>('${name}', attributes, ...children)
+  }
 }`
   return content
 }
@@ -68,13 +74,32 @@ const isExposableProperty = (prop: Browser.Property): boolean => {
 }
 
 const propertyTypes: Record<string, string> = {
-  DOMString: 'string',
+  'DOMString': 'string',
+  'USVString': 'string',
+  'short': 'number',
+  'float': 'number',
+  'double': 'number',
+  'long': 'number',
+  'unsigned short': 'number',
   'unsigned long': 'number',
   'unrestricted double': 'number'
 }
 
 const mapPropertyType = (type: string): string => {
-  return propertyTypes[type] || type.replace('"', "'")
+  return propertyTypes[type] || type.replace(/["]/g, "'")
+}
+
+const specialElementNames: Record<string, string> = {
+  'switch': 'switchEl',
+  'var': 'varEl'
+}
+
+const mapElementFnName = (name: string): string => {
+  return specialElementNames[name] || name // name.substring(0, 1).toUpperCase() + name.substring(1)
+}
+
+const mapPropertyName = (name: string): string => {
+  return name.replace(/[?]/g, '')
 }
 
 const extractTypes = (prop: Browser.Typed): { names: string[], nullable: boolean } => {
@@ -100,15 +125,15 @@ const propertyTemplate = (prop: Browser.Property) => {
   //   console.log(prop)
   // }
   // onMouseLeave?: DOMEventHandler<State, MouseEvent, Action>
-  return `${prop.name}${types.nullable ? '?' : ''}: DOMAttribute<State, ${names.join(' | ')}>`
+  return `${mapPropertyName(prop.name)}${types.nullable ? '?' : ''}: DOMAttribute<State, ${names.join(' | ')}>`
 }
 
 const comparePropertyByType = (a: Browser.Property, b: Browser.Property): number => {
-  const aIsEvent = typeof a.type === 'string' && a.type.indexOf('EventHandler') >= 0
-  const bIsEvent = typeof b.type === 'string' && b.type.indexOf('EventHandler') >= 0
+  const aIsEvent = typeof a.type === 'string' && a.type.includes('EventHandler')
+  const bIsEvent = typeof b.type === 'string' && b.type.includes('EventHandler')
   if ((aIsEvent && bIsEvent) || (!aIsEvent && !bIsEvent))
     return 0
-  if (typeof a.type === 'string' && a.type.indexOf('EventHandler') >= 0)
+  if (typeof a.type === 'string' && a.type.includes('EventHandler'))
     return 1
   else
     return -1
@@ -133,8 +158,14 @@ export const attributesTypeTemplate = (webidl: Browser.WebIdl) => (inter: Browse
     .sort(compareProperty)
   // console.log(properties)
   return `export interface ${name}<State, Action> {
-  ${properties.map(propertyTemplate).join(',\n  ')}
+  ${properties.map(propertyTemplate).join('\n  ')}
 }`
+}
+
+const filterElement = (inter: Browser.Interface) => (el: Browser.Element) => {
+  if (inter.name === 'HTMLTableCellElement' && (el.name === 'td' || el.name === 'th'))
+    return false
+  return true
 }
 
 export const interfaceTemplate = (webidl: Browser.WebIdl) => (inter: Browser.Interface) => {
@@ -143,8 +174,23 @@ export const interfaceTemplate = (webidl: Browser.WebIdl) => (inter: Browser.Int
   const result = [
       attributesTypeTemplate(webidl)(inter)
     ]
-    .concat(inter.element.map(elementTemplate(inter)))
+    .concat(inter.element.filter(filterElement(inter)).map(elementTemplate(inter)))
     .join('\n\n')
   // console.log(result)
   return result
+}
+
+export const importsContent = () => {
+  return `type DOMAttribute<A, B> = [A, B] // TODO
+type DOMChild<A, B> = [A, B] // TODO
+type DOMElement<A, B> = [A, B] // TODO
+type EventHandler = string // TODO
+function el<State, Action>(
+  name: string,
+  attributes: any, // TODO
+  ...children: DOMChild<State, Action>[]
+): DOMElement<State, Action> {
+  return null as any
+}
+`
 }

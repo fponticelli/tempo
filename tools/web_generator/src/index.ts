@@ -4,7 +4,7 @@ import * as path from 'path'
 import { merge, resolveExposure, markAsDeprecated, mapToArray } from './tslib/helpers'
 // import { Flavor, emitWebIdl } from './tslib/emitter'
 import { convert } from './tslib/widlprocess'
-import { getElementTypes } from './expose'
+import { getElementTypes as generateTypes } from './expose'
 // import { getExposedTypes } from './tslib/expose'
 
 // function mergeNamesakes(filtered: Browser.WebIdl) {
@@ -201,7 +201,8 @@ function emitElements() {
   // console.log(webidl.interfaces.interface.HTMLElement)
   // console.log(webidl.interfaces.interface.HTMLInputElement)
 
-  getElementTypes(webidl, new Set(knownTypes.Window))
+  const ts = generateTypes(webidl, new Set(knownTypes.Window))
+  fs.writeFileSync(path.join(__dirname, '..', 'generated', 'web.ts'), ts, 'utf-8')
   // emitDomWeb(webidl, tsWebOutput, new Set(knownTypes.Window))
   // emitDomWorker(webidl, tsWorkerOutput, new Set(knownTypes.Worker))
   // emitES6DomIterators(webidl, tsWebIteratorsOutput)
