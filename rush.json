@@ -292,6 +292,9 @@
       "packageName": "@mood/generator.dom",
       "projectFolder": "./tools/dom_generator"
     }, {
+      "packageName": "@mood/generator.web",
+      "projectFolder": "./tools/web_generator"
+    }, {
       "packageName": "@mood/dom",
       "projectFolder": "./dom"
     }, {

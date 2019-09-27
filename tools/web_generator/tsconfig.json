@@ -1,0 +1,15 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "target": "es2017",
+    "lib": ["es2017", "dom", "dom.iterable"],
+    "rootDir": "src",
+    "outDir": "lib",
+    "strict": false,
+    "noImplicitReturns": false
+  },
+  // "include": [],
+  "exclude": [
+    "generated", "lib", "specs", "extern"
+  ]
+}

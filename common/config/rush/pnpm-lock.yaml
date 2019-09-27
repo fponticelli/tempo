@@ -3,6 +3,7 @@ dependencies:
   '@rush-temp/demo.todomvc': 'file:projects/demo.todomvc.tgz'
   '@rush-temp/dom': 'file:projects/dom.tgz'
   '@rush-temp/generator.dom': 'file:projects/generator.dom.tgz'
+  '@rush-temp/generator.web': 'file:projects/generator.web.tgz'
   '@stoplight/json-ref-resolver': 1.2.0
   '@types/fs-extra-promise': 1.0.7
   '@types/jest': 24.0.15
@@ -11,17 +12,21 @@ dependencies:
   '@types/node': 10.12.18
   '@types/prettier': 1.15.2
   '@types/urijs': 1.15.38
+  '@types/webidl2': 23.8.0
   fs-extra-promise: 1.0.1
   jest: 24.9.0
   js-yaml: 3.12.0
   jsdom: 15.1.1
   lodash: 4.17.15
+  node-fetch: 2.6.0
   parcel-bundler: 1.12.3
   partsing: 0.5.0
   prettier: 1.18.2
+  print-diff: 0.1.1
   request: 2.88.0
   request-promise-native: 1.0.7_request@2.88.0
   stealthy-require: 1.0.0
+  styleless-innertext: 1.1.2
   todomvc-app-css: 2.2.0
   todomvc-common: 1.0.5
   ts-jest: 24.1.0_jest@24.9.0
@@ -29,6 +34,7 @@ dependencies:
   tslint: 5.20.0_typescript@3.6.3
   typescript: 3.6.3
   urijs: 1.19.1
+  webidl2: 23.8.3
 lockfileVersion: 5.1
 packages:
   /@babel/code-frame/7.0.0:
@@ -1202,6 +1208,10 @@ packages:
     dev: false
     resolution:
       integrity: sha512-5VWXqu6V2IxXsPuSXYwCZHbh25U7pE+UJTFtKnNQRJLZA7o0D7fOQRJdgwBTMLNY0uc5F9GsFSang1VwNcPguA==
+  /@types/webidl2/23.8.0:
+    dev: false
+    resolution:
+      integrity: sha512-qJcyHusYfhbDm+UxNRPlH71qYOU8UnM5QhOgpCkoduRHaEwfENpppr9Cf5AoPJlvZuSK5z2pZh2wXjBXdRkrog==
   /@types/yargs-parser/13.1.0:
     dev: false
     resolution:
@@ -2403,6 +2413,12 @@ packages:
       node: '>= 6'
     resolution:
       integrity: sha512-Dj6Wk3tWyTE+Fo1rW8v0Xhwk80um6yFYKbuAxc9c3EZxIHFDYwbi34Uk42u1CdnIiVorvt4RmlSDjIPyzGC2ew==
+  /diff/1.4.0:
+    dev: false
+    engines:
+      node: '>=0.3.1'
+    resolution:
+      integrity: sha1-fyjS657nsVqX79ic5j3P2qPMur8=
   /diff/3.5.0:
     dev: false
     engines:
@@ -4531,6 +4547,12 @@ packages:
     dev: false
     resolution:
       integrity: sha512-2+DuKodWvwRTrCfKOeR24KIc5unKjOh8mz17NCzVnHWfjAdDqbfbjqh7gUT+BkXBRQM52+xCHciKWonJ3CbJMQ==
+  /node-fetch/2.6.0:
+    dev: false
+    engines:
+      node: 4.x || >=6.0.0
+    resolution:
+      integrity: sha512-8dG4H5ujfvFiqDmVu9fQ5bOHUC15JMjMY/Zumv26oOvvVJjM67KF8koCWIabKQ1GJIa9r2mMZscBq/TbdOcmNA==
   /node-forge/0.7.6:
     dev: false
     resolution:
@@ -5473,6 +5495,12 @@ packages:
       node: '>= 6'
     resolution:
       integrity: sha512-00ZMZUiHaJrNfk33guavqgvfJS30sLYf0f8+Srklv0AMPodGGHcoHgksZ3OThYnIvOd+8yMCn0YiEOogjlgsnA==
+  /print-diff/0.1.1:
+    dependencies:
+      diff: 1.4.0
+    dev: false
+    resolution:
+      integrity: sha512-dp36GezMEivgKH/zcLB4eBhJmQM3ewAa1UAqEPXMzU69NQ5wCP8puVBZlDFyt1WEtR5k2UC+3ahg+T5BfmRVGw==
   /private/0.1.8:
     dev: false
     engines:
@@ -6362,6 +6390,10 @@ packages:
       node: '>=6.9.0'
     resolution:
       integrity: sha512-7GlLk9JwlElY4Y6a/rmbH2MhVlTyVmiJd1PfTCqFaIBEGMYNsrO/v3SeGTdhBThLg4Z+NbOk/qFMwCa+J+3p/g==
+  /styleless-innertext/1.1.2:
+    dev: false
+    resolution:
+      integrity: sha512-DtkmkUlnXmY/toO0hE8w0Tp5JD9oaI26ci8yRfU7FBqn4R/rKRCb6MakmCoT1hVhqgONOWSH02vEdrM5MD4gqQ==
   /supports-color/2.0.0:
     dev: false
     engines:
@@ -6908,6 +6940,10 @@ packages:
     dev: false
     resolution:
       integrity: sha512-YQ+BmxuTgd6UXZW3+ICGfyqRyHXVlD5GtQr5+qjiNW7bF0cqrzX500HVXPBOvgXb5YnzDd+h0zqyv61KUD7+Sg==
+  /webidl2/23.8.3:
+    dev: false
+    resolution:
+      integrity: sha512-sWVshDenzFnXB7Sr/0SAtdy6VdTKUtU587pNBNK4b5V1wmjSrz+/1e5Flm50aQickifsjLyY5EaZ3gkM3yzwgg==
   /whatwg-encoding/1.0.5:
     dependencies:
       iconv-lite: 0.4.24
@@ -7066,13 +7102,15 @@ packages:
   'file:projects/demo.todomvc.tgz':
     dependencies:
       parcel-bundler: 1.12.3
+      prettier: 1.18.2
       todomvc-app-css: 2.2.0
       todomvc-common: 1.0.5
+      tslint: 5.20.0_typescript@3.6.3
       typescript: 3.6.3
     dev: false
     name: '@rush-temp/demo.todomvc'
     resolution:
-      integrity: sha512-REVBe3lrBUIVx8O32X/hCbEDf7tSz9Rp/RqUWf/EOTUOLQphrHlSw39BD/paYa6VvqCr+r6qLPluLrExV6QMsA==
+      integrity: sha512-2qHIppm20w1Fu9q3tGhgn7A7U+8bLf8QtOxjnI1BxDh7bQdgY6ycnRL7EtEqWc7ppEE3hQcGHB9HvbcvqgBoGQ==
       tarball: 'file:projects/demo.todomvc.tgz'
     version: 0.0.0
   'file:projects/dom.tgz':
@@ -7118,12 +7156,33 @@ packages:
       integrity: sha512-joAK8lLTf/AmJRNoFRBxGaWX+Zh4v6k/NgeWLkJ0+dncuiGB2a7RA5JIOpub/UBzpJusxot3VLzkaN2+gUhnEA==
       tarball: 'file:projects/generator.dom.tgz'
     version: 0.0.0
+  'file:projects/generator.web.tgz':
+    dependencies:
+      '@types/jsdom': 12.2.4
+      '@types/node': 10.12.18
+      '@types/webidl2': 23.8.0
+      jsdom: 15.1.1
+      node-fetch: 2.6.0
+      prettier: 1.18.2
+      print-diff: 0.1.1
+      styleless-innertext: 1.1.2
+      tslib: 1.10.0
+      tslint: 5.20.0_typescript@3.6.3
+      typescript: 3.6.3
+      webidl2: 23.8.3
+    dev: false
+    name: '@rush-temp/generator.web'
+    resolution:
+      integrity: sha512-2tkLeaj6f8xgHVm8Y/6FjlTCNSW7dXXYaDW27uLvrorqAhEPOa3vXCq9MqOSEKMOC0aSyNvomeeHpOWAPHVNrQ==
+      tarball: 'file:projects/generator.web.tgz'
+    version: 0.0.0
 registry: ''
 specifiers:
   '@rush-temp/core': 'file:./projects/core.tgz'
   '@rush-temp/demo.todomvc': 'file:./projects/demo.todomvc.tgz'
   '@rush-temp/dom': 'file:./projects/dom.tgz'
   '@rush-temp/generator.dom': 'file:./projects/generator.dom.tgz'
+  '@rush-temp/generator.web': 'file:./projects/generator.web.tgz'
   '@stoplight/json-ref-resolver': 1.2.0
   '@types/fs-extra-promise': 1.0.7
   '@types/jest': 24.0.15
@@ -7132,17 +7191,21 @@ specifiers:
   '@types/node': 10.12.18
   '@types/prettier': 1.15.2
   '@types/urijs': 1.15.38
+  '@types/webidl2': 23.8.0
   fs-extra-promise: 1.0.1
   jest: 24.9.0
   js-yaml: 3.12.0
   jsdom: 15.1.1
   lodash: 4.17.15
+  node-fetch: 2.6.0
   parcel-bundler: 1.12.3
   partsing: 0.5.0
   prettier: 1.18.2
+  print-diff: 0.1.1
   request: 2.88.0
   request-promise-native: 1.0.7
   stealthy-require: 1.0.0
+  styleless-innertext: 1.1.2
   todomvc-app-css: 2.2.0
   todomvc-common: 1.0.5
   ts-jest: 24.1.0
@@ -7150,3 +7213,4 @@ specifiers:
   tslint: 5.20.0
   typescript: 3.6.3
   urijs: 1.19.1
+  webidl2: 23.8.3

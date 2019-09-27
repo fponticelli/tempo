@@ -1,0 +1,32 @@
+{
+  "name": "@mood/generator.web",
+  "version": "1.0.0",
+  "main": "lib/index.js",
+  "license": "MIT",
+  "dependencies": {
+    "tslib": "1.10.0",
+    "webidl2": "23.8.3",
+    "jsdom": "15.1.1",
+    "node-fetch": "2.6.0",
+    "styleless-innertext": "1.1.2",
+    "print-diff": "0.1.1"
+  },
+  "devDependencies": {
+    "@types/node": "10.12.18",
+    "@types/webidl2": "23.8.0",
+    "@types/jsdom": "12.2.4",
+    "typescript": "3.6.3",
+    "tslint": "5.20.0",
+    "prettier": "1.18.2"
+  },
+  "scripts": {
+    "compile": "tsc",
+    "generate": "node lib/index.js",
+    "build": "npm run compile && npm run generate && npm run copy",
+    "copy": "rm -rf ../../dom/src/els/* rm ../../dom/src/utils/attributes_mapper.ts ../../dom/src/utils/attributes.ts ../../dom/src/utils/css_properties.ts && cp -R generated/* ../../dom/src/",
+    "tslint": "tslint -p ./tslint.json",
+    "prettier": "prettier -c src/**/*.ts",
+    "prettier-fix": "prettier --write src/**/*.ts",
+    "test": "echo 'no tests yet'"
+  }
+}
