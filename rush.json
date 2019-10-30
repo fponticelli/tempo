@@ -289,6 +289,9 @@
       "packageName": "@mood/core",
       "projectFolder": "./core"
     }, {
+      "packageName": "@mood/store",
+      "projectFolder": "./store"
+    }, {
       "packageName": "@mood/generator.dom",
       "projectFolder": "./tools/dom_generator"
     }, {

@@ -3,6 +3,7 @@ dependencies:
   '@rush-temp/demo.todomvc': 'file:projects/demo.todomvc.tgz'
   '@rush-temp/dom': 'file:projects/dom.tgz'
   '@rush-temp/generator.dom': 'file:projects/generator.dom.tgz'
+  '@rush-temp/store': 'file:projects/store.tgz'
   '@stoplight/json-ref-resolver': 1.2.0
   '@types/fs-extra-promise': 1.0.7
   '@types/jest': 24.0.15
@@ -3813,6 +3814,9 @@ packages:
       node: '>=6'
     peerDependencies:
       jest-resolve: '*'
+    peerDependenciesMeta:
+      jest-resolve:
+        optional: true
     resolution:
       integrity: sha512-pgFw2tm54fzgYvc/OHrnysABEObZCUNFnhjoRjaVOCN8NYc032/gVjPaHD4Aq6ApkSieWtfKAFQtmDKAmhupnQ==
   /jest-regex-util/24.9.0:
@@ -7066,13 +7070,15 @@ packages:
   'file:projects/demo.todomvc.tgz':
     dependencies:
       parcel-bundler: 1.12.3
+      prettier: 1.18.2
       todomvc-app-css: 2.2.0
       todomvc-common: 1.0.5
+      tslint: 5.20.0_typescript@3.6.3
       typescript: 3.6.3
     dev: false
     name: '@rush-temp/demo.todomvc'
     resolution:
-      integrity: sha512-REVBe3lrBUIVx8O32X/hCbEDf7tSz9Rp/RqUWf/EOTUOLQphrHlSw39BD/paYa6VvqCr+r6qLPluLrExV6QMsA==
+      integrity: sha512-2qHIppm20w1Fu9q3tGhgn7A7U+8bLf8QtOxjnI1BxDh7bQdgY6ycnRL7EtEqWc7ppEE3hQcGHB9HvbcvqgBoGQ==
       tarball: 'file:projects/demo.todomvc.tgz'
     version: 0.0.0
   'file:projects/dom.tgz':
@@ -7118,12 +7124,27 @@ packages:
       integrity: sha512-joAK8lLTf/AmJRNoFRBxGaWX+Zh4v6k/NgeWLkJ0+dncuiGB2a7RA5JIOpub/UBzpJusxot3VLzkaN2+gUhnEA==
       tarball: 'file:projects/generator.dom.tgz'
     version: 0.0.0
+  'file:projects/store.tgz':
+    dependencies:
+      '@types/jest': 24.0.15
+      jest: 24.9.0
+      prettier: 1.18.2
+      ts-jest: 24.1.0_jest@24.9.0
+      tslint: 5.20.0_typescript@3.6.3
+      typescript: 3.6.3
+    dev: false
+    name: '@rush-temp/store'
+    resolution:
+      integrity: sha512-WvdYIHAzFf+ePdUUSyysO/vdPdotpvbSTVcfGQytUgg1e5RHJYxIePnz+vDYrJpHn0djpNy3IW4MmDgF7DrSsQ==
+      tarball: 'file:projects/store.tgz'
+    version: 0.0.0
 registry: ''
 specifiers:
   '@rush-temp/core': 'file:./projects/core.tgz'
   '@rush-temp/demo.todomvc': 'file:./projects/demo.todomvc.tgz'
   '@rush-temp/dom': 'file:./projects/dom.tgz'
   '@rush-temp/generator.dom': 'file:./projects/generator.dom.tgz'
+  '@rush-temp/store': 'file:./projects/store.tgz'
   '@stoplight/json-ref-resolver': 1.2.0
   '@types/fs-extra-promise': 1.0.7
   '@types/jest': 24.0.15
