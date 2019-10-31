@@ -37,12 +37,11 @@ export class DOMComponent<State, Action> implements DOMTemplate<State, Action> {
     const { store } = this
     const { property } = store
     const { observable } = property
-    const update = () => {
-      view.change(store.get())
-    }
+    const update = () => view.change(store.get())
+
     observable.on(update)
     function innerDispatch(action: Action) {
-      store.dispatch(action)
+      store.process(action)
       ctx.dispatch(action)
     }
     const newCtx = ctx.withDispatch(innerDispatch)

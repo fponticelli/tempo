@@ -22,10 +22,10 @@ export class Store<State, Action> {
     private readonly middleware: Middleware<State, Action> = () => {}
   ) {}
 
-  dispatch(action: Action) {
+  process(action: Action) {
     const value = this.reducer(this.get(), action)
     if (this.property.set(value)) {
-      this.middleware(value, action, (action: Action) => this.dispatch(action))
+      this.middleware(value, action, (action: Action) => this.process(action))
     }
   }
 

@@ -20,7 +20,7 @@ export module Mood {
     const doc = options.document || document
     const el = maybeElement || doc.body
     const append = (node: Node) => el.appendChild(node)
-    const view = component.render(new DOMContext(doc, append, el, (action) => store.dispatch(action)), store.get())
+    const view = component.render(new DOMContext(doc, append, el, (action) => store.process(action)), store.get())
 
     return {
       destroy: () => view.destroy(),

@@ -22,7 +22,7 @@ describe('store', () => {
     })
     expect(store.get()).toEqual('')
 
-    store.dispatch('a')
+    store.process('a')
 
     expect(store.get()).toEqual('a')
     expect(collect).toEqual([
@@ -32,7 +32,7 @@ describe('store', () => {
 
     collect = []
 
-    store.dispatch('a')
+    store.process('a')
 
     expect(store.get()).toEqual('a')
     expect(collect).toEqual([
@@ -41,7 +41,7 @@ describe('store', () => {
     ])
 
     collect = []
-    store.dispatch('b')
+    store.process('b')
 
     expect(store.get()).toEqual('b')
     expect(collect).toEqual([
@@ -64,7 +64,7 @@ describe('store', () => {
     const store = new Store(property, reducer)
     expect(store.get()).toEqual('')
 
-    store.dispatch('a')
+    store.process('a')
 
     expect(store.get()).toEqual('a')
     expect(collect).toEqual([
