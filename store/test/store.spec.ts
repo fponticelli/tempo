@@ -4,7 +4,6 @@ import { Property } from '../src/property'
 describe('store', () => {
   it('dispatcher triggers a change and middlware', () => {
     let collect: { state: string, action: string, type: string }[] = []
-    const property = new Property('')
     const reducer = (state: string, action: string) => {
       collect.push({
         state, action, type: 'reduce'
@@ -18,7 +17,9 @@ describe('store', () => {
       return action
     }
 
-    const store = new Store(property, reducer, middleware)
+    const store = Store.ofState({
+      state: '', reducer, middleware
+    })
     expect(store.get()).toEqual('')
 
     store.dispatch('a')

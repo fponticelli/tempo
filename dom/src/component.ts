@@ -35,10 +35,12 @@ export class DOMComponent<State, Action> implements DOMTemplate<State, Action> {
 
   render(ctx: DOMContext<Action>, state: State) {
     const { store } = this
+    const { property } = store
+    const { observable } = property
     const update = () => {
       view.change(store.get())
     }
-    store.property.on(update)
+    observable.on(update)
     function innerDispatch(action: Action) {
       store.dispatch(action)
       ctx.dispatch(action)
@@ -47,9 +49,9 @@ export class DOMComponent<State, Action> implements DOMTemplate<State, Action> {
     const viewChildren = this.children.map(child => child.render(newCtx, store.get()))
     const dynamics = filterDynamics(viewChildren)
     const view = new DOMComponentView<State, Action>(store, innerDispatch, viewChildren, dynamics, () => {
-      store.property.off(update)
+      observable.off(update)
     })
-    store.property.set(state)
+    property.set(state)
     return view
   }
 }

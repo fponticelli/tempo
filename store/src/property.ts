@@ -1,10 +1,16 @@
-import { Emitter, Listener } from './emitter'
+import { Emitter } from './emitter'
+import { Observable } from './observable'
 
+// @ts-ignore
 export class Property<T> {
+  readonly observable: Observable<T>
+
   constructor(
     private value: T,
     private equals: (a: T, b: T) => boolean = (a, b) => a === b
-  ) {}
+  ) {
+    this.observable = this.emitter = new Emitter<T>()
+  }
 
   set(value: T): boolean {
     if (this.equals(this.value, value)) {
@@ -19,19 +25,7 @@ export class Property<T> {
     return this.value
   }
 
-  on(listener: Listener<T>) {
-    this.emitter.on(listener)
-  }
-
-  once(listener: Listener<T>) {
-    this.emitter.once(listener)
-  }
-
-  off(listener: Listener<T>) {
-    this.emitter.off(listener)
-  }
-
-  private readonly emitter: Emitter<T> = new Emitter<T>()
+  private readonly emitter: Emitter<T>
 
   private emit(value: T) {
     this.emitter.emit(value)

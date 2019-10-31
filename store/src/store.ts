@@ -9,7 +9,11 @@ export class Store<State, Action> {
     equals?: (a: State, b: State) => boolean
     middleware?: Middleware<State, Action>
   }) {
-    return new Store(new Property(options.state, options.equals), options.reducer, options.middleware)
+    return new Store(
+      new Property(options.state, options.equals),
+      options.reducer,
+      options.middleware
+    )
   }
 
   constructor(

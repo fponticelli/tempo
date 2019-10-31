@@ -14,20 +14,9 @@ describe('property', () => {
     const h = (_: number) => {
       counter++
     }
-    p.on(h)
+    p.observable.on(h)
     p.set(1)
     expect(p.get()).toEqual(1)
-    expect(counter).toEqual(1)
-    p.off(h)
-
-    p.set(1) // no changes
-    expect(p.get()).toEqual(1)
-    expect(counter).toEqual(1)
-
-    p.off(h)
-
-    p.set(3) // changes
-    expect(p.get()).toEqual(3)
     expect(counter).toEqual(1)
   })
 
@@ -37,26 +26,13 @@ describe('property', () => {
     const h = (_: { id: number }) => {
       counter++
     }
-    p.on(h)
+    p.observable.on(h)
     p.set({ id: 2 })
     expect(p.get()).toEqual({ id: 2 })
     expect(counter).toEqual(1)
 
     p.set({ id: 2 }) // should not change
     expect(p.get()).toEqual({ id: 2 })
-    expect(counter).toEqual(1)
-  })
-
-  it('`once` should be triggered once', () => {
-    const p = new Property(1)
-    let counter = 0
-    const h = (_: number) => {
-      counter++
-    }
-    p.once(h)
-    p.set(0)
-    expect(counter).toEqual(1)
-    p.set(1)
     expect(counter).toEqual(1)
   })
 })

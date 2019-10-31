@@ -1,6 +1,7 @@
-export type Listener<T> = (value: T) => void
+import { Listener } from './listener'
+import { Observable } from './observable'
 
-export class Emitter<T> {
+export class Emitter<T> implements Observable<T> {
   readonly listeners: Listener<T>[] = []
 
   emit(value: T) {

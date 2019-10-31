@@ -37,4 +37,9 @@ describe('emitter', () => {
     e.emit(1)
     expect(counter).toEqual(1)
   })
+
+  it('a listener that is not registered should return false when removed', () => {
+    const e = new Emitter<number>()
+    expect(e.off(() => {})).toBeFalsy()
+  })
 })
