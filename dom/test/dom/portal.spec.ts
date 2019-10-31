@@ -6,7 +6,7 @@ describe('portal', () => {
   it('portalWithSelector', () => {
     const ctx = createContext()
     ctx.doc.body.innerHTML = '<div id="main"></div><div id="container"></div>'
-    const store = Store.create({
+    const store = Store.ofState({
       state: 'hello',
       reducer: (_: string, a: string) => a
     })
@@ -29,7 +29,7 @@ describe('portal', () => {
   it('portalWithSelector throws if element is not found', () => {
     const ctx = createContext()
     ctx.doc.body.innerHTML = '<div id="main"></div><div id="container"></div>'
-    const store = Store.create({
+    const store = Store.ofState({
       state: 'hello',
       reducer: (_: string, a: string) => a
     })
@@ -48,7 +48,7 @@ describe('portal', () => {
 
   it('headPortal', () => {
     const ctx = createContext()
-    const store = Store.create({
+    const store = Store.ofState({
       state: 'background-color: red',
       reducer: (_: string, a: string) => a
     })
@@ -70,7 +70,7 @@ describe('portal', () => {
 
   it('bodyPortal', () => {
     const ctx = createContext()
-    const store = Store.create({
+    const store = Store.ofState({
       state: 'background-color: red',
       reducer: (_: string, a: string) => a
     })

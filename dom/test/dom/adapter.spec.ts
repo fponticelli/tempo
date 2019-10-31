@@ -8,7 +8,7 @@ describe('adapter', () => {
     type InnerState = { inner: string; outer: string }
 
     const ctx = createContext(() => {})
-    const store = Store.create({
+    const store = Store.ofState({
       state: { inner: 'in', outer: 'out' },
       reducer: (state: InnerState) => {
         return state
@@ -38,7 +38,7 @@ describe('adapter', () => {
     type InnerState = { inner: string; outer: string }
 
     const ctx = createContext(() => {})
-    const store = Store.create({
+    const store = Store.ofState({
       state: { inner: 'in', outer: '' },
       reducer: (state: InnerState) => {
         return state
@@ -72,7 +72,7 @@ describe('adapter', () => {
       counter = v
     })
 
-    const store = Store.create({
+    const store = Store.ofState({
       state: { inner: 'in', outer: 'notout' },
       reducer: (state: InnerState, action: number) => {
         if (action === 5) {

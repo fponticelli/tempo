@@ -49,7 +49,7 @@ export class DOMAdapter<OuterState, InnerState, OuterAction, InnerAction>
 }
 
 export const adapter = <OuterState, InnerState, OuterAction, InnerAction>(
-  opts: {
+  options: {
     mergeStates?: (outerState: OuterState, innerState: InnerState) => InnerState | undefined
     propagate?: (
       action: InnerAction,
@@ -62,9 +62,9 @@ export const adapter = <OuterState, InnerState, OuterAction, InnerAction>(
   child: DOMComponent<InnerState, InnerAction>
 ) =>
   new DOMAdapter(
-    opts.mergeStates || ((_u: OuterState, _d: InnerState) => undefined),
+    options.mergeStates || ((_u: OuterState, _d: InnerState) => undefined),
     /* istanbul ignore next */
-    opts.propagate ||
+    options.propagate ||
       ((
         _m: InnerAction,
         _d: InnerState,

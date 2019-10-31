@@ -46,7 +46,7 @@ export class DOMUntilView<OuterState, InnerState, Action> implements DynamicView
 
 export class DOMUntilTemplate<OuterState, InnerState, Action> implements DOMTemplate<OuterState, Action> {
   constructor(
-    readonly opts: {
+    readonly options: {
       refId?: string
       repeatUntil: (state: OuterState, index: number) => InnerState
     },
@@ -54,11 +54,11 @@ export class DOMUntilTemplate<OuterState, InnerState, Action> implements DOMTemp
   ) {}
 
   render(ctx: DOMContext<Action>, state: OuterState): DynamicView<OuterState> {
-    const ref = ctx.doc.createComment(this.opts.refId || 'md:until')
+    const ref = ctx.doc.createComment(this.options.refId || 'md:until')
     ctx.append(ref)
     const view = new DOMUntilView<OuterState, InnerState, Action>(
       ref,
-      this.opts.repeatUntil,
+      this.options.repeatUntil,
       ctx.withAppend(insertBefore(ref)),
       this.children
     )
@@ -68,9 +68,9 @@ export class DOMUntilTemplate<OuterState, InnerState, Action> implements DOMTemp
 }
 
 export const until = <OuterState, InnerState, Action>(
-  opts: {
+  options: {
     refId?: string
     repeatUntil: (state: OuterState, index: number) => InnerState
   },
   ...children: DOMChild<InnerState, Action>[]
-) => new DOMUntilTemplate<OuterState, InnerState, Action>(opts, children.map(domChildToTemplate))
+) => new DOMUntilTemplate<OuterState, InnerState, Action>(options, children.map(domChildToTemplate))

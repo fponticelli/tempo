@@ -3,13 +3,13 @@ import { Reducer } from './reducer'
 import { Middleware } from './middleware'
 
 export class Store<State, Action> {
-  static create<State, Action>(opts: {
+  static ofState<State, Action>(options: {
     state: State
     reducer: Reducer<State, Action>
     equals?: (a: State, b: State) => boolean
     middleware?: Middleware<State, Action>
   }) {
-    return new Store(new Property(opts.state, opts.equals), opts.reducer, opts.middleware)
+    return new Store(new Property(options.state, options.equals), options.reducer, options.middleware)
   }
 
   constructor(

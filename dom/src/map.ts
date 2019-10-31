@@ -28,9 +28,9 @@ export class MapStateTemplate<OuterState, InnerState, Action> implements DOMTemp
 }
 
 export const mapState = <OuterState, InnerState, Action>(
-  opts: { map: (value: OuterState) => InnerState },
+  options: { map: (value: OuterState) => InnerState },
   ...children: DOMChild<InnerState, Action>[]
-) => new MapStateTemplate(opts.map, children.map(domChildToTemplate))
+) => new MapStateTemplate(options.map, children.map(domChildToTemplate))
 
 export class MapActionTemplate<State, OuterAction, InnerAction> implements DOMTemplate<State, OuterAction> {
   constructor(
@@ -46,6 +46,6 @@ export class MapActionTemplate<State, OuterAction, InnerAction> implements DOMTe
 }
 
 export const mapAction = <State, OuterAction, InnerAction>(
-  opts: { map: (value: InnerAction) => OuterAction | undefined },
+  options: { map: (value: InnerAction) => OuterAction | undefined },
   ...children: DOMChild<State, InnerAction>[]
-) => new MapActionTemplate<State, OuterAction, InnerAction>(opts.map, children.map(domChildToTemplate))
+) => new MapActionTemplate<State, OuterAction, InnerAction>(options.map, children.map(domChildToTemplate))
