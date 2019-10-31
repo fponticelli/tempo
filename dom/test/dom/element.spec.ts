@@ -2,7 +2,7 @@ import { createContext } from './common'
 import { el } from '../../src/element'
 import { DynamicView } from '@mood/core'
 import { handler, lifecycle, stateHandler } from '../../src/value'
-import { div, span, a } from '../../src/els'
+import { div, span, a } from '../../src'
 
 describe('dom_element', () => {
   it('static empty-element', () => {

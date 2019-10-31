@@ -1,4 +1,4 @@
-import { div } from '../../src/els'
+import { div } from '../../src'
 import { when, unless } from '../../src'
 import { createContext } from './common'
 

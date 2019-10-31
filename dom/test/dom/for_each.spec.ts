@@ -1,5 +1,5 @@
 import { createContext } from './common'
-import { div } from '../../src/els'
+import { div } from '../../src'
 import { forEach } from '../../src/for_each'
 
 describe('repeat', () => {

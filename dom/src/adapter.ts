@@ -15,7 +15,7 @@ export class DOMAdapterView<OuterState, InnerState, InnerAction> implements Dyna
   }
 
   change(outerState: OuterState): void {
-    const newState = this.mergeStates(outerState, this.child.state)
+    const newState = this.mergeStates(outerState, this.child.store.get())
     if (newState == null) return
     this.child.change(newState)
   }
@@ -36,10 +36,10 @@ export class DOMAdapter<OuterState, InnerState, OuterAction, InnerAction>
   ) {}
 
   render(ctx: DOMContext<OuterAction>, outerState: OuterState): DynamicView<OuterState> {
-    const mergedState = (this.mergeStates && this.mergeStates(outerState, this.child.state)) || this.child.state
+    const mergedState = (this.mergeStates && this.mergeStates(outerState, this.child.store.get())) || this.child.store.get()
     const viewChild = this.child.render(
       ctx.withDispatch((action: InnerAction) => {
-        this.propagate(action, viewChild.state, outerState, viewChild.dispatch, ctx.dispatch)
+        this.propagate(action, viewChild.store.get(), outerState, viewChild.dispatch, ctx.dispatch)
       }),
       mergedState
     )

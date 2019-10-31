@@ -1,21 +1,24 @@
 import { createContext } from './common'
-import { div } from '../../src/els'
+import { div } from '../../src'
 import { adapter, component } from '../../src'
+import { Store } from '@mood/store'
 
 describe('adapter', () => {
   it('noOptions', () => {
     type InnerState = { inner: string; outer: string }
 
     const ctx = createContext(() => {})
+    const store = Store.create({
+      state: { inner: 'in', outer: 'out' },
+      reducer: (state: InnerState) => {
+        return state
+      }
+    })
+
     const template = adapter(
       {},
       component(
-        {
-          state: { inner: 'in', outer: 'out' },
-          update: (state: InnerState) => {
-            return state
-          }
-        },
+        { store },
         'inner: ',
         s => s.inner,
         ', outer: ',
@@ -35,6 +38,12 @@ describe('adapter', () => {
     type InnerState = { inner: string; outer: string }
 
     const ctx = createContext(() => {})
+    const store = Store.create({
+      state: { inner: 'in', outer: '' },
+      reducer: (state: InnerState) => {
+        return state
+      }
+    })
     const template = adapter(
       {
         mergeStates: (outer: OuterState, inner: InnerState) => {
@@ -42,12 +51,7 @@ describe('adapter', () => {
         }
       },
       component(
-        {
-          state: { inner: 'in', outer: '' },
-          update: (state: InnerState) => {
-            return state
-          }
-        },
+        { store },
         'inner: ',
         s => s.inner,
         ', outer: ',
@@ -66,6 +70,18 @@ describe('adapter', () => {
     let counter = 0
     const ctx = createContext((v: number) => {
       counter = v
+    })
+
+    const store = Store.create({
+      state: { inner: 'in', outer: 'notout' },
+      reducer: (state: InnerState, action: number) => {
+        if (action === 5) {
+          return { ...state, inner: String(action) }
+        } else {
+          expect(++counter).toEqual(1)
+          return { ...state, inner: String(action) }
+        }
+      }
     })
 
     const template = adapter(
@@ -88,17 +104,7 @@ describe('adapter', () => {
         }
       },
       component<InnerState, number>(
-        {
-          state: { inner: 'in', outer: 'notout' },
-          update: (state: InnerState, action: number) => {
-            if (action === 5) {
-              return { ...state, inner: String(action) }
-            } else {
-              expect(++counter).toEqual(1)
-              return { ...state, inner: String(action) }
-            }
-          }
-        },
+        { store },
         div({ onClick: (_: MouseEvent) => 1 }, 'inner: ', s => s.inner, ', outer: ', s => s.outer)
       )
     )
