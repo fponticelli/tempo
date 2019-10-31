@@ -1,5 +1,5 @@
 import { createContext } from './common'
-import { div } from '../../src'
+import { div, PropagateArg } from '../../src'
 import { adapter, component } from '../../src'
 import { Store } from '@mood/store'
 
@@ -86,13 +86,8 @@ describe('adapter', () => {
 
     const template = adapter(
       {
-        propagate: (
-          action: number,
-          innerState: InnerState,
-          outerState: OuterState,
-          dispatchInner: (action: number) => void,
-          dispatchOuter: (action: number) => void
-        ) => {
+        propagate: (args: PropagateArg<OuterState, InnerState, number, number>) => {
+          const { action, innerState, outerState, dispatchOuter, dispatchInner } = args
           if (action === 5) return
           expect(++counter).toEqual(2)
           expect(action).toEqual(1)

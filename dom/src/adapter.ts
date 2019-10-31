@@ -25,13 +25,7 @@ export class DOMAdapter<OuterState, InnerState, OuterAction, InnerAction>
   implements DOMTemplate<OuterState, OuterAction> {
   constructor(
     readonly mergeStates: (outerState: OuterState, innerState: InnerState) => InnerState | undefined,
-    readonly propagate: (
-      action: InnerAction,
-      innerState: InnerState,
-      outerState: OuterState,
-      dispatchInner: (action: InnerAction) => void,
-      dispatchOuter: (action: OuterAction) => void
-    ) => void,
+    readonly propagate: (args: PropagateArg<OuterState, InnerState, OuterAction, InnerAction>) => void,
     readonly child: DOMComponent<InnerState, InnerAction>
   ) {}
 
@@ -39,7 +33,13 @@ export class DOMAdapter<OuterState, InnerState, OuterAction, InnerAction>
     const mergedState = (this.mergeStates && this.mergeStates(outerState, this.child.store.get())) || this.child.store.get()
     const viewChild = this.child.render(
       ctx.withDispatch((action: InnerAction) => {
-        this.propagate(action, viewChild.store.get(), outerState, viewChild.dispatch, ctx.dispatch)
+        this.propagate({
+          action,
+          innerState: viewChild.store.get(),
+          outerState,
+          dispatchInner: viewChild.dispatch,
+          dispatchOuter: ctx.dispatch
+        })
       }),
       mergedState
     )
@@ -48,29 +48,24 @@ export class DOMAdapter<OuterState, InnerState, OuterAction, InnerAction>
   }
 }
 
+export interface PropagateArg<OuterState, InnerState, OuterAction, InnerAction> {
+  action: InnerAction
+  innerState: InnerState
+  outerState: OuterState
+  dispatchInner: (action: InnerAction) => void
+  dispatchOuter: (action: OuterAction) => void
+}
+
 export const adapter = <OuterState, InnerState, OuterAction, InnerAction>(
   options: {
     mergeStates?: (outerState: OuterState, innerState: InnerState) => InnerState | undefined
-    propagate?: (
-      action: InnerAction,
-      innerState: InnerState,
-      outerState: OuterState,
-      dispatchInner: (action: InnerAction) => void,
-      dispatchOuter: (action: OuterAction) => void
-    ) => void
+    propagate?: (args: PropagateArg<OuterState, InnerState, OuterAction, InnerAction>) => void
   },
   child: DOMComponent<InnerState, InnerAction>
 ) =>
   new DOMAdapter(
     options.mergeStates || ((_u: OuterState, _d: InnerState) => undefined),
     /* istanbul ignore next */
-    options.propagate ||
-      ((
-        _m: InnerAction,
-        _d: InnerState,
-        _u: OuterState,
-        _f1: (action: InnerAction) => void,
-        _f2: (action: OuterAction) => void
-      ) => undefined),
+    options.propagate || (() => undefined),
     child
   )
