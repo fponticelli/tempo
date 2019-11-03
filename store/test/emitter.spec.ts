@@ -2,7 +2,7 @@ import { Emitter } from '../src/emitter'
 
 describe('emitter', () => {
   it('should allow adding handlers and trigger them', () => {
-    const e = new Emitter<number>()
+    const e = Emitter.ofOne<number>()
     let counter = 0
     const h = (value: number) => {
       counter++
@@ -14,7 +14,7 @@ describe('emitter', () => {
   })
 
   it('should allow removing a listener', () => {
-    const e = new Emitter<number>()
+    const e = Emitter.ofOne<number>()
     let counter = 0
     const h = (_: number) => {
       counter++
@@ -26,7 +26,7 @@ describe('emitter', () => {
   })
 
   it('`once` should be triggered once', () => {
-    const e = new Emitter<number>()
+    const e = Emitter.ofOne<number>()
     let counter = 0
     const h = (_: number) => {
       counter++
@@ -39,7 +39,7 @@ describe('emitter', () => {
   })
 
   it('a listener that is not registered should return false when removed', () => {
-    const e = new Emitter<number>()
+    const e = Emitter.ofOne<number>()
     expect(e.off(() => {})).toBeFalsy()
   })
 })

@@ -1,15 +1,15 @@
 import { Emitter } from './emitter'
-import { Observable } from './observable'
+import { Observable1 } from './observable'
 
 // @ts-ignore
 export class Property<T> {
-  readonly observable: Observable<T>
+  readonly observable: Observable1<T>
 
   constructor(
     private value: T,
     private equals: (a: T, b: T) => boolean = (a, b) => a === b
   ) {
-    this.observable = this.emitter = new Emitter<T>()
+    this.observable = this.emitter = Emitter.ofOne()
   }
 
   set(value: T): boolean {
@@ -25,7 +25,7 @@ export class Property<T> {
     return this.value
   }
 
-  private readonly emitter: Emitter<T>
+  private readonly emitter: Emitter<[T]>
 
   private emit(value: T) {
     this.emitter.emit(value)

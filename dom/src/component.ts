@@ -8,13 +8,14 @@ import { filterDynamics, domChildToTemplate } from './utils/dom'
 export class DOMComponentView<State, Action> extends DOMDynamicFragmentView<State> {
   /* istanbul ignore next */
   constructor(
-    public store: Store<State, Action>,
+    readonly store: Store<State, Action>,
     readonly dispatch: (action: Action) => void,
     children: View<State>[],
     dynamics: DynamicView<State>[],
     private _destroy: () => void
   ) {
     super(children, (state: State) => {
+      store.property.set(state)
       dynamics.forEach(child => child.change(state))
     })
   }
@@ -25,8 +26,6 @@ export class DOMComponentView<State, Action> extends DOMDynamicFragmentView<Stat
   }
 }
 
-export type UpdateF<State, Action> = (state: State, action: Action, dispatch: (action: Action) => void) => State
-
 export class DOMComponent<State, Action> implements DOMTemplate<State, Action> {
   constructor(
     readonly store: Store<State, Action>,
@@ -34,23 +33,21 @@ export class DOMComponent<State, Action> implements DOMTemplate<State, Action> {
   ) {}
 
   render(ctx: DOMContext<Action>, state: State) {
+    const update = (state: State) => view.change(state)
     const { store } = this
-    const { property } = store
-    const { observable } = property
-    const update = () => view.change(store.get())
 
-    observable.on(update)
-    function innerDispatch(action: Action) {
+    store.property.observable.on(update)
+    const innerDispatch = (action: Action) => {
+      // ctx.dispatch(action)
       store.process(action)
-      ctx.dispatch(action)
     }
     const newCtx = ctx.withDispatch(innerDispatch)
-    const viewChildren = this.children.map(child => child.render(newCtx, store.get()))
+    const viewChildren = this.children.map(child => child.render(newCtx, store.property.get()))
     const dynamics = filterDynamics(viewChildren)
     const view = new DOMComponentView<State, Action>(store, innerDispatch, viewChildren, dynamics, () => {
-      observable.off(update)
+      store.property.observable.off(update)
     })
-    property.set(state)
+    store.property.set(state)
     return view
   }
 }

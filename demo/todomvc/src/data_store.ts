@@ -2,7 +2,7 @@ import { State, Filter } from './state'
 
 const STORE_KEY = 'todomvc-mood'
 
-export class Store {
+export class DataStore {
   static get(): State {
     const store = localStorage.getItem(STORE_KEY)
     return (

@@ -85,7 +85,7 @@ describe('dom_element', () => {
 
   it('event that dispatch', () => {
     const ctx = createContext((c: number) => {
-      count = c
+      count += c
     })
     let count = 0
     const onclick = (e: MouseEvent) => 1
@@ -95,6 +95,8 @@ describe('dom_element', () => {
     expect(count).toEqual(0)
     domEl.click()
     expect(count).toEqual(1)
+    domEl.click()
+    expect(count).toEqual(2)
     node.destroy()
     expect(ctx.doc.body.innerHTML).toEqual('')
   })

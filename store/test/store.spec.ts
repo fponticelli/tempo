@@ -3,50 +3,55 @@ import { Property } from '../src/property'
 
 describe('store', () => {
   it('dispatcher triggers a change and middlware', () => {
-    let collect: { state: string, action: string, type: string }[] = []
+    let collect: { state: string, action: string, type: string, changed?: boolean }[] = []
     const reducer = (state: string, action: string) => {
       collect.push({
         state, action, type: 'reduce'
       })
       return action
     }
-    const middleware = (state: string, action: string) => {
+    const middleware = (state: string, action: string, changed: boolean) => {
       collect.push({
-        state, action, type: 'middleware'
+        state, action, type: 'middleware', changed
       })
       return action
     }
 
     const store = Store.ofState({
-      state: '', reducer, middleware
+      state: '', reducer
     })
-    expect(store.get()).toEqual('')
+
+    store.observable.on(middleware)
+
+    const { property } = store
+
+    expect(property.get()).toEqual('')
 
     store.process('a')
 
-    expect(store.get()).toEqual('a')
+    expect(property.get()).toEqual('a')
     expect(collect).toEqual([
       { state: '', action: 'a', type: 'reduce' },
-      { state: 'a', action: 'a', type: 'middleware' }
+      { state: 'a', action: 'a', type: 'middleware', changed: true }
     ])
 
     collect = []
 
     store.process('a')
 
-    expect(store.get()).toEqual('a')
+    expect(property.get()).toEqual('a')
     expect(collect).toEqual([
-      { state: 'a', action: 'a', type: 'reduce' }
-      // middlweare is not called because the value didn't change
+      { state: 'a', action: 'a', type: 'reduce' },
+      { state: 'a', action: 'a', type: 'middleware', changed: false }
     ])
 
     collect = []
     store.process('b')
 
-    expect(store.get()).toEqual('b')
+    expect(property.get()).toEqual('b')
     expect(collect).toEqual([
       { state: 'a', action: 'b', type: 'reduce' },
-      { state: 'b', action: 'b', type: 'middleware' }
+      { state: 'b', action: 'b', type: 'middleware', changed: true }
     ])
 
   })
@@ -62,11 +67,11 @@ describe('store', () => {
     }
 
     const store = new Store(property, reducer)
-    expect(store.get()).toEqual('')
+    expect(property.get()).toEqual('')
 
     store.process('a')
 
-    expect(store.get()).toEqual('a')
+    expect(property.get()).toEqual('a')
     expect(collect).toEqual([
       { state: '', action: 'a', type: 'reduce' }
     ])

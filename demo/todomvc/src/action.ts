@@ -40,7 +40,7 @@ export class ToggleFilter {
   constructor(readonly filter: Filter) {}
 }
 
-export class ToggleCompleted {
+export class ToggleTodo {
   readonly kind = 'toggle-completed'
   constructor(readonly id: string) {}
 }
@@ -58,7 +58,7 @@ export type Action =
   | ClearCompleted
   | EditingTodo
   | RemoveTodo
-  | ToggleCompleted
+  | ToggleTodo
   | ToggleFilter
   | UpdateTodo
 
@@ -70,7 +70,7 @@ export const Action = {
   clearCompleted: new ClearCompleted() as Action,
   editingTodo: (id: string, title: string): Action => new EditingTodo(id, title),
   removeTodo: (id: string): Action => new RemoveTodo(id),
-  toggleCompleted: (id: string): Action => new ToggleCompleted(id),
+  toggleTodo: (id: string): Action => new ToggleTodo(id),
   toggleFilter: (filter: Filter): Action => new ToggleFilter(filter),
   updateTodo: (id: string, title: string): Action => new UpdateTodo(id, title)
 }

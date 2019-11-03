@@ -25,9 +25,10 @@ export module Mood {
         doc,
         append,
         el,
-        (action) => store.process(action)
+        () => {}
+        // (action) => store.process(action)
       ),
-      store.get()
+      store.property.get()
     )
 
     return {

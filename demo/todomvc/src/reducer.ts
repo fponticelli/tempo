@@ -1,8 +1,8 @@
 import { State, createTodo } from './state'
 import { Action } from './action'
-import { Store } from './store'
+import { DataStore } from './data_store'
 
-export const update = (state: State, action: Action) => {
+export const reducer = (state: State, action: Action) => {
   const newState = { ...state }
   switch (action.kind) {
     case 'adding-todo':
@@ -51,6 +51,6 @@ export const update = (state: State, action: Action) => {
     default:
       throw 'unreacheable code'
   }
-  Store.set(newState)
+  DataStore.set(newState)
   return newState
 }

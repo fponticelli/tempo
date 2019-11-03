@@ -15,7 +15,7 @@ export class DOMAdapterView<OuterState, InnerState, InnerAction> implements Dyna
   }
 
   change(outerState: OuterState): void {
-    const newState = this.mergeStates(outerState, this.child.store.get())
+    const newState = this.mergeStates(outerState, this.child.store.property.get())
     if (newState == null) return
     this.child.change(newState)
   }
@@ -30,19 +30,24 @@ export class DOMAdapter<OuterState, InnerState, OuterAction, InnerAction>
   ) {}
 
   render(ctx: DOMContext<OuterAction>, outerState: OuterState): DynamicView<OuterState> {
-    const mergedState = (this.mergeStates && this.mergeStates(outerState, this.child.store.get())) || this.child.store.get()
+    const mergedState =
+      (this.mergeStates && this.mergeStates(outerState, this.child.store.property.get())) ||
+      this.child.store.property.get()
+
     const viewChild = this.child.render(
-      ctx.withDispatch((action: InnerAction) => {
-        this.propagate({
-          action,
-          innerState: viewChild.store.get(),
-          outerState,
-          dispatchInner: viewChild.dispatch,
-          dispatchOuter: ctx.dispatch
-        })
-      }),
+      ctx.withDispatch(() => { /* COMPONENT IS DETACHED FROM CONTAINER AND DOESN'T PROPAGATE */ }),
       mergedState
     )
+
+    this.child.store.observable.on((state: InnerState, action: InnerAction) => {
+      this.propagate({
+        action,
+        innerState: state,
+        outerState,
+        dispatchInner: (action: InnerAction) => this.child.store.process(action),
+        dispatchOuter: ctx.dispatch
+      })
+    })
     const view = new DOMAdapterView(this.mergeStates, viewChild)
     return view
   }

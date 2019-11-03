@@ -34,12 +34,15 @@ describe('Mood', () => {
 
     const store = new Store(
       new Property('hello'),
-      (state: string, action: string) => action.toUpperCase(),
-      (s: string, a: string) => {
-        result[0] = s
-        result[1] = a
-      }
+      (state: string, action: string) => action.toUpperCase()
     )
+
+    const middleware = (s: string, a: string) => {
+      result[0] = s
+      result[1] = a
+    }
+
+    store.observable.on(middleware)
 
     const comp = component(
       { store },

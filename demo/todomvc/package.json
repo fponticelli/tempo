@@ -5,6 +5,7 @@
   "dependencies": {
     "@mood/core": "1.0.0",
     "@mood/dom": "1.0.0",
+    "@mood/store": "1.0.0",
     "todomvc-app-css": "2.2.0",
     "todomvc-common": "1.0.5"
   },
