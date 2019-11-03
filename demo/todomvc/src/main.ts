@@ -2,15 +2,12 @@ import { Mood } from '@mood/dom'
 import { Store } from '@mood/store'
 import { DataStore } from './data_store'
 import { reducer } from './reducer'
-import { appView } from './app_view'
+import { template } from './app_view'
 
-const store = Store.ofState({
-  state: DataStore.get(),
-  reducer
-})
+const state = DataStore.get()
 
-store.observable.on((state, action) => console.log(action))
+const store = Store.ofState({ state, reducer })
 
-Mood.renderComponent({
-  component: appView(store)
-})
+store.observable.on((_, action) => console.log(action))
+
+Mood.render({ store, template })

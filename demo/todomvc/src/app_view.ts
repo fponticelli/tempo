@@ -1,8 +1,7 @@
 import {
-  a, button, component, div, footer, forEach, h1, header, input, label,
+  a, button, div, footer, forEach, h1, header, input, label,
   li, mapState, p, section, span, ul, when, stateHandler, handler, DOMEventHandler
 } from '@mood/dom'
-import { Store } from '@mood/store'
 import { Action } from './action'
 import { State, Filter, Todo } from './state'
 
@@ -30,8 +29,7 @@ const selectedF = (filter: Filter) => (state: State) => (state.filter === filter
 
 type TodoWEditing = Todo & { editing: boolean }
 
-export const appView = (store: Store<State, Action>) => component<State, Action>(
-  { store },
+export const template = section<State, Action>({},
   section(
     { className: 'todoapp' },
     header(
