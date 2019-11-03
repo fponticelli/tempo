@@ -149,17 +149,37 @@ const extractTypes = (prop: Browser.Typed): { names: string[], nullable: boolean
   }
 }
 
-const mangleEventType = (type: string) => {
+const eventTypeMap = {
+  'onabort': 'UIEvent',
+  'oncomplete': 'Event',
+  'onclick': 'MouseEvent',
+  'onerror': 'ErrorEvent',
+  'onload': 'Event',
+  'onloadstart': 'Event',
+  'onprogress': 'ProgressEvent',
+  'onreadystatechange': 'ProgressEvent',
+  'onresize': 'UIEvent',
+  'ontimeout': 'ProgressEvent'
+}
+
+const mangleEventType = (name: string, type: string) => {
+  name = name.toLowerCase()
+
+  if (eventTypeMap[name])
+    return eventTypeMap[name]
   switch (type) {
+    case 'Event':
     case 'EventHandlerNonNull':
     case 'EventHandler':
       return 'Event'
     case 'OnErrorEventHandler':
       return 'ErrorEvent'
     case 'OnBeforeUnloadEventHandler':
-        return 'BeforeUnloadEvent'
+      return 'BeforeUnloadEvent'
+    case 'Event | EventHandlerNonNull':
+      return 'Event | EventHandlerNonNull'
     default:
-      console.log(type)
+      console.log(`Unknown Event Type: ${type}`)
       return type
   }
 }
@@ -177,19 +197,20 @@ const propertyTemplate = (prop: Browser.Property) => {
 
 const propertyExpression = (types: string[], nullable: boolean, name: string) => {
   const type = types.join(' | ')
-  const stype = isEvent(type)
-    ? `DOMEventHandler<State, ${mangleEventType(type)}, Action>`
+
+  const stype = isEvent(name, type)
+    ? `DOMEventHandler<State, ${mangleEventType(name, type)}, Action>`
     : `DOMAttribute<State, ${type}>`
   return `${mapPropertyName(name)}${nullable ? '?' : ''}: ${stype}`
 }
 
-const isEvent = (type: Browser.Typed[] | string) => {
-  return typeof type === 'string' && type.includes('EventHandler')
+const isEvent = (name: string, type: Browser.Typed[] | string) => {
+  return name.startsWith('on') || typeof type === 'string' && type.includes('EventHandler')
 }
 
 const comparePropertyByType = (a: Browser.Property, b: Browser.Property): number => {
-  const aIsEvent = isEvent(a.type)
-  const bIsEvent = isEvent(b.type)
+  const aIsEvent = isEvent(a.name, a.type)
+  const bIsEvent = isEvent(a.name, b.type)
   if ((aIsEvent && bIsEvent) || (!aIsEvent && !bIsEvent))
     return 0
   if (aIsEvent)
@@ -239,7 +260,6 @@ const filterElement = (inter: Browser.Interface) => (el: Browser.Element) => {
 
 const attributesTemplate = (elements: Browser.Interface[], webidl: Browser.WebIdl) => {
   const attributes = getAllAttributes(elements, webidl)
-  console.log(attributes)
   const properties = attributes.map((a) => propertyExpression(a.types, true, a.attribute))
   return `
 export interface DOMAttributes<State, Action, El> extends MoodAttributes<State, El> {

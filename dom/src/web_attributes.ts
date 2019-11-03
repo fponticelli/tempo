@@ -104,115 +104,115 @@ export interface DOMAttributes<State, Action, El> extends MoodAttributes<State, 
   onMSVideoFormatChanged?: DOMEventHandler<State, Event, Action>
   onMSVideoFrameStepCompleted?: DOMEventHandler<State, Event, Action>
   onMSVideoOptimalLayoutChanged?: DOMEventHandler<State, Event, Action>
-  onabort?: DOMAttribute<State, Event>
-  onafterprint?: DOMAttribute<State, Event>
-  onanimationcancel?: DOMAttribute<State, Event>
-  onanimationend?: DOMAttribute<State, Event>
-  onanimationiteration?: DOMAttribute<State, Event>
-  onanimationstart?: DOMAttribute<State, Event>
-  onauxclick?: DOMAttribute<State, Event>
-  onbeforeprint?: DOMAttribute<State, Event>
+  onabort?: DOMEventHandler<State, UIEvent, Action>
+  onafterprint?: DOMEventHandler<State, Event, Action>
+  onanimationcancel?: DOMEventHandler<State, Event, Action>
+  onanimationend?: DOMEventHandler<State, Event, Action>
+  onanimationiteration?: DOMEventHandler<State, Event, Action>
+  onanimationstart?: DOMEventHandler<State, Event, Action>
+  onauxclick?: DOMEventHandler<State, Event, Action>
+  onbeforeprint?: DOMEventHandler<State, Event, Action>
   onbeforeunload?: DOMEventHandler<State, BeforeUnloadEvent, Action>
-  onblur?: DOMAttribute<State, Event>
-  oncancel?: DOMAttribute<State, Event>
-  oncanplay?: DOMAttribute<State, Event>
-  oncanplaythrough?: DOMAttribute<State, Event>
-  onchange?: DOMAttribute<State, Event>
-  onclick?: DOMAttribute<State, Event>
-  onclose?: DOMAttribute<State, Event>
-  oncontextmenu?: DOMAttribute<State, Event>
-  oncopy?: DOMAttribute<State, Event>
-  oncuechange?: DOMAttribute<State, Event>
-  oncut?: DOMAttribute<State, Event>
-  ondblclick?: DOMAttribute<State, Event>
-  ondrag?: DOMAttribute<State, Event>
-  ondragend?: DOMAttribute<State, Event>
-  ondragenter?: DOMAttribute<State, Event>
-  ondragexit?: DOMAttribute<State, Event>
-  ondragleave?: DOMAttribute<State, Event>
-  ondragover?: DOMAttribute<State, Event>
-  ondragstart?: DOMAttribute<State, Event>
-  ondrop?: DOMAttribute<State, Event>
-  ondurationchange?: DOMAttribute<State, Event>
-  onemptied?: DOMAttribute<State, Event>
-  onencrypted?: DOMAttribute<State, Event>
-  onended?: DOMAttribute<State, Event>
+  onblur?: DOMEventHandler<State, Event, Action>
+  oncancel?: DOMEventHandler<State, Event, Action>
+  oncanplay?: DOMEventHandler<State, Event, Action>
+  oncanplaythrough?: DOMEventHandler<State, Event, Action>
+  onchange?: DOMEventHandler<State, Event, Action>
+  onclick?: DOMEventHandler<State, MouseEvent, Action>
+  onclose?: DOMEventHandler<State, Event, Action>
+  oncontextmenu?: DOMEventHandler<State, Event, Action>
+  oncopy?: DOMEventHandler<State, Event, Action>
+  oncuechange?: DOMEventHandler<State, Event, Action>
+  oncut?: DOMEventHandler<State, Event, Action>
+  ondblclick?: DOMEventHandler<State, Event, Action>
+  ondrag?: DOMEventHandler<State, Event, Action>
+  ondragend?: DOMEventHandler<State, Event, Action>
+  ondragenter?: DOMEventHandler<State, Event, Action>
+  ondragexit?: DOMEventHandler<State, Event, Action>
+  ondragleave?: DOMEventHandler<State, Event, Action>
+  ondragover?: DOMEventHandler<State, Event, Action>
+  ondragstart?: DOMEventHandler<State, Event, Action>
+  ondrop?: DOMEventHandler<State, Event, Action>
+  ondurationchange?: DOMEventHandler<State, Event, Action>
+  onemptied?: DOMEventHandler<State, Event, Action>
+  onencrypted?: DOMEventHandler<State, Event, Action>
+  onended?: DOMEventHandler<State, Event, Action>
   onerror?: DOMEventHandler<State, ErrorEvent, Action>
-  onfocus?: DOMAttribute<State, Event>
-  onfullscreenchange?: DOMAttribute<State, Event>
-  onfullscreenerror?: DOMAttribute<State, Event>
-  ongotpointercapture?: DOMAttribute<State, Event>
-  onhashchange?: DOMAttribute<State, Event>
-  oninput?: DOMAttribute<State, Event>
-  oninvalid?: DOMAttribute<State, Event>
-  onkeydown?: DOMAttribute<State, Event>
-  onkeypress?: DOMAttribute<State, Event>
-  onkeyup?: DOMAttribute<State, Event>
-  onlanguagechange?: DOMAttribute<State, Event>
-  onload?: DOMAttribute<State, Event>
-  onloadeddata?: DOMAttribute<State, Event>
-  onloadedmetadata?: DOMAttribute<State, Event>
-  onloadend?: DOMAttribute<State, Event>
-  onloadstart?: DOMAttribute<State, Event>
-  onlostpointercapture?: DOMAttribute<State, Event>
-  onmessage?: DOMAttribute<State, Event>
-  onmessageerror?: DOMAttribute<State, Event>
-  onmousedown?: DOMAttribute<State, Event>
-  onmouseenter?: DOMAttribute<State, Event>
-  onmouseleave?: DOMAttribute<State, Event>
-  onmousemove?: DOMAttribute<State, Event>
-  onmouseout?: DOMAttribute<State, Event>
-  onmouseover?: DOMAttribute<State, Event>
-  onmouseup?: DOMAttribute<State, Event>
-  onoffline?: DOMAttribute<State, Event>
-  ononline?: DOMAttribute<State, Event>
-  onpagehide?: DOMAttribute<State, Event>
-  onpageshow?: DOMAttribute<State, Event>
-  onpaste?: DOMAttribute<State, Event>
-  onpause?: DOMAttribute<State, Event>
-  onplay?: DOMAttribute<State, Event>
-  onplaying?: DOMAttribute<State, Event>
-  onpointercancel?: DOMAttribute<State, Event>
-  onpointerdown?: DOMAttribute<State, Event>
-  onpointerenter?: DOMAttribute<State, Event>
-  onpointerleave?: DOMAttribute<State, Event>
-  onpointermove?: DOMAttribute<State, Event>
-  onpointerout?: DOMAttribute<State, Event>
-  onpointerover?: DOMAttribute<State, Event>
-  onpointerup?: DOMAttribute<State, Event>
-  onpopstate?: DOMAttribute<State, Event>
-  onprogress?: DOMAttribute<State, Event>
-  onratechange?: DOMAttribute<State, Event>
-  onrejectionhandled?: DOMAttribute<State, Event>
-  onreset?: DOMAttribute<State, Event>
-  onresize?: DOMAttribute<State, Event>
-  onscroll?: DOMAttribute<State, Event>
-  onsecuritypolicyviolation?: DOMAttribute<State, Event>
-  onseeked?: DOMAttribute<State, Event>
-  onseeking?: DOMAttribute<State, Event>
-  onselect?: DOMAttribute<State, Event>
-  onselectionchange?: DOMAttribute<State, Event>
-  onselectstart?: DOMAttribute<State, Event>
-  onstalled?: DOMAttribute<State, Event>
-  onstorage?: DOMAttribute<State, Event>
-  onsubmit?: DOMAttribute<State, Event>
-  onsuspend?: DOMAttribute<State, Event>
-  ontimeupdate?: DOMAttribute<State, Event>
-  ontoggle?: DOMAttribute<State, Event>
-  ontouchcancel?: DOMAttribute<State, Event>
-  ontouchend?: DOMAttribute<State, Event>
-  ontouchmove?: DOMAttribute<State, Event>
-  ontouchstart?: DOMAttribute<State, Event>
-  ontransitioncancel?: DOMAttribute<State, Event>
-  ontransitionend?: DOMAttribute<State, Event>
-  ontransitionrun?: DOMAttribute<State, Event>
-  ontransitionstart?: DOMAttribute<State, Event>
-  onunhandledrejection?: DOMAttribute<State, Event>
+  onfocus?: DOMEventHandler<State, Event, Action>
+  onfullscreenchange?: DOMEventHandler<State, Event, Action>
+  onfullscreenerror?: DOMEventHandler<State, Event, Action>
+  ongotpointercapture?: DOMEventHandler<State, Event, Action>
+  onhashchange?: DOMEventHandler<State, Event, Action>
+  oninput?: DOMEventHandler<State, Event, Action>
+  oninvalid?: DOMEventHandler<State, Event, Action>
+  onkeydown?: DOMEventHandler<State, Event, Action>
+  onkeypress?: DOMEventHandler<State, Event, Action>
+  onkeyup?: DOMEventHandler<State, Event, Action>
+  onlanguagechange?: DOMEventHandler<State, Event, Action>
+  onload?: DOMEventHandler<State, Event, Action>
+  onloadeddata?: DOMEventHandler<State, Event, Action>
+  onloadedmetadata?: DOMEventHandler<State, Event, Action>
+  onloadend?: DOMEventHandler<State, Event, Action>
+  onloadstart?: DOMEventHandler<State, Event, Action>
+  onlostpointercapture?: DOMEventHandler<State, Event, Action>
+  onmessage?: DOMEventHandler<State, Event, Action>
+  onmessageerror?: DOMEventHandler<State, Event, Action>
+  onmousedown?: DOMEventHandler<State, Event, Action>
+  onmouseenter?: DOMEventHandler<State, Event, Action>
+  onmouseleave?: DOMEventHandler<State, Event, Action>
+  onmousemove?: DOMEventHandler<State, Event, Action>
+  onmouseout?: DOMEventHandler<State, Event, Action>
+  onmouseover?: DOMEventHandler<State, Event, Action>
+  onmouseup?: DOMEventHandler<State, Event, Action>
+  onoffline?: DOMEventHandler<State, Event, Action>
+  ononline?: DOMEventHandler<State, Event, Action>
+  onpagehide?: DOMEventHandler<State, Event, Action>
+  onpageshow?: DOMEventHandler<State, Event, Action>
+  onpaste?: DOMEventHandler<State, Event, Action>
+  onpause?: DOMEventHandler<State, Event, Action>
+  onplay?: DOMEventHandler<State, Event, Action>
+  onplaying?: DOMEventHandler<State, Event, Action>
+  onpointercancel?: DOMEventHandler<State, Event, Action>
+  onpointerdown?: DOMEventHandler<State, Event, Action>
+  onpointerenter?: DOMEventHandler<State, Event, Action>
+  onpointerleave?: DOMEventHandler<State, Event, Action>
+  onpointermove?: DOMEventHandler<State, Event, Action>
+  onpointerout?: DOMEventHandler<State, Event, Action>
+  onpointerover?: DOMEventHandler<State, Event, Action>
+  onpointerup?: DOMEventHandler<State, Event, Action>
+  onpopstate?: DOMEventHandler<State, Event, Action>
+  onprogress?: DOMEventHandler<State, ProgressEvent, Action>
+  onratechange?: DOMEventHandler<State, Event, Action>
+  onrejectionhandled?: DOMEventHandler<State, Event, Action>
+  onreset?: DOMEventHandler<State, Event, Action>
+  onresize?: DOMEventHandler<State, UIEvent, Action>
+  onscroll?: DOMEventHandler<State, Event, Action>
+  onsecuritypolicyviolation?: DOMEventHandler<State, Event, Action>
+  onseeked?: DOMEventHandler<State, Event, Action>
+  onseeking?: DOMEventHandler<State, Event, Action>
+  onselect?: DOMEventHandler<State, Event, Action>
+  onselectionchange?: DOMEventHandler<State, Event, Action>
+  onselectstart?: DOMEventHandler<State, Event, Action>
+  onstalled?: DOMEventHandler<State, Event, Action>
+  onstorage?: DOMEventHandler<State, Event, Action>
+  onsubmit?: DOMEventHandler<State, Event, Action>
+  onsuspend?: DOMEventHandler<State, Event, Action>
+  ontimeupdate?: DOMEventHandler<State, Event, Action>
+  ontoggle?: DOMEventHandler<State, Event, Action>
+  ontouchcancel?: DOMEventHandler<State, Event, Action>
+  ontouchend?: DOMEventHandler<State, Event, Action>
+  ontouchmove?: DOMEventHandler<State, Event, Action>
+  ontouchstart?: DOMEventHandler<State, Event, Action>
+  ontransitioncancel?: DOMEventHandler<State, Event, Action>
+  ontransitionend?: DOMEventHandler<State, Event, Action>
+  ontransitionrun?: DOMEventHandler<State, Event, Action>
+  ontransitionstart?: DOMEventHandler<State, Event, Action>
+  onunhandledrejection?: DOMEventHandler<State, Event, Action>
   onunload?: DOMEventHandler<State, Event | EventHandlerNonNull, Action>
-  onvolumechange?: DOMAttribute<State, Event>
-  onwaiting?: DOMAttribute<State, Event>
-  onwaitingforkey?: DOMAttribute<State, Event>
-  onwheel?: DOMAttribute<State, Event>
+  onvolumechange?: DOMEventHandler<State, Event, Action>
+  onwaiting?: DOMEventHandler<State, Event, Action>
+  onwaitingforkey?: DOMEventHandler<State, Event, Action>
+  onwheel?: DOMEventHandler<State, Event, Action>
   onzoom?: DOMEventHandler<State, Event, Action>
   open?: DOMAttribute<State, boolean>
   optimum?: DOMAttribute<State, number>
