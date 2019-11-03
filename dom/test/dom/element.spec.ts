@@ -2,7 +2,7 @@ import { createContext } from './common'
 import { el } from '../../src/element'
 import { DynamicView } from '@mood/core'
 import { handler, lifecycle, stateHandler } from '../../src/value'
-import { div, span, a } from '../../src/els'
+import { div, span, a } from '../../src'
 
 describe('dom_element', () => {
   it('static empty-element', () => {
@@ -85,7 +85,7 @@ describe('dom_element', () => {
 
   it('event that dispatch', () => {
     const ctx = createContext((c: number) => {
-      count = c
+      count += c
     })
     let count = 0
     const onclick = (e: MouseEvent) => 1
@@ -95,6 +95,8 @@ describe('dom_element', () => {
     expect(count).toEqual(0)
     domEl.click()
     expect(count).toEqual(1)
+    domEl.click()
+    expect(count).toEqual(2)
     node.destroy()
     expect(ctx.doc.body.innerHTML).toEqual('')
   })

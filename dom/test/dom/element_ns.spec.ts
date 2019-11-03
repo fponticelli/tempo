@@ -1,5 +1,5 @@
 import { createContext } from './common'
-import { DOMElementNS } from '../../src/element_ns'
+import { DOMElementNS } from '../../src'
 import { DynamicView } from '@mood/core'
 
 describe('dom_ns_element', () => {

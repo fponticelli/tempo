@@ -1,0 +1,17 @@
+{
+  "name": "mood",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Franco Ponticelli <franco.ponticelli@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "@types/jest": "^24.0.21",
+    "jest": "^24.9.0",
+    "jsdom": "^15.2.0",
+    "ts-jest": "^24.1.0",
+    "typescript": "^3.6.4"
+  }
+}

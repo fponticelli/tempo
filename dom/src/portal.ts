@@ -23,27 +23,27 @@ export class DOMPortal<State, Action> implements DOMTemplate<State, Action> {
 }
 
 export const portal = <State, Action>(
-  opts: {
+  options: {
     getParent: (doc: Document) => Element
     append: (doc: Document, node: Node) => void
   },
   ...children: DOMChild<State, Action>[]
-) => new DOMPortal<State, Action>(opts.getParent, opts.append, children.map(domChildToTemplate))
+) => new DOMPortal<State, Action>(options.getParent, options.append, children.map(domChildToTemplate))
 
-export const portalWithSelector = <State, Action>(opts: { selector: string }, ...children: DOMChild<State, Action>[]) =>
+export const portalWithSelector = <State, Action>(options: { selector: string }, ...children: DOMChild<State, Action>[]) =>
   portal<State, Action>(
     {
       getParent: (doc: Document) => {
-        const el = doc.querySelector(opts.selector)
+        const el = doc.querySelector(options.selector)
         if (!el) {
-          throw new Error(`selector doesn't match any element: "${opts.selector}"`)
+          throw new Error(`selector doesn't match any element: "${options.selector}"`)
         }
         return el
       },
       append: (doc: Document, node: Node) => {
         // Parent should always be available given the guarantee from `getParent`.
         // If parent has been removed from unsafe manipulation of the dom, an exception will occurr.
-        const parent = doc.querySelector(opts.selector)!
+        const parent = doc.querySelector(options.selector)!
         parent.appendChild(node)
       }
     },

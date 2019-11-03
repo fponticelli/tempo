@@ -1,5 +1,5 @@
 {
-  "name": "@mood/dom",
+  "name": "@mood/store",
   "version": "1.0.0",
   "description": "",
   "main": "lib/index.js",
@@ -15,18 +15,11 @@
   },
   "author": "Franco Ponticelli <franco.ponticelli@gmail.com>",
   "dependencies": {
-    "@mood/core": "1.0.0",
-    "@mood/store": "1.0.0"
+    "@mood/core": "1.0.0"
   },
   "devDependencies": {
     "@types/jest": "24.0.15",
-    "@types/jsdom": "12.2.4",
-    "jsdom": "15.1.1",
     "jest": "24.9.0",
-    "lodash": "4.17.15",
-    "request": "2.88.0",
-    "request-promise-native": "1.0.7",
-    "stealthy-require": "1.0.0",
     "ts-jest": "24.1.0",
     "typescript": "3.6.3",
     "tslint": "5.20.0",

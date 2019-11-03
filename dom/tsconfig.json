@@ -1,7 +1,6 @@
 {
   "extends": "../tsconfig.json",
   "compilerOptions": {
-    "sourceMap": false,
     "jsx": "preserve",
     "lib": [
       "dom",
@@ -9,15 +8,7 @@
       "esnext"
     ],
     "rootDir": "./src",
-    "outDir": "./lib",
-    "declarationMap": false,
-    "allowJs": true,
-    "allowSyntheticDefaultImports": true,
-    "module": "esnext",
-    "resolveJsonModule": true,
-    "declaration": false,
-    "isolatedModules": true,
-    "noEmit": true
+    "outDir": "./lib"
   },
   "include": [
     "src"

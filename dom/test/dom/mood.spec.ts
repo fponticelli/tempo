@@ -1,14 +1,17 @@
 import { createContext } from './common'
 import { Mood, component, div } from '../../src'
+import { Store, Property } from '@mood/store'
 
 describe('Mood', () => {
   it('render', () => {
     const ctx = createContext()
+    const store = new Store(
+      new Property('hello'),
+      (state: string, action: string) => action
+    )
+
     const comp = component(
-      {
-        state: 'hello',
-        update: (_: string, a: string) => a
-      },
+      { store },
       div({}, a => a)
     )
     const view = Mood.renderComponent({
@@ -17,9 +20,9 @@ describe('Mood', () => {
       document: ctx.doc
     })
     expect(ctx.doc.body.innerHTML).toEqual('<div>hello</div>')
-    view.change('world')
+    view.store.property.set('world')
     expect(ctx.doc.body.innerHTML).toEqual('<div>world</div>')
-    view.dispatch('foo')
+    view.store.process('foo')
     expect(ctx.doc.body.innerHTML).toEqual('<div>foo</div>')
     view.destroy()
     expect(ctx.doc.body.innerHTML).toEqual('')
@@ -28,26 +31,32 @@ describe('Mood', () => {
   it('render with observe', () => {
     const ctx = createContext()
     let result = ['', '']
+
+    const store = new Store(
+      new Property('hello'),
+      (state: string, action: string) => action.toUpperCase()
+    )
+
+    const middleware = (s: string, a: string) => {
+      result[0] = s
+      result[1] = a
+    }
+
+    store.observable.on(middleware)
+
     const comp = component(
-      {
-        state: 'hello',
-        update: (_: string, a: string) => a.toUpperCase()
-      },
+      { store },
       div({}, a => a)
     )
 
     const view = Mood.renderComponent({
       el: ctx.doc.body,
       component: comp,
-      document: ctx.doc,
-      observe: (s: string, a: string) => {
-        result[0] = s
-        result[1] = a
-      }
+      document: ctx.doc
     })
     expect(result[0]).toEqual('')
     expect(result[1]).toEqual('')
-    view.dispatch('foo')
+    view.store.process('foo')
     expect(result[0]).toEqual('FOO')
     expect(result[1]).toEqual('foo')
   })

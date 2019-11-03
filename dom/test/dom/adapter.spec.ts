@@ -1,21 +1,24 @@
 import { createContext } from './common'
-import { div } from '../../src/els'
+import { div, PropagateArg } from '../../src'
 import { adapter, component } from '../../src'
+import { Store } from '@mood/store'
 
 describe('adapter', () => {
   it('noOptions', () => {
     type InnerState = { inner: string; outer: string }
 
     const ctx = createContext(() => {})
+    const store = Store.ofState({
+      state: { inner: 'in', outer: 'out' },
+      reducer: (state: InnerState) => {
+        return state
+      }
+    })
+
     const template = adapter(
       {},
       component(
-        {
-          state: { inner: 'in', outer: 'out' },
-          update: (state: InnerState) => {
-            return state
-          }
-        },
+        { store },
         'inner: ',
         s => s.inner,
         ', outer: ',
@@ -35,6 +38,12 @@ describe('adapter', () => {
     type InnerState = { inner: string; outer: string }
 
     const ctx = createContext(() => {})
+    const store = Store.ofState({
+      state: { inner: 'in', outer: '' },
+      reducer: (state: InnerState) => {
+        return state
+      }
+    })
     const template = adapter(
       {
         mergeStates: (outer: OuterState, inner: InnerState) => {
@@ -42,12 +51,7 @@ describe('adapter', () => {
         }
       },
       component(
-        {
-          state: { inner: 'in', outer: '' },
-          update: (state: InnerState) => {
-            return state
-          }
-        },
+        { store },
         'inner: ',
         s => s.inner,
         ', outer: ',
@@ -60,56 +64,63 @@ describe('adapter', () => {
     expect(ctx.doc.body.innerHTML).toEqual('inner: in, outer: OUT')
   })
 
+  // TODO this test is almost impossible to follow and understand
   it('propagate', () => {
-    type OuterState = { outer: string }
-    type InnerState = { inner: string; outer: string }
-    let counter = 0
-    const ctx = createContext((v: number) => {
-      counter = v
+    const state = ['inner-state'] as string[]
+    const store = Store.ofState<string[], string>({
+      state,
+      reducer: (s, a) => {
+        if (a === 'inner-action') {
+          didCallInnerDispatcher = true
+          return s.concat([a])
+        } else {
+          return s.concat([a])
+        }
+      }
     })
 
-    const template = adapter(
-      {
-        propagate: (
-          action: number,
-          innerState: InnerState,
-          outerState: OuterState,
-          dispatchInner: (action: number) => void,
-          dispatchOuter: (action: number) => void
-        ) => {
-          if (action === 5) return
-          expect(++counter).toEqual(2)
-          expect(action).toEqual(1)
-          expect(innerState).toEqual({ inner: '1', outer: 'notout' })
-          expect(outerState).toEqual({ outer: 'out' })
-          dispatchOuter(3)
-          expect(++counter).toEqual(4)
-          dispatchInner(5)
-        }
-      },
-      component<InnerState, number>(
-        {
-          state: { inner: 'in', outer: 'notout' },
-          update: (state: InnerState, action: number) => {
-            if (action === 5) {
-              return { ...state, inner: String(action) }
-            } else {
-              expect(++counter).toEqual(1)
-              return { ...state, inner: String(action) }
-            }
-          }
-        },
-        div({ onClick: (_: MouseEvent) => 1 }, 'inner: ', s => s.inner, ', outer: ', s => s.outer)
-      )
+    const comp = component(
+      { store },
+      div({ onClick: (_: MouseEvent) => 'click' }, s => s.join(', '))
     )
 
-    template.render(ctx, { outer: 'out' })
-    expect(counter).toEqual(0)
-    expect(ctx.doc.body.innerHTML).toEqual('<div>inner: in, outer: notout</div>')
+    let didCallPropagate = false
+    let didCallOuterDispatcher = false
+    let didCallInnerDispatcher = false
+
+    const propagate = (args: PropagateArg<string, string[], string, string>) => {
+      // dispatch it only once
+      if (args.action === 'click') {
+        didCallPropagate = true
+        expect(args.innerState).toEqual(['inner-state', 'outer-state', 'click'])
+        args.dispatchInner('inner-action')
+      } else if (args.action === 'inner-action') {
+        args.dispatchOuter('outer-action')
+        expect(args.innerState).toEqual(['inner-state', 'outer-state', 'click', 'inner-action'])
+        expect(args.outerState).toBe('outer-state')
+      }
+    }
+
+    const mergeStates = (outer: string, inner: string[]) => inner.concat([outer])
+
+    const adapt = adapter({ propagate, mergeStates }, comp)
+
+    const ctx = createContext(
+      (a: string) => {
+        expect(a).toBe('outer-action')
+        didCallOuterDispatcher = true
+      }
+    )
+
+    adapt.render(ctx, 'outer-state')
+
+    expect(ctx.doc.body.innerHTML).toEqual('<div>inner-state, outer-state</div>')
 
     const el = ctx.doc.body.firstElementChild as HTMLDivElement
     el.click()
-    expect(counter).toEqual(4)
-    expect(ctx.doc.body.innerHTML).toEqual('<div>inner: 5, outer: notout</div>')
+    expect(didCallPropagate).toBeTruthy()
+    expect(didCallOuterDispatcher).toBeTruthy()
+    expect(didCallInnerDispatcher).toBeTruthy()
+    expect(ctx.doc.body.innerHTML).toEqual('<div>inner-state, outer-state, click, inner-action</div>')
   })
 })

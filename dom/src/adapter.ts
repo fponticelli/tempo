@@ -15,7 +15,7 @@ export class DOMAdapterView<OuterState, InnerState, InnerAction> implements Dyna
   }
 
   change(outerState: OuterState): void {
-    const newState = this.mergeStates(outerState, this.child.state)
+    const newState = this.mergeStates(outerState, this.child.store.property.get())
     if (newState == null) return
     this.child.change(newState)
   }
@@ -25,52 +25,52 @@ export class DOMAdapter<OuterState, InnerState, OuterAction, InnerAction>
   implements DOMTemplate<OuterState, OuterAction> {
   constructor(
     readonly mergeStates: (outerState: OuterState, innerState: InnerState) => InnerState | undefined,
-    readonly propagate: (
-      action: InnerAction,
-      innerState: InnerState,
-      outerState: OuterState,
-      dispatchInner: (action: InnerAction) => void,
-      dispatchOuter: (action: OuterAction) => void
-    ) => void,
+    readonly propagate: (args: PropagateArg<OuterState, InnerState, OuterAction, InnerAction>) => void,
     readonly child: DOMComponent<InnerState, InnerAction>
   ) {}
 
   render(ctx: DOMContext<OuterAction>, outerState: OuterState): DynamicView<OuterState> {
-    const mergedState = (this.mergeStates && this.mergeStates(outerState, this.child.state)) || this.child.state
+    const mergedState =
+      (this.mergeStates && this.mergeStates(outerState, this.child.store.property.get())) ||
+      this.child.store.property.get()
+
     const viewChild = this.child.render(
-      ctx.withDispatch((action: InnerAction) => {
-        this.propagate(action, viewChild.state, outerState, viewChild.dispatch, ctx.dispatch)
-      }),
+      ctx.withDispatch(() => { /* COMPONENT IS DETACHED FROM CONTAINER AND DOESN'T PROPAGATE */ }),
       mergedState
     )
+
+    this.child.store.observable.on((state: InnerState, action: InnerAction) => {
+      this.propagate({
+        action,
+        innerState: state,
+        outerState,
+        dispatchInner: (action: InnerAction) => this.child.store.process(action),
+        dispatchOuter: ctx.dispatch
+      })
+    })
     const view = new DOMAdapterView(this.mergeStates, viewChild)
     return view
   }
 }
 
+export interface PropagateArg<OuterState, InnerState, OuterAction, InnerAction> {
+  action: InnerAction
+  innerState: InnerState
+  outerState: OuterState
+  dispatchInner: (action: InnerAction) => void
+  dispatchOuter: (action: OuterAction) => void
+}
+
 export const adapter = <OuterState, InnerState, OuterAction, InnerAction>(
-  opts: {
+  options: {
     mergeStates?: (outerState: OuterState, innerState: InnerState) => InnerState | undefined
-    propagate?: (
-      action: InnerAction,
-      innerState: InnerState,
-      outerState: OuterState,
-      dispatchInner: (action: InnerAction) => void,
-      dispatchOuter: (action: OuterAction) => void
-    ) => void
+    propagate?: (args: PropagateArg<OuterState, InnerState, OuterAction, InnerAction>) => void
   },
   child: DOMComponent<InnerState, InnerAction>
 ) =>
   new DOMAdapter(
-    opts.mergeStates || ((_u: OuterState, _d: InnerState) => undefined),
+    options.mergeStates || ((_u: OuterState, _d: InnerState) => undefined),
     /* istanbul ignore next */
-    opts.propagate ||
-      ((
-        _m: InnerAction,
-        _d: InnerState,
-        _u: OuterState,
-        _f1: (action: InnerAction) => void,
-        _f2: (action: OuterAction) => void
-      ) => undefined),
+    options.propagate || (() => undefined),
     child
   )

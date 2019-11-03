@@ -1,15 +1,17 @@
 import { createContext } from './common'
 import { Mood, component, span, portalWithSelector, headPortal, style, bodyPortal } from '../../src'
+import { Store } from '@mood/store'
 
 describe('portal', () => {
   it('portalWithSelector', () => {
     const ctx = createContext()
     ctx.doc.body.innerHTML = '<div id="main"></div><div id="container"></div>'
+    const store = Store.ofState({
+      state: 'hello',
+      reducer: (_: string, a: string) => a
+    })
     const comp = component(
-      {
-        state: 'hello',
-        update: (_: string, a: string) => a
-      },
+      { store },
       portalWithSelector({ selector: '#container' }, span({ className: s => s }))
     )
     const view = Mood.renderComponent({
@@ -18,7 +20,7 @@ describe('portal', () => {
       document: ctx.doc
     })
     expect(ctx.doc.body.innerHTML).toEqual('<div id="main"></div><div id="container"><span class="hello"></span></div>')
-    view.dispatch('foo')
+    view.store.process('foo')
     expect(ctx.doc.body.innerHTML).toEqual('<div id="main"></div><div id="container"><span class="foo"></span></div>')
     view.destroy()
     expect(ctx.doc.body.innerHTML).toEqual('<div id="main"></div><div id="container"></div>')
@@ -27,11 +29,12 @@ describe('portal', () => {
   it('portalWithSelector throws if element is not found', () => {
     const ctx = createContext()
     ctx.doc.body.innerHTML = '<div id="main"></div><div id="container"></div>'
+    const store = Store.ofState({
+      state: 'hello',
+      reducer: (_: string, a: string) => a
+    })
     const comp = component(
-      {
-        state: 'hello',
-        update: (_: string, a: string) => a
-      },
+      { store },
       portalWithSelector({ selector: '#doesnotexist' }, span({ className: s => s }))
     )
     expect(() => {
@@ -45,11 +48,12 @@ describe('portal', () => {
 
   it('headPortal', () => {
     const ctx = createContext()
+    const store = Store.ofState({
+      state: 'background-color: red',
+      reducer: (_: string, a: string) => a
+    })
     const comp = component(
-      {
-        state: 'background-color: red',
-        update: (_: string, a: string) => a
-      },
+      { store },
       headPortal(style({}, s => s))
     )
     const view = Mood.renderComponent({
@@ -58,7 +62,7 @@ describe('portal', () => {
       document: ctx.doc
     })
     expect(ctx.doc.head.innerHTML).toEqual('<style>background-color: red</style>')
-    view.dispatch('color: black')
+    view.store.process('color: black')
     expect(ctx.doc.head.innerHTML).toEqual('<style>color: black</style>')
     view.destroy()
     expect(ctx.doc.head.innerHTML).toEqual('')
@@ -66,11 +70,12 @@ describe('portal', () => {
 
   it('bodyPortal', () => {
     const ctx = createContext()
+    const store = Store.ofState({
+      state: 'background-color: red',
+      reducer: (_: string, a: string) => a
+    })
     const comp = component(
-      {
-        state: 'background-color: red',
-        update: (_: string, a: string) => a
-      },
+      { store },
       bodyPortal(style({}, s => s))
     )
     const view = Mood.renderComponent({
@@ -79,7 +84,7 @@ describe('portal', () => {
       document: ctx.doc
     })
     expect(ctx.doc.body.innerHTML).toEqual('<style>background-color: red</style>')
-    view.dispatch('color: black')
+    view.store.process('color: black')
     expect(ctx.doc.body.innerHTML).toEqual('<style>color: black</style>')
     view.destroy()
     expect(ctx.doc.body.innerHTML).toEqual('')
