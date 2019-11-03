@@ -5,12 +5,14 @@ import { DOMDynamicNodeView, DOMStaticNodeView } from './utils/node_view'
 import { DOMAttribute } from './value'
 import { prepareAttributes, maybeApplyMood, applyMood } from './element'
 import { View } from '@mood/core'
+import { MoodAttributes } from './mood_attributes'
+import { DOMAttributes } from './web_attributes'
 
-export class DOMElementNS<State, Action> implements DOMTemplate<State, Action> {
+export class DOMElementNS<State, Action, El> implements DOMTemplate<State, Action> {
   constructor(
     readonly ns: string,
     readonly name: string,
-    readonly attributes: Record<string, DOMAttribute<State, Action>>,
+    readonly attributes: DOMAttributes<State, Action, El>,
     readonly children: DOMTemplate<State, Action>[]
   ) {}
 
@@ -66,12 +68,12 @@ export const defaultNamespaces: Record<string, string> = {
   'svg': 'TODO'
 }
 
-export const elNS = <State, Action>(
+export const elNS = <State, Action, El>(
   ns: string,
   name: string,
-  attributes: Record<string, DOMAttribute<State, Action>>,
+  attributes: Record<string, DOMAttribute<State, Action>> & MoodAttributes<State, El>,
   ...children: DOMChild<State, Action>[]
 ) => {
   const namespace = defaultNamespaces[ns] || ns
-  return new DOMElementNS<State, Action>(namespace, name, attributes, children.map(domChildToTemplate))
+  return new DOMElementNS<State, Action, El>(namespace, name, attributes, children.map(domChildToTemplate))
 }

@@ -1,4 +1,5 @@
 import * as Browser from './tslib/types'
+import { baseTypeConversionMap } from './tslib/helpers'
 
 const extendsElement = (records: Record<string, Browser.Interface>) => (inter: Browser.Interface): boolean => {
   if (inter.extends === 'Element') return true
@@ -6,15 +7,27 @@ const extendsElement = (records: Record<string, Browser.Interface>) => (inter: B
   return extendsElement(records)(records[inter.extends])
 }
 
-export const generateTypes = (webidl: Browser.WebIdl, forceKnownTypes: Set<string>) => {
-  if (!webidl.interfaces) return
+export const filterElements = (webidl: Browser.WebIdl, forceKnownTypes: Set<string>) => {
+  if (!webidl.interfaces) return []
   const records = webidl.interfaces.interface
-  const elements = Object.values(records)
+  return Object.values(records)
     .filter(extendsElement(records))
     .filter(e => !!e.element)
+}
+
+export const generateTypes = (elements: Browser.Interface[], webidl: Browser.WebIdl) => {
   const result = [
-    importsContent(),
+    importsWebContent(),
     elements.map(interfaceTemplate(webidl)).join('\n\n')
+  ].join('\n\n')
+  console.log(result.split('\n').length)
+  return result
+}
+
+export const generateWebAttributes = (elements: Browser.Interface[], webidl: Browser.WebIdl) => {
+  const result = [
+    importsAttributesContent(),
+    attributesTemplate(elements, webidl)
   ].join('\n\n')
   console.log(result.split('\n').length)
   return result
@@ -27,15 +40,16 @@ const elementTemplate = (inter: Browser.Interface) => (el: Browser.Element) => {
   const fname = mapElementFnName(name)
   const attributesTypeName = getAttributesTypeName(inter)
 
+  //  as (DOMAttributes<State, Action> & MoodAttributes<State, El>)
   const fcall = ns === 'HTML'
-    ? `el<State, Action>('${name}', attributes, ...children)`
-    : `elNS<State, Action>('${lcns}', '${name}', attributes, ...children)`
+    ? `el<State, Action, ${inter.name}>('${name}', attributes as never, ...children)`
+    : `elNS<State, Action, ${inter.name}>('${lcns}', '${name}', attributes as never, ...children)`
 
   const content = `export module ${lcns} {
     export function ${fname}<State, Action>(
     attributes: ${attributesTypeName}<State, Action> & CSSAttributes<State> & MoodAttributes<State, ${inter.name}>,
     ...children: DOMChild<State, Action>[]
-  ): DOMElement<State, Action> {
+  ): DOMElement<State, Action, ${inter.name}> {
     return ${fcall}
   }
 }`
@@ -82,19 +96,23 @@ const isExposableProperty = (prop: Browser.Property): boolean => {
 
 const propertyTypes: Record<string, string> = {
   'CSSStyleDeclaration': 'CSSProperties',
-  'DOMString': 'string',
-  'USVString': 'string',
-  'short': 'number',
-  'float': 'number',
-  'double': 'number',
-  'long': 'number',
-  'unsigned short': 'number',
-  'unsigned long': 'number',
-  'unrestricted double': 'number'
+  'EventHandler': 'Event'
+  // 'DOMString': 'string',
+  // 'USVString': 'string',
+  // 'short': 'number',
+  // 'float': 'number',
+  // 'double': 'number',
+  // 'long': 'number',
+  // 'unsigned short': 'number',
+  // 'unsigned long': 'number',
+  // 'unrestricted double': 'number'
 }
 
 const mapPropertyType = (type: string): string => {
-  return propertyTypes[type] || type.replace(/["]/g, "'")
+  let value
+  if (baseTypeConversionMap.has(type))
+    value = baseTypeConversionMap.get(type)
+  return propertyTypes[value || type] || (value || type.replace(/[']/g, "'"))
 }
 
 const specialElementNames: Record<string, string> = {
@@ -109,6 +127,14 @@ const mapElementFnName = (name: string): string => {
 const mapPropertyName = (name: string): string => {
   return name.replace(/[?]/g, '')
 }
+
+// const sameTypes = (a: { names: string[], nullable: boolean }, b: { names: string[], nullable: boolean }) => {
+//   if (a.nullable !== b.nullable || a.names.length !== b.names.length) return false
+//   for (let i = 0; i < a.names.length; i++) {
+//     if (a.names[i] !== b.names[i]) return false
+//   }
+//   return true
+// }
 
 const extractTypes = (prop: Browser.Typed): { names: string[], nullable: boolean } => {
   if (prop['override-type'])
@@ -138,22 +164,23 @@ const mangleEventType = (type: string) => {
   }
 }
 
+const getProperyTypes = (prop: Browser.Property) => {
+  const types = extractTypes(prop)
+  return Array.from(new Set(types.names.map(mapPropertyType)))
+}
+
 const propertyTemplate = (prop: Browser.Property) => {
   const types = extractTypes(prop)
-  const names = types.names.map(mapPropertyType)
-  // if (['inputmode', 'spellcheck', 'dir', 'autocapitalize'].includes(prop.name))
-  //   console.log(prop)
-  // if (!types.nullable) {
-  //   console.log(types)
-  // }
-  // if (prop.type === 'EventHandler') {
-  //   console.log(prop)
-  // }
-  // onMouseLeave?: DOMEventHandler<State, MouseEvent, Action>
-  const stype = isEvent(prop.type)
-    ? `DOMEventHandler<State, ${mangleEventType(prop.type as string)}, Action>`
-    : `DOMAttribute<State, ${names.join(' | ')}>`
-  return `${mapPropertyName(prop.name)}${types.nullable ? '?' : ''}: ${stype}`
+  const typeNames = Array.from(new Set(types.names.map(mapPropertyType)))
+  return propertyExpression(typeNames, types.nullable, prop.name)
+}
+
+const propertyExpression = (types: string[], nullable: boolean, name: string) => {
+  const type = types.join(' | ')
+  const stype = isEvent(type)
+    ? `DOMEventHandler<State, ${mangleEventType(type)}, Action>`
+    : `DOMAttribute<State, ${type}>`
+  return `${mapPropertyName(name)}${nullable ? '?' : ''}: ${stype}`
 }
 
 const isEvent = (type: Browser.Typed[] | string) => {
@@ -183,11 +210,21 @@ const compareProperty = (a: Browser.Property, b: Browser.Property): number => {
     return 1
 }
 
-const attributesTypeTemplate = (webidl: Browser.WebIdl) => (inter: Browser.Interface) => {
-  const name = getAttributesTypeName(inter)
+const attributesCache = new Map<string, Browser.Property[]>()
+const getAttributes = (webidl: Browser.WebIdl, inter: Browser.Interface) => {
+  const id = inter.name
+  if (attributesCache.has(id))
+    return attributesCache.get(id)
   const properties = Object.values(collectProperties(webidl)(inter))
     .filter(isExposableProperty)
     .sort(compareProperty)
+  attributesCache.set(id, properties)
+  return properties
+}
+
+const attributesTypeTemplate = (webidl: Browser.WebIdl) => (inter: Browser.Interface) => {
+  const name = getAttributesTypeName(inter)
+  const properties = getAttributes(webidl, inter)
   // console.log(properties)
   return `export interface ${name}<State, Action> {
   ${properties.map(propertyTemplate).join('\n  ')}
@@ -198,6 +235,46 @@ const filterElement = (inter: Browser.Interface) => (el: Browser.Element) => {
   if (inter.name === 'HTMLTableCellElement' && (el.name === 'td' || el.name === 'th'))
     return false
   return true
+}
+
+const attributesTemplate = (elements: Browser.Interface[], webidl: Browser.WebIdl) => {
+  const attributes = getAllAttributes(elements, webidl)
+  console.log(attributes)
+  const properties = attributes.map((a) => propertyExpression(a.types, true, a.attribute))
+  return `
+export interface DOMAttributes<State, Action, El> extends MoodAttributes<State, El> {
+  ${properties.join('\n  ')}
+}
+`
+}
+
+const getAllAttributes = (elements: Browser.Interface[], webidl: Browser.WebIdl) => {
+  // console.log(inter)
+  const accumulator = new Map<string, string[]>()
+  elements.forEach(element => {
+    getAttributes(webidl, element).forEach(attribute => {
+      const name = mapPropertyName(attribute.name)
+      const types = getProperyTypes(attribute)
+      if (!accumulator.has(name)) {
+        accumulator.set(name, types)
+      } else {
+        const all = Array.from(new Set(accumulator.get(name).concat(types)))
+        accumulator.set(name, all)
+      }
+    })
+  })
+  const keys = Array.from(accumulator.keys())
+  return keys.map(attribute => ({
+    attribute, types: accumulator.get(attribute)
+  })).sort((a, b) => {
+    if (a.attribute < b.attribute) {
+      return -1
+    } else if (a.attribute > b.attribute) {
+      return 1
+    } else {
+      return 0
+    }
+  })
 }
 
 const interfaceTemplate = (webidl: Browser.WebIdl) => (inter: Browser.Interface) => {
@@ -212,12 +289,19 @@ const interfaceTemplate = (webidl: Browser.WebIdl) => (inter: Browser.Interface)
   return result
 }
 
-const importsContent = () => {
+const importsWebContent = () => {
   return `
 import { DOMChild } from './template'
 import { DOMAttribute, DOMEventHandler } from './value'
 import { el, DOMElement } from './element'
 import { elNS } from './element_ns'
 import { CSSAttributes, CSSProperties } from './css_properties'
-import { MoodAttributes } from './mood_attributes'`
+import { MoodAttributes } from './mood_attributes'`.trim()
+}
+
+const importsAttributesContent = () => {
+  return `
+import { DOMAttribute, DOMEventHandler } from './value'
+import { CSSProperties } from './css_properties'
+import { MoodAttributes } from './mood_attributes'`.trim()
 }

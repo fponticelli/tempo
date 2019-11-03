@@ -1,7 +1,7 @@
 import { DOMTemplate, DOMChild } from './template'
 import { DOMContext } from './context'
 import { View, wrapLiteral, WrappedValue } from '@mood/core'
-import { DOMAttributes as DOMAttributes } from './html/common/html_attributes'
+import { DOMAttributes } from './web_attributes'
 import { Acc, processAttribute, filterDynamics, domChildToTemplate } from './utils/dom'
 import { DOMDynamicNodeView, DOMStaticNodeView } from './utils/node_view'
 import { DOMAttribute } from './value'
@@ -22,14 +22,14 @@ export const maybeApplyMood = <State>(el: Element, attr: WrappedValue<State, (el
   }
 }
 
-export const prepareAttributes = <State, Action>(attrs: DOMAttributes<State, Action>) => {
+export const prepareAttributes = <State, Action, El>(attrs: DOMAttributes<State, Action, El>) => {
   const attributes = { ...attrs }
 
   const afterRender = attributes.moodAfterRender && wrapLiteral(attributes.moodAfterRender)
   const beforeChange = attributes.moodBeforeChange && wrapLiteral(attributes.moodBeforeChange)
   const afterChange = attributes.moodAfterChange && wrapLiteral(attributes.moodAfterChange)
   const beforeDestroyf = attributes.moodBeforeDestroy
-  const beforeDestroy = beforeDestroyf && (() => beforeDestroyf(el))
+  const beforeDestroy = beforeDestroyf && (() => beforeDestroyf(el as never))
 
   delete attributes.moodAfterRender
   delete attributes.moodBeforeChange
@@ -39,10 +39,10 @@ export const prepareAttributes = <State, Action>(attrs: DOMAttributes<State, Act
   return { attributes, afterRender, beforeChange, afterChange, beforeDestroy }
 }
 
-export class DOMElement<State, Action> implements DOMTemplate<State, Action> {
+export class DOMElement<State, Action, El> implements DOMTemplate<State, Action> {
   constructor(
     readonly name: string,
-    readonly attributes: DOMAttributes<State, Action>,
+    readonly attributes: DOMAttributes<State, Action, El>,
     readonly children: DOMTemplate<State, Action>[]
   ) {}
 
@@ -93,10 +93,10 @@ export class DOMElement<State, Action> implements DOMTemplate<State, Action> {
   }
 }
 
-export const el = <State, Action>(
+export const el = <State, Action, El>(
   name: string,
-  attributes: DOMAttributes<State, Action>,
+  attributes: DOMAttributes<State, Action, El>,
   ...children: DOMChild<State, Action>[]
 ) => {
-  return new DOMElement<State, Action>(name, attributes, children.map(domChildToTemplate))
+  return new DOMElement<State, Action, El>(name, attributes, children.map(domChildToTemplate))
 }

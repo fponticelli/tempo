@@ -4,7 +4,7 @@ import * as path from 'path'
 import { merge, resolveExposure, markAsDeprecated, mapToArray } from './tslib/helpers'
 // import { Flavor, emitWebIdl } from './tslib/emitter'
 import { convert } from './tslib/widlprocess'
-import { generateTypes } from './expose'
+import { generateTypes, generateWebAttributes, filterElements } from './expose'
 // import { getExposedTypes } from './tslib/expose'
 
 // function mergeNamesakes(filtered: Browser.WebIdl) {
@@ -202,10 +202,14 @@ function emitElements() {
   // console.log(webidl.interfaces.interface.HTMLInputElement)
 
   // mergeNamesakes(webidl)
+  const elements = filterElements(webidl, new Set(knownTypes.Window))
 
-  const ts = generateTypes(webidl, new Set(knownTypes.Window))
+  const webAttributesTs = generateWebAttributes(elements, webidl)
+  fs.writeFileSync(path.join(__dirname, '..', 'generated', 'web_attributes.ts'), webAttributesTs, 'utf-8')
+
+  const webTs = generateTypes(elements, webidl)
   // fs.writeFileSync(path.join(__dirname, '..', 'generated', 'info.json'), JSON.stringify(webidl, null, 2), 'utf-8')
-  fs.writeFileSync(path.join(__dirname, '..', 'generated', 'web.ts'), ts, 'utf-8')
+  fs.writeFileSync(path.join(__dirname, '..', 'generated', 'web.ts'), webTs, 'utf-8')
 
   // emitDomWeb(webidl, tsWebOutput, new Set(knownTypes.Window))
   // emitDomWorker(webidl, tsWorkerOutput, new Set(knownTypes.Worker))
