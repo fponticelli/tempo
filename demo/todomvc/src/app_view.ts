@@ -1,7 +1,5 @@
-import {
-  a, button, div, footer, forEach, h1, header, input, label,
-  li, mapState, p, section, span, ul, when, stateHandler, handler, DOMEventHandler
-} from '@mood/dom'
+import { html, mapState, DOMEventHandler, handler, forEach, when, stateHandler } from '@mood/dom'
+const { section, header, h1, input, ul, label, div, li, footer, span, a, p, button } = html
 import { Action } from './action'
 import { State, Filter, Todo } from './state'
 
@@ -40,7 +38,7 @@ export const template = section<State, Action>({},
         placeholder: 'What needs to be done?',
         autofocus: state => state.editing == null,
         value: state => state.adding,
-        onKeyDown: e => {
+        onkeydown: e => {
           const input = e.target as HTMLInputElement
           if (e.keyCode === 13) {
             return Action.addTodo(input.value.trim())
@@ -87,15 +85,15 @@ export const template = section<State, Action>({},
                   className: 'toggle',
                   type: 'checkbox',
                   checked: todo => todo.completed,
-                  onChange: stateHandler(todo => Action.toggleTodo(todo.id))
+                  onchange: stateHandler(todo => Action.toggleTodo(todo.id))
                 }),
                 label(
-                  { onDblClick: stateHandler(todo => Action.editingTodo(todo.id, todo.title)) },
+                  { ondblclick: stateHandler(todo => Action.editingTodo(todo.id, todo.title)) },
                   todo => todo.title
                 ),
                 button({
                   className: 'destroy',
-                  onClick: stateHandler(todo => Action.removeTodo(todo.id))
+                  onclick: stateHandler(todo => Action.removeTodo(todo.id))
                 })
               ),
               when(
@@ -104,7 +102,7 @@ export const template = section<State, Action>({},
                   moodAfterRender: el => el.focus(),
                   className: 'edit',
                   value: todo => todo.title,
-                  onKeyPress: handler(todo => e => {
+                  onkeypress: handler(todo => e => {
                     const input = e.target as HTMLInputElement
                     if (e.keyCode === 13) {
                       const value = input.value.trim()
@@ -119,7 +117,7 @@ export const template = section<State, Action>({},
                       return Action.editingTodo(todo.id, input.value)
                     }
                   }),
-                  onBlur: handler(todo => e => {
+                  onblur: handler(todo => e => {
                     const input = e.target as HTMLInputElement
                     return Action.updateTodo(todo.id, input.value.trim())
                   })
@@ -141,7 +139,7 @@ export const template = section<State, Action>({},
             {
               href: '#/',
               className: selectedF(Filter.All),
-              onClick: changeF(Filter.All)
+              onclick: changeF(Filter.All)
             },
             'All'
           )
@@ -152,7 +150,7 @@ export const template = section<State, Action>({},
             {
               href: '#/active',
               className: selectedF(Filter.Active),
-              onClick: changeF(Filter.Active)
+              onclick: changeF(Filter.Active)
             },
             'Active'
           )
@@ -163,7 +161,7 @@ export const template = section<State, Action>({},
             {
               href: '#/completed',
               className: selectedF(Filter.Completed),
-              onClick: changeF(Filter.Completed)
+              onclick: changeF(Filter.Completed)
             },
             'Completed'
           )
@@ -178,7 +176,7 @@ export const template = section<State, Action>({},
         button(
           {
             className: 'clear-completed',
-            onClick: (_: MouseEvent) => Action.clearCompleted
+            onclick: (_: MouseEvent) => Action.clearCompleted
           },
           'Clear completed'
         )

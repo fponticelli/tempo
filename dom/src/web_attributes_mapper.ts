@@ -7,7 +7,7 @@ import {
   setStyleAttribute,
   setBoolProperty,
   setProperty
-} from '../../utils/set_attribute'
+} from './utils/set_attribute'
 
 export const htmlAttributeNameMap: Record<string, string> = {
   acceptCharset: 'accept-charset',
