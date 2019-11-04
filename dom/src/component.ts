@@ -1,6 +1,6 @@
 import { DOMDynamicFragmentView } from './fragment'
 import { View, DynamicView } from '@mood/core'
-import { Store } from '@mood/store'
+import { Store, nextFrame } from '@mood/store'
 import { DOMTemplate, DOMChild } from './template'
 import { DOMContext } from './context'
 import { filterDynamics, domChildToTemplate } from './utils/dom'
@@ -29,16 +29,19 @@ export class DOMComponentView<State, Action> extends DOMDynamicFragmentView<Stat
 export class DOMComponent<State, Action> implements DOMTemplate<State, Action> {
   constructor(
     readonly store: Store<State, Action>,
-    readonly children: DOMTemplate<State, Action>[]
+    readonly children: DOMTemplate<State, Action>[],
+    readonly delayed: boolean
   ) {}
 
   render(ctx: DOMContext<Action>, state: State) {
-    const update = (state: State) => view.change(state)
+    let update = (state: State) => view.change(state)
+    if (this.delayed) {
+      update = nextFrame(update)
+    }
     const { store } = this
 
     store.property.observable.on(update)
     const innerDispatch = (action: Action) => {
-      // ctx.dispatch(action)
       store.process(action)
     }
     const newCtx = ctx.withDispatch(innerDispatch)
@@ -55,6 +58,7 @@ export class DOMComponent<State, Action> implements DOMTemplate<State, Action> {
 export const component = <State, Action>(
   attributes: {
     store: Store<State, Action>
+    delayed?: boolean
   },
   ...children: DOMChild<State, Action>[]
-) => new DOMComponent<State, Action>(attributes.store, children.map(domChildToTemplate))
+) => new DOMComponent<State, Action>(attributes.store, children.map(domChildToTemplate), attributes.delayed || false)

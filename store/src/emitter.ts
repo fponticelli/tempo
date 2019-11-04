@@ -53,7 +53,7 @@ export const debounce = (delay: number) => <T extends any[]>(listener: Listener<
   }
 }
 
-export const nextFrame = (delay: number) => <T extends any[]>(listener: Listener<T>): Listener<T> => {
+export const nextFrame = <T extends any[]>(listener: Listener<T>): Listener<T> => {
   let running = false
   let acc: T
   return (...values: T) => {
