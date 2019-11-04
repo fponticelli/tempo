@@ -1,6 +1,5 @@
 import { State, createTodo } from './state'
 import { Action } from './action'
-import { DataStore } from './data_store'
 
 export const reducer = (state: State, action: Action) => {
   const newState = { ...state }
@@ -13,7 +12,8 @@ export const reducer = (state: State, action: Action) => {
       }
       break
     case 'create-todo':
-      newState.todos = [...state.todos, createTodo(action.title)]
+      if (action.title)
+        newState.todos = [...state.todos, createTodo(action.title)]
       delete newState.adding
       break
     case 'editing-todo':
@@ -51,6 +51,5 @@ export const reducer = (state: State, action: Action) => {
     default:
       throw 'unreacheable code'
   }
-  DataStore.set(newState)
   return newState
 }

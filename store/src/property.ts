@@ -1,5 +1,6 @@
 import { Emitter } from './emitter'
 import { Observable1 } from './observable'
+import { deepEqual } from './equality'
 
 // @ts-ignore
 export class Property<T> {
@@ -7,7 +8,7 @@ export class Property<T> {
 
   constructor(
     private value: T,
-    private equals: (a: T, b: T) => boolean = (a, b) => a === b
+    private equals: (a: T, b: T) => boolean = deepEqual
   ) {
     this.observable = this.emitter = Emitter.ofOne()
   }
