@@ -14,16 +14,23 @@ export interface DOMAttributes<State, Action, El> extends MoodAttributes<State, 
   allowFullscreen?: DOMAttribute<State, boolean>
   allowPaymentRequest?: DOMAttribute<State, boolean>
   alt?: DOMAttribute<State, string>
+  amplitude?: DOMAttribute<State, number>
+  animatedPoints?: DOMAttribute<State, string>
   as?: DOMAttribute<State, string>
   async?: DOMAttribute<State, boolean>
   autocapitalize?: DOMAttribute<State, string>
   autocomplete?: DOMAttribute<State, string>
   autofocus?: DOMAttribute<State, boolean>
   autoplay?: DOMAttribute<State, boolean>
+  azimuth?: DOMAttribute<State, number>
+  baseFrequencyX?: DOMAttribute<State, number>
+  baseFrequencyY?: DOMAttribute<State, number>
   bgProperties?: DOMAttribute<State, string>
+  bias?: DOMAttribute<State, number>
   checked?: DOMAttribute<State, boolean>
   cite?: DOMAttribute<State, string>
   className?: DOMAttribute<State, string>
+  clipPathUnits?: DOMAttribute<State, string>
   colSpan?: DOMAttribute<State, number>
   color?: DOMAttribute<State, string>
   cols?: DOMAttribute<State, number>
@@ -34,6 +41,9 @@ export interface DOMAttributes<State, Action, El> extends MoodAttributes<State, 
   crossOrigin?: DOMAttribute<State, string>
   currentScale?: DOMAttribute<State, number>
   currentTime?: DOMAttribute<State, number>
+  currentTranslate?: DOMAttribute<State, string>
+  cx?: DOMAttribute<State, string>
+  cy?: DOMAttribute<State, string>
   data?: DOMAttribute<State, string>
   dateTime?: DOMAttribute<State, string>
   decoding?: DOMAttribute<State, 'async' | 'sync' | 'auto'>
@@ -44,23 +54,35 @@ export interface DOMAttributes<State, Action, El> extends MoodAttributes<State, 
   defaultSelected?: DOMAttribute<State, boolean>
   defaultValue?: DOMAttribute<State, string>
   defer?: DOMAttribute<State, boolean>
+  diffuseConstant?: DOMAttribute<State, number>
   dir?: DOMAttribute<State, string>
   dirName?: DOMAttribute<State, string>
   disabled?: DOMAttribute<State, boolean>
+  divisor?: DOMAttribute<State, number>
   download?: DOMAttribute<State, string>
   draggable?: DOMAttribute<State, boolean>
+  dx?: DOMAttribute<State, string | number>
+  dy?: DOMAttribute<State, string | number>
+  edgeMode?: DOMAttribute<State, string>
+  elevation?: DOMAttribute<State, number>
   encoding?: DOMAttribute<State, string>
   enctype?: DOMAttribute<State, string>
+  exponent?: DOMAttribute<State, number>
   files?: DOMAttribute<State, FileList | null>
+  filterUnits?: DOMAttribute<State, string>
   for?: DOMAttribute<State, string>
   formAction?: DOMAttribute<State, string>
   formEnctype?: DOMAttribute<State, string>
   formMethod?: DOMAttribute<State, string>
   formNoValidate?: DOMAttribute<State, boolean>
   formTarget?: DOMAttribute<State, string>
+  fx?: DOMAttribute<State, string>
+  fy?: DOMAttribute<State, string>
+  gradientTransform?: DOMAttribute<State, string>
+  gradientUnits?: DOMAttribute<State, string>
   hash?: DOMAttribute<State, string>
   headers?: DOMAttribute<State, string>
-  height?: DOMAttribute<State, number | string>
+  height?: DOMAttribute<State, string | number>
   hidden?: DOMAttribute<State, boolean>
   high?: DOMAttribute<State, number>
   host?: DOMAttribute<State, string>
@@ -71,22 +93,40 @@ export interface DOMAttributes<State, Action, El> extends MoodAttributes<State, 
   id?: DOMAttribute<State, string>
   imageSizes?: DOMAttribute<State, string>
   imageSrcset?: DOMAttribute<State, string>
+  in1?: DOMAttribute<State, string>
+  in2?: DOMAttribute<State, string>
   indeterminate?: DOMAttribute<State, boolean>
   inputMode?: DOMAttribute<State, string>
   integrity?: DOMAttribute<State, string>
+  intercept?: DOMAttribute<State, number>
   isMap?: DOMAttribute<State, boolean>
+  k1?: DOMAttribute<State, number>
+  k2?: DOMAttribute<State, number>
+  k3?: DOMAttribute<State, number>
+  k4?: DOMAttribute<State, number>
+  kernelMatrix?: DOMAttribute<State, string>
+  kernelUnitLengthX?: DOMAttribute<State, number>
+  kernelUnitLengthY?: DOMAttribute<State, number>
   kind?: DOMAttribute<State, string>
   label?: DOMAttribute<State, string>
   lang?: DOMAttribute<State, string>
   length?: DOMAttribute<State, number>
+  lengthAdjust?: DOMAttribute<State, string>
+  limitingConeAngle?: DOMAttribute<State, number>
   loop?: DOMAttribute<State, boolean>
   low?: DOMAttribute<State, number>
+  markerHeight?: DOMAttribute<State, string>
+  markerUnits?: DOMAttribute<State, string>
+  markerWidth?: DOMAttribute<State, string>
+  maskContentUnits?: DOMAttribute<State, string>
+  maskUnits?: DOMAttribute<State, string>
   max?: DOMAttribute<State, number | string>
   maxLength?: DOMAttribute<State, number>
   media?: DOMAttribute<State, string>
   method?: DOMAttribute<State, string>
   min?: DOMAttribute<State, number | string>
   minLength?: DOMAttribute<State, number>
+  mode?: DOMAttribute<State, string>
   msAudioCategory?: DOMAttribute<State, string>
   msAudioDeviceType?: DOMAttribute<State, string>
   msHorizontalMirror?: DOMAttribute<State, boolean>
@@ -103,6 +143,8 @@ export interface DOMAttributes<State, Action, El> extends MoodAttributes<State, 
   noModule?: DOMAttribute<State, boolean>
   noValidate?: DOMAttribute<State, boolean>
   nonce?: DOMAttribute<State, string>
+  numOctaves?: DOMAttribute<State, number>
+  offset?: DOMAttribute<State, number>
   onMSVideoFormatChanged?: DOMEventHandler<State, Event, Action>
   onMSVideoFrameStepCompleted?: DOMEventHandler<State, Event, Action>
   onMSVideoOptimalLayoutChanged?: DOMEventHandler<State, Event, Action>
@@ -217,29 +259,58 @@ export interface DOMAttributes<State, Action, El> extends MoodAttributes<State, 
   onwheel?: DOMEventHandler<State, Event, Action>
   onzoom?: DOMEventHandler<State, Event, Action>
   open?: DOMAttribute<State, boolean>
+  operator?: DOMAttribute<State, string>
   optimum?: DOMAttribute<State, number>
+  orderX?: DOMAttribute<State, number>
+  orderY?: DOMAttribute<State, number>
+  orientAngle?: DOMAttribute<State, string>
+  orientType?: DOMAttribute<State, string>
   password?: DOMAttribute<State, string>
+  pathLength?: DOMAttribute<State, number>
+  pathSegList?: DOMAttribute<State, string>
   pathname?: DOMAttribute<State, string>
   pattern?: DOMAttribute<State, string>
+  patternContentUnits?: DOMAttribute<State, string>
+  patternTransform?: DOMAttribute<State, string>
+  patternUnits?: DOMAttribute<State, string>
   ping?: DOMAttribute<State, string>
   placeholder?: DOMAttribute<State, string>
   playbackRate?: DOMAttribute<State, number>
+  points?: DOMAttribute<State, string>
+  pointsAtX?: DOMAttribute<State, number>
+  pointsAtY?: DOMAttribute<State, number>
+  pointsAtZ?: DOMAttribute<State, number>
   port?: DOMAttribute<State, string>
   poster?: DOMAttribute<State, string>
   preload?: DOMAttribute<State, string>
+  preserveAlpha?: DOMAttribute<State, boolean>
+  preserveAspectRatio?: DOMAttribute<State, string>
+  primitiveUnits?: DOMAttribute<State, string>
   protocol?: DOMAttribute<State, string>
+  r?: DOMAttribute<State, string>
+  radiusX?: DOMAttribute<State, number>
+  radiusY?: DOMAttribute<State, number>
   readOnly?: DOMAttribute<State, boolean>
+  refX?: DOMAttribute<State, string>
+  refY?: DOMAttribute<State, string>
   referrerPolicy?: DOMAttribute<State, string | ReferrerPolicy>
   rel?: DOMAttribute<State, string>
   required?: DOMAttribute<State, boolean>
+  requiredExtensions?: DOMAttribute<State, string>
+  result?: DOMAttribute<State, string>
   returnValue?: DOMAttribute<State, string>
   reversed?: DOMAttribute<State, boolean>
+  rotate?: DOMAttribute<State, string>
   rowSpan?: DOMAttribute<State, number>
   rows?: DOMAttribute<State, number>
+  rx?: DOMAttribute<State, string>
+  ry?: DOMAttribute<State, string>
+  scale?: DOMAttribute<State, number>
   scope?: DOMAttribute<State, string>
   scrollLeft?: DOMAttribute<State, number>
   scrollTop?: DOMAttribute<State, number>
   search?: DOMAttribute<State, string>
+  seed?: DOMAttribute<State, number>
   selected?: DOMAttribute<State, boolean>
   selectedIndex?: DOMAttribute<State, number>
   selectionDirection?: DOMAttribute<State, string>
@@ -248,21 +319,37 @@ export interface DOMAttributes<State, Action, El> extends MoodAttributes<State, 
   shape?: DOMAttribute<State, string>
   size?: DOMAttribute<State, number>
   sizes?: DOMAttribute<State, string>
+  slope?: DOMAttribute<State, number>
   slot?: DOMAttribute<State, string>
+  spacing?: DOMAttribute<State, string>
   span?: DOMAttribute<State, number>
+  specularConstant?: DOMAttribute<State, number>
+  specularExponent?: DOMAttribute<State, number>
   spellcheck?: DOMAttribute<State, boolean>
+  spreadMethod?: DOMAttribute<State, string>
   src?: DOMAttribute<State, string>
   srcObject?: DOMAttribute<State, MediaStream | MediaSource | Blob>
   srcdoc?: DOMAttribute<State, string>
   srclang?: DOMAttribute<State, string>
   srcset?: DOMAttribute<State, string>
   start?: DOMAttribute<State, number>
+  startOffset?: DOMAttribute<State, string>
+  stdDeviationX?: DOMAttribute<State, number>
+  stdDeviationY?: DOMAttribute<State, number>
   step?: DOMAttribute<State, string>
+  stitchTiles?: DOMAttribute<State, string>
   style?: DOMAttribute<State, CSSProperties>
+  surfaceScale?: DOMAttribute<State, number>
+  systemLanguage?: DOMAttribute<State, string>
   tabIndex?: DOMAttribute<State, number>
+  tableValues?: DOMAttribute<State, string>
   target?: DOMAttribute<State, string>
+  targetX?: DOMAttribute<State, number>
+  targetY?: DOMAttribute<State, number>
   text?: DOMAttribute<State, string>
+  textLength?: DOMAttribute<State, string>
   title?: DOMAttribute<State, string>
+  transform?: DOMAttribute<State, string>
   translate?: DOMAttribute<State, boolean>
   type?: DOMAttribute<State, string>
   useMap?: DOMAttribute<State, string>
@@ -270,8 +357,21 @@ export interface DOMAttributes<State, Action, El> extends MoodAttributes<State, 
   value?: DOMAttribute<State, string | number>
   valueAsDate?: DOMAttribute<State, Date | null>
   valueAsNumber?: DOMAttribute<State, number>
+  values?: DOMAttribute<State, string>
+  viewBox?: DOMAttribute<State, string>
+  viewTarget?: DOMAttribute<State, string>
+  viewport?: DOMAttribute<State, string>
   volume?: DOMAttribute<State, number>
-  width?: DOMAttribute<State, number | string>
+  width?: DOMAttribute<State, string | number>
   wrap?: DOMAttribute<State, string>
+  x?: DOMAttribute<State, string | number>
+  x1?: DOMAttribute<State, string>
+  x2?: DOMAttribute<State, string>
+  xChannelSelector?: DOMAttribute<State, string>
+  y?: DOMAttribute<State, string | number>
+  y1?: DOMAttribute<State, string>
+  y2?: DOMAttribute<State, string>
+  yChannelSelector?: DOMAttribute<State, string>
+  z?: DOMAttribute<State, number>
   zoomAndPan?: DOMAttribute<State, number>
 }

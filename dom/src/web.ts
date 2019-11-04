@@ -132,19 +132,16 @@ export module html {
 }
 
 export interface SVGFEFuncAElementAttributes<State, Action> {
+  amplitude?: DOMAttribute<State, number>
   className?: DOMAttribute<State, string>
+  exponent?: DOMAttribute<State, number>
   id?: DOMAttribute<State, string>
+  intercept?: DOMAttribute<State, number>
   nonce?: DOMAttribute<State, string>
-  scrollLeft?: DOMAttribute<State, number>
-  scrollTop?: DOMAttribute<State, number>
-  slot?: DOMAttribute<State, string>
-  style?: DOMAttribute<State, CSSProperties>
-  tabIndex?: DOMAttribute<State, number>
+  offset?: DOMAttribute<State, number>
   onabort?: DOMEventHandler<State, UIEvent, Action>
   onanimationcancel?: DOMEventHandler<State, Event, Action>
   onanimationend?: DOMEventHandler<State, AnimationEvent, Action>
-  onanimationiteration?: DOMEventHandler<State, AnimationEvent, Action>
-  onanimationstart?: DOMEventHandler<State, AnimationEvent, Action>
   onauxclick?: DOMEventHandler<State, Event, Action>
   onblur?: DOMEventHandler<State, FocusEvent, Action>
   oncancel?: DOMEventHandler<State, Event, Action>
@@ -152,17 +149,18 @@ export interface SVGFEFuncAElementAttributes<State, Action> {
   oncanplaythrough?: DOMEventHandler<State, Event, Action>
   onchange?: DOMEventHandler<State, Event, Action>
   onclick?: DOMEventHandler<State, MouseEvent, Action>
-  onclose?: DOMEventHandler<State, Event, Action>
   oncontextmenu?: DOMEventHandler<State, Event, Action>
   oncopy?: DOMEventHandler<State, ClipboardEvent, Action>
   oncuechange?: DOMEventHandler<State, Event, Action>
+  scrollLeft?: DOMAttribute<State, number>
+  scrollTop?: DOMAttribute<State, number>
+  onclose?: DOMEventHandler<State, Event, Action>
   oncut?: DOMEventHandler<State, ClipboardEvent, Action>
   ondblclick?: DOMEventHandler<State, Event, Action>
   ondrag?: DOMEventHandler<State, Event, Action>
   ondragend?: DOMEventHandler<State, DragEvent, Action>
   ondragenter?: DOMEventHandler<State, DragEvent, Action>
   ondragexit?: DOMEventHandler<State, DragEvent, Action>
-  ondragleave?: DOMEventHandler<State, DragEvent, Action>
   ondragover?: DOMEventHandler<State, DragEvent, Action>
   ondragstart?: DOMEventHandler<State, DragEvent, Action>
   ondrop?: DOMEventHandler<State, DragEvent, Action>
@@ -172,6 +170,15 @@ export interface SVGFEFuncAElementAttributes<State, Action> {
   onerror?: DOMEventHandler<State, ErrorEvent, Action>
   onfocus?: DOMEventHandler<State, FocusEvent, Action>
   onfullscreenchange?: DOMEventHandler<State, Event, Action>
+  slope?: DOMAttribute<State, number>
+  slot?: DOMAttribute<State, string>
+  style?: DOMAttribute<State, CSSProperties>
+  tabIndex?: DOMAttribute<State, number>
+  onanimationiteration?: DOMEventHandler<State, AnimationEvent, Action>
+  tableValues?: DOMAttribute<State, string>
+  onanimationstart?: DOMEventHandler<State, AnimationEvent, Action>
+  type?: DOMAttribute<State, string>
+  ondragleave?: DOMEventHandler<State, DragEvent, Action>
   onfullscreenerror?: DOMEventHandler<State, Event, Action>
   ongotpointercapture?: DOMEventHandler<State, Event, Action>
   oninput?: DOMEventHandler<State, Event, Action>
@@ -246,16 +253,20 @@ export module svg {
 
 export interface SVGFETileElementAttributes<State, Action> {
   className?: DOMAttribute<State, string>
+  height?: DOMAttribute<State, string>
   id?: DOMAttribute<State, string>
+  in1?: DOMAttribute<State, string>
   nonce?: DOMAttribute<State, string>
+  onabort?: DOMEventHandler<State, UIEvent, Action>
+  onanimationcancel?: DOMEventHandler<State, Event, Action>
+  onanimationend?: DOMEventHandler<State, AnimationEvent, Action>
+  result?: DOMAttribute<State, string>
   scrollLeft?: DOMAttribute<State, number>
   scrollTop?: DOMAttribute<State, number>
   slot?: DOMAttribute<State, string>
   style?: DOMAttribute<State, CSSProperties>
   tabIndex?: DOMAttribute<State, number>
-  onabort?: DOMEventHandler<State, UIEvent, Action>
-  onanimationcancel?: DOMEventHandler<State, Event, Action>
-  onanimationend?: DOMEventHandler<State, AnimationEvent, Action>
+  width?: DOMAttribute<State, string>
   onanimationiteration?: DOMEventHandler<State, AnimationEvent, Action>
   onanimationstart?: DOMEventHandler<State, AnimationEvent, Action>
   onauxclick?: DOMEventHandler<State, Event, Action>
@@ -276,7 +287,6 @@ export interface SVGFETileElementAttributes<State, Action> {
   ondragenter?: DOMEventHandler<State, DragEvent, Action>
   ondragexit?: DOMEventHandler<State, DragEvent, Action>
   ondragleave?: DOMEventHandler<State, DragEvent, Action>
-  ondragover?: DOMEventHandler<State, DragEvent, Action>
   ondragstart?: DOMEventHandler<State, DragEvent, Action>
   ondrop?: DOMEventHandler<State, DragEvent, Action>
   ondurationchange?: DOMEventHandler<State, Event, Action>
@@ -285,6 +295,9 @@ export interface SVGFETileElementAttributes<State, Action> {
   onerror?: DOMEventHandler<State, ErrorEvent, Action>
   onfocus?: DOMEventHandler<State, FocusEvent, Action>
   onfullscreenchange?: DOMEventHandler<State, Event, Action>
+  x?: DOMAttribute<State, string>
+  y?: DOMAttribute<State, string>
+  ondragover?: DOMEventHandler<State, DragEvent, Action>
   onfullscreenerror?: DOMEventHandler<State, Event, Action>
   ongotpointercapture?: DOMEventHandler<State, Event, Action>
   oninput?: DOMEventHandler<State, Event, Action>
@@ -359,14 +372,14 @@ export module svg {
 
 export interface SVGFEBlendElementAttributes<State, Action> {
   className?: DOMAttribute<State, string>
+  height?: DOMAttribute<State, string>
   id?: DOMAttribute<State, string>
+  in1?: DOMAttribute<State, string>
+  in2?: DOMAttribute<State, string>
+  mode?: DOMAttribute<State, string>
   nonce?: DOMAttribute<State, string>
+  result?: DOMAttribute<State, string>
   scrollLeft?: DOMAttribute<State, number>
-  scrollTop?: DOMAttribute<State, number>
-  slot?: DOMAttribute<State, string>
-  style?: DOMAttribute<State, CSSProperties>
-  tabIndex?: DOMAttribute<State, number>
-  onabort?: DOMEventHandler<State, UIEvent, Action>
   onanimationcancel?: DOMEventHandler<State, Event, Action>
   onanimationend?: DOMEventHandler<State, AnimationEvent, Action>
   onanimationiteration?: DOMEventHandler<State, AnimationEvent, Action>
@@ -385,9 +398,17 @@ export interface SVGFEBlendElementAttributes<State, Action> {
   oncut?: DOMEventHandler<State, ClipboardEvent, Action>
   ondblclick?: DOMEventHandler<State, Event, Action>
   ondrag?: DOMEventHandler<State, Event, Action>
-  ondragend?: DOMEventHandler<State, DragEvent, Action>
-  ondragenter?: DOMEventHandler<State, DragEvent, Action>
   ondragexit?: DOMEventHandler<State, DragEvent, Action>
+  scrollTop?: DOMAttribute<State, number>
+  slot?: DOMAttribute<State, string>
+  onabort?: DOMEventHandler<State, UIEvent, Action>
+  style?: DOMAttribute<State, CSSProperties>
+  tabIndex?: DOMAttribute<State, number>
+  ondragend?: DOMEventHandler<State, DragEvent, Action>
+  width?: DOMAttribute<State, string>
+  x?: DOMAttribute<State, string>
+  y?: DOMAttribute<State, string>
+  ondragenter?: DOMEventHandler<State, DragEvent, Action>
   ondragleave?: DOMEventHandler<State, DragEvent, Action>
   ondragover?: DOMEventHandler<State, DragEvent, Action>
   ondragstart?: DOMEventHandler<State, DragEvent, Action>
@@ -599,15 +620,16 @@ export interface SVGGElementAttributes<State, Action> {
   className?: DOMAttribute<State, string>
   id?: DOMAttribute<State, string>
   nonce?: DOMAttribute<State, string>
+  onabort?: DOMEventHandler<State, UIEvent, Action>
+  onanimationcancel?: DOMEventHandler<State, Event, Action>
+  onanimationend?: DOMEventHandler<State, AnimationEvent, Action>
+  onanimationiteration?: DOMEventHandler<State, AnimationEvent, Action>
+  requiredExtensions?: DOMAttribute<State, string>
   scrollLeft?: DOMAttribute<State, number>
   scrollTop?: DOMAttribute<State, number>
   slot?: DOMAttribute<State, string>
   style?: DOMAttribute<State, CSSProperties>
   tabIndex?: DOMAttribute<State, number>
-  onabort?: DOMEventHandler<State, UIEvent, Action>
-  onanimationcancel?: DOMEventHandler<State, Event, Action>
-  onanimationend?: DOMEventHandler<State, AnimationEvent, Action>
-  onanimationiteration?: DOMEventHandler<State, AnimationEvent, Action>
   onanimationstart?: DOMEventHandler<State, AnimationEvent, Action>
   onauxclick?: DOMEventHandler<State, Event, Action>
   onblur?: DOMEventHandler<State, FocusEvent, Action>
@@ -628,14 +650,16 @@ export interface SVGGElementAttributes<State, Action> {
   ondragexit?: DOMEventHandler<State, DragEvent, Action>
   ondragleave?: DOMEventHandler<State, DragEvent, Action>
   ondragover?: DOMEventHandler<State, DragEvent, Action>
-  ondragstart?: DOMEventHandler<State, DragEvent, Action>
   ondrop?: DOMEventHandler<State, DragEvent, Action>
   ondurationchange?: DOMEventHandler<State, Event, Action>
   onemptied?: DOMEventHandler<State, Event, Action>
   onended?: DOMEventHandler<State, Event, Action>
   onerror?: DOMEventHandler<State, ErrorEvent, Action>
   onfocus?: DOMEventHandler<State, FocusEvent, Action>
+  systemLanguage?: DOMAttribute<State, string>
   onfullscreenchange?: DOMEventHandler<State, Event, Action>
+  transform?: DOMAttribute<State, string>
+  ondragstart?: DOMEventHandler<State, DragEvent, Action>
   onfullscreenerror?: DOMEventHandler<State, Event, Action>
   ongotpointercapture?: DOMEventHandler<State, Event, Action>
   oninput?: DOMEventHandler<State, Event, Action>
@@ -710,14 +734,15 @@ export interface SVGFEPointLightElementAttributes<State, Action> {
   className?: DOMAttribute<State, string>
   id?: DOMAttribute<State, string>
   nonce?: DOMAttribute<State, string>
+  onanimationcancel?: DOMEventHandler<State, Event, Action>
+  onanimationend?: DOMEventHandler<State, AnimationEvent, Action>
   scrollLeft?: DOMAttribute<State, number>
+  onabort?: DOMEventHandler<State, UIEvent, Action>
   scrollTop?: DOMAttribute<State, number>
   slot?: DOMAttribute<State, string>
   style?: DOMAttribute<State, CSSProperties>
   tabIndex?: DOMAttribute<State, number>
-  onabort?: DOMEventHandler<State, UIEvent, Action>
-  onanimationcancel?: DOMEventHandler<State, Event, Action>
-  onanimationend?: DOMEventHandler<State, AnimationEvent, Action>
+  x?: DOMAttribute<State, number>
   onanimationiteration?: DOMEventHandler<State, AnimationEvent, Action>
   onanimationstart?: DOMEventHandler<State, AnimationEvent, Action>
   onauxclick?: DOMEventHandler<State, Event, Action>
@@ -739,7 +764,6 @@ export interface SVGFEPointLightElementAttributes<State, Action> {
   ondragexit?: DOMEventHandler<State, DragEvent, Action>
   ondragleave?: DOMEventHandler<State, DragEvent, Action>
   ondragover?: DOMEventHandler<State, DragEvent, Action>
-  ondragstart?: DOMEventHandler<State, DragEvent, Action>
   ondrop?: DOMEventHandler<State, DragEvent, Action>
   ondurationchange?: DOMEventHandler<State, Event, Action>
   onemptied?: DOMEventHandler<State, Event, Action>
@@ -747,6 +771,9 @@ export interface SVGFEPointLightElementAttributes<State, Action> {
   onerror?: DOMEventHandler<State, ErrorEvent, Action>
   onfocus?: DOMEventHandler<State, FocusEvent, Action>
   onfullscreenchange?: DOMEventHandler<State, Event, Action>
+  y?: DOMAttribute<State, number>
+  z?: DOMAttribute<State, number>
+  ondragstart?: DOMEventHandler<State, DragEvent, Action>
   onfullscreenerror?: DOMEventHandler<State, Event, Action>
   ongotpointercapture?: DOMEventHandler<State, Event, Action>
   oninput?: DOMEventHandler<State, Event, Action>
@@ -949,14 +976,20 @@ export interface SVGLineElementAttributes<State, Action> {
   className?: DOMAttribute<State, string>
   id?: DOMAttribute<State, string>
   nonce?: DOMAttribute<State, string>
+  pathLength?: DOMAttribute<State, number>
+  requiredExtensions?: DOMAttribute<State, string>
+  onabort?: DOMEventHandler<State, UIEvent, Action>
+  onanimationend?: DOMEventHandler<State, AnimationEvent, Action>
   scrollLeft?: DOMAttribute<State, number>
   scrollTop?: DOMAttribute<State, number>
   slot?: DOMAttribute<State, string>
   style?: DOMAttribute<State, CSSProperties>
+  systemLanguage?: DOMAttribute<State, string>
   tabIndex?: DOMAttribute<State, number>
-  onabort?: DOMEventHandler<State, UIEvent, Action>
+  transform?: DOMAttribute<State, string>
+  x1?: DOMAttribute<State, string>
+  x2?: DOMAttribute<State, string>
   onanimationcancel?: DOMEventHandler<State, Event, Action>
-  onanimationend?: DOMEventHandler<State, AnimationEvent, Action>
   onanimationiteration?: DOMEventHandler<State, AnimationEvent, Action>
   onanimationstart?: DOMEventHandler<State, AnimationEvent, Action>
   onauxclick?: DOMEventHandler<State, Event, Action>
@@ -976,7 +1009,6 @@ export interface SVGLineElementAttributes<State, Action> {
   ondragend?: DOMEventHandler<State, DragEvent, Action>
   ondragenter?: DOMEventHandler<State, DragEvent, Action>
   ondragexit?: DOMEventHandler<State, DragEvent, Action>
-  ondragleave?: DOMEventHandler<State, DragEvent, Action>
   ondragover?: DOMEventHandler<State, DragEvent, Action>
   ondragstart?: DOMEventHandler<State, DragEvent, Action>
   ondrop?: DOMEventHandler<State, DragEvent, Action>
@@ -986,6 +1018,9 @@ export interface SVGLineElementAttributes<State, Action> {
   onerror?: DOMEventHandler<State, ErrorEvent, Action>
   onfocus?: DOMEventHandler<State, FocusEvent, Action>
   onfullscreenchange?: DOMEventHandler<State, Event, Action>
+  y1?: DOMAttribute<State, string>
+  y2?: DOMAttribute<State, string>
+  ondragleave?: DOMEventHandler<State, DragEvent, Action>
   onfullscreenerror?: DOMEventHandler<State, Event, Action>
   ongotpointercapture?: DOMEventHandler<State, Event, Action>
   oninput?: DOMEventHandler<State, Event, Action>
@@ -1309,13 +1344,10 @@ export module html {
 
 export interface SVGFEMorphologyElementAttributes<State, Action> {
   className?: DOMAttribute<State, string>
+  height?: DOMAttribute<State, string>
   id?: DOMAttribute<State, string>
+  in1?: DOMAttribute<State, string>
   nonce?: DOMAttribute<State, string>
-  scrollLeft?: DOMAttribute<State, number>
-  scrollTop?: DOMAttribute<State, number>
-  slot?: DOMAttribute<State, string>
-  style?: DOMAttribute<State, CSSProperties>
-  tabIndex?: DOMAttribute<State, number>
   onabort?: DOMEventHandler<State, UIEvent, Action>
   onanimationcancel?: DOMEventHandler<State, Event, Action>
   onanimationend?: DOMEventHandler<State, AnimationEvent, Action>
@@ -1337,7 +1369,6 @@ export interface SVGFEMorphologyElementAttributes<State, Action> {
   ondrag?: DOMEventHandler<State, Event, Action>
   ondragend?: DOMEventHandler<State, DragEvent, Action>
   ondragenter?: DOMEventHandler<State, DragEvent, Action>
-  ondragexit?: DOMEventHandler<State, DragEvent, Action>
   ondragleave?: DOMEventHandler<State, DragEvent, Action>
   ondragover?: DOMEventHandler<State, DragEvent, Action>
   ondragstart?: DOMEventHandler<State, DragEvent, Action>
@@ -1348,6 +1379,19 @@ export interface SVGFEMorphologyElementAttributes<State, Action> {
   onerror?: DOMEventHandler<State, ErrorEvent, Action>
   onfocus?: DOMEventHandler<State, FocusEvent, Action>
   onfullscreenchange?: DOMEventHandler<State, Event, Action>
+  operator?: DOMAttribute<State, string>
+  radiusX?: DOMAttribute<State, number>
+  radiusY?: DOMAttribute<State, number>
+  result?: DOMAttribute<State, string>
+  scrollLeft?: DOMAttribute<State, number>
+  scrollTop?: DOMAttribute<State, number>
+  slot?: DOMAttribute<State, string>
+  style?: DOMAttribute<State, CSSProperties>
+  tabIndex?: DOMAttribute<State, number>
+  width?: DOMAttribute<State, string>
+  x?: DOMAttribute<State, string>
+  y?: DOMAttribute<State, string>
+  ondragexit?: DOMEventHandler<State, DragEvent, Action>
   onfullscreenerror?: DOMEventHandler<State, Event, Action>
   ongotpointercapture?: DOMEventHandler<State, Event, Action>
   oninput?: DOMEventHandler<State, Event, Action>
@@ -1422,18 +1466,26 @@ export module svg {
 
 export interface SVGPatternElementAttributes<State, Action> {
   className?: DOMAttribute<State, string>
+  height?: DOMAttribute<State, string>
+  href?: DOMAttribute<State, string>
   id?: DOMAttribute<State, string>
   nonce?: DOMAttribute<State, string>
+  patternContentUnits?: DOMAttribute<State, string>
+  onanimationcancel?: DOMEventHandler<State, Event, Action>
+  patternTransform?: DOMAttribute<State, string>
+  patternUnits?: DOMAttribute<State, string>
+  preserveAspectRatio?: DOMAttribute<State, string>
+  requiredExtensions?: DOMAttribute<State, string>
   scrollLeft?: DOMAttribute<State, number>
   scrollTop?: DOMAttribute<State, number>
   slot?: DOMAttribute<State, string>
   style?: DOMAttribute<State, CSSProperties>
+  systemLanguage?: DOMAttribute<State, string>
   tabIndex?: DOMAttribute<State, number>
+  viewBox?: DOMAttribute<State, string>
   onabort?: DOMEventHandler<State, UIEvent, Action>
-  onanimationcancel?: DOMEventHandler<State, Event, Action>
   onanimationend?: DOMEventHandler<State, AnimationEvent, Action>
   onanimationiteration?: DOMEventHandler<State, AnimationEvent, Action>
-  onanimationstart?: DOMEventHandler<State, AnimationEvent, Action>
   onauxclick?: DOMEventHandler<State, Event, Action>
   onblur?: DOMEventHandler<State, FocusEvent, Action>
   oncancel?: DOMEventHandler<State, Event, Action>
@@ -1449,7 +1501,6 @@ export interface SVGPatternElementAttributes<State, Action> {
   ondblclick?: DOMEventHandler<State, Event, Action>
   ondrag?: DOMEventHandler<State, Event, Action>
   ondragend?: DOMEventHandler<State, DragEvent, Action>
-  ondragenter?: DOMEventHandler<State, DragEvent, Action>
   ondragexit?: DOMEventHandler<State, DragEvent, Action>
   ondragleave?: DOMEventHandler<State, DragEvent, Action>
   ondragover?: DOMEventHandler<State, DragEvent, Action>
@@ -1461,6 +1512,11 @@ export interface SVGPatternElementAttributes<State, Action> {
   onerror?: DOMEventHandler<State, ErrorEvent, Action>
   onfocus?: DOMEventHandler<State, FocusEvent, Action>
   onfullscreenchange?: DOMEventHandler<State, Event, Action>
+  width?: DOMAttribute<State, string>
+  x?: DOMAttribute<State, string>
+  onanimationstart?: DOMEventHandler<State, AnimationEvent, Action>
+  y?: DOMAttribute<State, string>
+  ondragenter?: DOMEventHandler<State, DragEvent, Action>
   onfullscreenerror?: DOMEventHandler<State, Event, Action>
   ongotpointercapture?: DOMEventHandler<State, Event, Action>
   oninput?: DOMEventHandler<State, Event, Action>
@@ -1537,14 +1593,16 @@ export interface SVGViewElementAttributes<State, Action> {
   className?: DOMAttribute<State, string>
   id?: DOMAttribute<State, string>
   nonce?: DOMAttribute<State, string>
+  onabort?: DOMEventHandler<State, UIEvent, Action>
+  onanimationcancel?: DOMEventHandler<State, Event, Action>
+  onanimationend?: DOMEventHandler<State, AnimationEvent, Action>
+  preserveAspectRatio?: DOMAttribute<State, string>
   scrollLeft?: DOMAttribute<State, number>
   scrollTop?: DOMAttribute<State, number>
   slot?: DOMAttribute<State, string>
   style?: DOMAttribute<State, CSSProperties>
   tabIndex?: DOMAttribute<State, number>
-  onabort?: DOMEventHandler<State, UIEvent, Action>
-  onanimationcancel?: DOMEventHandler<State, Event, Action>
-  onanimationend?: DOMEventHandler<State, AnimationEvent, Action>
+  viewBox?: DOMAttribute<State, string>
   onanimationiteration?: DOMEventHandler<State, AnimationEvent, Action>
   onanimationstart?: DOMEventHandler<State, AnimationEvent, Action>
   onauxclick?: DOMEventHandler<State, Event, Action>
@@ -1566,15 +1624,16 @@ export interface SVGViewElementAttributes<State, Action> {
   ondragexit?: DOMEventHandler<State, DragEvent, Action>
   ondragleave?: DOMEventHandler<State, DragEvent, Action>
   ondragover?: DOMEventHandler<State, DragEvent, Action>
-  ondragstart?: DOMEventHandler<State, DragEvent, Action>
+  ondrop?: DOMEventHandler<State, DragEvent, Action>
   ondurationchange?: DOMEventHandler<State, Event, Action>
   onemptied?: DOMEventHandler<State, Event, Action>
   onended?: DOMEventHandler<State, Event, Action>
   onerror?: DOMEventHandler<State, ErrorEvent, Action>
   onfocus?: DOMEventHandler<State, FocusEvent, Action>
   onfullscreenchange?: DOMEventHandler<State, Event, Action>
+  viewTarget?: DOMAttribute<State, string>
   zoomAndPan?: DOMAttribute<State, number>
-  ondrop?: DOMEventHandler<State, DragEvent, Action>
+  ondragstart?: DOMEventHandler<State, DragEvent, Action>
   onfullscreenerror?: DOMEventHandler<State, Event, Action>
   ongotpointercapture?: DOMEventHandler<State, Event, Action>
   oninput?: DOMEventHandler<State, Event, Action>
@@ -2407,34 +2466,45 @@ export module html {
 }
 
 export interface SVGFETurbulenceElementAttributes<State, Action> {
+  baseFrequencyX?: DOMAttribute<State, number>
+  baseFrequencyY?: DOMAttribute<State, number>
   className?: DOMAttribute<State, string>
+  height?: DOMAttribute<State, string>
   id?: DOMAttribute<State, string>
   nonce?: DOMAttribute<State, string>
-  scrollLeft?: DOMAttribute<State, number>
-  scrollTop?: DOMAttribute<State, number>
-  slot?: DOMAttribute<State, string>
-  style?: DOMAttribute<State, CSSProperties>
-  tabIndex?: DOMAttribute<State, number>
+  numOctaves?: DOMAttribute<State, number>
+  result?: DOMAttribute<State, string>
   onabort?: DOMEventHandler<State, UIEvent, Action>
   onanimationcancel?: DOMEventHandler<State, Event, Action>
   onanimationend?: DOMEventHandler<State, AnimationEvent, Action>
+  scrollTop?: DOMAttribute<State, number>
   onanimationiteration?: DOMEventHandler<State, AnimationEvent, Action>
   onanimationstart?: DOMEventHandler<State, AnimationEvent, Action>
   onauxclick?: DOMEventHandler<State, Event, Action>
   onblur?: DOMEventHandler<State, FocusEvent, Action>
   oncancel?: DOMEventHandler<State, Event, Action>
-  oncanplay?: DOMEventHandler<State, Event, Action>
   oncanplaythrough?: DOMEventHandler<State, Event, Action>
   onchange?: DOMEventHandler<State, Event, Action>
+  scrollLeft?: DOMAttribute<State, number>
+  seed?: DOMAttribute<State, number>
+  oncanplay?: DOMEventHandler<State, Event, Action>
   onclick?: DOMEventHandler<State, MouseEvent, Action>
   onclose?: DOMEventHandler<State, Event, Action>
   oncontextmenu?: DOMEventHandler<State, Event, Action>
   oncopy?: DOMEventHandler<State, ClipboardEvent, Action>
-  oncuechange?: DOMEventHandler<State, Event, Action>
   oncut?: DOMEventHandler<State, ClipboardEvent, Action>
   ondblclick?: DOMEventHandler<State, Event, Action>
   ondrag?: DOMEventHandler<State, Event, Action>
   ondragend?: DOMEventHandler<State, DragEvent, Action>
+  slot?: DOMAttribute<State, string>
+  stitchTiles?: DOMAttribute<State, string>
+  style?: DOMAttribute<State, CSSProperties>
+  tabIndex?: DOMAttribute<State, number>
+  type?: DOMAttribute<State, string>
+  width?: DOMAttribute<State, string>
+  x?: DOMAttribute<State, string>
+  y?: DOMAttribute<State, string>
+  oncuechange?: DOMEventHandler<State, Event, Action>
   ondragenter?: DOMEventHandler<State, DragEvent, Action>
   ondragexit?: DOMEventHandler<State, DragEvent, Action>
   ondragleave?: DOMEventHandler<State, DragEvent, Action>
@@ -2522,15 +2592,21 @@ export module svg {
 export interface SVGFESpotLightElementAttributes<State, Action> {
   className?: DOMAttribute<State, string>
   id?: DOMAttribute<State, string>
+  limitingConeAngle?: DOMAttribute<State, number>
   nonce?: DOMAttribute<State, string>
+  pointsAtX?: DOMAttribute<State, number>
+  onabort?: DOMEventHandler<State, UIEvent, Action>
+  onanimationend?: DOMEventHandler<State, AnimationEvent, Action>
+  pointsAtY?: DOMAttribute<State, number>
+  pointsAtZ?: DOMAttribute<State, number>
   scrollLeft?: DOMAttribute<State, number>
   scrollTop?: DOMAttribute<State, number>
   slot?: DOMAttribute<State, string>
+  specularExponent?: DOMAttribute<State, number>
   style?: DOMAttribute<State, CSSProperties>
   tabIndex?: DOMAttribute<State, number>
-  onabort?: DOMEventHandler<State, UIEvent, Action>
+  x?: DOMAttribute<State, number>
   onanimationcancel?: DOMEventHandler<State, Event, Action>
-  onanimationend?: DOMEventHandler<State, AnimationEvent, Action>
   onanimationiteration?: DOMEventHandler<State, AnimationEvent, Action>
   onanimationstart?: DOMEventHandler<State, AnimationEvent, Action>
   onauxclick?: DOMEventHandler<State, Event, Action>
@@ -2550,7 +2626,6 @@ export interface SVGFESpotLightElementAttributes<State, Action> {
   ondragend?: DOMEventHandler<State, DragEvent, Action>
   ondragenter?: DOMEventHandler<State, DragEvent, Action>
   ondragexit?: DOMEventHandler<State, DragEvent, Action>
-  ondragleave?: DOMEventHandler<State, DragEvent, Action>
   ondragover?: DOMEventHandler<State, DragEvent, Action>
   ondragstart?: DOMEventHandler<State, DragEvent, Action>
   ondrop?: DOMEventHandler<State, DragEvent, Action>
@@ -2560,6 +2635,9 @@ export interface SVGFESpotLightElementAttributes<State, Action> {
   onerror?: DOMEventHandler<State, ErrorEvent, Action>
   onfocus?: DOMEventHandler<State, FocusEvent, Action>
   onfullscreenchange?: DOMEventHandler<State, Event, Action>
+  y?: DOMAttribute<State, number>
+  z?: DOMAttribute<State, number>
+  ondragleave?: DOMEventHandler<State, DragEvent, Action>
   onfullscreenerror?: DOMEventHandler<State, Event, Action>
   ongotpointercapture?: DOMEventHandler<State, Event, Action>
   oninput?: DOMEventHandler<State, Event, Action>
@@ -3150,15 +3228,16 @@ export module html {
 
 export interface SVGEllipseElementAttributes<State, Action> {
   className?: DOMAttribute<State, string>
+  cx?: DOMAttribute<State, string>
+  cy?: DOMAttribute<State, string>
   id?: DOMAttribute<State, string>
   nonce?: DOMAttribute<State, string>
-  scrollLeft?: DOMAttribute<State, number>
-  scrollTop?: DOMAttribute<State, number>
-  slot?: DOMAttribute<State, string>
-  style?: DOMAttribute<State, CSSProperties>
-  tabIndex?: DOMAttribute<State, number>
-  onabort?: DOMEventHandler<State, UIEvent, Action>
+  pathLength?: DOMAttribute<State, number>
+  rx?: DOMAttribute<State, string>
   onanimationcancel?: DOMEventHandler<State, Event, Action>
+  requiredExtensions?: DOMAttribute<State, string>
+  ry?: DOMAttribute<State, string>
+  onabort?: DOMEventHandler<State, UIEvent, Action>
   onanimationend?: DOMEventHandler<State, AnimationEvent, Action>
   onanimationiteration?: DOMEventHandler<State, AnimationEvent, Action>
   onanimationstart?: DOMEventHandler<State, AnimationEvent, Action>
@@ -3175,10 +3254,17 @@ export interface SVGEllipseElementAttributes<State, Action> {
   oncuechange?: DOMEventHandler<State, Event, Action>
   oncut?: DOMEventHandler<State, ClipboardEvent, Action>
   ondblclick?: DOMEventHandler<State, Event, Action>
-  ondrag?: DOMEventHandler<State, Event, Action>
-  ondragend?: DOMEventHandler<State, DragEvent, Action>
   ondragenter?: DOMEventHandler<State, DragEvent, Action>
   ondragexit?: DOMEventHandler<State, DragEvent, Action>
+  scrollLeft?: DOMAttribute<State, number>
+  scrollTop?: DOMAttribute<State, number>
+  slot?: DOMAttribute<State, string>
+  ondrag?: DOMEventHandler<State, Event, Action>
+  style?: DOMAttribute<State, CSSProperties>
+  systemLanguage?: DOMAttribute<State, string>
+  tabIndex?: DOMAttribute<State, number>
+  transform?: DOMAttribute<State, string>
+  ondragend?: DOMEventHandler<State, DragEvent, Action>
   ondragleave?: DOMEventHandler<State, DragEvent, Action>
   ondragover?: DOMEventHandler<State, DragEvent, Action>
   ondragstart?: DOMEventHandler<State, DragEvent, Action>
@@ -3263,18 +3349,16 @@ export module svg {
 
 export interface SVGTextElementAttributes<State, Action> {
   className?: DOMAttribute<State, string>
+  dx?: DOMAttribute<State, string>
+  dy?: DOMAttribute<State, string>
   id?: DOMAttribute<State, string>
+  lengthAdjust?: DOMAttribute<State, string>
   nonce?: DOMAttribute<State, string>
-  scrollLeft?: DOMAttribute<State, number>
-  scrollTop?: DOMAttribute<State, number>
-  slot?: DOMAttribute<State, string>
-  style?: DOMAttribute<State, CSSProperties>
-  tabIndex?: DOMAttribute<State, number>
   onabort?: DOMEventHandler<State, UIEvent, Action>
   onanimationcancel?: DOMEventHandler<State, Event, Action>
+  requiredExtensions?: DOMAttribute<State, string>
   onanimationend?: DOMEventHandler<State, AnimationEvent, Action>
   onanimationiteration?: DOMEventHandler<State, AnimationEvent, Action>
-  onanimationstart?: DOMEventHandler<State, AnimationEvent, Action>
   onauxclick?: DOMEventHandler<State, Event, Action>
   onblur?: DOMEventHandler<State, FocusEvent, Action>
   oncancel?: DOMEventHandler<State, Event, Action>
@@ -3291,7 +3375,6 @@ export interface SVGTextElementAttributes<State, Action> {
   ondrag?: DOMEventHandler<State, Event, Action>
   ondragend?: DOMEventHandler<State, DragEvent, Action>
   ondragenter?: DOMEventHandler<State, DragEvent, Action>
-  ondragexit?: DOMEventHandler<State, DragEvent, Action>
   ondragleave?: DOMEventHandler<State, DragEvent, Action>
   ondragover?: DOMEventHandler<State, DragEvent, Action>
   ondragstart?: DOMEventHandler<State, DragEvent, Action>
@@ -3302,6 +3385,19 @@ export interface SVGTextElementAttributes<State, Action> {
   onerror?: DOMEventHandler<State, ErrorEvent, Action>
   onfocus?: DOMEventHandler<State, FocusEvent, Action>
   onfullscreenchange?: DOMEventHandler<State, Event, Action>
+  rotate?: DOMAttribute<State, string>
+  scrollLeft?: DOMAttribute<State, number>
+  scrollTop?: DOMAttribute<State, number>
+  slot?: DOMAttribute<State, string>
+  style?: DOMAttribute<State, CSSProperties>
+  systemLanguage?: DOMAttribute<State, string>
+  tabIndex?: DOMAttribute<State, number>
+  textLength?: DOMAttribute<State, string>
+  transform?: DOMAttribute<State, string>
+  x?: DOMAttribute<State, string>
+  onanimationstart?: DOMEventHandler<State, AnimationEvent, Action>
+  y?: DOMAttribute<State, string>
+  ondragexit?: DOMEventHandler<State, DragEvent, Action>
   onfullscreenerror?: DOMEventHandler<State, Event, Action>
   ongotpointercapture?: DOMEventHandler<State, Event, Action>
   oninput?: DOMEventHandler<State, Event, Action>
@@ -3648,13 +3744,11 @@ export module html {
 
 export interface SVGFilterElementAttributes<State, Action> {
   className?: DOMAttribute<State, string>
+  filterUnits?: DOMAttribute<State, string>
+  height?: DOMAttribute<State, string>
+  href?: DOMAttribute<State, string>
   id?: DOMAttribute<State, string>
   nonce?: DOMAttribute<State, string>
-  scrollLeft?: DOMAttribute<State, number>
-  scrollTop?: DOMAttribute<State, number>
-  slot?: DOMAttribute<State, string>
-  style?: DOMAttribute<State, CSSProperties>
-  tabIndex?: DOMAttribute<State, number>
   onabort?: DOMEventHandler<State, UIEvent, Action>
   onanimationcancel?: DOMEventHandler<State, Event, Action>
   onanimationend?: DOMEventHandler<State, AnimationEvent, Action>
@@ -3677,7 +3771,6 @@ export interface SVGFilterElementAttributes<State, Action> {
   ondragend?: DOMEventHandler<State, DragEvent, Action>
   ondragenter?: DOMEventHandler<State, DragEvent, Action>
   ondragexit?: DOMEventHandler<State, DragEvent, Action>
-  ondragleave?: DOMEventHandler<State, DragEvent, Action>
   ondragover?: DOMEventHandler<State, DragEvent, Action>
   ondragstart?: DOMEventHandler<State, DragEvent, Action>
   ondrop?: DOMEventHandler<State, DragEvent, Action>
@@ -3687,6 +3780,16 @@ export interface SVGFilterElementAttributes<State, Action> {
   onerror?: DOMEventHandler<State, ErrorEvent, Action>
   onfocus?: DOMEventHandler<State, FocusEvent, Action>
   onfullscreenchange?: DOMEventHandler<State, Event, Action>
+  primitiveUnits?: DOMAttribute<State, string>
+  scrollLeft?: DOMAttribute<State, number>
+  scrollTop?: DOMAttribute<State, number>
+  slot?: DOMAttribute<State, string>
+  style?: DOMAttribute<State, CSSProperties>
+  tabIndex?: DOMAttribute<State, number>
+  width?: DOMAttribute<State, string>
+  x?: DOMAttribute<State, string>
+  y?: DOMAttribute<State, string>
+  ondragleave?: DOMEventHandler<State, DragEvent, Action>
   onfullscreenerror?: DOMEventHandler<State, Event, Action>
   ongotpointercapture?: DOMEventHandler<State, Event, Action>
   oninput?: DOMEventHandler<State, Event, Action>
@@ -3761,18 +3864,23 @@ export module svg {
 
 export interface SVGImageElementAttributes<State, Action> {
   className?: DOMAttribute<State, string>
+  height?: DOMAttribute<State, string>
+  href?: DOMAttribute<State, string>
   id?: DOMAttribute<State, string>
   nonce?: DOMAttribute<State, string>
+  preserveAspectRatio?: DOMAttribute<State, string>
+  onanimationcancel?: DOMEventHandler<State, Event, Action>
+  requiredExtensions?: DOMAttribute<State, string>
   scrollLeft?: DOMAttribute<State, number>
+  onabort?: DOMEventHandler<State, UIEvent, Action>
   scrollTop?: DOMAttribute<State, number>
   slot?: DOMAttribute<State, string>
   style?: DOMAttribute<State, CSSProperties>
+  systemLanguage?: DOMAttribute<State, string>
   tabIndex?: DOMAttribute<State, number>
-  onabort?: DOMEventHandler<State, UIEvent, Action>
-  onanimationcancel?: DOMEventHandler<State, Event, Action>
+  transform?: DOMAttribute<State, string>
   onanimationend?: DOMEventHandler<State, AnimationEvent, Action>
   onanimationiteration?: DOMEventHandler<State, AnimationEvent, Action>
-  onanimationstart?: DOMEventHandler<State, AnimationEvent, Action>
   onauxclick?: DOMEventHandler<State, Event, Action>
   onblur?: DOMEventHandler<State, FocusEvent, Action>
   oncancel?: DOMEventHandler<State, Event, Action>
@@ -3789,7 +3897,6 @@ export interface SVGImageElementAttributes<State, Action> {
   ondrag?: DOMEventHandler<State, Event, Action>
   ondragend?: DOMEventHandler<State, DragEvent, Action>
   ondragenter?: DOMEventHandler<State, DragEvent, Action>
-  ondragexit?: DOMEventHandler<State, DragEvent, Action>
   ondragleave?: DOMEventHandler<State, DragEvent, Action>
   ondragover?: DOMEventHandler<State, DragEvent, Action>
   ondragstart?: DOMEventHandler<State, DragEvent, Action>
@@ -3800,6 +3907,11 @@ export interface SVGImageElementAttributes<State, Action> {
   onerror?: DOMEventHandler<State, ErrorEvent, Action>
   onfocus?: DOMEventHandler<State, FocusEvent, Action>
   onfullscreenchange?: DOMEventHandler<State, Event, Action>
+  width?: DOMAttribute<State, string>
+  x?: DOMAttribute<State, string>
+  onanimationstart?: DOMEventHandler<State, AnimationEvent, Action>
+  y?: DOMAttribute<State, string>
+  ondragexit?: DOMEventHandler<State, DragEvent, Action>
   onfullscreenerror?: DOMEventHandler<State, Event, Action>
   ongotpointercapture?: DOMEventHandler<State, Event, Action>
   oninput?: DOMEventHandler<State, Event, Action>
@@ -4643,17 +4755,23 @@ export module html {
 
 export interface SVGUseElementAttributes<State, Action> {
   className?: DOMAttribute<State, string>
+  height?: DOMAttribute<State, string>
+  href?: DOMAttribute<State, string>
   id?: DOMAttribute<State, string>
   nonce?: DOMAttribute<State, string>
+  onabort?: DOMEventHandler<State, UIEvent, Action>
+  onanimationend?: DOMEventHandler<State, AnimationEvent, Action>
+  onanimationiteration?: DOMEventHandler<State, AnimationEvent, Action>
+  requiredExtensions?: DOMAttribute<State, string>
   scrollLeft?: DOMAttribute<State, number>
   scrollTop?: DOMAttribute<State, number>
   slot?: DOMAttribute<State, string>
   style?: DOMAttribute<State, CSSProperties>
+  systemLanguage?: DOMAttribute<State, string>
   tabIndex?: DOMAttribute<State, number>
-  onabort?: DOMEventHandler<State, UIEvent, Action>
+  transform?: DOMAttribute<State, string>
+  width?: DOMAttribute<State, string>
   onanimationcancel?: DOMEventHandler<State, Event, Action>
-  onanimationend?: DOMEventHandler<State, AnimationEvent, Action>
-  onanimationiteration?: DOMEventHandler<State, AnimationEvent, Action>
   onanimationstart?: DOMEventHandler<State, AnimationEvent, Action>
   onauxclick?: DOMEventHandler<State, Event, Action>
   onblur?: DOMEventHandler<State, FocusEvent, Action>
@@ -4672,7 +4790,6 @@ export interface SVGUseElementAttributes<State, Action> {
   ondragend?: DOMEventHandler<State, DragEvent, Action>
   ondragenter?: DOMEventHandler<State, DragEvent, Action>
   ondragexit?: DOMEventHandler<State, DragEvent, Action>
-  ondragleave?: DOMEventHandler<State, DragEvent, Action>
   ondragover?: DOMEventHandler<State, DragEvent, Action>
   ondragstart?: DOMEventHandler<State, DragEvent, Action>
   ondrop?: DOMEventHandler<State, DragEvent, Action>
@@ -4681,7 +4798,10 @@ export interface SVGUseElementAttributes<State, Action> {
   onended?: DOMEventHandler<State, Event, Action>
   onerror?: DOMEventHandler<State, ErrorEvent, Action>
   onfocus?: DOMEventHandler<State, FocusEvent, Action>
+  x?: DOMAttribute<State, string>
   onfullscreenchange?: DOMEventHandler<State, Event, Action>
+  y?: DOMAttribute<State, string>
+  ondragleave?: DOMEventHandler<State, DragEvent, Action>
   onfullscreenerror?: DOMEventHandler<State, Event, Action>
   ongotpointercapture?: DOMEventHandler<State, Event, Action>
   oninput?: DOMEventHandler<State, Event, Action>
@@ -4889,19 +5009,16 @@ export module html {
 }
 
 export interface SVGFEFuncBElementAttributes<State, Action> {
+  amplitude?: DOMAttribute<State, number>
   className?: DOMAttribute<State, string>
+  exponent?: DOMAttribute<State, number>
   id?: DOMAttribute<State, string>
+  intercept?: DOMAttribute<State, number>
   nonce?: DOMAttribute<State, string>
-  scrollLeft?: DOMAttribute<State, number>
-  scrollTop?: DOMAttribute<State, number>
-  slot?: DOMAttribute<State, string>
-  style?: DOMAttribute<State, CSSProperties>
-  tabIndex?: DOMAttribute<State, number>
+  offset?: DOMAttribute<State, number>
   onabort?: DOMEventHandler<State, UIEvent, Action>
   onanimationcancel?: DOMEventHandler<State, Event, Action>
   onanimationend?: DOMEventHandler<State, AnimationEvent, Action>
-  onanimationiteration?: DOMEventHandler<State, AnimationEvent, Action>
-  onanimationstart?: DOMEventHandler<State, AnimationEvent, Action>
   onauxclick?: DOMEventHandler<State, Event, Action>
   onblur?: DOMEventHandler<State, FocusEvent, Action>
   oncancel?: DOMEventHandler<State, Event, Action>
@@ -4909,17 +5026,18 @@ export interface SVGFEFuncBElementAttributes<State, Action> {
   oncanplaythrough?: DOMEventHandler<State, Event, Action>
   onchange?: DOMEventHandler<State, Event, Action>
   onclick?: DOMEventHandler<State, MouseEvent, Action>
-  onclose?: DOMEventHandler<State, Event, Action>
   oncontextmenu?: DOMEventHandler<State, Event, Action>
   oncopy?: DOMEventHandler<State, ClipboardEvent, Action>
   oncuechange?: DOMEventHandler<State, Event, Action>
+  scrollLeft?: DOMAttribute<State, number>
+  scrollTop?: DOMAttribute<State, number>
+  onclose?: DOMEventHandler<State, Event, Action>
   oncut?: DOMEventHandler<State, ClipboardEvent, Action>
   ondblclick?: DOMEventHandler<State, Event, Action>
   ondrag?: DOMEventHandler<State, Event, Action>
   ondragend?: DOMEventHandler<State, DragEvent, Action>
   ondragenter?: DOMEventHandler<State, DragEvent, Action>
   ondragexit?: DOMEventHandler<State, DragEvent, Action>
-  ondragleave?: DOMEventHandler<State, DragEvent, Action>
   ondragover?: DOMEventHandler<State, DragEvent, Action>
   ondragstart?: DOMEventHandler<State, DragEvent, Action>
   ondrop?: DOMEventHandler<State, DragEvent, Action>
@@ -4929,6 +5047,15 @@ export interface SVGFEFuncBElementAttributes<State, Action> {
   onerror?: DOMEventHandler<State, ErrorEvent, Action>
   onfocus?: DOMEventHandler<State, FocusEvent, Action>
   onfullscreenchange?: DOMEventHandler<State, Event, Action>
+  slope?: DOMAttribute<State, number>
+  slot?: DOMAttribute<State, string>
+  style?: DOMAttribute<State, CSSProperties>
+  tabIndex?: DOMAttribute<State, number>
+  onanimationiteration?: DOMEventHandler<State, AnimationEvent, Action>
+  tableValues?: DOMAttribute<State, string>
+  onanimationstart?: DOMEventHandler<State, AnimationEvent, Action>
+  type?: DOMAttribute<State, string>
+  ondragleave?: DOMEventHandler<State, DragEvent, Action>
   onfullscreenerror?: DOMEventHandler<State, Event, Action>
   ongotpointercapture?: DOMEventHandler<State, Event, Action>
   oninput?: DOMEventHandler<State, Event, Action>
@@ -5249,13 +5376,11 @@ export module html {
 
 export interface SVGFEColorMatrixElementAttributes<State, Action> {
   className?: DOMAttribute<State, string>
+  height?: DOMAttribute<State, string>
   id?: DOMAttribute<State, string>
+  in1?: DOMAttribute<State, string>
   nonce?: DOMAttribute<State, string>
-  scrollLeft?: DOMAttribute<State, number>
-  scrollTop?: DOMAttribute<State, number>
-  slot?: DOMAttribute<State, string>
-  style?: DOMAttribute<State, CSSProperties>
-  tabIndex?: DOMAttribute<State, number>
+  result?: DOMAttribute<State, string>
   onabort?: DOMEventHandler<State, UIEvent, Action>
   onanimationcancel?: DOMEventHandler<State, Event, Action>
   onanimationend?: DOMEventHandler<State, AnimationEvent, Action>
@@ -5266,10 +5391,15 @@ export interface SVGFEColorMatrixElementAttributes<State, Action> {
   oncancel?: DOMEventHandler<State, Event, Action>
   oncanplay?: DOMEventHandler<State, Event, Action>
   oncanplaythrough?: DOMEventHandler<State, Event, Action>
-  onchange?: DOMEventHandler<State, Event, Action>
   onclick?: DOMEventHandler<State, MouseEvent, Action>
   onclose?: DOMEventHandler<State, Event, Action>
   oncontextmenu?: DOMEventHandler<State, Event, Action>
+  scrollLeft?: DOMAttribute<State, number>
+  scrollTop?: DOMAttribute<State, number>
+  slot?: DOMAttribute<State, string>
+  style?: DOMAttribute<State, CSSProperties>
+  tabIndex?: DOMAttribute<State, number>
+  onchange?: DOMEventHandler<State, Event, Action>
   oncopy?: DOMEventHandler<State, ClipboardEvent, Action>
   oncuechange?: DOMEventHandler<State, Event, Action>
   oncut?: DOMEventHandler<State, ClipboardEvent, Action>
@@ -5278,7 +5408,6 @@ export interface SVGFEColorMatrixElementAttributes<State, Action> {
   ondragend?: DOMEventHandler<State, DragEvent, Action>
   ondragenter?: DOMEventHandler<State, DragEvent, Action>
   ondragexit?: DOMEventHandler<State, DragEvent, Action>
-  ondragleave?: DOMEventHandler<State, DragEvent, Action>
   ondragover?: DOMEventHandler<State, DragEvent, Action>
   ondragstart?: DOMEventHandler<State, DragEvent, Action>
   ondrop?: DOMEventHandler<State, DragEvent, Action>
@@ -5288,6 +5417,12 @@ export interface SVGFEColorMatrixElementAttributes<State, Action> {
   onerror?: DOMEventHandler<State, ErrorEvent, Action>
   onfocus?: DOMEventHandler<State, FocusEvent, Action>
   onfullscreenchange?: DOMEventHandler<State, Event, Action>
+  type?: DOMAttribute<State, string>
+  values?: DOMAttribute<State, string>
+  width?: DOMAttribute<State, string>
+  x?: DOMAttribute<State, string>
+  y?: DOMAttribute<State, string>
+  ondragleave?: DOMEventHandler<State, DragEvent, Action>
   onfullscreenerror?: DOMEventHandler<State, Event, Action>
   ongotpointercapture?: DOMEventHandler<State, Event, Action>
   oninput?: DOMEventHandler<State, Event, Action>
@@ -5362,17 +5497,22 @@ export module svg {
 
 export interface SVGForeignObjectElementAttributes<State, Action> {
   className?: DOMAttribute<State, string>
+  height?: DOMAttribute<State, string>
   id?: DOMAttribute<State, string>
   nonce?: DOMAttribute<State, string>
+  onabort?: DOMEventHandler<State, UIEvent, Action>
+  onanimationend?: DOMEventHandler<State, AnimationEvent, Action>
+  onanimationiteration?: DOMEventHandler<State, AnimationEvent, Action>
+  requiredExtensions?: DOMAttribute<State, string>
   scrollLeft?: DOMAttribute<State, number>
   scrollTop?: DOMAttribute<State, number>
   slot?: DOMAttribute<State, string>
   style?: DOMAttribute<State, CSSProperties>
+  systemLanguage?: DOMAttribute<State, string>
   tabIndex?: DOMAttribute<State, number>
-  onabort?: DOMEventHandler<State, UIEvent, Action>
+  transform?: DOMAttribute<State, string>
+  width?: DOMAttribute<State, string>
   onanimationcancel?: DOMEventHandler<State, Event, Action>
-  onanimationend?: DOMEventHandler<State, AnimationEvent, Action>
-  onanimationiteration?: DOMEventHandler<State, AnimationEvent, Action>
   onanimationstart?: DOMEventHandler<State, AnimationEvent, Action>
   onauxclick?: DOMEventHandler<State, Event, Action>
   onblur?: DOMEventHandler<State, FocusEvent, Action>
@@ -5391,7 +5531,6 @@ export interface SVGForeignObjectElementAttributes<State, Action> {
   ondragend?: DOMEventHandler<State, DragEvent, Action>
   ondragenter?: DOMEventHandler<State, DragEvent, Action>
   ondragexit?: DOMEventHandler<State, DragEvent, Action>
-  ondragleave?: DOMEventHandler<State, DragEvent, Action>
   ondragover?: DOMEventHandler<State, DragEvent, Action>
   ondragstart?: DOMEventHandler<State, DragEvent, Action>
   ondrop?: DOMEventHandler<State, DragEvent, Action>
@@ -5400,7 +5539,10 @@ export interface SVGForeignObjectElementAttributes<State, Action> {
   onended?: DOMEventHandler<State, Event, Action>
   onerror?: DOMEventHandler<State, ErrorEvent, Action>
   onfocus?: DOMEventHandler<State, FocusEvent, Action>
+  x?: DOMAttribute<State, string>
   onfullscreenchange?: DOMEventHandler<State, Event, Action>
+  y?: DOMAttribute<State, string>
+  ondragleave?: DOMEventHandler<State, DragEvent, Action>
   onfullscreenerror?: DOMEventHandler<State, Event, Action>
   ongotpointercapture?: DOMEventHandler<State, Event, Action>
   oninput?: DOMEventHandler<State, Event, Action>
@@ -5847,13 +5989,11 @@ export module html {
 
 export interface SVGTextPathElementAttributes<State, Action> {
   className?: DOMAttribute<State, string>
+  href?: DOMAttribute<State, string>
   id?: DOMAttribute<State, string>
+  lengthAdjust?: DOMAttribute<State, string>
+  method?: DOMAttribute<State, string>
   nonce?: DOMAttribute<State, string>
-  scrollLeft?: DOMAttribute<State, number>
-  scrollTop?: DOMAttribute<State, number>
-  slot?: DOMAttribute<State, string>
-  style?: DOMAttribute<State, CSSProperties>
-  tabIndex?: DOMAttribute<State, number>
   onabort?: DOMEventHandler<State, UIEvent, Action>
   onanimationcancel?: DOMEventHandler<State, Event, Action>
   onanimationend?: DOMEventHandler<State, AnimationEvent, Action>
@@ -5863,19 +6003,23 @@ export interface SVGTextPathElementAttributes<State, Action> {
   onblur?: DOMEventHandler<State, FocusEvent, Action>
   oncancel?: DOMEventHandler<State, Event, Action>
   oncanplay?: DOMEventHandler<State, Event, Action>
+  requiredExtensions?: DOMAttribute<State, string>
   oncanplaythrough?: DOMEventHandler<State, Event, Action>
-  onchange?: DOMEventHandler<State, Event, Action>
   onclick?: DOMEventHandler<State, MouseEvent, Action>
   onclose?: DOMEventHandler<State, Event, Action>
   oncontextmenu?: DOMEventHandler<State, Event, Action>
   oncopy?: DOMEventHandler<State, ClipboardEvent, Action>
   oncuechange?: DOMEventHandler<State, Event, Action>
+  scrollLeft?: DOMAttribute<State, number>
+  scrollTop?: DOMAttribute<State, number>
+  slot?: DOMAttribute<State, string>
+  spacing?: DOMAttribute<State, string>
+  onchange?: DOMEventHandler<State, Event, Action>
   oncut?: DOMEventHandler<State, ClipboardEvent, Action>
   ondblclick?: DOMEventHandler<State, Event, Action>
   ondrag?: DOMEventHandler<State, Event, Action>
   ondragend?: DOMEventHandler<State, DragEvent, Action>
   ondragenter?: DOMEventHandler<State, DragEvent, Action>
-  ondragexit?: DOMEventHandler<State, DragEvent, Action>
   ondragleave?: DOMEventHandler<State, DragEvent, Action>
   ondragover?: DOMEventHandler<State, DragEvent, Action>
   ondragstart?: DOMEventHandler<State, DragEvent, Action>
@@ -5886,6 +6030,13 @@ export interface SVGTextPathElementAttributes<State, Action> {
   onerror?: DOMEventHandler<State, ErrorEvent, Action>
   onfocus?: DOMEventHandler<State, FocusEvent, Action>
   onfullscreenchange?: DOMEventHandler<State, Event, Action>
+  startOffset?: DOMAttribute<State, string>
+  style?: DOMAttribute<State, CSSProperties>
+  systemLanguage?: DOMAttribute<State, string>
+  tabIndex?: DOMAttribute<State, number>
+  textLength?: DOMAttribute<State, string>
+  transform?: DOMAttribute<State, string>
+  ondragexit?: DOMEventHandler<State, DragEvent, Action>
   onfullscreenerror?: DOMEventHandler<State, Event, Action>
   ongotpointercapture?: DOMEventHandler<State, Event, Action>
   oninput?: DOMEventHandler<State, Event, Action>
@@ -6218,14 +6369,17 @@ export module html {
 
 export interface SVGFECompositeElementAttributes<State, Action> {
   className?: DOMAttribute<State, string>
+  height?: DOMAttribute<State, string>
   id?: DOMAttribute<State, string>
+  in1?: DOMAttribute<State, string>
+  in2?: DOMAttribute<State, string>
+  k1?: DOMAttribute<State, number>
+  k2?: DOMAttribute<State, number>
+  k3?: DOMAttribute<State, number>
+  k4?: DOMAttribute<State, number>
   nonce?: DOMAttribute<State, string>
-  scrollLeft?: DOMAttribute<State, number>
-  scrollTop?: DOMAttribute<State, number>
-  slot?: DOMAttribute<State, string>
-  style?: DOMAttribute<State, CSSProperties>
-  tabIndex?: DOMAttribute<State, number>
   onabort?: DOMEventHandler<State, UIEvent, Action>
+  operator?: DOMAttribute<State, string>
   onanimationcancel?: DOMEventHandler<State, Event, Action>
   onanimationend?: DOMEventHandler<State, AnimationEvent, Action>
   onanimationiteration?: DOMEventHandler<State, AnimationEvent, Action>
@@ -6238,13 +6392,22 @@ export interface SVGFECompositeElementAttributes<State, Action> {
   onchange?: DOMEventHandler<State, Event, Action>
   onclick?: DOMEventHandler<State, MouseEvent, Action>
   onclose?: DOMEventHandler<State, Event, Action>
+  result?: DOMAttribute<State, string>
+  scrollTop?: DOMAttribute<State, number>
   oncontextmenu?: DOMEventHandler<State, Event, Action>
   oncopy?: DOMEventHandler<State, ClipboardEvent, Action>
   oncuechange?: DOMEventHandler<State, Event, Action>
   oncut?: DOMEventHandler<State, ClipboardEvent, Action>
-  ondblclick?: DOMEventHandler<State, Event, Action>
   ondrag?: DOMEventHandler<State, Event, Action>
   ondragend?: DOMEventHandler<State, DragEvent, Action>
+  scrollLeft?: DOMAttribute<State, number>
+  slot?: DOMAttribute<State, string>
+  style?: DOMAttribute<State, CSSProperties>
+  tabIndex?: DOMAttribute<State, number>
+  width?: DOMAttribute<State, string>
+  x?: DOMAttribute<State, string>
+  y?: DOMAttribute<State, string>
+  ondblclick?: DOMEventHandler<State, Event, Action>
   ondragenter?: DOMEventHandler<State, DragEvent, Action>
   ondragexit?: DOMEventHandler<State, DragEvent, Action>
   ondragleave?: DOMEventHandler<State, DragEvent, Action>
@@ -6333,16 +6496,10 @@ export interface SVGSymbolElementAttributes<State, Action> {
   className?: DOMAttribute<State, string>
   id?: DOMAttribute<State, string>
   nonce?: DOMAttribute<State, string>
-  scrollLeft?: DOMAttribute<State, number>
-  scrollTop?: DOMAttribute<State, number>
-  slot?: DOMAttribute<State, string>
-  style?: DOMAttribute<State, CSSProperties>
-  tabIndex?: DOMAttribute<State, number>
   onabort?: DOMEventHandler<State, UIEvent, Action>
   onanimationcancel?: DOMEventHandler<State, Event, Action>
   onanimationend?: DOMEventHandler<State, AnimationEvent, Action>
   onanimationiteration?: DOMEventHandler<State, AnimationEvent, Action>
-  onanimationstart?: DOMEventHandler<State, AnimationEvent, Action>
   onauxclick?: DOMEventHandler<State, Event, Action>
   onblur?: DOMEventHandler<State, FocusEvent, Action>
   oncancel?: DOMEventHandler<State, Event, Action>
@@ -6363,13 +6520,21 @@ export interface SVGSymbolElementAttributes<State, Action> {
   ondragleave?: DOMEventHandler<State, DragEvent, Action>
   ondragover?: DOMEventHandler<State, DragEvent, Action>
   ondragstart?: DOMEventHandler<State, DragEvent, Action>
-  ondrop?: DOMEventHandler<State, DragEvent, Action>
   ondurationchange?: DOMEventHandler<State, Event, Action>
   onemptied?: DOMEventHandler<State, Event, Action>
   onended?: DOMEventHandler<State, Event, Action>
   onerror?: DOMEventHandler<State, ErrorEvent, Action>
   onfocus?: DOMEventHandler<State, FocusEvent, Action>
   onfullscreenchange?: DOMEventHandler<State, Event, Action>
+  preserveAspectRatio?: DOMAttribute<State, string>
+  scrollLeft?: DOMAttribute<State, number>
+  scrollTop?: DOMAttribute<State, number>
+  slot?: DOMAttribute<State, string>
+  style?: DOMAttribute<State, CSSProperties>
+  tabIndex?: DOMAttribute<State, number>
+  onanimationstart?: DOMEventHandler<State, AnimationEvent, Action>
+  viewBox?: DOMAttribute<State, string>
+  ondrop?: DOMEventHandler<State, DragEvent, Action>
   onfullscreenerror?: DOMEventHandler<State, Event, Action>
   ongotpointercapture?: DOMEventHandler<State, Event, Action>
   oninput?: DOMEventHandler<State, Event, Action>
@@ -6599,13 +6764,13 @@ export module html {
 
 export interface SVGFEDiffuseLightingElementAttributes<State, Action> {
   className?: DOMAttribute<State, string>
+  diffuseConstant?: DOMAttribute<State, number>
+  height?: DOMAttribute<State, string>
   id?: DOMAttribute<State, string>
+  in1?: DOMAttribute<State, string>
+  kernelUnitLengthX?: DOMAttribute<State, number>
+  kernelUnitLengthY?: DOMAttribute<State, number>
   nonce?: DOMAttribute<State, string>
-  scrollLeft?: DOMAttribute<State, number>
-  scrollTop?: DOMAttribute<State, number>
-  slot?: DOMAttribute<State, string>
-  style?: DOMAttribute<State, CSSProperties>
-  tabIndex?: DOMAttribute<State, number>
   onabort?: DOMEventHandler<State, UIEvent, Action>
   onanimationcancel?: DOMEventHandler<State, Event, Action>
   onanimationend?: DOMEventHandler<State, AnimationEvent, Action>
@@ -6614,12 +6779,17 @@ export interface SVGFEDiffuseLightingElementAttributes<State, Action> {
   onauxclick?: DOMEventHandler<State, Event, Action>
   onblur?: DOMEventHandler<State, FocusEvent, Action>
   oncancel?: DOMEventHandler<State, Event, Action>
+  result?: DOMAttribute<State, string>
   oncanplay?: DOMEventHandler<State, Event, Action>
-  oncanplaythrough?: DOMEventHandler<State, Event, Action>
   onchange?: DOMEventHandler<State, Event, Action>
   onclick?: DOMEventHandler<State, MouseEvent, Action>
   onclose?: DOMEventHandler<State, Event, Action>
   oncontextmenu?: DOMEventHandler<State, Event, Action>
+  scrollLeft?: DOMAttribute<State, number>
+  scrollTop?: DOMAttribute<State, number>
+  slot?: DOMAttribute<State, string>
+  style?: DOMAttribute<State, CSSProperties>
+  oncanplaythrough?: DOMEventHandler<State, Event, Action>
   oncopy?: DOMEventHandler<State, ClipboardEvent, Action>
   oncuechange?: DOMEventHandler<State, Event, Action>
   oncut?: DOMEventHandler<State, ClipboardEvent, Action>
@@ -6627,7 +6797,6 @@ export interface SVGFEDiffuseLightingElementAttributes<State, Action> {
   ondrag?: DOMEventHandler<State, Event, Action>
   ondragend?: DOMEventHandler<State, DragEvent, Action>
   ondragenter?: DOMEventHandler<State, DragEvent, Action>
-  ondragexit?: DOMEventHandler<State, DragEvent, Action>
   ondragleave?: DOMEventHandler<State, DragEvent, Action>
   ondragover?: DOMEventHandler<State, DragEvent, Action>
   ondragstart?: DOMEventHandler<State, DragEvent, Action>
@@ -6638,6 +6807,12 @@ export interface SVGFEDiffuseLightingElementAttributes<State, Action> {
   onerror?: DOMEventHandler<State, ErrorEvent, Action>
   onfocus?: DOMEventHandler<State, FocusEvent, Action>
   onfullscreenchange?: DOMEventHandler<State, Event, Action>
+  surfaceScale?: DOMAttribute<State, number>
+  tabIndex?: DOMAttribute<State, number>
+  width?: DOMAttribute<State, string>
+  x?: DOMAttribute<State, string>
+  y?: DOMAttribute<State, string>
+  ondragexit?: DOMEventHandler<State, DragEvent, Action>
   onfullscreenerror?: DOMEventHandler<State, Event, Action>
   ongotpointercapture?: DOMEventHandler<State, Event, Action>
   oninput?: DOMEventHandler<State, Event, Action>
@@ -6717,16 +6892,20 @@ export module svg {
 
 export interface SVGFEComponentTransferElementAttributes<State, Action> {
   className?: DOMAttribute<State, string>
+  height?: DOMAttribute<State, string>
   id?: DOMAttribute<State, string>
+  in1?: DOMAttribute<State, string>
   nonce?: DOMAttribute<State, string>
+  onabort?: DOMEventHandler<State, UIEvent, Action>
+  onanimationcancel?: DOMEventHandler<State, Event, Action>
+  onanimationend?: DOMEventHandler<State, AnimationEvent, Action>
+  result?: DOMAttribute<State, string>
   scrollLeft?: DOMAttribute<State, number>
   scrollTop?: DOMAttribute<State, number>
   slot?: DOMAttribute<State, string>
   style?: DOMAttribute<State, CSSProperties>
   tabIndex?: DOMAttribute<State, number>
-  onabort?: DOMEventHandler<State, UIEvent, Action>
-  onanimationcancel?: DOMEventHandler<State, Event, Action>
-  onanimationend?: DOMEventHandler<State, AnimationEvent, Action>
+  width?: DOMAttribute<State, string>
   onanimationiteration?: DOMEventHandler<State, AnimationEvent, Action>
   onanimationstart?: DOMEventHandler<State, AnimationEvent, Action>
   onauxclick?: DOMEventHandler<State, Event, Action>
@@ -6747,7 +6926,6 @@ export interface SVGFEComponentTransferElementAttributes<State, Action> {
   ondragenter?: DOMEventHandler<State, DragEvent, Action>
   ondragexit?: DOMEventHandler<State, DragEvent, Action>
   ondragleave?: DOMEventHandler<State, DragEvent, Action>
-  ondragover?: DOMEventHandler<State, DragEvent, Action>
   ondragstart?: DOMEventHandler<State, DragEvent, Action>
   ondrop?: DOMEventHandler<State, DragEvent, Action>
   ondurationchange?: DOMEventHandler<State, Event, Action>
@@ -6756,6 +6934,9 @@ export interface SVGFEComponentTransferElementAttributes<State, Action> {
   onerror?: DOMEventHandler<State, ErrorEvent, Action>
   onfocus?: DOMEventHandler<State, FocusEvent, Action>
   onfullscreenchange?: DOMEventHandler<State, Event, Action>
+  x?: DOMAttribute<State, string>
+  y?: DOMAttribute<State, string>
+  ondragover?: DOMEventHandler<State, DragEvent, Action>
   onfullscreenerror?: DOMEventHandler<State, Event, Action>
   ongotpointercapture?: DOMEventHandler<State, Event, Action>
   oninput?: DOMEventHandler<State, Event, Action>
@@ -6835,18 +7016,17 @@ export module svg {
 
 export interface SVGFEFloodElementAttributes<State, Action> {
   className?: DOMAttribute<State, string>
+  height?: DOMAttribute<State, string>
   id?: DOMAttribute<State, string>
   nonce?: DOMAttribute<State, string>
+  onanimationcancel?: DOMEventHandler<State, Event, Action>
+  tabIndex?: DOMAttribute<State, number>
+  onabort?: DOMEventHandler<State, UIEvent, Action>
   scrollLeft?: DOMAttribute<State, number>
   scrollTop?: DOMAttribute<State, number>
   slot?: DOMAttribute<State, string>
   style?: DOMAttribute<State, CSSProperties>
-  tabIndex?: DOMAttribute<State, number>
-  onabort?: DOMEventHandler<State, UIEvent, Action>
-  onanimationcancel?: DOMEventHandler<State, Event, Action>
   onanimationend?: DOMEventHandler<State, AnimationEvent, Action>
-  onanimationiteration?: DOMEventHandler<State, AnimationEvent, Action>
-  onanimationstart?: DOMEventHandler<State, AnimationEvent, Action>
   onauxclick?: DOMEventHandler<State, Event, Action>
   onblur?: DOMEventHandler<State, FocusEvent, Action>
   oncancel?: DOMEventHandler<State, Event, Action>
@@ -6865,15 +7045,21 @@ export interface SVGFEFloodElementAttributes<State, Action> {
   ondragenter?: DOMEventHandler<State, DragEvent, Action>
   ondragexit?: DOMEventHandler<State, DragEvent, Action>
   ondragleave?: DOMEventHandler<State, DragEvent, Action>
-  ondragover?: DOMEventHandler<State, DragEvent, Action>
   ondragstart?: DOMEventHandler<State, DragEvent, Action>
   ondrop?: DOMEventHandler<State, DragEvent, Action>
   ondurationchange?: DOMEventHandler<State, Event, Action>
   onemptied?: DOMEventHandler<State, Event, Action>
   onended?: DOMEventHandler<State, Event, Action>
-  onerror?: DOMEventHandler<State, ErrorEvent, Action>
   onfocus?: DOMEventHandler<State, FocusEvent, Action>
   onfullscreenchange?: DOMEventHandler<State, Event, Action>
+  result?: DOMAttribute<State, string>
+  onerror?: DOMEventHandler<State, ErrorEvent, Action>
+  width?: DOMAttribute<State, string>
+  onanimationiteration?: DOMEventHandler<State, AnimationEvent, Action>
+  x?: DOMAttribute<State, string>
+  onanimationstart?: DOMEventHandler<State, AnimationEvent, Action>
+  y?: DOMAttribute<State, string>
+  ondragover?: DOMEventHandler<State, DragEvent, Action>
   onfullscreenerror?: DOMEventHandler<State, Event, Action>
   ongotpointercapture?: DOMEventHandler<State, Event, Action>
   oninput?: DOMEventHandler<State, Event, Action>
@@ -6949,17 +7135,17 @@ export module svg {
 export interface SVGFEMergeNodeElementAttributes<State, Action> {
   className?: DOMAttribute<State, string>
   id?: DOMAttribute<State, string>
+  in1?: DOMAttribute<State, string>
   nonce?: DOMAttribute<State, string>
-  scrollLeft?: DOMAttribute<State, number>
-  scrollTop?: DOMAttribute<State, number>
-  slot?: DOMAttribute<State, string>
-  style?: DOMAttribute<State, CSSProperties>
-  tabIndex?: DOMAttribute<State, number>
   onabort?: DOMEventHandler<State, UIEvent, Action>
   onanimationcancel?: DOMEventHandler<State, Event, Action>
   onanimationend?: DOMEventHandler<State, AnimationEvent, Action>
   onanimationiteration?: DOMEventHandler<State, AnimationEvent, Action>
   onanimationstart?: DOMEventHandler<State, AnimationEvent, Action>
+  scrollLeft?: DOMAttribute<State, number>
+  scrollTop?: DOMAttribute<State, number>
+  style?: DOMAttribute<State, CSSProperties>
+  tabIndex?: DOMAttribute<State, number>
   onauxclick?: DOMEventHandler<State, Event, Action>
   onblur?: DOMEventHandler<State, FocusEvent, Action>
   oncancel?: DOMEventHandler<State, Event, Action>
@@ -6971,6 +7157,7 @@ export interface SVGFEMergeNodeElementAttributes<State, Action> {
   oncontextmenu?: DOMEventHandler<State, Event, Action>
   oncopy?: DOMEventHandler<State, ClipboardEvent, Action>
   oncuechange?: DOMEventHandler<State, Event, Action>
+  slot?: DOMAttribute<State, string>
   oncut?: DOMEventHandler<State, ClipboardEvent, Action>
   ondblclick?: DOMEventHandler<State, Event, Action>
   ondrag?: DOMEventHandler<State, Event, Action>
@@ -7186,12 +7373,12 @@ export module html {
 export interface SVGMarkerElementAttributes<State, Action> {
   className?: DOMAttribute<State, string>
   id?: DOMAttribute<State, string>
+  markerHeight?: DOMAttribute<State, string>
+  markerUnits?: DOMAttribute<State, string>
+  markerWidth?: DOMAttribute<State, string>
   nonce?: DOMAttribute<State, string>
-  scrollLeft?: DOMAttribute<State, number>
-  scrollTop?: DOMAttribute<State, number>
-  slot?: DOMAttribute<State, string>
-  style?: DOMAttribute<State, CSSProperties>
-  tabIndex?: DOMAttribute<State, number>
+  orientAngle?: DOMAttribute<State, string>
+  orientType?: DOMAttribute<State, string>
   onabort?: DOMEventHandler<State, UIEvent, Action>
   onanimationcancel?: DOMEventHandler<State, Event, Action>
   onanimationend?: DOMEventHandler<State, AnimationEvent, Action>
@@ -7208,12 +7395,9 @@ export interface SVGMarkerElementAttributes<State, Action> {
   oncontextmenu?: DOMEventHandler<State, Event, Action>
   oncopy?: DOMEventHandler<State, ClipboardEvent, Action>
   oncuechange?: DOMEventHandler<State, Event, Action>
-  oncut?: DOMEventHandler<State, ClipboardEvent, Action>
   ondblclick?: DOMEventHandler<State, Event, Action>
-  ondrag?: DOMEventHandler<State, Event, Action>
   ondragend?: DOMEventHandler<State, DragEvent, Action>
   ondragenter?: DOMEventHandler<State, DragEvent, Action>
-  ondragexit?: DOMEventHandler<State, DragEvent, Action>
   ondragleave?: DOMEventHandler<State, DragEvent, Action>
   ondragover?: DOMEventHandler<State, DragEvent, Action>
   ondragstart?: DOMEventHandler<State, DragEvent, Action>
@@ -7224,6 +7408,18 @@ export interface SVGMarkerElementAttributes<State, Action> {
   onerror?: DOMEventHandler<State, ErrorEvent, Action>
   onfocus?: DOMEventHandler<State, FocusEvent, Action>
   onfullscreenchange?: DOMEventHandler<State, Event, Action>
+  preserveAspectRatio?: DOMAttribute<State, string>
+  oncut?: DOMEventHandler<State, ClipboardEvent, Action>
+  refX?: DOMAttribute<State, string>
+  ondrag?: DOMEventHandler<State, Event, Action>
+  refY?: DOMAttribute<State, string>
+  scrollLeft?: DOMAttribute<State, number>
+  scrollTop?: DOMAttribute<State, number>
+  slot?: DOMAttribute<State, string>
+  style?: DOMAttribute<State, CSSProperties>
+  tabIndex?: DOMAttribute<State, number>
+  viewBox?: DOMAttribute<State, string>
+  ondragexit?: DOMEventHandler<State, DragEvent, Action>
   onfullscreenerror?: DOMEventHandler<State, Event, Action>
   ongotpointercapture?: DOMEventHandler<State, Event, Action>
   oninput?: DOMEventHandler<State, Event, Action>
@@ -7428,18 +7624,17 @@ export module html {
 
 export interface SVGFEMergeElementAttributes<State, Action> {
   className?: DOMAttribute<State, string>
+  height?: DOMAttribute<State, string>
   id?: DOMAttribute<State, string>
   nonce?: DOMAttribute<State, string>
+  onanimationcancel?: DOMEventHandler<State, Event, Action>
+  tabIndex?: DOMAttribute<State, number>
+  onabort?: DOMEventHandler<State, UIEvent, Action>
   scrollLeft?: DOMAttribute<State, number>
   scrollTop?: DOMAttribute<State, number>
   slot?: DOMAttribute<State, string>
   style?: DOMAttribute<State, CSSProperties>
-  tabIndex?: DOMAttribute<State, number>
-  onabort?: DOMEventHandler<State, UIEvent, Action>
-  onanimationcancel?: DOMEventHandler<State, Event, Action>
   onanimationend?: DOMEventHandler<State, AnimationEvent, Action>
-  onanimationiteration?: DOMEventHandler<State, AnimationEvent, Action>
-  onanimationstart?: DOMEventHandler<State, AnimationEvent, Action>
   onauxclick?: DOMEventHandler<State, Event, Action>
   onblur?: DOMEventHandler<State, FocusEvent, Action>
   oncancel?: DOMEventHandler<State, Event, Action>
@@ -7458,15 +7653,21 @@ export interface SVGFEMergeElementAttributes<State, Action> {
   ondragenter?: DOMEventHandler<State, DragEvent, Action>
   ondragexit?: DOMEventHandler<State, DragEvent, Action>
   ondragleave?: DOMEventHandler<State, DragEvent, Action>
-  ondragover?: DOMEventHandler<State, DragEvent, Action>
   ondragstart?: DOMEventHandler<State, DragEvent, Action>
   ondrop?: DOMEventHandler<State, DragEvent, Action>
   ondurationchange?: DOMEventHandler<State, Event, Action>
   onemptied?: DOMEventHandler<State, Event, Action>
   onended?: DOMEventHandler<State, Event, Action>
-  onerror?: DOMEventHandler<State, ErrorEvent, Action>
   onfocus?: DOMEventHandler<State, FocusEvent, Action>
   onfullscreenchange?: DOMEventHandler<State, Event, Action>
+  result?: DOMAttribute<State, string>
+  onerror?: DOMEventHandler<State, ErrorEvent, Action>
+  width?: DOMAttribute<State, string>
+  onanimationiteration?: DOMEventHandler<State, AnimationEvent, Action>
+  x?: DOMAttribute<State, string>
+  onanimationstart?: DOMEventHandler<State, AnimationEvent, Action>
+  y?: DOMAttribute<State, string>
+  ondragover?: DOMEventHandler<State, DragEvent, Action>
   onfullscreenerror?: DOMEventHandler<State, Event, Action>
   ongotpointercapture?: DOMEventHandler<State, Event, Action>
   oninput?: DOMEventHandler<State, Event, Action>
@@ -7541,34 +7742,39 @@ export module svg {
 
 export interface SVGFESpecularLightingElementAttributes<State, Action> {
   className?: DOMAttribute<State, string>
+  height?: DOMAttribute<State, string>
   id?: DOMAttribute<State, string>
+  in1?: DOMAttribute<State, string>
+  kernelUnitLengthX?: DOMAttribute<State, number>
+  kernelUnitLengthY?: DOMAttribute<State, number>
   nonce?: DOMAttribute<State, string>
-  scrollLeft?: DOMAttribute<State, number>
-  scrollTop?: DOMAttribute<State, number>
-  slot?: DOMAttribute<State, string>
-  style?: DOMAttribute<State, CSSProperties>
-  tabIndex?: DOMAttribute<State, number>
+  onanimationend?: DOMEventHandler<State, AnimationEvent, Action>
+  result?: DOMAttribute<State, string>
   onabort?: DOMEventHandler<State, UIEvent, Action>
   onanimationcancel?: DOMEventHandler<State, Event, Action>
-  onanimationend?: DOMEventHandler<State, AnimationEvent, Action>
   onanimationiteration?: DOMEventHandler<State, AnimationEvent, Action>
   onanimationstart?: DOMEventHandler<State, AnimationEvent, Action>
   onauxclick?: DOMEventHandler<State, Event, Action>
   onblur?: DOMEventHandler<State, FocusEvent, Action>
   oncancel?: DOMEventHandler<State, Event, Action>
   oncanplay?: DOMEventHandler<State, Event, Action>
-  oncanplaythrough?: DOMEventHandler<State, Event, Action>
   onchange?: DOMEventHandler<State, Event, Action>
   onclick?: DOMEventHandler<State, MouseEvent, Action>
   onclose?: DOMEventHandler<State, Event, Action>
   oncontextmenu?: DOMEventHandler<State, Event, Action>
+  scrollLeft?: DOMAttribute<State, number>
+  scrollTop?: DOMAttribute<State, number>
+  slot?: DOMAttribute<State, string>
+  specularConstant?: DOMAttribute<State, number>
+  specularExponent?: DOMAttribute<State, number>
+  style?: DOMAttribute<State, CSSProperties>
+  oncanplaythrough?: DOMEventHandler<State, Event, Action>
   oncopy?: DOMEventHandler<State, ClipboardEvent, Action>
   oncuechange?: DOMEventHandler<State, Event, Action>
   oncut?: DOMEventHandler<State, ClipboardEvent, Action>
   ondblclick?: DOMEventHandler<State, Event, Action>
   ondrag?: DOMEventHandler<State, Event, Action>
   ondragend?: DOMEventHandler<State, DragEvent, Action>
-  ondragenter?: DOMEventHandler<State, DragEvent, Action>
   ondragexit?: DOMEventHandler<State, DragEvent, Action>
   ondragleave?: DOMEventHandler<State, DragEvent, Action>
   ondragover?: DOMEventHandler<State, DragEvent, Action>
@@ -7580,6 +7786,12 @@ export interface SVGFESpecularLightingElementAttributes<State, Action> {
   onerror?: DOMEventHandler<State, ErrorEvent, Action>
   onfocus?: DOMEventHandler<State, FocusEvent, Action>
   onfullscreenchange?: DOMEventHandler<State, Event, Action>
+  surfaceScale?: DOMAttribute<State, number>
+  tabIndex?: DOMAttribute<State, number>
+  width?: DOMAttribute<State, string>
+  x?: DOMAttribute<State, string>
+  y?: DOMAttribute<State, string>
+  ondragenter?: DOMEventHandler<State, DragEvent, Action>
   onfullscreenerror?: DOMEventHandler<State, Event, Action>
   ongotpointercapture?: DOMEventHandler<State, Event, Action>
   oninput?: DOMEventHandler<State, Event, Action>
@@ -7770,18 +7982,19 @@ export module svg {
 
 export interface SVGClipPathElementAttributes<State, Action> {
   className?: DOMAttribute<State, string>
+  clipPathUnits?: DOMAttribute<State, string>
   id?: DOMAttribute<State, string>
   nonce?: DOMAttribute<State, string>
-  scrollLeft?: DOMAttribute<State, number>
-  scrollTop?: DOMAttribute<State, number>
-  slot?: DOMAttribute<State, string>
-  style?: DOMAttribute<State, CSSProperties>
-  tabIndex?: DOMAttribute<State, number>
   onabort?: DOMEventHandler<State, UIEvent, Action>
   onanimationcancel?: DOMEventHandler<State, Event, Action>
   onanimationend?: DOMEventHandler<State, AnimationEvent, Action>
+  tabIndex?: DOMAttribute<State, number>
   onanimationiteration?: DOMEventHandler<State, AnimationEvent, Action>
+  scrollLeft?: DOMAttribute<State, number>
+  scrollTop?: DOMAttribute<State, number>
+  slot?: DOMAttribute<State, string>
   onanimationstart?: DOMEventHandler<State, AnimationEvent, Action>
+  style?: DOMAttribute<State, CSSProperties>
   onauxclick?: DOMEventHandler<State, Event, Action>
   onblur?: DOMEventHandler<State, FocusEvent, Action>
   oncancel?: DOMEventHandler<State, Event, Action>
@@ -7802,13 +8015,14 @@ export interface SVGClipPathElementAttributes<State, Action> {
   ondragleave?: DOMEventHandler<State, DragEvent, Action>
   ondragover?: DOMEventHandler<State, DragEvent, Action>
   ondragstart?: DOMEventHandler<State, DragEvent, Action>
-  ondrop?: DOMEventHandler<State, DragEvent, Action>
   ondurationchange?: DOMEventHandler<State, Event, Action>
   onemptied?: DOMEventHandler<State, Event, Action>
   onended?: DOMEventHandler<State, Event, Action>
   onerror?: DOMEventHandler<State, ErrorEvent, Action>
   onfocus?: DOMEventHandler<State, FocusEvent, Action>
   onfullscreenchange?: DOMEventHandler<State, Event, Action>
+  transform?: DOMAttribute<State, string>
+  ondrop?: DOMEventHandler<State, DragEvent, Action>
   onfullscreenerror?: DOMEventHandler<State, Event, Action>
   ongotpointercapture?: DOMEventHandler<State, Event, Action>
   oninput?: DOMEventHandler<State, Event, Action>
@@ -8268,18 +8482,19 @@ export module html {
 
 export interface SVGScriptElementAttributes<State, Action> {
   className?: DOMAttribute<State, string>
+  href?: DOMAttribute<State, string>
   id?: DOMAttribute<State, string>
   nonce?: DOMAttribute<State, string>
-  scrollLeft?: DOMAttribute<State, number>
-  scrollTop?: DOMAttribute<State, number>
-  slot?: DOMAttribute<State, string>
-  style?: DOMAttribute<State, CSSProperties>
-  tabIndex?: DOMAttribute<State, number>
   onabort?: DOMEventHandler<State, UIEvent, Action>
   onanimationcancel?: DOMEventHandler<State, Event, Action>
   onanimationend?: DOMEventHandler<State, AnimationEvent, Action>
+  tabIndex?: DOMAttribute<State, number>
   onanimationiteration?: DOMEventHandler<State, AnimationEvent, Action>
+  scrollLeft?: DOMAttribute<State, number>
+  scrollTop?: DOMAttribute<State, number>
+  slot?: DOMAttribute<State, string>
   onanimationstart?: DOMEventHandler<State, AnimationEvent, Action>
+  style?: DOMAttribute<State, CSSProperties>
   onauxclick?: DOMEventHandler<State, Event, Action>
   onblur?: DOMEventHandler<State, FocusEvent, Action>
   oncancel?: DOMEventHandler<State, Event, Action>
@@ -8381,19 +8596,21 @@ export module svg {
 }
 
 export interface SVGFEDistantLightElementAttributes<State, Action> {
+  azimuth?: DOMAttribute<State, number>
   className?: DOMAttribute<State, string>
+  elevation?: DOMAttribute<State, number>
   id?: DOMAttribute<State, string>
   nonce?: DOMAttribute<State, string>
-  scrollLeft?: DOMAttribute<State, number>
-  scrollTop?: DOMAttribute<State, number>
-  slot?: DOMAttribute<State, string>
-  style?: DOMAttribute<State, CSSProperties>
-  tabIndex?: DOMAttribute<State, number>
   onabort?: DOMEventHandler<State, UIEvent, Action>
   onanimationcancel?: DOMEventHandler<State, Event, Action>
   onanimationend?: DOMEventHandler<State, AnimationEvent, Action>
   onanimationiteration?: DOMEventHandler<State, AnimationEvent, Action>
   onanimationstart?: DOMEventHandler<State, AnimationEvent, Action>
+  scrollLeft?: DOMAttribute<State, number>
+  scrollTop?: DOMAttribute<State, number>
+  slot?: DOMAttribute<State, string>
+  style?: DOMAttribute<State, CSSProperties>
+  tabIndex?: DOMAttribute<State, number>
   onauxclick?: DOMEventHandler<State, Event, Action>
   onblur?: DOMEventHandler<State, FocusEvent, Action>
   oncancel?: DOMEventHandler<State, Event, Action>
@@ -8731,14 +8948,17 @@ export module html {
 }
 
 export interface SVGFEConvolveMatrixElementAttributes<State, Action> {
+  bias?: DOMAttribute<State, number>
   className?: DOMAttribute<State, string>
+  divisor?: DOMAttribute<State, number>
+  edgeMode?: DOMAttribute<State, string>
+  height?: DOMAttribute<State, string>
   id?: DOMAttribute<State, string>
+  in1?: DOMAttribute<State, string>
+  kernelMatrix?: DOMAttribute<State, string>
+  kernelUnitLengthX?: DOMAttribute<State, number>
+  kernelUnitLengthY?: DOMAttribute<State, number>
   nonce?: DOMAttribute<State, string>
-  scrollLeft?: DOMAttribute<State, number>
-  scrollTop?: DOMAttribute<State, number>
-  slot?: DOMAttribute<State, string>
-  style?: DOMAttribute<State, CSSProperties>
-  tabIndex?: DOMAttribute<State, number>
   onabort?: DOMEventHandler<State, UIEvent, Action>
   onanimationcancel?: DOMEventHandler<State, Event, Action>
   onanimationend?: DOMEventHandler<State, AnimationEvent, Action>
@@ -8756,7 +8976,6 @@ export interface SVGFEConvolveMatrixElementAttributes<State, Action> {
   oncopy?: DOMEventHandler<State, ClipboardEvent, Action>
   oncuechange?: DOMEventHandler<State, Event, Action>
   oncut?: DOMEventHandler<State, ClipboardEvent, Action>
-  ondblclick?: DOMEventHandler<State, Event, Action>
   ondrag?: DOMEventHandler<State, Event, Action>
   ondragend?: DOMEventHandler<State, DragEvent, Action>
   ondragenter?: DOMEventHandler<State, DragEvent, Action>
@@ -8771,6 +8990,21 @@ export interface SVGFEConvolveMatrixElementAttributes<State, Action> {
   onerror?: DOMEventHandler<State, ErrorEvent, Action>
   onfocus?: DOMEventHandler<State, FocusEvent, Action>
   onfullscreenchange?: DOMEventHandler<State, Event, Action>
+  orderX?: DOMAttribute<State, number>
+  orderY?: DOMAttribute<State, number>
+  preserveAlpha?: DOMAttribute<State, boolean>
+  result?: DOMAttribute<State, string>
+  scrollLeft?: DOMAttribute<State, number>
+  scrollTop?: DOMAttribute<State, number>
+  slot?: DOMAttribute<State, string>
+  style?: DOMAttribute<State, CSSProperties>
+  tabIndex?: DOMAttribute<State, number>
+  targetX?: DOMAttribute<State, number>
+  targetY?: DOMAttribute<State, number>
+  x?: DOMAttribute<State, string>
+  y?: DOMAttribute<State, string>
+  ondblclick?: DOMEventHandler<State, Event, Action>
+  width?: DOMAttribute<State, string>
   onfullscreenerror?: DOMEventHandler<State, Event, Action>
   ongotpointercapture?: DOMEventHandler<State, Event, Action>
   oninput?: DOMEventHandler<State, Event, Action>
@@ -8844,19 +9078,16 @@ export module svg {
 }
 
 export interface SVGFEFuncGElementAttributes<State, Action> {
+  amplitude?: DOMAttribute<State, number>
   className?: DOMAttribute<State, string>
+  exponent?: DOMAttribute<State, number>
   id?: DOMAttribute<State, string>
+  intercept?: DOMAttribute<State, number>
   nonce?: DOMAttribute<State, string>
-  scrollLeft?: DOMAttribute<State, number>
-  scrollTop?: DOMAttribute<State, number>
-  slot?: DOMAttribute<State, string>
-  style?: DOMAttribute<State, CSSProperties>
-  tabIndex?: DOMAttribute<State, number>
+  offset?: DOMAttribute<State, number>
   onabort?: DOMEventHandler<State, UIEvent, Action>
   onanimationcancel?: DOMEventHandler<State, Event, Action>
   onanimationend?: DOMEventHandler<State, AnimationEvent, Action>
-  onanimationiteration?: DOMEventHandler<State, AnimationEvent, Action>
-  onanimationstart?: DOMEventHandler<State, AnimationEvent, Action>
   onauxclick?: DOMEventHandler<State, Event, Action>
   onblur?: DOMEventHandler<State, FocusEvent, Action>
   oncancel?: DOMEventHandler<State, Event, Action>
@@ -8864,17 +9095,18 @@ export interface SVGFEFuncGElementAttributes<State, Action> {
   oncanplaythrough?: DOMEventHandler<State, Event, Action>
   onchange?: DOMEventHandler<State, Event, Action>
   onclick?: DOMEventHandler<State, MouseEvent, Action>
-  onclose?: DOMEventHandler<State, Event, Action>
   oncontextmenu?: DOMEventHandler<State, Event, Action>
   oncopy?: DOMEventHandler<State, ClipboardEvent, Action>
   oncuechange?: DOMEventHandler<State, Event, Action>
+  scrollLeft?: DOMAttribute<State, number>
+  scrollTop?: DOMAttribute<State, number>
+  onclose?: DOMEventHandler<State, Event, Action>
   oncut?: DOMEventHandler<State, ClipboardEvent, Action>
   ondblclick?: DOMEventHandler<State, Event, Action>
   ondrag?: DOMEventHandler<State, Event, Action>
   ondragend?: DOMEventHandler<State, DragEvent, Action>
   ondragenter?: DOMEventHandler<State, DragEvent, Action>
   ondragexit?: DOMEventHandler<State, DragEvent, Action>
-  ondragleave?: DOMEventHandler<State, DragEvent, Action>
   ondragover?: DOMEventHandler<State, DragEvent, Action>
   ondragstart?: DOMEventHandler<State, DragEvent, Action>
   ondrop?: DOMEventHandler<State, DragEvent, Action>
@@ -8884,6 +9116,15 @@ export interface SVGFEFuncGElementAttributes<State, Action> {
   onerror?: DOMEventHandler<State, ErrorEvent, Action>
   onfocus?: DOMEventHandler<State, FocusEvent, Action>
   onfullscreenchange?: DOMEventHandler<State, Event, Action>
+  slope?: DOMAttribute<State, number>
+  slot?: DOMAttribute<State, string>
+  style?: DOMAttribute<State, CSSProperties>
+  tabIndex?: DOMAttribute<State, number>
+  onanimationiteration?: DOMEventHandler<State, AnimationEvent, Action>
+  tableValues?: DOMAttribute<State, string>
+  onanimationstart?: DOMEventHandler<State, AnimationEvent, Action>
+  type?: DOMAttribute<State, string>
+  ondragleave?: DOMEventHandler<State, DragEvent, Action>
   onfullscreenerror?: DOMEventHandler<State, Event, Action>
   ongotpointercapture?: DOMEventHandler<State, Event, Action>
   oninput?: DOMEventHandler<State, Event, Action>
@@ -9625,15 +9866,16 @@ export interface SVGDefsElementAttributes<State, Action> {
   className?: DOMAttribute<State, string>
   id?: DOMAttribute<State, string>
   nonce?: DOMAttribute<State, string>
+  onabort?: DOMEventHandler<State, UIEvent, Action>
+  onanimationcancel?: DOMEventHandler<State, Event, Action>
+  onanimationend?: DOMEventHandler<State, AnimationEvent, Action>
+  onanimationiteration?: DOMEventHandler<State, AnimationEvent, Action>
+  requiredExtensions?: DOMAttribute<State, string>
   scrollLeft?: DOMAttribute<State, number>
   scrollTop?: DOMAttribute<State, number>
   slot?: DOMAttribute<State, string>
   style?: DOMAttribute<State, CSSProperties>
   tabIndex?: DOMAttribute<State, number>
-  onabort?: DOMEventHandler<State, UIEvent, Action>
-  onanimationcancel?: DOMEventHandler<State, Event, Action>
-  onanimationend?: DOMEventHandler<State, AnimationEvent, Action>
-  onanimationiteration?: DOMEventHandler<State, AnimationEvent, Action>
   onanimationstart?: DOMEventHandler<State, AnimationEvent, Action>
   onauxclick?: DOMEventHandler<State, Event, Action>
   onblur?: DOMEventHandler<State, FocusEvent, Action>
@@ -9654,14 +9896,16 @@ export interface SVGDefsElementAttributes<State, Action> {
   ondragexit?: DOMEventHandler<State, DragEvent, Action>
   ondragleave?: DOMEventHandler<State, DragEvent, Action>
   ondragover?: DOMEventHandler<State, DragEvent, Action>
-  ondragstart?: DOMEventHandler<State, DragEvent, Action>
   ondrop?: DOMEventHandler<State, DragEvent, Action>
   ondurationchange?: DOMEventHandler<State, Event, Action>
   onemptied?: DOMEventHandler<State, Event, Action>
   onended?: DOMEventHandler<State, Event, Action>
   onerror?: DOMEventHandler<State, ErrorEvent, Action>
   onfocus?: DOMEventHandler<State, FocusEvent, Action>
+  systemLanguage?: DOMAttribute<State, string>
   onfullscreenchange?: DOMEventHandler<State, Event, Action>
+  transform?: DOMAttribute<State, string>
+  ondragstart?: DOMEventHandler<State, DragEvent, Action>
   onfullscreenerror?: DOMEventHandler<State, Event, Action>
   ongotpointercapture?: DOMEventHandler<State, Event, Action>
   oninput?: DOMEventHandler<State, Event, Action>
@@ -9858,16 +10102,19 @@ export module html {
 
 export interface SVGAElementAttributes<State, Action> {
   className?: DOMAttribute<State, string>
+  href?: DOMAttribute<State, string>
   id?: DOMAttribute<State, string>
   nonce?: DOMAttribute<State, string>
+  onabort?: DOMEventHandler<State, UIEvent, Action>
+  onanimationcancel?: DOMEventHandler<State, Event, Action>
+  onanimationend?: DOMEventHandler<State, AnimationEvent, Action>
+  requiredExtensions?: DOMAttribute<State, string>
   scrollLeft?: DOMAttribute<State, number>
   scrollTop?: DOMAttribute<State, number>
   slot?: DOMAttribute<State, string>
   style?: DOMAttribute<State, CSSProperties>
+  systemLanguage?: DOMAttribute<State, string>
   tabIndex?: DOMAttribute<State, number>
-  onabort?: DOMEventHandler<State, UIEvent, Action>
-  onanimationcancel?: DOMEventHandler<State, Event, Action>
-  onanimationend?: DOMEventHandler<State, AnimationEvent, Action>
   onanimationiteration?: DOMEventHandler<State, AnimationEvent, Action>
   onanimationstart?: DOMEventHandler<State, AnimationEvent, Action>
   onauxclick?: DOMEventHandler<State, Event, Action>
@@ -9888,7 +10135,6 @@ export interface SVGAElementAttributes<State, Action> {
   ondragenter?: DOMEventHandler<State, DragEvent, Action>
   ondragexit?: DOMEventHandler<State, DragEvent, Action>
   ondragleave?: DOMEventHandler<State, DragEvent, Action>
-  ondragover?: DOMEventHandler<State, DragEvent, Action>
   ondragstart?: DOMEventHandler<State, DragEvent, Action>
   ondrop?: DOMEventHandler<State, DragEvent, Action>
   ondurationchange?: DOMEventHandler<State, Event, Action>
@@ -9897,6 +10143,9 @@ export interface SVGAElementAttributes<State, Action> {
   onerror?: DOMEventHandler<State, ErrorEvent, Action>
   onfocus?: DOMEventHandler<State, FocusEvent, Action>
   onfullscreenchange?: DOMEventHandler<State, Event, Action>
+  target?: DOMAttribute<State, string>
+  transform?: DOMAttribute<State, string>
+  ondragover?: DOMEventHandler<State, DragEvent, Action>
   onfullscreenerror?: DOMEventHandler<State, Event, Action>
   ongotpointercapture?: DOMEventHandler<State, Event, Action>
   oninput?: DOMEventHandler<State, Event, Action>
@@ -10110,12 +10359,29 @@ export module html {
 export interface SVGSVGElementAttributes<State, Action> {
   className?: DOMAttribute<State, string>
   currentScale?: DOMAttribute<State, number>
+  currentTranslate?: DOMAttribute<State, string>
+  height?: DOMAttribute<State, string>
   id?: DOMAttribute<State, string>
   nonce?: DOMAttribute<State, string>
   onabort?: DOMEventHandler<State, UIEvent, Action>
   onanimationcancel?: DOMEventHandler<State, Event, Action>
+  preserveAspectRatio?: DOMAttribute<State, string>
+  requiredExtensions?: DOMAttribute<State, string>
+  scrollTop?: DOMAttribute<State, number>
   onanimationend?: DOMEventHandler<State, AnimationEvent, Action>
   onanimationiteration?: DOMEventHandler<State, AnimationEvent, Action>
+  scrollLeft?: DOMAttribute<State, number>
+  slot?: DOMAttribute<State, string>
+  style?: DOMAttribute<State, CSSProperties>
+  systemLanguage?: DOMAttribute<State, string>
+  tabIndex?: DOMAttribute<State, number>
+  transform?: DOMAttribute<State, string>
+  viewBox?: DOMAttribute<State, string>
+  viewport?: DOMAttribute<State, string>
+  width?: DOMAttribute<State, string>
+  x?: DOMAttribute<State, string>
+  y?: DOMAttribute<State, string>
+  zoomAndPan?: DOMAttribute<State, number>
   onanimationstart?: DOMEventHandler<State, AnimationEvent, Action>
   onauxclick?: DOMEventHandler<State, Event, Action>
   onblur?: DOMEventHandler<State, FocusEvent, Action>
@@ -10143,12 +10409,6 @@ export interface SVGSVGElementAttributes<State, Action> {
   onended?: DOMEventHandler<State, Event, Action>
   onerror?: DOMEventHandler<State, ErrorEvent, Action>
   onfocus?: DOMEventHandler<State, FocusEvent, Action>
-  scrollLeft?: DOMAttribute<State, number>
-  scrollTop?: DOMAttribute<State, number>
-  slot?: DOMAttribute<State, string>
-  style?: DOMAttribute<State, CSSProperties>
-  tabIndex?: DOMAttribute<State, number>
-  zoomAndPan?: DOMAttribute<State, number>
   onfullscreenchange?: DOMEventHandler<State, Event, Action>
   onfullscreenerror?: DOMEventHandler<State, Event, Action>
   ongotpointercapture?: DOMEventHandler<State, Event, Action>
@@ -10597,18 +10857,16 @@ export module html {
 
 export interface SVGTSpanElementAttributes<State, Action> {
   className?: DOMAttribute<State, string>
+  dx?: DOMAttribute<State, string>
+  dy?: DOMAttribute<State, string>
   id?: DOMAttribute<State, string>
+  lengthAdjust?: DOMAttribute<State, string>
   nonce?: DOMAttribute<State, string>
-  scrollLeft?: DOMAttribute<State, number>
-  scrollTop?: DOMAttribute<State, number>
-  slot?: DOMAttribute<State, string>
-  style?: DOMAttribute<State, CSSProperties>
-  tabIndex?: DOMAttribute<State, number>
   onabort?: DOMEventHandler<State, UIEvent, Action>
   onanimationcancel?: DOMEventHandler<State, Event, Action>
+  requiredExtensions?: DOMAttribute<State, string>
   onanimationend?: DOMEventHandler<State, AnimationEvent, Action>
   onanimationiteration?: DOMEventHandler<State, AnimationEvent, Action>
-  onanimationstart?: DOMEventHandler<State, AnimationEvent, Action>
   onauxclick?: DOMEventHandler<State, Event, Action>
   onblur?: DOMEventHandler<State, FocusEvent, Action>
   oncancel?: DOMEventHandler<State, Event, Action>
@@ -10625,7 +10883,6 @@ export interface SVGTSpanElementAttributes<State, Action> {
   ondrag?: DOMEventHandler<State, Event, Action>
   ondragend?: DOMEventHandler<State, DragEvent, Action>
   ondragenter?: DOMEventHandler<State, DragEvent, Action>
-  ondragexit?: DOMEventHandler<State, DragEvent, Action>
   ondragleave?: DOMEventHandler<State, DragEvent, Action>
   ondragover?: DOMEventHandler<State, DragEvent, Action>
   ondragstart?: DOMEventHandler<State, DragEvent, Action>
@@ -10636,6 +10893,19 @@ export interface SVGTSpanElementAttributes<State, Action> {
   onerror?: DOMEventHandler<State, ErrorEvent, Action>
   onfocus?: DOMEventHandler<State, FocusEvent, Action>
   onfullscreenchange?: DOMEventHandler<State, Event, Action>
+  rotate?: DOMAttribute<State, string>
+  scrollLeft?: DOMAttribute<State, number>
+  scrollTop?: DOMAttribute<State, number>
+  slot?: DOMAttribute<State, string>
+  style?: DOMAttribute<State, CSSProperties>
+  systemLanguage?: DOMAttribute<State, string>
+  tabIndex?: DOMAttribute<State, number>
+  textLength?: DOMAttribute<State, string>
+  transform?: DOMAttribute<State, string>
+  x?: DOMAttribute<State, string>
+  onanimationstart?: DOMEventHandler<State, AnimationEvent, Action>
+  y?: DOMAttribute<State, string>
+  ondragexit?: DOMEventHandler<State, DragEvent, Action>
   onfullscreenerror?: DOMEventHandler<State, Event, Action>
   ongotpointercapture?: DOMEventHandler<State, Event, Action>
   oninput?: DOMEventHandler<State, Event, Action>
@@ -10833,16 +11103,21 @@ export module html {
 
 export interface SVGFEImageElementAttributes<State, Action> {
   className?: DOMAttribute<State, string>
+  height?: DOMAttribute<State, string>
+  href?: DOMAttribute<State, string>
   id?: DOMAttribute<State, string>
   nonce?: DOMAttribute<State, string>
+  onabort?: DOMEventHandler<State, UIEvent, Action>
+  onanimationcancel?: DOMEventHandler<State, Event, Action>
+  onanimationend?: DOMEventHandler<State, AnimationEvent, Action>
+  preserveAspectRatio?: DOMAttribute<State, string>
+  result?: DOMAttribute<State, string>
   scrollLeft?: DOMAttribute<State, number>
   scrollTop?: DOMAttribute<State, number>
   slot?: DOMAttribute<State, string>
   style?: DOMAttribute<State, CSSProperties>
   tabIndex?: DOMAttribute<State, number>
-  onabort?: DOMEventHandler<State, UIEvent, Action>
-  onanimationcancel?: DOMEventHandler<State, Event, Action>
-  onanimationend?: DOMEventHandler<State, AnimationEvent, Action>
+  width?: DOMAttribute<State, string>
   onanimationiteration?: DOMEventHandler<State, AnimationEvent, Action>
   onanimationstart?: DOMEventHandler<State, AnimationEvent, Action>
   onauxclick?: DOMEventHandler<State, Event, Action>
@@ -10862,7 +11137,6 @@ export interface SVGFEImageElementAttributes<State, Action> {
   ondragend?: DOMEventHandler<State, DragEvent, Action>
   ondragenter?: DOMEventHandler<State, DragEvent, Action>
   ondragexit?: DOMEventHandler<State, DragEvent, Action>
-  ondragleave?: DOMEventHandler<State, DragEvent, Action>
   ondragover?: DOMEventHandler<State, DragEvent, Action>
   ondragstart?: DOMEventHandler<State, DragEvent, Action>
   ondrop?: DOMEventHandler<State, DragEvent, Action>
@@ -10872,6 +11146,9 @@ export interface SVGFEImageElementAttributes<State, Action> {
   onerror?: DOMEventHandler<State, ErrorEvent, Action>
   onfocus?: DOMEventHandler<State, FocusEvent, Action>
   onfullscreenchange?: DOMEventHandler<State, Event, Action>
+  x?: DOMAttribute<State, string>
+  y?: DOMAttribute<State, string>
+  ondragleave?: DOMEventHandler<State, DragEvent, Action>
   onfullscreenerror?: DOMEventHandler<State, Event, Action>
   ongotpointercapture?: DOMEventHandler<State, Event, Action>
   oninput?: DOMEventHandler<State, Event, Action>
@@ -11063,13 +11340,15 @@ export module svg {
 
 export interface SVGRadialGradientElementAttributes<State, Action> {
   className?: DOMAttribute<State, string>
+  cx?: DOMAttribute<State, string>
+  cy?: DOMAttribute<State, string>
+  fx?: DOMAttribute<State, string>
+  fy?: DOMAttribute<State, string>
+  gradientTransform?: DOMAttribute<State, string>
+  gradientUnits?: DOMAttribute<State, string>
+  href?: DOMAttribute<State, string>
   id?: DOMAttribute<State, string>
   nonce?: DOMAttribute<State, string>
-  scrollLeft?: DOMAttribute<State, number>
-  scrollTop?: DOMAttribute<State, number>
-  slot?: DOMAttribute<State, string>
-  style?: DOMAttribute<State, CSSProperties>
-  tabIndex?: DOMAttribute<State, number>
   onabort?: DOMEventHandler<State, UIEvent, Action>
   onanimationcancel?: DOMEventHandler<State, Event, Action>
   onanimationend?: DOMEventHandler<State, AnimationEvent, Action>
@@ -11091,7 +11370,6 @@ export interface SVGRadialGradientElementAttributes<State, Action> {
   ondrag?: DOMEventHandler<State, Event, Action>
   ondragend?: DOMEventHandler<State, DragEvent, Action>
   ondragenter?: DOMEventHandler<State, DragEvent, Action>
-  ondragexit?: DOMEventHandler<State, DragEvent, Action>
   ondragleave?: DOMEventHandler<State, DragEvent, Action>
   ondragover?: DOMEventHandler<State, DragEvent, Action>
   ondragstart?: DOMEventHandler<State, DragEvent, Action>
@@ -11102,6 +11380,14 @@ export interface SVGRadialGradientElementAttributes<State, Action> {
   onerror?: DOMEventHandler<State, ErrorEvent, Action>
   onfocus?: DOMEventHandler<State, FocusEvent, Action>
   onfullscreenchange?: DOMEventHandler<State, Event, Action>
+  r?: DOMAttribute<State, string>
+  scrollLeft?: DOMAttribute<State, number>
+  scrollTop?: DOMAttribute<State, number>
+  slot?: DOMAttribute<State, string>
+  spreadMethod?: DOMAttribute<State, string>
+  style?: DOMAttribute<State, CSSProperties>
+  tabIndex?: DOMAttribute<State, number>
+  ondragexit?: DOMEventHandler<State, DragEvent, Action>
   onfullscreenerror?: DOMEventHandler<State, Event, Action>
   ongotpointercapture?: DOMEventHandler<State, Event, Action>
   oninput?: DOMEventHandler<State, Event, Action>
@@ -12004,16 +12290,13 @@ export module svg {
 }
 
 export interface SVGPolygonElementAttributes<State, Action> {
+  animatedPoints?: DOMAttribute<State, string>
   className?: DOMAttribute<State, string>
   id?: DOMAttribute<State, string>
   nonce?: DOMAttribute<State, string>
-  scrollLeft?: DOMAttribute<State, number>
-  scrollTop?: DOMAttribute<State, number>
-  slot?: DOMAttribute<State, string>
-  style?: DOMAttribute<State, CSSProperties>
-  tabIndex?: DOMAttribute<State, number>
-  onabort?: DOMEventHandler<State, UIEvent, Action>
   onanimationcancel?: DOMEventHandler<State, Event, Action>
+  pathLength?: DOMAttribute<State, number>
+  onabort?: DOMEventHandler<State, UIEvent, Action>
   onanimationend?: DOMEventHandler<State, AnimationEvent, Action>
   onanimationiteration?: DOMEventHandler<State, AnimationEvent, Action>
   onanimationstart?: DOMEventHandler<State, AnimationEvent, Action>
@@ -12035,7 +12318,6 @@ export interface SVGPolygonElementAttributes<State, Action> {
   ondragenter?: DOMEventHandler<State, DragEvent, Action>
   ondragexit?: DOMEventHandler<State, DragEvent, Action>
   ondragleave?: DOMEventHandler<State, DragEvent, Action>
-  ondragover?: DOMEventHandler<State, DragEvent, Action>
   ondragstart?: DOMEventHandler<State, DragEvent, Action>
   ondrop?: DOMEventHandler<State, DragEvent, Action>
   ondurationchange?: DOMEventHandler<State, Event, Action>
@@ -12044,6 +12326,16 @@ export interface SVGPolygonElementAttributes<State, Action> {
   onerror?: DOMEventHandler<State, ErrorEvent, Action>
   onfocus?: DOMEventHandler<State, FocusEvent, Action>
   onfullscreenchange?: DOMEventHandler<State, Event, Action>
+  points?: DOMAttribute<State, string>
+  requiredExtensions?: DOMAttribute<State, string>
+  scrollLeft?: DOMAttribute<State, number>
+  scrollTop?: DOMAttribute<State, number>
+  slot?: DOMAttribute<State, string>
+  style?: DOMAttribute<State, CSSProperties>
+  systemLanguage?: DOMAttribute<State, string>
+  tabIndex?: DOMAttribute<State, number>
+  transform?: DOMAttribute<State, string>
+  ondragover?: DOMEventHandler<State, DragEvent, Action>
   onfullscreenerror?: DOMEventHandler<State, Event, Action>
   ongotpointercapture?: DOMEventHandler<State, Event, Action>
   oninput?: DOMEventHandler<State, Event, Action>
@@ -12118,13 +12410,11 @@ export module svg {
 
 export interface SVGFEGaussianBlurElementAttributes<State, Action> {
   className?: DOMAttribute<State, string>
+  height?: DOMAttribute<State, string>
   id?: DOMAttribute<State, string>
+  in1?: DOMAttribute<State, string>
   nonce?: DOMAttribute<State, string>
-  scrollLeft?: DOMAttribute<State, number>
-  scrollTop?: DOMAttribute<State, number>
-  slot?: DOMAttribute<State, string>
-  style?: DOMAttribute<State, CSSProperties>
-  tabIndex?: DOMAttribute<State, number>
+  result?: DOMAttribute<State, string>
   onabort?: DOMEventHandler<State, UIEvent, Action>
   onanimationcancel?: DOMEventHandler<State, Event, Action>
   onanimationend?: DOMEventHandler<State, AnimationEvent, Action>
@@ -12140,14 +12430,16 @@ export interface SVGFEGaussianBlurElementAttributes<State, Action> {
   onclose?: DOMEventHandler<State, Event, Action>
   oncontextmenu?: DOMEventHandler<State, Event, Action>
   oncopy?: DOMEventHandler<State, ClipboardEvent, Action>
-  oncuechange?: DOMEventHandler<State, Event, Action>
   oncut?: DOMEventHandler<State, ClipboardEvent, Action>
   ondblclick?: DOMEventHandler<State, Event, Action>
   ondrag?: DOMEventHandler<State, Event, Action>
+  scrollLeft?: DOMAttribute<State, number>
+  scrollTop?: DOMAttribute<State, number>
+  slot?: DOMAttribute<State, string>
+  oncuechange?: DOMEventHandler<State, Event, Action>
   ondragend?: DOMEventHandler<State, DragEvent, Action>
   ondragenter?: DOMEventHandler<State, DragEvent, Action>
   ondragexit?: DOMEventHandler<State, DragEvent, Action>
-  ondragleave?: DOMEventHandler<State, DragEvent, Action>
   ondragover?: DOMEventHandler<State, DragEvent, Action>
   ondragstart?: DOMEventHandler<State, DragEvent, Action>
   ondrop?: DOMEventHandler<State, DragEvent, Action>
@@ -12157,6 +12449,14 @@ export interface SVGFEGaussianBlurElementAttributes<State, Action> {
   onerror?: DOMEventHandler<State, ErrorEvent, Action>
   onfocus?: DOMEventHandler<State, FocusEvent, Action>
   onfullscreenchange?: DOMEventHandler<State, Event, Action>
+  stdDeviationX?: DOMAttribute<State, number>
+  stdDeviationY?: DOMAttribute<State, number>
+  style?: DOMAttribute<State, CSSProperties>
+  tabIndex?: DOMAttribute<State, number>
+  width?: DOMAttribute<State, string>
+  x?: DOMAttribute<State, string>
+  y?: DOMAttribute<State, string>
+  ondragleave?: DOMEventHandler<State, DragEvent, Action>
   onfullscreenerror?: DOMEventHandler<State, Event, Action>
   ongotpointercapture?: DOMEventHandler<State, Event, Action>
   oninput?: DOMEventHandler<State, Event, Action>
@@ -12233,15 +12533,17 @@ export interface SVGPathElementAttributes<State, Action> {
   className?: DOMAttribute<State, string>
   id?: DOMAttribute<State, string>
   nonce?: DOMAttribute<State, string>
-  scrollLeft?: DOMAttribute<State, number>
-  scrollTop?: DOMAttribute<State, number>
-  slot?: DOMAttribute<State, string>
-  style?: DOMAttribute<State, CSSProperties>
-  tabIndex?: DOMAttribute<State, number>
   onabort?: DOMEventHandler<State, UIEvent, Action>
   onanimationcancel?: DOMEventHandler<State, Event, Action>
   onanimationend?: DOMEventHandler<State, AnimationEvent, Action>
   onanimationiteration?: DOMEventHandler<State, AnimationEvent, Action>
+  pathSegList?: DOMAttribute<State, string>
+  scrollLeft?: DOMAttribute<State, number>
+  scrollTop?: DOMAttribute<State, number>
+  slot?: DOMAttribute<State, string>
+  style?: DOMAttribute<State, CSSProperties>
+  systemLanguage?: DOMAttribute<State, string>
+  tabIndex?: DOMAttribute<State, number>
   onanimationstart?: DOMEventHandler<State, AnimationEvent, Action>
   onauxclick?: DOMEventHandler<State, Event, Action>
   onblur?: DOMEventHandler<State, FocusEvent, Action>
@@ -12262,14 +12564,16 @@ export interface SVGPathElementAttributes<State, Action> {
   ondragexit?: DOMEventHandler<State, DragEvent, Action>
   ondragleave?: DOMEventHandler<State, DragEvent, Action>
   ondragover?: DOMEventHandler<State, DragEvent, Action>
-  ondragstart?: DOMEventHandler<State, DragEvent, Action>
   ondrop?: DOMEventHandler<State, DragEvent, Action>
   ondurationchange?: DOMEventHandler<State, Event, Action>
   onemptied?: DOMEventHandler<State, Event, Action>
   onended?: DOMEventHandler<State, Event, Action>
   onerror?: DOMEventHandler<State, ErrorEvent, Action>
   onfocus?: DOMEventHandler<State, FocusEvent, Action>
+  requiredExtensions?: DOMAttribute<State, string>
   onfullscreenchange?: DOMEventHandler<State, Event, Action>
+  transform?: DOMAttribute<State, string>
+  ondragstart?: DOMEventHandler<State, DragEvent, Action>
   onfullscreenerror?: DOMEventHandler<State, Event, Action>
   ongotpointercapture?: DOMEventHandler<State, Event, Action>
   oninput?: DOMEventHandler<State, Event, Action>
@@ -12487,19 +12791,17 @@ export module html {
 
 export interface SVGCircleElementAttributes<State, Action> {
   className?: DOMAttribute<State, string>
+  cx?: DOMAttribute<State, string>
+  cy?: DOMAttribute<State, string>
   id?: DOMAttribute<State, string>
   nonce?: DOMAttribute<State, string>
-  scrollLeft?: DOMAttribute<State, number>
-  scrollTop?: DOMAttribute<State, number>
-  slot?: DOMAttribute<State, string>
-  style?: DOMAttribute<State, CSSProperties>
-  tabIndex?: DOMAttribute<State, number>
-  onabort?: DOMEventHandler<State, UIEvent, Action>
   onanimationcancel?: DOMEventHandler<State, Event, Action>
   onanimationend?: DOMEventHandler<State, AnimationEvent, Action>
   onanimationiteration?: DOMEventHandler<State, AnimationEvent, Action>
-  onanimationstart?: DOMEventHandler<State, AnimationEvent, Action>
   onauxclick?: DOMEventHandler<State, Event, Action>
+  requiredExtensions?: DOMAttribute<State, string>
+  onanimationstart?: DOMEventHandler<State, AnimationEvent, Action>
+  r?: DOMAttribute<State, string>
   onblur?: DOMEventHandler<State, FocusEvent, Action>
   oncancel?: DOMEventHandler<State, Event, Action>
   oncanplay?: DOMEventHandler<State, Event, Action>
@@ -12513,9 +12815,18 @@ export interface SVGCircleElementAttributes<State, Action> {
   oncut?: DOMEventHandler<State, ClipboardEvent, Action>
   ondblclick?: DOMEventHandler<State, Event, Action>
   ondrag?: DOMEventHandler<State, Event, Action>
-  ondragend?: DOMEventHandler<State, DragEvent, Action>
-  ondragenter?: DOMEventHandler<State, DragEvent, Action>
   ondragexit?: DOMEventHandler<State, DragEvent, Action>
+  pathLength?: DOMAttribute<State, number>
+  scrollLeft?: DOMAttribute<State, number>
+  onabort?: DOMEventHandler<State, UIEvent, Action>
+  scrollTop?: DOMAttribute<State, number>
+  slot?: DOMAttribute<State, string>
+  ondragend?: DOMEventHandler<State, DragEvent, Action>
+  style?: DOMAttribute<State, CSSProperties>
+  systemLanguage?: DOMAttribute<State, string>
+  tabIndex?: DOMAttribute<State, number>
+  transform?: DOMAttribute<State, string>
+  ondragenter?: DOMEventHandler<State, DragEvent, Action>
   ondragleave?: DOMEventHandler<State, DragEvent, Action>
   ondragover?: DOMEventHandler<State, DragEvent, Action>
   ondragstart?: DOMEventHandler<State, DragEvent, Action>
@@ -12848,19 +13159,16 @@ export module html {
 }
 
 export interface SVGFEFuncRElementAttributes<State, Action> {
+  amplitude?: DOMAttribute<State, number>
   className?: DOMAttribute<State, string>
+  exponent?: DOMAttribute<State, number>
   id?: DOMAttribute<State, string>
+  intercept?: DOMAttribute<State, number>
   nonce?: DOMAttribute<State, string>
-  scrollLeft?: DOMAttribute<State, number>
-  scrollTop?: DOMAttribute<State, number>
-  slot?: DOMAttribute<State, string>
-  style?: DOMAttribute<State, CSSProperties>
-  tabIndex?: DOMAttribute<State, number>
+  offset?: DOMAttribute<State, number>
   onabort?: DOMEventHandler<State, UIEvent, Action>
   onanimationcancel?: DOMEventHandler<State, Event, Action>
   onanimationend?: DOMEventHandler<State, AnimationEvent, Action>
-  onanimationiteration?: DOMEventHandler<State, AnimationEvent, Action>
-  onanimationstart?: DOMEventHandler<State, AnimationEvent, Action>
   onauxclick?: DOMEventHandler<State, Event, Action>
   onblur?: DOMEventHandler<State, FocusEvent, Action>
   oncancel?: DOMEventHandler<State, Event, Action>
@@ -12868,17 +13176,18 @@ export interface SVGFEFuncRElementAttributes<State, Action> {
   oncanplaythrough?: DOMEventHandler<State, Event, Action>
   onchange?: DOMEventHandler<State, Event, Action>
   onclick?: DOMEventHandler<State, MouseEvent, Action>
-  onclose?: DOMEventHandler<State, Event, Action>
   oncontextmenu?: DOMEventHandler<State, Event, Action>
   oncopy?: DOMEventHandler<State, ClipboardEvent, Action>
   oncuechange?: DOMEventHandler<State, Event, Action>
+  scrollLeft?: DOMAttribute<State, number>
+  scrollTop?: DOMAttribute<State, number>
+  onclose?: DOMEventHandler<State, Event, Action>
   oncut?: DOMEventHandler<State, ClipboardEvent, Action>
   ondblclick?: DOMEventHandler<State, Event, Action>
   ondrag?: DOMEventHandler<State, Event, Action>
   ondragend?: DOMEventHandler<State, DragEvent, Action>
   ondragenter?: DOMEventHandler<State, DragEvent, Action>
   ondragexit?: DOMEventHandler<State, DragEvent, Action>
-  ondragleave?: DOMEventHandler<State, DragEvent, Action>
   ondragover?: DOMEventHandler<State, DragEvent, Action>
   ondragstart?: DOMEventHandler<State, DragEvent, Action>
   ondrop?: DOMEventHandler<State, DragEvent, Action>
@@ -12888,6 +13197,15 @@ export interface SVGFEFuncRElementAttributes<State, Action> {
   onerror?: DOMEventHandler<State, ErrorEvent, Action>
   onfocus?: DOMEventHandler<State, FocusEvent, Action>
   onfullscreenchange?: DOMEventHandler<State, Event, Action>
+  slope?: DOMAttribute<State, number>
+  slot?: DOMAttribute<State, string>
+  style?: DOMAttribute<State, CSSProperties>
+  tabIndex?: DOMAttribute<State, number>
+  onanimationiteration?: DOMEventHandler<State, AnimationEvent, Action>
+  tableValues?: DOMAttribute<State, string>
+  onanimationstart?: DOMEventHandler<State, AnimationEvent, Action>
+  type?: DOMAttribute<State, string>
+  ondragleave?: DOMEventHandler<State, DragEvent, Action>
   onfullscreenerror?: DOMEventHandler<State, Event, Action>
   ongotpointercapture?: DOMEventHandler<State, Event, Action>
   oninput?: DOMEventHandler<State, Event, Action>
@@ -12962,13 +13280,13 @@ export module svg {
 
 export interface SVGFEDisplacementMapElementAttributes<State, Action> {
   className?: DOMAttribute<State, string>
+  height?: DOMAttribute<State, string>
   id?: DOMAttribute<State, string>
+  in1?: DOMAttribute<State, string>
+  in2?: DOMAttribute<State, string>
   nonce?: DOMAttribute<State, string>
-  scrollLeft?: DOMAttribute<State, number>
-  scrollTop?: DOMAttribute<State, number>
-  slot?: DOMAttribute<State, string>
-  style?: DOMAttribute<State, CSSProperties>
-  tabIndex?: DOMAttribute<State, number>
+  result?: DOMAttribute<State, string>
+  scale?: DOMAttribute<State, number>
   onabort?: DOMEventHandler<State, UIEvent, Action>
   onanimationcancel?: DOMEventHandler<State, Event, Action>
   onanimationend?: DOMEventHandler<State, AnimationEvent, Action>
@@ -12987,9 +13305,19 @@ export interface SVGFEDisplacementMapElementAttributes<State, Action> {
   oncuechange?: DOMEventHandler<State, Event, Action>
   oncut?: DOMEventHandler<State, ClipboardEvent, Action>
   ondblclick?: DOMEventHandler<State, Event, Action>
-  ondrag?: DOMEventHandler<State, Event, Action>
-  ondragend?: DOMEventHandler<State, DragEvent, Action>
   ondragenter?: DOMEventHandler<State, DragEvent, Action>
+  scrollLeft?: DOMAttribute<State, number>
+  scrollTop?: DOMAttribute<State, number>
+  slot?: DOMAttribute<State, string>
+  style?: DOMAttribute<State, CSSProperties>
+  tabIndex?: DOMAttribute<State, number>
+  width?: DOMAttribute<State, string>
+  x?: DOMAttribute<State, string>
+  xChannelSelector?: DOMAttribute<State, string>
+  ondrag?: DOMEventHandler<State, Event, Action>
+  y?: DOMAttribute<State, string>
+  yChannelSelector?: DOMAttribute<State, string>
+  ondragend?: DOMEventHandler<State, DragEvent, Action>
   ondragexit?: DOMEventHandler<State, DragEvent, Action>
   ondragleave?: DOMEventHandler<State, DragEvent, Action>
   ondragover?: DOMEventHandler<State, DragEvent, Action>
@@ -13080,16 +13408,22 @@ export module svg {
 
 export interface SVGLinearGradientElementAttributes<State, Action> {
   className?: DOMAttribute<State, string>
+  gradientTransform?: DOMAttribute<State, string>
+  gradientUnits?: DOMAttribute<State, string>
+  href?: DOMAttribute<State, string>
   id?: DOMAttribute<State, string>
   nonce?: DOMAttribute<State, string>
+  onabort?: DOMEventHandler<State, UIEvent, Action>
   scrollLeft?: DOMAttribute<State, number>
   scrollTop?: DOMAttribute<State, number>
   slot?: DOMAttribute<State, string>
+  onanimationend?: DOMEventHandler<State, AnimationEvent, Action>
+  spreadMethod?: DOMAttribute<State, string>
   style?: DOMAttribute<State, CSSProperties>
   tabIndex?: DOMAttribute<State, number>
-  onabort?: DOMEventHandler<State, UIEvent, Action>
+  x1?: DOMAttribute<State, string>
+  x2?: DOMAttribute<State, string>
   onanimationcancel?: DOMEventHandler<State, Event, Action>
-  onanimationend?: DOMEventHandler<State, AnimationEvent, Action>
   onanimationiteration?: DOMEventHandler<State, AnimationEvent, Action>
   onanimationstart?: DOMEventHandler<State, AnimationEvent, Action>
   onauxclick?: DOMEventHandler<State, Event, Action>
@@ -13109,7 +13443,6 @@ export interface SVGLinearGradientElementAttributes<State, Action> {
   ondragend?: DOMEventHandler<State, DragEvent, Action>
   ondragenter?: DOMEventHandler<State, DragEvent, Action>
   ondragexit?: DOMEventHandler<State, DragEvent, Action>
-  ondragleave?: DOMEventHandler<State, DragEvent, Action>
   ondragover?: DOMEventHandler<State, DragEvent, Action>
   ondragstart?: DOMEventHandler<State, DragEvent, Action>
   ondrop?: DOMEventHandler<State, DragEvent, Action>
@@ -13119,6 +13452,9 @@ export interface SVGLinearGradientElementAttributes<State, Action> {
   onerror?: DOMEventHandler<State, ErrorEvent, Action>
   onfocus?: DOMEventHandler<State, FocusEvent, Action>
   onfullscreenchange?: DOMEventHandler<State, Event, Action>
+  y1?: DOMAttribute<State, string>
+  y2?: DOMAttribute<State, string>
+  ondragleave?: DOMEventHandler<State, DragEvent, Action>
   onfullscreenerror?: DOMEventHandler<State, Event, Action>
   ongotpointercapture?: DOMEventHandler<State, Event, Action>
   oninput?: DOMEventHandler<State, Event, Action>
@@ -13193,18 +13529,22 @@ export module svg {
 
 export interface SVGRectElementAttributes<State, Action> {
   className?: DOMAttribute<State, string>
+  height?: DOMAttribute<State, string>
   id?: DOMAttribute<State, string>
   nonce?: DOMAttribute<State, string>
+  ry?: DOMAttribute<State, string>
+  onabort?: DOMEventHandler<State, UIEvent, Action>
+  onanimationcancel?: DOMEventHandler<State, Event, Action>
+  pathLength?: DOMAttribute<State, number>
+  requiredExtensions?: DOMAttribute<State, string>
   scrollLeft?: DOMAttribute<State, number>
   scrollTop?: DOMAttribute<State, number>
   slot?: DOMAttribute<State, string>
   style?: DOMAttribute<State, CSSProperties>
+  systemLanguage?: DOMAttribute<State, string>
   tabIndex?: DOMAttribute<State, number>
-  onabort?: DOMEventHandler<State, UIEvent, Action>
-  onanimationcancel?: DOMEventHandler<State, Event, Action>
+  transform?: DOMAttribute<State, string>
   onanimationend?: DOMEventHandler<State, AnimationEvent, Action>
-  onanimationiteration?: DOMEventHandler<State, AnimationEvent, Action>
-  onanimationstart?: DOMEventHandler<State, AnimationEvent, Action>
   onauxclick?: DOMEventHandler<State, Event, Action>
   onblur?: DOMEventHandler<State, FocusEvent, Action>
   oncancel?: DOMEventHandler<State, Event, Action>
@@ -13221,7 +13561,6 @@ export interface SVGRectElementAttributes<State, Action> {
   ondrag?: DOMEventHandler<State, Event, Action>
   ondragend?: DOMEventHandler<State, DragEvent, Action>
   ondragenter?: DOMEventHandler<State, DragEvent, Action>
-  ondragexit?: DOMEventHandler<State, DragEvent, Action>
   ondragleave?: DOMEventHandler<State, DragEvent, Action>
   ondragover?: DOMEventHandler<State, DragEvent, Action>
   ondragstart?: DOMEventHandler<State, DragEvent, Action>
@@ -13229,9 +13568,16 @@ export interface SVGRectElementAttributes<State, Action> {
   ondurationchange?: DOMEventHandler<State, Event, Action>
   onemptied?: DOMEventHandler<State, Event, Action>
   onended?: DOMEventHandler<State, Event, Action>
-  onerror?: DOMEventHandler<State, ErrorEvent, Action>
   onfocus?: DOMEventHandler<State, FocusEvent, Action>
   onfullscreenchange?: DOMEventHandler<State, Event, Action>
+  rx?: DOMAttribute<State, string>
+  onerror?: DOMEventHandler<State, ErrorEvent, Action>
+  width?: DOMAttribute<State, string>
+  onanimationiteration?: DOMEventHandler<State, AnimationEvent, Action>
+  x?: DOMAttribute<State, string>
+  onanimationstart?: DOMEventHandler<State, AnimationEvent, Action>
+  y?: DOMAttribute<State, string>
+  ondragexit?: DOMEventHandler<State, DragEvent, Action>
   onfullscreenerror?: DOMEventHandler<State, Event, Action>
   ongotpointercapture?: DOMEventHandler<State, Event, Action>
   oninput?: DOMEventHandler<State, Event, Action>
@@ -13303,16 +13649,13 @@ export module svg {
 }
 
 export interface SVGPolylineElementAttributes<State, Action> {
+  animatedPoints?: DOMAttribute<State, string>
   className?: DOMAttribute<State, string>
   id?: DOMAttribute<State, string>
   nonce?: DOMAttribute<State, string>
-  scrollLeft?: DOMAttribute<State, number>
-  scrollTop?: DOMAttribute<State, number>
-  slot?: DOMAttribute<State, string>
-  style?: DOMAttribute<State, CSSProperties>
-  tabIndex?: DOMAttribute<State, number>
-  onabort?: DOMEventHandler<State, UIEvent, Action>
   onanimationcancel?: DOMEventHandler<State, Event, Action>
+  pathLength?: DOMAttribute<State, number>
+  onabort?: DOMEventHandler<State, UIEvent, Action>
   onanimationend?: DOMEventHandler<State, AnimationEvent, Action>
   onanimationiteration?: DOMEventHandler<State, AnimationEvent, Action>
   onanimationstart?: DOMEventHandler<State, AnimationEvent, Action>
@@ -13334,7 +13677,6 @@ export interface SVGPolylineElementAttributes<State, Action> {
   ondragenter?: DOMEventHandler<State, DragEvent, Action>
   ondragexit?: DOMEventHandler<State, DragEvent, Action>
   ondragleave?: DOMEventHandler<State, DragEvent, Action>
-  ondragover?: DOMEventHandler<State, DragEvent, Action>
   ondragstart?: DOMEventHandler<State, DragEvent, Action>
   ondrop?: DOMEventHandler<State, DragEvent, Action>
   ondurationchange?: DOMEventHandler<State, Event, Action>
@@ -13343,6 +13685,16 @@ export interface SVGPolylineElementAttributes<State, Action> {
   onerror?: DOMEventHandler<State, ErrorEvent, Action>
   onfocus?: DOMEventHandler<State, FocusEvent, Action>
   onfullscreenchange?: DOMEventHandler<State, Event, Action>
+  points?: DOMAttribute<State, string>
+  requiredExtensions?: DOMAttribute<State, string>
+  scrollLeft?: DOMAttribute<State, number>
+  scrollTop?: DOMAttribute<State, number>
+  slot?: DOMAttribute<State, string>
+  style?: DOMAttribute<State, CSSProperties>
+  systemLanguage?: DOMAttribute<State, string>
+  tabIndex?: DOMAttribute<State, number>
+  transform?: DOMAttribute<State, string>
+  ondragover?: DOMEventHandler<State, DragEvent, Action>
   onfullscreenerror?: DOMEventHandler<State, Event, Action>
   ongotpointercapture?: DOMEventHandler<State, Event, Action>
   oninput?: DOMEventHandler<State, Event, Action>
@@ -13720,13 +14072,13 @@ export module html {
 
 export interface SVGFEOffsetElementAttributes<State, Action> {
   className?: DOMAttribute<State, string>
+  dx?: DOMAttribute<State, number>
+  dy?: DOMAttribute<State, number>
+  height?: DOMAttribute<State, string>
   id?: DOMAttribute<State, string>
+  in1?: DOMAttribute<State, string>
   nonce?: DOMAttribute<State, string>
-  scrollLeft?: DOMAttribute<State, number>
-  scrollTop?: DOMAttribute<State, number>
-  slot?: DOMAttribute<State, string>
-  style?: DOMAttribute<State, CSSProperties>
-  tabIndex?: DOMAttribute<State, number>
+  result?: DOMAttribute<State, string>
   onabort?: DOMEventHandler<State, UIEvent, Action>
   onanimationcancel?: DOMEventHandler<State, Event, Action>
   onanimationend?: DOMEventHandler<State, AnimationEvent, Action>
@@ -13746,8 +14098,16 @@ export interface SVGFEOffsetElementAttributes<State, Action> {
   oncut?: DOMEventHandler<State, ClipboardEvent, Action>
   ondblclick?: DOMEventHandler<State, Event, Action>
   ondrag?: DOMEventHandler<State, Event, Action>
-  ondragend?: DOMEventHandler<State, DragEvent, Action>
   ondragenter?: DOMEventHandler<State, DragEvent, Action>
+  scrollLeft?: DOMAttribute<State, number>
+  scrollTop?: DOMAttribute<State, number>
+  slot?: DOMAttribute<State, string>
+  ondragend?: DOMEventHandler<State, DragEvent, Action>
+  style?: DOMAttribute<State, CSSProperties>
+  tabIndex?: DOMAttribute<State, number>
+  width?: DOMAttribute<State, string>
+  x?: DOMAttribute<State, string>
+  y?: DOMAttribute<State, string>
   ondragexit?: DOMEventHandler<State, DragEvent, Action>
   ondragleave?: DOMEventHandler<State, DragEvent, Action>
   ondragover?: DOMEventHandler<State, DragEvent, Action>
@@ -14797,15 +15157,16 @@ export interface SVGSwitchElementAttributes<State, Action> {
   className?: DOMAttribute<State, string>
   id?: DOMAttribute<State, string>
   nonce?: DOMAttribute<State, string>
+  onabort?: DOMEventHandler<State, UIEvent, Action>
+  onanimationcancel?: DOMEventHandler<State, Event, Action>
+  onanimationend?: DOMEventHandler<State, AnimationEvent, Action>
+  onanimationiteration?: DOMEventHandler<State, AnimationEvent, Action>
+  requiredExtensions?: DOMAttribute<State, string>
   scrollLeft?: DOMAttribute<State, number>
   scrollTop?: DOMAttribute<State, number>
   slot?: DOMAttribute<State, string>
   style?: DOMAttribute<State, CSSProperties>
   tabIndex?: DOMAttribute<State, number>
-  onabort?: DOMEventHandler<State, UIEvent, Action>
-  onanimationcancel?: DOMEventHandler<State, Event, Action>
-  onanimationend?: DOMEventHandler<State, AnimationEvent, Action>
-  onanimationiteration?: DOMEventHandler<State, AnimationEvent, Action>
   onanimationstart?: DOMEventHandler<State, AnimationEvent, Action>
   onauxclick?: DOMEventHandler<State, Event, Action>
   onblur?: DOMEventHandler<State, FocusEvent, Action>
@@ -14826,14 +15187,16 @@ export interface SVGSwitchElementAttributes<State, Action> {
   ondragexit?: DOMEventHandler<State, DragEvent, Action>
   ondragleave?: DOMEventHandler<State, DragEvent, Action>
   ondragover?: DOMEventHandler<State, DragEvent, Action>
-  ondragstart?: DOMEventHandler<State, DragEvent, Action>
   ondrop?: DOMEventHandler<State, DragEvent, Action>
   ondurationchange?: DOMEventHandler<State, Event, Action>
   onemptied?: DOMEventHandler<State, Event, Action>
   onended?: DOMEventHandler<State, Event, Action>
   onerror?: DOMEventHandler<State, ErrorEvent, Action>
   onfocus?: DOMEventHandler<State, FocusEvent, Action>
+  systemLanguage?: DOMAttribute<State, string>
   onfullscreenchange?: DOMEventHandler<State, Event, Action>
+  transform?: DOMAttribute<State, string>
+  ondragstart?: DOMEventHandler<State, DragEvent, Action>
   onfullscreenerror?: DOMEventHandler<State, Event, Action>
   ongotpointercapture?: DOMEventHandler<State, Event, Action>
   oninput?: DOMEventHandler<State, Event, Action>
@@ -15034,18 +15397,19 @@ export interface SVGStopElementAttributes<State, Action> {
   className?: DOMAttribute<State, string>
   id?: DOMAttribute<State, string>
   nonce?: DOMAttribute<State, string>
-  scrollLeft?: DOMAttribute<State, number>
-  scrollTop?: DOMAttribute<State, number>
-  slot?: DOMAttribute<State, string>
+  offset?: DOMAttribute<State, number>
+  onabort?: DOMEventHandler<State, UIEvent, Action>
   style?: DOMAttribute<State, CSSProperties>
   tabIndex?: DOMAttribute<State, number>
-  onabort?: DOMEventHandler<State, UIEvent, Action>
-  onanimationcancel?: DOMEventHandler<State, Event, Action>
-  onanimationend?: DOMEventHandler<State, AnimationEvent, Action>
   onanimationiteration?: DOMEventHandler<State, AnimationEvent, Action>
+  slot?: DOMAttribute<State, string>
+  onanimationend?: DOMEventHandler<State, AnimationEvent, Action>
+  scrollLeft?: DOMAttribute<State, number>
+  onanimationcancel?: DOMEventHandler<State, Event, Action>
   onanimationstart?: DOMEventHandler<State, AnimationEvent, Action>
   onauxclick?: DOMEventHandler<State, Event, Action>
   onblur?: DOMEventHandler<State, FocusEvent, Action>
+  scrollTop?: DOMAttribute<State, number>
   oncancel?: DOMEventHandler<State, Event, Action>
   oncanplay?: DOMEventHandler<State, Event, Action>
   oncanplaythrough?: DOMEventHandler<State, Event, Action>
@@ -15524,20 +15888,18 @@ export module html {
 
 export interface SVGMaskElementAttributes<State, Action> {
   className?: DOMAttribute<State, string>
+  height?: DOMAttribute<State, string>
   id?: DOMAttribute<State, string>
+  maskContentUnits?: DOMAttribute<State, string>
+  maskUnits?: DOMAttribute<State, string>
   nonce?: DOMAttribute<State, string>
-  scrollLeft?: DOMAttribute<State, number>
-  scrollTop?: DOMAttribute<State, number>
-  slot?: DOMAttribute<State, string>
-  style?: DOMAttribute<State, CSSProperties>
-  tabIndex?: DOMAttribute<State, number>
   onabort?: DOMEventHandler<State, UIEvent, Action>
   onanimationcancel?: DOMEventHandler<State, Event, Action>
   onanimationend?: DOMEventHandler<State, AnimationEvent, Action>
   onanimationiteration?: DOMEventHandler<State, AnimationEvent, Action>
   onanimationstart?: DOMEventHandler<State, AnimationEvent, Action>
+  scrollLeft?: DOMAttribute<State, number>
   onauxclick?: DOMEventHandler<State, Event, Action>
-  onblur?: DOMEventHandler<State, FocusEvent, Action>
   oncancel?: DOMEventHandler<State, Event, Action>
   oncanplay?: DOMEventHandler<State, Event, Action>
   oncanplaythrough?: DOMEventHandler<State, Event, Action>
@@ -15551,8 +15913,16 @@ export interface SVGMaskElementAttributes<State, Action> {
   ondblclick?: DOMEventHandler<State, Event, Action>
   ondrag?: DOMEventHandler<State, Event, Action>
   ondragend?: DOMEventHandler<State, DragEvent, Action>
+  scrollTop?: DOMAttribute<State, number>
   ondragenter?: DOMEventHandler<State, DragEvent, Action>
+  slot?: DOMAttribute<State, string>
+  style?: DOMAttribute<State, CSSProperties>
+  onblur?: DOMEventHandler<State, FocusEvent, Action>
+  tabIndex?: DOMAttribute<State, number>
   ondragexit?: DOMEventHandler<State, DragEvent, Action>
+  width?: DOMAttribute<State, string>
+  x?: DOMAttribute<State, string>
+  y?: DOMAttribute<State, string>
   ondragleave?: DOMEventHandler<State, DragEvent, Action>
   ondragover?: DOMEventHandler<State, DragEvent, Action>
   ondragstart?: DOMEventHandler<State, DragEvent, Action>

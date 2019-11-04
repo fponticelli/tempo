@@ -20,7 +20,6 @@ export const generateTypes = (elements: Browser.Interface[], webidl: Browser.Web
     importsWebContent(),
     elements.map(interfaceTemplate(webidl)).join('\n\n')
   ].join('\n\n')
-  console.log(result.split('\n').length)
   return result
 }
 
@@ -29,7 +28,6 @@ export const generateWebAttributes = (elements: Browser.Interface[], webidl: Bro
     importsAttributesContent(),
     attributesTemplate(elements, webidl)
   ].join('\n\n')
-  console.log(result.split('\n').length)
   return result
 }
 
@@ -63,7 +61,6 @@ const collectProperties = (webidl: Browser.WebIdl) => (inter: Browser.Interface)
   let local = (inter.properties && inter.properties.property) || {}
   if (inter.implements) {
     local = inter.implements.reduce((acc: Record<string, Browser.Property>, curr) => {
-      // console.log(curr, !!webidl.mixins!.mixin[curr], !!webidl.interfaces!.interface[curr])
       const mixin = webidl.mixins!.mixin[curr] || webidl.interfaces!.interface[curr]
       if (!mixin)
         return acc
@@ -88,13 +85,36 @@ const collectProperties = (webidl: Browser.WebIdl) => (inter: Browser.Interface)
 const excludeProperties = new Set(['innerHTML', 'innerText', 'textContent', 'nodeValue', 'outerHTML'])
 
 const isExposableProperty = (prop: Browser.Property): boolean => {
+  if (prop.name.toLowerCase().includes('stroke')
+      || prop.name.toLowerCase().includes('fill')
+      || prop.name.toLowerCase().includes('viewbox')) {
+    console.log(prop)
+  }
   if (typeof prop.type === 'string' && prop.type.includes('Element'))
     return false
-  return !prop.deprecated && (!prop['read-only'] || prop.name === 'style') && !excludeProperties.has(prop.name)
+  return (typeof prop.type === 'string' && prop.type.startsWith('SVG')) ||
+         (!prop.deprecated && (!prop['read-only'] || prop.name === 'style') && !excludeProperties.has(prop.name))
 }
 
 const propertyTypes: Record<string, string> = {
-  'CSSStyleDeclaration': 'CSSProperties'
+  'CSSStyleDeclaration': 'CSSProperties',
+  'SVGAnimatedLength': 'string',
+  'SVGAnimatedNumber': 'number',
+  'SVGAnimatedInteger': 'number',
+  'SVGAnimatedAngle': 'string',
+  'SVGAnimatedEnumeration': 'string',
+  'SVGPointList': 'string',
+  'SVGPoint': 'string',
+  'SVGAnimatedLengthList': 'string',
+  'SVGAnimatedTransformList': 'string',
+  'SVGAnimatedString': 'string',
+  'SVGAnimatedNumberList': 'string',
+  'SVGPathSegList': 'string',
+  'SVGAnimatedBoolean': 'boolean',
+  'SVGAnimatedPreserveAspectRatio': 'string',
+  'SVGStringList': 'string',
+  'SVGAnimatedRect': 'string',
+  'SVGRect': 'string'
 }
 
 const mapPropertyType = (type: string): string => {
@@ -286,7 +306,6 @@ const getAttributes = (webidl: Browser.WebIdl, inter: Browser.Interface) => {
 const attributesTypeTemplate = (webidl: Browser.WebIdl) => (inter: Browser.Interface) => {
   const name = getAttributesTypeName(inter)
   const properties = getAttributes(webidl, inter)
-  // console.log(properties)
   return `export interface ${name}<State, Action> {
   ${properties.map(propertyTemplate).join('\n  ')}
 }`
@@ -309,7 +328,6 @@ export interface DOMAttributes<State, Action, El> extends MoodAttributes<State, 
 }
 
 const getAllAttributes = (elements: Browser.Interface[], webidl: Browser.WebIdl) => {
-  // console.log(inter)
   const accumulator = new Map<string, string[]>()
   elements.forEach(element => {
     getAttributes(webidl, element).forEach(attribute => {
@@ -338,14 +356,12 @@ const getAllAttributes = (elements: Browser.Interface[], webidl: Browser.WebIdl)
 }
 
 const interfaceTemplate = (webidl: Browser.WebIdl) => (inter: Browser.Interface) => {
-  // console.log(inter)
   if (!inter.element) return ''
   const result = [
       attributesTypeTemplate(webidl)(inter)
     ]
     .concat(inter.element.filter(filterElement(inter)).map(elementTemplate(inter)))
     .join('\n\n')
-  // console.log(result)
   return result
 }
 

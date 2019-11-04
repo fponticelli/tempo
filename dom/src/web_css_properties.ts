@@ -2,6 +2,23 @@
 import { DOMAttribute } from './value'
 
 export interface CSSProperties {
+  clipRule?: string
+  colorInterpolation?: string
+  colorRendering?: string
+  fill?: string
+  fillOpacity?: string
+  fillRule?: string
+  shapeRendering?: string
+  stroke?: string
+  strokeDasharray?: string
+  strokeDashoffset?: string
+  strokeLinecap?: string
+  strokeLinejoin?: string
+  strokeMiterlimit?: string
+  strokeOpacity?: string
+  strokeWidth?: string
+  vectorEffect?: string
+
   additiveSymbols?: string
   alignContent?: string
   alignItems?: string
@@ -355,6 +372,23 @@ export interface CSSProperties {
 }
 
 export interface CSSAttributes<State> {
+  $clipRule?: DOMAttribute<State, string>
+  $colorInterpolation?: DOMAttribute<State, string>
+  $colorRendering?: DOMAttribute<State, string>
+  $fill?: DOMAttribute<State, string>
+  $fillOpacity?: DOMAttribute<State, string>
+  $fillRule?: DOMAttribute<State, string>
+  $shapeRendering?: DOMAttribute<State, string>
+  $stroke?: DOMAttribute<State, string>
+  $strokeDasharray?: DOMAttribute<State, string>
+  $strokeDashoffset?: DOMAttribute<State, string>
+  $strokeLinecap?: DOMAttribute<State, string>
+  $strokeLinejoin?: DOMAttribute<State, string>
+  $strokeMiterlimit?: DOMAttribute<State, string>
+  $strokeOpacity?: DOMAttribute<State, string>
+  $strokeWidth?: DOMAttribute<State, string>
+  $vectorEffect?: DOMAttribute<State, string>
+
   $additiveSymbols?: DOMAttribute<State, string>
   $alignContent?: DOMAttribute<State, string>
   $alignItems?: DOMAttribute<State, string>
@@ -708,6 +742,21 @@ export interface CSSAttributes<State> {
 }
 
 export const cssMapper = {
+  clipRule: 'clip-rule',
+  colorInterpolation: 'color-interpolation',
+  colorRendering: 'color-rendering',
+  fillOpacity: 'fill-opacity',
+  fillRule: 'fill-rule',
+  shapeRendering: 'shape-rendering',
+  strokeDasharray: 'stroke-dasharray',
+  strokeDashoffset: 'stroke-dashoffset',
+  strokeLinecap: 'stroke-linecap',
+  strokeLinejoin: 'stroke-linejoin',
+  strokeMiterlimit: 'stroke-miterlimit',
+  strokeOpacity: 'stroke-opacity',
+  strokeWidth: 'stroke-width',
+  vectorEffect: 'vector-effect',
+
   additiveSymbols: 'additive-symbols',
   alignContent: 'align-content',
   alignItems: 'align-items',
