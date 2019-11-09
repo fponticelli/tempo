@@ -1,6 +1,9 @@
 module.exports = {
   preset: 'ts-jest',
-  testEnvironment: 'node',
-  exclude: ['extern'],
-  packageJson: 'package.json'
+  rootDir: 'test',
+  globals: {
+    'ts-jest': {
+      packageJson: 'package.json'
+    }
+  }
 };

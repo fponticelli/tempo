@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="jest tests" tests="60" failures="0" time="5.145">
+  <testsuite name="component" errors="0" failures="0" skipped="0" timestamp="2019-11-09T20:32:31" time="2.875" tests="1">
+    <testcase classname="component fromElements sets-up the right defaults" name="component fromElements sets-up the right defaults" time="0.045">
+    </testcase>
+  </testsuite>
+  <testsuite name="map" errors="0" failures="0" skipped="0" timestamp="2019-11-09T20:32:31" time="2.908" tests="5">
+    <testcase classname="map mapState" name="map mapState" time="0.04">
+    </testcase>
+    <testcase classname="map mapState only static" name="map mapState only static" time="0.007">
+    </testcase>
+    <testcase classname="map mapAction" name="map mapAction" time="0.009">
+    </testcase>
+    <testcase classname="map mapAction passing undefined" name="map mapAction passing undefined" time="0.005">
+    </testcase>
+    <testcase classname="map mapAction only static" name="map mapAction only static" time="0.005">
+    </testcase>
+  </testsuite>
+  <testsuite name="when" errors="0" failures="0" skipped="0" timestamp="2019-11-09T20:32:31" time="2.927" tests="5">
+    <testcase classname="when always true" name="when always true" time="0.042">
+    </testcase>
+    <testcase classname="when always false" name="when always false" time="0.006">
+    </testcase>
+    <testcase classname="when unless" name="when unless" time="0.005">
+    </testcase>
+    <testcase classname="when alternate start with true" name="when alternate start with true" time="0.008">
+    </testcase>
+    <testcase classname="when alternate start with false" name="when alternate start with false" time="0.008">
+    </testcase>
+  </testsuite>
+  <testsuite name="adapter" errors="0" failures="0" skipped="0" timestamp="2019-11-09T20:32:31" time="2.967" tests="3">
+    <testcase classname="adapter noOptions" name="adapter noOptions" time="0.047">
+    </testcase>
+    <testcase classname="adapter mergeStates" name="adapter mergeStates" time="0.016">
+    </testcase>
+    <testcase classname="adapter propagate" name="adapter propagate" time="0.024">
+    </testcase>
+  </testsuite>
+  <testsuite name="Mood" errors="0" failures="0" skipped="0" timestamp="2019-11-09T20:32:31" time="2.962" tests="2">
+    <testcase classname="Mood render" name="Mood render" time="0.077">
+    </testcase>
+    <testcase classname="Mood render with observe" name="Mood render with observe" time="0.008">
+    </testcase>
+  </testsuite>
+  <testsuite name="dom_element" errors="0" failures="0" skipped="0" timestamp="2019-11-09T20:32:31" time="3.1" tests="16">
+    <testcase classname="dom_element static empty-element" name="dom_element static empty-element" time="0.064">
+    </testcase>
+    <testcase classname="dom_element static nested-element" name="dom_element static nested-element" time="0.009">
+    </testcase>
+    <testcase classname="dom_element static attribute" name="dom_element static attribute" time="0.007">
+    </testcase>
+    <testcase classname="dom_element dynamic attribute" name="dom_element dynamic attribute" time="0.023">
+    </testcase>
+    <testcase classname="dom_element dynamic child" name="dom_element dynamic child" time="0.015">
+    </testcase>
+    <testcase classname="dom_element static $style" name="dom_element static $style" time="0.01">
+    </testcase>
+    <testcase classname="dom_element dynamic $style" name="dom_element dynamic $style" time="0.006">
+    </testcase>
+    <testcase classname="dom_element event that dispatch" name="dom_element event that dispatch" time="0.008">
+    </testcase>
+    <testcase classname="dom_element handle event that doesn&apos;t dispatch" name="dom_element handle event that doesn&apos;t dispatch" time="0.005">
+    </testcase>
+    <testcase classname="dom_element handle event that dispatch" name="dom_element handle event that dispatch" time="0.007">
+    </testcase>
+    <testcase classname="dom_element handle event conditionally on state" name="dom_element handle event conditionally on state" time="0.006">
+    </testcase>
+    <testcase classname="dom_element event that does not dispatch" name="dom_element event that does not dispatch" time="0.003">
+    </testcase>
+    <testcase classname="dom_element generated elements" name="dom_element generated elements" time="0.008">
+    </testcase>
+    <testcase classname="dom_element generated elements with style" name="dom_element generated elements with style" time="0.004">
+    </testcase>
+    <testcase classname="dom_element respect lifecycle sequence" name="dom_element respect lifecycle sequence" time="0.005">
+    </testcase>
+    <testcase classname="dom_element respect lifecycle sequence with dereived" name="dom_element respect lifecycle sequence with dereived" time="0.004">
+    </testcase>
+  </testsuite>
+  <testsuite name="portal" errors="0" failures="0" skipped="0" timestamp="2019-11-09T20:32:31" time="3.041" tests="4">
+    <testcase classname="portal portalWithSelector" name="portal portalWithSelector" time="0.1">
+    </testcase>
+    <testcase classname="portal portalWithSelector throws if element is not found" name="portal portalWithSelector throws if element is not found" time="0.028">
+    </testcase>
+    <testcase classname="portal headPortal" name="portal headPortal" time="0.018">
+    </testcase>
+    <testcase classname="portal bodyPortal" name="portal bodyPortal" time="0.008">
+    </testcase>
+  </testsuite>
+  <testsuite name="repeat" errors="0" failures="0" skipped="0" timestamp="2019-11-09T20:32:34" time="0.641" tests="2">
+    <testcase classname="repeat repeat starting empty" name="repeat repeat starting empty" time="0.017">
+    </testcase>
+    <testcase classname="repeat repeat starting full" name="repeat repeat starting full" time="0.009">
+    </testcase>
+  </testsuite>
+  <testsuite name="dom_ns_element" errors="0" failures="0" skipped="0" timestamp="2019-11-09T20:32:34" time="0.639" tests="5">
+    <testcase classname="dom_ns_element static empty-element" name="dom_ns_element static empty-element" time="0.012">
+    </testcase>
+    <testcase classname="dom_ns_element static nested-element" name="dom_ns_element static nested-element" time="0.006">
+    </testcase>
+    <testcase classname="dom_ns_element static attribute" name="dom_ns_element static attribute" time="0.011">
+    </testcase>
+    <testcase classname="dom_ns_element dynamic attribute" name="dom_ns_element dynamic attribute" time="0.006">
+    </testcase>
+    <testcase classname="dom_ns_element dynamic child" name="dom_ns_element dynamic child" time="0.006">
+    </testcase>
+  </testsuite>
+  <testsuite name="set_attribute" errors="0" failures="0" skipped="0" timestamp="2019-11-09T20:32:34" time="0.684" tests="9">
+    <testcase classname="set_attribute setAttribute" name="set_attribute setAttribute" time="0.011">
+    </testcase>
+    <testcase classname="set_attribute seOneStyle" name="set_attribute seOneStyle" time="0.01">
+    </testcase>
+    <testcase classname="set_attribute setEnumBoolAttribute" name="set_attribute setEnumBoolAttribute" time="0.003">
+    </testcase>
+    <testcase classname="set_attribute setBoolAttribute" name="set_attribute setBoolAttribute" time="0.007">
+    </testcase>
+    <testcase classname="set_attribute setSpaceSeparated" name="set_attribute setSpaceSeparated" time="0.007">
+    </testcase>
+    <testcase classname="set_attribute setCommaSeparated" name="set_attribute setCommaSeparated" time="0.004">
+    </testcase>
+    <testcase classname="set_attribute setBoolProperty" name="set_attribute setBoolProperty" time="0.004">
+    </testcase>
+    <testcase classname="set_attribute setProperty" name="set_attribute setProperty" time="0.008">
+    </testcase>
+    <testcase classname="set_attribute setStyle" name="set_attribute setStyle" time="0.006">
+    </testcase>
+  </testsuite>
+  <testsuite name="dom_text" errors="0" failures="0" skipped="0" timestamp="2019-11-09T20:32:34" time="0.602" tests="3">
+    <testcase classname="dom_text create static undefined" name="dom_text create static undefined" time="0.011">
+    </testcase>
+    <testcase classname="dom_text create static with literal value" name="dom_text create static with literal value" time="0.004">
+    </testcase>
+    <testcase classname="dom_text create static with function value" name="dom_text create static with function value" time="0.004">
+    </testcase>
+  </testsuite>
+  <testsuite name="utils" errors="0" failures="0" skipped="0" timestamp="2019-11-09T20:32:34" time="0.591" tests="3">
+    <testcase classname="utils removeNode odd scenarios" name="utils removeNode odd scenarios" time="0.002">
+    </testcase>
+    <testcase classname="utils element blur doesn&apos;t prevent node removal" name="utils element blur doesn&apos;t prevent node removal" time="0.014">
+    </testcase>
+    <testcase classname="utils insertBefore" name="utils insertBefore" time="0.012">
+    </testcase>
+  </testsuite>
+  <testsuite name="context" errors="0" failures="0" skipped="0" timestamp="2019-11-09T20:32:34" time="0.528" tests="2">
+    <testcase classname="context fromElements sets-up the right defaults" name="context fromElements sets-up the right defaults" time="0.008">
+    </testcase>
+    <testcase classname="context mapAction trigger dispatch with the right value" name="context mapAction trigger dispatch with the right value" time="0.003">
+    </testcase>
+  </testsuite>
+</testsuites>

@@ -5,7 +5,7 @@
   "license": "UNLICENSED",
   "scripts": {
     "build": "tsc",
-    "test": "jest",
+    "test": "jest --reporters=default --reporters=jest-junit",
     "test-watch": "jest --watch",
     "tslint": "tslint -p ./tslint.json",
     "prettier": "prettier -c src/**/*.ts",
@@ -22,6 +22,7 @@
     "@types/jsdom": "12.2.4",
     "jsdom": "15.1.1",
     "jest": "24.9.0",
+    "jest-junit": "9.0.0",
     "lodash": "4.17.15",
     "request": "2.88.0",
     "request-promise-native": "1.0.7",
