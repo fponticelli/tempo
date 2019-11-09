@@ -188,7 +188,7 @@ When the template is defined, nothing really happens except that we have an inst
 
 These functions are managed and wired automatically when `store` and `template` are passed to `Mood.render`.
 
-The entire app fits 7.3kb when gzipped!
+The entire app fits 7.7kb when gzipped!
 
 # Elements
 
