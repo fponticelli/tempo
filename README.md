@@ -47,9 +47,15 @@ const template = div<State, Action>(
   { className: 'app' },
   mapState(
     { map: state => state.count },
-    count => `count: ${count} `,
-    button({ onclick: decrement, disabled: (count: number) => count <= 0 }, '-'),
-    button({ onclick: increment }, '+')
+    div(
+      { className: 'count' },
+      count => `count: ${count} `
+    ),
+    div(
+      { className: 'buttons' },
+      button({ onclick: decrement, disabled: (count: number) => count <= 0 }, '-'),
+      button({ onclick: increment }, '+')
+    )
   )
 )
 
@@ -147,9 +153,15 @@ const template = div<State, Action>(
   { className: 'app' },
   mapState(
     { map: state => state.count },
-    count => `count: ${count} `,
-    button({ onclick: decrement, disabled: (count: number) => count <= 0 }, '-'),
-    button({ onclick: increment }, '+')
+    div(
+      { className: 'count' },
+      count => `count: ${count} `
+    ),
+    div(
+      { className: 'buttons' },
+      button({ onclick: decrement, disabled: (count: number) => count <= 0 }, '-'),
+      button({ onclick: increment }, '+')
+    )
   )
 )
 

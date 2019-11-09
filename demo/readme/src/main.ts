@@ -4,18 +4,12 @@ const { div, button } = html
 import { mapState } from '@mood/dom/lib/map'
 import { Store } from '@mood/store/lib/store'
 
-interface State {
-  count: number
-}
+interface State { count: number }
 
 const state = { count: 0 }
 
-interface Increment {
-  kind: 'increment'
-}
-interface Decrement {
-  kind: 'decrement'
-}
+interface Increment { kind: 'increment' }
+interface Decrement { kind: 'decrement' }
 type Action = Increment | Decrement
 
 const decrement = (_: MouseEvent): Action => ({ kind: 'decrement' })
@@ -23,12 +17,9 @@ const increment = (_: MouseEvent): Action => ({ kind: 'increment' })
 
 const reducer = (state: State, action: Action) => {
   switch (action.kind) {
-    case 'increment':
-      return { count: state.count + 1 }
-    case 'decrement':
-      return { count: state.count - 1 }
-    default:
-      throw `this should never happen`
+    case 'increment': return { count: state.count + 1 }
+    case 'decrement': return { count: state.count - 1 }
+    default: throw `this should never happen`
   }
 }
 
@@ -38,9 +29,15 @@ const template = div<State, Action>(
   { className: 'app' },
   mapState(
     { map: state => state.count },
-    count => `count: ${count} `,
-    button({ onclick: decrement, disabled: (count: number) => count <= 0 }, '-'),
-    button({ onclick: increment }, '+')
+    div(
+      { className: 'count' },
+      count => `count: ${count} `
+    ),
+    div(
+      { className: 'buttons' },
+      button({ onclick: decrement, disabled: (count: number) => count <= 0 }, '-'),
+      button({ onclick: increment }, '+')
+    )
   )
 )
 
