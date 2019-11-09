@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "build": "echo \"nothing to build at root\""
+    "build": "echo \"nothing to build at root\"",
+    "test:all": "(cd core && npm run test) && (cd store && npm run test) && (cd dom && npm run test)"
   },
   "author": "Franco Ponticelli <franco.ponticelli@gmail.com>",
   "license": "ISC",

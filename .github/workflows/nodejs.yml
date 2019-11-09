@@ -36,8 +36,8 @@ jobs:
         rush prettier
       env:
         CI: true
-    - name: rush test
+    - name: test
       run: |
-        rush test
+        npm run test:all
       env:
         CI: true

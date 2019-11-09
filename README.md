@@ -1,6 +1,11 @@
 # Mood
 
 Mood is a framework to build dynamic front end applications.
+
+[TODO MVC demo](You can find this [demo running here](/docs/demo/todomvc/index.html))
+
+# Sample Application
+
 A Mood application, pivots around two main instances:
 
   * **Store** as in data-store, or state holder
@@ -50,6 +55,8 @@ const template = div<State, Action>(
 
 Mood.render({ store, template })
 ```
+
+You can find this [demo running here](/docs/demo/readme/index.html)
 
 Let's analyze what is going on there.
 
