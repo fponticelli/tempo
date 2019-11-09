@@ -20,6 +20,7 @@ jobs:
     - name: rush setup
       run: |
         npm i -g @microsoft/rush
+        git submodule update --init --recursive
         rush check
         rush update
       env:
