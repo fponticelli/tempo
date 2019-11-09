@@ -3,10 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "build": "echo \"nothing to build at root\"",
-    "test": "echo \"no tests yet\"",
-    "tslint": "echo \"no linting\"",
-    "prettier": "echo \"no linting\""
+    "build": "echo \"nothing to build at root\""
   },
   "author": "Franco Ponticelli <franco.ponticelli@gmail.com>",
   "license": "ISC",
