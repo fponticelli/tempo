@@ -30,8 +30,12 @@ const template = div<State, Action>(
   mapState(
     { map: state => state.count },
     div(
+      { className: 'count count-small' },
+      'count'
+    ),
+    div(
       { className: 'count' },
-      count => `count: ${count} `
+      String
     ),
     div(
       { className: 'buttons' },
