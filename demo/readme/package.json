@@ -14,7 +14,7 @@
     "prettier": "1.18.2"
   },
   "scripts": {
-    "compile": "NODE_ENV=production && parcel build src/index.html --public-url --out-dir ../../docs/demo/readme --experimental-scope-hoisting",
+    "compile": "NODE_ENV=production && parcel build src/index.html --public-url . --out-dir ../../docs/demo/readme --experimental-scope-hoisting",
     "clean": "rm -rf dist/*",
     "build": "npm run clean && npm run compile",
     "watch": "parcel src/index.html",
