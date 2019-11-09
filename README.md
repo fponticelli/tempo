@@ -1,5 +1,7 @@
 # Mood
 
+[![Actions Status](https://github.com/{owner}/{repo}/workflows/{workflow_name}/badge.svg)](https://github.com/{owner}/{repo}/actions)
+
 Mood is a framework to build dynamic front end applications.
 
 [TODO MVC demo](./docs/demo/todomvc/index.html)
