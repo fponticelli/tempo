@@ -1,6 +1,6 @@
 # Mood
 
-[![Actions Status](https://github.com/{owner}/{repo}/workflows/{workflow_name}/badge.svg)](https://github.com/{owner}/{repo}/actions)
+[![Actions Status](https://github.com/fponticelli/mood2/workflows/Build/Test%20CI/badge.svg)](https://github.com/fponticelli/mood2/actions)
 
 Mood is a framework to build dynamic front end applications.
 
