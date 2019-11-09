@@ -22,7 +22,11 @@ jobs:
         npm i -g @microsoft/rush
         rush check
         rush update
-        rush rebuild --verbose
+      env:
+        CI: true
+    - name: rush build
+      run: |
+        rush rebuild
       env:
         CI: true
     - name: code style
