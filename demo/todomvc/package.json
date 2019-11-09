@@ -13,7 +13,8 @@
     "parcel-bundler": "1.12.3",
     "typescript": "3.6.3",
     "tslint": "5.20.0",
-    "prettier": "1.18.2"
+    "prettier": "1.18.2",
+    "cssnano": "4.1.10"
   },
   "scripts": {
     "compile": "NODE_ENV=production && parcel build src/index.html",
