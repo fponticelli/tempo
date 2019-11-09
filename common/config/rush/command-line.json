@@ -17,21 +17,21 @@
       "summary": "Run `npm run test` on each project.",
       "description": "Run `npm run test` on each project.",
       "enableParallelism": true,
-      "ignoreMissingScript": false
+      "ignoreMissingScript": true
     }, {
       "commandKind": "bulk",
       "name": "tslint",
       "summary": "Run `tslint` on each project.",
       "description": "Run `tslint` on each project.",
       "enableParallelism": true,
-      "ignoreMissingScript": false
+      "ignoreMissingScript": true
     }, {
       "commandKind": "bulk",
       "name": "prettier",
       "summary": "Run `prettier` on each project.",
       "description": "Run `prettier` on each project.",
       "enableParallelism": true,
-      "ignoreMissingScript": false
+      "ignoreMissingScript": true
     }
     // {
     //   /**
