@@ -110,7 +110,7 @@ const propertyTypes: Record<string, string> = {
 const mapPropertyType = (type: string): string => {
   let value
   if (baseTypeConversionMap.has(type)) value = baseTypeConversionMap.get(type)
-  return propertyTypes[value || type] || (value || type.replace(/[']/g, "'"))
+  return propertyTypes[value || type] || value || type.replace(/[']/g, "'")
 }
 
 const specialElementNames: Record<string, string> = {
