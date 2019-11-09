@@ -19,7 +19,7 @@
   "scripts": {
     "compile": "NODE_ENV=production && parcel build src/index.html --public-url . --out-dir ../../docs/demo/todomvc --experimental-scope-hoisting",
     "clean": "rm -rf dist/*",
-    "build": "npm run clean && npm run compile",
+    "build": "npm run clean && npm run compile && cp src/learn.json ../../docs/demo/todomvc/",
     "watch": "parcel src/index.html",
     "tslint": "tslint -p ./tslint.json",
     "prettier": "prettier -c src/**/*.ts",
