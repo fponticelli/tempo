@@ -24,9 +24,9 @@ jobs:
         rush update
       env:
         CI: true
-    - name: rush build
+    - name: build
       run: |
-        rush rebuild
+        rush rebuild --verbose
       env:
         CI: true
     - name: code style
