@@ -20,7 +20,6 @@
     "watch": "parcel src/index.html",
     "tslint": "tslint -p ./tslint.json",
     "prettier": "prettier -c src/**/*.ts",
-    "prettier-fix": "prettier --write src/**/*.ts",
-    "test": "echo 'no tests yet'"
+    "prettier-fix": "prettier --write src/**/*.ts"
   }
 }
