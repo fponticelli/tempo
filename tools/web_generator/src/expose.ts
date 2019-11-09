@@ -79,13 +79,6 @@ const collectProperties = (webidl: Browser.WebIdl) => (inter: Browser.Interface)
 const excludeProperties = new Set(['innerHTML', 'innerText', 'textContent', 'nodeValue', 'outerHTML'])
 
 const isExposableProperty = (prop: Browser.Property): boolean => {
-  if (
-    prop.name.toLowerCase().includes('stroke') ||
-    prop.name.toLowerCase().includes('fill') ||
-    prop.name.toLowerCase().includes('viewbox')
-  ) {
-    console.log(prop)
-  }
   if (typeof prop.type === 'string' && prop.type.includes('Element')) return false
   return (
     (typeof prop.type === 'string' && prop.type.startsWith('SVG')) ||

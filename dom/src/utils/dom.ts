@@ -42,7 +42,7 @@ export const processAttribute = <State, Action>(
   dispatch: (action: Action) => void,
   acc: Acc<State>
 ): Acc<State> => {
-  name = attributeNameMap[name as keyof (typeof attributeNameMap)] || name
+  name = attributeNameMap[name as keyof typeof attributeNameMap] || name
 
   let set: (el: Element, name: string, value: any) => void
   const isEvent = name.startsWith('on')
