@@ -1,6 +1,10 @@
 import { createContext } from './common'
-import { Mood, component, div } from '../../src'
-import { Store, Property } from '@mood/store'
+import { Mood } from '../src/mood'
+import { component } from '../src/component'
+import { html } from '../src/web'
+const { div } = html
+import { Store } from '@mood/store/lib/store'
+import { Property } from '@mood/store/lib/property'
 
 describe('Mood', () => {
   it('render', () => {

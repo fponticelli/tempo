@@ -1,6 +1,10 @@
-import { div, component, text } from '../../src'
+import { html } from '../src/web'
+const { div } = html
+import { component } from '../src/component'
+import { text } from '../src/text'
 import { createContext } from './common'
-import { Store, Property } from '@mood/store'
+import { Store } from '@mood/store/lib/store'
+import { Property } from '@mood/store/lib/property'
 
 describe('component', () => {
   it('fromElements sets-up the right defaults', () => {

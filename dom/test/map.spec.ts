@@ -1,7 +1,7 @@
-import { el } from '../../src'
-import { mapState, mapAction } from '../../src'
+import { el } from '../src/element'
+import { mapState, mapAction } from '../src/map'
 import { createContext } from './common'
-import { DynamicView } from '@mood/core'
+import { DynamicView } from '@mood/core/lib/view'
 
 describe('map', () => {
   it('mapState', () => {
@@ -23,10 +23,10 @@ describe('map', () => {
   it('mapAction', () => {
     let ref: string | undefined
     const onclick = (_: Event): number => 1
-    const template = el<string, string>(
+    const template = el<string, string, HTMLDivElement>(
       'div',
       {},
-      mapAction({ map: (v: number) => `#${v}` }, el<string, number>('div', { onclick } as any, s => s))
+      mapAction({ map: (v: number) => `#${v}` }, el<string, number, HTMLDivElement>('div', { onclick } as any, s => s))
     )
     const ctx = createContext((n: string) => {
       ref = n
@@ -43,12 +43,12 @@ describe('map', () => {
   it('mapAction passing undefined', () => {
     let ref = 'ORIG'
     const onclick = (_: Event): string => 'X'
-    const template = el<string, string>(
+    const template = el<string, string, HTMLDivElement>(
       'div',
       {},
       mapAction(
         { map: (v: string): string | undefined => undefined },
-        el<string, string>('div', { onclick } as any, s => s)
+        el<string, string, HTMLDivElement>('div', { onclick } as any, s => s)
       )
     )
     const ctx = createContext((n: string) => {
@@ -66,10 +66,10 @@ describe('map', () => {
   it('mapAction only static', () => {
     let ref: string | undefined
     const onclick = (_: Event): number => 1
-    const template = el<string, string>(
+    const template = el<string, string, HTMLDivElement>(
       'div',
       {},
-      mapAction({ map: (v: number) => `#${v}` }, el<string, number>('div', { onclick } as any, 'X'))
+      mapAction({ map: (v: number) => `#${v}` }, el<string, number, HTMLDivElement>('div', { onclick } as any, 'X'))
     )
     const ctx = createContext((n: string) => {
       ref = n

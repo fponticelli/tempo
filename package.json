@@ -4,7 +4,9 @@
   "description": "",
   "scripts": {
     "build": "echo \"nothing to build at root\"",
-    "test": "echo \"no tests yet\""
+    "test": "echo \"no tests yet\"",
+    "tslint": "echo \"no linting\"",
+    "prettier": "echo \"no linting\""
   },
   "author": "Franco Ponticelli <franco.ponticelli@gmail.com>",
   "license": "ISC",

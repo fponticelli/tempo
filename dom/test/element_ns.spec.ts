@@ -1,6 +1,6 @@
 import { createContext } from './common'
-import { DOMElementNS } from '../../src'
-import { DynamicView } from '@mood/core'
+import { DOMElementNS } from '../src/element_ns'
+import { DynamicView } from '@mood/core/lib/view'
 
 describe('dom_ns_element', () => {
   it('static empty-element', () => {

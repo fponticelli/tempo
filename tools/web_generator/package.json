@@ -25,8 +25,8 @@
     "build": "npm run compile && npm run generate && prettier --write generated/**/*.ts && npm run copy",
     "copy": "rm -rf ../../dom/src/els/* rm ../../dom/src/utils/attributes_mapper.ts ../../dom/src/utils/attributes.ts ../../dom/src/utils/css_properties.ts && cp -R generated/* ../../dom/src/",
     "tslint": "tslint -p ./tslint.json",
-    "prettier": "prettier -c src/**/*.ts",
-    "prettier-fix": "prettier --write src/**/*.ts",
+    "prettier": "prettier -c src/*.ts",
+    "prettier-fix": "prettier --write src/*.ts",
     "test": "echo 'no tests yet'"
   }
 }

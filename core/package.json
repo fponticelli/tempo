@@ -3,12 +3,11 @@
   "private": true,
   "license": "UNLICENSED",
   "description": "",
-  "main": "lib/index.js",
-  "typings": "lib/index.d.ts",
   "version": "1.0.0",
   "scripts": {
     "build": "tsc",
-    "test": "echo 'no tests yet'",
+    "test": "jest",
+    "test-watch": "jest --watch",
     "tslint": "tslint -p ./tslint.json",
     "prettier": "prettier -c src/**/*.ts",
     "prettier-fix": "prettier --write src/**/*.ts"
@@ -16,6 +15,9 @@
   "author": "Franco Ponticelli <franco.ponticelli@gmail.com>",
   "devDependencies": {
     "@types/node": "10.12.18",
+    "@types/jest": "24.0.15",
+    "jest": "24.9.0",
+    "ts-jest": "24.1.0",
     "typescript": "3.6.3",
     "tslint": "5.20.0",
     "prettier": "1.18.2"

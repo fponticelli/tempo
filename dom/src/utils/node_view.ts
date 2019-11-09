@@ -1,4 +1,4 @@
-import { DynamicView, StaticView, View } from '@mood/core'
+import { DynamicView, StaticView, View } from '@mood/core/lib/view'
 import { removeNode } from './dom'
 
 export class DOMBaseNodeView<State> {

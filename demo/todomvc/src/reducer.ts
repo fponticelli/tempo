@@ -12,8 +12,7 @@ export const reducer = (state: State, action: Action) => {
       }
       break
     case 'create-todo':
-      if (action.title)
-        newState.todos = [...state.todos, createTodo(action.title)]
+      if (action.title) newState.todos = [...state.todos, createTodo(action.title)]
       delete newState.adding
       break
     case 'editing-todo':

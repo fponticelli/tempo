@@ -7,20 +7,14 @@ export class Store<State, Action> {
   static ofState<State, Action>(options: {
     state: State
     reducer: Reducer<State, Action>
-    equals?: (a: State, b: State) => boolean
+    equal?: (a: State, b: State) => boolean
   }) {
-    return new Store(
-      new Property(options.state, options.equals),
-      options.reducer
-    )
+    return new Store(new Property(options.state, options.equal), options.reducer)
   }
 
   readonly observable: Observable3<State, Action, boolean>
 
-  constructor(
-    readonly property: Property<State>,
-    private readonly reducer: Reducer<State, Action>
-  ) {
+  constructor(readonly property: Property<State>, private readonly reducer: Reducer<State, Action>) {
     this.observable = this.emitter = Emitter.ofThree<State, Action, boolean>()
   }
 

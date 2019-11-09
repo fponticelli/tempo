@@ -15,8 +15,7 @@ export const deepEqual = <A>(a: A, b: A): boolean => {
     const aLength = aArr.length
     if (aLength !== bArr.length) return false
     for (let i = 0; i < aLength; i++) {
-      if (!deepEqual(aArr[i], bArr[i]))
-        return false
+      if (!deepEqual(aArr[i], bArr[i])) return false
     }
     return true
   }
@@ -36,15 +35,12 @@ export const deepEqual = <A>(a: A, b: A): boolean => {
   if (aIsSet) {
     const aSet: Set<any> = a as never
     const bSet: Set<any> = b as never
-    if (aSet.size !== bSet.size)
-      return false
+    if (aSet.size !== bSet.size) return false
     const it = aSet.keys()
     while (true) {
       const curr = it.next()
-      if (curr.done)
-        break
-      if (!bSet.has(curr.value))
-        return false
+      if (curr.done) break
+      if (!bSet.has(curr.value)) return false
     }
     return true
   }
@@ -56,15 +52,12 @@ export const deepEqual = <A>(a: A, b: A): boolean => {
     const aMap: Map<any, any> = a as never
     const bMap: Map<any, any> = b as never
     const aMapLength = aMap.size
-    if (aMapLength !== bMap.size)
-      return false
+    if (aMapLength !== bMap.size) return false
     const it = aMap.keys()
     while (true) {
       const curr = it.next()
-      if (curr.done)
-        break
-      if (!deepEqual(aMap.get(curr.value), bMap.get(curr.value)))
-        return false
+      if (curr.done) break
+      if (!deepEqual(aMap.get(curr.value), bMap.get(curr.value))) return false
     }
     return true
   }
@@ -79,15 +72,12 @@ export const deepEqual = <A>(a: A, b: A): boolean => {
     const bFields = Object.keys(bObj)
     const aLength = aFields.length
 
-    if (aLength !== bFields.length)
-      return false
+    if (aLength !== bFields.length) return false
 
     for (let i = 0; i < aLength; i++) {
       const field = aFields[i]
-      if (!bObj.hasOwnProperty(field))
-        return false
-      if (!deepEqual(aObj[field], bObj[field]))
-        return false
+      if (!bObj.hasOwnProperty(field)) return false
+      if (!deepEqual(aObj[field], bObj[field])) return false
     }
 
     return true

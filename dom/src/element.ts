@@ -1,6 +1,7 @@
 import { DOMTemplate, DOMChild } from './template'
 import { DOMContext } from './context'
-import { View, wrapLiteral, WrappedValue } from '@mood/core'
+import { View } from '@mood/core/lib/view'
+import { wrapLiteral, WrappedValue } from '@mood/core/lib/value'
 import { DOMAttributes } from './web_attributes'
 import { Acc, processAttribute, filterDynamics, domChildToTemplate } from './utils/dom'
 import { DOMDynamicNodeView, DOMStaticNodeView } from './utils/node_view'

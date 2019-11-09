@@ -6,15 +6,12 @@ import { deepEqual } from './equality'
 export class Property<T> {
   readonly observable: Observable1<T>
 
-  constructor(
-    private value: T,
-    private equals: (a: T, b: T) => boolean = deepEqual
-  ) {
+  constructor(private value: T, private equal: (a: T, b: T) => boolean = deepEqual) {
     this.observable = this.emitter = Emitter.ofOne()
   }
 
   set(value: T): boolean {
-    if (this.equals(this.value, value)) {
+    if (this.equal(this.value, value)) {
       return false
     }
     this.value = value

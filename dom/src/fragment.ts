@@ -1,4 +1,4 @@
-import { View, StaticView, DynamicView } from '@mood/core'
+import { View, StaticView, DynamicView } from '@mood/core/lib/view'
 import { filterDynamics } from './utils/dom'
 
 export class DOMBaseFragmentView {

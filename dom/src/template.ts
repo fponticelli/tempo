@@ -1,4 +1,4 @@
-import { Template } from '@mood/core'
+import { Template } from '@mood/core/lib/template'
 import { DOMContext } from './context'
 import { DOMTextValue } from './value'
 

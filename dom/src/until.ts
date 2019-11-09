@@ -1,4 +1,4 @@
-import { DynamicView, View } from '@mood/core'
+import { DynamicView, View } from '@mood/core/lib/view'
 import { DOMContext } from './context'
 import { DOMTemplate, DOMChild } from './template'
 import { removeNode, filterDynamics, domChildToTemplate, insertBefore } from './utils/dom'
@@ -7,7 +7,7 @@ export class DOMUntilView<OuterState, InnerState, Action> implements DynamicView
   readonly kind = 'dynamic'
   constructor(
     readonly ref: Node,
-    readonly repeatUntil: (state: OuterState, index: number) => InnerState,
+    readonly repeatUntil: (state: OuterState, index: number) => InnerState | undefined,
     readonly ctx: DOMContext<Action>,
     readonly children: DOMTemplate<InnerState, Action>[]
   ) {}
@@ -48,7 +48,7 @@ export class DOMUntilTemplate<OuterState, InnerState, Action> implements DOMTemp
   constructor(
     readonly options: {
       refId?: string
-      repeatUntil: (state: OuterState, index: number) => InnerState
+      repeatUntil: (state: OuterState, index: number) => InnerState | undefined
     },
     readonly children: DOMTemplate<InnerState, Action>[]
   ) {}
@@ -70,7 +70,7 @@ export class DOMUntilTemplate<OuterState, InnerState, Action> implements DOMTemp
 export const until = <OuterState, InnerState, Action>(
   options: {
     refId?: string
-    repeatUntil: (state: OuterState, index: number) => InnerState
+    repeatUntil: (state: OuterState, index: number) => InnerState | undefined
   },
   ...children: DOMChild<InnerState, Action>[]
 ) => new DOMUntilTemplate<OuterState, InnerState, Action>(options, children.map(domChildToTemplate))

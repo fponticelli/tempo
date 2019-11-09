@@ -1,5 +1,5 @@
 /* istanbul ignore next */
-import { UnwrappedValue, UnwrappedLiteralValue, WrappedDerivedValue, derived } from '@mood/core'
+import { UnwrappedValue, UnwrappedLiteralValue, WrappedDerivedValue, derived } from '@mood/core/lib/value'
 
 export type DOMAttribute<S, V> = UnwrappedValue<S, V>
 export type DOMEventHandler<S, E, Action> =
@@ -9,7 +9,7 @@ export type DOMProperty<S, V> = DOMAttribute<S, V>
 export type DOMTextValue<S> = DOMAttribute<S, string>
 export type MoodAttribute<S, El> = UnwrappedLiteralValue<(el: El) => void> | WrappedDerivedValue<S, (el: El) => void>
 
-export const lifecycle = <State, Action, E extends Element>(f: (state: State) => (el: E) => void) =>
+export const lifecycle = <State, E extends Element>(f: (state: State) => (el: E) => void) =>
   derived<State, (el: E) => void>(f)
 
 export const handler = <State, Action, E extends Event>(

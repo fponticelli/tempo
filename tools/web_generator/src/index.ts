@@ -63,7 +63,7 @@ function emitElements() {
 
   // Create output folder
   if (!fs.existsSync(outputFolder)) {
-      fs.mkdirSync(outputFolder)
+    fs.mkdirSync(outputFolder)
   }
 
   // const tsWebOutput = path.join(outputFolder, 'dom.generated.d.ts')
@@ -78,7 +78,7 @@ function emitElements() {
   const idlSources: any[] = require(path.join(inputFolder, 'idlSources.json'))
   const widlStandardTypes = idlSources.map(convertWidl)
 
-  function convertWidl({ title, deprecated }: { title: string, deprecated?: boolean }) {
+  function convertWidl({ title, deprecated }: { title: string; deprecated?: boolean }) {
     const filename = title + '.widl'
     const idl: string = fs.readFileSync(path.join(inputFolder, 'idl', filename), { encoding: 'utf-8' })
     const commentsMapFilePath = path.join(inputFolder, 'idl', title + '.commentmap.json')
@@ -230,7 +230,7 @@ function emitElements() {
           }
           // template should include strings
           filtered[k] = obj[k].filter((item: any) => {
-            const name = typeof item === 'string' ? item : (item.name || item['new-type'])
+            const name = typeof item === 'string' ? item : item.name || item['new-type']
             return !template[k].includes(name)
           })
           if (filtered[k].length === obj[k].length) {

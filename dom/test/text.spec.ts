@@ -1,6 +1,6 @@
 import { createContext } from './common'
-import { DOMText } from '../../src/text'
-import { DynamicView } from '@mood/core'
+import { DOMText } from '../src/text'
+import { DynamicView } from '@mood/core/lib/view'
 
 describe('dom_text', () => {
   it('create static undefined', () => {

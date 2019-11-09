@@ -1,6 +1,10 @@
 import { createContext } from './common'
-import { Mood, component, span, portalWithSelector, headPortal, style, bodyPortal } from '../../src'
-import { Store } from '@mood/store'
+import { Mood } from '../src/mood'
+import { component } from '../src/component'
+import { portalWithSelector, headPortal, bodyPortal } from '../src/portal'
+import { html } from '../src/web'
+const { span, style } = html
+import { Store } from '@mood/store/lib/store'
 
 describe('portal', () => {
   it('portalWithSelector', () => {

@@ -2,9 +2,15 @@ import { Listener } from './listener'
 import { Observable } from './observable'
 
 export class Emitter<T extends any[]> implements Observable<T> {
-  static ofOne<A>(): Emitter1<A> { return new Emitter<[A]>() }
-  static ofTwo<A, B>(): Emitter2<A, B> { return new Emitter<[A, B]>() }
-  static ofThree<A, B, C>(): Emitter3<A, B, C> { return new Emitter<[A, B, C]>() }
+  static ofOne<A>(): Emitter1<A> {
+    return new Emitter<[A]>()
+  }
+  static ofTwo<A, B>(): Emitter2<A, B> {
+    return new Emitter<[A, B]>()
+  }
+  static ofThree<A, B, C>(): Emitter3<A, B, C> {
+    return new Emitter<[A, B, C]>()
+  }
 
   readonly listeners: Listener<T>[] = []
 
@@ -20,8 +26,7 @@ export class Emitter<T extends any[]> implements Observable<T> {
 
   off(listener: Listener<T>) {
     const index = this.listeners.indexOf(listener)
-    if (index < 0)
-      return false
+    if (index < 0) return false
     this.listeners.splice(index, 1)
     return true
   }

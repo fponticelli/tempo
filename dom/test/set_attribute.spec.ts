@@ -9,7 +9,7 @@ import {
   setBoolProperty,
   setStyleAttribute,
   setProperty
-} from '../../src/utils'
+} from '../src/utils/set_attribute'
 
 describe('set_attribute', () => {
   it('setAttribute', () => {
@@ -109,9 +109,9 @@ describe('set_attribute', () => {
     expect(el.getAttribute('style')).toBeNull()
     setStyleAttribute(el, 'style', {})
     expect(el.getAttribute('style')).toBeNull()
-    setStyleAttribute(el, 'style', { backgroundColor: 'rgb(1,2,3)' })
+    setStyleAttribute(el, 'style', { 'background-color': 'rgb(1,2,3)' })
     expect(el.getAttribute('style')).toEqual('background-color: rgb(1,2,3);')
-    setStyleAttribute(el, 'style', { fontWeight: 'bold', fontSize: '10px', border: '1px solid red' })
+    setStyleAttribute(el, 'style', { 'font-weight': 'bold', 'font-size': '10px', border: '1px solid red' })
     expect(el.getAttribute('style')).toEqual('font-weight: bold; font-size: 10px; border: 1px solid red;')
     setStyleAttribute(el, 'style', null as any)
     expect(el.getAttribute('style')).toBeNull()

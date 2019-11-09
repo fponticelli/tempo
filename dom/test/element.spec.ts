@@ -1,8 +1,9 @@
 import { createContext } from './common'
-import { el } from '../../src/element'
-import { DynamicView } from '@mood/core'
-import { handler, lifecycle, stateHandler } from '../../src/value'
-import { div, span, a } from '../../src'
+import { el } from '../src/element'
+import { DynamicView } from '@mood/core/lib/view'
+import { handler, lifecycle, stateHandler } from '../src/value'
+import { html } from '../src/web'
+const { div, span, a } = html
 
 describe('dom_element', () => {
   it('static empty-element', () => {
@@ -89,7 +90,7 @@ describe('dom_element', () => {
     })
     let count = 0
     const onclick = (e: MouseEvent) => 1
-    const node = el<number, number>('div', { onclick: onclick } as any).render(ctx, 1)
+    const node = el<number, number, HTMLDivElement>('div', { onclick: onclick } as any).render(ctx, 1)
     expect(ctx.doc.body.innerHTML).toEqual('<div></div>')
     const domEl = ctx.doc.body.firstElementChild as HTMLDivElement
     expect(count).toEqual(0)
@@ -107,7 +108,7 @@ describe('dom_element', () => {
     })
     let count = 0
     const onclick = handler(s => undefined)
-    const node = el<number, number>('div', { onclick } as any).render(ctx, 1)
+    const node = el<number, number, HTMLDivElement>('div', { onclick } as any).render(ctx, 1)
     expect(ctx.doc.body.innerHTML).toEqual('<div></div>')
     const domEl = ctx.doc.body.firstElementChild as HTMLDivElement
     expect(count).toEqual(0)
@@ -123,7 +124,7 @@ describe('dom_element', () => {
     })
     let count = 0
     const onclick = handler((s: number) => (e: Event) => s + 1)
-    const node = el<number, number>('div', { onclick } as any).render(ctx, 1)
+    const node = el<number, number, HTMLDivElement>('div', { onclick } as any).render(ctx, 1)
     expect(ctx.doc.body.innerHTML).toEqual('<div></div>')
     const domEl = ctx.doc.body.firstElementChild as HTMLDivElement
     expect(count).toEqual(0)
@@ -139,7 +140,7 @@ describe('dom_element', () => {
     })
     let count = 0
     const onclick = stateHandler((s: number) => s + 1)
-    const node = el<number, number>('div', { onclick } as any).render(ctx, 1)
+    const node = el<number, number, HTMLDivElement>('div', { onclick } as any).render(ctx, 1)
     expect(ctx.doc.body.innerHTML).toEqual('<div></div>')
     const domEl = ctx.doc.body.firstElementChild as HTMLDivElement
     expect(count).toEqual(0)
@@ -155,7 +156,7 @@ describe('dom_element', () => {
     })
     let count = 0
     const onclick = (e: MouseEvent) => undefined
-    const node = el<number, number>('div', { onclick } as any).render(ctx, 1)
+    const node = el<number, number, HTMLDivElement>('div', { onclick } as any).render(ctx, 1)
     const domEl = ctx.doc.body.firstElementChild as HTMLDivElement
     expect(count).toEqual(0)
     domEl.click()
@@ -171,7 +172,7 @@ describe('dom_element', () => {
   })
 
   it('generated elements with style', () => {
-    const template = div({ $backgroundColor: 'rgb(200, 200, 200)' }, 'hello')
+    const template = div({ '$background-color': 'rgb(200, 200, 200)' }, 'hello')
     const ctx = createContext()
     template.render(ctx, 1)
     expect(ctx.doc.body.innerHTML).toEqual('<div style="background-color: rgb(200, 200, 200);">hello</div>')

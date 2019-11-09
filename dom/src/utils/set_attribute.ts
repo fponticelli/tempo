@@ -1,4 +1,4 @@
-import { CSSProperties, cssMapper } from '../web_css_properties'
+import { CSSProperties } from '../web_css_properties'
 
 export const setOneStyle = (el: Element, name: string, value: any) => {
   const anyStyle = (el as HTMLElement).style as any
@@ -53,8 +53,8 @@ export const setStyleAttribute = (el: Element, name: string, value: CSSPropertie
   } else {
     const s = Object.keys(value)
       .map(k => {
-        const cssName = cssMapper[k as keyof (typeof cssMapper)] || k
-        return `${cssName}: ${(value as any)[k]!};`
+        // const cssName = cssMapper[k as keyof (typeof cssMapper)] || k
+        return `${k}: ${(value as any)[k]!};`
       })
       .join(' ')
     setAttribute(el, name, (s.length && s) || (null as any))

@@ -1,4 +1,4 @@
-import { Store } from '@mood/store'
+import { Store } from '@mood/store/lib/store'
 import { DOMComponent, component } from './component'
 import { DOMContext } from './context'
 import { DOMChild } from './template'

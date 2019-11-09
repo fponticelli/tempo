@@ -1,5 +1,5 @@
 import { JSDOM } from 'jsdom'
-import { DOMContext } from '../../src/context'
+import { DOMContext } from '../src/context'
 
 export const getWindow = (): Window => {
   const dom = new JSDOM(`<!DOCTYPE html>`)

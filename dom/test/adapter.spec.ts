@@ -1,7 +1,9 @@
 import { createContext } from './common'
-import { div, PropagateArg } from '../../src'
-import { adapter, component } from '../../src'
-import { Store } from '@mood/store'
+import { html } from '../src/web'
+const { div } = html
+import { adapter, PropagateArg } from '../src/adapter'
+import { component } from '../src/component'
+import { Store } from '@mood/store/lib/store'
 
 describe('adapter', () => {
   it('noOptions', () => {
@@ -81,7 +83,7 @@ describe('adapter', () => {
 
     const comp = component(
       { store },
-      div({ onClick: (_: MouseEvent) => 'click' }, s => s.join(', '))
+      div({ onclick: (_: MouseEvent) => 'click' }, s => s.join(', '))
     )
 
     let didCallPropagate = false

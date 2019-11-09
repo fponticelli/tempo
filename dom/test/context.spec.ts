@@ -1,4 +1,4 @@
-import { DOMContext } from '../../src'
+import { DOMContext } from '../src/context'
 import { createContext, getWindow } from './common'
 
 describe('context', () => {

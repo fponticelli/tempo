@@ -4,7 +4,7 @@ import { processAttribute, Acc, filterDynamics, domChildToTemplate } from './uti
 import { DOMDynamicNodeView, DOMStaticNodeView } from './utils/node_view'
 import { DOMAttribute } from './value'
 import { prepareAttributes, maybeApplyMood, applyMood } from './element'
-import { View } from '@mood/core'
+import { View } from '@mood/core/lib/view'
 import { MoodAttributes } from './mood_attributes'
 import { DOMAttributes } from './web_attributes'
 

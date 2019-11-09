@@ -1,6 +1,7 @@
 import { DOMTemplate } from './template'
 import { DOMContext } from './context'
-import { View, UnwrappedLiteralValue, UnwrappedDerivedValue } from '@mood/core'
+import { View } from '@mood/core/lib/view'
+import { UnwrappedLiteralValue, UnwrappedDerivedValue } from '@mood/core/lib/value'
 import { DOMStaticNodeView, DOMDynamicNodeView } from './utils/node_view'
 import { DOMTextValue } from './value'
 

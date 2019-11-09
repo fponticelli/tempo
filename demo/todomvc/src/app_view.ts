@@ -1,4 +1,8 @@
-import { html, mapState, DOMEventHandler, handler, forEach, when, stateHandler } from '@mood/dom'
+import { html } from '@mood/dom/lib/web'
+import { mapState } from '@mood/dom/lib/map'
+import { DOMEventHandler, handler, stateHandler } from '@mood/dom/lib/value'
+import { forEach } from '@mood/dom/lib/for_each'
+import { when } from '@mood/dom/lib/when'
 const { section, header, h1, input, ul, label, div, li, footer, span, a, p, button } = html
 import { Action } from './action'
 import { State, Filter, Todo } from './state'
@@ -27,7 +31,8 @@ const selectedF = (filter: Filter) => (state: State) => (state.filter === filter
 
 type TodoWEditing = Todo & { editing: boolean }
 
-export const template = section<State, Action>({},
+export const template = section<State, Action>(
+  {},
   section(
     { className: 'todoapp' },
     header(

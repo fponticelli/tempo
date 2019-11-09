@@ -16,18 +16,12 @@ export const filterElements = (webidl: Browser.WebIdl, forceKnownTypes: Set<stri
 }
 
 export const generateTypes = (elements: Browser.Interface[], webidl: Browser.WebIdl) => {
-  const result = [
-    importsWebContent(),
-    elements.map(interfaceTemplate(webidl)).join('\n\n')
-  ].join('\n\n')
+  const result = [importsWebContent(), elements.map(interfaceTemplate(webidl)).join('\n\n')].join('\n\n')
   return result
 }
 
 export const generateWebAttributes = (elements: Browser.Interface[], webidl: Browser.WebIdl) => {
-  const result = [
-    importsAttributesContent(),
-    attributesTemplate(elements, webidl)
-  ].join('\n\n')
+  const result = [importsAttributesContent(), attributesTemplate(elements, webidl)].join('\n\n')
   return result
 }
 
@@ -38,9 +32,10 @@ const elementTemplate = (inter: Browser.Interface) => (el: Browser.Element) => {
   const fname = mapElementFnName(name)
   const attributesTypeName = getAttributesTypeName(inter)
 
-  const fcall = ns === 'HTML'
-    ? `el<State, Action, ${inter.name}>('${name}', attributes as never, ...children)`
-    : `elNS<State, Action, ${inter.name}>('${lcns}', '${name}', attributes as never, ...children)`
+  const fcall =
+    ns === 'HTML'
+      ? `el<State, Action, ${inter.name}>('${name}', attributes as never, ...children)`
+      : `elNS<State, Action, ${inter.name}>('${lcns}', '${name}', attributes as never, ...children)`
 
   const content = `export module ${lcns} {
     export function ${fname}<State, Action>(
@@ -62,8 +57,7 @@ const collectProperties = (webidl: Browser.WebIdl) => (inter: Browser.Interface)
   if (inter.implements) {
     local = inter.implements.reduce((acc: Record<string, Browser.Property>, curr) => {
       const mixin = webidl.mixins!.mixin[curr] || webidl.interfaces!.interface[curr]
-      if (!mixin)
-        return acc
+      if (!mixin) return acc
       const prop = collectProperties(webidl)(mixin)
       return {
         ...acc,
@@ -85,48 +79,50 @@ const collectProperties = (webidl: Browser.WebIdl) => (inter: Browser.Interface)
 const excludeProperties = new Set(['innerHTML', 'innerText', 'textContent', 'nodeValue', 'outerHTML'])
 
 const isExposableProperty = (prop: Browser.Property): boolean => {
-  if (prop.name.toLowerCase().includes('stroke')
-      || prop.name.toLowerCase().includes('fill')
-      || prop.name.toLowerCase().includes('viewbox')) {
+  if (
+    prop.name.toLowerCase().includes('stroke') ||
+    prop.name.toLowerCase().includes('fill') ||
+    prop.name.toLowerCase().includes('viewbox')
+  ) {
     console.log(prop)
   }
-  if (typeof prop.type === 'string' && prop.type.includes('Element'))
-    return false
-  return (typeof prop.type === 'string' && prop.type.startsWith('SVG')) ||
-         (!prop.deprecated && (!prop['read-only'] || prop.name === 'style') && !excludeProperties.has(prop.name))
+  if (typeof prop.type === 'string' && prop.type.includes('Element')) return false
+  return (
+    (typeof prop.type === 'string' && prop.type.startsWith('SVG')) ||
+    (!prop.deprecated && (!prop['read-only'] || prop.name === 'style') && !excludeProperties.has(prop.name))
+  )
 }
 
 const propertyTypes: Record<string, string> = {
-  'CSSStyleDeclaration': 'CSSProperties',
-  'SVGAnimatedLength': 'string',
-  'SVGAnimatedNumber': 'number',
-  'SVGAnimatedInteger': 'number',
-  'SVGAnimatedAngle': 'string',
-  'SVGAnimatedEnumeration': 'string',
-  'SVGPointList': 'string',
-  'SVGPoint': 'string',
-  'SVGAnimatedLengthList': 'string',
-  'SVGAnimatedTransformList': 'string',
-  'SVGAnimatedString': 'string',
-  'SVGAnimatedNumberList': 'string',
-  'SVGPathSegList': 'string',
-  'SVGAnimatedBoolean': 'boolean',
-  'SVGAnimatedPreserveAspectRatio': 'string',
-  'SVGStringList': 'string',
-  'SVGAnimatedRect': 'string',
-  'SVGRect': 'string'
+  CSSStyleDeclaration: 'CSSProperties',
+  SVGAnimatedLength: 'string',
+  SVGAnimatedNumber: 'number',
+  SVGAnimatedInteger: 'number',
+  SVGAnimatedAngle: 'string',
+  SVGAnimatedEnumeration: 'string',
+  SVGPointList: 'string',
+  SVGPoint: 'string',
+  SVGAnimatedLengthList: 'string',
+  SVGAnimatedTransformList: 'string',
+  SVGAnimatedString: 'string',
+  SVGAnimatedNumberList: 'string',
+  SVGPathSegList: 'string',
+  SVGAnimatedBoolean: 'boolean',
+  SVGAnimatedPreserveAspectRatio: 'string',
+  SVGStringList: 'string',
+  SVGAnimatedRect: 'string',
+  SVGRect: 'string'
 }
 
 const mapPropertyType = (type: string): string => {
   let value
-  if (baseTypeConversionMap.has(type))
-    value = baseTypeConversionMap.get(type)
+  if (baseTypeConversionMap.has(type)) value = baseTypeConversionMap.get(type)
   return propertyTypes[value || type] || (value || type.replace(/[']/g, "'"))
 }
 
 const specialElementNames: Record<string, string> = {
-  'switch': 'switchEl',
-  'var': 'varEl'
+  switch: 'switchEl',
+  var: 'varEl'
 }
 
 const mapElementFnName = (name: string): string => {
@@ -150,83 +146,82 @@ const mapPropertyName = (name: string): string => {
 //   return true
 // }
 
-const extractTypes = (prop: Browser.Typed): { names: string[], nullable: boolean } => {
+const extractTypes = (prop: Browser.Typed): { names: string[]; nullable: boolean } => {
   if (prop['override-type'])
-    return { names: [prop['override-type']], nullable: prop.nullable === undefined || !!prop.nullable}
+    return { names: [prop['override-type']], nullable: prop.nullable === undefined || !!prop.nullable }
   if (typeof prop.type === 'string')
-    return { names: [prop.type], nullable: prop.nullable === undefined || !!prop.nullable}
+    return { names: [prop.type], nullable: prop.nullable === undefined || !!prop.nullable }
 
   const subs = prop.type.map(p => extractTypes(p))
   return {
     names: Array.prototype.concat(...subs.map(v => v.names)),
-    nullable: subs.reduce((acc: boolean, curr) => curr.nullable ? true : acc, false)
+    nullable: subs.reduce((acc: boolean, curr) => (curr.nullable ? true : acc), false)
   }
 }
 
 const eventTypeMap = {
-  'onabort': 'UIEvent',
-  'oncomplete': 'Event',
-  'onclick': 'MouseEvent',
-  'onerror': 'ErrorEvent',
-  'onload': 'UIEvent',
-  'onloadstart': 'Event',
-  'onprogress': 'ProgressEvent',
-  'onreadystatechange': 'ProgressEvent',
-  'onresize': 'UIEvent',
-  'onscroll': 'UIEvent',
-  'onselect': 'UIEvent',
-  'onunload': 'UIEvent',
-  'ontimeout': 'ProgressEvent',
-  'onkeydown': 'KeyboardEvent',
-  'onkeypress': 'KeyboardEvent',
-  'onkeyup': 'KeyboardEvent',
-  'onmousedown': 'MouseEvent',
-  'onmouseenter': 'MouseEvent',
-  'onmouseleave': 'MouseEvent',
-  'onmousemove': 'MouseEvent',
-  'onmouseout': 'MouseEvent',
-  'onmouseover': 'MouseEvent',
-  'onmouseup': 'MouseEvent',
-  'onmousewheel': 'MouseEvent',
+  onabort: 'UIEvent',
+  oncomplete: 'Event',
+  onclick: 'MouseEvent',
+  onerror: 'ErrorEvent',
+  onload: 'UIEvent',
+  onloadstart: 'Event',
+  onprogress: 'ProgressEvent',
+  onreadystatechange: 'ProgressEvent',
+  onresize: 'UIEvent',
+  onscroll: 'UIEvent',
+  onselect: 'UIEvent',
+  onunload: 'UIEvent',
+  ontimeout: 'ProgressEvent',
+  onkeydown: 'KeyboardEvent',
+  onkeypress: 'KeyboardEvent',
+  onkeyup: 'KeyboardEvent',
+  onmousedown: 'MouseEvent',
+  onmouseenter: 'MouseEvent',
+  onmouseleave: 'MouseEvent',
+  onmousemove: 'MouseEvent',
+  onmouseout: 'MouseEvent',
+  onmouseover: 'MouseEvent',
+  onmouseup: 'MouseEvent',
+  onmousewheel: 'MouseEvent',
 
-  'onanimationend': 'AnimationEvent',
-  'onanimationiteration': 'AnimationEvent',
-  'onanimationstart': 'AnimationEvent',
-  'onTransitionEnd': 'AnimationEvent',
-  'oncompositionend': 'CompositionEvent',
-  'oncompositionstart': 'CompositionEvent',
-  'oncompositionupdate': 'CompositionEvent',
+  onanimationend: 'AnimationEvent',
+  onanimationiteration: 'AnimationEvent',
+  onanimationstart: 'AnimationEvent',
+  onTransitionEnd: 'AnimationEvent',
+  oncompositionend: 'CompositionEvent',
+  oncompositionstart: 'CompositionEvent',
+  oncompositionupdate: 'CompositionEvent',
 
-  'oncopy': 'ClipboardEvent',
-  'oncut': 'ClipboardEvent',
-  'onpaste': 'ClipboardEvent',
+  oncopy: 'ClipboardEvent',
+  oncut: 'ClipboardEvent',
+  onpaste: 'ClipboardEvent',
 
-  'ondragend': 'DragEvent',
-  'ondragenter': 'DragEvent',
-  'ondragexit': 'DragEvent',
-  'ondragleave': 'DragEvent',
-  'ondragover': 'DragEvent',
-  'ondragstart': 'DragEvent',
-  'ondrop': 'DragEvent',
+  ondragend: 'DragEvent',
+  ondragenter: 'DragEvent',
+  ondragexit: 'DragEvent',
+  ondragleave: 'DragEvent',
+  ondragover: 'DragEvent',
+  ondragstart: 'DragEvent',
+  ondrop: 'DragEvent',
 
-  'onblur': 'FocusEvent',
-  'onfocus': 'FocusEvent',
-  'onfocusin': 'FocusEvent',
-  'onfocusout': 'FocusEvent',
+  onblur: 'FocusEvent',
+  onfocus: 'FocusEvent',
+  onfocusin: 'FocusEvent',
+  onfocusout: 'FocusEvent',
 
-  'ontouchcancel': 'TouchEvent',
-  'ontouchend': 'TouchEvent',
-  'ontouchmove': 'TouchEvent',
-  'ontouchstart': 'TouchEvent',
+  ontouchcancel: 'TouchEvent',
+  ontouchend: 'TouchEvent',
+  ontouchmove: 'TouchEvent',
+  ontouchstart: 'TouchEvent',
 
-  'onwheen': 'WheelEvent'
+  onwheen: 'WheelEvent'
 }
 
 const mangleEventType = (name: string, type: string) => {
   name = name.toLowerCase()
 
-  if (eventTypeMap[name])
-    return eventTypeMap[name]
+  if (eventTypeMap[name]) return eventTypeMap[name]
   switch (type) {
     case 'Event':
     case 'EventHandlerNonNull':
@@ -265,37 +260,29 @@ const propertyExpression = (types: string[], nullable: boolean, name: string) =>
 }
 
 const isEvent = (name: string, type: Browser.Typed[] | string) => {
-  return name.startsWith('on') || typeof type === 'string' && type.includes('EventHandler')
+  return name.startsWith('on') || (typeof type === 'string' && type.includes('EventHandler'))
 }
 
 const comparePropertyByType = (a: Browser.Property, b: Browser.Property): number => {
   const aIsEvent = isEvent(a.name, a.type)
   const bIsEvent = isEvent(a.name, b.type)
-  if ((aIsEvent && bIsEvent) || (!aIsEvent && !bIsEvent))
-    return 0
-  if (aIsEvent)
-    return 1
-  else
-    return -1
+  if ((aIsEvent && bIsEvent) || (!aIsEvent && !bIsEvent)) return 0
+  if (aIsEvent) return 1
+  else return -1
 }
 
 const compareProperty = (a: Browser.Property, b: Browser.Property): number => {
   const byType = comparePropertyByType(a, b)
-  if (byType !== 0)
-    return byType
-  if (a.name === b.name)
-    return 0
-  if (a.name < b.name)
-    return -1
-  else
-    return 1
+  if (byType !== 0) return byType
+  if (a.name === b.name) return 0
+  if (a.name < b.name) return -1
+  else return 1
 }
 
 const attributesCache = new Map<string, Browser.Property[]>()
 const getAttributes = (webidl: Browser.WebIdl, inter: Browser.Interface) => {
   const id = inter.name
-  if (attributesCache.has(id))
-    return attributesCache.get(id)
+  if (attributesCache.has(id)) return attributesCache.get(id)
   const properties = Object.values(collectProperties(webidl)(inter))
     .filter(isExposableProperty)
     .sort(compareProperty)
@@ -312,14 +299,13 @@ const attributesTypeTemplate = (webidl: Browser.WebIdl) => (inter: Browser.Inter
 }
 
 const filterElement = (inter: Browser.Interface) => (el: Browser.Element) => {
-  if (inter.name === 'HTMLTableCellElement' && (el.name === 'td' || el.name === 'th'))
-    return false
+  if (inter.name === 'HTMLTableCellElement' && (el.name === 'td' || el.name === 'th')) return false
   return true
 }
 
 const attributesTemplate = (elements: Browser.Interface[], webidl: Browser.WebIdl) => {
   const attributes = getAllAttributes(elements, webidl)
-  const properties = attributes.map((a) => propertyExpression(a.types, true, a.attribute))
+  const properties = attributes.map(a => propertyExpression(a.types, true, a.attribute))
   return `
 export interface DOMAttributes<State, Action, El> extends MoodAttributes<State, El> {
   ${properties.join('\n  ')}
@@ -342,24 +328,25 @@ const getAllAttributes = (elements: Browser.Interface[], webidl: Browser.WebIdl)
     })
   })
   const keys = Array.from(accumulator.keys())
-  return keys.map(attribute => ({
-    attribute, types: accumulator.get(attribute)
-  })).sort((a, b) => {
-    if (a.attribute < b.attribute) {
-      return -1
-    } else if (a.attribute > b.attribute) {
-      return 1
-    } else {
-      return 0
-    }
-  })
+  return keys
+    .map(attribute => ({
+      attribute,
+      types: accumulator.get(attribute)
+    }))
+    .sort((a, b) => {
+      if (a.attribute < b.attribute) {
+        return -1
+      } else if (a.attribute > b.attribute) {
+        return 1
+      } else {
+        return 0
+      }
+    })
 }
 
 const interfaceTemplate = (webidl: Browser.WebIdl) => (inter: Browser.Interface) => {
   if (!inter.element) return ''
-  const result = [
-      attributesTypeTemplate(webidl)(inter)
-    ]
+  const result = [attributesTypeTemplate(webidl)(inter)]
     .concat(inter.element.filter(filterElement(inter)).map(elementTemplate(inter)))
     .join('\n\n')
   return result

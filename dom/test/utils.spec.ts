@@ -1,4 +1,4 @@
-import { removeNode, insertBefore } from '../../src/utils'
+import { removeNode, insertBefore } from '../src/utils/dom'
 import { createContext } from './common'
 
 describe('utils', () => {

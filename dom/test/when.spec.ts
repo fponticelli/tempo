@@ -1,5 +1,6 @@
-import { div } from '../../src'
-import { when, unless } from '../../src'
+import { html } from '../src/web'
+const { div } = html
+import { when, unless } from '../src/when'
 import { createContext } from './common'
 
 describe('when', () => {
