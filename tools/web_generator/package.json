@@ -15,9 +15,9 @@
     "@types/node": "10.12.18",
     "@types/webidl2": "23.8.0",
     "@types/jsdom": "12.2.4",
-    "typescript": "3.6.3",
-    "tslint": "5.20.0",
-    "prettier": "1.18.2"
+    "typescript": "3.7.2",
+    "tslint": "5.20.1",
+    "prettier": "1.19.1"
   },
   "scripts": {
     "compile": "tsc",

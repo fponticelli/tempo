@@ -8,11 +8,12 @@
     "@mood/store": "1.0.0"
   },
   "devDependencies": {
-    "cssnano": "^4.1.10",
-    "parcel-bundler": "1.12.3",
-    "prettier": "1.18.2",
-    "tslint": "5.20.0",
-    "typescript": "3.6.3"
+    "cssnano": "4.1.10",
+    "parcel-bundler": "1.12.4",
+    "prettier": "1.19.1",
+    "tslint": "5.20.1",
+    "typescript": "3.7.2",
+    "babel-types": "6.26.0"
   },
   "scripts": {
     "compile": "NODE_ENV=production && parcel build src/index.html --public-url . --out-dir ../../docs/demo/readme --experimental-scope-hoisting",
