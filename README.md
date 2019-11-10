@@ -1,5 +1,3 @@
-# Mood
-
 [![Actions Status](https://github.com/fponticelli/mood2/workflows/Build%20and%20Test/badge.svg)](https://github.com/fponticelli/mood2/actions?query=workflow%3A"Build+and+Test")
 
 Mood is a framework to build dynamic front end applications.
