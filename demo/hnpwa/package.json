@@ -1,0 +1,29 @@
+{
+  "name": "@mood/demo.hnpwa",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "@mood/core": "1.0.0",
+    "@mood/dom": "1.0.0",
+    "@mood/store": "1.0.0",
+    "partsing": "0.7.3"
+  },
+  "devDependencies": {
+    "cssnano": "4.1.10",
+    "parcel-bundler": "1.12.4",
+    "prettier": "1.19.1",
+    "tslint": "5.20.1",
+    "typescript": "3.7.2",
+    "babel-types": "6.26.0",
+    "sass": "1.23.3"
+  },
+  "scripts": {
+    "compile": "NODE_ENV=production && parcel build src/index.html --public-url . --out-dir ../../docs/demo/hpnwa --experimental-scope-hoisting",
+    "clean": "rm -rf dist/*",
+    "build": "npm run clean && npm run compile",
+    "watch": "parcel src/index.html",
+    "tslint": "tslint -p ./tslint.json",
+    "prettier": "prettier -c src/**/*.ts",
+    "prettier-fix": "prettier --write src/**/*.ts"
+  }
+}

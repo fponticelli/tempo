@@ -54,6 +54,9 @@
     }, {
       "packageName": "@mood/demo.readme",
       "projectFolder": "./demo/readme"
+    }, {
+      "packageName": "@mood/demo.hnpwa",
+      "projectFolder": "./demo/hnpwa"
     }
   ]
 }
