@@ -77,3 +77,10 @@ export const elNS = <State, Action, El>(
   const namespace = defaultNamespaces[ns] || ns
   return new DOMElementNS<State, Action, El>(namespace, name, attributes, children.map(domChildToTemplate))
 }
+
+export const elNS2 = <El>(ns: string, ame: string) => <State, Action>(
+  attributes: DOMAttributes<State, Action, El>,
+  ...children: DOMChild<State, Action>[]) => {
+    const namespace = defaultNamespaces[ns] || ns
+    return new DOMElementNS<State, Action, El>(namespace, name, attributes, children.map(domChildToTemplate))
+  }

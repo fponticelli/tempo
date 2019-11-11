@@ -15,8 +15,37 @@ export const filterElements = (webidl: Browser.WebIdl, forceKnownTypes: Set<stri
     .filter(e => !!e.element)
 }
 
-export const generateTypes = (elements: Browser.Interface[], webidl: Browser.WebIdl) => {
-  const result = [importsWebContent(), elements.map(interfaceTemplate(webidl)).join('\n\n')].join('\n\n')
+export const generateTypes = (elements: Browser.Interface[]) => {
+  const groups = [].concat(...elements.map(interfaceTemplate))
+    .reduce((acc: Record<string, string[]>, curr: { module: string, f: string }) => {
+      const arr = acc[curr.module]
+      if (arr) {
+        arr.push(curr.f)
+        return acc
+      } else {
+        return {
+          ...acc,
+          [curr.module]: [curr.f]
+        }
+      }
+    }, {} as Record<string, string[]>)
+
+  console.log(Object.keys(groups))
+
+  const elementsr = Object.keys(groups)
+    .map(group => {
+      const fs = groups[group].sort((a, b) => {
+        if (a < b) return -1
+        else if (a > b) return 1
+        else return 0
+      })
+      return `export module ${group} {
+  ${fs.join('\n')}
+}`
+    })
+    .join('\n\n')
+
+  const result = [importsWebContent(), elementsr].join('\n\n')
   return result
 }
 
@@ -30,27 +59,22 @@ const elementTemplate = (inter: Browser.Interface) => (el: Browser.Element) => {
   const lcns = ns.toLowerCase()
   const name = el.name
   const fname = mapElementFnName(name)
-  const attributesTypeName = getAttributesTypeName(inter)
+  // const attributesTypeName = getAttributesTypeName(inter)
 
   const fcall =
     ns === 'HTML'
-      ? `el<State, Action, ${inter.name}>('${name}', attributes as never, ...children)`
-      : `elNS<State, Action, ${inter.name}>('${lcns}', '${name}', attributes as never, ...children)`
+      ? `el2<${inter.name}>('${name}')`
+      : `elNS2<${inter.name}>('${lcns}', '${name}')`
 
-  const content = `export module ${lcns} {
-    export function ${fname}<State, Action>(
-    attributes: ${attributesTypeName}<State, Action> & CSSAttributes<State> & MoodAttributes<State, ${inter.name}>,
-    ...children: DOMChild<State, Action>[]
-  ): DOMElement<State, Action, ${inter.name}> {
-    return ${fcall}
+  return {
+    module: lcns,
+    f: `export const ${fname} = ${fcall}`
   }
-}`
-  return content
 }
 
-const getAttributesTypeName = (inter: Browser.Interface) => {
-  return `${inter.name}Attributes`
-}
+// const getAttributesTypeName = (inter: Browser.Interface) => {
+//   return `${inter.name}Attributes`
+// }
 
 const collectProperties = (webidl: Browser.WebIdl) => (inter: Browser.Interface): Record<string, Browser.Property> => {
   let local = (inter.properties && inter.properties.property) || {}
@@ -237,11 +261,11 @@ const getProperyTypes = (prop: Browser.Property) => {
   return Array.from(new Set(types.names.map(mapPropertyType)))
 }
 
-const propertyTemplate = (prop: Browser.Property) => {
-  const types = extractTypes(prop)
-  const typeNames = Array.from(new Set(types.names.map(mapPropertyType)))
-  return propertyExpression(typeNames, types.nullable, prop.name)
-}
+// const propertyTemplate = (prop: Browser.Property) => {
+//   const types = extractTypes(prop)
+//   const typeNames = Array.from(new Set(types.names.map(mapPropertyType)))
+//   return propertyExpression(typeNames, types.nullable, prop.name)
+// }
 
 const propertyExpression = (types: string[], nullable: boolean, name: string) => {
   const type = types.join(' | ')
@@ -283,13 +307,13 @@ const getAttributes = (webidl: Browser.WebIdl, inter: Browser.Interface) => {
   return properties
 }
 
-const attributesTypeTemplate = (webidl: Browser.WebIdl) => (inter: Browser.Interface) => {
-  const name = getAttributesTypeName(inter)
-  const properties = getAttributes(webidl, inter)
-  return `export interface ${name}<State, Action> {
-  ${properties.map(propertyTemplate).join('\n  ')}
-}`
-}
+// const attributesTypeTemplate = (webidl: Browser.WebIdl) => (inter: Browser.Interface) => {
+//   const name = getAttributesTypeName(inter)
+//   const properties = getAttributes(webidl, inter)
+//   return `export interface ${name}<State, Action> {
+//   ${properties.map(propertyTemplate).join('\n  ')}
+// }`
+// }
 
 const filterElement = (inter: Browser.Interface) => (el: Browser.Element) => {
   if (inter.name === 'HTMLTableCellElement' && (el.name === 'td' || el.name === 'th')) return false
@@ -337,24 +361,20 @@ const getAllAttributes = (elements: Browser.Interface[], webidl: Browser.WebIdl)
     })
 }
 
-const interfaceTemplate = (webidl: Browser.WebIdl) => (inter: Browser.Interface) => {
-  if (!inter.element) return ''
-  const result = [attributesTypeTemplate(webidl)(inter)]
-    .concat(inter.element.filter(filterElement(inter)).map(elementTemplate(inter)))
-    .join('\n\n')
-  return result
+const interfaceTemplate = (inter: Browser.Interface) => {
+  if (!inter.element) return []
+  // const result = [attributesTypeTemplate(webidl)(inter)]
+  //   .concat(inter.element.filter(filterElement(inter)).map(elementTemplate(inter)))
+  return inter.element.filter(filterElement(inter)).map(elementTemplate(inter))
 }
 
 const importsWebContent = () => {
   return `
 // THIS FILE IS AUTOMATICALLY GENERATED, PLEASE DO NOT CHANGE DIRECTLY
 
-import { DOMChild } from './template'
-import { DOMAttribute, DOMEventHandler } from './value'
-import { el, DOMElement } from './element'
-import { elNS } from './element_ns'
-import { CSSAttributes, CSSProperties } from './web_css_properties'
-import { MoodAttributes } from './mood_attributes'`.trim()
+import { el2 } from './element'
+import { elNS2 } from './element_ns'
+`.trim()
 }
 
 const importsAttributesContent = () => {

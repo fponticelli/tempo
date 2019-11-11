@@ -207,7 +207,7 @@ function emitElements() {
   const webAttributesTs = generateWebAttributes(elements, webidl)
   fs.writeFileSync(path.join(__dirname, '..', 'generated', 'web_attributes.ts'), webAttributesTs, 'utf-8')
 
-  const webTs = generateTypes(elements, webidl)
+  const webTs = generateTypes(elements)
   // fs.writeFileSync(path.join(__dirname, '..', 'generated', 'info.json'), JSON.stringify(webidl, null, 2), 'utf-8')
   fs.writeFileSync(path.join(__dirname, '..', 'generated', 'web.ts'), webTs, 'utf-8')
 

@@ -66,7 +66,7 @@ export class DOMElement<State, Action, El> implements DOMTemplate<State, Action>
     // apply attributes
     for (const st of statics) st()
     for (const dy of dynamics) dy(state)
-    
+
     // children
     const appendChild = (n: Node) => el.appendChild(n)
     const views = this.children.map(child => child.render(ctx.withAppend(appendChild).withParent(el), state))
@@ -102,3 +102,9 @@ export const el = <State, Action, El>(
 ) => {
   return new DOMElement<State, Action, El>(name, attributes, children.map(domChildToTemplate))
 }
+
+export const el2 = <El>(name: string) => <State, Action>(
+  attributes: DOMAttributes<State, Action, El>,
+  ...children: DOMChild<State, Action>[]) => {
+    return new DOMElement<State, Action, El>(name, attributes, children.map(domChildToTemplate))
+  }
