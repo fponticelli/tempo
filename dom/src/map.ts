@@ -21,7 +21,7 @@ export class MapStateTemplate<OuterState, InnerState, Action> implements DOMTemp
     } else {
       return new DOMDynamicFragmentView<OuterState>(views, (state: OuterState) => {
         const innerState = map(state)
-        dynamics.forEach(d => d.change(innerState))
+        for (const d of dynamics) d.change(innerState)
       })
     }
   }

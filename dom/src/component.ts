@@ -17,7 +17,7 @@ export class DOMComponentView<State, Action> extends DOMDynamicFragmentView<Stat
   ) {
     super(children, (state: State) => {
       store.property.set(state)
-      dynamics.forEach(child => child.change(state))
+      for (const dy of dynamics) dy.change(state)
     })
   }
 

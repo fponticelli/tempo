@@ -6,7 +6,7 @@ export class DOMBaseNodeView<State> {
   destroy() {
     if (this.beforeDestroy) this.beforeDestroy()
     removeNode(this.node)
-    this.children.forEach(child => child.destroy())
+    for (const c of this.children) c.destroy()
   }
 }
 
@@ -25,12 +25,3 @@ export class DOMDynamicNodeView<State> extends DOMBaseNodeView<State> implements
     super(node, children, beforeDestroy)
   }
 }
-
-// export const nodeView = <State>(node: Node, children: View<State>[]) => {
-//   const dynamics = filterDynamics(children)
-//   if (dynamics.length > 0) {
-//     return new DOMDynamicNodeView(node, children, (state: State) => dynamics.forEach(child => child.change(state)))
-//   } else {
-//     return new DOMStaticNodeView(node, children)
-//   }
-// }

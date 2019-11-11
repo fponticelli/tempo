@@ -2,7 +2,7 @@ import { State, createTodo } from './state'
 import { Action } from './action'
 
 export const reducer = (state: State, action: Action) => {
-  const newState = { ...state }
+  const newState = Object.assign({}, state)
   switch (action.kind) {
     case 'adding-todo':
       if (action.title) {
@@ -12,7 +12,7 @@ export const reducer = (state: State, action: Action) => {
       }
       break
     case 'create-todo':
-      if (action.title) newState.todos = [...state.todos, createTodo(action.title)]
+      if (action.title) newState.todos = state.todos.concat([createTodo(action.title)])
       delete newState.adding
       break
     case 'editing-todo':

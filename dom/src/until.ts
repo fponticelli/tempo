@@ -14,7 +14,9 @@ export class DOMUntilView<OuterState, InnerState, Action> implements DynamicView
 
   destroy(): void {
     removeNode(this.ref)
-    this.childrenView.forEach(e => e.forEach(c => c.destroy()))
+    for (const c of this.childrenView)
+      for (const e of c)
+        e.destroy()
     this.childrenView = []
   }
 
@@ -25,7 +27,7 @@ export class DOMUntilView<OuterState, InnerState, Action> implements DynamicView
     while ((value = this.repeatUntil(state, count)) !== undefined) {
       if (count < currentViewLength) {
         // replace existing
-        filterDynamics(this.childrenView[count]).forEach((view) => view.change(value!))
+        for (const v of filterDynamics(this.childrenView[count])) v.change(value!)
       } else {
         // add node
         this.childrenView.push(this.children.map(el => el.render(this.ctx, value!)))
@@ -35,7 +37,7 @@ export class DOMUntilView<OuterState, InnerState, Action> implements DynamicView
     let i = count
     while (i < currentViewLength) {
       // remove extra nodes
-      this.childrenView[i].forEach(child => child.destroy())
+      for (const c of this.childrenView[i]) c.destroy()
       i++
     }
     this.childrenView = this.childrenView.slice(0, count)

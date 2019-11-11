@@ -30,12 +30,11 @@ export class DOMElementNS<State, Action, El> implements DOMTemplate<State, Actio
       { statics: [], dynamics: [] }
     )
 
-    // apply attributes
-    statics.forEach(f => f())
-    dynamics.forEach(f => f(state))
-
-    // TODO append before or after children?
     ctx.append(el)
+
+    // apply attributes
+    for (const st of statics) st()
+    for (const dy of dynamics) dy(state)
 
     // children
     const appendChild = (n: Node) => el.appendChild(n)
@@ -56,7 +55,9 @@ export class DOMElementNS<State, Action, El> implements DOMTemplate<State, Actio
     }
 
     if (allDynamics.length > 0) {
-      return new DOMDynamicNodeView(el, views, (state: State) => allDynamics.forEach(f => f(state)), beforeDestroy)
+      return new DOMDynamicNodeView(el, views, (state: State) => {
+        for (const f of allDynamics) f(state)
+      }, beforeDestroy)
     } else {
       return new DOMStaticNodeView(el, views, beforeDestroy)
     }

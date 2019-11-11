@@ -17,7 +17,7 @@ export class Emitter<T extends any[]> implements Observable<T> {
   private constructor() {}
 
   emit(...value: T) {
-    this.listeners.forEach(listener => listener(...value))
+    for (const l of this.listeners) l(...value)
   }
 
   on(listener: Listener<T>) {

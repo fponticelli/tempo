@@ -73,7 +73,7 @@ export const template = section<State, Action>(
               })
           },
           forEach<TodoWEditing[], Action>(
-            {},
+            { key: (todo: TodoWEditing) => todo.id },
             li(
               {
                 className: todo => {

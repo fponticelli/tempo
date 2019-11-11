@@ -3,7 +3,7 @@ import { Store } from '@mood/store/lib/store'
 import { debounce } from '@mood/store/lib/emitter'
 import { DataStore } from './data_store'
 import { reducer } from './reducer'
-import { template } from './app_view'
+import { template } from './app_template'
 import { State } from './state'
 
 const state = DataStore.get()

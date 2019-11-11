@@ -18,8 +18,8 @@
     "babel-types": "6.26.0"
   },
   "scripts": {
-    "compile": "NODE_ENV=production && parcel build src/index.html --public-url . --out-dir ../../docs/demo/todomvc --experimental-scope-hoisting",
-    "clean": "rm -rf dist/*",
+    "compile": "NODE_ENV=production && parcel build src/index.html --no-minify --public-url . --out-dir ../../docs/demo/todomvc --experimental-scope-hoisting",
+    "clean": "rm -rf dist/* && rm -rf ../../docs/demo/todomvc/*",
     "build": "npm run clean && npm run compile",
     "watch": "parcel src/index.html",
     "tslint": "tslint -p ./tslint.json",

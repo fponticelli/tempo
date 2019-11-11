@@ -5,7 +5,7 @@ export class DOMBaseFragmentView {
   constructor(readonly views: View<any>[]) {}
 
   destroy(): void {
-    this.views.forEach(view => view.destroy())
+    for (const v of this.views) v.destroy()
   }
 }
 
@@ -26,7 +26,9 @@ export class DOMDynamicFragmentView<State> extends DOMBaseFragmentView implement
 export const fragmentView = <State>(views: View<State>[]) => {
   const dynamics = filterDynamics(views)
   if (dynamics.length > 0) {
-    return new DOMDynamicFragmentView<State>(views, (state: State) => dynamics.forEach(child => child.change(state)))
+    return new DOMDynamicFragmentView<State>(views, (state: State) => {
+      for (const d of dynamics) d.change(state)
+    })
   } else {
     return new DOMStaticFragmentView(views)
   }

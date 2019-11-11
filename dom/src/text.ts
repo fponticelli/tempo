@@ -21,7 +21,8 @@ const renderFunction = <State>(
   const f = (state: State) => {
     const newContent = map(state) || ''
     // TODO, is this optimization worth it?
-    if (node.textContent !== newContent) node.textContent = newContent
+    if (node.textContent !== newContent)
+      node.textContent = newContent
   }
   const view = new DOMDynamicNodeView(node, [], f)
   ctx.append(node)

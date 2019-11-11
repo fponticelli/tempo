@@ -39,7 +39,7 @@ export const setAttribute = (el: Element, name: string, value: string) => {
 
 export const setProperty = (el: Element, name: string, value: any | undefined) => {
   const anyEl = el as any
-  if (value == null) {
+  if (value == null && anyEl[name] != null) {
     anyEl[name] = null
   } else if (anyEl[name] !== value) {
     anyEl[name] = value
