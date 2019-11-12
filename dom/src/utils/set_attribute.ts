@@ -1,5 +1,3 @@
-import { CSSProperties } from '../web_css_properties'
-
 export const setOneStyle = (el: Element, name: string, value: any) => {
   const anyStyle = (el as HTMLElement).style as any
   if (value == null) {
@@ -47,14 +45,13 @@ export const setProperty = (el: Element, name: string, value: any | undefined) =
   }
 }
 
-export const setStyleAttribute = (el: Element, name: string, value: CSSProperties | undefined) => {
+export const setStyleAttribute = (el: Element, name: string, value: {} | undefined) => {
   const html = el as HTMLElement
   if (value == null) {
     html.removeAttribute(name)
   } else {
     const s = Object.keys(value)
       .map(k => {
-        // const cssName = cssMapper[k as keyof (typeof cssMapper)] || k
         return `${k}: ${(value as any)[k]!};`
       })
       .join(' ')
