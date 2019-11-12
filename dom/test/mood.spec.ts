@@ -1,8 +1,7 @@
 import { createContext } from './common'
 import { Mood } from '../src/mood'
 import { component } from '../src/component'
-import { html } from '../src/web'
-const { div } = html
+import { div } from '../src/html'
 import { Store } from '@mood/store/lib/store'
 import { Property } from '@mood/store/lib/property'
 

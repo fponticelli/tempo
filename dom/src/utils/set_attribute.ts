@@ -12,13 +12,14 @@ export const setOneStyle = (el: Element, name: string, value: any) => {
   }
 }
 
-export const setEvent = <Action>(dispatch: (action: Action) => void) => {
-  return (el: Element, name: string, value: (e: Event) => Action | undefined) => {
+export const setEvent = <Action, Ev extends Event>(dispatch: (action: Action) => void) => {
+  return (el: Element, name: string, value: ((e: Ev) => Action | undefined) | undefined) => {
+    name = `on${name}`
     const anyEl = el as any
     if (value == null) {
       anyEl[name] = null
     } else {
-      anyEl[name] = (e: Event) => {
+      anyEl[name] = (e: Ev) => {
         const r = value(e)
         if (r != null) dispatch(r)
       }

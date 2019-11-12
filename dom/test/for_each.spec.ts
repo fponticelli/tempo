@@ -1,6 +1,5 @@
 import { createContext } from './common'
-import { html } from '../src/web'
-const { div } = html
+import { div } from '../src/html'
 import { forEach } from '../src/for_each'
 
 describe('repeat', () => {

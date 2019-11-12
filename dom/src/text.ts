@@ -34,7 +34,7 @@ export class DOMText<State, Action> implements DOMTemplate<State, Action> {
 
   render(ctx: DOMContext<Action>, state: State): View<State> {
     if (typeof this.content === 'function') {
-      return renderFunction(ctx, state, this.content)
+      return renderFunction(ctx, state, this.content as UnwrappedDerivedValue<State, string>)
     } else {
       return renderLiteral(ctx, this.content)
     }

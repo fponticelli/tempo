@@ -22,11 +22,11 @@ describe('map', () => {
 
   it('mapAction', () => {
     let ref: string | undefined
-    const onclick = (_: Event): number => 1
+    const click = (_: Event): number => 1
     const template = el<string, string, HTMLDivElement>(
       'div',
       {},
-      mapAction({ map: (v: number) => `#${v}` }, el<string, number, HTMLDivElement>('div', { onclick } as any, s => s))
+      mapAction({ map: (v: number) => `#${v}` }, el<string, number, HTMLDivElement>('div', { events: { click } }, s => s))
     )
     const ctx = createContext((n: string) => {
       ref = n
@@ -42,13 +42,13 @@ describe('map', () => {
 
   it('mapAction passing undefined', () => {
     let ref = 'ORIG'
-    const onclick = (_: Event): string => 'X'
+    const click = (_: Event): string => 'X'
     const template = el<string, string, HTMLDivElement>(
       'div',
       {},
       mapAction(
         { map: (v: string): string | undefined => undefined },
-        el<string, string, HTMLDivElement>('div', { onclick } as any, s => s)
+        el<string, string, HTMLDivElement>('div', { events: { click } }, s => s)
       )
     )
     const ctx = createContext((n: string) => {
@@ -65,11 +65,11 @@ describe('map', () => {
 
   it('mapAction only static', () => {
     let ref: string | undefined
-    const onclick = (_: Event): number => 1
+    const click = (_: Event): number => 1
     const template = el<string, string, HTMLDivElement>(
       'div',
       {},
-      mapAction({ map: (v: number) => `#${v}` }, el<string, number, HTMLDivElement>('div', { onclick } as any, 'X'))
+      mapAction({ map: (v: number) => `#${v}` }, el<string, number, HTMLDivElement>('div', { events: { click } }, 'X'))
     )
     const ctx = createContext((n: string) => {
       ref = n

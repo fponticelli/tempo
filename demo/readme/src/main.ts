@@ -34,15 +34,15 @@ const reducer = (state: State, action: Action) => {
 const store = Store.ofState({ state, reducer })
 
 const template = div<State, Action>(
-  { className: 'app' },
+  { attrs: { className: 'app' } },
   mapState(
-    { map: state => state.count },
-    div({ className: 'count count-small' }, 'count'),
-    div({ className: 'count' }, String),
+    { map: (state: State) => state.count },
+    div({ attrs: { className: 'count count-small' } }, 'count'),
+    div({ attrs: { className: 'count' } }, String),
     div(
-      { className: 'buttons' },
-      button({ onclick: decrement, disabled: (count: number) => count <= 0 }, '-'),
-      button({ onclick: increment }, '+')
+      { attrs: { className: 'buttons' } },
+      button({ events: { click: decrement }, attrs: { disabled: (count: number) => count <= 0 } }, '-'),
+      button({ events: { click: increment } }, '+')
     )
   )
 )

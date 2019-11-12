@@ -1,5 +1,4 @@
-import { html } from '../src/web'
-const { div } = html
+import { div } from '../src/html'
 import { component } from '../src/component'
 import { text } from '../src/text'
 import { createContext } from './common'

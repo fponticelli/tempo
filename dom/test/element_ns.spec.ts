@@ -23,7 +23,7 @@ describe('dom_ns_element', () => {
 
   it('static attribute', () => {
     const ctx = createContext()
-    const node = elNS('svg', 'svg', { id: 'main' }).render(ctx, 1)
+    const node = elNS('svg', 'svg', { attrs: { id: 'main' } }).render(ctx, 1)
     expect(ctx.doc.body.innerHTML).toEqual('<svg id="main"></svg>')
     node.destroy()
     expect(ctx.doc.body.innerHTML).toEqual('')
@@ -31,7 +31,7 @@ describe('dom_ns_element', () => {
 
   it('dynamic attribute', () => {
     const ctx = createContext()
-    const node = elNS('svg', 'svg', { id: (v: string) => v }).render(ctx, 'abc') as DynamicView<
+    const node = elNS('svg', 'svg', { attrs: { id: (v: string) => v } }).render(ctx, 'abc') as DynamicView<
       string | undefined
     >
     expect(ctx.doc.body.innerHTML).toEqual('<svg id="abc"></svg>')
@@ -45,8 +45,8 @@ describe('dom_ns_element', () => {
 
   it('dynamic child', () => {
     const ctx = createContext()
-    const node = elNS('svg', 'svg', { id: (v: string) => v },
-      elNS('svg', 'a', { href: (v: string) => v && `#${v}` })
+    const node = elNS('svg', 'svg', { attrs: { id: (v: string) => v } },
+      elNS('svg', 'a', { attrs: { href: (v: string) => v && `#${v}` } })
     ).render(ctx, 'abc') as DynamicView<string | undefined>
     expect(ctx.doc.body.innerHTML).toEqual('<svg id="abc"><a href="#abc"></a></svg>')
     node.change('xyz')

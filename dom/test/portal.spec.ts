@@ -2,8 +2,7 @@ import { createContext } from './common'
 import { Mood } from '../src/mood'
 import { component } from '../src/component'
 import { portalWithSelector, headPortal, bodyPortal } from '../src/portal'
-import { html } from '../src/web'
-const { span, style } = html
+import { span, style } from '../src/html'
 import { Store } from '@mood/store/lib/store'
 
 describe('portal', () => {
@@ -16,7 +15,7 @@ describe('portal', () => {
     })
     const comp = component(
       { store },
-      portalWithSelector({ selector: '#container' }, span({ className: s => s }))
+      portalWithSelector({ selector: '#container' }, span({ attrs: { className: (s: string) => s } }))
     )
     const view = Mood.renderComponent({
       el: ctx.doc.getElementById('main')!,
@@ -39,7 +38,7 @@ describe('portal', () => {
     })
     const comp = component(
       { store },
-      portalWithSelector({ selector: '#doesnotexist' }, span({ className: s => s }))
+      portalWithSelector({ selector: '#doesnotexist' }, span({ attrs: { className: (s: string) => s } }))
     )
     expect(() => {
       Mood.renderComponent({

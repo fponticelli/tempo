@@ -53,15 +53,15 @@ const reducer = (state: State, action: Action) => {
 const store = Store.ofState({ state, reducer })
 
 const template = div<State, Action>(
-  { className: 'app' },
+  { attrs: { className: 'app' } },
   mapState(
-    { map: state => state.count },
-    div({ className: 'count count-small' }, 'count'),
-    div({ className: 'count' }, String),
+    { map: (state: State) => state.count },
+    div({ attrs: { className: 'count count-small' } }, 'count'),
+    div({ attrs: { className: 'count' } }, String),
     div(
-      { className: 'buttons' },
-      button({ onclick: decrement, disabled: (count: number) => count <= 0 }, '-'),
-      button({ onclick: increment }, '+')
+      {  attrs: { className: 'buttons' } },
+      button({ events: { click: decrement }, attrs: { disabled: (count: number) => count <= 0 } }, '-'),
+      button({ events: { click: increment } }, '+')
     )
   )
 )
@@ -116,18 +116,6 @@ in Mood, the event handler has the following one:
 (event: Event) => Action
 ```
 
-Note that this is actually a shortcut, where the full representation is:
-
-```ts
-WrappedDerivedValue<State, (event: Event) => void>
-
-// an instance of WrappedDerivedValue can be built using
-
-handler<State, Action, E extends Event>(
-  f: (state: State) => ((event: E) => Action | undefined) | undefined
-)
-```
-
 This can be a mouthful, but in essence is just a function that takes another function. The function argument maps state to an optional event handler. If the event handler is returned, it will be invoked whenever the corresponding event is triggered. If the argument function returns `undefined` than the handler will not be applied. This allows to control the presence of event handlers based on the current state.
 
 All attributes and text nodes in Mood can be either Derived Values (like in the example above) or Literal Values. If they are derived, the content generated in the web-page will depend on the current state. If they are literals, they are assigned on the first render and never altered again for the life-cycle of the wrapping elements.
@@ -166,15 +154,15 @@ In our example, `reducer` is simply creating a new state where `count` is either
 
 ```ts
 const template = div<State, Action>(
-  { className: 'app' },
+  { attrs: { className: 'app' } },
   mapState(
-    { map: state => state.count },
-    div({ className: 'count count-small' }, 'count'),
-    div({ className: 'count' }, String),
+    { map: (state: State) => state.count },
+    div({ attrs: { className: 'count count-small' } }, 'count'),
+    div({ attrs: { className: 'count' } }, String),
     div(
-      { className: 'buttons' },
-      button({ onclick: decrement, disabled: (count: number) => count <= 0 }, '-'),
-      button({ onclick: increment }, '+')
+      {  attrs: { className: 'buttons' } },
+      button({ events: { click: decrement }, attrs: { disabled: (count: number) => count <= 0 } }, '-'),
+      button({ events: { click: increment } }, '+')
     )
   )
 )

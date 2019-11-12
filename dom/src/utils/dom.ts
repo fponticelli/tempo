@@ -1,6 +1,6 @@
 import { View, DynamicView } from '@mood/core/lib/view'
 import { UnwrappedDerivedValue, WrappedDerivedValue } from '@mood/core/lib/value'
-import { DOMAttribute, DOMEventHandler, DOMProperty } from '../value'
+import { DOMAttribute, DOMEventHandler, DOMStyleAttribute } from '../value'
 import { htmlAttributeNameMap as attributeNameMap, htmlAttributeMap as attributeMap } from '../dom_attributes_mapper'
 import { setEvent, setAttribute, setOneStyle } from './set_attribute'
 import { DOMChild, DOMTemplate } from '../template'
@@ -38,36 +38,67 @@ export type Acc<State> = {
 export const processAttribute = <State, Action>(
   el: Element,
   name: string,
-  value: DOMAttribute<State, Action> | DOMEventHandler<State, any, Action> | DOMProperty<State, Action>,
+  value: DOMAttribute<State, Action>,
+  acc: Acc<State>
+): Acc<State> => {
+  name = name.toLowerCase()
+  name = attributeNameMap[name] || name
+
+  let set = attributeMap[name] || setAttribute
+
+  if (typeof value === 'function') {
+    const f = (state: State) => set(el, name, (value as UnwrappedDerivedValue<State, Action>)(state))
+    return {
+      dynamics: acc.dynamics.concat([f]),
+      statics: acc.statics
+    }
+  } else {
+    const f = () => set(el, name, value)
+    return {
+      dynamics: acc.dynamics,
+      statics: acc.statics.concat([f])
+    }
+  }
+}
+
+export const processEvent = <State, Ev extends Event, Action>(
+  el: Element,
+  name: string,
+  value: DOMEventHandler<State, Ev, Action>,
   dispatch: (action: Action) => void,
   acc: Acc<State>
 ): Acc<State> => {
-  name = attributeNameMap[name as keyof typeof attributeNameMap] || name
-
-  let set: (el: Element, name: string, value: any) => void
-  const isEvent = name.startsWith('on')
-  if (isEvent) {
-    // events
-    name = name.toLowerCase()
-    set = setEvent(dispatch)
-  } else if (name.startsWith('$')) {
-    // pseudo-styles
-    name = name.substring(1)
-    set = setOneStyle
-  } else {
-    // other attributes/properties
-    set = attributeMap[name] || setAttribute
-  }
+  name = name.toLowerCase()
+  let set = setEvent<Action, Ev>(dispatch)
 
   const anyValue = value as any
   if (anyValue && anyValue.kind && anyValue.kind === 'derived') {
-    const derived = anyValue as WrappedDerivedValue<State, Action>
+    const derived = anyValue as WrappedDerivedValue<State, (event: Ev) => Action | undefined>
     const f = (state: State) => set(el, name, derived.resolve(state))
     return {
       dynamics: acc.dynamics.concat([f]),
       statics: acc.statics
     }
-  } else if (!isEvent && typeof value === 'function') {
+  } else {
+    const f = () => set(el, name, anyValue)
+    return {
+      dynamics: acc.dynamics,
+      statics: acc.statics.concat([f])
+    }
+  }
+}
+
+export const processStyle = <State, Action>(
+  el: Element,
+  name: string,
+  value: DOMStyleAttribute<State, Action>,
+  acc: Acc<State>
+): Acc<State> => {
+  name = name.toLowerCase()
+
+  let set = setOneStyle
+
+  if (typeof value === 'function') {
     const f = (state: State) => set(el, name, (value as UnwrappedDerivedValue<State, Action>)(state))
     return {
       dynamics: acc.dynamics.concat([f]),

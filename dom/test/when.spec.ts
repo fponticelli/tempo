@@ -1,5 +1,4 @@
-import { html } from '../src/web'
-const { div } = html
+import { div } from '../src/html'
 import { when, unless } from '../src/when'
 import { createContext } from './common'
 
