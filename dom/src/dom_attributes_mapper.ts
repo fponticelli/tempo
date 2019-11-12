@@ -10,20 +10,21 @@ import {
 } from './utils/set_attribute'
 
 export const htmlAttributeNameMap: Record<string, string> = {
-  acceptCharset: 'accept-charset',
-  asAttr: 'as',
-  className: 'class',
-  contentEditable: 'contenteditable',
-  httpEquiv: 'http-equiv'
+  acceptcharset: 'accept-charset',
+  asattr: 'as',
+  classname: 'class',
+  httpequiv: 'http-equiv',
+  htmlfor: 'for'
 }
 
 export const htmlAttributeMap: Record<string, (el: Element, name: string, value: any) => void> = {
-  acceptCharset: setSpaceSeparated,
+  'accept-charset': setSpaceSeparated,
+  acceptcharset: setSpaceSeparated,
   async: setBoolAttribute,
   autofocus: setBoolAttribute,
   autoplay: setBoolAttribute,
   checked: setBoolProperty,
-  contentEditable: setEnumBoolAttribute,
+  contenteditable: setEnumBoolAttribute,
   controls: setBoolAttribute,
   default: setBoolAttribute,
   defer: setBoolAttribute,

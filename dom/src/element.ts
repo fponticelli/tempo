@@ -2,7 +2,7 @@ import { DOMTemplate, DOMChild } from './template'
 import { DOMContext } from './context'
 import { View } from '@mood/core/lib/view'
 import { wrapLiteral, WrappedValue } from '@mood/core/lib/value'
-import { DOMAttributes } from './web_attributes'
+import { DOMAttributes } from './dom_attributes'
 import { Acc, processAttribute, filterDynamics, domChildToTemplate } from './utils/dom'
 import { DOMDynamicNodeView, DOMStaticNodeView } from './utils/node_view'
 import { DOMAttribute } from './value'
@@ -42,21 +42,20 @@ export const prepareAttributes = <State, Action, El>(attrs: DOMAttributes<State,
 
 export class DOMElement<State, Action, El> implements DOMTemplate<State, Action> {
   constructor(
-    readonly name: string,
+    readonly createElement: (doc: Document) => Element,
     readonly attributes: DOMAttributes<State, Action, El>,
     readonly children: DOMTemplate<State, Action>[]
   ) {}
 
   render(ctx: DOMContext<Action>, state: State): View<State> {
-    type AttributeName = keyof (typeof attributes)
-    const el = ctx.doc.createElement(this.name)
+    const el = this.createElement(ctx.doc)
 
     const { attributes, afterRender, beforeChange, afterChange, beforeDestroy } = prepareAttributes(this.attributes)
 
-    const keys = Object.keys(attributes) as AttributeName[]
+    const keys = Object.keys(attributes)
 
     const { statics, dynamics } = keys.reduce(
-      (acc: Acc<State>, key: AttributeName) =>
+      (acc: Acc<State>, key: string) =>
         processAttribute(el, key, attributes[key] as DOMAttribute<State, any>, ctx.dispatch, acc),
       { statics: [], dynamics: [] }
     )
@@ -95,16 +94,40 @@ export class DOMElement<State, Action, El> implements DOMTemplate<State, Action>
   }
 }
 
+const makeCreateElement = (name: string) => (doc: Document) => doc.createElement(name)
+
 export const el = <State, Action, El>(
   name: string,
   attributes: DOMAttributes<State, Action, El>,
   ...children: DOMChild<State, Action>[]
 ) => {
-  return new DOMElement<State, Action, El>(name, attributes, children.map(domChildToTemplate))
+  return new DOMElement<State, Action, El>(makeCreateElement(name), attributes, children.map(domChildToTemplate))
 }
 
 export const el2 = <El>(name: string) => <State, Action>(
   attributes: DOMAttributes<State, Action, El>,
   ...children: DOMChild<State, Action>[]) => {
-    return new DOMElement<State, Action, El>(name, attributes, children.map(domChildToTemplate))
+    return new DOMElement<State, Action, El>(makeCreateElement(name), attributes, children.map(domChildToTemplate))
+  }
+
+export const defaultNamespaces: Record<string, string> = {
+  'svg': 'http://www.w3.org/2000/svg'
+}
+
+const makeCreateElementNS = (namespace: string, name: string) => (doc: Document) => doc.createElementNS(namespace, name)
+
+export const elNS = <State, Action, El>(
+  ns: string,
+  name: string,
+  attributes: DOMAttributes<State, Action, El>,
+  ...children: DOMChild<State, Action>[]
+) => {
+  const namespace = defaultNamespaces[ns] || ns
+  return new DOMElement<State, Action, El>(makeCreateElementNS(namespace, name), attributes, children.map(domChildToTemplate))
+}
+
+export const elNS2 = <El>(namespace: string, name: string) => <State, Action>(
+  attributes: DOMAttributes<State, Action, El>,
+  ...children: DOMChild<State, Action>[]) => {
+    return new DOMElement<State, Action, El>(makeCreateElementNS(namespace, name), attributes, children.map(domChildToTemplate))
   }
