@@ -1,5 +1,7 @@
 import { View, StaticView, DynamicView } from '@mood/core/lib/view'
-import { filterDynamics } from './utils/dom'
+import { filterDynamics, domChildToTemplate } from './utils/dom'
+import { DOMTemplate, DOMChild } from './template'
+import { DOMContext } from './context'
 
 export class DOMBaseFragmentView {
   constructor(readonly views: View<any>[]) {}
@@ -33,3 +35,17 @@ export const fragmentView = <State>(views: View<State>[]) => {
     return new DOMStaticFragmentView(views)
   }
 }
+
+export class DOMFragment<State, Action> implements DOMTemplate<State, Action> {
+  constructor(
+    readonly children: DOMTemplate<State, Action>[]
+  ) {}
+
+  render(ctx: DOMContext<Action>, state: State): View<State> {
+    const views = this.children.map(child => child.render(ctx, state))
+    return fragmentView(views)
+  }
+}
+
+export const fragment = <State, Action>(...children: DOMChild<State, Action>[]) =>
+  new DOMFragment<State, Action>(children.map(domChildToTemplate))
