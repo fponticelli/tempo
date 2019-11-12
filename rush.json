@@ -43,9 +43,6 @@
       "packageName": "@mood/store",
       "projectFolder": "./store"
     }, {
-      "packageName": "@mood/generator.web",
-      "projectFolder": "./tools/web_generator"
-    }, {
       "packageName": "@mood/dom",
       "projectFolder": "./dom"
     }, {

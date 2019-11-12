@@ -14,6 +14,6 @@ const saveToDataStore = debounce(250)((state: State) => DataStore.set(state))
 
 store.property.observable.on(saveToDataStore)
 
-store.observable.on((_, action) => console.log(action))
+// store.observable.on((_, action) => console.log(action))
 
 Mood.render({ store, template })

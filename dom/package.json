@@ -4,7 +4,7 @@
   "description": "",
   "license": "UNLICENSED",
   "scripts": {
-    "build": "tsc",
+    "build": "rm -rf lib/* && tsc",
     "test": "jest",
     "test-watch": "jest --watch",
     "tslint": "tslint -p ./tslint.json",
@@ -17,7 +17,6 @@
     "@mood/store": "1.0.0"
   },
   "devDependencies": {
-    "@mood/generator.web": "1.0.0",
     "@types/jest": "24.0.22",
     "@types/jsdom": "12.2.4",
     "jsdom": "15.1.1",

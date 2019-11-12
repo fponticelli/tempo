@@ -1,6 +1,5 @@
 import { Mood } from '@mood/dom/lib/mood'
-import { html } from '@mood/dom/lib/web'
-const { div, button } = html
+import { div, button } from '@mood/dom/lib/html'
 import { mapState } from '@mood/dom/lib/map'
 import { Store } from '@mood/store/lib/store'
 

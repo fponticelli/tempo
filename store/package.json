@@ -4,7 +4,7 @@
   "description": "",
   "license": "UNLICENSED",
   "scripts": {
-    "build": "tsc",
+    "build": "rm -rf lib/* && tsc",
     "test": "jest",
     "test-watch": "jest --watch",
     "tslint": "tslint -p ./tslint.json",
