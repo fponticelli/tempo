@@ -46,7 +46,7 @@ export const template = section<State, Action>(
           value: state => state.adding
         },
         events: {
-          onkeydown: e => {
+          keydown: e => {
             const input = e.target as HTMLInputElement
             if (e.keyCode === 13) {
               return Action.addTodo(input.value.trim())
@@ -195,7 +195,7 @@ export const template = section<State, Action>(
                 className: selectedF(Filter.Completed)
               },
               events: {
-                onclick: changeF(Filter.Completed)
+                click: changeF(Filter.Completed)
               }
             },
             'Completed'
@@ -214,7 +214,7 @@ export const template = section<State, Action>(
               className: 'clear-completed'
             },
             events: {
-              onclick: (_: MouseEvent) => Action.clearCompleted
+              click: (_: MouseEvent) => Action.clearCompleted
             }
           },
           'Clear completed'
