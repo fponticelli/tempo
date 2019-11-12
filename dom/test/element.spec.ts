@@ -197,19 +197,31 @@ describe('dom_element', () => {
   it('respect lifecycle sequence with derived', () => {
     const ctx = createContext()
     const sequence = [] as string[]
-    const template = div<string, unknown>({
-      afterrender: derived((state: string) => (el: HTMLDivElement) => sequence.push(`AR:${state}:${el.tagName}`)),
-      beforechange: derived((state: string) => (el: HTMLDivElement) =>
-        sequence.push(`BC:${state}:${el.tagName}`)
-      ),
-      afterchange: derived((state: string) => (el: HTMLDivElement) => {
-        sequence.push(`AC:${state}:${el.tagName}`)
-      }),
-      beforedestroy: (el: HTMLDivElement) => {
-        sequence.push('BD')
-        sequence.push(String(el !== undefined))
-      }
-    })
+    const template = div<string, unknown, number>({
+        afterrender: (state, el, ctx) => {
+          expect(ctx).not.toBeUndefined()
+          sequence.push(`AR:${state}:${el.tagName}`)
+          return 1
+        },
+        beforechange: (state, el, ctx, value) => {
+          expect(value).toBe(1)
+          expect(ctx).not.toBeUndefined()
+          sequence.push(`BC:${state}:${el.tagName}`)
+          return 2
+        },
+        afterchange: (state, el, ctx, value) => {
+          expect(value).toBe(2)
+          expect(ctx).not.toBeUndefined()
+          sequence.push(`AC:${state}:${el.tagName}`)
+          return 3
+        },
+        beforedestroy: (el: HTMLDivElement, ctx, value) => {
+          expect(value).toBe(3)
+          expect(ctx).not.toBeUndefined()
+          sequence.push('BD')
+          sequence.push(String(el !== undefined))
+        }
+      })
     const view = template.render(ctx, 'A') as DynamicView<string>
     expect(sequence).toEqual(['AR:A:DIV'])
     view.change('B')

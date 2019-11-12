@@ -17,26 +17,37 @@ export const applyMood = <State, El extends Element>(
   }
 }
 
-export const maybeApplyMood = <State, El extends Element>(
+export const applyChange = <State, Action, El extends Element, T>(
+  change: (state: State, el: El, ctx: DOMContext<Action>, value: T | undefined) => T | undefined,
   el: El,
-  attr: UnwrappedValue<State, (el: El) => void> | WrappedDerivedValue<State, (el: El) => void> | undefined
-) => (
+  ctx: DOMContext<Action>
+) => (state: State, value: T | undefined): T | undefined => {
+  return change(state, el, ctx, value)
+}
+
+export const applyAfterRender = <State, Action, El extends Element, T>(
+  attr: (state: State, el: El, ctx: DOMContext<Action>) => T | undefined,
+  el: El,
+  ctx: DOMContext<Action>,
   state: State
 ) => {
   if (attr != null) {
-    applyMood(el, attr)(state)
+    return attr(state, el, ctx)
+  } else {
+    return undefined
   }
 }
 
-export class DOMElement<State, Action, El extends Element> implements DOMTemplate<State, Action> {
+export class DOMElement<State, Action, El extends Element = Element, T = unknown> implements DOMTemplate<State, Action> {
   constructor(
     readonly createElement: (doc: Document) => El,
-    readonly attributes: DOMAttributes<State, Action, El>,
+    readonly attributes: DOMAttributes<State, Action, El, T>,
     readonly children: DOMTemplate<State, Action>[]
   ) {}
 
   render(ctx: DOMContext<Action>, state: State): View<State> {
     const el = this.createElement(ctx.doc)
+    let value: T | undefined = undefined
 
     const {
       attrs,
@@ -48,7 +59,7 @@ export class DOMElement<State, Action, El extends Element> implements DOMTemplat
       beforedestroy
     } = this.attributes
 
-    const beforedestroyf = beforedestroy && (() => beforedestroy(el))
+    const beforedestroyf = beforedestroy && (() => beforedestroy(el, ctx, value))
 
     const allDynamics = [] as ((state: State) => void)[]
 
@@ -89,18 +100,24 @@ export class DOMElement<State, Action, El extends Element> implements DOMTemplat
 
     ctx.append(el)
 
-    maybeApplyMood(el, afterrender)(state)
+    if (afterrender) {
+      value = applyAfterRender(afterrender, el, ctx, state)
+    }
 
     const dynamicChildren = filterDynamics(views).map(child => (state: State) => child.change(state))
 
     allDynamics.push(...dynamicChildren)
 
     if (beforechange) {
-      allDynamics.unshift(applyMood(el, beforechange))
+      const change = applyChange(beforechange, el, ctx)
+      const update = (state: State) => { value = change(state, value) }
+      allDynamics.unshift(update)
     }
 
     if (afterchange) {
-      allDynamics.push(applyMood(el, afterchange))
+      const change = applyChange(afterchange, el, ctx)
+      const update = (state: State) => { value = change(state, value) }
+      allDynamics.push(update)
     }
 
     if (allDynamics.length > 0) {
@@ -115,22 +132,22 @@ export class DOMElement<State, Action, El extends Element> implements DOMTemplat
 
 const makeCreateElement = <El extends Element>(name: string) => (doc: Document) => doc.createElement(name) as any as El
 
-export const el = <State, Action, El extends Element>(
+export const el = <State, Action, El extends Element, T = unknown>(
   name: string,
-  attributes: DOMAttributes<State, Action, El>,
+  attributes: DOMAttributes<State, Action, El, T>,
   ...children: DOMChild<State, Action>[]
 ) => {
-  return new DOMElement<State, Action, El>(
+  return new DOMElement<State, Action, El, T>(
     makeCreateElement(name),
     attributes,
     children.map(domChildToTemplate)
   )
 }
 
-export const el2 = <El extends Element>(name: string) => <State, Action>(
-  attributes: DOMAttributes<State, Action, El>,
+export const el2 = <El extends Element>(name: string) => <State, Action, T = unknown>(
+  attributes: DOMAttributes<State, Action, El, T>,
   ...children: DOMChild<State, Action>[]) => {
-    return new DOMElement<State, Action, El>(
+    return new DOMElement<State, Action, El, T>(
       makeCreateElement(name),
       attributes,
       children.map(domChildToTemplate)
@@ -144,24 +161,24 @@ export const defaultNamespaces: Record<string, string> = {
 const makeCreateElementNS = <El extends Element>(namespace: string, name: string) =>
   (doc: Document) => doc.createElementNS(namespace, name) as any as El
 
-export const elNS = <State, Action, El extends Element>(
+export const elNS = <State, Action, El extends Element, T = unknown>(
   ns: string,
   name: string,
-  attributes: DOMAttributes<State, Action, El>,
+  attributes: DOMAttributes<State, Action, El, T>,
   ...children: DOMChild<State, Action>[]
 ) => {
   const namespace = defaultNamespaces[ns] || ns
-  return new DOMElement<State, Action, El>(
+  return new DOMElement<State, Action, El, T>(
     makeCreateElementNS(namespace, name),
     attributes,
     children.map(domChildToTemplate)
   )
 }
 
-export const elNS2 = <El extends Element>(namespace: string, name: string) => <State, Action>(
-  attributes: DOMAttributes<State, Action, El>,
+export const elNS2 = <El extends Element>(namespace: string, name: string) => <State, Action, T = unknown>(
+  attributes: DOMAttributes<State, Action, El, T>,
   ...children: DOMChild<State, Action>[]) => {
-    return new DOMElement<State, Action, El>(
+    return new DOMElement<State, Action, El, T>(
       makeCreateElementNS(namespace, name),
       attributes,
       children.map(domChildToTemplate)
