@@ -1,23 +1,11 @@
 import { DOMTemplate, DOMChild } from './template'
 import { DOMContext } from './context'
 import { View } from '@mood/core/lib/view'
-import { UnwrappedValue, WrappedDerivedValue } from '@mood/core/lib/value'
 import { Acc, processAttribute, processEvent, processStyle, filterDynamics, domChildToTemplate } from './utils/dom'
 import { DOMDynamicNodeView, DOMStaticNodeView } from './utils/node_view'
 import { DOMAttributes } from './value'
 
-export const applyMood = <State, El extends Element>(
-  el: El,
-  attr: UnwrappedValue<State, (el: El) => void> | WrappedDerivedValue<State, (el: El) => void>
-) => (state: State) => {
-  const f = (attr instanceof WrappedDerivedValue ? attr.resolve(state) : attr) as undefined | ((el: El) => void)
-  /* istanbul ignore next */
-  if (f != null) {
-    f(el)
-  }
-}
-
-export const applyChange = <State, Action, El extends Element, T>(
+const applyChange = <State, Action, El extends Element, T>(
   change: (state: State, el: El, ctx: DOMContext<Action>, value: T | undefined) => T | undefined,
   el: El,
   ctx: DOMContext<Action>
@@ -25,7 +13,7 @@ export const applyChange = <State, Action, El extends Element, T>(
   return change(state, el, ctx, value)
 }
 
-export const applyAfterRender = <State, Action, El extends Element, T>(
+const applyAfterRender = <State, Action, El extends Element, T>(
   attr: (state: State, el: El, ctx: DOMContext<Action>) => T | undefined,
   el: El,
   ctx: DOMContext<Action>,
