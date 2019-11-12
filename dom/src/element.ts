@@ -53,34 +53,31 @@ export class DOMElement<State, Action, El extends Element> implements DOMTemplat
     const allDynamics = [] as ((state: State) => void)[]
 
     if (attrs) {
-      const { statics, dynamics } = Object.keys(attrs).reduce(
+      const dynamics = Object.keys(attrs).reduce(
         (acc: Acc<State>, key: keyof typeof attrs) =>
           processAttribute(el, key, attrs[key], acc),
-        { statics: [], dynamics: [] }
+          []
       )
-      for (const st of statics) st()
       for (const dy of dynamics) dy(state)
       allDynamics.push(...dynamics)
     }
 
     if (events) {
-      const { statics, dynamics } = Object.keys(events).reduce(
+      const dynamics = Object.keys(events).reduce(
         (acc: Acc<State>, key: keyof typeof events) =>
           processEvent(el, key, events[key], ctx.dispatch, acc),
-        { statics: [], dynamics: [] }
+          []
       )
-      for (const st of statics) st()
       for (const dy of dynamics) dy(state)
       allDynamics.push(...dynamics)
     }
 
     if (styles) {
-      const { statics, dynamics } = Object.keys(styles).reduce(
+      const dynamics = Object.keys(styles).reduce(
         (acc: Acc<State>, key: keyof typeof styles) =>
           processStyle(el, key, styles[key], acc),
-        { statics: [], dynamics: [] }
+          []
       )
-      for (const st of statics) st()
       for (const dy of dynamics) dy(state)
       allDynamics.push(...dynamics)
     }

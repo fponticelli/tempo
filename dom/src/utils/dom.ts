@@ -30,10 +30,7 @@ export const domChildToTemplate = <State, Action>(dom: DOMChild<State, Action>):
   else return dom
 }
 
-export type Acc<State> = {
-  statics: (() => void)[]
-  dynamics: ((state: State) => void)[]
-}
+export type Acc<State> = ((state: State) => void)[]
 
 export const processAttribute = <State, Action>(
   el: Element,
@@ -48,17 +45,11 @@ export const processAttribute = <State, Action>(
 
   if (typeof value === 'function') {
     const f = (state: State) => set(el, name, (value as UnwrappedDerivedValue<State, Action>)(state))
-    return {
-      dynamics: acc.dynamics.concat([f]),
-      statics: acc.statics
-    }
+    acc.push(f)
   } else {
-    const f = () => set(el, name, value)
-    return {
-      dynamics: acc.dynamics,
-      statics: acc.statics.concat([f])
-    }
+    set(el, name, value)
   }
+  return acc
 }
 
 export const processEvent = <State, Ev extends Event, Action>(
@@ -75,17 +66,11 @@ export const processEvent = <State, Ev extends Event, Action>(
   if (anyValue && anyValue.kind && anyValue.kind === 'derived') {
     const derived = anyValue as WrappedDerivedValue<State, (event: Ev) => Action | undefined>
     const f = (state: State) => set(el, name, derived.resolve(state))
-    return {
-      dynamics: acc.dynamics.concat([f]),
-      statics: acc.statics
-    }
+    acc.push(f)
   } else {
-    const f = () => set(el, name, anyValue)
-    return {
-      dynamics: acc.dynamics,
-      statics: acc.statics.concat([f])
-    }
+    set(el, name, anyValue)
   }
+  return acc
 }
 
 export const processStyle = <State, Action>(
@@ -100,15 +85,9 @@ export const processStyle = <State, Action>(
 
   if (typeof value === 'function') {
     const f = (state: State) => set(el, name, (value as UnwrappedDerivedValue<State, Action>)(state))
-    return {
-      dynamics: acc.dynamics.concat([f]),
-      statics: acc.statics
-    }
+    acc.push(f)
   } else {
-    const f = () => set(el, name, value)
-    return {
-      dynamics: acc.dynamics,
-      statics: acc.statics.concat([f])
-    }
+    set(el, name, value)
   }
+  return acc
 }
