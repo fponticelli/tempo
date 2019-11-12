@@ -70,7 +70,7 @@ describe('dom_element', () => {
 
   it('dynamic $style', () => {
     const ctx = createContext()
-    const node = el('div', { styles: { color: (v: number | undefined) => v && (v === 1 ? 'red' : 'blue') } }).render(
+    const node = el('div', { styles: { color: (v: number | undefined) => (v && (v === 1 ? 'red' : 'blue')) || undefined } }).render(
       ctx,
       1
     ) as DynamicView<number | undefined>
