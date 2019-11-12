@@ -2,7 +2,7 @@
 
 Mood is a framework to build dynamic front end applications.
 
-[TODO MVC demo](./docs/demo/todomvc/index.html)
+[TODO MVC demo](./docs/demo/todomvc/)
 
 # Sample Application
 
@@ -69,7 +69,7 @@ const template = div<State, Action>(
 Mood.render({ store, template })
 ```
 
-You can find this [demo running here](./docs/demo/readme/index.html)
+You can find this [demo running here](./docs/demo/readme/)
 
 Let's analyze what is going on there.
 
@@ -182,7 +182,7 @@ When the template is defined, nothing really happens except that we have an inst
 
 These functions are managed and wired automatically when `store` and `template` are passed to `Mood.render`.
 
-The entire app fits 7.7kb when gzipped!
+The entire app fits 6.6kb when gzipped!
 
 # Elements
 
