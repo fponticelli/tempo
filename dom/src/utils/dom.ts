@@ -23,7 +23,7 @@ export const insertBefore = (ref: Node) => (node: Node) => {
 }
 
 export const filterDynamics = <State>(children: View<State>[]) =>
-  children.filter(child => child.kind === 'dynamic') as DynamicView<State> []
+  children.filter(child => child.kind === 'dynamic') as DynamicView<State>[]
 
 export const domChildToTemplate = <State, Action>(dom: DOMChild<State, Action>): DOMTemplate<State, Action> => {
   if (typeof dom === 'string' || typeof dom === 'function') return text(dom)
