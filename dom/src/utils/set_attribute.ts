@@ -10,22 +10,7 @@ export const setOneStyle = (el: Element, name: string, value: any) => {
   }
 }
 
-// export const setEvent = <Action, Ev extends Event>(dispatch: (action: Action) => void) => {
-//   return (el: Element, name: string, value: ((e: Ev) => Action | undefined) | undefined) => {
-//     name = `on${name}`
-//     const anyEl = el as any
-//     if (value == null) {
-//       anyEl[name] = null
-//     } else {
-//       anyEl[name] = (e: Ev) => {
-//         const r = value(e)
-//         if (r != null) dispatch(r)
-//       }
-//     }
-//   }
-// }
-
-export const setAttribute = (el: Element, name: string, value: string) => {
+export const setAttribute = (el: Element, name: string, value: any) => {
   if (value == null) {
     el.removeAttribute(name)
   } else {
@@ -36,7 +21,7 @@ export const setAttribute = (el: Element, name: string, value: string) => {
   }
 }
 
-export const setProperty = (el: Element, name: string, value: any | undefined) => {
+export const setProperty = (el: Element, name: string, value: any) => {
   const anyEl = el as any
   if (value == null && anyEl[name] != null) {
     anyEl[name] = null
@@ -45,10 +30,12 @@ export const setProperty = (el: Element, name: string, value: any | undefined) =
   }
 }
 
-export const setStyleAttribute = (el: Element, name: string, value: {} | undefined) => {
+export const setStyleAttribute = (el: Element, name: string, value: any) => {
   const html = el as HTMLElement
   if (value == null) {
     html.removeAttribute(name)
+  } else if (typeof value === 'string') {
+    setAttribute(el, name, value)
   } else {
     const s = Object.keys(value)
       .map(k => {
@@ -59,30 +46,32 @@ export const setStyleAttribute = (el: Element, name: string, value: {} | undefin
   }
 }
 
-export const setBoolProperty = (el: Element, name: string, value: boolean | undefined) => {
+export const setBoolProperty = (el: Element, name: string, value: any) => {
   const anyEl = el as any
   if (value == null) {
     anyEl[name] = null
   } else {
-    const bool = Boolean(value)
+    const bool = value === true || value === 'true'
     if (anyEl[name] !== bool) {
       anyEl[name] = bool
     }
   }
 }
 
-export const setEnumBoolAttribute = (el: Element, name: string, value: boolean | undefined) => {
-  setAttribute(el, name, value === true ? 'true' : value === false ? 'false' : (null as any))
+export const setEnumBoolAttribute = (el: Element, name: string, value: any) => {
+  setAttribute(el, name, value === true || value === 'true' ? 'true' : value === false ? 'false' : (null as any))
 }
 
-export const setBoolAttribute = (el: Element, name: string, value: boolean | undefined) => {
-  setAttribute(el, name, value === true ? '' : (null as any))
+export const setBoolAttribute = (el: Element, name: string, value: any) => {
+  setAttribute(el, name, value === true || value === 'true' ? '' : (null as any))
 }
 
-export const setCommaSeparated = (el: Element, name: string, values: string[] | undefined) => {
-  setAttribute(el, name, (values && values.length > 0 && values.join(', ')) || (null as any))
+export const setCommaSeparated = (el: Element, name: string, values: any) => {
+  if (Array.isArray(values)) setAttribute(el, name, values.join(', ') || (null as any))
+  else setAttribute(el, name, (values && String(values)) || (null as any))
 }
 
-export const setSpaceSeparated = (el: Element, name: string, values: string[] | undefined) => {
-  setAttribute(el, name, (values && values.length > 0 && values.join(' ')) || (null as any))
+export const setSpaceSeparated = (el: Element, name: string, values: any) => {
+  if (Array.isArray(values)) setAttribute(el, name, values.join(' ') || (null as any))
+  else setAttribute(el, name, (values && String(values)) || (null as any))
 }

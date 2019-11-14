@@ -19,6 +19,7 @@ export const htmlAttributeNameMap: Record<string, string> = {
 
 export const htmlAttributeMap: Record<string, (el: Element, name: string, value: any) => void> = {
   'accept-charset': setSpaceSeparated,
+  class: setSpaceSeparated,
   acceptcharset: setSpaceSeparated,
   async: setBoolAttribute,
   autofocus: setBoolAttribute,
