@@ -172,7 +172,7 @@ Mood.render({ store, template })
 
 Finally the UI! Each element, like `div` above, takes a first argument for the element attributes and 0 or more other arguments. If an argument is a literal value like in `className` that is applied and it cannot be modified anymore. For dynamic values a function from State to the attribute type are required.
 
-The following arguments are children nodes. The simplest child node is just a plain string that is mapped to a dom text node. A text node can also be dynamic when represented by a function `State => string`. The text in that case will change when the state is changed. That is the case for ``count => `count: ${count} ```.
+The following arguments are children nodes. The simplest child node is just a plain string that is mapped to a dom text node. A text node can also be dynamic when represented by a function `State => string`. The text in that case will change when the state is changed. That is the case for ```count => count: ${count} ```.
 
 We use `mapState` in the example to extract `count` and not avoid having to dereference that value every time it is used; this is really not necessary but it looks cool and it shows how State can be refined/transformed for inner elements.
 
