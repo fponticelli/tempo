@@ -55,13 +55,14 @@ export const processAttribute = <State, Action>(
 export const processEvent = <State, El extends Element, Ev extends Event, Action>(
   el: El,
   name: string,
-  value: DOMEventHandler<State, Action, El, Ev>,
+  value: DOMEventHandler<State, Action, Ev, El>,
   dispatch: (action: Action) => void,
   acc: Acc<State>
 ): Acc<State> => {
+  const anyEl = el as any
   name = 'on' + name.toLowerCase()
   const f = (state: State) => {
-    ;(el as any)[name] = (ev: Ev) => {
+    anyEl[name] = (ev: Ev) => {
       const r = value(state, ev, el)
       if (r != null) {
         dispatch(r)

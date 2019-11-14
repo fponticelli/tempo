@@ -6,10 +6,8 @@ import { when } from '@mood/dom/lib/when'
 import { Action } from './action'
 import { State, Filter, Todo } from './state'
 
-const changeF = <El extends Element>(filter: Filter): DOMEventHandler<State, Action, El, MouseEvent> => (
-  state: State,
-  _1: MouseEvent,
-  _2: El
+const changeF = <El extends Element>(filter: Filter): DOMEventHandler<State, Action, MouseEvent, El> => (
+  state: State
 ) => (state.filter === filter ? undefined : Action.toggleFilter(filter))
 
 const filterF = (filter: Filter) => {

@@ -2,7 +2,6 @@ import { createContext } from './common'
 import { el } from '../src/element'
 import { DynamicView } from '@mood/core/lib/view'
 import { div, span, a } from '../src/html'
-import { derived } from '@mood/core/lib/value'
 
 describe('dom_element', () => {
   it('static empty-element', () => {
@@ -88,7 +87,7 @@ describe('dom_element', () => {
       count += c
     })
     let count = 0
-    const click = (e: MouseEvent) => 1
+    const click = (state: number, e: MouseEvent, el: Element) => 1
     const node = el<number, number, HTMLDivElement>('div', { events: { click } }).render(ctx, 1)
     expect(ctx.doc.body.innerHTML).toEqual('<div></div>')
     const domEl = ctx.doc.body.firstElementChild as HTMLDivElement
@@ -106,7 +105,7 @@ describe('dom_element', () => {
       count = c
     })
     let count = 0
-    const click = (e: MouseEvent) => undefined
+    const click = () => undefined
     const node = el<number, number, HTMLDivElement>('div', { events: { click } }).render(ctx, 1)
     expect(ctx.doc.body.innerHTML).toEqual('<div></div>')
     const domEl = ctx.doc.body.firstElementChild as HTMLDivElement
@@ -122,7 +121,7 @@ describe('dom_element', () => {
       count = c
     })
     let count = 0
-    const click = derived((s: number) => (_: Event) => s + 1)
+    const click = (state: number, e: MouseEvent, el: Element) =>  state + 1
     const node = el<number, number, HTMLDivElement>('div', { events: { click } }).render(ctx, 1)
     expect(ctx.doc.body.innerHTML).toEqual('<div></div>')
     const domEl = ctx.doc.body.firstElementChild as HTMLDivElement
@@ -138,7 +137,7 @@ describe('dom_element', () => {
       count = c
     })
     let count = 0
-    const click = derived((s: number) => () => s + 1)
+    const click = (state: number, e: MouseEvent, el: Element) => state + 1
     const node = el<number, number, HTMLDivElement>('div', { events: { click } }).render(ctx, 1)
     expect(ctx.doc.body.innerHTML).toEqual('<div></div>')
     const domEl = ctx.doc.body.firstElementChild as HTMLDivElement
@@ -154,7 +153,7 @@ describe('dom_element', () => {
       count = c
     })
     let count = 0
-    const click = (e: MouseEvent) => undefined
+    const click = () => undefined
     const node = el<number, number, HTMLDivElement>('div', { events: { click } }).render(ctx, 1)
     const domEl = ctx.doc.body.firstElementChild as HTMLDivElement
     expect(count).toEqual(0)

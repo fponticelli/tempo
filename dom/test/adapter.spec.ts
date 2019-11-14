@@ -83,7 +83,7 @@ describe('adapter', () => {
     const comp = component(
       { store },
       div<string[], string>(
-        { events: { click:  (_: MouseEvent) => 'click' } },
+        { events: { click:  (_s: string[], _: MouseEvent) => 'click' } },
         s => s.join(', ')
       )
     )

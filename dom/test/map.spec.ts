@@ -22,7 +22,7 @@ describe('map', () => {
 
   it('mapAction', () => {
     let ref: string | undefined
-    const click = (_: Event): number => 1
+    const click = (): number => 1
     const template = el<string, string, HTMLDivElement>(
       'div',
       {},
@@ -42,7 +42,7 @@ describe('map', () => {
 
   it('mapAction passing undefined', () => {
     let ref = 'ORIG'
-    const click = (_: Event): string => 'X'
+    const click = (): string => 'X'
     const template = el<string, string, HTMLDivElement>(
       'div',
       {},
@@ -65,7 +65,7 @@ describe('map', () => {
 
   it('mapAction only static', () => {
     let ref: string | undefined
-    const click = (_: Event): number => 1
+    const click = (): number => 1
     const template = el<string, string, HTMLDivElement>(
       'div',
       {},
