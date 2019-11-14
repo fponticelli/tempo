@@ -152,8 +152,19 @@ export const template = section<State, Action>(
       )
     ),
     footer(
-      { attrs: { className: 'footer' } },
-      span({ attrs: { className: 'todo-count' } }),
+      { attrs: { className: 'footer' }, styles: { 'display': (state) => (state.todos.length === 0 ? 'none' : 'block') } },
+      span(
+        { attrs: { className: 'todo-count' } }
+        state => {
+          const completed = state.todos.filter(todo => todo.completed).length
+          const left = state.todos.length - completed
+          if (left === 1) {
+            return '1 item left'
+          } else {
+            return `${left} items left`
+          }
+        }
+      ),
       ul(
         { attrs: { className: 'filters' } },
         li(
