@@ -1,5 +1,5 @@
 import { DynamicView, StaticView, View } from '@mood/core/lib/view'
-import { removeNode } from './dom'
+import { removeNode } from './utils/dom'
 
 export class DOMBaseNodeView<State> {
   constructor(readonly node: Node, readonly children: View<State>[], readonly beforeDestroy?: () => void) {}

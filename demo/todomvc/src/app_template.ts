@@ -5,17 +5,12 @@ import { forEach } from '@mood/dom/lib/for_each'
 import { when } from '@mood/dom/lib/when'
 import { Action } from './action'
 import { State, Filter, Todo } from './state'
-import { derived } from '@mood/core/lib/value'
 
-const changeF = (filter: Filter): DOMEventHandler<State, MouseEvent, Action> => {
-  return derived((state: State) => {
-    if (state.filter === filter) {
-      return undefined
-    } else {
-      return (_: MouseEvent): Action | undefined => Action.toggleFilter(filter)
-    }
-  })
-}
+const changeF = <El extends Element>(filter: Filter): DOMEventHandler<State, Action, El, MouseEvent> => (
+  state: State,
+  _1: MouseEvent,
+  _2: El
+) => (state.filter === filter ? undefined : Action.toggleFilter(filter))
 
 const filterF = (filter: Filter) => {
   if (filter === Filter.All) {
@@ -46,8 +41,7 @@ export const template = section<State, Action>(
           value: state => state.adding
         },
         events: {
-          keydown: e => {
-            const input = e.target as HTMLInputElement
+          keydown: (_: State, e: KeyboardEvent, input: HTMLInputElement) => {
             if (e.keyCode === 13) {
               return Action.addTodo(input.value.trim())
             } else if (e.keyCode === 27) {
@@ -99,33 +93,29 @@ export const template = section<State, Action>(
                     checked: todo => todo.completed
                   },
                   events: {
-                    change: derived(todo => _ => Action.toggleTodo(todo.id))
+                    change: todo => Action.toggleTodo(todo.id)
                   }
                 }),
-                label(
-                  { events: { dblclick: derived(todo => _ => Action.editingTodo(todo.id, todo.title)) } },
-                  todo => todo.title
-                ),
+                label({ events: { dblclick: todo => Action.editingTodo(todo.id, todo.title) } }, todo => todo.title),
                 button({
                   attrs: {
                     className: 'destroy'
                   },
                   events: {
-                    click: derived(todo => _ => Action.removeTodo(todo.id))
+                    click: todo => Action.removeTodo(todo.id)
                   }
                 })
               ),
               when(
                 { condition: todo => todo.editing },
                 input<TodoWEditing, Action>({
-                  afterrender: el => el.focus(),
+                  afterrender: (_, el) => el.focus(),
                   attrs: {
                     className: 'edit',
                     value: todo => todo.title
                   },
                   events: {
-                    keypress: derived((todo: Todo) => (e: KeyboardEvent) => {
-                      const input = e.target as HTMLInputElement
+                    keypress: (todo: Todo, e: KeyboardEvent, input: HTMLInputElement) => {
                       if (e.keyCode === 13) {
                         const value = input.value.trim()
                         if (value) {
@@ -138,11 +128,10 @@ export const template = section<State, Action>(
                       } else {
                         return Action.editingTodo(todo.id, input.value)
                       }
-                    }),
-                    blur: derived(todo => e => {
-                      const input = e.target as HTMLInputElement
+                    },
+                    blur: (todo: Todo, _: MouseEvent, input: HTMLInputElement) => {
                       return Action.updateTodo(todo.id, input.value.trim())
-                    })
+                    }
                   }
                 })
               )
@@ -214,7 +203,7 @@ export const template = section<State, Action>(
               className: 'clear-completed'
             },
             events: {
-              click: (_: MouseEvent) => Action.clearCompleted
+              click: () => Action.clearCompleted
             }
           },
           'Clear completed'

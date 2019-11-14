@@ -10,20 +10,20 @@ export const setOneStyle = (el: Element, name: string, value: any) => {
   }
 }
 
-export const setEvent = <Action, Ev extends Event>(dispatch: (action: Action) => void) => {
-  return (el: Element, name: string, value: ((e: Ev) => Action | undefined) | undefined) => {
-    name = `on${name}`
-    const anyEl = el as any
-    if (value == null) {
-      anyEl[name] = null
-    } else {
-      anyEl[name] = (e: Ev) => {
-        const r = value(e)
-        if (r != null) dispatch(r)
-      }
-    }
-  }
-}
+// export const setEvent = <Action, Ev extends Event>(dispatch: (action: Action) => void) => {
+//   return (el: Element, name: string, value: ((e: Ev) => Action | undefined) | undefined) => {
+//     name = `on${name}`
+//     const anyEl = el as any
+//     if (value == null) {
+//       anyEl[name] = null
+//     } else {
+//       anyEl[name] = (e: Ev) => {
+//         const r = value(e)
+//         if (r != null) dispatch(r)
+//       }
+//     }
+//   }
+// }
 
 export const setAttribute = (el: Element, name: string, value: string) => {
   if (value == null) {

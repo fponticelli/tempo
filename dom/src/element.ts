@@ -2,7 +2,7 @@ import { DOMTemplate, DOMChild } from './template'
 import { DOMContext } from './context'
 import { View } from '@mood/core/lib/view'
 import { Acc, processAttribute, processEvent, processStyle, filterDynamics, domChildToTemplate } from './utils/dom'
-import { DOMDynamicNodeView, DOMStaticNodeView } from './utils/node_view'
+import { DOMDynamicNodeView, DOMStaticNodeView } from './node_view'
 import { DOMAttributes } from './value'
 
 const applyChange = <State, Action, El extends Element, T>(

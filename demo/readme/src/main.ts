@@ -17,8 +17,8 @@ interface Decrement {
 }
 type Action = Increment | Decrement
 
-const decrement = (_: MouseEvent): Action => ({ kind: 'decrement' })
-const increment = (_: MouseEvent): Action => ({ kind: 'increment' })
+const decrement = (): Action => ({ kind: 'decrement' })
+const increment = (): Action => ({ kind: 'increment' })
 
 const reducer = (state: State, action: Action) => {
   switch (action.kind) {
