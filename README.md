@@ -193,14 +193,10 @@ A template is built by assembling elements together. `@mood/dom/lib/web` contain
 Each DOM element has four additional special attributes:
 
 ```ts
-moodAfterRender?: MoodAttribute<State, El>
-moodAfterChange?: MoodAttribute<State, El>
-moodBeforeChange?: MoodAttribute<State, El>
-moodBeforeDestroy?: (el: El) => void
-
-// where MoodAttribute<State, El> is defined as
-
-type MoodAttribute<State, El> = UnwrappedLiteralValue<(el: El) => void> | WrappedDerivedValue<State, (el: El) => void>
+afterrender?:   (state: State, el: El, ctx: DOMContext<Action>) => T | undefined
+beforechange?:  (state: State, el: El, ctx: DOMContext<Action>, value: T | undefined) => T | undefined
+afterchange?:   (state: State, el: El, ctx: DOMContext<Action>, value: T | undefined) => T | undefined
+beforedestroy?: ((el: El, ctx: DOMContext<Action>, value: T | undefined) => void)
 ```
 
 These special attributes are used to control the life-cycle of the current element. These can be used to mount/update/destroy widgets that are not defined in Mood and that need to be embedded in your app. The functions receive a reference to the current element.
