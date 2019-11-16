@@ -68,3 +68,4 @@ package-deps.json
 **/tsconfig.tsbuildinfo
 
 **/generated/
+**/.DS_Store
