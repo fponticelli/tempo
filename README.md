@@ -96,8 +96,8 @@ interface Decrement {
 }
 type Action = Increment | Decrement
 
-const decrement = (_: MouseEvent): Action => ({ kind: 'decrement' })
-const increment = (_: MouseEvent): Action => ({ kind: 'increment' })
+const decrement = (): Action => ({ kind: 'decrement' })
+const increment = (): Action => ({ kind: 'increment' })
 ```
 
 Each interaction with the application is performed using Actions. Actions, like State, are defined per-application. Since actions are usually alternatives, they are generally well represented by union types like in the example above.
@@ -113,10 +113,10 @@ Where in a traditional JS application an event can be mapped to an event handler
 in Mood, the event handler has the following one:
 
 ```ts
-(event: Event) => Action
+<State, Action, Ev extends Event = Event, El extends Element = Element> = (state: State, event: Ev, element: El) => Action | undefined
 ```
 
-This can be a mouthful, but in essence is just a function that takes another function. The function argument maps state to an optional event handler. If the event handler is returned, it will be invoked whenever the corresponding event is triggered. If the argument function returns `undefined` than the handler will not be applied. This allows to control the presence of event handlers based on the current state.
+The function takes the current state, the DOM event and the element associated with such event. If it returns `undefined` than the handler will not resolve in an action and the reducer function that updates the state will not be invoked.
 
 All attributes and text nodes in Mood can be either Derived Values (like in the example above) or Literal Values. If they are derived, the content generated in the web-page will depend on the current state. If they are literals, they are assigned on the first render and never altered again for the life-cycle of the wrapping elements.
 
@@ -146,7 +146,7 @@ A Store adds to the story its capacity of changing its own state reacting to Act
 The reducer takes the current state, an action that has been triggered (usually from some user interaction) and returns a new state to replace the original. A reducer function should not introduce side-effects, like server calls, or perform heavy computations.
 
 
-If you want to perform async operations, you can do that observing `store.ebservable`. The listeners for this object take three arguments: `(state: State, action: Action, changed: boolean)`. In a listener you can call remote services, and once you have an async response, you can invoke `store.process(action)` with a new Action that will be applied to the store.
+If you want to perform async operations, you can do that observing `store.observable`. The listeners for this object take three arguments: `(state: State, action: Action, changed: boolean)`. In a listener you can for example call a remote service, and once you have an async response, you can invoke `store.process(action)` with a new Action that will be applied to the store.
 
 In our example, `reducer` is simply creating a new state where `count` is either incremented or decremented.
 
