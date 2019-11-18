@@ -1,4 +1,4 @@
-[![Actions Status](https://github.com/fponticelli/tempo2/workflows/Build%20and%20Test/badge.svg)](https://github.com/fponticelli/tempo2/actions?query=workflow%3A"Build+and+Test")
+[![Actions Status](https://github.com/fponticelli/tempo/workflows/Build%20and%20Test/badge.svg)](https://github.com/fponticelli/tempo/actions?query=workflow%3A"Build+and+Test")
 
 Tempo is a framework to build dynamic front end applications.
 
