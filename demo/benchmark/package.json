@@ -1,0 +1,30 @@
+{
+  "name": "@mood/demo.benchmark",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "@mood/core": "1.0.0",
+    "@mood/dom": "1.0.0",
+    "@mood/store": "1.0.0"
+  },
+  "devDependencies": {
+    "cssnano": "4.1.10",
+    "parcel-bundler": "1.12.4",
+    "prettier": "1.19.1",
+    "tslint": "5.20.1",
+    "typescript": "3.7.2",
+    "babel-types": "6.26.0",
+    "node-static": "0.7.11"
+  },
+  "scripts": {
+    "compile:ts": "parcel build src/main.ts --no-minify --out-dir dist/current/",
+    "compile:html": "cp src/index.js dist/ && cp src/index.html dist/",
+    "compile": "NODE_ENV=production && npm run compile:ts && npm run compile:html",
+    "clean": "rm -rf dist/current/* && rm -f dist/index.html && rm -f dist/index.js",
+    "build": "npm run clean && npm run compile",
+    "serve": "npx static dist -p 1234",
+    "tslint": "tslint -p ./tslint.json",
+    "prettier": "prettier -c src/**/*.ts",
+    "prettier-fix": "prettier --write src/**/*.ts"
+  }
+}

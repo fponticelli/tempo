@@ -51,6 +51,9 @@
     }, {
       "packageName": "@mood/demo.readme",
       "projectFolder": "./demo/readme"
+    }, {
+      "packageName": "@mood/demo.benchmark",
+      "projectFolder": "./demo/benchmark"
     }
   ]
 }

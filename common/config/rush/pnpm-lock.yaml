@@ -1,19 +1,25 @@
 dependencies:
   '@rush-temp/core': 'file:projects/core.tgz'
+  '@rush-temp/demo.benchmark': 'file:projects/demo.benchmark.tgz'
   '@rush-temp/demo.readme': 'file:projects/demo.readme.tgz'
   '@rush-temp/demo.todomvc': 'file:projects/demo.todomvc.tgz'
   '@rush-temp/dom': 'file:projects/dom.tgz'
   '@rush-temp/mood': 'file:projects/mood.tgz'
   '@rush-temp/store': 'file:projects/store.tgz'
+  '@types/benchmark': 1.0.31
   '@types/jest': 24.0.22
   '@types/jsdom': 12.2.4
   '@types/node': 10.12.18
+  babel-polyfill: 6.26.0
   babel-types: 6.26.0
+  benchmark: 2.1.4
   cssnano: 4.1.10
   jest: 24.9.0
   jsdom: 15.1.1
   lodash: 4.17.15
+  node-static: 0.7.11
   parcel-bundler: 1.12.4
+  platform: 1.3.5
   prettier: 1.19.1
   request: 2.88.0
   request-promise-native: 1.0.7_request@2.88.0
@@ -1173,6 +1179,10 @@ packages:
     dev: false
     resolution:
       integrity: sha512-CeBpmX1J8kWLcDEnI3Cl2Eo6RfbGvzUctA+CjZUhOKDFbLfcr7fc4usEqLNWetrlJd7RhAkyYe2czXop4fICpw==
+  /@types/benchmark/1.0.31:
+    dev: false
+    resolution:
+      integrity: sha512-F6fVNOkGEkSdo/19yWYOwVKGvzbTeWkR/XQYBKtGBQ9oGRjBN9f/L4aJI4sDcVPJO58Y1CJZN8va9V2BhrZapA==
   /@types/istanbul-lib-coverage/2.0.1:
     dev: false
     resolution:
@@ -1476,6 +1486,14 @@ packages:
       node: '>= 6'
     resolution:
       integrity: sha512-2EMA2P8Vp7lG0RAzr4HXqtYwacfMErOuv1U3wrvxHX6rD1sV6xS3WXG3r8TRQ2r6w8OhvSdWt+z41hQNwNm3Xw==
+  /babel-polyfill/6.26.0:
+    dependencies:
+      babel-runtime: 6.26.0
+      core-js: 2.6.10
+      regenerator-runtime: 0.10.5
+    dev: false
+    resolution:
+      integrity: sha1-N5k3q8Z9eJWXCtxiHyhM2WbPIVM=
   /babel-preset-jest/24.9.0_@babel+core@7.6.4:
     dependencies:
       '@babel/core': 7.6.4
@@ -1540,6 +1558,13 @@ packages:
     dev: false
     resolution:
       integrity: sha1-pDAdOJtqQ/m2f/PKEaP2Y342Dp4=
+  /benchmark/2.1.4:
+    dependencies:
+      lodash: 4.17.15
+      platform: 1.3.5
+    dev: false
+    resolution:
+      integrity: sha1-CfPeMckWQl1JjMLuVloOvzwqVik=
   /binary-extensions/1.13.1:
     dev: false
     engines:
@@ -1949,6 +1974,12 @@ packages:
     dev: false
     resolution:
       integrity: sha512-vXTJhHebByxZn3lDvDJYw4lR5+uB3vuoHsuYA5AKuxRVn5wzzIfQKGLBmgdVRHKTJYeK5rvJcHnrd0Li49CFpg==
+  /colors/1.4.0:
+    dev: false
+    engines:
+      node: '>=0.1.90'
+    resolution:
+      integrity: sha512-a+UqTh4kgZg/SlGvfbzDHpgRu7AAQOmmqRHJnxhRZICKFUT91brVhNNt58CMWU9PsBbv3PDCZUHbVxuDiH2mtA==
   /combined-stream/1.0.8:
     dependencies:
       delayed-stream: 1.0.0
@@ -2018,6 +2049,7 @@ packages:
     resolution:
       integrity: sha512-pgQUcgT2+v9/yxHgMynYjNj7nmxLRXv3UC39rjCjDwpe63ev2rioQTju1PKLYUBbPCQQvZNWvQC8tBJd65q11g==
   /core-js/2.6.10:
+    deprecated: 'core-js@<3.0 is no longer maintained and not recommended for usage due to the number of issues. Please, upgrade your dependencies to the actual version of core-js@3.'
     dev: false
     requiresBuild: true
     resolution:
@@ -4530,6 +4562,17 @@ packages:
     dev: false
     resolution:
       integrity: sha512-8MRC/ErwNCHOlAFycy9OPca46fQYUjbJRDcZTHVWIGXIjYLM73k70vv3WkYutVnM4cCo4hE0MqBVVZjP6vjISA==
+  /node-static/0.7.11:
+    dependencies:
+      colors: 1.4.0
+      mime: 1.6.0
+      optimist: 0.6.1
+    dev: false
+    engines:
+      node: '>= 0.4.1'
+    hasBin: true
+    resolution:
+      integrity: sha512-zfWC/gICcqb74D9ndyvxZWaI1jzcoHmf4UTHWQchBNuNMxdBLJMDiUgZ1tjGLEIe/BMhj2DxKD8HOuc2062pDQ==
   /normalize-html-whitespace/1.0.0:
     dev: false
     engines:
@@ -4979,6 +5022,10 @@ packages:
       node: '>=6'
     resolution:
       integrity: sha512-/E57AYkoeQ25qkxMj5PBOVgF8Kiu/h7cYS30Z5+R7WaiCCBfLq58ZI/dSeaEKb9WVJV5n/03QwrN3IeWIFllvw==
+  /platform/1.3.5:
+    dev: false
+    resolution:
+      integrity: sha512-TuvHS8AOIZNAlE77WUDiR4rySV/VMptyMfcfeoMgs4P8apaZM3JrnbzBiixKUv+XR6i+BXrQh8WAnjaSPFO65Q==
   /pn/1.1.0:
     dev: false
     resolution:
@@ -5599,6 +5646,10 @@ packages:
     dev: false
     resolution:
       integrity: sha512-1G6jJVDWrt0rK99kBjvEtziZNCICAuvIPkSiUFIQxVP06RCVpq3dmDo2oi6ABpYaDYaTRr67BEhL8r1wgEZZKg==
+  /regenerator-runtime/0.10.5:
+    dev: false
+    resolution:
+      integrity: sha1-M2w+/BIgrc7dosn6tntaeVWjNlg=
   /regenerator-runtime/0.11.1:
     dev: false
     resolution:
@@ -6970,8 +7021,28 @@ packages:
     dev: false
     name: '@rush-temp/core'
     resolution:
-      integrity: sha512-3jvfeaD7t1b3El+Dfr2SoYfn5fxgjpTNbZdYcpRbouYO8DozwRCy7TaIHRKcUMSuXHak3eHCBW7gkuuvyKcUww==
+      integrity: sha512-nmh78oNLJpniWtpROdiAUzjme+PDNry2JmGRqILXwvpQqEImeDAre0sG7lWw1BKT702OfjhFBOToKB9C0k9low==
       tarball: 'file:projects/core.tgz'
+    version: 0.0.0
+  'file:projects/demo.benchmark.tgz':
+    dependencies:
+      '@types/benchmark': 1.0.31
+      babel-polyfill: 6.26.0
+      babel-types: 6.26.0
+      benchmark: 2.1.4
+      cssnano: 4.1.10
+      lodash: 4.17.15
+      node-static: 0.7.11
+      parcel-bundler: 1.12.4
+      platform: 1.3.5
+      prettier: 1.19.1
+      tslint: 5.20.1_typescript@3.7.2
+      typescript: 3.7.2
+    dev: false
+    name: '@rush-temp/demo.benchmark'
+    resolution:
+      integrity: sha512-4a/LUtrhpNKlc6w/dL7UviFw03BlRMNDV1CHbgF7Qaj1CK6l2Ep8UD6ftSaG5RXIMRBYfSapuJZyyWVeteCAPg==
+      tarball: 'file:projects/demo.benchmark.tgz'
     version: 0.0.0
   'file:projects/demo.readme.tgz':
     dependencies:
@@ -6986,7 +7057,7 @@ packages:
     dev: false
     name: '@rush-temp/demo.readme'
     resolution:
-      integrity: sha512-Aqs4HDwa/Tfxnwxt3uG6SajjHVGqFlbFSTGVTdnNaZQ7F88JJpO+x7cKGjXQl7UCGsJ04ULw0j9NttTeVX/EkA==
+      integrity: sha512-OJPbqqNFU8da+JL3AT31nguciM17014E4VW+Qt4ybFW5Id70XybhsHOIDWj/j7Ves/9Oig1piKjm1aJBoPjYcg==
       tarball: 'file:projects/demo.readme.tgz'
     version: 0.0.0
   'file:projects/demo.todomvc.tgz':
@@ -7002,7 +7073,7 @@ packages:
     dev: false
     name: '@rush-temp/demo.todomvc'
     resolution:
-      integrity: sha512-WumzsdyMHUtUxx6fpU3+6oc79679muOLtQp56xSfh1A5Rkyx/vX1RB1rDklB7uz0e7Ed/FEe7bUI4f/KymKQmw==
+      integrity: sha512-zpylgiUkltmcP+FKCQrtmHb7U+oEz5Cvi3C4Zx6p0QCJgd4qrIkJBMKMGwEf3siLD5txuNGoSxPQfNbGUILQlw==
       tarball: 'file:projects/demo.todomvc.tgz'
     version: 0.0.0
   'file:projects/dom.tgz':
@@ -7022,7 +7093,7 @@ packages:
     dev: false
     name: '@rush-temp/dom'
     resolution:
-      integrity: sha512-c5PgBJtukkIHL1QmAkTzb082YZa3LYwanBmKIQ9shQ9+JymhD5L6xSrVtMNoU1Crnye4P3xJQ4f9wD12PaQ8vw==
+      integrity: sha512-GBr8gzcUZ5UFvb2U1+6K9fqjnxFbgAMyj5HyKSqwG9qtRQxVTUvHWzP2Bi0b798R8iBkz2M2rZbRTqO8PQudYQ==
       tarball: 'file:projects/dom.tgz'
     version: 0.0.0
   'file:projects/mood.tgz':
@@ -7035,7 +7106,7 @@ packages:
     dev: false
     name: '@rush-temp/mood'
     resolution:
-      integrity: sha512-OJgCuKAZ7nG6jIhYTZD733ltMvHjDiLpjkbrhWA7WjiwF62HO1ukk6RQYqANi/h04YiZoEwkG+xwIdJpougtVg==
+      integrity: sha512-ZvjkZAM6Gx6+Taos8hlFJqIgN8Glye0DKj8YNIbN69ELzAizFf8vuz+MxqsvHCZfO/mdPmLHUM/pKWRPf0GLmw==
       tarball: 'file:projects/mood.tgz'
     version: 0.0.0
   'file:projects/store.tgz':
@@ -7049,26 +7120,32 @@ packages:
     dev: false
     name: '@rush-temp/store'
     resolution:
-      integrity: sha512-3ARgTaG1j5kRPMuGCRS0kGGUWw1I+LqpS+VBpHfG/Fc1hDovxM/hqGkppPv84PHtavRpNI7I1BuVZC/8zCPgAg==
+      integrity: sha512-sR/CajhR/32AOLDIHDHaBaRzRZeumWt550OIgpRPscRgP+5TilCwahgNiVRDTva0nGEMOM8NOgdUrTg3xSWe8Q==
       tarball: 'file:projects/store.tgz'
     version: 0.0.0
 registry: ''
 specifiers:
   '@rush-temp/core': 'file:./projects/core.tgz'
+  '@rush-temp/demo.benchmark': 'file:./projects/demo.benchmark.tgz'
   '@rush-temp/demo.readme': 'file:./projects/demo.readme.tgz'
   '@rush-temp/demo.todomvc': 'file:./projects/demo.todomvc.tgz'
   '@rush-temp/dom': 'file:./projects/dom.tgz'
   '@rush-temp/mood': 'file:./projects/mood.tgz'
   '@rush-temp/store': 'file:./projects/store.tgz'
+  '@types/benchmark': 1.0.31
   '@types/jest': 24.0.22
   '@types/jsdom': 12.2.4
   '@types/node': 10.12.18
+  babel-polyfill: 6.26.0
   babel-types: 6.26.0
+  benchmark: 2.1.4
   cssnano: 4.1.10
   jest: 24.9.0
   jsdom: 15.1.1
   lodash: 4.17.15
+  node-static: 0.7.11
   parcel-bundler: 1.12.4
+  platform: 1.3.5
   prettier: 1.19.1
   request: 2.88.0
   request-promise-native: 1.0.7
