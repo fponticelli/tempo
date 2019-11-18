@@ -12,7 +12,7 @@ limitations under the License.
 */
 
 /* istanbul ignore next */
-import { UnwrappedValue } from '@mood/core/lib/value'
+import { UnwrappedValue } from '@tempo/core/lib/value'
 import { DOMContext } from './context'
 
 export type DOMAttribute<State, Value> = UnwrappedValue<State, Value>

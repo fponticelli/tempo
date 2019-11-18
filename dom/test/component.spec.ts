@@ -15,8 +15,8 @@ import { div } from '../src/html'
 import { component } from '../src/component'
 import { text } from '../src/text'
 import { createContext } from './common'
-import { Store } from '@mood/store/lib/store'
-import { Property } from '@mood/store/lib/property'
+import { Store } from '@tempo/store/lib/store'
+import { Property } from '@tempo/store/lib/property'
 
 describe('component', () => {
   it('fromElements sets-up the right defaults', () => {

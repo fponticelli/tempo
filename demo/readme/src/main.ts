@@ -11,10 +11,10 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { Mood } from '@mood/dom/lib/mood'
-import { div, button } from '@mood/dom/lib/html'
-import { mapState } from '@mood/dom/lib/map'
-import { Store } from '@mood/store/lib/store'
+import { Tempo } from '@tempo/dom/lib/tempo'
+import { div, button } from '@tempo/dom/lib/html'
+import { mapState } from '@tempo/dom/lib/map'
+import { Store } from '@tempo/store/lib/store'
 
 interface State {
   count: number
@@ -60,4 +60,4 @@ const template = div<State, Action>(
   )
 )
 
-Mood.render({ store, template })
+Tempo.render({ store, template })

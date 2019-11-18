@@ -11,7 +11,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { View, StaticView, DynamicView } from '@mood/core/lib/view'
+import { View, StaticView, DynamicView } from '@tempo/core/lib/view'
 import { filterDynamics, domChildToTemplate } from './utils/dom'
 import { DOMTemplate, DOMChild } from './template'
 import { DOMContext } from './context'

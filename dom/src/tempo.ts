@@ -11,22 +11,22 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { Store } from '@mood/store/lib/store'
+import { Store } from '@tempo/store/lib/store'
 import { DOMComponent, component } from './component'
 import { DOMContext } from './context'
 import { DOMChild } from './template'
 
-export type MoodView<State, Action> = Readonly<{
+export type TempoView<State, Action> = Readonly<{
   store: Store<State, Action>
   destroy(): void
 }>
 
-export module Mood {
+export module Tempo {
   export function renderComponent<State, Action>(options: {
     el?: HTMLElement
     component: DOMComponent<State, Action>
     document?: Document
-  }): MoodView<State, Action> {
+  }): TempoView<State, Action> {
     const { el: maybeElement, component } = options
     const { store } = component
     /* istanbul ignore next */
@@ -54,9 +54,9 @@ export module Mood {
     template: DOMChild<State, Action>
     store: Store<State, Action>
     document?: Document
-  }): MoodView<State, Action> {
+  }): TempoView<State, Action> {
     const { el, store, document, template } = options
     const comp = component({ store }, template)
-    return Mood.renderComponent({ el, component: comp, document })
+    return Tempo.renderComponent({ el, component: comp, document })
   }
 }

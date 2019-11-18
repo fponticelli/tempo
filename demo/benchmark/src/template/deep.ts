@@ -11,7 +11,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { div, h1, address, article } from '@mood/dom/lib/html'
+import { div, h1, address, article } from '@tempo/dom/lib/html'
 
 export interface Deep {
   id: string

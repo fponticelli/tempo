@@ -13,7 +13,7 @@ limitations under the License.
 
 import { list } from './template/list'
 import { deep, Deep } from './template/deep'
-import { DOMContext } from '@mood/dom/lib/context'
+import { DOMContext } from '@tempo/dom/lib/context'
 import { DynamicView } from 'core/lib/view'
 
 const ctx = DOMContext.fromElement(document.getElementById('App')!, () => {})

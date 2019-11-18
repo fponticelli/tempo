@@ -1,5 +1,5 @@
 {
-  "name": "@mood/dom",
+  "name": "@tempo/dom",
   "version": "1.0.0",
   "description": "",
   "license": "UNLICENSED",
@@ -13,8 +13,8 @@
   },
   "author": "Franco Ponticelli <franco.ponticelli@gmail.com>",
   "dependencies": {
-    "@mood/core": "1.0.0",
-    "@mood/store": "1.0.0"
+    "@tempo/core": "1.0.0",
+    "@tempo/store": "1.0.0"
   },
   "devDependencies": {
     "@types/jest": "24.0.22",

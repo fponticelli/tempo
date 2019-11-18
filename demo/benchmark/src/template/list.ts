@@ -11,7 +11,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { ul, li } from '@mood/dom/lib/html'
-import { forEach } from '@mood/dom/lib/for_each'
+import { ul, li } from '@tempo/dom/lib/html'
+import { forEach } from '@tempo/dom/lib/for_each'
 
 export const list = ul<number[], unknown>({}, forEach({}, li({ attrs: { className: String } }, String)))

@@ -34,25 +34,25 @@
 
   "projects": [
     {
-      "packageName": "mood",
+      "packageName": "tempo",
       "projectFolder": "."
     }, {
-      "packageName": "@mood/core",
+      "packageName": "@tempo/core",
       "projectFolder": "./core"
     }, {
-      "packageName": "@mood/store",
+      "packageName": "@tempo/store",
       "projectFolder": "./store"
     }, {
-      "packageName": "@mood/dom",
+      "packageName": "@tempo/dom",
       "projectFolder": "./dom"
     }, {
-      "packageName": "@mood/demo.todomvc",
+      "packageName": "@tempo/demo.todomvc",
       "projectFolder": "./demo/todomvc"
     }, {
-      "packageName": "@mood/demo.readme",
+      "packageName": "@tempo/demo.readme",
       "projectFolder": "./demo/readme"
     }, {
-      "packageName": "@mood/demo.benchmark",
+      "packageName": "@tempo/demo.benchmark",
       "projectFolder": "./demo/benchmark"
     }
   ]

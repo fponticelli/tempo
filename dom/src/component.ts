@@ -12,9 +12,9 @@ limitations under the License.
 */
 
 import { DOMDynamicFragmentView } from './fragment'
-import { View, DynamicView } from '@mood/core/lib/view'
-import { Store } from '@mood/store/lib/store'
-import { nextFrame } from '@mood/store/lib/emitter'
+import { View, DynamicView } from '@tempo/core/lib/view'
+import { Store } from '@tempo/store/lib/store'
+import { nextFrame } from '@tempo/store/lib/emitter'
 import { DOMTemplate, DOMChild } from './template'
 import { DOMContext } from './context'
 import { filterDynamics, domChildToTemplate } from './utils/dom'

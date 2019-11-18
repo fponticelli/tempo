@@ -13,7 +13,7 @@ limitations under the License.
 
 import { DOMTemplate, DOMChild } from './template'
 import { DOMContext } from './context'
-import { View } from '@mood/core/lib/view'
+import { View } from '@tempo/core/lib/view'
 import { processAttribute, processEvent, processStyle, filterDynamics, domChildToTemplate } from './utils/dom'
 import { DOMDynamicNodeView, DOMStaticNodeView } from './node_view'
 import { DOMAttributes } from './value'

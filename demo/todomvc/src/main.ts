@@ -11,9 +11,9 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { Mood } from '@mood/dom/lib/mood'
-import { Store } from '@mood/store/lib/store'
-import { debounce } from '@mood/store/lib/emitter'
+import { Tempo } from '@tempo/dom/lib/tempo'
+import { Store } from '@tempo/store/lib/store'
+import { debounce } from '@tempo/store/lib/emitter'
 import { DataStore } from './data_store'
 import { reducer } from './reducer'
 import { template } from './app_template'
@@ -29,4 +29,4 @@ store.property.observable.on(saveToDataStore)
 
 // store.observable.on((_, action) => console.log(action))
 
-Mood.render({ store, template })
+Tempo.render({ store, template })

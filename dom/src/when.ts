@@ -13,7 +13,7 @@ limitations under the License.
 
 import { DOMChild, DOMTemplate } from './template'
 import { DOMContext } from './context'
-import { View, DynamicView } from '@mood/core/lib/view'
+import { View, DynamicView } from '@tempo/core/lib/view'
 import { domChildToTemplate, filterDynamics, removeNode } from './utils/dom'
 
 export interface WhenOptions<State> {

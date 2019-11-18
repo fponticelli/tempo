@@ -11,11 +11,11 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { section, header, h1, input, ul, label, div, li, footer, span, a, p, button } from '@mood/dom/lib/html'
-import { mapState } from '@mood/dom/lib/map'
-import { DOMEventHandler } from '@mood/dom/lib/value'
-import { forEach } from '@mood/dom/lib/for_each'
-import { when } from '@mood/dom/lib/when'
+import { section, header, h1, input, ul, label, div, li, footer, span, a, p, button } from '@tempo/dom/lib/html'
+import { mapState } from '@tempo/dom/lib/map'
+import { DOMEventHandler } from '@tempo/dom/lib/value'
+import { forEach } from '@tempo/dom/lib/for_each'
+import { when } from '@tempo/dom/lib/when'
 import { Action } from './action'
 import { State, Filter, Todo } from './state'
 

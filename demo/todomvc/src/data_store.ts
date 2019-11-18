@@ -13,7 +13,7 @@ limitations under the License.
 
 import { State, Filter } from './state'
 
-const STORE_KEY = 'todomvc-mood'
+const STORE_KEY = 'todomvc-tempo'
 
 export class DataStore {
   static get(): State {

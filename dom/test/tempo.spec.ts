@@ -12,13 +12,13 @@ limitations under the License.
 */
 
 import { createContext } from './common'
-import { Mood } from '../src/mood'
+import { Tempo } from '../src/tempo'
 import { component } from '../src/component'
 import { div } from '../src/html'
-import { Store } from '@mood/store/lib/store'
-import { Property } from '@mood/store/lib/property'
+import { Store } from '@tempo/store/lib/store'
+import { Property } from '@tempo/store/lib/property'
 
-describe('Mood', () => {
+describe('Tempo', () => {
   it('render', () => {
     const ctx = createContext()
     const store = new Store(
@@ -30,7 +30,7 @@ describe('Mood', () => {
       { store },
       div({}, a => a)
     )
-    const view = Mood.renderComponent({
+    const view = Tempo.renderComponent({
       el: ctx.doc.body,
       component: comp,
       document: ctx.doc
@@ -65,7 +65,7 @@ describe('Mood', () => {
       div({}, a => a)
     )
 
-    const view = Mood.renderComponent({
+    const view = Tempo.renderComponent({
       el: ctx.doc.body,
       component: comp,
       document: ctx.doc

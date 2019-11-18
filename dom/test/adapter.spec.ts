@@ -15,7 +15,7 @@ import { createContext } from './common'
 import { div } from '../src/html'
 import { adapter, PropagateArg } from '../src/adapter'
 import { component } from '../src/component'
-import { Store } from '@mood/store/lib/store'
+import { Store } from '@tempo/store/lib/store'
 
 describe('adapter', () => {
   it('noOptions', () => {

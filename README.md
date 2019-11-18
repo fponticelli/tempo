@@ -1,26 +1,26 @@
-[![Actions Status](https://github.com/fponticelli/mood2/workflows/Build%20and%20Test/badge.svg)](https://github.com/fponticelli/mood2/actions?query=workflow%3A"Build+and+Test")
+[![Actions Status](https://github.com/fponticelli/tempo2/workflows/Build%20and%20Test/badge.svg)](https://github.com/fponticelli/tempo2/actions?query=workflow%3A"Build+and+Test")
 
-Mood is a framework to build dynamic front end applications.
+Tempo is a framework to build dynamic front end applications.
 
 [TODO MVC demo](./docs/demo/todomvc/)
 
 # Sample Application
 
-A Mood application, pivots around two main instances:
+A Tempo application, pivots around two main instances:
 
   * **Store** as in data-store, or state holder
   * **Template**: an object with a function `render(state: State, context: Context): View<State>`
 
-These two instances work together applying `Mood.render`.
+These two instances work together applying `Tempo.render`.
 
 Here is a full example for a little widget that allows to increment/decrement a counter.
 
 ```ts
-import { Mood } from '@mood/dom/lib/mood'
-import { html } from '@mood/dom/lib/web'
+import { Tempo } from '@tempo/dom/lib/tempo'
+import { html } from '@tempo/dom/lib/web'
 const { div, button } = html
-import { mapState } from '@mood/dom/lib/map'
-import { Store } from '@mood/store/lib/store'
+import { mapState } from '@tempo/dom/lib/map'
+import { Store } from '@tempo/store/lib/store'
 
 interface State {
   count: number
@@ -66,7 +66,7 @@ const template = div<State, Action>(
   )
 )
 
-Mood.render({ store, template })
+Tempo.render({ store, template })
 ```
 
 You can find this [demo running here](./docs/demo/readme/)
@@ -110,7 +110,7 @@ Where in a traditional JS application an event can be mapped to an event handler
 (event: Event) => void
 ```
 
-in Mood, the event handler has the following one:
+in Tempo, the event handler has the following one:
 
 ```ts
 <State, Action, Ev extends Event = Event, El extends Element = Element> = (state: State, event: Ev, element: El) => Action | undefined
@@ -118,7 +118,7 @@ in Mood, the event handler has the following one:
 
 The function takes the current state, the DOM event and the element associated with such event. If it returns `undefined` than the handler will not resolve in an action and the reducer function that updates the state will not be invoked.
 
-All attributes and text nodes in Mood can be either Derived Values (like in the example above) or Literal Values. If they are derived, the content generated in the web-page will depend on the current state. If they are literals, they are assigned on the first render and never altered again for the life-cycle of the wrapping elements.
+All attributes and text nodes in Tempo can be either Derived Values (like in the example above) or Literal Values. If they are derived, the content generated in the web-page will depend on the current state. If they are literals, they are assigned on the first render and never altered again for the life-cycle of the wrapping elements.
 
 ```ts
 const reducer = (state: State, action: Action) => {
@@ -167,7 +167,7 @@ const template = div<State, Action>(
   )
 )
 
-Mood.render({ store, template })
+Tempo.render({ store, template })
 ```
 
 Finally the UI! Each element, like `div` above, takes a first argument for the element attributes and 0 or more other arguments. If an argument is a literal value like in `className` that is applied and it cannot be modified anymore. For dynamic values a function from State to the attribute type are required.
@@ -180,15 +180,15 @@ Just for fun we added `disabled` and made it dependent on `count`. When it is ze
 
 When the template is defined, nothing really happens except that we have an instance of `DOMElement<State, Action, HTMLDivElement>`. This instance implements `DOMTemplate<State, Action>` which has a method `render: (ctx: DOMContext, state: State) => View<State>`. When that method is invoked, it will perform the actual modifications of the dom. The `View` returned by the method has a method `destroy()` to remove what has been generated and `change(state: State)` to update the its content.
 
-These functions are managed and wired automatically when `store` and `template` are passed to `Mood.render`.
+These functions are managed and wired automatically when `store` and `template` are passed to `Tempo.render`.
 
 The entire app fits 6.6kb when gzipped!
 
 # Elements
 
-A template is built by assembling elements together. `@mood/dom/lib/web` contains all the definitions for all HTML and SVG elements. The are then special elements described below.
+A template is built by assembling elements together. `@tempo/dom/lib/web` contains all the definitions for all HTML and SVG elements. The are then special elements described below.
 
-## mood_attributes
+## tempo_attributes
 
 Each DOM element has four additional special attributes:
 
@@ -199,7 +199,7 @@ afterchange?:   (state: State, el: El, ctx: DOMContext<Action>, value: T | undef
 beforedestroy?: ((el: El, ctx: DOMContext<Action>, value: T | undefined) => void)
 ```
 
-These special attributes are used to control the life-cycle of the current element. These can be used to mount/update/destroy widgets that are not defined in Mood and that need to be embedded in your app. The functions receive a reference to the current element.
+These special attributes are used to control the life-cycle of the current element. These can be used to mount/update/destroy widgets that are not defined in Tempo and that need to be embedded in your app. The functions receive a reference to the current element.
 
 ## Map state and action
 
@@ -254,7 +254,7 @@ condition: (state: State) => boolean
 
 A `component` is a special kind of node that manages its own state. When embedded in other nodes it does not automatically propagate actions up the hierarchy, nor changes its own contents when the outer state is updated.
 
-A component takes an instance of `Store` to manage its state, it is in fact what `Mood.render` wraps the passed template around.
+A component takes an instance of `Store` to manage its state, it is in fact what `Tempo.render` wraps the passed template around.
 
 ## Adapter
 

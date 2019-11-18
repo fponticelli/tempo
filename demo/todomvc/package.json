@@ -1,11 +1,11 @@
 {
-  "name": "@mood/demo.todomvc",
+  "name": "@tempo/demo.todomvc",
   "version": "1.0.0",
   "private": true,
   "dependencies": {
-    "@mood/core": "1.0.0",
-    "@mood/dom": "1.0.0",
-    "@mood/store": "1.0.0",
+    "@tempo/core": "1.0.0",
+    "@tempo/dom": "1.0.0",
+    "@tempo/store": "1.0.0",
     "todomvc-app-css": "2.2.0",
     "todomvc-common": "1.0.5"
   },

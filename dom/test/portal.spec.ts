@@ -12,11 +12,11 @@ limitations under the License.
 */
 
 import { createContext } from './common'
-import { Mood } from '../src/mood'
+import { Tempo } from '../src/tempo'
 import { component } from '../src/component'
 import { portalWithSelector, headPortal, bodyPortal } from '../src/portal'
 import { span, style } from '../src/html'
-import { Store } from '@mood/store/lib/store'
+import { Store } from '@tempo/store/lib/store'
 
 describe('portal', () => {
   it('portalWithSelector', () => {
@@ -30,7 +30,7 @@ describe('portal', () => {
       { store },
       portalWithSelector({ selector: '#container' }, span({ attrs: { className: (s: string) => s } }))
     )
-    const view = Mood.renderComponent({
+    const view = Tempo.renderComponent({
       el: ctx.doc.getElementById('main')!,
       component: comp,
       document: ctx.doc
@@ -54,7 +54,7 @@ describe('portal', () => {
       portalWithSelector({ selector: '#doesnotexist' }, span({ attrs: { className: (s: string) => s } }))
     )
     expect(() => {
-      Mood.renderComponent({
+      Tempo.renderComponent({
         el: ctx.doc.getElementById('main')!,
         component: comp,
         document: ctx.doc
@@ -72,7 +72,7 @@ describe('portal', () => {
       { store },
       headPortal(style({}, s => s))
     )
-    const view = Mood.renderComponent({
+    const view = Tempo.renderComponent({
       el: ctx.doc.body!,
       component: comp,
       document: ctx.doc
@@ -94,7 +94,7 @@ describe('portal', () => {
       { store },
       bodyPortal(style({}, s => s))
     )
-    const view = Mood.renderComponent({
+    const view = Tempo.renderComponent({
       el: ctx.doc.body!,
       component: comp,
       document: ctx.doc
