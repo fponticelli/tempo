@@ -373,7 +373,9 @@ var renderFunction = function (ctx, state, map) {
     var node = ctx.doc.createTextNode(map(state) || '');
     var f = function (state) {
         var newContent = map(state) || '';
-        node.nodeValue = newContent;
+        // TODO, is this optimization worth it?
+        if (node.textContent !== newContent)
+            node.textContent = newContent;
     };
     var view = new node_view_1.DOMDynamicNodeView(node, [], f);
     ctx.append(node);
@@ -518,17 +520,34 @@ var DOMElement = /** @class */ (function () {
         var beforedestroyf = beforedestroy && (function () { return beforedestroy(el, ctx, value); });
         var allDynamics = [];
         if (attrs) {
-            Object.keys(attrs).forEach(function (key) { return dom_1.processAttribute(el, key, attrs[key], allDynamics); });
+            var dynamics = Object.keys(attrs).reduce(function (acc, key) {
+                return dom_1.processAttribute(el, key, attrs[key], acc);
+            }, []);
+            for (var _i = 0, dynamics_1 = dynamics; _i < dynamics_1.length; _i++) {
+                var dy = dynamics_1[_i];
+                dy(state);
+            }
+            allDynamics.push.apply(allDynamics, dynamics);
         }
         if (events) {
-            Object.keys(events).forEach(function (key) { return dom_1.processEvent(el, key, events[key], ctx.dispatch, allDynamics); });
+            var dynamics = Object.keys(events).reduce(function (acc, key) {
+                return dom_1.processEvent(el, key, events[key], ctx.dispatch, acc);
+            }, []);
+            for (var _b = 0, dynamics_2 = dynamics; _b < dynamics_2.length; _b++) {
+                var dy = dynamics_2[_b];
+                dy(state);
+            }
+            allDynamics.push.apply(allDynamics, dynamics);
         }
         if (styles) {
-            Object.keys(styles).forEach(function (key) { return dom_1.processStyle(el, key, styles[key], allDynamics); });
-        }
-        for (var _i = 0, allDynamics_1 = allDynamics; _i < allDynamics_1.length; _i++) {
-            var dy = allDynamics_1[_i];
-            dy(state);
+            var dynamics = Object.keys(styles).reduce(function (acc, key) {
+                return dom_1.processStyle(el, key, styles[key], acc);
+            }, []);
+            for (var _c = 0, dynamics_3 = dynamics; _c < dynamics_3.length; _c++) {
+                var dy = dynamics_3[_c];
+                dy(state);
+            }
+            allDynamics.push.apply(allDynamics, dynamics);
         }
         // children
         var appendChild = function (n) { return el.appendChild(n); };
@@ -552,8 +571,8 @@ var DOMElement = /** @class */ (function () {
         }
         if (allDynamics.length > 0) {
             return new node_view_1.DOMDynamicNodeView(el, views, function (state) {
-                for (var _i = 0, allDynamics_2 = allDynamics; _i < allDynamics_2.length; _i++) {
-                    var f = allDynamics_2[_i];
+                for (var _i = 0, allDynamics_1 = allDynamics; _i < allDynamics_1.length; _i++) {
+                    var f = allDynamics_1[_i];
                     f(state);
                 }
             }, beforedestroyf);

@@ -33,9 +33,7 @@ const renderFunction = <State>(
   const node = ctx.doc.createTextNode(map(state) || '')
   const f = (state: State) => {
     const newContent = map(state) || ''
-    // TODO, is this optimization worth it?
-    if (node.textContent !== newContent)
-      node.textContent = newContent
+    node.nodeValue = newContent
   }
   const view = new DOMDynamicNodeView(node, [], f)
   ctx.append(node)

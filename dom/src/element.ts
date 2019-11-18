@@ -14,7 +14,7 @@ limitations under the License.
 import { DOMTemplate, DOMChild } from './template'
 import { DOMContext } from './context'
 import { View } from '@mood/core/lib/view'
-import { Acc, processAttribute, processEvent, processStyle, filterDynamics, domChildToTemplate } from './utils/dom'
+import { processAttribute, processEvent, processStyle, filterDynamics, domChildToTemplate } from './utils/dom'
 import { DOMDynamicNodeView, DOMStaticNodeView } from './node_view'
 import { DOMAttributes } from './value'
 
@@ -65,34 +65,24 @@ export class DOMElement<State, Action, El extends Element = Element, T = unknown
     const allDynamics = [] as ((state: State) => void)[]
 
     if (attrs) {
-      const dynamics = Object.keys(attrs).reduce(
-        (acc: Acc<State>, key: keyof typeof attrs) =>
-          processAttribute(el, key, attrs[key], acc),
-          []
+      Object.keys(attrs).forEach(
+        (key: keyof typeof attrs) => processAttribute(el, key, attrs[key], allDynamics)
       )
-      for (const dy of dynamics) dy(state)
-      allDynamics.push(...dynamics)
     }
 
     if (events) {
-      const dynamics = Object.keys(events).reduce(
-        (acc: Acc<State>, key: keyof typeof events) =>
-          processEvent(el, key, events[key], ctx.dispatch, acc),
-          []
+      Object.keys(events).forEach(
+        (key: keyof typeof events) => processEvent(el, key, events[key], ctx.dispatch, allDynamics)
       )
-      for (const dy of dynamics) dy(state)
-      allDynamics.push(...dynamics)
     }
 
     if (styles) {
-      const dynamics = Object.keys(styles).reduce(
-        (acc: Acc<State>, key: keyof typeof styles) =>
-          processStyle(el, key, styles[key], acc),
-          []
+      Object.keys(styles).forEach(
+        (key: keyof typeof styles) => processStyle(el, key, styles[key], allDynamics)
       )
-      for (const dy of dynamics) dy(state)
-      allDynamics.push(...dynamics)
     }
+
+    for (const dy of allDynamics) dy(state)
 
     // children
     const appendChild = (n: Node) => el.appendChild(n)

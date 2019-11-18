@@ -22,7 +22,7 @@
     "compile": "NODE_ENV=production && npm run compile:ts && npm run compile:html",
     "clean": "rm -rf dist/current/* && rm -f dist/index.html && rm -f dist/index.js",
     "build": "npm run clean && npm run compile",
-    "serve": "npx static dist -p 1234",
+    "serve": "npx static dist -p 4321",
     "tslint": "tslint -p ./tslint.json",
     "prettier": "prettier -c src/**/*.ts",
     "prettier-fix": "prettier --write src/**/*.ts"
