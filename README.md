@@ -2,6 +2,8 @@
 
 Tempo is a framework to build dynamic front end applications.
 
+This is not an officially supported Google product
+
 [TODO MVC demo](./docs/demo/todomvc/)
 
 # Sample Application
