@@ -993,7 +993,7 @@ var deep_1 = require("./template/deep");
 
 var context_1 = require("@mood/dom/lib/context");
 
-var ctx = context_1.DOMContext.fromElement(document.getElementById('App'), function () {});
+var ctx = context_1.DOMContext.fromElement(document.getElementById('test'), function () {});
 
 exports.renderListElements = function (numbers) {
   list_1.list.render(ctx, numbers);

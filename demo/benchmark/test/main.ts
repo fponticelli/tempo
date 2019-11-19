@@ -14,9 +14,9 @@ limitations under the License.
 import { list } from './template/list'
 import { deep, Deep } from './template/deep'
 import { DOMContext } from '@tempo/dom/lib/context'
-import { DynamicView } from 'core/lib/view'
+import { DynamicView } from '@tempo/core/lib/view'
 
-const ctx = DOMContext.fromElement(document.getElementById('App')!, () => {})
+const ctx = DOMContext.fromElement(document.getElementById('test')!, () => {})
 
 export const renderListElements = (numbers: number[]) => {
   list.render(ctx, numbers)

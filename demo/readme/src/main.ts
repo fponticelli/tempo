@@ -33,7 +33,7 @@ type Action = Increment | Decrement
 const decrement = (): Action => ({ kind: 'decrement' })
 const increment = (): Action => ({ kind: 'increment' })
 
-const reducer = (state: State, action: Action) => {
+const reducer = (state: State, action: Action): State => {
   switch (action.kind) {
     case 'increment':
       return { count: state.count + 1 }

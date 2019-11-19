@@ -5,7 +5,8 @@
   "dependencies": {
     "@tempo/core": "1.0.0",
     "@tempo/dom": "1.0.0",
-    "@tempo/store": "1.0.0"
+    "@tempo/store": "1.0.0",
+    "tslib": "1.10.0"
   },
   "devDependencies": {
     "cssnano": "4.1.10",
@@ -17,10 +18,10 @@
     "node-static": "0.7.11"
   },
   "scripts": {
-    "compile:ts": "parcel build src/main.ts --no-minify --out-dir dist/current/",
-    "compile:html": "cp src/index.js dist/ && cp src/index.html dist/",
-    "compile": "NODE_ENV=production && npm run compile:ts && npm run compile:html",
-    "clean": "rm -rf dist/current/* && rm -f dist/index.html && rm -f dist/index.js",
+    "compile:test": "parcel build test/main.ts --no-minify --out-dir dist/current/",
+    "compile:html": "parcel build src/index.html --no-minify --out-dir dist/ --experimental-scope-hoisting",
+    "compile": "NODE_ENV=production && npm run compile:test && npm run compile:html && node tools/create_config.js",
+    "clean": "rm -f dist/current/* && rm -f dist/*.css && rm -f dist/*.js* && rm -f dist/*.html",
     "build": "npm run clean && npm run compile",
     "serve": "npx static dist -p 4321",
     "tslint": "tslint -p ./tslint.json",
