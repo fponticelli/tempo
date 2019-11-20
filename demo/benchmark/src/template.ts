@@ -3,25 +3,15 @@ import { State } from './state'
 import { Action } from './action'
 import { optionsSelection } from './template/options_selection'
 import { mapState } from '@tempo/dom/lib/map'
-import { testSelection } from './template/test_selection'
-import { versionSelection } from './template/version_selection'
+import { tableView } from './template/table_view'
+import { header } from './template/header'
 
 export const template = div<State, Action>(
   { attrs: { className: 'display_test' } },
+  header,
   mapState(
     { map: state => state.options },
     optionsSelection
   ),
-  mapState(
-    { map: state => state.tests },
-    testSelection
-  ),
-  mapState(
-    { map: state => state.versions },
-    versionSelection
-  ),
-  button(
-    { events: { click: () => Action.executeTests() } },
-    'execute tests'
-  )
+  tableView
 )

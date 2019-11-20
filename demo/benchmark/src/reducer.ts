@@ -20,19 +20,21 @@ export const reducer = (state: State, action: Action): State => {
       return { ...state, tests: tests1 }
     case 'ToggleAllTests':
       const selected1 = state.tests.filter(test => test.selected).length !== state.tests.length
-      console.log(selected1)
       const tests2 = state.tests.map(test => ({...test, selected: selected1}))
       return { ...state, tests: tests2 }
     case 'ToggleVersion':
-      const versions1 = {
-        ...state.versions,
-        [action.id]: action.selected
+      return {
+        ...state,
+        versions: state.versions.map(v => {
+          if (v.id === action.id)
+            return { id: v.id, selected: action.selected }
+          else
+            return v
+        })
       }
-      return { ...state, versions: versions1 }
     case 'ToggleAllVersions':
-      const keys = Object.keys(state.versions)
-      const selected2 = keys.filter(k => state.versions[k]).length !== keys.length
-      const versions2 = keys.reduce((acc, key) => ({ ...acc, [key]: selected2 }), {})
+      const selected2 = state.versions.filter(v => v.selected).length !== state.versions.length
+      const versions2 = state.versions.map(v => ({ ...v, selected: selected2 }), {})
       return { ...state, versions: versions2 }
     case 'ExecuteTests':
       // no state changes

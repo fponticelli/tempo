@@ -1,4 +1,5 @@
 import { TestResult, TestDescription, TestOptions } from './state'
+/// <reference path="./definitions.d.ts" />
 
 function setup() {
   // document.getElementById('test').innerHTML = ''
@@ -24,38 +25,45 @@ const loadScript = (runnerId: string): Promise<any> => new Promise((resolve, rej
   document.body.appendChild(script)
 })
 
-const makeSuite = (runnerId: string, testDescriptions: TestDescription[], options: TestOptions) => new Promise(async (resolve, reject) => {
+const makeSuite = (runnerId: string, testDescriptions: TestDescription[], options: TestOptions) =>
+  new Promise<Record<string, TestResult>>(async (resolve, reject) => {
 
-  const mod = await loadScript(runnerId)
+    const mod = await loadScript(runnerId)
 
-  const suite = new Benchmark.Suite()
-  const results = [] as TestResult[]
+    const suite = new Benchmark.Suite()
+    const results = [] as TestResult[]
 
-  for (const test of testDescriptions) {
-    if (!mod[test.fn]) continue
+    for (const test of testDescriptions) {
+      if (!mod[test.fn]) continue
 
-    suite.add({
-      id: test.id,
-      async: !!test.async,
-      fn: function() { mod[test.fn](test.args) },
-      name: test.name,
-      setup: setup,
-      teardown: teardown,
-      maxTime: options.maxTime
+      suite.add({
+        id: test.id,
+        async: !!test.async,
+        fn: function() { mod[test.fn](test.args) },
+        name: test.name,
+        setup: setup,
+        teardown: teardown,
+        maxTime: options.maxTime
+      })
+    }
+
+    suite.on('cycle', function(event: { target: TestResult }) {
+      console.log(runnerId + ': ' + String(event.target))
+      results.push(event.target)
     })
-  }
 
-  suite.on('cycle', function(event) {
-    console.log(runnerId + ': ' + String(event.target))
-    results.push({ target: event.target })
+    suite.on('complete', function() {
+      const result = results.reduce((acc, curr) => {
+        return {
+          ...acc,
+          [curr.id]: curr
+        }
+      }, {})
+      resolve(result)
+    })
+
+    suite.run({ async: false, queued: true })
   })
-
-  suite.on('complete', function() {
-    resolve(results)
-  })
-
-  suite.run({ async: false, queued: true })
-})
 
 export const runTests = async (runnerIds: string[], testDescriptions: TestDescription[], options: TestOptions) => {
   let results = {}

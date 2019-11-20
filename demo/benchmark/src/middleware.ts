@@ -1,15 +1,20 @@
-import { State } from './state'
+import { State, TestResult } from './state'
 import { Action } from './action'
 import { TempoView } from '@tempo/dom/lib/tempo'
 import { runTests } from './test_runner'
 import { tests } from './tests'
 import { createApp } from './create_app'
 
-const mergeResults = (a: Record<string, unknown>, b: Record<string, unknown>) => {
-  return {
-    ...a,
-    ...b
-  }
+const mergeResults = (a: Record<string, Record<string, TestResult>>, b: Record<string, Record<string, TestResult>>) => {
+  return Object.keys(b).reduce((acc, curr) => {
+    return {
+      ...acc,
+      [curr]: {
+        ...acc[curr],
+        ...b[curr]
+      }
+    }
+  }, a)
 }
 
 export const middleware = (app: TempoView<State, Action>) => (state: State, action: Action) => {
@@ -18,7 +23,7 @@ export const middleware = (app: TempoView<State, Action>) => (state: State, acti
       app.destroy()
       setTimeout(() => {
         const { options } = state
-        const ids = Object.keys(state.versions).filter(key => state.versions[key])
+        const ids = state.versions.filter(v => v.selected).map(v => v.id)
         const set = new Set(state.tests.filter(test => test.selected).map(test => test.id))
         const testsToRun = tests.filter(test => set.has(test.id))
 
