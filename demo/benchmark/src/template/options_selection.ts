@@ -1,5 +1,5 @@
 /*
-Copyright 2018 Google LLC
+Copyright 2019 Google LLC
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
@@ -23,7 +23,7 @@ export const optionsSelection = div<TestOptions, Action>(
       {},
       th({}, label({ attrs: { for: 'options_max_time' } }, 'max execution time')),
       td(
-        {},
+        { attrs: { className: 'option-value' } },
         input({
           attrs: {
             id: 'options_max_time',

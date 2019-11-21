@@ -1,5 +1,5 @@
 /*
-Copyright 2018 Google LLC
+Copyright 2019 Google LLC
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
@@ -28,13 +28,36 @@ export interface ToggleTest {
   selected: boolean
 }
 
+export interface UpdateResult {
+  kind: 'UpdateResult'
+  runnerId: string
+  target: Target
+}
+
+export interface ExecuteTests {
+  kind: 'ExecuteTests'
+  versionIds: string[]
+  testIds: string[]
+}
+
 export interface ToggleAllVersions { kind: 'ToggleAllVersions' }
 
 export interface ToggleAllTests { kind: 'ToggleAllTests' }
 
-export interface ExecuteTests { kind: 'ExecuteTests' }
+export interface ExecuteSelectedTests { kind: 'ExecuteSelectedTests' }
 
-export type Action = ChangeOptionMaxTime | ToggleVersion | ToggleTest | ToggleAllVersions | ToggleAllTests | ExecuteTests
+export interface TestsExecuted { kind: 'TestsExecuted' }
+
+export type Action =
+  | ChangeOptionMaxTime
+  | ToggleVersion
+  | ToggleTest
+  | ToggleAllVersions
+  | ToggleAllTests
+  | ExecuteTests
+  | ExecuteSelectedTests
+  | UpdateResult
+  | TestsExecuted
 
 export const Action = {
   changeOptionMaxTime: (value: number): Action => ({ kind: 'ChangeOptionMaxTime', value }),
@@ -42,5 +65,8 @@ export const Action = {
   toggleAllVersions: (): Action => ({ kind: 'ToggleAllVersions' }),
   toggleTest: (id: string, selected: boolean): Action => ({ kind: 'ToggleTest', id, selected }),
   toggleAllTests: (): Action => ({ kind: 'ToggleAllTests' }),
-  executeTests: (): Action => ({ kind: 'ExecuteTests' })
+  executeTests: (versionIds: string[], testIds: string[]): Action => ({ kind: 'ExecuteTests', versionIds, testIds }),
+  executeSelectedTests: (): Action => ({ kind: 'ExecuteSelectedTests' }),
+  testsExecuted: (): Action => ({ kind: 'TestsExecuted' }),
+  updateResult: (runnerId: string, target: Target): Action => ({ kind: 'UpdateResult', runnerId, target })
 }

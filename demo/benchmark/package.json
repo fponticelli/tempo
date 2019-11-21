@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@tempo/core": "1.0.0",
-    "@tempo/dom": "1.0.0",
+    "@tempo/dom": "0.8.0",
     "@tempo/store": "1.0.0",
     "tslib": "1.10.0"
   },

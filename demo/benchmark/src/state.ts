@@ -1,5 +1,5 @@
 /*
-Copyright 2018 Google LLC
+Copyright 2019 Google LLC
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
@@ -12,10 +12,9 @@ limitations under the License.
 */
 
 import { availableTests } from './tests'
-import { Target } from './definitions'
-/// <reference path="./definitions.d.ts" />
 
 export interface State {
+  executingTests?: { running: number, total: number }
   versions: VersionWithSelected[]
   tests: TestInfoWithSelected[]
   options: TestOptions
@@ -34,15 +33,33 @@ const sortVersionIds = (a: string, b: string) => {
 
 const sortVersion = (a: Version, b: Version) => sortVersionIds(a.id, b.id)
 
-export const createState = (versions: string[]): State => {
+const createResults = (versions: Version[], tests: TestInfo[]): Record<string, Record<string, TestResult>> => {
+  return versions.reduce((acc, curr) => {
+    return {
+      ...acc,
+      [curr.id]: tests.reduce((acc, curr) => {
+        return {
+          ...acc,
+          [curr.id]: {
+            target: undefined,
+            processing: false
+          }
+        }
+      }, {})
+    }
+  }, {})
+}
+
+export const createState = (versionIds: string[]): State => {
   const tests = availableTests().map(test => ({
     ...test,
     selected: true
   }))
+  const versions = versionIds.map(id => ({ id, selected: true })).sort(sortVersion)
   return {
-    versions: versions.map(id => ({ id, selected: true })).sort(sortVersion),
+    versions,
     tests,
-    results: {},
+    results: createResults(versions, tests),
     options: {
       maxTime: 0.5 // default should be 5
     }
@@ -64,9 +81,13 @@ export interface TestInfo {
 
 export interface TestInfoWithSelected extends TestInfo {
   selected: boolean
+  stats?: { min: number, max: number }
 }
 
-export type TestResult = Target
+export interface TestResult {
+  target?: Target
+  processing: boolean
+}
 
 export interface TestDescription {
   id: string
@@ -78,4 +99,24 @@ export interface TestDescription {
 
 export interface TestOptions {
   maxTime: number
+}
+
+export const getSelectedTests = (state: State) => {
+  return {
+    tests: state.tests.filter(t => t.selected).map(t => t.id),
+    versions: state.versions.filter(t => t.selected).map(t => t.id)
+  }
+}
+
+export const countAllTests = (state: State) => {
+  return state.tests.length * state.versions.length
+}
+
+export const countSelectedTests = (state: State) => {
+  const { tests, versions } = getSelectedTests(state)
+  return tests.length * versions.length
+}
+
+export const hasSelectedTests = (state: State) => {
+  return countSelectedTests(state) > 0
 }

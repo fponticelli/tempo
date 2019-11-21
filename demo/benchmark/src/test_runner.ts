@@ -1,5 +1,5 @@
 /*
-Copyright 2018 Google LLC
+Copyright 2019 Google LLC
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
@@ -11,8 +11,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { TestResult, TestDescription, TestOptions } from './state'
-/// <reference path="./definitions.d.ts" />
+import { TestDescription, TestOptions } from './state'
 
 function setup() {
   // document.getElementById('test').innerHTML = ''
@@ -38,53 +37,48 @@ const loadScript = (runnerId: string): Promise<any> => new Promise((resolve, rej
   document.body.appendChild(script)
 })
 
-const makeSuite = (runnerId: string, testDescriptions: TestDescription[], options: TestOptions) =>
-  new Promise<Record<string, TestResult>>(async (resolve, reject) => {
-
+const makeSuite = (
+  runnerId: string,
+  testDescriptions: TestDescription[],
+  options: TestOptions,
+  dispatch: (runnerId: string, target: Target) => void
+) =>
+  new Promise<Record<string, Target>>(async resolve => {
     const mod = await loadScript(runnerId)
-
     const suite = new Benchmark.Suite()
-    const results = [] as TestResult[]
 
     for (const test of testDescriptions) {
       if (!mod[test.fn]) continue
 
       suite.add({
         id: test.id,
-        async: !!test.async,
+        async: true,
         fn: function() { mod[test.fn](test.args) },
         name: test.name,
         setup: setup,
         teardown: teardown,
-        maxTime: options.maxTime
-      })
+        maxTime: options.maxTime,
+        delay: 0.001
+      } as any)
     }
 
-    suite.on('cycle', function(event: { target: TestResult }) {
+    suite.on('cycle', function(event: { target: Target }) {
       console.log(runnerId + ': ' + String(event.target))
-      results.push(event.target)
+      dispatch(runnerId, event.target)
     })
 
-    suite.on('complete', function() {
-      const result = results.reduce((acc, curr) => {
-        return {
-          ...acc,
-          [curr.id]: curr
-        }
-      }, {})
-      resolve(result)
-    })
+    suite.on('complete', resolve)
 
-    suite.run({ async: false, queued: true })
+    suite.run({ async: true, queued: true })
   })
 
-export const runTests = async (runnerIds: string[], testDescriptions: TestDescription[], options: TestOptions) => {
-  let results = {}
+export const runTests = async (
+  runnerIds: string[],
+  testDescriptions: TestDescription[],
+  options: TestOptions,
+  dispatch: (runnerId: string, target: Target) => void
+) => {
   for (const id of runnerIds) {
-    results = {
-      ...results,
-      [id]: await makeSuite(id, testDescriptions, options)
-    }
+    await makeSuite(id, testDescriptions, options, dispatch)
   }
-  return results
 }

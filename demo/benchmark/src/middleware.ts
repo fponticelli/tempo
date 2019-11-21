@@ -1,5 +1,5 @@
 /*
-Copyright 2018 Google LLC
+Copyright 2019 Google LLC
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
@@ -11,45 +11,34 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { State, TestResult } from './state'
+import { State, getSelectedTests } from './state'
 import { Action } from './action'
 import { TempoView } from '@tempo/dom/lib/tempo'
 import { runTests } from './test_runner'
-import { tests } from './tests'
-import { createApp } from './create_app'
-
-const mergeResults = (a: Record<string, Record<string, TestResult>>, b: Record<string, Record<string, TestResult>>) => {
-  return Object.keys(b).reduce((acc, curr) => {
-    return {
-      ...acc,
-      [curr]: {
-        ...acc[curr],
-        ...b[curr]
-      }
-    }
-  }, a)
-}
+import { tests as testDescriptions } from './tests'
 
 export const middleware = (app: TempoView<State, Action>) => (state: State, action: Action) => {
   switch (action.kind) {
+    case 'ExecuteSelectedTests':
+      const { tests, versions } = getSelectedTests(state)
+      app.store.process(Action.executeTests(versions, tests))
+      return
     case 'ExecuteTests':
-      app.destroy()
-      setTimeout(() => {
-        const { options } = state
-        const ids = state.versions.filter(v => v.selected).map(v => v.id)
-        const set = new Set(state.tests.filter(test => test.selected).map(test => test.id))
-        const testsToRun = tests.filter(test => set.has(test.id))
+      const { versionIds, testIds } = action
+      const { options } = state
+      const set = new Set(testIds)
+      const testsToRun = testDescriptions.filter(test => set.has(test.id))
 
-        runTests(ids, testsToRun, options)
-          .then(input => {
-            const results = mergeResults(state.results, input)
-            const newState = {
-              ...state,
-              results
-            }
-            createApp(newState)
-          })
-      }, 0)
+      setTimeout(() => {
+        runTests(
+          versionIds,
+          testsToRun,
+          options,
+          (runnerId: string, target: Target) => {
+            app.store.process(Action.updateResult(runnerId, target))
+          }
+        ).then(() => app.store.process(Action.testsExecuted()))
+      }, 1)
       return
     default:
       // do nothing

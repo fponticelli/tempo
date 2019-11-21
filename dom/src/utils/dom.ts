@@ -1,5 +1,5 @@
 /*
-Copyright 2018 Google LLC
+Copyright 2019 Google LLC
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
@@ -92,15 +92,11 @@ export const processStyle = <State, Action>(
   value: DOMStyleAttribute<State, Action>,
   acc: Acc<State>
 ): Acc<State> => {
-  name = name.toLowerCase()
-
-  let set = setOneStyle
-
   if (typeof value === 'function') {
-    const f = (state: State) => set(el, name, (value as UnwrappedDerivedValue<State, Action>)(state))
+    const f = (state: State) => setOneStyle(el, name, (value as UnwrappedDerivedValue<State, Action>)(state))
     acc.push(f)
   } else {
-    set(el, name, value)
+    setOneStyle(el, name, value)
   }
   return acc
 }

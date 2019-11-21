@@ -28,6 +28,7 @@
 }
 
 .display_test th a {
+  color: rgb(32, 60, 150);
   text-decoration: none;
 }
 
@@ -35,7 +36,52 @@
   text-align: left;
 }
 
+.display_test th.hand {
+  font-size: 20px;
+}
+
 .display_test th .commit {
   color: #999;
   font-size: 10px;
+}
+
+.display_test td.selected, .display_test th.selected {
+  outline-offset: -2px;
+  outline: -webkit-focus-ring-color auto 5px;
+}
+
+.display_test td {
+  text-align: center;
+}
+
+.display_test td.processing {
+  background-color: #ccc;
+}
+
+.display_test .version-header {
+  width: 96px;
+}
+
+.display_test .details {
+  font-size: 10px;
+  color: #999;
+}
+
+.display_test input {
+  font-size: 13px;
+}
+
+.display_test button {
+  padding: 4px 8px;
+  font-size: 16px;
+  border: 1px solid #333;
+  cursor: pointer;
+}
+
+.display_test button[disabled] {
+  border: 1px solid #999;
+}
+
+.display_test td.option-value {
+  padding: 0;
 }

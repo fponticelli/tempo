@@ -10,5 +10,8 @@
     "removeComments": true,
     "outDir": "./dist/current",
     "importHelpers": true
-  }
+  },
+  "include": [
+    "./src/**/*"
+  ]
 }
