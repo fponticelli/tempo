@@ -1,19 +1,20 @@
 import { Action } from '../action'
 import { Route, toUrl, Feed, toTitle } from '../route'
-import { html, svg } from '@mood/dom/lib/web'
-import { when, unless } from '@mood/dom/lib/when'
+import { a, header, i, nav, span } from '@tempo/dom/lib/html'
+import { g, path, svg } from '@tempo/dom/lib/svg'
+import { when, unless } from '@tempo/dom/lib/when'
 
-const logo = svg.svg<Route, Action>(
-    { width: '26', height: '26', viewBox: '0 0 26 26' },
-    svg.g(
-      { '$fill': 'none' },
-      svg.path({ '$fill': '#ffffff', d: 'M2 2v6h6v-6h-6' } as any), // TODO
-      svg.path({ '$fill': '#ffffff', d: 'M18 2v6h6v-6h-6' } as any), // TODO
-      svg.path({ '$fill': '#ffffff', d: 'M2 10v6h6v-6h-6' } as any), // TODO
-      svg.path({ '$fill': '#ffffff', d: 'M18 10v6h6v-6h-6' } as any), // TODO
-      svg.path({ '$fill': '#ffffff', d: 'M2 18v6h6v-6h-6' } as any), // TODO
-      svg.path({ '$fill': '#ffffff', d: 'M18 18v6h6v-6h-6' } as any), // TODO
-      svg.path({ '$fill': '#ffffff', d: 'M10 4v6h6v-6h-6' } as any) // TODO
+const logo = svg<Route, Action>(
+    { attrs: { width: '26', height: '26', viewBox: '0 0 26 26' } },
+    g(
+      { styles: { fill: 'none' } },
+      path({ styles: { fill: '#ffffff', d: 'M2 2v6h6v-6h-6' } }),
+      path({ styles: { fill: '#ffffff', d: 'M18 2v6h6v-6h-6' } }),
+      path({ styles: { fill: '#ffffff', d: 'M2 10v6h6v-6h-6' } }),
+      path({ styles: { fill: '#ffffff', d: 'M18 10v6h6v-6h-6' } }),
+      path({ styles: { fill: '#ffffff', d: 'M2 18v6h6v-6h-6' } }),
+      path({ styles: { fill: '#ffffff', d: 'M18 18v6h6v-6h-6' } }),
+      path({ styles: { fill: '#ffffff', d: 'M10 4v6h6v-6h-6' } })
     )
   )
 
@@ -24,40 +25,40 @@ const headerLink = (feed: Feed) => {
       default: return false
     }
   }
-  return html.span<Route, Action>( // TODO need empty container?
+  return span<Route, Action>( // TODO need empty container?
     {},
     when(
       { condition },
-      html.span(
-        { 'aria-current': 'page' } as any, // TODO
+      span(
+        { attrs: { 'aria-current': 'page' } },
         toTitle(Route.feeds(feed, 1))
       )
     ),
     unless(
       { condition },
-      html.a(
-        { href: toUrl(Route.feeds(feed, 1)) },
+      a(
+        { attrs: { href: toUrl(Route.feeds(feed, 1)) } },
         toTitle(Route.feeds(feed, 1))
       )
     )
   )
 }
 
-export const appHeader = html.header<Route, Action>(
+export const appHeader = header<Route, Action>(
   {},
-  html.a(
-    { href: toUrl(Route.root()) },
-    html.i(
-      { 'aria-label': 'Homepage', className: 'logo' } as any, // TODO
+  a(
+    { attrs: { href: toUrl(Route.root()) } },
+    i(
+      { attrs: { 'aria-label': 'Homepage', className: 'logo' } },
       logo
     )
   ),
-  html.nav(
+  nav(
     {},
-    ...([ Feed.top, Feed.new, Feed.ask, Feed.show, Feed.jobs ].map(headerLink)
+    ...[ Feed.top, Feed.new, Feed.ask, Feed.show, Feed.jobs ].map(headerLink)
   ),
-  html.a(
-    { className: 'githublink', href: 'https://github.com/fponticelli/mood2', target: '_blank', rel: 'noopener' },
+  a(
+    { attrs: { className: 'githublink', href: 'https://github.com/fponticelli/mood2', target: '_blank', rel: 'noopener' } },
     'About'
   )
 )

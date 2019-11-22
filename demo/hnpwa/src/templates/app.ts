@@ -1,10 +1,9 @@
-import { mapState } from '@mood/dom/lib/map'
-import { html } from '@mood/dom/lib/web'
+import { mapState } from '@tempo/dom/lib/map'
+import { main, section } from '@tempo/dom/lib/html'
 import { State } from '../state'
 import { Action } from '../action'
 import { appHeader } from './header'
 import { page } from './page'
-const { main, section } = html
 
 export const template = main<State, Action>(
   {},
@@ -13,7 +12,7 @@ export const template = main<State, Action>(
     appHeader
   ),
   section(
-    { id: 'content' },
+    { attrs: { id: 'content' } },
     mapState(
       { map: state => state.page },
       page

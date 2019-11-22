@@ -1,5 +1,5 @@
-import { Mood } from '@mood/dom/lib/mood'
-import { Store } from '@mood/store/lib/store'
+import { Tempo } from '@tempo/dom/lib/tempo'
+import { Store } from '@tempo/store/lib/store'
 import { template } from './templates/app'
 import { reducer } from './reducer'
 import { state as createState, emptyCache, loading, State } from './state'
@@ -17,7 +17,7 @@ const store = Store.ofState({
 })
 
 document.body.innerHTML = ''
-Mood.render({ store, template })
+Tempo.render({ store, template })
 
 const setTitle = (state: State) => {
   const title = ((page) => {
@@ -27,7 +27,7 @@ const setTitle = (state: State) => {
       default: return  toTitle(state.route)
     }
   })(state.page)
-  document.title = `${title} | Mood HNPWA`
+  document.title = `${title} | Tempo HNPWA`
 }
 
 setTitle(state)
