@@ -55,7 +55,7 @@
       "packageName": "@tempo/demo.benchmark",
       "projectFolder": "./demo/benchmark"
     }, {
-      "packageName": "@mood/demo.hnpwa",
+      "packageName": "@tempo/demo.hnpwa",
       "projectFolder": "./demo/hnpwa"
     }
   ]
