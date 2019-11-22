@@ -117,10 +117,10 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"AxMU":[function(require,module,exports) {
+})({"RSj4":[function(require,module,exports) {
 "use strict";
 /*
-Copyright 2019 Google LLC
+Copyright 2018 Google LLC
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
@@ -212,10 +212,10 @@ exports.setSpaceSeparated = function (el, name, values) {
         exports.setAttribute(el, name, (values && String(values)) || null);
 };
 
-},{}],"QBLY":[function(require,module,exports) {
+},{}],"mTme":[function(require,module,exports) {
 "use strict";
 /*
-Copyright 2019 Google LLC
+Copyright 2018 Google LLC
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
@@ -275,10 +275,10 @@ exports.htmlAttributeMap = {
     value: set_attribute_1.setProperty
 };
 
-},{"./utils/set_attribute":"AxMU"}],"TJFn":[function(require,module,exports) {
+},{"./utils/set_attribute":"RSj4"}],"hwWW":[function(require,module,exports) {
 "use strict";
 /*
-Copyright 2019 Google LLC
+Copyright 2018 Google LLC
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
@@ -347,10 +347,10 @@ var DOMDynamicNodeView = /** @class */ (function (_super) {
 }(DOMBaseNodeView));
 exports.DOMDynamicNodeView = DOMDynamicNodeView;
 
-},{"./utils/dom":"KfbX"}],"jTie":[function(require,module,exports) {
+},{"./utils/dom":"maac"}],"bvNU":[function(require,module,exports) {
 "use strict";
 /*
-Copyright 2019 Google LLC
+Copyright 2018 Google LLC
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
@@ -396,10 +396,10 @@ var DOMText = /** @class */ (function () {
 exports.DOMText = DOMText;
 exports.text = function (content) { return new DOMText(content); };
 
-},{"./node_view":"TJFn"}],"KfbX":[function(require,module,exports) {
+},{"./node_view":"hwWW"}],"maac":[function(require,module,exports) {
 "use strict";
 /*
-Copyright 2019 Google LLC
+Copyright 2018 Google LLC
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
@@ -465,20 +465,22 @@ exports.processEvent = function (el, name, value, dispatch, acc) {
     return acc;
 };
 exports.processStyle = function (el, name, value, acc) {
+    name = name.toLowerCase();
+    var set = set_attribute_1.setOneStyle;
     if (typeof value === 'function') {
-        var f = function (state) { return set_attribute_1.setOneStyle(el, name, value(state)); };
+        var f = function (state) { return set(el, name, value(state)); };
         acc.push(f);
     }
     else {
-        set_attribute_1.setOneStyle(el, name, value);
+        set(el, name, value);
     }
     return acc;
 };
 
-},{"../dom_attributes_mapper":"QBLY","./set_attribute":"AxMU","../text":"jTie"}],"Mmj0":[function(require,module,exports) {
+},{"../dom_attributes_mapper":"mTme","./set_attribute":"RSj4","../text":"bvNU"}],"YOjV":[function(require,module,exports) {
 "use strict";
 /*
-Copyright 2019 Google LLC
+Copyright 2018 Google LLC
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
@@ -600,10 +602,10 @@ exports.elNS2 = function (namespace, name) { return function (attributes) {
     return new DOMElement(makeCreateElementNS(namespace, name), attributes, children.map(dom_1.domChildToTemplate));
 }; };
 
-},{"./utils/dom":"KfbX","./node_view":"TJFn"}],"YzxN":[function(require,module,exports) {
+},{"./utils/dom":"maac","./node_view":"hwWW"}],"tbXA":[function(require,module,exports) {
 "use strict";
 /*
-Copyright 2019 Google LLC
+Copyright 2018 Google LLC
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
@@ -738,10 +740,10 @@ exports.video = element_1.el2('video');
 exports.wbr = element_1.el2('wbr');
 exports.xmp = element_1.el2('xmp');
 
-},{"./element":"Mmj0"}],"hYCi":[function(require,module,exports) {
+},{"./element":"YOjV"}],"K46h":[function(require,module,exports) {
 "use strict";
 /*
-Copyright 2019 Google LLC
+Copyright 2018 Google LLC
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
@@ -830,10 +832,10 @@ exports.until = function (options) {
     return new DOMUntilTemplate(options, children.map(dom_1.domChildToTemplate));
 };
 
-},{"./utils/dom":"KfbX"}],"xmUo":[function(require,module,exports) {
+},{"./utils/dom":"maac"}],"OzSG":[function(require,module,exports) {
 "use strict";
 /*
-Copyright 2019 Google LLC
+Copyright 2018 Google LLC
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
@@ -864,30 +866,30 @@ exports.forEach = function (options) {
         }], children));
 };
 
-},{"./until":"hYCi"}],"dozB":[function(require,module,exports) {
+},{"./until":"K46h"}],"dozB":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var html_1 = require("@tempo/dom/lib/html");
+var html_1 = require("@mood/dom/lib/html");
 
-var for_each_1 = require("@tempo/dom/lib/for_each");
+var for_each_1 = require("@mood/dom/lib/for_each");
 
 exports.list = html_1.ul({}, for_each_1.forEach({}, html_1.li({
   attrs: {
     className: String
   }
 }, String)));
-},{"@tempo/dom/lib/html":"YzxN","@tempo/dom/lib/for_each":"xmUo"}],"JKII":[function(require,module,exports) {
+},{"@mood/dom/lib/html":"tbXA","@mood/dom/lib/for_each":"OzSG"}],"JKII":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var html_1 = require("@tempo/dom/lib/html");
+var html_1 = require("@mood/dom/lib/html");
 
 exports.deep = html_1.div({
   attrs: {
@@ -904,10 +906,10 @@ exports.deep = html_1.div({
 })), html_1.article({}, function (s) {
   return s.paragraph;
 })));
-},{"@tempo/dom/lib/html":"YzxN"}],"TsAd":[function(require,module,exports) {
+},{"@mood/dom/lib/html":"tbXA"}],"IiTS":[function(require,module,exports) {
 "use strict";
 /*
-Copyright 2019 Google LLC
+Copyright 2018 Google LLC
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
@@ -970,7 +972,7 @@ var list_1 = require("./template/list");
 
 var deep_1 = require("./template/deep");
 
-var context_1 = require("@tempo/dom/lib/context");
+var context_1 = require("@mood/dom/lib/context");
 
 var ctx = context_1.DOMContext.fromElement(document.getElementById('test'), function () {});
 
@@ -1008,5 +1010,5 @@ anyWin.__tests__ = {
   renderListElementsAndDestroy: exports.renderListElementsAndDestroy,
   renderDeepAndUpdate: exports.renderDeepAndUpdate
 };
-},{"./template/list":"dozB","./template/deep":"JKII","@tempo/dom/lib/context":"TsAd"}]},{},["ZCfc"], null)
-//# sourceMappingURL=main.js.map
+},{"./template/list":"dozB","./template/deep":"JKII","@mood/dom/lib/context":"IiTS"}]},{},["ZCfc"], null)
+//# sourceMappingURL=/main.js.map
