@@ -1,0 +1,29 @@
+{
+  "name": "@tempo/demo.benchmark",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "@tempo/core": "1.0.0",
+    "@tempo/dom": "0.8.0",
+    "@tempo/store": "1.0.0",
+    "tslib": "1.10.0"
+  },
+  "devDependencies": {
+    "cssnano": "4.1.10",
+    "parcel-bundler": "1.12.4",
+    "prettier": "1.19.1",
+    "tslint": "5.20.1",
+    "typescript": "3.7.2",
+    "babel-types": "6.26.0"
+  },
+  "scripts": {
+    "compile:test": "parcel build test/main.ts --no-minify --public-url . --out-dir ../../docs/demo/benchmark/current/",
+    "compile:html": "parcel build src/index.html --no-minify --public-url . --out-dir ../../docs/demo/benchmark/ --experimental-scope-hoisting",
+    "compile": "NODE_ENV=production && npm run compile:test && npm run compile:html && node tools/create_config.js",
+    "clean": "rm -f ../../docs/demo/benchmark/current/* && rm -f ../../docs/demo/benchmark/*.css && rm -f ../../docs/demo/benchmark/*.js* && rm -f ../../docs/demo/benchmark/*.html",
+    "build": "npm run clean && npm run compile",
+    "tslint": "tslint -p ./tslint.json",
+    "prettier": "prettier -c src/**/*.ts",
+    "prettier-fix": "prettier --write src/**/*.ts"
+  }
+}

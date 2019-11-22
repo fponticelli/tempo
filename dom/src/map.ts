@@ -1,5 +1,18 @@
+/*
+Copyright 2019 Google LLC
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+    https://www.apache.org/licenses/LICENSE-2.0
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+
 import { DOMChild, DOMTemplate } from './template'
-import { View } from '@mood/core/lib/view'
+import { View } from '@tempo/core/lib/view'
 import { DOMContext } from './context'
 import { domChildToTemplate, filterDynamics } from './utils/dom'
 import { DOMStaticFragmentView, DOMDynamicFragmentView, fragmentView } from './fragment'
@@ -21,7 +34,7 @@ export class MapStateTemplate<OuterState, InnerState, Action> implements DOMTemp
     } else {
       return new DOMDynamicFragmentView<OuterState>(views, (state: OuterState) => {
         const innerState = map(state)
-        dynamics.forEach(d => d.change(innerState))
+        for (const d of dynamics) d.change(innerState)
       })
     }
   }

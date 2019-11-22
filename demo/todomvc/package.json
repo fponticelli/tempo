@@ -1,11 +1,11 @@
 {
-  "name": "@mood/demo.todomvc",
+  "name": "@tempo/demo.todomvc",
   "version": "1.0.0",
   "private": true,
   "dependencies": {
-    "@mood/core": "1.0.0",
-    "@mood/dom": "1.0.0",
-    "@mood/store": "1.0.0",
+    "@tempo/core": "1.0.0",
+    "@tempo/dom": "0.8.0",
+    "@tempo/store": "1.0.0",
     "todomvc-app-css": "2.2.0",
     "todomvc-common": "1.0.5"
   },
@@ -19,7 +19,7 @@
   },
   "scripts": {
     "compile": "NODE_ENV=production && parcel build src/index.html --public-url . --out-dir ../../docs/demo/todomvc --experimental-scope-hoisting",
-    "clean": "rm -rf dist/*",
+    "clean": "rm -rf dist/* && rm -rf ../../docs/demo/todomvc/*",
     "build": "npm run clean && npm run compile",
     "watch": "parcel src/index.html",
     "tslint": "tslint -p ./tslint.json",

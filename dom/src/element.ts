@@ -1,103 +1,177 @@
+/*
+Copyright 2019 Google LLC
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+    https://www.apache.org/licenses/LICENSE-2.0
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+
 import { DOMTemplate, DOMChild } from './template'
 import { DOMContext } from './context'
-import { View } from '@mood/core/lib/view'
-import { wrapLiteral, WrappedValue } from '@mood/core/lib/value'
-import { DOMAttributes } from './web_attributes'
-import { Acc, processAttribute, filterDynamics, domChildToTemplate } from './utils/dom'
-import { DOMDynamicNodeView, DOMStaticNodeView } from './utils/node_view'
-import { DOMAttribute } from './value'
+import { View } from '@tempo/core/lib/view'
+import { processAttribute, processEvent, processStyle, filterDynamics, domChildToTemplate } from './utils/dom'
+import { DOMDynamicNodeView, DOMStaticNodeView } from './node_view'
+import { DOMAttributes } from './value'
 
-export const applyMood = <State>(el: Element, attr: WrappedValue<State, (el: any) => void>) => (state: State) => {
-  const f = attr.resolve(state)
-  /* istanbul ignore next */
-  if (f != null) {
-    f(el)
-  }
+const applyChange = <State, Action, El extends Element, T>(
+  change: (state: State, el: El, ctx: DOMContext<Action>, value: T | undefined) => T | undefined,
+  el: El,
+  ctx: DOMContext<Action>
+) => (state: State, value: T | undefined): T | undefined => {
+  return change(state, el, ctx, value)
 }
 
-export const maybeApplyMood = <State>(el: Element, attr: WrappedValue<State, (el: any) => void> | undefined) => (
+const applyAfterRender = <State, Action, El extends Element, T>(
+  attr: (state: State, el: El, ctx: DOMContext<Action>) => T | undefined,
+  el: El,
+  ctx: DOMContext<Action>,
   state: State
 ) => {
   if (attr != null) {
-    applyMood(el, attr)(state)
+    return attr(state, el, ctx)
+  } else {
+    return undefined
   }
 }
 
-export const prepareAttributes = <State, Action, El>(attrs: DOMAttributes<State, Action, El>) => {
-  const attributes = { ...attrs }
-
-  const afterRender = attributes.moodAfterRender && wrapLiteral(attributes.moodAfterRender)
-  const beforeChange = attributes.moodBeforeChange && wrapLiteral(attributes.moodBeforeChange)
-  const afterChange = attributes.moodAfterChange && wrapLiteral(attributes.moodAfterChange)
-  const beforeDestroyf = attributes.moodBeforeDestroy
-  const beforeDestroy = beforeDestroyf && (() => beforeDestroyf(el as never))
-
-  delete attributes.moodAfterRender
-  delete attributes.moodBeforeChange
-  delete attributes.moodAfterChange
-  delete attributes.moodBeforeDestroy
-
-  return { attributes, afterRender, beforeChange, afterChange, beforeDestroy }
-}
-
-export class DOMElement<State, Action, El> implements DOMTemplate<State, Action> {
+export class DOMElement<State, Action, El extends Element = Element, T = unknown> implements DOMTemplate<State, Action> {
   constructor(
-    readonly name: string,
-    readonly attributes: DOMAttributes<State, Action, El>,
+    readonly createElement: (doc: Document) => El,
+    readonly attributes: DOMAttributes<State, Action, El, T>,
     readonly children: DOMTemplate<State, Action>[]
   ) {}
 
   render(ctx: DOMContext<Action>, state: State): View<State> {
-    type AttributeName = keyof (typeof attributes)
-    const el = ctx.doc.createElement(this.name)
+    const el = this.createElement(ctx.doc)
+    let value: T | undefined = undefined
 
-    const { attributes, afterRender, beforeChange, afterChange, beforeDestroy } = prepareAttributes(this.attributes)
+    const {
+      attrs,
+      events,
+      styles,
+      afterrender,
+      beforechange,
+      afterchange,
+      beforedestroy
+    } = this.attributes
 
-    const keys = Object.keys(attributes) as AttributeName[]
+    const beforedestroyf = beforedestroy && (() => beforedestroy(el, ctx, value))
 
-    const { statics, dynamics } = keys.reduce(
-      (acc: Acc<State>, key: AttributeName) =>
-        processAttribute(el, key, attributes[key] as DOMAttribute<State, any>, ctx.dispatch, acc),
-      { statics: [], dynamics: [] }
-    )
+    const allDynamics = [] as ((state: State) => void)[]
 
-    // apply attributes
-    statics.forEach(f => f())
-    dynamics.forEach(f => f(state))
+    if (attrs) {
+      Object.keys(attrs).forEach(
+        (key: keyof typeof attrs) => processAttribute(el, key, attrs[key], allDynamics)
+      )
+    }
 
-    // TODO append before or after children?
-    ctx.append(el)
+    if (events) {
+      Object.keys(events).forEach(
+        (key: keyof typeof events) => processEvent(el, key, events[key], ctx.dispatch, allDynamics)
+      )
+    }
+
+    if (styles) {
+      Object.keys(styles).forEach(
+        (key: keyof typeof styles) => processStyle(el, key, styles[key], allDynamics)
+      )
+    }
+
+    for (const dy of allDynamics) dy(state)
 
     // children
     const appendChild = (n: Node) => el.appendChild(n)
-    const views = this.children.map(child => child.render(ctx.withAppend(appendChild).withParent(el), state))
+    const newCtx = ctx.withAppend(appendChild).withParent(el)
+    const views = this.children.map(child => child.render(newCtx, state))
 
-    maybeApplyMood(el, afterRender)(state)
+    ctx.append(el)
+
+    if (afterrender) {
+      value = applyAfterRender(afterrender, el, ctx, state)
+    }
 
     const dynamicChildren = filterDynamics(views).map(child => (state: State) => child.change(state))
 
-    const allDynamics = dynamics.concat(dynamicChildren)
+    allDynamics.push(...dynamicChildren)
 
-    if (beforeChange) {
-      allDynamics.unshift(applyMood(el, beforeChange))
+    if (beforechange) {
+      const change = applyChange(beforechange, el, ctx)
+      const update = (state: State) => { value = change(state, value) }
+      allDynamics.unshift(update)
     }
 
-    if (afterChange) {
-      allDynamics.push(applyMood(el, afterChange))
+    if (afterchange) {
+      const change = applyChange(afterchange, el, ctx)
+      const update = (state: State) => { value = change(state, value) }
+      allDynamics.push(update)
     }
 
     if (allDynamics.length > 0) {
-      return new DOMDynamicNodeView(el, views, (state: State) => allDynamics.forEach(f => f(state)), beforeDestroy)
+      return new DOMDynamicNodeView(el, views, (state: State) => {
+        for (const f of allDynamics) f(state)
+      }, beforedestroyf)
     } else {
-      return new DOMStaticNodeView(el, views, beforeDestroy)
+      return new DOMStaticNodeView(el, views, beforedestroyf)
     }
   }
 }
 
-export const el = <State, Action, El>(
+const makeCreateElement = <El extends Element>(name: string) => (doc: Document) => doc.createElement(name) as any as El
+
+export const el = <State, Action, El extends Element, T = unknown>(
   name: string,
-  attributes: DOMAttributes<State, Action, El>,
+  attributes: DOMAttributes<State, Action, El, T>,
   ...children: DOMChild<State, Action>[]
 ) => {
-  return new DOMElement<State, Action, El>(name, attributes, children.map(domChildToTemplate))
+  return new DOMElement<State, Action, El, T>(
+    makeCreateElement(name),
+    attributes,
+    children.map(domChildToTemplate)
+  )
 }
+
+export const el2 = <El extends Element>(name: string) => <State, Action, T = unknown>(
+  attributes: DOMAttributes<State, Action, El, T>,
+  ...children: DOMChild<State, Action>[]) => {
+    return new DOMElement<State, Action, El, T>(
+      makeCreateElement(name),
+      attributes,
+      children.map(domChildToTemplate)
+    )
+  }
+
+export const defaultNamespaces: Record<string, string> = {
+  'svg': 'http://www.w3.org/2000/svg'
+}
+
+const makeCreateElementNS = <El extends Element>(namespace: string, name: string) =>
+  (doc: Document) => doc.createElementNS(namespace, name) as any as El
+
+export const elNS = <State, Action, El extends Element, T = unknown>(
+  ns: string,
+  name: string,
+  attributes: DOMAttributes<State, Action, El, T>,
+  ...children: DOMChild<State, Action>[]
+) => {
+  const namespace = defaultNamespaces[ns] || ns
+  return new DOMElement<State, Action, El, T>(
+    makeCreateElementNS(namespace, name),
+    attributes,
+    children.map(domChildToTemplate)
+  )
+}
+
+export const elNS2 = <El extends Element>(namespace: string, name: string) => <State, Action, T = unknown>(
+  attributes: DOMAttributes<State, Action, El, T>,
+  ...children: DOMChild<State, Action>[]) => {
+    return new DOMElement<State, Action, El, T>(
+      makeCreateElementNS(namespace, name),
+      attributes,
+      children.map(domChildToTemplate)
+    )
+  }

@@ -1,6 +1,0 @@
-{
-  "extends": "../../tslint.json",
-  "linterOptions": {
-    "exclude": ["tslib/**", "generated/**", "lib/**", "extern/**", "src/tslib/**"]
-  }
-}

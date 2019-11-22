@@ -1,4 +1,17 @@
-import { DynamicView, View } from '@mood/core/lib/view'
+/*
+Copyright 2019 Google LLC
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+    https://www.apache.org/licenses/LICENSE-2.0
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+
+import { DynamicView, View } from '@tempo/core/lib/view'
 import { DOMContext } from './context'
 import { DOMTemplate, DOMChild } from './template'
 import { removeNode, filterDynamics, domChildToTemplate, insertBefore } from './utils/dom'
@@ -14,7 +27,9 @@ export class DOMUntilView<OuterState, InnerState, Action> implements DynamicView
 
   destroy(): void {
     removeNode(this.ref)
-    this.childrenView.forEach(e => e.forEach(c => c.destroy()))
+    for (const c of this.childrenView)
+      for (const e of c)
+        e.destroy()
     this.childrenView = []
   }
 
@@ -25,7 +40,7 @@ export class DOMUntilView<OuterState, InnerState, Action> implements DynamicView
     while ((value = this.repeatUntil(state, count)) !== undefined) {
       if (count < currentViewLength) {
         // replace existing
-        filterDynamics(this.childrenView[count]).forEach((view) => view.change(value!))
+        for (const v of filterDynamics(this.childrenView[count])) v.change(value!)
       } else {
         // add node
         this.childrenView.push(this.children.map(el => el.render(this.ctx, value!)))
@@ -35,7 +50,7 @@ export class DOMUntilView<OuterState, InnerState, Action> implements DynamicView
     let i = count
     while (i < currentViewLength) {
       // remove extra nodes
-      this.childrenView[i].forEach(child => child.destroy())
+      for (const c of this.childrenView[i]) c.destroy()
       i++
     }
     this.childrenView = this.childrenView.slice(0, count)

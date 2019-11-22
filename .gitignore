@@ -27,9 +27,6 @@ bower_components
 # node-waf configuration
 .lock-wscript
 
-# Compiled binary addons (https://nodejs.org/api/addons.html)
-build/Release
-
 # Dependency directories
 node_modules/
 jspm_packages/
@@ -66,7 +63,9 @@ package-deps.json
 **/.cache
 **/lib
 **/dist
+**/build
 
 **/tsconfig.tsbuildinfo
 
 **/generated/
+**/.DS_Store

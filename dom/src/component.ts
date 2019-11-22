@@ -1,7 +1,20 @@
+/*
+Copyright 2019 Google LLC
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+    https://www.apache.org/licenses/LICENSE-2.0
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+
 import { DOMDynamicFragmentView } from './fragment'
-import { View, DynamicView } from '@mood/core/lib/view'
-import { Store } from '@mood/store/lib/store'
-import { nextFrame } from '@mood/store/lib/emitter'
+import { View, DynamicView } from '@tempo/core/lib/view'
+import { Store } from '@tempo/store/lib/store'
+import { nextFrame } from '@tempo/store/lib/emitter'
 import { DOMTemplate, DOMChild } from './template'
 import { DOMContext } from './context'
 import { filterDynamics, domChildToTemplate } from './utils/dom'
@@ -17,7 +30,7 @@ export class DOMComponentView<State, Action> extends DOMDynamicFragmentView<Stat
   ) {
     super(children, (state: State) => {
       store.property.set(state)
-      dynamics.forEach(child => child.change(state))
+      for (const dy of dynamics) dy.change(state)
     })
   }
 

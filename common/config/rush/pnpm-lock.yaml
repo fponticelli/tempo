@@ -1,38 +1,33 @@
 dependencies:
   '@rush-temp/core': 'file:projects/core.tgz'
+  '@rush-temp/demo.benchmark': 'file:projects/demo.benchmark.tgz'
   '@rush-temp/demo.hnpwa': 'file:projects/demo.hnpwa.tgz'
   '@rush-temp/demo.readme': 'file:projects/demo.readme.tgz'
   '@rush-temp/demo.todomvc': 'file:projects/demo.todomvc.tgz'
   '@rush-temp/dom': 'file:projects/dom.tgz'
-  '@rush-temp/generator.web': 'file:projects/generator.web.tgz'
-  '@rush-temp/mood': 'file:projects/mood.tgz'
   '@rush-temp/store': 'file:projects/store.tgz'
+  '@rush-temp/tempo': 'file:projects/tempo.tgz'
   '@types/jest': 24.0.22
   '@types/jsdom': 12.2.4
   '@types/node': 10.12.18
-  '@types/webidl2': 23.8.0
   babel-types: 6.26.0
   cssnano: 4.1.10
   jest: 24.9.0
   jsdom: 15.1.1
   lodash: 4.17.15
-  node-fetch: 2.6.0
   parcel-bundler: 1.12.4
   partsing: 0.7.3
   prettier: 1.19.1
-  print-diff: 0.1.1
   request: 2.88.0
   request-promise-native: 1.0.7_request@2.88.0
   sass: 1.23.3
   stealthy-require: 1.0.0
-  styleless-innertext: 1.1.2
   todomvc-app-css: 2.2.0
   todomvc-common: 1.0.5
   ts-jest: 24.1.0_jest@24.9.0
   tslib: 1.10.0
   tslint: 5.20.1_typescript@3.7.2
   typescript: 3.7.2
-  webidl2: 23.8.3
 lockfileVersion: 5.1
 packages:
   /@babel/code-frame/7.5.5:
@@ -1234,10 +1229,6 @@ packages:
     dev: false
     resolution:
       integrity: sha512-SCcK7mvGi3+ZNz833RRjFIxrn4gI1PPR3NtuIS+6vMkvmsGjosqTJwRt5bAEFLRz+wtJMWv8+uOnZf2hi2QXTg==
-  /@types/webidl2/23.8.0:
-    dev: false
-    resolution:
-      integrity: sha512-qJcyHusYfhbDm+UxNRPlH71qYOU8UnM5QhOgpCkoduRHaEwfENpppr9Cf5AoPJlvZuSK5z2pZh2wXjBXdRkrog==
   /@types/yargs-parser/13.1.0:
     dev: false
     resolution:
@@ -2447,12 +2438,6 @@ packages:
       node: '>= 6'
     resolution:
       integrity: sha512-Dj6Wk3tWyTE+Fo1rW8v0Xhwk80um6yFYKbuAxc9c3EZxIHFDYwbi34Uk42u1CdnIiVorvt4RmlSDjIPyzGC2ew==
-  /diff/1.4.0:
-    dev: false
-    engines:
-      node: '>=0.3.1'
-    resolution:
-      integrity: sha1-fyjS657nsVqX79ic5j3P2qPMur8=
   /diff/4.0.1:
     dev: false
     engines:
@@ -4568,12 +4553,6 @@ packages:
     dev: false
     resolution:
       integrity: sha512-2+DuKodWvwRTrCfKOeR24KIc5unKjOh8mz17NCzVnHWfjAdDqbfbjqh7gUT+BkXBRQM52+xCHciKWonJ3CbJMQ==
-  /node-fetch/2.6.0:
-    dev: false
-    engines:
-      node: 4.x || >=6.0.0
-    resolution:
-      integrity: sha512-8dG4H5ujfvFiqDmVu9fQ5bOHUC15JMjMY/Zumv26oOvvVJjM67KF8koCWIabKQ1GJIa9r2mMZscBq/TbdOcmNA==
   /node-forge/0.7.6:
     dev: false
     resolution:
@@ -5509,12 +5488,6 @@ packages:
       node: '>= 6'
     resolution:
       integrity: sha512-00ZMZUiHaJrNfk33guavqgvfJS30sLYf0f8+Srklv0AMPodGGHcoHgksZ3OThYnIvOd+8yMCn0YiEOogjlgsnA==
-  /print-diff/0.1.1:
-    dependencies:
-      diff: 1.4.0
-    dev: false
-    resolution:
-      integrity: sha512-dp36GezMEivgKH/zcLB4eBhJmQM3ewAa1UAqEPXMzU69NQ5wCP8puVBZlDFyt1WEtR5k2UC+3ahg+T5BfmRVGw==
   /private/0.1.8:
     dev: false
     engines:
@@ -6406,10 +6379,6 @@ packages:
       node: '>=6.9.0'
     resolution:
       integrity: sha512-7GlLk9JwlElY4Y6a/rmbH2MhVlTyVmiJd1PfTCqFaIBEGMYNsrO/v3SeGTdhBThLg4Z+NbOk/qFMwCa+J+3p/g==
-  /styleless-innertext/1.1.2:
-    dev: false
-    resolution:
-      integrity: sha512-DtkmkUlnXmY/toO0hE8w0Tp5JD9oaI26ci8yRfU7FBqn4R/rKRCb6MakmCoT1hVhqgONOWSH02vEdrM5MD4gqQ==
   /supports-color/2.0.0:
     dev: false
     engines:
@@ -6934,10 +6903,6 @@ packages:
     dev: false
     resolution:
       integrity: sha512-YQ+BmxuTgd6UXZW3+ICGfyqRyHXVlD5GtQr5+qjiNW7bF0cqrzX500HVXPBOvgXb5YnzDd+h0zqyv61KUD7+Sg==
-  /webidl2/23.8.3:
-    dev: false
-    resolution:
-      integrity: sha512-sWVshDenzFnXB7Sr/0SAtdy6VdTKUtU587pNBNK4b5V1wmjSrz+/1e5Flm50aQickifsjLyY5EaZ3gkM3yzwgg==
   /whatwg-encoding/1.0.5:
     dependencies:
       iconv-lite: 0.4.24
@@ -7124,6 +7089,21 @@ packages:
       integrity: sha512-nmh78oNLJpniWtpROdiAUzjme+PDNry2JmGRqILXwvpQqEImeDAre0sG7lWw1BKT702OfjhFBOToKB9C0k9low==
       tarball: 'file:projects/core.tgz'
     version: 0.0.0
+  'file:projects/demo.benchmark.tgz':
+    dependencies:
+      babel-types: 6.26.0
+      cssnano: 4.1.10
+      parcel-bundler: 1.12.4
+      prettier: 1.19.1
+      tslib: 1.10.0
+      tslint: 5.20.1_typescript@3.7.2
+      typescript: 3.7.2
+    dev: false
+    name: '@rush-temp/demo.benchmark'
+    resolution:
+      integrity: sha512-Lny2KLUB09OEwGn3JP7cmA3HeLFWP2eFJbjzTM1+t0sgXfu1tbPB/GbyHWQYIzSrP8oOkNfc1HCdrRIm+VkJjA==
+      tarball: 'file:projects/demo.benchmark.tgz'
+    version: 0.0.0
   'file:projects/demo.hnpwa.tgz':
     dependencies:
       babel-types: 6.26.0
@@ -7137,7 +7117,7 @@ packages:
     dev: false
     name: '@rush-temp/demo.hnpwa'
     resolution:
-      integrity: sha512-9W5bPAvuJynwcK2qQIZQiAftU5KGY6VrBu/PnhZHF+F5i/nqpAYxZkqsj4Rmb4aERIc7rHXV8Nba5AYU/rKtcg==
+      integrity: sha512-WhmRC2QwN0edDLuLUr+Gn1trIAlP7+5xRQX8i7P4GskWi4QWfFm6dXKD+pxRSBHnJzNbK8YCcLFm8CE0Uqm8nA==
       tarball: 'file:projects/demo.hnpwa.tgz'
     version: 0.0.0
   'file:projects/demo.readme.tgz':
@@ -7153,7 +7133,7 @@ packages:
     dev: false
     name: '@rush-temp/demo.readme'
     resolution:
-      integrity: sha512-OJPbqqNFU8da+JL3AT31nguciM17014E4VW+Qt4ybFW5Id70XybhsHOIDWj/j7Ves/9Oig1piKjm1aJBoPjYcg==
+      integrity: sha512-vVi7yjFnDL/yek3XI4ohcrdGLU2DvOAS2kfwsxFX5WPagSGtNHNCt1a9ZTpKrYwTsfcoAQJJz09NOw3+Rdlu8w==
       tarball: 'file:projects/demo.readme.tgz'
     version: 0.0.0
   'file:projects/demo.todomvc.tgz':
@@ -7169,7 +7149,7 @@ packages:
     dev: false
     name: '@rush-temp/demo.todomvc'
     resolution:
-      integrity: sha512-zpylgiUkltmcP+FKCQrtmHb7U+oEz5Cvi3C4Zx6p0QCJgd4qrIkJBMKMGwEf3siLD5txuNGoSxPQfNbGUILQlw==
+      integrity: sha512-Mi9APSoXjOXn/UGEDr916P9teW12HO2puUNGPRrWQ7NmLUzaBQnUEtW/K4EXgN1Qj359EskHAov7cYLcn/gvIg==
       tarball: 'file:projects/demo.todomvc.tgz'
     version: 0.0.0
   'file:projects/dom.tgz':
@@ -7189,41 +7169,8 @@ packages:
     dev: false
     name: '@rush-temp/dom'
     resolution:
-      integrity: sha512-lC113Gw+55D1xU7UT74sPqZ2QMijUv/8UJe/oc7rbPPm6wgQkFkNj7fs8iiwpvH5vB11auanCkR7fzbDAnq5pA==
+      integrity: sha512-t2olNODPshkQw6F6zFTuH15Ga0a9l7VQVqmW22hSXcKbdJ6O6zJmoi3NciDtS/tAlttH2QEuakJvWQFC6lGRuQ==
       tarball: 'file:projects/dom.tgz'
-    version: 0.0.0
-  'file:projects/generator.web.tgz':
-    dependencies:
-      '@types/jsdom': 12.2.4
-      '@types/node': 10.12.18
-      '@types/webidl2': 23.8.0
-      jsdom: 15.1.1
-      node-fetch: 2.6.0
-      prettier: 1.19.1
-      print-diff: 0.1.1
-      styleless-innertext: 1.1.2
-      tslib: 1.10.0
-      tslint: 5.20.1_typescript@3.7.2
-      typescript: 3.7.2
-      webidl2: 23.8.3
-    dev: false
-    name: '@rush-temp/generator.web'
-    resolution:
-      integrity: sha512-39KdsCO4G9GeZg3Io3M670JPwOU8+7Gk8h/paCRF1w8I83lXDEEhAr9D6odySZk23n4BzjO2drN8HfOqHw6uDg==
-      tarball: 'file:projects/generator.web.tgz'
-    version: 0.0.0
-  'file:projects/mood.tgz':
-    dependencies:
-      '@types/jest': 24.0.22
-      jest: 24.9.0
-      jsdom: 15.1.1
-      ts-jest: 24.1.0_jest@24.9.0
-      typescript: 3.7.2
-    dev: false
-    name: '@rush-temp/mood'
-    resolution:
-      integrity: sha512-ZvjkZAM6Gx6+Taos8hlFJqIgN8Glye0DKj8YNIbN69ELzAizFf8vuz+MxqsvHCZfO/mdPmLHUM/pKWRPf0GLmw==
-      tarball: 'file:projects/mood.tgz'
     version: 0.0.0
   'file:projects/store.tgz':
     dependencies:
@@ -7236,42 +7183,50 @@ packages:
     dev: false
     name: '@rush-temp/store'
     resolution:
-      integrity: sha512-sR/CajhR/32AOLDIHDHaBaRzRZeumWt550OIgpRPscRgP+5TilCwahgNiVRDTva0nGEMOM8NOgdUrTg3xSWe8Q==
+      integrity: sha512-w9sRpec4Yc4pDj76QcrJFWd1gFbmqYnOW6YHYLNrA/pM/0HfFNga5Lqm4Rs3GqE/RQIP/6rCzxHJLd65I02vhA==
       tarball: 'file:projects/store.tgz'
+    version: 0.0.0
+  'file:projects/tempo.tgz':
+    dependencies:
+      '@types/jest': 24.0.22
+      jest: 24.9.0
+      jsdom: 15.1.1
+      ts-jest: 24.1.0_jest@24.9.0
+      typescript: 3.7.2
+    dev: false
+    name: '@rush-temp/tempo'
+    resolution:
+      integrity: sha512-WFVJQI0hZx0+hMqjOPkt8f+/JdDCmxHQvMBJtjLQ34PkuO5BSFs9KgDq+GBG5B/VumxxvxsF2nN4eTSMhnYeXw==
+      tarball: 'file:projects/tempo.tgz'
     version: 0.0.0
 registry: ''
 specifiers:
   '@rush-temp/core': 'file:./projects/core.tgz'
+  '@rush-temp/demo.benchmark': 'file:./projects/demo.benchmark.tgz'
   '@rush-temp/demo.hnpwa': 'file:./projects/demo.hnpwa.tgz'
   '@rush-temp/demo.readme': 'file:./projects/demo.readme.tgz'
   '@rush-temp/demo.todomvc': 'file:./projects/demo.todomvc.tgz'
   '@rush-temp/dom': 'file:./projects/dom.tgz'
-  '@rush-temp/generator.web': 'file:./projects/generator.web.tgz'
-  '@rush-temp/mood': 'file:./projects/mood.tgz'
   '@rush-temp/store': 'file:./projects/store.tgz'
+  '@rush-temp/tempo': 'file:./projects/tempo.tgz'
   '@types/jest': 24.0.22
   '@types/jsdom': 12.2.4
   '@types/node': 10.12.18
-  '@types/webidl2': 23.8.0
   babel-types: 6.26.0
   cssnano: 4.1.10
   jest: 24.9.0
   jsdom: 15.1.1
   lodash: 4.17.15
-  node-fetch: 2.6.0
   parcel-bundler: 1.12.4
   partsing: 0.7.3
   prettier: 1.19.1
-  print-diff: 0.1.1
   request: 2.88.0
   request-promise-native: 1.0.7
   sass: 1.23.3
   stealthy-require: 1.0.0
-  styleless-innertext: 1.1.2
   todomvc-app-css: 2.2.0
   todomvc-common: 1.0.5
   ts-jest: 24.1.0
   tslib: 1.10.0
   tslint: 5.20.1
   typescript: 3.7.2
-  webidl2: 23.8.3

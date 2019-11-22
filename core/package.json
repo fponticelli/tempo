@@ -1,11 +1,11 @@
 {
-  "name": "@mood/core",
+  "name": "@tempo/core",
   "private": true,
   "license": "UNLICENSED",
   "description": "",
   "version": "1.0.0",
   "scripts": {
-    "build": "tsc",
+    "build": "rm -rf lib/* && tsc",
     "test": "jest",
     "test-watch": "jest --watch",
     "tslint": "tslint -p ./tslint.json",

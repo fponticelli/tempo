@@ -1,26 +1,30 @@
-[![Actions Status](https://github.com/fponticelli/mood2/workflows/Build%20and%20Test/badge.svg)](https://github.com/fponticelli/mood2/actions?query=workflow%3A"Build+and+Test")
+[![Actions Status](https://github.com/fponticelli/tempo/workflows/Build%20and%20Test/badge.svg)](https://github.com/fponticelli/tempo/actions?query=workflow%3A"Build+and+Test")
 
-Mood is a framework to build dynamic front end applications.
+Tempo is a framework to build dynamic front end applications.
 
-[TODO MVC demo](./docs/demo/todomvc/index.html)
+This is not an officially supported Google product
+
+[TODO MVC demo](./docs/demo/todomvc/)
 
 # Sample Application
 
-A Mood application, pivots around two main instances:
+A Tempo application operates on two main instances:
 
   * **Store** as in data-store, or state holder
   * **Template**: an object with a function `render(state: State, context: Context): View<State>`
 
-These two instances work together applying `Mood.render`.
+These two instances work together applying `Tempo.render` to create your application.
 
-Here is a full example for a little widget that allows to increment/decrement a counter.
+Here is a full example of a little widget that increments and decrements a counter, updating as the value changes.
+
+You can try out the [demo running here](./docs/demo/readme/).
 
 ```ts
-import { Mood } from '@mood/dom/lib/mood'
-import { html } from '@mood/dom/lib/web'
+import { Tempo } from '@tempo/dom/lib/tempo'
+import { html } from '@tempo/dom/lib/web'
 const { div, button } = html
-import { mapState } from '@mood/dom/lib/map'
-import { Store } from '@mood/store/lib/store'
+import { mapState } from '@tempo/dom/lib/map'
+import { Store } from '@tempo/store/lib/store'
 
 interface State {
   count: number
@@ -39,7 +43,7 @@ type Action = Increment | Decrement
 const decrement = (_: MouseEvent): Action => ({ kind: 'decrement' })
 const increment = (_: MouseEvent): Action => ({ kind: 'increment' })
 
-const reducer = (state: State, action: Action) => {
+const reducer = (state: State, action: Action): State => {
   switch (action.kind) {
     case 'increment':
       return { count: state.count + 1 }
@@ -53,25 +57,23 @@ const reducer = (state: State, action: Action) => {
 const store = Store.ofState({ state, reducer })
 
 const template = div<State, Action>(
-  { className: 'app' },
+  { attrs: { className: 'app' } },
   mapState(
-    { map: state => state.count },
-    div({ className: 'count count-small' }, 'count'),
-    div({ className: 'count' }, String),
+    { map: (state: State) => state.count },
+    div({ attrs: { className: 'count count-small' } }, 'count'),
+    div({ attrs: { className: 'count' } }, String),
     div(
-      { className: 'buttons' },
-      button({ onclick: decrement, disabled: (count: number) => count <= 0 }, '-'),
-      button({ onclick: increment }, '+')
+      {  attrs: { className: 'buttons' } },
+      button({ events: { click: decrement }, attrs: { disabled: (count: number) => count <= 0 } }, '-'),
+      button({ events: { click: increment } }, '+')
     )
   )
 )
 
-Mood.render({ store, template })
+Tempo.render({ store, template })
 ```
 
-You can find this [demo running here](./docs/demo/readme/index.html)
-
-Let's analyze what is going on there.
+Let's analyze what is going on in this example.
 
 ```ts
 interface State {
@@ -81,11 +83,11 @@ interface State {
 const state = { count: 0 }
 ```
 
-We start declaring the shape for our state. In this case a simple object containing a count value.
+We start by declaring the signature for our State. In this case, our state is a simple object containing a numerical count.
 
-The UI rendering fully depends on the State and on that only. A nice is that the way the UI will display is fully represented by a specific State. This makes testing the UI simple and consistent.
+The UI rendering can only depend on the State and nothing else. This is one of the major advantages of Tempo; the way a UI renders is entirely contained within its State. Testing the UI is greatly simplified using this principle as it will consistently render with a given state.
 
-We also clear an initial State that represents the default state for our application.
+We also declare an initial State that is the default for our application.
 
 ```ts
 interface Increment {
@@ -96,41 +98,29 @@ interface Decrement {
 }
 type Action = Increment | Decrement
 
-const decrement = (_: MouseEvent): Action => ({ kind: 'decrement' })
-const increment = (_: MouseEvent): Action => ({ kind: 'increment' })
+const decrement = (): Action => ({ kind: 'decrement' })
+const increment = (): Action => ({ kind: 'increment' })
 ```
 
-Each interaction with the application is performed using Actions. Actions, like State, are defined per-application. Since actions are usually alternatives, they are generally well represented by union types like in the example above.
+Each interaction with the application is performed using Actions. Actions, like State, are defined per-application. Since actions are usually alternatives, they are well represented by union types like above. Actions can contain more data than just their kind, but this simple example's Actions don't require any additional information.
 
-To make the code cleaner, we implement two functions that map to those actions. These replace the traditional event handlers found in the browser Dom.
+To make the code cleaner, we implement two functions that map to these actions. These functions can be used to replace the traditional event handlers found in the browser DOM. See how they're used in the template to handle user clicks.
 
-Where in a traditional JS application an event can be mapped to an event handler with the following shape
+In a traditional JavaScript application, an event can be mapped to an event handler with the following signature.
 
 ```ts
 (event: Event) => void
 ```
 
-in Mood, the event handler has the following one:
+In Tempo, the event handler has a more advanced signature:
 
 ```ts
-(event: Event) => Action
+<State, Action, Ev extends Event = Event, El extends Element = Element> = (state: State, event: Ev, element: El) => Action | undefined
 ```
 
-Note that this is actually a shortcut, where the full representation is:
+The function takes the current state, the DOM event, and the element associated with the event. If it returns an Action, the reducer function that updates the state will be invoked with the returned Action. If it returns `undefined`, the reducer function will not be invoked.
 
-```ts
-WrappedDerivedValue<State, (event: Event) => void>
-
-// an instance of WrappedDerivedValue can be built using
-
-handler<State, Action, E extends Event>(
-  f: (state: State) => ((event: E) => Action | undefined) | undefined
-)
-```
-
-This can be a mouthful, but in essence is just a function that takes another function. The function argument maps state to an optional event handler. If the event handler is returned, it will be invoked whenever the corresponding event is triggered. If the argument function returns `undefined` than the handler will not be applied. This allows to control the presence of event handlers based on the current state.
-
-All attributes and text nodes in Mood can be either Derived Values (like in the example above) or Literal Values. If they are derived, the content generated in the web-page will depend on the current state. If they are literals, they are assigned on the first render and never altered again for the life-cycle of the wrapping elements.
+All attributes and text nodes in Tempo can be either Derived or Literal values. If they are derived, the content generated in the web-page will depend on the current state. If they are literals, they are assigned on the first render and never altered again for the life-cycle of the wrapping elements.
 
 ```ts
 const reducer = (state: State, action: Action) => {
@@ -149,73 +139,70 @@ const store = Store.ofState({ state, reducer })
 
 In the code above we create an instance of `Store`. A Store wraps a `Property`. A Property is an observable instance that triggers its own listeners whenever the value that it holds is changed.
 
-A Store adds to the story its capacity of changing its own state reacting to Actions or messages. That is why we need to define the `reducer` function above. A reducer as a simple signature of:
+A Store adds to the application its ability to change state in reaction to Actions. This State update is defined by the `reducer` function above. A reducer as the simple signature of:
 
 ```ts
 (state: State, action: Action) => State
 ```
 
-The reducer takes the current state, an action that has been triggered (usually from some user interaction) and returns a new state to replace the original. A reducer function should not introduce side-effects, like server calls, or perform heavy computations.
+The reducer takes the current State and an Action that has happened (usually from some user interaction) and returns a new state to replace the original. A reducer function should not introduce side-effects, like server calls, or perform heavy computations.
 
-
-If you want to perform async operations, you can do that observing `store.ebservable`. The listeners for this object take three arguments: `(state: State, action: Action, changed: boolean)`. In a listener you can call remote services, and once you have an async response, you can invoke `store.process(action)` with a new Action that will be applied to the store.
+If you want to perform async operations, you can do that by observing `store.observable`. The listeners for this object take three arguments: `(state: State, action: Action, changed: boolean)`. In a listener you can, for example, call a remote service. Once you have an async response, you can invoke `store.process(action)` with a new Action that will be applied to the store.
 
 In our example, `reducer` is simply creating a new state where `count` is either incremented or decremented.
 
-**Note**: `Property` doesn't trigger its own listeners unless the value is actually changed. Setting twice the same value will not trigger a change. This behavior can be controlled by passing an optional `equal: (a: State, b: State) => boolean` function. By default, the implementation provided will perform a deep structural comparison.
+**Note**: `Property` doesn't trigger its listeners unless the value is actually changed. Setting the same value twice will not trigger a second change. This behavior can be controlled by passing an optional equivalence `equal: (a: State, b: State) => boolean` function. By default, the implementation provided will perform a deep structural comparison.
 
 ```ts
 const template = div<State, Action>(
-  { className: 'app' },
+  { attrs: { className: 'app' } },
   mapState(
-    { map: state => state.count },
-    div({ className: 'count count-small' }, 'count'),
-    div({ className: 'count' }, String),
+    { map: (state: State) => state.count },
+    div({ attrs: { className: 'count count-small' } }, 'count'),
+    div({ attrs: { className: 'count' } }, String),
     div(
-      { className: 'buttons' },
-      button({ onclick: decrement, disabled: (count: number) => count <= 0 }, '-'),
-      button({ onclick: increment }, '+')
+      {  attrs: { className: 'buttons' } },
+      button({ events: { click: decrement }, attrs: { disabled: (count: number) => count <= 0 } }, '-'),
+      button({ events: { click: increment } }, '+')
     )
   )
 )
 
-Mood.render({ store, template })
+Tempo.render({ store, template })
 ```
 
-Finally the UI! Each element, like `div` above, takes a first argument for the element attributes and 0 or more other arguments. If an argument is a literal value like in `className` that is applied and it cannot be modified anymore. For dynamic values a function from State to the attribute type are required.
+Finally the UI! Each element, like `div` above, takes one or more arguments.
 
-The following arguments are children nodes. The simplest child node is just a plain string that is mapped to a dom text node. A text node can also be dynamic when represented by a function `State => string`. The text in that case will change when the state is changed. That is the case for ``count => `count: ${count} ```.
+The first argument is for the element's attributes. If passed a literal value, like the attributes `className: 'app'` above, it will be rendered once and cannot be updated dynamically. For dynamic values a function from State to the attribute type is required.
 
-We use `mapState` in the example to extract `count` and not avoid having to dereference that value every time it is used; this is really not necessary but it looks cool and it shows how State can be refined/transformed for inner elements.
+The rest of the arguments are optional children of the element. The simplest child node is a plain string that is mapped to a DOM text node. A text node can also be dynamic when represented by a function `State => string`. The text will then change when the state is changed. In our example, the `String` constructor is used in the template to render the `count` as a text node and will update when the state changes.
 
-Just for fun we added `disabled` and made it dependent on `count`. When it is zero or less we will not be able to click it.
+We use `mapState` in the example to extract `count` and avoid having to dereference that value every time it is used; this is not necessary but it shows how State can be refined/transformed for inner elements, simplifying and scoping what they can represent. This helps to clarify the intent of the code.
 
-When the template is defined, nothing really happens except that we have an instance of `DOMElement<State, Action, HTMLDivElement>`. This instance implements `DOMTemplate<State, Action>` which has a method `render: (ctx: DOMContext, state: State) => View<State>`. When that method is invoked, it will perform the actual modifications of the dom. The `View` returned by the method has a method `destroy()` to remove what has been generated and `change(state: State)` to update the its content.
+Just for fun we added `disabled` and made it dependent on `count`. When `count` is zero or less we will not be able to click it.
 
-These functions are managed and wired automatically when `store` and `template` are passed to `Mood.render`.
+When the template is defined, nothing happens except that we have an instance of `DOMElement<State, Action, HTMLDivElement>`. This instance implements `DOMTemplate<State, Action>` which contains the method `render: (ctx: DOMContext, state: State) => View<State>`. When that method is invoked, it will perform the actual creation and modification of the browser's DOM. The `View` returned by the `render` method has a method `destroy()` to remove what has been generated and `change(state: State)` to update the its content.
 
-The entire app fits 7.7kb when gzipped!
+These functions are managed and wired automatically when `store` and `template` are passed to `Tempo.render`.
+
+The entire app fits 6.6kb when gzipped!
 
 # Elements
 
-A template is built by assembling elements together. `@mood/dom/lib/web` contains all the definitions for all HTML and SVG elements. The are then special elements described below.
+A template is built by assembling elements together. `@tempo/dom/lib/web` contains all the definitions for all HTML and SVG elements. The are then special elements described below.
 
-## mood_attributes
+## tempo_attributes
 
 Each DOM element has four additional special attributes:
 
 ```ts
-moodAfterRender?: MoodAttribute<State, El>
-moodAfterChange?: MoodAttribute<State, El>
-moodBeforeChange?: MoodAttribute<State, El>
-moodBeforeDestroy?: (el: El) => void
-
-// where MoodAttribute<State, El> is defined as
-
-type MoodAttribute<State, El> = UnwrappedLiteralValue<(el: El) => void> | WrappedDerivedValue<State, (el: El) => void>
+afterrender?:   (state: State, el: El, ctx: DOMContext<Action>) => T | undefined
+beforechange?:  (state: State, el: El, ctx: DOMContext<Action>, value: T | undefined) => T | undefined
+afterchange?:   (state: State, el: El, ctx: DOMContext<Action>, value: T | undefined) => T | undefined
+beforedestroy?: ((el: El, ctx: DOMContext<Action>, value: T | undefined) => void)
 ```
 
-These special attributes are used to control the life-cycle of the current element. These can be used to mount/update/destroy widgets that are not defined in Mood and that need to be embedded in your app. The functions receive a reference to the current element.
+These special attributes are used to control the life-cycle of the current element. These can be used to mount/update/destroy widgets that are not defined in Tempo and that need to be embedded in your app. The functions receive a reference to the current element.
 
 ## Map state and action
 
@@ -270,7 +257,7 @@ condition: (state: State) => boolean
 
 A `component` is a special kind of node that manages its own state. When embedded in other nodes it does not automatically propagate actions up the hierarchy, nor changes its own contents when the outer state is updated.
 
-A component takes an instance of `Store` to manage its state, it is in fact what `Mood.render` wraps the passed template around.
+A component takes an instance of `Store` to manage its state, it is in fact what `Tempo.render` wraps the passed template around.
 
 ## Adapter
 
@@ -299,3 +286,5 @@ interface PropagateArg<OuterState, InnerState, OuterAction, InnerAction> {
 ```
 
 This function allows to react to inner actions. When the `propagate` function is invoked, the implementor can decide to trigger new inner actions `dispatchInner` or outer actions `dispatchOuter`.
+
+This [simple app tracks performance](./docs/demo/benchmark/) improvements/regressions with new versions of the library.

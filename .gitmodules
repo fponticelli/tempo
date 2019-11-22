@@ -1,4 +1,0 @@
-[submodule "tools/web_generator/extern/TSJS-lib-generator"]
-	path = tools/web_generator/extern/TSJS-lib-generator
-	url = https://github.com/microsoft/TSJS-lib-generator.git
-	branch = master

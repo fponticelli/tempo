@@ -1,7 +1,20 @@
+/*
+Copyright 2019 Google LLC
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+    https://www.apache.org/licenses/LICENSE-2.0
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+
 import { el } from '../src/element'
 import { mapState, mapAction } from '../src/map'
 import { createContext } from './common'
-import { DynamicView } from '@mood/core/lib/view'
+import { DynamicView } from '@tempo/core/lib/view'
 
 describe('map', () => {
   it('mapState', () => {
@@ -22,11 +35,11 @@ describe('map', () => {
 
   it('mapAction', () => {
     let ref: string | undefined
-    const onclick = (_: Event): number => 1
+    const click = (): number => 1
     const template = el<string, string, HTMLDivElement>(
       'div',
       {},
-      mapAction({ map: (v: number) => `#${v}` }, el<string, number, HTMLDivElement>('div', { onclick } as any, s => s))
+      mapAction({ map: (v: number) => `#${v}` }, el<string, number, HTMLDivElement>('div', { events: { click } }, s => s))
     )
     const ctx = createContext((n: string) => {
       ref = n
@@ -42,13 +55,13 @@ describe('map', () => {
 
   it('mapAction passing undefined', () => {
     let ref = 'ORIG'
-    const onclick = (_: Event): string => 'X'
+    const click = (): string => 'X'
     const template = el<string, string, HTMLDivElement>(
       'div',
       {},
       mapAction(
         { map: (v: string): string | undefined => undefined },
-        el<string, string, HTMLDivElement>('div', { onclick } as any, s => s)
+        el<string, string, HTMLDivElement>('div', { events: { click } }, s => s)
       )
     )
     const ctx = createContext((n: string) => {
@@ -65,11 +78,11 @@ describe('map', () => {
 
   it('mapAction only static', () => {
     let ref: string | undefined
-    const onclick = (_: Event): number => 1
+    const click = (): number => 1
     const template = el<string, string, HTMLDivElement>(
       'div',
       {},
-      mapAction({ map: (v: number) => `#${v}` }, el<string, number, HTMLDivElement>('div', { onclick } as any, 'X'))
+      mapAction({ map: (v: number) => `#${v}` }, el<string, number, HTMLDivElement>('div', { events: { click } }, 'X'))
     )
     const ctx = createContext((n: string) => {
       ref = n
