@@ -171,7 +171,7 @@ const template = div<State, Action>(
 Tempo.render({ store, template })
 ```
 
-Finally the UI! Each element, like `div` above, takes one or more arguments. 
+Finally the UI! Each element, like `div` above, takes one or more arguments.
 
 The first argument is for the element's attributes. If passed a literal value, like the attributes `className: 'app'` above, it will be rendered once and cannot be updated dynamically. For dynamic values a function from State to the attribute type is required.
 
@@ -286,3 +286,5 @@ interface PropagateArg<OuterState, InnerState, OuterAction, InnerAction> {
 ```
 
 This function allows to react to inner actions. When the `propagate` function is invoked, the implementor can decide to trigger new inner actions `dispatchInner` or outer actions `dispatchOuter`.
+
+This [simple app tracks performance](./docs/demo/benchmark/) improvements/regressions with new versions of the library.

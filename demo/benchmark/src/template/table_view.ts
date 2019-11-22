@@ -11,32 +11,25 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { div, th, table, tr, td, br, a, span, button, b } from '@tempo/dom/lib/html'
+import { div, th, table, tr, td, br, a, span, button, b, s } from '@tempo/dom/lib/html'
 import { Action } from '../action'
-import { TestInfoWithSelected, State, VersionWithSelected, TestResult, hasSelectedTests } from '../state'
+import { TestInfoWithSelected, State, VersionWithSelected, makeTestRunId } from '../state'
 import { forEach } from '@tempo/dom/lib/for_each'
 import { mapState } from '@tempo/dom/lib/map'
 import { when } from '@tempo/dom/lib/when'
 import { fragment } from '@tempo/dom/lib/fragment'
 
-const pm = '\xb1'
-
-const resultToOpsPerSec = (r: Target) => {
+const resultToOpsPerSec = (r: TestResult) => {
   return r.hz.toFixed(r.hz < 100 ? 2 : 0)
 }
 
-const resultToSamples = (r: Target) => {
+const resultToSamples = (r: TestResult) => {
   const size = r.stats.sample.length
-  return pm + r.stats.rme.toFixed(2) + '%, ' + size + ' sample' + (size === 1 ? '' : 's')
+  return `error \xb1${r.stats.rme.toFixed(2)}%, ${size} sample` + (size === 1 ? '' : 's')
 }
 
-const colHeader = fragment<{ id: string, selected: boolean }, Action>(
-  when(
-    { condition: s => s.id === 'current' },
-    'current',
-    br({}),
-    s => (s.selected ? '✅' : '⛔️')
-  ),
+const colHeader = fragment<{ id: string; selected: boolean }, Action>(
+  when({ condition: s => s.id === 'current' }, 'current', br({}), s => (s.selected ? '✅' : '⛔️')),
   when(
     { condition: s => s.id !== 'current' },
     mapState(
@@ -52,16 +45,12 @@ const colHeader = fragment<{ id: string, selected: boolean }, Action>(
           return { date, commit, selected: s.selected }
         }
       },
-      div<{ date: Date, commit: string, selected: boolean }, Action>(
-        { attrs: { className: 'date' } },
-        s => s.date.toDateString()
+      div<{ date: Date; commit: string; selected: boolean }, Action>({ attrs: { className: 'date' } }, s =>
+        s.date.toDateString()
       ),
-      span(
-        { attrs: { className: 'commit' } },
-        s => s.commit
-      ),
+      span({ attrs: { className: 'commit' } }, s => s.commit),
       ' ',
-      s => s.selected ? '✅' : '⛔️'
+      s => (s.selected ? '✅' : '⛔️')
     )
   )
 )
@@ -73,17 +62,11 @@ export const tableView = table<State, Action>(
     th(
       {},
       when(
-        { condition: s => !!s.executingTests },
-        span({ attrs: { className: 'details' } }, s => ` ${s.executingTests!.running} more tests to run out of ${s.executingTests!.total}`),
+        { condition: s => s.processing.size > 0 },
+        span({ attrs: { className: 'details' } }, s => ` running ${s.processing.size} tests`),
         br({})
       ),
-      button(
-        {
-          attrs: { disabled: s => !hasSelectedTests(s) || !!s.executingTests },
-          events: { click: () => Action.executeSelectedTests() }
-        },
-        'execute selected tests'
-      )
+      button({ events: { click: () => Action.executeSelectedTests() } }, 'execute selected tests')
     ),
     th({}),
     mapState(
@@ -117,7 +100,7 @@ export const tableView = table<State, Action>(
       { map: state => state.versions.map(version => ({ version, tests: state.tests.map(t => t.id) })) },
       forEach(
         {},
-        th<{ version: VersionWithSelected, tests: string[] }, Action>(
+        th<{ version: VersionWithSelected; tests: string[] }, Action>(
           { attrs: { className: 'hand' } },
           a(
             {
@@ -133,10 +116,10 @@ export const tableView = table<State, Action>(
   mapState(
     { map: (state: State) => state.tests.map(test => ({ test, state })) },
     forEach(
-      { },
+      {},
       tr(
         {},
-        th<{ test: TestInfoWithSelected, state: State }, Action>(
+        th<{ test: TestInfoWithSelected; state: State }, Action>(
           { attrs: { className: 'header-col' } },
           a(
             {
@@ -151,93 +134,94 @@ export const tableView = table<State, Action>(
           a(
             {
               attrs: { href: '#' },
-              events: { click: s => Action.executeTests(s.state.versions.map(v => v.id), [s.test.id]) }
+              events: {
+                click: s =>
+                  Action.executeTests(
+                    s.state.versions.map(v => v.id),
+                    [s.test.id]
+                  )
+              }
             },
             '👉'
           )
         ),
         mapState(
           {
-            map: (item) => {
-              const id = item.test.id
+            map: item => {
+              const testId = item.test.id
               const results = item.state.results
-              return item.state.versions
-                .map(v => {
-                    const result = results[v.id]?.[id] || null
-                    return {
-                      result,
-                      selected: v.selected && item.test.selected,
-                      test: id,
-                      version: v.id,
-                      stats: item.test.stats,
-                      faster: result.target && item.test.stats && (result.target.hz / item.test.stats.min) - 1
-                    }
-                  }
-                )
+              const stats = item.state.stats[testId]
+              return item.state.versions.map(v => {
+                const id = makeTestRunId(v.id, testId)
+                const result = results[id] || null
+                return {
+                  result,
+                  selected: v.selected && item.test.selected,
+                  test: item.test.id,
+                  version: v.id,
+                  stats,
+                  processing: item.state.processing.has(id),
+                  faster: result && stats && result.hz / stats.min - 1
+                }
+              })
             }
           },
           forEach(
             {},
-            td<{
-              result: TestResult,
-              selected: boolean,
-              test: string,
-              version: string,
-              stats?: { min: number, max: number },
-              faster?: number
-            }, Action>(
+            td<
+              {
+                result: TestResult
+                selected: boolean
+                test: string
+                version: string
+                processing: boolean
+                stats?: { min: number; max: number }
+                faster?: number
+              },
+              Action
+            >(
               {
                 attrs: {
                   className: s => {
                     const buff = []
                     if (s.selected) buff.push('selected')
-                    if (s.result.processing) buff.push('processing')
+                    if (s.processing) buff.push('processing')
                     return buff.join(' ')
-                  }
-                },
-                styles: {
-                  backgroundColor: s => {
-                    console.log(s.result.processing, s.stats !== undefined, s.result.target !== undefined)
-                    if (s.result.processing) {
-                      return 'hsl(0, 0%, 90%)'
-                    } else if (s.stats !== undefined && s.result.target !== undefined) {
-                      // const diff = s.stats.max - s.stats.min
-                      // const v = 100 - 50 * (s.result.target.hz - s.stats.min) / diff
-                      const faster = 100 * (s.result.target.hz / s.stats.max - 1)
-                      console.log(`hsl(100, 60%, ${100 - faster}%)`)
-                      return `hsl(100, 60%, ${100 - faster}%)`
-                    } else {
-                      return '#fff'
-                    }
                   }
                 }
               },
               when(
-                { condition: s => s.result.target !== undefined },
-                s => resultToOpsPerSec(s.result.target!),
-                span({ attrs: { className: 'details', title: s => resultToSamples(s.result.target!) } }, ' ops/sec'),
+                { condition: s => s.result != null },
+                s => resultToOpsPerSec(s.result!),
+                span({ attrs: { className: 'details', title: s => resultToSamples(s.result!) } }, ' ops/sec'),
+                br({}),
                 when(
-                  { condition: s => !!s.faster && s.faster > 0.04 },
-                  br({}),
+                  { condition: s => !!s.faster && s.faster >= 0.05 },
                   span(
                     { attrs: { className: 'details' } },
-                    b(
-                      {},
-                      s => {
-                        const v = (s.faster! * 100).toFixed(0)
-                        return `${v}% faster`
-                      }
-                    )
+                    b({}, s => `${(s.faster! * 100).toFixed(0)}% faster`)
+                  )
+                ),
+                when(
+                  { condition: s => !s.processing },
+                  ' ',
+                  a(
+                    {
+                      attrs: { href: '#' },
+                      events: { click: s => Action.executeTests([s.version], [s.test]) }
+                    },
+                    '▶️'
                   )
                 )
               ),
               when(
-                { condition: s => s.result.target === undefined },
-                a({
+                { condition: s => s.result == null && !s.processing },
+                a(
+                  {
                     attrs: { href: '#' },
-                    events: { click: (s) => Action.executeTests([s.version], [s.test]) }
+                    events: { click: s => Action.executeTests([s.version], [s.test]) }
                   },
-                  'run'
+                  '▶️'
                 )
               )
             )

@@ -14,11 +14,18 @@ limitations under the License.
 import { availableTests } from './tests'
 
 export interface State {
-  executingTests?: { running: number, total: number }
   versions: VersionWithSelected[]
   tests: TestInfoWithSelected[]
   options: TestOptions
-  results: Record<string, Record<string, TestResult>>
+  results: Record<string, TestResult>
+  stats: Record<string, { min: number, max: number }>
+  processing: Set<string>
+}
+
+export const makeTestRunId = (versionId: string, testId: string) => `${versionId}:${testId}`
+export const unpackTestRunId = (testRunId: string) => {
+  const parts = testRunId.split(':')
+  return { versionId: parts[0], testId: parts[1] }
 }
 
 const sortVersionIds = (a: string, b: string) => {
@@ -33,23 +40,6 @@ const sortVersionIds = (a: string, b: string) => {
 
 const sortVersion = (a: Version, b: Version) => sortVersionIds(a.id, b.id)
 
-const createResults = (versions: Version[], tests: TestInfo[]): Record<string, Record<string, TestResult>> => {
-  return versions.reduce((acc, curr) => {
-    return {
-      ...acc,
-      [curr.id]: tests.reduce((acc, curr) => {
-        return {
-          ...acc,
-          [curr.id]: {
-            target: undefined,
-            processing: false
-          }
-        }
-      }, {})
-    }
-  }, {})
-}
-
 export const createState = (versionIds: string[]): State => {
   const tests = availableTests().map(test => ({
     ...test,
@@ -59,10 +49,12 @@ export const createState = (versionIds: string[]): State => {
   return {
     versions,
     tests,
-    results: createResults(versions, tests),
     options: {
-      maxTime: 0.5 // default should be 5
-    }
+      maxTime: 2 // default should be 5
+    },
+    results: {},
+    processing: new Set(),
+    stats: {}
   }
 }
 
@@ -81,17 +73,10 @@ export interface TestInfo {
 
 export interface TestInfoWithSelected extends TestInfo {
   selected: boolean
-  stats?: { min: number, max: number }
-}
-
-export interface TestResult {
-  target?: Target
-  processing: boolean
 }
 
 export interface TestDescription {
   id: string
-  async?: boolean
   fn: string
   name: string
   args?: any

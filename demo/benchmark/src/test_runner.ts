@@ -13,9 +13,7 @@ limitations under the License.
 
 import { TestDescription, TestOptions } from './state'
 
-function setup() {
-  // document.getElementById('test').innerHTML = ''
-}
+function setup() { }
 
 function teardown() {
   document.getElementById('test')!.innerHTML = ''
@@ -23,8 +21,6 @@ function teardown() {
 
 const loadScript = (runnerId: string): Promise<any> => new Promise((resolve, reject) => {
   const script = document.createElement('script')
-  // script.async = false
-  // script.defer = false
   script.onload = () => {
     console.log(`loaded tests for ${runnerId}, now executing ...`)
     const anyWin = window as any
@@ -41,9 +37,9 @@ const makeSuite = (
   runnerId: string,
   testDescriptions: TestDescription[],
   options: TestOptions,
-  dispatch: (runnerId: string, target: Target) => void
+  dispatch: (runnerId: string, target: TestResult) => void
 ) =>
-  new Promise<Record<string, Target>>(async resolve => {
+  new Promise<Record<string, TestResult>>(async resolve => {
     const mod = await loadScript(runnerId)
     const suite = new Benchmark.Suite()
 
@@ -57,12 +53,11 @@ const makeSuite = (
         name: test.name,
         setup: setup,
         teardown: teardown,
-        maxTime: options.maxTime,
-        delay: 0.001
-      } as any)
+        maxTime: options.maxTime
+      })
     }
 
-    suite.on('cycle', function(event: { target: Target }) {
+    suite.on('cycle', function(event: { target: TestResult }) {
       console.log(runnerId + ': ' + String(event.target))
       dispatch(runnerId, event.target)
     })
@@ -76,7 +71,7 @@ export const runTests = async (
   runnerIds: string[],
   testDescriptions: TestDescription[],
   options: TestOptions,
-  dispatch: (runnerId: string, target: Target) => void
+  dispatch: (runnerId: string, target: TestResult) => void
 ) => {
   for (const id of runnerIds) {
     await makeSuite(id, testDescriptions, options, dispatch)

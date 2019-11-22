@@ -15,7 +15,7 @@ export interface AppConfig {
   versions: string[]
 }
 
-export const loadConfig = (): Promise<AppConfig> => {
-  return fetch('./config.json')
-    .then(response => response.json() as any as AppConfig)
+export const loadConfig = async (): Promise<AppConfig> => {
+  const response = await fetch('./config.json')
+  return response.json() as any as AppConfig
 }

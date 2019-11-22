@@ -16,6 +16,4 @@ import { loadConfig } from './config'
 import { createApp } from './create_app'
 
 loadConfig()
-  .then(config => {
-    createApp(createState(config.versions))
-  })
+  .then(config => createApp(createState(config.versions)))

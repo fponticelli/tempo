@@ -30,7 +30,7 @@ declare namespace Benchmark {
   }
 }
 
-interface Target {
+interface TestResult {
   options: {
     async: boolean
     defer: boolean
