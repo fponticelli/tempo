@@ -14,8 +14,7 @@
     "prettier": "1.19.1",
     "tslint": "5.20.1",
     "typescript": "3.7.2",
-    "babel-types": "6.26.0",
-    "node-static": "0.7.11"
+    "babel-types": "6.26.0"
   },
   "scripts": {
     "compile:test": "parcel build test/main.ts --no-minify --out-dir ../../docs/demo/benchmark/current/",
@@ -23,7 +22,6 @@
     "compile": "NODE_ENV=production && npm run compile:test && npm run compile:html && node tools/create_config.js",
     "clean": "rm -f ../../docs/demo/benchmark/current/* && rm -f ../../docs/demo/benchmark/*.css && rm -f ../../docs/demo/benchmark/*.js* && rm -f ../../docs/demo/benchmark/*.html",
     "build": "npm run clean && npm run compile",
-    "serve": "npx static dist -p 4321",
     "tslint": "tslint -p ./tslint.json",
     "prettier": "prettier -c src/**/*.ts",
     "prettier-fix": "prettier --write src/**/*.ts"
