@@ -84,6 +84,20 @@ var $L0ny$export$repeatf = function (f) {
 
 $L0ny$exports.repeatf = $L0ny$export$repeatf;
 
+var $L0ny$export$repeatfWithNulls = function (f) {
+  return function (ratio, times) {
+    return $L0ny$export$createArray(times).map(function (i) {
+      if (Math.random() < ratio) {
+        return f(i);
+      } else {
+        return null;
+      }
+    });
+  };
+};
+
+$L0ny$exports.repeatfWithNulls = $L0ny$export$repeatfWithNulls;
+
 var $L0ny$export$createRanges = function (values) {
   return values.map($L0ny$export$createRange);
 };
@@ -142,9 +156,9 @@ $L0ny$exports.createDeep = $L0ny$export$createDeep;
 
 var $L0ny$export$createAttributes = function () {
   return {
-    id: $L0ny$export$createRandomWord(2, 8),
-    className: $L0ny$export$createWordsBetween(1, 4, 2, 8),
-    title: $L0ny$export$createWordsBetween(1, 6, 2, 8)
+    id: $L0ny$export$randomValueOrNull(0.4, $L0ny$export$createRandomWord(2, 8)),
+    className: $L0ny$export$randomValueOrNull(0.4, $L0ny$export$createWordsBetween(1, 4, 2, 8)),
+    title: $L0ny$export$randomValueOrNull(0.4, $L0ny$export$createWordsBetween(1, 6, 2, 8))
   };
 };
 
@@ -170,17 +184,48 @@ var $L0ny$export$randomInt = function (min, max) {
 
 $L0ny$exports.randomInt = $L0ny$export$randomInt;
 
+var $L0ny$export$randomOrNull = function (ratio, f) {
+  if (Math.random() <= ratio) return f();else return null;
+};
+
+$L0ny$exports.randomOrNull = $L0ny$export$randomOrNull;
+
+var $L0ny$export$randomValueOrNull = function (ratio, v) {
+  if (Math.random() <= ratio) return v;else return null;
+};
+
+$L0ny$exports.randomValueOrNull = $L0ny$export$randomValueOrNull;
+
 var $L0ny$export$createStyles = function () {
   return {
-    backgroundColor: $L0ny$export$randomColor(),
-    color: $L0ny$export$randomColor(),
-    border: $L0ny$export$randomInt(1, 4) + "px solid " + $L0ny$export$randomColor()
+    backgroundColor: $L0ny$export$randomOrNull(0.4, $L0ny$export$randomColor),
+    color: $L0ny$export$randomOrNull(0.4, $L0ny$export$randomColor),
+    border: $L0ny$export$randomOrNull(0.4, function () {
+      return $L0ny$export$randomInt(1, 4) + "px solid " + $L0ny$export$randomColor();
+    })
   };
 };
 
 $L0ny$exports.createStyles = $L0ny$export$createStyles;
+
+var $L0ny$export$randomBoolean = function () {
+  if (Math.random() <= 0.5) return true;else return false;
+};
+
+$L0ny$exports.randomBoolean = $L0ny$export$randomBoolean;
 var $L0ny$export$createManyStyles = $L0ny$export$repeatf($L0ny$export$createStyles);
 $L0ny$exports.createManyStyles = $L0ny$export$createManyStyles;
+
+var $L0ny$export$createProperties = function () {
+  return {
+    value: $L0ny$export$randomValueOrNull(0.4, $L0ny$export$createWordsBetween(1, 6, 2, 8)),
+    disabled: $L0ny$export$randomOrNull(0.4, $L0ny$export$randomBoolean)
+  };
+};
+
+$L0ny$exports.createProperties = $L0ny$export$createProperties;
+var $L0ny$export$createManyProperties = $L0ny$export$repeatf($L0ny$export$createProperties);
+$L0ny$exports.createManyProperties = $L0ny$export$createManyProperties;
 // ASSET: tests.ts
 var $cibo$exports = {};
 Object.defineProperty($cibo$exports, "__esModule", {
@@ -223,16 +268,22 @@ var $cibo$export$tests = [{
   args: $L0ny$export$createManyAttributes(1000),
   selected: true
 }, {
+  id: 'update-properties',
+  name: 'Update Properties',
+  fn: 'updateProperty',
+  args: $L0ny$export$createManyProperties(1000),
+  selected: true
+}, {
   id: 'update-styles',
   name: 'Update Styles',
   fn: 'updateStyles',
-  args: $L0ny$export$createManyStyles(1000),
+  args: $L0ny$export$createManyStyles(500),
   selected: true
 }, {
   id: 'trigger-events',
   name: 'Update and Trigger Events',
   fn: 'updateAndTriggerEvents',
-  args: $L0ny$export$createWords(1000, 3, 6),
+  args: $L0ny$export$createWords(100, 3, 6),
   selected: true
 }];
 $cibo$exports.tests = $cibo$export$tests;
@@ -731,11 +782,7 @@ var $AxMU$export$setAttribute = function (el, name, value) {
   if (value == null) {
     el.removeAttribute(name);
   } else {
-    var s = String(value);
-
-    if (s !== el.getAttribute(name)) {
-      el.setAttribute(name, s);
-    }
+    el.setAttribute(name, value);
   }
 };
 

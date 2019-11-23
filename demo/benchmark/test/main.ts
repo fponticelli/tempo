@@ -18,6 +18,7 @@ import { DynamicView } from '@tempo/core/lib/view'
 import { TestAttributes, attribute } from './template/attribute'
 import { TestStyles, style } from './template/styles'
 import { event } from './template/events'
+import { TestProperties, property } from './template/property'
 
 const ctx = DOMContext.fromElement(document.getElementById('test')!, () => {})
 
@@ -48,6 +49,12 @@ export const updateAttributes = (values: TestAttributes[]) => {
     view.change(v)
 }
 
+export const updateProperty = (values: TestProperties[]) => {
+  const view = property.render(ctx, values[0]!) as DynamicView<TestProperties>
+  for (const v of values)
+    view.change(v)
+}
+
 export const updateStyles = (values: TestStyles[]) => {
   const view = style.render(ctx, values[0]!) as DynamicView<TestStyles>
   for (const v of values)
@@ -71,5 +78,6 @@ anyWin.__tests__ = {
   renderDeepAndUpdate,
   updateAttributes,
   updateStyles,
+  updateProperty,
   updateAndTriggerEvents
 }

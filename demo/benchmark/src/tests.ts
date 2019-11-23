@@ -12,7 +12,7 @@ limitations under the License.
 */
 
 import { TestInfo, TestDescription } from './state'
-import { createRange, createRanges, repeat, createDeep, createWords, createManyStyles, createManyAttributes } from './generator'
+import { createRange, createRanges, repeat, createDeep, createWords, createManyStyles, createManyAttributes, createManyProperties } from './generator'
 
 export const tests: TestDescription[] = [
   {
@@ -52,33 +52,25 @@ export const tests: TestDescription[] = [
     args: createManyAttributes(1000),
     selected: true
   }, {
+    id: 'update-properties',
+    name: 'Update Properties',
+    fn: 'updateProperty',
+    args: createManyProperties(1000),
+    selected: true
+  }, {
     id: 'update-styles',
     name: 'Update Styles',
     fn: 'updateStyles',
-    args: createManyStyles(1000),
+    args: createManyStyles(500),
     selected: true
   }, {
     id: 'trigger-events',
     name: 'Update and Trigger Events',
     fn: 'updateAndTriggerEvents',
-    args: createWords(1000, 3, 6),
+    args: createWords(100, 3, 6),
     selected: true
   }
 ]
-
-/*
-export const updateAttributes = (values: TestAttributes[]) => {
-  const view = attribute.render(ctx, values[0]!) as DynamicView<TestAttributes>
-  for (const v of values)
-    view.change(v)
-}
-
-export const updateStyles = (values: TestStyles[]) => {
-  const view = style.render(ctx, values[0]!) as DynamicView<TestStyles>
-  for (const v of values)
-    view.change(v)
-}
-*/
 
 export const availableTests = (): TestInfo[] => {
   return tests.map(test => ({

@@ -27,10 +27,7 @@ export const setAttribute = (el: Element, name: string, value: any) => {
   if (value == null) {
     el.removeAttribute(name)
   } else {
-    const s = String(value)
-    if (s !== el.getAttribute(name)) {
-      el.setAttribute(name, s)
-    }
+    el.setAttribute(name, value)
   }
 }
 

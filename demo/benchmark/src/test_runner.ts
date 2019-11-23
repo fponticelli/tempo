@@ -45,7 +45,7 @@ const makeSuite = (
 
     for (const test of testDescriptions) {
       if (!mod[test.fn]) {
-        console.log(`skip (no implementation): ${runnerId}: ${test.id}`)
+        console.log(`skip (no implementation): ${runnerId}: ${test.id}`);
         dispatch(runnerId, test.id, undefined)
         continue
       }

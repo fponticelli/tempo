@@ -33,6 +33,16 @@ export const repeatf = <B>(f: (num: number) => B) => (times: number)  => {
   return (createArray(times)).map(f)
 }
 
+export const repeatfWithNulls = <B>(f: (num: number) => B) => (ratio: number, times: number)  => {
+  return (createArray(times)).map(i => {
+    if (Math.random() < ratio) {
+      return f(i)
+    } else {
+      return null
+    }
+  })
+}
+
 export const createRanges = (values: number[])  => {
   return values.map(createRange)
 }
@@ -72,9 +82,9 @@ export const createDeep = ()  => {
 
 export const createAttributes = () => {
   return {
-    id: createRandomWord(2, 8),
-    className: createWordsBetween(1, 4, 2, 8),
-    title: createWordsBetween(1, 6, 2, 8)
+    id: randomValueOrNull(0.4, createRandomWord(2, 8)),
+    className: randomValueOrNull(0.4, createWordsBetween(1, 4, 2, 8)),
+    title: randomValueOrNull(0.4, createWordsBetween(1, 6, 2, 8))
   }
 }
 
@@ -93,12 +103,42 @@ export const randomInt = (min: number, max: number) => {
   return Math.floor(Math.random() * (max - min)) + min
 }
 
+export const randomOrNull = <T>(ratio: number, f: () => T): T | null => {
+  if (Math.random() <= ratio)
+    return f()
+  else
+    return null
+}
+
+export const randomValueOrNull = <T>(ratio: number, v: T): T | null => {
+  if (Math.random() <= ratio)
+    return v
+  else
+    return null
+}
+
 export const createStyles = () => {
   return {
-    backgroundColor: randomColor(),
-    color: randomColor(),
-    border: `${randomInt(1, 4)}px solid ${randomColor()}`
+    backgroundColor: randomOrNull(0.4, randomColor),
+    color: randomOrNull(0.4, randomColor),
+    border: randomOrNull(0.4, () => `${randomInt(1, 4)}px solid ${randomColor()}`)
   }
 }
 
+export const randomBoolean = () => {
+  if (Math.random() <= 0.5)
+    return true
+  else
+    return false
+}
+
 export const createManyStyles = repeatf(createStyles)
+
+export const createProperties = () => {
+  return {
+    value: randomValueOrNull(0.4, createWordsBetween(1, 6, 2, 8)),
+    disabled: randomOrNull(0.4, randomBoolean)
+  }
+}
+
+export const createManyProperties = repeatf(createProperties)

@@ -149,7 +149,10 @@ exports.setAttribute = function (el, name, value) {
         el.removeAttribute(name);
     }
     else {
-        el.setAttribute(name, value);
+        var s = String(value);
+        if (s !== el.getAttribute(name)) {
+            el.setAttribute(name, s);
+        }
     }
 };
 exports.setProperty = function (el, name, value) {
@@ -1016,25 +1019,6 @@ exports.event = html_1.button({
     }
   }
 }, 'click me');
-},{"@tempo/dom/lib/html":"YzxN"}],"YbU7":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var html_1 = require("@tempo/dom/lib/html");
-
-exports.property = html_1.input({
-  attrs: {
-    value: function value(s) {
-      return s.value;
-    },
-    disabled: function disabled(s) {
-      return s.disabled;
-    }
-  }
-});
 },{"@tempo/dom/lib/html":"YzxN"}],"ZCfc":[function(require,module,exports) {
 "use strict";
 
@@ -1053,8 +1037,6 @@ var attribute_1 = require("./template/attribute");
 var styles_1 = require("./template/styles");
 
 var events_1 = require("./template/events");
-
-var property_1 = require("./template/property");
 
 var ctx = context_1.DOMContext.fromElement(document.getElementById('test'), function () {});
 
@@ -1094,20 +1076,11 @@ exports.updateAttributes = function (values) {
   }
 };
 
-exports.updateProperty = function (values) {
-  var view = property_1.property.render(ctx, values[0]);
-
-  for (var _i = 0, values_3 = values; _i < values_3.length; _i++) {
-    var v = values_3[_i];
-    view.change(v);
-  }
-};
-
 exports.updateStyles = function (values) {
   var view = styles_1.style.render(ctx, values[0]);
 
-  for (var _i = 0, values_4 = values; _i < values_4.length; _i++) {
-    var v = values_4[_i];
+  for (var _i = 0, values_3 = values; _i < values_3.length; _i++) {
+    var v = values_3[_i];
     view.change(v);
   }
 };
@@ -1116,8 +1089,8 @@ exports.updateAndTriggerEvents = function (values) {
   var view = events_1.event.render(ctx, values[0]);
   var el = document.getElementById('test').firstElementChild;
 
-  for (var _i = 0, values_5 = values; _i < values_5.length; _i++) {
-    var v = values_5[_i];
+  for (var _i = 0, values_4 = values; _i < values_4.length; _i++) {
+    var v = values_4[_i];
     el.click();
     view.change(v);
   }
@@ -1131,8 +1104,7 @@ anyWin.__tests__ = {
   renderDeepAndUpdate: exports.renderDeepAndUpdate,
   updateAttributes: exports.updateAttributes,
   updateStyles: exports.updateStyles,
-  updateProperty: exports.updateProperty,
   updateAndTriggerEvents: exports.updateAndTriggerEvents
 };
-},{"./template/list":"dozB","./template/deep":"JKII","@tempo/dom/lib/context":"TsAd","./template/attribute":"izmn","./template/styles":"qnhq","./template/events":"jpZy","./template/property":"YbU7"}]},{},["ZCfc"], null)
+},{"./template/list":"dozB","./template/deep":"JKII","@tempo/dom/lib/context":"TsAd","./template/attribute":"izmn","./template/styles":"qnhq","./template/events":"jpZy"}]},{},["ZCfc"], null)
 //# sourceMappingURL=main.js.map
