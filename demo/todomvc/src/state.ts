@@ -24,6 +24,7 @@ export interface State {
   editing?: TodoEdit
   filter: Filter
   todos: Todo[]
+  completed: number
 }
 
 export interface TodoEdit {

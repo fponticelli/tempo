@@ -65,8 +65,18 @@ export const template = section<State, Action>(
       })
     ),
     section(
-      { attrs: { className: 'main' } },
-      input({ attrs: { id: 'toggle-all', className: 'toggle-all', type: 'checkbox' } }),
+      { attrs: { className: 'main' }, styles: { visibility: state => state.todos.length === 0 ? 'hidden' : '' } },
+      input({
+        attrs: {
+          id: 'toggle-all',
+          className: 'toggle-all',
+          type: 'checkbox',
+          checked: state => state.completed === state.todos.length
+        },
+        events: {
+          click: () => Action.toggleAllTodo
+        }
+      }),
       label({ attrs: { for: 'toggle-all' } }, 'Mark all as complete'),
       ul(
         { attrs: { className: 'todo-list' } },
@@ -154,8 +164,7 @@ export const template = section<State, Action>(
     footer(
       { attrs: { className: 'footer' }, styles: { display: state => (state.todos.length === 0 ? 'none' : 'block') } },
       span({ attrs: { className: 'todo-count' } }, state => {
-        const completed = state.todos.filter(todo => todo.completed).length
-        const left = state.todos.length - completed
+        const left = state.todos.length - state.completed
         if (left === 1) {
           return '1 item left'
         } else {

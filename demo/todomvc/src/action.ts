@@ -58,6 +58,10 @@ export class ToggleTodo {
   constructor(readonly id: string) {}
 }
 
+export class ToggleAllTodo {
+  readonly kind = 'toggle-all-todo'
+}
+
 export class UpdateTodo {
   readonly kind = 'update-todo'
   constructor(readonly id: string, readonly title: string) {}
@@ -72,6 +76,7 @@ export type Action =
   | EditingTodo
   | RemoveTodo
   | ToggleTodo
+  | ToggleAllTodo
   | ToggleFilter
   | UpdateTodo
 
@@ -84,6 +89,7 @@ export const Action = {
   editingTodo: (id: string, title: string): Action => new EditingTodo(id, title),
   removeTodo: (id: string): Action => new RemoveTodo(id),
   toggleTodo: (id: string): Action => new ToggleTodo(id),
+  toggleAllTodo: new ToggleAllTodo() as Action,
   toggleFilter: (filter: Filter): Action => new ToggleFilter(filter),
   updateTodo: (id: string, title: string): Action => new UpdateTodo(id, title)
 }
