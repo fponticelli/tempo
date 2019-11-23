@@ -21,10 +21,12 @@ import { text } from '../text'
 
 export const removeNode = (node: Node) => {
   const el = node as HTMLElement
+  if (!node || node.ownerDocument === undefined)
+    return
   if (el && el.onblur) {
     el.onblur = null
   }
-  if (node && node.parentElement) {
+  if (node.parentElement) {
     node.parentElement.removeChild(node)
   }
 }

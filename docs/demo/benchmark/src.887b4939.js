@@ -1062,12 +1062,13 @@ Object.defineProperty($KfbX$exports, "__esModule", {
 
 var $KfbX$export$removeNode = function (node) {
   var el = node;
+  if (!node || node.ownerDocument === undefined) return;
 
   if (el && el.onblur) {
     el.onblur = null;
   }
 
-  if (node && node.parentElement) {
+  if (node.parentElement) {
     node.parentElement.removeChild(node);
   }
 };
