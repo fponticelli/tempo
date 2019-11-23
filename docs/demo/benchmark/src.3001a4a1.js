@@ -43,7 +43,303 @@ parcelRequire = (function (init) {
   localRequire.modules = modules;
   return localRequire;
 })(function (require) {
-// ASSET: ../node_modules/tslib/tslib.es6.js
+// ASSET: generator.ts
+var $L0ny$exports = {};
+Object.defineProperty($L0ny$exports, "__esModule", {
+  value: true
+});
+var $L0ny$var$alphabet = 'abcdefghijklmnopqrstuvwxyz';
+
+var $L0ny$export$createArray = function (num) {
+  var res = [];
+
+  for (var i = 0; i < num; i++) {
+    res.push(i);
+  }
+
+  return res;
+};
+
+$L0ny$exports.createArray = $L0ny$export$createArray;
+
+var $L0ny$export$createRange = function (num) {
+  return $L0ny$export$createArray(num).map(function (_) {
+    return Math.floor(Math.random() * num);
+  });
+};
+
+$L0ny$exports.createRange = $L0ny$export$createRange;
+
+var $L0ny$export$repeat = function (times, f) {
+  return $L0ny$export$createArray(times).map(f);
+};
+
+$L0ny$exports.repeat = $L0ny$export$repeat;
+
+var $L0ny$export$repeatf = function (f) {
+  return function (times) {
+    return $L0ny$export$createArray(times).map(f);
+  };
+};
+
+$L0ny$exports.repeatf = $L0ny$export$repeatf;
+
+var $L0ny$export$createRanges = function (values) {
+  return values.map($L0ny$export$createRange);
+};
+
+$L0ny$exports.createRanges = $L0ny$export$createRanges;
+
+var $L0ny$export$createWord = function (num) {
+  var w = '';
+
+  for (var i = 0; i < num; i++) {
+    w += $L0ny$var$alphabet[Math.floor($L0ny$var$alphabet.length * Math.random())];
+  }
+
+  return w;
+};
+
+$L0ny$exports.createWord = $L0ny$export$createWord;
+
+var $L0ny$export$createRandomWord = function (min, max) {
+  var length = min + Math.round((max - min) * Math.random());
+  return $L0ny$export$createWord(length);
+};
+
+$L0ny$exports.createRandomWord = $L0ny$export$createRandomWord;
+
+var $L0ny$export$createWords = function (num, min, max) {
+  return $L0ny$export$createArray(num).map(function (_) {
+    return $L0ny$export$createRandomWord(min, max);
+  }).join(' ');
+};
+
+$L0ny$exports.createWords = $L0ny$export$createWords;
+
+var $L0ny$export$createWordsBetween = function (minWords, maxWords, minLength, maxLentgh) {
+  var num = $L0ny$export$randomInt(minWords, maxWords);
+  return $L0ny$export$createArray(num).map(function (_) {
+    return $L0ny$export$createRandomWord(minLength, maxLentgh);
+  }).join(' ');
+};
+
+$L0ny$exports.createWordsBetween = $L0ny$export$createWordsBetween;
+
+var $L0ny$export$createDeep = function () {
+  return {
+    id: $L0ny$export$createWord(8),
+    name: $L0ny$export$createRandomWord(4, 12),
+    address: {
+      line1: $L0ny$export$createWords(3, 4, 6),
+      line2: $L0ny$export$createWords(2, 4, 6)
+    },
+    paragraph: $L0ny$export$createWords(30, 1, 8)
+  };
+};
+
+$L0ny$exports.createDeep = $L0ny$export$createDeep;
+
+var $L0ny$export$createAttributes = function () {
+  return {
+    id: $L0ny$export$createRandomWord(2, 8),
+    className: $L0ny$export$createWordsBetween(1, 4, 2, 8),
+    title: $L0ny$export$createWordsBetween(1, 6, 2, 8)
+  };
+};
+
+$L0ny$exports.createAttributes = $L0ny$export$createAttributes;
+var $L0ny$var$hexAlphabet = '0123456789ABCDEF';
+
+var $L0ny$export$randomColor = function () {
+  function randomHex() {
+    var pos = Math.floor(Math.random() * $L0ny$var$hexAlphabet.length);
+    return $L0ny$var$hexAlphabet[pos];
+  }
+
+  return "#" + randomHex() + randomHex() + randomHex() + randomHex() + randomHex() + randomHex();
+};
+
+$L0ny$exports.randomColor = $L0ny$export$randomColor;
+var $L0ny$export$createManyAttributes = $L0ny$export$repeatf($L0ny$export$createAttributes);
+$L0ny$exports.createManyAttributes = $L0ny$export$createManyAttributes;
+
+var $L0ny$export$randomInt = function (min, max) {
+  return Math.floor(Math.random() * (max - min)) + min;
+};
+
+$L0ny$exports.randomInt = $L0ny$export$randomInt;
+
+var $L0ny$export$createStyles = function () {
+  return {
+    backgroundColor: $L0ny$export$randomColor(),
+    color: $L0ny$export$randomColor(),
+    border: $L0ny$export$randomInt(1, 4) + "px solid " + $L0ny$export$randomColor()
+  };
+};
+
+$L0ny$exports.createStyles = $L0ny$export$createStyles;
+var $L0ny$export$createManyStyles = $L0ny$export$repeatf($L0ny$export$createStyles);
+$L0ny$exports.createManyStyles = $L0ny$export$createManyStyles;
+// ASSET: tests.ts
+var $cibo$exports = {};
+Object.defineProperty($cibo$exports, "__esModule", {
+  value: true
+});
+var $cibo$export$tests = [{
+  id: 'render-list-50',
+  name: 'Render List (50)',
+  fn: 'renderListElements',
+  args: $L0ny$export$createRange(50),
+  selected: false
+}, {
+  id: 'render-list-500',
+  name: 'Render List (500)',
+  fn: 'renderListElements',
+  args: $L0ny$export$createRange(500),
+  selected: true
+}, {
+  id: 'render-destroy-list-500',
+  name: 'Render List & Destroy (500)',
+  fn: 'renderListElementsAndDestroy',
+  args: $L0ny$export$createRange(500),
+  selected: false
+}, {
+  id: 'render-update-list',
+  name: 'Render List & Update',
+  fn: 'renderListAndUpdate',
+  args: $L0ny$export$createRanges([200, 100, 50, 20, 0, 20, 50, 100, 200]),
+  selected: true
+}, {
+  id: 'render-update-deep',
+  name: 'Render Deep & Update',
+  fn: 'renderDeepAndUpdate',
+  args: $L0ny$export$repeat(1000, $L0ny$export$createDeep),
+  selected: true
+}, {
+  id: 'update-attributes',
+  name: 'Update Attributes',
+  fn: 'updateAttributes',
+  args: $L0ny$export$createManyAttributes(1000),
+  selected: true
+}, {
+  id: 'update-styles',
+  name: 'Update Styles',
+  fn: 'updateStyles',
+  args: $L0ny$export$createManyStyles(1000),
+  selected: true
+}, {
+  id: 'trigger-events',
+  name: 'Update and Trigger Events',
+  fn: 'updateAndTriggerEvents',
+  args: $L0ny$export$createWords(1000, 3, 6),
+  selected: true
+}];
+$cibo$exports.tests = $cibo$export$tests;
+
+var $cibo$export$availableTests = function () {
+  return $cibo$export$tests.map(function (test) {
+    return {
+      id: test.id,
+      name: test.name,
+      selected: test.selected
+    };
+  });
+};
+
+$cibo$exports.availableTests = $cibo$export$availableTests;
+// ASSET: state.ts
+var $mIWh$exports = {};
+Object.defineProperty($mIWh$exports, "__esModule", {
+  value: true
+});
+
+var $mIWh$export$makeTestRunId = function (versionId, testId) {
+  return versionId + ":" + testId;
+};
+
+$mIWh$exports.makeTestRunId = $mIWh$export$makeTestRunId;
+
+var $mIWh$export$unpackTestRunId = function (testRunId) {
+  var parts = testRunId.split(':');
+  return {
+    versionId: parts[0],
+    testId: parts[1]
+  };
+};
+
+$mIWh$exports.unpackTestRunId = $mIWh$export$unpackTestRunId;
+
+var $mIWh$var$sortVersionIds = function sortVersionIds(a, b) {
+  if (a === 'current' || a > b) {
+    return -1;
+  } else if (a < b) {
+    return 1;
+  } else {
+    return 0;
+  }
+};
+
+var $mIWh$export$createState = function (versionIds) {
+  var tests = $cibo$export$availableTests();
+  var versions = versionIds.sort($mIWh$var$sortVersionIds).map(function (id, i) {
+    return {
+      id: id,
+      selected: i < 2
+    };
+  });
+  return {
+    versions: versions,
+    tests: tests,
+    options: {
+      maxTime: 0.2
+    },
+    results: {},
+    processing: new Set(),
+    stats: {}
+  };
+};
+
+$mIWh$exports.createState = $mIWh$export$createState;
+
+var $mIWh$export$getSelectedTests = function (state) {
+  return {
+    tests: state.tests.filter(function (t) {
+      return t.selected;
+    }).map(function (t) {
+      return t.id;
+    }),
+    versions: state.versions.filter(function (t) {
+      return t.selected;
+    }).map(function (t) {
+      return t.id;
+    })
+  };
+};
+
+$mIWh$exports.getSelectedTests = $mIWh$export$getSelectedTests;
+
+var $mIWh$export$countAllTests = function (state) {
+  return state.tests.length * state.versions.length;
+};
+
+$mIWh$exports.countAllTests = $mIWh$export$countAllTests;
+
+var $mIWh$export$countSelectedTests = function (state) {
+  var _a = $mIWh$export$getSelectedTests(state),
+      tests = _a.tests,
+      versions = _a.versions;
+
+  return tests.length * versions.length;
+};
+
+$mIWh$exports.countSelectedTests = $mIWh$export$countSelectedTests;
+
+var $mIWh$export$hasSelectedTests = function (state) {
+  return $mIWh$export$countSelectedTests(state) > 0;
+};
+
+$mIWh$exports.hasSelectedTests = $mIWh$export$hasSelectedTests;
 
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation. All rights reserved.
@@ -231,228 +527,6 @@ function $vCxL$export$__await(v) {
 }
 
 ;
-// ASSET: generator.ts
-var $L0ny$exports = {};
-Object.defineProperty($L0ny$exports, "__esModule", {
-  value: true
-});
-var $L0ny$var$alphabet = 'abcdefghijklmnopqrstuvwxyz';
-
-var $L0ny$export$createArray = function (num) {
-  var res = [];
-
-  for (var i = 0; i < num; i++) {
-    res.push(i);
-  }
-
-  return res;
-};
-
-$L0ny$exports.createArray = $L0ny$export$createArray;
-
-var $L0ny$export$createRange = function (num) {
-  return $L0ny$export$createArray(num).map(function (_) {
-    return Math.floor(Math.random() * num);
-  });
-};
-
-$L0ny$exports.createRange = $L0ny$export$createRange;
-
-var $L0ny$export$repeat = function (times, f) {
-  return $L0ny$export$createArray(times).map(f);
-};
-
-$L0ny$exports.repeat = $L0ny$export$repeat;
-
-var $L0ny$export$createRanges = function (values) {
-  return values.map($L0ny$export$createRange);
-};
-
-$L0ny$exports.createRanges = $L0ny$export$createRanges;
-
-var $L0ny$export$createWord = function (num) {
-  var w = '';
-
-  for (var i = 0; i < num; i++) {
-    w += $L0ny$var$alphabet[Math.floor($L0ny$var$alphabet.length * Math.random())];
-  }
-
-  return w;
-};
-
-$L0ny$exports.createWord = $L0ny$export$createWord;
-
-var $L0ny$export$createRandomWord = function (min, max) {
-  var length = min + Math.round((max - min) * Math.random());
-  return $L0ny$export$createWord(length);
-};
-
-$L0ny$exports.createRandomWord = $L0ny$export$createRandomWord;
-
-var $L0ny$export$createWords = function (num, min, max) {
-  return $L0ny$export$createArray(num).map(function (_) {
-    return $L0ny$export$createRandomWord(min, max);
-  }).join(' ');
-};
-
-$L0ny$exports.createWords = $L0ny$export$createWords;
-
-var $L0ny$export$createDeep = function () {
-  return {
-    id: $L0ny$export$createWord(8),
-    name: $L0ny$export$createRandomWord(4, 12),
-    address: {
-      line1: $L0ny$export$createWords(3, 4, 6),
-      line2: $L0ny$export$createWords(2, 4, 6)
-    },
-    paragraph: $L0ny$export$createWords(30, 1, 8)
-  };
-};
-
-$L0ny$exports.createDeep = $L0ny$export$createDeep;
-// ASSET: tests.ts
-var $cibo$exports = {};
-Object.defineProperty($cibo$exports, "__esModule", {
-  value: true
-});
-var $cibo$export$tests = [{
-  id: 'render-list-50',
-  name: 'Render List (50)',
-  fn: 'renderListElements',
-  args: $L0ny$export$createRange(50)
-}, {
-  id: 'render-list-500',
-  name: 'Render List (500)',
-  fn: 'renderListElements',
-  args: $L0ny$export$createRange(500)
-}, {
-  id: 'render-destroy-list-500',
-  name: 'Render List & Destroy (500)',
-  fn: 'renderListElementsAndDestroy',
-  args: $L0ny$export$createRange(500)
-}, {
-  id: 'render-update-list',
-  name: 'Render List & Update',
-  fn: 'renderListAndUpdate',
-  args: $L0ny$export$createRanges([200, 100, 50, 20, 0, 20, 50, 100, 200])
-}, {
-  id: 'render-update-deep',
-  name: 'Render Deep & Update',
-  fn: 'renderDeepAndUpdate',
-  args: $L0ny$export$repeat(50, $L0ny$export$createDeep)
-}];
-$cibo$exports.tests = $cibo$export$tests;
-
-var $cibo$export$availableTests = function () {
-  return $cibo$export$tests.map(function (test) {
-    return {
-      id: test.id,
-      name: test.name
-    };
-  });
-};
-
-$cibo$exports.availableTests = $cibo$export$availableTests;
-// ASSET: state.ts
-var $mIWh$exports = {};
-Object.defineProperty($mIWh$exports, "__esModule", {
-  value: true
-});
-
-var $mIWh$export$makeTestRunId = function (versionId, testId) {
-  return versionId + ":" + testId;
-};
-
-$mIWh$exports.makeTestRunId = $mIWh$export$makeTestRunId;
-
-var $mIWh$export$unpackTestRunId = function (testRunId) {
-  var parts = testRunId.split(':');
-  return {
-    versionId: parts[0],
-    testId: parts[1]
-  };
-};
-
-$mIWh$exports.unpackTestRunId = $mIWh$export$unpackTestRunId;
-
-var $mIWh$var$sortVersionIds = function sortVersionIds(a, b) {
-  if (a === 'current' || a > b) {
-    return -1;
-  } else if (a < b) {
-    return 1;
-  } else {
-    return 0;
-  }
-};
-
-var $mIWh$var$sortVersion = function sortVersion(a, b) {
-  return $mIWh$var$sortVersionIds(a.id, b.id);
-};
-
-var $mIWh$export$createState = function (versionIds) {
-  var tests = $cibo$export$availableTests().map(function (test) {
-    return $vCxL$export$__assign($vCxL$export$__assign({}, test), {
-      selected: true
-    });
-  });
-  var versions = versionIds.map(function (id) {
-    return {
-      id: id,
-      selected: true
-    };
-  }).sort($mIWh$var$sortVersion);
-  return {
-    versions: versions,
-    tests: tests,
-    options: {
-      maxTime: 2
-    },
-    results: {},
-    processing: new Set(),
-    stats: {}
-  };
-};
-
-$mIWh$exports.createState = $mIWh$export$createState;
-
-var $mIWh$export$getSelectedTests = function (state) {
-  return {
-    tests: state.tests.filter(function (t) {
-      return t.selected;
-    }).map(function (t) {
-      return t.id;
-    }),
-    versions: state.versions.filter(function (t) {
-      return t.selected;
-    }).map(function (t) {
-      return t.id;
-    })
-  };
-};
-
-$mIWh$exports.getSelectedTests = $mIWh$export$getSelectedTests;
-
-var $mIWh$export$countAllTests = function (state) {
-  return state.tests.length * state.versions.length;
-};
-
-$mIWh$exports.countAllTests = $mIWh$export$countAllTests;
-
-var $mIWh$export$countSelectedTests = function (state) {
-  var _a = $mIWh$export$getSelectedTests(state),
-      tests = _a.tests,
-      versions = _a.versions;
-
-  return tests.length * versions.length;
-};
-
-$mIWh$exports.countSelectedTests = $mIWh$export$countSelectedTests;
-
-var $mIWh$export$hasSelectedTests = function (state) {
-  return $mIWh$export$countSelectedTests(state) > 0;
-};
-
-$mIWh$exports.hasSelectedTests = $mIWh$export$hasSelectedTests;
 // ASSET: config.ts
 var $C9JJ$exports = {};
 Object.defineProperty($C9JJ$exports, "__esModule", {
@@ -566,17 +640,25 @@ var $pSX2$export$reducer = function (state, action) {
 
     case 'UpdateResult':
       var runnerId = action.runnerId,
+          testId = action.testId,
           result = action.target;
-      var id = $mIWh$export$makeTestRunId(runnerId, result.id);
-      var results2 = $vCxL$export$__assign($vCxL$export$__assign({}, state.results), (_a = {}, _a[id] = result, _a));
-      var stats = $pSX2$var$calculateMinMax(results2, state.tests);
       var processing2 = new Set(state.processing);
+      var id = $mIWh$export$makeTestRunId(runnerId, testId);
       processing2.delete(id);
-      return $vCxL$export$__assign($vCxL$export$__assign({}, state), {
-        results: results2,
-        processing: processing2,
-        stats: $vCxL$export$__assign($vCxL$export$__assign({}, state.stats), stats)
-      });
+
+      if (result) {
+        var results2 = $vCxL$export$__assign($vCxL$export$__assign({}, state.results), (_a = {}, _a[id] = result, _a));
+        var stats = $pSX2$var$calculateMinMax(results2, state.tests);
+        return $vCxL$export$__assign($vCxL$export$__assign({}, state), {
+          results: results2,
+          processing: processing2,
+          stats: $vCxL$export$__assign($vCxL$export$__assign({}, state.stats), stats)
+        });
+      } else {
+        return $vCxL$export$__assign($vCxL$export$__assign({}, state), {
+          processing: processing2
+        });
+      }
 
     default:
       throw "unhandled case " + action;
@@ -1532,10 +1614,11 @@ var $FLek$export$Action = {
       kind: 'TestsExecuted'
     };
   },
-  updateResult: function updateResult(runnerId, target) {
+  updateResult: function updateResult(runnerId, testId, target) {
     return {
       kind: 'UpdateResult',
       runnerId: runnerId,
+      testId: testId,
       target: target
     };
   }
@@ -3044,7 +3127,12 @@ var $MWVc$var$makeSuite = function makeSuite(runnerId, testDescriptions, options
             suite = new Benchmark.Suite();
 
             _loop_1 = function _loop_1(test) {
-              if (!mod[test.fn]) return "continue";
+              if (!mod[test.fn]) {
+                console.log("skip (no implementation): " + runnerId + ": " + test.id);
+                dispatch(runnerId, test.id, undefined);
+                return "continue";
+              }
+
               suite.add({
                 id: test.id,
                 async: true,
@@ -3065,8 +3153,8 @@ var $MWVc$var$makeSuite = function makeSuite(runnerId, testDescriptions, options
             }
 
             suite.on('cycle', function (event) {
-              console.log(runnerId + ': ' + String(event.target));
-              dispatch(runnerId, event.target);
+              console.log(runnerId + ": " + String(event.target));
+              dispatch(runnerId, event.target.id, event.target);
             });
             suite.on('complete', resolve);
             suite.run({
@@ -3138,8 +3226,8 @@ var $GrqS$export$middleware = function (app) {
           return set_1.has(test.id);
         });
         setTimeout(function () {
-          $MWVc$export$runTests(versionIds_1, testsToRun_1, options_1, function (runnerId, target) {
-            app.store.process($FLek$export$Action.updateResult(runnerId, target));
+          $MWVc$export$runTests(versionIds_1, testsToRun_1, options_1, function (runnerId, testId, target) {
+            app.store.process($FLek$export$Action.updateResult(runnerId, testId, target));
           }).then(function () {
             return app.store.process($FLek$export$Action.testsExecuted());
           });

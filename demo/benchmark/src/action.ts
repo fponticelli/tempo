@@ -31,7 +31,8 @@ export interface ToggleTest {
 export interface UpdateResult {
   kind: 'UpdateResult'
   runnerId: string
-  target: TestResult
+  testId: string
+  target: TestResult | undefined
 }
 
 export interface ExecuteTests {
@@ -68,5 +69,6 @@ export const Action = {
   executeTests: (versionIds: string[], testIds: string[]): Action => ({ kind: 'ExecuteTests', versionIds, testIds }),
   executeSelectedTests: (): Action => ({ kind: 'ExecuteSelectedTests' }),
   testsExecuted: (): Action => ({ kind: 'TestsExecuted' }),
-  updateResult: (runnerId: string, target: TestResult): Action => ({ kind: 'UpdateResult', runnerId, target })
+  updateResult: (runnerId: string, testId: string, target: TestResult | undefined): Action =>
+    ({ kind: 'UpdateResult', runnerId, testId, target })
 }

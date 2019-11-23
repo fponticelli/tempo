@@ -959,7 +959,67 @@ var DOMContext = /** @class */ (function () {
 }());
 exports.DOMContext = DOMContext;
 
-},{}],"ZCfc":[function(require,module,exports) {
+},{}],"izmn":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var html_1 = require("@tempo/dom/lib/html");
+
+exports.attribute = html_1.div({
+  attrs: {
+    id: function id(s) {
+      return s.id;
+    },
+    className: function className(s) {
+      return s.className;
+    },
+    title: function title(s) {
+      return s.title;
+    }
+  }
+}, 'content');
+},{"@tempo/dom/lib/html":"YzxN"}],"qnhq":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var html_1 = require("@tempo/dom/lib/html");
+
+exports.style = html_1.div({
+  styles: {
+    backgroundColor: function backgroundColor(s) {
+      return s.backgroundColor;
+    },
+    color: function color(s) {
+      return s.color;
+    },
+    border: function border(s) {
+      return s.border;
+    }
+  }
+}, 'content');
+},{"@tempo/dom/lib/html":"YzxN"}],"jpZy":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var html_1 = require("@tempo/dom/lib/html");
+
+exports.event = html_1.button({
+  events: {
+    click: function click(state) {
+      return state;
+    }
+  }
+}, 'click me');
+},{"@tempo/dom/lib/html":"YzxN"}],"ZCfc":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -971,6 +1031,12 @@ var list_1 = require("./template/list");
 var deep_1 = require("./template/deep");
 
 var context_1 = require("@tempo/dom/lib/context");
+
+var attribute_1 = require("./template/attribute");
+
+var styles_1 = require("./template/styles");
+
+var events_1 = require("./template/events");
 
 var ctx = context_1.DOMContext.fromElement(document.getElementById('test'), function () {});
 
@@ -992,12 +1058,41 @@ exports.renderListElementsAndDestroy = function (numbers) {
   view.destroy();
 };
 
-exports.renderDeepAndUpdate = function (deeps) {
-  var view = deep_1.deep.render(ctx, deeps[0]);
+exports.renderDeepAndUpdate = function (values) {
+  var view = deep_1.deep.render(ctx, values[0]);
 
-  for (var _i = 0, deeps_1 = deeps; _i < deeps_1.length; _i++) {
-    var d = deeps_1[_i];
-    view.change(d);
+  for (var _i = 0, values_1 = values; _i < values_1.length; _i++) {
+    var v = values_1[_i];
+    view.change(v);
+  }
+};
+
+exports.updateAttributes = function (values) {
+  var view = attribute_1.attribute.render(ctx, values[0]);
+
+  for (var _i = 0, values_2 = values; _i < values_2.length; _i++) {
+    var v = values_2[_i];
+    view.change(v);
+  }
+};
+
+exports.updateStyles = function (values) {
+  var view = styles_1.style.render(ctx, values[0]);
+
+  for (var _i = 0, values_3 = values; _i < values_3.length; _i++) {
+    var v = values_3[_i];
+    view.change(v);
+  }
+};
+
+exports.updateAndTriggerEvents = function (values) {
+  var view = events_1.event.render(ctx, values[0]);
+  var el = document.getElementById('test').firstElementChild;
+
+  for (var _i = 0, values_4 = values; _i < values_4.length; _i++) {
+    var v = values_4[_i];
+    el.click();
+    view.change(v);
   }
 };
 
@@ -1006,7 +1101,10 @@ anyWin.__tests__ = {
   renderListElements: exports.renderListElements,
   renderListAndUpdate: exports.renderListAndUpdate,
   renderListElementsAndDestroy: exports.renderListElementsAndDestroy,
-  renderDeepAndUpdate: exports.renderDeepAndUpdate
+  renderDeepAndUpdate: exports.renderDeepAndUpdate,
+  updateAttributes: exports.updateAttributes,
+  updateStyles: exports.updateStyles,
+  updateAndTriggerEvents: exports.updateAndTriggerEvents
 };
-},{"./template/list":"dozB","./template/deep":"JKII","@tempo/dom/lib/context":"TsAd"}]},{},["ZCfc"], null)
+},{"./template/list":"dozB","./template/deep":"JKII","@tempo/dom/lib/context":"TsAd","./template/attribute":"izmn","./template/styles":"qnhq","./template/events":"jpZy"}]},{},["ZCfc"], null)
 //# sourceMappingURL=main.js.map

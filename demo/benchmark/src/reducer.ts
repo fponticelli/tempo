@@ -11,7 +11,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { State, TestInfoWithSelected, makeTestRunId, unpackTestRunId } from './state'
+import { State, TestInfo, makeTestRunId, unpackTestRunId } from './state'
 import { Action } from './action'
 
 export const reducer = (state: State, action: Action): State => {
@@ -67,22 +67,29 @@ export const reducer = (state: State, action: Action): State => {
     case 'TestsExecuted':
       return state
     case 'UpdateResult':
-      const { runnerId, target: result } = action
-      const id = makeTestRunId(runnerId, result.id)
-      const results2 = {
-        ...state.results,
-        [id]: result
-      }
-      const stats = calculateMinMax(results2, state.tests)
+      const { runnerId, testId, target: result } = action
       const processing2 = new Set(state.processing)
+      const id = makeTestRunId(runnerId, testId)
       processing2.delete(id)
-      return {
-        ...state,
-        results: results2,
-        processing: processing2,
-        stats: {
-          ...state.stats,
-          ...stats
+      if (result) {
+        const results2 = {
+          ...state.results,
+          [id]: result
+        }
+        const stats = calculateMinMax(results2, state.tests)
+        return {
+          ...state,
+          results: results2,
+          processing: processing2,
+          stats: {
+            ...state.stats,
+            ...stats
+          }
+        }
+      } else {
+        return {
+          ...state,
+          processing: processing2
         }
       }
     default:
@@ -90,7 +97,7 @@ export const reducer = (state: State, action: Action): State => {
   }
 }
 
-const calculateMinMaxForTest = (results: Record<string, TestResult>, test: TestInfoWithSelected) => {
+const calculateMinMaxForTest = (results: Record<string, TestResult>, test: TestInfo) => {
   let count = 0
   let min = Infinity
   let max = -Infinity
@@ -114,7 +121,7 @@ const calculateMinMaxForTest = (results: Record<string, TestResult>, test: TestI
 
 const calculateMinMax = (
   results: Record<string, TestResult>,
-  tests: TestInfoWithSelected[]
+  tests: TestInfo[]
 ): Record<string, { min: number, max: number }> => {
   return tests.reduce((acc, test) => {
     const stats = calculateMinMaxForTest(results, test)

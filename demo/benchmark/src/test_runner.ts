@@ -37,14 +37,18 @@ const makeSuite = (
   runnerId: string,
   testDescriptions: TestDescription[],
   options: TestOptions,
-  dispatch: (runnerId: string, target: TestResult) => void
+  dispatch: (runnerId: string, testId: string, target: TestResult | undefined) => void
 ) =>
   new Promise<Record<string, TestResult>>(async resolve => {
     const mod = await loadScript(runnerId)
     const suite = new Benchmark.Suite()
 
     for (const test of testDescriptions) {
-      if (!mod[test.fn]) continue
+      if (!mod[test.fn]) {
+        console.log(`skip (no implementation): ${runnerId}: ${test.id}`)
+        dispatch(runnerId, test.id, undefined)
+        continue
+      }
 
       suite.add({
         id: test.id,
@@ -58,8 +62,8 @@ const makeSuite = (
     }
 
     suite.on('cycle', function(event: { target: TestResult }) {
-      console.log(runnerId + ': ' + String(event.target))
-      dispatch(runnerId, event.target)
+      console.log(`${runnerId}: ${String(event.target)}`)
+      dispatch(runnerId, event.target.id, event.target)
     })
 
     suite.on('complete', resolve)
@@ -71,7 +75,7 @@ export const runTests = async (
   runnerIds: string[],
   testDescriptions: TestDescription[],
   options: TestOptions,
-  dispatch: (runnerId: string, target: TestResult) => void
+  dispatch: (runnerId: string, testId: string, target: TestResult | undefined) => void
 ) => {
   for (const id of runnerIds) {
     await makeSuite(id, testDescriptions, options, dispatch)

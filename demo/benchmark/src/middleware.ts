@@ -34,8 +34,8 @@ export const middleware = (app: TempoView<State, Action>) => (state: State, acti
           versionIds,
           testsToRun,
           options,
-          (runnerId: string, target: TestResult) => {
-            app.store.process(Action.updateResult(runnerId, target))
+          (runnerId: string, testId: string, target: TestResult | undefined) => {
+            app.store.process(Action.updateResult(runnerId, testId, target))
           }
         ).then(() => app.store.process(Action.testsExecuted()))
       }, 1)
