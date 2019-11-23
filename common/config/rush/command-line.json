@@ -27,9 +27,23 @@
       "ignoreMissingScript": true
     }, {
       "commandKind": "bulk",
+      "name": "tslint-fix",
+      "summary": "Run `tslint-fix` on each project.",
+      "description": "Run `tslint-fix` on each project.",
+      "enableParallelism": true,
+      "ignoreMissingScript": true
+    }, {
+      "commandKind": "bulk",
       "name": "prettier",
       "summary": "Run `prettier` on each project.",
       "description": "Run `prettier` on each project.",
+      "enableParallelism": true,
+      "ignoreMissingScript": true
+    }, {
+      "commandKind": "bulk",
+      "name": "prettier-fix",
+      "summary": "Run `prettier-fix` on each project.",
+      "description": "Run `prettier-fix` on each project.",
       "enableParallelism": true,
       "ignoreMissingScript": true
     }

@@ -24,8 +24,7 @@ export const removeNode = (node: Node) => {
   if (el && el.onblur) {
     el.onblur = null
   }
-  if (!node || node.ownerDocument === undefined)
-    return
+  if (!node || node.ownerDocument === undefined) return
   if (node.parentElement) {
     node.parentElement.removeChild(node)
   }
