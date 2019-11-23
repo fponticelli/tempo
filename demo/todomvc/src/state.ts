@@ -20,11 +20,11 @@ export enum Filter {
 }
 
 export interface State {
-  adding?: string
-  editing?: TodoEdit
   filter: Filter
   todos: Todo[]
   completed: number
+  adding?: string
+  editing?: TodoEdit
 }
 
 export interface TodoEdit {
@@ -42,4 +42,12 @@ export const createTodo = (title: string): Todo => ({
   id: Utils.uuid(),
   title,
   completed: false
+})
+
+export const emptyState = (): State => ({
+  filter: Filter.All,
+  todos: [],
+  completed: 0,
+  adding: undefined,
+  editing: undefined
 })

@@ -406,11 +406,11 @@ var set_attribute_1 = require("./set_attribute");
 var text_1 = require("../text");
 exports.removeNode = function (node) {
     var el = node;
-    if (!node || node.ownerDocument === undefined)
-        return;
     if (el && el.onblur) {
         el.onblur = null;
     }
+    if (!node || node.ownerDocument === undefined)
+        return;
     if (node.parentElement) {
         node.parentElement.removeChild(node);
     }
@@ -443,13 +443,15 @@ exports.processAttribute = function (el, name, value, acc) {
     return acc;
 };
 exports.processEvent = function (el, name, value, dispatch, acc) {
+    name = "on" + name.toLowerCase();
     var localState;
-    el.addEventListener(name.toLowerCase(), function (ev) {
+    var anyEl = el;
+    anyEl[name] = function (ev) {
         var r = value(localState, ev, el);
         if (r !== undefined) {
             dispatch(r);
         }
-    }, false);
+    };
     var f = function (state) {
         localState = state;
     };

@@ -82,9 +82,9 @@ export type Action =
 
 export const Action = {
   adddingTodo: (title: string): Action => new AddingTodo(title),
-  addTodo: (title: string): Action => new CreateTodo(title),
-  cancelAddTodo: new CancelAddingTodo() as Action,
-  cancelUpdateTodo: new CancelEditingTodo() as Action,
+  createTodo: (title: string): Action => new CreateTodo(title),
+  cancelAddingTodo: new CancelAddingTodo() as Action,
+  cancelEditingTodo: new CancelEditingTodo() as Action,
   clearCompleted: new ClearCompleted() as Action,
   editingTodo: (id: string, title: string): Action => new EditingTodo(id, title),
   removeTodo: (id: string): Action => new RemoveTodo(id),

@@ -21,11 +21,11 @@ import { text } from '../text'
 
 export const removeNode = (node: Node) => {
   const el = node as HTMLElement
-  if (!node || node.ownerDocument === undefined)
-    return
   if (el && el.onblur) {
     el.onblur = null
   }
+  if (!node || node.ownerDocument === undefined)
+    return
   if (node.parentElement) {
     node.parentElement.removeChild(node)
   }
@@ -74,17 +74,16 @@ export const processEvent = <State, El extends Element, Ev extends Event, Action
   dispatch: (action: Action) => void,
   acc: Acc<State>
 ): Acc<State> => {
+  name = `on${name.toLowerCase()}`
   let localState: State
-  el.addEventListener(
-    name.toLowerCase(),
-    ev => {
-      const r = value(localState, ev as Ev, el)
-      if (r !== undefined) {
-        dispatch(r)
-      }
-    },
-    false
-  )
+  const anyEl = el as any
+  anyEl[name] = (ev: Ev) => {
+    const r = value(localState, ev as Ev, el)
+    if (r !== undefined) {
+      dispatch(r)
+    }
+  }
+
   const f = (state: State) => {
     localState = state
   }

@@ -13,20 +13,25 @@ limitations under the License.
 
 import { Tempo } from '@tempo/dom/lib/tempo'
 import { Store } from '@tempo/store/lib/store'
-import { debounce } from '@tempo/store/lib/emitter'
-import { DataStore } from './data_store'
+import { strictEqual as equal } from '@tempo/store/lib/equality'
+// import { debounce } from '@tempo/store/lib/emitter'
+// import { DataStore } from './data_store'
 import { reducer } from './reducer'
 import { template } from './app_template'
-import { State } from './state'
+import { emptyState } from './state'
 
-const state = DataStore.get()
+// const state = DataStore.get()
 
-const store = Store.ofState({ state, reducer })
+const store = Store.ofState({
+  state: emptyState(),
+  reducer,
+  equal
+})
 
-const saveToDataStore = debounce(250)((state: State) => DataStore.set(state))
+// const saveToDataStore = debounce(250)((state: State) => DataStore.set(state))
 
-store.property.observable.on(saveToDataStore)
+// store.property.observable.on(saveToDataStore)
 
-// store.observable.on((_, action) => console.log(action))
+// store.observable.on(console.log)
 
 Tempo.render({ store, template })

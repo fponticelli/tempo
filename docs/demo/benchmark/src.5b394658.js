@@ -1062,11 +1062,12 @@ Object.defineProperty($KfbX$exports, "__esModule", {
 
 var $KfbX$export$removeNode = function (node) {
   var el = node;
-  if (!node || node.ownerDocument === undefined) return;
 
   if (el && el.onblur) {
     el.onblur = null;
   }
+
+  if (!node || node.ownerDocument === undefined) return;
 
   if (node.parentElement) {
     node.parentElement.removeChild(node);
@@ -1120,14 +1121,17 @@ var $KfbX$export$processAttribute = function (el, name, value, acc) {
 $KfbX$exports.processAttribute = $KfbX$export$processAttribute;
 
 var $KfbX$export$processEvent = function (el, name, value, dispatch, acc) {
+  name = "on" + name.toLowerCase();
   var localState;
-  el.addEventListener(name.toLowerCase(), function (ev) {
+  var anyEl = el;
+
+  anyEl[name] = function (ev) {
     var r = value(localState, ev, el);
 
     if (r !== undefined) {
       dispatch(r);
     }
-  }, false);
+  };
 
   var f = function (state) {
     localState = state;
