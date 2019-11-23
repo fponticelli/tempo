@@ -72,16 +72,12 @@ export const processEvent = <State, El extends Element, Ev extends Event, Action
   dispatch: (action: Action) => void,
   acc: Acc<State>
 ): Acc<State> => {
-  const anyEl = el as any
-  name = 'on' + name.toLowerCase()
-  const f = (state: State) => {
-    anyEl[name] = (ev: Ev) => {
-      const r = value(state, ev, el)
-      if (r != null) {
-        dispatch(r)
-      }
-    }
-  }
+  let localState: State
+  el.addEventListener(name.toLowerCase(), (ev) => {
+    const r = value(localState, ev as Ev, el)
+    if (r !== undefined) { dispatch(r) }
+  }, false)
+  const f = (state: State) => { localState = state }
   acc.push(f)
   return acc
 }

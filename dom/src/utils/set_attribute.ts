@@ -16,10 +16,7 @@ export const setOneStyle = (el: Element, name: string, value: any) => {
   if (value == null) {
     anyStyle[name] = null
   } else {
-    const s = String(value)
-    if (s !== anyStyle[name]) {
-      anyStyle[name] = String(value)
-    }
+    anyStyle[name] = value
   }
 }
 
@@ -33,9 +30,9 @@ export const setAttribute = (el: Element, name: string, value: any) => {
 
 export const setProperty = (el: Element, name: string, value: any) => {
   const anyEl = el as any
-  if (value == null && anyEl[name] != null) {
+  if (value == null) {
     anyEl[name] = null
-  } else if (anyEl[name] !== value) {
+  } else {
     anyEl[name] = value
   }
 }
@@ -48,9 +45,7 @@ export const setStyleAttribute = (el: Element, name: string, value: any) => {
     setAttribute(el, name, value)
   } else {
     const s = Object.keys(value)
-      .map(k => {
-        return `${k}: ${(value as any)[k]!};`
-      })
+      .map(k => `${k}: ${(value as any)[k]!};`)
       .join(' ')
     setAttribute(el, name, (s.length && s) || (null as any))
   }
@@ -62,9 +57,7 @@ export const setBoolProperty = (el: Element, name: string, value: any) => {
     anyEl[name] = null
   } else {
     const bool = value === true || value === 'true'
-    if (anyEl[name] !== bool) {
-      anyEl[name] = bool
-    }
+    anyEl[name] = bool
   }
 }
 

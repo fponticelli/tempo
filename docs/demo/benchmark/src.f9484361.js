@@ -336,14 +336,14 @@ var $mIWh$export$createState = function (versionIds) {
   var versions = versionIds.sort($mIWh$var$sortVersionIds).map(function (id, i) {
     return {
       id: id,
-      selected: i < 2
+      selected: i < 2 || i === versionIds.length - 1
     };
   });
   return {
     versions: versions,
     tests: tests,
     options: {
-      maxTime: 0.2
+      maxTime: 2
     },
     results: {},
     processing: new Set(),
@@ -768,11 +768,7 @@ var $AxMU$export$setOneStyle = function (el, name, value) {
   if (value == null) {
     anyStyle[name] = null;
   } else {
-    var s = String(value);
-
-    if (s !== anyStyle[name]) {
-      anyStyle[name] = String(value);
-    }
+    anyStyle[name] = value;
   }
 };
 
@@ -791,9 +787,9 @@ $AxMU$exports.setAttribute = $AxMU$export$setAttribute;
 var $AxMU$export$setProperty = function (el, name, value) {
   var anyEl = el;
 
-  if (value == null && anyEl[name] != null) {
+  if (value == null) {
     anyEl[name] = null;
-  } else if (anyEl[name] !== value) {
+  } else {
     anyEl[name] = value;
   }
 };
@@ -824,10 +820,7 @@ var $AxMU$export$setBoolProperty = function (el, name, value) {
     anyEl[name] = null;
   } else {
     var bool = value === true || value === 'true';
-
-    if (anyEl[name] !== bool) {
-      anyEl[name] = bool;
-    }
+    anyEl[name] = bool;
   }
 };
 
@@ -1126,17 +1119,17 @@ var $KfbX$export$processAttribute = function (el, name, value, acc) {
 $KfbX$exports.processAttribute = $KfbX$export$processAttribute;
 
 var $KfbX$export$processEvent = function (el, name, value, dispatch, acc) {
-  var anyEl = el;
-  name = 'on' + name.toLowerCase();
+  var localState;
+  el.addEventListener(name.toLowerCase(), function (ev) {
+    var r = value(localState, ev, el);
+
+    if (r !== undefined) {
+      dispatch(r);
+    }
+  }, false);
 
   var f = function (state) {
-    anyEl[name] = function (ev) {
-      var r = value(state, ev, el);
-
-      if (r != null) {
-        dispatch(r);
-      }
-    };
+    localState = state;
   };
 
   acc.push(f);

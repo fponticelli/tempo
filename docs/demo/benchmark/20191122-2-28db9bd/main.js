@@ -138,7 +138,10 @@ exports.setOneStyle = function (el, name, value) {
         anyStyle[name] = null;
     }
     else {
-        anyStyle[name] = value;
+        var s = String(value);
+        if (s !== anyStyle[name]) {
+            anyStyle[name] = String(value);
+        }
     }
 };
 exports.setAttribute = function (el, name, value) {
@@ -151,10 +154,10 @@ exports.setAttribute = function (el, name, value) {
 };
 exports.setProperty = function (el, name, value) {
     var anyEl = el;
-    if (value == null) {
+    if (value == null && anyEl[name] != null) {
         anyEl[name] = null;
     }
-    else {
+    else if (anyEl[name] !== value) {
         anyEl[name] = value;
     }
 };
@@ -168,7 +171,9 @@ exports.setStyleAttribute = function (el, name, value) {
     }
     else {
         var s = Object.keys(value)
-            .map(function (k) { return k + ": " + value[k] + ";"; })
+            .map(function (k) {
+            return k + ": " + value[k] + ";";
+        })
             .join(' ');
         exports.setAttribute(el, name, (s.length && s) || null);
     }
@@ -180,7 +185,9 @@ exports.setBoolProperty = function (el, name, value) {
     }
     else {
         var bool = value === true || value === 'true';
-        anyEl[name] = bool;
+        if (anyEl[name] !== bool) {
+            anyEl[name] = bool;
+        }
     }
 };
 exports.setEnumBoolAttribute = function (el, name, value) {
@@ -441,14 +448,16 @@ exports.processAttribute = function (el, name, value, acc) {
     return acc;
 };
 exports.processEvent = function (el, name, value, dispatch, acc) {
-    var localState;
-    el.addEventListener(name.toLowerCase(), function (ev) {
-        var r = value(localState, ev, el);
-        if (r !== undefined) {
-            dispatch(r);
-        }
-    }, false);
-    var f = function (state) { localState = state; };
+    var anyEl = el;
+    name = 'on' + name.toLowerCase();
+    var f = function (state) {
+        anyEl[name] = function (ev) {
+            var r = value(state, ev, el);
+            if (r != null) {
+                dispatch(r);
+            }
+        };
+    };
     acc.push(f);
     return acc;
 };

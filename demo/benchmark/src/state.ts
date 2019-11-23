@@ -40,7 +40,7 @@ const sortVersionIds = (a: string, b: string) => {
 
 export const createState = (versionIds: string[]): State => {
   const tests = availableTests()
-  const versions = versionIds.sort(sortVersionIds).map((id, i) => ({ id, selected: i < 2 }))
+  const versions = versionIds.sort(sortVersionIds).map((id, i) => ({ id, selected: i < 2 || i === versionIds.length - 1 }))
   return {
     versions,
     tests,
