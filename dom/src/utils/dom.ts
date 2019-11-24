@@ -78,7 +78,7 @@ export const processEvent = <State, El extends Element, Ev extends Event, Action
   const anyEl = el as any
   anyEl[name] = (ev: Ev) => {
     const r = value(localState, ev as Ev, el)
-    if (r !== undefined) {
+    if (typeof r !== 'undefined') {
       dispatch(r)
     }
   }

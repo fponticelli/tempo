@@ -54,9 +54,10 @@ export module Tempo {
     template: DOMChild<State, Action>
     store: Store<State, Action>
     document?: Document
+    delayed?: boolean
   }): TempoView<State, Action> {
-    const { el, store, document, template } = options
-    const comp = component({ store }, template)
+    const { el, store, document, template, delayed } = options
+    const comp = component({ store, delayed }, template)
     return Tempo.renderComponent({ el, component: comp, document })
   }
 }

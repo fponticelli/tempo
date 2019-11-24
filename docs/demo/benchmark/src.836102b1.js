@@ -1128,7 +1128,7 @@ var $KfbX$export$processEvent = function (el, name, value, dispatch, acc) {
   anyEl[name] = function (ev) {
     var r = value(localState, ev, el);
 
-    if (r !== undefined) {
+    if (typeof r !== 'undefined') {
       dispatch(r);
     }
   };
@@ -1172,7 +1172,7 @@ var $Mmj0$var$applyChange = function (change, el, ctx) {
 };
 
 var $Mmj0$var$applyAfterRender = function (attr, el, ctx, state) {
-  if (attr != null) {
+  if (typeof attr !== undefined) {
     return attr(state, el, ctx);
   } else {
     return undefined;
@@ -1182,50 +1182,42 @@ var $Mmj0$var$applyAfterRender = function (attr, el, ctx, state) {
 var $Mmj0$var$DOMElement =
 /** @class */
 function () {
-  function DOMElement(createElement, attributes, children) {
+  function DOMElement(createElement, attrs, events, styles, afterrender, beforechange, afterchange, beforedestroy, children) {
     this.createElement = createElement;
-    this.attributes = attributes;
+    this.attrs = attrs;
+    this.events = events;
+    this.styles = styles;
+    this.afterrender = afterrender;
+    this.beforechange = beforechange;
+    this.afterchange = afterchange;
+    this.beforedestroy = beforedestroy;
     this.children = children;
   }
 
   DOMElement.prototype.render = function (ctx, state) {
+    var _this = this;
+
     var el = this.createElement(ctx.doc);
     var value = undefined;
-    var _a = this.attributes,
-        attrs = _a.attrs,
-        events = _a.events,
-        styles = _a.styles,
-        afterrender = _a.afterrender,
-        beforechange = _a.beforechange,
-        afterchange = _a.afterchange,
-        beforedestroy = _a.beforedestroy;
-
-    var beforedestroyf = beforedestroy && function () {
-      return beforedestroy(el, ctx, value);
-    };
-
     var allDynamics = [];
 
-    if (attrs) {
-      Object.keys(attrs).forEach(function (key) {
-        return $KfbX$export$processAttribute(el, key, attrs[key], allDynamics);
-      });
+    for (var _i = 0, _a = this.attrs; _i < _a.length; _i++) {
+      var o = _a[_i];
+      $KfbX$export$processAttribute(el, o.name, o.value, allDynamics);
     }
 
-    if (events) {
-      Object.keys(events).forEach(function (key) {
-        return $KfbX$export$processEvent(el, key, events[key], ctx.dispatch, allDynamics);
-      });
+    for (var _b = 0, _c = this.events; _b < _c.length; _b++) {
+      var o = _c[_b];
+      $KfbX$export$processEvent(el, o.name, o.value, ctx.dispatch, allDynamics);
     }
 
-    if (styles) {
-      Object.keys(styles).forEach(function (key) {
-        return $KfbX$export$processStyle(el, key, styles[key], allDynamics);
-      });
+    for (var _d = 0, _e = this.styles; _d < _e.length; _d++) {
+      var o = _e[_d];
+      $KfbX$export$processStyle(el, o.name, o.value, allDynamics);
     }
 
-    for (var _i = 0, allDynamics_1 = allDynamics; _i < allDynamics_1.length; _i++) {
-      var dy = allDynamics_1[_i];
+    for (var _f = 0, allDynamics_1 = allDynamics; _f < allDynamics_1.length; _f++) {
+      var dy = allDynamics_1[_f];
       dy(state);
     } // children
 
@@ -1240,8 +1232,8 @@ function () {
     });
     ctx.append(el);
 
-    if (afterrender) {
-      value = $Mmj0$var$applyAfterRender(afterrender, el, ctx, state);
+    if (this.afterrender) {
+      value = $Mmj0$var$applyAfterRender(this.afterrender, el, ctx, state);
     }
 
     var dynamicChildren = $KfbX$export$filterDynamics(views).map(function (child) {
@@ -1251,8 +1243,8 @@ function () {
     });
     allDynamics.push.apply(allDynamics, dynamicChildren);
 
-    if (beforechange) {
-      var change_1 = $Mmj0$var$applyChange(beforechange, el, ctx);
+    if (this.beforechange) {
+      var change_1 = $Mmj0$var$applyChange(this.beforechange, el, ctx);
 
       var update = function (state) {
         value = change_1(state, value);
@@ -1261,8 +1253,8 @@ function () {
       allDynamics.unshift(update);
     }
 
-    if (afterchange) {
-      var change_2 = $Mmj0$var$applyChange(afterchange, el, ctx);
+    if (this.afterchange) {
+      var change_2 = $Mmj0$var$applyChange(this.afterchange, el, ctx);
 
       var update = function (state) {
         value = change_2(state, value);
@@ -1270,6 +1262,10 @@ function () {
 
       allDynamics.push(update);
     }
+
+    var beforedestroyf = this.beforedestroy && function () {
+      return _this.beforedestroy(el, ctx, value);
+    };
 
     if (allDynamics.length > 0) {
       return new $TJFn$export$DOMDynamicNodeView(el, views, function (state) {
@@ -1289,6 +1285,33 @@ function () {
 var $Mmj0$export$DOMElement = $Mmj0$var$DOMElement;
 $Mmj0$exports.DOMElement = $Mmj0$export$DOMElement;
 
+var $Mmj0$var$extractAttrs = function (attrs) {
+  return Object.keys(attrs || {}).map(function (name) {
+    return {
+      name: name,
+      value: attrs[name]
+    };
+  });
+};
+
+var $Mmj0$var$extractEvents = function (attrs) {
+  return Object.keys(attrs || {}).map(function (name) {
+    return {
+      name: name,
+      value: attrs[name]
+    };
+  });
+};
+
+var $Mmj0$var$extractStyles = function (attrs) {
+  return Object.keys(attrs || {}).map(function (name) {
+    return {
+      name: name,
+      value: attrs[name]
+    };
+  });
+};
+
 var $Mmj0$var$makeCreateElement = function (name) {
   return function (doc) {
     return doc.createElement(name);
@@ -1302,7 +1325,7 @@ var $Mmj0$export$el = function (name, attributes) {
     children[_i - 2] = arguments[_i];
   }
 
-  return new $Mmj0$var$DOMElement($Mmj0$var$makeCreateElement(name), attributes, children.map($KfbX$export$domChildToTemplate));
+  return new $Mmj0$var$DOMElement($Mmj0$var$makeCreateElement(name), $Mmj0$var$extractAttrs(attributes.attrs), $Mmj0$var$extractEvents(attributes.events), $Mmj0$var$extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, children.map($KfbX$export$domChildToTemplate));
 };
 
 $Mmj0$exports.el = $Mmj0$export$el;
@@ -1315,7 +1338,7 @@ var $Mmj0$export$el2 = function (name) {
       children[_i - 1] = arguments[_i];
     }
 
-    return new $Mmj0$var$DOMElement($Mmj0$var$makeCreateElement(name), attributes, children.map($KfbX$export$domChildToTemplate));
+    return new $Mmj0$var$DOMElement($Mmj0$var$makeCreateElement(name), $Mmj0$var$extractAttrs(attributes.attrs), $Mmj0$var$extractEvents(attributes.events), $Mmj0$var$extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, children.map($KfbX$export$domChildToTemplate));
   };
 };
 
@@ -1339,7 +1362,7 @@ var $Mmj0$export$elNS = function (ns, name, attributes) {
   }
 
   var namespace = $Mmj0$export$defaultNamespaces[ns] || ns;
-  return new $Mmj0$var$DOMElement($Mmj0$var$makeCreateElementNS(namespace, name), attributes, children.map($KfbX$export$domChildToTemplate));
+  return new $Mmj0$var$DOMElement($Mmj0$var$makeCreateElementNS(namespace, name), $Mmj0$var$extractAttrs(attributes.attrs), $Mmj0$var$extractEvents(attributes.events), $Mmj0$var$extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, children.map($KfbX$export$domChildToTemplate));
 };
 
 $Mmj0$exports.elNS = $Mmj0$export$elNS;
@@ -1352,7 +1375,7 @@ var $Mmj0$export$elNS2 = function (namespace, name) {
       children[_i - 1] = arguments[_i];
     }
 
-    return new $Mmj0$var$DOMElement($Mmj0$var$makeCreateElementNS(namespace, name), attributes, children.map($KfbX$export$domChildToTemplate));
+    return new $Mmj0$var$DOMElement($Mmj0$var$makeCreateElementNS(namespace, name), $Mmj0$var$extractAttrs(attributes.attrs), $Mmj0$var$extractEvents(attributes.events), $Mmj0$var$extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, children.map($KfbX$export$domChildToTemplate));
   };
 };
 
@@ -1967,31 +1990,41 @@ function () {
 
     var currentViewLength = this.childrenView.length;
     var count = 0;
-    var value;
 
-    while ((value = this.repeatUntil(state, count)) !== undefined) {
+    var _loop_1 = function () {
+      var value = this_1.repeatUntil(state, count);
+      if (typeof value === 'undefined') return "break";
+
       if (count < currentViewLength) {
         // replace existing
-        for (var _i = 0, _a = $KfbX$export$filterDynamics(this.childrenView[count]); _i < _a.length; _i++) {
+        for (var _i = 0, _a = $KfbX$export$filterDynamics(this_1.childrenView[count]); _i < _a.length; _i++) {
           var v = _a[_i];
           v.change(value);
         }
       } else {
         // add node
-        this.childrenView.push(this.children.map(function (el) {
+        this_1.childrenView.push(this_1.children.map(function (el) {
           return el.render(_this.ctx, value);
         }));
       }
 
       count++;
+    };
+
+    var this_1 = this;
+
+    while (true) {
+      var state_1 = _loop_1();
+
+      if (state_1 === "break") break;
     }
 
     var i = count;
 
     while (i < currentViewLength) {
       // remove extra nodes
-      for (var _b = 0, _c = this.childrenView[i]; _b < _c.length; _b++) {
-        var c = _c[_b];
+      for (var _i = 0, _a = this.childrenView[i]; _i < _a.length; _i++) {
+        var c = _a[_i];
         c.destroy();
       }
 
@@ -2095,7 +2128,7 @@ function () {
     var _this = this;
 
     if (this.condition(value)) {
-      if (this.views == null) {
+      if (typeof this.views === 'undefined') {
         // it has never been rendered before
         this.views = this.children.map(function (c) {
           return c.render(_this.ctx, value);
@@ -2118,7 +2151,7 @@ function () {
   };
 
   DOMWhenView.prototype.destroyViews = function () {
-    if (this.views != null) {
+    if (typeof this.views !== 'undefined') {
       for (var _i = 0, _a = this.views; _i < _a.length; _i++) {
         var v = _a[_i];
         v.destroy();
@@ -3038,7 +3071,7 @@ function () {
     return new DOMContext(this.doc, this.append, this.parent, function (action) {
       var newAction = f(action);
 
-      if (newAction !== undefined) {
+      if (typeof newAction !== 'undefined') {
         _this.dispatch(newAction);
       }
     });
@@ -3112,9 +3145,11 @@ var $sCte$var$Tempo;
     var el = options.el,
         store = options.store,
         document = options.document,
-        template = options.template;
+        template = options.template,
+        delayed = options.delayed;
     var comp = $Mlpu$export$component({
-      store: store
+      store: store,
+      delayed: delayed
     }, template);
     return Tempo.renderComponent({
       el: el,

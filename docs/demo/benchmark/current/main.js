@@ -448,7 +448,7 @@ exports.processEvent = function (el, name, value, dispatch, acc) {
     var anyEl = el;
     anyEl[name] = function (ev) {
         var r = value(localState, ev, el);
-        if (r !== undefined) {
+        if (typeof r !== 'undefined') {
             dispatch(r);
         }
     };
@@ -490,7 +490,7 @@ var applyChange = function (change, el, ctx) { return function (state, value) {
     return change(state, el, ctx, value);
 }; };
 var applyAfterRender = function (attr, el, ctx, state) {
-    if (attr != null) {
+    if (typeof attr !== undefined) {
         return attr(state, el, ctx);
     }
     else {
@@ -498,28 +498,36 @@ var applyAfterRender = function (attr, el, ctx, state) {
     }
 };
 var DOMElement = /** @class */ (function () {
-    function DOMElement(createElement, attributes, children) {
+    function DOMElement(createElement, attrs, events, styles, afterrender, beforechange, afterchange, beforedestroy, children) {
         this.createElement = createElement;
-        this.attributes = attributes;
+        this.attrs = attrs;
+        this.events = events;
+        this.styles = styles;
+        this.afterrender = afterrender;
+        this.beforechange = beforechange;
+        this.afterchange = afterchange;
+        this.beforedestroy = beforedestroy;
         this.children = children;
     }
     DOMElement.prototype.render = function (ctx, state) {
+        var _this = this;
         var el = this.createElement(ctx.doc);
         var value = undefined;
-        var _a = this.attributes, attrs = _a.attrs, events = _a.events, styles = _a.styles, afterrender = _a.afterrender, beforechange = _a.beforechange, afterchange = _a.afterchange, beforedestroy = _a.beforedestroy;
-        var beforedestroyf = beforedestroy && (function () { return beforedestroy(el, ctx, value); });
         var allDynamics = [];
-        if (attrs) {
-            Object.keys(attrs).forEach(function (key) { return dom_1.processAttribute(el, key, attrs[key], allDynamics); });
+        for (var _i = 0, _a = this.attrs; _i < _a.length; _i++) {
+            var o = _a[_i];
+            dom_1.processAttribute(el, o.name, o.value, allDynamics);
         }
-        if (events) {
-            Object.keys(events).forEach(function (key) { return dom_1.processEvent(el, key, events[key], ctx.dispatch, allDynamics); });
+        for (var _b = 0, _c = this.events; _b < _c.length; _b++) {
+            var o = _c[_b];
+            dom_1.processEvent(el, o.name, o.value, ctx.dispatch, allDynamics);
         }
-        if (styles) {
-            Object.keys(styles).forEach(function (key) { return dom_1.processStyle(el, key, styles[key], allDynamics); });
+        for (var _d = 0, _e = this.styles; _d < _e.length; _d++) {
+            var o = _e[_d];
+            dom_1.processStyle(el, o.name, o.value, allDynamics);
         }
-        for (var _i = 0, allDynamics_1 = allDynamics; _i < allDynamics_1.length; _i++) {
-            var dy = allDynamics_1[_i];
+        for (var _f = 0, allDynamics_1 = allDynamics; _f < allDynamics_1.length; _f++) {
+            var dy = allDynamics_1[_f];
             dy(state);
         }
         // children
@@ -527,21 +535,22 @@ var DOMElement = /** @class */ (function () {
         var newCtx = ctx.withAppend(appendChild).withParent(el);
         var views = this.children.map(function (child) { return child.render(newCtx, state); });
         ctx.append(el);
-        if (afterrender) {
-            value = applyAfterRender(afterrender, el, ctx, state);
+        if (this.afterrender) {
+            value = applyAfterRender(this.afterrender, el, ctx, state);
         }
         var dynamicChildren = dom_1.filterDynamics(views).map(function (child) { return function (state) { return child.change(state); }; });
         allDynamics.push.apply(allDynamics, dynamicChildren);
-        if (beforechange) {
-            var change_1 = applyChange(beforechange, el, ctx);
+        if (this.beforechange) {
+            var change_1 = applyChange(this.beforechange, el, ctx);
             var update = function (state) { value = change_1(state, value); };
             allDynamics.unshift(update);
         }
-        if (afterchange) {
-            var change_2 = applyChange(afterchange, el, ctx);
+        if (this.afterchange) {
+            var change_2 = applyChange(this.afterchange, el, ctx);
             var update = function (state) { value = change_2(state, value); };
             allDynamics.push(update);
         }
+        var beforedestroyf = this.beforedestroy && (function () { return _this.beforedestroy(el, ctx, value); });
         if (allDynamics.length > 0) {
             return new node_view_1.DOMDynamicNodeView(el, views, function (state) {
                 for (var _i = 0, allDynamics_2 = allDynamics; _i < allDynamics_2.length; _i++) {
@@ -557,20 +566,38 @@ var DOMElement = /** @class */ (function () {
     return DOMElement;
 }());
 exports.DOMElement = DOMElement;
+var extractAttrs = function (attrs) {
+    return Object.keys(attrs || {}).map(function (name) { return ({
+        name: name,
+        value: attrs[name]
+    }); });
+};
+var extractEvents = function (attrs) {
+    return Object.keys(attrs || {}).map(function (name) { return ({
+        name: name,
+        value: attrs[name]
+    }); });
+};
+var extractStyles = function (attrs) {
+    return Object.keys(attrs || {}).map(function (name) { return ({
+        name: name,
+        value: attrs[name]
+    }); });
+};
 var makeCreateElement = function (name) { return function (doc) { return doc.createElement(name); }; };
 exports.el = function (name, attributes) {
     var children = [];
     for (var _i = 2; _i < arguments.length; _i++) {
         children[_i - 2] = arguments[_i];
     }
-    return new DOMElement(makeCreateElement(name), attributes, children.map(dom_1.domChildToTemplate));
+    return new DOMElement(makeCreateElement(name), extractAttrs(attributes.attrs), extractEvents(attributes.events), extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, children.map(dom_1.domChildToTemplate));
 };
 exports.el2 = function (name) { return function (attributes) {
     var children = [];
     for (var _i = 1; _i < arguments.length; _i++) {
         children[_i - 1] = arguments[_i];
     }
-    return new DOMElement(makeCreateElement(name), attributes, children.map(dom_1.domChildToTemplate));
+    return new DOMElement(makeCreateElement(name), extractAttrs(attributes.attrs), extractEvents(attributes.events), extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, children.map(dom_1.domChildToTemplate));
 }; };
 exports.defaultNamespaces = {
     'svg': 'http://www.w3.org/2000/svg'
@@ -584,14 +611,14 @@ exports.elNS = function (ns, name, attributes) {
         children[_i - 3] = arguments[_i];
     }
     var namespace = exports.defaultNamespaces[ns] || ns;
-    return new DOMElement(makeCreateElementNS(namespace, name), attributes, children.map(dom_1.domChildToTemplate));
+    return new DOMElement(makeCreateElementNS(namespace, name), extractAttrs(attributes.attrs), extractEvents(attributes.events), extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, children.map(dom_1.domChildToTemplate));
 };
 exports.elNS2 = function (namespace, name) { return function (attributes) {
     var children = [];
     for (var _i = 1; _i < arguments.length; _i++) {
         children[_i - 1] = arguments[_i];
     }
-    return new DOMElement(makeCreateElementNS(namespace, name), attributes, children.map(dom_1.domChildToTemplate));
+    return new DOMElement(makeCreateElementNS(namespace, name), extractAttrs(attributes.attrs), extractEvents(attributes.events), extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, children.map(dom_1.domChildToTemplate));
 }; };
 
 },{"./utils/dom":"KfbX","./node_view":"TJFn"}],"YzxN":[function(require,module,exports) {
@@ -772,26 +799,34 @@ var DOMUntilView = /** @class */ (function () {
         var _this = this;
         var currentViewLength = this.childrenView.length;
         var count = 0;
-        var value;
-        while ((value = this.repeatUntil(state, count)) !== undefined) {
+        var _loop_1 = function () {
+            var value = this_1.repeatUntil(state, count);
+            if (typeof value === 'undefined')
+                return "break";
             if (count < currentViewLength) {
                 // replace existing
-                for (var _i = 0, _a = dom_1.filterDynamics(this.childrenView[count]); _i < _a.length; _i++) {
+                for (var _i = 0, _a = dom_1.filterDynamics(this_1.childrenView[count]); _i < _a.length; _i++) {
                     var v = _a[_i];
                     v.change(value);
                 }
             }
             else {
                 // add node
-                this.childrenView.push(this.children.map(function (el) { return el.render(_this.ctx, value); }));
+                this_1.childrenView.push(this_1.children.map(function (el) { return el.render(_this.ctx, value); }));
             }
             count++;
+        };
+        var this_1 = this;
+        while (true) {
+            var state_1 = _loop_1();
+            if (state_1 === "break")
+                break;
         }
         var i = count;
         while (i < currentViewLength) {
             // remove extra nodes
-            for (var _b = 0, _c = this.childrenView[i]; _b < _c.length; _b++) {
-                var c = _c[_b];
+            for (var _i = 0, _a = this.childrenView[i]; _i < _a.length; _i++) {
+                var c = _a[_i];
                 c.destroy();
             }
             i++;
@@ -935,7 +970,7 @@ var DOMContext = /** @class */ (function () {
         var _this = this;
         return new DOMContext(this.doc, this.append, this.parent, function (action) {
             var newAction = f(action);
-            if (newAction !== undefined) {
+            if (typeof newAction !== 'undefined') {
                 _this.dispatch(newAction);
             }
         });

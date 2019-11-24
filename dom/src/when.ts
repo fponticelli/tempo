@@ -33,7 +33,7 @@ export class DOMWhenView<State, Action> implements DynamicView<State> {
 
   change(value: State): void {
     if (this.condition(value)) {
-      if (this.views == null) {
+      if (typeof this.views === 'undefined') {
         // it has never been rendered before
         this.views = this.children.map(c => c.render(this.ctx, value))
         this.dynamics = filterDynamics(this.views)
@@ -53,7 +53,7 @@ export class DOMWhenView<State, Action> implements DynamicView<State> {
   private views: View<State>[] | undefined
   private dynamics: DynamicView<State>[] | undefined
   private destroyViews() {
-    if (this.views != null) {
+    if (typeof this.views !== 'undefined') {
       for (const v of this.views) v.destroy()
       this.views = undefined
       this.dynamics = undefined

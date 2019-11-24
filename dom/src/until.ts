@@ -36,8 +36,9 @@ export class DOMUntilView<OuterState, InnerState, Action> implements DynamicView
   change(state: OuterState): void {
     const currentViewLength = this.childrenView.length
     let count = 0
-    let value: InnerState | undefined
-    while ((value = this.repeatUntil(state, count)) !== undefined) {
+    while (true) {
+      const value = this.repeatUntil(state, count)
+      if (typeof value === 'undefined') break
       if (count < currentViewLength) {
         // replace existing
         for (const v of filterDynamics(this.childrenView[count])) v.change(value!)
