@@ -2833,122 +2833,6 @@ function () {
 var $UiLj$export$Store = $UiLj$var$Store;
 $UiLj$exports.Store = $UiLj$export$Store; //# sourceMappingURL=store.js.map
 
-// ASSET: ../node_modules/@tempo/dom/node_modules/@tempo/store/lib/emitter.js
-var $U7VT$exports = {};
-Object.defineProperty($U7VT$exports, "__esModule", {
-  value: true
-});
-
-var $U7VT$var$Emitter = function () {
-  function Emitter() {
-    this.listeners = [];
-  }
-
-  Emitter.ofOne = function () {
-    return new Emitter();
-  };
-
-  Emitter.ofTwo = function () {
-    return new Emitter();
-  };
-
-  Emitter.ofThree = function () {
-    return new Emitter();
-  };
-
-  Emitter.prototype.emit = function () {
-    var value = [];
-
-    for (var _i = 0; _i < arguments.length; _i++) {
-      value[_i] = arguments[_i];
-    }
-
-    for (var _a = 0, _b = this.listeners; _a < _b.length; _a++) {
-      var l = _b[_a];
-      l.apply(void 0, value);
-    }
-  };
-
-  Emitter.prototype.on = function (listener) {
-    this.listeners.push(listener);
-  };
-
-  Emitter.prototype.off = function (listener) {
-    var index = this.listeners.indexOf(listener);
-    if (index < 0) return false;
-    this.listeners.splice(index, 1);
-    return true;
-  };
-
-  Emitter.prototype.once = function (listener) {
-    var _this = this;
-
-    var wrapper = function () {
-      var values = [];
-
-      for (var _i = 0; _i < arguments.length; _i++) {
-        values[_i] = arguments[_i];
-      }
-
-      _this.off(wrapper);
-
-      listener.apply(void 0, values);
-    };
-
-    this.on(wrapper);
-  };
-
-  return Emitter;
-}();
-
-var $U7VT$export$Emitter = $U7VT$var$Emitter;
-$U7VT$exports.Emitter = $U7VT$export$Emitter;
-
-var $U7VT$export$debounce = function (delay) {
-  return function (listener) {
-    var running = false;
-    var acc;
-    return function () {
-      var values = [];
-
-      for (var _i = 0; _i < arguments.length; _i++) {
-        values[_i] = arguments[_i];
-      }
-
-      acc = values;
-      if (running) return;
-      running = true;
-      setTimeout(function () {
-        running = false;
-        listener.apply(void 0, acc);
-      }, delay);
-    };
-  };
-};
-
-$U7VT$exports.debounce = $U7VT$export$debounce;
-
-var $U7VT$export$nextFrame = function (listener) {
-  var running = false;
-  var acc;
-  return function () {
-    var values = [];
-
-    for (var _i = 0; _i < arguments.length; _i++) {
-      values[_i] = arguments[_i];
-    }
-
-    acc = values;
-    if (running) return;
-    running = true;
-    requestAnimationFrame(function () {
-      running = false;
-      listener.apply(void 0, acc);
-    });
-  };
-};
-
-$U7VT$exports.nextFrame = $U7VT$export$nextFrame;
 // ASSET: ../node_modules/@tempo/dom/lib/component.js
 var $Mlpu$exports = {};
 
@@ -3024,12 +2908,24 @@ function () {
   }
 
   DOMComponent.prototype.render = function (ctx, state) {
-    var update = function (state) {
-      return view.change(state);
-    };
+    var update;
 
     if (this.delayed) {
-      update = $U7VT$export$nextFrame(update);
+      var shouldRender_1 = true;
+
+      update = function (state) {
+        if (shouldRender_1) {
+          shouldRender_1 = false;
+          setTimeout(function () {
+            view.change(state);
+            shouldRender_1 = true;
+          });
+        }
+      };
+    } else {
+      update = function (state) {
+        view.change(state);
+      };
     }
 
     var store = this.store;

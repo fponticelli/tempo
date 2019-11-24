@@ -14,7 +14,6 @@ limitations under the License.
 import { DOMDynamicFragmentView } from './fragment'
 import { View, DynamicView } from '@tempo/core/lib/view'
 import { Store } from '@tempo/store/lib/store'
-import { nextFrame } from '@tempo/store/lib/emitter'
 import { DOMTemplate, DOMChild } from './template'
 import { DOMContext } from './context'
 import { filterDynamics, domChildToTemplate } from './utils/dom'
@@ -49,9 +48,22 @@ export class DOMComponent<State, Action> implements DOMTemplate<State, Action> {
   ) {}
 
   render(ctx: DOMContext<Action>, state: State) {
-    let update = (state: State) => view.change(state)
+    let update: (state: State) => void
     if (this.delayed) {
-      update = nextFrame(update)
+      let shouldRender = true
+      update = (state: State) => {
+        if (shouldRender) {
+          shouldRender = false
+          setTimeout(() => {
+            view.change(state)
+            shouldRender = true
+          })
+        }
+      }
+    } else {
+      update = (state: State) => {
+        view.change(state)
+      }
     }
     const { store } = this
 

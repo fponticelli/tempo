@@ -34,4 +34,4 @@ const store = Store.ofState({
 
 // store.observable.on(console.log)
 
-Tempo.render({ store, template })
+Tempo.render({ store, template, delayed: true })
