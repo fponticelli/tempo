@@ -31,9 +31,14 @@ const renderFunction = <State>(
   map: UnwrappedDerivedValue<State, string>
 ): View<State> => {
   const node = ctx.doc.createTextNode(map(state) || '')
+  let oldContent = ''
   const f = (state: State) => {
     const newContent = map(state) || ''
-    node.nodeValue = newContent
+    if (newContent !== oldContent) {
+      node.nodeValue = newContent
+      if (newContent.length < 5000)
+        oldContent = newContent
+    }
   }
   const view = new DOMDynamicNodeView(node, [], f)
   ctx.append(node)

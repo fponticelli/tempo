@@ -381,9 +381,14 @@ var renderLiteral = function (ctx, value) {
 };
 var renderFunction = function (ctx, state, map) {
     var node = ctx.doc.createTextNode(map(state) || '');
+    var oldContent = '';
     var f = function (state) {
         var newContent = map(state) || '';
-        node.nodeValue = newContent;
+        if (newContent !== oldContent) {
+            node.nodeValue = newContent;
+            if (newContent.length < 5000)
+                oldContent = newContent;
+        }
     };
     var view = new node_view_1.DOMDynamicNodeView(node, [], f);
     ctx.append(node);
@@ -458,7 +463,15 @@ exports.domChildToTemplate = domChildToTemplate;
 function processAttribute(el, name, value, acc) {
     var set = dom_attributes_mapper_1.htmlAttributeMap[name] || set_attribute_1.setAttribute;
     if (typeof value === 'function') {
-        var f = function (state) { return set(el, name, value(state)); };
+        var oldValue_1;
+        var f = function (state) {
+            var newValue = value(state);
+            if (newValue !== oldValue_1) {
+                set(el, name, newValue);
+                if (String(newValue).length < 50000)
+                    oldValue_1 = newValue;
+            }
+        };
         acc.push(f);
     }
     else {
@@ -485,7 +498,14 @@ function processEvent(el, name, value, dispatch, acc) {
 exports.processEvent = processEvent;
 function processStyle(el, name, value, acc) {
     if (typeof value === 'function') {
-        var f = function (state) { return set_attribute_1.setOneStyle(el, name, value(state)); };
+        var oldValue_2;
+        var f = function (state) {
+            var newValue = value(state);
+            if (newValue !== oldValue_2) {
+                set_attribute_1.setOneStyle(el, name, newValue);
+                oldValue_2 = newValue;
+            }
+        };
         acc.push(f);
     }
     else {

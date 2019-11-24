@@ -1044,10 +1044,15 @@ var $jTie$var$renderLiteral = function (ctx, value) {
 
 var $jTie$var$renderFunction = function (ctx, state, map) {
   var node = ctx.doc.createTextNode(map(state) || '');
+  var oldContent = '';
 
   var f = function (state) {
     var newContent = map(state) || '';
-    node.nodeValue = newContent;
+
+    if (newContent !== oldContent) {
+      node.nodeValue = newContent;
+      if (newContent.length < 5000) oldContent = newContent;
+    }
   };
 
   var view = new $TJFn$export$DOMDynamicNodeView(node, [], f);
@@ -1136,8 +1141,15 @@ function $KfbX$var$processAttribute(el, name, value, acc) {
   var set = $QBLY$export$htmlAttributeMap[name] || $AxMU$export$setAttribute;
 
   if (typeof value === 'function') {
+    var oldValue_1;
+
     var f = function (state) {
-      return set(el, name, value(state));
+      var newValue = value(state);
+
+      if (newValue !== oldValue_1) {
+        set(el, name, newValue);
+        if (String(newValue).length < 50000) oldValue_1 = newValue;
+      }
     };
 
     acc.push(f);
@@ -1176,8 +1188,15 @@ $KfbX$exports.processEvent = $KfbX$export$processEvent;
 
 function $KfbX$var$processStyle(el, name, value, acc) {
   if (typeof value === 'function') {
+    var oldValue_2;
+
     var f = function (state) {
-      return $AxMU$export$setOneStyle(el, name, value(state));
+      var newValue = value(state);
+
+      if (newValue !== oldValue_2) {
+        $AxMU$export$setOneStyle(el, name, newValue);
+        oldValue_2 = newValue;
+      }
     };
 
     acc.push(f);

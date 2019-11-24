@@ -49,16 +49,23 @@ export function domChildToTemplate<State, Action>(dom: DOMChild<State, Action>):
 
 export type Acc<State> = ((state: State) => void)[]
 
-export function processAttribute<State, Action>(
+export function processAttribute<State, Value>(
   el: Element,
   name: string,
-  value: DOMAttribute<State, Action>,
+  value: DOMAttribute<State, Value>,
   acc: Acc<State>
 ): Acc<State> {
   let set = attributeMap[name] || setAttribute
 
   if (typeof value === 'function') {
-    const f = (state: State) => set(el, name, (value as UnwrappedDerivedValue<State, Action>)(state))
+    let oldValue: Value | undefined
+    const f = (state: State) => {
+      const newValue = (value as UnwrappedDerivedValue<State, Value>)(state)
+      if (newValue !== oldValue) {
+        set(el, name, newValue)
+        if (String(newValue).length < 50000) oldValue = newValue
+      }
+    }
     acc.push(f)
   } else {
     set(el, name, value)
@@ -89,14 +96,21 @@ export function processEvent<State, El extends Element, Ev extends Event, Action
   return acc
 }
 
-export function processStyle<State, Action>(
+export function processStyle<State, Value>(
   el: Element,
   name: string,
-  value: DOMStyleAttribute<State, Action>,
+  value: DOMStyleAttribute<State, Value>,
   acc: Acc<State>
 ): Acc<State> {
   if (typeof value === 'function') {
-    const f = (state: State) => setOneStyle(el, name, (value as UnwrappedDerivedValue<State, Action>)(state))
+    let oldValue: Value | undefined
+    const f = (state: State) => {
+      const newValue = (value as UnwrappedDerivedValue<State, Value>)(state)
+      if (newValue !== oldValue) {
+        setOneStyle(el, name, newValue)
+        oldValue = newValue
+      }
+    }
     acc.push(f)
   } else {
     setOneStyle(el, name, value)
