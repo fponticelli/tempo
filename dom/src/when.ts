@@ -15,6 +15,7 @@ import { DOMChild, DOMTemplate } from './template'
 import { DOMContext } from './context'
 import { View, DynamicView } from '@tempo/core/lib/view'
 import { domChildToTemplate, filterDynamics, removeNode } from './utils/dom'
+import { mapArray } from '@tempo/core/lib/util/map'
 
 export interface WhenOptions<State> {
   condition: (state: State) => boolean
@@ -35,7 +36,7 @@ export class DOMWhenView<State, Action> implements DynamicView<State> {
     if (this.condition(value)) {
       if (typeof this.views === 'undefined') {
         // it has never been rendered before
-        this.views = this.children.map(c => c.render(this.ctx, value))
+        this.views = mapArray(this.children, c => c.render(this.ctx, value))
         this.dynamics = filterDynamics(this.views)
       } else if (this.dynamics) {
         for (const d of this.dynamics) d.change(value)
@@ -64,7 +65,7 @@ export class DOMWhenView<State, Action> implements DynamicView<State> {
 export class DOMWhen<State, Action> implements DOMTemplate<State, Action> {
   constructor(readonly options: WhenOptions<State>, readonly children: DOMChild<State, Action>[]) {}
   render(ctx: DOMContext<Action>, state: State): DOMWhenView<State, Action> {
-    const ref = ctx.doc.createComment(this.options.refId || 'md:when')
+    const ref = ctx.doc.createComment(this.options.refId || 't:when')
     ctx.append(ref)
     const parent = ref.parentElement!
     const view = new DOMWhenView(
@@ -72,7 +73,7 @@ export class DOMWhen<State, Action> implements DOMTemplate<State, Action> {
       ctx.withAppend((node: Node) => parent.insertBefore(node, ref)),
       ctx.dispatch,
       () => removeNode(ref),
-      this.children.map(domChildToTemplate)
+      mapArray(this.children, domChildToTemplate)
     )
     view.change(state)
     return view
@@ -86,7 +87,7 @@ export const unless = <State, Action>(options: WhenOptions<State>, ...children: 
   new DOMWhen<State, Action>(
     {
       condition: (v: State) => !options.condition(v),
-      refId: options.refId || 'md:unless'
+      refId: options.refId || 't:unless'
     },
     children
   )

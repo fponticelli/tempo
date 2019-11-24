@@ -343,7 +343,7 @@ var $mIWh$export$createState = function (versionIds) {
     versions: versions,
     tests: tests,
     options: {
-      maxTime: 2
+      maxTime: 0.2
     },
     results: {},
     processing: new Set(),
@@ -756,13 +756,32 @@ var $pSX2$var$calculateMinMax = function calculateMinMax(results, tests) {
   }, {});
 };
 
+// ASSET: ../node_modules/@tempo/dom/node_modules/@tempo/core/lib/util/map.js
+var $UNaj$exports = {};
+Object.defineProperty($UNaj$exports, "__esModule", {
+  value: true
+});
+
+var $UNaj$export$mapArray = function (arr, f) {
+  var length = arr.length;
+  var buff = new Array(length);
+
+  for (var i = 0; i < length; i++) {
+    buff[i] = f(arr[i]);
+  }
+
+  return buff;
+};
+
+$UNaj$exports.mapArray = $UNaj$export$mapArray; //# sourceMappingURL=map.js.map
+
 // ASSET: ../node_modules/@tempo/dom/lib/utils/set_attribute.js
 var $AxMU$exports = {};
 Object.defineProperty($AxMU$exports, "__esModule", {
   value: true
 });
 
-var $AxMU$export$setOneStyle = function (el, name, value) {
+function $AxMU$var$setOneStyle(el, name, value) {
   var anyStyle = el.style;
 
   if (value == null) {
@@ -770,21 +789,23 @@ var $AxMU$export$setOneStyle = function (el, name, value) {
   } else {
     anyStyle[name] = value;
   }
-};
+}
 
+var $AxMU$export$setOneStyle = $AxMU$var$setOneStyle;
 $AxMU$exports.setOneStyle = $AxMU$export$setOneStyle;
 
-var $AxMU$export$setAttribute = function (el, name, value) {
+function $AxMU$var$setAttribute(el, name, value) {
   if (value == null) {
     el.removeAttribute(name);
   } else {
     el.setAttribute(name, value);
   }
-};
+}
 
+var $AxMU$export$setAttribute = $AxMU$var$setAttribute;
 $AxMU$exports.setAttribute = $AxMU$export$setAttribute;
 
-var $AxMU$export$setProperty = function (el, name, value) {
+function $AxMU$var$setProperty(el, name, value) {
   var anyEl = el;
 
   if (value == null) {
@@ -792,28 +813,30 @@ var $AxMU$export$setProperty = function (el, name, value) {
   } else {
     anyEl[name] = value;
   }
-};
+}
 
+var $AxMU$export$setProperty = $AxMU$var$setProperty;
 $AxMU$exports.setProperty = $AxMU$export$setProperty;
 
-var $AxMU$export$setStyleAttribute = function (el, name, value) {
+function $AxMU$var$setStyleAttribute(el, name, value) {
   var html = el;
 
   if (value == null) {
     html.removeAttribute(name);
   } else if (typeof value === 'string') {
-    $AxMU$export$setAttribute(el, name, value);
+    $AxMU$var$setAttribute(el, name, value);
   } else {
-    var s = Object.keys(value).map(function (k) {
+    var s = $UNaj$export$mapArray(Object.keys(value), function (k) {
       return k + ": " + value[k] + ";";
     }).join(' ');
-    $AxMU$export$setAttribute(el, name, s.length && s || null);
+    $AxMU$var$setAttribute(el, name, s.length && s || null);
   }
-};
+}
 
+var $AxMU$export$setStyleAttribute = $AxMU$var$setStyleAttribute;
 $AxMU$exports.setStyleAttribute = $AxMU$export$setStyleAttribute;
 
-var $AxMU$export$setBoolProperty = function (el, name, value) {
+function $AxMU$var$setBoolProperty(el, name, value) {
   var anyEl = el;
 
   if (value == null) {
@@ -822,32 +845,37 @@ var $AxMU$export$setBoolProperty = function (el, name, value) {
     var bool = value === true || value === 'true';
     anyEl[name] = bool;
   }
-};
+}
 
+var $AxMU$export$setBoolProperty = $AxMU$var$setBoolProperty;
 $AxMU$exports.setBoolProperty = $AxMU$export$setBoolProperty;
 
-var $AxMU$export$setEnumBoolAttribute = function (el, name, value) {
-  $AxMU$export$setAttribute(el, name, value === true || value === 'true' ? 'true' : value === false ? 'false' : null);
-};
+function $AxMU$var$setEnumBoolAttribute(el, name, value) {
+  $AxMU$var$setAttribute(el, name, value === true || value === 'true' ? 'true' : value === false ? 'false' : null);
+}
 
+var $AxMU$export$setEnumBoolAttribute = $AxMU$var$setEnumBoolAttribute;
 $AxMU$exports.setEnumBoolAttribute = $AxMU$export$setEnumBoolAttribute;
 
-var $AxMU$export$setBoolAttribute = function (el, name, value) {
-  $AxMU$export$setAttribute(el, name, value === true || value === 'true' ? '' : null);
-};
+function $AxMU$var$setBoolAttribute(el, name, value) {
+  $AxMU$var$setAttribute(el, name, value === true || value === 'true' ? '' : null);
+}
 
+var $AxMU$export$setBoolAttribute = $AxMU$var$setBoolAttribute;
 $AxMU$exports.setBoolAttribute = $AxMU$export$setBoolAttribute;
 
-var $AxMU$export$setCommaSeparated = function (el, name, values) {
-  if (Array.isArray(values)) $AxMU$export$setAttribute(el, name, values.join(', ') || null);else $AxMU$export$setAttribute(el, name, values && String(values) || null);
-};
+function $AxMU$var$setCommaSeparated(el, name, values) {
+  if (Array.isArray(values)) $AxMU$var$setAttribute(el, name, values.join(', ') || null);else $AxMU$var$setAttribute(el, name, values && String(values) || null);
+}
 
+var $AxMU$export$setCommaSeparated = $AxMU$var$setCommaSeparated;
 $AxMU$exports.setCommaSeparated = $AxMU$export$setCommaSeparated;
 
-var $AxMU$export$setSpaceSeparated = function (el, name, values) {
-  if (Array.isArray(values)) $AxMU$export$setAttribute(el, name, values.join(' ') || null);else $AxMU$export$setAttribute(el, name, values && String(values) || null);
-};
+function $AxMU$var$setSpaceSeparated(el, name, values) {
+  if (Array.isArray(values)) $AxMU$var$setAttribute(el, name, values.join(' ') || null);else $AxMU$var$setAttribute(el, name, values && String(values) || null);
+}
 
+var $AxMU$export$setSpaceSeparated = $AxMU$var$setSpaceSeparated;
 $AxMU$exports.setSpaceSeparated = $AxMU$export$setSpaceSeparated; //# sourceMappingURL=set_attribute.js.map
 
 // ASSET: ../node_modules/@tempo/dom/lib/dom_attributes_mapper.js
@@ -857,14 +885,14 @@ Object.defineProperty($QBLY$exports, "__esModule", {
 });
 /* istanbul ignore file */
 
-var $QBLY$export$htmlAttributeNameMap = {
+var $QBLY$export$attributeNameMap = {
   acceptcharset: 'accept-charset',
   asattr: 'as',
   classname: 'class',
   httpequiv: 'http-equiv',
   htmlfor: 'for'
 };
-$QBLY$exports.htmlAttributeNameMap = $QBLY$export$htmlAttributeNameMap;
+$QBLY$exports.attributeNameMap = $QBLY$export$attributeNameMap;
 var $QBLY$export$htmlAttributeMap = {
   'accept-charset': $AxMU$export$setSpaceSeparated,
   class: $AxMU$export$setSpaceSeparated,
@@ -1060,7 +1088,7 @@ Object.defineProperty($KfbX$exports, "__esModule", {
   value: true
 });
 
-var $KfbX$export$removeNode = function (node) {
+function $KfbX$var$removeNode(node) {
   var el = node;
 
   if (el && el.onblur) {
@@ -1072,37 +1100,39 @@ var $KfbX$export$removeNode = function (node) {
   if (node.parentElement) {
     node.parentElement.removeChild(node);
   }
-};
+}
 
+var $KfbX$export$removeNode = $KfbX$var$removeNode;
 $KfbX$exports.removeNode = $KfbX$export$removeNode;
 
-var $KfbX$export$insertBefore = function (ref) {
+function $KfbX$var$insertBefore(ref) {
   return function (node) {
     if (ref.parentElement != null) {
       ref.parentElement.insertBefore(node, ref);
     }
   };
-};
+}
 
+var $KfbX$export$insertBefore = $KfbX$var$insertBefore;
 $KfbX$exports.insertBefore = $KfbX$export$insertBefore;
 
-var $KfbX$export$filterDynamics = function (children) {
+function $KfbX$var$filterDynamics(children) {
   return children.filter(function (child) {
     return child.kind === 'dynamic';
   });
-};
+}
 
+var $KfbX$export$filterDynamics = $KfbX$var$filterDynamics;
 $KfbX$exports.filterDynamics = $KfbX$export$filterDynamics;
 
-var $KfbX$export$domChildToTemplate = function (dom) {
+function $KfbX$var$domChildToTemplate(dom) {
   if (typeof dom === 'string' || typeof dom === 'function') return $jTie$export$text(dom);else return dom;
-};
+}
 
+var $KfbX$export$domChildToTemplate = $KfbX$var$domChildToTemplate;
 $KfbX$exports.domChildToTemplate = $KfbX$export$domChildToTemplate;
 
-var $KfbX$export$processAttribute = function (el, name, value, acc) {
-  name = name.toLowerCase();
-  name = $QBLY$export$htmlAttributeNameMap[name] || name;
+function $KfbX$var$processAttribute(el, name, value, acc) {
   var set = $QBLY$export$htmlAttributeMap[name] || $AxMU$export$setAttribute;
 
   if (typeof value === 'function') {
@@ -1116,12 +1146,12 @@ var $KfbX$export$processAttribute = function (el, name, value, acc) {
   }
 
   return acc;
-};
+}
 
+var $KfbX$export$processAttribute = $KfbX$var$processAttribute;
 $KfbX$exports.processAttribute = $KfbX$export$processAttribute;
 
-var $KfbX$export$processEvent = function (el, name, value, dispatch, acc) {
-  name = "on" + name.toLowerCase();
+function $KfbX$var$processEvent(el, name, value, dispatch, acc) {
   var localState;
   var anyEl = el;
 
@@ -1139,11 +1169,12 @@ var $KfbX$export$processEvent = function (el, name, value, dispatch, acc) {
 
   acc.push(f);
   return acc;
-};
+}
 
+var $KfbX$export$processEvent = $KfbX$var$processEvent;
 $KfbX$exports.processEvent = $KfbX$export$processEvent;
 
-var $KfbX$export$processStyle = function (el, name, value, acc) {
+function $KfbX$var$processStyle(el, name, value, acc) {
   if (typeof value === 'function') {
     var f = function (state) {
       return $AxMU$export$setOneStyle(el, name, value(state));
@@ -1155,8 +1186,9 @@ var $KfbX$export$processStyle = function (el, name, value, acc) {
   }
 
   return acc;
-};
+}
 
+var $KfbX$export$processStyle = $KfbX$var$processStyle;
 $KfbX$exports.processStyle = $KfbX$export$processStyle; //# sourceMappingURL=dom.js.map
 
 // ASSET: ../node_modules/@tempo/dom/lib/element.js
@@ -1227,7 +1259,7 @@ function () {
     };
 
     var newCtx = ctx.withAppend(appendChild).withParent(el);
-    var views = this.children.map(function (child) {
+    var views = $UNaj$export$mapArray(this.children, function (child) {
       return child.render(newCtx, state);
     });
     ctx.append(el);
@@ -1236,7 +1268,7 @@ function () {
       value = $Mmj0$var$applyAfterRender(this.afterrender, el, ctx, state);
     }
 
-    var dynamicChildren = $KfbX$export$filterDynamics(views).map(function (child) {
+    var dynamicChildren = $UNaj$export$mapArray($KfbX$export$filterDynamics(views), function (child) {
       return function (state) {
         return child.change(state);
       };
@@ -1285,32 +1317,35 @@ function () {
 var $Mmj0$export$DOMElement = $Mmj0$var$DOMElement;
 $Mmj0$exports.DOMElement = $Mmj0$export$DOMElement;
 
-var $Mmj0$var$extractAttrs = function (attrs) {
-  return Object.keys(attrs || {}).map(function (name) {
+function $Mmj0$var$extractAttrs(attrs) {
+  return $UNaj$export$mapArray(Object.keys(attrs || {}), function (attName) {
+    var name = attName.toLowerCase();
+    name = $QBLY$export$attributeNameMap[name] || name;
     return {
       name: name,
-      value: attrs[name]
+      value: attrs[attName]
     };
   });
-};
+}
 
-var $Mmj0$var$extractEvents = function (attrs) {
-  return Object.keys(attrs || {}).map(function (name) {
+function $Mmj0$var$extractEvents(attrs) {
+  return $UNaj$export$mapArray(Object.keys(attrs || {}), function (eventName) {
+    var name = "on" + eventName.toLowerCase();
     return {
       name: name,
-      value: attrs[name]
+      value: attrs[eventName]
     };
   });
-};
+}
 
-var $Mmj0$var$extractStyles = function (attrs) {
-  return Object.keys(attrs || {}).map(function (name) {
+function $Mmj0$var$extractStyles(attrs) {
+  return $UNaj$export$mapArray(Object.keys(attrs || {}), function (name) {
     return {
       name: name,
       value: attrs[name]
     };
   });
-};
+}
 
 var $Mmj0$var$makeCreateElement = function (name) {
   return function (doc) {
@@ -1325,7 +1360,7 @@ var $Mmj0$export$el = function (name, attributes) {
     children[_i - 2] = arguments[_i];
   }
 
-  return new $Mmj0$var$DOMElement($Mmj0$var$makeCreateElement(name), $Mmj0$var$extractAttrs(attributes.attrs), $Mmj0$var$extractEvents(attributes.events), $Mmj0$var$extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, children.map($KfbX$export$domChildToTemplate));
+  return new $Mmj0$var$DOMElement($Mmj0$var$makeCreateElement(name), $Mmj0$var$extractAttrs(attributes.attrs), $Mmj0$var$extractEvents(attributes.events), $Mmj0$var$extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, $UNaj$export$mapArray(children, $KfbX$export$domChildToTemplate));
 };
 
 $Mmj0$exports.el = $Mmj0$export$el;
@@ -1338,7 +1373,7 @@ var $Mmj0$export$el2 = function (name) {
       children[_i - 1] = arguments[_i];
     }
 
-    return new $Mmj0$var$DOMElement($Mmj0$var$makeCreateElement(name), $Mmj0$var$extractAttrs(attributes.attrs), $Mmj0$var$extractEvents(attributes.events), $Mmj0$var$extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, children.map($KfbX$export$domChildToTemplate));
+    return new $Mmj0$var$DOMElement($Mmj0$var$makeCreateElement(name), $Mmj0$var$extractAttrs(attributes.attrs), $Mmj0$var$extractEvents(attributes.events), $Mmj0$var$extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, $UNaj$export$mapArray(children, $KfbX$export$domChildToTemplate));
   };
 };
 
@@ -1362,7 +1397,7 @@ var $Mmj0$export$elNS = function (ns, name, attributes) {
   }
 
   var namespace = $Mmj0$export$defaultNamespaces[ns] || ns;
-  return new $Mmj0$var$DOMElement($Mmj0$var$makeCreateElementNS(namespace, name), $Mmj0$var$extractAttrs(attributes.attrs), $Mmj0$var$extractEvents(attributes.events), $Mmj0$var$extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, children.map($KfbX$export$domChildToTemplate));
+  return new $Mmj0$var$DOMElement($Mmj0$var$makeCreateElementNS(namespace, name), $Mmj0$var$extractAttrs(attributes.attrs), $Mmj0$var$extractEvents(attributes.events), $Mmj0$var$extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, $UNaj$export$mapArray(children, $KfbX$export$domChildToTemplate));
 };
 
 $Mmj0$exports.elNS = $Mmj0$export$elNS;
@@ -1375,7 +1410,7 @@ var $Mmj0$export$elNS2 = function (namespace, name) {
       children[_i - 1] = arguments[_i];
     }
 
-    return new $Mmj0$var$DOMElement($Mmj0$var$makeCreateElementNS(namespace, name), $Mmj0$var$extractAttrs(attributes.attrs), $Mmj0$var$extractEvents(attributes.events), $Mmj0$var$extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, children.map($KfbX$export$domChildToTemplate));
+    return new $Mmj0$var$DOMElement($Mmj0$var$makeCreateElementNS(namespace, name), $Mmj0$var$extractAttrs(attributes.attrs), $Mmj0$var$extractEvents(attributes.events), $Mmj0$var$extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, $UNaj$export$mapArray(children, $KfbX$export$domChildToTemplate));
   };
 };
 
@@ -1834,7 +1869,7 @@ function () {
   }
 
   DOMFragment.prototype.render = function (ctx, state) {
-    var views = this.children.map(function (child) {
+    var views = $UNaj$export$mapArray(this.children, function (child) {
       return child.render(ctx, state);
     });
     return $xGqp$export$fragmentView(views);
@@ -1853,7 +1888,7 @@ var $xGqp$export$fragment = function () {
     children[_i] = arguments[_i];
   }
 
-  return new $xGqp$var$DOMFragment(children.map($KfbX$export$domChildToTemplate));
+  return new $xGqp$var$DOMFragment($UNaj$export$mapArray(children, $KfbX$export$domChildToTemplate));
 };
 
 $xGqp$exports.fragment = $xGqp$export$fragment; //# sourceMappingURL=fragment.js.map
@@ -1878,7 +1913,7 @@ function () {
         map = _a.map;
 
     var innerState = map(state);
-    var views = children.map(function (c) {
+    var views = $UNaj$export$mapArray(children, function (c) {
       return c.render(ctx, innerState);
     });
     var dynamics = $KfbX$export$filterDynamics(views);
@@ -1910,7 +1945,7 @@ var $YLN0$export$mapState = function (options) {
     children[_i - 1] = arguments[_i];
   }
 
-  return new $YLN0$var$MapStateTemplate(options.map, children.map($KfbX$export$domChildToTemplate));
+  return new $YLN0$var$MapStateTemplate(options.map, $UNaj$export$mapArray(children, $KfbX$export$domChildToTemplate));
 };
 
 $YLN0$exports.mapState = $YLN0$export$mapState;
@@ -1928,7 +1963,7 @@ function () {
         children = _a.children,
         map = _a.map;
 
-    var views = children.map(function (c) {
+    var views = $UNaj$export$mapArray(children, function (c) {
       return c.render(ctx.conditionalMapAction(map), state);
     });
     return $xGqp$export$fragmentView(views);
@@ -1947,7 +1982,7 @@ var $YLN0$export$mapAction = function (options) {
     children[_i - 1] = arguments[_i];
   }
 
-  return new $YLN0$var$MapActionTemplate(options.map, children.map($KfbX$export$domChildToTemplate));
+  return new $YLN0$var$MapActionTemplate(options.map, $UNaj$export$mapArray(children, $KfbX$export$domChildToTemplate));
 };
 
 $YLN0$exports.mapAction = $YLN0$export$mapAction; //# sourceMappingURL=map.js.map
@@ -1989,26 +2024,28 @@ function () {
     var _this = this;
 
     var currentViewLength = this.childrenView.length;
-    var count = 0;
+    var index = 0;
 
     var _loop_1 = function () {
-      var value = this_1.repeatUntil(state, count);
+      var value = this_1.repeatUntil(state, index);
       if (typeof value === 'undefined') return "break";
 
-      if (count < currentViewLength) {
+      if (index < currentViewLength) {
         // replace existing
-        for (var _i = 0, _a = $KfbX$export$filterDynamics(this_1.childrenView[count]); _i < _a.length; _i++) {
-          var v = _a[_i];
+        var filtered = $KfbX$export$filterDynamics(this_1.childrenView[index]);
+
+        for (var _i = 0, filtered_1 = filtered; _i < filtered_1.length; _i++) {
+          var v = filtered_1[_i];
           v.change(value);
         }
       } else {
         // add node
-        this_1.childrenView.push(this_1.children.map(function (el) {
+        this_1.childrenView.push($UNaj$export$mapArray(this_1.children, function (el) {
           return el.render(_this.ctx, value);
         }));
       }
 
-      count++;
+      index++;
     };
 
     var this_1 = this;
@@ -2019,10 +2056,9 @@ function () {
       if (state_1 === "break") break;
     }
 
-    var i = count;
+    var i = index; // remove extra nodes
 
     while (i < currentViewLength) {
-      // remove extra nodes
       for (var _i = 0, _a = this.childrenView[i]; _i < _a.length; _i++) {
         var c = _a[_i];
         c.destroy();
@@ -2031,7 +2067,7 @@ function () {
       i++;
     }
 
-    this.childrenView = this.childrenView.slice(0, count);
+    this.childrenView = this.childrenView.slice(0, index);
   };
 
   return DOMUntilView;
@@ -2049,7 +2085,7 @@ function () {
   }
 
   DOMUntilTemplate.prototype.render = function (ctx, state) {
-    var ref = ctx.doc.createComment(this.options.refId || 'md:until');
+    var ref = ctx.doc.createComment(this.options.refId || 't:until');
     ctx.append(ref);
     var view = new $hYCi$var$DOMUntilView(ref, this.options.repeatUntil, ctx.withAppend($KfbX$export$insertBefore(ref)), this.children);
     view.change(state);
@@ -2069,7 +2105,7 @@ var $hYCi$export$until = function (options) {
     children[_i - 1] = arguments[_i];
   }
 
-  return new $hYCi$var$DOMUntilTemplate(options, children.map($KfbX$export$domChildToTemplate));
+  return new $hYCi$var$DOMUntilTemplate(options, $UNaj$export$mapArray(children, $KfbX$export$domChildToTemplate));
 };
 
 $hYCi$exports.until = $hYCi$export$until; //# sourceMappingURL=until.js.map
@@ -2097,7 +2133,7 @@ var $xmUo$export$forEach = function (options) {
   }
 
   return $hYCi$export$until.apply(void 0, $xmUo$var$__spreadArrays([{
-    refId: options.refId || 'md:for_each',
+    refId: options.refId || 't:for_each',
     repeatUntil: function (state, index) {
       return state[index];
     }
@@ -2130,7 +2166,7 @@ function () {
     if (this.condition(value)) {
       if (typeof this.views === 'undefined') {
         // it has never been rendered before
-        this.views = this.children.map(function (c) {
+        this.views = $UNaj$export$mapArray(this.children, function (c) {
           return c.render(_this.ctx, value);
         });
         this.dynamics = $KfbX$export$filterDynamics(this.views);
@@ -2177,14 +2213,14 @@ function () {
   }
 
   DOMWhen.prototype.render = function (ctx, state) {
-    var ref = ctx.doc.createComment(this.options.refId || 'md:when');
+    var ref = ctx.doc.createComment(this.options.refId || 't:when');
     ctx.append(ref);
     var parent = ref.parentElement;
     var view = new $rPBd$var$DOMWhenView(this.options.condition, ctx.withAppend(function (node) {
       return parent.insertBefore(node, ref);
     }), ctx.dispatch, function () {
       return $KfbX$export$removeNode(ref);
-    }, this.children.map($KfbX$export$domChildToTemplate));
+    }, $UNaj$export$mapArray(this.children, $KfbX$export$domChildToTemplate));
     view.change(state);
     return view;
   };
@@ -2218,7 +2254,7 @@ var $rPBd$export$unless = function (options) {
     condition: function (v) {
       return !options.condition(v);
     },
-    refId: options.refId || 'md:unless'
+    refId: options.refId || 't:unless'
   }, children);
 };
 
@@ -3004,7 +3040,7 @@ function () {
     };
 
     var newCtx = ctx.withDispatch(innerDispatch);
-    var viewChildren = this.children.map(function (child) {
+    var viewChildren = $UNaj$export$mapArray(this.children, function (child) {
       return child.render(newCtx, store.property.get());
     });
     var dynamics = $KfbX$export$filterDynamics(viewChildren);
@@ -3028,7 +3064,7 @@ var $Mlpu$export$component = function (attributes) {
     children[_i - 1] = arguments[_i];
   }
 
-  return new $Mlpu$var$DOMComponent(attributes.store, children.map($KfbX$export$domChildToTemplate), attributes.delayed || false);
+  return new $Mlpu$var$DOMComponent(attributes.store, $UNaj$export$mapArray(children, $KfbX$export$domChildToTemplate), attributes.delayed || false);
 };
 
 $Mlpu$exports.component = $Mlpu$export$component; //# sourceMappingURL=component.js.map

@@ -13,6 +13,7 @@ limitations under the License.
 
 import { State, createTodo } from './state'
 import { Action } from './action'
+import { mapArray } from '@tempo/core/lib/util/map'
 
 export const reducer = (state: State, action: Action) => {
   switch (action.kind) {
@@ -86,7 +87,7 @@ export const reducer = (state: State, action: Action) => {
       const allCompleted = state.completed === state.todos.length
       return {
         ...state,
-        todos: state.todos.map(todo => {
+        todos: mapArray(state.todos, todo => {
           return {
             ...todo,
             completed: !allCompleted

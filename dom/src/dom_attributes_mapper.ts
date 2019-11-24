@@ -22,7 +22,7 @@ import {
   setProperty
 } from './utils/set_attribute'
 
-export const htmlAttributeNameMap: Record<string, string> = {
+export const attributeNameMap: Record<string, string> = {
   acceptcharset: 'accept-charset',
   asattr: 'as',
   classname: 'class',

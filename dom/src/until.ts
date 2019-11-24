@@ -15,6 +15,7 @@ import { DynamicView, View } from '@tempo/core/lib/view'
 import { DOMContext } from './context'
 import { DOMTemplate, DOMChild } from './template'
 import { removeNode, filterDynamics, domChildToTemplate, insertBefore } from './utils/dom'
+import { mapArray } from '@tempo/core/lib/util/map'
 
 export class DOMUntilView<OuterState, InnerState, Action> implements DynamicView<OuterState> {
   readonly kind = 'dynamic'
@@ -35,26 +36,27 @@ export class DOMUntilView<OuterState, InnerState, Action> implements DynamicView
 
   change(state: OuterState): void {
     const currentViewLength = this.childrenView.length
-    let count = 0
+    let index = 0
     while (true) {
-      const value = this.repeatUntil(state, count)
+      const value = this.repeatUntil(state, index)
       if (typeof value === 'undefined') break
-      if (count < currentViewLength) {
+      if (index < currentViewLength) {
         // replace existing
-        for (const v of filterDynamics(this.childrenView[count])) v.change(value!)
+        const filtered = filterDynamics(this.childrenView[index])
+        for (const v of filtered) v.change(value!)
       } else {
         // add node
-        this.childrenView.push(this.children.map(el => el.render(this.ctx, value!)))
+        this.childrenView.push(mapArray(this.children, el => el.render(this.ctx, value!)))
       }
-      count++
+      index++
     }
-    let i = count
+    let i = index
+    // remove extra nodes
     while (i < currentViewLength) {
-      // remove extra nodes
       for (const c of this.childrenView[i]) c.destroy()
       i++
     }
-    this.childrenView = this.childrenView.slice(0, count)
+    this.childrenView = this.childrenView.slice(0, index)
   }
 
   private childrenView: View<InnerState>[][] = []
@@ -70,7 +72,7 @@ export class DOMUntilTemplate<OuterState, InnerState, Action> implements DOMTemp
   ) {}
 
   render(ctx: DOMContext<Action>, state: OuterState): DynamicView<OuterState> {
-    const ref = ctx.doc.createComment(this.options.refId || 'md:until')
+    const ref = ctx.doc.createComment(this.options.refId || 't:until')
     ctx.append(ref)
     const view = new DOMUntilView<OuterState, InnerState, Action>(
       ref,
@@ -89,4 +91,4 @@ export const until = <OuterState, InnerState, Action>(
     repeatUntil: (state: OuterState, index: number) => InnerState | undefined
   },
   ...children: DOMChild<InnerState, Action>[]
-) => new DOMUntilTemplate<OuterState, InnerState, Action>(options, children.map(domChildToTemplate))
+) => new DOMUntilTemplate<OuterState, InnerState, Action>(options, mapArray(children, domChildToTemplate))

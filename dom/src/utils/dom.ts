@@ -14,12 +14,12 @@ limitations under the License.
 import { View, DynamicView } from '@tempo/core/lib/view'
 import { UnwrappedDerivedValue } from '@tempo/core/lib/value'
 import { DOMAttribute, DOMEventHandler, DOMStyleAttribute } from '../value'
-import { htmlAttributeNameMap as attributeNameMap, htmlAttributeMap as attributeMap } from '../dom_attributes_mapper'
+import { htmlAttributeMap as attributeMap } from '../dom_attributes_mapper'
 import { setAttribute, setOneStyle } from './set_attribute'
 import { DOMChild, DOMTemplate } from '../template'
 import { text } from '../text'
 
-export const removeNode = (node: Node) => {
+export function removeNode(node: Node) {
   const el = node as HTMLElement
   if (el && el.onblur) {
     el.onblur = null
@@ -30,31 +30,31 @@ export const removeNode = (node: Node) => {
   }
 }
 
-export const insertBefore = (ref: Node) => (node: Node) => {
-  if (ref.parentElement != null) {
-    ref.parentElement.insertBefore(node, ref)
+export function insertBefore(ref: Node) {
+  return function (node: Node) {
+    if (ref.parentElement != null) {
+      ref.parentElement.insertBefore(node, ref)
+    }
   }
 }
 
-export const filterDynamics = <State>(children: View<State>[]) =>
-  children.filter(child => child.kind === 'dynamic') as DynamicView<State>[]
+export function filterDynamics<State>(children: View<State>[]) {
+  return children.filter(child => child.kind === 'dynamic') as DynamicView<State>[]
+}
 
-export const domChildToTemplate = <State, Action>(dom: DOMChild<State, Action>): DOMTemplate<State, Action> => {
+export function domChildToTemplate<State, Action>(dom: DOMChild<State, Action>): DOMTemplate<State, Action> {
   if (typeof dom === 'string' || typeof dom === 'function') return text(dom)
   else return dom
 }
 
 export type Acc<State> = ((state: State) => void)[]
 
-export const processAttribute = <State, Action>(
+export function processAttribute<State, Action>(
   el: Element,
   name: string,
   value: DOMAttribute<State, Action>,
   acc: Acc<State>
-): Acc<State> => {
-  name = name.toLowerCase()
-  name = attributeNameMap[name] || name
-
+): Acc<State> {
   let set = attributeMap[name] || setAttribute
 
   if (typeof value === 'function') {
@@ -66,14 +66,13 @@ export const processAttribute = <State, Action>(
   return acc
 }
 
-export const processEvent = <State, El extends Element, Ev extends Event, Action>(
+export function processEvent<State, El extends Element, Ev extends Event, Action>(
   el: El,
   name: string,
   value: DOMEventHandler<State, Action, Ev, El>,
   dispatch: (action: Action) => void,
   acc: Acc<State>
-): Acc<State> => {
-  name = `on${name.toLowerCase()}`
+): Acc<State> {
   let localState: State
   const anyEl = el as any
   anyEl[name] = (ev: Ev) => {
@@ -90,12 +89,12 @@ export const processEvent = <State, El extends Element, Ev extends Event, Action
   return acc
 }
 
-export const processStyle = <State, Action>(
+export function processStyle<State, Action>(
   el: Element,
   name: string,
   value: DOMStyleAttribute<State, Action>,
   acc: Acc<State>
-): Acc<State> => {
+): Acc<State> {
   if (typeof value === 'function') {
     const f = (state: State) => setOneStyle(el, name, (value as UnwrappedDerivedValue<State, Action>)(state))
     acc.push(f)

@@ -117,7 +117,19 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"AxMU":[function(require,module,exports) {
+})({"UNaj":[function(require,module,exports) {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.mapArray = function (arr, f) {
+    var length = arr.length;
+    var buff = new Array(length);
+    for (var i = 0; i < length; i++) {
+        buff[i] = f(arr[i]);
+    }
+    return buff;
+};
+
+},{}],"AxMU":[function(require,module,exports) {
 "use strict";
 /*
 Copyright 2019 Google LLC
@@ -132,7 +144,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.setOneStyle = function (el, name, value) {
+var map_1 = require("@tempo/core/lib/util/map");
+function setOneStyle(el, name, value) {
     var anyStyle = el.style;
     if (value == null) {
         anyStyle[name] = null;
@@ -140,16 +153,18 @@ exports.setOneStyle = function (el, name, value) {
     else {
         anyStyle[name] = value;
     }
-};
-exports.setAttribute = function (el, name, value) {
+}
+exports.setOneStyle = setOneStyle;
+function setAttribute(el, name, value) {
     if (value == null) {
         el.removeAttribute(name);
     }
     else {
         el.setAttribute(name, value);
     }
-};
-exports.setProperty = function (el, name, value) {
+}
+exports.setAttribute = setAttribute;
+function setProperty(el, name, value) {
     var anyEl = el;
     if (value == null) {
         anyEl[name] = null;
@@ -157,23 +172,23 @@ exports.setProperty = function (el, name, value) {
     else {
         anyEl[name] = value;
     }
-};
-exports.setStyleAttribute = function (el, name, value) {
+}
+exports.setProperty = setProperty;
+function setStyleAttribute(el, name, value) {
     var html = el;
     if (value == null) {
         html.removeAttribute(name);
     }
     else if (typeof value === 'string') {
-        exports.setAttribute(el, name, value);
+        setAttribute(el, name, value);
     }
     else {
-        var s = Object.keys(value)
-            .map(function (k) { return k + ": " + value[k] + ";"; })
-            .join(' ');
-        exports.setAttribute(el, name, (s.length && s) || null);
+        var s = map_1.mapArray(Object.keys(value), function (k) { return k + ": " + value[k] + ";"; }).join(' ');
+        setAttribute(el, name, (s.length && s) || null);
     }
-};
-exports.setBoolProperty = function (el, name, value) {
+}
+exports.setStyleAttribute = setStyleAttribute;
+function setBoolProperty(el, name, value) {
     var anyEl = el;
     if (value == null) {
         anyEl[name] = null;
@@ -182,27 +197,32 @@ exports.setBoolProperty = function (el, name, value) {
         var bool = value === true || value === 'true';
         anyEl[name] = bool;
     }
-};
-exports.setEnumBoolAttribute = function (el, name, value) {
-    exports.setAttribute(el, name, value === true || value === 'true' ? 'true' : value === false ? 'false' : null);
-};
-exports.setBoolAttribute = function (el, name, value) {
-    exports.setAttribute(el, name, value === true || value === 'true' ? '' : null);
-};
-exports.setCommaSeparated = function (el, name, values) {
+}
+exports.setBoolProperty = setBoolProperty;
+function setEnumBoolAttribute(el, name, value) {
+    setAttribute(el, name, value === true || value === 'true' ? 'true' : value === false ? 'false' : null);
+}
+exports.setEnumBoolAttribute = setEnumBoolAttribute;
+function setBoolAttribute(el, name, value) {
+    setAttribute(el, name, value === true || value === 'true' ? '' : null);
+}
+exports.setBoolAttribute = setBoolAttribute;
+function setCommaSeparated(el, name, values) {
     if (Array.isArray(values))
-        exports.setAttribute(el, name, values.join(', ') || null);
+        setAttribute(el, name, values.join(', ') || null);
     else
-        exports.setAttribute(el, name, (values && String(values)) || null);
-};
-exports.setSpaceSeparated = function (el, name, values) {
+        setAttribute(el, name, (values && String(values)) || null);
+}
+exports.setCommaSeparated = setCommaSeparated;
+function setSpaceSeparated(el, name, values) {
     if (Array.isArray(values))
-        exports.setAttribute(el, name, values.join(' ') || null);
+        setAttribute(el, name, values.join(' ') || null);
     else
-        exports.setAttribute(el, name, (values && String(values)) || null);
-};
+        setAttribute(el, name, (values && String(values)) || null);
+}
+exports.setSpaceSeparated = setSpaceSeparated;
 
-},{}],"QBLY":[function(require,module,exports) {
+},{"@tempo/core/lib/util/map":"UNaj"}],"QBLY":[function(require,module,exports) {
 "use strict";
 /*
 Copyright 2019 Google LLC
@@ -219,7 +239,7 @@ limitations under the License.
 Object.defineProperty(exports, "__esModule", { value: true });
 /* istanbul ignore file */
 var set_attribute_1 = require("./utils/set_attribute");
-exports.htmlAttributeNameMap = {
+exports.attributeNameMap = {
     acceptcharset: 'accept-charset',
     asattr: 'as',
     classname: 'class',
@@ -404,7 +424,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var dom_attributes_mapper_1 = require("../dom_attributes_mapper");
 var set_attribute_1 = require("./set_attribute");
 var text_1 = require("../text");
-exports.removeNode = function (node) {
+function removeNode(node) {
     var el = node;
     if (el && el.onblur) {
         el.onblur = null;
@@ -414,24 +434,28 @@ exports.removeNode = function (node) {
     if (node.parentElement) {
         node.parentElement.removeChild(node);
     }
-};
-exports.insertBefore = function (ref) { return function (node) {
-    if (ref.parentElement != null) {
-        ref.parentElement.insertBefore(node, ref);
-    }
-}; };
-exports.filterDynamics = function (children) {
+}
+exports.removeNode = removeNode;
+function insertBefore(ref) {
+    return function (node) {
+        if (ref.parentElement != null) {
+            ref.parentElement.insertBefore(node, ref);
+        }
+    };
+}
+exports.insertBefore = insertBefore;
+function filterDynamics(children) {
     return children.filter(function (child) { return child.kind === 'dynamic'; });
-};
-exports.domChildToTemplate = function (dom) {
+}
+exports.filterDynamics = filterDynamics;
+function domChildToTemplate(dom) {
     if (typeof dom === 'string' || typeof dom === 'function')
         return text_1.text(dom);
     else
         return dom;
-};
-exports.processAttribute = function (el, name, value, acc) {
-    name = name.toLowerCase();
-    name = dom_attributes_mapper_1.htmlAttributeNameMap[name] || name;
+}
+exports.domChildToTemplate = domChildToTemplate;
+function processAttribute(el, name, value, acc) {
     var set = dom_attributes_mapper_1.htmlAttributeMap[name] || set_attribute_1.setAttribute;
     if (typeof value === 'function') {
         var f = function (state) { return set(el, name, value(state)); };
@@ -441,9 +465,9 @@ exports.processAttribute = function (el, name, value, acc) {
         set(el, name, value);
     }
     return acc;
-};
-exports.processEvent = function (el, name, value, dispatch, acc) {
-    name = "on" + name.toLowerCase();
+}
+exports.processAttribute = processAttribute;
+function processEvent(el, name, value, dispatch, acc) {
     var localState;
     var anyEl = el;
     anyEl[name] = function (ev) {
@@ -457,8 +481,9 @@ exports.processEvent = function (el, name, value, dispatch, acc) {
     };
     acc.push(f);
     return acc;
-};
-exports.processStyle = function (el, name, value, acc) {
+}
+exports.processEvent = processEvent;
+function processStyle(el, name, value, acc) {
     if (typeof value === 'function') {
         var f = function (state) { return set_attribute_1.setOneStyle(el, name, value(state)); };
         acc.push(f);
@@ -467,7 +492,8 @@ exports.processStyle = function (el, name, value, acc) {
         set_attribute_1.setOneStyle(el, name, value);
     }
     return acc;
-};
+}
+exports.processStyle = processStyle;
 
 },{"../dom_attributes_mapper":"QBLY","./set_attribute":"AxMU","../text":"jTie"}],"Mmj0":[function(require,module,exports) {
 "use strict";
@@ -486,6 +512,8 @@ limitations under the License.
 Object.defineProperty(exports, "__esModule", { value: true });
 var dom_1 = require("./utils/dom");
 var node_view_1 = require("./node_view");
+var map_1 = require("@tempo/core/lib/util/map");
+var dom_attributes_mapper_1 = require("./dom_attributes_mapper");
 var applyChange = function (change, el, ctx) { return function (state, value) {
     return change(state, el, ctx, value);
 }; };
@@ -533,12 +561,12 @@ var DOMElement = /** @class */ (function () {
         // children
         var appendChild = function (n) { return el.appendChild(n); };
         var newCtx = ctx.withAppend(appendChild).withParent(el);
-        var views = this.children.map(function (child) { return child.render(newCtx, state); });
+        var views = map_1.mapArray(this.children, function (child) { return child.render(newCtx, state); });
         ctx.append(el);
         if (this.afterrender) {
             value = applyAfterRender(this.afterrender, el, ctx, state);
         }
-        var dynamicChildren = dom_1.filterDynamics(views).map(function (child) { return function (state) { return child.change(state); }; });
+        var dynamicChildren = map_1.mapArray(dom_1.filterDynamics(views), function (child) { return function (state) { return child.change(state); }; });
         allDynamics.push.apply(allDynamics, dynamicChildren);
         if (this.beforechange) {
             var change_1 = applyChange(this.beforechange, el, ctx);
@@ -566,38 +594,45 @@ var DOMElement = /** @class */ (function () {
     return DOMElement;
 }());
 exports.DOMElement = DOMElement;
-var extractAttrs = function (attrs) {
-    return Object.keys(attrs || {}).map(function (name) { return ({
+function extractAttrs(attrs) {
+    return map_1.mapArray(Object.keys(attrs || {}), function (attName) {
+        var name = attName.toLowerCase();
+        name = dom_attributes_mapper_1.attributeNameMap[name] || name;
+        return {
+            name: name,
+            value: attrs[attName]
+        };
+    });
+}
+function extractEvents(attrs) {
+    return map_1.mapArray(Object.keys(attrs || {}), function (eventName) {
+        var name = "on" + eventName.toLowerCase();
+        return {
+            name: name,
+            value: attrs[eventName]
+        };
+    });
+}
+function extractStyles(attrs) {
+    return map_1.mapArray(Object.keys(attrs || {}), function (name) { return ({
         name: name,
         value: attrs[name]
     }); });
-};
-var extractEvents = function (attrs) {
-    return Object.keys(attrs || {}).map(function (name) { return ({
-        name: name,
-        value: attrs[name]
-    }); });
-};
-var extractStyles = function (attrs) {
-    return Object.keys(attrs || {}).map(function (name) { return ({
-        name: name,
-        value: attrs[name]
-    }); });
-};
+}
 var makeCreateElement = function (name) { return function (doc) { return doc.createElement(name); }; };
 exports.el = function (name, attributes) {
     var children = [];
     for (var _i = 2; _i < arguments.length; _i++) {
         children[_i - 2] = arguments[_i];
     }
-    return new DOMElement(makeCreateElement(name), extractAttrs(attributes.attrs), extractEvents(attributes.events), extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, children.map(dom_1.domChildToTemplate));
+    return new DOMElement(makeCreateElement(name), extractAttrs(attributes.attrs), extractEvents(attributes.events), extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, map_1.mapArray(children, dom_1.domChildToTemplate));
 };
 exports.el2 = function (name) { return function (attributes) {
     var children = [];
     for (var _i = 1; _i < arguments.length; _i++) {
         children[_i - 1] = arguments[_i];
     }
-    return new DOMElement(makeCreateElement(name), extractAttrs(attributes.attrs), extractEvents(attributes.events), extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, children.map(dom_1.domChildToTemplate));
+    return new DOMElement(makeCreateElement(name), extractAttrs(attributes.attrs), extractEvents(attributes.events), extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, map_1.mapArray(children, dom_1.domChildToTemplate));
 }; };
 exports.defaultNamespaces = {
     'svg': 'http://www.w3.org/2000/svg'
@@ -611,17 +646,17 @@ exports.elNS = function (ns, name, attributes) {
         children[_i - 3] = arguments[_i];
     }
     var namespace = exports.defaultNamespaces[ns] || ns;
-    return new DOMElement(makeCreateElementNS(namespace, name), extractAttrs(attributes.attrs), extractEvents(attributes.events), extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, children.map(dom_1.domChildToTemplate));
+    return new DOMElement(makeCreateElementNS(namespace, name), extractAttrs(attributes.attrs), extractEvents(attributes.events), extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, map_1.mapArray(children, dom_1.domChildToTemplate));
 };
 exports.elNS2 = function (namespace, name) { return function (attributes) {
     var children = [];
     for (var _i = 1; _i < arguments.length; _i++) {
         children[_i - 1] = arguments[_i];
     }
-    return new DOMElement(makeCreateElementNS(namespace, name), extractAttrs(attributes.attrs), extractEvents(attributes.events), extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, children.map(dom_1.domChildToTemplate));
+    return new DOMElement(makeCreateElementNS(namespace, name), extractAttrs(attributes.attrs), extractEvents(attributes.events), extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, map_1.mapArray(children, dom_1.domChildToTemplate));
 }; };
 
-},{"./utils/dom":"KfbX","./node_view":"TJFn"}],"YzxN":[function(require,module,exports) {
+},{"./utils/dom":"KfbX","./node_view":"TJFn","@tempo/core/lib/util/map":"UNaj","./dom_attributes_mapper":"QBLY"}],"YzxN":[function(require,module,exports) {
 "use strict";
 /*
 Copyright 2019 Google LLC
@@ -775,6 +810,7 @@ limitations under the License.
 */
 Object.defineProperty(exports, "__esModule", { value: true });
 var dom_1 = require("./utils/dom");
+var map_1 = require("@tempo/core/lib/util/map");
 var DOMUntilView = /** @class */ (function () {
     function DOMUntilView(ref, repeatUntil, ctx, children) {
         this.ref = ref;
@@ -798,23 +834,24 @@ var DOMUntilView = /** @class */ (function () {
     DOMUntilView.prototype.change = function (state) {
         var _this = this;
         var currentViewLength = this.childrenView.length;
-        var count = 0;
+        var index = 0;
         var _loop_1 = function () {
-            var value = this_1.repeatUntil(state, count);
+            var value = this_1.repeatUntil(state, index);
             if (typeof value === 'undefined')
                 return "break";
-            if (count < currentViewLength) {
+            if (index < currentViewLength) {
                 // replace existing
-                for (var _i = 0, _a = dom_1.filterDynamics(this_1.childrenView[count]); _i < _a.length; _i++) {
-                    var v = _a[_i];
+                var filtered = dom_1.filterDynamics(this_1.childrenView[index]);
+                for (var _i = 0, filtered_1 = filtered; _i < filtered_1.length; _i++) {
+                    var v = filtered_1[_i];
                     v.change(value);
                 }
             }
             else {
                 // add node
-                this_1.childrenView.push(this_1.children.map(function (el) { return el.render(_this.ctx, value); }));
+                this_1.childrenView.push(map_1.mapArray(this_1.children, function (el) { return el.render(_this.ctx, value); }));
             }
-            count++;
+            index++;
         };
         var this_1 = this;
         while (true) {
@@ -822,16 +859,16 @@ var DOMUntilView = /** @class */ (function () {
             if (state_1 === "break")
                 break;
         }
-        var i = count;
+        var i = index;
+        // remove extra nodes
         while (i < currentViewLength) {
-            // remove extra nodes
             for (var _i = 0, _a = this.childrenView[i]; _i < _a.length; _i++) {
                 var c = _a[_i];
                 c.destroy();
             }
             i++;
         }
-        this.childrenView = this.childrenView.slice(0, count);
+        this.childrenView = this.childrenView.slice(0, index);
     };
     return DOMUntilView;
 }());
@@ -842,7 +879,7 @@ var DOMUntilTemplate = /** @class */ (function () {
         this.children = children;
     }
     DOMUntilTemplate.prototype.render = function (ctx, state) {
-        var ref = ctx.doc.createComment(this.options.refId || 'md:until');
+        var ref = ctx.doc.createComment(this.options.refId || 't:until');
         ctx.append(ref);
         var view = new DOMUntilView(ref, this.options.repeatUntil, ctx.withAppend(dom_1.insertBefore(ref)), this.children);
         view.change(state);
@@ -856,10 +893,10 @@ exports.until = function (options) {
     for (var _i = 1; _i < arguments.length; _i++) {
         children[_i - 1] = arguments[_i];
     }
-    return new DOMUntilTemplate(options, children.map(dom_1.domChildToTemplate));
+    return new DOMUntilTemplate(options, map_1.mapArray(children, dom_1.domChildToTemplate));
 };
 
-},{"./utils/dom":"KfbX"}],"xmUo":[function(require,module,exports) {
+},{"./utils/dom":"KfbX","@tempo/core/lib/util/map":"UNaj"}],"xmUo":[function(require,module,exports) {
 "use strict";
 /*
 Copyright 2019 Google LLC
@@ -888,7 +925,7 @@ exports.forEach = function (options) {
         children[_i - 1] = arguments[_i];
     }
     return until_1.until.apply(void 0, __spreadArrays([{
-            refId: options.refId || 'md:for_each',
+            refId: options.refId || 't:for_each',
             repeatUntil: function (state, index) { return state[index]; }
         }], children));
 };

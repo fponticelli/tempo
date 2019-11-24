@@ -18,6 +18,7 @@ import { nextFrame } from '@tempo/store/lib/emitter'
 import { DOMTemplate, DOMChild } from './template'
 import { DOMContext } from './context'
 import { filterDynamics, domChildToTemplate } from './utils/dom'
+import { mapArray } from '@tempo/core/lib/util/map'
 
 export class DOMComponentView<State, Action> extends DOMDynamicFragmentView<State> {
   /* istanbul ignore next */
@@ -59,7 +60,7 @@ export class DOMComponent<State, Action> implements DOMTemplate<State, Action> {
       store.process(action)
     }
     const newCtx = ctx.withDispatch(innerDispatch)
-    const viewChildren = this.children.map(child => child.render(newCtx, store.property.get()))
+    const viewChildren = mapArray(this.children, child => child.render(newCtx, store.property.get()))
     const dynamics = filterDynamics(viewChildren)
     const view = new DOMComponentView<State, Action>(store, innerDispatch, viewChildren, dynamics, () => {
       store.property.observable.off(update)
@@ -75,4 +76,4 @@ export const component = <State, Action>(
     delayed?: boolean
   },
   ...children: DOMChild<State, Action>[]
-) => new DOMComponent<State, Action>(attributes.store, children.map(domChildToTemplate), attributes.delayed || false)
+) => new DOMComponent<State, Action>(attributes.store, mapArray(children, domChildToTemplate), attributes.delayed || false)

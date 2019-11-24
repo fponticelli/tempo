@@ -45,7 +45,7 @@ export const createState = (versionIds: string[]): State => {
     versions,
     tests,
     options: {
-      maxTime: 2 // default should be 5
+      maxTime: 0.2 // default should be 5
     },
     results: {},
     processing: new Set(),

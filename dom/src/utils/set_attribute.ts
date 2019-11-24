@@ -11,7 +11,9 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-export const setOneStyle = (el: Element, name: string, value: any) => {
+import { mapArray } from '@tempo/core/lib/util/map'
+
+export function setOneStyle(el: Element, name: string, value: any) {
   const anyStyle = (el as HTMLElement).style as any
   if (value == null) {
     anyStyle[name] = null
@@ -20,7 +22,7 @@ export const setOneStyle = (el: Element, name: string, value: any) => {
   }
 }
 
-export const setAttribute = (el: Element, name: string, value: any) => {
+export function setAttribute(el: Element, name: string, value: any) {
   if (value == null) {
     el.removeAttribute(name)
   } else {
@@ -28,7 +30,7 @@ export const setAttribute = (el: Element, name: string, value: any) => {
   }
 }
 
-export const setProperty = (el: Element, name: string, value: any) => {
+export function setProperty(el: Element, name: string, value: any) {
   const anyEl = el as any
   if (value == null) {
     anyEl[name] = null
@@ -37,21 +39,19 @@ export const setProperty = (el: Element, name: string, value: any) => {
   }
 }
 
-export const setStyleAttribute = (el: Element, name: string, value: any) => {
+export function setStyleAttribute(el: Element, name: string, value: any) {
   const html = el as HTMLElement
   if (value == null) {
     html.removeAttribute(name)
   } else if (typeof value === 'string') {
     setAttribute(el, name, value)
   } else {
-    const s = Object.keys(value)
-      .map(k => `${k}: ${(value as any)[k]!};`)
-      .join(' ')
+    const s = mapArray(Object.keys(value), k => `${k}: ${(value as any)[k]!};`).join(' ')
     setAttribute(el, name, (s.length && s) || (null as any))
   }
 }
 
-export const setBoolProperty = (el: Element, name: string, value: any) => {
+export function setBoolProperty(el: Element, name: string, value: any) {
   const anyEl = el as any
   if (value == null) {
     anyEl[name] = null
@@ -61,20 +61,20 @@ export const setBoolProperty = (el: Element, name: string, value: any) => {
   }
 }
 
-export const setEnumBoolAttribute = (el: Element, name: string, value: any) => {
+export function setEnumBoolAttribute(el: Element, name: string, value: any) {
   setAttribute(el, name, value === true || value === 'true' ? 'true' : value === false ? 'false' : (null as any))
 }
 
-export const setBoolAttribute = (el: Element, name: string, value: any) => {
+export function setBoolAttribute(el: Element, name: string, value: any) {
   setAttribute(el, name, value === true || value === 'true' ? '' : (null as any))
 }
 
-export const setCommaSeparated = (el: Element, name: string, values: any) => {
+export function setCommaSeparated(el: Element, name: string, values: any) {
   if (Array.isArray(values)) setAttribute(el, name, values.join(', ') || (null as any))
   else setAttribute(el, name, (values && String(values)) || (null as any))
 }
 
-export const setSpaceSeparated = (el: Element, name: string, values: any) => {
+export function setSpaceSeparated(el: Element, name: string, values: any) {
   if (Array.isArray(values)) setAttribute(el, name, values.join(' ') || (null as any))
   else setAttribute(el, name, (values && String(values)) || (null as any))
 }

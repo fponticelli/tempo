@@ -15,6 +15,7 @@ import { View, StaticView, DynamicView } from '@tempo/core/lib/view'
 import { filterDynamics, domChildToTemplate } from './utils/dom'
 import { DOMTemplate, DOMChild } from './template'
 import { DOMContext } from './context'
+import { mapArray } from '@tempo/core/lib/util/map'
 
 export class DOMBaseFragmentView {
   constructor(readonly views: View<any>[]) {}
@@ -55,10 +56,10 @@ export class DOMFragment<State, Action> implements DOMTemplate<State, Action> {
   ) {}
 
   render(ctx: DOMContext<Action>, state: State): View<State> {
-    const views = this.children.map(child => child.render(ctx, state))
+    const views = mapArray(this.children, child => child.render(ctx, state))
     return fragmentView(views)
   }
 }
 
 export const fragment = <State, Action>(...children: DOMChild<State, Action>[]) =>
-  new DOMFragment<State, Action>(children.map(domChildToTemplate))
+  new DOMFragment<State, Action>(mapArray(children, domChildToTemplate))

@@ -17,6 +17,8 @@ import { View } from '@tempo/core/lib/view'
 import { processAttribute, processEvent, processStyle, filterDynamics, domChildToTemplate } from './utils/dom'
 import { DOMDynamicNodeView, DOMStaticNodeView } from './node_view'
 import { DOMAttributes, DOMAttribute, AttributeValue, DOMEventHandler, DOMStyleAttribute } from './value'
+import { mapArray } from '@tempo/core/lib/util/map'
+import { attributeNameMap } from './dom_attributes_mapper'
 
 const applyChange = <State, Action, El extends Element, T>(
   change: (state: State, el: El, ctx: DOMContext<Action>, value: T | undefined) => T | undefined,
@@ -69,7 +71,7 @@ export class DOMElement<State, Action, El extends Element = Element, T = unknown
     // children
     const appendChild = (n: Node) => el.appendChild(n)
     const newCtx = ctx.withAppend(appendChild).withParent(el)
-    const views = this.children.map(child => child.render(newCtx, state))
+    const views = mapArray(this.children, child => child.render(newCtx, state))
 
     ctx.append(el)
 
@@ -77,7 +79,7 @@ export class DOMElement<State, Action, El extends Element = Element, T = unknown
       value = applyAfterRender(this.afterrender, el, ctx, state)
     }
 
-    const dynamicChildren = filterDynamics(views).map(child => (state: State) => child.change(state))
+    const dynamicChildren = mapArray(filterDynamics(views), child => (state: State) => child.change(state))
 
     allDynamics.push(...dynamicChildren)
 
@@ -105,28 +107,38 @@ export class DOMElement<State, Action, El extends Element = Element, T = unknown
   }
 }
 
-const extractAttrs = <State>(
+function extractAttrs<State>(
   attrs: Record<string, DOMAttribute<State, AttributeValue>> | undefined
-): { name: string, value: DOMAttribute<State, AttributeValue>}[] => {
-  return Object.keys(attrs || {}).map(name => ({
-    name,
-    value: attrs![name]
-  }))
+): {
+  name: string,
+  value: DOMAttribute<State, AttributeValue>
+}[] {
+  return mapArray(Object.keys(attrs || {}), attName =>  {
+    let name = attName.toLowerCase()
+    name = attributeNameMap[name] || name
+    return {
+      name,
+      value: attrs![attName]
+    }
+  })
 }
 
-const extractEvents = <State, Action, El extends Element>(
+function extractEvents<State, Action, El extends Element>(
   attrs: Record<string, DOMEventHandler<State, Action, any, El>> | undefined
-): { name: string, value: DOMEventHandler<State, Action, any, El>}[] => {
-  return Object.keys(attrs || {}).map(name => ({
-    name,
-    value: attrs![name]
-  }))
+): { name: string, value: DOMEventHandler<State, Action, any, El>}[] {
+  return mapArray(Object.keys(attrs || {}), eventName => {
+    let name = `on${eventName.toLowerCase()}`
+    return {
+      name,
+      value: attrs![eventName]
+    }
+  })
 }
 
-const extractStyles = <State>(
+function extractStyles<State>(
   attrs: Record<string, DOMStyleAttribute<State, string>> | undefined
-): { name: string, value: DOMStyleAttribute<State, string>}[] => {
-  return Object.keys(attrs || {}).map(name => ({
+): { name: string, value: DOMStyleAttribute<State, string>}[] {
+  return mapArray(Object.keys(attrs || {}), name => ({
     name,
     value: attrs![name]
   }))
@@ -148,7 +160,7 @@ export const el = <State, Action, El extends Element, T = unknown>(
     attributes.beforechange,
     attributes.afterchange,
     attributes.beforedestroy,
-    children.map(domChildToTemplate)
+    mapArray(children, domChildToTemplate)
   )
 }
 
@@ -164,7 +176,7 @@ export const el2 = <El extends Element>(name: string) => <State, Action, T = unk
       attributes.beforechange,
       attributes.afterchange,
       attributes.beforedestroy,
-      children.map(domChildToTemplate)
+      mapArray(children, domChildToTemplate)
     )
   }
 
@@ -191,7 +203,7 @@ export const elNS = <State, Action, El extends Element, T = unknown>(
     attributes.beforechange,
     attributes.afterchange,
     attributes.beforedestroy,
-    children.map(domChildToTemplate)
+    mapArray(children, domChildToTemplate)
   )
 }
 
@@ -207,6 +219,6 @@ export const elNS2 = <El extends Element>(namespace: string, name: string) => <S
       attributes.beforechange,
       attributes.afterchange,
       attributes.beforedestroy,
-      children.map(domChildToTemplate)
+      mapArray(children, domChildToTemplate)
     )
   }
