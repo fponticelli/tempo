@@ -11,57 +11,146 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { State, createTodo } from './state'
+import { State, createTodo, Todo, Filter } from './state'
 import { Action } from './action'
+import { mapArray } from '@tempo/core/lib/util/map'
+
+const filterF = (filter: Filter) => {
+  if (filter === Filter.All) {
+    return (_: Todo) => true
+  } else if (filter === Filter.Completed) {
+    return (todo: Todo) => todo.completed
+  } else {
+    return (todo: Todo) => !todo.completed
+  }
+}
+
+const filterTodos = (todos: Todo[], filter: Filter) => {
+  return todos.filter(filterF(filter))
+}
 
 export const reducer = (state: State, action: Action) => {
-  const newState = Object.assign({}, state)
   switch (action.kind) {
     case 'adding-todo':
       if (action.title) {
-        newState.adding = action.title
+        return {
+          ...state,
+          adding: action.title
+        }
       } else {
-        delete newState.adding
+        return {
+          ...state,
+          adding: undefined
+        }
       }
-      break
     case 'create-todo':
-      if (action.title) newState.todos = state.todos.concat([createTodo(action.title)])
-      delete newState.adding
-      break
+      if (action.title) {
+        const todos = state.todos.concat([createTodo(action.title)])
+        const filtered = filterTodos(todos, state.filter)
+        return {
+          ...state,
+          todos,
+          filtered,
+          completed: todos.filter(todo => todo.completed).length,
+          adding: undefined
+        }
+      } else {
+        return {
+          ...state,
+          adding: undefined
+        }
+      }
     case 'editing-todo':
-      newState.editing = { id: action.id, title: action.title }
-      break
+      return {
+        ...state,
+        editing: { id: action.id, title: action.title }
+      }
     case 'cancel-adding-todo':
-      delete newState.adding
-      break
+      return {
+        ...state,
+        adding: undefined
+      }
     case 'cancel-editing-todo':
-      delete newState.editing
-      break
+      return {
+        ...state,
+        editing: undefined
+      }
     case 'clear-completed':
-      newState.todos = state.todos.filter(v => !v.completed)
-      break
+      const todos = state.todos.filter(v => !v.completed)
+      const filtered = filterTodos(todos, state.filter)
+      return {
+        ...state,
+        completed: 0,
+        filtered,
+        todos
+      }
     case 'remove-todo':
-      newState.todos = state.todos.filter(v => v.id !== action.id)
-      break
+      const todos2 = state.todos.filter(v => v.id !== action.id)
+      const filtered2 = filterTodos(todos2, state.filter)
+      return {
+        ...state,
+        completed: todos2.filter(todo => todo.completed).length,
+        todos: todos2,
+        filtered: filtered2
+      }
     case 'toggle-completed':
       const index = state.todos.findIndex(v => v.id === action.id)
       const current = state.todos[index]
       const todo = { ...current, completed: !current.completed }
-      newState.todos = [...state.todos.slice(0, index), todo, ...state.todos.slice(index + 1)]
-      break
+      const todos3 = [...state.todos.slice(0, index), todo, ...state.todos.slice(index + 1)]
+      const filtered3 = filterTodos(todos3, state.filter)
+      return {
+        ...state,
+        completed: todos3.filter(todo => todo.completed).length,
+        todos: todos3,
+        filtered: filtered3
+      }
+    case 'toggle-all-todo':
+      const allCompleted = state.completed === state.todos.length
+      const todos4 = mapArray(state.todos, todo => {
+        if (todo.completed !== allCompleted) {
+          return todo
+        } else {
+          return {
+            ...todo,
+            completed: !allCompleted
+          }
+        }
+      })
+      const filtered4 = filterTodos(todos4, state.filter)
+      return {
+        ...state,
+        todos: todos4,
+        filtered: filtered4,
+        completed: allCompleted ? 0 : state.todos.length
+      }
     case 'toggle-filter':
-      newState.filter = action.filter
-      break
+      const filtered5 = filterTodos(state.todos, action.filter)
+      return {
+        ...state,
+        filtered: filtered5,
+        filter: action.filter
+      }
     case 'update-todo':
-      delete newState.editing
       const index2 = state.todos.findIndex(o => o.id === action.id)
       if (index2 >= 0) {
         const updated = { id: action.id, title: action.title, completed: state.todos[index2].completed }
-        newState.todos = [...state.todos.slice(0, index2), updated, ...state.todos.slice(index2 + 1)]
+        const todos = [...state.todos.slice(0, index2), updated, ...state.todos.slice(index2 + 1)]
+        const filtered = filterTodos(todos, state.filter)
+        return {
+          ...state,
+          editing: undefined,
+          completed: todos.filter(todo => todo.completed).length,
+          todos,
+          filtered
+        }
+      } else {
+        return {
+          ...state,
+          editing: undefined
+        }
       }
-      break
     default:
       throw 'unreacheable code'
   }
-  return newState
 }

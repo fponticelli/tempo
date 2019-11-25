@@ -15,6 +15,7 @@ import { DOMTemplate, DOMChild } from './template'
 import { DOMContext } from './context'
 import { fragmentView } from './fragment'
 import { domChildToTemplate } from './utils/dom'
+import { mapArray } from '@tempo/core/lib/util/map'
 
 export class DOMPortal<State, Action> implements DOMTemplate<State, Action> {
   constructor(
@@ -27,7 +28,7 @@ export class DOMPortal<State, Action> implements DOMTemplate<State, Action> {
     const doc = ctx.doc
     const append = (node: Node) => this.append(doc, node)
     const parent = this.getParent(doc)
-    const viewChildren = this.children.map(child => {
+    const viewChildren = mapArray(this.children, child => {
       const newCtx = ctx.withAppend(append).withParent(parent)
       return child.render(newCtx, state)
     })
@@ -41,7 +42,7 @@ export const portal = <State, Action>(
     append: (doc: Document, node: Node) => void
   },
   ...children: DOMChild<State, Action>[]
-) => new DOMPortal<State, Action>(options.getParent, options.append, children.map(domChildToTemplate))
+) => new DOMPortal<State, Action>(options.getParent, options.append, mapArray(children, domChildToTemplate))
 
 export const portalWithSelector = <State, Action>(options: { selector: string }, ...children: DOMChild<State, Action>[]) =>
   portal<State, Action>(
@@ -67,12 +68,12 @@ export const headPortal = <State, Action>(...children: DOMChild<State, Action>[]
   new DOMPortal<State, Action>(
     (doc: Document) => doc.head!,
     (doc: Document, node: Node) => doc.head!.appendChild(node),
-    children.map(domChildToTemplate)
+    mapArray(children, domChildToTemplate)
   )
 
 export const bodyPortal = <State, Action>(...children: DOMChild<State, Action>[]) =>
   new DOMPortal<State, Action>(
     (doc: Document) => doc.body,
     (doc: Document, node: Node) => doc.body.appendChild(node),
-    children.map(domChildToTemplate)
+    mapArray(children, domChildToTemplate)
   )

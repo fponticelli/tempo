@@ -15,7 +15,7 @@ import { availableTests } from './tests'
 
 export interface State {
   versions: VersionWithSelected[]
-  tests: TestInfoWithSelected[]
+  tests: TestInfo[]
   options: TestOptions
   results: Record<string, TestResult>
   stats: Record<string, { min: number, max: number }>
@@ -38,19 +38,14 @@ const sortVersionIds = (a: string, b: string) => {
   }
 }
 
-const sortVersion = (a: Version, b: Version) => sortVersionIds(a.id, b.id)
-
 export const createState = (versionIds: string[]): State => {
-  const tests = availableTests().map(test => ({
-    ...test,
-    selected: true
-  }))
-  const versions = versionIds.map(id => ({ id, selected: true })).sort(sortVersion)
+  const tests = availableTests()
+  const versions = versionIds.sort(sortVersionIds).map((id, i) => ({ id, selected: i < 2 || i === versionIds.length - 1 }))
   return {
     versions,
     tests,
     options: {
-      maxTime: 2 // default should be 5
+      maxTime: 0.2 // default should be 5
     },
     results: {},
     processing: new Set(),
@@ -69,9 +64,6 @@ export interface VersionWithSelected extends Version {
 export interface TestInfo {
   id: string
   name: string
-}
-
-export interface TestInfoWithSelected extends TestInfo {
   selected: boolean
 }
 
@@ -80,6 +72,7 @@ export interface TestDescription {
   fn: string
   name: string
   args?: any
+  selected: boolean
 }
 
 export interface TestOptions {

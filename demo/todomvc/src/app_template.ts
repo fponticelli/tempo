@@ -12,9 +12,9 @@ limitations under the License.
 */
 
 import { section, header, h1, input, ul, label, div, li, footer, span, a, p, button } from '@tempo/dom/lib/html'
-import { mapState } from '@tempo/dom/lib/map'
 import { DOMEventHandler } from '@tempo/dom/lib/value'
-import { forEach } from '@tempo/dom/lib/for_each'
+import { filterState } from '@tempo/dom/lib/filter'
+import { iterate } from '@tempo/dom/lib/iterate'
 import { when } from '@tempo/dom/lib/when'
 import { Action } from './action'
 import { State, Filter, Todo } from './state'
@@ -23,19 +23,9 @@ const changeF = <El extends Element>(filter: Filter): DOMEventHandler<State, Act
   state: State
 ) => (state.filter === filter ? undefined : Action.toggleFilter(filter))
 
-const filterF = (filter: Filter) => {
-  if (filter === Filter.All) {
-    return (_: Todo) => true
-  } else if (filter === Filter.Completed) {
-    return (todo: Todo) => todo.completed
-  } else {
-    return (todo: Todo) => !todo.completed
-  }
-}
-
 const selectedF = (filter: Filter) => (state: State) => (state.filter === filter ? 'selected' : undefined)
 
-type TodoWEditing = Todo & { editing: boolean }
+const isEditing = (state: State, todo: Todo) => (state.editing && state.editing.id === todo.id) || false
 
 export const template = section<State, Action>(
   {},
@@ -44,52 +34,60 @@ export const template = section<State, Action>(
     header(
       { attrs: { className: 'header' } },
       h1({}, 'todos'),
-      input({
-        attrs: {
-          className: 'new-todo',
-          placeholder: 'What needs to be done?',
-          autofocus: state => state.editing == null,
-          value: state => state.adding
-        },
-        events: {
-          keydown: (_: State, e: KeyboardEvent, input: HTMLInputElement) => {
-            if (e.keyCode === 13) {
-              return Action.addTodo(input.value.trim())
-            } else if (e.keyCode === 27) {
-              return Action.cancelAddTodo
-            } else {
-              return Action.adddingTodo(input.value)
+      filterState(
+        { isSame: (a, b) => false },
+        input({
+          attrs: {
+            type: 'text',
+            className: 'new-todo',
+            placeholder: 'What needs to be done?',
+            autofocus: (state: State) => state.editing == null,
+            value: (state: State) => state.adding
+          },
+          events: {
+            keydown: (_: State, e: KeyboardEvent, input: HTMLInputElement) => {
+              if (e.keyCode === 13) {
+                return Action.createTodo(input.value.trim())
+              } else if (e.keyCode === 27) {
+                return Action.cancelAddingTodo
+              } else {
+                return Action.adddingTodo(input.value)
+              }
             }
           }
-        }
-      })
+        })
+      )
     ),
     section(
-      { attrs: { className: 'main' } },
-      input({ attrs: { id: 'toggle-all', className: 'toggle-all', type: 'checkbox' } }),
+      {
+        attrs: { className: 'main' },
+        styles: { visibility: (state: State) => (state.todos.length === 0 ? 'hidden' : '') }
+      },
+      input({
+        attrs: {
+          id: 'toggle-all',
+          className: 'toggle-all',
+          type: 'checkbox',
+          checked: (state: State) => state.completed === state.todos.length
+        },
+        events: {
+          click: () => Action.toggleAllTodo
+        }
+      }),
       label({ attrs: { for: 'toggle-all' } }, 'Mark all as complete'),
       ul(
         { attrs: { className: 'todo-list' } },
-        mapState(
-          {
-            map: state =>
-              state.todos.filter(filterF(state.filter)).map(todo => {
-                if (state.editing && state.editing.id === todo.id) {
-                  return { ...todo, editing: true, title: state.editing.title }
-                } else {
-                  return { ...todo, editing: false }
-                }
-              })
-          },
-          forEach<TodoWEditing[], Action>(
-            {},
+        iterate<State, Todo[], Action>(
+          { getArray: (state: State) => state.filtered },
+          filterState(
+            { isSame: ([a, sa], [b, sb]) => a === b && sa.editing === sb.editing },
             li(
               {
                 attrs: {
-                  className: todo => {
+                  className: ([todo, state]: [Todo, State]) => {
                     const classes = [
                       todo.completed ? 'completed' : undefined,
-                      todo.editing ? 'editing' : undefined
+                      isEditing(state, todo) ? 'editing' : undefined
                     ].filter(v => v != null)
                     return classes.join(' ') || undefined
                   }
@@ -97,51 +95,64 @@ export const template = section<State, Action>(
               },
               div(
                 { attrs: { className: 'view' } },
-                input<TodoWEditing, Action>({
+                input<[Todo, State], Action>({
                   attrs: {
                     className: 'toggle',
                     type: 'checkbox',
-                    checked: todo => todo.completed
+                    checked: ([todo]: [Todo, State]) => todo.completed
                   },
                   events: {
-                    change: todo => Action.toggleTodo(todo.id)
+                    change: ([todo]: [Todo, State]) => Action.toggleTodo(todo.id)
                   }
                 }),
-                label({ events: { dblclick: todo => Action.editingTodo(todo.id, todo.title) } }, todo => todo.title),
+                label(
+                  {
+                    events: {
+                      dblclick: ([todo]: [Todo, State]) => Action.editingTodo(todo.id, todo.title)
+                    }
+                  },
+                  ([todo]: [Todo, State]) => todo.title
+                ),
                 button({
                   attrs: {
                     className: 'destroy'
                   },
                   events: {
-                    click: todo => Action.removeTodo(todo.id)
+                    click: ([todo]: [Todo, State]) => Action.removeTodo(todo.id)
                   }
                 })
               ),
               when(
-                { condition: todo => todo.editing },
-                input<TodoWEditing, Action>({
+                { condition: ([todo, state]: [Todo, State]) => isEditing(state, todo) /* todo.editing */ },
+                input<[Todo, State], Action>({
                   afterrender: (_, el) => el.focus(),
                   attrs: {
+                    type: 'text',
                     className: 'edit',
-                    value: todo => todo.title
+                    value: ([_, state]: [Todo, State]) => state.editing && state.editing.title
                   },
                   events: {
-                    keypress: (todo: Todo, e: KeyboardEvent, input: HTMLInputElement) => {
+                    keydown: ([todo]: [Todo, State], e: KeyboardEvent, input: HTMLInputElement) => {
                       if (e.keyCode === 13) {
                         const value = input.value.trim()
-                        if (value) {
+                        if (value !== '') {
                           return Action.updateTodo(todo.id, value)
                         } else {
                           return Action.removeTodo(todo.id)
                         }
                       } else if (e.keyCode === 27) {
-                        return Action.cancelUpdateTodo
+                        return Action.cancelEditingTodo
                       } else {
                         return Action.editingTodo(todo.id, input.value)
                       }
                     },
-                    blur: (todo: Todo, _: MouseEvent, input: HTMLInputElement) => {
-                      return Action.updateTodo(todo.id, input.value.trim())
+                    blur: ([todo]: [Todo, State], e: MouseEvent, input: HTMLInputElement) => {
+                      const value = input.value.trim()
+                      if (value !== '') {
+                        return Action.updateTodo(todo.id, value)
+                      } else {
+                        return Action.removeTodo(todo.id)
+                      }
                     }
                   }
                 })
@@ -151,81 +162,83 @@ export const template = section<State, Action>(
         )
       )
     ),
-    footer(
-      { attrs: { className: 'footer' }, styles: { display: state => (state.todos.length === 0 ? 'none' : 'block') } },
-      span({ attrs: { className: 'todo-count' } }, state => {
-        const completed = state.todos.filter(todo => todo.completed).length
-        const left = state.todos.length - completed
-        if (left === 1) {
-          return '1 item left'
-        } else {
-          return `${left} items left`
-        }
-      }),
-      ul(
-        { attrs: { className: 'filters' } },
-        li(
-          {},
-          a(
-            {
-              attrs: {
-                href: '#/',
-                className: selectedF(Filter.All)
-              },
-              events: {
-                click: changeF(Filter.All)
-              }
-            },
-            'All'
-          )
-        ),
-        li(
-          {},
-          a(
-            {
-              attrs: {
-                href: '#/active',
-                className: selectedF(Filter.Active)
-              },
-              events: {
-                click: changeF(Filter.Active)
-              }
-            },
-            'Active'
-          )
-        ),
-        li(
-          {},
-          a(
-            {
-              attrs: {
-                href: '#/completed',
-                className: selectedF(Filter.Completed)
-              },
-              events: {
-                click: changeF(Filter.Completed)
-              }
-            },
-            'Completed'
-          )
-        )
-      ),
-      when(
-        {
-          condition: (state: State) => {
-            return state.todos.filter(v => v.completed).length > 0
+    filterState(
+      { isSame: (a, b) => a.filter === b.filter && a.completed === b.completed && a.todos.length === b.todos.length },
+      footer(
+        { attrs: { className: 'footer' }, styles: { display: state => (state.todos.length === 0 ? 'none' : 'block') } },
+        span({ attrs: { className: 'todo-count' } }, state => {
+          const left = state.todos.length - state.completed
+          if (left === 1) {
+            return '1 item left'
+          } else {
+            return `${left} items left`
           }
-        },
-        button(
+        }),
+        ul(
+          { attrs: { className: 'filters' } },
+          li(
+            {},
+            a(
+              {
+                attrs: {
+                  href: '#/',
+                  className: selectedF(Filter.All)
+                },
+                events: {
+                  click: changeF(Filter.All)
+                }
+              },
+              'All'
+            )
+          ),
+          li(
+            {},
+            a(
+              {
+                attrs: {
+                  href: '#/active',
+                  className: selectedF(Filter.Active)
+                },
+                events: {
+                  click: changeF(Filter.Active)
+                }
+              },
+              'Active'
+            )
+          ),
+          li(
+            {},
+            a(
+              {
+                attrs: {
+                  href: '#/completed',
+                  className: selectedF(Filter.Completed)
+                },
+                events: {
+                  click: changeF(Filter.Completed)
+                }
+              },
+              'Completed'
+            )
+          )
+        ),
+        when(
           {
-            attrs: {
-              className: 'clear-completed'
-            },
-            events: {
-              click: () => Action.clearCompleted
+            condition: (state: State) => {
+              return state.completed > 0
             }
           },
-          'Clear completed'
+          button(
+            {
+              attrs: {
+                className: 'clear-completed'
+              },
+              events: {
+                click: () => Action.clearCompleted
+              }
+            },
+            'Clear completed'
+          )
         )
       )
     )

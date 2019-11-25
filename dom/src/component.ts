@@ -14,10 +14,10 @@ limitations under the License.
 import { DOMDynamicFragmentView } from './fragment'
 import { View, DynamicView } from '@tempo/core/lib/view'
 import { Store } from '@tempo/store/lib/store'
-import { nextFrame } from '@tempo/store/lib/emitter'
 import { DOMTemplate, DOMChild } from './template'
 import { DOMContext } from './context'
 import { filterDynamics, domChildToTemplate } from './utils/dom'
+import { mapArray } from '@tempo/core/lib/util/map'
 
 export class DOMComponentView<State, Action> extends DOMDynamicFragmentView<State> {
   /* istanbul ignore next */
@@ -48,23 +48,37 @@ export class DOMComponent<State, Action> implements DOMTemplate<State, Action> {
   ) {}
 
   render(ctx: DOMContext<Action>, state: State) {
-    let update = (state: State) => view.change(state)
+    let update: (state: State) => void
     if (this.delayed) {
-      update = nextFrame(update)
+      let shouldRender = true
+      update = (state: State) => {
+        if (shouldRender) {
+          shouldRender = false
+          setTimeout(() => {
+            view.change(state)
+            shouldRender = true
+          })
+        }
+      }
+    } else {
+      update = (state: State) => {
+        view.change(state)
+      }
     }
     const { store } = this
+    const { property } = store
 
-    store.property.observable.on(update)
+    property.observable.on(update)
     const innerDispatch = (action: Action) => {
       store.process(action)
     }
     const newCtx = ctx.withDispatch(innerDispatch)
-    const viewChildren = this.children.map(child => child.render(newCtx, store.property.get()))
+    const viewChildren = mapArray(this.children, child => child.render(newCtx, property.get()))
     const dynamics = filterDynamics(viewChildren)
     const view = new DOMComponentView<State, Action>(store, innerDispatch, viewChildren, dynamics, () => {
-      store.property.observable.off(update)
+      property.observable.off(update)
     })
-    store.property.set(state)
+    property.set(state)
     return view
   }
 }
@@ -75,4 +89,4 @@ export const component = <State, Action>(
     delayed?: boolean
   },
   ...children: DOMChild<State, Action>[]
-) => new DOMComponent<State, Action>(attributes.store, children.map(domChildToTemplate), attributes.delayed || false)
+) => new DOMComponent<State, Action>(attributes.store, mapArray(children, domChildToTemplate), attributes.delayed || false)

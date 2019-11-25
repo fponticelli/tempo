@@ -117,19 +117,7 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"UNaj":[function(require,module,exports) {
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.mapArray = function (arr, f) {
-    var length = arr.length;
-    var buff = new Array(length);
-    for (var i = 0; i < length; i++) {
-        buff[i] = f(arr[i]);
-    }
-    return buff;
-};
-
-},{}],"AxMU":[function(require,module,exports) {
+})({"AxMU":[function(require,module,exports) {
 "use strict";
 /*
 Copyright 2019 Google LLC
@@ -144,85 +132,84 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 Object.defineProperty(exports, "__esModule", { value: true });
-var map_1 = require("@tempo/core/lib/util/map");
-function setOneStyle(el, name, value) {
+exports.setOneStyle = function (el, name, value) {
     var anyStyle = el.style;
     if (value == null) {
         anyStyle[name] = null;
     }
     else {
-        anyStyle[name] = value;
+        var s = String(value);
+        if (s !== anyStyle[name]) {
+            anyStyle[name] = String(value);
+        }
     }
-}
-exports.setOneStyle = setOneStyle;
-function setAttribute(el, name, value) {
+};
+exports.setAttribute = function (el, name, value) {
     if (value == null) {
         el.removeAttribute(name);
     }
     else {
         el.setAttribute(name, value);
     }
-}
-exports.setAttribute = setAttribute;
-function setProperty(el, name, value) {
+};
+exports.setProperty = function (el, name, value) {
     var anyEl = el;
-    if (value == null) {
+    if (value == null && anyEl[name] != null) {
         anyEl[name] = null;
     }
-    else {
+    else if (anyEl[name] !== value) {
         anyEl[name] = value;
     }
-}
-exports.setProperty = setProperty;
-function setStyleAttribute(el, name, value) {
+};
+exports.setStyleAttribute = function (el, name, value) {
     var html = el;
     if (value == null) {
         html.removeAttribute(name);
     }
     else if (typeof value === 'string') {
-        setAttribute(el, name, value);
+        exports.setAttribute(el, name, value);
     }
     else {
-        var s = map_1.mapArray(Object.keys(value), function (k) { return k + ": " + value[k] + ";"; }).join(' ');
-        setAttribute(el, name, (s.length && s) || null);
+        var s = Object.keys(value)
+            .map(function (k) {
+            return k + ": " + value[k] + ";";
+        })
+            .join(' ');
+        exports.setAttribute(el, name, (s.length && s) || null);
     }
-}
-exports.setStyleAttribute = setStyleAttribute;
-function setBoolProperty(el, name, value) {
+};
+exports.setBoolProperty = function (el, name, value) {
     var anyEl = el;
     if (value == null) {
         anyEl[name] = null;
     }
     else {
         var bool = value === true || value === 'true';
-        anyEl[name] = bool;
+        if (anyEl[name] !== bool) {
+            anyEl[name] = bool;
+        }
     }
-}
-exports.setBoolProperty = setBoolProperty;
-function setEnumBoolAttribute(el, name, value) {
-    setAttribute(el, name, value === true || value === 'true' ? 'true' : value === false ? 'false' : null);
-}
-exports.setEnumBoolAttribute = setEnumBoolAttribute;
-function setBoolAttribute(el, name, value) {
-    setAttribute(el, name, value === true || value === 'true' ? '' : null);
-}
-exports.setBoolAttribute = setBoolAttribute;
-function setCommaSeparated(el, name, values) {
+};
+exports.setEnumBoolAttribute = function (el, name, value) {
+    exports.setAttribute(el, name, value === true || value === 'true' ? 'true' : value === false ? 'false' : null);
+};
+exports.setBoolAttribute = function (el, name, value) {
+    exports.setAttribute(el, name, value === true || value === 'true' ? '' : null);
+};
+exports.setCommaSeparated = function (el, name, values) {
     if (Array.isArray(values))
-        setAttribute(el, name, values.join(', ') || null);
+        exports.setAttribute(el, name, values.join(', ') || null);
     else
-        setAttribute(el, name, (values && String(values)) || null);
-}
-exports.setCommaSeparated = setCommaSeparated;
-function setSpaceSeparated(el, name, values) {
+        exports.setAttribute(el, name, (values && String(values)) || null);
+};
+exports.setSpaceSeparated = function (el, name, values) {
     if (Array.isArray(values))
-        setAttribute(el, name, values.join(' ') || null);
+        exports.setAttribute(el, name, values.join(' ') || null);
     else
-        setAttribute(el, name, (values && String(values)) || null);
-}
-exports.setSpaceSeparated = setSpaceSeparated;
+        exports.setAttribute(el, name, (values && String(values)) || null);
+};
 
-},{"@tempo/core/lib/util/map":"UNaj"}],"QBLY":[function(require,module,exports) {
+},{}],"QBLY":[function(require,module,exports) {
 "use strict";
 /*
 Copyright 2019 Google LLC
@@ -239,7 +226,7 @@ limitations under the License.
 Object.defineProperty(exports, "__esModule", { value: true });
 /* istanbul ignore file */
 var set_attribute_1 = require("./utils/set_attribute");
-exports.attributeNameMap = {
+exports.htmlAttributeNameMap = {
     acceptcharset: 'accept-charset',
     asattr: 'as',
     classname: 'class',
@@ -381,14 +368,9 @@ var renderLiteral = function (ctx, value) {
 };
 var renderFunction = function (ctx, state, map) {
     var node = ctx.doc.createTextNode(map(state) || '');
-    var oldContent = '';
     var f = function (state) {
         var newContent = map(state) || '';
-        if (newContent !== oldContent) {
-            node.nodeValue = newContent;
-            if (newContent.length < 5000)
-                oldContent = newContent;
-        }
+        node.nodeValue = newContent;
     };
     var view = new node_view_1.DOMDynamicNodeView(node, [], f);
     ctx.append(node);
@@ -429,102 +411,66 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var dom_attributes_mapper_1 = require("../dom_attributes_mapper");
 var set_attribute_1 = require("./set_attribute");
 var text_1 = require("../text");
-function removeNode(node) {
+exports.removeNode = function (node) {
     var el = node;
     if (el && el.onblur) {
         el.onblur = null;
     }
-    if (!node || node.ownerDocument === undefined)
-        return;
-    if (node.parentElement) {
+    if (node && node.parentElement) {
         node.parentElement.removeChild(node);
     }
-}
-exports.removeNode = removeNode;
-function insertBefore(ref) {
-    return function (node) {
-        if (ref.parentElement != null) {
-            ref.parentElement.insertBefore(node, ref);
-        }
-    };
-}
-exports.insertBefore = insertBefore;
-function filterDynamics(children) {
+};
+exports.insertBefore = function (ref) { return function (node) {
+    if (ref.parentElement != null) {
+        ref.parentElement.insertBefore(node, ref);
+    }
+}; };
+exports.filterDynamics = function (children) {
     return children.filter(function (child) { return child.kind === 'dynamic'; });
-}
-exports.filterDynamics = filterDynamics;
-function domChildToTemplate(dom) {
+};
+exports.domChildToTemplate = function (dom) {
     if (typeof dom === 'string' || typeof dom === 'function')
         return text_1.text(dom);
     else
         return dom;
-}
-exports.domChildToTemplate = domChildToTemplate;
-function processAttribute(el, name, value, acc) {
+};
+exports.processAttribute = function (el, name, value, acc) {
+    name = name.toLowerCase();
+    name = dom_attributes_mapper_1.htmlAttributeNameMap[name] || name;
     var set = dom_attributes_mapper_1.htmlAttributeMap[name] || set_attribute_1.setAttribute;
     if (typeof value === 'function') {
-        // state in inputs can incorrectly map to state
-        if (el.nodeName === 'INPUT' || el.nodeName === 'TEXTAREA') {
-            var f = function (state) {
-                var newValue = value(state);
-                set(el, name, newValue);
-            };
-            acc.push(f);
-        }
-        else {
-            var oldValue_1 = undefined;
-            var f = function (state) {
-                var newValue = value(state);
-                if (newValue !== oldValue_1) {
-                    set(el, name, newValue);
-                    if (String(newValue).length < 50000) {
-                        oldValue_1 = newValue;
-                    }
-                }
-            };
-            acc.push(f);
-        }
+        var f = function (state) { return set(el, name, value(state)); };
+        acc.push(f);
     }
     else {
         set(el, name, value);
     }
     return acc;
-}
-exports.processAttribute = processAttribute;
-function processEvent(el, name, value, dispatch, acc) {
-    var localState;
+};
+exports.processEvent = function (el, name, value, dispatch, acc) {
     var anyEl = el;
-    anyEl[name] = function (ev) {
-        var r = value(localState, ev, el);
-        if (typeof r !== 'undefined') {
-            dispatch(r);
-        }
-    };
+    name = 'on' + name.toLowerCase();
     var f = function (state) {
-        localState = state;
+        anyEl[name] = function (ev) {
+            var r = value(state, ev, el);
+            if (r != null) {
+                dispatch(r);
+            }
+        };
     };
     acc.push(f);
     return acc;
-}
-exports.processEvent = processEvent;
-function processStyle(el, name, value, acc) {
+};
+exports.processStyle = function (el, name, value, acc) {
     if (typeof value === 'function') {
-        var oldValue_2;
-        var f = function (state) {
-            var newValue = value(state);
-            if (newValue !== oldValue_2) {
-                set_attribute_1.setOneStyle(el, name, newValue);
-                oldValue_2 = newValue;
-            }
-        };
+        var f = function (state) { return set_attribute_1.setOneStyle(el, name, value(state)); };
         acc.push(f);
     }
     else {
         set_attribute_1.setOneStyle(el, name, value);
     }
     return acc;
-}
-exports.processStyle = processStyle;
+};
 
 },{"../dom_attributes_mapper":"QBLY","./set_attribute":"AxMU","../text":"jTie"}],"Mmj0":[function(require,module,exports) {
 "use strict";
@@ -543,13 +489,11 @@ limitations under the License.
 Object.defineProperty(exports, "__esModule", { value: true });
 var dom_1 = require("./utils/dom");
 var node_view_1 = require("./node_view");
-var map_1 = require("@tempo/core/lib/util/map");
-var dom_attributes_mapper_1 = require("./dom_attributes_mapper");
 var applyChange = function (change, el, ctx) { return function (state, value) {
     return change(state, el, ctx, value);
 }; };
 var applyAfterRender = function (attr, el, ctx, state) {
-    if (typeof attr !== undefined) {
+    if (attr != null) {
         return attr(state, el, ctx);
     }
     else {
@@ -557,59 +501,50 @@ var applyAfterRender = function (attr, el, ctx, state) {
     }
 };
 var DOMElement = /** @class */ (function () {
-    function DOMElement(createElement, attrs, events, styles, afterrender, beforechange, afterchange, beforedestroy, children) {
+    function DOMElement(createElement, attributes, children) {
         this.createElement = createElement;
-        this.attrs = attrs;
-        this.events = events;
-        this.styles = styles;
-        this.afterrender = afterrender;
-        this.beforechange = beforechange;
-        this.afterchange = afterchange;
-        this.beforedestroy = beforedestroy;
+        this.attributes = attributes;
         this.children = children;
     }
     DOMElement.prototype.render = function (ctx, state) {
-        var _this = this;
         var el = this.createElement(ctx.doc);
         var value = undefined;
+        var _a = this.attributes, attrs = _a.attrs, events = _a.events, styles = _a.styles, afterrender = _a.afterrender, beforechange = _a.beforechange, afterchange = _a.afterchange, beforedestroy = _a.beforedestroy;
+        var beforedestroyf = beforedestroy && (function () { return beforedestroy(el, ctx, value); });
         var allDynamics = [];
-        for (var _i = 0, _a = this.attrs; _i < _a.length; _i++) {
-            var o = _a[_i];
-            dom_1.processAttribute(el, o.name, o.value, allDynamics);
+        if (attrs) {
+            Object.keys(attrs).forEach(function (key) { return dom_1.processAttribute(el, key, attrs[key], allDynamics); });
         }
-        for (var _b = 0, _c = this.events; _b < _c.length; _b++) {
-            var o = _c[_b];
-            dom_1.processEvent(el, o.name, o.value, ctx.dispatch, allDynamics);
+        if (events) {
+            Object.keys(events).forEach(function (key) { return dom_1.processEvent(el, key, events[key], ctx.dispatch, allDynamics); });
         }
-        for (var _d = 0, _e = this.styles; _d < _e.length; _d++) {
-            var o = _e[_d];
-            dom_1.processStyle(el, o.name, o.value, allDynamics);
+        if (styles) {
+            Object.keys(styles).forEach(function (key) { return dom_1.processStyle(el, key, styles[key], allDynamics); });
         }
-        for (var _f = 0, allDynamics_1 = allDynamics; _f < allDynamics_1.length; _f++) {
-            var dy = allDynamics_1[_f];
+        for (var _i = 0, allDynamics_1 = allDynamics; _i < allDynamics_1.length; _i++) {
+            var dy = allDynamics_1[_i];
             dy(state);
         }
         // children
         var appendChild = function (n) { return el.appendChild(n); };
         var newCtx = ctx.withAppend(appendChild).withParent(el);
-        var views = map_1.mapArray(this.children, function (child) { return child.render(newCtx, state); });
+        var views = this.children.map(function (child) { return child.render(newCtx, state); });
         ctx.append(el);
-        if (this.afterrender) {
-            value = applyAfterRender(this.afterrender, el, ctx, state);
+        if (afterrender) {
+            value = applyAfterRender(afterrender, el, ctx, state);
         }
-        var dynamicChildren = map_1.mapArray(dom_1.filterDynamics(views), function (child) { return function (state) { return child.change(state); }; });
+        var dynamicChildren = dom_1.filterDynamics(views).map(function (child) { return function (state) { return child.change(state); }; });
         allDynamics.push.apply(allDynamics, dynamicChildren);
-        if (this.beforechange) {
-            var change_1 = applyChange(this.beforechange, el, ctx);
+        if (beforechange) {
+            var change_1 = applyChange(beforechange, el, ctx);
             var update = function (state) { value = change_1(state, value); };
             allDynamics.unshift(update);
         }
-        if (this.afterchange) {
-            var change_2 = applyChange(this.afterchange, el, ctx);
+        if (afterchange) {
+            var change_2 = applyChange(afterchange, el, ctx);
             var update = function (state) { value = change_2(state, value); };
             allDynamics.push(update);
         }
-        var beforedestroyf = this.beforedestroy && (function () { return _this.beforedestroy(el, ctx, value); });
         if (allDynamics.length > 0) {
             return new node_view_1.DOMDynamicNodeView(el, views, function (state) {
                 for (var _i = 0, allDynamics_2 = allDynamics; _i < allDynamics_2.length; _i++) {
@@ -625,45 +560,20 @@ var DOMElement = /** @class */ (function () {
     return DOMElement;
 }());
 exports.DOMElement = DOMElement;
-function extractAttrs(attrs) {
-    return map_1.mapArray(Object.keys(attrs || {}), function (attName) {
-        var name = attName.toLowerCase();
-        name = dom_attributes_mapper_1.attributeNameMap[name] || name;
-        return {
-            name: name,
-            value: attrs[attName]
-        };
-    });
-}
-function extractEvents(attrs) {
-    return map_1.mapArray(Object.keys(attrs || {}), function (eventName) {
-        var name = "on" + eventName.toLowerCase();
-        return {
-            name: name,
-            value: attrs[eventName]
-        };
-    });
-}
-function extractStyles(attrs) {
-    return map_1.mapArray(Object.keys(attrs || {}), function (name) { return ({
-        name: name,
-        value: attrs[name]
-    }); });
-}
 var makeCreateElement = function (name) { return function (doc) { return doc.createElement(name); }; };
 exports.el = function (name, attributes) {
     var children = [];
     for (var _i = 2; _i < arguments.length; _i++) {
         children[_i - 2] = arguments[_i];
     }
-    return new DOMElement(makeCreateElement(name), extractAttrs(attributes.attrs), extractEvents(attributes.events), extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, map_1.mapArray(children, dom_1.domChildToTemplate));
+    return new DOMElement(makeCreateElement(name), attributes, children.map(dom_1.domChildToTemplate));
 };
 exports.el2 = function (name) { return function (attributes) {
     var children = [];
     for (var _i = 1; _i < arguments.length; _i++) {
         children[_i - 1] = arguments[_i];
     }
-    return new DOMElement(makeCreateElement(name), extractAttrs(attributes.attrs), extractEvents(attributes.events), extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, map_1.mapArray(children, dom_1.domChildToTemplate));
+    return new DOMElement(makeCreateElement(name), attributes, children.map(dom_1.domChildToTemplate));
 }; };
 exports.defaultNamespaces = {
     'svg': 'http://www.w3.org/2000/svg'
@@ -677,17 +587,17 @@ exports.elNS = function (ns, name, attributes) {
         children[_i - 3] = arguments[_i];
     }
     var namespace = exports.defaultNamespaces[ns] || ns;
-    return new DOMElement(makeCreateElementNS(namespace, name), extractAttrs(attributes.attrs), extractEvents(attributes.events), extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, map_1.mapArray(children, dom_1.domChildToTemplate));
+    return new DOMElement(makeCreateElementNS(namespace, name), attributes, children.map(dom_1.domChildToTemplate));
 };
 exports.elNS2 = function (namespace, name) { return function (attributes) {
     var children = [];
     for (var _i = 1; _i < arguments.length; _i++) {
         children[_i - 1] = arguments[_i];
     }
-    return new DOMElement(makeCreateElementNS(namespace, name), extractAttrs(attributes.attrs), extractEvents(attributes.events), extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, map_1.mapArray(children, dom_1.domChildToTemplate));
+    return new DOMElement(makeCreateElementNS(namespace, name), attributes, children.map(dom_1.domChildToTemplate));
 }; };
 
-},{"./utils/dom":"KfbX","./node_view":"TJFn","@tempo/core/lib/util/map":"UNaj","./dom_attributes_mapper":"QBLY"}],"YzxN":[function(require,module,exports) {
+},{"./utils/dom":"KfbX","./node_view":"TJFn"}],"YzxN":[function(require,module,exports) {
 "use strict";
 /*
 Copyright 2019 Google LLC
@@ -841,7 +751,6 @@ limitations under the License.
 */
 Object.defineProperty(exports, "__esModule", { value: true });
 var dom_1 = require("./utils/dom");
-var map_1 = require("@tempo/core/lib/util/map");
 var DOMUntilView = /** @class */ (function () {
     function DOMUntilView(ref, repeatUntil, ctx, children) {
         this.ref = ref;
@@ -865,41 +774,32 @@ var DOMUntilView = /** @class */ (function () {
     DOMUntilView.prototype.change = function (state) {
         var _this = this;
         var currentViewLength = this.childrenView.length;
-        var index = 0;
-        var _loop_1 = function () {
-            var value = this_1.repeatUntil(state, index);
-            if (typeof value === 'undefined')
-                return "break";
-            if (index < currentViewLength) {
+        var count = 0;
+        var value;
+        while ((value = this.repeatUntil(state, count)) !== undefined) {
+            if (count < currentViewLength) {
                 // replace existing
-                var filtered = dom_1.filterDynamics(this_1.childrenView[index]);
-                for (var _i = 0, filtered_1 = filtered; _i < filtered_1.length; _i++) {
-                    var v = filtered_1[_i];
+                for (var _i = 0, _a = dom_1.filterDynamics(this.childrenView[count]); _i < _a.length; _i++) {
+                    var v = _a[_i];
                     v.change(value);
                 }
             }
             else {
                 // add node
-                this_1.childrenView.push(map_1.mapArray(this_1.children, function (el) { return el.render(_this.ctx, value); }));
+                this.childrenView.push(this.children.map(function (el) { return el.render(_this.ctx, value); }));
             }
-            index++;
-        };
-        var this_1 = this;
-        while (true) {
-            var state_1 = _loop_1();
-            if (state_1 === "break")
-                break;
+            count++;
         }
-        var i = index;
-        // remove extra nodes
+        var i = count;
         while (i < currentViewLength) {
-            for (var _i = 0, _a = this.childrenView[i]; _i < _a.length; _i++) {
-                var c = _a[_i];
+            // remove extra nodes
+            for (var _b = 0, _c = this.childrenView[i]; _b < _c.length; _b++) {
+                var c = _c[_b];
                 c.destroy();
             }
             i++;
         }
-        this.childrenView = this.childrenView.slice(0, index);
+        this.childrenView = this.childrenView.slice(0, count);
     };
     return DOMUntilView;
 }());
@@ -910,7 +810,7 @@ var DOMUntilTemplate = /** @class */ (function () {
         this.children = children;
     }
     DOMUntilTemplate.prototype.render = function (ctx, state) {
-        var ref = ctx.doc.createComment(this.options.refId || 't:until');
+        var ref = ctx.doc.createComment(this.options.refId || 'md:until');
         ctx.append(ref);
         var view = new DOMUntilView(ref, this.options.repeatUntil, ctx.withAppend(dom_1.insertBefore(ref)), this.children);
         view.change(state);
@@ -924,10 +824,10 @@ exports.until = function (options) {
     for (var _i = 1; _i < arguments.length; _i++) {
         children[_i - 1] = arguments[_i];
     }
-    return new DOMUntilTemplate(options, map_1.mapArray(children, dom_1.domChildToTemplate));
+    return new DOMUntilTemplate(options, children.map(dom_1.domChildToTemplate));
 };
 
-},{"./utils/dom":"KfbX","@tempo/core/lib/util/map":"UNaj"}],"xmUo":[function(require,module,exports) {
+},{"./utils/dom":"KfbX"}],"xmUo":[function(require,module,exports) {
 "use strict";
 /*
 Copyright 2019 Google LLC
@@ -956,7 +856,7 @@ exports.forEach = function (options) {
         children[_i - 1] = arguments[_i];
     }
     return until_1.until.apply(void 0, __spreadArrays([{
-            refId: options.refId || 't:for_each',
+            refId: options.refId || 'md:for_each',
             repeatUntil: function (state, index) { return state[index]; }
         }], children));
 };
@@ -1038,7 +938,7 @@ var DOMContext = /** @class */ (function () {
         var _this = this;
         return new DOMContext(this.doc, this.append, this.parent, function (action) {
             var newAction = f(action);
-            if (typeof newAction !== 'undefined') {
+            if (newAction !== undefined) {
                 _this.dispatch(newAction);
             }
         });

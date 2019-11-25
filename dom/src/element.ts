@@ -16,7 +16,9 @@ import { DOMContext } from './context'
 import { View } from '@tempo/core/lib/view'
 import { processAttribute, processEvent, processStyle, filterDynamics, domChildToTemplate } from './utils/dom'
 import { DOMDynamicNodeView, DOMStaticNodeView } from './node_view'
-import { DOMAttributes } from './value'
+import { DOMAttributes, DOMAttribute, AttributeValue, DOMEventHandler, DOMStyleAttribute } from './value'
+import { mapArray } from '@tempo/core/lib/util/map'
+import { attributeNameMap } from './dom_attributes_mapper'
 
 const applyChange = <State, Action, El extends Element, T>(
   change: (state: State, el: El, ctx: DOMContext<Action>, value: T | undefined) => T | undefined,
@@ -32,7 +34,7 @@ const applyAfterRender = <State, Action, El extends Element, T>(
   ctx: DOMContext<Action>,
   state: State
 ) => {
-  if (attr != null) {
+  if (typeof attr !== undefined) {
     return attr(state, el, ctx)
   } else {
     return undefined
@@ -42,7 +44,13 @@ const applyAfterRender = <State, Action, El extends Element, T>(
 export class DOMElement<State, Action, El extends Element = Element, T = unknown> implements DOMTemplate<State, Action> {
   constructor(
     readonly createElement: (doc: Document) => El,
-    readonly attributes: DOMAttributes<State, Action, El, T>,
+    readonly attrs: { name: string, value: DOMAttribute<State, AttributeValue>}[],
+    readonly events: { name: string, value: DOMEventHandler<State, Action, any, El>}[],
+    readonly styles: { name: string, value: DOMStyleAttribute<State, string>}[],
+    readonly afterrender:  undefined | ((state: State, el: El, ctx: DOMContext<Action>) => T | undefined),
+    readonly beforechange: undefined | ((state: State, el: El, ctx: DOMContext<Action>, value: T | undefined) => T | undefined),
+    readonly afterchange:  undefined | ((state: State, el: El, ctx: DOMContext<Action>, value: T | undefined) => T | undefined),
+    readonly beforedestroy: undefined | (((el: El, ctx: DOMContext<Action>, value: T | undefined) => void)),
     readonly children: DOMTemplate<State, Action>[]
   ) {}
 
@@ -50,66 +58,44 @@ export class DOMElement<State, Action, El extends Element = Element, T = unknown
     const el = this.createElement(ctx.doc)
     let value: T | undefined = undefined
 
-    const {
-      attrs,
-      events,
-      styles,
-      afterrender,
-      beforechange,
-      afterchange,
-      beforedestroy
-    } = this.attributes
-
-    const beforedestroyf = beforedestroy && (() => beforedestroy(el, ctx, value))
-
     const allDynamics = [] as ((state: State) => void)[]
 
-    if (attrs) {
-      Object.keys(attrs).forEach(
-        (key: keyof typeof attrs) => processAttribute(el, key, attrs[key], allDynamics)
-      )
-    }
+    for (const o of this.attrs) processAttribute(el, o.name, o.value, allDynamics)
 
-    if (events) {
-      Object.keys(events).forEach(
-        (key: keyof typeof events) => processEvent(el, key, events[key], ctx.dispatch, allDynamics)
-      )
-    }
+    for (const o of this.events) processEvent(el, o.name, o.value, ctx.dispatch, allDynamics)
 
-    if (styles) {
-      Object.keys(styles).forEach(
-        (key: keyof typeof styles) => processStyle(el, key, styles[key], allDynamics)
-      )
-    }
+    for (const o of this.styles) processStyle(el, o.name, o.value, allDynamics)
 
     for (const dy of allDynamics) dy(state)
 
     // children
     const appendChild = (n: Node) => el.appendChild(n)
     const newCtx = ctx.withAppend(appendChild).withParent(el)
-    const views = this.children.map(child => child.render(newCtx, state))
+    const views = mapArray(this.children, child => child.render(newCtx, state))
 
     ctx.append(el)
 
-    if (afterrender) {
-      value = applyAfterRender(afterrender, el, ctx, state)
+    if (this.afterrender) {
+      value = applyAfterRender(this.afterrender, el, ctx, state)
     }
 
-    const dynamicChildren = filterDynamics(views).map(child => (state: State) => child.change(state))
+    const dynamicChildren = mapArray(filterDynamics(views), child => (state: State) => child.change(state))
 
     allDynamics.push(...dynamicChildren)
 
-    if (beforechange) {
-      const change = applyChange(beforechange, el, ctx)
+    if (this.beforechange) {
+      const change = applyChange(this.beforechange, el, ctx)
       const update = (state: State) => { value = change(state, value) }
       allDynamics.unshift(update)
     }
 
-    if (afterchange) {
-      const change = applyChange(afterchange, el, ctx)
+    if (this.afterchange) {
+      const change = applyChange(this.afterchange, el, ctx)
       const update = (state: State) => { value = change(state, value) }
       allDynamics.push(update)
     }
+
+    const beforedestroyf = this.beforedestroy && (() => this.beforedestroy!(el, ctx, value))
 
     if (allDynamics.length > 0) {
       return new DOMDynamicNodeView(el, views, (state: State) => {
@@ -121,6 +107,43 @@ export class DOMElement<State, Action, El extends Element = Element, T = unknown
   }
 }
 
+function extractAttrs<State>(
+  attrs: Record<string, DOMAttribute<State, AttributeValue>> | undefined
+): {
+  name: string,
+  value: DOMAttribute<State, AttributeValue>
+}[] {
+  return mapArray(Object.keys(attrs || {}), attName =>  {
+    let name = attName.toLowerCase()
+    name = attributeNameMap[name] || name
+    return {
+      name,
+      value: attrs![attName]
+    }
+  })
+}
+
+function extractEvents<State, Action, El extends Element>(
+  attrs: Record<string, DOMEventHandler<State, Action, any, El>> | undefined
+): { name: string, value: DOMEventHandler<State, Action, any, El>}[] {
+  return mapArray(Object.keys(attrs || {}), eventName => {
+    let name = `on${eventName.toLowerCase()}`
+    return {
+      name,
+      value: attrs![eventName]
+    }
+  })
+}
+
+function extractStyles<State>(
+  attrs: Record<string, DOMStyleAttribute<State, string>> | undefined
+): { name: string, value: DOMStyleAttribute<State, string>}[] {
+  return mapArray(Object.keys(attrs || {}), name => ({
+    name,
+    value: attrs![name]
+  }))
+}
+
 const makeCreateElement = <El extends Element>(name: string) => (doc: Document) => doc.createElement(name) as any as El
 
 export const el = <State, Action, El extends Element, T = unknown>(
@@ -130,8 +153,14 @@ export const el = <State, Action, El extends Element, T = unknown>(
 ) => {
   return new DOMElement<State, Action, El, T>(
     makeCreateElement(name),
-    attributes,
-    children.map(domChildToTemplate)
+    extractAttrs(attributes.attrs),
+    extractEvents(attributes.events),
+    extractStyles(attributes.styles),
+    attributes.afterrender,
+    attributes.beforechange,
+    attributes.afterchange,
+    attributes.beforedestroy,
+    mapArray(children, domChildToTemplate)
   )
 }
 
@@ -140,8 +169,14 @@ export const el2 = <El extends Element>(name: string) => <State, Action, T = unk
   ...children: DOMChild<State, Action>[]) => {
     return new DOMElement<State, Action, El, T>(
       makeCreateElement(name),
-      attributes,
-      children.map(domChildToTemplate)
+      extractAttrs(attributes.attrs),
+      extractEvents(attributes.events),
+      extractStyles(attributes.styles),
+      attributes.afterrender,
+      attributes.beforechange,
+      attributes.afterchange,
+      attributes.beforedestroy,
+      mapArray(children, domChildToTemplate)
     )
   }
 
@@ -161,8 +196,14 @@ export const elNS = <State, Action, El extends Element, T = unknown>(
   const namespace = defaultNamespaces[ns] || ns
   return new DOMElement<State, Action, El, T>(
     makeCreateElementNS(namespace, name),
-    attributes,
-    children.map(domChildToTemplate)
+    extractAttrs(attributes.attrs),
+    extractEvents(attributes.events),
+    extractStyles(attributes.styles),
+    attributes.afterrender,
+    attributes.beforechange,
+    attributes.afterchange,
+    attributes.beforedestroy,
+    mapArray(children, domChildToTemplate)
   )
 }
 
@@ -171,7 +212,13 @@ export const elNS2 = <El extends Element>(namespace: string, name: string) => <S
   ...children: DOMChild<State, Action>[]) => {
     return new DOMElement<State, Action, El, T>(
       makeCreateElementNS(namespace, name),
-      attributes,
-      children.map(domChildToTemplate)
+      extractAttrs(attributes.attrs),
+      extractEvents(attributes.events),
+      extractStyles(attributes.styles),
+      attributes.afterrender,
+      attributes.beforechange,
+      attributes.afterchange,
+      attributes.beforedestroy,
+      mapArray(children, domChildToTemplate)
     )
   }

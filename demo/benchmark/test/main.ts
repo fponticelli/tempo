@@ -15,6 +15,10 @@ import { list } from './template/list'
 import { deep, Deep } from './template/deep'
 import { DOMContext } from '@tempo/dom/lib/context'
 import { DynamicView } from '@tempo/core/lib/view'
+import { TestAttributes, attribute } from './template/attribute'
+import { TestStyles, style } from './template/styles'
+import { event } from './template/events'
+import { TestProperties, property } from './template/property'
 
 const ctx = DOMContext.fromElement(document.getElementById('test')!, () => {})
 
@@ -33,10 +37,37 @@ export const renderListElementsAndDestroy = (numbers: number[]) => {
   view.destroy()
 }
 
-export const renderDeepAndUpdate = (deeps: Deep[]) => {
-  const view = deep.render(ctx, deeps[0]!) as DynamicView<Deep>
-  for (const d of deeps)
-    view.change(d)
+export const renderDeepAndUpdate = (values: Deep[]) => {
+  const view = deep.render(ctx, values[0]!) as DynamicView<Deep>
+  for (const v of values)
+    view.change(v)
+}
+
+export const updateAttributes = (values: TestAttributes[]) => {
+  const view = attribute.render(ctx, values[0]!) as DynamicView<TestAttributes>
+  for (const v of values)
+    view.change(v)
+}
+
+export const updateProperty = (values: TestProperties[]) => {
+  const view = property.render(ctx, values[0]!) as DynamicView<TestProperties>
+  for (const v of values)
+    view.change(v)
+}
+
+export const updateStyles = (values: TestStyles[]) => {
+  const view = style.render(ctx, values[0]!) as DynamicView<TestStyles>
+  for (const v of values)
+    view.change(v)
+}
+
+export const updateAndTriggerEvents = (values: string[]) => {
+  const view = event.render(ctx, values[0]!) as DynamicView<string>
+  const el = document.getElementById('test').firstElementChild! as HTMLButtonElement
+  for (const v of values) {
+    el.click()
+    view.change(v)
+  }
 }
 
 const anyWin = window as any
@@ -44,5 +75,9 @@ anyWin.__tests__ = {
   renderListElements,
   renderListAndUpdate,
   renderListElementsAndDestroy,
-  renderDeepAndUpdate
+  renderDeepAndUpdate,
+  updateAttributes,
+  updateStyles,
+  updateProperty,
+  updateAndTriggerEvents
 }

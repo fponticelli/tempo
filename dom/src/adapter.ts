@@ -29,7 +29,7 @@ export class DOMAdapterView<OuterState, InnerState, InnerAction> implements Dyna
 
   change(outerState: OuterState): void {
     const newState = this.mergeStates(outerState, this.child.store.property.get())
-    if (newState == null) return
+    if (typeof newState === 'undefined') return
     this.child.change(newState)
   }
 }

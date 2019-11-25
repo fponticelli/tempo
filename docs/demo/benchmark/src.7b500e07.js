@@ -43,7 +43,354 @@ parcelRequire = (function (init) {
   localRequire.modules = modules;
   return localRequire;
 })(function (require) {
-// ASSET: ../node_modules/tslib/tslib.es6.js
+// ASSET: generator.ts
+var $L0ny$exports = {};
+Object.defineProperty($L0ny$exports, "__esModule", {
+  value: true
+});
+var $L0ny$var$alphabet = 'abcdefghijklmnopqrstuvwxyz';
+
+var $L0ny$export$createArray = function (num) {
+  var res = [];
+
+  for (var i = 0; i < num; i++) {
+    res.push(i);
+  }
+
+  return res;
+};
+
+$L0ny$exports.createArray = $L0ny$export$createArray;
+
+var $L0ny$export$createRange = function (num) {
+  return $L0ny$export$createArray(num).map(function (_) {
+    return Math.floor(Math.random() * num);
+  });
+};
+
+$L0ny$exports.createRange = $L0ny$export$createRange;
+
+var $L0ny$export$repeat = function (times, f) {
+  return $L0ny$export$createArray(times).map(f);
+};
+
+$L0ny$exports.repeat = $L0ny$export$repeat;
+
+var $L0ny$export$repeatf = function (f) {
+  return function (times) {
+    return $L0ny$export$createArray(times).map(f);
+  };
+};
+
+$L0ny$exports.repeatf = $L0ny$export$repeatf;
+
+var $L0ny$export$repeatfWithNulls = function (f) {
+  return function (ratio, times) {
+    return $L0ny$export$createArray(times).map(function (i) {
+      if (Math.random() < ratio) {
+        return f(i);
+      } else {
+        return null;
+      }
+    });
+  };
+};
+
+$L0ny$exports.repeatfWithNulls = $L0ny$export$repeatfWithNulls;
+
+var $L0ny$export$createRanges = function (values) {
+  return values.map($L0ny$export$createRange);
+};
+
+$L0ny$exports.createRanges = $L0ny$export$createRanges;
+
+var $L0ny$export$createWord = function (num) {
+  var w = '';
+
+  for (var i = 0; i < num; i++) {
+    w += $L0ny$var$alphabet[Math.floor($L0ny$var$alphabet.length * Math.random())];
+  }
+
+  return w;
+};
+
+$L0ny$exports.createWord = $L0ny$export$createWord;
+
+var $L0ny$export$createRandomWord = function (min, max) {
+  var length = min + Math.round((max - min) * Math.random());
+  return $L0ny$export$createWord(length);
+};
+
+$L0ny$exports.createRandomWord = $L0ny$export$createRandomWord;
+
+var $L0ny$export$createWords = function (num, min, max) {
+  return $L0ny$export$createArray(num).map(function (_) {
+    return $L0ny$export$createRandomWord(min, max);
+  }).join(' ');
+};
+
+$L0ny$exports.createWords = $L0ny$export$createWords;
+
+var $L0ny$export$createWordsBetween = function (minWords, maxWords, minLength, maxLentgh) {
+  var num = $L0ny$export$randomInt(minWords, maxWords);
+  return $L0ny$export$createArray(num).map(function (_) {
+    return $L0ny$export$createRandomWord(minLength, maxLentgh);
+  }).join(' ');
+};
+
+$L0ny$exports.createWordsBetween = $L0ny$export$createWordsBetween;
+
+var $L0ny$export$createDeep = function () {
+  return {
+    id: $L0ny$export$createWord(8),
+    name: $L0ny$export$createRandomWord(4, 12),
+    address: {
+      line1: $L0ny$export$createWords(3, 4, 6),
+      line2: $L0ny$export$createWords(2, 4, 6)
+    },
+    paragraph: $L0ny$export$createWords(30, 1, 8)
+  };
+};
+
+$L0ny$exports.createDeep = $L0ny$export$createDeep;
+
+var $L0ny$export$createAttributes = function () {
+  return {
+    id: $L0ny$export$randomValueOrNull(0.4, $L0ny$export$createRandomWord(2, 8)),
+    className: $L0ny$export$randomValueOrNull(0.4, $L0ny$export$createWordsBetween(1, 4, 2, 8)),
+    title: $L0ny$export$randomValueOrNull(0.4, $L0ny$export$createWordsBetween(1, 6, 2, 8))
+  };
+};
+
+$L0ny$exports.createAttributes = $L0ny$export$createAttributes;
+var $L0ny$var$hexAlphabet = '0123456789ABCDEF';
+
+var $L0ny$export$randomColor = function () {
+  function randomHex() {
+    var pos = Math.floor(Math.random() * $L0ny$var$hexAlphabet.length);
+    return $L0ny$var$hexAlphabet[pos];
+  }
+
+  return "#" + randomHex() + randomHex() + randomHex() + randomHex() + randomHex() + randomHex();
+};
+
+$L0ny$exports.randomColor = $L0ny$export$randomColor;
+var $L0ny$export$createManyAttributes = $L0ny$export$repeatf($L0ny$export$createAttributes);
+$L0ny$exports.createManyAttributes = $L0ny$export$createManyAttributes;
+
+var $L0ny$export$randomInt = function (min, max) {
+  return Math.floor(Math.random() * (max - min)) + min;
+};
+
+$L0ny$exports.randomInt = $L0ny$export$randomInt;
+
+var $L0ny$export$randomOrNull = function (ratio, f) {
+  if (Math.random() <= ratio) return f();else return null;
+};
+
+$L0ny$exports.randomOrNull = $L0ny$export$randomOrNull;
+
+var $L0ny$export$randomValueOrNull = function (ratio, v) {
+  if (Math.random() <= ratio) return v;else return null;
+};
+
+$L0ny$exports.randomValueOrNull = $L0ny$export$randomValueOrNull;
+
+var $L0ny$export$createStyles = function () {
+  return {
+    backgroundColor: $L0ny$export$randomOrNull(0.4, $L0ny$export$randomColor),
+    color: $L0ny$export$randomOrNull(0.4, $L0ny$export$randomColor),
+    border: $L0ny$export$randomOrNull(0.4, function () {
+      return $L0ny$export$randomInt(1, 4) + "px solid " + $L0ny$export$randomColor();
+    })
+  };
+};
+
+$L0ny$exports.createStyles = $L0ny$export$createStyles;
+
+var $L0ny$export$randomBoolean = function () {
+  if (Math.random() <= 0.5) return true;else return false;
+};
+
+$L0ny$exports.randomBoolean = $L0ny$export$randomBoolean;
+var $L0ny$export$createManyStyles = $L0ny$export$repeatf($L0ny$export$createStyles);
+$L0ny$exports.createManyStyles = $L0ny$export$createManyStyles;
+
+var $L0ny$export$createProperties = function () {
+  return {
+    value: $L0ny$export$randomValueOrNull(0.4, $L0ny$export$createWordsBetween(1, 6, 2, 8)),
+    disabled: $L0ny$export$randomOrNull(0.4, $L0ny$export$randomBoolean)
+  };
+};
+
+$L0ny$exports.createProperties = $L0ny$export$createProperties;
+var $L0ny$export$createManyProperties = $L0ny$export$repeatf($L0ny$export$createProperties);
+$L0ny$exports.createManyProperties = $L0ny$export$createManyProperties;
+// ASSET: tests.ts
+var $cibo$exports = {};
+Object.defineProperty($cibo$exports, "__esModule", {
+  value: true
+});
+var $cibo$export$tests = [{
+  id: 'render-list-50',
+  name: 'Render List (50)',
+  fn: 'renderListElements',
+  args: $L0ny$export$createRange(50),
+  selected: false
+}, {
+  id: 'render-list-500',
+  name: 'Render List (500)',
+  fn: 'renderListElements',
+  args: $L0ny$export$createRange(500),
+  selected: true
+}, {
+  id: 'render-destroy-list-500',
+  name: 'Render List & Destroy (500)',
+  fn: 'renderListElementsAndDestroy',
+  args: $L0ny$export$createRange(500),
+  selected: false
+}, {
+  id: 'render-update-list',
+  name: 'Render List & Update',
+  fn: 'renderListAndUpdate',
+  args: $L0ny$export$createRanges([200, 100, 50, 20, 0, 20, 50, 100, 200]),
+  selected: true
+}, {
+  id: 'render-update-deep',
+  name: 'Render Deep & Update',
+  fn: 'renderDeepAndUpdate',
+  args: $L0ny$export$repeat(1000, $L0ny$export$createDeep),
+  selected: true
+}, {
+  id: 'update-attributes',
+  name: 'Update Attributes',
+  fn: 'updateAttributes',
+  args: $L0ny$export$createManyAttributes(1000),
+  selected: true
+}, {
+  id: 'update-properties',
+  name: 'Update Properties',
+  fn: 'updateProperty',
+  args: $L0ny$export$createManyProperties(1000),
+  selected: true
+}, {
+  id: 'update-styles',
+  name: 'Update Styles',
+  fn: 'updateStyles',
+  args: $L0ny$export$createManyStyles(500),
+  selected: true
+}, {
+  id: 'trigger-events',
+  name: 'Update and Trigger Events',
+  fn: 'updateAndTriggerEvents',
+  args: $L0ny$export$createWords(100, 3, 6),
+  selected: true
+}];
+$cibo$exports.tests = $cibo$export$tests;
+
+var $cibo$export$availableTests = function () {
+  return $cibo$export$tests.map(function (test) {
+    return {
+      id: test.id,
+      name: test.name,
+      selected: test.selected
+    };
+  });
+};
+
+$cibo$exports.availableTests = $cibo$export$availableTests;
+// ASSET: state.ts
+var $mIWh$exports = {};
+Object.defineProperty($mIWh$exports, "__esModule", {
+  value: true
+});
+
+var $mIWh$export$makeTestRunId = function (versionId, testId) {
+  return versionId + ":" + testId;
+};
+
+$mIWh$exports.makeTestRunId = $mIWh$export$makeTestRunId;
+
+var $mIWh$export$unpackTestRunId = function (testRunId) {
+  var parts = testRunId.split(':');
+  return {
+    versionId: parts[0],
+    testId: parts[1]
+  };
+};
+
+$mIWh$exports.unpackTestRunId = $mIWh$export$unpackTestRunId;
+
+var $mIWh$var$sortVersionIds = function sortVersionIds(a, b) {
+  if (a === 'current' || a > b) {
+    return -1;
+  } else if (a < b) {
+    return 1;
+  } else {
+    return 0;
+  }
+};
+
+var $mIWh$export$createState = function (versionIds) {
+  var tests = $cibo$export$availableTests();
+  var versions = versionIds.sort($mIWh$var$sortVersionIds).map(function (id, i) {
+    return {
+      id: id,
+      selected: i < 2 || i === versionIds.length - 1
+    };
+  });
+  return {
+    versions: versions,
+    tests: tests,
+    options: {
+      maxTime: 0.2
+    },
+    results: {},
+    processing: new Set(),
+    stats: {}
+  };
+};
+
+$mIWh$exports.createState = $mIWh$export$createState;
+
+var $mIWh$export$getSelectedTests = function (state) {
+  return {
+    tests: state.tests.filter(function (t) {
+      return t.selected;
+    }).map(function (t) {
+      return t.id;
+    }),
+    versions: state.versions.filter(function (t) {
+      return t.selected;
+    }).map(function (t) {
+      return t.id;
+    })
+  };
+};
+
+$mIWh$exports.getSelectedTests = $mIWh$export$getSelectedTests;
+
+var $mIWh$export$countAllTests = function (state) {
+  return state.tests.length * state.versions.length;
+};
+
+$mIWh$exports.countAllTests = $mIWh$export$countAllTests;
+
+var $mIWh$export$countSelectedTests = function (state) {
+  var _a = $mIWh$export$getSelectedTests(state),
+      tests = _a.tests,
+      versions = _a.versions;
+
+  return tests.length * versions.length;
+};
+
+$mIWh$exports.countSelectedTests = $mIWh$export$countSelectedTests;
+
+var $mIWh$export$hasSelectedTests = function (state) {
+  return $mIWh$export$countSelectedTests(state) > 0;
+};
+
+$mIWh$exports.hasSelectedTests = $mIWh$export$hasSelectedTests;
 
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation. All rights reserved.
@@ -231,228 +578,6 @@ function $vCxL$export$__await(v) {
 }
 
 ;
-// ASSET: generator.ts
-var $L0ny$exports = {};
-Object.defineProperty($L0ny$exports, "__esModule", {
-  value: true
-});
-var $L0ny$var$alphabet = 'abcdefghijklmnopqrstuvwxyz';
-
-var $L0ny$export$createArray = function (num) {
-  var res = [];
-
-  for (var i = 0; i < num; i++) {
-    res.push(i);
-  }
-
-  return res;
-};
-
-$L0ny$exports.createArray = $L0ny$export$createArray;
-
-var $L0ny$export$createRange = function (num) {
-  return $L0ny$export$createArray(num).map(function (_) {
-    return Math.floor(Math.random() * num);
-  });
-};
-
-$L0ny$exports.createRange = $L0ny$export$createRange;
-
-var $L0ny$export$repeat = function (times, f) {
-  return $L0ny$export$createArray(times).map(f);
-};
-
-$L0ny$exports.repeat = $L0ny$export$repeat;
-
-var $L0ny$export$createRanges = function (values) {
-  return values.map($L0ny$export$createRange);
-};
-
-$L0ny$exports.createRanges = $L0ny$export$createRanges;
-
-var $L0ny$export$createWord = function (num) {
-  var w = '';
-
-  for (var i = 0; i < num; i++) {
-    w += $L0ny$var$alphabet[Math.floor($L0ny$var$alphabet.length * Math.random())];
-  }
-
-  return w;
-};
-
-$L0ny$exports.createWord = $L0ny$export$createWord;
-
-var $L0ny$export$createRandomWord = function (min, max) {
-  var length = min + Math.round((max - min) * Math.random());
-  return $L0ny$export$createWord(length);
-};
-
-$L0ny$exports.createRandomWord = $L0ny$export$createRandomWord;
-
-var $L0ny$export$createWords = function (num, min, max) {
-  return $L0ny$export$createArray(num).map(function (_) {
-    return $L0ny$export$createRandomWord(min, max);
-  }).join(' ');
-};
-
-$L0ny$exports.createWords = $L0ny$export$createWords;
-
-var $L0ny$export$createDeep = function () {
-  return {
-    id: $L0ny$export$createWord(8),
-    name: $L0ny$export$createRandomWord(4, 12),
-    address: {
-      line1: $L0ny$export$createWords(3, 4, 6),
-      line2: $L0ny$export$createWords(2, 4, 6)
-    },
-    paragraph: $L0ny$export$createWords(30, 1, 8)
-  };
-};
-
-$L0ny$exports.createDeep = $L0ny$export$createDeep;
-// ASSET: tests.ts
-var $cibo$exports = {};
-Object.defineProperty($cibo$exports, "__esModule", {
-  value: true
-});
-var $cibo$export$tests = [{
-  id: 'render-list-50',
-  name: 'Render List (50)',
-  fn: 'renderListElements',
-  args: $L0ny$export$createRange(50)
-}, {
-  id: 'render-list-500',
-  name: 'Render List (500)',
-  fn: 'renderListElements',
-  args: $L0ny$export$createRange(500)
-}, {
-  id: 'render-destroy-list-500',
-  name: 'Render List & Destroy (500)',
-  fn: 'renderListElementsAndDestroy',
-  args: $L0ny$export$createRange(500)
-}, {
-  id: 'render-update-list',
-  name: 'Render List & Update',
-  fn: 'renderListAndUpdate',
-  args: $L0ny$export$createRanges([200, 100, 50, 20, 0, 20, 50, 100, 200])
-}, {
-  id: 'render-update-deep',
-  name: 'Render Deep & Update',
-  fn: 'renderDeepAndUpdate',
-  args: $L0ny$export$repeat(50, $L0ny$export$createDeep)
-}];
-$cibo$exports.tests = $cibo$export$tests;
-
-var $cibo$export$availableTests = function () {
-  return $cibo$export$tests.map(function (test) {
-    return {
-      id: test.id,
-      name: test.name
-    };
-  });
-};
-
-$cibo$exports.availableTests = $cibo$export$availableTests;
-// ASSET: state.ts
-var $mIWh$exports = {};
-Object.defineProperty($mIWh$exports, "__esModule", {
-  value: true
-});
-
-var $mIWh$export$makeTestRunId = function (versionId, testId) {
-  return versionId + ":" + testId;
-};
-
-$mIWh$exports.makeTestRunId = $mIWh$export$makeTestRunId;
-
-var $mIWh$export$unpackTestRunId = function (testRunId) {
-  var parts = testRunId.split(':');
-  return {
-    versionId: parts[0],
-    testId: parts[1]
-  };
-};
-
-$mIWh$exports.unpackTestRunId = $mIWh$export$unpackTestRunId;
-
-var $mIWh$var$sortVersionIds = function sortVersionIds(a, b) {
-  if (a === 'current' || a > b) {
-    return -1;
-  } else if (a < b) {
-    return 1;
-  } else {
-    return 0;
-  }
-};
-
-var $mIWh$var$sortVersion = function sortVersion(a, b) {
-  return $mIWh$var$sortVersionIds(a.id, b.id);
-};
-
-var $mIWh$export$createState = function (versionIds) {
-  var tests = $cibo$export$availableTests().map(function (test) {
-    return $vCxL$export$__assign($vCxL$export$__assign({}, test), {
-      selected: true
-    });
-  });
-  var versions = versionIds.map(function (id) {
-    return {
-      id: id,
-      selected: true
-    };
-  }).sort($mIWh$var$sortVersion);
-  return {
-    versions: versions,
-    tests: tests,
-    options: {
-      maxTime: 2
-    },
-    results: {},
-    processing: new Set(),
-    stats: {}
-  };
-};
-
-$mIWh$exports.createState = $mIWh$export$createState;
-
-var $mIWh$export$getSelectedTests = function (state) {
-  return {
-    tests: state.tests.filter(function (t) {
-      return t.selected;
-    }).map(function (t) {
-      return t.id;
-    }),
-    versions: state.versions.filter(function (t) {
-      return t.selected;
-    }).map(function (t) {
-      return t.id;
-    })
-  };
-};
-
-$mIWh$exports.getSelectedTests = $mIWh$export$getSelectedTests;
-
-var $mIWh$export$countAllTests = function (state) {
-  return state.tests.length * state.versions.length;
-};
-
-$mIWh$exports.countAllTests = $mIWh$export$countAllTests;
-
-var $mIWh$export$countSelectedTests = function (state) {
-  var _a = $mIWh$export$getSelectedTests(state),
-      tests = _a.tests,
-      versions = _a.versions;
-
-  return tests.length * versions.length;
-};
-
-$mIWh$exports.countSelectedTests = $mIWh$export$countSelectedTests;
-
-var $mIWh$export$hasSelectedTests = function (state) {
-  return $mIWh$export$countSelectedTests(state) > 0;
-};
-
-$mIWh$exports.hasSelectedTests = $mIWh$export$hasSelectedTests;
 // ASSET: config.ts
 var $C9JJ$exports = {};
 Object.defineProperty($C9JJ$exports, "__esModule", {
@@ -566,17 +691,25 @@ var $pSX2$export$reducer = function (state, action) {
 
     case 'UpdateResult':
       var runnerId = action.runnerId,
+          testId = action.testId,
           result = action.target;
-      var id = $mIWh$export$makeTestRunId(runnerId, result.id);
-      var results2 = $vCxL$export$__assign($vCxL$export$__assign({}, state.results), (_a = {}, _a[id] = result, _a));
-      var stats = $pSX2$var$calculateMinMax(results2, state.tests);
       var processing2 = new Set(state.processing);
+      var id = $mIWh$export$makeTestRunId(runnerId, testId);
       processing2.delete(id);
-      return $vCxL$export$__assign($vCxL$export$__assign({}, state), {
-        results: results2,
-        processing: processing2,
-        stats: $vCxL$export$__assign($vCxL$export$__assign({}, state.stats), stats)
-      });
+
+      if (result) {
+        var results2 = $vCxL$export$__assign($vCxL$export$__assign({}, state.results), (_a = {}, _a[id] = result, _a));
+        var stats = $pSX2$var$calculateMinMax(results2, state.tests);
+        return $vCxL$export$__assign($vCxL$export$__assign({}, state), {
+          results: results2,
+          processing: processing2,
+          stats: $vCxL$export$__assign($vCxL$export$__assign({}, state.stats), stats)
+        });
+      } else {
+        return $vCxL$export$__assign($vCxL$export$__assign({}, state), {
+          processing: processing2
+        });
+      }
 
     default:
       throw "unhandled case " + action;
@@ -623,109 +756,126 @@ var $pSX2$var$calculateMinMax = function calculateMinMax(results, tests) {
   }, {});
 };
 
+// ASSET: ../node_modules/@tempo/dom/node_modules/@tempo/core/lib/util/map.js
+var $UNaj$exports = {};
+Object.defineProperty($UNaj$exports, "__esModule", {
+  value: true
+});
+
+var $UNaj$export$mapArray = function (arr, f) {
+  var length = arr.length;
+  var buff = new Array(length);
+
+  for (var i = 0; i < length; i++) {
+    buff[i] = f(arr[i]);
+  }
+
+  return buff;
+};
+
+$UNaj$exports.mapArray = $UNaj$export$mapArray; //# sourceMappingURL=map.js.map
+
 // ASSET: ../node_modules/@tempo/dom/lib/utils/set_attribute.js
 var $AxMU$exports = {};
 Object.defineProperty($AxMU$exports, "__esModule", {
   value: true
 });
 
-var $AxMU$export$setOneStyle = function (el, name, value) {
+function $AxMU$var$setOneStyle(el, name, value) {
   var anyStyle = el.style;
 
   if (value == null) {
     anyStyle[name] = null;
   } else {
-    var s = String(value);
-
-    if (s !== anyStyle[name]) {
-      anyStyle[name] = String(value);
-    }
+    anyStyle[name] = value;
   }
-};
+}
 
+var $AxMU$export$setOneStyle = $AxMU$var$setOneStyle;
 $AxMU$exports.setOneStyle = $AxMU$export$setOneStyle;
 
-var $AxMU$export$setAttribute = function (el, name, value) {
+function $AxMU$var$setAttribute(el, name, value) {
   if (value == null) {
     el.removeAttribute(name);
   } else {
-    var s = String(value);
-
-    if (s !== el.getAttribute(name)) {
-      el.setAttribute(name, s);
-    }
+    el.setAttribute(name, value);
   }
-};
+}
 
+var $AxMU$export$setAttribute = $AxMU$var$setAttribute;
 $AxMU$exports.setAttribute = $AxMU$export$setAttribute;
 
-var $AxMU$export$setProperty = function (el, name, value) {
+function $AxMU$var$setProperty(el, name, value) {
   var anyEl = el;
 
-  if (value == null && anyEl[name] != null) {
+  if (value == null) {
     anyEl[name] = null;
-  } else if (anyEl[name] !== value) {
+  } else {
     anyEl[name] = value;
   }
-};
+}
 
+var $AxMU$export$setProperty = $AxMU$var$setProperty;
 $AxMU$exports.setProperty = $AxMU$export$setProperty;
 
-var $AxMU$export$setStyleAttribute = function (el, name, value) {
+function $AxMU$var$setStyleAttribute(el, name, value) {
   var html = el;
 
   if (value == null) {
     html.removeAttribute(name);
   } else if (typeof value === 'string') {
-    $AxMU$export$setAttribute(el, name, value);
+    $AxMU$var$setAttribute(el, name, value);
   } else {
-    var s = Object.keys(value).map(function (k) {
+    var s = $UNaj$export$mapArray(Object.keys(value), function (k) {
       return k + ": " + value[k] + ";";
     }).join(' ');
-    $AxMU$export$setAttribute(el, name, s.length && s || null);
+    $AxMU$var$setAttribute(el, name, s.length && s || null);
   }
-};
+}
 
+var $AxMU$export$setStyleAttribute = $AxMU$var$setStyleAttribute;
 $AxMU$exports.setStyleAttribute = $AxMU$export$setStyleAttribute;
 
-var $AxMU$export$setBoolProperty = function (el, name, value) {
+function $AxMU$var$setBoolProperty(el, name, value) {
   var anyEl = el;
 
   if (value == null) {
     anyEl[name] = null;
   } else {
     var bool = value === true || value === 'true';
-
-    if (anyEl[name] !== bool) {
-      anyEl[name] = bool;
-    }
+    anyEl[name] = bool;
   }
-};
+}
 
+var $AxMU$export$setBoolProperty = $AxMU$var$setBoolProperty;
 $AxMU$exports.setBoolProperty = $AxMU$export$setBoolProperty;
 
-var $AxMU$export$setEnumBoolAttribute = function (el, name, value) {
-  $AxMU$export$setAttribute(el, name, value === true || value === 'true' ? 'true' : value === false ? 'false' : null);
-};
+function $AxMU$var$setEnumBoolAttribute(el, name, value) {
+  $AxMU$var$setAttribute(el, name, value === true || value === 'true' ? 'true' : value === false ? 'false' : null);
+}
 
+var $AxMU$export$setEnumBoolAttribute = $AxMU$var$setEnumBoolAttribute;
 $AxMU$exports.setEnumBoolAttribute = $AxMU$export$setEnumBoolAttribute;
 
-var $AxMU$export$setBoolAttribute = function (el, name, value) {
-  $AxMU$export$setAttribute(el, name, value === true || value === 'true' ? '' : null);
-};
+function $AxMU$var$setBoolAttribute(el, name, value) {
+  $AxMU$var$setAttribute(el, name, value === true || value === 'true' ? '' : null);
+}
 
+var $AxMU$export$setBoolAttribute = $AxMU$var$setBoolAttribute;
 $AxMU$exports.setBoolAttribute = $AxMU$export$setBoolAttribute;
 
-var $AxMU$export$setCommaSeparated = function (el, name, values) {
-  if (Array.isArray(values)) $AxMU$export$setAttribute(el, name, values.join(', ') || null);else $AxMU$export$setAttribute(el, name, values && String(values) || null);
-};
+function $AxMU$var$setCommaSeparated(el, name, values) {
+  if (Array.isArray(values)) $AxMU$var$setAttribute(el, name, values.join(', ') || null);else $AxMU$var$setAttribute(el, name, values && String(values) || null);
+}
 
+var $AxMU$export$setCommaSeparated = $AxMU$var$setCommaSeparated;
 $AxMU$exports.setCommaSeparated = $AxMU$export$setCommaSeparated;
 
-var $AxMU$export$setSpaceSeparated = function (el, name, values) {
-  if (Array.isArray(values)) $AxMU$export$setAttribute(el, name, values.join(' ') || null);else $AxMU$export$setAttribute(el, name, values && String(values) || null);
-};
+function $AxMU$var$setSpaceSeparated(el, name, values) {
+  if (Array.isArray(values)) $AxMU$var$setAttribute(el, name, values.join(' ') || null);else $AxMU$var$setAttribute(el, name, values && String(values) || null);
+}
 
+var $AxMU$export$setSpaceSeparated = $AxMU$var$setSpaceSeparated;
 $AxMU$exports.setSpaceSeparated = $AxMU$export$setSpaceSeparated; //# sourceMappingURL=set_attribute.js.map
 
 // ASSET: ../node_modules/@tempo/dom/lib/dom_attributes_mapper.js
@@ -735,14 +885,14 @@ Object.defineProperty($QBLY$exports, "__esModule", {
 });
 /* istanbul ignore file */
 
-var $QBLY$export$htmlAttributeNameMap = {
+var $QBLY$export$attributeNameMap = {
   acceptcharset: 'accept-charset',
   asattr: 'as',
   classname: 'class',
   httpequiv: 'http-equiv',
   htmlfor: 'for'
 };
-$QBLY$exports.htmlAttributeNameMap = $QBLY$export$htmlAttributeNameMap;
+$QBLY$exports.attributeNameMap = $QBLY$export$attributeNameMap;
 var $QBLY$export$htmlAttributeMap = {
   'accept-charset': $AxMU$export$setSpaceSeparated,
   class: $AxMU$export$setSpaceSeparated,
@@ -894,10 +1044,15 @@ var $jTie$var$renderLiteral = function (ctx, value) {
 
 var $jTie$var$renderFunction = function (ctx, state, map) {
   var node = ctx.doc.createTextNode(map(state) || '');
+  var oldContent = '';
 
   var f = function (state) {
     var newContent = map(state) || '';
-    node.nodeValue = newContent;
+
+    if (newContent !== oldContent) {
+      node.nodeValue = newContent;
+      if (newContent.length < 5000) oldContent = newContent;
+    }
   };
 
   var view = new $TJFn$export$DOMDynamicNodeView(node, [], f);
@@ -938,88 +1093,123 @@ Object.defineProperty($KfbX$exports, "__esModule", {
   value: true
 });
 
-var $KfbX$export$removeNode = function (node) {
+function $KfbX$var$removeNode(node) {
   var el = node;
 
   if (el && el.onblur) {
     el.onblur = null;
   }
 
-  if (node && node.parentElement) {
+  if (!node || node.ownerDocument === undefined) return;
+
+  if (node.parentElement) {
     node.parentElement.removeChild(node);
   }
-};
+}
 
+var $KfbX$export$removeNode = $KfbX$var$removeNode;
 $KfbX$exports.removeNode = $KfbX$export$removeNode;
 
-var $KfbX$export$insertBefore = function (ref) {
+function $KfbX$var$insertBefore(ref) {
   return function (node) {
     if (ref.parentElement != null) {
       ref.parentElement.insertBefore(node, ref);
     }
   };
-};
+}
 
+var $KfbX$export$insertBefore = $KfbX$var$insertBefore;
 $KfbX$exports.insertBefore = $KfbX$export$insertBefore;
 
-var $KfbX$export$filterDynamics = function (children) {
+function $KfbX$var$filterDynamics(children) {
   return children.filter(function (child) {
     return child.kind === 'dynamic';
   });
-};
+}
 
+var $KfbX$export$filterDynamics = $KfbX$var$filterDynamics;
 $KfbX$exports.filterDynamics = $KfbX$export$filterDynamics;
 
-var $KfbX$export$domChildToTemplate = function (dom) {
+function $KfbX$var$domChildToTemplate(dom) {
   if (typeof dom === 'string' || typeof dom === 'function') return $jTie$export$text(dom);else return dom;
-};
+}
 
+var $KfbX$export$domChildToTemplate = $KfbX$var$domChildToTemplate;
 $KfbX$exports.domChildToTemplate = $KfbX$export$domChildToTemplate;
 
-var $KfbX$export$processAttribute = function (el, name, value, acc) {
-  name = name.toLowerCase();
-  name = $QBLY$export$htmlAttributeNameMap[name] || name;
+function $KfbX$var$processAttribute(el, name, value, acc) {
   var set = $QBLY$export$htmlAttributeMap[name] || $AxMU$export$setAttribute;
 
   if (typeof value === 'function') {
-    var f = function (state) {
-      return set(el, name, value(state));
-    };
+    // state in inputs can incorrectly map to state
+    if (el.nodeName === 'INPUT' || el.nodeName === 'TEXTAREA') {
+      var f = function (state) {
+        var newValue = value(state);
+        set(el, name, newValue);
+      };
 
-    acc.push(f);
+      acc.push(f);
+    } else {
+      var oldValue_1 = undefined;
+
+      var f = function (state) {
+        var newValue = value(state);
+
+        if (newValue !== oldValue_1) {
+          set(el, name, newValue);
+
+          if (String(newValue).length < 50000) {
+            oldValue_1 = newValue;
+          }
+        }
+      };
+
+      acc.push(f);
+    }
   } else {
     set(el, name, value);
   }
 
   return acc;
-};
+}
 
+var $KfbX$export$processAttribute = $KfbX$var$processAttribute;
 $KfbX$exports.processAttribute = $KfbX$export$processAttribute;
 
-var $KfbX$export$processEvent = function (el, name, value, dispatch, acc) {
+function $KfbX$var$processEvent(el, name, value, dispatch, acc) {
+  var localState;
   var anyEl = el;
-  name = 'on' + name.toLowerCase();
+
+  anyEl[name] = function (ev) {
+    var r = value(localState, ev, el);
+
+    if (typeof r !== 'undefined') {
+      dispatch(r);
+    }
+  };
 
   var f = function (state) {
-    anyEl[name] = function (ev) {
-      var r = value(state, ev, el);
-
-      if (r != null) {
-        dispatch(r);
-      }
-    };
+    localState = state;
   };
 
   acc.push(f);
   return acc;
-};
+}
 
+var $KfbX$export$processEvent = $KfbX$var$processEvent;
 $KfbX$exports.processEvent = $KfbX$export$processEvent;
 
-var $KfbX$export$processStyle = function (el, name, value, acc) {
+function $KfbX$var$processStyle(el, name, value, acc) {
   if (typeof value === 'function') {
+    var oldValue_2;
+
     var f = function (state) {
-      return $AxMU$export$setOneStyle(el, name, value(state));
+      var newValue = value(state);
+
+      if (newValue !== oldValue_2) {
+        $AxMU$export$setOneStyle(el, name, newValue);
+        oldValue_2 = newValue;
+      }
     };
 
     acc.push(f);
@@ -1028,8 +1218,9 @@ var $KfbX$export$processStyle = function (el, name, value, acc) {
   }
 
   return acc;
-};
+}
 
+var $KfbX$export$processStyle = $KfbX$var$processStyle;
 $KfbX$exports.processStyle = $KfbX$export$processStyle; //# sourceMappingURL=dom.js.map
 
 // ASSET: ../node_modules/@tempo/dom/lib/element.js
@@ -1045,7 +1236,7 @@ var $Mmj0$var$applyChange = function (change, el, ctx) {
 };
 
 var $Mmj0$var$applyAfterRender = function (attr, el, ctx, state) {
-  if (attr != null) {
+  if (typeof attr !== undefined) {
     return attr(state, el, ctx);
   } else {
     return undefined;
@@ -1055,50 +1246,42 @@ var $Mmj0$var$applyAfterRender = function (attr, el, ctx, state) {
 var $Mmj0$var$DOMElement =
 /** @class */
 function () {
-  function DOMElement(createElement, attributes, children) {
+  function DOMElement(createElement, attrs, events, styles, afterrender, beforechange, afterchange, beforedestroy, children) {
     this.createElement = createElement;
-    this.attributes = attributes;
+    this.attrs = attrs;
+    this.events = events;
+    this.styles = styles;
+    this.afterrender = afterrender;
+    this.beforechange = beforechange;
+    this.afterchange = afterchange;
+    this.beforedestroy = beforedestroy;
     this.children = children;
   }
 
   DOMElement.prototype.render = function (ctx, state) {
+    var _this = this;
+
     var el = this.createElement(ctx.doc);
     var value = undefined;
-    var _a = this.attributes,
-        attrs = _a.attrs,
-        events = _a.events,
-        styles = _a.styles,
-        afterrender = _a.afterrender,
-        beforechange = _a.beforechange,
-        afterchange = _a.afterchange,
-        beforedestroy = _a.beforedestroy;
-
-    var beforedestroyf = beforedestroy && function () {
-      return beforedestroy(el, ctx, value);
-    };
-
     var allDynamics = [];
 
-    if (attrs) {
-      Object.keys(attrs).forEach(function (key) {
-        return $KfbX$export$processAttribute(el, key, attrs[key], allDynamics);
-      });
+    for (var _i = 0, _a = this.attrs; _i < _a.length; _i++) {
+      var o = _a[_i];
+      $KfbX$export$processAttribute(el, o.name, o.value, allDynamics);
     }
 
-    if (events) {
-      Object.keys(events).forEach(function (key) {
-        return $KfbX$export$processEvent(el, key, events[key], ctx.dispatch, allDynamics);
-      });
+    for (var _b = 0, _c = this.events; _b < _c.length; _b++) {
+      var o = _c[_b];
+      $KfbX$export$processEvent(el, o.name, o.value, ctx.dispatch, allDynamics);
     }
 
-    if (styles) {
-      Object.keys(styles).forEach(function (key) {
-        return $KfbX$export$processStyle(el, key, styles[key], allDynamics);
-      });
+    for (var _d = 0, _e = this.styles; _d < _e.length; _d++) {
+      var o = _e[_d];
+      $KfbX$export$processStyle(el, o.name, o.value, allDynamics);
     }
 
-    for (var _i = 0, allDynamics_1 = allDynamics; _i < allDynamics_1.length; _i++) {
-      var dy = allDynamics_1[_i];
+    for (var _f = 0, allDynamics_1 = allDynamics; _f < allDynamics_1.length; _f++) {
+      var dy = allDynamics_1[_f];
       dy(state);
     } // children
 
@@ -1108,24 +1291,24 @@ function () {
     };
 
     var newCtx = ctx.withAppend(appendChild).withParent(el);
-    var views = this.children.map(function (child) {
+    var views = $UNaj$export$mapArray(this.children, function (child) {
       return child.render(newCtx, state);
     });
     ctx.append(el);
 
-    if (afterrender) {
-      value = $Mmj0$var$applyAfterRender(afterrender, el, ctx, state);
+    if (this.afterrender) {
+      value = $Mmj0$var$applyAfterRender(this.afterrender, el, ctx, state);
     }
 
-    var dynamicChildren = $KfbX$export$filterDynamics(views).map(function (child) {
+    var dynamicChildren = $UNaj$export$mapArray($KfbX$export$filterDynamics(views), function (child) {
       return function (state) {
         return child.change(state);
       };
     });
     allDynamics.push.apply(allDynamics, dynamicChildren);
 
-    if (beforechange) {
-      var change_1 = $Mmj0$var$applyChange(beforechange, el, ctx);
+    if (this.beforechange) {
+      var change_1 = $Mmj0$var$applyChange(this.beforechange, el, ctx);
 
       var update = function (state) {
         value = change_1(state, value);
@@ -1134,8 +1317,8 @@ function () {
       allDynamics.unshift(update);
     }
 
-    if (afterchange) {
-      var change_2 = $Mmj0$var$applyChange(afterchange, el, ctx);
+    if (this.afterchange) {
+      var change_2 = $Mmj0$var$applyChange(this.afterchange, el, ctx);
 
       var update = function (state) {
         value = change_2(state, value);
@@ -1143,6 +1326,10 @@ function () {
 
       allDynamics.push(update);
     }
+
+    var beforedestroyf = this.beforedestroy && function () {
+      return _this.beforedestroy(el, ctx, value);
+    };
 
     if (allDynamics.length > 0) {
       return new $TJFn$export$DOMDynamicNodeView(el, views, function (state) {
@@ -1162,6 +1349,36 @@ function () {
 var $Mmj0$export$DOMElement = $Mmj0$var$DOMElement;
 $Mmj0$exports.DOMElement = $Mmj0$export$DOMElement;
 
+function $Mmj0$var$extractAttrs(attrs) {
+  return $UNaj$export$mapArray(Object.keys(attrs || {}), function (attName) {
+    var name = attName.toLowerCase();
+    name = $QBLY$export$attributeNameMap[name] || name;
+    return {
+      name: name,
+      value: attrs[attName]
+    };
+  });
+}
+
+function $Mmj0$var$extractEvents(attrs) {
+  return $UNaj$export$mapArray(Object.keys(attrs || {}), function (eventName) {
+    var name = "on" + eventName.toLowerCase();
+    return {
+      name: name,
+      value: attrs[eventName]
+    };
+  });
+}
+
+function $Mmj0$var$extractStyles(attrs) {
+  return $UNaj$export$mapArray(Object.keys(attrs || {}), function (name) {
+    return {
+      name: name,
+      value: attrs[name]
+    };
+  });
+}
+
 var $Mmj0$var$makeCreateElement = function (name) {
   return function (doc) {
     return doc.createElement(name);
@@ -1175,7 +1392,7 @@ var $Mmj0$export$el = function (name, attributes) {
     children[_i - 2] = arguments[_i];
   }
 
-  return new $Mmj0$var$DOMElement($Mmj0$var$makeCreateElement(name), attributes, children.map($KfbX$export$domChildToTemplate));
+  return new $Mmj0$var$DOMElement($Mmj0$var$makeCreateElement(name), $Mmj0$var$extractAttrs(attributes.attrs), $Mmj0$var$extractEvents(attributes.events), $Mmj0$var$extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, $UNaj$export$mapArray(children, $KfbX$export$domChildToTemplate));
 };
 
 $Mmj0$exports.el = $Mmj0$export$el;
@@ -1188,7 +1405,7 @@ var $Mmj0$export$el2 = function (name) {
       children[_i - 1] = arguments[_i];
     }
 
-    return new $Mmj0$var$DOMElement($Mmj0$var$makeCreateElement(name), attributes, children.map($KfbX$export$domChildToTemplate));
+    return new $Mmj0$var$DOMElement($Mmj0$var$makeCreateElement(name), $Mmj0$var$extractAttrs(attributes.attrs), $Mmj0$var$extractEvents(attributes.events), $Mmj0$var$extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, $UNaj$export$mapArray(children, $KfbX$export$domChildToTemplate));
   };
 };
 
@@ -1212,7 +1429,7 @@ var $Mmj0$export$elNS = function (ns, name, attributes) {
   }
 
   var namespace = $Mmj0$export$defaultNamespaces[ns] || ns;
-  return new $Mmj0$var$DOMElement($Mmj0$var$makeCreateElementNS(namespace, name), attributes, children.map($KfbX$export$domChildToTemplate));
+  return new $Mmj0$var$DOMElement($Mmj0$var$makeCreateElementNS(namespace, name), $Mmj0$var$extractAttrs(attributes.attrs), $Mmj0$var$extractEvents(attributes.events), $Mmj0$var$extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, $UNaj$export$mapArray(children, $KfbX$export$domChildToTemplate));
 };
 
 $Mmj0$exports.elNS = $Mmj0$export$elNS;
@@ -1225,7 +1442,7 @@ var $Mmj0$export$elNS2 = function (namespace, name) {
       children[_i - 1] = arguments[_i];
     }
 
-    return new $Mmj0$var$DOMElement($Mmj0$var$makeCreateElementNS(namespace, name), attributes, children.map($KfbX$export$domChildToTemplate));
+    return new $Mmj0$var$DOMElement($Mmj0$var$makeCreateElementNS(namespace, name), $Mmj0$var$extractAttrs(attributes.attrs), $Mmj0$var$extractEvents(attributes.events), $Mmj0$var$extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, $UNaj$export$mapArray(children, $KfbX$export$domChildToTemplate));
   };
 };
 
@@ -1532,10 +1749,11 @@ var $FLek$export$Action = {
       kind: 'TestsExecuted'
     };
   },
-  updateResult: function updateResult(runnerId, target) {
+  updateResult: function updateResult(runnerId, testId, target) {
     return {
       kind: 'UpdateResult',
       runnerId: runnerId,
+      testId: testId,
       target: target
     };
   }
@@ -1683,7 +1901,7 @@ function () {
   }
 
   DOMFragment.prototype.render = function (ctx, state) {
-    var views = this.children.map(function (child) {
+    var views = $UNaj$export$mapArray(this.children, function (child) {
       return child.render(ctx, state);
     });
     return $xGqp$export$fragmentView(views);
@@ -1702,7 +1920,7 @@ var $xGqp$export$fragment = function () {
     children[_i] = arguments[_i];
   }
 
-  return new $xGqp$var$DOMFragment(children.map($KfbX$export$domChildToTemplate));
+  return new $xGqp$var$DOMFragment($UNaj$export$mapArray(children, $KfbX$export$domChildToTemplate));
 };
 
 $xGqp$exports.fragment = $xGqp$export$fragment; //# sourceMappingURL=fragment.js.map
@@ -1727,7 +1945,7 @@ function () {
         map = _a.map;
 
     var innerState = map(state);
-    var views = children.map(function (c) {
+    var views = $UNaj$export$mapArray(children, function (c) {
       return c.render(ctx, innerState);
     });
     var dynamics = $KfbX$export$filterDynamics(views);
@@ -1759,7 +1977,7 @@ var $YLN0$export$mapState = function (options) {
     children[_i - 1] = arguments[_i];
   }
 
-  return new $YLN0$var$MapStateTemplate(options.map, children.map($KfbX$export$domChildToTemplate));
+  return new $YLN0$var$MapStateTemplate(options.map, $UNaj$export$mapArray(children, $KfbX$export$domChildToTemplate));
 };
 
 $YLN0$exports.mapState = $YLN0$export$mapState;
@@ -1777,7 +1995,7 @@ function () {
         children = _a.children,
         map = _a.map;
 
-    var views = children.map(function (c) {
+    var views = $UNaj$export$mapArray(children, function (c) {
       return c.render(ctx.conditionalMapAction(map), state);
     });
     return $xGqp$export$fragmentView(views);
@@ -1796,7 +2014,7 @@ var $YLN0$export$mapAction = function (options) {
     children[_i - 1] = arguments[_i];
   }
 
-  return new $YLN0$var$MapActionTemplate(options.map, children.map($KfbX$export$domChildToTemplate));
+  return new $YLN0$var$MapActionTemplate(options.map, $UNaj$export$mapArray(children, $KfbX$export$domChildToTemplate));
 };
 
 $YLN0$exports.mapAction = $YLN0$export$mapAction; //# sourceMappingURL=map.js.map
@@ -1838,39 +2056,50 @@ function () {
     var _this = this;
 
     var currentViewLength = this.childrenView.length;
-    var count = 0;
-    var value;
+    var index = 0;
 
-    while ((value = this.repeatUntil(state, count)) !== undefined) {
-      if (count < currentViewLength) {
+    var _loop_1 = function () {
+      var value = this_1.repeatUntil(state, index);
+      if (typeof value === 'undefined') return "break";
+
+      if (index < currentViewLength) {
         // replace existing
-        for (var _i = 0, _a = $KfbX$export$filterDynamics(this.childrenView[count]); _i < _a.length; _i++) {
-          var v = _a[_i];
+        var filtered = $KfbX$export$filterDynamics(this_1.childrenView[index]);
+
+        for (var _i = 0, filtered_1 = filtered; _i < filtered_1.length; _i++) {
+          var v = filtered_1[_i];
           v.change(value);
         }
       } else {
         // add node
-        this.childrenView.push(this.children.map(function (el) {
+        this_1.childrenView.push($UNaj$export$mapArray(this_1.children, function (el) {
           return el.render(_this.ctx, value);
         }));
       }
 
-      count++;
+      index++;
+    };
+
+    var this_1 = this;
+
+    while (true) {
+      var state_1 = _loop_1();
+
+      if (state_1 === "break") break;
     }
 
-    var i = count;
+    var i = index; // remove extra nodes
 
     while (i < currentViewLength) {
-      // remove extra nodes
-      for (var _b = 0, _c = this.childrenView[i]; _b < _c.length; _b++) {
-        var c = _c[_b];
+      for (var _i = 0, _a = this.childrenView[i]; _i < _a.length; _i++) {
+        var c = _a[_i];
         c.destroy();
       }
 
       i++;
     }
 
-    this.childrenView = this.childrenView.slice(0, count);
+    this.childrenView = this.childrenView.slice(0, index);
   };
 
   return DOMUntilView;
@@ -1888,7 +2117,7 @@ function () {
   }
 
   DOMUntilTemplate.prototype.render = function (ctx, state) {
-    var ref = ctx.doc.createComment(this.options.refId || 'md:until');
+    var ref = ctx.doc.createComment(this.options.refId || 't:until');
     ctx.append(ref);
     var view = new $hYCi$var$DOMUntilView(ref, this.options.repeatUntil, ctx.withAppend($KfbX$export$insertBefore(ref)), this.children);
     view.change(state);
@@ -1908,7 +2137,7 @@ var $hYCi$export$until = function (options) {
     children[_i - 1] = arguments[_i];
   }
 
-  return new $hYCi$var$DOMUntilTemplate(options, children.map($KfbX$export$domChildToTemplate));
+  return new $hYCi$var$DOMUntilTemplate(options, $UNaj$export$mapArray(children, $KfbX$export$domChildToTemplate));
 };
 
 $hYCi$exports.until = $hYCi$export$until; //# sourceMappingURL=until.js.map
@@ -1936,7 +2165,7 @@ var $xmUo$export$forEach = function (options) {
   }
 
   return $hYCi$export$until.apply(void 0, $xmUo$var$__spreadArrays([{
-    refId: options.refId || 'md:for_each',
+    refId: options.refId || 't:for_each',
     repeatUntil: function (state, index) {
       return state[index];
     }
@@ -1967,9 +2196,9 @@ function () {
     var _this = this;
 
     if (this.condition(value)) {
-      if (this.views == null) {
+      if (typeof this.views === 'undefined') {
         // it has never been rendered before
-        this.views = this.children.map(function (c) {
+        this.views = $UNaj$export$mapArray(this.children, function (c) {
           return c.render(_this.ctx, value);
         });
         this.dynamics = $KfbX$export$filterDynamics(this.views);
@@ -1990,7 +2219,7 @@ function () {
   };
 
   DOMWhenView.prototype.destroyViews = function () {
-    if (this.views != null) {
+    if (typeof this.views !== 'undefined') {
       for (var _i = 0, _a = this.views; _i < _a.length; _i++) {
         var v = _a[_i];
         v.destroy();
@@ -2016,14 +2245,14 @@ function () {
   }
 
   DOMWhen.prototype.render = function (ctx, state) {
-    var ref = ctx.doc.createComment(this.options.refId || 'md:when');
+    var ref = ctx.doc.createComment(this.options.refId || 't:when');
     ctx.append(ref);
     var parent = ref.parentElement;
     var view = new $rPBd$var$DOMWhenView(this.options.condition, ctx.withAppend(function (node) {
       return parent.insertBefore(node, ref);
     }), ctx.dispatch, function () {
       return $KfbX$export$removeNode(ref);
-    }, this.children.map($KfbX$export$domChildToTemplate));
+    }, $UNaj$export$mapArray(this.children, $KfbX$export$domChildToTemplate));
     view.change(state);
     return view;
   };
@@ -2057,7 +2286,7 @@ var $rPBd$export$unless = function (options) {
     condition: function (v) {
       return !options.condition(v);
     },
-    refId: options.refId || 'md:unless'
+    refId: options.refId || 't:unless'
   }, children);
 };
 
@@ -2636,122 +2865,6 @@ function () {
 var $UiLj$export$Store = $UiLj$var$Store;
 $UiLj$exports.Store = $UiLj$export$Store; //# sourceMappingURL=store.js.map
 
-// ASSET: ../node_modules/@tempo/dom/node_modules/@tempo/store/lib/emitter.js
-var $U7VT$exports = {};
-Object.defineProperty($U7VT$exports, "__esModule", {
-  value: true
-});
-
-var $U7VT$var$Emitter = function () {
-  function Emitter() {
-    this.listeners = [];
-  }
-
-  Emitter.ofOne = function () {
-    return new Emitter();
-  };
-
-  Emitter.ofTwo = function () {
-    return new Emitter();
-  };
-
-  Emitter.ofThree = function () {
-    return new Emitter();
-  };
-
-  Emitter.prototype.emit = function () {
-    var value = [];
-
-    for (var _i = 0; _i < arguments.length; _i++) {
-      value[_i] = arguments[_i];
-    }
-
-    for (var _a = 0, _b = this.listeners; _a < _b.length; _a++) {
-      var l = _b[_a];
-      l.apply(void 0, value);
-    }
-  };
-
-  Emitter.prototype.on = function (listener) {
-    this.listeners.push(listener);
-  };
-
-  Emitter.prototype.off = function (listener) {
-    var index = this.listeners.indexOf(listener);
-    if (index < 0) return false;
-    this.listeners.splice(index, 1);
-    return true;
-  };
-
-  Emitter.prototype.once = function (listener) {
-    var _this = this;
-
-    var wrapper = function () {
-      var values = [];
-
-      for (var _i = 0; _i < arguments.length; _i++) {
-        values[_i] = arguments[_i];
-      }
-
-      _this.off(wrapper);
-
-      listener.apply(void 0, values);
-    };
-
-    this.on(wrapper);
-  };
-
-  return Emitter;
-}();
-
-var $U7VT$export$Emitter = $U7VT$var$Emitter;
-$U7VT$exports.Emitter = $U7VT$export$Emitter;
-
-var $U7VT$export$debounce = function (delay) {
-  return function (listener) {
-    var running = false;
-    var acc;
-    return function () {
-      var values = [];
-
-      for (var _i = 0; _i < arguments.length; _i++) {
-        values[_i] = arguments[_i];
-      }
-
-      acc = values;
-      if (running) return;
-      running = true;
-      setTimeout(function () {
-        running = false;
-        listener.apply(void 0, acc);
-      }, delay);
-    };
-  };
-};
-
-$U7VT$exports.debounce = $U7VT$export$debounce;
-
-var $U7VT$export$nextFrame = function (listener) {
-  var running = false;
-  var acc;
-  return function () {
-    var values = [];
-
-    for (var _i = 0; _i < arguments.length; _i++) {
-      values[_i] = arguments[_i];
-    }
-
-    acc = values;
-    if (running) return;
-    running = true;
-    requestAnimationFrame(function () {
-      running = false;
-      listener.apply(void 0, acc);
-    });
-  };
-};
-
-$U7VT$exports.nextFrame = $U7VT$export$nextFrame;
 // ASSET: ../node_modules/@tempo/dom/lib/component.js
 var $Mlpu$exports = {};
 
@@ -2827,30 +2940,43 @@ function () {
   }
 
   DOMComponent.prototype.render = function (ctx, state) {
-    var update = function (state) {
-      return view.change(state);
-    };
+    var update;
 
     if (this.delayed) {
-      update = $U7VT$export$nextFrame(update);
+      var shouldRender_1 = true;
+
+      update = function (state) {
+        if (shouldRender_1) {
+          shouldRender_1 = false;
+          setTimeout(function () {
+            view.change(state);
+            shouldRender_1 = true;
+          });
+        }
+      };
+    } else {
+      update = function (state) {
+        view.change(state);
+      };
     }
 
     var store = this.store;
-    store.property.observable.on(update);
+    var property = store.property;
+    property.observable.on(update);
 
     var innerDispatch = function (action) {
       store.process(action);
     };
 
     var newCtx = ctx.withDispatch(innerDispatch);
-    var viewChildren = this.children.map(function (child) {
-      return child.render(newCtx, store.property.get());
+    var viewChildren = $UNaj$export$mapArray(this.children, function (child) {
+      return child.render(newCtx, property.get());
     });
     var dynamics = $KfbX$export$filterDynamics(viewChildren);
     var view = new $Mlpu$var$DOMComponentView(store, innerDispatch, viewChildren, dynamics, function () {
-      store.property.observable.off(update);
+      property.observable.off(update);
     });
-    store.property.set(state);
+    property.set(state);
     return view;
   };
 
@@ -2867,7 +2993,7 @@ var $Mlpu$export$component = function (attributes) {
     children[_i - 1] = arguments[_i];
   }
 
-  return new $Mlpu$var$DOMComponent(attributes.store, children.map($KfbX$export$domChildToTemplate), attributes.delayed || false);
+  return new $Mlpu$var$DOMComponent(attributes.store, $UNaj$export$mapArray(children, $KfbX$export$domChildToTemplate), attributes.delayed || false);
 };
 
 $Mlpu$exports.component = $Mlpu$export$component; //# sourceMappingURL=component.js.map
@@ -2910,7 +3036,7 @@ function () {
     return new DOMContext(this.doc, this.append, this.parent, function (action) {
       var newAction = f(action);
 
-      if (newAction !== undefined) {
+      if (typeof newAction !== 'undefined') {
         _this.dispatch(newAction);
       }
     });
@@ -2984,9 +3110,11 @@ var $sCte$var$Tempo;
     var el = options.el,
         store = options.store,
         document = options.document,
-        template = options.template;
+        template = options.template,
+        delayed = options.delayed;
     var comp = $Mlpu$export$component({
-      store: store
+      store: store,
+      delayed: delayed
     }, template);
     return Tempo.renderComponent({
       el: el,
@@ -3044,7 +3172,12 @@ var $MWVc$var$makeSuite = function makeSuite(runnerId, testDescriptions, options
             suite = new Benchmark.Suite();
 
             _loop_1 = function _loop_1(test) {
-              if (!mod[test.fn]) return "continue";
+              if (!mod[test.fn]) {
+                console.log("skip (no implementation): " + runnerId + ": " + test.id);
+                dispatch(runnerId, test.id, undefined);
+                return "continue";
+              }
+
               suite.add({
                 id: test.id,
                 async: true,
@@ -3065,8 +3198,8 @@ var $MWVc$var$makeSuite = function makeSuite(runnerId, testDescriptions, options
             }
 
             suite.on('cycle', function (event) {
-              console.log(runnerId + ': ' + String(event.target));
-              dispatch(runnerId, event.target);
+              console.log(runnerId + ": " + String(event.target));
+              dispatch(runnerId, event.target.id, event.target);
             });
             suite.on('complete', resolve);
             suite.run({
@@ -3138,8 +3271,8 @@ var $GrqS$export$middleware = function (app) {
           return set_1.has(test.id);
         });
         setTimeout(function () {
-          $MWVc$export$runTests(versionIds_1, testsToRun_1, options_1, function (runnerId, target) {
-            app.store.process($FLek$export$Action.updateResult(runnerId, target));
+          $MWVc$export$runTests(versionIds_1, testsToRun_1, options_1, function (runnerId, testId, target) {
+            app.store.process($FLek$export$Action.updateResult(runnerId, testId, target));
           }).then(function () {
             return app.store.process($FLek$export$Action.testsExecuted());
           });

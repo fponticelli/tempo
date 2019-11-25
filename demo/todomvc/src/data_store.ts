@@ -21,7 +21,8 @@ export class DataStore {
     return (
       (store && JSON.parse(store)) || {
         filter: Filter.All,
-        todos: []
+        todos: [],
+        completed: 0
       }
     )
   }

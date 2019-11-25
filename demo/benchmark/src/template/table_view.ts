@@ -13,7 +13,7 @@ limitations under the License.
 
 import { div, th, table, tr, td, br, a, span, button, b, s } from '@tempo/dom/lib/html'
 import { Action } from '../action'
-import { TestInfoWithSelected, State, VersionWithSelected, makeTestRunId } from '../state'
+import { TestInfo, State, VersionWithSelected, makeTestRunId } from '../state'
 import { forEach } from '@tempo/dom/lib/for_each'
 import { mapState } from '@tempo/dom/lib/map'
 import { when } from '@tempo/dom/lib/when'
@@ -119,7 +119,7 @@ export const tableView = table<State, Action>(
       {},
       tr(
         {},
-        th<{ test: TestInfoWithSelected; state: State }, Action>(
+        th<{ test: TestInfo; state: State }, Action>(
           { attrs: { className: 'header-col' } },
           a(
             {

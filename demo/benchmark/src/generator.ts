@@ -29,6 +29,20 @@ export const repeat = <B>(times: number, f: (num: number) => B)  => {
   return (createArray(times)).map(f)
 }
 
+export const repeatf = <B>(f: (num: number) => B) => (times: number)  => {
+  return (createArray(times)).map(f)
+}
+
+export const repeatfWithNulls = <B>(f: (num: number) => B) => (ratio: number, times: number)  => {
+  return (createArray(times)).map(i => {
+    if (Math.random() < ratio) {
+      return f(i)
+    } else {
+      return null
+    }
+  })
+}
+
 export const createRanges = (values: number[])  => {
   return values.map(createRange)
 }
@@ -49,6 +63,11 @@ export const createWords = (num: number, min: number, max: number)  => {
   return (createArray(num)).map(_ => createRandomWord(min, max)).join(' ')
 }
 
+export const createWordsBetween = (minWords: number, maxWords: number, minLength: number, maxLentgh: number)  => {
+  const num = randomInt(minWords, maxWords)
+  return (createArray(num)).map(_ => createRandomWord(minLength, maxLentgh)).join(' ')
+}
+
 export const createDeep = ()  => {
   return {
     id: createWord(8),
@@ -60,3 +79,66 @@ export const createDeep = ()  => {
     paragraph: createWords(30, 1, 8)
   }
 }
+
+export const createAttributes = () => {
+  return {
+    id: randomValueOrNull(0.4, createRandomWord(2, 8)),
+    className: randomValueOrNull(0.4, createWordsBetween(1, 4, 2, 8)),
+    title: randomValueOrNull(0.4, createWordsBetween(1, 6, 2, 8))
+  }
+}
+
+const hexAlphabet = '0123456789ABCDEF'
+export const randomColor = () => {
+  function randomHex() {
+    const pos = Math.floor(Math.random() * hexAlphabet.length)
+    return hexAlphabet[pos]
+  }
+  return `#${randomHex()}${randomHex()}${randomHex()}${randomHex()}${randomHex()}${randomHex()}`
+}
+
+export const createManyAttributes = repeatf(createAttributes)
+
+export const randomInt = (min: number, max: number) => {
+  return Math.floor(Math.random() * (max - min)) + min
+}
+
+export const randomOrNull = <T>(ratio: number, f: () => T): T | null => {
+  if (Math.random() <= ratio)
+    return f()
+  else
+    return null
+}
+
+export const randomValueOrNull = <T>(ratio: number, v: T): T | null => {
+  if (Math.random() <= ratio)
+    return v
+  else
+    return null
+}
+
+export const createStyles = () => {
+  return {
+    backgroundColor: randomOrNull(0.4, randomColor),
+    color: randomOrNull(0.4, randomColor),
+    border: randomOrNull(0.4, () => `${randomInt(1, 4)}px solid ${randomColor()}`)
+  }
+}
+
+export const randomBoolean = () => {
+  if (Math.random() <= 0.5)
+    return true
+  else
+    return false
+}
+
+export const createManyStyles = repeatf(createStyles)
+
+export const createProperties = () => {
+  return {
+    value: randomValueOrNull(0.4, createWordsBetween(1, 6, 2, 8)),
+    disabled: randomOrNull(0.4, randomBoolean)
+  }
+}
+
+export const createManyProperties = repeatf(createProperties)
