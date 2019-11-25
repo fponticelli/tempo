@@ -66,18 +66,19 @@ export class DOMComponent<State, Action> implements DOMTemplate<State, Action> {
       }
     }
     const { store } = this
+    const { property } = store
 
-    store.property.observable.on(update)
+    property.observable.on(update)
     const innerDispatch = (action: Action) => {
       store.process(action)
     }
     const newCtx = ctx.withDispatch(innerDispatch)
-    const viewChildren = mapArray(this.children, child => child.render(newCtx, store.property.get()))
+    const viewChildren = mapArray(this.children, child => child.render(newCtx, property.get()))
     const dynamics = filterDynamics(viewChildren)
     const view = new DOMComponentView<State, Action>(store, innerDispatch, viewChildren, dynamics, () => {
-      store.property.observable.off(update)
+      property.observable.off(update)
     })
-    store.property.set(state)
+    property.set(state)
     return view
   }
 }

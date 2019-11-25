@@ -1141,18 +1141,31 @@ function $KfbX$var$processAttribute(el, name, value, acc) {
   var set = $QBLY$export$htmlAttributeMap[name] || $AxMU$export$setAttribute;
 
   if (typeof value === 'function') {
-    var oldValue_1;
-
-    var f = function (state) {
-      var newValue = value(state);
-
-      if (newValue !== oldValue_1) {
+    // state in inputs can incorrectly map to state
+    if (el.nodeName === 'INPUT' || el.nodeName === 'TEXTAREA') {
+      var f = function (state) {
+        var newValue = value(state);
         set(el, name, newValue);
-        if (String(newValue).length < 50000) oldValue_1 = newValue;
-      }
-    };
+      };
 
-    acc.push(f);
+      acc.push(f);
+    } else {
+      var oldValue_1 = undefined;
+
+      var f = function (state) {
+        var newValue = value(state);
+
+        if (newValue !== oldValue_1) {
+          set(el, name, newValue);
+
+          if (String(newValue).length < 50000) {
+            oldValue_1 = newValue;
+          }
+        }
+      };
+
+      acc.push(f);
+    }
   } else {
     set(el, name, value);
   }
@@ -2948,7 +2961,8 @@ function () {
     }
 
     var store = this.store;
-    store.property.observable.on(update);
+    var property = store.property;
+    property.observable.on(update);
 
     var innerDispatch = function (action) {
       store.process(action);
@@ -2956,13 +2970,13 @@ function () {
 
     var newCtx = ctx.withDispatch(innerDispatch);
     var viewChildren = $UNaj$export$mapArray(this.children, function (child) {
-      return child.render(newCtx, store.property.get());
+      return child.render(newCtx, property.get());
     });
     var dynamics = $KfbX$export$filterDynamics(viewChildren);
     var view = new $Mlpu$var$DOMComponentView(store, innerDispatch, viewChildren, dynamics, function () {
-      store.property.observable.off(update);
+      property.observable.off(update);
     });
-    store.property.set(state);
+    property.set(state);
     return view;
   };
 

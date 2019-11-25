@@ -58,15 +58,26 @@ export function processAttribute<State, Value>(
   let set = attributeMap[name] || setAttribute
 
   if (typeof value === 'function') {
-    let oldValue: Value | undefined
-    const f = (state: State) => {
-      const newValue = (value as UnwrappedDerivedValue<State, Value>)(state)
-      if (newValue !== oldValue) {
+    // state in inputs can incorrectly map to state
+    if (el.nodeName === 'INPUT' || el.nodeName === 'TEXTAREA') {
+      const f = (state: State) => {
+        const newValue = (value as UnwrappedDerivedValue<State, Value>)(state)
         set(el, name, newValue)
-        if (String(newValue).length < 50000) oldValue = newValue
       }
+      acc.push(f)
+    } else {
+      let oldValue: Value | undefined = undefined
+      const f = (state: State) => {
+        const newValue = (value as UnwrappedDerivedValue<State, Value>)(state)
+        if (newValue !== oldValue) {
+          set(el, name, newValue)
+          if (String(newValue).length < 50000) {
+            oldValue = newValue
+          }
+        }
+      }
+      acc.push(f)
     }
-    acc.push(f)
   } else {
     set(el, name, value)
   }

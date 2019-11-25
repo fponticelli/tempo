@@ -21,6 +21,7 @@ export enum Filter {
 
 export interface State {
   filter: Filter
+  filtered: Todo[]
   todos: Todo[]
   completed: number
   adding?: string
@@ -46,6 +47,7 @@ export const createTodo = (title: string): Todo => ({
 
 export const emptyState = (): State => ({
   filter: Filter.All,
+  filtered: [],
   todos: [],
   completed: 0,
   adding: undefined,

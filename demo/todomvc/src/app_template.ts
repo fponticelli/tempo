@@ -23,16 +23,6 @@ const changeF = <El extends Element>(filter: Filter): DOMEventHandler<State, Act
   state: State
 ) => (state.filter === filter ? undefined : Action.toggleFilter(filter))
 
-const filterF = (filter: Filter) => {
-  if (filter === Filter.All) {
-    return (_: Todo) => true
-  } else if (filter === Filter.Completed) {
-    return (todo: Todo) => todo.completed
-  } else {
-    return (todo: Todo) => !todo.completed
-  }
-}
-
 const selectedF = (filter: Filter) => (state: State) => (state.filter === filter ? 'selected' : undefined)
 
 const isEditing = (state: State, todo: Todo) => (state.editing && state.editing.id === todo.id) || false
@@ -45,7 +35,7 @@ export const template = section<State, Action>(
       { attrs: { className: 'header' } },
       h1({}, 'todos'),
       filterState(
-        { isSame: (a, b) => a.adding === b.adding && a.editing === b.editing && a.todos.length === b.todos.length },
+        { isSame: (a, b) => false },
         input({
           attrs: {
             type: 'text',
@@ -88,7 +78,7 @@ export const template = section<State, Action>(
       ul(
         { attrs: { className: 'todo-list' } },
         iterate<State, Todo[], Action>(
-          { getArray: (state: State) => state.todos.filter(filterF(state.filter)) },
+          { getArray: (state: State) => state.filtered },
           filterState(
             { isSame: ([a, sa], [b, sb]) => a === b && sa.editing === sb.editing },
             li(
@@ -173,7 +163,7 @@ export const template = section<State, Action>(
       )
     ),
     filterState(
-      { isSame: (a, b) => a.completed === b.completed && a.todos.length === b.todos.length },
+      { isSame: (a, b) => a.filter === b.filter && a.completed === b.completed && a.todos.length === b.todos.length },
       footer(
         { attrs: { className: 'footer' }, styles: { display: state => (state.todos.length === 0 ? 'none' : 'block') } },
         span({ attrs: { className: 'todo-count' } }, state => {

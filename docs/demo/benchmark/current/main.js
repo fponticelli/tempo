@@ -463,16 +463,27 @@ exports.domChildToTemplate = domChildToTemplate;
 function processAttribute(el, name, value, acc) {
     var set = dom_attributes_mapper_1.htmlAttributeMap[name] || set_attribute_1.setAttribute;
     if (typeof value === 'function') {
-        var oldValue_1;
-        var f = function (state) {
-            var newValue = value(state);
-            if (newValue !== oldValue_1) {
+        // state in inputs can incorrectly map to state
+        if (el.nodeName === 'INPUT' || el.nodeName === 'TEXTAREA') {
+            var f = function (state) {
+                var newValue = value(state);
                 set(el, name, newValue);
-                if (String(newValue).length < 50000)
-                    oldValue_1 = newValue;
-            }
-        };
-        acc.push(f);
+            };
+            acc.push(f);
+        }
+        else {
+            var oldValue_1 = undefined;
+            var f = function (state) {
+                var newValue = value(state);
+                if (newValue !== oldValue_1) {
+                    set(el, name, newValue);
+                    if (String(newValue).length < 50000) {
+                        oldValue_1 = newValue;
+                    }
+                }
+            };
+            acc.push(f);
+        }
     }
     else {
         set(el, name, value);
