@@ -1,20 +1,18 @@
 import { Action } from '../action'
 import { Route, toUrl, Feed, toTitle } from '../route'
 import { a, header, i, nav, span } from '@tempo/dom/lib/html'
-import { g, path, svg } from '@tempo/dom/lib/svg'
+import { g, svg, rect } from '@tempo/dom/lib/svg'
 import { when, unless } from '@tempo/dom/lib/when'
 
 const logo = svg<Route, Action>(
-    { attrs: { width: '26', height: '26', viewBox: '0 0 26 26' } },
+    { attrs: { width: 32, height: 32, viewBox: `0 0 32 32` } },
     g(
       { styles: { fill: 'none' } },
-      path({ styles: { fill: '#ffffff', d: 'M2 2v6h6v-6h-6' } }),
-      path({ styles: { fill: '#ffffff', d: 'M18 2v6h6v-6h-6' } }),
-      path({ styles: { fill: '#ffffff', d: 'M2 10v6h6v-6h-6' } }),
-      path({ styles: { fill: '#ffffff', d: 'M18 10v6h6v-6h-6' } }),
-      path({ styles: { fill: '#ffffff', d: 'M2 18v6h6v-6h-6' } }),
-      path({ styles: { fill: '#ffffff', d: 'M18 18v6h6v-6h-6' } }),
-      path({ styles: { fill: '#ffffff', d: 'M10 4v6h6v-6h-6' } })
+      rect({ attrs: { x: 0,  y: 0,  fill: '#ffffff', width: 8, height: 8 } }),
+      rect({ attrs: { x: 11, y: 0,  fill: '#ffffff', width: 8, height: 8 } }),
+      rect({ attrs: { x: 22, y: 0,  fill: '#ffffff', width: 8, height: 8 } }),
+      rect({ attrs: { x: 11, y: 11, fill: '#ffffff', width: 8, height: 8 } }),
+      rect({ attrs: { x: 11, y: 22, fill: '#ffffff', width: 8, height: 8 } })
     )
   )
 
