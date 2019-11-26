@@ -77,7 +77,7 @@ export const template = section<State, Action>(
       label({ attrs: { for: 'toggle-all' } }, 'Mark all as complete'),
       ul(
         { attrs: { className: 'todo-list' } },
-        iterate<State, Todo[], Action>(
+        iterate(
           { getArray: (state: State) => state.filtered },
           filterState(
             { isSame: ([a, sa], [b, sb]) => a === b && sa.editing === sb.editing },
@@ -95,7 +95,7 @@ export const template = section<State, Action>(
               },
               div(
                 { attrs: { className: 'view' } },
-                input<[Todo, State], Action>({
+                input({
                   attrs: {
                     className: 'toggle',
                     type: 'checkbox',
@@ -124,7 +124,7 @@ export const template = section<State, Action>(
               ),
               when(
                 { condition: ([todo, state]: [Todo, State]) => isEditing(state, todo) /* todo.editing */ },
-                input<[Todo, State], Action>({
+                input({
                   afterrender: (_, el) => el.focus(),
                   attrs: {
                     type: 'text',
