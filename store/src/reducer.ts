@@ -19,3 +19,22 @@ export const compose = <State, Action>(reducer: Reducer<State, Action>, ...other
 ) => {
   return others.reduce((s, f) => f(s, action), reducer(state, action))
 }
+
+export const matchReduce = <Field extends (string | number | symbol), State, Action extends { [_ in Field]: any }>(
+  field: Field,
+  matches: { [k in Action[Field]]: (state: State, action: Action extends { [_ in Field]: k } ? Action : never) => State }
+): Reducer<State, Action> => {
+  return function(state: State, action: Action) {
+    const key = action[field] as Action[Field]
+    return matches[key](state, action as any)
+  }
+}
+
+export const reduceOnKind = <State, Action extends { kind: any }>(
+  matches: { [k in Action['kind']]: (state: State, action: Action extends { kind: k } ? Action : never) => State }
+): Reducer<State, Action> => {
+  return function(state: State, action: Action) {
+    const key = action.kind as Action['kind']
+    return matches[key](state, action as any)
+  }
+}
