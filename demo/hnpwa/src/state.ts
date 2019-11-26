@@ -9,7 +9,7 @@ export interface State {
   readonly page: Page
 }
 
-export const state = (route: Route, cache: Cache, page: Page): State =>
+export const createState = (route: Route, cache: Cache, page: Page): State =>
   ({ route, cache, page })
 
 export interface Cache {
@@ -21,7 +21,7 @@ export interface Cache {
 export const emptyCache = (): Cache => ({ feeds: {}, items: {}, users: {} })
 
 export interface PageFeed {
-  readonly kind: 'page-feed'
+  readonly kind: 'PageFeed'
   readonly feed: Feed
   readonly page: number
   readonly items: Item[]
@@ -29,40 +29,40 @@ export interface PageFeed {
 }
 
 export const pageFeed = (feed: Feed, page: number, items: Item[]): Page =>
-  ({ kind: 'page-feed', feed, page, items })
+  ({ kind: 'PageFeed', feed, page, items })
 
 export interface Article {
-  readonly kind: 'article'
+  readonly kind: 'Article'
   readonly item: Item
 }
 
-export const article = (item: Item): Page => ({ kind: 'article', item })
+export const article = (item: Item): Page => ({ kind: 'Article', item })
 
 export interface Profile {
-  readonly kind: 'profile'
+  readonly kind: 'Profile'
   readonly user: User
 }
 
-export const profile = (user: User): Page => ({ kind: 'profile', user })
+export const profile = (user: User): Page => ({ kind: 'Profile', user })
 
 export interface Loading {
-  readonly kind: 'loading'
+  readonly kind: 'Loading'
 }
 
-export const loading = { kind: 'loading' } as Page
+export const loading = { kind: 'Loading' } as Page
 
 export interface Error {
-  readonly kind: 'error'
+  readonly kind: 'Error'
   readonly error: HttpError
 }
 
-export const error = (error: HttpError): Page => ({ kind: 'error', error })
+export const error = (error: HttpError): Page => ({ kind: 'Error', error })
 
 export interface NotFound {
-  readonly kind: 'not-found'
+  readonly kind: 'NotFound'
 }
 
-export const notFound = { kind: 'not-found' } as Page
+export const notFound = { kind: 'NotFound' } as Page
 
 export type Page = PageFeed | Article | Profile | Loading | Error | NotFound
 

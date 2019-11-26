@@ -2,6 +2,7 @@ import { Action } from './action'
 import { State, article, error, profile, pageFeed } from './state'
 import { Route, Feed } from './route'
 import { match } from './result'
+import { reduceOnKind } from '@tempo/store/lib/reducer'
 
 // type Load result cmd
 //     = View result
@@ -39,57 +40,43 @@ import { match } from './result'
 //         GotFeed id feed ->
 //             check { model | cache = { cache | feeds = Dict.insert id feed cache.feeds } }
 
-export const reducer = (state: State, action: Action): State => {
-  switch (action.kind) {
-    case 'link-clicked':
-      if (action.isInternal) {
-        window.history.pushState({}, '', action.url)
-      } else {
-        window.location.assign(action.url)
+export const reducer = reduceOnKind<State, Action>({
+  LinkClicked: (state, _) => state,
+  UrlChanged: (state, action) => ({
+    ...state,
+    route: Route.fromUrl(action.url)
+  }),
+  GotItem: (state, action) => ({
+    ...state,
+    page: match(action.result, article, error),
+    cache: {
+      ...state.cache,
+      items: {
+        ...state.cache.items,
+        [String(action.id)]: action.result
       }
-      return state
-    case 'url-changed':
-      return {
-        ...state,
-        route: Route.fromUrl(action.url)
+    }
+  }),
+  GotFeed: (state, action) => ({
+    ...state,
+    page: match(action.result, items => pageFeed(Feed.top, 1, items), error), // TODO feed, page
+    cache: {
+      ...state.cache,
+      feeds: {
+        ...state.cache.feeds,
+        [action.feed]: action.result
       }
-    case 'got-item':
-      return {
-        ...state,
-        page: match(action.result, article, error),
-        cache: {
-          ...state.cache,
-          items: {
-            ...state.cache.items,
-            [String(action.id)]: action.result
-          }
-        }
+    }
+  }),
+  GotUser: (state, action) => ({
+    ...state,
+    page: match(action.result, profile, error),
+    cache: {
+      ...state.cache,
+      users: {
+        ...state.cache.users,
+        [action.user]: action.result
       }
-    case 'got-user':
-      return {
-        ...state,
-        page: match(action.result, profile, error),
-        cache: {
-          ...state.cache,
-          users: {
-            ...state.cache.users,
-            [action.user]: action.result
-          }
-        }
-      }
-    case 'got-feed':
-      return {
-        ...state,
-        page: match(action.result, items => pageFeed(Feed.top, 1, items), error), // TODO feed, page
-        cache: {
-          ...state.cache,
-          feeds: {
-            ...state.cache.feeds,
-            [action.feed]: action.result
-          }
-        }
-      }
-    default:
-      throw 'not all actions have been processed'
-  }
-}
+    }
+  })
+})
