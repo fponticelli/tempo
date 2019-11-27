@@ -11,8 +11,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-export type Tail<T extends any[]> =
-  ((...args: T) => void) extends ((_: any, ...rest: infer Rest) => void) ? Rest : never
+export type Tail<T extends any[]> = ((...args: T) => void) extends (_: any, ...rest: infer Rest) => void ? Rest : never
 
-export type Head<T extends any[]> =
-  T extends [infer H] ? H : never
+export type Head<T extends any[]> = T extends [infer H] ? H : never

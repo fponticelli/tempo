@@ -11,14 +11,15 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { Differentiate } from '@tempo/core/lib/util/differentiate'
+import { Differentiate } from '@tempo/core/lib/types/differentiate'
 import { DOMTemplate, DOMChild } from './template'
 import { DOMContext } from './context'
 import { DynamicView, View } from '@tempo/core/lib/view'
 import { domChildToTemplate } from './utils/dom'
+import { IndexKey } from '@tempo/core/lib/types/index_key'
 
 export class MatchView<
-  Field extends (string | number | symbol),
+  Field extends IndexKey,
   State extends { [k in Field]: any },
   Action
 > implements DynamicView<State> {
@@ -27,7 +28,7 @@ export class MatchView<
     private key: State[Field],
     private view: View<State>,
     readonly field: Field,
-    readonly matches: {
+    readonly matcher: {
       [k in State[Field]]: DOMTemplate<Differentiate<Field, State, k>, Action>
     },
     readonly ctx: DOMContext<Action>
@@ -41,7 +42,7 @@ export class MatchView<
     } else {
       this.view.destroy()
       this.key = newKey
-      this.view = this.matches[newKey].render(this.ctx, state as any)
+      this.view = this.matcher[newKey].render(this.ctx, state as any)
     }
   }
   destroy() {
@@ -50,45 +51,45 @@ export class MatchView<
 }
 
 export class MatchTemplate<
-  Field extends (string | number | symbol),
+  Field extends IndexKey,
   State extends { [k in Field]: any },
   Action
 > implements DOMTemplate<State, Action> {
   constructor(
     readonly field: Field,
-    readonly matches: {
+    readonly matcher: {
       [k in State[Field]]: DOMTemplate<Differentiate<Field, State, k>, Action>
     }
   ) {}
   render(ctx: DOMContext<Action>, state: State) {
     const key = state[this.field]
-    const view = this.matches[key].render(ctx, state as any)
+    const view = this.matcher[key].render(ctx, state as any)
     return new MatchView<Field, State, Action>(
       key,
       view,
       this.field,
-      this.matches,
+      this.matcher,
       ctx
     )
   }
 }
 
 export const match = <
-  Field extends (string | number | symbol),
+  Field extends IndexKey,
   State extends { [k in Field]: any },
   Action
 >(
   field: Field,
-  matches: {
+  matcher: {
     [k in State[Field]]: DOMChild<Differentiate<Field, State, k>, Action>
   }
 ) => {
   return new MatchTemplate<Field, State, Action>(
     field,
-    Object.keys(matches).reduce((acc, key) => {
+    Object.keys(matcher).reduce((acc, key) => {
       return {
         ...acc,
-        [key]: domChildToTemplate(matches[key as keyof typeof matches])
+        [key]: domChildToTemplate(matcher[key as keyof typeof matcher])
       }
     }, {} as {
       [k in State[Field]]: DOMTemplate<Differentiate<Field, State, k>, Action>
@@ -97,19 +98,19 @@ export const match = <
 }
 
 export const createMatch = <
-  Field extends (string | number | symbol)
+  Field extends IndexKey
 >(field: Field) =>
 <
   State extends { [k in Field]: any },
   Action
 >(
-  matches: {
+  matcher: {
     [k in State[Field]]: DOMTemplate<Differentiate<Field, State, k>, Action>
   }
 ) => {
   return new MatchTemplate<Field, State, Action>(
     field,
-    matches
+    matcher
   )
 }
 

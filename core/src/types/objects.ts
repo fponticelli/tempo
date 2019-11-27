@@ -11,7 +11,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { IndexKey } from './index_value'
+import { IndexKey } from './index_key'
 import { Tail } from './tuples'
 
 export type ObjectWithField<F extends IndexKey, V> = { [_ in F]: V }
@@ -24,53 +24,38 @@ export type ObjectWithPath<Path extends IndexKey[], V> = Path extends []
     : never
   : Path extends [infer K, ...any[]]
   ? K extends IndexKey
-    ? Tail<Path> extends infer Rest ?
-      Rest extends IndexKey[]
-      ? { [_ in K]: ObjectWithPath<Rest, V> }
-      : never
+    ? Tail<Path> extends infer Rest
+      ? Rest extends IndexKey[]
+        ? { [_ in K]: ObjectWithPath<Rest, V> }
+        : never
       : never
     : never
   : never
-export type TypeAtPath<Path extends IndexKey[], O> = {
-  next: number,
-  empty: O,
-  done: O[K]
-}[
-  Path extends [] ? 'empty' : Path extends [infer K] ? 'done' : 'next'
-]
-
-export type T0 = TypeAtPath<['a', 'b', 0], {
-  a: {
-    b: boolean[]
-    c: number
-  }
-  d: string
-}
-
-  // Path extends []
-  // ? {}
-  // : Path extends [infer T]
-  // ? T extends IndexKey
-  //   ? O extends Record<IndexKey, any>
-  //   ? O[T]
-  //   : never
-  //   : never
-  // : Path extends [infer K, ...any[]]
-  // ? K extends IndexKey
-  //   ? Tail<Path> extends infer Rest ?
-  //     Rest extends IndexKey[]
-  //     ? O extends Record<IndexKey, any>
-  //     ? O[K] extends Record<IndexKey, any>
-  //     ? TypeAtPath<Rest, O[K]>
-  //     : never
-  //     : never
-  //     : never
-  //     : never
-  //   : never
-  // : never
 
 // type T0 = ObjectWithPath<[], number>
 // type T1 = ObjectWithPath<['a'], number>
 // type T2 = ObjectWithPath<['a', 'b'], number>
 // type T3 = ObjectWithPath<['a', 'b', 'c'], number>
 // type T4 = ObjectWithPath<['a', 'b', 'c', 0], number>
+
+export type TypeAtPath<Path extends IndexKey[], O> = {
+  next: Path extends [infer K, ...any[]]
+    ? K extends IndexKey
+      ? Tail<Path> extends infer Rest
+        ? O extends Record<IndexKey, any>
+          ? Rest extends IndexKey[]
+            ? TypeAtPath<Rest, O[K]>
+            : never
+          : never
+        : never
+      : never
+    : never
+  empty: O
+  done: O extends Record<IndexKey, any> ? (Path extends [infer K] ? (K extends IndexKey ? O[K] : never) : never) : never
+}[Path extends [] ? 'empty' : Path extends [any] ? 'done' : 'next']
+
+// type Nested = { a: { b: boolean[], c: number }, d: string }
+// type T0 = TypeAtPath<[], Nested>
+// type T1 = TypeAtPath<['a'], Nested>
+// type T2 = TypeAtPath<['a', 'b'], Nested>
+// type T3 = TypeAtPath<['a', 'b', 0], Nested>

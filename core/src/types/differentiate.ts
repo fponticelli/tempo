@@ -11,7 +11,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { IndexKey } from './index_value'
+import { IndexKey } from './index_key'
 import { ObjectWithField, ObjectWithPath } from './objects'
 
 export type Differentiate<
@@ -28,9 +28,8 @@ export type DifferentiateDeep<
   K
 > = State extends ObjectWithPath<Path, K> ? State : never
 
-export type A = { kind: 'A', a: string }
-export type B = { kind: 'B', b: string }
-export type AB = A | B
-export type C = { ab: AB, c: string }
-
-export type T0 = DifferentiateDeep<['ab', 'kind'], C, 'A'>
+// export type A = { kind: 'A'; a: string }
+// export type B = { kind: 'B'; b: string }
+// export type AB = A | B
+// export type C = { ab: AB; c: string }
+// export type T0 = DifferentiateDeep<['ab', 'kind'], C, 'A'>
