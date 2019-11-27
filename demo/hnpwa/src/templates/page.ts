@@ -1,6 +1,6 @@
 import { Action } from '../action'
 import { Page } from '../state'
-import { matchKind } from '@tempo/dom/lib/match'
+import { matchOnKind } from '@tempo/dom/lib/match'
 import { article } from './article'
 import { error } from './error'
 import { loading } from './loading'
@@ -8,7 +8,7 @@ import { notFound } from './not_found'
 import { pageFeed } from './page_feed'
 import { profile } from './profile'
 
-export const page = matchKind<Page, Action>({
+export const page = matchOnKind<Page, Action>({
   Article: article,
   Error: error,
   Loading: loading,

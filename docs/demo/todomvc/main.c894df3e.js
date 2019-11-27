@@ -2126,6 +2126,20 @@ var $YLN0$export$mapState = function (options) {
 
 $YLN0$exports.mapState = $YLN0$export$mapState;
 
+var $YLN0$export$mapStateAndKeep = function (options) {
+  var children = [];
+
+  for (var _i = 1; _i < arguments.length; _i++) {
+    children[_i - 1] = arguments[_i];
+  }
+
+  return new $YLN0$var$MapStateTemplate(function (state) {
+    return [options.map(state), state];
+  }, $UNaj$export$mapArray(children, $KfbX$export$domChildToTemplate));
+};
+
+$YLN0$exports.mapStateAndKeep = $YLN0$export$mapStateAndKeep;
+
 var $YLN0$var$MapActionTemplate =
 /** @class */
 function () {
@@ -2286,38 +2300,6 @@ var $hYCi$export$until = function (options) {
 
 $hYCi$exports.until = $hYCi$export$until; //# sourceMappingURL=until.js.map
 
-// ASSET: ../node_modules/@tempo/dom/lib/for_each.js
-var $xmUo$exports = {};
-
-var $xmUo$var$__spreadArrays = $xmUo$exports && $xmUo$exports.__spreadArrays || function () {
-  for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
-
-  for (var r = Array(s), k = 0, i = 0; i < il; i++) for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++) r[k] = a[j];
-
-  return r;
-};
-
-Object.defineProperty($xmUo$exports, "__esModule", {
-  value: true
-});
-
-var $xmUo$export$forEach = function (options) {
-  var children = [];
-
-  for (var _i = 1; _i < arguments.length; _i++) {
-    children[_i - 1] = arguments[_i];
-  }
-
-  return $hYCi$export$until.apply(void 0, $xmUo$var$__spreadArrays([{
-    refId: options.refId || 't:for_each',
-    repeatUntil: function (state, index) {
-      return state[index];
-    }
-  }], children));
-};
-
-$xmUo$exports.forEach = $xmUo$export$forEach; //# sourceMappingURL=for_each.js.map
-
 // ASSET: ../node_modules/@tempo/dom/lib/iterate.js
 var $EcG8$exports = {};
 
@@ -2346,13 +2328,11 @@ var $EcG8$export$iterate = function (options) {
       outerState = outer;
       return options.getArray(outer);
     }
-  }, $xmUo$export$forEach({
-    refId: options.refId
-  }, $YLN0$export$mapState.apply(void 0, $EcG8$var$__spreadArrays([{
-    map: function (value) {
-      return [value, outerState];
+  }, $hYCi$export$until.apply(void 0, $EcG8$var$__spreadArrays([{
+    repeatUntil: function (value, index) {
+      return [value[index], outerState, index];
     }
-  }], children))));
+  }], children)));
 };
 
 $EcG8$exports.iterate = $EcG8$export$iterate; //# sourceMappingURL=iterate.js.map

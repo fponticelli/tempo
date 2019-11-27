@@ -12,9 +12,10 @@ limitations under the License.
 */
 
 import { Differentiate } from '@tempo/core/lib/util/differentiate'
-import { DOMTemplate } from './template'
+import { DOMTemplate, DOMChild } from './template'
 import { DOMContext } from './context'
 import { DynamicView, View } from '@tempo/core/lib/view'
+import { domChildToTemplate } from './utils/dom'
 
 export class MatchView<
   Field extends (string | number | symbol),
@@ -79,12 +80,19 @@ export const match = <
 >(
   field: Field,
   matches: {
-    [k in State[Field]]: DOMTemplate<Differentiate<Field, State, k>, Action>
+    [k in State[Field]]: DOMChild<Differentiate<Field, State, k>, Action>
   }
 ) => {
   return new MatchTemplate<Field, State, Action>(
     field,
-    matches
+    Object.keys(matches).reduce((acc, key) => {
+      return {
+        ...acc,
+        [key]: domChildToTemplate(matches[key as keyof typeof matches])
+      }
+    }, {} as {
+      [k in State[Field]]: DOMTemplate<Differentiate<Field, State, k>, Action>
+    })
   )
 }
 
@@ -105,4 +113,68 @@ export const createMatch = <
   )
 }
 
-export const matchKind = createMatch('kind')
+export const matchOnKind = createMatch('kind')
+
+export class MatchBoolView<State, Action> implements DynamicView<State> {
+  readonly kind = 'dynamic'
+  constructor(
+    readonly condition: (state: State) => boolean,
+    readonly trueTemplate: DOMTemplate<State, Action>,
+    readonly falseTemplate: DOMTemplate<State, Action>,
+    private view: View<State>,
+    private lastEvaluation: boolean,
+    readonly ctx: DOMContext<Action>
+  ) {}
+  change(state: State) {
+    const newEvaluation = this.condition(state)
+    if (newEvaluation === this.lastEvaluation) {
+      if (this.view.kind === 'dynamic') {
+        this.view.change(state)
+      }
+    } else {
+      this.view.destroy()
+      this.lastEvaluation = newEvaluation
+      this.view = newEvaluation ?
+        this.trueTemplate.render(this.ctx, state) :
+        this.falseTemplate.render(this.ctx, state)
+    }
+  }
+  destroy() {
+    this.view.destroy()
+  }
+}
+
+export class MatchBoolTemplate<
+  State,
+  Action
+> implements DOMTemplate<State, Action> {
+  constructor(
+    readonly condition: (state: State) => boolean,
+    readonly trueTemplate: DOMTemplate<State, Action>,
+    readonly falseTemplate: DOMTemplate<State, Action>
+  ) {}
+  render(ctx: DOMContext<Action>, state: State) {
+    const evaluation = this.condition(state)
+    const view = evaluation ? this.trueTemplate.render(ctx, state) : this.falseTemplate.render(ctx, state)
+    return new MatchBoolView<State, Action>(
+      this.condition,
+      this.trueTemplate,
+      this.falseTemplate,
+      view,
+      evaluation,
+      ctx
+    )
+  }
+}
+
+export const matchBool = <State, Action>(
+  options: {
+    condition: (state: State) => boolean,
+    true: DOMChild<State, Action>,
+    false: DOMChild<State, Action>
+  }
+) => new MatchBoolTemplate(
+  options.condition,
+  domChildToTemplate(options.true),
+  domChildToTemplate(options.false)
+)

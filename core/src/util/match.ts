@@ -13,8 +13,7 @@ limitations under the License.
 
 import { Differentiate } from './differentiate'
 
-export const match = <F extends (string | number | symbol), T extends { [_ in F]: any }, B>
-(
+export const match = <F extends string | number | symbol, T extends { [_ in F]: any }, B>(
   field: F,
   matcher: { [k in T[F]]: (arg: Differentiate<F, T, k>) => B },
   input: T
@@ -23,10 +22,7 @@ export const match = <F extends (string | number | symbol), T extends { [_ in F]
   return matcher[k](input as any)
 }
 
-export const createMatch = <F extends (string | number | symbol)>
-(
-  field: F
-) => <T extends { [_ in F]: any }, B> (
+export const createMatch = <F extends string | number | symbol>(field: F) => <T extends { [_ in F]: any }, B>(
   matcher: { [k in T[F]]: (arg: Differentiate<F, T, k>) => B }
 ) => (input: T): B => {
   const k = input[field]

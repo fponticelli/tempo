@@ -11,9 +11,4 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-export type DifferentiateDeep<
-  Path extends IndexValue[],
-  State extends WithField<Field, any>,
-  K extends State[Field]
-> = State extends WithField<Field, K> ? State : never
-
+export type IndexKey = string | number | symbol

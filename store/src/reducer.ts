@@ -20,9 +20,11 @@ export const compose = <State, Action>(reducer: Reducer<State, Action>, ...other
   return others.reduce((s, f) => f(s, action), reducer(state, action))
 }
 
-export const matchReduce = <Field extends (string | number | symbol), State, Action extends { [_ in Field]: any }>(
+export const matchReduce = <Field extends string | number | symbol, State, Action extends { [_ in Field]: any }>(
   field: Field,
-  matches: { [k in Action[Field]]: (state: State, action: Action extends { [_ in Field]: k } ? Action : never) => State }
+  matches: {
+    [k in Action[Field]]: (state: State, action: Action extends { [_ in Field]: k } ? Action : never) => State
+  }
 ): Reducer<State, Action> => {
   return function(state: State, action: Action) {
     const key = action[field] as Action[Field]

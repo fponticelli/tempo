@@ -7,15 +7,6 @@ import { page } from './page'
 
 export const template = main<State, Action>(
   {},
-  mapState(
-    { map: state => state.route },
-    appHeader
-  ),
-  section(
-    { attrs: { id: 'content' } },
-    mapState(
-      { map: state => state.page },
-      page
-    )
-  )
+  mapState({ map: state => state.route }, appHeader),
+  section({ attrs: { id: 'content' } }, mapState({ map: state => state.page }, page))
 )

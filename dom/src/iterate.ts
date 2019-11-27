@@ -13,14 +13,14 @@ limitations under the License.
 
 import { DOMChild } from './template'
 import { mapState } from './map'
-import { forEach } from './for_each'
+import { until } from './until'
 
 export const iterate = <OuterState, InnerState extends any[], Action>(
   options: {
     refId?: string
     getArray: (outer: OuterState) => InnerState
   },
-  ...children: DOMChild<[InnerState[number], OuterState], Action>[]
+  ...children: DOMChild<[InnerState[number], OuterState, number], Action>[]
 ) => {
   let outerState: OuterState
   return mapState<OuterState, InnerState, Action>(
@@ -30,12 +30,12 @@ export const iterate = <OuterState, InnerState extends any[], Action>(
         return options.getArray(outer)
       }
     },
-    forEach(
-      { refId: options.refId },
-      mapState<InnerState[number], [InnerState[number], OuterState], Action>(
-        { map: (value: InnerState[number]) => [value, outerState] },
-        ...children
-      )  
+    until<InnerState, InnerState[number], Action>(
+      {
+        repeatUntil:
+          (value: InnerState, index: number) => ([value[index], outerState, index])
+      },
+      ...children
     )
   )
 }

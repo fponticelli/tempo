@@ -1982,6 +1982,20 @@ var $YLN0$export$mapState = function (options) {
 
 $YLN0$exports.mapState = $YLN0$export$mapState;
 
+var $YLN0$export$mapStateAndKeep = function (options) {
+  var children = [];
+
+  for (var _i = 1; _i < arguments.length; _i++) {
+    children[_i - 1] = arguments[_i];
+  }
+
+  return new $YLN0$var$MapStateTemplate(function (state) {
+    return [options.map(state), state];
+  }, $UNaj$export$mapArray(children, $KfbX$export$domChildToTemplate));
+};
+
+$YLN0$exports.mapStateAndKeep = $YLN0$export$mapStateAndKeep;
+
 var $YLN0$var$MapActionTemplate =
 /** @class */
 function () {
