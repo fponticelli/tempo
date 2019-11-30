@@ -80,14 +80,9 @@ export interface Internal {
   readonly kind: 'Internal'
 }
 
-export interface None {
-  readonly kind: 'None'
-}
-
-export type ItemUrl = External | Internal | None
+export type ItemUrl = External | Internal
 
 export const ItemUrl = {
   external: (path: string): ItemUrl => ({ kind: 'External', path }),
-  internal: { kind: 'Internal' } as ItemUrl,
-  none: { kind: 'None' } as ItemUrl
+  internal: { kind: 'Internal' } as ItemUrl
 }

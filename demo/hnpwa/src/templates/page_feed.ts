@@ -1,4 +1,4 @@
-import { footer, section, ul, li, aside, span, a, div, h2 } from '@tempo/dom/lib/html'
+import { footer, section, ul, li, aside, span, div, h2 } from '@tempo/dom/lib/html'
 import { iterate } from '@tempo/dom/lib/iterate'
 import { fragment } from '@tempo/dom/lib/fragment'
 import { PageFeed, Item, External } from '../state'
@@ -17,8 +17,7 @@ export const itemUrlTemplate = match<['url', 'kind'], Item, Action>(['url', 'kin
   Internal: linkRoute(
     { route: item => Route.item(item.id) },
     h2({}, (item: Item) => item.title)
-  ),
-  None: h2({}, (item: Item) => item.title)
+  )
 })
 
 export const listItemUrlTemplate = match<['url', 'kind'], Item, Action>(['url', 'kind'], {
@@ -26,8 +25,7 @@ export const listItemUrlTemplate = match<['url', 'kind'], Item, Action>(['url', 
     { route: item => Route.externalRoute(item.url.path) },
     (item: Item) => item.title
   ),
-  Internal: linkRoute({ route: item => Route.item(item.id) }, (item: Item) => item.title),
-  None: (item: Item) => item.title
+  Internal: linkRoute({ route: item => Route.item(item.id) }, (item: Item) => item.title)
 })
 
 export const itemFooterTemplate = footer<Item, Action>(

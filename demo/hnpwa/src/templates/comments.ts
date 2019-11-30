@@ -1,4 +1,4 @@
-import { li, ul, div, a } from '@tempo/dom/lib/html'
+import { li, ul, div } from '@tempo/dom/lib/html'
 import { mapState } from '@tempo/dom/lib/map'
 import { forEach } from '@tempo/dom/lib/for_each'
 import { Route } from '../route'

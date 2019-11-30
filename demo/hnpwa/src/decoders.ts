@@ -13,7 +13,7 @@ import {
 
 import { lazy } from 'partsing/core/decoder'
 
-const itemUrlDecoder = stringValue.map((s): ItemUrl => {
+const itemUrlDecoder = stringValue.map((s: string): ItemUrl => {
   if (s.indexOf('item?id=') >= 0) {
     return ItemUrl.internal
   } else {
@@ -21,7 +21,7 @@ const itemUrlDecoder = stringValue.map((s): ItemUrl => {
   }
 })
 
-export const itemDecoder: ValueDecoder<Item> = objectValue({
+const itemDecoder: ValueDecoder<Item> = objectValue({
     id: integerValue,
     title: stringValue,
     points: nullValue.map(() => 0).or(integerValue),
@@ -38,7 +38,7 @@ export const itemDecoder: ValueDecoder<Item> = objectValue({
 export const decodeItem = decodeValue<Item>(itemDecoder)
 export const decodeFeed = decodeValue<Item[]>(arrayValue(itemDecoder))
 
-export const userDecoder = objectValue({
+const userDecoder = objectValue({
   about: stringValue.map(s => sanitize(s)),
   created: stringValue,
   id: stringValue,

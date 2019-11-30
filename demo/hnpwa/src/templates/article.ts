@@ -9,7 +9,7 @@ import { unsafeHtml } from '@tempo/dom/lib/unsafe_html'
 export const articleTemplate = article<Article, Action>(
   {},
   mapState(
-    { map: article => article.item },
+    { map: (article: Article) => article.item },
     section(
       {},
       itemUrlTemplate,
