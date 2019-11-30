@@ -290,12 +290,3 @@ interface PropagateArg<OuterState, InnerState, OuterAction, InnerAction> {
 This function allows to react to inner actions. When the `propagate` function is invoked, the implementor can decide to trigger new inner actions `dispatchInner` or outer actions `dispatchOuter`.
 
 This [simple app tracks performance](./docs/demo/benchmark/) improvements/regressions with new versions of the library.
-
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-589893-23"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-589893-23');
-</script>
