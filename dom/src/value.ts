@@ -12,10 +12,10 @@ limitations under the License.
 */
 
 /* istanbul ignore next */
-import { UnwrappedValue } from '@tempo/core/lib/value'
+import { UnwrappedValue, UnwrappedDerivedValue } from '@tempo/core/lib/value'
 import { DOMContext } from './context'
 
-export type DOMAttribute<State, Value> = UnwrappedValue<State, Value>
+export type DOMAttribute<State, Value> = UnwrappedValue<State, Value | undefined> | undefined
 export type DOMTextValue<S> = DOMAttribute<S, string>
 export type DOMEventHandler<S, Action, Ev extends Event = Event, El extends Element = Element> =
   (state: S, event: Ev, element: El) => Action | undefined
@@ -31,4 +31,28 @@ export interface DOMAttributes<State, Action, El extends Element, T> {
   beforechange?: (state: State, el: El, ctx: DOMContext<Action>, value: T | undefined) => T | undefined
   afterchange?:  (state: State, el: El, ctx: DOMContext<Action>, value: T | undefined) => T | undefined
   beforedestroy?: ((el: El, ctx: DOMContext<Action>, value: T | undefined) => void)
+}
+
+export const mapAttribute = <State, A, B>(attr: DOMAttribute<State, A>, map: (a: A) => B): DOMAttribute<State, B> => {
+  if (typeof attr === 'undefined') {
+    return undefined
+  } else if (typeof attr === 'function') {
+    return (state: State) => {
+      const res = (attr as UnwrappedDerivedValue<State, A>)(state)
+      if (res !== undefined)
+        return map(res)
+      else
+        return undefined
+    }
+  } else {
+    return map(attr)
+  }
+}
+
+export const resolveAttribute = <State, Value>(attr: DOMAttribute<State, Value>): ((state: State) => Value | undefined) =>  {
+  if (typeof attr === 'function') {
+    return (attr as UnwrappedDerivedValue<State, Value>)
+  } else {
+    return (_: State): Value | undefined => attr
+  }
 }

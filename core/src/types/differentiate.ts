@@ -11,25 +11,40 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { IndexKey } from './index_key'
-import { ObjectWithField, ObjectWithPath } from './objects'
+import { IndexType } from './index_type'
+import { ObjectWithField } from './objects'
+import { Tail } from './tuples'
 
 export type Differentiate<
-  Field extends IndexKey,
+  Field extends IndexType,
   State extends ObjectWithField<Field, any>,
-  K extends State[Field]
-> = State extends ObjectWithField<Field, K> ? State : never
+  ExpectedType extends State[Field]
+> = State extends ObjectWithField<Field, ExpectedType> ? State : never
 
 export type DifferentiateByKind<State extends { kind: any }, K extends State['kind']> = Differentiate<'kind', State, K>
 
-export type DifferentiateDeep<
-  Path extends IndexKey[],
-  State extends ObjectWithPath<Path, any>,
-  K
-> = State extends ObjectWithPath<Path, K> ? State : never
+export type DifferentiateAt<Path extends IndexType[], State, ExpectedType> = Path extends []
+  ? State
+  : Path extends [infer T]
+  ? T extends keyof State
+    ? ExpectedType extends State[T]
+      ? Differentiate<T, State, ExpectedType>
+      : never
+    : never
+  : Path extends [infer K, ...any[]]
+  ? K extends keyof State
+    ? Tail<Path> extends infer Rest
+      ? Rest extends IndexType[]
+        ? State & { [k in K]: DifferentiateAt<Rest, State[k], ExpectedType> }
+        : never
+      : never
+    : never
+  : never
 
 // export type A = { kind: 'A'; a: string }
 // export type B = { kind: 'B'; b: string }
 // export type AB = A | B
 // export type C = { ab: AB; c: string }
-// export type T0 = DifferentiateDeep<['ab', 'kind'], C, 'A'>
+// export type T1 = DifferentiateAt<['ab', 'kind'], C, 'A'>
+// export const t1: T1 = { ab: { kind: 'A', a: 'hello' }, c: '' }
+// console.log(t1.ab.a)

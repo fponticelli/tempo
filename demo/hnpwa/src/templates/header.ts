@@ -1,8 +1,10 @@
-import { Action, linkClicked } from '../action'
-import { Route, toUrl, Feed, toTitle } from '../route'
-import { a, header, i, nav, span } from '@tempo/dom/lib/html'
+import { Action } from '../action'
+import { Route, Feed, toTitle } from '../route'
+import { header, i, nav, span } from '@tempo/dom/lib/html'
 import { g, svg, rect } from '@tempo/dom/lib/svg'
 import { when, unless } from '@tempo/dom/lib/when'
+import { fragment } from '@tempo/dom/lib/fragment'
+import { linkRoute } from './link_route'
 
 const logo = svg<Route, Action>(
   { attrs: { width: 32, height: 32, viewBox: `0 0 32 32` } },
@@ -19,45 +21,26 @@ const logo = svg<Route, Action>(
 const headerLink = (feed: Feed) => {
   const condition = (route: Route) => {
     switch (route.kind) {
-      case 'feeds-route':
+      case 'FeedsRoute':
         return route.feed === feed
       default:
         return false
     }
   }
-  return span<Route, Action>( // TODO need empty container?
-    {},
+  return fragment<Route, Action>(
     when({ condition }, span({ attrs: { 'aria-current': 'page' } }, toTitle(Route.feeds(feed, 1)))),
-    unless(
-      { condition },
-      a(
-        {
-          attrs: { href: toUrl(Route.feeds(feed, 1)) },
-          events: {
-            click: (_, e: MouseEvent) => {
-              e.preventDefault()
-              return linkClicked(true, toUrl(Route.feeds(feed, 1)))
-            }
-          }
-        },
-        toTitle(Route.feeds(feed, 1))
-      )
-    )
+    unless({ condition }, linkRoute({ route: Route.feeds(feed, 1) }))
   )
 }
 
 export const appHeader = header<Route, Action>(
   {},
-  a({ attrs: { href: toUrl(Route.root()) } }, i({ attrs: { 'aria-label': 'Homepage', className: 'logo' } }, logo)),
+  linkRoute({ route: Route.root }, i({ attrs: { 'aria-label': 'Homepage', className: 'logo' } }, logo)),
   nav({}, ...[Feed.top, Feed.new, Feed.ask, Feed.show, Feed.jobs].map(headerLink)),
-  a(
+  linkRoute(
     {
-      attrs: {
-        className: 'githublink',
-        href: 'https://github.com/fponticelli/tempo',
-        target: '_blank',
-        rel: 'noopener'
-      }
+      className: 'githublink',
+      route: Route.externalRoute('https://github.com/fponticelli/tempo')
     },
     'About'
   )

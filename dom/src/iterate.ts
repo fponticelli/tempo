@@ -11,7 +11,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { DOMChild } from './template'
+import { DOMChild, DOMTemplate } from './template'
 import { mapState } from './map'
 import { until } from './until'
 
@@ -21,7 +21,7 @@ export const iterate = <OuterState, InnerState extends any[], Action>(
     getArray: (outer: OuterState) => InnerState
   },
   ...children: DOMChild<[InnerState[number], OuterState, number], Action>[]
-) => {
+): DOMTemplate<OuterState, Action> => {
   let outerState: OuterState
   return mapState<OuterState, InnerState, Action>(
     {
@@ -33,7 +33,7 @@ export const iterate = <OuterState, InnerState extends any[], Action>(
     until<InnerState, InnerState[number], Action>(
       {
         repeatUntil:
-          (value: InnerState, index: number) => ([value[index], outerState, index])
+          (value: InnerState, index: number) => value[index] && ([value[index], outerState, index])
       },
       ...children
     )

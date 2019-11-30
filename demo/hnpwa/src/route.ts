@@ -3,11 +3,14 @@ import {
   match,
   digits,
   TextInput,
-  rest
+  rest,
+  eoi
 } from 'partsing/text'
 
 import { oneOf, succeed } from 'partsing/core/decoder'
 import { DecodeError } from 'partsing/error'
+import { Page } from './state'
+import { matchKind } from '@tempo/core/lib/util/match'
 
 export enum Feed {
   top = 'top',
@@ -18,45 +21,51 @@ export enum Feed {
 }
 
 export interface RootRoute {
-  readonly kind: 'root-route'
+  readonly kind: 'RootRoute'
 }
 
 export interface FeedsRoute {
-  readonly kind: 'feeds-route'
+  readonly kind: 'FeedsRoute'
   readonly feed: Feed
   readonly page: number
 }
 
+export interface ExternalRoute {
+  readonly kind: 'ExternalRoute'
+  readonly path: string
+}
+
 export interface ItemRoute {
-  readonly kind: 'item-route'
+  readonly kind: 'ItemRoute'
   readonly item: number
 }
 
 export interface UserRoute {
-  readonly kind: 'user-route'
+  readonly kind: 'UserRoute'
   readonly user: string
 }
 
 export interface NotFoundRoute {
-  readonly kind: 'not-found-route'
+  readonly kind: 'NotFoundRoute'
 }
 
-export type Route = RootRoute | FeedsRoute | ItemRoute | UserRoute | NotFoundRoute
+export type Route = RootRoute | FeedsRoute | ItemRoute | UserRoute | NotFoundRoute | ExternalRoute
 
 export const Route = {
-  root: (): Route => ({ kind: 'root-route' }),
-  feeds: (feed: Feed, page: number): Route => ({ kind: 'feeds-route', feed, page }),
-  item: (item: number): Route => ({ kind: 'item-route', item }),
-  user: (user: string): Route => ({ kind: 'user-route', user }),
-  notFound: (): Route => ({ kind: 'not-found-route' }),
+  root: { kind: 'RootRoute' } as Route,
+  feeds: (feed: Feed, page: number): Route => ({ kind: 'FeedsRoute', feed, page }),
+  item: (item: number): Route => ({ kind: 'ItemRoute', item }),
+  user: (user: string | undefined): Route => ({ kind: 'UserRoute', user: user || '' }),
+  notFound: { kind: 'NotFoundRoute' } as Route,
+  externalRoute: (path: string): Route => ({ kind: 'ExternalRoute', path }),
 
   fromUrl: (url: string): Route => {
-    const result = decoder(url)
+    const result = urlDecoder(url)
     switch (result.kind) {
       case 'decode-success':
         return result.value
       default:
-        return Route.notFound()
+        return Route.notFound
     }
   }
 }
@@ -71,8 +80,8 @@ export const routeData = (title: string, url: string): RouteData => ({ title, ur
 export const maxPage = (feed: Feed) => {
   switch (feed) {
     case Feed.top:  return 10
-    case Feed.new:  return 12
-    case Feed.ask:  return 3
+    case Feed.new:  return 10
+    case Feed.ask:  return 2
     case Feed.show: return 2
     case Feed.jobs: return 1
     default: throw 'should never happen'
@@ -84,21 +93,14 @@ const feedToTitle = (feed: Feed) => {
   return s.substring(0, 1).toUpperCase() + s.substring(1)
 }
 
-export const toRouteData = (route: Route): RouteData => {
-  switch (route.kind) {
-    case 'feeds-route':
-      return routeData(feedToTitle(route.feed), `/${route.feed}/page/${route.page}`)
-    case 'item-route':
-      return routeData('Item', `/item/${route.item}`)
-    case 'not-found-route':
-      return routeData('404', '/404')
-    case 'root-route':
-      return routeData('Top', '/')
-    case 'user-route':
-      return routeData('User', `/user/${route.user}`)
-    default: throw 'should never happen'
-  }
-}
+export const toRouteData = matchKind<Route, RouteData>({
+  FeedsRoute: (route) => routeData(feedToTitle(route.feed), route.page === 1 ? `/${route.feed}` : `/${route.feed}/page/${route.page}`),
+  ItemRoute: (route) => routeData('Item', `/item/${route.item}`),
+  NotFoundRoute: () => routeData('404', '/404'),
+  RootRoute: () => routeData('Top', '/'),
+  UserRoute: (route) => routeData(route.user, `/user/${route.user}`),
+  ExternalRoute: (route) => routeData('External', route.path)
+})
 
 export const toTitle = (route: Route): string => toRouteData(route).title
 export const toUrl = (route: Route): string => toRouteData(route).url
@@ -111,15 +113,17 @@ const parseFeed = oneOf(
   match('/jobs').withResult(Feed.jobs)
 )
 
-const decoder = decodeText<Route>(
+const urlDecoder = decodeText<Route>(
   oneOf(
-    parseFeed
-      .join(
-        match('?page=').pickNext(digits(1)).map(Number)
-          .or(succeed<TextInput, number, DecodeError>(1))
-      ).map(([feed, page]: [Feed, number]) => Route.feeds(feed, page)),
+    oneOf(
+      parseFeed.skipNext(eoi).map(feed => Route.feeds(feed, 1)),
+      parseFeed.join(
+        match('/page/').pickNext(digits(1)).map(Number)
+      ).map(([feed, page]: [Feed, number]) => Route.feeds(feed, page))
+    ),
     match('/item/').pickNext(digits(0)).map(Number).map(Route.item),
     match('/user/').pickNext(rest).map(i => Route.user(i)),
-    match('/').map(_ => Route.root())
+    match('/404').map(() => Route.notFound),
+    match('/').skipNext(eoi).map(_ => Route.root)
   )
 )

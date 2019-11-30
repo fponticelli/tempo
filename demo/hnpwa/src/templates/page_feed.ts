@@ -1,34 +1,74 @@
-import { section, ul, li, aside, div, span, link, a } from '@tempo/dom/lib/html'
+import { footer, section, ul, li, aside, span, a, div, h2 } from '@tempo/dom/lib/html'
 import { iterate } from '@tempo/dom/lib/iterate'
-import { PageFeed, Item } from '../state'
+import { fragment } from '@tempo/dom/lib/fragment'
+import { PageFeed, Item, External } from '../state'
 import { Action } from '../action'
-import { matchOnKind } from '@tempo/dom/lib/match'
+import { match, matchBool } from '@tempo/dom/lib/match'
 import { mapState } from '@tempo/dom/lib/map'
+import { Route } from '../route'
+import { linkRoute } from './link_route'
+import { paginationTemplate } from './pagination'
 
-const listItemUrl = mapState(
-  { map: (state: Item) => ({ kind: state.url.kind, id: state.id, title: state.title }) }, // TODO don't like this very much
-  matchOnKind<{ kind: 'external' | 'internal' | 'none'; id: number; title: string }, Action>({
-    external: link({}),
-    internal: a({}),
-    none: span({}, item => item.title)
+export const itemUrlTemplate = match<['url', 'kind'], Item, Action>(['url', 'kind'], {
+  External: linkRoute<Item & { url: External }>(
+    { route: item => Route.externalRoute(item.url.path) },
+    h2({}, (item: Item) => item.title)
+  ),
+  Internal: linkRoute(
+    { route: item => Route.item(item.id) },
+    h2({}, (item: Item) => item.title)
+  ),
+  None: h2({}, (item: Item) => item.title)
+})
+
+export const listItemUrlTemplate = match<['url', 'kind'], Item, Action>(['url', 'kind'], {
+  External: linkRoute<Item & { url: External }>(
+    { route: item => Route.externalRoute(item.url.path) },
+    (item: Item) => item.title
+  ),
+  Internal: linkRoute({ route: item => Route.item(item.id) }, (item: Item) => item.title),
+  None: (item: Item) => item.title
+})
+
+export const itemFooterTemplate = footer<Item, Action>(
+  {},
+  matchBool({
+    condition: item => item.type === 'job',
+    true: item => item.time_ago,
+    false: fragment(
+      item => String(item.points),
+      ' points by ',
+      linkRoute({ route: item => Route.user(item.user) }),
+      ' ',
+      item => item.time_ago,
+      ' ',
+      linkRoute({ route: item => Route.item(item.id) }, item => String(item.comments_count), ' comments')
+    )
   })
 )
 
-const itemFooter = (item: Item) => {}
-
-const listItem = li<[Item, PageFeed, number], Action>(
+const listItemTemplate = li<[Item, PageFeed, number], Action>(
   {},
-  aside({}, ([_i, _p, index]) => String(index + 1)),
+  aside({}, ([_i, page, index]) => String((page.page - 1) * 30 + index + 1)),
   div(
     {},
-    listItemUrl,
-    span({ attrs: { className: 'domain' } }, ([item]) => item.domain, itemFooter)
+    mapState(
+      { map: ([item]) => item },
+      listItemUrlTemplate,
+      span({ attrs: { className: 'domain' } }, item => item.domain, itemFooterTemplate)
+    )
   )
 )
 
-export const pageFeed = section<PageFeed, Action>(
+export const pageFeedTemplate = section<PageFeed, Action>(
   {
     attrs: { className: 'list-view' }
   },
-  ul({}, iterate({ getArray: state => state.items }, listItem))
+  ul({}, iterate({ getArray: state => state.items }, listItemTemplate)),
+  mapState(
+    {
+      map: state => ({ feed: state.feed, page: state.page })
+    },
+    paginationTemplate
+  )
 )

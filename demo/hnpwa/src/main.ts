@@ -2,14 +2,16 @@ import { Tempo } from '@tempo/dom/lib/tempo'
 import { Store } from '@tempo/store/lib/store'
 import { template } from './templates/app'
 import { reducer } from './reducer'
-import { createState, emptyCache, loading } from './state'
+import { createState, Page } from './state'
 import { Route } from './route'
 import { middleware, setTitle } from './middleware'
+import { Action } from './action'
+
+const route = Route.fromUrl(location.pathname)
 
 const state = createState(
-  Route.root(),
-  emptyCache(),
-  loading
+  Route.root,
+  Page.loading
 )
 
 const store = Store.ofState({
@@ -23,4 +25,11 @@ Tempo.render({ store, template })
 setTitle(state)
 
 store.property.observable.on(setTitle)
-store.observable.on(middleware)
+store.observable.on(middleware(store))
+
+store.process(Action.linkClicked(route))
+
+window.addEventListener('popstate', (event) => {
+  const route = Route.fromUrl(location.pathname)
+  store.process(Action.linkClicked(route))
+})

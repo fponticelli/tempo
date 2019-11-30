@@ -16,6 +16,7 @@ import { div } from '../src/html'
 import { adapter, PropagateArg } from '../src/adapter'
 import { component } from '../src/component'
 import { Store } from '@tempo/store/lib/store'
+import { DynamicView } from '@tempo/core/lib/view'
 
 describe('adapter', () => {
   it('noOptions', () => {
@@ -39,7 +40,7 @@ describe('adapter', () => {
         s => s.outer
       )
     )
-    const view = template.render(ctx, { outer: 'out' })
+    const view = template.render(ctx, { outer: 'out' }) as DynamicView<{ outer: string }>
     expect(ctx.doc.body.innerHTML).toEqual('inner: in, outer: out')
     view.change({ outer: 'OUT' })
     expect(ctx.doc.body.innerHTML).toEqual('inner: in, outer: out')
@@ -72,7 +73,7 @@ describe('adapter', () => {
         s => s.outer
       )
     )
-    const view = template.render(ctx, { outer: 'out' })
+    const view = template.render(ctx, { outer: 'out' }) as DynamicView<{ outer: string }>
     expect(ctx.doc.body.innerHTML).toEqual('inner: in, outer: out')
     view.change({ outer: 'OUT' })
     expect(ctx.doc.body.innerHTML).toEqual('inner: in, outer: OUT')

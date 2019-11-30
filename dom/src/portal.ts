@@ -17,7 +17,7 @@ import { fragmentView } from './fragment'
 import { domChildToTemplate } from './utils/dom'
 import { mapArray } from '@tempo/core/lib/util/map'
 
-export class DOMPortal<State, Action> implements DOMTemplate<State, Action> {
+export class DOMPortalTemplate<State, Action> implements DOMTemplate<State, Action> {
   constructor(
     readonly getParent: (doc: Document) => Element,
     readonly append: (doc: Document, node: Node) => void,
@@ -42,9 +42,9 @@ export const portal = <State, Action>(
     append: (doc: Document, node: Node) => void
   },
   ...children: DOMChild<State, Action>[]
-) => new DOMPortal<State, Action>(options.getParent, options.append, mapArray(children, domChildToTemplate))
+): DOMTemplate<State, Action> => new DOMPortalTemplate<State, Action>(options.getParent, options.append, mapArray(children, domChildToTemplate))
 
-export const portalWithSelector = <State, Action>(options: { selector: string }, ...children: DOMChild<State, Action>[]) =>
+export const portalWithSelector = <State, Action>(options: { selector: string }, ...children: DOMChild<State, Action>[]): DOMTemplate<State, Action> =>
   portal<State, Action>(
     {
       getParent: (doc: Document) => {
@@ -64,15 +64,15 @@ export const portalWithSelector = <State, Action>(options: { selector: string },
     ...children
   )
 
-export const headPortal = <State, Action>(...children: DOMChild<State, Action>[]) =>
-  new DOMPortal<State, Action>(
+export const headPortal = <State, Action>(...children: DOMChild<State, Action>[]): DOMTemplate<State, Action> =>
+  new DOMPortalTemplate<State, Action>(
     (doc: Document) => doc.head!,
     (doc: Document, node: Node) => doc.head!.appendChild(node),
     mapArray(children, domChildToTemplate)
   )
 
-export const bodyPortal = <State, Action>(...children: DOMChild<State, Action>[]) =>
-  new DOMPortal<State, Action>(
+export const bodyPortal = <State, Action>(...children: DOMChild<State, Action>[]): DOMTemplate<State, Action> =>
+  new DOMPortalTemplate<State, Action>(
     (doc: Document) => doc.body,
     (doc: Document, node: Node) => doc.body.appendChild(node),
     mapArray(children, domChildToTemplate)

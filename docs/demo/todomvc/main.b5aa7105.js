@@ -360,14 +360,14 @@ var $jTie$var$renderFunction = function (ctx, state, map) {
   return view;
 };
 
-var $jTie$var$DOMText =
+var $jTie$var$DOMTextTemplate =
 /** @class */
 function () {
-  function DOMText(content) {
+  function DOMTextTemplate(content) {
     this.content = content;
   }
 
-  DOMText.prototype.render = function (ctx, state) {
+  DOMTextTemplate.prototype.render = function (ctx, state) {
     if (typeof this.content === 'function') {
       return $jTie$var$renderFunction(ctx, state, this.content);
     } else {
@@ -375,14 +375,14 @@ function () {
     }
   };
 
-  return DOMText;
+  return DOMTextTemplate;
 }();
 
-var $jTie$export$DOMText = $jTie$var$DOMText;
-$jTie$exports.DOMText = $jTie$export$DOMText;
+var $jTie$export$DOMTextTemplate = $jTie$var$DOMTextTemplate;
+$jTie$exports.DOMTextTemplate = $jTie$export$DOMTextTemplate;
 
 var $jTie$export$text = function (content) {
-  return new $jTie$var$DOMText(content);
+  return new $jTie$var$DOMTextTemplate(content);
 };
 
 $jTie$exports.text = $jTie$export$text; //# sourceMappingURL=text.js.map
@@ -431,7 +431,7 @@ var $KfbX$export$filterDynamics = $KfbX$var$filterDynamics;
 $KfbX$exports.filterDynamics = $KfbX$export$filterDynamics;
 
 function $KfbX$var$domChildToTemplate(dom) {
-  if (typeof dom === 'string' || typeof dom === 'function') return $jTie$export$text(dom);else return dom;
+  if (typeof dom === 'string' || typeof dom === 'function' || typeof dom === 'undefined') return $jTie$export$text(dom);else return dom;
 }
 
 var $KfbX$export$domChildToTemplate = $KfbX$var$domChildToTemplate;
@@ -628,25 +628,25 @@ var $xGqp$export$fragmentView = function (views) {
 
 $xGqp$exports.fragmentView = $xGqp$export$fragmentView;
 
-var $xGqp$var$DOMFragment =
+var $xGqp$var$DOMFragmentTemplate =
 /** @class */
 function () {
-  function DOMFragment(children) {
+  function DOMFragmentTemplate(children) {
     this.children = children;
   }
 
-  DOMFragment.prototype.render = function (ctx, state) {
+  DOMFragmentTemplate.prototype.render = function (ctx, state) {
     var views = $UNaj$export$mapArray(this.children, function (child) {
       return child.render(ctx, state);
     });
     return $xGqp$export$fragmentView(views);
   };
 
-  return DOMFragment;
+  return DOMFragmentTemplate;
 }();
 
-var $xGqp$export$DOMFragment = $xGqp$var$DOMFragment;
-$xGqp$exports.DOMFragment = $xGqp$export$DOMFragment;
+var $xGqp$export$DOMFragmentTemplate = $xGqp$var$DOMFragmentTemplate;
+$xGqp$exports.DOMFragmentTemplate = $xGqp$export$DOMFragmentTemplate;
 
 var $xGqp$export$fragment = function () {
   var children = [];
@@ -655,7 +655,7 @@ var $xGqp$export$fragment = function () {
     children[_i] = arguments[_i];
   }
 
-  return new $xGqp$var$DOMFragment($UNaj$export$mapArray(children, $KfbX$export$domChildToTemplate));
+  return new $xGqp$var$DOMFragmentTemplate($UNaj$export$mapArray(children, $KfbX$export$domChildToTemplate));
 };
 
 $xGqp$exports.fragment = $xGqp$export$fragment; //# sourceMappingURL=fragment.js.map
@@ -725,16 +725,16 @@ function (_super) {
 var $Mlpu$export$DOMComponentView = $Mlpu$var$DOMComponentView;
 $Mlpu$exports.DOMComponentView = $Mlpu$export$DOMComponentView;
 
-var $Mlpu$var$DOMComponent =
+var $Mlpu$var$DOMComponentTemplate =
 /** @class */
 function () {
-  function DOMComponent(store, children, delayed) {
+  function DOMComponentTemplate(store, children, delayed) {
     this.store = store;
     this.children = children;
     this.delayed = delayed;
   }
 
-  DOMComponent.prototype.render = function (ctx, state) {
+  DOMComponentTemplate.prototype.render = function (ctx, state) {
     var update;
 
     if (this.delayed) {
@@ -775,11 +775,11 @@ function () {
     return view;
   };
 
-  return DOMComponent;
+  return DOMComponentTemplate;
 }();
 
-var $Mlpu$export$DOMComponent = $Mlpu$var$DOMComponent;
-$Mlpu$exports.DOMComponent = $Mlpu$export$DOMComponent;
+var $Mlpu$export$DOMComponentTemplate = $Mlpu$var$DOMComponentTemplate;
+$Mlpu$exports.DOMComponentTemplate = $Mlpu$export$DOMComponentTemplate;
 
 var $Mlpu$export$component = function (attributes) {
   var children = [];
@@ -788,7 +788,7 @@ var $Mlpu$export$component = function (attributes) {
     children[_i - 1] = arguments[_i];
   }
 
-  return new $Mlpu$var$DOMComponent(attributes.store, $UNaj$export$mapArray(children, $KfbX$export$domChildToTemplate), attributes.delayed || false);
+  return new $Mlpu$var$DOMComponentTemplate(attributes.store, $UNaj$export$mapArray(children, $KfbX$export$domChildToTemplate), attributes.delayed || false);
 };
 
 $Mlpu$exports.component = $Mlpu$export$component; //# sourceMappingURL=component.js.map
@@ -2330,7 +2330,7 @@ var $EcG8$export$iterate = function (options) {
     }
   }, $hYCi$export$until.apply(void 0, $EcG8$var$__spreadArrays([{
     repeatUntil: function (value, index) {
-      return [value[index], outerState, index];
+      return value[index] && [value[index], outerState, index];
     }
   }], children)));
 };
@@ -2399,15 +2399,15 @@ function () {
 var $rPBd$export$DOMWhenView = $rPBd$var$DOMWhenView;
 $rPBd$exports.DOMWhenView = $rPBd$export$DOMWhenView;
 
-var $rPBd$var$DOMWhen =
+var $rPBd$var$DOMWhenTemplate =
 /** @class */
 function () {
-  function DOMWhen(options, children) {
+  function DOMWhenTemplate(options, children) {
     this.options = options;
     this.children = children;
   }
 
-  DOMWhen.prototype.render = function (ctx, state) {
+  DOMWhenTemplate.prototype.render = function (ctx, state) {
     var ref = ctx.doc.createComment(this.options.refId || 't:when');
     ctx.append(ref);
     var parent = ref.parentElement;
@@ -2420,11 +2420,11 @@ function () {
     return view;
   };
 
-  return DOMWhen;
+  return DOMWhenTemplate;
 }();
 
-var $rPBd$export$DOMWhen = $rPBd$var$DOMWhen;
-$rPBd$exports.DOMWhen = $rPBd$export$DOMWhen;
+var $rPBd$export$DOMWhenTemplate = $rPBd$var$DOMWhenTemplate;
+$rPBd$exports.DOMWhenTemplate = $rPBd$export$DOMWhenTemplate;
 
 var $rPBd$export$when = function (options) {
   var children = [];
@@ -2433,7 +2433,7 @@ var $rPBd$export$when = function (options) {
     children[_i - 1] = arguments[_i];
   }
 
-  return new $rPBd$var$DOMWhen(options, children);
+  return new $rPBd$var$DOMWhenTemplate(options, children);
 };
 
 $rPBd$exports.when = $rPBd$export$when;
@@ -2445,7 +2445,7 @@ var $rPBd$export$unless = function (options) {
     children[_i - 1] = arguments[_i];
   }
 
-  return new $rPBd$var$DOMWhen({
+  return new $rPBd$var$DOMWhenTemplate({
     condition: function (v) {
       return !options.condition(v);
     },

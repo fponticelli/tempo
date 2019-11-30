@@ -1,30 +1,17 @@
 import { Result } from './result'
 import { HttpError } from './http_error'
 import { Item, User } from './state'
-
-// type Msg
-//     = LinkClicked Browser.UrlRequest
-//     | UrlChanged Url.Url
-//     | GotItem Int (Result Http.Error Item)
-//     | GotUser String (Result Http.Error User)
-//     | GotFeed String (Result Http.Error (List Item))
+import { Route, Feed } from './route'
 
 export interface LinkClicked {
   readonly kind: 'LinkClicked'
-  readonly isInternal: boolean
-  readonly url: string // Browser.UrlRequest
+  readonly route: Route
 }
-
-export const linkClicked = (isInternal: boolean, url: string): Action =>
-  ({ kind: 'LinkClicked', isInternal, url })
 
 export interface UrlChanged {
   readonly kind: 'UrlChanged'
   readonly url: string // Url.Url
 }
-
-export const urlChanged = (url: string): Action =>
-  ({ kind: 'UrlChanged', url })
 
 export interface GotItem {
   readonly kind: 'GotItem'
@@ -32,25 +19,34 @@ export interface GotItem {
   readonly result: Result<Item, HttpError>
 }
 
-export const gotItem = (id: number, result: Result<Item, HttpError>): Action =>
-  ({ kind: 'GotItem', id, result })
-
 export interface GotUser {
   readonly kind: 'GotUser'
   readonly user: string
   readonly result: Result<User, HttpError>
 }
 
-export const gotUser = (user: string, result: Result<User, HttpError>): Action =>
-  ({ kind: 'GotUser', user, result })
-
 export interface GotFeed {
   readonly kind: 'GotFeed'
-  readonly feed: string
+  readonly feed: Feed
   readonly result: Result<Item[], HttpError>
 }
 
-export const gotFeed = (feed: string, result: Result<Item[], HttpError>): Action =>
-  ({ kind: 'GotFeed', feed, result })
-
 export type Action = LinkClicked | UrlChanged | GotItem | GotUser | GotFeed
+
+export const Action = {
+  linkClicked(route: Route): Action {
+    return { kind: 'LinkClicked', route }
+  },
+  urlChanged(url: string): Action {
+    return { kind: 'UrlChanged', url }
+  },
+  gotItem(id: number, result: Result<Item, HttpError>): Action {
+    return { kind: 'GotItem', id, result }
+  },
+  gotUser(user: string, result: Result<User, HttpError>): Action {
+    return { kind: 'GotUser', user, result }
+  },
+  gotFeed(feed: Feed, result: Result<Item[], HttpError>): Action {
+    return { kind: 'GotFeed', feed, result }
+  }
+}

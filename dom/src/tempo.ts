@@ -12,7 +12,7 @@ limitations under the License.
 */
 
 import { Store } from '@tempo/store/lib/store'
-import { DOMComponent, component } from './component'
+import { DOMComponentTemplate, component } from './component'
 import { DOMContext } from './context'
 import { DOMChild } from './template'
 
@@ -24,7 +24,7 @@ export type TempoView<State, Action> = Readonly<{
 export module Tempo {
   export function renderComponent<State, Action>(options: {
     el?: HTMLElement
-    component: DOMComponent<State, Action>
+    component: DOMComponentTemplate<State, Action>
     document?: Document
   }): TempoView<State, Action> {
     const { el: maybeElement, component } = options

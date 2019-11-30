@@ -50,7 +50,7 @@ export const fragmentView = <State>(views: View<State>[]) => {
   }
 }
 
-export class DOMFragment<State, Action> implements DOMTemplate<State, Action> {
+export class DOMFragmentTemplate<State, Action> implements DOMTemplate<State, Action> {
   constructor(
     readonly children: DOMTemplate<State, Action>[]
   ) {}
@@ -61,5 +61,5 @@ export class DOMFragment<State, Action> implements DOMTemplate<State, Action> {
   }
 }
 
-export const fragment = <State, Action>(...children: DOMChild<State, Action>[]) =>
-  new DOMFragment<State, Action>(mapArray(children, domChildToTemplate))
+export const fragment = <State, Action>(...children: DOMChild<State, Action>[]): DOMTemplate<State, Action> =>
+  new DOMFragmentTemplate<State, Action>(mapArray(children, domChildToTemplate))

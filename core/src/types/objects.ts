@@ -11,21 +11,21 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { IndexKey } from './index_key'
+import { IndexType } from './index_type'
 import { Tail } from './tuples'
 
-export type ObjectWithField<F extends IndexKey, V> = { [_ in F]: V }
+export type ObjectWithField<F extends IndexType, V> = { [_ in F]: V }
 
-export type ObjectWithPath<Path extends IndexKey[], V> = Path extends []
+export type ObjectWithPath<Path extends IndexType[], V> = Path extends []
   ? {}
   : Path extends [infer T]
-  ? T extends IndexKey
+  ? T extends IndexType
     ? { [_ in T]: V }
     : never
   : Path extends [infer K, ...any[]]
-  ? K extends IndexKey
+  ? K extends IndexType
     ? Tail<Path> extends infer Rest
-      ? Rest extends IndexKey[]
+      ? Rest extends IndexType[]
         ? { [_ in K]: ObjectWithPath<Rest, V> }
         : never
       : never
@@ -38,12 +38,12 @@ export type ObjectWithPath<Path extends IndexKey[], V> = Path extends []
 // type T3 = ObjectWithPath<['a', 'b', 'c'], number>
 // type T4 = ObjectWithPath<['a', 'b', 'c', 0], number>
 
-export type TypeAtPath<Path extends IndexKey[], O> = {
+export type TypeAtPath<Path extends IndexType[], O> = {
   next: Path extends [infer K, ...any[]]
-    ? K extends IndexKey
+    ? K extends IndexType
       ? Tail<Path> extends infer Rest
-        ? O extends Record<IndexKey, any>
-          ? Rest extends IndexKey[]
+        ? O extends Record<IndexType, any>
+          ? Rest extends IndexType[]
             ? TypeAtPath<Rest, O[K]>
             : never
           : never
@@ -51,7 +51,13 @@ export type TypeAtPath<Path extends IndexKey[], O> = {
       : never
     : never
   empty: O
-  done: O extends Record<IndexKey, any> ? (Path extends [infer K] ? (K extends IndexKey ? O[K] : never) : never) : never
+  done: O extends Record<IndexType, any>
+    ? Path extends [infer K]
+      ? K extends IndexType
+        ? O[K]
+        : never
+      : never
+    : never
 }[Path extends [] ? 'empty' : Path extends [any] ? 'done' : 'next']
 
 // type Nested = { a: { b: boolean[], c: number }, d: string }

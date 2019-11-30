@@ -1,23 +1,43 @@
-export interface Success<T, E> {
-  readonly kind: 'success'
-  readonly value: T
+abstract class BaseResult<T, E> {
+  abstract match<B>(
+    successf: (value: T) => B,
+    errorf: (error: E) => B
+  ): B
 }
 
-export interface Error<T, E> {
-  readonly kind: 'error'
-  readonly error: E
+export class Success<T, E> extends BaseResult<T, E> {
+  readonly kind = 'success'
+  constructor(
+    readonly value: T
+  ) {
+    super()
+  }
+  match<B>(
+    successf: (value: T) => B,
+    _: (error: E) => B
+  ): B {
+    return successf(this.value)
+  }
+}
+
+export class Error<T, E> extends BaseResult<T, E> {
+  readonly kind = 'error'
+  constructor(
+    readonly error: E
+  ) {
+    super()
+  }
+  match<B>(
+    _: (value: T) => B,
+    errorf: (error: E) => B
+  ): B {
+    return errorf(this.error)
+  }
 }
 
 export type Result<T, E> = Success<T, E> | Error<T, E>
 
 export const Result = {
-  success: <T, E>(value: T): Result<T, E> => ({ kind: 'success', value }),
-  error: <T, E>(error: E): Result<T, E> => ({ kind: 'error', error })
-}
-
-export const match = <T, E, B>(result: Result<T, E>, successf: (value: T) => B, errorf: (error: E) => B): B => {
-  if (result.kind === 'success')
-    return successf(result.value)
-  else
-    return errorf(result.error)
+  success: <T, E>(value: T): Result<T, E> => new Success(value),
+  error: <T, E>(error: E): Result<T, E> => new Error(error)
 }

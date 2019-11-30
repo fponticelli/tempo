@@ -14,11 +14,11 @@ limitations under the License.
 import { DOMTemplate } from './template'
 import { DOMContext } from './context'
 import { View } from '@tempo/core/lib/view'
-import { UnwrappedLiteralValue, UnwrappedDerivedValue } from '@tempo/core/lib/value'
+import { UnwrappedDerivedValue } from '@tempo/core/lib/value'
 import { DOMStaticNodeView, DOMDynamicNodeView } from './node_view'
 import { DOMTextValue } from './value'
 
-const renderLiteral = <State>(ctx: DOMContext<never>, value: UnwrappedLiteralValue<string>): View<State> => {
+const renderLiteral = <State>(ctx: DOMContext<never>, value: string | undefined): View<State> => {
   const node = ctx.doc.createTextNode(value || '')
   const view = new DOMStaticNodeView(node, [])
   ctx.append(node)
@@ -45,7 +45,7 @@ const renderFunction = <State>(
   return view
 }
 
-export class DOMText<State, Action> implements DOMTemplate<State, Action> {
+export class DOMTextTemplate<State, Action> implements DOMTemplate<State, Action> {
   constructor(readonly content: DOMTextValue<State>) {}
 
   render(ctx: DOMContext<Action>, state: State): View<State> {
@@ -57,4 +57,4 @@ export class DOMText<State, Action> implements DOMTemplate<State, Action> {
   }
 }
 
-export const text = <State, Action>(content: DOMTextValue<State>) => new DOMText<State, Action>(content)
+export const text = <State, Action>(content: DOMTextValue<State>): DOMTemplate<State, Action> => new DOMTextTemplate<State, Action>(content)

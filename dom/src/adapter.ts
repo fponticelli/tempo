@@ -12,7 +12,7 @@ limitations under the License.
 */
 
 import { DynamicView } from '@tempo/core/lib/view'
-import { DOMComponentView, DOMComponent } from './component'
+import { DOMComponentView, DOMComponentTemplate } from './component'
 import { DOMTemplate } from './template'
 import { DOMContext } from './context'
 
@@ -34,12 +34,12 @@ export class DOMAdapterView<OuterState, InnerState, InnerAction> implements Dyna
   }
 }
 
-export class DOMAdapter<OuterState, InnerState, OuterAction, InnerAction>
+export class DOMAdapterTemplate<OuterState, InnerState, OuterAction, InnerAction>
   implements DOMTemplate<OuterState, OuterAction> {
   constructor(
     readonly mergeStates: (outerState: OuterState, innerState: InnerState) => InnerState | undefined,
     readonly propagate: (args: PropagateArg<OuterState, InnerState, OuterAction, InnerAction>) => void,
-    readonly child: DOMComponent<InnerState, InnerAction>
+    readonly child: DOMComponentTemplate<InnerState, InnerAction>
   ) {}
 
   render(ctx: DOMContext<OuterAction>, outerState: OuterState): DynamicView<OuterState> {
@@ -79,9 +79,9 @@ export const adapter = <OuterState, InnerState, OuterAction, InnerAction>(
     mergeStates?: (outerState: OuterState, innerState: InnerState) => InnerState | undefined
     propagate?: (args: PropagateArg<OuterState, InnerState, OuterAction, InnerAction>) => void
   },
-  child: DOMComponent<InnerState, InnerAction>
-) =>
-  new DOMAdapter(
+  child: DOMComponentTemplate<InnerState, InnerAction>
+): DOMTemplate<OuterState, OuterAction> =>
+  new DOMAdapterTemplate(
     options.mergeStates || ((_u: OuterState, _d: InnerState) => undefined),
     /* istanbul ignore next */
     options.propagate || (() => undefined),

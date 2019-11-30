@@ -46,7 +46,7 @@ export class FilterStateTemplate<State, Action> implements DOMTemplate<State, Ac
 export const filterState = <State, Action>(
   options: { isSame?: (prev: State, next: State ) => boolean },
   ...children: DOMChild<State, Action>[]
-) => new FilterStateTemplate(
+): DOMTemplate<State, Action> => new FilterStateTemplate(
   options.isSame || ((a: State, b: State) => a === b),
   mapArray(children, domChildToTemplate)
 )
