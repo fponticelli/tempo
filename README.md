@@ -1,10 +1,4 @@
-[![Actions Status](https://github.com/fponticelli/tempo/workflows/Build%20and%20Test/badge.svg)](https://github.com/fponticelli/tempo/actions?query=workflow%3A"Build+and+Test")
-
-![npm](https://img.shields.io/npm/v/tempo-core?label=npm%3A%20tempo-core)
-
-![npm](https://img.shields.io/npm/v/tempo-store?label=npm%3A%20tempo-store)
-
-![npm](https://img.shields.io/npm/v/tempo-dom?label=npm%3A%20tempo-dom)
+[![Actions Status](https://github.com/fponticelli/tempo/workflows/Build%20and%20Test/badge.svg)](https://github.com/fponticelli/tempo/actions?query=workflow%3A"Build+and+Test") ![npm](https://img.shields.io/npm/v/tempo-core?label=npm%3A%20tempo-core) ![npm](https://img.shields.io/npm/v/tempo-store?label=npm%3A%20tempo-store) ![npm](https://img.shields.io/npm/v/tempo-dom?label=npm%3A%20tempo-dom)
 
 Tempo is a framework to build dynamic front end applications.
 
