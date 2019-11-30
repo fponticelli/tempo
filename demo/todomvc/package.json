@@ -4,7 +4,7 @@
   "license": "Apache-2.0",
   "dependencies": {
     "tempo-core": "1.0.1",
-    "tempo-dom": "0.8.1",
+    "tempo-dom": "0.8.2",
     "tempo-store": "1.0.1",
     "todomvc-app-css": "2.2.0",
     "todomvc-common": "1.0.5"

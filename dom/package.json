@@ -1,6 +1,6 @@
 {
   "name": "tempo-dom",
-  "version": "0.8.1",
+  "version": "0.8.2",
   "description": "UI framework alternative to React and Angular",
   "keywords": ["ui", "framework", "typescript", "angular-alternative", "react-alternative"],
   "license": "Apache-2.0",
