@@ -6,16 +6,7 @@ import { createState, Page } from './state'
 import { Route } from './route'
 import { middleware, setTitle } from './middleware'
 import { Action } from './action'
-
-const prodPrefix = '/tempo/docs/demo/hpnwa'
-const getCurrentPath = () => {
-  const path = location.pathname
-  if (path.startsWith(prodPrefix)) {
-    return path.substring(prodPrefix.length)
-  } else {
-    return path
-  }
-}
+import { getCurrentPath } from './config'
 
 const route = Route.fromUrl(getCurrentPath())
 

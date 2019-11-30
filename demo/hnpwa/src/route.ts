@@ -8,6 +8,7 @@ import {
 
 import { oneOf } from 'partsing/core/decoder'
 import { matchKind } from '@tempo/core/lib/util/match'
+import { getPath, makePath } from './config'
 
 export enum Feed {
   top = 'top',
@@ -57,7 +58,7 @@ export const Route = {
   externalRoute: (path: string): Route => ({ kind: 'ExternalRoute', path }),
 
   fromUrl: (url: string): Route => {
-    const result = urlDecoder(url)
+    const result = urlDecoder(getPath(url))
     switch (result.kind) {
       case 'decode-success':
         return result.value
@@ -72,7 +73,7 @@ export interface RouteData {
   readonly url: string
 }
 
-export const routeData = (title: string, url: string): RouteData => ({ title, url })
+export const routeData = (title: string, url: string): RouteData => ({ title, url: makePath(url) })
 
 export const maxPage = (feed: Feed) => {
   switch (feed) {
