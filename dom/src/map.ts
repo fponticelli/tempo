@@ -70,4 +70,5 @@ export class MapActionTemplate<State, OuterAction, InnerAction> implements DOMTe
 export const mapAction = <State, OuterAction, InnerAction>(
   options: { map: (value: InnerAction) => OuterAction | undefined },
   ...children: DOMChild<State, InnerAction>[]
-): DOMTemplate<State, OuterAction> => new MapActionTemplate<State, OuterAction, InnerAction>(options.map, mapArray(children, domChildToTemplate))
+): DOMTemplate<State, OuterAction> =>
+  new MapActionTemplate<State, OuterAction, InnerAction>(options.map, mapArray(children, domChildToTemplate))

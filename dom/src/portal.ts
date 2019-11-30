@@ -42,9 +42,13 @@ export const portal = <State, Action>(
     append: (doc: Document, node: Node) => void
   },
   ...children: DOMChild<State, Action>[]
-): DOMTemplate<State, Action> => new DOMPortalTemplate<State, Action>(options.getParent, options.append, mapArray(children, domChildToTemplate))
+): DOMTemplate<State, Action> =>
+  new DOMPortalTemplate<State, Action>(options.getParent, options.append, mapArray(children, domChildToTemplate))
 
-export const portalWithSelector = <State, Action>(options: { selector: string }, ...children: DOMChild<State, Action>[]): DOMTemplate<State, Action> =>
+export const portalWithSelector = <State, Action>(
+  options: { selector: string },
+  ...children: DOMChild<State, Action>[]
+): DOMTemplate<State, Action> =>
   portal<State, Action>(
     {
       getParent: (doc: Document) => {
