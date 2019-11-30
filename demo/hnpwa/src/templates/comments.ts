@@ -8,7 +8,6 @@ import { lazy } from '@tempo/dom/lib/lazy'
 import { DOMTemplate } from '@tempo/dom/lib/template'
 import { when } from '@tempo/dom/lib/when'
 import { unsafeHtml } from '@tempo/dom/lib/unsafe_html'
-import { sanitize } from 'dompurify'
 import { linkRoute } from './link_route'
 
 export const commentTemplate: DOMTemplate<Item, Action> = lazy<Item, Action>(() =>
@@ -20,7 +19,7 @@ export const commentTemplate: DOMTemplate<Item, Action> = lazy<Item, Action>(() 
       ' ',
       item => item.time_ago
     ),
-    unsafeHtml({ content: item => item.content, transform: sanitize }),
+    unsafeHtml({ content: item => item.content }),
     mapState<Item, Item[], Action>({ map: item => item.comments || [] }, commentsTemplate)
   )
 )

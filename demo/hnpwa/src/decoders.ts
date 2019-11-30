@@ -1,4 +1,5 @@
 import { Item, ItemUrl, User } from './state'
+import { sanitize } from 'dompurify'
 
 import {
   ValueDecoder,
@@ -30,7 +31,7 @@ export const itemDecoder: ValueDecoder<Item> = objectValue({
     domain: stringValue,
     comments_count: integerValue,
     comments: lazy(() => arrayValue(itemDecoder)),
-    content: stringValue,
+    content: stringValue.map(s => sanitize(s)),
     type: stringValue
   }, ['comments', 'content', 'domain', 'points', 'title', 'user'])
 
@@ -38,7 +39,7 @@ export const decodeItem = decodeValue<Item>(itemDecoder)
 export const decodeFeed = decodeValue<Item[]>(arrayValue(itemDecoder))
 
 export const userDecoder = objectValue({
-  about: stringValue,
+  about: stringValue.map(s => sanitize(s)),
   created: stringValue,
   id: stringValue,
   karma: integerValue

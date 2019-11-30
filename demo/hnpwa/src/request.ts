@@ -4,7 +4,7 @@ import { HttpError } from './http_error'
 import { Feed } from './route'
 import { decodeItem, decodeUser, decodeFeed } from './decoders'
 
-const RESET_CACHE_AFTER = 20000
+const RESET_CACHE_AFTER = 120000
 const base = 'https://api.hnpwa.com'
 
 const makeUrl = (path: string[]) => {

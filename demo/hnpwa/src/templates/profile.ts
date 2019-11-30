@@ -4,7 +4,6 @@ import { Action } from '../action'
 import { mapState } from '@tempo/dom/lib/map'
 import { when } from '@tempo/dom/lib/when'
 import { unsafeHtml } from '@tempo/dom/lib/unsafe_html'
-import { sanitize } from 'dompurify'
 
 export const profileTemplate = section<Profile, Action>(
   { attrs: { className: 'user-view' } },
@@ -32,7 +31,7 @@ export const profileTemplate = section<Profile, Action>(
       ),
       when(
         { condition: user => !!user.about },
-        tr({}, td({}, 'about:'), td({}, unsafeHtml({ content: user => user.about, transform: sanitize })))
+        tr({}, td({}, 'about:'), td({}, unsafeHtml({ content: user => user.about })))
       )
     )
   )
