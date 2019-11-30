@@ -43,7 +43,7 @@ export function filterDynamics<State>(children: View<State>[]) {
 }
 
 export function domChildToTemplate<State, Action>(dom: DOMChild<State, Action>): DOMTemplate<State, Action> {
-  if (typeof dom === 'string' || typeof dom === 'function') return text(dom)
+  if (typeof dom === 'string' || typeof dom === 'function' || typeof dom === 'undefined') return text(dom)
   else return dom
 }
 

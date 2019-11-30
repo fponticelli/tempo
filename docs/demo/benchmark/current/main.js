@@ -394,11 +394,11 @@ var renderFunction = function (ctx, state, map) {
     ctx.append(node);
     return view;
 };
-var DOMText = /** @class */ (function () {
-    function DOMText(content) {
+var DOMTextTemplate = /** @class */ (function () {
+    function DOMTextTemplate(content) {
         this.content = content;
     }
-    DOMText.prototype.render = function (ctx, state) {
+    DOMTextTemplate.prototype.render = function (ctx, state) {
         if (typeof this.content === 'function') {
             return renderFunction(ctx, state, this.content);
         }
@@ -406,10 +406,10 @@ var DOMText = /** @class */ (function () {
             return renderLiteral(ctx, this.content);
         }
     };
-    return DOMText;
+    return DOMTextTemplate;
 }());
-exports.DOMText = DOMText;
-exports.text = function (content) { return new DOMText(content); };
+exports.DOMTextTemplate = DOMTextTemplate;
+exports.text = function (content) { return new DOMTextTemplate(content); };
 
 },{"./node_view":"TJFn"}],"KfbX":[function(require,module,exports) {
 "use strict";
@@ -454,7 +454,7 @@ function filterDynamics(children) {
 }
 exports.filterDynamics = filterDynamics;
 function domChildToTemplate(dom) {
-    if (typeof dom === 'string' || typeof dom === 'function')
+    if (typeof dom === 'string' || typeof dom === 'function' || typeof dom === 'undefined')
         return text_1.text(dom);
     else
         return dom;

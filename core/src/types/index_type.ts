@@ -11,14 +11,4 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-export type Differentiate<
-  Field extends (string | number | symbol),
-  State extends { [k in Field]: any },
-  K extends State[Field]
-> = State extends { [_ in Field]: K } ? State : never
-
-export type DifferentiateByKind<
-  State extends { kind: any },
-  K extends State['kind']
-> =
-  Differentiate<'kind', State, K>
+export type IndexType = string | number | symbol

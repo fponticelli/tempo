@@ -91,4 +91,4 @@ export const until = <OuterState, InnerState, Action>(
     repeatUntil: (state: OuterState, index: number) => InnerState | undefined
   },
   ...children: DOMChild<InnerState, Action>[]
-) => new DOMUntilTemplate<OuterState, InnerState, Action>(options, mapArray(children, domChildToTemplate))
+): DOMTemplate<OuterState, Action> => new DOMUntilTemplate<OuterState, InnerState, Action>(options, mapArray(children, domChildToTemplate))

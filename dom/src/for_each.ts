@@ -11,13 +11,13 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { DOMChild } from './template'
+import { DOMChild, DOMTemplate } from './template'
 import { until } from './until'
 
 export const forEach = <State extends any[], Action>(
   options: { refId?: string },
   ...children: DOMChild<State[number], Action>[]
-) => until({
+): DOMTemplate<State, Action> => until({
   refId: options.refId || 't:for_each',
   repeatUntil: (state: State, index: number) => state[index]
 }, ...children)

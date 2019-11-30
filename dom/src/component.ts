@@ -40,7 +40,7 @@ export class DOMComponentView<State, Action> extends DOMDynamicFragmentView<Stat
   }
 }
 
-export class DOMComponent<State, Action> implements DOMTemplate<State, Action> {
+export class DOMComponentTemplate<State, Action> implements DOMTemplate<State, Action> {
   constructor(
     readonly store: Store<State, Action>,
     readonly children: DOMTemplate<State, Action>[],
@@ -89,4 +89,4 @@ export const component = <State, Action>(
     delayed?: boolean
   },
   ...children: DOMChild<State, Action>[]
-) => new DOMComponent<State, Action>(attributes.store, mapArray(children, domChildToTemplate), attributes.delayed || false)
+) => new DOMComponentTemplate<State, Action>(attributes.store, mapArray(children, domChildToTemplate), attributes.delayed || false)
