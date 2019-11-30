@@ -10,8 +10,6 @@ import { getCurrentPath } from './config'
 
 const route = Route.fromUrl(getCurrentPath())
 
-console.log(route)
-
 const state = createState(
   Route.root,
   Page.loading
