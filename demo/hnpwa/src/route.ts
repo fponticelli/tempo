@@ -2,14 +2,11 @@ import {
   decodeText,
   match,
   digits,
-  TextInput,
   rest,
   eoi
 } from 'partsing/text'
 
-import { oneOf, succeed } from 'partsing/core/decoder'
-import { DecodeError } from 'partsing/error'
-import { Page } from './state'
+import { oneOf } from 'partsing/core/decoder'
 import { matchKind } from '@tempo/core/lib/util/match'
 
 export enum Feed {

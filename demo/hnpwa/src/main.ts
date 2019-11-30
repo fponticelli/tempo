@@ -7,7 +7,17 @@ import { Route } from './route'
 import { middleware, setTitle } from './middleware'
 import { Action } from './action'
 
-const route = Route.fromUrl(location.pathname)
+const prodPrefix = '/tempo/docs/demo/hpnwa'
+const getCurrentPath = () => {
+  const path = location.pathname
+  if (path.startsWith(prodPrefix)) {
+    return path.substring(prodPrefix.length)
+  } else {
+    return path
+  }
+}
+
+const route = Route.fromUrl(getCurrentPath())
 
 const state = createState(
   Route.root,
@@ -30,6 +40,6 @@ store.observable.on(middleware(store))
 store.process(Action.linkClicked(route))
 
 window.addEventListener('popstate', (event) => {
-  const route = Route.fromUrl(location.pathname)
+  const route = Route.fromUrl(getCurrentPath())
   store.process(Action.linkClicked(route))
 })

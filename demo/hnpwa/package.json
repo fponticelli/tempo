@@ -20,8 +20,8 @@
     "@types/dompurify": "2.0.0"
   },
   "scripts": {
-    "compile": "NODE_ENV=production && parcel build src/index.html --public-url . --out-dir ../../docs/demo/hpnwa --experimental-scope-hoisting",
-    "clean": "rm -rf dist/* && rm -rf ../../docs/demo/hpnwa/*",
+    "compile": "NODE_ENV=production && parcel build src/index.html --public-url . --out-dir ../../docs/demo/hnpwa --experimental-scope-hoisting",
+    "clean": "rm -rf dist/* && rm -rf ../../docs/demo/hnpwa/*",
     "build": "npm run clean && npm run compile",
     "watch": "parcel src/index.html",
     "tslint": "tslint -p ./tslint.json",
