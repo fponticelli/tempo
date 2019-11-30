@@ -1,21 +1,14 @@
 const githubPrefix = '/tempo/docs/demo/hnpwa'
 export const isGithub = location.pathname.startsWith(githubPrefix)
 
-export const getPath = (path: string) => {
-  if (isGithub) {
-    return path.substring(githubPrefix.length)
-  } else {
-    return path
-  }
-}
-
 export const getCurrentPath = () => {
-  return getPath(location.pathname)
-}
-
-export const makePath = (path: string) => {
-  if (isGithub)
-    return `${githubPrefix}${path}`
-  else
-    return path
+  if (isGithub) {
+    const base = location.hash
+    if (!base || base === '#')
+      return '/'
+    else
+      return base.substring(1)
+  } else {
+    return location.pathname
+  }
 }

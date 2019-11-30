@@ -4,6 +4,7 @@ import { toTitle, Route, toUrl, Feed } from './route'
 import { matchKind } from '@tempo/core/lib/util/match'
 import { Request } from './request'
 import { Store } from '@tempo/store/lib/store'
+import { isGithub } from './config'
 
 export const setTitle = (state: State) => {
   const title = ((page) => {
@@ -48,7 +49,8 @@ export const middleware = (store: Store<State, Action>) => (state: State, action
       } else if (action.route.kind !== 'NotFoundRoute') {
         const url = toUrl(action.route)
         if (url !== current) {
-          history.pushState(action.route, '', url)
+          const toSet = isGithub ? `#${url}` : url
+          history.pushState(action.route, '', toSet)
           current = url
         }
         store.process(Action.urlChanged(url))
