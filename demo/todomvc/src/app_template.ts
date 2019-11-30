@@ -79,12 +79,12 @@ export const template = section<State, Action>(
         { attrs: { className: 'todo-list' } },
         iterate(
           { getArray: (state: State) => state.filtered },
-          filterState(
+          filterState<[Todo, State, number], Action>(
             { isSame: ([a, sa], [b, sb]) => a === b && sa.editing === sb.editing },
             li(
               {
                 attrs: {
-                  className: ([todo, state]: [Todo, State]) => {
+                  className: ([todo, state]: [Todo, State, number]) => {
                     const classes = [
                       todo.completed ? 'completed' : undefined,
                       isEditing(state, todo) ? 'editing' : undefined
@@ -99,40 +99,40 @@ export const template = section<State, Action>(
                   attrs: {
                     className: 'toggle',
                     type: 'checkbox',
-                    checked: ([todo]: [Todo, State]) => todo.completed
+                    checked: ([todo]: [Todo, State, number]) => todo.completed
                   },
                   events: {
-                    change: ([todo]: [Todo, State]) => Action.toggleTodo(todo.id)
+                    change: ([todo]: [Todo, State, number]) => Action.toggleTodo(todo.id)
                   }
                 }),
                 label(
                   {
                     events: {
-                      dblclick: ([todo]: [Todo, State]) => Action.editingTodo(todo.id, todo.title)
+                      dblclick: ([todo]: [Todo, State, number]) => Action.editingTodo(todo.id, todo.title)
                     }
                   },
-                  ([todo]: [Todo, State]) => todo.title
+                  ([todo]: [Todo, State, number]) => todo.title
                 ),
                 button({
                   attrs: {
                     className: 'destroy'
                   },
                   events: {
-                    click: ([todo]: [Todo, State]) => Action.removeTodo(todo.id)
+                    click: ([todo]: [Todo, State, number]) => Action.removeTodo(todo.id)
                   }
                 })
               ),
               when(
-                { condition: ([todo, state]: [Todo, State]) => isEditing(state, todo) /* todo.editing */ },
+                { condition: ([todo, state]: [Todo, State, number]) => isEditing(state, todo) /* todo.editing */ },
                 input({
                   afterrender: (_, el) => el.focus(),
                   attrs: {
                     type: 'text',
                     className: 'edit',
-                    value: ([_, state]: [Todo, State]) => state.editing && state.editing.title
+                    value: ([_, state]: [Todo, State, number]) => state.editing && state.editing.title
                   },
                   events: {
-                    keydown: ([todo]: [Todo, State], e: KeyboardEvent, input: HTMLInputElement) => {
+                    keydown: ([todo]: [Todo, State, number], e: KeyboardEvent, input: HTMLInputElement) => {
                       if (e.keyCode === 13) {
                         const value = input.value.trim()
                         if (value !== '') {
@@ -146,7 +146,7 @@ export const template = section<State, Action>(
                         return Action.editingTodo(todo.id, input.value)
                       }
                     },
-                    blur: ([todo]: [Todo, State], e: MouseEvent, input: HTMLInputElement) => {
+                    blur: ([todo]: [Todo, State, number], e: MouseEvent, input: HTMLInputElement) => {
                       const value = input.value.trim()
                       if (value !== '') {
                         return Action.updateTodo(todo.id, value)

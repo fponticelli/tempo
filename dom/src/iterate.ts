@@ -39,3 +39,24 @@ export const iterate = <OuterState, InnerState extends any[], Action>(
     )
   )
 }
+
+export const iterateItems = <OuterState, InnerState extends any[], Action>(
+  options: {
+    refId?: string
+    getArray: (outer: OuterState) => InnerState
+  },
+  ...children: DOMChild<InnerState[number], Action>[]
+): DOMTemplate<OuterState, Action> => {
+  return mapState<OuterState, InnerState, Action>(
+    {
+      map: (outer) => options.getArray(outer)
+    },
+    until<InnerState, InnerState[number], Action>(
+      {
+        repeatUntil:
+          (value: InnerState, index: number) => value[index]
+      },
+      ...children
+    )
+  )
+}

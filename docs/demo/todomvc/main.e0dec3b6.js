@@ -45,6 +45,19 @@ parcelRequire = (function (init) {
 })(function (require) {
 // ASSET: ../node_modules/@tempo/dom/node_modules/@tempo/core/lib/util/map.js
 var $UNaj$exports = {};
+/*
+Copyright 2019 Google LLC
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+    https://www.apache.org/licenses/LICENSE-2.0
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+
 Object.defineProperty($UNaj$exports, "__esModule", {
   value: true
 });
@@ -64,19 +77,6 @@ $UNaj$exports.mapArray = $UNaj$export$mapArray; //# sourceMappingURL=map.js.map
 
 // ASSET: ../node_modules/@tempo/dom/lib/utils/set_attribute.js
 var $AxMU$exports = {};
-/*
-Copyright 2019 Google LLC
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-    https://www.apache.org/licenses/LICENSE-2.0
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-*/
-
 Object.defineProperty($AxMU$exports, "__esModule", {
   value: true
 });
@@ -2335,7 +2335,27 @@ var $EcG8$export$iterate = function (options) {
   }], children)));
 };
 
-$EcG8$exports.iterate = $EcG8$export$iterate; //# sourceMappingURL=iterate.js.map
+$EcG8$exports.iterate = $EcG8$export$iterate;
+
+var $EcG8$export$iterateItems = function (options) {
+  var children = [];
+
+  for (var _i = 1; _i < arguments.length; _i++) {
+    children[_i - 1] = arguments[_i];
+  }
+
+  return $YLN0$export$mapState({
+    map: function (outer) {
+      return options.getArray(outer);
+    }
+  }, $hYCi$export$until.apply(void 0, $EcG8$var$__spreadArrays([{
+    repeatUntil: function (value, index) {
+      return value[index];
+    }
+  }], children)));
+};
+
+$EcG8$exports.iterateItems = $EcG8$export$iterateItems; //# sourceMappingURL=iterate.js.map
 
 // ASSET: ../node_modules/@tempo/dom/lib/when.js
 var $rPBd$exports = {};
