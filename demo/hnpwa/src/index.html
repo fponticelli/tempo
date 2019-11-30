@@ -28,13 +28,39 @@
 </head>
 
 <body>
-	<noscript>
-		<h2>I need to execute some JS to work 😞</h2>
-	</noscript>
-
-	<div class="notification">
-		<div class="spinner"></div>
-	</div>
+    <main>
+        <header>
+            <a href="/">
+                <i aria-label="Homepage" class="logo">
+                    <svg width="32" height="32" viewbox="0 0 32 32">
+                        <g style="fill: none;">
+                            <rect x="0" y="0" fill="#ffffff" width="8" height="8"></rect>
+                            <rect x="11" y="0" fill="#ffffff" width="8" height="8"></rect>
+                            <rect x="22" y="0" fill="#ffffff" width="8" height="8"></rect>
+                            <rect x="11" y="11" fill="#ffffff" width="8" height="8"></rect>
+                            <rect x="11" y="22" fill="#ffffff" width="8" height="8"></rect>
+                        </g>
+                    </svg>
+                </i>
+            </a>
+            <nav>
+                <a href="/top">Top</a>
+                <a href="/new">New</a>
+                <a href="/ask">Ask</a>
+                <a href="/show">Show</a>
+                <a href="/jobs">Jobs</a>
+            </nav>
+            <a href="https://github.com/fponticelli/tempo" class="githublink" target="_blank" rel="noopener">About</a>
+        </header>
+        <section id="content">
+            <noscript>
+                <h2>I need to execute some JS to work 😞</h2>
+            </noscript>
+            <div class="notification">
+                <div class="spinner"></div>
+            </div>
+        </section>
+    </main>
 </body>
 <script src="./main.ts"></script>
 </html>
