@@ -4,12 +4,14 @@
   "description": "",
   "license": "UNLICENSED",
   "scripts": {
-    "build": "rm -rf lib/* && tsc",
+    "clean": "rm -rf lib/* && rm -rf es6/*",
+    "build": "npm run clean && tsc && tsc -p tsconfig.es6.json",
     "test": "jest",
     "test-watch": "jest --watch",
     "tslint": "tslint -p ./tslint.json",
     "prettier": "prettier -c src/**/*.ts",
-    "prettier-fix": "prettier --write src/**/*.ts"
+    "prettier-fix": "prettier --write src/**/*.ts",
+    "prepublish": "npm run build"
   },
   "author": "Franco Ponticelli <franco.ponticelli@gmail.com>",
   "dependencies": {
@@ -30,7 +32,11 @@
     "tslint": "5.20.1",
     "prettier": "1.19.1"
   },
+  "main": "lib/index.js",
+  "module": "es6/index.js",
+  "typings": "lib/index.d.ts",
   "files": [
-    "lib/*"
+    "lib",
+    "es6"
   ]
 }
