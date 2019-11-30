@@ -11,8 +11,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { View, DynamicView } from '@tempo/core/lib/view'
-import { UnwrappedDerivedValue } from '@tempo/core/lib/value'
+import { View, DynamicView } from 'tempo-core/lib/view'
+import { UnwrappedDerivedValue } from 'tempo-core/lib/value'
 import { DOMAttribute, DOMEventHandler, DOMStyleAttribute } from '../value'
 import { htmlAttributeMap as attributeMap } from '../dom_attributes_mapper'
 import { setAttribute, setOneStyle } from './set_attribute'

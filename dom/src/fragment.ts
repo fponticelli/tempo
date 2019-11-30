@@ -11,11 +11,11 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { View, StaticView, DynamicView } from '@tempo/core/lib/view'
+import { View, StaticView, DynamicView } from 'tempo-core/lib/view'
 import { filterDynamics, domChildToTemplate } from './utils/dom'
 import { DOMTemplate, DOMChild } from './template'
 import { DOMContext } from './context'
-import { mapArray } from '@tempo/core/lib/util/map'
+import { mapArray } from 'tempo-core/lib/util/map'
 
 export class DOMBaseFragmentView {
   constructor(readonly views: View<any>[]) {}

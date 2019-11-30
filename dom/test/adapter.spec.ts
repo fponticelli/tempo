@@ -15,8 +15,8 @@ import { createContext } from './common'
 import { div } from '../src/html'
 import { adapter, PropagateArg } from '../src/adapter'
 import { component } from '../src/component'
-import { Store } from '@tempo/store/lib/store'
-import { DynamicView } from '@tempo/core/lib/view'
+import { Store } from 'tempo-store/lib/store'
+import { DynamicView } from 'tempo-core/lib/view'
 
 describe('adapter', () => {
   it('noOptions', () => {

@@ -13,8 +13,8 @@ limitations under the License.
 
 import { DOMTemplate } from './template'
 import { DOMContext } from './context'
-import { View } from '@tempo/core/lib/view'
-import { UnwrappedDerivedValue } from '@tempo/core/lib/value'
+import { View } from 'tempo-core/lib/view'
+import { UnwrappedDerivedValue } from 'tempo-core/lib/value'
 import { DOMStaticNodeView, DOMDynamicNodeView } from './node_view'
 import { DOMTextValue } from './value'
 

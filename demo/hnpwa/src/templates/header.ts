@@ -13,10 +13,10 @@ limitations under the License.
 
 import { Action } from '../action'
 import { Route, Feed, toTitle } from '../route'
-import { header, i, nav, span } from '@tempo/dom/lib/html'
-import { g, svg, rect } from '@tempo/dom/lib/svg'
-import { when, unless } from '@tempo/dom/lib/when'
-import { fragment } from '@tempo/dom/lib/fragment'
+import { header, i, nav, span } from 'tempo-dom/lib/html'
+import { g, svg, rect } from 'tempo-dom/lib/svg'
+import { when, unless } from 'tempo-dom/lib/when'
+import { fragment } from 'tempo-dom/lib/fragment'
 import { linkRoute } from './link_route'
 
 const logo = svg<Route, Action>(

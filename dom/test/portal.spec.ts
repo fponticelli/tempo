@@ -16,7 +16,7 @@ import { Tempo } from '../src/tempo'
 import { component } from '../src/component'
 import { portalWithSelector, headPortal, bodyPortal } from '../src/portal'
 import { span, style } from '../src/html'
-import { Store } from '@tempo/store/lib/store'
+import { Store } from 'tempo-store/lib/store'
 
 describe('portal', () => {
   it('portalWithSelector', () => {

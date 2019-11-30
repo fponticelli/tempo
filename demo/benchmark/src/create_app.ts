@@ -14,8 +14,8 @@ limitations under the License.
 import { reducer } from './reducer'
 import { template } from './template'
 import { State } from './state'
-import { Store } from '@tempo/store/lib/store'
-import { Tempo } from '@tempo/dom/lib/tempo'
+import { Store } from 'tempo-store/lib/store'
+import { Tempo } from 'tempo-dom/lib/tempo'
 import { middleware } from './middleware'
 
 export const createApp = (state: State) => {

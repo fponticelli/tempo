@@ -13,7 +13,7 @@ limitations under the License.
 
 import { createContext } from './common'
 import { el } from '../src/element'
-import { DynamicView } from '@tempo/core/lib/view'
+import { DynamicView } from 'tempo-core/lib/view'
 import { div, span, a } from '../src/html'
 
 describe('dom_element', () => {

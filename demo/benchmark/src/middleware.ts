@@ -13,7 +13,7 @@ limitations under the License.
 
 import { State, getSelectedTests } from './state'
 import { Action } from './action'
-import { TempoView } from '@tempo/dom/lib/tempo'
+import { TempoView } from 'tempo-dom/lib/tempo'
 import { runTests } from './test_runner'
 import { tests as testDescriptions } from './tests'
 

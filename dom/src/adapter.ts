@@ -11,7 +11,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { DynamicView } from '@tempo/core/lib/view'
+import { DynamicView } from 'tempo-core/lib/view'
 import { DOMComponentView, DOMComponentTemplate } from './component'
 import { DOMTemplate } from './template'
 import { DOMContext } from './context'

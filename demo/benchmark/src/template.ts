@@ -11,11 +11,11 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { div } from '@tempo/dom/lib/html'
+import { div } from 'tempo-dom/lib/html'
 import { State } from './state'
 import { Action } from './action'
 import { optionsSelection } from './template/options_selection'
-import { mapState } from '@tempo/dom/lib/map'
+import { mapState } from 'tempo-dom/lib/map'
 import { tableView } from './template/table_view'
 
 export const template = div<State, Action>(

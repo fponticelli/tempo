@@ -11,7 +11,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { Store } from '@tempo/store/lib/store'
+import { Store } from 'tempo-store/lib/store'
 import { DOMComponentTemplate, component } from './component'
 import { DOMContext } from './context'
 import { DOMChild } from './template'

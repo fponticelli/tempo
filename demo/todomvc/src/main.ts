@@ -11,10 +11,10 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { Tempo } from '@tempo/dom/lib/tempo'
-import { Store } from '@tempo/store/lib/store'
-import { strictEqual as equal } from '@tempo/store/lib/equality'
-// import { debounce } from '@tempo/store/lib/emitter'
+import { Tempo } from 'tempo-dom/lib/tempo'
+import { Store } from 'tempo-store/lib/store'
+import { strictEqual as equal } from 'tempo-store/lib/equality'
+// import { debounce } from 'tempo-store/lib/emitter'
 // import { DataStore } from './data_store'
 import { reducer } from './reducer'
 import { template } from './app_template'

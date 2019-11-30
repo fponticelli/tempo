@@ -11,13 +11,13 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { DifferentiateAt } from '@tempo/core/lib/types/differentiate'
+import { DifferentiateAt } from 'tempo-core/lib/types/differentiate'
 import { DOMTemplate, DOMChild } from './template'
 import { DOMContext } from './context'
-import { DynamicView, View } from '@tempo/core/lib/view'
+import { DynamicView, View } from 'tempo-core/lib/view'
 import { domChildToTemplate } from './utils/dom'
 import { IndexType } from 'core/lib/types/index_type'
-import { ObjectWithPath, TypeAtPath, ObjectWithField } from '@tempo/core/lib/types/objects'
+import { ObjectWithPath, TypeAtPath, ObjectWithField } from 'tempo-core/lib/types/objects'
 
 export class MatchView<
   Path extends IndexType[],

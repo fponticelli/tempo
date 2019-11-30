@@ -13,7 +13,7 @@ limitations under the License.
 
 import { Action } from '../action'
 import { Page } from '../state'
-import { matchKind } from '@tempo/dom/lib/match'
+import { matchKind } from 'tempo-dom/lib/match'
 import { articleTemplate } from './article'
 import { errorTemplate } from './error'
 import { loadingTemplate } from './loading'

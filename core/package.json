@@ -1,9 +1,9 @@
 {
-  "name": "@tempo/core",
-  "private": true,
-  "license": "UNLICENSED",
-  "description": "",
-  "version": "1.0.0",
+  "name": "tempo-core",
+  "license": "Apache-2.0",
+  "description": "Core types for the Tempo framework.",
+  "version": "1.0.1",
+  "keywords": ["tempo", "framework", "ui", "library"],
   "scripts": {
     "clean": "rm -rf lib/* && rm -rf es6/*",
     "build": "npm run clean && tsc && tsc -p tsconfig.es6.json",

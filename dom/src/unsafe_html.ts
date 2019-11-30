@@ -13,9 +13,9 @@ limitations under the License.
 
 import { DOMTemplate } from './template'
 import { DOMContext } from './context'
-import { View } from '@tempo/core/lib/view'
+import { View } from 'tempo-core/lib/view'
 import { DOMElement, el } from './element'
-import { UnwrappedDerivedValue } from '@tempo/core/lib/value'
+import { UnwrappedDerivedValue } from 'tempo-core/lib/value'
 import { DOMDynamicNodeView, DOMBaseNodeView } from './node_view'
 import { DOMTextValue } from './value'
 

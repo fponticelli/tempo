@@ -11,7 +11,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { mapArray } from '@tempo/core/lib/util/map'
+import { mapArray } from 'tempo-core/lib/util/map'
 
 export function setOneStyle(el: Element, name: string, value: any) {
   const anyStyle = (el as HTMLElement).style as any

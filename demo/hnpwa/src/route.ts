@@ -20,7 +20,7 @@ import {
 } from 'partsing/text'
 
 import { oneOf } from 'partsing/core/decoder'
-import { matchKind } from '@tempo/core/lib/util/match'
+import { matchKind } from 'tempo-core/lib/util/match'
 
 export enum Feed {
   top = 'top',

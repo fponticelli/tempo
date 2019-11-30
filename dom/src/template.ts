@@ -11,7 +11,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { Template } from '@tempo/core/lib/template'
+import { Template } from 'tempo-core/lib/template'
 import { DOMContext } from './context'
 import { DOMTextValue } from './value'
 

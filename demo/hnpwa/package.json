@@ -1,11 +1,11 @@
 {
-  "name": "@tempo/demo.hnpwa",
+  "name": "tempo-demo.hnpwa",
   "version": "1.0.0",
-  "private": true,
+  "license": "Apache-2.0",
   "dependencies": {
-    "@tempo/core": "1.0.0",
-    "@tempo/dom": "0.8.0",
-    "@tempo/store": "1.0.0",
+    "tempo-core": "1.0.1",
+    "tempo-dom": "0.8.1",
+    "tempo-store": "1.0.1",
     "partsing": "0.7.3",
     "dompurify": "2.0.7"
   },

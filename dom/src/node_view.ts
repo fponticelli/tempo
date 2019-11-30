@@ -11,7 +11,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { DynamicView, StaticView, View } from '@tempo/core/lib/view'
+import { DynamicView, StaticView, View } from 'tempo-core/lib/view'
 import { removeNode } from './utils/dom'
 
 export class DOMBaseNodeView<State> {

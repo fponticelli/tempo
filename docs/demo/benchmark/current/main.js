@@ -117,7 +117,7 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"UNaj":[function(require,module,exports) {
+})({"tBUf":[function(require,module,exports) {
 "use strict";
 /*
 Copyright 2019 Google LLC
@@ -141,7 +141,7 @@ exports.mapArray = function (arr, f) {
     return buff;
 };
 
-},{}],"AxMU":[function(require,module,exports) {
+},{}],"BEVE":[function(require,module,exports) {
 "use strict";
 /*
 Copyright 2019 Google LLC
@@ -156,7 +156,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 Object.defineProperty(exports, "__esModule", { value: true });
-var map_1 = require("@tempo/core/lib/util/map");
+var map_1 = require("tempo-core/lib/util/map");
 function setOneStyle(el, name, value) {
     var anyStyle = el.style;
     if (value == null) {
@@ -234,7 +234,7 @@ function setSpaceSeparated(el, name, values) {
 }
 exports.setSpaceSeparated = setSpaceSeparated;
 
-},{"@tempo/core/lib/util/map":"UNaj"}],"QBLY":[function(require,module,exports) {
+},{"tempo-core/lib/util/map":"tBUf"}],"UKQ2":[function(require,module,exports) {
 "use strict";
 /*
 Copyright 2019 Google LLC
@@ -297,7 +297,7 @@ exports.htmlAttributeMap = {
     value: set_attribute_1.setProperty
 };
 
-},{"./utils/set_attribute":"AxMU"}],"TJFn":[function(require,module,exports) {
+},{"./utils/set_attribute":"BEVE"}],"wNw6":[function(require,module,exports) {
 "use strict";
 /*
 Copyright 2019 Google LLC
@@ -369,7 +369,7 @@ var DOMDynamicNodeView = /** @class */ (function (_super) {
 }(DOMBaseNodeView));
 exports.DOMDynamicNodeView = DOMDynamicNodeView;
 
-},{"./utils/dom":"KfbX"}],"jTie":[function(require,module,exports) {
+},{"./utils/dom":"TnZD"}],"GqEk":[function(require,module,exports) {
 "use strict";
 /*
 Copyright 2019 Google LLC
@@ -423,7 +423,7 @@ var DOMTextTemplate = /** @class */ (function () {
 exports.DOMTextTemplate = DOMTextTemplate;
 exports.text = function (content) { return new DOMTextTemplate(content); };
 
-},{"./node_view":"TJFn"}],"KfbX":[function(require,module,exports) {
+},{"./node_view":"wNw6"}],"TnZD":[function(require,module,exports) {
 "use strict";
 /*
 Copyright 2019 Google LLC
@@ -538,7 +538,7 @@ function processStyle(el, name, value, acc) {
 }
 exports.processStyle = processStyle;
 
-},{"../dom_attributes_mapper":"QBLY","./set_attribute":"AxMU","../text":"jTie"}],"Mmj0":[function(require,module,exports) {
+},{"../dom_attributes_mapper":"UKQ2","./set_attribute":"BEVE","../text":"GqEk"}],"bbLX":[function(require,module,exports) {
 "use strict";
 /*
 Copyright 2019 Google LLC
@@ -555,7 +555,7 @@ limitations under the License.
 Object.defineProperty(exports, "__esModule", { value: true });
 var dom_1 = require("./utils/dom");
 var node_view_1 = require("./node_view");
-var map_1 = require("@tempo/core/lib/util/map");
+var map_1 = require("tempo-core/lib/util/map");
 var dom_attributes_mapper_1 = require("./dom_attributes_mapper");
 var applyChange = function (change, el, ctx) { return function (state, value) {
     return change(state, el, ctx, value);
@@ -699,7 +699,7 @@ exports.elNS2 = function (namespace, name) { return function (attributes) {
     return new DOMElement(makeCreateElementNS(namespace, name), extractAttrs(attributes.attrs), extractEvents(attributes.events), extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, map_1.mapArray(children, dom_1.domChildToTemplate));
 }; };
 
-},{"./utils/dom":"KfbX","./node_view":"TJFn","@tempo/core/lib/util/map":"UNaj","./dom_attributes_mapper":"QBLY"}],"YzxN":[function(require,module,exports) {
+},{"./utils/dom":"TnZD","./node_view":"wNw6","tempo-core/lib/util/map":"tBUf","./dom_attributes_mapper":"UKQ2"}],"zQMt":[function(require,module,exports) {
 "use strict";
 /*
 Copyright 2019 Google LLC
@@ -837,7 +837,7 @@ exports.video = element_1.el2('video');
 exports.wbr = element_1.el2('wbr');
 exports.xmp = element_1.el2('xmp');
 
-},{"./element":"Mmj0"}],"hYCi":[function(require,module,exports) {
+},{"./element":"bbLX"}],"UU8h":[function(require,module,exports) {
 "use strict";
 /*
 Copyright 2019 Google LLC
@@ -853,7 +853,7 @@ limitations under the License.
 */
 Object.defineProperty(exports, "__esModule", { value: true });
 var dom_1 = require("./utils/dom");
-var map_1 = require("@tempo/core/lib/util/map");
+var map_1 = require("tempo-core/lib/util/map");
 var DOMUntilView = /** @class */ (function () {
     function DOMUntilView(ref, repeatUntil, ctx, children) {
         this.ref = ref;
@@ -939,7 +939,7 @@ exports.until = function (options) {
     return new DOMUntilTemplate(options, map_1.mapArray(children, dom_1.domChildToTemplate));
 };
 
-},{"./utils/dom":"KfbX","@tempo/core/lib/util/map":"UNaj"}],"xmUo":[function(require,module,exports) {
+},{"./utils/dom":"TnZD","tempo-core/lib/util/map":"tBUf"}],"kxUV":[function(require,module,exports) {
 "use strict";
 /*
 Copyright 2019 Google LLC
@@ -973,30 +973,30 @@ exports.forEach = function (options) {
         }], children));
 };
 
-},{"./until":"hYCi"}],"dozB":[function(require,module,exports) {
+},{"./until":"UU8h"}],"dozB":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var html_1 = require("@tempo/dom/lib/html");
+var html_1 = require("tempo-dom/lib/html");
 
-var for_each_1 = require("@tempo/dom/lib/for_each");
+var for_each_1 = require("tempo-dom/lib/for_each");
 
 exports.list = html_1.ul({}, for_each_1.forEach({}, html_1.li({
   attrs: {
     className: String
   }
 }, String)));
-},{"@tempo/dom/lib/html":"YzxN","@tempo/dom/lib/for_each":"xmUo"}],"JKII":[function(require,module,exports) {
+},{"tempo-dom/lib/html":"zQMt","tempo-dom/lib/for_each":"kxUV"}],"JKII":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var html_1 = require("@tempo/dom/lib/html");
+var html_1 = require("tempo-dom/lib/html");
 
 exports.deep = html_1.div({
   attrs: {
@@ -1013,7 +1013,7 @@ exports.deep = html_1.div({
 })), html_1.article({}, function (s) {
   return s.paragraph;
 })));
-},{"@tempo/dom/lib/html":"YzxN"}],"TsAd":[function(require,module,exports) {
+},{"tempo-dom/lib/html":"zQMt"}],"OJrv":[function(require,module,exports) {
 "use strict";
 /*
 Copyright 2019 Google LLC
@@ -1075,7 +1075,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var html_1 = require("@tempo/dom/lib/html");
+var html_1 = require("tempo-dom/lib/html");
 
 exports.attribute = html_1.div({
   attrs: {
@@ -1090,14 +1090,14 @@ exports.attribute = html_1.div({
     }
   }
 }, 'content');
-},{"@tempo/dom/lib/html":"YzxN"}],"qnhq":[function(require,module,exports) {
+},{"tempo-dom/lib/html":"zQMt"}],"qnhq":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var html_1 = require("@tempo/dom/lib/html");
+var html_1 = require("tempo-dom/lib/html");
 
 exports.style = html_1.div({
   styles: {
@@ -1112,14 +1112,14 @@ exports.style = html_1.div({
     }
   }
 }, 'content');
-},{"@tempo/dom/lib/html":"YzxN"}],"jpZy":[function(require,module,exports) {
+},{"tempo-dom/lib/html":"zQMt"}],"jpZy":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var html_1 = require("@tempo/dom/lib/html");
+var html_1 = require("tempo-dom/lib/html");
 
 exports.event = html_1.button({
   events: {
@@ -1128,14 +1128,14 @@ exports.event = html_1.button({
     }
   }
 }, 'click me');
-},{"@tempo/dom/lib/html":"YzxN"}],"YbU7":[function(require,module,exports) {
+},{"tempo-dom/lib/html":"zQMt"}],"YbU7":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var html_1 = require("@tempo/dom/lib/html");
+var html_1 = require("tempo-dom/lib/html");
 
 exports.property = html_1.input({
   attrs: {
@@ -1147,7 +1147,7 @@ exports.property = html_1.input({
     }
   }
 });
-},{"@tempo/dom/lib/html":"YzxN"}],"ZCfc":[function(require,module,exports) {
+},{"tempo-dom/lib/html":"zQMt"}],"ZCfc":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1158,7 +1158,7 @@ var list_1 = require("./template/list");
 
 var deep_1 = require("./template/deep");
 
-var context_1 = require("@tempo/dom/lib/context");
+var context_1 = require("tempo-dom/lib/context");
 
 var attribute_1 = require("./template/attribute");
 
@@ -1246,5 +1246,5 @@ anyWin.__tests__ = {
   updateProperty: exports.updateProperty,
   updateAndTriggerEvents: exports.updateAndTriggerEvents
 };
-},{"./template/list":"dozB","./template/deep":"JKII","@tempo/dom/lib/context":"TsAd","./template/attribute":"izmn","./template/styles":"qnhq","./template/events":"jpZy","./template/property":"YbU7"}]},{},["ZCfc"], null)
+},{"./template/list":"dozB","./template/deep":"JKII","tempo-dom/lib/context":"OJrv","./template/attribute":"izmn","./template/styles":"qnhq","./template/events":"jpZy","./template/property":"YbU7"}]},{},["ZCfc"], null)
 //# sourceMappingURL=main.js.map

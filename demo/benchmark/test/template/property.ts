@@ -11,7 +11,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { input } from '@tempo/dom/lib/html'
+import { input } from 'tempo-dom/lib/html'
 
 export interface TestProperties {
   value: string

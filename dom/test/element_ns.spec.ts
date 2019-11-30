@@ -13,7 +13,7 @@ limitations under the License.
 
 import { createContext } from './common'
 import { elNS } from '../src/element'
-import { DynamicView } from '@tempo/core/lib/view'
+import { DynamicView } from 'tempo-core/lib/view'
 
 describe('dom_ns_element', () => {
   it('static empty-element', () => {

@@ -13,7 +13,7 @@ limitations under the License.
 
 import { Action } from './action'
 import { State, Page } from './state'
-import { reduceOnKind } from '@tempo/store/lib/reducer'
+import { reduceOnKind } from 'tempo-store/lib/reducer'
 
 export const reducer = reduceOnKind<State, Action>({
   LinkClicked: (state, action) => {

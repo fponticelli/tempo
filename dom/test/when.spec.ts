@@ -14,7 +14,7 @@ limitations under the License.
 import { div } from '../src/html'
 import { when, unless } from '../src/when'
 import { createContext } from './common'
-import { DynamicView } from '@tempo/core/lib/view'
+import { DynamicView } from 'tempo-core/lib/view'
 
 describe('when', () => {
   it('always true', () => {

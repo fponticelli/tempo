@@ -11,7 +11,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { button } from '@tempo/dom/lib/html'
+import { button } from 'tempo-dom/lib/html'
 
 export const event = button<string, string>(
   {

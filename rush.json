@@ -34,28 +34,28 @@
 
   "projects": [
     {
-      "packageName": "tempo",
+      "packageName": "tempo-root",
       "projectFolder": "."
     }, {
-      "packageName": "@tempo/core",
+      "packageName": "tempo-core",
       "projectFolder": "./core"
     }, {
-      "packageName": "@tempo/store",
+      "packageName": "tempo-store",
       "projectFolder": "./store"
     }, {
-      "packageName": "@tempo/dom",
+      "packageName": "tempo-dom",
       "projectFolder": "./dom"
     }, {
-      "packageName": "@tempo/demo.todomvc",
+      "packageName": "tempo-demo.todomvc",
       "projectFolder": "./demo/todomvc"
     }, {
-      "packageName": "@tempo/demo.readme",
+      "packageName": "tempo-demo.readme",
       "projectFolder": "./demo/readme"
     }, {
-      "packageName": "@tempo/demo.benchmark",
+      "packageName": "tempo-demo.benchmark",
       "projectFolder": "./demo/benchmark"
     }, {
-      "packageName": "@tempo/demo.hnpwa",
+      "packageName": "tempo-demo.hnpwa",
       "projectFolder": "./demo/hnpwa"
     }
   ]

@@ -13,7 +13,7 @@ limitations under the License.
 
 import { createContext } from './common'
 import { DOMTextTemplate } from '../src/text'
-import { DynamicView } from '@tempo/core/lib/view'
+import { DynamicView } from 'tempo-core/lib/view'
 
 describe('dom_text', () => {
   it('create static undefined', () => {

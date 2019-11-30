@@ -15,7 +15,7 @@ import { DOMTemplate, DOMChild } from './template'
 import { DOMContext } from './context'
 import { fragmentView } from './fragment'
 import { domChildToTemplate } from './utils/dom'
-import { mapArray } from '@tempo/core/lib/util/map'
+import { mapArray } from 'tempo-core/lib/util/map'
 
 export class DOMPortalTemplate<State, Action> implements DOMTemplate<State, Action> {
   constructor(

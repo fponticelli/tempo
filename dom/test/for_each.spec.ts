@@ -14,7 +14,7 @@ limitations under the License.
 import { createContext } from './common'
 import { div } from '../src/html'
 import { forEach } from '../src/for_each'
-import { DynamicView } from '@tempo/core/lib/view'
+import { DynamicView } from 'tempo-core/lib/view'
 
 describe('repeat', () => {
   it('repeat starting empty', () => {

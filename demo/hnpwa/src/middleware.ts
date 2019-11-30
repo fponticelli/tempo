@@ -14,9 +14,9 @@ limitations under the License.
 import { State } from './state'
 import { Action } from './action'
 import { toTitle, Route, toUrl, Feed } from './route'
-import { matchKind } from '@tempo/core/lib/util/match'
+import { matchKind } from 'tempo-core/lib/util/match'
 import { Request } from './request'
-import { Store } from '@tempo/store/lib/store'
+import { Store } from 'tempo-store/lib/store'
 import { isGithub } from './config'
 
 export const setTitle = (state: State) => {

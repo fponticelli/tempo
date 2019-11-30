@@ -13,8 +13,8 @@ limitations under the License.
 
 import { list } from './template/list'
 import { deep, Deep } from './template/deep'
-import { DOMContext } from '@tempo/dom/lib/context'
-import { DynamicView } from '@tempo/core/lib/view'
+import { DOMContext } from 'tempo-dom/lib/context'
+import { DynamicView } from 'tempo-core/lib/view'
 import { TestAttributes, attribute } from './template/attribute'
 import { TestStyles, style } from './template/styles'
 import { event } from './template/events'

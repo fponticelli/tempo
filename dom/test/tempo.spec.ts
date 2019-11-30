@@ -15,8 +15,8 @@ import { createContext } from './common'
 import { Tempo } from '../src/tempo'
 import { component } from '../src/component'
 import { div } from '../src/html'
-import { Store } from '@tempo/store/lib/store'
-import { Property } from '@tempo/store/lib/property'
+import { Store } from 'tempo-store/lib/store'
+import { Property } from 'tempo-store/lib/property'
 
 describe('Tempo', () => {
   it('render', () => {

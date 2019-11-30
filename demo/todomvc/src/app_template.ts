@@ -11,11 +11,11 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { section, header, h1, input, ul, label, div, li, footer, span, a, p, button } from '@tempo/dom/lib/html'
-import { DOMEventHandler } from '@tempo/dom/lib/value'
-import { filterState } from '@tempo/dom/lib/filter'
-import { iterate } from '@tempo/dom/lib/iterate'
-import { when } from '@tempo/dom/lib/when'
+import { section, header, h1, input, ul, label, div, li, footer, span, a, p, button } from 'tempo-dom/lib/html'
+import { DOMEventHandler } from 'tempo-dom/lib/value'
+import { filterState } from 'tempo-dom/lib/filter'
+import { iterate } from 'tempo-dom/lib/iterate'
+import { when } from 'tempo-dom/lib/when'
 import { Action } from './action'
 import { State, Filter, Todo } from './state'
 

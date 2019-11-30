@@ -11,13 +11,13 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { div, th, table, tr, td, br, a, span, button, b, s } from '@tempo/dom/lib/html'
+import { div, th, table, tr, td, br, a, span, button, b, s } from 'tempo-dom/lib/html'
 import { Action } from '../action'
 import { TestInfo, State, VersionWithSelected, makeTestRunId } from '../state'
-import { forEach } from '@tempo/dom/lib/for_each'
-import { mapState } from '@tempo/dom/lib/map'
-import { when } from '@tempo/dom/lib/when'
-import { fragment } from '@tempo/dom/lib/fragment'
+import { forEach } from 'tempo-dom/lib/for_each'
+import { mapState } from 'tempo-dom/lib/map'
+import { when } from 'tempo-dom/lib/when'
+import { fragment } from 'tempo-dom/lib/fragment'
 
 const resultToOpsPerSec = (r: TestResult) => {
   return r.hz.toFixed(r.hz < 100 ? 2 : 0)

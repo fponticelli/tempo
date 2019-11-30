@@ -1,8 +1,9 @@
 {
-  "name": "@tempo/store",
-  "version": "1.0.0",
+  "name": "tempo-store",
+  "version": "1.0.1",
   "description": "",
-  "license": "UNLICENSED",
+  "license": "Apache-2.0",
+  "keywords": ["tempo", "unidirectional-flow", "store", "state-management"],
   "scripts": {
     "clean": "rm -rf lib/* && rm -rf es6/*",
     "build": "npm run clean && tsc && tsc -p tsconfig.es6.json",
@@ -15,7 +16,7 @@
   },
   "author": "Franco Ponticelli <franco.ponticelli@gmail.com>",
   "dependencies": {
-    "@tempo/core": "1.0.0"
+    "tempo-core": "1.0.1"
   },
   "devDependencies": {
     "@types/jest": "24.0.22",

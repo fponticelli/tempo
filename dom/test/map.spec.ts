@@ -14,7 +14,7 @@ limitations under the License.
 import { el } from '../src/element'
 import { mapState, mapAction } from '../src/map'
 import { createContext } from './common'
-import { DynamicView } from '@tempo/core/lib/view'
+import { DynamicView } from 'tempo-core/lib/view'
 
 describe('map', () => {
   it('mapState', () => {

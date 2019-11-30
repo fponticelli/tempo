@@ -12,12 +12,12 @@ limitations under the License.
 */
 
 import { DOMDynamicFragmentView } from './fragment'
-import { View, DynamicView } from '@tempo/core/lib/view'
-import { Store } from '@tempo/store/lib/store'
+import { View, DynamicView } from 'tempo-core/lib/view'
+import { Store } from 'tempo-store/lib/store'
 import { DOMTemplate, DOMChild } from './template'
 import { DOMContext } from './context'
 import { filterDynamics, domChildToTemplate } from './utils/dom'
-import { mapArray } from '@tempo/core/lib/util/map'
+import { mapArray } from 'tempo-core/lib/util/map'
 
 export class DOMComponentView<State, Action> extends DOMDynamicFragmentView<State> {
   /* istanbul ignore next */

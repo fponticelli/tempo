@@ -11,8 +11,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { div } from '@tempo/dom/lib/html'
-import { DOMChild } from '@tempo/dom/lib/template'
+import { div } from 'tempo-dom/lib/html'
+import { DOMChild } from 'tempo-dom/lib/template'
 
 export const notification = <State, Action>(...children: DOMChild<State, Action>[]) =>
   div({ attrs: { className: 'notification' } }, ...children)

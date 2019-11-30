@@ -12,11 +12,11 @@ limitations under the License.
 */
 
 import { DOMChild, DOMTemplate } from './template'
-import { View } from '@tempo/core/lib/view'
+import { View } from 'tempo-core/lib/view'
 import { DOMContext } from './context'
 import { domChildToTemplate, filterDynamics } from './utils/dom'
 import { DOMStaticFragmentView, DOMDynamicFragmentView } from './fragment'
-import { mapArray } from '@tempo/core/lib/util/map'
+import { mapArray } from 'tempo-core/lib/util/map'
 
 export class FilterStateTemplate<State, Action> implements DOMTemplate<State, Action> {
   constructor(

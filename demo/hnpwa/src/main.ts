@@ -11,8 +11,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { Tempo } from '@tempo/dom/lib/tempo'
-import { Store } from '@tempo/store/lib/store'
+import { Tempo } from 'tempo-dom/lib/tempo'
+import { Store } from 'tempo-store/lib/store'
 import { template } from './templates/app'
 import { reducer } from './reducer'
 import { createState, Page } from './state'

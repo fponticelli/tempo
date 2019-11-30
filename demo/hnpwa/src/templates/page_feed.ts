@@ -11,13 +11,13 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { footer, section, ul, li, aside, span, div, h2 } from '@tempo/dom/lib/html'
-import { iterate } from '@tempo/dom/lib/iterate'
-import { fragment } from '@tempo/dom/lib/fragment'
+import { footer, section, ul, li, aside, span, div, h2 } from 'tempo-dom/lib/html'
+import { iterate } from 'tempo-dom/lib/iterate'
+import { fragment } from 'tempo-dom/lib/fragment'
 import { PageFeed, Item, External } from '../state'
 import { Action } from '../action'
-import { match, matchBool } from '@tempo/dom/lib/match'
-import { mapState } from '@tempo/dom/lib/map'
+import { match, matchBool } from 'tempo-dom/lib/match'
+import { mapState } from 'tempo-dom/lib/map'
 import { Route } from '../route'
 import { linkRoute } from './link_route'
 import { paginationTemplate } from './pagination'
