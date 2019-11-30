@@ -45,7 +45,7 @@ export const middleware = (store: Store<State, Action>) => (state: State, action
     case 'LinkClicked':
       if (action.route.kind === 'ExternalRoute') {
         window.open(action.route.path, '_blank')
-      } else {
+      } else if (action.route.kind !== 'NotFoundRoute') {
         const url = toUrl(action.route)
         if (url !== current) {
           history.pushState(action.route, '', url)

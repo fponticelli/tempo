@@ -1,7 +1,5 @@
-const githubPrefix = '/tempo/docs/demo/hpnwa'
+const githubPrefix = '/tempo/docs/demo/hnpwa'
 export const isGithub = location.pathname.startsWith(githubPrefix)
-
-console.log(isGithub, location.pathname)
 
 export const getPath = (path: string) => {
   if (isGithub) {
