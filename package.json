@@ -1,13 +1,29 @@
 {
   "name": "tempo-root",
   "version": "1.0.0",
-  "description": "",
+  "description": "Web framework alternative to React/Angular fully typed.",
+  "keywords": [
+    "typescript",
+    "ui",
+    "framework",
+    "dom",
+    "react-alternative",
+    "angular-alternative"
+  ],
   "scripts": {
     "build": "echo \"nothing to build at root\"",
     "test:all": "(cd core && npm run test) && (cd store && npm run test) && (cd dom && npm run test)"
   },
-  "author": "Franco Ponticelli <franco.ponticelli@gmail.com>",
   "license": "Apache-2.0",
+  "homepage": "https://github.com/fponticelli/tempo",
+  "bugs": {
+    "url": "https://github.com/fponticelli/tempo/issues"
+  },
+  "author": {
+    "name": "Franco Ponticelli",
+    "email": "franco.ponticelli@gmail.com",
+    "url": "https://github.com/fponticelli"
+  },
   "dependencies": {
     "@types/jest": "24.0.22",
     "jest": "24.9.0",

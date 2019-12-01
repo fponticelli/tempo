@@ -1,8 +1,8 @@
 {
   "name": "tempo-dom",
   "version": "0.8.3",
-  "description": "UI framework alternative to React and Angular",
-  "keywords": ["ui", "framework", "typescript", "angular-alternative", "react-alternative"],
+  "description": "Fully-typed web framework alternative to React and Angular",
+  "keywords": ["ui", "framework", "typescript", "dom", "angular-alternative", "react-alternative"],
   "license": "Apache-2.0",
   "scripts": {
     "clean": "rm -rf lib/* && rm -rf es6/*",
@@ -14,7 +14,15 @@
     "prettier-fix": "prettier --write src/**/*.ts",
     "prepublish": "npm run build"
   },
-  "author": "Franco Ponticelli <franco.ponticelli@gmail.com>",
+  "homepage": "https://github.com/fponticelli/tempo",
+  "bugs": {
+    "url": "https://github.com/fponticelli/tempo/issues"
+  },
+  "author": {
+    "name": "Franco Ponticelli",
+    "email": "franco.ponticelli@gmail.com",
+    "url": "https://github.com/fponticelli"
+  },
   "dependencies": {
     "tempo-core": "1.0.1",
     "tempo-store": "1.0.1"

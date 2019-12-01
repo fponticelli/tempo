@@ -1,9 +1,9 @@
 {
   "name": "tempo-store",
   "version": "1.0.1",
-  "description": "",
+  "description": "Super simple state management library",
   "license": "Apache-2.0",
-  "keywords": ["tempo", "unidirectional-flow", "store", "state-management"],
+  "keywords": ["tempo", "unidirectional-flow", "property", "store", "state-management", "typescript"],
   "scripts": {
     "clean": "rm -rf lib/* && rm -rf es6/*",
     "build": "npm run clean && tsc && tsc -p tsconfig.es6.json",
@@ -14,7 +14,15 @@
     "prettier-fix": "prettier --write src/**/*.ts",
     "prepublish": "npm run build"
   },
-  "author": "Franco Ponticelli <franco.ponticelli@gmail.com>",
+  "homepage": "https://github.com/fponticelli/tempo",
+  "bugs": {
+    "url": "https://github.com/fponticelli/tempo/issues"
+  },
+  "author": {
+    "name": "Franco Ponticelli",
+    "email": "franco.ponticelli@gmail.com",
+    "url": "https://github.com/fponticelli"
+  },
   "dependencies": {
     "tempo-core": "1.0.1"
   },

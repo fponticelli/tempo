@@ -1,7 +1,7 @@
 {
   "name": "tempo-core",
   "license": "Apache-2.0",
-  "description": "Core types for the Tempo framework.",
+  "description": "Core types for Tempo. The tempo architecture encourages a unilateral flow in a practical way.",
   "version": "1.0.1",
   "keywords": ["tempo", "framework", "ui", "library"],
   "scripts": {
@@ -14,7 +14,15 @@
     "prettier-fix": "prettier --write src/**/*.ts",
     "prepublish": "npm run build"
   },
-  "author": "Franco Ponticelli <franco.ponticelli@gmail.com>",
+  "homepage": "https://github.com/fponticelli/tempo",
+  "bugs": {
+    "url": "https://github.com/fponticelli/tempo/issues"
+  },
+  "author": {
+    "name": "Franco Ponticelli",
+    "email": "franco.ponticelli@gmail.com",
+    "url": "https://github.com/fponticelli"
+  },
   "devDependencies": {
     "@types/node": "10.12.18",
     "@types/jest": "24.0.22",
