@@ -1,2 +1,10 @@
-theme: jekyll-theme-tactile
+remote_theme: pmarsceill/just-the-docs
 google_analytics: UA-589893-23
+
+# Enable or disable the site search
+# search_enabled: true
+
+# Aux links for the upper right navigation
+aux_links:
+  'tempo on GitHub':
+    - 'https://github.com/fponticelli/tempo'
