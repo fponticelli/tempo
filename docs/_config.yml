@@ -2,7 +2,9 @@ remote_theme: pmarsceill/just-the-docs
 google_analytics: UA-589893-23
 
 # Enable or disable the site search
-# search_enabled: true
+search_enabled: true
+
+logo: ./assets/icon-512x512.png
 
 # Aux links for the upper right navigation
 aux_links:
