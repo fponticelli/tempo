@@ -10,6 +10,6 @@ This is not an officially supported Google product.
 
 [HNPWA demo](https://fponticelli.github.io/tempo/demo/hnpwa/)
 
-[Sample Application demo](https://fponticelli.github.io/tempo/demo/hnpwa/)
+[Sample Application demo](https://fponticelli.github.io/tempo/demo/readme/)
 
-[Performance app](https://fponticelli.github.io/tempo/demo/demo/benchmark/) to track improvements/regressions with new versions of the library.
+[Performance app](https://fponticelli.github.io/tempo/demo/benchmark/) to track improvements/regressions with new versions of the library.
