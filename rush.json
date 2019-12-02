@@ -57,6 +57,12 @@
     }, {
       "packageName": "tempo-demo.hnpwa",
       "projectFolder": "./demo/hnpwa"
+    }, {
+      "packageName": "tempo-paper",
+      "projectFolder": "./paper"
+    }, {
+      "packageName": "tempo-demo.paper",
+      "projectFolder": "./demo/paper"
     }
   ]
 }

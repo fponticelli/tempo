@@ -25,3 +25,15 @@ export interface StaticView extends BasicView {
 }
 
 export type View<State> = DynamicView<State> | StaticView
+
+export function filterDynamics<State>(children: View<State>[]) {
+  return children.filter(child => child.kind === 'dynamic') as DynamicView<State>[]
+}
+
+export function applyChange<State>(state: State, children: View<State>[]) {
+  for (const view of children) {
+    if (view.kind === 'dynamic') {
+      view.change(state)
+    }
+  }
+}

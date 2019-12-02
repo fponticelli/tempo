@@ -2,21 +2,25 @@ dependencies:
   '@rush-temp/tempo-core': 'file:projects/tempo-core.tgz'
   '@rush-temp/tempo-demo.benchmark': 'file:projects/tempo-demo.benchmark.tgz'
   '@rush-temp/tempo-demo.hnpwa': 'file:projects/tempo-demo.hnpwa.tgz'
+  '@rush-temp/tempo-demo.paper': 'file:projects/tempo-demo.paper.tgz'
   '@rush-temp/tempo-demo.readme': 'file:projects/tempo-demo.readme.tgz'
   '@rush-temp/tempo-demo.todomvc': 'file:projects/tempo-demo.todomvc.tgz'
   '@rush-temp/tempo-dom': 'file:projects/tempo-dom.tgz'
+  '@rush-temp/tempo-paper': 'file:projects/tempo-paper.tgz'
   '@rush-temp/tempo-root': 'file:projects/tempo-root.tgz'
   '@rush-temp/tempo-store': 'file:projects/tempo-store.tgz'
   '@types/dompurify': 2.0.0
   '@types/jest': 24.0.22
   '@types/jsdom': 12.2.4
   '@types/node': 10.12.18
+  '@types/paper': 0.12.3
   babel-types: 6.26.0
   cssnano: 4.1.10
   dompurify: 2.0.7
   jest: 24.9.0
   jsdom: 15.1.1
   lodash: 4.17.15
+  paper: 0.12.3
   parcel-bundler: 1.12.4
   partsing: 0.7.3
   prettier: 1.19.1
@@ -1226,6 +1230,13 @@ packages:
     dev: false
     resolution:
       integrity: sha512-fh+pAqt4xRzPfqA6eh3Z2y6fyZavRIumvjhaCL753+TVkGKGhpPeyrJG2JftD0T9q4GF00KjefsQ+PQNDdWQaQ==
+  /@types/paper/0.12.3:
+    dependencies:
+      paper: 0.12.3
+    deprecated: 'This is a stub types definition. paper provides its own type definitions, so you do not need this installed.'
+    dev: false
+    resolution:
+      integrity: sha512-kU00AqWZcpb6b5Fnnrilurk3NfdkuyZXG4v+L9GF5+6zAfTYIThXDcieCtjdHFl/HlLfqZr5Zbf+tKvGX3FyFw==
   /@types/q/1.5.2:
     dev: false
     resolution:
@@ -5237,6 +5248,12 @@ packages:
     dev: false
     resolution:
       integrity: sha512-0DTvPVU3ed8+HNXOu5Bs+o//Mbdj9VNQMUOe9oKCwh8l0GNwpTDMKCWbRjgtD291AWnkAgkqA/LOnQS8AmS1tw==
+  /paper/0.12.3:
+    dev: false
+    engines:
+      node: '>=8.0.0'
+    resolution:
+      integrity: sha512-MBlJ0xKFkU/K0eTk2VoAlNbqbfp7MJMVw7gF6v0pveXrBXrJ+1842YLTm07jjjbVJaQZnLvtecDf6Mbazc3jig==
   /parcel-bundler/1.12.4:
     dependencies:
       '@babel/code-frame': 7.5.5
@@ -7760,7 +7777,7 @@ packages:
     dev: false
     name: '@rush-temp/tempo-demo.benchmark'
     resolution:
-      integrity: sha512-1FmcUQUs1sUhkfxZq6oHhadNTmXVUiwmx9lqCKHwUvbakPfPwpoLWTIoW/5GgUGoxKo5ZxMA4ucixGjtcIIp9g==
+      integrity: sha512-JF62Vi3ZEXfNhXk7MmDX6BQD4++3gFUHi27L89NgDCT0nRYdqrDXxO4jq8o9AgIE30b4yo6aZ7St1moUdk/HHQ==
       tarball: 'file:projects/tempo-demo.benchmark.tgz'
     version: 0.0.0
   'file:projects/tempo-demo.hnpwa.tgz':
@@ -7779,8 +7796,22 @@ packages:
     dev: false
     name: '@rush-temp/tempo-demo.hnpwa'
     resolution:
-      integrity: sha512-jDW9hrO+W0fPjgnJGj6/A+rKnuFJWJJ3hbNPBH5jGYxCC8T+Ru1zGqm16J6E0R5EE1CtxJvm15W47VQdq4ap+Q==
+      integrity: sha512-8JlUkpyJNF5MFXrVVpvryftTRiexQ+4Q76MFi404Q1mDXXE7bW3NAlVSU9ND6MGN3M9/5imOV3/Xi79nEUvhmg==
       tarball: 'file:projects/tempo-demo.hnpwa.tgz'
+    version: 0.0.0
+  'file:projects/tempo-demo.paper.tgz':
+    dependencies:
+      babel-types: 6.26.0
+      cssnano: 4.1.10
+      parcel-bundler: 1.12.4
+      prettier: 1.19.1
+      tslint: 5.20.1_typescript@3.7.2
+      typescript: 3.7.2
+    dev: false
+    name: '@rush-temp/tempo-demo.paper'
+    resolution:
+      integrity: sha512-F4cylUSo+HWD+NXBRLrUtgrGcgdXJHl+grm3YFOCjgnBrR8Gq8Hj+uaufz99ddtQuqfiswIFb46Arm6qIJON6g==
+      tarball: 'file:projects/tempo-demo.paper.tgz'
     version: 0.0.0
   'file:projects/tempo-demo.readme.tgz':
     dependencies:
@@ -7793,7 +7824,7 @@ packages:
     dev: false
     name: '@rush-temp/tempo-demo.readme'
     resolution:
-      integrity: sha512-qUm864cvfPfpONO+NDcsrL5Pt8VP3GgnuLqAGS3FE7YtOwsl/AmvH4PL2m1xkSstspNi/eJStvKNBzNK7GGkyQ==
+      integrity: sha512-G5sqUL8IT1IsmvfbQr+LF+BbwTKl0q3f7S4eVpb+WnXPoSBsg9edlDvH7eiM3RPjDdXBp4LPt1fvHU7KzB7xZw==
       tarball: 'file:projects/tempo-demo.readme.tgz'
     version: 0.0.0
   'file:projects/tempo-demo.todomvc.tgz':
@@ -7809,7 +7840,7 @@ packages:
     dev: false
     name: '@rush-temp/tempo-demo.todomvc'
     resolution:
-      integrity: sha512-Kw9jJYZMjELCMP5ps0sINKqv1w50zSRZKejeZ5CG2N0Bz9M90lA5SMKWNhah7YUkG7rfRUJ1tV37/vrID1SafA==
+      integrity: sha512-aMT/25WHUfAdUsSFzvr1JNZlCf4JPFudYVJJlJwV93pV33Clip+kP4vSFYw0SNo0RpR6nUotm5frI4xaf7E1YA==
       tarball: 'file:projects/tempo-demo.todomvc.tgz'
     version: 0.0.0
   'file:projects/tempo-dom.tgz':
@@ -7829,8 +7860,30 @@ packages:
     dev: false
     name: '@rush-temp/tempo-dom'
     resolution:
-      integrity: sha512-qamYb+viP7m36/ptwdJ8+pHC3rwwAtrbPoXVqTZyUUmqo6+aigSnb1P74GxfmZps6IoUmfFT8VoNhjGjoADffg==
+      integrity: sha512-29r4SFMpvaAZrZwxhqI2JWVZP8XeUHD1KOrwkN8GKleOxc5r/O3oMaVf689iWXt/1xueY6CtgyNX4uZhRFhDrw==
       tarball: 'file:projects/tempo-dom.tgz'
+    version: 0.0.0
+  'file:projects/tempo-paper.tgz':
+    dependencies:
+      '@types/jest': 24.0.22
+      '@types/jsdom': 12.2.4
+      '@types/paper': 0.12.3
+      jest: 24.9.0
+      jsdom: 15.1.1
+      lodash: 4.17.15
+      paper: 0.12.3
+      prettier: 1.19.1
+      request: 2.88.0
+      request-promise-native: 1.0.7_request@2.88.0
+      stealthy-require: 1.0.0
+      ts-jest: 24.1.0_jest@24.9.0
+      tslint: 5.20.1_typescript@3.7.2
+      typescript: 3.7.2
+    dev: false
+    name: '@rush-temp/tempo-paper'
+    resolution:
+      integrity: sha512-qjpwqSMG0JvBHYFvZr2Rq/mXinz43UMGhdoCISakEfgMZ3pZrnt0HC5QoVpYUBl9ZNwAcsLWmwnhIGMPi+ECXQ==
+      tarball: 'file:projects/tempo-paper.tgz'
     version: 0.0.0
   'file:projects/tempo-root.tgz':
     dependencies:
@@ -7856,7 +7909,7 @@ packages:
     dev: false
     name: '@rush-temp/tempo-store'
     resolution:
-      integrity: sha512-p3mBFQIsn/dImOvIhRnxx84o21fCB0jYYnD+YbTuEUt90RC/uWD0kTmsM+HGyGDlwBt7ZhtucYcnqYGFYRdM1A==
+      integrity: sha512-ALGnjX3D5MPXAyAdEByRwnJsvhk3le1jLWuaSzrnGI5/YWmMywS+vdX0AgEXvDQxfzvNUDWOPj1Ykl879aJdkQ==
       tarball: 'file:projects/tempo-store.tgz'
     version: 0.0.0
 registry: ''
@@ -7864,21 +7917,25 @@ specifiers:
   '@rush-temp/tempo-core': 'file:./projects/tempo-core.tgz'
   '@rush-temp/tempo-demo.benchmark': 'file:./projects/tempo-demo.benchmark.tgz'
   '@rush-temp/tempo-demo.hnpwa': 'file:./projects/tempo-demo.hnpwa.tgz'
+  '@rush-temp/tempo-demo.paper': 'file:./projects/tempo-demo.paper.tgz'
   '@rush-temp/tempo-demo.readme': 'file:./projects/tempo-demo.readme.tgz'
   '@rush-temp/tempo-demo.todomvc': 'file:./projects/tempo-demo.todomvc.tgz'
   '@rush-temp/tempo-dom': 'file:./projects/tempo-dom.tgz'
+  '@rush-temp/tempo-paper': 'file:./projects/tempo-paper.tgz'
   '@rush-temp/tempo-root': 'file:./projects/tempo-root.tgz'
   '@rush-temp/tempo-store': 'file:./projects/tempo-store.tgz'
   '@types/dompurify': 2.0.0
   '@types/jest': 24.0.22
   '@types/jsdom': 12.2.4
   '@types/node': 10.12.18
+  '@types/paper': 0.12.3
   babel-types: 6.26.0
   cssnano: 4.1.10
   dompurify: 2.0.7
   jest: 24.9.0
   jsdom: 15.1.1
   lodash: 4.17.15
+  paper: 0.12.3
   parcel-bundler: 1.12.4
   partsing: 0.7.3
   prettier: 1.19.1

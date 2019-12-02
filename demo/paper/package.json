@@ -1,0 +1,38 @@
+{
+  "name": "tempo-demo.paper",
+  "version": "1.0.0",
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/fponticelli/tempo",
+  "description": "",
+  "bugs": {
+    "url": "https://github.com/fponticelli/tempo/issues"
+  },
+  "author": {
+    "name": "Franco Ponticelli",
+    "email": "franco.ponticelli@gmail.com",
+    "url": "https://github.com/fponticelli"
+  },
+  "dependencies": {
+    "tempo-core": "1.0.1",
+    "tempo-dom": "0.8.3",
+    "tempo-store": "1.0.1",
+    "tempo-paper": "1.0.0"
+  },
+  "devDependencies": {
+    "cssnano": "4.1.10",
+    "parcel-bundler": "1.12.4",
+    "prettier": "1.19.1",
+    "tslint": "5.20.1",
+    "typescript": "3.7.2",
+    "babel-types": "6.26.0"
+  },
+  "scripts": {
+    "compile": "NODE_ENV=production && parcel build src/index.html --public-url . --out-dir ../../docs/demo/paper --experimental-scope-hoisting",
+    "clean": "rm -rf dist/* && rm -rf ../../docs/demo/paper/*",
+    "build": "npm run clean && npm run compile",
+    "watch": "parcel src/index.html",
+    "tslint": "tslint -p ./tslint.json",
+    "prettier": "prettier -c src/**/*.ts",
+    "prettier-fix": "prettier --write src/**/*.ts"
+  }
+}

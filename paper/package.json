@@ -1,0 +1,54 @@
+{
+  "name": "tempo-paper",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [],
+  "license": "Apache-2.0",
+  "scripts": {
+    "clean": "rm -rf lib/* && rm -rf es6/*",
+    "build": "npm run clean && tsc && tsc -p tsconfig.es6.json",
+    "test": "jest",
+    "test-watch": "jest --watch",
+    "tslint": "tslint -p ./tslint.json",
+    "prettier": "prettier -c src/**/*.ts",
+    "prettier-fix": "prettier --write src/**/*.ts",
+    "prepublish": "npm run build"
+  },
+  "homepage": "https://github.com/fponticelli/tempo",
+  "bugs": {
+    "url": "https://github.com/fponticelli/tempo/issues"
+  },
+  "author": {
+    "name": "Franco Ponticelli",
+    "email": "franco.ponticelli@gmail.com",
+    "url": "https://github.com/fponticelli"
+  },
+  "dependencies": {
+    "tempo-core": "1.0.1",
+    "tempo-store": "1.0.1",
+    "tempo-dom": "0.8.3",
+    "paper": "0.12.3"
+  },
+  "devDependencies": {
+    "@types/jest": "24.0.22",
+    "@types/jsdom": "12.2.4",
+    "jsdom": "15.1.1",
+    "jest": "24.9.0",
+    "lodash": "4.17.15",
+    "request": "2.88.0",
+    "request-promise-native": "1.0.7",
+    "stealthy-require": "1.0.0",
+    "ts-jest": "24.1.0",
+    "typescript": "3.7.2",
+    "tslint": "5.20.1",
+    "prettier": "1.19.1",
+    "@types/paper": "0.12.3"
+  },
+  "main": "lib/index.js",
+  "module": "es6/index.js",
+  "typings": "lib/index.d.ts",
+  "files": [
+    "lib",
+    "es6"
+  ]
+}

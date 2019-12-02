@@ -11,10 +11,10 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { DynamicView, View } from 'tempo-core/lib/view'
+import { DynamicView, View, filterDynamics } from 'tempo-core/lib/view'
 import { DOMContext } from './context'
 import { DOMTemplate, DOMChild } from './template'
-import { removeNode, filterDynamics, domChildToTemplate, insertBefore } from './utils/dom'
+import { removeNode, domChildToTemplate, insertBefore } from './utils/dom'
 import { mapArray } from 'tempo-core/lib/util/map'
 
 export class DOMUntilView<OuterState, InnerState, Action> implements DynamicView<OuterState> {

@@ -117,7 +117,36 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"tBUf":[function(require,module,exports) {
+})({"OQt2":[function(require,module,exports) {
+"use strict";
+/*
+Copyright 2019 Google LLC
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+    https://www.apache.org/licenses/LICENSE-2.0
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+Object.defineProperty(exports, "__esModule", { value: true });
+function filterDynamics(children) {
+    return children.filter(function (child) { return child.kind === 'dynamic'; });
+}
+exports.filterDynamics = filterDynamics;
+function applyChange(state, children) {
+    for (var _i = 0, children_1 = children; _i < children_1.length; _i++) {
+        var view = children_1[_i];
+        if (view.kind === 'dynamic') {
+            view.change(state);
+        }
+    }
+}
+exports.applyChange = applyChange;
+
+},{}],"tBUf":[function(require,module,exports) {
 "use strict";
 /*
 Copyright 2019 Google LLC
@@ -461,10 +490,6 @@ function insertBefore(ref) {
     };
 }
 exports.insertBefore = insertBefore;
-function filterDynamics(children) {
-    return children.filter(function (child) { return child.kind === 'dynamic'; });
-}
-exports.filterDynamics = filterDynamics;
 function domChildToTemplate(dom) {
     if (typeof dom === 'string' || typeof dom === 'function' || typeof dom === 'undefined')
         return text_1.text(dom);
@@ -553,6 +578,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 Object.defineProperty(exports, "__esModule", { value: true });
+var view_1 = require("tempo-core/lib/view");
 var dom_1 = require("./utils/dom");
 var node_view_1 = require("./node_view");
 var map_1 = require("tempo-core/lib/util/map");
@@ -609,7 +635,7 @@ var DOMElement = /** @class */ (function () {
         if (this.afterrender) {
             value = applyAfterRender(this.afterrender, el, ctx, state);
         }
-        var dynamicChildren = map_1.mapArray(dom_1.filterDynamics(views), function (child) { return function (state) { return child.change(state); }; });
+        var dynamicChildren = map_1.mapArray(view_1.filterDynamics(views), function (child) { return function (state) { return child.change(state); }; });
         allDynamics.push.apply(allDynamics, dynamicChildren);
         if (this.beforechange) {
             var change_1 = applyChange(this.beforechange, el, ctx);
@@ -699,7 +725,7 @@ exports.elNS2 = function (namespace, name) { return function (attributes) {
     return new DOMElement(makeCreateElementNS(namespace, name), extractAttrs(attributes.attrs), extractEvents(attributes.events), extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, map_1.mapArray(children, dom_1.domChildToTemplate));
 }; };
 
-},{"./utils/dom":"TnZD","./node_view":"wNw6","tempo-core/lib/util/map":"tBUf","./dom_attributes_mapper":"UKQ2"}],"zQMt":[function(require,module,exports) {
+},{"tempo-core/lib/view":"OQt2","./utils/dom":"TnZD","./node_view":"wNw6","tempo-core/lib/util/map":"tBUf","./dom_attributes_mapper":"UKQ2"}],"zQMt":[function(require,module,exports) {
 "use strict";
 /*
 Copyright 2019 Google LLC
@@ -852,6 +878,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 Object.defineProperty(exports, "__esModule", { value: true });
+var view_1 = require("tempo-core/lib/view");
 var dom_1 = require("./utils/dom");
 var map_1 = require("tempo-core/lib/util/map");
 var DOMUntilView = /** @class */ (function () {
@@ -884,7 +911,7 @@ var DOMUntilView = /** @class */ (function () {
                 return "break";
             if (index < currentViewLength) {
                 // replace existing
-                var filtered = dom_1.filterDynamics(this_1.childrenView[index]);
+                var filtered = view_1.filterDynamics(this_1.childrenView[index]);
                 for (var _i = 0, filtered_1 = filtered; _i < filtered_1.length; _i++) {
                     var v = filtered_1[_i];
                     v.change(value);
@@ -939,7 +966,7 @@ exports.until = function (options) {
     return new DOMUntilTemplate(options, map_1.mapArray(children, dom_1.domChildToTemplate));
 };
 
-},{"./utils/dom":"TnZD","tempo-core/lib/util/map":"tBUf"}],"kxUV":[function(require,module,exports) {
+},{"tempo-core/lib/view":"OQt2","./utils/dom":"TnZD","tempo-core/lib/util/map":"tBUf"}],"kxUV":[function(require,module,exports) {
 "use strict";
 /*
 Copyright 2019 Google LLC

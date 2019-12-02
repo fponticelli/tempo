@@ -13,8 +13,8 @@ limitations under the License.
 
 import { DOMChild, DOMTemplate } from './template'
 import { DOMContext } from './context'
-import { View, DynamicView } from 'tempo-core/lib/view'
-import { domChildToTemplate, filterDynamics, removeNode } from './utils/dom'
+import { View, DynamicView, filterDynamics } from 'tempo-core/lib/view'
+import { domChildToTemplate, removeNode } from './utils/dom'
 import { mapArray } from 'tempo-core/lib/util/map'
 
 export interface WhenOptions<State> {

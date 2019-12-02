@@ -756,6 +756,34 @@ var $pSX2$var$calculateMinMax = function calculateMinMax(results, tests) {
   }, {});
 };
 
+// ASSET: ../node_modules/tempo-dom/node_modules/tempo-core/lib/view.js
+var $OQt2$exports = {};
+Object.defineProperty($OQt2$exports, "__esModule", {
+  value: true
+});
+
+function $OQt2$var$filterDynamics(children) {
+  return children.filter(function (child) {
+    return child.kind === 'dynamic';
+  });
+}
+
+var $OQt2$export$filterDynamics = $OQt2$var$filterDynamics;
+$OQt2$exports.filterDynamics = $OQt2$export$filterDynamics;
+
+function $OQt2$var$applyChange(state, children) {
+  for (var _i = 0, children_1 = children; _i < children_1.length; _i++) {
+    var view = children_1[_i];
+
+    if (view.kind === 'dynamic') {
+      view.change(state);
+    }
+  }
+}
+
+var $OQt2$export$applyChange = $OQt2$var$applyChange;
+$OQt2$exports.applyChange = $OQt2$export$applyChange; //# sourceMappingURL=view.js.map
+
 // ASSET: ../node_modules/tempo-dom/node_modules/tempo-core/lib/util/map.js
 var $tBUf$exports = {};
 Object.defineProperty($tBUf$exports, "__esModule", {
@@ -1121,15 +1149,6 @@ function $TnZD$var$insertBefore(ref) {
 var $TnZD$export$insertBefore = $TnZD$var$insertBefore;
 $TnZD$exports.insertBefore = $TnZD$export$insertBefore;
 
-function $TnZD$var$filterDynamics(children) {
-  return children.filter(function (child) {
-    return child.kind === 'dynamic';
-  });
-}
-
-var $TnZD$export$filterDynamics = $TnZD$var$filterDynamics;
-$TnZD$exports.filterDynamics = $TnZD$export$filterDynamics;
-
 function $TnZD$var$domChildToTemplate(dom) {
   if (typeof dom === 'string' || typeof dom === 'function' || typeof dom === 'undefined') return $GqEk$export$text(dom);else return dom;
 }
@@ -1300,7 +1319,7 @@ function () {
       value = $bbLX$var$applyAfterRender(this.afterrender, el, ctx, state);
     }
 
-    var dynamicChildren = $tBUf$export$mapArray($TnZD$export$filterDynamics(views), function (child) {
+    var dynamicChildren = $tBUf$export$mapArray($OQt2$export$filterDynamics(views), function (child) {
       return function (state) {
         return child.change(state);
       };
@@ -1877,7 +1896,7 @@ var $Gdta$export$DOMDynamicFragmentView = $Gdta$var$DOMDynamicFragmentView;
 $Gdta$exports.DOMDynamicFragmentView = $Gdta$export$DOMDynamicFragmentView;
 
 var $Gdta$export$fragmentView = function (views) {
-  var dynamics = $TnZD$export$filterDynamics(views);
+  var dynamics = $OQt2$export$filterDynamics(views);
 
   if (dynamics.length > 0) {
     return new $Gdta$var$DOMDynamicFragmentView(views, function (state) {
@@ -1948,7 +1967,7 @@ function () {
     var views = $tBUf$export$mapArray(children, function (c) {
       return c.render(ctx, innerState);
     });
-    var dynamics = $TnZD$export$filterDynamics(views);
+    var dynamics = $OQt2$export$filterDynamics(views);
 
     if (dynamics.length === 0) {
       return new $Gdta$export$DOMStaticFragmentView(views);
@@ -2078,7 +2097,7 @@ function () {
 
       if (index < currentViewLength) {
         // replace existing
-        var filtered = $TnZD$export$filterDynamics(this_1.childrenView[index]);
+        var filtered = $OQt2$export$filterDynamics(this_1.childrenView[index]);
 
         for (var _i = 0, filtered_1 = filtered; _i < filtered_1.length; _i++) {
           var v = filtered_1[_i];
@@ -2215,7 +2234,7 @@ function () {
         this.views = $tBUf$export$mapArray(this.children, function (c) {
           return c.render(_this.ctx, value);
         });
-        this.dynamics = $TnZD$export$filterDynamics(this.views);
+        this.dynamics = $OQt2$export$filterDynamics(this.views);
       } else if (this.dynamics) {
         for (var _i = 0, _a = this.dynamics; _i < _a.length; _i++) {
           var d = _a[_i];
@@ -2986,7 +3005,7 @@ function () {
     var viewChildren = $tBUf$export$mapArray(this.children, function (child) {
       return child.render(newCtx, property.get());
     });
-    var dynamics = $TnZD$export$filterDynamics(viewChildren);
+    var dynamics = $OQt2$export$filterDynamics(viewChildren);
     var view = new $yVFQ$var$DOMComponentView(store, innerDispatch, viewChildren, dynamics, function () {
       property.observable.off(update);
     });
@@ -3029,9 +3048,7 @@ function () {
   }
 
   DOMContext.fromElement = function (element, dispatch) {
-    return new DOMContext(
-    /* istanbul ignore next */
-    element.ownerDocument || window && window.document, function (node) {
+    return new DOMContext(element.ownerDocument || window && window.document, function (node) {
       return element.appendChild(node);
     }, element, dispatch);
   };
@@ -3138,7 +3155,8 @@ var $UPGL$var$Tempo;
   }
 
   Tempo.render = render;
-})($UPGL$var$Tempo = $UPGL$export$Tempo || ($UPGL$export$Tempo = {}, $UPGL$exports.Tempo = $UPGL$export$Tempo));
+})($UPGL$var$Tempo = $UPGL$export$Tempo || ($UPGL$export$Tempo = {}, $UPGL$exports.Tempo = $UPGL$export$Tempo)); //# sourceMappingURL=tempo.js.map
+
 
 // ASSET: test_runner.ts
 var $MWVc$exports = {};

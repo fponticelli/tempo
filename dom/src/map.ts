@@ -12,9 +12,9 @@ limitations under the License.
 */
 
 import { DOMChild, DOMTemplate } from './template'
-import { View } from 'tempo-core/lib/view'
+import { View, filterDynamics } from 'tempo-core/lib/view'
 import { DOMContext } from './context'
-import { domChildToTemplate, filterDynamics } from './utils/dom'
+import { domChildToTemplate } from './utils/dom'
 import { DOMStaticFragmentView, DOMDynamicFragmentView, fragmentView } from './fragment'
 import { mapArray } from 'tempo-core/lib/util/map'
 
