@@ -8,6 +8,7 @@ nav_order: 4
 
 ## Table of contents
 {: .text-delta }
+{:toc}
 
 ### Why no JSX/TSX?
 
