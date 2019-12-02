@@ -7,7 +7,9 @@ nav_order: 4
 # FAQ
 
 ## Table of contents
-{: .text-delta }
+{: .no_toc .text-delta }
+
+1. TOC
 {:toc}
 
 ### Why no JSX/TSX?
