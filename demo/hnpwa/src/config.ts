@@ -11,7 +11,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-const githubPrefix = '/tempo/docs/demo/hnpwa'
+const githubPrefix = '/tempo/demo/hnpwa'
 export const isGithub = location.pathname.startsWith(githubPrefix)
 
 export const getCurrentPath = () => {
