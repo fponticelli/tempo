@@ -1,6 +1,6 @@
 {
-    "name": "Elm Hacker News PWA",
-    "short_name": "Elm HNPWA",
+    "name": "Tempo Hacker News PWA",
+    "short_name": "Tempo HNPWA",
     "start_url": "/",
     "display": "standalone",
     "theme_color": "#27C37F",
