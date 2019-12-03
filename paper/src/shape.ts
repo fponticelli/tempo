@@ -5,6 +5,7 @@ import { keys } from 'tempo-core/lib/util/objects'
 import { Shape, Point, Color } from 'paper'
 import { PaperAttribute } from './value'
 import { UnwrappedDerivedValue } from 'tempo-core/lib/value'
+import { WritableFields, ExcludeFunctionFields, RemoveNullableFromFields } from 'tempo-core/lib/types/objects'
 
 export class ShapeDynamicView<State> implements DynamicView<State> {
   readonly kind = 'dynamic'
@@ -30,9 +31,10 @@ export class ShapeTemplate<State, Action> implements PaperTemplate<State, Action
   ) {}
   render(ctx: PaperContext<Action>, state: State) {
     const shape = this.createShape(state)
-    shape.fillColor = Color.random()
+    shape.fillColor = Color.random() // TODO
+    shape.strokeColor = Color.random() // TODO
+    shape.strokeWidth = 2 // TODO
     ctx.append(shape)
-    console.log(shape, shape.fillColor, shape.position, shape.radius)
     return new ShapeDynamicView(
       shape,
       this.changeShape
@@ -40,47 +42,64 @@ export class ShapeTemplate<State, Action> implements PaperTemplate<State, Action
   }
 }
 
-type SecondArgument<F> = F extends (_: any, arg: infer V) => any ? V : never
+type WritableShape = ExcludeFunctionFields<RemoveNullableFromFields<WritableFields<Shape>>>
 
-const circleSetters = {
-  'radius': <State>(shape: Shape, value: number) => shape.radius = value,
-  'cx': <State>(shape: Shape, value: number) => shape.position!.x = value,
-  'cy': <State>(shape: Shape, value: number) => shape.position!.y = value
+type ShapeOptions<State> = {
+  [k in keyof WritableShape]?: PaperAttribute<State, WritableShape[k]>
 }
 
-export type CircleOptions<State> = {
-  [k in keyof typeof circleSetters]: PaperAttribute<State, SecondArgument<typeof circleSetters[k]>>
-}
-
-export const circle = <State, Action>(options: CircleOptions<State>) => {
+const shape = <State, Action>(
+  makeShape: (state: State) => Shape,
+  options: ShapeOptions<State>
+) => {
   const setters = keys(options).map(k => {
-    const setter = circleSetters[k]
     const attr = options[k]
     if (typeof attr === 'function') {
       const attrf = attr as UnwrappedDerivedValue<State, any>
       return {
         kind: 'dynamic',
-        f: (state: State, shape: Shape) => setter(shape, attrf(state))
+        f: (state: State, shape: Shape) => shape[k] = attrf(state)
       }
     } else {
-      const attr = options[k] as SecondArgument<typeof circleSetters[typeof k]>
       return {
         kind: 'static',
-        f: (state: State, shape: Shape) => setter(shape, attr)
+        f: (state: State, shape: Shape) => shape[k] = attr as any
       }
     }
   })
   const dynamics = setters.filter(setter => setter.kind === 'dynamic').map(setter => setter.f)
+  const make = (state: State) => {
+    const shape = makeShape(state)
+    setters.forEach(setter => setter.f(state, shape))
+    return shape
+  }
   return new ShapeTemplate<State, Action>(
-    (state: State) => {
-      const shape = new Shape.Circle(new Point(0, 0), 0)
-      setters.forEach(setter => setter.f(state, shape))
-      return shape
-    },
+    make,
     dynamics.length > 0 ?
       (state: State, shape: Shape) => {
         dynamics.forEach(dyna => dyna(state, shape))
       } :
       (_1: State, _2: Shape) => {}
+  )
+}
+
+export const circle = <State, Action>(options: ShapeOptions<State>) => {
+  return shape<State, Action>(
+    (state: State) => new Shape.Circle(new Point(0, 0), 0),
+    options
+  )
+}
+
+export const rectangle = <State, Action>(options: ShapeOptions<State>) => {
+  return shape<State, Action>(
+    (state: State) => new Shape.Rectangle(new Point(0, 0), new Point(0, 0)),
+    options
+  )
+}
+
+export const ellipse = <State, Action>(options: ShapeOptions<State>) => {
+  return shape<State, Action>(
+    (state: State) => new Shape.Ellipse(new Point(0, 0)),
+    options
   )
 }

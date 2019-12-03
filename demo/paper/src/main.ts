@@ -15,7 +15,8 @@ import { Tempo } from 'tempo-dom/lib/tempo'
 import { div } from 'tempo-dom/lib/html'
 import { Store } from 'tempo-store/lib/store'
 import { project } from 'tempo-paper/lib/project'
-import { circle } from 'tempo-paper/lib/shape'
+import { circle, ellipse, rectangle } from 'tempo-paper/lib/shape'
+import { Point, Size } from 'paper'
 
 interface State {
 
@@ -41,9 +42,16 @@ const template = div<State, Action>(
         height: 400
       },
       circle({
-        cx: 100,
-        cy: 100,
-        radius: 25
+        position: new Point(100, 100),
+        size: new Size(100, 100)
+      }),
+      rectangle({
+        position: new Point(200, 100),
+        size: new Size(100, 100)
+      }),
+      ellipse({
+        position: new Point(150, 200),
+        size: new Size(200, 100)
       })
     )
   )

@@ -16,7 +16,8 @@
     "tempo-core": "1.0.1",
     "tempo-dom": "0.8.3",
     "tempo-store": "1.0.1",
-    "tempo-paper": "1.0.0"
+    "tempo-paper": "1.0.0",
+    "paper": "0.12.3"
   },
   "devDependencies": {
     "cssnano": "4.1.10",
@@ -24,10 +25,11 @@
     "prettier": "1.19.1",
     "tslint": "5.20.1",
     "typescript": "3.7.2",
-    "babel-types": "6.26.0"
+    "babel-types": "6.26.0",
+    "@types/paper": "0.12.3"
   },
   "scripts": {
-    "compile": "NODE_ENV=production && parcel build src/index.html --public-url . --out-dir ../../docs/demo/paper --experimental-scope-hoisting",
+    "compile": "NODE_ENV=production && parcel build src/index.html --public-url . --out-dir ../../docs/demo/paper --experimental-scope-hoisting --no-minify",
     "clean": "rm -rf dist/* && rm -rf ../../docs/demo/paper/*",
     "build": "npm run clean && npm run compile",
     "watch": "parcel src/index.html",

@@ -13,6 +13,7 @@ limitations under the License.
 
 import { IndexType } from './index_type'
 import { Tail } from './tuples'
+import { AnyFunction } from './functions'
 
 export type ObjectWithField<F extends IndexType, V> = { [_ in F]: V }
 
@@ -65,3 +66,42 @@ export type TypeAtPath<Path extends IndexType[], O> = {
 // type T1 = TypeAtPath<['a'], Nested>
 // type T2 = TypeAtPath<['a', 'b'], Nested>
 // type T3 = TypeAtPath<['a', 'b', 0], Nested>
+
+export type IfEquals<X, Y, A = X, B = never> =
+  (<T>() => T extends X ? 1 : 2) extends (<T>() => T extends Y ? 1 : 2) ? A : B
+
+export type WritableKeys<T> = {
+  [K in keyof T]-?: IfEquals<{ [Q in K]: T[K] }, { -readonly [Q in K]: T[K] }, K>
+}[keyof T]
+
+export type ReadonlyKeys<T> = {
+  [P in keyof T]-?: IfEquals<{ [Q in P]: T[P] }, { -readonly [Q in P]: T[P] }, never, P>
+}[keyof T]
+
+export type KeepKeysByType<T, Condition> = {
+  [K in keyof T]: T[K] extends Condition ? K : never
+}[keyof T]
+
+export type ExcludeKeysByType<T, Condition> = {
+  [K in keyof T]: T[K] extends Condition ? never : K
+}[keyof T]
+
+export type KeepFields<T, F extends IndexType> = {
+  [K in F]: K extends keyof T ? T[K] : never
+}
+
+export type RemoveNullableFromFields<T> = {
+  [K in keyof T]: Exclude<T[K], null>
+}
+
+// interface A {
+//   a: string | null | undefined
+//   b: number | null
+//   c: boolean
+// }
+
+// type X = RemoveNullableFromFields<A>
+
+export type WritableFields<T> = KeepFields<T, WritableKeys<T>>
+export type ReadonlyFields<T> = KeepFields<T, ReadonlyKeys<T>>
+export type ExcludeFunctionFields<T> = KeepFields<T, ExcludeKeysByType<T, AnyFunction>>
