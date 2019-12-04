@@ -19119,7 +19119,22 @@ var $e5bF$export$keys = function (object) {
   return Object.keys(object);
 };
 
-$e5bF$exports.keys = $e5bF$export$keys; //# sourceMappingURL=objects.js.map
+$e5bF$exports.keys = $e5bF$export$keys;
+
+var $e5bF$export$removeFields = function (ob) {
+  var fields = [];
+
+  for (var _i = 1; _i < arguments.length; _i++) {
+    fields[_i - 1] = arguments[_i];
+  }
+
+  return $e5bF$export$keys(ob).reduce(function (acc, key) {
+    if (fields.indexOf(key) < 0) acc[key] = ob[key];
+    return acc;
+  }, {});
+};
+
+$e5bF$exports.removeFields = $e5bF$export$removeFields; //# sourceMappingURL=objects.js.map
 
 // ASSET: ../node_modules/tempo-paper/lib/shape.js
 var $q9iH$exports = {};
@@ -19130,19 +19145,11 @@ Object.defineProperty($q9iH$exports, "__esModule", {
 var $q9iH$var$ShapeDynamicView =
 /** @class */
 function () {
-  function ShapeDynamicView(shape, changeShape) {
-    this.shape = shape;
-    this.changeShape = changeShape;
+  function ShapeDynamicView(change, destroy) {
+    this.change = change;
+    this.destroy = destroy;
     this.kind = 'dynamic';
   }
-
-  ShapeDynamicView.prototype.change = function (state) {
-    this.changeShape(state, this.shape);
-  };
-
-  ShapeDynamicView.prototype.destroy = function () {
-    this.shape.remove();
-  };
 
   return ShapeDynamicView;
 }();
@@ -19153,13 +19160,17 @@ $q9iH$exports.ShapeDynamicView = $q9iH$export$ShapeDynamicView;
 var $q9iH$var$ShapeTemplate =
 /** @class */
 function () {
-  function ShapeTemplate(createShape, changeShape) {
+  function ShapeTemplate(createShape, changeShape, destroy) {
     this.createShape = createShape;
     this.changeShape = changeShape;
+    this.destroy = destroy;
   }
 
   ShapeTemplate.prototype.render = function (ctx, state) {
-    var shape = this.createShape(state);
+    var wrapper = {
+      value: undefined
+    };
+    var shape = this.createShape(wrapper, ctx)(state);
     shape.fillColor = $QMc8$exports.Color.random(); // TODO
 
     shape.strokeColor = $QMc8$exports.Color.random(); // TODO
@@ -19167,7 +19178,7 @@ function () {
     shape.strokeWidth = 2; // TODO
 
     ctx.append(shape);
-    return new $q9iH$var$ShapeDynamicView(shape, this.changeShape);
+    return new $q9iH$var$ShapeDynamicView(this.changeShape(wrapper, ctx, shape), this.destroy(wrapper, ctx, shape));
   };
 
   return ShapeTemplate;
@@ -19177,8 +19188,14 @@ var $q9iH$export$ShapeTemplate = $q9iH$var$ShapeTemplate;
 $q9iH$exports.ShapeTemplate = $q9iH$export$ShapeTemplate;
 
 var $q9iH$var$shape = function (makeShape, options) {
-  var setters = $e5bF$export$keys(options).map(function (k) {
-    var attr = options[k];
+  var afterchange = options.afterchange,
+      afterrender = options.afterrender,
+      beforechange = options.beforechange,
+      beforedestroy = options.beforedestroy;
+  console.log(beforedestroy);
+  var attributes = $e5bF$export$removeFields(options, 'afterchange', 'afterrender', 'beforechange', 'beforedestroy');
+  var setters = $e5bF$export$keys(attributes).map(function (k) {
+    var attr = attributes[k];
 
     if (typeof attr === 'function') {
       var attrf_1 = attr;
@@ -19191,7 +19208,7 @@ var $q9iH$var$shape = function (makeShape, options) {
     } else {
       return {
         kind: 'static',
-        f: function (state, shape) {
+        f: function (_, shape) {
           return shape[k] = attr;
         }
       };
@@ -19203,23 +19220,50 @@ var $q9iH$var$shape = function (makeShape, options) {
     return setter.f;
   });
 
-  var make = function (state) {
-    var shape = makeShape(state);
-    setters.forEach(function (setter) {
-      return setter.f(state, shape);
-    });
-    return shape;
+  var make = function (wrapper, ctx) {
+    return function (state) {
+      var shape = makeShape(state);
+      setters.forEach(function (setter) {
+        return setter.f(state, shape);
+      });
+
+      if (afterrender) {
+        wrapper.value = afterrender(state, shape, ctx);
+      }
+
+      return shape;
+    };
   };
 
-  return new $q9iH$var$ShapeTemplate(make, dynamics.length > 0 ? function (state, shape) {
-    dynamics.forEach(function (dyna) {
-      return dyna(state, shape);
-    });
-  } : function (_1, _2) {});
+  return new $q9iH$var$ShapeTemplate(make, dynamics.length > 0 ? function (wrapper, ctx, shape) {
+    return function (state) {
+      if (beforechange) {
+        wrapper.value = beforechange(state, shape, ctx, wrapper.value);
+      }
+
+      dynamics.forEach(function (dyna) {
+        return dyna(state, shape);
+      });
+
+      if (afterchange) {
+        wrapper.value = afterchange(state, shape, ctx, wrapper.value);
+      }
+    };
+  } : function (wrapper, ctx, shape) {
+    return function (state) {};
+  }, function (wrapper, ctx, shape) {
+    return function () {
+      if (beforedestroy) {
+        beforedestroy(shape, ctx, wrapper.value);
+      }
+
+      shape.remove();
+    };
+  });
 };
 
 var $q9iH$export$circle = function (options) {
-  return $q9iH$var$shape(function (state) {
+  return $q9iH$var$shape(function (_) {
     return new $QMc8$exports.Shape.Circle(new $QMc8$exports.Point(0, 0), 0);
   }, options);
 };
@@ -19227,7 +19271,7 @@ var $q9iH$export$circle = function (options) {
 $q9iH$exports.circle = $q9iH$export$circle;
 
 var $q9iH$export$rectangle = function (options) {
-  return $q9iH$var$shape(function (state) {
+  return $q9iH$var$shape(function (_) {
     return new $QMc8$exports.Shape.Rectangle(new $QMc8$exports.Point(0, 0), new $QMc8$exports.Point(0, 0));
   }, options);
 };
@@ -19235,7 +19279,7 @@ var $q9iH$export$rectangle = function (options) {
 $q9iH$exports.rectangle = $q9iH$export$rectangle;
 
 var $q9iH$export$ellipse = function (options) {
-  return $q9iH$var$shape(function (state) {
+  return $q9iH$var$shape(function (_) {
     return new $QMc8$exports.Shape.Ellipse(new $QMc8$exports.Point(0, 0));
   }, options);
 };

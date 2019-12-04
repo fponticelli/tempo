@@ -86,10 +86,6 @@ export type ExcludeKeysByType<T, Condition> = {
   [K in keyof T]: T[K] extends Condition ? never : K
 }[keyof T]
 
-export type KeepFields<T, F extends IndexType> = {
-  [K in F]: K extends keyof T ? T[K] : never
-}
-
 export type RemoveNullableFromFields<T> = {
   [K in keyof T]: Exclude<T[K], null>
 }
@@ -102,6 +98,6 @@ export type RemoveNullableFromFields<T> = {
 
 // type X = RemoveNullableFromFields<A>
 
-export type WritableFields<T> = KeepFields<T, WritableKeys<T>>
-export type ReadonlyFields<T> = KeepFields<T, ReadonlyKeys<T>>
-export type ExcludeFunctionFields<T> = KeepFields<T, ExcludeKeysByType<T, AnyFunction>>
+export type WritableFields<T> = Pick<T, WritableKeys<T>>
+export type ReadonlyFields<T> = Pick<T, ReadonlyKeys<T>>
+export type ExcludeFunctionFields<T> = Pick<T, ExcludeKeysByType<T, AnyFunction>>
