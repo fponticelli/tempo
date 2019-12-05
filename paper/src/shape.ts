@@ -37,6 +37,6 @@ export const rectangle = <State, Action, T = unknown>(options: ShapeOptions<Stat
 
 export const ellipse = <State, Action, T = unknown>(options: ShapeOptions<State, Action, T>) =>
   createItem<State, Action, T, Shape, ShapeOptions<State, Action, T>>(
-    (_: State) => new Shape.Rectangle(new Point(0, 0), new Point(0, 0)),
+    (_: State) => new Shape.Ellipse(new Point(0, 0), new Size(0, 0)),
     options
   )
