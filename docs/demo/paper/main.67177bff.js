@@ -19009,13 +19009,29 @@ Object.defineProperty($rpUf$exports, "__esModule", {
 var $rpUf$var$PaperContext =
 /** @class */
 function () {
-  function PaperContext(project, append // readonly append: (node: Node) => void,
+  function PaperContext(project, append, // readonly append: (node: Node) => void,
   // readonly parent: Element,
-  // readonly dispatch: (action: Action) => void
-  ) {
+  dispatch) {
     this.project = project;
     this.append = append;
-  }
+    this.dispatch = dispatch;
+  } // mapAction<OtherAction>(f: (action: OtherAction) => Action) {
+  //   return new PaperContext<OtherAction>(this.doc, this.append, this.parent, (action: OtherAction) =>
+  //     this.dispatch(f(action))
+  //   )
+  // }
+  // conditionalMapAction<OtherAction>(f: (action: OtherAction) => Action | undefined) {
+  //     const newAction = f(action)
+  //     if (typeof newAction !== 'undefined') {
+  //       this.dispatch(newAction)
+  //     }
+  //   })
+  // }
+
+
+  PaperContext.prototype.withAppend = function (append) {
+    return new PaperContext(this.project, append, this.dispatch);
+  };
 
   return PaperContext;
 }();
@@ -19072,8 +19088,10 @@ var $ST02$export$project = function (options) {
       var project = new $QMc8$exports.Project(el);
       var rootLayer = new $QMc8$exports.Layer();
       project.addLayer(rootLayer);
-      var context = new $rpUf$export$PaperContext(project, function (shape) {
-        return rootLayer.addChild(shape);
+      var context = new $rpUf$export$PaperContext(project, function (item) {
+        return rootLayer.addChild(item);
+      }, function (action) {
+        return ctx.dispatch(action);
       });
       var views = children.map(function (child) {
         return child.render(context, state);
@@ -19134,82 +19152,99 @@ var $e5bF$export$removeFields = function (ob) {
   }, {});
 };
 
-$e5bF$exports.removeFields = $e5bF$export$removeFields; //# sourceMappingURL=objects.js.map
+$e5bF$exports.removeFields = $e5bF$export$removeFields;
 
-// ASSET: ../node_modules/tempo-paper/lib/shape.js
-var $q9iH$exports = {};
-Object.defineProperty($q9iH$exports, "__esModule", {
+var $e5bF$export$merge = function (a, b) {
+  return Object.assign({}, a, b);
+};
+
+$e5bF$exports.merge = $e5bF$export$merge; //# sourceMappingURL=objects.js.map
+
+// ASSET: ../node_modules/tempo-paper/lib/item.js
+var $ftoX$exports = {};
+Object.defineProperty($ftoX$exports, "__esModule", {
   value: true
 });
 
-var $q9iH$var$ShapeDynamicView =
+var $ftoX$var$ItemDynamicView =
 /** @class */
 function () {
-  function ShapeDynamicView(change, destroy) {
+  function ItemDynamicView(change, destroy) {
     this.change = change;
     this.destroy = destroy;
     this.kind = 'dynamic';
   }
 
-  return ShapeDynamicView;
+  return ItemDynamicView;
 }();
 
-var $q9iH$export$ShapeDynamicView = $q9iH$var$ShapeDynamicView;
-$q9iH$exports.ShapeDynamicView = $q9iH$export$ShapeDynamicView;
+var $ftoX$export$ItemDynamicView = $ftoX$var$ItemDynamicView;
+$ftoX$exports.ItemDynamicView = $ftoX$export$ItemDynamicView;
 
-var $q9iH$var$ShapeTemplate =
+var $ftoX$var$ItemTemplate =
 /** @class */
 function () {
-  function ShapeTemplate(createShape, changeShape, destroy) {
-    this.createShape = createShape;
-    this.changeShape = changeShape;
+  function ItemTemplate(createItem, changeItem, destroy) {
+    this.createItem = createItem;
+    this.changeItem = changeItem;
     this.destroy = destroy;
   }
 
-  ShapeTemplate.prototype.render = function (ctx, state) {
+  ItemTemplate.prototype.render = function (ctx, state) {
     var wrapper = {
       value: undefined
     };
-    var shape = this.createShape(wrapper, ctx)(state);
-    shape.fillColor = $QMc8$exports.Color.random(); // TODO
 
-    shape.strokeColor = $QMc8$exports.Color.random(); // TODO
+    var _a = this.createItem(wrapper, ctx)(state),
+        item = _a.item,
+        views = _a.views;
 
-    shape.strokeWidth = 2; // TODO
-
-    ctx.append(shape);
-    return new $q9iH$var$ShapeDynamicView(this.changeShape(wrapper, ctx, shape), this.destroy(wrapper, ctx, shape));
+    ctx.append(item);
+    return new $ftoX$var$ItemDynamicView(this.changeItem(wrapper, ctx, item, views), this.destroy(wrapper, ctx, item, views));
   };
 
-  return ShapeTemplate;
+  return ItemTemplate;
 }();
 
-var $q9iH$export$ShapeTemplate = $q9iH$var$ShapeTemplate;
-$q9iH$exports.ShapeTemplate = $q9iH$export$ShapeTemplate;
+var $ftoX$export$ItemTemplate = $ftoX$var$ItemTemplate;
+$ftoX$exports.ItemTemplate = $ftoX$export$ItemTemplate;
 
-var $q9iH$var$shape = function (makeShape, options) {
+var $ftoX$export$createItem = function (makeItem, options, children) {
   var afterchange = options.afterchange,
       afterrender = options.afterrender,
       beforechange = options.beforechange,
       beforedestroy = options.beforedestroy;
-  console.log(beforedestroy);
   var attributes = $e5bF$export$removeFields(options, 'afterchange', 'afterrender', 'beforechange', 'beforedestroy');
-  var setters = $e5bF$export$keys(attributes).map(function (k) {
+  var setters = Object.keys(attributes).map(function (k) {
     var attr = attributes[k];
 
-    if (typeof attr === 'function') {
+    if (k.substring(0, 2) === 'on') {
       var attrf_1 = attr;
       return {
         kind: 'dynamic',
-        f: function (state, shape) {
-          return shape[k] = attrf_1(state);
+        f: function (state, item, ctx) {
+          item[k] = function (e) {
+            var action = attrf_1(state, e, item);
+
+            if (typeof action !== 'undefined') {
+              ctx.dispatch(action);
+            }
+          };
+        }
+      };
+    } else if (typeof attr === 'function') {
+      var attrf_2 = attr;
+      return {
+        kind: 'dynamic',
+        f: function (state, item) {
+          return item[k] = attrf_2(state);
         }
       };
     } else {
       return {
         kind: 'static',
-        f: function (_, shape) {
-          return shape[k] = attr;
+        f: function (_, item) {
+          return item[k] = attr;
         }
       };
     }
@@ -19222,48 +19257,79 @@ var $q9iH$var$shape = function (makeShape, options) {
 
   var make = function (wrapper, ctx) {
     return function (state) {
-      var shape = makeShape(state);
+      var _a;
+
+      var item = makeItem(state);
       setters.forEach(function (setter) {
-        return setter.f(state, shape);
+        return setter.f(state, item, ctx);
+      });
+      var newCtx = ctx.withAppend(function (child) {
+        return item.addChild(child);
+      });
+      var views = (_a = children) === null || _a === void 0 ? void 0 : _a.map(function (child) {
+        return child.render(newCtx, state);
       });
 
       if (afterrender) {
-        wrapper.value = afterrender(state, shape, ctx);
+        wrapper.value = afterrender(state, item, ctx);
       }
 
-      return shape;
+      return {
+        item: item,
+        views: views
+      };
     };
   };
 
-  return new $q9iH$var$ShapeTemplate(make, dynamics.length > 0 ? function (wrapper, ctx, shape) {
+  return new $ftoX$var$ItemTemplate(make, dynamics.length > 0 ? function (wrapper, ctx, item, views) {
     return function (state) {
       if (beforechange) {
-        wrapper.value = beforechange(state, shape, ctx, wrapper.value);
+        wrapper.value = beforechange(state, item, ctx, wrapper.value);
+      }
+
+      if (views) {
+        $nrxN$export$filterDynamics(views).forEach(function (view) {
+          return view.change(state);
+        });
       }
 
       dynamics.forEach(function (dyna) {
-        return dyna(state, shape);
+        return dyna(state, item, ctx);
       });
 
       if (afterchange) {
-        wrapper.value = afterchange(state, shape, ctx, wrapper.value);
+        wrapper.value = afterchange(state, item, ctx, wrapper.value);
       }
     };
-  } : function (wrapper, ctx, shape) {
-    return function (state) {};
-  }, function (wrapper, ctx, shape) {
+  } : function () {
+    return function () {};
+  }, function (wrapper, ctx, item, views) {
     return function () {
       if (beforedestroy) {
-        beforedestroy(shape, ctx, wrapper.value);
+        beforedestroy(item, ctx, wrapper.value);
       }
 
-      shape.remove();
+      item.remove();
+
+      if (views) {
+        views.forEach(function (view) {
+          return view.destroy();
+        });
+      }
     };
   });
 };
 
+$ftoX$exports.createItem = $ftoX$export$createItem; //# sourceMappingURL=item.js.map
+
+// ASSET: ../node_modules/tempo-paper/lib/shape.js
+var $q9iH$exports = {};
+Object.defineProperty($q9iH$exports, "__esModule", {
+  value: true
+});
+
 var $q9iH$export$circle = function (options) {
-  return $q9iH$var$shape(function (_) {
+  return $ftoX$export$createItem(function (_) {
     return new $QMc8$exports.Shape.Circle(new $QMc8$exports.Point(0, 0), 0);
   }, options);
 };
@@ -19271,7 +19337,7 @@ var $q9iH$export$circle = function (options) {
 $q9iH$exports.circle = $q9iH$export$circle;
 
 var $q9iH$export$rectangle = function (options) {
-  return $q9iH$var$shape(function (_) {
+  return $ftoX$export$createItem(function (_) {
     return new $QMc8$exports.Shape.Rectangle(new $QMc8$exports.Point(0, 0), new $QMc8$exports.Point(0, 0));
   }, options);
 };
@@ -19279,12 +19345,26 @@ var $q9iH$export$rectangle = function (options) {
 $q9iH$exports.rectangle = $q9iH$export$rectangle;
 
 var $q9iH$export$ellipse = function (options) {
-  return $q9iH$var$shape(function (_) {
-    return new $QMc8$exports.Shape.Ellipse(new $QMc8$exports.Point(0, 0));
+  return $ftoX$export$createItem(function (_) {
+    return new $QMc8$exports.Shape.Rectangle(new $QMc8$exports.Point(0, 0), new $QMc8$exports.Point(0, 0));
   }, options);
 };
 
 $q9iH$exports.ellipse = $q9iH$export$ellipse; //# sourceMappingURL=shape.js.map
+
+// ASSET: ../node_modules/tempo-paper/lib/raster.js
+var $rEdp$exports = {};
+Object.defineProperty($rEdp$exports, "__esModule", {
+  value: true
+});
+
+var $rEdp$export$raster = function (options) {
+  return $ftoX$export$createItem(function (_) {
+    return new $QMc8$exports.Raster(new $QMc8$exports.Size(0, 0));
+  }, options);
+};
+
+$rEdp$exports.raster = $rEdp$export$raster; //# sourceMappingURL=raster.js.map
 
 // ASSET: ../node_modules/paper/dist/paper-full.js
 var $GYcQ$exports = function () {
@@ -35745,13 +35825,20 @@ var $ZCfc$var$template = $zQMt$export$div({
   height: 400
 }, $q9iH$export$circle({
   position: new $GYcQ$exports.Point(100, 100),
-  size: new $GYcQ$exports.Size(100, 100)
+  size: new $GYcQ$exports.Size(100, 100),
+  fillColor: new $GYcQ$exports.Color(0, 0.5, 1)
 }), $q9iH$export$rectangle({
   position: new $GYcQ$exports.Point(200, 100),
-  size: new $GYcQ$exports.Size(100, 100)
+  size: new $GYcQ$exports.Size(100, 100),
+  strokeColor: new $GYcQ$exports.Color(1, 0.5, 0),
+  strokeWidth: 2
 }), $q9iH$export$ellipse({
   position: new $GYcQ$exports.Point(150, 200),
-  size: new $GYcQ$exports.Size(200, 100)
+  size: new $GYcQ$exports.Size(200, 100),
+  fillColor: new $GYcQ$exports.Color(0.2, 0.1, 0.2)
+}), $rEdp$export$raster({
+  position: new $GYcQ$exports.Point(200, 200),
+  source: 'https://helpx.adobe.com/content/dam/help/en/stock/how-to/visual-reverse-image-search/jcr_content/main-pars/image/visual-reverse-image-search-v2_intro.jpg'
 }))));
 $UPGL$export$Tempo.render({
   store: $ZCfc$var$store,

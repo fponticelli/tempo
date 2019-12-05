@@ -1,4 +1,5 @@
 import { TupleToUnion } from '../types/tuples'
+import { Merge } from '../types'
 
 export const keys = <T>(object: T): (keyof T)[] => {
   return Object.keys(object) as any as (keyof T)[]
@@ -14,3 +15,6 @@ export const removeFields = <T, F extends (keyof T)[]>(ob: T, ...fields: F): Omi
     {} as any
   ) as Omit<T, TupleToUnion<F>>
 }
+
+export const merge = <A extends {}, B extends {}>(a: A, b: B): Merge<A, B> =>
+  Object.assign({}, a, b) as Merge<A, B>

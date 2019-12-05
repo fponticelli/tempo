@@ -101,3 +101,28 @@ export type RemoveNullableFromFields<T> = {
 export type WritableFields<T> = Pick<T, WritableKeys<T>>
 export type ReadonlyFields<T> = Pick<T, ReadonlyKeys<T>>
 export type ExcludeFunctionFields<T> = Pick<T, ExcludeKeysByType<T, AnyFunction>>
+
+// TODO optional fields are converted to mandatory ones
+export type Merge<A, B> = {
+  [K in (keyof A | keyof B)]: K extends keyof B ? B[K] : K extends keyof A ? A[K] : never
+}
+
+export type MakeOptional<T> = {
+  [K in keyof T]?: T[K]
+}
+
+// interface A {
+//   a: string
+//   b: number
+// }
+
+// interface B {
+//   b: boolean
+//   c: string
+// }
+
+// interface C {
+//   d: boolean
+// }
+
+// type ABC = Merge<Merge<A, B>, C>

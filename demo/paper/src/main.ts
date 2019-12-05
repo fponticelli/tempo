@@ -16,7 +16,8 @@ import { div } from 'tempo-dom/lib/html'
 import { Store } from 'tempo-store/lib/store'
 import { project } from 'tempo-paper/lib/project'
 import { circle, ellipse, rectangle } from 'tempo-paper/lib/shape'
-import { Point, Size } from 'paper'
+import { raster } from 'tempo-paper/lib/raster'
+import { Point, Size, Color } from 'paper'
 
 interface State {
 
@@ -38,20 +39,30 @@ const template = div<State, Action>(
     {},
     project(
       {
-        width: 400,
-        height: 400
+        width: 800,
+        height: 800
       },
       circle({
         position: new Point(100, 100),
-        size: new Size(100, 100)
+        size: new Size(100, 100),
+        fillColor: new Color(0, 0.5, 1)
       }),
       rectangle({
         position: new Point(200, 100),
-        size: new Size(100, 100)
+        size: new Size(100, 100),
+        fillColor: new Color('white'),
+        strokeColor: new Color(1, 0.5, 0),
+        strokeWidth: 2
       }),
       ellipse({
         position: new Point(150, 200),
-        size: new Size(200, 100)
+        size: new Size(200, 100),
+        fillColor: new Color(0.2, 0.1, 0.2)
+      }),
+      raster({
+        position: new Point(200, 200),
+        size: new Size(30, 30),
+        source: 'https://helpx.adobe.com/content/dam/help/en/stock/how-to/visual-reverse-image-search/jcr_content/main-pars/image/visual-reverse-image-search-v2_intro.jpg'
       })
     )
   )

@@ -14,25 +14,25 @@ limitations under the License.
 /* istanbul ignore next */
 import { UnwrappedValue, UnwrappedDerivedValue } from 'tempo-core/lib/value'
 // import { PaperContext } from './context'
-import { Item } from 'paper'
+// import { Item } from 'paper'
 
 export type PaperAttribute<State, Value> = UnwrappedValue<State, Value | undefined> | undefined
 // export type PaperTextValue<S> = PaperAttribute<S, string>
-// export type PaperEventHandler<S, Action, Ev extends Event = Event, El extends Element = Element> =
-//   (state: S, event: Ev, element: El) => Action | undefined
+export type PaperEventHandler<State, Action, Ev, El> =
+  (state: State, event: Ev, element: El) => Action | undefined
 // export type PaperStyleAttribute<State, Value> = UnwrappedValue<State, Value>
 
 // export type AttributeValue = string | number | boolean | string[]
 
-export interface PaperAttributes<State, Action, El extends Item, T> {
-  // attrs?: Record<string, PaperAttribute<State, AttributeValue>>
-  // events?: Record<string, PaperEventHandler<State, Action, any, El>>
-  // styles?: Record<string, PaperStyleAttribute<State, string>>
-  // afterrender?:  (state: State, el: El, ctx: PaperContext<Action>) => T | undefined
-  // beforechange?: (state: State, el: El, ctx: PaperContext<Action>, value: T | undefined) => T | undefined
-  // afterchange?:  (state: State, el: El, ctx: PaperContext<Action>, value: T | undefined) => T | undefined
-  // beforedestroy?: ((el: El, ctx: PaperContext<Action>, value: T | undefined) => void)
-}
+// export interface PaperAttributes<State, Action, El extends Item, T> {
+//   // attrs?: Record<string, PaperAttribute<State, AttributeValue>>
+//   // events?: Record<string, PaperEventHandler<State, Action, any, El>>
+//   // styles?: Record<string, PaperStyleAttribute<State, string>>
+//   // afterrender?:  (state: State, el: El, ctx: PaperContext<Action>) => T | undefined
+//   // beforechange?: (state: State, el: El, ctx: PaperContext<Action>, value: T | undefined) => T | undefined
+//   // afterchange?:  (state: State, el: El, ctx: PaperContext<Action>, value: T | undefined) => T | undefined
+//   // beforedestroy?: ((el: El, ctx: PaperContext<Action>, value: T | undefined) => void)
+// }
 
 // export const mapAttribute = <State, A, B>(attr: PaperAttribute<State, A>, map: (a: A) => B): PaperAttribute<State, B> => {
 //   if (typeof attr === 'undefined') {
