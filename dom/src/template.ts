@@ -15,6 +15,6 @@ import { Template } from 'tempo-core/lib/template'
 import { DOMContext } from './context'
 import { DOMTextValue } from './value'
 
-export interface DOMTemplate<State, Action> extends Template<State, DOMContext<Action>> {}
+export interface DOMTemplate<State, Query, Action> extends Template<State, Query, DOMContext<Action>> {}
 
-export type DOMChild<State, Action> = DOMTemplate<State, Action> | DOMTextValue<State>
+export type DOMChild<State, Query, Action> = DOMTemplate<State, Query, Action> | DOMTextValue<State>

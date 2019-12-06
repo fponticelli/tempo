@@ -38,11 +38,11 @@ export function insertBefore(ref: Node) {
   }
 }
 
-export function filterDynamics<State>(children: View<State>[]) {
-  return children.filter(child => child.kind === 'dynamic') as DynamicView<State>[]
+export function filterDynamics<State, Query>(children: View<State, Query>[]) {
+  return children.filter(child => child.kind === 'dynamic') as DynamicView<State, Query>[]
 }
 
-export function domChildToTemplate<State, Action>(dom: DOMChild<State, Action>): DOMTemplate<State, Action> {
+export function domChildToTemplate<State, Query, Action>(dom: DOMChild<State, Query, Action>): DOMTemplate<State, Query, Action> {
   if (typeof dom === 'string' || typeof dom === 'function' || typeof dom === 'undefined') return text(dom)
   else return dom
 }

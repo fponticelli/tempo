@@ -327,9 +327,10 @@ var __extends = (this && this.__extends) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 var dom_1 = require("./utils/dom");
 var DOMBaseNodeView = /** @class */ (function () {
-    function DOMBaseNodeView(node, children, beforeDestroy) {
+    function DOMBaseNodeView(node, children, request, beforeDestroy) {
         this.node = node;
         this.children = children;
+        this.request = request;
         this.beforeDestroy = beforeDestroy;
     }
     DOMBaseNodeView.prototype.destroy = function () {
@@ -356,11 +357,12 @@ var DOMStaticNodeView = /** @class */ (function (_super) {
 exports.DOMStaticNodeView = DOMStaticNodeView;
 var DOMDynamicNodeView = /** @class */ (function (_super) {
     __extends(DOMDynamicNodeView, _super);
-    function DOMDynamicNodeView(node, children, change, beforeDestroy) {
-        var _this = _super.call(this, node, children, beforeDestroy) || this;
+    function DOMDynamicNodeView(node, children, change, request, beforeDestroy) {
+        var _this = _super.call(this, node, children, request, beforeDestroy) || this;
         _this.node = node;
         _this.children = children;
         _this.change = change;
+        _this.request = request;
         _this.beforeDestroy = beforeDestroy;
         _this.kind = 'dynamic';
         return _this;
@@ -387,7 +389,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var node_view_1 = require("./node_view");
 var renderLiteral = function (ctx, value) {
     var node = ctx.doc.createTextNode(value || '');
-    var view = new node_view_1.DOMStaticNodeView(node, []);
+    var view = new node_view_1.DOMStaticNodeView(node, [], function () { });
     ctx.append(node);
     return view;
 };
@@ -402,7 +404,7 @@ var renderFunction = function (ctx, state, map) {
                 oldContent = newContent;
         }
     };
-    var view = new node_view_1.DOMDynamicNodeView(node, [], f);
+    var view = new node_view_1.DOMDynamicNodeView(node, [], f, function () { });
     ctx.append(node);
     return view;
 };
@@ -421,7 +423,9 @@ var DOMTextTemplate = /** @class */ (function () {
     return DOMTextTemplate;
 }());
 exports.DOMTextTemplate = DOMTextTemplate;
-exports.text = function (content) { return new DOMTextTemplate(content); };
+exports.text = function (content) {
+    return new DOMTextTemplate(content);
+};
 
 },{"./node_view":"wNw6"}],"TnZD":[function(require,module,exports) {
 "use strict";
@@ -569,7 +573,7 @@ var applyAfterRender = function (attr, el, ctx, state) {
     }
 };
 var DOMElement = /** @class */ (function () {
-    function DOMElement(createElement, attrs, events, styles, afterrender, beforechange, afterchange, beforedestroy, children) {
+    function DOMElement(createElement, attrs, events, styles, afterrender, beforechange, afterchange, beforedestroy, respond, children) {
         this.createElement = createElement;
         this.attrs = attrs;
         this.events = events;
@@ -578,6 +582,7 @@ var DOMElement = /** @class */ (function () {
         this.beforechange = beforechange;
         this.afterchange = afterchange;
         this.beforedestroy = beforedestroy;
+        this.respond = respond;
         this.children = children;
     }
     DOMElement.prototype.render = function (ctx, state) {
@@ -622,16 +627,19 @@ var DOMElement = /** @class */ (function () {
             allDynamics.push(update);
         }
         var beforedestroyf = this.beforedestroy && (function () { return _this.beforedestroy(el, ctx, value); });
+        var request = this.respond ?
+            function (query) { return _this.respond(query, el, ctx); } :
+            function () { };
         if (allDynamics.length > 0) {
             return new node_view_1.DOMDynamicNodeView(el, views, function (state) {
                 for (var _i = 0, allDynamics_2 = allDynamics; _i < allDynamics_2.length; _i++) {
                     var f = allDynamics_2[_i];
                     f(state);
                 }
-            }, beforedestroyf);
+            }, request, beforedestroyf);
         }
         else {
-            return new node_view_1.DOMStaticNodeView(el, views, beforedestroyf);
+            return new node_view_1.DOMStaticNodeView(el, views, request, beforedestroyf);
         }
     };
     return DOMElement;
@@ -668,14 +676,14 @@ exports.el = function (name, attributes) {
     for (var _i = 2; _i < arguments.length; _i++) {
         children[_i - 2] = arguments[_i];
     }
-    return new DOMElement(makeCreateElement(name), extractAttrs(attributes.attrs), extractEvents(attributes.events), extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, map_1.mapArray(children, dom_1.domChildToTemplate));
+    return new DOMElement(makeCreateElement(name), extractAttrs(attributes.attrs), extractEvents(attributes.events), extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, attributes.respond, map_1.mapArray(children, dom_1.domChildToTemplate));
 };
 exports.el2 = function (name) { return function (attributes) {
     var children = [];
     for (var _i = 1; _i < arguments.length; _i++) {
         children[_i - 1] = arguments[_i];
     }
-    return new DOMElement(makeCreateElement(name), extractAttrs(attributes.attrs), extractEvents(attributes.events), extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, map_1.mapArray(children, dom_1.domChildToTemplate));
+    return new DOMElement(makeCreateElement(name), extractAttrs(attributes.attrs), extractEvents(attributes.events), extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, attributes.respond, map_1.mapArray(children, dom_1.domChildToTemplate));
 }; };
 exports.defaultNamespaces = {
     'svg': 'http://www.w3.org/2000/svg'
@@ -689,14 +697,14 @@ exports.elNS = function (ns, name, attributes) {
         children[_i - 3] = arguments[_i];
     }
     var namespace = exports.defaultNamespaces[ns] || ns;
-    return new DOMElement(makeCreateElementNS(namespace, name), extractAttrs(attributes.attrs), extractEvents(attributes.events), extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, map_1.mapArray(children, dom_1.domChildToTemplate));
+    return new DOMElement(makeCreateElementNS(namespace, name), extractAttrs(attributes.attrs), extractEvents(attributes.events), extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, attributes.respond, map_1.mapArray(children, dom_1.domChildToTemplate));
 };
 exports.elNS2 = function (namespace, name) { return function (attributes) {
     var children = [];
     for (var _i = 1; _i < arguments.length; _i++) {
         children[_i - 1] = arguments[_i];
     }
-    return new DOMElement(makeCreateElementNS(namespace, name), extractAttrs(attributes.attrs), extractEvents(attributes.events), extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, map_1.mapArray(children, dom_1.domChildToTemplate));
+    return new DOMElement(makeCreateElementNS(namespace, name), extractAttrs(attributes.attrs), extractEvents(attributes.events), extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, attributes.respond, map_1.mapArray(children, dom_1.domChildToTemplate));
 }; };
 
 },{"./utils/dom":"TnZD","./node_view":"wNw6","tempo-core/lib/util/map":"tBUf","./dom_attributes_mapper":"UKQ2"}],"zQMt":[function(require,module,exports) {
@@ -912,6 +920,9 @@ var DOMUntilView = /** @class */ (function () {
             i++;
         }
         this.childrenView = this.childrenView.slice(0, index);
+    };
+    DOMUntilView.prototype.request = function (query) {
+        this.childrenView.forEach(function (views) { return views.forEach(function (view) { return view.request(query); }); });
     };
     return DOMUntilView;
 }());

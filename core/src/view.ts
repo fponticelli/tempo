@@ -11,17 +11,18 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-interface BasicView {
+interface BasicView<Query> {
   destroy(): void
+  request(query: Query): void
 }
 
-export interface DynamicView<State> extends BasicView {
+export interface DynamicView<State, Query> extends BasicView<Query> {
   readonly kind: 'dynamic'
   change(value: State): void
 }
 
-export interface StaticView extends BasicView {
+export interface StaticView<Query> extends BasicView<Query> {
   readonly kind: 'static'
 }
 
-export type View<State> = DynamicView<State> | StaticView
+export type View<State, Query> = DynamicView<State, Query> | StaticView<Query>

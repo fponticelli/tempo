@@ -18,13 +18,13 @@ import { domChildToTemplate, filterDynamics } from './utils/dom'
 import { DOMStaticFragmentView, DOMDynamicFragmentView, fragmentView } from './fragment'
 import { mapArray } from 'tempo-core/lib/util/map'
 
-export class MapStateTemplate<OuterState, InnerState, Action> implements DOMTemplate<OuterState, Action> {
+export class MapStateTemplate<OuterState, InnerState, Query, Action> implements DOMTemplate<OuterState, Query, Action> {
   constructor(
     readonly map: (value: OuterState) => InnerState,
-    readonly children: DOMTemplate<InnerState, Action>[]
+    readonly children: DOMTemplate<InnerState, Query, Action>[]
   ) {}
 
-  render(ctx: DOMContext<Action>, state: OuterState): View<OuterState> {
+  render(ctx: DOMContext<Action>, state: OuterState): View<OuterState, Query> {
     const { children, map } = this
     const innerState = map(state)
     const views = mapArray(children, c => c.render(ctx, innerState))
@@ -33,7 +33,7 @@ export class MapStateTemplate<OuterState, InnerState, Action> implements DOMTemp
     if (dynamics.length === 0) {
       return new DOMStaticFragmentView(views)
     } else {
-      return new DOMDynamicFragmentView<OuterState>(views, (state: OuterState) => {
+      return new DOMDynamicFragmentView<OuterState, Query>(views, (state: OuterState) => {
         const innerState = map(state)
         for (const d of dynamics) d.change(innerState)
       })
@@ -41,34 +41,34 @@ export class MapStateTemplate<OuterState, InnerState, Action> implements DOMTemp
   }
 }
 
-export const mapState = <OuterState, InnerState, Action>(
+export const mapState = <OuterState, InnerState, Query, Action>(
   options: { map: (value: OuterState) => InnerState },
-  ...children: DOMChild<InnerState, Action>[]
-): DOMTemplate<OuterState, Action> => new MapStateTemplate(options.map, mapArray(children, domChildToTemplate))
+  ...children: DOMChild<InnerState, Query, Action>[]
+): DOMTemplate<OuterState, Query, Action> => new MapStateTemplate(options.map, mapArray(children, domChildToTemplate))
 
-export const mapStateAndKeep = <OuterState, InnerState, Action>(
+export const mapStateAndKeep = <OuterState, InnerState, Query, Action>(
   options: { map: (value: OuterState) => InnerState },
-  ...children: DOMChild<[InnerState, OuterState], Action>[]
-): DOMTemplate<OuterState, Action> => new MapStateTemplate<OuterState, [InnerState, OuterState], Action>(
+  ...children: DOMChild<[InnerState, OuterState], Query, Action>[]
+): DOMTemplate<OuterState, Query, Action> => new MapStateTemplate<OuterState, [InnerState, OuterState], Query, Action>(
   (state: OuterState) => ([options.map(state), state]),
   mapArray(children, domChildToTemplate)
 )
 
-export class MapActionTemplate<State, OuterAction, InnerAction> implements DOMTemplate<State, OuterAction> {
+export class MapActionTemplate<State, Query, OuterAction, InnerAction> implements DOMTemplate<State, Query, OuterAction> {
   constructor(
     readonly map: (value: InnerAction) => OuterAction | undefined,
-    readonly children: DOMTemplate<State, InnerAction>[]
+    readonly children: DOMTemplate<State, Query, InnerAction>[]
   ) {}
 
-  render(ctx: DOMContext<OuterAction>, state: State): View<State> {
+  render(ctx: DOMContext<OuterAction>, state: State): View<State, Query> {
     const { children, map } = this
     const views = mapArray(children, c => c.render(ctx.conditionalMapAction(map), state))
     return fragmentView(views)
   }
 }
 
-export const mapAction = <State, OuterAction, InnerAction>(
+export const mapAction = <State, Query, OuterAction, InnerAction>(
   options: { map: (value: InnerAction) => OuterAction | undefined },
-  ...children: DOMChild<State, InnerAction>[]
-): DOMTemplate<State, OuterAction> =>
-  new MapActionTemplate<State, OuterAction, InnerAction>(options.map, mapArray(children, domChildToTemplate))
+  ...children: DOMChild<State, Query, InnerAction>[]
+): DOMTemplate<State, Query, OuterAction> =>
+  new MapActionTemplate<State, Query, OuterAction, InnerAction>(options.map, mapArray(children, domChildToTemplate))

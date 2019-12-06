@@ -22,14 +22,14 @@ export interface WhenOptions<State> {
   refId?: string
 }
 
-export class DOMWhenView<State, Action> implements DynamicView<State> {
+export class DOMWhenView<State, Query, Action> implements DynamicView<State, Query> {
   readonly kind = 'dynamic'
   constructor(
     readonly condition: (state: State) => boolean,
     readonly ctx: DOMContext<Action>,
     readonly dispatch: (action: Action) => void,
     readonly removeNode: () => void,
-    readonly children: DOMTemplate<State, Action>[]
+    readonly children: DOMTemplate<State, Query, Action>[]
   ) {}
 
   change(value: State): void {
@@ -51,8 +51,12 @@ export class DOMWhenView<State, Action> implements DynamicView<State> {
     this.removeNode()
   }
 
-  private views: View<State>[] | undefined
-  private dynamics: DynamicView<State>[] | undefined
+  request(query: Query) {
+    this.views?.forEach(view => view.request(query))
+  }
+
+  private views: View<State, Query>[] | undefined
+  private dynamics: DynamicView<State, Query>[] | undefined
   private destroyViews() {
     if (typeof this.views !== 'undefined') {
       for (const v of this.views) v.destroy()
@@ -62,9 +66,9 @@ export class DOMWhenView<State, Action> implements DynamicView<State> {
   }
 }
 
-export class DOMWhenTemplate<State, Action> implements DOMTemplate<State, Action> {
-  constructor(readonly options: WhenOptions<State>, readonly children: DOMChild<State, Action>[]) {}
-  render(ctx: DOMContext<Action>, state: State): DOMWhenView<State, Action> {
+export class DOMWhenTemplate<State, Query, Action> implements DOMTemplate<State, Query, Action> {
+  constructor(readonly options: WhenOptions<State>, readonly children: DOMChild<State, Query, Action>[]) {}
+  render(ctx: DOMContext<Action>, state: State): DOMWhenView<State, Query, Action> {
     const ref = ctx.doc.createComment(this.options.refId || 't:when')
     ctx.append(ref)
     const parent = ref.parentElement!
@@ -80,11 +84,13 @@ export class DOMWhenTemplate<State, Action> implements DOMTemplate<State, Action
   }
 }
 
-export const when = <State, Action>(options: WhenOptions<State>, ...children: DOMChild<State, Action>[]): DOMTemplate<State, Action> =>
-  new DOMWhenTemplate<State, Action>(options, children)
+export const when = <State, Query, Action>(options: WhenOptions<State>, ...children: DOMChild<State, Query, Action>[]):
+    DOMTemplate<State, Query, Action> =>
+  new DOMWhenTemplate<State, Query, Action>(options, children)
 
-export const unless = <State, Action>(options: WhenOptions<State>, ...children: DOMChild<State, Action>[]): DOMTemplate<State, Action> =>
-  new DOMWhenTemplate<State, Action>(
+export const unless = <State, Query, Action>(options: WhenOptions<State>, ...children: DOMChild<State, Query, Action>[]):
+    DOMTemplate<State, Query, Action> =>
+  new DOMWhenTemplate<State, Query, Action>(
     {
       condition: (v: State) => !options.condition(v),
       refId: options.refId || 't:unless'

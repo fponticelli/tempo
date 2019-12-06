@@ -15,22 +15,22 @@ import { DOMChild, DOMTemplate } from './template'
 import { mapState } from './map'
 import { until } from './until'
 
-export const iterate = <OuterState, InnerState extends any[], Action>(
+export const iterate = <OuterState, InnerState extends any[], Query, Action>(
   options: {
     refId?: string
     getArray: (outer: OuterState) => InnerState
   },
-  ...children: DOMChild<[InnerState[number], OuterState, number], Action>[]
-): DOMTemplate<OuterState, Action> => {
+  ...children: DOMChild<[InnerState[number], OuterState, number], Query, Action>[]
+): DOMTemplate<OuterState, Query, Action> => {
   let outerState: OuterState
-  return mapState<OuterState, InnerState, Action>(
+  return mapState<OuterState, InnerState, Query, Action>(
     {
       map: (outer) => {
         outerState = outer
         return options.getArray(outer)
       }
     },
-    until<InnerState, InnerState[number], Action>(
+    until<InnerState, InnerState[number], Query, Action>(
       {
         repeatUntil:
           (value: InnerState, index: number) => value[index] && ([value[index], outerState, index])
@@ -40,18 +40,18 @@ export const iterate = <OuterState, InnerState extends any[], Action>(
   )
 }
 
-export const iterateItems = <OuterState, InnerState extends any[], Action>(
+export const iterateItems = <OuterState, InnerState extends any[], Query, Action>(
   options: {
     refId?: string
     getArray: (outer: OuterState) => InnerState
   },
-  ...children: DOMChild<InnerState[number], Action>[]
-): DOMTemplate<OuterState, Action> => {
-  return mapState<OuterState, InnerState, Action>(
+  ...children: DOMChild<InnerState[number], Query, Action>[]
+): DOMTemplate<OuterState, Query, Action> => {
+  return mapState<OuterState, InnerState, Query, Action>(
     {
       map: (outer) => options.getArray(outer)
     },
-    until<InnerState, InnerState[number], Action>(
+    until<InnerState, InnerState[number], Query, Action>(
       {
         repeatUntil:
           (value: InnerState, index: number) => value[index]

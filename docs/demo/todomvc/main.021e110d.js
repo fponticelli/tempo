@@ -267,9 +267,10 @@ Object.defineProperty($wNw6$exports, "__esModule", {
 var $wNw6$var$DOMBaseNodeView =
 /** @class */
 function () {
-  function DOMBaseNodeView(node, children, beforeDestroy) {
+  function DOMBaseNodeView(node, children, request, beforeDestroy) {
     this.node = node;
     this.children = children;
+    this.request = request;
     this.beforeDestroy = beforeDestroy;
   }
 
@@ -312,12 +313,13 @@ var $wNw6$var$DOMDynamicNodeView =
 function (_super) {
   $wNw6$var$__extends(DOMDynamicNodeView, _super);
 
-  function DOMDynamicNodeView(node, children, change, beforeDestroy) {
-    var _this = _super.call(this, node, children, beforeDestroy) || this;
+  function DOMDynamicNodeView(node, children, change, request, beforeDestroy) {
+    var _this = _super.call(this, node, children, request, beforeDestroy) || this;
 
     _this.node = node;
     _this.children = children;
     _this.change = change;
+    _this.request = request;
     _this.beforeDestroy = beforeDestroy;
     _this.kind = 'dynamic';
     return _this;
@@ -337,7 +339,7 @@ Object.defineProperty($GqEk$exports, "__esModule", {
 
 var $GqEk$var$renderLiteral = function (ctx, value) {
   var node = ctx.doc.createTextNode(value || '');
-  var view = new $wNw6$export$DOMStaticNodeView(node, []);
+  var view = new $wNw6$export$DOMStaticNodeView(node, [], function () {});
   ctx.append(node);
   return view;
 };
@@ -355,7 +357,7 @@ var $GqEk$var$renderFunction = function (ctx, state, map) {
     }
   };
 
-  var view = new $wNw6$export$DOMDynamicNodeView(node, [], f);
+  var view = new $wNw6$export$DOMDynamicNodeView(node, [], f, function () {});
   ctx.append(node);
   return view;
 };
@@ -568,6 +570,13 @@ function () {
     }
   };
 
+  DOMBaseFragmentView.prototype.request = function (query) {
+    for (var _i = 0, _a = this.views; _i < _a.length; _i++) {
+      var v = _a[_i];
+      v.request(query);
+    }
+  };
+
   return DOMBaseFragmentView;
 }();
 
@@ -712,6 +721,10 @@ function (_super) {
     _this._destroy = _destroy;
     return _this;
   }
+
+  DOMComponentView.prototype.request = function (query) {
+    throw 'TODO'; // TODO
+  };
 
   DOMComponentView.prototype.destroy = function () {
     this._destroy();
@@ -881,8 +894,6 @@ var $UPGL$var$Tempo;
     var maybeElement = options.el,
         component = options.component;
     var store = component.store;
-    /* istanbul ignore next */
-
     var doc = options.document || document;
     var el = maybeElement || doc.body;
 
@@ -894,6 +905,9 @@ var $UPGL$var$Tempo;
     return {
       destroy: function () {
         return view.destroy();
+      },
+      request: function (query) {
+        return view.request(query);
       },
       store: store
     };
@@ -1558,7 +1572,7 @@ var $bbLX$var$applyAfterRender = function (attr, el, ctx, state) {
 var $bbLX$var$DOMElement =
 /** @class */
 function () {
-  function DOMElement(createElement, attrs, events, styles, afterrender, beforechange, afterchange, beforedestroy, children) {
+  function DOMElement(createElement, attrs, events, styles, afterrender, beforechange, afterchange, beforedestroy, respond, children) {
     this.createElement = createElement;
     this.attrs = attrs;
     this.events = events;
@@ -1567,6 +1581,7 @@ function () {
     this.beforechange = beforechange;
     this.afterchange = afterchange;
     this.beforedestroy = beforedestroy;
+    this.respond = respond;
     this.children = children;
   }
 
@@ -1643,15 +1658,19 @@ function () {
       return _this.beforedestroy(el, ctx, value);
     };
 
+    var request = this.respond ? function (query) {
+      return _this.respond(query, el, ctx);
+    } : function () {};
+
     if (allDynamics.length > 0) {
       return new $wNw6$export$DOMDynamicNodeView(el, views, function (state) {
         for (var _i = 0, allDynamics_2 = allDynamics; _i < allDynamics_2.length; _i++) {
           var f = allDynamics_2[_i];
           f(state);
         }
-      }, beforedestroyf);
+      }, request, beforedestroyf);
     } else {
-      return new $wNw6$export$DOMStaticNodeView(el, views, beforedestroyf);
+      return new $wNw6$export$DOMStaticNodeView(el, views, request, beforedestroyf);
     }
   };
 
@@ -1704,7 +1723,7 @@ var $bbLX$export$el = function (name, attributes) {
     children[_i - 2] = arguments[_i];
   }
 
-  return new $bbLX$var$DOMElement($bbLX$var$makeCreateElement(name), $bbLX$var$extractAttrs(attributes.attrs), $bbLX$var$extractEvents(attributes.events), $bbLX$var$extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, $tBUf$export$mapArray(children, $TnZD$export$domChildToTemplate));
+  return new $bbLX$var$DOMElement($bbLX$var$makeCreateElement(name), $bbLX$var$extractAttrs(attributes.attrs), $bbLX$var$extractEvents(attributes.events), $bbLX$var$extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, attributes.respond, $tBUf$export$mapArray(children, $TnZD$export$domChildToTemplate));
 };
 
 $bbLX$exports.el = $bbLX$export$el;
@@ -1717,7 +1736,7 @@ var $bbLX$export$el2 = function (name) {
       children[_i - 1] = arguments[_i];
     }
 
-    return new $bbLX$var$DOMElement($bbLX$var$makeCreateElement(name), $bbLX$var$extractAttrs(attributes.attrs), $bbLX$var$extractEvents(attributes.events), $bbLX$var$extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, $tBUf$export$mapArray(children, $TnZD$export$domChildToTemplate));
+    return new $bbLX$var$DOMElement($bbLX$var$makeCreateElement(name), $bbLX$var$extractAttrs(attributes.attrs), $bbLX$var$extractEvents(attributes.events), $bbLX$var$extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, attributes.respond, $tBUf$export$mapArray(children, $TnZD$export$domChildToTemplate));
   };
 };
 
@@ -1741,7 +1760,7 @@ var $bbLX$export$elNS = function (ns, name, attributes) {
   }
 
   var namespace = $bbLX$export$defaultNamespaces[ns] || ns;
-  return new $bbLX$var$DOMElement($bbLX$var$makeCreateElementNS(namespace, name), $bbLX$var$extractAttrs(attributes.attrs), $bbLX$var$extractEvents(attributes.events), $bbLX$var$extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, $tBUf$export$mapArray(children, $TnZD$export$domChildToTemplate));
+  return new $bbLX$var$DOMElement($bbLX$var$makeCreateElementNS(namespace, name), $bbLX$var$extractAttrs(attributes.attrs), $bbLX$var$extractEvents(attributes.events), $bbLX$var$extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, attributes.respond, $tBUf$export$mapArray(children, $TnZD$export$domChildToTemplate));
 };
 
 $bbLX$exports.elNS = $bbLX$export$elNS;
@@ -1754,7 +1773,7 @@ var $bbLX$export$elNS2 = function (namespace, name) {
       children[_i - 1] = arguments[_i];
     }
 
-    return new $bbLX$var$DOMElement($bbLX$var$makeCreateElementNS(namespace, name), $bbLX$var$extractAttrs(attributes.attrs), $bbLX$var$extractEvents(attributes.events), $bbLX$var$extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, $tBUf$export$mapArray(children, $TnZD$export$domChildToTemplate));
+    return new $bbLX$var$DOMElement($bbLX$var$makeCreateElementNS(namespace, name), $bbLX$var$extractAttrs(attributes.attrs), $bbLX$var$extractEvents(attributes.events), $bbLX$var$extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, attributes.respond, $tBUf$export$mapArray(children, $TnZD$export$domChildToTemplate));
   };
 };
 
@@ -2229,6 +2248,7 @@ function () {
           v.change(value);
         }
       } else {
+        // add node
         this_1.childrenView.push($tBUf$export$mapArray(this_1.children, function (el) {
           return el.render(_this.ctx, value);
         }));
@@ -2257,6 +2277,14 @@ function () {
     }
 
     this.childrenView = this.childrenView.slice(0, index);
+  };
+
+  DOMUntilView.prototype.request = function (query) {
+    this.childrenView.forEach(function (views) {
+      return views.forEach(function (view) {
+        return view.request(query);
+      });
+    });
   };
 
   return DOMUntilView;
@@ -2398,6 +2426,14 @@ function () {
   DOMWhenView.prototype.destroy = function () {
     this.destroyViews();
     this.removeNode();
+  };
+
+  DOMWhenView.prototype.request = function (query) {
+    var _a;
+
+    (_a = this.views) === null || _a === void 0 ? void 0 : _a.forEach(function (view) {
+      return view.request(query);
+    });
   };
 
   DOMWhenView.prototype.destroyViews = function () {

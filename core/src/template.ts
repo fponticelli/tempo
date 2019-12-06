@@ -13,8 +13,8 @@ limitations under the License.
 
 import { View } from './view'
 
-export type RenderMethod<State, Context> = (ctx: Context, state: State) => View<State>
+export type RenderMethod<State, Query, Context> = (ctx: Context, state: State) => View<State, Query>
 
-export interface Template<State, Context> {
-  render: RenderMethod<State, Context>
+export interface Template<State, Query, Context> {
+  render: RenderMethod<State, Query, Context>
 }

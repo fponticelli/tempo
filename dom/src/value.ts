@@ -11,7 +11,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-/* istanbul ignore next */
 import { UnwrappedValue, UnwrappedDerivedValue } from 'tempo-core/lib/value'
 import { DOMContext } from './context'
 
@@ -23,7 +22,7 @@ export type DOMStyleAttribute<State, Value> = UnwrappedValue<State, Value>
 
 export type AttributeValue = string | number | boolean | string[]
 
-export interface DOMAttributes<State, Action, El extends Element, T> {
+export interface DOMAttributes<State, Query, Action, El extends Element, T> {
   attrs?: Record<string, DOMAttribute<State, AttributeValue>>
   events?: Record<string, DOMEventHandler<State, Action, any, El>>
   styles?: Record<string, DOMStyleAttribute<State, string>>
@@ -31,6 +30,7 @@ export interface DOMAttributes<State, Action, El extends Element, T> {
   beforechange?: (state: State, el: El, ctx: DOMContext<Action>, value: T | undefined) => T | undefined
   afterchange?:  (state: State, el: El, ctx: DOMContext<Action>, value: T | undefined) => T | undefined
   beforedestroy?: ((el: El, ctx: DOMContext<Action>, value: T | undefined) => void)
+  respond?: (query: Query, el: El, ctx: DOMContext<Action>) => undefined
 }
 
 export const mapAttribute = <State, A, B>(attr: DOMAttribute<State, A>, map: (a: A) => B): DOMAttribute<State, B> => {

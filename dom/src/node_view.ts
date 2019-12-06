@@ -14,8 +14,13 @@ limitations under the License.
 import { DynamicView, StaticView, View } from 'tempo-core/lib/view'
 import { removeNode } from './utils/dom'
 
-export class DOMBaseNodeView<State> {
-  constructor(readonly node: Node, readonly children: View<State>[], readonly beforeDestroy?: () => void) {}
+export class DOMBaseNodeView<State, Query> {
+  constructor(
+    readonly node: Node,
+    readonly children: View<State, Query>[],
+    readonly request: (query: Query) => void,
+    readonly beforeDestroy?: () => void
+  ) {}
   destroy() {
     if (this.beforeDestroy) this.beforeDestroy()
     removeNode(this.node)
@@ -23,18 +28,19 @@ export class DOMBaseNodeView<State> {
   }
 }
 
-export class DOMStaticNodeView<State> extends DOMBaseNodeView<State> implements StaticView {
+export class DOMStaticNodeView<State, Query> extends DOMBaseNodeView<State, Query> implements StaticView<Query> {
   readonly kind = 'static'
 }
 
-export class DOMDynamicNodeView<State> extends DOMBaseNodeView<State> implements DynamicView<State> {
+export class DOMDynamicNodeView<State, Query> extends DOMBaseNodeView<State, Query> implements DynamicView<State, Query> {
   readonly kind = 'dynamic'
   constructor(
     readonly node: Node,
-    readonly children: View<State>[],
+    readonly children: View<State, Query>[],
     readonly change: (state: State) => void,
+    readonly request: (query: Query) => void,
     readonly beforeDestroy?: () => void
   ) {
-    super(node, children, beforeDestroy)
+    super(node, children, request, beforeDestroy)
   }
 }

@@ -17,13 +17,13 @@ import { DOMTemplate, DOMChild } from './template'
 import { removeNode, filterDynamics, domChildToTemplate, insertBefore } from './utils/dom'
 import { mapArray } from 'tempo-core/lib/util/map'
 
-export class DOMUntilView<OuterState, InnerState, Action> implements DynamicView<OuterState> {
+export class DOMUntilView<OuterState, InnerState, Query, Action> implements DynamicView<OuterState, Query> {
   readonly kind = 'dynamic'
   constructor(
     readonly ref: Node,
     readonly repeatUntil: (state: OuterState, index: number) => InnerState | undefined,
     readonly ctx: DOMContext<Action>,
-    readonly children: DOMTemplate<InnerState, Action>[]
+    readonly children: DOMTemplate<InnerState, Query, Action>[]
   ) {}
 
   destroy(): void {
@@ -59,22 +59,26 @@ export class DOMUntilView<OuterState, InnerState, Action> implements DynamicView
     this.childrenView = this.childrenView.slice(0, index)
   }
 
-  private childrenView: View<InnerState>[][] = []
+  request(query: Query) {
+    this.childrenView.forEach(views => views.forEach(view => view.request(query)))
+  }
+
+  private childrenView: View<InnerState, Query>[][] = []
 }
 
-export class DOMUntilTemplate<OuterState, InnerState, Action> implements DOMTemplate<OuterState, Action> {
+export class DOMUntilTemplate<OuterState, InnerState, Query, Action> implements DOMTemplate<OuterState, Query, Action> {
   constructor(
     readonly options: {
       refId?: string
       repeatUntil: (state: OuterState, index: number) => InnerState | undefined
     },
-    readonly children: DOMTemplate<InnerState, Action>[]
+    readonly children: DOMTemplate<InnerState, Query, Action>[]
   ) {}
 
-  render(ctx: DOMContext<Action>, state: OuterState): DynamicView<OuterState> {
+  render(ctx: DOMContext<Action>, state: OuterState): DynamicView<OuterState, Query> {
     const ref = ctx.doc.createComment(this.options.refId || 't:until')
     ctx.append(ref)
-    const view = new DOMUntilView<OuterState, InnerState, Action>(
+    const view = new DOMUntilView<OuterState, InnerState, Query, Action>(
       ref,
       this.options.repeatUntil,
       ctx.withAppend(insertBefore(ref)),
@@ -85,10 +89,11 @@ export class DOMUntilTemplate<OuterState, InnerState, Action> implements DOMTemp
   }
 }
 
-export const until = <OuterState, InnerState, Action>(
+export const until = <OuterState, InnerState, Query, Action>(
   options: {
     refId?: string
     repeatUntil: (state: OuterState, index: number) => InnerState | undefined
   },
-  ...children: DOMChild<InnerState, Action>[]
-): DOMTemplate<OuterState, Action> => new DOMUntilTemplate<OuterState, InnerState, Action>(options, mapArray(children, domChildToTemplate))
+  ...children: DOMChild<InnerState, Query, Action>[]
+): DOMTemplate<OuterState, Query, Action> =>
+  new DOMUntilTemplate<OuterState, InnerState, Query, Action>(options, mapArray(children, domChildToTemplate))
