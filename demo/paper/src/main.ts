@@ -17,18 +17,30 @@ import { Store } from 'tempo-store/lib/store'
 import { project } from 'tempo-paper/lib/project'
 import { circle, ellipse, rectangle } from 'tempo-paper/lib/shape'
 import { raster } from 'tempo-paper/lib/raster'
-import { Point, Size, Color } from 'paper'
+import { Point, Size, Color, Raster } from 'paper'
 
-interface State {
-
+const state = {
+  ellipsePosition: new Point(350, 200)
 }
 
-const state = {  }
+type State = typeof state
 
-type Action = unknown
+type Action = undefined | {
+  kind: 'MoveEllipse',
+  position: Point
+}
 
 const reducer = (state: State, action: Action): State => {
-  return state
+  if (action === undefined)
+    return state
+  if (action.kind === 'MoveEllipse')
+    return {
+      ...state,
+      ellipsePosition: action.position
+    }
+  else {
+    return state
+  }
 }
 
 const store = Store.ofState({ state, reducer })
@@ -39,8 +51,8 @@ const template = div<State, Action>(
     {},
     project(
       {
-        width: 800,
-        height: 800
+        width: 600,
+        height: 600
       },
       circle({
         position: new Point(100, 100),
@@ -55,14 +67,27 @@ const template = div<State, Action>(
         strokeWidth: 2
       }),
       ellipse({
-        position: new Point(150, 200),
-        size: new Size(200, 100),
-        fillColor: new Color(0.2, 0.1, 0.2)
+        position: state => state.ellipsePosition,
+        size: new Size(200, 250),
+        fillColor: new Color(0.2, 0.1, 0.2),
+        onMouseDrag: (state, event, shape) => {
+          return {
+            kind: 'MoveEllipse',
+            position: new Point(
+              state.ellipsePosition.x! + event.delta!.x!,
+              state.ellipsePosition.y! + event.delta!.y!
+            )
+          }
+        }
       }),
       raster({
-        position: new Point(200, 200),
+        position: new Point(200, 300),
         size: new Size(30, 30),
-        source: 'https://helpx.adobe.com/content/dam/help/en/stock/how-to/visual-reverse-image-search/jcr_content/main-pars/image/visual-reverse-image-search-v2_intro.jpg'
+        source: 'https://helpx.adobe.com/content/dam/help/en/stock/how-to/visual-reverse-image-search/jcr_content/main-pars/image/visual-reverse-image-search-v2_intro.jpg',
+        onLoad: (s, n, raster: Raster) => {
+          raster.size = new Size(150, 150)
+          return undefined
+        }
       })
     )
   )

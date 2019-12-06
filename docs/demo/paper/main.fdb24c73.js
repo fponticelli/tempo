@@ -19346,7 +19346,10 @@ $q9iH$exports.rectangle = $q9iH$export$rectangle;
 
 var $q9iH$export$ellipse = function (options) {
   return $ftoX$export$createItem(function (_) {
-    return new $QMc8$exports.Shape.Rectangle(new $QMc8$exports.Point(0, 0), new $QMc8$exports.Point(0, 0));
+    return new $QMc8$exports.Shape.Ellipse({
+      center: new $QMc8$exports.Point(0, 0),
+      size: new $QMc8$exports.Size(0, 0)
+    });
   }, options);
 };
 
@@ -35803,13 +35806,37 @@ var $GYcQ$exports = function () {
 
 // ASSET: main.ts
 var $ZCfc$exports = {};
+
+var $ZCfc$var$__assign = $ZCfc$exports && $ZCfc$exports.__assign || function () {
+  $ZCfc$var$__assign = Object.assign || function (t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+      s = arguments[i];
+
+      for (var p in s) {
+        if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+      }
+    }
+
+    return t;
+  };
+
+  return $ZCfc$var$__assign.apply(this, arguments);
+};
+
 Object.defineProperty($ZCfc$exports, "__esModule", {
   value: true
 });
-var $ZCfc$var$state = {};
+var $ZCfc$var$state = {
+  ellipsePosition: new $GYcQ$exports.Point(350, 200)
+};
 
 var $ZCfc$var$reducer = function reducer(state, action) {
-  return state;
+  if (action === undefined) return state;
+  if (action.kind === 'MoveEllipse') return $ZCfc$var$__assign($ZCfc$var$__assign({}, state), {
+    ellipsePosition: action.position
+  });else {
+    return state;
+  }
 };
 
 var $ZCfc$var$store = $xN6r$export$Store.ofState({
@@ -35821,8 +35848,8 @@ var $ZCfc$var$template = $zQMt$export$div({
     className: 'app'
   }
 }, $zQMt$export$div({}, $ST02$export$project({
-  width: 400,
-  height: 400
+  width: 600,
+  height: 600
 }, $q9iH$export$circle({
   position: new $GYcQ$exports.Point(100, 100),
   size: new $GYcQ$exports.Size(100, 100),
@@ -35830,15 +35857,29 @@ var $ZCfc$var$template = $zQMt$export$div({
 }), $q9iH$export$rectangle({
   position: new $GYcQ$exports.Point(200, 100),
   size: new $GYcQ$exports.Size(100, 100),
+  fillColor: new $GYcQ$exports.Color('white'),
   strokeColor: new $GYcQ$exports.Color(1, 0.5, 0),
   strokeWidth: 2
 }), $q9iH$export$ellipse({
-  position: new $GYcQ$exports.Point(150, 200),
-  size: new $GYcQ$exports.Size(200, 100),
-  fillColor: new $GYcQ$exports.Color(0.2, 0.1, 0.2)
+  position: function position(state) {
+    return state.ellipsePosition;
+  },
+  size: new $GYcQ$exports.Size(200, 250),
+  fillColor: new $GYcQ$exports.Color(0.2, 0.1, 0.2),
+  onMouseDrag: function onMouseDrag(state, event, shape) {
+    return {
+      kind: 'MoveEllipse',
+      position: new $GYcQ$exports.Point(state.ellipsePosition.x + event.delta.x, state.ellipsePosition.y + event.delta.y)
+    };
+  }
 }), $rEdp$export$raster({
-  position: new $GYcQ$exports.Point(200, 200),
-  source: 'https://helpx.adobe.com/content/dam/help/en/stock/how-to/visual-reverse-image-search/jcr_content/main-pars/image/visual-reverse-image-search-v2_intro.jpg'
+  position: new $GYcQ$exports.Point(200, 300),
+  size: new $GYcQ$exports.Size(30, 30),
+  source: 'https://helpx.adobe.com/content/dam/help/en/stock/how-to/visual-reverse-image-search/jcr_content/main-pars/image/visual-reverse-image-search-v2_intro.jpg',
+  onLoad: function onLoad(s, n, raster) {
+    raster.size = new $GYcQ$exports.Size(150, 150);
+    return undefined;
+  }
 }))));
 $UPGL$export$Tempo.render({
   store: $ZCfc$var$store,

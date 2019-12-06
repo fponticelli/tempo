@@ -1,4 +1,4 @@
-import { Shape, Point } from 'paper'
+import { Shape, Point, Size } from 'paper'
 import { PaperAttribute } from './value'
 import { WritableFields, ExcludeFunctionFields, RemoveNullableFromFields, Merge, MakeOptional } from 'tempo-core/lib/types/objects'
 import { TempoAttributes } from './tempo_attributes'
@@ -37,6 +37,9 @@ export const rectangle = <State, Action, T = unknown>(options: ShapeOptions<Stat
 
 export const ellipse = <State, Action, T = unknown>(options: ShapeOptions<State, Action, T>) =>
   createItem<State, Action, T, Shape, ShapeOptions<State, Action, T>>(
-    (_: State) => new Shape.Ellipse(new Point(0, 0), new Size(0, 0)),
+    (_: State) => new Shape.Ellipse({
+      center: new Point(0, 0),
+      size: new Size(0, 0)
+    }),
     options
   )
