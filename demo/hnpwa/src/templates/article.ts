@@ -19,7 +19,7 @@ import { itemFooterTemplate, itemUrlTemplate } from './page_feed'
 import { mapState } from 'tempo-dom/lib/map'
 import { unsafeHtml } from 'tempo-dom/lib/unsafe_html'
 
-export const articleTemplate = article<Article, Action>(
+export const articleTemplate = article<Article, unknown, Action>(
   {},
   mapState(
     { map: (article: Article) => article.item },

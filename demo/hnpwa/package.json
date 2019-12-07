@@ -21,7 +21,7 @@
     "sw-precache": "5.2.1"
   },
   "scripts": {
-    "compile": "NODE_ENV=production && parcel build src/index.html --public-url . --out-dir ../../docs/demo/hnpwa --experimental-scope-hoisting",
+    "compile": "NODE_ENV=production && tsc --noEmit && parcel build src/index.html --public-url . --out-dir ../../docs/demo/hnpwa --experimental-scope-hoisting",
     "clean": "rm -rf dist/* && rm -rf ../../docs/demo/hnpwa/*",
     "build": "npm run clean && npm run compile",
     "watch": "parcel src/index.html",

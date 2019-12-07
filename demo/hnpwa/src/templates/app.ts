@@ -18,7 +18,7 @@ import { Action } from '../action'
 import { appHeader } from './header'
 import { pageTemplate } from './page'
 
-export const template = main<State, Action>(
+export const template = main<State, unknown, Action>(
   {},
   mapState({ map: state => state.route }, appHeader),
   section({ attrs: { id: 'content' } }, mapState({ map: state => state.page }, pageTemplate))

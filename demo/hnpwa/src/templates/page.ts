@@ -21,7 +21,7 @@ import { notFoundTemplate } from './not_found'
 import { pageFeedTemplate } from './page_feed'
 import { profileTemplate } from './profile'
 
-export const pageTemplate = matchKind<Page, Action>({
+export const pageTemplate = matchKind<Page, unknown, Action>({
   Article: articleTemplate,
   Error: errorTemplate,
   Loading: loadingTemplate,

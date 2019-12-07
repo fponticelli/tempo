@@ -27,7 +27,7 @@ const selectedF = (filter: Filter) => (state: State) => (state.filter === filter
 
 const isEditing = (state: State, todo: Todo) => (state.editing && state.editing.id === todo.id) || false
 
-export const template = section<State, Action>(
+export const template = section<State, unknown, Action>(
   {},
   section(
     { attrs: { className: 'todoapp' } },
@@ -79,7 +79,7 @@ export const template = section<State, Action>(
         { attrs: { className: 'todo-list' } },
         iterate(
           { getArray: (state: State) => state.filtered },
-          filterState<[Todo, State, number], Action>(
+          filterState<[Todo, State, number], unknown, Action>(
             { isSame: ([a, sa], [b, sb]) => a === b && sa.editing === sb.editing },
             li(
               {

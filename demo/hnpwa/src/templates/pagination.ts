@@ -19,13 +19,13 @@ import { linkRoute } from './link_route'
 import { mapState } from 'tempo-dom/lib/map'
 import { forEach } from 'tempo-dom/lib/for_each'
 
-const paginationDesktop = matchBool<{ feed: Feed; page: number; current: number }, Action>({
+const paginationDesktop = matchBool<{ feed: Feed; page: number; current: number }, unknown, Action>({
   condition: state => state.page === state.current,
   true: span({ attrs: { 'aria-current': 'page' } }, state => `${state.page}`),
   false: linkRoute({ route: state => Route.feeds(state.feed, state.page) }, state => String(state.page))
 })
 
-const previousPageLink = section<{ feed: Feed; page: number }, Action>(
+const previousPageLink = section<{ feed: Feed; page: number }, unknown, Action>(
   {},
   matchBool({
     condition: state => state.page === 1,
@@ -34,7 +34,7 @@ const previousPageLink = section<{ feed: Feed; page: number }, Action>(
   })
 )
 
-const nextPageLink = section<{ feed: Feed; page: number }, Action>(
+const nextPageLink = section<{ feed: Feed; page: number }, unknown, Action>(
   {},
   matchBool({
     condition: state => maxPage(state.feed) === state.page,
@@ -48,7 +48,7 @@ const pageRange = (feed: Feed, current: number): { feed: Feed; current: number; 
   return arr
 }
 
-export const paginationTemplate = section<{ feed: Feed; page: number }, Action>(
+export const paginationTemplate = section<{ feed: Feed; page: number }, unknown, Action>(
   {
     attrs: { className: 'pagination' }
   },

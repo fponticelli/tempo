@@ -22,7 +22,7 @@ export const linkRoute = <State>(
     route: DOMAttribute<State, Route>
     className?: DOMAttribute<State, string>
   },
-  ...children: DOMChild<State, Action>[]
+  ...children: DOMChild<State, unknown, Action>[]
 ) => {
   if (children.length === 0) {
     children.push(mapAttribute(opts.route, toTitle))
