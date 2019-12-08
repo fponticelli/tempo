@@ -212,7 +212,11 @@ function setBoolProperty(el, name, value) {
 }
 exports.setBoolProperty = setBoolProperty;
 function setEnumBoolAttribute(el, name, value) {
-    setAttribute(el, name, value === true || value === 'true' ? 'true' : value === false ? 'false' : null);
+    setAttribute(el, name, value === true || value === 'true'
+        ? 'true'
+        : value === false
+            ? 'false'
+            : null);
 }
 exports.setEnumBoolAttribute = setEnumBoolAttribute;
 function setBoolAttribute(el, name, value) {
@@ -470,7 +474,9 @@ function filterDynamics(children) {
 }
 exports.filterDynamics = filterDynamics;
 function domChildToTemplate(dom) {
-    if (typeof dom === 'string' || typeof dom === 'function' || typeof dom === 'undefined')
+    if (typeof dom === 'string' ||
+        typeof dom === 'function' ||
+        typeof dom === 'undefined')
         return text_1.text(dom);
     else
         return dom;

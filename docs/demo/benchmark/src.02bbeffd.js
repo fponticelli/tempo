@@ -2049,7 +2049,131 @@ var $qep0$export$mapAction = function (options) {
   return new $qep0$var$MapActionTemplate(options.map, $tBUf$export$mapArray(children, $TnZD$export$domChildToTemplate));
 };
 
-$qep0$exports.mapAction = $qep0$export$mapAction; //# sourceMappingURL=map.js.map
+$qep0$exports.mapAction = $qep0$export$mapAction;
+
+var $qep0$var$MapQueryDynamicView =
+/** @class */
+function () {
+  function MapQueryDynamicView(map, views, dynamicViews) {
+    this.map = map;
+    this.views = views;
+    this.dynamicViews = dynamicViews;
+    this.kind = 'dynamic';
+  }
+
+  MapQueryDynamicView.prototype.request = function (query) {
+    var innerQuery = this.map(query);
+
+    if (typeof innerQuery !== 'undefined') {
+      this.views.forEach(function (view) {
+        return view.request(innerQuery);
+      });
+    }
+  };
+
+  MapQueryDynamicView.prototype.change = function (state) {
+    this.dynamicViews.forEach(function (view) {
+      return view.change(state);
+    });
+  };
+
+  MapQueryDynamicView.prototype.destroy = function () {
+    this.views.forEach(function (view) {
+      return view.destroy();
+    });
+  };
+
+  return MapQueryDynamicView;
+}();
+
+var $qep0$export$MapQueryDynamicView = $qep0$var$MapQueryDynamicView;
+$qep0$exports.MapQueryDynamicView = $qep0$export$MapQueryDynamicView;
+
+var $qep0$var$MapQueryStaticView =
+/** @class */
+function () {
+  function MapQueryStaticView(map, views) {
+    this.map = map;
+    this.views = views;
+    this.kind = 'static';
+  }
+
+  MapQueryStaticView.prototype.request = function (query) {
+    var innerQuery = this.map(query);
+
+    if (typeof innerQuery !== 'undefined') {
+      this.views.forEach(function (view) {
+        return view.request(innerQuery);
+      });
+    }
+  };
+
+  MapQueryStaticView.prototype.destroy = function () {
+    this.views.forEach(function (view) {
+      return view.destroy();
+    });
+  };
+
+  return MapQueryStaticView;
+}();
+
+var $qep0$export$MapQueryStaticView = $qep0$var$MapQueryStaticView;
+$qep0$exports.MapQueryStaticView = $qep0$export$MapQueryStaticView;
+
+var $qep0$var$MapQueryTemplate =
+/** @class */
+function () {
+  function MapQueryTemplate(map, children) {
+    this.map = map;
+    this.children = children;
+  }
+
+  MapQueryTemplate.prototype.render = function (ctx, state) {
+    var _a = this,
+        children = _a.children,
+        map = _a.map;
+
+    var views = $tBUf$export$mapArray(children, function (c) {
+      return c.render(ctx, state);
+    });
+    var dynamicViews = $TnZD$export$filterDynamics(views);
+
+    if (dynamicViews.length > 0) {
+      return new $qep0$var$MapQueryDynamicView(map, views, dynamicViews);
+    } else {
+      return new $qep0$var$MapQueryStaticView(map, views);
+    }
+  };
+
+  return MapQueryTemplate;
+}();
+
+var $qep0$export$MapQueryTemplate = $qep0$var$MapQueryTemplate;
+$qep0$exports.MapQueryTemplate = $qep0$export$MapQueryTemplate;
+
+var $qep0$export$mapQuery = function (options) {
+  var children = [];
+
+  for (var _i = 1; _i < arguments.length; _i++) {
+    children[_i - 1] = arguments[_i];
+  }
+
+  return new $qep0$var$MapQueryTemplate(options.map, $tBUf$export$mapArray(children, $TnZD$export$domChildToTemplate));
+};
+
+$qep0$exports.mapQuery = $qep0$export$mapQuery;
+
+var $qep0$export$mapQueryConditional = function (options) {
+  var children = [];
+
+  for (var _i = 1; _i < arguments.length; _i++) {
+    children[_i - 1] = arguments[_i];
+  }
+
+  return new $qep0$var$MapQueryTemplate(options.map, $tBUf$export$mapArray(children, $TnZD$export$domChildToTemplate));
+};
+
+$qep0$exports.mapQueryConditional = $qep0$export$mapQueryConditional; //# sourceMappingURL=map.js.map
 
 // ASSET: ../node_modules/tempo-dom/lib/until.js
 var $UU8h$exports = {};
