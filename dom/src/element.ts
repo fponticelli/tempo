@@ -105,7 +105,6 @@ export class DOMElement<State, Action, Query = unknown, El extends Element = Ele
       } :
       () => {}
 
-
     return new DOMNodeView(
       el,
       views,

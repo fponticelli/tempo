@@ -115,4 +115,3 @@ export const mapQueryConditional = <State, Action, OuterQuery, InnerQuery>(
   ...children: DOMChild<State, Action, InnerQuery>[]
 ): DOMTemplate<State, Action, OuterQuery> =>
   new MapQueryTemplate<State, Action, OuterQuery, InnerQuery>(options.map, mapArray(children, domChildToTemplate))
-
