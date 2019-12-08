@@ -995,9 +995,10 @@ Object.defineProperty($wNw6$exports, "__esModule", {
 var $wNw6$var$DOMBaseNodeView =
 /** @class */
 function () {
-  function DOMBaseNodeView(node, children, beforeDestroy) {
+  function DOMBaseNodeView(node, children, request, beforeDestroy) {
     this.node = node;
     this.children = children;
+    this.request = request;
     this.beforeDestroy = beforeDestroy;
   }
 
@@ -1040,12 +1041,13 @@ var $wNw6$var$DOMDynamicNodeView =
 function (_super) {
   $wNw6$var$__extends(DOMDynamicNodeView, _super);
 
-  function DOMDynamicNodeView(node, children, change, beforeDestroy) {
-    var _this = _super.call(this, node, children, beforeDestroy) || this;
+  function DOMDynamicNodeView(node, children, change, request, beforeDestroy) {
+    var _this = _super.call(this, node, children, request, beforeDestroy) || this;
 
     _this.node = node;
     _this.children = children;
     _this.change = change;
+    _this.request = request;
     _this.beforeDestroy = beforeDestroy;
     _this.kind = 'dynamic';
     return _this;
@@ -1065,7 +1067,7 @@ Object.defineProperty($GqEk$exports, "__esModule", {
 
 var $GqEk$var$renderLiteral = function (ctx, value) {
   var node = ctx.doc.createTextNode(value || '');
-  var view = new $wNw6$export$DOMStaticNodeView(node, []);
+  var view = new $wNw6$export$DOMStaticNodeView(node, [], function () {});
   ctx.append(node);
   return view;
 };
@@ -1083,7 +1085,7 @@ var $GqEk$var$renderFunction = function (ctx, state, map) {
     }
   };
 
-  var view = new $wNw6$export$DOMDynamicNodeView(node, [], f);
+  var view = new $wNw6$export$DOMDynamicNodeView(node, [], f, function () {});
   ctx.append(node);
   return view;
 };
@@ -1148,6 +1150,15 @@ function $TnZD$var$insertBefore(ref) {
 
 var $TnZD$export$insertBefore = $TnZD$var$insertBefore;
 $TnZD$exports.insertBefore = $TnZD$export$insertBefore;
+
+function $TnZD$var$filterDynamics(children) {
+  return children.filter(function (child) {
+    return child.kind === 'dynamic';
+  });
+}
+
+var $TnZD$export$filterDynamics = $TnZD$var$filterDynamics;
+$TnZD$exports.filterDynamics = $TnZD$export$filterDynamics;
 
 function $TnZD$var$domChildToTemplate(dom) {
   if (typeof dom === 'string' || typeof dom === 'function' || typeof dom === 'undefined') return $GqEk$export$text(dom);else return dom;
@@ -1265,7 +1276,7 @@ var $bbLX$var$applyAfterRender = function (attr, el, ctx, state) {
 var $bbLX$var$DOMElement =
 /** @class */
 function () {
-  function DOMElement(createElement, attrs, events, styles, afterrender, beforechange, afterchange, beforedestroy, children) {
+  function DOMElement(createElement, attrs, events, styles, afterrender, beforechange, afterchange, beforedestroy, respond, children) {
     this.createElement = createElement;
     this.attrs = attrs;
     this.events = events;
@@ -1274,6 +1285,7 @@ function () {
     this.beforechange = beforechange;
     this.afterchange = afterchange;
     this.beforedestroy = beforedestroy;
+    this.respond = respond;
     this.children = children;
   }
 
@@ -1350,15 +1362,23 @@ function () {
       return _this.beforedestroy(el, ctx, value);
     };
 
+    var request = this.respond ? function (query) {
+      views.forEach(function (view) {
+        return view.request(query);
+      });
+
+      _this.respond(query, el, ctx, value);
+    } : function () {};
+
     if (allDynamics.length > 0) {
       return new $wNw6$export$DOMDynamicNodeView(el, views, function (state) {
         for (var _i = 0, allDynamics_2 = allDynamics; _i < allDynamics_2.length; _i++) {
           var f = allDynamics_2[_i];
           f(state);
         }
-      }, beforedestroyf);
+      }, request, beforedestroyf);
     } else {
-      return new $wNw6$export$DOMStaticNodeView(el, views, beforedestroyf);
+      return new $wNw6$export$DOMStaticNodeView(el, views, request, beforedestroyf);
     }
   };
 
@@ -1411,7 +1431,7 @@ var $bbLX$export$el = function (name, attributes) {
     children[_i - 2] = arguments[_i];
   }
 
-  return new $bbLX$var$DOMElement($bbLX$var$makeCreateElement(name), $bbLX$var$extractAttrs(attributes.attrs), $bbLX$var$extractEvents(attributes.events), $bbLX$var$extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, $tBUf$export$mapArray(children, $TnZD$export$domChildToTemplate));
+  return new $bbLX$var$DOMElement($bbLX$var$makeCreateElement(name), $bbLX$var$extractAttrs(attributes.attrs), $bbLX$var$extractEvents(attributes.events), $bbLX$var$extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, attributes.respond, $tBUf$export$mapArray(children, $TnZD$export$domChildToTemplate));
 };
 
 $bbLX$exports.el = $bbLX$export$el;
@@ -1424,7 +1444,7 @@ var $bbLX$export$el2 = function (name) {
       children[_i - 1] = arguments[_i];
     }
 
-    return new $bbLX$var$DOMElement($bbLX$var$makeCreateElement(name), $bbLX$var$extractAttrs(attributes.attrs), $bbLX$var$extractEvents(attributes.events), $bbLX$var$extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, $tBUf$export$mapArray(children, $TnZD$export$domChildToTemplate));
+    return new $bbLX$var$DOMElement($bbLX$var$makeCreateElement(name), $bbLX$var$extractAttrs(attributes.attrs), $bbLX$var$extractEvents(attributes.events), $bbLX$var$extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, attributes.respond, $tBUf$export$mapArray(children, $TnZD$export$domChildToTemplate));
   };
 };
 
@@ -1448,7 +1468,7 @@ var $bbLX$export$elNS = function (ns, name, attributes) {
   }
 
   var namespace = $bbLX$export$defaultNamespaces[ns] || ns;
-  return new $bbLX$var$DOMElement($bbLX$var$makeCreateElementNS(namespace, name), $bbLX$var$extractAttrs(attributes.attrs), $bbLX$var$extractEvents(attributes.events), $bbLX$var$extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, $tBUf$export$mapArray(children, $TnZD$export$domChildToTemplate));
+  return new $bbLX$var$DOMElement($bbLX$var$makeCreateElementNS(namespace, name), $bbLX$var$extractAttrs(attributes.attrs), $bbLX$var$extractEvents(attributes.events), $bbLX$var$extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, attributes.respond, $tBUf$export$mapArray(children, $TnZD$export$domChildToTemplate));
 };
 
 $bbLX$exports.elNS = $bbLX$export$elNS;
@@ -1461,7 +1481,7 @@ var $bbLX$export$elNS2 = function (namespace, name) {
       children[_i - 1] = arguments[_i];
     }
 
-    return new $bbLX$var$DOMElement($bbLX$var$makeCreateElementNS(namespace, name), $bbLX$var$extractAttrs(attributes.attrs), $bbLX$var$extractEvents(attributes.events), $bbLX$var$extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, $tBUf$export$mapArray(children, $TnZD$export$domChildToTemplate));
+    return new $bbLX$var$DOMElement($bbLX$var$makeCreateElementNS(namespace, name), $bbLX$var$extractAttrs(attributes.attrs), $bbLX$var$extractEvents(attributes.events), $bbLX$var$extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, attributes.respond, $tBUf$export$mapArray(children, $TnZD$export$domChildToTemplate));
   };
 };
 
@@ -1852,6 +1872,13 @@ function () {
     }
   };
 
+  DOMBaseFragmentView.prototype.request = function (query) {
+    for (var _i = 0, _a = this.views; _i < _a.length; _i++) {
+      var v = _a[_i];
+      v.request(query);
+    }
+  };
+
   return DOMBaseFragmentView;
 }();
 
@@ -1967,7 +1994,7 @@ function () {
     var views = $tBUf$export$mapArray(children, function (c) {
       return c.render(ctx, innerState);
     });
-    var dynamics = $OQt2$export$filterDynamics(views);
+    var dynamics = $TnZD$export$filterDynamics(views);
 
     if (dynamics.length === 0) {
       return new $Gdta$export$DOMStaticFragmentView(views);
@@ -2028,8 +2055,9 @@ function () {
         children = _a.children,
         map = _a.map;
 
+    var newCtx = ctx.conditionalMapAction(map);
     var views = $tBUf$export$mapArray(children, function (c) {
-      return c.render(ctx.conditionalMapAction(map), state);
+      return c.render(newCtx, state);
     });
     return $Gdta$export$fragmentView(views);
   };
@@ -2050,7 +2078,131 @@ var $qep0$export$mapAction = function (options) {
   return new $qep0$var$MapActionTemplate(options.map, $tBUf$export$mapArray(children, $TnZD$export$domChildToTemplate));
 };
 
-$qep0$exports.mapAction = $qep0$export$mapAction; //# sourceMappingURL=map.js.map
+$qep0$exports.mapAction = $qep0$export$mapAction;
+
+var $qep0$var$MapQueryDynamicView =
+/** @class */
+function () {
+  function MapQueryDynamicView(map, views, dynamicViews) {
+    this.map = map;
+    this.views = views;
+    this.dynamicViews = dynamicViews;
+    this.kind = 'dynamic';
+  }
+
+  MapQueryDynamicView.prototype.request = function (query) {
+    var innerQuery = this.map(query);
+
+    if (typeof innerQuery !== 'undefined') {
+      this.views.forEach(function (view) {
+        return view.request(innerQuery);
+      });
+    }
+  };
+
+  MapQueryDynamicView.prototype.change = function (state) {
+    this.dynamicViews.forEach(function (view) {
+      return view.change(state);
+    });
+  };
+
+  MapQueryDynamicView.prototype.destroy = function () {
+    this.views.forEach(function (view) {
+      return view.destroy();
+    });
+  };
+
+  return MapQueryDynamicView;
+}();
+
+var $qep0$export$MapQueryDynamicView = $qep0$var$MapQueryDynamicView;
+$qep0$exports.MapQueryDynamicView = $qep0$export$MapQueryDynamicView;
+
+var $qep0$var$MapQueryStaticView =
+/** @class */
+function () {
+  function MapQueryStaticView(map, views) {
+    this.map = map;
+    this.views = views;
+    this.kind = 'static';
+  }
+
+  MapQueryStaticView.prototype.request = function (query) {
+    var innerQuery = this.map(query);
+
+    if (typeof innerQuery !== 'undefined') {
+      this.views.forEach(function (view) {
+        return view.request(innerQuery);
+      });
+    }
+  };
+
+  MapQueryStaticView.prototype.destroy = function () {
+    this.views.forEach(function (view) {
+      return view.destroy();
+    });
+  };
+
+  return MapQueryStaticView;
+}();
+
+var $qep0$export$MapQueryStaticView = $qep0$var$MapQueryStaticView;
+$qep0$exports.MapQueryStaticView = $qep0$export$MapQueryStaticView;
+
+var $qep0$var$MapQueryTemplate =
+/** @class */
+function () {
+  function MapQueryTemplate(map, children) {
+    this.map = map;
+    this.children = children;
+  }
+
+  MapQueryTemplate.prototype.render = function (ctx, state) {
+    var _a = this,
+        children = _a.children,
+        map = _a.map;
+
+    var views = $tBUf$export$mapArray(children, function (c) {
+      return c.render(ctx, state);
+    });
+    var dynamicViews = $TnZD$export$filterDynamics(views);
+
+    if (dynamicViews.length > 0) {
+      return new $qep0$var$MapQueryDynamicView(map, views, dynamicViews);
+    } else {
+      return new $qep0$var$MapQueryStaticView(map, views);
+    }
+  };
+
+  return MapQueryTemplate;
+}();
+
+var $qep0$export$MapQueryTemplate = $qep0$var$MapQueryTemplate;
+$qep0$exports.MapQueryTemplate = $qep0$export$MapQueryTemplate;
+
+var $qep0$export$mapQuery = function (options) {
+  var children = [];
+
+  for (var _i = 1; _i < arguments.length; _i++) {
+    children[_i - 1] = arguments[_i];
+  }
+
+  return new $qep0$var$MapQueryTemplate(options.map, $tBUf$export$mapArray(children, $TnZD$export$domChildToTemplate));
+};
+
+$qep0$exports.mapQuery = $qep0$export$mapQuery;
+
+var $qep0$export$mapQueryConditional = function (options) {
+  var children = [];
+
+  for (var _i = 1; _i < arguments.length; _i++) {
+    children[_i - 1] = arguments[_i];
+  }
+
+  return new $qep0$var$MapQueryTemplate(options.map, $tBUf$export$mapArray(children, $TnZD$export$domChildToTemplate));
+};
+
+$qep0$exports.mapQueryConditional = $qep0$export$mapQueryConditional; //# sourceMappingURL=map.js.map
 
 // ASSET: ../node_modules/tempo-dom/lib/until.js
 var $UU8h$exports = {};
@@ -2135,6 +2287,14 @@ function () {
     this.childrenView = this.childrenView.slice(0, index);
   };
 
+  DOMUntilView.prototype.request = function (query) {
+    this.childrenView.forEach(function (views) {
+      return views.forEach(function (view) {
+        return view.request(query);
+      });
+    });
+  };
+
   return DOMUntilView;
 }();
 
@@ -2213,9 +2373,7 @@ Object.defineProperty($Qev4$exports, "__esModule", {
   value: true
 });
 
-var $Qev4$var$DOMWhenView =
-/** @class */
-function () {
+var $Qev4$var$DOMWhenView = function () {
   function DOMWhenView(condition, ctx, dispatch, removeNode, children) {
     this.condition = condition;
     this.ctx = ctx;
@@ -2249,6 +2407,14 @@ function () {
   DOMWhenView.prototype.destroy = function () {
     this.destroyViews();
     this.removeNode();
+  };
+
+  DOMWhenView.prototype.request = function (query) {
+    var _a;
+
+    (_a = this.views) === null || _a === void 0 ? void 0 : _a.forEach(function (view) {
+      return view.request(query);
+    });
   };
 
   DOMWhenView.prototype.destroyViews = function () {
@@ -2951,6 +3117,10 @@ function (_super) {
     return _this;
   }
 
+  DOMComponentView.prototype.request = function (query) {
+    throw 'TODO'; // TODO
+  };
+
   DOMComponentView.prototype.destroy = function () {
     this._destroy();
 
@@ -3048,7 +3218,9 @@ function () {
   }
 
   DOMContext.fromElement = function (element, dispatch) {
-    return new DOMContext(element.ownerDocument || window && window.document, function (node) {
+    return new DOMContext(
+    /* istanbul ignore next */
+    element.ownerDocument || window && window.document, function (node) {
       return element.appendChild(node);
     }, element, dispatch);
   };
@@ -3117,8 +3289,6 @@ var $UPGL$var$Tempo;
     var maybeElement = options.el,
         component = options.component;
     var store = component.store;
-    /* istanbul ignore next */
-
     var doc = options.document || document;
     var el = maybeElement || doc.body;
 
@@ -3130,6 +3300,9 @@ var $UPGL$var$Tempo;
     return {
       destroy: function () {
         return view.destroy();
+      },
+      request: function (query) {
+        return view.request(query);
       },
       store: store
     };

@@ -41,7 +41,8 @@ const applyAfterRender = <State, Action, El extends Element, T>(
   }
 }
 
-export class DOMElement<State, Action, El extends Element = Element, T = unknown> implements DOMTemplate<State, Action> {
+export class DOMElement<State, Action, Query = unknown, El extends Element = Element, T = unknown>
+    implements DOMTemplate<State, Action, Query> {
   constructor(
     readonly createElement: (doc: Document) => El,
     readonly attrs: { name: string, value: DOMAttribute<State, AttributeValue>}[],
@@ -51,10 +52,11 @@ export class DOMElement<State, Action, El extends Element = Element, T = unknown
     readonly beforechange: undefined | ((state: State, el: El, ctx: DOMContext<Action>, value: T | undefined) => T | undefined),
     readonly afterchange:  undefined | ((state: State, el: El, ctx: DOMContext<Action>, value: T | undefined) => T | undefined),
     readonly beforedestroy: undefined | (((el: El, ctx: DOMContext<Action>, value: T | undefined) => void)),
-    readonly children: DOMTemplate<State, Action>[]
+    readonly respond: undefined | ((query: Query, el: El, ctx: DOMContext<Action>, value: T | undefined) => void),
+    readonly children: DOMTemplate<State, Action, Query>[]
   ) {}
 
-  render(ctx: DOMContext<Action>, state: State): View<State> {
+  render(ctx: DOMContext<Action>, state: State): View<State, Query> {
     const el = this.createElement(ctx.doc)
     let value: T | undefined = undefined
 
@@ -96,13 +98,30 @@ export class DOMElement<State, Action, El extends Element = Element, T = unknown
     }
 
     const beforedestroyf = this.beforedestroy && (() => this.beforedestroy!(el, ctx, value))
+    const request = this.respond ?
+      (query: Query) => {
+        views.forEach(view => view.request(query))
+        this.respond!(query, el, ctx, value)
+      } :
+      () => {}
 
     if (allDynamics.length > 0) {
-      return new DOMDynamicNodeView(el, views, (state: State) => {
-        for (const f of allDynamics) f(state)
-      }, beforedestroyf)
+      return new DOMDynamicNodeView(
+        el,
+        views,
+        (state: State) => {
+          for (const f of allDynamics) f(state)
+        },
+        request,
+        beforedestroyf
+      )
     } else {
-      return new DOMStaticNodeView(el, views, beforedestroyf)
+      return new DOMStaticNodeView(
+        el,
+        views,
+        request,
+        beforedestroyf
+      )
     }
   }
 }
@@ -146,12 +165,12 @@ function extractStyles<State>(
 
 const makeCreateElement = <El extends Element>(name: string) => (doc: Document) => doc.createElement(name) as any as El
 
-export const el = <State, Action, El extends Element, T = unknown>(
+export const el = <State, Action, Query = unknown, El extends Element = Element, T = unknown>(
   name: string,
-  attributes: DOMAttributes<State, Action, El, T>,
-  ...children: DOMChild<State, Action>[]
+  attributes: DOMAttributes<State, Action, Query, El, T>,
+  ...children: DOMChild<State, Action, Query>[]
 ) => {
-  return new DOMElement<State, Action, El, T>(
+  return new DOMElement<State, Action, Query, El, T>(
     makeCreateElement(name),
     extractAttrs(attributes.attrs),
     extractEvents(attributes.events),
@@ -160,14 +179,15 @@ export const el = <State, Action, El extends Element, T = unknown>(
     attributes.beforechange,
     attributes.afterchange,
     attributes.beforedestroy,
+    attributes.respond,
     mapArray(children, domChildToTemplate)
   )
 }
 
-export const el2 = <El extends Element>(name: string) => <State, Action, T = unknown>(
-  attributes: DOMAttributes<State, Action, El, T>,
-  ...children: DOMChild<State, Action>[]) => {
-    return new DOMElement<State, Action, El, T>(
+export const el2 = <El extends Element>(name: string) => <State, Action, Query = unknown, T = unknown>(
+  attributes: DOMAttributes<State, Action, Query, El, T>,
+  ...children: DOMChild<State, Action, Query>[]) => {
+    return new DOMElement<State, Action, Query, El, T>(
       makeCreateElement(name),
       extractAttrs(attributes.attrs),
       extractEvents(attributes.events),
@@ -176,6 +196,7 @@ export const el2 = <El extends Element>(name: string) => <State, Action, T = unk
       attributes.beforechange,
       attributes.afterchange,
       attributes.beforedestroy,
+      attributes.respond,
       mapArray(children, domChildToTemplate)
     )
   }
@@ -187,14 +208,14 @@ export const defaultNamespaces: Record<string, string> = {
 const makeCreateElementNS = <El extends Element>(namespace: string, name: string) =>
   (doc: Document) => doc.createElementNS(namespace, name) as any as El
 
-export const elNS = <State, Action, El extends Element, T = unknown>(
+export const elNS = <State, Action, Query = unknown, El extends Element = Element, T = unknown>(
   ns: string,
   name: string,
-  attributes: DOMAttributes<State, Action, El, T>,
-  ...children: DOMChild<State, Action>[]
+  attributes: DOMAttributes<State, Action, Query, El, T>,
+  ...children: DOMChild<State, Action, Query>[]
 ) => {
   const namespace = defaultNamespaces[ns] || ns
-  return new DOMElement<State, Action, El, T>(
+  return new DOMElement<State, Action, Query, El, T>(
     makeCreateElementNS(namespace, name),
     extractAttrs(attributes.attrs),
     extractEvents(attributes.events),
@@ -203,14 +224,15 @@ export const elNS = <State, Action, El extends Element, T = unknown>(
     attributes.beforechange,
     attributes.afterchange,
     attributes.beforedestroy,
+    attributes.respond,
     mapArray(children, domChildToTemplate)
   )
 }
 
-export const elNS2 = <El extends Element>(namespace: string, name: string) => <State, Action, T = unknown>(
-  attributes: DOMAttributes<State, Action, El, T>,
-  ...children: DOMChild<State, Action>[]) => {
-    return new DOMElement<State, Action, El, T>(
+export const elNS2 = <El extends Element>(namespace: string, name: string) => <State, Action, Query = unknown, T = unknown>(
+  attributes: DOMAttributes<State, Action, Query, El, T>,
+  ...children: DOMChild<State, Action, Query>[]) => {
+    return new DOMElement<State, Action, Query, El, T>(
       makeCreateElementNS(namespace, name),
       extractAttrs(attributes.attrs),
       extractEvents(attributes.events),
@@ -219,6 +241,7 @@ export const elNS2 = <El extends Element>(namespace: string, name: string) => <S
       attributes.beforechange,
       attributes.afterchange,
       attributes.beforedestroy,
+      attributes.respond,
       mapArray(children, domChildToTemplate)
     )
   }

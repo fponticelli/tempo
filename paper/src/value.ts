@@ -16,10 +16,15 @@ import { UnwrappedValue, UnwrappedDerivedValue } from 'tempo-core/lib/value'
 // import { PaperContext } from './context'
 // import { Item } from 'paper'
 
-export type PaperAttribute<State, Value> = UnwrappedValue<State, Value | undefined> | undefined
+export type PaperAttribute<State, Value> =
+  | UnwrappedValue<State, Value | undefined>
+  | undefined
 // export type PaperTextValue<S> = PaperAttribute<S, string>
-export type PaperEventHandler<State, Action, Ev, El> =
-  (state: State, event: Ev, element: El) => Action | undefined
+export type PaperEventHandler<State, Action, Ev, El> = (
+  state: State,
+  event: Ev,
+  element: El
+) => Action | undefined
 // export type PaperStyleAttribute<State, Value> = UnwrappedValue<State, Value>
 
 // export type AttributeValue = string | number | boolean | string[]
@@ -50,9 +55,11 @@ export type PaperEventHandler<State, Action, Ev, El> =
 //   }
 // }
 
-export const resolveAttribute = <State, Value>(attr: PaperAttribute<State, Value>): ((state: State) => Value | undefined) =>  {
+export const resolveAttribute = <State, Value>(
+  attr: PaperAttribute<State, Value>
+): ((state: State) => Value | undefined) => {
   if (typeof attr === 'function') {
-    return (attr as UnwrappedDerivedValue<State, Value>)
+    return attr as UnwrappedDerivedValue<State, Value>
   } else {
     return (_: State): Value | undefined => attr
   }

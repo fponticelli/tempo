@@ -34,7 +34,7 @@ describe('dom_text', () => {
 
   it('create static with function value', () => {
     const ctx = createContext()
-    const node = new DOMTextTemplate((r: string) => r).render(ctx, 'abc') as DynamicView<string | undefined>
+    const node = new DOMTextTemplate((r: string) => r).render(ctx, 'abc') as DynamicView<string | undefined, unknown>
     expect(ctx.doc.body.innerHTML).toEqual('abc')
     node.change('abc')
     expect(ctx.doc.body.innerHTML).toEqual('abc')

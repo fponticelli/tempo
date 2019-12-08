@@ -97,7 +97,11 @@ export const reducer = (state: State, action: Action) => {
       const index = state.todos.findIndex(v => v.id === action.id)
       const current = state.todos[index]
       const todo = { ...current, completed: !current.completed }
-      const todos3 = [...state.todos.slice(0, index), todo, ...state.todos.slice(index + 1)]
+      const todos3 = [
+        ...state.todos.slice(0, index),
+        todo,
+        ...state.todos.slice(index + 1)
+      ]
       const filtered3 = filterTodos(todos3, state.filter)
       return {
         ...state,
@@ -134,8 +138,16 @@ export const reducer = (state: State, action: Action) => {
     case 'update-todo':
       const index2 = state.todos.findIndex(o => o.id === action.id)
       if (index2 >= 0) {
-        const updated = { id: action.id, title: action.title, completed: state.todos[index2].completed }
-        const todos = [...state.todos.slice(0, index2), updated, ...state.todos.slice(index2 + 1)]
+        const updated = {
+          id: action.id,
+          title: action.title,
+          completed: state.todos[index2].completed
+        }
+        const todos = [
+          ...state.todos.slice(0, index2),
+          updated,
+          ...state.todos.slice(index2 + 1)
+        ]
         const filtered = filterTodos(todos, state.filter)
         return {
           ...state,

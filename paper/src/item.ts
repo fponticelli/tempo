@@ -29,42 +29,75 @@ export interface ItemEvents<State, Action, El> {
   onMouseLeave?: PaperEventHandler<State, Action, MouseEvent, El>
 }
 
-export class ItemDynamicView<State> implements DynamicView<State> {
+export class ItemDynamicView<State, Query>
+  implements DynamicView<State, Query> {
   readonly kind = 'dynamic'
 
   constructor(
     readonly change: (state: State) => void,
-    readonly destroy: () => void
+    readonly destroy: () => void,
+    readonly request: (query: Query) => void
   ) {}
 }
 
-export class ItemTemplate<State, Action, T, I extends Item> implements PaperTemplate<State, Action> {
+export class ItemTemplate<
+  State,
+  Action,
+  Query,
+  I extends Item = Item,
+  T = unknown
+> implements PaperTemplate<State, Action, Query> {
   constructor(
-    readonly createItem: (wrapper: { value: T | undefined }, ctx: PaperContext<Action>)
-      => (state: State) => { item: I, views: View<State>[] | undefined },
-    readonly changeItem: (wrapper: { value: T | undefined }, ctx: PaperContext<Action>, item: I, views: View<State>[] | undefined)
-      => (state: State) => void,
-    readonly destroy: (wrapper: { value: T | undefined }, ctx: PaperContext<Action>, item: I, views: View<State>[] | undefined)
-      => () => void
+    readonly createItem: (
+      wrapper: { value: T | undefined },
+      ctx: PaperContext<Action>
+    ) => (state: State) => { item: I; views: View<State, Query>[] | undefined },
+    readonly changeItem: (
+      wrapper: { value: T | undefined },
+      ctx: PaperContext<Action>,
+      item: I,
+      views: View<State, Query>[] | undefined
+    ) => (state: State) => void,
+    readonly destroy: (
+      wrapper: { value: T | undefined },
+      ctx: PaperContext<Action>,
+      item: I,
+      views: View<State, Query>[] | undefined
+    ) => () => void,
+    readonly request: (
+      wrapper: { value: T | undefined },
+      ctx: PaperContext<Action>,
+      item: I,
+      views: View<State, Query>[] | undefined
+    ) => (query: Query) => void
   ) {}
   render(ctx: PaperContext<Action>, state: State) {
     const wrapper = { value: undefined }
-    const {item, views } = this.createItem(wrapper, ctx)(state)
+    const { item, views } = this.createItem(wrapper, ctx)(state)
     ctx.append(item)
-    return new ItemDynamicView<State>(
+    return new ItemDynamicView<State, Query>(
       this.changeItem(wrapper, ctx, item, views),
-      this.destroy(wrapper, ctx, item, views)
+      this.destroy(wrapper, ctx, item, views),
+      this.request(wrapper, ctx, item, views)
     )
   }
 }
 
-export const createItem = <State, Action, T, I extends Item, Option>(
+export const createItem = <State, Action, Query, I extends Item, T, Option>(
   makeItem: (state: State) => I,
-  options: MakeOptional<Merge<Option, TempoAttributes<State, Action, T, I>>>,
-  children?: PaperTemplate<State, Action>[] | undefined
+  options: MakeOptional<
+    Merge<Option, TempoAttributes<State, Action, Query, I, T>>
+  >,
+  children?: PaperTemplate<State, Action, Query>[] | undefined
 ) => {
   const { afterchange, afterrender, beforechange, beforedestroy } = options
-  const attributes = removeFields(options, 'afterchange', 'afterrender', 'beforechange', 'beforedestroy')
+  const attributes = removeFields(
+    options,
+    'afterchange',
+    'afterrender',
+    'beforechange',
+    'beforedestroy'
+  )
   const setters = Object.keys(attributes).map(k => {
     const attr = (attributes as any)[k] as UnwrappedValue<State, any>
     if (k.substring(0, 2) === 'on') {
@@ -72,7 +105,8 @@ export const createItem = <State, Action, T, I extends Item, Option>(
       return {
         kind: 'dynamic',
         f: (state: State, item: I, ctx: PaperContext<Action>) => {
-          (item as any)[k] = (e: any) => {
+          const anyItem = item as any
+          anyItem[k] = (e: any) => {
             const action = attrf(state, e, item)
             if (typeof action !== 'undefined') {
               ctx.dispatch(action)
@@ -84,18 +118,22 @@ export const createItem = <State, Action, T, I extends Item, Option>(
       const attrf = attr as UnwrappedDerivedValue<State, any>
       return {
         kind: 'dynamic',
-        f: (state: State, item: I) => (item as any)[k] = attrf(state)
+        f: (state: State, item: I) => ((item as any)[k] = attrf(state))
       }
     } else {
       return {
         kind: 'static',
-        f: (_: State, item: I) => (item as any)[k] = attr as any
+        f: (_: State, item: I) => ((item as any)[k] = attr as any)
       }
     }
   })
-  const dynamics = setters.filter(setter => setter.kind === 'dynamic').map(setter => setter.f)
-  const make = (wrapper: { value: T | undefined }, ctx: PaperContext<Action>) => (state: State)
-      : { item: I, views: View<State>[] | undefined } => {
+  const dynamics = setters
+    .filter(setter => setter.kind === 'dynamic')
+    .map(setter => setter.f)
+  const make = (
+    wrapper: { value: T | undefined },
+    ctx: PaperContext<Action>
+  ) => (state: State): { item: I; views: View<State, Query>[] | undefined } => {
     const item = makeItem(state)
     setters.forEach(setter => setter.f(state, item, ctx))
     const newCtx = ctx.withAppend(child => item.addChild(child))
@@ -105,23 +143,33 @@ export const createItem = <State, Action, T, I extends Item, Option>(
     }
     return { item, views }
   }
-  return new ItemTemplate<State, Action, T, I>(
+  return new ItemTemplate<State, Action, Query, I, T>(
     make,
-    dynamics.length > 0 ?
-      (wrapper: { value: T | undefined }, ctx: PaperContext<Action>, item: I, views: View<State>[] | undefined) => (state: State): void => {
-        if (beforechange) {
-          wrapper.value = beforechange(state, item, ctx, wrapper.value)
+    dynamics.length > 0
+      ? (
+          wrapper: { value: T | undefined },
+          ctx: PaperContext<Action>,
+          item: I,
+          views: View<State, Query>[] | undefined
+        ) => (state: State): void => {
+          if (beforechange) {
+            wrapper.value = beforechange(state, item, ctx, wrapper.value)
+          }
+          if (views) {
+            filterDynamics(views).forEach(view => view.change(state))
+          }
+          dynamics.forEach(dyna => dyna(state, item, ctx))
+          if (afterchange) {
+            wrapper.value = afterchange(state, item, ctx, wrapper.value)
+          }
         }
-        if (views) {
-          filterDynamics(views).forEach(view => view.change(state))
-        }
-        dynamics.forEach(dyna => dyna(state, item, ctx))
-        if (afterchange) {
-          wrapper.value = afterchange(state, item, ctx, wrapper.value)
-        }
-      } :
-      () => (): void => {},
-    (wrapper: { value: T | undefined }, ctx: PaperContext<Action>, item: I, views: View<State>[] | undefined) => () => {
+      : () => (): void => {},
+    (
+      wrapper: { value: T | undefined },
+      ctx: PaperContext<Action>,
+      item: I,
+      views: View<State, Query>[] | undefined
+    ) => () => {
       if (beforedestroy) {
         beforedestroy(item, ctx, wrapper.value)
       }
@@ -129,6 +177,14 @@ export const createItem = <State, Action, T, I extends Item, Option>(
       if (views) {
         views.forEach(view => view.destroy())
       }
+    },
+    (
+      wrapper: { value: T | undefined },
+      ctx: PaperContext<Action>,
+      item: I,
+      views: View<State, Query>[] | undefined
+    ) => (query: Query) => {
+      // TODO
     }
   )
 }

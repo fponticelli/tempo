@@ -12,19 +12,19 @@ limitations under the License.
 */
 
 import { DOMChild, DOMTemplate } from './template'
-import { View, filterDynamics } from 'tempo-core/lib/view'
+import { View, DynamicView, StaticView } from 'tempo-core/lib/view'
 import { DOMContext } from './context'
-import { domChildToTemplate } from './utils/dom'
+import { domChildToTemplate, filterDynamics } from './utils/dom'
 import { DOMStaticFragmentView, DOMDynamicFragmentView, fragmentView } from './fragment'
 import { mapArray } from 'tempo-core/lib/util/map'
 
-export class MapStateTemplate<OuterState, InnerState, Action> implements DOMTemplate<OuterState, Action> {
+export class MapStateTemplate<OuterState, InnerState, Action, Query> implements DOMTemplate<OuterState, Action, Query> {
   constructor(
     readonly map: (value: OuterState) => InnerState,
-    readonly children: DOMTemplate<InnerState, Action>[]
+    readonly children: DOMTemplate<InnerState, Action, Query>[]
   ) {}
 
-  render(ctx: DOMContext<Action>, state: OuterState): View<OuterState> {
+  render(ctx: DOMContext<Action>, state: OuterState): View<OuterState, Query> {
     const { children, map } = this
     const innerState = map(state)
     const views = mapArray(children, c => c.render(ctx, innerState))
@@ -33,7 +33,7 @@ export class MapStateTemplate<OuterState, InnerState, Action> implements DOMTemp
     if (dynamics.length === 0) {
       return new DOMStaticFragmentView(views)
     } else {
-      return new DOMDynamicFragmentView<OuterState>(views, (state: OuterState) => {
+      return new DOMDynamicFragmentView<OuterState, Query>(views, (state: OuterState) => {
         const innerState = map(state)
         for (const d of dynamics) d.change(innerState)
       })
@@ -41,34 +41,109 @@ export class MapStateTemplate<OuterState, InnerState, Action> implements DOMTemp
   }
 }
 
-export const mapState = <OuterState, InnerState, Action>(
+export const mapState = <OuterState, InnerState, Action, Query = unknown>(
   options: { map: (value: OuterState) => InnerState },
-  ...children: DOMChild<InnerState, Action>[]
-): DOMTemplate<OuterState, Action> => new MapStateTemplate(options.map, mapArray(children, domChildToTemplate))
+  ...children: DOMChild<InnerState, Action, Query>[]
+): DOMTemplate<OuterState, Action, Query> => new MapStateTemplate(options.map, mapArray(children, domChildToTemplate))
 
-export const mapStateAndKeep = <OuterState, InnerState, Action>(
+export const mapStateAndKeep = <OuterState, InnerState, Action, Query = unknown>(
   options: { map: (value: OuterState) => InnerState },
-  ...children: DOMChild<[InnerState, OuterState], Action>[]
-): DOMTemplate<OuterState, Action> => new MapStateTemplate<OuterState, [InnerState, OuterState], Action>(
+  ...children: DOMChild<[InnerState, OuterState], Action, Query>[]
+): DOMTemplate<OuterState, Action, Query> => new MapStateTemplate<OuterState, [InnerState, OuterState], Action, Query>(
   (state: OuterState) => ([options.map(state), state]),
   mapArray(children, domChildToTemplate)
 )
 
-export class MapActionTemplate<State, OuterAction, InnerAction> implements DOMTemplate<State, OuterAction> {
+export class MapActionTemplate<State, OuterAction, InnerAction, Query> implements DOMTemplate<State, OuterAction, Query> {
   constructor(
     readonly map: (value: InnerAction) => OuterAction | undefined,
-    readonly children: DOMTemplate<State, InnerAction>[]
+    readonly children: DOMTemplate<State, InnerAction, Query>[]
   ) {}
 
-  render(ctx: DOMContext<OuterAction>, state: State): View<State> {
+  render(ctx: DOMContext<OuterAction>, state: State): View<State, Query> {
     const { children, map } = this
-    const views = mapArray(children, c => c.render(ctx.conditionalMapAction(map), state))
+    const newCtx = ctx.conditionalMapAction(map)
+    const views = mapArray(children, c => c.render(newCtx, state))
     return fragmentView(views)
   }
 }
 
-export const mapAction = <State, OuterAction, InnerAction>(
+export const mapAction = <State, OuterAction, InnerAction, Query = unknown>(
   options: { map: (value: InnerAction) => OuterAction | undefined },
-  ...children: DOMChild<State, InnerAction>[]
-): DOMTemplate<State, OuterAction> =>
-  new MapActionTemplate<State, OuterAction, InnerAction>(options.map, mapArray(children, domChildToTemplate))
+  ...children: DOMChild<State, InnerAction, Query>[]
+): DOMTemplate<State, OuterAction, Query> =>
+  new MapActionTemplate<State, OuterAction, InnerAction, Query>(options.map, mapArray(children, domChildToTemplate))
+
+export class MapQueryDynamicView<State, OuterQuery, InnerQuery> implements DynamicView<State, OuterQuery> {
+  readonly kind = 'dynamic'
+  constructor(
+    readonly map: (query: OuterQuery) => InnerQuery | undefined,
+    readonly views: View<State, InnerQuery>[],
+    readonly dynamicViews: DynamicView<State, InnerQuery>[]
+  ) { }
+
+  request(query: OuterQuery) {
+    const innerQuery = this.map(query)
+    if (typeof innerQuery !== 'undefined') {
+      this.views.forEach(view => view.request(innerQuery))
+    }
+  }
+
+  change(state: State) {
+    this.dynamicViews.forEach(view => view.change(state))
+  }
+
+  destroy() {
+    this.views.forEach(view => view.destroy())
+  }
+}
+
+export class MapQueryStaticView<OuterQuery, InnerQuery> implements StaticView<OuterQuery> {
+  readonly kind = 'static'
+  constructor(
+    readonly map: (query: OuterQuery) => InnerQuery | undefined,
+    readonly views: StaticView<InnerQuery>[]
+  ) { }
+
+  request(query: OuterQuery) {
+    const innerQuery = this.map(query)
+    if (typeof innerQuery !== 'undefined') {
+      this.views.forEach(view => view.request(innerQuery))
+    }
+  }
+
+  destroy() {
+    this.views.forEach(view => view.destroy())
+  }
+}
+
+export class MapQueryTemplate<State, Action, OuterQuery, InnerQuery> implements DOMTemplate<State, Action, OuterQuery> {
+  constructor(
+    readonly map: (value: OuterQuery) => InnerQuery | undefined,
+    readonly children: DOMTemplate<State, Action, InnerQuery>[]
+  ) {}
+
+  render(ctx: DOMContext<Action>, state: State): View<State, OuterQuery> {
+    const { children, map } = this
+    const views = mapArray(children, c => c.render(ctx, state))
+    const dynamicViews = filterDynamics(views)
+    if (dynamicViews.length > 0) {
+      return new MapQueryDynamicView<State, OuterQuery, InnerQuery>(map, views, dynamicViews)
+    } else {
+      return new MapQueryStaticView<OuterQuery, InnerQuery>(map, views as (StaticView<InnerQuery>[]))
+    }
+  }
+}
+
+export const mapQuery = <State, Action, OuterQuery, InnerQuery>(
+  options: { map: (value: OuterQuery) => InnerQuery },
+  ...children: DOMChild<State, Action, InnerQuery>[]
+): DOMTemplate<State, Action, OuterQuery> =>
+  new MapQueryTemplate<State, Action, OuterQuery, InnerQuery>(options.map, mapArray(children, domChildToTemplate))
+
+export const mapQueryConditional = <State, Action, OuterQuery, InnerQuery>(
+  options: { map: (value: OuterQuery) => InnerQuery | undefined },
+  ...children: DOMChild<State, Action, InnerQuery>[]
+): DOMTemplate<State, Action, OuterQuery> =>
+  new MapQueryTemplate<State, Action, OuterQuery, InnerQuery>(options.map, mapArray(children, domChildToTemplate))
+

@@ -40,7 +40,7 @@ describe('adapter', () => {
         s => s.outer
       )
     )
-    const view = template.render(ctx, { outer: 'out' }) as DynamicView<{ outer: string }>
+    const view = template.render(ctx, { outer: 'out' }) as DynamicView<{ outer: string }, unknown>
     expect(ctx.doc.body.innerHTML).toEqual('inner: in, outer: out')
     view.change({ outer: 'OUT' })
     expect(ctx.doc.body.innerHTML).toEqual('inner: in, outer: out')
@@ -73,7 +73,7 @@ describe('adapter', () => {
         s => s.outer
       )
     )
-    const view = template.render(ctx, { outer: 'out' }) as DynamicView<{ outer: string }>
+    const view = template.render(ctx, { outer: 'out' }) as DynamicView<{ outer: string }, unknown>
     expect(ctx.doc.body.innerHTML).toEqual('inner: in, outer: out')
     view.change({ outer: 'OUT' })
     expect(ctx.doc.body.innerHTML).toEqual('inner: in, outer: OUT')

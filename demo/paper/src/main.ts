@@ -25,14 +25,15 @@ const state = {
 
 type State = typeof state
 
-type Action = undefined | {
-  kind: 'MoveEllipse',
-  position: Point
-}
+type Action =
+  | undefined
+  | {
+      kind: 'MoveEllipse'
+      position: Point
+    }
 
 const reducer = (state: State, action: Action): State => {
-  if (action === undefined)
-    return state
+  if (action === undefined) return state
   if (action.kind === 'MoveEllipse')
     return {
       ...state,
@@ -83,7 +84,8 @@ const template = div<State, Action>(
       raster({
         position: new Point(200, 300),
         size: new Size(30, 30),
-        source: 'https://helpx.adobe.com/content/dam/help/en/stock/how-to/visual-reverse-image-search/jcr_content/main-pars/image/visual-reverse-image-search-v2_intro.jpg',
+        source:
+          'https://helpx.adobe.com/content/dam/help/en/stock/how-to/visual-reverse-image-search/jcr_content/main-pars/image/visual-reverse-image-search-v2_intro.jpg',
         onLoad: (s, n, raster: Raster) => {
           raster.size = new Size(150, 150)
           return undefined

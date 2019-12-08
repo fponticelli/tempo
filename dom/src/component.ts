@@ -19,13 +19,13 @@ import { DOMContext } from './context'
 import { domChildToTemplate } from './utils/dom'
 import { mapArray } from 'tempo-core/lib/util/map'
 
-export class DOMComponentView<State, Action> extends DOMDynamicFragmentView<State> {
+export class DOMComponentView<State, Action, Query> extends DOMDynamicFragmentView<State, Query> {
   /* istanbul ignore next */
   constructor(
     readonly store: Store<State, Action>,
     readonly dispatch: (action: Action) => void,
-    children: View<State>[],
-    dynamics: DynamicView<State>[],
+    children: View<State, Query>[],
+    dynamics: DynamicView<State, Query>[],
     private _destroy: () => void
   ) {
     super(children, (state: State) => {
@@ -34,16 +34,20 @@ export class DOMComponentView<State, Action> extends DOMDynamicFragmentView<Stat
     })
   }
 
+  request(query: Query) {
+    throw 'TODO' // TODO
+  }
+
   destroy() {
     this._destroy()
     super.destroy()
   }
 }
 
-export class DOMComponentTemplate<State, Action> implements DOMTemplate<State, Action> {
+export class DOMComponentTemplate<State, Action, Query> implements DOMTemplate<State, Action, Query> {
   constructor(
     readonly store: Store<State, Action>,
-    readonly children: DOMTemplate<State, Action>[],
+    readonly children: DOMTemplate<State, Action, Query>[],
     readonly delayed: boolean
   ) {}
 
@@ -75,7 +79,7 @@ export class DOMComponentTemplate<State, Action> implements DOMTemplate<State, A
     const newCtx = ctx.withDispatch(innerDispatch)
     const viewChildren = mapArray(this.children, child => child.render(newCtx, property.get()))
     const dynamics = filterDynamics(viewChildren)
-    const view = new DOMComponentView<State, Action>(store, innerDispatch, viewChildren, dynamics, () => {
+    const view = new DOMComponentView<State, Action, Query>(store, innerDispatch, viewChildren, dynamics, () => {
       property.observable.off(update)
     })
     property.set(state)
@@ -83,10 +87,10 @@ export class DOMComponentTemplate<State, Action> implements DOMTemplate<State, A
   }
 }
 
-export const component = <State, Action>(
+export const component = <State, Action, Query = unknown>(
   attributes: {
     store: Store<State, Action>
     delayed?: boolean
   },
-  ...children: DOMChild<State, Action>[]
-) => new DOMComponentTemplate<State, Action>(attributes.store, mapArray(children, domChildToTemplate), attributes.delayed || false)
+  ...children: DOMChild<State, Action, Query>[]
+) => new DOMComponentTemplate<State, Action, Query>(attributes.store, mapArray(children, domChildToTemplate), attributes.delayed || false)

@@ -67,15 +67,27 @@ export type TypeAtPath<Path extends IndexType[], O> = {
 // type T2 = TypeAtPath<['a', 'b'], Nested>
 // type T3 = TypeAtPath<['a', 'b', 0], Nested>
 
-export type IfEquals<X, Y, A = X, B = never> =
-  (<T>() => T extends X ? 1 : 2) extends (<T>() => T extends Y ? 1 : 2) ? A : B
+export type IfEquals<X, Y, A = X, B = never> = (<T>() => T extends X
+  ? 1
+  : 2) extends <T>() => T extends Y ? 1 : 2
+  ? A
+  : B
 
 export type WritableKeys<T> = {
-  [K in keyof T]-?: IfEquals<{ [Q in K]: T[K] }, { -readonly [Q in K]: T[K] }, K>
+  [K in keyof T]-?: IfEquals<
+    { [Q in K]: T[K] },
+    { -readonly [Q in K]: T[K] },
+    K
+  >
 }[keyof T]
 
 export type ReadonlyKeys<T> = {
-  [P in keyof T]-?: IfEquals<{ [Q in P]: T[P] }, { -readonly [Q in P]: T[P] }, never, P>
+  [P in keyof T]-?: IfEquals<
+    { [Q in P]: T[P] },
+    { -readonly [Q in P]: T[P] },
+    never,
+    P
+  >
 }[keyof T]
 
 export type KeepKeysByType<T, Condition> = {
@@ -100,11 +112,18 @@ export type RemoveNullableFromFields<T> = {
 
 export type WritableFields<T> = Pick<T, WritableKeys<T>>
 export type ReadonlyFields<T> = Pick<T, ReadonlyKeys<T>>
-export type ExcludeFunctionFields<T> = Pick<T, ExcludeKeysByType<T, AnyFunction>>
+export type ExcludeFunctionFields<T> = Pick<
+  T,
+  ExcludeKeysByType<T, AnyFunction>
+>
 
 // TODO optional fields are converted to mandatory ones
 export type Merge<A, B> = {
-  [K in (keyof A | keyof B)]: K extends keyof B ? B[K] : K extends keyof A ? A[K] : never
+  [K in keyof A | keyof B]: K extends keyof B
+    ? B[K]
+    : K extends keyof A
+    ? A[K]
+    : never
 }
 
 export type MakeOptional<T> = {

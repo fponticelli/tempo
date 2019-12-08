@@ -86,7 +86,8 @@ export const Action = {
   cancelAddingTodo: new CancelAddingTodo() as Action,
   cancelEditingTodo: new CancelEditingTodo() as Action,
   clearCompleted: new ClearCompleted() as Action,
-  editingTodo: (id: string, title: string): Action => new EditingTodo(id, title),
+  editingTodo: (id: string, title: string): Action =>
+    new EditingTodo(id, title),
   removeTodo: (id: string): Action => new RemoveTodo(id),
   toggleTodo: (id: string): Action => new ToggleTodo(id),
   toggleAllTodo: new ToggleAllTodo() as Action,

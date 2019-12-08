@@ -18,18 +18,18 @@ import { UnwrappedDerivedValue } from 'tempo-core/lib/value'
 import { DOMStaticNodeView, DOMDynamicNodeView } from './node_view'
 import { DOMTextValue } from './value'
 
-const renderLiteral = <State>(ctx: DOMContext<never>, value: string | undefined): View<State> => {
+const renderLiteral = <State, Query = unknown>(ctx: DOMContext<never>, value: string | undefined): View<State, Query> => {
   const node = ctx.doc.createTextNode(value || '')
-  const view = new DOMStaticNodeView(node, [])
+  const view = new DOMStaticNodeView(node, [], () => {})
   ctx.append(node)
   return view
 }
 
-const renderFunction = <State>(
+const renderFunction = <State, Query = unknown>(
   ctx: DOMContext<never>,
   state: State,
   map: UnwrappedDerivedValue<State, string>
-): View<State> => {
+): View<State, Query> => {
   const node = ctx.doc.createTextNode(map(state) || '')
   let oldContent = ''
   const f = (state: State) => {
@@ -40,15 +40,15 @@ const renderFunction = <State>(
         oldContent = newContent
     }
   }
-  const view = new DOMDynamicNodeView(node, [], f)
+  const view = new DOMDynamicNodeView(node, [], f, () => {})
   ctx.append(node)
   return view
 }
 
-export class DOMTextTemplate<State, Action> implements DOMTemplate<State, Action> {
+export class DOMTextTemplate<State, Action, Query> implements DOMTemplate<State, Action, Query> {
   constructor(readonly content: DOMTextValue<State>) {}
 
-  render(ctx: DOMContext<Action>, state: State): View<State> {
+  render(ctx: DOMContext<Action>, state: State): View<State, Query> {
     if (typeof this.content === 'function') {
       return renderFunction(ctx, state, this.content as UnwrappedDerivedValue<State, string>)
     } else {
@@ -57,4 +57,5 @@ export class DOMTextTemplate<State, Action> implements DOMTemplate<State, Action
   }
 }
 
-export const text = <State, Action>(content: DOMTextValue<State>): DOMTemplate<State, Action> => new DOMTextTemplate<State, Action>(content)
+export const text = <State, Action, Query = unknown>(content: DOMTextValue<State>): DOMTemplate<State, Action, Query> =>
+  new DOMTextTemplate<State, Action, Query>(content)

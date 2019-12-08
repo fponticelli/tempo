@@ -41,15 +41,24 @@ const headerLink = (feed: Feed) => {
     }
   }
   return fragment<Route, Action>(
-    when({ condition }, span({ attrs: { 'aria-current': 'page' } }, toTitle(Route.feeds(feed, 1)))),
+    when(
+      { condition },
+      span({ attrs: { 'aria-current': 'page' } }, toTitle(Route.feeds(feed, 1)))
+    ),
     unless({ condition }, linkRoute({ route: Route.feeds(feed, 1) }))
   )
 }
 
 export const appHeader = header<Route, Action>(
   {},
-  linkRoute({ route: Route.root }, i({ attrs: { 'aria-label': 'Homepage', className: 'logo' } }, logo)),
-  nav({}, ...[Feed.top, Feed.new, Feed.ask, Feed.show, Feed.jobs].map(headerLink)),
+  linkRoute(
+    { route: Route.root },
+    i({ attrs: { 'aria-label': 'Homepage', className: 'logo' } }, logo)
+  ),
+  nav(
+    {},
+    ...[Feed.top, Feed.new, Feed.ask, Feed.show, Feed.jobs].map(headerLink)
+  ),
   linkRoute(
     {
       className: 'githublink',

@@ -6,50 +6,77 @@ import { PaperContext } from './context'
 import { View, DynamicView, filterDynamics } from 'tempo-core/lib/view'
 import { DOMContext } from 'tempo-dom/lib/context'
 
-interface PaperScope<State, Action> {
-  views: View<State>[]
-  dynamics: DynamicView<State>[]
+interface PaperScope<State, Action, Query> {
+  views: View<State, Query>[]
+  dynamics: DynamicView<State, Query>[]
   context: PaperContext<Action>
 }
 
-export const project = <State, Action>(
+export const project = <State, Action, Query>(
   options: {
     width: DOMAttribute<State, number>
     height: DOMAttribute<State, number>
   },
-  ...children: PaperTemplate<State, Action>[]
+  ...children: PaperTemplate<State, Action, Query>[]
 ) => {
-  return el<State, Action, HTMLCanvasElement, PaperScope<State, Action>>(
-    'canvas',
-    {
-      attrs: {
-        width: options.width,
-        height: options.height
-      },
-      afterrender: (state: State, el: HTMLCanvasElement, ctx: DOMContext<Action>) => {
-        const project = new Project(el)
-        const rootLayer = new Layer()
-        project.addLayer(rootLayer)
-        const context = new PaperContext(
-          project,
-          (item: Item) => rootLayer.addChild(item),
-          (action: Action) => ctx.dispatch(action)
-        )
-        const views = children.map(child => child.render(context, state))
-        const dynamics = filterDynamics(views)
-        return { context, views, dynamics }
-      },
-      afterchange: (state: State, el: HTMLCanvasElement, ctx, scope: PaperScope<State, Action> | undefined) => {
-        scope?.dynamics.forEach(view => view.change(state))
-        return scope
-      },
-      beforedestroy: (el: HTMLCanvasElement, ctx, scope: PaperScope<State, Action> | undefined) => {
-        if (typeof scope !== undefined) {
-          const { context, views } = scope!
-          views.forEach(view => view.destroy())
-          context.project.remove()
-        }
+  return el<
+    State,
+    Action,
+    Query,
+    HTMLCanvasElement,
+    PaperScope<State, Action, Query>
+  >('canvas', {
+    attrs: {
+      width: options.width,
+      height: options.height
+    },
+    afterrender: (
+      state: State,
+      el: HTMLCanvasElement,
+      ctx: DOMContext<Action>
+    ) => {
+      const project = new Project(el)
+      const rootLayer = new Layer()
+      project.addLayer(rootLayer)
+      const context = new PaperContext(
+        project,
+        (item: Item) => rootLayer.addChild(item),
+        (action: Action) => ctx.dispatch(action)
+      )
+      const views = children.map(child => child.render(context, state))
+      const dynamics = filterDynamics(views)
+      return { context, views, dynamics }
+    },
+    afterchange: (
+      state: State,
+      el: HTMLCanvasElement,
+      ctx,
+      scope: PaperScope<State, Action, Query> | undefined
+    ) => {
+      scope?.dynamics.forEach(view => view.change(state))
+      return scope
+    },
+    beforedestroy: (
+      el: HTMLCanvasElement,
+      ctx,
+      scope: PaperScope<State, Action, Query> | undefined
+    ) => {
+      if (typeof scope !== undefined) {
+        const { context, views } = scope!
+        views.forEach(view => view.destroy())
+        context.project.remove()
+      }
+    },
+    respond: (
+      query: Query,
+      el: HTMLCanvasElement,
+      ctx: DOMContext<Action>,
+      scope: PaperScope<State, Action, Query> | undefined
+    ) => {
+      if (typeof scope !== undefined) {
+        const { views } = scope!
+        views.forEach(view => view.request(query))
       }
     }
-  )
+  })
 }

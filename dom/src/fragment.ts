@@ -17,32 +17,36 @@ import { DOMTemplate, DOMChild } from './template'
 import { DOMContext } from './context'
 import { mapArray } from 'tempo-core/lib/util/map'
 
-export class DOMBaseFragmentView {
-  constructor(readonly views: View<any>[]) {}
+export class DOMBaseFragmentView<Query> {
+  constructor(readonly views: View<any, Query>[]) {}
 
   destroy(): void {
     for (const v of this.views) v.destroy()
   }
+
+  request(query: Query) {
+    for (const v of this.views) v.request(query)
+  }
 }
 
-export class DOMStaticFragmentView extends DOMBaseFragmentView implements StaticView {
+export class DOMStaticFragmentView<Query> extends DOMBaseFragmentView<Query> implements StaticView<Query> {
   readonly kind = 'static'
 }
 
-export class DOMDynamicFragmentView<State> extends DOMBaseFragmentView implements DynamicView<State> {
+export class DOMDynamicFragmentView<State, Query> extends DOMBaseFragmentView<Query> implements DynamicView<State, Query> {
   readonly kind = 'dynamic'
   constructor(
-    views: View<any>[],
+    views: View<any, Query>[],
     readonly change: (state: State) => void
   ) {
     super(views)
   }
 }
 
-export const fragmentView = <State>(views: View<State>[]) => {
+export const fragmentView = <State, Query = unknown>(views: View<State, Query>[]) => {
   const dynamics = filterDynamics(views)
   if (dynamics.length > 0) {
-    return new DOMDynamicFragmentView<State>(views, (state: State) => {
+    return new DOMDynamicFragmentView<State, Query>(views, (state: State) => {
       for (const d of dynamics) d.change(state)
     })
   } else {
@@ -50,16 +54,17 @@ export const fragmentView = <State>(views: View<State>[]) => {
   }
 }
 
-export class DOMFragmentTemplate<State, Action> implements DOMTemplate<State, Action> {
+export class DOMFragmentTemplate<State, Action, Query> implements DOMTemplate<State, Action, Query> {
   constructor(
-    readonly children: DOMTemplate<State, Action>[]
+    readonly children: DOMTemplate<State, Action, Query>[]
   ) {}
 
-  render(ctx: DOMContext<Action>, state: State): View<State> {
+  render(ctx: DOMContext<Action>, state: State): View<State, Query> {
     const views = mapArray(this.children, child => child.render(ctx, state))
     return fragmentView(views)
   }
 }
 
-export const fragment = <State, Action>(...children: DOMChild<State, Action>[]): DOMTemplate<State, Action> =>
-  new DOMFragmentTemplate<State, Action>(mapArray(children, domChildToTemplate))
+export const fragment = <State, Action, Query = unknown>(...children: DOMChild<State, Action, Query>[])
+    : DOMTemplate<State, Action, Query> =>
+  new DOMFragmentTemplate<State, Action, Query>(mapArray(children, domChildToTemplate))

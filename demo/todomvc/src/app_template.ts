@@ -11,7 +11,21 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { section, header, h1, input, ul, label, div, li, footer, span, a, p, button } from 'tempo-dom/lib/html'
+import {
+  section,
+  header,
+  h1,
+  input,
+  ul,
+  label,
+  div,
+  li,
+  footer,
+  span,
+  a,
+  p,
+  button
+} from 'tempo-dom/lib/html'
 import { DOMEventHandler } from 'tempo-dom/lib/value'
 import { filterState } from 'tempo-dom/lib/filter'
 import { iterate } from 'tempo-dom/lib/iterate'
@@ -19,13 +33,16 @@ import { when } from 'tempo-dom/lib/when'
 import { Action } from './action'
 import { State, Filter, Todo } from './state'
 
-const changeF = <El extends Element>(filter: Filter): DOMEventHandler<State, Action, MouseEvent, El> => (
-  state: State
-) => (state.filter === filter ? undefined : Action.toggleFilter(filter))
+const changeF = <El extends Element>(
+  filter: Filter
+): DOMEventHandler<State, Action, MouseEvent, El> => (state: State) =>
+  state.filter === filter ? undefined : Action.toggleFilter(filter)
 
-const selectedF = (filter: Filter) => (state: State) => (state.filter === filter ? 'selected' : undefined)
+const selectedF = (filter: Filter) => (state: State) =>
+  state.filter === filter ? 'selected' : undefined
 
-const isEditing = (state: State, todo: Todo) => (state.editing && state.editing.id === todo.id) || false
+const isEditing = (state: State, todo: Todo) =>
+  (state.editing && state.editing.id === todo.id) || false
 
 export const template = section<State, Action>(
   {},
@@ -61,7 +78,10 @@ export const template = section<State, Action>(
     section(
       {
         attrs: { className: 'main' },
-        styles: { visibility: (state: State) => (state.todos.length === 0 ? 'hidden' : '') }
+        styles: {
+          visibility: (state: State) =>
+            state.todos.length === 0 ? 'hidden' : ''
+        }
       },
       input({
         attrs: {
@@ -80,7 +100,9 @@ export const template = section<State, Action>(
         iterate(
           { getArray: (state: State) => state.filtered },
           filterState<[Todo, State, number], Action>(
-            { isSame: ([a, sa], [b, sb]) => a === b && sa.editing === sb.editing },
+            {
+              isSame: ([a, sa], [b, sb]) => a === b && sa.editing === sb.editing
+            },
             li(
               {
                 attrs: {
@@ -102,13 +124,15 @@ export const template = section<State, Action>(
                     checked: ([todo]: [Todo, State, number]) => todo.completed
                   },
                   events: {
-                    change: ([todo]: [Todo, State, number]) => Action.toggleTodo(todo.id)
+                    change: ([todo]: [Todo, State, number]) =>
+                      Action.toggleTodo(todo.id)
                   }
                 }),
                 label(
                   {
                     events: {
-                      dblclick: ([todo]: [Todo, State, number]) => Action.editingTodo(todo.id, todo.title)
+                      dblclick: ([todo]: [Todo, State, number]) =>
+                        Action.editingTodo(todo.id, todo.title)
                     }
                   },
                   ([todo]: [Todo, State, number]) => todo.title
@@ -118,21 +142,30 @@ export const template = section<State, Action>(
                     className: 'destroy'
                   },
                   events: {
-                    click: ([todo]: [Todo, State, number]) => Action.removeTodo(todo.id)
+                    click: ([todo]: [Todo, State, number]) =>
+                      Action.removeTodo(todo.id)
                   }
                 })
               ),
               when(
-                { condition: ([todo, state]: [Todo, State, number]) => isEditing(state, todo) /* todo.editing */ },
+                {
+                  condition: ([todo, state]: [Todo, State, number]) =>
+                    isEditing(state, todo) /* todo.editing */
+                },
                 input({
                   afterrender: (_, el) => el.focus(),
                   attrs: {
                     type: 'text',
                     className: 'edit',
-                    value: ([_, state]: [Todo, State, number]) => state.editing && state.editing.title
+                    value: ([_, state]: [Todo, State, number]) =>
+                      state.editing && state.editing.title
                   },
                   events: {
-                    keydown: ([todo]: [Todo, State, number], e: KeyboardEvent, input: HTMLInputElement) => {
+                    keydown: (
+                      [todo]: [Todo, State, number],
+                      e: KeyboardEvent,
+                      input: HTMLInputElement
+                    ) => {
                       if (e.keyCode === 13) {
                         const value = input.value.trim()
                         if (value !== '') {
@@ -146,7 +179,11 @@ export const template = section<State, Action>(
                         return Action.editingTodo(todo.id, input.value)
                       }
                     },
-                    blur: ([todo]: [Todo, State, number], e: MouseEvent, input: HTMLInputElement) => {
+                    blur: (
+                      [todo]: [Todo, State, number],
+                      e: MouseEvent,
+                      input: HTMLInputElement
+                    ) => {
                       const value = input.value.trim()
                       if (value !== '') {
                         return Action.updateTodo(todo.id, value)
@@ -163,9 +200,19 @@ export const template = section<State, Action>(
       )
     ),
     filterState(
-      { isSame: (a, b) => a.filter === b.filter && a.completed === b.completed && a.todos.length === b.todos.length },
+      {
+        isSame: (a, b) =>
+          a.filter === b.filter &&
+          a.completed === b.completed &&
+          a.todos.length === b.todos.length
+      },
       footer(
-        { attrs: { className: 'footer' }, styles: { display: state => (state.todos.length === 0 ? 'none' : 'block') } },
+        {
+          attrs: { className: 'footer' },
+          styles: {
+            display: state => (state.todos.length === 0 ? 'none' : 'block')
+          }
+        },
         span({ attrs: { className: 'todo-count' } }, state => {
           const left = state.todos.length - state.completed
           if (left === 1) {
@@ -246,7 +293,14 @@ export const template = section<State, Action>(
   footer(
     { attrs: { className: 'info' } },
     p({}, 'Double-click to edit a todo'),
-    p({}, 'Created by ', a({ attrs: { href: 'http://github.com/fponticelli' } }, 'Franco Ponticelli')),
+    p(
+      {},
+      'Created by ',
+      a(
+        { attrs: { href: 'http://github.com/fponticelli' } },
+        'Franco Ponticelli'
+      )
+    ),
     p({}, 'Part of ', a({ attrs: { href: 'http://todomvc.com' } }, 'TodoMVC'))
   )
 )

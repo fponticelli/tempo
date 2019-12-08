@@ -17,39 +17,39 @@ import { fragmentView } from './fragment'
 import { domChildToTemplate } from './utils/dom'
 import { mapArray } from 'tempo-core/lib/util/map'
 
-export class DOMPortalTemplate<State, Action> implements DOMTemplate<State, Action> {
+export class DOMPortalTemplate<State, Action, Query> implements DOMTemplate<State, Action, Query> {
   constructor(
     readonly getParent: (doc: Document) => Element,
     readonly append: (doc: Document, node: Node) => void,
-    readonly children: DOMTemplate<State, Action>[]
+    readonly children: DOMTemplate<State, Action, Query>[]
   ) {}
 
   render(ctx: DOMContext<Action>, state: State) {
     const doc = ctx.doc
     const append = (node: Node) => this.append(doc, node)
     const parent = this.getParent(doc)
+    const newCtx = ctx.withAppend(append).withParent(parent)
     const viewChildren = mapArray(this.children, child => {
-      const newCtx = ctx.withAppend(append).withParent(parent)
       return child.render(newCtx, state)
     })
     return fragmentView(viewChildren)
   }
 }
 
-export const portal = <State, Action>(
+export const portal = <State, Action, Query = unknown>(
   options: {
     getParent: (doc: Document) => Element
     append: (doc: Document, node: Node) => void
   },
-  ...children: DOMChild<State, Action>[]
-): DOMTemplate<State, Action> =>
-  new DOMPortalTemplate<State, Action>(options.getParent, options.append, mapArray(children, domChildToTemplate))
+  ...children: DOMChild<State, Action, Query>[]
+): DOMTemplate<State, Action, Query> =>
+  new DOMPortalTemplate<State, Action, Query>(options.getParent, options.append, mapArray(children, domChildToTemplate))
 
-export const portalWithSelector = <State, Action>(
+export const portalWithSelector = <State, Action, Query = unknown>(
   options: { selector: string },
-  ...children: DOMChild<State, Action>[]
-): DOMTemplate<State, Action> =>
-  portal<State, Action>(
+  ...children: DOMChild<State, Action, Query>[]
+): DOMTemplate<State, Action, Query> =>
+  portal<State, Action, Query>(
     {
       getParent: (doc: Document) => {
         const el = doc.querySelector(options.selector)
@@ -68,15 +68,17 @@ export const portalWithSelector = <State, Action>(
     ...children
   )
 
-export const headPortal = <State, Action>(...children: DOMChild<State, Action>[]): DOMTemplate<State, Action> =>
-  new DOMPortalTemplate<State, Action>(
+export const headPortal = <State, Action, Query = unknown>(...children: DOMChild<State, Action, Query>[])
+    : DOMTemplate<State, Action, Query> =>
+  new DOMPortalTemplate<State, Action, Query>(
     (doc: Document) => doc.head!,
     (doc: Document, node: Node) => doc.head!.appendChild(node),
     mapArray(children, domChildToTemplate)
   )
 
-export const bodyPortal = <State, Action>(...children: DOMChild<State, Action>[]): DOMTemplate<State, Action> =>
-  new DOMPortalTemplate<State, Action>(
+export const bodyPortal = <State, Action, Query = unknown>(...children: DOMChild<State, Action, Query>[])
+    : DOMTemplate<State, Action, Query> =>
+  new DOMPortalTemplate<State, Action, Query>(
     (doc: Document) => doc.body,
     (doc: Document, node: Node) => doc.body.appendChild(node),
     mapArray(children, domChildToTemplate)

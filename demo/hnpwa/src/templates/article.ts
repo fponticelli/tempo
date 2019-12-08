@@ -30,6 +30,9 @@ export const articleTemplate = article<Article, Action>(
       itemFooterTemplate
     ),
     unsafeHtml({ content: item => item.content }),
-    section({ attrs: { className: 'comments-view' } }, mapState({ map: item => item.comments || [] }, commentsTemplate))
+    section(
+      { attrs: { className: 'comments-view' } },
+      mapState({ map: item => item.comments || [] }, commentsTemplate)
+    )
   )
 )

@@ -6,7 +6,7 @@
   "keywords": ["tempo", "unidirectional-flow", "property", "store", "state-management", "typescript"],
   "scripts": {
     "clean": "rm -rf lib/* && rm -rf es6/*",
-    "build": "npm run clean && tsc && tsc -p tsconfig.es6.json",
+    "build": "npm run clean && npx tsc && npx tsc -p tsconfig.es6.json",
     "test": "jest",
     "test-watch": "jest --watch",
     "tslint": "tslint -p ./tslint.json",
@@ -24,7 +24,7 @@
     "url": "https://github.com/fponticelli"
   },
   "dependencies": {
-    "tempo-core": "1.0.1"
+    "tempo-core": "1.1.0"
   },
   "devDependencies": {
     "@types/jest": "24.0.22",

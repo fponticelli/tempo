@@ -16,11 +16,12 @@ import { DOMComponentView, DOMComponentTemplate } from './component'
 import { DOMTemplate } from './template'
 import { DOMContext } from './context'
 
-export class DOMAdapterView<OuterState, InnerState, InnerAction> implements DynamicView<OuterState> {
+export class DOMAdapterView<OuterState, InnerState, InnerAction, Query> implements DynamicView<OuterState, Query> {
   readonly kind = 'dynamic'
   constructor(
     readonly mergeStates: (outerState: OuterState, innerState: InnerState) => InnerState | undefined,
-    readonly child: DOMComponentView<InnerState, InnerAction>
+    readonly request: (query: Query) => void,
+    readonly child: DOMComponentView<InnerState, InnerAction, Query>
   ) {}
 
   destroy(): void {
@@ -34,15 +35,15 @@ export class DOMAdapterView<OuterState, InnerState, InnerAction> implements Dyna
   }
 }
 
-export class DOMAdapterTemplate<OuterState, InnerState, OuterAction, InnerAction>
-  implements DOMTemplate<OuterState, OuterAction> {
+export class DOMAdapterTemplate<OuterState, InnerState, OuterAction, InnerAction, Query>
+  implements DOMTemplate<OuterState, OuterAction, Query> {
   constructor(
     readonly mergeStates: (outerState: OuterState, innerState: InnerState) => InnerState | undefined,
     readonly propagate: (args: PropagateArg<OuterState, InnerState, OuterAction, InnerAction>) => void,
-    readonly child: DOMComponentTemplate<InnerState, InnerAction>
+    readonly child: DOMComponentTemplate<InnerState, InnerAction, Query>
   ) {}
 
-  render(ctx: DOMContext<OuterAction>, outerState: OuterState): DynamicView<OuterState> {
+  render(ctx: DOMContext<OuterAction>, outerState: OuterState): DynamicView<OuterState, Query> {
     const mergedState =
       (this.mergeStates && this.mergeStates(outerState, this.child.store.property.get())) ||
       this.child.store.property.get()
@@ -61,7 +62,11 @@ export class DOMAdapterTemplate<OuterState, InnerState, OuterAction, InnerAction
         dispatchOuter: ctx.dispatch
       })
     })
-    const view = new DOMAdapterView(this.mergeStates, viewChild)
+    const view = new DOMAdapterView(
+      this.mergeStates,
+      (query: Query) => viewChild.request(query),
+      viewChild
+    )
     return view
   }
 }
@@ -74,13 +79,13 @@ export interface PropagateArg<OuterState, InnerState, OuterAction, InnerAction> 
   dispatchOuter: (action: OuterAction) => void
 }
 
-export const adapter = <OuterState, InnerState, OuterAction, InnerAction>(
+export const adapter = <OuterState, InnerState, OuterAction, InnerAction, Query = unknown>(
   options: {
     mergeStates?: (outerState: OuterState, innerState: InnerState) => InnerState | undefined
     propagate?: (args: PropagateArg<OuterState, InnerState, OuterAction, InnerAction>) => void
   },
-  child: DOMComponentTemplate<InnerState, InnerAction>
-): DOMTemplate<OuterState, OuterAction> =>
+  child: DOMComponentTemplate<InnerState, InnerAction, Query>
+): DOMTemplate<OuterState, OuterAction, Query> =>
   new DOMAdapterTemplate(
     options.mergeStates || ((_u: OuterState, _d: InnerState) => undefined),
     /* istanbul ignore next */

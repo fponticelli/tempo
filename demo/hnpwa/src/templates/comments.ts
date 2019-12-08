@@ -23,20 +23,27 @@ import { when } from 'tempo-dom/lib/when'
 import { unsafeHtml } from 'tempo-dom/lib/unsafe_html'
 import { linkRoute } from './link_route'
 
-export const commentTemplate: DOMTemplate<Item, Action> = lazy<Item, Action>(() =>
-  li<Item, Action>(
-    {},
-    div(
-      { attrs: { className: 'comment-meta' } },
-      linkRoute({ route: item => Route.user(item.user) }),
-      ' ',
-      item => item.time_ago
-    ),
-    unsafeHtml({ content: item => item.content }),
-    mapState<Item, Item[], Action>({ map: item => item.comments || [] }, commentsTemplate)
-  )
+export const commentTemplate: DOMTemplate<Item, Action> = lazy<Item, Action>(
+  () =>
+    li<Item, Action>(
+      {},
+      div(
+        { attrs: { className: 'comment-meta' } },
+        linkRoute({ route: item => Route.user(item.user) }),
+        ' ',
+        item => item.time_ago
+      ),
+      unsafeHtml({ content: item => item.content }),
+      mapState<Item, Item[], Action>(
+        { map: item => item.comments || [] },
+        commentsTemplate
+      )
+    )
 )
 
 export const commentsTemplate = lazy<Item[], Action>(() =>
-  when({ condition: comments => comments.length > 0 }, ul({}, forEach({}, commentTemplate)))
+  when(
+    { condition: comments => comments.length > 0 },
+    ul({}, forEach({}, commentTemplate))
+  )
 )

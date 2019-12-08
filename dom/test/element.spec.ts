@@ -45,7 +45,7 @@ describe('dom_element', () => {
     const ctx = createContext()
     const node = el('div', {
       attrs: { id: (v: string) => (v !== 'X' ? v : undefined) }
-    }).render(ctx, 'abc') as DynamicView<string | undefined>
+    }).render(ctx, 'abc') as DynamicView<string | undefined, unknown>
     expect(ctx.doc.body.innerHTML).toEqual('<div id="abc"></div>')
     node.change('xyz')
     expect(ctx.doc.body.innerHTML).toEqual('<div id="xyz"></div>')
@@ -62,7 +62,7 @@ describe('dom_element', () => {
     const node = el('div', { attrs: { id: (v: string) => v } }, el('a', { attrs: { href: (v: string) => v && `#${v}` } })).render(
       ctx,
       'abc'
-    ) as DynamicView<string | undefined>
+    ) as DynamicView<string | undefined, unknown>
     expect(ctx.doc.body.innerHTML).toEqual('<div id="abc"><a href="#abc"></a></div>')
     node.change('xyz')
     expect(ctx.doc.body.innerHTML).toEqual('<div id="xyz"><a href="#xyz"></a></div>')
@@ -85,7 +85,7 @@ describe('dom_element', () => {
     const node = el('div', { styles: { color: (v: number | undefined) => (v && (v === 1 ? 'red' : 'blue')) || undefined } }).render(
       ctx,
       1
-    ) as DynamicView<number | undefined>
+    ) as DynamicView<number | undefined, unknown>
     expect(ctx.doc.body.innerHTML).toEqual('<div style="color: red;"></div>')
     node.change(2)
     expect(ctx.doc.body.innerHTML).toEqual('<div style="color: blue;"></div>')
@@ -198,7 +198,7 @@ describe('dom_element', () => {
       afterchange: el => sequence.push('afterchange'),
       beforedestroy: () => sequence.push('beforedestroy')
     })
-    const view = template.render(ctx, 'A') as DynamicView<string>
+    const view = template.render(ctx, 'A') as DynamicView<string, unknown>
     expect(sequence).toEqual(['afterrender'])
     view.change('B')
     expect(sequence).toEqual(['afterrender', 'beforechange', 'afterchange'])
@@ -234,7 +234,7 @@ describe('dom_element', () => {
           sequence.push(String(el !== undefined))
         }
       })
-    const view = template.render(ctx, 'A') as DynamicView<string>
+    const view = template.render(ctx, 'A') as DynamicView<string, unknown>
     expect(sequence).toEqual(['AR:A:DIV'])
     view.change('B')
     expect(sequence).toEqual(['AR:A:DIV', 'BC:B:DIV', 'AC:B:DIV'])

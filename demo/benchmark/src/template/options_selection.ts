@@ -21,7 +21,10 @@ export const optionsSelection = div<TestOptions, Action>(
     {},
     tr(
       {},
-      th({}, label({ attrs: { for: 'options_max_time' } }, 'max execution time')),
+      th(
+        {},
+        label({ attrs: { for: 'options_max_time' } }, 'max execution time')
+      ),
       td(
         { attrs: { className: 'option-value' } },
         input({

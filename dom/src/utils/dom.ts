@@ -17,6 +17,7 @@ import { htmlAttributeMap as attributeMap } from '../dom_attributes_mapper'
 import { setAttribute, setOneStyle } from './set_attribute'
 import { DOMChild, DOMTemplate } from '../template'
 import { text } from '../text'
+import { View, DynamicView } from 'tempo-core/lib/view'
 
 export function removeNode(node: Node) {
   const el = node as HTMLElement
@@ -37,8 +38,22 @@ export function insertBefore(ref: Node) {
   }
 }
 
-export function domChildToTemplate<State, Action>(dom: DOMChild<State, Action>): DOMTemplate<State, Action> {
-  if (typeof dom === 'string' || typeof dom === 'function' || typeof dom === 'undefined') return text(dom)
+export function filterDynamics<State, Query>(children: View<State, Query>[]) {
+  return children.filter(child => child.kind === 'dynamic') as DynamicView<
+    State,
+    Query
+  >[]
+}
+
+export function domChildToTemplate<State, Action, Query>(
+  dom: DOMChild<State, Action, Query>
+): DOMTemplate<State, Action, Query> {
+  if (
+    typeof dom === 'string' ||
+    typeof dom === 'function' ||
+    typeof dom === 'undefined'
+  )
+    return text(dom)
   else return dom
 }
 
@@ -79,7 +94,12 @@ export function processAttribute<State, Value>(
   return acc
 }
 
-export function processEvent<State, El extends Element, Ev extends Event, Action>(
+export function processEvent<
+  State,
+  El extends Element,
+  Ev extends Event,
+  Action
+>(
   el: El,
   name: string,
   value: DOMEventHandler<State, Action, Ev, El>,

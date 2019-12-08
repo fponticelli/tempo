@@ -2,9 +2,10 @@
   "name": "tempo-demo.hnpwa",
   "version": "1.0.0",
   "license": "Apache-2.0",
+  "private": true,
   "dependencies": {
-    "tempo-core": "1.0.1",
-    "tempo-dom": "0.8.3",
+    "tempo-core": "1.1.0",
+    "tempo-dom": "0.9.0",
     "tempo-store": "1.0.1",
     "partsing": "0.7.3",
     "dompurify": "2.0.7"
@@ -21,7 +22,7 @@
     "sw-precache": "5.2.1"
   },
   "scripts": {
-    "compile": "NODE_ENV=production && parcel build src/index.html --public-url . --out-dir ../../docs/demo/hnpwa --experimental-scope-hoisting",
+    "compile": "NODE_ENV=production && npx tsc --noEmit && parcel build src/index.html --public-url . --out-dir ../../docs/demo/hnpwa --experimental-scope-hoisting",
     "clean": "rm -rf dist/* && rm -rf ../../docs/demo/hnpwa/*",
     "build": "npm run clean && npm run compile",
     "watch": "parcel src/index.html",

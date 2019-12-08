@@ -1,7 +1,6 @@
 import { Project, Item } from 'paper'
 
 export class PaperContext<Action> {
-
   constructor(
     readonly project: Project,
     readonly append: (item: Item) => void,

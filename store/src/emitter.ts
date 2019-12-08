@@ -57,7 +57,9 @@ export type Emitter1<T> = Emitter<[T]>
 export type Emitter2<A, B> = Emitter<[A, B]>
 export type Emitter3<A, B, C> = Emitter<[A, B, C]>
 
-export const debounce = (delay: number) => <T extends any[]>(listener: Listener<T>): Listener<T> => {
+export const debounce = (delay: number) => <T extends any[]>(
+  listener: Listener<T>
+): Listener<T> => {
   let running = false
   let acc: T
   return (...values: T) => {
@@ -71,7 +73,9 @@ export const debounce = (delay: number) => <T extends any[]>(listener: Listener<
   }
 }
 
-export const nextFrame = <T extends any[]>(listener: Listener<T>): Listener<T> => {
+export const nextFrame = <T extends any[]>(
+  listener: Listener<T>
+): Listener<T> => {
   let running = false
   let acc: T
   return (...values: T) => {

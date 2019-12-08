@@ -1,6 +1,12 @@
 import { Raster, Size } from 'paper'
 import { PaperAttribute, PaperEventHandler } from './value'
-import { WritableFields, ExcludeFunctionFields, RemoveNullableFromFields, Merge, MakeOptional } from 'tempo-core/lib/types/objects'
+import {
+  WritableFields,
+  ExcludeFunctionFields,
+  RemoveNullableFromFields,
+  Merge,
+  MakeOptional
+} from 'tempo-core/lib/types/objects'
 import { TempoAttributes } from './tempo_attributes'
 import { ItemEvents, createItem } from './item'
 
@@ -9,7 +15,9 @@ export interface RasterSpecificEvents<State, Action, El> {
   onError: PaperEventHandler<State, Action, null, El>
 }
 
-type WritableRaster = ExcludeFunctionFields<RemoveNullableFromFields<WritableFields<Raster>>>
+type WritableRaster = ExcludeFunctionFields<
+  RemoveNullableFromFields<WritableFields<Raster>>
+>
 
 type WritableRasterOptionKeys = keyof WritableRaster
 
@@ -17,22 +25,27 @@ type WritableRasterOptions<State> = {
   [K in WritableRasterOptionKeys]?: PaperAttribute<State, WritableRaster[K]>
 }
 
-type RasterOptions<State, Action, T> =
-  MakeOptional<
+type RasterOptions<State, Action, Query, T> = MakeOptional<
+  Merge<
     Merge<
-      Merge<
-        WritableRasterOptions<State>,
-        TempoAttributes<State, Action, T, Raster>
-      >,
-      Merge<
-        ItemEvents<State, Action, Raster>,
-        RasterSpecificEvents<State, Action, Raster>
-      >
+      WritableRasterOptions<State>,
+      TempoAttributes<State, Action, Query, Raster, T>
+    >,
+    Merge<
+      ItemEvents<State, Action, Raster>,
+      RasterSpecificEvents<State, Action, Raster>
     >
   >
+>
 
-export const raster = <State, Action, T = unknown>(options: RasterOptions<State, Action, T>) =>
-  createItem<State, Action, T, Raster, RasterOptions<State, Action, T>>(
-    (_: State) => new Raster(new Size(0, 0)),
-    options
-  )
+export const raster = <State, Action, Query = unknown, T = unknown>(
+  options: RasterOptions<State, Action, Query, T>
+) =>
+  createItem<
+    State,
+    Action,
+    Query,
+    Raster,
+    T,
+    RasterOptions<State, Action, Query, T>
+  >((_: State) => new Raster(new Size(0, 0)), options)
