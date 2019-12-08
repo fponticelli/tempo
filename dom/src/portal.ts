@@ -68,14 +68,16 @@ export const portalWithSelector = <State, Action, Query = unknown>(
     ...children
   )
 
-export const headPortal = <State, Action, Query = unknown>(...children: DOMChild<State, Action, Query>[]): DOMTemplate<State, Action, Query> =>
+export const headPortal = <State, Action, Query = unknown>(...children: DOMChild<State, Action, Query>[])
+    : DOMTemplate<State, Action, Query> =>
   new DOMPortalTemplate<State, Action, Query>(
     (doc: Document) => doc.head!,
     (doc: Document, node: Node) => doc.head!.appendChild(node),
     mapArray(children, domChildToTemplate)
   )
 
-export const bodyPortal = <State, Action, Query = unknown>(...children: DOMChild<State, Action, Query>[]): DOMTemplate<State, Action, Query> =>
+export const bodyPortal = <State, Action, Query = unknown>(...children: DOMChild<State, Action, Query>[])
+    : DOMTemplate<State, Action, Query> =>
   new DOMPortalTemplate<State, Action, Query>(
     (doc: Document) => doc.body,
     (doc: Document, node: Node) => doc.body.appendChild(node),

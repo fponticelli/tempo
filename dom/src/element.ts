@@ -41,7 +41,8 @@ const applyAfterRender = <State, Action, El extends Element, T>(
   }
 }
 
-export class DOMElement<State, Action, Query = unknown, El extends Element = Element, T = unknown> implements DOMTemplate<State, Action, Query> {
+export class DOMElement<State, Action, Query = unknown, El extends Element = Element, T = unknown>
+    implements DOMTemplate<State, Action, Query> {
   constructor(
     readonly createElement: (doc: Document) => El,
     readonly attrs: { name: string, value: DOMAttribute<State, AttributeValue>}[],

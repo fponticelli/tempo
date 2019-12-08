@@ -65,5 +65,6 @@ export class DOMFragmentTemplate<State, Action, Query> implements DOMTemplate<St
   }
 }
 
-export const fragment = <State, Action, Query = unknown>(...children: DOMChild<State, Action, Query>[]): DOMTemplate<State, Action, Query> =>
+export const fragment = <State, Action, Query = unknown>(...children: DOMChild<State, Action, Query>[])
+    : DOMTemplate<State, Action, Query> =>
   new DOMFragmentTemplate<State, Action, Query>(mapArray(children, domChildToTemplate))
