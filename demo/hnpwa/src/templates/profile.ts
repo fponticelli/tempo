@@ -44,7 +44,11 @@ export const profileTemplate = section<Profile, Action>(
       ),
       when(
         { condition: user => !!user.about },
-        tr({}, td({}, 'about:'), td({}, unsafeHtml({ content: user => user.about })))
+        tr(
+          {},
+          td({}, 'about:'),
+          td({}, unsafeHtml({ content: user => user.about }))
+        )
       )
     )
   )

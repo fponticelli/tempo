@@ -39,13 +39,21 @@ export function insertBefore(ref: Node) {
 }
 
 export function filterDynamics<State, Query>(children: View<State, Query>[]) {
-  return children.filter(child => child.kind === 'dynamic') as DynamicView<State, Query>[]
+  return children.filter(child => child.kind === 'dynamic') as DynamicView<
+    State,
+    Query
+  >[]
 }
 
 export function domChildToTemplate<State, Action, Query>(
   dom: DOMChild<State, Action, Query>
 ): DOMTemplate<State, Action, Query> {
-  if (typeof dom === 'string' || typeof dom === 'function' || typeof dom === 'undefined') return text(dom)
+  if (
+    typeof dom === 'string' ||
+    typeof dom === 'function' ||
+    typeof dom === 'undefined'
+  )
+    return text(dom)
   else return dom
 }
 
@@ -86,7 +94,12 @@ export function processAttribute<State, Value>(
   return acc
 }
 
-export function processEvent<State, El extends Element, Ev extends Event, Action>(
+export function processEvent<
+  State,
+  El extends Element,
+  Ev extends Event,
+  Action
+>(
   el: El,
   name: string,
   value: DOMEventHandler<State, Action, Ev, El>,

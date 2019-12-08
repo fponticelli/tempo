@@ -14,7 +14,11 @@ limitations under the License.
 import { Action } from '../action'
 import { Route, toUrl, toTitle } from '../route'
 import { a } from 'tempo-dom/lib/html'
-import { DOMAttribute, mapAttribute, resolveAttribute } from 'tempo-dom/lib/value'
+import {
+  DOMAttribute,
+  mapAttribute,
+  resolveAttribute
+} from 'tempo-dom/lib/value'
 import { DOMChild } from 'tempo-dom/lib/template'
 
 export const linkRoute = <State>(
@@ -32,8 +36,12 @@ export const linkRoute = <State>(
       attrs: {
         href: mapAttribute(opts.route, toUrl),
         className: opts.className,
-        target: mapAttribute(opts.route, a => (a.kind === 'ExternalRoute' ? '_blank' : undefined)),
-        rel: mapAttribute(opts.route, a => (a.kind === 'ExternalRoute' ? 'noopener' : undefined))
+        target: mapAttribute(opts.route, a =>
+          a.kind === 'ExternalRoute' ? '_blank' : undefined
+        ),
+        rel: mapAttribute(opts.route, a =>
+          a.kind === 'ExternalRoute' ? 'noopener' : undefined
+        )
       },
       events: {
         click: (state: State, e: MouseEvent) => {

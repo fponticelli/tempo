@@ -46,7 +46,10 @@ export function setStyleAttribute(el: Element, name: string, value: any) {
   } else if (typeof value === 'string') {
     setAttribute(el, name, value)
   } else {
-    const s = mapArray(Object.keys(value), k => `${k}: ${(value as any)[k]!};`).join(' ')
+    const s = mapArray(
+      Object.keys(value),
+      k => `${k}: ${(value as any)[k]!};`
+    ).join(' ')
     setAttribute(el, name, (s.length && s) || (null as any))
   }
 }
@@ -62,19 +65,33 @@ export function setBoolProperty(el: Element, name: string, value: any) {
 }
 
 export function setEnumBoolAttribute(el: Element, name: string, value: any) {
-  setAttribute(el, name, value === true || value === 'true' ? 'true' : value === false ? 'false' : (null as any))
+  setAttribute(
+    el,
+    name,
+    value === true || value === 'true'
+      ? 'true'
+      : value === false
+      ? 'false'
+      : (null as any)
+  )
 }
 
 export function setBoolAttribute(el: Element, name: string, value: any) {
-  setAttribute(el, name, value === true || value === 'true' ? '' : (null as any))
+  setAttribute(
+    el,
+    name,
+    value === true || value === 'true' ? '' : (null as any)
+  )
 }
 
 export function setCommaSeparated(el: Element, name: string, values: any) {
-  if (Array.isArray(values)) setAttribute(el, name, values.join(', ') || (null as any))
+  if (Array.isArray(values))
+    setAttribute(el, name, values.join(', ') || (null as any))
   else setAttribute(el, name, (values && String(values)) || (null as any))
 }
 
 export function setSpaceSeparated(el: Element, name: string, values: any) {
-  if (Array.isArray(values)) setAttribute(el, name, values.join(' ') || (null as any))
+  if (Array.isArray(values))
+    setAttribute(el, name, values.join(' ') || (null as any))
   else setAttribute(el, name, (values && String(values)) || (null as any))
 }

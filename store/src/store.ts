@@ -22,12 +22,18 @@ export class Store<State, Action> {
     reducer: Reducer<State, Action>
     equal?: (a: State, b: State) => boolean
   }) {
-    return new Store(new Property(options.state, options.equal), options.reducer)
+    return new Store(
+      new Property(options.state, options.equal),
+      options.reducer
+    )
   }
 
   readonly observable: Observable3<State, Action, boolean>
 
-  constructor(readonly property: Property<State>, private readonly reducer: Reducer<State, Action>) {
+  constructor(
+    readonly property: Property<State>,
+    private readonly reducer: Reducer<State, Action>
+  ) {
     this.observable = this.emitter = Emitter.ofThree<State, Action, boolean>()
   }
 

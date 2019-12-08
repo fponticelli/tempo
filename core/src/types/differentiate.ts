@@ -21,9 +21,16 @@ export type Differentiate<
   ExpectedType extends State[Field]
 > = State extends ObjectWithField<Field, ExpectedType> ? State : never
 
-export type DifferentiateByKind<State extends { kind: any }, K extends State['kind']> = Differentiate<'kind', State, K>
+export type DifferentiateByKind<
+  State extends { kind: any },
+  K extends State['kind']
+> = Differentiate<'kind', State, K>
 
-export type DifferentiateAt<Path extends IndexType[], State, ExpectedType> = Path extends []
+export type DifferentiateAt<
+  Path extends IndexType[],
+  State,
+  ExpectedType
+> = Path extends []
   ? State
   : Path extends [infer T]
   ? T extends keyof State

@@ -54,7 +54,13 @@ const template = div<State, Action>(
     div({ attrs: { className: 'count' } }, String),
     div(
       { attrs: { className: 'buttons' } },
-      button({ events: { click: decrement }, attrs: { disabled: (count: number) => count <= 0 } }, '-'),
+      button(
+        {
+          events: { click: decrement },
+          attrs: { disabled: (count: number) => count <= 0 }
+        },
+        '-'
+      ),
       button({ events: { click: increment } }, '+')
     )
   )

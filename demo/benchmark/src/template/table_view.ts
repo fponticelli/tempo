@@ -11,7 +11,19 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { div, th, table, tr, td, br, a, span, button, b, s } from 'tempo-dom/lib/html'
+import {
+  div,
+  th,
+  table,
+  tr,
+  td,
+  br,
+  a,
+  span,
+  button,
+  b,
+  s
+} from 'tempo-dom/lib/html'
 import { Action } from '../action'
 import { TestInfo, State, VersionWithSelected, makeTestRunId } from '../state'
 import { forEach } from 'tempo-dom/lib/for_each'
@@ -25,11 +37,16 @@ const resultToOpsPerSec = (r: TestResult) => {
 
 const resultToSamples = (r: TestResult) => {
   const size = r.stats.sample.length
-  return `error \xb1${r.stats.rme.toFixed(2)}%, ${size} sample` + (size === 1 ? '' : 's')
+  return (
+    `error \xb1${r.stats.rme.toFixed(2)}%, ${size} sample` +
+    (size === 1 ? '' : 's')
+  )
 }
 
 const colHeader = fragment<{ id: string; selected: boolean }, Action>(
-  when({ condition: s => s.id === 'current' }, 'current', br({}), s => (s.selected ? '✅' : '⛔️')),
+  when({ condition: s => s.id === 'current' }, 'current', br({}), s =>
+    s.selected ? '✅' : '⛔️'
+  ),
   when(
     { condition: s => s.id !== 'current' },
     mapState(
@@ -45,8 +62,9 @@ const colHeader = fragment<{ id: string; selected: boolean }, Action>(
           return { date, commit, selected: s.selected }
         }
       },
-      div<{ date: Date; commit: string; selected: boolean }, Action>({ attrs: { className: 'date' } }, s =>
-        s.date.toDateString()
+      div<{ date: Date; commit: string; selected: boolean }, Action>(
+        { attrs: { className: 'date' } },
+        s => s.date.toDateString()
       ),
       span({ attrs: { className: 'commit' } }, s => s.commit),
       ' ',
@@ -63,10 +81,16 @@ export const tableView = table<State, Action>(
       {},
       when(
         { condition: s => s.processing.size > 0 },
-        span({ attrs: { className: 'details' } }, s => ` running ${s.processing.size} tests`),
+        span(
+          { attrs: { className: 'details' } },
+          s => ` running ${s.processing.size} tests`
+        ),
         br({})
       ),
-      button({ events: { click: () => Action.executeSelectedTests() } }, 'execute selected tests')
+      button(
+        { events: { click: () => Action.executeSelectedTests() } },
+        'execute selected tests'
+      )
     ),
     th({}),
     mapState(
@@ -91,13 +115,31 @@ export const tableView = table<State, Action>(
     th(
       {},
       'toggle: ',
-      a({ attrs: { href: '#' }, events: { click: () => Action.toggleAllTests() } }, 'tests'),
+      a(
+        {
+          attrs: { href: '#' },
+          events: { click: () => Action.toggleAllTests() }
+        },
+        'tests'
+      ),
       ', ',
-      a({ attrs: { href: '#' }, events: { click: () => Action.toggleAllVersions() } }, 'versions')
+      a(
+        {
+          attrs: { href: '#' },
+          events: { click: () => Action.toggleAllVersions() }
+        },
+        'versions'
+      )
     ),
     th({}),
     mapState(
-      { map: state => state.versions.map(version => ({ version, tests: state.tests.map(t => t.id) })) },
+      {
+        map: state =>
+          state.versions.map(version => ({
+            version,
+            tests: state.tests.map(t => t.id)
+          }))
+      },
       forEach(
         {},
         th<{ version: VersionWithSelected; tests: string[] }, Action>(
@@ -105,7 +147,9 @@ export const tableView = table<State, Action>(
           a(
             {
               attrs: { href: '#' },
-              events: { click: s => Action.executeTests([s.version.id], s.tests) }
+              events: {
+                click: s => Action.executeTests([s.version.id], s.tests)
+              }
             },
             '👇'
           )
@@ -124,7 +168,9 @@ export const tableView = table<State, Action>(
           a(
             {
               attrs: { href: '#' },
-              events: { click: s => Action.toggleTest(s.test.id, !s.test.selected) }
+              events: {
+                click: s => Action.toggleTest(s.test.id, !s.test.selected)
+              }
             },
             item => (item.test.selected ? '✅' : '⛔️') + ' ' + item.test.name
           )
@@ -193,7 +239,15 @@ export const tableView = table<State, Action>(
               when(
                 { condition: s => s.result != null },
                 s => resultToOpsPerSec(s.result!),
-                span({ attrs: { className: 'details', title: s => resultToSamples(s.result!) } }, ' ops/sec'),
+                span(
+                  {
+                    attrs: {
+                      className: 'details',
+                      title: s => resultToSamples(s.result!)
+                    }
+                  },
+                  ' ops/sec'
+                ),
                 br({}),
                 when(
                   { condition: s => !!s.faster && s.faster >= 0.05 },
@@ -208,7 +262,9 @@ export const tableView = table<State, Action>(
                   a(
                     {
                       attrs: { href: '#' },
-                      events: { click: s => Action.executeTests([s.version], [s.test]) }
+                      events: {
+                        click: s => Action.executeTests([s.version], [s.test])
+                      }
                     },
                     '▶️'
                   )
@@ -219,7 +275,9 @@ export const tableView = table<State, Action>(
                 a(
                   {
                     attrs: { href: '#' },
-                    events: { click: s => Action.executeTests([s.version], [s.test]) }
+                    events: {
+                      click: s => Action.executeTests([s.version], [s.test])
+                    }
                   },
                   '▶️'
                 )
