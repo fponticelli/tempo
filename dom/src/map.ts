@@ -76,14 +76,16 @@ export const mapAction = <State, OuterAction, InnerAction, Query = unknown>(
 export class MapQueryDynamicView<State, OuterQuery, InnerQuery> implements DynamicView<State, OuterQuery> {
   readonly kind = 'dynamic'
   constructor(
-    readonly map: (query: OuterQuery) => InnerQuery,
+    readonly map: (query: OuterQuery) => InnerQuery | undefined,
     readonly views: View<State, InnerQuery>[],
     readonly dynamicViews: DynamicView<State, InnerQuery>[]
   ) { }
 
   request(query: OuterQuery) {
     const innerQuery = this.map(query)
-    this.views.forEach(view => view.request(innerQuery))
+    if (typeof innerQuery !== 'undefined') {
+      this.views.forEach(view => view.request(innerQuery))
+    }
   }
 
   change(state: State) {
@@ -98,13 +100,15 @@ export class MapQueryDynamicView<State, OuterQuery, InnerQuery> implements Dynam
 export class MapQueryStaticView<OuterQuery, InnerQuery> implements StaticView<OuterQuery> {
   readonly kind = 'static'
   constructor(
-    readonly map: (query: OuterQuery) => InnerQuery,
+    readonly map: (query: OuterQuery) => InnerQuery | undefined,
     readonly views: StaticView<InnerQuery>[]
   ) { }
 
   request(query: OuterQuery) {
     const innerQuery = this.map(query)
-    this.views.forEach(view => view.request(innerQuery))
+    if (typeof innerQuery !== 'undefined') {
+      this.views.forEach(view => view.request(innerQuery))
+    }
   }
 
   destroy() {
@@ -114,7 +118,7 @@ export class MapQueryStaticView<OuterQuery, InnerQuery> implements StaticView<Ou
 
 export class MapQueryTemplate<State, Action, OuterQuery, InnerQuery> implements DOMTemplate<State, Action, OuterQuery> {
   constructor(
-    readonly map: (value: OuterQuery) => InnerQuery,
+    readonly map: (value: OuterQuery) => InnerQuery | undefined,
     readonly children: DOMTemplate<State, Action, InnerQuery>[]
   ) {}
 
@@ -132,6 +136,12 @@ export class MapQueryTemplate<State, Action, OuterQuery, InnerQuery> implements 
 
 export const mapQuery = <State, Action, OuterQuery, InnerQuery>(
   options: { map: (value: OuterQuery) => InnerQuery },
+  ...children: DOMChild<State, Action, InnerQuery>[]
+): DOMTemplate<State, Action, OuterQuery> =>
+  new MapQueryTemplate<State, Action, OuterQuery, InnerQuery>(options.map, mapArray(children, domChildToTemplate))
+
+export const mapQueryConditional = <State, Action, OuterQuery, InnerQuery>(
+  options: { map: (value: OuterQuery) => InnerQuery | undefined },
   ...children: DOMChild<State, Action, InnerQuery>[]
 ): DOMTemplate<State, Action, OuterQuery> =>
   new MapQueryTemplate<State, Action, OuterQuery, InnerQuery>(options.map, mapArray(children, domChildToTemplate))
