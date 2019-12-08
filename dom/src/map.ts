@@ -12,7 +12,7 @@ limitations under the License.
 */
 
 import { DOMChild, DOMTemplate } from './template'
-import { View } from 'tempo-core/lib/view'
+import { View, DynamicView, StaticView } from 'tempo-core/lib/view'
 import { DOMContext } from './context'
 import { domChildToTemplate, filterDynamics } from './utils/dom'
 import { DOMStaticFragmentView, DOMDynamicFragmentView, fragmentView } from './fragment'
@@ -72,3 +72,67 @@ export const mapAction = <State, OuterAction, InnerAction, Query = unknown>(
   ...children: DOMChild<State, InnerAction, Query>[]
 ): DOMTemplate<State, OuterAction, Query> =>
   new MapActionTemplate<State, OuterAction, InnerAction, Query>(options.map, mapArray(children, domChildToTemplate))
+
+export class MapQueryDynamicView<State, OuterQuery, InnerQuery> implements DynamicView<State, OuterQuery> {
+  readonly kind = 'dynamic'
+  constructor(
+    readonly map: (query: OuterQuery) => InnerQuery,
+    readonly views: View<State, InnerQuery>[],
+    readonly dynamicViews: DynamicView<State, InnerQuery>[]
+  ) { }
+
+  request(query: OuterQuery) {
+    const innerQuery = this.map(query)
+    this.views.forEach(view => view.request(innerQuery))
+  }
+
+  change(state: State) {
+    this.dynamicViews.forEach(view => view.change(state))
+  }
+
+  destroy() {
+    this.views.forEach(view => view.destroy())
+  }
+}
+
+export class MapQueryStaticView<OuterQuery, InnerQuery> implements StaticView<OuterQuery> {
+  readonly kind = 'static'
+  constructor(
+    readonly map: (query: OuterQuery) => InnerQuery,
+    readonly views: StaticView<InnerQuery>[]
+  ) { }
+
+  request(query: OuterQuery) {
+    const innerQuery = this.map(query)
+    this.views.forEach(view => view.request(innerQuery))
+  }
+
+  destroy() {
+    this.views.forEach(view => view.destroy())
+  }
+}
+
+export class MapQueryTemplate<State, Action, OuterQuery, InnerQuery> implements DOMTemplate<State, Action, OuterQuery> {
+  constructor(
+    readonly map: (value: OuterQuery) => InnerQuery,
+    readonly children: DOMTemplate<State, Action, InnerQuery>[]
+  ) {}
+
+  render(ctx: DOMContext<Action>, state: State): View<State, OuterQuery> {
+    const { children, map } = this
+    const views = mapArray(children, c => c.render(ctx, state))
+    const dynamicViews = filterDynamics(views)
+    if (dynamicViews.length > 0) {
+      return new MapQueryDynamicView<State, OuterQuery, InnerQuery>(map, views, dynamicViews)
+    } else {
+      return new MapQueryStaticView<OuterQuery, InnerQuery>(map, views as (StaticView<InnerQuery>[]))
+    }
+  }
+}
+
+export const mapQuery = <State, Action, OuterQuery, InnerQuery>(
+  options: { map: (value: OuterQuery) => InnerQuery },
+  ...children: DOMChild<State, Action, InnerQuery>[]
+): DOMTemplate<State, Action, OuterQuery> =>
+  new MapQueryTemplate<State, Action, OuterQuery, InnerQuery>(options.map, mapArray(children, domChildToTemplate))
+
