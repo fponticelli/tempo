@@ -17,7 +17,7 @@ import { TempoView } from 'tempo-dom/lib/tempo'
 import { runTests } from './test_runner'
 import { tests as testDescriptions } from './tests'
 
-export const middleware = (app: TempoView<State, Action>) => (state: State, action: Action) => {
+export const middleware = (app: TempoView<State, Action, unknown>) => (state: State, action: Action) => {
   switch (action.kind) {
     case 'ExecuteSelectedTests':
       const { tests, versions } = getSelectedTests(state)

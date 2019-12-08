@@ -233,158 +233,79 @@ var $UKQ2$export$htmlAttributeMap = {
 };
 $UKQ2$exports.htmlAttributeMap = $UKQ2$export$htmlAttributeMap; //# sourceMappingURL=dom_attributes_mapper.js.map
 
-// ASSET: ../node_modules/tempo-dom/lib/node_view.js
-var $wNw6$exports = {};
-
-var $wNw6$var$__extends = $wNw6$exports && $wNw6$exports.__extends || function () {
-  var extendStatics = function (d, b) {
-    extendStatics = Object.setPrototypeOf || {
-      __proto__: []
-    } instanceof Array && function (d, b) {
-      d.__proto__ = b;
-    } || function (d, b) {
-      for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    };
-
-    return extendStatics(d, b);
-  };
-
-  return function (d, b) {
-    extendStatics(d, b);
-
-    function __() {
-      this.constructor = d;
-    }
-
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-  };
-}();
-
-Object.defineProperty($wNw6$exports, "__esModule", {
-  value: true
-});
-
-var $wNw6$var$DOMBaseNodeView =
-/** @class */
-function () {
-  function DOMBaseNodeView(node, children, request, beforeDestroy) {
-    this.node = node;
-    this.children = children;
-    this.request = request;
-    this.beforeDestroy = beforeDestroy;
-  }
-
-  DOMBaseNodeView.prototype.destroy = function () {
-    if (this.beforeDestroy) this.beforeDestroy();
-    $TnZD$export$removeNode(this.node);
-
-    for (var _i = 0, _a = this.children; _i < _a.length; _i++) {
-      var c = _a[_i];
-      c.destroy();
-    }
-  };
-
-  return DOMBaseNodeView;
-}();
-
-var $wNw6$export$DOMBaseNodeView = $wNw6$var$DOMBaseNodeView;
-$wNw6$exports.DOMBaseNodeView = $wNw6$export$DOMBaseNodeView;
-
-var $wNw6$var$DOMStaticNodeView =
-/** @class */
-function (_super) {
-  $wNw6$var$__extends(DOMStaticNodeView, _super);
-
-  function DOMStaticNodeView() {
-    var _this = _super !== null && _super.apply(this, arguments) || this;
-
-    _this.kind = 'static';
-    return _this;
-  }
-
-  return DOMStaticNodeView;
-}($wNw6$var$DOMBaseNodeView);
-
-var $wNw6$export$DOMStaticNodeView = $wNw6$var$DOMStaticNodeView;
-$wNw6$exports.DOMStaticNodeView = $wNw6$export$DOMStaticNodeView;
-
-var $wNw6$var$DOMDynamicNodeView =
-/** @class */
-function (_super) {
-  $wNw6$var$__extends(DOMDynamicNodeView, _super);
-
-  function DOMDynamicNodeView(node, children, change, request, beforeDestroy) {
-    var _this = _super.call(this, node, children, request, beforeDestroy) || this;
-
-    _this.node = node;
-    _this.children = children;
-    _this.change = change;
-    _this.request = request;
-    _this.beforeDestroy = beforeDestroy;
-    _this.kind = 'dynamic';
-    return _this;
-  }
-
-  return DOMDynamicNodeView;
-}($wNw6$var$DOMBaseNodeView);
-
-var $wNw6$export$DOMDynamicNodeView = $wNw6$var$DOMDynamicNodeView;
-$wNw6$exports.DOMDynamicNodeView = $wNw6$export$DOMDynamicNodeView; //# sourceMappingURL=node_view.js.map
-
 // ASSET: ../node_modules/tempo-dom/lib/text.js
 var $GqEk$exports = {};
 Object.defineProperty($GqEk$exports, "__esModule", {
   value: true
 });
 
-var $GqEk$var$renderLiteral = function (ctx, value) {
-  var node = ctx.doc.createTextNode(value || '');
-  var view = new $wNw6$export$DOMStaticNodeView(node, [], function () {});
-  ctx.append(node);
-  return view;
-};
-
-var $GqEk$var$renderFunction = function (ctx, state, map) {
-  var node = ctx.doc.createTextNode(map(state) || '');
-  var oldContent = '';
-
-  var f = function (state) {
-    var newContent = map(state) || '';
-
-    if (newContent !== oldContent) {
-      node.nodeValue = newContent;
-      if (newContent.length < 5000) oldContent = newContent;
-    }
-  };
-
-  var view = new $wNw6$export$DOMDynamicNodeView(node, [], f, function () {});
-  ctx.append(node);
-  return view;
-};
-
-var $GqEk$var$DOMTextTemplate =
+var $GqEk$var$DOMDerivedTextTemplate =
 /** @class */
 function () {
-  function DOMTextTemplate(content) {
+  function DOMDerivedTextTemplate(makeContent) {
+    this.makeContent = makeContent;
+  }
+
+  DOMDerivedTextTemplate.prototype.render = function (ctx, state) {
+    var makeContent = this.makeContent;
+    var content = makeContent(state) || '';
+    var node = ctx.doc.createTextNode(content);
+    ctx.append(node);
+    return {
+      kind: 'dynamic',
+      change: function (state) {
+        var newContent = makeContent(state) || '';
+
+        if (newContent !== content) {
+          node.nodeValue = newContent;
+          if (newContent.length < 5000) content = newContent;
+        }
+      },
+      destroy: function () {
+        $TnZD$export$removeNode(node);
+      },
+      request: function (_) {}
+    };
+  };
+
+  return DOMDerivedTextTemplate;
+}();
+
+var $GqEk$export$DOMDerivedTextTemplate = $GqEk$var$DOMDerivedTextTemplate;
+$GqEk$exports.DOMDerivedTextTemplate = $GqEk$export$DOMDerivedTextTemplate;
+
+var $GqEk$var$DOMLiteralTextTemplate =
+/** @class */
+function () {
+  function DOMLiteralTextTemplate(content) {
     this.content = content;
   }
 
-  DOMTextTemplate.prototype.render = function (ctx, state) {
-    if (typeof this.content === 'function') {
-      return $GqEk$var$renderFunction(ctx, state, this.content);
-    } else {
-      return $GqEk$var$renderLiteral(ctx, this.content);
-    }
+  DOMLiteralTextTemplate.prototype.render = function (ctx, _) {
+    var node = ctx.doc.createTextNode(this.content);
+    ctx.append(node);
+    return {
+      kind: 'dynamic',
+      change: function (_) {},
+      destroy: function () {
+        $TnZD$export$removeNode(node);
+      },
+      request: function (_) {}
+    };
   };
 
-  return DOMTextTemplate;
+  return DOMLiteralTextTemplate;
 }();
 
-var $GqEk$export$DOMTextTemplate = $GqEk$var$DOMTextTemplate;
-$GqEk$exports.DOMTextTemplate = $GqEk$export$DOMTextTemplate;
+var $GqEk$export$DOMLiteralTextTemplate = $GqEk$var$DOMLiteralTextTemplate;
+$GqEk$exports.DOMLiteralTextTemplate = $GqEk$export$DOMLiteralTextTemplate;
 
 var $GqEk$export$text = function (content) {
-  return new $GqEk$var$DOMTextTemplate(content);
+  if (typeof content === 'function') {
+    return new $GqEk$var$DOMDerivedTextTemplate(content);
+  } else {
+    return new $GqEk$var$DOMLiteralTextTemplate(content || '');
+  }
 };
 
 $GqEk$exports.text = $GqEk$export$text; //# sourceMappingURL=text.js.map
@@ -1549,6 +1470,104 @@ var $pSX2$export$reducer = function (state, action) {
 };
 
 $pSX2$exports.reducer = $pSX2$export$reducer;
+// ASSET: ../node_modules/tempo-dom/lib/node_view.js
+var $wNw6$exports = {};
+
+var $wNw6$var$__extends = $wNw6$exports && $wNw6$exports.__extends || function () {
+  var extendStatics = function (d, b) {
+    extendStatics = Object.setPrototypeOf || {
+      __proto__: []
+    } instanceof Array && function (d, b) {
+      d.__proto__ = b;
+    } || function (d, b) {
+      for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    };
+
+    return extendStatics(d, b);
+  };
+
+  return function (d, b) {
+    extendStatics(d, b);
+
+    function __() {
+      this.constructor = d;
+    }
+
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+}();
+
+Object.defineProperty($wNw6$exports, "__esModule", {
+  value: true
+});
+
+var $wNw6$var$DOMBaseNodeView =
+/** @class */
+function () {
+  function DOMBaseNodeView(node, children, request, beforeDestroy) {
+    this.node = node;
+    this.children = children;
+    this.request = request;
+    this.beforeDestroy = beforeDestroy;
+  }
+
+  DOMBaseNodeView.prototype.destroy = function () {
+    if (this.beforeDestroy) this.beforeDestroy();
+    $TnZD$export$removeNode(this.node);
+
+    for (var _i = 0, _a = this.children; _i < _a.length; _i++) {
+      var c = _a[_i];
+      c.destroy();
+    }
+  };
+
+  return DOMBaseNodeView;
+}();
+
+var $wNw6$export$DOMBaseNodeView = $wNw6$var$DOMBaseNodeView;
+$wNw6$exports.DOMBaseNodeView = $wNw6$export$DOMBaseNodeView;
+
+var $wNw6$var$DOMStaticNodeView =
+/** @class */
+function (_super) {
+  $wNw6$var$__extends(DOMStaticNodeView, _super);
+
+  function DOMStaticNodeView() {
+    var _this = _super !== null && _super.apply(this, arguments) || this;
+
+    _this.kind = 'static';
+    return _this;
+  }
+
+  return DOMStaticNodeView;
+}($wNw6$var$DOMBaseNodeView);
+
+var $wNw6$export$DOMStaticNodeView = $wNw6$var$DOMStaticNodeView;
+$wNw6$exports.DOMStaticNodeView = $wNw6$export$DOMStaticNodeView;
+
+var $wNw6$var$DOMDynamicNodeView =
+/** @class */
+function (_super) {
+  $wNw6$var$__extends(DOMDynamicNodeView, _super);
+
+  function DOMDynamicNodeView(node, children, change, request, beforeDestroy) {
+    var _this = _super.call(this, node, children, request, beforeDestroy) || this;
+
+    _this.node = node;
+    _this.children = children;
+    _this.change = change;
+    _this.request = request;
+    _this.beforeDestroy = beforeDestroy;
+    _this.kind = 'dynamic';
+    return _this;
+  }
+
+  return DOMDynamicNodeView;
+}($wNw6$var$DOMBaseNodeView);
+
+var $wNw6$export$DOMDynamicNodeView = $wNw6$var$DOMDynamicNodeView;
+$wNw6$exports.DOMDynamicNodeView = $wNw6$export$DOMDynamicNodeView; //# sourceMappingURL=node_view.js.map
+
 // ASSET: ../node_modules/tempo-dom/lib/element.js
 var $bbLX$exports = {};
 Object.defineProperty($bbLX$exports, "__esModule", {
@@ -2176,8 +2195,9 @@ function () {
         children = _a.children,
         map = _a.map;
 
+    var newCtx = ctx.conditionalMapAction(map);
     var views = $tBUf$export$mapArray(children, function (c) {
-      return c.render(ctx.conditionalMapAction(map), state);
+      return c.render(newCtx, state);
     });
     return $Gdta$export$fragmentView(views);
   };

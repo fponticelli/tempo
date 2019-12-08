@@ -11,51 +11,61 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { DOMTemplate } from './template'
-import { DOMContext } from './context'
 import { View } from 'tempo-core/lib/view'
 import { UnwrappedDerivedValue } from 'tempo-core/lib/value'
-import { DOMStaticNodeView, DOMDynamicNodeView } from './node_view'
+import { removeNode } from './utils/dom'
+import { DOMTemplate } from './template'
+import { DOMContext } from './context'
 import { DOMTextValue } from './value'
 
-const renderLiteral = <State, Query = unknown>(ctx: DOMContext<never>, value: string | undefined): View<State, Query> => {
-  const node = ctx.doc.createTextNode(value || '')
-  const view = new DOMStaticNodeView(node, [], () => {})
-  ctx.append(node)
-  return view
-}
-
-const renderFunction = <State, Query = unknown>(
-  ctx: DOMContext<never>,
-  state: State,
-  map: UnwrappedDerivedValue<State, string>
-): View<State, Query> => {
-  const node = ctx.doc.createTextNode(map(state) || '')
-  let oldContent = ''
-  const f = (state: State) => {
-    const newContent = map(state) || ''
-    if (newContent !== oldContent) {
-      node.nodeValue = newContent
-      if (newContent.length < 5000)
-        oldContent = newContent
-    }
-  }
-  const view = new DOMDynamicNodeView(node, [], f, () => {})
-  ctx.append(node)
-  return view
-}
-
-export class DOMTextTemplate<State, Action, Query> implements DOMTemplate<State, Action, Query> {
-  constructor(readonly content: DOMTextValue<State>) {}
+export class DOMDerivedTextTemplate<State, Action, Query> implements DOMTemplate<State, Action, Query> {
+  constructor(readonly makeContent: UnwrappedDerivedValue<State, string>) {}
 
   render(ctx: DOMContext<Action>, state: State): View<State, Query> {
-    if (typeof this.content === 'function') {
-      return renderFunction(ctx, state, this.content as UnwrappedDerivedValue<State, string>)
-    } else {
-      return renderLiteral(ctx, this.content)
+    const { makeContent } = this
+    let content = makeContent(state) || ''
+    const node = ctx.doc.createTextNode(content)
+    ctx.append(node)
+    return {
+      kind: 'dynamic',
+      change(state: State) {
+        const newContent = makeContent(state) || ''
+        if (newContent !== content) {
+          node.nodeValue = newContent
+          if (newContent.length < 5000)
+            content = newContent
+        }
+      },
+      destroy() {
+        removeNode(node)
+      },
+      request(_: Query) {}
     }
   }
 }
 
-export const text = <State, Action, Query = unknown>(content: DOMTextValue<State>): DOMTemplate<State, Action, Query> =>
-  new DOMTextTemplate<State, Action, Query>(content)
+export class DOMLiteralTextTemplate<State, Action, Query> implements DOMTemplate<State, Action, Query> {
+  constructor(
+    readonly content: string
+  ) {}
+  render(ctx: DOMContext<Action>, _: State): View<State, Query> {
+    const node = ctx.doc.createTextNode(this.content)
+    ctx.append(node)
+    return {
+      kind: 'dynamic',
+      change(_: State) {},
+      destroy() {
+        removeNode(node)
+      },
+      request(_: Query) {}
+    }
+  }
+}
+
+export const text = <State, Action, Query = unknown>(content: DOMTextValue<State>): DOMTemplate<State, Action, Query> => {
+  if (typeof content === 'function') {
+    return new DOMDerivedTextTemplate<State, Action, Query>(content as UnwrappedDerivedValue<State, string>)
+  } else {
+    return new DOMLiteralTextTemplate<State, Action, Query>(content || '')
+  }
+}

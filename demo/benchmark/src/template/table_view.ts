@@ -21,8 +21,7 @@ import {
   a,
   span,
   button,
-  b,
-  s
+  b
 } from 'tempo-dom/lib/html'
 import { Action } from '../action'
 import { TestInfo, State, VersionWithSelected, makeTestRunId } from '../state'

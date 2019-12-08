@@ -12,21 +12,22 @@ limitations under the License.
 */
 
 import { createContext } from './common'
-import { DOMTextTemplate } from '../src/text'
+import { DOMDerivedTextTemplate, DOMLiteralTextTemplate } from '../src/text'
 import { DynamicView } from 'tempo-core/lib/view'
 
 describe('dom_text', () => {
   it('create static undefined', () => {
     const ctx = createContext()
-    const nodeUndefined = new DOMTextTemplate(undefined as any).render(ctx, 1)
-    expect(ctx.doc.body.innerHTML).toEqual('')
+    const nodeUndefined = new DOMLiteralTextTemplate(undefined as any).render(ctx, 1)
+    // undefined normalization is done in the helper function `text`
+    expect(ctx.doc.body.innerHTML).toEqual('undefined')
     nodeUndefined.destroy()
     expect(ctx.doc.body.innerHTML).toEqual('')
   })
 
   it('create static with literal value', () => {
     const ctx = createContext()
-    const node = new DOMTextTemplate('abc').render(ctx, 1)
+    const node = new DOMLiteralTextTemplate('abc').render(ctx, 1)
     expect(ctx.doc.body.innerHTML).toEqual('abc')
     node.destroy()
     expect(ctx.doc.body.innerHTML).toEqual('')
@@ -34,7 +35,7 @@ describe('dom_text', () => {
 
   it('create static with function value', () => {
     const ctx = createContext()
-    const node = new DOMTextTemplate((r: string) => r).render(ctx, 'abc') as DynamicView<string | undefined, unknown>
+    const node = new DOMDerivedTextTemplate((r: string) => r).render(ctx, 'abc') as DynamicView<string | undefined, unknown>
     expect(ctx.doc.body.innerHTML).toEqual('abc')
     node.change('abc')
     expect(ctx.doc.body.innerHTML).toEqual('abc')
@@ -44,7 +45,7 @@ describe('dom_text', () => {
     expect(ctx.doc.body.innerHTML).toEqual('xyz')
     node.destroy()
     expect(ctx.doc.body.innerHTML).toEqual('')
-    const t = new DOMTextTemplate((r: string) => r)
+    const t = new DOMDerivedTextTemplate((r: string) => r)
     t.render(ctx, undefined as any)
     expect(ctx.doc.body.innerHTML).toEqual('')
   })

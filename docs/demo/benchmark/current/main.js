@@ -301,7 +301,7 @@ exports.htmlAttributeMap = {
     value: set_attribute_1.setProperty
 };
 
-},{"./utils/set_attribute":"BEVE"}],"wNw6":[function(require,module,exports) {
+},{"./utils/set_attribute":"BEVE"}],"GqEk":[function(require,module,exports) {
 "use strict";
 /*
 Copyright 2019 Google LLC
@@ -315,123 +315,65 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 Object.defineProperty(exports, "__esModule", { value: true });
 var dom_1 = require("./utils/dom");
-var DOMBaseNodeView = /** @class */ (function () {
-    function DOMBaseNodeView(node, children, request, beforeDestroy) {
-        this.node = node;
-        this.children = children;
-        this.request = request;
-        this.beforeDestroy = beforeDestroy;
+var DOMDerivedTextTemplate = /** @class */ (function () {
+    function DOMDerivedTextTemplate(makeContent) {
+        this.makeContent = makeContent;
     }
-    DOMBaseNodeView.prototype.destroy = function () {
-        if (this.beforeDestroy)
-            this.beforeDestroy();
-        dom_1.removeNode(this.node);
-        for (var _i = 0, _a = this.children; _i < _a.length; _i++) {
-            var c = _a[_i];
-            c.destroy();
-        }
+    DOMDerivedTextTemplate.prototype.render = function (ctx, state) {
+        var makeContent = this.makeContent;
+        var content = makeContent(state) || '';
+        var node = ctx.doc.createTextNode(content);
+        ctx.append(node);
+        return {
+            kind: 'dynamic',
+            change: function (state) {
+                var newContent = makeContent(state) || '';
+                if (newContent !== content) {
+                    node.nodeValue = newContent;
+                    if (newContent.length < 5000)
+                        content = newContent;
+                }
+            },
+            destroy: function () {
+                dom_1.removeNode(node);
+            },
+            request: function (_) { }
+        };
     };
-    return DOMBaseNodeView;
+    return DOMDerivedTextTemplate;
 }());
-exports.DOMBaseNodeView = DOMBaseNodeView;
-var DOMStaticNodeView = /** @class */ (function (_super) {
-    __extends(DOMStaticNodeView, _super);
-    function DOMStaticNodeView() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.kind = 'static';
-        return _this;
-    }
-    return DOMStaticNodeView;
-}(DOMBaseNodeView));
-exports.DOMStaticNodeView = DOMStaticNodeView;
-var DOMDynamicNodeView = /** @class */ (function (_super) {
-    __extends(DOMDynamicNodeView, _super);
-    function DOMDynamicNodeView(node, children, change, request, beforeDestroy) {
-        var _this = _super.call(this, node, children, request, beforeDestroy) || this;
-        _this.node = node;
-        _this.children = children;
-        _this.change = change;
-        _this.request = request;
-        _this.beforeDestroy = beforeDestroy;
-        _this.kind = 'dynamic';
-        return _this;
-    }
-    return DOMDynamicNodeView;
-}(DOMBaseNodeView));
-exports.DOMDynamicNodeView = DOMDynamicNodeView;
-
-},{"./utils/dom":"TnZD"}],"GqEk":[function(require,module,exports) {
-"use strict";
-/*
-Copyright 2019 Google LLC
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-    https://www.apache.org/licenses/LICENSE-2.0
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-*/
-Object.defineProperty(exports, "__esModule", { value: true });
-var node_view_1 = require("./node_view");
-var renderLiteral = function (ctx, value) {
-    var node = ctx.doc.createTextNode(value || '');
-    var view = new node_view_1.DOMStaticNodeView(node, [], function () { });
-    ctx.append(node);
-    return view;
-};
-var renderFunction = function (ctx, state, map) {
-    var node = ctx.doc.createTextNode(map(state) || '');
-    var oldContent = '';
-    var f = function (state) {
-        var newContent = map(state) || '';
-        if (newContent !== oldContent) {
-            node.nodeValue = newContent;
-            if (newContent.length < 5000)
-                oldContent = newContent;
-        }
-    };
-    var view = new node_view_1.DOMDynamicNodeView(node, [], f, function () { });
-    ctx.append(node);
-    return view;
-};
-var DOMTextTemplate = /** @class */ (function () {
-    function DOMTextTemplate(content) {
+exports.DOMDerivedTextTemplate = DOMDerivedTextTemplate;
+var DOMLiteralTextTemplate = /** @class */ (function () {
+    function DOMLiteralTextTemplate(content) {
         this.content = content;
     }
-    DOMTextTemplate.prototype.render = function (ctx, state) {
-        if (typeof this.content === 'function') {
-            return renderFunction(ctx, state, this.content);
-        }
-        else {
-            return renderLiteral(ctx, this.content);
-        }
+    DOMLiteralTextTemplate.prototype.render = function (ctx, _) {
+        var node = ctx.doc.createTextNode(this.content);
+        ctx.append(node);
+        return {
+            kind: 'dynamic',
+            change: function (_) { },
+            destroy: function () {
+                dom_1.removeNode(node);
+            },
+            request: function (_) { }
+        };
     };
-    return DOMTextTemplate;
+    return DOMLiteralTextTemplate;
 }());
-exports.DOMTextTemplate = DOMTextTemplate;
+exports.DOMLiteralTextTemplate = DOMLiteralTextTemplate;
 exports.text = function (content) {
-    return new DOMTextTemplate(content);
+    if (typeof content === 'function') {
+        return new DOMDerivedTextTemplate(content);
+    }
+    else {
+        return new DOMLiteralTextTemplate(content || '');
+    }
 };
 
-},{"./node_view":"wNw6"}],"TnZD":[function(require,module,exports) {
+},{"./utils/dom":"TnZD"}],"TnZD":[function(require,module,exports) {
 "use strict";
 /*
 Copyright 2019 Google LLC
@@ -548,7 +490,81 @@ function processStyle(el, name, value, acc) {
 }
 exports.processStyle = processStyle;
 
-},{"../dom_attributes_mapper":"UKQ2","./set_attribute":"BEVE","../text":"GqEk"}],"bbLX":[function(require,module,exports) {
+},{"../dom_attributes_mapper":"UKQ2","./set_attribute":"BEVE","../text":"GqEk"}],"wNw6":[function(require,module,exports) {
+"use strict";
+/*
+Copyright 2019 Google LLC
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+    https://www.apache.org/licenses/LICENSE-2.0
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
+var dom_1 = require("./utils/dom");
+var DOMBaseNodeView = /** @class */ (function () {
+    function DOMBaseNodeView(node, children, request, beforeDestroy) {
+        this.node = node;
+        this.children = children;
+        this.request = request;
+        this.beforeDestroy = beforeDestroy;
+    }
+    DOMBaseNodeView.prototype.destroy = function () {
+        if (this.beforeDestroy)
+            this.beforeDestroy();
+        dom_1.removeNode(this.node);
+        for (var _i = 0, _a = this.children; _i < _a.length; _i++) {
+            var c = _a[_i];
+            c.destroy();
+        }
+    };
+    return DOMBaseNodeView;
+}());
+exports.DOMBaseNodeView = DOMBaseNodeView;
+var DOMStaticNodeView = /** @class */ (function (_super) {
+    __extends(DOMStaticNodeView, _super);
+    function DOMStaticNodeView() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.kind = 'static';
+        return _this;
+    }
+    return DOMStaticNodeView;
+}(DOMBaseNodeView));
+exports.DOMStaticNodeView = DOMStaticNodeView;
+var DOMDynamicNodeView = /** @class */ (function (_super) {
+    __extends(DOMDynamicNodeView, _super);
+    function DOMDynamicNodeView(node, children, change, request, beforeDestroy) {
+        var _this = _super.call(this, node, children, request, beforeDestroy) || this;
+        _this.node = node;
+        _this.children = children;
+        _this.change = change;
+        _this.request = request;
+        _this.beforeDestroy = beforeDestroy;
+        _this.kind = 'dynamic';
+        return _this;
+    }
+    return DOMDynamicNodeView;
+}(DOMBaseNodeView));
+exports.DOMDynamicNodeView = DOMDynamicNodeView;
+
+},{"./utils/dom":"TnZD"}],"bbLX":[function(require,module,exports) {
 "use strict";
 /*
 Copyright 2019 Google LLC
