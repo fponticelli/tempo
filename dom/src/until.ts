@@ -11,14 +11,13 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { DynamicView, View } from 'tempo-core/lib/view'
+import { View } from 'tempo-core/lib/view'
 import { DOMContext } from './context'
 import { DOMTemplate, DOMChild } from './template'
-import { removeNode, filterDynamics, domChildToTemplate, insertBefore } from './utils/dom'
+import { removeNode, domChildToTemplate, insertBefore } from './utils/dom'
 import { mapArray } from 'tempo-core/lib/util/map'
 
-export class DOMUntilView<OuterState, InnerState, Action, Query> implements DynamicView<OuterState, Query> {
-  readonly kind = 'dynamic'
+export class DOMUntilView<OuterState, InnerState, Action, Query> implements View<OuterState, Query> {
   constructor(
     readonly ref: Node,
     readonly repeatUntil: (state: OuterState, index: number) => InnerState | undefined,
@@ -42,8 +41,8 @@ export class DOMUntilView<OuterState, InnerState, Action, Query> implements Dyna
       if (typeof value === 'undefined') break
       if (index < currentViewLength) {
         // replace existing
-        const filtered = filterDynamics(this.childrenView[index])
-        for (const v of filtered) v.change(value!)
+        const filteredViews = this.childrenView[index]
+        for (const view of filteredViews) view.change(value!)
       } else {
         // add node
         this.childrenView.push(mapArray(this.children, el => el.render(this.ctx, value!)))
@@ -75,7 +74,7 @@ export class DOMUntilTemplate<OuterState, InnerState, Action, Query> implements 
     readonly children: DOMTemplate<InnerState, Action, Query>[]
   ) {}
 
-  render(ctx: DOMContext<Action>, state: OuterState): DynamicView<OuterState, Query> {
+  render(ctx: DOMContext<Action>, state: OuterState): View<OuterState, Query> {
     const ref = ctx.doc.createComment(this.options.refId || 't:until')
     ctx.append(ref)
     const view = new DOMUntilView<OuterState, InnerState, Action, Query>(

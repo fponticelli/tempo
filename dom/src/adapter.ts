@@ -11,27 +11,26 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { DynamicView } from 'tempo-core/lib/view'
+import { View } from 'tempo-core/lib/view'
 import { DOMComponentView, DOMComponentTemplate } from './component'
 import { DOMTemplate } from './template'
 import { DOMContext } from './context'
 
-export class DOMAdapterView<OuterState, InnerState, InnerAction, Query> implements DynamicView<OuterState, Query> {
-  readonly kind = 'dynamic'
+export class DOMAdapterView<OuterState, InnerState, InnerAction, Query> implements View<OuterState, Query> {
   constructor(
     readonly mergeStates: (outerState: OuterState, innerState: InnerState) => InnerState | undefined,
     readonly request: (query: Query) => void,
     readonly child: DOMComponentView<InnerState, InnerAction, Query>
   ) {}
 
-  destroy(): void {
-    this.child.destroy()
-  }
-
   change(outerState: OuterState): void {
     const newState = this.mergeStates(outerState, this.child.store.property.get())
     if (typeof newState === 'undefined') return
     this.child.change(newState)
+  }
+
+  destroy(): void {
+    this.child.destroy()
   }
 }
 
@@ -43,7 +42,7 @@ export class DOMAdapterTemplate<OuterState, InnerState, OuterAction, InnerAction
     readonly child: DOMComponentTemplate<InnerState, InnerAction, Query>
   ) {}
 
-  render(ctx: DOMContext<OuterAction>, outerState: OuterState): DynamicView<OuterState, Query> {
+  render(ctx: DOMContext<OuterAction>, outerState: OuterState): View<OuterState, Query> {
     const mergedState =
       (this.mergeStates && this.mergeStates(outerState, this.child.store.property.get())) ||
       this.child.store.property.get()

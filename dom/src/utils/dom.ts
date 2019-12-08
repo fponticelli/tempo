@@ -11,7 +11,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { View, DynamicView } from 'tempo-core/lib/view'
 import { UnwrappedDerivedValue } from 'tempo-core/lib/value'
 import { DOMAttribute, DOMEventHandler, DOMStyleAttribute } from '../value'
 import { htmlAttributeMap as attributeMap } from '../dom_attributes_mapper'
@@ -36,13 +35,6 @@ export function insertBefore(ref: Node) {
       ref.parentElement.insertBefore(node, ref)
     }
   }
-}
-
-export function filterDynamics<State, Query>(children: View<State, Query>[]) {
-  return children.filter(child => child.kind === 'dynamic') as DynamicView<
-    State,
-    Query
-  >[]
 }
 
 export function domChildToTemplate<State, Action, Query>(

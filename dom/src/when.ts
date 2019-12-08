@@ -13,8 +13,8 @@ limitations under the License.
 
 import { DOMChild, DOMTemplate } from './template'
 import { DOMContext } from './context'
-import { View, DynamicView } from 'tempo-core/lib/view'
-import { domChildToTemplate, filterDynamics, removeNode } from './utils/dom'
+import { View } from 'tempo-core/lib/view'
+import { domChildToTemplate, removeNode } from './utils/dom'
 import { mapArray } from 'tempo-core/lib/util/map'
 
 export interface WhenOptions<State> {
@@ -22,8 +22,7 @@ export interface WhenOptions<State> {
   refId?: string
 }
 
-export class DOMWhenView<State, Action, Query> implements DynamicView<State, Query> {
-  readonly kind = 'dynamic'
+export class DOMWhenView<State, Action, Query> implements View<State, Query> {
   constructor(
     readonly condition: (state: State) => boolean,
     readonly ctx: DOMContext<Action>,
@@ -37,9 +36,8 @@ export class DOMWhenView<State, Action, Query> implements DynamicView<State, Que
       if (typeof this.views === 'undefined') {
         // it has never been rendered before
         this.views = mapArray(this.children, c => c.render(this.ctx, value))
-        this.dynamics = filterDynamics(this.views)
-      } else if (this.dynamics) {
-        for (const d of this.dynamics) d.change(value)
+      } else {
+        for (const view of this.views) view.change(value)
       }
     } else {
       this.destroyViews()
@@ -56,12 +54,10 @@ export class DOMWhenView<State, Action, Query> implements DynamicView<State, Que
   }
 
   private views: View<State, Query>[] | undefined
-  private dynamics: DynamicView<State, Query>[] | undefined
   private destroyViews() {
     if (typeof this.views !== 'undefined') {
       for (const v of this.views) v.destroy()
       this.views = undefined
-      this.dynamics = undefined
     }
   }
 }

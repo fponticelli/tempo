@@ -14,8 +14,8 @@ limitations under the License.
 import { DOMTemplate, DOMChild } from './template'
 import { DOMContext } from './context'
 import { View } from 'tempo-core/lib/view'
-import { processAttribute, processEvent, processStyle, filterDynamics, domChildToTemplate } from './utils/dom'
-import { DOMDynamicNodeView, DOMStaticNodeView } from './node_view'
+import { processAttribute, processEvent, processStyle, domChildToTemplate } from './utils/dom'
+import { DOMNodeView } from './node_view'
 import { DOMAttributes, DOMAttribute, AttributeValue, DOMEventHandler, DOMStyleAttribute } from './value'
 import { mapArray } from 'tempo-core/lib/util/map'
 import { attributeNameMap } from './dom_attributes_mapper'
@@ -81,7 +81,7 @@ export class DOMElement<State, Action, Query = unknown, El extends Element = Ele
       value = applyAfterRender(this.afterrender, el, ctx, state)
     }
 
-    const dynamicChildren = mapArray(filterDynamics(views), child => (state: State) => child.change(state))
+    const dynamicChildren = mapArray(views, child => (state: State) => child.change(state))
 
     allDynamics.push(...dynamicChildren)
 
@@ -105,24 +105,16 @@ export class DOMElement<State, Action, Query = unknown, El extends Element = Ele
       } :
       () => {}
 
-    if (allDynamics.length > 0) {
-      return new DOMDynamicNodeView(
-        el,
-        views,
-        (state: State) => {
-          for (const f of allDynamics) f(state)
-        },
-        request,
-        beforedestroyf
-      )
-    } else {
-      return new DOMStaticNodeView(
-        el,
-        views,
-        request,
-        beforedestroyf
-      )
-    }
+
+    return new DOMNodeView(
+      el,
+      views,
+      (state: State) => {
+        for (const f of allDynamics) f(state)
+      },
+      request,
+      beforedestroyf
+    )
   }
 }
 

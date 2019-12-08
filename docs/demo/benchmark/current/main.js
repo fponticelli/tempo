@@ -327,7 +327,6 @@ var DOMDerivedTextTemplate = /** @class */ (function () {
         var node = ctx.doc.createTextNode(content);
         ctx.append(node);
         return {
-            kind: 'dynamic',
             change: function (state) {
                 var newContent = makeContent(state) || '';
                 if (newContent !== content) {
@@ -353,7 +352,6 @@ var DOMLiteralTextTemplate = /** @class */ (function () {
         var node = ctx.doc.createTextNode(this.content);
         ctx.append(node);
         return {
-            kind: 'dynamic',
             change: function (_) { },
             destroy: function () {
                 dom_1.removeNode(node);
@@ -411,10 +409,6 @@ function insertBefore(ref) {
     };
 }
 exports.insertBefore = insertBefore;
-function filterDynamics(children) {
-    return children.filter(function (child) { return child.kind === 'dynamic'; });
-}
-exports.filterDynamics = filterDynamics;
 function domChildToTemplate(dom) {
     if (typeof dom === 'string' ||
         typeof dom === 'function' ||
@@ -504,65 +498,28 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 Object.defineProperty(exports, "__esModule", { value: true });
 var dom_1 = require("./utils/dom");
-var DOMBaseNodeView = /** @class */ (function () {
-    function DOMBaseNodeView(node, children, request, beforeDestroy) {
+var DOMNodeView = /** @class */ (function () {
+    function DOMNodeView(node, views, change, request, beforeDestroy) {
         this.node = node;
-        this.children = children;
+        this.views = views;
+        this.change = change;
         this.request = request;
         this.beforeDestroy = beforeDestroy;
     }
-    DOMBaseNodeView.prototype.destroy = function () {
+    DOMNodeView.prototype.destroy = function () {
         if (this.beforeDestroy)
             this.beforeDestroy();
         dom_1.removeNode(this.node);
-        for (var _i = 0, _a = this.children; _i < _a.length; _i++) {
-            var c = _a[_i];
-            c.destroy();
+        for (var _i = 0, _a = this.views; _i < _a.length; _i++) {
+            var view = _a[_i];
+            view.destroy();
         }
     };
-    return DOMBaseNodeView;
+    return DOMNodeView;
 }());
-exports.DOMBaseNodeView = DOMBaseNodeView;
-var DOMStaticNodeView = /** @class */ (function (_super) {
-    __extends(DOMStaticNodeView, _super);
-    function DOMStaticNodeView() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.kind = 'static';
-        return _this;
-    }
-    return DOMStaticNodeView;
-}(DOMBaseNodeView));
-exports.DOMStaticNodeView = DOMStaticNodeView;
-var DOMDynamicNodeView = /** @class */ (function (_super) {
-    __extends(DOMDynamicNodeView, _super);
-    function DOMDynamicNodeView(node, children, change, request, beforeDestroy) {
-        var _this = _super.call(this, node, children, request, beforeDestroy) || this;
-        _this.node = node;
-        _this.children = children;
-        _this.change = change;
-        _this.request = request;
-        _this.beforeDestroy = beforeDestroy;
-        _this.kind = 'dynamic';
-        return _this;
-    }
-    return DOMDynamicNodeView;
-}(DOMBaseNodeView));
-exports.DOMDynamicNodeView = DOMDynamicNodeView;
+exports.DOMNodeView = DOMNodeView;
 
 },{"./utils/dom":"TnZD"}],"bbLX":[function(require,module,exports) {
 "use strict";
@@ -636,7 +593,7 @@ var DOMElement = /** @class */ (function () {
         if (this.afterrender) {
             value = applyAfterRender(this.afterrender, el, ctx, state);
         }
-        var dynamicChildren = map_1.mapArray(dom_1.filterDynamics(views), function (child) { return function (state) { return child.change(state); }; });
+        var dynamicChildren = map_1.mapArray(views, function (child) { return function (state) { return child.change(state); }; });
         allDynamics.push.apply(allDynamics, dynamicChildren);
         if (this.beforechange) {
             var change_1 = applyChange(this.beforechange, el, ctx);
@@ -655,17 +612,12 @@ var DOMElement = /** @class */ (function () {
                 _this.respond(query, el, ctx);
             } :
             function () { };
-        if (allDynamics.length > 0) {
-            return new node_view_1.DOMDynamicNodeView(el, views, function (state) {
-                for (var _i = 0, allDynamics_2 = allDynamics; _i < allDynamics_2.length; _i++) {
-                    var f = allDynamics_2[_i];
-                    f(state);
-                }
-            }, request, beforedestroyf);
-        }
-        else {
-            return new node_view_1.DOMStaticNodeView(el, views, request, beforedestroyf);
-        }
+        return new node_view_1.DOMNodeView(el, views, function (state) {
+            for (var _i = 0, allDynamics_2 = allDynamics; _i < allDynamics_2.length; _i++) {
+                var f = allDynamics_2[_i];
+                f(state);
+            }
+        }, request, beforedestroyf);
     };
     return DOMElement;
 }());
@@ -893,7 +845,6 @@ var DOMUntilView = /** @class */ (function () {
         this.repeatUntil = repeatUntil;
         this.ctx = ctx;
         this.children = children;
-        this.kind = 'dynamic';
         this.childrenView = [];
     }
     DOMUntilView.prototype.destroy = function () {
@@ -917,10 +868,10 @@ var DOMUntilView = /** @class */ (function () {
                 return "break";
             if (index < currentViewLength) {
                 // replace existing
-                var filtered = dom_1.filterDynamics(this_1.childrenView[index]);
-                for (var _i = 0, filtered_1 = filtered; _i < filtered_1.length; _i++) {
-                    var v = filtered_1[_i];
-                    v.change(value);
+                var filteredViews = this_1.childrenView[index];
+                for (var _i = 0, filteredViews_1 = filteredViews; _i < filteredViews_1.length; _i++) {
+                    var view = filteredViews_1[_i];
+                    view.change(value);
                 }
             }
             else {

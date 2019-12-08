@@ -14,7 +14,7 @@ limitations under the License.
 import { DifferentiateAt } from 'tempo-core/lib/types/differentiate'
 import { DOMTemplate, DOMChild } from './template'
 import { DOMContext } from './context'
-import { DynamicView, View } from 'tempo-core/lib/view'
+import { View } from 'tempo-core/lib/view'
 import { domChildToTemplate } from './utils/dom'
 import { IndexType } from 'core/lib/types/index_type'
 import { ObjectWithPath, TypeAtPath, ObjectWithField } from 'tempo-core/lib/types/objects'
@@ -24,8 +24,7 @@ export class MatchView<
   State extends ObjectWithPath<Path, any>,
   Action,
   Query
-> implements DynamicView<State, Query> {
-  readonly kind = 'dynamic'
+> implements View<State, Query> {
   constructor(
     private key: TypeAtPath<Path, State>,
     private view: View<State, Query>,
@@ -38,9 +37,7 @@ export class MatchView<
   change(state: State) {
     const newKey = this.path.reduce((acc: any, key) => acc[key], state) as TypeAtPath<Path, State>
     if (newKey === this.key) {
-      if (this.view.kind === 'dynamic') {
-        this.view.change(state as any)
-      }
+      this.view.change(state as any)
     } else {
       this.view.destroy()
       this.key = newKey
@@ -110,8 +107,7 @@ export const matchKind = <State extends ObjectWithField<'kind', any>, Action, Qu
   }
 ): DOMTemplate<State, Action, Query> => match<['kind'], State, Action, Query>(['kind'], matchers)
 
-export class MatchBoolView<State, Action, Query> implements DynamicView<State, Query> {
-  readonly kind = 'dynamic'
+export class MatchBoolView<State, Action, Query> implements View<State, Query> {
   constructor(
     readonly condition: (state: State) => boolean,
     readonly trueTemplate: DOMTemplate<State, Action, Query>,
@@ -123,9 +119,7 @@ export class MatchBoolView<State, Action, Query> implements DynamicView<State, Q
   change(state: State) {
     const newEvaluation = this.condition(state)
     if (newEvaluation === this.lastEvaluation) {
-      if (this.view.kind === 'dynamic') {
-        this.view.change(state)
-      }
+      this.view.change(state)
     } else {
       this.view.destroy()
       this.lastEvaluation = newEvaluation
@@ -178,8 +172,7 @@ export const matchBool = <State, Action, Query = unknown>(
   domChildToTemplate(options.false)
 )
 
-export class MatchValueView<State, Action, Query> implements DynamicView<State, Query> {
-  readonly kind = 'dynamic'
+export class MatchValueView<State, Action, Query> implements View<State, Query> {
   constructor(
     readonly path: IndexType[],
     private key: string,
@@ -191,9 +184,7 @@ export class MatchValueView<State, Action, Query> implements DynamicView<State, 
   change(state: State) {
     const newKey = this.path.reduce((acc: any, key) => acc[key], state)
     if (newKey === this.key) {
-      if (this.view.kind === 'dynamic') {
-        this.view.change(state)
-      }
+      this.view.change(state)
     } else {
       this.view.destroy()
       this.key = newKey

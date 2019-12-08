@@ -16,7 +16,7 @@ import { DOMContext } from './context'
 import { View } from 'tempo-core/lib/view'
 import { DOMElement, el } from './element'
 import { UnwrappedDerivedValue } from 'tempo-core/lib/value'
-import { DOMDynamicNodeView, DOMBaseNodeView } from './node_view'
+import { DOMNodeView } from './node_view'
 import { DOMTextValue } from './value'
 
 const renderLiteral = <State, Action, Query = unknown, El extends Element = Element, T = unknown>
@@ -28,7 +28,7 @@ const renderLiteral = <State, Action, Query = unknown, El extends Element = Elem
   value: string | undefined
 ): View<State, Query> => {
   const view = element.render(ctx, state)
-  const el = ((view as unknown as DOMBaseNodeView<State, Query>).node as HTMLElement)
+  const el = ((view as DOMNodeView<State, Query>).node as HTMLElement)
   el.innerHTML = transform(value || '')
   return view
 }
@@ -42,7 +42,7 @@ const renderFunction = <State, Action, Query, El extends Element = Element, T = 
 ): View<State, Query> => {
   const view = element.render(ctx, state)
   const value = map(state) || ''
-  const el = ((view as unknown as DOMBaseNodeView<State, Query>).node as HTMLElement)
+  const el = ((view as DOMNodeView<State, Query>).node as HTMLElement)
   el.innerHTML = transform(value || '')
   let oldContent = ''
   const f = (state: State) => {
@@ -53,7 +53,7 @@ const renderFunction = <State, Action, Query, El extends Element = Element, T = 
         oldContent = newContent
     }
   }
-  return new DOMDynamicNodeView(el, [view], f, (query: Query) => view.request(query))
+  return new DOMNodeView(el, [view], f, (query: Query) => view.request(query))
 }
 
 export class DOMUnsafeHtml<State, Action, Query, El extends Element = Element, T = unknown> implements DOMTemplate<State, Action, Query> {

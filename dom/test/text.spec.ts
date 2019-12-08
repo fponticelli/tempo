@@ -13,7 +13,7 @@ limitations under the License.
 
 import { createContext } from './common'
 import { DOMDerivedTextTemplate, DOMLiteralTextTemplate } from '../src/text'
-import { DynamicView } from 'tempo-core/lib/view'
+import { View } from 'tempo-core/lib/view'
 
 describe('dom_text', () => {
   it('create static undefined', () => {
@@ -35,7 +35,7 @@ describe('dom_text', () => {
 
   it('create static with function value', () => {
     const ctx = createContext()
-    const node = new DOMDerivedTextTemplate((r: string) => r).render(ctx, 'abc') as DynamicView<string | undefined, unknown>
+    const node = new DOMDerivedTextTemplate((r: string) => r).render(ctx, 'abc') as View<string | undefined, unknown>
     expect(ctx.doc.body.innerHTML).toEqual('abc')
     node.change('abc')
     expect(ctx.doc.body.innerHTML).toEqual('abc')

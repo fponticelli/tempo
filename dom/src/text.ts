@@ -27,7 +27,6 @@ export class DOMDerivedTextTemplate<State, Action, Query> implements DOMTemplate
     const node = ctx.doc.createTextNode(content)
     ctx.append(node)
     return {
-      kind: 'dynamic',
       change(state: State) {
         const newContent = makeContent(state) || ''
         if (newContent !== content) {
@@ -52,7 +51,6 @@ export class DOMLiteralTextTemplate<State, Action, Query> implements DOMTemplate
     const node = ctx.doc.createTextNode(this.content)
     ctx.append(node)
     return {
-      kind: 'dynamic',
       change(_: State) {},
       destroy() {
         removeNode(node)

@@ -14,13 +14,13 @@ limitations under the License.
 import { createContext } from './common'
 import { div } from '../src/html'
 import { forEach } from '../src/for_each'
-import { DynamicView } from 'tempo-core/lib/view'
+import { View } from 'tempo-core/lib/view'
 
 describe('repeat', () => {
   it('repeat starting empty', () => {
     const ctx = createContext()
     const template = forEach({}, div({}, String))
-    const view = template.render(ctx, []) as DynamicView<number[], unknown>
+    const view = template.render(ctx, []) as View<number[], unknown>
     expect(ctx.doc.body.innerHTML).toEqual('<!--t:for_each-->')
     view.change([1, 2, 3])
     expect(ctx.doc.body.innerHTML).toEqual('<div>1</div><div>2</div><div>3</div><!--t:for_each-->')
@@ -37,7 +37,7 @@ describe('repeat', () => {
   it('repeat starting full', () => {
     const ctx = createContext()
     const template = forEach({ refId: 'A' }, div({}, String))
-    const view = template.render(ctx, [1, 2, 3]) as DynamicView<number[], unknown>
+    const view = template.render(ctx, [1, 2, 3]) as View<number[], unknown>
     expect(ctx.doc.body.innerHTML).toEqual('<div>1</div><div>2</div><div>3</div><!--A-->')
     view.change([4, 5])
     expect(ctx.doc.body.innerHTML).toEqual('<div>4</div><div>5</div><!--A-->')

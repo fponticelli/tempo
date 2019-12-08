@@ -11,31 +11,30 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { DOMDynamicFragmentView } from './fragment'
-import { View, DynamicView } from 'tempo-core/lib/view'
+import { DOMFragmentView } from './fragment'
+import { View } from 'tempo-core/lib/view'
 import { Store } from 'tempo-store/lib/store'
 import { DOMTemplate, DOMChild } from './template'
 import { DOMContext } from './context'
-import { filterDynamics, domChildToTemplate } from './utils/dom'
+import { domChildToTemplate } from './utils/dom'
 import { mapArray } from 'tempo-core/lib/util/map'
 
-export class DOMComponentView<State, Action, Query> extends DOMDynamicFragmentView<State, Query> {
+export class DOMComponentView<State, Action, Query> extends DOMFragmentView<State, Query> {
   /* istanbul ignore next */
   constructor(
     readonly store: Store<State, Action>,
     readonly dispatch: (action: Action) => void,
-    children: View<State, Query>[],
-    dynamics: DynamicView<State, Query>[],
+    views: View<State, Query>[],
     private _destroy: () => void
   ) {
-    super(children, (state: State) => {
+    super(views, (state: State) => {
       store.property.set(state)
-      for (const dy of dynamics) dy.change(state)
+      for (const view of views) view.change(state)
     })
   }
 
   request(query: Query) {
-    throw 'TODO' // TODO
+    for (const view of this.views) view.request(query)
   }
 
   destroy() {
@@ -77,9 +76,8 @@ export class DOMComponentTemplate<State, Action, Query> implements DOMTemplate<S
       store.process(action)
     }
     const newCtx = ctx.withDispatch(innerDispatch)
-    const viewChildren = mapArray(this.children, child => child.render(newCtx, property.get()))
-    const dynamics = filterDynamics(viewChildren)
-    const view = new DOMComponentView<State, Action, Query>(store, innerDispatch, viewChildren, dynamics, () => {
+    const views = mapArray(this.children, child => child.render(newCtx, property.get()))
+    const view = new DOMComponentView<State, Action, Query>(store, innerDispatch, views, () => {
       property.observable.off(update)
     })
     property.set(state)
