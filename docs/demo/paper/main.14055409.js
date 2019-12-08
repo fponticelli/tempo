@@ -19382,7 +19382,10 @@ var $ftoX$export$createItem = function (makeItem, options, children) {
       }
     };
   }, function (wrapper, ctx, item, views) {
-    return function (query) {// TODO
+    return function (query) {
+      if (typeof options.request !== 'undefined') {
+        options.request(query, item, ctx, wrapper.value);
+      }
     };
   });
 };
