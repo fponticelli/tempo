@@ -1965,42 +1965,6 @@ var $qep0$export$mapAction = function (options) {
 
 $qep0$exports.mapAction = $qep0$export$mapAction;
 
-var $qep0$var$MapQueryView =
-/** @class */
-function () {
-  function MapQueryView(map, views) {
-    this.map = map;
-    this.views = views;
-  }
-
-  MapQueryView.prototype.request = function (query) {
-    var innerQuery = this.map(query);
-
-    if (typeof innerQuery !== 'undefined') {
-      this.views.forEach(function (view) {
-        return view.request(innerQuery);
-      });
-    }
-  };
-
-  MapQueryView.prototype.change = function (state) {
-    this.views.forEach(function (view) {
-      return view.change(state);
-    });
-  };
-
-  MapQueryView.prototype.destroy = function () {
-    this.views.forEach(function (view) {
-      return view.destroy();
-    });
-  };
-
-  return MapQueryView;
-}();
-
-var $qep0$export$MapQueryView = $qep0$var$MapQueryView;
-$qep0$exports.MapQueryView = $qep0$export$MapQueryView;
-
 var $qep0$var$MapQueryTemplate =
 /** @class */
 function () {
@@ -2017,7 +1981,29 @@ function () {
     var views = $tBUf$export$mapArray(children, function (c) {
       return c.render(ctx, state);
     });
-    return new $qep0$var$MapQueryView(map, views);
+    return {
+      change: function (state) {
+        for (var _i = 0, views_7 = views; _i < views_7.length; _i++) {
+          var view = views_7[_i];
+          view.change(state);
+        }
+      },
+      destroy: function () {
+        for (var _i = 0, views_8 = views; _i < views_8.length; _i++) {
+          var view = views_8[_i];
+          view.destroy();
+        }
+      },
+      request: function (query) {
+        var innerQuery = map(query);
+
+        if (typeof innerQuery !== 'undefined') {
+          views.forEach(function (view) {
+            return view.request(innerQuery);
+          });
+        }
+      }
+    };
   };
 
   return MapQueryTemplate;
@@ -2056,108 +2042,92 @@ Object.defineProperty($UU8h$exports, "__esModule", {
   value: true
 });
 
-var $UU8h$var$DOMUntilView =
-/** @class */
-function () {
-  function DOMUntilView(ref, repeatUntil, ctx, children) {
-    this.ref = ref;
-    this.repeatUntil = repeatUntil;
-    this.ctx = ctx;
-    this.children = children;
-    this.childrenView = [];
-  }
-
-  DOMUntilView.prototype.destroy = function () {
-    $TnZD$export$removeNode(this.ref);
-
-    for (var _i = 0, _a = this.childrenView; _i < _a.length; _i++) {
-      var c = _a[_i];
-
-      for (var _b = 0, c_1 = c; _b < c_1.length; _b++) {
-        var e = c_1[_b];
-        e.destroy();
-      }
-    }
-
-    this.childrenView = [];
-  };
-
-  DOMUntilView.prototype.change = function (state) {
-    var _this = this;
-
-    var currentViewLength = this.childrenView.length;
-    var index = 0;
-
-    var _loop_1 = function () {
-      var value = this_1.repeatUntil(state, index);
-      if (typeof value === 'undefined') return "break";
-
-      if (index < currentViewLength) {
-        // replace existing
-        var filteredViews = this_1.childrenView[index];
-
-        for (var _i = 0, filteredViews_1 = filteredViews; _i < filteredViews_1.length; _i++) {
-          var view = filteredViews_1[_i];
-          view.change(value);
-        }
-      } else {
-        // add node
-        this_1.childrenView.push($tBUf$export$mapArray(this_1.children, function (el) {
-          return el.render(_this.ctx, value);
-        }));
-      }
-
-      index++;
-    };
-
-    var this_1 = this;
-
-    while (true) {
-      var state_1 = _loop_1();
-
-      if (state_1 === "break") break;
-    }
-
-    var i = index; // remove extra nodes
-
-    while (i < currentViewLength) {
-      for (var _i = 0, _a = this.childrenView[i]; _i < _a.length; _i++) {
-        var c = _a[_i];
-        c.destroy();
-      }
-
-      i++;
-    }
-
-    this.childrenView = this.childrenView.slice(0, index);
-  };
-
-  DOMUntilView.prototype.request = function (query) {
-    this.childrenView.forEach(function (views) {
-      return views.forEach(function (view) {
-        return view.request(query);
-      });
-    });
-  };
-
-  return DOMUntilView;
-}();
-
-var $UU8h$export$DOMUntilView = $UU8h$var$DOMUntilView;
-$UU8h$exports.DOMUntilView = $UU8h$export$DOMUntilView;
-
-var $UU8h$var$DOMUntilTemplate =
-/** @class */
-function () {
+var $UU8h$var$DOMUntilTemplate = function () {
   function DOMUntilTemplate(options, children) {
     this.options = options;
     this.children = children;
   }
 
   DOMUntilTemplate.prototype.render = function (ctx, state) {
-    var ref = ctx.doc.createComment(this.options.refId || 't:until');
+    var children = this.children;
+    var _a = this.options,
+        refId = _a.refId,
+        repeatUntil = _a.repeatUntil;
+    var ref = ctx.doc.createComment(refId || 't:until');
     ctx.append(ref);
-    var view = new $UU8h$var$DOMUntilView(ref, this.options.repeatUntil, ctx.withAppend($TnZD$export$insertBefore(ref)), this.children);
+    var newCtx = ctx.withAppend($TnZD$export$insertBefore(ref));
+    var childrenViews = [];
+    var view = {
+      change: function (state) {
+        var currentLength = childrenViews.length;
+        var index = 0;
+
+        var _loop_1 = function () {
+          var value = repeatUntil(state, index);
+          if (typeof value === 'undefined') return "break";
+
+          if (index < currentLength) {
+            // replace existing
+            var filteredViews = childrenViews[index];
+
+            for (var _i = 0, filteredViews_1 = filteredViews; _i < filteredViews_1.length; _i++) {
+              var view_1 = filteredViews_1[_i];
+              view_1.change(value);
+            }
+          } else {
+            // add node
+            childrenViews.push($tBUf$export$mapArray(children, function (el) {
+              return el.render(newCtx, value);
+            }));
+          }
+
+          index++;
+        };
+
+        while (true) {
+          var state_1 = _loop_1();
+
+          if (state_1 === "break") break;
+        }
+
+        var i = index; // remove extra nodes
+
+        while (i < currentLength) {
+          for (var _i = 0, _a = childrenViews[i]; _i < _a.length; _i++) {
+            var c = _a[_i];
+            c.destroy();
+          }
+
+          i++;
+        }
+
+        childrenViews = childrenViews.slice(0, index);
+      },
+      destroy: function () {
+        $TnZD$export$removeNode(ref);
+
+        for (var _i = 0, childrenViews_1 = childrenViews; _i < childrenViews_1.length; _i++) {
+          var childViews = childrenViews_1[_i];
+
+          for (var _a = 0, childViews_1 = childViews; _a < childViews_1.length; _a++) {
+            var view_2 = childViews_1[_a];
+            view_2.destroy();
+          }
+        }
+
+        childrenViews = [];
+      },
+      request: function (query) {
+        for (var _i = 0, childrenViews_2 = childrenViews; _i < childrenViews_2.length; _i++) {
+          var childViews = childrenViews_2[_i];
+
+          for (var _a = 0, childViews_2 = childViews; _a < childViews_2.length; _a++) {
+            var view_3 = childViews_2[_a];
+            view_3.request(query);
+          }
+        }
+      }
+    };
     view.change(state);
     return view;
   };
@@ -2243,67 +2213,6 @@ Object.defineProperty($Qev4$exports, "__esModule", {
   value: true
 });
 
-var $Qev4$var$DOMWhenView =
-/** @class */
-function () {
-  function DOMWhenView(condition, ctx, dispatch, removeNode, children) {
-    this.condition = condition;
-    this.ctx = ctx;
-    this.dispatch = dispatch;
-    this.removeNode = removeNode;
-    this.children = children;
-  }
-
-  DOMWhenView.prototype.change = function (value) {
-    var _this = this;
-
-    if (this.condition(value)) {
-      if (typeof this.views === 'undefined') {
-        // it has never been rendered before
-        this.views = $tBUf$export$mapArray(this.children, function (c) {
-          return c.render(_this.ctx, value);
-        });
-      } else {
-        for (var _i = 0, _a = this.views; _i < _a.length; _i++) {
-          var view = _a[_i];
-          view.change(value);
-        }
-      }
-    } else {
-      this.destroyViews();
-    }
-  };
-
-  DOMWhenView.prototype.destroy = function () {
-    this.destroyViews();
-    this.removeNode();
-  };
-
-  DOMWhenView.prototype.request = function (query) {
-    var _a;
-
-    (_a = this.views) === null || _a === void 0 ? void 0 : _a.forEach(function (view) {
-      return view.request(query);
-    });
-  };
-
-  DOMWhenView.prototype.destroyViews = function () {
-    if (typeof this.views !== 'undefined') {
-      for (var _i = 0, _a = this.views; _i < _a.length; _i++) {
-        var v = _a[_i];
-        v.destroy();
-      }
-
-      this.views = undefined;
-    }
-  };
-
-  return DOMWhenView;
-}();
-
-var $Qev4$export$DOMWhenView = $Qev4$var$DOMWhenView;
-$Qev4$exports.DOMWhenView = $Qev4$export$DOMWhenView;
-
 var $Qev4$var$DOMWhenTemplate =
 /** @class */
 function () {
@@ -2313,14 +2222,60 @@ function () {
   }
 
   DOMWhenTemplate.prototype.render = function (ctx, state) {
-    var ref = ctx.doc.createComment(this.options.refId || 't:when');
+    var _this = this;
+
+    var _a = this.options,
+        condition = _a.condition,
+        refId = _a.refId;
+    var ref = ctx.doc.createComment(refId || 't:when');
     ctx.append(ref);
     var parent = ref.parentElement;
-    var view = new $Qev4$var$DOMWhenView(this.options.condition, ctx.withAppend(function (node) {
+    var newCtx = ctx.withAppend(function (node) {
       return parent.insertBefore(node, ref);
-    }), ctx.dispatch, function () {
-      return $TnZD$export$removeNode(ref);
-    }, $tBUf$export$mapArray(this.children, $TnZD$export$domChildToTemplate));
+    });
+    var views;
+    var view = {
+      change: function (state) {
+        if (condition(state)) {
+          if (typeof views === 'undefined') {
+            // it has never been rendered before
+            views = $tBUf$export$mapArray(_this.children, function (c) {
+              return c.render(newCtx, state);
+            });
+          } else {
+            for (var _i = 0, views_1 = views; _i < views_1.length; _i++) {
+              var view_1 = views_1[_i];
+              view_1.change(state);
+            }
+          }
+        } else if (typeof views !== 'undefined') {
+          for (var _a = 0, views_2 = views; _a < views_2.length; _a++) {
+            var view_2 = views_2[_a];
+            view_2.destroy();
+          }
+
+          views = undefined;
+        }
+      },
+      destroy: function () {
+        $TnZD$export$removeNode(ref);
+
+        if (typeof views !== 'undefined') {
+          for (var _i = 0, views_3 = views; _i < views_3.length; _i++) {
+            var view_3 = views_3[_i];
+            view_3.destroy();
+          }
+        }
+      },
+      request: function (query) {
+        if (typeof views !== 'undefined') {
+          for (var _i = 0, views_4 = views; _i < views_4.length; _i++) {
+            var view_4 = views_4[_i];
+            view_4.request(query);
+          }
+        }
+      }
+    };
     view.change(state);
     return view;
   };
@@ -2338,7 +2293,7 @@ var $Qev4$export$when = function (options) {
     children[_i - 1] = arguments[_i];
   }
 
-  return new $Qev4$var$DOMWhenTemplate(options, children);
+  return new $Qev4$var$DOMWhenTemplate(options, $tBUf$export$mapArray(children, $TnZD$export$domChildToTemplate));
 };
 
 $Qev4$exports.when = $Qev4$export$when;
@@ -2355,7 +2310,7 @@ var $Qev4$export$unless = function (options) {
       return !options.condition(v);
     },
     refId: options.refId || 't:unless'
-  }, children);
+  }, $tBUf$export$mapArray(children, $TnZD$export$domChildToTemplate));
 };
 
 $Qev4$exports.unless = $Qev4$export$unless; //# sourceMappingURL=when.js.map

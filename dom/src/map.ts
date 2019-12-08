@@ -86,28 +86,6 @@ export const mapAction = <State, OuterAction, InnerAction, Query = unknown>(
 ): DOMTemplate<State, OuterAction, Query> =>
   new MapActionTemplate<State, OuterAction, InnerAction, Query>(options.map, mapArray(children, domChildToTemplate))
 
-export class MapQueryView<State, OuterQuery, InnerQuery> implements View<State, OuterQuery> {
-  constructor(
-    readonly map: (query: OuterQuery) => InnerQuery | undefined,
-    readonly views: View<State, InnerQuery>[]
-  ) { }
-
-  request(query: OuterQuery) {
-    const innerQuery = this.map(query)
-    if (typeof innerQuery !== 'undefined') {
-      this.views.forEach(view => view.request(innerQuery))
-    }
-  }
-
-  change(state: State) {
-    this.views.forEach(view => view.change(state))
-  }
-
-  destroy() {
-    this.views.forEach(view => view.destroy())
-  }
-}
-
 export class MapQueryTemplate<State, Action, OuterQuery, InnerQuery> implements DOMTemplate<State, Action, OuterQuery> {
   constructor(
     readonly map: (value: OuterQuery) => InnerQuery | undefined,
@@ -117,7 +95,20 @@ export class MapQueryTemplate<State, Action, OuterQuery, InnerQuery> implements 
   render(ctx: DOMContext<Action>, state: State): View<State, OuterQuery> {
     const { children, map } = this
     const views = mapArray(children, c => c.render(ctx, state))
-    return new MapQueryView<State, OuterQuery, InnerQuery>(map, views)
+    return {
+      change: (state: State) => {
+        for (const view of views) view.change(state)
+      },
+      destroy: () => {
+        for (const view of views) view.destroy()
+      },
+      request: (query: OuterQuery) => {
+        const innerQuery = map(query)
+        if (typeof innerQuery !== 'undefined') {
+          views.forEach(view => view.request(innerQuery))
+        }
+      }
+    }
   }
 }
 

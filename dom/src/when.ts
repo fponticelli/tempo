@@ -22,59 +22,44 @@ export interface WhenOptions<State> {
   refId?: string
 }
 
-export class DOMWhenView<State, Action, Query> implements View<State, Query> {
+export class DOMWhenTemplate<State, Action, Query> implements DOMTemplate<State, Action, Query> {
   constructor(
-    readonly condition: (state: State) => boolean,
-    readonly ctx: DOMContext<Action>,
-    readonly dispatch: (action: Action) => void,
-    readonly removeNode: () => void,
+    readonly options: WhenOptions<State>,
     readonly children: DOMTemplate<State, Action, Query>[]
   ) {}
-
-  change(value: State): void {
-    if (this.condition(value)) {
-      if (typeof this.views === 'undefined') {
-        // it has never been rendered before
-        this.views = mapArray(this.children, c => c.render(this.ctx, value))
-      } else {
-        for (const view of this.views) view.change(value)
-      }
-    } else {
-      this.destroyViews()
-    }
-  }
-
-  destroy() {
-    this.destroyViews()
-    this.removeNode()
-  }
-
-  request(query: Query) {
-    this.views?.forEach(view => view.request(query))
-  }
-
-  private views: View<State, Query>[] | undefined
-  private destroyViews() {
-    if (typeof this.views !== 'undefined') {
-      for (const v of this.views) v.destroy()
-      this.views = undefined
-    }
-  }
-}
-
-export class DOMWhenTemplate<State, Action, Query> implements DOMTemplate<State, Action, Query> {
-  constructor(readonly options: WhenOptions<State>, readonly children: DOMChild<State, Action, Query>[]) {}
-  render(ctx: DOMContext<Action>, state: State): DOMWhenView<State, Action, Query> {
-    const ref = ctx.doc.createComment(this.options.refId || 't:when')
+  render(ctx: DOMContext<Action>, state: State): View<State, Query> {
+    const { condition, refId } = this.options
+    const ref = ctx.doc.createComment(refId || 't:when')
     ctx.append(ref)
     const parent = ref.parentElement!
-    const view = new DOMWhenView(
-      this.options.condition,
-      ctx.withAppend((node: Node) => parent.insertBefore(node, ref)),
-      ctx.dispatch,
-      () => removeNode(ref),
-      mapArray(this.children, domChildToTemplate)
-    )
+    const newCtx = ctx.withAppend((node: Node) => parent.insertBefore(node, ref))
+    let views: View<State, Query>[] | undefined
+    const view = {
+      change: (state: State) => {
+        if (condition(state)) {
+          if (typeof views === 'undefined') {
+            // it has never been rendered before
+            views = mapArray(this.children, c => c.render(newCtx, state))
+          } else {
+            for (const view of views) view.change(state)
+          }
+        } else if (typeof views !== 'undefined') {
+          for (const view of views) view.destroy()
+          views = undefined
+        }
+      },
+      destroy: () => {
+        removeNode(ref)
+        if (typeof views !== 'undefined') {
+          for (const view of views) view.destroy()
+        }
+      },
+      request: (query: Query) => {
+        if (typeof views !== 'undefined') {
+          for (const view of views) view.request(query)
+        }
+      }
+    }
     view.change(state)
     return view
   }
@@ -82,7 +67,7 @@ export class DOMWhenTemplate<State, Action, Query> implements DOMTemplate<State,
 
 export const when = <State, Action, Query = unknown>(options: WhenOptions<State>, ...children: DOMChild<State, Action, Query>[]):
     DOMTemplate<State, Action, Query> =>
-  new DOMWhenTemplate<State, Action, Query>(options, children)
+  new DOMWhenTemplate<State, Action, Query>(options, mapArray(children, domChildToTemplate))
 
 export const unless = <State, Action, Query = unknown>(options: WhenOptions<State>, ...children: DOMChild<State, Action, Query>[]):
     DOMTemplate<State, Action, Query> =>
@@ -91,5 +76,5 @@ export const unless = <State, Action, Query = unknown>(options: WhenOptions<Stat
       condition: (v: State) => !options.condition(v),
       refId: options.refId || 't:unless'
     },
-    children
+    mapArray(children, domChildToTemplate)
   )

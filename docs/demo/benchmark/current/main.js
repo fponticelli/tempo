@@ -815,79 +815,77 @@ limitations under the License.
 Object.defineProperty(exports, "__esModule", { value: true });
 var dom_1 = require("./utils/dom");
 var map_1 = require("tempo-core/lib/util/map");
-var DOMUntilView = /** @class */ (function () {
-    function DOMUntilView(ref, repeatUntil, ctx, children) {
-        this.ref = ref;
-        this.repeatUntil = repeatUntil;
-        this.ctx = ctx;
-        this.children = children;
-        this.childrenView = [];
-    }
-    DOMUntilView.prototype.destroy = function () {
-        dom_1.removeNode(this.ref);
-        for (var _i = 0, _a = this.childrenView; _i < _a.length; _i++) {
-            var c = _a[_i];
-            for (var _b = 0, c_1 = c; _b < c_1.length; _b++) {
-                var e = c_1[_b];
-                e.destroy();
-            }
-        }
-        this.childrenView = [];
-    };
-    DOMUntilView.prototype.change = function (state) {
-        var _this = this;
-        var currentViewLength = this.childrenView.length;
-        var index = 0;
-        var _loop_1 = function () {
-            var value = this_1.repeatUntil(state, index);
-            if (typeof value === 'undefined')
-                return "break";
-            if (index < currentViewLength) {
-                // replace existing
-                var filteredViews = this_1.childrenView[index];
-                for (var _i = 0, filteredViews_1 = filteredViews; _i < filteredViews_1.length; _i++) {
-                    var view = filteredViews_1[_i];
-                    view.change(value);
-                }
-            }
-            else {
-                // add node
-                this_1.childrenView.push(map_1.mapArray(this_1.children, function (el) { return el.render(_this.ctx, value); }));
-            }
-            index++;
-        };
-        var this_1 = this;
-        while (true) {
-            var state_1 = _loop_1();
-            if (state_1 === "break")
-                break;
-        }
-        var i = index;
-        // remove extra nodes
-        while (i < currentViewLength) {
-            for (var _i = 0, _a = this.childrenView[i]; _i < _a.length; _i++) {
-                var c = _a[_i];
-                c.destroy();
-            }
-            i++;
-        }
-        this.childrenView = this.childrenView.slice(0, index);
-    };
-    DOMUntilView.prototype.request = function (query) {
-        this.childrenView.forEach(function (views) { return views.forEach(function (view) { return view.request(query); }); });
-    };
-    return DOMUntilView;
-}());
-exports.DOMUntilView = DOMUntilView;
 var DOMUntilTemplate = /** @class */ (function () {
     function DOMUntilTemplate(options, children) {
         this.options = options;
         this.children = children;
     }
     DOMUntilTemplate.prototype.render = function (ctx, state) {
-        var ref = ctx.doc.createComment(this.options.refId || 't:until');
+        var children = this.children;
+        var _a = this.options, refId = _a.refId, repeatUntil = _a.repeatUntil;
+        var ref = ctx.doc.createComment(refId || 't:until');
         ctx.append(ref);
-        var view = new DOMUntilView(ref, this.options.repeatUntil, ctx.withAppend(dom_1.insertBefore(ref)), this.children);
+        var newCtx = ctx.withAppend(dom_1.insertBefore(ref));
+        var childrenViews = [];
+        var view = {
+            change: function (state) {
+                var currentLength = childrenViews.length;
+                var index = 0;
+                var _loop_1 = function () {
+                    var value = repeatUntil(state, index);
+                    if (typeof value === 'undefined')
+                        return "break";
+                    if (index < currentLength) {
+                        // replace existing
+                        var filteredViews = childrenViews[index];
+                        for (var _i = 0, filteredViews_1 = filteredViews; _i < filteredViews_1.length; _i++) {
+                            var view_1 = filteredViews_1[_i];
+                            view_1.change(value);
+                        }
+                    }
+                    else {
+                        // add node
+                        childrenViews.push(map_1.mapArray(children, function (el) { return el.render(newCtx, value); }));
+                    }
+                    index++;
+                };
+                while (true) {
+                    var state_1 = _loop_1();
+                    if (state_1 === "break")
+                        break;
+                }
+                var i = index;
+                // remove extra nodes
+                while (i < currentLength) {
+                    for (var _i = 0, _a = childrenViews[i]; _i < _a.length; _i++) {
+                        var c = _a[_i];
+                        c.destroy();
+                    }
+                    i++;
+                }
+                childrenViews = childrenViews.slice(0, index);
+            },
+            destroy: function () {
+                dom_1.removeNode(ref);
+                for (var _i = 0, childrenViews_1 = childrenViews; _i < childrenViews_1.length; _i++) {
+                    var childViews = childrenViews_1[_i];
+                    for (var _a = 0, childViews_1 = childViews; _a < childViews_1.length; _a++) {
+                        var view_2 = childViews_1[_a];
+                        view_2.destroy();
+                    }
+                }
+                childrenViews = [];
+            },
+            request: function (query) {
+                for (var _i = 0, childrenViews_2 = childrenViews; _i < childrenViews_2.length; _i++) {
+                    var childViews = childrenViews_2[_i];
+                    for (var _a = 0, childViews_2 = childViews; _a < childViews_2.length; _a++) {
+                        var view_3 = childViews_2[_a];
+                        view_3.request(query);
+                    }
+                }
+            }
+        };
         view.change(state);
         return view;
     };

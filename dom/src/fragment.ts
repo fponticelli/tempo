@@ -26,13 +26,13 @@ export class DOMFragmentTemplate<State, Action, Query> implements DOMTemplate<St
     const views = mapArray(this.children, child => child.render(ctx, state))
     return {
       change: (state: State) => {
-        for (const v of views) v.change(state)
+        for (const view of views) view.change(state)
       },
       destroy: () => {
-        for (const v of views) v.destroy()
+        for (const view of views) view.destroy()
       },
       request: (query: Query) => {
-        for (const v of views) v.request(query)
+        for (const view of views) view.request(query)
       }
     }
   }
