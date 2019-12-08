@@ -15,7 +15,6 @@ import { DOMChild, DOMTemplate } from './template'
 import { View } from 'tempo-core/lib/view'
 import { DOMContext } from './context'
 import { domChildToTemplate } from './utils/dom'
-import { DOMFragmentView } from './fragment'
 import { mapArray } from 'tempo-core/lib/util/map'
 
 export class MapStateTemplate<OuterState, InnerState, Action, Query> implements DOMTemplate<OuterState, Action, Query> {
@@ -29,10 +28,18 @@ export class MapStateTemplate<OuterState, InnerState, Action, Query> implements 
     const innerState = map(state)
     const views = mapArray(children, c => c.render(ctx, innerState))
 
-    return new DOMFragmentView<OuterState, Query>(views, (state: OuterState) => {
-      const innerState = map(state)
-      for (const view of views) view.change(innerState)
-    })
+    return {
+      change: (state: OuterState) => {
+        const innerState = map(state)
+        for (const view of views) view.change(innerState)
+      },
+      destroy: () => {
+        for (const view of views) view.destroy()
+      },
+      request: (query: Query) => {
+        for (const view of views) view.request(query)
+      }
+    }
   }
 }
 
@@ -59,7 +66,17 @@ export class MapActionTemplate<State, OuterAction, InnerAction, Query> implement
     const { children, map } = this
     const newCtx = ctx.conditionalMapAction(map)
     const views = mapArray(children, c => c.render(newCtx, state))
-    return new DOMFragmentView(views)
+    return {
+      change: (state: State) => {
+        for (const view of views) view.change(state)
+      },
+      destroy: () => {
+        for (const view of views) view.destroy()
+      },
+      request: (query: Query) => {
+        for (const view of views) view.request(query)
+      }
+    }
   }
 }
 

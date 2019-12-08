@@ -12,27 +12,9 @@ limitations under the License.
 */
 
 import { View } from 'tempo-core/lib/view'
-import { DOMComponentView, DOMComponentTemplate } from './component'
+import { DOMComponentTemplate } from './component'
 import { DOMTemplate } from './template'
 import { DOMContext } from './context'
-
-export class DOMAdapterView<OuterState, InnerState, InnerAction, Query> implements View<OuterState, Query> {
-  constructor(
-    readonly mergeStates: (outerState: OuterState, innerState: InnerState) => InnerState | undefined,
-    readonly request: (query: Query) => void,
-    readonly child: DOMComponentView<InnerState, InnerAction, Query>
-  ) {}
-
-  change(outerState: OuterState): void {
-    const newState = this.mergeStates(outerState, this.child.store.property.get())
-    if (typeof newState === 'undefined') return
-    this.child.change(newState)
-  }
-
-  destroy(): void {
-    this.child.destroy()
-  }
-}
 
 export class DOMAdapterTemplate<OuterState, InnerState, OuterAction, InnerAction, Query>
   implements DOMTemplate<OuterState, OuterAction, Query> {
@@ -47,7 +29,7 @@ export class DOMAdapterTemplate<OuterState, InnerState, OuterAction, InnerAction
       (this.mergeStates && this.mergeStates(outerState, this.child.store.property.get())) ||
       this.child.store.property.get()
 
-    const viewChild = this.child.render(
+    const viewComponent = this.child.render(
       ctx.withDispatch(() => { /* COMPONENT IS DETACHED FROM CONTAINER AND DOESN'T PROPAGATE */ }),
       mergedState
     )
@@ -61,12 +43,20 @@ export class DOMAdapterTemplate<OuterState, InnerState, OuterAction, InnerAction
         dispatchOuter: ctx.dispatch
       })
     })
-    const view = new DOMAdapterView(
-      this.mergeStates,
-      (query: Query) => viewChild.request(query),
-      viewChild
-    )
-    return view
+
+    return {
+      change: (state: OuterState) => {
+        const newState = this.mergeStates(state, this.child.store.property.get())
+        if (typeof newState !== 'undefined')
+          viewComponent.change(newState)
+      },
+      destroy: () => {
+        viewComponent.destroy()
+      },
+      request: (query: Query) => {
+        viewComponent.request(query)
+      }
+    }
   }
 }
 

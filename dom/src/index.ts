@@ -11,7 +11,6 @@ export * from './iterate'
 export * from './lazy'
 export * from './map'
 export * from './match'
-export * from './node_view'
 export * from './portal'
 import * as svg from './svg'
 export { svg }

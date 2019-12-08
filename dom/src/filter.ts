@@ -15,7 +15,6 @@ import { DOMChild, DOMTemplate } from './template'
 import { View } from 'tempo-core/lib/view'
 import { DOMContext } from './context'
 import { domChildToTemplate } from './utils/dom'
-import { DOMFragmentView } from './fragment'
 import { mapArray } from 'tempo-core/lib/util/map'
 
 export class FilterStateTemplate<State, Action, Query> implements DOMTemplate<State, Action, Query> {
@@ -29,12 +28,20 @@ export class FilterStateTemplate<State, Action, Query> implements DOMTemplate<St
     const views = mapArray(children, c => c.render(ctx, state))
 
     let prevState = state
-    return new DOMFragmentView(views, (newState: State) => {
-      if (!filter(prevState, newState)) {
-        prevState = newState
-        for (const view of views) view.change(newState)
+    return {
+      change: (newState: State) => {
+        if (!filter(prevState, newState)) {
+          prevState = newState
+          for (const view of views) view.change(newState)
+        }
+      },
+      destroy: () => {
+        for (const view of views) view.destroy()
+      },
+      request: (query: Query) => {
+        for (const view of views) view.request(query)
       }
-    })
+    }
   }
 }
 

@@ -14,8 +14,7 @@ limitations under the License.
 import { DOMTemplate, DOMChild } from './template'
 import { DOMContext } from './context'
 import { View } from 'tempo-core/lib/view'
-import { processAttribute, processEvent, processStyle, domChildToTemplate } from './utils/dom'
-import { DOMNodeView } from './node_view'
+import { processAttribute, processEvent, processStyle, domChildToTemplate, removeNode } from './utils/dom'
 import { DOMAttributes, DOMAttribute, AttributeValue, DOMEventHandler, DOMStyleAttribute } from './value'
 import { mapArray } from 'tempo-core/lib/util/map'
 import { attributeNameMap } from './dom_attributes_mapper'
@@ -44,16 +43,16 @@ const applyAfterRender = <State, Action, El extends Element, T>(
 export class DOMElement<State, Action, Query = unknown, El extends Element = Element, T = unknown>
     implements DOMTemplate<State, Action, Query> {
   constructor(
-    readonly createElement: (doc: Document) => El,
-    readonly attrs: { name: string, value: DOMAttribute<State, AttributeValue>}[],
-    readonly events: { name: string, value: DOMEventHandler<State, Action, any, El>}[],
-    readonly styles: { name: string, value: DOMStyleAttribute<State, string>}[],
-    readonly afterrender:  undefined | ((state: State, el: El, ctx: DOMContext<Action>) => T | undefined),
-    readonly beforechange: undefined | ((state: State, el: El, ctx: DOMContext<Action>, value: T | undefined) => T | undefined),
-    readonly afterchange:  undefined | ((state: State, el: El, ctx: DOMContext<Action>, value: T | undefined) => T | undefined),
-    readonly beforedestroy: undefined | (((el: El, ctx: DOMContext<Action>, value: T | undefined) => void)),
-    readonly respond: undefined | ((query: Query, el: El, ctx: DOMContext<Action>) => undefined),
-    readonly children: DOMTemplate<State, Action, Query>[]
+    public createElement: (doc: Document) => El,
+    public attrs: { name: string, value: DOMAttribute<State, AttributeValue>}[],
+    public events: { name: string, value: DOMEventHandler<State, Action, any, El>}[],
+    public styles: { name: string, value: DOMStyleAttribute<State, string>}[],
+    public afterrender:  undefined | ((state: State, el: El, ctx: DOMContext<Action>) => T | undefined),
+    public beforechange: undefined | ((state: State, el: El, ctx: DOMContext<Action>, value: T | undefined) => T | undefined),
+    public afterchange:  undefined | ((state: State, el: El, ctx: DOMContext<Action>, value: T | undefined) => T | undefined),
+    public beforedestroy: undefined | (((el: El, ctx: DOMContext<Action>, value: T | undefined) => void)),
+    public respond: undefined | ((query: Query, el: El, ctx: DOMContext<Action>) => undefined),
+    public children: DOMTemplate<State, Action, Query>[]
   ) {}
 
   render(ctx: DOMContext<Action>, state: State): View<State, Query> {
@@ -98,22 +97,22 @@ export class DOMElement<State, Action, Query = unknown, El extends Element = Ele
     }
 
     const beforedestroyf = this.beforedestroy && (() => this.beforedestroy!(el, ctx, value))
-    const request = this.respond ?
-      (query: Query) => {
-        views.forEach(view => view.request(query))
-        this.respond!(query, el, ctx)
-      } :
-      () => {}
+    const { respond } = this
 
-    return new DOMNodeView(
-      el,
-      views,
-      (state: State) => {
+    return {
+      change: (state: State) => {
         for (const change of allChanges) change(state)
       },
-      request,
-      beforedestroyf
-    )
+      destroy: () => {
+        if (beforedestroyf) beforedestroyf()
+        removeNode(el)
+        for (const view of views) view.destroy()
+      },
+      request: (query: Query) => {
+        if (respond) respond(query, el, ctx)
+        for (const view of views) view.request(query)
+      }
+    }
   }
 }
 

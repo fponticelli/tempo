@@ -484,7 +484,7 @@ function processStyle(el, name, value, acc) {
 }
 exports.processStyle = processStyle;
 
-},{"../dom_attributes_mapper":"UKQ2","./set_attribute":"BEVE","../text":"GqEk"}],"wNw6":[function(require,module,exports) {
+},{"../dom_attributes_mapper":"UKQ2","./set_attribute":"BEVE","../text":"GqEk"}],"bbLX":[function(require,module,exports) {
 "use strict";
 /*
 Copyright 2019 Google LLC
@@ -500,44 +500,6 @@ limitations under the License.
 */
 Object.defineProperty(exports, "__esModule", { value: true });
 var dom_1 = require("./utils/dom");
-var DOMNodeView = /** @class */ (function () {
-    function DOMNodeView(node, views, change, request, beforeDestroy) {
-        this.node = node;
-        this.views = views;
-        this.change = change;
-        this.request = request;
-        this.beforeDestroy = beforeDestroy;
-    }
-    DOMNodeView.prototype.destroy = function () {
-        if (this.beforeDestroy)
-            this.beforeDestroy();
-        dom_1.removeNode(this.node);
-        for (var _i = 0, _a = this.views; _i < _a.length; _i++) {
-            var view = _a[_i];
-            view.destroy();
-        }
-    };
-    return DOMNodeView;
-}());
-exports.DOMNodeView = DOMNodeView;
-
-},{"./utils/dom":"TnZD"}],"bbLX":[function(require,module,exports) {
-"use strict";
-/*
-Copyright 2019 Google LLC
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-    https://www.apache.org/licenses/LICENSE-2.0
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-*/
-Object.defineProperty(exports, "__esModule", { value: true });
-var dom_1 = require("./utils/dom");
-var node_view_1 = require("./node_view");
 var map_1 = require("tempo-core/lib/util/map");
 var dom_attributes_mapper_1 = require("./dom_attributes_mapper");
 var applyChange = function (change, el, ctx) { return function (state, value) {
@@ -606,18 +568,32 @@ var DOMElement = /** @class */ (function () {
             allChanges.push(update);
         }
         var beforedestroyf = this.beforedestroy && (function () { return _this.beforedestroy(el, ctx, value); });
-        var request = this.respond ?
-            function (query) {
-                views.forEach(function (view) { return view.request(query); });
-                _this.respond(query, el, ctx);
-            } :
-            function () { };
-        return new node_view_1.DOMNodeView(el, views, function (state) {
-            for (var _i = 0, allChanges_2 = allChanges; _i < allChanges_2.length; _i++) {
-                var change = allChanges_2[_i];
-                change(state);
+        var respond = this.respond;
+        return {
+            change: function (state) {
+                for (var _i = 0, allChanges_2 = allChanges; _i < allChanges_2.length; _i++) {
+                    var change = allChanges_2[_i];
+                    change(state);
+                }
+            },
+            destroy: function () {
+                if (beforedestroyf)
+                    beforedestroyf();
+                dom_1.removeNode(el);
+                for (var _i = 0, views_1 = views; _i < views_1.length; _i++) {
+                    var view = views_1[_i];
+                    view.destroy();
+                }
+            },
+            request: function (query) {
+                if (respond)
+                    respond(query, el, ctx);
+                for (var _i = 0, views_2 = views; _i < views_2.length; _i++) {
+                    var view = views_2[_i];
+                    view.request(query);
+                }
             }
-        }, request, beforedestroyf);
+        };
     };
     return DOMElement;
 }());
@@ -684,7 +660,7 @@ exports.elNS2 = function (namespace, name) { return function (attributes) {
     return new DOMElement(makeCreateElementNS(namespace, name), extractAttrs(attributes.attrs), extractEvents(attributes.events), extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, attributes.respond, map_1.mapArray(children, dom_1.domChildToTemplate));
 }; };
 
-},{"./utils/dom":"TnZD","./node_view":"wNw6","tempo-core/lib/util/map":"tBUf","./dom_attributes_mapper":"UKQ2"}],"zQMt":[function(require,module,exports) {
+},{"./utils/dom":"TnZD","tempo-core/lib/util/map":"tBUf","./dom_attributes_mapper":"UKQ2"}],"zQMt":[function(require,module,exports) {
 "use strict";
 /*
 Copyright 2019 Google LLC

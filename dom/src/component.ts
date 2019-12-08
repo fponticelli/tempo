@@ -11,37 +11,12 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { DOMFragmentView } from './fragment'
-import { View } from 'tempo-core/lib/view'
+// import { View } from 'tempo-core/lib/view'
 import { Store } from 'tempo-store/lib/store'
 import { DOMTemplate, DOMChild } from './template'
 import { DOMContext } from './context'
 import { domChildToTemplate } from './utils/dom'
 import { mapArray } from 'tempo-core/lib/util/map'
-
-export class DOMComponentView<State, Action, Query> extends DOMFragmentView<State, Query> {
-  /* istanbul ignore next */
-  constructor(
-    readonly store: Store<State, Action>,
-    readonly dispatch: (action: Action) => void,
-    views: View<State, Query>[],
-    private _destroy: () => void
-  ) {
-    super(views, (state: State) => {
-      store.property.set(state)
-      for (const view of views) view.change(state)
-    })
-  }
-
-  request(query: Query) {
-    for (const view of this.views) view.request(query)
-  }
-
-  destroy() {
-    this._destroy()
-    super.destroy()
-  }
-}
 
 export class DOMComponentTemplate<State, Action, Query> implements DOMTemplate<State, Action, Query> {
   constructor(
@@ -77,9 +52,19 @@ export class DOMComponentTemplate<State, Action, Query> implements DOMTemplate<S
     }
     const newCtx = ctx.withDispatch(innerDispatch)
     const views = mapArray(this.children, child => child.render(newCtx, property.get()))
-    const view = new DOMComponentView<State, Action, Query>(store, innerDispatch, views, () => {
-      property.observable.off(update)
-    })
+    const view = {
+      change: (state: State) => {
+        store.property.set(state)
+        for (const view of views) view.change(state)
+      },
+      destroy: () => {
+        property.observable.off(update)
+        for (const view of views) view.destroy()
+      },
+      request: (query: Query) => {
+        for (const view of views) view.request(query)
+      }
+    }
     property.set(state)
     return view
   }

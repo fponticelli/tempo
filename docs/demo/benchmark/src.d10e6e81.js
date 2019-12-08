@@ -1135,39 +1135,6 @@ function $TnZD$var$processStyle(el, name, value, acc) {
 var $TnZD$export$processStyle = $TnZD$var$processStyle;
 $TnZD$exports.processStyle = $TnZD$export$processStyle; //# sourceMappingURL=dom.js.map
 
-// ASSET: ../node_modules/tempo-dom/lib/node_view.js
-var $wNw6$exports = {};
-Object.defineProperty($wNw6$exports, "__esModule", {
-  value: true
-});
-
-var $wNw6$var$DOMNodeView =
-/** @class */
-function () {
-  function DOMNodeView(node, views, change, request, beforeDestroy) {
-    this.node = node;
-    this.views = views;
-    this.change = change;
-    this.request = request;
-    this.beforeDestroy = beforeDestroy;
-  }
-
-  DOMNodeView.prototype.destroy = function () {
-    if (this.beforeDestroy) this.beforeDestroy();
-    $TnZD$export$removeNode(this.node);
-
-    for (var _i = 0, _a = this.views; _i < _a.length; _i++) {
-      var view = _a[_i];
-      view.destroy();
-    }
-  };
-
-  return DOMNodeView;
-}();
-
-var $wNw6$export$DOMNodeView = $wNw6$var$DOMNodeView;
-$wNw6$exports.DOMNodeView = $wNw6$export$DOMNodeView; //# sourceMappingURL=node_view.js.map
-
 // ASSET: ../node_modules/tempo-dom/lib/element.js
 var $bbLX$exports = {};
 Object.defineProperty($bbLX$exports, "__esModule", {
@@ -1277,19 +1244,32 @@ function () {
       return _this.beforedestroy(el, ctx, value);
     };
 
-    var request = this.respond ? function (query) {
-      views.forEach(function (view) {
-        return view.request(query);
-      });
+    var respond = this.respond;
+    return {
+      change: function (state) {
+        for (var _i = 0, allChanges_2 = allChanges; _i < allChanges_2.length; _i++) {
+          var change = allChanges_2[_i];
+          change(state);
+        }
+      },
+      destroy: function () {
+        if (beforedestroyf) beforedestroyf();
+        $TnZD$export$removeNode(el);
 
-      _this.respond(query, el, ctx);
-    } : function () {};
-    return new $wNw6$export$DOMNodeView(el, views, function (state) {
-      for (var _i = 0, allChanges_2 = allChanges; _i < allChanges_2.length; _i++) {
-        var change = allChanges_2[_i];
-        change(state);
+        for (var _i = 0, views_1 = views; _i < views_1.length; _i++) {
+          var view = views_1[_i];
+          view.destroy();
+        }
+      },
+      request: function (query) {
+        if (respond) respond(query, el, ctx);
+
+        for (var _i = 0, views_2 = views; _i < views_2.length; _i++) {
+          var view = views_2[_i];
+          view.request(query);
+        }
       }
-    }, request, beforedestroyf);
+    };
   };
 
   return DOMElement;
@@ -1737,83 +1717,6 @@ var $JiXW$export$optionsSelection = $zQMt$export$div({}, $zQMt$export$table({}, 
   }
 })))));
 $JiXW$exports.optionsSelection = $JiXW$export$optionsSelection;
-// ASSET: ../node_modules/tempo-dom/lib/fragment.js
-var $Gdta$exports = {};
-Object.defineProperty($Gdta$exports, "__esModule", {
-  value: true
-});
-
-var $Gdta$var$DOMFragmentView =
-/** @class */
-function () {
-  function DOMFragmentView(views, change) {
-    var _this = this;
-
-    if (change === void 0) {
-      change = function (state) {
-        for (var _i = 0, _a = _this.views; _i < _a.length; _i++) {
-          var v = _a[_i];
-          v.change(state);
-        }
-      };
-    }
-
-    this.views = views;
-    this.change = change;
-  }
-
-  DOMFragmentView.prototype.destroy = function () {
-    for (var _i = 0, _a = this.views; _i < _a.length; _i++) {
-      var v = _a[_i];
-      v.destroy();
-    }
-  };
-
-  DOMFragmentView.prototype.request = function (query) {
-    for (var _i = 0, _a = this.views; _i < _a.length; _i++) {
-      var v = _a[_i];
-      v.request(query);
-    }
-  };
-
-  return DOMFragmentView;
-}();
-
-var $Gdta$export$DOMFragmentView = $Gdta$var$DOMFragmentView;
-$Gdta$exports.DOMFragmentView = $Gdta$export$DOMFragmentView;
-
-var $Gdta$var$DOMFragmentTemplate =
-/** @class */
-function () {
-  function DOMFragmentTemplate(children) {
-    this.children = children;
-  }
-
-  DOMFragmentTemplate.prototype.render = function (ctx, state) {
-    var views = $tBUf$export$mapArray(this.children, function (child) {
-      return child.render(ctx, state);
-    });
-    return new $Gdta$var$DOMFragmentView(views);
-  };
-
-  return DOMFragmentTemplate;
-}();
-
-var $Gdta$export$DOMFragmentTemplate = $Gdta$var$DOMFragmentTemplate;
-$Gdta$exports.DOMFragmentTemplate = $Gdta$export$DOMFragmentTemplate;
-
-var $Gdta$export$fragment = function () {
-  var children = [];
-
-  for (var _i = 0; _i < arguments.length; _i++) {
-    children[_i] = arguments[_i];
-  }
-
-  return new $Gdta$var$DOMFragmentTemplate($tBUf$export$mapArray(children, $TnZD$export$domChildToTemplate));
-};
-
-$Gdta$exports.fragment = $Gdta$export$fragment; //# sourceMappingURL=fragment.js.map
-
 // ASSET: ../node_modules/tempo-dom/lib/map.js
 var $qep0$exports = {};
 Object.defineProperty($qep0$exports, "__esModule", {
@@ -1837,14 +1740,28 @@ function () {
     var views = $tBUf$export$mapArray(children, function (c) {
       return c.render(ctx, innerState);
     });
-    return new $Gdta$export$DOMFragmentView(views, function (state) {
-      var innerState = map(state);
+    return {
+      change: function (state) {
+        var innerState = map(state);
 
-      for (var _i = 0, views_1 = views; _i < views_1.length; _i++) {
-        var view = views_1[_i];
-        view.change(innerState);
+        for (var _i = 0, views_1 = views; _i < views_1.length; _i++) {
+          var view = views_1[_i];
+          view.change(innerState);
+        }
+      },
+      destroy: function () {
+        for (var _i = 0, views_2 = views; _i < views_2.length; _i++) {
+          var view = views_2[_i];
+          view.destroy();
+        }
+      },
+      request: function (query) {
+        for (var _i = 0, views_3 = views; _i < views_3.length; _i++) {
+          var view = views_3[_i];
+          view.request(query);
+        }
       }
-    });
+    };
   };
 
   return MapStateTemplate;
@@ -1896,7 +1813,26 @@ function () {
     var views = $tBUf$export$mapArray(children, function (c) {
       return c.render(newCtx, state);
     });
-    return new $Gdta$export$DOMFragmentView(views);
+    return {
+      change: function (state) {
+        for (var _i = 0, views_4 = views; _i < views_4.length; _i++) {
+          var view = views_4[_i];
+          view.change(state);
+        }
+      },
+      destroy: function () {
+        for (var _i = 0, views_5 = views; _i < views_5.length; _i++) {
+          var view = views_5[_i];
+          view.destroy();
+        }
+      },
+      request: function (query) {
+        for (var _i = 0, views_6 = views; _i < views_6.length; _i++) {
+          var view = views_6[_i];
+          view.request(query);
+        }
+      }
+    };
   };
 
   return MapActionTemplate;
@@ -2286,6 +2222,63 @@ var $Qev4$export$unless = function (options) {
 };
 
 $Qev4$exports.unless = $Qev4$export$unless; //# sourceMappingURL=when.js.map
+
+// ASSET: ../node_modules/tempo-dom/lib/fragment.js
+var $Gdta$exports = {};
+Object.defineProperty($Gdta$exports, "__esModule", {
+  value: true
+});
+
+var $Gdta$var$DOMFragmentTemplate =
+/** @class */
+function () {
+  function DOMFragmentTemplate(children) {
+    this.children = children;
+  }
+
+  DOMFragmentTemplate.prototype.render = function (ctx, state) {
+    var views = $tBUf$export$mapArray(this.children, function (child) {
+      return child.render(ctx, state);
+    });
+    return {
+      change: function (state) {
+        for (var _i = 0, views_1 = views; _i < views_1.length; _i++) {
+          var v = views_1[_i];
+          v.change(state);
+        }
+      },
+      destroy: function () {
+        for (var _i = 0, views_2 = views; _i < views_2.length; _i++) {
+          var v = views_2[_i];
+          v.destroy();
+        }
+      },
+      request: function (query) {
+        for (var _i = 0, views_3 = views; _i < views_3.length; _i++) {
+          var v = views_3[_i];
+          v.request(query);
+        }
+      }
+    };
+  };
+
+  return DOMFragmentTemplate;
+}();
+
+var $Gdta$export$DOMFragmentTemplate = $Gdta$var$DOMFragmentTemplate;
+$Gdta$exports.DOMFragmentTemplate = $Gdta$export$DOMFragmentTemplate;
+
+var $Gdta$export$fragment = function () {
+  var children = [];
+
+  for (var _i = 0; _i < arguments.length; _i++) {
+    children[_i] = arguments[_i];
+  }
+
+  return new $Gdta$var$DOMFragmentTemplate($tBUf$export$mapArray(children, $TnZD$export$domChildToTemplate));
+};
+
+$Gdta$exports.fragment = $Gdta$export$fragment; //# sourceMappingURL=fragment.js.map
 
 // ASSET: template/table_view.ts
 var $Seec$exports = {};
@@ -2791,9 +2784,7 @@ Object.defineProperty($zFui$exports, "__esModule", {
 });
 
 // @ts-ignore
-var $zFui$var$Property =
-/** @class */
-function () {
+var $zFui$var$Property = function () {
   function Property(value, equal) {
     if (equal === void 0) {
       equal = $dLEG$export$deepEqual;
@@ -2862,75 +2853,9 @@ $xN6r$exports.Store = $xN6r$export$Store; //# sourceMappingURL=store.js.map
 
 // ASSET: ../node_modules/tempo-dom/lib/component.js
 var $yVFQ$exports = {};
-
-var $yVFQ$var$__extends = $yVFQ$exports && $yVFQ$exports.__extends || function () {
-  var extendStatics = function (d, b) {
-    extendStatics = Object.setPrototypeOf || {
-      __proto__: []
-    } instanceof Array && function (d, b) {
-      d.__proto__ = b;
-    } || function (d, b) {
-      for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    };
-
-    return extendStatics(d, b);
-  };
-
-  return function (d, b) {
-    extendStatics(d, b);
-
-    function __() {
-      this.constructor = d;
-    }
-
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-  };
-}();
-
 Object.defineProperty($yVFQ$exports, "__esModule", {
   value: true
 });
-
-var $yVFQ$var$DOMComponentView =
-/** @class */
-function (_super) {
-  $yVFQ$var$__extends(DOMComponentView, _super);
-  /* istanbul ignore next */
-
-  function DOMComponentView(store, dispatch, views, _destroy) {
-    var _this = _super.call(this, views, function (state) {
-      store.property.set(state);
-
-      for (var _i = 0, views_1 = views; _i < views_1.length; _i++) {
-        var view = views_1[_i];
-        view.change(state);
-      }
-    }) || this;
-
-    _this.store = store;
-    _this.dispatch = dispatch;
-    _this._destroy = _destroy;
-    return _this;
-  }
-
-  DOMComponentView.prototype.request = function (query) {
-    for (var _i = 0, _a = this.views; _i < _a.length; _i++) {
-      var view = _a[_i];
-      view.request(query);
-    }
-  };
-
-  DOMComponentView.prototype.destroy = function () {
-    this._destroy();
-
-    _super.prototype.destroy.call(this);
-  };
-
-  return DOMComponentView;
-}($Gdta$export$DOMFragmentView);
-
-var $yVFQ$export$DOMComponentView = $yVFQ$var$DOMComponentView;
-$yVFQ$exports.DOMComponentView = $yVFQ$export$DOMComponentView;
 
 var $yVFQ$var$DOMComponentTemplate =
 /** @class */
@@ -2974,9 +2899,30 @@ function () {
     var views = $tBUf$export$mapArray(this.children, function (child) {
       return child.render(newCtx, property.get());
     });
-    var view = new $yVFQ$var$DOMComponentView(store, innerDispatch, views, function () {
-      property.observable.off(update);
-    });
+    var view = {
+      change: function (state) {
+        store.property.set(state);
+
+        for (var _i = 0, views_1 = views; _i < views_1.length; _i++) {
+          var view_1 = views_1[_i];
+          view_1.change(state);
+        }
+      },
+      destroy: function () {
+        property.observable.off(update);
+
+        for (var _i = 0, views_2 = views; _i < views_2.length; _i++) {
+          var view_2 = views_2[_i];
+          view_2.destroy();
+        }
+      },
+      request: function (query) {
+        for (var _i = 0, views_3 = views; _i < views_3.length; _i++) {
+          var view_3 = views_3[_i];
+          view_3.request(query);
+        }
+      }
+    };
     property.set(state);
     return view;
   };

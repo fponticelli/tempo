@@ -17,23 +17,6 @@ import { DOMTemplate, DOMChild } from './template'
 import { DOMContext } from './context'
 import { mapArray } from 'tempo-core/lib/util/map'
 
-export class DOMFragmentView<State, Query> implements View<State, Query> {
-  constructor(
-    readonly views: View<any, Query>[],
-    readonly change: ((state: State) => void) = (state: State) => {
-      for (const v of this.views) v.change(state)
-    }
-  ) { }
-
-  destroy(): void {
-    for (const v of this.views) v.destroy()
-  }
-
-  request(query: Query) {
-    for (const v of this.views) v.request(query)
-  }
-}
-
 export class DOMFragmentTemplate<State, Action, Query> implements DOMTemplate<State, Action, Query> {
   constructor(
     readonly children: DOMTemplate<State, Action, Query>[]
@@ -41,7 +24,17 @@ export class DOMFragmentTemplate<State, Action, Query> implements DOMTemplate<St
 
   render(ctx: DOMContext<Action>, state: State): View<State, Query> {
     const views = mapArray(this.children, child => child.render(ctx, state))
-    return new DOMFragmentView(views)
+    return {
+      change: (state: State) => {
+        for (const v of views) v.change(state)
+      },
+      destroy: () => {
+        for (const v of views) v.destroy()
+      },
+      request: (query: Query) => {
+        for (const v of views) v.request(query)
+      }
+    }
   }
 }
 

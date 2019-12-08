@@ -16,7 +16,6 @@ import { DOMContext } from './context'
 import { View } from 'tempo-core/lib/view'
 import { DOMElement, el } from './element'
 import { UnwrappedDerivedValue } from 'tempo-core/lib/value'
-import { DOMNodeView } from './node_view'
 import { DOMTextValue } from './value'
 
 const renderLiteral = <State, Action, Query = unknown, El extends Element = Element, T = unknown>
@@ -28,7 +27,7 @@ const renderLiteral = <State, Action, Query = unknown, El extends Element = Elem
   value: string | undefined
 ): View<State, Query> => {
   const view = element.render(ctx, state)
-  const el = ((view as DOMNodeView<State, Query>).node as HTMLElement)
+  const el = ctx.parent
   el.innerHTML = transform(value || '')
   return view
 }
@@ -40,20 +39,36 @@ const renderFunction = <State, Action, Query, El extends Element = Element, T = 
   state: State,
   map: UnwrappedDerivedValue<State, string>
 ): View<State, Query> => {
-  const view = element.render(ctx, state)
-  const value = map(state) || ''
-  const el = ((view as DOMNodeView<State, Query>).node as HTMLElement)
-  el.innerHTML = transform(value || '')
-  let oldContent = ''
-  const f = (state: State) => {
-    const newContent = transform(map(state) || '')
-    if (newContent !== oldContent) {
-      el.innerHTML = newContent
-      if (newContent.length < 20000)
-        oldContent = newContent
+  const prevAfterRender = element.afterrender
+  let localEl: El
+  element.afterrender = (state: State, el: El, ctx: DOMContext<Action>): T | undefined => {
+    localEl = el
+    if (prevAfterRender) {
+      return prevAfterRender(state, el, ctx)
+    } else {
+      return undefined
     }
   }
-  return new DOMNodeView(el, [view], f, (query: Query) => view.request(query))
+  const view = element.render(ctx, state)
+  const value = map(state) || ''
+  localEl!.innerHTML = transform(value || '')
+  let oldContent = ''
+  return {
+    change: (state: State) => {
+      const newContent = transform(map(state) || '')
+      if (newContent !== oldContent) {
+        localEl.innerHTML = newContent
+        if (newContent.length < 20000)
+          oldContent = newContent
+      }
+    },
+    destroy: () => {
+      view.destroy()
+    },
+    request: (query: Query) => {
+      view.request(query)
+    }
+  }
 }
 
 export class DOMUnsafeHtml<State, Action, Query, El extends Element = Element, T = unknown> implements DOMTemplate<State, Action, Query> {
