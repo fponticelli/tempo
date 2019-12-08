@@ -14,7 +14,7 @@
   },
 
   "repository": {
-    "url": "https://github.com/fponticelli/tempo"
+    "url": "git@github.com:fponticelli/tempo.git"
   },
 
   "eventHooks": {
