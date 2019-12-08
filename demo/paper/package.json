@@ -1,10 +1,9 @@
 {
-  "name": "tempo-demo.readme",
+  "name": "tempo-demo.paper",
   "version": "1.0.0",
   "license": "Apache-2.0",
   "homepage": "https://github.com/fponticelli/tempo",
-  "description": "A small example that fits a README page. Two buttons and a counter.",
-  "private": true,
+  "description": "",
   "bugs": {
     "url": "https://github.com/fponticelli/tempo/issues"
   },
@@ -16,7 +15,9 @@
   "dependencies": {
     "tempo-core": "1.2.0",
     "tempo-dom": "0.10.0",
-    "tempo-store": "1.0.1"
+    "tempo-store": "1.0.1",
+    "tempo-paper": "1.0.0",
+    "paper": "0.12.3"
   },
   "devDependencies": {
     "cssnano": "4.1.10",
@@ -24,11 +25,12 @@
     "prettier": "1.19.1",
     "tslint": "5.20.1",
     "typescript": "3.7.2",
-    "babel-types": "6.26.0"
+    "babel-types": "6.26.0",
+    "@types/paper": "0.12.3"
   },
   "scripts": {
-    "compile": "NODE_ENV=production && tsc --noEmit && parcel build src/index.html --public-url . --out-dir ../../docs/demo/readme --experimental-scope-hoisting",
-    "clean": "rm -rf dist/* && rm -rf ../../docs/demo/readme/*",
+    "compile": "NODE_ENV=production && npx tsc --noEmit && parcel build src/index.html --public-url . --out-dir ../../docs/demo/paper --experimental-scope-hoisting --no-minify",
+    "clean": "rm -rf dist/* && rm -rf ../../docs/demo/paper/*",
     "build": "npm run clean && npm run compile",
     "watch": "parcel src/index.html",
     "tslint": "tslint -p ./tslint.json",
