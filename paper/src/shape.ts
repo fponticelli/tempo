@@ -20,18 +20,21 @@ type WritableShapeOptions<State> = {
   [K in WritableShapeOptionKeys]?: PaperAttribute<State, WritableShape[K]>
 }
 
-type ShapeOptions<State, Action, Query, T> = MakeOptional<
+type ShapeOptions<State, Action, Query, T, Sub> = MakeOptional<
   Merge<
     Merge<
       WritableShapeOptions<State>,
-      TempoAttributes<State, Action, Query, Shape, T>
+      Merge<
+        { args?: {} },
+        TempoAttributes<State, Action, Query, Shape, T>
+      >
     >,
     ItemEvents<State, Action, Shape>
   >
 >
 
 export const circle = <State, Action, Query = unknown, T = unknown>(
-  options: ShapeOptions<State, Action, Query, T>
+  options: ShapeOptions<State, Action, Query, T, Shape.Circle>
 ) =>
   createItem<
     State,
@@ -39,11 +42,16 @@ export const circle = <State, Action, Query = unknown, T = unknown>(
     Query,
     Shape,
     T,
-    ShapeOptions<State, Action, Query, T>
-  >((_: State) => new Shape.Circle(new Point(0, 0), 0), options)
+    ShapeOptions<State, Action, Query, T, Shape.Circle>
+  >((_: State) =>
+      typeof options.args !== 'undefined' ?
+        new Shape.Circle(options.args) :
+        new Shape.Circle(new Point(0, 0), 0),
+      options
+    )
 
 export const rectangle = <State, Action, Query = unknown, T = unknown>(
-  options: ShapeOptions<State, Action, Query, T>
+  options: ShapeOptions<State, Action, Query, T, Shape.Rectangle>
 ) =>
   createItem<
     State,
@@ -51,14 +59,17 @@ export const rectangle = <State, Action, Query = unknown, T = unknown>(
     Query,
     Shape,
     T,
-    ShapeOptions<State, Action, Query, T>
+    ShapeOptions<State, Action, Query, T, Shape.Rectangle>
   >(
-    (_: State) => new Shape.Rectangle(new Point(0, 0), new Point(0, 0)),
-    options
+    (_: State) =>
+      typeof options.args !== 'undefined' ?
+        new Shape.Rectangle(options.args) :
+        new Shape.Rectangle(new Point(0, 0), new Point(0, 0)),
+      options
   )
 
 export const ellipse = <State, Action, Query = unknown, T = unknown>(
-  options: ShapeOptions<State, Action, Query, T>
+  options: ShapeOptions<State, Action, Query, T, Shape.Ellipse>
 ) =>
   createItem<
     State,
@@ -66,12 +77,15 @@ export const ellipse = <State, Action, Query = unknown, T = unknown>(
     Query,
     Shape,
     T,
-    ShapeOptions<State, Action, Query, T>
+    ShapeOptions<State, Action, Query, T, Shape.Ellipse>
   >(
     (_: State) =>
-      new Shape.Ellipse({
-        center: new Point(0, 0),
-        size: new Size(0, 0)
-      }),
+      typeof options.args !== 'undefined' ?
+        new Shape.Ellipse(options.args) :
+        new Shape.Ellipse({
+          center: new Point(0, 0),
+          size: new Size(0, 0)
+        })
+      ,
     options
   )

@@ -1,4 +1,4 @@
-import { Layer, Size } from 'paper'
+import { Layer } from 'paper'
 import { PaperAttribute } from './value'
 import {
   WritableFields,
@@ -23,11 +23,14 @@ type WritableLayerOptions<State> = {
 
 type LayerOptions<State, Action, Query, T> = MakeOptional<
   Merge<
+    { args?: {} },
     Merge<
-      WritableLayerOptions<State>,
-      TempoAttributes<State, Action, Query, Layer, T>
-    >,
-    ItemEvents<State, Action, Layer>
+      Merge<
+        WritableLayerOptions<State>,
+        TempoAttributes<State, Action, Query, Layer, T>
+      >,
+      ItemEvents<State, Action, Layer>
+    >
   >
 >
 
@@ -42,4 +45,11 @@ export const layer = <State, Action, Query, T = unknown>(
     Layer,
     T,
     LayerOptions<State, Action, Query, T>
-  >((_: State) => new Layer(new Size(0, 0)), options, children)
+  >((_: State) =>
+    typeof options.args !== 'undefined' ?
+      new Layer(options.args) :
+      new Layer([]),
+      options,
+      children
+    )
+

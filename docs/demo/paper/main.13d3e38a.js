@@ -19400,7 +19400,7 @@ Object.defineProperty($q9iH$exports, "__esModule", {
 
 var $q9iH$export$circle = function (options) {
   return $ftoX$export$createItem(function (_) {
-    return new $QMc8$exports.Shape.Circle(new $QMc8$exports.Point(0, 0), 0);
+    return typeof options.args !== 'undefined' ? new $QMc8$exports.Shape.Circle(options.args) : new $QMc8$exports.Shape.Circle(new $QMc8$exports.Point(0, 0), 0);
   }, options);
 };
 
@@ -19408,7 +19408,7 @@ $q9iH$exports.circle = $q9iH$export$circle;
 
 var $q9iH$export$rectangle = function (options) {
   return $ftoX$export$createItem(function (_) {
-    return new $QMc8$exports.Shape.Rectangle(new $QMc8$exports.Point(0, 0), new $QMc8$exports.Point(0, 0));
+    return typeof options.args !== 'undefined' ? new $QMc8$exports.Shape.Rectangle(options.args) : new $QMc8$exports.Shape.Rectangle(new $QMc8$exports.Point(0, 0), new $QMc8$exports.Point(0, 0));
   }, options);
 };
 
@@ -19416,7 +19416,7 @@ $q9iH$exports.rectangle = $q9iH$export$rectangle;
 
 var $q9iH$export$ellipse = function (options) {
   return $ftoX$export$createItem(function (_) {
-    return new $QMc8$exports.Shape.Ellipse({
+    return typeof options.args !== 'undefined' ? new $QMc8$exports.Shape.Ellipse(options.args) : new $QMc8$exports.Shape.Ellipse({
       center: new $QMc8$exports.Point(0, 0),
       size: new $QMc8$exports.Size(0, 0)
     });
@@ -19433,7 +19433,7 @@ Object.defineProperty($rEdp$exports, "__esModule", {
 
 var $rEdp$export$raster = function (options) {
   return $ftoX$export$createItem(function (_) {
-    return new $QMc8$exports.Raster(new $QMc8$exports.Size(0, 0));
+    return typeof options.args ? new $QMc8$exports.Raster(options.args) : new $QMc8$exports.Raster();
   }, options);
 };
 

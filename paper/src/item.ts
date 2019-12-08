@@ -6,7 +6,7 @@ import { PaperContext } from './context'
 import { TempoAttributes } from './tempo_attributes'
 import { removeFields } from 'tempo-core/lib/util/objects'
 import { UnwrappedDerivedValue, UnwrappedValue } from 'tempo-core/lib/value'
-import { Merge, MakeOptional } from 'tempo-core/lib/types'
+import { Merge, MakeOptional } from 'tempo-core/lib/types/objects'
 
 export interface FrameEvent extends Event {
   // the number of times the frame event was fired
@@ -86,7 +86,10 @@ export class ItemTemplate<
 export const createItem = <State, Action, Query, I extends Item, T, Option>(
   makeItem: (state: State) => I,
   options: MakeOptional<
-    Merge<Option, TempoAttributes<State, Action, Query, I, T>>
+    Merge<{ args?: {} }, Merge<
+      Option,
+      TempoAttributes<State, Action, Query, I, T>>
+    >
   >,
   children?: PaperTemplate<State, Action, Query>[] | undefined
 ) => {
