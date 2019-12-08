@@ -60,15 +60,15 @@ export class DOMElement<State, Action, Query = unknown, El extends Element = Ele
     const el = this.createElement(ctx.doc)
     let value: T | undefined = undefined
 
-    const allDynamics = [] as ((state: State) => void)[]
+    const allChanges = [] as ((state: State) => void)[]
 
-    for (const o of this.attrs) processAttribute(el, o.name, o.value, allDynamics)
+    for (const o of this.attrs) processAttribute(el, o.name, o.value, allChanges)
 
-    for (const o of this.events) processEvent(el, o.name, o.value, ctx.dispatch, allDynamics)
+    for (const o of this.events) processEvent(el, o.name, o.value, ctx.dispatch, allChanges)
 
-    for (const o of this.styles) processStyle(el, o.name, o.value, allDynamics)
+    for (const o of this.styles) processStyle(el, o.name, o.value, allChanges)
 
-    for (const dy of allDynamics) dy(state)
+    for (const change of allChanges) change(state)
 
     // children
     const appendChild = (n: Node) => el.appendChild(n)
@@ -81,20 +81,20 @@ export class DOMElement<State, Action, Query = unknown, El extends Element = Ele
       value = applyAfterRender(this.afterrender, el, ctx, state)
     }
 
-    const dynamicChildren = mapArray(views, child => (state: State) => child.change(state))
+    const viewChanges = mapArray(views, child => (state: State) => child.change(state))
 
-    allDynamics.push(...dynamicChildren)
+    allChanges.push(...viewChanges)
 
     if (this.beforechange) {
       const change = applyChange(this.beforechange, el, ctx)
       const update = (state: State) => { value = change(state, value) }
-      allDynamics.unshift(update)
+      allChanges.unshift(update)
     }
 
     if (this.afterchange) {
       const change = applyChange(this.afterchange, el, ctx)
       const update = (state: State) => { value = change(state, value) }
-      allDynamics.push(update)
+      allChanges.push(update)
     }
 
     const beforedestroyf = this.beforedestroy && (() => this.beforedestroy!(el, ctx, value))
@@ -110,7 +110,7 @@ export class DOMElement<State, Action, Query = unknown, El extends Element = Ele
       el,
       views,
       (state: State) => {
-        for (const f of allDynamics) f(state)
+        for (const change of allChanges) change(state)
       },
       request,
       beforedestroyf

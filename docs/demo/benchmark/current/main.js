@@ -568,22 +568,22 @@ var DOMElement = /** @class */ (function () {
         var _this = this;
         var el = this.createElement(ctx.doc);
         var value = undefined;
-        var allDynamics = [];
+        var allChanges = [];
         for (var _i = 0, _a = this.attrs; _i < _a.length; _i++) {
             var o = _a[_i];
-            dom_1.processAttribute(el, o.name, o.value, allDynamics);
+            dom_1.processAttribute(el, o.name, o.value, allChanges);
         }
         for (var _b = 0, _c = this.events; _b < _c.length; _b++) {
             var o = _c[_b];
-            dom_1.processEvent(el, o.name, o.value, ctx.dispatch, allDynamics);
+            dom_1.processEvent(el, o.name, o.value, ctx.dispatch, allChanges);
         }
         for (var _d = 0, _e = this.styles; _d < _e.length; _d++) {
             var o = _e[_d];
-            dom_1.processStyle(el, o.name, o.value, allDynamics);
+            dom_1.processStyle(el, o.name, o.value, allChanges);
         }
-        for (var _f = 0, allDynamics_1 = allDynamics; _f < allDynamics_1.length; _f++) {
-            var dy = allDynamics_1[_f];
-            dy(state);
+        for (var _f = 0, allChanges_1 = allChanges; _f < allChanges_1.length; _f++) {
+            var change = allChanges_1[_f];
+            change(state);
         }
         // children
         var appendChild = function (n) { return el.appendChild(n); };
@@ -593,17 +593,17 @@ var DOMElement = /** @class */ (function () {
         if (this.afterrender) {
             value = applyAfterRender(this.afterrender, el, ctx, state);
         }
-        var dynamicChildren = map_1.mapArray(views, function (child) { return function (state) { return child.change(state); }; });
-        allDynamics.push.apply(allDynamics, dynamicChildren);
+        var viewChanges = map_1.mapArray(views, function (child) { return function (state) { return child.change(state); }; });
+        allChanges.push.apply(allChanges, viewChanges);
         if (this.beforechange) {
             var change_1 = applyChange(this.beforechange, el, ctx);
             var update = function (state) { value = change_1(state, value); };
-            allDynamics.unshift(update);
+            allChanges.unshift(update);
         }
         if (this.afterchange) {
             var change_2 = applyChange(this.afterchange, el, ctx);
             var update = function (state) { value = change_2(state, value); };
-            allDynamics.push(update);
+            allChanges.push(update);
         }
         var beforedestroyf = this.beforedestroy && (function () { return _this.beforedestroy(el, ctx, value); });
         var request = this.respond ?
@@ -613,9 +613,9 @@ var DOMElement = /** @class */ (function () {
             } :
             function () { };
         return new node_view_1.DOMNodeView(el, views, function (state) {
-            for (var _i = 0, allDynamics_2 = allDynamics; _i < allDynamics_2.length; _i++) {
-                var f = allDynamics_2[_i];
-                f(state);
+            for (var _i = 0, allChanges_2 = allChanges; _i < allChanges_2.length; _i++) {
+                var change = allChanges_2[_i];
+                change(state);
             }
         }, request, beforedestroyf);
     };

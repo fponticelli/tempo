@@ -13,7 +13,6 @@ limitations under the License.
 
 import { createContext } from './common'
 import { el } from '../src/element'
-import { View } from 'tempo-core/lib/view'
 import { div, span, a } from '../src/html'
 
 describe('dom_element', () => {
@@ -45,13 +44,13 @@ describe('dom_element', () => {
     const ctx = createContext()
     const node = el('div', {
       attrs: { id: (v: string) => (v !== 'X' ? v : undefined) }
-    }).render(ctx, 'abc') as View<string | undefined, unknown>
+    }).render(ctx, 'abc')
     expect(ctx.doc.body.innerHTML).toEqual('<div id="abc"></div>')
     node.change('xyz')
     expect(ctx.doc.body.innerHTML).toEqual('<div id="xyz"></div>')
     node.change('X')
     expect(ctx.doc.body.innerHTML).toEqual('<div></div>')
-    node.change(undefined)
+    node.change(undefined as unknown as string)
     expect(ctx.doc.body.innerHTML).toEqual('<div></div>')
     node.destroy()
     expect(ctx.doc.body.innerHTML).toEqual('')
@@ -62,11 +61,11 @@ describe('dom_element', () => {
     const node = el('div', { attrs: { id: (v: string) => v } }, el('a', { attrs: { href: (v: string) => v && `#${v}` } })).render(
       ctx,
       'abc'
-    ) as View<string | undefined, unknown>
+    )
     expect(ctx.doc.body.innerHTML).toEqual('<div id="abc"><a href="#abc"></a></div>')
     node.change('xyz')
     expect(ctx.doc.body.innerHTML).toEqual('<div id="xyz"><a href="#xyz"></a></div>')
-    node.change(undefined)
+    node.change(undefined as unknown as string)
     expect(ctx.doc.body.innerHTML).toEqual('<div><a></a></div>')
     node.destroy()
     expect(ctx.doc.body.innerHTML).toEqual('')
@@ -85,7 +84,7 @@ describe('dom_element', () => {
     const node = el('div', { styles: { color: (v: number | undefined) => (v && (v === 1 ? 'red' : 'blue')) || undefined } }).render(
       ctx,
       1
-    ) as View<number | undefined, unknown>
+    )
     expect(ctx.doc.body.innerHTML).toEqual('<div style="color: red;"></div>')
     node.change(2)
     expect(ctx.doc.body.innerHTML).toEqual('<div style="color: blue;"></div>')
@@ -198,7 +197,7 @@ describe('dom_element', () => {
       afterchange: el => sequence.push('afterchange'),
       beforedestroy: () => sequence.push('beforedestroy')
     })
-    const view = template.render(ctx, 'A') as View<string, unknown>
+    const view = template.render(ctx, 'A')
     expect(sequence).toEqual(['afterrender'])
     view.change('B')
     expect(sequence).toEqual(['afterrender', 'beforechange', 'afterchange'])
@@ -234,7 +233,7 @@ describe('dom_element', () => {
           sequence.push(String(el !== undefined))
         }
       })
-    const view = template.render(ctx, 'A') as View<string, unknown>
+    const view = template.render(ctx, 'A')
     expect(sequence).toEqual(['AR:A:DIV'])
     view.change('B')
     expect(sequence).toEqual(['AR:A:DIV', 'BC:B:DIV', 'AC:B:DIV'])

@@ -27,7 +27,7 @@ export const renderListElements = (numbers: number[]) => {
 }
 
 export const renderListAndUpdate = (numbers: number[][]) => {
-  const view = list.render(ctx, []) as View<number[], unknown>
+  const view = list.render(ctx, [])
   for (const nums of numbers)
     view.change(nums)
 }
@@ -38,31 +38,31 @@ export const renderListElementsAndDestroy = (numbers: number[]) => {
 }
 
 export const renderDeepAndUpdate = (values: Deep[]) => {
-  const view = deep.render(ctx, values[0]!) as View<Deep, unknown>
+  const view = deep.render(ctx, values[0]!)
   for (const v of values)
     view.change(v)
 }
 
 export const updateAttributes = (values: TestAttributes[]) => {
-  const view = attribute.render(ctx, values[0]!) as View<TestAttributes, unknown>
+  const view = attribute.render(ctx, values[0]!)
   for (const v of values)
     view.change(v)
 }
 
 export const updateProperty = (values: TestProperties[]) => {
-  const view = property.render(ctx, values[0]!) as View<TestProperties, unknown>
+  const view = property.render(ctx, values[0]!)
   for (const v of values)
     view.change(v)
 }
 
 export const updateStyles = (values: TestStyles[]) => {
-  const view = style.render(ctx, values[0]!) as View<TestStyles, unknown>
+  const view = style.render(ctx, values[0]!)
   for (const v of values)
     view.change(v)
 }
 
 export const updateAndTriggerEvents = (values: string[]) => {
-  const view = event.render(ctx, values[0]!) as View<string, unknown>
+  const view = event.render(ctx, values[0]!)
   const el = document.getElementById('test').firstElementChild! as HTMLButtonElement
   for (const v of values) {
     el.click()

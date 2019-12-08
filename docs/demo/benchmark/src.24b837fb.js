@@ -1209,26 +1209,26 @@ function () {
 
     var el = this.createElement(ctx.doc);
     var value = undefined;
-    var allDynamics = [];
+    var allChanges = [];
 
     for (var _i = 0, _a = this.attrs; _i < _a.length; _i++) {
       var o = _a[_i];
-      $TnZD$export$processAttribute(el, o.name, o.value, allDynamics);
+      $TnZD$export$processAttribute(el, o.name, o.value, allChanges);
     }
 
     for (var _b = 0, _c = this.events; _b < _c.length; _b++) {
       var o = _c[_b];
-      $TnZD$export$processEvent(el, o.name, o.value, ctx.dispatch, allDynamics);
+      $TnZD$export$processEvent(el, o.name, o.value, ctx.dispatch, allChanges);
     }
 
     for (var _d = 0, _e = this.styles; _d < _e.length; _d++) {
       var o = _e[_d];
-      $TnZD$export$processStyle(el, o.name, o.value, allDynamics);
+      $TnZD$export$processStyle(el, o.name, o.value, allChanges);
     }
 
-    for (var _f = 0, allDynamics_1 = allDynamics; _f < allDynamics_1.length; _f++) {
-      var dy = allDynamics_1[_f];
-      dy(state);
+    for (var _f = 0, allChanges_1 = allChanges; _f < allChanges_1.length; _f++) {
+      var change = allChanges_1[_f];
+      change(state);
     } // children
 
 
@@ -1246,12 +1246,12 @@ function () {
       value = $bbLX$var$applyAfterRender(this.afterrender, el, ctx, state);
     }
 
-    var dynamicChildren = $tBUf$export$mapArray(views, function (child) {
+    var viewChanges = $tBUf$export$mapArray(views, function (child) {
       return function (state) {
         return child.change(state);
       };
     });
-    allDynamics.push.apply(allDynamics, dynamicChildren);
+    allChanges.push.apply(allChanges, viewChanges);
 
     if (this.beforechange) {
       var change_1 = $bbLX$var$applyChange(this.beforechange, el, ctx);
@@ -1260,7 +1260,7 @@ function () {
         value = change_1(state, value);
       };
 
-      allDynamics.unshift(update);
+      allChanges.unshift(update);
     }
 
     if (this.afterchange) {
@@ -1270,7 +1270,7 @@ function () {
         value = change_2(state, value);
       };
 
-      allDynamics.push(update);
+      allChanges.push(update);
     }
 
     var beforedestroyf = this.beforedestroy && function () {
@@ -1285,9 +1285,9 @@ function () {
       _this.respond(query, el, ctx);
     } : function () {};
     return new $wNw6$export$DOMNodeView(el, views, function (state) {
-      for (var _i = 0, allDynamics_2 = allDynamics; _i < allDynamics_2.length; _i++) {
-        var f = allDynamics_2[_i];
-        f(state);
+      for (var _i = 0, allChanges_2 = allChanges; _i < allChanges_2.length; _i++) {
+        var change = allChanges_2[_i];
+        change(state);
       }
     }, request, beforedestroyf);
   };
