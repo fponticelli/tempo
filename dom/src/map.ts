@@ -62,7 +62,8 @@ export class MapActionTemplate<State, OuterAction, InnerAction, Query> implement
 
   render(ctx: DOMContext<OuterAction>, state: State): View<State, Query> {
     const { children, map } = this
-    const views = mapArray(children, c => c.render(ctx.conditionalMapAction(map), state))
+    const newCtx = ctx.conditionalMapAction(map)
+    const views = mapArray(children, c => c.render(newCtx, state))
     return fragmentView(views)
   }
 }

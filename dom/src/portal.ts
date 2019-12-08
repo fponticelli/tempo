@@ -28,8 +28,8 @@ export class DOMPortalTemplate<State, Action, Query> implements DOMTemplate<Stat
     const doc = ctx.doc
     const append = (node: Node) => this.append(doc, node)
     const parent = this.getParent(doc)
+    const newCtx = ctx.withAppend(append).withParent(parent)
     const viewChildren = mapArray(this.children, child => {
-      const newCtx = ctx.withAppend(append).withParent(parent)
       return child.render(newCtx, state)
     })
     return fragmentView(viewChildren)
