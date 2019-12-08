@@ -20,7 +20,7 @@ describe('map', () => {
   it('mapState', () => {
     const template = el('div', {}, mapState({ map: (v: number) => `#${v}` }, s => s))
     const ctx = createContext()
-    const view = template.render(ctx, 1) as DynamicView<number>
+    const view = template.render(ctx, 1) as DynamicView<number, unknown>
     expect(ctx.doc.body.innerHTML).toEqual('<div>#1</div>')
     view.change(2)
     expect(ctx.doc.body.innerHTML).toEqual('<div>#2</div>')
@@ -44,7 +44,7 @@ describe('map', () => {
     const ctx = createContext((n: string) => {
       ref = n
     })
-    const view = template.render(ctx, 'A') as DynamicView<string>
+    const view = template.render(ctx, 'A') as DynamicView<string, unknown>
     expect(ctx.doc.body.innerHTML).toEqual('<div><div>A</div></div>')
     const domEl = ctx.doc.body.firstElementChild!.firstElementChild! as HTMLDivElement
     domEl.click()
@@ -67,7 +67,7 @@ describe('map', () => {
     const ctx = createContext((n: string) => {
       ref = n
     })
-    const view = template.render(ctx, 'A') as DynamicView<string>
+    const view = template.render(ctx, 'A') as DynamicView<string, unknown>
     expect(ctx.doc.body.innerHTML).toEqual('<div><div>A</div></div>')
     const domEl = ctx.doc.body.firstElementChild!.firstElementChild! as HTMLDivElement
     domEl.click()
@@ -87,7 +87,7 @@ describe('map', () => {
     const ctx = createContext((n: string) => {
       ref = n
     })
-    const view = template.render(ctx, 'A') as DynamicView<string>
+    const view = template.render(ctx, 'A') as DynamicView<string, unknown>
     expect(ctx.doc.body.innerHTML).toEqual('<div><div>X</div></div>')
     const domEl = ctx.doc.body.firstElementChild!.firstElementChild! as HTMLDivElement
     domEl.click()
