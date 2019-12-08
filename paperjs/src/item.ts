@@ -175,6 +175,7 @@ export const createItem = <State, Action, Query, I extends Item, T, Option>(
       item: I,
       views: View<State, Query>[] | undefined
     ) => (query: Query) => {
+      views?.forEach(view => view.request(query))
       if (typeof options.request !== 'undefined') {
         options.request(query, item, ctx, wrapper.value)
       }

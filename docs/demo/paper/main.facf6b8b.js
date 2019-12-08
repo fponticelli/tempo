@@ -18664,28 +18664,38 @@ Object.defineProperty($rpUf$exports, "__esModule", {
 var $rpUf$var$PaperContext =
 /** @class */
 function () {
-  function PaperContext(project, append, // readonly append: (node: Node) => void,
-  // readonly parent: Element,
-  dispatch) {
+  function PaperContext(project, append, dispatch) {
     this.project = project;
     this.append = append;
     this.dispatch = dispatch;
-  } // mapAction<OtherAction>(f: (action: OtherAction) => Action) {
-  //   return new PaperContext<OtherAction>(this.doc, this.append, this.parent, (action: OtherAction) =>
-  //     this.dispatch(f(action))
-  //   )
-  // }
-  // conditionalMapAction<OtherAction>(f: (action: OtherAction) => Action | undefined) {
-  //     const newAction = f(action)
-  //     if (typeof newAction !== 'undefined') {
-  //       this.dispatch(newAction)
-  //     }
-  //   })
-  // }
+  }
 
+  PaperContext.prototype.mapAction = function (f) {
+    var _this = this;
+
+    return new PaperContext(this.project, this.append, function (action) {
+      return _this.dispatch(f(action));
+    });
+  };
+
+  PaperContext.prototype.conditionalMapAction = function (f) {
+    var _this = this;
+
+    return new PaperContext(this.project, this.append, function (action) {
+      var newAction = f(action);
+
+      if (typeof newAction !== 'undefined') {
+        _this.dispatch(newAction);
+      }
+    });
+  };
 
   PaperContext.prototype.withAppend = function (append) {
     return new PaperContext(this.project, append, this.dispatch);
+  };
+
+  PaperContext.prototype.withDispatch = function (dispatch) {
+    return new PaperContext(this.project, this.append, dispatch);
   };
 
   return PaperContext;
@@ -18951,6 +18961,12 @@ var $ftoX$export$createItem = function (makeItem, options, children) {
     };
   }, function (wrapper, ctx, item, views) {
     return function (query) {
+      var _a;
+
+      (_a = views) === null || _a === void 0 ? void 0 : _a.forEach(function (view) {
+        return view.request(query);
+      });
+
       if (typeof options.request !== 'undefined') {
         options.request(query, item, ctx, wrapper.value);
       }

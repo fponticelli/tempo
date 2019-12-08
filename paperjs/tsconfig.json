@@ -12,5 +12,6 @@
   },
   "include": [
     "src"
-  ]
+  ],
+  "exclude": ["lib", "es6"]
 }
