@@ -1,6 +1,6 @@
 import { PaperEventHandler } from './value'
 import { MouseEvent, Item } from 'paper'
-import { DynamicView, View, filterDynamics } from 'tempo-core/lib/view'
+import { View } from 'tempo-core/lib/view'
 import { PaperTemplate } from './template'
 import { PaperContext } from './context'
 import { TempoAttributes } from './tempo_attributes'
@@ -27,17 +27,6 @@ export interface ItemEvents<State, Action, El> {
   onMouseMove?: PaperEventHandler<State, Action, MouseEvent, El>
   onMouseEnter?: PaperEventHandler<State, Action, MouseEvent, El>
   onMouseLeave?: PaperEventHandler<State, Action, MouseEvent, El>
-}
-
-export class ItemDynamicView<State, Query>
-  implements DynamicView<State, Query> {
-  readonly kind = 'dynamic'
-
-  constructor(
-    readonly change: (state: State) => void,
-    readonly destroy: () => void,
-    readonly request: (query: Query) => void
-  ) {}
 }
 
 export class ItemTemplate<
@@ -75,11 +64,10 @@ export class ItemTemplate<
     const wrapper = { value: undefined }
     const { item, views } = this.createItem(wrapper, ctx)(state)
     ctx.append(item)
-    return new ItemDynamicView<State, Query>(
-      this.changeItem(wrapper, ctx, item, views),
-      this.destroy(wrapper, ctx, item, views),
-      this.request(wrapper, ctx, item, views)
-    )
+    const change = this.changeItem(wrapper, ctx, item, views)
+    const destroy = this.destroy(wrapper, ctx, item, views)
+    const request = this.request(wrapper, ctx, item, views)
+    return { change, destroy, request }
   }
 }
 
@@ -159,7 +147,7 @@ export const createItem = <State, Action, Query, I extends Item, T, Option>(
             wrapper.value = beforechange(state, item, ctx, wrapper.value)
           }
           if (views) {
-            filterDynamics(views).forEach(view => view.change(state))
+            views.forEach(view => view.change(state))
           }
           dynamics.forEach(dyna => dyna(state, item, ctx))
           if (afterchange) {

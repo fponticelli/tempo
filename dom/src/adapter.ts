@@ -11,29 +11,10 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { DynamicView } from 'tempo-core/lib/view'
-import { DOMComponentView, DOMComponentTemplate } from './component'
+import { View } from 'tempo-core/lib/view'
+import { DOMComponentTemplate } from './component'
 import { DOMTemplate } from './template'
 import { DOMContext } from './context'
-
-export class DOMAdapterView<OuterState, InnerState, InnerAction, Query> implements DynamicView<OuterState, Query> {
-  readonly kind = 'dynamic'
-  constructor(
-    readonly mergeStates: (outerState: OuterState, innerState: InnerState) => InnerState | undefined,
-    readonly request: (query: Query) => void,
-    readonly child: DOMComponentView<InnerState, InnerAction, Query>
-  ) {}
-
-  destroy(): void {
-    this.child.destroy()
-  }
-
-  change(outerState: OuterState): void {
-    const newState = this.mergeStates(outerState, this.child.store.property.get())
-    if (typeof newState === 'undefined') return
-    this.child.change(newState)
-  }
-}
 
 export class DOMAdapterTemplate<OuterState, InnerState, OuterAction, InnerAction, Query>
   implements DOMTemplate<OuterState, OuterAction, Query> {
@@ -43,12 +24,12 @@ export class DOMAdapterTemplate<OuterState, InnerState, OuterAction, InnerAction
     readonly child: DOMComponentTemplate<InnerState, InnerAction, Query>
   ) {}
 
-  render(ctx: DOMContext<OuterAction>, outerState: OuterState): DynamicView<OuterState, Query> {
+  render(ctx: DOMContext<OuterAction>, outerState: OuterState): View<OuterState, Query> {
     const mergedState =
       (this.mergeStates && this.mergeStates(outerState, this.child.store.property.get())) ||
       this.child.store.property.get()
 
-    const viewChild = this.child.render(
+    const viewComponent = this.child.render(
       ctx.withDispatch(() => { /* COMPONENT IS DETACHED FROM CONTAINER AND DOESN'T PROPAGATE */ }),
       mergedState
     )
@@ -62,12 +43,20 @@ export class DOMAdapterTemplate<OuterState, InnerState, OuterAction, InnerAction
         dispatchOuter: ctx.dispatch
       })
     })
-    const view = new DOMAdapterView(
-      this.mergeStates,
-      (query: Query) => viewChild.request(query),
-      viewChild
-    )
-    return view
+
+    return {
+      change: (state: OuterState) => {
+        const newState = this.mergeStates(state, this.child.store.property.get())
+        if (typeof newState !== 'undefined')
+          viewComponent.change(newState)
+      },
+      destroy: () => {
+        viewComponent.destroy()
+      },
+      request: (query: Query) => {
+        viewComponent.request(query)
+      }
+    }
   }
 }
 

@@ -12,10 +12,9 @@ limitations under the License.
 */
 
 import { DOMChild, DOMTemplate } from './template'
-import { View, filterDynamics } from 'tempo-core/lib/view'
+import { View } from 'tempo-core/lib/view'
 import { DOMContext } from './context'
 import { domChildToTemplate } from './utils/dom'
-import { DOMStaticFragmentView, DOMDynamicFragmentView } from './fragment'
 import { mapArray } from 'tempo-core/lib/util/map'
 
 export class FilterStateTemplate<State, Action, Query> implements DOMTemplate<State, Action, Query> {
@@ -27,18 +26,21 @@ export class FilterStateTemplate<State, Action, Query> implements DOMTemplate<St
   render(ctx: DOMContext<Action>, state: State): View<State, Query> {
     const { children, isSame: filter } = this
     const views = mapArray(children, c => c.render(ctx, state))
-    const dynamics = filterDynamics(views)
 
-    if (dynamics.length === 0) {
-      return new DOMStaticFragmentView(views)
-    } else {
-      let prevState = state
-      return new DOMDynamicFragmentView<State, Query>(views, (newState: State) => {
+    let prevState = state
+    return {
+      change: (newState: State) => {
         if (!filter(prevState, newState)) {
           prevState = newState
-          for (const d of dynamics) d.change(newState)
+          for (const view of views) view.change(newState)
         }
-      })
+      },
+      destroy: () => {
+        for (const view of views) view.destroy()
+      },
+      request: (query: Query) => {
+        for (const view of views) view.request(query)
+      }
     }
   }
 }

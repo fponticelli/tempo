@@ -29,8 +29,8 @@ dependencies:
   sass: 1.23.3
   stealthy-require: 1.0.0
   sw-precache: 5.2.1
-  tempo-core: 1.0.1
-  tempo-dom: 0.8.3
+  tempo-core: 1.1.0
+  tempo-dom: 0.9.0
   todomvc-app-css: 2.2.0
   todomvc-common: 1.0.5
   ts-jest: 24.1.0_jest@24.9.0
@@ -7032,6 +7032,10 @@ packages:
     dev: false
     resolution:
       integrity: sha512-wUsK8xVIvenOZYQmBwPHWRgJkooqIKUxpO66j21e+k7l6OA1JGj45WtL5efpGvX7b39uzhH8G0ezXhEywU4MAQ==
+  /tempo-core/1.1.0:
+    dev: false
+    resolution:
+      integrity: sha512-AENA8xEo+r6UZ2d0wF/LcZdqj9qv7z76mYwZ3QkWQZQ1dNj3CNeVvs7IL4IoZspnRz9Xdt5oDjjwtKfEDbaCMg==
   /tempo-dom/0.8.3:
     dependencies:
       tempo-core: 1.0.1
@@ -7039,6 +7043,13 @@ packages:
     dev: false
     resolution:
       integrity: sha512-bC1Kf0GRNJd6esaf5I14/xLLRuKveIwQiQOVR8eZ9Yzk/cqvMmLdA6RKCIbq1O3HdUS1uEXV6D9cn8FohCFiCw==
+  /tempo-dom/0.9.0:
+    dependencies:
+      tempo-core: 1.1.0
+      tempo-store: 1.0.1
+    dev: false
+    resolution:
+      integrity: sha512-o4bE0FWZ0CpHT7W7y4rNqZAR5vjFgVksjotH3tUF69vbB0wI9qbMZ3vkrTJQjAKBaqxiKfYVTaV2GD79tYiezg==
   /tempo-store/1.0.1:
     dependencies:
       tempo-core: 1.0.1
@@ -7796,7 +7807,7 @@ packages:
     dev: false
     name: '@rush-temp/tempo-demo.benchmark'
     resolution:
-      integrity: sha512-MQxPCNaaJJNhav9r+oFmEwDhROB4ZJNmwYcan3zbPVv/foucbxTOmaWw/Pu2qeywdpOhoVcLZzitdBAQ4oJinA==
+      integrity: sha512-T1ZCMSd7mF8LDnjC16hxcZIYVKqA2/nB5qiT6bTLjgi4rYo/dD89gXR3lj5YMgR/9ynK6i90/KeSULoCRha1LQ==
       tarball: 'file:projects/tempo-demo.benchmark.tgz'
     version: 0.0.0
   'file:projects/tempo-demo.hnpwa.tgz':
@@ -7815,7 +7826,7 @@ packages:
     dev: false
     name: '@rush-temp/tempo-demo.hnpwa'
     resolution:
-      integrity: sha512-GNKZSexu82wSa+dDqgzRwMhu+/xjROtW31evypuEuDZ3iLce0zx5yc99rM0D1P9NOqB+gbFMt7IMMPNjSQxxgw==
+      integrity: sha512-3ZqaOFRVWWPwEeshnag1+d4gpNRm3ik1vzfnDx1vd0bpTINVXloXYbM+4CrFPaxNpH5eqr7XbTjaK2ml04XeJg==
       tarball: 'file:projects/tempo-demo.hnpwa.tgz'
     version: 0.0.0
   'file:projects/tempo-demo.paper.tgz':
@@ -7833,7 +7844,7 @@ packages:
     dev: false
     name: '@rush-temp/tempo-demo.paper'
     resolution:
-      integrity: sha512-X3RiQigwcyECK8PKqV+U7BXa0bZnav8kw9tNoBPwWBE91HoYB1S7W2jzk09sQV6bq7AkmJNQURwJA/zpW2TgjQ==
+      integrity: sha512-DQDAnBfDOtyPWOKnPtq5bnkOPUizqPr3ciD/LRy8/87OYbFZogfeHWCFneILgQDgxpoimh8RuRbJvRXEFZUdog==
       tarball: 'file:projects/tempo-demo.paper.tgz'
     version: 0.0.0
   'file:projects/tempo-demo.readme.tgz':
@@ -7847,7 +7858,7 @@ packages:
     dev: false
     name: '@rush-temp/tempo-demo.readme'
     resolution:
-      integrity: sha512-4PepZb8yibai5eDQ5vtfTpbstPk03XGlk4vhjp8NKNEDBi6pB2+MoHeOiD8mF4yFzVKrhZZnQWCqjPOyY1NT5A==
+      integrity: sha512-LhEkR4Aap4KeBH0Fu2urP2oLM+kDEbJVO/7acKIWV4uQSizWsM8yGbJ4dUDENixDnGAribTfoceqjDpPEh7lIg==
       tarball: 'file:projects/tempo-demo.readme.tgz'
     version: 0.0.0
   'file:projects/tempo-demo.todomvc.tgz':
@@ -7863,7 +7874,7 @@ packages:
     dev: false
     name: '@rush-temp/tempo-demo.todomvc'
     resolution:
-      integrity: sha512-ZKCL4oEVceWfrheOSkTgeA8k7te0ULUJJY0wPN6e+swufzH744A7oX7x/NGcD1jv8zWeKhHspfsYB5B2UHa6Qw==
+      integrity: sha512-zqAtkCYao/64MGrfZ9yode/SoOHrZy1/rWWNB3m0l2/9kjnZ9475WeD0hlhCpnKQuQM94dEwI2nTaP8oIQOcDQ==
       tarball: 'file:projects/tempo-demo.todomvc.tgz'
     version: 0.0.0
   'file:projects/tempo-dom.tgz':
@@ -7883,7 +7894,7 @@ packages:
     dev: false
     name: '@rush-temp/tempo-dom'
     resolution:
-      integrity: sha512-iE+CwqduayzTOLj5GMdmy+Ibb+bbiT2nIyjms2SrwYfX9My+ZUqVebdl0uVayAJ0J4s3Udy4bcW05kzESlXgqg==
+      integrity: sha512-igSa6c7ur/uOSuINW9vZckpJOSscxkJxDML3RebZ/3O0ye/x7YAim5XweaWBEXqyaKGYAvSQmKDFxCJ7UJyvQQ==
       tarball: 'file:projects/tempo-dom.tgz'
     version: 0.0.0
   'file:projects/tempo-paper.tgz':
@@ -7899,15 +7910,15 @@ packages:
       request: 2.88.0
       request-promise-native: 1.0.7_request@2.88.0
       stealthy-require: 1.0.0
-      tempo-core: 1.0.1
-      tempo-dom: 0.8.3
+      tempo-core: 1.1.0
+      tempo-dom: 0.9.0
       ts-jest: 24.1.0_jest@24.9.0
       tslint: 5.20.1_typescript@3.7.2
       typescript: 3.7.2
     dev: false
     name: '@rush-temp/tempo-paper'
     resolution:
-      integrity: sha512-VXmH9jY2DDvH8GCNtC7mj8yrt9LrqZmFhCVzna2rPZaljDMgWmjumSFMZ8zlvnzPUSZoumjiiwPdUAqu6TYB0g==
+      integrity: sha512-6fR8maivw/iq5w8a8UtZNVPZ+dh4KmmNEK6cOs7Qun10g54LXLiNaFVg5xKC4dZLItNJgFPhRC931UaDdwDVhA==
       tarball: 'file:projects/tempo-paper.tgz'
     version: 0.0.0
   'file:projects/tempo-root.tgz':
@@ -7934,7 +7945,7 @@ packages:
     dev: false
     name: '@rush-temp/tempo-store'
     resolution:
-      integrity: sha512-U3gXT0iQj16sxN4htCYxSYBod2eyfF97et6dtKiD02Su2xAWDVRINobb/rguxWlVSHLV2K6zH6FSntlJVPkvbQ==
+      integrity: sha512-XKrnKoGNYOuEY/VjQzyY5oHyXSm0ODxSeWXe3qcTfzWaUIXsaxHMA6lrNRK9gpQACp/KU6HaVaSI9jel9DHhhg==
       tarball: 'file:projects/tempo-store.tgz'
     version: 0.0.0
 registry: ''
@@ -7969,8 +7980,8 @@ specifiers:
   sass: 1.23.3
   stealthy-require: 1.0.0
   sw-precache: 5.2.1
-  tempo-core: 1.0.1
-  tempo-dom: 0.8.3
+  tempo-core: 1.1.0
+  tempo-dom: 0.9.0
   todomvc-app-css: 2.2.0
   todomvc-common: 1.0.5
   ts-jest: 24.1.0

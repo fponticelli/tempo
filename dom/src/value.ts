@@ -30,7 +30,7 @@ export interface DOMAttributes<State, Action, Query = unknown, El extends Elemen
   beforechange?: (state: State, el: El, ctx: DOMContext<Action>, value: T | undefined) => T | undefined
   afterchange?:  (state: State, el: El, ctx: DOMContext<Action>, value: T | undefined) => T | undefined
   beforedestroy?: (el: El, ctx: DOMContext<Action>, value: T | undefined) => void
-  respond?: (query: Query, el: El, ctx: DOMContext<Action>, value: T | undefined) => void
+  respond?: (query: Query, el: El, ctx: DOMContext<Action>, value: T | undefined) => T | undefined
 }
 
 export const mapAttribute = <State, A, B>(attr: DOMAttribute<State, A>, map: (a: A) => B): DOMAttribute<State, B> => {

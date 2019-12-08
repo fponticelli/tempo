@@ -17,7 +17,6 @@ import { htmlAttributeMap as attributeMap } from '../dom_attributes_mapper'
 import { setAttribute, setOneStyle } from './set_attribute'
 import { DOMChild, DOMTemplate } from '../template'
 import { text } from '../text'
-import { View, DynamicView } from 'tempo-core/lib/view'
 
 export function removeNode(node: Node) {
   const el = node as HTMLElement
@@ -36,13 +35,6 @@ export function insertBefore(ref: Node) {
       ref.parentElement.insertBefore(node, ref)
     }
   }
-}
-
-export function filterDynamics<State, Query>(children: View<State, Query>[]) {
-  return children.filter(child => child.kind === 'dynamic') as DynamicView<
-    State,
-    Query
-  >[]
 }
 
 export function domChildToTemplate<State, Action, Query>(

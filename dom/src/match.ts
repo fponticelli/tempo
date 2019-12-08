@@ -14,46 +14,9 @@ limitations under the License.
 import { DifferentiateAt } from 'tempo-core/lib/types/differentiate'
 import { DOMTemplate, DOMChild } from './template'
 import { DOMContext } from './context'
-import { DynamicView, View } from 'tempo-core/lib/view'
 import { domChildToTemplate } from './utils/dom'
 import { IndexType } from 'core/lib/types/index_type'
 import { ObjectWithPath, TypeAtPath, ObjectWithField } from 'tempo-core/lib/types/objects'
-
-export class MatchView<
-  Path extends IndexType[],
-  State extends ObjectWithPath<Path, any>,
-  Action,
-  Query
-> implements DynamicView<State, Query> {
-  readonly kind = 'dynamic'
-  constructor(
-    private key: TypeAtPath<Path, State>,
-    private view: View<State, Query>,
-    readonly path: Path,
-    readonly matcher: {
-      [k in TypeAtPath<Path, State>]: DOMTemplate<DifferentiateAt<Path, State, k>, Action, Query>
-    },
-    readonly ctx: DOMContext<Action>
-  ) {}
-  change(state: State) {
-    const newKey = this.path.reduce((acc: any, key) => acc[key], state) as TypeAtPath<Path, State>
-    if (newKey === this.key) {
-      if (this.view.kind === 'dynamic') {
-        this.view.change(state as any)
-      }
-    } else {
-      this.view.destroy()
-      this.key = newKey
-      this.view = this.matcher[newKey].render(this.ctx, state as any)
-    }
-  }
-  request(query: Query) {
-    this.view.request(query)
-  }
-  destroy() {
-    this.view.destroy()
-  }
-}
 
 export class MatchTemplate<
   Path extends IndexType[],
@@ -68,15 +31,27 @@ export class MatchTemplate<
     }
   ) {}
   render(ctx: DOMContext<Action>, state: State) {
-    const key = this.path.reduce((acc: any, key) => acc[key], state) as TypeAtPath<Path, State>
-    const view = this.matcher[key].render(ctx, state as any)
-    return new MatchView<Path, State, Action, Query>(
-      key,
-      view,
-      this.path,
-      this.matcher,
-      ctx
-    )
+    let key = this.path.reduce((acc: any, key) => acc[key], state) as TypeAtPath<Path, State>
+    let view = this.matcher[key].render(ctx, state as any)
+    const { matcher, path } = this
+    return {
+      change: (state: State) => {
+        const newKey = path.reduce((acc: any, key) => acc[key], state) as TypeAtPath<Path, State>
+        if (newKey === key) {
+          view.change(state as any)
+        } else {
+          view.destroy()
+          key = newKey
+          view = matcher[newKey].render(ctx, state as any)
+        }
+      },
+      destroy: () => {
+        view.destroy()
+      },
+      request: (query: Query) => {
+        view.request(query)
+      }
+    }
   }
 }
 
@@ -110,38 +85,6 @@ export const matchKind = <State extends ObjectWithField<'kind', any>, Action, Qu
   }
 ): DOMTemplate<State, Action, Query> => match<['kind'], State, Action, Query>(['kind'], matchers)
 
-export class MatchBoolView<State, Action, Query> implements DynamicView<State, Query> {
-  readonly kind = 'dynamic'
-  constructor(
-    readonly condition: (state: State) => boolean,
-    readonly trueTemplate: DOMTemplate<State, Action, Query>,
-    readonly falseTemplate: DOMTemplate<State, Action, Query>,
-    private view: View<State, Query>,
-    private lastEvaluation: boolean,
-    readonly ctx: DOMContext<Action>
-  ) {}
-  change(state: State) {
-    const newEvaluation = this.condition(state)
-    if (newEvaluation === this.lastEvaluation) {
-      if (this.view.kind === 'dynamic') {
-        this.view.change(state)
-      }
-    } else {
-      this.view.destroy()
-      this.lastEvaluation = newEvaluation
-      this.view = newEvaluation ?
-        this.trueTemplate.render(this.ctx, state) :
-        this.falseTemplate.render(this.ctx, state)
-    }
-  }
-  destroy() {
-    this.view.destroy()
-  }
-  request(query: Query) {
-    this.view.request(query)
-  }
-}
-
 export class MatchBoolTemplate<
   State,
   Action,
@@ -153,16 +96,29 @@ export class MatchBoolTemplate<
     readonly falseTemplate: DOMTemplate<State, Action, Query>
   ) {}
   render(ctx: DOMContext<Action>, state: State) {
-    const evaluation = this.condition(state)
-    const view = evaluation ? this.trueTemplate.render(ctx, state) : this.falseTemplate.render(ctx, state)
-    return new MatchBoolView<State, Action, Query>(
-      this.condition,
-      this.trueTemplate,
-      this.falseTemplate,
-      view,
-      evaluation,
-      ctx
-    )
+    const { condition, trueTemplate, falseTemplate } = this
+    let lastEvaluation = condition(state)
+    let view = lastEvaluation ? trueTemplate.render(ctx, state) : falseTemplate.render(ctx, state)
+    return {
+      change: (state: State) => {
+        const newEvaluation = condition(state)
+        if (newEvaluation === lastEvaluation) {
+          view.change(state)
+        } else {
+          view.destroy()
+          lastEvaluation = newEvaluation
+          view = newEvaluation ?
+            trueTemplate.render(ctx, state) :
+            falseTemplate.render(ctx, state)
+        }
+      },
+      destroy: () => {
+        view.destroy()
+      },
+      request: (query: Query) => {
+        view.request(query)
+      }
+    }
   }
 }
 
@@ -178,37 +134,6 @@ export const matchBool = <State, Action, Query = unknown>(
   domChildToTemplate(options.false)
 )
 
-export class MatchValueView<State, Action, Query> implements DynamicView<State, Query> {
-  readonly kind = 'dynamic'
-  constructor(
-    readonly path: IndexType[],
-    private key: string,
-    readonly matchers: { [_ in (string | number)]: DOMTemplate<State, Action, Query> },
-    readonly orElese: DOMTemplate<State, Action, Query>,
-    private view: View<State, Query>,
-    readonly ctx: DOMContext<Action>
-  ) {}
-  change(state: State) {
-    const newKey = this.path.reduce((acc: any, key) => acc[key], state)
-    if (newKey === this.key) {
-      if (this.view.kind === 'dynamic') {
-        this.view.change(state)
-      }
-    } else {
-      this.view.destroy()
-      this.key = newKey
-      const template = this.matchers[newKey] || this.orElese
-      this.view = template.render(this.ctx, state)
-    }
-  }
-  destroy() {
-    this.view.destroy()
-  }
-  request(query: Query) {
-    this.view.request(query)
-  }
-}
-
 export class MatchValueTemplate<
   State,
   Action,
@@ -222,17 +147,29 @@ export class MatchValueTemplate<
     readonly orElse: DOMTemplate<State, Action, Query>
   ) {}
   render(ctx: DOMContext<Action>, state: State) {
-    const key = this.path.reduce((acc: any, key) => acc[key], state)
-    const template = this.matchers[key] || this.orElse
-    const view = template.render(ctx, state)
-    return new MatchValueView<State, Action, Query>(
-      this.path,
-      key,
-      this.matchers,
-      this.orElse,
-      view,
-      ctx
-    )
+    const { matchers, orElse } = this
+    let oldKey = this.path.reduce((acc: any, key) => acc[key], state)
+    const template = this.matchers[oldKey] || this.orElse
+    let view = template.render(ctx, state)
+    return {
+      change: (state: State) => {
+        const newKey = this.path.reduce((acc: any, key) => acc[key], state)
+        if (newKey === oldKey) {
+          view.change(state)
+        } else {
+          view.destroy()
+          oldKey = newKey
+          const template = matchers[newKey] || orElse
+          view = template.render(ctx, state)
+        }
+      },
+      destroy: () => {
+        view.destroy()
+      },
+      request: (query: Query) => {
+        view.request(query)
+      }
+    }
   }
 }
 

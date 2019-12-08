@@ -11,30 +11,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-interface BasicView<Query> {
+export interface View<State, Query> {
+  change(value: State): void
   destroy(): void
   request(query: Query): void
-}
-
-export interface DynamicView<State, Query> extends BasicView<Query> {
-  readonly kind: 'dynamic'
-  change(value: State): void
-}
-
-export interface StaticView<Query> extends BasicView<Query> {
-  readonly kind: 'static'
-}
-
-export type View<State, Query> = DynamicView<State, Query> | StaticView<Query>
-
-export function filterDynamics<State, Query>(children: View<State, Query>[]) {
-  return children.filter(child => child.kind === 'dynamic') as DynamicView<State, Query>[]
-}
-
-export function applyChange<State, Query>(state: State, children: View<State, Query>[]) {
-  for (const view of children) {
-    if (view.kind === 'dynamic') {
-      view.change(state)
-    }
-  }
 }

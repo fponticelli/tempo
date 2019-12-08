@@ -11,38 +11,11 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { DOMDynamicFragmentView } from './fragment'
-import { View, DynamicView, filterDynamics } from 'tempo-core/lib/view'
 import { Store } from 'tempo-store/lib/store'
 import { DOMTemplate, DOMChild } from './template'
 import { DOMContext } from './context'
 import { domChildToTemplate } from './utils/dom'
 import { mapArray } from 'tempo-core/lib/util/map'
-
-export class DOMComponentView<State, Action, Query> extends DOMDynamicFragmentView<State, Query> {
-  /* istanbul ignore next */
-  constructor(
-    readonly store: Store<State, Action>,
-    readonly dispatch: (action: Action) => void,
-    children: View<State, Query>[],
-    dynamics: DynamicView<State, Query>[],
-    private _destroy: () => void
-  ) {
-    super(children, (state: State) => {
-      store.property.set(state)
-      for (const dy of dynamics) dy.change(state)
-    })
-  }
-
-  request(query: Query) {
-    throw 'TODO' // TODO
-  }
-
-  destroy() {
-    this._destroy()
-    super.destroy()
-  }
-}
 
 export class DOMComponentTemplate<State, Action, Query> implements DOMTemplate<State, Action, Query> {
   constructor(
@@ -77,11 +50,20 @@ export class DOMComponentTemplate<State, Action, Query> implements DOMTemplate<S
       store.process(action)
     }
     const newCtx = ctx.withDispatch(innerDispatch)
-    const viewChildren = mapArray(this.children, child => child.render(newCtx, property.get()))
-    const dynamics = filterDynamics(viewChildren)
-    const view = new DOMComponentView<State, Action, Query>(store, innerDispatch, viewChildren, dynamics, () => {
-      property.observable.off(update)
-    })
+    const views = mapArray(this.children, child => child.render(newCtx, property.get()))
+    const view = {
+      change: (state: State) => {
+        store.property.set(state)
+        for (const view of views) view.change(state)
+      },
+      destroy: () => {
+        property.observable.off(update)
+        for (const view of views) view.destroy()
+      },
+      request: (query: Query) => {
+        for (const view of views) view.request(query)
+      }
+    }
     property.set(state)
     return view
   }

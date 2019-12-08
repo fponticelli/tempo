@@ -3,12 +3,11 @@ import { DOMAttribute } from 'tempo-dom/lib/value'
 import { Project, Layer, Item } from 'paper'
 import { PaperTemplate } from './template'
 import { PaperContext } from './context'
-import { View, DynamicView, filterDynamics } from 'tempo-core/lib/view'
+import { View } from 'tempo-core/lib/view'
 import { DOMContext } from 'tempo-dom/lib/context'
 
 interface PaperScope<State, Action, Query> {
   views: View<State, Query>[]
-  dynamics: DynamicView<State, Query>[]
   context: PaperContext<Action>
 }
 
@@ -44,8 +43,7 @@ export const project = <State, Action, Query>(
         (action: Action) => ctx.dispatch(action)
       )
       const views = children.map(child => child.render(context, state))
-      const dynamics = filterDynamics(views)
-      return { context, views, dynamics }
+      return { context, views }
     },
     afterchange: (
       state: State,
@@ -53,7 +51,7 @@ export const project = <State, Action, Query>(
       ctx,
       scope: PaperScope<State, Action, Query> | undefined
     ) => {
-      scope?.dynamics.forEach(view => view.change(state))
+      scope?.views.forEach(view => view.change(state))
       return scope
     },
     beforedestroy: (
@@ -76,6 +74,9 @@ export const project = <State, Action, Query>(
       if (typeof scope !== undefined) {
         const { views } = scope!
         views.forEach(view => view.request(query))
+        return scope
+      } else {
+        return undefined
       }
     }
   })

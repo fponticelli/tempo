@@ -13,7 +13,6 @@ limitations under the License.
 
 import { DOMTemplate, DOMChild } from './template'
 import { DOMContext } from './context'
-import { fragmentView } from './fragment'
 import { domChildToTemplate } from './utils/dom'
 import { mapArray } from 'tempo-core/lib/util/map'
 
@@ -29,10 +28,18 @@ export class DOMPortalTemplate<State, Action, Query> implements DOMTemplate<Stat
     const append = (node: Node) => this.append(doc, node)
     const parent = this.getParent(doc)
     const newCtx = ctx.withAppend(append).withParent(parent)
-    const viewChildren = mapArray(this.children, child => {
-      return child.render(newCtx, state)
-    })
-    return fragmentView(viewChildren)
+    const views = mapArray(this.children, child => child.render(newCtx, state))
+    return {
+      change: (state: State) => {
+        for (const view of views) view.change(state)
+      },
+      destroy: () => {
+        for (const view of views) view.destroy()
+      },
+      request: (query: Query) => {
+        for (const view of views) view.request(query)
+      }
+    }
   }
 }
 

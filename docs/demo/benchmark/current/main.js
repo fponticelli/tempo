@@ -117,36 +117,7 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"OQt2":[function(require,module,exports) {
-"use strict";
-/*
-Copyright 2019 Google LLC
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-    https://www.apache.org/licenses/LICENSE-2.0
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-*/
-Object.defineProperty(exports, "__esModule", { value: true });
-function filterDynamics(children) {
-    return children.filter(function (child) { return child.kind === 'dynamic'; });
-}
-exports.filterDynamics = filterDynamics;
-function applyChange(state, children) {
-    for (var _i = 0, children_1 = children; _i < children_1.length; _i++) {
-        var view = children_1[_i];
-        if (view.kind === 'dynamic') {
-            view.change(state);
-        }
-    }
-}
-exports.applyChange = applyChange;
-
-},{}],"tBUf":[function(require,module,exports) {
+})({"tBUf":[function(require,module,exports) {
 "use strict";
 /*
 Copyright 2019 Google LLC
@@ -330,7 +301,7 @@ exports.htmlAttributeMap = {
     value: set_attribute_1.setProperty
 };
 
-},{"./utils/set_attribute":"BEVE"}],"wNw6":[function(require,module,exports) {
+},{"./utils/set_attribute":"BEVE"}],"GqEk":[function(require,module,exports) {
 "use strict";
 /*
 Copyright 2019 Google LLC
@@ -344,123 +315,63 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 Object.defineProperty(exports, "__esModule", { value: true });
 var dom_1 = require("./utils/dom");
-var DOMBaseNodeView = /** @class */ (function () {
-    function DOMBaseNodeView(node, children, request, beforeDestroy) {
-        this.node = node;
-        this.children = children;
-        this.request = request;
-        this.beforeDestroy = beforeDestroy;
+var DOMDerivedTextTemplate = /** @class */ (function () {
+    function DOMDerivedTextTemplate(makeContent) {
+        this.makeContent = makeContent;
     }
-    DOMBaseNodeView.prototype.destroy = function () {
-        if (this.beforeDestroy)
-            this.beforeDestroy();
-        dom_1.removeNode(this.node);
-        for (var _i = 0, _a = this.children; _i < _a.length; _i++) {
-            var c = _a[_i];
-            c.destroy();
-        }
+    DOMDerivedTextTemplate.prototype.render = function (ctx, state) {
+        var makeContent = this.makeContent;
+        var content = makeContent(state) || '';
+        var node = ctx.doc.createTextNode(content);
+        ctx.append(node);
+        return {
+            change: function (state) {
+                var newContent = makeContent(state) || '';
+                if (newContent !== content) {
+                    node.nodeValue = newContent;
+                    if (newContent.length < 5000)
+                        content = newContent;
+                }
+            },
+            destroy: function () {
+                dom_1.removeNode(node);
+            },
+            request: function (_) { }
+        };
     };
-    return DOMBaseNodeView;
+    return DOMDerivedTextTemplate;
 }());
-exports.DOMBaseNodeView = DOMBaseNodeView;
-var DOMStaticNodeView = /** @class */ (function (_super) {
-    __extends(DOMStaticNodeView, _super);
-    function DOMStaticNodeView() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.kind = 'static';
-        return _this;
-    }
-    return DOMStaticNodeView;
-}(DOMBaseNodeView));
-exports.DOMStaticNodeView = DOMStaticNodeView;
-var DOMDynamicNodeView = /** @class */ (function (_super) {
-    __extends(DOMDynamicNodeView, _super);
-    function DOMDynamicNodeView(node, children, change, request, beforeDestroy) {
-        var _this = _super.call(this, node, children, request, beforeDestroy) || this;
-        _this.node = node;
-        _this.children = children;
-        _this.change = change;
-        _this.request = request;
-        _this.beforeDestroy = beforeDestroy;
-        _this.kind = 'dynamic';
-        return _this;
-    }
-    return DOMDynamicNodeView;
-}(DOMBaseNodeView));
-exports.DOMDynamicNodeView = DOMDynamicNodeView;
-
-},{"./utils/dom":"TnZD"}],"GqEk":[function(require,module,exports) {
-"use strict";
-/*
-Copyright 2019 Google LLC
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-    https://www.apache.org/licenses/LICENSE-2.0
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-*/
-Object.defineProperty(exports, "__esModule", { value: true });
-var node_view_1 = require("./node_view");
-var renderLiteral = function (ctx, value) {
-    var node = ctx.doc.createTextNode(value || '');
-    var view = new node_view_1.DOMStaticNodeView(node, [], function () { });
-    ctx.append(node);
-    return view;
-};
-var renderFunction = function (ctx, state, map) {
-    var node = ctx.doc.createTextNode(map(state) || '');
-    var oldContent = '';
-    var f = function (state) {
-        var newContent = map(state) || '';
-        if (newContent !== oldContent) {
-            node.nodeValue = newContent;
-            if (newContent.length < 5000)
-                oldContent = newContent;
-        }
-    };
-    var view = new node_view_1.DOMDynamicNodeView(node, [], f, function () { });
-    ctx.append(node);
-    return view;
-};
-var DOMTextTemplate = /** @class */ (function () {
-    function DOMTextTemplate(content) {
+exports.DOMDerivedTextTemplate = DOMDerivedTextTemplate;
+var DOMLiteralTextTemplate = /** @class */ (function () {
+    function DOMLiteralTextTemplate(content) {
         this.content = content;
     }
-    DOMTextTemplate.prototype.render = function (ctx, state) {
-        if (typeof this.content === 'function') {
-            return renderFunction(ctx, state, this.content);
-        }
-        else {
-            return renderLiteral(ctx, this.content);
-        }
+    DOMLiteralTextTemplate.prototype.render = function (ctx, _) {
+        var node = ctx.doc.createTextNode(this.content);
+        ctx.append(node);
+        return {
+            change: function (_) { },
+            destroy: function () {
+                dom_1.removeNode(node);
+            },
+            request: function (_) { }
+        };
     };
-    return DOMTextTemplate;
+    return DOMLiteralTextTemplate;
 }());
-exports.DOMTextTemplate = DOMTextTemplate;
+exports.DOMLiteralTextTemplate = DOMLiteralTextTemplate;
 exports.text = function (content) {
-    return new DOMTextTemplate(content);
+    if (typeof content === 'function') {
+        return new DOMDerivedTextTemplate(content);
+    }
+    else {
+        return new DOMLiteralTextTemplate(content || '');
+    }
 };
 
-},{"./node_view":"wNw6"}],"TnZD":[function(require,module,exports) {
+},{"./utils/dom":"TnZD"}],"TnZD":[function(require,module,exports) {
 "use strict";
 /*
 Copyright 2019 Google LLC
@@ -498,10 +409,6 @@ function insertBefore(ref) {
     };
 }
 exports.insertBefore = insertBefore;
-function filterDynamics(children) {
-    return children.filter(function (child) { return child.kind === 'dynamic'; });
-}
-exports.filterDynamics = filterDynamics;
 function domChildToTemplate(dom) {
     if (typeof dom === 'string' ||
         typeof dom === 'function' ||
@@ -592,9 +499,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 Object.defineProperty(exports, "__esModule", { value: true });
-var view_1 = require("tempo-core/lib/view");
 var dom_1 = require("./utils/dom");
-var node_view_1 = require("./node_view");
 var map_1 = require("tempo-core/lib/util/map");
 var dom_attributes_mapper_1 = require("./dom_attributes_mapper");
 var applyChange = function (change, el, ctx) { return function (state, value) {
@@ -625,22 +530,22 @@ var DOMElement = /** @class */ (function () {
         var _this = this;
         var el = this.createElement(ctx.doc);
         var value = undefined;
-        var allDynamics = [];
+        var allChanges = [];
         for (var _i = 0, _a = this.attrs; _i < _a.length; _i++) {
             var o = _a[_i];
-            dom_1.processAttribute(el, o.name, o.value, allDynamics);
+            dom_1.processAttribute(el, o.name, o.value, allChanges);
         }
         for (var _b = 0, _c = this.events; _b < _c.length; _b++) {
             var o = _c[_b];
-            dom_1.processEvent(el, o.name, o.value, ctx.dispatch, allDynamics);
+            dom_1.processEvent(el, o.name, o.value, ctx.dispatch, allChanges);
         }
         for (var _d = 0, _e = this.styles; _d < _e.length; _d++) {
             var o = _e[_d];
-            dom_1.processStyle(el, o.name, o.value, allDynamics);
+            dom_1.processStyle(el, o.name, o.value, allChanges);
         }
-        for (var _f = 0, allDynamics_1 = allDynamics; _f < allDynamics_1.length; _f++) {
-            var dy = allDynamics_1[_f];
-            dy(state);
+        for (var _f = 0, allChanges_1 = allChanges; _f < allChanges_1.length; _f++) {
+            var change = allChanges_1[_f];
+            change(state);
         }
         // children
         var appendChild = function (n) { return el.appendChild(n); };
@@ -650,36 +555,46 @@ var DOMElement = /** @class */ (function () {
         if (this.afterrender) {
             value = applyAfterRender(this.afterrender, el, ctx, state);
         }
-        var dynamicChildren = map_1.mapArray(view_1.filterDynamics(views), function (child) { return function (state) { return child.change(state); }; });
-        allDynamics.push.apply(allDynamics, dynamicChildren);
+        var viewChanges = map_1.mapArray(views, function (child) { return function (state) { return child.change(state); }; });
+        allChanges.push.apply(allChanges, viewChanges);
         if (this.beforechange) {
             var change_1 = applyChange(this.beforechange, el, ctx);
             var update = function (state) { value = change_1(state, value); };
-            allDynamics.unshift(update);
+            allChanges.unshift(update);
         }
         if (this.afterchange) {
             var change_2 = applyChange(this.afterchange, el, ctx);
             var update = function (state) { value = change_2(state, value); };
-            allDynamics.push(update);
+            allChanges.push(update);
         }
         var beforedestroyf = this.beforedestroy && (function () { return _this.beforedestroy(el, ctx, value); });
-        var request = this.respond ?
-            function (query) {
-                views.forEach(function (view) { return view.request(query); });
-                _this.respond(query, el, ctx, value);
-            } :
-            function () { };
-        if (allDynamics.length > 0) {
-            return new node_view_1.DOMDynamicNodeView(el, views, function (state) {
-                for (var _i = 0, allDynamics_2 = allDynamics; _i < allDynamics_2.length; _i++) {
-                    var f = allDynamics_2[_i];
-                    f(state);
+        var respond = this.respond;
+        return {
+            change: function (state) {
+                for (var _i = 0, allChanges_2 = allChanges; _i < allChanges_2.length; _i++) {
+                    var change = allChanges_2[_i];
+                    change(state);
                 }
-            }, request, beforedestroyf);
-        }
-        else {
-            return new node_view_1.DOMStaticNodeView(el, views, request, beforedestroyf);
-        }
+            },
+            destroy: function () {
+                if (beforedestroyf)
+                    beforedestroyf();
+                dom_1.removeNode(el);
+                for (var _i = 0, views_1 = views; _i < views_1.length; _i++) {
+                    var view = views_1[_i];
+                    view.destroy();
+                }
+            },
+            request: function (query) {
+                if (respond) {
+                    value = respond(query, el, ctx, value);
+                }
+                for (var _i = 0, views_2 = views; _i < views_2.length; _i++) {
+                    var view = views_2[_i];
+                    view.request(query);
+                }
+            }
+        };
     };
     return DOMElement;
 }());
@@ -746,7 +661,7 @@ exports.elNS2 = function (namespace, name) { return function (attributes) {
     return new DOMElement(makeCreateElementNS(namespace, name), extractAttrs(attributes.attrs), extractEvents(attributes.events), extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, attributes.respond, map_1.mapArray(children, dom_1.domChildToTemplate));
 }; };
 
-},{"tempo-core/lib/view":"OQt2","./utils/dom":"TnZD","./node_view":"wNw6","tempo-core/lib/util/map":"tBUf","./dom_attributes_mapper":"UKQ2"}],"zQMt":[function(require,module,exports) {
+},{"./utils/dom":"TnZD","tempo-core/lib/util/map":"tBUf","./dom_attributes_mapper":"UKQ2"}],"zQMt":[function(require,module,exports) {
 "use strict";
 /*
 Copyright 2019 Google LLC
@@ -899,83 +814,79 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 Object.defineProperty(exports, "__esModule", { value: true });
-var view_1 = require("tempo-core/lib/view");
 var dom_1 = require("./utils/dom");
 var map_1 = require("tempo-core/lib/util/map");
-var DOMUntilView = /** @class */ (function () {
-    function DOMUntilView(ref, repeatUntil, ctx, children) {
-        this.ref = ref;
-        this.repeatUntil = repeatUntil;
-        this.ctx = ctx;
-        this.children = children;
-        this.kind = 'dynamic';
-        this.childrenView = [];
-    }
-    DOMUntilView.prototype.destroy = function () {
-        dom_1.removeNode(this.ref);
-        for (var _i = 0, _a = this.childrenView; _i < _a.length; _i++) {
-            var c = _a[_i];
-            for (var _b = 0, c_1 = c; _b < c_1.length; _b++) {
-                var e = c_1[_b];
-                e.destroy();
-            }
-        }
-        this.childrenView = [];
-    };
-    DOMUntilView.prototype.change = function (state) {
-        var _this = this;
-        var currentViewLength = this.childrenView.length;
-        var index = 0;
-        var _loop_1 = function () {
-            var value = this_1.repeatUntil(state, index);
-            if (typeof value === 'undefined')
-                return "break";
-            if (index < currentViewLength) {
-                // replace existing
-                var filtered = view_1.filterDynamics(this_1.childrenView[index]);
-                for (var _i = 0, filtered_1 = filtered; _i < filtered_1.length; _i++) {
-                    var v = filtered_1[_i];
-                    v.change(value);
-                }
-            }
-            else {
-                // add node
-                this_1.childrenView.push(map_1.mapArray(this_1.children, function (el) { return el.render(_this.ctx, value); }));
-            }
-            index++;
-        };
-        var this_1 = this;
-        while (true) {
-            var state_1 = _loop_1();
-            if (state_1 === "break")
-                break;
-        }
-        var i = index;
-        // remove extra nodes
-        while (i < currentViewLength) {
-            for (var _i = 0, _a = this.childrenView[i]; _i < _a.length; _i++) {
-                var c = _a[_i];
-                c.destroy();
-            }
-            i++;
-        }
-        this.childrenView = this.childrenView.slice(0, index);
-    };
-    DOMUntilView.prototype.request = function (query) {
-        this.childrenView.forEach(function (views) { return views.forEach(function (view) { return view.request(query); }); });
-    };
-    return DOMUntilView;
-}());
-exports.DOMUntilView = DOMUntilView;
 var DOMUntilTemplate = /** @class */ (function () {
     function DOMUntilTemplate(options, children) {
         this.options = options;
         this.children = children;
     }
     DOMUntilTemplate.prototype.render = function (ctx, state) {
-        var ref = ctx.doc.createComment(this.options.refId || 't:until');
+        var children = this.children;
+        var _a = this.options, refId = _a.refId, repeatUntil = _a.repeatUntil;
+        var ref = ctx.doc.createComment(refId || 't:until');
         ctx.append(ref);
-        var view = new DOMUntilView(ref, this.options.repeatUntil, ctx.withAppend(dom_1.insertBefore(ref)), this.children);
+        var newCtx = ctx.withAppend(dom_1.insertBefore(ref));
+        var childrenViews = [];
+        var view = {
+            change: function (state) {
+                var currentLength = childrenViews.length;
+                var index = 0;
+                var _loop_1 = function () {
+                    var value = repeatUntil(state, index);
+                    if (typeof value === 'undefined')
+                        return "break";
+                    if (index < currentLength) {
+                        // replace existing
+                        var filteredViews = childrenViews[index];
+                        for (var _i = 0, filteredViews_1 = filteredViews; _i < filteredViews_1.length; _i++) {
+                            var view_1 = filteredViews_1[_i];
+                            view_1.change(value);
+                        }
+                    }
+                    else {
+                        // add node
+                        childrenViews.push(map_1.mapArray(children, function (el) { return el.render(newCtx, value); }));
+                    }
+                    index++;
+                };
+                while (true) {
+                    var state_1 = _loop_1();
+                    if (state_1 === "break")
+                        break;
+                }
+                var i = index;
+                // remove extra nodes
+                while (i < currentLength) {
+                    for (var _i = 0, _a = childrenViews[i]; _i < _a.length; _i++) {
+                        var c = _a[_i];
+                        c.destroy();
+                    }
+                    i++;
+                }
+                childrenViews = childrenViews.slice(0, index);
+            },
+            destroy: function () {
+                dom_1.removeNode(ref);
+                for (var _i = 0, childrenViews_1 = childrenViews; _i < childrenViews_1.length; _i++) {
+                    var childViews = childrenViews_1[_i];
+                    for (var _a = 0, childViews_1 = childViews; _a < childViews_1.length; _a++) {
+                        var view_2 = childViews_1[_a];
+                        view_2.destroy();
+                    }
+                }
+                childrenViews = [];
+            },
+            request: function (query) {
+                for (var _i = 0, childrenViews_2 = childrenViews; _i < childrenViews_2.length; _i++) {
+                    var childViews = childrenViews_2[_i];
+                    for (var _a = 0, childViews_2 = childViews; _a < childViews_2.length; _a++) {
+                        var view_3 = childViews_2[_a];
+                        view_3.request(query);
+                    }
+                }
+            }
+        };
         view.change(state);
         return view;
     };
@@ -990,7 +901,7 @@ exports.until = function (options) {
     return new DOMUntilTemplate(options, map_1.mapArray(children, dom_1.domChildToTemplate));
 };
 
-},{"tempo-core/lib/view":"OQt2","./utils/dom":"TnZD","tempo-core/lib/util/map":"tBUf"}],"kxUV":[function(require,module,exports) {
+},{"./utils/dom":"TnZD","tempo-core/lib/util/map":"tBUf"}],"kxUV":[function(require,module,exports) {
 "use strict";
 /*
 Copyright 2019 Google LLC

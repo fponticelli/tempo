@@ -14,13 +14,12 @@ limitations under the License.
 import { div } from '../src/html'
 import { when, unless } from '../src/when'
 import { createContext } from './common'
-import { DynamicView } from 'tempo-core/lib/view'
 
 describe('when', () => {
   it('always true', () => {
     const ctx = createContext()
     const template = when({ condition: _ => true, refId: 'A' }, div({}, 'a'))
-    const view = template.render(ctx, 1) as DynamicView<number, unknown>
+    const view = template.render(ctx, 1)
     expect(ctx.doc.body.innerHTML).toEqual('<div>a</div><!--A-->')
     view.change(2)
     expect(ctx.doc.body.innerHTML).toEqual('<div>a</div><!--A-->')
@@ -31,7 +30,7 @@ describe('when', () => {
   it('always false', () => {
     const ctx = createContext()
     const template = when({ condition: _ => false }, div({}, 'a'))
-    const view = template.render(ctx, 1) as DynamicView<number, unknown>
+    const view = template.render(ctx, 1)
     expect(ctx.doc.body.innerHTML).toEqual('<!--t:when-->')
     view.change(2)
     expect(ctx.doc.body.innerHTML).toEqual('<!--t:when-->')
@@ -42,7 +41,7 @@ describe('when', () => {
   it('unless', () => {
     const ctx = createContext()
     const template = unless({ condition: _ => false }, div({}, 'a'))
-    const view = template.render(ctx, 1) as DynamicView<number, unknown>
+    const view = template.render(ctx, 1)
     expect(ctx.doc.body.innerHTML).toEqual('<div>a</div><!--t:unless-->')
     view.change(2)
     expect(ctx.doc.body.innerHTML).toEqual('<div>a</div><!--t:unless-->')
@@ -54,7 +53,7 @@ describe('when', () => {
     const ctx = createContext()
     let condition = true
     const template = when({ condition: _ => condition }, div({}, 'a'))
-    const view = template.render(ctx, 1) as DynamicView<number, unknown>
+    const view = template.render(ctx, 1)
     expect(ctx.doc.body.innerHTML).toEqual('<div>a</div><!--t:when-->')
     condition = false
     view.change(2)
@@ -70,7 +69,7 @@ describe('when', () => {
     const ctx = createContext()
     let condition = false
     const template = when({ condition: _ => condition }, div({}, 'a'))
-    const view = template.render(ctx, 1) as DynamicView<number, unknown>
+    const view = template.render(ctx, 1)
     expect(ctx.doc.body.innerHTML).toEqual('<!--t:when-->')
     condition = true
     view.change(2)
