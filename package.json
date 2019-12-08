@@ -2,6 +2,7 @@
   "name": "tempo-root",
   "version": "1.0.0",
   "description": "Web framework alternative to React/Angular fully typed.",
+  "private": true,
   "keywords": [
     "typescript",
     "ui",

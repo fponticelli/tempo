@@ -1,6 +1,6 @@
 {
   "name": "tempo-dom",
-  "version": "0.8.3",
+  "version": "0.9.0",
   "description": "Fully-typed web framework alternative to React and Angular",
   "keywords": ["ui", "framework", "typescript", "dom", "angular-alternative", "react-alternative"],
   "license": "Apache-2.0",
@@ -24,7 +24,7 @@
     "url": "https://github.com/fponticelli"
   },
   "dependencies": {
-    "tempo-core": "1.0.1",
+    "tempo-core": "1.1.0",
     "tempo-store": "1.0.1"
   },
   "devDependencies": {
