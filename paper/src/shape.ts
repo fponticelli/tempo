@@ -24,10 +24,7 @@ type ShapeOptions<State, Action, Query, T, Sub> = MakeOptional<
   Merge<
     Merge<
       WritableShapeOptions<State>,
-      Merge<
-        { args?: {} },
-        TempoAttributes<State, Action, Query, Shape, T>
-      >
+      Merge<{ args?: {} }, TempoAttributes<State, Action, Query, Shape, T>>
     >,
     ItemEvents<State, Action, Shape>
   >
@@ -43,12 +40,13 @@ export const circle = <State, Action, Query = unknown, T = unknown>(
     Shape,
     T,
     ShapeOptions<State, Action, Query, T, Shape.Circle>
-  >((_: State) =>
-      typeof options.args !== 'undefined' ?
-        new Shape.Circle(options.args) :
-        new Shape.Circle(new Point(0, 0), 0),
-      options
-    )
+  >(
+    (_: State) =>
+      typeof options.args !== 'undefined'
+        ? new Shape.Circle(options.args)
+        : new Shape.Circle(new Point(0, 0), 0),
+    options
+  )
 
 export const rectangle = <State, Action, Query = unknown, T = unknown>(
   options: ShapeOptions<State, Action, Query, T, Shape.Rectangle>
@@ -62,10 +60,10 @@ export const rectangle = <State, Action, Query = unknown, T = unknown>(
     ShapeOptions<State, Action, Query, T, Shape.Rectangle>
   >(
     (_: State) =>
-      typeof options.args !== 'undefined' ?
-        new Shape.Rectangle(options.args) :
-        new Shape.Rectangle(new Point(0, 0), new Point(0, 0)),
-      options
+      typeof options.args !== 'undefined'
+        ? new Shape.Rectangle(options.args)
+        : new Shape.Rectangle(new Point(0, 0), new Point(0, 0)),
+    options
   )
 
 export const ellipse = <State, Action, Query = unknown, T = unknown>(
@@ -80,12 +78,11 @@ export const ellipse = <State, Action, Query = unknown, T = unknown>(
     ShapeOptions<State, Action, Query, T, Shape.Ellipse>
   >(
     (_: State) =>
-      typeof options.args !== 'undefined' ?
-        new Shape.Ellipse(options.args) :
-        new Shape.Ellipse({
-          center: new Point(0, 0),
-          size: new Size(0, 0)
-        })
-      ,
+      typeof options.args !== 'undefined'
+        ? new Shape.Ellipse(options.args)
+        : new Shape.Ellipse({
+            center: new Point(0, 0),
+            size: new Size(0, 0)
+          }),
     options
   )

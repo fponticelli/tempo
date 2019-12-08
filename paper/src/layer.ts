@@ -45,11 +45,11 @@ export const layer = <State, Action, Query, T = unknown>(
     Layer,
     T,
     LayerOptions<State, Action, Query, T>
-  >((_: State) =>
-    typeof options.args !== 'undefined' ?
-      new Layer(options.args) :
-      new Layer([]),
-      options,
-      children
-    )
-
+  >(
+    (_: State) =>
+      typeof options.args !== 'undefined'
+        ? new Layer(options.args)
+        : new Layer([]),
+    options,
+    children
+  )

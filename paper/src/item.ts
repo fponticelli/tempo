@@ -86,9 +86,9 @@ export class ItemTemplate<
 export const createItem = <State, Action, Query, I extends Item, T, Option>(
   makeItem: (state: State) => I,
   options: MakeOptional<
-    Merge<{ args?: {} }, Merge<
-      Option,
-      TempoAttributes<State, Action, Query, I, T>>
+    Merge<
+      { args?: {} },
+      Merge<Option, TempoAttributes<State, Action, Query, I, T>>
     >
   >,
   children?: PaperTemplate<State, Action, Query>[] | undefined

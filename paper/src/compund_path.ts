@@ -18,7 +18,10 @@ type WritableCompoundPath = ExcludeFunctionFields<
 type WritableCompoundPathOptionKeys = keyof WritableCompoundPath
 
 type WritableCompoundPathOptions<State> = {
-  [K in WritableCompoundPathOptionKeys]?: PaperAttribute<State, WritableCompoundPath[K]>
+  [K in WritableCompoundPathOptionKeys]?: PaperAttribute<
+    State,
+    WritableCompoundPath[K]
+  >
 }
 
 type CompoundPathOptions<State, Action, Query, T> = MakeOptional<
@@ -45,10 +48,11 @@ export const compoundPath = <State, Action, Query, T = unknown>(
     CompoundPath,
     T,
     CompoundPathOptions<State, Action, Query, T>
-  >((_: State) =>
-    typeof options.args !== 'undefined' ?
-      new CompoundPath(options.args) :
-      new CompoundPath([]),
+  >(
+    (_: State) =>
+      typeof options.args !== 'undefined'
+        ? new CompoundPath(options.args)
+        : new CompoundPath([]),
     options,
     children
-)
+  )

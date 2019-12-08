@@ -34,19 +34,18 @@ type PathOptions<State, Action, Query, T> = MakeOptional<
   >
 >
 
-type PathConstrOptions<State, Action, Query, T> =
-  Merge<
-    { args: {} },
-    MakeOptional<
+type PathConstrOptions<State, Action, Query, T> = Merge<
+  { args: {} },
+  MakeOptional<
+    Merge<
       Merge<
-        Merge<
-          WritablePathOptions<State>,
-          TempoAttributes<State, Action, Query, Path, T>
-        >,
-        ItemEvents<State, Action, Path>
-      >
+        WritablePathOptions<State>,
+        TempoAttributes<State, Action, Query, Path, T>
+      >,
+      ItemEvents<State, Action, Path>
     >
   >
+>
 
 export const path = <State, Action, Query, T = unknown>(
   options: PathOptions<State, Action, Query, T>,
@@ -59,10 +58,11 @@ export const path = <State, Action, Query, T = unknown>(
     Path,
     T,
     PathOptions<State, Action, Query, T>
-  >((_: State) =>
-    typeof options.args !== 'undefined' ?
-      new Path(options.args) :
-      new Path([]),
+  >(
+    (_: State) =>
+      typeof options.args !== 'undefined'
+        ? new Path(options.args)
+        : new Path([]),
     options,
     children
   )
