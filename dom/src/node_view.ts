@@ -11,36 +11,20 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { DynamicView, StaticView, View } from 'tempo-core/lib/view'
+import { View } from 'tempo-core/lib/view'
 import { removeNode } from './utils/dom'
 
-export class DOMBaseNodeView<State, Query> {
+export class DOMNodeView<State, Query> implements View<State, Query> {
   constructor(
     readonly node: Node,
-    readonly children: View<State, Query>[],
-    readonly request: (query: Query) => void,
-    readonly beforeDestroy?: () => void
-  ) {}
-  destroy() {
-    if (this.beforeDestroy) this.beforeDestroy()
-    removeNode(this.node)
-    for (const c of this.children) c.destroy()
-  }
-}
-
-export class DOMStaticNodeView<State, Query> extends DOMBaseNodeView<State, Query> implements StaticView<Query> {
-  readonly kind = 'static'
-}
-
-export class DOMDynamicNodeView<State, Query> extends DOMBaseNodeView<State, Query> implements DynamicView<State, Query> {
-  readonly kind = 'dynamic'
-  constructor(
-    readonly node: Node,
-    readonly children: View<State, Query>[],
+    readonly views: View<State, Query>[],
     readonly change: (state: State) => void,
     readonly request: (query: Query) => void,
     readonly beforeDestroy?: () => void
-  ) {
-    super(node, children, request, beforeDestroy)
+  ) { }
+  destroy() {
+    if (this.beforeDestroy) this.beforeDestroy()
+    removeNode(this.node)
+    for (const view of this.views) view.destroy()
   }
 }

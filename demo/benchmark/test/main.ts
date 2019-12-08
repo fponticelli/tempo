@@ -14,7 +14,7 @@ limitations under the License.
 import { list } from './template/list'
 import { deep, Deep } from './template/deep'
 import { DOMContext } from 'tempo-dom/lib/context'
-import { DynamicView } from 'tempo-core/lib/view'
+import { View } from 'tempo-core/lib/view'
 import { TestAttributes, attribute } from './template/attribute'
 import { TestStyles, style } from './template/styles'
 import { event } from './template/events'
@@ -27,7 +27,7 @@ export const renderListElements = (numbers: number[]) => {
 }
 
 export const renderListAndUpdate = (numbers: number[][]) => {
-  const view = list.render(ctx, []) as DynamicView<number[], unknown>
+  const view = list.render(ctx, [])
   for (const nums of numbers)
     view.change(nums)
 }
@@ -38,31 +38,31 @@ export const renderListElementsAndDestroy = (numbers: number[]) => {
 }
 
 export const renderDeepAndUpdate = (values: Deep[]) => {
-  const view = deep.render(ctx, values[0]!) as DynamicView<Deep, unknown>
+  const view = deep.render(ctx, values[0]!)
   for (const v of values)
     view.change(v)
 }
 
 export const updateAttributes = (values: TestAttributes[]) => {
-  const view = attribute.render(ctx, values[0]!) as DynamicView<TestAttributes, unknown>
+  const view = attribute.render(ctx, values[0]!)
   for (const v of values)
     view.change(v)
 }
 
 export const updateProperty = (values: TestProperties[]) => {
-  const view = property.render(ctx, values[0]!) as DynamicView<TestProperties, unknown>
+  const view = property.render(ctx, values[0]!)
   for (const v of values)
     view.change(v)
 }
 
 export const updateStyles = (values: TestStyles[]) => {
-  const view = style.render(ctx, values[0]!) as DynamicView<TestStyles, unknown>
+  const view = style.render(ctx, values[0]!)
   for (const v of values)
     view.change(v)
 }
 
 export const updateAndTriggerEvents = (values: string[]) => {
-  const view = event.render(ctx, values[0]!) as DynamicView<string, unknown>
+  const view = event.render(ctx, values[0]!)
   const el = document.getElementById('test').firstElementChild! as HTMLButtonElement
   for (const v of values) {
     el.click()
