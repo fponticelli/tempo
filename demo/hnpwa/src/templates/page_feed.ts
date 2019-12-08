@@ -22,7 +22,7 @@ import { Route } from '../route'
 import { linkRoute } from './link_route'
 import { paginationTemplate } from './pagination'
 
-export const itemUrlTemplate = match<['url', 'kind'], Item, unknown, Action>(['url', 'kind'], {
+export const itemUrlTemplate = match<['url', 'kind'], Item, Action>(['url', 'kind'], {
   External: linkRoute<Item & { url: External }>(
     { route: item => Route.externalRoute(item.url.path) },
     h2({}, (item: Item) => item.title)
@@ -33,7 +33,7 @@ export const itemUrlTemplate = match<['url', 'kind'], Item, unknown, Action>(['u
   )
 })
 
-export const listItemUrlTemplate = match<['url', 'kind'], Item, unknown, Action>(['url', 'kind'], {
+export const listItemUrlTemplate = match<['url', 'kind'], Item, Action>(['url', 'kind'], {
   External: linkRoute<Item & { url: External }>(
     { route: item => Route.externalRoute(item.url.path) },
     (item: Item) => item.title
@@ -41,7 +41,7 @@ export const listItemUrlTemplate = match<['url', 'kind'], Item, unknown, Action>
   Internal: linkRoute({ route: item => Route.item(item.id) }, (item: Item) => item.title)
 })
 
-export const itemFooterTemplate = footer<Item, unknown, Action>(
+export const itemFooterTemplate = footer<Item, Action>(
   {},
   matchBool({
     condition: item => item.type === 'job',
@@ -58,7 +58,7 @@ export const itemFooterTemplate = footer<Item, unknown, Action>(
   })
 )
 
-const listItemTemplate = li<[Item, PageFeed, number], unknown, Action>(
+const listItemTemplate = li<[Item, PageFeed, number], Action>(
   {},
   aside({}, ([_i, page, index]) => String((page.page - 1) * 30 + index + 1)),
   div(
@@ -71,7 +71,7 @@ const listItemTemplate = li<[Item, PageFeed, number], unknown, Action>(
   )
 )
 
-export const pageFeedTemplate = section<PageFeed, unknown, Action>(
+export const pageFeedTemplate = section<PageFeed, Action>(
   {
     attrs: { className: 'list-view' }
   },

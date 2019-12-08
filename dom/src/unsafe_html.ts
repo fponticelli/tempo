@@ -19,9 +19,9 @@ import { UnwrappedDerivedValue } from 'tempo-core/lib/value'
 import { DOMDynamicNodeView, DOMBaseNodeView } from './node_view'
 import { DOMTextValue } from './value'
 
-const renderLiteral = <State, Query, Action, El extends Element = Element, T = unknown>
+const renderLiteral = <State, Action, Query = unknown, El extends Element = Element, T = unknown>
 (
-  element: DOMElement<State, Query, Action, El, T>,
+  element: DOMElement<State, Action, Query, El, T>,
   ctx: DOMContext<Action>,
   transform: (source: string) => string,
   state: State,
@@ -33,8 +33,8 @@ const renderLiteral = <State, Query, Action, El extends Element = Element, T = u
   return view
 }
 
-const renderFunction = <State, Query, Action, El extends Element = Element, T = unknown>(
-  element: DOMElement<State, Query, Action, El, T>,
+const renderFunction = <State, Action, Query, El extends Element = Element, T = unknown>(
+  element: DOMElement<State, Action, Query, El, T>,
   ctx: DOMContext<Action>,
   transform: (source: string) => string,
   state: State,
@@ -56,16 +56,16 @@ const renderFunction = <State, Query, Action, El extends Element = Element, T = 
   return new DOMDynamicNodeView(el, [view], f, (query: Query) => view.request(query))
 }
 
-export class DOMUnsafeHtml<State, Query, Action, El extends Element = Element, T = unknown> implements DOMTemplate<State, Query, Action> {
+export class DOMUnsafeHtml<State, Action, Query, El extends Element = Element, T = unknown> implements DOMTemplate<State, Action, Query> {
   constructor(
     readonly content: DOMTextValue<State>,
-    readonly element: DOMElement<State, Query, Action, El, T>,
+    readonly element: DOMElement<State, Action, Query, El, T>,
     readonly transform: (source: string) => string
   ) {}
 
   render(ctx: DOMContext<Action>, state: State): View<State, Query> {
     if (typeof this.content === 'function') {
-      return renderFunction<State, Query, Action, El, T>(
+      return renderFunction<State, Action, Query, El, T>(
         this.element,
         ctx,
         this.transform,
@@ -73,7 +73,7 @@ export class DOMUnsafeHtml<State, Query, Action, El extends Element = Element, T
         this.content as UnwrappedDerivedValue<State, string>
       )
     } else {
-      return renderLiteral<State, Query, Action, El, T>(
+      return renderLiteral<State, Action, Query, El, T>(
         this.element,
         ctx,
         this.transform,
@@ -84,15 +84,15 @@ export class DOMUnsafeHtml<State, Query, Action, El extends Element = Element, T
   }
 }
 
-export const unsafeHtml = <State, Query, Action, El extends Element = Element, T = unknown>(
+export const unsafeHtml = <State, Action, Query = unknown, El extends Element = Element, T = unknown>(
   options: {
     content: DOMTextValue<State>
-    element?: DOMElement<State, Query, Action, El, T>
+    element?: DOMElement<State, Action, Query, El, T>
     transform?: (source: string) => string
   }
-): DOMTemplate<State, Query, Action> =>
-  new DOMUnsafeHtml<State, Query, Action, El, T>(
+): DOMTemplate<State, Action, Query> =>
+  new DOMUnsafeHtml<State, Action, Query, El, T>(
     options.content,
-    options.element || el<State, Query, Action, El, T>('div', {}),
+    options.element || el<State, Action, Query, El, T>('div', {}),
     options.transform || (s => s)
   )

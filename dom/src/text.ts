@@ -18,14 +18,14 @@ import { UnwrappedDerivedValue } from 'tempo-core/lib/value'
 import { DOMStaticNodeView, DOMDynamicNodeView } from './node_view'
 import { DOMTextValue } from './value'
 
-const renderLiteral = <State, Query>(ctx: DOMContext<never>, value: string | undefined): View<State, Query> => {
+const renderLiteral = <State, Query = unknown>(ctx: DOMContext<never>, value: string | undefined): View<State, Query> => {
   const node = ctx.doc.createTextNode(value || '')
   const view = new DOMStaticNodeView(node, [], () => {})
   ctx.append(node)
   return view
 }
 
-const renderFunction = <State, Query>(
+const renderFunction = <State, Query = unknown>(
   ctx: DOMContext<never>,
   state: State,
   map: UnwrappedDerivedValue<State, string>
@@ -45,7 +45,7 @@ const renderFunction = <State, Query>(
   return view
 }
 
-export class DOMTextTemplate<State, Query, Action> implements DOMTemplate<State, Query, Action> {
+export class DOMTextTemplate<State, Action, Query> implements DOMTemplate<State, Action, Query> {
   constructor(readonly content: DOMTextValue<State>) {}
 
   render(ctx: DOMContext<Action>, state: State): View<State, Query> {
@@ -57,5 +57,5 @@ export class DOMTextTemplate<State, Query, Action> implements DOMTemplate<State,
   }
 }
 
-export const text = <State, Query, Action>(content: DOMTextValue<State>): DOMTemplate<State, Query, Action> =>
-  new DOMTextTemplate<State, Query, Action>(content)
+export const text = <State, Action, Query = unknown>(content: DOMTextValue<State>): DOMTemplate<State, Action, Query> =>
+  new DOMTextTemplate<State, Action, Query>(content)

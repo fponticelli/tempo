@@ -1335,7 +1335,11 @@ function () {
     };
 
     var request = this.respond ? function (query) {
-      return _this.respond(query, el, ctx);
+      views.forEach(function (view) {
+        return view.request(query);
+      });
+
+      _this.respond(query, el, ctx);
     } : function () {};
 
     if (allDynamics.length > 0) {

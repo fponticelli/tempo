@@ -18,11 +18,11 @@ import { mapState } from 'tempo-dom/lib/map'
 import { when } from 'tempo-dom/lib/when'
 import { unsafeHtml } from 'tempo-dom/lib/unsafe_html'
 
-export const profileTemplate = section<Profile, unknown, Action>(
+export const profileTemplate = section<Profile, Action>(
   { attrs: { className: 'user-view' } },
   mapState(
     { map: profile => profile.user },
-    table<User, unknown, Action>(
+    table<User, Action>(
       {},
       tr(
         {},

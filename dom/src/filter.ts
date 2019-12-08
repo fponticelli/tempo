@@ -18,10 +18,10 @@ import { domChildToTemplate, filterDynamics } from './utils/dom'
 import { DOMStaticFragmentView, DOMDynamicFragmentView } from './fragment'
 import { mapArray } from 'tempo-core/lib/util/map'
 
-export class FilterStateTemplate<State, Query, Action> implements DOMTemplate<State, Query, Action> {
+export class FilterStateTemplate<State, Action, Query> implements DOMTemplate<State, Action, Query> {
   constructor(
     readonly isSame: (prev: State, next: State ) => boolean,
-    readonly children: DOMTemplate<State, Query, Action>[]
+    readonly children: DOMTemplate<State, Action, Query>[]
   ) {}
 
   render(ctx: DOMContext<Action>, state: State): View<State, Query> {
@@ -43,10 +43,10 @@ export class FilterStateTemplate<State, Query, Action> implements DOMTemplate<St
   }
 }
 
-export const filterState = <State, Query, Action>(
+export const filterState = <State, Action, Query = unknown>(
   options: { isSame?: (prev: State, next: State ) => boolean },
-  ...children: DOMChild<State, Query, Action>[]
-): DOMTemplate<State, Query, Action> => new FilterStateTemplate(
+  ...children: DOMChild<State, Action, Query>[]
+): DOMTemplate<State, Action, Query> => new FilterStateTemplate(
   options.isSame || ((a: State, b: State) => a === b),
   mapArray(children, domChildToTemplate)
 )

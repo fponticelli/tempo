@@ -16,18 +16,18 @@ import { DOMComponentTemplate, component } from './component'
 import { DOMContext } from './context'
 import { DOMChild } from './template'
 
-export type TempoView<State, Query, Action> = Readonly<{
+export type TempoView<State, Action, Query> = Readonly<{
   store: Store<State, Action>
   request(query: Query): void
   destroy(): void
 }>
 
 export module Tempo {
-  export function renderComponent<State, Query, Action>(options: {
+  export function renderComponent<State, Action, Query = unknown>(options: {
     el?: HTMLElement
-    component: DOMComponentTemplate<State, Query, Action>
+    component: DOMComponentTemplate<State, Action, Query>
     document?: Document
-  }): TempoView<State, Query, Action> {
+  }): TempoView<State, Action, Query> {
     const { el: maybeElement, component } = options
     const { store } = component
     const doc = options.document || document
@@ -50,13 +50,13 @@ export module Tempo {
     }
   }
 
-  export function render<State, Query, Action>(options: {
+  export function render<State, Action, Query = unknown>(options: {
     el?: HTMLElement
-    template: DOMChild<State, Query, Action>
+    template: DOMChild<State, Action, Query>
     store: Store<State, Action>
     document?: Document
     delayed?: boolean
-  }): TempoView<State, Query, Action> {
+  }): TempoView<State, Action, Query> {
     const { el, store, document, template, delayed } = options
     const comp = component({ store, delayed }, template)
     return Tempo.renderComponent({ el, component: comp, document })

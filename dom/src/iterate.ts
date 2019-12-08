@@ -15,22 +15,22 @@ import { DOMChild, DOMTemplate } from './template'
 import { mapState } from './map'
 import { until } from './until'
 
-export const iterate = <OuterState, InnerState extends any[], Query, Action>(
+export const iterate = <OuterState, InnerState extends any[], Action, Query = unknown>(
   options: {
     refId?: string
     getArray: (outer: OuterState) => InnerState
   },
-  ...children: DOMChild<[InnerState[number], OuterState, number], Query, Action>[]
-): DOMTemplate<OuterState, Query, Action> => {
+  ...children: DOMChild<[InnerState[number], OuterState, number], Action, Query>[]
+): DOMTemplate<OuterState, Action, Query> => {
   let outerState: OuterState
-  return mapState<OuterState, InnerState, Query, Action>(
+  return mapState<OuterState, InnerState, Action, Query>(
     {
       map: (outer) => {
         outerState = outer
         return options.getArray(outer)
       }
     },
-    until<InnerState, InnerState[number], Query, Action>(
+    until<InnerState, InnerState[number], Action, Query>(
       {
         repeatUntil:
           (value: InnerState, index: number) => value[index] && ([value[index], outerState, index])
@@ -40,18 +40,18 @@ export const iterate = <OuterState, InnerState extends any[], Query, Action>(
   )
 }
 
-export const iterateItems = <OuterState, InnerState extends any[], Query, Action>(
+export const iterateItems = <OuterState, InnerState extends any[], Action, Query = unknown>(
   options: {
     refId?: string
     getArray: (outer: OuterState) => InnerState
   },
-  ...children: DOMChild<InnerState[number], Query, Action>[]
-): DOMTemplate<OuterState, Query, Action> => {
-  return mapState<OuterState, InnerState, Query, Action>(
+  ...children: DOMChild<InnerState[number], Action, Query>[]
+): DOMTemplate<OuterState, Action, Query> => {
+  return mapState<OuterState, InnerState, Action, Query>(
     {
       map: (outer) => options.getArray(outer)
     },
-    until<InnerState, InnerState[number], Query, Action>(
+    until<InnerState, InnerState[number], Action, Query>(
       {
         repeatUntil:
           (value: InnerState, index: number) => value[index]

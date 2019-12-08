@@ -16,12 +16,12 @@ import { DOMComponentView, DOMComponentTemplate } from './component'
 import { DOMTemplate } from './template'
 import { DOMContext } from './context'
 
-export class DOMAdapterView<OuterState, InnerState, Query, InnerAction> implements DynamicView<OuterState, Query> {
+export class DOMAdapterView<OuterState, InnerState, InnerAction, Query> implements DynamicView<OuterState, Query> {
   readonly kind = 'dynamic'
   constructor(
     readonly mergeStates: (outerState: OuterState, innerState: InnerState) => InnerState | undefined,
     readonly request: (query: Query) => void,
-    readonly child: DOMComponentView<InnerState, Query, InnerAction>
+    readonly child: DOMComponentView<InnerState, InnerAction, Query>
   ) {}
 
   destroy(): void {
@@ -35,12 +35,12 @@ export class DOMAdapterView<OuterState, InnerState, Query, InnerAction> implemen
   }
 }
 
-export class DOMAdapterTemplate<OuterState, InnerState, Query, OuterAction, InnerAction>
-  implements DOMTemplate<OuterState, Query, OuterAction> {
+export class DOMAdapterTemplate<OuterState, InnerState, OuterAction, InnerAction, Query>
+  implements DOMTemplate<OuterState, OuterAction, Query> {
   constructor(
     readonly mergeStates: (outerState: OuterState, innerState: InnerState) => InnerState | undefined,
     readonly propagate: (args: PropagateArg<OuterState, InnerState, OuterAction, InnerAction>) => void,
-    readonly child: DOMComponentTemplate<InnerState, Query, InnerAction>
+    readonly child: DOMComponentTemplate<InnerState, InnerAction, Query>
   ) {}
 
   render(ctx: DOMContext<OuterAction>, outerState: OuterState): DynamicView<OuterState, Query> {
@@ -79,13 +79,13 @@ export interface PropagateArg<OuterState, InnerState, OuterAction, InnerAction> 
   dispatchOuter: (action: OuterAction) => void
 }
 
-export const adapter = <OuterState, InnerState, Query, OuterAction, InnerAction>(
+export const adapter = <OuterState, InnerState, OuterAction, InnerAction, Query = unknown>(
   options: {
     mergeStates?: (outerState: OuterState, innerState: InnerState) => InnerState | undefined
     propagate?: (args: PropagateArg<OuterState, InnerState, OuterAction, InnerAction>) => void
   },
-  child: DOMComponentTemplate<InnerState, Query, InnerAction>
-): DOMTemplate<OuterState, Query, OuterAction> =>
+  child: DOMComponentTemplate<InnerState, InnerAction, Query>
+): DOMTemplate<OuterState, OuterAction, Query> =>
   new DOMAdapterTemplate(
     options.mergeStates || ((_u: OuterState, _d: InnerState) => undefined),
     /* istanbul ignore next */

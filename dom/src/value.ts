@@ -22,7 +22,7 @@ export type DOMStyleAttribute<State, Value> = UnwrappedValue<State, Value>
 
 export type AttributeValue = string | number | boolean | string[]
 
-export interface DOMAttributes<State, Query, Action, El extends Element, T> {
+export interface DOMAttributes<State, Action, Query = unknown, El extends Element = Element, T = unknown> {
   attrs?: Record<string, DOMAttribute<State, AttributeValue>>
   events?: Record<string, DOMEventHandler<State, Action, any, El>>
   styles?: Record<string, DOMStyleAttribute<State, string>>

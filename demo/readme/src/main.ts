@@ -46,7 +46,7 @@ const reducer = (state: State, action: Action): State => {
 
 const store = Store.ofState({ state, reducer })
 
-const template = div<State, unknown, Action>(
+const template = div<State, Action>(
   { attrs: { className: 'app' } },
   mapState(
     { map: (state: State) => state.count },

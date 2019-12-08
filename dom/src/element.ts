@@ -41,7 +41,7 @@ const applyAfterRender = <State, Action, El extends Element, T>(
   }
 }
 
-export class DOMElement<State, Query, Action, El extends Element = Element, T = unknown> implements DOMTemplate<State, Query, Action> {
+export class DOMElement<State, Action, Query = unknown, El extends Element = Element, T = unknown> implements DOMTemplate<State, Action, Query> {
   constructor(
     readonly createElement: (doc: Document) => El,
     readonly attrs: { name: string, value: DOMAttribute<State, AttributeValue>}[],
@@ -52,7 +52,7 @@ export class DOMElement<State, Query, Action, El extends Element = Element, T = 
     readonly afterchange:  undefined | ((state: State, el: El, ctx: DOMContext<Action>, value: T | undefined) => T | undefined),
     readonly beforedestroy: undefined | (((el: El, ctx: DOMContext<Action>, value: T | undefined) => void)),
     readonly respond: undefined | ((query: Query, el: El, ctx: DOMContext<Action>) => undefined),
-    readonly children: DOMTemplate<State, Query, Action>[]
+    readonly children: DOMTemplate<State, Action, Query>[]
   ) {}
 
   render(ctx: DOMContext<Action>, state: State): View<State, Query> {
@@ -98,7 +98,10 @@ export class DOMElement<State, Query, Action, El extends Element = Element, T = 
 
     const beforedestroyf = this.beforedestroy && (() => this.beforedestroy!(el, ctx, value))
     const request = this.respond ?
-      (query: Query) => this.respond!(query, el, ctx) :
+      (query: Query) => {
+        views.forEach(view => view.request(query))
+        this.respond!(query, el, ctx)
+      } :
       () => {}
 
     if (allDynamics.length > 0) {
@@ -161,12 +164,12 @@ function extractStyles<State>(
 
 const makeCreateElement = <El extends Element>(name: string) => (doc: Document) => doc.createElement(name) as any as El
 
-export const el = <State, Query, Action, El extends Element, T = unknown>(
+export const el = <State, Action, Query = unknown, El extends Element = Element, T = unknown>(
   name: string,
-  attributes: DOMAttributes<State, Query, Action, El, T>,
-  ...children: DOMChild<State, Query, Action>[]
+  attributes: DOMAttributes<State, Action, Query, El, T>,
+  ...children: DOMChild<State, Action, Query>[]
 ) => {
-  return new DOMElement<State, Query, Action, El, T>(
+  return new DOMElement<State, Action, Query, El, T>(
     makeCreateElement(name),
     extractAttrs(attributes.attrs),
     extractEvents(attributes.events),
@@ -180,10 +183,10 @@ export const el = <State, Query, Action, El extends Element, T = unknown>(
   )
 }
 
-export const el2 = <El extends Element>(name: string) => <State, Query, Action, T = unknown>(
-  attributes: DOMAttributes<State, Query, Action, El, T>,
-  ...children: DOMChild<State, Query, Action>[]) => {
-    return new DOMElement<State, Query, Action, El, T>(
+export const el2 = <El extends Element>(name: string) => <State, Action, Query = unknown, T = unknown>(
+  attributes: DOMAttributes<State, Action, Query, El, T>,
+  ...children: DOMChild<State, Action, Query>[]) => {
+    return new DOMElement<State, Action, Query, El, T>(
       makeCreateElement(name),
       extractAttrs(attributes.attrs),
       extractEvents(attributes.events),
@@ -204,14 +207,14 @@ export const defaultNamespaces: Record<string, string> = {
 const makeCreateElementNS = <El extends Element>(namespace: string, name: string) =>
   (doc: Document) => doc.createElementNS(namespace, name) as any as El
 
-export const elNS = <State, Query, Action, El extends Element, T = unknown>(
+export const elNS = <State, Action, Query = unknown, El extends Element = Element, T = unknown>(
   ns: string,
   name: string,
-  attributes: DOMAttributes<State, Query, Action, El, T>,
-  ...children: DOMChild<State, Query, Action>[]
+  attributes: DOMAttributes<State, Action, Query, El, T>,
+  ...children: DOMChild<State, Action, Query>[]
 ) => {
   const namespace = defaultNamespaces[ns] || ns
-  return new DOMElement<State, Query, Action, El, T>(
+  return new DOMElement<State, Action, Query, El, T>(
     makeCreateElementNS(namespace, name),
     extractAttrs(attributes.attrs),
     extractEvents(attributes.events),
@@ -225,10 +228,10 @@ export const elNS = <State, Query, Action, El extends Element, T = unknown>(
   )
 }
 
-export const elNS2 = <El extends Element>(namespace: string, name: string) => <State, Query, Action, T = unknown>(
-  attributes: DOMAttributes<State, Query, Action, El, T>,
-  ...children: DOMChild<State, Query, Action>[]) => {
-    return new DOMElement<State, Query, Action, El, T>(
+export const elNS2 = <El extends Element>(namespace: string, name: string) => <State, Action, Query = unknown, T = unknown>(
+  attributes: DOMAttributes<State, Action, Query, El, T>,
+  ...children: DOMChild<State, Action, Query>[]) => {
+    return new DOMElement<State, Action, Query, El, T>(
       makeCreateElementNS(namespace, name),
       extractAttrs(attributes.attrs),
       extractEvents(attributes.events),

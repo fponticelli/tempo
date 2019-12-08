@@ -43,7 +43,7 @@ export class DOMDynamicFragmentView<State, Query> extends DOMBaseFragmentView<Qu
   }
 }
 
-export const fragmentView = <State, Query>(views: View<State, Query>[]) => {
+export const fragmentView = <State, Query = unknown>(views: View<State, Query>[]) => {
   const dynamics = filterDynamics(views)
   if (dynamics.length > 0) {
     return new DOMDynamicFragmentView<State, Query>(views, (state: State) => {
@@ -54,9 +54,9 @@ export const fragmentView = <State, Query>(views: View<State, Query>[]) => {
   }
 }
 
-export class DOMFragmentTemplate<State, Query, Action> implements DOMTemplate<State, Query, Action> {
+export class DOMFragmentTemplate<State, Action, Query> implements DOMTemplate<State, Action, Query> {
   constructor(
-    readonly children: DOMTemplate<State, Query, Action>[]
+    readonly children: DOMTemplate<State, Action, Query>[]
   ) {}
 
   render(ctx: DOMContext<Action>, state: State): View<State, Query> {
@@ -65,5 +65,5 @@ export class DOMFragmentTemplate<State, Query, Action> implements DOMTemplate<St
   }
 }
 
-export const fragment = <State, Query, Action>(...children: DOMChild<State, Query, Action>[]): DOMTemplate<State, Query, Action> =>
-  new DOMFragmentTemplate<State, Query, Action>(mapArray(children, domChildToTemplate))
+export const fragment = <State, Action, Query = unknown>(...children: DOMChild<State, Action, Query>[]): DOMTemplate<State, Action, Query> =>
+  new DOMFragmentTemplate<State, Action, Query>(mapArray(children, domChildToTemplate))

@@ -19,7 +19,7 @@ import { DOMContext } from './context'
 import { filterDynamics, domChildToTemplate } from './utils/dom'
 import { mapArray } from 'tempo-core/lib/util/map'
 
-export class DOMComponentView<State, Query, Action> extends DOMDynamicFragmentView<State, Query> {
+export class DOMComponentView<State, Action, Query> extends DOMDynamicFragmentView<State, Query> {
   /* istanbul ignore next */
   constructor(
     readonly store: Store<State, Action>,
@@ -44,10 +44,10 @@ export class DOMComponentView<State, Query, Action> extends DOMDynamicFragmentVi
   }
 }
 
-export class DOMComponentTemplate<State, Query, Action> implements DOMTemplate<State, Query, Action> {
+export class DOMComponentTemplate<State, Action, Query> implements DOMTemplate<State, Action, Query> {
   constructor(
     readonly store: Store<State, Action>,
-    readonly children: DOMTemplate<State, Query, Action>[],
+    readonly children: DOMTemplate<State, Action, Query>[],
     readonly delayed: boolean
   ) {}
 
@@ -79,7 +79,7 @@ export class DOMComponentTemplate<State, Query, Action> implements DOMTemplate<S
     const newCtx = ctx.withDispatch(innerDispatch)
     const viewChildren = mapArray(this.children, child => child.render(newCtx, property.get()))
     const dynamics = filterDynamics(viewChildren)
-    const view = new DOMComponentView<State, Query, Action>(store, innerDispatch, viewChildren, dynamics, () => {
+    const view = new DOMComponentView<State, Action, Query>(store, innerDispatch, viewChildren, dynamics, () => {
       property.observable.off(update)
     })
     property.set(state)
@@ -87,10 +87,10 @@ export class DOMComponentTemplate<State, Query, Action> implements DOMTemplate<S
   }
 }
 
-export const component = <State, Query, Action>(
+export const component = <State, Action, Query = unknown>(
   attributes: {
     store: Store<State, Action>
     delayed?: boolean
   },
-  ...children: DOMChild<State, Query, Action>[]
-) => new DOMComponentTemplate<State, Query, Action>(attributes.store, mapArray(children, domChildToTemplate), attributes.delayed || false)
+  ...children: DOMChild<State, Action, Query>[]
+) => new DOMComponentTemplate<State, Action, Query>(attributes.store, mapArray(children, domChildToTemplate), attributes.delayed || false)

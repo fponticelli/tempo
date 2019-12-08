@@ -22,8 +22,8 @@ import { ObjectWithPath, TypeAtPath, ObjectWithField } from 'tempo-core/lib/type
 export class MatchView<
   Path extends IndexType[],
   State extends ObjectWithPath<Path, any>,
-  Query,
-  Action
+  Action,
+  Query
 > implements DynamicView<State, Query> {
   readonly kind = 'dynamic'
   constructor(
@@ -31,7 +31,7 @@ export class MatchView<
     private view: View<State, Query>,
     readonly path: Path,
     readonly matcher: {
-      [k in TypeAtPath<Path, State>]: DOMTemplate<DifferentiateAt<Path, State, k>, Query, Action>
+      [k in TypeAtPath<Path, State>]: DOMTemplate<DifferentiateAt<Path, State, k>, Action, Query>
     },
     readonly ctx: DOMContext<Action>
   ) {}
@@ -58,19 +58,19 @@ export class MatchView<
 export class MatchTemplate<
   Path extends IndexType[],
   State extends ObjectWithPath<Path, any>,
-  Query,
-  Action
-> implements DOMTemplate<State, Query, Action> {
+  Action,
+  Query
+> implements DOMTemplate<State, Action, Query> {
   constructor(
     readonly path: Path,
     readonly matcher: {
-      [k in TypeAtPath<Path, State>]: DOMTemplate<DifferentiateAt<Path, State, k>, Query, Action>
+      [k in TypeAtPath<Path, State>]: DOMTemplate<DifferentiateAt<Path, State, k>, Action, Query>
     }
   ) {}
   render(ctx: DOMContext<Action>, state: State) {
     const key = this.path.reduce((acc: any, key) => acc[key], state) as TypeAtPath<Path, State>
     const view = this.matcher[key].render(ctx, state as any)
-    return new MatchView<Path, State, Query, Action>(
+    return new MatchView<Path, State, Action, Query>(
       key,
       view,
       this.path,
@@ -83,15 +83,15 @@ export class MatchTemplate<
 export const match = <
   Path extends IndexType[],
   State extends ObjectWithPath<Path, any>,
-  Query,
-  Action
+  Action,
+  Query = unknown
 >(
   path: Path,
   matcher: {
-    [k in TypeAtPath<Path, State>]: DOMChild<DifferentiateAt<Path, State, k>, Query, Action>
+    [k in TypeAtPath<Path, State>]: DOMChild<DifferentiateAt<Path, State, k>, Action, Query>
   }
-): DOMTemplate<State, Query, Action> => {
-  return new MatchTemplate<Path, State, Query, Action>(
+): DOMTemplate<State, Action, Query> => {
+  return new MatchTemplate<Path, State, Action, Query>(
     path,
     Object.keys(matcher).reduce((acc, key) => {
       return {
@@ -99,23 +99,23 @@ export const match = <
         [key]: domChildToTemplate(matcher[key as keyof typeof matcher])
       }
     }, {} as {
-      [k in TypeAtPath<Path, State>]: DOMTemplate<DifferentiateAt<Path, State, k>, Query, Action>
+      [k in TypeAtPath<Path, State>]: DOMTemplate<DifferentiateAt<Path, State, k>, Action, Query>
     })
   )
 }
 
-export const matchKind = <State extends ObjectWithField<'kind', any>, Query, Action>(
+export const matchKind = <State extends ObjectWithField<'kind', any>, Action, Query = unknown>(
   matchers: {
-    [k in State['kind']]: DOMChild<DifferentiateAt<['kind'], State, k>, Query, Action>
+    [k in State['kind']]: DOMChild<DifferentiateAt<['kind'], State, k>, Action, Query>
   }
-): DOMTemplate<State, Query, Action> => match<['kind'], State, Query, Action>(['kind'], matchers)
+): DOMTemplate<State, Action, Query> => match<['kind'], State, Action, Query>(['kind'], matchers)
 
-export class MatchBoolView<State, Query, Action> implements DynamicView<State, Query> {
+export class MatchBoolView<State, Action, Query> implements DynamicView<State, Query> {
   readonly kind = 'dynamic'
   constructor(
     readonly condition: (state: State) => boolean,
-    readonly trueTemplate: DOMTemplate<State, Query, Action>,
-    readonly falseTemplate: DOMTemplate<State, Query, Action>,
+    readonly trueTemplate: DOMTemplate<State, Action, Query>,
+    readonly falseTemplate: DOMTemplate<State, Action, Query>,
     private view: View<State, Query>,
     private lastEvaluation: boolean,
     readonly ctx: DOMContext<Action>
@@ -144,18 +144,18 @@ export class MatchBoolView<State, Query, Action> implements DynamicView<State, Q
 
 export class MatchBoolTemplate<
   State,
-  Query,
-  Action
-> implements DOMTemplate<State, Query, Action> {
+  Action,
+  Query
+> implements DOMTemplate<State, Action, Query> {
   constructor(
     readonly condition: (state: State) => boolean,
-    readonly trueTemplate: DOMTemplate<State, Query, Action>,
-    readonly falseTemplate: DOMTemplate<State, Query, Action>
+    readonly trueTemplate: DOMTemplate<State, Action, Query>,
+    readonly falseTemplate: DOMTemplate<State, Action, Query>
   ) {}
   render(ctx: DOMContext<Action>, state: State) {
     const evaluation = this.condition(state)
     const view = evaluation ? this.trueTemplate.render(ctx, state) : this.falseTemplate.render(ctx, state)
-    return new MatchBoolView<State, Query, Action>(
+    return new MatchBoolView<State, Action, Query>(
       this.condition,
       this.trueTemplate,
       this.falseTemplate,
@@ -166,25 +166,25 @@ export class MatchBoolTemplate<
   }
 }
 
-export const matchBool = <State, Query, Action>(
+export const matchBool = <State, Action, Query = unknown>(
   options: {
     condition: (state: State) => boolean,
-    true: DOMChild<State, Query, Action>,
-    false: DOMChild<State, Query, Action>
+    true: DOMChild<State, Action, Query>,
+    false: DOMChild<State, Action, Query>
   }
-): DOMTemplate<State, Query, Action> => new MatchBoolTemplate<State, Query, Action>(
+): DOMTemplate<State, Action, Query> => new MatchBoolTemplate<State, Action, Query>(
   options.condition,
   domChildToTemplate(options.true),
   domChildToTemplate(options.false)
 )
 
-export class MatchValueView<State, Query, Action> implements DynamicView<State, Query> {
+export class MatchValueView<State, Action, Query> implements DynamicView<State, Query> {
   readonly kind = 'dynamic'
   constructor(
     readonly path: IndexType[],
     private key: string,
-    readonly matchers: { [_ in (string | number)]: DOMTemplate<State, Query, Action> },
-    readonly orElese: DOMTemplate<State, Query, Action>,
+    readonly matchers: { [_ in (string | number)]: DOMTemplate<State, Action, Query> },
+    readonly orElese: DOMTemplate<State, Action, Query>,
     private view: View<State, Query>,
     readonly ctx: DOMContext<Action>
   ) {}
@@ -211,21 +211,21 @@ export class MatchValueView<State, Query, Action> implements DynamicView<State, 
 
 export class MatchValueTemplate<
   State,
-  Query,
-  Action
-> implements DOMTemplate<State, Query, Action> {
+  Action,
+  Query
+> implements DOMTemplate<State, Action, Query> {
   constructor(
     readonly path: IndexType[],
     readonly matchers: {
-      [_ in (string | number)]: DOMTemplate<State, Query, Action>
+      [_ in (string | number)]: DOMTemplate<State, Action, Query>
     },
-    readonly orElse: DOMTemplate<State, Query, Action>
+    readonly orElse: DOMTemplate<State, Action, Query>
   ) {}
   render(ctx: DOMContext<Action>, state: State) {
     const key = this.path.reduce((acc: any, key) => acc[key], state)
     const template = this.matchers[key] || this.orElse
     const view = template.render(ctx, state)
-    return new MatchValueView<State, Query, Action>(
+    return new MatchValueView<State, Action, Query>(
       this.path,
       key,
       this.matchers,
@@ -236,15 +236,15 @@ export class MatchValueTemplate<
   }
 }
 
-export const matchValue = <Path extends IndexType[], State extends ObjectWithPath<Path, string>, Query, Action>(
+export const matchValue = <Path extends IndexType[], State extends ObjectWithPath<Path, string>, Action, Query = unknown>(
   path: Path,
   matchers: {
-    [_ in (string | number)]: DOMChild<State, Query, Action>
+    [_ in (string | number)]: DOMChild<State, Action, Query>
   },
-  orElse: DOMChild<State, Query, Action>
-): DOMTemplate<State, Query, Action> => new MatchValueTemplate<State, Query, Action>(
+  orElse: DOMChild<State, Action, Query>
+): DOMTemplate<State, Action, Query> => new MatchValueTemplate<State, Action, Query>(
   path,
-  Object.keys(matchers).reduce((acc: { [_ in (string | number)]: DOMTemplate<State, Query, Action> }, key: string) => {
+  Object.keys(matchers).reduce((acc: { [_ in (string | number)]: DOMTemplate<State, Action, Query> }, key: string) => {
     return {
       ...acc,
       [key]: domChildToTemplate(matchers[key])

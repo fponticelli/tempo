@@ -628,7 +628,10 @@ var DOMElement = /** @class */ (function () {
         }
         var beforedestroyf = this.beforedestroy && (function () { return _this.beforedestroy(el, ctx, value); });
         var request = this.respond ?
-            function (query) { return _this.respond(query, el, ctx); } :
+            function (query) {
+                views.forEach(function (view) { return view.request(query); });
+                _this.respond(query, el, ctx);
+            } :
             function () { };
         if (allDynamics.length > 0) {
             return new node_view_1.DOMDynamicNodeView(el, views, function (state) {

@@ -14,10 +14,10 @@ limitations under the License.
 import { DOMChild, DOMTemplate } from './template'
 import { until } from './until'
 
-export const forEach = <State extends any[], Query, Action>(
+export const forEach = <State extends any[], Action, Query = unknown>(
   options: { refId?: string },
-  ...children: DOMChild<State[number], Query, Action>[]
-): DOMTemplate<State, Query, Action> => until({
+  ...children: DOMChild<State[number], Action, Query>[]
+): DOMTemplate<State, Action, Query> => until({
   refId: options.refId || 't:for_each',
   repeatUntil: (state: State, index: number) => state[index]
 }, ...children)

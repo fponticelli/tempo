@@ -19,7 +19,7 @@ import { when, unless } from 'tempo-dom/lib/when'
 import { fragment } from 'tempo-dom/lib/fragment'
 import { linkRoute } from './link_route'
 
-const logo = svg<Route, unknown, Action>(
+const logo = svg<Route, Action>(
   { attrs: { width: 32, height: 32, viewBox: `0 0 32 32` } },
   g(
     { styles: { fill: 'none' } },
@@ -40,13 +40,13 @@ const headerLink = (feed: Feed) => {
         return false
     }
   }
-  return fragment<Route, unknown, Action>(
+  return fragment<Route, Action>(
     when({ condition }, span({ attrs: { 'aria-current': 'page' } }, toTitle(Route.feeds(feed, 1)))),
     unless({ condition }, linkRoute({ route: Route.feeds(feed, 1) }))
   )
 }
 
-export const appHeader = header<Route, unknown, Action>(
+export const appHeader = header<Route, Action>(
   {},
   linkRoute({ route: Route.root }, i({ attrs: { 'aria-label': 'Homepage', className: 'logo' } }, logo)),
   nav({}, ...[Feed.top, Feed.new, Feed.ask, Feed.show, Feed.jobs].map(headerLink)),

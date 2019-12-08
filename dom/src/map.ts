@@ -18,10 +18,10 @@ import { domChildToTemplate, filterDynamics } from './utils/dom'
 import { DOMStaticFragmentView, DOMDynamicFragmentView, fragmentView } from './fragment'
 import { mapArray } from 'tempo-core/lib/util/map'
 
-export class MapStateTemplate<OuterState, InnerState, Query, Action> implements DOMTemplate<OuterState, Query, Action> {
+export class MapStateTemplate<OuterState, InnerState, Action, Query> implements DOMTemplate<OuterState, Action, Query> {
   constructor(
     readonly map: (value: OuterState) => InnerState,
-    readonly children: DOMTemplate<InnerState, Query, Action>[]
+    readonly children: DOMTemplate<InnerState, Action, Query>[]
   ) {}
 
   render(ctx: DOMContext<Action>, state: OuterState): View<OuterState, Query> {
@@ -41,23 +41,23 @@ export class MapStateTemplate<OuterState, InnerState, Query, Action> implements 
   }
 }
 
-export const mapState = <OuterState, InnerState, Query, Action>(
+export const mapState = <OuterState, InnerState, Action, Query = unknown>(
   options: { map: (value: OuterState) => InnerState },
-  ...children: DOMChild<InnerState, Query, Action>[]
-): DOMTemplate<OuterState, Query, Action> => new MapStateTemplate(options.map, mapArray(children, domChildToTemplate))
+  ...children: DOMChild<InnerState, Action, Query>[]
+): DOMTemplate<OuterState, Action, Query> => new MapStateTemplate(options.map, mapArray(children, domChildToTemplate))
 
-export const mapStateAndKeep = <OuterState, InnerState, Query, Action>(
+export const mapStateAndKeep = <OuterState, InnerState, Action, Query = unknown>(
   options: { map: (value: OuterState) => InnerState },
-  ...children: DOMChild<[InnerState, OuterState], Query, Action>[]
-): DOMTemplate<OuterState, Query, Action> => new MapStateTemplate<OuterState, [InnerState, OuterState], Query, Action>(
+  ...children: DOMChild<[InnerState, OuterState], Action, Query>[]
+): DOMTemplate<OuterState, Action, Query> => new MapStateTemplate<OuterState, [InnerState, OuterState], Action, Query>(
   (state: OuterState) => ([options.map(state), state]),
   mapArray(children, domChildToTemplate)
 )
 
-export class MapActionTemplate<State, Query, OuterAction, InnerAction> implements DOMTemplate<State, Query, OuterAction> {
+export class MapActionTemplate<State, OuterAction, InnerAction, Query> implements DOMTemplate<State, OuterAction, Query> {
   constructor(
     readonly map: (value: InnerAction) => OuterAction | undefined,
-    readonly children: DOMTemplate<State, Query, InnerAction>[]
+    readonly children: DOMTemplate<State, InnerAction, Query>[]
   ) {}
 
   render(ctx: DOMContext<OuterAction>, state: State): View<State, Query> {
@@ -67,8 +67,8 @@ export class MapActionTemplate<State, Query, OuterAction, InnerAction> implement
   }
 }
 
-export const mapAction = <State, Query, OuterAction, InnerAction>(
+export const mapAction = <State, OuterAction, InnerAction, Query = unknown>(
   options: { map: (value: InnerAction) => OuterAction | undefined },
-  ...children: DOMChild<State, Query, InnerAction>[]
-): DOMTemplate<State, Query, OuterAction> =>
-  new MapActionTemplate<State, Query, OuterAction, InnerAction>(options.map, mapArray(children, domChildToTemplate))
+  ...children: DOMChild<State, InnerAction, Query>[]
+): DOMTemplate<State, OuterAction, Query> =>
+  new MapActionTemplate<State, OuterAction, InnerAction, Query>(options.map, mapArray(children, domChildToTemplate))
