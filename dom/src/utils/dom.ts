@@ -135,3 +135,21 @@ export function processStyle<State, Value>(
   }
   return acc
 }
+
+export const containerSize = (el: HTMLElement) => {
+  const prev = []
+  for (let i = 0; i < el.children.length; i++) {
+    const child = el.children[i] as HTMLElement
+    prev[i] = child.style.display
+    child.style.display = 'none'
+  }
+  const size = {
+    width: el.offsetWidth,
+    height: el.offsetHeight
+  }
+  for (let i = 0; i < el.children.length; i++) {
+    const child = el.children[i] as HTMLElement
+    child.style.display = prev[i]
+  }
+  return size
+}

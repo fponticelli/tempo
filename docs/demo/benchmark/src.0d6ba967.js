@@ -1133,7 +1133,31 @@ function $TnZD$var$processStyle(el, name, value, acc) {
 }
 
 var $TnZD$export$processStyle = $TnZD$var$processStyle;
-$TnZD$exports.processStyle = $TnZD$export$processStyle; //# sourceMappingURL=dom.js.map
+$TnZD$exports.processStyle = $TnZD$export$processStyle;
+
+var $TnZD$export$containerSize = function (el) {
+  var prev = [];
+
+  for (var i = 0; i < el.children.length; i++) {
+    var child = el.children[i];
+    prev[i] = child.style.display;
+    child.style.display = 'none';
+  }
+
+  var size = {
+    width: el.offsetWidth,
+    height: el.offsetHeight
+  };
+
+  for (var i = 0; i < el.children.length; i++) {
+    var child = el.children[i];
+    child.style.display = prev[i];
+  }
+
+  return size;
+};
+
+$TnZD$exports.containerSize = $TnZD$export$containerSize; //# sourceMappingURL=dom.js.map
 
 // ASSET: ../node_modules/tempo-dom/lib/element.js
 var $bbLX$exports = {};

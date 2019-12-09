@@ -18,7 +18,7 @@ export type DOMAttribute<State, Value> = UnwrappedValue<State, Value | undefined
 export type DOMTextValue<S> = DOMAttribute<S, string>
 export type DOMEventHandler<S, Action, Ev extends Event = Event, El extends Element = Element> =
   (state: S, event: Ev, element: El) => Action | undefined
-export type DOMStyleAttribute<State, Value> = UnwrappedValue<State, Value>
+export type DOMStyleAttribute<State, Value> = UnwrappedValue<State, Value | undefined>
 
 export type AttributeValue = string | number | boolean | string[]
 

@@ -9,7 +9,6 @@ import {
 } from 'tempo-core/lib/types/objects'
 import { TempoAttributes } from './tempo_attributes'
 import { ItemEvents, createItem } from './item'
-import { PaperTemplate } from './template'
 
 type WritablePath = ExcludeFunctionFields<
   RemoveNullableFromFields<WritableFields<Path>>
@@ -47,9 +46,8 @@ type PathConstrOptions<State, Action, Query, T> = Merge<
   >
 >
 
-export const path = <State, Action, Query, T = unknown>(
-  options: PathOptions<State, Action, Query, T>,
-  ...children: PaperTemplate<State, Action, Query>[]
+export const path = <State, Action, Query = unknown, T = unknown>(
+  options: PathOptions<State, Action, Query, T>
 ) =>
   createItem<
     State,
@@ -63,13 +61,11 @@ export const path = <State, Action, Query, T = unknown>(
       typeof options.args !== 'undefined'
         ? new Path(options.args)
         : new Path([]),
-    options,
-    children
+    options
   )
 
-export const pathLine = <State, Action, Query, T = unknown>(
-  options: PathConstrOptions<State, Action, Query, T>,
-  ...children: PaperTemplate<State, Action, Query>[]
+export const pathLine = <State, Action, Query = unknown, T = unknown>(
+  options: PathConstrOptions<State, Action, Query, T>
 ) =>
   createItem<
     State,
@@ -78,11 +74,10 @@ export const pathLine = <State, Action, Query, T = unknown>(
     Path,
     T,
     PathOptions<State, Action, Query, T>
-  >((_: State) => new Path.Line(options.args), options, children)
+  >((_: State) => new Path.Line(options.args), options)
 
-export const pathCircle = <State, Action, Query, T = unknown>(
-  options: PathConstrOptions<State, Action, Query, T>,
-  ...children: PaperTemplate<State, Action, Query>[]
+export const pathCircle = <State, Action, Query = unknown, T = unknown>(
+  options: PathConstrOptions<State, Action, Query, T>
 ) =>
   createItem<
     State,
@@ -91,11 +86,10 @@ export const pathCircle = <State, Action, Query, T = unknown>(
     Path,
     T,
     PathOptions<State, Action, Query, T>
-  >((_: State) => new Path.Circle(options.args), options, children)
+  >((_: State) => new Path.Circle(options.args), options)
 
-export const pathRectangle = <State, Action, Query, T = unknown>(
-  options: PathConstrOptions<State, Action, Query, T>,
-  ...children: PaperTemplate<State, Action, Query>[]
+export const pathRectangle = <State, Action, Query = unknown, T = unknown>(
+  options: PathConstrOptions<State, Action, Query, T>
 ) =>
   createItem<
     State,
@@ -104,11 +98,10 @@ export const pathRectangle = <State, Action, Query, T = unknown>(
     Path,
     T,
     PathOptions<State, Action, Query, T>
-  >((_: State) => new Path.Rectangle(options.args), options, children)
+  >((_: State) => new Path.Rectangle(options.args), options)
 
 export const pathEllipse = <State, Action, Query, T = unknown>(
-  options: PathConstrOptions<State, Action, Query, T>,
-  ...children: PaperTemplate<State, Action, Query>[]
+  options: PathConstrOptions<State, Action, Query, T>
 ) =>
   createItem<
     State,
@@ -117,11 +110,10 @@ export const pathEllipse = <State, Action, Query, T = unknown>(
     Path,
     T,
     PathOptions<State, Action, Query, T>
-  >((_: State) => new Path.Ellipse(options.args), options, children)
+  >((_: State) => new Path.Ellipse(options.args), options)
 
-export const pathArc = <State, Action, Query, T = unknown>(
-  options: PathConstrOptions<State, Action, Query, T>,
-  ...children: PaperTemplate<State, Action, Query>[]
+export const pathArc = <State, Action, Query = unknown, T = unknown>(
+  options: PathConstrOptions<State, Action, Query, T>
 ) =>
   createItem<
     State,
@@ -130,11 +122,10 @@ export const pathArc = <State, Action, Query, T = unknown>(
     Path,
     T,
     PathOptions<State, Action, Query, T>
-  >((_: State) => new Path.Arc(options.args), options, children)
+  >((_: State) => new Path.Arc(options.args), options)
 
-export const pathRegularPolygon = <State, Action, Query, T = unknown>(
-  options: PathConstrOptions<State, Action, Query, T>,
-  ...children: PaperTemplate<State, Action, Query>[]
+export const pathRegularPolygon = <State, Action, Query = unknown, T = unknown>(
+  options: PathConstrOptions<State, Action, Query, T>
 ) =>
   createItem<
     State,
@@ -143,11 +134,10 @@ export const pathRegularPolygon = <State, Action, Query, T = unknown>(
     Path,
     T,
     PathOptions<State, Action, Query, T>
-  >((_: State) => new Path.RegularPolygon(options.args), options, children)
+  >((_: State) => new Path.RegularPolygon(options.args), options)
 
-export const pathStar = <State, Action, Query, T = unknown>(
-  options: PathConstrOptions<State, Action, Query, T>,
-  ...children: PaperTemplate<State, Action, Query>[]
+export const pathStar = <State, Action, Query = unknown, T = unknown>(
+  options: PathConstrOptions<State, Action, Query, T>
 ) =>
   createItem<
     State,
@@ -156,4 +146,4 @@ export const pathStar = <State, Action, Query, T = unknown>(
     Path,
     T,
     PathOptions<State, Action, Query, T>
-  >((_: State) => new Path.Star(options.args), options, children)
+  >((_: State) => new Path.Star(options.args), options)

@@ -483,6 +483,23 @@ function processStyle(el, name, value, acc) {
     return acc;
 }
 exports.processStyle = processStyle;
+exports.containerSize = function (el) {
+    var prev = [];
+    for (var i = 0; i < el.children.length; i++) {
+        var child = el.children[i];
+        prev[i] = child.style.display;
+        child.style.display = 'none';
+    }
+    var size = {
+        width: el.offsetWidth,
+        height: el.offsetHeight
+    };
+    for (var i = 0; i < el.children.length; i++) {
+        var child = el.children[i];
+        child.style.display = prev[i];
+    }
+    return size;
+};
 
 },{"../dom_attributes_mapper":"UKQ2","./set_attribute":"BEVE","../text":"GqEk"}],"bbLX":[function(require,module,exports) {
 "use strict";

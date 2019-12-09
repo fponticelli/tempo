@@ -12,87 +12,113 @@ limitations under the License.
 */
 
 import { Tempo } from 'tempo-dom/lib/tempo'
-import { div } from 'tempo-dom/lib/html'
+import { main, li, span, a, article, section, header, ul } from 'tempo-dom/lib/html'
+import { iterate } from 'tempo-dom/lib/iterate'
+import { containerSize } from 'tempo-dom/lib/utils/dom'
+import { matchBool } from 'tempo-dom/lib/match'
+import { matchKind } from 'tempo-paper/lib/match'
+import { mapState } from 'tempo-dom/lib/map'
+import { createState, State, Example, CanvasState } from './state'
+import { Action } from './action'
+import { Query } from './query'
 import { Store } from 'tempo-store/lib/store'
+import { reduceOnKind } from 'tempo-store/lib/reducer'
 import { project } from 'tempo-paper/lib/project'
-import { circle, ellipse, rectangle } from 'tempo-paper/lib/shape'
-import { raster } from 'tempo-paper/lib/raster'
-import { Point, Size, Color, Raster } from 'paper'
+import { Size } from 'paper'
 
-const state = {
-  ellipsePosition: new Point(350, 200)
-}
+import { template as circle } from './circle/sample'
+import { template as path_simplification } from './path_simplification/sample'
 
-type State = typeof state
+const state = createState()
 
-type Action =
-  | undefined
-  | {
-      kind: 'MoveEllipse'
-      position: Point
-    }
-
-const reducer = (state: State, action: Action): State => {
-  if (action === undefined) return state
-  if (action.kind === 'MoveEllipse')
-    return {
-      ...state,
-      ellipsePosition: action.position
-    }
-  else {
-    return state
-  }
-}
+const reducer = reduceOnKind<State, Action>({
+  ChangeSample: (state, action) => ({
+    ...state,
+    selected: action.sample
+  }),
+  SetMainAreaSize: (state, action) => ({
+    ...state,
+    mainAreaSize: action.size
+  })
+})
 
 const store = Store.ofState({ state, reducer })
 
-const template = div<State, Action>(
+const template = article<State, Action, Query>(
   { attrs: { className: 'app' } },
-  div(
-    {},
-    project(
+  header(
+    { attrs: { class: 'header' } },
+    'header'
+  ),
+  section(
+    { attrs: { class: 'body' } },
+    section(
+      { attrs: { class: 'sidebar' } },
+      ul(
+        {},
+        iterate(
+          {
+            getArray: state => state.examples as unknown as Example[] // TODO
+          },
+          li<[Example, State, number], Action, unknown>(
+            {},
+            matchBool({
+              condition: ([item, state, index]) => item === state.selected,
+              true: span(
+                {},
+                ([item]) => item.split('_').join(' ')
+              ),
+              false: a(
+                  {
+                    attrs: { href: ([item]) => `#${item}` },
+                    events: { click: ([item]) => Action.changeSample(item) }
+                  },
+                  ([item]) => item.split('_').join(' ')
+                )
+            })
+          )
+        )
+      )
+    ),
+    main(
       {
-        width: 600,
-        height: 600
-      },
-      circle({
-        position: new Point(100, 100),
-        size: new Size(100, 100),
-        fillColor: new Color(0, 0.5, 1)
-      }),
-      rectangle({
-        position: new Point(200, 100),
-        size: new Size(100, 100),
-        fillColor: new Color('white'),
-        strokeColor: new Color(1, 0.5, 0),
-        strokeWidth: 2
-      }),
-      ellipse({
-        position: state => state.ellipsePosition,
-        size: new Size(200, 250),
-        fillColor: new Color(0.2, 0.1, 0.2),
-        onMouseDrag: (state, event, shape) => {
-          return {
-            kind: 'MoveEllipse',
-            position: new Point(
-              state.ellipsePosition.x! + event.delta!.x!,
-              state.ellipsePosition.y! + event.delta!.y!
-            )
+        attrs: { class: 'main' },
+        respond: (query: Query, el) => {
+          if (query.kind === 'MainAreaSize') {
+            const size = containerSize(el)
+            query.callback(new Size(size.width, size.height))
           }
         }
-      }),
-      raster({
-        position: new Point(200, 300),
-        size: new Size(30, 30),
-        source:
-          'https://helpx.adobe.com/content/dam/help/en/stock/how-to/visual-reverse-image-search/jcr_content/main-pars/image/visual-reverse-image-search-v2_intro.jpg',
-        onLoad: (s, n, raster: Raster) => {
-          raster.size = new Size(150, 150)
-          return undefined
-        }
+      },
+      matchBool({
+        condition: state => typeof state.mainAreaSize !== 'undefined',
+        true: mapState(
+          { map: state => ({ size: state.mainAreaSize!, kind: state.selected }) },
+          project<CanvasState, any, any>(
+            {
+              width: ({size}) => size.width!,
+              height: ({size}) => size.height!,
+            },
+            matchKind<CanvasState, any, any>({
+              circle: circle,
+              path_simplification: path_simplification
+            })
+          )
+        ),
+        false: ''
       })
     )
   )
 )
 
-Tempo.render({ store, template })
+const view = Tempo.render({ store, template })
+
+const updateSizeQuery = Query.mainAreaSize(size => {
+  view.store.process(Action.setMainAreaSize(size))
+})
+
+view.request(updateSizeQuery)
+
+window.addEventListener('resize', () => {
+  view.request(updateSizeQuery)
+}, false)

@@ -34,7 +34,7 @@ type LayerOptions<State, Action, Query, T> = MakeOptional<
   >
 >
 
-export const layer = <State, Action, Query, T = unknown>(
+export const layer = <State, Action, Query = unknown, T = unknown>(
   options: LayerOptions<State, Action, Query, T>,
   ...children: PaperTemplate<State, Action, Query>[]
 ) =>

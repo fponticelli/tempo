@@ -97,6 +97,7 @@ export const createItem = <State, Action, Query, I extends Item, T, Option>(
         kind: 'dynamic',
         f: (state: State, item: I, ctx: PaperContext<Action>) => {
           const anyItem = item as any
+
           anyItem[k] = (e: any) => {
             const action = attrf(state, e, item)
             if (typeof action !== 'undefined') {
@@ -109,7 +110,12 @@ export const createItem = <State, Action, Query, I extends Item, T, Option>(
       const attrf = attr as UnwrappedDerivedValue<State, any>
       return {
         kind: 'dynamic',
-        f: (state: State, item: I) => ((item as any)[k] = attrf(state))
+        f: (state: State, item: I) => {
+          const anyItem = item as any
+          const value = attrf(state)
+          // TODO
+          anyItem[k] = value
+        }
       }
     } else {
       return {
@@ -136,25 +142,23 @@ export const createItem = <State, Action, Query, I extends Item, T, Option>(
   }
   return new ItemTemplate<State, Action, Query, I, T>(
     make,
-    dynamics.length > 0
-      ? (
-          wrapper: { value: T | undefined },
-          ctx: PaperContext<Action>,
-          item: I,
-          views: View<State, Query>[] | undefined
-        ) => (state: State): void => {
-          if (beforechange) {
-            wrapper.value = beforechange(state, item, ctx, wrapper.value)
-          }
-          if (views) {
-            views.forEach(view => view.change(state))
-          }
-          dynamics.forEach(dyna => dyna(state, item, ctx))
-          if (afterchange) {
-            wrapper.value = afterchange(state, item, ctx, wrapper.value)
-          }
-        }
-      : () => (): void => {},
+    (
+      wrapper: { value: T | undefined },
+      ctx: PaperContext<Action>,
+      item: I,
+      views: View<State, Query>[] | undefined
+    ) => (state: State): void => {
+      if (beforechange) {
+        wrapper.value = beforechange(state, item, ctx, wrapper.value)
+      }
+      if (views) {
+        views.forEach(view => view.change(state))
+      }
+      dynamics.forEach(dyna => dyna(state, item, ctx))
+      if (afterchange) {
+        wrapper.value = afterchange(state, item, ctx, wrapper.value)
+      }
+    },
     (
       wrapper: { value: T | undefined },
       ctx: PaperContext<Action>,
