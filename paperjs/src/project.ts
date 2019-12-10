@@ -1,12 +1,12 @@
 import { el } from 'tempo-dom/lib/element'
 import { DOMAttribute } from 'tempo-dom/lib/value'
-import { Project, Layer, Item } from 'paper'
+import { Item, PaperScope } from 'paper'
 import { PaperTemplate } from './template'
 import { PaperContext } from './context'
 import { View } from 'tempo-core/lib/view'
 import { DOMContext } from 'tempo-dom/lib/context'
 
-interface PaperScope<State, Action, Query> {
+interface PaperLocal<State, Action, Query> {
   views: View<State, Query>[]
   context: PaperContext<Action>
 }
@@ -15,6 +15,7 @@ export const project = <State, Action, Query>(
   options: {
     width: DOMAttribute<State, number>
     height: DOMAttribute<State, number>
+    scope?: PaperScope
   },
   ...children: PaperTemplate<State, Action, Query>[]
 ) => {
@@ -23,7 +24,7 @@ export const project = <State, Action, Query>(
     Action,
     Query,
     HTMLCanvasElement,
-    PaperScope<State, Action, Query>
+    PaperLocal<State, Action, Query>
   >('canvas', {
     attrs: {
       width: options.width,
@@ -34,10 +35,14 @@ export const project = <State, Action, Query>(
       el: HTMLCanvasElement,
       ctx: DOMContext<Action>
     ) => {
-      const project = new Project(el)
-      const rootLayer = new Layer()
-      project.addLayer(rootLayer)
+      const scope = options.scope || PaperScope.get(0) as unknown as PaperScope
+      scope.setup(el)
+      scope.install(window)
+      scope.activate()
+      const project = scope.project!
+      const rootLayer = project.activeLayer
       const context = new PaperContext(
+        scope,
         project,
         (item: Item) => rootLayer.addChild(item),
         (action: Action) => ctx.dispatch(action)
@@ -49,7 +54,7 @@ export const project = <State, Action, Query>(
       state: State,
       el: HTMLCanvasElement,
       ctx,
-      scope: PaperScope<State, Action, Query> | undefined
+      scope: PaperLocal<State, Action, Query> | undefined
     ) => {
       scope?.views.forEach(view => view.change(state))
       return scope
@@ -57,7 +62,7 @@ export const project = <State, Action, Query>(
     beforedestroy: (
       el: HTMLCanvasElement,
       ctx,
-      scope: PaperScope<State, Action, Query> | undefined
+      scope: PaperLocal<State, Action, Query> | undefined
     ) => {
       if (typeof scope !== undefined) {
         const { context, views } = scope!
@@ -69,7 +74,7 @@ export const project = <State, Action, Query>(
       query: Query,
       el: HTMLCanvasElement,
       ctx: DOMContext<Action>,
-      scope: PaperScope<State, Action, Query> | undefined
+      scope: PaperLocal<State, Action, Query> | undefined
     ) => {
       if (typeof scope !== undefined) {
         const { views } = scope!

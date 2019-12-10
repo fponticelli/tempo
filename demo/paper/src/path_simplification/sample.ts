@@ -4,7 +4,7 @@ import { component } from 'tempo-paper/lib/component'
 import { iterate } from 'tempo-paper/lib/iterate'
 import { path } from 'tempo-paper/lib/path'
 import { CanvasState } from '../state'
-import { View, Segment, MouseEvent, Color, Path, Project } from 'paper'
+import { Segment, MouseEvent, Color, Path, View, PaperScope } from 'paper'
 import { Store } from 'tempo-store/lib/store'
 import { reduceOnKind } from 'tempo-store/lib/reducer'
 
@@ -12,8 +12,6 @@ const state = {
   paths: [] as Segment[][],
   current: [] as Segment[]
 }
-
-let project: Project
 
 type State = typeof state
 type Action = {
@@ -39,6 +37,7 @@ const reducer = reduceOnKind<State, Action>({
     }
   },
   AddPath: (state) => {
+    const project = (window.paper as PaperScope).project
     const path = new Path({
       segments: state.current.slice(0),
       insert: false,
@@ -71,18 +70,19 @@ export const template =
       layer<State, Action, unknown, View>(
         {
           afterrender: (state, el, ctx) => {
-            project = ctx.project // TODO dirty hack to remove
-            const view = ctx.project.view
-            view.onMouseDown = () => {
-            }
-            view.onMouseUp = () => {
+            // project = ctx.project // TODO dirty hack to remove
+            const tool = ctx.project.view // new Tool()
+            // tool.activate()
+            // const view = ctx.project.view
+            tool.onMouseDown = () => {}
+            tool.onMouseUp = () => {
               store.process(Action.addPath)
             }
-            view.onMouseDrag = (event: MouseEvent) => {
+            tool.onMouseDrag = (event: MouseEvent) => {
               const segment = new Segment(event.point!)
               store.process(Action.addSegment(segment))
             }
-            return view
+            return tool
           },
           beforedestroy: (el, ctx, view) => {
             if (view) {

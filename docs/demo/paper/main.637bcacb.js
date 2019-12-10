@@ -19615,7 +19615,8 @@ Object.defineProperty($rpUf$exports, "__esModule", {
 var $rpUf$var$PaperContext =
 /** @class */
 function () {
-  function PaperContext(project, append, dispatch) {
+  function PaperContext(scope, project, append, dispatch) {
+    this.scope = scope;
     this.project = project;
     this.append = append;
     this.dispatch = dispatch;
@@ -19624,7 +19625,7 @@ function () {
   PaperContext.prototype.mapAction = function (f) {
     var _this = this;
 
-    return new PaperContext(this.project, this.append, function (action) {
+    return new PaperContext(this.scope, this.project, this.append, function (action) {
       return _this.dispatch(f(action));
     });
   };
@@ -19632,7 +19633,7 @@ function () {
   PaperContext.prototype.conditionalMapAction = function (f) {
     var _this = this;
 
-    return new PaperContext(this.project, this.append, function (action) {
+    return new PaperContext(this.scope, this.project, this.append, function (action) {
       var newAction = f(action);
 
       if (typeof newAction !== 'undefined') {
@@ -19642,11 +19643,11 @@ function () {
   };
 
   PaperContext.prototype.withAppend = function (append) {
-    return new PaperContext(this.project, append, this.dispatch);
+    return new PaperContext(this.scope, this.project, append, this.dispatch);
   };
 
   PaperContext.prototype.withDispatch = function (dispatch) {
-    return new PaperContext(this.project, this.append, dispatch);
+    return new PaperContext(this.scope, this.project, this.append, dispatch);
   };
 
   return PaperContext;
@@ -19674,10 +19675,13 @@ var $ST02$export$project = function (options) {
       height: options.height
     },
     afterrender: function (state, el, ctx) {
-      var project = new $QMc8$exports.Project(el);
-      var rootLayer = new $QMc8$exports.Layer();
-      project.addLayer(rootLayer);
-      var context = new $rpUf$export$PaperContext(project, function (item) {
+      var scope = options.scope || $QMc8$exports.PaperScope.get(0);
+      scope.setup(el);
+      scope.install(window);
+      scope.activate();
+      var project = scope.project;
+      var rootLayer = project.activeLayer;
+      var context = new $rpUf$export$PaperContext(scope, project, function (item) {
         return rootLayer.addChild(item);
       }, function (action) {
         return ctx.dispatch(action);
@@ -37083,7 +37087,6 @@ var $fjlG$var$state = {
   paths: [],
   current: []
 };
-var $fjlG$var$project;
 var $fjlG$var$Action = {
   addSegment: function addSegment(segment) {
     return {
@@ -37103,10 +37106,11 @@ var $fjlG$var$reducer = $KKGP$export$reduceOnKind({
     });
   },
   AddPath: function AddPath(state) {
+    var scope = window.paper;
     var path = new $GYcQ$exports.Path({
       segments: state.current.slice(0),
       insert: false,
-      project: $fjlG$var$project
+      project: scope.project
     });
     path.simplify(10);
     var segments = path.segments;
@@ -37126,21 +37130,20 @@ var $fjlG$export$template = $gGAU$export$adapter({}, $FTaY$export$component({
   store: $fjlG$var$store
 }, $u3Hu$export$layer({
   afterrender: function afterrender(state, el, ctx) {
-    $fjlG$var$project = ctx.project;
-    var view = ctx.project.view;
+    var tool = ctx.project.view;
 
-    view.onMouseDown = function () {};
+    tool.onMouseDown = function () {};
 
-    view.onMouseUp = function () {
+    tool.onMouseUp = function () {
       $fjlG$var$store.process($fjlG$var$Action.addPath);
     };
 
-    view.onMouseDrag = function (event) {
+    tool.onMouseDrag = function (event) {
       var segment = new $GYcQ$exports.Segment(event.point);
       $fjlG$var$store.process($fjlG$var$Action.addSegment(segment));
     };
 
-    return view;
+    return tool;
   },
   beforedestroy: function beforedestroy(el, ctx, view) {
     if (view) {
