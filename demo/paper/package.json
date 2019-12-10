@@ -16,7 +16,7 @@
     "tempo-core": "1.2.0",
     "tempo-dom": "0.10.0",
     "tempo-store": "1.0.1",
-    "tempo-paper": "1.0.0",
+    "tempo-paper": "0.1.0",
     "paper": "0.12.3"
   },
   "devDependencies": {

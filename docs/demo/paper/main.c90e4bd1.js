@@ -37106,11 +37106,11 @@ var $fjlG$var$reducer = $KKGP$export$reduceOnKind({
     });
   },
   AddPath: function AddPath(state) {
-    var scope = window.paper;
+    var project = window.paper.project;
     var path = new $GYcQ$exports.Path({
       segments: state.current.slice(0),
       insert: false,
-      project: scope.project
+      project: project
     });
     path.simplify(10);
     var segments = path.segments;

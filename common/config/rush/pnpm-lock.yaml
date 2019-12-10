@@ -13,7 +13,6 @@ dependencies:
   '@types/jest': 24.0.22
   '@types/jsdom': 12.2.4
   '@types/node': 10.12.18
-  '@types/paper': 0.12.3
   babel-types: 6.26.0
   cssnano: 4.1.10
   dompurify: 2.0.7
@@ -26,11 +25,8 @@ dependencies:
   prettier: 1.19.1
   request: 2.88.0
   request-promise-native: 1.0.7_request@2.88.0
-  sass: 1.23.3
   stealthy-require: 1.0.0
   sw-precache: 5.2.1
-  tempo-core: 1.1.0
-  tempo-dom: 0.9.0
   todomvc-app-css: 2.2.0
   todomvc-common: 1.0.5
   ts-jest: 24.1.0_jest@24.9.0
@@ -6479,6 +6475,15 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-1DKRZxJMOh4Bme16AbWTyYeJAjTlrvw2+fWshHHaepeJfGq2soFZTnt0YhWit+bohtDu4LdyPoEj6VFD4APHog==
+  /sass/1.23.7:
+    dependencies:
+      chokidar: 3.3.0
+    dev: false
+    engines:
+      node: '>=8.9.0'
+    hasBin: true
+    resolution:
+      integrity: sha512-cYgc0fanwIpi0rXisGxl+/wadVQ/HX3RhpdRcjLdj2o2ye/sxUTpAxIhbmJy3PLQgRFbf6Pn8Jsrta2vdXcoOQ==
   /sax/1.2.4:
     dev: false
     resolution:
@@ -7837,6 +7842,7 @@ packages:
       paper: 0.12.3
       parcel-bundler: 1.12.4
       prettier: 1.19.1
+      sass: 1.23.7
       tempo-core: 1.0.1
       tempo-dom: 0.8.3
       tslint: 5.20.1_typescript@3.7.2
@@ -7844,7 +7850,7 @@ packages:
     dev: false
     name: '@rush-temp/tempo-demo.paper'
     resolution:
-      integrity: sha512-DQDAnBfDOtyPWOKnPtq5bnkOPUizqPr3ciD/LRy8/87OYbFZogfeHWCFneILgQDgxpoimh8RuRbJvRXEFZUdog==
+      integrity: sha512-Xkg/LkwjtIG9aTnuGCJoEjR7Oc41fSXr+bEZOnPI+gRnUGOC31O1Q6BfwcdtY4Uvci3vX+GprDZj9Y2OqGsZ2w==
       tarball: 'file:projects/tempo-demo.paper.tgz'
     version: 0.0.0
   'file:projects/tempo-demo.readme.tgz':
@@ -7918,7 +7924,7 @@ packages:
     dev: false
     name: '@rush-temp/tempo-paper'
     resolution:
-      integrity: sha512-6fR8maivw/iq5w8a8UtZNVPZ+dh4KmmNEK6cOs7Qun10g54LXLiNaFVg5xKC4dZLItNJgFPhRC931UaDdwDVhA==
+      integrity: sha512-C79+kHs83cCONh5sYsB/WFWELEbfeO1DHX0y2pyZWU33VFlKeQU23TiXHkYmUfs+vZsLmlEky9dpUgBd+XiJLw==
       tarball: 'file:projects/tempo-paper.tgz'
     version: 0.0.0
   'file:projects/tempo-root.tgz':
@@ -7964,7 +7970,6 @@ specifiers:
   '@types/jest': 24.0.22
   '@types/jsdom': 12.2.4
   '@types/node': 10.12.18
-  '@types/paper': 0.12.3
   babel-types: 6.26.0
   cssnano: 4.1.10
   dompurify: 2.0.7
@@ -7977,11 +7982,8 @@ specifiers:
   prettier: 1.19.1
   request: 2.88.0
   request-promise-native: 1.0.7
-  sass: 1.23.3
   stealthy-require: 1.0.0
   sw-precache: 5.2.1
-  tempo-core: 1.1.0
-  tempo-dom: 0.9.0
   todomvc-app-css: 2.2.0
   todomvc-common: 1.0.5
   ts-jest: 24.1.0
