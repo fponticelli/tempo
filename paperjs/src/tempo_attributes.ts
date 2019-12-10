@@ -1,7 +1,6 @@
-import { Item } from 'paper'
 import { PaperContext } from './context'
 
-export interface TempoAttributes<State, Action, Query, El extends Item, T> {
+export interface TempoAttributes<State, Action, Query, El, T> {
   readonly afterrender?:
     | undefined
     | ((state: State, el: El, ctx: PaperContext<Action>) => T | undefined)
