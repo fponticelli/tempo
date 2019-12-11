@@ -1,5 +1,5 @@
-import { Tool } from 'paper'
-import { PaperAttribute, resolveAttribute } from './value'
+import { Tool, KeyEvent, MouseEvent } from 'paper'
+import { PaperAttribute, resolveAttribute, PaperEventHandler } from './value'
 import {
   WritableFields,
   ExcludeFunctionFields,
@@ -8,9 +8,10 @@ import {
   MakeOptional
 } from 'tempo-core/lib/types/objects'
 import { TempoAttributes } from './tempo_attributes'
-import { PaperTemplate } from 'paperjs/lib/template'
-import { PaperContext } from 'paperjs/lib/context'
+import { PaperTemplate } from './template'
+import { PaperContext } from './context'
 import { UnwrappedDerivedValue } from 'tempo-core/lib/value'
+import { keys } from 'tempo-core/lib/util/objects'
 
 type WritableTool = ExcludeFunctionFields<
   RemoveNullableFromFields<WritableFields<Tool>>
@@ -27,7 +28,13 @@ interface ToolAttributes<State> {
 }
 
 interface ToolEvents<State, Action> {
+  onMouseDown?: PaperEventHandler<State, Action, MouseEvent, Tool>
+  onMouseDrag?: PaperEventHandler<State, Action, MouseEvent, Tool>
+  onMouseMove?: PaperEventHandler<State, Action, MouseEvent, Tool>
+  onMouseUp?: PaperEventHandler<State, Action, MouseEvent, Tool>
 
+  onKeyDown?: PaperEventHandler<State, Action, KeyEvent, Tool>
+  onKeyUp?: PaperEventHandler<State, Action, KeyEvent, Tool>
 }
 
 type ToolOptions<State, Action, Query, T> = MakeOptional<
@@ -43,8 +50,6 @@ type ToolOptions<State, Action, Query, T> = MakeOptional<
   >
 >
 
-const attrs = ['minDistance', 'maxDistance', 'fixedDistance']
-
 export const tool = <State, Action, Query = unknown, T = unknown>(
   options: ToolOptions<State, Action, Query, T>
 ): PaperTemplate<State, Action, Query> => {
@@ -54,27 +59,41 @@ export const tool = <State, Action, Query = unknown, T = unknown>(
       let value: T | undefined
       if (options.afterrender)
          value = options.afterrender(state, tool, ctx)
-      if (resolveAttribute(options.active))
+      const active = resolveAttribute(options.active)(state)
+      if (typeof active === 'undefined' || active === true)
         tool.activate()
 
       const derived = [] as ((state: State) => void)[]
+
+      derived.push((newState: State) => state = newState)
+
       if (typeof options.active === 'function')
         derived.push((state: State) => {
           const fun = options.active! as UnwrappedDerivedValue<State, boolean>
           if (fun(state)) tool.activate()
         })
 
-      for (const attr of attrs) {
-        if (typeof options[attr] !== 'undefined') continue
-        const value = resolveAttribute(options[attr])
-        tool[attr] = falue
-        if (typeof options[attr] === 'function') {
-          derived.push((state: State) => {
-            const fun = options[attr]! as UnwrappedDerivedValue<State, boolean>
-            options[attr] = fun(state)
-          })
+      const anyTool = tool as any
+      keys(options).forEach(attr => {
+        if (attr.startsWith('on')) {
+          const f = options[attr] as PaperEventHandler<State, Action, any, Tool>
+          anyTool[attr] = (event: any) => {
+            const action = f(state, event, tool, ctx.project)
+            if (typeof action !== 'undefined')
+              ctx.dispatch(action)
+          }
+        } else {
+          const value = resolveAttribute(options[attr])
+          anyTool[attr] = value
+          if (typeof options[attr] === 'function') {
+            const k = attr as keyof ToolOptions<State, Action, Query, T>
+            derived.push((state: State) => {
+              const fun = options[k]! as UnwrappedDerivedValue<State, boolean>
+              anyTool[k] = fun(state)
+            })
+          }
         }
-      }
+      })
 
       return {
         change(state: State) {
@@ -89,6 +108,7 @@ export const tool = <State, Action, Query = unknown, T = unknown>(
         destroy() {
           if (options.beforedestroy)
             options.beforedestroy(tool, ctx, value)
+          tool.remove()
         },
         request(query: Query) {
 

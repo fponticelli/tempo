@@ -2992,150 +2992,150 @@ function $Ybsf$init() {
 // don't break things.  But we need to wrap it in a try catch in case it is
 // wrapped in strict mode code which doesn't define any globals.  It's inside a
 // function because try/catches deoptimize in certain engines.
-var $wFDg$var$cachedSetTimeout;
-var $wFDg$var$cachedClearTimeout;
+var $Uzzg$var$cachedSetTimeout;
+var $Uzzg$var$cachedClearTimeout;
 
-function $wFDg$var$defaultSetTimout() {
+function $Uzzg$var$defaultSetTimout() {
   throw new Error('setTimeout has not been defined');
 }
 
-function $wFDg$var$defaultClearTimeout() {
+function $Uzzg$var$defaultClearTimeout() {
   throw new Error('clearTimeout has not been defined');
 }
 
 (function () {
   try {
     if (typeof setTimeout === 'function') {
-      $wFDg$var$cachedSetTimeout = setTimeout;
+      $Uzzg$var$cachedSetTimeout = setTimeout;
     } else {
-      $wFDg$var$cachedSetTimeout = $wFDg$var$defaultSetTimout;
+      $Uzzg$var$cachedSetTimeout = $Uzzg$var$defaultSetTimout;
     }
   } catch (e) {
-    $wFDg$var$cachedSetTimeout = $wFDg$var$defaultSetTimout;
+    $Uzzg$var$cachedSetTimeout = $Uzzg$var$defaultSetTimout;
   }
 
   try {
     if (typeof clearTimeout === 'function') {
-      $wFDg$var$cachedClearTimeout = clearTimeout;
+      $Uzzg$var$cachedClearTimeout = clearTimeout;
     } else {
-      $wFDg$var$cachedClearTimeout = $wFDg$var$defaultClearTimeout;
+      $Uzzg$var$cachedClearTimeout = $Uzzg$var$defaultClearTimeout;
     }
   } catch (e) {
-    $wFDg$var$cachedClearTimeout = $wFDg$var$defaultClearTimeout;
+    $Uzzg$var$cachedClearTimeout = $Uzzg$var$defaultClearTimeout;
   }
 })();
 
-function $wFDg$var$runTimeout(fun) {
-  if ($wFDg$var$cachedSetTimeout === setTimeout) {
+function $Uzzg$var$runTimeout(fun) {
+  if ($Uzzg$var$cachedSetTimeout === setTimeout) {
     //normal enviroments in sane situations
     return setTimeout(fun, 0);
   } // if setTimeout wasn't available but was latter defined
 
 
-  if (($wFDg$var$cachedSetTimeout === $wFDg$var$defaultSetTimout || !$wFDg$var$cachedSetTimeout) && setTimeout) {
-    $wFDg$var$cachedSetTimeout = setTimeout;
+  if (($Uzzg$var$cachedSetTimeout === $Uzzg$var$defaultSetTimout || !$Uzzg$var$cachedSetTimeout) && setTimeout) {
+    $Uzzg$var$cachedSetTimeout = setTimeout;
     return setTimeout(fun, 0);
   }
 
   try {
     // when when somebody has screwed with setTimeout but no I.E. maddness
-    return $wFDg$var$cachedSetTimeout(fun, 0);
+    return $Uzzg$var$cachedSetTimeout(fun, 0);
   } catch (e) {
     try {
       // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
-      return $wFDg$var$cachedSetTimeout.call(null, fun, 0);
+      return $Uzzg$var$cachedSetTimeout.call(null, fun, 0);
     } catch (e) {
       // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
-      return $wFDg$var$cachedSetTimeout.call(this, fun, 0);
+      return $Uzzg$var$cachedSetTimeout.call(this, fun, 0);
     }
   }
 }
 
-function $wFDg$var$runClearTimeout(marker) {
-  if ($wFDg$var$cachedClearTimeout === clearTimeout) {
+function $Uzzg$var$runClearTimeout(marker) {
+  if ($Uzzg$var$cachedClearTimeout === clearTimeout) {
     //normal enviroments in sane situations
     return clearTimeout(marker);
   } // if clearTimeout wasn't available but was latter defined
 
 
-  if (($wFDg$var$cachedClearTimeout === $wFDg$var$defaultClearTimeout || !$wFDg$var$cachedClearTimeout) && clearTimeout) {
-    $wFDg$var$cachedClearTimeout = clearTimeout;
+  if (($Uzzg$var$cachedClearTimeout === $Uzzg$var$defaultClearTimeout || !$Uzzg$var$cachedClearTimeout) && clearTimeout) {
+    $Uzzg$var$cachedClearTimeout = clearTimeout;
     return clearTimeout(marker);
   }
 
   try {
     // when when somebody has screwed with setTimeout but no I.E. maddness
-    return $wFDg$var$cachedClearTimeout(marker);
+    return $Uzzg$var$cachedClearTimeout(marker);
   } catch (e) {
     try {
       // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
-      return $wFDg$var$cachedClearTimeout.call(null, marker);
+      return $Uzzg$var$cachedClearTimeout.call(null, marker);
     } catch (e) {
       // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
       // Some versions of I.E. have different rules for clearTimeout vs setTimeout
-      return $wFDg$var$cachedClearTimeout.call(this, marker);
+      return $Uzzg$var$cachedClearTimeout.call(this, marker);
     }
   }
 }
 
-var $wFDg$var$queue = [];
-var $wFDg$var$draining = false;
-var $wFDg$var$currentQueue;
-var $wFDg$var$queueIndex = -1;
+var $Uzzg$var$queue = [];
+var $Uzzg$var$draining = false;
+var $Uzzg$var$currentQueue;
+var $Uzzg$var$queueIndex = -1;
 
-function $wFDg$var$cleanUpNextTick() {
-  if (!$wFDg$var$draining || !$wFDg$var$currentQueue) {
+function $Uzzg$var$cleanUpNextTick() {
+  if (!$Uzzg$var$draining || !$Uzzg$var$currentQueue) {
     return;
   }
 
-  $wFDg$var$draining = false;
+  $Uzzg$var$draining = false;
 
-  if ($wFDg$var$currentQueue.length) {
-    $wFDg$var$queue = $wFDg$var$currentQueue.concat($wFDg$var$queue);
+  if ($Uzzg$var$currentQueue.length) {
+    $Uzzg$var$queue = $Uzzg$var$currentQueue.concat($Uzzg$var$queue);
   } else {
-    $wFDg$var$queueIndex = -1;
+    $Uzzg$var$queueIndex = -1;
   }
 
-  if ($wFDg$var$queue.length) {
-    $wFDg$var$drainQueue();
+  if ($Uzzg$var$queue.length) {
+    $Uzzg$var$drainQueue();
   }
 }
 
-function $wFDg$var$drainQueue() {
-  if ($wFDg$var$draining) {
+function $Uzzg$var$drainQueue() {
+  if ($Uzzg$var$draining) {
     return;
   }
 
-  var timeout = $wFDg$var$runTimeout($wFDg$var$cleanUpNextTick);
-  $wFDg$var$draining = true;
-  var len = $wFDg$var$queue.length;
+  var timeout = $Uzzg$var$runTimeout($Uzzg$var$cleanUpNextTick);
+  $Uzzg$var$draining = true;
+  var len = $Uzzg$var$queue.length;
 
   while (len) {
-    $wFDg$var$currentQueue = $wFDg$var$queue;
-    $wFDg$var$queue = [];
+    $Uzzg$var$currentQueue = $Uzzg$var$queue;
+    $Uzzg$var$queue = [];
 
-    while (++$wFDg$var$queueIndex < len) {
-      if ($wFDg$var$currentQueue) {
-        $wFDg$var$currentQueue[$wFDg$var$queueIndex].run();
+    while (++$Uzzg$var$queueIndex < len) {
+      if ($Uzzg$var$currentQueue) {
+        $Uzzg$var$currentQueue[$Uzzg$var$queueIndex].run();
       }
     }
 
-    $wFDg$var$queueIndex = -1;
-    len = $wFDg$var$queue.length;
+    $Uzzg$var$queueIndex = -1;
+    len = $Uzzg$var$queue.length;
   }
 
-  $wFDg$var$currentQueue = null;
-  $wFDg$var$draining = false;
-  $wFDg$var$runClearTimeout(timeout);
+  $Uzzg$var$currentQueue = null;
+  $Uzzg$var$draining = false;
+  $Uzzg$var$runClearTimeout(timeout);
 }
 
 // v8 likes predictible objects
-function $wFDg$var$Item(fun, array) {
+function $Uzzg$var$Item(fun, array) {
   this.fun = fun;
   this.array = array;
 }
 
-$wFDg$var$Item.prototype.run = function () {
+$Uzzg$var$Item.prototype.run = function () {
   this.fun.apply(null, this.array);
 };
 
@@ -19656,6 +19656,23 @@ function () {
 var $rpUf$export$PaperContext = $rpUf$var$PaperContext;
 $rpUf$exports.PaperContext = $rpUf$export$PaperContext; //# sourceMappingURL=context.js.map
 
+// ASSET: ../node_modules/tempo-paper/lib/value.js
+var $Y8w1$exports = {};
+Object.defineProperty($Y8w1$exports, "__esModule", {
+  value: true
+});
+
+var $Y8w1$export$resolveAttribute = function (attr) {
+  if (typeof attr === 'function') {
+    return attr;
+  } else {
+    return function (_) {
+      return attr;
+    };
+  }
+};
+
+$Y8w1$exports.resolveAttribute = $Y8w1$export$resolveAttribute;
 // ASSET: ../node_modules/tempo-paper/lib/project.js
 var $ST02$exports = {};
 Object.defineProperty($ST02$exports, "__esModule", {
@@ -19676,10 +19693,29 @@ var $ST02$export$project = function (options) {
     },
     afterrender: function (state, el, ctx) {
       var scope = options.scope || $QMc8$exports.PaperScope.get(0);
+      var derived = [];
       scope.setup(el);
       scope.install(window);
-      scope.activate();
+      var active = $Y8w1$export$resolveAttribute(options.active)(state);
+
+      if (typeof active === 'undefined' || active === true) {
+        scope.activate();
+      }
+
       var project = scope.project;
+
+      if (typeof active === 'undefined' || active === true) {
+        project.activate();
+      }
+
+      if (typeof options.active === 'function') derived.push(function (state) {
+        var fun = options.active;
+
+        if (fun(state)) {
+          scope.activate();
+          project.activate();
+        }
+      });
       var rootLayer = project.activeLayer;
       var context = new $rpUf$export$PaperContext(scope, project, function (item) {
         return rootLayer.addChild(item);
@@ -19691,13 +19727,17 @@ var $ST02$export$project = function (options) {
       });
       return {
         context: context,
-        views: views
+        views: views,
+        derived: derived
       };
     },
     afterchange: function (state, el, ctx, scope) {
-      var _a;
+      var _a, _b;
 
-      (_a = scope) === null || _a === void 0 ? void 0 : _a.views.forEach(function (view) {
+      (_a = scope) === null || _a === void 0 ? void 0 : _a.derived.forEach(function (f) {
+        return f(state);
+      });
+      (_b = scope) === null || _b === void 0 ? void 0 : _b.views.forEach(function (view) {
         return view.change(state);
       });
       return scope;
@@ -36256,7 +36296,7 @@ var $ftoX$export$createItem = function (makeItem, options, children) {
           var anyItem = item;
 
           anyItem[k] = function (e) {
-            var action = attrf_1(state, e, item);
+            var action = attrf_1(state, e, item, ctx.project);
 
             if (typeof action !== 'undefined') {
               ctx.dispatch(action);
@@ -36416,26 +36456,6 @@ var $csCT$export$template = $q9iH$export$circle({
   }
 });
 $csCT$exports.template = $csCT$export$template;
-// ASSET: ../node_modules/tempo-paper/lib/layer.js
-var $u3Hu$exports = {};
-Object.defineProperty($u3Hu$exports, "__esModule", {
-  value: true
-});
-
-var $u3Hu$export$layer = function (options) {
-  var children = [];
-
-  for (var _i = 1; _i < arguments.length; _i++) {
-    children[_i - 1] = arguments[_i];
-  }
-
-  return $ftoX$export$createItem(function (_) {
-    return typeof options.args !== 'undefined' ? new $QMc8$exports.Layer(options.args) : new $QMc8$exports.Layer([]);
-  }, options, children);
-};
-
-$u3Hu$exports.layer = $u3Hu$export$layer; //# sourceMappingURL=layer.js.map
-
 // ASSET: ../node_modules/tempo-paper/lib/adapter.js
 var $gGAU$exports = {};
 Object.defineProperty($gGAU$exports, "__esModule", {
@@ -37061,6 +37081,124 @@ var $kzB0$export$pathStar = function (options) {
 
 $kzB0$exports.pathStar = $kzB0$export$pathStar; //# sourceMappingURL=path.js.map
 
+// ASSET: ../node_modules/tempo-paper/lib/tool.js
+var $VFAJ$exports = {};
+Object.defineProperty($VFAJ$exports, "__esModule", {
+  value: true
+});
+
+var $VFAJ$export$tool = function (options) {
+  return {
+    render: function (ctx, state) {
+      var tool = new ctx.scope.Tool();
+      var value;
+      if (options.afterrender) value = options.afterrender(state, tool, ctx);
+      var active = $Y8w1$export$resolveAttribute(options.active)(state);
+      if (typeof active === 'undefined' || active === true) tool.activate();
+      var derived = [];
+      derived.push(function (newState) {
+        return state = newState;
+      });
+      if (typeof options.active === 'function') derived.push(function (state) {
+        var fun = options.active;
+        if (fun(state)) tool.activate();
+      });
+      var anyTool = tool;
+      $e5bF$export$keys(options).forEach(function (attr) {
+        if (attr.startsWith('on')) {
+          var f_1 = options[attr];
+
+          anyTool[attr] = function (event) {
+            var action = f_1(state, event, tool, ctx.project);
+            if (typeof action !== 'undefined') ctx.dispatch(action);
+          };
+        } else {
+          var value_2 = $Y8w1$export$resolveAttribute(options[attr]);
+          anyTool[attr] = value_2;
+
+          if (typeof options[attr] === 'function') {
+            var k_1 = attr;
+            derived.push(function (state) {
+              var fun = options[k_1];
+              anyTool[k_1] = fun(state);
+            });
+          }
+        }
+      });
+      return {
+        change: function (state) {
+          if (options.beforechange) value = options.beforechange(state, tool, ctx, value);
+          derived.forEach(function (d) {
+            return d(state);
+          });
+          if (options.afterchange) value = options.afterchange(state, tool, ctx, value);
+        },
+        destroy: function () {
+          if (options.beforedestroy) options.beforedestroy(tool, ctx, value);
+          tool.remove();
+        },
+        request: function (query) {}
+      };
+    }
+  };
+};
+
+$VFAJ$exports.tool = $VFAJ$export$tool; //# sourceMappingURL=tool.js.map
+
+// ASSET: ../node_modules/tempo-core/lib/util/match.js
+var $aGwy$exports = {};
+Object.defineProperty($aGwy$exports, "__esModule", {
+  value: true
+});
+
+var $aGwy$export$match = function (field, matcher, input) {
+  var k = input[field];
+  return matcher[k](input);
+};
+
+$aGwy$exports.match = $aGwy$export$match;
+
+var $aGwy$export$deepMatch = function (path, matcher, input) {
+  var k = path.reduce(function (res, key) {
+    return res[key];
+  }, input);
+  return matcher[k](input);
+};
+
+$aGwy$exports.deepMatch = $aGwy$export$deepMatch;
+
+var $aGwy$export$createMatch = function (field) {
+  return function (matcher) {
+    return function (input) {
+      var k = input[field];
+      return matcher[k](input);
+    };
+  };
+};
+
+$aGwy$exports.createMatch = $aGwy$export$createMatch;
+
+var $aGwy$export$createDeepMatch = function () {
+  var path = [];
+
+  for (var _i = 0; _i < arguments.length; _i++) {
+    path[_i] = arguments[_i];
+  }
+
+  return function (matcher) {
+    return function (input) {
+      var k = path.reduce(function (res, key) {
+        return res[key];
+      }, input);
+      return matcher[k](input);
+    };
+  };
+};
+
+$aGwy$exports.createDeepMatch = $aGwy$export$createDeepMatch;
+var $aGwy$export$matchKind = $aGwy$export$createMatch('kind');
+$aGwy$exports.matchKind = $aGwy$export$matchKind; //# sourceMappingURL=match.js.map
+
 // ASSET: path_simplification/sample.ts
 var $fjlG$exports = {};
 
@@ -37083,9 +37221,24 @@ var $fjlG$var$__assign = $fjlG$exports && $fjlG$exports.__assign || function () 
 Object.defineProperty($fjlG$exports, "__esModule", {
   value: true
 });
+var $fjlG$var$Mode = {
+  idle: {
+    kind: 'idle'
+  },
+  drawing: {
+    kind: 'drawing'
+  },
+  editing: function editing(pathIndex) {
+    return {
+      kind: 'editing',
+      pathIndex: pathIndex
+    };
+  }
+};
 var $fjlG$var$state = {
   paths: [],
-  current: []
+  current: [],
+  mode: $fjlG$var$Mode.idle
 };
 var $fjlG$var$Action = {
   addSegment: function addSegment(segment) {
@@ -37096,8 +37249,33 @@ var $fjlG$var$Action = {
   },
   addPath: {
     kind: 'AddPath'
+  },
+  selectPath: function selectPath(pathIndex) {
+    return {
+      kind: 'ChangeMode',
+      mode: $fjlG$var$Mode.editing(pathIndex)
+    };
+  },
+  unselect: {
+    kind: 'ChangeMode',
+    mode: $fjlG$var$Mode.idle
+  },
+  draw: {
+    kind: 'ChangeMode',
+    mode: $fjlG$var$Mode.drawing
+  },
+  updatePosition: function updatePosition(delta) {
+    return {
+      kind: 'UpdatePosition',
+      delta: delta
+    };
   }
 };
+
+var $fjlG$var$getActiveProject = function getActiveProject() {
+  return window.paper.project;
+};
+
 var $fjlG$var$reducer = $KKGP$export$reduceOnKind({
   AddSegment: function AddSegment(state, action) {
     var current = state.current.concat([action.segment]);
@@ -37106,53 +37284,98 @@ var $fjlG$var$reducer = $KKGP$export$reduceOnKind({
     });
   },
   AddPath: function AddPath(state) {
-    var project = window.paper.project;
     var path = new $GYcQ$exports.Path({
       segments: state.current.slice(0),
       insert: false,
-      project: project
+      project: $fjlG$var$getActiveProject()
     });
     path.simplify(10);
-    var segments = path.segments;
+    var paths = state.paths.concat([{
+      segments: path.segments,
+      position: new $GYcQ$exports.Point(0, 0)
+    }]);
     path.remove();
     return $fjlG$var$__assign($fjlG$var$__assign({}, state), {
-      paths: state.paths.concat([segments]),
-      current: []
+      paths: paths,
+      current: [],
+      mode: $fjlG$var$Mode.idle
     });
+  },
+  ChangeMode: function ChangeMode(state, action) {
+    return $fjlG$var$__assign($fjlG$var$__assign({}, state), {
+      mode: action.mode
+    });
+  },
+  UpdatePosition: function UpdatePosition(state, action) {
+    if (state.mode.kind === 'editing') {
+      var old = state.paths[state.mode.pathIndex];
+      var item = $fjlG$var$__assign($fjlG$var$__assign({}, old), {
+        position: old.position.add(action.delta)
+      });
+      var paths = state.paths.slice(0, state.mode.pathIndex).concat([item]).concat(state.paths.slice(state.mode.pathIndex + 1));
+      return $fjlG$var$__assign($fjlG$var$__assign({}, state), {
+        paths: paths
+      });
+    } else {
+      return state;
+    }
   }
 });
 var $fjlG$var$store = $xN6r$export$Store.ofState({
   state: $fjlG$var$state,
   reducer: $fjlG$var$reducer
 });
-$fjlG$var$store.observable.on(function (state, action) {});
 var $fjlG$export$template = $gGAU$export$adapter({}, $FTaY$export$component({
   store: $fjlG$var$store
-}, $u3Hu$export$layer({
-  afterrender: function afterrender(state, el, ctx) {
-    var tool = ctx.project.view;
-
-    tool.onMouseDown = function () {};
-
-    tool.onMouseUp = function () {
-      $fjlG$var$store.process($fjlG$var$Action.addPath);
-    };
-
-    tool.onMouseDrag = function (event) {
-      var segment = new $GYcQ$exports.Segment(event.point);
-      $fjlG$var$store.process($fjlG$var$Action.addSegment(segment));
-    };
-
-    return tool;
+}, $VFAJ$export$tool({
+  active: function active(_a) {
+    var mode = _a.mode;
+    return mode.kind === 'idle';
   },
-  beforedestroy: function beforedestroy(el, ctx, view) {
-    if (view) {
-      view.onMouseDown = null;
-      view.onMouseUp = null;
-      view.onMouseDrag = null;
+  onMouseDown: function onMouseDown(_1, event, _3, project) {
+    var target = project.hitTest(event.point, {
+      stroke: true,
+      tolerance: 5
+    });
+
+    if (target) {
+      return $fjlG$var$Action.selectPath(target.item.index);
+    } else {
+      return $fjlG$var$Action.draw;
     }
   }
-}, $kzB0$export$path({
+}), $VFAJ$export$tool({
+  active: function active(_a) {
+    var mode = _a.mode;
+    return mode.kind === 'editing';
+  },
+  onMouseDown: function onMouseDown(_1, event, _3, project) {
+    var target = project.hitTest(event.point, {
+      stroke: true,
+      tolerance: 5
+    });
+
+    if (target) {
+      return $fjlG$var$Action.selectPath(target.item.index);
+    } else {
+      return $fjlG$var$Action.unselect;
+    }
+  },
+  onMouseDrag: function onMouseDrag(_, event) {
+    return $fjlG$var$Action.updatePosition(event.delta);
+  }
+}), $VFAJ$export$tool({
+  active: function active(_a) {
+    var mode = _a.mode;
+    return mode.kind === 'drawing';
+  },
+  onMouseUp: function onMouseUp() {
+    return $fjlG$var$Action.addPath;
+  },
+  onMouseDrag: function onMouseDrag(_, event) {
+    return $fjlG$var$Action.addSegment(new $GYcQ$exports.Segment(event.point));
+  }
+}), $kzB0$export$path({
   segments: function segments(state) {
     return state.current;
   },
@@ -37162,19 +37385,39 @@ var $fjlG$export$template = $gGAU$export$adapter({}, $FTaY$export$component({
     return state.paths;
   }
 }, $kzB0$export$path({
+  position: function position(_a) {
+    var item = _a[0];
+    console.log(item.position);
+    return item.position;
+  },
+  rotation: function rotation(_a) {
+    var item = _a[0];
+    return item.position.x;
+  },
   segments: function segments(_a) {
-    var segments = _a[0];
-    return segments;
+    var item = _a[0];
+    return item.segments;
   },
   strokeWidth: 2,
   strokeColor: new $GYcQ$exports.Color(0.75, 0.75, 0.75),
   selected: function selected(_a) {
-    var _ = _a[0],
+    var current = _a[0],
         state = _a[1],
         index = _a[2];
-    return state.paths.length - 1 === index;
+    return $aGwy$export$matchKind({
+      drawing: function drawing() {
+        return false;
+      },
+      editing: function editing(_a) {
+        var pathIndex = _a.pathIndex;
+        return pathIndex === index;
+      },
+      idle: function idle() {
+        return false;
+      }
+    })(state.mode);
   }
-})))));
+}))));
 $fjlG$exports.template = $fjlG$export$template;
 // ASSET: main.ts
 var $ZCfc$exports = {};

@@ -5,8 +5,11 @@ import { PaperTemplate } from './template'
 import { PaperContext } from './context'
 import { View } from 'tempo-core/lib/view'
 import { DOMContext } from 'tempo-dom/lib/context'
+import { resolveAttribute } from './value'
+import { UnwrappedDerivedValue } from 'tempo-core/lib/value'
 
 interface PaperLocal<State, Action, Query> {
+  derived: ((state: State) => void)[]
   views: View<State, Query>[]
   context: PaperContext<Action>
 }
@@ -16,6 +19,7 @@ export const project = <State, Action, Query>(
     width: DOMAttribute<State, number>
     height: DOMAttribute<State, number>
     scope?: PaperScope
+    active?: DOMAttribute<State, boolean>
   },
   ...children: PaperTemplate<State, Action, Query>[]
 ) => {
@@ -36,10 +40,28 @@ export const project = <State, Action, Query>(
       ctx: DOMContext<Action>
     ) => {
       const scope = options.scope || PaperScope.get(0) as unknown as PaperScope
+      const derived = [] as ((state: State) => void)[]
       scope.setup(el)
       scope.install(window)
-      scope.activate()
+      const active = resolveAttribute(options.active)(state)
+      if (typeof active === 'undefined' || active === true) {
+        scope.activate()
+      }
+
       const project = scope.project!
+      if (typeof active === 'undefined' || active === true) {
+        project.activate()
+      }
+
+      if (typeof options.active === 'function')
+        derived.push((state: State) => {
+          const fun = options.active! as UnwrappedDerivedValue<State, boolean>
+          if (fun(state)) {
+            scope.activate()
+            project.activate()
+          }
+        })
+
       const rootLayer = project.activeLayer
       const context = new PaperContext(
         scope,
@@ -48,7 +70,7 @@ export const project = <State, Action, Query>(
         (action: Action) => ctx.dispatch(action)
       )
       const views = children.map(child => child.render(context, state))
-      return { context, views }
+      return { context, views, derived }
     },
     afterchange: (
       state: State,
@@ -56,6 +78,7 @@ export const project = <State, Action, Query>(
       ctx,
       scope: PaperLocal<State, Action, Query> | undefined
     ) => {
+      scope?.derived.forEach(f => f(state))
       scope?.views.forEach(view => view.change(state))
       return scope
     },

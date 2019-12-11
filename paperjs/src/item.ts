@@ -99,7 +99,7 @@ export const createItem = <State, Action, Query, I extends Item, T, Option>(
           const anyItem = item as any
 
           anyItem[k] = (e: any) => {
-            const action = attrf(state, e, item)
+            const action = attrf(state, e, item, ctx.project)
             if (typeof action !== 'undefined') {
               ctx.dispatch(action)
             }
