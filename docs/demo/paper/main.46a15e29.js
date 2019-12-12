@@ -19615,7 +19615,8 @@ Object.defineProperty($rpUf$exports, "__esModule", {
 var $rpUf$var$PaperContext =
 /** @class */
 function () {
-  function PaperContext(scope, project, append, dispatch) {
+  function PaperContext(canvas, scope, project, append, dispatch) {
+    this.canvas = canvas;
     this.scope = scope;
     this.project = project;
     this.append = append;
@@ -19625,7 +19626,7 @@ function () {
   PaperContext.prototype.mapAction = function (f) {
     var _this = this;
 
-    return new PaperContext(this.scope, this.project, this.append, function (action) {
+    return new PaperContext(this.canvas, this.scope, this.project, this.append, function (action) {
       return _this.dispatch(f(action));
     });
   };
@@ -19633,7 +19634,7 @@ function () {
   PaperContext.prototype.conditionalMapAction = function (f) {
     var _this = this;
 
-    return new PaperContext(this.scope, this.project, this.append, function (action) {
+    return new PaperContext(this.canvas, this.scope, this.project, this.append, function (action) {
       var newAction = f(action);
 
       if (typeof newAction !== 'undefined') {
@@ -19643,11 +19644,11 @@ function () {
   };
 
   PaperContext.prototype.withAppend = function (append) {
-    return new PaperContext(this.scope, this.project, append, this.dispatch);
+    return new PaperContext(this.canvas, this.scope, this.project, append, this.dispatch);
   };
 
   PaperContext.prototype.withDispatch = function (dispatch) {
-    return new PaperContext(this.scope, this.project, this.append, dispatch);
+    return new PaperContext(this.canvas, this.scope, this.project, this.append, dispatch);
   };
 
   return PaperContext;
@@ -19717,7 +19718,7 @@ var $ST02$export$project = function (options) {
         }
       });
       var rootLayer = project.activeLayer;
-      var context = new $rpUf$export$PaperContext(scope, project, function (item) {
+      var context = new $rpUf$export$PaperContext(el, scope, project, function (item) {
         return rootLayer.addChild(item);
       }, function (action) {
         return ctx.dispatch(action);
@@ -36440,12 +36441,12 @@ var $q9iH$export$ellipse = function (options) {
 
 $q9iH$exports.ellipse = $q9iH$export$ellipse; //# sourceMappingURL=shape.js.map
 
-// ASSET: circle/sample.ts
-var $csCT$exports = {};
-Object.defineProperty($csCT$exports, "__esModule", {
+// ASSET: circle/main.ts
+var $p2mr$exports = {};
+Object.defineProperty($p2mr$exports, "__esModule", {
   value: true
 });
-var $csCT$export$template = $q9iH$export$circle({
+var $p2mr$export$template = $q9iH$export$circle({
   args: {
     radius: 100
   },
@@ -36455,7 +36456,7 @@ var $csCT$export$template = $q9iH$export$circle({
     return new $GYcQ$exports.Point(size.width / 2, size.height / 2);
   }
 });
-$csCT$exports.template = $csCT$export$template;
+$p2mr$exports.template = $p2mr$export$template;
 // ASSET: ../node_modules/tempo-paper/lib/adapter.js
 var $gGAU$exports = {};
 Object.defineProperty($gGAU$exports, "__esModule", {
@@ -36520,6 +36521,111 @@ var $gGAU$export$adapter = function (options, child) {
 
 $gGAU$exports.adapter = $gGAU$export$adapter; //# sourceMappingURL=adapter.js.map
 
+// ASSET: path_simplification/state.ts
+var $AVNj$exports = {};
+Object.defineProperty($AVNj$exports, "__esModule", {
+  value: true
+});
+var $AVNj$export$Mode = {
+  idle: {
+    kind: 'idle'
+  },
+  drawing: {
+    kind: 'drawing'
+  },
+  editing: function editing(pathIndex) {
+    return {
+      kind: 'editing',
+      pathIndex: pathIndex
+    };
+  }
+};
+$AVNj$exports.Mode = $AVNj$export$Mode;
+var $AVNj$export$state = {
+  paths: [],
+  current: [],
+  mode: $AVNj$export$Mode.idle
+};
+$AVNj$exports.state = $AVNj$export$state;
+// ASSET: path_simplification/reducer.ts
+var $Vh63$exports = {};
+
+var $Vh63$var$__assign = $Vh63$exports && $Vh63$exports.__assign || function () {
+  $Vh63$var$__assign = Object.assign || function (t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+      s = arguments[i];
+
+      for (var p in s) {
+        if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+      }
+    }
+
+    return t;
+  };
+
+  return $Vh63$var$__assign.apply(this, arguments);
+};
+
+Object.defineProperty($Vh63$exports, "__esModule", {
+  value: true
+});
+
+var $Vh63$var$getActiveProject = function getActiveProject() {
+  return window.paper.project;
+};
+
+var $Vh63$export$reducer = $KKGP$export$reduceOnKind({
+  AddSegment: function AddSegment(state, action) {
+    var current = state.current.concat([action.segment]);
+    return $Vh63$var$__assign($Vh63$var$__assign({}, state), {
+      current: current
+    });
+  },
+  AddPath: function AddPath(state) {
+    if (state.current.length <= 1) return state;
+    var path = new $GYcQ$exports.Path({
+      segments: state.current,
+      insert: false,
+      project: $Vh63$var$getActiveProject(),
+      applyMatrix: false
+    });
+    path.simplify(10);
+    var paths = state.paths.concat([{
+      segments: path.segments.map(function (seg) {
+        var newSeg = seg.clone();
+        newSeg.transform(new $GYcQ$exports.Matrix(1, 0, 0, 1, -path.position.x, -path.position.y));
+        return newSeg;
+      }),
+      position: path.position
+    }]);
+    path.remove();
+    return $Vh63$var$__assign($Vh63$var$__assign({}, state), {
+      paths: paths,
+      current: [],
+      mode: $AVNj$export$Mode.editing(paths.length - 1)
+    });
+  },
+  ChangeMode: function ChangeMode(state, action) {
+    return $Vh63$var$__assign($Vh63$var$__assign({}, state), {
+      mode: action.mode
+    });
+  },
+  UpdatePosition: function UpdatePosition(state, action) {
+    if (state.mode.kind === 'editing') {
+      var old = state.paths[state.mode.pathIndex];
+      var item = $Vh63$var$__assign($Vh63$var$__assign({}, old), {
+        position: old.position.add(action.delta)
+      });
+      var paths = state.paths.slice(0, state.mode.pathIndex).concat([item]).concat(state.paths.slice(state.mode.pathIndex + 1));
+      return $Vh63$var$__assign($Vh63$var$__assign({}, state), {
+        paths: paths
+      });
+    } else {
+      return state;
+    }
+  }
+});
+$Vh63$exports.reducer = $Vh63$export$reducer;
 // ASSET: ../node_modules/tempo-paper/node_modules/tempo-core/lib/util/map.js
 var $nRn8$exports = {};
 Object.defineProperty($nRn8$exports, "__esModule", {
@@ -36631,6 +36737,488 @@ var $FTaY$export$component = function (attributes) {
 };
 
 $FTaY$exports.component = $FTaY$export$component; //# sourceMappingURL=component.js.map
+
+// ASSET: path_simplification/action.ts
+var $Nt5a$exports = {};
+Object.defineProperty($Nt5a$exports, "__esModule", {
+  value: true
+});
+var $Nt5a$export$Action = {
+  addSegment: function addSegment(segment) {
+    return {
+      kind: 'AddSegment',
+      segment: segment
+    };
+  },
+  addPath: {
+    kind: 'AddPath'
+  },
+  selectPath: function selectPath(pathIndex) {
+    return {
+      kind: 'ChangeMode',
+      mode: $AVNj$export$Mode.editing(pathIndex)
+    };
+  },
+  unselect: {
+    kind: 'ChangeMode',
+    mode: $AVNj$export$Mode.idle
+  },
+  draw: {
+    kind: 'ChangeMode',
+    mode: $AVNj$export$Mode.drawing
+  },
+  updatePosition: function updatePosition(delta) {
+    return {
+      kind: 'UpdatePosition',
+      delta: delta
+    };
+  }
+};
+$Nt5a$exports.Action = $Nt5a$export$Action;
+// ASSET: ../node_modules/tempo-paper/lib/tool.js
+var $VFAJ$exports = {};
+Object.defineProperty($VFAJ$exports, "__esModule", {
+  value: true
+});
+
+var $VFAJ$export$tool = function (options) {
+  return {
+    render: function (ctx, state) {
+      var tool = new ctx.scope.Tool();
+      var value;
+      if (options.afterrender) value = options.afterrender(state, tool, ctx);
+      var active = $Y8w1$export$resolveAttribute(options.active)(state);
+      if (typeof active === 'undefined' || active === true) tool.activate();
+      var derived = [];
+      derived.push(function (newState) {
+        return state = newState;
+      });
+      if (typeof options.active === 'function') derived.push(function (state) {
+        var fun = options.active;
+        if (fun(state)) tool.activate();
+      });
+      var anyTool = tool;
+      $e5bF$export$keys(options).forEach(function (attr) {
+        if (attr.startsWith('on')) {
+          var f_1 = options[attr];
+
+          anyTool[attr] = function (event) {
+            var action = f_1(state, event, tool, ctx.project);
+            if (typeof action !== 'undefined') ctx.dispatch(action);
+          };
+        } else {
+          var value_2 = $Y8w1$export$resolveAttribute(options[attr]);
+          anyTool[attr] = value_2;
+
+          if (typeof options[attr] === 'function') {
+            var k_1 = attr;
+            derived.push(function (state) {
+              var fun = options[k_1];
+              anyTool[k_1] = fun(state);
+            });
+          }
+        }
+      });
+      return {
+        change: function (state) {
+          if (options.beforechange) value = options.beforechange(state, tool, ctx, value);
+          derived.forEach(function (d) {
+            return d(state);
+          });
+          if (options.afterchange) value = options.afterchange(state, tool, ctx, value);
+        },
+        destroy: function () {
+          if (options.beforedestroy) options.beforedestroy(tool, ctx, value);
+          tool.remove();
+        },
+        request: function (query) {}
+      };
+    }
+  };
+};
+
+$VFAJ$exports.tool = $VFAJ$export$tool; //# sourceMappingURL=tool.js.map
+
+// ASSET: ../node_modules/tempo-paper/lib/path.js
+var $kzB0$exports = {};
+Object.defineProperty($kzB0$exports, "__esModule", {
+  value: true
+});
+
+var $kzB0$export$path = function (options) {
+  return $ftoX$export$createItem(function (_) {
+    return typeof options.args !== 'undefined' ? new $QMc8$exports.Path(options.args) : new $QMc8$exports.Path([]);
+  }, options);
+};
+
+$kzB0$exports.path = $kzB0$export$path;
+
+var $kzB0$export$pathLine = function (options) {
+  return $ftoX$export$createItem(function (_) {
+    return new $QMc8$exports.Path.Line(options.args);
+  }, options);
+};
+
+$kzB0$exports.pathLine = $kzB0$export$pathLine;
+
+var $kzB0$export$pathCircle = function (options) {
+  return $ftoX$export$createItem(function (_) {
+    return new $QMc8$exports.Path.Circle(options.args);
+  }, options);
+};
+
+$kzB0$exports.pathCircle = $kzB0$export$pathCircle;
+
+var $kzB0$export$pathRectangle = function (options) {
+  return $ftoX$export$createItem(function (_) {
+    return new $QMc8$exports.Path.Rectangle(options.args);
+  }, options);
+};
+
+$kzB0$exports.pathRectangle = $kzB0$export$pathRectangle;
+
+var $kzB0$export$pathEllipse = function (options) {
+  return $ftoX$export$createItem(function (_) {
+    return new $QMc8$exports.Path.Ellipse(options.args);
+  }, options);
+};
+
+$kzB0$exports.pathEllipse = $kzB0$export$pathEllipse;
+
+var $kzB0$export$pathArc = function (options) {
+  return $ftoX$export$createItem(function (_) {
+    return new $QMc8$exports.Path.Arc(options.args);
+  }, options);
+};
+
+$kzB0$exports.pathArc = $kzB0$export$pathArc;
+
+var $kzB0$export$pathRegularPolygon = function (options) {
+  return $ftoX$export$createItem(function (_) {
+    return new $QMc8$exports.Path.RegularPolygon(options.args);
+  }, options);
+};
+
+$kzB0$exports.pathRegularPolygon = $kzB0$export$pathRegularPolygon;
+
+var $kzB0$export$pathStar = function (options) {
+  return $ftoX$export$createItem(function (_) {
+    return new $QMc8$exports.Path.Star(options.args);
+  }, options);
+};
+
+$kzB0$exports.pathStar = $kzB0$export$pathStar; //# sourceMappingURL=path.js.map
+
+// ASSET: ../node_modules/tempo-paper/node_modules/tempo-dom/lib/portal.js
+var $VxRO$exports = {};
+
+var $VxRO$var$__spreadArrays = $VxRO$exports && $VxRO$exports.__spreadArrays || function () {
+  for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
+
+  for (var r = Array(s), k = 0, i = 0; i < il; i++) for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++) r[k] = a[j];
+
+  return r;
+};
+
+Object.defineProperty($VxRO$exports, "__esModule", {
+  value: true
+});
+
+var $VxRO$var$DOMPortalTemplate =
+/** @class */
+function () {
+  function DOMPortalTemplate(getParent, append, children) {
+    this.getParent = getParent;
+    this.append = append;
+    this.children = children;
+  }
+
+  DOMPortalTemplate.prototype.render = function (ctx, state) {
+    var _this = this;
+
+    var append = function (node) {
+      return _this.append(ctx.doc, node);
+    };
+
+    var parent = this.getParent(ctx.doc);
+    var newCtx = ctx.withAppend(append).withParent(parent);
+    var views = $J2rA$export$mapArray(this.children, function (child) {
+      return child.render(newCtx, state);
+    });
+    return {
+      change: function (state) {
+        for (var _i = 0, views_1 = views; _i < views_1.length; _i++) {
+          var view = views_1[_i];
+          view.change(state);
+        }
+      },
+      destroy: function () {
+        for (var _i = 0, views_2 = views; _i < views_2.length; _i++) {
+          var view = views_2[_i];
+          view.destroy();
+        }
+      },
+      request: function (query) {
+        for (var _i = 0, views_3 = views; _i < views_3.length; _i++) {
+          var view = views_3[_i];
+          view.request(query);
+        }
+      }
+    };
+  };
+
+  return DOMPortalTemplate;
+}();
+
+var $VxRO$export$DOMPortalTemplate = $VxRO$var$DOMPortalTemplate;
+$VxRO$exports.DOMPortalTemplate = $VxRO$export$DOMPortalTemplate;
+
+var $VxRO$export$portal = function (options) {
+  var children = [];
+
+  for (var _i = 1; _i < arguments.length; _i++) {
+    children[_i - 1] = arguments[_i];
+  }
+
+  return new $VxRO$var$DOMPortalTemplate(options.getParent, options.append, $J2rA$export$mapArray(children, $wV43$export$domChildToTemplate));
+};
+
+$VxRO$exports.portal = $VxRO$export$portal;
+
+var $VxRO$export$portalWithSelector = function (options) {
+  var children = [];
+
+  for (var _i = 1; _i < arguments.length; _i++) {
+    children[_i - 1] = arguments[_i];
+  }
+
+  return $VxRO$export$portal.apply(void 0, $VxRO$var$__spreadArrays([{
+    getParent: function (doc) {
+      var el = doc.querySelector(options.selector);
+
+      if (!el) {
+        throw new Error("selector doesn't match any element: \"" + options.selector + "\"");
+      }
+
+      return el;
+    },
+    append: function (doc, node) {
+      // Parent should always be available given the guarantee from `getParent`.
+      // If parent has been removed from unsafe manipulation of the dom, an exception will occurr.
+      var parent = doc.querySelector(options.selector);
+      parent.appendChild(node);
+    }
+  }], children));
+};
+
+$VxRO$exports.portalWithSelector = $VxRO$export$portalWithSelector;
+
+var $VxRO$export$headPortal = function () {
+  var children = [];
+
+  for (var _i = 0; _i < arguments.length; _i++) {
+    children[_i] = arguments[_i];
+  }
+
+  return new $VxRO$var$DOMPortalTemplate(function (doc) {
+    return doc.head;
+  }, function (doc, node) {
+    return doc.head.appendChild(node);
+  }, $J2rA$export$mapArray(children, $wV43$export$domChildToTemplate));
+};
+
+$VxRO$exports.headPortal = $VxRO$export$headPortal;
+
+var $VxRO$export$bodyPortal = function () {
+  var children = [];
+
+  for (var _i = 0; _i < arguments.length; _i++) {
+    children[_i] = arguments[_i];
+  }
+
+  return new $VxRO$var$DOMPortalTemplate(function (doc) {
+    return doc.body;
+  }, function (doc, node) {
+    return doc.body.appendChild(node);
+  }, $J2rA$export$mapArray(children, $wV43$export$domChildToTemplate));
+};
+
+$VxRO$exports.bodyPortal = $VxRO$export$bodyPortal; //# sourceMappingURL=portal.js.map
+
+// ASSET: ../node_modules/tempo-paper/node_modules/tempo-dom/lib/context.js
+var $ZfoF$exports = {};
+Object.defineProperty($ZfoF$exports, "__esModule", {
+  value: true
+});
+
+var $ZfoF$var$DOMContext = function () {
+  function DOMContext(doc, append, parent, dispatch) {
+    this.doc = doc;
+    this.append = append;
+    this.parent = parent;
+    this.dispatch = dispatch;
+  }
+
+  DOMContext.fromElement = function (element, dispatch) {
+    return new DOMContext(element.ownerDocument || window && window.document, function (node) {
+      return element.appendChild(node);
+    }, element, dispatch);
+  };
+
+  DOMContext.prototype.mapAction = function (f) {
+    var _this = this;
+
+    return new DOMContext(this.doc, this.append, this.parent, function (action) {
+      return _this.dispatch(f(action));
+    });
+  };
+
+  DOMContext.prototype.conditionalMapAction = function (f) {
+    var _this = this;
+
+    return new DOMContext(this.doc, this.append, this.parent, function (action) {
+      var newAction = f(action);
+
+      if (typeof newAction !== 'undefined') {
+        _this.dispatch(newAction);
+      }
+    });
+  };
+
+  DOMContext.prototype.withAppend = function (append) {
+    return new DOMContext(this.doc, append, this.parent, this.dispatch);
+  };
+
+  DOMContext.prototype.withParent = function (parent) {
+    return new DOMContext(this.doc, this.append, parent, this.dispatch);
+  };
+
+  DOMContext.prototype.withDispatch = function (dispatch) {
+    return new DOMContext(this.doc, this.append, this.parent, dispatch);
+  };
+
+  return DOMContext;
+}();
+
+var $ZfoF$export$DOMContext = $ZfoF$var$DOMContext;
+$ZfoF$exports.DOMContext = $ZfoF$export$DOMContext;
+// ASSET: ../node_modules/tempo-paper/lib/dom_portal.js
+var $hJtD$exports = {};
+
+var $hJtD$var$__spreadArrays = $hJtD$exports && $hJtD$exports.__spreadArrays || function () {
+  for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
+
+  for (var r = Array(s), k = 0, i = 0; i < il; i++) for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++) r[k] = a[j];
+
+  return r;
+};
+
+Object.defineProperty($hJtD$exports, "__esModule", {
+  value: true
+});
+
+var $hJtD$export$domPortal = function (options) {
+  var children = [];
+
+  for (var _i = 1; _i < arguments.length; _i++) {
+    children[_i - 1] = arguments[_i];
+  }
+
+  return {
+    render: function (ctx, state) {
+      var doc = ctx.canvas.ownerDocument;
+
+      var append = function (doc, node) {
+        options.append(doc, node);
+      };
+
+      var domCtx = new $ZfoF$export$DOMContext(doc, function () {}, ctx.canvas, ctx.dispatch);
+      var port = $VxRO$export$portal.apply(void 0, $hJtD$var$__spreadArrays([{
+        append: append,
+        getParent: options.getParent
+      }], children)).render(domCtx, state);
+      return {
+        change: function (state) {
+          port.change(state);
+        },
+        destroy: function () {
+          port.destroy();
+        },
+        request: function (query) {
+          port.request(query);
+        }
+      };
+    }
+  };
+};
+
+$hJtD$exports.domPortal = $hJtD$export$domPortal;
+
+var $hJtD$export$domPortalWithSelector = function (options) {
+  var children = [];
+
+  for (var _i = 1; _i < arguments.length; _i++) {
+    children[_i - 1] = arguments[_i];
+  }
+
+  return $hJtD$export$domPortal.apply(void 0, $hJtD$var$__spreadArrays([{
+    getParent: function (doc) {
+      var el = doc.querySelector(options.selector);
+
+      if (!el) {
+        throw new Error("selector doesn't match any element: \"" + options.selector + "\"");
+      }
+
+      return el;
+    },
+    append: function (doc, node) {
+      // Parent should always be available given the guarantee from `getParent`.
+      // If parent has been removed from unsafe manipulation of the dom, an exception will occurr.
+      var parent = doc.querySelector(options.selector);
+      parent.appendChild(node);
+    }
+  }], children));
+};
+
+$hJtD$exports.domPortalWithSelector = $hJtD$export$domPortalWithSelector;
+
+var $hJtD$export$domHeadPortal = function () {
+  var children = [];
+
+  for (var _i = 0; _i < arguments.length; _i++) {
+    children[_i] = arguments[_i];
+  }
+
+  return $hJtD$export$domPortal.apply(void 0, $hJtD$var$__spreadArrays([{
+    getParent: function (doc) {
+      return doc.head;
+    },
+    append: function (doc, node) {
+      return doc.head.appendChild(node);
+    }
+  }], children));
+};
+
+$hJtD$exports.domHeadPortal = $hJtD$export$domHeadPortal;
+
+var $hJtD$export$domBodyPortal = function () {
+  var children = [];
+
+  for (var _i = 0; _i < arguments.length; _i++) {
+    children[_i] = arguments[_i];
+  }
+
+  return $hJtD$export$domPortal.apply(void 0, $hJtD$var$__spreadArrays([{
+    getParent: function (doc) {
+      return doc.body;
+    },
+    append: function (doc, node) {
+      return doc.body.appendChild(node);
+    }
+  }], children));
+};
+
+$hJtD$exports.domBodyPortal = $hJtD$export$domBodyPortal; //# sourceMappingURL=dom_portal.js.map
 
 // ASSET: ../node_modules/tempo-paper/lib/map.js
 var $ZNMw$exports = {};
@@ -37011,163 +37599,8 @@ var $Haxo$export$iterateItems = function (options) {
 };
 
 $Haxo$exports.iterateItems = $Haxo$export$iterateItems;
-// ASSET: ../node_modules/tempo-paper/lib/path.js
-var $kzB0$exports = {};
-Object.defineProperty($kzB0$exports, "__esModule", {
-  value: true
-});
 
-var $kzB0$export$path = function (options) {
-  return $ftoX$export$createItem(function (_) {
-    return typeof options.args !== 'undefined' ? new $QMc8$exports.Path(options.args) : new $QMc8$exports.Path([]);
-  }, options);
-};
-
-$kzB0$exports.path = $kzB0$export$path;
-
-var $kzB0$export$pathLine = function (options) {
-  return $ftoX$export$createItem(function (_) {
-    return new $QMc8$exports.Path.Line(options.args);
-  }, options);
-};
-
-$kzB0$exports.pathLine = $kzB0$export$pathLine;
-
-var $kzB0$export$pathCircle = function (options) {
-  return $ftoX$export$createItem(function (_) {
-    return new $QMc8$exports.Path.Circle(options.args);
-  }, options);
-};
-
-$kzB0$exports.pathCircle = $kzB0$export$pathCircle;
-
-var $kzB0$export$pathRectangle = function (options) {
-  return $ftoX$export$createItem(function (_) {
-    return new $QMc8$exports.Path.Rectangle(options.args);
-  }, options);
-};
-
-$kzB0$exports.pathRectangle = $kzB0$export$pathRectangle;
-
-var $kzB0$export$pathEllipse = function (options) {
-  return $ftoX$export$createItem(function (_) {
-    return new $QMc8$exports.Path.Ellipse(options.args);
-  }, options);
-};
-
-$kzB0$exports.pathEllipse = $kzB0$export$pathEllipse;
-
-var $kzB0$export$pathArc = function (options) {
-  return $ftoX$export$createItem(function (_) {
-    return new $QMc8$exports.Path.Arc(options.args);
-  }, options);
-};
-
-$kzB0$exports.pathArc = $kzB0$export$pathArc;
-
-var $kzB0$export$pathRegularPolygon = function (options) {
-  return $ftoX$export$createItem(function (_) {
-    return new $QMc8$exports.Path.RegularPolygon(options.args);
-  }, options);
-};
-
-$kzB0$exports.pathRegularPolygon = $kzB0$export$pathRegularPolygon;
-
-var $kzB0$export$pathStar = function (options) {
-  return $ftoX$export$createItem(function (_) {
-    return new $QMc8$exports.Path.Star(options.args);
-  }, options);
-};
-
-$kzB0$exports.pathStar = $kzB0$export$pathStar; //# sourceMappingURL=path.js.map
-
-// ASSET: ../node_modules/tempo-paper/lib/tool.js
-var $VFAJ$exports = {};
-Object.defineProperty($VFAJ$exports, "__esModule", {
-  value: true
-});
-
-var $VFAJ$export$tool = function (options) {
-  return {
-    render: function (ctx, state) {
-      var tool = new ctx.scope.Tool();
-      var value;
-      if (options.afterrender) value = options.afterrender(state, tool, ctx);
-      var active = $Y8w1$export$resolveAttribute(options.active)(state);
-      if (typeof active === 'undefined' || active === true) tool.activate();
-      var derived = [];
-      derived.push(function (newState) {
-        return state = newState;
-      });
-      if (typeof options.active === 'function') derived.push(function (state) {
-        var fun = options.active;
-        if (fun(state)) tool.activate();
-      });
-      var anyTool = tool;
-      $e5bF$export$keys(options).forEach(function (attr) {
-        if (attr.startsWith('on')) {
-          var f_1 = options[attr];
-
-          anyTool[attr] = function (event) {
-            var action = f_1(state, event, tool, ctx.project);
-            if (typeof action !== 'undefined') ctx.dispatch(action);
-          };
-        } else {
-          var value_2 = $Y8w1$export$resolveAttribute(options[attr]);
-          anyTool[attr] = value_2;
-
-          if (typeof options[attr] === 'function') {
-            var k_1 = attr;
-            derived.push(function (state) {
-              var fun = options[k_1];
-              anyTool[k_1] = fun(state);
-            });
-          }
-        }
-      });
-      return {
-        change: function (state) {
-          if (options.beforechange) value = options.beforechange(state, tool, ctx, value);
-          derived.forEach(function (d) {
-            return d(state);
-          });
-          if (options.afterchange) value = options.afterchange(state, tool, ctx, value);
-        },
-        destroy: function () {
-          if (options.beforedestroy) options.beforedestroy(tool, ctx, value);
-          tool.remove();
-        },
-        request: function (query) {}
-      };
-    }
-  };
-};
-
-$VFAJ$exports.tool = $VFAJ$export$tool; //# sourceMappingURL=tool.js.map
-
-// ASSET: ../node_modules/tempo-core/lib/util/match.js
-var $aGwy$exports = {};
-Object.defineProperty($aGwy$exports, "__esModule", {
-  value: true
-});
-
-var $aGwy$export$match = function (field, matcher, input) {
-  var k = input[field];
-  return matcher[k](input);
-};
-
-$aGwy$exports.match = $aGwy$export$match;
-
-var $aGwy$export$deepMatch = function (path, matcher, input) {
-  var k = path.reduce(function (res, key) {
-    return res[key];
-  }, input);
-  return matcher[k](input);
-};
-
-$aGwy$exports.deepMatch = $aGwy$export$deepMatch;
-
-var $aGwy$export$createMatch = function (field) {
+var $T9s4$export$createMatch = function (field) {
   return function (matcher) {
     return function (input) {
       var k = input[field];
@@ -37176,249 +37609,140 @@ var $aGwy$export$createMatch = function (field) {
   };
 };
 
-$aGwy$exports.createMatch = $aGwy$export$createMatch;
+var $T9s4$export$matchKind = $T9s4$export$createMatch('kind'); //# sourceMappingURL=match.js.map
 
-var $aGwy$export$createDeepMatch = function () {
-  var path = [];
-
-  for (var _i = 0; _i < arguments.length; _i++) {
-    path[_i] = arguments[_i];
-  }
-
-  return function (matcher) {
-    return function (input) {
-      var k = path.reduce(function (res, key) {
-        return res[key];
-      }, input);
-      return matcher[k](input);
-    };
-  };
-};
-
-$aGwy$exports.createDeepMatch = $aGwy$export$createDeepMatch;
-var $aGwy$export$matchKind = $aGwy$export$createMatch('kind');
-$aGwy$exports.matchKind = $aGwy$export$matchKind; //# sourceMappingURL=match.js.map
-
-// ASSET: path_simplification/sample.ts
-var $fjlG$exports = {};
-
-var $fjlG$var$__assign = $fjlG$exports && $fjlG$exports.__assign || function () {
-  $fjlG$var$__assign = Object.assign || function (t) {
-    for (var s, i = 1, n = arguments.length; i < n; i++) {
-      s = arguments[i];
-
-      for (var p in s) {
-        if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
-      }
-    }
-
-    return t;
-  };
-
-  return $fjlG$var$__assign.apply(this, arguments);
-};
-
-Object.defineProperty($fjlG$exports, "__esModule", {
+// ASSET: path_simplification/toolbar.ts
+var $nYZ9$exports = {};
+Object.defineProperty($nYZ9$exports, "__esModule", {
   value: true
 });
-var $fjlG$var$Mode = {
-  idle: {
-    kind: 'idle'
+var $nYZ9$export$toolbar = $zQMt$export$span({}, $iRIV$export$match(['mode', 'kind'], {
+  idle: function idle(state) {
+    return state.paths.length > 0 ? 'Click to select a line or click and drag to draw' : 'Click and drop to draw a line';
   },
-  drawing: {
-    kind: 'drawing'
+  editing: function editing(state) {
+    return "Selected line has " + state.paths[state.mode.pathIndex].segments.length + " segments";
   },
-  editing: function editing(pathIndex) {
-    return {
-      kind: 'editing',
-      pathIndex: pathIndex
-    };
+  drawing: function drawing(state) {
+    return "Line has " + state.current.length + " segments";
   }
-};
-var $fjlG$var$state = {
-  paths: [],
-  current: [],
-  mode: $fjlG$var$Mode.idle
-};
-var $fjlG$var$Action = {
-  addSegment: function addSegment(segment) {
-    return {
-      kind: 'AddSegment',
-      segment: segment
-    };
-  },
-  addPath: {
-    kind: 'AddPath'
-  },
-  selectPath: function selectPath(pathIndex) {
-    return {
-      kind: 'ChangeMode',
-      mode: $fjlG$var$Mode.editing(pathIndex)
-    };
-  },
-  unselect: {
-    kind: 'ChangeMode',
-    mode: $fjlG$var$Mode.idle
-  },
-  draw: {
-    kind: 'ChangeMode',
-    mode: $fjlG$var$Mode.drawing
-  },
-  updatePosition: function updatePosition(delta) {
-    return {
-      kind: 'UpdatePosition',
-      delta: delta
-    };
-  }
-};
-
-var $fjlG$var$getActiveProject = function getActiveProject() {
-  return window.paper.project;
-};
-
-var $fjlG$var$reducer = $KKGP$export$reduceOnKind({
-  AddSegment: function AddSegment(state, action) {
-    var current = state.current.concat([action.segment]);
-    return $fjlG$var$__assign($fjlG$var$__assign({}, state), {
-      current: current
-    });
-  },
-  AddPath: function AddPath(state) {
-    var path = new $GYcQ$exports.Path({
-      segments: state.current.slice(0),
-      insert: false,
-      project: $fjlG$var$getActiveProject()
-    });
-    path.simplify(10);
-    var paths = state.paths.concat([{
-      segments: path.segments,
-      position: new $GYcQ$exports.Point(0, 0)
-    }]);
-    path.remove();
-    return $fjlG$var$__assign($fjlG$var$__assign({}, state), {
-      paths: paths,
-      current: [],
-      mode: $fjlG$var$Mode.idle
-    });
-  },
-  ChangeMode: function ChangeMode(state, action) {
-    return $fjlG$var$__assign($fjlG$var$__assign({}, state), {
-      mode: action.mode
-    });
-  },
-  UpdatePosition: function UpdatePosition(state, action) {
-    if (state.mode.kind === 'editing') {
-      var old = state.paths[state.mode.pathIndex];
-      var item = $fjlG$var$__assign($fjlG$var$__assign({}, old), {
-        position: old.position.add(action.delta)
-      });
-      var paths = state.paths.slice(0, state.mode.pathIndex).concat([item]).concat(state.paths.slice(state.mode.pathIndex + 1));
-      return $fjlG$var$__assign($fjlG$var$__assign({}, state), {
-        paths: paths
-      });
-    } else {
-      return state;
-    }
-  }
+}));
+$nYZ9$exports.toolbar = $nYZ9$export$toolbar;
+// ASSET: path_simplification/app.ts
+var $pA64$exports = {};
+Object.defineProperty($pA64$exports, "__esModule", {
+  value: true
 });
-var $fjlG$var$store = $xN6r$export$Store.ofState({
-  state: $fjlG$var$state,
-  reducer: $fjlG$var$reducer
-});
-var $fjlG$export$template = $gGAU$export$adapter({}, $FTaY$export$component({
-  store: $fjlG$var$store
-}, $VFAJ$export$tool({
-  active: function active(_a) {
-    var mode = _a.mode;
-    return mode.kind === 'idle';
-  },
-  onMouseDown: function onMouseDown(_1, event, _3, project) {
-    var target = project.hitTest(event.point, {
-      stroke: true,
-      tolerance: 5
-    });
 
-    if (target) {
-      return $fjlG$var$Action.selectPath(target.item.index);
-    } else {
-      return $fjlG$var$Action.draw;
-    }
-  }
-}), $VFAJ$export$tool({
-  active: function active(_a) {
-    var mode = _a.mode;
-    return mode.kind === 'editing';
-  },
-  onMouseDown: function onMouseDown(_1, event, _3, project) {
-    var target = project.hitTest(event.point, {
-      stroke: true,
-      tolerance: 5
-    });
+var $pA64$export$makeApp = function (store) {
+  return $FTaY$export$component({
+    store: store
+  }, $hJtD$export$domPortalWithSelector({
+    selector: '#toolbar'
+  }, $nYZ9$export$toolbar), $VFAJ$export$tool({
+    active: function active(_a) {
+      var mode = _a.mode;
+      return mode.kind === 'idle';
+    },
+    onMouseDown: function onMouseDown(_1, event, _3, project) {
+      var target = project.hitTest(event.point, {
+        stroke: true,
+        tolerance: 5
+      });
 
-    if (target) {
-      return $fjlG$var$Action.selectPath(target.item.index);
-    } else {
-      return $fjlG$var$Action.unselect;
-    }
-  },
-  onMouseDrag: function onMouseDrag(_, event) {
-    return $fjlG$var$Action.updatePosition(event.delta);
-  }
-}), $VFAJ$export$tool({
-  active: function active(_a) {
-    var mode = _a.mode;
-    return mode.kind === 'drawing';
-  },
-  onMouseUp: function onMouseUp() {
-    return $fjlG$var$Action.addPath;
-  },
-  onMouseDrag: function onMouseDrag(_, event) {
-    return $fjlG$var$Action.addSegment(new $GYcQ$exports.Segment(event.point));
-  }
-}), $kzB0$export$path({
-  segments: function segments(state) {
-    return state.current;
-  },
-  selected: true
-}), $Haxo$export$iterate({
-  getArray: function getArray(state) {
-    return state.paths;
-  }
-}, $kzB0$export$path({
-  position: function position(_a) {
-    var item = _a[0];
-    console.log(item.position);
-    return item.position;
-  },
-  rotation: function rotation(_a) {
-    var item = _a[0];
-    return item.position.x;
-  },
-  segments: function segments(_a) {
-    var item = _a[0];
-    return item.segments;
-  },
-  strokeWidth: 2,
-  strokeColor: new $GYcQ$exports.Color(0.75, 0.75, 0.75),
-  selected: function selected(_a) {
-    var current = _a[0],
-        state = _a[1],
-        index = _a[2];
-    return $aGwy$export$matchKind({
-      drawing: function drawing() {
-        return false;
-      },
-      editing: function editing(_a) {
-        var pathIndex = _a.pathIndex;
-        return pathIndex === index;
-      },
-      idle: function idle() {
-        return false;
+      if (target) {
+        return $Nt5a$export$Action.selectPath(target.item.index);
+      } else {
+        return $Nt5a$export$Action.draw;
       }
-    })(state.mode);
-  }
-}))));
-$fjlG$exports.template = $fjlG$export$template;
+    },
+    onMouseUp: function onMouseUp() {
+      return $Nt5a$export$Action.unselect;
+    }
+  }), $VFAJ$export$tool({
+    active: function active(_a) {
+      var mode = _a.mode;
+      return mode.kind === 'editing';
+    },
+    onMouseDown: function onMouseDown(state, event, _3, project) {
+      var target = project.hitTest(event.point, {
+        stroke: true,
+        tolerance: 5
+      });
+
+      if (target) {
+        return $Nt5a$export$Action.selectPath(target.item.index);
+      } else {
+        return $Nt5a$export$Action.unselect;
+      }
+    },
+    onMouseDrag: function onMouseDrag(_1, event) {
+      return $Nt5a$export$Action.updatePosition(event.delta);
+    }
+  }), $VFAJ$export$tool({
+    active: function active(_a) {
+      var mode = _a.mode;
+      return mode.kind === 'drawing';
+    },
+    onMouseUp: function onMouseUp() {
+      return $Nt5a$export$Action.addPath;
+    },
+    onMouseDrag: function onMouseDrag(_, event) {
+      return $Nt5a$export$Action.addSegment(new $GYcQ$exports.Segment(event.point));
+    }
+  }), $kzB0$export$path({
+    segments: function segments(state) {
+      return state.current;
+    },
+    selected: true
+  }), $Haxo$export$iterate({
+    getArray: function getArray(state) {
+      return state.paths;
+    }
+  }, $kzB0$export$path({
+    applyMatrix: false,
+    position: function position(_a) {
+      var item = _a[0];
+      return item.position;
+    },
+    segments: function segments(_a) {
+      var item = _a[0];
+      return item.segments;
+    },
+    strokeWidth: 3,
+    strokeColor: new $GYcQ$exports.Color(0.75, 0.75, 0.75),
+    fullySelected: function fullySelected(_a) {
+      var _ = _a[0],
+          state = _a[1],
+          index = _a[2];
+      return $T9s4$export$matchKind({
+        drawing: function drawing() {
+          return false;
+        },
+        editing: function editing(_a) {
+          var pathIndex = _a.pathIndex;
+          return pathIndex === index;
+        },
+        idle: function idle() {
+          return false;
+        }
+      })(state.mode);
+    }
+  })));
+};
+
+$pA64$exports.makeApp = $pA64$export$makeApp;
+// ASSET: path_simplification/main.ts
+var $XHEJ$exports = {};
+Object.defineProperty($XHEJ$exports, "__esModule", {
+  value: true
+});
+var $XHEJ$var$store = $xN6r$export$Store.ofState({
+  state: $AVNj$export$state,
+  reducer: $Vh63$export$reducer
+});
+var $XHEJ$export$template = $gGAU$export$adapter({}, $pA64$export$makeApp($XHEJ$var$store));
+$XHEJ$exports.template = $XHEJ$export$template;
 // ASSET: main.ts
 var $ZCfc$exports = {};
 
@@ -37466,7 +37790,11 @@ var $ZCfc$var$template = $zQMt$export$article({
   attrs: {
     class: 'header'
   }
-}, 'header'), $zQMt$export$section({
+}, 'header', $zQMt$export$div({
+  attrs: {
+    id: 'toolbar'
+  }
+})), $zQMt$export$section({
   attrs: {
     class: 'body'
   }
@@ -37537,8 +37865,8 @@ var $ZCfc$var$template = $zQMt$export$article({
       return size.height;
     }
   }, $fICP$export$matchKind({
-    circle: $csCT$export$template,
-    path_simplification: $fjlG$export$template
+    circle: $p2mr$export$template,
+    path_simplification: $XHEJ$export$template
   }))),
   false: ''
 }))));

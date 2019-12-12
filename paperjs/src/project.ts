@@ -64,6 +64,7 @@ export const project = <State, Action, Query>(
 
       const rootLayer = project.activeLayer
       const context = new PaperContext(
+        el,
         scope,
         project,
         (item: Item) => rootLayer.addChild(item),

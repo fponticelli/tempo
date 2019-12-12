@@ -12,7 +12,7 @@ limitations under the License.
 */
 
 import { Tempo } from 'tempo-dom/lib/tempo'
-import { main, li, span, a, article, section, header, ul } from 'tempo-dom/lib/html'
+import { main, li, span, a, article, section, header, ul, div } from 'tempo-dom/lib/html'
 import { iterate } from 'tempo-dom/lib/iterate'
 import { containerSize } from 'tempo-dom/lib/utils/dom'
 import { matchBool } from 'tempo-dom/lib/match'
@@ -26,8 +26,8 @@ import { reduceOnKind } from 'tempo-store/lib/reducer'
 import { project } from 'tempo-paper/lib/project'
 import { Size } from 'paper'
 
-import { template as circle } from './circle/sample'
-import { template as path_simplification } from './path_simplification/sample'
+import { template as circleTemplate } from './circle/main'
+import { template as pathSimplificationTemplate } from './path_simplification/main'
 
 const state = createState()
 
@@ -48,7 +48,8 @@ const template = article<State, Action, Query>(
   { attrs: { className: 'app' } },
   header(
     { attrs: { class: 'header' } },
-    'header'
+    'header',
+    div({ attrs: { id: 'toolbar' } })
   ),
   section(
     { attrs: { class: 'body' } },
@@ -97,11 +98,11 @@ const template = article<State, Action, Query>(
           project<CanvasState, any, any>(
             {
               width: ({size}) => size.width!,
-              height: ({size}) => size.height!,
+              height: ({size}) => size.height!
             },
             matchKind<CanvasState, any, any>({
-              circle: circle,
-              path_simplification: path_simplification
+              circle: circleTemplate,
+              path_simplification: pathSimplificationTemplate
             })
           )
         ),
