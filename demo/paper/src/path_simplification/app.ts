@@ -10,59 +10,70 @@ import { iterate } from 'tempo-paper/lib/iterate'
 import { matchKind } from 'tempo-core'
 import { toolbar } from './toolbar'
 
-export const makeApp = (store: Store<State, Action>) => component<State, Action, unknown>(
-  { store },
-  domPortalWithSelector(
-    { selector: '#toolbar' },
-    toolbar
-  ),
-  tool({
-    active: ({ mode }) => mode.kind === 'idle',
-    onMouseDown: (_1: State, event: MouseEvent, _3: Tool, project: Project) => {
-      const target = project.hitTest(event.point!, { stroke: true, tolerance: 5 })
-      if (target) {
-        return Action.selectPath(target.item!.index)
-      } else {
-        return Action.draw
-      }
-    }
-  }),
-  tool({
-    active: ({ mode }) => mode.kind === 'editing',
-    onMouseDown: (state: State, event: MouseEvent, _3: Tool, project: Project) => {
-      const target = project.hitTest(event.point!, { stroke: true, tolerance: 5 })
-      if (target) {
-        return Action.selectPath(target.item!.index)
-      } else {
-        return Action.unselect
-      }
-    },
-    onMouseDrag: (_1, event: MouseEvent) => Action.updatePosition(event.delta!)
-  }),
-  tool({
-    active: ({ mode }) => mode.kind === 'drawing',
-    onMouseUp: () => Action.addPath,
-    onMouseDrag: (_, event: MouseEvent) => Action.addSegment(new Segment(event.point!))
-  }),
-  path({
-    segments: state => state.current,
-    selected: true
-  }),
-  iterate(
-    { getArray: state => state.paths },
-    path<[PathItem, State, number], Action>(
-      {
+export const makeApp = (store: Store<State, Action>) =>
+  component<State, Action, unknown>(
+    { store },
+    domPortalWithSelector({ selector: '#toolbar' }, toolbar),
+    tool({
+      active: ({ mode }) => mode.kind === 'drawing',
+      onMouseDown: (
+        _1: State,
+        event: MouseEvent,
+        _3: Tool,
+        project: Project
+      ) => {
+        const target = project.hitTest(event.point!, {
+          stroke: true,
+          tolerance: 5
+        })
+        if (target) {
+          return Action.selectPath(target.item!.index)
+        } else {
+          return Action.draw
+        }
+      },
+      onMouseUp: () => Action.addPath,
+      onMouseDrag: (_, event: MouseEvent) =>
+        Action.addSegment(new Segment(event.point!))
+    }),
+    tool({
+      active: ({ mode }) => mode.kind === 'editing',
+      onMouseDown: (
+        state: State,
+        event: MouseEvent,
+        _3: Tool,
+        project: Project
+      ) => {
+        const target = project.hitTest(event.point!, {
+          stroke: true,
+          tolerance: 5
+        })
+        if (target) {
+          return Action.selectPath(target.item!.index)
+        } else {
+          return Action.draw
+        }
+      },
+      onMouseDrag: (_1, event: MouseEvent) =>
+        Action.updatePosition(event.delta!)
+    }),
+    path({
+      segments: state => state.current,
+      selected: true
+    }),
+    iterate(
+      { getArray: state => state.paths },
+      path<[PathItem, State, number], Action>({
         applyMatrix: false,
         position: ([item]) => item.position,
         segments: ([item]) => item.segments,
-        strokeWidth: 3,
-        strokeColor: new Color(0.75, 0.75, 0.75),
-        fullySelected: ([_, state, index]) => matchKind<Mode, boolean>({
-          drawing: () => false,
-          editing: ({ pathIndex }) => pathIndex === index,
-          idle: () => false
-        })(state.mode)
-      }
+        strokeWidth: 1,
+        strokeColor: new Color(0.2, 0.2, 0.2),
+        fullySelected: ([_, state, index]) =>
+          matchKind<Mode, boolean>({
+            drawing: () => false,
+            editing: ({ pathIndex }) => pathIndex === index
+          })(state.mode)
+      })
     )
   )
-)

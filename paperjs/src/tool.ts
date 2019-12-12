@@ -43,10 +43,7 @@ type ToolOptions<State, Action, Query, T> = MakeOptional<
       WritableToolOptions<State>,
       TempoAttributes<State, Action, Query, Tool, T>
     >,
-    Merge<
-      ToolAttributes<State>,
-      ToolEvents<State, Action>
-    >
+    Merge<ToolAttributes<State>, ToolEvents<State, Action>>
   >
 >
 
@@ -57,15 +54,13 @@ export const tool = <State, Action, Query = unknown, T = unknown>(
     render(ctx: PaperContext<Action>, state: State) {
       const tool = new ctx.scope.Tool() as Tool
       let value: T | undefined
-      if (options.afterrender)
-         value = options.afterrender(state, tool, ctx)
+      if (options.afterrender) value = options.afterrender(state, tool, ctx)
       const active = resolveAttribute(options.active)(state)
-      if (typeof active === 'undefined' || active === true)
-        tool.activate()
+      if (typeof active === 'undefined' || active === true) tool.activate()
 
       const derived = [] as ((state: State) => void)[]
 
-      derived.push((newState: State) => state = newState)
+      derived.push((newState: State) => (state = newState))
 
       if (typeof options.active === 'function')
         derived.push((state: State) => {
@@ -79,8 +74,7 @@ export const tool = <State, Action, Query = unknown, T = unknown>(
           const f = options[attr] as PaperEventHandler<State, Action, any, Tool>
           anyTool[attr] = (event: any) => {
             const action = f(state, event, tool, ctx.project)
-            if (typeof action !== 'undefined')
-              ctx.dispatch(action)
+            if (typeof action !== 'undefined') ctx.dispatch(action)
           }
         } else {
           const value = resolveAttribute(options[attr])
@@ -106,13 +100,10 @@ export const tool = <State, Action, Query = unknown, T = unknown>(
             value = options.afterchange(state, tool, ctx, value)
         },
         destroy() {
-          if (options.beforedestroy)
-            options.beforedestroy(tool, ctx, value)
+          if (options.beforedestroy) options.beforedestroy(tool, ctx, value)
           tool.remove()
         },
-        request(query: Query) {
-
-        }
+        request(query: Query) {}
       }
     }
   }

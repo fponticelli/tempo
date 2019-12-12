@@ -18,7 +18,10 @@ import { DOMContext } from 'tempo-dom/lib/context'
 import { PaperContext } from './context'
 
 export const domPortal = <State, Action, Query = unknown>(
-  options: { getParent: (doc: Document) => Element, append: (doc: Document, node: Node) => void },
+  options: {
+    getParent: (doc: Document) => Element
+    append: (doc: Document, node: Node) => void
+  },
   ...children: DOMChild<State, Action, Query>[]
 ): PaperTemplate<State, Action, Query> => {
   return {
@@ -29,7 +32,10 @@ export const domPortal = <State, Action, Query = unknown>(
       }
       const domCtx = new DOMContext(doc!, () => {}, ctx.canvas, ctx.dispatch)
 
-      const port = portal({ append, getParent: options.getParent }, ...children).render(domCtx, state)
+      const port = portal(
+        { append, getParent: options.getParent },
+        ...children
+      ).render(domCtx, state)
       return {
         change(state: State) {
           port.change(state)
@@ -54,7 +60,9 @@ export const domPortalWithSelector = <State, Action, Query = unknown>(
       getParent: (doc: Document) => {
         const el = doc.querySelector(options.selector)
         if (!el) {
-          throw new Error(`selector doesn't match any element: "${options.selector}"`)
+          throw new Error(
+            `selector doesn't match any element: "${options.selector}"`
+          )
         }
         return el
       },
@@ -68,8 +76,9 @@ export const domPortalWithSelector = <State, Action, Query = unknown>(
     ...children
   )
 
-export const domHeadPortal = <State, Action, Query = unknown>(...children: DOMChild<State, Action, Query>[])
-    : PaperTemplate<State, Action, Query> =>
+export const domHeadPortal = <State, Action, Query = unknown>(
+  ...children: DOMChild<State, Action, Query>[]
+): PaperTemplate<State, Action, Query> =>
   domPortal<State, Action, Query>(
     {
       getParent: (doc: Document) => doc.head!,
@@ -78,8 +87,9 @@ export const domHeadPortal = <State, Action, Query = unknown>(...children: DOMCh
     ...children
   )
 
-export const domBodyPortal = <State, Action, Query = unknown>(...children: DOMChild<State, Action, Query>[])
-    : PaperTemplate<State, Action, Query> =>
+export const domBodyPortal = <State, Action, Query = unknown>(
+  ...children: DOMChild<State, Action, Query>[]
+): PaperTemplate<State, Action, Query> =>
   domPortal<State, Action, Query>(
     {
       getParent: (doc: Document) => doc.body,

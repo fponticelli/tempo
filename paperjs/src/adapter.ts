@@ -16,21 +16,37 @@ import { PaperComponentTemplate } from './component'
 import { PaperTemplate } from './template'
 import { PaperContext } from './context'
 
-export class PaperAdapterTemplate<OuterState, InnerState, OuterAction, InnerAction, Query>
-  implements PaperTemplate<OuterState, OuterAction, Query> {
+export class PaperAdapterTemplate<
+  OuterState,
+  InnerState,
+  OuterAction,
+  InnerAction,
+  Query
+> implements PaperTemplate<OuterState, OuterAction, Query> {
   constructor(
-    readonly mergeStates: (outerState: OuterState, innerState: InnerState) => InnerState | undefined,
-    readonly propagate: (args: PropagateArg<OuterState, InnerState, OuterAction, InnerAction>) => void,
+    readonly mergeStates: (
+      outerState: OuterState,
+      innerState: InnerState
+    ) => InnerState | undefined,
+    readonly propagate: (
+      args: PropagateArg<OuterState, InnerState, OuterAction, InnerAction>
+    ) => void,
     readonly child: PaperComponentTemplate<InnerState, InnerAction, Query>
   ) {}
 
-  render(ctx: PaperContext<OuterAction>, outerState: OuterState): View<OuterState, Query> {
+  render(
+    ctx: PaperContext<OuterAction>,
+    outerState: OuterState
+  ): View<OuterState, Query> {
     const mergedState =
-      (this.mergeStates && this.mergeStates(outerState, this.child.store.property.get())) ||
+      (this.mergeStates &&
+        this.mergeStates(outerState, this.child.store.property.get())) ||
       this.child.store.property.get()
 
     const viewComponent = this.child.render(
-      ctx.withDispatch(() => { /* COMPONENT IS DETACHED FROM CONTAINER AND DOESN'T PROPAGATE */ }),
+      ctx.withDispatch(() => {
+        /* COMPONENT IS DETACHED FROM CONTAINER AND DOESN'T PROPAGATE */
+      }),
       mergedState
     )
 
@@ -39,16 +55,19 @@ export class PaperAdapterTemplate<OuterState, InnerState, OuterAction, InnerActi
         action,
         innerState: state,
         outerState,
-        dispatchInner: (action: InnerAction) => this.child.store.process(action),
+        dispatchInner: (action: InnerAction) =>
+          this.child.store.process(action),
         dispatchOuter: ctx.dispatch
       })
     })
 
     return {
       change: (state: OuterState) => {
-        const newState = this.mergeStates(state, this.child.store.property.get())
-        if (typeof newState !== 'undefined')
-          viewComponent.change(newState)
+        const newState = this.mergeStates(
+          state,
+          this.child.store.property.get()
+        )
+        if (typeof newState !== 'undefined') viewComponent.change(newState)
       },
       destroy: () => {
         viewComponent.destroy()
@@ -60,7 +79,12 @@ export class PaperAdapterTemplate<OuterState, InnerState, OuterAction, InnerActi
   }
 }
 
-export interface PropagateArg<OuterState, InnerState, OuterAction, InnerAction> {
+export interface PropagateArg<
+  OuterState,
+  InnerState,
+  OuterAction,
+  InnerAction
+> {
   action: InnerAction
   innerState: InnerState
   outerState: OuterState
@@ -68,10 +92,21 @@ export interface PropagateArg<OuterState, InnerState, OuterAction, InnerAction> 
   dispatchOuter: (action: OuterAction) => void
 }
 
-export const adapter = <OuterState, InnerState, OuterAction, InnerAction, Query = unknown>(
+export const adapter = <
+  OuterState,
+  InnerState,
+  OuterAction,
+  InnerAction,
+  Query = unknown
+>(
   options: {
-    mergeStates?: (outerState: OuterState, innerState: InnerState) => InnerState | undefined
-    propagate?: (args: PropagateArg<OuterState, InnerState, OuterAction, InnerAction>) => void
+    mergeStates?: (
+      outerState: OuterState,
+      innerState: InnerState
+    ) => InnerState | undefined
+    propagate?: (
+      args: PropagateArg<OuterState, InnerState, OuterAction, InnerAction>
+    ) => void
   },
   child: PaperComponentTemplate<InnerState, InnerAction, Query>
 ): PaperTemplate<OuterState, OuterAction, Query> =>

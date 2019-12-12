@@ -20,6 +20,12 @@ export const project = <State, Action, Query>(
     height: DOMAttribute<State, number>
     scope?: PaperScope
     active?: DOMAttribute<State, boolean>
+    respond?: (
+      query: Query,
+      el: HTMLCanvasElement,
+      ctx: DOMContext<Action>,
+      scope: PaperLocal<State, Action, Query> | undefined
+    ) => void
   },
   ...children: PaperTemplate<State, Action, Query>[]
 ) => {
@@ -39,7 +45,8 @@ export const project = <State, Action, Query>(
       el: HTMLCanvasElement,
       ctx: DOMContext<Action>
     ) => {
-      const scope = options.scope || PaperScope.get(0) as unknown as PaperScope
+      const scope =
+        options.scope || ((PaperScope.get(0) as unknown) as PaperScope)
       const derived = [] as ((state: State) => void)[]
       scope.setup(el)
       scope.install(window)
@@ -103,6 +110,9 @@ export const project = <State, Action, Query>(
       if (typeof scope !== undefined) {
         const { views } = scope!
         views.forEach(view => view.request(query))
+        if (options.respond) {
+          options.respond(query, el, ctx, scope)
+        }
         return scope
       } else {
         return undefined

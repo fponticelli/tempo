@@ -40,7 +40,4 @@ export const shape = <State, Action, Query = unknown, T = unknown>(
     PointText,
     T,
     ShapeOptions<State, Action, Query, T, PointText>
-  >(
-    (_: State) => new PointText(new Point(0, 0)),
-    options
-  )
+  >((_: State) => new PointText(new Point(0, 0)), options)

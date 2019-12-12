@@ -337,7 +337,7 @@ function $TnZD$var$removeNode(node) {
 var $TnZD$export$removeNode = $TnZD$var$removeNode;
 $TnZD$exports.removeNode = $TnZD$export$removeNode;
 
-function $TnZD$var$insertBefore(ref) {
+function $TnZD$var$insertFBefore(ref) {
   return function (node) {
     if (ref.parentElement != null) {
       ref.parentElement.insertBefore(node, ref);
@@ -345,8 +345,8 @@ function $TnZD$var$insertBefore(ref) {
   };
 }
 
-var $TnZD$export$insertBefore = $TnZD$var$insertBefore;
-$TnZD$exports.insertBefore = $TnZD$export$insertBefore;
+var $TnZD$export$insertFBefore = $TnZD$var$insertFBefore;
+$TnZD$exports.insertFBefore = $TnZD$export$insertFBefore;
 
 function $TnZD$var$domChildToTemplate(dom) {
   if (typeof dom === 'string' || typeof dom === 'function' || typeof dom === 'undefined') return $GqEk$export$text(dom);else return dom;
@@ -559,12 +559,37 @@ var $yVFQ$export$component = function (attributes) {
 
 $yVFQ$exports.component = $yVFQ$export$component; //# sourceMappingURL=component.js.map
 
+// ASSET: ../node_modules/tempo-dom/lib/utils/index.js
+var $Na9D$exports = {};
+
+function $Na9D$var$__export(m) {
+  for (var p in m) if (!$Na9D$exports.hasOwnProperty(p)) $Na9D$exports[p] = m[p];
+}
+
+Object.defineProperty($Na9D$exports, "__esModule", {
+  value: true
+});
+$Na9D$var$__export($TnZD$exports);
+$Na9D$var$__export($BEVE$exports); //# sourceMappingURL=index.js.map
+
 // ASSET: ../node_modules/tempo-dom/lib/context.js
 var $OJrv$exports = {};
 Object.defineProperty($OJrv$exports, "__esModule", {
   value: true
 });
 
+/*
+Copyright 2019 Google LLC
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+    https://www.apache.org/licenses/LICENSE-2.0
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 var $OJrv$var$DOMContext =
 /** @class */
 function () {
@@ -601,6 +626,15 @@ function () {
         _this.dispatch(newAction);
       }
     });
+  };
+
+  DOMContext.prototype.withAppendToReference = function (refId) {
+    var ref = this.doc.createComment(refId || 't:ref');
+    this.append(ref);
+    return {
+      ctx: this.withAppend($Na9D$exports.insertFBefore(ref)),
+      ref: ref
+    };
   };
 
   DOMContext.prototype.withAppend = function (append) {
@@ -656,12 +690,7 @@ var $UPGL$var$Tempo;
 
     var view = component.render(new $OJrv$export$DOMContext(doc, append, el, function () {}), store.property.get());
     return {
-      destroy: function () {
-        return view.destroy();
-      },
-      request: function (query) {
-        return view.request(query);
-      },
+      view: view,
       store: store
     };
   }
@@ -1405,9 +1434,11 @@ var $UU8h$var$DOMUntilTemplate = function () {
     var _a = this.options,
         refId = _a.refId,
         repeatUntil = _a.repeatUntil;
-    var ref = ctx.doc.createComment(refId || 't:until');
-    ctx.append(ref);
-    var newCtx = ctx.withAppend($TnZD$export$insertBefore(ref));
+
+    var _b = ctx.withAppendToReference(refId),
+        newCtx = _b.ctx,
+        ref = _b.ref;
+
     var childrenViews = [];
     var view = {
       change: function (state) {
@@ -1583,20 +1614,25 @@ Object.defineProperty($iRIV$exports, "__esModule", {
 var $iRIV$var$MatchTemplate =
 /** @class */
 function () {
-  function MatchTemplate(path, matcher) {
+  function MatchTemplate(path, matcher, refId) {
     this.path = path;
     this.matcher = matcher;
+    this.refId = refId;
   }
 
   MatchTemplate.prototype.render = function (ctx, state) {
+    var _a = ctx.withAppendToReference(this.refId),
+        newCtx = _a.ctx,
+        ref = _a.ref;
+
     var key = this.path.reduce(function (acc, key) {
       return acc[key];
     }, state);
-    var view = this.matcher[key].render(ctx, state);
+    var view = this.matcher[key].render(newCtx, state);
 
-    var _a = this,
-        matcher = _a.matcher,
-        path = _a.path;
+    var _b = this,
+        matcher = _b.matcher,
+        path = _b.path;
 
     return {
       change: function (state) {
@@ -1609,10 +1645,11 @@ function () {
         } else {
           view.destroy();
           key = newKey;
-          view = matcher[newKey].render(ctx, state);
+          view = matcher[newKey].render(newCtx, state);
         }
       },
       destroy: function () {
+        $TnZD$export$removeNode(ref);
         view.destroy();
       },
       request: function (query) {
@@ -1627,12 +1664,12 @@ function () {
 var $iRIV$export$MatchTemplate = $iRIV$var$MatchTemplate;
 $iRIV$exports.MatchTemplate = $iRIV$export$MatchTemplate;
 
-var $iRIV$export$match = function (path, matcher) {
+var $iRIV$export$match = function (path, matcher, refId) {
   return new $iRIV$var$MatchTemplate(path, Object.keys(matcher).reduce(function (acc, key) {
     var _a;
 
     return $iRIV$var$__assign($iRIV$var$__assign({}, acc), (_a = {}, _a[key] = $TnZD$export$domChildToTemplate(matcher[key]), _a));
-  }, {}));
+  }, {}), refId || 't:match');
 };
 
 $iRIV$exports.match = $iRIV$export$match;
@@ -1646,20 +1683,25 @@ $iRIV$exports.matchKind = $iRIV$export$matchKind;
 var $iRIV$var$MatchBoolTemplate =
 /** @class */
 function () {
-  function MatchBoolTemplate(condition, trueTemplate, falseTemplate) {
+  function MatchBoolTemplate(condition, trueTemplate, falseTemplate, refId) {
     this.condition = condition;
     this.trueTemplate = trueTemplate;
     this.falseTemplate = falseTemplate;
+    this.refId = refId;
   }
 
   MatchBoolTemplate.prototype.render = function (ctx, state) {
-    var _a = this,
-        condition = _a.condition,
-        trueTemplate = _a.trueTemplate,
-        falseTemplate = _a.falseTemplate;
+    var _a = ctx.withAppendToReference(this.refId),
+        newCtx = _a.ctx,
+        ref = _a.ref;
+
+    var _b = this,
+        condition = _b.condition,
+        trueTemplate = _b.trueTemplate,
+        falseTemplate = _b.falseTemplate;
 
     var lastEvaluation = condition(state);
-    var view = lastEvaluation ? trueTemplate.render(ctx, state) : falseTemplate.render(ctx, state);
+    var view = lastEvaluation ? trueTemplate.render(newCtx, state) : falseTemplate.render(newCtx, state);
     return {
       change: function (state) {
         var newEvaluation = condition(state);
@@ -1669,10 +1711,11 @@ function () {
         } else {
           view.destroy();
           lastEvaluation = newEvaluation;
-          view = newEvaluation ? trueTemplate.render(ctx, state) : falseTemplate.render(ctx, state);
+          view = newEvaluation ? trueTemplate.render(newCtx, state) : falseTemplate.render(newCtx, state);
         }
       },
       destroy: function () {
+        $TnZD$export$removeNode(ref);
         view.destroy();
       },
       request: function (query) {
@@ -1688,7 +1731,7 @@ var $iRIV$export$MatchBoolTemplate = $iRIV$var$MatchBoolTemplate;
 $iRIV$exports.MatchBoolTemplate = $iRIV$export$MatchBoolTemplate;
 
 var $iRIV$export$matchBool = function (options) {
-  return new $iRIV$var$MatchBoolTemplate(options.condition, $TnZD$export$domChildToTemplate(options.true), $TnZD$export$domChildToTemplate(options.false));
+  return new $iRIV$var$MatchBoolTemplate(options.condition, $TnZD$export$domChildToTemplate(options.true), $TnZD$export$domChildToTemplate(options.false), options.refId || 't:match-bool');
 };
 
 $iRIV$exports.matchBool = $iRIV$export$matchBool;
@@ -1696,10 +1739,11 @@ $iRIV$exports.matchBool = $iRIV$export$matchBool;
 var $iRIV$var$MatchValueTemplate =
 /** @class */
 function () {
-  function MatchValueTemplate(path, matchers, orElse) {
+  function MatchValueTemplate(path, matchers, orElse, refId) {
     this.path = path;
     this.matchers = matchers;
     this.orElse = orElse;
+    this.refId = refId;
   }
 
   MatchValueTemplate.prototype.render = function (ctx, state) {
@@ -1709,11 +1753,15 @@ function () {
         matchers = _a.matchers,
         orElse = _a.orElse;
 
+    var _b = ctx.withAppendToReference(this.refId),
+        newCtx = _b.ctx,
+        ref = _b.ref;
+
     var oldKey = this.path.reduce(function (acc, key) {
       return acc[key];
     }, state);
     var template = this.matchers[oldKey] || this.orElse;
-    var view = template.render(ctx, state);
+    var view = template.render(newCtx, state);
     return {
       change: function (state) {
         var newKey = _this.path.reduce(function (acc, key) {
@@ -1726,10 +1774,11 @@ function () {
           view.destroy();
           oldKey = newKey;
           var template_1 = matchers[newKey] || orElse;
-          view = template_1.render(ctx, state);
+          view = template_1.render(newCtx, state);
         }
       },
       destroy: function () {
+        $TnZD$export$removeNode(ref);
         view.destroy();
       },
       request: function (query) {
@@ -1744,12 +1793,12 @@ function () {
 var $iRIV$export$MatchValueTemplate = $iRIV$var$MatchValueTemplate;
 $iRIV$exports.MatchValueTemplate = $iRIV$export$MatchValueTemplate;
 
-var $iRIV$export$matchValue = function (path, matchers, orElse) {
+var $iRIV$export$matchValue = function (path, matchers, orElse, refId) {
   return new $iRIV$var$MatchValueTemplate(path, Object.keys(matchers).reduce(function (acc, key) {
     var _a;
 
     return $iRIV$var$__assign($iRIV$var$__assign({}, acc), (_a = {}, _a[key] = $TnZD$export$domChildToTemplate(matchers[key]), _a));
-  }, {}), $TnZD$export$domChildToTemplate(orElse));
+  }, {}), $TnZD$export$domChildToTemplate(orElse), refId || 't:match-value');
 };
 
 $iRIV$exports.matchValue = $iRIV$export$matchValue; //# sourceMappingURL=match.js.map
@@ -1980,6 +2029,12 @@ var $FLek$export$Action = {
       sample: sample
     };
   },
+  exportSVG: {
+    kind: 'ExportSVG'
+  },
+  exportPNG: {
+    kind: 'ExportPNG'
+  },
   setMainAreaSize: function setMainAreaSize(size) {
     return {
       kind: 'SetMainAreaSize',
@@ -1997,6 +2052,18 @@ var $bcMl$export$Query = {
   mainAreaSize: function mainAreaSize(callback) {
     return {
       kind: 'MainAreaSize',
+      callback: callback
+    };
+  },
+  exportPNG: function exportPNG(callback) {
+    return {
+      kind: 'ExportPNG',
+      callback: callback
+    };
+  },
+  exportSVG: function exportSVG(callback) {
+    return {
+      kind: 'ExportSVG',
       callback: callback
     };
   }
@@ -2607,7 +2674,7 @@ function $wV43$var$removeNode(node) {
 var $wV43$export$removeNode = $wV43$var$removeNode;
 $wV43$exports.removeNode = $wV43$export$removeNode;
 
-function $wV43$var$insertBefore(ref) {
+function $wV43$var$insertFBefore(ref) {
   return function (node) {
     if (ref.parentElement != null) {
       ref.parentElement.insertBefore(node, ref);
@@ -2615,8 +2682,8 @@ function $wV43$var$insertBefore(ref) {
   };
 }
 
-var $wV43$export$insertBefore = $wV43$var$insertBefore;
-$wV43$exports.insertBefore = $wV43$export$insertBefore;
+var $wV43$export$insertFBefore = $wV43$var$insertFBefore;
+$wV43$exports.insertFBefore = $wV43$export$insertFBefore;
 
 function $wV43$var$domChildToTemplate(dom) {
   if (typeof dom === 'string' || typeof dom === 'function' || typeof dom === 'undefined') return $e0nT$export$text(dom);else return dom;
@@ -19760,6 +19827,11 @@ var $ST02$export$project = function (options) {
         views.forEach(function (view) {
           return view.request(query);
         });
+
+        if (options.respond) {
+          options.respond(query, el, ctx, scope);
+        }
+
         return scope;
       } else {
         return undefined;
@@ -36205,6 +36277,39 @@ var $GYcQ$exports = function () {
   return module.exports;
 }.call({});
 
+// ASSET: middleware.ts
+var $GrqS$exports = {};
+Object.defineProperty($GrqS$exports, "__esModule", {
+  value: true
+});
+
+var $GrqS$var$makeSave = function makeSave(name, type) {
+  return function (file) {
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(file);
+    a.download = name;
+    a.click();
+  };
+};
+
+var $GrqS$var$saveSVG = $GrqS$var$makeSave('export.svg', 'application/svg+xml');
+var $GrqS$var$savePNG = $GrqS$var$makeSave('export.png', 'image/png');
+
+var $GrqS$export$makeMiddleware = function (view) {
+  return function (state, action) {
+    switch (action.kind) {
+      case 'ExportPNG':
+        return view.request($bcMl$export$Query.exportPNG($GrqS$var$savePNG));
+
+      case 'ExportSVG':
+        return view.request($bcMl$export$Query.exportSVG($GrqS$var$saveSVG));
+
+      default:
+    }
+  };
+};
+
+$GrqS$exports.makeMiddleware = $GrqS$export$makeMiddleware;
 // ASSET: ../node_modules/tempo-paper/node_modules/tempo-core/lib/util/objects.js
 var $e5bF$exports = {};
 Object.defineProperty($e5bF$exports, "__esModule", {
@@ -36476,7 +36581,9 @@ function () {
     var _this = this;
 
     var mergedState = this.mergeStates && this.mergeStates(outerState, this.child.store.property.get()) || this.child.store.property.get();
-    var viewComponent = this.child.render(ctx.withDispatch(function () {}), mergedState);
+    var viewComponent = this.child.render(ctx.withDispatch(function () {
+      /* COMPONENT IS DETACHED FROM CONTAINER AND DOESN'T PROPAGATE */
+    }), mergedState);
     this.child.store.observable.on(function (state, action) {
       _this.propagate({
         action: action,
@@ -36527,9 +36634,6 @@ Object.defineProperty($AVNj$exports, "__esModule", {
   value: true
 });
 var $AVNj$export$Mode = {
-  idle: {
-    kind: 'idle'
-  },
   drawing: {
     kind: 'drawing'
   },
@@ -36544,7 +36648,7 @@ $AVNj$exports.Mode = $AVNj$export$Mode;
 var $AVNj$export$state = {
   paths: [],
   current: [],
-  mode: $AVNj$export$Mode.idle
+  mode: $AVNj$export$Mode.drawing
 };
 $AVNj$exports.state = $AVNj$export$state;
 // ASSET: path_simplification/reducer.ts
@@ -36603,6 +36707,14 @@ var $Vh63$export$reducer = $KKGP$export$reduceOnKind({
       paths: paths,
       current: [],
       mode: $AVNj$export$Mode.editing(paths.length - 1)
+    });
+  },
+  RemovePath: function RemovePath(state) {
+    if (state.mode.kind === 'drawing') return state;
+    var paths = state.paths.slice(0, state.mode.pathIndex).concat(state.paths.slice(state.mode.pathIndex + 1));
+    return $Vh63$var$__assign($Vh63$var$__assign({}, state), {
+      mode: $AVNj$export$Mode.drawing,
+      paths: paths
     });
   },
   ChangeMode: function ChangeMode(state, action) {
@@ -36753,15 +36865,14 @@ var $Nt5a$export$Action = {
   addPath: {
     kind: 'AddPath'
   },
+  removePath: {
+    kind: 'RemovePath'
+  },
   selectPath: function selectPath(pathIndex) {
     return {
       kind: 'ChangeMode',
       mode: $AVNj$export$Mode.editing(pathIndex)
     };
-  },
-  unselect: {
-    kind: 'ChangeMode',
-    mode: $AVNj$export$Mode.idle
   },
   draw: {
     kind: 'ChangeMode',
@@ -37045,6 +37156,18 @@ var $VxRO$export$bodyPortal = function () {
 
 $VxRO$exports.bodyPortal = $VxRO$export$bodyPortal; //# sourceMappingURL=portal.js.map
 
+// ASSET: ../node_modules/tempo-paper/node_modules/tempo-dom/lib/utils/index.js
+var $yFqh$exports = {};
+
+function $yFqh$var$__export(m) {
+  for (var p in m) if (!$yFqh$exports.hasOwnProperty(p)) $yFqh$exports[p] = m[p];
+}
+
+Object.defineProperty($yFqh$exports, "__esModule", {
+  value: true
+});
+$yFqh$var$__export($wV43$exports);
+$yFqh$var$__export($Zrvy$exports);
 // ASSET: ../node_modules/tempo-paper/node_modules/tempo-dom/lib/context.js
 var $ZfoF$exports = {};
 Object.defineProperty($ZfoF$exports, "__esModule", {
@@ -37083,6 +37206,15 @@ var $ZfoF$var$DOMContext = function () {
         _this.dispatch(newAction);
       }
     });
+  };
+
+  DOMContext.prototype.withAppendToReference = function (refId) {
+    var ref = this.doc.createComment(refId || 't:ref');
+    this.append(ref);
+    return {
+      ctx: this.withAppend($yFqh$exports.insertFBefore(ref)),
+      ref: ref
+    };
   };
 
   DOMContext.prototype.withAppend = function (append) {
@@ -37617,16 +37749,24 @@ Object.defineProperty($nYZ9$exports, "__esModule", {
   value: true
 });
 var $nYZ9$export$toolbar = $zQMt$export$span({}, $iRIV$export$match(['mode', 'kind'], {
-  idle: function idle(state) {
-    return state.paths.length > 0 ? 'Click to select a line or click and drag to draw' : 'Click and drop to draw a line';
-  },
   editing: function editing(state) {
     return "Selected line has " + state.paths[state.mode.pathIndex].segments.length + " segments";
   },
   drawing: function drawing(state) {
-    return "Line has " + state.current.length + " segments";
+    if (state.current.length > 0) return "Line has " + state.current.length + " segments";else if (state.paths.length > 0) return 'Click to select a line or click and drag to draw';else return 'Click and drag to draw a line';
   }
-}));
+}), $zQMt$export$button({
+  attrs: {
+    disabled: function disabled(state) {
+      return state.mode.kind !== 'editing';
+    }
+  },
+  events: {
+    click: function click() {
+      return $Nt5a$export$Action.removePath;
+    }
+  }
+}, 'remove selected'));
 $nYZ9$exports.toolbar = $nYZ9$export$toolbar;
 // ASSET: path_simplification/app.ts
 var $pA64$exports = {};
@@ -37642,7 +37782,7 @@ var $pA64$export$makeApp = function (store) {
   }, $nYZ9$export$toolbar), $VFAJ$export$tool({
     active: function active(_a) {
       var mode = _a.mode;
-      return mode.kind === 'idle';
+      return mode.kind === 'drawing';
     },
     onMouseDown: function onMouseDown(_1, event, _3, project) {
       var target = project.hitTest(event.point, {
@@ -37657,7 +37797,10 @@ var $pA64$export$makeApp = function (store) {
       }
     },
     onMouseUp: function onMouseUp() {
-      return $Nt5a$export$Action.unselect;
+      return $Nt5a$export$Action.addPath;
+    },
+    onMouseDrag: function onMouseDrag(_, event) {
+      return $Nt5a$export$Action.addSegment(new $GYcQ$exports.Segment(event.point));
     }
   }), $VFAJ$export$tool({
     active: function active(_a) {
@@ -37673,22 +37816,11 @@ var $pA64$export$makeApp = function (store) {
       if (target) {
         return $Nt5a$export$Action.selectPath(target.item.index);
       } else {
-        return $Nt5a$export$Action.unselect;
+        return $Nt5a$export$Action.draw;
       }
     },
     onMouseDrag: function onMouseDrag(_1, event) {
       return $Nt5a$export$Action.updatePosition(event.delta);
-    }
-  }), $VFAJ$export$tool({
-    active: function active(_a) {
-      var mode = _a.mode;
-      return mode.kind === 'drawing';
-    },
-    onMouseUp: function onMouseUp() {
-      return $Nt5a$export$Action.addPath;
-    },
-    onMouseDrag: function onMouseDrag(_, event) {
-      return $Nt5a$export$Action.addSegment(new $GYcQ$exports.Segment(event.point));
     }
   }), $kzB0$export$path({
     segments: function segments(state) {
@@ -37709,8 +37841,8 @@ var $pA64$export$makeApp = function (store) {
       var item = _a[0];
       return item.segments;
     },
-    strokeWidth: 3,
-    strokeColor: new $GYcQ$exports.Color(0.75, 0.75, 0.75),
+    strokeWidth: 1,
+    strokeColor: new $GYcQ$exports.Color(0.2, 0.2, 0.2),
     fullySelected: function fullySelected(_a) {
       var _ = _a[0],
           state = _a[1],
@@ -37722,9 +37854,6 @@ var $pA64$export$makeApp = function (store) {
         editing: function editing(_a) {
           var pathIndex = _a.pathIndex;
           return pathIndex === index;
-        },
-        idle: function idle() {
-          return false;
         }
       })(state.mode);
     }
@@ -37776,6 +37905,12 @@ var $ZCfc$var$reducer = $KKGP$export$reduceOnKind({
     return $ZCfc$var$__assign($ZCfc$var$__assign({}, state), {
       mainAreaSize: action.size
     });
+  },
+  ExportPNG: function ExportPNG(state) {
+    return state;
+  },
+  ExportSVG: function ExportSVG(state) {
+    return state;
   }
 });
 var $ZCfc$var$store = $xN6r$export$Store.ofState({
@@ -37794,7 +37929,23 @@ var $ZCfc$var$template = $zQMt$export$article({
   attrs: {
     id: 'toolbar'
   }
-})), $zQMt$export$section({
+}), $zQMt$export$div({
+  attrs: {
+    class: 'toolbar-fixed'
+  }
+}, $zQMt$export$button({
+  events: {
+    click: function click() {
+      return $FLek$export$Action.exportSVG;
+    }
+  }
+}, 'Export to SVG'), $zQMt$export$button({
+  events: {
+    click: function click() {
+      return $FLek$export$Action.exportPNG;
+    }
+  }
+}, 'Export to PNG'))), $zQMt$export$section({
   attrs: {
     class: 'body'
   }
@@ -37863,6 +38014,24 @@ var $ZCfc$var$template = $zQMt$export$article({
     height: function height(_a) {
       var size = _a.size;
       return size.height;
+    },
+    respond: function respond(query, el, ctx, scope) {
+      if (!scope) return;
+
+      if (query.kind === 'ExportSVG') {
+        var content = scope.context.project.exportSVG({
+          asString: true,
+          embedImages: true
+        });
+        var file = new Blob([content], {
+          type: 'application/svg+xml'
+        });
+        query.callback(file);
+      } else if (query.kind === 'ExportPNG') {
+        scope.context.canvas.toBlob(function (blob) {
+          return query.callback(blob);
+        }, 'image/png');
+      }
     }
   }, $fICP$export$matchKind({
     circle: $p2mr$export$template,
@@ -37873,9 +38042,10 @@ var $ZCfc$var$template = $zQMt$export$article({
 var $ZCfc$var$view = $UPGL$export$Tempo.render({
   store: $ZCfc$var$store,
   template: $ZCfc$var$template
-});
+}).view;
+$ZCfc$var$store.observable.on($GrqS$export$makeMiddleware($ZCfc$var$view));
 var $ZCfc$var$updateSizeQuery = $bcMl$export$Query.mainAreaSize(function (size) {
-  $ZCfc$var$view.store.process($FLek$export$Action.setMainAreaSize(size));
+  $ZCfc$var$store.process($FLek$export$Action.setMainAreaSize(size));
 });
 $ZCfc$var$view.request($ZCfc$var$updateSizeQuery);
 window.addEventListener('resize', function () {

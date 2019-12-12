@@ -29,10 +29,7 @@ export class DOMWhenTemplate<State, Action, Query> implements DOMTemplate<State,
   ) {}
   render(ctx: DOMContext<Action>, state: State): View<State, Query> {
     const { condition, refId } = this.options
-    const ref = ctx.doc.createComment(refId || 't:when')
-    ctx.append(ref)
-    const parent = ref.parentElement!
-    const newCtx = ctx.withAppend((node: Node) => parent.insertBefore(node, ref))
+    const { ctx: newCtx, ref } = ctx.withAppendToReference(refId || 't:when')
     let views: View<State, Query>[] | undefined
     const view = {
       change: (state: State) => {

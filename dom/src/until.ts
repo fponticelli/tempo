@@ -14,7 +14,7 @@ limitations under the License.
 import { View } from 'tempo-core/lib/view'
 import { DOMContext } from './context'
 import { DOMTemplate, DOMChild } from './template'
-import { removeNode, domChildToTemplate, insertBefore } from './utils/dom'
+import { removeNode, domChildToTemplate } from './utils/dom'
 import { mapArray } from 'tempo-core/lib/util/map'
 
 export class DOMUntilTemplate<OuterState, InnerState, Action, Query> implements DOMTemplate<OuterState, Action, Query> {
@@ -29,9 +29,7 @@ export class DOMUntilTemplate<OuterState, InnerState, Action, Query> implements 
   render(ctx: DOMContext<Action>, state: OuterState): View<OuterState, Query> {
     const { children } = this
     const { refId, repeatUntil } = this.options
-    const ref = ctx.doc.createComment(refId || 't:until')
-    ctx.append(ref)
-    const newCtx = ctx.withAppend(insertBefore(ref))
+    const { ctx: newCtx, ref } = ctx.withAppendToReference(refId)
     let childrenViews: View<InnerState, Query>[][] = []
     const view = {
       change: (state: OuterState) => {

@@ -15,11 +15,11 @@ import { Store } from 'tempo-store/lib/store'
 import { DOMComponentTemplate, component } from './component'
 import { DOMContext } from './context'
 import { DOMChild } from './template'
+import { View } from 'tempo-core/lib/view'
 
 export type TempoView<State, Action, Query> = Readonly<{
+  view: View<State, Query>
   store: Store<State, Action>
-  request(query: Query): void
-  destroy(): void
 }>
 
 export module Tempo {
@@ -44,8 +44,7 @@ export module Tempo {
     )
 
     return {
-      destroy: () => view.destroy(),
-      request: (query: Query) => view.request(query),
+      view,
       store
     }
   }

@@ -12,7 +12,7 @@ limitations under the License.
 */
 
 import { Tempo } from 'tempo-dom/lib/tempo'
-import { main, li, span, a, article, section, header, ul, div } from 'tempo-dom/lib/html'
+import { main, li, span, a, article, section, header, ul, div, button } from 'tempo-dom/lib/html'
 import { iterate } from 'tempo-dom/lib/iterate'
 import { containerSize } from 'tempo-dom/lib/utils/dom'
 import { matchBool } from 'tempo-dom/lib/match'
@@ -25,7 +25,7 @@ import { Store } from 'tempo-store/lib/store'
 import { reduceOnKind } from 'tempo-store/lib/reducer'
 import { project } from 'tempo-paper/lib/project'
 import { Size } from 'paper'
-
+import { makeMiddleware } from './middleware'
 import { template as circleTemplate } from './circle/main'
 import { template as pathSimplificationTemplate } from './path_simplification/main'
 
@@ -39,7 +39,9 @@ const reducer = reduceOnKind<State, Action>({
   SetMainAreaSize: (state, action) => ({
     ...state,
     mainAreaSize: action.size
-  })
+  }),
+  ExportPNG: state => state,
+  ExportSVG: state => state
 })
 
 const store = Store.ofState({ state, reducer })
@@ -49,7 +51,18 @@ const template = article<State, Action, Query>(
   header(
     { attrs: { class: 'header' } },
     'header',
-    div({ attrs: { id: 'toolbar' } })
+    div({ attrs: { id: 'toolbar' } }),
+    div(
+      { attrs: { class: 'toolbar-fixed' } },
+      button(
+        { events: { click: () => Action.exportSVG } },
+        'Export to SVG'
+      ),
+      button(
+        { events: { click: () => Action.exportPNG } },
+        'Export to PNG'
+      )
+    )
   ),
   section(
     { attrs: { class: 'body' } },
@@ -98,7 +111,20 @@ const template = article<State, Action, Query>(
           project<CanvasState, any, any>(
             {
               width: ({size}) => size.width!,
-              height: ({size}) => size.height!
+              height: ({size}) => size.height!,
+              respond(query: Query, el, ctx, scope) {
+                if (!scope) return
+                if (query.kind === 'ExportSVG') {
+                  const content = scope.context.project.exportSVG({
+                    asString: true,
+                    embedImages: true
+                  }) as string
+                  const file = new Blob([content], { type: 'application/svg+xml' })
+                  query.callback(file)
+                } else if (query.kind === 'ExportPNG') {
+                  scope.context.canvas.toBlob(blob => query.callback(blob!), 'image/png')
+                }
+              }
             },
             matchKind<CanvasState, any, any>({
               circle: circleTemplate,
@@ -112,10 +138,12 @@ const template = article<State, Action, Query>(
   )
 )
 
-const view = Tempo.render({ store, template })
+const { view } = Tempo.render({ store, template })
+
+store.observable.on(makeMiddleware(view))
 
 const updateSizeQuery = Query.mainAreaSize(size => {
-  view.store.process(Action.setMainAreaSize(size))
+  store.process(Action.setMainAreaSize(size))
 })
 
 view.request(updateSizeQuery)

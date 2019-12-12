@@ -1,3 +1,5 @@
+import { insertFBefore as makeInsertBefore } from './utils'
+
 /*
 Copyright 2019 Google LLC
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -42,6 +44,15 @@ export class DOMContext<Action> {
         this.dispatch(newAction)
       }
     })
+  }
+
+  withAppendToReference(refId?: string) {
+    const ref = this.doc.createComment(refId || 't:ref')
+    this.append(ref)
+    return {
+      ctx: this.withAppend(makeInsertBefore(ref)),
+      ref
+    }
   }
 
   withAppend(append: (node: Node) => void) {

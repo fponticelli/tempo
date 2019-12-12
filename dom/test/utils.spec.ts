@@ -11,7 +11,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { removeNode, insertBefore } from '../src/utils/dom'
+import { removeNode, insertFBefore } from '../src/utils/dom'
 import { createContext } from './common'
 
 describe('utils', () => {
@@ -32,7 +32,7 @@ describe('utils', () => {
     expect(triggered).toEqual(1)
   })
 
-  it('insertBefore', () => {
+  it('insertFBefore', () => {
     const ctx = createContext()
     const div0 = ctx.doc.createElement('div')
     div0.innerHTML = '0'
@@ -40,9 +40,9 @@ describe('utils', () => {
     div1.innerHTML = '1'
     const div2 = ctx.doc.createElement('div')
     div2.innerHTML = '2'
-    insertBefore(div1)(div0) // this will not insert
+    insertFBefore(div1)(div0) // this will not insert
     ctx.doc.body.appendChild(div2)
-    insertBefore(div2)(div1)
+    insertFBefore(div2)(div1)
     expect(ctx.doc.body.innerHTML).toEqual('<div>1</div><div>2</div>')
   })
 })

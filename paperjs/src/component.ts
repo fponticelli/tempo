@@ -16,7 +16,8 @@ import { PaperTemplate } from './template'
 import { PaperContext } from './context'
 import { mapArray } from 'tempo-core/lib/util/map'
 
-export class PaperComponentTemplate<State, Action, Query> implements PaperTemplate<State, Action, Query> {
+export class PaperComponentTemplate<State, Action, Query>
+  implements PaperTemplate<State, Action, Query> {
   constructor(
     readonly store: Store<State, Action>,
     readonly children: PaperTemplate<State, Action, Query>[],
@@ -49,7 +50,9 @@ export class PaperComponentTemplate<State, Action, Query> implements PaperTempla
       store.process(action)
     }
     const newCtx = ctx.withDispatch(innerDispatch)
-    const views = mapArray(this.children, child => child.render(newCtx, property.get()))
+    const views = mapArray(this.children, child =>
+      child.render(newCtx, property.get())
+    )
     const view = {
       change: (state: State) => {
         store.property.set(state)
@@ -74,4 +77,9 @@ export const component = <State, Action, Query = unknown>(
     delayed?: boolean
   },
   ...children: PaperTemplate<State, Action, Query>[]
-) => new PaperComponentTemplate<State, Action, Query>(attributes.store, children, attributes.delayed || false)
+) =>
+  new PaperComponentTemplate<State, Action, Query>(
+    attributes.store,
+    children,
+    attributes.delayed || false
+  )

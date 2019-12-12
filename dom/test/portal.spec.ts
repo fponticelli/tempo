@@ -30,13 +30,13 @@ describe('portal', () => {
       { store },
       portalWithSelector({ selector: '#container' }, span({ attrs: { className: (s: string) => s } }))
     )
-    const view = Tempo.renderComponent({
+    const { view } = Tempo.renderComponent({
       el: ctx.doc.getElementById('main')!,
       component: comp,
       document: ctx.doc
     })
     expect(ctx.doc.body.innerHTML).toEqual('<div id="main"></div><div id="container"><span class="hello"></span></div>')
-    view.store.process('foo')
+    store.process('foo')
     expect(ctx.doc.body.innerHTML).toEqual('<div id="main"></div><div id="container"><span class="foo"></span></div>')
     view.destroy()
     expect(ctx.doc.body.innerHTML).toEqual('<div id="main"></div><div id="container"></div>')
@@ -72,13 +72,13 @@ describe('portal', () => {
       { store },
       headPortal(style({}, s => s))
     )
-    const view = Tempo.renderComponent({
+    const { view } = Tempo.renderComponent({
       el: ctx.doc.body!,
       component: comp,
       document: ctx.doc
     })
     expect(ctx.doc.head.innerHTML).toEqual('<style>background-color: red</style>')
-    view.store.process('color: black')
+    store.process('color: black')
     expect(ctx.doc.head.innerHTML).toEqual('<style>color: black</style>')
     view.destroy()
     expect(ctx.doc.head.innerHTML).toEqual('')
@@ -94,13 +94,13 @@ describe('portal', () => {
       { store },
       bodyPortal(style({}, s => s))
     )
-    const view = Tempo.renderComponent({
+    const { view } = Tempo.renderComponent({
       el: ctx.doc.body!,
       component: comp,
       document: ctx.doc
     })
     expect(ctx.doc.body.innerHTML).toEqual('<style>background-color: red</style>')
-    view.store.process('color: black')
+    store.process('color: black')
     expect(ctx.doc.body.innerHTML).toEqual('<style>color: black</style>')
     view.destroy()
     expect(ctx.doc.body.innerHTML).toEqual('')

@@ -15,32 +15,46 @@ import { PaperTemplate } from './template'
 import { mapState } from './map'
 import { until } from './until'
 
-export const iterate = <OuterState, InnerState extends any[], Action, Query = unknown>(
+export const iterate = <
+  OuterState,
+  InnerState extends any[],
+  Action,
+  Query = unknown
+>(
   options: {
     refId?: string
     getArray: (outer: OuterState) => InnerState
   },
-  ...children: PaperTemplate<[InnerState[number], OuterState, number], Action, Query>[]
+  ...children: PaperTemplate<
+    [InnerState[number], OuterState, number],
+    Action,
+    Query
+  >[]
 ): PaperTemplate<OuterState, Action, Query> => {
   let outerState: OuterState
   return mapState<OuterState, InnerState, Action, Query>(
     {
-      map: (outer) => {
+      map: outer => {
         outerState = outer
         return options.getArray(outer)
       }
     },
     until<InnerState, InnerState[number], Action, Query>(
       {
-        repeatUntil:
-          (value: InnerState, index: number) => value[index] && ([value[index], outerState, index])
+        repeatUntil: (value: InnerState, index: number) =>
+          value[index] && [value[index], outerState, index]
       },
       ...children
     )
   )
 }
 
-export const iterateItems = <OuterState, InnerState extends any[], Action, Query = unknown>(
+export const iterateItems = <
+  OuterState,
+  InnerState extends any[],
+  Action,
+  Query = unknown
+>(
   options: {
     refId?: string
     getArray: (outer: OuterState) => InnerState
@@ -49,12 +63,11 @@ export const iterateItems = <OuterState, InnerState extends any[], Action, Query
 ): PaperTemplate<OuterState, Action, Query> => {
   return mapState<OuterState, InnerState, Action, Query>(
     {
-      map: (outer) => options.getArray(outer)
+      map: outer => options.getArray(outer)
     },
     until<InnerState, InnerState[number], Action, Query>(
       {
-        repeatUntil:
-          (value: InnerState, index: number) => value[index]
+        repeatUntil: (value: InnerState, index: number) => value[index]
       },
       ...children
     )

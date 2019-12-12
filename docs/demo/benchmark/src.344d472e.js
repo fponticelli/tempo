@@ -1031,7 +1031,7 @@ function $TnZD$var$removeNode(node) {
 var $TnZD$export$removeNode = $TnZD$var$removeNode;
 $TnZD$exports.removeNode = $TnZD$export$removeNode;
 
-function $TnZD$var$insertBefore(ref) {
+function $TnZD$var$insertFBefore(ref) {
   return function (node) {
     if (ref.parentElement != null) {
       ref.parentElement.insertBefore(node, ref);
@@ -1039,8 +1039,8 @@ function $TnZD$var$insertBefore(ref) {
   };
 }
 
-var $TnZD$export$insertBefore = $TnZD$var$insertBefore;
-$TnZD$exports.insertBefore = $TnZD$export$insertBefore;
+var $TnZD$export$insertFBefore = $TnZD$var$insertFBefore;
+$TnZD$exports.insertFBefore = $TnZD$export$insertFBefore;
 
 function $TnZD$var$domChildToTemplate(dom) {
   if (typeof dom === 'string' || typeof dom === 'function' || typeof dom === 'undefined') return $GqEk$export$text(dom);else return dom;
@@ -1967,9 +1967,11 @@ var $UU8h$var$DOMUntilTemplate = function () {
     var _a = this.options,
         refId = _a.refId,
         repeatUntil = _a.repeatUntil;
-    var ref = ctx.doc.createComment(refId || 't:until');
-    ctx.append(ref);
-    var newCtx = ctx.withAppend($TnZD$export$insertBefore(ref));
+
+    var _b = ctx.withAppendToReference(refId),
+        newCtx = _b.ctx,
+        ref = _b.ref;
+
     var childrenViews = [];
     var view = {
       change: function (state) {
@@ -2116,12 +2118,11 @@ function () {
     var _a = this.options,
         condition = _a.condition,
         refId = _a.refId;
-    var ref = ctx.doc.createComment(refId || 't:when');
-    ctx.append(ref);
-    var parent = ref.parentElement;
-    var newCtx = ctx.withAppend(function (node) {
-      return parent.insertBefore(node, ref);
-    });
+
+    var _b = ctx.withAppendToReference(refId || 't:when'),
+        newCtx = _b.ctx,
+        ref = _b.ref;
+
     var views;
     var view = {
       change: function (state) {
@@ -2926,12 +2927,37 @@ var $yVFQ$export$component = function (attributes) {
 
 $yVFQ$exports.component = $yVFQ$export$component; //# sourceMappingURL=component.js.map
 
+// ASSET: ../node_modules/tempo-dom/lib/utils/index.js
+var $Na9D$exports = {};
+
+function $Na9D$var$__export(m) {
+  for (var p in m) if (!$Na9D$exports.hasOwnProperty(p)) $Na9D$exports[p] = m[p];
+}
+
+Object.defineProperty($Na9D$exports, "__esModule", {
+  value: true
+});
+$Na9D$var$__export($TnZD$exports);
+$Na9D$var$__export($BEVE$exports); //# sourceMappingURL=index.js.map
+
 // ASSET: ../node_modules/tempo-dom/lib/context.js
 var $OJrv$exports = {};
 Object.defineProperty($OJrv$exports, "__esModule", {
   value: true
 });
 
+/*
+Copyright 2019 Google LLC
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+    https://www.apache.org/licenses/LICENSE-2.0
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 var $OJrv$var$DOMContext =
 /** @class */
 function () {
@@ -2968,6 +2994,15 @@ function () {
         _this.dispatch(newAction);
       }
     });
+  };
+
+  DOMContext.prototype.withAppendToReference = function (refId) {
+    var ref = this.doc.createComment(refId || 't:ref');
+    this.append(ref);
+    return {
+      ctx: this.withAppend($Na9D$exports.insertFBefore(ref)),
+      ref: ref
+    };
   };
 
   DOMContext.prototype.withAppend = function (append) {
@@ -3023,12 +3058,7 @@ var $UPGL$var$Tempo;
 
     var view = component.render(new $OJrv$export$DOMContext(doc, append, el, function () {}), store.property.get());
     return {
-      destroy: function () {
-        return view.destroy();
-      },
-      request: function (query) {
-        return view.request(query);
-      },
+      view: view,
       store: store
     };
   }

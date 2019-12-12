@@ -7,11 +7,11 @@ import { Action } from './action'
 import { makeApp } from './app'
 
 const store = Store.ofState<State, Action>({
-  state, reducer
+  state,
+  reducer
 })
 
-export const template =
-  adapter<CanvasState, State, unknown, Action>(
-    {},
-    makeApp(store)
-  )
+export const template = adapter<CanvasState, State, unknown, Action>(
+  {},
+  makeApp(store)
+)

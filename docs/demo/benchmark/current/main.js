@@ -401,14 +401,14 @@ function removeNode(node) {
     }
 }
 exports.removeNode = removeNode;
-function insertBefore(ref) {
+function insertFBefore(ref) {
     return function (node) {
         if (ref.parentElement != null) {
             ref.parentElement.insertBefore(node, ref);
         }
     };
 }
-exports.insertBefore = insertBefore;
+exports.insertFBefore = insertFBefore;
 function domChildToTemplate(dom) {
     if (typeof dom === 'string' ||
         typeof dom === 'function' ||
@@ -841,9 +841,7 @@ var DOMUntilTemplate = /** @class */ (function () {
     DOMUntilTemplate.prototype.render = function (ctx, state) {
         var children = this.children;
         var _a = this.options, refId = _a.refId, repeatUntil = _a.repeatUntil;
-        var ref = ctx.doc.createComment(refId || 't:until');
-        ctx.append(ref);
-        var newCtx = ctx.withAppend(dom_1.insertBefore(ref));
+        var _b = ctx.withAppendToReference(refId), newCtx = _b.ctx, ref = _b.ref;
         var childrenViews = [];
         var view = {
             change: function (state) {
@@ -992,8 +990,19 @@ exports.deep = html_1.div({
 })), html_1.article({}, function (s) {
   return s.paragraph;
 })));
-},{"tempo-dom/lib/html":"zQMt"}],"OJrv":[function(require,module,exports) {
+},{"tempo-dom/lib/html":"zQMt"}],"Na9D":[function(require,module,exports) {
 "use strict";
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+__export(require("./dom"));
+__export(require("./set_attribute"));
+
+},{"./dom":"TnZD","./set_attribute":"BEVE"}],"OJrv":[function(require,module,exports) {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var utils_1 = require("./utils");
 /*
 Copyright 2019 Google LLC
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -1006,7 +1015,6 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-Object.defineProperty(exports, "__esModule", { value: true });
 var DOMContext = /** @class */ (function () {
     function DOMContext(doc, append, parent, dispatch) {
         this.doc = doc;
@@ -1034,6 +1042,14 @@ var DOMContext = /** @class */ (function () {
             }
         });
     };
+    DOMContext.prototype.withAppendToReference = function (refId) {
+        var ref = this.doc.createComment(refId || 't:ref');
+        this.append(ref);
+        return {
+            ctx: this.withAppend(utils_1.insertFBefore(ref)),
+            ref: ref
+        };
+    };
     DOMContext.prototype.withAppend = function (append) {
         return new DOMContext(this.doc, append, this.parent, this.dispatch);
     };
@@ -1047,7 +1063,7 @@ var DOMContext = /** @class */ (function () {
 }());
 exports.DOMContext = DOMContext;
 
-},{}],"izmn":[function(require,module,exports) {
+},{"./utils":"Na9D"}],"izmn":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {

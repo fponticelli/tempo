@@ -1,14 +1,12 @@
 import { Point, Segment } from 'paper'
 
-export type Mode =
-  | { kind: 'idle' }
-  | { kind: 'drawing' }
-  | { kind: 'editing', pathIndex: number }
+export type Mode = { kind: 'drawing' } | { kind: 'editing'; pathIndex: number }
 
 export const Mode = {
-  idle: { kind: 'idle' } as Mode,
   drawing: { kind: 'drawing' } as Mode,
-  editing(pathIndex: number): Mode { return { kind: 'editing', pathIndex } }
+  editing(pathIndex: number): Mode {
+    return { kind: 'editing', pathIndex }
+  }
 }
 
 export interface PathItem {
@@ -19,7 +17,7 @@ export interface PathItem {
 export const state = {
   paths: [] as PathItem[],
   current: [] as Segment[],
-  mode: Mode.idle
+  mode: Mode.drawing
 }
 
 export type State = typeof state

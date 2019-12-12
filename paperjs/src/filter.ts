@@ -16,9 +16,10 @@ import { View } from 'tempo-core/lib/view'
 import { PaperContext } from './context'
 import { mapArray } from 'tempo-core/lib/util/map'
 
-export class FilterStateTemplate<State, Action, Query> implements PaperTemplate<State, Action, Query> {
+export class FilterStateTemplate<State, Action, Query>
+  implements PaperTemplate<State, Action, Query> {
   constructor(
-    readonly isSame: (prev: State, next: State ) => boolean,
+    readonly isSame: (prev: State, next: State) => boolean,
     readonly children: PaperTemplate<State, Action, Query>[]
   ) {}
 
@@ -45,9 +46,10 @@ export class FilterStateTemplate<State, Action, Query> implements PaperTemplate<
 }
 
 export const filterState = <State, Action, Query = unknown>(
-  options: { isSame?: (prev: State, next: State ) => boolean },
+  options: { isSame?: (prev: State, next: State) => boolean },
   ...children: PaperTemplate<State, Action, Query>[]
-): PaperTemplate<State, Action, Query> => new FilterStateTemplate(
-  options.isSame || ((a: State, b: State) => a === b),
-  children
-)
+): PaperTemplate<State, Action, Query> =>
+  new FilterStateTemplate(
+    options.isSame || ((a: State, b: State) => a === b),
+    children
+  )

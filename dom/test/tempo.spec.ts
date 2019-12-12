@@ -30,15 +30,15 @@ describe('Tempo', () => {
       { store },
       div({}, a => a)
     )
-    const view = Tempo.renderComponent({
+    const { view } = Tempo.renderComponent({
       el: ctx.doc.body,
       component: comp,
       document: ctx.doc
     })
     expect(ctx.doc.body.innerHTML).toEqual('<div>hello</div>')
-    view.store.property.set('world')
+    store.property.set('world')
     expect(ctx.doc.body.innerHTML).toEqual('<div>world</div>')
-    view.store.process('foo')
+    store.process('foo')
     expect(ctx.doc.body.innerHTML).toEqual('<div>foo</div>')
     view.destroy()
     expect(ctx.doc.body.innerHTML).toEqual('')
@@ -65,14 +65,14 @@ describe('Tempo', () => {
       div({}, a => a)
     )
 
-    const view = Tempo.renderComponent({
+    Tempo.renderComponent({
       el: ctx.doc.body,
       component: comp,
       document: ctx.doc
     })
     expect(result[0]).toEqual('')
     expect(result[1]).toEqual('')
-    view.store.process('foo')
+    store.process('foo')
     expect(result[0]).toEqual('FOO')
     expect(result[1]).toEqual('foo')
   })

@@ -52,6 +52,7 @@ export const raster = <State, Action, Query = unknown, T = unknown>(
     T,
     RasterOptions<State, Action, Query, T>
   >(
-    (_: State) => typeof options.args ? new Raster(options.args as any) : new Raster(),
+    (_: State) =>
+      typeof options.args ? new Raster(options.args as any) : new Raster(),
     options
   )

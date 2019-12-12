@@ -17,7 +17,8 @@ import { PaperTemplate } from './template'
 import { mapArray } from 'tempo-core/lib/util/map'
 import { Group } from 'paper'
 
-export class PaperUntilTemplate<OuterState, InnerState, Action, Query> implements PaperTemplate<OuterState, Action, Query> {
+export class PaperUntilTemplate<OuterState, InnerState, Action, Query>
+  implements PaperTemplate<OuterState, Action, Query> {
   constructor(
     readonly options: {
       repeatUntil: (state: OuterState, index: number) => InnerState | undefined
@@ -25,7 +26,10 @@ export class PaperUntilTemplate<OuterState, InnerState, Action, Query> implement
     readonly children: PaperTemplate<InnerState, Action, Query>[]
   ) {}
 
-  render(ctx: PaperContext<Action>, state: OuterState): View<OuterState, Query> {
+  render(
+    ctx: PaperContext<Action>,
+    state: OuterState
+  ): View<OuterState, Query> {
     const { children } = this
     const { repeatUntil } = this.options
     const ref = new Group()
@@ -38,15 +42,16 @@ export class PaperUntilTemplate<OuterState, InnerState, Action, Query> implement
         let index = 0
         while (true) {
           const value = repeatUntil(state, index)
-          if (typeof value === 'undefined')
-            break
+          if (typeof value === 'undefined') break
           if (index < currentLength) {
             // replace existing
             const filteredViews = childrenViews[index]
             for (const view of filteredViews) view.change(value!)
           } else {
             // add node
-            childrenViews.push(mapArray(children, el => el.render(newCtx, value!)))
+            childrenViews.push(
+              mapArray(children, el => el.render(newCtx, value!))
+            )
           }
           index++
         }
@@ -61,14 +66,12 @@ export class PaperUntilTemplate<OuterState, InnerState, Action, Query> implement
       destroy: () => {
         ref.remove()
         for (const childViews of childrenViews)
-          for (const view of childViews)
-            view.destroy()
+          for (const view of childViews) view.destroy()
         childrenViews = []
       },
       request: (query: Query) => {
         for (const childViews of childrenViews)
-          for (const view of childViews)
-            view.request(query)
+          for (const view of childViews) view.request(query)
       }
     }
     view.change(state)
@@ -82,4 +85,7 @@ export const until = <OuterState, InnerState, Action, Query = unknown>(
   },
   ...children: PaperTemplate<InnerState, Action, Query>[]
 ): PaperTemplate<OuterState, Action, Query> =>
-  new PaperUntilTemplate<OuterState, InnerState, Action, Query>(options, children)
+  new PaperUntilTemplate<OuterState, InnerState, Action, Query>(
+    options,
+    children
+  )

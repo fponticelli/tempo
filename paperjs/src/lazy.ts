@@ -15,10 +15,9 @@ import { View } from 'tempo-core/lib/view'
 import { PaperContext } from './context'
 import { PaperTemplate } from './template'
 
-export class PaperLazyTemplate<State, Action, Query> implements PaperTemplate<State, Action, Query> {
-  constructor(
-    readonly f: () => PaperTemplate<State, Action, Query>
-  ) {}
+export class PaperLazyTemplate<State, Action, Query>
+  implements PaperTemplate<State, Action, Query> {
+  constructor(readonly f: () => PaperTemplate<State, Action, Query>) {}
 
   render(ctx: PaperContext<Action>, state: State): View<State, Query> {
     const template = this.f()
@@ -28,4 +27,5 @@ export class PaperLazyTemplate<State, Action, Query> implements PaperTemplate<St
 
 export const lazy = <State, Action, Query = unknown>(
   f: () => PaperTemplate<State, Action, Query>
-): PaperTemplate<State, Action, Query> => new PaperLazyTemplate<State, Action, Query>(f)
+): PaperTemplate<State, Action, Query> =>
+  new PaperLazyTemplate<State, Action, Query>(f)

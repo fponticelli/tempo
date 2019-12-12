@@ -14,7 +14,7 @@ limitations under the License.
 import { DifferentiateAt } from 'tempo-core/lib/types/differentiate'
 import { DOMTemplate, DOMChild } from './template'
 import { DOMContext } from './context'
-import { domChildToTemplate } from './utils/dom'
+import { domChildToTemplate, removeNode } from './utils/dom'
 import { IndexType } from 'core/lib/types/index_type'
 import { ObjectWithPath, TypeAtPath, ObjectWithField } from 'tempo-core/lib/types/objects'
 
@@ -28,11 +28,13 @@ export class MatchTemplate<
     readonly path: Path,
     readonly matcher: {
       [k in TypeAtPath<Path, State>]: DOMTemplate<DifferentiateAt<Path, State, k>, Action, Query>
-    }
+    },
+    readonly refId: string
   ) {}
   render(ctx: DOMContext<Action>, state: State) {
+    const { ctx: newCtx, ref } = ctx.withAppendToReference(this.refId)
     let key = this.path.reduce((acc: any, key) => acc[key], state) as TypeAtPath<Path, State>
-    let view = this.matcher[key].render(ctx, state as any)
+    let view = this.matcher[key].render(newCtx, state as any)
     const { matcher, path } = this
     return {
       change: (state: State) => {
@@ -42,10 +44,11 @@ export class MatchTemplate<
         } else {
           view.destroy()
           key = newKey
-          view = matcher[newKey].render(ctx, state as any)
+          view = matcher[newKey].render(newCtx, state as any)
         }
       },
       destroy: () => {
+        removeNode(ref)
         view.destroy()
       },
       request: (query: Query) => {
@@ -64,7 +67,8 @@ export const match = <
   path: Path,
   matcher: {
     [k in TypeAtPath<Path, State>]: DOMChild<DifferentiateAt<Path, State, k>, Action, Query>
-  }
+  },
+  refId?: string
 ): DOMTemplate<State, Action, Query> => {
   return new MatchTemplate<Path, State, Action, Query>(
     path,
@@ -75,7 +79,8 @@ export const match = <
       }
     }, {} as {
       [k in TypeAtPath<Path, State>]: DOMTemplate<DifferentiateAt<Path, State, k>, Action, Query>
-    })
+    }),
+    refId || 't:match'
   )
 }
 
@@ -93,12 +98,14 @@ export class MatchBoolTemplate<
   constructor(
     readonly condition: (state: State) => boolean,
     readonly trueTemplate: DOMTemplate<State, Action, Query>,
-    readonly falseTemplate: DOMTemplate<State, Action, Query>
+    readonly falseTemplate: DOMTemplate<State, Action, Query>,
+    readonly refId: string
   ) {}
   render(ctx: DOMContext<Action>, state: State) {
+    const { ctx: newCtx, ref } = ctx.withAppendToReference(this.refId)
     const { condition, trueTemplate, falseTemplate } = this
     let lastEvaluation = condition(state)
-    let view = lastEvaluation ? trueTemplate.render(ctx, state) : falseTemplate.render(ctx, state)
+    let view = lastEvaluation ? trueTemplate.render(newCtx, state) : falseTemplate.render(newCtx, state)
     return {
       change: (state: State) => {
         const newEvaluation = condition(state)
@@ -108,11 +115,12 @@ export class MatchBoolTemplate<
           view.destroy()
           lastEvaluation = newEvaluation
           view = newEvaluation ?
-            trueTemplate.render(ctx, state) :
-            falseTemplate.render(ctx, state)
+            trueTemplate.render(newCtx, state) :
+            falseTemplate.render(newCtx, state)
         }
       },
       destroy: () => {
+        removeNode(ref)
         view.destroy()
       },
       request: (query: Query) => {
@@ -126,12 +134,14 @@ export const matchBool = <State, Action, Query = unknown>(
   options: {
     condition: (state: State) => boolean,
     true: DOMChild<State, Action, Query>,
-    false: DOMChild<State, Action, Query>
+    false: DOMChild<State, Action, Query>,
+    refId?: string
   }
 ): DOMTemplate<State, Action, Query> => new MatchBoolTemplate<State, Action, Query>(
   options.condition,
   domChildToTemplate(options.true),
-  domChildToTemplate(options.false)
+  domChildToTemplate(options.false),
+  options.refId || 't:match-bool'
 )
 
 export class MatchValueTemplate<
@@ -144,13 +154,15 @@ export class MatchValueTemplate<
     readonly matchers: {
       [_ in (string | number)]: DOMTemplate<State, Action, Query>
     },
-    readonly orElse: DOMTemplate<State, Action, Query>
+    readonly orElse: DOMTemplate<State, Action, Query>,
+    readonly refId: string
   ) {}
   render(ctx: DOMContext<Action>, state: State) {
     const { matchers, orElse } = this
+    const { ctx: newCtx, ref } = ctx.withAppendToReference(this.refId)
     let oldKey = this.path.reduce((acc: any, key) => acc[key], state)
     const template = this.matchers[oldKey] || this.orElse
-    let view = template.render(ctx, state)
+    let view = template.render(newCtx, state)
     return {
       change: (state: State) => {
         const newKey = this.path.reduce((acc: any, key) => acc[key], state)
@@ -160,10 +172,11 @@ export class MatchValueTemplate<
           view.destroy()
           oldKey = newKey
           const template = matchers[newKey] || orElse
-          view = template.render(ctx, state)
+          view = template.render(newCtx, state)
         }
       },
       destroy: () => {
+        removeNode(ref)
         view.destroy()
       },
       request: (query: Query) => {
@@ -178,7 +191,8 @@ export const matchValue = <Path extends IndexType[], State extends ObjectWithPat
   matchers: {
     [_ in (string | number)]: DOMChild<State, Action, Query>
   },
-  orElse: DOMChild<State, Action, Query>
+  orElse: DOMChild<State, Action, Query>,
+  refId?: string
 ): DOMTemplate<State, Action, Query> => new MatchValueTemplate<State, Action, Query>(
   path,
   Object.keys(matchers).reduce((acc: { [_ in (string | number)]: DOMTemplate<State, Action, Query> }, key: string) => {
@@ -187,5 +201,6 @@ export const matchValue = <Path extends IndexType[], State extends ObjectWithPat
       [key]: domChildToTemplate(matchers[key])
     }
   }, {}),
-  domChildToTemplate(orElse)
+  domChildToTemplate(orElse),
+  refId || 't:match-value'
 )

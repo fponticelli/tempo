@@ -10,25 +10,49 @@ export class PaperContext<Action> {
   ) {}
 
   mapAction<OtherAction>(f: (action: OtherAction) => Action) {
-    return new PaperContext<OtherAction>(this.canvas, this.scope, this.project, this.append, (action: OtherAction) =>
-      this.dispatch(f(action))
+    return new PaperContext<OtherAction>(
+      this.canvas,
+      this.scope,
+      this.project,
+      this.append,
+      (action: OtherAction) => this.dispatch(f(action))
     )
   }
 
-  conditionalMapAction<OtherAction>(f: (action: OtherAction) => Action | undefined) {
-    return new PaperContext<OtherAction>(this.canvas, this.scope, this.project, this.append, (action: OtherAction) => {
-      const newAction = f(action)
-      if (typeof newAction !== 'undefined') {
-        this.dispatch(newAction)
+  conditionalMapAction<OtherAction>(
+    f: (action: OtherAction) => Action | undefined
+  ) {
+    return new PaperContext<OtherAction>(
+      this.canvas,
+      this.scope,
+      this.project,
+      this.append,
+      (action: OtherAction) => {
+        const newAction = f(action)
+        if (typeof newAction !== 'undefined') {
+          this.dispatch(newAction)
+        }
       }
-    })
+    )
   }
 
   withAppend(append: (item: Item) => void) {
-    return new PaperContext<Action>(this.canvas, this.scope, this.project, append, this.dispatch)
+    return new PaperContext<Action>(
+      this.canvas,
+      this.scope,
+      this.project,
+      append,
+      this.dispatch
+    )
   }
 
   withDispatch<OtherAction>(dispatch: (action: OtherAction) => void) {
-    return new PaperContext<OtherAction>(this.canvas, this.scope, this.project, this.append, dispatch)
+    return new PaperContext<OtherAction>(
+      this.canvas,
+      this.scope,
+      this.project,
+      this.append,
+      dispatch
+    )
   }
 }

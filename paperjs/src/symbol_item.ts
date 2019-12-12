@@ -24,7 +24,10 @@ type ShapeOptions<State, Action, Query, T, Sub> = MakeOptional<
   Merge<
     Merge<
       WritableShapeOptions<State>,
-      Merge<{ definition: SymbolDefinition }, TempoAttributes<State, Action, Query, SymbolItem, T>>
+      Merge<
+        { definition: SymbolDefinition },
+        TempoAttributes<State, Action, Query, SymbolItem, T>
+      >
     >,
     ItemEvents<State, Action, SymbolItem>
   >
@@ -41,7 +44,6 @@ export const shape = <State, Action, Query = unknown, T = unknown>(
     T,
     ShapeOptions<State, Action, Query, T, SymbolItem>
   >(
-    (_: State) =>
-      new SymbolItem(options.definition as SymbolDefinition),
+    (_: State) => new SymbolItem(options.definition as SymbolDefinition),
     options
   )

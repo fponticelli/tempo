@@ -16,10 +16,9 @@ import { PaperTemplate } from './template'
 import { PaperContext } from './context'
 import { mapArray } from 'tempo-core/lib/util/map'
 
-export class PaperFragmentTemplate<State, Action, Query> implements PaperTemplate<State, Action, Query> {
-  constructor(
-    readonly children: PaperTemplate<State, Action, Query>[]
-  ) {}
+export class PaperFragmentTemplate<State, Action, Query>
+  implements PaperTemplate<State, Action, Query> {
+  constructor(readonly children: PaperTemplate<State, Action, Query>[]) {}
 
   render(ctx: PaperContext<Action>, state: State): View<State, Query> {
     const views = mapArray(this.children, child => child.render(ctx, state))
@@ -37,6 +36,7 @@ export class PaperFragmentTemplate<State, Action, Query> implements PaperTemplat
   }
 }
 
-export const fragment = <State, Action, Query = unknown>(...children: PaperTemplate<State, Action, Query>[])
-    : PaperTemplate<State, Action, Query> =>
+export const fragment = <State, Action, Query = unknown>(
+  ...children: PaperTemplate<State, Action, Query>[]
+): PaperTemplate<State, Action, Query> =>
   new PaperFragmentTemplate<State, Action, Query>(children)

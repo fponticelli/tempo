@@ -15,7 +15,11 @@ import { DifferentiateAt } from 'tempo-core/lib/types/differentiate'
 import { PaperTemplate } from './template'
 import { PaperContext } from './context'
 import { IndexType } from 'core/lib/types/index_type'
-import { ObjectWithPath, TypeAtPath, ObjectWithField } from 'tempo-core/lib/types/objects'
+import {
+  ObjectWithPath,
+  TypeAtPath,
+  ObjectWithField
+} from 'tempo-core/lib/types/objects'
 
 export class MatchTemplate<
   Path extends IndexType[],
@@ -26,16 +30,26 @@ export class MatchTemplate<
   constructor(
     readonly path: Path,
     readonly matcher: {
-      [k in TypeAtPath<Path, State>]: PaperTemplate<DifferentiateAt<Path, State, k>, Action, Query>
+      [k in TypeAtPath<Path, State>]: PaperTemplate<
+        DifferentiateAt<Path, State, k>,
+        Action,
+        Query
+      >
     }
   ) {}
   render(ctx: PaperContext<Action>, state: State) {
-    let key = this.path.reduce((acc: any, key) => acc[key], state) as TypeAtPath<Path, State>
+    let key = this.path.reduce(
+      (acc: any, key) => acc[key],
+      state
+    ) as TypeAtPath<Path, State>
     let view = this.matcher[key].render(ctx, state as any)
     const { matcher, path } = this
     return {
       change: (state: State) => {
-        const newKey = path.reduce((acc: any, key) => acc[key], state) as TypeAtPath<Path, State>
+        const newKey = path.reduce(
+          (acc: any, key) => acc[key],
+          state
+        ) as TypeAtPath<Path, State>
         if (newKey === key) {
           view.change(state as any)
         } else {
@@ -62,33 +76,50 @@ export const match = <
 >(
   path: Path,
   matcher: {
-    [k in TypeAtPath<Path, State>]: PaperTemplate<DifferentiateAt<Path, State, k>, Action, Query>
+    [k in TypeAtPath<Path, State>]: PaperTemplate<
+      DifferentiateAt<Path, State, k>,
+      Action,
+      Query
+    >
   }
 ): PaperTemplate<State, Action, Query> => {
   return new MatchTemplate<Path, State, Action, Query>(
     path,
-    Object.keys(matcher).reduce((acc, key) => {
-      return {
-        ...acc,
-        [key]: matcher[key as keyof typeof matcher]
+    Object.keys(matcher).reduce(
+      (acc, key) => {
+        return {
+          ...acc,
+          [key]: matcher[key as keyof typeof matcher]
+        }
+      },
+      {} as {
+        [k in TypeAtPath<Path, State>]: PaperTemplate<
+          DifferentiateAt<Path, State, k>,
+          Action,
+          Query
+        >
       }
-    }, {} as {
-      [k in TypeAtPath<Path, State>]: PaperTemplate<DifferentiateAt<Path, State, k>, Action, Query>
-    })
+    )
   )
 }
 
-export const matchKind = <State extends ObjectWithField<'kind', any>, Action, Query = unknown>(
-  matchers: {
-    [k in State['kind']]: PaperTemplate<DifferentiateAt<['kind'], State, k>, Action, Query>
-  }
-): PaperTemplate<State, Action, Query> => match<['kind'], State, Action, Query>(['kind'], matchers)
-
-export class MatchBoolTemplate<
-  State,
+export const matchKind = <
+  State extends ObjectWithField<'kind', any>,
   Action,
-  Query
-> implements PaperTemplate<State, Action, Query> {
+  Query = unknown
+>(
+  matchers: {
+    [k in State['kind']]: PaperTemplate<
+      DifferentiateAt<['kind'], State, k>,
+      Action,
+      Query
+    >
+  }
+): PaperTemplate<State, Action, Query> =>
+  match<['kind'], State, Action, Query>(['kind'], matchers)
+
+export class MatchBoolTemplate<State, Action, Query>
+  implements PaperTemplate<State, Action, Query> {
   constructor(
     readonly condition: (state: State) => boolean,
     readonly trueTemplate: PaperTemplate<State, Action, Query>,
@@ -97,7 +128,9 @@ export class MatchBoolTemplate<
   render(ctx: PaperContext<Action>, state: State) {
     const { condition, trueTemplate, falseTemplate } = this
     let lastEvaluation = condition(state)
-    let view = lastEvaluation ? trueTemplate.render(ctx, state) : falseTemplate.render(ctx, state)
+    let view = lastEvaluation
+      ? trueTemplate.render(ctx, state)
+      : falseTemplate.render(ctx, state)
     return {
       change: (state: State) => {
         const newEvaluation = condition(state)
@@ -106,9 +139,9 @@ export class MatchBoolTemplate<
         } else {
           view.destroy()
           lastEvaluation = newEvaluation
-          view = newEvaluation ?
-            trueTemplate.render(ctx, state) :
-            falseTemplate.render(ctx, state)
+          view = newEvaluation
+            ? trueTemplate.render(ctx, state)
+            : falseTemplate.render(ctx, state)
         }
       },
       destroy: () => {
@@ -121,27 +154,23 @@ export class MatchBoolTemplate<
   }
 }
 
-export const matchBool = <State, Action, Query = unknown>(
-  options: {
-    condition: (state: State) => boolean,
-    true: PaperTemplate<State, Action, Query>,
-    false: PaperTemplate<State, Action, Query>
-  }
-): PaperTemplate<State, Action, Query> => new MatchBoolTemplate<State, Action, Query>(
-  options.condition,
-  options.true,
-  options.false
-)
+export const matchBool = <State, Action, Query = unknown>(options: {
+  condition: (state: State) => boolean
+  true: PaperTemplate<State, Action, Query>
+  false: PaperTemplate<State, Action, Query>
+}): PaperTemplate<State, Action, Query> =>
+  new MatchBoolTemplate<State, Action, Query>(
+    options.condition,
+    options.true,
+    options.false
+  )
 
-export class MatchValueTemplate<
-  State,
-  Action,
-  Query
-> implements PaperTemplate<State, Action, Query> {
+export class MatchValueTemplate<State, Action, Query>
+  implements PaperTemplate<State, Action, Query> {
   constructor(
     readonly path: IndexType[],
     readonly matchers: {
-      [_ in (string | number)]: PaperTemplate<State, Action, Query>
+      [_ in string | number]: PaperTemplate<State, Action, Query>
     },
     readonly orElse: PaperTemplate<State, Action, Query>
   ) {}
@@ -172,19 +201,31 @@ export class MatchValueTemplate<
   }
 }
 
-export const matchValue = <Path extends IndexType[], State extends ObjectWithPath<Path, string>, Action, Query = unknown>(
+export const matchValue = <
+  Path extends IndexType[],
+  State extends ObjectWithPath<Path, string>,
+  Action,
+  Query = unknown
+>(
   path: Path,
   matchers: {
-    [_ in (string | number)]: PaperTemplate<State, Action, Query>
+    [_ in string | number]: PaperTemplate<State, Action, Query>
   },
   orElse: PaperTemplate<State, Action, Query>
-): PaperTemplate<State, Action, Query> => new MatchValueTemplate<State, Action, Query>(
-  path,
-  Object.keys(matchers).reduce((acc: { [_ in (string | number)]: PaperTemplate<State, Action, Query> }, key: string) => {
-    return {
-      ...acc,
-      [key]: matchers[key]
-    }
-  }, {}),
-  orElse
-)
+): PaperTemplate<State, Action, Query> =>
+  new MatchValueTemplate<State, Action, Query>(
+    path,
+    Object.keys(matchers).reduce(
+      (
+        acc: { [_ in string | number]: PaperTemplate<State, Action, Query> },
+        key: string
+      ) => {
+        return {
+          ...acc,
+          [key]: matchers[key]
+        }
+      },
+      {}
+    ),
+    orElse
+  )

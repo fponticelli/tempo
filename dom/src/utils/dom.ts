@@ -29,7 +29,7 @@ export function removeNode(node: Node) {
   }
 }
 
-export function insertBefore(ref: Node) {
+export function insertFBefore(ref: Node) {
   return function(node: Node) {
     if (ref.parentElement != null) {
       ref.parentElement.insertBefore(node, ref)

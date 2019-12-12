@@ -16,13 +16,17 @@ import { View } from 'tempo-core/lib/view'
 import { PaperContext } from './context'
 import { mapArray } from 'tempo-core/lib/util/map'
 
-export class MapStateTemplate<OuterState, InnerState, Action, Query> implements PaperTemplate<OuterState, Action, Query> {
+export class MapStateTemplate<OuterState, InnerState, Action, Query>
+  implements PaperTemplate<OuterState, Action, Query> {
   constructor(
     readonly map: (value: OuterState) => InnerState,
     readonly children: PaperTemplate<InnerState, Action, Query>[]
   ) {}
 
-  render(ctx: PaperContext<Action>, state: OuterState): View<OuterState, Query> {
+  render(
+    ctx: PaperContext<Action>,
+    state: OuterState
+  ): View<OuterState, Query> {
     const { children, map } = this
     const innerState = map(state)
     const views = mapArray(children, c => c.render(ctx, innerState))
@@ -45,17 +49,25 @@ export class MapStateTemplate<OuterState, InnerState, Action, Query> implements 
 export const mapState = <OuterState, InnerState, Action, Query = unknown>(
   options: { map: (value: OuterState) => InnerState },
   ...children: PaperTemplate<InnerState, Action, Query>[]
-): PaperTemplate<OuterState, Action, Query> => new MapStateTemplate(options.map, children)
+): PaperTemplate<OuterState, Action, Query> =>
+  new MapStateTemplate(options.map, children)
 
-export const mapStateAndKeep = <OuterState, InnerState, Action, Query = unknown>(
+export const mapStateAndKeep = <
+  OuterState,
+  InnerState,
+  Action,
+  Query = unknown
+>(
   options: { map: (value: OuterState) => InnerState },
   ...children: PaperTemplate<[InnerState, OuterState], Action, Query>[]
-): PaperTemplate<OuterState, Action, Query> => new MapStateTemplate<OuterState, [InnerState, OuterState], Action, Query>(
-  (state: OuterState) => ([options.map(state), state]),
-  children
-)
+): PaperTemplate<OuterState, Action, Query> =>
+  new MapStateTemplate<OuterState, [InnerState, OuterState], Action, Query>(
+    (state: OuterState) => [options.map(state), state],
+    children
+  )
 
-export class MapActionTemplate<State, OuterAction, InnerAction, Query> implements PaperTemplate<State, OuterAction, Query> {
+export class MapActionTemplate<State, OuterAction, InnerAction, Query>
+  implements PaperTemplate<State, OuterAction, Query> {
   constructor(
     readonly map: (value: InnerAction) => OuterAction | undefined,
     readonly children: PaperTemplate<State, InnerAction, Query>[]
@@ -83,9 +95,13 @@ export const mapAction = <State, OuterAction, InnerAction, Query = unknown>(
   options: { map: (value: InnerAction) => OuterAction | undefined },
   ...children: PaperTemplate<State, InnerAction, Query>[]
 ): PaperTemplate<State, OuterAction, Query> =>
-  new MapActionTemplate<State, OuterAction, InnerAction, Query>(options.map, children)
+  new MapActionTemplate<State, OuterAction, InnerAction, Query>(
+    options.map,
+    children
+  )
 
-export class MapQueryTemplate<State, Action, OuterQuery, InnerQuery> implements PaperTemplate<State, Action, OuterQuery> {
+export class MapQueryTemplate<State, Action, OuterQuery, InnerQuery>
+  implements PaperTemplate<State, Action, OuterQuery> {
   constructor(
     readonly map: (value: OuterQuery) => InnerQuery | undefined,
     readonly children: PaperTemplate<State, Action, InnerQuery>[]
@@ -115,10 +131,16 @@ export const mapQuery = <State, Action, OuterQuery, InnerQuery>(
   options: { map: (value: OuterQuery) => InnerQuery },
   ...children: PaperTemplate<State, Action, InnerQuery>[]
 ): PaperTemplate<State, Action, OuterQuery> =>
-  new MapQueryTemplate<State, Action, OuterQuery, InnerQuery>(options.map, children)
+  new MapQueryTemplate<State, Action, OuterQuery, InnerQuery>(
+    options.map,
+    children
+  )
 
 export const mapQueryConditional = <State, Action, OuterQuery, InnerQuery>(
   options: { map: (value: OuterQuery) => InnerQuery | undefined },
   ...children: PaperTemplate<State, Action, InnerQuery>[]
 ): PaperTemplate<State, Action, OuterQuery> =>
-  new MapQueryTemplate<State, Action, OuterQuery, InnerQuery>(options.map, children)
+  new MapQueryTemplate<State, Action, OuterQuery, InnerQuery>(
+    options.map,
+    children
+  )
