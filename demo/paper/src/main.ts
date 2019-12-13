@@ -50,7 +50,7 @@ const template = article<State, Action, Query>(
   { attrs: { className: 'app' } },
   header(
     { attrs: { class: 'header' } },
-    'header',
+    div({ attrs: { class: 'logo' } }, 'Tempo + Paper'),
     div({ attrs: { id: 'toolbar' } }),
     div(
       { attrs: { class: 'toolbar-fixed' } },

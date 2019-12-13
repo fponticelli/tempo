@@ -37763,14 +37763,22 @@ var $nYZ9$exports = {};
 Object.defineProperty($nYZ9$exports, "__esModule", {
   value: true
 });
-var $nYZ9$export$toolbar = $zQMt$export$span({}, $iRIV$export$match(['mode', 'kind'], {
+var $nYZ9$export$toolbar = $zQMt$export$span({}, $zQMt$export$span({
+  attrs: {
+    class: 'message'
+  }
+}, $iRIV$export$match(['mode', 'kind'], {
   editing: function editing(state) {
     return "Selected line has " + state.paths[state.mode.pathIndex].segments.length + " segments";
   },
   drawing: function drawing(state) {
-    if (state.current.length > 0) return "Line has " + state.current.length + " segments";else if (state.paths.length > 0) return 'Click to select a line or click and drag to draw';else return 'Click and drag to draw a line';
+    if (state.current.length > 0) return "line has " + state.current.length + " segments";else if (state.paths.length > 0) return 'click to select a line or click and drag to draw';else return 'click and drag to draw a line';
   }
-}), $zQMt$export$button({
+})), $zQMt$export$span({
+  attrs: {
+    class: 'actions'
+  }
+}, $zQMt$export$button({
   attrs: {
     disabled: function disabled(state) {
       return state.mode.kind !== 'editing';
@@ -37781,7 +37789,7 @@ var $nYZ9$export$toolbar = $zQMt$export$span({}, $iRIV$export$match(['mode', 'ki
       return $Nt5a$export$Action.removePath;
     }
   }
-}, 'remove selected'));
+}, 'Remove Selected')));
 $nYZ9$exports.toolbar = $nYZ9$export$toolbar;
 // ASSET: path_simplification/app.ts
 var $pA64$exports = {};
@@ -37940,7 +37948,11 @@ var $ZCfc$var$template = $zQMt$export$article({
   attrs: {
     class: 'header'
   }
-}, 'header', $zQMt$export$div({
+}, $zQMt$export$div({
+  attrs: {
+    class: 'logo'
+  }
+}, 'Tempo + Paper'), $zQMt$export$div({
   attrs: {
     id: 'toolbar'
   }
