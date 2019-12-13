@@ -17,7 +17,7 @@
     "tslint": "5.20.1",
     "typescript": "3.7.2",
     "babel-types": "6.26.0",
-    "sass": "1.23.3",
+    "sass": "1.23.7",
     "@types/dompurify": "2.0.0",
     "sw-precache": "5.2.1"
   },

@@ -83,12 +83,12 @@ const template = article<State, Action, Query>(
                 ([item]) => item.split('_').join(' ')
               ),
               false: a(
-                  {
-                    attrs: { href: ([item]) => `#${item}` },
-                    events: { click: ([item]) => Action.changeSample(item) }
-                  },
-                  ([item]) => item.split('_').join(' ')
-                )
+                {
+                  attrs: { href: ([item]) => `#${item}` },
+                  events: { click: ([item]) => Action.changeSample(item) }
+                },
+                ([item]) => item.split('_').join(' ')
+              )
             })
           )
         )

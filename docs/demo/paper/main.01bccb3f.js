@@ -19784,6 +19784,21 @@ var $ST02$export$project = function (options) {
           project.activate();
         }
       });
+
+      if (typeof options.width === 'function') {
+        derived.push(function (state) {
+          var f = options.width;
+          project.view.viewSize.width = f(state) || null;
+        });
+      }
+
+      if (typeof options.height === 'function') {
+        derived.push(function (state) {
+          var f = options.height;
+          project.view.viewSize.height = f(state) || null;
+        });
+      }
+
       var rootLayer = project.activeLayer;
       var context = new $rpUf$export$PaperContext(el, scope, project, function (item) {
         return rootLayer.addChild(item);

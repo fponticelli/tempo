@@ -25,6 +25,7 @@ dependencies:
   prettier: 1.19.1
   request: 2.88.0
   request-promise-native: 1.0.7_request@2.88.0
+  sass: 1.23.7
   stealthy-require: 1.0.0
   sw-precache: 5.2.1
   todomvc-app-css: 2.2.0
@@ -6466,15 +6467,6 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-hhbzAgTIX8O7SHfp2c8/kREfEn4qO/9q8C9beyY6+tvZ87EpoZ3i1RIEvp27YBswnNbY9mWd6paKVmKbAgLfZA==
-  /sass/1.23.3:
-    dependencies:
-      chokidar: 3.3.0
-    dev: false
-    engines:
-      node: '>=8.9.0'
-    hasBin: true
-    resolution:
-      integrity: sha512-1DKRZxJMOh4Bme16AbWTyYeJAjTlrvw2+fWshHHaepeJfGq2soFZTnt0YhWit+bohtDu4LdyPoEj6VFD4APHog==
   /sass/1.23.7:
     dependencies:
       chokidar: 3.3.0
@@ -7824,14 +7816,14 @@ packages:
       parcel-bundler: 1.12.4
       partsing: 0.7.3
       prettier: 1.19.1
-      sass: 1.23.3
+      sass: 1.23.7
       sw-precache: 5.2.1
       tslint: 5.20.1_typescript@3.7.2
       typescript: 3.7.2
     dev: false
     name: '@rush-temp/tempo-demo.hnpwa'
     resolution:
-      integrity: sha512-3ZqaOFRVWWPwEeshnag1+d4gpNRm3ik1vzfnDx1vd0bpTINVXloXYbM+4CrFPaxNpH5eqr7XbTjaK2ml04XeJg==
+      integrity: sha512-3fqe4fbgHkH3HkwEG84g5cfr8UCfnFvOMpcTmpVmaaevdXiUbwezHtQGeotJAxt4kxieGMw2Sa/lcX7sPmHZYQ==
       tarball: 'file:projects/tempo-demo.hnpwa.tgz'
     version: 0.0.0
   'file:projects/tempo-demo.paper.tgz':
@@ -7850,7 +7842,7 @@ packages:
     dev: false
     name: '@rush-temp/tempo-demo.paper'
     resolution:
-      integrity: sha512-Xkg/LkwjtIG9aTnuGCJoEjR7Oc41fSXr+bEZOnPI+gRnUGOC31O1Q6BfwcdtY4Uvci3vX+GprDZj9Y2OqGsZ2w==
+      integrity: sha512-HLRXQcOyyAm49lQWchiCv41ZJUFvkY1bqPVdZej+PSOm+EMwkoaUtypva4nK7UKhW3c7b3F1HWkQDHqT1pJvHg==
       tarball: 'file:projects/tempo-demo.paper.tgz'
     version: 0.0.0
   'file:projects/tempo-demo.readme.tgz':
@@ -7982,6 +7974,7 @@ specifiers:
   prettier: 1.19.1
   request: 2.88.0
   request-promise-native: 1.0.7
+  sass: 1.23.7
   stealthy-require: 1.0.0
   sw-precache: 5.2.1
   todomvc-app-css: 2.2.0

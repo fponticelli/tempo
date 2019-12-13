@@ -69,6 +69,20 @@ export const project = <State, Action, Query>(
           }
         })
 
+      if (typeof options.width === 'function') {
+        derived.push((state: State) => {
+          const f = options.width as UnwrappedDerivedValue<State, number>
+          project.view.viewSize!.width = f(state) || null
+        })
+      }
+
+      if (typeof options.height === 'function') {
+        derived.push((state: State) => {
+          const f = options.height as UnwrappedDerivedValue<State, number>
+          project.view.viewSize!.height = f(state) || null
+        })
+      }
+
       const rootLayer = project.activeLayer
       const context = new PaperContext(
         el,
