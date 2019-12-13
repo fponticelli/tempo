@@ -118,13 +118,14 @@ export type ExcludeFunctionFields<T> = Pick<
 >
 
 // TODO optional fields are converted to mandatory ones
-export type Merge<A, B> = {
-  [K in keyof A | keyof B]: K extends keyof B
-    ? B[K]
-    : K extends keyof A
-    ? A[K]
-    : never
-}
+export type Merge<A, B> = A & B
+// {
+//   [K in keyof A | keyof B]: K extends keyof B
+//     ? B[K]
+//     : K extends keyof A
+//     ? A[K]
+//     : never
+// }
 
 export type MakeOptional<T> = {
   [K in keyof T]?: T[K]

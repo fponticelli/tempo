@@ -2003,7 +2003,7 @@ var $mIWh$exports = {};
 Object.defineProperty($mIWh$exports, "__esModule", {
   value: true
 });
-var $mIWh$export$examples = ['circle', 'path_simplification'];
+var $mIWh$export$examples = ['stars', 'path_simplification'];
 $mIWh$exports.examples = $mIWh$export$examples;
 
 var $mIWh$export$createState = function () {
@@ -36325,6 +36325,214 @@ var $GrqS$export$makeMiddleware = function (view) {
 };
 
 $GrqS$exports.makeMiddleware = $GrqS$export$makeMiddleware;
+// ASSET: ../node_modules/tempo-paper/lib/lazy.js
+var $Ccrz$exports = {};
+Object.defineProperty($Ccrz$exports, "__esModule", {
+  value: true
+});
+
+var $Ccrz$var$PaperLazyTemplate =
+/** @class */
+function () {
+  function PaperLazyTemplate(f) {
+    this.f = f;
+  }
+
+  PaperLazyTemplate.prototype.render = function (ctx, state) {
+    var template = this.f();
+    return template.render(ctx, state);
+  };
+
+  return PaperLazyTemplate;
+}();
+
+var $Ccrz$export$PaperLazyTemplate = $Ccrz$var$PaperLazyTemplate;
+$Ccrz$exports.PaperLazyTemplate = $Ccrz$export$PaperLazyTemplate;
+
+var $Ccrz$export$lazy = function (f) {
+  return new $Ccrz$var$PaperLazyTemplate(f);
+};
+
+$Ccrz$exports.lazy = $Ccrz$export$lazy; //# sourceMappingURL=lazy.js.map
+
+// ASSET: ../node_modules/tempo-paper/lib/adapter.js
+var $gGAU$exports = {};
+Object.defineProperty($gGAU$exports, "__esModule", {
+  value: true
+});
+
+var $gGAU$var$PaperAdapterTemplate =
+/** @class */
+function () {
+  function PaperAdapterTemplate(mergeStates, propagate, child) {
+    this.mergeStates = mergeStates;
+    this.propagate = propagate;
+    this.child = child;
+  }
+
+  PaperAdapterTemplate.prototype.render = function (ctx, outerState) {
+    var _this = this;
+
+    var mergedState = this.mergeStates && this.mergeStates(outerState, this.child.store.property.get()) || this.child.store.property.get();
+    var viewComponent = this.child.render(ctx.withDispatch(function () {
+      /* COMPONENT IS DETACHED FROM CONTAINER AND DOESN'T PROPAGATE */
+    }), mergedState);
+    this.child.store.observable.on(function (state, action) {
+      _this.propagate({
+        action: action,
+        innerState: state,
+        outerState: outerState,
+        dispatchInner: function (action) {
+          return _this.child.store.process(action);
+        },
+        dispatchOuter: ctx.dispatch
+      });
+    });
+    return {
+      change: function (state) {
+        var newState = _this.mergeStates(state, _this.child.store.property.get());
+
+        if (typeof newState !== 'undefined') viewComponent.change(newState);
+      },
+      destroy: function () {
+        viewComponent.destroy();
+      },
+      request: function (query) {
+        viewComponent.request(query);
+      }
+    };
+  };
+
+  return PaperAdapterTemplate;
+}();
+
+var $gGAU$export$PaperAdapterTemplate = $gGAU$var$PaperAdapterTemplate;
+$gGAU$exports.PaperAdapterTemplate = $gGAU$export$PaperAdapterTemplate;
+
+var $gGAU$export$adapter = function (options, child) {
+  return new $gGAU$var$PaperAdapterTemplate(options.mergeStates || function (_u, _d) {
+    return undefined;
+  },
+  /* istanbul ignore next */
+  options.propagate || function () {
+    return undefined;
+  }, child);
+};
+
+$gGAU$exports.adapter = $gGAU$export$adapter; //# sourceMappingURL=adapter.js.map
+
+// ASSET: ../node_modules/tempo-paper/node_modules/tempo-core/lib/util/map.js
+var $nRn8$exports = {};
+Object.defineProperty($nRn8$exports, "__esModule", {
+  value: true
+});
+
+var $nRn8$export$mapArray = function (arr, f) {
+  var length = arr.length;
+  var buff = new Array(length);
+
+  for (var i = 0; i < length; i++) {
+    buff[i] = f(arr[i]);
+  }
+
+  return buff;
+};
+
+$nRn8$exports.mapArray = $nRn8$export$mapArray;
+// ASSET: ../node_modules/tempo-paper/lib/component.js
+var $FTaY$exports = {};
+Object.defineProperty($FTaY$exports, "__esModule", {
+  value: true
+});
+
+var $FTaY$var$PaperComponentTemplate =
+/** @class */
+function () {
+  function PaperComponentTemplate(store, children, delayed) {
+    this.store = store;
+    this.children = children;
+    this.delayed = delayed;
+  }
+
+  PaperComponentTemplate.prototype.render = function (ctx, state) {
+    var update;
+
+    if (this.delayed) {
+      var shouldRender_1 = true;
+
+      update = function (state) {
+        if (shouldRender_1) {
+          shouldRender_1 = false;
+          setTimeout(function () {
+            view.change(state);
+            shouldRender_1 = true;
+          });
+        }
+      };
+    } else {
+      update = function (state) {
+        view.change(state);
+      };
+    }
+
+    var store = this.store;
+    var property = store.property;
+    property.observable.on(update);
+
+    var innerDispatch = function (action) {
+      store.process(action);
+    };
+
+    var newCtx = ctx.withDispatch(innerDispatch);
+    var views = $nRn8$export$mapArray(this.children, function (child) {
+      return child.render(newCtx, property.get());
+    });
+    var view = {
+      change: function (state) {
+        store.property.set(state);
+
+        for (var _i = 0, views_1 = views; _i < views_1.length; _i++) {
+          var view_1 = views_1[_i];
+          view_1.change(state);
+        }
+      },
+      destroy: function () {
+        property.observable.off(update);
+
+        for (var _i = 0, views_2 = views; _i < views_2.length; _i++) {
+          var view_2 = views_2[_i];
+          view_2.destroy();
+        }
+      },
+      request: function (query) {
+        for (var _i = 0, views_3 = views; _i < views_3.length; _i++) {
+          var view_3 = views_3[_i];
+          view_3.request(query);
+        }
+      }
+    };
+    property.set(state);
+    return view;
+  };
+
+  return PaperComponentTemplate;
+}();
+
+var $FTaY$export$PaperComponentTemplate = $FTaY$var$PaperComponentTemplate;
+$FTaY$exports.PaperComponentTemplate = $FTaY$export$PaperComponentTemplate;
+
+var $FTaY$export$component = function (attributes) {
+  var children = [];
+
+  for (var _i = 1; _i < arguments.length; _i++) {
+    children[_i - 1] = arguments[_i];
+  }
+
+  return new $FTaY$var$PaperComponentTemplate(attributes.store, children, attributes.delayed || false);
+};
+
+$FTaY$exports.component = $FTaY$export$component; //# sourceMappingURL=component.js.map
+
 // ASSET: ../node_modules/tempo-paper/node_modules/tempo-core/lib/util/objects.js
 var $e5bF$exports = {};
 Object.defineProperty($e5bF$exports, "__esModule", {
@@ -36528,121 +36736,486 @@ var $ftoX$export$createItem = function (makeItem, options, children) {
 
 $ftoX$exports.createItem = $ftoX$export$createItem; //# sourceMappingURL=item.js.map
 
-// ASSET: ../node_modules/tempo-paper/lib/shape.js
-var $q9iH$exports = {};
-Object.defineProperty($q9iH$exports, "__esModule", {
+// ASSET: ../node_modules/tempo-paper/lib/symbol_item.js
+var $hS85$exports = {};
+Object.defineProperty($hS85$exports, "__esModule", {
   value: true
 });
 
-var $q9iH$export$circle = function (options) {
+// { definition: PaperAttribute<State, SymbolDefinition> }
+// >
+var $hS85$export$symbolItem = function (options) {
   return $ftoX$export$createItem(function (_) {
-    return typeof options.args !== 'undefined' ? new $QMc8$exports.Shape.Circle(options.args) : new $QMc8$exports.Shape.Circle(new $QMc8$exports.Point(0, 0), 0);
+    return new $QMc8$exports.SymbolItem(options.definition);
   }, options);
 };
 
-$q9iH$exports.circle = $q9iH$export$circle;
+$hS85$exports.symbolItem = $hS85$export$symbolItem; //# sourceMappingURL=symbol_item.js.map
 
-var $q9iH$export$rectangle = function (options) {
-  return $ftoX$export$createItem(function (_) {
-    return typeof options.args !== 'undefined' ? new $QMc8$exports.Shape.Rectangle(options.args) : new $QMc8$exports.Shape.Rectangle(new $QMc8$exports.Point(0, 0), new $QMc8$exports.Point(0, 0));
-  }, options);
-};
-
-$q9iH$exports.rectangle = $q9iH$export$rectangle;
-
-var $q9iH$export$ellipse = function (options) {
-  return $ftoX$export$createItem(function (_) {
-    return typeof options.args !== 'undefined' ? new $QMc8$exports.Shape.Ellipse(options.args) : new $QMc8$exports.Shape.Ellipse({
-      center: new $QMc8$exports.Point(0, 0),
-      size: new $QMc8$exports.Size(0, 0)
-    });
-  }, options);
-};
-
-$q9iH$exports.ellipse = $q9iH$export$ellipse; //# sourceMappingURL=shape.js.map
-
-// ASSET: circle/main.ts
-var $p2mr$exports = {};
-Object.defineProperty($p2mr$exports, "__esModule", {
-  value: true
-});
-var $p2mr$export$template = $q9iH$export$circle({
-  args: {
-    radius: 100
-  },
-  fillColor: new $GYcQ$exports.Color(0.4, 0.2, 0.3),
-  position: function position(_a) {
-    var size = _a.size;
-    return new $GYcQ$exports.Point(size.width / 2, size.height / 2);
-  }
-});
-$p2mr$exports.template = $p2mr$export$template;
-// ASSET: ../node_modules/tempo-paper/lib/adapter.js
-var $gGAU$exports = {};
-Object.defineProperty($gGAU$exports, "__esModule", {
+// ASSET: ../node_modules/tempo-paper/lib/map.js
+var $ZNMw$exports = {};
+Object.defineProperty($ZNMw$exports, "__esModule", {
   value: true
 });
 
-var $gGAU$var$PaperAdapterTemplate =
+var $ZNMw$var$MapStateTemplate =
 /** @class */
 function () {
-  function PaperAdapterTemplate(mergeStates, propagate, child) {
-    this.mergeStates = mergeStates;
-    this.propagate = propagate;
-    this.child = child;
+  function MapStateTemplate(map, children) {
+    this.map = map;
+    this.children = children;
   }
 
-  PaperAdapterTemplate.prototype.render = function (ctx, outerState) {
-    var _this = this;
+  MapStateTemplate.prototype.render = function (ctx, state) {
+    var _a = this,
+        children = _a.children,
+        map = _a.map;
 
-    var mergedState = this.mergeStates && this.mergeStates(outerState, this.child.store.property.get()) || this.child.store.property.get();
-    var viewComponent = this.child.render(ctx.withDispatch(function () {
-      /* COMPONENT IS DETACHED FROM CONTAINER AND DOESN'T PROPAGATE */
-    }), mergedState);
-    this.child.store.observable.on(function (state, action) {
-      _this.propagate({
-        action: action,
-        innerState: state,
-        outerState: outerState,
-        dispatchInner: function (action) {
-          return _this.child.store.process(action);
-        },
-        dispatchOuter: ctx.dispatch
-      });
+    var innerState = map(state);
+    var views = $nRn8$export$mapArray(children, function (c) {
+      return c.render(ctx, innerState);
     });
     return {
       change: function (state) {
-        var newState = _this.mergeStates(state, _this.child.store.property.get());
+        var innerState = map(state);
 
-        if (typeof newState !== 'undefined') viewComponent.change(newState);
+        for (var _i = 0, views_1 = views; _i < views_1.length; _i++) {
+          var view = views_1[_i];
+          view.change(innerState);
+        }
       },
       destroy: function () {
-        viewComponent.destroy();
+        for (var _i = 0, views_2 = views; _i < views_2.length; _i++) {
+          var view = views_2[_i];
+          view.destroy();
+        }
       },
       request: function (query) {
-        viewComponent.request(query);
+        for (var _i = 0, views_3 = views; _i < views_3.length; _i++) {
+          var view = views_3[_i];
+          view.request(query);
+        }
       }
     };
   };
 
-  return PaperAdapterTemplate;
+  return MapStateTemplate;
 }();
 
-var $gGAU$export$PaperAdapterTemplate = $gGAU$var$PaperAdapterTemplate;
-$gGAU$exports.PaperAdapterTemplate = $gGAU$export$PaperAdapterTemplate;
+var $ZNMw$export$MapStateTemplate = $ZNMw$var$MapStateTemplate;
+$ZNMw$exports.MapStateTemplate = $ZNMw$export$MapStateTemplate;
 
-var $gGAU$export$adapter = function (options, child) {
-  return new $gGAU$var$PaperAdapterTemplate(options.mergeStates || function (_u, _d) {
-    return undefined;
-  },
-  /* istanbul ignore next */
-  options.propagate || function () {
-    return undefined;
-  }, child);
+var $ZNMw$export$mapState = function (options) {
+  var children = [];
+
+  for (var _i = 1; _i < arguments.length; _i++) {
+    children[_i - 1] = arguments[_i];
+  }
+
+  return new $ZNMw$var$MapStateTemplate(options.map, children);
 };
 
-$gGAU$exports.adapter = $gGAU$export$adapter; //# sourceMappingURL=adapter.js.map
+$ZNMw$exports.mapState = $ZNMw$export$mapState;
 
+var $ZNMw$export$mapStateAndKeep = function (options) {
+  var children = [];
+
+  for (var _i = 1; _i < arguments.length; _i++) {
+    children[_i - 1] = arguments[_i];
+  }
+
+  return new $ZNMw$var$MapStateTemplate(function (state) {
+    return [options.map(state), state];
+  }, children);
+};
+
+$ZNMw$exports.mapStateAndKeep = $ZNMw$export$mapStateAndKeep;
+
+var $ZNMw$var$MapActionTemplate =
+/** @class */
+function () {
+  function MapActionTemplate(map, children) {
+    this.map = map;
+    this.children = children;
+  }
+
+  MapActionTemplate.prototype.render = function (ctx, state) {
+    var _a = this,
+        children = _a.children,
+        map = _a.map;
+
+    var newCtx = ctx.conditionalMapAction(map);
+    var views = $nRn8$export$mapArray(children, function (c) {
+      return c.render(newCtx, state);
+    });
+    return {
+      change: function (state) {
+        for (var _i = 0, views_4 = views; _i < views_4.length; _i++) {
+          var view = views_4[_i];
+          view.change(state);
+        }
+      },
+      destroy: function () {
+        for (var _i = 0, views_5 = views; _i < views_5.length; _i++) {
+          var view = views_5[_i];
+          view.destroy();
+        }
+      },
+      request: function (query) {
+        for (var _i = 0, views_6 = views; _i < views_6.length; _i++) {
+          var view = views_6[_i];
+          view.request(query);
+        }
+      }
+    };
+  };
+
+  return MapActionTemplate;
+}();
+
+var $ZNMw$export$MapActionTemplate = $ZNMw$var$MapActionTemplate;
+$ZNMw$exports.MapActionTemplate = $ZNMw$export$MapActionTemplate;
+
+var $ZNMw$export$mapAction = function (options) {
+  var children = [];
+
+  for (var _i = 1; _i < arguments.length; _i++) {
+    children[_i - 1] = arguments[_i];
+  }
+
+  return new $ZNMw$var$MapActionTemplate(options.map, children);
+};
+
+$ZNMw$exports.mapAction = $ZNMw$export$mapAction;
+
+var $ZNMw$var$MapQueryTemplate =
+/** @class */
+function () {
+  function MapQueryTemplate(map, children) {
+    this.map = map;
+    this.children = children;
+  }
+
+  MapQueryTemplate.prototype.render = function (ctx, state) {
+    var _a = this,
+        children = _a.children,
+        map = _a.map;
+
+    var views = $nRn8$export$mapArray(children, function (c) {
+      return c.render(ctx, state);
+    });
+    return {
+      change: function (state) {
+        for (var _i = 0, views_7 = views; _i < views_7.length; _i++) {
+          var view = views_7[_i];
+          view.change(state);
+        }
+      },
+      destroy: function () {
+        for (var _i = 0, views_8 = views; _i < views_8.length; _i++) {
+          var view = views_8[_i];
+          view.destroy();
+        }
+      },
+      request: function (query) {
+        var innerQuery = map(query);
+
+        if (typeof innerQuery !== 'undefined') {
+          views.forEach(function (view) {
+            return view.request(innerQuery);
+          });
+        }
+      }
+    };
+  };
+
+  return MapQueryTemplate;
+}();
+
+var $ZNMw$export$MapQueryTemplate = $ZNMw$var$MapQueryTemplate;
+$ZNMw$exports.MapQueryTemplate = $ZNMw$export$MapQueryTemplate;
+
+var $ZNMw$export$mapQuery = function (options) {
+  var children = [];
+
+  for (var _i = 1; _i < arguments.length; _i++) {
+    children[_i - 1] = arguments[_i];
+  }
+
+  return new $ZNMw$var$MapQueryTemplate(options.map, children);
+};
+
+$ZNMw$exports.mapQuery = $ZNMw$export$mapQuery;
+
+var $ZNMw$export$mapQueryConditional = function (options) {
+  var children = [];
+
+  for (var _i = 1; _i < arguments.length; _i++) {
+    children[_i - 1] = arguments[_i];
+  }
+
+  return new $ZNMw$var$MapQueryTemplate(options.map, children);
+};
+
+$ZNMw$exports.mapQueryConditional = $ZNMw$export$mapQueryConditional; //# sourceMappingURL=map.js.map
+
+// ASSET: ../node_modules/tempo-paper/lib/until.js
+var $yHEb$exports = {};
+Object.defineProperty($yHEb$exports, "__esModule", {
+  value: true
+});
+
+var $yHEb$var$PaperUntilTemplate =
+/** @class */
+function () {
+  function PaperUntilTemplate(options, children) {
+    this.options = options;
+    this.children = children;
+  }
+
+  PaperUntilTemplate.prototype.render = function (ctx, state) {
+    var children = this.children;
+    var repeatUntil = this.options.repeatUntil;
+    var ref = new $QMc8$exports.Group();
+    ctx.append(ref);
+    var newCtx = ctx.withAppend(function (item) {
+      return ref.addChild(item);
+    });
+    var childrenViews = [];
+    var view = {
+      change: function (state) {
+        var currentLength = childrenViews.length;
+        var index = 0;
+
+        var _loop_1 = function () {
+          var value = repeatUntil(state, index);
+          if (typeof value === 'undefined') return "break";
+
+          if (index < currentLength) {
+            // replace existing
+            var filteredViews = childrenViews[index];
+
+            for (var _i = 0, filteredViews_1 = filteredViews; _i < filteredViews_1.length; _i++) {
+              var view_1 = filteredViews_1[_i];
+              view_1.change(value);
+            }
+          } else {
+            // add node
+            childrenViews.push($nRn8$export$mapArray(children, function (el) {
+              return el.render(newCtx, value);
+            }));
+          }
+
+          index++;
+        };
+
+        while (true) {
+          var state_1 = _loop_1();
+
+          if (state_1 === "break") break;
+        }
+
+        var i = index; // remove extra nodes
+
+        while (i < currentLength) {
+          for (var _i = 0, _a = childrenViews[i]; _i < _a.length; _i++) {
+            var c = _a[_i];
+            c.destroy();
+          }
+
+          i++;
+        }
+
+        childrenViews = childrenViews.slice(0, index);
+      },
+      destroy: function () {
+        ref.remove();
+
+        for (var _i = 0, childrenViews_1 = childrenViews; _i < childrenViews_1.length; _i++) {
+          var childViews = childrenViews_1[_i];
+
+          for (var _a = 0, childViews_1 = childViews; _a < childViews_1.length; _a++) {
+            var view_2 = childViews_1[_a];
+            view_2.destroy();
+          }
+        }
+
+        childrenViews = [];
+      },
+      request: function (query) {
+        for (var _i = 0, childrenViews_2 = childrenViews; _i < childrenViews_2.length; _i++) {
+          var childViews = childrenViews_2[_i];
+
+          for (var _a = 0, childViews_2 = childViews; _a < childViews_2.length; _a++) {
+            var view_3 = childViews_2[_a];
+            view_3.request(query);
+          }
+        }
+      }
+    };
+    view.change(state);
+    return view;
+  };
+
+  return PaperUntilTemplate;
+}();
+
+var $yHEb$export$PaperUntilTemplate = $yHEb$var$PaperUntilTemplate;
+$yHEb$exports.PaperUntilTemplate = $yHEb$export$PaperUntilTemplate;
+
+var $yHEb$export$until = function (options) {
+  var children = [];
+
+  for (var _i = 1; _i < arguments.length; _i++) {
+    children[_i - 1] = arguments[_i];
+  }
+
+  return new $yHEb$var$PaperUntilTemplate(options, children);
+};
+
+$yHEb$exports.until = $yHEb$export$until; //# sourceMappingURL=until.js.map
+
+// ASSET: ../node_modules/tempo-paper/lib/iterate.js
+var $Haxo$exports = {};
+
+var $Haxo$var$__spreadArrays = $Haxo$exports && $Haxo$exports.__spreadArrays || function () {
+  for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
+
+  for (var r = Array(s), k = 0, i = 0; i < il; i++) for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++) r[k] = a[j];
+
+  return r;
+};
+
+Object.defineProperty($Haxo$exports, "__esModule", {
+  value: true
+});
+
+var $Haxo$export$iterate = function (options) {
+  var children = [];
+
+  for (var _i = 1; _i < arguments.length; _i++) {
+    children[_i - 1] = arguments[_i];
+  }
+
+  var outerState;
+  return $ZNMw$export$mapState({
+    map: function (outer) {
+      outerState = outer;
+      return options.getArray(outer);
+    }
+  }, $yHEb$export$until.apply(void 0, $Haxo$var$__spreadArrays([{
+    repeatUntil: function (value, index) {
+      return value[index] && [value[index], outerState, index];
+    }
+  }], children)));
+};
+
+$Haxo$exports.iterate = $Haxo$export$iterate;
+
+var $Haxo$export$iterateItems = function (options) {
+  var children = [];
+
+  for (var _i = 1; _i < arguments.length; _i++) {
+    children[_i - 1] = arguments[_i];
+  }
+
+  return $ZNMw$export$mapState({
+    map: function (outer) {
+      return options.getArray(outer);
+    }
+  }, $yHEb$export$until.apply(void 0, $Haxo$var$__spreadArrays([{
+    repeatUntil: function (value, index) {
+      return value[index];
+    }
+  }], children)));
+};
+
+$Haxo$exports.iterateItems = $Haxo$export$iterateItems;
+// ASSET: stars/app.ts
+var $kNYk$exports = {};
+Object.defineProperty($kNYk$exports, "__esModule", {
+  value: true
+});
+
+var $kNYk$var$getActiveProject = function getActiveProject() {
+  return window.paper.project;
+};
+
+var $kNYk$var$reducer = function reducer(state, action) {
+  return state;
+};
+
+var $kNYk$export$makeApp = function () {
+  var stars = [];
+
+  for (var i = 0; i < 200; i++) {
+    stars.push(new $GYcQ$exports.Point(Math.random(), Math.random()));
+  }
+
+  var state = {
+    size: new $GYcQ$exports.Point(1, 1),
+    stars: stars
+  };
+  var store = $xN6r$export$Store.ofState({
+    state: state,
+    reducer: $kNYk$var$reducer
+  });
+  var star = new $GYcQ$exports.Path({
+    segments: [new $GYcQ$exports.Point(-1, -1), new $GYcQ$exports.Point(-1, 1), new $GYcQ$exports.Point(1, 1), new $GYcQ$exports.Point(1, -1)],
+    closed: true,
+    insert: false,
+    fillColor: 'red',
+    project: $kNYk$var$getActiveProject()
+  });
+  var definition = new $GYcQ$exports.SymbolDefinition(star);
+  return $FTaY$export$component({
+    store: store
+  }, $Haxo$export$iterate({
+    getArray: function getArray(state) {
+      return state.stars;
+    }
+  }, $hS85$export$symbolItem({
+    definition: definition,
+    position: function position(_a) {
+      var p = _a[0];
+      return p.multiply(state.size);
+    }
+  })));
+};
+
+$kNYk$exports.makeApp = $kNYk$export$makeApp;
+// ASSET: stars/main.ts
+var $smgu$exports = {};
+
+var $smgu$var$__assign = $smgu$exports && $smgu$exports.__assign || function () {
+  $smgu$var$__assign = Object.assign || function (t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+      s = arguments[i];
+
+      for (var p in s) {
+        if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+      }
+    }
+
+    return t;
+  };
+
+  return $smgu$var$__assign.apply(this, arguments);
+};
+
+Object.defineProperty($smgu$exports, "__esModule", {
+  value: true
+});
+var $smgu$export$template = $Ccrz$export$lazy(function () {
+  return $gGAU$export$adapter({
+    mergeStates: function mergeStates(outer, inner) {
+      return $smgu$var$__assign($smgu$var$__assign({}, inner), {
+        size: new $GYcQ$exports.Point(outer.size.width, outer.size.height)
+      });
+    }
+  }, $kNYk$export$makeApp());
+});
+$smgu$exports.template = $smgu$export$template;
 // ASSET: path_simplification/state.ts
 var $AVNj$exports = {};
 Object.defineProperty($AVNj$exports, "__esModule", {
@@ -36753,118 +37326,6 @@ var $Vh63$export$reducer = $KKGP$export$reduceOnKind({
   }
 });
 $Vh63$exports.reducer = $Vh63$export$reducer;
-// ASSET: ../node_modules/tempo-paper/node_modules/tempo-core/lib/util/map.js
-var $nRn8$exports = {};
-Object.defineProperty($nRn8$exports, "__esModule", {
-  value: true
-});
-
-var $nRn8$export$mapArray = function (arr, f) {
-  var length = arr.length;
-  var buff = new Array(length);
-
-  for (var i = 0; i < length; i++) {
-    buff[i] = f(arr[i]);
-  }
-
-  return buff;
-};
-
-$nRn8$exports.mapArray = $nRn8$export$mapArray;
-// ASSET: ../node_modules/tempo-paper/lib/component.js
-var $FTaY$exports = {};
-Object.defineProperty($FTaY$exports, "__esModule", {
-  value: true
-});
-
-var $FTaY$var$PaperComponentTemplate =
-/** @class */
-function () {
-  function PaperComponentTemplate(store, children, delayed) {
-    this.store = store;
-    this.children = children;
-    this.delayed = delayed;
-  }
-
-  PaperComponentTemplate.prototype.render = function (ctx, state) {
-    var update;
-
-    if (this.delayed) {
-      var shouldRender_1 = true;
-
-      update = function (state) {
-        if (shouldRender_1) {
-          shouldRender_1 = false;
-          setTimeout(function () {
-            view.change(state);
-            shouldRender_1 = true;
-          });
-        }
-      };
-    } else {
-      update = function (state) {
-        view.change(state);
-      };
-    }
-
-    var store = this.store;
-    var property = store.property;
-    property.observable.on(update);
-
-    var innerDispatch = function (action) {
-      store.process(action);
-    };
-
-    var newCtx = ctx.withDispatch(innerDispatch);
-    var views = $nRn8$export$mapArray(this.children, function (child) {
-      return child.render(newCtx, property.get());
-    });
-    var view = {
-      change: function (state) {
-        store.property.set(state);
-
-        for (var _i = 0, views_1 = views; _i < views_1.length; _i++) {
-          var view_1 = views_1[_i];
-          view_1.change(state);
-        }
-      },
-      destroy: function () {
-        property.observable.off(update);
-
-        for (var _i = 0, views_2 = views; _i < views_2.length; _i++) {
-          var view_2 = views_2[_i];
-          view_2.destroy();
-        }
-      },
-      request: function (query) {
-        for (var _i = 0, views_3 = views; _i < views_3.length; _i++) {
-          var view_3 = views_3[_i];
-          view_3.request(query);
-        }
-      }
-    };
-    property.set(state);
-    return view;
-  };
-
-  return PaperComponentTemplate;
-}();
-
-var $FTaY$export$PaperComponentTemplate = $FTaY$var$PaperComponentTemplate;
-$FTaY$exports.PaperComponentTemplate = $FTaY$export$PaperComponentTemplate;
-
-var $FTaY$export$component = function (attributes) {
-  var children = [];
-
-  for (var _i = 1; _i < arguments.length; _i++) {
-    children[_i - 1] = arguments[_i];
-  }
-
-  return new $FTaY$var$PaperComponentTemplate(attributes.store, children, attributes.delayed || false);
-};
-
-$FTaY$exports.component = $FTaY$export$component; //# sourceMappingURL=component.js.map
-
 // ASSET: path_simplification/action.ts
 var $Nt5a$exports = {};
 Object.defineProperty($Nt5a$exports, "__esModule", {
@@ -37367,386 +37828,6 @@ var $hJtD$export$domBodyPortal = function () {
 
 $hJtD$exports.domBodyPortal = $hJtD$export$domBodyPortal; //# sourceMappingURL=dom_portal.js.map
 
-// ASSET: ../node_modules/tempo-paper/lib/map.js
-var $ZNMw$exports = {};
-Object.defineProperty($ZNMw$exports, "__esModule", {
-  value: true
-});
-
-var $ZNMw$var$MapStateTemplate =
-/** @class */
-function () {
-  function MapStateTemplate(map, children) {
-    this.map = map;
-    this.children = children;
-  }
-
-  MapStateTemplate.prototype.render = function (ctx, state) {
-    var _a = this,
-        children = _a.children,
-        map = _a.map;
-
-    var innerState = map(state);
-    var views = $nRn8$export$mapArray(children, function (c) {
-      return c.render(ctx, innerState);
-    });
-    return {
-      change: function (state) {
-        var innerState = map(state);
-
-        for (var _i = 0, views_1 = views; _i < views_1.length; _i++) {
-          var view = views_1[_i];
-          view.change(innerState);
-        }
-      },
-      destroy: function () {
-        for (var _i = 0, views_2 = views; _i < views_2.length; _i++) {
-          var view = views_2[_i];
-          view.destroy();
-        }
-      },
-      request: function (query) {
-        for (var _i = 0, views_3 = views; _i < views_3.length; _i++) {
-          var view = views_3[_i];
-          view.request(query);
-        }
-      }
-    };
-  };
-
-  return MapStateTemplate;
-}();
-
-var $ZNMw$export$MapStateTemplate = $ZNMw$var$MapStateTemplate;
-$ZNMw$exports.MapStateTemplate = $ZNMw$export$MapStateTemplate;
-
-var $ZNMw$export$mapState = function (options) {
-  var children = [];
-
-  for (var _i = 1; _i < arguments.length; _i++) {
-    children[_i - 1] = arguments[_i];
-  }
-
-  return new $ZNMw$var$MapStateTemplate(options.map, children);
-};
-
-$ZNMw$exports.mapState = $ZNMw$export$mapState;
-
-var $ZNMw$export$mapStateAndKeep = function (options) {
-  var children = [];
-
-  for (var _i = 1; _i < arguments.length; _i++) {
-    children[_i - 1] = arguments[_i];
-  }
-
-  return new $ZNMw$var$MapStateTemplate(function (state) {
-    return [options.map(state), state];
-  }, children);
-};
-
-$ZNMw$exports.mapStateAndKeep = $ZNMw$export$mapStateAndKeep;
-
-var $ZNMw$var$MapActionTemplate =
-/** @class */
-function () {
-  function MapActionTemplate(map, children) {
-    this.map = map;
-    this.children = children;
-  }
-
-  MapActionTemplate.prototype.render = function (ctx, state) {
-    var _a = this,
-        children = _a.children,
-        map = _a.map;
-
-    var newCtx = ctx.conditionalMapAction(map);
-    var views = $nRn8$export$mapArray(children, function (c) {
-      return c.render(newCtx, state);
-    });
-    return {
-      change: function (state) {
-        for (var _i = 0, views_4 = views; _i < views_4.length; _i++) {
-          var view = views_4[_i];
-          view.change(state);
-        }
-      },
-      destroy: function () {
-        for (var _i = 0, views_5 = views; _i < views_5.length; _i++) {
-          var view = views_5[_i];
-          view.destroy();
-        }
-      },
-      request: function (query) {
-        for (var _i = 0, views_6 = views; _i < views_6.length; _i++) {
-          var view = views_6[_i];
-          view.request(query);
-        }
-      }
-    };
-  };
-
-  return MapActionTemplate;
-}();
-
-var $ZNMw$export$MapActionTemplate = $ZNMw$var$MapActionTemplate;
-$ZNMw$exports.MapActionTemplate = $ZNMw$export$MapActionTemplate;
-
-var $ZNMw$export$mapAction = function (options) {
-  var children = [];
-
-  for (var _i = 1; _i < arguments.length; _i++) {
-    children[_i - 1] = arguments[_i];
-  }
-
-  return new $ZNMw$var$MapActionTemplate(options.map, children);
-};
-
-$ZNMw$exports.mapAction = $ZNMw$export$mapAction;
-
-var $ZNMw$var$MapQueryTemplate =
-/** @class */
-function () {
-  function MapQueryTemplate(map, children) {
-    this.map = map;
-    this.children = children;
-  }
-
-  MapQueryTemplate.prototype.render = function (ctx, state) {
-    var _a = this,
-        children = _a.children,
-        map = _a.map;
-
-    var views = $nRn8$export$mapArray(children, function (c) {
-      return c.render(ctx, state);
-    });
-    return {
-      change: function (state) {
-        for (var _i = 0, views_7 = views; _i < views_7.length; _i++) {
-          var view = views_7[_i];
-          view.change(state);
-        }
-      },
-      destroy: function () {
-        for (var _i = 0, views_8 = views; _i < views_8.length; _i++) {
-          var view = views_8[_i];
-          view.destroy();
-        }
-      },
-      request: function (query) {
-        var innerQuery = map(query);
-
-        if (typeof innerQuery !== 'undefined') {
-          views.forEach(function (view) {
-            return view.request(innerQuery);
-          });
-        }
-      }
-    };
-  };
-
-  return MapQueryTemplate;
-}();
-
-var $ZNMw$export$MapQueryTemplate = $ZNMw$var$MapQueryTemplate;
-$ZNMw$exports.MapQueryTemplate = $ZNMw$export$MapQueryTemplate;
-
-var $ZNMw$export$mapQuery = function (options) {
-  var children = [];
-
-  for (var _i = 1; _i < arguments.length; _i++) {
-    children[_i - 1] = arguments[_i];
-  }
-
-  return new $ZNMw$var$MapQueryTemplate(options.map, children);
-};
-
-$ZNMw$exports.mapQuery = $ZNMw$export$mapQuery;
-
-var $ZNMw$export$mapQueryConditional = function (options) {
-  var children = [];
-
-  for (var _i = 1; _i < arguments.length; _i++) {
-    children[_i - 1] = arguments[_i];
-  }
-
-  return new $ZNMw$var$MapQueryTemplate(options.map, children);
-};
-
-$ZNMw$exports.mapQueryConditional = $ZNMw$export$mapQueryConditional; //# sourceMappingURL=map.js.map
-
-// ASSET: ../node_modules/tempo-paper/lib/until.js
-var $yHEb$exports = {};
-Object.defineProperty($yHEb$exports, "__esModule", {
-  value: true
-});
-
-var $yHEb$var$PaperUntilTemplate =
-/** @class */
-function () {
-  function PaperUntilTemplate(options, children) {
-    this.options = options;
-    this.children = children;
-  }
-
-  PaperUntilTemplate.prototype.render = function (ctx, state) {
-    var children = this.children;
-    var repeatUntil = this.options.repeatUntil;
-    var ref = new $QMc8$exports.Group();
-    ctx.append(ref);
-    var newCtx = ctx.withAppend(function (item) {
-      return ref.addChild(item);
-    });
-    var childrenViews = [];
-    var view = {
-      change: function (state) {
-        var currentLength = childrenViews.length;
-        var index = 0;
-
-        var _loop_1 = function () {
-          var value = repeatUntil(state, index);
-          if (typeof value === 'undefined') return "break";
-
-          if (index < currentLength) {
-            // replace existing
-            var filteredViews = childrenViews[index];
-
-            for (var _i = 0, filteredViews_1 = filteredViews; _i < filteredViews_1.length; _i++) {
-              var view_1 = filteredViews_1[_i];
-              view_1.change(value);
-            }
-          } else {
-            // add node
-            childrenViews.push($nRn8$export$mapArray(children, function (el) {
-              return el.render(newCtx, value);
-            }));
-          }
-
-          index++;
-        };
-
-        while (true) {
-          var state_1 = _loop_1();
-
-          if (state_1 === "break") break;
-        }
-
-        var i = index; // remove extra nodes
-
-        while (i < currentLength) {
-          for (var _i = 0, _a = childrenViews[i]; _i < _a.length; _i++) {
-            var c = _a[_i];
-            c.destroy();
-          }
-
-          i++;
-        }
-
-        childrenViews = childrenViews.slice(0, index);
-      },
-      destroy: function () {
-        ref.remove();
-
-        for (var _i = 0, childrenViews_1 = childrenViews; _i < childrenViews_1.length; _i++) {
-          var childViews = childrenViews_1[_i];
-
-          for (var _a = 0, childViews_1 = childViews; _a < childViews_1.length; _a++) {
-            var view_2 = childViews_1[_a];
-            view_2.destroy();
-          }
-        }
-
-        childrenViews = [];
-      },
-      request: function (query) {
-        for (var _i = 0, childrenViews_2 = childrenViews; _i < childrenViews_2.length; _i++) {
-          var childViews = childrenViews_2[_i];
-
-          for (var _a = 0, childViews_2 = childViews; _a < childViews_2.length; _a++) {
-            var view_3 = childViews_2[_a];
-            view_3.request(query);
-          }
-        }
-      }
-    };
-    view.change(state);
-    return view;
-  };
-
-  return PaperUntilTemplate;
-}();
-
-var $yHEb$export$PaperUntilTemplate = $yHEb$var$PaperUntilTemplate;
-$yHEb$exports.PaperUntilTemplate = $yHEb$export$PaperUntilTemplate;
-
-var $yHEb$export$until = function (options) {
-  var children = [];
-
-  for (var _i = 1; _i < arguments.length; _i++) {
-    children[_i - 1] = arguments[_i];
-  }
-
-  return new $yHEb$var$PaperUntilTemplate(options, children);
-};
-
-$yHEb$exports.until = $yHEb$export$until; //# sourceMappingURL=until.js.map
-
-// ASSET: ../node_modules/tempo-paper/lib/iterate.js
-var $Haxo$exports = {};
-
-var $Haxo$var$__spreadArrays = $Haxo$exports && $Haxo$exports.__spreadArrays || function () {
-  for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
-
-  for (var r = Array(s), k = 0, i = 0; i < il; i++) for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++) r[k] = a[j];
-
-  return r;
-};
-
-Object.defineProperty($Haxo$exports, "__esModule", {
-  value: true
-});
-
-var $Haxo$export$iterate = function (options) {
-  var children = [];
-
-  for (var _i = 1; _i < arguments.length; _i++) {
-    children[_i - 1] = arguments[_i];
-  }
-
-  var outerState;
-  return $ZNMw$export$mapState({
-    map: function (outer) {
-      outerState = outer;
-      return options.getArray(outer);
-    }
-  }, $yHEb$export$until.apply(void 0, $Haxo$var$__spreadArrays([{
-    repeatUntil: function (value, index) {
-      return value[index] && [value[index], outerState, index];
-    }
-  }], children)));
-};
-
-$Haxo$exports.iterate = $Haxo$export$iterate;
-
-var $Haxo$export$iterateItems = function (options) {
-  var children = [];
-
-  for (var _i = 1; _i < arguments.length; _i++) {
-    children[_i - 1] = arguments[_i];
-  }
-
-  return $ZNMw$export$mapState({
-    map: function (outer) {
-      return options.getArray(outer);
-    }
-  }, $yHEb$export$until.apply(void 0, $Haxo$var$__spreadArrays([{
-    repeatUntil: function (value, index) {
-      return value[index];
-    }
-  }], children)));
-};
-
-$Haxo$exports.iterateItems = $Haxo$export$iterateItems;
-
 var $T9s4$export$createMatch = function (field) {
   return function (matcher) {
     return function (input) {
@@ -38061,7 +38142,7 @@ var $ZCfc$var$template = $zQMt$export$article({
       }
     }
   }, $fICP$export$matchKind({
-    circle: $p2mr$export$template,
+    stars: $smgu$export$template,
     path_simplification: $XHEJ$export$template
   }))),
   false: ''

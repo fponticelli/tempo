@@ -34,7 +34,7 @@ type PathOptions<State, Action, Query, T> = MakeOptional<
 >
 
 type PathConstrOptions<State, Action, Query, T> = Merge<
-  { args: {} },
+  { args: any },
   MakeOptional<
     Merge<
       Merge<

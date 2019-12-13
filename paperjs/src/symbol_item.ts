@@ -10,31 +10,32 @@ import {
 import { TempoAttributes } from './tempo_attributes'
 import { ItemEvents, createItem } from './item'
 
-type WritableShape = ExcludeFunctionFields<
+type WritableSymbolItem = ExcludeFunctionFields<
   RemoveNullableFromFields<WritableFields<SymbolItem>>
 >
 
-type WritableShapeOptionKeys = keyof WritableShape
+type WritableSymbolItemOptionKeys = keyof WritableSymbolItem
 
-type WritableShapeOptions<State> = {
-  [K in WritableShapeOptionKeys]?: PaperAttribute<State, WritableShape[K]>
+type WritableSymbolItemOptions<State> = {
+  [K in WritableSymbolItemOptionKeys]?: PaperAttribute<State, WritableSymbolItem[K]>
 }
 
-type ShapeOptions<State, Action, Query, T, Sub> = MakeOptional<
-  Merge<
+type SymbolItemOptions<State, Action, Query, T, Sub> =
+// Merge<
+  MakeOptional<
     Merge<
-      WritableShapeOptions<State>,
       Merge<
-        { definition: SymbolDefinition },
+        WritableSymbolItemOptions<State>,
         TempoAttributes<State, Action, Query, SymbolItem, T>
-      >
-    >,
-    ItemEvents<State, Action, SymbolItem>
+      >,
+      ItemEvents<State, Action, SymbolItem>
+    >
   >
->
+  // { definition: PaperAttribute<State, SymbolDefinition> }
+// >
 
-export const shape = <State, Action, Query = unknown, T = unknown>(
-  options: ShapeOptions<State, Action, Query, T, SymbolItem>
+export const symbolItem = <State, Action, Query = unknown, T = unknown>(
+  options: SymbolItemOptions<State, Action, Query, T, SymbolItem>
 ) =>
   createItem<
     State,
@@ -42,7 +43,7 @@ export const shape = <State, Action, Query = unknown, T = unknown>(
     Query,
     SymbolItem,
     T,
-    ShapeOptions<State, Action, Query, T, SymbolItem>
+    SymbolItemOptions<State, Action, Query, T, SymbolItem>
   >(
     (_: State) => new SymbolItem(options.definition as SymbolDefinition),
     options

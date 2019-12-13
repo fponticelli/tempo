@@ -26,7 +26,7 @@ import { reduceOnKind } from 'tempo-store/lib/reducer'
 import { project } from 'tempo-paper/lib/project'
 import { Size } from 'paper'
 import { makeMiddleware } from './middleware'
-import { template as circleTemplate } from './circle/main'
+import { template as starsTemplate } from './stars/main'
 import { template as pathSimplificationTemplate } from './path_simplification/main'
 
 const state = createState()
@@ -127,7 +127,7 @@ const template = article<State, Action, Query>(
               }
             },
             matchKind<CanvasState, any, any>({
-              circle: circleTemplate,
+              stars: starsTemplate,
               path_simplification: pathSimplificationTemplate
             })
           )
