@@ -1,9 +1,7 @@
-import { Path, PaperScope, Matrix } from 'paper'
+import { Path, Matrix } from 'paper'
 import { reduceOnKind } from 'tempo-store/lib/reducer'
 import { State, Mode } from './state'
 import { Action } from './action'
-
-const getActiveProject = () => (window.paper as PaperScope).project
 
 export const reducer = reduceOnKind<State, Action>({
   AddSegment: (state, action) => {
@@ -15,7 +13,6 @@ export const reducer = reduceOnKind<State, Action>({
     const path = new Path({
       segments: state.current,
       insert: false,
-      project: getActiveProject(),
       applyMatrix: false
     })
     path.simplify(10)

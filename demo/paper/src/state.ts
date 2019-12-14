@@ -1,6 +1,6 @@
 import { Size } from 'paper'
 
-export const examples = ['stars', 'path_simplification'] as const
+export const examples = ['path_simplification', 'symbol'] as const
 export type Examples = typeof examples
 export type Example = Examples[number]
 

@@ -11,6 +11,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+import './style.sass'
+
 import { Tempo } from 'tempo-dom/lib/tempo'
 import { main, li, span, a, article, section, header, ul, div, button } from 'tempo-dom/lib/html'
 import { iterate } from 'tempo-dom/lib/iterate'
@@ -26,7 +28,7 @@ import { reduceOnKind } from 'tempo-store/lib/reducer'
 import { project } from 'tempo-paper/lib/project'
 import { Size } from 'paper'
 import { makeMiddleware } from './middleware'
-import { template as starsTemplate } from './stars/main'
+import { template as symbolTemplate } from './symbol/main'
 import { template as pathSimplificationTemplate } from './path_simplification/main'
 
 const state = createState()
@@ -127,7 +129,7 @@ const template = article<State, Action, Query>(
               }
             },
             matchKind<CanvasState, any, any>({
-              stars: starsTemplate,
+              symbol: symbolTemplate,
               path_simplification: pathSimplificationTemplate
             })
           )

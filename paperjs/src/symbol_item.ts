@@ -17,11 +17,14 @@ type WritableSymbolItem = ExcludeFunctionFields<
 type WritableSymbolItemOptionKeys = keyof WritableSymbolItem
 
 type WritableSymbolItemOptions<State> = {
-  [K in WritableSymbolItemOptionKeys]?: PaperAttribute<State, WritableSymbolItem[K]>
+  [K in WritableSymbolItemOptionKeys]?: PaperAttribute<
+    State,
+    WritableSymbolItem[K]
+  >
 }
 
 type SymbolItemOptions<State, Action, Query, T, Sub> =
-// Merge<
+  // Merge<
   MakeOptional<
     Merge<
       Merge<
@@ -31,7 +34,7 @@ type SymbolItemOptions<State, Action, Query, T, Sub> =
       ItemEvents<State, Action, SymbolItem>
     >
   >
-  // { definition: PaperAttribute<State, SymbolDefinition> }
+// { definition: PaperAttribute<State, SymbolDefinition> }
 // >
 
 export const symbolItem = <State, Action, Query = unknown, T = unknown>(
