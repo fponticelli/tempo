@@ -2,7 +2,8 @@
   "name": "tempo-paper",
   "version": "0.1.0",
   "description": "",
-  "keywords": [],
+  "sideEffects": false,
+  "keywords": ["tempo", "paperjs", "2d", "graphics"],
   "license": "Apache-2.0",
   "scripts": {
     "clean": "rm -rf lib/* && rm -rf es6/*",

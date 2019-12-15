@@ -4,6 +4,7 @@
   "description": "Core types for Tempo. The tempo architecture encourages a unilateral flow in a practical way.",
   "version": "1.2.0",
   "keywords": ["tempo", "framework", "ui", "library"],
+  "sideEffects": false,
   "scripts": {
     "clean": "rm -rf lib/* && rm -rf es6/*",
     "build": "npm run clean && npx tsc && npx tsc -p tsconfig.es6.json",

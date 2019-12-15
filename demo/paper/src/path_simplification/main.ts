@@ -1,5 +1,5 @@
 import { adapter } from 'tempo-paper/lib/adapter'
-import { CanvasState } from '../state'
+import { SampleState } from '../canvas_state'
 import { state, State } from './state'
 import { reducer } from './reducer'
 import { Store } from 'tempo-store/lib/store'
@@ -11,7 +11,7 @@ const store = Store.ofState<State, Action>({
   reducer
 })
 
-export const template = adapter<CanvasState, State, unknown, Action>(
+export const template = adapter<SampleState, State, unknown, Action>(
   {},
   makeApp(store)
 )

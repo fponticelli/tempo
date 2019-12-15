@@ -5,7 +5,7 @@ import { Store } from 'tempo-store/lib/store'
 import { tool } from 'tempo-paper/lib/tool'
 import { Tool, Project, Color, Segment, MouseEvent } from 'paper'
 import { path } from 'tempo-paper/lib/path'
-import { domPortalWithSelector } from 'tempo-paper/lib/dom_portal'
+import { htmlPortalWithSelector } from 'tempo-paper/lib/html_portal'
 import { iterate } from 'tempo-paper/lib/iterate'
 import { matchKind } from 'tempo-core'
 import { toolbar } from './toolbar'
@@ -13,7 +13,7 @@ import { toolbar } from './toolbar'
 export const makeApp = (store: Store<State, Action>) =>
   component<State, Action, unknown>(
     { store },
-    domPortalWithSelector({ selector: '#toolbar' }, toolbar),
+    htmlPortalWithSelector({ selector: '#toolbar' }, toolbar),
     tool({
       active: ({ mode }) => mode.kind === 'drawing',
       onMouseDown: (

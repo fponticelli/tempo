@@ -20,8 +20,8 @@ import { containerSize } from 'tempo-dom/lib/utils/dom'
 import { matchBool } from 'tempo-dom/lib/match'
 import { matchKind } from 'tempo-paper/lib/match'
 import { mapState } from 'tempo-dom/lib/map'
-import { createState, State, Example, CanvasState } from './state'
-import { Action } from './action'
+import { createState, CanvasState, Example, SampleState } from './canvas_state'
+import { CanvasAction } from './canvas_action'
 import { Query } from './query'
 import { Store } from 'tempo-store/lib/store'
 import { reduceOnKind } from 'tempo-store/lib/reducer'
@@ -30,10 +30,11 @@ import { Size } from 'paper'
 import { makeMiddleware } from './middleware'
 import { template as symbolTemplate } from './symbol/main'
 import { template as pathSimplificationTemplate } from './path_simplification/main'
+import { template as paintTemplate } from './paint/main'
 
 const state = createState()
 
-const reducer = reduceOnKind<State, Action>({
+const reducer = reduceOnKind<CanvasState, CanvasAction>({
   ChangeSample: (state, action) => ({
     ...state,
     selected: action.sample
@@ -48,7 +49,7 @@ const reducer = reduceOnKind<State, Action>({
 
 const store = Store.ofState({ state, reducer })
 
-const template = article<State, Action, Query>(
+const template = article<CanvasState, CanvasAction, Query>(
   { attrs: { className: 'app' } },
   header(
     { attrs: { class: 'header' } },
@@ -57,11 +58,11 @@ const template = article<State, Action, Query>(
     div(
       { attrs: { class: 'toolbar-fixed' } },
       button(
-        { events: { click: () => Action.exportSVG } },
+        { events: { click: () => CanvasAction.exportSVG } },
         'Export to SVG'
       ),
       button(
-        { events: { click: () => Action.exportPNG } },
+        { events: { click: () => CanvasAction.exportPNG } },
         'Export to PNG'
       )
     )
@@ -76,7 +77,7 @@ const template = article<State, Action, Query>(
           {
             getArray: state => state.examples as unknown as Example[] // TODO
           },
-          li<[Example, State, number], Action, unknown>(
+          li<[Example, CanvasState, number], CanvasAction, unknown>(
             {},
             matchBool({
               condition: ([item, state, index]) => item === state.selected,
@@ -87,7 +88,7 @@ const template = article<State, Action, Query>(
               false: a(
                 {
                   attrs: { href: ([item]) => `#${item}` },
-                  events: { click: ([item]) => Action.changeSample(item) }
+                  events: { click: ([item]) => CanvasAction.changeSample(item) }
                 },
                 ([item]) => item.split('_').join(' ')
               )
@@ -110,7 +111,7 @@ const template = article<State, Action, Query>(
         condition: state => typeof state.mainAreaSize !== 'undefined',
         true: mapState(
           { map: state => ({ size: state.mainAreaSize!, kind: state.selected }) },
-          project<CanvasState, any, any>(
+          project<SampleState, any, any>(
             {
               width: ({size}) => size.width!,
               height: ({size}) => size.height!,
@@ -128,9 +129,10 @@ const template = article<State, Action, Query>(
                 }
               }
             },
-            matchKind<CanvasState, any, any>({
+            matchKind<SampleState, any, any>({
               symbol: symbolTemplate,
-              path_simplification: pathSimplificationTemplate
+              path_simplification: pathSimplificationTemplate,
+              paint: paintTemplate
             })
           )
         ),
@@ -145,7 +147,7 @@ const { view } = Tempo.render({ store, template })
 store.observable.on(makeMiddleware(view))
 
 const updateSizeQuery = Query.mainAreaSize(size => {
-  store.process(Action.setMainAreaSize(size))
+  store.process(CanvasAction.setMainAreaSize(size))
 })
 
 view.request(updateSizeQuery)

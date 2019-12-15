@@ -4,9 +4,6 @@ const path = require('path');
 module.exports = {
   entry: './src/index.ts',
   devtool: 'inline-source-map',
-  devServer: {
-    contentBase: './build',
-  },
   module: {
     rules: [
       {
@@ -32,10 +29,17 @@ module.exports = {
   },
   output: {
     filename: 'index.js',
-    path: path.resolve(__dirname, '../../docs/demo/paper/'),
-    publicPath: '.'
+    path: path.resolve(__dirname, './build'),
+    // publicPath: '.'
   },
   plugins: [
     new HtmlWebpackPlugin(),
   ],
+  optimization: {
+    usedExports: true,
+  },
+  devServer: {
+    port: 1234
+    // contentBase: './build'
+  }
 };
