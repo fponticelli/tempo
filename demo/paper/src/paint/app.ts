@@ -27,7 +27,10 @@ const fitSize = (image: HTMLImageElement, size: Size) => {
   const cw = size.width!
   const ch = size.height!
   const cr = cw / ch
-  console.log(`iw: ${iw}, ih: ${ih}, ir: ${ir}, cw: ${cw}, cw: ${cw}, cw: ${cw}, ratio: ${ir > cr}`)
+  console.log(
+    `iw: ${iw}, ih: ${ih}, ir: ${ir}, cw: ${cw}, cw: ${cw}, cw: ${cw}, ratio: ${ir >
+      cr}`
+  )
   if (ir < cr) {
     const ratio = cw / iw
     return new Size(iw * ratio, ih * ratio)
@@ -50,14 +53,12 @@ export const makeApp = () => {
     htmlPortalWithSelector({ selector: '#toolbar' }, toolbar),
     matchBool({
       condition: state => typeof state.raster !== 'undefined',
-      true: raster(
-        {
-          image: state => state.raster,
-          size: state => fitSize(state.raster!, state.size),
-          position: state => center(state.size),
-          opacity: 0.3
-        }
-      ),
+      true: raster({
+        image: state => state.raster,
+        size: state => fitSize(state.raster!, state.size),
+        position: state => center(state.size),
+        opacity: 0.3
+      }),
       false: fragment()
     })
   )

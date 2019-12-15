@@ -71,7 +71,9 @@ type _T1_should_not_include_B = AssertNot<Equals<T1, B>>
 type C = { ab: AB; c: string }
 type T2 = DifferentiateAt<['ab', 'kind'], C, 'A'>
 
-type _T2_should_only_include_A = Assert<Same<T2, { ab: { kind: 'A', a: string }, c: string }>>
+type _T2_should_only_include_A = Assert<
+  Same<T2, { ab: { kind: 'A'; a: string }; c: string }>
+>
 
 // @ts-ignore
 type _TESTS_ =

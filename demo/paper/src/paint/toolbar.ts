@@ -4,19 +4,14 @@ import { Action } from './action'
 
 export const toolbar = span<State, Action, unknown>(
   {},
-  span(
-    { attrs: { class: 'message' } },
-    state => state.message
-  ),
+  span({ attrs: { class: 'message' } }, state => state.message),
   span(
     { attrs: { class: 'action' } },
-    input(
-      {
-        attrs: {
-          type: 'text',
-          value: state => state.url
-        }
-      },
-    )
+    input({
+      attrs: {
+        type: 'text',
+        value: state => state.url
+      }
+    })
   )
 )

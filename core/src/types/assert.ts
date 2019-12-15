@@ -17,12 +17,14 @@ export type AssertNot<A extends false> = A extends false ? 'PASS' : 'FAIL'
 export type Extends<A, B> = A extends B ? true : false
 
 // do not use with `any`
-export type Same<A, B> = A extends B ? B extends A ? true : false : false
+export type Same<A, B> = A extends B ? (B extends A ? true : false) : false
 
 // does not work comparing intersaction types with literals. Use `Same` for that.
-export type Equals<X, Y> =
-    (<T>() => T extends X ? 1 : 2) extends
-    (<T>() => T extends Y ? 1 : 2) ? true : false;
+export type Equals<X, Y> = (<T>() => T extends X ? 1 : 2) extends <
+  T
+>() => T extends Y ? 1 : 2
+  ? true
+  : false
 
 // TYPE TESTS
 type _primitives_are_not_equals = AssertNot<Equals<number, string>>
@@ -36,8 +38,12 @@ type _any_is_not_equal_to_never = AssertNot<Equals<any, never>>
 type _any_is_not_same_as_never = AssertNot<Equals<any, never>>
 type _same_tuple_elements_match = Assert<Equals<[number], [number]>>
 type _different_tuple_elements_do_not_match = AssertNot<Equals<[any], [string]>>
-type _intersaction_objects_are_same_as_literal = Assert<Same<{ x: 1 } & { y: 2 }, { x: 1, y: 2 }>>
-type _intersaction_objects_not_equal_to_literal = AssertNot<Equals<{ x: 1 } & { y: 2 }, { x: 1, y: 2 }>>
+type _intersaction_objects_are_same_as_literal = Assert<
+  Same<{ x: 1 } & { y: 2 }, { x: 1; y: 2 }>
+>
+type _intersaction_objects_not_equal_to_literal = AssertNot<
+  Equals<{ x: 1 } & { y: 2 }, { x: 1; y: 2 }>
+>
 
 // @ts-ignore
 type _TESTS_ =

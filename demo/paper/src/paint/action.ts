@@ -1,11 +1,11 @@
 export type Result<T> =
-  | { kind: 'failure', message: string }
-  | { kind: 'success', value: T }
+  | { kind: 'failure'; message: string }
+  | { kind: 'success'; value: T }
 
 export type Action =
   | { kind: 'LoadUrl' }
-  | { kind: 'ChangeUrl', url: string }
-  | { kind: 'ImageLoaded', result: Result<HTMLImageElement> }
+  | { kind: 'ChangeUrl'; url: string }
+  | { kind: 'ImageLoaded'; result: Result<HTMLImageElement> }
 
 export const Action = {
   loadUrl: { kind: 'LoadUrl' } as Action,

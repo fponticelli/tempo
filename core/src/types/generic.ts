@@ -11,18 +11,21 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-export type WhenEquals<X, Y, A = X, B = never> =
-(<T>() => T extends X ? true : false) extends (<T>() => T extends Y ? true : false)
-? A
-: B
+export type WhenEquals<X, Y, A = X, B = never> = (<T>() => T extends X
+  ? true
+  : false) extends <T>() => T extends Y ? true : false
+  ? A
+  : B
 
 // TYPE TESTS
 import { Assert, Equals } from './assert'
 
-type _when_true_returns_A = Assert<Equals<WhenEquals<string, string, number, boolean>, number>>
-type _when_false_returns_B = Assert<Equals<WhenEquals<string, number, number, boolean>, boolean>>
+type _when_true_returns_A = Assert<
+  Equals<WhenEquals<string, string, number, boolean>, number>
+>
+type _when_false_returns_B = Assert<
+  Equals<WhenEquals<string, number, number, boolean>, boolean>
+>
 
 // @ts-ignore
-type _TESTS_ =
-  | _when_true_returns_A
-  | _when_false_returns_B
+type _TESTS_ = _when_true_returns_A | _when_false_returns_B

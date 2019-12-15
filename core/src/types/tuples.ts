@@ -31,7 +31,9 @@ type _head_is_number = Assert<Equals<_head, number>>
 type _tail_is_string_boolean = Assert<Equals<_tail, [string, boolean]>>
 type _head_is_not_string = AssertNot<Equals<Head<[number, string]>, boolean>>
 type _tuple_to_union_of_empty_is_never = Assert<Equals<TupleToUnion<[]>, never>>
-type _tuple_to_union_of_not_empty_is_list = Assert<Equals<TupleToUnion<[string, 1]>, string | 1>>
+type _tuple_to_union_of_not_empty_is_list = Assert<
+  Equals<TupleToUnion<[string, 1]>, string | 1>
+>
 
 // @ts-ignore
 type _TESTS_ =

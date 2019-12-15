@@ -2,7 +2,10 @@ import { State } from './state'
 import { Action } from './action'
 import { Store } from 'tempo-store/lib/store'
 
-export const middleware = (store: Store<State, Action>) => (state: State, action: Action) => {
+export const middleware = (store: Store<State, Action>) => (
+  state: State,
+  action: Action
+) => {
   switch (action.kind) {
     case 'LoadUrl':
       const raster = new Image()
