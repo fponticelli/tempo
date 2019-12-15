@@ -1,22 +1,22 @@
 import { Size } from 'paper'
 
-export const examples = ['path_simplification', 'symbol'] as const
+export const examples = ['paint', 'path_simplification', 'symbol'] as const
 export type Examples = typeof examples
 export type Example = Examples[number]
 
-export interface State {
+export interface CanvasState {
   examples: Examples
   selected: Example
   mainAreaSize: Size | undefined
 }
 
-export const createState = (): State => {
+export const createState = (): CanvasState => {
   const hash = location.hash.substring(1)
   const selected = (examples.indexOf(hash as Example) >= 0) ? (hash as Example) : examples[0]
   return { examples, selected, mainAreaSize: undefined }
 }
 
-export interface CanvasState {
+export interface SampleState {
   kind: Example
   size: Size
 }
