@@ -4,6 +4,7 @@
   "description": "Web framework alternative to React/Angular fully typed.",
   "private": true,
   "keywords": [
+    "tempo",
     "typescript",
     "ui",
     "framework",

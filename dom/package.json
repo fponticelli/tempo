@@ -2,7 +2,8 @@
   "name": "tempo-dom",
   "version": "0.10.0",
   "description": "Fully-typed web framework alternative to React and Angular",
-  "keywords": ["ui", "framework", "typescript", "dom", "angular-alternative", "react-alternative"],
+  "keywords": ["tempo", "ui", "framework", "typescript", "dom", "angular-alternative", "react-alternative"],
+  "sideEffects": false,
   "license": "Apache-2.0",
   "scripts": {
     "clean": "rm -rf lib/* && rm -rf es6/*",

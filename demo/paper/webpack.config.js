@@ -38,4 +38,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin(),
   ],
+  optimization: {
+    usedExports: true,
+  },
 };
