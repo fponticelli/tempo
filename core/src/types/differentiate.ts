@@ -48,10 +48,35 @@ export type DifferentiateAt<
     : never
   : never
 
-// export type A = { kind: 'A'; a: string }
-// export type B = { kind: 'B'; b: string }
-// export type AB = A | B
-// export type C = { ab: AB; c: string }
-// export type T1 = DifferentiateAt<['ab', 'kind'], C, 'A'>
-// export const t1: T1 = { ab: { kind: 'A', a: 'hello' }, c: '' }
-// console.log(t1.ab.a)
+// TYPE TESTS
+import { Assert, AssertNot, Equals, Same } from './assert'
+
+type A = { kind: 'A'; a: string }
+type B = { kind: 'B'; b: string }
+type AB = A | B
+
+// DifferentiateByKind
+type T0 = Differentiate<'kind', AB, 'A'>
+
+type _T0_should_only_include_A = Assert<Equals<T0, A>>
+type _T0_should_not_include_B = AssertNot<Equals<T0, B>>
+
+// DifferentiateByKind
+type T1 = DifferentiateByKind<AB, 'A'>
+
+type _T1_should_only_include_A = Assert<Equals<T1, A>>
+type _T1_should_not_include_B = AssertNot<Equals<T1, B>>
+
+// DifferentiateAt
+type C = { ab: AB; c: string }
+type T2 = DifferentiateAt<['ab', 'kind'], C, 'A'>
+
+type _T2_should_only_include_A = Assert<Same<T2, { ab: { kind: 'A', a: string }, c: string }>>
+
+// @ts-ignore
+type _TESTS_ =
+  | _T0_should_only_include_A
+  | _T0_should_not_include_B
+  | _T1_should_only_include_A
+  | _T1_should_not_include_B
+  | _T2_should_only_include_A

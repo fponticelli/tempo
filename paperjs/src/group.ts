@@ -4,8 +4,7 @@ import {
   WritableFields,
   ExcludeFunctionFields,
   RemoveNullableFromFields,
-  Merge,
-  MakeOptional
+  Merge
 } from 'tempo-core/lib/types/objects'
 import { TempoAttributes } from './tempo_attributes'
 import { ItemEvents, createItem } from './item'
@@ -21,7 +20,7 @@ type WritableGroupOptions<State> = {
   [K in WritableGroupOptionKeys]?: PaperAttribute<State, WritableGroup[K]>
 }
 
-type GroupOptions<State, Action, Query, T> = MakeOptional<
+type GroupOptions<State, Action, Query, T> = Partial<
   Merge<
     Merge<
       WritableGroupOptions<State>,

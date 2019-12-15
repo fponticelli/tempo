@@ -12,3 +12,15 @@ limitations under the License.
 */
 
 export type AnyFunction = ((...args: any[]) => any) | Function
+
+// TYPE TESTS
+import { Assert, Extends, AssertNot } from './assert'
+type _procedure_is_AnyFunction = Assert<Extends<() => void, AnyFunction>>
+type _Function_is_AnyFunction = Assert<Extends<Function, AnyFunction>>
+type _string_is_not_AnyFunction = AssertNot<Extends<string, AnyFunction>>
+
+// @ts-ignore
+type _TESTS_ =
+  | _procedure_is_AnyFunction
+  | _Function_is_AnyFunction
+  | _string_is_not_AnyFunction

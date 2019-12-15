@@ -4,8 +4,7 @@ import {
   WritableFields,
   ExcludeFunctionFields,
   RemoveNullableFromFields,
-  Merge,
-  MakeOptional
+  Merge
 } from 'tempo-core/lib/types/objects'
 import { TempoAttributes } from './tempo_attributes'
 import { ItemEvents, createItem } from './item'
@@ -20,7 +19,7 @@ type WritableShapeOptions<State> = {
   [K in WritableShapeOptionKeys]?: PaperAttribute<State, WritableShape[K]>
 }
 
-type ShapeOptions<State, Action, Query, T, Sub> = MakeOptional<
+type ShapeOptions<State, Action, Query, T, Sub> = Partial<
   Merge<
     Merge<
       WritableShapeOptions<State>,

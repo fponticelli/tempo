@@ -4,8 +4,7 @@ import {
   WritableFields,
   ExcludeFunctionFields,
   RemoveNullableFromFields,
-  Merge,
-  MakeOptional
+  Merge
 } from 'tempo-core/lib/types/objects'
 import { TempoAttributes } from './tempo_attributes'
 import { ItemEvents, createItem } from './item'
@@ -24,7 +23,7 @@ type WritableCompoundPathOptions<State> = {
   >
 }
 
-type CompoundPathOptions<State, Action, Query, T> = MakeOptional<
+type CompoundPathOptions<State, Action, Query, T> = Partial<
   Merge<
     { args?: {} },
     Merge<

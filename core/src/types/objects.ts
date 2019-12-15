@@ -33,12 +33,6 @@ export type ObjectWithPath<Path extends IndexType[], V> = Path extends []
     : never
   : never
 
-// type T0 = ObjectWithPath<[], number>
-// type T1 = ObjectWithPath<['a'], number>
-// type T2 = ObjectWithPath<['a', 'b'], number>
-// type T3 = ObjectWithPath<['a', 'b', 'c'], number>
-// type T4 = ObjectWithPath<['a', 'b', 'c', 0], number>
-
 export type TypeAtPath<Path extends IndexType[], O> = {
   next: Path extends [infer K, ...any[]]
     ? K extends IndexType
@@ -61,20 +55,8 @@ export type TypeAtPath<Path extends IndexType[], O> = {
     : never
 }[Path extends [] ? 'empty' : Path extends [any] ? 'done' : 'next']
 
-// type Nested = { a: { b: boolean[], c: number }, d: string }
-// type T0 = TypeAtPath<[], Nested>
-// type T1 = TypeAtPath<['a'], Nested>
-// type T2 = TypeAtPath<['a', 'b'], Nested>
-// type T3 = TypeAtPath<['a', 'b', 0], Nested>
-
-export type IfEquals<X, Y, A = X, B = never> = (<T>() => T extends X
-  ? 1
-  : 2) extends <T>() => T extends Y ? 1 : 2
-  ? A
-  : B
-
 export type WritableKeys<T> = {
-  [K in keyof T]-?: IfEquals<
+  [K in keyof T]-?: WhenEquals<
     { [Q in K]: T[K] },
     { -readonly [Q in K]: T[K] },
     K
@@ -82,7 +64,7 @@ export type WritableKeys<T> = {
 }[keyof T]
 
 export type ReadonlyKeys<T> = {
-  [P in keyof T]-?: IfEquals<
+  [P in keyof T]-?: WhenEquals<
     { [Q in P]: T[P] },
     { -readonly [Q in P]: T[P] },
     never,
@@ -90,34 +72,26 @@ export type ReadonlyKeys<T> = {
   >
 }[keyof T]
 
-export type KeepKeysByType<T, Condition> = {
-  [K in keyof T]: T[K] extends Condition ? K : never
+export type KeysWithFieldType<T, Condition> = {
+  [K in keyof T]: WhenEquals<T[K], Condition, K>
 }[keyof T]
 
-export type ExcludeKeysByType<T, Condition> = {
-  [K in keyof T]: T[K] extends Condition ? never : K
+export type KeysWithoutFieldType<T, Condition> = {
+  [K in keyof T]: WhenEquals<T[K], Condition, never, K>
 }[keyof T]
 
 export type RemoveNullableFromFields<T> = {
-  [K in keyof T]: Exclude<T[K], null>
+  [K in keyof T]: NonNullable<T[K]>
 }
-
-// interface A {
-//   a: string | null | undefined
-//   b: number | null
-//   c: boolean
-// }
-
-// type X = RemoveNullableFromFields<A>
 
 export type WritableFields<T> = Pick<T, WritableKeys<T>>
 export type ReadonlyFields<T> = Pick<T, ReadonlyKeys<T>>
 export type ExcludeFunctionFields<T> = Pick<
   T,
-  ExcludeKeysByType<T, AnyFunction>
+  KeysWithoutFieldType<T, AnyFunction>
 >
 
-// TODO optional fields are converted to mandatory ones
+// TODO express as literal object but preserve readonly/optional
 export type Merge<A, B> = A & B
 // {
 //   [K in keyof A | keyof B]: K extends keyof B
@@ -127,22 +101,58 @@ export type Merge<A, B> = A & B
 //     : never
 // }
 
-export type MakeOptional<T> = {
-  [K in keyof T]?: T[K]
-}
+// TYPE TESTS
+import { Assert, Equals, AssertNot } from './assert'
+import { WhenEquals } from './generic'
 
-// interface A {
-//   a: string
-//   b: number
-// }
+type _object_with_field_has_field = Assert<Equals<{ a: number }, ObjectWithField<'a', number>>>
+type _object_with_field_has_no_field = AssertNot<Equals<{ a: number }, ObjectWithField<'c', number>>>
 
-// interface B {
-//   b: boolean
-//   c: string
-// }
+type _object_with_empty_path_is_empty_object = Assert<Equals<{}, ObjectWithPath<[], number>>>
+type _object_with_tuple_of_one_is_object = Assert<Equals<{ a: number }, ObjectWithPath<['a'], number>>>
+type _object_with_tuple_of_two_is_object = Assert<Equals<{ a: { b: number } }, ObjectWithPath<['a', 'b'], number>>>
+type _object_with_tuple_of_three_is_object = Assert<Equals<{ a: { b: { c: number } } }, ObjectWithPath<['a', 'b', 'c'], number>>>
 
-// interface C {
-//   d: boolean
-// }
+type _nested = { a: { b: boolean[], c: number }, d: string }
+type _type_at_empty_path_is_type_of_argument = Assert<Equals<_nested, TypeAtPath<[], _nested>>>
+type _type_at_level_1 = Assert<Equals<{ b: boolean[], c: number }, TypeAtPath<['a'], _nested>>>
+type _type_at_level_2 = Assert<Equals<boolean[], TypeAtPath<['a', 'b'], _nested>>>
+type _type_at_level_3 = Assert<Equals<boolean, TypeAtPath<['a', 'b', number], _nested>>>
 
-// type ABC = Merge<Merge<A, B>, C>
+type _writable_keys_of_empty_is_never = Assert<Equals<WritableKeys<{}>, never>>
+type _writable_keys_of_writables_is_keys = Assert<Equals<WritableKeys<{ a: string, b: string }>, 'a' | 'b'>>
+type _writable_keys_of_mixed_is_subset = Assert<Equals<WritableKeys<{ a: string, b: string, readonly c: number }>, 'a' | 'b'>>
+
+type _readonly_keys_of_empty_is_never = Assert<Equals<ReadonlyKeys<{}>, never>>
+type _readonly_keys_of_readonlys_is_keys = Assert<Equals<ReadonlyKeys<{ readonly a: string, readonly b: string }>, 'a' | 'b'>>
+type _readonly_keys_of_mixed_is_subset = Assert<Equals<ReadonlyKeys<{ readonly a: string, readonly b: string, c: number }>, 'a' | 'b'>>
+
+type _KeysWithFieldType_matches = Assert<Equals<KeysWithFieldType<{ a: string, b: number }, string>, 'a'>>
+type _KeysWithoutFieldType_matches = Assert<Equals<KeysWithoutFieldType<{ a: string, b: number }, number>, 'a'>>
+type _RemoveNullableFromFields_matches = Assert<Equals<RemoveNullableFromFields<{
+    a: string | null | undefined
+    b: number | null
+    c: boolean
+  }>, { a: string, b: number, c: boolean }>>
+
+// @ts-ignore
+type _TESTS_ =
+  | _object_with_field_has_field
+  | _object_with_field_has_no_field
+  | _object_with_empty_path_is_empty_object
+  | _object_with_tuple_of_one_is_object
+  | _object_with_tuple_of_two_is_object
+  | _object_with_tuple_of_three_is_object
+  | _type_at_empty_path_is_type_of_argument
+  | _type_at_level_1
+  | _type_at_level_2
+  | _type_at_level_3
+  | _writable_keys_of_empty_is_never
+  | _writable_keys_of_writables_is_keys
+  | _writable_keys_of_mixed_is_subset
+  | _readonly_keys_of_empty_is_never
+  | _readonly_keys_of_readonlys_is_keys
+  | _readonly_keys_of_mixed_is_subset
+  | _KeysWithFieldType_matches
+  | _KeysWithoutFieldType_matches
+  | _RemoveNullableFromFields_matches

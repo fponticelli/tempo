@@ -4,8 +4,7 @@ import {
   WritableFields,
   ExcludeFunctionFields,
   RemoveNullableFromFields,
-  Merge,
-  MakeOptional
+  Merge
 } from 'tempo-core/lib/types/objects'
 import { TempoAttributes } from './tempo_attributes'
 import { PaperTemplate } from './template'
@@ -37,7 +36,7 @@ interface ToolEvents<State, Action> {
   onKeyUp?: PaperEventHandler<State, Action, KeyEvent, Tool>
 }
 
-type ToolOptions<State, Action, Query, T> = MakeOptional<
+type ToolOptions<State, Action, Query, T> = Partial<
   Merge<
     Merge<
       WritableToolOptions<State>,

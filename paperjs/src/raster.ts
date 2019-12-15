@@ -4,8 +4,7 @@ import {
   WritableFields,
   ExcludeFunctionFields,
   RemoveNullableFromFields,
-  Merge,
-  MakeOptional
+  Merge
 } from 'tempo-core/lib/types/objects'
 import { TempoAttributes } from './tempo_attributes'
 import { ItemEvents, createItem } from './item'
@@ -25,7 +24,7 @@ type WritableRasterOptions<State> = {
   [K in WritableRasterOptionKeys]?: PaperAttribute<State, WritableRaster[K]>
 }
 
-type RasterOptions<State, Action, Query, T> = MakeOptional<
+type RasterOptions<State, Action, Query, T> = Partial<
   Merge<
     { args?: {} },
     Merge<

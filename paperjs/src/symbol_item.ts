@@ -4,8 +4,7 @@ import {
   WritableFields,
   ExcludeFunctionFields,
   RemoveNullableFromFields,
-  Merge,
-  MakeOptional
+  Merge
 } from 'tempo-core/lib/types/objects'
 import { TempoAttributes } from './tempo_attributes'
 import { ItemEvents, createItem } from './item'
@@ -25,7 +24,7 @@ type WritableSymbolItemOptions<State> = {
 
 type SymbolItemOptions<State, Action, Query, T, Sub> =
   // Merge<
-  MakeOptional<
+  Partial<
     Merge<
       Merge<
         WritableSymbolItemOptions<State>,

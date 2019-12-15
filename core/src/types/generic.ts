@@ -11,14 +11,18 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-export type IndexType = keyof any
+export type WhenEquals<X, Y, A = X, B = never> =
+(<T>() => T extends X ? true : false) extends (<T>() => T extends Y ? true : false)
+? A
+: B
 
 // TYPE TESTS
-import { Assert, Extends, AssertNot } from './assert'
+import { Assert, Equals } from './assert'
+
+type _when_true_returns_A = Assert<Equals<WhenEquals<string, string, number, boolean>, number>>
+type _when_false_returns_B = Assert<Equals<WhenEquals<string, number, number, boolean>, boolean>>
 
 // @ts-ignore
 type _TESTS_ =
-  | Assert<Extends<string, IndexType>>
-  | Assert<Extends<number, IndexType>>
-  | Assert<Extends<symbol, IndexType>>
-  | AssertNot<Extends<boolean, IndexType>>
+  | _when_true_returns_A
+  | _when_false_returns_B
