@@ -20,9 +20,9 @@ export type Extends<A, B> = A extends B ? true : false
 export type Same<A, B> = A extends B ? (B extends A ? true : false) : false
 
 // does not work comparing intersaction types with literals. Use `Same` for that.
-export type Equals<X, Y> = (<T>() => T extends X ? 1 : 2) extends <
+export type Equals<A, B> = (<T>() => T extends A ? 1 : 2) extends <
   T
->() => T extends Y ? 1 : 2
+>() => T extends B ? 1 : 2
   ? true
   : false
 
@@ -38,10 +38,10 @@ type _any_is_not_equal_to_never = AssertNot<Equals<any, never>>
 type _any_is_not_same_as_never = AssertNot<Equals<any, never>>
 type _same_tuple_elements_match = Assert<Equals<[number], [number]>>
 type _different_tuple_elements_do_not_match = AssertNot<Equals<[any], [string]>>
-type _intersaction_objects_are_same_as_literal = Assert<
+type _intersection_objects_are_same_as_literal = Assert<
   Same<{ x: 1 } & { y: 2 }, { x: 1; y: 2 }>
 >
-type _intersaction_objects_not_equal_to_literal = AssertNot<
+type _intersection_objects_not_equal_to_literal = AssertNot<
   Equals<{ x: 1 } & { y: 2 }, { x: 1; y: 2 }>
 >
 
@@ -58,5 +58,5 @@ type _TESTS_ =
   | _any_is_not_same_as_never
   | _same_tuple_elements_match
   | _different_tuple_elements_do_not_match
-  | _intersaction_objects_are_same_as_literal
-  | _intersaction_objects_not_equal_to_literal
+  | _intersection_objects_are_same_as_literal
+  | _intersection_objects_not_equal_to_literal
