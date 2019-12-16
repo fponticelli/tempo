@@ -17,5 +17,7 @@ export const middleware = (store: Store<State, Action>) => (
       }
       raster.src = state.url
       break
+    default:
+      // do nothing
   }
 }
