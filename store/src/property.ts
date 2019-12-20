@@ -13,7 +13,7 @@ limitations under the License.
 
 import { Emitter } from './emitter'
 import { Observable1 } from './observable'
-import { deepEqual } from './equality'
+import { strictEqual } from './equality'
 
 // @ts-ignore
 export class Property<T> {
@@ -21,7 +21,7 @@ export class Property<T> {
 
   constructor(
     private value: T,
-    private equal: (a: T, b: T) => boolean = deepEqual
+    private equal: (a: T, b: T) => boolean = strictEqual
   ) {
     this.observable = this.emitter = Emitter.ofOne()
   }

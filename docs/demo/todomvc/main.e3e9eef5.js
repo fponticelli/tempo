@@ -950,7 +950,7 @@ var $zFui$var$Property =
 function () {
   function Property(value, equal) {
     if (equal === void 0) {
-      equal = $dLEG$export$deepEqual;
+      equal = $dLEG$export$strictEqual;
     }
 
     this.value = value;

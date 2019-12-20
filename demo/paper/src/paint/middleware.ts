@@ -8,14 +8,15 @@ export const middleware = (store: Store<State, Action>) => (
 ) => {
   switch (action.kind) {
     case 'LoadUrl':
-      const raster = new Image()
-      raster.onerror = () => {
+      const image = new Image()
+      image.crossOrigin = "Anonymous"
+      image.onerror = () => {
         store.process(Action.imageFailed(`Failed to load ${state.url}`))
       }
-      raster.onload = () => {
-        store.process(Action.imageLoaded(raster))
+      image.onload = () => {
+        store.process(Action.imageLoaded(image))
       }
-      raster.src = state.url
+      image.src = state.url
       break
     default:
     // do nothing
