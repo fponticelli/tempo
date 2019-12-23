@@ -1,6 +1,6 @@
 {
   "name": "tempo-dom",
-  "version": "0.10.0",
+  "version": "0.11.0",
   "description": "Fully-typed web framework alternative to React and Angular",
   "keywords": ["tempo", "ui", "framework", "typescript", "dom", "angular-alternative", "react-alternative"],
   "sideEffects": false,

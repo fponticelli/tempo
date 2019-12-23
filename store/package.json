@@ -1,6 +1,6 @@
 {
   "name": "tempo-store",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Super simple state management library",
   "license": "Apache-2.0",
   "keywords": ["tempo", "unidirectional-flow", "property", "store", "state-management", "typescript"],

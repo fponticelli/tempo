@@ -165,7 +165,7 @@ If you want to perform async operations, you can do that by observing `store.obs
 
 In our example, `reducer` is simply creating a new state where `count` is either incremented or decremented.
 
-**Note**: `Property` doesn't trigger its listeners unless the value is actually changed. Setting the same value twice will not trigger a second change. This behavior can be controlled by passing an optional equivalence `equal: (a: State, b: State) => boolean` function. By default, the implementation provided will perform a deep structural comparison.
+**Note**: `Property` doesn't trigger its listeners unless the value is actually changed. Setting the same value twice will not trigger a second change. This behavior can be controlled by passing an optional equivalence `equal: (a: State, b: State) => boolean` function. By default, the implementation provided will perform a strict comparison.
 
 ```ts
 const template = div<State, Action>(
