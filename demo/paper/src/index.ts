@@ -30,7 +30,6 @@ import { Size } from 'paper'
 import { makeMiddleware } from './middleware'
 import { template as symbolTemplate } from './symbol/main'
 import { template as pathSimplificationTemplate } from './path_simplification/main'
-import { template as paintTemplate } from './paint/main'
 
 const state = createState()
 
@@ -131,8 +130,7 @@ const template = article<CanvasState, CanvasAction, Query>(
             },
             matchKind<SampleState, any, any>({
               symbol: symbolTemplate,
-              path_simplification: pathSimplificationTemplate,
-              paint: paintTemplate
+              path_simplification: pathSimplificationTemplate
             })
           )
         ),
