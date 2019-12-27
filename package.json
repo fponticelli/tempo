@@ -13,6 +13,7 @@
     "angular-alternative"
   ],
   "scripts": {
+    "publish:npm": "rush publish -a -b master -p -r https://registry.npmjs.org/ --include-all",
     "build": "echo \"nothing to build at root\"",
     "test:all": "(cd core && npm run test) && (cd store && npm run test) && (cd dom && npm run test)"
   },
