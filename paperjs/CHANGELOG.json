@@ -1,0 +1,28 @@
+{
+  "name": "tempo-paper",
+  "entries": [
+    {
+      "version": "0.2.0",
+      "tag": "tempo-paper_v0.2.0",
+      "date": "Fri, 27 Dec 2019 18:44:24 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Adopt consistent versions of Tempo libraries"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"tempo-core\" from `1.2.0` to `1.4.0`"
+          },
+          {
+            "comment": "Updating dependency \"tempo-store\" from `1.0.1` to `1.1.0`"
+          },
+          {
+            "comment": "Updating dependency \"tempo-dom\" from `0.10.0` to `0.12.0`"
+          }
+        ]
+      }
+    }
+  ]
+}

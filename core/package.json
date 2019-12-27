@@ -2,8 +2,13 @@
   "name": "tempo-core",
   "license": "Apache-2.0",
   "description": "Core types for Tempo. The tempo architecture encourages a unilateral flow in a practical way.",
-  "version": "1.3.0",
-  "keywords": ["tempo", "framework", "ui", "library"],
+  "version": "1.4.0",
+  "keywords": [
+    "tempo",
+    "framework",
+    "ui",
+    "library"
+  ],
   "sideEffects": false,
   "private": false,
   "scripts": {
