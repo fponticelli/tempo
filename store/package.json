@@ -5,6 +5,7 @@
   "license": "Apache-2.0",
   "keywords": ["tempo", "unidirectional-flow", "property", "store", "state-management", "typescript"],
   "sideEffects": false,
+  "private": false,
   "scripts": {
     "clean": "rm -rf lib/* && rm -rf es6/*",
     "build": "npm run clean && npx tsc && npx tsc -p tsconfig.es6.json",

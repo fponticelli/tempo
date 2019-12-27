@@ -19,9 +19,10 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - name: rush setup
       run: |
-        npm i -g @microsoft/rush
-        rush check
-        rush update
+        node common/scripts/install-run-rush.js install
+        rush change -v
+        rush install --no-link
+        rush link
       env:
         CI: true
     - name: build

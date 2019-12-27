@@ -5,6 +5,7 @@
   "sideEffects": false,
   "keywords": ["tempo", "paperjs", "2d", "graphics"],
   "license": "Apache-2.0",
+  "private": false,
   "scripts": {
     "clean": "rm -rf lib/* && rm -rf es6/*",
     "build": "npm run clean && npx tsc -p tsconfig.es6.json && npx tsc",

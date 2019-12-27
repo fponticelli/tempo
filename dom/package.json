@@ -5,6 +5,7 @@
   "keywords": ["tempo", "ui", "framework", "typescript", "dom", "angular-alternative", "react-alternative"],
   "sideEffects": false,
   "license": "Apache-2.0",
+  "private": false,
   "scripts": {
     "clean": "rm -rf lib/* && rm -rf es6/*",
     "build": "npm run clean && npx tsc && npx tsc -p tsconfig.es6.json",

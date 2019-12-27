@@ -5,6 +5,7 @@
   "version": "1.3.0",
   "keywords": ["tempo", "framework", "ui", "library"],
   "sideEffects": false,
+  "private": false,
   "scripts": {
     "clean": "rm -rf lib/* && rm -rf es6/*",
     "build": "npm run clean && npx tsc && npx tsc -p tsconfig.es6.json",
