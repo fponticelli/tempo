@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "tempo-paper",
+      "comment": "Adopt consistent versions of Tempo libraries",
+      "type": "minor"
+    }
+  ],
+  "packageName": "tempo-paper",
+  "email": "franco.ponticelli@gmail.com"
+}
