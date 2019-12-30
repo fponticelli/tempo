@@ -19,20 +19,20 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - name: rush setup
       run: |
-        npm i -g @microsoft/rush
-        rush check
-        rush update
+        node common/scripts/install-run-rush.js change -v
+        node common/scripts/install-run-rush.js install --no-link
+        node common/scripts/install-run-rush.js link
       env:
         CI: true
     - name: build
       run: |
-        rush rebuild --verbose
+        node common/scripts/install-run-rush.js rebuild --verbose
       env:
         CI: true
     - name: code style
       run: |
-        rush tslint
-        rush prettier
+        node common/scripts/install-run-rush.js tslint
+        node common/scripts/install-run-rush.js prettier
       env:
         CI: true
     - name: test

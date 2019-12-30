@@ -1,0 +1,22 @@
+{
+  "name": "tempo-store",
+  "entries": [
+    {
+      "version": "1.1.0",
+      "tag": "tempo-store_v1.1.0",
+      "date": "Fri, 27 Dec 2019 18:44:24 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Adopt consistent versions of Tempo libraries"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"tempo-core\" from `1.2.0` to `1.4.0`"
+          }
+        ]
+      }
+    }
+  ]
+}

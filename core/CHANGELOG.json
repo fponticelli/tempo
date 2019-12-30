@@ -1,0 +1,17 @@
+{
+  "name": "tempo-core",
+  "entries": [
+    {
+      "version": "1.4.0",
+      "tag": "tempo-core_v1.4.0",
+      "date": "Fri, 27 Dec 2019 18:44:24 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Add type helpers"
+          }
+        ]
+      }
+    }
+  ]
+}

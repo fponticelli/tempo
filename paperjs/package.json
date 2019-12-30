@@ -1,10 +1,16 @@
 {
   "name": "tempo-paper",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "",
   "sideEffects": false,
-  "keywords": ["tempo", "paperjs", "2d", "graphics"],
+  "keywords": [
+    "tempo",
+    "paperjs",
+    "2d",
+    "graphics"
+  ],
   "license": "Apache-2.0",
+  "private": false,
   "scripts": {
     "clean": "rm -rf lib/* && rm -rf es6/*",
     "build": "npm run clean && npx tsc -p tsconfig.es6.json && npx tsc",
@@ -25,10 +31,10 @@
     "url": "https://github.com/fponticelli"
   },
   "dependencies": {
-    "tempo-core": "1.2.0",
-    "tempo-store": "1.0.1",
-    "tempo-dom": "0.10.0",
-    "paper": "0.12.3"
+    "paper": "0.12.3",
+    "tempo-core": "1.4.0",
+    "tempo-dom": "0.12.0",
+    "tempo-store": "1.1.0"
   },
   "devDependencies": {
     "@types/jest": "24.0.22",

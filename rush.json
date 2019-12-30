@@ -1,8 +1,10 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/rush/v5/rush.schema.json",
-  "rushVersion": "5.13.0",
-  "pnpmVersion": "3.8.1",
-  "pnpmOptions": {},
+  "rushVersion": "5.17.2",
+  "pnpmVersion": "4.6.0",
+  "pnpmOptions": {
+    // "strictPeerDependencies": true
+  },
 
   "nodeSupportedVersionRange": ">=10.13.0 <11.0.0",
   "projectFolderMaxDepth": 3,
@@ -31,34 +33,45 @@
   "projects": [
     {
       "packageName": "tempo-root",
-      "projectFolder": "."
+      "projectFolder": ".",
+      "shouldPublish": false
     }, {
       "packageName": "tempo-core",
-      "projectFolder": "./core"
+      "projectFolder": "./core",
+      "shouldPublish": true
     }, {
       "packageName": "tempo-store",
-      "projectFolder": "./store"
+      "projectFolder": "./store",
+      "shouldPublish": true
     }, {
       "packageName": "tempo-dom",
-      "projectFolder": "./dom"
+      "projectFolder": "./dom",
+      "shouldPublish": true
     }, {
       "packageName": "tempo-demo.todomvc",
-      "projectFolder": "./demo/todomvc"
+      "projectFolder": "./demo/todomvc",
+      "shouldPublish": false
     }, {
       "packageName": "tempo-demo.readme",
-      "projectFolder": "./demo/readme"
+      "projectFolder": "./demo/readme",
+      "shouldPublish": false
     }, {
       "packageName": "tempo-demo.benchmark",
-      "projectFolder": "./demo/benchmark"
+      "projectFolder": "./demo/benchmark",
+      "shouldPublish": false
     }, {
       "packageName": "tempo-demo.hnpwa",
-      "projectFolder": "./demo/hnpwa"
+      "projectFolder": "./demo/hnpwa",
+      "shouldPublish": false
     }, {
       "packageName": "tempo-paper",
-      "projectFolder": "./paperjs"
+      "projectFolder": "./paperjs",
+      "shouldPublish": true
     }, {
       "packageName": "tempo-demo.paper",
-      "projectFolder": "./demo/paper"
+      "projectFolder": "./demo/paper",
+      "shouldPublish": false
     }
-  ]
+  ],
+  "ensureConsistentVersions": true
 }
