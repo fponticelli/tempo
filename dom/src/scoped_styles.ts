@@ -1,10 +1,23 @@
+/*
+Copyright 2019 Google LLC
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+    https://www.apache.org/licenses/LICENSE-2.0
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+
 import { UnwrappedValue } from 'tempo-core/lib/value'
 import { keys } from 'tempo-core/lib/util/objects'
+import { replaceAll } from 'tempo-core/lib/util/strings'
 import { DOMTemplate } from './template'
 import { DOMContext } from './context'
 import { DOMAttribute } from './value'
 import { headPortal } from './portal'
-import { style } from './html'
 import { el } from './element'
 import { text } from './text'
 
@@ -36,8 +49,6 @@ export const annotation = Symbol('annotation')
 export const stylistic = Symbol('stylistic')
 export const styleset = Symbol('styleset')
 export const characterVariant = Symbol('character-variant')
-
-export const scope = Symbol('scope')
 
 export const nestedAtRules: (
   typeof media |
@@ -98,37 +109,31 @@ export interface MediaQueries<State> {
 }
 
 export type StyleDefinitions<State> =
-  & StyleDeclarations<State>
+  & Record<string, StyleDeclarations<State>>
   & MediaQueries<State>
-  & { [scope]: string }
 
 type Acc<State> = {
   statics: string[]
   dynamics: ((state: State) => string)[]
 }
 
-const makeDynamicScope = (scope: string) => `t-${scope}-dynamic`
-const makeStaticScope = (scope: string) => `t-${scope}-static`
-
-const processRules = <State>(rules: StyleDefinitions<State>, staticScopeName: string, dynamicScopeName: string): Acc<State> => {
+const processRules = <State>(rules: StyleDefinitions<State>, scopeName: string): Acc<State> => {
   return keys(rules).reduce(
     (acc: Acc<State>, selector: keyof StyleDefinitions<State>) => {
-      const rule = rules[selector]
-      const all = Object.keys(rule).reduce(
-        (acc: Acc<State>, prop: string) => {
-          const declaration = rule[prop] as DOMValue<State, any>
+      const rule = rules[selector] as Record<string, any>
+      const all = keys(rule).reduce(
+        (acc: Acc<State>, property: any) => {
+          const declaration = rule[property] as ((state: State) => string) | string
           if (typeof declaration === 'function') {
-            const property = ruleMap[prop] || prop
             return {
               dynamics: [...acc.dynamics, (state: State) => {
-                const s = toString(declaration(state))
+                const s = declaration(state)
                 return s ? `  ${property}: ${s};` : `  /* ${property} */`
               }],
               statics: acc.statics
             }
           } else {
-            const s = toString(declaration)
-            const property = ruleMap[prop] || prop
+            const s = declaration
             return {
               dynamics: acc.dynamics,
               statics: [...acc.statics, s ? `  ${property}: ${s};` : `  /* ${property} */`]
@@ -143,11 +148,11 @@ const processRules = <State>(rules: StyleDefinitions<State>, staticScopeName: st
       )
       return {
         statics: all.statics.length > 0 ?
-          [...acc.statics, `${replaceAll(selector, ':scope', `[${staticScopeName}]`)} {\n${all.statics.join('\n')}\n}\n`] :
+          [...acc.statics, `${replaceAll(selector as string, ':scope', `[${scopeName}]`)} {\n${all.statics.join('\n')}\n}\n`] :
           all.statics,
         dynamics: all.dynamics.length > 0 ?
           [...acc.dynamics, (state: State) =>
-            `${replaceAll(selector, ':scope', `[${dynamicScopeName}]`)} {\n${all.dynamics.map(f => f(state)).join('\n')}\n}\n`] :
+            `${replaceAll(selector as string, ':scope', `[${scopeName}]`)} {\n${all.dynamics.map(f => f(state)).join('\n')}\n}\n`] :
           all.dynamics
       }
     },
@@ -159,11 +164,11 @@ const processRules = <State>(rules: StyleDefinitions<State>, staticScopeName: st
 }
 
 const processNestedAtRule = <State>
-    (nestedAtRule: string, queries: CSSMediaQuery<State>, staticScopeName: string, dynamicScopeName: string) => {
-  return Object.keys(queries).reduce(
-    (acc, query: string) => {
+    (nestedAtRule: string, queries: MediaQuery<State>, scopeName: string) => {
+  return keys(queries).reduce(
+    (acc: Acc<State>, query: string | number) => {
       const definitions = queries[query]
-      const r = processDefinitions(definitions, staticScopeName, dynamicScopeName)
+      const r = processDefinitions(definitions, scopeName)
       return {
         statics: [`@${nestedAtRule} ${query} {\n${r.statics.map(v => `  ${v.split('\n').join('\n  ')}`).join('\n')}\n}`],
         dynamics:
@@ -182,7 +187,7 @@ const processNestedAtRule = <State>
   )
 }
 
-const processOneAtRule = <State>(prefix: string, rule: DOMValue<State, string>) => {
+const processOneAtRule = <State>(prefix: string, rule: UnwrappedValue<State, string>) => {
   if (typeof rule === 'function') {
     return {
       statics: [],
@@ -196,7 +201,7 @@ const processOneAtRule = <State>(prefix: string, rule: DOMValue<State, string>) 
   }
 }
 
-const processtAtRule = <State>(prefix: string, rules: DOMValue<State, string>[]) => {
+const processtAtRule = <State>(prefix: string, rules: UnwrappedValue<State, string>[]) => {
   return rules.reduce(
     (acc, curr) => {
       const res = processOneAtRule(prefix, curr)
@@ -213,7 +218,7 @@ const processtAtRule = <State>(prefix: string, rules: DOMValue<State, string>[])
 }
 
 const processDefinitions =
-    <State>(definitions: StyleDefinitions<State>, staticScopeName: string, dynamicScopeName: string): Acc<State> => {
+    <State>(definitions: StyleDefinitions<State>, scopeName: string): Acc<State> => {
   let statics = [] as string[]
   let dynamics =  [] as ((state: State) => string)[]
 
@@ -229,36 +234,44 @@ const processDefinitions =
   for (let i = 0; i < nestedAtRules.length; i++) {
     const sym = nestedAtRules[i]
     if (definitions[sym]) {
-      const queries = processNestedAtRule(extractName(sym), definitions[sym]!, staticScopeName, dynamicScopeName)
+      const queries = processNestedAtRule(extractName(sym), definitions[sym]!, scopeName)
       statics = [...statics, ...queries.statics]
       dynamics = [...dynamics, ...queries.dynamics]
     }
   }
 
-  const rules = processRules(definitions, staticScopeName, dynamicScopeName)
+  const rules = processRules(definitions, scopeName)
   statics = [...statics, ...rules.statics]
   dynamics = [...dynamics, ...rules.dynamics]
   return { statics, dynamics }
 }
 
 export class ScopedStyles<State, Action, Query> implements DOMTemplate<State, Action, Query> {
-  constructor (readonly definitions: StyleDefinitions<State>) {}
+  constructor (
+    readonly scopeName: string,
+    readonly statics: string[],
+    readonly dynamics: ((state: State) => string)[]
+  ) {}
   render(ctx: DOMContext<Action>, state: State) {
-    const dynamicScope = makeDynamicScope(this.definitions[scope])
-    const staticScope = makeStaticScope(this.definitions[scope])
-    const { statics, dynamics } = processDefinitions(this.definitions, staticScope, dynamicScope)
-
     const styles = [] as DOMTemplate<State, Action, Query>[]
-    if (statics.length > 0) {
-      styles.push(el('style', {}, text(statics.join('\n'))))
+    if (this.statics.length > 0) {
+      if (!ctx.doc.querySelector(`style[name=${this.scopeName}]`)) {
+        styles.push(el('style', { attrs: { name: this.scopeName } }, text('\n'+this.statics.join('\n'))))
+      }
     }
-    if (dynamics.length > 0) {
-      styles.push(el('style', {}, text(state => dynamics.map(f => f(state)).join('\n'))))
+    if (this.dynamics.length > 0) {
+      styles.push(el('style', {}, text(state => this.dynamics.map(f => '\n'+f(state)).join('\n'))))
     }
+
+    ctx.parent.setAttribute(this.scopeName, '')
     return headPortal(...styles).render(ctx, state)
   }
 }
 
 export const scopedStyles = <State, Action, Query>(
+  options: { scope: string },
   definitions: StyleDefinitions<State>
-) => new ScopedStyles<State, Action, Query>(definitions)
+) => {
+  const { statics, dynamics } = processDefinitions(definitions, options.scope)
+  return new ScopedStyles<State, Action, Query>(options.scope, statics, dynamics)
+}
