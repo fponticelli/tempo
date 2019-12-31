@@ -38,8 +38,8 @@ describe('scoped_styles', () => {
   it('literal style', () => {
     const ctx = createContext()
     const view = renderEl<number>(ctx)(1, literalScoped)
-    expect(ctx.doc.head.innerHTML).toEqual(`<style data-te-definition-literal="1">
-[data-te-scope-literal=1] {
+    expect(ctx.doc.head.innerHTML).toEqual(`<style data-tedef-lit="1">
+[data-tescope-lit=1] {
   border: 2px solid red;
 }
 </style>`)
@@ -50,7 +50,7 @@ describe('scoped_styles', () => {
   it('element has literal scope attribute', () => {
     const ctx = createContext()
     const view = renderEl<number>(ctx)(1, literalScoped)
-    expect(ctx.doc.body.innerHTML).toEqual(`<div data-te-scope-literal="1"></div>`)
+    expect(ctx.doc.body.innerHTML).toEqual(`<div data-tescope-lit="1"></div>`)
     view.destroy()
     expect(ctx.doc.body.innerHTML).toEqual('')
   })
@@ -58,7 +58,7 @@ describe('scoped_styles', () => {
   it('element has dynamic scope attribute', () => {
     const ctx = createContext()
     const view = renderEl<number>(ctx)(1, derivedScoped)
-    expect(ctx.doc.body.innerHTML).toEqual(`<div data-te-scope-derived="1"></div>`)
+    expect(ctx.doc.body.innerHTML).toEqual(`<div data-tescope-der="1"></div>`)
     view.destroy()
     expect(ctx.doc.body.innerHTML).toEqual('')
   })
@@ -67,16 +67,16 @@ describe('scoped_styles', () => {
     const ctx = createContext()
     const view = renderEl<number>(ctx)(1, derivedScoped)
 
-    expect(ctx.doc.head.innerHTML).toEqual(`<style data-te-definition-derived="1">
-[data-te-scope-derived=1] {
+    expect(ctx.doc.head.innerHTML).toEqual(`<style data-tedef-der="1">
+[data-tescope-der=1] {
   border: 1px solid blue;
 }
 </style>`)
 
     view.change(3)
 
-    expect(ctx.doc.head.innerHTML).toEqual(`<style data-te-definition-derived="2">
-[data-te-scope-derived=2] {
+    expect(ctx.doc.head.innerHTML).toEqual(`<style data-tedef-der="2">
+[data-tescope-der=2] {
   border: 3px solid blue;
 }
 </style>`)
@@ -96,24 +96,24 @@ describe('scoped_styles', () => {
       })
     )
 
-    expect(ctx.doc.head.innerHTML).toEqual(`<style data-te-definition-literal="1">
-[data-te-scope-literal=1] {
+    expect(ctx.doc.head.innerHTML).toEqual(`<style data-tedef-lit="1">
+[data-tescope-lit=1] {
   background-color: red;
 }
-</style><style data-te-definition-derived="2">
-[data-te-scope-derived=2] {
+</style><style data-tedef-der="2">
+[data-tescope-der=2] {
   border: 1px solid blue;
 }
 </style>`)
 
     view.change(3)
 
-    expect(ctx.doc.head.innerHTML).toEqual(`<style data-te-definition-literal="1">
-[data-te-scope-literal=1] {
+    expect(ctx.doc.head.innerHTML).toEqual(`<style data-tedef-lit="1">
+[data-tescope-lit=1] {
   background-color: red;
 }
-</style><style data-te-definition-derived="3">
-[data-te-scope-derived=3] {
+</style><style data-tedef-der="3">
+[data-tescope-der=3] {
   border: 3px solid blue;
 }
 </style>`)
@@ -133,8 +133,8 @@ describe('scoped_styles', () => {
         { ':scope': { border: '2px solid red' } }
       )
     )
-    expect(ctx.doc.head.innerHTML).toEqual(`<style data-te-definition-literal="1">
-[data-te-scope-literal=1] {
+    expect(ctx.doc.head.innerHTML).toEqual(`<style data-tedef-lit="1">
+[data-tescope-lit=1] {
   border: 2px solid red;
 }
 </style>`)
@@ -156,24 +156,24 @@ describe('scoped_styles', () => {
       ),
     )
 
-    expect(ctx.doc.head.innerHTML).toEqual(`<style data-te-definition-literal="1">
-[data-te-scope-literal=1] {
+    expect(ctx.doc.head.innerHTML).toEqual(`<style data-tedef-lit="1">
+[data-tescope-lit=1] {
   border: 2px solid red;
 }
 </style>`)
 
     view.change(1)
 
-    expect(ctx.doc.head.innerHTML).toEqual(`<style data-te-definition-literal="2">
-[data-te-scope-literal=2] {
+    expect(ctx.doc.head.innerHTML).toEqual(`<style data-tedef-lit="2">
+[data-tescope-lit=2] {
   border: 2px solid red;
 }
 </style>`)
 
     view.change(2)
 
-    expect(ctx.doc.head.innerHTML).toEqual(`<style data-te-definition-literal="2">
-[data-te-scope-literal=2] {
+    expect(ctx.doc.head.innerHTML).toEqual(`<style data-tedef-lit="2">
+[data-tescope-lit=2] {
   border: 2px solid red;
 }
 </style>`)
@@ -201,24 +201,24 @@ describe('scoped_styles', () => {
       )
     )
 
-    expect(ctx.doc.head.innerHTML).toEqual(`<style data-te-definition-derived="1">
-[data-te-scope-derived=1] {
+    expect(ctx.doc.head.innerHTML).toEqual(`<style data-tedef-der="1">
+[data-tescope-der=1] {
   border: 1px solid blue;
 }
-</style><style data-te-definition-derived="2">
-[data-te-scope-derived=2] {
+</style><style data-tedef-der="2">
+[data-tescope-der=2] {
   border: 2px solid blue;
 }
-</style><style data-te-definition-derived="3">
-[data-te-scope-derived=3] {
+</style><style data-tedef-der="3">
+[data-tescope-der=3] {
   border: 3px solid blue;
 }
 </style>`)
 
     view.change([4])
 
-    expect(ctx.doc.head.innerHTML).toEqual(`<style data-te-definition-derived="4">
-[data-te-scope-derived=4] {
+    expect(ctx.doc.head.innerHTML).toEqual(`<style data-tedef-der="4">
+[data-tescope-der=4] {
   border: 4px solid blue;
 }
 </style>`)
@@ -238,16 +238,16 @@ describe('scoped_styles', () => {
       )
     )
 
-    expect(ctx.doc.head.innerHTML).toEqual(`<style data-te-definition-derived="1">
-[data-te-scope-derived=1] {
+    expect(ctx.doc.head.innerHTML).toEqual(`<style data-tedef-der="1">
+[data-tescope-der=1] {
   border: 7px solid blue;
 }
 </style>`)
 
     view.change([4])
 
-    expect(ctx.doc.head.innerHTML).toEqual(`<style data-te-definition-derived="1">
-[data-te-scope-derived=1] {
+    expect(ctx.doc.head.innerHTML).toEqual(`<style data-tedef-der="1">
+[data-tescope-der=1] {
   border: 7px solid blue;
 }
 </style>`)

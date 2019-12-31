@@ -262,7 +262,7 @@ export const resetCache = () => {
   cacheByContent.clear()
 }
 
-function make<State, Action, Query>(update: boolean, ctx: DOMContext<Action>, type: 'literal' | 'derived', state: State, originalContent: string | undefined) {
+function make<State, Action, Query>(update: boolean, ctx: DOMContext<Action>, type: 'lit' | 'der', state: State, originalContent: string | undefined) {
   let name: string | undefined
   if (originalContent) {
     name = cacheByContent.get(originalContent)
@@ -271,13 +271,13 @@ function make<State, Action, Query>(update: boolean, ctx: DOMContext<Action>, ty
       if (!update) item.hits++
     } else {
       name = '' + (++counter)
-      const content = replaceAll(originalContent, ':scope', `[data-te-scope-${type}=${name}]`)
-      const template = headPortal<State, Action, Query>(el('style', { attrs: { [`data-te-definition-${type}`]: name } }, text(content)))
+      const content = replaceAll(originalContent, ':scope', `[data-tescope-${type}=${name}]`)
+      const template = headPortal<State, Action, Query>(el('style', { attrs: { [`data-tedef-${type}`]: name } }, text(content)))
       const view = template.render(ctx, state)
       cacheByName.set(name, { hits: 1, view, content: originalContent })
       cacheByContent.set(originalContent, name)
     }
-    ctx.parent.setAttribute(`data-te-scope-${type}`, name)
+    ctx.parent.setAttribute(`data-tescope-${type}`, name)
   }
   return name
 }
@@ -289,9 +289,9 @@ export class ScopedStyles<State, Action, Query> implements DOMTemplate<State, Ac
   ) {}
   render(ctx: DOMContext<Action>, state: State) {
     const { literal, derived } = this
-    const literalName = make(false, ctx, 'literal', state, literal.length > 0 ? ('\n' + literal.join('\n')) : undefined)
+    const literalName = make(false, ctx, 'lit', state, literal.length > 0 ? ('\n' + literal.join('\n')) : undefined)
 
-    const makeDerived = (state: State, update: boolean) => make(update, ctx, 'derived', state, derived.length > 0 ? ('\n' + derived.map(f => f(state)).join('\n')) : undefined)
+    const makeDerived = (state: State, update: boolean) => make(update, ctx, 'der', state, derived.length > 0 ? ('\n' + derived.map(f => f(state)).join('\n')) : undefined)
     let derivedName = makeDerived(state, false)
 
     let destroy = (name: string | undefined) => {
