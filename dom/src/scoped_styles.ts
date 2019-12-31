@@ -262,7 +262,13 @@ export const resetCache = () => {
   cacheByContent.clear()
 }
 
-function make<State, Action, Query>(update: boolean, ctx: DOMContext<Action>, type: 'lit' | 'der', state: State, originalContent: string | undefined) {
+function make<State, Action, Query>(
+  update: boolean,
+  ctx: DOMContext<Action>,
+  type: 'lit' | 'der',
+  state: State,
+  originalContent: string | undefined
+) {
   let name: string | undefined
   if (originalContent) {
     name = cacheByContent.get(originalContent)
@@ -291,7 +297,8 @@ export class ScopedStyles<State, Action, Query> implements DOMTemplate<State, Ac
     const { literal, derived } = this
     const literalName = make(false, ctx, 'lit', state, literal.length > 0 ? ('\n' + literal.join('\n')) : undefined)
 
-    const makeDerived = (state: State, update: boolean) => make(update, ctx, 'der', state, derived.length > 0 ? ('\n' + derived.map(f => f(state)).join('\n')) : undefined)
+    const makeDerived = (state: State, update: boolean) =>
+      make(update, ctx, 'der', state, derived.length > 0 ? ('\n' + derived.map(f => f(state)).join('\n')) : undefined)
     let derivedName = makeDerived(state, false)
 
     let destroy = (name: string | undefined) => {

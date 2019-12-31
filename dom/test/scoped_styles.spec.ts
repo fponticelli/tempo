@@ -19,7 +19,8 @@ import { forEach } from '../src/for_each'
 import { DOMContext } from '../src/context'
 import { DOMChild } from '../src/template'
 
-const renderEl = <State>(ctx: DOMContext<unknown>) => (state: State, ...children: DOMChild<State, unknown, unknown>[]) => el('div', {}, ...children).render(ctx, state)
+const renderEl = <State>(ctx: DOMContext<unknown>) =>
+  (state: State, ...children: DOMChild<State, unknown, unknown>[]) => el('div', {}, ...children).render(ctx, state)
 
 const createContext = () => {
   resetCache()
@@ -153,7 +154,7 @@ describe('scoped_styles', () => {
       when(
         { condition: (state: number) => state === 1},
         el<number, unknown, unknown>('div', {}, literalScoped)
-      ),
+      )
     )
 
     expect(ctx.doc.head.innerHTML).toEqual(`<style data-tedef-lit="1">
