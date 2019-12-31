@@ -20,6 +20,7 @@ import { DOMAttribute } from './value'
 import { headPortal } from './portal'
 import { el } from './element'
 import { text } from './text'
+import { View } from 'tempo-core/lib/view'
 
 const extractName = (sym: symbol) => {
   const a = sym.toString().substring(7)
@@ -113,11 +114,11 @@ export type StyleDefinitions<State> =
   & MediaQueries<State>
 
 type Acc<State> = {
-  statics: string[]
-  dynamics: ((state: State) => string)[]
+  literal: string[]
+  derived: ((state: State) => string)[]
 }
 
-const processRules = <State>(rules: StyleDefinitions<State>, scopeName: string): Acc<State> => {
+const processRules = <State>(rules: StyleDefinitions<State>): Acc<State> => {
   return keys(rules).reduce(
     (acc: Acc<State>, selector: keyof StyleDefinitions<State>) => {
       const rule = rules[selector] as Record<string, any>
@@ -126,63 +127,63 @@ const processRules = <State>(rules: StyleDefinitions<State>, scopeName: string):
           const declaration = rule[property] as ((state: State) => string) | string
           if (typeof declaration === 'function') {
             return {
-              dynamics: [...acc.dynamics, (state: State) => {
+              derived: [...acc.derived, (state: State) => {
                 const s = declaration(state)
                 return s ? `  ${property}: ${s};` : `  /* ${property} */`
               }],
-              statics: acc.statics
+              literal: acc.literal
             }
           } else {
             const s = declaration
             return {
-              dynamics: acc.dynamics,
-              statics: [...acc.statics, s ? `  ${property}: ${s};` : `  /* ${property} */`]
+              derived: acc.derived,
+              literal: [...acc.literal, s ? `  ${property}: ${s};` : `  /* ${property} */`]
             }
             return acc
           }
         },
         {
-          statics: [],
-          dynamics: []
+          literal: [],
+          derived: []
         } as Acc<State>
       )
       return {
-        statics: all.statics.length > 0 ?
-          [...acc.statics, `${replaceAll(selector as string, ':scope', `[${scopeName}]`)} {\n${all.statics.join('\n')}\n}\n`] :
-          all.statics,
-        dynamics: all.dynamics.length > 0 ?
-          [...acc.dynamics, (state: State) =>
-            `${replaceAll(selector as string, ':scope', `[${scopeName}]`)} {\n${all.dynamics.map(f => f(state)).join('\n')}\n}\n`] :
-          all.dynamics
+        literal: all.literal.length > 0 ?
+          [...acc.literal, `${selector as string} {\n${all.literal.join('\n')}\n}\n`] :
+          all.literal,
+        derived: all.derived.length > 0 ?
+          [...acc.derived, (state: State) =>
+            `${selector as string} {\n${all.derived.map(f => f(state)).join('\n')}\n}\n`] :
+          all.derived
       }
     },
     {
-      statics: [],
-      dynamics: []
+      literal: [],
+      derived: []
     } as Acc<State>
   )
 }
 
 const processNestedAtRule = <State>
-    (nestedAtRule: string, queries: MediaQuery<State>, scopeName: string) => {
+    (nestedAtRule: string, queries: MediaQuery<State>) => {
   return keys(queries).reduce(
     (acc: Acc<State>, query: string | number) => {
       const definitions = queries[query]
-      const r = processDefinitions(definitions, scopeName)
+      const r = processDefinitions(definitions)
       return {
-        statics: [`@${nestedAtRule} ${query} {\n${r.statics.map(v => `  ${v.split('\n').join('\n  ')}`).join('\n')}\n}`],
-        dynamics:
-          r.dynamics.map(f => {
+        literal: [`@${nestedAtRule} ${query} {\n${r.literal.map(v => `  ${v.split('\n').join('\n  ')}`).join('\n')}\n}`],
+        derived:
+          r.derived.map(f => {
             return (state: State) => {
-              const values = r.dynamics.map(f => '  ' + f(state).split('\n').join('\n  '))
+              const values = r.derived.map(f => '  ' + f(state).split('\n').join('\n  '))
               return `@${nestedAtRule} ${query} {\n${values.join('\n')}\n}`
             }
           })
       }
     },
     {
-      statics: [],
-      dynamics: []
+      literal: [],
+      derived: []
     } as Acc<State>
   )
 }
@@ -190,13 +191,13 @@ const processNestedAtRule = <State>
 const processOneAtRule = <State>(prefix: string, rule: UnwrappedValue<State, string>) => {
   if (typeof rule === 'function') {
     return {
-      statics: [],
-      dynamics: [(state: State) => `\n@${prefix} ${rule(state)};\n`]
+      literal: [],
+      derived: [(state: State) => `\n@${prefix} ${rule(state)};\n`]
     } as Acc<State>
   } else {
     return {
-      statics: [`@${prefix} ${rule};`],
-      dynamics: []
+      literal: [`@${prefix} ${rule};`],
+      derived: []
     } as Acc<State>
   }
 }
@@ -206,72 +207,127 @@ const processtAtRule = <State>(prefix: string, rules: UnwrappedValue<State, stri
     (acc, curr) => {
       const res = processOneAtRule(prefix, curr)
       return {
-        statics: [...acc.statics, ...res.statics],
-        dynamics: [...acc.dynamics, ...res.dynamics]
+        literal: [...acc.literal, ...res.literal],
+        derived: [...acc.derived, ...res.derived]
       }
     },
     {
-      statics: [],
-      dynamics: []
+      literal: [],
+      derived: []
     } as Acc<State>
   )
 }
 
 const processDefinitions =
-    <State>(definitions: StyleDefinitions<State>, scopeName: string): Acc<State> => {
-  let statics = [] as string[]
-  let dynamics =  [] as ((state: State) => string)[]
+    <State>(definitions: StyleDefinitions<State>): Acc<State> => {
+  let literal = [] as string[]
+  let derived =  [] as ((state: State) => string)[]
 
   for (let i = 0; i < atRules.length; i++) {
     const sym = atRules[i]
     if (definitions[sym]) {
       const queries = processtAtRule(extractName(sym), definitions[sym]!)
-      statics = [...statics, ...queries.statics]
-      dynamics = [...dynamics, ...queries.dynamics]
+      literal = [...literal, ...queries.literal]
+      derived = [...derived, ...queries.derived]
     }
   }
 
   for (let i = 0; i < nestedAtRules.length; i++) {
     const sym = nestedAtRules[i]
     if (definitions[sym]) {
-      const queries = processNestedAtRule(extractName(sym), definitions[sym]!, scopeName)
-      statics = [...statics, ...queries.statics]
-      dynamics = [...dynamics, ...queries.dynamics]
+      const queries = processNestedAtRule(extractName(sym), definitions[sym]!)
+      literal = [...literal, ...queries.literal]
+      derived = [...derived, ...queries.derived]
     }
   }
 
-  const rules = processRules(definitions, scopeName)
-  statics = [...statics, ...rules.statics]
-  dynamics = [...dynamics, ...rules.dynamics]
-  return { statics, dynamics }
+  const rules = processRules(definitions)
+  literal = [...literal, ...rules.literal]
+  derived = [...derived, ...rules.derived]
+  return { literal, derived }
+}
+
+let counter = 0
+type CacheItem = {
+  hits: number
+  view: View<unknown, unknown>
+  content: string
+}
+const cacheByName = new Map<string, CacheItem>()
+const cacheByContent = new Map<string, string>()
+
+export const resetCache = () => {
+  counter = 0
+  cacheByName.clear()
+  cacheByContent.clear()
+}
+
+function make<State, Action, Query>(update: boolean, ctx: DOMContext<Action>, type: 'literal' | 'derived', state: State, originalContent: string | undefined) {
+  let name: string | undefined
+  if (originalContent) {
+    name = cacheByContent.get(originalContent)
+    if (typeof name !== 'undefined') {
+      const item = cacheByName.get(name)!
+      if (!update) item.hits++
+    } else {
+      name = '' + (++counter)
+      const content = replaceAll(originalContent, ':scope', `[data-te-scope-${type}=${name}]`)
+      const template = headPortal<State, Action, Query>(el('style', { attrs: { [`data-te-definition-${type}`]: name } }, text(content)))
+      const view = template.render(ctx, state)
+      cacheByName.set(name, { hits: 1, view, content: originalContent })
+      cacheByContent.set(originalContent, name)
+    }
+    ctx.parent.setAttribute(`data-te-scope-${type}`, name)
+  }
+  return name
 }
 
 export class ScopedStyles<State, Action, Query> implements DOMTemplate<State, Action, Query> {
   constructor (
-    readonly scopeName: string,
-    readonly statics: string[],
-    readonly dynamics: ((state: State) => string)[]
+    readonly literal: string[],
+    readonly derived: ((state: State) => string)[]
   ) {}
   render(ctx: DOMContext<Action>, state: State) {
-    const styles = [] as DOMTemplate<State, Action, Query>[]
-    if (this.statics.length > 0) {
-      if (!ctx.doc.querySelector(`style[name=${this.scopeName}]`)) {
-        styles.push(el('style', { attrs: { name: this.scopeName } }, text('\n'+this.statics.join('\n'))))
+    const { literal, derived } = this
+    const literalName = make(false, ctx, 'literal', state, literal.length > 0 ? ('\n' + literal.join('\n')) : undefined)
+
+    const makeDerived = (state: State, update: boolean) => make(update, ctx, 'derived', state, derived.length > 0 ? ('\n' + derived.map(f => f(state)).join('\n')) : undefined)
+    let derivedName = makeDerived(state, false)
+
+    let destroy = (name: string | undefined) => {
+      if (typeof name !== 'undefined') {
+        const item = cacheByName.get(name)
+        if (typeof item !== 'undefined') {
+          item.hits--
+          if (item.hits === 0) {
+            item.view.destroy()
+            cacheByContent.delete(item.content)
+            cacheByName.delete(name)
+          }
+        }
       }
     }
-    if (this.dynamics.length > 0) {
-      styles.push(el('style', {}, text(state => this.dynamics.map(f => '\n'+f(state)).join('\n'))))
-    }
 
-    ctx.parent.setAttribute(this.scopeName, '')
-    return headPortal(...styles).render(ctx, state)
+    return {
+      change: (state: State) => {
+        const newName = makeDerived(state, true)
+        if (newName !== derivedName) {
+          destroy(derivedName)
+        }
+        derivedName = newName
+      },
+      request: (query: Query) => {}, // do nothing
+      destroy: () => {
+        destroy(literalName)
+        destroy(derivedName)
+      }
+    }
   }
 }
 
 export const scopedStyles = <State, Action, Query>(
-  options: { scope: string },
   definitions: StyleDefinitions<State>
 ) => {
-  const { statics, dynamics } = processDefinitions(definitions, options.scope)
-  return new ScopedStyles<State, Action, Query>(options.scope, statics, dynamics)
+  const { literal, derived } = processDefinitions(definitions)
+  return new ScopedStyles<State, Action, Query>(literal, derived)
 }
