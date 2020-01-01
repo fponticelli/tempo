@@ -17,4 +17,6 @@ This is not an officially supported Google product.
 
 [Sample Application demo](https://fponticelli.github.io/tempo/demo/readme/)
 
+[PaperJS integration demo](https://fponticelli.github.io/tempo/demo/paper/)
+
 [Performance app](https://fponticelli.github.io/tempo/demo/benchmark/) to track improvements/regressions with new versions of the library.

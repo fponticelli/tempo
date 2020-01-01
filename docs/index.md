@@ -25,6 +25,8 @@ This is not an officially supported Google product.
 
 [HNPWA demo](./demo/hnpwa/)
 
+[PaperJS integration demo](./demo/paper/)
+
 # Sample Application
 
 A Tempo application operates on two main instances:
@@ -39,11 +41,10 @@ Here is a full example of a little widget that increments and decrements a count
 You can try out the [demo running here](./demo/readme/).
 
 ```ts
-import { Tempo } from '@tempo/dom/lib/tempo'
-import { html } from '@tempo/dom/lib/web'
-const { div, button } = html
-import { mapState } from '@tempo/dom/lib/map'
-import { Store } from '@tempo/store/lib/store'
+import { Tempo } from 'tempo-dom/lib/tempo'
+import { div, button } from 'tempo-dom/lib/html'
+import { mapState } from 'tempo-dom/lib/map'
+import { Store } from 'tempo-store/lib/store'
 
 interface State {
   count: number
@@ -59,8 +60,8 @@ interface Decrement {
 }
 type Action = Increment | Decrement
 
-const decrement = (_: MouseEvent): Action => ({ kind: 'decrement' })
-const increment = (_: MouseEvent): Action => ({ kind: 'increment' })
+const decrement = (): Action => ({ kind: 'decrement' })
+const increment = (): Action => ({ kind: 'increment' })
 
 const reducer = (state: State, action: Action): State => {
   switch (action.kind) {
@@ -82,8 +83,14 @@ const template = div<State, Action>(
     div({ attrs: { className: 'count count-small' } }, 'count'),
     div({ attrs: { className: 'count' } }, String),
     div(
-      {  attrs: { className: 'buttons' } },
-      button({ events: { click: decrement }, attrs: { disabled: (count: number) => count <= 0 } }, '-'),
+      { attrs: { className: 'buttons' } },
+      button(
+        {
+          events: { click: decrement },
+          attrs: { disabled: (count: number) => count <= 0 }
+        },
+        '-'
+      ),
       button({ events: { click: increment } }, '+')
     )
   )
@@ -180,8 +187,14 @@ const template = div<State, Action>(
     div({ attrs: { className: 'count count-small' } }, 'count'),
     div({ attrs: { className: 'count' } }, String),
     div(
-      {  attrs: { className: 'buttons' } },
-      button({ events: { click: decrement }, attrs: { disabled: (count: number) => count <= 0 } }, '-'),
+      { attrs: { className: 'buttons' } },
+      button(
+        {
+          events: { click: decrement },
+          attrs: { disabled: (count: number) => count <= 0 }
+        },
+        '-'
+      ),
       button({ events: { click: increment } }, '+')
     )
   )
