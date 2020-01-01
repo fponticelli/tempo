@@ -1,6 +1,6 @@
 {
   "name": "tempo-dom",
-  "version": "0.12.0",
+  "version": "0.13.0",
   "description": "Fully-typed web framework alternative to React and Angular",
   "keywords": [
     "tempo",
@@ -34,8 +34,8 @@
     "url": "https://github.com/fponticelli"
   },
   "dependencies": {
-    "tempo-core": "1.4.0",
-    "tempo-store": "1.1.0"
+    "tempo-core": "1.5.0",
+    "tempo-store": "1.1.1"
   },
   "devDependencies": {
     "@types/jest": "24.0.22",

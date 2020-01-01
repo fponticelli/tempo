@@ -1,6 +1,6 @@
 {
   "name": "tempo-paper",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "",
   "sideEffects": false,
   "keywords": [
@@ -32,9 +32,9 @@
   },
   "dependencies": {
     "paper": "0.12.3",
-    "tempo-core": "1.4.0",
-    "tempo-dom": "0.12.0",
-    "tempo-store": "1.1.0"
+    "tempo-core": "1.5.0",
+    "tempo-dom": "0.13.0",
+    "tempo-store": "1.1.1"
   },
   "devDependencies": {
     "@types/jest": "24.0.22",
