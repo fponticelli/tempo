@@ -16,7 +16,7 @@
     "publish:npm": "rush publish -a -b master -p -r https://registry.npmjs.org/ --include-all && npm run changelog:all",
     "build": "echo \"nothing to build at root\"",
     "test:all": "(cd core && npm run test) && (cd store && npm run test) && (cd dom && npm run test)",
-    "changelog": "run(){ mkdir -p docs/changelog; cp ./$1/CHANGELOG.md docs/changelog/$1.md; echo \"---\ntitle: $1 change log\nparent: Change Log\n---\n$(cat docs/changelog/$1.md)\" > docs/changelog/$1.md; }; run",
+    "changelog": "run(){ mkdir -p docs/changelog; cp ./$1/CHANGELOG.md docs/changelog/$1.md; echo \"---\ntitle: $1\nparent: Change Log\n---\n$(cat docs/changelog/$1.md)\" > docs/changelog/$1.md; }; run",
     "changelog:core": "npm run changelog -- core",
     "changelog:dom": "npm run changelog -- dom",
     "changelog:store": "npm run changelog -- store",
