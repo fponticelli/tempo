@@ -7,7 +7,7 @@ import { Tool, Project, Color, Segment, MouseEvent } from 'paper'
 import { path } from 'tempo-paper/lib/path'
 import { htmlPortalWithSelector } from 'tempo-paper/lib/html_portal'
 import { iterate } from 'tempo-paper/lib/iterate'
-import { matchKind } from 'tempo-core'
+import { matchKind } from 'tempo-std/lib/match'
 import { toolbar } from './toolbar'
 
 export const makeApp = (store: Store<State, Action>) =>

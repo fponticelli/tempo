@@ -117,7 +117,7 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"tBUf":[function(require,module,exports) {
+})({"LAOm":[function(require,module,exports) {
 "use strict";
 /*
 Copyright 2019 Google LLC
@@ -156,7 +156,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 Object.defineProperty(exports, "__esModule", { value: true });
-var map_1 = require("tempo-core/lib/util/map");
+var arrays_1 = require("tempo-std/lib/arrays");
 function setOneStyle(el, name, value) {
     var anyStyle = el.style;
     if (value == null) {
@@ -195,7 +195,7 @@ function setStyleAttribute(el, name, value) {
         setAttribute(el, name, value);
     }
     else {
-        var s = map_1.mapArray(Object.keys(value), function (k) { return k + ": " + value[k] + ";"; }).join(' ');
+        var s = arrays_1.mapArray(Object.keys(value), function (k) { return k + ": " + value[k] + ";"; }).join(' ');
         setAttribute(el, name, (s.length && s) || null);
     }
 }
@@ -238,7 +238,7 @@ function setSpaceSeparated(el, name, values) {
 }
 exports.setSpaceSeparated = setSpaceSeparated;
 
-},{"tempo-core/lib/util/map":"tBUf"}],"UKQ2":[function(require,module,exports) {
+},{"tempo-std/lib/arrays":"LAOm"}],"UKQ2":[function(require,module,exports) {
 "use strict";
 /*
 Copyright 2019 Google LLC
@@ -517,7 +517,7 @@ limitations under the License.
 */
 Object.defineProperty(exports, "__esModule", { value: true });
 var dom_1 = require("./utils/dom");
-var map_1 = require("tempo-core/lib/util/map");
+var arrays_1 = require("tempo-std/lib/arrays");
 var dom_attributes_mapper_1 = require("./dom_attributes_mapper");
 var applyChange = function (change, el, ctx) { return function (state, value) {
     return change(state, el, ctx, value);
@@ -567,12 +567,12 @@ var DOMElement = /** @class */ (function () {
         // children
         var appendChild = function (n) { return el.appendChild(n); };
         var newCtx = ctx.withAppend(appendChild).withParent(el);
-        var views = map_1.mapArray(this.children, function (child) { return child.render(newCtx, state); });
+        var views = arrays_1.mapArray(this.children, function (child) { return child.render(newCtx, state); });
         ctx.append(el);
         if (this.afterrender) {
             value = applyAfterRender(this.afterrender, el, ctx, state);
         }
-        var viewChanges = map_1.mapArray(views, function (child) { return function (state) { return child.change(state); }; });
+        var viewChanges = arrays_1.mapArray(views, function (child) { return function (state) { return child.change(state); }; });
         allChanges.push.apply(allChanges, viewChanges);
         if (this.beforechange) {
             var change_1 = applyChange(this.beforechange, el, ctx);
@@ -617,7 +617,7 @@ var DOMElement = /** @class */ (function () {
 }());
 exports.DOMElement = DOMElement;
 function extractAttrs(attrs) {
-    return map_1.mapArray(Object.keys(attrs || {}), function (attName) {
+    return arrays_1.mapArray(Object.keys(attrs || {}), function (attName) {
         var name = attName.toLowerCase();
         name = dom_attributes_mapper_1.attributeNameMap[name] || name;
         return {
@@ -627,7 +627,7 @@ function extractAttrs(attrs) {
     });
 }
 function extractEvents(attrs) {
-    return map_1.mapArray(Object.keys(attrs || {}), function (eventName) {
+    return arrays_1.mapArray(Object.keys(attrs || {}), function (eventName) {
         var name = "on" + eventName.toLowerCase();
         return {
             name: name,
@@ -636,7 +636,7 @@ function extractEvents(attrs) {
     });
 }
 function extractStyles(attrs) {
-    return map_1.mapArray(Object.keys(attrs || {}), function (name) { return ({
+    return arrays_1.mapArray(Object.keys(attrs || {}), function (name) { return ({
         name: name,
         value: attrs[name]
     }); });
@@ -647,14 +647,14 @@ exports.el = function (name, attributes) {
     for (var _i = 2; _i < arguments.length; _i++) {
         children[_i - 2] = arguments[_i];
     }
-    return new DOMElement(makeCreateElement(name), extractAttrs(attributes.attrs), extractEvents(attributes.events), extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, attributes.respond, map_1.mapArray(children, dom_1.domChildToTemplate));
+    return new DOMElement(makeCreateElement(name), extractAttrs(attributes.attrs), extractEvents(attributes.events), extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, attributes.respond, arrays_1.mapArray(children, dom_1.domChildToTemplate));
 };
 exports.el2 = function (name) { return function (attributes) {
     var children = [];
     for (var _i = 1; _i < arguments.length; _i++) {
         children[_i - 1] = arguments[_i];
     }
-    return new DOMElement(makeCreateElement(name), extractAttrs(attributes.attrs), extractEvents(attributes.events), extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, attributes.respond, map_1.mapArray(children, dom_1.domChildToTemplate));
+    return new DOMElement(makeCreateElement(name), extractAttrs(attributes.attrs), extractEvents(attributes.events), extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, attributes.respond, arrays_1.mapArray(children, dom_1.domChildToTemplate));
 }; };
 exports.defaultNamespaces = {
     'svg': 'http://www.w3.org/2000/svg'
@@ -668,17 +668,17 @@ exports.elNS = function (ns, name, attributes) {
         children[_i - 3] = arguments[_i];
     }
     var namespace = exports.defaultNamespaces[ns] || ns;
-    return new DOMElement(makeCreateElementNS(namespace, name), extractAttrs(attributes.attrs), extractEvents(attributes.events), extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, attributes.respond, map_1.mapArray(children, dom_1.domChildToTemplate));
+    return new DOMElement(makeCreateElementNS(namespace, name), extractAttrs(attributes.attrs), extractEvents(attributes.events), extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, attributes.respond, arrays_1.mapArray(children, dom_1.domChildToTemplate));
 };
 exports.elNS2 = function (namespace, name) { return function (attributes) {
     var children = [];
     for (var _i = 1; _i < arguments.length; _i++) {
         children[_i - 1] = arguments[_i];
     }
-    return new DOMElement(makeCreateElementNS(namespace, name), extractAttrs(attributes.attrs), extractEvents(attributes.events), extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, attributes.respond, map_1.mapArray(children, dom_1.domChildToTemplate));
+    return new DOMElement(makeCreateElementNS(namespace, name), extractAttrs(attributes.attrs), extractEvents(attributes.events), extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, attributes.respond, arrays_1.mapArray(children, dom_1.domChildToTemplate));
 }; };
 
-},{"./utils/dom":"TnZD","tempo-core/lib/util/map":"tBUf","./dom_attributes_mapper":"UKQ2"}],"zQMt":[function(require,module,exports) {
+},{"./utils/dom":"TnZD","tempo-std/lib/arrays":"LAOm","./dom_attributes_mapper":"UKQ2"}],"zQMt":[function(require,module,exports) {
 "use strict";
 /*
 Copyright 2019 Google LLC
@@ -832,7 +832,7 @@ limitations under the License.
 */
 Object.defineProperty(exports, "__esModule", { value: true });
 var dom_1 = require("./utils/dom");
-var map_1 = require("tempo-core/lib/util/map");
+var arrays_1 = require("tempo-std/lib/arrays");
 var DOMUntilTemplate = /** @class */ (function () {
     function DOMUntilTemplate(options, children) {
         this.options = options;
@@ -861,7 +861,7 @@ var DOMUntilTemplate = /** @class */ (function () {
                     }
                     else {
                         // add node
-                        childrenViews.push(map_1.mapArray(children, function (el) { return el.render(newCtx, value); }));
+                        childrenViews.push(arrays_1.mapArray(children, function (el) { return el.render(newCtx, value); }));
                     }
                     index++;
                 };
@@ -913,10 +913,10 @@ exports.until = function (options) {
     for (var _i = 1; _i < arguments.length; _i++) {
         children[_i - 1] = arguments[_i];
     }
-    return new DOMUntilTemplate(options, map_1.mapArray(children, dom_1.domChildToTemplate));
+    return new DOMUntilTemplate(options, arrays_1.mapArray(children, dom_1.domChildToTemplate));
 };
 
-},{"./utils/dom":"TnZD","tempo-core/lib/util/map":"tBUf"}],"kxUV":[function(require,module,exports) {
+},{"./utils/dom":"TnZD","tempo-std/lib/arrays":"LAOm"}],"kxUV":[function(require,module,exports) {
 "use strict";
 /*
 Copyright 2019 Google LLC

@@ -11,9 +11,9 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { Differentiate, DifferentiateAt } from '../types/differentiate'
-import { IndexType } from '../types/index_type'
-import { ObjectWithField, ObjectWithPath, TypeAtPath } from '../types/objects'
+import { Differentiate, DifferentiateAt } from './types/differentiate'
+import { IndexType } from './types/index_type'
+import { ObjectWithField, ObjectWithPath, TypeAtPath } from './types/objects'
 
 export const match = <
   F extends IndexType,

@@ -15,7 +15,7 @@ import { DOMChild, DOMTemplate } from './template'
 import { DOMContext } from './context'
 import { View } from 'tempo-core/lib/view'
 import { domChildToTemplate, removeNode } from './utils/dom'
-import { mapArray } from 'tempo-core/lib/util/map'
+import { mapArray } from 'tempo-std/lib/arrays'
 
 export interface WhenOptions<State> {
   condition: (state: State) => boolean

@@ -1,18 +1,15 @@
 {
-  "name": "tempo-dom",
-  "version": "0.13.0",
-  "description": "Fully-typed web framework alternative to React and Angular",
+  "name": "tempo-std",
+  "license": "Apache-2.0",
+  "description": "Std library for TypeScript. Natural complement to the tempo libs.",
+  "version": "0.1.0",
   "keywords": [
     "tempo",
-    "ui",
     "framework",
-    "typescript",
-    "dom",
-    "angular-alternative",
-    "react-alternative"
+    "std",
+    "library"
   ],
   "sideEffects": false,
-  "license": "Apache-2.0",
   "private": false,
   "scripts": {
     "clean": "rm -rf lib/* && rm -rf es6/*",
@@ -33,21 +30,11 @@
     "email": "franco.ponticelli@gmail.com",
     "url": "https://github.com/fponticelli"
   },
-  "dependencies": {
-    "tempo-std": "0.1.0",
-    "tempo-core": "1.5.0",
-    "tempo-store": "1.1.1"
-  },
   "devDependencies": {
     "@types/jest": "24.0.22",
-    "@types/jsdom": "12.2.4",
+    "@types/node": "10.12.18",
     "jest": "24.9.0",
-    "jsdom": "15.1.1",
-    "lodash": "4.17.15",
     "prettier": "1.19.1",
-    "request": "2.88.0",
-    "request-promise-native": "1.0.7",
-    "stealthy-require": "1.0.0",
     "ts-jest": "24.1.0",
     "tslint": "5.20.1",
     "typescript": "3.7.2"

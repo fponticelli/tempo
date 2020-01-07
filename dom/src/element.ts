@@ -16,7 +16,7 @@ import { DOMContext } from './context'
 import { View } from 'tempo-core/lib/view'
 import { processAttribute, processEvent, processStyle, domChildToTemplate, removeNode } from './utils/dom'
 import { DOMAttributes, DOMAttribute, AttributeValue, DOMEventHandler, DOMStyleAttribute } from './value'
-import { mapArray } from 'tempo-core/lib/util/map'
+import { mapArray } from 'tempo-std/lib/arrays'
 import { attributeNameMap } from './dom_attributes_mapper'
 
 const applyChange = <State, Action, El extends Element, T>(

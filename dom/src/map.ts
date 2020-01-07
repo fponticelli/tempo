@@ -15,7 +15,7 @@ import { DOMChild, DOMTemplate } from './template'
 import { View } from 'tempo-core/lib/view'
 import { DOMContext } from './context'
 import { domChildToTemplate } from './utils/dom'
-import { mapArray } from 'tempo-core/lib/util/map'
+import { mapArray } from 'tempo-std/lib/arrays'
 
 export class MapStateTemplate<OuterState, InnerState, Action, Query> implements DOMTemplate<OuterState, Action, Query> {
   constructor(

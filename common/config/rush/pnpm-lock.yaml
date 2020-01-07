@@ -8,6 +8,7 @@ dependencies:
   '@rush-temp/tempo-dom': 'file:projects/tempo-dom.tgz'
   '@rush-temp/tempo-paper': 'file:projects/tempo-paper.tgz_webpack@4.41.2'
   '@rush-temp/tempo-root': 'file:projects/tempo-root.tgz'
+  '@rush-temp/tempo-std': 'file:projects/tempo-std.tgz'
   '@rush-temp/tempo-store': 'file:projects/tempo-store.tgz'
   '@types/dompurify': 2.0.0
   '@types/jest': 24.0.22
@@ -34,9 +35,6 @@ dependencies:
   stealthy-require: 1.0.0
   style-loader: 1.0.1_webpack@4.41.2
   sw-precache: 5.2.1
-  tempo-core: 1.2.0
-  tempo-dom: 0.10.0
-  tempo-store: 1.0.1
   todomvc-app-css: 2.2.0
   todomvc-common: 1.0.5
   ts-jest: 24.1.0_jest@24.9.0
@@ -8046,6 +8044,13 @@ packages:
       node-sass: ^4.0.0
       sass: ^1.3.0
       webpack: ^4.36.0
+    peerDependenciesMeta:
+      fibers:
+        optional: true
+      node-sass:
+        optional: true
+      sass:
+        optional: true
     resolution:
       integrity: sha512-+qeMu563PN7rPdit2+n5uuYVR0SSVwm0JsOUsaJXzgYcClWSlmX0iHDnmeOobPkf5kUglVot3QS6SyLyaQoJ4w==
   /sass/1.23.7:
@@ -9942,7 +9947,7 @@ packages:
     dev: false
     name: '@rush-temp/tempo-demo.benchmark'
     resolution:
-      integrity: sha512-8MVdeE1M6yZkaPWODGZd0Wh2koF+d5EXLyfARcXlRfdNNdHPaJh7HIpg7risAYMDsMdyLjESUqUzlb/AnWJTUg==
+      integrity: sha512-7sGEMQjYvyxREuczjKsTRYCjOmNgz2lxx4ZWP3SIjVG9sLpc6eY0686/Hf1V887YdA2WlXVtK35aiEqRSXs6KQ==
       tarball: 'file:projects/tempo-demo.benchmark.tgz'
     version: 0.0.0
   'file:projects/tempo-demo.hnpwa.tgz':
@@ -9964,7 +9969,7 @@ packages:
     dev: false
     name: '@rush-temp/tempo-demo.hnpwa'
     resolution:
-      integrity: sha512-+z3wjfGceu5RO3k/k9d3+1AXpaooFnJQeZEJQdeL+T7FprGN6LN/JtkZrhlD9D9rVeaXhnNpRnfnqKcYXnCKEg==
+      integrity: sha512-dn4V27iVw4J2u2BagbGZSgLk5bx5uZKqAPJNujeq89fCR4B9XLv8z2fQPMEOk+puth8fRIoBxNuNrN+gFoa7Iw==
       tarball: 'file:projects/tempo-demo.hnpwa.tgz'
     version: 0.0.0
   'file:projects/tempo-demo.paper.tgz_sass@1.23.7':
@@ -9994,7 +9999,7 @@ packages:
     peerDependencies:
       sass: '*'
     resolution:
-      integrity: sha512-2U7BZ3u3atxTNy35SzG8a5Yf0DYPMHalPCtFdcY6f95eMw+whngn30f+V5nR3P03nmXfuZKn2OYRJ0TrwvR0YQ==
+      integrity: sha512-8OjCpjUL0iAqAjihghvV88Y+hJyb4uget59ogN2S9bDjYZQwsW6Dc2QqcAHuspmgRl0qN++nGFVX7g1d9DZcvg==
       tarball: 'file:projects/tempo-demo.paper.tgz'
     version: 0.0.0
   'file:projects/tempo-demo.readme.tgz':
@@ -10011,7 +10016,7 @@ packages:
     dev: false
     name: '@rush-temp/tempo-demo.readme'
     resolution:
-      integrity: sha512-O3/sEENv1DCDFoHq81LlwldXSHP/Y94UVnmBq6qCPsvy1qkVdPFWjciK1ZOcZu1nqbcKpjHzpBEoUSee9HH39g==
+      integrity: sha512-XQNxaBhHcpAI+q3/iUh1xanl8NySQcgXV1P3RD8Am2uGWWhE7Qx0fkut2o8pBRS0ibPsbWeHBf0p83hmYOcn7A==
       tarball: 'file:projects/tempo-demo.readme.tgz'
     version: 0.0.0
   'file:projects/tempo-demo.todomvc.tgz':
@@ -10030,7 +10035,7 @@ packages:
     dev: false
     name: '@rush-temp/tempo-demo.todomvc'
     resolution:
-      integrity: sha512-E6H4KCgMccJLdz4Za9SlnNOVPdz2yJD0yoSt3SI+K3kUABrdFJ+IRp7Tsm4E66I85jfOOsFT+72OCxsUBHIBmg==
+      integrity: sha512-MH8d70hpWMzwk0NcgUZjbDvVuYEEdgAz+trhGdVdndqtSMX1WuHGM6yBrQxGQ1yQsyCdZ+9cWZb1ERviOsdfTA==
       tarball: 'file:projects/tempo-demo.todomvc.tgz'
     version: 0.0.0
   'file:projects/tempo-dom.tgz':
@@ -10052,7 +10057,7 @@ packages:
     dev: false
     name: '@rush-temp/tempo-dom'
     resolution:
-      integrity: sha512-CizL/X06G0UDYAKcDuUBKEVtkWV5/e2a80TTqYvVKItSsUrTBXxkBQpVpPX5C1aC7J4NAkcHP8IQHixPiCJ4tQ==
+      integrity: sha512-nZpqThVoEGDx3oRn3jaYkEkBChDhd0TeIhNr72MdFLVBSfovTxXgFGag75omgEZncr4cMRSO04X/7k5aL+ketg==
       tarball: 'file:projects/tempo-dom.tgz'
     version: 0.0.0
   'file:projects/tempo-paper.tgz_webpack@4.41.2':
@@ -10080,7 +10085,7 @@ packages:
     peerDependencies:
       webpack: '*'
     resolution:
-      integrity: sha512-/2C+KzxAQ1RuYnQ4/+dACC7v/PklTytytV0PZnqzseftFVG2NfqD9shYc19SKGFr0JY6hG2CL8/Xe2K6j/S+uw==
+      integrity: sha512-BPQm1hkLy7tfO1qaPfeM6K0UoPn4kSS6tL1duFOVTKfXfU7kemKmXAwjDYAeucBmvkNNs4cLfgESG2X5t1YjXA==
       tarball: 'file:projects/tempo-paper.tgz'
     version: 0.0.0
   'file:projects/tempo-root.tgz':
@@ -10096,6 +10101,21 @@ packages:
       integrity: sha512-mzuoEZ5ENP2zU6btKgotAGWDvCe9jIhGaxGCcj22ik5CCsqv9TvswN91Xr0MNshuhddim9CiXFJLDC/8j9iZiQ==
       tarball: 'file:projects/tempo-root.tgz'
     version: 0.0.0
+  'file:projects/tempo-std.tgz':
+    dependencies:
+      '@types/jest': 24.0.22
+      '@types/node': 10.12.18
+      jest: 24.9.0
+      prettier: 1.19.1
+      ts-jest: 24.1.0_jest@24.9.0
+      tslint: 5.20.1_typescript@3.7.2
+      typescript: 3.7.2
+    dev: false
+    name: '@rush-temp/tempo-std'
+    resolution:
+      integrity: sha512-99PWnWW/hfJJZ9pt6iHBguyS3XjEu0j03lM1GH2IQstIT1mTjAaqgIi8+steQ6lfbiFWMPAdtI+Fs4Qite2VyQ==
+      tarball: 'file:projects/tempo-std.tgz'
+    version: 0.0.0
   'file:projects/tempo-store.tgz':
     dependencies:
       '@types/jest': 24.0.22
@@ -10108,9 +10128,10 @@ packages:
     dev: false
     name: '@rush-temp/tempo-store'
     resolution:
-      integrity: sha512-SlCW+EeBT7gVJcEUFnFZ5AKnVhWDOY6zjxijUDx0SJqSIamiGZK42d+O9fq1GgakXU77V+HkIrRAF7UTy6rQZQ==
+      integrity: sha512-IrppM/pF6BHAhRm4NJ6EZd1ET+qzB5Q0l+E7rG0NC3H5Wf9kQKkYuIGBkW7I/MCGeoTklf5rB30oD7MCgNk3rg==
       tarball: 'file:projects/tempo-store.tgz'
     version: 0.0.0
+registry: ''
 specifiers:
   '@rush-temp/tempo-core': 'file:./projects/tempo-core.tgz'
   '@rush-temp/tempo-demo.benchmark': 'file:./projects/tempo-demo.benchmark.tgz'
@@ -10121,6 +10142,7 @@ specifiers:
   '@rush-temp/tempo-dom': 'file:./projects/tempo-dom.tgz'
   '@rush-temp/tempo-paper': 'file:./projects/tempo-paper.tgz'
   '@rush-temp/tempo-root': 'file:./projects/tempo-root.tgz'
+  '@rush-temp/tempo-std': 'file:./projects/tempo-std.tgz'
   '@rush-temp/tempo-store': 'file:./projects/tempo-store.tgz'
   '@types/dompurify': 2.0.0
   '@types/jest': 24.0.22
@@ -10147,9 +10169,6 @@ specifiers:
   stealthy-require: 1.0.0
   style-loader: 1.0.1
   sw-precache: 5.2.1
-  tempo-core: 1.2.0
-  tempo-dom: 0.10.0
-  tempo-store: 1.0.1
   todomvc-app-css: 2.2.0
   todomvc-common: 1.0.5
   ts-jest: 24.1.0

@@ -14,7 +14,7 @@ limitations under the License.
 import { View } from 'tempo-core/lib/view'
 import { PaperContext } from './context'
 import { PaperTemplate } from './template'
-import { mapArray } from 'tempo-core/lib/util/map'
+import { mapArray } from 'tempo-std/lib/arrays'
 import { Group } from 'paper'
 
 export class PaperUntilTemplate<OuterState, InnerState, Action, Query>

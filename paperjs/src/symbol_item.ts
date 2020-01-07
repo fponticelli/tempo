@@ -18,7 +18,7 @@ import {
   ExcludeFunctionFields,
   RemoveNullableFromFields,
   Merge
-} from 'tempo-core/lib/types/objects'
+} from 'tempo-std/lib/types/objects'
 import { TempoAttributes } from './tempo_attributes'
 import { ItemEvents, createItem } from './item'
 

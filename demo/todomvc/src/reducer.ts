@@ -13,7 +13,7 @@ limitations under the License.
 
 import { State, createTodo, Todo, Filter } from './state'
 import { Action } from './action'
-import { mapArray } from 'tempo-core/lib/util/map'
+import { mapArray } from 'tempo-std/lib/arrays'
 
 const filterF = (filter: Filter) => {
   if (filter === Filter.All) {

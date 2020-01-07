@@ -18,12 +18,12 @@ import {
   ExcludeFunctionFields,
   RemoveNullableFromFields,
   Merge
-} from 'tempo-core/lib/types/objects'
+} from 'tempo-std/lib/types/objects'
 import { TempoAttributes } from './tempo_attributes'
 import { PaperTemplate } from './template'
 import { PaperContext } from './context'
 import { UnwrappedDerivedValue } from 'tempo-core/lib/value'
-import { keys } from 'tempo-core/lib/util/objects'
+import { keys } from 'tempo-std/lib//objects'
 
 type WritableTool = ExcludeFunctionFields<
   RemoveNullableFromFields<WritableFields<Tool>>

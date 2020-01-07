@@ -1,5 +1,5 @@
-import { TupleToUnion } from '../types/tuples'
-import { Merge } from '../types'
+import { TupleToUnion } from './types/tuples'
+import { Merge } from './types/objects'
 
 export const keys = <T>(object: T): (keyof T)[] => {
   return (Object.keys(object) as any) as (keyof T)[]
