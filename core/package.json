@@ -14,7 +14,7 @@
   "scripts": {
     "clean": "rm -rf lib/* && rm -rf es6/*",
     "build": "npm run clean && npx tsc && npx tsc -p tsconfig.es6.json",
-    "test": "jest",
+    "test": "jest --passWithNoTests",
     "test-watch": "jest --watch",
     "tslint": "tslint -p ./tslint.json",
     "prettier": "prettier -c src/**/*.ts",

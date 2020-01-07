@@ -11,7 +11,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { mapArray } from '../src/util/map'
+import { mapArray } from '../src/arrays'
 
 describe('map', () => {
   it('should work with empty arrays', () => {

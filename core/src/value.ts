@@ -12,5 +12,9 @@ limitations under the License.
 */
 
 export type UnwrappedLiteralValue<Value> = Value
-export type UnwrappedDerivedValue<State, Value> = (state: State) => Value | undefined
-export type UnwrappedValue<State, Value> = UnwrappedLiteralValue<Value> | UnwrappedDerivedValue<State, Value>
+export type UnwrappedDerivedValue<State, Value> = (
+  state: State
+) => Value | undefined
+export type UnwrappedValue<State, Value> =
+  | UnwrappedLiteralValue<Value>
+  | UnwrappedDerivedValue<State, Value>
