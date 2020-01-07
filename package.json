@@ -21,7 +21,7 @@
     "changelog:dom": "npm run changelog -- dom",
     "changelog:store": "npm run changelog -- store",
     "changelog:paperjs": "npm run changelog -- paperjs",
-    "changelog:all": "npm run changelog:core && npm run changelog:dom && npm run changelog:store && npm run changelog:paperjs"
+    "changelog:all": "npm run changelog:core & npm run changelog:dom & npm run changelog:store & npm run changelog:paperjs"
   },
   "license": "Apache-2.0",
   "homepage": "https://github.com/fponticelli/tempo",
