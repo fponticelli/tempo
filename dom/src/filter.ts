@@ -15,7 +15,7 @@ import { DOMChild, DOMTemplate } from './template'
 import { View } from 'tempo-core/lib/view'
 import { DOMContext } from './context'
 import { domChildToTemplate } from './utils/dom'
-import { mapArray } from 'tempo-std/lib/arrays'
+import { map } from 'tempo-std/lib/arrays'
 
 export class FilterStateTemplate<State, Action, Query> implements DOMTemplate<State, Action, Query> {
   constructor(
@@ -25,7 +25,7 @@ export class FilterStateTemplate<State, Action, Query> implements DOMTemplate<St
 
   render(ctx: DOMContext<Action>, state: State): View<State, Query> {
     const { children, isSame: filter } = this
-    const views = mapArray(children, c => c.render(ctx, state))
+    const views = map(c => c.render(ctx, state), children)
 
     let prevState = state
     return {
@@ -50,5 +50,5 @@ export const filterState = <State, Action, Query = unknown>(
   ...children: DOMChild<State, Action, Query>[]
 ): DOMTemplate<State, Action, Query> => new FilterStateTemplate(
   options.isSame || ((a: State, b: State) => a === b),
-  mapArray(children, domChildToTemplate)
+  map(domChildToTemplate, children)
 )

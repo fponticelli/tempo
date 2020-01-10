@@ -11,14 +11,4 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { map } from '../src/arrays'
-
-describe('map', () => {
-  it('should work with empty arrays', () => {
-    expect(map([], a => a)).toEqual([])
-  })
-
-  it('should work with any array', () => {
-    expect(map([1, 2, 3], a => a + 1)).toEqual([2, 3, 4])
-  })
-})
+export type Maybe<T> = T | undefined | null

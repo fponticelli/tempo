@@ -16,7 +16,7 @@ import { DOMContext } from './context'
 import { View } from 'tempo-core/lib/view'
 import { processAttribute, processEvent, processStyle, domChildToTemplate, removeNode } from './utils/dom'
 import { DOMAttributes, DOMAttribute, AttributeValue, DOMEventHandler, DOMStyleAttribute } from './value'
-import { mapArray } from 'tempo-std/lib/arrays'
+import { map } from 'tempo-std/lib/arrays'
 import { attributeNameMap } from './dom_attributes_mapper'
 
 const applyChange = <State, Action, El extends Element, T>(
@@ -72,7 +72,7 @@ export class DOMElement<State, Action, Query = unknown, El extends Element = Ele
     // children
     const appendChild = (n: Node) => el.appendChild(n)
     const newCtx = ctx.withAppend(appendChild).withParent(el)
-    const views = mapArray(this.children, child => child.render(newCtx, state))
+    const views = map(child => child.render(newCtx, state), this.children)
 
     ctx.append(el)
 
@@ -80,7 +80,7 @@ export class DOMElement<State, Action, Query = unknown, El extends Element = Ele
       value = applyAfterRender(this.afterrender, el, ctx, state)
     }
 
-    const viewChanges = mapArray(views, child => (state: State) => child.change(state))
+    const viewChanges = map(child => (state: State) => child.change(state), views)
 
     allChanges.push(...viewChanges)
 
@@ -126,35 +126,35 @@ function extractAttrs<State>(
   name: string,
   value: DOMAttribute<State, AttributeValue>
 }[] {
-  return mapArray(Object.keys(attrs || {}), attName =>  {
+  return map(attName =>  {
     let name = attName.toLowerCase()
     name = attributeNameMap[name] || name
     return {
       name,
       value: attrs![attName]
     }
-  })
+  }, Object.keys(attrs || {}))
 }
 
 function extractEvents<State, Action, El extends Element>(
   attrs: Record<string, DOMEventHandler<State, Action, any, El>> | undefined
 ): { name: string, value: DOMEventHandler<State, Action, any, El>}[] {
-  return mapArray(Object.keys(attrs || {}), eventName => {
+  return map(eventName => {
     let name = `on${eventName.toLowerCase()}`
     return {
       name,
       value: attrs![eventName]
     }
-  })
+  }, Object.keys(attrs || {}))
 }
 
 function extractStyles<State>(
   attrs: Record<string, DOMStyleAttribute<State, string>> | undefined
 ): { name: string, value: DOMStyleAttribute<State, string>}[] {
-  return mapArray(Object.keys(attrs || {}), name => ({
+  return map(name => ({
     name,
     value: attrs![name]
-  }))
+  }), Object.keys(attrs || {}))
 }
 
 const makeCreateElement = <El extends Element>(name: string) => (doc: Document) => doc.createElement(name) as any as El
@@ -174,7 +174,7 @@ export const el = <State, Action, Query = unknown, El extends Element = Element,
     attributes.afterchange,
     attributes.beforedestroy,
     attributes.respond,
-    mapArray(children, domChildToTemplate)
+    map(domChildToTemplate, children)
   )
 }
 
@@ -191,7 +191,7 @@ export const el2 = <El extends Element>(name: string) => <State, Action, Query =
       attributes.afterchange,
       attributes.beforedestroy,
       attributes.respond,
-      mapArray(children, domChildToTemplate)
+      map(domChildToTemplate, children)
     )
   }
 
@@ -219,7 +219,7 @@ export const elNS = <State, Action, Query = unknown, El extends Element = Elemen
     attributes.afterchange,
     attributes.beforedestroy,
     attributes.respond,
-    mapArray(children, domChildToTemplate)
+    map(domChildToTemplate, children)
   )
 }
 
@@ -236,6 +236,6 @@ export const elNS2 = <El extends Element>(namespace: string, name: string) => <S
       attributes.afterchange,
       attributes.beforedestroy,
       attributes.respond,
-      mapArray(children, domChildToTemplate)
+      map(domChildToTemplate, children)
     )
   }

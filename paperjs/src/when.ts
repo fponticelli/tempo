@@ -14,7 +14,7 @@ limitations under the License.
 import { PaperTemplate } from './template'
 import { PaperContext } from './context'
 import { View } from 'tempo-core/lib/view'
-import { mapArray } from 'tempo-std/lib/arrays'
+import { map } from 'tempo-std/lib/arrays'
 import { Group } from 'paper'
 
 export interface WhenOptions<State> {
@@ -38,7 +38,7 @@ export class PaperWhenTemplate<State, Action, Query>
         if (condition(state)) {
           if (typeof views === 'undefined') {
             // it has never been rendered before
-            views = mapArray(this.children, c => c.render(newCtx, state))
+            views = map(c => c.render(newCtx, state), this.children)
           } else {
             for (const view of views) view.change(state)
           }

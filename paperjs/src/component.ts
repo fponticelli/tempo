@@ -14,7 +14,7 @@ limitations under the License.
 import { Store } from 'tempo-store/lib/store'
 import { PaperTemplate } from './template'
 import { PaperContext } from './context'
-import { mapArray } from 'tempo-std/lib/arrays'
+import { map } from 'tempo-std/lib/arrays'
 
 export class PaperComponentTemplate<State, Action, Query>
   implements PaperTemplate<State, Action, Query> {
@@ -50,8 +50,9 @@ export class PaperComponentTemplate<State, Action, Query>
       store.process(action)
     }
     const newCtx = ctx.withDispatch(innerDispatch)
-    const views = mapArray(this.children, child =>
-      child.render(newCtx, property.get())
+    const views = map(
+      child => child.render(newCtx, property.get()),
+      this.children
     )
     const view = {
       change: (state: State) => {

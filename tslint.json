@@ -82,7 +82,7 @@
     "quotemark": [true, "single", "jsx-double", "avoid-escape"],
     "radix": true,
     "semicolon": [true, "never"],
-    "switch-default": true,
+    "switch-default": false,
 
     "trailing-comma": [
       true,

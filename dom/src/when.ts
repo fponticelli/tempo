@@ -15,7 +15,7 @@ import { DOMChild, DOMTemplate } from './template'
 import { DOMContext } from './context'
 import { View } from 'tempo-core/lib/view'
 import { domChildToTemplate, removeNode } from './utils/dom'
-import { mapArray } from 'tempo-std/lib/arrays'
+import { map } from 'tempo-std/lib/arrays'
 
 export interface WhenOptions<State> {
   condition: (state: State) => boolean
@@ -36,7 +36,7 @@ export class DOMWhenTemplate<State, Action, Query> implements DOMTemplate<State,
         if (condition(state)) {
           if (typeof views === 'undefined') {
             // it has never been rendered before
-            views = mapArray(this.children, c => c.render(newCtx, state))
+            views = map(c => c.render(newCtx, state), this.children)
           } else {
             for (const view of views) view.change(state)
           }
@@ -64,7 +64,7 @@ export class DOMWhenTemplate<State, Action, Query> implements DOMTemplate<State,
 
 export const when = <State, Action, Query = unknown>(options: WhenOptions<State>, ...children: DOMChild<State, Action, Query>[]):
     DOMTemplate<State, Action, Query> =>
-  new DOMWhenTemplate<State, Action, Query>(options, mapArray(children, domChildToTemplate))
+  new DOMWhenTemplate<State, Action, Query>(options, map(domChildToTemplate, children))
 
 export const unless = <State, Action, Query = unknown>(options: WhenOptions<State>, ...children: DOMChild<State, Action, Query>[]):
     DOMTemplate<State, Action, Query> =>
@@ -73,5 +73,5 @@ export const unless = <State, Action, Query = unknown>(options: WhenOptions<Stat
       condition: (v: State) => !options.condition(v),
       refId: options.refId || 't:unless'
     },
-    mapArray(children, domChildToTemplate)
+    map(domChildToTemplate, children)
   )

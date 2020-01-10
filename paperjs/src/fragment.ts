@@ -14,14 +14,14 @@ limitations under the License.
 import { View } from 'tempo-core/lib/view'
 import { PaperTemplate } from './template'
 import { PaperContext } from './context'
-import { mapArray } from 'tempo-std/lib/arrays'
+import { map } from 'tempo-std/lib/arrays'
 
 export class PaperFragmentTemplate<State, Action, Query>
   implements PaperTemplate<State, Action, Query> {
   constructor(readonly children: PaperTemplate<State, Action, Query>[]) {}
 
   render(ctx: PaperContext<Action>, state: State): View<State, Query> {
-    const views = mapArray(this.children, child => child.render(ctx, state))
+    const views = map(child => child.render(ctx, state), this.children)
     return {
       change: (state: State) => {
         for (const view of views) view.change(state)

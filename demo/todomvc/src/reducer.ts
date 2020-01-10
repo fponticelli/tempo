@@ -13,7 +13,7 @@ limitations under the License.
 
 import { State, createTodo, Todo, Filter } from './state'
 import { Action } from './action'
-import { mapArray } from 'tempo-std/lib/arrays'
+import { map } from 'tempo-std/lib/arrays'
 
 const filterF = (filter: Filter) => {
   if (filter === Filter.All) {
@@ -111,7 +111,7 @@ export const reducer = (state: State, action: Action) => {
       }
     case 'toggle-all-todo':
       const allCompleted = state.completed === state.todos.length
-      const todos4 = mapArray(state.todos, todo => {
+      const todos4 = map(todo => {
         if (todo.completed !== allCompleted) {
           return todo
         } else {
@@ -120,7 +120,7 @@ export const reducer = (state: State, action: Action) => {
             completed: !allCompleted
           }
         }
-      })
+      }, state.todos)
       const filtered4 = filterTodos(todos4, state.filter)
       return {
         ...state,

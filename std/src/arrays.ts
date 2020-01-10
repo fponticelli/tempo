@@ -11,11 +11,19 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-export const mapArray = <A, B>(arr: A[], f: (a: A) => B): B[] => {
+export const map = <A, B>(f: (a: A) => B, arr: A[]): B[] => {
   const length = arr.length
   const buff = new Array(length)
   for (let i = 0; i < length; i++) {
     buff[i] = f(arr[i])
+  }
+  return buff
+}
+
+export const flatMap = <A, B>(f: (a: A) => B[], arr: A[]): B[] => {
+  const buff = new Array()
+  for (const el of arr) {
+    buff.push(...f(el))
   }
   return buff
 }

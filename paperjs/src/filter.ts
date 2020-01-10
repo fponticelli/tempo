@@ -14,7 +14,7 @@ limitations under the License.
 import { PaperTemplate } from './template'
 import { View } from 'tempo-core/lib/view'
 import { PaperContext } from './context'
-import { mapArray } from 'tempo-std/lib/arrays'
+import { map } from 'tempo-std/lib/arrays'
 
 export class FilterStateTemplate<State, Action, Query>
   implements PaperTemplate<State, Action, Query> {
@@ -25,7 +25,7 @@ export class FilterStateTemplate<State, Action, Query>
 
   render(ctx: PaperContext<Action>, state: State): View<State, Query> {
     const { children, isSame: filter } = this
-    const views = mapArray(children, c => c.render(ctx, state))
+    const views = map(c => c.render(ctx, state), children)
 
     let prevState = state
     return {

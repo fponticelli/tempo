@@ -132,11 +132,19 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.mapArray = function (arr, f) {
+exports.map = function (f, arr) {
     var length = arr.length;
     var buff = new Array(length);
     for (var i = 0; i < length; i++) {
         buff[i] = f(arr[i]);
+    }
+    return buff;
+};
+exports.flatMap = function (f, arr) {
+    var buff = new Array();
+    for (var _i = 0, arr_1 = arr; _i < arr_1.length; _i++) {
+        var el = arr_1[_i];
+        buff.push.apply(buff, f(el));
     }
     return buff;
 };
@@ -195,7 +203,7 @@ function setStyleAttribute(el, name, value) {
         setAttribute(el, name, value);
     }
     else {
-        var s = arrays_1.mapArray(Object.keys(value), function (k) { return k + ": " + value[k] + ";"; }).join(' ');
+        var s = arrays_1.map(function (k) { return k + ": " + value[k] + ";"; }, Object.keys(value)).join(' ');
         setAttribute(el, name, (s.length && s) || null);
     }
 }
@@ -567,12 +575,12 @@ var DOMElement = /** @class */ (function () {
         // children
         var appendChild = function (n) { return el.appendChild(n); };
         var newCtx = ctx.withAppend(appendChild).withParent(el);
-        var views = arrays_1.mapArray(this.children, function (child) { return child.render(newCtx, state); });
+        var views = arrays_1.map(function (child) { return child.render(newCtx, state); }, this.children);
         ctx.append(el);
         if (this.afterrender) {
             value = applyAfterRender(this.afterrender, el, ctx, state);
         }
-        var viewChanges = arrays_1.mapArray(views, function (child) { return function (state) { return child.change(state); }; });
+        var viewChanges = arrays_1.map(function (child) { return function (state) { return child.change(state); }; }, views);
         allChanges.push.apply(allChanges, viewChanges);
         if (this.beforechange) {
             var change_1 = applyChange(this.beforechange, el, ctx);
@@ -617,29 +625,29 @@ var DOMElement = /** @class */ (function () {
 }());
 exports.DOMElement = DOMElement;
 function extractAttrs(attrs) {
-    return arrays_1.mapArray(Object.keys(attrs || {}), function (attName) {
+    return arrays_1.map(function (attName) {
         var name = attName.toLowerCase();
         name = dom_attributes_mapper_1.attributeNameMap[name] || name;
         return {
             name: name,
             value: attrs[attName]
         };
-    });
+    }, Object.keys(attrs || {}));
 }
 function extractEvents(attrs) {
-    return arrays_1.mapArray(Object.keys(attrs || {}), function (eventName) {
+    return arrays_1.map(function (eventName) {
         var name = "on" + eventName.toLowerCase();
         return {
             name: name,
             value: attrs[eventName]
         };
-    });
+    }, Object.keys(attrs || {}));
 }
 function extractStyles(attrs) {
-    return arrays_1.mapArray(Object.keys(attrs || {}), function (name) { return ({
+    return arrays_1.map(function (name) { return ({
         name: name,
         value: attrs[name]
-    }); });
+    }); }, Object.keys(attrs || {}));
 }
 var makeCreateElement = function (name) { return function (doc) { return doc.createElement(name); }; };
 exports.el = function (name, attributes) {
@@ -647,14 +655,14 @@ exports.el = function (name, attributes) {
     for (var _i = 2; _i < arguments.length; _i++) {
         children[_i - 2] = arguments[_i];
     }
-    return new DOMElement(makeCreateElement(name), extractAttrs(attributes.attrs), extractEvents(attributes.events), extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, attributes.respond, arrays_1.mapArray(children, dom_1.domChildToTemplate));
+    return new DOMElement(makeCreateElement(name), extractAttrs(attributes.attrs), extractEvents(attributes.events), extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, attributes.respond, arrays_1.map(dom_1.domChildToTemplate, children));
 };
 exports.el2 = function (name) { return function (attributes) {
     var children = [];
     for (var _i = 1; _i < arguments.length; _i++) {
         children[_i - 1] = arguments[_i];
     }
-    return new DOMElement(makeCreateElement(name), extractAttrs(attributes.attrs), extractEvents(attributes.events), extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, attributes.respond, arrays_1.mapArray(children, dom_1.domChildToTemplate));
+    return new DOMElement(makeCreateElement(name), extractAttrs(attributes.attrs), extractEvents(attributes.events), extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, attributes.respond, arrays_1.map(dom_1.domChildToTemplate, children));
 }; };
 exports.defaultNamespaces = {
     'svg': 'http://www.w3.org/2000/svg'
@@ -668,14 +676,14 @@ exports.elNS = function (ns, name, attributes) {
         children[_i - 3] = arguments[_i];
     }
     var namespace = exports.defaultNamespaces[ns] || ns;
-    return new DOMElement(makeCreateElementNS(namespace, name), extractAttrs(attributes.attrs), extractEvents(attributes.events), extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, attributes.respond, arrays_1.mapArray(children, dom_1.domChildToTemplate));
+    return new DOMElement(makeCreateElementNS(namespace, name), extractAttrs(attributes.attrs), extractEvents(attributes.events), extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, attributes.respond, arrays_1.map(dom_1.domChildToTemplate, children));
 };
 exports.elNS2 = function (namespace, name) { return function (attributes) {
     var children = [];
     for (var _i = 1; _i < arguments.length; _i++) {
         children[_i - 1] = arguments[_i];
     }
-    return new DOMElement(makeCreateElementNS(namespace, name), extractAttrs(attributes.attrs), extractEvents(attributes.events), extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, attributes.respond, arrays_1.mapArray(children, dom_1.domChildToTemplate));
+    return new DOMElement(makeCreateElementNS(namespace, name), extractAttrs(attributes.attrs), extractEvents(attributes.events), extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, attributes.respond, arrays_1.map(dom_1.domChildToTemplate, children));
 }; };
 
 },{"./utils/dom":"TnZD","tempo-std/lib/arrays":"LAOm","./dom_attributes_mapper":"UKQ2"}],"zQMt":[function(require,module,exports) {
@@ -861,7 +869,7 @@ var DOMUntilTemplate = /** @class */ (function () {
                     }
                     else {
                         // add node
-                        childrenViews.push(arrays_1.mapArray(children, function (el) { return el.render(newCtx, value); }));
+                        childrenViews.push(arrays_1.map(function (el) { return el.render(newCtx, value); }, children));
                     }
                     index++;
                 };
@@ -913,7 +921,7 @@ exports.until = function (options) {
     for (var _i = 1; _i < arguments.length; _i++) {
         children[_i - 1] = arguments[_i];
     }
-    return new DOMUntilTemplate(options, arrays_1.mapArray(children, dom_1.domChildToTemplate));
+    return new DOMUntilTemplate(options, arrays_1.map(dom_1.domChildToTemplate, children));
 };
 
 },{"./utils/dom":"TnZD","tempo-std/lib/arrays":"LAOm"}],"kxUV":[function(require,module,exports) {

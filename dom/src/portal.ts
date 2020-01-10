@@ -14,7 +14,7 @@ limitations under the License.
 import { DOMTemplate, DOMChild } from './template'
 import { DOMContext } from './context'
 import { domChildToTemplate } from './utils/dom'
-import { mapArray } from 'tempo-std/lib/arrays'
+import { map } from 'tempo-std/lib/arrays'
 
 export class DOMPortalTemplate<State, Action, Query> implements DOMTemplate<State, Action, Query> {
   constructor(
@@ -27,7 +27,7 @@ export class DOMPortalTemplate<State, Action, Query> implements DOMTemplate<Stat
     const append = (node: Node) => this.append(ctx.doc, node)
     const parent = this.getParent(ctx.doc)
     const newCtx = ctx.withAppend(append).withParent(parent)
-    const views = mapArray(this.children, child => child.render(newCtx, state))
+    const views = map(child => child.render(newCtx, state), this.children)
     return {
       change: (state: State) => {
         for (const view of views) view.change(state)
@@ -49,7 +49,7 @@ export const portal = <State, Action, Query = unknown>(
   },
   ...children: DOMChild<State, Action, Query>[]
 ): DOMTemplate<State, Action, Query> =>
-  new DOMPortalTemplate<State, Action, Query>(options.getParent, options.append, mapArray(children, domChildToTemplate))
+  new DOMPortalTemplate<State, Action, Query>(options.getParent, options.append, map(domChildToTemplate, children))
 
 export const portalWithSelector = <State, Action, Query = unknown>(
   options: { selector: string },
@@ -79,7 +79,7 @@ export const headPortal = <State, Action, Query = unknown>(...children: DOMChild
   new DOMPortalTemplate<State, Action, Query>(
     (doc: Document) => doc.head!,
     (doc: Document, node: Node) => doc.head!.appendChild(node),
-    mapArray(children, domChildToTemplate)
+    map(domChildToTemplate, children)
   )
 
 export const bodyPortal = <State, Action, Query = unknown>(...children: DOMChild<State, Action, Query>[])
@@ -87,5 +87,5 @@ export const bodyPortal = <State, Action, Query = unknown>(...children: DOMChild
   new DOMPortalTemplate<State, Action, Query>(
     (doc: Document) => doc.body,
     (doc: Document, node: Node) => doc.body.appendChild(node),
-    mapArray(children, domChildToTemplate)
+    map(domChildToTemplate, children)
   )
