@@ -1,6 +1,6 @@
 /*
 Copyright 2019 Google LLC
-Licensed under the Apache License, Version 2.0 (the "License");
+Licensed under the Apache License, Version 2.0 (the "License")
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
     https://www.apache.org/licenses/LICENSE-2.0
@@ -14,6 +14,7 @@ limitations under the License.
 import { Maybe } from './maybe'
 import { map as mapArray } from './arrays'
 import { Fun2, Fun3, Fun4, Fun5, Fun6 } from './types'
+import { Result, failure, success } from './result'
 
 export type Some<T> = { kind: 'some', value: T }
 export type None = { kind: 'none' }
@@ -29,6 +30,28 @@ export const ofValue = <T>(value: T | undefined | null): Option<T> => {
     return none
   else
     return some(value)
+}
+
+export const ap = <A, B>(optf: Option<(a: A) => B>, opt: Option<A>): Option<B> =>
+  flatten(map(f => map(v => f(v), opt), optf))
+export function apN<A, B, C>(f: Option<Fun2<A, B, C>>, a: Option<A>, b: Option<B>): Option<C>
+export function apN<A, B, C, D>(f: Option<Fun3<A, B, C, D>>, a: Option<A>, b: Option<B>, c: Option<C>): Option<D>
+export function apN<A, B, C, D, E>(
+  f: Option<Fun4<A, B, C, D, E>>,
+  a: Option<A>, b: Option<B>, c: Option<C>, d: Option<D>): Option<E>
+export function apN<A, B, C, D, E, F>(
+  f: Option<Fun5<A, B, C, D, E, F>>,
+  a: Option<A>, b: Option<B>, c: Option<C>, d: Option<D>, e: Option<E>): Option<F>
+export function apN<A, B, C, D, E, F, G>(
+  f: Option<Fun6<A, B, C, D, E, F, G>>,
+  a: Option<A>, b: Option<B>, c: Option<C>, d: Option<D>, e: Option<E>, g: Option<F>): Option<G>
+export function apN<Args extends any[], Ret>(f: Option<(...args: Args) => Ret>, ...args: Option<any>[]): Option<Ret> {
+  if (f.kind === 'none')
+    return none
+  for (const a of args)
+    if (a.kind === 'none') return none
+  const results = mapArray(a => a.value, args as { kind: 'some', value: any }[])
+  return some(f.value(...results as Args))
 }
 
 export const map = <A, B>(f: (a: A) => B, opt: Option<A>): Option<B> => {
@@ -49,7 +72,7 @@ export function mapN<A, B, C, D, E, F>(
 export function mapN<A, B, C, D, E, F, G>(
   f: Fun6<A, B, C, D, E, F, G>,
   a: Option<A>, b: Option<B>, c: Option<C>, d: Option<D>, e: Option<E>, g: Option<F>): Option<G>
-export function mapN<Args extends any[], Ret>(f: (...functions: Args) => Ret, ...args: Option<any>[]): Option<Ret> {
+export function mapN<Args extends any[], Ret>(f: (...args: Args) => Ret, ...args: Option<any>[]): Option<Ret> {
   for (const a of args)
     if (a.kind === 'none') return none
   const results = mapArray(a => a.value, args as { kind: 'some', value: any }[])
@@ -72,7 +95,7 @@ export function flatMapN<A, B, C, D, E, F>(
 export function flatMapN<A, B, C, D, E, F, G>(
   f: Fun6<A, B, C, D, E, F, Option<G>>,
   a: Option<A>, b: Option<B>, c: Option<C>, d: Option<D>, e: Option<E>, g: Option<F>): Option<G>
-export function flatMapN<Args extends any[], Ret>(f: (...functions: Args) => Option<Ret>, ...args: Option<any>[]): Option<Ret> {
+export function flatMapN<Args extends any[], Ret>(f: (...args: Args) => Option<Ret>, ...args: Option<any>[]): Option<Ret> {
   for (const a of args)
     if (a.kind === 'none') return none
   const results = mapArray(a => a.value, args as { kind: 'some', value: any }[])
@@ -90,6 +113,25 @@ export const equals = <T>(predicate: (a: T, b: T) => boolean, a: Option<T>, b: O
 
 export const isNone = <T>(option: Option<T>): option is None => option.kind === 'none'
 export const isSome = <T>(option: Option<T>): option is Some<T> => option.kind === 'some'
+
+export const filter = <T>(predicate: (v: T) => boolean, option: Option<T>): Option<T> => {
+  switch (option.kind) {
+    case 'none': return none
+    case 'some':
+      if (predicate(option.value)) {
+        return option
+      } else {
+        return none
+      }
+  }
+}
+
+export const getOrThrow = <T, E>(option: Option<T>, exception: E): Maybe<T> => {
+  switch (option.kind) {
+    case 'none': throw exception
+    case 'some': return option.value
+  }
+}
 
 export const getMaybe = <T>(option: Option<T>): Maybe<T> => {
   switch (option.kind) {
@@ -112,50 +154,102 @@ export const getOrElseLazy = <T>(option: Option<T>, alt: () => T): T => {
   }
 }
 
-// export const getOrThrow
-// export const apply
-// export const recover
-// export const flatten/join/collapse
-// export const cata<A, B>(option: Option<A>, ifNone: B, f: A -> B): B
-// export const cataLazy<A, B>(option: Option<A>, ifNone: () => B, f: A -> B): B
-// foldLeft<T, B>(option: Option<T>, b: B, f: B -> T -> B): B
-// foldLeftLazy<T, B>(option: Option<T>, b: B, f: B -> T -> B): B
-// Lazy<T> ... LazyOrNot<T>
-// public static function foldMap<A, B>(option: Option<A>, f: A -> B, m: Monoid<B>): B
-//   return foldLeft(map(option, f), m.zero, m.append);
-// filter
-// toArray
-// toBool
-// toResult/toSuccess
-// toResultLazy/toSuccessLazy
-// toFailure
-// toFailureLazy
-// orElse<T>(option : Option<T>, alt : Option<T>) : Option<T>
-// orElseLazy<T>(option : Option<T>, alt : () => Option<T>) : Option<T>
-// public static function all<T>(option: Option<T>, f: T -> Bool): Bool
-// return switch option {
-//   case None: true;
-//   case Some(v): f(v);
-// };
-// each
+export const toBoolean = (option: Option<unknown>) => {
+  switch (option.kind) {
+    case 'none': return false
+    case 'some': return true
+  }
+}
 
-// public static function any<T>(option: Option<T>, f: T -> Bool): Bool
-// return switch option {
-//   case None: false;
-//   case Some(v): f(v);
-// };
-// inline static public function alt2<A>(a : Option<A>, b : Option<A>) : Option<A> {
-//   return switch [a, b] {
-//     case [None, r] : r;
-//     case [l, _] : l;
-//   };
-// }
-// inline static public function combine<A, B>(a : Option<A>, b : Option<B>) : Option<Tuple2<A, B>>
-//   return ap2(Tuple2.of, a, b);
-// inline static public function spread<A, B, C>(v : Option<Tuple2<A, B>>, f : A -> B -> C) : Option<C>
-//   return map(v, function(t) {
-//     return f(t._0, t._1);
-//   });
-// Nel
+export const toArray = <T>(option: Option<T>): T[] => {
+  switch (option.kind) {
+    case 'none': return []
+    case 'some': return [option.value]
+  }
+}
+
+export const toResult = <T, E>(option: Option<T>, error: E): Result<T, E> => {
+  switch (option.kind) {
+    case 'none': return failure(error)
+    case 'some': return success(option.value)
+  }
+}
+
+export const toResultLazy = <T, E>(option: Option<T>, errorf: () => E): Result<T, E> => {
+  switch (option.kind) {
+    case 'none': return failure(errorf())
+    case 'some': return success(option.value)
+  }
+}
+
+export const flatten = <T>(option: Option<Option<T>>): Option<T> => {
+  switch (option.kind) {
+    case 'none': return none
+    case 'some': return option.value
+  }
+}
+
+export const cata = <A, B>(f: (a: A) => B, option: Option<A>, ifNone: B): B => {
+  switch (option.kind) {
+    case 'none': return ifNone
+    case 'some': return f(option.value)
+  }
+}
+
+export const cataLazy = <A, B>(f: (a: A) => B, option: Option<A>, ifNone: () => B): B => {
+  switch (option.kind) {
+    case 'none': return ifNone()
+    case 'some': return f(option.value)
+  }
+}
+
+export const foldLeft = <T, B>(f: (acc: B, curr: T) => B, option: Option<T>, b: B): B => {
+  switch (option.kind) {
+    case 'none': return b
+    case 'some': return f(b, option.value)
+  }
+}
+
+export const all = <T>(f: (v: T) => boolean, option: Option<T>): boolean => {
+  switch (option.kind) {
+    case 'none': return true
+    case 'some': return f(option.value)
+  }
+}
+
+export const any = <T>(f: (v: T) => boolean, option: Option<T>): boolean => {
+  switch (option.kind) {
+    case 'none': return false
+    case 'some': return f(option.value)
+  }
+}
+
+export const each = <T>(f: (v: T) => void, option: Option<T>): void => {
+  switch (option.kind) {
+    case 'none': return
+    case 'some': return f(option.value)
+  }
+}
+
+export const firstSome = <A>(...args : Option<A>[]): Option<A> => {
+  for (const a of args) {
+    if (isSome(a))
+      return a
+  }
+  return none
+}
+
+export const recover = <T>(f: (v: T) => boolean, option: Option<T>): boolean => {
+  switch (option.kind) {
+    case 'none': return false
+    case 'some': return f(option.value)
+  }
+}
+
+export const combine = <A, B>(a : Option<A>, b : Option<B>): Option<[A, B]> =>
+  mapN((a, b) => [a, b], a, b)
+
+export const spread = <A, B, C>(f : (a: A, b: B) => C, v: Option<[A, B]>): Option<C> =>
+  map((t) => f(t[0], t[1]), v)
 
 export type T<V> = Option<V>

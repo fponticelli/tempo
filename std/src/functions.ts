@@ -12,10 +12,4 @@ export function compose<Args extends Fun1<any, any>[]>(...args: Args) {
   return (a: FirstArgument<Args[0]>) => args.reduce((acc, f) => f(acc), a)
 }
 
-const f = compose(
-  (a: number) => `${a}`,
-  (b: string) => b === '1',
-  (c: boolean) => c ? 1 : 0
-)
-
-console.log(f(1))
+export const identity = <T>(v: T) => v
