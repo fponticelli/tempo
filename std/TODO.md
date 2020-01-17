@@ -1,8 +1,6 @@
 # Types to be implements
 
-* `NewType`
 * `Async`
-* `Nel`
 
 * `LocalDate`
 * `LocalMonthDay`
