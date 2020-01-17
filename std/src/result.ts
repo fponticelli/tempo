@@ -33,8 +33,8 @@ export const ofNullable = <T, E>(value: T | undefined | null, error: E): Result<
     return success(value)
 }
 
-export const ap = <A, B, Err>(optf: Result<(a: A) => B, Err>, opt: Result<A, Err>): Result<B, Err> =>
-  flatten(map(f => map(v => f(v), opt), optf))
+export const ap = <A, B, Err>(resultf: Result<(a: A) => B, Err>, result: Result<A, Err>): Result<B, Err> =>
+  flatten(map(f => map(v => f(v), result), resultf))
 export function apN<A, B, C, Err>(f: Result<Fun2<A, B, C>, Err>, a: Result<A, Err>, b: Result<B, Err>): Result<C, Err>
 export function apN<A, B, C, D, Err>(
   f: Result<Fun3<A, B, C, D>, Err>,
@@ -100,10 +100,17 @@ export function apNWithCombine<Args extends any[], Err, Ret>(
   }
 }
 
-export const map = <A, B, Err>(f: (a: A) => B, opt: Result<A, Err>): Result<B, Err> => {
-  switch (opt.kind) {
-    case 'failure': return opt
-    case 'success': return success(f(opt.value))
+export const map = <A, B, Err>(f: (a: A) => B, result: Result<A, Err>): Result<B, Err> => {
+  switch (result.kind) {
+    case 'failure': return result
+    case 'success': return success(f(result.value))
+  }
+}
+
+export const mapError = <A, E1, E2>(f: (e: E1) => E2, result: Result<A, E1>): Result<A, E2> => {
+  switch (result.kind) {
+    case 'failure': return failure(f(result.error))
+    case 'success': return success(result.value)
   }
 }
 
@@ -169,10 +176,10 @@ export function mapNWithCombine<Args extends any[], Err, Ret>(
   }
 }
 
-export const flatMap = <A, B, Err>(f: (a: A) => Result<B, Err>, opt: Result<A, Err>): Result<B, Err> => {
-  switch (opt.kind) {
-    case 'failure': return opt
-    case 'success': return f(opt.value)
+export const flatMap = <A, B, Err>(f: (a: A) => Result<B, Err>, result: Result<A, Err>): Result<B, Err> => {
+  switch (result.kind) {
+    case 'failure': return result
+    case 'success': return f(result.value)
   }
 }
 
@@ -399,9 +406,9 @@ export const recover = <T, E>(result: Result<T, E>, whenFailure: T) => {
   }
 }
 
-export const recoverLazy = <T, E>(result: Result<T, E>, whenFailuref: () => T) => {
+export const recoverFromError = <T, E>(result: Result<T, E>, whenFailuref: (e: E) => T) => {
   switch (result.kind) {
-    case 'failure': return success(whenFailuref())
+    case 'failure': return success(whenFailuref(result.error))
     case 'success': return result
   }
 }

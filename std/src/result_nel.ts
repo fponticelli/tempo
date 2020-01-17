@@ -1,0 +1,140 @@
+/*
+Copyright 2019 Google LLC
+Licensed under the Apache License, Version 2.0 (the "License")
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+    https://www.apache.org/licenses/LICENSE-2.0
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+
+import { Fun2, Fun3, Fun4, Fun5, Fun6 } from './types'
+import * as Res from './result'
+import { Nel, ofValue, concat, map } from './nel'
+
+export type ResultNel<T, E> = Res.T<T, Nel<E>>
+
+export const success = <T, E>(value: T): ResultNel<T, E> => ({ kind: 'success', value })
+export const failure = <T, E>(error: E): ResultNel<T, E> => ({ kind: 'failure', error: ofValue(error) })
+export const failures = <T, E>(errors: Nel<E>): ResultNel<T, E> => ({ kind: 'failure', error: errors })
+
+export const ofNullable = <T, E>(value: T | undefined | null, error: E): ResultNel<T, E> =>
+  Res.ofNullable(value, ofValue(error))
+
+export function apN<A, B, C, Err>(f: ResultNel<Fun2<A, B, C>, Err>, a: ResultNel<A, Err>, b: ResultNel<B, Err>): ResultNel<C, Err>
+export function apN<A, B, C, D, Err>(
+  f: ResultNel<Fun3<A, B, C, D>, Err>,
+  a: ResultNel<A, Err>, b: ResultNel<B, Err>, c: ResultNel<C, Err>): ResultNel<D, Err>
+export function apN<A, B, C, D, E, Err>(
+  f: ResultNel<Fun4<A, B, C, D, E>, Err>,
+  a: ResultNel<A, Err>, b: ResultNel<B, Err>, c: ResultNel<C, Err>, d: ResultNel<D, Err>): ResultNel<E, Err>
+export function apN<A, B, C, D, E, F, Err>(
+  f: ResultNel<Fun5<A, B, C, D, E, F>, Err>,
+  a: ResultNel<A, Err>, b: ResultNel<B, Err>, c: ResultNel<C, Err>, d: ResultNel<D, Err>, e: ResultNel<E, Err>): ResultNel<F, Err>
+export function apN<A, B, C, D, E, F, G, Err>(
+  f: ResultNel<Fun6<A, B, C, D, E, F, G>, Err>,
+  a: ResultNel<A, Err>, b: ResultNel<B, Err>, c: ResultNel<C, Err>, d: ResultNel<D, Err>, e: ResultNel<E, Err>, g: ResultNel<F, Err>): ResultNel<G, Err>
+export function apN<Args extends any[], Err, Ret>(f: ResultNel<(...args: Args) => Ret, Err>, ...args: ResultNel<any, Err>[]): ResultNel<Ret, Err> {
+  return (Res.apNWithCombine as Function)(f, concat, ...args)
+}
+
+export const mapError = <A, E1, E2>(f: (e: E1) => E2, result: ResultNel<A, E1>): ResultNel<A, E2> => {
+  switch (result.kind) {
+    case 'failure': return failures(map(f, result.error))
+    case 'success': return success(result.value)
+  }
+}
+
+export function mapN<A, B, C, Err>(f: Fun2<A, B, C>, a: ResultNel<A, Err>, b: ResultNel<B, Err>): ResultNel<C, Err>
+export function mapN<A, B, C, D, Err>(f: Fun3<A, B, C, D>, a: ResultNel<A, Err>, b: ResultNel<B, Err>, c: ResultNel<C, Err>): ResultNel<D, Err>
+export function mapN<A, B, C, D, E, Err>(
+  f: Fun4<A, B, C, D, E>,
+  a: ResultNel<A, Err>, b: ResultNel<B, Err>, c: ResultNel<C, Err>, d: ResultNel<D, Err>): ResultNel<E, Err>
+export function mapN<A, B, C, D, E, F, Err>(
+  f: Fun5<A, B, C, D, E, F>,
+  a: ResultNel<A, Err>, b: ResultNel<B, Err>, c: ResultNel<C, Err>, d: ResultNel<D, Err>, e: ResultNel<E, Err>): ResultNel<F, Err>
+export function mapN<A, B, C, D, E, F, G, Err>(
+  f: Fun6<A, B, C, D, E, F, G>,
+  a: ResultNel<A, Err>, b: ResultNel<B, Err>, c: ResultNel<C, Err>, d: ResultNel<D, Err>, e: ResultNel<E, Err>, g: ResultNel<F, Err>): ResultNel<G, Err>
+export function mapN<Args extends any[], Err, Ret>(f: (...args: Args) => Ret, ...args: ResultNel<any, Err>[]): ResultNel<Ret, Err> {
+  return (Res.mapNWithCombine as Function)(f, concat, ...args)
+}
+
+export function flatMapN<A, B, C, Err>(
+  f: Fun2<A, B, ResultNel<C, Err>>,
+  a: ResultNel<A, Err>, b: ResultNel<B, Err>): ResultNel<C, Err>
+export function flatMapN<A, B, C, D, Err>(
+  f: Fun3<A, B, C, ResultNel<D, Err>>,
+  a: ResultNel<A, Err>, b: ResultNel<B, Err>, c: ResultNel<C, Err>): ResultNel<D, Err>
+export function flatMapN<A, B, C, D, E, Err>(
+  f: Fun4<A, B, C, D, ResultNel<E, Err>>,
+  a: ResultNel<A, Err>, b: ResultNel<B, Err>, c: ResultNel<C, Err>, d: ResultNel<D, Err>): ResultNel<E, Err>
+export function flatMapN<A, B, C, D, E, F, Err>(
+  f: Fun5<A, B, C, D, E, ResultNel<F, Err>>,
+  a: ResultNel<A, Err>, b: ResultNel<B, Err>, c: ResultNel<C, Err>, d: ResultNel<D, Err>, e: ResultNel<E, Err>): ResultNel<F, Err>
+export function flatMapN<A, B, C, D, E, F, G, Err>(
+  f: Fun6<A, B, C, D, E, F, ResultNel<G, Err>>,
+  a: ResultNel<A, Err>, b: ResultNel<B, Err>, c: ResultNel<C, Err>, d: ResultNel<D, Err>, e: ResultNel<E, Err>, g: ResultNel<F, Err>): ResultNel<G, Err>
+export function flatMapN<Args extends any[], Err, Ret>(
+  f: (...args: Args) => ResultNel<Ret, Err>,
+  ...args: ResultNel<any, Err>[]
+): ResultNel<Ret, Err> {
+  return (Res.flatMapNWithCombine as Function)(f, concat, ...args)
+}
+
+export const filter = <T, E>(predicate: (v: T) => boolean, error: E, result: ResultNel<T, E>): ResultNel<T, E> => {
+  switch (result.kind) {
+    case 'failure': return result
+    case 'success':
+      if (predicate(result.value)) {
+        return result
+      } else {
+        return failure(error)
+      }
+  }
+}
+
+export const filterLazy = <T, E>(predicate: (v: T) => boolean, errorf: () => E, result: ResultNel<T, E>): ResultNel<T, E> => {
+  switch (result.kind) {
+    case 'failure': return result
+    case 'success':
+      if (predicate(result.value)) {
+        return result
+      } else {
+        return failure(errorf())
+      }
+  }
+}
+
+export const flatten = <T, E>(result: ResultNel<ResultNel<T, E>, E>): ResultNel<T, E> => {
+  switch (result.kind) {
+    case 'failure': return failures(result.error)
+    case 'success': return result.value
+  }
+}
+
+export const recover = <T, E>(result: ResultNel<T, E>, whenFailure: T) => {
+  switch (result.kind) {
+    case 'failure': return success(whenFailure)
+    case 'success': return result
+  }
+}
+
+export const recoverFromError = <T, E>(result: ResultNel<T, E>, whenFailuref: (e: Nel<E>) => T) => {
+  switch (result.kind) {
+    case 'failure': return success(whenFailuref(result.error))
+    case 'success': return result
+  }
+}
+
+export const swap = <T, E>(result: ResultNel<T, E>): Res.T<Nel<E>, T> => {
+  switch (result.kind) {
+    case 'failure': return Res.success(result.error)
+    case 'success': return Res.failure(result.value)
+  }
+}
+
+export type T<V, E> = ResultNel<V, E>

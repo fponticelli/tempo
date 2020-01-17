@@ -18,7 +18,7 @@ import {
   map, failure, success, isFailure, isSuccess, toMaybe, toOption,
   mapNWithCombine, flatMapNWithCombine,
   mapN, flatMap, flatMapN, getOrElse, getOrElseLazy, filter, filterLazy, combine,
-  recover, recoverLazy, spread, swap,
+  recover, recoverFromError, spread, swap,
   toArray, toBoolean, flatten, firstSuccess, any, each, foldLeft
 } from '../src/result'
 import { none, some } from '../src/option'
@@ -204,9 +204,9 @@ describe('Option', () => {
     expect(recover(failure('x'), 1)).toEqual(success(1))
     expect(recover(success(1), 2)).toEqual(success(1))
   })
-  it('recoverLazy should work', () => {
-    expect(recoverLazy(failure('x'), () => 1)).toEqual(success(1))
-    expect(recoverLazy(success(1), () => 2)).toEqual(success(1))
+  it('recoverFromError should work', () => {
+    expect(recoverFromError(failure('x'), (_) => 1)).toEqual(success(1))
+    expect(recoverFromError(success(1), (_) => 2)).toEqual(success(1))
   })
   it('each should work', () => {
     let count = 0
