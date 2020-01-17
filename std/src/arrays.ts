@@ -14,7 +14,7 @@ limitations under the License.
 import { Maybe, nothing } from './maybe'
 import { Ordering } from './ord'
 
-export const map = <A, B>(f: (a: A) => B, arr: ReadonlyArray<A>): ReadonlyArray<B> => {
+export const map = <A, B>(f: (a: A) => B, arr: A[]): B[] => {
   const length = arr.length
   const buff = new Array(length)
   for (let i = 0; i < length; i++) {
@@ -23,7 +23,7 @@ export const map = <A, B>(f: (a: A) => B, arr: ReadonlyArray<A>): ReadonlyArray<
   return buff
 }
 
-export const flatMap = <A, B>(f: (a: A) => ReadonlyArray<B>, arr: ReadonlyArray<A>): ReadonlyArray<B> => {
+export const flatMap = <A, B>(f: (a: A) => B[], arr: A[]): B[] => {
   const buff = new Array()
   for (const el of arr) {
     buff.push(...f(el))
@@ -31,10 +31,10 @@ export const flatMap = <A, B>(f: (a: A) => ReadonlyArray<B>, arr: ReadonlyArray<
   return buff
 }
 
-export const head = <A>(arr: ReadonlyArray<A>): Maybe<A> => arr.length > 0 ? arr[0] : nothing
-export const tail = <A>(arr: ReadonlyArray<A>): ReadonlyArray<A> => arr.slice(1)
+export const head = <A>(arr: A[]): Maybe<A> => arr.length > 0 ? arr[0] : nothing
+export const tail = <A>(arr: A[]): A[] => arr.slice(1)
 
-export const equals = <T>(predicate: (a: T, b: T) => boolean, a: ReadonlyArray<T>, b: ReadonlyArray<T>): boolean => {
+export const equals = <T>(predicate: (a: T, b: T) => boolean, a: T[], b: T[]): boolean => {
   if (a.length !== b.length)
     return false
   else {
@@ -45,10 +45,10 @@ export const equals = <T>(predicate: (a: T, b: T) => boolean, a: ReadonlyArray<T
   }
 }
 
-export const isEmpty = <T>(arr: ReadonlyArray<T>): arr is [] => arr.length === 0
-export const hasValues = <T>(arr: ReadonlyArray<T>): arr is [T, ...T[]] => arr.length > 0
+export const isEmpty = <T>(arr: T[]): arr is [] => arr.length === 0
+export const hasValues = <T>(arr: T[]): arr is [T, ...T[]] => arr.length > 0
 
-export const filter = <T>(predicate: (v: T) => boolean, arr: ReadonlyArray<T>): ReadonlyArray<T> => {
+export const filter = <T>(predicate: (v: T) => boolean, arr: T[]): T[] => {
   const buff = [] as T[]
   for (const a of arr)
     if (predicate(a))
@@ -56,18 +56,18 @@ export const filter = <T>(predicate: (v: T) => boolean, arr: ReadonlyArray<T>): 
   return buff
 }
 
-export const flatten = <T>(arr: ReadonlyArray<ReadonlyArray<T>>): ReadonlyArray<T> => {
-  return ([] as ReadonlyArray<T>).concat(...arr)
+export const flatten = <T>(arr: T[][]): T[] => {
+  return ([] as T[]).concat(...arr)
 }
 
-export const foldLeft = <T, B>(f: (acc: B, curr: T) => B, arr: ReadonlyArray<T>, b: B): B => {
+export const foldLeft = <T, B>(f: (acc: B, curr: T) => B, arr: T[], b: B): B => {
   for (const a of arr) {
     b = f(b, a)
   }
   return b
 }
 
-export const all = <T>(predicate: (v: T) => boolean, arr: ReadonlyArray<T>): boolean => {
+export const all = <T>(predicate: (v: T) => boolean, arr: T[]): boolean => {
   for (const a of arr) {
     if (!predicate(a)) {
       return false
@@ -76,7 +76,7 @@ export const all = <T>(predicate: (v: T) => boolean, arr: ReadonlyArray<T>): boo
   return true
 }
 
-export const any = <T>(predicate: (v: T) => boolean, arr: ReadonlyArray<T>): boolean => {
+export const any = <T>(predicate: (v: T) => boolean, arr: T[]): boolean => {
   for (const a of arr) {
     if (predicate(a)) {
       return true
@@ -85,13 +85,13 @@ export const any = <T>(predicate: (v: T) => boolean, arr: ReadonlyArray<T>): boo
   return false
 }
 
-export const each = <T>(f: (v: T) => void, arr: ReadonlyArray<T>): void => {
+export const each = <T>(f: (v: T) => void, arr: T[]): void => {
   for (const a of arr)
     f(a)
 }
 
-export const concat = <A>(...arrs: ReadonlyArray<A>[]): ReadonlyArray<A> =>
-  ([] as ReadonlyArray<A>).concat(...arrs)
+export const concat = <A>(...arrs: A[][]): A[] =>
+  ([] as A[]).concat(...arrs)
 
-export const sort = <A>(compare: (a: A, b: A) => Ordering, arr: ReadonlyArray<A>): ReadonlyArray<A> =>
+export const sort = <A>(compare: (a: A, b: A) => Ordering, arr: A[]): A[] =>
   arr.slice().sort(compare)

@@ -17,11 +17,11 @@ import { Ordering } from './ord'
 
 const nelSymbol = Symbol()
 
-export type Nel<T> = Newtype<ReadonlyArray<T>, typeof nelSymbol>
+export type Nel<T> = Newtype<T[], typeof nelSymbol>
 
-export const isValid = <T>(arr: ReadonlyArray<T>) => arr.length > 0
+export const isValid = <T>(arr: T[]) => arr.length > 0
 
-export const makeNel = <T>(arr: ReadonlyArray<T>) => makeWrap<Nel<T>>(isValid)(arr)
+export const makeNel = <T>(arr: T[]) => makeWrap<Nel<T>>(isValid)(arr)
 
 export const ofValue = <T>(value: T): Nel<T> => wrapUnsafe([value])
 
@@ -34,12 +34,12 @@ export const flatMap = <A, B>(f: (a: A) => Nel<B>, nel: Nel<A>): Nel<B> =>
   wrapUnsafe<Nel<B>>(Arr.flatMap(v => unwrap(f(v)), unwrap(nel)))!
 
 export const head = <A>(nel: Nel<A>): A => unwrap(nel)[0]
-export const tail = <A>(nel: Nel<A>): ReadonlyArray<A> => unwrap(nel).slice(1)
+export const tail = <A>(nel: Nel<A>): A[] => unwrap(nel).slice(1)
 
 export const equals = <T>(predicate: (a: T, b: T) => boolean, a: Nel<T>, b: Nel<T>): boolean =>
   Arr.equals(predicate, unwrap(a), unwrap(b))
 
-export const filter = <T>(predicate: (v: T) => boolean, nel: Nel<T>): ReadonlyArray<T> =>
+export const filter = <T>(predicate: (v: T) => boolean, nel: Nel<T>): T[] =>
   Arr.filter(predicate, unwrap(nel))
 
 export const flatten = <T>(nel: Nel<Nel<T>>): Nel<T> =>
