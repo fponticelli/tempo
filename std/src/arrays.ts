@@ -11,6 +11,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+import { Maybe, nothing } from './maybe'
+
 export const map = <A, B>(f: (a: A) => B, arr: A[]): B[] => {
   const length = arr.length
   const buff = new Array(length)
@@ -27,3 +29,6 @@ export const flatMap = <A, B>(f: (a: A) => B[], arr: A[]): B[] => {
   }
   return buff
 }
+
+export const head = <A>(arr: A[]): Maybe<A> => arr.length > 0 ? arr[0] : nothing
+export const tail = <A>(arr: A[]): A[] => arr.slice(1)

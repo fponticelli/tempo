@@ -11,4 +11,13 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-export type Maybe<T> = T | undefined | null
+export type Maybe<T> = Just<T> | Nothing
+
+export type Nothing = undefined | null
+export type Just<T> = T
+
+export const nothing: Maybe<never> = undefined
+export const just = <T>(value: T): Maybe<T> => value
+
+export const isNothing = <T>(maybe: Maybe<T>): maybe is Nothing => maybe == null
+export const isJust = <T>(maybe: Maybe<T>): maybe is Just<T> => maybe != null
