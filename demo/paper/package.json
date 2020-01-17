@@ -43,6 +43,7 @@
     "build": "npm run clean && npm run compile",
     "watch": "webpack --watch",
     "tslint": "tslint -p ./tslint.json",
+    "tslint-fix": "tslint -p ./tslint.json --fix",
     "prettier": "prettier -c src/**/*.ts",
     "prettier-fix": "prettier --write src/**/*.ts",
     "start": "webpack-dev-server --open"

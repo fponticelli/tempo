@@ -34,6 +34,7 @@
     "clean": "rm -f ../../docs/demo/benchmark/current/* && rm -f ../../docs/demo/benchmark/*.css && rm -f ../../docs/demo/benchmark/*.js* && rm -f ../../docs/demo/benchmark/*.html",
     "build": "npm run clean && npm run compile",
     "tslint": "tslint -p ./tslint.json",
+    "tslint-fix": "tslint -p ./tslint.json --fix",
     "prettier": "prettier -c src/**/*.ts",
     "prettier-fix": "prettier --write src/**/*.ts"
   }

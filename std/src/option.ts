@@ -232,7 +232,7 @@ export const each = <T>(f: (v: T) => void, option: Option<T>): void => {
   }
 }
 
-export const firstSome = <A>(...args : Option<A>[]): Option<A> => {
+export const firstSome = <A>(...args: Option<A>[]): Option<A> => {
   for (const a of args) {
     if (isSome(a))
       return a
@@ -240,10 +240,24 @@ export const firstSome = <A>(...args : Option<A>[]): Option<A> => {
   return none
 }
 
-export const combine = <A, B>(a : Option<A>, b : Option<B>): Option<[A, B]> =>
+export const recover = <T>(result: Option<T>, whenFailure: T) => {
+  switch (result.kind) {
+    case 'none': return some(whenFailure)
+    case 'some': return result
+  }
+}
+
+export const recoverLazy = <T>(result: Option<T>, whenFailuref: () => T) => {
+  switch (result.kind) {
+    case 'none': return some(whenFailuref())
+    case 'some': return result
+  }
+}
+
+export const combine = <A, B>(a: Option<A>, b: Option<B>): Option<[A, B]> =>
   mapN((a, b) => [a, b], a, b)
 
-export const spread = <A, B, C>(f : (a: A, b: B) => C, v: Option<[A, B]>): Option<C> =>
+export const spread = <A, B, C>(f: (a: A, b: B) => C, v: Option<[A, B]>): Option<C> =>
   map((t) => f(t[0], t[1]), v)
 
 export type T<V> = Option<V>

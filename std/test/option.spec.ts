@@ -19,7 +19,9 @@ import {
   mapN, flatMap, flatMapN, getOrElse, getOrElseLazy, filter, combine,
   spread,
   toArray, toBoolean, flatten, firstSome, any, each, foldLeft, toResult,
-  toResultLazy
+  toResultLazy,
+  recover,
+  recoverLazy
 } from '../src/option'
 import { success, failure } from '../src/result'
 
@@ -48,7 +50,9 @@ describe('Option', () => {
     expect(ap(none, some(2))).toEqual(none)
     expect(ap(none, none)).toEqual(none)
 
-    expect(apN(some((i: number, s: string, b: boolean): number => i * 3 + s.length + (b ? 1 : 0)), some(2), some('a'), some(true))).toEqual(some(8))
+    expect(apN(
+      some((i: number, s: string, b: boolean): number => i * 3 + s.length + (b ? 1 : 0)),
+      some(2), some('a'), some(true))).toEqual(some(8))
     expect(apN(some((i: number, s: string, b: boolean): number => i * 3 + s.length + (b ? 1 : 0)), some(2), some('a'), none)).toEqual(none)
     expect(apN(none, some(2), some('a'), some(true))).toEqual(none)
   })
@@ -151,6 +155,14 @@ describe('Option', () => {
   it('any should work', () => {
     expect(any(v => v === 1, none)).toBe(false)
     expect(any(v => v === 1, some(1))).toBe(true)
+  })
+  it('recover should work', () => {
+    expect(recover(none, 1)).toEqual(some(1))
+    expect(recover(some(1), 2)).toEqual(some(1))
+  })
+  it('recoverLazy should work', () => {
+    expect(recoverLazy(none, () => 1)).toEqual(some(1))
+    expect(recoverLazy(some(1), () => 2)).toEqual(some(1))
   })
   it('each should work', () => {
     let count = 0
