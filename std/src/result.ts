@@ -325,13 +325,6 @@ export const firstResult = <A, Err>(...args : Result<A, Err>[]): Result<A, Err> 
   throw 'cannot use `firstResult` with empty argument list'
 }
 
-export const recover = <T, E>(f: (v: T) => boolean, result: Result<T, E>): boolean => {
-  switch (result.kind) {
-    case 'failure': return false
-    case 'success': return f(result.value)
-  }
-}
-
 export const swap = <T, E>(result: Result<T, E>): Result<E, T> => {
   switch (result.kind) {
     case 'failure': return success(result.error)

@@ -34,6 +34,7 @@ export const ofValue = <T>(value: T | undefined | null): Option<T> => {
 
 export const ap = <A, B>(optf: Option<(a: A) => B>, opt: Option<A>): Option<B> =>
   flatten(map(f => map(v => f(v), opt), optf))
+
 export function apN<A, B, C>(f: Option<Fun2<A, B, C>>, a: Option<A>, b: Option<B>): Option<C>
 export function apN<A, B, C, D>(f: Option<Fun3<A, B, C, D>>, a: Option<A>, b: Option<B>, c: Option<C>): Option<D>
 export function apN<A, B, C, D, E>(
@@ -133,7 +134,7 @@ export const getOrThrow = <T, E>(option: Option<T>, exception: E): Maybe<T> => {
   }
 }
 
-export const getMaybe = <T>(option: Option<T>): Maybe<T> => {
+export const toMaybe = <T>(option: Option<T>): Maybe<T> => {
   switch (option.kind) {
     case 'none': return undefined
     case 'some': return option.value
@@ -237,13 +238,6 @@ export const firstSome = <A>(...args : Option<A>[]): Option<A> => {
       return a
   }
   return none
-}
-
-export const recover = <T>(f: (v: T) => boolean, option: Option<T>): boolean => {
-  switch (option.kind) {
-    case 'none': return false
-    case 'some': return f(option.value)
-  }
 }
 
 export const combine = <A, B>(a : Option<A>, b : Option<B>): Option<[A, B]> =>
