@@ -92,10 +92,6 @@ describe('Option', () => {
       (i: number, s: string, b: boolean): number => i * 3 + s.length + (b ? 1 : 0),
       (a: string[], b: string[]) => a.concat(b),
       success(2), failure(['x']), failure(['y']))).toEqual(failure(['x', 'y']))
-    expect(mapNWithCombine(
-      (i: number, s: string, b: boolean): number => i * 3 + s.length + (b ? 1 : 0),
-      (a: string[], b: string[]) => a.concat(b),
-      success(2), success('a'), success(true))).toEqual(failure(['x']))
   })
 
   it('should flatMap', () => {

@@ -289,13 +289,6 @@ export const getOrThrow = <T, E>(result: Result<T, E>): Maybe<T> => {
   }
 }
 
-export const getMaybe = <T, E>(result: Result<T, E>): Maybe<T> => {
-  switch (result.kind) {
-    case 'failure': return undefined
-    case 'success': return result.value
-  }
-}
-
 export const getOrElse = <T, E>(result: Result<T, E>, alt: T): T => {
   switch (result.kind) {
     case 'failure': return alt
