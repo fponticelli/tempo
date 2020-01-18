@@ -95,3 +95,14 @@ export const concat = <A>(...arrs: A[][]): A[] =>
 
 export const sort = <A>(compare: (a: A, b: A) => Ordering, arr: A[]): A[] =>
   arr.slice().sort(compare)
+
+export const range = <A>(length: number, f: (index: number) => A) => {
+  const buff = new Array(length)
+  for (let i = 0; i < length; i++)
+    buff[i] = f(i)
+  return buff
+}
+
+export const numbersRange = (length: number, startAt = 0) => range(length, i => startAt + i)
+
+export const fill = <A>(length: number, value: A) => range(length, () => value)

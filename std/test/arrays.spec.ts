@@ -11,7 +11,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { map, head, tail } from '../src/arrays'
+import { map, head, tail, numbersRange, fill } from '../src/arrays'
 
 describe('arrays:map', () => {
   it('should work with empty arrays', () => {
@@ -44,5 +44,16 @@ describe('arrays:tail', () => {
     expect(tail([1])).toEqual([])
     expect(tail([1, 2])).toEqual([2])
     expect(tail([1, 2, 3])).toEqual([2, 3])
+  })
+})
+
+describe('arrays', () => {
+  it('numberRange', () => {
+    expect(numbersRange(4)).toEqual([0, 1, 2, 3])
+    expect(numbersRange(4, 1)).toEqual([1, 2, 3, 4])
+  })
+
+  it('fill', () => {
+    expect(fill(4, 'x')).toEqual(['x', 'x', 'x', 'x'])
   })
 })
