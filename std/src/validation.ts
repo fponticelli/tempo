@@ -36,8 +36,11 @@ export function apN<A, B, C, D, E, F, Err>(
   a: Validation<A, Err>, b: Validation<B, Err>, c: Validation<C, Err>, d: Validation<D, Err>, e: Validation<E, Err>): Validation<F, Err>
 export function apN<A, B, C, D, E, F, G, Err>(
   f: Validation<Fun6<A, B, C, D, E, F, G>, Err>,
-  a: Validation<A, Err>, b: Validation<B, Err>, c: Validation<C, Err>, d: Validation<D, Err>, e: Validation<E, Err>, g: Validation<F, Err>): Validation<G, Err>
-export function apN<Args extends any[], Err, Ret>(f: Validation<(...args: Args) => Ret, Err>, ...args: Validation<any, Err>[]): Validation<Ret, Err> {
+  a: Validation<A, Err>, b: Validation<B, Err>, c: Validation<C, Err>,
+  d: Validation<D, Err>, e: Validation<E, Err>, g: Validation<F, Err>): Validation<G, Err>
+export function apN<Args extends any[], Err, Ret>(
+  f: Validation<(...args: Args) => Ret, Err>,
+  ...args: Validation<any, Err>[]): Validation<Ret, Err> {
   return (Res.apNWithCombine as Function)(f, concat, ...args)
 }
 
@@ -48,8 +51,12 @@ export const mapError = <A, E1, E2>(f: (e: E1) => E2, result: Validation<A, E1>)
   }
 }
 
-export function mapN<A, B, C, Err>(f: Fun2<A, B, C>, a: Validation<A, Err>, b: Validation<B, Err>): Validation<C, Err>
-export function mapN<A, B, C, D, Err>(f: Fun3<A, B, C, D>, a: Validation<A, Err>, b: Validation<B, Err>, c: Validation<C, Err>): Validation<D, Err>
+export function mapN<A, B, C, Err>(
+  f: Fun2<A, B, C>,
+  a: Validation<A, Err>, b: Validation<B, Err>): Validation<C, Err>
+export function mapN<A, B, C, D, Err>(
+  f: Fun3<A, B, C, D>,
+  a: Validation<A, Err>, b: Validation<B, Err>, c: Validation<C, Err>): Validation<D, Err>
 export function mapN<A, B, C, D, E, Err>(
   f: Fun4<A, B, C, D, E>,
   a: Validation<A, Err>, b: Validation<B, Err>, c: Validation<C, Err>, d: Validation<D, Err>): Validation<E, Err>
@@ -58,7 +65,8 @@ export function mapN<A, B, C, D, E, F, Err>(
   a: Validation<A, Err>, b: Validation<B, Err>, c: Validation<C, Err>, d: Validation<D, Err>, e: Validation<E, Err>): Validation<F, Err>
 export function mapN<A, B, C, D, E, F, G, Err>(
   f: Fun6<A, B, C, D, E, F, G>,
-  a: Validation<A, Err>, b: Validation<B, Err>, c: Validation<C, Err>, d: Validation<D, Err>, e: Validation<E, Err>, g: Validation<F, Err>): Validation<G, Err>
+  a: Validation<A, Err>, b: Validation<B, Err>, c: Validation<C, Err>,
+  d: Validation<D, Err>, e: Validation<E, Err>, g: Validation<F, Err>): Validation<G, Err>
 export function mapN<Args extends any[], Err, Ret>(f: (...args: Args) => Ret, ...args: Validation<any, Err>[]): Validation<Ret, Err> {
   return (Res.mapNWithCombine as Function)(f, concat, ...args)
 }
@@ -77,7 +85,8 @@ export function flatMapN<A, B, C, D, E, F, Err>(
   a: Validation<A, Err>, b: Validation<B, Err>, c: Validation<C, Err>, d: Validation<D, Err>, e: Validation<E, Err>): Validation<F, Err>
 export function flatMapN<A, B, C, D, E, F, G, Err>(
   f: Fun6<A, B, C, D, E, F, Validation<G, Err>>,
-  a: Validation<A, Err>, b: Validation<B, Err>, c: Validation<C, Err>, d: Validation<D, Err>, e: Validation<E, Err>, g: Validation<F, Err>): Validation<G, Err>
+  a: Validation<A, Err>, b: Validation<B, Err>, c: Validation<C, Err>,
+  d: Validation<D, Err>, e: Validation<E, Err>, g: Validation<F, Err>): Validation<G, Err>
 export function flatMapN<Args extends any[], Err, Ret>(
   f: (...args: Args) => Validation<Ret, Err>,
   ...args: Validation<any, Err>[]
