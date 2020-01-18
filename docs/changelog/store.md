@@ -1,5 +1,5 @@
 ---
-title: store change log
+title: store
 parent: changelog
 ---
 # Change Log - tempo-store

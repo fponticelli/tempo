@@ -1,5 +1,5 @@
 ---
-title: paperjs change log
+title: paperjs
 parent: changelog
 ---
 # Change Log - tempo-paper
