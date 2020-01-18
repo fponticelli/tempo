@@ -26,7 +26,7 @@ jobs:
         CI: true
     - name: build
       run: |
-        node common/scripts/install-run-rush.js rebuild --verbose
+        node common/scripts/install-run-rush.js rebuild
       env:
         CI: true
     - name: code style
