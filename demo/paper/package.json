@@ -38,7 +38,7 @@
     "node-sass": "4.13.0"
   },
   "scripts": {
-    "compile": "webpack --progress --mode=production",
+    "compile": "webpack --mode=production",
     "clean": "rm -rf dist/* && rm -rf ../../docs/demo/paper/*",
     "build": "npm run clean && npm run compile",
     "watch": "webpack --watch",

@@ -117,7 +117,7 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"LAOm":[function(require,module,exports) {
+})({"pwth":[function(require,module,exports) {
 "use strict";
 /*
 Copyright 2019 Google LLC
@@ -132,6 +132,27 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.nothing = undefined;
+exports.just = function (value) { return value; };
+exports.isNothing = function (maybe) { return maybe == null; };
+exports.isJust = function (maybe) { return maybe != null; };
+
+},{}],"LAOm":[function(require,module,exports) {
+"use strict";
+/*
+Copyright 2019 Google LLC
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+    https://www.apache.org/licenses/LICENSE-2.0
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+Object.defineProperty(exports, "__esModule", { value: true });
+var maybe_1 = require("./maybe");
 exports.map = function (f, arr) {
     var length = arr.length;
     var buff = new Array(length);
@@ -148,8 +169,89 @@ exports.flatMap = function (f, arr) {
     }
     return buff;
 };
+exports.head = function (arr) { return arr.length > 0 ? arr[0] : maybe_1.nothing; };
+exports.tail = function (arr) { return arr.slice(1); };
+exports.equals = function (predicate, a, b) {
+    if (a.length !== b.length)
+        return false;
+    else {
+        for (var i = 0; i < a.length; i++) {
+            if (!predicate(a[i], b[i]))
+                return false;
+        }
+        return true;
+    }
+};
+exports.isEmpty = function (arr) { return arr.length === 0; };
+exports.hasValues = function (arr) { return arr.length > 0; };
+exports.filter = function (predicate, arr) {
+    var buff = [];
+    for (var _i = 0, arr_2 = arr; _i < arr_2.length; _i++) {
+        var a = arr_2[_i];
+        if (predicate(a))
+            buff.push(a);
+    }
+    return buff;
+};
+exports.flatten = function (arr) {
+    var _a;
+    return (_a = []).concat.apply(_a, arr);
+};
+exports.foldLeft = function (f, arr, b) {
+    for (var _i = 0, arr_3 = arr; _i < arr_3.length; _i++) {
+        var a = arr_3[_i];
+        b = f(b, a);
+    }
+    return b;
+};
+exports.all = function (predicate, arr) {
+    for (var _i = 0, arr_4 = arr; _i < arr_4.length; _i++) {
+        var a = arr_4[_i];
+        if (!predicate(a)) {
+            return false;
+        }
+    }
+    return true;
+};
+exports.any = function (predicate, arr) {
+    for (var _i = 0, arr_5 = arr; _i < arr_5.length; _i++) {
+        var a = arr_5[_i];
+        if (predicate(a)) {
+            return true;
+        }
+    }
+    return false;
+};
+exports.each = function (f, arr) {
+    for (var _i = 0, arr_6 = arr; _i < arr_6.length; _i++) {
+        var a = arr_6[_i];
+        f(a);
+    }
+};
+exports.concat = function () {
+    var _a;
+    var arrs = [];
+    for (var _i = 0; _i < arguments.length; _i++) {
+        arrs[_i] = arguments[_i];
+    }
+    return (_a = []).concat.apply(_a, arrs);
+};
+exports.sort = function (compare, arr) {
+    return arr.slice().sort(compare);
+};
+exports.range = function (length, f) {
+    var buff = new Array(length);
+    for (var i = 0; i < length; i++)
+        buff[i] = f(i);
+    return buff;
+};
+exports.numbersRange = function (length, startAt) {
+    if (startAt === void 0) { startAt = 0; }
+    return exports.range(length, function (i) { return startAt + i; });
+};
+exports.fill = function (length, value) { return exports.range(length, function () { return value; }); };
 
-},{}],"BEVE":[function(require,module,exports) {
+},{"./maybe":"pwth"}],"BEVE":[function(require,module,exports) {
 "use strict";
 /*
 Copyright 2019 Google LLC

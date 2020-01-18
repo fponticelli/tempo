@@ -43,8 +43,8 @@ parcelRequire = (function (init) {
   localRequire.modules = modules;
   return localRequire;
 })(function (require) {
-// ASSET: ../node_modules/tempo-dom/node_modules/tempo-std/lib/arrays.js
-var $LAOm$exports = {};
+// ASSET: ../node_modules/tempo-dom/node_modules/tempo-std/lib/maybe.js
+var $pwth$exports = {};
 /*
 Copyright 2019 Google LLC
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -58,6 +58,32 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+Object.defineProperty($pwth$exports, "__esModule", {
+  value: true
+});
+var $pwth$export$nothing = undefined;
+$pwth$exports.nothing = $pwth$export$nothing;
+
+var $pwth$export$just = function (value) {
+  return value;
+};
+
+$pwth$exports.just = $pwth$export$just;
+
+var $pwth$export$isNothing = function (maybe) {
+  return maybe == null;
+};
+
+$pwth$exports.isNothing = $pwth$export$isNothing;
+
+var $pwth$export$isJust = function (maybe) {
+  return maybe != null;
+};
+
+$pwth$exports.isJust = $pwth$export$isJust; //# sourceMappingURL=maybe.js.map
+
+// ASSET: ../node_modules/tempo-dom/node_modules/tempo-std/lib/arrays.js
+var $LAOm$exports = {};
 Object.defineProperty($LAOm$exports, "__esModule", {
   value: true
 });
@@ -86,7 +112,162 @@ var $LAOm$export$flatMap = function (f, arr) {
   return buff;
 };
 
-$LAOm$exports.flatMap = $LAOm$export$flatMap; //# sourceMappingURL=arrays.js.map
+$LAOm$exports.flatMap = $LAOm$export$flatMap;
+
+var $LAOm$export$head = function (arr) {
+  return arr.length > 0 ? arr[0] : $pwth$export$nothing;
+};
+
+$LAOm$exports.head = $LAOm$export$head;
+
+var $LAOm$export$tail = function (arr) {
+  return arr.slice(1);
+};
+
+$LAOm$exports.tail = $LAOm$export$tail;
+
+var $LAOm$export$equals = function (predicate, a, b) {
+  if (a.length !== b.length) return false;else {
+    for (var i = 0; i < a.length; i++) {
+      if (!predicate(a[i], b[i])) return false;
+    }
+
+    return true;
+  }
+};
+
+$LAOm$exports.equals = $LAOm$export$equals;
+
+var $LAOm$export$isEmpty = function (arr) {
+  return arr.length === 0;
+};
+
+$LAOm$exports.isEmpty = $LAOm$export$isEmpty;
+
+var $LAOm$export$hasValues = function (arr) {
+  return arr.length > 0;
+};
+
+$LAOm$exports.hasValues = $LAOm$export$hasValues;
+
+var $LAOm$export$filter = function (predicate, arr) {
+  var buff = [];
+
+  for (var _i = 0, arr_2 = arr; _i < arr_2.length; _i++) {
+    var a = arr_2[_i];
+    if (predicate(a)) buff.push(a);
+  }
+
+  return buff;
+};
+
+$LAOm$exports.filter = $LAOm$export$filter;
+
+var $LAOm$export$flatten = function (arr) {
+  var _a;
+
+  return (_a = []).concat.apply(_a, arr);
+};
+
+$LAOm$exports.flatten = $LAOm$export$flatten;
+
+var $LAOm$export$foldLeft = function (f, arr, b) {
+  for (var _i = 0, arr_3 = arr; _i < arr_3.length; _i++) {
+    var a = arr_3[_i];
+    b = f(b, a);
+  }
+
+  return b;
+};
+
+$LAOm$exports.foldLeft = $LAOm$export$foldLeft;
+
+var $LAOm$export$all = function (predicate, arr) {
+  for (var _i = 0, arr_4 = arr; _i < arr_4.length; _i++) {
+    var a = arr_4[_i];
+
+    if (!predicate(a)) {
+      return false;
+    }
+  }
+
+  return true;
+};
+
+$LAOm$exports.all = $LAOm$export$all;
+
+var $LAOm$export$any = function (predicate, arr) {
+  for (var _i = 0, arr_5 = arr; _i < arr_5.length; _i++) {
+    var a = arr_5[_i];
+
+    if (predicate(a)) {
+      return true;
+    }
+  }
+
+  return false;
+};
+
+$LAOm$exports.any = $LAOm$export$any;
+
+var $LAOm$export$each = function (f, arr) {
+  for (var _i = 0, arr_6 = arr; _i < arr_6.length; _i++) {
+    var a = arr_6[_i];
+    f(a);
+  }
+};
+
+$LAOm$exports.each = $LAOm$export$each;
+
+var $LAOm$export$concat = function () {
+  var _a;
+
+  var arrs = [];
+
+  for (var _i = 0; _i < arguments.length; _i++) {
+    arrs[_i] = arguments[_i];
+  }
+
+  return (_a = []).concat.apply(_a, arrs);
+};
+
+$LAOm$exports.concat = $LAOm$export$concat;
+
+var $LAOm$export$sort = function (compare, arr) {
+  return arr.slice().sort(compare);
+};
+
+$LAOm$exports.sort = $LAOm$export$sort;
+
+var $LAOm$export$range = function (length, f) {
+  var buff = new Array(length);
+
+  for (var i = 0; i < length; i++) buff[i] = f(i);
+
+  return buff;
+};
+
+$LAOm$exports.range = $LAOm$export$range;
+
+var $LAOm$export$numbersRange = function (length, startAt) {
+  if (startAt === void 0) {
+    startAt = 0;
+  }
+
+  return $LAOm$export$range(length, function (i) {
+    return startAt + i;
+  });
+};
+
+$LAOm$exports.numbersRange = $LAOm$export$numbersRange;
+
+var $LAOm$export$fill = function (length, value) {
+  return $LAOm$export$range(length, function () {
+    return value;
+  });
+};
+
+$LAOm$exports.fill = $LAOm$export$fill; //# sourceMappingURL=arrays.js.map
 
 // ASSET: ../node_modules/tempo-dom/lib/utils/set_attribute.js
 var $BEVE$exports = {};
@@ -1114,6 +1295,31 @@ var $mIWh$export$emptyState = function () {
 };
 
 $mIWh$exports.emptyState = $mIWh$export$emptyState;
+// ASSET: ../node_modules/tempo-std/lib/maybe.js
+var $KScB$exports = {};
+Object.defineProperty($KScB$exports, "__esModule", {
+  value: true
+});
+var $KScB$export$nothing = undefined;
+$KScB$exports.nothing = $KScB$export$nothing;
+
+var $KScB$export$just = function (value) {
+  return value;
+};
+
+$KScB$exports.just = $KScB$export$just;
+
+var $KScB$export$isNothing = function (maybe) {
+  return maybe == null;
+};
+
+$KScB$exports.isNothing = $KScB$export$isNothing;
+
+var $KScB$export$isJust = function (maybe) {
+  return maybe != null;
+};
+
+$KScB$exports.isJust = $KScB$export$isJust;
 // ASSET: ../node_modules/tempo-std/lib/arrays.js
 var $o25q$exports = {};
 Object.defineProperty($o25q$exports, "__esModule", {
@@ -1145,6 +1351,161 @@ var $o25q$export$flatMap = function (f, arr) {
 };
 
 $o25q$exports.flatMap = $o25q$export$flatMap;
+
+var $o25q$export$head = function (arr) {
+  return arr.length > 0 ? arr[0] : $KScB$export$nothing;
+};
+
+$o25q$exports.head = $o25q$export$head;
+
+var $o25q$export$tail = function (arr) {
+  return arr.slice(1);
+};
+
+$o25q$exports.tail = $o25q$export$tail;
+
+var $o25q$export$equals = function (predicate, a, b) {
+  if (a.length !== b.length) return false;else {
+    for (var i = 0; i < a.length; i++) {
+      if (!predicate(a[i], b[i])) return false;
+    }
+
+    return true;
+  }
+};
+
+$o25q$exports.equals = $o25q$export$equals;
+
+var $o25q$export$isEmpty = function (arr) {
+  return arr.length === 0;
+};
+
+$o25q$exports.isEmpty = $o25q$export$isEmpty;
+
+var $o25q$export$hasValues = function (arr) {
+  return arr.length > 0;
+};
+
+$o25q$exports.hasValues = $o25q$export$hasValues;
+
+var $o25q$export$filter = function (predicate, arr) {
+  var buff = [];
+
+  for (var _i = 0, arr_2 = arr; _i < arr_2.length; _i++) {
+    var a = arr_2[_i];
+    if (predicate(a)) buff.push(a);
+  }
+
+  return buff;
+};
+
+$o25q$exports.filter = $o25q$export$filter;
+
+var $o25q$export$flatten = function (arr) {
+  var _a;
+
+  return (_a = []).concat.apply(_a, arr);
+};
+
+$o25q$exports.flatten = $o25q$export$flatten;
+
+var $o25q$export$foldLeft = function (f, arr, b) {
+  for (var _i = 0, arr_3 = arr; _i < arr_3.length; _i++) {
+    var a = arr_3[_i];
+    b = f(b, a);
+  }
+
+  return b;
+};
+
+$o25q$exports.foldLeft = $o25q$export$foldLeft;
+
+var $o25q$export$all = function (predicate, arr) {
+  for (var _i = 0, arr_4 = arr; _i < arr_4.length; _i++) {
+    var a = arr_4[_i];
+
+    if (!predicate(a)) {
+      return false;
+    }
+  }
+
+  return true;
+};
+
+$o25q$exports.all = $o25q$export$all;
+
+var $o25q$export$any = function (predicate, arr) {
+  for (var _i = 0, arr_5 = arr; _i < arr_5.length; _i++) {
+    var a = arr_5[_i];
+
+    if (predicate(a)) {
+      return true;
+    }
+  }
+
+  return false;
+};
+
+$o25q$exports.any = $o25q$export$any;
+
+var $o25q$export$each = function (f, arr) {
+  for (var _i = 0, arr_6 = arr; _i < arr_6.length; _i++) {
+    var a = arr_6[_i];
+    f(a);
+  }
+};
+
+$o25q$exports.each = $o25q$export$each;
+
+var $o25q$export$concat = function () {
+  var _a;
+
+  var arrs = [];
+
+  for (var _i = 0; _i < arguments.length; _i++) {
+    arrs[_i] = arguments[_i];
+  }
+
+  return (_a = []).concat.apply(_a, arrs);
+};
+
+$o25q$exports.concat = $o25q$export$concat;
+
+var $o25q$export$sort = function (compare, arr) {
+  return arr.slice().sort(compare);
+};
+
+$o25q$exports.sort = $o25q$export$sort;
+
+var $o25q$export$range = function (length, f) {
+  var buff = new Array(length);
+
+  for (var i = 0; i < length; i++) buff[i] = f(i);
+
+  return buff;
+};
+
+$o25q$exports.range = $o25q$export$range;
+
+var $o25q$export$numbersRange = function (length, startAt) {
+  if (startAt === void 0) {
+    startAt = 0;
+  }
+
+  return $o25q$export$range(length, function (i) {
+    return startAt + i;
+  });
+};
+
+$o25q$exports.numbersRange = $o25q$export$numbersRange;
+
+var $o25q$export$fill = function (length, value) {
+  return $o25q$export$range(length, function () {
+    return value;
+  });
+};
+
+$o25q$exports.fill = $o25q$export$fill;
 // ASSET: reducer.ts
 var $pSX2$exports = {};
 

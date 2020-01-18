@@ -756,6 +756,32 @@ var $pSX2$var$calculateMinMax = function calculateMinMax(results, tests) {
   }, {});
 };
 
+// ASSET: ../node_modules/tempo-dom/node_modules/tempo-std/lib/maybe.js
+var $pwth$exports = {};
+Object.defineProperty($pwth$exports, "__esModule", {
+  value: true
+});
+var $pwth$export$nothing = undefined;
+$pwth$exports.nothing = $pwth$export$nothing;
+
+var $pwth$export$just = function (value) {
+  return value;
+};
+
+$pwth$exports.just = $pwth$export$just;
+
+var $pwth$export$isNothing = function (maybe) {
+  return maybe == null;
+};
+
+$pwth$exports.isNothing = $pwth$export$isNothing;
+
+var $pwth$export$isJust = function (maybe) {
+  return maybe != null;
+};
+
+$pwth$exports.isJust = $pwth$export$isJust; //# sourceMappingURL=maybe.js.map
+
 // ASSET: ../node_modules/tempo-dom/node_modules/tempo-std/lib/arrays.js
 var $LAOm$exports = {};
 Object.defineProperty($LAOm$exports, "__esModule", {
@@ -786,7 +812,162 @@ var $LAOm$export$flatMap = function (f, arr) {
   return buff;
 };
 
-$LAOm$exports.flatMap = $LAOm$export$flatMap; //# sourceMappingURL=arrays.js.map
+$LAOm$exports.flatMap = $LAOm$export$flatMap;
+
+var $LAOm$export$head = function (arr) {
+  return arr.length > 0 ? arr[0] : $pwth$export$nothing;
+};
+
+$LAOm$exports.head = $LAOm$export$head;
+
+var $LAOm$export$tail = function (arr) {
+  return arr.slice(1);
+};
+
+$LAOm$exports.tail = $LAOm$export$tail;
+
+var $LAOm$export$equals = function (predicate, a, b) {
+  if (a.length !== b.length) return false;else {
+    for (var i = 0; i < a.length; i++) {
+      if (!predicate(a[i], b[i])) return false;
+    }
+
+    return true;
+  }
+};
+
+$LAOm$exports.equals = $LAOm$export$equals;
+
+var $LAOm$export$isEmpty = function (arr) {
+  return arr.length === 0;
+};
+
+$LAOm$exports.isEmpty = $LAOm$export$isEmpty;
+
+var $LAOm$export$hasValues = function (arr) {
+  return arr.length > 0;
+};
+
+$LAOm$exports.hasValues = $LAOm$export$hasValues;
+
+var $LAOm$export$filter = function (predicate, arr) {
+  var buff = [];
+
+  for (var _i = 0, arr_2 = arr; _i < arr_2.length; _i++) {
+    var a = arr_2[_i];
+    if (predicate(a)) buff.push(a);
+  }
+
+  return buff;
+};
+
+$LAOm$exports.filter = $LAOm$export$filter;
+
+var $LAOm$export$flatten = function (arr) {
+  var _a;
+
+  return (_a = []).concat.apply(_a, arr);
+};
+
+$LAOm$exports.flatten = $LAOm$export$flatten;
+
+var $LAOm$export$foldLeft = function (f, arr, b) {
+  for (var _i = 0, arr_3 = arr; _i < arr_3.length; _i++) {
+    var a = arr_3[_i];
+    b = f(b, a);
+  }
+
+  return b;
+};
+
+$LAOm$exports.foldLeft = $LAOm$export$foldLeft;
+
+var $LAOm$export$all = function (predicate, arr) {
+  for (var _i = 0, arr_4 = arr; _i < arr_4.length; _i++) {
+    var a = arr_4[_i];
+
+    if (!predicate(a)) {
+      return false;
+    }
+  }
+
+  return true;
+};
+
+$LAOm$exports.all = $LAOm$export$all;
+
+var $LAOm$export$any = function (predicate, arr) {
+  for (var _i = 0, arr_5 = arr; _i < arr_5.length; _i++) {
+    var a = arr_5[_i];
+
+    if (predicate(a)) {
+      return true;
+    }
+  }
+
+  return false;
+};
+
+$LAOm$exports.any = $LAOm$export$any;
+
+var $LAOm$export$each = function (f, arr) {
+  for (var _i = 0, arr_6 = arr; _i < arr_6.length; _i++) {
+    var a = arr_6[_i];
+    f(a);
+  }
+};
+
+$LAOm$exports.each = $LAOm$export$each;
+
+var $LAOm$export$concat = function () {
+  var _a;
+
+  var arrs = [];
+
+  for (var _i = 0; _i < arguments.length; _i++) {
+    arrs[_i] = arguments[_i];
+  }
+
+  return (_a = []).concat.apply(_a, arrs);
+};
+
+$LAOm$exports.concat = $LAOm$export$concat;
+
+var $LAOm$export$sort = function (compare, arr) {
+  return arr.slice().sort(compare);
+};
+
+$LAOm$exports.sort = $LAOm$export$sort;
+
+var $LAOm$export$range = function (length, f) {
+  var buff = new Array(length);
+
+  for (var i = 0; i < length; i++) buff[i] = f(i);
+
+  return buff;
+};
+
+$LAOm$exports.range = $LAOm$export$range;
+
+var $LAOm$export$numbersRange = function (length, startAt) {
+  if (startAt === void 0) {
+    startAt = 0;
+  }
+
+  return $LAOm$export$range(length, function (i) {
+    return startAt + i;
+  });
+};
+
+$LAOm$exports.numbersRange = $LAOm$export$numbersRange;
+
+var $LAOm$export$fill = function (length, value) {
+  return $LAOm$export$range(length, function () {
+    return value;
+  });
+};
+
+$LAOm$exports.fill = $LAOm$export$fill; //# sourceMappingURL=arrays.js.map
 
 // ASSET: ../node_modules/tempo-dom/lib/utils/set_attribute.js
 var $BEVE$exports = {};
