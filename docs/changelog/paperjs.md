@@ -4,7 +4,14 @@ parent: changelog
 ---
 # Change Log - tempo-paper
 
-This log was last generated on Wed, 01 Jan 2020 00:17:16 GMT and should not be manually modified.
+This log was last generated on Sat, 18 Jan 2020 05:08:11 GMT and should not be manually modified.
+
+## 0.3.0
+Sat, 18 Jan 2020 05:08:11 GMT
+
+### Minor changes
+
+- Updated dependency on tempo-std.
 
 ## 0.2.1
 Wed, 01 Jan 2020 00:17:16 GMT

@@ -33,9 +33,9 @@
   },
   "dependencies": {
     "paper": "0.12.3",
-    "tempo-std": "0.2.0",
     "tempo-core": "1.6.0",
     "tempo-dom": "0.14.0",
+    "tempo-std": "0.2.0",
     "tempo-store": "1.1.2"
   },
   "devDependencies": {
