@@ -15,7 +15,7 @@ import { View } from 'tempo-core/lib/view'
 import { DOMContext } from './context'
 import { DOMTemplate, DOMChild } from './template'
 import { removeNode, domChildToTemplate } from './utils/dom'
-import { mapArray } from 'tempo-core/lib/util/map'
+import { map } from 'tempo-std/lib/arrays'
 
 export class DOMUntilTemplate<OuterState, InnerState, Action, Query> implements DOMTemplate<OuterState, Action, Query> {
   constructor(
@@ -45,7 +45,7 @@ export class DOMUntilTemplate<OuterState, InnerState, Action, Query> implements 
             for (const view of filteredViews) view.change(value!)
           } else {
             // add node
-            childrenViews.push(mapArray(children, el => el.render(newCtx, value!)))
+            childrenViews.push(map(el => el.render(newCtx, value!), children))
           }
           index++
         }
@@ -82,4 +82,4 @@ export const until = <OuterState, InnerState, Action, Query = unknown>(
   },
   ...children: DOMChild<InnerState, Action, Query>[]
 ): DOMTemplate<OuterState, Action, Query> =>
-  new DOMUntilTemplate<OuterState, InnerState, Action, Query>(options, mapArray(children, domChildToTemplate))
+  new DOMUntilTemplate<OuterState, InnerState, Action, Query>(options, map(domChildToTemplate, children))

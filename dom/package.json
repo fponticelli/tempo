@@ -20,6 +20,7 @@
     "test": "jest",
     "test-watch": "jest --watch",
     "tslint": "tslint -p ./tslint.json",
+    "tslint-fix": "tslint -p ./tslint.json --fix",
     "prettier": "prettier -c src/**/*.ts",
     "prettier-fix": "prettier --write src/**/*.ts",
     "prepublish": "npm run build"
@@ -34,6 +35,7 @@
     "url": "https://github.com/fponticelli"
   },
   "dependencies": {
+    "tempo-std": "0.1.0",
     "tempo-core": "1.5.0",
     "tempo-store": "1.1.1"
   },

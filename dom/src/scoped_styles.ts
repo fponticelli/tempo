@@ -12,8 +12,8 @@ limitations under the License.
 */
 
 import { UnwrappedValue } from 'tempo-core/lib/value'
-import { keys } from 'tempo-core/lib/util/objects'
-import { replaceAll } from 'tempo-core/lib/util/strings'
+import { keys } from 'tempo-std/lib//objects'
+import { replaceAll } from 'tempo-std/lib//strings'
 import { DOMTemplate } from './template'
 import { DOMContext } from './context'
 import { DOMAttribute } from './value'

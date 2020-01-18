@@ -11,16 +11,13 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-export type AnyFunction = ((...args: any[]) => any) | Function
+export type Maybe<T> = Just<T> | Nothing
 
-// TYPE TESTS
-import { Assert, Extends, AssertNot } from './assert'
-type _procedure_is_AnyFunction = Assert<Extends<() => void, AnyFunction>>
-type _Function_is_AnyFunction = Assert<Extends<Function, AnyFunction>>
-type _string_is_not_AnyFunction = AssertNot<Extends<string, AnyFunction>>
+export type Nothing = undefined | null
+export type Just<T> = T
 
-// @ts-ignore
-type _TESTS_ =
-  | _procedure_is_AnyFunction
-  | _Function_is_AnyFunction
-  | _string_is_not_AnyFunction
+export const nothing: Maybe<never> = undefined
+export const just = <T>(value: T): Maybe<T> => value
+
+export const isNothing = <T>(maybe: Maybe<T>): maybe is Nothing => maybe == null
+export const isJust = <T>(maybe: Maybe<T>): maybe is Just<T> => maybe != null

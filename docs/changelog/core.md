@@ -1,6 +1,6 @@
 ---
 title: core
-parent: Change Log
+parent: changelog
 ---
 # Change Log - tempo-core
 

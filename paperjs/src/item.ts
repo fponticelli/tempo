@@ -17,9 +17,9 @@ import { View } from 'tempo-core/lib/view'
 import { PaperTemplate } from './template'
 import { PaperContext } from './context'
 import { TempoAttributes } from './tempo_attributes'
-import { removeFields } from 'tempo-core/lib/util/objects'
+import { removeFields } from 'tempo-std/lib//objects'
 import { UnwrappedDerivedValue, UnwrappedValue } from 'tempo-core/lib/value'
-import { Merge } from 'tempo-core/lib/types/objects'
+import { Merge } from 'tempo-std/lib/types/objects'
 
 export interface FrameEvent extends Event {
   // the number of times the frame event was fired

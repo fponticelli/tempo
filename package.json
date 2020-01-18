@@ -15,13 +15,14 @@
   "scripts": {
     "publish:npm": "rush publish -a -b master -p -r https://registry.npmjs.org/ --include-all && npm run changelog:all",
     "build": "echo \"nothing to build at root\"",
-    "test:all": "(cd core && npm run test) && (cd store && npm run test) && (cd dom && npm run test)",
-    "changelog": "run(){ mkdir -p docs/changelog; cp ./$1/CHANGELOG.md docs/changelog/$1.md; echo \"---\ntitle: $1\nparent: Change Log\n---\n$(cat docs/changelog/$1.md)\" > docs/changelog/$1.md; }; run",
+    "test:all": "(cd std && npm run test) && (cd core && npm run test) && (cd store && npm run test) && (cd dom && npm run test)",
+    "changelog": "run(){ mkdir -p docs/changelog; cp ./$1/CHANGELOG.md docs/changelog/$1.md; echo \"---\ntitle: $1\nparent: changelog\n---\n$(cat docs/changelog/$1.md)\" > docs/changelog/$1.md; }; run",
     "changelog:core": "npm run changelog -- core",
+    "changelog:std": "npm run changelog -- std",
     "changelog:dom": "npm run changelog -- dom",
     "changelog:store": "npm run changelog -- store",
     "changelog:paperjs": "npm run changelog -- paperjs",
-    "changelog:all": "npm run changelog:core & npm run changelog:dom & npm run changelog:store & npm run changelog:paperjs"
+    "changelog:all": "npm run changelog:std && npm run changelog:core && npm run changelog:dom && npm run changelog:store && npm run changelog:paperjs"
   },
   "license": "Apache-2.0",
   "homepage": "https://github.com/fponticelli/tempo",

@@ -14,7 +14,7 @@ limitations under the License.
 import { View } from 'tempo-core/lib/view'
 import { PaperContext } from './context'
 import { PaperTemplate } from './template'
-import { mapArray } from 'tempo-core/lib/util/map'
+import { map } from 'tempo-std/lib/arrays'
 import { Group } from 'paper'
 
 export class PaperUntilTemplate<OuterState, InnerState, Action, Query>
@@ -49,9 +49,7 @@ export class PaperUntilTemplate<OuterState, InnerState, Action, Query>
             for (const view of filteredViews) view.change(value!)
           } else {
             // add node
-            childrenViews.push(
-              mapArray(children, el => el.render(newCtx, value!))
-            )
+            childrenViews.push(map(el => el.render(newCtx, value!), children))
           }
           index++
         }

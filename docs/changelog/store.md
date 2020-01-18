@@ -1,6 +1,6 @@
 ---
 title: store
-parent: Change Log
+parent: changelog
 ---
 # Change Log - tempo-store
 

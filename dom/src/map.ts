@@ -15,7 +15,7 @@ import { DOMChild, DOMTemplate } from './template'
 import { View } from 'tempo-core/lib/view'
 import { DOMContext } from './context'
 import { domChildToTemplate } from './utils/dom'
-import { mapArray } from 'tempo-core/lib/util/map'
+import { map as mapArray } from 'tempo-std/lib/arrays'
 
 export class MapStateTemplate<OuterState, InnerState, Action, Query> implements DOMTemplate<OuterState, Action, Query> {
   constructor(
@@ -26,7 +26,7 @@ export class MapStateTemplate<OuterState, InnerState, Action, Query> implements 
   render(ctx: DOMContext<Action>, state: OuterState): View<OuterState, Query> {
     const { children, map } = this
     const innerState = map(state)
-    const views = mapArray(children, c => c.render(ctx, innerState))
+    const views = mapArray(c => c.render(ctx, innerState), children)
 
     return {
       change: (state: OuterState) => {
@@ -46,14 +46,14 @@ export class MapStateTemplate<OuterState, InnerState, Action, Query> implements 
 export const mapState = <OuterState, InnerState, Action, Query = unknown>(
   options: { map: (value: OuterState) => InnerState },
   ...children: DOMChild<InnerState, Action, Query>[]
-): DOMTemplate<OuterState, Action, Query> => new MapStateTemplate(options.map, mapArray(children, domChildToTemplate))
+): DOMTemplate<OuterState, Action, Query> => new MapStateTemplate(options.map, mapArray(domChildToTemplate, children))
 
 export const mapStateAndKeep = <OuterState, InnerState, Action, Query = unknown>(
   options: { map: (value: OuterState) => InnerState },
   ...children: DOMChild<[InnerState, OuterState], Action, Query>[]
 ): DOMTemplate<OuterState, Action, Query> => new MapStateTemplate<OuterState, [InnerState, OuterState], Action, Query>(
   (state: OuterState) => ([options.map(state), state]),
-  mapArray(children, domChildToTemplate)
+  mapArray(domChildToTemplate, children)
 )
 
 export class MapActionTemplate<State, OuterAction, InnerAction, Query> implements DOMTemplate<State, OuterAction, Query> {
@@ -65,7 +65,7 @@ export class MapActionTemplate<State, OuterAction, InnerAction, Query> implement
   render(ctx: DOMContext<OuterAction>, state: State): View<State, Query> {
     const { children, map } = this
     const newCtx = ctx.conditionalMapAction(map)
-    const views = mapArray(children, c => c.render(newCtx, state))
+    const views = mapArray(c => c.render(newCtx, state), children)
     return {
       change: (state: State) => {
         for (const view of views) view.change(state)
@@ -84,7 +84,7 @@ export const mapAction = <State, OuterAction, InnerAction, Query = unknown>(
   options: { map: (value: InnerAction) => OuterAction | undefined },
   ...children: DOMChild<State, InnerAction, Query>[]
 ): DOMTemplate<State, OuterAction, Query> =>
-  new MapActionTemplate<State, OuterAction, InnerAction, Query>(options.map, mapArray(children, domChildToTemplate))
+  new MapActionTemplate<State, OuterAction, InnerAction, Query>(options.map, mapArray(domChildToTemplate, children))
 
 export class MapQueryTemplate<State, Action, OuterQuery, InnerQuery> implements DOMTemplate<State, Action, OuterQuery> {
   constructor(
@@ -94,7 +94,7 @@ export class MapQueryTemplate<State, Action, OuterQuery, InnerQuery> implements 
 
   render(ctx: DOMContext<Action>, state: State): View<State, OuterQuery> {
     const { children, map } = this
-    const views = mapArray(children, c => c.render(ctx, state))
+    const views = mapArray(c => c.render(ctx, state), children)
     return {
       change: (state: State) => {
         for (const view of views) view.change(state)
@@ -116,10 +116,10 @@ export const mapQuery = <State, Action, OuterQuery, InnerQuery>(
   options: { map: (value: OuterQuery) => InnerQuery },
   ...children: DOMChild<State, Action, InnerQuery>[]
 ): DOMTemplate<State, Action, OuterQuery> =>
-  new MapQueryTemplate<State, Action, OuterQuery, InnerQuery>(options.map, mapArray(children, domChildToTemplate))
+  new MapQueryTemplate<State, Action, OuterQuery, InnerQuery>(options.map, mapArray(domChildToTemplate, children))
 
 export const mapQueryConditional = <State, Action, OuterQuery, InnerQuery>(
   options: { map: (value: OuterQuery) => InnerQuery | undefined },
   ...children: DOMChild<State, Action, InnerQuery>[]
 ): DOMTemplate<State, Action, OuterQuery> =>
-  new MapQueryTemplate<State, Action, OuterQuery, InnerQuery>(options.map, mapArray(children, domChildToTemplate))
+  new MapQueryTemplate<State, Action, OuterQuery, InnerQuery>(options.map, mapArray(domChildToTemplate, children))

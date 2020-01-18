@@ -11,7 +11,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { mapArray } from 'tempo-core/lib/util/map'
+import { map } from 'tempo-std/lib/arrays'
 
 export function setOneStyle(el: Element, name: string, value: any) {
   const anyStyle = (el as HTMLElement).style as any
@@ -46,10 +46,9 @@ export function setStyleAttribute(el: Element, name: string, value: any) {
   } else if (typeof value === 'string') {
     setAttribute(el, name, value)
   } else {
-    const s = mapArray(
-      Object.keys(value),
-      k => `${k}: ${(value as any)[k]!};`
-    ).join(' ')
+    const s = map(k => `${k}: ${(value as any)[k]!};`, Object.keys(value)).join(
+      ' '
+    )
     setAttribute(el, name, (s.length && s) || (null as any))
   }
 }

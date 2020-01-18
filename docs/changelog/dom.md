@@ -1,6 +1,6 @@
 ---
 title: dom
-parent: Change Log
+parent: changelog
 ---
 # Change Log - tempo-dom
 

@@ -1,5 +1,5 @@
 /*
-Copyright 2019 Google LLC
+Copyright 2018 Google LLC
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
@@ -11,11 +11,4 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-export const mapArray = <A, B>(arr: A[], f: (a: A) => B): B[] => {
-  const length = arr.length
-  const buff = new Array(length)
-  for (let i = 0; i < length; i++) {
-    buff[i] = f(arr[i])
-  }
-  return buff
-}
+module.exports = require('../jest.config.js')

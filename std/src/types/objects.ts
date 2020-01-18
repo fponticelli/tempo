@@ -140,7 +140,7 @@ type _type_at_level_3 = Assert<
 >
 
 type _writable_keys_of_empty_is_never = Assert<Equals<WritableKeys<{}>, never>>
-type _writable_keys_of_writables_is_keys = Assert<
+type _writable_keys_of_writable_is_keys = Assert<
   Equals<WritableKeys<{ a: string; b: string }>, 'a' | 'b'>
 >
 type _writable_keys_of_mixed_is_subset = Assert<
@@ -148,7 +148,7 @@ type _writable_keys_of_mixed_is_subset = Assert<
 >
 
 type _readonly_keys_of_empty_is_never = Assert<Equals<ReadonlyKeys<{}>, never>>
-type _readonly_keys_of_readonlys_is_keys = Assert<
+type _readonly_keys_of_readonly_is_keys = Assert<
   Equals<ReadonlyKeys<{ readonly a: string; readonly b: string }>, 'a' | 'b'>
 >
 type _readonly_keys_of_mixed_is_subset = Assert<
@@ -188,10 +188,10 @@ type _TESTS_ =
   | _type_at_level_2
   | _type_at_level_3
   | _writable_keys_of_empty_is_never
-  | _writable_keys_of_writables_is_keys
+  | _writable_keys_of_writable_is_keys
   | _writable_keys_of_mixed_is_subset
   | _readonly_keys_of_empty_is_never
-  | _readonly_keys_of_readonlys_is_keys
+  | _readonly_keys_of_readonly_is_keys
   | _readonly_keys_of_mixed_is_subset
   | _KeysWithFieldType_matches
   | _KeysWithoutFieldType_matches

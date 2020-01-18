@@ -15,7 +15,7 @@ import { View } from 'tempo-core/lib/view'
 import { domChildToTemplate } from './utils/dom'
 import { DOMTemplate, DOMChild } from './template'
 import { DOMContext } from './context'
-import { mapArray } from 'tempo-core/lib/util/map'
+import { map } from 'tempo-std/lib/arrays'
 
 export class DOMFragmentTemplate<State, Action, Query> implements DOMTemplate<State, Action, Query> {
   constructor(
@@ -23,7 +23,7 @@ export class DOMFragmentTemplate<State, Action, Query> implements DOMTemplate<St
   ) {}
 
   render(ctx: DOMContext<Action>, state: State): View<State, Query> {
-    const views = mapArray(this.children, child => child.render(ctx, state))
+    const views = map(child => child.render(ctx, state), this.children)
     return {
       change: (state: State) => {
         for (const view of views) view.change(state)
@@ -40,4 +40,4 @@ export class DOMFragmentTemplate<State, Action, Query> implements DOMTemplate<St
 
 export const fragment = <State, Action, Query = unknown>(...children: DOMChild<State, Action, Query>[])
     : DOMTemplate<State, Action, Query> =>
-  new DOMFragmentTemplate<State, Action, Query>(mapArray(children, domChildToTemplate))
+  new DOMFragmentTemplate<State, Action, Query>(map(domChildToTemplate, children))

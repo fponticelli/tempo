@@ -14,7 +14,7 @@ limitations under the License.
 import { PaperTemplate } from './template'
 import { View } from 'tempo-core/lib/view'
 import { PaperContext } from './context'
-import { mapArray } from 'tempo-core/lib/util/map'
+import { map as mapArray } from 'tempo-std/lib/arrays'
 
 export class MapStateTemplate<OuterState, InnerState, Action, Query>
   implements PaperTemplate<OuterState, Action, Query> {
@@ -29,7 +29,7 @@ export class MapStateTemplate<OuterState, InnerState, Action, Query>
   ): View<OuterState, Query> {
     const { children, map } = this
     const innerState = map(state)
-    const views = mapArray(children, c => c.render(ctx, innerState))
+    const views = mapArray(c => c.render(ctx, innerState), children)
 
     return {
       change: (state: OuterState) => {
@@ -76,7 +76,7 @@ export class MapActionTemplate<State, OuterAction, InnerAction, Query>
   render(ctx: PaperContext<OuterAction>, state: State): View<State, Query> {
     const { children, map } = this
     const newCtx = ctx.conditionalMapAction(map)
-    const views = mapArray(children, c => c.render(newCtx, state))
+    const views = mapArray(c => c.render(newCtx, state), children)
     return {
       change: (state: State) => {
         for (const view of views) view.change(state)
@@ -109,7 +109,7 @@ export class MapQueryTemplate<State, Action, OuterQuery, InnerQuery>
 
   render(ctx: PaperContext<Action>, state: State): View<State, OuterQuery> {
     const { children, map } = this
-    const views = mapArray(children, c => c.render(ctx, state))
+    const views = mapArray(c => c.render(ctx, state), children)
     return {
       change: (state: State) => {
         for (const view of views) view.change(state)

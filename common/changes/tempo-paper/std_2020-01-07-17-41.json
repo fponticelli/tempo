@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "tempo-paper",
+      "comment": "Updated dependency on tempo-std.",
+      "type": "minor"
+    }
+  ],
+  "packageName": "tempo-paper",
+  "email": "franco.ponticelli@gmail.com"
+}

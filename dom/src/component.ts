@@ -15,7 +15,7 @@ import { Store } from 'tempo-store/lib/store'
 import { DOMTemplate, DOMChild } from './template'
 import { DOMContext } from './context'
 import { domChildToTemplate } from './utils/dom'
-import { mapArray } from 'tempo-core/lib/util/map'
+import { map } from 'tempo-std/lib/arrays'
 
 export class DOMComponentTemplate<State, Action, Query> implements DOMTemplate<State, Action, Query> {
   constructor(
@@ -50,7 +50,7 @@ export class DOMComponentTemplate<State, Action, Query> implements DOMTemplate<S
       store.process(action)
     }
     const newCtx = ctx.withDispatch(innerDispatch)
-    const views = mapArray(this.children, child => child.render(newCtx, property.get()))
+    const views = map(child => child.render(newCtx, property.get()), this.children)
     const view = {
       change: (state: State) => {
         store.property.set(state)
@@ -75,4 +75,4 @@ export const component = <State, Action, Query = unknown>(
     delayed?: boolean
   },
   ...children: DOMChild<State, Action, Query>[]
-) => new DOMComponentTemplate<State, Action, Query>(attributes.store, mapArray(children, domChildToTemplate), attributes.delayed || false)
+) => new DOMComponentTemplate<State, Action, Query>(attributes.store, map(domChildToTemplate, children), attributes.delayed || false)
