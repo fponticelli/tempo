@@ -12,25 +12,26 @@ limitations under the License.
 */
 
 import { map, head, tail, ofValue, makeNel } from '../src/nel'
+import { toMaybe } from '../src/option'
 
 describe('nel:map', () => {
   it('should work with any array', () => {
-    expect(map(a => a + 1, makeNel([1, 2, 3])!)).toEqual([2, 3, 4])
+    expect(map(a => a + 1, toMaybe(makeNel([1, 2, 3]))!)).toEqual([2, 3, 4])
   })
 })
 
 describe('nel:head', () => {
   it('should return the first element', () => {
     expect(head(ofValue(1))).toEqual(1)
-    expect(head(makeNel([1, 2])!)).toEqual(1)
-    expect(head(makeNel([1, 2, 3])!)).toEqual(1)
+    expect(head(toMaybe(makeNel([1, 2]))!)).toEqual(1)
+    expect(head(toMaybe(makeNel([1, 2, 3]))!)).toEqual(1)
   })
 })
 
 describe('nel:tail', () => {
   it('should return all the elements except for the first', () => {
     expect(tail(ofValue(1))).toEqual([])
-    expect(tail(makeNel([1, 2])!)).toEqual([2])
-    expect(tail(makeNel([1, 2, 3])!)).toEqual([2, 3])
+    expect(tail(toMaybe(makeNel([1, 2]))!)).toEqual([2])
+    expect(tail(toMaybe(makeNel([1, 2, 3]))!)).toEqual([2, 3])
   })
 })

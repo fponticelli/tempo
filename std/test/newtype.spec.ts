@@ -14,7 +14,7 @@ limitations under the License.
 import { Newtype, makeWrap, unwrap, wrapUnsafe } from '../src/newtype'
 
 import { Assert, NotEquals, Equals } from '../src/types/assert'
-import { Maybe } from '../src/maybe'
+import { toMaybe, Option, none, some } from '../src/option'
 
 const sa = Symbol()
 type SA = typeof sa
@@ -30,16 +30,16 @@ type Int = Newtype<number, typeof intSymbol>
 const isValid = (v: number): boolean => v === Math.round(v)
 const makeInt = makeWrap<Int>(isValid)
 
-type _makeWrap_sets_the_right_type = Assert<Equals<ReturnType<typeof makeInt>, Maybe<Int>>>
+type _makeWrap_sets_the_right_type = Assert<Equals<ReturnType<typeof makeInt>, Option<Int>>>
 
 describe('Newtype', () => {
   it('wrapUnsafe', () => {
     expect(unwrap(wrapUnsafe<Int>(1))).toEqual(1)
   })
   it('makeWrap', () => {
-    expect(makeInt(1.1)).not.toBeDefined()
-    expect(makeInt(1)).toBeDefined()
-    expect(unwrap<Int>(makeInt(1)!)).toEqual(1)
+    expect(makeInt(1.1)).toEqual(none)
+    expect(makeInt(1)).toEqual(some(1))
+    expect(unwrap<Int>(toMaybe(makeInt(1))!)).toEqual(1)
   })
 })
 

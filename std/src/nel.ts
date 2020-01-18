@@ -15,9 +15,9 @@ import { Newtype, makeWrap, unwrap, wrapUnsafe } from './newtype'
 import * as Arr from './arrays'
 import { Ordering } from './ord'
 
-const nelSymbol = Symbol()
+const NEL_ = Symbol()
 
-export type Nel<T> = Newtype<T[], typeof nelSymbol>
+export type Nel<T> = Newtype<T[], typeof NEL_>
 
 export const isValid = <T>(arr: T[]) => arr.length > 0
 
