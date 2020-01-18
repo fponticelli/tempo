@@ -2,7 +2,7 @@
   "name": "tempo-std",
   "license": "Apache-2.0",
   "description": "Std library for TypeScript. Natural complement to the tempo libs.",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "keywords": [
     "tempo",
     "framework",

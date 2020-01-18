@@ -4,10 +4,10 @@
   "license": "Apache-2.0",
   "private": true,
   "dependencies": {
-    "tempo-std": "0.1.0",
-    "tempo-core": "1.5.0",
-    "tempo-dom": "0.13.0",
-    "tempo-store": "1.1.1",
+    "tempo-std": "0.2.0",
+    "tempo-core": "1.6.0",
+    "tempo-dom": "0.14.0",
+    "tempo-store": "1.1.2",
     "partsing": "0.7.3",
     "dompurify": "2.0.7"
   },

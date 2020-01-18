@@ -2,6 +2,29 @@
   "name": "tempo-dom",
   "entries": [
     {
+      "version": "0.14.0",
+      "tag": "tempo-dom_v0.14.0",
+      "date": "Sat, 18 Jan 2020 05:08:11 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Updated dependency on tempo-std."
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"tempo-std\" from `0.1.0` to `0.2.0`"
+          },
+          {
+            "comment": "Updating dependency \"tempo-core\" from `1.5.0` to `1.6.0`"
+          },
+          {
+            "comment": "Updating dependency \"tempo-store\" from `1.1.1` to `1.1.2`"
+          }
+        ]
+      }
+    },
+    {
       "version": "0.13.0",
       "tag": "tempo-dom_v0.13.0",
       "date": "Wed, 01 Jan 2020 00:17:16 GMT",

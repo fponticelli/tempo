@@ -14,9 +14,9 @@
     "url": "https://github.com/fponticelli"
   },
   "dependencies": {
-    "tempo-core": "1.5.0",
-    "tempo-dom": "0.13.0",
-    "tempo-store": "1.1.1",
+    "tempo-core": "1.6.0",
+    "tempo-dom": "0.14.0",
+    "tempo-store": "1.1.2",
     "tslib": "1.10.0"
   },
   "devDependencies": {

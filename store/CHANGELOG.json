@@ -2,6 +2,18 @@
   "name": "tempo-store",
   "entries": [
     {
+      "version": "1.1.2",
+      "tag": "tempo-store_v1.1.2",
+      "date": "Sat, 18 Jan 2020 05:08:11 GMT",
+      "comments": {
+        "dependency": [
+          {
+            "comment": "Updating dependency \"tempo-core\" from `1.5.0` to `1.6.0`"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.1.1",
       "tag": "tempo-store_v1.1.1",
       "date": "Wed, 01 Jan 2020 00:17:16 GMT",

@@ -2,6 +2,18 @@
   "name": "tempo-core",
   "entries": [
     {
+      "version": "1.6.0",
+      "tag": "tempo-core_v1.6.0",
+      "date": "Sat, 18 Jan 2020 05:08:11 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Moved generic code into tempo-std."
+          }
+        ]
+      }
+    },
+    {
       "version": "1.5.0",
       "tag": "tempo-core_v1.5.0",
       "date": "Wed, 01 Jan 2020 00:17:16 GMT",

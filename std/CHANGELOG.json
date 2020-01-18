@@ -1,4 +1,17 @@
 {
   "name": "tempo-std",
-  "entries": []
+  "entries": [
+    {
+      "version": "0.2.0",
+      "tag": "tempo-std_v0.2.0",
+      "date": "Sat, 18 Jan 2020 05:08:11 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Add new project tempo-std."
+          }
+        ]
+      }
+    }
+  ]
 }
