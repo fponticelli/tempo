@@ -21,6 +21,8 @@ export type WhenNotEquals<X, Y, A = X, B = never> = NotEquals<X, Y> extends true
   ? A
   : B
 
+export type Cast<A, B> = A extends B ? A : B
+
 // TYPE TESTS
 import { Assert } from './assert'
 
