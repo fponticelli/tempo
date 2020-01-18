@@ -16,7 +16,6 @@
 * `Lazy<T>`
 * `LazyOrNot<T>`
 * `Url`
-* `UUID`
 * `Weekday`
 
 * `tuples.ts` module
