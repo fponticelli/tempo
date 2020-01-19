@@ -13,8 +13,8 @@ limitations under the License.
 
 import { Newtype, NewtypeClass } from '../src/newtype'
 
-import { Assert, NotEquals, Equals, Same } from '../src/types/assert'
-import { toMaybe, Option, none, some } from '../src/option'
+import { Assert, NotEquals, Same } from '../src/types/assert'
+import { Option, none, some } from '../src/option'
 
 const sa = Symbol()
 type SA = typeof sa
