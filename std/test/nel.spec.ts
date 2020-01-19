@@ -11,27 +11,28 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { map, head, tail, ofValue, makeNel } from '../src/nel'
-import { toMaybe } from '../src/option'
+import { Nel, map, head, tail } from '../src/nel'
+
+const NelNumber = Nel<number>()
 
 describe('nel:map', () => {
   it('should work with any array', () => {
-    expect(map(a => a + 1, toMaybe(makeNel([1, 2, 3]))!)).toEqual([2, 3, 4])
+    expect(map(a => a + 1, NelNumber.maybeOf([1, 2, 3])!)).toEqual([2, 3, 4])
   })
 })
 
 describe('nel:head', () => {
   it('should return the first element', () => {
-    expect(head(ofValue(1))).toEqual(1)
-    expect(head(toMaybe(makeNel([1, 2]))!)).toEqual(1)
-    expect(head(toMaybe(makeNel([1, 2, 3]))!)).toEqual(1)
+    expect(head(NelNumber.ofValue(1))).toEqual(1)
+    expect(head(NelNumber.maybeOf([1, 2])!)).toEqual(1)
+    expect(head(NelNumber.maybeOf([1, 2, 3])!)).toEqual(1)
   })
 })
 
 describe('nel:tail', () => {
   it('should return all the elements except for the first', () => {
-    expect(tail(ofValue(1))).toEqual([])
-    expect(tail(toMaybe(makeNel([1, 2]))!)).toEqual([2])
-    expect(tail(toMaybe(makeNel([1, 2, 3]))!)).toEqual([2, 3])
+    expect(tail(NelNumber.ofValue(1))).toEqual([])
+    expect(tail(NelNumber.maybeOf([1, 2])!)).toEqual([2])
+    expect(tail(NelNumber.maybeOf([1, 2, 3])!)).toEqual([2, 3])
   })
 })

@@ -11,9 +11,9 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { Newtype, makeWrap, unwrap, wrapUnsafe } from '../src/newtype'
+import { Newtype, NewtypeClass } from '../src/newtype'
 
-import { Assert, NotEquals, Equals } from '../src/types/assert'
+import { Assert, NotEquals, Equals, Same } from '../src/types/assert'
 import { toMaybe, Option, none, some } from '../src/option'
 
 const sa = Symbol()
@@ -23,23 +23,23 @@ type SB = typeof sb
 
 type _matching_signature_should_not_be_sufficient = Assert<NotEquals<Newtype<number, SA>, Newtype<number, SB>>>
 
-const intSymbol = Symbol()
+type Int = Newtype<number, { readonly Int: unique symbol }>
+const Int = new class extends NewtypeClass<Int> {
+  isValid(v: number): boolean { return v === Math.round(v) }
+}
 
-type Int = Newtype<number, typeof intSymbol>
+type _ = ReturnType<typeof Int['of']>
 
-const isValid = (v: number): boolean => v === Math.round(v)
-const makeInt = makeWrap<Int>(isValid)
-
-type _makeWrap_sets_the_right_type = Assert<Equals<ReturnType<typeof makeInt>, Option<Int>>>
+type _makeWrap_sets_the_right_type = Assert<Same<_, Option<Int>>>
 
 describe('Newtype', () => {
   it('wrapUnsafe', () => {
-    expect(unwrap(wrapUnsafe<Int>(1))).toEqual(1)
+    expect(Int.get(Int.unsafeOf(1))).toEqual(1)
   })
   it('makeWrap', () => {
-    expect(makeInt(1.1)).toEqual(none)
-    expect(makeInt(1)).toEqual(some(1))
-    expect(unwrap<Int>(toMaybe(makeInt(1))!)).toEqual(1)
+    expect(Int.of(1.1)).toEqual(none)
+    expect(Int.of(1)).toEqual(some(1))
+    expect(Int.get(Int.maybeOf(1)!)).toEqual(1)
   })
 })
 

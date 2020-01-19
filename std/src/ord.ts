@@ -5,6 +5,10 @@ export enum Ordering {
 }
 
 export class Ord<T> {
+  static fromNumberComparison<T>(compare: (a: T, b: T) => number) {
+    return new Ord<T>(fromNumberComparison(compare))
+  }
+
   constructor(
     readonly compare: (a: T, b: T) => Ordering
   ) {}

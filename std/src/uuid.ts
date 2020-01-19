@@ -1,4 +1,4 @@
-import { Newtype, makeWrap, wrapUnsafe, unwrap } from './newtype'
+import { Newtype, NewtypeClass } from './newtype'
 
 /**
  * Helper functions to generate [UUID](http://en.wikipedia.org/wiki/Universally_unique_identifier)
@@ -29,20 +29,18 @@ export const create = () => {
   s[23] = '-'
   for (i = 24; i < 36; i++)
     s[i] = srandom()
-  return wrapUnsafe<UUID>(s.join(''))
+  return UUID.unsafeOf(s.join(''))
 }
 
 const pattern = /^[0123456789abcdef]{8}-[0123456789abcdef]{4}-4[0123456789abcdef]{3}-[89ab][0123456789abcdef]{3}-[0123456789abcdef]{12}$/i
 
-const UUID_ = Symbol()
-
 /**
  * Returns `true` if the passed `uuid` conforms to the UUID v.4 format.
  */
-export type UUID = Newtype<string, typeof UUID_>
+export type UUID = Newtype<string, { readonly UUID: unique symbol }>
 
-export const isValid = (uuid: string) => pattern.test(uuid)
+export const UUID = new class extends NewtypeClass<UUID> {
+  isValid(uuid: string) { return pattern.test(uuid) }
+}()
 
-export const makeUUID = makeWrap<UUID>(isValid)
-
-export const toString = (uuid: UUID) => unwrap(uuid)
+export const toString = (uuid: UUID) => UUID.get(uuid)

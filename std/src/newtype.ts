@@ -1,13 +1,45 @@
-import { Option, none, some } from './option'
+import { Option, ofValue } from './option'
+import { Maybe } from './maybe'
 
-export interface Newtype<V, S extends Symbol> {
+/**
+ * Usage:
+ * export interface Int extends Newtype<
+ *   number,
+ *   { readonly Int: unique symbol }
+ * > {}
+ *
+ * export const Int = new class extends NewtypeClass<Int> {
+ *   isValid(v: number) { return Number.isInteger(v) }
+ * }()
+ */
+
+export interface Newtype<V, S> {
   readonly _T: V
   readonly _S: S
 }
 
-export const wrapUnsafe = <T extends Newtype<any, any>>(value: T['_T']): T => value as unknown as T
-
-export const unwrap = <T extends Newtype<any, any>>(wrapped: T) => wrapped as T['_T']
-
-export const makeWrap = <T extends Newtype<any, any>>(isValid: (v: T['_T']) => boolean) =>
-  (v: T['_T']): Option<T> => isValid(v) ? some(v) : none
+export abstract class NewtypeClass<T extends Newtype<any, any>> {
+  abstract isValid(v: T['_T']): boolean
+  unsafeOf(v: T['_T']): T {
+    return v as unknown as T
+  }
+  of(v: T['_T']): Option<T> {
+    return ofValue(this.maybeOf(v))
+  }
+  maybeOf(v: T['_T']): Maybe<T> {
+    return this.isValid(v) ? v as unknown as T : undefined
+  }
+  get(v: T): T['_T'] {
+    return v as unknown as T['_T']
+  }
+  maybeModify(f: (v: T['_T']) => T['_T']): (value: T) => Maybe<T> {
+    return (value: T) => this.maybeOf(f(this.get(value)))
+  }
+  modify(f: (v: T['_T']) => T['_T']): (value: T) => Option<T> {
+    const mf = this.maybeModify(f)
+    return (value: T) => ofValue(mf(value))
+  }
+  unsafeModify(f: (v: T['_T']) => T['_T']): (value: T) => T {
+    return (value: T) => this.unsafeOf(f(this.get(value)))
+  }
+}

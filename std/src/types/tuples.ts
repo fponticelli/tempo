@@ -11,6 +11,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+import { Pointer, DeRef } from './generic'
+
 export type Tail<T extends any[]> = ((...args: T) => void) extends (
   _: any,
   ...rest: infer Rest
@@ -26,7 +28,7 @@ type DropNImpl<N extends number, T extends any[], I extends any[]> = {
 export type DropN<N extends number, T extends any[]> = DropNImpl<N, T, []>
 
 type ReverseImpl<T extends any[], R extends any[], I extends any[]> = {
-  return: R
+  return: DeRef<Pointer<R>>
   next: ReverseImpl<T, Prepend<T[Length<I>], R>, Prepend<any, I>>
 }[Length<I> extends Length<T> ? 'return' : 'next']
 

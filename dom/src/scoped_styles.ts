@@ -12,8 +12,8 @@ limitations under the License.
 */
 
 import { UnwrappedValue } from 'tempo-core/lib/value'
-import { keys } from 'tempo-std/lib//objects'
-import { replaceAll } from 'tempo-std/lib//strings'
+import { keys } from 'tempo-std/lib/objects'
+import { replace } from 'tempo-std/lib/strings'
 import { DOMTemplate } from './template'
 import { DOMContext } from './context'
 import { DOMAttribute } from './value'
@@ -277,7 +277,7 @@ function make<State, Action, Query>(
       if (!update) item.hits++
     } else {
       name = '' + (++counter)
-      const content = replaceAll(originalContent, ':scope', `[data-tescope-${type}=${name}]`)
+      const content = replace(originalContent, ':scope', `[data-tescope-${type}=${name}]`)
       const template = headPortal<State, Action, Query>(el('style', { attrs: { [`data-tedef-${type}`]: name } }, text(content)))
       const view = template.render(ctx, state)
       cacheByName.set(name, { hits: 1, view, content: originalContent })

@@ -13,6 +13,9 @@ limitations under the License.
 
 import { Equals, NotEquals } from './assert'
 
+export type Pointer<T> = () => T
+export type DeRef<T extends () => any> = T extends () => infer Ret ? Ret : never
+
 export type WhenEquals<X, Y, A = X, B = never> = Equals<X, Y> extends true
   ? A
   : B

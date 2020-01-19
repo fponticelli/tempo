@@ -11,7 +11,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-export type DeRef<T> = () => T
+import { Pointer } from './generic'
 
 export type Assert<A extends true> = A extends never
   ? 'FAIL'
@@ -27,11 +27,17 @@ export type AssertNot<A extends false> = A extends never
 export type Extends<A, B> = A extends B ? true : false
 
 // do not use with `any`
-export type Same<A, B> = DeRef<A> extends DeRef<B>
-  ? DeRef<B> extends DeRef<A>
+export type Same<A, B> = Pointer<A> extends Pointer<B>
+  ? Pointer<B> extends Pointer<A>
     ? true
     : false
   : false
+
+export type NotSame<A, B> = Pointer<A> extends Pointer<B>
+  ? Pointer<B> extends Pointer<A>
+    ? false
+    : true
+  : true
 
 // does not work comparing intersection types with literals. Use `Same` for that.
 export type Equals<A, B> = (<T>() => T extends A ? 1 : 2) extends <
@@ -42,13 +48,14 @@ export type Equals<A, B> = (<T>() => T extends A ? 1 : 2) extends <
 
 export type NotEquals<A, B> = Equals<A, B> extends true ? false : true
 
-export type IsNever<T> = DeRef<T> extends DeRef<never> ? true : false
+export type IsNever<T> = Pointer<T> extends Pointer<never> ? true : false
 
 // TYPE TESTS
 type _primitives_are_not_equals = AssertNot<Equals<number, string>>
 type _primitives_are_not_same = AssertNot<Same<number, string>>
 type _literals_are_equals = Assert<Equals<1, 1>>
 type _literals_are_same = Assert<Same<1, 1>>
+type _literals_are_notsame = Assert<NotSame<1, 2>>
 type _any_is_not_equal_to_literal = Assert<NotEquals<any, 1>>
 type _any_is_equal_to_any = Assert<Equals<any, any>>
 type _union_is_not_equal_to_member = Assert<NotEquals<1 | 2, 1>>
@@ -71,6 +78,7 @@ type _TESTS_ =
   | _primitives_are_not_same
   | _literals_are_equals
   | _literals_are_same
+  | _literals_are_notsame
   | _any_is_not_equal_to_literal
   | _any_is_equal_to_any
   | _union_is_not_equal_to_member
