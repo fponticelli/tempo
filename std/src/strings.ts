@@ -73,7 +73,7 @@ export function beforeLast(value: string, searchFor: string) {
  * `capitalize` returns a string with the first character convert to upper case.
  */
 export function capitalize(s: string) {
-  return s.substr(0, 1).toUpperCase() + s.substr(1)
+  return s.substring(0, 1).toUpperCase() + s.substring(1)
 }
 
 const upperMatch = (s: string) => s.toUpperCase()
@@ -91,7 +91,7 @@ export function capitalizeWords(value: string, whiteSpaceOnly = false): string {
 }
 
 /**
- * Replaces occurrances of `\r\n`, `\n\r`, `\r` with `\n`;
+ * Replaces occurrances of `\r\n`, `\n\r`, `\r` with `\n`
  */
 export function canonicalizeNewlines(value: string): string {
   return value.replace(CANONICALIZE_LINES, '\n')
@@ -210,7 +210,7 @@ export function containsAll(s: string, tests: Array<string>) {
 }
 
 /**
- * `dasherize` replaces all the occurrances of `_` with `-`;
+ * `dasherize` replaces all the occurrances of `_` with `-`
  */
 export function dasherize(s: string) {
   return s.replace('_', '-')
@@ -219,7 +219,7 @@ export function dasherize(s: string) {
 /**
  * Compares strings `a` and `b` and returns the position where they differ.
  * ```ts
- * diffAt('abcdef', 'abc123'); // returns 3
+ * diffAt('abcdef', 'abc123') // returns 3
  * ```
  */
 export function diffAt(a: string, b: string) {
@@ -234,7 +234,7 @@ export function diffAt(a: string, b: string) {
  * `ellipsis` truncates `s` at len `maxlen` replaces the last characters with the content
  * of `symbol`.
  * ```ts
- * ellipsis('tempo is a nice library', 9); // returns 'tempo is …'
+ * ellipsis('tempo is a nice library', 9) // returns 'tempo is …'
  * ```
  */
 export function ellipsis(s: string, maxlen = 20, symbol = '…') {
@@ -253,7 +253,7 @@ export function ellipsis(s: string, maxlen = 20, symbol = '…') {
 /**
  * Same as `ellipsis` but puts the symbol in the middle of the string and not to the end.
  * ```ts
- * ellipsisMiddle('tempo is a nice library', 18); // returns 'tempo is … library'
+ * ellipsisMiddle('tempo is a nice library', 18) // returns 'tempo is … library'
  * ```
  */
 export function ellipsisMiddle(s: string, maxlen = 20, symbol = '…') {
@@ -309,15 +309,16 @@ export function from(value: string, searchFor: string) {
     return value.substring(pos)
 }
 
-const HASCODE_MAX = 2147483647
-const HASCODE_MUL = 31
-export function hashCode(value: string) {
-  let code = 0
-  for (let i = 0; i < value.length; i++) {
-    const c = value.charCodeAt(i)
-    code = (HASCODE_MUL * code + c) % HASCODE_MAX
+export function hashCode(value: string, seed = 0x811c9dc5) {
+  let hval = seed
+  for (let i = 0, l = value.length; i < l; i++) {
+    // tslint:disable-next-line
+    hval ^= value.charCodeAt(i)
+    // tslint:disable-next-line
+    hval += (hval << 1) + (hval << 4) + (hval << 7) + (hval << 8) + (hval << 24)
   }
-  return code
+  // tslint:disable-next-line
+  return hval >>> 0
 }
 
 /**
@@ -331,7 +332,7 @@ export function hasContent(value: string): boolean {
  * Works the same as `underscore` but also replaces underscores with whitespaces.
  */
 export function humanize(s: string) {
-  return underscore(s).replace('_', ' ')
+  return replace(underscore(s), '_', ' ')
 }
 
 /**
@@ -420,7 +421,7 @@ export function randomSequence64(length: number): string {
 /**
  * It maps a string character by character using `callback`.
  */
-export function map<T>(value: string, callback: (c: string) => T): Array<T> {
+export function map<T>(callback: (c: string) => T, value: string): Array<T> {
   return toArray(value).map(callback)
 }
 
@@ -464,12 +465,12 @@ export function removeOne(value: string, toremove: string): string {
 
 /**
  * `repeat` builds a new string by repeating the argument `s`, n `times`.
- * ```haxe
- * 'Xy'.repeat(3); // generates 'XyXyXy'
+ * ```ts
+ * repeat('Xy', 3) // generates 'XyXyXy'
  * ```
  */
 export function repeat(s: string, times: number) {
-  return fill(times, s)
+  return fill(times, s).join('')
 }
 
 /**
@@ -520,10 +521,10 @@ export function stripTags(s: string): string {
 
 /**
  * Surrounds a string with the contents of `left` and `right`. If `right` is omitted,
- * `left` will be used on both sides;
+ * `left` will be used on both sides
  */
-export function surround(s: string, left: string, right: string) {
-  return '$left$s${null==right?left:right}'
+export function surround(s: string, left: string, right = left) {
+  return `${left}${s}${right}`
 }
 
 /**

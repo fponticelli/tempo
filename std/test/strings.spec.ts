@@ -68,10 +68,12 @@ describe('strings.ts', () => {
   })
 
   it('HashCode', () => {
-    expect(97).toBe(hashCode('a'))
-    expect(96354).toBe(hashCode('abc'))
-    expect(898829415).toBe(hashCode('abcdefghijklm'))
-    expect(410520826).toBe(hashCode('abcdefghijklmabcdefghijklmabcdefghijklmabcdefghijklmabcdefghijklm!!!'))
+    expect(hashCode('a')).toBe(3826002220)
+    expect(hashCode('abc')).toBe(440920331)
+    expect(hashCode('abcdefghijklm')).toBe(998463208)
+    expect(hashCode('abcdefghijklM')).toBe(461579400)
+    expect(hashCode('Abcdefghijklm')).toBe(3054447752)
+    expect(hashCode('abcdefghijklmabcdefghijklmabcdefghijklmabcdefghijklmabcdefghijklm!!')).toBe(3846459698)
   })
 
   it('Ucwordsws', () => {
@@ -83,7 +85,7 @@ describe('strings.ts', () => {
       { expected : 'Test\tTest', test : 'test\ttest' }
     ]
     for (const item of tests)
-      expect(item.expected).toBe(capitalizeWords(item.test, true))
+      expect(capitalizeWords(item.test, true)).toBe(item.expected)
   })
 
   it('DifferAt', () => {
@@ -96,10 +98,10 @@ describe('strings.ts', () => {
 
   it('Ellipsis', () => {
     var test = 'abcdefghijkl',
-        tests: Array<{ expected: string, len: number | null, symbol: string }> = [
-      { expected : 'abcdefghijkl', len : null, symbol : null },
-      { expected : 'abcdefghijkl', len : 100, symbol : null },
-      { expected : 'abcd…', len : 5, symbol : null },
+        tests = [
+      { expected : 'abcdefghijkl', len : undefined, symbol : undefined },
+      { expected : 'abcdefghijkl', len : 100, symbol : undefined },
+      { expected : 'abcd…', len : 5, symbol : undefined },
       { expected : 'a ...', len : 5, symbol : ' ...' },
       { expected : '..', len : 2, symbol : ' ...' },
       { expected : 'abcdef ...', len : 10, symbol : ' ...' }
@@ -110,10 +112,10 @@ describe('strings.ts', () => {
 
   it('EllipsisMiddle', () => {
     var test = 'abcdefghijkl',
-        tests: Array<{ expected: string, len: number | null, symbol: string }> = [
-      { expected : 'abcdefghijkl', len : null, symbol : null },
-      { expected : 'abcdefghijkl', len : 100, symbol : null },
-      { expected : 'ab…kl', len : 5, symbol : null },
+        tests = [
+      { expected : 'abcdefghijkl', len : undefined, symbol : undefined },
+      { expected : 'abcdefghijkl', len : 100, symbol : undefined },
+      { expected : 'ab…kl', len : 5, symbol : undefined },
       { expected : 'a ...', len : 5, symbol : ' ...' },
       { expected : '..', len : 2, symbol : ' ...' },
       { expected : 'abc ...jkl', len : 10, symbol : ' ...' }
@@ -131,7 +133,7 @@ describe('strings.ts', () => {
       { expected : 'Test\tTest', test : 'test\ttest' }
     ]
     for (const item of tests)
-      expect(item.expected).toBe(capitalizeWords(item.test))
+      expect(capitalizeWords(item.test)).toBe(item.expected)
   })
 
   it('AlphaNum', () => {
@@ -147,9 +149,9 @@ describe('strings.ts', () => {
   })
 
   it('Humanize', () => {
-    expect('hello world').toBe(humanize('helloWorld'))
-    expect('my long string').toBe(humanize('my_long_string'))
-    expect('ignore many').toBe(humanize('ignoreMANY'))
+    expect(humanize('helloWorld')).toBe('hello world')
+    expect(humanize('my_long_string')).toBe('my long string')
+    expect(humanize('ignoreMANY')).toBe('ignore many')
   })
 
   it('WrapColumn', () => {
