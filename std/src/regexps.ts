@@ -12,12 +12,23 @@ limitations under the License.
 */
 
 export const map = (f: (...s: string[]) => string, pattern: RegExp, subject: string) => {
-  let pos = 0
   const buff = [] as string[]
-  pattern.lastIndex = pos
+  let pos = 0
   let result: RegExpExecArray | null
-  while ((result = pattern.exec(subject)) !== null) {
-    buff.push(f(...result))
+  if (pattern.global) {
+    pattern.lastIndex = 0
+    while ((result = pattern.exec(subject)) !== null) {
+      buff.push(subject.substring(pos, result.index))
+      buff.push(f(...result))
+      pos = result.index + result[0].length
+    }
+  } else {
+    while ((result = pattern.exec(subject.substring(pos))) !== null) {
+      buff.push(subject.substring(pos, pos + result.index))
+      buff.push(f(...result))
+      pos += result.index + result[0].length
+    }
   }
+  buff.push(subject.substring(pos))
   return buff.join('')
 }
