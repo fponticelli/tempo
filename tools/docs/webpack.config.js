@@ -2,7 +2,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
 module.exports = {
-  entry: './src/index.ts',
+  entry: './src/main.ts',
   devtool: 'inline-source-map',
   module: {
     rules: [
@@ -29,17 +29,11 @@ module.exports = {
   },
   output: {
     filename: 'index.js',
-    path: path.resolve(__dirname, '../../docs/demo/paper'),
+    path: path.resolve(__dirname, '../../docs/doc'),
     // publicPath: '.'
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      title: 'Tempo • PaperJS',
-      meta: {
-        description: "Mini application to monitor regressions and performance improvements across versions of Tempo.",
-        priority: "3"
-      }
-    }),
+    new HtmlWebpackPlugin(),
   ],
   optimization: {
     usedExports: true,

@@ -1,0 +1,29 @@
+{
+  "demos": [
+    {
+      "path": "demo/hnpwa",
+      "title": "Tempo HNPWA",
+      "description": "Tempo Hacker News PWA / Sample SPA"
+    },
+    {
+      "path": "demo/todomvc",
+      "title": "Tempo • TodoMVC",
+      "description": "Tempo implementation of the classic TodoMVC application."
+    },
+    {
+      "path": "demo/paper",
+      "title": "Tempo • PaperJS",
+      "description": "Mini application to monitor regressions and performance improvements across versions of Tempo."
+    },
+    {
+      "path": "demo/readme",
+      "title": "Tempo • Readme",
+      "description": "Basic example of a Tempo Web App"
+    },
+    {
+      "path": "demo/benchmark",
+      "title": "Tempo Benchmark",
+      "description": "Mini application to monitor regressions and performance improvements across versions of Tempo."
+    }
+  ]
+}

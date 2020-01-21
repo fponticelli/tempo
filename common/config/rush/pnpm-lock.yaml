@@ -10,6 +10,7 @@ dependencies:
   '@rush-temp/tempo-root': 'file:projects/tempo-root.tgz'
   '@rush-temp/tempo-std': 'file:projects/tempo-std.tgz'
   '@rush-temp/tempo-store': 'file:projects/tempo-store.tgz'
+  '@rush-temp/tempo-tools.docs': 'file:projects/tempo-tools.docs.tgz_sass@1.23.7'
   '@types/dompurify': 2.0.0
   '@types/jest': 24.0.22
   '@types/jsdom': 12.2.4
@@ -39,6 +40,7 @@ dependencies:
   todomvc-common: 1.0.5
   ts-jest: 24.1.0_jest@24.9.0
   ts-loader: 6.2.1_typescript@3.7.2
+  ts-node: 8.6.2_typescript@3.7.2
   tslib: 1.10.0
   tslint: 5.20.1_typescript@3.7.2
   typedoc: 0.16.7
@@ -1481,6 +1483,10 @@ packages:
     dev: false
     resolution:
       integrity: sha512-5hYdAkZlcG8tOLujVDTgCT+uPX0VnpAH28gWsLfzpXYm7wP6mp5Q/gYyR7YQ0cKVJcXJnl3j2kpBan13PtQf6w==
+  /arg/4.1.2:
+    dev: false
+    resolution:
+      integrity: sha512-+ytCkGcBtHZ3V2r2Z06AncYO8jz46UEamcspGoU8lHcEbpn6J77QK0vdWvChsclg/tM5XIJC5tnjmPp7Eq6Obg==
   /argparse/1.0.10:
     dependencies:
       sprintf-js: 1.0.3
@@ -5192,6 +5198,9 @@ packages:
       node: '>=6'
     peerDependencies:
       jest-resolve: '*'
+    peerDependenciesMeta:
+      jest-resolve:
+        optional: true
     resolution:
       integrity: sha512-pgFw2tm54fzgYvc/OHrnysABEObZCUNFnhjoRjaVOCN8NYc032/gVjPaHD4Aq6ApkSieWtfKAFQtmDKAmhupnQ==
   /jest-regex-util/24.9.0:
@@ -9154,6 +9163,22 @@ packages:
       typescript: '*'
     resolution:
       integrity: sha512-Dd9FekWuABGgjE1g0TlQJ+4dFUfYGbYcs52/HQObE0ZmUNjQlmLAS7xXsSzy23AMaMwipsx5sNHvoEpT2CZq1g==
+  /ts-node/8.6.2_typescript@3.7.2:
+    dependencies:
+      arg: 4.1.2
+      diff: 4.0.1
+      make-error: 1.3.5
+      source-map-support: 0.5.16
+      typescript: 3.7.2
+      yn: 3.1.1
+    dev: false
+    engines:
+      node: '>=6.0.0'
+    hasBin: true
+    peerDependencies:
+      typescript: '>=2.7'
+    resolution:
+      integrity: sha512-4mZEbofxGqLL2RImpe3zMJukvEvcO1XP8bj8ozBPySdCUXEcU5cIRwR0aM3R+VoZq7iXc8N86NC0FspGRqP4gg==
   /tslib/1.10.0:
     dev: false
     resolution:
@@ -10050,6 +10075,12 @@ packages:
     dev: false
     resolution:
       integrity: sha1-a6MY6xaWFyf10oT46gA+jWFU0Mg=
+  /yn/3.1.1:
+    dev: false
+    engines:
+      node: '>=6'
+    resolution:
+      integrity: sha512-Ux4ygGWsu2c7isFWe8Yu1YluJmqVhxqK2cLXNQA5AcC3QfbGNpM7fu0Y8b/z16pXLnFxZYvWhd3fhBY9DLmC6Q==
   'file:projects/tempo-core.tgz':
     dependencies:
       '@types/jest': 24.0.22
@@ -10266,6 +10297,33 @@ packages:
       integrity: sha512-n18kShAChJKVhWhcqti0Aw8f7ukSUchcEtv8w44JHJj8qhNBSvcoAsSCzrlRut21m+l92gCzllJf1cW0+ob+Sw==
       tarball: 'file:projects/tempo-store.tgz'
     version: 0.0.0
+  'file:projects/tempo-tools.docs.tgz_sass@1.23.7':
+    dependencies:
+      acorn: 7.1.0
+      babel-types: 6.26.0
+      css-loader: 3.3.2_webpack@4.41.2
+      cssnano: 4.1.10
+      html-webpack-plugin: 3.2.0_webpack@4.41.2
+      node-sass: 4.13.0
+      prettier: 1.19.1
+      sass-loader: 8.0.0_2fa3437e004bcebf5b7457d96c39fa2e
+      style-loader: 1.0.1_webpack@4.41.2
+      ts-loader: 6.2.1_typescript@3.7.2
+      ts-node: 8.6.2_typescript@3.7.2
+      tslint: 5.20.1_typescript@3.7.2
+      typescript: 3.7.2
+      webpack: 4.41.2_webpack@4.41.2
+      webpack-cli: 3.3.10_webpack@4.41.2
+      webpack-dev-server: 3.9.0_webpack@4.41.2
+    dev: false
+    id: 'file:projects/tempo-tools.docs.tgz'
+    name: '@rush-temp/tempo-tools.docs'
+    peerDependencies:
+      sass: '*'
+    resolution:
+      integrity: sha512-n7NNaaAsqyCgldCA4iHX1yZ3sPHxjtFFfVD0ImFTbnXuCLYh1/Qi/jQMC7xioqb6xVeMbGx0mWHvYSOsCpxh1Q==
+      tarball: 'file:projects/tempo-tools.docs.tgz'
+    version: 0.0.0
 registry: ''
 specifiers:
   '@rush-temp/tempo-core': 'file:./projects/tempo-core.tgz'
@@ -10279,6 +10337,7 @@ specifiers:
   '@rush-temp/tempo-root': 'file:./projects/tempo-root.tgz'
   '@rush-temp/tempo-std': 'file:./projects/tempo-std.tgz'
   '@rush-temp/tempo-store': 'file:./projects/tempo-store.tgz'
+  '@rush-temp/tempo-tools.docs': 'file:./projects/tempo-tools.docs.tgz'
   '@types/dompurify': 2.0.0
   '@types/jest': 24.0.22
   '@types/jsdom': 12.2.4
@@ -10308,6 +10367,7 @@ specifiers:
   todomvc-common: 1.0.5
   ts-jest: 24.1.0
   ts-loader: 6.2.1
+  ts-node: 8.6.2
   tslib: 1.10.0
   tslint: 5.20.1
   typedoc: 0.16.7

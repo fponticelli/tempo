@@ -1,0 +1,69 @@
+{
+  "name": "tempo-tools.docs",
+  "version": "0.1.0",
+  "description": "",
+  "sideEffects": false,
+  "keywords": [
+    "tempo",
+    "paperjs",
+    "2d",
+    "graphics"
+  ],
+  "license": "Apache-2.0",
+  "private": false,
+  "scripts": {
+    "buildtoc": "ts-node --project tsconfig.script.json ./scripts/buildtoc.ts",
+    "compile": "webpack --mode=production",
+    "clean": "rm -rf dist/* && rm -rf ../../docs/demo/paper/*",
+    "build": "npm run clean && npm run compile",
+    "watch": "webpack --watch",
+    "tslint": "tslint -p ./tslint.json",
+    "tslint-fix": "tslint -p ./tslint.json --fix",
+    "prettier": "prettier -c src/**/*.ts",
+    "prettier-fix": "prettier --write src/**/*.ts",
+    "start": "webpack-dev-server --open"
+  },
+  "homepage": "https://github.com/fponticelli/tempo",
+  "bugs": {
+    "url": "https://github.com/fponticelli/tempo/issues"
+  },
+  "author": {
+    "name": "Franco Ponticelli",
+    "email": "franco.ponticelli@gmail.com",
+    "url": "https://github.com/fponticelli"
+  },
+  "dependencies": {
+    "acorn": "7.1.0",
+    "tempo-std": "0.2.0",
+    "tempo-core": "1.6.0",
+    "tempo-dom": "0.14.0",
+    "tempo-store": "1.1.2"
+  },
+  "devDependencies": {
+    "jsdom": "15.1.1",
+    "@types/jsdom": "12.2.4",
+    "babel-types": "6.26.0",
+    "cssnano": "4.1.10",
+    "prettier": "1.19.1",
+    "tslint": "5.20.1",
+    "typescript": "3.7.2",
+    "ts-loader": "6.2.1",
+    "webpack": "4.41.2",
+    "webpack-cli": "3.3.10",
+    "webpack-dev-server": "3.9.0",
+    "html-webpack-plugin": "3.2.0",
+    "style-loader": "1.0.1",
+    "css-loader": "3.3.2",
+    "sass-loader": "8.0.0",
+    "node-sass": "4.13.0",
+    "ts-node": "8.6.2",
+    "@types/node": "10.12.18"
+  },
+  "main": "lib/index.js",
+  "module": "es6/index.js",
+  "typings": "lib/index.d.ts",
+  "files": [
+    "lib",
+    "es6"
+  ]
+}
