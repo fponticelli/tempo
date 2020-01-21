@@ -29,7 +29,7 @@ module.exports = {
   },
   output: {
     filename: 'index.js',
-    path: path.resolve(__dirname, '../../docs/demo/paper'),
+    path: path.resolve(__dirname, './build'),
     // publicPath: '.'
   },
   plugins: [

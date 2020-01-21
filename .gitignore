@@ -72,6 +72,4 @@ package-deps.json
 
 .bundle/
 vendor/
-docs/_site/
-docs/.jekyll-cache/
-docs/.sass-cache/
+*/docs/
