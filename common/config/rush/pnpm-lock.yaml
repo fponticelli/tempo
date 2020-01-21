@@ -41,6 +41,8 @@ dependencies:
   ts-loader: 6.2.1_typescript@3.7.2
   tslib: 1.10.0
   tslint: 5.20.1_typescript@3.7.2
+  typedoc: 0.16.7
+  typedoc-plugin-markdown: 2.2.16_typedoc@0.16.7
   typescript: 3.7.2
   webpack: 4.41.2_webpack@4.41.2
   webpack-cli: 3.3.10_webpack@4.41.2
@@ -1695,6 +1697,12 @@ packages:
     dev: false
     resolution:
       integrity: sha1-OxWl3btIKni0zpwByLoYFwLZ1s4=
+  /backbone/1.4.0:
+    dependencies:
+      underscore: 1.9.2
+    dev: false
+    resolution:
+      integrity: sha512-RLmDrRXkVdouTg38jcgHhyQ/2zjg7a8E6sz2zxfz21Hh17xDJYUHBZimVIt5fUyS8vbfpeSmTL3gUjTEvUV3qQ==
   /balanced-match/1.0.0:
     dev: false
     resolution:
@@ -3772,6 +3780,16 @@ packages:
     dev: false
     resolution:
       integrity: sha1-i/tVAr3kpNNs/e6gB/zKIdfjgq8=
+  /fs-extra/8.1.0:
+    dependencies:
+      graceful-fs: 4.2.3
+      jsonfile: 4.0.0
+      universalify: 0.1.2
+    dev: false
+    engines:
+      node: '>=6 <7 || >=8'
+    resolution:
+      integrity: sha512-yhlQgA6mnOJUKOsRUFsgJdQCvkKhcz8tlZG5HBQfReYZy46OwLcY+Zia0mtdHsOo9y/hP+CxMN0TU9QxoOtG4g==
   /fs-write-stream-atomic/1.0.10:
     dependencies:
       graceful-fs: 4.2.3
@@ -4045,6 +4063,19 @@ packages:
       uglify-js: 3.7.3
     resolution:
       integrity: sha512-3yPecJoJHK/4c6aZhSvxOyG4vJKDshV36VHp0iVCDVh7o9w2vwi3NSnL2MMPj3YdduqaBcu7cGbggJQM0br9xA==
+  /handlebars/4.7.2:
+    dependencies:
+      neo-async: 2.6.1
+      optimist: 0.6.1
+      source-map: 0.6.1
+    dev: false
+    engines:
+      node: '>=0.4.7'
+    hasBin: true
+    optionalDependencies:
+      uglify-js: 3.7.3
+    resolution:
+      integrity: sha512-4PwqDL2laXtTWZghzzCtunQUTLbo31pcCJrd/B/9JP8XbhVzpS5ZXuKqlOzsd1rtcaLo4KqAn8nl8mkknS4MHw==
   /har-schema/2.0.0:
     dev: false
     engines:
@@ -4158,6 +4189,10 @@ packages:
     dev: false
     resolution:
       integrity: sha512-l9sfDFsuqtOqKDsQdqrMRk0U85RZc0RtOR9yPI7mRVOa4FsR/BVnZ0shmQRM96Ji99kYZP/7hn1cedc1+ApsTQ==
+  /highlight.js/9.18.0:
+    dev: false
+    resolution:
+      integrity: sha512-A97kI1KAUzKoAiEoaGcf2O9YPS8nbDTCRFokaaeBhnqjQTvbAuAJrQMm21zw8s8xzaMtCQBtgbyGXLGxdxQyqQ==
   /hmac-drbg/1.0.1:
     dependencies:
       hash.js: 1.1.7
@@ -5337,6 +5372,10 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-YvkBL1Zm7d2B1+h5fHEOdyjCG+sGMz4f8D86/0HiqJ6MB4MnDc8FgP5vdWsGnemOQro7lnYo8UakZ3+5A0jxGw==
+  /jquery/3.4.1:
+    dev: false
+    resolution:
+      integrity: sha512-36+AdBzCL+y6qjw5Tx7HgzeGCzC81MDDgaUP8ld2zhx58HdqXGoBd+tHdrBMiyjGQs0Hxs/MLZTu/eHNJJuWPw==
   /js-base64/2.5.1:
     dev: false
     resolution:
@@ -5513,6 +5552,12 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-l+3HXD0GEI3huGq1njuqtzYK8OYJyXMkOLtQ53pjWh89tvWS2h6l+1zMkYWqlb57+SiQodKZyvMEFb2X+KrFhQ==
+  /jsonfile/4.0.0:
+    dev: false
+    optionalDependencies:
+      graceful-fs: 4.2.3
+    resolution:
+      integrity: sha1-h3Gq4HmbZAdrdmQPygWPnBDjPss=
   /jsprim/1.4.1:
     dependencies:
       assert-plus: 1.0.0
@@ -5757,6 +5802,10 @@ packages:
     dev: false
     resolution:
       integrity: sha512-KpNARQA3Iwv+jTA0utUVVbrh+Jlrr1Fv0e56GGzAFOXN7dk/FviaDW8LHmK52DlcH4WP2n6gI8vN1aesBFgo9w==
+  /lunr/2.3.8:
+    dev: false
+    resolution:
+      integrity: sha512-oxMeX/Y35PNFuZoHp+jUj5OSEmLCaIH4KTFJh7a93cHBoFmpw2IoPs22VIz7vyO2YUnx2Tn9dzIwO2P/4quIRg==
   /magic-string/0.22.5:
     dependencies:
       vlq: 0.2.3
@@ -5822,6 +5871,13 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha1-7Nyo8TFE5mDxtb1B8S80edmN+48=
+  /marked/0.8.0:
+    dev: false
+    engines:
+      node: '>= 8.16.2'
+    hasBin: true
+    resolution:
+      integrity: sha512-MyUe+T/Pw4TZufHkzAfDj6HarCBWia2y27/bhuYkTaiUnfDYFnCP3KUN+9oM7Wi6JA2rymtVYbQu3spE0GCmxQ==
   /md5.js/1.3.5:
     dependencies:
       hash-base: 3.0.4
@@ -7401,6 +7457,12 @@ packages:
       node: '>= 0.6.0'
     resolution:
       integrity: sha1-czIwDoQBYb2j5podHZGn1LwW8YI=
+  /progress/2.0.3:
+    dev: false
+    engines:
+      node: '>=0.4.0'
+    resolution:
+      integrity: sha512-7PiHtLll5LdnKIMw100I+8xJXR5gW2QwWYkT6iJva0bXitZKa/XMrSbdmg3r2Xnaidz9Qumd0VPaMrZlF9V9sA==
   /promise-inflight/1.0.1:
     dev: false
     resolution:
@@ -7669,6 +7731,14 @@ packages:
       node: '>=4'
     resolution:
       integrity: sha512-wlgPA6cCIIg9gKz0fgAPjnzh4yR/LnXovwuo9hvyGvx3h8nX4+/iLZplfUWasXpqD8BdnGnP5njOFjkUwPzvjA==
+  /rechoir/0.6.2:
+    dependencies:
+      resolve: 1.14.1
+    dev: false
+    engines:
+      node: '>= 0.10'
+    resolution:
+      integrity: sha1-hSBLVNuoLVdC4oyWdW70OvUOM4Q=
   /redent/1.0.0:
     dependencies:
       indent-string: 2.1.0
@@ -8258,6 +8328,17 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha1-2kL0l0DAtC2yypcoVxyxkMmO/qM=
+  /shelljs/0.8.3:
+    dependencies:
+      glob: 7.1.6
+      interpret: 1.2.0
+      rechoir: 0.6.2
+    dev: false
+    engines:
+      node: '>=4'
+    hasBin: true
+    resolution:
+      integrity: sha512-fc0BKlAWiLpwZljmOvAOTE/gXawtCoNrP5oaY7KIaQbbyHeQVg01pSEuEGvGh3HEdBU4baCD7wQBwADmM/7f7A==
   /shellwords/0.1.1:
     dev: false
     resolution:
@@ -9145,6 +9226,48 @@ packages:
     dev: false
     resolution:
       integrity: sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
+  /typedoc-default-themes/0.7.2:
+    dependencies:
+      backbone: 1.4.0
+      jquery: 3.4.1
+      lunr: 2.3.8
+      underscore: 1.9.2
+    dev: false
+    engines:
+      node: '>= 8'
+    resolution:
+      integrity: sha512-fiFKlFO6VTqjcno8w6WpTsbCgXmfPHVjnLfYkmByZE7moaz+E2DSpAT+oHtDHv7E0BM5kAhPrHJELP2J2Y2T9A==
+  /typedoc-plugin-markdown/2.2.16_typedoc@0.16.7:
+    dependencies:
+      fs-extra: 8.1.0
+      handlebars: 4.7.2
+      typedoc: 0.16.7
+    dev: false
+    engines:
+      node: '>=6'
+    peerDependencies:
+      typedoc: '>=0.10.0'
+    resolution:
+      integrity: sha512-0Y1zBqL8EQGnwMGoh82LtvioaVs1BGMr1qzINXWwh0R769Awg17vjnKZ8pBY9VHVc6yINB6ZvrLhJsfZuzJxkw==
+  /typedoc/0.16.7:
+    dependencies:
+      '@types/minimatch': 3.0.3
+      fs-extra: 8.1.0
+      handlebars: 4.7.2
+      highlight.js: 9.18.0
+      lodash: 4.17.15
+      marked: 0.8.0
+      minimatch: 3.0.4
+      progress: 2.0.3
+      shelljs: 0.8.3
+      typedoc-default-themes: 0.7.2
+      typescript: 3.7.2
+    dev: false
+    engines:
+      node: '>= 6.0.0'
+    hasBin: true
+    resolution:
+      integrity: sha512-sNrLlaZ/aZHxA2rCURGf3g5YabGVwrujiwC6SCV/rgx3LFfZh+goUCatAAyTEDk7evuu6pJ0APGDSde1mSYegw==
   /typescript/3.7.2:
     dev: false
     engines:
@@ -9190,6 +9313,10 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-hu2HquwDItuGDem4YsJROdAD8SknmWtM24zwhQax6J1se8tPjV1cnwPKhtjodzBaUhaL8Zb3hlGdZ2WAUpbAOg==
+  /underscore/1.9.2:
+    dev: false
+    resolution:
+      integrity: sha512-D39qtimx0c1fI3ya1Lnhk3E9nONswSKhnffBI0gME9C99fYOkNi04xs8K6pePLhvl1frbDemkaBQ5ikWllR2HQ==
   /unicode-canonical-property-names-ecmascript/1.0.4:
     dev: false
     engines:
@@ -9263,6 +9390,12 @@ packages:
       node: '>=4'
     resolution:
       integrity: sha1-nhBXzKhRq7kzmPizOuGHuZyuwRo=
+  /universalify/0.1.2:
+    dev: false
+    engines:
+      node: '>= 4.0.0'
+    resolution:
+      integrity: sha512-rBJeI5CXAlmy1pV+617WB9J63U6XcazHHF2f2dbJix4XzpUF0RS3Zbj0FGIOCAva5P/d/GBOYaACQ1w+0azUkg==
   /unpipe/1.0.0:
     dev: false
     engines:
@@ -9947,7 +10080,7 @@ packages:
     dev: false
     name: '@rush-temp/tempo-demo.benchmark'
     resolution:
-      integrity: sha512-7sGEMQjYvyxREuczjKsTRYCjOmNgz2lxx4ZWP3SIjVG9sLpc6eY0686/Hf1V887YdA2WlXVtK35aiEqRSXs6KQ==
+      integrity: sha512-/XcPzuAen/xR7r0n6JjHNcc3h+7W8NBxf3v5p/E0m39CyaQ+Ry3Lg0tSX5AB4xYHR5VvHOtoAFXHQSk3bL2ARA==
       tarball: 'file:projects/tempo-demo.benchmark.tgz'
     version: 0.0.0
   'file:projects/tempo-demo.hnpwa.tgz':
@@ -9969,7 +10102,7 @@ packages:
     dev: false
     name: '@rush-temp/tempo-demo.hnpwa'
     resolution:
-      integrity: sha512-dn4V27iVw4J2u2BagbGZSgLk5bx5uZKqAPJNujeq89fCR4B9XLv8z2fQPMEOk+puth8fRIoBxNuNrN+gFoa7Iw==
+      integrity: sha512-zcdMORCfvHunAU1vJ/9CJJOc9+jjrM0ipP29eIjuT2O1nZut0GaSBvnGQZAqw5ZW7Rl8eiuQhNhmIdrMnU9Fyw==
       tarball: 'file:projects/tempo-demo.hnpwa.tgz'
     version: 0.0.0
   'file:projects/tempo-demo.paper.tgz_sass@1.23.7':
@@ -9999,7 +10132,7 @@ packages:
     peerDependencies:
       sass: '*'
     resolution:
-      integrity: sha512-8OjCpjUL0iAqAjihghvV88Y+hJyb4uget59ogN2S9bDjYZQwsW6Dc2QqcAHuspmgRl0qN++nGFVX7g1d9DZcvg==
+      integrity: sha512-SyebkOPUmi/5M181WQ+7IRxz3YZklvuTf0oneBmiPSPF8OrW90KcJUbw1iHx79l/hhEGvNET1nZVdlWS/9uxTQ==
       tarball: 'file:projects/tempo-demo.paper.tgz'
     version: 0.0.0
   'file:projects/tempo-demo.readme.tgz':
@@ -10016,7 +10149,7 @@ packages:
     dev: false
     name: '@rush-temp/tempo-demo.readme'
     resolution:
-      integrity: sha512-XQNxaBhHcpAI+q3/iUh1xanl8NySQcgXV1P3RD8Am2uGWWhE7Qx0fkut2o8pBRS0ibPsbWeHBf0p83hmYOcn7A==
+      integrity: sha512-JYomYPCkSSUhND4PAF6FRCVJu3pTAn6v6NnW582yOqGwIKb5prqF/INkFE1M7CpynEIRRAE79eDMn8o5XRMAYA==
       tarball: 'file:projects/tempo-demo.readme.tgz'
     version: 0.0.0
   'file:projects/tempo-demo.todomvc.tgz':
@@ -10035,7 +10168,7 @@ packages:
     dev: false
     name: '@rush-temp/tempo-demo.todomvc'
     resolution:
-      integrity: sha512-MH8d70hpWMzwk0NcgUZjbDvVuYEEdgAz+trhGdVdndqtSMX1WuHGM6yBrQxGQ1yQsyCdZ+9cWZb1ERviOsdfTA==
+      integrity: sha512-08B10HDfzGha4czeVNa4EXgPWh1eJKXucd6lOyaJCpK0ah444IJYcyZaBJaL4iQfOGpoY82xST9s3zsSw3Jzhg==
       tarball: 'file:projects/tempo-demo.todomvc.tgz'
     version: 0.0.0
   'file:projects/tempo-dom.tgz':
@@ -10057,7 +10190,7 @@ packages:
     dev: false
     name: '@rush-temp/tempo-dom'
     resolution:
-      integrity: sha512-nZpqThVoEGDx3oRn3jaYkEkBChDhd0TeIhNr72MdFLVBSfovTxXgFGag75omgEZncr4cMRSO04X/7k5aL+ketg==
+      integrity: sha512-O8SiqdeEw3EJ6BsG1S70RTZG46uMj3L0sq3GpNWs4KmQ7VLQffyXD4XdTk9mwvBWykZpr909ndaWJ3Qk15l5vQ==
       tarball: 'file:projects/tempo-dom.tgz'
     version: 0.0.0
   'file:projects/tempo-paper.tgz_webpack@4.41.2':
@@ -10085,7 +10218,7 @@ packages:
     peerDependencies:
       webpack: '*'
     resolution:
-      integrity: sha512-BPQm1hkLy7tfO1qaPfeM6K0UoPn4kSS6tL1duFOVTKfXfU7kemKmXAwjDYAeucBmvkNNs4cLfgESG2X5t1YjXA==
+      integrity: sha512-M7GZMEC/iX1ZN5RE6Y/XxQ7cwn54iIsU6fLr+DQ0Vqp6iY9AG8oeCmR1/i9+E7cPueTyhyRZA4krHaVDJs3tOA==
       tarball: 'file:projects/tempo-paper.tgz'
     version: 0.0.0
   'file:projects/tempo-root.tgz':
@@ -10109,11 +10242,13 @@ packages:
       prettier: 1.19.1
       ts-jest: 24.1.0_jest@24.9.0
       tslint: 5.20.1_typescript@3.7.2
+      typedoc: 0.16.7
+      typedoc-plugin-markdown: 2.2.16_typedoc@0.16.7
       typescript: 3.7.2
     dev: false
     name: '@rush-temp/tempo-std'
     resolution:
-      integrity: sha512-99PWnWW/hfJJZ9pt6iHBguyS3XjEu0j03lM1GH2IQstIT1mTjAaqgIi8+steQ6lfbiFWMPAdtI+Fs4Qite2VyQ==
+      integrity: sha512-1h1GD5KOSkuwYMxQTZ62XuYd9JSwEeqAQ2mJJ1IFHIUcWEbv/GR61nWPJ2NxoaqSOLvioxNOkdeJ2gIMMR6S7w==
       tarball: 'file:projects/tempo-std.tgz'
     version: 0.0.0
   'file:projects/tempo-store.tgz':
@@ -10128,7 +10263,7 @@ packages:
     dev: false
     name: '@rush-temp/tempo-store'
     resolution:
-      integrity: sha512-IrppM/pF6BHAhRm4NJ6EZd1ET+qzB5Q0l+E7rG0NC3H5Wf9kQKkYuIGBkW7I/MCGeoTklf5rB30oD7MCgNk3rg==
+      integrity: sha512-n18kShAChJKVhWhcqti0Aw8f7ukSUchcEtv8w44JHJj8qhNBSvcoAsSCzrlRut21m+l92gCzllJf1cW0+ob+Sw==
       tarball: 'file:projects/tempo-store.tgz'
     version: 0.0.0
 registry: ''
@@ -10175,6 +10310,8 @@ specifiers:
   ts-loader: 6.2.1
   tslib: 1.10.0
   tslint: 5.20.1
+  typedoc: 0.16.7
+  typedoc-plugin-markdown: 2.2.16
   typescript: 3.7.2
   webpack: 4.41.2
   webpack-cli: 3.3.10

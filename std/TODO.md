@@ -11,7 +11,6 @@
 * `Time`
 * `TimePeriod`
 * `TimeStamp`
-* `Ord`
 * `Char`
 * `Lazy<T>`
 * `LazyOrNot<T>`
