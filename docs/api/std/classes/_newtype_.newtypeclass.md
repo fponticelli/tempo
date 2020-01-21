@@ -33,7 +33,7 @@ sidebar_label: "NewtypeClass"
 
 ▸ **get**(`v`: T): *T["_T"]*
 
-*Defined in [newtype.ts:32](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/newtype.ts#L32)*
+*Defined in [newtype.ts:32](https://github.com/fponticelli/tempo/blob/master/std/src/newtype.ts#L32)*
 
 **Parameters:**
 
@@ -49,7 +49,7 @@ ___
 
 ▸ **isValid**(`v`: T["_T"]): *boolean*
 
-*Defined in [newtype.ts:22](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/newtype.ts#L22)*
+*Defined in [newtype.ts:22](https://github.com/fponticelli/tempo/blob/master/std/src/newtype.ts#L22)*
 
 **Parameters:**
 
@@ -65,7 +65,7 @@ ___
 
 ▸ **maybeModify**(`f`: function): *function*
 
-*Defined in [newtype.ts:35](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/newtype.ts#L35)*
+*Defined in [newtype.ts:35](https://github.com/fponticelli/tempo/blob/master/std/src/newtype.ts#L35)*
 
 **Parameters:**
 
@@ -95,7 +95,7 @@ ___
 
 ▸ **maybeOf**(`v`: T["_T"]): *[Maybe](../modules/_maybe_.md#maybe)‹T›*
 
-*Defined in [newtype.ts:29](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/newtype.ts#L29)*
+*Defined in [newtype.ts:29](https://github.com/fponticelli/tempo/blob/master/std/src/newtype.ts#L29)*
 
 **Parameters:**
 
@@ -111,7 +111,7 @@ ___
 
 ▸ **modify**(`f`: function): *function*
 
-*Defined in [newtype.ts:38](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/newtype.ts#L38)*
+*Defined in [newtype.ts:38](https://github.com/fponticelli/tempo/blob/master/std/src/newtype.ts#L38)*
 
 **Parameters:**
 
@@ -141,7 +141,7 @@ ___
 
 ▸ **of**(`v`: T["_T"]): *[Option](../modules/_option_.md#option)‹T›*
 
-*Defined in [newtype.ts:26](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/newtype.ts#L26)*
+*Defined in [newtype.ts:26](https://github.com/fponticelli/tempo/blob/master/std/src/newtype.ts#L26)*
 
 **Parameters:**
 
@@ -157,7 +157,7 @@ ___
 
 ▸ **unsafeModify**(`f`: function): *function*
 
-*Defined in [newtype.ts:42](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/newtype.ts#L42)*
+*Defined in [newtype.ts:42](https://github.com/fponticelli/tempo/blob/master/std/src/newtype.ts#L42)*
 
 **Parameters:**
 
@@ -187,7 +187,7 @@ ___
 
 ▸ **unsafeOf**(`v`: T["_T"]): *T*
 
-*Defined in [newtype.ts:23](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/newtype.ts#L23)*
+*Defined in [newtype.ts:23](https://github.com/fponticelli/tempo/blob/master/std/src/newtype.ts#L23)*
 
 **Parameters:**
 

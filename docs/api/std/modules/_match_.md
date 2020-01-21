@@ -25,7 +25,7 @@ sidebar_label: "match"
 
 • **matchKind**: *(Anonymous function)* = createMatch('kind')
 
-*Defined in [match.ts:74](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/match.ts#L74)*
+*Defined in [match.ts:74](https://github.com/fponticelli/tempo/blob/master/std/src/match.ts#L74)*
 
 ## Functions
 
@@ -33,7 +33,7 @@ sidebar_label: "match"
 
 ▸ **createDeepMatch**<**Path**>(...`path`: Path): *(Anonymous function)*
 
-*Defined in [match.ts:59](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/match.ts#L59)*
+*Defined in [match.ts:59](https://github.com/fponticelli/tempo/blob/master/std/src/match.ts#L59)*
 
 **Type parameters:**
 
@@ -53,7 +53,7 @@ ___
 
 ▸ **createMatch**<**F**>(`field`: F): *(Anonymous function)*
 
-*Defined in [match.ts:49](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/match.ts#L49)*
+*Defined in [match.ts:49](https://github.com/fponticelli/tempo/blob/master/std/src/match.ts#L49)*
 
 **Type parameters:**
 
@@ -73,7 +73,7 @@ ___
 
 ▸ **deepMatch**<**Path**, **T**, **B**>(`path`: Path, `matcher`: object, `input`: T): *B*
 
-*Defined in [match.ts:31](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/match.ts#L31)*
+*Defined in [match.ts:31](https://github.com/fponticelli/tempo/blob/master/std/src/match.ts#L31)*
 
 **Type parameters:**
 
@@ -99,7 +99,7 @@ ___
 
 ▸ **match**<**F**, **T**, **B**>(`field`: F, `matcher`: object, `input`: T): *B*
 
-*Defined in [match.ts:18](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/match.ts#L18)*
+*Defined in [match.ts:18](https://github.com/fponticelli/tempo/blob/master/std/src/match.ts#L18)*
 
 **Type parameters:**
 

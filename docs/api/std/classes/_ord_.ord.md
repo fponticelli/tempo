@@ -40,7 +40,7 @@ sidebar_label: "Ord"
 
 \+ **new Ord**(`compare`: function): *[Ord](_ord_.ord.md)*
 
-*Defined in [ord.ts:10](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/ord.ts#L10)*
+*Defined in [ord.ts:10](https://github.com/fponticelli/tempo/blob/master/std/src/ord.ts#L10)*
 
 **Parameters:**
 
@@ -63,7 +63,7 @@ Name | Type |
 
 • **compare**: *function*
 
-*Defined in [ord.ts:13](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/ord.ts#L13)*
+*Defined in [ord.ts:13](https://github.com/fponticelli/tempo/blob/master/std/src/ord.ts#L13)*
 
 #### Type declaration:
 
@@ -82,7 +82,7 @@ Name | Type |
 
 ▸ **contramap**<**B**>(`f`: function): *[Ord](_ord_.ord.md)‹B›*
 
-*Defined in [ord.ts:45](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/ord.ts#L45)*
+*Defined in [ord.ts:45](https://github.com/fponticelli/tempo/blob/master/std/src/ord.ts#L45)*
 
 **Type parameters:**
 
@@ -108,7 +108,7 @@ ___
 
 ▸ **equal**(`a`: T, `b`: T): *boolean*
 
-*Defined in [ord.ts:36](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/ord.ts#L36)*
+*Defined in [ord.ts:36](https://github.com/fponticelli/tempo/blob/master/std/src/ord.ts#L36)*
 
 **Parameters:**
 
@@ -125,7 +125,7 @@ ___
 
 ▸ **inverse**(): *[Ord](_ord_.ord.md)‹T›*
 
-*Defined in [ord.ts:49](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/ord.ts#L49)*
+*Defined in [ord.ts:49](https://github.com/fponticelli/tempo/blob/master/std/src/ord.ts#L49)*
 
 **Returns:** *[Ord](_ord_.ord.md)‹T›*
 
@@ -135,7 +135,7 @@ ___
 
 ▸ **max**(`a`: T, `b`: T): *T*
 
-*Defined in [ord.ts:16](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/ord.ts#L16)*
+*Defined in [ord.ts:16](https://github.com/fponticelli/tempo/blob/master/std/src/ord.ts#L16)*
 
 **Parameters:**
 
@@ -152,7 +152,7 @@ ___
 
 ▸ **min**(`a`: T, `b`: T): *T*
 
-*Defined in [ord.ts:26](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/ord.ts#L26)*
+*Defined in [ord.ts:26](https://github.com/fponticelli/tempo/blob/master/std/src/ord.ts#L26)*
 
 **Parameters:**
 
@@ -169,7 +169,7 @@ ___
 
 ▸ **numberComparison**(`a0`: T, `a1`: T): *number*
 
-*Defined in [ord.ts:53](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/ord.ts#L53)*
+*Defined in [ord.ts:53](https://github.com/fponticelli/tempo/blob/master/std/src/ord.ts#L53)*
 
 **Parameters:**
 
@@ -186,7 +186,7 @@ ___
 
 ▸ **fromNumberComparison**<**T**>(`compare`: function): *[Ord](_ord_.ord.md)‹T›*
 
-*Defined in [ord.ts:8](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/ord.ts#L8)*
+*Defined in [ord.ts:8](https://github.com/fponticelli/tempo/blob/master/std/src/ord.ts#L8)*
 
 **Type parameters:**
 

@@ -39,7 +39,7 @@ export const Int = new class extends NewtypeClass<Int> {
 
 • **_S**: *S*
 
-*Defined in [newtype.ts:18](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/newtype.ts#L18)*
+*Defined in [newtype.ts:18](https://github.com/fponticelli/tempo/blob/master/std/src/newtype.ts#L18)*
 
 ___
 
@@ -47,4 +47,4 @@ ___
 
 • **_T**: *V*
 
-*Defined in [newtype.ts:17](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/newtype.ts#L17)*
+*Defined in [newtype.ts:17](https://github.com/fponticelli/tempo/blob/master/std/src/newtype.ts#L17)*

@@ -30,7 +30,7 @@ sidebar_label: "maybe"
 
 Ƭ **Just**: *T*
 
-*Defined in [maybe.ts:17](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/maybe.ts#L17)*
+*Defined in [maybe.ts:17](https://github.com/fponticelli/tempo/blob/master/std/src/maybe.ts#L17)*
 
 ___
 
@@ -38,7 +38,7 @@ ___
 
 Ƭ **Maybe**: *[Just](_maybe_.md#just)‹T› | [Nothing](_maybe_.md#nothing)*
 
-*Defined in [maybe.ts:14](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/maybe.ts#L14)*
+*Defined in [maybe.ts:14](https://github.com/fponticelli/tempo/blob/master/std/src/maybe.ts#L14)*
 
 ___
 
@@ -46,7 +46,7 @@ ___
 
 Ƭ **Nothing**: *undefined | null*
 
-*Defined in [maybe.ts:16](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/maybe.ts#L16)*
+*Defined in [maybe.ts:16](https://github.com/fponticelli/tempo/blob/master/std/src/maybe.ts#L16)*
 
 ## Variables
 
@@ -54,7 +54,7 @@ ___
 
 • **nothing**: *[Maybe](_maybe_.md#maybe)‹never›* = undefined
 
-*Defined in [maybe.ts:19](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/maybe.ts#L19)*
+*Defined in [maybe.ts:19](https://github.com/fponticelli/tempo/blob/master/std/src/maybe.ts#L19)*
 
 ## Functions
 
@@ -62,7 +62,7 @@ ___
 
 ▸ **isJust**<**T**>(`maybe`: [Maybe](_maybe_.md#maybe)‹T›): *maybe is Just<T>*
 
-*Defined in [maybe.ts:23](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/maybe.ts#L23)*
+*Defined in [maybe.ts:23](https://github.com/fponticelli/tempo/blob/master/std/src/maybe.ts#L23)*
 
 **Type parameters:**
 
@@ -82,7 +82,7 @@ ___
 
 ▸ **isNothing**<**T**>(`maybe`: [Maybe](_maybe_.md#maybe)‹T›): *maybe is Nothing*
 
-*Defined in [maybe.ts:22](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/maybe.ts#L22)*
+*Defined in [maybe.ts:22](https://github.com/fponticelli/tempo/blob/master/std/src/maybe.ts#L22)*
 
 **Type parameters:**
 
@@ -102,7 +102,7 @@ ___
 
 ▸ **just**<**T**>(`value`: T): *[Maybe](_maybe_.md#maybe)‹T›*
 
-*Defined in [maybe.ts:20](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/maybe.ts#L20)*
+*Defined in [maybe.ts:20](https://github.com/fponticelli/tempo/blob/master/std/src/maybe.ts#L20)*
 
 **Type parameters:**
 

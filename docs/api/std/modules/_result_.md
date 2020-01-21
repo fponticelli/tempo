@@ -62,7 +62,7 @@ sidebar_label: "result"
 
 Ƭ **Failure**: *object*
 
-*Defined in [result.ts:20](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/result.ts#L20)*
+*Defined in [result.ts:20](https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L20)*
 
 #### Type declaration:
 
@@ -76,7 +76,7 @@ ___
 
 Ƭ **Result**: *[Success](_result_.md#success)‹T› | [Failure](_result_.md#failure)‹E›*
 
-*Defined in [result.ts:22](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/result.ts#L22)*
+*Defined in [result.ts:22](https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L22)*
 
 ___
 
@@ -84,7 +84,7 @@ ___
 
 Ƭ **Success**: *object*
 
-*Defined in [result.ts:19](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/result.ts#L19)*
+*Defined in [result.ts:19](https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L19)*
 
 #### Type declaration:
 
@@ -98,7 +98,7 @@ ___
 
 Ƭ **T**: *[Result](_result_.md#result)‹V, E›*
 
-*Defined in [result.ts:429](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/result.ts#L429)*
+*Defined in [result.ts:429](https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L429)*
 
 ## Functions
 
@@ -106,7 +106,7 @@ ___
 
 ▸ **all**<**T**, **E**>(`f`: function, `result`: [Result](_result_.md#result)‹T, E›): *boolean*
 
-*Defined in [result.ts:369](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/result.ts#L369)*
+*Defined in [result.ts:369](https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L369)*
 
 **Type parameters:**
 
@@ -136,7 +136,7 @@ ___
 
 ▸ **any**<**T**, **E**>(`f`: function, `result`: [Result](_result_.md#result)‹T, E›): *boolean*
 
-*Defined in [result.ts:376](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/result.ts#L376)*
+*Defined in [result.ts:376](https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L376)*
 
 **Type parameters:**
 
@@ -166,7 +166,7 @@ ___
 
 ▸ **ap**<**A**, **B**, **Err**>(`resultf`: [Result](_result_.md#result)‹function, Err›, `result`: [Result](_result_.md#result)‹A, Err›): *[Result](_result_.md#result)‹B, Err›*
 
-*Defined in [result.ts:36](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/result.ts#L36)*
+*Defined in [result.ts:36](https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L36)*
 
 **Type parameters:**
 
@@ -191,7 +191,7 @@ ___
 
 ▸ **apN**<**A**, **B**, **C**, **Err**>(`f`: [Result](_result_.md#result)‹[Fun2](_types_functions_.md#fun2)‹A, B, C›, Err›, `a`: [Result](_result_.md#result)‹A, Err›, `b`: [Result](_result_.md#result)‹B, Err›): *[Result](_result_.md#result)‹C, Err›*
 
-*Defined in [result.ts:38](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/result.ts#L38)*
+*Defined in [result.ts:38](https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L38)*
 
 **Type parameters:**
 
@@ -215,7 +215,7 @@ Name | Type |
 
 ▸ **apN**<**A**, **B**, **C**, **D**, **Err**>(`f`: [Result](_result_.md#result)‹[Fun3](_types_functions_.md#fun3)‹A, B, C, D›, Err›, `a`: [Result](_result_.md#result)‹A, Err›, `b`: [Result](_result_.md#result)‹B, Err›, `c`: [Result](_result_.md#result)‹C, Err›): *[Result](_result_.md#result)‹D, Err›*
 
-*Defined in [result.ts:39](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/result.ts#L39)*
+*Defined in [result.ts:39](https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L39)*
 
 **Type parameters:**
 
@@ -242,7 +242,7 @@ Name | Type |
 
 ▸ **apN**<**A**, **B**, **C**, **D**, **E**, **Err**>(`f`: [Result](_result_.md#result)‹[Fun4](_types_functions_.md#fun4)‹A, B, C, D, E›, Err›, `a`: [Result](_result_.md#result)‹A, Err›, `b`: [Result](_result_.md#result)‹B, Err›, `c`: [Result](_result_.md#result)‹C, Err›, `d`: [Result](_result_.md#result)‹D, Err›): *[Result](_result_.md#result)‹E, Err›*
 
-*Defined in [result.ts:42](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/result.ts#L42)*
+*Defined in [result.ts:42](https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L42)*
 
 **Type parameters:**
 
@@ -272,7 +272,7 @@ Name | Type |
 
 ▸ **apN**<**A**, **B**, **C**, **D**, **E**, **F**, **Err**>(`f`: [Result](_result_.md#result)‹[Fun5](_types_functions_.md#fun5)‹A, B, C, D, E, F›, Err›, `a`: [Result](_result_.md#result)‹A, Err›, `b`: [Result](_result_.md#result)‹B, Err›, `c`: [Result](_result_.md#result)‹C, Err›, `d`: [Result](_result_.md#result)‹D, Err›, `e`: [Result](_result_.md#result)‹E, Err›): *[Result](_result_.md#result)‹F, Err›*
 
-*Defined in [result.ts:45](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/result.ts#L45)*
+*Defined in [result.ts:45](https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L45)*
 
 **Type parameters:**
 
@@ -305,7 +305,7 @@ Name | Type |
 
 ▸ **apN**<**A**, **B**, **C**, **D**, **E**, **F**, **G**, **Err**>(`f`: [Result](_result_.md#result)‹[Fun6](_types_functions_.md#fun6)‹A, B, C, D, E, F, G›, Err›, `a`: [Result](_result_.md#result)‹A, Err›, `b`: [Result](_result_.md#result)‹B, Err›, `c`: [Result](_result_.md#result)‹C, Err›, `d`: [Result](_result_.md#result)‹D, Err›, `e`: [Result](_result_.md#result)‹E, Err›, `g`: [Result](_result_.md#result)‹F, Err›): *[Result](_result_.md#result)‹G, Err›*
 
-*Defined in [result.ts:48](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/result.ts#L48)*
+*Defined in [result.ts:48](https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L48)*
 
 **Type parameters:**
 
@@ -345,7 +345,7 @@ ___
 
 ▸ **apNWithCombine**<**A**, **B**, **C**, **Err**>(`f`: [Result](_result_.md#result)‹[Fun2](_types_functions_.md#fun2)‹A, B, C›, Err›, `combineErrors`: function, `a`: [Result](_result_.md#result)‹A, Err›, `b`: [Result](_result_.md#result)‹B, Err›): *[Result](_result_.md#result)‹C, Err›*
 
-*Defined in [result.ts:60](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/result.ts#L60)*
+*Defined in [result.ts:60](https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L60)*
 
 **Type parameters:**
 
@@ -380,7 +380,7 @@ Name | Type |
 
 ▸ **apNWithCombine**<**A**, **B**, **C**, **D**, **Err**>(`f`: [Result](_result_.md#result)‹[Fun3](_types_functions_.md#fun3)‹A, B, C, D›, Err›, `combineErrors`: function, `a`: [Result](_result_.md#result)‹A, Err›, `b`: [Result](_result_.md#result)‹B, Err›, `c`: [Result](_result_.md#result)‹C, Err›): *[Result](_result_.md#result)‹D, Err›*
 
-*Defined in [result.ts:64](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/result.ts#L64)*
+*Defined in [result.ts:64](https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L64)*
 
 **Type parameters:**
 
@@ -419,7 +419,7 @@ Name | Type |
 
 ▸ **apNWithCombine**<**A**, **B**, **C**, **D**, **E**, **Err**>(`f`: [Result](_result_.md#result)‹[Fun4](_types_functions_.md#fun4)‹A, B, C, D, E›, Err›, `combineErrors`: function, `a`: [Result](_result_.md#result)‹A, Err›, `b`: [Result](_result_.md#result)‹B, Err›, `c`: [Result](_result_.md#result)‹C, Err›, `d`: [Result](_result_.md#result)‹D, Err›): *[Result](_result_.md#result)‹E, Err›*
 
-*Defined in [result.ts:68](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/result.ts#L68)*
+*Defined in [result.ts:68](https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L68)*
 
 **Type parameters:**
 
@@ -462,7 +462,7 @@ Name | Type |
 
 ▸ **apNWithCombine**<**A**, **B**, **C**, **D**, **E**, **F**, **Err**>(`f`: [Result](_result_.md#result)‹[Fun5](_types_functions_.md#fun5)‹A, B, C, D, E, F›, Err›, `combineErrors`: function, `a`: [Result](_result_.md#result)‹A, Err›, `b`: [Result](_result_.md#result)‹B, Err›, `c`: [Result](_result_.md#result)‹C, Err›, `d`: [Result](_result_.md#result)‹D, Err›, `e`: [Result](_result_.md#result)‹E, Err›): *[Result](_result_.md#result)‹F, Err›*
 
-*Defined in [result.ts:72](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/result.ts#L72)*
+*Defined in [result.ts:72](https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L72)*
 
 **Type parameters:**
 
@@ -509,7 +509,7 @@ Name | Type |
 
 ▸ **apNWithCombine**<**A**, **B**, **C**, **D**, **E**, **F**, **G**, **Err**>(`f`: [Result](_result_.md#result)‹[Fun6](_types_functions_.md#fun6)‹A, B, C, D, E, F, G›, Err›, `combineErrors`: function, `a`: [Result](_result_.md#result)‹A, Err›, `b`: [Result](_result_.md#result)‹B, Err›, `c`: [Result](_result_.md#result)‹C, Err›, `d`: [Result](_result_.md#result)‹D, Err›, `e`: [Result](_result_.md#result)‹E, Err›, `g`: [Result](_result_.md#result)‹F, Err›): *[Result](_result_.md#result)‹G, Err›*
 
-*Defined in [result.ts:76](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/result.ts#L76)*
+*Defined in [result.ts:76](https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L76)*
 
 **Type parameters:**
 
@@ -564,7 +564,7 @@ ___
 
 ▸ **cata**<**A**, **B**, **Err**>(`f`: function, `result`: [Result](_result_.md#result)‹A, Err›, `ifNone`: B): *B*
 
-*Defined in [result.ts:348](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/result.ts#L348)*
+*Defined in [result.ts:348](https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L348)*
 
 **Type parameters:**
 
@@ -598,7 +598,7 @@ ___
 
 ▸ **cataLazy**<**A**, **B**, **Err**>(`f`: function, `result`: [Result](_result_.md#result)‹A, Err›, `ifNone`: function): *B*
 
-*Defined in [result.ts:355](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/result.ts#L355)*
+*Defined in [result.ts:355](https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L355)*
 
 **Type parameters:**
 
@@ -634,7 +634,7 @@ ___
 
 ▸ **combine**<**A**, **B**, **Err**>(`a`: [Result](_result_.md#result)‹A, Err›, `b`: [Result](_result_.md#result)‹B, Err›): *[Result](_result_.md#result)‹[A, B], Err›*
 
-*Defined in [result.ts:423](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/result.ts#L423)*
+*Defined in [result.ts:423](https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L423)*
 
 **Type parameters:**
 
@@ -659,7 +659,7 @@ ___
 
 ▸ **each**<**T**, **E**>(`f`: function, `result`: [Result](_result_.md#result)‹T, E›): *void*
 
-*Defined in [result.ts:383](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/result.ts#L383)*
+*Defined in [result.ts:383](https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L383)*
 
 **Type parameters:**
 
@@ -689,7 +689,7 @@ ___
 
 ▸ **equals**<**T**, **E**>(`predicate`: function, `a`: [Result](_result_.md#result)‹T, E›, `b`: [Result](_result_.md#result)‹T, E›): *boolean*
 
-*Defined in [result.ts:256](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/result.ts#L256)*
+*Defined in [result.ts:256](https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L256)*
 
 **Type parameters:**
 
@@ -722,7 +722,7 @@ ___
 
 ▸ **failure**<**T**, **E**>(`error`: E): *[Result](_result_.md#result)‹T, E›*
 
-*Defined in [result.ts:27](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/result.ts#L27)*
+*Defined in [result.ts:27](https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L27)*
 
 **Type parameters:**
 
@@ -744,7 +744,7 @@ ___
 
 ▸ **filter**<**T**, **E**>(`predicate`: function, `error`: E, `result`: [Result](_result_.md#result)‹T, E›): *[Result](_result_.md#result)‹T, E›*
 
-*Defined in [result.ts:268](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/result.ts#L268)*
+*Defined in [result.ts:268](https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L268)*
 
 **Type parameters:**
 
@@ -776,7 +776,7 @@ ___
 
 ▸ **filterLazy**<**T**, **E**>(`predicate`: function, `errorf`: function, `result`: [Result](_result_.md#result)‹T, E›): *[Result](_result_.md#result)‹T, E›*
 
-*Defined in [result.ts:280](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/result.ts#L280)*
+*Defined in [result.ts:280](https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L280)*
 
 **Type parameters:**
 
@@ -810,7 +810,7 @@ ___
 
 ▸ **firstSuccess**<**A**, **Err**>(...`args`: [Result](_result_.md#result)‹A, Err›[]): *[Result](_result_.md#result)‹A, Err›*
 
-*Defined in [result.ts:390](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/result.ts#L390)*
+*Defined in [result.ts:390](https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L390)*
 
 **Type parameters:**
 
@@ -832,7 +832,7 @@ ___
 
 ▸ **flatMap**<**A**, **B**, **Err**>(`f`: function, `result`: [Result](_result_.md#result)‹A, Err›): *[Result](_result_.md#result)‹B, Err›*
 
-*Defined in [result.ts:179](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/result.ts#L179)*
+*Defined in [result.ts:179](https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L179)*
 
 **Type parameters:**
 
@@ -864,7 +864,7 @@ ___
 
 ▸ **flatMapN**<**A**, **B**, **C**, **Err**>(`f`: [Fun2](_types_functions_.md#fun2)‹A, B, [Result](_result_.md#result)‹C, Err››, `a`: [Result](_result_.md#result)‹A, Err›, `b`: [Result](_result_.md#result)‹B, Err›): *[Result](_result_.md#result)‹C, Err›*
 
-*Defined in [result.ts:186](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/result.ts#L186)*
+*Defined in [result.ts:186](https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L186)*
 
 **Type parameters:**
 
@@ -888,7 +888,7 @@ Name | Type |
 
 ▸ **flatMapN**<**A**, **B**, **C**, **D**, **Err**>(`f`: [Fun3](_types_functions_.md#fun3)‹A, B, C, [Result](_result_.md#result)‹D, Err››, `a`: [Result](_result_.md#result)‹A, Err›, `b`: [Result](_result_.md#result)‹B, Err›, `c`: [Result](_result_.md#result)‹C, Err›): *[Result](_result_.md#result)‹D, Err›*
 
-*Defined in [result.ts:189](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/result.ts#L189)*
+*Defined in [result.ts:189](https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L189)*
 
 **Type parameters:**
 
@@ -915,7 +915,7 @@ Name | Type |
 
 ▸ **flatMapN**<**A**, **B**, **C**, **D**, **E**, **Err**>(`f`: [Fun4](_types_functions_.md#fun4)‹A, B, C, D, [Result](_result_.md#result)‹E, Err››, `a`: [Result](_result_.md#result)‹A, Err›, `b`: [Result](_result_.md#result)‹B, Err›, `c`: [Result](_result_.md#result)‹C, Err›, `d`: [Result](_result_.md#result)‹D, Err›): *[Result](_result_.md#result)‹E, Err›*
 
-*Defined in [result.ts:192](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/result.ts#L192)*
+*Defined in [result.ts:192](https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L192)*
 
 **Type parameters:**
 
@@ -945,7 +945,7 @@ Name | Type |
 
 ▸ **flatMapN**<**A**, **B**, **C**, **D**, **E**, **F**, **Err**>(`f`: [Fun5](_types_functions_.md#fun5)‹A, B, C, D, E, [Result](_result_.md#result)‹F, Err››, `a`: [Result](_result_.md#result)‹A, Err›, `b`: [Result](_result_.md#result)‹B, Err›, `c`: [Result](_result_.md#result)‹C, Err›, `d`: [Result](_result_.md#result)‹D, Err›, `e`: [Result](_result_.md#result)‹E, Err›): *[Result](_result_.md#result)‹F, Err›*
 
-*Defined in [result.ts:195](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/result.ts#L195)*
+*Defined in [result.ts:195](https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L195)*
 
 **Type parameters:**
 
@@ -978,7 +978,7 @@ Name | Type |
 
 ▸ **flatMapN**<**A**, **B**, **C**, **D**, **E**, **F**, **G**, **Err**>(`f`: [Fun6](_types_functions_.md#fun6)‹A, B, C, D, E, F, [Result](_result_.md#result)‹G, Err››, `a`: [Result](_result_.md#result)‹A, Err›, `b`: [Result](_result_.md#result)‹B, Err›, `c`: [Result](_result_.md#result)‹C, Err›, `d`: [Result](_result_.md#result)‹D, Err›, `e`: [Result](_result_.md#result)‹E, Err›, `g`: [Result](_result_.md#result)‹F, Err›): *[Result](_result_.md#result)‹G, Err›*
 
-*Defined in [result.ts:198](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/result.ts#L198)*
+*Defined in [result.ts:198](https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L198)*
 
 **Type parameters:**
 
@@ -1018,7 +1018,7 @@ ___
 
 ▸ **flatMapNWithCombine**<**A**, **B**, **C**, **Err**>(`f`: [Fun2](_types_functions_.md#fun2)‹A, B, [Result](_result_.md#result)‹C, Err››, `combineErrors`: function, `a`: [Result](_result_.md#result)‹A, Err›, `b`: [Result](_result_.md#result)‹B, Err›): *[Result](_result_.md#result)‹C, Err›*
 
-*Defined in [result.ts:214](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/result.ts#L214)*
+*Defined in [result.ts:214](https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L214)*
 
 **Type parameters:**
 
@@ -1053,7 +1053,7 @@ Name | Type |
 
 ▸ **flatMapNWithCombine**<**A**, **B**, **C**, **D**, **Err**>(`f`: [Fun3](_types_functions_.md#fun3)‹A, B, C, [Result](_result_.md#result)‹D, Err››, `combineErrors`: function, `a`: [Result](_result_.md#result)‹A, Err›, `b`: [Result](_result_.md#result)‹B, Err›, `c`: [Result](_result_.md#result)‹C, Err›): *[Result](_result_.md#result)‹D, Err›*
 
-*Defined in [result.ts:218](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/result.ts#L218)*
+*Defined in [result.ts:218](https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L218)*
 
 **Type parameters:**
 
@@ -1092,7 +1092,7 @@ Name | Type |
 
 ▸ **flatMapNWithCombine**<**A**, **B**, **C**, **D**, **E**, **Err**>(`f`: [Fun4](_types_functions_.md#fun4)‹A, B, C, D, [Result](_result_.md#result)‹E, Err››, `combineErrors`: function, `a`: [Result](_result_.md#result)‹A, Err›, `b`: [Result](_result_.md#result)‹B, Err›, `c`: [Result](_result_.md#result)‹C, Err›, `d`: [Result](_result_.md#result)‹D, Err›): *[Result](_result_.md#result)‹E, Err›*
 
-*Defined in [result.ts:222](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/result.ts#L222)*
+*Defined in [result.ts:222](https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L222)*
 
 **Type parameters:**
 
@@ -1135,7 +1135,7 @@ Name | Type |
 
 ▸ **flatMapNWithCombine**<**A**, **B**, **C**, **D**, **E**, **F**, **Err**>(`f`: [Fun5](_types_functions_.md#fun5)‹A, B, C, D, E, [Result](_result_.md#result)‹F, Err››, `combineErrors`: function, `a`: [Result](_result_.md#result)‹A, Err›, `b`: [Result](_result_.md#result)‹B, Err›, `c`: [Result](_result_.md#result)‹C, Err›, `d`: [Result](_result_.md#result)‹D, Err›, `e`: [Result](_result_.md#result)‹E, Err›): *[Result](_result_.md#result)‹F, Err›*
 
-*Defined in [result.ts:226](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/result.ts#L226)*
+*Defined in [result.ts:226](https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L226)*
 
 **Type parameters:**
 
@@ -1182,7 +1182,7 @@ Name | Type |
 
 ▸ **flatMapNWithCombine**<**A**, **B**, **C**, **D**, **E**, **F**, **G**, **Err**>(`f`: [Fun6](_types_functions_.md#fun6)‹A, B, C, D, E, F, [Result](_result_.md#result)‹G, Err››, `combineErrors`: function, `a`: [Result](_result_.md#result)‹A, Err›, `b`: [Result](_result_.md#result)‹B, Err›, `c`: [Result](_result_.md#result)‹C, Err›, `d`: [Result](_result_.md#result)‹D, Err›, `e`: [Result](_result_.md#result)‹E, Err›, `g`: [Result](_result_.md#result)‹F, Err›): *[Result](_result_.md#result)‹G, Err›*
 
-*Defined in [result.ts:230](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/result.ts#L230)*
+*Defined in [result.ts:230](https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L230)*
 
 **Type parameters:**
 
@@ -1237,7 +1237,7 @@ ___
 
 ▸ **flatten**<**T**, **E**>(`result`: [Result](_result_.md#result)‹[Result](_result_.md#result)‹T, E›, E›): *[Result](_result_.md#result)‹T, E›*
 
-*Defined in [result.ts:341](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/result.ts#L341)*
+*Defined in [result.ts:341](https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L341)*
 
 **Type parameters:**
 
@@ -1259,7 +1259,7 @@ ___
 
 ▸ **foldLeft**<**T**, **B**, **Err**>(`f`: function, `result`: [Result](_result_.md#result)‹T, Err›, `b`: B): *B*
 
-*Defined in [result.ts:362](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/result.ts#L362)*
+*Defined in [result.ts:362](https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L362)*
 
 **Type parameters:**
 
@@ -1294,7 +1294,7 @@ ___
 
 ▸ **getOrElse**<**T**, **E**>(`result`: [Result](_result_.md#result)‹T, E›, `alt`: T): *T*
 
-*Defined in [result.ts:299](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/result.ts#L299)*
+*Defined in [result.ts:299](https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L299)*
 
 **Type parameters:**
 
@@ -1317,7 +1317,7 @@ ___
 
 ▸ **getOrElseLazy**<**T**, **E**>(`result`: [Result](_result_.md#result)‹T, E›, `alt`: function): *T*
 
-*Defined in [result.ts:306](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/result.ts#L306)*
+*Defined in [result.ts:306](https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L306)*
 
 **Type parameters:**
 
@@ -1341,7 +1341,7 @@ ___
 
 ▸ **getOrThrow**<**T**, **E**>(`result`: [Result](_result_.md#result)‹T, E›): *[Maybe](_maybe_.md#maybe)‹T›*
 
-*Defined in [result.ts:292](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/result.ts#L292)*
+*Defined in [result.ts:292](https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L292)*
 
 **Type parameters:**
 
@@ -1363,7 +1363,7 @@ ___
 
 ▸ **isFailure**<**T**, **E**>(`result`: [Result](_result_.md#result)‹T, E›): *result is Failure<E>*
 
-*Defined in [result.ts:265](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/result.ts#L265)*
+*Defined in [result.ts:265](https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L265)*
 
 **Type parameters:**
 
@@ -1385,7 +1385,7 @@ ___
 
 ▸ **isSuccess**<**T**, **E**>(`result`: [Result](_result_.md#result)‹T, E›): *result is Success<T>*
 
-*Defined in [result.ts:266](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/result.ts#L266)*
+*Defined in [result.ts:266](https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L266)*
 
 **Type parameters:**
 
@@ -1407,7 +1407,7 @@ ___
 
 ▸ **map**<**A**, **B**, **Err**>(`f`: function, `result`: [Result](_result_.md#result)‹A, Err›): *[Result](_result_.md#result)‹B, Err›*
 
-*Defined in [result.ts:103](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/result.ts#L103)*
+*Defined in [result.ts:103](https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L103)*
 
 **Type parameters:**
 
@@ -1439,7 +1439,7 @@ ___
 
 ▸ **mapError**<**A**, **E1**, **E2**>(`f`: function, `result`: [Result](_result_.md#result)‹A, E1›): *[Result](_result_.md#result)‹A, E2›*
 
-*Defined in [result.ts:110](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/result.ts#L110)*
+*Defined in [result.ts:110](https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L110)*
 
 **Type parameters:**
 
@@ -1471,7 +1471,7 @@ ___
 
 ▸ **mapN**<**A**, **B**, **C**, **Err**>(`f`: [Fun2](_types_functions_.md#fun2)‹A, B, C›, `a`: [Result](_result_.md#result)‹A, Err›, `b`: [Result](_result_.md#result)‹B, Err›): *[Result](_result_.md#result)‹C, Err›*
 
-*Defined in [result.ts:117](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/result.ts#L117)*
+*Defined in [result.ts:117](https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L117)*
 
 **Type parameters:**
 
@@ -1495,7 +1495,7 @@ Name | Type |
 
 ▸ **mapN**<**A**, **B**, **C**, **D**, **Err**>(`f`: [Fun3](_types_functions_.md#fun3)‹A, B, C, D›, `a`: [Result](_result_.md#result)‹A, Err›, `b`: [Result](_result_.md#result)‹B, Err›, `c`: [Result](_result_.md#result)‹C, Err›): *[Result](_result_.md#result)‹D, Err›*
 
-*Defined in [result.ts:118](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/result.ts#L118)*
+*Defined in [result.ts:118](https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L118)*
 
 **Type parameters:**
 
@@ -1522,7 +1522,7 @@ Name | Type |
 
 ▸ **mapN**<**A**, **B**, **C**, **D**, **E**, **Err**>(`f`: [Fun4](_types_functions_.md#fun4)‹A, B, C, D, E›, `a`: [Result](_result_.md#result)‹A, Err›, `b`: [Result](_result_.md#result)‹B, Err›, `c`: [Result](_result_.md#result)‹C, Err›, `d`: [Result](_result_.md#result)‹D, Err›): *[Result](_result_.md#result)‹E, Err›*
 
-*Defined in [result.ts:119](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/result.ts#L119)*
+*Defined in [result.ts:119](https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L119)*
 
 **Type parameters:**
 
@@ -1552,7 +1552,7 @@ Name | Type |
 
 ▸ **mapN**<**A**, **B**, **C**, **D**, **E**, **F**, **Err**>(`f`: [Fun5](_types_functions_.md#fun5)‹A, B, C, D, E, F›, `a`: [Result](_result_.md#result)‹A, Err›, `b`: [Result](_result_.md#result)‹B, Err›, `c`: [Result](_result_.md#result)‹C, Err›, `d`: [Result](_result_.md#result)‹D, Err›, `e`: [Result](_result_.md#result)‹E, Err›): *[Result](_result_.md#result)‹F, Err›*
 
-*Defined in [result.ts:122](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/result.ts#L122)*
+*Defined in [result.ts:122](https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L122)*
 
 **Type parameters:**
 
@@ -1585,7 +1585,7 @@ Name | Type |
 
 ▸ **mapN**<**A**, **B**, **C**, **D**, **E**, **F**, **G**, **Err**>(`f`: [Fun6](_types_functions_.md#fun6)‹A, B, C, D, E, F, G›, `a`: [Result](_result_.md#result)‹A, Err›, `b`: [Result](_result_.md#result)‹B, Err›, `c`: [Result](_result_.md#result)‹C, Err›, `d`: [Result](_result_.md#result)‹D, Err›, `e`: [Result](_result_.md#result)‹E, Err›, `g`: [Result](_result_.md#result)‹F, Err›): *[Result](_result_.md#result)‹G, Err›*
 
-*Defined in [result.ts:125](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/result.ts#L125)*
+*Defined in [result.ts:125](https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L125)*
 
 **Type parameters:**
 
@@ -1625,7 +1625,7 @@ ___
 
 ▸ **mapNWithCombine**<**A**, **B**, **C**, **Err**>(`f`: [Fun2](_types_functions_.md#fun2)‹A, B, C›, `combineErrors`: function, `a`: [Result](_result_.md#result)‹A, Err›, `b`: [Result](_result_.md#result)‹B, Err›): *[Result](_result_.md#result)‹C, Err›*
 
-*Defined in [result.ts:137](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/result.ts#L137)*
+*Defined in [result.ts:137](https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L137)*
 
 **Type parameters:**
 
@@ -1660,7 +1660,7 @@ Name | Type |
 
 ▸ **mapNWithCombine**<**A**, **B**, **C**, **D**, **Err**>(`f`: [Fun3](_types_functions_.md#fun3)‹A, B, C, D›, `combineErrors`: function, `a`: [Result](_result_.md#result)‹A, Err›, `b`: [Result](_result_.md#result)‹B, Err›, `c`: [Result](_result_.md#result)‹C, Err›): *[Result](_result_.md#result)‹D, Err›*
 
-*Defined in [result.ts:141](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/result.ts#L141)*
+*Defined in [result.ts:141](https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L141)*
 
 **Type parameters:**
 
@@ -1699,7 +1699,7 @@ Name | Type |
 
 ▸ **mapNWithCombine**<**A**, **B**, **C**, **D**, **E**, **Err**>(`f`: [Fun4](_types_functions_.md#fun4)‹A, B, C, D, E›, `combineErrors`: function, `a`: [Result](_result_.md#result)‹A, Err›, `b`: [Result](_result_.md#result)‹B, Err›, `c`: [Result](_result_.md#result)‹C, Err›, `d`: [Result](_result_.md#result)‹D, Err›): *[Result](_result_.md#result)‹E, Err›*
 
-*Defined in [result.ts:145](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/result.ts#L145)*
+*Defined in [result.ts:145](https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L145)*
 
 **Type parameters:**
 
@@ -1742,7 +1742,7 @@ Name | Type |
 
 ▸ **mapNWithCombine**<**A**, **B**, **C**, **D**, **E**, **F**, **Err**>(`f`: [Fun5](_types_functions_.md#fun5)‹A, B, C, D, E, F›, `combineErrors`: function, `a`: [Result](_result_.md#result)‹A, Err›, `b`: [Result](_result_.md#result)‹B, Err›, `c`: [Result](_result_.md#result)‹C, Err›, `d`: [Result](_result_.md#result)‹D, Err›, `e`: [Result](_result_.md#result)‹E, Err›): *[Result](_result_.md#result)‹F, Err›*
 
-*Defined in [result.ts:149](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/result.ts#L149)*
+*Defined in [result.ts:149](https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L149)*
 
 **Type parameters:**
 
@@ -1789,7 +1789,7 @@ Name | Type |
 
 ▸ **mapNWithCombine**<**A**, **B**, **C**, **D**, **E**, **F**, **G**, **Err**>(`f`: [Fun6](_types_functions_.md#fun6)‹A, B, C, D, E, F, G›, `combineErrors`: function, `a`: [Result](_result_.md#result)‹A, Err›, `b`: [Result](_result_.md#result)‹B, Err›, `c`: [Result](_result_.md#result)‹C, Err›, `d`: [Result](_result_.md#result)‹D, Err›, `e`: [Result](_result_.md#result)‹E, Err›, `g`: [Result](_result_.md#result)‹F, Err›): *[Result](_result_.md#result)‹G, Err›*
 
-*Defined in [result.ts:153](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/result.ts#L153)*
+*Defined in [result.ts:153](https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L153)*
 
 **Type parameters:**
 
@@ -1844,7 +1844,7 @@ ___
 
 ▸ **ofNullable**<**T**, **E**>(`value`: T | undefined | null, `error`: E): *[Result](_result_.md#result)‹T, E›*
 
-*Defined in [result.ts:29](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/result.ts#L29)*
+*Defined in [result.ts:29](https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L29)*
 
 **Type parameters:**
 
@@ -1867,7 +1867,7 @@ ___
 
 ▸ **recover**<**T**, **E**>(`result`: [Result](_result_.md#result)‹T, E›, `whenFailure`: T): *object | object*
 
-*Defined in [result.ts:402](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/result.ts#L402)*
+*Defined in [result.ts:402](https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L402)*
 
 **Type parameters:**
 
@@ -1890,7 +1890,7 @@ ___
 
 ▸ **recoverFromError**<**T**, **E**>(`result`: [Result](_result_.md#result)‹T, E›, `whenFailuref`: function): *object | object*
 
-*Defined in [result.ts:409](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/result.ts#L409)*
+*Defined in [result.ts:409](https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L409)*
 
 **Type parameters:**
 
@@ -1920,7 +1920,7 @@ ___
 
 ▸ **spread**<**A**, **B**, **C**, **Err**>(`f`: function, `v`: [Result](_result_.md#result)‹[A, B], Err›): *[Result](_result_.md#result)‹C, Err›*
 
-*Defined in [result.ts:426](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/result.ts#L426)*
+*Defined in [result.ts:426](https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L426)*
 
 **Type parameters:**
 
@@ -1955,7 +1955,7 @@ ___
 
 ▸ **success**<**T**, **E**>(`value`: T): *[Result](_result_.md#result)‹T, E›*
 
-*Defined in [result.ts:26](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/result.ts#L26)*
+*Defined in [result.ts:26](https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L26)*
 
 **Type parameters:**
 
@@ -1977,7 +1977,7 @@ ___
 
 ▸ **swap**<**T**, **E**>(`result`: [Result](_result_.md#result)‹T, E›): *[Result](_result_.md#result)‹E, T›*
 
-*Defined in [result.ts:416](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/result.ts#L416)*
+*Defined in [result.ts:416](https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L416)*
 
 **Type parameters:**
 
@@ -1999,7 +1999,7 @@ ___
 
 ▸ **toArray**<**T**, **E**>(`result`: [Result](_result_.md#result)‹T, E›): *T[]*
 
-*Defined in [result.ts:320](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/result.ts#L320)*
+*Defined in [result.ts:320](https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L320)*
 
 **Type parameters:**
 
@@ -2021,7 +2021,7 @@ ___
 
 ▸ **toBoolean**(`result`: [Result](_result_.md#result)‹unknown, unknown›): *boolean*
 
-*Defined in [result.ts:313](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/result.ts#L313)*
+*Defined in [result.ts:313](https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L313)*
 
 **Parameters:**
 
@@ -2037,7 +2037,7 @@ ___
 
 ▸ **toMaybe**<**T**, **E**>(`result`: [Result](_result_.md#result)‹T, E›): *[Maybe](_maybe_.md#maybe)‹T›*
 
-*Defined in [result.ts:327](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/result.ts#L327)*
+*Defined in [result.ts:327](https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L327)*
 
 **Type parameters:**
 
@@ -2059,7 +2059,7 @@ ___
 
 ▸ **toOption**<**T**, **E**>(`result`: [Result](_result_.md#result)‹T, E›): *[Option](_option_.md#option)‹T›*
 
-*Defined in [result.ts:334](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/result.ts#L334)*
+*Defined in [result.ts:334](https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L334)*
 
 **Type parameters:**
 

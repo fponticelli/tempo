@@ -26,7 +26,7 @@ sidebar_label: "ord"
 
 ▸ **fromNumberComparison**<**A**>(`f`: function): *(Anonymous function)*
 
-*Defined in [ord.ts:58](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/ord.ts#L58)*
+*Defined in [ord.ts:58](https://github.com/fponticelli/tempo/blob/master/std/src/ord.ts#L58)*
 
 **Type parameters:**
 

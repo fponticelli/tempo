@@ -27,7 +27,7 @@ sidebar_label: "uuid"
 
 Ƭ **UUID**: *[Newtype](../interfaces/_newtype_.newtype.md)‹string, object›*
 
-*Defined in [uuid.ts:40](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/uuid.ts#L40)*
+*Defined in [uuid.ts:40](https://github.com/fponticelli/tempo/blob/master/std/src/uuid.ts#L40)*
 
 Returns `true` if the passed `uuid` conforms to the UUID v.4 format.
 
@@ -39,7 +39,7 @@ Returns `true` if the passed `uuid` conforms to the UUID v.4 format.
   isValid(uuid: string) { return pattern.test(uuid) }
 }()
 
-*Defined in [uuid.ts:42](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/uuid.ts#L42)*
+*Defined in [uuid.ts:42](https://github.com/fponticelli/tempo/blob/master/std/src/uuid.ts#L42)*
 
 ## Functions
 
@@ -47,7 +47,7 @@ Returns `true` if the passed `uuid` conforms to the UUID v.4 format.
 
 ▸ **create**(): *[Newtype](../interfaces/_newtype_.newtype.md)‹string, object›*
 
-*Defined in [uuid.ts:13](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/uuid.ts#L13)*
+*Defined in [uuid.ts:13](https://github.com/fponticelli/tempo/blob/master/std/src/uuid.ts#L13)*
 
 `Uuid.create()` returns a string value representing a random UUID string.
 
@@ -59,7 +59,7 @@ ___
 
 ▸ **toString**(`uuid`: [UUID](_uuid_.md#uuid)): *string*
 
-*Defined in [uuid.ts:46](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/uuid.ts#L46)*
+*Defined in [uuid.ts:46](https://github.com/fponticelli/tempo/blob/master/std/src/uuid.ts#L46)*
 
 **Parameters:**
 

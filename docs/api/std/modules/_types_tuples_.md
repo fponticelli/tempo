@@ -26,7 +26,7 @@ sidebar_label: "types/tuples"
 
 Ƭ **DropN**: *DropNImpl‹N, T, []›*
 
-*Defined in [types/tuples.ts:28](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/types/tuples.ts#L28)*
+*Defined in [types/tuples.ts:28](https://github.com/fponticelli/tempo/blob/master/std/src/types/tuples.ts#L28)*
 
 ___
 
@@ -34,7 +34,7 @@ ___
 
 Ƭ **Head**: *T extends [infer H, any] ? H : never*
 
-*Defined in [types/tuples.ts:37](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/types/tuples.ts#L37)*
+*Defined in [types/tuples.ts:37](https://github.com/fponticelli/tempo/blob/master/std/src/types/tuples.ts#L37)*
 
 ___
 
@@ -42,7 +42,7 @@ ___
 
 Ƭ **Last**: *object[T extends [] ? "empty" : T extends [any] ? "one" : "n"]*
 
-*Defined in [types/tuples.ts:39](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/types/tuples.ts#L39)*
+*Defined in [types/tuples.ts:39](https://github.com/fponticelli/tempo/blob/master/std/src/types/tuples.ts#L39)*
 
 ___
 
@@ -50,7 +50,7 @@ ___
 
 Ƭ **Length**: *T["length"]*
 
-*Defined in [types/tuples.ts:54](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/types/tuples.ts#L54)*
+*Defined in [types/tuples.ts:54](https://github.com/fponticelli/tempo/blob/master/std/src/types/tuples.ts#L54)*
 
 ___
 
@@ -58,7 +58,7 @@ ___
 
 Ƭ **LoseLastImpl**: *object[B extends [] ? "empty" : B extends [any] ? "empty" : "next"]*
 
-*Defined in [types/tuples.ts:63](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/types/tuples.ts#L63)*
+*Defined in [types/tuples.ts:63](https://github.com/fponticelli/tempo/blob/master/std/src/types/tuples.ts#L63)*
 
 ___
 
@@ -66,7 +66,7 @@ ___
 
 Ƭ **Prepend**: *function extends function ? Tuple : never*
 
-*Defined in [types/tuples.ts:47](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/types/tuples.ts#L47)*
+*Defined in [types/tuples.ts:47](https://github.com/fponticelli/tempo/blob/master/std/src/types/tuples.ts#L47)*
 
 ___
 
@@ -74,7 +74,7 @@ ___
 
 Ƭ **Reverse**: *ReverseImpl‹T, [], []›*
 
-*Defined in [types/tuples.ts:35](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/types/tuples.ts#L35)*
+*Defined in [types/tuples.ts:35](https://github.com/fponticelli/tempo/blob/master/std/src/types/tuples.ts#L35)*
 
 ___
 
@@ -82,7 +82,7 @@ ___
 
 Ƭ **Tail**: *function extends function ? Rest : never*
 
-*Defined in [types/tuples.ts:16](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/types/tuples.ts#L16)*
+*Defined in [types/tuples.ts:16](https://github.com/fponticelli/tempo/blob/master/std/src/types/tuples.ts#L16)*
 
 ___
 
@@ -90,4 +90,4 @@ ___
 
 Ƭ **TupleToUnion**: *T[number]*
 
-*Defined in [types/tuples.ts:45](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/types/tuples.ts#L45)*
+*Defined in [types/tuples.ts:45](https://github.com/fponticelli/tempo/blob/master/std/src/types/tuples.ts#L45)*

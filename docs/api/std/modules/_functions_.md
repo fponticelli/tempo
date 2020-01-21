@@ -22,7 +22,7 @@ sidebar_label: "functions"
 
 ▸ **compose**<**A**>(): *function*
 
-*Defined in [functions.ts:3](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/functions.ts#L3)*
+*Defined in [functions.ts:3](https://github.com/fponticelli/tempo/blob/master/std/src/functions.ts#L3)*
 
 **Type parameters:**
 
@@ -40,7 +40,7 @@ Name | Type |
 
 ▸ **compose**<**A**, **B**>(`f1`: function): *function*
 
-*Defined in [functions.ts:4](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/functions.ts#L4)*
+*Defined in [functions.ts:4](https://github.com/fponticelli/tempo/blob/master/std/src/functions.ts#L4)*
 
 **Type parameters:**
 
@@ -72,7 +72,7 @@ Name | Type |
 
 ▸ **compose**<**A**, **B**, **C**>(`f1`: function, `f2`: function): *function*
 
-*Defined in [functions.ts:5](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/functions.ts#L5)*
+*Defined in [functions.ts:5](https://github.com/fponticelli/tempo/blob/master/std/src/functions.ts#L5)*
 
 **Type parameters:**
 
@@ -116,7 +116,7 @@ Name | Type |
 
 ▸ **compose**<**A**, **B**, **C**, **D**>(`f1`: function, `f2`: function, `f3`: function): *function*
 
-*Defined in [functions.ts:6](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/functions.ts#L6)*
+*Defined in [functions.ts:6](https://github.com/fponticelli/tempo/blob/master/std/src/functions.ts#L6)*
 
 **Type parameters:**
 
@@ -172,7 +172,7 @@ Name | Type |
 
 ▸ **compose**<**A**, **B**, **C**, **D**, **E**>(`f1`: function, `f2`: function, `f3`: function, `f4`: function): *function*
 
-*Defined in [functions.ts:7](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/functions.ts#L7)*
+*Defined in [functions.ts:7](https://github.com/fponticelli/tempo/blob/master/std/src/functions.ts#L7)*
 
 **Type parameters:**
 
@@ -240,7 +240,7 @@ Name | Type |
 
 ▸ **compose**<**A**, **B**, **C**, **D**, **E**, **F**>(`f1`: function, `f2`: function, `f3`: function, `f4`: function, `f5`: function): *function*
 
-*Defined in [functions.ts:8](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/functions.ts#L8)*
+*Defined in [functions.ts:8](https://github.com/fponticelli/tempo/blob/master/std/src/functions.ts#L8)*
 
 **Type parameters:**
 
@@ -320,7 +320,7 @@ Name | Type |
 
 ▸ **compose**<**A**, **B**, **C**, **D**, **E**, **F**, **G**>(`f1`: function, `f2`: function, `f3`: function, `f4`: function, `f5`: function, `f6`: function): *function*
 
-*Defined in [functions.ts:9](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/functions.ts#L9)*
+*Defined in [functions.ts:9](https://github.com/fponticelli/tempo/blob/master/std/src/functions.ts#L9)*
 
 **Type parameters:**
 
@@ -416,7 +416,7 @@ ___
 
 ▸ **curryLeft**<**A**, **Rest**, **Ret**>(`f`: function): *(Anonymous function)*
 
-*Defined in [functions.ts:17](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/functions.ts#L17)*
+*Defined in [functions.ts:17](https://github.com/fponticelli/tempo/blob/master/std/src/functions.ts#L17)*
 
 **Type parameters:**
 
@@ -447,7 +447,7 @@ ___
 
 ▸ **curryRight**<**A**, **B**, **C**, **D**>(`f`: function): *function*
 
-*Defined in [functions.ts:20](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/functions.ts#L20)*
+*Defined in [functions.ts:20](https://github.com/fponticelli/tempo/blob/master/std/src/functions.ts#L20)*
 
 **Type parameters:**
 
@@ -494,7 +494,7 @@ Name | Type |
 
 ▸ **curryRight**<**A**, **B**, **C**, **D**, **E**>(`f`: function): *function*
 
-*Defined in [functions.ts:22](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/functions.ts#L22)*
+*Defined in [functions.ts:22](https://github.com/fponticelli/tempo/blob/master/std/src/functions.ts#L22)*
 
 **Type parameters:**
 
@@ -545,7 +545,7 @@ Name | Type |
 
 ▸ **curryRight**<**A**, **B**, **C**, **D**, **E**, **F**>(`f`: function): *function*
 
-*Defined in [functions.ts:24](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/functions.ts#L24)*
+*Defined in [functions.ts:24](https://github.com/fponticelli/tempo/blob/master/std/src/functions.ts#L24)*
 
 **Type parameters:**
 
@@ -600,7 +600,7 @@ Name | Type |
 
 ▸ **curryRight**<**A**, **B**, **C**, **D**, **E**, **F**, **G**>(`f`: function): *function*
 
-*Defined in [functions.ts:26](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/functions.ts#L26)*
+*Defined in [functions.ts:26](https://github.com/fponticelli/tempo/blob/master/std/src/functions.ts#L26)*
 
 **Type parameters:**
 
@@ -663,7 +663,7 @@ ___
 
 ▸ **flip**<**A**, **B**, **C**>(`f`: function): *function*
 
-*Defined in [functions.ts:32](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/functions.ts#L32)*
+*Defined in [functions.ts:32](https://github.com/fponticelli/tempo/blob/master/std/src/functions.ts#L32)*
 
 **Type parameters:**
 
@@ -699,7 +699,7 @@ Name | Type |
 
 ▸ **flip**<**A**, **B**, **C**, **D**>(`f`: function): *function*
 
-*Defined in [functions.ts:34](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/functions.ts#L34)*
+*Defined in [functions.ts:34](https://github.com/fponticelli/tempo/blob/master/std/src/functions.ts#L34)*
 
 **Type parameters:**
 
@@ -739,7 +739,7 @@ Name | Type |
 
 ▸ **flip**<**A**, **B**, **C**, **D**, **E**>(`f`: function): *function*
 
-*Defined in [functions.ts:36](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/functions.ts#L36)*
+*Defined in [functions.ts:36](https://github.com/fponticelli/tempo/blob/master/std/src/functions.ts#L36)*
 
 **Type parameters:**
 
@@ -783,7 +783,7 @@ Name | Type |
 
 ▸ **flip**<**A**, **B**, **C**, **D**, **E**>(`f`: function): *function*
 
-*Defined in [functions.ts:38](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/functions.ts#L38)*
+*Defined in [functions.ts:38](https://github.com/fponticelli/tempo/blob/master/std/src/functions.ts#L38)*
 
 **Type parameters:**
 
@@ -827,7 +827,7 @@ Name | Type |
 
 ▸ **flip**<**A**, **B**, **C**, **D**, **E**, **F**>(`f`: function): *function*
 
-*Defined in [functions.ts:40](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/functions.ts#L40)*
+*Defined in [functions.ts:40](https://github.com/fponticelli/tempo/blob/master/std/src/functions.ts#L40)*
 
 **Type parameters:**
 
@@ -875,7 +875,7 @@ Name | Type |
 
 ▸ **flip**<**A**, **B**, **C**, **D**, **E**, **F**, **G**>(`f`: function): *function*
 
-*Defined in [functions.ts:42](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/functions.ts#L42)*
+*Defined in [functions.ts:42](https://github.com/fponticelli/tempo/blob/master/std/src/functions.ts#L42)*
 
 **Type parameters:**
 
@@ -931,7 +931,7 @@ ___
 
 ▸ **identity**<**T**>(`v`: T): *T*
 
-*Defined in [functions.ts:15](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/functions.ts#L15)*
+*Defined in [functions.ts:15](https://github.com/fponticelli/tempo/blob/master/std/src/functions.ts#L15)*
 
 **Type parameters:**
 

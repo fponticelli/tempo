@@ -22,7 +22,7 @@ sidebar_label: "types/generic"
 
 Ƭ **Cast**: *A extends B ? A : B*
 
-*Defined in [types/generic.ts:27](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/types/generic.ts#L27)*
+*Defined in [types/generic.ts:27](https://github.com/fponticelli/tempo/blob/master/std/src/types/generic.ts#L27)*
 
 ___
 
@@ -30,7 +30,7 @@ ___
 
 Ƭ **DeRef**: *T extends function ? Ret : never*
 
-*Defined in [types/generic.ts:17](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/types/generic.ts#L17)*
+*Defined in [types/generic.ts:17](https://github.com/fponticelli/tempo/blob/master/std/src/types/generic.ts#L17)*
 
 ___
 
@@ -38,7 +38,7 @@ ___
 
 Ƭ **Pointer**: *function*
 
-*Defined in [types/generic.ts:16](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/types/generic.ts#L16)*
+*Defined in [types/generic.ts:16](https://github.com/fponticelli/tempo/blob/master/std/src/types/generic.ts#L16)*
 
 #### Type declaration:
 
@@ -50,7 +50,7 @@ ___
 
 Ƭ **WhenEquals**: *Equals<X, Y> extends true ? A : B*
 
-*Defined in [types/generic.ts:19](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/types/generic.ts#L19)*
+*Defined in [types/generic.ts:19](https://github.com/fponticelli/tempo/blob/master/std/src/types/generic.ts#L19)*
 
 ___
 
@@ -58,4 +58,4 @@ ___
 
 Ƭ **WhenNotEquals**: *NotEquals<X, Y> extends true ? A : B*
 
-*Defined in [types/generic.ts:23](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/types/generic.ts#L23)*
+*Defined in [types/generic.ts:23](https://github.com/fponticelli/tempo/blob/master/std/src/types/generic.ts#L23)*

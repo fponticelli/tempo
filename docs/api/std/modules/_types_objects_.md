@@ -29,7 +29,7 @@ sidebar_label: "types/objects"
 
 Ƭ **ExcludeFunctionFields**: *Pick‹T, [KeysWithoutFieldType](_types_objects_.md#keyswithoutfieldtype)‹T, [AnyFunction](_types_functions_.md#anyfunction)››*
 
-*Defined in [types/objects.ts:89](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/types/objects.ts#L89)*
+*Defined in [types/objects.ts:89](https://github.com/fponticelli/tempo/blob/master/std/src/types/objects.ts#L89)*
 
 ___
 
@@ -37,7 +37,7 @@ ___
 
 Ƭ **KeysWithFieldType**: *object[keyof T]*
 
-*Defined in [types/objects.ts:75](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/types/objects.ts#L75)*
+*Defined in [types/objects.ts:75](https://github.com/fponticelli/tempo/blob/master/std/src/types/objects.ts#L75)*
 
 ___
 
@@ -45,7 +45,7 @@ ___
 
 Ƭ **KeysWithoutFieldType**: *object[keyof T]*
 
-*Defined in [types/objects.ts:79](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/types/objects.ts#L79)*
+*Defined in [types/objects.ts:79](https://github.com/fponticelli/tempo/blob/master/std/src/types/objects.ts#L79)*
 
 ___
 
@@ -53,7 +53,7 @@ ___
 
 Ƭ **Merge**: *A & B*
 
-*Defined in [types/objects.ts:95](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/types/objects.ts#L95)*
+*Defined in [types/objects.ts:95](https://github.com/fponticelli/tempo/blob/master/std/src/types/objects.ts#L95)*
 
 ___
 
@@ -61,7 +61,7 @@ ___
 
 Ƭ **ObjectWithField**: *object*
 
-*Defined in [types/objects.ts:18](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/types/objects.ts#L18)*
+*Defined in [types/objects.ts:18](https://github.com/fponticelli/tempo/blob/master/std/src/types/objects.ts#L18)*
 
 #### Type declaration:
 
@@ -71,7 +71,7 @@ ___
 
 Ƭ **ObjectWithPath**: *Path extends [] ? object : Path extends [infer T] ? T extends IndexType ? object : never : Path extends [infer K, any] ? K extends IndexType ? Tail<Path> extends infer Rest ? Rest extends IndexType[] ? object : never : never : never : never*
 
-*Defined in [types/objects.ts:20](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/types/objects.ts#L20)*
+*Defined in [types/objects.ts:20](https://github.com/fponticelli/tempo/blob/master/std/src/types/objects.ts#L20)*
 
 ___
 
@@ -79,7 +79,7 @@ ___
 
 Ƭ **ReadonlyFields**: *Pick‹T, [ReadonlyKeys](_types_objects_.md#readonlykeys)‹T››*
 
-*Defined in [types/objects.ts:88](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/types/objects.ts#L88)*
+*Defined in [types/objects.ts:88](https://github.com/fponticelli/tempo/blob/master/std/src/types/objects.ts#L88)*
 
 ___
 
@@ -87,7 +87,7 @@ ___
 
 Ƭ **ReadonlyKeys**: *object[keyof T]*
 
-*Defined in [types/objects.ts:66](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/types/objects.ts#L66)*
+*Defined in [types/objects.ts:66](https://github.com/fponticelli/tempo/blob/master/std/src/types/objects.ts#L66)*
 
 ___
 
@@ -95,7 +95,7 @@ ___
 
 Ƭ **RemoveNullableFromFields**: *object*
 
-*Defined in [types/objects.ts:83](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/types/objects.ts#L83)*
+*Defined in [types/objects.ts:83](https://github.com/fponticelli/tempo/blob/master/std/src/types/objects.ts#L83)*
 
 #### Type declaration:
 
@@ -105,7 +105,7 @@ ___
 
 Ƭ **TypeAtPath**: *object[Path extends [] ? "empty" : Path extends [any] ? "done" : "next"]*
 
-*Defined in [types/objects.ts:36](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/types/objects.ts#L36)*
+*Defined in [types/objects.ts:36](https://github.com/fponticelli/tempo/blob/master/std/src/types/objects.ts#L36)*
 
 ___
 
@@ -113,7 +113,7 @@ ___
 
 Ƭ **WritableFields**: *Pick‹T, [WritableKeys](_types_objects_.md#writablekeys)‹T››*
 
-*Defined in [types/objects.ts:87](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/types/objects.ts#L87)*
+*Defined in [types/objects.ts:87](https://github.com/fponticelli/tempo/blob/master/std/src/types/objects.ts#L87)*
 
 ___
 
@@ -121,4 +121,4 @@ ___
 
 Ƭ **WritableKeys**: *object[keyof T]*
 
-*Defined in [types/objects.ts:58](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/types/objects.ts#L58)*
+*Defined in [types/objects.ts:58](https://github.com/fponticelli/tempo/blob/master/std/src/types/objects.ts#L58)*

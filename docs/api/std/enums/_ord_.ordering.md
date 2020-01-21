@@ -20,7 +20,7 @@ sidebar_label: "Ordering"
 
 • **EQ**: = 0
 
-*Defined in [ord.ts:3](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/ord.ts#L3)*
+*Defined in [ord.ts:3](https://github.com/fponticelli/tempo/blob/master/std/src/ord.ts#L3)*
 
 ___
 
@@ -28,7 +28,7 @@ ___
 
 • **GT**: = 1
 
-*Defined in [ord.ts:4](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/ord.ts#L4)*
+*Defined in [ord.ts:4](https://github.com/fponticelli/tempo/blob/master/std/src/ord.ts#L4)*
 
 ___
 
@@ -36,4 +36,4 @@ ___
 
 • **LT**: = -1
 
-*Defined in [ord.ts:2](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/ord.ts#L2)*
+*Defined in [ord.ts:2](https://github.com/fponticelli/tempo/blob/master/std/src/ord.ts#L2)*

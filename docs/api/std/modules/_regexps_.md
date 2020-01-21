@@ -18,7 +18,7 @@ sidebar_label: "regexps"
 
 ▸ **map**(`f`: function, `pattern`: RegExp, `subject`: string): *string*
 
-*Defined in [regexps.ts:14](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/regexps.ts#L14)*
+*Defined in [regexps.ts:14](https://github.com/fponticelli/tempo/blob/master/std/src/regexps.ts#L14)*
 
 **Parameters:**
 

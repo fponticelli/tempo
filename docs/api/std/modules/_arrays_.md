@@ -35,7 +35,7 @@ sidebar_label: "arrays"
 
 ▸ **all**<**T**>(`predicate`: function, `arr`: T[]): *boolean*
 
-*Defined in [arrays.ts:70](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/arrays.ts#L70)*
+*Defined in [arrays.ts:70](https://github.com/fponticelli/tempo/blob/master/std/src/arrays.ts#L70)*
 
 **Type parameters:**
 
@@ -63,7 +63,7 @@ ___
 
 ▸ **any**<**T**>(`predicate`: function, `arr`: T[]): *boolean*
 
-*Defined in [arrays.ts:79](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/arrays.ts#L79)*
+*Defined in [arrays.ts:79](https://github.com/fponticelli/tempo/blob/master/std/src/arrays.ts#L79)*
 
 **Type parameters:**
 
@@ -91,7 +91,7 @@ ___
 
 ▸ **concat**<**A**>(...`arrs`: A[][]): *A[]*
 
-*Defined in [arrays.ts:93](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/arrays.ts#L93)*
+*Defined in [arrays.ts:93](https://github.com/fponticelli/tempo/blob/master/std/src/arrays.ts#L93)*
 
 **Type parameters:**
 
@@ -111,7 +111,7 @@ ___
 
 ▸ **each**<**T**>(`f`: function, `arr`: T[]): *void*
 
-*Defined in [arrays.ts:88](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/arrays.ts#L88)*
+*Defined in [arrays.ts:88](https://github.com/fponticelli/tempo/blob/master/std/src/arrays.ts#L88)*
 
 **Type parameters:**
 
@@ -139,7 +139,7 @@ ___
 
 ▸ **equals**<**T**>(`predicate`: function, `a`: T[], `b`: T[]): *boolean*
 
-*Defined in [arrays.ts:37](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/arrays.ts#L37)*
+*Defined in [arrays.ts:37](https://github.com/fponticelli/tempo/blob/master/std/src/arrays.ts#L37)*
 
 **Type parameters:**
 
@@ -170,7 +170,7 @@ ___
 
 ▸ **fill**<**A**>(`length`: number, `value`: A): *any[]*
 
-*Defined in [arrays.ts:108](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/arrays.ts#L108)*
+*Defined in [arrays.ts:108](https://github.com/fponticelli/tempo/blob/master/std/src/arrays.ts#L108)*
 
 **Type parameters:**
 
@@ -191,7 +191,7 @@ ___
 
 ▸ **filter**<**T**>(`predicate`: function, `arr`: T[]): *T[]*
 
-*Defined in [arrays.ts:51](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/arrays.ts#L51)*
+*Defined in [arrays.ts:51](https://github.com/fponticelli/tempo/blob/master/std/src/arrays.ts#L51)*
 
 **Type parameters:**
 
@@ -219,7 +219,7 @@ ___
 
 ▸ **flatMap**<**A**, **B**>(`f`: function, `arr`: A[]): *B[]*
 
-*Defined in [arrays.ts:26](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/arrays.ts#L26)*
+*Defined in [arrays.ts:26](https://github.com/fponticelli/tempo/blob/master/std/src/arrays.ts#L26)*
 
 **Type parameters:**
 
@@ -249,7 +249,7 @@ ___
 
 ▸ **flatten**<**T**>(`arr`: T[][]): *T[]*
 
-*Defined in [arrays.ts:59](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/arrays.ts#L59)*
+*Defined in [arrays.ts:59](https://github.com/fponticelli/tempo/blob/master/std/src/arrays.ts#L59)*
 
 **Type parameters:**
 
@@ -269,7 +269,7 @@ ___
 
 ▸ **foldLeft**<**T**, **B**>(`f`: function, `arr`: T[], `b`: B): *B*
 
-*Defined in [arrays.ts:63](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/arrays.ts#L63)*
+*Defined in [arrays.ts:63](https://github.com/fponticelli/tempo/blob/master/std/src/arrays.ts#L63)*
 
 **Type parameters:**
 
@@ -302,7 +302,7 @@ ___
 
 ▸ **hasValues**<**T**>(`arr`: T[]): *arr is [T]*
 
-*Defined in [arrays.ts:49](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/arrays.ts#L49)*
+*Defined in [arrays.ts:49](https://github.com/fponticelli/tempo/blob/master/std/src/arrays.ts#L49)*
 
 **Type parameters:**
 
@@ -322,7 +322,7 @@ ___
 
 ▸ **head**<**A**>(`arr`: A[]): *[Maybe](_maybe_.md#maybe)‹A›*
 
-*Defined in [arrays.ts:34](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/arrays.ts#L34)*
+*Defined in [arrays.ts:34](https://github.com/fponticelli/tempo/blob/master/std/src/arrays.ts#L34)*
 
 **Type parameters:**
 
@@ -342,7 +342,7 @@ ___
 
 ▸ **isEmpty**<**T**>(`arr`: T[]): *arr is []*
 
-*Defined in [arrays.ts:48](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/arrays.ts#L48)*
+*Defined in [arrays.ts:48](https://github.com/fponticelli/tempo/blob/master/std/src/arrays.ts#L48)*
 
 **Type parameters:**
 
@@ -362,7 +362,7 @@ ___
 
 ▸ **map**<**A**, **B**>(`f`: function, `arr`: A[]): *B[]*
 
-*Defined in [arrays.ts:17](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/arrays.ts#L17)*
+*Defined in [arrays.ts:17](https://github.com/fponticelli/tempo/blob/master/std/src/arrays.ts#L17)*
 
 **Type parameters:**
 
@@ -392,7 +392,7 @@ ___
 
 ▸ **numbersRange**(`length`: number, `startAt`: number): *any[]*
 
-*Defined in [arrays.ts:106](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/arrays.ts#L106)*
+*Defined in [arrays.ts:106](https://github.com/fponticelli/tempo/blob/master/std/src/arrays.ts#L106)*
 
 **Parameters:**
 
@@ -409,7 +409,7 @@ ___
 
 ▸ **range**<**A**>(`length`: number, `f`: function): *any[]*
 
-*Defined in [arrays.ts:99](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/arrays.ts#L99)*
+*Defined in [arrays.ts:99](https://github.com/fponticelli/tempo/blob/master/std/src/arrays.ts#L99)*
 
 **Type parameters:**
 
@@ -437,7 +437,7 @@ ___
 
 ▸ **sort**<**A**>(`compare`: function, `arr`: A[]): *A[]*
 
-*Defined in [arrays.ts:96](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/arrays.ts#L96)*
+*Defined in [arrays.ts:96](https://github.com/fponticelli/tempo/blob/master/std/src/arrays.ts#L96)*
 
 **Type parameters:**
 
@@ -466,7 +466,7 @@ ___
 
 ▸ **tail**<**A**>(`arr`: A[]): *A[]*
 
-*Defined in [arrays.ts:35](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/arrays.ts#L35)*
+*Defined in [arrays.ts:35](https://github.com/fponticelli/tempo/blob/master/std/src/arrays.ts#L35)*
 
 **Type parameters:**
 
