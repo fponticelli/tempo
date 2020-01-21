@@ -59,7 +59,6 @@ temp
 common/temp/**
 package-deps.json
 
-
 **/.cache
 **/es6
 **/lib
@@ -70,3 +69,9 @@ package-deps.json
 
 **/generated/
 **/.DS_Store
+
+.bundle/
+vendor/
+docs/_site/
+docs/.jekyll-cache/
+docs/.sass-cache/
