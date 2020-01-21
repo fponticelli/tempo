@@ -1,6 +1,10 @@
-[tempo-std - v0.2.0](../README.md) › [Globals](../globals.md) › ["strings"](_strings_.md)
+---
+id: "_strings_"
+title: "strings"
+sidebar_label: "strings"
+---
 
-# External module: "strings"
+[tempo-std - v0.2.0](../index.md) › [Globals](../globals.md) › ["strings"](_strings_.md)
 
 ## Index
 
@@ -92,7 +96,7 @@
 
 • **BASE64_ALPHABET**: *"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"* = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
 
-*Defined in [strings.ts:703](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/strings.ts#L703)*
+*Defined in [strings.ts:703](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/strings.ts#L703)*
 
 ___
 
@@ -100,7 +104,7 @@ ___
 
 • **order**: *[Ord](../classes/_ord_.ord.md)‹string›* = Ord.fromNumberComparison(compare)
 
-*Defined in [strings.ts:161](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/strings.ts#L161)*
+*Defined in [strings.ts:161](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/strings.ts#L161)*
 
 ## Functions
 
@@ -108,7 +112,7 @@ ___
 
 ▸ **after**(`value`: string, `searchFor`: string): *string*
 
-*Defined in [strings.ts:28](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/strings.ts#L28)*
+*Defined in [strings.ts:28](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/strings.ts#L28)*
 
 `after` searches for the first occurrance of `searchFor` and returns the text after that.
 If `searchFor` is not found, an empty string is returned.
@@ -128,7 +132,7 @@ ___
 
 ▸ **afterLast**(`value`: string, `searchFor`: string): *string*
 
-*Defined in [strings.ts:40](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/strings.ts#L40)*
+*Defined in [strings.ts:40](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/strings.ts#L40)*
 
 `afterLast` searches for the last occurrance of `searchFor` and returns the text after that.
 If `searchFor` is not found, an empty string is returned.
@@ -148,7 +152,7 @@ ___
 
 ▸ **before**(`value`: string, `searchFor`: string): *string*
 
-*Defined in [strings.ts:52](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/strings.ts#L52)*
+*Defined in [strings.ts:52](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/strings.ts#L52)*
 
 `before` searches for the first occurrance of `searchFor` and returns the text before that.
 If `searchFor` is not found, an empty string is returned.
@@ -168,7 +172,7 @@ ___
 
 ▸ **beforeLast**(`value`: string, `searchFor`: string): *string*
 
-*Defined in [strings.ts:64](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/strings.ts#L64)*
+*Defined in [strings.ts:64](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/strings.ts#L64)*
 
 `beforeLast` searches for the last occurrance of `searchFor` and returns the text before that.
 If `searchFor` is not found, an empty string is returned.
@@ -188,7 +192,7 @@ ___
 
 ▸ **canonicalizeNewlines**(`value`: string): *string*
 
-*Defined in [strings.ts:96](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/strings.ts#L96)*
+*Defined in [strings.ts:96](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/strings.ts#L96)*
 
 Replaces occurrances of `\r\n`, `\n\r`, `\r` with `\n`
 
@@ -206,7 +210,7 @@ ___
 
 ▸ **capitalize**(`s`: string): *string*
 
-*Defined in [strings.ts:75](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/strings.ts#L75)*
+*Defined in [strings.ts:75](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/strings.ts#L75)*
 
 `capitalize` returns a string with the first character convert to upper case.
 
@@ -224,7 +228,7 @@ ___
 
 ▸ **capitalizeWords**(`value`: string, `whiteSpaceOnly`: boolean): *string*
 
-*Defined in [strings.ts:85](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/strings.ts#L85)*
+*Defined in [strings.ts:85](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/strings.ts#L85)*
 
 Capitalize the first letter of every word in `value`. If `whiteSpaceOnly` is set to `true`
 the process is limited to whitespace separated words.
@@ -244,7 +248,7 @@ ___
 
 ▸ **collapse**(`value`: string): *string*
 
-*Defined in [strings.ts:149](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/strings.ts#L149)*
+*Defined in [strings.ts:149](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/strings.ts#L149)*
 
 It cleans up all the whitespaces in the passed `value`. `collapse` does the following:
 - remove trailing/leading whitespaces
@@ -265,7 +269,7 @@ ___
 
 ▸ **compare**(`a`: string, `b`: string): *0 | 1 | -1*
 
-*Defined in [strings.ts:157](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/strings.ts#L157)*
+*Defined in [strings.ts:157](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/strings.ts#L157)*
 
 It compares to string and it returns a negative number if `a` is inferior to `b`, zero if they are the same,
 or otherwise a positive non-sero number.
@@ -285,7 +289,7 @@ ___
 
 ▸ **compareCaseInsensitive**(`a`: string, `b`: string): *number*
 
-*Defined in [strings.ts:103](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/strings.ts#L103)*
+*Defined in [strings.ts:103](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/strings.ts#L103)*
 
 Compares two strings ignoring their case.
 
@@ -304,7 +308,7 @@ ___
 
 ▸ **contains**(`s`: string, `test`: string): *boolean*
 
-*Defined in [strings.ts:173](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/strings.ts#L173)*
+*Defined in [strings.ts:173](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/strings.ts#L173)*
 
 `contains` returns `true` if `s` contains one or more occurrences of `test`.
 
@@ -323,7 +327,7 @@ ___
 
 ▸ **containsAll**(`s`: string, `tests`: Array‹string›): *boolean*
 
-*Defined in [strings.ts:208](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/strings.ts#L208)*
+*Defined in [strings.ts:208](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/strings.ts#L208)*
 
 `contains` returns `true` if `s` contains all of the strings in `tests`
 
@@ -342,7 +346,7 @@ ___
 
 ▸ **containsAllCaseInsensitive**(`s`: string, `tests`: Array‹string›): *boolean*
 
-*Defined in [strings.ts:201](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/strings.ts#L201)*
+*Defined in [strings.ts:201](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/strings.ts#L201)*
 
 `contains` returns `true` if `s` contains all of the strings in `tests` regardless of the text case
 
@@ -361,7 +365,7 @@ ___
 
 ▸ **containsAny**(`s`: string, `tests`: Array‹string›): *boolean*
 
-*Defined in [strings.ts:194](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/strings.ts#L194)*
+*Defined in [strings.ts:194](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/strings.ts#L194)*
 
 `contains` returns `true` if `s` contains any of the strings in `tests`
 
@@ -380,7 +384,7 @@ ___
 
 ▸ **containsAnyCaseInsensitive**(`s`: string, `tests`: Array‹string›): *boolean*
 
-*Defined in [strings.ts:187](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/strings.ts#L187)*
+*Defined in [strings.ts:187](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/strings.ts#L187)*
 
 `contains` returns `true` if `s` contains any of the strings in `tests` regardless of the text case
 
@@ -399,7 +403,7 @@ ___
 
 ▸ **containsCaseInsensitive**(`s`: string, `test`: string): *boolean*
 
-*Defined in [strings.ts:166](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/strings.ts#L166)*
+*Defined in [strings.ts:166](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/strings.ts#L166)*
 
 `contains` returns `true` if `s` contains one or more occurrences of `test` regardless of the text case.
 
@@ -418,7 +422,7 @@ ___
 
 ▸ **count**(`s`: string, `test`: string): *number*
 
-*Defined in [strings.ts:180](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/strings.ts#L180)*
+*Defined in [strings.ts:180](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/strings.ts#L180)*
 
 Return the number of occurances of `test` in `s`.
 
@@ -437,7 +441,7 @@ ___
 
 ▸ **dasherize**(`s`: string): *string*
 
-*Defined in [strings.ts:215](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/strings.ts#L215)*
+*Defined in [strings.ts:215](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/strings.ts#L215)*
 
 `dasherize` replaces all the occurrances of `_` with `-`
 
@@ -455,7 +459,7 @@ ___
 
 ▸ **diffAt**(`a`: string, `b`: string): *number*
 
-*Defined in [strings.ts:225](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/strings.ts#L225)*
+*Defined in [strings.ts:225](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/strings.ts#L225)*
 
 Compares strings `a` and `b` and returns the position where they differ.
 ```ts
@@ -477,7 +481,7 @@ ___
 
 ▸ **ellipsis**(`s`: string, `maxlen`: number, `symbol`: string): *string*
 
-*Defined in [strings.ts:240](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/strings.ts#L240)*
+*Defined in [strings.ts:240](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/strings.ts#L240)*
 
 `ellipsis` truncates `s` at len `maxlen` replaces the last characters with the content
 of `symbol`.
@@ -501,7 +505,7 @@ ___
 
 ▸ **ellipsisMiddle**(`s`: string, `maxlen`: number, `symbol`: string): *string*
 
-*Defined in [strings.ts:259](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/strings.ts#L259)*
+*Defined in [strings.ts:259](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/strings.ts#L259)*
 
 Same as `ellipsis` but puts the symbol in the middle of the string and not to the end.
 ```ts
@@ -524,7 +528,7 @@ ___
 
 ▸ **endsWith**(`s`: string, `end`: string): *boolean*
 
-*Defined in [strings.ts:113](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/strings.ts#L113)*
+*Defined in [strings.ts:113](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/strings.ts#L113)*
 
 **Parameters:**
 
@@ -541,7 +545,7 @@ ___
 
 ▸ **endsWithAny**(`s`: string, `values`: string[]): *boolean*
 
-*Defined in [strings.ts:276](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/strings.ts#L276)*
+*Defined in [strings.ts:276](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/strings.ts#L276)*
 
 Returns `true` if `s` ends with any of the values in `values`.
 
@@ -560,7 +564,7 @@ ___
 
 ▸ **endsWithAnyCaseInsensitive**(`s`: string, `values`: Array‹string›): *boolean*
 
-*Defined in [strings.ts:132](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/strings.ts#L132)*
+*Defined in [strings.ts:132](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/strings.ts#L132)*
 
 Compares a string `s` with many `values` and see if one of them matches its end ignoring their case.
 
@@ -579,7 +583,7 @@ ___
 
 ▸ **endsWithCaseInsensitive**(`s`: string, `end`: string): *boolean*
 
-*Defined in [strings.ts:117](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/strings.ts#L117)*
+*Defined in [strings.ts:117](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/strings.ts#L117)*
 
 **Parameters:**
 
@@ -596,7 +600,7 @@ ___
 
 ▸ **filter**(`s`: string, `predicate`: function): *string*
 
-*Defined in [strings.ts:284](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/strings.ts#L284)*
+*Defined in [strings.ts:284](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/strings.ts#L284)*
 
 `filter` applies `predicate` character by character to `s` and it returns a filtered
 version of the string.
@@ -623,7 +627,7 @@ ___
 
 ▸ **filterCharcode**(`s`: string, `predicate`: function): *string*
 
-*Defined in [strings.ts:293](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/strings.ts#L293)*
+*Defined in [strings.ts:293](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/strings.ts#L293)*
 
 Same as `filter` but `predicate` operates on integer char codes instead of string characters.
 
@@ -649,7 +653,7 @@ ___
 
 ▸ **from**(`value`: string, `searchFor`: string): *string*
 
-*Defined in [strings.ts:304](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/strings.ts#L304)*
+*Defined in [strings.ts:304](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/strings.ts#L304)*
 
 `from` searches for the first occurrance of `searchFor` and returns the text from that point on.
 If `searchFor` is not found, an empty string is returned.
@@ -669,7 +673,7 @@ ___
 
 ▸ **hasContent**(`value`: string): *boolean*
 
-*Defined in [strings.ts:327](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/strings.ts#L327)*
+*Defined in [strings.ts:327](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/strings.ts#L327)*
 
 Returns `true` if `value` is not `null` and contains at least one character.
 
@@ -687,7 +691,7 @@ ___
 
 ▸ **hashCode**(`value`: string, `seed`: number): *number*
 
-*Defined in [strings.ts:312](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/strings.ts#L312)*
+*Defined in [strings.ts:312](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/strings.ts#L312)*
 
 **Parameters:**
 
@@ -704,7 +708,7 @@ ___
 
 ▸ **humanize**(`s`: string): *string*
 
-*Defined in [strings.ts:334](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/strings.ts#L334)*
+*Defined in [strings.ts:334](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/strings.ts#L334)*
 
 Works the same as `underscore` but also replaces underscores with whitespaces.
 
@@ -722,7 +726,7 @@ ___
 
 ▸ **ifEmpty**(`value`: string, `alt`: string): *string*
 
-*Defined in [strings.ts:375](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/strings.ts#L375)*
+*Defined in [strings.ts:375](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/strings.ts#L375)*
 
 `ifEmpty` returns `value` if it is neither `null` or empty, otherwise it returns `alt`
 
@@ -741,7 +745,7 @@ ___
 
 ▸ **isAlpha**(`s`: string): *boolean*
 
-*Defined in [strings.ts:341](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/strings.ts#L341)*
+*Defined in [strings.ts:341](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/strings.ts#L341)*
 
 Checks if `s` contains only (and at least one) alphabetical characters.
 
@@ -759,7 +763,7 @@ ___
 
 ▸ **isAlphaNum**(`value`: string): *boolean*
 
-*Defined in [strings.ts:348](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/strings.ts#L348)*
+*Defined in [strings.ts:348](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/strings.ts#L348)*
 
 `isAlphaNum` returns `true` if the string only contains alpha-numeric characters.
 
@@ -777,7 +781,7 @@ ___
 
 ▸ **isBreakingWhitespace**(`value`: string): *boolean*
 
-*Defined in [strings.ts:352](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/strings.ts#L352)*
+*Defined in [strings.ts:352](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/strings.ts#L352)*
 
 **Parameters:**
 
@@ -793,7 +797,7 @@ ___
 
 ▸ **isDigitsOnly**(`value`: string): *boolean*
 
-*Defined in [strings.ts:382](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/strings.ts#L382)*
+*Defined in [strings.ts:382](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/strings.ts#L382)*
 
 `isDigitsOnly` returns `true` if the string only contains digits.
 
@@ -811,7 +815,7 @@ ___
 
 ▸ **isEmpty**(`value`: string): *boolean*
 
-*Defined in [strings.ts:389](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/strings.ts#L389)*
+*Defined in [strings.ts:389](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/strings.ts#L389)*
 
 `isEmpty` returns true if either `value` is null or is an empty string.
 
@@ -829,7 +833,7 @@ ___
 
 ▸ **isLowerCase**(`value`: string): *boolean*
 
-*Defined in [strings.ts:360](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/strings.ts#L360)*
+*Defined in [strings.ts:360](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/strings.ts#L360)*
 
 Returns `true` if the value string is composed of only lower cased characters
 or case neutral characters.
@@ -848,7 +852,7 @@ ___
 
 ▸ **isSpaceAt**(`s`: string, `pos`: number): *boolean*
 
-*Defined in [strings.ts:648](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/strings.ts#L648)*
+*Defined in [strings.ts:648](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/strings.ts#L648)*
 
 **Parameters:**
 
@@ -865,7 +869,7 @@ ___
 
 ▸ **isUpperCase**(`value`: string): *boolean*
 
-*Defined in [strings.ts:368](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/strings.ts#L368)*
+*Defined in [strings.ts:368](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/strings.ts#L368)*
 
 Returns `true` if the value string is composed of only upper cased characters
 or case neutral characters.
@@ -884,7 +888,7 @@ ___
 
 ▸ **lowerCaseFirst**(`value`: string): *string*
 
-*Defined in [strings.ts:396](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/strings.ts#L396)*
+*Defined in [strings.ts:396](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/strings.ts#L396)*
 
 Convert first letter in `value` to lower case.
 
@@ -902,7 +906,7 @@ ___
 
 ▸ **lpad**(`s`: string, `char`: string, `length`: number): *string*
 
-*Defined in [strings.ts:685](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/strings.ts#L685)*
+*Defined in [strings.ts:685](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/strings.ts#L685)*
 
 **Parameters:**
 
@@ -920,7 +924,7 @@ ___
 
 ▸ **map**<**T**>(`callback`: function, `value`: string): *Array‹T›*
 
-*Defined in [strings.ts:424](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/strings.ts#L424)*
+*Defined in [strings.ts:424](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/strings.ts#L424)*
 
 It maps a string character by character using `callback`.
 
@@ -950,7 +954,7 @@ ___
 
 ▸ **quote**(`s`: string): *string*
 
-*Defined in [strings.ts:488](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/strings.ts#L488)*
+*Defined in [strings.ts:488](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/strings.ts#L488)*
 
 Converts a string in a quoted string.
 
@@ -968,7 +972,7 @@ ___
 
 ▸ **random**(`value`: string, `length`: number): *string*
 
-*Defined in [strings.ts:403](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/strings.ts#L403)*
+*Defined in [strings.ts:403](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/strings.ts#L403)*
 
 Returns a random substring from the `value` argument. The length of such value is by default `1`.
 
@@ -987,7 +991,7 @@ ___
 
 ▸ **randomSequence**(`alphabet`: string, `length`: number): *string*
 
-*Defined in [strings.ts:410](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/strings.ts#L410)*
+*Defined in [strings.ts:410](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/strings.ts#L410)*
 
 Returns a random sampling of the specified length from the seed string.
 
@@ -1006,7 +1010,7 @@ ___
 
 ▸ **randomSequence64**(`length`: number): *string*
 
-*Defined in [strings.ts:417](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/strings.ts#L417)*
+*Defined in [strings.ts:417](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/strings.ts#L417)*
 
 Like `randomSequence`, but automatically uses the base64 sequence as the seed string.
 
@@ -1024,7 +1028,7 @@ ___
 
 ▸ **remove**(`value`: string, `toremove`: string): *string*
 
-*Defined in [strings.ts:431](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/strings.ts#L431)*
+*Defined in [strings.ts:431](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/strings.ts#L431)*
 
 If present, it removes all the occurrences of `toremove` from `value`.
 
@@ -1043,7 +1047,7 @@ ___
 
 ▸ **removeAfter**(`value`: string, `toremove`: string): *string*
 
-*Defined in [strings.ts:438](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/strings.ts#L438)*
+*Defined in [strings.ts:438](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/strings.ts#L438)*
 
 If present, it removes the `toremove` text from the end of `value`.
 
@@ -1062,7 +1066,7 @@ ___
 
 ▸ **removeAt**(`value`: string, `index`: number, `length`: number): *string*
 
-*Defined in [strings.ts:445](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/strings.ts#L445)*
+*Defined in [strings.ts:445](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/strings.ts#L445)*
 
 Removes a slice from `index` to `index + length` from `value`.
 
@@ -1082,7 +1086,7 @@ ___
 
 ▸ **removeBefore**(`value`: string, `toremove`: string): *string*
 
-*Defined in [strings.ts:452](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/strings.ts#L452)*
+*Defined in [strings.ts:452](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/strings.ts#L452)*
 
 If present, it removes the `toremove` text from the beginning of `value`.
 
@@ -1101,7 +1105,7 @@ ___
 
 ▸ **removeOne**(`value`: string, `toremove`: string): *string*
 
-*Defined in [strings.ts:459](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/strings.ts#L459)*
+*Defined in [strings.ts:459](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/strings.ts#L459)*
 
 If present, it removes the first occurrence of `toremove` from `value`.
 
@@ -1120,7 +1124,7 @@ ___
 
 ▸ **repeat**(`s`: string, `times`: number): *string*
 
-*Defined in [strings.ts:472](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/strings.ts#L472)*
+*Defined in [strings.ts:472](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/strings.ts#L472)*
 
 `repeat` builds a new string by repeating the argument `s`, n `times`.
 ```ts
@@ -1142,7 +1146,7 @@ ___
 
 ▸ **replace**(`subject`: string, `placeholder`: string, `replacement`: string): *string*
 
-*Defined in [strings.ts:18](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/strings.ts#L18)*
+*Defined in [strings.ts:18](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/strings.ts#L18)*
 
 **Parameters:**
 
@@ -1160,7 +1164,7 @@ ___
 
 ▸ **reverse**(`s`: string): *string*
 
-*Defined in [strings.ts:479](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/strings.ts#L479)*
+*Defined in [strings.ts:479](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/strings.ts#L479)*
 
 Returns a new string whose characters are in reverse order.
 
@@ -1178,7 +1182,7 @@ ___
 
 ▸ **rpad**(`s`: string, `char`: string, `length`: number): *string*
 
-*Defined in [strings.ts:694](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/strings.ts#L694)*
+*Defined in [strings.ts:694](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/strings.ts#L694)*
 
 **Parameters:**
 
@@ -1196,7 +1200,7 @@ ___
 
 ▸ **splitOnce**(`s`: string, `separator`: string): *string[]*
 
-*Defined in [strings.ts:500](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/strings.ts#L500)*
+*Defined in [strings.ts:500](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/strings.ts#L500)*
 
 It only splits on the first occurrance of separator.
 
@@ -1215,7 +1219,7 @@ ___
 
 ▸ **startsWith**(`s`: string, `start`: string): *boolean*
 
-*Defined in [strings.ts:121](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/strings.ts#L121)*
+*Defined in [strings.ts:121](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/strings.ts#L121)*
 
 **Parameters:**
 
@@ -1232,7 +1236,7 @@ ___
 
 ▸ **startsWithAny**(`s`: string, `values`: string[]): *boolean*
 
-*Defined in [strings.ts:510](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/strings.ts#L510)*
+*Defined in [strings.ts:510](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/strings.ts#L510)*
 
 Returns `true` if `s` starts with any of the values in `values`.
 
@@ -1251,7 +1255,7 @@ ___
 
 ▸ **startsWithAnyCaseInsensitive**(`s`: string, `values`: Array‹string›): *boolean*
 
-*Defined in [strings.ts:139](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/strings.ts#L139)*
+*Defined in [strings.ts:139](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/strings.ts#L139)*
 
 Compares a string `s` with many `values` and see if one of them matches its beginning ignoring their case.
 
@@ -1270,7 +1274,7 @@ ___
 
 ▸ **startsWithCaseInsensitive**(`s`: string, `start`: string): *boolean*
 
-*Defined in [strings.ts:125](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/strings.ts#L125)*
+*Defined in [strings.ts:125](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/strings.ts#L125)*
 
 **Parameters:**
 
@@ -1287,7 +1291,7 @@ ___
 
 ▸ **stripTags**(`s`: string): *string*
 
-*Defined in [strings.ts:518](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/strings.ts#L518)*
+*Defined in [strings.ts:518](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/strings.ts#L518)*
 
 `stripTags` removes any HTML/XML markup from the string leaving only the concatenation
 of the existing text nodes.
@@ -1306,7 +1310,7 @@ ___
 
 ▸ **surround**(`s`: string, `left`: string, `right`: string): *string*
 
-*Defined in [strings.ts:526](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/strings.ts#L526)*
+*Defined in [strings.ts:526](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/strings.ts#L526)*
 
 Surrounds a string with the contents of `left` and `right`. If `right` is omitted,
 `left` will be used on both sides
@@ -1327,7 +1331,7 @@ ___
 
 ▸ **toArray**(`s`: string): *string[]*
 
-*Defined in [strings.ts:533](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/strings.ts#L533)*
+*Defined in [strings.ts:533](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/strings.ts#L533)*
 
 It transforms a string into an `Array` of characters.
 
@@ -1345,7 +1349,7 @@ ___
 
 ▸ **toCharcodes**(`s`: string): *Array‹number›*
 
-*Defined in [strings.ts:540](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/strings.ts#L540)*
+*Defined in [strings.ts:540](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/strings.ts#L540)*
 
 It transforms a string into an `Array` of char codes in integer format.
 
@@ -1363,7 +1367,7 @@ ___
 
 ▸ **toChunks**(`s`: string, `len`: number): *Array‹string›*
 
-*Defined in [strings.ts:548](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/strings.ts#L548)*
+*Defined in [strings.ts:548](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/strings.ts#L548)*
 
 Returns an array of `string` whose elements are equally long (using `len`). If the string `s`
 is not exactly divisible by `len` the last element of the array will be shorter.
@@ -1383,7 +1387,7 @@ ___
 
 ▸ **toLines**(`s`: string): *string[]*
 
-*Defined in [strings.ts:560](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/strings.ts#L560)*
+*Defined in [strings.ts:560](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/strings.ts#L560)*
 
 Returns an array of `string` split by line breaks.
 
@@ -1401,7 +1405,7 @@ ___
 
 ▸ **trimChars**(`value`: string, `charlist`: string): *string*
 
-*Defined in [strings.ts:567](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/strings.ts#L567)*
+*Defined in [strings.ts:567](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/strings.ts#L567)*
 
 `trimChars` removes from the beginning and the end of the string any character that is present in `charlist`.
 
@@ -1420,7 +1424,7 @@ ___
 
 ▸ **trimCharsLeft**(`value`: string, `charlist`: string): *string*
 
-*Defined in [strings.ts:574](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/strings.ts#L574)*
+*Defined in [strings.ts:574](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/strings.ts#L574)*
 
 `trimCharsLeft` removes from the beginning of the string any character that is present in `charlist`.
 
@@ -1439,7 +1443,7 @@ ___
 
 ▸ **trimCharsRight**(`value`: string, `charlist`: string): *string*
 
-*Defined in [strings.ts:587](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/strings.ts#L587)*
+*Defined in [strings.ts:587](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/strings.ts#L587)*
 
 `trimCharsRight` removes from the end of the string any character that is present in `charlist`.
 
@@ -1458,7 +1462,7 @@ ___
 
 ▸ **underscore**(`s`: string): *string*
 
-*Defined in [strings.ts:605](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/strings.ts#L605)*
+*Defined in [strings.ts:605](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/strings.ts#L605)*
 
 `underscore` finds UpperCase characters and turns them into LowerCase and prepends them with a whtiespace.
 Sequences of more than one UpperCase character are left untouched.
@@ -1477,7 +1481,7 @@ ___
 
 ▸ **upTo**(`value`: string, `searchFor`: string): *string*
 
-*Defined in [strings.ts:624](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/strings.ts#L624)*
+*Defined in [strings.ts:624](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/strings.ts#L624)*
 
 `upTo` searches for the first occurrance of `searchFor` and returns the text up to that point.
 If `searchFor` is not found, the entire string is returned.
@@ -1497,7 +1501,7 @@ ___
 
 ▸ **upperCaseFirst**(`value`: string): *string*
 
-*Defined in [strings.ts:616](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/strings.ts#L616)*
+*Defined in [strings.ts:616](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/strings.ts#L616)*
 
 Convert first letter in `value` to upper case.
 
@@ -1515,7 +1519,7 @@ ___
 
 ▸ **wrapColumns**(`s`: string, `columns`: number, `indent`: string, `newline`: string): *string*
 
-*Defined in [strings.ts:636](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/strings.ts#L636)*
+*Defined in [strings.ts:636](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/strings.ts#L636)*
 
 `wrapColumns` splits a long string into lines that are at most `columns` long.
 Words whose length exceeds `columns` are not split.

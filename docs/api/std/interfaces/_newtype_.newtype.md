@@ -1,6 +1,10 @@
-[tempo-std - v0.2.0](../README.md) › [Globals](../globals.md) › ["newtype"](../modules/_newtype_.md) › [Newtype](_newtype_.newtype.md)
+---
+id: "_newtype_.newtype"
+title: "Newtype"
+sidebar_label: "Newtype"
+---
 
-# Interface: Newtype <**V, S**>
+[tempo-std - v0.2.0](../index.md) › [Globals](../globals.md) › ["newtype"](../modules/_newtype_.md) › [Newtype](_newtype_.newtype.md)
 
 Usage:
 export interface Int extends Newtype<
@@ -35,7 +39,7 @@ export const Int = new class extends NewtypeClass<Int> {
 
 • **_S**: *S*
 
-*Defined in [newtype.ts:18](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/newtype.ts#L18)*
+*Defined in [newtype.ts:18](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/newtype.ts#L18)*
 
 ___
 
@@ -43,4 +47,4 @@ ___
 
 • **_T**: *V*
 
-*Defined in [newtype.ts:17](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/newtype.ts#L17)*
+*Defined in [newtype.ts:17](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/newtype.ts#L17)*

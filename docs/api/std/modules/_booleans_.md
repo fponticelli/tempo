@@ -1,6 +1,10 @@
-[tempo-std - v0.2.0](../README.md) › [Globals](../globals.md) › ["booleans"](_booleans_.md)
+---
+id: "_booleans_"
+title: "booleans"
+sidebar_label: "booleans"
+---
 
-# External module: "booleans"
+[tempo-std - v0.2.0](../index.md) › [Globals](../globals.md) › ["booleans"](_booleans_.md)
 
 ## Index
 
@@ -19,7 +23,7 @@
 
 ▸ **canParse**(`v`: string): *boolean*
 
-*Defined in [booleans.ts:20](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/booleans.ts#L20)*
+*Defined in [booleans.ts:20](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/booleans.ts#L20)*
 
 Returns `true` if the passed value is either `true` or `false` (case insensitive).
 
@@ -37,7 +41,7 @@ ___
 
 ▸ **compare**(`a`: boolean, `b`: boolean): *0 | 1 | -1*
 
-*Defined in [booleans.ts:6](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/booleans.ts#L6)*
+*Defined in [booleans.ts:6](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/booleans.ts#L6)*
 
 Returns a comparison value (`Int`) from two boolean values.
 
@@ -56,7 +60,7 @@ ___
 
 ▸ **option**<**A**>(`cond`: boolean, `a`: A): *[Option](_option_.md#option)‹A›*
 
-*Defined in [booleans.ts:64](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/booleans.ts#L64)*
+*Defined in [booleans.ts:64](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/booleans.ts#L64)*
 
 Depending upon the condition, return the provided value wrapped
 in a `some`, or `none` if the condition is false.
@@ -80,7 +84,7 @@ ___
 
 ▸ **parse**(`v`: string): *boolean*
 
-*Defined in [booleans.ts:38](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/booleans.ts#L38)*
+*Defined in [booleans.ts:38](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/booleans.ts#L38)*
 
 Returns `true`/`false` if the passed value is `true`/`false` (case insensitive) with any other value it will return null.
 
@@ -98,7 +102,7 @@ ___
 
 ▸ **toInt**(`v`: boolean): *0 | 1*
 
-*Defined in [booleans.ts:13](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/booleans.ts#L13)*
+*Defined in [booleans.ts:13](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/booleans.ts#L13)*
 
 Converts a boolean to an integer value (`true` => `1`, `false` => `0`).
 
@@ -116,7 +120,7 @@ ___
 
 ▸ **xor**(`a`: boolean, `b`: boolean): *boolean*
 
-*Defined in [booleans.ts:56](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/booleans.ts#L56)*
+*Defined in [booleans.ts:56](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/booleans.ts#L56)*
 
 Returns `true` when arguments are different.
 

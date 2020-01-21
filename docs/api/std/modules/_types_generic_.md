@@ -1,6 +1,10 @@
-[tempo-std - v0.2.0](../README.md) › [Globals](../globals.md) › ["types/generic"](_types_generic_.md)
+---
+id: "_types_generic_"
+title: "types/generic"
+sidebar_label: "types/generic"
+---
 
-# External module: "types/generic"
+[tempo-std - v0.2.0](../index.md) › [Globals](../globals.md) › ["types/generic"](_types_generic_.md)
 
 ## Index
 
@@ -18,7 +22,7 @@
 
 Ƭ **Cast**: *A extends B ? A : B*
 
-*Defined in [types/generic.ts:27](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/types/generic.ts#L27)*
+*Defined in [types/generic.ts:27](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/types/generic.ts#L27)*
 
 ___
 
@@ -26,7 +30,7 @@ ___
 
 Ƭ **DeRef**: *T extends function ? Ret : never*
 
-*Defined in [types/generic.ts:17](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/types/generic.ts#L17)*
+*Defined in [types/generic.ts:17](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/types/generic.ts#L17)*
 
 ___
 
@@ -34,7 +38,7 @@ ___
 
 Ƭ **Pointer**: *function*
 
-*Defined in [types/generic.ts:16](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/types/generic.ts#L16)*
+*Defined in [types/generic.ts:16](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/types/generic.ts#L16)*
 
 #### Type declaration:
 
@@ -46,7 +50,7 @@ ___
 
 Ƭ **WhenEquals**: *Equals<X, Y> extends true ? A : B*
 
-*Defined in [types/generic.ts:19](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/types/generic.ts#L19)*
+*Defined in [types/generic.ts:19](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/types/generic.ts#L19)*
 
 ___
 
@@ -54,4 +58,4 @@ ___
 
 Ƭ **WhenNotEquals**: *NotEquals<X, Y> extends true ? A : B*
 
-*Defined in [types/generic.ts:23](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/types/generic.ts#L23)*
+*Defined in [types/generic.ts:23](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/types/generic.ts#L23)*

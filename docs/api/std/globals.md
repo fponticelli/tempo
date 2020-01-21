@@ -1,6 +1,10 @@
-[tempo-std - v0.2.0](README.md) › [Globals](globals.md)
+---
+id: "globals"
+title: "tempo-std - v0.2.0"
+sidebar_label: "Globals"
+---
 
-# tempo-std - v0.2.0
+[tempo-std - v0.2.0](index.md) › [Globals](globals.md)
 
 ## Index
 

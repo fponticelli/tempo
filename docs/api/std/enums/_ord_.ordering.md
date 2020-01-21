@@ -1,6 +1,10 @@
-[tempo-std - v0.2.0](../README.md) › [Globals](../globals.md) › ["ord"](../modules/_ord_.md) › [Ordering](_ord_.ordering.md)
+---
+id: "_ord_.ordering"
+title: "Ordering"
+sidebar_label: "Ordering"
+---
 
-# Enumeration: Ordering
+[tempo-std - v0.2.0](../index.md) › [Globals](../globals.md) › ["ord"](../modules/_ord_.md) › [Ordering](_ord_.ordering.md)
 
 ## Index
 
@@ -16,7 +20,7 @@
 
 • **EQ**: = 0
 
-*Defined in [ord.ts:3](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/ord.ts#L3)*
+*Defined in [ord.ts:3](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/ord.ts#L3)*
 
 ___
 
@@ -24,7 +28,7 @@ ___
 
 • **GT**: = 1
 
-*Defined in [ord.ts:4](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/ord.ts#L4)*
+*Defined in [ord.ts:4](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/ord.ts#L4)*
 
 ___
 
@@ -32,4 +36,4 @@ ___
 
 • **LT**: = -1
 
-*Defined in [ord.ts:2](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/ord.ts#L2)*
+*Defined in [ord.ts:2](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/ord.ts#L2)*

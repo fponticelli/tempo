@@ -1,6 +1,10 @@
-[tempo-std - v0.2.0](../README.md) › [Globals](../globals.md) › ["validation"](_validation_.md)
+---
+id: "_validation_"
+title: "validation"
+sidebar_label: "validation"
+---
 
-# External module: "validation"
+[tempo-std - v0.2.0](../index.md) › [Globals](../globals.md) › ["validation"](_validation_.md)
 
 ## Index
 
@@ -32,7 +36,7 @@
 
 Ƭ **T**: *[Validation](_validation_.md#validation)‹V, E›*
 
-*Defined in [validation.ts:149](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/validation.ts#L149)*
+*Defined in [validation.ts:149](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/validation.ts#L149)*
 
 ___
 
@@ -40,7 +44,7 @@ ___
 
 Ƭ **Validation**: *Res.T‹T, [Nel](_nel_.md#nel)‹E››*
 
-*Defined in [validation.ts:18](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/validation.ts#L18)*
+*Defined in [validation.ts:18](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/validation.ts#L18)*
 
 ## Functions
 
@@ -48,7 +52,7 @@ ___
 
 ▸ **apN**<**A**, **B**, **C**, **Err**>(`f`: [Validation](_validation_.md#validation)‹[Fun2](_types_functions_.md#fun2)‹A, B, C›, Err›, `a`: [Validation](_validation_.md#validation)‹A, Err›, `b`: [Validation](_validation_.md#validation)‹B, Err›): *[Validation](_validation_.md#validation)‹C, Err›*
 
-*Defined in [validation.ts:27](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/validation.ts#L27)*
+*Defined in [validation.ts:27](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/validation.ts#L27)*
 
 **Type parameters:**
 
@@ -72,7 +76,7 @@ Name | Type |
 
 ▸ **apN**<**A**, **B**, **C**, **D**, **Err**>(`f`: [Validation](_validation_.md#validation)‹[Fun3](_types_functions_.md#fun3)‹A, B, C, D›, Err›, `a`: [Validation](_validation_.md#validation)‹A, Err›, `b`: [Validation](_validation_.md#validation)‹B, Err›, `c`: [Validation](_validation_.md#validation)‹C, Err›): *[Validation](_validation_.md#validation)‹D, Err›*
 
-*Defined in [validation.ts:28](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/validation.ts#L28)*
+*Defined in [validation.ts:28](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/validation.ts#L28)*
 
 **Type parameters:**
 
@@ -99,7 +103,7 @@ Name | Type |
 
 ▸ **apN**<**A**, **B**, **C**, **D**, **E**, **Err**>(`f`: [Validation](_validation_.md#validation)‹[Fun4](_types_functions_.md#fun4)‹A, B, C, D, E›, Err›, `a`: [Validation](_validation_.md#validation)‹A, Err›, `b`: [Validation](_validation_.md#validation)‹B, Err›, `c`: [Validation](_validation_.md#validation)‹C, Err›, `d`: [Validation](_validation_.md#validation)‹D, Err›): *[Validation](_validation_.md#validation)‹E, Err›*
 
-*Defined in [validation.ts:31](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/validation.ts#L31)*
+*Defined in [validation.ts:31](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/validation.ts#L31)*
 
 **Type parameters:**
 
@@ -129,7 +133,7 @@ Name | Type |
 
 ▸ **apN**<**A**, **B**, **C**, **D**, **E**, **F**, **Err**>(`f`: [Validation](_validation_.md#validation)‹[Fun5](_types_functions_.md#fun5)‹A, B, C, D, E, F›, Err›, `a`: [Validation](_validation_.md#validation)‹A, Err›, `b`: [Validation](_validation_.md#validation)‹B, Err›, `c`: [Validation](_validation_.md#validation)‹C, Err›, `d`: [Validation](_validation_.md#validation)‹D, Err›, `e`: [Validation](_validation_.md#validation)‹E, Err›): *[Validation](_validation_.md#validation)‹F, Err›*
 
-*Defined in [validation.ts:34](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/validation.ts#L34)*
+*Defined in [validation.ts:34](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/validation.ts#L34)*
 
 **Type parameters:**
 
@@ -162,7 +166,7 @@ Name | Type |
 
 ▸ **apN**<**A**, **B**, **C**, **D**, **E**, **F**, **G**, **Err**>(`f`: [Validation](_validation_.md#validation)‹[Fun6](_types_functions_.md#fun6)‹A, B, C, D, E, F, G›, Err›, `a`: [Validation](_validation_.md#validation)‹A, Err›, `b`: [Validation](_validation_.md#validation)‹B, Err›, `c`: [Validation](_validation_.md#validation)‹C, Err›, `d`: [Validation](_validation_.md#validation)‹D, Err›, `e`: [Validation](_validation_.md#validation)‹E, Err›, `g`: [Validation](_validation_.md#validation)‹F, Err›): *[Validation](_validation_.md#validation)‹G, Err›*
 
-*Defined in [validation.ts:37](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/validation.ts#L37)*
+*Defined in [validation.ts:37](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/validation.ts#L37)*
 
 **Type parameters:**
 
@@ -202,7 +206,7 @@ ___
 
 ▸ **failure**<**T**, **E**>(`error`: E): *[Validation](_validation_.md#validation)‹T, E›*
 
-*Defined in [validation.ts:21](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/validation.ts#L21)*
+*Defined in [validation.ts:21](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/validation.ts#L21)*
 
 **Type parameters:**
 
@@ -224,7 +228,7 @@ ___
 
 ▸ **failures**<**T**, **E**>(`errors`: [Nel](_nel_.md#nel)‹E›): *[Validation](_validation_.md#validation)‹T, E›*
 
-*Defined in [validation.ts:22](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/validation.ts#L22)*
+*Defined in [validation.ts:22](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/validation.ts#L22)*
 
 **Type parameters:**
 
@@ -246,7 +250,7 @@ ___
 
 ▸ **filter**<**T**, **E**>(`predicate`: function, `error`: E, `result`: [Validation](_validation_.md#validation)‹T, E›): *[Validation](_validation_.md#validation)‹T, E›*
 
-*Defined in [validation.ts:97](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/validation.ts#L97)*
+*Defined in [validation.ts:97](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/validation.ts#L97)*
 
 **Type parameters:**
 
@@ -278,7 +282,7 @@ ___
 
 ▸ **filterLazy**<**T**, **E**>(`predicate`: function, `errorf`: function, `result`: [Validation](_validation_.md#validation)‹T, E›): *[Validation](_validation_.md#validation)‹T, E›*
 
-*Defined in [validation.ts:109](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/validation.ts#L109)*
+*Defined in [validation.ts:109](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/validation.ts#L109)*
 
 **Type parameters:**
 
@@ -312,7 +316,7 @@ ___
 
 ▸ **flatMapN**<**A**, **B**, **C**, **Err**>(`f`: [Fun2](_types_functions_.md#fun2)‹A, B, [Validation](_validation_.md#validation)‹C, Err››, `a`: [Validation](_validation_.md#validation)‹A, Err›, `b`: [Validation](_validation_.md#validation)‹B, Err›): *[Validation](_validation_.md#validation)‹C, Err›*
 
-*Defined in [validation.ts:74](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/validation.ts#L74)*
+*Defined in [validation.ts:74](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/validation.ts#L74)*
 
 **Type parameters:**
 
@@ -336,7 +340,7 @@ Name | Type |
 
 ▸ **flatMapN**<**A**, **B**, **C**, **D**, **Err**>(`f`: [Fun3](_types_functions_.md#fun3)‹A, B, C, [Validation](_validation_.md#validation)‹D, Err››, `a`: [Validation](_validation_.md#validation)‹A, Err›, `b`: [Validation](_validation_.md#validation)‹B, Err›, `c`: [Validation](_validation_.md#validation)‹C, Err›): *[Validation](_validation_.md#validation)‹D, Err›*
 
-*Defined in [validation.ts:77](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/validation.ts#L77)*
+*Defined in [validation.ts:77](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/validation.ts#L77)*
 
 **Type parameters:**
 
@@ -363,7 +367,7 @@ Name | Type |
 
 ▸ **flatMapN**<**A**, **B**, **C**, **D**, **E**, **Err**>(`f`: [Fun4](_types_functions_.md#fun4)‹A, B, C, D, [Validation](_validation_.md#validation)‹E, Err››, `a`: [Validation](_validation_.md#validation)‹A, Err›, `b`: [Validation](_validation_.md#validation)‹B, Err›, `c`: [Validation](_validation_.md#validation)‹C, Err›, `d`: [Validation](_validation_.md#validation)‹D, Err›): *[Validation](_validation_.md#validation)‹E, Err›*
 
-*Defined in [validation.ts:80](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/validation.ts#L80)*
+*Defined in [validation.ts:80](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/validation.ts#L80)*
 
 **Type parameters:**
 
@@ -393,7 +397,7 @@ Name | Type |
 
 ▸ **flatMapN**<**A**, **B**, **C**, **D**, **E**, **F**, **Err**>(`f`: [Fun5](_types_functions_.md#fun5)‹A, B, C, D, E, [Validation](_validation_.md#validation)‹F, Err››, `a`: [Validation](_validation_.md#validation)‹A, Err›, `b`: [Validation](_validation_.md#validation)‹B, Err›, `c`: [Validation](_validation_.md#validation)‹C, Err›, `d`: [Validation](_validation_.md#validation)‹D, Err›, `e`: [Validation](_validation_.md#validation)‹E, Err›): *[Validation](_validation_.md#validation)‹F, Err›*
 
-*Defined in [validation.ts:83](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/validation.ts#L83)*
+*Defined in [validation.ts:83](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/validation.ts#L83)*
 
 **Type parameters:**
 
@@ -426,7 +430,7 @@ Name | Type |
 
 ▸ **flatMapN**<**A**, **B**, **C**, **D**, **E**, **F**, **G**, **Err**>(`f`: [Fun6](_types_functions_.md#fun6)‹A, B, C, D, E, F, [Validation](_validation_.md#validation)‹G, Err››, `a`: [Validation](_validation_.md#validation)‹A, Err›, `b`: [Validation](_validation_.md#validation)‹B, Err›, `c`: [Validation](_validation_.md#validation)‹C, Err›, `d`: [Validation](_validation_.md#validation)‹D, Err›, `e`: [Validation](_validation_.md#validation)‹E, Err›, `g`: [Validation](_validation_.md#validation)‹F, Err›): *[Validation](_validation_.md#validation)‹G, Err›*
 
-*Defined in [validation.ts:86](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/validation.ts#L86)*
+*Defined in [validation.ts:86](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/validation.ts#L86)*
 
 **Type parameters:**
 
@@ -466,7 +470,7 @@ ___
 
 ▸ **flatten**<**T**, **E**>(`result`: [Validation](_validation_.md#validation)‹[Validation](_validation_.md#validation)‹T, E›, E›): *[Validation](_validation_.md#validation)‹T, E›*
 
-*Defined in [validation.ts:121](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/validation.ts#L121)*
+*Defined in [validation.ts:121](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/validation.ts#L121)*
 
 **Type parameters:**
 
@@ -488,7 +492,7 @@ ___
 
 ▸ **mapError**<**A**, **E1**, **E2**>(`f`: function, `result`: [Validation](_validation_.md#validation)‹A, E1›): *[Validation](_validation_.md#validation)‹A, E2›*
 
-*Defined in [validation.ts:47](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/validation.ts#L47)*
+*Defined in [validation.ts:47](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/validation.ts#L47)*
 
 **Type parameters:**
 
@@ -520,7 +524,7 @@ ___
 
 ▸ **mapN**<**A**, **B**, **C**, **Err**>(`f`: [Fun2](_types_functions_.md#fun2)‹A, B, C›, `a`: [Validation](_validation_.md#validation)‹A, Err›, `b`: [Validation](_validation_.md#validation)‹B, Err›): *[Validation](_validation_.md#validation)‹C, Err›*
 
-*Defined in [validation.ts:54](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/validation.ts#L54)*
+*Defined in [validation.ts:54](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/validation.ts#L54)*
 
 **Type parameters:**
 
@@ -544,7 +548,7 @@ Name | Type |
 
 ▸ **mapN**<**A**, **B**, **C**, **D**, **Err**>(`f`: [Fun3](_types_functions_.md#fun3)‹A, B, C, D›, `a`: [Validation](_validation_.md#validation)‹A, Err›, `b`: [Validation](_validation_.md#validation)‹B, Err›, `c`: [Validation](_validation_.md#validation)‹C, Err›): *[Validation](_validation_.md#validation)‹D, Err›*
 
-*Defined in [validation.ts:57](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/validation.ts#L57)*
+*Defined in [validation.ts:57](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/validation.ts#L57)*
 
 **Type parameters:**
 
@@ -571,7 +575,7 @@ Name | Type |
 
 ▸ **mapN**<**A**, **B**, **C**, **D**, **E**, **Err**>(`f`: [Fun4](_types_functions_.md#fun4)‹A, B, C, D, E›, `a`: [Validation](_validation_.md#validation)‹A, Err›, `b`: [Validation](_validation_.md#validation)‹B, Err›, `c`: [Validation](_validation_.md#validation)‹C, Err›, `d`: [Validation](_validation_.md#validation)‹D, Err›): *[Validation](_validation_.md#validation)‹E, Err›*
 
-*Defined in [validation.ts:60](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/validation.ts#L60)*
+*Defined in [validation.ts:60](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/validation.ts#L60)*
 
 **Type parameters:**
 
@@ -601,7 +605,7 @@ Name | Type |
 
 ▸ **mapN**<**A**, **B**, **C**, **D**, **E**, **F**, **Err**>(`f`: [Fun5](_types_functions_.md#fun5)‹A, B, C, D, E, F›, `a`: [Validation](_validation_.md#validation)‹A, Err›, `b`: [Validation](_validation_.md#validation)‹B, Err›, `c`: [Validation](_validation_.md#validation)‹C, Err›, `d`: [Validation](_validation_.md#validation)‹D, Err›, `e`: [Validation](_validation_.md#validation)‹E, Err›): *[Validation](_validation_.md#validation)‹F, Err›*
 
-*Defined in [validation.ts:63](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/validation.ts#L63)*
+*Defined in [validation.ts:63](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/validation.ts#L63)*
 
 **Type parameters:**
 
@@ -634,7 +638,7 @@ Name | Type |
 
 ▸ **mapN**<**A**, **B**, **C**, **D**, **E**, **F**, **G**, **Err**>(`f`: [Fun6](_types_functions_.md#fun6)‹A, B, C, D, E, F, G›, `a`: [Validation](_validation_.md#validation)‹A, Err›, `b`: [Validation](_validation_.md#validation)‹B, Err›, `c`: [Validation](_validation_.md#validation)‹C, Err›, `d`: [Validation](_validation_.md#validation)‹D, Err›, `e`: [Validation](_validation_.md#validation)‹E, Err›, `g`: [Validation](_validation_.md#validation)‹F, Err›): *[Validation](_validation_.md#validation)‹G, Err›*
 
-*Defined in [validation.ts:66](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/validation.ts#L66)*
+*Defined in [validation.ts:66](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/validation.ts#L66)*
 
 **Type parameters:**
 
@@ -674,7 +678,7 @@ ___
 
 ▸ **ofNullable**<**T**, **E**>(`value`: T | undefined | null, `error`: E): *[Validation](_validation_.md#validation)‹T, E›*
 
-*Defined in [validation.ts:24](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/validation.ts#L24)*
+*Defined in [validation.ts:24](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/validation.ts#L24)*
 
 **Type parameters:**
 
@@ -697,7 +701,7 @@ ___
 
 ▸ **recover**<**T**, **E**>(`result`: [Validation](_validation_.md#validation)‹T, E›, `whenFailure`: T): *object | object*
 
-*Defined in [validation.ts:128](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/validation.ts#L128)*
+*Defined in [validation.ts:128](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/validation.ts#L128)*
 
 **Type parameters:**
 
@@ -720,7 +724,7 @@ ___
 
 ▸ **recoverFromError**<**T**, **E**>(`result`: [Validation](_validation_.md#validation)‹T, E›, `whenFailuref`: function): *object | object*
 
-*Defined in [validation.ts:135](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/validation.ts#L135)*
+*Defined in [validation.ts:135](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/validation.ts#L135)*
 
 **Type parameters:**
 
@@ -750,7 +754,7 @@ ___
 
 ▸ **success**<**T**, **E**>(`value`: T): *[Validation](_validation_.md#validation)‹T, E›*
 
-*Defined in [validation.ts:20](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/validation.ts#L20)*
+*Defined in [validation.ts:20](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/validation.ts#L20)*
 
 **Type parameters:**
 
@@ -772,7 +776,7 @@ ___
 
 ▸ **swap**<**T**, **E**>(`result`: [Validation](_validation_.md#validation)‹T, E›): *Res.T‹[Nel](_nel_.md#nel)‹E›, T›*
 
-*Defined in [validation.ts:142](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/validation.ts#L142)*
+*Defined in [validation.ts:142](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/validation.ts#L142)*
 
 **Type parameters:**
 

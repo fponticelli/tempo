@@ -1,6 +1,10 @@
-[tempo-std - v0.2.0](../README.md) › [Globals](../globals.md) › ["nel"](_nel_.md)
+---
+id: "_nel_"
+title: "nel"
+sidebar_label: "nel"
+---
 
-# External module: "nel"
+[tempo-std - v0.2.0](../index.md) › [Globals](../globals.md) › ["nel"](_nel_.md)
 
 ## Index
 
@@ -34,7 +38,7 @@
 
 Ƭ **Nel**: *[Newtype](../interfaces/_newtype_.newtype.md)‹T[], object›*
 
-*Defined in [nel.ts:18](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/nel.ts#L18)*
+*Defined in [nel.ts:18](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/nel.ts#L18)*
 
 ## Functions
 
@@ -42,7 +46,7 @@
 
 ▸ **Nel**<**T**>(): *NelTypeClass‹T›*
 
-*Defined in [nel.ts:27](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/nel.ts#L27)*
+*Defined in [nel.ts:27](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/nel.ts#L27)*
 
 **Type parameters:**
 
@@ -56,7 +60,7 @@ ___
 
 ▸ **all**<**T**>(`predicate`: function, `nel`: [Nel](_nel_.md#nel)‹T›): *boolean*
 
-*Defined in [nel.ts:58](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/nel.ts#L58)*
+*Defined in [nel.ts:58](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/nel.ts#L58)*
 
 **Type parameters:**
 
@@ -84,7 +88,7 @@ ___
 
 ▸ **any**<**T**>(`predicate`: function, `nel`: [Nel](_nel_.md#nel)‹T›): *boolean*
 
-*Defined in [nel.ts:61](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/nel.ts#L61)*
+*Defined in [nel.ts:61](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/nel.ts#L61)*
 
 **Type parameters:**
 
@@ -112,7 +116,7 @@ ___
 
 ▸ **concat**<**A**>(...`nels`: [Nel](_nel_.md#nel)‹A›[]): *[Nel](_nel_.md#nel)‹A›*
 
-*Defined in [nel.ts:67](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/nel.ts#L67)*
+*Defined in [nel.ts:67](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/nel.ts#L67)*
 
 **Type parameters:**
 
@@ -132,7 +136,7 @@ ___
 
 ▸ **each**<**T**>(`f`: function, `nel`: [Nel](_nel_.md#nel)‹T›): *void*
 
-*Defined in [nel.ts:64](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/nel.ts#L64)*
+*Defined in [nel.ts:64](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/nel.ts#L64)*
 
 **Type parameters:**
 
@@ -160,7 +164,7 @@ ___
 
 ▸ **equals**<**T**>(`predicate`: function, `a`: [Nel](_nel_.md#nel)‹T›, `b`: [Nel](_nel_.md#nel)‹T›): *boolean*
 
-*Defined in [nel.ts:46](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/nel.ts#L46)*
+*Defined in [nel.ts:46](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/nel.ts#L46)*
 
 **Type parameters:**
 
@@ -191,7 +195,7 @@ ___
 
 ▸ **filter**<**T**>(`predicate`: function, `nel`: [Nel](_nel_.md#nel)‹T›): *T[]*
 
-*Defined in [nel.ts:49](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/nel.ts#L49)*
+*Defined in [nel.ts:49](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/nel.ts#L49)*
 
 **Type parameters:**
 
@@ -219,7 +223,7 @@ ___
 
 ▸ **flatMap**<**A**, **B**>(`f`: function, `nel`: [Nel](_nel_.md#nel)‹A›): *[Nel](_nel_.md#nel)‹B›*
 
-*Defined in [nel.ts:40](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/nel.ts#L40)*
+*Defined in [nel.ts:40](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/nel.ts#L40)*
 
 **Type parameters:**
 
@@ -249,7 +253,7 @@ ___
 
 ▸ **flatten**<**T**>(`nel`: [Nel](_nel_.md#nel)‹[Nel](_nel_.md#nel)‹T››): *[Nel](_nel_.md#nel)‹T›*
 
-*Defined in [nel.ts:52](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/nel.ts#L52)*
+*Defined in [nel.ts:52](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/nel.ts#L52)*
 
 **Type parameters:**
 
@@ -269,7 +273,7 @@ ___
 
 ▸ **foldLeft**<**T**, **B**>(`f`: function, `nel`: [Nel](_nel_.md#nel)‹T›, `b`: B): *B*
 
-*Defined in [nel.ts:55](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/nel.ts#L55)*
+*Defined in [nel.ts:55](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/nel.ts#L55)*
 
 **Type parameters:**
 
@@ -302,7 +306,7 @@ ___
 
 ▸ **head**<**A**>(`nel`: [Nel](_nel_.md#nel)‹A›): *A*
 
-*Defined in [nel.ts:43](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/nel.ts#L43)*
+*Defined in [nel.ts:43](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/nel.ts#L43)*
 
 **Type parameters:**
 
@@ -322,7 +326,7 @@ ___
 
 ▸ **isValid**<**T**>(`arr`: T[]): *boolean*
 
-*Defined in [nel.ts:29](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/nel.ts#L29)*
+*Defined in [nel.ts:29](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/nel.ts#L29)*
 
 **Type parameters:**
 
@@ -342,7 +346,7 @@ ___
 
 ▸ **length**<**T**>(`nel`: [Nel](_nel_.md#nel)‹T›): *number*
 
-*Defined in [nel.ts:35](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/nel.ts#L35)*
+*Defined in [nel.ts:35](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/nel.ts#L35)*
 
 **Type parameters:**
 
@@ -362,7 +366,7 @@ ___
 
 ▸ **map**<**A**, **B**>(`f`: function, `nel`: [Nel](_nel_.md#nel)‹A›): *[Nel](_nel_.md#nel)‹B›*
 
-*Defined in [nel.ts:37](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/nel.ts#L37)*
+*Defined in [nel.ts:37](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/nel.ts#L37)*
 
 **Type parameters:**
 
@@ -392,7 +396,7 @@ ___
 
 ▸ **ofValue**<**T**>(`value`: T): *[Nel](_nel_.md#nel)‹T›*
 
-*Defined in [nel.ts:33](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/nel.ts#L33)*
+*Defined in [nel.ts:33](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/nel.ts#L33)*
 
 **Type parameters:**
 
@@ -412,7 +416,7 @@ ___
 
 ▸ **sort**<**A**>(`compare`: function, `arr`: [Nel](_nel_.md#nel)‹A›): *[Nel](_nel_.md#nel)‹A›*
 
-*Defined in [nel.ts:70](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/nel.ts#L70)*
+*Defined in [nel.ts:70](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/nel.ts#L70)*
 
 **Type parameters:**
 
@@ -441,7 +445,7 @@ ___
 
 ▸ **tail**<**A**>(`nel`: [Nel](_nel_.md#nel)‹A›): *A[]*
 
-*Defined in [nel.ts:44](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/nel.ts#L44)*
+*Defined in [nel.ts:44](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/nel.ts#L44)*
 
 **Type parameters:**
 

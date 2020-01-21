@@ -1,6 +1,10 @@
-[tempo-std - v0.2.0](../README.md) › [Globals](../globals.md) › ["objects"](_objects_.md)
+---
+id: "_objects_"
+title: "objects"
+sidebar_label: "objects"
+---
 
-# External module: "objects"
+[tempo-std - v0.2.0](../index.md) › [Globals](../globals.md) › ["objects"](_objects_.md)
 
 ## Index
 
@@ -16,7 +20,7 @@
 
 ▸ **keys**<**T**>(`object`: T): *keyof T[]*
 
-*Defined in [objects.ts:4](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/objects.ts#L4)*
+*Defined in [objects.ts:4](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/objects.ts#L4)*
 
 **Type parameters:**
 
@@ -36,7 +40,7 @@ ___
 
 ▸ **merge**<**A**, **B**>(`a`: A, `b`: B): *[Merge](_types_objects_.md#merge)‹A, B›*
 
-*Defined in [objects.ts:18](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/objects.ts#L18)*
+*Defined in [objects.ts:18](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/objects.ts#L18)*
 
 **Type parameters:**
 
@@ -59,7 +63,7 @@ ___
 
 ▸ **removeFields**<**T**, **F**>(`ob`: T, ...`fields`: F): *Omit‹T, [TupleToUnion](_types_tuples_.md#tupletounion)‹F››*
 
-*Defined in [objects.ts:8](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/objects.ts#L8)*
+*Defined in [objects.ts:8](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/objects.ts#L8)*
 
 **Type parameters:**
 

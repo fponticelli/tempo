@@ -1,6 +1,10 @@
-[tempo-std - v0.2.0](../README.md) › [Globals](../globals.md) › ["maybe"](_maybe_.md)
+---
+id: "_maybe_"
+title: "maybe"
+sidebar_label: "maybe"
+---
 
-# External module: "maybe"
+[tempo-std - v0.2.0](../index.md) › [Globals](../globals.md) › ["maybe"](_maybe_.md)
 
 ## Index
 
@@ -26,7 +30,7 @@
 
 Ƭ **Just**: *T*
 
-*Defined in [maybe.ts:17](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/maybe.ts#L17)*
+*Defined in [maybe.ts:17](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/maybe.ts#L17)*
 
 ___
 
@@ -34,7 +38,7 @@ ___
 
 Ƭ **Maybe**: *[Just](_maybe_.md#just)‹T› | [Nothing](_maybe_.md#nothing)*
 
-*Defined in [maybe.ts:14](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/maybe.ts#L14)*
+*Defined in [maybe.ts:14](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/maybe.ts#L14)*
 
 ___
 
@@ -42,7 +46,7 @@ ___
 
 Ƭ **Nothing**: *undefined | null*
 
-*Defined in [maybe.ts:16](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/maybe.ts#L16)*
+*Defined in [maybe.ts:16](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/maybe.ts#L16)*
 
 ## Variables
 
@@ -50,7 +54,7 @@ ___
 
 • **nothing**: *[Maybe](_maybe_.md#maybe)‹never›* = undefined
 
-*Defined in [maybe.ts:19](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/maybe.ts#L19)*
+*Defined in [maybe.ts:19](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/maybe.ts#L19)*
 
 ## Functions
 
@@ -58,7 +62,7 @@ ___
 
 ▸ **isJust**<**T**>(`maybe`: [Maybe](_maybe_.md#maybe)‹T›): *maybe is Just<T>*
 
-*Defined in [maybe.ts:23](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/maybe.ts#L23)*
+*Defined in [maybe.ts:23](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/maybe.ts#L23)*
 
 **Type parameters:**
 
@@ -78,7 +82,7 @@ ___
 
 ▸ **isNothing**<**T**>(`maybe`: [Maybe](_maybe_.md#maybe)‹T›): *maybe is Nothing*
 
-*Defined in [maybe.ts:22](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/maybe.ts#L22)*
+*Defined in [maybe.ts:22](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/maybe.ts#L22)*
 
 **Type parameters:**
 
@@ -98,7 +102,7 @@ ___
 
 ▸ **just**<**T**>(`value`: T): *[Maybe](_maybe_.md#maybe)‹T›*
 
-*Defined in [maybe.ts:20](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/maybe.ts#L20)*
+*Defined in [maybe.ts:20](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/maybe.ts#L20)*
 
 **Type parameters:**
 

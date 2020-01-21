@@ -1,6 +1,10 @@
-[tempo-std - v0.2.0](../README.md) › [Globals](../globals.md) › ["newtype"](_newtype_.md)
+---
+id: "_newtype_"
+title: "newtype"
+sidebar_label: "newtype"
+---
 
-# External module: "newtype"
+[tempo-std - v0.2.0](../index.md) › [Globals](../globals.md) › ["newtype"](_newtype_.md)
 
 ## Index
 

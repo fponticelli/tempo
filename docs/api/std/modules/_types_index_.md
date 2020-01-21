@@ -1,6 +1,10 @@
-[tempo-std - v0.2.0](../README.md) › [Globals](../globals.md) › ["types/index"](_types_index_.md)
+---
+id: "_types_index_"
+title: "types/index"
+sidebar_label: "types/index"
+---
 
-# External module: "types/index"
+[tempo-std - v0.2.0](../index.md) › [Globals](../globals.md) › ["types/index"](_types_index_.md)
 
 ## Index
 

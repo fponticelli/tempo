@@ -1,6 +1,10 @@
-[tempo-std - v0.2.0](../README.md) › [Globals](../globals.md) › ["types/differentiate"](_types_differentiate_.md)
+---
+id: "_types_differentiate_"
+title: "types/differentiate"
+sidebar_label: "types/differentiate"
+---
 
-# External module: "types/differentiate"
+[tempo-std - v0.2.0](../index.md) › [Globals](../globals.md) › ["types/differentiate"](_types_differentiate_.md)
 
 ## Index
 
@@ -16,7 +20,7 @@
 
 Ƭ **Differentiate**: *State extends ObjectWithField<Field, ExpectedType> ? State : never*
 
-*Defined in [types/differentiate.ts:18](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/types/differentiate.ts#L18)*
+*Defined in [types/differentiate.ts:18](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/types/differentiate.ts#L18)*
 
 ___
 
@@ -24,7 +28,7 @@ ___
 
 Ƭ **DifferentiateAt**: *Path extends [] ? State : Path extends [infer T] ? T extends keyof State ? ExpectedType extends State[T] ? Differentiate<T, State, ExpectedType> : never : never : Path extends [infer K, any] ? K extends keyof State ? Tail<Path> extends infer Rest ? Rest extends IndexType[] ? State & object : never : never : never : never*
 
-*Defined in [types/differentiate.ts:29](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/types/differentiate.ts#L29)*
+*Defined in [types/differentiate.ts:29](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/types/differentiate.ts#L29)*
 
 ___
 
@@ -32,4 +36,4 @@ ___
 
 Ƭ **DifferentiateByKind**: *[Differentiate](_types_differentiate_.md#differentiate)‹"kind", State, K›*
 
-*Defined in [types/differentiate.ts:24](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/types/differentiate.ts#L24)*
+*Defined in [types/differentiate.ts:24](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/types/differentiate.ts#L24)*

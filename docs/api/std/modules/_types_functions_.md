@@ -1,6 +1,10 @@
-[tempo-std - v0.2.0](../README.md) › [Globals](../globals.md) › ["types/functions"](_types_functions_.md)
+---
+id: "_types_functions_"
+title: "types/functions"
+sidebar_label: "types/functions"
+---
 
-# External module: "types/functions"
+[tempo-std - v0.2.0](../index.md) › [Globals](../globals.md) › ["types/functions"](_types_functions_.md)
 
 ## Index
 
@@ -25,7 +29,7 @@
 
 Ƭ **AnyFunction**: *[Fun](_types_functions_.md#fun) | Function*
 
-*Defined in [types/functions.ts:30](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/types/functions.ts#L30)*
+*Defined in [types/functions.ts:30](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/types/functions.ts#L30)*
 
 ___
 
@@ -33,7 +37,7 @@ ___
 
 Ƭ **FirstArgument**: *F extends function ? unknown extends A ? never : A : never*
 
-*Defined in [types/functions.ts:32](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/types/functions.ts#L32)*
+*Defined in [types/functions.ts:32](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/types/functions.ts#L32)*
 
 ___
 
@@ -41,7 +45,7 @@ ___
 
 Ƭ **Fun**: *function*
 
-*Defined in [types/functions.ts:15](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/types/functions.ts#L15)*
+*Defined in [types/functions.ts:15](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/types/functions.ts#L15)*
 
 #### Type declaration:
 
@@ -59,7 +63,7 @@ ___
 
 Ƭ **Fun1**: *function*
 
-*Defined in [types/functions.ts:16](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/types/functions.ts#L16)*
+*Defined in [types/functions.ts:16](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/types/functions.ts#L16)*
 
 #### Type declaration:
 
@@ -77,7 +81,7 @@ ___
 
 Ƭ **Fun2**: *function*
 
-*Defined in [types/functions.ts:17](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/types/functions.ts#L17)*
+*Defined in [types/functions.ts:17](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/types/functions.ts#L17)*
 
 #### Type declaration:
 
@@ -96,7 +100,7 @@ ___
 
 Ƭ **Fun3**: *function*
 
-*Defined in [types/functions.ts:18](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/types/functions.ts#L18)*
+*Defined in [types/functions.ts:18](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/types/functions.ts#L18)*
 
 #### Type declaration:
 
@@ -116,7 +120,7 @@ ___
 
 Ƭ **Fun4**: *function*
 
-*Defined in [types/functions.ts:19](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/types/functions.ts#L19)*
+*Defined in [types/functions.ts:19](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/types/functions.ts#L19)*
 
 #### Type declaration:
 
@@ -137,7 +141,7 @@ ___
 
 Ƭ **Fun5**: *function*
 
-*Defined in [types/functions.ts:20](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/types/functions.ts#L20)*
+*Defined in [types/functions.ts:20](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/types/functions.ts#L20)*
 
 #### Type declaration:
 
@@ -159,7 +163,7 @@ ___
 
 Ƭ **Fun6**: *function*
 
-*Defined in [types/functions.ts:21](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/types/functions.ts#L21)*
+*Defined in [types/functions.ts:21](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/types/functions.ts#L21)*
 
 #### Type declaration:
 
@@ -182,7 +186,7 @@ ___
 
 Ƭ **FunctionsChain**: *[OnlyIfDoesNotReturnNever](_types_functions_.md#onlyifdoesnotreturnnever)‹CheckFunctionsChain‹In, Args››*
 
-*Defined in [types/functions.ts:52](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/types/functions.ts#L52)*
+*Defined in [types/functions.ts:52](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/types/functions.ts#L52)*
 
 ___
 
@@ -190,7 +194,7 @@ ___
 
 Ƭ **Lazy**: *function*
 
-*Defined in [types/functions.ts:14](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/types/functions.ts#L14)*
+*Defined in [types/functions.ts:14](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/types/functions.ts#L14)*
 
 #### Type declaration:
 
@@ -202,4 +206,4 @@ ___
 
 Ƭ **OnlyIfDoesNotReturnNever**: *F extends Fun1<any, never> ? never : F*
 
-*Defined in [types/functions.ts:38](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/types/functions.ts#L38)*
+*Defined in [types/functions.ts:38](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/types/functions.ts#L38)*

@@ -1,6 +1,10 @@
-[tempo-std - v0.2.0](../README.md) › [Globals](../globals.md) › ["option"](_option_.md)
+---
+id: "_option_"
+title: "option"
+sidebar_label: "option"
+---
 
-# External module: "option"
+[tempo-std - v0.2.0](../index.md) › [Globals](../globals.md) › ["option"](_option_.md)
 
 ## Index
 
@@ -56,7 +60,7 @@
 
 Ƭ **None**: *object*
 
-*Defined in [option.ts:20](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/option.ts#L20)*
+*Defined in [option.ts:20](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/option.ts#L20)*
 
 #### Type declaration:
 
@@ -68,7 +72,7 @@ ___
 
 Ƭ **Option**: *[Some](_option_.md#some)‹T› | [None](_option_.md#none)*
 
-*Defined in [option.ts:22](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/option.ts#L22)*
+*Defined in [option.ts:22](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/option.ts#L22)*
 
 ___
 
@@ -76,7 +80,7 @@ ___
 
 Ƭ **Some**: *object*
 
-*Defined in [option.ts:19](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/option.ts#L19)*
+*Defined in [option.ts:19](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/option.ts#L19)*
 
 #### Type declaration:
 
@@ -90,7 +94,7 @@ ___
 
 Ƭ **T**: *[Option](_option_.md#option)‹V›*
 
-*Defined in [option.ts:263](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/option.ts#L263)*
+*Defined in [option.ts:263](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/option.ts#L263)*
 
 ## Variables
 
@@ -98,7 +102,7 @@ ___
 
 • **none**: *object | object* = { kind: 'none' } as Option<never>
 
-*Defined in [option.ts:27](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/option.ts#L27)*
+*Defined in [option.ts:27](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/option.ts#L27)*
 
 ## Functions
 
@@ -106,7 +110,7 @@ ___
 
 ▸ **all**<**T**>(`f`: function, `option`: [Option](_option_.md#option)‹T›): *boolean*
 
-*Defined in [option.ts:214](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/option.ts#L214)*
+*Defined in [option.ts:214](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/option.ts#L214)*
 
 **Type parameters:**
 
@@ -134,7 +138,7 @@ ___
 
 ▸ **any**<**T**>(`f`: function, `option`: [Option](_option_.md#option)‹T›): *boolean*
 
-*Defined in [option.ts:221](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/option.ts#L221)*
+*Defined in [option.ts:221](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/option.ts#L221)*
 
 **Type parameters:**
 
@@ -162,7 +166,7 @@ ___
 
 ▸ **ap**<**A**, **B**>(`optf`: [Option](_option_.md#option)‹function›, `opt`: [Option](_option_.md#option)‹A›): *[Option](_option_.md#option)‹B›*
 
-*Defined in [option.ts:35](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/option.ts#L35)*
+*Defined in [option.ts:35](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/option.ts#L35)*
 
 **Type parameters:**
 
@@ -185,7 +189,7 @@ ___
 
 ▸ **apN**<**A**, **B**, **C**>(`f`: [Option](_option_.md#option)‹[Fun2](_types_functions_.md#fun2)‹A, B, C››, `a`: [Option](_option_.md#option)‹A›, `b`: [Option](_option_.md#option)‹B›): *[Option](_option_.md#option)‹C›*
 
-*Defined in [option.ts:38](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/option.ts#L38)*
+*Defined in [option.ts:38](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/option.ts#L38)*
 
 **Type parameters:**
 
@@ -207,7 +211,7 @@ Name | Type |
 
 ▸ **apN**<**A**, **B**, **C**, **D**>(`f`: [Option](_option_.md#option)‹[Fun3](_types_functions_.md#fun3)‹A, B, C, D››, `a`: [Option](_option_.md#option)‹A›, `b`: [Option](_option_.md#option)‹B›, `c`: [Option](_option_.md#option)‹C›): *[Option](_option_.md#option)‹D›*
 
-*Defined in [option.ts:39](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/option.ts#L39)*
+*Defined in [option.ts:39](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/option.ts#L39)*
 
 **Type parameters:**
 
@@ -232,7 +236,7 @@ Name | Type |
 
 ▸ **apN**<**A**, **B**, **C**, **D**, **E**>(`f`: [Option](_option_.md#option)‹[Fun4](_types_functions_.md#fun4)‹A, B, C, D, E››, `a`: [Option](_option_.md#option)‹A›, `b`: [Option](_option_.md#option)‹B›, `c`: [Option](_option_.md#option)‹C›, `d`: [Option](_option_.md#option)‹D›): *[Option](_option_.md#option)‹E›*
 
-*Defined in [option.ts:40](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/option.ts#L40)*
+*Defined in [option.ts:40](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/option.ts#L40)*
 
 **Type parameters:**
 
@@ -260,7 +264,7 @@ Name | Type |
 
 ▸ **apN**<**A**, **B**, **C**, **D**, **E**, **F**>(`f`: [Option](_option_.md#option)‹[Fun5](_types_functions_.md#fun5)‹A, B, C, D, E, F››, `a`: [Option](_option_.md#option)‹A›, `b`: [Option](_option_.md#option)‹B›, `c`: [Option](_option_.md#option)‹C›, `d`: [Option](_option_.md#option)‹D›, `e`: [Option](_option_.md#option)‹E›): *[Option](_option_.md#option)‹F›*
 
-*Defined in [option.ts:43](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/option.ts#L43)*
+*Defined in [option.ts:43](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/option.ts#L43)*
 
 **Type parameters:**
 
@@ -291,7 +295,7 @@ Name | Type |
 
 ▸ **apN**<**A**, **B**, **C**, **D**, **E**, **F**, **G**>(`f`: [Option](_option_.md#option)‹[Fun6](_types_functions_.md#fun6)‹A, B, C, D, E, F, G››, `a`: [Option](_option_.md#option)‹A›, `b`: [Option](_option_.md#option)‹B›, `c`: [Option](_option_.md#option)‹C›, `d`: [Option](_option_.md#option)‹D›, `e`: [Option](_option_.md#option)‹E›, `g`: [Option](_option_.md#option)‹F›): *[Option](_option_.md#option)‹G›*
 
-*Defined in [option.ts:46](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/option.ts#L46)*
+*Defined in [option.ts:46](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/option.ts#L46)*
 
 **Type parameters:**
 
@@ -329,7 +333,7 @@ ___
 
 ▸ **cata**<**A**, **B**>(`f`: function, `option`: [Option](_option_.md#option)‹A›, `ifNone`: B): *B*
 
-*Defined in [option.ts:193](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/option.ts#L193)*
+*Defined in [option.ts:193](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/option.ts#L193)*
 
 **Type parameters:**
 
@@ -361,7 +365,7 @@ ___
 
 ▸ **cataLazy**<**A**, **B**>(`f`: function, `option`: [Option](_option_.md#option)‹A›, `ifNone`: function): *B*
 
-*Defined in [option.ts:200](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/option.ts#L200)*
+*Defined in [option.ts:200](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/option.ts#L200)*
 
 **Type parameters:**
 
@@ -395,7 +399,7 @@ ___
 
 ▸ **combine**<**A**, **B**>(`a`: [Option](_option_.md#option)‹A›, `b`: [Option](_option_.md#option)‹B›): *[Option](_option_.md#option)‹[A, B]›*
 
-*Defined in [option.ts:257](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/option.ts#L257)*
+*Defined in [option.ts:257](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/option.ts#L257)*
 
 **Type parameters:**
 
@@ -418,7 +422,7 @@ ___
 
 ▸ **each**<**T**>(`f`: function, `option`: [Option](_option_.md#option)‹T›): *void*
 
-*Defined in [option.ts:228](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/option.ts#L228)*
+*Defined in [option.ts:228](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/option.ts#L228)*
 
 **Type parameters:**
 
@@ -446,7 +450,7 @@ ___
 
 ▸ **equals**<**T**>(`predicate`: function, `a`: [Option](_option_.md#option)‹T›, `b`: [Option](_option_.md#option)‹T›): *boolean*
 
-*Defined in [option.ts:106](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/option.ts#L106)*
+*Defined in [option.ts:106](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/option.ts#L106)*
 
 **Type parameters:**
 
@@ -477,7 +481,7 @@ ___
 
 ▸ **filter**<**T**>(`predicate`: function, `option`: [Option](_option_.md#option)‹T›): *[Option](_option_.md#option)‹T›*
 
-*Defined in [option.ts:118](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/option.ts#L118)*
+*Defined in [option.ts:118](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/option.ts#L118)*
 
 **Type parameters:**
 
@@ -505,7 +509,7 @@ ___
 
 ▸ **firstSome**<**A**>(...`args`: [Option](_option_.md#option)‹A›[]): *[Option](_option_.md#option)‹A›*
 
-*Defined in [option.ts:235](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/option.ts#L235)*
+*Defined in [option.ts:235](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/option.ts#L235)*
 
 **Type parameters:**
 
@@ -525,7 +529,7 @@ ___
 
 ▸ **flatMap**<**A**, **B**>(`f`: function, `opt`: [Option](_option_.md#option)‹A›): *[Option](_option_.md#option)‹B›*
 
-*Defined in [option.ts:83](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/option.ts#L83)*
+*Defined in [option.ts:83](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/option.ts#L83)*
 
 **Type parameters:**
 
@@ -555,7 +559,7 @@ ___
 
 ▸ **flatMapN**<**A**, **B**, **C**>(`f`: [Fun2](_types_functions_.md#fun2)‹A, B, [Option](_option_.md#option)‹C››, `a`: [Option](_option_.md#option)‹A›, `b`: [Option](_option_.md#option)‹B›): *[Option](_option_.md#option)‹C›*
 
-*Defined in [option.ts:90](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/option.ts#L90)*
+*Defined in [option.ts:90](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/option.ts#L90)*
 
 **Type parameters:**
 
@@ -577,7 +581,7 @@ Name | Type |
 
 ▸ **flatMapN**<**A**, **B**, **C**, **D**>(`f`: [Fun3](_types_functions_.md#fun3)‹A, B, C, [Option](_option_.md#option)‹D››, `a`: [Option](_option_.md#option)‹A›, `b`: [Option](_option_.md#option)‹B›, `c`: [Option](_option_.md#option)‹C›): *[Option](_option_.md#option)‹D›*
 
-*Defined in [option.ts:91](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/option.ts#L91)*
+*Defined in [option.ts:91](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/option.ts#L91)*
 
 **Type parameters:**
 
@@ -602,7 +606,7 @@ Name | Type |
 
 ▸ **flatMapN**<**A**, **B**, **C**, **D**, **E**>(`f`: [Fun4](_types_functions_.md#fun4)‹A, B, C, D, [Option](_option_.md#option)‹E››, `a`: [Option](_option_.md#option)‹A›, `b`: [Option](_option_.md#option)‹B›, `c`: [Option](_option_.md#option)‹C›, `d`: [Option](_option_.md#option)‹D›): *[Option](_option_.md#option)‹E›*
 
-*Defined in [option.ts:92](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/option.ts#L92)*
+*Defined in [option.ts:92](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/option.ts#L92)*
 
 **Type parameters:**
 
@@ -630,7 +634,7 @@ Name | Type |
 
 ▸ **flatMapN**<**A**, **B**, **C**, **D**, **E**, **F**>(`f`: [Fun5](_types_functions_.md#fun5)‹A, B, C, D, E, [Option](_option_.md#option)‹F››, `a`: [Option](_option_.md#option)‹A›, `b`: [Option](_option_.md#option)‹B›, `c`: [Option](_option_.md#option)‹C›, `d`: [Option](_option_.md#option)‹D›, `e`: [Option](_option_.md#option)‹E›): *[Option](_option_.md#option)‹F›*
 
-*Defined in [option.ts:93](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/option.ts#L93)*
+*Defined in [option.ts:93](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/option.ts#L93)*
 
 **Type parameters:**
 
@@ -661,7 +665,7 @@ Name | Type |
 
 ▸ **flatMapN**<**A**, **B**, **C**, **D**, **E**, **F**, **G**>(`f`: [Fun6](_types_functions_.md#fun6)‹A, B, C, D, E, F, [Option](_option_.md#option)‹G››, `a`: [Option](_option_.md#option)‹A›, `b`: [Option](_option_.md#option)‹B›, `c`: [Option](_option_.md#option)‹C›, `d`: [Option](_option_.md#option)‹D›, `e`: [Option](_option_.md#option)‹E›, `g`: [Option](_option_.md#option)‹F›): *[Option](_option_.md#option)‹G›*
 
-*Defined in [option.ts:96](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/option.ts#L96)*
+*Defined in [option.ts:96](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/option.ts#L96)*
 
 **Type parameters:**
 
@@ -699,7 +703,7 @@ ___
 
 ▸ **flatten**<**T**>(`option`: [Option](_option_.md#option)‹[Option](_option_.md#option)‹T››): *[Option](_option_.md#option)‹T›*
 
-*Defined in [option.ts:186](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/option.ts#L186)*
+*Defined in [option.ts:186](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/option.ts#L186)*
 
 **Type parameters:**
 
@@ -719,7 +723,7 @@ ___
 
 ▸ **foldLeft**<**T**, **B**>(`f`: function, `option`: [Option](_option_.md#option)‹T›, `b`: B): *B*
 
-*Defined in [option.ts:207](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/option.ts#L207)*
+*Defined in [option.ts:207](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/option.ts#L207)*
 
 **Type parameters:**
 
@@ -752,7 +756,7 @@ ___
 
 ▸ **getOrElse**<**T**>(`option`: [Option](_option_.md#option)‹T›, `alt`: T): *T*
 
-*Defined in [option.ts:144](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/option.ts#L144)*
+*Defined in [option.ts:144](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/option.ts#L144)*
 
 **Type parameters:**
 
@@ -773,7 +777,7 @@ ___
 
 ▸ **getOrElseLazy**<**T**>(`option`: [Option](_option_.md#option)‹T›, `alt`: function): *T*
 
-*Defined in [option.ts:151](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/option.ts#L151)*
+*Defined in [option.ts:151](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/option.ts#L151)*
 
 **Type parameters:**
 
@@ -795,7 +799,7 @@ ___
 
 ▸ **getOrThrow**<**T**, **E**>(`option`: [Option](_option_.md#option)‹T›, `exception`: E): *[Maybe](_maybe_.md#maybe)‹T›*
 
-*Defined in [option.ts:130](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/option.ts#L130)*
+*Defined in [option.ts:130](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/option.ts#L130)*
 
 **Type parameters:**
 
@@ -818,7 +822,7 @@ ___
 
 ▸ **isNone**<**T**>(`option`: [Option](_option_.md#option)‹T›): *option is None*
 
-*Defined in [option.ts:115](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/option.ts#L115)*
+*Defined in [option.ts:115](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/option.ts#L115)*
 
 **Type parameters:**
 
@@ -838,7 +842,7 @@ ___
 
 ▸ **isSome**<**T**>(`option`: [Option](_option_.md#option)‹T›): *option is Some<T>*
 
-*Defined in [option.ts:116](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/option.ts#L116)*
+*Defined in [option.ts:116](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/option.ts#L116)*
 
 **Type parameters:**
 
@@ -858,7 +862,7 @@ ___
 
 ▸ **map**<**A**, **B**>(`f`: function, `opt`: [Option](_option_.md#option)‹A›): *[Option](_option_.md#option)‹B›*
 
-*Defined in [option.ts:58](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/option.ts#L58)*
+*Defined in [option.ts:58](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/option.ts#L58)*
 
 **Type parameters:**
 
@@ -888,7 +892,7 @@ ___
 
 ▸ **mapN**<**A**, **B**, **C**>(`f`: [Fun2](_types_functions_.md#fun2)‹A, B, C›, `a`: [Option](_option_.md#option)‹A›, `b`: [Option](_option_.md#option)‹B›): *[Option](_option_.md#option)‹C›*
 
-*Defined in [option.ts:65](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/option.ts#L65)*
+*Defined in [option.ts:65](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/option.ts#L65)*
 
 **Type parameters:**
 
@@ -910,7 +914,7 @@ Name | Type |
 
 ▸ **mapN**<**A**, **B**, **C**, **D**>(`f`: [Fun3](_types_functions_.md#fun3)‹A, B, C, D›, `a`: [Option](_option_.md#option)‹A›, `b`: [Option](_option_.md#option)‹B›, `c`: [Option](_option_.md#option)‹C›): *[Option](_option_.md#option)‹D›*
 
-*Defined in [option.ts:66](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/option.ts#L66)*
+*Defined in [option.ts:66](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/option.ts#L66)*
 
 **Type parameters:**
 
@@ -935,7 +939,7 @@ Name | Type |
 
 ▸ **mapN**<**A**, **B**, **C**, **D**, **E**>(`f`: [Fun4](_types_functions_.md#fun4)‹A, B, C, D, E›, `a`: [Option](_option_.md#option)‹A›, `b`: [Option](_option_.md#option)‹B›, `c`: [Option](_option_.md#option)‹C›, `d`: [Option](_option_.md#option)‹D›): *[Option](_option_.md#option)‹E›*
 
-*Defined in [option.ts:67](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/option.ts#L67)*
+*Defined in [option.ts:67](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/option.ts#L67)*
 
 **Type parameters:**
 
@@ -963,7 +967,7 @@ Name | Type |
 
 ▸ **mapN**<**A**, **B**, **C**, **D**, **E**, **F**>(`f`: [Fun5](_types_functions_.md#fun5)‹A, B, C, D, E, F›, `a`: [Option](_option_.md#option)‹A›, `b`: [Option](_option_.md#option)‹B›, `c`: [Option](_option_.md#option)‹C›, `d`: [Option](_option_.md#option)‹D›, `e`: [Option](_option_.md#option)‹E›): *[Option](_option_.md#option)‹F›*
 
-*Defined in [option.ts:70](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/option.ts#L70)*
+*Defined in [option.ts:70](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/option.ts#L70)*
 
 **Type parameters:**
 
@@ -994,7 +998,7 @@ Name | Type |
 
 ▸ **mapN**<**A**, **B**, **C**, **D**, **E**, **F**, **G**>(`f`: [Fun6](_types_functions_.md#fun6)‹A, B, C, D, E, F, G›, `a`: [Option](_option_.md#option)‹A›, `b`: [Option](_option_.md#option)‹B›, `c`: [Option](_option_.md#option)‹C›, `d`: [Option](_option_.md#option)‹D›, `e`: [Option](_option_.md#option)‹E›, `g`: [Option](_option_.md#option)‹F›): *[Option](_option_.md#option)‹G›*
 
-*Defined in [option.ts:73](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/option.ts#L73)*
+*Defined in [option.ts:73](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/option.ts#L73)*
 
 **Type parameters:**
 
@@ -1032,7 +1036,7 @@ ___
 
 ▸ **ofValue**<**T**>(`value`: T | undefined | null): *[Option](_option_.md#option)‹T›*
 
-*Defined in [option.ts:28](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/option.ts#L28)*
+*Defined in [option.ts:28](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/option.ts#L28)*
 
 **Type parameters:**
 
@@ -1052,7 +1056,7 @@ ___
 
 ▸ **recover**<**T**>(`result`: [Option](_option_.md#option)‹T›, `whenFailure`: T): *object | object*
 
-*Defined in [option.ts:243](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/option.ts#L243)*
+*Defined in [option.ts:243](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/option.ts#L243)*
 
 **Type parameters:**
 
@@ -1073,7 +1077,7 @@ ___
 
 ▸ **recoverLazy**<**T**>(`result`: [Option](_option_.md#option)‹T›, `whenFailuref`: function): *object | object*
 
-*Defined in [option.ts:250](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/option.ts#L250)*
+*Defined in [option.ts:250](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/option.ts#L250)*
 
 **Type parameters:**
 
@@ -1095,7 +1099,7 @@ ___
 
 ▸ **some**<**T**>(`value`: T): *[Option](_option_.md#option)‹T›*
 
-*Defined in [option.ts:26](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/option.ts#L26)*
+*Defined in [option.ts:26](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/option.ts#L26)*
 
 **Type parameters:**
 
@@ -1115,7 +1119,7 @@ ___
 
 ▸ **spread**<**A**, **B**, **C**>(`f`: function, `v`: [Option](_option_.md#option)‹[A, B]›): *[Option](_option_.md#option)‹C›*
 
-*Defined in [option.ts:260](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/option.ts#L260)*
+*Defined in [option.ts:260](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/option.ts#L260)*
 
 **Type parameters:**
 
@@ -1148,7 +1152,7 @@ ___
 
 ▸ **toArray**<**T**>(`option`: [Option](_option_.md#option)‹T›): *T[]*
 
-*Defined in [option.ts:165](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/option.ts#L165)*
+*Defined in [option.ts:165](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/option.ts#L165)*
 
 **Type parameters:**
 
@@ -1168,7 +1172,7 @@ ___
 
 ▸ **toBoolean**(`option`: [Option](_option_.md#option)‹unknown›): *boolean*
 
-*Defined in [option.ts:158](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/option.ts#L158)*
+*Defined in [option.ts:158](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/option.ts#L158)*
 
 **Parameters:**
 
@@ -1184,7 +1188,7 @@ ___
 
 ▸ **toMaybe**<**T**>(`option`: [Option](_option_.md#option)‹T›): *[Maybe](_maybe_.md#maybe)‹T›*
 
-*Defined in [option.ts:137](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/option.ts#L137)*
+*Defined in [option.ts:137](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/option.ts#L137)*
 
 **Type parameters:**
 
@@ -1204,7 +1208,7 @@ ___
 
 ▸ **toResult**<**T**, **E**>(`option`: [Option](_option_.md#option)‹T›, `error`: E): *[Result](_result_.md#result)‹T, E›*
 
-*Defined in [option.ts:172](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/option.ts#L172)*
+*Defined in [option.ts:172](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/option.ts#L172)*
 
 **Type parameters:**
 
@@ -1227,7 +1231,7 @@ ___
 
 ▸ **toResultLazy**<**T**, **E**>(`option`: [Option](_option_.md#option)‹T›, `errorf`: function): *[Result](_result_.md#result)‹T, E›*
 
-*Defined in [option.ts:179](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/option.ts#L179)*
+*Defined in [option.ts:179](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/option.ts#L179)*
 
 **Type parameters:**
 

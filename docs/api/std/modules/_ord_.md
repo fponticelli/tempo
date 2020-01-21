@@ -1,6 +1,10 @@
-[tempo-std - v0.2.0](../README.md) › [Globals](../globals.md) › ["ord"](_ord_.md)
+---
+id: "_ord_"
+title: "ord"
+sidebar_label: "ord"
+---
 
-# External module: "ord"
+[tempo-std - v0.2.0](../index.md) › [Globals](../globals.md) › ["ord"](_ord_.md)
 
 ## Index
 
@@ -22,7 +26,7 @@
 
 ▸ **fromNumberComparison**<**A**>(`f`: function): *(Anonymous function)*
 
-*Defined in [ord.ts:58](https://github.com/fponticelli/tempo/blob/d1a1f4f/std/src/ord.ts#L58)*
+*Defined in [ord.ts:58](https://github.com/fponticelli/tempo/blob/4a30d82/std/src/ord.ts#L58)*
 
 **Type parameters:**
 
