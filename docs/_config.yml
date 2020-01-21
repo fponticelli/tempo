@@ -12,4 +12,4 @@ aux_links:
   'Tempo on GitHub':
     - 'https://github.com/fponticelli/tempo'
 keep_files:
-  - api
+  - api/**.*
