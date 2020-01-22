@@ -1,5 +1,7 @@
 {
   "name": "tempo-demo.todomvc",
+  "title": "ToDo MVC App",
+  "priority": 5,
   "version": "1.0.0",
   "license": "Apache-2.0",
   "homepage": "https://github.com/fponticelli/tempo",

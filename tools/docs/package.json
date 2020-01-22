@@ -57,7 +57,12 @@
     "sass-loader": "8.0.0",
     "node-sass": "4.13.0",
     "ts-node": "8.6.2",
-    "@types/node": "10.12.18"
+    "@types/node": "10.12.18",
+    "fs-extra": "8.1.0",
+    "@types/fs-extra": "8.0.1",
+    "showdown": "1.9.1",
+    "@types/showdown": "1.7.3",
+    "front-matter": "3.1.0"
   },
   "main": "lib/index.js",
   "module": "es6/index.js",

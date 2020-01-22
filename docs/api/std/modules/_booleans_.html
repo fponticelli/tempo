@@ -1,0 +1,77 @@
+<p><a href="../index.md">tempo-std - v0.2.0</a> › <a href="../globals.md">Globals</a> › <a href="_booleans_.md">"booleans"</a></p>
+<h2 id="index">Index</h2>
+<h3 id="functions">Functions</h3>
+<ul>
+<li><a href="_booleans_.md#canparse">canParse</a></li>
+<li><a href="_booleans_.md#compare">compare</a></li>
+<li><a href="_booleans_.md#option">option</a></li>
+<li><a href="_booleans_.md#parse">parse</a></li>
+<li><a href="_booleans_.md#toint">toInt</a></li>
+<li><a href="_booleans_.md#xor">xor</a></li>
+</ul>
+<h2 id="functions-1">Functions</h2>
+<h3 id="canparse">canParse</h3>
+<p>▸ <strong>canParse</strong>(<code>v</code>: string): <em>boolean</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/booleans.ts#L20">booleans.ts:20</a></em></p>
+<p>Returns <code>true</code> if the passed value is either <code>true</code> or <code>false</code> (case insensitive).</p>
+<p><strong>Parameters:</strong></p>
+<p>Name | Type |
+------ | ------ |
+<code>v</code> | string |</p>
+<p><strong>Returns:</strong> <em>boolean</em></p>
+<hr />
+<h3 id="compare">compare</h3>
+<p>▸ <strong>compare</strong>(<code>a</code>: boolean, <code>b</code>: boolean): <em>0 | 1 | -1</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/booleans.ts#L6">booleans.ts:6</a></em></p>
+<p>Returns a comparison value (<code>Int</code>) from two boolean values.</p>
+<p><strong>Parameters:</strong></p>
+<p>Name | Type |
+------ | ------ |
+<code>a</code> | boolean |
+<code>b</code> | boolean |</p>
+<p><strong>Returns:</strong> <em>0 | 1 | -1</em></p>
+<hr />
+<h3 id="option">option</h3>
+<p>▸ <strong>option</strong><<strong>A</strong>>(<code>cond</code>: boolean, <code>a</code>: A): <em><a href="_option_.md#option">Option</a>‹A›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/booleans.ts#L64">booleans.ts:64</a></em></p>
+<p>Depending upon the condition, return the provided value wrapped
+in a <code>some</code>, or <code>none</code> if the condition is false.</p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>A</strong></p>
+<p><strong>Parameters:</strong></p>
+<p>Name | Type |
+------ | ------ |
+<code>cond</code> | boolean |
+<code>a</code> | A |</p>
+<p><strong>Returns:</strong> <em><a href="_option_.md#option">Option</a>‹A›</em></p>
+<hr />
+<h3 id="parse">parse</h3>
+<p>▸ <strong>parse</strong>(<code>v</code>: string): <em>boolean</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/booleans.ts#L38">booleans.ts:38</a></em></p>
+<p>Returns <code>true</code>/<code>false</code> if the passed value is <code>true</code>/<code>false</code> (case insensitive) with any other value it will return null.</p>
+<p><strong>Parameters:</strong></p>
+<p>Name | Type |
+------ | ------ |
+<code>v</code> | string |</p>
+<p><strong>Returns:</strong> <em>boolean</em></p>
+<hr />
+<h3 id="toint">toInt</h3>
+<p>▸ <strong>toInt</strong>(<code>v</code>: boolean): <em>0 | 1</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/booleans.ts#L13">booleans.ts:13</a></em></p>
+<p>Converts a boolean to an integer value (<code>true</code> =&gt; <code>1</code>, <code>false</code> =&gt; <code>0</code>).</p>
+<p><strong>Parameters:</strong></p>
+<p>Name | Type |
+------ | ------ |
+<code>v</code> | boolean |</p>
+<p><strong>Returns:</strong> <em>0 | 1</em></p>
+<hr />
+<h3 id="xor">xor</h3>
+<p>▸ <strong>xor</strong>(<code>a</code>: boolean, <code>b</code>: boolean): <em>boolean</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/booleans.ts#L56">booleans.ts:56</a></em></p>
+<p>Returns <code>true</code> when arguments are different.</p>
+<p><strong>Parameters:</strong></p>
+<p>Name | Type |
+------ | ------ |
+<code>a</code> | boolean |
+<code>b</code> | boolean |</p>
+<p><strong>Returns:</strong> <em>boolean</em></p>

@@ -1,0 +1,6 @@
+<p><a href="index.md">tempo-core - v1.6.0</a> › <a href="globals.md">Globals</a></p>
+<h1 id="tempocore">tempo-core</h1>
+<p><code>tempo-core</code> includes the basic types and building blocks for <code>tempo</code> implementations. The only one available right now is <a href="https://fponticelli.github.io/tempo/"><code>tempo-dom</code></a>.</p>
+<p>The <code>tempo</code> concept is quite simple. You describe your UI creating templates. A template has a <code>render</code> method that takes a <code>context</code> (provide the DOM context for example) and a <code>state</code> (the data to render).</p>
+<p>The side-effect of <code>render</code> is to create a piece of UI and return a new <code>View</code> instance to control it.</p>
+<p><code>View</code> has a method <code>destroy</code> and when it is a <code>Dynamic</code> view a <code>change(state: State)</code> method.</p>

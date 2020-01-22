@@ -1,10 +1,8 @@
-export interface Increment {
-  kind: 'increment'
-}
-export interface Decrement {
-  kind: 'decrement'
-}
-export type Action = Increment | Decrement
+import { Async } from 'tempo-std/lib/async'
+import { Result } from 'tempo-std/lib/result'
+import { Toc } from './toc'
+import { HttpError } from './request'
 
-export const decrement = (): Action => ({ kind: 'decrement' })
-export const increment = (): Action => ({ kind: 'increment' })
+export type Action =
+  | { kind: 'RequestToc' }
+  | { kind: 'LoadedToc', toc: Async<Result<Toc, HttpError>, unknown> }

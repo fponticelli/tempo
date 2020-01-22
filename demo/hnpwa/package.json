@@ -1,5 +1,8 @@
 {
   "name": "tempo-demo.hnpwa",
+  "title": "Hacker News Progressive Web App",
+  "description": "Client for Hacker New built using Tempo. Heavily inspired on the Elm implementation.",
+  "priority": 10,
   "version": "1.0.0",
   "license": "Apache-2.0",
   "private": true,

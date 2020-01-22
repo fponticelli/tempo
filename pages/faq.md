@@ -1,7 +1,6 @@
 ---
-layout: default
 title: FAQ
-nav_order: 4
+order: 4
 ---
 
 # FAQ

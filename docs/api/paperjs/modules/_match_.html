@@ -1,0 +1,75 @@
+<p><a href="../index.md">tempo-paper - v0.3.0</a> › <a href="../globals.md">Globals</a> › <a href="_match_.md">"match"</a></p>
+<h2 id="index">Index</h2>
+<h3 id="classes">Classes</h3>
+<ul>
+<li><a href="../classes/_match_.matchbooltemplate.md">MatchBoolTemplate</a></li>
+<li><a href="../classes/_match_.matchtemplate.md">MatchTemplate</a></li>
+<li><a href="../classes/_match_.matchvaluetemplate.md">MatchValueTemplate</a></li>
+</ul>
+<h3 id="functions">Functions</h3>
+<ul>
+<li><a href="_match_.md#const-match">match</a></li>
+<li><a href="_match_.md#const-matchbool">matchBool</a></li>
+<li><a href="_match_.md#const-matchkind">matchKind</a></li>
+<li><a href="_match_.md#const-matchvalue">matchValue</a></li>
+</ul>
+<h2 id="functions-1">Functions</h2>
+<h3 id="constmatch"><code>Const</code> match</h3>
+<p>▸ <strong>match</strong><<strong>Path</strong>, <strong>State</strong>, <strong>Action</strong>, <strong>Query</strong>>(<code>path</code>: Path, <code>matcher</code>: object): <em><a href="../interfaces/_template_.papertemplate.md">PaperTemplate</a>‹State, Action, Query›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/paperjs/src/match.ts#L71">paperjs/src/match.ts:71</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>Path</strong>: <em>IndexType[]</em></p>
+<p>▪ <strong>State</strong>: <em>ObjectWithPath‹Path, any›</em></p>
+<p>▪ <strong>Action</strong></p>
+<p>▪ <strong>Query</strong></p>
+<p><strong>Parameters:</strong></p>
+<p>Name | Type |
+------ | ------ |
+<code>path</code> | Path |
+<code>matcher</code> | object |</p>
+<p><strong>Returns:</strong> <em><a href="../interfaces/_template_.papertemplate.md">PaperTemplate</a>‹State, Action, Query›</em></p>
+<hr />
+<h3 id="constmatchbool"><code>Const</code> matchBool</h3>
+<p>▸ <strong>matchBool</strong><<strong>State</strong>, <strong>Action</strong>, <strong>Query</strong>>(<code>options</code>: object): <em><a href="../interfaces/_template_.papertemplate.md">PaperTemplate</a>‹State, Action, Query›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/paperjs/src/match.ts#L157">paperjs/src/match.ts:157</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>State</strong></p>
+<p>▪ <strong>Action</strong></p>
+<p>▪ <strong>Query</strong></p>
+<p><strong>Parameters:</strong></p>
+<p>▪ <strong>options</strong>: <em>object</em></p>
+<p>Name | Type |
+------ | ------ |
+<code>condition</code> | function |
+<code>false</code> | <a href="../interfaces/_template_.papertemplate.md">PaperTemplate</a>‹State, Action, Query› |
+<code>true</code> | <a href="../interfaces/_template_.papertemplate.md">PaperTemplate</a>‹State, Action, Query› |</p>
+<p><strong>Returns:</strong> <em><a href="../interfaces/_template_.papertemplate.md">PaperTemplate</a>‹State, Action, Query›</em></p>
+<hr />
+<h3 id="constmatchkind"><code>Const</code> matchKind</h3>
+<p>▸ <strong>matchKind</strong><<strong>State</strong>, <strong>Action</strong>, <strong>Query</strong>>(<code>matchers</code>: object): <em><a href="../interfaces/_template_.papertemplate.md">PaperTemplate</a>‹State, Action, Query›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/paperjs/src/match.ts#L106">paperjs/src/match.ts:106</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>State</strong>: <em>ObjectWithField‹"kind", any›</em></p>
+<p>▪ <strong>Action</strong></p>
+<p>▪ <strong>Query</strong></p>
+<p><strong>Parameters:</strong></p>
+<p>Name | Type |
+------ | ------ |
+<code>matchers</code> | object |</p>
+<p><strong>Returns:</strong> <em><a href="../interfaces/_template_.papertemplate.md">PaperTemplate</a>‹State, Action, Query›</em></p>
+<hr />
+<h3 id="constmatchvalue"><code>Const</code> matchValue</h3>
+<p>▸ <strong>matchValue</strong><<strong>Path</strong>, <strong>State</strong>, <strong>Action</strong>, <strong>Query</strong>>(<code>path</code>: Path, <code>matchers</code>: object, <code>orElse</code>: <a href="../interfaces/_template_.papertemplate.md">PaperTemplate</a>‹State, Action, Query›): <em><a href="../interfaces/_template_.papertemplate.md">PaperTemplate</a>‹State, Action, Query›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/paperjs/src/match.ts#L204">paperjs/src/match.ts:204</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>Path</strong>: <em>IndexType[]</em></p>
+<p>▪ <strong>State</strong>: <em>ObjectWithPath‹Path, string›</em></p>
+<p>▪ <strong>Action</strong></p>
+<p>▪ <strong>Query</strong></p>
+<p><strong>Parameters:</strong></p>
+<p>Name | Type |
+------ | ------ |
+<code>path</code> | Path |
+<code>matchers</code> | object |
+<code>orElse</code> | <a href="../interfaces/_template_.papertemplate.md">PaperTemplate</a>‹State, Action, Query› |</p>
+<p><strong>Returns:</strong> <em><a href="../interfaces/_template_.papertemplate.md">PaperTemplate</a>‹State, Action, Query›</em></p>

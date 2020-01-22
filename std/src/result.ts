@@ -393,8 +393,7 @@ export const firstSuccess = <A, Err>(...args: Result<A, Err>[]): Result<A, Err> 
       return a
   }
   for (const a of args) {
-    if (isFailure(a))
-      return a
+    return a
   }
   throw 'cannot use `firstSuccess` with empty argument list'
 }

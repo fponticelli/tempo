@@ -46,6 +46,13 @@
       "description": "Run `prettier-fix` on each project.",
       "enableParallelism": true,
       "ignoreMissingScript": true
+    }, {
+      "commandKind": "bulk",
+      "name": "docs",
+      "summary": "Generate API docs for each project.",
+      "description": "Generate API docs for each project.",
+      "enableParallelism": true,
+      "ignoreMissingScript": true
     }
     // {
     //   /**

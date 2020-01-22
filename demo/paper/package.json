@@ -1,9 +1,11 @@
 {
   "name": "tempo-demo.paper",
+  "title": "Paper JS Integration",
+  "priority": 20,
   "version": "1.0.0",
   "license": "Apache-2.0",
   "homepage": "https://github.com/fponticelli/tempo",
-  "description": "",
+  "description": "Example of integration between the HTML DOM and the Paper DOM represented in Tempo.",
   "bugs": {
     "url": "https://github.com/fponticelli/tempo/issues"
   },

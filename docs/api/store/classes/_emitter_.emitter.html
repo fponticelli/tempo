@@ -1,0 +1,93 @@
+<p><a href="../index.md">tempo-store - v1.1.2</a> › <a href="../globals.md">Globals</a> › <a href="../modules/_emitter_.md">"emitter"</a> › <a href="_emitter_.emitter.md">Emitter</a></p>
+<h2 id="typeparameters">Type parameters</h2>
+<p>▪ <strong>T</strong>: <em>any[]</em></p>
+<h2 id="hierarchy">Hierarchy</h2>
+<ul>
+<li><strong>Emitter</strong></li>
+</ul>
+<h2 id="implements">Implements</h2>
+<ul>
+<li><a href="../interfaces/_observable_.observable.md">Observable</a>‹T›</li>
+</ul>
+<h2 id="index">Index</h2>
+<h3 id="properties">Properties</h3>
+<ul>
+<li><a href="_emitter_.emitter.md#listeners">listeners</a></li>
+</ul>
+<h3 id="methods">Methods</h3>
+<ul>
+<li><a href="_emitter_.emitter.md#emit">emit</a></li>
+<li><a href="_emitter_.emitter.md#off">off</a></li>
+<li><a href="_emitter_.emitter.md#on">on</a></li>
+<li><a href="_emitter_.emitter.md#once">once</a></li>
+<li><a href="_emitter_.emitter.md#static-ofone">ofOne</a></li>
+<li><a href="_emitter_.emitter.md#static-ofthree">ofThree</a></li>
+<li><a href="_emitter_.emitter.md#static-oftwo">ofTwo</a></li>
+</ul>
+<h2 id="properties-1">Properties</h2>
+<h3 id="listeners">listeners</h3>
+<p>• <strong>listeners</strong>: <em><a href="../modules/_listener_.md#listener">Listener</a>‹T›[]</em> = []</p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/store/src/emitter.ts#L28">emitter.ts:28</a></em></p>
+<h2 id="methods-1">Methods</h2>
+<h3 id="emit">emit</h3>
+<p>▸ <strong>emit</strong>(…<code>value</code>: T): <em>void</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/store/src/emitter.ts#L32">emitter.ts:32</a></em></p>
+<p><strong>Parameters:</strong></p>
+<p>Name | Type |
+------ | ------ |
+<code>...value</code> | T |</p>
+<p><strong>Returns:</strong> <em>void</em></p>
+<hr />
+<h3 id="off">off</h3>
+<p>▸ <strong>off</strong>(<code>listener</code>: <a href="../modules/_listener_.md#listener">Listener</a>‹T›): <em>boolean</em></p>
+<p><em>Implementation of <a href="../interfaces/_observable_.observable.md">Observable</a></em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/store/src/emitter.ts#L40">emitter.ts:40</a></em></p>
+<p><strong>Parameters:</strong></p>
+<p>Name | Type |
+------ | ------ |
+<code>listener</code> | <a href="../modules/_listener_.md#listener">Listener</a>‹T› |</p>
+<p><strong>Returns:</strong> <em>boolean</em></p>
+<hr />
+<h3 id="on">on</h3>
+<p>▸ <strong>on</strong>(<code>listener</code>: <a href="../modules/_listener_.md#listener">Listener</a>‹T›): <em>void</em></p>
+<p><em>Implementation of <a href="../interfaces/_observable_.observable.md">Observable</a></em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/store/src/emitter.ts#L36">emitter.ts:36</a></em></p>
+<p><strong>Parameters:</strong></p>
+<p>Name | Type |
+------ | ------ |
+<code>listener</code> | <a href="../modules/_listener_.md#listener">Listener</a>‹T› |</p>
+<p><strong>Returns:</strong> <em>void</em></p>
+<hr />
+<h3 id="once">once</h3>
+<p>▸ <strong>once</strong>(<code>listener</code>: <a href="../modules/_listener_.md#listener">Listener</a>‹T›): <em>void</em></p>
+<p><em>Implementation of <a href="../interfaces/_observable_.observable.md">Observable</a></em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/store/src/emitter.ts#L47">emitter.ts:47</a></em></p>
+<p><strong>Parameters:</strong></p>
+<p>Name | Type |
+------ | ------ |
+<code>listener</code> | <a href="../modules/_listener_.md#listener">Listener</a>‹T› |</p>
+<p><strong>Returns:</strong> <em>void</em></p>
+<hr />
+<h3 id="staticofone"><code>Static</code> ofOne</h3>
+<p>▸ <strong>ofOne</strong><<strong>A</strong>>(): <em><a href="../modules/_emitter_.md#emitter1">Emitter1</a>‹A›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/store/src/emitter.ts#L18">emitter.ts:18</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>A</strong></p>
+<p><strong>Returns:</strong> <em><a href="../modules/_emitter_.md#emitter1">Emitter1</a>‹A›</em></p>
+<hr />
+<h3 id="staticofthree"><code>Static</code> ofThree</h3>
+<p>▸ <strong>ofThree</strong><<strong>A</strong>, <strong>B</strong>, <strong>C</strong>>(): <em><a href="../modules/_emitter_.md#emitter3">Emitter3</a>‹A, B, C›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/store/src/emitter.ts#L24">emitter.ts:24</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>A</strong></p>
+<p>▪ <strong>B</strong></p>
+<p>▪ <strong>C</strong></p>
+<p><strong>Returns:</strong> <em><a href="../modules/_emitter_.md#emitter3">Emitter3</a>‹A, B, C›</em></p>
+<hr />
+<h3 id="staticoftwo"><code>Static</code> ofTwo</h3>
+<p>▸ <strong>ofTwo</strong><<strong>A</strong>, <strong>B</strong>>(): <em><a href="../modules/_emitter_.md#emitter2">Emitter2</a>‹A, B›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/store/src/emitter.ts#L21">emitter.ts:21</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>A</strong></p>
+<p>▪ <strong>B</strong></p>
+<p><strong>Returns:</strong> <em><a href="../modules/_emitter_.md#emitter2">Emitter2</a>‹A, B›</em></p>

@@ -1,0 +1,115 @@
+<p><a href="../index.md">tempo-dom - v0.14.0</a> › <a href="../globals.md">Globals</a> › <a href="_utils_dom_.md">"utils/dom"</a></p>
+<h2 id="index">Index</h2>
+<h3 id="typealiases">Type aliases</h3>
+<ul>
+<li><a href="_utils_dom_.md#acc">Acc</a></li>
+</ul>
+<h3 id="functions">Functions</h3>
+<ul>
+<li><a href="_utils_dom_.md#const-containersize">containerSize</a></li>
+<li><a href="_utils_dom_.md#domchildtotemplate">domChildToTemplate</a></li>
+<li><a href="_utils_dom_.md#insertfbefore">insertFBefore</a></li>
+<li><a href="_utils_dom_.md#processattribute">processAttribute</a></li>
+<li><a href="_utils_dom_.md#processevent">processEvent</a></li>
+<li><a href="_utils_dom_.md#processstyle">processStyle</a></li>
+<li><a href="_utils_dom_.md#removenode">removeNode</a></li>
+</ul>
+<h2 id="typealiases-1">Type aliases</h2>
+<h3 id="acc">Acc</h3>
+<p>Ƭ <strong>Acc</strong>: <em>function[]</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/utils/dom.ts#L52">dom/src/utils/dom.ts:52</a></em></p>
+<h2 id="functions-1">Functions</h2>
+<h3 id="constcontainersize"><code>Const</code> containerSize</h3>
+<p>▸ <strong>containerSize</strong>(<code>el</code>: HTMLElement): <em>object</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/utils/dom.ts#L139">dom/src/utils/dom.ts:139</a></em></p>
+<p><strong>Parameters:</strong></p>
+<p>Name | Type |
+------ | ------ |
+<code>el</code> | HTMLElement |</p>
+<p><strong>Returns:</strong> <em>object</em></p>
+<ul>
+<li><p><strong>height</strong>: <em>number</em> = el.offsetHeight</p></li>
+<li><p><strong>width</strong>: <em>number</em> = el.offsetWidth</p></li>
+</ul>
+<hr />
+<h3 id="domchildtotemplate">domChildToTemplate</h3>
+<p>▸ <strong>domChildToTemplate</strong><<strong>State</strong>, <strong>Action</strong>, <strong>Query</strong>>(<code>dom</code>: <a href="_template_.md#domchild">DOMChild</a>‹State, Action, Query›): <em><a href="../interfaces/_template_.domtemplate.md">DOMTemplate</a>‹State, Action, Query›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/utils/dom.ts#L40">dom/src/utils/dom.ts:40</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>State</strong></p>
+<p>▪ <strong>Action</strong></p>
+<p>▪ <strong>Query</strong></p>
+<p><strong>Parameters:</strong></p>
+<p>Name | Type |
+------ | ------ |
+<code>dom</code> | <a href="_template_.md#domchild">DOMChild</a>‹State, Action, Query› |</p>
+<p><strong>Returns:</strong> <em><a href="../interfaces/_template_.domtemplate.md">DOMTemplate</a>‹State, Action, Query›</em></p>
+<hr />
+<h3 id="insertfbefore">insertFBefore</h3>
+<p>▸ <strong>insertFBefore</strong>(<code>ref</code>: Node): <em>(Anonymous function)</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/utils/dom.ts#L32">dom/src/utils/dom.ts:32</a></em></p>
+<p><strong>Parameters:</strong></p>
+<p>Name | Type |
+------ | ------ |
+<code>ref</code> | Node |</p>
+<p><strong>Returns:</strong> <em>(Anonymous function)</em></p>
+<hr />
+<h3 id="processattribute">processAttribute</h3>
+<p>▸ <strong>processAttribute</strong><<strong>State</strong>, <strong>Value</strong>>(<code>el</code>: Element, <code>name</code>: string, <code>value</code>: <a href="_value_.md#domattribute">DOMAttribute</a>‹State, Value›, <code>acc</code>: <a href="_utils_dom_.md#acc">Acc</a>‹State›): <em><a href="_utils_dom_.md#acc">Acc</a>‹State›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/utils/dom.ts#L54">dom/src/utils/dom.ts:54</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>State</strong></p>
+<p>▪ <strong>Value</strong></p>
+<p><strong>Parameters:</strong></p>
+<p>Name | Type |
+------ | ------ |
+<code>el</code> | Element |
+<code>name</code> | string |
+<code>value</code> | <a href="_value_.md#domattribute">DOMAttribute</a>‹State, Value› |
+<code>acc</code> | <a href="_utils_dom_.md#acc">Acc</a>‹State› |</p>
+<p><strong>Returns:</strong> <em><a href="_utils_dom_.md#acc">Acc</a>‹State›</em></p>
+<hr />
+<h3 id="processevent">processEvent</h3>
+<p>▸ <strong>processEvent</strong><<strong>State</strong>, <strong>El</strong>, <strong>Ev</strong>, <strong>Action</strong>>(<code>el</code>: El, <code>name</code>: string, <code>value</code>: <a href="_value_.md#domeventhandler">DOMEventHandler</a>‹State, Action, Ev, El›, <code>dispatch</code>: function, <code>acc</code>: <a href="_utils_dom_.md#acc">Acc</a>‹State›): <em><a href="_utils_dom_.md#acc">Acc</a>‹State›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/utils/dom.ts#L89">dom/src/utils/dom.ts:89</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>State</strong></p>
+<p>▪ <strong>El</strong>: <em>Element</em></p>
+<p>▪ <strong>Ev</strong>: <em>Event</em></p>
+<p>▪ <strong>Action</strong></p>
+<p><strong>Parameters:</strong></p>
+<p>▪ <strong>el</strong>: <em>El</em></p>
+<p>▪ <strong>name</strong>: <em>string</em></p>
+<p>▪ <strong>value</strong>: <em><a href="_value_.md#domeventhandler">DOMEventHandler</a>‹State, Action, Ev, El›</em></p>
+<p>▪ <strong>dispatch</strong>: <em>function</em></p>
+<p>▸ (<code>action</code>: Action): <em>void</em></p>
+<p><strong>Parameters:</strong></p>
+<p>Name | Type |
+------ | ------ |
+<code>action</code> | Action |</p>
+<p>▪ <strong>acc</strong>: <em><a href="_utils_dom_.md#acc">Acc</a>‹State›</em></p>
+<p><strong>Returns:</strong> <em><a href="_utils_dom_.md#acc">Acc</a>‹State›</em></p>
+<hr />
+<h3 id="processstyle">processStyle</h3>
+<p>▸ <strong>processStyle</strong><<strong>State</strong>, <strong>Value</strong>>(<code>el</code>: Element, <code>name</code>: string, <code>value</code>: <a href="_value_.md#domstyleattribute">DOMStyleAttribute</a>‹State, Value›, <code>acc</code>: <a href="_utils_dom_.md#acc">Acc</a>‹State›): <em><a href="_utils_dom_.md#acc">Acc</a>‹State›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/utils/dom.ts#L117">dom/src/utils/dom.ts:117</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>State</strong></p>
+<p>▪ <strong>Value</strong></p>
+<p><strong>Parameters:</strong></p>
+<p>Name | Type |
+------ | ------ |
+<code>el</code> | Element |
+<code>name</code> | string |
+<code>value</code> | <a href="_value_.md#domstyleattribute">DOMStyleAttribute</a>‹State, Value› |
+<code>acc</code> | <a href="_utils_dom_.md#acc">Acc</a>‹State› |</p>
+<p><strong>Returns:</strong> <em><a href="_utils_dom_.md#acc">Acc</a>‹State›</em></p>
+<hr />
+<h3 id="removenode">removeNode</h3>
+<p>▸ <strong>removeNode</strong>(<code>node</code>: Node): <em>void</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/utils/dom.ts#L21">dom/src/utils/dom.ts:21</a></em></p>
+<p><strong>Parameters:</strong></p>
+<p>Name | Type |
+------ | ------ |
+<code>node</code> | Node |</p>
+<p><strong>Returns:</strong> <em>void</em></p>

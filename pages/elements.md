@@ -1,7 +1,6 @@
 ---
-layout: default
 title: Common Elements
-nav_order: 2
+order: 2
 ---
 
 # Elements

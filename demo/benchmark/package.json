@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "license": "Apache-2.0",
   "homepage": "https://github.com/fponticelli/tempo",
+  "title": "Performance Benchmark",
+  "priority": 30,
   "description": "Tool to measure performance improvements/regressions across versions.",
   "private": true,
   "bugs": {

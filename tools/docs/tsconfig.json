@@ -1,6 +1,7 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
+    "allowJs": true,
     "lib": ["dom", "es2015"],
     "rootDir": "./src",
     "sourceMap": false,
@@ -9,5 +10,5 @@
     "removeComments": true,
     "outDir": "build"
   },
-  "exclude": ["scripts"]
+  "exclude": ["scripts", "webpack.config.js"]
 }

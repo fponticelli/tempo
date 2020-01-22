@@ -1,7 +1,6 @@
 ---
-layout: default
 title: Home
-nav_order: 0
+order: 0
 ---
 
 [![Actions Status](https://github.com/fponticelli/tempo/workflows/Build%20and%20Test/badge.svg)](https://github.com/fponticelli/tempo/actions?query=workflow%3A"Build+and+Test")

@@ -1,0 +1,20 @@
+{
+  "tempo-core": {
+    "Introduction": [
+      "index",
+      "globals"
+    ],
+    "External Modules": [
+      "modules/_index_",
+      "modules/_template_",
+      "interfaces/_template_.template",
+      "modules/_value_",
+      "modules/_view_",
+      "interfaces/_view_.view"
+    ],
+    "Interfaces": [
+      "interfaces/_template_.template",
+      "interfaces/_view_.view"
+    ]
+  }
+}

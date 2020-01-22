@@ -1,0 +1,29 @@
+<h1 id="faq">FAQ</h1>
+<h2 id="tableofcontents">Table of contents</h2>
+<p>{: .no_toc .text-delta }</p>
+<ol>
+<li>TOC
+{:toc}</li>
+</ol>
+<h3 id="whynojsxtsx">Why no JSX/TSX?</h3>
+<p>It wouls be really great to have TSX support in Tempo. Unforunately the current implementation doesn't work well with generics. That means that all of the inferred typing for State and Action would get lost using TSX. If someone wants to give it another try, I'd love to consider a PR.</p>
+<h3 id="whynoversion1oftempodomyet">Why no version 1 of <code>tempo-dom</code> yet?</h3>
+<p>There are a few areas still that I would like to improve or reconsider:</p>
+<ul>
+<li>Some elements use objects to capture options, some other do not.</li>
+<li>TSX or an HTML-like syntax would be a great addition and might affect how attributes are passed.</li>
+<li>Attributes/Events/Styles are passed in nested objects. While that makes for less runtime guessing and better typing, it makes the DSL to assemble UI a little more bloated than I'd like.</li>
+<li>Passing outer scopes to inner elements is not great. It requires that you glue smaller pieces of state together with their parents using mapState. React Context is trying to address a similar problem but I am not sure that strategy would work nicely here because typing would be impossible (?).</li>
+<li>Function and element names could use some improvements in consistency and clarity. <em>Match</em> functions are especially critical because they are used in many different places and their names conflict.</li>
+<li>Type inference breaks at time and I need to understand why. I observed that in <em>match</em> functions and <em>mapState</em> element.</li>
+</ul>
+<h3 id="caniusetherenderingenginewithouttemporenderandstore">Can I use the rendering engine without <code>Tempo.render</code> and <code>Store</code>?</h3>
+<p>TBD</p>
+<h3 id="whyattributesdonotusecamelcasewhystylepropertiesdoandwhataboutthestyleattribute">Why attributes do not use camelCase? Why style properties do? And what about the style attribute?</h3>
+<p>TBD</p>
+<h3 id="howdoiembedanativejswidgetoronethathasbeenwrittenwithanotherframeworklikeangularorreact">How do I embed a native JS widget or one that has been written with another framework like Angular or React?</h3>
+<p>TBD</p>
+<h3 id="isatempocomponentthesameasareactcomponent">Is a Tempo Component the same as a React Component?</h3>
+<p>TBD</p>
+<h3 id="doestempouseavirtualdom">Does Tempo use a Virtual Dom?</h3>
+<p>TBD</p>

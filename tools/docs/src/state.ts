@@ -1,5 +1,10 @@
+import { Toc } from '../build/toc'
+import { Async, notAsked } from 'tempo-std/lib/async'
+import { HttpError } from './request'
+import { Result } from 'tempo-std/lib/result'
+
 export interface State {
-  count: number
+  toc: Async<Result<Toc, HttpError>, unknown>
 }
 
-export const state = { count: 0 }
+export const state: State = { toc: notAsked }

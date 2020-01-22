@@ -1,24 +1,21 @@
-import { div, button } from 'tempo-dom/lib/html'
+import { div } from 'tempo-dom/lib/html'
+import { matchKind } from 'tempo-dom/lib/match'
 import { mapState } from 'tempo-dom/lib/map'
 import { State } from './state'
-import { Action, decrement, increment } from './action'
+import { Action } from './action'
+import { Async } from 'tempo-std/lib/async'
+import { Result } from 'tempo-std/lib/result'
+import { Toc } from './toc'
+import { HttpError } from './request'
 
 export const template = div<State, Action>(
   { attrs: { className: 'app' } },
   mapState(
-    { map: (state: State) => state.count },
-    div({ attrs: { className: 'count count-small' } }, 'count'),
-    div({ attrs: { className: 'count' } }, String),
-    div(
-      { attrs: { className: 'buttons' } },
-      button(
-        {
-          events: { click: decrement },
-          attrs: { disabled: (count: number) => count <= 0 }
-        },
-        '-'
-      ),
-      button({ events: { click: increment } }, '+')
-    )
+    { map: state => state.toc },
+    matchKind<Async<Result<Toc, HttpError>, unknown>, Action>({
+      notasked: 'not asked',
+      loading: '...',
+      outcome: div({}, s => JSON.stringify(s))
+    })
   )
 )

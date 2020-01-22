@@ -1,0 +1,73 @@
+<p><a href="../index.md">tempo-dom - v0.14.0</a> › <a href="../globals.md">Globals</a> › <a href="../modules/_match_.md">"match"</a> › <a href="_match_.matchvaluetemplate.md">MatchValueTemplate</a></p>
+<h2 id="typeparameters">Type parameters</h2>
+<p>▪ <strong>State</strong></p>
+<p>▪ <strong>Action</strong></p>
+<p>▪ <strong>Query</strong></p>
+<h2 id="hierarchy">Hierarchy</h2>
+<ul>
+<li><strong>MatchValueTemplate</strong></li>
+</ul>
+<h2 id="implements">Implements</h2>
+<ul>
+<li><a href="../interfaces/_template_.domtemplate.md">DOMTemplate</a>‹State, Action, Query›</li>
+</ul>
+<h2 id="index">Index</h2>
+<h3 id="constructors">Constructors</h3>
+<ul>
+<li><a href="_match_.matchvaluetemplate.md#constructor">constructor</a></li>
+</ul>
+<h3 id="properties">Properties</h3>
+<ul>
+<li><a href="_match_.matchvaluetemplate.md#matchers">matchers</a></li>
+<li><a href="_match_.matchvaluetemplate.md#orelse">orElse</a></li>
+<li><a href="_match_.matchvaluetemplate.md#path">path</a></li>
+<li><a href="_match_.matchvaluetemplate.md#refid">refId</a></li>
+</ul>
+<h3 id="methods">Methods</h3>
+<ul>
+<li><a href="_match_.matchvaluetemplate.md#render">render</a></li>
+</ul>
+<h2 id="constructors-1">Constructors</h2>
+<h3 id="constructor-NaN">constructor</h3>
+<p>+ <strong>new MatchValueTemplate</strong>(<code>path</code>: IndexType[], <code>matchers</code>: object, <code>orElse</code>: <a href="../interfaces/_template_.domtemplate.md">DOMTemplate</a>‹State, Action, Query›, <code>refId</code>: string): <em><a href="_match_.matchvaluetemplate.md">MatchValueTemplate</a></em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/match.ts#L151">dom/src/match.ts:151</a></em></p>
+<p><strong>Parameters:</strong></p>
+<p>Name | Type |
+------ | ------ |
+<code>path</code> | IndexType[] |
+<code>matchers</code> | object |
+<code>orElse</code> | <a href="../interfaces/_template_.domtemplate.md">DOMTemplate</a>‹State, Action, Query› |
+<code>refId</code> | string |</p>
+<p><strong>Returns:</strong> <em><a href="_match_.matchvaluetemplate.md">MatchValueTemplate</a></em></p>
+<h2 id="properties-1">Properties</h2>
+<h3 id="matchers">matchers</h3>
+<p>• <strong>matchers</strong>: <em>object</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/match.ts#L154">dom/src/match.ts:154</a></em></p>
+<h4 id="typedeclaration">Type declaration:</h4>
+<hr />
+<h3 id="orelse">orElse</h3>
+<p>• <strong>orElse</strong>: <em><a href="../interfaces/_template_.domtemplate.md">DOMTemplate</a>‹State, Action, Query›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/match.ts#L157">dom/src/match.ts:157</a></em></p>
+<hr />
+<h3 id="path">path</h3>
+<p>• <strong>path</strong>: <em>IndexType[]</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/match.ts#L153">dom/src/match.ts:153</a></em></p>
+<hr />
+<h3 id="refid">refId</h3>
+<p>• <strong>refId</strong>: <em>string</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/match.ts#L158">dom/src/match.ts:158</a></em></p>
+<h2 id="methods-1">Methods</h2>
+<h3 id="render">render</h3>
+<p>▸ <strong>render</strong>(<code>ctx</code>: <a href="_context_.domcontext.md">DOMContext</a>‹Action›, <code>state</code>: State): <em>object</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/match.ts#L160">dom/src/match.ts:160</a></em></p>
+<p><strong>Parameters:</strong></p>
+<p>Name | Type |
+------ | ------ |
+<code>ctx</code> | <a href="_context_.domcontext.md">DOMContext</a>‹Action› |
+<code>state</code> | State |</p>
+<p><strong>Returns:</strong> <em>object</em></p>
+<ul>
+<li><p><strong>change</strong>(<code>state</code>: State): <em>void</em></p></li>
+<li><p><strong>destroy</strong>(): <em>void</em></p></li>
+<li><p><strong>request</strong>(<code>query</code>: Query): <em>void</em></p></li>
+</ul>

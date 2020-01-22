@@ -1,13 +1,18 @@
 import { State } from './state'
 import { Action } from './action'
+import { loading } from 'tempo-std/lib/async'
 
 export const reducer = (state: State, action: Action): State => {
   switch (action.kind) {
-    case 'increment':
-      return { count: state.count + 1 }
-    case 'decrement':
-      return { count: state.count - 1 }
-    default:
-      throw `this should never happen`
+    case 'RequestToc':
+      return {
+        ...state,
+        toc: loading(null)
+      }
+    case 'LoadedToc':
+      return {
+        ...state,
+        toc: action.toc
+      }
   }
 }

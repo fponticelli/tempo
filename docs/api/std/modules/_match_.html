@@ -1,0 +1,69 @@
+<p><a href="../index.md">tempo-std - v0.2.0</a> › <a href="../globals.md">Globals</a> › <a href="_match_.md">"match"</a></p>
+<h2 id="index">Index</h2>
+<h3 id="variables">Variables</h3>
+<ul>
+<li><a href="_match_.md#const-matchkind">matchKind</a></li>
+</ul>
+<h3 id="functions">Functions</h3>
+<ul>
+<li><a href="_match_.md#const-createdeepmatch">createDeepMatch</a></li>
+<li><a href="_match_.md#const-creatematch">createMatch</a></li>
+<li><a href="_match_.md#const-deepmatch">deepMatch</a></li>
+<li><a href="_match_.md#const-match">match</a></li>
+</ul>
+<h2 id="variables-1">Variables</h2>
+<h3 id="constmatchkind"><code>Const</code> matchKind</h3>
+<p>• <strong>matchKind</strong>: <em>(Anonymous function)</em> = createMatch('kind')</p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/match.ts#L74">match.ts:74</a></em></p>
+<h2 id="functions-1">Functions</h2>
+<h3 id="constcreatedeepmatch"><code>Const</code> createDeepMatch</h3>
+<p>▸ <strong>createDeepMatch</strong><<strong>Path</strong>>(…<code>path</code>: Path): <em>(Anonymous function)</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/match.ts#L59">match.ts:59</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>Path</strong>: <em><a href="_types_index_type_.md#indextype">IndexType</a>[]</em></p>
+<p><strong>Parameters:</strong></p>
+<p>Name | Type |
+------ | ------ |
+<code>...path</code> | Path |</p>
+<p><strong>Returns:</strong> <em>(Anonymous function)</em></p>
+<hr />
+<h3 id="constcreatematch"><code>Const</code> createMatch</h3>
+<p>▸ <strong>createMatch</strong><<strong>F</strong>>(<code>field</code>: F): <em>(Anonymous function)</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/match.ts#L49">match.ts:49</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>F</strong>: <em><a href="_types_index_type_.md#indextype">IndexType</a></em></p>
+<p><strong>Parameters:</strong></p>
+<p>Name | Type |
+------ | ------ |
+<code>field</code> | F |</p>
+<p><strong>Returns:</strong> <em>(Anonymous function)</em></p>
+<hr />
+<h3 id="constdeepmatch"><code>Const</code> deepMatch</h3>
+<p>▸ <strong>deepMatch</strong><<strong>Path</strong>, <strong>T</strong>, <strong>B</strong>>(<code>path</code>: Path, <code>matcher</code>: object, <code>input</code>: T): <em>B</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/match.ts#L31">match.ts:31</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>Path</strong>: <em><a href="_types_index_type_.md#indextype">IndexType</a>[]</em></p>
+<p>▪ <strong>T</strong>: <em><a href="_types_objects_.md#objectwithpath">ObjectWithPath</a>‹Path, any›</em></p>
+<p>▪ <strong>B</strong></p>
+<p><strong>Parameters:</strong></p>
+<p>Name | Type |
+------ | ------ |
+<code>path</code> | Path |
+<code>matcher</code> | object |
+<code>input</code> | T |</p>
+<p><strong>Returns:</strong> <em>B</em></p>
+<hr />
+<h3 id="constmatch"><code>Const</code> match</h3>
+<p>▸ <strong>match</strong><<strong>F</strong>, <strong>T</strong>, <strong>B</strong>>(<code>field</code>: F, <code>matcher</code>: object, <code>input</code>: T): <em>B</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/match.ts#L18">match.ts:18</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>F</strong>: <em><a href="_types_index_type_.md#indextype">IndexType</a></em></p>
+<p>▪ <strong>T</strong>: <em><a href="_types_objects_.md#objectwithfield">ObjectWithField</a>‹F, any›</em></p>
+<p>▪ <strong>B</strong></p>
+<p><strong>Parameters:</strong></p>
+<p>Name | Type |
+------ | ------ |
+<code>field</code> | F |
+<code>matcher</code> | object |
+<code>input</code> | T |</p>
+<p><strong>Returns:</strong> <em>B</em></p>

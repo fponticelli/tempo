@@ -15,6 +15,7 @@
   "license": "Apache-2.0",
   "private": false,
   "scripts": {
+    "docs": "typedoc --plugin typedoc-plugin-markdown --options ../typedoc.json --out ./docs src",
     "clean": "rm -rf lib/* && rm -rf es6/*",
     "build": "npm run clean && npx tsc && npx tsc -p tsconfig.es6.json",
     "test": "jest",
@@ -40,6 +41,8 @@
     "tempo-store": "1.1.2"
   },
   "devDependencies": {
+    "typedoc": "0.16.7",
+    "typedoc-plugin-markdown": "2.2.16",
     "@types/jest": "24.0.22",
     "@types/jsdom": "12.2.4",
     "jest": "24.9.0",

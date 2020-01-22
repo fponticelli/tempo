@@ -1,0 +1,257 @@
+<p><a href="../index.md">tempo-std - v0.2.0</a> › <a href="../globals.md">Globals</a> › <a href="_nel_.md">"nel"</a></p>
+<h2 id="index">Index</h2>
+<h3 id="typealiases">Type aliases</h3>
+<ul>
+<li><a href="_nel_.md#nel">Nel</a></li>
+</ul>
+<h3 id="functions">Functions</h3>
+<ul>
+<li><a href="_nel_.md#const-nel">Nel</a></li>
+<li><a href="_nel_.md#const-all">all</a></li>
+<li><a href="_nel_.md#const-any">any</a></li>
+<li><a href="_nel_.md#const-concat">concat</a></li>
+<li><a href="_nel_.md#const-each">each</a></li>
+<li><a href="_nel_.md#const-equals">equals</a></li>
+<li><a href="_nel_.md#const-filter">filter</a></li>
+<li><a href="_nel_.md#const-flatmap">flatMap</a></li>
+<li><a href="_nel_.md#const-flatten">flatten</a></li>
+<li><a href="_nel_.md#const-foldleft">foldLeft</a></li>
+<li><a href="_nel_.md#const-head">head</a></li>
+<li><a href="_nel_.md#const-isvalid">isValid</a></li>
+<li><a href="_nel_.md#const-length">length</a></li>
+<li><a href="_nel_.md#const-map">map</a></li>
+<li><a href="_nel_.md#const-ofvalue">ofValue</a></li>
+<li><a href="_nel_.md#const-sort">sort</a></li>
+<li><a href="_nel_.md#const-tail">tail</a></li>
+</ul>
+<h2 id="typealiases-1">Type aliases</h2>
+<h3 id="nel">Nel</h3>
+<p>Ƭ <strong>Nel</strong>: <em><a href="../interfaces/_newtype_.newtype.md">Newtype</a>‹T[], object›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/nel.ts#L18">nel.ts:18</a></em></p>
+<h2 id="functions-1">Functions</h2>
+<h3 id="constnel"><code>Const</code> Nel</h3>
+<p>▸ <strong>Nel</strong><<strong>T</strong>>(): <em>NelTypeClass‹T›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/nel.ts#L27">nel.ts:27</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>T</strong></p>
+<p><strong>Returns:</strong> <em>NelTypeClass‹T›</em></p>
+<hr />
+<h3 id="constall"><code>Const</code> all</h3>
+<p>▸ <strong>all</strong><<strong>T</strong>>(<code>predicate</code>: function, <code>nel</code>: <a href="_nel_.md#nel">Nel</a>‹T›): <em>boolean</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/nel.ts#L58">nel.ts:58</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>T</strong></p>
+<p><strong>Parameters:</strong></p>
+<p>▪ <strong>predicate</strong>: <em>function</em></p>
+<p>▸ (<code>v</code>: T): <em>boolean</em></p>
+<p><strong>Parameters:</strong></p>
+<p>Name | Type |
+------ | ------ |
+<code>v</code> | T |</p>
+<p>▪ <strong>nel</strong>: <em><a href="_nel_.md#nel">Nel</a>‹T›</em></p>
+<p><strong>Returns:</strong> <em>boolean</em></p>
+<hr />
+<h3 id="constany"><code>Const</code> any</h3>
+<p>▸ <strong>any</strong><<strong>T</strong>>(<code>predicate</code>: function, <code>nel</code>: <a href="_nel_.md#nel">Nel</a>‹T›): <em>boolean</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/nel.ts#L61">nel.ts:61</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>T</strong></p>
+<p><strong>Parameters:</strong></p>
+<p>▪ <strong>predicate</strong>: <em>function</em></p>
+<p>▸ (<code>v</code>: T): <em>boolean</em></p>
+<p><strong>Parameters:</strong></p>
+<p>Name | Type |
+------ | ------ |
+<code>v</code> | T |</p>
+<p>▪ <strong>nel</strong>: <em><a href="_nel_.md#nel">Nel</a>‹T›</em></p>
+<p><strong>Returns:</strong> <em>boolean</em></p>
+<hr />
+<h3 id="constconcat"><code>Const</code> concat</h3>
+<p>▸ <strong>concat</strong><<strong>A</strong>>(…<code>nels</code>: <a href="_nel_.md#nel">Nel</a>‹A›[]): <em><a href="_nel_.md#nel">Nel</a>‹A›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/nel.ts#L67">nel.ts:67</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>A</strong></p>
+<p><strong>Parameters:</strong></p>
+<p>Name | Type |
+------ | ------ |
+<code>...nels</code> | <a href="_nel_.md#nel">Nel</a>‹A›[] |</p>
+<p><strong>Returns:</strong> <em><a href="_nel_.md#nel">Nel</a>‹A›</em></p>
+<hr />
+<h3 id="consteach"><code>Const</code> each</h3>
+<p>▸ <strong>each</strong><<strong>T</strong>>(<code>f</code>: function, <code>nel</code>: <a href="_nel_.md#nel">Nel</a>‹T›): <em>void</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/nel.ts#L64">nel.ts:64</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>T</strong></p>
+<p><strong>Parameters:</strong></p>
+<p>▪ <strong>f</strong>: <em>function</em></p>
+<p>▸ (<code>v</code>: T): <em>void</em></p>
+<p><strong>Parameters:</strong></p>
+<p>Name | Type |
+------ | ------ |
+<code>v</code> | T |</p>
+<p>▪ <strong>nel</strong>: <em><a href="_nel_.md#nel">Nel</a>‹T›</em></p>
+<p><strong>Returns:</strong> <em>void</em></p>
+<hr />
+<h3 id="constequals"><code>Const</code> equals</h3>
+<p>▸ <strong>equals</strong><<strong>T</strong>>(<code>predicate</code>: function, <code>a</code>: <a href="_nel_.md#nel">Nel</a>‹T›, <code>b</code>: <a href="_nel_.md#nel">Nel</a>‹T›): <em>boolean</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/nel.ts#L46">nel.ts:46</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>T</strong></p>
+<p><strong>Parameters:</strong></p>
+<p>▪ <strong>predicate</strong>: <em>function</em></p>
+<p>▸ (<code>a</code>: T, <code>b</code>: T): <em>boolean</em></p>
+<p><strong>Parameters:</strong></p>
+<p>Name | Type |
+------ | ------ |
+<code>a</code> | T |
+<code>b</code> | T |</p>
+<p>▪ <strong>a</strong>: <em><a href="_nel_.md#nel">Nel</a>‹T›</em></p>
+<p>▪ <strong>b</strong>: <em><a href="_nel_.md#nel">Nel</a>‹T›</em></p>
+<p><strong>Returns:</strong> <em>boolean</em></p>
+<hr />
+<h3 id="constfilter"><code>Const</code> filter</h3>
+<p>▸ <strong>filter</strong><<strong>T</strong>>(<code>predicate</code>: function, <code>nel</code>: <a href="_nel_.md#nel">Nel</a>‹T›): <em>T[]</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/nel.ts#L49">nel.ts:49</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>T</strong></p>
+<p><strong>Parameters:</strong></p>
+<p>▪ <strong>predicate</strong>: <em>function</em></p>
+<p>▸ (<code>v</code>: T): <em>boolean</em></p>
+<p><strong>Parameters:</strong></p>
+<p>Name | Type |
+------ | ------ |
+<code>v</code> | T |</p>
+<p>▪ <strong>nel</strong>: <em><a href="_nel_.md#nel">Nel</a>‹T›</em></p>
+<p><strong>Returns:</strong> <em>T[]</em></p>
+<hr />
+<h3 id="constflatmap"><code>Const</code> flatMap</h3>
+<p>▸ <strong>flatMap</strong><<strong>A</strong>, <strong>B</strong>>(<code>f</code>: function, <code>nel</code>: <a href="_nel_.md#nel">Nel</a>‹A›): <em><a href="_nel_.md#nel">Nel</a>‹B›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/nel.ts#L40">nel.ts:40</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>A</strong></p>
+<p>▪ <strong>B</strong></p>
+<p><strong>Parameters:</strong></p>
+<p>▪ <strong>f</strong>: <em>function</em></p>
+<p>▸ (<code>a</code>: A): <em><a href="_nel_.md#nel">Nel</a>‹B›</em></p>
+<p><strong>Parameters:</strong></p>
+<p>Name | Type |
+------ | ------ |
+<code>a</code> | A |</p>
+<p>▪ <strong>nel</strong>: <em><a href="_nel_.md#nel">Nel</a>‹A›</em></p>
+<p><strong>Returns:</strong> <em><a href="_nel_.md#nel">Nel</a>‹B›</em></p>
+<hr />
+<h3 id="constflatten"><code>Const</code> flatten</h3>
+<p>▸ <strong>flatten</strong><<strong>T</strong>>(<code>nel</code>: <a href="_nel_.md#nel">Nel</a>‹<a href="_nel_.md#nel">Nel</a>‹T››): <em><a href="_nel_.md#nel">Nel</a>‹T›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/nel.ts#L52">nel.ts:52</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>T</strong></p>
+<p><strong>Parameters:</strong></p>
+<p>Name | Type |
+------ | ------ |
+<code>nel</code> | <a href="_nel_.md#nel">Nel</a>‹<a href="_nel_.md#nel">Nel</a>‹T›› |</p>
+<p><strong>Returns:</strong> <em><a href="_nel_.md#nel">Nel</a>‹T›</em></p>
+<hr />
+<h3 id="constfoldleft"><code>Const</code> foldLeft</h3>
+<p>▸ <strong>foldLeft</strong><<strong>T</strong>, <strong>B</strong>>(<code>f</code>: function, <code>nel</code>: <a href="_nel_.md#nel">Nel</a>‹T›, <code>b</code>: B): <em>B</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/nel.ts#L55">nel.ts:55</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>T</strong></p>
+<p>▪ <strong>B</strong></p>
+<p><strong>Parameters:</strong></p>
+<p>▪ <strong>f</strong>: <em>function</em></p>
+<p>▸ (<code>acc</code>: B, <code>curr</code>: T): <em>B</em></p>
+<p><strong>Parameters:</strong></p>
+<p>Name | Type |
+------ | ------ |
+<code>acc</code> | B |
+<code>curr</code> | T |</p>
+<p>▪ <strong>nel</strong>: <em><a href="_nel_.md#nel">Nel</a>‹T›</em></p>
+<p>▪ <strong>b</strong>: <em>B</em></p>
+<p><strong>Returns:</strong> <em>B</em></p>
+<hr />
+<h3 id="consthead"><code>Const</code> head</h3>
+<p>▸ <strong>head</strong><<strong>A</strong>>(<code>nel</code>: <a href="_nel_.md#nel">Nel</a>‹A›): <em>A</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/nel.ts#L43">nel.ts:43</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>A</strong></p>
+<p><strong>Parameters:</strong></p>
+<p>Name | Type |
+------ | ------ |
+<code>nel</code> | <a href="_nel_.md#nel">Nel</a>‹A› |</p>
+<p><strong>Returns:</strong> <em>A</em></p>
+<hr />
+<h3 id="constisvalid"><code>Const</code> isValid</h3>
+<p>▸ <strong>isValid</strong><<strong>T</strong>>(<code>arr</code>: T[]): <em>boolean</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/nel.ts#L29">nel.ts:29</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>T</strong></p>
+<p><strong>Parameters:</strong></p>
+<p>Name | Type |
+------ | ------ |
+<code>arr</code> | T[] |</p>
+<p><strong>Returns:</strong> <em>boolean</em></p>
+<hr />
+<h3 id="constlength"><code>Const</code> length</h3>
+<p>▸ <strong>length</strong><<strong>T</strong>>(<code>nel</code>: <a href="_nel_.md#nel">Nel</a>‹T›): <em>number</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/nel.ts#L35">nel.ts:35</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>T</strong></p>
+<p><strong>Parameters:</strong></p>
+<p>Name | Type |
+------ | ------ |
+<code>nel</code> | <a href="_nel_.md#nel">Nel</a>‹T› |</p>
+<p><strong>Returns:</strong> <em>number</em></p>
+<hr />
+<h3 id="constmap"><code>Const</code> map</h3>
+<p>▸ <strong>map</strong><<strong>A</strong>, <strong>B</strong>>(<code>f</code>: function, <code>nel</code>: <a href="_nel_.md#nel">Nel</a>‹A›): <em><a href="_nel_.md#nel">Nel</a>‹B›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/nel.ts#L37">nel.ts:37</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>A</strong></p>
+<p>▪ <strong>B</strong></p>
+<p><strong>Parameters:</strong></p>
+<p>▪ <strong>f</strong>: <em>function</em></p>
+<p>▸ (<code>a</code>: A): <em>B</em></p>
+<p><strong>Parameters:</strong></p>
+<p>Name | Type |
+------ | ------ |
+<code>a</code> | A |</p>
+<p>▪ <strong>nel</strong>: <em><a href="_nel_.md#nel">Nel</a>‹A›</em></p>
+<p><strong>Returns:</strong> <em><a href="_nel_.md#nel">Nel</a>‹B›</em></p>
+<hr />
+<h3 id="constofvalue"><code>Const</code> ofValue</h3>
+<p>▸ <strong>ofValue</strong><<strong>T</strong>>(<code>value</code>: T): <em><a href="_nel_.md#nel">Nel</a>‹T›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/nel.ts#L33">nel.ts:33</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>T</strong></p>
+<p><strong>Parameters:</strong></p>
+<p>Name | Type |
+------ | ------ |
+<code>value</code> | T |</p>
+<p><strong>Returns:</strong> <em><a href="_nel_.md#nel">Nel</a>‹T›</em></p>
+<hr />
+<h3 id="constsort"><code>Const</code> sort</h3>
+<p>▸ <strong>sort</strong><<strong>A</strong>>(<code>compare</code>: function, <code>arr</code>: <a href="_nel_.md#nel">Nel</a>‹A›): <em><a href="_nel_.md#nel">Nel</a>‹A›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/nel.ts#L70">nel.ts:70</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>A</strong></p>
+<p><strong>Parameters:</strong></p>
+<p>▪ <strong>compare</strong>: <em>function</em></p>
+<p>▸ (<code>a</code>: A, <code>b</code>: A): <em><a href="../enums/_ord_.ordering.md">Ordering</a></em></p>
+<p><strong>Parameters:</strong></p>
+<p>Name | Type |
+------ | ------ |
+<code>a</code> | A |
+<code>b</code> | A |</p>
+<p>▪ <strong>arr</strong>: <em><a href="_nel_.md#nel">Nel</a>‹A›</em></p>
+<p><strong>Returns:</strong> <em><a href="_nel_.md#nel">Nel</a>‹A›</em></p>
+<hr />
+<h3 id="consttail"><code>Const</code> tail</h3>
+<p>▸ <strong>tail</strong><<strong>A</strong>>(<code>nel</code>: <a href="_nel_.md#nel">Nel</a>‹A›): <em>A[]</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/nel.ts#L44">nel.ts:44</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>A</strong></p>
+<p><strong>Parameters:</strong></p>
+<p>Name | Type |
+------ | ------ |
+<code>nel</code> | <a href="_nel_.md#nel">Nel</a>‹A› |</p>
+<p><strong>Returns:</strong> <em>A[]</em></p>

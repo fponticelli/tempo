@@ -1,0 +1,20 @@
+<p><a href="../index.md">tempo-std - v0.2.0</a> › <a href="../globals.md">Globals</a> › <a href="_types_differentiate_.md">"types/differentiate"</a></p>
+<h2 id="index">Index</h2>
+<h3 id="typealiases">Type aliases</h3>
+<ul>
+<li><a href="_types_differentiate_.md#differentiate">Differentiate</a></li>
+<li><a href="_types_differentiate_.md#differentiateat">DifferentiateAt</a></li>
+<li><a href="_types_differentiate_.md#differentiatebykind">DifferentiateByKind</a></li>
+</ul>
+<h2 id="typealiases-1">Type aliases</h2>
+<h3 id="differentiate">Differentiate</h3>
+<p>Ƭ <strong>Differentiate</strong>: <em>State extends ObjectWithField<Field, ExpectedType> ? State : never</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/types/differentiate.ts#L18">types/differentiate.ts:18</a></em></p>
+<hr />
+<h3 id="differentiateat">DifferentiateAt</h3>
+<p>Ƭ <strong>DifferentiateAt</strong>: <em>Path extends [] ? State : Path extends [infer T] ? T extends keyof State ? ExpectedType extends State[T] ? Differentiate<T, State, ExpectedType> : never : never : Path extends [infer K, any] ? K extends keyof State ? Tail<Path> extends infer Rest ? Rest extends IndexType[] ? State & object : never : never : never : never</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/types/differentiate.ts#L29">types/differentiate.ts:29</a></em></p>
+<hr />
+<h3 id="differentiatebykind">DifferentiateByKind</h3>
+<p>Ƭ <strong>DifferentiateByKind</strong>: <em><a href="_types_differentiate_.md#differentiate">Differentiate</a>‹"kind", State, K›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/types/differentiate.ts#L24">types/differentiate.ts:24</a></em></p>

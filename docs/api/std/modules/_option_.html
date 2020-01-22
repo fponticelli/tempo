@@ -1,0 +1,725 @@
+<p><a href="../index.md">tempo-std - v0.2.0</a> › <a href="../globals.md">Globals</a> › <a href="_option_.md">"option"</a></p>
+<h2 id="index">Index</h2>
+<h3 id="typealiases">Type aliases</h3>
+<ul>
+<li><a href="_option_.md#none">None</a></li>
+<li><a href="_option_.md#option">Option</a></li>
+<li><a href="_option_.md#some">Some</a></li>
+<li><a href="_option_.md#t">T</a></li>
+</ul>
+<h3 id="variables">Variables</h3>
+<ul>
+<li><a href="_option_.md#const-none">none</a></li>
+</ul>
+<h3 id="functions">Functions</h3>
+<ul>
+<li><a href="_option_.md#const-all">all</a></li>
+<li><a href="_option_.md#const-any">any</a></li>
+<li><a href="_option_.md#const-ap">ap</a></li>
+<li><a href="_option_.md#apn">apN</a></li>
+<li><a href="_option_.md#const-cata">cata</a></li>
+<li><a href="_option_.md#const-catalazy">cataLazy</a></li>
+<li><a href="_option_.md#const-combine">combine</a></li>
+<li><a href="_option_.md#const-each">each</a></li>
+<li><a href="_option_.md#const-equals">equals</a></li>
+<li><a href="_option_.md#const-filter">filter</a></li>
+<li><a href="_option_.md#const-firstsome">firstSome</a></li>
+<li><a href="_option_.md#const-flatmap">flatMap</a></li>
+<li><a href="_option_.md#flatmapn">flatMapN</a></li>
+<li><a href="_option_.md#const-flatten">flatten</a></li>
+<li><a href="_option_.md#const-foldleft">foldLeft</a></li>
+<li><a href="_option_.md#const-getorelse">getOrElse</a></li>
+<li><a href="_option_.md#const-getorelselazy">getOrElseLazy</a></li>
+<li><a href="_option_.md#const-getorthrow">getOrThrow</a></li>
+<li><a href="_option_.md#const-isnone">isNone</a></li>
+<li><a href="_option_.md#const-issome">isSome</a></li>
+<li><a href="_option_.md#const-map">map</a></li>
+<li><a href="_option_.md#mapn">mapN</a></li>
+<li><a href="_option_.md#const-ofvalue">ofValue</a></li>
+<li><a href="_option_.md#const-recover">recover</a></li>
+<li><a href="_option_.md#const-recoverlazy">recoverLazy</a></li>
+<li><a href="_option_.md#const-some">some</a></li>
+<li><a href="_option_.md#const-spread">spread</a></li>
+<li><a href="_option_.md#const-toarray">toArray</a></li>
+<li><a href="_option_.md#const-toboolean">toBoolean</a></li>
+<li><a href="_option_.md#const-tomaybe">toMaybe</a></li>
+<li><a href="_option_.md#const-toresult">toResult</a></li>
+<li><a href="_option_.md#const-toresultlazy">toResultLazy</a></li>
+</ul>
+<h2 id="typealiases-1">Type aliases</h2>
+<h3 id="none">None</h3>
+<p>Ƭ <strong>None</strong>: <em>object</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L20">option.ts:20</a></em></p>
+<h4 id="typedeclaration">Type declaration:</h4>
+<ul>
+<li><strong>kind</strong>: <em>"none"</em></li>
+</ul>
+<hr />
+<h3 id="option">Option</h3>
+<p>Ƭ <strong>Option</strong>: <em><a href="_option_.md#some">Some</a>‹T› | <a href="_option_.md#none">None</a></em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L22">option.ts:22</a></em></p>
+<hr />
+<h3 id="some">Some</h3>
+<p>Ƭ <strong>Some</strong>: <em>object</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L19">option.ts:19</a></em></p>
+<h4 id="typedeclaration-1">Type declaration:</h4>
+<ul>
+<li><p><strong>kind</strong>: <em>"some"</em></p></li>
+<li><p><strong>value</strong>: <em>T</em></p></li>
+</ul>
+<hr />
+<h3 id="t">T</h3>
+<p>Ƭ <strong>T</strong>: <em><a href="_option_.md#option">Option</a>‹V›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L263">option.ts:263</a></em></p>
+<h2 id="variables-1">Variables</h2>
+<h3 id="constnone"><code>Const</code> none</h3>
+<p>• <strong>none</strong>: <em>object | object</em> = { kind: 'none' } as Option<never></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L27">option.ts:27</a></em></p>
+<h2 id="functions-1">Functions</h2>
+<h3 id="constall"><code>Const</code> all</h3>
+<p>▸ <strong>all</strong><<strong>T</strong>>(<code>f</code>: function, <code>option</code>: <a href="_option_.md#option">Option</a>‹T›): <em>boolean</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L214">option.ts:214</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>T</strong></p>
+<p><strong>Parameters:</strong></p>
+<p>▪ <strong>f</strong>: <em>function</em></p>
+<p>▸ (<code>v</code>: T): <em>boolean</em></p>
+<p><strong>Parameters:</strong></p>
+<p>Name | Type |
+------ | ------ |
+<code>v</code> | T |</p>
+<p>▪ <strong>option</strong>: <em><a href="_option_.md#option">Option</a>‹T›</em></p>
+<p><strong>Returns:</strong> <em>boolean</em></p>
+<hr />
+<h3 id="constany"><code>Const</code> any</h3>
+<p>▸ <strong>any</strong><<strong>T</strong>>(<code>f</code>: function, <code>option</code>: <a href="_option_.md#option">Option</a>‹T›): <em>boolean</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L221">option.ts:221</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>T</strong></p>
+<p><strong>Parameters:</strong></p>
+<p>▪ <strong>f</strong>: <em>function</em></p>
+<p>▸ (<code>v</code>: T): <em>boolean</em></p>
+<p><strong>Parameters:</strong></p>
+<p>Name | Type |
+------ | ------ |
+<code>v</code> | T |</p>
+<p>▪ <strong>option</strong>: <em><a href="_option_.md#option">Option</a>‹T›</em></p>
+<p><strong>Returns:</strong> <em>boolean</em></p>
+<hr />
+<h3 id="constap"><code>Const</code> ap</h3>
+<p>▸ <strong>ap</strong><<strong>A</strong>, <strong>B</strong>>(<code>optf</code>: <a href="_option_.md#option">Option</a>‹function›, <code>opt</code>: <a href="_option_.md#option">Option</a>‹A›): <em><a href="_option_.md#option">Option</a>‹B›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L35">option.ts:35</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>A</strong></p>
+<p>▪ <strong>B</strong></p>
+<p><strong>Parameters:</strong></p>
+<p>Name | Type |
+------ | ------ |
+<code>optf</code> | <a href="_option_.md#option">Option</a>‹function› |
+<code>opt</code> | <a href="_option_.md#option">Option</a>‹A› |</p>
+<p><strong>Returns:</strong> <em><a href="_option_.md#option">Option</a>‹B›</em></p>
+<hr />
+<h3 id="apn">apN</h3>
+<p>▸ <strong>apN</strong><<strong>A</strong>, <strong>B</strong>, <strong>C</strong>>(<code>f</code>: <a href="_option_.md#option">Option</a>‹<a href="_types_functions_.md#fun2">Fun2</a>‹A, B, C››, <code>a</code>: <a href="_option_.md#option">Option</a>‹A›, <code>b</code>: <a href="_option_.md#option">Option</a>‹B›): <em><a href="_option_.md#option">Option</a>‹C›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L38">option.ts:38</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>A</strong></p>
+<p>▪ <strong>B</strong></p>
+<p>▪ <strong>C</strong></p>
+<p><strong>Parameters:</strong></p>
+<p>Name | Type |
+------ | ------ |
+<code>f</code> | <a href="_option_.md#option">Option</a>‹<a href="_types_functions_.md#fun2">Fun2</a>‹A, B, C›› |
+<code>a</code> | <a href="_option_.md#option">Option</a>‹A› |
+<code>b</code> | <a href="_option_.md#option">Option</a>‹B› |</p>
+<p><strong>Returns:</strong> <em><a href="_option_.md#option">Option</a>‹C›</em></p>
+<p>▸ <strong>apN</strong><<strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>D</strong>>(<code>f</code>: <a href="_option_.md#option">Option</a>‹<a href="_types_functions_.md#fun3">Fun3</a>‹A, B, C, D››, <code>a</code>: <a href="_option_.md#option">Option</a>‹A›, <code>b</code>: <a href="_option_.md#option">Option</a>‹B›, <code>c</code>: <a href="_option_.md#option">Option</a>‹C›): <em><a href="_option_.md#option">Option</a>‹D›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L39">option.ts:39</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>A</strong></p>
+<p>▪ <strong>B</strong></p>
+<p>▪ <strong>C</strong></p>
+<p>▪ <strong>D</strong></p>
+<p><strong>Parameters:</strong></p>
+<p>Name | Type |
+------ | ------ |
+<code>f</code> | <a href="_option_.md#option">Option</a>‹<a href="_types_functions_.md#fun3">Fun3</a>‹A, B, C, D›› |
+<code>a</code> | <a href="_option_.md#option">Option</a>‹A› |
+<code>b</code> | <a href="_option_.md#option">Option</a>‹B› |
+<code>c</code> | <a href="_option_.md#option">Option</a>‹C› |</p>
+<p><strong>Returns:</strong> <em><a href="_option_.md#option">Option</a>‹D›</em></p>
+<p>▸ <strong>apN</strong><<strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>D</strong>, <strong>E</strong>>(<code>f</code>: <a href="_option_.md#option">Option</a>‹<a href="_types_functions_.md#fun4">Fun4</a>‹A, B, C, D, E››, <code>a</code>: <a href="_option_.md#option">Option</a>‹A›, <code>b</code>: <a href="_option_.md#option">Option</a>‹B›, <code>c</code>: <a href="_option_.md#option">Option</a>‹C›, <code>d</code>: <a href="_option_.md#option">Option</a>‹D›): <em><a href="_option_.md#option">Option</a>‹E›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L40">option.ts:40</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>A</strong></p>
+<p>▪ <strong>B</strong></p>
+<p>▪ <strong>C</strong></p>
+<p>▪ <strong>D</strong></p>
+<p>▪ <strong>E</strong></p>
+<p><strong>Parameters:</strong></p>
+<p>Name | Type |
+------ | ------ |
+<code>f</code> | <a href="_option_.md#option">Option</a>‹<a href="_types_functions_.md#fun4">Fun4</a>‹A, B, C, D, E›› |
+<code>a</code> | <a href="_option_.md#option">Option</a>‹A› |
+<code>b</code> | <a href="_option_.md#option">Option</a>‹B› |
+<code>c</code> | <a href="_option_.md#option">Option</a>‹C› |
+<code>d</code> | <a href="_option_.md#option">Option</a>‹D› |</p>
+<p><strong>Returns:</strong> <em><a href="_option_.md#option">Option</a>‹E›</em></p>
+<p>▸ <strong>apN</strong><<strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>D</strong>, <strong>E</strong>, <strong>F</strong>>(<code>f</code>: <a href="_option_.md#option">Option</a>‹<a href="_types_functions_.md#fun5">Fun5</a>‹A, B, C, D, E, F››, <code>a</code>: <a href="_option_.md#option">Option</a>‹A›, <code>b</code>: <a href="_option_.md#option">Option</a>‹B›, <code>c</code>: <a href="_option_.md#option">Option</a>‹C›, <code>d</code>: <a href="_option_.md#option">Option</a>‹D›, <code>e</code>: <a href="_option_.md#option">Option</a>‹E›): <em><a href="_option_.md#option">Option</a>‹F›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L43">option.ts:43</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>A</strong></p>
+<p>▪ <strong>B</strong></p>
+<p>▪ <strong>C</strong></p>
+<p>▪ <strong>D</strong></p>
+<p>▪ <strong>E</strong></p>
+<p>▪ <strong>F</strong></p>
+<p><strong>Parameters:</strong></p>
+<p>Name | Type |
+------ | ------ |
+<code>f</code> | <a href="_option_.md#option">Option</a>‹<a href="_types_functions_.md#fun5">Fun5</a>‹A, B, C, D, E, F›› |
+<code>a</code> | <a href="_option_.md#option">Option</a>‹A› |
+<code>b</code> | <a href="_option_.md#option">Option</a>‹B› |
+<code>c</code> | <a href="_option_.md#option">Option</a>‹C› |
+<code>d</code> | <a href="_option_.md#option">Option</a>‹D› |
+<code>e</code> | <a href="_option_.md#option">Option</a>‹E› |</p>
+<p><strong>Returns:</strong> <em><a href="_option_.md#option">Option</a>‹F›</em></p>
+<p>▸ <strong>apN</strong><<strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>D</strong>, <strong>E</strong>, <strong>F</strong>, <strong>G</strong>>(<code>f</code>: <a href="_option_.md#option">Option</a>‹<a href="_types_functions_.md#fun6">Fun6</a>‹A, B, C, D, E, F, G››, <code>a</code>: <a href="_option_.md#option">Option</a>‹A›, <code>b</code>: <a href="_option_.md#option">Option</a>‹B›, <code>c</code>: <a href="_option_.md#option">Option</a>‹C›, <code>d</code>: <a href="_option_.md#option">Option</a>‹D›, <code>e</code>: <a href="_option_.md#option">Option</a>‹E›, <code>g</code>: <a href="_option_.md#option">Option</a>‹F›): <em><a href="_option_.md#option">Option</a>‹G›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L46">option.ts:46</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>A</strong></p>
+<p>▪ <strong>B</strong></p>
+<p>▪ <strong>C</strong></p>
+<p>▪ <strong>D</strong></p>
+<p>▪ <strong>E</strong></p>
+<p>▪ <strong>F</strong></p>
+<p>▪ <strong>G</strong></p>
+<p><strong>Parameters:</strong></p>
+<p>Name | Type |
+------ | ------ |
+<code>f</code> | <a href="_option_.md#option">Option</a>‹<a href="_types_functions_.md#fun6">Fun6</a>‹A, B, C, D, E, F, G›› |
+<code>a</code> | <a href="_option_.md#option">Option</a>‹A› |
+<code>b</code> | <a href="_option_.md#option">Option</a>‹B› |
+<code>c</code> | <a href="_option_.md#option">Option</a>‹C› |
+<code>d</code> | <a href="_option_.md#option">Option</a>‹D› |
+<code>e</code> | <a href="_option_.md#option">Option</a>‹E› |
+<code>g</code> | <a href="_option_.md#option">Option</a>‹F› |</p>
+<p><strong>Returns:</strong> <em><a href="_option_.md#option">Option</a>‹G›</em></p>
+<hr />
+<h3 id="constcata"><code>Const</code> cata</h3>
+<p>▸ <strong>cata</strong><<strong>A</strong>, <strong>B</strong>>(<code>f</code>: function, <code>option</code>: <a href="_option_.md#option">Option</a>‹A›, <code>ifNone</code>: B): <em>B</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L193">option.ts:193</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>A</strong></p>
+<p>▪ <strong>B</strong></p>
+<p><strong>Parameters:</strong></p>
+<p>▪ <strong>f</strong>: <em>function</em></p>
+<p>▸ (<code>a</code>: A): <em>B</em></p>
+<p><strong>Parameters:</strong></p>
+<p>Name | Type |
+------ | ------ |
+<code>a</code> | A |</p>
+<p>▪ <strong>option</strong>: <em><a href="_option_.md#option">Option</a>‹A›</em></p>
+<p>▪ <strong>ifNone</strong>: <em>B</em></p>
+<p><strong>Returns:</strong> <em>B</em></p>
+<hr />
+<h3 id="constcatalazy"><code>Const</code> cataLazy</h3>
+<p>▸ <strong>cataLazy</strong><<strong>A</strong>, <strong>B</strong>>(<code>f</code>: function, <code>option</code>: <a href="_option_.md#option">Option</a>‹A›, <code>ifNone</code>: function): <em>B</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L200">option.ts:200</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>A</strong></p>
+<p>▪ <strong>B</strong></p>
+<p><strong>Parameters:</strong></p>
+<p>▪ <strong>f</strong>: <em>function</em></p>
+<p>▸ (<code>a</code>: A): <em>B</em></p>
+<p><strong>Parameters:</strong></p>
+<p>Name | Type |
+------ | ------ |
+<code>a</code> | A |</p>
+<p>▪ <strong>option</strong>: <em><a href="_option_.md#option">Option</a>‹A›</em></p>
+<p>▪ <strong>ifNone</strong>: <em>function</em></p>
+<p>▸ (): <em>B</em></p>
+<p><strong>Returns:</strong> <em>B</em></p>
+<hr />
+<h3 id="constcombine"><code>Const</code> combine</h3>
+<p>▸ <strong>combine</strong><<strong>A</strong>, <strong>B</strong>>(<code>a</code>: <a href="_option_.md#option">Option</a>‹A›, <code>b</code>: <a href="_option_.md#option">Option</a>‹B›): <em><a href="_option_.md#option">Option</a>‹[A, B]›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L257">option.ts:257</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>A</strong></p>
+<p>▪ <strong>B</strong></p>
+<p><strong>Parameters:</strong></p>
+<p>Name | Type |
+------ | ------ |
+<code>a</code> | <a href="_option_.md#option">Option</a>‹A› |
+<code>b</code> | <a href="_option_.md#option">Option</a>‹B› |</p>
+<p><strong>Returns:</strong> <em><a href="_option_.md#option">Option</a>‹[A, B]›</em></p>
+<hr />
+<h3 id="consteach"><code>Const</code> each</h3>
+<p>▸ <strong>each</strong><<strong>T</strong>>(<code>f</code>: function, <code>option</code>: <a href="_option_.md#option">Option</a>‹T›): <em>void</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L228">option.ts:228</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>T</strong></p>
+<p><strong>Parameters:</strong></p>
+<p>▪ <strong>f</strong>: <em>function</em></p>
+<p>▸ (<code>v</code>: T): <em>void</em></p>
+<p><strong>Parameters:</strong></p>
+<p>Name | Type |
+------ | ------ |
+<code>v</code> | T |</p>
+<p>▪ <strong>option</strong>: <em><a href="_option_.md#option">Option</a>‹T›</em></p>
+<p><strong>Returns:</strong> <em>void</em></p>
+<hr />
+<h3 id="constequals"><code>Const</code> equals</h3>
+<p>▸ <strong>equals</strong><<strong>T</strong>>(<code>predicate</code>: function, <code>a</code>: <a href="_option_.md#option">Option</a>‹T›, <code>b</code>: <a href="_option_.md#option">Option</a>‹T›): <em>boolean</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L106">option.ts:106</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>T</strong></p>
+<p><strong>Parameters:</strong></p>
+<p>▪ <strong>predicate</strong>: <em>function</em></p>
+<p>▸ (<code>a</code>: T, <code>b</code>: T): <em>boolean</em></p>
+<p><strong>Parameters:</strong></p>
+<p>Name | Type |
+------ | ------ |
+<code>a</code> | T |
+<code>b</code> | T |</p>
+<p>▪ <strong>a</strong>: <em><a href="_option_.md#option">Option</a>‹T›</em></p>
+<p>▪ <strong>b</strong>: <em><a href="_option_.md#option">Option</a>‹T›</em></p>
+<p><strong>Returns:</strong> <em>boolean</em></p>
+<hr />
+<h3 id="constfilter"><code>Const</code> filter</h3>
+<p>▸ <strong>filter</strong><<strong>T</strong>>(<code>predicate</code>: function, <code>option</code>: <a href="_option_.md#option">Option</a>‹T›): <em><a href="_option_.md#option">Option</a>‹T›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L118">option.ts:118</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>T</strong></p>
+<p><strong>Parameters:</strong></p>
+<p>▪ <strong>predicate</strong>: <em>function</em></p>
+<p>▸ (<code>v</code>: T): <em>boolean</em></p>
+<p><strong>Parameters:</strong></p>
+<p>Name | Type |
+------ | ------ |
+<code>v</code> | T |</p>
+<p>▪ <strong>option</strong>: <em><a href="_option_.md#option">Option</a>‹T›</em></p>
+<p><strong>Returns:</strong> <em><a href="_option_.md#option">Option</a>‹T›</em></p>
+<hr />
+<h3 id="constfirstsome"><code>Const</code> firstSome</h3>
+<p>▸ <strong>firstSome</strong><<strong>A</strong>>(…<code>args</code>: <a href="_option_.md#option">Option</a>‹A›[]): <em><a href="_option_.md#option">Option</a>‹A›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L235">option.ts:235</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>A</strong></p>
+<p><strong>Parameters:</strong></p>
+<p>Name | Type |
+------ | ------ |
+<code>...args</code> | <a href="_option_.md#option">Option</a>‹A›[] |</p>
+<p><strong>Returns:</strong> <em><a href="_option_.md#option">Option</a>‹A›</em></p>
+<hr />
+<h3 id="constflatmap"><code>Const</code> flatMap</h3>
+<p>▸ <strong>flatMap</strong><<strong>A</strong>, <strong>B</strong>>(<code>f</code>: function, <code>opt</code>: <a href="_option_.md#option">Option</a>‹A›): <em><a href="_option_.md#option">Option</a>‹B›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L83">option.ts:83</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>A</strong></p>
+<p>▪ <strong>B</strong></p>
+<p><strong>Parameters:</strong></p>
+<p>▪ <strong>f</strong>: <em>function</em></p>
+<p>▸ (<code>a</code>: A): <em><a href="_option_.md#option">Option</a>‹B›</em></p>
+<p><strong>Parameters:</strong></p>
+<p>Name | Type |
+------ | ------ |
+<code>a</code> | A |</p>
+<p>▪ <strong>opt</strong>: <em><a href="_option_.md#option">Option</a>‹A›</em></p>
+<p><strong>Returns:</strong> <em><a href="_option_.md#option">Option</a>‹B›</em></p>
+<hr />
+<h3 id="flatmapn">flatMapN</h3>
+<p>▸ <strong>flatMapN</strong><<strong>A</strong>, <strong>B</strong>, <strong>C</strong>>(<code>f</code>: <a href="_types_functions_.md#fun2">Fun2</a>‹A, B, <a href="_option_.md#option">Option</a>‹C››, <code>a</code>: <a href="_option_.md#option">Option</a>‹A›, <code>b</code>: <a href="_option_.md#option">Option</a>‹B›): <em><a href="_option_.md#option">Option</a>‹C›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L90">option.ts:90</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>A</strong></p>
+<p>▪ <strong>B</strong></p>
+<p>▪ <strong>C</strong></p>
+<p><strong>Parameters:</strong></p>
+<p>Name | Type |
+------ | ------ |
+<code>f</code> | <a href="_types_functions_.md#fun2">Fun2</a>‹A, B, <a href="_option_.md#option">Option</a>‹C›› |
+<code>a</code> | <a href="_option_.md#option">Option</a>‹A› |
+<code>b</code> | <a href="_option_.md#option">Option</a>‹B› |</p>
+<p><strong>Returns:</strong> <em><a href="_option_.md#option">Option</a>‹C›</em></p>
+<p>▸ <strong>flatMapN</strong><<strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>D</strong>>(<code>f</code>: <a href="_types_functions_.md#fun3">Fun3</a>‹A, B, C, <a href="_option_.md#option">Option</a>‹D››, <code>a</code>: <a href="_option_.md#option">Option</a>‹A›, <code>b</code>: <a href="_option_.md#option">Option</a>‹B›, <code>c</code>: <a href="_option_.md#option">Option</a>‹C›): <em><a href="_option_.md#option">Option</a>‹D›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L91">option.ts:91</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>A</strong></p>
+<p>▪ <strong>B</strong></p>
+<p>▪ <strong>C</strong></p>
+<p>▪ <strong>D</strong></p>
+<p><strong>Parameters:</strong></p>
+<p>Name | Type |
+------ | ------ |
+<code>f</code> | <a href="_types_functions_.md#fun3">Fun3</a>‹A, B, C, <a href="_option_.md#option">Option</a>‹D›› |
+<code>a</code> | <a href="_option_.md#option">Option</a>‹A› |
+<code>b</code> | <a href="_option_.md#option">Option</a>‹B› |
+<code>c</code> | <a href="_option_.md#option">Option</a>‹C› |</p>
+<p><strong>Returns:</strong> <em><a href="_option_.md#option">Option</a>‹D›</em></p>
+<p>▸ <strong>flatMapN</strong><<strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>D</strong>, <strong>E</strong>>(<code>f</code>: <a href="_types_functions_.md#fun4">Fun4</a>‹A, B, C, D, <a href="_option_.md#option">Option</a>‹E››, <code>a</code>: <a href="_option_.md#option">Option</a>‹A›, <code>b</code>: <a href="_option_.md#option">Option</a>‹B›, <code>c</code>: <a href="_option_.md#option">Option</a>‹C›, <code>d</code>: <a href="_option_.md#option">Option</a>‹D›): <em><a href="_option_.md#option">Option</a>‹E›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L92">option.ts:92</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>A</strong></p>
+<p>▪ <strong>B</strong></p>
+<p>▪ <strong>C</strong></p>
+<p>▪ <strong>D</strong></p>
+<p>▪ <strong>E</strong></p>
+<p><strong>Parameters:</strong></p>
+<p>Name | Type |
+------ | ------ |
+<code>f</code> | <a href="_types_functions_.md#fun4">Fun4</a>‹A, B, C, D, <a href="_option_.md#option">Option</a>‹E›› |
+<code>a</code> | <a href="_option_.md#option">Option</a>‹A› |
+<code>b</code> | <a href="_option_.md#option">Option</a>‹B› |
+<code>c</code> | <a href="_option_.md#option">Option</a>‹C› |
+<code>d</code> | <a href="_option_.md#option">Option</a>‹D› |</p>
+<p><strong>Returns:</strong> <em><a href="_option_.md#option">Option</a>‹E›</em></p>
+<p>▸ <strong>flatMapN</strong><<strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>D</strong>, <strong>E</strong>, <strong>F</strong>>(<code>f</code>: <a href="_types_functions_.md#fun5">Fun5</a>‹A, B, C, D, E, <a href="_option_.md#option">Option</a>‹F››, <code>a</code>: <a href="_option_.md#option">Option</a>‹A›, <code>b</code>: <a href="_option_.md#option">Option</a>‹B›, <code>c</code>: <a href="_option_.md#option">Option</a>‹C›, <code>d</code>: <a href="_option_.md#option">Option</a>‹D›, <code>e</code>: <a href="_option_.md#option">Option</a>‹E›): <em><a href="_option_.md#option">Option</a>‹F›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L93">option.ts:93</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>A</strong></p>
+<p>▪ <strong>B</strong></p>
+<p>▪ <strong>C</strong></p>
+<p>▪ <strong>D</strong></p>
+<p>▪ <strong>E</strong></p>
+<p>▪ <strong>F</strong></p>
+<p><strong>Parameters:</strong></p>
+<p>Name | Type |
+------ | ------ |
+<code>f</code> | <a href="_types_functions_.md#fun5">Fun5</a>‹A, B, C, D, E, <a href="_option_.md#option">Option</a>‹F›› |
+<code>a</code> | <a href="_option_.md#option">Option</a>‹A› |
+<code>b</code> | <a href="_option_.md#option">Option</a>‹B› |
+<code>c</code> | <a href="_option_.md#option">Option</a>‹C› |
+<code>d</code> | <a href="_option_.md#option">Option</a>‹D› |
+<code>e</code> | <a href="_option_.md#option">Option</a>‹E› |</p>
+<p><strong>Returns:</strong> <em><a href="_option_.md#option">Option</a>‹F›</em></p>
+<p>▸ <strong>flatMapN</strong><<strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>D</strong>, <strong>E</strong>, <strong>F</strong>, <strong>G</strong>>(<code>f</code>: <a href="_types_functions_.md#fun6">Fun6</a>‹A, B, C, D, E, F, <a href="_option_.md#option">Option</a>‹G››, <code>a</code>: <a href="_option_.md#option">Option</a>‹A›, <code>b</code>: <a href="_option_.md#option">Option</a>‹B›, <code>c</code>: <a href="_option_.md#option">Option</a>‹C›, <code>d</code>: <a href="_option_.md#option">Option</a>‹D›, <code>e</code>: <a href="_option_.md#option">Option</a>‹E›, <code>g</code>: <a href="_option_.md#option">Option</a>‹F›): <em><a href="_option_.md#option">Option</a>‹G›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L96">option.ts:96</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>A</strong></p>
+<p>▪ <strong>B</strong></p>
+<p>▪ <strong>C</strong></p>
+<p>▪ <strong>D</strong></p>
+<p>▪ <strong>E</strong></p>
+<p>▪ <strong>F</strong></p>
+<p>▪ <strong>G</strong></p>
+<p><strong>Parameters:</strong></p>
+<p>Name | Type |
+------ | ------ |
+<code>f</code> | <a href="_types_functions_.md#fun6">Fun6</a>‹A, B, C, D, E, F, <a href="_option_.md#option">Option</a>‹G›› |
+<code>a</code> | <a href="_option_.md#option">Option</a>‹A› |
+<code>b</code> | <a href="_option_.md#option">Option</a>‹B› |
+<code>c</code> | <a href="_option_.md#option">Option</a>‹C› |
+<code>d</code> | <a href="_option_.md#option">Option</a>‹D› |
+<code>e</code> | <a href="_option_.md#option">Option</a>‹E› |
+<code>g</code> | <a href="_option_.md#option">Option</a>‹F› |</p>
+<p><strong>Returns:</strong> <em><a href="_option_.md#option">Option</a>‹G›</em></p>
+<hr />
+<h3 id="constflatten"><code>Const</code> flatten</h3>
+<p>▸ <strong>flatten</strong><<strong>T</strong>>(<code>option</code>: <a href="_option_.md#option">Option</a>‹<a href="_option_.md#option">Option</a>‹T››): <em><a href="_option_.md#option">Option</a>‹T›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L186">option.ts:186</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>T</strong></p>
+<p><strong>Parameters:</strong></p>
+<p>Name | Type |
+------ | ------ |
+<code>option</code> | <a href="_option_.md#option">Option</a>‹<a href="_option_.md#option">Option</a>‹T›› |</p>
+<p><strong>Returns:</strong> <em><a href="_option_.md#option">Option</a>‹T›</em></p>
+<hr />
+<h3 id="constfoldleft"><code>Const</code> foldLeft</h3>
+<p>▸ <strong>foldLeft</strong><<strong>T</strong>, <strong>B</strong>>(<code>f</code>: function, <code>option</code>: <a href="_option_.md#option">Option</a>‹T›, <code>b</code>: B): <em>B</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L207">option.ts:207</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>T</strong></p>
+<p>▪ <strong>B</strong></p>
+<p><strong>Parameters:</strong></p>
+<p>▪ <strong>f</strong>: <em>function</em></p>
+<p>▸ (<code>acc</code>: B, <code>curr</code>: T): <em>B</em></p>
+<p><strong>Parameters:</strong></p>
+<p>Name | Type |
+------ | ------ |
+<code>acc</code> | B |
+<code>curr</code> | T |</p>
+<p>▪ <strong>option</strong>: <em><a href="_option_.md#option">Option</a>‹T›</em></p>
+<p>▪ <strong>b</strong>: <em>B</em></p>
+<p><strong>Returns:</strong> <em>B</em></p>
+<hr />
+<h3 id="constgetorelse"><code>Const</code> getOrElse</h3>
+<p>▸ <strong>getOrElse</strong><<strong>T</strong>>(<code>option</code>: <a href="_option_.md#option">Option</a>‹T›, <code>alt</code>: T): <em>T</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L144">option.ts:144</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>T</strong></p>
+<p><strong>Parameters:</strong></p>
+<p>Name | Type |
+------ | ------ |
+<code>option</code> | <a href="_option_.md#option">Option</a>‹T› |
+<code>alt</code> | T |</p>
+<p><strong>Returns:</strong> <em>T</em></p>
+<hr />
+<h3 id="constgetorelselazy"><code>Const</code> getOrElseLazy</h3>
+<p>▸ <strong>getOrElseLazy</strong><<strong>T</strong>>(<code>option</code>: <a href="_option_.md#option">Option</a>‹T›, <code>alt</code>: function): <em>T</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L151">option.ts:151</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>T</strong></p>
+<p><strong>Parameters:</strong></p>
+<p>▪ <strong>option</strong>: <em><a href="_option_.md#option">Option</a>‹T›</em></p>
+<p>▪ <strong>alt</strong>: <em>function</em></p>
+<p>▸ (): <em>T</em></p>
+<p><strong>Returns:</strong> <em>T</em></p>
+<hr />
+<h3 id="constgetorthrow"><code>Const</code> getOrThrow</h3>
+<p>▸ <strong>getOrThrow</strong><<strong>T</strong>, <strong>E</strong>>(<code>option</code>: <a href="_option_.md#option">Option</a>‹T›, <code>exception</code>: E): <em><a href="_maybe_.md#maybe">Maybe</a>‹T›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L130">option.ts:130</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>T</strong></p>
+<p>▪ <strong>E</strong></p>
+<p><strong>Parameters:</strong></p>
+<p>Name | Type |
+------ | ------ |
+<code>option</code> | <a href="_option_.md#option">Option</a>‹T› |
+<code>exception</code> | E |</p>
+<p><strong>Returns:</strong> <em><a href="_maybe_.md#maybe">Maybe</a>‹T›</em></p>
+<hr />
+<h3 id="constisnone"><code>Const</code> isNone</h3>
+<p>▸ <strong>isNone</strong><<strong>T</strong>>(<code>option</code>: <a href="_option_.md#option">Option</a>‹T›): <em>option is None</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L115">option.ts:115</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>T</strong></p>
+<p><strong>Parameters:</strong></p>
+<p>Name | Type |
+------ | ------ |
+<code>option</code> | <a href="_option_.md#option">Option</a>‹T› |</p>
+<p><strong>Returns:</strong> <em>option is None</em></p>
+<hr />
+<h3 id="constissome"><code>Const</code> isSome</h3>
+<p>▸ <strong>isSome</strong><<strong>T</strong>>(<code>option</code>: <a href="_option_.md#option">Option</a>‹T›): <em>option is Some<T></em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L116">option.ts:116</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>T</strong></p>
+<p><strong>Parameters:</strong></p>
+<p>Name | Type |
+------ | ------ |
+<code>option</code> | <a href="_option_.md#option">Option</a>‹T› |</p>
+<p><strong>Returns:</strong> <em>option is Some<T></em></p>
+<hr />
+<h3 id="constmap"><code>Const</code> map</h3>
+<p>▸ <strong>map</strong><<strong>A</strong>, <strong>B</strong>>(<code>f</code>: function, <code>opt</code>: <a href="_option_.md#option">Option</a>‹A›): <em><a href="_option_.md#option">Option</a>‹B›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L58">option.ts:58</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>A</strong></p>
+<p>▪ <strong>B</strong></p>
+<p><strong>Parameters:</strong></p>
+<p>▪ <strong>f</strong>: <em>function</em></p>
+<p>▸ (<code>a</code>: A): <em>B</em></p>
+<p><strong>Parameters:</strong></p>
+<p>Name | Type |
+------ | ------ |
+<code>a</code> | A |</p>
+<p>▪ <strong>opt</strong>: <em><a href="_option_.md#option">Option</a>‹A›</em></p>
+<p><strong>Returns:</strong> <em><a href="_option_.md#option">Option</a>‹B›</em></p>
+<hr />
+<h3 id="mapn">mapN</h3>
+<p>▸ <strong>mapN</strong><<strong>A</strong>, <strong>B</strong>, <strong>C</strong>>(<code>f</code>: <a href="_types_functions_.md#fun2">Fun2</a>‹A, B, C›, <code>a</code>: <a href="_option_.md#option">Option</a>‹A›, <code>b</code>: <a href="_option_.md#option">Option</a>‹B›): <em><a href="_option_.md#option">Option</a>‹C›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L65">option.ts:65</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>A</strong></p>
+<p>▪ <strong>B</strong></p>
+<p>▪ <strong>C</strong></p>
+<p><strong>Parameters:</strong></p>
+<p>Name | Type |
+------ | ------ |
+<code>f</code> | <a href="_types_functions_.md#fun2">Fun2</a>‹A, B, C› |
+<code>a</code> | <a href="_option_.md#option">Option</a>‹A› |
+<code>b</code> | <a href="_option_.md#option">Option</a>‹B› |</p>
+<p><strong>Returns:</strong> <em><a href="_option_.md#option">Option</a>‹C›</em></p>
+<p>▸ <strong>mapN</strong><<strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>D</strong>>(<code>f</code>: <a href="_types_functions_.md#fun3">Fun3</a>‹A, B, C, D›, <code>a</code>: <a href="_option_.md#option">Option</a>‹A›, <code>b</code>: <a href="_option_.md#option">Option</a>‹B›, <code>c</code>: <a href="_option_.md#option">Option</a>‹C›): <em><a href="_option_.md#option">Option</a>‹D›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L66">option.ts:66</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>A</strong></p>
+<p>▪ <strong>B</strong></p>
+<p>▪ <strong>C</strong></p>
+<p>▪ <strong>D</strong></p>
+<p><strong>Parameters:</strong></p>
+<p>Name | Type |
+------ | ------ |
+<code>f</code> | <a href="_types_functions_.md#fun3">Fun3</a>‹A, B, C, D› |
+<code>a</code> | <a href="_option_.md#option">Option</a>‹A› |
+<code>b</code> | <a href="_option_.md#option">Option</a>‹B› |
+<code>c</code> | <a href="_option_.md#option">Option</a>‹C› |</p>
+<p><strong>Returns:</strong> <em><a href="_option_.md#option">Option</a>‹D›</em></p>
+<p>▸ <strong>mapN</strong><<strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>D</strong>, <strong>E</strong>>(<code>f</code>: <a href="_types_functions_.md#fun4">Fun4</a>‹A, B, C, D, E›, <code>a</code>: <a href="_option_.md#option">Option</a>‹A›, <code>b</code>: <a href="_option_.md#option">Option</a>‹B›, <code>c</code>: <a href="_option_.md#option">Option</a>‹C›, <code>d</code>: <a href="_option_.md#option">Option</a>‹D›): <em><a href="_option_.md#option">Option</a>‹E›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L67">option.ts:67</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>A</strong></p>
+<p>▪ <strong>B</strong></p>
+<p>▪ <strong>C</strong></p>
+<p>▪ <strong>D</strong></p>
+<p>▪ <strong>E</strong></p>
+<p><strong>Parameters:</strong></p>
+<p>Name | Type |
+------ | ------ |
+<code>f</code> | <a href="_types_functions_.md#fun4">Fun4</a>‹A, B, C, D, E› |
+<code>a</code> | <a href="_option_.md#option">Option</a>‹A› |
+<code>b</code> | <a href="_option_.md#option">Option</a>‹B› |
+<code>c</code> | <a href="_option_.md#option">Option</a>‹C› |
+<code>d</code> | <a href="_option_.md#option">Option</a>‹D› |</p>
+<p><strong>Returns:</strong> <em><a href="_option_.md#option">Option</a>‹E›</em></p>
+<p>▸ <strong>mapN</strong><<strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>D</strong>, <strong>E</strong>, <strong>F</strong>>(<code>f</code>: <a href="_types_functions_.md#fun5">Fun5</a>‹A, B, C, D, E, F›, <code>a</code>: <a href="_option_.md#option">Option</a>‹A›, <code>b</code>: <a href="_option_.md#option">Option</a>‹B›, <code>c</code>: <a href="_option_.md#option">Option</a>‹C›, <code>d</code>: <a href="_option_.md#option">Option</a>‹D›, <code>e</code>: <a href="_option_.md#option">Option</a>‹E›): <em><a href="_option_.md#option">Option</a>‹F›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L70">option.ts:70</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>A</strong></p>
+<p>▪ <strong>B</strong></p>
+<p>▪ <strong>C</strong></p>
+<p>▪ <strong>D</strong></p>
+<p>▪ <strong>E</strong></p>
+<p>▪ <strong>F</strong></p>
+<p><strong>Parameters:</strong></p>
+<p>Name | Type |
+------ | ------ |
+<code>f</code> | <a href="_types_functions_.md#fun5">Fun5</a>‹A, B, C, D, E, F› |
+<code>a</code> | <a href="_option_.md#option">Option</a>‹A› |
+<code>b</code> | <a href="_option_.md#option">Option</a>‹B› |
+<code>c</code> | <a href="_option_.md#option">Option</a>‹C› |
+<code>d</code> | <a href="_option_.md#option">Option</a>‹D› |
+<code>e</code> | <a href="_option_.md#option">Option</a>‹E› |</p>
+<p><strong>Returns:</strong> <em><a href="_option_.md#option">Option</a>‹F›</em></p>
+<p>▸ <strong>mapN</strong><<strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>D</strong>, <strong>E</strong>, <strong>F</strong>, <strong>G</strong>>(<code>f</code>: <a href="_types_functions_.md#fun6">Fun6</a>‹A, B, C, D, E, F, G›, <code>a</code>: <a href="_option_.md#option">Option</a>‹A›, <code>b</code>: <a href="_option_.md#option">Option</a>‹B›, <code>c</code>: <a href="_option_.md#option">Option</a>‹C›, <code>d</code>: <a href="_option_.md#option">Option</a>‹D›, <code>e</code>: <a href="_option_.md#option">Option</a>‹E›, <code>g</code>: <a href="_option_.md#option">Option</a>‹F›): <em><a href="_option_.md#option">Option</a>‹G›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L73">option.ts:73</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>A</strong></p>
+<p>▪ <strong>B</strong></p>
+<p>▪ <strong>C</strong></p>
+<p>▪ <strong>D</strong></p>
+<p>▪ <strong>E</strong></p>
+<p>▪ <strong>F</strong></p>
+<p>▪ <strong>G</strong></p>
+<p><strong>Parameters:</strong></p>
+<p>Name | Type |
+------ | ------ |
+<code>f</code> | <a href="_types_functions_.md#fun6">Fun6</a>‹A, B, C, D, E, F, G› |
+<code>a</code> | <a href="_option_.md#option">Option</a>‹A› |
+<code>b</code> | <a href="_option_.md#option">Option</a>‹B› |
+<code>c</code> | <a href="_option_.md#option">Option</a>‹C› |
+<code>d</code> | <a href="_option_.md#option">Option</a>‹D› |
+<code>e</code> | <a href="_option_.md#option">Option</a>‹E› |
+<code>g</code> | <a href="_option_.md#option">Option</a>‹F› |</p>
+<p><strong>Returns:</strong> <em><a href="_option_.md#option">Option</a>‹G›</em></p>
+<hr />
+<h3 id="constofvalue"><code>Const</code> ofValue</h3>
+<p>▸ <strong>ofValue</strong><<strong>T</strong>>(<code>value</code>: T | undefined | null): <em><a href="_option_.md#option">Option</a>‹T›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L28">option.ts:28</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>T</strong></p>
+<p><strong>Parameters:</strong></p>
+<p>Name | Type |
+------ | ------ |
+<code>value</code> | T &#124; undefined &#124; null |</p>
+<p><strong>Returns:</strong> <em><a href="_option_.md#option">Option</a>‹T›</em></p>
+<hr />
+<h3 id="constrecover"><code>Const</code> recover</h3>
+<p>▸ <strong>recover</strong><<strong>T</strong>>(<code>result</code>: <a href="_option_.md#option">Option</a>‹T›, <code>whenFailure</code>: T): <em>object | object</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L243">option.ts:243</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>T</strong></p>
+<p><strong>Parameters:</strong></p>
+<p>Name | Type |
+------ | ------ |
+<code>result</code> | <a href="_option_.md#option">Option</a>‹T› |
+<code>whenFailure</code> | T |</p>
+<p><strong>Returns:</strong> <em>object | object</em></p>
+<hr />
+<h3 id="constrecoverlazy"><code>Const</code> recoverLazy</h3>
+<p>▸ <strong>recoverLazy</strong><<strong>T</strong>>(<code>result</code>: <a href="_option_.md#option">Option</a>‹T›, <code>whenFailuref</code>: function): <em>object | object</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L250">option.ts:250</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>T</strong></p>
+<p><strong>Parameters:</strong></p>
+<p>▪ <strong>result</strong>: <em><a href="_option_.md#option">Option</a>‹T›</em></p>
+<p>▪ <strong>whenFailuref</strong>: <em>function</em></p>
+<p>▸ (): <em>T</em></p>
+<p><strong>Returns:</strong> <em>object | object</em></p>
+<hr />
+<h3 id="constsome"><code>Const</code> some</h3>
+<p>▸ <strong>some</strong><<strong>T</strong>>(<code>value</code>: T): <em><a href="_option_.md#option">Option</a>‹T›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L26">option.ts:26</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>T</strong></p>
+<p><strong>Parameters:</strong></p>
+<p>Name | Type |
+------ | ------ |
+<code>value</code> | T |</p>
+<p><strong>Returns:</strong> <em><a href="_option_.md#option">Option</a>‹T›</em></p>
+<hr />
+<h3 id="constspread"><code>Const</code> spread</h3>
+<p>▸ <strong>spread</strong><<strong>A</strong>, <strong>B</strong>, <strong>C</strong>>(<code>f</code>: function, <code>v</code>: <a href="_option_.md#option">Option</a>‹[A, B]›): <em><a href="_option_.md#option">Option</a>‹C›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L260">option.ts:260</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>A</strong></p>
+<p>▪ <strong>B</strong></p>
+<p>▪ <strong>C</strong></p>
+<p><strong>Parameters:</strong></p>
+<p>▪ <strong>f</strong>: <em>function</em></p>
+<p>▸ (<code>a</code>: A, <code>b</code>: B): <em>C</em></p>
+<p><strong>Parameters:</strong></p>
+<p>Name | Type |
+------ | ------ |
+<code>a</code> | A |
+<code>b</code> | B |</p>
+<p>▪ <strong>v</strong>: <em><a href="_option_.md#option">Option</a>‹[A, B]›</em></p>
+<p><strong>Returns:</strong> <em><a href="_option_.md#option">Option</a>‹C›</em></p>
+<hr />
+<h3 id="consttoarray"><code>Const</code> toArray</h3>
+<p>▸ <strong>toArray</strong><<strong>T</strong>>(<code>option</code>: <a href="_option_.md#option">Option</a>‹T›): <em>T[]</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L165">option.ts:165</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>T</strong></p>
+<p><strong>Parameters:</strong></p>
+<p>Name | Type |
+------ | ------ |
+<code>option</code> | <a href="_option_.md#option">Option</a>‹T› |</p>
+<p><strong>Returns:</strong> <em>T[]</em></p>
+<hr />
+<h3 id="consttoboolean"><code>Const</code> toBoolean</h3>
+<p>▸ <strong>toBoolean</strong>(<code>option</code>: <a href="_option_.md#option">Option</a>‹unknown›): <em>boolean</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L158">option.ts:158</a></em></p>
+<p><strong>Parameters:</strong></p>
+<p>Name | Type |
+------ | ------ |
+<code>option</code> | <a href="_option_.md#option">Option</a>‹unknown› |</p>
+<p><strong>Returns:</strong> <em>boolean</em></p>
+<hr />
+<h3 id="consttomaybe"><code>Const</code> toMaybe</h3>
+<p>▸ <strong>toMaybe</strong><<strong>T</strong>>(<code>option</code>: <a href="_option_.md#option">Option</a>‹T›): <em><a href="_maybe_.md#maybe">Maybe</a>‹T›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L137">option.ts:137</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>T</strong></p>
+<p><strong>Parameters:</strong></p>
+<p>Name | Type |
+------ | ------ |
+<code>option</code> | <a href="_option_.md#option">Option</a>‹T› |</p>
+<p><strong>Returns:</strong> <em><a href="_maybe_.md#maybe">Maybe</a>‹T›</em></p>
+<hr />
+<h3 id="consttoresult"><code>Const</code> toResult</h3>
+<p>▸ <strong>toResult</strong><<strong>T</strong>, <strong>E</strong>>(<code>option</code>: <a href="_option_.md#option">Option</a>‹T›, <code>error</code>: E): <em><a href="_result_.md#result">Result</a>‹T, E›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L172">option.ts:172</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>T</strong></p>
+<p>▪ <strong>E</strong></p>
+<p><strong>Parameters:</strong></p>
+<p>Name | Type |
+------ | ------ |
+<code>option</code> | <a href="_option_.md#option">Option</a>‹T› |
+<code>error</code> | E |</p>
+<p><strong>Returns:</strong> <em><a href="_result_.md#result">Result</a>‹T, E›</em></p>
+<hr />
+<h3 id="consttoresultlazy"><code>Const</code> toResultLazy</h3>
+<p>▸ <strong>toResultLazy</strong><<strong>T</strong>, <strong>E</strong>>(<code>option</code>: <a href="_option_.md#option">Option</a>‹T›, <code>errorf</code>: function): <em><a href="_result_.md#result">Result</a>‹T, E›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L179">option.ts:179</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>T</strong></p>
+<p>▪ <strong>E</strong></p>
+<p><strong>Parameters:</strong></p>
+<p>▪ <strong>option</strong>: <em><a href="_option_.md#option">Option</a>‹T›</em></p>
+<p>▪ <strong>errorf</strong>: <em>function</em></p>
+<p>▸ (): <em>E</em></p>
+<p><strong>Returns:</strong> <em><a href="_result_.md#result">Result</a>‹T, E›</em></p>

@@ -1,0 +1,64 @@
+<h1 id="elements">Elements</h1>
+<p>A template is built by assembling elements together. <code>@tempo/dom/lib/web</code> contains all the definitions for all HTML and SVG elements. The are then special elements described below.</p>
+<h2 id="tempo_attributes">tempo_attributes</h2>
+<p>Each DOM element has four additional special attributes:</p>
+<pre><code class="ts language-ts">afterrender?:   (state: State, el: El, ctx: DOMContext&lt;Action&gt;) =&gt; T | undefined
+beforechange?:  (state: State, el: El, ctx: DOMContext&lt;Action&gt;, value: T | undefined) =&gt; T | undefined
+afterchange?:   (state: State, el: El, ctx: DOMContext&lt;Action&gt;, value: T | undefined) =&gt; T | undefined
+beforedestroy?: ((el: El, ctx: DOMContext&lt;Action&gt;, value: T | undefined) =&gt; void)
+</code></pre>
+<p>These special attributes are used to control the life-cycle of the current element. These can be used to mount/update/destroy widgets that are not defined in Tempo and that need to be embedded in your app. The functions receive a reference to the current element.</p>
+<h2 id="mapstateandaction">Map state and action</h2>
+<p>We already saw <code>mapState</code> above. Its counter part <code>mapAction</code> is used to transform an <code>action</code> from a sub-element up to its ancestors.</p>
+<h2 id="foreach">forEach</h2>
+<p>The <code>forEach</code> element takes a state whose shape is an array (<code>State extends any[]</code>) and applies individually each element in the array to the children nodes. This is useful for lists or tables.</p>
+<h2 id="portal">portal</h2>
+<p>A <code>portal</code> allows to mount a node outside of the natural nesting. The portal module provides the following nodes:</p>
+<pre><code class="ts language-ts">const portal = &lt;State, Action&gt;(
+  options: {
+    getParent: (doc: Document) =&gt; Element
+    append: (doc: Document, node: Node) =&gt; void
+  },
+  ...children: DOMChild&lt;State, Action&gt;[]
+) =&gt; DOMTemplate&lt;State, Action&gt;
+
+const portalWithSelector = &lt;State, Action&gt;(
+    options: { selector: string },
+    ...children: DOMChild&lt;State, Action&gt;[]
+  ) =&gt; DOMTemplate&lt;State, Action&gt;
+
+const headPortal = &lt;State, Action&gt;(...children: DOMChild&lt;State, Action&gt;[]) =&gt; DOMTemplate&lt;State, Action&gt;
+
+const bodyPortal = &lt;State, Action&gt;(...children: DOMChild&lt;State, Action&gt;[]) =&gt; DOMTemplate&lt;State, Action&gt;
+</code></pre>
+<h2 id="until">until</h2>
+<p>The <code>until</code> node, much like the <code>forEach</code> is for state that represent collections or repeatable elements. Its implementation requires that a function <code>repeatUntil</code> is provided with the following signature:</p>
+<pre><code class="ts language-ts">repeatUntil: (state: OuterState, index: number) =&gt; InnerState | undefined
+</code></pre>
+<p>The function is invoked <code>n</code> times until a result of <code>undefined</code> is returned. For each successful invocation, the children nodes will be rendered with the returned result.</p>
+<h2 id="when">when</h2>
+<p><code>when</code> and <code>unless</code> nodes are for containers that will display their contents conditionally. A <code>condition</code> function needs to be provided:</p>
+<pre><code class="ts language-ts">condition: (state: State) =&gt; boolean
+</code></pre>
+<h1 id="component">Component</h1>
+<p>A <code>component</code> is a special kind of node that manages its own state. When embedded in other nodes it does not automatically propagate actions up the hierarchy, nor changes its own contents when the outer state is updated.</p>
+<p>A component takes an instance of <code>Store</code> to manage its state, it is in fact what <code>Tempo.render</code> wraps the passed template around.</p>
+<h2 id="adapter">Adapter</h2>
+<p>An adapter is needed if you need for a component to be able to communicate with its container. An adapter takes an optional <code>mergeStates</code> attribute:</p>
+<pre><code class="ts language-ts">mergeStates?: (outerState: OuterState, innerState: InnerState) =&gt; InnerState | undefined
+</code></pre>
+<p>This function allows for the <code>OuterState</code> to be merged into the <code>InnerState</code> and trigger a template change. If the function returns <code>undefined</code> then the inner state will not be updated.</p>
+<p>It can also take a <code>propagate</code> function:</p>
+<pre><code class="ts language-ts">propagate?: (args: PropagateArg&lt;OuterState, InnerState, OuterAction, InnerAction&gt;) =&gt; void
+
+// where PropagateArg is
+
+interface PropagateArg&lt;OuterState, InnerState, OuterAction, InnerAction&gt; {
+  action: InnerAction
+  innerState: InnerState
+  outerState: OuterState
+  dispatchInner: (action: InnerAction) =&gt; void
+  dispatchOuter: (action: OuterAction) =&gt; void
+}
+</code></pre>
+<p>This function allows to react to inner actions. When the <code>propagate</code> function is invoked, the implementor can decide to trigger new inner actions <code>dispatchInner</code> or outer actions <code>dispatchOuter</code>.</p>
