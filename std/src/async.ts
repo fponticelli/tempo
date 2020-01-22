@@ -16,32 +16,32 @@ import { map as mapArray } from './arrays'
 import { Fun2, Fun3, Fun4, Fun5, Fun6 } from './types'
 import { Option, none, some } from './option'
 
-export type Outcome<T> = { kind: 'outcome', value: T }
-export type NotAsked = { kind: 'notasked' }
-export type Loading<P> = { kind: 'loading', progress: P }
+export type Outcome<T> = { kind: 'Outcome', value: T }
+export type NotAsked = { kind: 'NotAsked' }
+export type Loading<P> = { kind: 'Loading', progress: P }
 
 export type Async<T, P> =
   | Outcome<T>
   | NotAsked
   | Loading<P>
 
-export const outcome = <T, P>(value: T): Async<T, P> => ({ kind: 'outcome', value })
-export const notAsked = { kind: 'notasked' } as Async<never, never>
-export const loading = <T, P>(progress: P): Async<T, P> => ({ kind: 'loading', progress })
+export const outcome = <T, P>(value: T): Async<T, P> => ({ kind: 'Outcome', value })
+export const notAsked = { kind: 'NotAsked' } as Async<never, never>
+export const loading = <T, P>(progress: P): Async<T, P> => ({ kind: 'Loading', progress })
 
 export const map = <A, B, P>(f: (a: A) => B, async: Async<A, P>): Async<B, P> => {
   switch (async.kind) {
-    case 'loading':
-    case 'notasked': return async
-    case 'outcome': return outcome(f(async.value))
+    case 'Loading':
+    case 'NotAsked': return async
+    case 'Outcome': return outcome(f(async.value))
   }
 }
 
 export const mapLoading = <A, E1, E2>(f: (e: E1) => E2, async: Async<A, E1>): Async<A, E2> => {
   switch (async.kind) {
-    case 'loading': return loading(f(async.progress))
-    case 'notasked': return async
-    case 'outcome': return outcome(async.value)
+    case 'Loading': return loading(f(async.progress))
+    case 'NotAsked': return async
+    case 'Outcome': return outcome(async.value)
   }
 }
 
@@ -58,18 +58,18 @@ export function mapN<A, B, C, D, E, F, G, Prog>(
   a: Async<A, Prog>, b: Async<B, Prog>, c: Async<C, Prog>, d: Async<D, Prog>, e: Async<E, Prog>, g: Async<F, Prog>): Async<G, Prog>
 export function mapN<Args extends any[], Prog, Ret>(f: (...args: Args) => Ret, ...args: Async<any, Prog>[]): Async<Ret, Prog> {
   for (const a of args) {
-    if (a.kind === 'loading' || a.kind === 'notasked')
+    if (a.kind === 'Loading' || a.kind === 'NotAsked')
       return a
   }
-  const results = mapArray(a => a.value, args as { kind: 'outcome', value: any }[])
+  const results = mapArray(a => a.value, args as { kind: 'Outcome', value: any }[])
   return outcome(f(...results as Args))
 }
 
 export const flatMap = <A, B, Prog>(f: (a: A) => Async<B, Prog>, async: Async<A, Prog>): Async<B, Prog> => {
   switch (async.kind) {
-    case 'notasked':
-    case 'loading': return async
-    case 'outcome': return f(async.value)
+    case 'NotAsked':
+    case 'Loading': return async
+    case 'Outcome': return f(async.value)
   }
 }
 
@@ -93,34 +93,34 @@ export function flatMapN<Args extends any[], Prog, Ret>(
   ...args: Async<any, Prog>[]
 ): Async<Ret, Prog> {
   for (const a of args) {
-    if (a.kind === 'loading' || a.kind === 'notasked') {
+    if (a.kind === 'Loading' || a.kind === 'NotAsked') {
       return a
     }
   }
-  const results = mapArray(a => a.value, args as { kind: 'outcome', value: any }[])
+  const results = mapArray(a => a.value, args as { kind: 'Outcome', value: any }[])
   return f(...results as Args)
 }
 
 export const equals = <T, P>(predicateOutcome: (a: T, b: T) => boolean, predicateProgress: (a: P, b: P) => boolean, a: Async<T, P>, b: Async<T, P>): boolean => {
   if (a.kind !== b.kind)
     return false
-  else if (a.kind === 'notasked' && b.kind === 'notasked')
+  else if (a.kind === 'NotAsked' && b.kind === 'NotAsked')
     return true
-  else if (a.kind === 'loading' && b.kind === 'loading')
-    return predicateProgress((a as { kind: 'loading', progress: P }).progress, (b as { kind: 'loading', progress: P }).progress)
+  else if (a.kind === 'Loading' && b.kind === 'Loading')
+    return predicateProgress((a as { kind: 'Loading', progress: P }).progress, (b as { kind: 'Loading', progress: P }).progress)
   else
-    return predicateOutcome((a as { kind: 'outcome', value: T }).value, (b as { kind: 'outcome', value: T }).value)
+    return predicateOutcome((a as { kind: 'Outcome', value: T }).value, (b as { kind: 'Outcome', value: T }).value)
 }
 
-export const isOutcome = <T, P>(async: Async<T, P>): async is Outcome<T> => async.kind === 'outcome'
-export const isLoading = <T, P>(async: Async<T, P>): async is Loading<P> => async.kind === 'loading'
-export const isNotAsked = <T, P>(async: Async<T, P>): async is NotAsked => async.kind === 'notasked'
+export const isOutcome = <T, P>(async: Async<T, P>): async is Outcome<T> => async.kind === 'Outcome'
+export const isLoading = <T, P>(async: Async<T, P>): async is Loading<P> => async.kind === 'Loading'
+export const isNotAsked = <T, P>(async: Async<T, P>): async is NotAsked => async.kind === 'NotAsked'
 
 export const filter = <T, P>(predicate: (v: T) => boolean, progress: P, async: Async<T, P>): Async<T, P> => {
   switch (async.kind) {
-    case 'notasked':
-    case 'loading': return async
-    case 'outcome':
+    case 'NotAsked':
+    case 'Loading': return async
+    case 'Outcome':
       if (predicate(async.value)) {
         return async
       } else {
@@ -131,9 +131,9 @@ export const filter = <T, P>(predicate: (v: T) => boolean, progress: P, async: A
 
 export const filterLazy = <T, P>(predicate: (v: T) => boolean, progressf: () => P, async: Async<T, P>): Async<T, P> => {
   switch (async.kind) {
-    case 'notasked':
-    case 'loading': return async
-    case 'outcome':
+    case 'NotAsked':
+    case 'Loading': return async
+    case 'Outcome':
       if (predicate(async.value)) {
         return async
       } else {
@@ -144,105 +144,105 @@ export const filterLazy = <T, P>(predicate: (v: T) => boolean, progressf: () => 
 
 export const getOrThrow = <T, P>(async: Async<T, P>): Maybe<T> => {
   switch (async.kind) {
-    case 'notasked': throw 'Can\'t retrieve value from NotAsked'
-    case 'loading': throw async.progress
-    case 'outcome': return async.value
+    case 'NotAsked': throw 'Can\'t retrieve value from NotAsked'
+    case 'Loading': throw async.progress
+    case 'Outcome': return async.value
   }
 }
 
 export const getOrElse = <T, P>(async: Async<T, P>, alt: T): T => {
   switch (async.kind) {
-    case 'notasked':
-    case 'loading': return alt
-    case 'outcome': return async.value
+    case 'NotAsked':
+    case 'Loading': return alt
+    case 'Outcome': return async.value
   }
 }
 
 export const getOrElseLazy = <T, P>(async: Async<T, P>, alt: () => T): T => {
   switch (async.kind) {
-    case 'notasked':
-    case 'loading': return alt()
-    case 'outcome': return async.value
+    case 'NotAsked':
+    case 'Loading': return alt()
+    case 'Outcome': return async.value
   }
 }
 
 export const toArray = <T, P>(async: Async<T, P>): T[] => {
   switch (async.kind) {
-    case 'notasked':
-    case 'loading': return []
-    case 'outcome': return [async.value]
+    case 'NotAsked':
+    case 'Loading': return []
+    case 'Outcome': return [async.value]
   }
 }
 
 export const toMaybe = <T, P>(async: Async<T, P>): Maybe<T> => {
   switch (async.kind) {
-    case 'notasked':
-    case 'loading': return nothing
-    case 'outcome': return just(async.value)
+    case 'NotAsked':
+    case 'Loading': return nothing
+    case 'Outcome': return just(async.value)
   }
 }
 
 export const toOption = <T, P>(async: Async<T, P>): Option<T> => {
   switch (async.kind) {
-    case 'notasked':
-    case 'loading': return none
-    case 'outcome': return some(async.value)
+    case 'NotAsked':
+    case 'Loading': return none
+    case 'Outcome': return some(async.value)
   }
 }
 
 export const flatten = <T, P>(async: Async<Async<T, P>, P>): Async<T, P> => {
   switch (async.kind) {
-    case 'notasked': return notAsked
-    case 'loading': return loading(async.progress)
-    case 'outcome': return async.value
+    case 'NotAsked': return notAsked
+    case 'Loading': return loading(async.progress)
+    case 'Outcome': return async.value
   }
 }
 
 export const cata = <A, B, Prog>(f: (a: A) => B, async: Async<A, Prog>, ifNotOutcome: B): B => {
   switch (async.kind) {
-    case 'notasked':
-    case 'loading': return ifNotOutcome
-    case 'outcome': return f(async.value)
+    case 'NotAsked':
+    case 'Loading': return ifNotOutcome
+    case 'Outcome': return f(async.value)
   }
 }
 
 export const cataLazy = <A, B, Prog>(f: (a: A) => B, async: Async<A, Prog>, ifNotOutcome: () => B): B => {
   switch (async.kind) {
-    case 'notasked':
-    case 'loading': return ifNotOutcome()
-    case 'outcome': return f(async.value)
+    case 'NotAsked':
+    case 'Loading': return ifNotOutcome()
+    case 'Outcome': return f(async.value)
   }
 }
 
 export const foldLeft = <T, B, Prog>(f: (acc: B, curr: T) => B, async: Async<T, Prog>, b: B): B => {
   switch (async.kind) {
-    case 'notasked':
-    case 'loading': return b
-    case 'outcome': return f(b, async.value)
+    case 'NotAsked':
+    case 'Loading': return b
+    case 'Outcome': return f(b, async.value)
   }
 }
 
 export const all = <T, P>(f: (v: T) => boolean, async: Async<T, P>): boolean => {
   switch (async.kind) {
-    case 'notasked':
-    case 'loading': return true
-    case 'outcome': return f(async.value)
+    case 'NotAsked':
+    case 'Loading': return true
+    case 'Outcome': return f(async.value)
   }
 }
 
 export const any = <T, P>(f: (v: T) => boolean, async: Async<T, P>): boolean => {
   switch (async.kind) {
-    case 'notasked':
-    case 'loading': return false
-    case 'outcome': return f(async.value)
+    case 'NotAsked':
+    case 'Loading': return false
+    case 'Outcome': return f(async.value)
   }
 }
 
 export const each = <T, P>(f: (v: T) => void, async: Async<T, P>): void => {
   switch (async.kind) {
-    case 'notasked':
-    case 'loading': return
-    case 'outcome': return f(async.value)
+    case 'NotAsked':
+    case 'Loading': return
+    case 'Outcome': return f(async.value)
   }
 }
 
@@ -259,9 +259,9 @@ export const firstOutcome = <A, Prog>(...args: Async<A, Prog>[]): Async<A, Prog>
 
 export const recover = <T, P>(async: Async<T, P>, whenNoOutcome: T) => {
   switch (async.kind) {
-    case 'notasked':
-    case 'loading': return outcome(whenNoOutcome)
-    case 'outcome': return async
+    case 'NotAsked':
+    case 'Loading': return outcome(whenNoOutcome)
+    case 'Outcome': return async
   }
 }
 

@@ -17,9 +17,9 @@ import { Nel, ofValue, concat, map } from './nel'
 
 export type Validation<T, E> = Res.T<T, Nel<E>>
 
-export const success = <T, E>(value: T): Validation<T, E> => ({ kind: 'success', value })
-export const failure = <T, E>(error: E): Validation<T, E> => ({ kind: 'failure', error: ofValue(error) })
-export const failures = <T, E>(errors: Nel<E>): Validation<T, E> => ({ kind: 'failure', error: errors })
+export const success = <T, E>(value: T): Validation<T, E> => ({ kind: 'Success', value })
+export const failure = <T, E>(error: E): Validation<T, E> => ({ kind: 'Failure', error: ofValue(error) })
+export const failures = <T, E>(errors: Nel<E>): Validation<T, E> => ({ kind: 'Failure', error: errors })
 
 export const ofNullable = <T, E>(value: T | undefined | null, error: E): Validation<T, E> =>
   Res.ofNullable(value, ofValue(error))
@@ -46,8 +46,8 @@ export function apN<Args extends any[], Err, Ret>(
 
 export const mapError = <A, E1, E2>(f: (e: E1) => E2, result: Validation<A, E1>): Validation<A, E2> => {
   switch (result.kind) {
-    case 'failure': return failures(map(f, result.error))
-    case 'success': return success(result.value)
+    case 'Failure': return failures(map(f, result.error))
+    case 'Success': return success(result.value)
   }
 }
 
@@ -96,8 +96,8 @@ export function flatMapN<Args extends any[], Err, Ret>(
 
 export const filter = <T, E>(predicate: (v: T) => boolean, error: E, result: Validation<T, E>): Validation<T, E> => {
   switch (result.kind) {
-    case 'failure': return result
-    case 'success':
+    case 'Failure': return result
+    case 'Success':
       if (predicate(result.value)) {
         return result
       } else {
@@ -108,8 +108,8 @@ export const filter = <T, E>(predicate: (v: T) => boolean, error: E, result: Val
 
 export const filterLazy = <T, E>(predicate: (v: T) => boolean, errorf: () => E, result: Validation<T, E>): Validation<T, E> => {
   switch (result.kind) {
-    case 'failure': return result
-    case 'success':
+    case 'Failure': return result
+    case 'Success':
       if (predicate(result.value)) {
         return result
       } else {
@@ -120,29 +120,29 @@ export const filterLazy = <T, E>(predicate: (v: T) => boolean, errorf: () => E, 
 
 export const flatten = <T, E>(result: Validation<Validation<T, E>, E>): Validation<T, E> => {
   switch (result.kind) {
-    case 'failure': return failures(result.error)
-    case 'success': return result.value
+    case 'Failure': return failures(result.error)
+    case 'Success': return result.value
   }
 }
 
 export const recover = <T, E>(result: Validation<T, E>, whenFailure: T) => {
   switch (result.kind) {
-    case 'failure': return success(whenFailure)
-    case 'success': return result
+    case 'Failure': return success(whenFailure)
+    case 'Success': return result
   }
 }
 
 export const recoverFromError = <T, E>(result: Validation<T, E>, whenFailuref: (e: Nel<E>) => T) => {
   switch (result.kind) {
-    case 'failure': return success(whenFailuref(result.error))
-    case 'success': return result
+    case 'Failure': return success(whenFailuref(result.error))
+    case 'Success': return result
   }
 }
 
 export const swap = <T, E>(result: Validation<T, E>): Res.T<Nel<E>, T> => {
   switch (result.kind) {
-    case 'failure': return Res.success(result.error)
-    case 'success': return Res.failure(result.value)
+    case 'Failure': return Res.success(result.error)
+    case 'Success': return Res.failure(result.value)
   }
 }
 
