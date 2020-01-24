@@ -56,13 +56,13 @@ export function mapN<A, B, C, D, E, F, Prog>(
 export function mapN<A, B, C, D, E, F, G, Prog>(
   f: Fun6<A, B, C, D, E, F, G>,
   a: Async<A, Prog>, b: Async<B, Prog>, c: Async<C, Prog>, d: Async<D, Prog>, e: Async<E, Prog>, g: Async<F, Prog>): Async<G, Prog>
-export function mapN<Args extends any[], Prog, Ret>(f: (...args: Args) => Ret, ...args: Async<any, Prog>[]): Async<Ret, Prog> {
+export function mapN<Prog, Ret>(f: (...args: any[]) => Ret, ...args: Async<any, Prog>[]): Async<Ret, Prog> {
   for (const a of args) {
     if (a.kind === 'Loading' || a.kind === 'NotAsked')
       return a
   }
   const results = mapArray(a => a.value, args as { kind: 'Outcome', value: any }[])
-  return outcome(f(...results as Args))
+  return outcome(f(...results))
 }
 
 export const flatMap = <A, B, Prog>(f: (a: A) => Async<B, Prog>, async: Async<A, Prog>): Async<B, Prog> => {
@@ -116,36 +116,10 @@ export const isOutcome = <T, P>(async: Async<T, P>): async is Outcome<T> => asyn
 export const isLoading = <T, P>(async: Async<T, P>): async is Loading<P> => async.kind === 'Loading'
 export const isNotAsked = <T, P>(async: Async<T, P>): async is NotAsked => async.kind === 'NotAsked'
 
-export const filter = <T, P>(predicate: (v: T) => boolean, progress: P, async: Async<T, P>): Async<T, P> => {
-  switch (async.kind) {
-    case 'NotAsked':
-    case 'Loading': return async
-    case 'Outcome':
-      if (predicate(async.value)) {
-        return async
-      } else {
-        return loading(progress)
-      }
-  }
-}
-
-export const filterLazy = <T, P>(predicate: (v: T) => boolean, progressf: () => P, async: Async<T, P>): Async<T, P> => {
-  switch (async.kind) {
-    case 'NotAsked':
-    case 'Loading': return async
-    case 'Outcome':
-      if (predicate(async.value)) {
-        return async
-      } else {
-        return loading(progressf())
-      }
-  }
-}
-
 export const getOrThrow = <T, P>(async: Async<T, P>): Maybe<T> => {
   switch (async.kind) {
     case 'NotAsked': throw 'Can\'t retrieve value from NotAsked'
-    case 'Loading': throw async.progress
+    case 'Loading': throw 'Can\'t retrieve value from Loading: ' + async.progress
     case 'Outcome': return async.value
   }
 }

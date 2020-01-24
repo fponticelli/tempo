@@ -398,7 +398,7 @@ export const firstSuccess = <A, Err>(...args: Result<A, Err>[]): Result<A, Err> 
   throw 'cannot use `firstSuccess` with empty argument list'
 }
 
-export const recover = <T, E>(result: Result<T, E>, whenFailure: T) => {
+export const recover = <T, E>(result: Result<T, E>, whenFailure: T): Result<T, E> => {
   switch (result.kind) {
     case 'Failure': return success(whenFailure)
     case 'Success': return result

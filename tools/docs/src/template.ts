@@ -15,7 +15,7 @@ export const template = div<State, Action>(
     matchKind<Async<Result<Toc, HttpError>, unknown>, Action>({
       NotAsked: 'not asked',
       Loading: '...',
-      Outcome: div({}, s => JSON.stringify(s))
+      Outcome: div({}, s => JSON.stringify(s.value))
     })
   )
 )
