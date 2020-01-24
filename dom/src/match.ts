@@ -213,18 +213,13 @@ export const matchValue = <Path extends IndexType[], State extends ObjectWithPat
 )
 
 export const matchOption = <State, Action, Query = unknown>(matchers: {
-  Some: DOMChild<State, Action, Query>,
-  None?: DOMChild<unknown, Action, Query>
-}, refId?: string): DOMTemplate<Option<State>, Action, Query> => {
-  return new MatchBoolTemplate<Option<State>, Action, Query>(
-    isSome,
-    mapState(
-      { map: (opt: Option<State>) => (opt as Some<State>).value },
-      domChildToTemplate(matchers.Some)
-    ),
-    domChildToTemplate(matchers.None),
-    refId ?? 't-match-option'
-  )
+  Some:  DOMChild<State, Action, Query>,
+  None: DOMChild<unknown, Action, Query>
+}, refId = 't-match-option'): DOMTemplate<Option<State>, Action, Query> => {
+  return matchKind({
+    Some:  mapState({ map: (o: Some<State>) => o.value }, matchers.Some),
+    None:  mapState({ map: () => null }, matchers.None)
+  }, refId)
 }
 
 export const matchMaybe = <State, Action, Query = unknown>(matchers: {
