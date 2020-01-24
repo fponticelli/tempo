@@ -11,13 +11,13 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { Maybe, nothing, just } from './maybe'
+import { Maybe, nothing } from './maybe'
 import { map as mapArray } from './arrays'
 import { Fun2, Fun3, Fun4, Fun5, Fun6 } from './types'
-import { Option, none, some } from './option'
+import { Option, none } from './option'
 import { Result, success as successR, failure as failureR, map as mapR, mapN as mapNR, Success, Failure,
 getOrElse as getOrElseR, getOrThrow as getOrThrowR, getOrElseLazy as getOrElseLazyR, toArray as toArrayR,
-cata as cataR, cataLazy as cataLazyR, flatten as flattenR, toOption as toOptionR, toMaybe as toMaybeR, recover as recoverR,
+cata as cataR, cataLazy as cataLazyR, toOption as toOptionR, toMaybe as toMaybeR, recover as recoverR,
 foldLeft as foldLeftR, any as anyR, each as eachR, all as allR } from './result'
 import { Async, outcome, map as mapA, mapN as mapNA, Outcome, Loading, NotAsked } from './async'
 
