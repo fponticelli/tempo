@@ -101,17 +101,6 @@ export function flatMapN<Args extends any[], Prog, Ret>(
   return f(...results as Args)
 }
 
-export const equals = <T, P>(predicateOutcome: (a: T, b: T) => boolean, predicateProgress: (a: P, b: P) => boolean, a: Async<T, P>, b: Async<T, P>): boolean => {
-  if (a.kind !== b.kind)
-    return false
-  else if (a.kind === 'NotAsked' && b.kind === 'NotAsked')
-    return true
-  else if (a.kind === 'Loading' && b.kind === 'Loading')
-    return predicateProgress((a as { kind: 'Loading', progress: P }).progress, (b as { kind: 'Loading', progress: P }).progress)
-  else
-    return predicateOutcome((a as { kind: 'Outcome', value: T }).value, (b as { kind: 'Outcome', value: T }).value)
-}
-
 export const isOutcome = <T, P>(async: Async<T, P>): async is Outcome<T> => async.kind === 'Outcome'
 export const isLoading = <T, P>(async: Async<T, P>): async is Loading<P> => async.kind === 'Loading'
 export const isNotAsked = <T, P>(async: Async<T, P>): async is NotAsked => async.kind === 'NotAsked'

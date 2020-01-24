@@ -5,4 +5,4 @@ import { HttpError } from './request'
 
 export type Action =
   | { kind: 'RequestToc' }
-  | { kind: 'LoadedToc', toc: Async<Result<Toc, HttpError>, unknown> }
+  | { kind: 'LoadedToc'; toc: Async<Result<Toc, HttpError>, unknown> }
