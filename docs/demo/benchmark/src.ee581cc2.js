@@ -2846,20 +2846,20 @@ var $bXMb$export$nextFrame = function (listener) {
 
 $bXMb$exports.nextFrame = $bXMb$export$nextFrame; //# sourceMappingURL=emitter.js.map
 
-// ASSET: ../node_modules/tempo-store/lib/equality.js
-var $dLEG$exports = {};
-Object.defineProperty($dLEG$exports, "__esModule", {
+// ASSET: ../node_modules/tempo-store/node_modules/tempo-std/lib/equals.js
+var $fRdy$exports = {};
+Object.defineProperty($fRdy$exports, "__esModule", {
   value: true
 });
 
-var $dLEG$export$strictEqual = function (a, b) {
+var $fRdy$export$strictEqual = function (a, b) {
   return a === b || a !== a && b !== b;
 };
 
-$dLEG$exports.strictEqual = $dLEG$export$strictEqual;
+$fRdy$exports.strictEqual = $fRdy$export$strictEqual;
 
-var $dLEG$export$deepEqual = function (a, b) {
-  if ($dLEG$export$strictEqual(a, b)) return true;
+var $fRdy$export$deepEqual = function (a, b) {
+  if ($fRdy$export$strictEqual(a, b)) return true;
   if (a == null || b == null) return false;
   var aIsArr = Array.isArray(a);
   var bIsArr = Array.isArray(b);
@@ -2872,7 +2872,7 @@ var $dLEG$export$deepEqual = function (a, b) {
     if (aLength !== bArr.length) return false;
 
     for (var i = 0; i < aLength; i++) {
-      if (!$dLEG$export$deepEqual(aArr[i], bArr[i])) return false;
+      if (!$fRdy$export$deepEqual(aArr[i], bArr[i])) return false;
     }
 
     return true;
@@ -2921,7 +2921,7 @@ var $dLEG$export$deepEqual = function (a, b) {
     while (true) {
       var curr = it_2.next();
       if (curr.done) break;
-      if (!$dLEG$export$deepEqual(aMap.get(curr.value), bMap.get(curr.value))) return false;
+      if (!$fRdy$export$deepEqual(aMap.get(curr.value), bMap.get(curr.value))) return false;
     }
 
     return true;
@@ -2942,7 +2942,7 @@ var $dLEG$export$deepEqual = function (a, b) {
     for (var i = 0; i < aLength; i++) {
       var field = aFields[i];
       if (!bObj.hasOwnProperty(field)) return false;
-      if (!$dLEG$export$deepEqual(aObj[field], bObj[field])) return false;
+      if (!$fRdy$export$deepEqual(aObj[field], bObj[field])) return false;
     }
 
     return true;
@@ -2951,7 +2951,7 @@ var $dLEG$export$deepEqual = function (a, b) {
   return false;
 };
 
-$dLEG$exports.deepEqual = $dLEG$export$deepEqual; //# sourceMappingURL=equality.js.map
+$fRdy$exports.deepEqual = $fRdy$export$deepEqual; //# sourceMappingURL=equals.js.map
 
 // ASSET: ../node_modules/tempo-store/lib/property.js
 var $zFui$exports = {};
@@ -2959,11 +2959,12 @@ Object.defineProperty($zFui$exports, "__esModule", {
   value: true
 });
 
-// @ts-ignore
-var $zFui$var$Property = function () {
+var $zFui$var$Property =
+/** @class */
+function () {
   function Property(value, equal) {
     if (equal === void 0) {
-      equal = $dLEG$export$strictEqual;
+      equal = $fRdy$export$strictEqual;
     }
 
     this.value = value;

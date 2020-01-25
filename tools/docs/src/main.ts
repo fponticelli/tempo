@@ -6,13 +6,17 @@ import { makeState } from './state'
 import { reducer } from './reducer'
 import { template } from './template'
 import { middleware } from './middleware'
+import { parseUrl } from './route'
+import { Action } from './action'
 
 const url = location.pathname.split('/').pop() + location.hash
+const route = parseUrl(url)
 
-const store = Store.ofState({ state: makeState(url), reducer })
+const store = Store.ofState({ state: makeState(route), reducer })
 
 Tempo.render({ store, template })
 
 store.observable.on(middleware(store))
 
-store.process({ kind: 'RequestToc' })
+store.process(Action.requestToc)
+store.process(Action.requestPageContent)
