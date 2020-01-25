@@ -11,9 +11,9 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { strictEqual, deepEqual } from '../src/equality'
+import { strictEqual, deepEqual } from '../src/equals'
 
-describe('equality', () => {
+describe('equals', () => {
   it('strictEqual with number', () => {
     expect(strictEqual(1, 1)).toBe(true)
     expect(strictEqual(0, 0)).toBe(true)

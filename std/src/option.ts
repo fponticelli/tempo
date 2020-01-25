@@ -127,7 +127,7 @@ export const filter = <T>(predicate: (v: T) => boolean, option: Option<T>): Opti
   }
 }
 
-export const getOrThrow = <T, E>(option: Option<T>, exception: E): Maybe<T> => {
+export const getOrThrow = <T, E>(option: Option<T>, exception: E): T => {
   switch (option.kind) {
     case 'None': throw exception
     case 'Some': return option.value
@@ -140,6 +140,9 @@ export const toMaybe = <T>(option: Option<T>): Maybe<T> => {
     case 'Some': return option.value
   }
 }
+
+export const getUnsafe = <T>(option: Option<T>): T =>
+  getOrThrow(option, 'unable to extract value from None')
 
 export const getOrElse = <T>(option: Option<T>, alt: T): T => {
   switch (option.kind) {

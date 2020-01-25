@@ -13,9 +13,8 @@ limitations under the License.
 
 import { Emitter } from './emitter'
 import { Observable1 } from './observable'
-import { strictEqual } from './equality'
+import { strictEqual } from 'tempo-std/lib/equals'
 
-// @ts-ignore
 export class Property<T> {
   readonly observable: Observable1<T>
 

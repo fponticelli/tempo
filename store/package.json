@@ -35,7 +35,8 @@
     "url": "https://github.com/fponticelli"
   },
   "dependencies": {
-    "tempo-core": "1.6.0"
+    "tempo-core": "1.6.0",
+    "tempo-std": "0.2.0"
   },
   "devDependencies": {
     "typedoc": "0.16.7",
