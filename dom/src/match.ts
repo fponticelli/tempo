@@ -17,12 +17,13 @@ import { DOMContext } from './context'
 import { domChildToTemplate, removeNode } from './utils/dom'
 import { IndexType } from 'tempo-std/lib/types/index_type'
 import { ObjectWithPath, TypeAtPath, ObjectWithField } from 'tempo-std/lib/types/objects'
-import { Option, isSome, Some } from 'tempo-std/lib/option'
+import { Option, Some } from 'tempo-std/lib/option'
 import { mapState } from './map'
 import { Maybe, Just } from 'tempo-std/lib/maybe'
 import { Result, Success, Failure } from 'tempo-std/lib/result'
 import { Async, Loading, Outcome } from 'tempo-std/lib/async'
 import { AsyncResult } from 'tempo-std/lib/async_result'
+import { DOMAttribute, resolveAttribute } from './value'
 
 export class MatchTemplate<
   Path extends IndexType[],
@@ -103,14 +104,15 @@ export class MatchBoolTemplate<
   Query
 > implements DOMTemplate<State, Action, Query> {
   constructor(
-    readonly condition: (state: State) => boolean,
+    readonly condition: DOMAttribute<State, boolean>,
     readonly trueTemplate: DOMTemplate<State, Action, Query>,
     readonly falseTemplate: DOMTemplate<State, Action, Query>,
     readonly refId: string
   ) {}
   render(ctx: DOMContext<Action>, state: State) {
     const { ctx: newCtx, ref } = ctx.withAppendToReference(this.refId)
-    const { condition, trueTemplate, falseTemplate } = this
+    const { trueTemplate, falseTemplate } = this
+    const condition = resolveAttribute(this.condition)
     let lastEvaluation = condition(state)
     let view = lastEvaluation ? trueTemplate.render(newCtx, state) : falseTemplate.render(newCtx, state)
     return {
@@ -139,7 +141,7 @@ export class MatchBoolTemplate<
 
 export const matchBool = <State, Action, Query = unknown>(
   options: {
-    condition: (state: State) => boolean,
+    condition: DOMAttribute<State, boolean>,
     true: DOMChild<State, Action, Query>,
     false: DOMChild<State, Action, Query>,
     refId?: string
@@ -280,8 +282,8 @@ export const matchAsyncResult = <State, Error, Progress, Action, Query = unknown
       matchResult<State, Error, Action, Query>({
         Success: matchers.Success,
         Failure: matchers.Failure
-      }),
-      `${refId}-sub`),
+      }, `${refId}-sub`)
+    ),
     Loading:  mapState({ map: (o: Loading<Progress>) => o.progress }, matchers.Loading),
     NotAsked: mapState({ map: () => null }, matchers.NotAsked)
   }, refId)
