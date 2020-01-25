@@ -13,7 +13,6 @@ limitations under the License.
 
 import { Tempo } from 'tempo-dom/lib/tempo'
 import { Store } from 'tempo-store/lib/store'
-import { strictEqual as equal } from 'tempo-store/lib/equality'
 // import { debounce } from 'tempo-store/lib/emitter'
 // import { DataStore } from './data_store'
 import { reducer } from './reducer'
@@ -24,8 +23,7 @@ import { emptyState } from './state'
 
 const store = Store.ofState({
   state: emptyState(),
-  reducer,
-  equal
+  reducer
 })
 
 // const saveToDataStore = debounce(250)((state: State) => DataStore.set(state))
