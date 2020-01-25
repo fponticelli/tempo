@@ -1,12 +1,16 @@
 import { Toc } from '../build/toc'
-import { Async, notAsked } from 'tempo-std/lib/async'
+import { AsyncResult, notAsked } from 'tempo-std/lib/async_result'
 import { HttpError } from './request'
-import { Result } from 'tempo-std/lib/result'
 import { Route, parseUrl } from './route'
 
 export interface State {
-  toc: Async<Result<Toc, HttpError>, unknown>
+  toc: AsyncResult<Toc, HttpError, unknown>
+  content: AsyncResult<string, HttpError, unknown>,
   route: Route
 }
 
-export const makeState = (url: string): State => ({ toc: notAsked, route: parseUrl(url) })
+export const makeState = (url: string): State => ({
+  toc: notAsked,
+  content: notAsked,
+  route: parseUrl(url)
+})

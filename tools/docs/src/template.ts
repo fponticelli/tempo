@@ -22,9 +22,9 @@ export const template = div<State, Action>(
         Success: div(
           {},
           release(
-            mapState({ map: ([state, toc]) => ({ toc, route: state.route }) },  sidebar)
-          ),
-          content
+            mapState({ map: ([state, toc]) => ({ toc, route: state.route }) },  sidebar),
+            mapState({ map: ([state]) => state.content },  content)
+          )
         ),
         Failure: div({}, e => e.message)
       })

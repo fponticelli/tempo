@@ -15,5 +15,13 @@ export const reducer = reduceOnKind<State, Action>({
   RequestToc: (state) => ({
     ...state,
     toc: loading(null)
+  }),
+  LoadedPageContent: (state, action) => ({
+    ...state,
+    content: action.content
+  }),
+  RequestPageContent: (state) => ({
+    ...state,
+    content: loading(null)
   })
 })
