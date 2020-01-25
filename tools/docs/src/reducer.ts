@@ -1,18 +1,19 @@
 import { State } from './state'
 import { Action } from './action'
 import { loading } from 'tempo-std/lib/async'
+import { reduceOnKind } from 'tempo-store/lib/reducer'
 
-export const reducer = (state: State, action: Action): State => {
-  switch (action.kind) {
-    case 'RequestToc':
-      return {
-        ...state,
-        toc: loading(null)
-      }
-    case 'LoadedToc':
-      return {
-        ...state,
-        toc: action.toc
-      }
-  }
-}
+export const reducer = reduceOnKind<State, Action>({
+  GoTo: (state, action) => ({
+    ...state,
+    route: action.route
+  }),
+  LoadedToc: (state, action) => ({
+    ...state,
+    toc: action.toc
+  }),
+  RequestToc: (state) => ({
+    ...state,
+    toc: loading(null)
+  })
+})
