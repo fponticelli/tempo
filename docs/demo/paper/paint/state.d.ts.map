@@ -1,0 +1,1 @@
+{"version":3,"file":"state.d.ts","sourceRoot":"","sources":["../../src/paint/state.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,IAAI,EAAE,MAAM,OAAO,CAAA;AAE5B,MAAM,WAAW,KAAK;IACpB,IAAI,EAAE,IAAI,CAAA;IACV,GAAG,EAAE,MAAM,CAAA;IACX,MAAM,EAAE,gBAAgB,GAAG,SAAS,CAAA;IACpC,OAAO,EAAE,MAAM,CAAA;CAChB;AAED,eAAO,MAAM,SAAS,wBAOrB,CAAA"}

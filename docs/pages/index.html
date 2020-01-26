@@ -11,9 +11,9 @@
 <p><a href="https://github.com/fponticelli/tempo">Github Repository</a></p>
 <p>Tempo is a framework to build dynamic front end applications.</p>
 <p>This is not an officially supported Google product.</p>
-<p><a href="./demo/todomvc/">TODO MVC demo</a></p>
-<p><a href="./demo/hnpwa/">HNPWA demo</a></p>
-<p><a href="./demo/paper/">PaperJS integration demo</a></p>
+<p><a href="demo/todomvc/">TODO MVC demo</a></p>
+<p><a href="demo/hnpwa/">HNPWA demo</a></p>
+<p><a href="demo/paper/">PaperJS integration demo</a></p>
 <h1 id="sampleapplication">Sample Application</h1>
 <p>A Tempo application operates on two main instances:</p>
 <ul>
@@ -22,7 +22,7 @@
 </ul>
 <p>These two instances work together applying <code>Tempo.render</code> to create your application.</p>
 <p>Here is a full example of a little widget that increments and decrements a counter, updating as the value changes.</p>
-<p>You can try out the <a href="./demo/readme/">demo running here</a>.</p>
+<p>You can try out the <a href="demo/readme/">demo running here</a>.</p>
 <pre class="language-ts"><code class="ts language-ts"><span class="token keyword">import</span> <span class="token punctuation">{</span> Tempo <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/tempo'</span>
 <span class="token keyword">import</span> <span class="token punctuation">{</span> div<span class="token punctuation">,</span> button <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/html'</span>
 <span class="token keyword">import</span> <span class="token punctuation">{</span> mapState <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/map'</span>
@@ -162,4 +162,4 @@ Tempo<span class="token punctuation">.</span><span class="token function">render
 <p>When the template is defined, nothing happens except that we have an instance of <code>DOMElement&lt;State, Action, HTMLDivElement&gt;</code>. This instance implements <code>DOMTemplate&lt;State, Action&gt;</code> which contains the method <code>render: (ctx: DOMContext, state: State) =&gt; View&lt;State&gt;</code>. When that method is invoked, it will perform the actual creation and modification of the browser's DOM. The <code>View</code> returned by the <code>render</code> method has a method <code>destroy()</code> to remove what has been generated and <code>change(state: State)</code> to update the its content.</p>
 <p>These functions are managed and wired automatically when <code>store</code> and <code>template</code> are passed to <code>Tempo.render</code>.</p>
 <p>The entire app fits 6.6kb when gzipped!</p>
-<p>This <a href="./demo/benchmark/">simple app tracks performance</a> improvements/regressions with new versions of the library.</p>
+<p>This <a href="demo/benchmark/">simple app tracks performance</a> improvements/regressions with new versions of the library.</p>

@@ -10,14 +10,21 @@ import { parseUrl } from './route'
 import { Action } from './action'
 import { State } from './state'
 
-const url = location.pathname.split('/').pop() + location.hash
-const route = parseUrl(url)
+const parseLocation = () => {
+  const url = location.pathname.split('/').pop() + location.hash
+  return parseUrl(url)
+}
 
-const store = Store.ofState<State, Action>({ state: makeState(route), reducer })
+const store = Store.ofState<State, Action>({ state: makeState(parseLocation()), reducer })
 
 Tempo.render({ store, template })
 
 store.observable.on(middleware(store))
+
+window.addEventListener('popstate', (e) => {
+  const route = parseLocation()
+  store.process(Action.goTo(route))
+})
 
 store.process(Action.requestToc)
 store.process(Action.requestPageContent)
