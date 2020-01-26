@@ -5,7 +5,7 @@ import { Route } from './route'
 
 export interface State {
   toc: AsyncResult<Toc, HttpError, unknown>
-  content: AsyncResult<string, HttpError, unknown>,
+  content: AsyncResult<string, HttpError, unknown>
   route: Route
 }
 
