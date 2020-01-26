@@ -20,9 +20,9 @@
 <p>Returns <code>true</code> if the passed <code>uuid</code> conforms to the UUID v.4 format.</p>
 <h2 id="variables-1">Variables</h2>
 <h3 id="constuuid"><code>Const</code> UUID</h3>
-<p>• <strong>UUID</strong>: <em>(Anonymous class)‹›</em> = new class extends NewtypeClass<UUID> {
+<p>• <strong>UUID</strong>: <em>(Anonymous class)‹›</em> = new class extends NewtypeClass<uuid> {
   isValid(uuid: string) { return pattern.test(uuid) }
-}()</p>
+}()</uuid></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/uuid.ts#L42">uuid.ts:42</a></em></p>
 <h2 id="functions-1">Functions</h2>
 <h3 id="constcreate"><code>Const</code> create</h3>
@@ -30,12 +30,23 @@
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/uuid.ts#L13">uuid.ts:13</a></em></p>
 <p><code>Uuid.create()</code> returns a string value representing a random UUID string.</p>
 <p><strong>Returns:</strong> <em><a href="../interfaces/_newtype_.newtype.md">Newtype</a>‹string, object›</em></p>
-<hr />
+<hr>
 <h3 id="consttostring"><code>Const</code> toString</h3>
 <p>▸ <strong>toString</strong>(<code>uuid</code>: <a href="_uuid_.md#uuid">UUID</a>): <em>string</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/uuid.ts#L46">uuid.ts:46</a></em></p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>uuid</code> | <a href="_uuid_.md#uuid">UUID</a> |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>uuid</code></td>
+<td><a href="_uuid_.md#uuid">UUID</a></td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em>string</em></p>

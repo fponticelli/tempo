@@ -1,12 +1,12 @@
-<p><a href="https://github.com/fponticelli/tempo/actions?query=workflow%3A" title="Build+and+Test"><img src="https://github.com/fponticelli/tempo/workflows/Build%20and%20Test/badge.svg" alt="Actions Status" /></a>
-<a href="https://www.npmjs.com/package/tempo-std"><img src="https://img.shields.io/npm/v/tempo-std?label=npm%3A%20tempo-std" alt="npm tempo std" /></a>
-<a href="https://www.npmjs.com/package/tempo-core"><img src="https://img.shields.io/npm/v/tempo-core?label=npm%3A%20tempo-core" alt="npm tempo core" /></a>
-<a href="https://www.npmjs.com/package/tempo-store"><img src="https://img.shields.io/npm/v/tempo-store?label=npm%3A%20tempo-store" alt="npm tempo store" /></a>
-<a href="https://www.npmjs.com/package/tempo-dom"><img src="https://img.shields.io/npm/v/tempo-dom?label=npm%3A%20tempo-dom" alt="npm tempo dom" /></a>
-<a href="https://www.npmjs.com/package/tempo-paper"><img src="https://img.shields.io/npm/v/tempo-paper?label=npm%3A%20tempo-paper" alt="npm tempo paper" /></a>
-<a href="https://github.com/fponticelli/tempo"><img src="https://img.shields.io/github/stars/fponticelli/tempo?label=Star%20me%20on%20Github&style=social" alt="GitHub stars" /></a></p>
+<p><a href="https://github.com/fponticelli/tempo/actions?query=workflow%3A" title="Build+and+Test"><img src="https://github.com/fponticelli/tempo/workflows/Build%20and%20Test/badge.svg" alt="Actions Status"></a>
+<a href="https://www.npmjs.com/package/tempo-std"><img src="https://img.shields.io/npm/v/tempo-std?label=npm%3A%20tempo-std" alt="npm tempo std"></a>
+<a href="https://www.npmjs.com/package/tempo-core"><img src="https://img.shields.io/npm/v/tempo-core?label=npm%3A%20tempo-core" alt="npm tempo core"></a>
+<a href="https://www.npmjs.com/package/tempo-store"><img src="https://img.shields.io/npm/v/tempo-store?label=npm%3A%20tempo-store" alt="npm tempo store"></a>
+<a href="https://www.npmjs.com/package/tempo-dom"><img src="https://img.shields.io/npm/v/tempo-dom?label=npm%3A%20tempo-dom" alt="npm tempo dom"></a>
+<a href="https://www.npmjs.com/package/tempo-paper"><img src="https://img.shields.io/npm/v/tempo-paper?label=npm%3A%20tempo-paper" alt="npm tempo paper"></a>
+<a href="https://github.com/fponticelli/tempo"><img src="https://img.shields.io/github/stars/fponticelli/tempo?label=Star%20me%20on%20Github&amp;style=social" alt="GitHub stars"></a></p>
 <p style="text-align: center">
-  <img src="./assets/icon-512x512.png" style="width: 128px" alt="Tempo logo" />
+  <img src="./assets/icon-512x512.png" style="width: 128px" alt="Tempo logo">
 </p>
 <p><a href="https://github.com/fponticelli/tempo">Github Repository</a></p>
 <p>Tempo is a framework to build dynamic front end applications.</p>
@@ -23,136 +23,136 @@
 <p>These two instances work together applying <code>Tempo.render</code> to create your application.</p>
 <p>Here is a full example of a little widget that increments and decrements a counter, updating as the value changes.</p>
 <p>You can try out the <a href="./demo/readme/">demo running here</a>.</p>
-<pre><code class="ts language-ts">import { Tempo } from 'tempo-dom/lib/tempo'
-import { div, button } from 'tempo-dom/lib/html'
-import { mapState } from 'tempo-dom/lib/map'
-import { Store } from 'tempo-store/lib/store'
+<pre class="language-ts"><code class="ts language-ts"><span class="token keyword">import</span> <span class="token punctuation">{</span> Tempo <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/tempo'</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> div<span class="token punctuation">,</span> button <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/html'</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> mapState <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/map'</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> Store <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-store/lib/store'</span>
 
-interface State {
-  count: number
-}
+<span class="token keyword">interface</span> <span class="token class-name">State</span> <span class="token punctuation">{</span>
+  count<span class="token operator">:</span> <span class="token builtin">number</span>
+<span class="token punctuation">}</span>
 
-const state = { count: 0 }
+<span class="token keyword">const</span> state <span class="token operator">=</span> <span class="token punctuation">{</span> count<span class="token operator">:</span> <span class="token number">0</span> <span class="token punctuation">}</span>
 
-interface Increment {
-  kind: 'increment'
-}
-interface Decrement {
-  kind: 'decrement'
-}
-type Action = Increment | Decrement
+<span class="token keyword">interface</span> <span class="token class-name">Increment</span> <span class="token punctuation">{</span>
+  kind<span class="token operator">:</span> <span class="token string">'increment'</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">interface</span> <span class="token class-name">Decrement</span> <span class="token punctuation">{</span>
+  kind<span class="token operator">:</span> <span class="token string">'decrement'</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">type</span> Action <span class="token operator">=</span> Increment <span class="token operator">|</span> Decrement
 
-const decrement = (): Action =&gt; ({ kind: 'decrement' })
-const increment = (): Action =&gt; ({ kind: 'increment' })
+<span class="token keyword">const</span> decrement <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token parameter">Action</span> <span class="token operator">=&gt;</span> <span class="token punctuation">(</span><span class="token punctuation">{</span> kind<span class="token operator">:</span> <span class="token string">'decrement'</span> <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token keyword">const</span> increment <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token parameter">Action</span> <span class="token operator">=&gt;</span> <span class="token punctuation">(</span><span class="token punctuation">{</span> kind<span class="token operator">:</span> <span class="token string">'increment'</span> <span class="token punctuation">}</span><span class="token punctuation">)</span>
 
-const reducer = (state: State, action: Action): State =&gt; {
-  switch (action.kind) {
-    case 'increment':
-      return { count: state.count + 1 }
-    case 'decrement':
-      return { count: state.count - 1 }
-    default:
-      throw `this should never happen`
-  }
-}
+<span class="token keyword">const</span> reducer <span class="token operator">=</span> <span class="token punctuation">(</span>state<span class="token operator">:</span> State<span class="token punctuation">,</span> action<span class="token operator">:</span> Action<span class="token punctuation">)</span><span class="token operator">:</span> <span class="token parameter">State</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">switch</span> <span class="token punctuation">(</span>action<span class="token punctuation">.</span>kind<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">case</span> <span class="token string">'increment'</span><span class="token operator">:</span>
+      <span class="token keyword">return</span> <span class="token punctuation">{</span> count<span class="token operator">:</span> state<span class="token punctuation">.</span>count <span class="token operator">+</span> <span class="token number">1</span> <span class="token punctuation">}</span>
+    <span class="token keyword">case</span> <span class="token string">'decrement'</span><span class="token operator">:</span>
+      <span class="token keyword">return</span> <span class="token punctuation">{</span> count<span class="token operator">:</span> state<span class="token punctuation">.</span>count <span class="token operator">-</span> <span class="token number">1</span> <span class="token punctuation">}</span>
+    <span class="token keyword">default</span><span class="token operator">:</span>
+      <span class="token keyword">throw</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">this should never happen</span><span class="token template-punctuation string">`</span></span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 
-const store = Store.ofState({ state, reducer })
+<span class="token keyword">const</span> store <span class="token operator">=</span> Store<span class="token punctuation">.</span><span class="token function">ofState</span><span class="token punctuation">(</span><span class="token punctuation">{</span> state<span class="token punctuation">,</span> reducer <span class="token punctuation">}</span><span class="token punctuation">)</span>
 
-const template = div&lt;State, Action&gt;(
-  { attrs: { className: 'app' } },
-  mapState(
-    { map: (state: State) =&gt; state.count },
-    div({ attrs: { className: 'count count-small' } }, 'count'),
-    div({ attrs: { className: 'count' } }, String),
-    div(
-      { attrs: { className: 'buttons' } },
-      button(
-        {
-          events: { click: decrement },
-          attrs: { disabled: (count: number) =&gt; count &lt;= 0 }
-        },
-        '-'
-      ),
-      button({ events: { click: increment } }, '+')
-    )
-  )
-)
+<span class="token keyword">const</span> template <span class="token operator">=</span> div<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  <span class="token punctuation">{</span> attrs<span class="token operator">:</span> <span class="token punctuation">{</span> className<span class="token operator">:</span> <span class="token string">'app'</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token function">mapState</span><span class="token punctuation">(</span>
+    <span class="token punctuation">{</span> <span class="token function-variable function">map</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">state<span class="token operator">:</span> State</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> state<span class="token punctuation">.</span>count <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token function">div</span><span class="token punctuation">(</span><span class="token punctuation">{</span> attrs<span class="token operator">:</span> <span class="token punctuation">{</span> className<span class="token operator">:</span> <span class="token string">'count count-small'</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token string">'count'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token function">div</span><span class="token punctuation">(</span><span class="token punctuation">{</span> attrs<span class="token operator">:</span> <span class="token punctuation">{</span> className<span class="token operator">:</span> <span class="token string">'count'</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> String<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token function">div</span><span class="token punctuation">(</span>
+      <span class="token punctuation">{</span> attrs<span class="token operator">:</span> <span class="token punctuation">{</span> className<span class="token operator">:</span> <span class="token string">'buttons'</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token function">button</span><span class="token punctuation">(</span>
+        <span class="token punctuation">{</span>
+          events<span class="token operator">:</span> <span class="token punctuation">{</span> click<span class="token operator">:</span> decrement <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          attrs<span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token function-variable function">disabled</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">count<span class="token operator">:</span> <span class="token builtin">number</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> count <span class="token operator">&lt;=</span> <span class="token number">0</span> <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token string">'-'</span>
+      <span class="token punctuation">)</span><span class="token punctuation">,</span>
+      <span class="token function">button</span><span class="token punctuation">(</span><span class="token punctuation">{</span> events<span class="token operator">:</span> <span class="token punctuation">{</span> click<span class="token operator">:</span> increment <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token string">'+'</span><span class="token punctuation">)</span>
+    <span class="token punctuation">)</span>
+  <span class="token punctuation">)</span>
+<span class="token punctuation">)</span>
 
-Tempo.render({ store, template })
+Tempo<span class="token punctuation">.</span><span class="token function">render</span><span class="token punctuation">(</span><span class="token punctuation">{</span> store<span class="token punctuation">,</span> template <span class="token punctuation">}</span><span class="token punctuation">)</span>
 </code></pre>
 <p>Let's analyze what is going on in this example.</p>
-<pre><code class="ts language-ts">interface State {
-  count: number
-}
+<pre class="language-ts"><code class="ts language-ts"><span class="token keyword">interface</span> <span class="token class-name">State</span> <span class="token punctuation">{</span>
+  count<span class="token operator">:</span> <span class="token builtin">number</span>
+<span class="token punctuation">}</span>
 
-const state = { count: 0 }
+<span class="token keyword">const</span> state <span class="token operator">=</span> <span class="token punctuation">{</span> count<span class="token operator">:</span> <span class="token number">0</span> <span class="token punctuation">}</span>
 </code></pre>
 <p>We start by declaring the signature for our State. In this case, our state is a simple object containing a numerical count.</p>
 <p>The UI rendering can only depend on the State and nothing else. This is one of the major advantages of Tempo; the way a UI renders is entirely contained within its State. Testing the UI is greatly simplified using this principle as it will consistently render with a given state.</p>
 <p>We also declare an initial State that is the default for our application.</p>
-<pre><code class="ts language-ts">interface Increment {
-  kind: 'increment'
-}
-interface Decrement {
-  kind: 'decrement'
-}
-type Action = Increment | Decrement
+<pre class="language-ts"><code class="ts language-ts"><span class="token keyword">interface</span> <span class="token class-name">Increment</span> <span class="token punctuation">{</span>
+  kind<span class="token operator">:</span> <span class="token string">'increment'</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">interface</span> <span class="token class-name">Decrement</span> <span class="token punctuation">{</span>
+  kind<span class="token operator">:</span> <span class="token string">'decrement'</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">type</span> Action <span class="token operator">=</span> Increment <span class="token operator">|</span> Decrement
 
-const decrement = (): Action =&gt; ({ kind: 'decrement' })
-const increment = (): Action =&gt; ({ kind: 'increment' })
+<span class="token keyword">const</span> decrement <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token parameter">Action</span> <span class="token operator">=&gt;</span> <span class="token punctuation">(</span><span class="token punctuation">{</span> kind<span class="token operator">:</span> <span class="token string">'decrement'</span> <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token keyword">const</span> increment <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token parameter">Action</span> <span class="token operator">=&gt;</span> <span class="token punctuation">(</span><span class="token punctuation">{</span> kind<span class="token operator">:</span> <span class="token string">'increment'</span> <span class="token punctuation">}</span><span class="token punctuation">)</span>
 </code></pre>
 <p>Each interaction with the application is performed using Actions. Actions, like State, are defined per-application. Since actions are usually alternatives, they are well represented by union types like above. Actions can contain more data than just their kind, but this simple example's Actions don't require any additional information.</p>
 <p>To make the code cleaner, we implement two functions that map to these actions. These functions can be used to replace the traditional event handlers found in the browser DOM. See how they're used in the template to handle user clicks.</p>
 <p>In a traditional JavaScript application, an event can be mapped to an event handler with the following signature.</p>
-<pre><code class="ts language-ts">(event: Event) =&gt; void
+<pre class="language-ts"><code class="ts language-ts"><span class="token punctuation">(</span><span class="token parameter">event<span class="token operator">:</span> Event</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
 </code></pre>
 <p>In Tempo, the event handler has a more advanced signature:</p>
-<pre><code class="ts language-ts">&lt;State, Action, Ev extends Event = Event, El extends Element = Element&gt; = (state: State, event: Ev, element: El) =&gt; Action | undefined
+<pre class="language-ts"><code class="ts language-ts"><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Ev <span class="token keyword">extends</span> <span class="token class-name">Event</span> <span class="token operator">=</span> Event<span class="token punctuation">,</span> El <span class="token keyword">extends</span> <span class="token class-name">Element</span> <span class="token operator">=</span> Element<span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">state<span class="token operator">:</span> State<span class="token punctuation">,</span> event<span class="token operator">:</span> Ev<span class="token punctuation">,</span> element<span class="token operator">:</span> El</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Action <span class="token operator">|</span> <span class="token keyword">undefined</span>
 </code></pre>
 <p>The function takes the current state, the DOM event, and the element associated with the event. If it returns an Action, the reducer function that updates the state will be invoked with the returned Action. If it returns <code>undefined</code>, the reducer function will not be invoked.</p>
 <p>All attributes and text nodes in Tempo can be either Derived or Literal values. If they are derived, the content generated in the web-page will depend on the current state. If they are literals, they are assigned on the first render and never altered again for the life-cycle of the wrapping elements.</p>
-<pre><code class="ts language-ts">const reducer = (state: State, action: Action) =&gt; {
-  switch (action.kind) {
-    case 'increment':
-      return { count: state.count + 1 }
-    case 'decrement':
-      return { count: state.count - 1 }
-    default:
-      throw `this should never happen`
-  }
-}
+<pre class="language-ts"><code class="ts language-ts"><span class="token keyword">const</span> <span class="token function-variable function">reducer</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">state<span class="token operator">:</span> State<span class="token punctuation">,</span> action<span class="token operator">:</span> Action</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">switch</span> <span class="token punctuation">(</span>action<span class="token punctuation">.</span>kind<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">case</span> <span class="token string">'increment'</span><span class="token operator">:</span>
+      <span class="token keyword">return</span> <span class="token punctuation">{</span> count<span class="token operator">:</span> state<span class="token punctuation">.</span>count <span class="token operator">+</span> <span class="token number">1</span> <span class="token punctuation">}</span>
+    <span class="token keyword">case</span> <span class="token string">'decrement'</span><span class="token operator">:</span>
+      <span class="token keyword">return</span> <span class="token punctuation">{</span> count<span class="token operator">:</span> state<span class="token punctuation">.</span>count <span class="token operator">-</span> <span class="token number">1</span> <span class="token punctuation">}</span>
+    <span class="token keyword">default</span><span class="token operator">:</span>
+      <span class="token keyword">throw</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">this should never happen</span><span class="token template-punctuation string">`</span></span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 
-const store = Store.ofState({ state, reducer })
+<span class="token keyword">const</span> store <span class="token operator">=</span> Store<span class="token punctuation">.</span><span class="token function">ofState</span><span class="token punctuation">(</span><span class="token punctuation">{</span> state<span class="token punctuation">,</span> reducer <span class="token punctuation">}</span><span class="token punctuation">)</span>
 </code></pre>
 <p>In the code above we create an instance of <code>Store</code>. A Store wraps a <code>Property</code>. A Property is an observable instance that triggers its own listeners whenever the value that it holds is changed.</p>
 <p>A Store adds to the application its ability to change state in reaction to Actions. This State update is defined by the <code>reducer</code> function above. A reducer as the simple signature of:</p>
-<pre><code class="ts language-ts">(state: State, action: Action) =&gt; State
+<pre class="language-ts"><code class="ts language-ts"><span class="token punctuation">(</span><span class="token parameter">state<span class="token operator">:</span> State<span class="token punctuation">,</span> action<span class="token operator">:</span> Action</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> State
 </code></pre>
 <p>The reducer takes the current State and an Action that has happened (usually from some user interaction) and returns a new state to replace the original. A reducer function should not introduce side-effects, like server calls, or perform heavy computations.</p>
 <p>If you want to perform async operations, you can do that by observing <code>store.observable</code>. The listeners for this object take three arguments: <code>(state: State, action: Action, changed: boolean)</code>. In a listener you can, for example, call a remote service. Once you have an async response, you can invoke <code>store.process(action)</code> with a new Action that will be applied to the store.</p>
 <p>In our example, <code>reducer</code> is simply creating a new state where <code>count</code> is either incremented or decremented.</p>
 <p><strong>Note</strong>: <code>Property</code> doesn't trigger its listeners unless the value is actually changed. Setting the same value twice will not trigger a second change. This behavior can be controlled by passing an optional equivalence <code>equal: (a: State, b: State) =&gt; boolean</code> function. By default, the implementation provided will perform a strict comparison.</p>
-<pre><code class="ts language-ts">const template = div&lt;State, Action&gt;(
-  { attrs: { className: 'app' } },
-  mapState(
-    { map: (state: State) =&gt; state.count },
-    div({ attrs: { className: 'count count-small' } }, 'count'),
-    div({ attrs: { className: 'count' } }, String),
-    div(
-      { attrs: { className: 'buttons' } },
-      button(
-        {
-          events: { click: decrement },
-          attrs: { disabled: (count: number) =&gt; count &lt;= 0 }
-        },
-        '-'
-      ),
-      button({ events: { click: increment } }, '+')
-    )
-  )
-)
+<pre class="language-ts"><code class="ts language-ts"><span class="token keyword">const</span> template <span class="token operator">=</span> div<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  <span class="token punctuation">{</span> attrs<span class="token operator">:</span> <span class="token punctuation">{</span> className<span class="token operator">:</span> <span class="token string">'app'</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token function">mapState</span><span class="token punctuation">(</span>
+    <span class="token punctuation">{</span> <span class="token function-variable function">map</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">state<span class="token operator">:</span> State</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> state<span class="token punctuation">.</span>count <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token function">div</span><span class="token punctuation">(</span><span class="token punctuation">{</span> attrs<span class="token operator">:</span> <span class="token punctuation">{</span> className<span class="token operator">:</span> <span class="token string">'count count-small'</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token string">'count'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token function">div</span><span class="token punctuation">(</span><span class="token punctuation">{</span> attrs<span class="token operator">:</span> <span class="token punctuation">{</span> className<span class="token operator">:</span> <span class="token string">'count'</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> String<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token function">div</span><span class="token punctuation">(</span>
+      <span class="token punctuation">{</span> attrs<span class="token operator">:</span> <span class="token punctuation">{</span> className<span class="token operator">:</span> <span class="token string">'buttons'</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token function">button</span><span class="token punctuation">(</span>
+        <span class="token punctuation">{</span>
+          events<span class="token operator">:</span> <span class="token punctuation">{</span> click<span class="token operator">:</span> decrement <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          attrs<span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token function-variable function">disabled</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">count<span class="token operator">:</span> <span class="token builtin">number</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> count <span class="token operator">&lt;=</span> <span class="token number">0</span> <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token string">'-'</span>
+      <span class="token punctuation">)</span><span class="token punctuation">,</span>
+      <span class="token function">button</span><span class="token punctuation">(</span><span class="token punctuation">{</span> events<span class="token operator">:</span> <span class="token punctuation">{</span> click<span class="token operator">:</span> increment <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token string">'+'</span><span class="token punctuation">)</span>
+    <span class="token punctuation">)</span>
+  <span class="token punctuation">)</span>
+<span class="token punctuation">)</span>
 
-Tempo.render({ store, template })
+Tempo<span class="token punctuation">.</span><span class="token function">render</span><span class="token punctuation">(</span><span class="token punctuation">{</span> store<span class="token punctuation">,</span> template <span class="token punctuation">}</span><span class="token punctuation">)</span>
 </code></pre>
 <p>Finally the UI! Each element, like <code>div</code> above, takes one or more arguments.</p>
 <p>The first argument is for the element's attributes. If passed a literal value, like the attributes <code>className: 'app'</code> above, it will be rendered once and cannot be updated dynamically. For dynamic values a function from State to the attribute type is required.</p>

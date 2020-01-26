@@ -5,12 +5,6 @@ order: 4
 
 # FAQ
 
-## Table of contents
-{: .no_toc .text-delta }
-
-1. TOC
-{:toc}
-
 ### Why no JSX/TSX?
 
 It wouls be really great to have TSX support in Tempo. Unforunately the current implementation doesn't work well with generics. That means that all of the inferred typing for State and Action would get lost using TSX. If someone wants to give it another try, I'd love to consider a PR.

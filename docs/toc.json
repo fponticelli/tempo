@@ -1,21 +1,9 @@
 {
-  "projects": {
-    "core": {
-      "name": "core",
-      "title": "tempo-core",
-      "description": "Core types for Tempo. The tempo architecture encourages a unilateral flow in a practical way.",
-      "version": "1.6.0",
-      "keywords": [
-        "tempo",
-        "framework",
-        "ui",
-        "library"
-      ]
-    },
-    "dom": {
+  "projects": [
+    {
       "name": "dom",
       "title": "tempo-dom",
-      "description": "Fully-typed web framework alternative to React and Angular",
+      "description": "Fully-typed frontend framework alternative to React and Angular",
       "version": "0.14.0",
       "keywords": [
         "tempo",
@@ -27,19 +15,7 @@
         "react-alternative"
       ]
     },
-    "paperjs": {
-      "name": "paperjs",
-      "title": "tempo-paper",
-      "description": "",
-      "version": "0.3.0",
-      "keywords": [
-        "tempo",
-        "paperjs",
-        "2d",
-        "graphics"
-      ]
-    },
-    "std": {
+    {
       "name": "std",
       "title": "tempo-std",
       "description": "Std library for TypeScript. Natural complement to the tempo libs.",
@@ -51,7 +27,19 @@
         "library"
       ]
     },
-    "store": {
+    {
+      "name": "core",
+      "title": "tempo-core",
+      "description": "Core types for Tempo. The tempo architecture encourages a unilateral flow in a practical way.",
+      "version": "1.6.0",
+      "keywords": [
+        "tempo",
+        "framework",
+        "ui",
+        "library"
+      ]
+    },
+    {
       "name": "store",
       "title": "tempo-store",
       "description": "Super simple state management library",
@@ -64,8 +52,20 @@
         "state-management",
         "typescript"
       ]
+    },
+    {
+      "name": "paperjs",
+      "title": "tempo-paper",
+      "description": "Integration of PaperJS api using Tempo to create a declarative Document Object Model.",
+      "version": "0.3.0",
+      "keywords": [
+        "tempo",
+        "paperjs",
+        "2d",
+        "graphics"
+      ]
     }
-  },
+  ],
   "demos": [
     {
       "path": "todomvc",

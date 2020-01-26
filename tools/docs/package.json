@@ -12,7 +12,7 @@
   "license": "Apache-2.0",
   "private": false,
   "scripts": {
-    "buildtoc": "ts-node --project tsconfig.script.json ./scripts/buildtoc.ts",
+    "builddocs": "ts-node --project tsconfig.script.json ./scripts/builddocs.ts",
     "compile": "webpack --mode=production",
     "clean": "rm -rf dist/* && rm -rf ../../docs/demo/paper/*",
     "build": "npm run clean && npm run compile",
@@ -62,7 +62,10 @@
     "@types/fs-extra": "8.0.1",
     "showdown": "1.9.1",
     "@types/showdown": "1.7.3",
-    "front-matter": "3.1.0"
+    "front-matter": "3.1.0",
+    "prismjs": "1.19.0",
+    "prism-themes": "1.3.0",
+    "@types/prismjs": "1.16.0"
   },
   "main": "lib/index.js",
   "module": "es6/index.js",

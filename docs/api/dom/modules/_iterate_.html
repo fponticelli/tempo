@@ -7,7 +7,7 @@
 </ul>
 <h2 id="functions-1">Functions</h2>
 <h3 id="constiterate"><code>Const</code> iterate</h3>
-<p>▸ <strong>iterate</strong><<strong>OuterState</strong>, <strong>InnerState</strong>, <strong>Action</strong>, <strong>Query</strong>>(<code>options</code>: object, …<code>children</code>: <a href="_template_.md#domchild">DOMChild</a>‹[InnerState[number], OuterState, number], Action, Query›[]): <em><a href="../interfaces/_template_.domtemplate.md">DOMTemplate</a>‹OuterState, Action, Query›</em></p>
+<p>▸ <strong>iterate</strong>&lt;<strong>OuterState</strong>, <strong>InnerState</strong>, <strong>Action</strong>, <strong>Query</strong>&gt;(<code>options</code>: object, …<code>children</code>: <a href="_template_.md#domchild">DOMChild</a>‹[InnerState[number], OuterState, number], Action, Query›[]): <em><a href="../interfaces/_template_.domtemplate.md">DOMTemplate</a>‹OuterState, Action, Query›</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/iterate.ts#L18">dom/src/iterate.ts:18</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>OuterState</strong></p>
@@ -16,15 +16,29 @@
 <p>▪ <strong>Query</strong></p>
 <p><strong>Parameters:</strong></p>
 <p>▪ <strong>options</strong>: <em>object</em></p>
-<p>Name | Type |
------- | ------ |
-<code>getArray</code> | function |
-<code>refId?</code> | undefined &#124; string |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>getArray</code></td>
+<td>function</td>
+</tr>
+<tr>
+<td><code>refId?</code></td>
+<td>undefined | string</td>
+</tr>
+</tbody>
+</table>
 <p>▪… <strong>children</strong>: <em><a href="_template_.md#domchild">DOMChild</a>‹[InnerState[number], OuterState, number], Action, Query›[]</em></p>
 <p><strong>Returns:</strong> <em><a href="../interfaces/_template_.domtemplate.md">DOMTemplate</a>‹OuterState, Action, Query›</em></p>
-<hr />
+<hr>
 <h3 id="constiterateitems"><code>Const</code> iterateItems</h3>
-<p>▸ <strong>iterateItems</strong><<strong>OuterState</strong>, <strong>InnerState</strong>, <strong>Action</strong>, <strong>Query</strong>>(<code>options</code>: object, …<code>children</code>: <a href="_template_.md#domchild">DOMChild</a>‹InnerState[number], Action, Query›[]): <em><a href="../interfaces/_template_.domtemplate.md">DOMTemplate</a>‹OuterState, Action, Query›</em></p>
+<p>▸ <strong>iterateItems</strong>&lt;<strong>OuterState</strong>, <strong>InnerState</strong>, <strong>Action</strong>, <strong>Query</strong>&gt;(<code>options</code>: object, …<code>children</code>: <a href="_template_.md#domchild">DOMChild</a>‹InnerState[number], Action, Query›[]): <em><a href="../interfaces/_template_.domtemplate.md">DOMTemplate</a>‹OuterState, Action, Query›</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/iterate.ts#L43">dom/src/iterate.ts:43</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>OuterState</strong></p>
@@ -33,9 +47,23 @@
 <p>▪ <strong>Query</strong></p>
 <p><strong>Parameters:</strong></p>
 <p>▪ <strong>options</strong>: <em>object</em></p>
-<p>Name | Type |
------- | ------ |
-<code>getArray</code> | function |
-<code>refId?</code> | undefined &#124; string |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>getArray</code></td>
+<td>function</td>
+</tr>
+<tr>
+<td><code>refId?</code></td>
+<td>undefined | string</td>
+</tr>
+</tbody>
+</table>
 <p>▪… <strong>children</strong>: <em><a href="_template_.md#domchild">DOMChild</a>‹InnerState[number], Action, Query›[]</em></p>
 <p><strong>Returns:</strong> <em><a href="../interfaces/_template_.domtemplate.md">DOMTemplate</a>‹OuterState, Action, Query›</em></p>

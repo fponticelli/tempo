@@ -17,46 +17,99 @@
 <h4 id="typedeclaration">Type declaration:</h4>
 <p>▸ (<code>state</code>: State, <code>action</code>: Action): <em>State</em></p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>state</code> | State |
-<code>action</code> | Action |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>state</code></td>
+<td>State</td>
+</tr>
+<tr>
+<td><code>action</code></td>
+<td>Action</td>
+</tr>
+</tbody>
+</table>
 <h2 id="functions-1">Functions</h2>
 <h3 id="constcompose"><code>Const</code> compose</h3>
-<p>▸ <strong>compose</strong><<strong>State</strong>, <strong>Action</strong>>(<code>reducer</code>: <a href="_reducer_.md#reducer">Reducer</a>‹State, Action›, …<code>others</code>: <a href="_reducer_.md#reducer">Reducer</a>‹State, Action›[]): <em>(Anonymous function)</em></p>
+<p>▸ <strong>compose</strong>&lt;<strong>State</strong>, <strong>Action</strong>&gt;(<code>reducer</code>: <a href="_reducer_.md#reducer">Reducer</a>‹State, Action›, …<code>others</code>: <a href="_reducer_.md#reducer">Reducer</a>‹State, Action›[]): <em>(Anonymous function)</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/store/src/reducer.ts#L16">reducer.ts:16</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>State</strong></p>
 <p>▪ <strong>Action</strong></p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>reducer</code> | <a href="_reducer_.md#reducer">Reducer</a>‹State, Action› |
-<code>...others</code> | <a href="_reducer_.md#reducer">Reducer</a>‹State, Action›[] |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>reducer</code></td>
+<td><a href="_reducer_.md#reducer">Reducer</a>‹State, Action›</td>
+</tr>
+<tr>
+<td><code>...others</code></td>
+<td><a href="_reducer_.md#reducer">Reducer</a>‹State, Action›[]</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em>(Anonymous function)</em></p>
-<hr />
+<hr>
 <h3 id="constmatchreduce"><code>Const</code> matchReduce</h3>
-<p>▸ <strong>matchReduce</strong><<strong>Field</strong>, <strong>State</strong>, <strong>Action</strong>>(<code>field</code>: Field, <code>matches</code>: object): <em><a href="_reducer_.md#reducer">Reducer</a>‹State, Action›</em></p>
+<p>▸ <strong>matchReduce</strong>&lt;<strong>Field</strong>, <strong>State</strong>, <strong>Action</strong>&gt;(<code>field</code>: Field, <code>matches</code>: object): <em><a href="_reducer_.md#reducer">Reducer</a>‹State, Action›</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/store/src/reducer.ts#L23">reducer.ts:23</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>Field</strong>: <em>string | number | symbol</em></p>
 <p>▪ <strong>State</strong></p>
 <p>▪ <strong>Action</strong>: <em>object</em></p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>field</code> | Field |
-<code>matches</code> | object |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>field</code></td>
+<td>Field</td>
+</tr>
+<tr>
+<td><code>matches</code></td>
+<td>object</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em><a href="_reducer_.md#reducer">Reducer</a>‹State, Action›</em></p>
-<hr />
+<hr>
 <h3 id="constreduceonkind"><code>Const</code> reduceOnKind</h3>
-<p>▸ <strong>reduceOnKind</strong><<strong>State</strong>, <strong>Action</strong>>(<code>matches</code>: object): <em><a href="_reducer_.md#reducer">Reducer</a>‹State, Action›</em></p>
+<p>▸ <strong>reduceOnKind</strong>&lt;<strong>State</strong>, <strong>Action</strong>&gt;(<code>matches</code>: object): <em><a href="_reducer_.md#reducer">Reducer</a>‹State, Action›</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/store/src/reducer.ts#L42">reducer.ts:42</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>State</strong></p>
 <p>▪ <strong>Action</strong>: <em>object</em></p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>matches</code> | object |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>matches</code></td>
+<td>object</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em><a href="_reducer_.md#reducer">Reducer</a>‹State, Action›</em></p>

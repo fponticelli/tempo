@@ -10,7 +10,7 @@
 </ul>
 <h2 id="functions-1">Functions</h2>
 <h3 id="constcomponent"><code>Const</code> component</h3>
-<p>▸ <strong>component</strong><<strong>State</strong>, <strong>Action</strong>, <strong>Query</strong>>(<code>attributes</code>: object, …<code>children</code>: <a href="../interfaces/_template_.papertemplate.md">PaperTemplate</a>‹State, Action, Query›[]): <em><a href="../classes/_component_.papercomponenttemplate.md">PaperComponentTemplate</a>‹State, Action, Query›</em></p>
+<p>▸ <strong>component</strong>&lt;<strong>State</strong>, <strong>Action</strong>, <strong>Query</strong>&gt;(<code>attributes</code>: object, …<code>children</code>: <a href="../interfaces/_template_.papertemplate.md">PaperTemplate</a>‹State, Action, Query›[]): <em><a href="../classes/_component_.papercomponenttemplate.md">PaperComponentTemplate</a>‹State, Action, Query›</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/paperjs/src/component.ts#L75">paperjs/src/component.ts:75</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>State</strong></p>
@@ -18,9 +18,23 @@
 <p>▪ <strong>Query</strong></p>
 <p><strong>Parameters:</strong></p>
 <p>▪ <strong>attributes</strong>: <em>object</em></p>
-<p>Name | Type |
------- | ------ |
-<code>delayed?</code> | undefined &#124; false &#124; true |
-<code>store</code> | Store‹State, Action› |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>delayed?</code></td>
+<td>undefined | false | true</td>
+</tr>
+<tr>
+<td><code>store</code></td>
+<td>Store‹State, Action›</td>
+</tr>
+</tbody>
+</table>
 <p>▪… <strong>children</strong>: <em><a href="../interfaces/_template_.papertemplate.md">PaperTemplate</a>‹State, Action, Query›[]</em></p>
 <p><strong>Returns:</strong> <em><a href="../classes/_component_.papercomponenttemplate.md">PaperComponentTemplate</a>‹State, Action, Query›</em></p>

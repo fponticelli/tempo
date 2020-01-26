@@ -9,6 +9,8 @@
     "module": "commonjs",
     "removeComments": true,
     "moduleResolution": "node",
-    "outDir": "build"
+    "outDir": "build",
+    "baseUrl": ".",
+    "paths": { "*": ["typings/*"] }
   }
 }

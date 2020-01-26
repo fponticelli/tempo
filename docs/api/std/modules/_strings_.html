@@ -86,7 +86,7 @@
 <h3 id="constbase64_alphabet"><code>Const</code> BASE64_ALPHABET</h3>
 <p>• <strong>BASE64_ALPHABET</strong>: <em>"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"</em> = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"</p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/strings.ts#L703">strings.ts:703</a></em></p>
-<hr />
+<hr>
 <h3 id="constorder"><code>Const</code> order</h3>
 <p>• <strong>order</strong>: <em><a href="../classes/_ord_.ord.md">Ord</a>‹string›</em> = Ord.fromNumberComparison(compare)</p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/strings.ts#L161">strings.ts:161</a></em></p>
@@ -97,80 +97,175 @@
 <p><code>after</code> searches for the first occurrance of <code>searchFor</code> and returns the text after that.
 If <code>searchFor</code> is not found, an empty string is returned.</p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>value</code> | string |
-<code>searchFor</code> | string |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>value</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>searchFor</code></td>
+<td>string</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em>string</em></p>
-<hr />
+<hr>
 <h3 id="afterlast">afterLast</h3>
 <p>▸ <strong>afterLast</strong>(<code>value</code>: string, <code>searchFor</code>: string): <em>string</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/strings.ts#L40">strings.ts:40</a></em></p>
 <p><code>afterLast</code> searches for the last occurrance of <code>searchFor</code> and returns the text after that.
 If <code>searchFor</code> is not found, an empty string is returned.</p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>value</code> | string |
-<code>searchFor</code> | string |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>value</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>searchFor</code></td>
+<td>string</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em>string</em></p>
-<hr />
+<hr>
 <h3 id="before">before</h3>
 <p>▸ <strong>before</strong>(<code>value</code>: string, <code>searchFor</code>: string): <em>string</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/strings.ts#L52">strings.ts:52</a></em></p>
 <p><code>before</code> searches for the first occurrance of <code>searchFor</code> and returns the text before that.
 If <code>searchFor</code> is not found, an empty string is returned.</p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>value</code> | string |
-<code>searchFor</code> | string |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>value</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>searchFor</code></td>
+<td>string</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em>string</em></p>
-<hr />
+<hr>
 <h3 id="beforelast">beforeLast</h3>
 <p>▸ <strong>beforeLast</strong>(<code>value</code>: string, <code>searchFor</code>: string): <em>string</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/strings.ts#L64">strings.ts:64</a></em></p>
 <p><code>beforeLast</code> searches for the last occurrance of <code>searchFor</code> and returns the text before that.
 If <code>searchFor</code> is not found, an empty string is returned.</p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>value</code> | string |
-<code>searchFor</code> | string |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>value</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>searchFor</code></td>
+<td>string</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em>string</em></p>
-<hr />
+<hr>
 <h3 id="canonicalizenewlines">canonicalizeNewlines</h3>
 <p>▸ <strong>canonicalizeNewlines</strong>(<code>value</code>: string): <em>string</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/strings.ts#L96">strings.ts:96</a></em></p>
 <p>Replaces occurrances of <code>\r\n</code>, <code>\n\r</code>, <code>\r</code> with <code>\n</code></p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>value</code> | string |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>value</code></td>
+<td>string</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em>string</em></p>
-<hr />
+<hr>
 <h3 id="capitalize">capitalize</h3>
 <p>▸ <strong>capitalize</strong>(<code>s</code>: string): <em>string</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/strings.ts#L75">strings.ts:75</a></em></p>
 <p><code>capitalize</code> returns a string with the first character convert to upper case.</p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>s</code> | string |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>s</code></td>
+<td>string</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em>string</em></p>
-<hr />
+<hr>
 <h3 id="capitalizewords">capitalizeWords</h3>
 <p>▸ <strong>capitalizeWords</strong>(<code>value</code>: string, <code>whiteSpaceOnly</code>: boolean): <em>string</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/strings.ts#L85">strings.ts:85</a></em></p>
 <p>Capitalize the first letter of every word in <code>value</code>. If <code>whiteSpaceOnly</code> is set to <code>true</code>
 the process is limited to whitespace separated words.</p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type | Default |
------- | ------ | ------ |
-<code>value</code> | string | - |
-<code>whiteSpaceOnly</code> | boolean | false |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>value</code></td>
+<td>string</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>whiteSpaceOnly</code></td>
+<td>boolean</td>
+<td>false</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em>string</em></p>
-<hr />
+<hr>
 <h3 id="collapse">collapse</h3>
 <p>▸ <strong>collapse</strong>(<code>value</code>: string): <em>string</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/strings.ts#L149">strings.ts:149</a></em></p>
@@ -181,205 +276,465 @@ the process is limited to whitespace separated words.</p>
 For whitespaces in this description, it is intended to be anything that is matched by the regular expression <code>\s</code>.</li>
 </ul>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>value</code> | string |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>value</code></td>
+<td>string</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em>string</em></p>
-<hr />
+<hr>
 <h3 id="compare">compare</h3>
 <p>▸ <strong>compare</strong>(<code>a</code>: string, <code>b</code>: string): <em>0 | 1 | -1</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/strings.ts#L157">strings.ts:157</a></em></p>
 <p>It compares to string and it returns a negative number if <code>a</code> is inferior to <code>b</code>, zero if they are the same,
 or otherwise a positive non-sero number.</p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>a</code> | string |
-<code>b</code> | string |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>a</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>b</code></td>
+<td>string</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em>0 | 1 | -1</em></p>
-<hr />
+<hr>
 <h3 id="comparecaseinsensitive">compareCaseInsensitive</h3>
 <p>▸ <strong>compareCaseInsensitive</strong>(<code>a</code>: string, <code>b</code>: string): <em>number</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/strings.ts#L103">strings.ts:103</a></em></p>
 <p>Compares two strings ignoring their case.</p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>a</code> | string |
-<code>b</code> | string |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>a</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>b</code></td>
+<td>string</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em>number</em></p>
-<hr />
+<hr>
 <h3 id="contains">contains</h3>
 <p>▸ <strong>contains</strong>(<code>s</code>: string, <code>test</code>: string): <em>boolean</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/strings.ts#L173">strings.ts:173</a></em></p>
 <p><code>contains</code> returns <code>true</code> if <code>s</code> contains one or more occurrences of <code>test</code>.</p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>s</code> | string |
-<code>test</code> | string |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>s</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>test</code></td>
+<td>string</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em>boolean</em></p>
-<hr />
+<hr>
 <h3 id="containsall">containsAll</h3>
 <p>▸ <strong>containsAll</strong>(<code>s</code>: string, <code>tests</code>: Array‹string›): <em>boolean</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/strings.ts#L208">strings.ts:208</a></em></p>
 <p><code>contains</code> returns <code>true</code> if <code>s</code> contains all of the strings in <code>tests</code></p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>s</code> | string |
-<code>tests</code> | Array‹string› |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>s</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>tests</code></td>
+<td>Array‹string›</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em>boolean</em></p>
-<hr />
+<hr>
 <h3 id="containsallcaseinsensitive">containsAllCaseInsensitive</h3>
 <p>▸ <strong>containsAllCaseInsensitive</strong>(<code>s</code>: string, <code>tests</code>: Array‹string›): <em>boolean</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/strings.ts#L201">strings.ts:201</a></em></p>
 <p><code>contains</code> returns <code>true</code> if <code>s</code> contains all of the strings in <code>tests</code> regardless of the text case</p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>s</code> | string |
-<code>tests</code> | Array‹string› |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>s</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>tests</code></td>
+<td>Array‹string›</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em>boolean</em></p>
-<hr />
+<hr>
 <h3 id="containsany">containsAny</h3>
 <p>▸ <strong>containsAny</strong>(<code>s</code>: string, <code>tests</code>: Array‹string›): <em>boolean</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/strings.ts#L194">strings.ts:194</a></em></p>
 <p><code>contains</code> returns <code>true</code> if <code>s</code> contains any of the strings in <code>tests</code></p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>s</code> | string |
-<code>tests</code> | Array‹string› |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>s</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>tests</code></td>
+<td>Array‹string›</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em>boolean</em></p>
-<hr />
+<hr>
 <h3 id="containsanycaseinsensitive">containsAnyCaseInsensitive</h3>
 <p>▸ <strong>containsAnyCaseInsensitive</strong>(<code>s</code>: string, <code>tests</code>: Array‹string›): <em>boolean</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/strings.ts#L187">strings.ts:187</a></em></p>
 <p><code>contains</code> returns <code>true</code> if <code>s</code> contains any of the strings in <code>tests</code> regardless of the text case</p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>s</code> | string |
-<code>tests</code> | Array‹string› |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>s</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>tests</code></td>
+<td>Array‹string›</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em>boolean</em></p>
-<hr />
+<hr>
 <h3 id="containscaseinsensitive">containsCaseInsensitive</h3>
 <p>▸ <strong>containsCaseInsensitive</strong>(<code>s</code>: string, <code>test</code>: string): <em>boolean</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/strings.ts#L166">strings.ts:166</a></em></p>
 <p><code>contains</code> returns <code>true</code> if <code>s</code> contains one or more occurrences of <code>test</code> regardless of the text case.</p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>s</code> | string |
-<code>test</code> | string |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>s</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>test</code></td>
+<td>string</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em>boolean</em></p>
-<hr />
+<hr>
 <h3 id="count">count</h3>
 <p>▸ <strong>count</strong>(<code>s</code>: string, <code>test</code>: string): <em>number</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/strings.ts#L180">strings.ts:180</a></em></p>
 <p>Return the number of occurances of <code>test</code> in <code>s</code>.</p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>s</code> | string |
-<code>test</code> | string |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>s</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>test</code></td>
+<td>string</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em>number</em></p>
-<hr />
+<hr>
 <h3 id="dasherize">dasherize</h3>
 <p>▸ <strong>dasherize</strong>(<code>s</code>: string): <em>string</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/strings.ts#L215">strings.ts:215</a></em></p>
 <p><code>dasherize</code> replaces all the occurrances of <code>_</code> with <code>-</code></p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>s</code> | string |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>s</code></td>
+<td>string</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em>string</em></p>
-<hr />
+<hr>
 <h3 id="diffat">diffAt</h3>
 <p>▸ <strong>diffAt</strong>(<code>a</code>: string, <code>b</code>: string): <em>number</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/strings.ts#L225">strings.ts:225</a></em></p>
 <p>Compares strings <code>a</code> and <code>b</code> and returns the position where they differ.</p>
-<pre><code class="ts language-ts">diffAt('abcdef', 'abc123') // returns 3
+<pre class="language-ts"><code class="ts language-ts"><span class="token function">diffAt</span><span class="token punctuation">(</span><span class="token string">'abcdef'</span><span class="token punctuation">,</span> <span class="token string">'abc123'</span><span class="token punctuation">)</span> <span class="token comment">// returns 3</span>
 </code></pre>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>a</code> | string |
-<code>b</code> | string |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>a</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>b</code></td>
+<td>string</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em>number</em></p>
-<hr />
+<hr>
 <h3 id="ellipsis">ellipsis</h3>
 <p>▸ <strong>ellipsis</strong>(<code>s</code>: string, <code>maxlen</code>: number, <code>symbol</code>: string): <em>string</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/strings.ts#L240">strings.ts:240</a></em></p>
 <p><code>ellipsis</code> truncates <code>s</code> at len <code>maxlen</code> replaces the last characters with the content
 of <code>symbol</code>.</p>
-<pre><code class="ts language-ts">ellipsis('tempo is a nice library', 9) // returns 'tempo is …'
+<pre class="language-ts"><code class="ts language-ts"><span class="token function">ellipsis</span><span class="token punctuation">(</span><span class="token string">'tempo is a nice library'</span><span class="token punctuation">,</span> <span class="token number">9</span><span class="token punctuation">)</span> <span class="token comment">// returns 'tempo is …'</span>
 </code></pre>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type | Default |
------- | ------ | ------ |
-<code>s</code> | string | - |
-<code>maxlen</code> | number | 20 |
-<code>symbol</code> | string | "…" |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>s</code></td>
+<td>string</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>maxlen</code></td>
+<td>number</td>
+<td>20</td>
+</tr>
+<tr>
+<td><code>symbol</code></td>
+<td>string</td>
+<td>"…"</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em>string</em></p>
-<hr />
+<hr>
 <h3 id="ellipsismiddle">ellipsisMiddle</h3>
 <p>▸ <strong>ellipsisMiddle</strong>(<code>s</code>: string, <code>maxlen</code>: number, <code>symbol</code>: string): <em>string</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/strings.ts#L259">strings.ts:259</a></em></p>
 <p>Same as <code>ellipsis</code> but puts the symbol in the middle of the string and not to the end.</p>
-<pre><code class="ts language-ts">ellipsisMiddle('tempo is a nice library', 18) // returns 'tempo is … library'
+<pre class="language-ts"><code class="ts language-ts"><span class="token function">ellipsisMiddle</span><span class="token punctuation">(</span><span class="token string">'tempo is a nice library'</span><span class="token punctuation">,</span> <span class="token number">18</span><span class="token punctuation">)</span> <span class="token comment">// returns 'tempo is … library'</span>
 </code></pre>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type | Default |
------- | ------ | ------ |
-<code>s</code> | string | - |
-<code>maxlen</code> | number | 20 |
-<code>symbol</code> | string | "…" |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>s</code></td>
+<td>string</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>maxlen</code></td>
+<td>number</td>
+<td>20</td>
+</tr>
+<tr>
+<td><code>symbol</code></td>
+<td>string</td>
+<td>"…"</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em>string</em></p>
-<hr />
+<hr>
 <h3 id="endswith">endsWith</h3>
 <p>▸ <strong>endsWith</strong>(<code>s</code>: string, <code>end</code>: string): <em>boolean</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/strings.ts#L113">strings.ts:113</a></em></p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>s</code> | string |
-<code>end</code> | string |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>s</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>end</code></td>
+<td>string</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em>boolean</em></p>
-<hr />
+<hr>
 <h3 id="endswithany">endsWithAny</h3>
 <p>▸ <strong>endsWithAny</strong>(<code>s</code>: string, <code>values</code>: string[]): <em>boolean</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/strings.ts#L276">strings.ts:276</a></em></p>
 <p>Returns <code>true</code> if <code>s</code> ends with any of the values in <code>values</code>.</p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>s</code> | string |
-<code>values</code> | string[] |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>s</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>values</code></td>
+<td>string[]</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em>boolean</em></p>
-<hr />
+<hr>
 <h3 id="endswithanycaseinsensitive">endsWithAnyCaseInsensitive</h3>
 <p>▸ <strong>endsWithAnyCaseInsensitive</strong>(<code>s</code>: string, <code>values</code>: Array‹string›): <em>boolean</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/strings.ts#L132">strings.ts:132</a></em></p>
 <p>Compares a string <code>s</code> with many <code>values</code> and see if one of them matches its end ignoring their case.</p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>s</code> | string |
-<code>values</code> | Array‹string› |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>s</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>values</code></td>
+<td>Array‹string›</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em>boolean</em></p>
-<hr />
+<hr>
 <h3 id="endswithcaseinsensitive">endsWithCaseInsensitive</h3>
 <p>▸ <strong>endsWithCaseInsensitive</strong>(<code>s</code>: string, <code>end</code>: string): <em>boolean</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/strings.ts#L117">strings.ts:117</a></em></p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>s</code> | string |
-<code>end</code> | string |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>s</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>end</code></td>
+<td>string</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em>boolean</em></p>
-<hr />
+<hr>
 <h3 id="filter">filter</h3>
 <p>▸ <strong>filter</strong>(<code>s</code>: string, <code>predicate</code>: function): <em>string</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/strings.ts#L284">strings.ts:284</a></em></p>
@@ -390,11 +745,22 @@ version of the string.</p>
 <p>▪ <strong>predicate</strong>: <em>function</em></p>
 <p>▸ (<code>s</code>: string): <em>boolean</em></p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>s</code> | string |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>s</code></td>
+<td>string</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em>string</em></p>
-<hr />
+<hr>
 <h3 id="filtercharcode">filterCharcode</h3>
 <p>▸ <strong>filterCharcode</strong>(<code>s</code>: string, <code>predicate</code>: function): <em>string</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/strings.ts#L293">strings.ts:293</a></em></p>
@@ -404,168 +770,365 @@ version of the string.</p>
 <p>▪ <strong>predicate</strong>: <em>function</em></p>
 <p>▸ (<code>n</code>: number): <em>boolean</em></p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>n</code> | number |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>n</code></td>
+<td>number</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em>string</em></p>
-<hr />
+<hr>
 <h3 id="from">from</h3>
 <p>▸ <strong>from</strong>(<code>value</code>: string, <code>searchFor</code>: string): <em>string</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/strings.ts#L304">strings.ts:304</a></em></p>
 <p><code>from</code> searches for the first occurrance of <code>searchFor</code> and returns the text from that point on.
 If <code>searchFor</code> is not found, an empty string is returned.</p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>value</code> | string |
-<code>searchFor</code> | string |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>value</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>searchFor</code></td>
+<td>string</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em>string</em></p>
-<hr />
+<hr>
 <h3 id="hascontent">hasContent</h3>
 <p>▸ <strong>hasContent</strong>(<code>value</code>: string): <em>boolean</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/strings.ts#L327">strings.ts:327</a></em></p>
 <p>Returns <code>true</code> if <code>value</code> is not <code>null</code> and contains at least one character.</p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>value</code> | string |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>value</code></td>
+<td>string</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em>boolean</em></p>
-<hr />
+<hr>
 <h3 id="hashcode">hashCode</h3>
 <p>▸ <strong>hashCode</strong>(<code>value</code>: string, <code>seed</code>: number): <em>number</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/strings.ts#L312">strings.ts:312</a></em></p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type | Default |
------- | ------ | ------ |
-<code>value</code> | string | - |
-<code>seed</code> | number | 2166136261 |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>value</code></td>
+<td>string</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>seed</code></td>
+<td>number</td>
+<td>2166136261</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em>number</em></p>
-<hr />
+<hr>
 <h3 id="humanize">humanize</h3>
 <p>▸ <strong>humanize</strong>(<code>s</code>: string): <em>string</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/strings.ts#L334">strings.ts:334</a></em></p>
 <p>Works the same as <code>underscore</code> but also replaces underscores with whitespaces.</p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>s</code> | string |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>s</code></td>
+<td>string</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em>string</em></p>
-<hr />
+<hr>
 <h3 id="ifempty">ifEmpty</h3>
 <p>▸ <strong>ifEmpty</strong>(<code>value</code>: string, <code>alt</code>: string): <em>string</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/strings.ts#L375">strings.ts:375</a></em></p>
 <p><code>ifEmpty</code> returns <code>value</code> if it is neither <code>null</code> or empty, otherwise it returns <code>alt</code></p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>value</code> | string |
-<code>alt</code> | string |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>value</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>alt</code></td>
+<td>string</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em>string</em></p>
-<hr />
+<hr>
 <h3 id="isalpha">isAlpha</h3>
 <p>▸ <strong>isAlpha</strong>(<code>s</code>: string): <em>boolean</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/strings.ts#L341">strings.ts:341</a></em></p>
 <p>Checks if <code>s</code> contains only (and at least one) alphabetical characters.</p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>s</code> | string |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>s</code></td>
+<td>string</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em>boolean</em></p>
-<hr />
+<hr>
 <h3 id="isalphanum">isAlphaNum</h3>
 <p>▸ <strong>isAlphaNum</strong>(<code>value</code>: string): <em>boolean</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/strings.ts#L348">strings.ts:348</a></em></p>
 <p><code>isAlphaNum</code> returns <code>true</code> if the string only contains alpha-numeric characters.</p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>value</code> | string |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>value</code></td>
+<td>string</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em>boolean</em></p>
-<hr />
+<hr>
 <h3 id="isbreakingwhitespace">isBreakingWhitespace</h3>
 <p>▸ <strong>isBreakingWhitespace</strong>(<code>value</code>: string): <em>boolean</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/strings.ts#L352">strings.ts:352</a></em></p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>value</code> | string |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>value</code></td>
+<td>string</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em>boolean</em></p>
-<hr />
+<hr>
 <h3 id="isdigitsonly">isDigitsOnly</h3>
 <p>▸ <strong>isDigitsOnly</strong>(<code>value</code>: string): <em>boolean</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/strings.ts#L382">strings.ts:382</a></em></p>
 <p><code>isDigitsOnly</code> returns <code>true</code> if the string only contains digits.</p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>value</code> | string |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>value</code></td>
+<td>string</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em>boolean</em></p>
-<hr />
+<hr>
 <h3 id="isempty">isEmpty</h3>
 <p>▸ <strong>isEmpty</strong>(<code>value</code>: string): <em>boolean</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/strings.ts#L389">strings.ts:389</a></em></p>
 <p><code>isEmpty</code> returns true if either <code>value</code> is null or is an empty string.</p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>value</code> | string |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>value</code></td>
+<td>string</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em>boolean</em></p>
-<hr />
+<hr>
 <h3 id="islowercase">isLowerCase</h3>
 <p>▸ <strong>isLowerCase</strong>(<code>value</code>: string): <em>boolean</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/strings.ts#L360">strings.ts:360</a></em></p>
 <p>Returns <code>true</code> if the value string is composed of only lower cased characters
 or case neutral characters.</p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>value</code> | string |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>value</code></td>
+<td>string</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em>boolean</em></p>
-<hr />
+<hr>
 <h3 id="isspaceat">isSpaceAt</h3>
 <p>▸ <strong>isSpaceAt</strong>(<code>s</code>: string, <code>pos</code>: number): <em>boolean</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/strings.ts#L648">strings.ts:648</a></em></p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>s</code> | string |
-<code>pos</code> | number |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>s</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>pos</code></td>
+<td>number</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em>boolean</em></p>
-<hr />
+<hr>
 <h3 id="isuppercase">isUpperCase</h3>
 <p>▸ <strong>isUpperCase</strong>(<code>value</code>: string): <em>boolean</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/strings.ts#L368">strings.ts:368</a></em></p>
 <p>Returns <code>true</code> if the value string is composed of only upper cased characters
 or case neutral characters.</p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>value</code> | string |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>value</code></td>
+<td>string</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em>boolean</em></p>
-<hr />
+<hr>
 <h3 id="lowercasefirst">lowerCaseFirst</h3>
 <p>▸ <strong>lowerCaseFirst</strong>(<code>value</code>: string): <em>string</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/strings.ts#L396">strings.ts:396</a></em></p>
 <p>Convert first letter in <code>value</code> to lower case.</p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>value</code> | string |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>value</code></td>
+<td>string</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em>string</em></p>
-<hr />
+<hr>
 <h3 id="lpad">lpad</h3>
 <p>▸ <strong>lpad</strong>(<code>s</code>: string, <code>char</code>: string, <code>length</code>: number): <em>string</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/strings.ts#L685">strings.ts:685</a></em></p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>s</code> | string |
-<code>char</code> | string |
-<code>length</code> | number |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>s</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>char</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>length</code></td>
+<td>number</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em>string</em></p>
-<hr />
+<hr>
 <h3 id="map">map</h3>
-<p>▸ <strong>map</strong><<strong>T</strong>>(<code>callback</code>: function, <code>value</code>: string): <em>Array‹T›</em></p>
+<p>▸ <strong>map</strong>&lt;<strong>T</strong>&gt;(<code>callback</code>: function, <code>value</code>: string): <em>Array‹T›</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/strings.ts#L424">strings.ts:424</a></em></p>
 <p>It maps a string character by character using <code>callback</code>.</p>
 <p><strong>Type parameters:</strong></p>
@@ -574,351 +1137,803 @@ or case neutral characters.</p>
 <p>▪ <strong>callback</strong>: <em>function</em></p>
 <p>▸ (<code>c</code>: string): <em>T</em></p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>c</code> | string |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>c</code></td>
+<td>string</td>
+</tr>
+</tbody>
+</table>
 <p>▪ <strong>value</strong>: <em>string</em></p>
 <p><strong>Returns:</strong> <em>Array‹T›</em></p>
-<hr />
+<hr>
 <h3 id="quote">quote</h3>
 <p>▸ <strong>quote</strong>(<code>s</code>: string): <em>string</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/strings.ts#L488">strings.ts:488</a></em></p>
 <p>Converts a string in a quoted string.</p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>s</code> | string |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>s</code></td>
+<td>string</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em>string</em></p>
-<hr />
+<hr>
 <h3 id="random">random</h3>
 <p>▸ <strong>random</strong>(<code>value</code>: string, <code>length</code>: number): <em>string</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/strings.ts#L403">strings.ts:403</a></em></p>
 <p>Returns a random substring from the <code>value</code> argument. The length of such value is by default <code>1</code>.</p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type | Default |
------- | ------ | ------ |
-<code>value</code> | string | - |
-<code>length</code> | number | 1 |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>value</code></td>
+<td>string</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>length</code></td>
+<td>number</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em>string</em></p>
-<hr />
+<hr>
 <h3 id="randomsequence">randomSequence</h3>
 <p>▸ <strong>randomSequence</strong>(<code>alphabet</code>: string, <code>length</code>: number): <em>string</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/strings.ts#L410">strings.ts:410</a></em></p>
 <p>Returns a random sampling of the specified length from the seed string.</p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>alphabet</code> | string |
-<code>length</code> | number |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>alphabet</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>length</code></td>
+<td>number</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em>string</em></p>
-<hr />
+<hr>
 <h3 id="randomsequence64">randomSequence64</h3>
 <p>▸ <strong>randomSequence64</strong>(<code>length</code>: number): <em>string</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/strings.ts#L417">strings.ts:417</a></em></p>
 <p>Like <code>randomSequence</code>, but automatically uses the base64 sequence as the seed string.</p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>length</code> | number |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>length</code></td>
+<td>number</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em>string</em></p>
-<hr />
+<hr>
 <h3 id="remove">remove</h3>
 <p>▸ <strong>remove</strong>(<code>value</code>: string, <code>toremove</code>: string): <em>string</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/strings.ts#L431">strings.ts:431</a></em></p>
 <p>If present, it removes all the occurrences of <code>toremove</code> from <code>value</code>.</p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>value</code> | string |
-<code>toremove</code> | string |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>value</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>toremove</code></td>
+<td>string</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em>string</em></p>
-<hr />
+<hr>
 <h3 id="removeafter">removeAfter</h3>
 <p>▸ <strong>removeAfter</strong>(<code>value</code>: string, <code>toremove</code>: string): <em>string</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/strings.ts#L438">strings.ts:438</a></em></p>
 <p>If present, it removes the <code>toremove</code> text from the end of <code>value</code>.</p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>value</code> | string |
-<code>toremove</code> | string |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>value</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>toremove</code></td>
+<td>string</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em>string</em></p>
-<hr />
+<hr>
 <h3 id="removeat">removeAt</h3>
 <p>▸ <strong>removeAt</strong>(<code>value</code>: string, <code>index</code>: number, <code>length</code>: number): <em>string</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/strings.ts#L445">strings.ts:445</a></em></p>
 <p>Removes a slice from <code>index</code> to <code>index + length</code> from <code>value</code>.</p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>value</code> | string |
-<code>index</code> | number |
-<code>length</code> | number |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>value</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>index</code></td>
+<td>number</td>
+</tr>
+<tr>
+<td><code>length</code></td>
+<td>number</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em>string</em></p>
-<hr />
+<hr>
 <h3 id="removebefore">removeBefore</h3>
 <p>▸ <strong>removeBefore</strong>(<code>value</code>: string, <code>toremove</code>: string): <em>string</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/strings.ts#L452">strings.ts:452</a></em></p>
 <p>If present, it removes the <code>toremove</code> text from the beginning of <code>value</code>.</p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>value</code> | string |
-<code>toremove</code> | string |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>value</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>toremove</code></td>
+<td>string</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em>string</em></p>
-<hr />
+<hr>
 <h3 id="removeone">removeOne</h3>
 <p>▸ <strong>removeOne</strong>(<code>value</code>: string, <code>toremove</code>: string): <em>string</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/strings.ts#L459">strings.ts:459</a></em></p>
 <p>If present, it removes the first occurrence of <code>toremove</code> from <code>value</code>.</p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>value</code> | string |
-<code>toremove</code> | string |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>value</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>toremove</code></td>
+<td>string</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em>string</em></p>
-<hr />
+<hr>
 <h3 id="repeat">repeat</h3>
 <p>▸ <strong>repeat</strong>(<code>s</code>: string, <code>times</code>: number): <em>string</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/strings.ts#L472">strings.ts:472</a></em></p>
 <p><code>repeat</code> builds a new string by repeating the argument <code>s</code>, n <code>times</code>.</p>
-<pre><code class="ts language-ts">repeat('Xy', 3) // generates 'XyXyXy'
+<pre class="language-ts"><code class="ts language-ts"><span class="token function">repeat</span><span class="token punctuation">(</span><span class="token string">'Xy'</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span> <span class="token comment">// generates 'XyXyXy'</span>
 </code></pre>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>s</code> | string |
-<code>times</code> | number |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>s</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>times</code></td>
+<td>number</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em>string</em></p>
-<hr />
+<hr>
 <h3 id="constreplace"><code>Const</code> replace</h3>
 <p>▸ <strong>replace</strong>(<code>subject</code>: string, <code>placeholder</code>: string, <code>replacement</code>: string): <em>string</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/strings.ts#L18">strings.ts:18</a></em></p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>subject</code> | string |
-<code>placeholder</code> | string |
-<code>replacement</code> | string |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>subject</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>placeholder</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>replacement</code></td>
+<td>string</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em>string</em></p>
-<hr />
+<hr>
 <h3 id="reverse">reverse</h3>
 <p>▸ <strong>reverse</strong>(<code>s</code>: string): <em>string</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/strings.ts#L479">strings.ts:479</a></em></p>
 <p>Returns a new string whose characters are in reverse order.</p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>s</code> | string |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>s</code></td>
+<td>string</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em>string</em></p>
-<hr />
+<hr>
 <h3 id="rpad">rpad</h3>
 <p>▸ <strong>rpad</strong>(<code>s</code>: string, <code>char</code>: string, <code>length</code>: number): <em>string</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/strings.ts#L694">strings.ts:694</a></em></p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>s</code> | string |
-<code>char</code> | string |
-<code>length</code> | number |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>s</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>char</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>length</code></td>
+<td>number</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em>string</em></p>
-<hr />
+<hr>
 <h3 id="splitonce">splitOnce</h3>
 <p>▸ <strong>splitOnce</strong>(<code>s</code>: string, <code>separator</code>: string): <em>string[]</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/strings.ts#L500">strings.ts:500</a></em></p>
 <p>It only splits on the first occurrance of separator.</p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>s</code> | string |
-<code>separator</code> | string |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>s</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>separator</code></td>
+<td>string</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em>string[]</em></p>
-<hr />
+<hr>
 <h3 id="startswith">startsWith</h3>
 <p>▸ <strong>startsWith</strong>(<code>s</code>: string, <code>start</code>: string): <em>boolean</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/strings.ts#L121">strings.ts:121</a></em></p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>s</code> | string |
-<code>start</code> | string |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>s</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>start</code></td>
+<td>string</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em>boolean</em></p>
-<hr />
+<hr>
 <h3 id="startswithany">startsWithAny</h3>
 <p>▸ <strong>startsWithAny</strong>(<code>s</code>: string, <code>values</code>: string[]): <em>boolean</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/strings.ts#L510">strings.ts:510</a></em></p>
 <p>Returns <code>true</code> if <code>s</code> starts with any of the values in <code>values</code>.</p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>s</code> | string |
-<code>values</code> | string[] |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>s</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>values</code></td>
+<td>string[]</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em>boolean</em></p>
-<hr />
+<hr>
 <h3 id="startswithanycaseinsensitive">startsWithAnyCaseInsensitive</h3>
 <p>▸ <strong>startsWithAnyCaseInsensitive</strong>(<code>s</code>: string, <code>values</code>: Array‹string›): <em>boolean</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/strings.ts#L139">strings.ts:139</a></em></p>
 <p>Compares a string <code>s</code> with many <code>values</code> and see if one of them matches its beginning ignoring their case.</p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>s</code> | string |
-<code>values</code> | Array‹string› |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>s</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>values</code></td>
+<td>Array‹string›</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em>boolean</em></p>
-<hr />
+<hr>
 <h3 id="startswithcaseinsensitive">startsWithCaseInsensitive</h3>
 <p>▸ <strong>startsWithCaseInsensitive</strong>(<code>s</code>: string, <code>start</code>: string): <em>boolean</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/strings.ts#L125">strings.ts:125</a></em></p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>s</code> | string |
-<code>start</code> | string |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>s</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>start</code></td>
+<td>string</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em>boolean</em></p>
-<hr />
+<hr>
 <h3 id="striptags">stripTags</h3>
 <p>▸ <strong>stripTags</strong>(<code>s</code>: string): <em>string</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/strings.ts#L518">strings.ts:518</a></em></p>
 <p><code>stripTags</code> removes any HTML/XML markup from the string leaving only the concatenation
 of the existing text nodes.</p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>s</code> | string |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>s</code></td>
+<td>string</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em>string</em></p>
-<hr />
+<hr>
 <h3 id="surround">surround</h3>
 <p>▸ <strong>surround</strong>(<code>s</code>: string, <code>left</code>: string, <code>right</code>: string): <em>string</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/strings.ts#L526">strings.ts:526</a></em></p>
 <p>Surrounds a string with the contents of <code>left</code> and <code>right</code>. If <code>right</code> is omitted,
 <code>left</code> will be used on both sides</p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type | Default |
------- | ------ | ------ |
-<code>s</code> | string | - |
-<code>left</code> | string | - |
-<code>right</code> | string | left |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>s</code></td>
+<td>string</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>left</code></td>
+<td>string</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>right</code></td>
+<td>string</td>
+<td>left</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em>string</em></p>
-<hr />
+<hr>
 <h3 id="toarray">toArray</h3>
 <p>▸ <strong>toArray</strong>(<code>s</code>: string): <em>string[]</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/strings.ts#L533">strings.ts:533</a></em></p>
 <p>It transforms a string into an <code>Array</code> of characters.</p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>s</code> | string |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>s</code></td>
+<td>string</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em>string[]</em></p>
-<hr />
+<hr>
 <h3 id="tocharcodes">toCharcodes</h3>
 <p>▸ <strong>toCharcodes</strong>(<code>s</code>: string): <em>Array‹number›</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/strings.ts#L540">strings.ts:540</a></em></p>
 <p>It transforms a string into an <code>Array</code> of char codes in integer format.</p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>s</code> | string |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>s</code></td>
+<td>string</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em>Array‹number›</em></p>
-<hr />
+<hr>
 <h3 id="tochunks">toChunks</h3>
 <p>▸ <strong>toChunks</strong>(<code>s</code>: string, <code>len</code>: number): <em>Array‹string›</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/strings.ts#L548">strings.ts:548</a></em></p>
 <p>Returns an array of <code>string</code> whose elements are equally long (using <code>len</code>). If the string <code>s</code>
 is not exactly divisible by <code>len</code> the last element of the array will be shorter.</p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>s</code> | string |
-<code>len</code> | number |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>s</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>len</code></td>
+<td>number</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em>Array‹string›</em></p>
-<hr />
+<hr>
 <h3 id="tolines">toLines</h3>
 <p>▸ <strong>toLines</strong>(<code>s</code>: string): <em>string[]</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/strings.ts#L560">strings.ts:560</a></em></p>
 <p>Returns an array of <code>string</code> split by line breaks.</p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>s</code> | string |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>s</code></td>
+<td>string</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em>string[]</em></p>
-<hr />
+<hr>
 <h3 id="trimchars">trimChars</h3>
 <p>▸ <strong>trimChars</strong>(<code>value</code>: string, <code>charlist</code>: string): <em>string</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/strings.ts#L567">strings.ts:567</a></em></p>
 <p><code>trimChars</code> removes from the beginning and the end of the string any character that is present in <code>charlist</code>.</p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>value</code> | string |
-<code>charlist</code> | string |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>value</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>charlist</code></td>
+<td>string</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em>string</em></p>
-<hr />
+<hr>
 <h3 id="trimcharsleft">trimCharsLeft</h3>
 <p>▸ <strong>trimCharsLeft</strong>(<code>value</code>: string, <code>charlist</code>: string): <em>string</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/strings.ts#L574">strings.ts:574</a></em></p>
 <p><code>trimCharsLeft</code> removes from the beginning of the string any character that is present in <code>charlist</code>.</p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>value</code> | string |
-<code>charlist</code> | string |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>value</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>charlist</code></td>
+<td>string</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em>string</em></p>
-<hr />
+<hr>
 <h3 id="trimcharsright">trimCharsRight</h3>
 <p>▸ <strong>trimCharsRight</strong>(<code>value</code>: string, <code>charlist</code>: string): <em>string</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/strings.ts#L587">strings.ts:587</a></em></p>
 <p><code>trimCharsRight</code> removes from the end of the string any character that is present in <code>charlist</code>.</p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>value</code> | string |
-<code>charlist</code> | string |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>value</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>charlist</code></td>
+<td>string</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em>string</em></p>
-<hr />
+<hr>
 <h3 id="underscore">underscore</h3>
 <p>▸ <strong>underscore</strong>(<code>s</code>: string): <em>string</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/strings.ts#L605">strings.ts:605</a></em></p>
 <p><code>underscore</code> finds UpperCase characters and turns them into LowerCase and prepends them with a whtiespace.
 Sequences of more than one UpperCase character are left untouched.</p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>s</code> | string |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>s</code></td>
+<td>string</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em>string</em></p>
-<hr />
+<hr>
 <h3 id="upto">upTo</h3>
 <p>▸ <strong>upTo</strong>(<code>value</code>: string, <code>searchFor</code>: string): <em>string</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/strings.ts#L624">strings.ts:624</a></em></p>
 <p><code>upTo</code> searches for the first occurrance of <code>searchFor</code> and returns the text up to that point.
 If <code>searchFor</code> is not found, the entire string is returned.</p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>value</code> | string |
-<code>searchFor</code> | string |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>value</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>searchFor</code></td>
+<td>string</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em>string</em></p>
-<hr />
+<hr>
 <h3 id="uppercasefirst">upperCaseFirst</h3>
 <p>▸ <strong>upperCaseFirst</strong>(<code>value</code>: string): <em>string</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/strings.ts#L616">strings.ts:616</a></em></p>
 <p>Convert first letter in <code>value</code> to upper case.</p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>value</code> | string |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>value</code></td>
+<td>string</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em>string</em></p>
-<hr />
+<hr>
 <h3 id="wrapcolumns">wrapColumns</h3>
 <p>▸ <strong>wrapColumns</strong>(<code>s</code>: string, <code>columns</code>: number, <code>indent</code>: string, <code>newline</code>: string): <em>string</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/strings.ts#L636">strings.ts:636</a></em></p>
 <p><code>wrapColumns</code> splits a long string into lines that are at most <code>columns</code> long.
 Words whose length exceeds <code>columns</code> are not split.</p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type | Default |
------- | ------ | ------ |
-<code>s</code> | string | - |
-<code>columns</code> | number | 78 |
-<code>indent</code> | string | "" |
-<code>newline</code> | string | "
-" |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>s</code></td>
+<td>string</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>columns</code></td>
+<td>number</td>
+<td>78</td>
+</tr>
+<tr>
+<td><code>indent</code></td>
+<td>string</td>
+<td>""</td>
+</tr>
+<tr>
+<td><code>newline</code></td>
+<td>string</td>
+<td>"</td>
+</tr>
+<tr>
+<td>"</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em>string</em></p>

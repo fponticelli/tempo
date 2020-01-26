@@ -2,10 +2,10 @@
 <p>A template is built by assembling elements together. <code>@tempo/dom/lib/web</code> contains all the definitions for all HTML and SVG elements. The are then special elements described below.</p>
 <h2 id="tempo_attributes">tempo_attributes</h2>
 <p>Each DOM element has four additional special attributes:</p>
-<pre><code class="ts language-ts">afterrender?:   (state: State, el: El, ctx: DOMContext&lt;Action&gt;) =&gt; T | undefined
-beforechange?:  (state: State, el: El, ctx: DOMContext&lt;Action&gt;, value: T | undefined) =&gt; T | undefined
-afterchange?:   (state: State, el: El, ctx: DOMContext&lt;Action&gt;, value: T | undefined) =&gt; T | undefined
-beforedestroy?: ((el: El, ctx: DOMContext&lt;Action&gt;, value: T | undefined) =&gt; void)
+<pre class="language-ts"><code class="ts language-ts">afterrender<span class="token operator">?</span><span class="token operator">:</span>   <span class="token punctuation">(</span><span class="token parameter">state<span class="token operator">:</span> State<span class="token punctuation">,</span> el<span class="token operator">:</span> El<span class="token punctuation">,</span> ctx<span class="token operator">:</span> DOMContext<span class="token operator">&lt;</span>Action<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">T</span> <span class="token operator">|</span> <span class="token keyword">undefined</span>
+beforechange<span class="token operator">?</span><span class="token operator">:</span>  <span class="token punctuation">(</span><span class="token parameter">state<span class="token operator">:</span> State<span class="token punctuation">,</span> el<span class="token operator">:</span> El<span class="token punctuation">,</span> ctx<span class="token operator">:</span> DOMContext<span class="token operator">&lt;</span>Action<span class="token operator">&gt;</span><span class="token punctuation">,</span> value<span class="token operator">:</span> <span class="token constant">T</span> <span class="token operator">|</span> <span class="token keyword">undefined</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">T</span> <span class="token operator">|</span> <span class="token keyword">undefined</span>
+afterchange<span class="token operator">?</span><span class="token operator">:</span>   <span class="token punctuation">(</span><span class="token parameter">state<span class="token operator">:</span> State<span class="token punctuation">,</span> el<span class="token operator">:</span> El<span class="token punctuation">,</span> ctx<span class="token operator">:</span> DOMContext<span class="token operator">&lt;</span>Action<span class="token operator">&gt;</span><span class="token punctuation">,</span> value<span class="token operator">:</span> <span class="token constant">T</span> <span class="token operator">|</span> <span class="token keyword">undefined</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">T</span> <span class="token operator">|</span> <span class="token keyword">undefined</span>
+beforedestroy<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">el<span class="token operator">:</span> El<span class="token punctuation">,</span> ctx<span class="token operator">:</span> DOMContext<span class="token operator">&lt;</span>Action<span class="token operator">&gt;</span><span class="token punctuation">,</span> value<span class="token operator">:</span> <span class="token constant">T</span> <span class="token operator">|</span> <span class="token keyword">undefined</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span><span class="token punctuation">)</span>
 </code></pre>
 <p>These special attributes are used to control the life-cycle of the current element. These can be used to mount/update/destroy widgets that are not defined in Tempo and that need to be embedded in your app. The functions receive a reference to the current element.</p>
 <h2 id="mapstateandaction">Map state and action</h2>
@@ -14,51 +14,51 @@ beforedestroy?: ((el: El, ctx: DOMContext&lt;Action&gt;, value: T | undefined) =
 <p>The <code>forEach</code> element takes a state whose shape is an array (<code>State extends any[]</code>) and applies individually each element in the array to the children nodes. This is useful for lists or tables.</p>
 <h2 id="portal">portal</h2>
 <p>A <code>portal</code> allows to mount a node outside of the natural nesting. The portal module provides the following nodes:</p>
-<pre><code class="ts language-ts">const portal = &lt;State, Action&gt;(
-  options: {
-    getParent: (doc: Document) =&gt; Element
-    append: (doc: Document, node: Node) =&gt; void
-  },
-  ...children: DOMChild&lt;State, Action&gt;[]
-) =&gt; DOMTemplate&lt;State, Action&gt;
+<pre class="language-ts"><code class="ts language-ts"><span class="token keyword">const</span> portal <span class="token operator">=</span> <span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  options<span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token function-variable function">getParent</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">doc<span class="token operator">:</span> Document</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Element
+    <span class="token function-variable function">append</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">doc<span class="token operator">:</span> Document<span class="token punctuation">,</span> node<span class="token operator">:</span> Node</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token operator">...</span>children<span class="token operator">:</span> DOMChild<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token operator">&gt;</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
+<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> DOMTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token operator">&gt;</span>
 
-const portalWithSelector = &lt;State, Action&gt;(
-    options: { selector: string },
-    ...children: DOMChild&lt;State, Action&gt;[]
-  ) =&gt; DOMTemplate&lt;State, Action&gt;
+<span class="token keyword">const</span> portalWithSelector <span class="token operator">=</span> <span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+    <span class="token parameter">options<span class="token operator">:</span> <span class="token punctuation">{</span> selector<span class="token operator">:</span> <span class="token builtin">string</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token operator">...</span>children<span class="token operator">:</span> DOMChild<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token operator">&gt;</span><span class="token punctuation">[</span><span class="token punctuation">]</span></span>
+  <span class="token punctuation">)</span> <span class="token operator">=&gt;</span> DOMTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token operator">&gt;</span>
 
-const headPortal = &lt;State, Action&gt;(...children: DOMChild&lt;State, Action&gt;[]) =&gt; DOMTemplate&lt;State, Action&gt;
+<span class="token keyword">const</span> headPortal <span class="token operator">=</span> <span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token parameter"><span class="token operator">...</span>children<span class="token operator">:</span> DOMChild<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token operator">&gt;</span><span class="token punctuation">[</span><span class="token punctuation">]</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> DOMTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token operator">&gt;</span>
 
-const bodyPortal = &lt;State, Action&gt;(...children: DOMChild&lt;State, Action&gt;[]) =&gt; DOMTemplate&lt;State, Action&gt;
+<span class="token keyword">const</span> bodyPortal <span class="token operator">=</span> <span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token parameter"><span class="token operator">...</span>children<span class="token operator">:</span> DOMChild<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token operator">&gt;</span><span class="token punctuation">[</span><span class="token punctuation">]</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> DOMTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token operator">&gt;</span>
 </code></pre>
 <h2 id="until">until</h2>
 <p>The <code>until</code> node, much like the <code>forEach</code> is for state that represent collections or repeatable elements. Its implementation requires that a function <code>repeatUntil</code> is provided with the following signature:</p>
-<pre><code class="ts language-ts">repeatUntil: (state: OuterState, index: number) =&gt; InnerState | undefined
+<pre class="language-ts"><code class="ts language-ts"><span class="token function-variable function">repeatUntil</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">state<span class="token operator">:</span> OuterState<span class="token punctuation">,</span> index<span class="token operator">:</span> <span class="token builtin">number</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> InnerState <span class="token operator">|</span> <span class="token keyword">undefined</span>
 </code></pre>
 <p>The function is invoked <code>n</code> times until a result of <code>undefined</code> is returned. For each successful invocation, the children nodes will be rendered with the returned result.</p>
 <h2 id="when">when</h2>
 <p><code>when</code> and <code>unless</code> nodes are for containers that will display their contents conditionally. A <code>condition</code> function needs to be provided:</p>
-<pre><code class="ts language-ts">condition: (state: State) =&gt; boolean
+<pre class="language-ts"><code class="ts language-ts"><span class="token function-variable function">condition</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">state<span class="token operator">:</span> State</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">boolean</span>
 </code></pre>
 <h1 id="component">Component</h1>
 <p>A <code>component</code> is a special kind of node that manages its own state. When embedded in other nodes it does not automatically propagate actions up the hierarchy, nor changes its own contents when the outer state is updated.</p>
 <p>A component takes an instance of <code>Store</code> to manage its state, it is in fact what <code>Tempo.render</code> wraps the passed template around.</p>
 <h2 id="adapter">Adapter</h2>
 <p>An adapter is needed if you need for a component to be able to communicate with its container. An adapter takes an optional <code>mergeStates</code> attribute:</p>
-<pre><code class="ts language-ts">mergeStates?: (outerState: OuterState, innerState: InnerState) =&gt; InnerState | undefined
+<pre class="language-ts"><code class="ts language-ts">mergeStates<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">outerState<span class="token operator">:</span> OuterState<span class="token punctuation">,</span> innerState<span class="token operator">:</span> InnerState</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> InnerState <span class="token operator">|</span> <span class="token keyword">undefined</span>
 </code></pre>
 <p>This function allows for the <code>OuterState</code> to be merged into the <code>InnerState</code> and trigger a template change. If the function returns <code>undefined</code> then the inner state will not be updated.</p>
 <p>It can also take a <code>propagate</code> function:</p>
-<pre><code class="ts language-ts">propagate?: (args: PropagateArg&lt;OuterState, InnerState, OuterAction, InnerAction&gt;) =&gt; void
+<pre class="language-ts"><code class="ts language-ts">propagate<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">args<span class="token operator">:</span> PropagateArg<span class="token operator">&lt;</span>OuterState<span class="token punctuation">,</span> InnerState<span class="token punctuation">,</span> OuterAction<span class="token punctuation">,</span> InnerAction<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
 
-// where PropagateArg is
+<span class="token comment">// where PropagateArg is</span>
 
-interface PropagateArg&lt;OuterState, InnerState, OuterAction, InnerAction&gt; {
-  action: InnerAction
-  innerState: InnerState
-  outerState: OuterState
-  dispatchInner: (action: InnerAction) =&gt; void
-  dispatchOuter: (action: OuterAction) =&gt; void
-}
+<span class="token keyword">interface</span> <span class="token class-name">PropagateArg</span><span class="token operator">&lt;</span>OuterState<span class="token punctuation">,</span> InnerState<span class="token punctuation">,</span> OuterAction<span class="token punctuation">,</span> InnerAction<span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+  action<span class="token operator">:</span> InnerAction
+  innerState<span class="token operator">:</span> InnerState
+  outerState<span class="token operator">:</span> OuterState
+  <span class="token function-variable function">dispatchInner</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">action<span class="token operator">:</span> InnerAction</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+  <span class="token function-variable function">dispatchOuter</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">action<span class="token operator">:</span> OuterAction</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+<span class="token punctuation">}</span>
 </code></pre>
 <p>This function allows to react to inner actions. When the <code>propagate</code> function is invoked, the implementor can decide to trigger new inner actions <code>dispatchInner</code> or outer actions <code>dispatchOuter</code>.</p>

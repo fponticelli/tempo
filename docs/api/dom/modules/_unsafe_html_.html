@@ -10,7 +10,7 @@
 </ul>
 <h2 id="functions-1">Functions</h2>
 <h3 id="constunsafehtml"><code>Const</code> unsafeHtml</h3>
-<p>▸ <strong>unsafeHtml</strong><<strong>State</strong>, <strong>Action</strong>, <strong>Query</strong>, <strong>El</strong>, <strong>T</strong>>(<code>options</code>: object): <em><a href="../interfaces/_template_.domtemplate.md">DOMTemplate</a>‹State, Action, Query›</em></p>
+<p>▸ <strong>unsafeHtml</strong>&lt;<strong>State</strong>, <strong>Action</strong>, <strong>Query</strong>, <strong>El</strong>, <strong>T</strong>&gt;(<code>options</code>: object): <em><a href="../interfaces/_template_.domtemplate.md">DOMTemplate</a>‹State, Action, Query›</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/unsafe_html.ts#L102">dom/src/unsafe_html.ts:102</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>State</strong></p>
@@ -20,9 +20,26 @@
 <p>▪ <strong>T</strong></p>
 <p><strong>Parameters:</strong></p>
 <p>▪ <strong>options</strong>: <em>object</em></p>
-<p>Name | Type |
------- | ------ |
-<code>content</code> | <a href="_value_.md#domtextvalue">DOMTextValue</a>‹State› |
-<code>element?</code> | <a href="../classes/_element_.domelement.md">DOMElement</a>‹State, Action, Query, El, T› |
-<code>transform?</code> | undefined &#124; function |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>content</code></td>
+<td><a href="_value_.md#domtextvalue">DOMTextValue</a>‹State›</td>
+</tr>
+<tr>
+<td><code>element?</code></td>
+<td><a href="../classes/_element_.domelement.md">DOMElement</a>‹State, Action, Query, El, T›</td>
+</tr>
+<tr>
+<td><code>transform?</code></td>
+<td>undefined | function</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em><a href="../interfaces/_template_.domtemplate.md">DOMTemplate</a>‹State, Action, Query›</em></p>

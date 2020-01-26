@@ -26,7 +26,7 @@ export interface Toc {
   pages: PageRef[]
   sections: Record<string, SectionRef>
   apis: Record<string, ApiRef[]>
-  projects: Record<string, ProjectRef[]>
+  projects: ProjectRef[]
 }
 
 export interface ProjectRef {

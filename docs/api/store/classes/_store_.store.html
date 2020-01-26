@@ -26,16 +26,30 @@
 <p>+ <strong>new Store</strong>(<code>property</code>: <a href="_property_.property.md">Property</a>‹State›, <code>reducer</code>: <a href="../modules/_reducer_.md#reducer">Reducer</a>‹State, Action›): <em><a href="_store_.store.md">Store</a></em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/store/src/store.ts#L31">store.ts:31</a></em></p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>property</code> | <a href="_property_.property.md">Property</a>‹State› |
-<code>reducer</code> | <a href="../modules/_reducer_.md#reducer">Reducer</a>‹State, Action› |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>property</code></td>
+<td><a href="_property_.property.md">Property</a>‹State›</td>
+</tr>
+<tr>
+<td><code>reducer</code></td>
+<td><a href="../modules/_reducer_.md#reducer">Reducer</a>‹State, Action›</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em><a href="_store_.store.md">Store</a></em></p>
 <h2 id="properties-1">Properties</h2>
 <h3 id="observable">observable</h3>
 <p>• <strong>observable</strong>: <em><a href="../modules/_observable_.md#observable3">Observable3</a>‹State, Action, boolean›</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/store/src/store.ts#L31">store.ts:31</a></em></p>
-<hr />
+<hr>
 <h3 id="property">property</h3>
 <p>• <strong>property</strong>: <em><a href="_property_.property.md">Property</a>‹State›</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/store/src/store.ts#L34">store.ts:34</a></em></p>
@@ -44,22 +58,50 @@
 <p>▸ <strong>process</strong>(<code>action</code>: Action): <em>boolean</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/store/src/store.ts#L40">store.ts:40</a></em></p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>action</code> | Action |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>action</code></td>
+<td>Action</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em>boolean</em></p>
-<hr />
+<hr>
 <h3 id="staticofstate"><code>Static</code> ofState</h3>
-<p>▸ <strong>ofState</strong><<strong>State</strong>, <strong>Action</strong>>(<code>options</code>: object): <em><a href="_store_.store.md">Store</a>‹State, Action›</em></p>
+<p>▸ <strong>ofState</strong>&lt;<strong>State</strong>, <strong>Action</strong>&gt;(<code>options</code>: object): <em><a href="_store_.store.md">Store</a>‹State, Action›</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/store/src/store.ts#L20">store.ts:20</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>State</strong></p>
 <p>▪ <strong>Action</strong></p>
 <p><strong>Parameters:</strong></p>
 <p>▪ <strong>options</strong>: <em>object</em></p>
-<p>Name | Type |
------- | ------ |
-<code>equal?</code> | undefined &#124; function |
-<code>reducer</code> | <a href="../modules/_reducer_.md#reducer">Reducer</a>‹State, Action› |
-<code>state</code> | State |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>equal?</code></td>
+<td>undefined | function</td>
+</tr>
+<tr>
+<td><code>reducer</code></td>
+<td><a href="../modules/_reducer_.md#reducer">Reducer</a>‹State, Action›</td>
+</tr>
+<tr>
+<td><code>state</code></td>
+<td>State</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em><a href="_store_.store.md">Store</a>‹State, Action›</em></p>

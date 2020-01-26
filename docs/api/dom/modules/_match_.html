@@ -15,7 +15,7 @@
 </ul>
 <h2 id="functions-1">Functions</h2>
 <h3 id="constmatch"><code>Const</code> match</h3>
-<p>▸ <strong>match</strong><<strong>Path</strong>, <strong>State</strong>, <strong>Action</strong>, <strong>Query</strong>>(<code>path</code>: Path, <code>matcher</code>: object, <code>refId?</code>: undefined | string): <em><a href="../interfaces/_template_.domtemplate.md">DOMTemplate</a>‹State, Action, Query›</em></p>
+<p>▸ <strong>match</strong>&lt;<strong>Path</strong>, <strong>State</strong>, <strong>Action</strong>, <strong>Query</strong>&gt;(<code>path</code>: Path, <code>matcher</code>: object, <code>refId?</code>: undefined | string): <em><a href="../interfaces/_template_.domtemplate.md">DOMTemplate</a>‹State, Action, Query›</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/match.ts#L61">dom/src/match.ts:61</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>Path</strong>: <em>IndexType[]</em></p>
@@ -23,15 +23,32 @@
 <p>▪ <strong>Action</strong></p>
 <p>▪ <strong>Query</strong></p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>path</code> | Path |
-<code>matcher</code> | object |
-<code>refId?</code> | undefined &#124; string |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>path</code></td>
+<td>Path</td>
+</tr>
+<tr>
+<td><code>matcher</code></td>
+<td>object</td>
+</tr>
+<tr>
+<td><code>refId?</code></td>
+<td>undefined | string</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em><a href="../interfaces/_template_.domtemplate.md">DOMTemplate</a>‹State, Action, Query›</em></p>
-<hr />
+<hr>
 <h3 id="constmatchbool"><code>Const</code> matchBool</h3>
-<p>▸ <strong>matchBool</strong><<strong>State</strong>, <strong>Action</strong>, <strong>Query</strong>>(<code>options</code>: object): <em><a href="../interfaces/_template_.domtemplate.md">DOMTemplate</a>‹State, Action, Query›</em></p>
+<p>▸ <strong>matchBool</strong>&lt;<strong>State</strong>, <strong>Action</strong>, <strong>Query</strong>&gt;(<code>options</code>: object): <em><a href="../interfaces/_template_.domtemplate.md">DOMTemplate</a>‹State, Action, Query›</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/match.ts#L133">dom/src/match.ts:133</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>State</strong></p>
@@ -39,29 +56,60 @@
 <p>▪ <strong>Query</strong></p>
 <p><strong>Parameters:</strong></p>
 <p>▪ <strong>options</strong>: <em>object</em></p>
-<p>Name | Type |
------- | ------ |
-<code>condition</code> | function |
-<code>false</code> | <a href="_template_.md#domchild">DOMChild</a>‹State, Action, Query› |
-<code>refId?</code> | undefined &#124; string |
-<code>true</code> | <a href="_template_.md#domchild">DOMChild</a>‹State, Action, Query› |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>condition</code></td>
+<td>function</td>
+</tr>
+<tr>
+<td><code>false</code></td>
+<td><a href="_template_.md#domchild">DOMChild</a>‹State, Action, Query›</td>
+</tr>
+<tr>
+<td><code>refId?</code></td>
+<td>undefined | string</td>
+</tr>
+<tr>
+<td><code>true</code></td>
+<td><a href="_template_.md#domchild">DOMChild</a>‹State, Action, Query›</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em><a href="../interfaces/_template_.domtemplate.md">DOMTemplate</a>‹State, Action, Query›</em></p>
-<hr />
+<hr>
 <h3 id="constmatchkind"><code>Const</code> matchKind</h3>
-<p>▸ <strong>matchKind</strong><<strong>State</strong>, <strong>Action</strong>, <strong>Query</strong>>(<code>matchers</code>: object): <em><a href="../interfaces/_template_.domtemplate.md">DOMTemplate</a>‹State, Action, Query›</em></p>
+<p>▸ <strong>matchKind</strong>&lt;<strong>State</strong>, <strong>Action</strong>, <strong>Query</strong>&gt;(<code>matchers</code>: object): <em><a href="../interfaces/_template_.domtemplate.md">DOMTemplate</a>‹State, Action, Query›</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/match.ts#L87">dom/src/match.ts:87</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>State</strong>: <em>ObjectWithField‹"kind", any›</em></p>
 <p>▪ <strong>Action</strong></p>
 <p>▪ <strong>Query</strong></p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>matchers</code> | object |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>matchers</code></td>
+<td>object</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em><a href="../interfaces/_template_.domtemplate.md">DOMTemplate</a>‹State, Action, Query›</em></p>
-<hr />
+<hr>
 <h3 id="constmatchvalue"><code>Const</code> matchValue</h3>
-<p>▸ <strong>matchValue</strong><<strong>Path</strong>, <strong>State</strong>, <strong>Action</strong>, <strong>Query</strong>>(<code>path</code>: Path, <code>matchers</code>: object, <code>orElse</code>: <a href="_template_.md#domchild">DOMChild</a>‹State, Action, Query›, <code>refId?</code>: undefined | string): <em><a href="../interfaces/_template_.domtemplate.md">DOMTemplate</a>‹State, Action, Query›</em></p>
+<p>▸ <strong>matchValue</strong>&lt;<strong>Path</strong>, <strong>State</strong>, <strong>Action</strong>, <strong>Query</strong>&gt;(<code>path</code>: Path, <code>matchers</code>: object, <code>orElse</code>: <a href="_template_.md#domchild">DOMChild</a>‹State, Action, Query›, <code>refId?</code>: undefined | string): <em><a href="../interfaces/_template_.domtemplate.md">DOMTemplate</a>‹State, Action, Query›</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/match.ts#L189">dom/src/match.ts:189</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>Path</strong>: <em>IndexType[]</em></p>
@@ -69,10 +117,30 @@
 <p>▪ <strong>Action</strong></p>
 <p>▪ <strong>Query</strong></p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>path</code> | Path |
-<code>matchers</code> | object |
-<code>orElse</code> | <a href="_template_.md#domchild">DOMChild</a>‹State, Action, Query› |
-<code>refId?</code> | undefined &#124; string |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>path</code></td>
+<td>Path</td>
+</tr>
+<tr>
+<td><code>matchers</code></td>
+<td>object</td>
+</tr>
+<tr>
+<td><code>orElse</code></td>
+<td><a href="_template_.md#domchild">DOMChild</a>‹State, Action, Query›</td>
+</tr>
+<tr>
+<td><code>refId?</code></td>
+<td>undefined | string</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em><a href="../interfaces/_template_.domtemplate.md">DOMTemplate</a>‹State, Action, Query›</em></p>

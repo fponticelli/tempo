@@ -1,4 +1,4 @@
-import { Toc } from '../build/toc'
+import { Toc } from './toc'
 import { AsyncResult, notAsked } from 'tempo-std/lib/async_result'
 import { HttpError } from './request'
 import { Route } from './route'

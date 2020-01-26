@@ -15,7 +15,7 @@
 </ul>
 <h2 id="functions-1">Functions</h2>
 <h3 id="constcreateitem"><code>Const</code> createItem</h3>
-<p>▸ <strong>createItem</strong><<strong>State</strong>, <strong>Action</strong>, <strong>Query</strong>, <strong>I</strong>, <strong>T</strong>, <strong>Option</strong>>(<code>makeItem</code>: function, <code>options</code>: Partial‹Merge‹object, Merge‹Option, <a href="../interfaces/_tempo_attributes_.tempoattributes.md">TempoAttributes</a>‹State, Action, Query, I, T››››, <code>children?</code>: <a href="../interfaces/_template_.papertemplate.md">PaperTemplate</a>‹State, Action, Query›[] | undefined): <em><a href="../classes/_item_.itemtemplate.md">ItemTemplate</a>‹State, Action, Query, I, T›</em></p>
+<p>▸ <strong>createItem</strong>&lt;<strong>State</strong>, <strong>Action</strong>, <strong>Query</strong>, <strong>I</strong>, <strong>T</strong>, <strong>Option</strong>&gt;(<code>makeItem</code>: function, <code>options</code>: Partial‹Merge‹object, Merge‹Option, <a href="../interfaces/_tempo_attributes_.tempoattributes.md">TempoAttributes</a>‹State, Action, Query, I, T››››, <code>children?</code>: <a href="../interfaces/_template_.papertemplate.md">PaperTemplate</a>‹State, Action, Query›[] | undefined): <em><a href="../classes/_item_.itemtemplate.md">ItemTemplate</a>‹State, Action, Query, I, T›</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/paperjs/src/item.ts#L87">paperjs/src/item.ts:87</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>State</strong></p>
@@ -28,9 +28,20 @@
 <p>▪ <strong>makeItem</strong>: <em>function</em></p>
 <p>▸ (<code>state</code>: State): <em>I</em></p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>state</code> | State |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>state</code></td>
+<td>State</td>
+</tr>
+</tbody>
+</table>
 <p>▪ <strong>options</strong>: <em>Partial‹Merge‹object, Merge‹Option, <a href="../interfaces/_tempo_attributes_.tempoattributes.md">TempoAttributes</a>‹State, Action, Query, I, T››››</em></p>
 <p>▪<code>Optional</code>  <strong>children</strong>: <em><a href="../interfaces/_template_.papertemplate.md">PaperTemplate</a>‹State, Action, Query›[] | undefined</em></p>
 <p><strong>Returns:</strong> <em><a href="../classes/_item_.itemtemplate.md">ItemTemplate</a>‹State, Action, Query, I, T›</em></p>

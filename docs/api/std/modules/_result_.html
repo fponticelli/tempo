@@ -57,11 +57,11 @@
 <li><p><strong>error</strong>: <em>E</em></p></li>
 <li><p><strong>kind</strong>: <em>"failure"</em></p></li>
 </ul>
-<hr />
+<hr>
 <h3 id="result">Result</h3>
 <p>Ƭ <strong>Result</strong>: <em><a href="_result_.md#success">Success</a>‹T› | <a href="_result_.md#failure">Failure</a>‹E›</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L22">result.ts:22</a></em></p>
-<hr />
+<hr>
 <h3 id="success">Success</h3>
 <p>Ƭ <strong>Success</strong>: <em>object</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L19">result.ts:19</a></em></p>
@@ -70,13 +70,13 @@
 <li><p><strong>kind</strong>: <em>"success"</em></p></li>
 <li><p><strong>value</strong>: <em>T</em></p></li>
 </ul>
-<hr />
+<hr>
 <h3 id="t">T</h3>
 <p>Ƭ <strong>T</strong>: <em><a href="_result_.md#result">Result</a>‹V, E›</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L429">result.ts:429</a></em></p>
 <h2 id="functions-1">Functions</h2>
 <h3 id="constall"><code>Const</code> all</h3>
-<p>▸ <strong>all</strong><<strong>T</strong>, <strong>E</strong>>(<code>f</code>: function, <code>result</code>: <a href="_result_.md#result">Result</a>‹T, E›): <em>boolean</em></p>
+<p>▸ <strong>all</strong>&lt;<strong>T</strong>, <strong>E</strong>&gt;(<code>f</code>: function, <code>result</code>: <a href="_result_.md#result">Result</a>‹T, E›): <em>boolean</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L369">result.ts:369</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>T</strong></p>
@@ -85,14 +85,25 @@
 <p>▪ <strong>f</strong>: <em>function</em></p>
 <p>▸ (<code>v</code>: T): <em>boolean</em></p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>v</code> | T |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>v</code></td>
+<td>T</td>
+</tr>
+</tbody>
+</table>
 <p>▪ <strong>result</strong>: <em><a href="_result_.md#result">Result</a>‹T, E›</em></p>
 <p><strong>Returns:</strong> <em>boolean</em></p>
-<hr />
+<hr>
 <h3 id="constany"><code>Const</code> any</h3>
-<p>▸ <strong>any</strong><<strong>T</strong>, <strong>E</strong>>(<code>f</code>: function, <code>result</code>: <a href="_result_.md#result">Result</a>‹T, E›): <em>boolean</em></p>
+<p>▸ <strong>any</strong>&lt;<strong>T</strong>, <strong>E</strong>&gt;(<code>f</code>: function, <code>result</code>: <a href="_result_.md#result">Result</a>‹T, E›): <em>boolean</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L376">result.ts:376</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>T</strong></p>
@@ -101,28 +112,53 @@
 <p>▪ <strong>f</strong>: <em>function</em></p>
 <p>▸ (<code>v</code>: T): <em>boolean</em></p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>v</code> | T |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>v</code></td>
+<td>T</td>
+</tr>
+</tbody>
+</table>
 <p>▪ <strong>result</strong>: <em><a href="_result_.md#result">Result</a>‹T, E›</em></p>
 <p><strong>Returns:</strong> <em>boolean</em></p>
-<hr />
+<hr>
 <h3 id="constap"><code>Const</code> ap</h3>
-<p>▸ <strong>ap</strong><<strong>A</strong>, <strong>B</strong>, <strong>Err</strong>>(<code>resultf</code>: <a href="_result_.md#result">Result</a>‹function, Err›, <code>result</code>: <a href="_result_.md#result">Result</a>‹A, Err›): <em><a href="_result_.md#result">Result</a>‹B, Err›</em></p>
+<p>▸ <strong>ap</strong>&lt;<strong>A</strong>, <strong>B</strong>, <strong>Err</strong>&gt;(<code>resultf</code>: <a href="_result_.md#result">Result</a>‹function, Err›, <code>result</code>: <a href="_result_.md#result">Result</a>‹A, Err›): <em><a href="_result_.md#result">Result</a>‹B, Err›</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L36">result.ts:36</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>A</strong></p>
 <p>▪ <strong>B</strong></p>
 <p>▪ <strong>Err</strong></p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>resultf</code> | <a href="_result_.md#result">Result</a>‹function, Err› |
-<code>result</code> | <a href="_result_.md#result">Result</a>‹A, Err› |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>resultf</code></td>
+<td><a href="_result_.md#result">Result</a>‹function, Err›</td>
+</tr>
+<tr>
+<td><code>result</code></td>
+<td><a href="_result_.md#result">Result</a>‹A, Err›</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em><a href="_result_.md#result">Result</a>‹B, Err›</em></p>
-<hr />
+<hr>
 <h3 id="apn">apN</h3>
-<p>▸ <strong>apN</strong><<strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>Err</strong>>(<code>f</code>: <a href="_result_.md#result">Result</a>‹<a href="_types_functions_.md#fun2">Fun2</a>‹A, B, C›, Err›, <code>a</code>: <a href="_result_.md#result">Result</a>‹A, Err›, <code>b</code>: <a href="_result_.md#result">Result</a>‹B, Err›): <em><a href="_result_.md#result">Result</a>‹C, Err›</em></p>
+<p>▸ <strong>apN</strong>&lt;<strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>Err</strong>&gt;(<code>f</code>: <a href="_result_.md#result">Result</a>‹<a href="_types_functions_.md#fun2">Fun2</a>‹A, B, C›, Err›, <code>a</code>: <a href="_result_.md#result">Result</a>‹A, Err›, <code>b</code>: <a href="_result_.md#result">Result</a>‹B, Err›): <em><a href="_result_.md#result">Result</a>‹C, Err›</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L38">result.ts:38</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>A</strong></p>
@@ -130,13 +166,30 @@
 <p>▪ <strong>C</strong></p>
 <p>▪ <strong>Err</strong></p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>f</code> | <a href="_result_.md#result">Result</a>‹<a href="_types_functions_.md#fun2">Fun2</a>‹A, B, C›, Err› |
-<code>a</code> | <a href="_result_.md#result">Result</a>‹A, Err› |
-<code>b</code> | <a href="_result_.md#result">Result</a>‹B, Err› |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>f</code></td>
+<td><a href="_result_.md#result">Result</a>‹<a href="_types_functions_.md#fun2">Fun2</a>‹A, B, C›, Err›</td>
+</tr>
+<tr>
+<td><code>a</code></td>
+<td><a href="_result_.md#result">Result</a>‹A, Err›</td>
+</tr>
+<tr>
+<td><code>b</code></td>
+<td><a href="_result_.md#result">Result</a>‹B, Err›</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em><a href="_result_.md#result">Result</a>‹C, Err›</em></p>
-<p>▸ <strong>apN</strong><<strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>D</strong>, <strong>Err</strong>>(<code>f</code>: <a href="_result_.md#result">Result</a>‹<a href="_types_functions_.md#fun3">Fun3</a>‹A, B, C, D›, Err›, <code>a</code>: <a href="_result_.md#result">Result</a>‹A, Err›, <code>b</code>: <a href="_result_.md#result">Result</a>‹B, Err›, <code>c</code>: <a href="_result_.md#result">Result</a>‹C, Err›): <em><a href="_result_.md#result">Result</a>‹D, Err›</em></p>
+<p>▸ <strong>apN</strong>&lt;<strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>D</strong>, <strong>Err</strong>&gt;(<code>f</code>: <a href="_result_.md#result">Result</a>‹<a href="_types_functions_.md#fun3">Fun3</a>‹A, B, C, D›, Err›, <code>a</code>: <a href="_result_.md#result">Result</a>‹A, Err›, <code>b</code>: <a href="_result_.md#result">Result</a>‹B, Err›, <code>c</code>: <a href="_result_.md#result">Result</a>‹C, Err›): <em><a href="_result_.md#result">Result</a>‹D, Err›</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L39">result.ts:39</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>A</strong></p>
@@ -145,14 +198,34 @@
 <p>▪ <strong>D</strong></p>
 <p>▪ <strong>Err</strong></p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>f</code> | <a href="_result_.md#result">Result</a>‹<a href="_types_functions_.md#fun3">Fun3</a>‹A, B, C, D›, Err› |
-<code>a</code> | <a href="_result_.md#result">Result</a>‹A, Err› |
-<code>b</code> | <a href="_result_.md#result">Result</a>‹B, Err› |
-<code>c</code> | <a href="_result_.md#result">Result</a>‹C, Err› |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>f</code></td>
+<td><a href="_result_.md#result">Result</a>‹<a href="_types_functions_.md#fun3">Fun3</a>‹A, B, C, D›, Err›</td>
+</tr>
+<tr>
+<td><code>a</code></td>
+<td><a href="_result_.md#result">Result</a>‹A, Err›</td>
+</tr>
+<tr>
+<td><code>b</code></td>
+<td><a href="_result_.md#result">Result</a>‹B, Err›</td>
+</tr>
+<tr>
+<td><code>c</code></td>
+<td><a href="_result_.md#result">Result</a>‹C, Err›</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em><a href="_result_.md#result">Result</a>‹D, Err›</em></p>
-<p>▸ <strong>apN</strong><<strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>D</strong>, <strong>E</strong>, <strong>Err</strong>>(<code>f</code>: <a href="_result_.md#result">Result</a>‹<a href="_types_functions_.md#fun4">Fun4</a>‹A, B, C, D, E›, Err›, <code>a</code>: <a href="_result_.md#result">Result</a>‹A, Err›, <code>b</code>: <a href="_result_.md#result">Result</a>‹B, Err›, <code>c</code>: <a href="_result_.md#result">Result</a>‹C, Err›, <code>d</code>: <a href="_result_.md#result">Result</a>‹D, Err›): <em><a href="_result_.md#result">Result</a>‹E, Err›</em></p>
+<p>▸ <strong>apN</strong>&lt;<strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>D</strong>, <strong>E</strong>, <strong>Err</strong>&gt;(<code>f</code>: <a href="_result_.md#result">Result</a>‹<a href="_types_functions_.md#fun4">Fun4</a>‹A, B, C, D, E›, Err›, <code>a</code>: <a href="_result_.md#result">Result</a>‹A, Err›, <code>b</code>: <a href="_result_.md#result">Result</a>‹B, Err›, <code>c</code>: <a href="_result_.md#result">Result</a>‹C, Err›, <code>d</code>: <a href="_result_.md#result">Result</a>‹D, Err›): <em><a href="_result_.md#result">Result</a>‹E, Err›</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L42">result.ts:42</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>A</strong></p>
@@ -162,15 +235,38 @@
 <p>▪ <strong>E</strong></p>
 <p>▪ <strong>Err</strong></p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>f</code> | <a href="_result_.md#result">Result</a>‹<a href="_types_functions_.md#fun4">Fun4</a>‹A, B, C, D, E›, Err› |
-<code>a</code> | <a href="_result_.md#result">Result</a>‹A, Err› |
-<code>b</code> | <a href="_result_.md#result">Result</a>‹B, Err› |
-<code>c</code> | <a href="_result_.md#result">Result</a>‹C, Err› |
-<code>d</code> | <a href="_result_.md#result">Result</a>‹D, Err› |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>f</code></td>
+<td><a href="_result_.md#result">Result</a>‹<a href="_types_functions_.md#fun4">Fun4</a>‹A, B, C, D, E›, Err›</td>
+</tr>
+<tr>
+<td><code>a</code></td>
+<td><a href="_result_.md#result">Result</a>‹A, Err›</td>
+</tr>
+<tr>
+<td><code>b</code></td>
+<td><a href="_result_.md#result">Result</a>‹B, Err›</td>
+</tr>
+<tr>
+<td><code>c</code></td>
+<td><a href="_result_.md#result">Result</a>‹C, Err›</td>
+</tr>
+<tr>
+<td><code>d</code></td>
+<td><a href="_result_.md#result">Result</a>‹D, Err›</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em><a href="_result_.md#result">Result</a>‹E, Err›</em></p>
-<p>▸ <strong>apN</strong><<strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>D</strong>, <strong>E</strong>, <strong>F</strong>, <strong>Err</strong>>(<code>f</code>: <a href="_result_.md#result">Result</a>‹<a href="_types_functions_.md#fun5">Fun5</a>‹A, B, C, D, E, F›, Err›, <code>a</code>: <a href="_result_.md#result">Result</a>‹A, Err›, <code>b</code>: <a href="_result_.md#result">Result</a>‹B, Err›, <code>c</code>: <a href="_result_.md#result">Result</a>‹C, Err›, <code>d</code>: <a href="_result_.md#result">Result</a>‹D, Err›, <code>e</code>: <a href="_result_.md#result">Result</a>‹E, Err›): <em><a href="_result_.md#result">Result</a>‹F, Err›</em></p>
+<p>▸ <strong>apN</strong>&lt;<strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>D</strong>, <strong>E</strong>, <strong>F</strong>, <strong>Err</strong>&gt;(<code>f</code>: <a href="_result_.md#result">Result</a>‹<a href="_types_functions_.md#fun5">Fun5</a>‹A, B, C, D, E, F›, Err›, <code>a</code>: <a href="_result_.md#result">Result</a>‹A, Err›, <code>b</code>: <a href="_result_.md#result">Result</a>‹B, Err›, <code>c</code>: <a href="_result_.md#result">Result</a>‹C, Err›, <code>d</code>: <a href="_result_.md#result">Result</a>‹D, Err›, <code>e</code>: <a href="_result_.md#result">Result</a>‹E, Err›): <em><a href="_result_.md#result">Result</a>‹F, Err›</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L45">result.ts:45</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>A</strong></p>
@@ -181,16 +277,42 @@
 <p>▪ <strong>F</strong></p>
 <p>▪ <strong>Err</strong></p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>f</code> | <a href="_result_.md#result">Result</a>‹<a href="_types_functions_.md#fun5">Fun5</a>‹A, B, C, D, E, F›, Err› |
-<code>a</code> | <a href="_result_.md#result">Result</a>‹A, Err› |
-<code>b</code> | <a href="_result_.md#result">Result</a>‹B, Err› |
-<code>c</code> | <a href="_result_.md#result">Result</a>‹C, Err› |
-<code>d</code> | <a href="_result_.md#result">Result</a>‹D, Err› |
-<code>e</code> | <a href="_result_.md#result">Result</a>‹E, Err› |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>f</code></td>
+<td><a href="_result_.md#result">Result</a>‹<a href="_types_functions_.md#fun5">Fun5</a>‹A, B, C, D, E, F›, Err›</td>
+</tr>
+<tr>
+<td><code>a</code></td>
+<td><a href="_result_.md#result">Result</a>‹A, Err›</td>
+</tr>
+<tr>
+<td><code>b</code></td>
+<td><a href="_result_.md#result">Result</a>‹B, Err›</td>
+</tr>
+<tr>
+<td><code>c</code></td>
+<td><a href="_result_.md#result">Result</a>‹C, Err›</td>
+</tr>
+<tr>
+<td><code>d</code></td>
+<td><a href="_result_.md#result">Result</a>‹D, Err›</td>
+</tr>
+<tr>
+<td><code>e</code></td>
+<td><a href="_result_.md#result">Result</a>‹E, Err›</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em><a href="_result_.md#result">Result</a>‹F, Err›</em></p>
-<p>▸ <strong>apN</strong><<strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>D</strong>, <strong>E</strong>, <strong>F</strong>, <strong>G</strong>, <strong>Err</strong>>(<code>f</code>: <a href="_result_.md#result">Result</a>‹<a href="_types_functions_.md#fun6">Fun6</a>‹A, B, C, D, E, F, G›, Err›, <code>a</code>: <a href="_result_.md#result">Result</a>‹A, Err›, <code>b</code>: <a href="_result_.md#result">Result</a>‹B, Err›, <code>c</code>: <a href="_result_.md#result">Result</a>‹C, Err›, <code>d</code>: <a href="_result_.md#result">Result</a>‹D, Err›, <code>e</code>: <a href="_result_.md#result">Result</a>‹E, Err›, <code>g</code>: <a href="_result_.md#result">Result</a>‹F, Err›): <em><a href="_result_.md#result">Result</a>‹G, Err›</em></p>
+<p>▸ <strong>apN</strong>&lt;<strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>D</strong>, <strong>E</strong>, <strong>F</strong>, <strong>G</strong>, <strong>Err</strong>&gt;(<code>f</code>: <a href="_result_.md#result">Result</a>‹<a href="_types_functions_.md#fun6">Fun6</a>‹A, B, C, D, E, F, G›, Err›, <code>a</code>: <a href="_result_.md#result">Result</a>‹A, Err›, <code>b</code>: <a href="_result_.md#result">Result</a>‹B, Err›, <code>c</code>: <a href="_result_.md#result">Result</a>‹C, Err›, <code>d</code>: <a href="_result_.md#result">Result</a>‹D, Err›, <code>e</code>: <a href="_result_.md#result">Result</a>‹E, Err›, <code>g</code>: <a href="_result_.md#result">Result</a>‹F, Err›): <em><a href="_result_.md#result">Result</a>‹G, Err›</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L48">result.ts:48</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>A</strong></p>
@@ -202,19 +324,48 @@
 <p>▪ <strong>G</strong></p>
 <p>▪ <strong>Err</strong></p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>f</code> | <a href="_result_.md#result">Result</a>‹<a href="_types_functions_.md#fun6">Fun6</a>‹A, B, C, D, E, F, G›, Err› |
-<code>a</code> | <a href="_result_.md#result">Result</a>‹A, Err› |
-<code>b</code> | <a href="_result_.md#result">Result</a>‹B, Err› |
-<code>c</code> | <a href="_result_.md#result">Result</a>‹C, Err› |
-<code>d</code> | <a href="_result_.md#result">Result</a>‹D, Err› |
-<code>e</code> | <a href="_result_.md#result">Result</a>‹E, Err› |
-<code>g</code> | <a href="_result_.md#result">Result</a>‹F, Err› |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>f</code></td>
+<td><a href="_result_.md#result">Result</a>‹<a href="_types_functions_.md#fun6">Fun6</a>‹A, B, C, D, E, F, G›, Err›</td>
+</tr>
+<tr>
+<td><code>a</code></td>
+<td><a href="_result_.md#result">Result</a>‹A, Err›</td>
+</tr>
+<tr>
+<td><code>b</code></td>
+<td><a href="_result_.md#result">Result</a>‹B, Err›</td>
+</tr>
+<tr>
+<td><code>c</code></td>
+<td><a href="_result_.md#result">Result</a>‹C, Err›</td>
+</tr>
+<tr>
+<td><code>d</code></td>
+<td><a href="_result_.md#result">Result</a>‹D, Err›</td>
+</tr>
+<tr>
+<td><code>e</code></td>
+<td><a href="_result_.md#result">Result</a>‹E, Err›</td>
+</tr>
+<tr>
+<td><code>g</code></td>
+<td><a href="_result_.md#result">Result</a>‹F, Err›</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em><a href="_result_.md#result">Result</a>‹G, Err›</em></p>
-<hr />
+<hr>
 <h3 id="apnwithcombine">apNWithCombine</h3>
-<p>▸ <strong>apNWithCombine</strong><<strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>Err</strong>>(<code>f</code>: <a href="_result_.md#result">Result</a>‹<a href="_types_functions_.md#fun2">Fun2</a>‹A, B, C›, Err›, <code>combineErrors</code>: function, <code>a</code>: <a href="_result_.md#result">Result</a>‹A, Err›, <code>b</code>: <a href="_result_.md#result">Result</a>‹B, Err›): <em><a href="_result_.md#result">Result</a>‹C, Err›</em></p>
+<p>▸ <strong>apNWithCombine</strong>&lt;<strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>Err</strong>&gt;(<code>f</code>: <a href="_result_.md#result">Result</a>‹<a href="_types_functions_.md#fun2">Fun2</a>‹A, B, C›, Err›, <code>combineErrors</code>: function, <code>a</code>: <a href="_result_.md#result">Result</a>‹A, Err›, <code>b</code>: <a href="_result_.md#result">Result</a>‹B, Err›): <em><a href="_result_.md#result">Result</a>‹C, Err›</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L60">result.ts:60</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>A</strong></p>
@@ -226,14 +377,28 @@
 <p>▪ <strong>combineErrors</strong>: <em>function</em></p>
 <p>▸ (<code>e1</code>: Err, <code>e2</code>: Err): <em>Err</em></p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>e1</code> | Err |
-<code>e2</code> | Err |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>e1</code></td>
+<td>Err</td>
+</tr>
+<tr>
+<td><code>e2</code></td>
+<td>Err</td>
+</tr>
+</tbody>
+</table>
 <p>▪ <strong>a</strong>: <em><a href="_result_.md#result">Result</a>‹A, Err›</em></p>
 <p>▪ <strong>b</strong>: <em><a href="_result_.md#result">Result</a>‹B, Err›</em></p>
 <p><strong>Returns:</strong> <em><a href="_result_.md#result">Result</a>‹C, Err›</em></p>
-<p>▸ <strong>apNWithCombine</strong><<strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>D</strong>, <strong>Err</strong>>(<code>f</code>: <a href="_result_.md#result">Result</a>‹<a href="_types_functions_.md#fun3">Fun3</a>‹A, B, C, D›, Err›, <code>combineErrors</code>: function, <code>a</code>: <a href="_result_.md#result">Result</a>‹A, Err›, <code>b</code>: <a href="_result_.md#result">Result</a>‹B, Err›, <code>c</code>: <a href="_result_.md#result">Result</a>‹C, Err›): <em><a href="_result_.md#result">Result</a>‹D, Err›</em></p>
+<p>▸ <strong>apNWithCombine</strong>&lt;<strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>D</strong>, <strong>Err</strong>&gt;(<code>f</code>: <a href="_result_.md#result">Result</a>‹<a href="_types_functions_.md#fun3">Fun3</a>‹A, B, C, D›, Err›, <code>combineErrors</code>: function, <code>a</code>: <a href="_result_.md#result">Result</a>‹A, Err›, <code>b</code>: <a href="_result_.md#result">Result</a>‹B, Err›, <code>c</code>: <a href="_result_.md#result">Result</a>‹C, Err›): <em><a href="_result_.md#result">Result</a>‹D, Err›</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L64">result.ts:64</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>A</strong></p>
@@ -246,15 +411,29 @@
 <p>▪ <strong>combineErrors</strong>: <em>function</em></p>
 <p>▸ (<code>e1</code>: Err, <code>e2</code>: Err): <em>Err</em></p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>e1</code> | Err |
-<code>e2</code> | Err |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>e1</code></td>
+<td>Err</td>
+</tr>
+<tr>
+<td><code>e2</code></td>
+<td>Err</td>
+</tr>
+</tbody>
+</table>
 <p>▪ <strong>a</strong>: <em><a href="_result_.md#result">Result</a>‹A, Err›</em></p>
 <p>▪ <strong>b</strong>: <em><a href="_result_.md#result">Result</a>‹B, Err›</em></p>
 <p>▪ <strong>c</strong>: <em><a href="_result_.md#result">Result</a>‹C, Err›</em></p>
 <p><strong>Returns:</strong> <em><a href="_result_.md#result">Result</a>‹D, Err›</em></p>
-<p>▸ <strong>apNWithCombine</strong><<strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>D</strong>, <strong>E</strong>, <strong>Err</strong>>(<code>f</code>: <a href="_result_.md#result">Result</a>‹<a href="_types_functions_.md#fun4">Fun4</a>‹A, B, C, D, E›, Err›, <code>combineErrors</code>: function, <code>a</code>: <a href="_result_.md#result">Result</a>‹A, Err›, <code>b</code>: <a href="_result_.md#result">Result</a>‹B, Err›, <code>c</code>: <a href="_result_.md#result">Result</a>‹C, Err›, <code>d</code>: <a href="_result_.md#result">Result</a>‹D, Err›): <em><a href="_result_.md#result">Result</a>‹E, Err›</em></p>
+<p>▸ <strong>apNWithCombine</strong>&lt;<strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>D</strong>, <strong>E</strong>, <strong>Err</strong>&gt;(<code>f</code>: <a href="_result_.md#result">Result</a>‹<a href="_types_functions_.md#fun4">Fun4</a>‹A, B, C, D, E›, Err›, <code>combineErrors</code>: function, <code>a</code>: <a href="_result_.md#result">Result</a>‹A, Err›, <code>b</code>: <a href="_result_.md#result">Result</a>‹B, Err›, <code>c</code>: <a href="_result_.md#result">Result</a>‹C, Err›, <code>d</code>: <a href="_result_.md#result">Result</a>‹D, Err›): <em><a href="_result_.md#result">Result</a>‹E, Err›</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L68">result.ts:68</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>A</strong></p>
@@ -268,16 +447,30 @@
 <p>▪ <strong>combineErrors</strong>: <em>function</em></p>
 <p>▸ (<code>e1</code>: Err, <code>e2</code>: Err): <em>Err</em></p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>e1</code> | Err |
-<code>e2</code> | Err |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>e1</code></td>
+<td>Err</td>
+</tr>
+<tr>
+<td><code>e2</code></td>
+<td>Err</td>
+</tr>
+</tbody>
+</table>
 <p>▪ <strong>a</strong>: <em><a href="_result_.md#result">Result</a>‹A, Err›</em></p>
 <p>▪ <strong>b</strong>: <em><a href="_result_.md#result">Result</a>‹B, Err›</em></p>
 <p>▪ <strong>c</strong>: <em><a href="_result_.md#result">Result</a>‹C, Err›</em></p>
 <p>▪ <strong>d</strong>: <em><a href="_result_.md#result">Result</a>‹D, Err›</em></p>
 <p><strong>Returns:</strong> <em><a href="_result_.md#result">Result</a>‹E, Err›</em></p>
-<p>▸ <strong>apNWithCombine</strong><<strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>D</strong>, <strong>E</strong>, <strong>F</strong>, <strong>Err</strong>>(<code>f</code>: <a href="_result_.md#result">Result</a>‹<a href="_types_functions_.md#fun5">Fun5</a>‹A, B, C, D, E, F›, Err›, <code>combineErrors</code>: function, <code>a</code>: <a href="_result_.md#result">Result</a>‹A, Err›, <code>b</code>: <a href="_result_.md#result">Result</a>‹B, Err›, <code>c</code>: <a href="_result_.md#result">Result</a>‹C, Err›, <code>d</code>: <a href="_result_.md#result">Result</a>‹D, Err›, <code>e</code>: <a href="_result_.md#result">Result</a>‹E, Err›): <em><a href="_result_.md#result">Result</a>‹F, Err›</em></p>
+<p>▸ <strong>apNWithCombine</strong>&lt;<strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>D</strong>, <strong>E</strong>, <strong>F</strong>, <strong>Err</strong>&gt;(<code>f</code>: <a href="_result_.md#result">Result</a>‹<a href="_types_functions_.md#fun5">Fun5</a>‹A, B, C, D, E, F›, Err›, <code>combineErrors</code>: function, <code>a</code>: <a href="_result_.md#result">Result</a>‹A, Err›, <code>b</code>: <a href="_result_.md#result">Result</a>‹B, Err›, <code>c</code>: <a href="_result_.md#result">Result</a>‹C, Err›, <code>d</code>: <a href="_result_.md#result">Result</a>‹D, Err›, <code>e</code>: <a href="_result_.md#result">Result</a>‹E, Err›): <em><a href="_result_.md#result">Result</a>‹F, Err›</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L72">result.ts:72</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>A</strong></p>
@@ -292,17 +485,31 @@
 <p>▪ <strong>combineErrors</strong>: <em>function</em></p>
 <p>▸ (<code>e1</code>: Err, <code>e2</code>: Err): <em>Err</em></p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>e1</code> | Err |
-<code>e2</code> | Err |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>e1</code></td>
+<td>Err</td>
+</tr>
+<tr>
+<td><code>e2</code></td>
+<td>Err</td>
+</tr>
+</tbody>
+</table>
 <p>▪ <strong>a</strong>: <em><a href="_result_.md#result">Result</a>‹A, Err›</em></p>
 <p>▪ <strong>b</strong>: <em><a href="_result_.md#result">Result</a>‹B, Err›</em></p>
 <p>▪ <strong>c</strong>: <em><a href="_result_.md#result">Result</a>‹C, Err›</em></p>
 <p>▪ <strong>d</strong>: <em><a href="_result_.md#result">Result</a>‹D, Err›</em></p>
 <p>▪ <strong>e</strong>: <em><a href="_result_.md#result">Result</a>‹E, Err›</em></p>
 <p><strong>Returns:</strong> <em><a href="_result_.md#result">Result</a>‹F, Err›</em></p>
-<p>▸ <strong>apNWithCombine</strong><<strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>D</strong>, <strong>E</strong>, <strong>F</strong>, <strong>G</strong>, <strong>Err</strong>>(<code>f</code>: <a href="_result_.md#result">Result</a>‹<a href="_types_functions_.md#fun6">Fun6</a>‹A, B, C, D, E, F, G›, Err›, <code>combineErrors</code>: function, <code>a</code>: <a href="_result_.md#result">Result</a>‹A, Err›, <code>b</code>: <a href="_result_.md#result">Result</a>‹B, Err›, <code>c</code>: <a href="_result_.md#result">Result</a>‹C, Err›, <code>d</code>: <a href="_result_.md#result">Result</a>‹D, Err›, <code>e</code>: <a href="_result_.md#result">Result</a>‹E, Err›, <code>g</code>: <a href="_result_.md#result">Result</a>‹F, Err›): <em><a href="_result_.md#result">Result</a>‹G, Err›</em></p>
+<p>▸ <strong>apNWithCombine</strong>&lt;<strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>D</strong>, <strong>E</strong>, <strong>F</strong>, <strong>G</strong>, <strong>Err</strong>&gt;(<code>f</code>: <a href="_result_.md#result">Result</a>‹<a href="_types_functions_.md#fun6">Fun6</a>‹A, B, C, D, E, F, G›, Err›, <code>combineErrors</code>: function, <code>a</code>: <a href="_result_.md#result">Result</a>‹A, Err›, <code>b</code>: <a href="_result_.md#result">Result</a>‹B, Err›, <code>c</code>: <a href="_result_.md#result">Result</a>‹C, Err›, <code>d</code>: <a href="_result_.md#result">Result</a>‹D, Err›, <code>e</code>: <a href="_result_.md#result">Result</a>‹E, Err›, <code>g</code>: <a href="_result_.md#result">Result</a>‹F, Err›): <em><a href="_result_.md#result">Result</a>‹G, Err›</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L76">result.ts:76</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>A</strong></p>
@@ -318,10 +525,24 @@
 <p>▪ <strong>combineErrors</strong>: <em>function</em></p>
 <p>▸ (<code>e1</code>: Err, <code>e2</code>: Err): <em>Err</em></p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>e1</code> | Err |
-<code>e2</code> | Err |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>e1</code></td>
+<td>Err</td>
+</tr>
+<tr>
+<td><code>e2</code></td>
+<td>Err</td>
+</tr>
+</tbody>
+</table>
 <p>▪ <strong>a</strong>: <em><a href="_result_.md#result">Result</a>‹A, Err›</em></p>
 <p>▪ <strong>b</strong>: <em><a href="_result_.md#result">Result</a>‹B, Err›</em></p>
 <p>▪ <strong>c</strong>: <em><a href="_result_.md#result">Result</a>‹C, Err›</em></p>
@@ -329,9 +550,9 @@
 <p>▪ <strong>e</strong>: <em><a href="_result_.md#result">Result</a>‹E, Err›</em></p>
 <p>▪ <strong>g</strong>: <em><a href="_result_.md#result">Result</a>‹F, Err›</em></p>
 <p><strong>Returns:</strong> <em><a href="_result_.md#result">Result</a>‹G, Err›</em></p>
-<hr />
+<hr>
 <h3 id="constcata"><code>Const</code> cata</h3>
-<p>▸ <strong>cata</strong><<strong>A</strong>, <strong>B</strong>, <strong>Err</strong>>(<code>f</code>: function, <code>result</code>: <a href="_result_.md#result">Result</a>‹A, Err›, <code>ifNone</code>: B): <em>B</em></p>
+<p>▸ <strong>cata</strong>&lt;<strong>A</strong>, <strong>B</strong>, <strong>Err</strong>&gt;(<code>f</code>: function, <code>result</code>: <a href="_result_.md#result">Result</a>‹A, Err›, <code>ifNone</code>: B): <em>B</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L348">result.ts:348</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>A</strong></p>
@@ -341,15 +562,26 @@
 <p>▪ <strong>f</strong>: <em>function</em></p>
 <p>▸ (<code>a</code>: A): <em>B</em></p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>a</code> | A |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>a</code></td>
+<td>A</td>
+</tr>
+</tbody>
+</table>
 <p>▪ <strong>result</strong>: <em><a href="_result_.md#result">Result</a>‹A, Err›</em></p>
 <p>▪ <strong>ifNone</strong>: <em>B</em></p>
 <p><strong>Returns:</strong> <em>B</em></p>
-<hr />
+<hr>
 <h3 id="constcatalazy"><code>Const</code> cataLazy</h3>
-<p>▸ <strong>cataLazy</strong><<strong>A</strong>, <strong>B</strong>, <strong>Err</strong>>(<code>f</code>: function, <code>result</code>: <a href="_result_.md#result">Result</a>‹A, Err›, <code>ifNone</code>: function): <em>B</em></p>
+<p>▸ <strong>cataLazy</strong>&lt;<strong>A</strong>, <strong>B</strong>, <strong>Err</strong>&gt;(<code>f</code>: function, <code>result</code>: <a href="_result_.md#result">Result</a>‹A, Err›, <code>ifNone</code>: function): <em>B</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L355">result.ts:355</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>A</strong></p>
@@ -359,30 +591,55 @@
 <p>▪ <strong>f</strong>: <em>function</em></p>
 <p>▸ (<code>a</code>: A): <em>B</em></p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>a</code> | A |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>a</code></td>
+<td>A</td>
+</tr>
+</tbody>
+</table>
 <p>▪ <strong>result</strong>: <em><a href="_result_.md#result">Result</a>‹A, Err›</em></p>
 <p>▪ <strong>ifNone</strong>: <em>function</em></p>
 <p>▸ (): <em>B</em></p>
 <p><strong>Returns:</strong> <em>B</em></p>
-<hr />
+<hr>
 <h3 id="constcombine"><code>Const</code> combine</h3>
-<p>▸ <strong>combine</strong><<strong>A</strong>, <strong>B</strong>, <strong>Err</strong>>(<code>a</code>: <a href="_result_.md#result">Result</a>‹A, Err›, <code>b</code>: <a href="_result_.md#result">Result</a>‹B, Err›): <em><a href="_result_.md#result">Result</a>‹[A, B], Err›</em></p>
+<p>▸ <strong>combine</strong>&lt;<strong>A</strong>, <strong>B</strong>, <strong>Err</strong>&gt;(<code>a</code>: <a href="_result_.md#result">Result</a>‹A, Err›, <code>b</code>: <a href="_result_.md#result">Result</a>‹B, Err›): <em><a href="_result_.md#result">Result</a>‹[A, B], Err›</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L423">result.ts:423</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>A</strong></p>
 <p>▪ <strong>B</strong></p>
 <p>▪ <strong>Err</strong></p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>a</code> | <a href="_result_.md#result">Result</a>‹A, Err› |
-<code>b</code> | <a href="_result_.md#result">Result</a>‹B, Err› |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>a</code></td>
+<td><a href="_result_.md#result">Result</a>‹A, Err›</td>
+</tr>
+<tr>
+<td><code>b</code></td>
+<td><a href="_result_.md#result">Result</a>‹B, Err›</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em><a href="_result_.md#result">Result</a>‹[A, B], Err›</em></p>
-<hr />
+<hr>
 <h3 id="consteach"><code>Const</code> each</h3>
-<p>▸ <strong>each</strong><<strong>T</strong>, <strong>E</strong>>(<code>f</code>: function, <code>result</code>: <a href="_result_.md#result">Result</a>‹T, E›): <em>void</em></p>
+<p>▸ <strong>each</strong>&lt;<strong>T</strong>, <strong>E</strong>&gt;(<code>f</code>: function, <code>result</code>: <a href="_result_.md#result">Result</a>‹T, E›): <em>void</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L383">result.ts:383</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>T</strong></p>
@@ -391,14 +648,25 @@
 <p>▪ <strong>f</strong>: <em>function</em></p>
 <p>▸ (<code>v</code>: T): <em>void</em></p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>v</code> | T |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>v</code></td>
+<td>T</td>
+</tr>
+</tbody>
+</table>
 <p>▪ <strong>result</strong>: <em><a href="_result_.md#result">Result</a>‹T, E›</em></p>
 <p><strong>Returns:</strong> <em>void</em></p>
-<hr />
+<hr>
 <h3 id="constequals"><code>Const</code> equals</h3>
-<p>▸ <strong>equals</strong><<strong>T</strong>, <strong>E</strong>>(<code>predicate</code>: function, <code>a</code>: <a href="_result_.md#result">Result</a>‹T, E›, <code>b</code>: <a href="_result_.md#result">Result</a>‹T, E›): <em>boolean</em></p>
+<p>▸ <strong>equals</strong>&lt;<strong>T</strong>, <strong>E</strong>&gt;(<code>predicate</code>: function, <code>a</code>: <a href="_result_.md#result">Result</a>‹T, E›, <code>b</code>: <a href="_result_.md#result">Result</a>‹T, E›): <em>boolean</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L256">result.ts:256</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>T</strong></p>
@@ -407,28 +675,53 @@
 <p>▪ <strong>predicate</strong>: <em>function</em></p>
 <p>▸ (<code>a</code>: T, <code>b</code>: T): <em>boolean</em></p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>a</code> | T |
-<code>b</code> | T |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>a</code></td>
+<td>T</td>
+</tr>
+<tr>
+<td><code>b</code></td>
+<td>T</td>
+</tr>
+</tbody>
+</table>
 <p>▪ <strong>a</strong>: <em><a href="_result_.md#result">Result</a>‹T, E›</em></p>
 <p>▪ <strong>b</strong>: <em><a href="_result_.md#result">Result</a>‹T, E›</em></p>
 <p><strong>Returns:</strong> <em>boolean</em></p>
-<hr />
+<hr>
 <h3 id="constfailure"><code>Const</code> failure</h3>
-<p>▸ <strong>failure</strong><<strong>T</strong>, <strong>E</strong>>(<code>error</code>: E): <em><a href="_result_.md#result">Result</a>‹T, E›</em></p>
+<p>▸ <strong>failure</strong>&lt;<strong>T</strong>, <strong>E</strong>&gt;(<code>error</code>: E): <em><a href="_result_.md#result">Result</a>‹T, E›</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L27">result.ts:27</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>T</strong></p>
 <p>▪ <strong>E</strong></p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>error</code> | E |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>error</code></td>
+<td>E</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em><a href="_result_.md#result">Result</a>‹T, E›</em></p>
-<hr />
+<hr>
 <h3 id="constfilter"><code>Const</code> filter</h3>
-<p>▸ <strong>filter</strong><<strong>T</strong>, <strong>E</strong>>(<code>predicate</code>: function, <code>error</code>: E, <code>result</code>: <a href="_result_.md#result">Result</a>‹T, E›): <em><a href="_result_.md#result">Result</a>‹T, E›</em></p>
+<p>▸ <strong>filter</strong>&lt;<strong>T</strong>, <strong>E</strong>&gt;(<code>predicate</code>: function, <code>error</code>: E, <code>result</code>: <a href="_result_.md#result">Result</a>‹T, E›): <em><a href="_result_.md#result">Result</a>‹T, E›</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L268">result.ts:268</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>T</strong></p>
@@ -437,15 +730,26 @@
 <p>▪ <strong>predicate</strong>: <em>function</em></p>
 <p>▸ (<code>v</code>: T): <em>boolean</em></p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>v</code> | T |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>v</code></td>
+<td>T</td>
+</tr>
+</tbody>
+</table>
 <p>▪ <strong>error</strong>: <em>E</em></p>
 <p>▪ <strong>result</strong>: <em><a href="_result_.md#result">Result</a>‹T, E›</em></p>
 <p><strong>Returns:</strong> <em><a href="_result_.md#result">Result</a>‹T, E›</em></p>
-<hr />
+<hr>
 <h3 id="constfilterlazy"><code>Const</code> filterLazy</h3>
-<p>▸ <strong>filterLazy</strong><<strong>T</strong>, <strong>E</strong>>(<code>predicate</code>: function, <code>errorf</code>: function, <code>result</code>: <a href="_result_.md#result">Result</a>‹T, E›): <em><a href="_result_.md#result">Result</a>‹T, E›</em></p>
+<p>▸ <strong>filterLazy</strong>&lt;<strong>T</strong>, <strong>E</strong>&gt;(<code>predicate</code>: function, <code>errorf</code>: function, <code>result</code>: <a href="_result_.md#result">Result</a>‹T, E›): <em><a href="_result_.md#result">Result</a>‹T, E›</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L280">result.ts:280</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>T</strong></p>
@@ -454,28 +758,50 @@
 <p>▪ <strong>predicate</strong>: <em>function</em></p>
 <p>▸ (<code>v</code>: T): <em>boolean</em></p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>v</code> | T |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>v</code></td>
+<td>T</td>
+</tr>
+</tbody>
+</table>
 <p>▪ <strong>errorf</strong>: <em>function</em></p>
 <p>▸ (): <em>E</em></p>
 <p>▪ <strong>result</strong>: <em><a href="_result_.md#result">Result</a>‹T, E›</em></p>
 <p><strong>Returns:</strong> <em><a href="_result_.md#result">Result</a>‹T, E›</em></p>
-<hr />
+<hr>
 <h3 id="constfirstsuccess"><code>Const</code> firstSuccess</h3>
-<p>▸ <strong>firstSuccess</strong><<strong>A</strong>, <strong>Err</strong>>(…<code>args</code>: <a href="_result_.md#result">Result</a>‹A, Err›[]): <em><a href="_result_.md#result">Result</a>‹A, Err›</em></p>
+<p>▸ <strong>firstSuccess</strong>&lt;<strong>A</strong>, <strong>Err</strong>&gt;(…<code>args</code>: <a href="_result_.md#result">Result</a>‹A, Err›[]): <em><a href="_result_.md#result">Result</a>‹A, Err›</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L390">result.ts:390</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>A</strong></p>
 <p>▪ <strong>Err</strong></p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>...args</code> | <a href="_result_.md#result">Result</a>‹A, Err›[] |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>...args</code></td>
+<td><a href="_result_.md#result">Result</a>‹A, Err›[]</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em><a href="_result_.md#result">Result</a>‹A, Err›</em></p>
-<hr />
+<hr>
 <h3 id="constflatmap"><code>Const</code> flatMap</h3>
-<p>▸ <strong>flatMap</strong><<strong>A</strong>, <strong>B</strong>, <strong>Err</strong>>(<code>f</code>: function, <code>result</code>: <a href="_result_.md#result">Result</a>‹A, Err›): <em><a href="_result_.md#result">Result</a>‹B, Err›</em></p>
+<p>▸ <strong>flatMap</strong>&lt;<strong>A</strong>, <strong>B</strong>, <strong>Err</strong>&gt;(<code>f</code>: function, <code>result</code>: <a href="_result_.md#result">Result</a>‹A, Err›): <em><a href="_result_.md#result">Result</a>‹B, Err›</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L179">result.ts:179</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>A</strong></p>
@@ -485,14 +811,25 @@
 <p>▪ <strong>f</strong>: <em>function</em></p>
 <p>▸ (<code>a</code>: A): <em><a href="_result_.md#result">Result</a>‹B, Err›</em></p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>a</code> | A |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>a</code></td>
+<td>A</td>
+</tr>
+</tbody>
+</table>
 <p>▪ <strong>result</strong>: <em><a href="_result_.md#result">Result</a>‹A, Err›</em></p>
 <p><strong>Returns:</strong> <em><a href="_result_.md#result">Result</a>‹B, Err›</em></p>
-<hr />
+<hr>
 <h3 id="flatmapn">flatMapN</h3>
-<p>▸ <strong>flatMapN</strong><<strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>Err</strong>>(<code>f</code>: <a href="_types_functions_.md#fun2">Fun2</a>‹A, B, <a href="_result_.md#result">Result</a>‹C, Err››, <code>a</code>: <a href="_result_.md#result">Result</a>‹A, Err›, <code>b</code>: <a href="_result_.md#result">Result</a>‹B, Err›): <em><a href="_result_.md#result">Result</a>‹C, Err›</em></p>
+<p>▸ <strong>flatMapN</strong>&lt;<strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>Err</strong>&gt;(<code>f</code>: <a href="_types_functions_.md#fun2">Fun2</a>‹A, B, <a href="_result_.md#result">Result</a>‹C, Err››, <code>a</code>: <a href="_result_.md#result">Result</a>‹A, Err›, <code>b</code>: <a href="_result_.md#result">Result</a>‹B, Err›): <em><a href="_result_.md#result">Result</a>‹C, Err›</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L186">result.ts:186</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>A</strong></p>
@@ -500,13 +837,30 @@
 <p>▪ <strong>C</strong></p>
 <p>▪ <strong>Err</strong></p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>f</code> | <a href="_types_functions_.md#fun2">Fun2</a>‹A, B, <a href="_result_.md#result">Result</a>‹C, Err›› |
-<code>a</code> | <a href="_result_.md#result">Result</a>‹A, Err› |
-<code>b</code> | <a href="_result_.md#result">Result</a>‹B, Err› |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>f</code></td>
+<td><a href="_types_functions_.md#fun2">Fun2</a>‹A, B, <a href="_result_.md#result">Result</a>‹C, Err››</td>
+</tr>
+<tr>
+<td><code>a</code></td>
+<td><a href="_result_.md#result">Result</a>‹A, Err›</td>
+</tr>
+<tr>
+<td><code>b</code></td>
+<td><a href="_result_.md#result">Result</a>‹B, Err›</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em><a href="_result_.md#result">Result</a>‹C, Err›</em></p>
-<p>▸ <strong>flatMapN</strong><<strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>D</strong>, <strong>Err</strong>>(<code>f</code>: <a href="_types_functions_.md#fun3">Fun3</a>‹A, B, C, <a href="_result_.md#result">Result</a>‹D, Err››, <code>a</code>: <a href="_result_.md#result">Result</a>‹A, Err›, <code>b</code>: <a href="_result_.md#result">Result</a>‹B, Err›, <code>c</code>: <a href="_result_.md#result">Result</a>‹C, Err›): <em><a href="_result_.md#result">Result</a>‹D, Err›</em></p>
+<p>▸ <strong>flatMapN</strong>&lt;<strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>D</strong>, <strong>Err</strong>&gt;(<code>f</code>: <a href="_types_functions_.md#fun3">Fun3</a>‹A, B, C, <a href="_result_.md#result">Result</a>‹D, Err››, <code>a</code>: <a href="_result_.md#result">Result</a>‹A, Err›, <code>b</code>: <a href="_result_.md#result">Result</a>‹B, Err›, <code>c</code>: <a href="_result_.md#result">Result</a>‹C, Err›): <em><a href="_result_.md#result">Result</a>‹D, Err›</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L189">result.ts:189</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>A</strong></p>
@@ -515,14 +869,34 @@
 <p>▪ <strong>D</strong></p>
 <p>▪ <strong>Err</strong></p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>f</code> | <a href="_types_functions_.md#fun3">Fun3</a>‹A, B, C, <a href="_result_.md#result">Result</a>‹D, Err›› |
-<code>a</code> | <a href="_result_.md#result">Result</a>‹A, Err› |
-<code>b</code> | <a href="_result_.md#result">Result</a>‹B, Err› |
-<code>c</code> | <a href="_result_.md#result">Result</a>‹C, Err› |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>f</code></td>
+<td><a href="_types_functions_.md#fun3">Fun3</a>‹A, B, C, <a href="_result_.md#result">Result</a>‹D, Err››</td>
+</tr>
+<tr>
+<td><code>a</code></td>
+<td><a href="_result_.md#result">Result</a>‹A, Err›</td>
+</tr>
+<tr>
+<td><code>b</code></td>
+<td><a href="_result_.md#result">Result</a>‹B, Err›</td>
+</tr>
+<tr>
+<td><code>c</code></td>
+<td><a href="_result_.md#result">Result</a>‹C, Err›</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em><a href="_result_.md#result">Result</a>‹D, Err›</em></p>
-<p>▸ <strong>flatMapN</strong><<strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>D</strong>, <strong>E</strong>, <strong>Err</strong>>(<code>f</code>: <a href="_types_functions_.md#fun4">Fun4</a>‹A, B, C, D, <a href="_result_.md#result">Result</a>‹E, Err››, <code>a</code>: <a href="_result_.md#result">Result</a>‹A, Err›, <code>b</code>: <a href="_result_.md#result">Result</a>‹B, Err›, <code>c</code>: <a href="_result_.md#result">Result</a>‹C, Err›, <code>d</code>: <a href="_result_.md#result">Result</a>‹D, Err›): <em><a href="_result_.md#result">Result</a>‹E, Err›</em></p>
+<p>▸ <strong>flatMapN</strong>&lt;<strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>D</strong>, <strong>E</strong>, <strong>Err</strong>&gt;(<code>f</code>: <a href="_types_functions_.md#fun4">Fun4</a>‹A, B, C, D, <a href="_result_.md#result">Result</a>‹E, Err››, <code>a</code>: <a href="_result_.md#result">Result</a>‹A, Err›, <code>b</code>: <a href="_result_.md#result">Result</a>‹B, Err›, <code>c</code>: <a href="_result_.md#result">Result</a>‹C, Err›, <code>d</code>: <a href="_result_.md#result">Result</a>‹D, Err›): <em><a href="_result_.md#result">Result</a>‹E, Err›</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L192">result.ts:192</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>A</strong></p>
@@ -532,15 +906,38 @@
 <p>▪ <strong>E</strong></p>
 <p>▪ <strong>Err</strong></p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>f</code> | <a href="_types_functions_.md#fun4">Fun4</a>‹A, B, C, D, <a href="_result_.md#result">Result</a>‹E, Err›› |
-<code>a</code> | <a href="_result_.md#result">Result</a>‹A, Err› |
-<code>b</code> | <a href="_result_.md#result">Result</a>‹B, Err› |
-<code>c</code> | <a href="_result_.md#result">Result</a>‹C, Err› |
-<code>d</code> | <a href="_result_.md#result">Result</a>‹D, Err› |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>f</code></td>
+<td><a href="_types_functions_.md#fun4">Fun4</a>‹A, B, C, D, <a href="_result_.md#result">Result</a>‹E, Err››</td>
+</tr>
+<tr>
+<td><code>a</code></td>
+<td><a href="_result_.md#result">Result</a>‹A, Err›</td>
+</tr>
+<tr>
+<td><code>b</code></td>
+<td><a href="_result_.md#result">Result</a>‹B, Err›</td>
+</tr>
+<tr>
+<td><code>c</code></td>
+<td><a href="_result_.md#result">Result</a>‹C, Err›</td>
+</tr>
+<tr>
+<td><code>d</code></td>
+<td><a href="_result_.md#result">Result</a>‹D, Err›</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em><a href="_result_.md#result">Result</a>‹E, Err›</em></p>
-<p>▸ <strong>flatMapN</strong><<strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>D</strong>, <strong>E</strong>, <strong>F</strong>, <strong>Err</strong>>(<code>f</code>: <a href="_types_functions_.md#fun5">Fun5</a>‹A, B, C, D, E, <a href="_result_.md#result">Result</a>‹F, Err››, <code>a</code>: <a href="_result_.md#result">Result</a>‹A, Err›, <code>b</code>: <a href="_result_.md#result">Result</a>‹B, Err›, <code>c</code>: <a href="_result_.md#result">Result</a>‹C, Err›, <code>d</code>: <a href="_result_.md#result">Result</a>‹D, Err›, <code>e</code>: <a href="_result_.md#result">Result</a>‹E, Err›): <em><a href="_result_.md#result">Result</a>‹F, Err›</em></p>
+<p>▸ <strong>flatMapN</strong>&lt;<strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>D</strong>, <strong>E</strong>, <strong>F</strong>, <strong>Err</strong>&gt;(<code>f</code>: <a href="_types_functions_.md#fun5">Fun5</a>‹A, B, C, D, E, <a href="_result_.md#result">Result</a>‹F, Err››, <code>a</code>: <a href="_result_.md#result">Result</a>‹A, Err›, <code>b</code>: <a href="_result_.md#result">Result</a>‹B, Err›, <code>c</code>: <a href="_result_.md#result">Result</a>‹C, Err›, <code>d</code>: <a href="_result_.md#result">Result</a>‹D, Err›, <code>e</code>: <a href="_result_.md#result">Result</a>‹E, Err›): <em><a href="_result_.md#result">Result</a>‹F, Err›</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L195">result.ts:195</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>A</strong></p>
@@ -551,16 +948,42 @@
 <p>▪ <strong>F</strong></p>
 <p>▪ <strong>Err</strong></p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>f</code> | <a href="_types_functions_.md#fun5">Fun5</a>‹A, B, C, D, E, <a href="_result_.md#result">Result</a>‹F, Err›› |
-<code>a</code> | <a href="_result_.md#result">Result</a>‹A, Err› |
-<code>b</code> | <a href="_result_.md#result">Result</a>‹B, Err› |
-<code>c</code> | <a href="_result_.md#result">Result</a>‹C, Err› |
-<code>d</code> | <a href="_result_.md#result">Result</a>‹D, Err› |
-<code>e</code> | <a href="_result_.md#result">Result</a>‹E, Err› |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>f</code></td>
+<td><a href="_types_functions_.md#fun5">Fun5</a>‹A, B, C, D, E, <a href="_result_.md#result">Result</a>‹F, Err››</td>
+</tr>
+<tr>
+<td><code>a</code></td>
+<td><a href="_result_.md#result">Result</a>‹A, Err›</td>
+</tr>
+<tr>
+<td><code>b</code></td>
+<td><a href="_result_.md#result">Result</a>‹B, Err›</td>
+</tr>
+<tr>
+<td><code>c</code></td>
+<td><a href="_result_.md#result">Result</a>‹C, Err›</td>
+</tr>
+<tr>
+<td><code>d</code></td>
+<td><a href="_result_.md#result">Result</a>‹D, Err›</td>
+</tr>
+<tr>
+<td><code>e</code></td>
+<td><a href="_result_.md#result">Result</a>‹E, Err›</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em><a href="_result_.md#result">Result</a>‹F, Err›</em></p>
-<p>▸ <strong>flatMapN</strong><<strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>D</strong>, <strong>E</strong>, <strong>F</strong>, <strong>G</strong>, <strong>Err</strong>>(<code>f</code>: <a href="_types_functions_.md#fun6">Fun6</a>‹A, B, C, D, E, F, <a href="_result_.md#result">Result</a>‹G, Err››, <code>a</code>: <a href="_result_.md#result">Result</a>‹A, Err›, <code>b</code>: <a href="_result_.md#result">Result</a>‹B, Err›, <code>c</code>: <a href="_result_.md#result">Result</a>‹C, Err›, <code>d</code>: <a href="_result_.md#result">Result</a>‹D, Err›, <code>e</code>: <a href="_result_.md#result">Result</a>‹E, Err›, <code>g</code>: <a href="_result_.md#result">Result</a>‹F, Err›): <em><a href="_result_.md#result">Result</a>‹G, Err›</em></p>
+<p>▸ <strong>flatMapN</strong>&lt;<strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>D</strong>, <strong>E</strong>, <strong>F</strong>, <strong>G</strong>, <strong>Err</strong>&gt;(<code>f</code>: <a href="_types_functions_.md#fun6">Fun6</a>‹A, B, C, D, E, F, <a href="_result_.md#result">Result</a>‹G, Err››, <code>a</code>: <a href="_result_.md#result">Result</a>‹A, Err›, <code>b</code>: <a href="_result_.md#result">Result</a>‹B, Err›, <code>c</code>: <a href="_result_.md#result">Result</a>‹C, Err›, <code>d</code>: <a href="_result_.md#result">Result</a>‹D, Err›, <code>e</code>: <a href="_result_.md#result">Result</a>‹E, Err›, <code>g</code>: <a href="_result_.md#result">Result</a>‹F, Err›): <em><a href="_result_.md#result">Result</a>‹G, Err›</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L198">result.ts:198</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>A</strong></p>
@@ -572,19 +995,48 @@
 <p>▪ <strong>G</strong></p>
 <p>▪ <strong>Err</strong></p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>f</code> | <a href="_types_functions_.md#fun6">Fun6</a>‹A, B, C, D, E, F, <a href="_result_.md#result">Result</a>‹G, Err›› |
-<code>a</code> | <a href="_result_.md#result">Result</a>‹A, Err› |
-<code>b</code> | <a href="_result_.md#result">Result</a>‹B, Err› |
-<code>c</code> | <a href="_result_.md#result">Result</a>‹C, Err› |
-<code>d</code> | <a href="_result_.md#result">Result</a>‹D, Err› |
-<code>e</code> | <a href="_result_.md#result">Result</a>‹E, Err› |
-<code>g</code> | <a href="_result_.md#result">Result</a>‹F, Err› |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>f</code></td>
+<td><a href="_types_functions_.md#fun6">Fun6</a>‹A, B, C, D, E, F, <a href="_result_.md#result">Result</a>‹G, Err››</td>
+</tr>
+<tr>
+<td><code>a</code></td>
+<td><a href="_result_.md#result">Result</a>‹A, Err›</td>
+</tr>
+<tr>
+<td><code>b</code></td>
+<td><a href="_result_.md#result">Result</a>‹B, Err›</td>
+</tr>
+<tr>
+<td><code>c</code></td>
+<td><a href="_result_.md#result">Result</a>‹C, Err›</td>
+</tr>
+<tr>
+<td><code>d</code></td>
+<td><a href="_result_.md#result">Result</a>‹D, Err›</td>
+</tr>
+<tr>
+<td><code>e</code></td>
+<td><a href="_result_.md#result">Result</a>‹E, Err›</td>
+</tr>
+<tr>
+<td><code>g</code></td>
+<td><a href="_result_.md#result">Result</a>‹F, Err›</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em><a href="_result_.md#result">Result</a>‹G, Err›</em></p>
-<hr />
+<hr>
 <h3 id="flatmapnwithcombine">flatMapNWithCombine</h3>
-<p>▸ <strong>flatMapNWithCombine</strong><<strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>Err</strong>>(<code>f</code>: <a href="_types_functions_.md#fun2">Fun2</a>‹A, B, <a href="_result_.md#result">Result</a>‹C, Err››, <code>combineErrors</code>: function, <code>a</code>: <a href="_result_.md#result">Result</a>‹A, Err›, <code>b</code>: <a href="_result_.md#result">Result</a>‹B, Err›): <em><a href="_result_.md#result">Result</a>‹C, Err›</em></p>
+<p>▸ <strong>flatMapNWithCombine</strong>&lt;<strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>Err</strong>&gt;(<code>f</code>: <a href="_types_functions_.md#fun2">Fun2</a>‹A, B, <a href="_result_.md#result">Result</a>‹C, Err››, <code>combineErrors</code>: function, <code>a</code>: <a href="_result_.md#result">Result</a>‹A, Err›, <code>b</code>: <a href="_result_.md#result">Result</a>‹B, Err›): <em><a href="_result_.md#result">Result</a>‹C, Err›</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L214">result.ts:214</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>A</strong></p>
@@ -596,14 +1048,28 @@
 <p>▪ <strong>combineErrors</strong>: <em>function</em></p>
 <p>▸ (<code>e1</code>: Err, <code>e2</code>: Err): <em>Err</em></p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>e1</code> | Err |
-<code>e2</code> | Err |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>e1</code></td>
+<td>Err</td>
+</tr>
+<tr>
+<td><code>e2</code></td>
+<td>Err</td>
+</tr>
+</tbody>
+</table>
 <p>▪ <strong>a</strong>: <em><a href="_result_.md#result">Result</a>‹A, Err›</em></p>
 <p>▪ <strong>b</strong>: <em><a href="_result_.md#result">Result</a>‹B, Err›</em></p>
 <p><strong>Returns:</strong> <em><a href="_result_.md#result">Result</a>‹C, Err›</em></p>
-<p>▸ <strong>flatMapNWithCombine</strong><<strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>D</strong>, <strong>Err</strong>>(<code>f</code>: <a href="_types_functions_.md#fun3">Fun3</a>‹A, B, C, <a href="_result_.md#result">Result</a>‹D, Err››, <code>combineErrors</code>: function, <code>a</code>: <a href="_result_.md#result">Result</a>‹A, Err›, <code>b</code>: <a href="_result_.md#result">Result</a>‹B, Err›, <code>c</code>: <a href="_result_.md#result">Result</a>‹C, Err›): <em><a href="_result_.md#result">Result</a>‹D, Err›</em></p>
+<p>▸ <strong>flatMapNWithCombine</strong>&lt;<strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>D</strong>, <strong>Err</strong>&gt;(<code>f</code>: <a href="_types_functions_.md#fun3">Fun3</a>‹A, B, C, <a href="_result_.md#result">Result</a>‹D, Err››, <code>combineErrors</code>: function, <code>a</code>: <a href="_result_.md#result">Result</a>‹A, Err›, <code>b</code>: <a href="_result_.md#result">Result</a>‹B, Err›, <code>c</code>: <a href="_result_.md#result">Result</a>‹C, Err›): <em><a href="_result_.md#result">Result</a>‹D, Err›</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L218">result.ts:218</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>A</strong></p>
@@ -616,15 +1082,29 @@
 <p>▪ <strong>combineErrors</strong>: <em>function</em></p>
 <p>▸ (<code>e1</code>: Err, <code>e2</code>: Err): <em>Err</em></p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>e1</code> | Err |
-<code>e2</code> | Err |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>e1</code></td>
+<td>Err</td>
+</tr>
+<tr>
+<td><code>e2</code></td>
+<td>Err</td>
+</tr>
+</tbody>
+</table>
 <p>▪ <strong>a</strong>: <em><a href="_result_.md#result">Result</a>‹A, Err›</em></p>
 <p>▪ <strong>b</strong>: <em><a href="_result_.md#result">Result</a>‹B, Err›</em></p>
 <p>▪ <strong>c</strong>: <em><a href="_result_.md#result">Result</a>‹C, Err›</em></p>
 <p><strong>Returns:</strong> <em><a href="_result_.md#result">Result</a>‹D, Err›</em></p>
-<p>▸ <strong>flatMapNWithCombine</strong><<strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>D</strong>, <strong>E</strong>, <strong>Err</strong>>(<code>f</code>: <a href="_types_functions_.md#fun4">Fun4</a>‹A, B, C, D, <a href="_result_.md#result">Result</a>‹E, Err››, <code>combineErrors</code>: function, <code>a</code>: <a href="_result_.md#result">Result</a>‹A, Err›, <code>b</code>: <a href="_result_.md#result">Result</a>‹B, Err›, <code>c</code>: <a href="_result_.md#result">Result</a>‹C, Err›, <code>d</code>: <a href="_result_.md#result">Result</a>‹D, Err›): <em><a href="_result_.md#result">Result</a>‹E, Err›</em></p>
+<p>▸ <strong>flatMapNWithCombine</strong>&lt;<strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>D</strong>, <strong>E</strong>, <strong>Err</strong>&gt;(<code>f</code>: <a href="_types_functions_.md#fun4">Fun4</a>‹A, B, C, D, <a href="_result_.md#result">Result</a>‹E, Err››, <code>combineErrors</code>: function, <code>a</code>: <a href="_result_.md#result">Result</a>‹A, Err›, <code>b</code>: <a href="_result_.md#result">Result</a>‹B, Err›, <code>c</code>: <a href="_result_.md#result">Result</a>‹C, Err›, <code>d</code>: <a href="_result_.md#result">Result</a>‹D, Err›): <em><a href="_result_.md#result">Result</a>‹E, Err›</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L222">result.ts:222</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>A</strong></p>
@@ -638,16 +1118,30 @@
 <p>▪ <strong>combineErrors</strong>: <em>function</em></p>
 <p>▸ (<code>e1</code>: Err, <code>e2</code>: Err): <em>Err</em></p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>e1</code> | Err |
-<code>e2</code> | Err |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>e1</code></td>
+<td>Err</td>
+</tr>
+<tr>
+<td><code>e2</code></td>
+<td>Err</td>
+</tr>
+</tbody>
+</table>
 <p>▪ <strong>a</strong>: <em><a href="_result_.md#result">Result</a>‹A, Err›</em></p>
 <p>▪ <strong>b</strong>: <em><a href="_result_.md#result">Result</a>‹B, Err›</em></p>
 <p>▪ <strong>c</strong>: <em><a href="_result_.md#result">Result</a>‹C, Err›</em></p>
 <p>▪ <strong>d</strong>: <em><a href="_result_.md#result">Result</a>‹D, Err›</em></p>
 <p><strong>Returns:</strong> <em><a href="_result_.md#result">Result</a>‹E, Err›</em></p>
-<p>▸ <strong>flatMapNWithCombine</strong><<strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>D</strong>, <strong>E</strong>, <strong>F</strong>, <strong>Err</strong>>(<code>f</code>: <a href="_types_functions_.md#fun5">Fun5</a>‹A, B, C, D, E, <a href="_result_.md#result">Result</a>‹F, Err››, <code>combineErrors</code>: function, <code>a</code>: <a href="_result_.md#result">Result</a>‹A, Err›, <code>b</code>: <a href="_result_.md#result">Result</a>‹B, Err›, <code>c</code>: <a href="_result_.md#result">Result</a>‹C, Err›, <code>d</code>: <a href="_result_.md#result">Result</a>‹D, Err›, <code>e</code>: <a href="_result_.md#result">Result</a>‹E, Err›): <em><a href="_result_.md#result">Result</a>‹F, Err›</em></p>
+<p>▸ <strong>flatMapNWithCombine</strong>&lt;<strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>D</strong>, <strong>E</strong>, <strong>F</strong>, <strong>Err</strong>&gt;(<code>f</code>: <a href="_types_functions_.md#fun5">Fun5</a>‹A, B, C, D, E, <a href="_result_.md#result">Result</a>‹F, Err››, <code>combineErrors</code>: function, <code>a</code>: <a href="_result_.md#result">Result</a>‹A, Err›, <code>b</code>: <a href="_result_.md#result">Result</a>‹B, Err›, <code>c</code>: <a href="_result_.md#result">Result</a>‹C, Err›, <code>d</code>: <a href="_result_.md#result">Result</a>‹D, Err›, <code>e</code>: <a href="_result_.md#result">Result</a>‹E, Err›): <em><a href="_result_.md#result">Result</a>‹F, Err›</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L226">result.ts:226</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>A</strong></p>
@@ -662,17 +1156,31 @@
 <p>▪ <strong>combineErrors</strong>: <em>function</em></p>
 <p>▸ (<code>e1</code>: Err, <code>e2</code>: Err): <em>Err</em></p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>e1</code> | Err |
-<code>e2</code> | Err |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>e1</code></td>
+<td>Err</td>
+</tr>
+<tr>
+<td><code>e2</code></td>
+<td>Err</td>
+</tr>
+</tbody>
+</table>
 <p>▪ <strong>a</strong>: <em><a href="_result_.md#result">Result</a>‹A, Err›</em></p>
 <p>▪ <strong>b</strong>: <em><a href="_result_.md#result">Result</a>‹B, Err›</em></p>
 <p>▪ <strong>c</strong>: <em><a href="_result_.md#result">Result</a>‹C, Err›</em></p>
 <p>▪ <strong>d</strong>: <em><a href="_result_.md#result">Result</a>‹D, Err›</em></p>
 <p>▪ <strong>e</strong>: <em><a href="_result_.md#result">Result</a>‹E, Err›</em></p>
 <p><strong>Returns:</strong> <em><a href="_result_.md#result">Result</a>‹F, Err›</em></p>
-<p>▸ <strong>flatMapNWithCombine</strong><<strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>D</strong>, <strong>E</strong>, <strong>F</strong>, <strong>G</strong>, <strong>Err</strong>>(<code>f</code>: <a href="_types_functions_.md#fun6">Fun6</a>‹A, B, C, D, E, F, <a href="_result_.md#result">Result</a>‹G, Err››, <code>combineErrors</code>: function, <code>a</code>: <a href="_result_.md#result">Result</a>‹A, Err›, <code>b</code>: <a href="_result_.md#result">Result</a>‹B, Err›, <code>c</code>: <a href="_result_.md#result">Result</a>‹C, Err›, <code>d</code>: <a href="_result_.md#result">Result</a>‹D, Err›, <code>e</code>: <a href="_result_.md#result">Result</a>‹E, Err›, <code>g</code>: <a href="_result_.md#result">Result</a>‹F, Err›): <em><a href="_result_.md#result">Result</a>‹G, Err›</em></p>
+<p>▸ <strong>flatMapNWithCombine</strong>&lt;<strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>D</strong>, <strong>E</strong>, <strong>F</strong>, <strong>G</strong>, <strong>Err</strong>&gt;(<code>f</code>: <a href="_types_functions_.md#fun6">Fun6</a>‹A, B, C, D, E, F, <a href="_result_.md#result">Result</a>‹G, Err››, <code>combineErrors</code>: function, <code>a</code>: <a href="_result_.md#result">Result</a>‹A, Err›, <code>b</code>: <a href="_result_.md#result">Result</a>‹B, Err›, <code>c</code>: <a href="_result_.md#result">Result</a>‹C, Err›, <code>d</code>: <a href="_result_.md#result">Result</a>‹D, Err›, <code>e</code>: <a href="_result_.md#result">Result</a>‹E, Err›, <code>g</code>: <a href="_result_.md#result">Result</a>‹F, Err›): <em><a href="_result_.md#result">Result</a>‹G, Err›</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L230">result.ts:230</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>A</strong></p>
@@ -688,10 +1196,24 @@
 <p>▪ <strong>combineErrors</strong>: <em>function</em></p>
 <p>▸ (<code>e1</code>: Err, <code>e2</code>: Err): <em>Err</em></p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>e1</code> | Err |
-<code>e2</code> | Err |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>e1</code></td>
+<td>Err</td>
+</tr>
+<tr>
+<td><code>e2</code></td>
+<td>Err</td>
+</tr>
+</tbody>
+</table>
 <p>▪ <strong>a</strong>: <em><a href="_result_.md#result">Result</a>‹A, Err›</em></p>
 <p>▪ <strong>b</strong>: <em><a href="_result_.md#result">Result</a>‹B, Err›</em></p>
 <p>▪ <strong>c</strong>: <em><a href="_result_.md#result">Result</a>‹C, Err›</em></p>
@@ -699,21 +1221,32 @@
 <p>▪ <strong>e</strong>: <em><a href="_result_.md#result">Result</a>‹E, Err›</em></p>
 <p>▪ <strong>g</strong>: <em><a href="_result_.md#result">Result</a>‹F, Err›</em></p>
 <p><strong>Returns:</strong> <em><a href="_result_.md#result">Result</a>‹G, Err›</em></p>
-<hr />
+<hr>
 <h3 id="constflatten"><code>Const</code> flatten</h3>
-<p>▸ <strong>flatten</strong><<strong>T</strong>, <strong>E</strong>>(<code>result</code>: <a href="_result_.md#result">Result</a>‹<a href="_result_.md#result">Result</a>‹T, E›, E›): <em><a href="_result_.md#result">Result</a>‹T, E›</em></p>
+<p>▸ <strong>flatten</strong>&lt;<strong>T</strong>, <strong>E</strong>&gt;(<code>result</code>: <a href="_result_.md#result">Result</a>‹<a href="_result_.md#result">Result</a>‹T, E›, E›): <em><a href="_result_.md#result">Result</a>‹T, E›</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L341">result.ts:341</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>T</strong></p>
 <p>▪ <strong>E</strong></p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>result</code> | <a href="_result_.md#result">Result</a>‹<a href="_result_.md#result">Result</a>‹T, E›, E› |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>result</code></td>
+<td><a href="_result_.md#result">Result</a>‹<a href="_result_.md#result">Result</a>‹T, E›, E›</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em><a href="_result_.md#result">Result</a>‹T, E›</em></p>
-<hr />
+<hr>
 <h3 id="constfoldleft"><code>Const</code> foldLeft</h3>
-<p>▸ <strong>foldLeft</strong><<strong>T</strong>, <strong>B</strong>, <strong>Err</strong>>(<code>f</code>: function, <code>result</code>: <a href="_result_.md#result">Result</a>‹T, Err›, <code>b</code>: B): <em>B</em></p>
+<p>▸ <strong>foldLeft</strong>&lt;<strong>T</strong>, <strong>B</strong>, <strong>Err</strong>&gt;(<code>f</code>: function, <code>result</code>: <a href="_result_.md#result">Result</a>‹T, Err›, <code>b</code>: B): <em>B</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L362">result.ts:362</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>T</strong></p>
@@ -723,29 +1256,57 @@
 <p>▪ <strong>f</strong>: <em>function</em></p>
 <p>▸ (<code>acc</code>: B, <code>curr</code>: T): <em>B</em></p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>acc</code> | B |
-<code>curr</code> | T |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>acc</code></td>
+<td>B</td>
+</tr>
+<tr>
+<td><code>curr</code></td>
+<td>T</td>
+</tr>
+</tbody>
+</table>
 <p>▪ <strong>result</strong>: <em><a href="_result_.md#result">Result</a>‹T, Err›</em></p>
 <p>▪ <strong>b</strong>: <em>B</em></p>
 <p><strong>Returns:</strong> <em>B</em></p>
-<hr />
+<hr>
 <h3 id="constgetorelse"><code>Const</code> getOrElse</h3>
-<p>▸ <strong>getOrElse</strong><<strong>T</strong>, <strong>E</strong>>(<code>result</code>: <a href="_result_.md#result">Result</a>‹T, E›, <code>alt</code>: T): <em>T</em></p>
+<p>▸ <strong>getOrElse</strong>&lt;<strong>T</strong>, <strong>E</strong>&gt;(<code>result</code>: <a href="_result_.md#result">Result</a>‹T, E›, <code>alt</code>: T): <em>T</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L299">result.ts:299</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>T</strong></p>
 <p>▪ <strong>E</strong></p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>result</code> | <a href="_result_.md#result">Result</a>‹T, E› |
-<code>alt</code> | T |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>result</code></td>
+<td><a href="_result_.md#result">Result</a>‹T, E›</td>
+</tr>
+<tr>
+<td><code>alt</code></td>
+<td>T</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em>T</em></p>
-<hr />
+<hr>
 <h3 id="constgetorelselazy"><code>Const</code> getOrElseLazy</h3>
-<p>▸ <strong>getOrElseLazy</strong><<strong>T</strong>, <strong>E</strong>>(<code>result</code>: <a href="_result_.md#result">Result</a>‹T, E›, <code>alt</code>: function): <em>T</em></p>
+<p>▸ <strong>getOrElseLazy</strong>&lt;<strong>T</strong>, <strong>E</strong>&gt;(<code>result</code>: <a href="_result_.md#result">Result</a>‹T, E›, <code>alt</code>: function): <em>T</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L306">result.ts:306</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>T</strong></p>
@@ -755,45 +1316,78 @@
 <p>▪ <strong>alt</strong>: <em>function</em></p>
 <p>▸ (): <em>T</em></p>
 <p><strong>Returns:</strong> <em>T</em></p>
-<hr />
+<hr>
 <h3 id="constgetorthrow"><code>Const</code> getOrThrow</h3>
-<p>▸ <strong>getOrThrow</strong><<strong>T</strong>, <strong>E</strong>>(<code>result</code>: <a href="_result_.md#result">Result</a>‹T, E›): <em><a href="_maybe_.md#maybe">Maybe</a>‹T›</em></p>
+<p>▸ <strong>getOrThrow</strong>&lt;<strong>T</strong>, <strong>E</strong>&gt;(<code>result</code>: <a href="_result_.md#result">Result</a>‹T, E›): <em><a href="_maybe_.md#maybe">Maybe</a>‹T›</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L292">result.ts:292</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>T</strong></p>
 <p>▪ <strong>E</strong></p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>result</code> | <a href="_result_.md#result">Result</a>‹T, E› |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>result</code></td>
+<td><a href="_result_.md#result">Result</a>‹T, E›</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em><a href="_maybe_.md#maybe">Maybe</a>‹T›</em></p>
-<hr />
+<hr>
 <h3 id="constisfailure"><code>Const</code> isFailure</h3>
-<p>▸ <strong>isFailure</strong><<strong>T</strong>, <strong>E</strong>>(<code>result</code>: <a href="_result_.md#result">Result</a>‹T, E›): <em>result is Failure<E></em></p>
+<p>▸ <strong>isFailure</strong>&lt;<strong>T</strong>, <strong>E</strong>&gt;(<code>result</code>: <a href="_result_.md#result">Result</a>‹T, E›): <em>result is Failure<e></e></em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L265">result.ts:265</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>T</strong></p>
 <p>▪ <strong>E</strong></p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>result</code> | <a href="_result_.md#result">Result</a>‹T, E› |</p>
-<p><strong>Returns:</strong> <em>result is Failure<E></em></p>
-<hr />
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>result</code></td>
+<td><a href="_result_.md#result">Result</a>‹T, E›</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong> <em>result is Failure<e></e></em></p>
+<hr>
 <h3 id="constissuccess"><code>Const</code> isSuccess</h3>
-<p>▸ <strong>isSuccess</strong><<strong>T</strong>, <strong>E</strong>>(<code>result</code>: <a href="_result_.md#result">Result</a>‹T, E›): <em>result is Success<T></em></p>
+<p>▸ <strong>isSuccess</strong>&lt;<strong>T</strong>, <strong>E</strong>&gt;(<code>result</code>: <a href="_result_.md#result">Result</a>‹T, E›): <em>result is Success<t></t></em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L266">result.ts:266</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>T</strong></p>
 <p>▪ <strong>E</strong></p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>result</code> | <a href="_result_.md#result">Result</a>‹T, E› |</p>
-<p><strong>Returns:</strong> <em>result is Success<T></em></p>
-<hr />
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>result</code></td>
+<td><a href="_result_.md#result">Result</a>‹T, E›</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong> <em>result is Success<t></t></em></p>
+<hr>
 <h3 id="constmap"><code>Const</code> map</h3>
-<p>▸ <strong>map</strong><<strong>A</strong>, <strong>B</strong>, <strong>Err</strong>>(<code>f</code>: function, <code>result</code>: <a href="_result_.md#result">Result</a>‹A, Err›): <em><a href="_result_.md#result">Result</a>‹B, Err›</em></p>
+<p>▸ <strong>map</strong>&lt;<strong>A</strong>, <strong>B</strong>, <strong>Err</strong>&gt;(<code>f</code>: function, <code>result</code>: <a href="_result_.md#result">Result</a>‹A, Err›): <em><a href="_result_.md#result">Result</a>‹B, Err›</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L103">result.ts:103</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>A</strong></p>
@@ -803,14 +1397,25 @@
 <p>▪ <strong>f</strong>: <em>function</em></p>
 <p>▸ (<code>a</code>: A): <em>B</em></p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>a</code> | A |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>a</code></td>
+<td>A</td>
+</tr>
+</tbody>
+</table>
 <p>▪ <strong>result</strong>: <em><a href="_result_.md#result">Result</a>‹A, Err›</em></p>
 <p><strong>Returns:</strong> <em><a href="_result_.md#result">Result</a>‹B, Err›</em></p>
-<hr />
+<hr>
 <h3 id="constmaperror"><code>Const</code> mapError</h3>
-<p>▸ <strong>mapError</strong><<strong>A</strong>, <strong>E1</strong>, <strong>E2</strong>>(<code>f</code>: function, <code>result</code>: <a href="_result_.md#result">Result</a>‹A, E1›): <em><a href="_result_.md#result">Result</a>‹A, E2›</em></p>
+<p>▸ <strong>mapError</strong>&lt;<strong>A</strong>, <strong>E1</strong>, <strong>E2</strong>&gt;(<code>f</code>: function, <code>result</code>: <a href="_result_.md#result">Result</a>‹A, E1›): <em><a href="_result_.md#result">Result</a>‹A, E2›</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L110">result.ts:110</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>A</strong></p>
@@ -820,14 +1425,25 @@
 <p>▪ <strong>f</strong>: <em>function</em></p>
 <p>▸ (<code>e</code>: E1): <em>E2</em></p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>e</code> | E1 |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>e</code></td>
+<td>E1</td>
+</tr>
+</tbody>
+</table>
 <p>▪ <strong>result</strong>: <em><a href="_result_.md#result">Result</a>‹A, E1›</em></p>
 <p><strong>Returns:</strong> <em><a href="_result_.md#result">Result</a>‹A, E2›</em></p>
-<hr />
+<hr>
 <h3 id="mapn">mapN</h3>
-<p>▸ <strong>mapN</strong><<strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>Err</strong>>(<code>f</code>: <a href="_types_functions_.md#fun2">Fun2</a>‹A, B, C›, <code>a</code>: <a href="_result_.md#result">Result</a>‹A, Err›, <code>b</code>: <a href="_result_.md#result">Result</a>‹B, Err›): <em><a href="_result_.md#result">Result</a>‹C, Err›</em></p>
+<p>▸ <strong>mapN</strong>&lt;<strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>Err</strong>&gt;(<code>f</code>: <a href="_types_functions_.md#fun2">Fun2</a>‹A, B, C›, <code>a</code>: <a href="_result_.md#result">Result</a>‹A, Err›, <code>b</code>: <a href="_result_.md#result">Result</a>‹B, Err›): <em><a href="_result_.md#result">Result</a>‹C, Err›</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L117">result.ts:117</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>A</strong></p>
@@ -835,13 +1451,30 @@
 <p>▪ <strong>C</strong></p>
 <p>▪ <strong>Err</strong></p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>f</code> | <a href="_types_functions_.md#fun2">Fun2</a>‹A, B, C› |
-<code>a</code> | <a href="_result_.md#result">Result</a>‹A, Err› |
-<code>b</code> | <a href="_result_.md#result">Result</a>‹B, Err› |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>f</code></td>
+<td><a href="_types_functions_.md#fun2">Fun2</a>‹A, B, C›</td>
+</tr>
+<tr>
+<td><code>a</code></td>
+<td><a href="_result_.md#result">Result</a>‹A, Err›</td>
+</tr>
+<tr>
+<td><code>b</code></td>
+<td><a href="_result_.md#result">Result</a>‹B, Err›</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em><a href="_result_.md#result">Result</a>‹C, Err›</em></p>
-<p>▸ <strong>mapN</strong><<strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>D</strong>, <strong>Err</strong>>(<code>f</code>: <a href="_types_functions_.md#fun3">Fun3</a>‹A, B, C, D›, <code>a</code>: <a href="_result_.md#result">Result</a>‹A, Err›, <code>b</code>: <a href="_result_.md#result">Result</a>‹B, Err›, <code>c</code>: <a href="_result_.md#result">Result</a>‹C, Err›): <em><a href="_result_.md#result">Result</a>‹D, Err›</em></p>
+<p>▸ <strong>mapN</strong>&lt;<strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>D</strong>, <strong>Err</strong>&gt;(<code>f</code>: <a href="_types_functions_.md#fun3">Fun3</a>‹A, B, C, D›, <code>a</code>: <a href="_result_.md#result">Result</a>‹A, Err›, <code>b</code>: <a href="_result_.md#result">Result</a>‹B, Err›, <code>c</code>: <a href="_result_.md#result">Result</a>‹C, Err›): <em><a href="_result_.md#result">Result</a>‹D, Err›</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L118">result.ts:118</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>A</strong></p>
@@ -850,14 +1483,34 @@
 <p>▪ <strong>D</strong></p>
 <p>▪ <strong>Err</strong></p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>f</code> | <a href="_types_functions_.md#fun3">Fun3</a>‹A, B, C, D› |
-<code>a</code> | <a href="_result_.md#result">Result</a>‹A, Err› |
-<code>b</code> | <a href="_result_.md#result">Result</a>‹B, Err› |
-<code>c</code> | <a href="_result_.md#result">Result</a>‹C, Err› |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>f</code></td>
+<td><a href="_types_functions_.md#fun3">Fun3</a>‹A, B, C, D›</td>
+</tr>
+<tr>
+<td><code>a</code></td>
+<td><a href="_result_.md#result">Result</a>‹A, Err›</td>
+</tr>
+<tr>
+<td><code>b</code></td>
+<td><a href="_result_.md#result">Result</a>‹B, Err›</td>
+</tr>
+<tr>
+<td><code>c</code></td>
+<td><a href="_result_.md#result">Result</a>‹C, Err›</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em><a href="_result_.md#result">Result</a>‹D, Err›</em></p>
-<p>▸ <strong>mapN</strong><<strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>D</strong>, <strong>E</strong>, <strong>Err</strong>>(<code>f</code>: <a href="_types_functions_.md#fun4">Fun4</a>‹A, B, C, D, E›, <code>a</code>: <a href="_result_.md#result">Result</a>‹A, Err›, <code>b</code>: <a href="_result_.md#result">Result</a>‹B, Err›, <code>c</code>: <a href="_result_.md#result">Result</a>‹C, Err›, <code>d</code>: <a href="_result_.md#result">Result</a>‹D, Err›): <em><a href="_result_.md#result">Result</a>‹E, Err›</em></p>
+<p>▸ <strong>mapN</strong>&lt;<strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>D</strong>, <strong>E</strong>, <strong>Err</strong>&gt;(<code>f</code>: <a href="_types_functions_.md#fun4">Fun4</a>‹A, B, C, D, E›, <code>a</code>: <a href="_result_.md#result">Result</a>‹A, Err›, <code>b</code>: <a href="_result_.md#result">Result</a>‹B, Err›, <code>c</code>: <a href="_result_.md#result">Result</a>‹C, Err›, <code>d</code>: <a href="_result_.md#result">Result</a>‹D, Err›): <em><a href="_result_.md#result">Result</a>‹E, Err›</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L119">result.ts:119</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>A</strong></p>
@@ -867,15 +1520,38 @@
 <p>▪ <strong>E</strong></p>
 <p>▪ <strong>Err</strong></p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>f</code> | <a href="_types_functions_.md#fun4">Fun4</a>‹A, B, C, D, E› |
-<code>a</code> | <a href="_result_.md#result">Result</a>‹A, Err› |
-<code>b</code> | <a href="_result_.md#result">Result</a>‹B, Err› |
-<code>c</code> | <a href="_result_.md#result">Result</a>‹C, Err› |
-<code>d</code> | <a href="_result_.md#result">Result</a>‹D, Err› |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>f</code></td>
+<td><a href="_types_functions_.md#fun4">Fun4</a>‹A, B, C, D, E›</td>
+</tr>
+<tr>
+<td><code>a</code></td>
+<td><a href="_result_.md#result">Result</a>‹A, Err›</td>
+</tr>
+<tr>
+<td><code>b</code></td>
+<td><a href="_result_.md#result">Result</a>‹B, Err›</td>
+</tr>
+<tr>
+<td><code>c</code></td>
+<td><a href="_result_.md#result">Result</a>‹C, Err›</td>
+</tr>
+<tr>
+<td><code>d</code></td>
+<td><a href="_result_.md#result">Result</a>‹D, Err›</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em><a href="_result_.md#result">Result</a>‹E, Err›</em></p>
-<p>▸ <strong>mapN</strong><<strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>D</strong>, <strong>E</strong>, <strong>F</strong>, <strong>Err</strong>>(<code>f</code>: <a href="_types_functions_.md#fun5">Fun5</a>‹A, B, C, D, E, F›, <code>a</code>: <a href="_result_.md#result">Result</a>‹A, Err›, <code>b</code>: <a href="_result_.md#result">Result</a>‹B, Err›, <code>c</code>: <a href="_result_.md#result">Result</a>‹C, Err›, <code>d</code>: <a href="_result_.md#result">Result</a>‹D, Err›, <code>e</code>: <a href="_result_.md#result">Result</a>‹E, Err›): <em><a href="_result_.md#result">Result</a>‹F, Err›</em></p>
+<p>▸ <strong>mapN</strong>&lt;<strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>D</strong>, <strong>E</strong>, <strong>F</strong>, <strong>Err</strong>&gt;(<code>f</code>: <a href="_types_functions_.md#fun5">Fun5</a>‹A, B, C, D, E, F›, <code>a</code>: <a href="_result_.md#result">Result</a>‹A, Err›, <code>b</code>: <a href="_result_.md#result">Result</a>‹B, Err›, <code>c</code>: <a href="_result_.md#result">Result</a>‹C, Err›, <code>d</code>: <a href="_result_.md#result">Result</a>‹D, Err›, <code>e</code>: <a href="_result_.md#result">Result</a>‹E, Err›): <em><a href="_result_.md#result">Result</a>‹F, Err›</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L122">result.ts:122</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>A</strong></p>
@@ -886,16 +1562,42 @@
 <p>▪ <strong>F</strong></p>
 <p>▪ <strong>Err</strong></p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>f</code> | <a href="_types_functions_.md#fun5">Fun5</a>‹A, B, C, D, E, F› |
-<code>a</code> | <a href="_result_.md#result">Result</a>‹A, Err› |
-<code>b</code> | <a href="_result_.md#result">Result</a>‹B, Err› |
-<code>c</code> | <a href="_result_.md#result">Result</a>‹C, Err› |
-<code>d</code> | <a href="_result_.md#result">Result</a>‹D, Err› |
-<code>e</code> | <a href="_result_.md#result">Result</a>‹E, Err› |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>f</code></td>
+<td><a href="_types_functions_.md#fun5">Fun5</a>‹A, B, C, D, E, F›</td>
+</tr>
+<tr>
+<td><code>a</code></td>
+<td><a href="_result_.md#result">Result</a>‹A, Err›</td>
+</tr>
+<tr>
+<td><code>b</code></td>
+<td><a href="_result_.md#result">Result</a>‹B, Err›</td>
+</tr>
+<tr>
+<td><code>c</code></td>
+<td><a href="_result_.md#result">Result</a>‹C, Err›</td>
+</tr>
+<tr>
+<td><code>d</code></td>
+<td><a href="_result_.md#result">Result</a>‹D, Err›</td>
+</tr>
+<tr>
+<td><code>e</code></td>
+<td><a href="_result_.md#result">Result</a>‹E, Err›</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em><a href="_result_.md#result">Result</a>‹F, Err›</em></p>
-<p>▸ <strong>mapN</strong><<strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>D</strong>, <strong>E</strong>, <strong>F</strong>, <strong>G</strong>, <strong>Err</strong>>(<code>f</code>: <a href="_types_functions_.md#fun6">Fun6</a>‹A, B, C, D, E, F, G›, <code>a</code>: <a href="_result_.md#result">Result</a>‹A, Err›, <code>b</code>: <a href="_result_.md#result">Result</a>‹B, Err›, <code>c</code>: <a href="_result_.md#result">Result</a>‹C, Err›, <code>d</code>: <a href="_result_.md#result">Result</a>‹D, Err›, <code>e</code>: <a href="_result_.md#result">Result</a>‹E, Err›, <code>g</code>: <a href="_result_.md#result">Result</a>‹F, Err›): <em><a href="_result_.md#result">Result</a>‹G, Err›</em></p>
+<p>▸ <strong>mapN</strong>&lt;<strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>D</strong>, <strong>E</strong>, <strong>F</strong>, <strong>G</strong>, <strong>Err</strong>&gt;(<code>f</code>: <a href="_types_functions_.md#fun6">Fun6</a>‹A, B, C, D, E, F, G›, <code>a</code>: <a href="_result_.md#result">Result</a>‹A, Err›, <code>b</code>: <a href="_result_.md#result">Result</a>‹B, Err›, <code>c</code>: <a href="_result_.md#result">Result</a>‹C, Err›, <code>d</code>: <a href="_result_.md#result">Result</a>‹D, Err›, <code>e</code>: <a href="_result_.md#result">Result</a>‹E, Err›, <code>g</code>: <a href="_result_.md#result">Result</a>‹F, Err›): <em><a href="_result_.md#result">Result</a>‹G, Err›</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L125">result.ts:125</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>A</strong></p>
@@ -907,19 +1609,48 @@
 <p>▪ <strong>G</strong></p>
 <p>▪ <strong>Err</strong></p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>f</code> | <a href="_types_functions_.md#fun6">Fun6</a>‹A, B, C, D, E, F, G› |
-<code>a</code> | <a href="_result_.md#result">Result</a>‹A, Err› |
-<code>b</code> | <a href="_result_.md#result">Result</a>‹B, Err› |
-<code>c</code> | <a href="_result_.md#result">Result</a>‹C, Err› |
-<code>d</code> | <a href="_result_.md#result">Result</a>‹D, Err› |
-<code>e</code> | <a href="_result_.md#result">Result</a>‹E, Err› |
-<code>g</code> | <a href="_result_.md#result">Result</a>‹F, Err› |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>f</code></td>
+<td><a href="_types_functions_.md#fun6">Fun6</a>‹A, B, C, D, E, F, G›</td>
+</tr>
+<tr>
+<td><code>a</code></td>
+<td><a href="_result_.md#result">Result</a>‹A, Err›</td>
+</tr>
+<tr>
+<td><code>b</code></td>
+<td><a href="_result_.md#result">Result</a>‹B, Err›</td>
+</tr>
+<tr>
+<td><code>c</code></td>
+<td><a href="_result_.md#result">Result</a>‹C, Err›</td>
+</tr>
+<tr>
+<td><code>d</code></td>
+<td><a href="_result_.md#result">Result</a>‹D, Err›</td>
+</tr>
+<tr>
+<td><code>e</code></td>
+<td><a href="_result_.md#result">Result</a>‹E, Err›</td>
+</tr>
+<tr>
+<td><code>g</code></td>
+<td><a href="_result_.md#result">Result</a>‹F, Err›</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em><a href="_result_.md#result">Result</a>‹G, Err›</em></p>
-<hr />
+<hr>
 <h3 id="mapnwithcombine">mapNWithCombine</h3>
-<p>▸ <strong>mapNWithCombine</strong><<strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>Err</strong>>(<code>f</code>: <a href="_types_functions_.md#fun2">Fun2</a>‹A, B, C›, <code>combineErrors</code>: function, <code>a</code>: <a href="_result_.md#result">Result</a>‹A, Err›, <code>b</code>: <a href="_result_.md#result">Result</a>‹B, Err›): <em><a href="_result_.md#result">Result</a>‹C, Err›</em></p>
+<p>▸ <strong>mapNWithCombine</strong>&lt;<strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>Err</strong>&gt;(<code>f</code>: <a href="_types_functions_.md#fun2">Fun2</a>‹A, B, C›, <code>combineErrors</code>: function, <code>a</code>: <a href="_result_.md#result">Result</a>‹A, Err›, <code>b</code>: <a href="_result_.md#result">Result</a>‹B, Err›): <em><a href="_result_.md#result">Result</a>‹C, Err›</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L137">result.ts:137</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>A</strong></p>
@@ -931,14 +1662,28 @@
 <p>▪ <strong>combineErrors</strong>: <em>function</em></p>
 <p>▸ (<code>e1</code>: Err, <code>e2</code>: Err): <em>Err</em></p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>e1</code> | Err |
-<code>e2</code> | Err |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>e1</code></td>
+<td>Err</td>
+</tr>
+<tr>
+<td><code>e2</code></td>
+<td>Err</td>
+</tr>
+</tbody>
+</table>
 <p>▪ <strong>a</strong>: <em><a href="_result_.md#result">Result</a>‹A, Err›</em></p>
 <p>▪ <strong>b</strong>: <em><a href="_result_.md#result">Result</a>‹B, Err›</em></p>
 <p><strong>Returns:</strong> <em><a href="_result_.md#result">Result</a>‹C, Err›</em></p>
-<p>▸ <strong>mapNWithCombine</strong><<strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>D</strong>, <strong>Err</strong>>(<code>f</code>: <a href="_types_functions_.md#fun3">Fun3</a>‹A, B, C, D›, <code>combineErrors</code>: function, <code>a</code>: <a href="_result_.md#result">Result</a>‹A, Err›, <code>b</code>: <a href="_result_.md#result">Result</a>‹B, Err›, <code>c</code>: <a href="_result_.md#result">Result</a>‹C, Err›): <em><a href="_result_.md#result">Result</a>‹D, Err›</em></p>
+<p>▸ <strong>mapNWithCombine</strong>&lt;<strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>D</strong>, <strong>Err</strong>&gt;(<code>f</code>: <a href="_types_functions_.md#fun3">Fun3</a>‹A, B, C, D›, <code>combineErrors</code>: function, <code>a</code>: <a href="_result_.md#result">Result</a>‹A, Err›, <code>b</code>: <a href="_result_.md#result">Result</a>‹B, Err›, <code>c</code>: <a href="_result_.md#result">Result</a>‹C, Err›): <em><a href="_result_.md#result">Result</a>‹D, Err›</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L141">result.ts:141</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>A</strong></p>
@@ -951,15 +1696,29 @@
 <p>▪ <strong>combineErrors</strong>: <em>function</em></p>
 <p>▸ (<code>e1</code>: Err, <code>e2</code>: Err): <em>Err</em></p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>e1</code> | Err |
-<code>e2</code> | Err |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>e1</code></td>
+<td>Err</td>
+</tr>
+<tr>
+<td><code>e2</code></td>
+<td>Err</td>
+</tr>
+</tbody>
+</table>
 <p>▪ <strong>a</strong>: <em><a href="_result_.md#result">Result</a>‹A, Err›</em></p>
 <p>▪ <strong>b</strong>: <em><a href="_result_.md#result">Result</a>‹B, Err›</em></p>
 <p>▪ <strong>c</strong>: <em><a href="_result_.md#result">Result</a>‹C, Err›</em></p>
 <p><strong>Returns:</strong> <em><a href="_result_.md#result">Result</a>‹D, Err›</em></p>
-<p>▸ <strong>mapNWithCombine</strong><<strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>D</strong>, <strong>E</strong>, <strong>Err</strong>>(<code>f</code>: <a href="_types_functions_.md#fun4">Fun4</a>‹A, B, C, D, E›, <code>combineErrors</code>: function, <code>a</code>: <a href="_result_.md#result">Result</a>‹A, Err›, <code>b</code>: <a href="_result_.md#result">Result</a>‹B, Err›, <code>c</code>: <a href="_result_.md#result">Result</a>‹C, Err›, <code>d</code>: <a href="_result_.md#result">Result</a>‹D, Err›): <em><a href="_result_.md#result">Result</a>‹E, Err›</em></p>
+<p>▸ <strong>mapNWithCombine</strong>&lt;<strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>D</strong>, <strong>E</strong>, <strong>Err</strong>&gt;(<code>f</code>: <a href="_types_functions_.md#fun4">Fun4</a>‹A, B, C, D, E›, <code>combineErrors</code>: function, <code>a</code>: <a href="_result_.md#result">Result</a>‹A, Err›, <code>b</code>: <a href="_result_.md#result">Result</a>‹B, Err›, <code>c</code>: <a href="_result_.md#result">Result</a>‹C, Err›, <code>d</code>: <a href="_result_.md#result">Result</a>‹D, Err›): <em><a href="_result_.md#result">Result</a>‹E, Err›</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L145">result.ts:145</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>A</strong></p>
@@ -973,16 +1732,30 @@
 <p>▪ <strong>combineErrors</strong>: <em>function</em></p>
 <p>▸ (<code>e1</code>: Err, <code>e2</code>: Err): <em>Err</em></p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>e1</code> | Err |
-<code>e2</code> | Err |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>e1</code></td>
+<td>Err</td>
+</tr>
+<tr>
+<td><code>e2</code></td>
+<td>Err</td>
+</tr>
+</tbody>
+</table>
 <p>▪ <strong>a</strong>: <em><a href="_result_.md#result">Result</a>‹A, Err›</em></p>
 <p>▪ <strong>b</strong>: <em><a href="_result_.md#result">Result</a>‹B, Err›</em></p>
 <p>▪ <strong>c</strong>: <em><a href="_result_.md#result">Result</a>‹C, Err›</em></p>
 <p>▪ <strong>d</strong>: <em><a href="_result_.md#result">Result</a>‹D, Err›</em></p>
 <p><strong>Returns:</strong> <em><a href="_result_.md#result">Result</a>‹E, Err›</em></p>
-<p>▸ <strong>mapNWithCombine</strong><<strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>D</strong>, <strong>E</strong>, <strong>F</strong>, <strong>Err</strong>>(<code>f</code>: <a href="_types_functions_.md#fun5">Fun5</a>‹A, B, C, D, E, F›, <code>combineErrors</code>: function, <code>a</code>: <a href="_result_.md#result">Result</a>‹A, Err›, <code>b</code>: <a href="_result_.md#result">Result</a>‹B, Err›, <code>c</code>: <a href="_result_.md#result">Result</a>‹C, Err›, <code>d</code>: <a href="_result_.md#result">Result</a>‹D, Err›, <code>e</code>: <a href="_result_.md#result">Result</a>‹E, Err›): <em><a href="_result_.md#result">Result</a>‹F, Err›</em></p>
+<p>▸ <strong>mapNWithCombine</strong>&lt;<strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>D</strong>, <strong>E</strong>, <strong>F</strong>, <strong>Err</strong>&gt;(<code>f</code>: <a href="_types_functions_.md#fun5">Fun5</a>‹A, B, C, D, E, F›, <code>combineErrors</code>: function, <code>a</code>: <a href="_result_.md#result">Result</a>‹A, Err›, <code>b</code>: <a href="_result_.md#result">Result</a>‹B, Err›, <code>c</code>: <a href="_result_.md#result">Result</a>‹C, Err›, <code>d</code>: <a href="_result_.md#result">Result</a>‹D, Err›, <code>e</code>: <a href="_result_.md#result">Result</a>‹E, Err›): <em><a href="_result_.md#result">Result</a>‹F, Err›</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L149">result.ts:149</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>A</strong></p>
@@ -997,17 +1770,31 @@
 <p>▪ <strong>combineErrors</strong>: <em>function</em></p>
 <p>▸ (<code>e1</code>: Err, <code>e2</code>: Err): <em>Err</em></p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>e1</code> | Err |
-<code>e2</code> | Err |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>e1</code></td>
+<td>Err</td>
+</tr>
+<tr>
+<td><code>e2</code></td>
+<td>Err</td>
+</tr>
+</tbody>
+</table>
 <p>▪ <strong>a</strong>: <em><a href="_result_.md#result">Result</a>‹A, Err›</em></p>
 <p>▪ <strong>b</strong>: <em><a href="_result_.md#result">Result</a>‹B, Err›</em></p>
 <p>▪ <strong>c</strong>: <em><a href="_result_.md#result">Result</a>‹C, Err›</em></p>
 <p>▪ <strong>d</strong>: <em><a href="_result_.md#result">Result</a>‹D, Err›</em></p>
 <p>▪ <strong>e</strong>: <em><a href="_result_.md#result">Result</a>‹E, Err›</em></p>
 <p><strong>Returns:</strong> <em><a href="_result_.md#result">Result</a>‹F, Err›</em></p>
-<p>▸ <strong>mapNWithCombine</strong><<strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>D</strong>, <strong>E</strong>, <strong>F</strong>, <strong>G</strong>, <strong>Err</strong>>(<code>f</code>: <a href="_types_functions_.md#fun6">Fun6</a>‹A, B, C, D, E, F, G›, <code>combineErrors</code>: function, <code>a</code>: <a href="_result_.md#result">Result</a>‹A, Err›, <code>b</code>: <a href="_result_.md#result">Result</a>‹B, Err›, <code>c</code>: <a href="_result_.md#result">Result</a>‹C, Err›, <code>d</code>: <a href="_result_.md#result">Result</a>‹D, Err›, <code>e</code>: <a href="_result_.md#result">Result</a>‹E, Err›, <code>g</code>: <a href="_result_.md#result">Result</a>‹F, Err›): <em><a href="_result_.md#result">Result</a>‹G, Err›</em></p>
+<p>▸ <strong>mapNWithCombine</strong>&lt;<strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>D</strong>, <strong>E</strong>, <strong>F</strong>, <strong>G</strong>, <strong>Err</strong>&gt;(<code>f</code>: <a href="_types_functions_.md#fun6">Fun6</a>‹A, B, C, D, E, F, G›, <code>combineErrors</code>: function, <code>a</code>: <a href="_result_.md#result">Result</a>‹A, Err›, <code>b</code>: <a href="_result_.md#result">Result</a>‹B, Err›, <code>c</code>: <a href="_result_.md#result">Result</a>‹C, Err›, <code>d</code>: <a href="_result_.md#result">Result</a>‹D, Err›, <code>e</code>: <a href="_result_.md#result">Result</a>‹E, Err›, <code>g</code>: <a href="_result_.md#result">Result</a>‹F, Err›): <em><a href="_result_.md#result">Result</a>‹G, Err›</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L153">result.ts:153</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>A</strong></p>
@@ -1023,10 +1810,24 @@
 <p>▪ <strong>combineErrors</strong>: <em>function</em></p>
 <p>▸ (<code>e1</code>: Err, <code>e2</code>: Err): <em>Err</em></p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>e1</code> | Err |
-<code>e2</code> | Err |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>e1</code></td>
+<td>Err</td>
+</tr>
+<tr>
+<td><code>e2</code></td>
+<td>Err</td>
+</tr>
+</tbody>
+</table>
 <p>▪ <strong>a</strong>: <em><a href="_result_.md#result">Result</a>‹A, Err›</em></p>
 <p>▪ <strong>b</strong>: <em><a href="_result_.md#result">Result</a>‹B, Err›</em></p>
 <p>▪ <strong>c</strong>: <em><a href="_result_.md#result">Result</a>‹C, Err›</em></p>
@@ -1034,35 +1835,63 @@
 <p>▪ <strong>e</strong>: <em><a href="_result_.md#result">Result</a>‹E, Err›</em></p>
 <p>▪ <strong>g</strong>: <em><a href="_result_.md#result">Result</a>‹F, Err›</em></p>
 <p><strong>Returns:</strong> <em><a href="_result_.md#result">Result</a>‹G, Err›</em></p>
-<hr />
+<hr>
 <h3 id="constofnullable"><code>Const</code> ofNullable</h3>
-<p>▸ <strong>ofNullable</strong><<strong>T</strong>, <strong>E</strong>>(<code>value</code>: T | undefined | null, <code>error</code>: E): <em><a href="_result_.md#result">Result</a>‹T, E›</em></p>
+<p>▸ <strong>ofNullable</strong>&lt;<strong>T</strong>, <strong>E</strong>&gt;(<code>value</code>: T | undefined | null, <code>error</code>: E): <em><a href="_result_.md#result">Result</a>‹T, E›</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L29">result.ts:29</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>T</strong></p>
 <p>▪ <strong>E</strong></p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>value</code> | T &#124; undefined &#124; null |
-<code>error</code> | E |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>value</code></td>
+<td>T | undefined | null</td>
+</tr>
+<tr>
+<td><code>error</code></td>
+<td>E</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em><a href="_result_.md#result">Result</a>‹T, E›</em></p>
-<hr />
+<hr>
 <h3 id="constrecover"><code>Const</code> recover</h3>
-<p>▸ <strong>recover</strong><<strong>T</strong>, <strong>E</strong>>(<code>result</code>: <a href="_result_.md#result">Result</a>‹T, E›, <code>whenFailure</code>: T): <em>object | object</em></p>
+<p>▸ <strong>recover</strong>&lt;<strong>T</strong>, <strong>E</strong>&gt;(<code>result</code>: <a href="_result_.md#result">Result</a>‹T, E›, <code>whenFailure</code>: T): <em>object | object</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L402">result.ts:402</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>T</strong></p>
 <p>▪ <strong>E</strong></p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>result</code> | <a href="_result_.md#result">Result</a>‹T, E› |
-<code>whenFailure</code> | T |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>result</code></td>
+<td><a href="_result_.md#result">Result</a>‹T, E›</td>
+</tr>
+<tr>
+<td><code>whenFailure</code></td>
+<td>T</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em>object | object</em></p>
-<hr />
+<hr>
 <h3 id="constrecoverfromerror"><code>Const</code> recoverFromError</h3>
-<p>▸ <strong>recoverFromError</strong><<strong>T</strong>, <strong>E</strong>>(<code>result</code>: <a href="_result_.md#result">Result</a>‹T, E›, <code>whenFailuref</code>: function): <em>object | object</em></p>
+<p>▸ <strong>recoverFromError</strong>&lt;<strong>T</strong>, <strong>E</strong>&gt;(<code>result</code>: <a href="_result_.md#result">Result</a>‹T, E›, <code>whenFailuref</code>: function): <em>object | object</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L409">result.ts:409</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>T</strong></p>
@@ -1072,13 +1901,24 @@
 <p>▪ <strong>whenFailuref</strong>: <em>function</em></p>
 <p>▸ (<code>e</code>: E): <em>T</em></p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>e</code> | E |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>e</code></td>
+<td>E</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em>object | object</em></p>
-<hr />
+<hr>
 <h3 id="constspread"><code>Const</code> spread</h3>
-<p>▸ <strong>spread</strong><<strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>Err</strong>>(<code>f</code>: function, <code>v</code>: <a href="_result_.md#result">Result</a>‹[A, B], Err›): <em><a href="_result_.md#result">Result</a>‹C, Err›</em></p>
+<p>▸ <strong>spread</strong>&lt;<strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>Err</strong>&gt;(<code>f</code>: function, <code>v</code>: <a href="_result_.md#result">Result</a>‹[A, B], Err›): <em><a href="_result_.md#result">Result</a>‹C, Err›</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L426">result.ts:426</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>A</strong></p>
@@ -1089,78 +1929,158 @@
 <p>▪ <strong>f</strong>: <em>function</em></p>
 <p>▸ (<code>a</code>: A, <code>b</code>: B): <em>C</em></p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>a</code> | A |
-<code>b</code> | B |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>a</code></td>
+<td>A</td>
+</tr>
+<tr>
+<td><code>b</code></td>
+<td>B</td>
+</tr>
+</tbody>
+</table>
 <p>▪ <strong>v</strong>: <em><a href="_result_.md#result">Result</a>‹[A, B], Err›</em></p>
 <p><strong>Returns:</strong> <em><a href="_result_.md#result">Result</a>‹C, Err›</em></p>
-<hr />
+<hr>
 <h3 id="constsuccess"><code>Const</code> success</h3>
-<p>▸ <strong>success</strong><<strong>T</strong>, <strong>E</strong>>(<code>value</code>: T): <em><a href="_result_.md#result">Result</a>‹T, E›</em></p>
+<p>▸ <strong>success</strong>&lt;<strong>T</strong>, <strong>E</strong>&gt;(<code>value</code>: T): <em><a href="_result_.md#result">Result</a>‹T, E›</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L26">result.ts:26</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>T</strong></p>
 <p>▪ <strong>E</strong></p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>value</code> | T |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>value</code></td>
+<td>T</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em><a href="_result_.md#result">Result</a>‹T, E›</em></p>
-<hr />
+<hr>
 <h3 id="constswap"><code>Const</code> swap</h3>
-<p>▸ <strong>swap</strong><<strong>T</strong>, <strong>E</strong>>(<code>result</code>: <a href="_result_.md#result">Result</a>‹T, E›): <em><a href="_result_.md#result">Result</a>‹E, T›</em></p>
+<p>▸ <strong>swap</strong>&lt;<strong>T</strong>, <strong>E</strong>&gt;(<code>result</code>: <a href="_result_.md#result">Result</a>‹T, E›): <em><a href="_result_.md#result">Result</a>‹E, T›</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L416">result.ts:416</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>T</strong></p>
 <p>▪ <strong>E</strong></p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>result</code> | <a href="_result_.md#result">Result</a>‹T, E› |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>result</code></td>
+<td><a href="_result_.md#result">Result</a>‹T, E›</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em><a href="_result_.md#result">Result</a>‹E, T›</em></p>
-<hr />
+<hr>
 <h3 id="consttoarray"><code>Const</code> toArray</h3>
-<p>▸ <strong>toArray</strong><<strong>T</strong>, <strong>E</strong>>(<code>result</code>: <a href="_result_.md#result">Result</a>‹T, E›): <em>T[]</em></p>
+<p>▸ <strong>toArray</strong>&lt;<strong>T</strong>, <strong>E</strong>&gt;(<code>result</code>: <a href="_result_.md#result">Result</a>‹T, E›): <em>T[]</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L320">result.ts:320</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>T</strong></p>
 <p>▪ <strong>E</strong></p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>result</code> | <a href="_result_.md#result">Result</a>‹T, E› |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>result</code></td>
+<td><a href="_result_.md#result">Result</a>‹T, E›</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em>T[]</em></p>
-<hr />
+<hr>
 <h3 id="consttoboolean"><code>Const</code> toBoolean</h3>
 <p>▸ <strong>toBoolean</strong>(<code>result</code>: <a href="_result_.md#result">Result</a>‹unknown, unknown›): <em>boolean</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L313">result.ts:313</a></em></p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>result</code> | <a href="_result_.md#result">Result</a>‹unknown, unknown› |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>result</code></td>
+<td><a href="_result_.md#result">Result</a>‹unknown, unknown›</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em>boolean</em></p>
-<hr />
+<hr>
 <h3 id="consttomaybe"><code>Const</code> toMaybe</h3>
-<p>▸ <strong>toMaybe</strong><<strong>T</strong>, <strong>E</strong>>(<code>result</code>: <a href="_result_.md#result">Result</a>‹T, E›): <em><a href="_maybe_.md#maybe">Maybe</a>‹T›</em></p>
+<p>▸ <strong>toMaybe</strong>&lt;<strong>T</strong>, <strong>E</strong>&gt;(<code>result</code>: <a href="_result_.md#result">Result</a>‹T, E›): <em><a href="_maybe_.md#maybe">Maybe</a>‹T›</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L327">result.ts:327</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>T</strong></p>
 <p>▪ <strong>E</strong></p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>result</code> | <a href="_result_.md#result">Result</a>‹T, E› |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>result</code></td>
+<td><a href="_result_.md#result">Result</a>‹T, E›</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em><a href="_maybe_.md#maybe">Maybe</a>‹T›</em></p>
-<hr />
+<hr>
 <h3 id="consttooption"><code>Const</code> toOption</h3>
-<p>▸ <strong>toOption</strong><<strong>T</strong>, <strong>E</strong>>(<code>result</code>: <a href="_result_.md#result">Result</a>‹T, E›): <em><a href="_option_.md#option">Option</a>‹T›</em></p>
+<p>▸ <strong>toOption</strong>&lt;<strong>T</strong>, <strong>E</strong>&gt;(<code>result</code>: <a href="_result_.md#result">Result</a>‹T, E›): <em><a href="_option_.md#option">Option</a>‹T›</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L334">result.ts:334</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>T</strong></p>
 <p>▪ <strong>E</strong></p>
 <p><strong>Parameters:</strong></p>
-<p>Name | Type |
------- | ------ |
-<code>result</code> | <a href="_result_.md#result">Result</a>‹T, E› |</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>result</code></td>
+<td><a href="_result_.md#result">Result</a>‹T, E›</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns:</strong> <em><a href="_option_.md#option">Option</a>‹T›</em></p>

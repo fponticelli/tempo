@@ -1,7 +1,8 @@
 {
   "name": "tempo-paper",
   "version": "0.3.0",
-  "description": "",
+  "priority": 100,
+  "description": "Integration of PaperJS api using Tempo to create a declarative Document Object Model.",
   "sideEffects": false,
   "keywords": [
     "tempo",
