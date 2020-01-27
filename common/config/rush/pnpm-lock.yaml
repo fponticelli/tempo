@@ -20,6 +20,7 @@ dependencies:
   '@types/showdown': 1.7.3
   acorn: 7.1.0
   babel-types: 6.26.0
+  bulma: 0.8.0
   css-loader: 3.3.2_webpack@4.41.2
   cssnano: 4.1.10
   dompurify: 2.0.7
@@ -2023,6 +2024,10 @@ packages:
     dev: false
     resolution:
       integrity: sha1-hZgoeOIbmOHGZCXgPQF0eI9Wnug=
+  /bulma/0.8.0:
+    dev: false
+    resolution:
+      integrity: sha512-nhf3rGyiZh/VM7FrSJ/5KeLlfaFkXz0nYcXriynfPH4vVpnxnqyEwaNGdNCVzHyyCA3cHgkQAMpdF/SFbFGZfA==
   /bytes/3.0.0:
     dev: false
     engines:
@@ -10419,6 +10424,7 @@ packages:
       '@types/showdown': 1.7.3
       acorn: 7.1.0
       babel-types: 6.26.0
+      bulma: 0.8.0
       css-loader: 3.3.2_webpack@4.41.2
       cssnano: 4.1.10
       front-matter: 3.1.0
@@ -10447,7 +10453,7 @@ packages:
     peerDependencies:
       sass: '*'
     resolution:
-      integrity: sha512-0VoEYzQfot1Tjk1BoJsfwRskjtYnZnRQPPYshJA6osBYHXZ2nNJ1IXr6x/99TkJlcMDO/L8+UVYfKPIKh/QgfA==
+      integrity: sha512-YrNYv9GkYOGDCPdlZolbRAgeI24vReGSP6Z4YYwPdf1lerczytkO2MHa1uYJ0eBhrnNnSEIFoxEG4v6l/X/fFg==
       tarball: 'file:projects/tempo-tools.docs.tgz'
     version: 0.0.0
 registry: ''
@@ -10473,6 +10479,7 @@ specifiers:
   '@types/showdown': 1.7.3
   acorn: 7.1.0
   babel-types: 6.26.0
+  bulma: 0.8.0
   css-loader: 3.3.2
   cssnano: 4.1.10
   dompurify: 2.0.7

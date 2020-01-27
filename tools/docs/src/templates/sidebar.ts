@@ -1,4 +1,4 @@
-import { div, h1, h2, ul, li, h3 } from 'tempo-dom/lib/html'
+import { div, ul, li, h3, aside, p, span } from 'tempo-dom/lib/html'
 import { lazy } from 'tempo-dom/lib/lazy'
 import { iterate } from 'tempo-dom/lib/iterate'
 import { when } from 'tempo-dom/lib/when'
@@ -20,11 +20,11 @@ type Sidebar = { toc: Toc; route: Route }
 let section: DOMTemplate<[string, SectionRef, Route], Action, unknown>
 section = lazy(() => div<[string, SectionRef, Route], Action>(
   {  },
-  h2({}, ([title]) => title),
+  p({ attrs: { class: 'menu-label' } }, ([title]) => title),
   when(
     { condition: ([_, section]) => section.pages.length > 0 || keys(section.sections).length > 0 },
     ul(
-      {},
+      { attrs: { class: 'menu-list' } },
       iterate<[string, SectionRef, Route], PageRef[], Action>(
         { getArray: ([_, s]) => s.pages },
         li(
@@ -59,50 +59,79 @@ const api = fragment<[ApiRef, { apis: ApiRef[], project: ProjectRef, route: Rout
 
 const demo = div<[DemoRef, Sidebar, number], Action>(
   {},
-  h2({}, link(([s]) => s.title, ([s]) => Route.demo(s.path))),
-  div({ attrs: { class: 'description' }}, ([s]) => s.description)
+  p(
+    { attrs: { class: '' } },
+    link(([s]) => s.title, ([s]) => Route.demo(s.path), 'has-text-weight-bold'),
+    div({ attrs: { class: 'is-size-7' }}, ([s]) => s.description)
+  ),
 )
 
 const project = div<[ProjectRef, Sidebar, number], Action>(
   {},
-  h2({}, maybeLink(([p]) => p.title, ([p, s]) => apiMatchesRoute(p.name, 'index.html', s.route) ? none : some(Route.api(p.name, 'index.html')))),
-  div({ attrs: { class: 'version' }}, ([s]) => s.version),
-  div({ attrs: { class: 'description' }}, ([s]) => s.description),
+  div(
+    { attrs: { class: '' } },
+    span({ attrs: { class: 'is-pulled-right is-size-7 has-text-grey' }}, ([s]) => s.version),
+    maybeLink(
+      ([p]) => p.title,
+      ([p, s]) => apiMatchesRoute(p.name, 'index.html', s.route) ? none : some(Route.api(p.name, 'index.html')),
+      'is-uppercase has-text-weight-bold'
+    ),
+    div({ attrs: { class: 'is-size-7' }}, ([s]) => s.description),
+  ),
   h3({ attrs: { class: 'changelog' } }, maybeLink('changelog', ([p, s]) => projectChangelogMatchesRoute(p, s.route) ? none : some(Route.changelog(p.name)))),
   div(
     {},
     mapState(
       { map: ([project, sidebar]) => ({ apis: sidebar.toc.apis[project.name], project, route: sidebar.route }) },
-      h3({ attrs: { class: 'types' } }, 'types'),
-      ul(
-        {},
-        iterate<{ apis: ApiRef[], project: ProjectRef, route: Route }, ApiRef[], Action>(
-          { getArray: state => state.apis.filter(a => a.type !== 'module').sort((a, b) => compareCaseInsensitive(a.title, b.title)) },
-          li({}, api)
+      mapState<{ apis: ApiRef[], project: ProjectRef, route: Route }, { apis: ApiRef[], project: ProjectRef, route: Route }, Action>(
+        { map: state => ({
+          apis: state.apis.filter(a => a.type !== 'module').sort((a, b) => compareCaseInsensitive(a.title, b.title)),
+          project: state.project,
+          route: state.route
+        }) },
+        when(
+          { condition: state => state.apis.length > 0 },
+          p({ attrs: { class: 'menu-label' } }, 'types'),
+          ul(
+            { attrs: { class: 'menu-list' } },
+            iterate<{ apis: ApiRef[], project: ProjectRef, route: Route }, ApiRef[], Action>(
+              { getArray: state => state.apis },
+              li({}, api)
+            )
+          )
         )
       ),
-      h3({ attrs: { class: 'modules' } }, 'modules'),
-      ul(
-        {},
-        iterate<{ apis: ApiRef[], project: ProjectRef, route: Route }, ApiRef[], Action>(
-          { getArray: state => state.apis.filter(a => a.type === 'module').sort((a, b) => compareCaseInsensitive(a.title, b.title)) },
-          li({}, api)
+      mapState<{ apis: ApiRef[], project: ProjectRef, route: Route }, { apis: ApiRef[], project: ProjectRef, route: Route }, Action>(
+        { map: state => ({
+          apis: state.apis.filter(a => a.type === 'module').sort((a, b) => compareCaseInsensitive(a.title, b.title)),
+          project: state.project,
+          route: state.route
+        }) },
+        when(
+          { condition: state => state.apis.length > 0 },
+          p({ attrs: { class: 'menu-label' } }, 'modules'),
+          ul(
+            { attrs: { class: 'menu-list' } },
+            iterate<{ apis: ApiRef[], project: ProjectRef, route: Route }, ApiRef[], Action>(
+              { getArray: state => state.apis },
+              li({}, api)
+            )
+          )
         )
-      )
+      ),
     )
   )
 )
 
-export const sidebar = div<Sidebar, Action>(
-  { attrs: { className: 'sidebar' } },
-  h1({}, link('Tempo', Route.home)),
+export const sidebar = aside<Sidebar, Action>(
+  { attrs: { class: 'menu' } },
   mapState(
-    { map: sidebar => ['Contents', sidebar.toc as SectionRef, sidebar.route] as [string, SectionRef, Route] },
+    { map: sidebar => ['Tempo', sidebar.toc as SectionRef, sidebar.route] as [string, SectionRef, Route] },
     section
   ),
-  h2({}, 'Demos'),
+  p({ attrs: { class: 'menu-label' } }, 'Demos'),
   ul(
-    {},
+    { attrs: { class: '' } },
     iterate<Sidebar, DemoRef[], Action>(
       { getArray: s => s.toc.demos },
       li(
@@ -111,15 +140,9 @@ export const sidebar = div<Sidebar, Action>(
       )
     )
   ),
-  h2({}, 'Projects'),
-  ul(
-    {},
-    iterate<Sidebar, ProjectRef[], Action>(
-      { getArray: s => s.toc.projects },
-      li(
-        {},
-        project
-      )
-    )
+  p({ attrs: { class: 'menu-label' } }, 'Projects'),
+  iterate<Sidebar, ProjectRef[], Action>(
+    { getArray: s => s.toc.projects },
+    project
   )
 )

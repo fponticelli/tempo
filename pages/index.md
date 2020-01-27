@@ -141,7 +141,8 @@ In a traditional JavaScript application, an event can be mapped to an event hand
 In Tempo, the event handler has a more advanced signature:
 
 ```ts
-<State, Action, Ev extends Event = Event, El extends Element = Element> = (state: State, event: Ev, element: El) => Action | undefined
+<State, Action, Ev extends Event = Event, El extends Element = Element> =
+  (state: State, event: Ev, element: El) => Action | undefined
 ```
 
 The function takes the current state, the DOM event, and the element associated with the event. If it returns an Action, the reducer function that updates the state will be invoked with the returned Action. If it returns `undefined`, the reducer function will not be invoked.
