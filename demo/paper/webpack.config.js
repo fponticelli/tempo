@@ -29,11 +29,17 @@ module.exports = {
   },
   output: {
     filename: 'index.js',
-    path: path.resolve(__dirname, '../../docs/demo/paper'),
+    path: path.resolve(__dirname, './build'),
     // publicPath: '.'
   },
   plugins: [
-    new HtmlWebpackPlugin(),
+    new HtmlWebpackPlugin({
+      title: 'Tempo • PaperJS',
+      meta: {
+        description: "Mini application to monitor regressions and performance improvements across versions of Tempo.",
+        priority: "3"
+      }
+    }),
   ],
   optimization: {
     usedExports: true,

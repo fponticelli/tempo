@@ -1,7 +1,8 @@
 {
   "name": "tempo-dom",
   "version": "0.14.0",
-  "description": "Fully-typed web framework alternative to React and Angular",
+  "priority": 1,
+  "description": "Fully-typed frontend framework alternative to React and Angular",
   "keywords": [
     "tempo",
     "ui",
@@ -15,6 +16,7 @@
   "license": "Apache-2.0",
   "private": false,
   "scripts": {
+    "docs": "typedoc --plugin typedoc-plugin-markdown --options ../typedoc.json --out ./docs src && mv ./website/sidebars.json ./docs/toc.json && rm -rf website",
     "clean": "rm -rf lib/* && rm -rf es6/*",
     "build": "npm run clean && npx tsc && npx tsc -p tsconfig.es6.json",
     "test": "jest",
@@ -40,6 +42,8 @@
     "tempo-store": "1.1.2"
   },
   "devDependencies": {
+    "typedoc": "0.16.7",
+    "typedoc-plugin-markdown": "2.2.16",
     "@types/jest": "24.0.22",
     "@types/jsdom": "12.2.4",
     "jest": "24.9.0",

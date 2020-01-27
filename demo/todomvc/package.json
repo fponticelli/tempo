@@ -1,5 +1,7 @@
 {
   "name": "tempo-demo.todomvc",
+  "title": "ToDo MVC App",
+  "priority": 5,
   "version": "1.0.0",
   "license": "Apache-2.0",
   "homepage": "https://github.com/fponticelli/tempo",
@@ -30,8 +32,8 @@
     "babel-types": "6.26.0"
   },
   "scripts": {
-    "compile": "NODE_ENV=production && npx tsc --noEmit && parcel build src/index.html --public-url . --out-dir ../../docs/demo/todomvc --experimental-scope-hoisting --no-minify",
-    "clean": "rm -rf dist/* && rm -rf ../../docs/demo/todomvc/*",
+    "compile": "NODE_ENV=production && npx tsc --noEmit && parcel build src/index.html --public-url . --out-dir ./build --experimental-scope-hoisting --no-minify",
+    "clean": "rm -rf dist/* && rm -rf ./build/*",
     "build": "npm run clean && npm run compile",
     "watch": "parcel src/index.html",
     "tslint": "tslint -p ./tslint.json",

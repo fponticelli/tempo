@@ -1,0 +1,235 @@
+<h2 id="typeparameters">Type parameters</h2>
+<p>▪ <strong>T</strong>: <em><a href="#/api/std/interfaces/_newtype_.newtype.html">Newtype</a>‹any, any›</em></p>
+<h2 id="hierarchy">Hierarchy</h2>
+<ul>
+<li><strong>NewtypeClass</strong></li>
+</ul>
+<h2 id="index">Index</h2>
+<h3 id="methods">Methods</h3>
+<ul>
+<li><a href="#/api/std/classes/_newtype_.newtypeclass.html#get">get</a></li>
+<li><a href="#/api/std/classes/_newtype_.newtypeclass.html#abstract-isvalid">isValid</a></li>
+<li><a href="#/api/std/classes/_newtype_.newtypeclass.html#maybemodify">maybeModify</a></li>
+<li><a href="#/api/std/classes/_newtype_.newtypeclass.html#maybeof">maybeOf</a></li>
+<li><a href="#/api/std/classes/_newtype_.newtypeclass.html#modify">modify</a></li>
+<li><a href="#/api/std/classes/_newtype_.newtypeclass.html#of">of</a></li>
+<li><a href="#/api/std/classes/_newtype_.newtypeclass.html#unsafemodify">unsafeModify</a></li>
+<li><a href="#/api/std/classes/_newtype_.newtypeclass.html#unsafeof">unsafeOf</a></li>
+</ul>
+<h2 id="methods-1">Methods</h2>
+<h3 id="get">get</h3>
+<p>▸ <strong>get</strong>(<code>v</code>: T): <em>T["_T"]</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/newtype.ts#L32">newtype.ts:32</a></em></p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>v</code></td>
+<td>T</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong> <em>T["_T"]</em></p>
+<hr>
+<h3 id="abstractisvalid"><code>Abstract</code> isValid</h3>
+<p>▸ <strong>isValid</strong>(<code>v</code>: T["_T"]): <em>boolean</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/newtype.ts#L22">newtype.ts:22</a></em></p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>v</code></td>
+<td>T["_T"]</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong> <em>boolean</em></p>
+<hr>
+<h3 id="maybemodify">maybeModify</h3>
+<p>▸ <strong>maybeModify</strong>(<code>f</code>: function): <em>function</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/newtype.ts#L35">newtype.ts:35</a></em></p>
+<p><strong>Parameters:</strong></p>
+<p>▪ <strong>f</strong>: <em>function</em></p>
+<p>▸ (<code>v</code>: T["<em>T"]): <em>T["</em>T"]</em></p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>v</code></td>
+<td>T["_T"]</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong> <em>function</em></p>
+<p>▸ (<code>value</code>: T): <em><a href="#/api/std/modules/_maybe_.html#maybe">Maybe</a>‹T›</em></p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>value</code></td>
+<td>T</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="maybeof">maybeOf</h3>
+<p>▸ <strong>maybeOf</strong>(<code>v</code>: T["_T"]): <em><a href="#/api/std/modules/_maybe_.html#maybe">Maybe</a>‹T›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/newtype.ts#L29">newtype.ts:29</a></em></p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>v</code></td>
+<td>T["_T"]</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong> <em><a href="#/api/std/modules/_maybe_.html#maybe">Maybe</a>‹T›</em></p>
+<hr>
+<h3 id="modify">modify</h3>
+<p>▸ <strong>modify</strong>(<code>f</code>: function): <em>function</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/newtype.ts#L38">newtype.ts:38</a></em></p>
+<p><strong>Parameters:</strong></p>
+<p>▪ <strong>f</strong>: <em>function</em></p>
+<p>▸ (<code>v</code>: T["<em>T"]): <em>T["</em>T"]</em></p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>v</code></td>
+<td>T["_T"]</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong> <em>function</em></p>
+<p>▸ (<code>value</code>: T): <em><a href="#/api/std/modules/_option_.html#option">Option</a>‹T›</em></p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>value</code></td>
+<td>T</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="of">of</h3>
+<p>▸ <strong>of</strong>(<code>v</code>: T["_T"]): <em><a href="#/api/std/modules/_option_.html#option">Option</a>‹T›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/newtype.ts#L26">newtype.ts:26</a></em></p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>v</code></td>
+<td>T["_T"]</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong> <em><a href="#/api/std/modules/_option_.html#option">Option</a>‹T›</em></p>
+<hr>
+<h3 id="unsafemodify">unsafeModify</h3>
+<p>▸ <strong>unsafeModify</strong>(<code>f</code>: function): <em>function</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/newtype.ts#L42">newtype.ts:42</a></em></p>
+<p><strong>Parameters:</strong></p>
+<p>▪ <strong>f</strong>: <em>function</em></p>
+<p>▸ (<code>v</code>: T["<em>T"]): <em>T["</em>T"]</em></p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>v</code></td>
+<td>T["_T"]</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong> <em>function</em></p>
+<p>▸ (<code>value</code>: T): <em>T</em></p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>value</code></td>
+<td>T</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="unsafeof">unsafeOf</h3>
+<p>▸ <strong>unsafeOf</strong>(<code>v</code>: T["_T"]): <em>T</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/newtype.ts#L23">newtype.ts:23</a></em></p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>v</code></td>
+<td>T["_T"]</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong> <em>T</em></p>

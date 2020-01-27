@@ -1,6 +1,7 @@
 {
   "name": "tempo-std",
   "license": "Apache-2.0",
+  "priority": 10,
   "description": "Std library for TypeScript. Natural complement to the tempo libs.",
   "version": "0.2.0",
   "keywords": [
@@ -12,7 +13,7 @@
   "sideEffects": false,
   "private": false,
   "scripts": {
-    "docs": "typedoc --plugin typedoc-plugin-markdown --options ../typedoc.json --out ../docs/api/std src",
+    "docs": "typedoc --plugin typedoc-plugin-markdown --options ../typedoc.json --out ./docs src && mv ./website/sidebars.json ./docs/toc.json && rm -rf website",
     "clean": "rm -rf lib/* && rm -rf es6/*",
     "build": "npm run clean && npx tsc && npx tsc -p tsconfig.es6.json",
     "test": "jest",

@@ -1,0 +1,40 @@
+@charset "utf-8"
+
+@import url('https://fonts.googleapis.com/css?family=Nunito:400,700')
+$family-sans-serif: "Nunito", sans-serif
+
+@import '../node_modules/bulma/bulma.sass'
+@import '../node_modules/prismjs/themes/prism.css', '../node_modules/prism-themes/themes/prism-vs.css'
+
+html, body, #app
+  height: 100%
+
+#app
+  min-height: 100%
+
+.footer
+  margin-top: -12px
+
+@media screen and (max-width: 768px)
+  #menu-toggle:checked + .nav-menu
+    display: block
+
+main.container
+  padding: 2em 1em
+
+.scrollable
+  max-height: calc(100vh - 48px - 1em)
+  overflow-y: auto
+
+.content .tag, .content .number
+  display: inline
+  padding: inherit
+  font-size: inherit
+  line-height: inherit
+  text-align: inherit
+  vertical-align: inherit
+  border-radius: inherit
+  font-weight: inherit
+  white-space: inherit
+  background: inherit
+  margin: inherit

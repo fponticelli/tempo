@@ -17,6 +17,13 @@ import { DOMContext } from './context'
 import { domChildToTemplate, removeNode } from './utils/dom'
 import { IndexType } from 'tempo-std/lib/types/index_type'
 import { ObjectWithPath, TypeAtPath, ObjectWithField } from 'tempo-std/lib/types/objects'
+import { Option, Some } from 'tempo-std/lib/option'
+import { mapState } from './map'
+import { Maybe, Just } from 'tempo-std/lib/maybe'
+import { Result, Success, Failure } from 'tempo-std/lib/result'
+import { Async, Loading, Outcome } from 'tempo-std/lib/async'
+import { AsyncResult } from 'tempo-std/lib/async_result'
+import { DOMAttribute, resolveAttribute } from './value'
 
 export class MatchTemplate<
   Path extends IndexType[],
@@ -87,8 +94,9 @@ export const match = <
 export const matchKind = <State extends ObjectWithField<'kind', any>, Action, Query = unknown>(
   matchers: {
     [k in State['kind']]: DOMChild<DifferentiateAt<['kind'], State, k>, Action, Query>
-  }
-): DOMTemplate<State, Action, Query> => match<['kind'], State, Action, Query>(['kind'], matchers)
+  },
+  refId = 't-match-kind'
+): DOMTemplate<State, Action, Query> => match<['kind'], State, Action, Query>(['kind'], matchers, refId)
 
 export class MatchBoolTemplate<
   State,
@@ -96,14 +104,15 @@ export class MatchBoolTemplate<
   Query
 > implements DOMTemplate<State, Action, Query> {
   constructor(
-    readonly condition: (state: State) => boolean,
+    readonly condition: DOMAttribute<State, boolean>,
     readonly trueTemplate: DOMTemplate<State, Action, Query>,
     readonly falseTemplate: DOMTemplate<State, Action, Query>,
     readonly refId: string
   ) {}
   render(ctx: DOMContext<Action>, state: State) {
     const { ctx: newCtx, ref } = ctx.withAppendToReference(this.refId)
-    const { condition, trueTemplate, falseTemplate } = this
+    const { trueTemplate, falseTemplate } = this
+    const condition = resolveAttribute(this.condition)
     let lastEvaluation = condition(state)
     let view = lastEvaluation ? trueTemplate.render(newCtx, state) : falseTemplate.render(newCtx, state)
     return {
@@ -132,7 +141,7 @@ export class MatchBoolTemplate<
 
 export const matchBool = <State, Action, Query = unknown>(
   options: {
-    condition: (state: State) => boolean,
+    condition: DOMAttribute<State, boolean>,
     true: DOMChild<State, Action, Query>,
     false: DOMChild<State, Action, Query>,
     refId?: string
@@ -204,3 +213,78 @@ export const matchValue = <Path extends IndexType[], State extends ObjectWithPat
   domChildToTemplate(orElse),
   refId || 't:match-value'
 )
+
+export const matchOption = <State, Action, Query = unknown>(matchers: {
+  Some:  DOMChild<State, Action, Query>,
+  None: DOMChild<unknown, Action, Query>
+},                                                          refId = 't-match-option'): DOMTemplate<Option<State>, Action, Query> => {
+  return matchKind({
+    Some:  mapState({ map: (o: Some<State>) => o.value }, matchers.Some),
+    None:  mapState({ map: () => null }, matchers.None)
+  }, refId)
+}
+
+export const matchMaybe = <State, Action, Query = unknown>(matchers: {
+  Just: DOMChild<State, Action, Query>,
+  Nothing?: DOMChild<unknown, Action, Query>
+},                                                         refId = 't-match-option'): DOMTemplate<Maybe<State>, Action, Query> => {
+  return new MatchBoolTemplate<Maybe<State>, Action, Query>(
+    v => typeof v !== 'undefined',
+    mapState(
+      { map: (opt: Maybe<State>) => (opt as Just<State>) },
+      domChildToTemplate(matchers.Just)
+    ),
+    domChildToTemplate(matchers.Nothing),
+    refId
+  )
+}
+
+export const matchResult = <State, Error, Action, Query = unknown>(
+  matchers: {
+    Success:  DOMChild<State, Action, Query>,
+    Failure: DOMChild<Error, Action, Query>
+  },
+  refId = 't-match-result'
+): DOMTemplate<Result<State, Error>, Action, Query> => {
+  return matchKind({
+    Success:  mapState({ map: (o: Success<State>) => o.value }, matchers.Success),
+    Failure:  mapState({ map: (o: Failure<Error>) => o.error }, matchers.Failure)
+  }, refId)
+}
+
+export const matchAsync = <State, Progress, Action, Query = unknown>(
+  matchers: {
+    Outcome:  DOMChild<State, Action, Query>,
+    NotAsked: DOMChild<unknown, Action, Query>,
+    Loading:  DOMChild<Progress, Action, Query>
+  },
+  refId = 't-match-async'
+): DOMTemplate<Async<State, Progress>, Action, Query> => {
+  return matchKind({
+    Outcome:  mapState({ map: (o: Outcome<State>) => o.value }, matchers.Outcome),
+    Loading:  mapState({ map: (o: Loading<Progress>) => o.progress }, matchers.Loading),
+    NotAsked: mapState({ map: () => null }, matchers.NotAsked)
+  }, refId)
+}
+
+export const matchAsyncResult = <State, Error, Progress, Action, Query = unknown>(
+  matchers: {
+    Success:  DOMChild<State, Action, Query>,
+    Failure:  DOMChild<Error, Action, Query>,
+    NotAsked: DOMChild<unknown, Action, Query>,
+    Loading:  DOMChild<Progress, Action, Query>
+  },
+  refId = 't-match-async-result'
+): DOMTemplate<AsyncResult<State, Error, Progress>, Action, Query> => {
+  return matchKind<AsyncResult<State, Error, Progress>, Action, Query>({
+    Outcome:  mapState(
+      { map: (o: Outcome<Result<State, Error>>) => o.value },
+      matchResult<State, Error, Action, Query>({
+        Success: matchers.Success,
+        Failure: matchers.Failure
+      }, `${refId}-sub`)
+    ),
+    Loading:  mapState({ map: (o: Loading<Progress>) => o.progress }, matchers.Loading),
+    NotAsked: mapState({ map: () => null }, matchers.NotAsked)
+  }, refId)
+}

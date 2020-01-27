@@ -10,15 +10,22 @@ dependencies:
   '@rush-temp/tempo-root': 'file:projects/tempo-root.tgz'
   '@rush-temp/tempo-std': 'file:projects/tempo-std.tgz'
   '@rush-temp/tempo-store': 'file:projects/tempo-store.tgz'
+  '@rush-temp/tempo-tools.docs': 'file:projects/tempo-tools.docs.tgz_sass@1.23.7'
   '@types/dompurify': 2.0.0
+  '@types/fs-extra': 8.0.1
   '@types/jest': 24.0.22
   '@types/jsdom': 12.2.4
   '@types/node': 10.12.18
+  '@types/prismjs': 1.16.0
+  '@types/showdown': 1.7.3
   acorn: 7.1.0
   babel-types: 6.26.0
+  bulma: 0.8.0
   css-loader: 3.3.2_webpack@4.41.2
   cssnano: 4.1.10
   dompurify: 2.0.7
+  front-matter: 3.1.0
+  fs-extra: 8.1.0
   html-webpack-plugin: 3.2.0_webpack@4.41.2
   jest: 24.9.0
   jsdom: 15.1.1
@@ -28,10 +35,13 @@ dependencies:
   parcel-bundler: 1.12.4
   partsing: 0.7.3
   prettier: 1.19.1
+  prism-themes: 1.3.0
+  prismjs: 1.19.0
   request: 2.88.0
   request-promise-native: 1.0.7_request@2.88.0
   sass: 1.23.7
   sass-loader: 8.0.0_2fa3437e004bcebf5b7457d96c39fa2e
+  showdown: 1.9.1
   stealthy-require: 1.0.0
   style-loader: 1.0.1_webpack@4.41.2
   sw-precache: 5.2.1
@@ -39,6 +49,7 @@ dependencies:
   todomvc-common: 1.0.5
   ts-jest: 24.1.0_jest@24.9.0
   ts-loader: 6.2.1_typescript@3.7.2
+  ts-node: 8.6.2_typescript@3.7.2
   tslib: 1.10.0
   tslint: 5.20.1_typescript@3.7.2
   typedoc: 0.16.7
@@ -1088,6 +1099,12 @@ packages:
     dev: false
     resolution:
       integrity: sha512-EaObqwIvayI5a8dCzhFrjKzVwKLxjoG9T6Ppd5CEo07LRKfQ8Yokw54r5+Wq7FaBQ+yXRvQAYPrHwya1/UFt9g==
+  /@types/fs-extra/8.0.1:
+    dependencies:
+      '@types/node': 10.12.18
+    dev: false
+    resolution:
+      integrity: sha512-J00cVDALmi/hJOYsunyT52Hva5TnJeKP5yd1r+mH/ZU0mbYZflR0Z5kw5kITtKTRYMhm1JMClOFYdHnQszEvqw==
   /@types/glob/7.1.1:
     dependencies:
       '@types/events': 3.0.0
@@ -1096,6 +1113,10 @@ packages:
     dev: false
     resolution:
       integrity: sha512-1Bh06cbWJUHMC97acuD6UMG29nMt0Aqz1vF3guLfG+kHHJhy3AyohZFFxYk2f7Q1SQIrNwvncxAE0N/9s70F2w==
+  /@types/highlight.js/9.12.3:
+    dev: false
+    resolution:
+      integrity: sha512-pGF/zvYOACZ/gLGWdQH8zSwteQS1epp68yRcVLJMgUck/MjEn/FBYmPub9pXT8C1e4a8YZfHo1CKyV8q1vKUnQ==
   /@types/istanbul-lib-coverage/2.0.1:
     dev: false
     resolution:
@@ -1142,10 +1163,18 @@ packages:
     dev: false
     resolution:
       integrity: sha512-fh+pAqt4xRzPfqA6eh3Z2y6fyZavRIumvjhaCL753+TVkGKGhpPeyrJG2JftD0T9q4GF00KjefsQ+PQNDdWQaQ==
+  /@types/prismjs/1.16.0:
+    dev: false
+    resolution:
+      integrity: sha512-mEyuziLrfDCQ4juQP1k706BUU/c8OGn/ZFl69AXXY6dStHClKX4P+N8+rhqpul1vRDA2VOygzMRSJJZHyDEOfw==
   /@types/q/1.5.2:
     dev: false
     resolution:
       integrity: sha512-ce5d3q03Ex0sy4R14722Rmt6MT07Ua+k4FwDfdcToYJcMKNtRVQvJ6JCAPdAmAnbRb6CsX6aYb9m96NGod9uTw==
+  /@types/showdown/1.7.3:
+    dev: false
+    resolution:
+      integrity: sha512-dlkYTr7bWn3GVl5DDpAwZo/mw0JMyiZpyfJNRqNRPEhd0ehM7h/RuALLU4gYmvb+pZhOoOQae0AyZIhSUv73rA==
   /@types/stack-utils/1.0.1:
     dev: false
     resolution:
@@ -1481,6 +1510,10 @@ packages:
     dev: false
     resolution:
       integrity: sha512-5hYdAkZlcG8tOLujVDTgCT+uPX0VnpAH28gWsLfzpXYm7wP6mp5Q/gYyR7YQ0cKVJcXJnl3j2kpBan13PtQf6w==
+  /arg/4.1.2:
+    dev: false
+    resolution:
+      integrity: sha512-+ytCkGcBtHZ3V2r2Z06AncYO8jz46UEamcspGoU8lHcEbpn6J77QK0vdWvChsclg/tM5XIJC5tnjmPp7Eq6Obg==
   /argparse/1.0.10:
     dependencies:
       sprintf-js: 1.0.3
@@ -1991,6 +2024,10 @@ packages:
     dev: false
     resolution:
       integrity: sha1-hZgoeOIbmOHGZCXgPQF0eI9Wnug=
+  /bulma/0.8.0:
+    dev: false
+    resolution:
+      integrity: sha512-nhf3rGyiZh/VM7FrSJ/5KeLlfaFkXz0nYcXriynfPH4vVpnxnqyEwaNGdNCVzHyyCA3cHgkQAMpdF/SFbFGZfA==
   /bytes/3.0.0:
     dev: false
     engines:
@@ -2264,6 +2301,15 @@ packages:
       node: '>=4'
     resolution:
       integrity: sha512-1QL4544moEsDVH9T/l6Cemov/37iv1RtoKf7NJ04A60+4MREXNfx/QvavbH6QoGdsD4N4Mwy49cmaINR/o2mdg==
+  /clipboard/2.0.4:
+    dependencies:
+      good-listener: 1.2.2
+      select: 1.1.2
+      tiny-emitter: 2.1.0
+    dev: false
+    optional: true
+    resolution:
+      integrity: sha512-Vw26VSLRpJfBofiVaFb/I8PVfdI1OxKcYShe6fm0sP/DtmiWQNCjhM/okTvdCo0G+lMMm1rMYbk4IK4x1X+kgQ==
   /cliui/3.2.0:
     dependencies:
       string-width: 1.0.2
@@ -2997,6 +3043,11 @@ packages:
       node: '>=0.4.0'
     resolution:
       integrity: sha1-3zrhmayt+31ECqrgsp4icrJOxhk=
+  /delegate/3.2.0:
+    dev: false
+    optional: true
+    resolution:
+      integrity: sha512-IofjkYBZaZivn0V8nnsMJGBr4jVLxHDheKSW88PyxS5QC4Vo9ZbZVvhzlSxY87fVq3STR6r+4cGepyHkcWOQSw==
   /delegates/1.0.0:
     dev: false
     resolution:
@@ -3780,6 +3831,12 @@ packages:
     dev: false
     resolution:
       integrity: sha1-i/tVAr3kpNNs/e6gB/zKIdfjgq8=
+  /front-matter/3.1.0:
+    dependencies:
+      js-yaml: 3.13.1
+    dev: false
+    resolution:
+      integrity: sha512-RFEK8N6waWTdwBZOPNEtvwMjZ/hUfpwXkYUYkmmOhQGdhSulXhWrFwiUhdhkduLDiIwbROl/faF1X/PC/GGRMw==
   /fs-extra/8.1.0:
     dependencies:
       graceful-fs: 4.2.3
@@ -4013,6 +4070,13 @@ packages:
       node: '>= 0.10'
     resolution:
       integrity: sha512-YlD4kdMqRCQHrhVdonet4TdRtv1/sZKepvoxNT4Nrhrp5HI8XFfc8kFlGlBn2myBo80aGp8Eft259mbcUJhgSg==
+  /good-listener/1.2.2:
+    dependencies:
+      delegate: 3.2.0
+    dev: false
+    optional: true
+    resolution:
+      integrity: sha1-1TswzfkxPf+33JoNR3CWqm0UXFA=
   /got/6.7.1:
     dependencies:
       create-error-class: 3.0.2
@@ -4234,6 +4298,14 @@ packages:
     dev: false
     resolution:
       integrity: sha512-P+M65QY2JQ5Y0G9KKdlDpo0zK+/OHptU5AaBwUfAIDJZk1MYf32Frm84EcOytfJE0t5JvkAnKlmjsXDnWzCJmQ==
+  /html-encoder-decoder/1.3.8:
+    dependencies:
+      he: 1.2.0
+      iterate-object: 1.3.3
+      regex-escape: 3.4.9
+    dev: false
+    resolution:
+      integrity: sha512-H5GJwy7y9jVpc1lrMLwQy8As0IiyLKy0TibpYX3DdpLD03MxmZnO97S9KXkvmKtMdbZo9jF1fmS+Fkx+61D5/w==
   /html-encoding-sniffer/1.0.2:
     dependencies:
       whatwg-encoding: 1.0.5
@@ -4981,6 +5053,10 @@ packages:
       node: '>=6'
     resolution:
       integrity: sha512-SKi4rnMyLBKe0Jy2uUdx28h8oG7ph2PPuQPvIAh31d+Ci+lSiEu4C+h3oBPuJ9+mPKhOyW0M8gY4U5NM1WLeXA==
+  /iterate-object/1.3.3:
+    dev: false
+    resolution:
+      integrity: sha512-DximWbkke36cnrSfNJv6bgcB2QOMV9PRD2FiowwzCoMsh8RupFLdbNIzWe+cVDWT+NIMNJgGlB1dGxP6kpzGtA==
   /jest-changed-files/24.9.0:
     dependencies:
       '@jest/types': 24.9.0
@@ -5192,6 +5268,9 @@ packages:
       node: '>=6'
     peerDependencies:
       jest-resolve: '*'
+    peerDependenciesMeta:
+      jest-resolve:
+        optional: true
     resolution:
       integrity: sha512-pgFw2tm54fzgYvc/OHrnysABEObZCUNFnhjoRjaVOCN8NYc032/gVjPaHD4Aq6ApkSieWtfKAFQtmDKAmhupnQ==
   /jest-regex-util/24.9.0:
@@ -7441,6 +7520,16 @@ packages:
       node: '>= 6'
     resolution:
       integrity: sha512-00ZMZUiHaJrNfk33guavqgvfJS30sLYf0f8+Srklv0AMPodGGHcoHgksZ3OThYnIvOd+8yMCn0YiEOogjlgsnA==
+  /prism-themes/1.3.0:
+    dev: false
+    resolution:
+      integrity: sha512-4hDQyNuBRyWVvwHeTH4yY5TIWrl6BHmhoh85kgfTFgwklGerWA3R2RFp7Sg0zPCnQS8SsloKsEIN3ao63KhiIw==
+  /prismjs/1.19.0:
+    dev: false
+    optionalDependencies:
+      clipboard: 2.0.4
+    resolution:
+      integrity: sha512-IVFtbW9mCWm9eOIaEkNyo2Vl4NnEifis2GQ7/MLRG5TQe6t+4Sj9J5QWI9i3v+SS43uZBlCAOn+zYTVYQcPXJw==
   /private/0.1.8:
     dev: false
     engines:
@@ -7774,6 +7863,10 @@ packages:
     dev: false
     resolution:
       integrity: sha512-flVuee02C3FKRISbxhXl9mGzdbWUVHubl1SMaknjxkFB1/iqpJhArQUvRxOOPEc/9tAiX0BaQ28FJH10E4isSQ==
+  /regex-escape/3.4.9:
+    dev: false
+    resolution:
+      integrity: sha512-Cv9rjwyQwVhn3L097ysanWsEElurmxDj6Cc4Ut23z7e6hzRbrNvF3Le7yAciMfuzyb0sZwSr0ZHunMNCIoy2/g==
   /regex-not/1.0.2:
     dependencies:
       extend-shallow: 3.0.2
@@ -8174,6 +8267,11 @@ packages:
     dev: false
     resolution:
       integrity: sha1-Yl2GWPhlr0Psliv8N2o3NZpJlMo=
+  /select/1.1.2:
+    dev: false
+    optional: true
+    resolution:
+      integrity: sha1-DnNQrN7ICxEIUoeG7B1EGNEbOW0=
   /selfsigned/1.10.7:
     dependencies:
       node-forge: 0.9.0
@@ -8343,6 +8441,21 @@ packages:
     dev: false
     resolution:
       integrity: sha512-vFwSUfQvqybiICwZY5+DAWIPLKsWO31Q91JSKl3UYv+K5c2QRPzn0qzec6QPu1Qc9eHYItiP3NdJqNVqetYAww==
+  /showdown-highlight/2.1.3:
+    dependencies:
+      highlight.js: 9.18.0
+      html-encoder-decoder: 1.3.8
+      showdown: 1.9.1
+    dev: false
+    resolution:
+      integrity: sha512-F3SG9A92qPoR0cROdQcFvQ1Yh8SimXZJAfvJ2qa05BTlQF9oyut32QsZv+k34joHMv1I5iQi3mQSIb4PXI5EnQ==
+  /showdown/1.9.1:
+    dependencies:
+      yargs: 14.2.2
+    dev: false
+    hasBin: true
+    resolution:
+      integrity: sha512-9cGuS382HcvExtf5AHk7Cb4pAeQQ+h0eTr33V1mu+crYWV4KvWAw6el92bDrqGEk5d46Ai/fhbEUwqJ/mTCNEA==
   /signal-exit/3.0.2:
     dev: false
     resolution:
@@ -8994,6 +9107,11 @@ packages:
     dev: false
     resolution:
       integrity: sha1-QFQRqOfmM5/mTbmiNN4R3DHgK9Q=
+  /tiny-emitter/2.1.0:
+    dev: false
+    optional: true
+    resolution:
+      integrity: sha512-NB6Dk1A9xgQPMoGqC5CVXn123gWyte215ONT5Pp5a0yt4nlEoO1ZWeCwpncaekPHXO60i47ihFnZPiRPjRMq4Q==
   /tiny-inflate/1.0.3:
     dev: false
     resolution:
@@ -9154,6 +9272,22 @@ packages:
       typescript: '*'
     resolution:
       integrity: sha512-Dd9FekWuABGgjE1g0TlQJ+4dFUfYGbYcs52/HQObE0ZmUNjQlmLAS7xXsSzy23AMaMwipsx5sNHvoEpT2CZq1g==
+  /ts-node/8.6.2_typescript@3.7.2:
+    dependencies:
+      arg: 4.1.2
+      diff: 4.0.1
+      make-error: 1.3.5
+      source-map-support: 0.5.16
+      typescript: 3.7.2
+      yn: 3.1.1
+    dev: false
+    engines:
+      node: '>=6.0.0'
+    hasBin: true
+    peerDependencies:
+      typescript: '>=2.7'
+    resolution:
+      integrity: sha512-4mZEbofxGqLL2RImpe3zMJukvEvcO1XP8bj8ozBPySdCUXEcU5cIRwR0aM3R+VoZq7iXc8N86NC0FspGRqP4gg==
   /tslib/1.10.0:
     dev: false
     resolution:
@@ -10050,6 +10184,12 @@ packages:
     dev: false
     resolution:
       integrity: sha1-a6MY6xaWFyf10oT46gA+jWFU0Mg=
+  /yn/3.1.1:
+    dev: false
+    engines:
+      node: '>=6'
+    resolution:
+      integrity: sha512-Ux4ygGWsu2c7isFWe8Yu1YluJmqVhxqK2cLXNQA5AcC3QfbGNpM7fu0Y8b/z16pXLnFxZYvWhd3fhBY9DLmC6Q==
   'file:projects/tempo-core.tgz':
     dependencies:
       '@types/jest': 24.0.22
@@ -10058,11 +10198,13 @@ packages:
       prettier: 1.19.1
       ts-jest: 24.1.0_jest@24.9.0
       tslint: 5.20.1_typescript@3.7.2
+      typedoc: 0.16.7
+      typedoc-plugin-markdown: 2.2.16_typedoc@0.16.7
       typescript: 3.7.2
     dev: false
     name: '@rush-temp/tempo-core'
     resolution:
-      integrity: sha512-nRe7jGRSvkuQb875TmAJmDRpaK+rQ7yrCPznXk2y2cgQiO4/OnRwc0HZp3xlzST6ZWhaANy57c1Q97QjrZ7ZNg==
+      integrity: sha512-dfVVf0tsOm24qoT/63br4ic/PxMKlRKuwN5OakUw/oRvcoU0w6h9NF4ryOayFe+qHmbIkDA8aUhxt+7tgjkP6w==
       tarball: 'file:projects/tempo-core.tgz'
     version: 0.0.0
   'file:projects/tempo-demo.benchmark.tgz':
@@ -10186,11 +10328,13 @@ packages:
       tempo-store: 1.0.1
       ts-jest: 24.1.0_jest@24.9.0
       tslint: 5.20.1_typescript@3.7.2
+      typedoc: 0.16.7
+      typedoc-plugin-markdown: 2.2.16_typedoc@0.16.7
       typescript: 3.7.2
     dev: false
     name: '@rush-temp/tempo-dom'
     resolution:
-      integrity: sha512-O8SiqdeEw3EJ6BsG1S70RTZG46uMj3L0sq3GpNWs4KmQ7VLQffyXD4XdTk9mwvBWykZpr909ndaWJ3Qk15l5vQ==
+      integrity: sha512-RiRooWzdV6Lhmg930vi5/BOolkFeCv0Ox5H1rXwRnFF2U8Xts2/r457Rlqpigh8zGLN7Urf7KAkaz9Fb0+MKaA==
       tarball: 'file:projects/tempo-dom.tgz'
     version: 0.0.0
   'file:projects/tempo-paper.tgz_webpack@4.41.2':
@@ -10210,6 +10354,8 @@ packages:
       tempo-store: 1.0.1
       ts-jest: 24.1.0_jest@24.9.0
       tslint: 5.20.1_typescript@3.7.2
+      typedoc: 0.16.7
+      typedoc-plugin-markdown: 2.2.16_typedoc@0.16.7
       typescript: 3.7.2
       webpack-cli: 3.3.10_webpack@4.41.2
     dev: false
@@ -10218,7 +10364,7 @@ packages:
     peerDependencies:
       webpack: '*'
     resolution:
-      integrity: sha512-M7GZMEC/iX1ZN5RE6Y/XxQ7cwn54iIsU6fLr+DQ0Vqp6iY9AG8oeCmR1/i9+E7cPueTyhyRZA4krHaVDJs3tOA==
+      integrity: sha512-N1KlHCqRrRn07a5xqdPqUeTk/Pzk0oUfU6RaTWXVCpeF/MeFJOr3wrqpHaWsZ8/srnkoFm7GDv5sOLf0ESZ1HA==
       tarball: 'file:projects/tempo-paper.tgz'
     version: 0.0.0
   'file:projects/tempo-root.tgz':
@@ -10259,12 +10405,56 @@ packages:
       tempo-core: 1.2.0
       ts-jest: 24.1.0_jest@24.9.0
       tslint: 5.20.1_typescript@3.7.2
+      typedoc: 0.16.7
+      typedoc-plugin-markdown: 2.2.16_typedoc@0.16.7
       typescript: 3.7.2
     dev: false
     name: '@rush-temp/tempo-store'
     resolution:
-      integrity: sha512-n18kShAChJKVhWhcqti0Aw8f7ukSUchcEtv8w44JHJj8qhNBSvcoAsSCzrlRut21m+l92gCzllJf1cW0+ob+Sw==
+      integrity: sha512-1h1BQSocpzTXPp/5UJ8BesSSpkQyz3r469TphzXG4KTACMLXkJTGpfcOKWaOEKxW68Vy/PCbjD9yka5ohaI9OQ==
       tarball: 'file:projects/tempo-store.tgz'
+    version: 0.0.0
+  'file:projects/tempo-tools.docs.tgz_sass@1.23.7':
+    dependencies:
+      '@types/fs-extra': 8.0.1
+      '@types/highlight.js': 9.12.3
+      '@types/jsdom': 12.2.4
+      '@types/node': 10.12.18
+      '@types/prismjs': 1.16.0
+      '@types/showdown': 1.7.3
+      acorn: 7.1.0
+      babel-types: 6.26.0
+      bulma: 0.8.0
+      css-loader: 3.3.2_webpack@4.41.2
+      cssnano: 4.1.10
+      front-matter: 3.1.0
+      fs-extra: 8.1.0
+      highlight.js: 9.18.0
+      html-webpack-plugin: 3.2.0_webpack@4.41.2
+      jsdom: 15.1.1
+      node-sass: 4.13.0
+      prettier: 1.19.1
+      prism-themes: 1.3.0
+      prismjs: 1.19.0
+      sass-loader: 8.0.0_2fa3437e004bcebf5b7457d96c39fa2e
+      showdown: 1.9.1
+      showdown-highlight: 2.1.3
+      style-loader: 1.0.1_webpack@4.41.2
+      ts-loader: 6.2.1_typescript@3.7.2
+      ts-node: 8.6.2_typescript@3.7.2
+      tslint: 5.20.1_typescript@3.7.2
+      typescript: 3.7.2
+      webpack: 4.41.2_webpack@4.41.2
+      webpack-cli: 3.3.10_webpack@4.41.2
+      webpack-dev-server: 3.9.0_webpack@4.41.2
+    dev: false
+    id: 'file:projects/tempo-tools.docs.tgz'
+    name: '@rush-temp/tempo-tools.docs'
+    peerDependencies:
+      sass: '*'
+    resolution:
+      integrity: sha512-YrNYv9GkYOGDCPdlZolbRAgeI24vReGSP6Z4YYwPdf1lerczytkO2MHa1uYJ0eBhrnNnSEIFoxEG4v6l/X/fFg==
+      tarball: 'file:projects/tempo-tools.docs.tgz'
     version: 0.0.0
 registry: ''
 specifiers:
@@ -10279,15 +10469,22 @@ specifiers:
   '@rush-temp/tempo-root': 'file:./projects/tempo-root.tgz'
   '@rush-temp/tempo-std': 'file:./projects/tempo-std.tgz'
   '@rush-temp/tempo-store': 'file:./projects/tempo-store.tgz'
+  '@rush-temp/tempo-tools.docs': 'file:./projects/tempo-tools.docs.tgz'
   '@types/dompurify': 2.0.0
+  '@types/fs-extra': 8.0.1
   '@types/jest': 24.0.22
   '@types/jsdom': 12.2.4
   '@types/node': 10.12.18
+  '@types/prismjs': 1.16.0
+  '@types/showdown': 1.7.3
   acorn: 7.1.0
   babel-types: 6.26.0
+  bulma: 0.8.0
   css-loader: 3.3.2
   cssnano: 4.1.10
   dompurify: 2.0.7
+  front-matter: 3.1.0
+  fs-extra: 8.1.0
   html-webpack-plugin: 3.2.0
   jest: 24.9.0
   jsdom: 15.1.1
@@ -10297,10 +10494,13 @@ specifiers:
   parcel-bundler: 1.12.4
   partsing: 0.7.3
   prettier: 1.19.1
+  prism-themes: 1.3.0
+  prismjs: 1.19.0
   request: 2.88.0
   request-promise-native: 1.0.7
   sass: 1.23.7
   sass-loader: 8.0.0
+  showdown: 1.9.1
   stealthy-require: 1.0.0
   style-loader: 1.0.1
   sw-precache: 5.2.1
@@ -10308,6 +10508,7 @@ specifiers:
   todomvc-common: 1.0.5
   ts-jest: 24.1.0
   ts-loader: 6.2.1
+  ts-node: 8.6.2
   tslib: 1.10.0
   tslint: 5.20.1
   typedoc: 0.16.7

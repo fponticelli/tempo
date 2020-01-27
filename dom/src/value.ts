@@ -49,6 +49,27 @@ export const mapAttribute = <State, A, B>(attr: DOMAttribute<State, A>, map: (a:
   }
 }
 
+export const attributeToHandler = <State, Value, Action, Ev extends Event, El extends Element>(
+  attr: DOMAttribute<State, Value>,
+  handler: DOMEventHandler<Value, Action, Ev, El>
+): DOMEventHandler<State, Action, Ev, El> => {
+  if (typeof attr === 'undefined') {
+    return () => { return undefined }
+  } else if (typeof attr === 'function') {
+    return (state: State, event: Ev, element: El) => {
+      const res = (attr as UnwrappedDerivedValue<State, Value>)(state)
+      if (res !== undefined)
+        return handler(res, event, element)
+      else
+        return undefined
+    }
+  } else {
+    return (_: State, event: Ev, element: El) => {
+      return handler(attr, event, element)
+    }
+  }
+}
+
 export const resolveAttribute = <State, Value>(attr: DOMAttribute<State, Value>): ((state: State) => Value | undefined) =>  {
   if (typeof attr === 'function') {
     return (attr as UnwrappedDerivedValue<State, Value>)

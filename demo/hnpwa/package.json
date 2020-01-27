@@ -1,5 +1,8 @@
 {
   "name": "tempo-demo.hnpwa",
+  "title": "Hacker News Progressive Web App",
+  "description": "Client for Hacker New built using Tempo. Heavily inspired on the Elm implementation.",
+  "priority": 10,
   "version": "1.0.0",
   "license": "Apache-2.0",
   "private": true,
@@ -23,8 +26,8 @@
     "sw-precache": "5.2.1"
   },
   "scripts": {
-    "compile": "NODE_ENV=production && npx tsc --noEmit && parcel build src/index.html --public-url . --out-dir ../../docs/demo/hnpwa --experimental-scope-hoisting",
-    "clean": "rm -rf dist/* && rm -rf ../../docs/demo/hnpwa/*",
+    "compile": "NODE_ENV=production && npx tsc --noEmit && parcel build src/index.html --public-url . --out-dir ./build --experimental-scope-hoisting",
+    "clean": "rm -rf dist/* && rm -rf ./build/*",
     "build": "npm run clean && npm run compile",
     "watch": "parcel src/index.html",
     "tslint": "tslint -p ./tslint.json",

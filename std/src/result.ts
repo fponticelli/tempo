@@ -16,15 +16,15 @@ import { map as mapArray } from './arrays'
 import { Fun2, Fun3, Fun4, Fun5, Fun6 } from './types'
 import { Option, none, some } from './option'
 
-export type Success<T> = { kind: 'success', value: T }
-export type Failure<E> = { kind: 'failure', error: E }
+export type Success<T> = { kind: 'Success', value: T }
+export type Failure<E> = { kind: 'Failure', error: E }
 
 export type Result<T, E> =
   | Success<T>
   | Failure<E>
 
-export const success = <T, E>(value: T): Result<T, E> => ({ kind: 'success', value })
-export const failure = <T, E>(error: E): Result<T, E> => ({ kind: 'failure', error })
+export const success = <T, E>(value: T): Result<T, E> => ({ kind: 'Success', value })
+export const failure = <T, E>(error: E): Result<T, E> => ({ kind: 'Failure', error })
 
 export const ofNullable = <T, E>(value: T | undefined | null, error: E): Result<T, E> => {
   if (value == null)
@@ -49,11 +49,11 @@ export function apN<A, B, C, D, E, F, G, Err>(
   f: Result<Fun6<A, B, C, D, E, F, G>, Err>,
   a: Result<A, Err>, b: Result<B, Err>, c: Result<C, Err>, d: Result<D, Err>, e: Result<E, Err>, g: Result<F, Err>): Result<G, Err>
 export function apN<Args extends any[], Err, Ret>(f: Result<(...args: Args) => Ret, Err>, ...args: Result<any, Err>[]): Result<Ret, Err> {
-  if (f.kind === 'failure')
+  if (f.kind === 'Failure')
     return f
   for (const a of args)
-    if (a.kind === 'failure') return a
-  const results = mapArray(a => a.value, args as { kind: 'success', value: any }[])
+    if (a.kind === 'Failure') return a
+  const results = mapArray(a => a.value, args as { kind: 'Success', value: any }[])
   return success(f.value(...results as Args))
 }
 
@@ -82,10 +82,10 @@ export function apNWithCombine<Args extends any[], Err, Ret>(
   combineErrors: (e1: Err, e2: Err) => Err,
   ...args: Result<any, Err>[]): Result<Ret, Err> {
   let err: Err | null = null
-  if (f.kind === 'failure')
+  if (f.kind === 'Failure')
     err = f.error
   for (const a of args)
-    if (a.kind === 'failure') {
+    if (a.kind === 'Failure') {
       if (err !== null) {
         err = combineErrors(err, a.error)
       } else {
@@ -95,22 +95,22 @@ export function apNWithCombine<Args extends any[], Err, Ret>(
   if (err !== null) {
     return failure(err)
   } else {
-    const results = mapArray(a => a.value, args as { kind: 'success', value: any }[])
+    const results = mapArray(a => a.value, args as { kind: 'Success', value: any }[])
     return success((f as Success<(...args: Args) => Ret>).value(...results as Args))
   }
 }
 
 export const map = <A, B, Err>(f: (a: A) => B, result: Result<A, Err>): Result<B, Err> => {
   switch (result.kind) {
-    case 'failure': return result
-    case 'success': return success(f(result.value))
+    case 'Failure': return result
+    case 'Success': return success(f(result.value))
   }
 }
 
 export const mapError = <A, E1, E2>(f: (e: E1) => E2, result: Result<A, E1>): Result<A, E2> => {
   switch (result.kind) {
-    case 'failure': return failure(f(result.error))
-    case 'success': return success(result.value)
+    case 'Failure': return failure(f(result.error))
+    case 'Success': return success(result.value)
   }
 }
 
@@ -127,10 +127,10 @@ export function mapN<A, B, C, D, E, F, G, Err>(
   a: Result<A, Err>, b: Result<B, Err>, c: Result<C, Err>, d: Result<D, Err>, e: Result<E, Err>, g: Result<F, Err>): Result<G, Err>
 export function mapN<Args extends any[], Err, Ret>(f: (...args: Args) => Ret, ...args: Result<any, Err>[]): Result<Ret, Err> {
   for (const a of args) {
-    if (a.kind === 'failure')
+    if (a.kind === 'Failure')
       return a
   }
-  const results = mapArray(a => a.value, args as { kind: 'success', value: any }[])
+  const results = mapArray(a => a.value, args as { kind: 'Success', value: any }[])
   return success(f(...results as Args))
 }
 
@@ -161,7 +161,7 @@ export function mapNWithCombine<Args extends any[], Err, Ret>(
 ): Result<Ret, Err> {
   let error: Err | null = null
   for (const a of args) {
-    if (a.kind === 'failure') {
+    if (a.kind === 'Failure') {
       if (error !== null)
         error = combineErrors(error, a.error)
       else
@@ -171,15 +171,15 @@ export function mapNWithCombine<Args extends any[], Err, Ret>(
   if (error !== null) {
     return failure(error)
   } else {
-    const results = mapArray(a => a.value, args as { kind: 'success', value: any }[])
+    const results = mapArray(a => a.value, args as { kind: 'Success', value: any }[])
     return success(f(...results as Args))
   }
 }
 
 export const flatMap = <A, B, Err>(f: (a: A) => Result<B, Err>, result: Result<A, Err>): Result<B, Err> => {
   switch (result.kind) {
-    case 'failure': return result
-    case 'success': return f(result.value)
+    case 'Failure': return result
+    case 'Success': return f(result.value)
   }
 }
 
@@ -203,11 +203,11 @@ export function flatMapN<Args extends any[], Err, Ret>(
   ...args: Result<any, Err>[]
 ): Result<Ret, Err> {
   for (const a of args) {
-    if (a.kind === 'failure') {
+    if (a.kind === 'Failure') {
       return a
     }
   }
-  const results = mapArray(a => a.value, args as { kind: 'success', value: any }[])
+  const results = mapArray(a => a.value, args as { kind: 'Success', value: any }[])
   return f(...results as Args)
 }
 
@@ -238,7 +238,7 @@ export function flatMapNWithCombine<Args extends any[], Err, Ret>(
 ): Result<Ret, Err> {
   let error: Err | null = null
   for (const a of args) {
-    if (a.kind === 'failure') {
+    if (a.kind === 'Failure') {
       if (error !== null)
         error = combineErrors(error, a.error)
       else
@@ -248,7 +248,7 @@ export function flatMapNWithCombine<Args extends any[], Err, Ret>(
   if (error !== null) {
     return failure(error)
   } else {
-    const results = mapArray(a => a.value, args as { kind: 'success', value: any }[])
+    const results = mapArray(a => a.value, args as { kind: 'Success', value: any }[])
     return f(...results as Args)
   }
 }
@@ -256,19 +256,19 @@ export function flatMapNWithCombine<Args extends any[], Err, Ret>(
 export const equals = <T, E>(predicate: (a: T, b: T) => boolean, a: Result<T, E>, b: Result<T, E>): boolean => {
   if (a.kind !== b.kind)
     return false
-  else if (a.kind === 'failure' && b.kind === 'failure')
+  else if (a.kind === 'Failure' && b.kind === 'Failure')
     return true
   else
-    return predicate((a as { kind: 'success', value: T }).value, (b as { kind: 'success', value: T }).value)
+    return predicate((a as { kind: 'Success', value: T }).value, (b as { kind: 'Success', value: T }).value)
 }
 
-export const isFailure = <T, E>(result: Result<T, E>): result is Failure<E> => result.kind === 'failure'
-export const isSuccess = <T, E>(result: Result<T, E>): result is Success<T> => result.kind === 'success'
+export const isFailure = <T, E>(result: Result<T, E>): result is Failure<E> => result.kind === 'Failure'
+export const isSuccess = <T, E>(result: Result<T, E>): result is Success<T> => result.kind === 'Success'
 
 export const filter = <T, E>(predicate: (v: T) => boolean, error: E, result: Result<T, E>): Result<T, E> => {
   switch (result.kind) {
-    case 'failure': return result
-    case 'success':
+    case 'Failure': return result
+    case 'Success':
       if (predicate(result.value)) {
         return result
       } else {
@@ -279,8 +279,8 @@ export const filter = <T, E>(predicate: (v: T) => boolean, error: E, result: Res
 
 export const filterLazy = <T, E>(predicate: (v: T) => boolean, errorf: () => E, result: Result<T, E>): Result<T, E> => {
   switch (result.kind) {
-    case 'failure': return result
-    case 'success':
+    case 'Failure': return result
+    case 'Success':
       if (predicate(result.value)) {
         return result
       } else {
@@ -291,99 +291,99 @@ export const filterLazy = <T, E>(predicate: (v: T) => boolean, errorf: () => E, 
 
 export const getOrThrow = <T, E>(result: Result<T, E>): Maybe<T> => {
   switch (result.kind) {
-    case 'failure': throw result.error
-    case 'success': return result.value
+    case 'Failure': throw result.error
+    case 'Success': return result.value
   }
 }
 
 export const getOrElse = <T, E>(result: Result<T, E>, alt: T): T => {
   switch (result.kind) {
-    case 'failure': return alt
-    case 'success': return result.value
+    case 'Failure': return alt
+    case 'Success': return result.value
   }
 }
 
 export const getOrElseLazy = <T, E>(result: Result<T, E>, alt: () => T): T => {
   switch (result.kind) {
-    case 'failure': return alt()
-    case 'success': return result.value
+    case 'Failure': return alt()
+    case 'Success': return result.value
   }
 }
 
 export const toBoolean = (result: Result<unknown, unknown>) => {
   switch (result.kind) {
-    case 'failure': return false
-    case 'success': return true
+    case 'Failure': return false
+    case 'Success': return true
   }
 }
 
 export const toArray = <T, E>(result: Result<T, E>): T[] => {
   switch (result.kind) {
-    case 'failure': return []
-    case 'success': return [result.value]
+    case 'Failure': return []
+    case 'Success': return [result.value]
   }
 }
 
 export const toMaybe = <T, E>(result: Result<T, E>): Maybe<T> => {
   switch (result.kind) {
-    case 'failure': return nothing
-    case 'success': return just(result.value)
+    case 'Failure': return nothing
+    case 'Success': return just(result.value)
   }
 }
 
 export const toOption = <T, E>(result: Result<T, E>): Option<T> => {
   switch (result.kind) {
-    case 'failure': return none
-    case 'success': return some(result.value)
+    case 'Failure': return none
+    case 'Success': return some(result.value)
   }
 }
 
 export const flatten = <T, E>(result: Result<Result<T, E>, E>): Result<T, E> => {
   switch (result.kind) {
-    case 'failure': return failure(result.error)
-    case 'success': return result.value
+    case 'Failure': return failure(result.error)
+    case 'Success': return result.value
   }
 }
 
 export const cata = <A, B, Err>(f: (a: A) => B, result: Result<A, Err>, ifNone: B): B => {
   switch (result.kind) {
-    case 'failure': return ifNone
-    case 'success': return f(result.value)
+    case 'Failure': return ifNone
+    case 'Success': return f(result.value)
   }
 }
 
 export const cataLazy = <A, B, Err>(f: (a: A) => B, result: Result<A, Err>, ifNone: () => B): B => {
   switch (result.kind) {
-    case 'failure': return ifNone()
-    case 'success': return f(result.value)
+    case 'Failure': return ifNone()
+    case 'Success': return f(result.value)
   }
 }
 
 export const foldLeft = <T, B, Err>(f: (acc: B, curr: T) => B, result: Result<T, Err>, b: B): B => {
   switch (result.kind) {
-    case 'failure': return b
-    case 'success': return f(b, result.value)
+    case 'Failure': return b
+    case 'Success': return f(b, result.value)
   }
 }
 
 export const all = <T, E>(f: (v: T) => boolean, result: Result<T, E>): boolean => {
   switch (result.kind) {
-    case 'failure': return true
-    case 'success': return f(result.value)
+    case 'Failure': return true
+    case 'Success': return f(result.value)
   }
 }
 
 export const any = <T, E>(f: (v: T) => boolean, result: Result<T, E>): boolean => {
   switch (result.kind) {
-    case 'failure': return false
-    case 'success': return f(result.value)
+    case 'Failure': return false
+    case 'Success': return f(result.value)
   }
 }
 
 export const each = <T, E>(f: (v: T) => void, result: Result<T, E>): void => {
   switch (result.kind) {
-    case 'failure': return
-    case 'success': return f(result.value)
+    case 'Failure': return
+    case 'Success': return f(result.value)
   }
 }
 
@@ -393,30 +393,29 @@ export const firstSuccess = <A, Err>(...args: Result<A, Err>[]): Result<A, Err> 
       return a
   }
   for (const a of args) {
-    if (isFailure(a))
-      return a
+    return a
   }
   throw 'cannot use `firstSuccess` with empty argument list'
 }
 
-export const recover = <T, E>(result: Result<T, E>, whenFailure: T) => {
+export const recover = <T, E>(result: Result<T, E>, whenFailure: T): Result<T, E> => {
   switch (result.kind) {
-    case 'failure': return success(whenFailure)
-    case 'success': return result
+    case 'Failure': return success(whenFailure)
+    case 'Success': return result
   }
 }
 
 export const recoverFromError = <T, E>(result: Result<T, E>, whenFailuref: (e: E) => T) => {
   switch (result.kind) {
-    case 'failure': return success(whenFailuref(result.error))
-    case 'success': return result
+    case 'Failure': return success(whenFailuref(result.error))
+    case 'Success': return result
   }
 }
 
 export const swap = <T, E>(result: Result<T, E>): Result<E, T> => {
   switch (result.kind) {
-    case 'failure': return success(result.error)
-    case 'success': return failure(result.value)
+    case 'Failure': return success(result.error)
+    case 'Success': return failure(result.value)
   }
 }
 

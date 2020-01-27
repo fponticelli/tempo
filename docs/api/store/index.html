@@ -1,0 +1,7 @@
+<h1 id="tempostore">tempo-store</h1>
+<p><code>tempo-store</code> contains utilities to wrap a value into a <code>Store</code> instance and track its lifecycle.</p>
+<h2 id="property">Property</h2>
+<p>A <code>Property</code> instance wraps a single generic value of type <code>T</code>. It exposes a field <code>observable</code> where you can add your own listeners. These will be triggered any time <code>Property.set</code> is invoked but only if the value differs from its previous state. To control such behavior it is possible to pass a function <code>equal</code>. The default implementation performs a structural equality test.</p>
+<h2 id="store">Store</h2>
+<p>A <code>Store</code> instance wraps a property and adds a <code>reducer</code> function to the mix. With the <code>reducer</code> it is possible to influence the value of store by invoking <code>process(action: Action)</code>. Whenver that method is called, <code>reducer(currentState: State, action: Action): State</code> is invoked and the value of store is accordinlgy updated. It is possible to monitor state changes and action triggers by adding listeners to the <code>observable</code> field. Note that these listeners should have the shape <code>(state: State, action: Action, changed: boolean) =&gt; void</code>.</p>
+<p>More info on the <code>tempo</code> architecture can be found <a href="https://fponticelli.github.io/tempo/">here</a>.</p>
