@@ -15,13 +15,16 @@ const parseLocation = () => {
   return parseUrl(url)
 }
 
-const store = Store.ofState<State, Action>({ state: makeState(parseLocation()), reducer })
+const store = Store.ofState<State, Action>({
+  state: makeState(parseLocation()),
+  reducer
+})
 
 Tempo.render({ store, template })
 
 store.observable.on(middleware(store))
 
-window.addEventListener('popstate', (e) => {
+window.addEventListener('popstate', e => {
   const route = parseLocation()
   store.process(Action.goTo(route))
 })
