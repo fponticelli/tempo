@@ -157,7 +157,7 @@ function manglePageHref(url: string) {
   return url
 }
 
-async function  createPages(src: string, dst: string) {
+async function createPages(src: string, dst: string) {
   const mdFiles = await listAllMDFiles(src)
   const data = await Promise.all(mdFiles.map(async file => ({
     dest: renameMdToHtml(file),
@@ -240,16 +240,38 @@ async function createApi(project: string, root: string, dst: string): Promise<Ap
     dest: renameMdToHtml(file),
     ...await makeHtml(path.join(p, file), mangleApiHref(project, path.dirname(file)))
   })))
+
+  const mapName: Record<string, string> = {
+    modules: 'module',
+    classes: 'class',
+    interfaces: 'interface',
+    enums: 'enum',
+  }
+
+  data
+    .forEach(d => {
+      const parts = d.dest.split('/')
+      if (parts.length === 1) return
+      delete d.data.sidebar_label
+      const ctx = parts[0]!
+      if (!!mapName[ctx]) {
+        d.data.type = mapName[ctx]
+      } else {
+        console.log(`unkown type ${ctx}`)
+      }
+    })
   await Promise.all(data.map(async o => {
     const p = path.join(dst, project, o.dest)
     const base = path.dirname(p)
     await fse.ensureDir(base)
     await fs.writeFile(p, o.html)
   }))
-  return data.map(d => ({
-    path: d.dest,
-    ...d.data
-  }))
+  return data
+    .filter(d => !!d.data.type)
+    .map(d => ({
+      path: d.dest,
+      ...d.data
+    }))
 }
 
 async function createApis(projects: string[], root: string, dst: string): Promise<Record<string, ApiRef[]>> {

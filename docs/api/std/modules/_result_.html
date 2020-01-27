@@ -55,7 +55,7 @@
 <h4 id="typedeclaration">Type declaration:</h4>
 <ul>
 <li><p><strong>error</strong>: <em>E</em></p></li>
-<li><p><strong>kind</strong>: <em>"failure"</em></p></li>
+<li><p><strong>kind</strong>: <em>"Failure"</em></p></li>
 </ul>
 <hr>
 <h3 id="result">Result</h3>
@@ -67,13 +67,13 @@
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L19">result.ts:19</a></em></p>
 <h4 id="typedeclaration-1">Type declaration:</h4>
 <ul>
-<li><p><strong>kind</strong>: <em>"success"</em></p></li>
+<li><p><strong>kind</strong>: <em>"Success"</em></p></li>
 <li><p><strong>value</strong>: <em>T</em></p></li>
 </ul>
 <hr>
 <h3 id="t">T</h3>
 <p>Ƭ <strong>T</strong>: <em><a href="#/api/std/modules/_result_.html#result">Result</a>‹V, E›</em></p>
-<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L429">result.ts:429</a></em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L428">result.ts:428</a></em></p>
 <h2 id="functions-1">Functions</h2>
 <h3 id="constall"><code>Const</code> all</h3>
 <p>▸ <strong>all</strong>&lt;<strong>T</strong>, <strong>E</strong>&gt;(<code>f</code>: function, <code>result</code>: <a href="#/api/std/modules/_result_.html#result">Result</a>‹T, E›): <em>boolean</em></p>
@@ -612,7 +612,7 @@
 <hr>
 <h3 id="constcombine"><code>Const</code> combine</h3>
 <p>▸ <strong>combine</strong>&lt;<strong>A</strong>, <strong>B</strong>, <strong>Err</strong>&gt;(<code>a</code>: <a href="#/api/std/modules/_result_.html#result">Result</a>‹A, Err›, <code>b</code>: <a href="#/api/std/modules/_result_.html#result">Result</a>‹B, Err›): <em><a href="#/api/std/modules/_result_.html#result">Result</a>‹[A, B], Err›</em></p>
-<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L423">result.ts:423</a></em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L422">result.ts:422</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>A</strong></p>
 <p>▪ <strong>B</strong></p>
@@ -1864,8 +1864,8 @@
 <p><strong>Returns:</strong> <em><a href="#/api/std/modules/_result_.html#result">Result</a>‹T, E›</em></p>
 <hr>
 <h3 id="constrecover"><code>Const</code> recover</h3>
-<p>▸ <strong>recover</strong>&lt;<strong>T</strong>, <strong>E</strong>&gt;(<code>result</code>: <a href="#/api/std/modules/_result_.html#result">Result</a>‹T, E›, <code>whenFailure</code>: T): <em>object | object</em></p>
-<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L402">result.ts:402</a></em></p>
+<p>▸ <strong>recover</strong>&lt;<strong>T</strong>, <strong>E</strong>&gt;(<code>result</code>: <a href="#/api/std/modules/_result_.html#result">Result</a>‹T, E›, <code>whenFailure</code>: T): <em><a href="#/api/std/modules/_result_.html#result">Result</a>‹T, E›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L401">result.ts:401</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>T</strong></p>
 <p>▪ <strong>E</strong></p>
@@ -1888,11 +1888,11 @@
 </tr>
 </tbody>
 </table>
-<p><strong>Returns:</strong> <em>object | object</em></p>
+<p><strong>Returns:</strong> <em><a href="#/api/std/modules/_result_.html#result">Result</a>‹T, E›</em></p>
 <hr>
 <h3 id="constrecoverfromerror"><code>Const</code> recoverFromError</h3>
 <p>▸ <strong>recoverFromError</strong>&lt;<strong>T</strong>, <strong>E</strong>&gt;(<code>result</code>: <a href="#/api/std/modules/_result_.html#result">Result</a>‹T, E›, <code>whenFailuref</code>: function): <em>object | object</em></p>
-<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L409">result.ts:409</a></em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L408">result.ts:408</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>T</strong></p>
 <p>▪ <strong>E</strong></p>
@@ -1919,7 +1919,7 @@
 <hr>
 <h3 id="constspread"><code>Const</code> spread</h3>
 <p>▸ <strong>spread</strong>&lt;<strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>Err</strong>&gt;(<code>f</code>: function, <code>v</code>: <a href="#/api/std/modules/_result_.html#result">Result</a>‹[A, B], Err›): <em><a href="#/api/std/modules/_result_.html#result">Result</a>‹C, Err›</em></p>
-<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L426">result.ts:426</a></em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L425">result.ts:425</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>A</strong></p>
 <p>▪ <strong>B</strong></p>
@@ -1975,7 +1975,7 @@
 <hr>
 <h3 id="constswap"><code>Const</code> swap</h3>
 <p>▸ <strong>swap</strong>&lt;<strong>T</strong>, <strong>E</strong>&gt;(<code>result</code>: <a href="#/api/std/modules/_result_.html#result">Result</a>‹T, E›): <em><a href="#/api/std/modules/_result_.html#result">Result</a>‹E, T›</em></p>
-<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L416">result.ts:416</a></em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L415">result.ts:415</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>T</strong></p>
 <p>▪ <strong>E</strong></p>

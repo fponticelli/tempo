@@ -1,5 +1,5 @@
 {
-  "mode": "modules",
+  "mode": "file",
   "excludeNotExported": true,
   "excludePrivate": true,
   "includeVersion": true,
@@ -7,5 +7,6 @@
   "hideGenerator": true,
   "theme": "docusaurus",
   "gitRevision": "master",
-  "hideBreadcrumbs": false
+  "hideBreadcrumbs": false,
+  "disableOutputCheck": true
 }

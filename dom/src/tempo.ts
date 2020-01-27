@@ -22,8 +22,8 @@ export type TempoView<State, Action, Query> = Readonly<{
   store: Store<State, Action>
 }>
 
-export module Tempo {
-  export function renderComponent<State, Action, Query = unknown>(options: {
+export const Tempo = {
+  renderComponent<State, Action, Query = unknown>(options: {
     el?: HTMLElement
     component: DOMComponentTemplate<State, Action, Query>
     document?: Document
@@ -47,9 +47,9 @@ export module Tempo {
       view,
       store
     }
-  }
+  },
 
-  export function render<State, Action, Query = unknown>(options: {
+  render<State, Action, Query = unknown>(options: {
     el?: HTMLElement
     template: DOMChild<State, Action, Query>
     store: Store<State, Action>

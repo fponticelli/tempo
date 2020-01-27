@@ -9,14 +9,19 @@
 <h3 id="functions">Functions</h3>
 <ul>
 <li><a href="#/api/dom/modules/_match_.html#const-match">match</a></li>
+<li><a href="#/api/dom/modules/_match_.html#const-matchasync">matchAsync</a></li>
+<li><a href="#/api/dom/modules/_match_.html#const-matchasyncresult">matchAsyncResult</a></li>
 <li><a href="#/api/dom/modules/_match_.html#const-matchbool">matchBool</a></li>
 <li><a href="#/api/dom/modules/_match_.html#const-matchkind">matchKind</a></li>
+<li><a href="#/api/dom/modules/_match_.html#const-matchmaybe">matchMaybe</a></li>
+<li><a href="#/api/dom/modules/_match_.html#const-matchoption">matchOption</a></li>
+<li><a href="#/api/dom/modules/_match_.html#const-matchresult">matchResult</a></li>
 <li><a href="#/api/dom/modules/_match_.html#const-matchvalue">matchValue</a></li>
 </ul>
 <h2 id="functions-1">Functions</h2>
 <h3 id="constmatch"><code>Const</code> match</h3>
 <p>▸ <strong>match</strong>&lt;<strong>Path</strong>, <strong>State</strong>, <strong>Action</strong>, <strong>Query</strong>&gt;(<code>path</code>: Path, <code>matcher</code>: object, <code>refId?</code>: undefined | string): <em><a href="#/api/dom/interfaces/_template_.domtemplate.html">DOMTemplate</a>‹State, Action, Query›</em></p>
-<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/match.ts#L61">dom/src/match.ts:61</a></em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/match.ts#L68">dom/src/match.ts:68</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>Path</strong>: <em>IndexType[]</em></p>
 <p>▪ <strong>State</strong>: <em>ObjectWithPath‹Path, any›</em></p>
@@ -47,9 +52,84 @@
 </table>
 <p><strong>Returns:</strong> <em><a href="#/api/dom/interfaces/_template_.domtemplate.html">DOMTemplate</a>‹State, Action, Query›</em></p>
 <hr>
+<h3 id="constmatchasync"><code>Const</code> matchAsync</h3>
+<p>▸ <strong>matchAsync</strong>&lt;<strong>State</strong>, <strong>Progress</strong>, <strong>Action</strong>, <strong>Query</strong>&gt;(<code>matchers</code>: object, <code>refId</code>: string): <em><a href="#/api/dom/interfaces/_template_.domtemplate.html">DOMTemplate</a>‹Async‹State, Progress›, Action, Query›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/match.ts#L255">dom/src/match.ts:255</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>State</strong></p>
+<p>▪ <strong>Progress</strong></p>
+<p>▪ <strong>Action</strong></p>
+<p>▪ <strong>Query</strong></p>
+<p><strong>Parameters:</strong></p>
+<p>▪ <strong>matchers</strong>: <em>object</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Loading</code></td>
+<td><a href="#/api/dom/modules/_template_.html#domchild">DOMChild</a>‹Progress, Action, Query›</td>
+</tr>
+<tr>
+<td><code>NotAsked</code></td>
+<td><a href="#/api/dom/modules/_template_.html#domchild">DOMChild</a>‹unknown, Action, Query›</td>
+</tr>
+<tr>
+<td><code>Outcome</code></td>
+<td><a href="#/api/dom/modules/_template_.html#domchild">DOMChild</a>‹State, Action, Query›</td>
+</tr>
+</tbody>
+</table>
+<p>▪<code>Default value</code>  <strong>refId</strong>: <em>string</em>= "t-match-async"</p>
+<p><strong>Returns:</strong> <em><a href="#/api/dom/interfaces/_template_.domtemplate.html">DOMTemplate</a>‹Async‹State, Progress›, Action, Query›</em></p>
+<hr>
+<h3 id="constmatchasyncresult"><code>Const</code> matchAsyncResult</h3>
+<p>▸ <strong>matchAsyncResult</strong>&lt;<strong>State</strong>, <strong>Error</strong>, <strong>Progress</strong>, <strong>Action</strong>, <strong>Query</strong>&gt;(<code>matchers</code>: object, <code>refId</code>: string): <em><a href="#/api/dom/interfaces/_template_.domtemplate.html">DOMTemplate</a>‹AsyncResult‹State, Error, Progress›, Action, Query›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/match.ts#L270">dom/src/match.ts:270</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>State</strong></p>
+<p>▪ <strong>Error</strong></p>
+<p>▪ <strong>Progress</strong></p>
+<p>▪ <strong>Action</strong></p>
+<p>▪ <strong>Query</strong></p>
+<p><strong>Parameters:</strong></p>
+<p>▪ <strong>matchers</strong>: <em>object</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Failure</code></td>
+<td><a href="#/api/dom/modules/_template_.html#domchild">DOMChild</a>‹Error, Action, Query›</td>
+</tr>
+<tr>
+<td><code>Loading</code></td>
+<td><a href="#/api/dom/modules/_template_.html#domchild">DOMChild</a>‹Progress, Action, Query›</td>
+</tr>
+<tr>
+<td><code>NotAsked</code></td>
+<td><a href="#/api/dom/modules/_template_.html#domchild">DOMChild</a>‹unknown, Action, Query›</td>
+</tr>
+<tr>
+<td><code>Success</code></td>
+<td><a href="#/api/dom/modules/_template_.html#domchild">DOMChild</a>‹State, Action, Query›</td>
+</tr>
+</tbody>
+</table>
+<p>▪<code>Default value</code>  <strong>refId</strong>: <em>string</em>= "t-match-async-result"</p>
+<p><strong>Returns:</strong> <em><a href="#/api/dom/interfaces/_template_.domtemplate.html">DOMTemplate</a>‹AsyncResult‹State, Error, Progress›, Action, Query›</em></p>
+<hr>
 <h3 id="constmatchbool"><code>Const</code> matchBool</h3>
 <p>▸ <strong>matchBool</strong>&lt;<strong>State</strong>, <strong>Action</strong>, <strong>Query</strong>&gt;(<code>options</code>: object): <em><a href="#/api/dom/interfaces/_template_.domtemplate.html">DOMTemplate</a>‹State, Action, Query›</em></p>
-<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/match.ts#L133">dom/src/match.ts:133</a></em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/match.ts#L142">dom/src/match.ts:142</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>State</strong></p>
 <p>▪ <strong>Action</strong></p>
@@ -66,7 +146,7 @@
 <tbody>
 <tr>
 <td><code>condition</code></td>
-<td>function</td>
+<td><a href="#/api/dom/modules/_value_.html#domattribute">DOMAttribute</a>‹State, boolean›</td>
 </tr>
 <tr>
 <td><code>false</code></td>
@@ -85,8 +165,8 @@
 <p><strong>Returns:</strong> <em><a href="#/api/dom/interfaces/_template_.domtemplate.html">DOMTemplate</a>‹State, Action, Query›</em></p>
 <hr>
 <h3 id="constmatchkind"><code>Const</code> matchKind</h3>
-<p>▸ <strong>matchKind</strong>&lt;<strong>State</strong>, <strong>Action</strong>, <strong>Query</strong>&gt;(<code>matchers</code>: object): <em><a href="#/api/dom/interfaces/_template_.domtemplate.html">DOMTemplate</a>‹State, Action, Query›</em></p>
-<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/match.ts#L87">dom/src/match.ts:87</a></em></p>
+<p>▸ <strong>matchKind</strong>&lt;<strong>State</strong>, <strong>Action</strong>, <strong>Query</strong>&gt;(<code>matchers</code>: object, <code>refId</code>: string): <em><a href="#/api/dom/interfaces/_template_.domtemplate.html">DOMTemplate</a>‹State, Action, Query›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/match.ts#L94">dom/src/match.ts:94</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>State</strong>: <em>ObjectWithField‹"kind", any›</em></p>
 <p>▪ <strong>Action</strong></p>
@@ -97,20 +177,118 @@
 <tr>
 <th>Name</th>
 <th>Type</th>
+<th>Default</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>matchers</code></td>
 <td>object</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>refId</code></td>
+<td>string</td>
+<td>"t-match-kind"</td>
 </tr>
 </tbody>
 </table>
 <p><strong>Returns:</strong> <em><a href="#/api/dom/interfaces/_template_.domtemplate.html">DOMTemplate</a>‹State, Action, Query›</em></p>
 <hr>
+<h3 id="constmatchmaybe"><code>Const</code> matchMaybe</h3>
+<p>▸ <strong>matchMaybe</strong>&lt;<strong>State</strong>, <strong>Action</strong>, <strong>Query</strong>&gt;(<code>matchers</code>: object, <code>refId</code>: string): <em><a href="#/api/dom/interfaces/_template_.domtemplate.html">DOMTemplate</a>‹Maybe‹State›, Action, Query›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/match.ts#L227">dom/src/match.ts:227</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>State</strong></p>
+<p>▪ <strong>Action</strong></p>
+<p>▪ <strong>Query</strong></p>
+<p><strong>Parameters:</strong></p>
+<p>▪ <strong>matchers</strong>: <em>object</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Just</code></td>
+<td><a href="#/api/dom/modules/_template_.html#domchild">DOMChild</a>‹State, Action, Query›</td>
+</tr>
+<tr>
+<td><code>Nothing?</code></td>
+<td><a href="#/api/dom/modules/_template_.html#domchild">DOMChild</a>‹unknown, Action, Query›</td>
+</tr>
+</tbody>
+</table>
+<p>▪<code>Default value</code>  <strong>refId</strong>: <em>string</em>= "t-match-option"</p>
+<p><strong>Returns:</strong> <em><a href="#/api/dom/interfaces/_template_.domtemplate.html">DOMTemplate</a>‹Maybe‹State›, Action, Query›</em></p>
+<hr>
+<h3 id="constmatchoption"><code>Const</code> matchOption</h3>
+<p>▸ <strong>matchOption</strong>&lt;<strong>State</strong>, <strong>Action</strong>, <strong>Query</strong>&gt;(<code>matchers</code>: object, <code>refId</code>: string): <em><a href="#/api/dom/interfaces/_template_.domtemplate.html">DOMTemplate</a>‹Option‹State›, Action, Query›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/match.ts#L217">dom/src/match.ts:217</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>State</strong></p>
+<p>▪ <strong>Action</strong></p>
+<p>▪ <strong>Query</strong></p>
+<p><strong>Parameters:</strong></p>
+<p>▪ <strong>matchers</strong>: <em>object</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>None</code></td>
+<td><a href="#/api/dom/modules/_template_.html#domchild">DOMChild</a>‹unknown, Action, Query›</td>
+</tr>
+<tr>
+<td><code>Some</code></td>
+<td><a href="#/api/dom/modules/_template_.html#domchild">DOMChild</a>‹State, Action, Query›</td>
+</tr>
+</tbody>
+</table>
+<p>▪<code>Default value</code>  <strong>refId</strong>: <em>string</em>= "t-match-option"</p>
+<p><strong>Returns:</strong> <em><a href="#/api/dom/interfaces/_template_.domtemplate.html">DOMTemplate</a>‹Option‹State›, Action, Query›</em></p>
+<hr>
+<h3 id="constmatchresult"><code>Const</code> matchResult</h3>
+<p>▸ <strong>matchResult</strong>&lt;<strong>State</strong>, <strong>Error</strong>, <strong>Action</strong>, <strong>Query</strong>&gt;(<code>matchers</code>: object, <code>refId</code>: string): <em><a href="#/api/dom/interfaces/_template_.domtemplate.html">DOMTemplate</a>‹Result‹State, Error›, Action, Query›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/match.ts#L242">dom/src/match.ts:242</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>State</strong></p>
+<p>▪ <strong>Error</strong></p>
+<p>▪ <strong>Action</strong></p>
+<p>▪ <strong>Query</strong></p>
+<p><strong>Parameters:</strong></p>
+<p>▪ <strong>matchers</strong>: <em>object</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Failure</code></td>
+<td><a href="#/api/dom/modules/_template_.html#domchild">DOMChild</a>‹Error, Action, Query›</td>
+</tr>
+<tr>
+<td><code>Success</code></td>
+<td><a href="#/api/dom/modules/_template_.html#domchild">DOMChild</a>‹State, Action, Query›</td>
+</tr>
+</tbody>
+</table>
+<p>▪<code>Default value</code>  <strong>refId</strong>: <em>string</em>= "t-match-result"</p>
+<p><strong>Returns:</strong> <em><a href="#/api/dom/interfaces/_template_.domtemplate.html">DOMTemplate</a>‹Result‹State, Error›, Action, Query›</em></p>
+<hr>
 <h3 id="constmatchvalue"><code>Const</code> matchValue</h3>
 <p>▸ <strong>matchValue</strong>&lt;<strong>Path</strong>, <strong>State</strong>, <strong>Action</strong>, <strong>Query</strong>&gt;(<code>path</code>: Path, <code>matchers</code>: object, <code>orElse</code>: <a href="#/api/dom/modules/_template_.html#domchild">DOMChild</a>‹State, Action, Query›, <code>refId?</code>: undefined | string): <em><a href="#/api/dom/interfaces/_template_.domtemplate.html">DOMTemplate</a>‹State, Action, Query›</em></p>
-<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/match.ts#L189">dom/src/match.ts:189</a></em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/match.ts#L198">dom/src/match.ts:198</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>Path</strong>: <em>IndexType[]</em></p>
 <p>▪ <strong>State</strong>: <em>ObjectWithPath‹Path, string›</em></p>

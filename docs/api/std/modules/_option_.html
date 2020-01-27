@@ -31,6 +31,7 @@
 <li><a href="#/api/std/modules/_option_.html#const-getorelse">getOrElse</a></li>
 <li><a href="#/api/std/modules/_option_.html#const-getorelselazy">getOrElseLazy</a></li>
 <li><a href="#/api/std/modules/_option_.html#const-getorthrow">getOrThrow</a></li>
+<li><a href="#/api/std/modules/_option_.html#const-getunsafe">getUnsafe</a></li>
 <li><a href="#/api/std/modules/_option_.html#const-isnone">isNone</a></li>
 <li><a href="#/api/std/modules/_option_.html#const-issome">isSome</a></li>
 <li><a href="#/api/std/modules/_option_.html#const-map">map</a></li>
@@ -52,7 +53,7 @@
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L20">option.ts:20</a></em></p>
 <h4 id="typedeclaration">Type declaration:</h4>
 <ul>
-<li><strong>kind</strong>: <em>"none"</em></li>
+<li><strong>kind</strong>: <em>"None"</em></li>
 </ul>
 <hr>
 <h3 id="option">Option</h3>
@@ -64,21 +65,21 @@
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L19">option.ts:19</a></em></p>
 <h4 id="typedeclaration-1">Type declaration:</h4>
 <ul>
-<li><p><strong>kind</strong>: <em>"some"</em></p></li>
+<li><p><strong>kind</strong>: <em>"Some"</em></p></li>
 <li><p><strong>value</strong>: <em>T</em></p></li>
 </ul>
 <hr>
 <h3 id="t">T</h3>
 <p>Ƭ <strong>T</strong>: <em><a href="#/api/std/modules/_option_.html#option">Option</a>‹V›</em></p>
-<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L263">option.ts:263</a></em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L266">option.ts:266</a></em></p>
 <h2 id="variables-1">Variables</h2>
 <h3 id="constnone"><code>Const</code> none</h3>
-<p>• <strong>none</strong>: <em>object | object</em> = { kind: 'none' } as Option<never></never></p>
+<p>• <strong>none</strong>: <em>object | object</em> = { kind: 'None' } as Option<never></never></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L27">option.ts:27</a></em></p>
 <h2 id="functions-1">Functions</h2>
 <h3 id="constall"><code>Const</code> all</h3>
 <p>▸ <strong>all</strong>&lt;<strong>T</strong>&gt;(<code>f</code>: function, <code>option</code>: <a href="#/api/std/modules/_option_.html#option">Option</a>‹T›): <em>boolean</em></p>
-<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L214">option.ts:214</a></em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L217">option.ts:217</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>T</strong></p>
 <p><strong>Parameters:</strong></p>
@@ -104,7 +105,7 @@
 <hr>
 <h3 id="constany"><code>Const</code> any</h3>
 <p>▸ <strong>any</strong>&lt;<strong>T</strong>&gt;(<code>f</code>: function, <code>option</code>: <a href="#/api/std/modules/_option_.html#option">Option</a>‹T›): <em>boolean</em></p>
-<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L221">option.ts:221</a></em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L224">option.ts:224</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>T</strong></p>
 <p><strong>Parameters:</strong></p>
@@ -359,7 +360,7 @@
 <hr>
 <h3 id="constcata"><code>Const</code> cata</h3>
 <p>▸ <strong>cata</strong>&lt;<strong>A</strong>, <strong>B</strong>&gt;(<code>f</code>: function, <code>option</code>: <a href="#/api/std/modules/_option_.html#option">Option</a>‹A›, <code>ifNone</code>: B): <em>B</em></p>
-<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L193">option.ts:193</a></em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L196">option.ts:196</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>A</strong></p>
 <p>▪ <strong>B</strong></p>
@@ -387,7 +388,7 @@
 <hr>
 <h3 id="constcatalazy"><code>Const</code> cataLazy</h3>
 <p>▸ <strong>cataLazy</strong>&lt;<strong>A</strong>, <strong>B</strong>&gt;(<code>f</code>: function, <code>option</code>: <a href="#/api/std/modules/_option_.html#option">Option</a>‹A›, <code>ifNone</code>: function): <em>B</em></p>
-<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L200">option.ts:200</a></em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L203">option.ts:203</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>A</strong></p>
 <p>▪ <strong>B</strong></p>
@@ -416,7 +417,7 @@
 <hr>
 <h3 id="constcombine"><code>Const</code> combine</h3>
 <p>▸ <strong>combine</strong>&lt;<strong>A</strong>, <strong>B</strong>&gt;(<code>a</code>: <a href="#/api/std/modules/_option_.html#option">Option</a>‹A›, <code>b</code>: <a href="#/api/std/modules/_option_.html#option">Option</a>‹B›): <em><a href="#/api/std/modules/_option_.html#option">Option</a>‹[A, B]›</em></p>
-<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L257">option.ts:257</a></em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L260">option.ts:260</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>A</strong></p>
 <p>▪ <strong>B</strong></p>
@@ -443,7 +444,7 @@
 <hr>
 <h3 id="consteach"><code>Const</code> each</h3>
 <p>▸ <strong>each</strong>&lt;<strong>T</strong>&gt;(<code>f</code>: function, <code>option</code>: <a href="#/api/std/modules/_option_.html#option">Option</a>‹T›): <em>void</em></p>
-<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L228">option.ts:228</a></em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L231">option.ts:231</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>T</strong></p>
 <p><strong>Parameters:</strong></p>
@@ -526,7 +527,7 @@
 <hr>
 <h3 id="constfirstsome"><code>Const</code> firstSome</h3>
 <p>▸ <strong>firstSome</strong>&lt;<strong>A</strong>&gt;(…<code>args</code>: <a href="#/api/std/modules/_option_.html#option">Option</a>‹A›[]): <em><a href="#/api/std/modules/_option_.html#option">Option</a>‹A›</em></p>
-<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L235">option.ts:235</a></em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L238">option.ts:238</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>A</strong></p>
 <p><strong>Parameters:</strong></p>
@@ -777,7 +778,7 @@
 <hr>
 <h3 id="constflatten"><code>Const</code> flatten</h3>
 <p>▸ <strong>flatten</strong>&lt;<strong>T</strong>&gt;(<code>option</code>: <a href="#/api/std/modules/_option_.html#option">Option</a>‹<a href="#/api/std/modules/_option_.html#option">Option</a>‹T››): <em><a href="#/api/std/modules/_option_.html#option">Option</a>‹T›</em></p>
-<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L186">option.ts:186</a></em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L189">option.ts:189</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>T</strong></p>
 <p><strong>Parameters:</strong></p>
@@ -799,7 +800,7 @@
 <hr>
 <h3 id="constfoldleft"><code>Const</code> foldLeft</h3>
 <p>▸ <strong>foldLeft</strong>&lt;<strong>T</strong>, <strong>B</strong>&gt;(<code>f</code>: function, <code>option</code>: <a href="#/api/std/modules/_option_.html#option">Option</a>‹T›, <code>b</code>: B): <em>B</em></p>
-<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L207">option.ts:207</a></em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L210">option.ts:210</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>T</strong></p>
 <p>▪ <strong>B</strong></p>
@@ -831,7 +832,7 @@
 <hr>
 <h3 id="constgetorelse"><code>Const</code> getOrElse</h3>
 <p>▸ <strong>getOrElse</strong>&lt;<strong>T</strong>&gt;(<code>option</code>: <a href="#/api/std/modules/_option_.html#option">Option</a>‹T›, <code>alt</code>: T): <em>T</em></p>
-<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L144">option.ts:144</a></em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L147">option.ts:147</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>T</strong></p>
 <p><strong>Parameters:</strong></p>
@@ -857,7 +858,7 @@
 <hr>
 <h3 id="constgetorelselazy"><code>Const</code> getOrElseLazy</h3>
 <p>▸ <strong>getOrElseLazy</strong>&lt;<strong>T</strong>&gt;(<code>option</code>: <a href="#/api/std/modules/_option_.html#option">Option</a>‹T›, <code>alt</code>: function): <em>T</em></p>
-<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L151">option.ts:151</a></em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L154">option.ts:154</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>T</strong></p>
 <p><strong>Parameters:</strong></p>
@@ -867,7 +868,7 @@
 <p><strong>Returns:</strong> <em>T</em></p>
 <hr>
 <h3 id="constgetorthrow"><code>Const</code> getOrThrow</h3>
-<p>▸ <strong>getOrThrow</strong>&lt;<strong>T</strong>, <strong>E</strong>&gt;(<code>option</code>: <a href="#/api/std/modules/_option_.html#option">Option</a>‹T›, <code>exception</code>: E): <em><a href="#/api/std/modules/_maybe_.html#maybe">Maybe</a>‹T›</em></p>
+<p>▸ <strong>getOrThrow</strong>&lt;<strong>T</strong>, <strong>E</strong>&gt;(<code>option</code>: <a href="#/api/std/modules/_option_.html#option">Option</a>‹T›, <code>exception</code>: E): <em>T</em></p>
 <p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L130">option.ts:130</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>T</strong></p>
@@ -891,7 +892,29 @@
 </tr>
 </tbody>
 </table>
-<p><strong>Returns:</strong> <em><a href="#/api/std/modules/_maybe_.html#maybe">Maybe</a>‹T›</em></p>
+<p><strong>Returns:</strong> <em>T</em></p>
+<hr>
+<h3 id="constgetunsafe"><code>Const</code> getUnsafe</h3>
+<p>▸ <strong>getUnsafe</strong>&lt;<strong>T</strong>&gt;(<code>option</code>: <a href="#/api/std/modules/_option_.html#option">Option</a>‹T›): <em>T</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L144">option.ts:144</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>T</strong></p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>option</code></td>
+<td><a href="#/api/std/modules/_option_.html#option">Option</a>‹T›</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong> <em>T</em></p>
 <hr>
 <h3 id="constisnone"><code>Const</code> isNone</h3>
 <p>▸ <strong>isNone</strong>&lt;<strong>T</strong>&gt;(<code>option</code>: <a href="#/api/std/modules/_option_.html#option">Option</a>‹T›): <em>option is None</em></p>
@@ -1190,7 +1213,7 @@
 <hr>
 <h3 id="constrecover"><code>Const</code> recover</h3>
 <p>▸ <strong>recover</strong>&lt;<strong>T</strong>&gt;(<code>result</code>: <a href="#/api/std/modules/_option_.html#option">Option</a>‹T›, <code>whenFailure</code>: T): <em>object | object</em></p>
-<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L243">option.ts:243</a></em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L246">option.ts:246</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>T</strong></p>
 <p><strong>Parameters:</strong></p>
@@ -1216,7 +1239,7 @@
 <hr>
 <h3 id="constrecoverlazy"><code>Const</code> recoverLazy</h3>
 <p>▸ <strong>recoverLazy</strong>&lt;<strong>T</strong>&gt;(<code>result</code>: <a href="#/api/std/modules/_option_.html#option">Option</a>‹T›, <code>whenFailuref</code>: function): <em>object | object</em></p>
-<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L250">option.ts:250</a></em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L253">option.ts:253</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>T</strong></p>
 <p><strong>Parameters:</strong></p>
@@ -1249,7 +1272,7 @@
 <hr>
 <h3 id="constspread"><code>Const</code> spread</h3>
 <p>▸ <strong>spread</strong>&lt;<strong>A</strong>, <strong>B</strong>, <strong>C</strong>&gt;(<code>f</code>: function, <code>v</code>: <a href="#/api/std/modules/_option_.html#option">Option</a>‹[A, B]›): <em><a href="#/api/std/modules/_option_.html#option">Option</a>‹C›</em></p>
-<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L260">option.ts:260</a></em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L263">option.ts:263</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>A</strong></p>
 <p>▪ <strong>B</strong></p>
@@ -1281,7 +1304,7 @@
 <hr>
 <h3 id="consttoarray"><code>Const</code> toArray</h3>
 <p>▸ <strong>toArray</strong>&lt;<strong>T</strong>&gt;(<code>option</code>: <a href="#/api/std/modules/_option_.html#option">Option</a>‹T›): <em>T[]</em></p>
-<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L165">option.ts:165</a></em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L168">option.ts:168</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>T</strong></p>
 <p><strong>Parameters:</strong></p>
@@ -1303,7 +1326,7 @@
 <hr>
 <h3 id="consttoboolean"><code>Const</code> toBoolean</h3>
 <p>▸ <strong>toBoolean</strong>(<code>option</code>: <a href="#/api/std/modules/_option_.html#option">Option</a>‹unknown›): <em>boolean</em></p>
-<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L158">option.ts:158</a></em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L161">option.ts:161</a></em></p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -1345,7 +1368,7 @@
 <hr>
 <h3 id="consttoresult"><code>Const</code> toResult</h3>
 <p>▸ <strong>toResult</strong>&lt;<strong>T</strong>, <strong>E</strong>&gt;(<code>option</code>: <a href="#/api/std/modules/_option_.html#option">Option</a>‹T›, <code>error</code>: E): <em><a href="#/api/std/modules/_result_.html#result">Result</a>‹T, E›</em></p>
-<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L172">option.ts:172</a></em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L175">option.ts:175</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>T</strong></p>
 <p>▪ <strong>E</strong></p>
@@ -1372,7 +1395,7 @@
 <hr>
 <h3 id="consttoresultlazy"><code>Const</code> toResultLazy</h3>
 <p>▸ <strong>toResultLazy</strong>&lt;<strong>T</strong>, <strong>E</strong>&gt;(<code>option</code>: <a href="#/api/std/modules/_option_.html#option">Option</a>‹T›, <code>errorf</code>: function): <em><a href="#/api/std/modules/_result_.html#result">Result</a>‹T, E›</em></p>
-<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L179">option.ts:179</a></em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L182">option.ts:182</a></em></p>
 <p><strong>Type parameters:</strong></p>
 <p>▪ <strong>T</strong></p>
 <p>▪ <strong>E</strong></p>

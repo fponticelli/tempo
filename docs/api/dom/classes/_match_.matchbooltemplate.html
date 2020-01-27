@@ -29,11 +29,8 @@
 </ul>
 <h2 id="constructors-1">Constructors</h2>
 <h3 id="constructor-NaN">constructor</h3>
-<p>+ <strong>new MatchBoolTemplate</strong>(<code>condition</code>: function, <code>trueTemplate</code>: <a href="#/api/dom/interfaces/_template_.domtemplate.html">DOMTemplate</a>‹State, Action, Query›, <code>falseTemplate</code>: <a href="#/api/dom/interfaces/_template_.domtemplate.html">DOMTemplate</a>‹State, Action, Query›, <code>refId</code>: string): <em><a href="#/api/dom/classes/_match_.matchbooltemplate.html">MatchBoolTemplate</a></em></p>
-<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/match.ts#L97">dom/src/match.ts:97</a></em></p>
-<p><strong>Parameters:</strong></p>
-<p>▪ <strong>condition</strong>: <em>function</em></p>
-<p>▸ (<code>state</code>: State): <em>boolean</em></p>
+<p>+ <strong>new MatchBoolTemplate</strong>(<code>condition</code>: <a href="#/api/dom/modules/_value_.html#domattribute">DOMAttribute</a>‹State, boolean›, <code>trueTemplate</code>: <a href="#/api/dom/interfaces/_template_.domtemplate.html">DOMTemplate</a>‹State, Action, Query›, <code>falseTemplate</code>: <a href="#/api/dom/interfaces/_template_.domtemplate.html">DOMTemplate</a>‹State, Action, Query›, <code>refId</code>: string): <em><a href="#/api/dom/classes/_match_.matchbooltemplate.html">MatchBoolTemplate</a></em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/match.ts#L105">dom/src/match.ts:105</a></em></p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -44,52 +41,44 @@
 </thead>
 <tbody>
 <tr>
-<td><code>state</code></td>
-<td>State</td>
+<td><code>condition</code></td>
+<td><a href="#/api/dom/modules/_value_.html#domattribute">DOMAttribute</a>‹State, boolean›</td>
+</tr>
+<tr>
+<td><code>trueTemplate</code></td>
+<td><a href="#/api/dom/interfaces/_template_.domtemplate.html">DOMTemplate</a>‹State, Action, Query›</td>
+</tr>
+<tr>
+<td><code>falseTemplate</code></td>
+<td><a href="#/api/dom/interfaces/_template_.domtemplate.html">DOMTemplate</a>‹State, Action, Query›</td>
+</tr>
+<tr>
+<td><code>refId</code></td>
+<td>string</td>
 </tr>
 </tbody>
 </table>
-<p>▪ <strong>trueTemplate</strong>: <em><a href="#/api/dom/interfaces/_template_.domtemplate.html">DOMTemplate</a>‹State, Action, Query›</em></p>
-<p>▪ <strong>falseTemplate</strong>: <em><a href="#/api/dom/interfaces/_template_.domtemplate.html">DOMTemplate</a>‹State, Action, Query›</em></p>
-<p>▪ <strong>refId</strong>: <em>string</em></p>
 <p><strong>Returns:</strong> <em><a href="#/api/dom/classes/_match_.matchbooltemplate.html">MatchBoolTemplate</a></em></p>
 <h2 id="properties-1">Properties</h2>
 <h3 id="condition">condition</h3>
-<p>• <strong>condition</strong>: <em>function</em></p>
-<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/match.ts#L99">dom/src/match.ts:99</a></em></p>
-<h4 id="typedeclaration">Type declaration:</h4>
-<p>▸ (<code>state</code>: State): <em>boolean</em></p>
-<p><strong>Parameters:</strong></p>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>state</code></td>
-<td>State</td>
-</tr>
-</tbody>
-</table>
+<p>• <strong>condition</strong>: <em><a href="#/api/dom/modules/_value_.html#domattribute">DOMAttribute</a>‹State, boolean›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/match.ts#L107">dom/src/match.ts:107</a></em></p>
 <hr>
 <h3 id="falsetemplate">falseTemplate</h3>
 <p>• <strong>falseTemplate</strong>: <em><a href="#/api/dom/interfaces/_template_.domtemplate.html">DOMTemplate</a>‹State, Action, Query›</em></p>
-<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/match.ts#L101">dom/src/match.ts:101</a></em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/match.ts#L109">dom/src/match.ts:109</a></em></p>
 <hr>
 <h3 id="refid">refId</h3>
 <p>• <strong>refId</strong>: <em>string</em></p>
-<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/match.ts#L102">dom/src/match.ts:102</a></em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/match.ts#L110">dom/src/match.ts:110</a></em></p>
 <hr>
 <h3 id="truetemplate">trueTemplate</h3>
 <p>• <strong>trueTemplate</strong>: <em><a href="#/api/dom/interfaces/_template_.domtemplate.html">DOMTemplate</a>‹State, Action, Query›</em></p>
-<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/match.ts#L100">dom/src/match.ts:100</a></em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/match.ts#L108">dom/src/match.ts:108</a></em></p>
 <h2 id="methods-1">Methods</h2>
 <h3 id="render">render</h3>
 <p>▸ <strong>render</strong>(<code>ctx</code>: <a href="#/api/dom/classes/_context_.domcontext.html">DOMContext</a>‹Action›, <code>state</code>: State): <em>object</em></p>
-<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/match.ts#L104">dom/src/match.ts:104</a></em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/match.ts#L112">dom/src/match.ts:112</a></em></p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>

@@ -7,6 +7,7 @@ import { Toc, PageRef, ApiRef } from '../toc'
 import { link, maybeLink } from './link'
 import { Route, pageMatchesRoute, pageToRoute, projectChangelogMatchesRoute, apiMatchesRoute } from '../route'
 import { some, none } from 'tempo-std/lib/option'
+import { compareCaseInsensitive } from 'tempo-std/lib/strings'
 import { keys } from 'tempo-std/lib/objects'
 import { SectionRef, ProjectRef } from '../toc'
 import { DOMTemplate } from 'tempo-dom/lib/template'
@@ -53,7 +54,7 @@ section = lazy(() => div<[string, SectionRef, Route], Action>(
 ))
 
 const api = fragment<[ApiRef, { apis: ApiRef[], project: ProjectRef, route: Route }, number], Action>(
-  maybeLink(([r]) => r.sidebar_label, ([r, p]) => apiMatchesRoute(p.project.name, r.path, p.route) ? none : some(Route.api(p.project.name, r.path)))
+  maybeLink(([r]) => r.title, ([r, p]) => apiMatchesRoute(p.project.name, r.path, p.route) ? none : some(Route.api(p.project.name, r.path)))
 )
 
 const demo = div<[DemoRef, Sidebar, number], Action>(
@@ -64,19 +65,27 @@ const demo = div<[DemoRef, Sidebar, number], Action>(
 
 const project = div<[ProjectRef, Sidebar, number], Action>(
   {},
-  h2({}, ([s]) => s.title),
+  h2({}, maybeLink(([p]) => p.title, ([p, s]) => apiMatchesRoute(p.name, 'index.html', s.route) ? none : some(Route.api(p.name, 'index.html')))),
   div({ attrs: { class: 'version' }}, ([s]) => s.version),
   div({ attrs: { class: 'description' }}, ([s]) => s.description),
   h3({ attrs: { class: 'changelog' } }, maybeLink('changelog', ([p, s]) => projectChangelogMatchesRoute(p, s.route) ? none : some(Route.changelog(p.name)))),
-  h3({ attrs: { class: 'api' } }, 'API'),
   div(
     {},
     mapState(
       { map: ([project, sidebar]) => ({ apis: sidebar.toc.apis[project.name], project, route: sidebar.route }) },
+      h3({ attrs: { class: 'types' } }, 'types'),
       ul(
         {},
         iterate<{ apis: ApiRef[], project: ProjectRef, route: Route }, ApiRef[], Action>(
-          { getArray: state => state.apis },
+          { getArray: state => state.apis.filter(a => a.type !== 'module').sort((a, b) => compareCaseInsensitive(a.title, b.title)) },
+          li({}, api)
+        )
+      ),
+      h3({ attrs: { class: 'modules' } }, 'modules'),
+      ul(
+        {},
+        iterate<{ apis: ApiRef[], project: ProjectRef, route: Route }, ApiRef[], Action>(
+          { getArray: state => state.apis.filter(a => a.type === 'module').sort((a, b) => compareCaseInsensitive(a.title, b.title)) },
           li({}, api)
         )
       )

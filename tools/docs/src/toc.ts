@@ -13,7 +13,7 @@ export interface ApiRef {
   path: string
   id: string
   title: string
-  sidebar_label: string
+  type: string
 }
 
 export interface SectionRef {
