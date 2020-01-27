@@ -15,7 +15,7 @@
   "sideEffects": false,
   "private": false,
   "scripts": {
-    "docs": "typedoc --plugin typedoc-plugin-markdown --options ../typedoc.json --out ./docs src",
+    "docs": "typedoc --plugin typedoc-plugin-markdown --options ../typedoc.json --out ./docs src && mv ./website/sidebars.json ./docs/toc.json && rm -rf website",
     "clean": "rm -rf lib/* && rm -rf es6/*",
     "build": "npm run clean && npx tsc && npx tsc -p tsconfig.es6.json",
     "test": "jest",

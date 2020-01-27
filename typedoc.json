@@ -6,5 +6,6 @@
   "gaID": "UA-589893-23",
   "hideGenerator": true,
   "theme": "docusaurus",
-  "gitRevision": "master"
+  "gitRevision": "master",
+  "hideBreadcrumbs": false
 }

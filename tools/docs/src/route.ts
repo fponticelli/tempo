@@ -2,7 +2,7 @@ import { matchKind } from 'tempo-std/lib/match'
 import { deepEqual } from 'tempo-std/lib/equals'
 import { Option, some, none } from 'tempo-std/lib/option'
 import { PageRef } from './toc'
-import { ProjectRef } from '../build/toc'
+import { ProjectRef } from './toc'
 
 export type Route =
   | { kind: 'Page', path: string }
