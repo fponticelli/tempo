@@ -2,7 +2,10 @@
   "name": "tempo-tools.docs",
   "version": "0.1.0",
   "description": "",
-  "sideEffects": false,
+  "sideEffects": [
+    "*.css",
+    "*.sass"
+  ],
   "keywords": [
     "tempo",
     "paperjs",

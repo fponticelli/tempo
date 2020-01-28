@@ -3,7 +3,7 @@ const path = require('path');
 
 module.exports = {
   entry: './src/index.ts',
-  devtool: 'inline-source-map',
+  mode: 'production',
   module: {
     rules: [
       {
@@ -43,6 +43,9 @@ module.exports = {
   ],
   optimization: {
     usedExports: true,
+    splitChunks: {
+      chunks: 'all',
+    },
   },
   devServer: {
     port: 1234

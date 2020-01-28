@@ -48,6 +48,13 @@
       "ignoreMissingScript": true
     }, {
       "commandKind": "bulk",
+      "name": "docs:clear",
+      "summary": "Remove API docs for each project.",
+      "description": "Remove API docs for each project.",
+      "enableParallelism": true,
+      "ignoreMissingScript": true
+    }, {
+      "commandKind": "bulk",
       "name": "docs",
       "summary": "Generate API docs for each project.",
       "description": "Generate API docs for each project.",
