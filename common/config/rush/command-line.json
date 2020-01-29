@@ -17,7 +17,8 @@
       "summary": "Run `npm run test` on each project.",
       "description": "Run `npm run test` on each project.",
       "enableParallelism": true,
-      "ignoreMissingScript": true
+      "ignoreMissingScript": true,
+      "allowWarningsInSuccessfulBuild": true
     }, {
       "commandKind": "bulk",
       "name": "tslint",
@@ -59,7 +60,8 @@
       "summary": "Generate API docs for each project.",
       "description": "Generate API docs for each project.",
       "enableParallelism": true,
-      "ignoreMissingScript": true
+      "ignoreMissingScript": true,
+      "allowWarningsInSuccessfulBuild": true
     }
     // {
     //   /**

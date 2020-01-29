@@ -11,9 +11,9 @@
 // - [ ] layout
 // - [ ] style site
 // - [ ] style API
-// - [ ] search
 // - [ ] make sub hash scroll to the right header
-// - [ ] better API links (mixed modules and types, index.md and globals.md)
+// - [ ] search
+// - [x] better API links (mixed modules and types, index.md and globals.md)
 
 import { Toc, DemoRef, ApiRef, PageRef, ProjectRef, SectionRef } from '../src/toc'
 import { promises as fs } from 'fs'
@@ -37,6 +37,8 @@ const markdown = new Converter({
 
 const rootFolder = '../..'
 const docsFolder = path.join(rootFolder, 'docs')
+const binFolderSrc = './dist'
+const binFolderDst = docsFolder
 const demoFolderSrc = path.join(rootFolder, 'demo')
 const demoFolderDst = path.join(docsFolder, 'demo')
 const assetsFolderSrc = path.join(rootFolder, 'pages/assets')
@@ -324,15 +326,23 @@ async function main() {
 
   const demos = await getDemos(demoFolderSrc)
 
+  await prepDir(docsFolder)
+
   // copy demos
   await prepDir(demoFolderDst)
   await Promise.all(demos.map(demo => {
-    fse.copy(path.join(demoFolderSrc, demo.path, 'build'), path.join(demoFolderDst, demo.path))
+    let src = path.join(demoFolderSrc, demo.path, 'dist')
+    if (!fse.existsSync(src))
+      src = path.join(demoFolderSrc, demo.path, 'build')
+    fse.copy(src, path.join(demoFolderDst, demo.path))
   }))
 
   // copy assets
   await prepDir(assetsFolderDst)
   await fse.copy(assetsFolderSrc, assetsFolderDst)
+
+  // copy binaries
+  await fse.copy(binFolderSrc, binFolderDst)
 
   // ensure no jekyll
   await fse.createFile(path.join(docsFolder, '.nojekyll'))
