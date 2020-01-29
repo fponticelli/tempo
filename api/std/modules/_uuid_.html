@@ -1,0 +1,51 @@
+<h2 id="index">Index</h2>
+<h3 id="typealiases">Type aliases</h3>
+<ul>
+<li><a href="#/api/std/modules/_uuid_.html#uuid">UUID</a></li>
+</ul>
+<h3 id="variables">Variables</h3>
+<ul>
+<li><a href="#/api/std/modules/_uuid_.html#const-uuid">UUID</a></li>
+</ul>
+<h3 id="functions">Functions</h3>
+<ul>
+<li><a href="#/api/std/modules/_uuid_.html#const-create">create</a></li>
+<li><a href="#/api/std/modules/_uuid_.html#const-tostring">toString</a></li>
+</ul>
+<h2 id="typealiases-1">Type aliases</h2>
+<h3 id="uuid">UUID</h3>
+<p>Ƭ <strong>UUID</strong>: <em><a href="#/api/std/interfaces/_newtype_.newtype.html">Newtype</a>‹string, object›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/uuid.ts#L40">uuid.ts:40</a></em></p>
+<p>Returns <code>true</code> if the passed <code>uuid</code> conforms to the UUID v.4 format.</p>
+<h2 id="variables-1">Variables</h2>
+<h3 id="constuuid"><code>Const</code> UUID</h3>
+<p>• <strong>UUID</strong>: <em>(Anonymous class)‹›</em> = new class extends NewtypeClass<uuid> {
+  isValid(uuid: string) { return pattern.test(uuid) }
+}()</uuid></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/uuid.ts#L42">uuid.ts:42</a></em></p>
+<h2 id="functions-1">Functions</h2>
+<h3 id="constcreate"><code>Const</code> create</h3>
+<p>▸ <strong>create</strong>(): <em><a href="#/api/std/interfaces/_newtype_.newtype.html">Newtype</a>‹string, object›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/uuid.ts#L13">uuid.ts:13</a></em></p>
+<p><code>Uuid.create()</code> returns a string value representing a random UUID string.</p>
+<p><strong>Returns:</strong> <em><a href="#/api/std/interfaces/_newtype_.newtype.html">Newtype</a>‹string, object›</em></p>
+<hr>
+<h3 id="consttostring"><code>Const</code> toString</h3>
+<p>▸ <strong>toString</strong>(<code>uuid</code>: <a href="#/api/std/modules/_uuid_.html#uuid">UUID</a>): <em>string</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/uuid.ts#L46">uuid.ts:46</a></em></p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>uuid</code></td>
+<td><a href="#/api/std/modules/_uuid_.html#uuid">UUID</a></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong> <em>string</em></p>
