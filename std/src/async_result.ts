@@ -18,7 +18,7 @@ import { Option, none } from './option'
 import { Result, success as successR, failure as failureR, map as mapR, mapN as mapNR, Success, Failure,
 getOrElse as getOrElseR, getOrThrow as getOrThrowR, getOrElseLazy as getOrElseLazyR, toArray as toArrayR,
 cata as cataR, cataLazy as cataLazyR, toOption as toOptionR, toMaybe as toMaybeR, recover as recoverR,
-foldLeft as foldLeftR, any as anyR, each as eachR, all as allR } from './result'
+foldLeft as foldLeftR, any as anyR, each as eachR, all as allR, forEach as forEachR } from './result'
 import { Async, outcome, map as mapA, mapN as mapNA, Outcome, Loading, NotAsked } from './async'
 
 export type AsyncResult<T, E, P = unknown> = Async<Result<T, E>, P>
@@ -27,6 +27,16 @@ export const success = <T, E, P = unknown>(value: T): AsyncResult<T, E, P> => ou
 export const failure = <T, E, P = unknown>(error: E): AsyncResult<T, E, P> => outcome(failureR(error))
 export const notAsked = { kind: 'NotAsked' } as AsyncResult<never, never>
 export const loading = <T, E, P = unknown>(progress: P): AsyncResult<T, E, P> => ({ kind: 'Loading', progress })
+
+export const forEach = <A, Err>(f: (a: A) => void, result: AsyncResult<A, Err>): void => {
+  switch (result.kind) {
+    case 'Loading':
+    case 'NotAsked':
+      return
+    case 'Outcome':
+      forEachR(f, result.value)
+  }
+}
 
 export const map = <A, B, Err, Prog>(f: (a: A) => B, async: AsyncResult<A, Err, Prog>): AsyncResult<B, Err, Prog> => {
   return mapA(r => mapR(f, r), async)

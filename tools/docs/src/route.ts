@@ -1,11 +1,16 @@
 import { matchKind } from 'tempo-std/lib/match'
 import { deepEqual } from 'tempo-std/lib/equals'
-import { Option, some, none } from 'tempo-std/lib/option'
-import { PageRef } from './toc'
+import { Option, some, none, getUnsafe } from 'tempo-std/lib/option'
+import { PageRef, Toc } from './toc'
 import { ProjectRef } from './toc'
+import { Store } from 'tempo-store/lib/store'
+import { State, Content } from './state'
+import { Action } from './action'
+import { success } from 'tempo-std/lib/async_result'
 
 export type Route =
   | { kind: 'Page', path: string }
+  | { kind: 'Demos' }
   | { kind: 'Demo', path: string }
   | { kind: 'Api', name: string, path: string }
   | { kind: 'Changelog', name: string }
@@ -14,6 +19,7 @@ export type Route =
 
 export const toHref = matchKind<Route, string>({
   Home: _ => '',
+  Demos: o => `#/demo`,
   Demo: o => `#/demo/${o.path}`,
   Page: o => `#/page/${o.path}`,
   Api: o => `#/api/${o.name}/${o.path}`,
@@ -24,6 +30,7 @@ export const toHref = matchKind<Route, string>({
 export const toContentUrl = matchKind<Route, Option<string>>({
   Home: _ => some('pages/index.html'),
   Api: o => some(`api/${o.name}/${o.path}`),
+  Demos: _ => none,
   Demo: o => some(`demo/${o.path}`),
   Page: o => some(`pages/${o.path}`),
   NotFound: _ => none,
@@ -33,6 +40,7 @@ export const toContentUrl = matchKind<Route, Option<string>>({
 export const Route = {
   home: ({ kind: 'Home' }) as Route,
   api: (name: string, path: string): Route => ({ kind: 'Api', name, path }),
+  demos: ({ kind: 'Demos' }) as Route,
   demo: (path: string): Route => ({ kind: 'Demo', path }),
   page: (path: string): Route => {
     if (path === 'index.html')
@@ -82,6 +90,10 @@ export const parseUrl = (url: string): Route => {
       const name = parts.shift()!
       const path = parts.join('/')
       return Route.api(name, path)
+    } else if (url === '/demo') {
+      return Route.demos
+    } else if (url.startsWith('/demo/')) {
+      return Route.demo(url.substring(6))
     } else if (url.startsWith('/page/')) {
       return Route.page(url.substring(6))
     } else if (url.startsWith('/changelog/')) {
@@ -89,5 +101,15 @@ export const parseUrl = (url: string): Route => {
     } else {
       return Route.notFound(url)
     }
+  }
+}
+
+export const contentFromRoute = (store: Store<State, Action>, toc: Toc, route: Route) => {
+  if (route.kind === 'Demo') {
+    location.href = getUnsafe(toContentUrl(route))
+  } else if (route.kind === 'Demos') {
+    store.process(Action.loadedContent(success(Content.demos(toc.demos))))
+  } else {
+    store.process(Action.requestPageContent)
   }
 }

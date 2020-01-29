@@ -100,6 +100,13 @@ export function apNWithCombine<Args extends any[], Err, Ret>(
   }
 }
 
+export const forEach = <A, Err>(f: (a: A) => void, result: Result<A, Err>): void => {
+  switch (result.kind) {
+    case 'Failure': return
+    case 'Success': f(result.value)
+  }
+}
+
 export const map = <A, B, Err>(f: (a: A) => B, result: Result<A, Err>): Result<B, Err> => {
   switch (result.kind) {
     case 'Failure': return result

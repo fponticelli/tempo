@@ -6,19 +6,20 @@ import { makeState } from './state'
 import { reducer } from './reducer'
 import { template } from './templates/main'
 import { middleware } from './middleware'
-import { parseUrl } from './route'
+import { parseUrl, contentFromRoute } from './route'
 import { Action } from './action'
 import { State } from './state'
+import { isSuccess } from 'tempo-std/lib/async_result'
 
 const parseLocation = () => {
   const url = location.pathname.split('/').pop() + location.hash
   return parseUrl(url)
 }
 
-const store = Store.ofState<State, Action>({
-  state: makeState(parseLocation()),
-  reducer
-})
+const route = parseLocation()
+const state = makeState(route)
+
+const store = Store.ofState<State, Action>({ state, reducer })
 
 Tempo.render({ store, template })
 
@@ -29,5 +30,14 @@ window.addEventListener('popstate', e => {
   store.process(Action.goTo(route))
 })
 
+const triggerFirstContentLoad = (state: State, action: Action) => {
+  if (action.kind === 'LoadedToc' && isSuccess(action.toc)) {
+    store.observable.off(triggerFirstContentLoad)
+    contentFromRoute(store, action.toc.value.value, route)
+  }
+}
+
+store.observable.on(triggerFirstContentLoad)
+
 store.process(Action.requestToc)
-store.process(Action.requestPageContent)
+// store.process(Action.requestPageContent)

@@ -1,18 +1,20 @@
-import { State } from './state'
+import { State, Content } from './state'
 import { Action } from './action'
 import { loadJson, loadText } from './request'
 import { Store } from 'tempo-store/lib/store'
 import { outcome } from 'tempo-std/lib/async'
+import { forEach } from 'tempo-std/lib/async_result'
 import { Toc } from './toc'
 import { HttpError } from './request'
 import { Result, map } from 'tempo-std/lib/result'
-import { toContentUrl } from './route'
-import { each, getUnsafe } from 'tempo-std/lib/option'
+import { toContentUrl, contentFromRoute } from './route'
+import { each } from 'tempo-std/lib/option'
 
 export const middleware = (store: Store<State, Action>) => (
   state: State,
   action: Action
 ) => {
+  console.log(state)
   switch (action.kind) {
     case 'RequestToc':
       loadJson('toc.json')
@@ -28,17 +30,15 @@ export const middleware = (store: Store<State, Action>) => (
       each(
         (url: string) => {
           loadText(url).then(
-            (content: Result<string, HttpError>) => store.process(Action.loadedPageContent(outcome(content)))
+            (htmlResult: Result<string, HttpError>) =>
+              store.process(Action.loadedContent(outcome(map(Content.htmlPage, htmlResult))))
           )
         },
         toContentUrl(state.route)
       )
       break
     case 'GoTo':
-      if (action.route.kind === 'Demo') {
-        location.href = getUnsafe(toContentUrl(action.route))
-      }
-      store.process(Action.requestPageContent)
+      forEach(toc => contentFromRoute(store, toc, action.route), state.toc)
       break
   }
 }
