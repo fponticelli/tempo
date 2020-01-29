@@ -4,13 +4,14 @@ import { iterate } from 'tempo-dom/lib/iterate'
 import { when } from 'tempo-dom/lib/when'
 import { Action } from '../action'
 import { Toc, PageRef, ApiRef } from '../toc'
-import { link, maybeLink } from './link'
+import { maybeLink } from './link'
 import {
   Route,
   pageMatchesRoute,
   pageToRoute,
   projectChangelogMatchesRoute,
-  apiMatchesRoute
+  apiMatchesRoute,
+  sameRoute
 } from '../route'
 import { some, none } from 'tempo-std/lib/option'
 import { compareCaseInsensitive } from 'tempo-std/lib/strings'
@@ -19,7 +20,6 @@ import { SectionRef, ProjectRef } from '../toc'
 import { DOMTemplate } from 'tempo-dom/lib/template'
 import { mapState } from 'tempo-dom/lib/map'
 import { fragment } from 'tempo-dom/lib/fragment'
-import { DemoRef } from 'tools/docs/build/toc'
 
 type Sidebar = { toc: Toc; route: Route }
 
@@ -85,19 +85,6 @@ const api = fragment<
   )
 )
 
-const demo = div<[DemoRef, Sidebar, number], Action>(
-  {},
-  p(
-    { attrs: { class: '' } },
-    link(
-      ([s]) => s.title,
-      ([s]) => Route.demo(s.path),
-      'has-text-weight-bold'
-    ),
-    div({ attrs: { class: 'is-size-7' } }, ([s]) => s.description)
-  )
-)
-
 const project = div<[ProjectRef, Sidebar, number], Action>(
   {},
   div(
@@ -142,7 +129,7 @@ const project = div<[ProjectRef, Sidebar, number], Action>(
         {
           map: state => ({
             apis: state.apis
-              .filter(a => a.type !== 'module')
+              .filter(a => a.type === 'module')
               .sort((a, b) => compareCaseInsensitive(a.title, b.title)),
             project: state.project,
             route: state.route
@@ -150,7 +137,7 @@ const project = div<[ProjectRef, Sidebar, number], Action>(
         },
         when(
           { condition: state => state.apis.length > 0 },
-          p({ attrs: { class: 'menu-label' } }, 'types'),
+          p({ attrs: { class: 'menu-label' } }, 'modules'),
           ul(
             { attrs: { class: 'menu-list' } },
             iterate<
@@ -169,7 +156,7 @@ const project = div<[ProjectRef, Sidebar, number], Action>(
         {
           map: state => ({
             apis: state.apis
-              .filter(a => a.type === 'module')
+              .filter(a => a.type !== 'module')
               .sort((a, b) => compareCaseInsensitive(a.title, b.title)),
             project: state.project,
             route: state.route
@@ -177,7 +164,7 @@ const project = div<[ProjectRef, Sidebar, number], Action>(
         },
         when(
           { condition: state => state.apis.length > 0 },
-          p({ attrs: { class: 'menu-label' } }, 'modules'),
+          p({ attrs: { class: 'menu-label' } }, 'types'),
           ul(
             { attrs: { class: 'menu-list' } },
             iterate<
@@ -205,12 +192,10 @@ export const sidebar = aside<Sidebar, Action>(
     },
     section
   ),
-  p({ attrs: { class: 'menu-label' } }, 'Demos'),
-  ul(
-    { attrs: { class: '' } },
-    iterate<Sidebar, DemoRef[], Action>(
-      { getArray: s => s.toc.demos },
-      li({}, demo)
+  p(
+    { attrs: { class: 'menu-label' } },
+    maybeLink('Demos', s =>
+      sameRoute(Route.demos, s.route) ? none : some(Route.demos)
     )
   ),
   p({ attrs: { class: 'menu-label' } }, 'Projects'),
