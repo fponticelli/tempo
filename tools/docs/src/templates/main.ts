@@ -16,21 +16,37 @@ const { capture, release } = holdState<State>()
 export const template = div<State, Action>(
   { attrs: { class: 'app' } },
   nav(
-    { attrs: { class: 'navbar has-shadow', role: 'navigation', 'aria-label': 'main navigation' } },
+    {
+      attrs: {
+        class: 'navbar has-shadow',
+        role: 'navigation',
+        'aria-label': 'main navigation'
+      }
+    },
     div(
-      { attrs: { class: 'container' }},
+      { attrs: { class: 'container' } },
       div(
-        { attrs: { class: 'navbar-brand' }},
+        { attrs: { class: 'navbar-brand' } },
         link(
-          img({ attrs: { src: 'assets/icon-512x512.png', width: '32', height: '32' } }),
+          img({
+            attrs: { src: 'assets/icon-512x512.png', width: '32', height: '32' }
+          }),
           Route.home,
           'navbar-item'
         ),
         a(
-          { attrs: { class: 'navbar-burger burger', role: 'button', 'aria-label': 'menu', 'aria-expanded': 'false', 'data-target': 'navbarBasicExample' } },
-          span({ attrs: { 'aria-hidden': 'true' }}),
-          span({ attrs: { 'aria-hidden': 'true' }}),
-          span({ attrs: { 'aria-hidden': 'true' }}),
+          {
+            attrs: {
+              class: 'navbar-burger burger',
+              role: 'button',
+              'aria-label': 'menu',
+              'aria-expanded': 'false',
+              'data-target': 'navbarBasicExample'
+            }
+          },
+          span({ attrs: { 'aria-hidden': 'true' } }),
+          span({ attrs: { 'aria-hidden': 'true' } }),
+          span({ attrs: { 'aria-hidden': 'true' } })
         )
       )
     )
@@ -45,13 +61,17 @@ export const template = div<State, Action>(
           {},
           release(
             main(
-              { attrs: { class: 'container' }},
+              { attrs: { class: 'container' } },
               div(
-                { attrs: { class: 'columns' }},
+                { attrs: { class: 'columns' } },
                 div(
-                  { attrs: { class: 'column is-narrow has-background-light scrollable' }},
+                  {
+                    attrs: {
+                      class: 'column is-narrow has-background-light scrollable'
+                    }
+                  },
                   div(
-                    { attrs: { class: '', style: 'width: 300px;' }},
+                    { attrs: { class: '', style: 'width: 300px;' } },
                     mapState(
                       { map: ([state, toc]) => ({ toc, route: state.route }) },
                       sidebar
@@ -59,7 +79,7 @@ export const template = div<State, Action>(
                   )
                 ),
                 div(
-                  { attrs: { class: 'column scrollable' }},
+                  { attrs: { class: 'column scrollable' } },
                   mapState({ map: ([state]) => state.content }, content)
                 )
               )

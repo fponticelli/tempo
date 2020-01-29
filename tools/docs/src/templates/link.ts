@@ -19,7 +19,16 @@ export const maybeLink = <State>(
   fragment<State, Action>(
     matchBool({
       condition: mapAttribute(route, toBoolean),
-      false: a({ attrs: { class: mapAttribute(className || '', v => (v ? [v] : []).concat(['is-active']).join(' ')) } }, label),
+      false: a(
+        {
+          attrs: {
+            class: mapAttribute(className || '', v =>
+              (v ? [v] : []).concat(['is-active']).join(' ')
+            )
+          }
+        },
+        label
+      ),
       true: link(label, mapAttribute(route, getUnsafe), className)
     })
   )

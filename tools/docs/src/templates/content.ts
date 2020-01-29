@@ -8,9 +8,12 @@ import { matchAsyncResult } from 'tempo-dom/lib/match'
 export const content = article<AsyncResult<string, HttpError, unknown>, Action>(
   { attrs: { className: 'content' } },
   matchAsyncResult({
-    Failure: article({ attrs: { class: 'message is-danger' }}, div({ attrs: { class: 'message-body' } }, s => s.message)),
+    Failure: article(
+      { attrs: { class: 'message is-danger' } },
+      div({ attrs: { class: 'message-body' } }, s => s.message)
+    ),
     Loading: '...',
     NotAsked: '',
-    Success: unsafeHtml({ content: s => s})
+    Success: unsafeHtml({ content: s => s })
   })
 )

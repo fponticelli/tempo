@@ -245,7 +245,7 @@ async function createApi(project: string, root: string, dst: string): Promise<Ap
     modules: 'module',
     classes: 'class',
     interfaces: 'interface',
-    enums: 'enum',
+    enums: 'enum'
   }
 
   data
