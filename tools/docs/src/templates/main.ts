@@ -8,8 +8,11 @@ import { HttpError } from '../request'
 import { content } from './content'
 import { sidebar } from './sidebar'
 import { holdState } from 'tempo-dom/lib/hold_state'
-import { link } from './link'
-import { Route } from '../route'
+import { link, maybeLink } from './link'
+import { Route, sameRoute } from '../route'
+import { none, some } from 'tempo-std/lib/option'
+import { iterateItems } from 'tempo-dom/lib/iterate'
+import { ProjectRef } from 'tools/docs/build/toc'
 
 const { capture, release } = holdState<State>()
 
@@ -47,6 +50,46 @@ export const template = div<State, Action>(
           span({ attrs: { 'aria-hidden': 'true' } }),
           span({ attrs: { 'aria-hidden': 'true' } }),
           span({ attrs: { 'aria-hidden': 'true' } })
+        )
+      ),
+      div(
+        { attrs: { class: 'navbar-menu' } },
+        div(
+          { attrs: { class: 'navbar-end' } },
+          a(
+            { attrs: { class: 'navbar-item', href: 'https://github.com/fponticelli/tempo' } },
+            img({
+              attrs: { src: 'assets/github-mark-64px.png', width: '32', height: '32' }
+            })
+          ),
+          maybeLink(
+            'Demos',
+            s => sameRoute(Route.demos, s.route) ? none : some(Route.demos),
+            'navbar-item'
+          ),
+          div(
+            { attrs: { class: 'navbar-item has-dropdown is-hoverable' } },
+            a(
+              { attrs: { class: 'navbar-link'} },
+              'Projects'
+            ),
+            div(
+              { attrs: { class: 'navbar-dropdown' } },
+              mapState(
+                { map: s => s.toc },
+                matchAsyncResult<Toc, HttpError, unknown, Action>({
+                  Failure: '',
+                  Loading: '',
+                  NotAsked: '',
+                  Success:
+                    iterateItems(
+                      { getArray: s => s.projects },
+                      link<ProjectRef>(s => s.title, s => Route.api(s.name, 'index.html'), 'navbar-item')
+                    )
+                })
+              )
+            )
+          )
         )
       )
     )

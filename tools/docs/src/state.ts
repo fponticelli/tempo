@@ -4,12 +4,12 @@ import { HttpError } from './request'
 import { Route } from './route'
 
 export type Content =
-  | { kind: 'HtmlPage', html: string }
+  | { kind: 'HtmlPage', title: string | undefined, html: string }
   | { kind: 'Demos', demos: DemoRef[] }
 
 export const Content = {
-  htmlPage(html: string): Content {
-    return { kind: 'HtmlPage', html }
+  htmlPage(title: string | undefined, html: string): Content {
+    return { kind: 'HtmlPage', title, html }
   },
   demos(demos: DemoRef[]): Content {
     return { kind: 'Demos', demos }

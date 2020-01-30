@@ -31,7 +31,7 @@ export const middleware = (store: Store<State, Action>) => (
         (url: string) => {
           loadText(url).then(
             (htmlResult: Result<string, HttpError>) =>
-              store.process(Action.loadedContent(outcome(map(Content.htmlPage, htmlResult))))
+              store.process(Action.loadedContent(outcome(map(h => Content.htmlPage(undefined, h), htmlResult))))
           )
         },
         toContentUrl(state.route)

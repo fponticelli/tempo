@@ -6,7 +6,7 @@ import { Route } from '../route'
 import { link } from './link'
 
 const demo = div<DemoRef, Action>(
-  { attrs: { class: 'tile is-parent' } },
+  { attrs: { class: 'tile is-parent tile-width' } },
   div(
     { attrs: { class: 'tile is-child box' } },
     p(

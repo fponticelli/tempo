@@ -21,7 +21,7 @@ export const content = article<
     Loading: '...',
     NotAsked: '',
     Success: matchKind({
-      HtmlPage: mapState({ map: c => c.html }, htmlContent),
+      HtmlPage: htmlContent,
       Demos: mapState({ map: c => c.demos }, demosContent)
     })
   })

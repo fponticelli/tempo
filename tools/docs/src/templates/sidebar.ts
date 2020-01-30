@@ -10,8 +10,7 @@ import {
   pageMatchesRoute,
   pageToRoute,
   projectChangelogMatchesRoute,
-  apiMatchesRoute,
-  sameRoute
+  apiMatchesRoute
 } from '../route'
 import { some, none } from 'tempo-std/lib/option'
 import { compareCaseInsensitive } from 'tempo-std/lib/strings'
@@ -191,12 +190,6 @@ export const sidebar = aside<Sidebar, Action>(
         ]
     },
     section
-  ),
-  p(
-    { attrs: { class: 'menu-label' } },
-    maybeLink('Demos', s =>
-      sameRoute(Route.demos, s.route) ? none : some(Route.demos)
-    )
   ),
   p({ attrs: { class: 'menu-label' } }, 'Projects'),
   iterate<Sidebar, ProjectRef[], Action>(
