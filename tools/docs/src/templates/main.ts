@@ -57,22 +57,28 @@ export const template = div<State, Action>(
         div(
           { attrs: { class: 'navbar-end' } },
           a(
-            { attrs: { class: 'navbar-item', href: 'https://github.com/fponticelli/tempo' } },
+            {
+              attrs: {
+                class: 'navbar-item',
+                href: 'https://github.com/fponticelli/tempo'
+              }
+            },
             img({
-              attrs: { src: 'assets/github-mark-64px.png', width: '32', height: '32' }
+              attrs: {
+                src: 'assets/github-mark-64px.png',
+                width: '32',
+                height: '32'
+              }
             })
           ),
           maybeLink(
             'Demos',
-            s => sameRoute(Route.demos, s.route) ? none : some(Route.demos),
+            s => (sameRoute(Route.demos, s.route) ? none : some(Route.demos)),
             'navbar-item'
           ),
           div(
             { attrs: { class: 'navbar-item has-dropdown is-hoverable' } },
-            a(
-              { attrs: { class: 'navbar-link'} },
-              'Projects'
-            ),
+            a({ attrs: { class: 'navbar-link' } }, 'Projects'),
             div(
               { attrs: { class: 'navbar-dropdown' } },
               mapState(
@@ -81,11 +87,14 @@ export const template = div<State, Action>(
                   Failure: '',
                   Loading: '',
                   NotAsked: '',
-                  Success:
-                    iterateItems(
-                      { getArray: s => s.projects },
-                      link<ProjectRef>(s => s.title, s => Route.api(s.name, 'index.html'), 'navbar-item')
+                  Success: iterateItems(
+                    { getArray: s => s.projects },
+                    link<ProjectRef>(
+                      s => s.title,
+                      s => Route.api(s.name, 'index.html'),
+                      'navbar-item'
                     )
+                  )
                 })
               )
             )
