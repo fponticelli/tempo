@@ -1,4 +1,7 @@
-var HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const TerserJSPlugin = require('terser-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const path = require('path');
 
 module.exports = {
@@ -14,8 +17,7 @@ module.exports = {
       {
         test: /\.s[ac]ss$/i,
         use: [
-          // Creates `style` nodes from JS strings
-          'style-loader',
+          MiniCssExtractPlugin.loader,
           // Translates CSS into CommonJS
           'css-loader',
           // Compiles Sass to CSS
@@ -34,9 +36,24 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin(),
+    new MiniCssExtractPlugin({
+      filename: '[name].css',
+      chunkFilename: '[id].css',
+    }),
   ],
   optimization: {
+    splitChunks: {
+      chunks: 'all',
+      cacheGroups: {
+        commons: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          chunks: 'all'
+        }
+      }
+    },
     usedExports: true,
+    minimizer: [new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})]
   },
   devServer: {
     port: 1234
