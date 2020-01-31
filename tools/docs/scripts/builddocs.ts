@@ -25,6 +25,7 @@ import Prism from 'prismjs'
 const loadLanguages: any = require('prismjs/components/')
 loadLanguages(['typescript'])
 import fm from 'front-matter'
+import { trimChars } from 'tempo-std/lib/strings'
 
 const markdown = new Converter({
   parseImgDimensions: true,
@@ -50,6 +51,17 @@ const changelogFolderDst = path.join(docsFolder, 'changelog')
 const apiFolderDst = path.join(docsFolder, 'api')
 
 const tocFile = path.join(docsFolder, 'toc.json')
+
+const renameHtml = (path: string) => {
+  const hasLeadingHash = path.startsWith('#')
+  const parts = path.split('#').filter(a => !!a)
+  if (!parts[0].endsWith('.html')) return path
+  function processPart(part: string) {
+    return part.split('.').map(p => trimChars(p, '_')).join('.')
+  }
+  const res = parts[0].split('/').map(processPart).join('/')
+  return (hasLeadingHash ? [''] : []).concat([res].concat(parts.slice(1))).join('#')
+}
 
 async function getDemos(folder: string): Promise<DemoRef[]> {
   const dirs = filterDirectories(await fs.readdir(folder))
@@ -141,7 +153,7 @@ async function makeHtml(mdFile: string, anchorMangler: (url: string) => string) 
     const a = anchors[i]
     const href = a.href
     if (href.startsWith('http:') || href.startsWith('https:')) continue
-    a.href = anchorMangler(href)
+    a.href = renameHtml(anchorMangler(href))
   }
 
   return {
@@ -162,7 +174,7 @@ function manglePageHref(url: string) {
 async function createPages(src: string, dst: string) {
   const mdFiles = await listAllMDFiles(src)
   const data = await Promise.all(mdFiles.map(async file => ({
-    dest: renameMdToHtml(file),
+    dest: renameHtml(renameMdToHtml(file)),
     ...await makeHtml(path.join(src, file), manglePageHref)
   })))
   await Promise.all(data.map(async o => {
@@ -228,7 +240,6 @@ const mangleApiHref = (name: string, base: string) => (url: string) => {
     url = url.replace('.md#', '.html#')
   }
   const p = path.join(name, base, url)
-  // console.log(base, url, p)
   return `#/api/${p}`
 }
 
@@ -239,7 +250,7 @@ async function createApi(project: string, root: string, dst: string): Promise<Ap
   }
   const mdFiles = await listAllMDFiles(p)
   const data = await Promise.all(mdFiles.map(async file => ({
-    dest: renameMdToHtml(file),
+    dest: renameHtml(renameMdToHtml(file)),
     ...await makeHtml(path.join(p, file), mangleApiHref(project, path.dirname(file)))
   })))
 

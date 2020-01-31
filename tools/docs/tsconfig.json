@@ -9,5 +9,5 @@
     "removeComments": true,
     "outDir": "build"
   },
-  "exclude": ["scripts", "webpack.config.js"]
+  "exclude": ["scripts", "webpack.config.js", "build"]
 }

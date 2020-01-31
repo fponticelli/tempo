@@ -14,7 +14,7 @@ export const middleware = (store: Store<State, Action>) => (
   state: State,
   action: Action
 ) => {
-  console.log(state)
+  // console.log(state)
   switch (action.kind) {
     case 'RequestToc':
       loadJson('toc.json')
