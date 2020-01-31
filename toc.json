@@ -116,37 +116,37 @@
   "apis": {
     "core": [
       {
-        "path": "interfaces/_template_.template.html",
+        "path": "interfaces/template.template.html",
         "id": "_template_.template",
         "title": "Template",
         "type": "interface"
       },
       {
-        "path": "interfaces/_view_.view.html",
+        "path": "interfaces/view.view.html",
         "id": "_view_.view",
         "title": "View",
         "type": "interface"
       },
       {
-        "path": "modules/_index_.html",
+        "path": "modules/index.html",
         "id": "_index_",
         "title": "index",
         "type": "module"
       },
       {
-        "path": "modules/_template_.html",
+        "path": "modules/template.html",
         "id": "_template_",
         "title": "template",
         "type": "module"
       },
       {
-        "path": "modules/_value_.html",
+        "path": "modules/value.html",
         "id": "_value_",
         "title": "value",
         "type": "module"
       },
       {
-        "path": "modules/_view_.html",
+        "path": "modules/view.html",
         "id": "_view_",
         "title": "view",
         "type": "module"
@@ -154,325 +154,325 @@
     ],
     "dom": [
       {
-        "path": "classes/_adapter_.domadaptertemplate.html",
+        "path": "classes/adapter.domadaptertemplate.html",
         "id": "_adapter_.domadaptertemplate",
         "title": "DOMAdapterTemplate",
         "type": "class"
       },
       {
-        "path": "classes/_component_.domcomponenttemplate.html",
+        "path": "classes/component.domcomponenttemplate.html",
         "id": "_component_.domcomponenttemplate",
         "title": "DOMComponentTemplate",
         "type": "class"
       },
       {
-        "path": "classes/_context_.domcontext.html",
+        "path": "classes/context.domcontext.html",
         "id": "_context_.domcontext",
         "title": "DOMContext",
         "type": "class"
       },
       {
-        "path": "classes/_element_.domelement.html",
+        "path": "classes/element.domelement.html",
         "id": "_element_.domelement",
         "title": "DOMElement",
         "type": "class"
       },
       {
-        "path": "classes/_filter_.filterstatetemplate.html",
+        "path": "classes/filter.filterstatetemplate.html",
         "id": "_filter_.filterstatetemplate",
         "title": "FilterStateTemplate",
         "type": "class"
       },
       {
-        "path": "classes/_fragment_.domfragmenttemplate.html",
+        "path": "classes/fragment.domfragmenttemplate.html",
         "id": "_fragment_.domfragmenttemplate",
         "title": "DOMFragmentTemplate",
         "type": "class"
       },
       {
-        "path": "classes/_lazy_.domlazytemplate.html",
+        "path": "classes/lazy.domlazytemplate.html",
         "id": "_lazy_.domlazytemplate",
         "title": "DOMLazyTemplate",
         "type": "class"
       },
       {
-        "path": "classes/_map_.mapactiontemplate.html",
+        "path": "classes/map.mapactiontemplate.html",
         "id": "_map_.mapactiontemplate",
         "title": "MapActionTemplate",
         "type": "class"
       },
       {
-        "path": "classes/_map_.mapquerytemplate.html",
+        "path": "classes/map.mapquerytemplate.html",
         "id": "_map_.mapquerytemplate",
         "title": "MapQueryTemplate",
         "type": "class"
       },
       {
-        "path": "classes/_map_.mapstatetemplate.html",
+        "path": "classes/map.mapstatetemplate.html",
         "id": "_map_.mapstatetemplate",
         "title": "MapStateTemplate",
         "type": "class"
       },
       {
-        "path": "classes/_match_.matchbooltemplate.html",
+        "path": "classes/match.matchbooltemplate.html",
         "id": "_match_.matchbooltemplate",
         "title": "MatchBoolTemplate",
         "type": "class"
       },
       {
-        "path": "classes/_match_.matchtemplate.html",
+        "path": "classes/match.matchtemplate.html",
         "id": "_match_.matchtemplate",
         "title": "MatchTemplate",
         "type": "class"
       },
       {
-        "path": "classes/_match_.matchvaluetemplate.html",
+        "path": "classes/match.matchvaluetemplate.html",
         "id": "_match_.matchvaluetemplate",
         "title": "MatchValueTemplate",
         "type": "class"
       },
       {
-        "path": "classes/_portal_.domportaltemplate.html",
+        "path": "classes/portal.domportaltemplate.html",
         "id": "_portal_.domportaltemplate",
         "title": "DOMPortalTemplate",
         "type": "class"
       },
       {
-        "path": "classes/_scoped_styles_.scopedstyles.html",
+        "path": "classes/scoped_styles.scopedstyles.html",
         "id": "_scoped_styles_.scopedstyles",
         "title": "ScopedStyles",
         "type": "class"
       },
       {
-        "path": "classes/_text_.domderivedtexttemplate.html",
+        "path": "classes/text.domderivedtexttemplate.html",
         "id": "_text_.domderivedtexttemplate",
         "title": "DOMDerivedTextTemplate",
         "type": "class"
       },
       {
-        "path": "classes/_text_.domliteraltexttemplate.html",
+        "path": "classes/text.domliteraltexttemplate.html",
         "id": "_text_.domliteraltexttemplate",
         "title": "DOMLiteralTextTemplate",
         "type": "class"
       },
       {
-        "path": "classes/_unsafe_html_.domunsafehtml.html",
+        "path": "classes/unsafe_html.domunsafehtml.html",
         "id": "_unsafe_html_.domunsafehtml",
         "title": "DOMUnsafeHtml",
         "type": "class"
       },
       {
-        "path": "classes/_until_.domuntiltemplate.html",
+        "path": "classes/until.domuntiltemplate.html",
         "id": "_until_.domuntiltemplate",
         "title": "DOMUntilTemplate",
         "type": "class"
       },
       {
-        "path": "classes/_when_.domwhentemplate.html",
+        "path": "classes/when.domwhentemplate.html",
         "id": "_when_.domwhentemplate",
         "title": "DOMWhenTemplate",
         "type": "class"
       },
       {
-        "path": "interfaces/_adapter_.propagatearg.html",
+        "path": "interfaces/adapter.propagatearg.html",
         "id": "_adapter_.propagatearg",
         "title": "PropagateArg",
         "type": "interface"
       },
       {
-        "path": "interfaces/_scoped_styles_.mediaqueries.html",
+        "path": "interfaces/scoped_styles.mediaqueries.html",
         "id": "_scoped_styles_.mediaqueries",
         "title": "MediaQueries",
         "type": "interface"
       },
       {
-        "path": "interfaces/_scoped_styles_.mediaquery.html",
+        "path": "interfaces/scoped_styles.mediaquery.html",
         "id": "_scoped_styles_.mediaquery",
         "title": "MediaQuery",
         "type": "interface"
       },
       {
-        "path": "interfaces/_template_.domtemplate.html",
+        "path": "interfaces/template.domtemplate.html",
         "id": "_template_.domtemplate",
         "title": "DOMTemplate",
         "type": "interface"
       },
       {
-        "path": "interfaces/_value_.domattributes.html",
+        "path": "interfaces/value.domattributes.html",
         "id": "_value_.domattributes",
         "title": "DOMAttributes",
         "type": "interface"
       },
       {
-        "path": "interfaces/_when_.whenoptions.html",
+        "path": "interfaces/when.whenoptions.html",
         "id": "_when_.whenoptions",
         "title": "WhenOptions",
         "type": "interface"
       },
       {
-        "path": "modules/_adapter_.html",
+        "path": "modules/adapter.html",
         "id": "_adapter_",
         "title": "adapter",
         "type": "module"
       },
       {
-        "path": "modules/_component_.html",
+        "path": "modules/component.html",
         "id": "_component_",
         "title": "component",
         "type": "module"
       },
       {
-        "path": "modules/_context_.html",
+        "path": "modules/context.html",
         "id": "_context_",
         "title": "context",
         "type": "module"
       },
       {
-        "path": "modules/_dom_attributes_mapper_.html",
+        "path": "modules/dom_attributes_mapper.html",
         "id": "_dom_attributes_mapper_",
         "title": "dom_attributes_mapper",
         "type": "module"
       },
       {
-        "path": "modules/_element_.html",
+        "path": "modules/element.html",
         "id": "_element_",
         "title": "element",
         "type": "module"
       },
       {
-        "path": "modules/_filter_.html",
+        "path": "modules/filter.html",
         "id": "_filter_",
         "title": "filter",
         "type": "module"
       },
       {
-        "path": "modules/_for_each_.html",
+        "path": "modules/for_each.html",
         "id": "_for_each_",
         "title": "for_each",
         "type": "module"
       },
       {
-        "path": "modules/_fragment_.html",
+        "path": "modules/fragment.html",
         "id": "_fragment_",
         "title": "fragment",
         "type": "module"
       },
       {
-        "path": "modules/_hold_state_.html",
+        "path": "modules/hold_state.html",
         "id": "_hold_state_",
         "title": "hold_state",
         "type": "module"
       },
       {
-        "path": "modules/_html_.html",
+        "path": "modules/html.html",
         "id": "_html_",
         "title": "html",
         "type": "module"
       },
       {
-        "path": "modules/_index_.html",
+        "path": "modules/index.html",
         "id": "_index_",
         "title": "index",
         "type": "module"
       },
       {
-        "path": "modules/_iterate_.html",
+        "path": "modules/iterate.html",
         "id": "_iterate_",
         "title": "iterate",
         "type": "module"
       },
       {
-        "path": "modules/_lazy_.html",
+        "path": "modules/lazy.html",
         "id": "_lazy_",
         "title": "lazy",
         "type": "module"
       },
       {
-        "path": "modules/_map_.html",
+        "path": "modules/map.html",
         "id": "_map_",
         "title": "map",
         "type": "module"
       },
       {
-        "path": "modules/_match_.html",
+        "path": "modules/match.html",
         "id": "_match_",
         "title": "match",
         "type": "module"
       },
       {
-        "path": "modules/_portal_.html",
+        "path": "modules/portal.html",
         "id": "_portal_",
         "title": "portal",
         "type": "module"
       },
       {
-        "path": "modules/_scoped_styles_.html",
+        "path": "modules/scoped_styles.html",
         "id": "_scoped_styles_",
         "title": "scoped_styles",
         "type": "module"
       },
       {
-        "path": "modules/_svg_.html",
+        "path": "modules/svg.html",
         "id": "_svg_",
         "title": "svg",
         "type": "module"
       },
       {
-        "path": "modules/_template_.html",
+        "path": "modules/template.html",
         "id": "_template_",
         "title": "template",
         "type": "module"
       },
       {
-        "path": "modules/_tempo_.html",
+        "path": "modules/tempo.html",
         "id": "_tempo_",
         "title": "tempo",
         "type": "module"
       },
       {
-        "path": "modules/_text_.html",
+        "path": "modules/text.html",
         "id": "_text_",
         "title": "text",
         "type": "module"
       },
       {
-        "path": "modules/_unsafe_html_.html",
+        "path": "modules/unsafe_html.html",
         "id": "_unsafe_html_",
         "title": "unsafe_html",
         "type": "module"
       },
       {
-        "path": "modules/_until_.html",
+        "path": "modules/until.html",
         "id": "_until_",
         "title": "until",
         "type": "module"
       },
       {
-        "path": "modules/_utils_dom_.html",
+        "path": "modules/utils_dom.html",
         "id": "_utils_dom_",
         "title": "utils/dom",
         "type": "module"
       },
       {
-        "path": "modules/_utils_index_.html",
+        "path": "modules/utils_index.html",
         "id": "_utils_index_",
         "title": "utils/index",
         "type": "module"
       },
       {
-        "path": "modules/_utils_set_attribute_.html",
+        "path": "modules/utils_set_attribute.html",
         "id": "_utils_set_attribute_",
         "title": "utils/set_attribute",
         "type": "module"
       },
       {
-        "path": "modules/_value_.html",
+        "path": "modules/value.html",
         "id": "_value_",
         "title": "value",
         "type": "module"
       },
       {
-        "path": "modules/_when_.html",
+        "path": "modules/when.html",
         "id": "_when_",
         "title": "when",
         "type": "module"
@@ -480,301 +480,301 @@
     ],
     "paperjs": [
       {
-        "path": "classes/_adapter_.paperadaptertemplate.html",
+        "path": "classes/adapter.paperadaptertemplate.html",
         "id": "_adapter_.paperadaptertemplate",
         "title": "PaperAdapterTemplate",
         "type": "class"
       },
       {
-        "path": "classes/_component_.papercomponenttemplate.html",
+        "path": "classes/component.papercomponenttemplate.html",
         "id": "_component_.papercomponenttemplate",
         "title": "PaperComponentTemplate",
         "type": "class"
       },
       {
-        "path": "classes/_context_.papercontext.html",
+        "path": "classes/context.papercontext.html",
         "id": "_context_.papercontext",
         "title": "PaperContext",
         "type": "class"
       },
       {
-        "path": "classes/_filter_.filterstatetemplate.html",
+        "path": "classes/filter.filterstatetemplate.html",
         "id": "_filter_.filterstatetemplate",
         "title": "FilterStateTemplate",
         "type": "class"
       },
       {
-        "path": "classes/_fragment_.paperfragmenttemplate.html",
+        "path": "classes/fragment.paperfragmenttemplate.html",
         "id": "_fragment_.paperfragmenttemplate",
         "title": "PaperFragmentTemplate",
         "type": "class"
       },
       {
-        "path": "classes/_item_.itemtemplate.html",
+        "path": "classes/item.itemtemplate.html",
         "id": "_item_.itemtemplate",
         "title": "ItemTemplate",
         "type": "class"
       },
       {
-        "path": "classes/_lazy_.paperlazytemplate.html",
+        "path": "classes/lazy.paperlazytemplate.html",
         "id": "_lazy_.paperlazytemplate",
         "title": "PaperLazyTemplate",
         "type": "class"
       },
       {
-        "path": "classes/_map_.mapactiontemplate.html",
+        "path": "classes/map.mapactiontemplate.html",
         "id": "_map_.mapactiontemplate",
         "title": "MapActionTemplate",
         "type": "class"
       },
       {
-        "path": "classes/_map_.mapquerytemplate.html",
+        "path": "classes/map.mapquerytemplate.html",
         "id": "_map_.mapquerytemplate",
         "title": "MapQueryTemplate",
         "type": "class"
       },
       {
-        "path": "classes/_map_.mapstatetemplate.html",
+        "path": "classes/map.mapstatetemplate.html",
         "id": "_map_.mapstatetemplate",
         "title": "MapStateTemplate",
         "type": "class"
       },
       {
-        "path": "classes/_match_.matchbooltemplate.html",
+        "path": "classes/match.matchbooltemplate.html",
         "id": "_match_.matchbooltemplate",
         "title": "MatchBoolTemplate",
         "type": "class"
       },
       {
-        "path": "classes/_match_.matchtemplate.html",
+        "path": "classes/match.matchtemplate.html",
         "id": "_match_.matchtemplate",
         "title": "MatchTemplate",
         "type": "class"
       },
       {
-        "path": "classes/_match_.matchvaluetemplate.html",
+        "path": "classes/match.matchvaluetemplate.html",
         "id": "_match_.matchvaluetemplate",
         "title": "MatchValueTemplate",
         "type": "class"
       },
       {
-        "path": "classes/_until_.paperuntiltemplate.html",
+        "path": "classes/until.paperuntiltemplate.html",
         "id": "_until_.paperuntiltemplate",
         "title": "PaperUntilTemplate",
         "type": "class"
       },
       {
-        "path": "classes/_when_.paperwhentemplate.html",
+        "path": "classes/when.paperwhentemplate.html",
         "id": "_when_.paperwhentemplate",
         "title": "PaperWhenTemplate",
         "type": "class"
       },
       {
-        "path": "interfaces/_adapter_.propagatearg.html",
+        "path": "interfaces/adapter.propagatearg.html",
         "id": "_adapter_.propagatearg",
         "title": "PropagateArg",
         "type": "interface"
       },
       {
-        "path": "interfaces/_item_.frameevent.html",
+        "path": "interfaces/item.frameevent.html",
         "id": "_item_.frameevent",
         "title": "FrameEvent",
         "type": "interface"
       },
       {
-        "path": "interfaces/_item_.itemevents.html",
+        "path": "interfaces/item.itemevents.html",
         "id": "_item_.itemevents",
         "title": "ItemEvents",
         "type": "interface"
       },
       {
-        "path": "interfaces/_raster_.rasterspecificevents.html",
+        "path": "interfaces/raster.rasterspecificevents.html",
         "id": "_raster_.rasterspecificevents",
         "title": "RasterSpecificEvents",
         "type": "interface"
       },
       {
-        "path": "interfaces/_template_.papertemplate.html",
+        "path": "interfaces/template.papertemplate.html",
         "id": "_template_.papertemplate",
         "title": "PaperTemplate",
         "type": "interface"
       },
       {
-        "path": "interfaces/_tempo_attributes_.tempoattributes.html",
+        "path": "interfaces/tempo_attributes.tempoattributes.html",
         "id": "_tempo_attributes_.tempoattributes",
         "title": "TempoAttributes",
         "type": "interface"
       },
       {
-        "path": "interfaces/_when_.whenoptions.html",
+        "path": "interfaces/when.whenoptions.html",
         "id": "_when_.whenoptions",
         "title": "WhenOptions",
         "type": "interface"
       },
       {
-        "path": "modules/_adapter_.html",
+        "path": "modules/adapter.html",
         "id": "_adapter_",
         "title": "adapter",
         "type": "module"
       },
       {
-        "path": "modules/_component_.html",
+        "path": "modules/component.html",
         "id": "_component_",
         "title": "component",
         "type": "module"
       },
       {
-        "path": "modules/_compound_path_.html",
+        "path": "modules/compound_path.html",
         "id": "_compound_path_",
         "title": "compound_path",
         "type": "module"
       },
       {
-        "path": "modules/_context_.html",
+        "path": "modules/context.html",
         "id": "_context_",
         "title": "context",
         "type": "module"
       },
       {
-        "path": "modules/_filter_.html",
+        "path": "modules/filter.html",
         "id": "_filter_",
         "title": "filter",
         "type": "module"
       },
       {
-        "path": "modules/_for_each_.html",
+        "path": "modules/for_each.html",
         "id": "_for_each_",
         "title": "for_each",
         "type": "module"
       },
       {
-        "path": "modules/_fragment_.html",
+        "path": "modules/fragment.html",
         "id": "_fragment_",
         "title": "fragment",
         "type": "module"
       },
       {
-        "path": "modules/_group_.html",
+        "path": "modules/group.html",
         "id": "_group_",
         "title": "group",
         "type": "module"
       },
       {
-        "path": "modules/_html_portal_.html",
+        "path": "modules/html_portal.html",
         "id": "_html_portal_",
         "title": "html_portal",
         "type": "module"
       },
       {
-        "path": "modules/_index_.html",
+        "path": "modules/index.html",
         "id": "_index_",
         "title": "index",
         "type": "module"
       },
       {
-        "path": "modules/_item_.html",
+        "path": "modules/item.html",
         "id": "_item_",
         "title": "item",
         "type": "module"
       },
       {
-        "path": "modules/_iterate_.html",
+        "path": "modules/iterate.html",
         "id": "_iterate_",
         "title": "iterate",
         "type": "module"
       },
       {
-        "path": "modules/_layer_.html",
+        "path": "modules/layer.html",
         "id": "_layer_",
         "title": "layer",
         "type": "module"
       },
       {
-        "path": "modules/_lazy_.html",
+        "path": "modules/lazy.html",
         "id": "_lazy_",
         "title": "lazy",
         "type": "module"
       },
       {
-        "path": "modules/_map_.html",
+        "path": "modules/map.html",
         "id": "_map_",
         "title": "map",
         "type": "module"
       },
       {
-        "path": "modules/_match_.html",
+        "path": "modules/match.html",
         "id": "_match_",
         "title": "match",
         "type": "module"
       },
       {
-        "path": "modules/_path_.html",
+        "path": "modules/path.html",
         "id": "_path_",
         "title": "path",
         "type": "module"
       },
       {
-        "path": "modules/_point_text_.html",
+        "path": "modules/point_text.html",
         "id": "_point_text_",
         "title": "point_text",
         "type": "module"
       },
       {
-        "path": "modules/_project_.html",
+        "path": "modules/project.html",
         "id": "_project_",
         "title": "project",
         "type": "module"
       },
       {
-        "path": "modules/_raster_.html",
+        "path": "modules/raster.html",
         "id": "_raster_",
         "title": "raster",
         "type": "module"
       },
       {
-        "path": "modules/_shape_.html",
+        "path": "modules/shape.html",
         "id": "_shape_",
         "title": "shape",
         "type": "module"
       },
       {
-        "path": "modules/_symbol_item_.html",
+        "path": "modules/symbol_item.html",
         "id": "_symbol_item_",
         "title": "symbol_item",
         "type": "module"
       },
       {
-        "path": "modules/_template_.html",
+        "path": "modules/template.html",
         "id": "_template_",
         "title": "template",
         "type": "module"
       },
       {
-        "path": "modules/_tempo_attributes_.html",
+        "path": "modules/tempo_attributes.html",
         "id": "_tempo_attributes_",
         "title": "tempo_attributes",
         "type": "module"
       },
       {
-        "path": "modules/_tool_.html",
+        "path": "modules/tool.html",
         "id": "_tool_",
         "title": "tool",
         "type": "module"
       },
       {
-        "path": "modules/_until_.html",
+        "path": "modules/until.html",
         "id": "_until_",
         "title": "until",
         "type": "module"
       },
       {
-        "path": "modules/_value_.html",
+        "path": "modules/value.html",
         "id": "_value_",
         "title": "value",
         "type": "module"
       },
       {
-        "path": "modules/_when_.html",
+        "path": "modules/when.html",
         "id": "_when_",
         "title": "when",
         "type": "module"
@@ -782,193 +782,193 @@
     ],
     "std": [
       {
-        "path": "classes/_newtype_.newtypeclass.html",
+        "path": "classes/newtype.newtypeclass.html",
         "id": "_newtype_.newtypeclass",
         "title": "NewtypeClass",
         "type": "class"
       },
       {
-        "path": "classes/_ord_.ord.html",
+        "path": "classes/ord.ord.html",
         "id": "_ord_.ord",
         "title": "Ord",
         "type": "class"
       },
       {
-        "path": "enums/_ord_.ordering.html",
+        "path": "enums/ord.ordering.html",
         "id": "_ord_.ordering",
         "title": "Ordering",
         "type": "enum"
       },
       {
-        "path": "interfaces/_json_.jsonobject.html",
+        "path": "interfaces/json.jsonobject.html",
         "id": "_json_.jsonobject",
         "title": "JSONObject",
         "type": "interface"
       },
       {
-        "path": "interfaces/_newtype_.newtype.html",
+        "path": "interfaces/newtype.newtype.html",
         "id": "_newtype_.newtype",
         "title": "Newtype",
         "type": "interface"
       },
       {
-        "path": "modules/_arrays_.html",
+        "path": "modules/arrays.html",
         "id": "_arrays_",
         "title": "arrays",
         "type": "module"
       },
       {
-        "path": "modules/_async_.html",
+        "path": "modules/async.html",
         "id": "_async_",
         "title": "async",
         "type": "module"
       },
       {
-        "path": "modules/_async_result_.html",
+        "path": "modules/async_result.html",
         "id": "_async_result_",
         "title": "async_result",
         "type": "module"
       },
       {
-        "path": "modules/_booleans_.html",
+        "path": "modules/booleans.html",
         "id": "_booleans_",
         "title": "booleans",
         "type": "module"
       },
       {
-        "path": "modules/_equals_.html",
+        "path": "modules/equals.html",
         "id": "_equals_",
         "title": "equals",
         "type": "module"
       },
       {
-        "path": "modules/_functions_.html",
+        "path": "modules/functions.html",
         "id": "_functions_",
         "title": "functions",
         "type": "module"
       },
       {
-        "path": "modules/_json_.html",
+        "path": "modules/json.html",
         "id": "_json_",
         "title": "json",
         "type": "module"
       },
       {
-        "path": "modules/_match_.html",
+        "path": "modules/match.html",
         "id": "_match_",
         "title": "match",
         "type": "module"
       },
       {
-        "path": "modules/_maybe_.html",
+        "path": "modules/maybe.html",
         "id": "_maybe_",
         "title": "maybe",
         "type": "module"
       },
       {
-        "path": "modules/_nel_.html",
+        "path": "modules/nel.html",
         "id": "_nel_",
         "title": "nel",
         "type": "module"
       },
       {
-        "path": "modules/_newtype_.html",
+        "path": "modules/newtype.html",
         "id": "_newtype_",
         "title": "newtype",
         "type": "module"
       },
       {
-        "path": "modules/_objects_.html",
+        "path": "modules/objects.html",
         "id": "_objects_",
         "title": "objects",
         "type": "module"
       },
       {
-        "path": "modules/_option_.html",
+        "path": "modules/option.html",
         "id": "_option_",
         "title": "option",
         "type": "module"
       },
       {
-        "path": "modules/_ord_.html",
+        "path": "modules/ord.html",
         "id": "_ord_",
         "title": "ord",
         "type": "module"
       },
       {
-        "path": "modules/_regexps_.html",
+        "path": "modules/regexps.html",
         "id": "_regexps_",
         "title": "regexps",
         "type": "module"
       },
       {
-        "path": "modules/_result_.html",
+        "path": "modules/result.html",
         "id": "_result_",
         "title": "result",
         "type": "module"
       },
       {
-        "path": "modules/_strings_.html",
+        "path": "modules/strings.html",
         "id": "_strings_",
         "title": "strings",
         "type": "module"
       },
       {
-        "path": "modules/_types_assert_.html",
+        "path": "modules/types_assert.html",
         "id": "_types_assert_",
         "title": "types/assert",
         "type": "module"
       },
       {
-        "path": "modules/_types_differentiate_.html",
+        "path": "modules/types_differentiate.html",
         "id": "_types_differentiate_",
         "title": "types/differentiate",
         "type": "module"
       },
       {
-        "path": "modules/_types_functions_.html",
+        "path": "modules/types_functions.html",
         "id": "_types_functions_",
         "title": "types/functions",
         "type": "module"
       },
       {
-        "path": "modules/_types_generic_.html",
+        "path": "modules/types_generic.html",
         "id": "_types_generic_",
         "title": "types/generic",
         "type": "module"
       },
       {
-        "path": "modules/_types_index_.html",
+        "path": "modules/types_index.html",
         "id": "_types_index_",
         "title": "types/index",
         "type": "module"
       },
       {
-        "path": "modules/_types_index_type_.html",
+        "path": "modules/types_index_type.html",
         "id": "_types_index_type_",
         "title": "types/index_type",
         "type": "module"
       },
       {
-        "path": "modules/_types_objects_.html",
+        "path": "modules/types_objects.html",
         "id": "_types_objects_",
         "title": "types/objects",
         "type": "module"
       },
       {
-        "path": "modules/_types_tuples_.html",
+        "path": "modules/types_tuples.html",
         "id": "_types_tuples_",
         "title": "types/tuples",
         "type": "module"
       },
       {
-        "path": "modules/_uuid_.html",
+        "path": "modules/uuid.html",
         "id": "_uuid_",
         "title": "uuid",
         "type": "module"
       },
       {
-        "path": "modules/_validation_.html",
+        "path": "modules/validation.html",
         "id": "_validation_",
         "title": "validation",
         "type": "module"
@@ -976,67 +976,67 @@
     ],
     "store": [
       {
-        "path": "classes/_emitter_.emitter.html",
+        "path": "classes/emitter.emitter.html",
         "id": "_emitter_.emitter",
         "title": "Emitter",
         "type": "class"
       },
       {
-        "path": "classes/_property_.property.html",
+        "path": "classes/property.property.html",
         "id": "_property_.property",
         "title": "Property",
         "type": "class"
       },
       {
-        "path": "classes/_store_.store.html",
+        "path": "classes/store.store.html",
         "id": "_store_.store",
         "title": "Store",
         "type": "class"
       },
       {
-        "path": "interfaces/_observable_.observable.html",
+        "path": "interfaces/observable.observable.html",
         "id": "_observable_.observable",
         "title": "Observable",
         "type": "interface"
       },
       {
-        "path": "modules/_emitter_.html",
+        "path": "modules/emitter.html",
         "id": "_emitter_",
         "title": "emitter",
         "type": "module"
       },
       {
-        "path": "modules/_index_.html",
+        "path": "modules/index.html",
         "id": "_index_",
         "title": "index",
         "type": "module"
       },
       {
-        "path": "modules/_listener_.html",
+        "path": "modules/listener.html",
         "id": "_listener_",
         "title": "listener",
         "type": "module"
       },
       {
-        "path": "modules/_observable_.html",
+        "path": "modules/observable.html",
         "id": "_observable_",
         "title": "observable",
         "type": "module"
       },
       {
-        "path": "modules/_property_.html",
+        "path": "modules/property.html",
         "id": "_property_",
         "title": "property",
         "type": "module"
       },
       {
-        "path": "modules/_reducer_.html",
+        "path": "modules/reducer.html",
         "id": "_reducer_",
         "title": "reducer",
         "type": "module"
       },
       {
-        "path": "modules/_store_.html",
+        "path": "modules/store.html",
         "id": "_store_",
         "title": "store",
         "type": "module"

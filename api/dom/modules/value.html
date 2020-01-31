@@ -1,0 +1,161 @@
+<h2 id="index">Index</h2>
+<h3 id="interfaces">Interfaces</h3>
+<ul>
+<li><a href="#/api/dom/interfaces/value.domattributes.html">DOMAttributes</a></li>
+</ul>
+<h3 id="typealiases">Type aliases</h3>
+<ul>
+<li><a href="#/api/dom/modules/value.html#attributevalue">AttributeValue</a></li>
+<li><a href="#/api/dom/modules/value.html#domattribute">DOMAttribute</a></li>
+<li><a href="#/api/dom/modules/value.html#domeventhandler">DOMEventHandler</a></li>
+<li><a href="#/api/dom/modules/value.html#domstyleattribute">DOMStyleAttribute</a></li>
+<li><a href="#/api/dom/modules/value.html#domtextvalue">DOMTextValue</a></li>
+</ul>
+<h3 id="functions">Functions</h3>
+<ul>
+<li><a href="#/api/dom/modules/value.html#const-attributetohandler">attributeToHandler</a></li>
+<li><a href="#/api/dom/modules/value.html#const-mapattribute">mapAttribute</a></li>
+<li><a href="#/api/dom/modules/value.html#const-resolveattribute">resolveAttribute</a></li>
+</ul>
+<h2 id="typealiases-1">Type aliases</h2>
+<h3 id="attributevalue">AttributeValue</h3>
+<p>Ƭ <strong>AttributeValue</strong>: <em>string | number | boolean | string[]</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/value.ts#L23">dom/src/value.ts:23</a></em></p>
+<hr>
+<h3 id="domattribute">DOMAttribute</h3>
+<p>Ƭ <strong>DOMAttribute</strong>: <em>UnwrappedValue‹State, Value | undefined› | undefined</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/value.ts#L17">dom/src/value.ts:17</a></em></p>
+<hr>
+<h3 id="domeventhandler">DOMEventHandler</h3>
+<p>Ƭ <strong>DOMEventHandler</strong>: <em>function</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/value.ts#L19">dom/src/value.ts:19</a></em></p>
+<h4 id="typedeclaration">Type declaration:</h4>
+<p>▸ (<code>state</code>: S, <code>event</code>: Ev, <code>element</code>: El): <em>Action | undefined</em></p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>state</code></td>
+<td>S</td>
+</tr>
+<tr>
+<td><code>event</code></td>
+<td>Ev</td>
+</tr>
+<tr>
+<td><code>element</code></td>
+<td>El</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="domstyleattribute">DOMStyleAttribute</h3>
+<p>Ƭ <strong>DOMStyleAttribute</strong>: <em>UnwrappedValue‹State, Value | undefined›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/value.ts#L21">dom/src/value.ts:21</a></em></p>
+<hr>
+<h3 id="domtextvalue">DOMTextValue</h3>
+<p>Ƭ <strong>DOMTextValue</strong>: <em><a href="#/api/dom/modules/value.html#domattribute">DOMAttribute</a>‹S, string›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/value.ts#L18">dom/src/value.ts:18</a></em></p>
+<h2 id="functions-1">Functions</h2>
+<h3 id="constattributetohandler"><code>Const</code> attributeToHandler</h3>
+<p>▸ <strong>attributeToHandler</strong>&lt;<strong>State</strong>, <strong>Value</strong>, <strong>Action</strong>, <strong>Ev</strong>, <strong>El</strong>&gt;(<code>attr</code>: <a href="#/api/dom/modules/value.html#domattribute">DOMAttribute</a>‹State, Value›, <code>handler</code>: <a href="#/api/dom/modules/value.html#domeventhandler">DOMEventHandler</a>‹Value, Action, Ev, El›): <em><a href="#/api/dom/modules/value.html#domeventhandler">DOMEventHandler</a>‹State, Action, Ev, El›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/value.ts#L52">dom/src/value.ts:52</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>State</strong></p>
+<p>▪ <strong>Value</strong></p>
+<p>▪ <strong>Action</strong></p>
+<p>▪ <strong>Ev</strong>: <em>Event</em></p>
+<p>▪ <strong>El</strong>: <em>Element</em></p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>attr</code></td>
+<td><a href="#/api/dom/modules/value.html#domattribute">DOMAttribute</a>‹State, Value›</td>
+</tr>
+<tr>
+<td><code>handler</code></td>
+<td><a href="#/api/dom/modules/value.html#domeventhandler">DOMEventHandler</a>‹Value, Action, Ev, El›</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong> <em><a href="#/api/dom/modules/value.html#domeventhandler">DOMEventHandler</a>‹State, Action, Ev, El›</em></p>
+<hr>
+<h3 id="constmapattribute"><code>Const</code> mapAttribute</h3>
+<p>▸ <strong>mapAttribute</strong>&lt;<strong>State</strong>, <strong>A</strong>, <strong>B</strong>&gt;(<code>attr</code>: <a href="#/api/dom/modules/value.html#domattribute">DOMAttribute</a>‹State, A›, <code>map</code>: function): <em><a href="#/api/dom/modules/value.html#domattribute">DOMAttribute</a>‹State, B›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/value.ts#L36">dom/src/value.ts:36</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>State</strong></p>
+<p>▪ <strong>A</strong></p>
+<p>▪ <strong>B</strong></p>
+<p><strong>Parameters:</strong></p>
+<p>▪ <strong>attr</strong>: <em><a href="#/api/dom/modules/value.html#domattribute">DOMAttribute</a>‹State, A›</em></p>
+<p>▪ <strong>map</strong>: <em>function</em></p>
+<p>▸ (<code>a</code>: A): <em>B</em></p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>a</code></td>
+<td>A</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong> <em><a href="#/api/dom/modules/value.html#domattribute">DOMAttribute</a>‹State, B›</em></p>
+<hr>
+<h3 id="constresolveattribute"><code>Const</code> resolveAttribute</h3>
+<p>▸ <strong>resolveAttribute</strong>&lt;<strong>State</strong>, <strong>Value</strong>&gt;(<code>attr</code>: <a href="#/api/dom/modules/value.html#domattribute">DOMAttribute</a>‹State, Value›): <em>function</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/value.ts#L73">dom/src/value.ts:73</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>State</strong></p>
+<p>▪ <strong>Value</strong></p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>attr</code></td>
+<td><a href="#/api/dom/modules/value.html#domattribute">DOMAttribute</a>‹State, Value›</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong> <em>function</em></p>
+<p>▸ (<code>state</code>: State): <em>Value | undefined</em></p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>state</code></td>
+<td>State</td>
+</tr>
+</tbody>
+</table>

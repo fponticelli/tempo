@@ -1,0 +1,86 @@
+<h2 id="typeparameters">Type parameters</h2>
+<p>▪ <strong>OuterState</strong></p>
+<p>▪ <strong>InnerState</strong></p>
+<p>▪ <strong>Action</strong></p>
+<p>▪ <strong>Query</strong></p>
+<h2 id="hierarchy">Hierarchy</h2>
+<ul>
+<li><strong>PaperUntilTemplate</strong></li>
+</ul>
+<h2 id="implements">Implements</h2>
+<ul>
+<li><a href="#/api/paperjs/interfaces/template.papertemplate.html">PaperTemplate</a>‹OuterState, Action, Query›</li>
+</ul>
+<h2 id="index">Index</h2>
+<h3 id="constructors">Constructors</h3>
+<ul>
+<li><a href="#/api/paperjs/classes/until.paperuntiltemplate.html#constructor">constructor</a></li>
+</ul>
+<h3 id="properties">Properties</h3>
+<ul>
+<li><a href="#/api/paperjs/classes/until.paperuntiltemplate.html#children">children</a></li>
+<li><a href="#/api/paperjs/classes/until.paperuntiltemplate.html#options">options</a></li>
+</ul>
+<h3 id="methods">Methods</h3>
+<ul>
+<li><a href="#/api/paperjs/classes/until.paperuntiltemplate.html#render">render</a></li>
+</ul>
+<h2 id="constructors-1">Constructors</h2>
+<h3 id="constructor-NaN">constructor</h3>
+<p>+ <strong>new PaperUntilTemplate</strong>(<code>options</code>: object, <code>children</code>: <a href="#/api/paperjs/interfaces/template.papertemplate.html">PaperTemplate</a>‹InnerState, Action, Query›[]): <em><a href="#/api/paperjs/classes/until.paperuntiltemplate.html">PaperUntilTemplate</a></em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/paperjs/src/until.ts#L21">paperjs/src/until.ts:21</a></em></p>
+<p><strong>Parameters:</strong></p>
+<p>▪ <strong>options</strong>: <em>object</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>repeatUntil</code></td>
+<td>function</td>
+</tr>
+</tbody>
+</table>
+<p>▪ <strong>children</strong>: <em><a href="#/api/paperjs/interfaces/template.papertemplate.html">PaperTemplate</a>‹InnerState, Action, Query›[]</em></p>
+<p><strong>Returns:</strong> <em><a href="#/api/paperjs/classes/until.paperuntiltemplate.html">PaperUntilTemplate</a></em></p>
+<h2 id="properties-1">Properties</h2>
+<h3 id="children">children</h3>
+<p>• <strong>children</strong>: <em><a href="#/api/paperjs/interfaces/template.papertemplate.html">PaperTemplate</a>‹InnerState, Action, Query›[]</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/paperjs/src/until.ts#L26">paperjs/src/until.ts:26</a></em></p>
+<hr>
+<h3 id="options">options</h3>
+<p>• <strong>options</strong>: <em>object</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/paperjs/src/until.ts#L23">paperjs/src/until.ts:23</a></em></p>
+<h4 id="typedeclaration">Type declaration:</h4>
+<ul>
+<li><p><strong>repeatUntil</strong>(): <em>function</em></p></li>
+<li><p>(<code>state</code>: OuterState, <code>index</code>: number): <em>InnerState | undefined</em></p></li>
+</ul>
+<h2 id="methods-1">Methods</h2>
+<h3 id="render">render</h3>
+<p>▸ <strong>render</strong>(<code>ctx</code>: <a href="#/api/paperjs/classes/context.papercontext.html">PaperContext</a>‹Action›, <code>state</code>: OuterState): <em>View‹OuterState, Query›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/paperjs/src/until.ts#L29">paperjs/src/until.ts:29</a></em></p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ctx</code></td>
+<td><a href="#/api/paperjs/classes/context.papercontext.html">PaperContext</a>‹Action›</td>
+</tr>
+<tr>
+<td><code>state</code></td>
+<td>OuterState</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong> <em>View‹OuterState, Query›</em></p>

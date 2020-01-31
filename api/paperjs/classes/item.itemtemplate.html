@@ -1,0 +1,354 @@
+<h2 id="typeparameters">Type parameters</h2>
+<p>▪ <strong>State</strong></p>
+<p>▪ <strong>Action</strong></p>
+<p>▪ <strong>Query</strong></p>
+<p>▪ <strong>I</strong>: <em>Item</em></p>
+<p>▪ <strong>T</strong></p>
+<h2 id="hierarchy">Hierarchy</h2>
+<ul>
+<li><strong>ItemTemplate</strong></li>
+</ul>
+<h2 id="implements">Implements</h2>
+<ul>
+<li><a href="#/api/paperjs/interfaces/template.papertemplate.html">PaperTemplate</a>‹State, Action, Query›</li>
+</ul>
+<h2 id="index">Index</h2>
+<h3 id="constructors">Constructors</h3>
+<ul>
+<li><a href="#/api/paperjs/classes/item.itemtemplate.html#constructor">constructor</a></li>
+</ul>
+<h3 id="properties">Properties</h3>
+<ul>
+<li><a href="#/api/paperjs/classes/item.itemtemplate.html#changeitem">changeItem</a></li>
+<li><a href="#/api/paperjs/classes/item.itemtemplate.html#createitem">createItem</a></li>
+<li><a href="#/api/paperjs/classes/item.itemtemplate.html#destroy">destroy</a></li>
+<li><a href="#/api/paperjs/classes/item.itemtemplate.html#request">request</a></li>
+</ul>
+<h3 id="methods">Methods</h3>
+<ul>
+<li><a href="#/api/paperjs/classes/item.itemtemplate.html#render">render</a></li>
+</ul>
+<h2 id="constructors-1">Constructors</h2>
+<h3 id="constructor-NaN">constructor</h3>
+<p>+ <strong>new ItemTemplate</strong>(<code>createItem</code>: function, <code>changeItem</code>: function, <code>destroy</code>: function, <code>request</code>: function): <em><a href="#/api/paperjs/classes/item.itemtemplate.html">ItemTemplate</a></em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/paperjs/src/item.ts#L51">paperjs/src/item.ts:51</a></em></p>
+<p><strong>Parameters:</strong></p>
+<p>▪ <strong>createItem</strong>: <em>function</em></p>
+<p>▸ (<code>wrapper</code>: object, <code>ctx</code>: <a href="#/api/paperjs/classes/context.papercontext.html">PaperContext</a>‹Action›): <em>function</em></p>
+<p><strong>Parameters:</strong></p>
+<p>▪ <strong>wrapper</strong>: <em>object</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>value</code></td>
+<td>T | undefined</td>
+</tr>
+</tbody>
+</table>
+<p>▪ <strong>ctx</strong>: <em><a href="#/api/paperjs/classes/context.papercontext.html">PaperContext</a>‹Action›</em></p>
+<p>▸ (<code>state</code>: State): <em>object</em></p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>state</code></td>
+<td>State</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><p><strong>item</strong>: <em>I</em></p></li>
+<li><p><strong>views</strong>: <em>View‹State, Query›[] | undefined</em></p></li>
+</ul>
+<p>▪ <strong>changeItem</strong>: <em>function</em></p>
+<p>▸ (<code>wrapper</code>: object, <code>ctx</code>: <a href="#/api/paperjs/classes/context.papercontext.html">PaperContext</a>‹Action›, <code>item</code>: I, <code>views</code>: View‹State, Query›[] | undefined): <em>function</em></p>
+<p><strong>Parameters:</strong></p>
+<p>▪ <strong>wrapper</strong>: <em>object</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>value</code></td>
+<td>T | undefined</td>
+</tr>
+</tbody>
+</table>
+<p>▪ <strong>ctx</strong>: <em><a href="#/api/paperjs/classes/context.papercontext.html">PaperContext</a>‹Action›</em></p>
+<p>▪ <strong>item</strong>: <em>I</em></p>
+<p>▪ <strong>views</strong>: <em>View‹State, Query›[] | undefined</em></p>
+<p>▸ (<code>state</code>: State): <em>void</em></p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>state</code></td>
+<td>State</td>
+</tr>
+</tbody>
+</table>
+<p>▪ <strong>destroy</strong>: <em>function</em></p>
+<p>▸ (<code>wrapper</code>: object, <code>ctx</code>: <a href="#/api/paperjs/classes/context.papercontext.html">PaperContext</a>‹Action›, <code>item</code>: I, <code>views</code>: View‹State, Query›[] | undefined): <em>function</em></p>
+<p><strong>Parameters:</strong></p>
+<p>▪ <strong>wrapper</strong>: <em>object</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>value</code></td>
+<td>T | undefined</td>
+</tr>
+</tbody>
+</table>
+<p>▪ <strong>ctx</strong>: <em><a href="#/api/paperjs/classes/context.papercontext.html">PaperContext</a>‹Action›</em></p>
+<p>▪ <strong>item</strong>: <em>I</em></p>
+<p>▪ <strong>views</strong>: <em>View‹State, Query›[] | undefined</em></p>
+<p>▸ (): <em>void</em></p>
+<p>▪ <strong>request</strong>: <em>function</em></p>
+<p>▸ (<code>wrapper</code>: object, <code>ctx</code>: <a href="#/api/paperjs/classes/context.papercontext.html">PaperContext</a>‹Action›, <code>item</code>: I, <code>views</code>: View‹State, Query›[] | undefined): <em>function</em></p>
+<p><strong>Parameters:</strong></p>
+<p>▪ <strong>wrapper</strong>: <em>object</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>value</code></td>
+<td>T | undefined</td>
+</tr>
+</tbody>
+</table>
+<p>▪ <strong>ctx</strong>: <em><a href="#/api/paperjs/classes/context.papercontext.html">PaperContext</a>‹Action›</em></p>
+<p>▪ <strong>item</strong>: <em>I</em></p>
+<p>▪ <strong>views</strong>: <em>View‹State, Query›[] | undefined</em></p>
+<p>▸ (<code>query</code>: Query): <em>void</em></p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>query</code></td>
+<td>Query</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong> <em><a href="#/api/paperjs/classes/item.itemtemplate.html">ItemTemplate</a></em></p>
+<h2 id="properties-1">Properties</h2>
+<h3 id="changeitem">changeItem</h3>
+<p>• <strong>changeItem</strong>: <em>function</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/paperjs/src/item.ts#L57">paperjs/src/item.ts:57</a></em></p>
+<h4 id="typedeclaration">Type declaration:</h4>
+<p>▸ (<code>wrapper</code>: object, <code>ctx</code>: <a href="#/api/paperjs/classes/context.papercontext.html">PaperContext</a>‹Action›, <code>item</code>: I, <code>views</code>: View‹State, Query›[] | undefined): <em>function</em></p>
+<p><strong>Parameters:</strong></p>
+<p>▪ <strong>wrapper</strong>: <em>object</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>value</code></td>
+<td>T | undefined</td>
+</tr>
+</tbody>
+</table>
+<p>▪ <strong>ctx</strong>: <em><a href="#/api/paperjs/classes/context.papercontext.html">PaperContext</a>‹Action›</em></p>
+<p>▪ <strong>item</strong>: <em>I</em></p>
+<p>▪ <strong>views</strong>: <em>View‹State, Query›[] | undefined</em></p>
+<p>▸ (<code>state</code>: State): <em>void</em></p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>state</code></td>
+<td>State</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="createitem">createItem</h3>
+<p>• <strong>createItem</strong>: <em>function</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/paperjs/src/item.ts#L53">paperjs/src/item.ts:53</a></em></p>
+<h4 id="typedeclaration-1">Type declaration:</h4>
+<p>▸ (<code>wrapper</code>: object, <code>ctx</code>: <a href="#/api/paperjs/classes/context.papercontext.html">PaperContext</a>‹Action›): <em>function</em></p>
+<p><strong>Parameters:</strong></p>
+<p>▪ <strong>wrapper</strong>: <em>object</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>value</code></td>
+<td>T | undefined</td>
+</tr>
+</tbody>
+</table>
+<p>▪ <strong>ctx</strong>: <em><a href="#/api/paperjs/classes/context.papercontext.html">PaperContext</a>‹Action›</em></p>
+<p>▸ (<code>state</code>: State): <em>object</em></p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>state</code></td>
+<td>State</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><p><strong>item</strong>: <em>I</em></p></li>
+<li><p><strong>views</strong>: <em>View‹State, Query›[] | undefined</em></p></li>
+</ul>
+<hr>
+<h3 id="destroy">destroy</h3>
+<p>• <strong>destroy</strong>: <em>function</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/paperjs/src/item.ts#L63">paperjs/src/item.ts:63</a></em></p>
+<h4 id="typedeclaration-2">Type declaration:</h4>
+<p>▸ (<code>wrapper</code>: object, <code>ctx</code>: <a href="#/api/paperjs/classes/context.papercontext.html">PaperContext</a>‹Action›, <code>item</code>: I, <code>views</code>: View‹State, Query›[] | undefined): <em>function</em></p>
+<p><strong>Parameters:</strong></p>
+<p>▪ <strong>wrapper</strong>: <em>object</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>value</code></td>
+<td>T | undefined</td>
+</tr>
+</tbody>
+</table>
+<p>▪ <strong>ctx</strong>: <em><a href="#/api/paperjs/classes/context.papercontext.html">PaperContext</a>‹Action›</em></p>
+<p>▪ <strong>item</strong>: <em>I</em></p>
+<p>▪ <strong>views</strong>: <em>View‹State, Query›[] | undefined</em></p>
+<p>▸ (): <em>void</em></p>
+<hr>
+<h3 id="request">request</h3>
+<p>• <strong>request</strong>: <em>function</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/paperjs/src/item.ts#L69">paperjs/src/item.ts:69</a></em></p>
+<h4 id="typedeclaration-3">Type declaration:</h4>
+<p>▸ (<code>wrapper</code>: object, <code>ctx</code>: <a href="#/api/paperjs/classes/context.papercontext.html">PaperContext</a>‹Action›, <code>item</code>: I, <code>views</code>: View‹State, Query›[] | undefined): <em>function</em></p>
+<p><strong>Parameters:</strong></p>
+<p>▪ <strong>wrapper</strong>: <em>object</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>value</code></td>
+<td>T | undefined</td>
+</tr>
+</tbody>
+</table>
+<p>▪ <strong>ctx</strong>: <em><a href="#/api/paperjs/classes/context.papercontext.html">PaperContext</a>‹Action›</em></p>
+<p>▪ <strong>item</strong>: <em>I</em></p>
+<p>▪ <strong>views</strong>: <em>View‹State, Query›[] | undefined</em></p>
+<p>▸ (<code>query</code>: Query): <em>void</em></p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>query</code></td>
+<td>Query</td>
+</tr>
+</tbody>
+</table>
+<h2 id="methods-1">Methods</h2>
+<h3 id="render">render</h3>
+<p>▸ <strong>render</strong>(<code>ctx</code>: <a href="#/api/paperjs/classes/context.papercontext.html">PaperContext</a>‹Action›, <code>state</code>: State): <em>object</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/paperjs/src/item.ts#L76">paperjs/src/item.ts:76</a></em></p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ctx</code></td>
+<td><a href="#/api/paperjs/classes/context.papercontext.html">PaperContext</a>‹Action›</td>
+</tr>
+<tr>
+<td><code>state</code></td>
+<td>State</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong> <em>object</em></p>
+<ul>
+<li><p><strong>change</strong>(): <em>function</em></p></li>
+<li><p>(<code>state</code>: State): <em>void</em></p></li>
+<li><p><strong>destroy</strong>(): <em>function</em></p></li>
+<li><p>(): <em>void</em></p></li>
+<li><p><strong>request</strong>(): <em>function</em></p></li>
+<li><p>(<code>query</code>: Query): <em>void</em></p></li>
+</ul>

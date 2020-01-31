@@ -1,0 +1,288 @@
+<h2 id="typeparameters">Type parameters</h2>
+<p>▪ <strong>Action</strong></p>
+<h2 id="hierarchy">Hierarchy</h2>
+<ul>
+<li><strong>DOMContext</strong></li>
+</ul>
+<h2 id="index">Index</h2>
+<h3 id="constructors">Constructors</h3>
+<ul>
+<li><a href="#/api/dom/classes/context.domcontext.html#constructor">constructor</a></li>
+</ul>
+<h3 id="properties">Properties</h3>
+<ul>
+<li><a href="#/api/dom/classes/context.domcontext.html#append">append</a></li>
+<li><a href="#/api/dom/classes/context.domcontext.html#dispatch">dispatch</a></li>
+<li><a href="#/api/dom/classes/context.domcontext.html#doc">doc</a></li>
+<li><a href="#/api/dom/classes/context.domcontext.html#parent">parent</a></li>
+</ul>
+<h3 id="methods">Methods</h3>
+<ul>
+<li><a href="#/api/dom/classes/context.domcontext.html#conditionalmapaction">conditionalMapAction</a></li>
+<li><a href="#/api/dom/classes/context.domcontext.html#mapaction">mapAction</a></li>
+<li><a href="#/api/dom/classes/context.domcontext.html#withappend">withAppend</a></li>
+<li><a href="#/api/dom/classes/context.domcontext.html#withappendtoreference">withAppendToReference</a></li>
+<li><a href="#/api/dom/classes/context.domcontext.html#withdispatch">withDispatch</a></li>
+<li><a href="#/api/dom/classes/context.domcontext.html#withparent">withParent</a></li>
+<li><a href="#/api/dom/classes/context.domcontext.html#static-fromelement">fromElement</a></li>
+</ul>
+<h2 id="constructors-1">Constructors</h2>
+<h3 id="constructor-NaN">constructor</h3>
+<p>+ <strong>new DOMContext</strong>(<code>doc</code>: Document, <code>append</code>: function, <code>parent</code>: Element, <code>dispatch</code>: function): <em><a href="#/api/dom/classes/context.domcontext.html">DOMContext</a></em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/context.ts#L25">dom/src/context.ts:25</a></em></p>
+<p><strong>Parameters:</strong></p>
+<p>▪ <strong>doc</strong>: <em>Document</em></p>
+<p>▪ <strong>append</strong>: <em>function</em></p>
+<p>▸ (<code>node</code>: Node): <em>void</em></p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>node</code></td>
+<td>Node</td>
+</tr>
+</tbody>
+</table>
+<p>▪ <strong>parent</strong>: <em>Element</em></p>
+<p>▪ <strong>dispatch</strong>: <em>function</em></p>
+<p>▸ (<code>action</code>: Action): <em>void</em></p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>action</code></td>
+<td>Action</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong> <em><a href="#/api/dom/classes/context.domcontext.html">DOMContext</a></em></p>
+<h2 id="properties-1">Properties</h2>
+<h3 id="append">append</h3>
+<p>• <strong>append</strong>: <em>function</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/context.ts#L29">dom/src/context.ts:29</a></em></p>
+<h4 id="typedeclaration">Type declaration:</h4>
+<p>▸ (<code>node</code>: Node): <em>void</em></p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>node</code></td>
+<td>Node</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="dispatch">dispatch</h3>
+<p>• <strong>dispatch</strong>: <em>function</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/context.ts#L31">dom/src/context.ts:31</a></em></p>
+<h4 id="typedeclaration-1">Type declaration:</h4>
+<p>▸ (<code>action</code>: Action): <em>void</em></p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>action</code></td>
+<td>Action</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="doc">doc</h3>
+<p>• <strong>doc</strong>: <em>Document</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/context.ts#L28">dom/src/context.ts:28</a></em></p>
+<hr>
+<h3 id="parent">parent</h3>
+<p>• <strong>parent</strong>: <em>Element</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/context.ts#L30">dom/src/context.ts:30</a></em></p>
+<h2 id="methods-1">Methods</h2>
+<h3 id="conditionalmapaction">conditionalMapAction</h3>
+<p>▸ <strong>conditionalMapAction</strong>&lt;<strong>OtherAction</strong>&gt;(<code>f</code>: function): <em><a href="#/api/dom/classes/context.domcontext.html">DOMContext</a>‹OtherAction›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/context.ts#L40">dom/src/context.ts:40</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>OtherAction</strong></p>
+<p><strong>Parameters:</strong></p>
+<p>▪ <strong>f</strong>: <em>function</em></p>
+<p>▸ (<code>action</code>: OtherAction): <em>Action | undefined</em></p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>action</code></td>
+<td>OtherAction</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong> <em><a href="#/api/dom/classes/context.domcontext.html">DOMContext</a>‹OtherAction›</em></p>
+<hr>
+<h3 id="mapaction">mapAction</h3>
+<p>▸ <strong>mapAction</strong>&lt;<strong>OtherAction</strong>&gt;(<code>f</code>: function): <em><a href="#/api/dom/classes/context.domcontext.html">DOMContext</a>‹OtherAction›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/context.ts#L34">dom/src/context.ts:34</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>OtherAction</strong></p>
+<p><strong>Parameters:</strong></p>
+<p>▪ <strong>f</strong>: <em>function</em></p>
+<p>▸ (<code>action</code>: OtherAction): <em>Action</em></p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>action</code></td>
+<td>OtherAction</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong> <em><a href="#/api/dom/classes/context.domcontext.html">DOMContext</a>‹OtherAction›</em></p>
+<hr>
+<h3 id="withappend">withAppend</h3>
+<p>▸ <strong>withAppend</strong>(<code>append</code>: function): <em><a href="#/api/dom/classes/context.domcontext.html">DOMContext</a>‹Action›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/context.ts#L58">dom/src/context.ts:58</a></em></p>
+<p><strong>Parameters:</strong></p>
+<p>▪ <strong>append</strong>: <em>function</em></p>
+<p>▸ (<code>node</code>: Node): <em>void</em></p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>node</code></td>
+<td>Node</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong> <em><a href="#/api/dom/classes/context.domcontext.html">DOMContext</a>‹Action›</em></p>
+<hr>
+<h3 id="withappendtoreference">withAppendToReference</h3>
+<p>▸ <strong>withAppendToReference</strong>(<code>refId?</code>: undefined | string): <em>object</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/context.ts#L49">dom/src/context.ts:49</a></em></p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>refId?</code></td>
+<td>undefined | string</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong> <em>object</em></p>
+<ul>
+<li><p><strong>ctx</strong>: <em><a href="#/api/dom/classes/context.domcontext.html">DOMContext</a>‹Action›</em> = this.withAppend(makeInsertBefore(ref))</p></li>
+<li><p><strong>ref</strong>: <em>Comment</em></p></li>
+</ul>
+<hr>
+<h3 id="withdispatch">withDispatch</h3>
+<p>▸ <strong>withDispatch</strong>&lt;<strong>OtherAction</strong>&gt;(<code>dispatch</code>: function): <em><a href="#/api/dom/classes/context.domcontext.html">DOMContext</a>‹OtherAction›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/context.ts#L66">dom/src/context.ts:66</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>OtherAction</strong></p>
+<p><strong>Parameters:</strong></p>
+<p>▪ <strong>dispatch</strong>: <em>function</em></p>
+<p>▸ (<code>action</code>: OtherAction): <em>void</em></p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>action</code></td>
+<td>OtherAction</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong> <em><a href="#/api/dom/classes/context.domcontext.html">DOMContext</a>‹OtherAction›</em></p>
+<hr>
+<h3 id="withparent">withParent</h3>
+<p>▸ <strong>withParent</strong>(<code>parent</code>: Element): <em><a href="#/api/dom/classes/context.domcontext.html">DOMContext</a>‹Action›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/context.ts#L62">dom/src/context.ts:62</a></em></p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>parent</code></td>
+<td>Element</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong> <em><a href="#/api/dom/classes/context.domcontext.html">DOMContext</a>‹Action›</em></p>
+<hr>
+<h3 id="staticfromelement"><code>Static</code> fromElement</h3>
+<p>▸ <strong>fromElement</strong>&lt;<strong>Action</strong>&gt;(<code>element</code>: Element, <code>dispatch</code>: function): <em><a href="#/api/dom/classes/context.domcontext.html">DOMContext</a>‹Action›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/context.ts#L17">dom/src/context.ts:17</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>Action</strong></p>
+<p><strong>Parameters:</strong></p>
+<p>▪ <strong>element</strong>: <em>Element</em></p>
+<p>▪ <strong>dispatch</strong>: <em>function</em></p>
+<p>▸ (<code>action</code>: Action): <em>void</em></p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>action</code></td>
+<td>Action</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong> <em><a href="#/api/dom/classes/context.domcontext.html">DOMContext</a>‹Action›</em></p>

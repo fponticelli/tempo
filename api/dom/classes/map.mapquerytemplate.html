@@ -1,0 +1,100 @@
+<h2 id="typeparameters">Type parameters</h2>
+<p>▪ <strong>State</strong></p>
+<p>▪ <strong>Action</strong></p>
+<p>▪ <strong>OuterQuery</strong></p>
+<p>▪ <strong>InnerQuery</strong></p>
+<h2 id="hierarchy">Hierarchy</h2>
+<ul>
+<li><strong>MapQueryTemplate</strong></li>
+</ul>
+<h2 id="implements">Implements</h2>
+<ul>
+<li><a href="#/api/dom/interfaces/template.domtemplate.html">DOMTemplate</a>‹State, Action, OuterQuery›</li>
+</ul>
+<h2 id="index">Index</h2>
+<h3 id="constructors">Constructors</h3>
+<ul>
+<li><a href="#/api/dom/classes/map.mapquerytemplate.html#constructor">constructor</a></li>
+</ul>
+<h3 id="properties">Properties</h3>
+<ul>
+<li><a href="#/api/dom/classes/map.mapquerytemplate.html#children">children</a></li>
+<li><a href="#/api/dom/classes/map.mapquerytemplate.html#map">map</a></li>
+</ul>
+<h3 id="methods">Methods</h3>
+<ul>
+<li><a href="#/api/dom/classes/map.mapquerytemplate.html#render">render</a></li>
+</ul>
+<h2 id="constructors-1">Constructors</h2>
+<h3 id="constructor-NaN">constructor</h3>
+<p>+ <strong>new MapQueryTemplate</strong>(<code>map</code>: function, <code>children</code>: <a href="#/api/dom/interfaces/template.domtemplate.html">DOMTemplate</a>‹State, Action, InnerQuery›[]): <em><a href="#/api/dom/classes/map.mapquerytemplate.html">MapQueryTemplate</a></em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/map.ts#L89">dom/src/map.ts:89</a></em></p>
+<p><strong>Parameters:</strong></p>
+<p>▪ <strong>map</strong>: <em>function</em></p>
+<p>▸ (<code>value</code>: OuterQuery): <em>InnerQuery | undefined</em></p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>value</code></td>
+<td>OuterQuery</td>
+</tr>
+</tbody>
+</table>
+<p>▪ <strong>children</strong>: <em><a href="#/api/dom/interfaces/template.domtemplate.html">DOMTemplate</a>‹State, Action, InnerQuery›[]</em></p>
+<p><strong>Returns:</strong> <em><a href="#/api/dom/classes/map.mapquerytemplate.html">MapQueryTemplate</a></em></p>
+<h2 id="properties-1">Properties</h2>
+<h3 id="children">children</h3>
+<p>• <strong>children</strong>: <em><a href="#/api/dom/interfaces/template.domtemplate.html">DOMTemplate</a>‹State, Action, InnerQuery›[]</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/map.ts#L92">dom/src/map.ts:92</a></em></p>
+<hr>
+<h3 id="map">map</h3>
+<p>• <strong>map</strong>: <em>function</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/map.ts#L91">dom/src/map.ts:91</a></em></p>
+<h4 id="typedeclaration">Type declaration:</h4>
+<p>▸ (<code>value</code>: OuterQuery): <em>InnerQuery | undefined</em></p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>value</code></td>
+<td>OuterQuery</td>
+</tr>
+</tbody>
+</table>
+<h2 id="methods-1">Methods</h2>
+<h3 id="render">render</h3>
+<p>▸ <strong>render</strong>(<code>ctx</code>: <a href="#/api/dom/classes/context.domcontext.html">DOMContext</a>‹Action›, <code>state</code>: State): <em>View‹State, OuterQuery›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/map.ts#L95">dom/src/map.ts:95</a></em></p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ctx</code></td>
+<td><a href="#/api/dom/classes/context.domcontext.html">DOMContext</a>‹Action›</td>
+</tr>
+<tr>
+<td><code>state</code></td>
+<td>State</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong> <em>View‹State, OuterQuery›</em></p>

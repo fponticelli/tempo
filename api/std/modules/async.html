@@ -1,0 +1,1069 @@
+<h2 id="index">Index</h2>
+<h3 id="typealiases">Type aliases</h3>
+<ul>
+<li><a href="#/api/std/modules/async.html#async">Async</a></li>
+<li><a href="#/api/std/modules/async.html#loading">Loading</a></li>
+<li><a href="#/api/std/modules/async.html#notasked">NotAsked</a></li>
+<li><a href="#/api/std/modules/async.html#outcome">Outcome</a></li>
+<li><a href="#/api/std/modules/async.html#t">T</a></li>
+</ul>
+<h3 id="variables">Variables</h3>
+<ul>
+<li><a href="#/api/std/modules/async.html#const-notasked">notAsked</a></li>
+</ul>
+<h3 id="functions">Functions</h3>
+<ul>
+<li><a href="#/api/std/modules/async.html#const-all">all</a></li>
+<li><a href="#/api/std/modules/async.html#const-any">any</a></li>
+<li><a href="#/api/std/modules/async.html#const-cata">cata</a></li>
+<li><a href="#/api/std/modules/async.html#const-catalazy">cataLazy</a></li>
+<li><a href="#/api/std/modules/async.html#const-each">each</a></li>
+<li><a href="#/api/std/modules/async.html#const-firstoutcome">firstOutcome</a></li>
+<li><a href="#/api/std/modules/async.html#const-flatmap">flatMap</a></li>
+<li><a href="#/api/std/modules/async.html#flatmapn">flatMapN</a></li>
+<li><a href="#/api/std/modules/async.html#const-flatten">flatten</a></li>
+<li><a href="#/api/std/modules/async.html#const-foldleft">foldLeft</a></li>
+<li><a href="#/api/std/modules/async.html#const-getorelse">getOrElse</a></li>
+<li><a href="#/api/std/modules/async.html#const-getorelselazy">getOrElseLazy</a></li>
+<li><a href="#/api/std/modules/async.html#const-getorthrow">getOrThrow</a></li>
+<li><a href="#/api/std/modules/async.html#const-isloading">isLoading</a></li>
+<li><a href="#/api/std/modules/async.html#const-isnotasked">isNotAsked</a></li>
+<li><a href="#/api/std/modules/async.html#const-isoutcome">isOutcome</a></li>
+<li><a href="#/api/std/modules/async.html#const-loading">loading</a></li>
+<li><a href="#/api/std/modules/async.html#const-map">map</a></li>
+<li><a href="#/api/std/modules/async.html#const-maploading">mapLoading</a></li>
+<li><a href="#/api/std/modules/async.html#mapn">mapN</a></li>
+<li><a href="#/api/std/modules/async.html#const-outcome">outcome</a></li>
+<li><a href="#/api/std/modules/async.html#const-recover">recover</a></li>
+<li><a href="#/api/std/modules/async.html#const-toarray">toArray</a></li>
+<li><a href="#/api/std/modules/async.html#const-tomaybe">toMaybe</a></li>
+<li><a href="#/api/std/modules/async.html#const-tooption">toOption</a></li>
+</ul>
+<h2 id="typealiases-1">Type aliases</h2>
+<h3 id="async">Async</h3>
+<p>Ƭ <strong>Async</strong>: <em><a href="#/api/std/modules/async.html#outcome">Outcome</a>‹T› | <a href="#/api/std/modules/async.html#notasked">NotAsked</a> | <a href="#/api/std/modules/async.html#loading">Loading</a>‹P›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/async.ts#L23">async.ts:23</a></em></p>
+<hr>
+<h3 id="loading">Loading</h3>
+<p>Ƭ <strong>Loading</strong>: <em>object</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/async.ts#L21">async.ts:21</a></em></p>
+<h4 id="typedeclaration">Type declaration:</h4>
+<ul>
+<li><p><strong>kind</strong>: <em>"Loading"</em></p></li>
+<li><p><strong>progress</strong>: <em>P</em></p></li>
+</ul>
+<hr>
+<h3 id="notasked">NotAsked</h3>
+<p>Ƭ <strong>NotAsked</strong>: <em>object</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/async.ts#L20">async.ts:20</a></em></p>
+<h4 id="typedeclaration-1">Type declaration:</h4>
+<ul>
+<li><strong>kind</strong>: <em>"NotAsked"</em></li>
+</ul>
+<hr>
+<h3 id="outcome">Outcome</h3>
+<p>Ƭ <strong>Outcome</strong>: <em>object</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/async.ts#L19">async.ts:19</a></em></p>
+<h4 id="typedeclaration-2">Type declaration:</h4>
+<ul>
+<li><p><strong>kind</strong>: <em>"Outcome"</em></p></li>
+<li><p><strong>value</strong>: <em>T</em></p></li>
+</ul>
+<hr>
+<h3 id="t">T</h3>
+<p>Ƭ <strong>T</strong>: <em><a href="#/api/std/modules/async.html#async">Async</a>‹V, E›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/async.ts#L231">async.ts:231</a></em></p>
+<h2 id="variables-1">Variables</h2>
+<h3 id="constnotasked"><code>Const</code> notAsked</h3>
+<p>• <strong>notAsked</strong>: <em>object | object | object</em> = { kind: 'NotAsked' } as Async<never, never=""></never,></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/async.ts#L29">async.ts:29</a></em></p>
+<h2 id="functions-1">Functions</h2>
+<h3 id="constall"><code>Const</code> all</h3>
+<p>▸ <strong>all</strong>&lt;<strong>T</strong>, <strong>P</strong>&gt;(<code>f</code>: function, <code>async</code>: <a href="#/api/std/modules/async.html#async">Async</a>‹T, P›): <em>boolean</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/async.ts#L188">async.ts:188</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>T</strong></p>
+<p>▪ <strong>P</strong></p>
+<p><strong>Parameters:</strong></p>
+<p>▪ <strong>f</strong>: <em>function</em></p>
+<p>▸ (<code>v</code>: T): <em>boolean</em></p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>v</code></td>
+<td>T</td>
+</tr>
+</tbody>
+</table>
+<p>▪ <strong>async</strong>: <em><a href="#/api/std/modules/async.html#async">Async</a>‹T, P›</em></p>
+<p><strong>Returns:</strong> <em>boolean</em></p>
+<hr>
+<h3 id="constany"><code>Const</code> any</h3>
+<p>▸ <strong>any</strong>&lt;<strong>T</strong>, <strong>P</strong>&gt;(<code>f</code>: function, <code>async</code>: <a href="#/api/std/modules/async.html#async">Async</a>‹T, P›): <em>boolean</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/async.ts#L196">async.ts:196</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>T</strong></p>
+<p>▪ <strong>P</strong></p>
+<p><strong>Parameters:</strong></p>
+<p>▪ <strong>f</strong>: <em>function</em></p>
+<p>▸ (<code>v</code>: T): <em>boolean</em></p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>v</code></td>
+<td>T</td>
+</tr>
+</tbody>
+</table>
+<p>▪ <strong>async</strong>: <em><a href="#/api/std/modules/async.html#async">Async</a>‹T, P›</em></p>
+<p><strong>Returns:</strong> <em>boolean</em></p>
+<hr>
+<h3 id="constcata"><code>Const</code> cata</h3>
+<p>▸ <strong>cata</strong>&lt;<strong>A</strong>, <strong>B</strong>, <strong>Prog</strong>&gt;(<code>f</code>: function, <code>async</code>: <a href="#/api/std/modules/async.html#async">Async</a>‹A, Prog›, <code>ifNotOutcome</code>: B): <em>B</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/async.ts#L164">async.ts:164</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>A</strong></p>
+<p>▪ <strong>B</strong></p>
+<p>▪ <strong>Prog</strong></p>
+<p><strong>Parameters:</strong></p>
+<p>▪ <strong>f</strong>: <em>function</em></p>
+<p>▸ (<code>a</code>: A): <em>B</em></p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>a</code></td>
+<td>A</td>
+</tr>
+</tbody>
+</table>
+<p>▪ <strong>async</strong>: <em><a href="#/api/std/modules/async.html#async">Async</a>‹A, Prog›</em></p>
+<p>▪ <strong>ifNotOutcome</strong>: <em>B</em></p>
+<p><strong>Returns:</strong> <em>B</em></p>
+<hr>
+<h3 id="constcatalazy"><code>Const</code> cataLazy</h3>
+<p>▸ <strong>cataLazy</strong>&lt;<strong>A</strong>, <strong>B</strong>, <strong>Prog</strong>&gt;(<code>f</code>: function, <code>async</code>: <a href="#/api/std/modules/async.html#async">Async</a>‹A, Prog›, <code>ifNotOutcome</code>: function): <em>B</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/async.ts#L172">async.ts:172</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>A</strong></p>
+<p>▪ <strong>B</strong></p>
+<p>▪ <strong>Prog</strong></p>
+<p><strong>Parameters:</strong></p>
+<p>▪ <strong>f</strong>: <em>function</em></p>
+<p>▸ (<code>a</code>: A): <em>B</em></p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>a</code></td>
+<td>A</td>
+</tr>
+</tbody>
+</table>
+<p>▪ <strong>async</strong>: <em><a href="#/api/std/modules/async.html#async">Async</a>‹A, Prog›</em></p>
+<p>▪ <strong>ifNotOutcome</strong>: <em>function</em></p>
+<p>▸ (): <em>B</em></p>
+<p><strong>Returns:</strong> <em>B</em></p>
+<hr>
+<h3 id="consteach"><code>Const</code> each</h3>
+<p>▸ <strong>each</strong>&lt;<strong>T</strong>, <strong>P</strong>&gt;(<code>f</code>: function, <code>async</code>: <a href="#/api/std/modules/async.html#async">Async</a>‹T, P›): <em>void</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/async.ts#L204">async.ts:204</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>T</strong></p>
+<p>▪ <strong>P</strong></p>
+<p><strong>Parameters:</strong></p>
+<p>▪ <strong>f</strong>: <em>function</em></p>
+<p>▸ (<code>v</code>: T): <em>void</em></p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>v</code></td>
+<td>T</td>
+</tr>
+</tbody>
+</table>
+<p>▪ <strong>async</strong>: <em><a href="#/api/std/modules/async.html#async">Async</a>‹T, P›</em></p>
+<p><strong>Returns:</strong> <em>void</em></p>
+<hr>
+<h3 id="constfirstoutcome"><code>Const</code> firstOutcome</h3>
+<p>▸ <strong>firstOutcome</strong>&lt;<strong>A</strong>, <strong>Prog</strong>&gt;(…<code>args</code>: <a href="#/api/std/modules/async.html#async">Async</a>‹A, Prog›[]): <em><a href="#/api/std/modules/async.html#async">Async</a>‹A, Prog›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/async.ts#L212">async.ts:212</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>A</strong></p>
+<p>▪ <strong>Prog</strong></p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>...args</code></td>
+<td><a href="#/api/std/modules/async.html#async">Async</a>‹A, Prog›[]</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong> <em><a href="#/api/std/modules/async.html#async">Async</a>‹A, Prog›</em></p>
+<hr>
+<h3 id="constflatmap"><code>Const</code> flatMap</h3>
+<p>▸ <strong>flatMap</strong>&lt;<strong>A</strong>, <strong>B</strong>, <strong>Prog</strong>&gt;(<code>f</code>: function, <code>async</code>: <a href="#/api/std/modules/async.html#async">Async</a>‹A, Prog›): <em><a href="#/api/std/modules/async.html#async">Async</a>‹B, Prog›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/async.ts#L68">async.ts:68</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>A</strong></p>
+<p>▪ <strong>B</strong></p>
+<p>▪ <strong>Prog</strong></p>
+<p><strong>Parameters:</strong></p>
+<p>▪ <strong>f</strong>: <em>function</em></p>
+<p>▸ (<code>a</code>: A): <em><a href="#/api/std/modules/async.html#async">Async</a>‹B, Prog›</em></p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>a</code></td>
+<td>A</td>
+</tr>
+</tbody>
+</table>
+<p>▪ <strong>async</strong>: <em><a href="#/api/std/modules/async.html#async">Async</a>‹A, Prog›</em></p>
+<p><strong>Returns:</strong> <em><a href="#/api/std/modules/async.html#async">Async</a>‹B, Prog›</em></p>
+<hr>
+<h3 id="flatmapn">flatMapN</h3>
+<p>▸ <strong>flatMapN</strong>&lt;<strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>Prog</strong>&gt;(<code>f</code>: <a href="#/api/std/modules/types_functions.html#fun2">Fun2</a>‹A, B, <a href="#/api/std/modules/async.html#async">Async</a>‹C, Prog››, <code>a</code>: <a href="#/api/std/modules/async.html#async">Async</a>‹A, Prog›, <code>b</code>: <a href="#/api/std/modules/async.html#async">Async</a>‹B, Prog›): <em><a href="#/api/std/modules/async.html#async">Async</a>‹C, Prog›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/async.ts#L76">async.ts:76</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>A</strong></p>
+<p>▪ <strong>B</strong></p>
+<p>▪ <strong>C</strong></p>
+<p>▪ <strong>Prog</strong></p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>f</code></td>
+<td><a href="#/api/std/modules/types_functions.html#fun2">Fun2</a>‹A, B, <a href="#/api/std/modules/async.html#async">Async</a>‹C, Prog››</td>
+</tr>
+<tr>
+<td><code>a</code></td>
+<td><a href="#/api/std/modules/async.html#async">Async</a>‹A, Prog›</td>
+</tr>
+<tr>
+<td><code>b</code></td>
+<td><a href="#/api/std/modules/async.html#async">Async</a>‹B, Prog›</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong> <em><a href="#/api/std/modules/async.html#async">Async</a>‹C, Prog›</em></p>
+<p>▸ <strong>flatMapN</strong>&lt;<strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>D</strong>, <strong>Prog</strong>&gt;(<code>f</code>: <a href="#/api/std/modules/types_functions.html#fun3">Fun3</a>‹A, B, C, <a href="#/api/std/modules/async.html#async">Async</a>‹D, Prog››, <code>a</code>: <a href="#/api/std/modules/async.html#async">Async</a>‹A, Prog›, <code>b</code>: <a href="#/api/std/modules/async.html#async">Async</a>‹B, Prog›, <code>c</code>: <a href="#/api/std/modules/async.html#async">Async</a>‹C, Prog›): <em><a href="#/api/std/modules/async.html#async">Async</a>‹D, Prog›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/async.ts#L79">async.ts:79</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>A</strong></p>
+<p>▪ <strong>B</strong></p>
+<p>▪ <strong>C</strong></p>
+<p>▪ <strong>D</strong></p>
+<p>▪ <strong>Prog</strong></p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>f</code></td>
+<td><a href="#/api/std/modules/types_functions.html#fun3">Fun3</a>‹A, B, C, <a href="#/api/std/modules/async.html#async">Async</a>‹D, Prog››</td>
+</tr>
+<tr>
+<td><code>a</code></td>
+<td><a href="#/api/std/modules/async.html#async">Async</a>‹A, Prog›</td>
+</tr>
+<tr>
+<td><code>b</code></td>
+<td><a href="#/api/std/modules/async.html#async">Async</a>‹B, Prog›</td>
+</tr>
+<tr>
+<td><code>c</code></td>
+<td><a href="#/api/std/modules/async.html#async">Async</a>‹C, Prog›</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong> <em><a href="#/api/std/modules/async.html#async">Async</a>‹D, Prog›</em></p>
+<p>▸ <strong>flatMapN</strong>&lt;<strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>D</strong>, <strong>E</strong>, <strong>Prog</strong>&gt;(<code>f</code>: <a href="#/api/std/modules/types_functions.html#fun4">Fun4</a>‹A, B, C, D, <a href="#/api/std/modules/async.html#async">Async</a>‹E, Prog››, <code>a</code>: <a href="#/api/std/modules/async.html#async">Async</a>‹A, Prog›, <code>b</code>: <a href="#/api/std/modules/async.html#async">Async</a>‹B, Prog›, <code>c</code>: <a href="#/api/std/modules/async.html#async">Async</a>‹C, Prog›, <code>d</code>: <a href="#/api/std/modules/async.html#async">Async</a>‹D, Prog›): <em><a href="#/api/std/modules/async.html#async">Async</a>‹E, Prog›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/async.ts#L82">async.ts:82</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>A</strong></p>
+<p>▪ <strong>B</strong></p>
+<p>▪ <strong>C</strong></p>
+<p>▪ <strong>D</strong></p>
+<p>▪ <strong>E</strong></p>
+<p>▪ <strong>Prog</strong></p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>f</code></td>
+<td><a href="#/api/std/modules/types_functions.html#fun4">Fun4</a>‹A, B, C, D, <a href="#/api/std/modules/async.html#async">Async</a>‹E, Prog››</td>
+</tr>
+<tr>
+<td><code>a</code></td>
+<td><a href="#/api/std/modules/async.html#async">Async</a>‹A, Prog›</td>
+</tr>
+<tr>
+<td><code>b</code></td>
+<td><a href="#/api/std/modules/async.html#async">Async</a>‹B, Prog›</td>
+</tr>
+<tr>
+<td><code>c</code></td>
+<td><a href="#/api/std/modules/async.html#async">Async</a>‹C, Prog›</td>
+</tr>
+<tr>
+<td><code>d</code></td>
+<td><a href="#/api/std/modules/async.html#async">Async</a>‹D, Prog›</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong> <em><a href="#/api/std/modules/async.html#async">Async</a>‹E, Prog›</em></p>
+<p>▸ <strong>flatMapN</strong>&lt;<strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>D</strong>, <strong>E</strong>, <strong>F</strong>, <strong>Prog</strong>&gt;(<code>f</code>: <a href="#/api/std/modules/types_functions.html#fun5">Fun5</a>‹A, B, C, D, E, <a href="#/api/std/modules/async.html#async">Async</a>‹F, Prog››, <code>a</code>: <a href="#/api/std/modules/async.html#async">Async</a>‹A, Prog›, <code>b</code>: <a href="#/api/std/modules/async.html#async">Async</a>‹B, Prog›, <code>c</code>: <a href="#/api/std/modules/async.html#async">Async</a>‹C, Prog›, <code>d</code>: <a href="#/api/std/modules/async.html#async">Async</a>‹D, Prog›, <code>e</code>: <a href="#/api/std/modules/async.html#async">Async</a>‹E, Prog›): <em><a href="#/api/std/modules/async.html#async">Async</a>‹F, Prog›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/async.ts#L85">async.ts:85</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>A</strong></p>
+<p>▪ <strong>B</strong></p>
+<p>▪ <strong>C</strong></p>
+<p>▪ <strong>D</strong></p>
+<p>▪ <strong>E</strong></p>
+<p>▪ <strong>F</strong></p>
+<p>▪ <strong>Prog</strong></p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>f</code></td>
+<td><a href="#/api/std/modules/types_functions.html#fun5">Fun5</a>‹A, B, C, D, E, <a href="#/api/std/modules/async.html#async">Async</a>‹F, Prog››</td>
+</tr>
+<tr>
+<td><code>a</code></td>
+<td><a href="#/api/std/modules/async.html#async">Async</a>‹A, Prog›</td>
+</tr>
+<tr>
+<td><code>b</code></td>
+<td><a href="#/api/std/modules/async.html#async">Async</a>‹B, Prog›</td>
+</tr>
+<tr>
+<td><code>c</code></td>
+<td><a href="#/api/std/modules/async.html#async">Async</a>‹C, Prog›</td>
+</tr>
+<tr>
+<td><code>d</code></td>
+<td><a href="#/api/std/modules/async.html#async">Async</a>‹D, Prog›</td>
+</tr>
+<tr>
+<td><code>e</code></td>
+<td><a href="#/api/std/modules/async.html#async">Async</a>‹E, Prog›</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong> <em><a href="#/api/std/modules/async.html#async">Async</a>‹F, Prog›</em></p>
+<p>▸ <strong>flatMapN</strong>&lt;<strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>D</strong>, <strong>E</strong>, <strong>F</strong>, <strong>G</strong>, <strong>Prog</strong>&gt;(<code>f</code>: <a href="#/api/std/modules/types_functions.html#fun6">Fun6</a>‹A, B, C, D, E, F, <a href="#/api/std/modules/async.html#async">Async</a>‹G, Prog››, <code>a</code>: <a href="#/api/std/modules/async.html#async">Async</a>‹A, Prog›, <code>b</code>: <a href="#/api/std/modules/async.html#async">Async</a>‹B, Prog›, <code>c</code>: <a href="#/api/std/modules/async.html#async">Async</a>‹C, Prog›, <code>d</code>: <a href="#/api/std/modules/async.html#async">Async</a>‹D, Prog›, <code>e</code>: <a href="#/api/std/modules/async.html#async">Async</a>‹E, Prog›, <code>g</code>: <a href="#/api/std/modules/async.html#async">Async</a>‹F, Prog›): <em><a href="#/api/std/modules/async.html#async">Async</a>‹G, Prog›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/async.ts#L88">async.ts:88</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>A</strong></p>
+<p>▪ <strong>B</strong></p>
+<p>▪ <strong>C</strong></p>
+<p>▪ <strong>D</strong></p>
+<p>▪ <strong>E</strong></p>
+<p>▪ <strong>F</strong></p>
+<p>▪ <strong>G</strong></p>
+<p>▪ <strong>Prog</strong></p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>f</code></td>
+<td><a href="#/api/std/modules/types_functions.html#fun6">Fun6</a>‹A, B, C, D, E, F, <a href="#/api/std/modules/async.html#async">Async</a>‹G, Prog››</td>
+</tr>
+<tr>
+<td><code>a</code></td>
+<td><a href="#/api/std/modules/async.html#async">Async</a>‹A, Prog›</td>
+</tr>
+<tr>
+<td><code>b</code></td>
+<td><a href="#/api/std/modules/async.html#async">Async</a>‹B, Prog›</td>
+</tr>
+<tr>
+<td><code>c</code></td>
+<td><a href="#/api/std/modules/async.html#async">Async</a>‹C, Prog›</td>
+</tr>
+<tr>
+<td><code>d</code></td>
+<td><a href="#/api/std/modules/async.html#async">Async</a>‹D, Prog›</td>
+</tr>
+<tr>
+<td><code>e</code></td>
+<td><a href="#/api/std/modules/async.html#async">Async</a>‹E, Prog›</td>
+</tr>
+<tr>
+<td><code>g</code></td>
+<td><a href="#/api/std/modules/async.html#async">Async</a>‹F, Prog›</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong> <em><a href="#/api/std/modules/async.html#async">Async</a>‹G, Prog›</em></p>
+<hr>
+<h3 id="constflatten"><code>Const</code> flatten</h3>
+<p>▸ <strong>flatten</strong>&lt;<strong>T</strong>, <strong>P</strong>&gt;(<code>async</code>: <a href="#/api/std/modules/async.html#async">Async</a>‹<a href="#/api/std/modules/async.html#async">Async</a>‹T, P›, P›): <em><a href="#/api/std/modules/async.html#async">Async</a>‹T, P›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/async.ts#L156">async.ts:156</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>T</strong></p>
+<p>▪ <strong>P</strong></p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>async</code></td>
+<td><a href="#/api/std/modules/async.html#async">Async</a>‹<a href="#/api/std/modules/async.html#async">Async</a>‹T, P›, P›</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong> <em><a href="#/api/std/modules/async.html#async">Async</a>‹T, P›</em></p>
+<hr>
+<h3 id="constfoldleft"><code>Const</code> foldLeft</h3>
+<p>▸ <strong>foldLeft</strong>&lt;<strong>T</strong>, <strong>B</strong>, <strong>Prog</strong>&gt;(<code>f</code>: function, <code>async</code>: <a href="#/api/std/modules/async.html#async">Async</a>‹T, Prog›, <code>b</code>: B): <em>B</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/async.ts#L180">async.ts:180</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>T</strong></p>
+<p>▪ <strong>B</strong></p>
+<p>▪ <strong>Prog</strong></p>
+<p><strong>Parameters:</strong></p>
+<p>▪ <strong>f</strong>: <em>function</em></p>
+<p>▸ (<code>acc</code>: B, <code>curr</code>: T): <em>B</em></p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>acc</code></td>
+<td>B</td>
+</tr>
+<tr>
+<td><code>curr</code></td>
+<td>T</td>
+</tr>
+</tbody>
+</table>
+<p>▪ <strong>async</strong>: <em><a href="#/api/std/modules/async.html#async">Async</a>‹T, Prog›</em></p>
+<p>▪ <strong>b</strong>: <em>B</em></p>
+<p><strong>Returns:</strong> <em>B</em></p>
+<hr>
+<h3 id="constgetorelse"><code>Const</code> getOrElse</h3>
+<p>▸ <strong>getOrElse</strong>&lt;<strong>T</strong>, <strong>P</strong>&gt;(<code>async</code>: <a href="#/api/std/modules/async.html#async">Async</a>‹T, P›, <code>alt</code>: T): <em>T</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/async.ts#L116">async.ts:116</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>T</strong></p>
+<p>▪ <strong>P</strong></p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>async</code></td>
+<td><a href="#/api/std/modules/async.html#async">Async</a>‹T, P›</td>
+</tr>
+<tr>
+<td><code>alt</code></td>
+<td>T</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong> <em>T</em></p>
+<hr>
+<h3 id="constgetorelselazy"><code>Const</code> getOrElseLazy</h3>
+<p>▸ <strong>getOrElseLazy</strong>&lt;<strong>T</strong>, <strong>P</strong>&gt;(<code>async</code>: <a href="#/api/std/modules/async.html#async">Async</a>‹T, P›, <code>alt</code>: function): <em>T</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/async.ts#L124">async.ts:124</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>T</strong></p>
+<p>▪ <strong>P</strong></p>
+<p><strong>Parameters:</strong></p>
+<p>▪ <strong>async</strong>: <em><a href="#/api/std/modules/async.html#async">Async</a>‹T, P›</em></p>
+<p>▪ <strong>alt</strong>: <em>function</em></p>
+<p>▸ (): <em>T</em></p>
+<p><strong>Returns:</strong> <em>T</em></p>
+<hr>
+<h3 id="constgetorthrow"><code>Const</code> getOrThrow</h3>
+<p>▸ <strong>getOrThrow</strong>&lt;<strong>T</strong>, <strong>P</strong>&gt;(<code>async</code>: <a href="#/api/std/modules/async.html#async">Async</a>‹T, P›): <em><a href="#/api/std/modules/maybe.html#maybe">Maybe</a>‹T›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/async.ts#L108">async.ts:108</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>T</strong></p>
+<p>▪ <strong>P</strong></p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>async</code></td>
+<td><a href="#/api/std/modules/async.html#async">Async</a>‹T, P›</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong> <em><a href="#/api/std/modules/maybe.html#maybe">Maybe</a>‹T›</em></p>
+<hr>
+<h3 id="constisloading"><code>Const</code> isLoading</h3>
+<p>▸ <strong>isLoading</strong>&lt;<strong>T</strong>, <strong>P</strong>&gt;(<code>async</code>: <a href="#/api/std/modules/async.html#async">Async</a>‹T, P›): <em>async is Loading</em></p><p></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/async.ts#L105">async.ts:105</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>T</strong></p>
+<p>▪ <strong>P</strong></p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>async</code></td>
+<td><a href="#/api/std/modules/async.html#async">Async</a>‹T, P›</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong> <em>async is Loading</em></p><p></p>
+<hr>
+<h3 id="constisnotasked"><code>Const</code> isNotAsked</h3>
+<p>▸ <strong>isNotAsked</strong>&lt;<strong>T</strong>, <strong>P</strong>&gt;(<code>async</code>: <a href="#/api/std/modules/async.html#async">Async</a>‹T, P›): <em>async is NotAsked</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/async.ts#L106">async.ts:106</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>T</strong></p>
+<p>▪ <strong>P</strong></p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>async</code></td>
+<td><a href="#/api/std/modules/async.html#async">Async</a>‹T, P›</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong> <em>async is NotAsked</em></p>
+<hr>
+<h3 id="constisoutcome"><code>Const</code> isOutcome</h3>
+<p>▸ <strong>isOutcome</strong>&lt;<strong>T</strong>, <strong>P</strong>&gt;(<code>async</code>: <a href="#/api/std/modules/async.html#async">Async</a>‹T, P›): <em>async is Outcome<t></t></em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/async.ts#L104">async.ts:104</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>T</strong></p>
+<p>▪ <strong>P</strong></p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>async</code></td>
+<td><a href="#/api/std/modules/async.html#async">Async</a>‹T, P›</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong> <em>async is Outcome<t></t></em></p>
+<hr>
+<h3 id="constloading"><code>Const</code> loading</h3>
+<p>▸ <strong>loading</strong>&lt;<strong>T</strong>, <strong>P</strong>&gt;(<code>progress</code>: P): <em><a href="#/api/std/modules/async.html#async">Async</a>‹T, P›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/async.ts#L30">async.ts:30</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>T</strong></p>
+<p>▪ <strong>P</strong></p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>progress</code></td>
+<td>P</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong> <em><a href="#/api/std/modules/async.html#async">Async</a>‹T, P›</em></p>
+<hr>
+<h3 id="constmap"><code>Const</code> map</h3>
+<p>▸ <strong>map</strong>&lt;<strong>A</strong>, <strong>B</strong>, <strong>P</strong>&gt;(<code>f</code>: function, <code>async</code>: <a href="#/api/std/modules/async.html#async">Async</a>‹A, P›): <em><a href="#/api/std/modules/async.html#async">Async</a>‹B, P›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/async.ts#L32">async.ts:32</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>A</strong></p>
+<p>▪ <strong>B</strong></p>
+<p>▪ <strong>P</strong></p>
+<p><strong>Parameters:</strong></p>
+<p>▪ <strong>f</strong>: <em>function</em></p>
+<p>▸ (<code>a</code>: A): <em>B</em></p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>a</code></td>
+<td>A</td>
+</tr>
+</tbody>
+</table>
+<p>▪ <strong>async</strong>: <em><a href="#/api/std/modules/async.html#async">Async</a>‹A, P›</em></p>
+<p><strong>Returns:</strong> <em><a href="#/api/std/modules/async.html#async">Async</a>‹B, P›</em></p>
+<hr>
+<h3 id="constmaploading"><code>Const</code> mapLoading</h3>
+<p>▸ <strong>mapLoading</strong>&lt;<strong>A</strong>, <strong>E1</strong>, <strong>E2</strong>&gt;(<code>f</code>: function, <code>async</code>: <a href="#/api/std/modules/async.html#async">Async</a>‹A, E1›): <em><a href="#/api/std/modules/async.html#async">Async</a>‹A, E2›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/async.ts#L40">async.ts:40</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>A</strong></p>
+<p>▪ <strong>E1</strong></p>
+<p>▪ <strong>E2</strong></p>
+<p><strong>Parameters:</strong></p>
+<p>▪ <strong>f</strong>: <em>function</em></p>
+<p>▸ (<code>e</code>: E1): <em>E2</em></p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>e</code></td>
+<td>E1</td>
+</tr>
+</tbody>
+</table>
+<p>▪ <strong>async</strong>: <em><a href="#/api/std/modules/async.html#async">Async</a>‹A, E1›</em></p>
+<p><strong>Returns:</strong> <em><a href="#/api/std/modules/async.html#async">Async</a>‹A, E2›</em></p>
+<hr>
+<h3 id="mapn">mapN</h3>
+<p>▸ <strong>mapN</strong>&lt;<strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>Prog</strong>&gt;(<code>f</code>: <a href="#/api/std/modules/types_functions.html#fun2">Fun2</a>‹A, B, C›, <code>a</code>: <a href="#/api/std/modules/async.html#async">Async</a>‹A, Prog›, <code>b</code>: <a href="#/api/std/modules/async.html#async">Async</a>‹B, Prog›): <em><a href="#/api/std/modules/async.html#async">Async</a>‹C, Prog›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/async.ts#L48">async.ts:48</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>A</strong></p>
+<p>▪ <strong>B</strong></p>
+<p>▪ <strong>C</strong></p>
+<p>▪ <strong>Prog</strong></p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>f</code></td>
+<td><a href="#/api/std/modules/types_functions.html#fun2">Fun2</a>‹A, B, C›</td>
+</tr>
+<tr>
+<td><code>a</code></td>
+<td><a href="#/api/std/modules/async.html#async">Async</a>‹A, Prog›</td>
+</tr>
+<tr>
+<td><code>b</code></td>
+<td><a href="#/api/std/modules/async.html#async">Async</a>‹B, Prog›</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong> <em><a href="#/api/std/modules/async.html#async">Async</a>‹C, Prog›</em></p>
+<p>▸ <strong>mapN</strong>&lt;<strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>D</strong>, <strong>Prog</strong>&gt;(<code>f</code>: <a href="#/api/std/modules/types_functions.html#fun3">Fun3</a>‹A, B, C, D›, <code>a</code>: <a href="#/api/std/modules/async.html#async">Async</a>‹A, Prog›, <code>b</code>: <a href="#/api/std/modules/async.html#async">Async</a>‹B, Prog›, <code>c</code>: <a href="#/api/std/modules/async.html#async">Async</a>‹C, Prog›): <em><a href="#/api/std/modules/async.html#async">Async</a>‹D, Prog›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/async.ts#L49">async.ts:49</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>A</strong></p>
+<p>▪ <strong>B</strong></p>
+<p>▪ <strong>C</strong></p>
+<p>▪ <strong>D</strong></p>
+<p>▪ <strong>Prog</strong></p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>f</code></td>
+<td><a href="#/api/std/modules/types_functions.html#fun3">Fun3</a>‹A, B, C, D›</td>
+</tr>
+<tr>
+<td><code>a</code></td>
+<td><a href="#/api/std/modules/async.html#async">Async</a>‹A, Prog›</td>
+</tr>
+<tr>
+<td><code>b</code></td>
+<td><a href="#/api/std/modules/async.html#async">Async</a>‹B, Prog›</td>
+</tr>
+<tr>
+<td><code>c</code></td>
+<td><a href="#/api/std/modules/async.html#async">Async</a>‹C, Prog›</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong> <em><a href="#/api/std/modules/async.html#async">Async</a>‹D, Prog›</em></p>
+<p>▸ <strong>mapN</strong>&lt;<strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>D</strong>, <strong>E</strong>, <strong>Prog</strong>&gt;(<code>f</code>: <a href="#/api/std/modules/types_functions.html#fun4">Fun4</a>‹A, B, C, D, E›, <code>a</code>: <a href="#/api/std/modules/async.html#async">Async</a>‹A, Prog›, <code>b</code>: <a href="#/api/std/modules/async.html#async">Async</a>‹B, Prog›, <code>c</code>: <a href="#/api/std/modules/async.html#async">Async</a>‹C, Prog›, <code>d</code>: <a href="#/api/std/modules/async.html#async">Async</a>‹D, Prog›): <em><a href="#/api/std/modules/async.html#async">Async</a>‹E, Prog›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/async.ts#L50">async.ts:50</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>A</strong></p>
+<p>▪ <strong>B</strong></p>
+<p>▪ <strong>C</strong></p>
+<p>▪ <strong>D</strong></p>
+<p>▪ <strong>E</strong></p>
+<p>▪ <strong>Prog</strong></p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>f</code></td>
+<td><a href="#/api/std/modules/types_functions.html#fun4">Fun4</a>‹A, B, C, D, E›</td>
+</tr>
+<tr>
+<td><code>a</code></td>
+<td><a href="#/api/std/modules/async.html#async">Async</a>‹A, Prog›</td>
+</tr>
+<tr>
+<td><code>b</code></td>
+<td><a href="#/api/std/modules/async.html#async">Async</a>‹B, Prog›</td>
+</tr>
+<tr>
+<td><code>c</code></td>
+<td><a href="#/api/std/modules/async.html#async">Async</a>‹C, Prog›</td>
+</tr>
+<tr>
+<td><code>d</code></td>
+<td><a href="#/api/std/modules/async.html#async">Async</a>‹D, Prog›</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong> <em><a href="#/api/std/modules/async.html#async">Async</a>‹E, Prog›</em></p>
+<p>▸ <strong>mapN</strong>&lt;<strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>D</strong>, <strong>E</strong>, <strong>F</strong>, <strong>Prog</strong>&gt;(<code>f</code>: <a href="#/api/std/modules/types_functions.html#fun5">Fun5</a>‹A, B, C, D, E, F›, <code>a</code>: <a href="#/api/std/modules/async.html#async">Async</a>‹A, Prog›, <code>b</code>: <a href="#/api/std/modules/async.html#async">Async</a>‹B, Prog›, <code>c</code>: <a href="#/api/std/modules/async.html#async">Async</a>‹C, Prog›, <code>d</code>: <a href="#/api/std/modules/async.html#async">Async</a>‹D, Prog›, <code>e</code>: <a href="#/api/std/modules/async.html#async">Async</a>‹E, Prog›): <em><a href="#/api/std/modules/async.html#async">Async</a>‹F, Prog›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/async.ts#L53">async.ts:53</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>A</strong></p>
+<p>▪ <strong>B</strong></p>
+<p>▪ <strong>C</strong></p>
+<p>▪ <strong>D</strong></p>
+<p>▪ <strong>E</strong></p>
+<p>▪ <strong>F</strong></p>
+<p>▪ <strong>Prog</strong></p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>f</code></td>
+<td><a href="#/api/std/modules/types_functions.html#fun5">Fun5</a>‹A, B, C, D, E, F›</td>
+</tr>
+<tr>
+<td><code>a</code></td>
+<td><a href="#/api/std/modules/async.html#async">Async</a>‹A, Prog›</td>
+</tr>
+<tr>
+<td><code>b</code></td>
+<td><a href="#/api/std/modules/async.html#async">Async</a>‹B, Prog›</td>
+</tr>
+<tr>
+<td><code>c</code></td>
+<td><a href="#/api/std/modules/async.html#async">Async</a>‹C, Prog›</td>
+</tr>
+<tr>
+<td><code>d</code></td>
+<td><a href="#/api/std/modules/async.html#async">Async</a>‹D, Prog›</td>
+</tr>
+<tr>
+<td><code>e</code></td>
+<td><a href="#/api/std/modules/async.html#async">Async</a>‹E, Prog›</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong> <em><a href="#/api/std/modules/async.html#async">Async</a>‹F, Prog›</em></p>
+<p>▸ <strong>mapN</strong>&lt;<strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>D</strong>, <strong>E</strong>, <strong>F</strong>, <strong>G</strong>, <strong>Prog</strong>&gt;(<code>f</code>: <a href="#/api/std/modules/types_functions.html#fun6">Fun6</a>‹A, B, C, D, E, F, G›, <code>a</code>: <a href="#/api/std/modules/async.html#async">Async</a>‹A, Prog›, <code>b</code>: <a href="#/api/std/modules/async.html#async">Async</a>‹B, Prog›, <code>c</code>: <a href="#/api/std/modules/async.html#async">Async</a>‹C, Prog›, <code>d</code>: <a href="#/api/std/modules/async.html#async">Async</a>‹D, Prog›, <code>e</code>: <a href="#/api/std/modules/async.html#async">Async</a>‹E, Prog›, <code>g</code>: <a href="#/api/std/modules/async.html#async">Async</a>‹F, Prog›): <em><a href="#/api/std/modules/async.html#async">Async</a>‹G, Prog›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/async.ts#L56">async.ts:56</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>A</strong></p>
+<p>▪ <strong>B</strong></p>
+<p>▪ <strong>C</strong></p>
+<p>▪ <strong>D</strong></p>
+<p>▪ <strong>E</strong></p>
+<p>▪ <strong>F</strong></p>
+<p>▪ <strong>G</strong></p>
+<p>▪ <strong>Prog</strong></p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>f</code></td>
+<td><a href="#/api/std/modules/types_functions.html#fun6">Fun6</a>‹A, B, C, D, E, F, G›</td>
+</tr>
+<tr>
+<td><code>a</code></td>
+<td><a href="#/api/std/modules/async.html#async">Async</a>‹A, Prog›</td>
+</tr>
+<tr>
+<td><code>b</code></td>
+<td><a href="#/api/std/modules/async.html#async">Async</a>‹B, Prog›</td>
+</tr>
+<tr>
+<td><code>c</code></td>
+<td><a href="#/api/std/modules/async.html#async">Async</a>‹C, Prog›</td>
+</tr>
+<tr>
+<td><code>d</code></td>
+<td><a href="#/api/std/modules/async.html#async">Async</a>‹D, Prog›</td>
+</tr>
+<tr>
+<td><code>e</code></td>
+<td><a href="#/api/std/modules/async.html#async">Async</a>‹E, Prog›</td>
+</tr>
+<tr>
+<td><code>g</code></td>
+<td><a href="#/api/std/modules/async.html#async">Async</a>‹F, Prog›</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong> <em><a href="#/api/std/modules/async.html#async">Async</a>‹G, Prog›</em></p>
+<hr>
+<h3 id="constoutcome"><code>Const</code> outcome</h3>
+<p>▸ <strong>outcome</strong>&lt;<strong>T</strong>, <strong>P</strong>&gt;(<code>value</code>: T): <em><a href="#/api/std/modules/async.html#async">Async</a>‹T, P›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/async.ts#L28">async.ts:28</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>T</strong></p>
+<p>▪ <strong>P</strong></p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>value</code></td>
+<td>T</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong> <em><a href="#/api/std/modules/async.html#async">Async</a>‹T, P›</em></p>
+<hr>
+<h3 id="constrecover"><code>Const</code> recover</h3>
+<p>▸ <strong>recover</strong>&lt;<strong>T</strong>, <strong>P</strong>&gt;(<code>async</code>: <a href="#/api/std/modules/async.html#async">Async</a>‹T, P›, <code>whenNoOutcome</code>: T): <em>object | object | object</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/async.ts#L223">async.ts:223</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>T</strong></p>
+<p>▪ <strong>P</strong></p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>async</code></td>
+<td><a href="#/api/std/modules/async.html#async">Async</a>‹T, P›</td>
+</tr>
+<tr>
+<td><code>whenNoOutcome</code></td>
+<td>T</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong> <em>object | object | object</em></p>
+<hr>
+<h3 id="consttoarray"><code>Const</code> toArray</h3>
+<p>▸ <strong>toArray</strong>&lt;<strong>T</strong>, <strong>P</strong>&gt;(<code>async</code>: <a href="#/api/std/modules/async.html#async">Async</a>‹T, P›): <em>T[]</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/async.ts#L132">async.ts:132</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>T</strong></p>
+<p>▪ <strong>P</strong></p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>async</code></td>
+<td><a href="#/api/std/modules/async.html#async">Async</a>‹T, P›</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong> <em>T[]</em></p>
+<hr>
+<h3 id="consttomaybe"><code>Const</code> toMaybe</h3>
+<p>▸ <strong>toMaybe</strong>&lt;<strong>T</strong>, <strong>P</strong>&gt;(<code>async</code>: <a href="#/api/std/modules/async.html#async">Async</a>‹T, P›): <em><a href="#/api/std/modules/maybe.html#maybe">Maybe</a>‹T›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/async.ts#L140">async.ts:140</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>T</strong></p>
+<p>▪ <strong>P</strong></p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>async</code></td>
+<td><a href="#/api/std/modules/async.html#async">Async</a>‹T, P›</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong> <em><a href="#/api/std/modules/maybe.html#maybe">Maybe</a>‹T›</em></p>
+<hr>
+<h3 id="consttooption"><code>Const</code> toOption</h3>
+<p>▸ <strong>toOption</strong>&lt;<strong>T</strong>, <strong>P</strong>&gt;(<code>async</code>: <a href="#/api/std/modules/async.html#async">Async</a>‹T, P›): <em><a href="#/api/std/modules/option.html#option">Option</a>‹T›</em></p>
+<p><em>Defined in <a href="https://github.com/fponticelli/tempo/blob/master/std/src/async.ts#L148">async.ts:148</a></em></p>
+<p><strong>Type parameters:</strong></p>
+<p>▪ <strong>T</strong></p>
+<p>▪ <strong>P</strong></p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>async</code></td>
+<td><a href="#/api/std/modules/async.html#async">Async</a>‹T, P›</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong> <em><a href="#/api/std/modules/option.html#option">Option</a>‹T›</em></p>
