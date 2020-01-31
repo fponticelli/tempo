@@ -43,7 +43,11 @@ module.exports = {
       filename: '[name].css',
       chunkFilename: '[id].css',
     }),
-    new FaviconsWebpackPlugin('../../pages/assets/icon-512x512.png'),
+    new FaviconsWebpackPlugin({
+      logo: '../../pages/assets/icon-512x512.png',
+      publicPath: '.',
+      outputPath: './assets'
+    }),
   ],
   optimization: {
     splitChunks: {
