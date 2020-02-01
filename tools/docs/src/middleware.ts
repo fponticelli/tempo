@@ -10,6 +10,16 @@ import { Result, map } from 'tempo-std/lib/result'
 import { toContentUrl, contentFromRoute } from './route'
 import { each } from 'tempo-std/lib/option'
 
+export const scrollTo = () => {
+  const ref = location.hash.split('#').pop()
+  if (ref) {
+    const el = document.getElementById(ref)
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' })
+    }
+  }
+}
+
 export const middleware = (store: Store<State, Action>) => (
   state: State,
   action: Action
@@ -36,6 +46,9 @@ export const middleware = (store: Store<State, Action>) => (
         },
         toContentUrl(state.route)
       )
+      break
+    case 'LoadedContent':
+      scrollTo()
       break
     case 'GoTo':
       forEach(toc => contentFromRoute(store, toc, action.route), state.toc)

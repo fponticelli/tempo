@@ -1,4 +1,4 @@
-import { div, ul, li, h3, aside, p, span } from 'tempo-dom/lib/html'
+import { div, ul, li, aside, p, hr } from 'tempo-dom/lib/html'
 import { lazy } from 'tempo-dom/lib/lazy'
 import { iterate } from 'tempo-dom/lib/iterate'
 import { when } from 'tempo-dom/lib/when'
@@ -10,7 +10,8 @@ import {
   pageMatchesRoute,
   pageToRoute,
   projectChangelogMatchesRoute,
-  apiMatchesRoute
+  apiMatchesRoute,
+  isApiProjectRoute
 } from '../route'
 import { some, none } from 'tempo-std/lib/option'
 import { compareCaseInsensitive } from 'tempo-std/lib/strings'
@@ -26,14 +27,17 @@ let section: DOMTemplate<[string, SectionRef, Route], Action, unknown>
 section = lazy(() =>
   div<[string, SectionRef, Route], Action>(
     {},
-    p({ attrs: { class: 'menu-label' } }, ([title]) => title),
+    when(
+      { condition: ([title]) => !!title},
+      p({ attrs: { class: 'menu-label' } }, ([title]) => title),
+    ),
     when(
       {
         condition: ([_, section]) =>
           section.pages.length > 0 || keys(section.sections).length > 0
       },
       ul(
-        { attrs: { class: 'menu-list' } },
+        { attrs: { class: '' } },
         iterate<[string, SectionRef, Route], PageRef[], Action>(
           { getArray: ([_, s]) => s.pages },
           li(
@@ -86,11 +90,15 @@ const api = fragment<
 
 const project = div<[ProjectRef, Sidebar, number], Action>(
   {},
-  div(
+  p(
     { attrs: { class: '' } },
-    span(
-      { attrs: { class: 'is-pulled-right is-size-7 has-text-grey' } },
-      ([s]) => s.version
+    maybeLink(
+      ([s]) => `v.${s.version}`,
+      ([p, s]) =>
+        projectChangelogMatchesRoute(p, s.route)
+          ? none
+          : some(Route.changelog(p.name)),
+      'is-pulled-right is-size-7'
     ),
     maybeLink(
       ([p]) => p.title,
@@ -99,78 +107,73 @@ const project = div<[ProjectRef, Sidebar, number], Action>(
           ? none
           : some(Route.api(p.name, 'index.html')),
       'is-uppercase has-text-weight-bold'
-    ),
-    div({ attrs: { class: 'is-size-7' } }, ([s]) => s.description)
-  ),
-  h3(
-    { attrs: { class: 'changelog' } },
-    maybeLink('changelog', ([p, s]) =>
-      projectChangelogMatchesRoute(p, s.route)
-        ? none
-        : some(Route.changelog(p.name))
     )
   ),
-  div(
-    {},
-    mapState(
-      {
-        map: ([project, sidebar]) => ({
-          apis: sidebar.toc.apis[project.name],
-          project,
-          route: sidebar.route
-        })
-      },
-      mapState<
-        { apis: ApiRef[]; project: ProjectRef; route: Route },
-        { apis: ApiRef[]; project: ProjectRef; route: Route },
-        Action
-      >(
+  div({ attrs: { class: 'is-size-7' } }, ([s]) => s.description),
+  when(
+    { condition: ([p, s]) => isApiProjectRoute(s.route, p.name)  },
+    div(
+      { attrs: { class: 'box api-box' } },
+      mapState(
         {
-          map: state => ({
-            apis: state.apis
-              .filter(a => a.type === 'module')
-              .sort((a, b) => compareCaseInsensitive(a.title, b.title)),
-            project: state.project,
-            route: state.route
+          map: ([project, sidebar]) => ({
+            apis: sidebar.toc.apis[project.name],
+            project,
+            route: sidebar.route
           })
         },
-        when(
-          { condition: state => state.apis.length > 0 },
-          p({ attrs: { class: 'menu-label' } }, 'modules'),
-          ul(
-            { attrs: { class: 'menu-list' } },
-            iterate<
-              { apis: ApiRef[]; project: ProjectRef; route: Route },
-              ApiRef[],
-              Action
-            >({ getArray: state => state.apis }, li({}, api))
+        mapState<
+          { apis: ApiRef[]; project: ProjectRef; route: Route },
+          { apis: ApiRef[]; project: ProjectRef; route: Route },
+          Action
+        >(
+          {
+            map: state => ({
+              apis: state.apis
+                .filter(a => a.type === 'module')
+                .sort((a, b) => compareCaseInsensitive(a.title, b.title)),
+              project: state.project,
+              route: state.route
+            })
+          },
+          when(
+            { condition: state => state.apis.length > 0 },
+            p({ attrs: { class: 'title is-6 is-marginless' } }, 'modules'),
+            ul(
+              { attrs: { class: 'links-list' } },
+              iterate<
+                { apis: ApiRef[]; project: ProjectRef; route: Route },
+                ApiRef[],
+                Action
+              >({ getArray: state => state.apis }, li({}, api))
+            )
           )
-        )
-      ),
-      mapState<
-        { apis: ApiRef[]; project: ProjectRef; route: Route },
-        { apis: ApiRef[]; project: ProjectRef; route: Route },
-        Action
-      >(
-        {
-          map: state => ({
-            apis: state.apis
-              .filter(a => a.type !== 'module')
-              .sort((a, b) => compareCaseInsensitive(a.title, b.title)),
-            project: state.project,
-            route: state.route
-          })
-        },
-        when(
-          { condition: state => state.apis.length > 0 },
-          p({ attrs: { class: 'menu-label' } }, 'types'),
-          ul(
-            { attrs: { class: 'menu-list' } },
-            iterate<
-              { apis: ApiRef[]; project: ProjectRef; route: Route },
-              ApiRef[],
-              Action
-            >({ getArray: state => state.apis }, li({}, api))
+        ),
+        mapState<
+          { apis: ApiRef[]; project: ProjectRef; route: Route },
+          { apis: ApiRef[]; project: ProjectRef; route: Route },
+          Action
+        >(
+          {
+            map: state => ({
+              apis: state.apis
+                .filter(a => a.type !== 'module')
+                .sort((a, b) => compareCaseInsensitive(a.title, b.title)),
+              project: state.project,
+              route: state.route
+            })
+          },
+          when(
+            { condition: state => state.apis.length > 0 },
+            p({ attrs: { class: 'title is-6 is-marginless' } }, 'types'),
+            ul(
+              { attrs: { class: 'links-list' } },
+              iterate<
+                { apis: ApiRef[]; project: ProjectRef; route: Route },
+                ApiRef[],
+                Action
+              >({ getArray: state => state.apis }, li({}, api))
+            )
           )
         )
       )
@@ -183,7 +186,7 @@ export const sidebar = aside<Sidebar, Action>(
   mapState(
     {
       map: sidebar =>
-        ['Tempo', sidebar.toc as SectionRef, sidebar.route] as [
+        ['', sidebar.toc as SectionRef, sidebar.route] as [
           string,
           SectionRef,
           Route
@@ -191,7 +194,7 @@ export const sidebar = aside<Sidebar, Action>(
     },
     section
   ),
-  p({ attrs: { class: 'menu-label' } }, 'Projects'),
+  hr({ attrs: { class: 'sidebar-separator' } }),
   iterate<Sidebar, ProjectRef[], Action>(
     { getArray: s => s.toc.projects },
     project

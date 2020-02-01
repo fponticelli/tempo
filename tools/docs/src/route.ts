@@ -104,6 +104,10 @@ export const parseUrl = (url: string): Route => {
   }
 }
 
+export const isApiProjectRoute = (route: Route, name: string) => {
+  return route.kind === 'Api' && route.name === name || route.kind === 'Changelog' && route.name === name
+}
+
 export const contentFromRoute = (store: Store<State, Action>, toc: Toc, route: Route) => {
   if (route.kind === 'Demo') {
     location.href = getUnsafe(toContentUrl(route))

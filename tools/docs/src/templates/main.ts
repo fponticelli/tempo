@@ -1,4 +1,4 @@
-import { div, nav, a, img, span, main } from 'tempo-dom/lib/html'
+import { div, nav, a, img, main } from 'tempo-dom/lib/html'
 import { matchAsyncResult } from 'tempo-dom/lib/match'
 import { mapState } from 'tempo-dom/lib/map'
 import { State } from '../state'
@@ -37,23 +37,31 @@ export const template = div<State, Action>(
           Route.home,
           'navbar-item'
         ),
-        a(
-          {
-            attrs: {
-              class: 'navbar-burger burger',
-              role: 'button',
-              'aria-label': 'menu',
-              'aria-expanded': 'false',
-              'data-target': 'navbarBasicExample'
-            }
-          },
-          span({ attrs: { 'aria-hidden': 'true' } }),
-          span({ attrs: { 'aria-hidden': 'true' } }),
-          span({ attrs: { 'aria-hidden': 'true' } })
-        )
+        // a(
+        //   {
+        //     attrs: {
+        //       class: 'navbar-burger burger',
+        //       role: 'button',
+        //       'aria-label': 'menu',
+        //       'aria-expanded': 'false',
+        //       'data-target': 'navbarBasicExample'
+        //     }
+        //   },
+        //   span({ attrs: { 'aria-hidden': 'true' } }),
+        //   span({ attrs: { 'aria-hidden': 'true' } }),
+        //   span({ attrs: { 'aria-hidden': 'true' } })
+        // )
       ),
       div(
         { attrs: { class: 'navbar-menu' } },
+        div(
+          { attrs: { class: 'navbar-start' } },
+          link(
+            'Tempo',
+            Route.home,
+            'navbar-item'
+          )
+        ),
         div(
           { attrs: { class: 'navbar-end' } },
           a(

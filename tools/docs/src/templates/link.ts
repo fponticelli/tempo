@@ -2,7 +2,7 @@ import { fragment } from 'tempo-dom/lib/fragment'
 import { matchBool } from 'tempo-dom/lib/match'
 import { Action } from '../action'
 import { toHref, Route } from '../route'
-import { a } from 'tempo-dom/lib/html'
+import { a, span } from 'tempo-dom/lib/html'
 import { getUnsafe, Option, toBoolean } from 'tempo-std/lib/option'
 import {
   DOMAttribute,
@@ -19,7 +19,7 @@ export const maybeLink = <State>(
   fragment<State, Action>(
     matchBool({
       condition: mapAttribute(route, toBoolean),
-      false: a(
+      false: span(
         {
           attrs: {
             class: mapAttribute(className || '', v =>
