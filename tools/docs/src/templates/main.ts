@@ -36,7 +36,7 @@ export const template = div<State, Action>(
           }),
           Route.home,
           'navbar-item'
-        ),
+        )
         // a(
         //   {
         //     attrs: {
@@ -56,11 +56,7 @@ export const template = div<State, Action>(
         { attrs: { class: 'navbar-menu' } },
         div(
           { attrs: { class: 'navbar-start' } },
-          link(
-            'Tempo',
-            Route.home,
-            'navbar-item'
-          )
+          link('Tempo', Route.home, 'navbar-item')
         ),
         div(
           { attrs: { class: 'navbar-end' } },

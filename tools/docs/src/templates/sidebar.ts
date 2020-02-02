@@ -28,8 +28,8 @@ section = lazy(() =>
   div<[string, SectionRef, Route], Action>(
     {},
     when(
-      { condition: ([title]) => !!title},
-      p({ attrs: { class: 'menu-label' } }, ([title]) => title),
+      { condition: ([title]) => !!title },
+      p({ attrs: { class: 'menu-label' } }, ([title]) => title)
     ),
     when(
       {
@@ -111,7 +111,7 @@ const project = div<[ProjectRef, Sidebar, number], Action>(
   ),
   div({ attrs: { class: 'is-size-7' } }, ([s]) => s.description),
   when(
-    { condition: ([p, s]) => isApiProjectRoute(s.route, p.name)  },
+    { condition: ([p, s]) => isApiProjectRoute(s.route, p.name) },
     div(
       { attrs: { class: 'box api-box' } },
       mapState(

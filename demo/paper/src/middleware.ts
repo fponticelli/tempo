@@ -1,6 +1,6 @@
 import { CanvasState } from './canvas_state'
 import { CanvasAction } from './canvas_action'
-import { View } from 'tempo-core'
+import { View } from 'tempo-core/lib/view'
 import { Query } from './query'
 
 const makeSave = (name: string, type: string) => (file: Blob) => {
