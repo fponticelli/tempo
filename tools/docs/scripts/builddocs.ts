@@ -8,8 +8,9 @@
 // - [x] collect pages
 // - [x] transform pages MDs to HTMLs
 // - [x] projects metadata
-// - [ ] layout
-// - [ ] style site
+// - [x] layout
+// - [x] style site
+// - [ ] generate API docs
 // - [ ] style API
 // - [ ] make sub hash scroll to the right header
 // - [ ] search
@@ -19,20 +20,13 @@ import { Toc, DemoRef, ApiRef, PageRef, ProjectRef, SectionRef } from '../src/to
 import { promises as fs } from 'fs'
 import * as fse from 'fs-extra'
 import * as path from 'path'
-import { Converter } from 'showdown'
 import { JSDOM } from 'jsdom'
 import Prism from 'prismjs'
 const loadLanguages: any = require('prismjs/components/')
 loadLanguages(['typescript'])
 import fm from 'front-matter'
 import { trimChars } from 'tempo-std/lib/strings'
-
-const markdown = new Converter({
-  parseImgDimensions: true,
-  strikethrough: true,
-  tables: true,
-  tasklists: true
-})
+import { markdown } from './template/markdown'
 
 // import { JSDOM } from 'jsdom'
 
@@ -139,7 +133,7 @@ async function listAllMDFiles(src: string): Promise<string[]> {
 async function makeHtml(mdFile: string, anchorMangler: (url: string) => string) {
   const content = await fs.readFile(mdFile, 'utf8')
   const parsed = fm(content)
-  const rawHtml = markdown.makeHtml(parsed.body)
+  const rawHtml = markdown(parsed.body)
   const dom = new JSDOM(rawHtml)
   const codes = dom.window.document.querySelectorAll('.language-ts')
   for (let i = 0; i < codes.length; i++) {
@@ -222,7 +216,7 @@ async function createChangeLogs(projects: string[], root: string, dst: string) {
     projects.map(async project => {
       const p = path.join(root, project, 'CHANGELOG.md')
       const content = await fs.readFile(p, 'utf8')
-      const html = markdown.makeHtml(content)
+      const html = markdown(content)
       return { project, html }
     })
   )

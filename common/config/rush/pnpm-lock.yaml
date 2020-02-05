@@ -17,6 +17,7 @@ dependencies:
   '@types/jest': 24.0.22
   '@types/jsdom': 12.2.4
   '@types/node': 10.12.18
+  '@types/prettier': 1.19.0
   '@types/prismjs': 1.16.0
   '@types/showdown': 1.7.3
   acorn: 7.1.0
@@ -1573,6 +1574,10 @@ packages:
     dev: false
     resolution:
       integrity: sha512-fh+pAqt4xRzPfqA6eh3Z2y6fyZavRIumvjhaCL753+TVkGKGhpPeyrJG2JftD0T9q4GF00KjefsQ+PQNDdWQaQ==
+  /@types/prettier/1.19.0:
+    dev: false
+    resolution:
+      integrity: sha512-gDE8JJEygpay7IjA/u3JiIURvwZW08f0cZSZLAzFoX/ZmeqvS0Sqv+97aKuHpNsalAMMhwPe+iAS6fQbfmbt7A==
   /@types/prismjs/1.16.0:
     dev: false
     resolution:
@@ -11941,6 +11946,7 @@ packages:
       '@types/highlight.js': 9.12.3
       '@types/jsdom': 12.2.4
       '@types/node': 10.12.18
+      '@types/prettier': 1.19.0
       '@types/prismjs': 1.16.0
       '@types/showdown': 1.7.3
       acorn: 7.1.0
@@ -11980,7 +11986,7 @@ packages:
     peerDependencies:
       sass: '*'
     resolution:
-      integrity: sha512-Z2BQxI9TFJWpGudLoER/FyFuNMGfrBbVtTRQLYVnznM58ml2Vs9dVPK8xtmqFukC0jrDZQ+1cx6EdSqVVGknqA==
+      integrity: sha512-Vuouyeye5HDefiOdNEsVQGj5rEBPojog0mtc5TFdTevta5z01u+d5De4tOZryRpb60XMPCjd2zefQEwGRBCiBQ==
       tarball: 'file:projects/tempo-tools.docs.tgz'
     version: 0.0.0
 registry: ''
@@ -12003,6 +12009,7 @@ specifiers:
   '@types/jest': 24.0.22
   '@types/jsdom': 12.2.4
   '@types/node': 10.12.18
+  '@types/prettier': 1.19.0
   '@types/prismjs': 1.16.0
   '@types/showdown': 1.7.3
   acorn: 7.1.0

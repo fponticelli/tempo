@@ -79,7 +79,8 @@
     "optimize-css-assets-webpack-plugin": "5.0.3",
     "favicons-webpack-plugin": "2.1.0",
     "doctrine": "3.0.0",
-    "@types/doctrine": "0.0.3"
+    "@types/doctrine": "0.0.3",
+    "@types/prettier": "1.19.0"
   },
   "main": "lib/index.js",
   "module": "es6/index.js",
