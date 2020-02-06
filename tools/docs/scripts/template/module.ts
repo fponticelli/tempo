@@ -1,5 +1,4 @@
 import { article, h1, h2 } from 'tempo-dom/lib/html'
-import { Module } from '../parse/module'
 import { mapState } from 'tempo-dom/lib/map'
 import { when } from 'tempo-dom/lib/when'
 import { forEach } from 'tempo-dom/lib/for_each'
@@ -11,6 +10,8 @@ import { functionTemplate } from './function_template'
 import { variableTemplate } from './variable_template'
 import { classTemplate } from './class_template'
 import { baseDoc } from './base_doc'
+import { moduleToc } from './module_toc'
+import { State } from './state'
 
 export const list = <State extends any[], Inner>(title: string, element: DOMChild<State[number], unknown>) => {
   return when<State, unknown>(
@@ -23,35 +24,39 @@ export const list = <State extends any[], Inner>(title: string, element: DOMChil
   )
 }
 
-export const module = article<Module, unknown>(
+export const module = article<State, unknown>(
   {},
   h1(
     {},
-    m => `module '${m.title}'`
+    m => `module '${m.module.title}'`
   ),
-  baseDoc,
   mapState(
-    { map: s => s.interfaces },
+    { map: s => s.module },
+    baseDoc
+  ),
+  moduleToc,
+  mapState(
+    { map: s => s.module.interfaces },
     list('interfaces', interfaceTemplate)
   ),
   mapState(
-    { map: s => s.typeAliases },
+    { map: s => s.module.typeAliases },
     list('type aliases', typeAliasTemplate)
   ),
   mapState(
-    { map: s => s.exports },
+    { map: s => s.module.exports },
     list('exports', exportTemplate)
   ),
   mapState(
-    { map: s => s.functions },
+    { map: s => s.module.functions },
     list('functions', functionTemplate)
   ),
   mapState(
-    { map: s => s.variables },
+    { map: s => s.module.variables },
     list('variables', variableTemplate)
   ),
   mapState(
-    { map: s => s.classes },
+    { map: s => s.module.classes },
     list('classes', classTemplate)
   )
 )

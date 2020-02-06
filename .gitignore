@@ -73,9 +73,9 @@ package-deps.json
 .bundle/
 vendor/
 
-docs/
-core/docs/
-dom/docs/
-paperjs/docs/
-std/docs/
-store/docs/
+/docs/
+/core/docs/
+/dom/docs/
+/paperjs/docs/
+/std/docs/
+/store/docs/
