@@ -6,15 +6,10 @@ import { makeState } from './state'
 import { reducer } from './reducer'
 import { template } from './templates/main'
 import { middleware } from './middleware'
-import { parseUrl, contentFromRoute } from './route'
+import { contentFromRoute, parseLocation } from './route'
 import { Action } from './action'
 import { State } from './state'
 import { isSuccess } from 'tempo-std/lib/async_result'
-
-const parseLocation = () => {
-  const url = location.pathname.split('/').pop() + location.hash
-  return parseUrl(url)
-}
 
 const route = parseLocation()
 const state = makeState(route)

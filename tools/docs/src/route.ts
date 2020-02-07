@@ -117,3 +117,8 @@ export const contentFromRoute = (store: Store<State, Action>, toc: Toc, route: R
     store.process(Action.requestPageContent)
   }
 }
+
+export const parseLocation = () => {
+  const url = location.pathname.split('/').pop() + location.hash
+  return parseUrl(url)
+}

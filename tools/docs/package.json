@@ -18,7 +18,7 @@
     "docs:update": "rush rebuild && rush docs && npm run docs:maketoc",
     "docs:buildandtoc": "npm run build && npm run docs:maketoc",
     "docs:maketoc": "ts-node --project tsconfig.script.json ./scripts/builddocs.ts",
-    "docs:gen": "ts-node  --project tsconfig.script.json ./scripts/gendocs.ts",
+    "docs:gen": "ts-node --project tsconfig.script.json ./scripts/gendocs.ts",
     "compile": "webpack --mode=production",
     "clean": "rm -rf dist/* && rm -rf docs/* && rm -rf ../../docs/demo/paper/*",
     "build": "npm run clean && npm run compile",

@@ -7,7 +7,7 @@ import { forEach } from 'tempo-std/lib/async_result'
 import { Toc } from './toc'
 import { HttpError } from './request'
 import { Result, map } from 'tempo-std/lib/result'
-import { toContentUrl, contentFromRoute } from './route'
+import { toContentUrl, contentFromRoute, sameRoute } from './route'
 import { each } from 'tempo-std/lib/option'
 
 export const scrollTo = () => {
@@ -22,7 +22,8 @@ export const scrollTo = () => {
 
 export const middleware = (store: Store<State, Action>) => (
   state: State,
-  action: Action
+  action: Action,
+  prev: State
 ) => {
   // console.log(state)
   switch (action.kind) {
@@ -51,7 +52,12 @@ export const middleware = (store: Store<State, Action>) => (
       scrollTo()
       break
     case 'GoTo':
-      forEach(toc => contentFromRoute(store, toc, action.route), state.toc)
+      if (!sameRoute(action.route, prev.route)) {
+        forEach(
+          toc => contentFromRoute(store, toc, action.route),
+          state.toc
+        )
+      }
       break
   }
 }

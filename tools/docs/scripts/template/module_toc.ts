@@ -28,11 +28,11 @@ export const moduleToc = nav<State, unknown>(
   mapState(
     { map: mapModuleToToc },
     ul(
-      {},
+      { attrs: { class: 'module-toc-list' } },
       forEach(
         {},
         li(
-          {},
+          { attrs: { class: 'is-size-7' } },
           a(
             { attrs: { href: s => s.path } },
             // span(
