@@ -19,7 +19,7 @@ import { PaperContext } from './context'
 import { View } from 'tempo-core/lib/view'
 import { DOMContext } from 'tempo-dom/lib/context'
 import { resolveAttribute } from './value'
-import { UnwrappedDerivedValue } from 'tempo-core/lib/value'
+import { DerivedValue } from 'tempo-core/lib/value'
 
 interface PaperLocal<State, Action, Query> {
   derived: ((state: State) => void)[]
@@ -75,7 +75,7 @@ export const project = <State, Action, Query>(
 
       if (typeof options.active === 'function')
         derived.push((state: State) => {
-          const fun = options.active! as UnwrappedDerivedValue<State, boolean>
+          const fun = options.active! as DerivedValue<State, boolean>
           if (fun(state)) {
             scope.activate()
             project.activate()
@@ -84,14 +84,14 @@ export const project = <State, Action, Query>(
 
       if (typeof options.width === 'function') {
         derived.push((state: State) => {
-          const f = options.width as UnwrappedDerivedValue<State, number>
+          const f = options.width as DerivedValue<State, number>
           project.view.viewSize!.width = f(state) || null
         })
       }
 
       if (typeof options.height === 'function') {
         derived.push((state: State) => {
-          const f = options.height as UnwrappedDerivedValue<State, number>
+          const f = options.height as DerivedValue<State, number>
           project.view.viewSize!.height = f(state) || null
         })
       }

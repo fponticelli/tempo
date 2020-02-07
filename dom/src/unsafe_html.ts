@@ -15,7 +15,7 @@ import { DOMTemplate } from './template'
 import { DOMContext } from './context'
 import { View } from 'tempo-core/lib/view'
 import { DOMElement, el } from './element'
-import { UnwrappedDerivedValue } from 'tempo-core/lib/value'
+import { DerivedValue } from 'tempo-core/lib/value'
 import { DOMTextValue } from './value'
 
 const renderLiteral = <State, Action, Query = unknown, El extends Element = Element, T = unknown>
@@ -37,7 +37,7 @@ const renderFunction = <State, Action, Query, El extends Element = Element, T = 
   ctx: DOMContext<Action>,
   transform: (source: string) => string,
   state: State,
-  map: UnwrappedDerivedValue<State, string>
+  map: DerivedValue<State, string>
 ): View<State, Query> => {
   const prevAfterRender = element.afterrender
   let localEl: El
@@ -85,7 +85,7 @@ export class DOMUnsafeHtml<State, Action, Query, El extends Element = Element, T
         ctx,
         this.transform,
         state,
-        this.content as UnwrappedDerivedValue<State, string>
+        this.content as DerivedValue<State, string>
       )
     } else {
       return renderLiteral<State, Action, Query, El, T>(

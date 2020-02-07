@@ -11,7 +11,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { UnwrappedValue } from 'tempo-core/lib/value'
+import { DerivedOrLiteralValue } from 'tempo-core/lib/value'
 import { keys } from 'tempo-std/lib/objects'
 import { replace } from 'tempo-std/lib/strings'
 import { DOMTemplate } from './template'
@@ -90,9 +90,9 @@ export interface MediaQuery<State> {
 }
 
 export interface MediaQueries<State> {
-  [importRule]?: UnwrappedValue<State, string>[]
-  [charset]?: UnwrappedValue<State, string>[]
-  [namespace]?: UnwrappedValue<State, string>[]
+  [importRule]?: DerivedOrLiteralValue<State, string>[]
+  [charset]?: DerivedOrLiteralValue<State, string>[]
+  [namespace]?: DerivedOrLiteralValue<State, string>[]
 
   [media]?: MediaQuery<State>
   [supports]?: MediaQuery<State>
@@ -188,7 +188,7 @@ const processNestedAtRule = <State>
   )
 }
 
-const processOneAtRule = <State>(prefix: string, rule: UnwrappedValue<State, string>) => {
+const processOneAtRule = <State>(prefix: string, rule: DerivedOrLiteralValue<State, string>) => {
   if (typeof rule === 'function') {
     return {
       literal: [],
@@ -202,7 +202,7 @@ const processOneAtRule = <State>(prefix: string, rule: UnwrappedValue<State, str
   }
 }
 
-const processtAtRule = <State>(prefix: string, rules: UnwrappedValue<State, string>[]) => {
+const processtAtRule = <State>(prefix: string, rules: DerivedOrLiteralValue<State, string>[]) => {
   return rules.reduce(
     (acc, curr) => {
       const res = processOneAtRule(prefix, curr)

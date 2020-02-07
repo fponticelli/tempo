@@ -11,7 +11,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { UnwrappedDerivedValue } from 'tempo-core/lib/value'
+import { DerivedValue } from 'tempo-core/lib/value'
 import { DOMAttribute, DOMEventHandler, DOMStyleAttribute } from '../value'
 import { htmlAttributeMap as attributeMap } from '../dom_attributes_mapper'
 import { setAttribute, setOneStyle } from './set_attribute'
@@ -63,14 +63,14 @@ export function processAttribute<State, Value>(
     // state in inputs can incorrectly map to state
     if (el.nodeName === 'INPUT' || el.nodeName === 'TEXTAREA') {
       const f = (state: State) => {
-        const newValue = (value as UnwrappedDerivedValue<State, Value>)(state)
+        const newValue = (value as DerivedValue<State, Value>)(state)
         set(el, name, newValue)
       }
       acc.push(f)
     } else {
       let oldValue: Value | undefined = undefined
       const f = (state: State) => {
-        const newValue = (value as UnwrappedDerivedValue<State, Value>)(state)
+        const newValue = (value as DerivedValue<State, Value>)(state)
         if (newValue !== oldValue) {
           set(el, name, newValue)
           if (String(newValue).length < 50000) {
@@ -123,7 +123,7 @@ export function processStyle<State, Value>(
   if (typeof value === 'function') {
     let oldValue: Value | undefined
     const f = (state: State) => {
-      const newValue = (value as UnwrappedDerivedValue<State, Value>)(state)
+      const newValue = (value as DerivedValue<State, Value>)(state)
       if (newValue !== oldValue) {
         setOneStyle(el, name, newValue)
         oldValue = newValue

@@ -41,7 +41,7 @@ export const module = article<State, unknown>(
   ),
   mapState(
     { map: s => s.module.typeAliases },
-    list('type aliases', typeAliasTemplate)
+    list('types', typeAliasTemplate)
   ),
   mapState(
     { map: s => s.module.exports },

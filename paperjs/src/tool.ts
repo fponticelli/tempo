@@ -22,7 +22,7 @@ import {
 import { TempoAttributes } from './tempo_attributes'
 import { PaperTemplate } from './template'
 import { PaperContext } from './context'
-import { UnwrappedDerivedValue } from 'tempo-core/lib/value'
+import { DerivedValue } from 'tempo-core/lib/value'
 import { keys } from 'tempo-std/lib//objects'
 
 type WritableTool = ExcludeFunctionFields<
@@ -76,7 +76,7 @@ export const tool = <State, Action, Query = unknown, T = unknown>(
 
       if (typeof options.active === 'function')
         derived.push((state: State) => {
-          const fun = options.active! as UnwrappedDerivedValue<State, boolean>
+          const fun = options.active! as DerivedValue<State, boolean>
           if (fun(state)) tool.activate()
         })
 
@@ -94,7 +94,7 @@ export const tool = <State, Action, Query = unknown, T = unknown>(
           if (typeof options[attr] === 'function') {
             const k = attr as keyof ToolOptions<State, Action, Query, T>
             derived.push((state: State) => {
-              const fun = options[k]! as UnwrappedDerivedValue<State, boolean>
+              const fun = options[k]! as DerivedValue<State, boolean>
               anyTool[k] = fun(state)
             })
           }

@@ -5,7 +5,7 @@ import { when } from 'tempo-dom/lib/when'
 import { mapState } from 'tempo-dom/lib/map'
 import { matchOption } from 'tempo-dom/lib/match'
 import { unsafeHtml } from 'tempo-dom/lib/unsafe_html'
-import { Option } from 'tempo-std/lib/option'
+import { Option, isSome } from 'tempo-std/lib/option'
 import { markdown } from './markdown'
 import { forEach } from 'tempo-dom/lib/for_each'
 
@@ -55,18 +55,24 @@ const examples = mapState<BaseDoc, string[], unknown>(
   )
 )
 export const baseDoc = fragment<BaseDoc, unknown>(
-  div(
-    { attrs: { class: 'tags' } },
+  mapState<BaseDoc, { type: string, name: string }[], unknown>(
+    { map: doc => {
+      const tags = [] as { type: string, name: string }[]
+      if (doc.isDeprecated)
+        tags.push({ type: 'danger', name: 'deprecated' })
+      if (isSome(doc.since))
+        tags.push({ type: 'info', name: `since v${doc.since.value}` })
+      return tags
+    }},
     when(
-      { condition: bd => bd.isDeprecated },
-      span({ attrs: { class: 'tag is-danger' } }, 'deprecated')
-    ),
-    mapState(
-      { map: doc => doc.since },
-      matchOption({
-        Some: span({ attrs: { class: 'tag is-info' } }, s => `since v${s}`),
-        None: ''
-      })
+      { condition: tags => tags.length > 0 },
+      div(
+        { attrs: { class: 'tags' } },
+        forEach(
+          {},
+          span({ attrs: { class: s => `tag is-${s.type}` } }, s => s.name)
+        )
+      )
     )
   ),
   description,
