@@ -24,6 +24,15 @@ export class Emitter<T extends any[]> implements Observable<T> {
   static ofThree<A, B, C>(): Emitter3<A, B, C> {
     return new Emitter<[A, B, C]>()
   }
+  static ofFour<A, B, C, D>(): Emitter4<A, B, C, D> {
+    return new Emitter<[A, B, C, D]>()
+  }
+  static ofFive<A, B, C, D, E>(): Emitter5<A, B, C, D, E> {
+    return new Emitter<[A, B, C, D, E]>()
+  }
+  static ofSix<A, B, C, D, E, F>(): Emitter6<A, B, C, D, E, F> {
+    return new Emitter<[A, B, C, D, E, F]>()
+  }
 
   readonly listeners: Listener<T>[] = []
 
@@ -56,6 +65,9 @@ export class Emitter<T extends any[]> implements Observable<T> {
 export type Emitter1<T> = Emitter<[T]>
 export type Emitter2<A, B> = Emitter<[A, B]>
 export type Emitter3<A, B, C> = Emitter<[A, B, C]>
+export type Emitter4<A, B, C, D> = Emitter<[A, B, C, D]>
+export type Emitter5<A, B, C, D, E> = Emitter<[A, B, C, D, E]>
+export type Emitter6<A, B, C, D, E, F> = Emitter<[A, B, C, D, E, F]>
 
 export const debounce = (delay: number) => <T extends any[]>(
   listener: Listener<T>
