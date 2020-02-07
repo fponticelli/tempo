@@ -57,6 +57,8 @@ export const middleware = (store: Store<State, Action>) => (
           toc => contentFromRoute(store, toc, action.route),
           state.toc
         )
+      } else {
+        scrollTo()
       }
       break
   }

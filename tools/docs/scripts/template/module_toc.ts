@@ -32,7 +32,7 @@ export const moduleToc = nav<State, unknown>(
       forEach(
         {},
         li(
-          { attrs: { class: 'is-size-7' } },
+          { attrs: {} },
           a(
             { attrs: { href: s => s.path } },
             // span(
