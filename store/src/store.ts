@@ -34,7 +34,12 @@ export class Store<State, Action> {
     readonly property: Property<State>,
     private readonly reducer: Reducer<State, Action>
   ) {
-    this.observable = this.emitter = Emitter.ofFour<State, Action, State, boolean>()
+    this.observable = this.emitter = Emitter.ofFour<
+      State,
+      Action,
+      State,
+      boolean
+    >()
   }
 
   process(action: Action) {

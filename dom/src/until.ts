@@ -17,7 +17,7 @@ import { DOMTemplate, DOMChild } from './template'
 import { removeNode, domChildToTemplate } from './utils/dom'
 import { map } from 'tempo-std/lib/arrays'
 
-export class DOMUntilTemplate<OuterState, InnerState, Action, Query> implements DOMTemplate<OuterState, Action, Query> {
+export class UntilTemplate<OuterState, InnerState, Action, Query> implements DOMTemplate<OuterState, Action, Query> {
   constructor(
     readonly options: {
       refId?: string
@@ -82,4 +82,4 @@ export const until = <OuterState, InnerState, Action, Query = unknown>(
   },
   ...children: DOMChild<InnerState, Action, Query>[]
 ): DOMTemplate<OuterState, Action, Query> =>
-  new DOMUntilTemplate<OuterState, InnerState, Action, Query>(options, map(domChildToTemplate, children))
+  new UntilTemplate<OuterState, InnerState, Action, Query>(options, map(domChildToTemplate, children))

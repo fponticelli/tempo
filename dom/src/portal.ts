@@ -16,7 +16,7 @@ import { DOMContext } from './context'
 import { domChildToTemplate } from './utils/dom'
 import { map } from 'tempo-std/lib/arrays'
 
-export class DOMPortalTemplate<State, Action, Query> implements DOMTemplate<State, Action, Query> {
+export class PortalTemplate<State, Action, Query> implements DOMTemplate<State, Action, Query> {
   constructor(
     readonly getParent: (doc: Document) => Element,
     readonly append: (doc: Document, node: Node) => void,
@@ -49,7 +49,7 @@ export const portal = <State, Action, Query = unknown>(
   },
   ...children: DOMChild<State, Action, Query>[]
 ): DOMTemplate<State, Action, Query> =>
-  new DOMPortalTemplate<State, Action, Query>(options.getParent, options.append, map(domChildToTemplate, children))
+  new PortalTemplate<State, Action, Query>(options.getParent, options.append, map(domChildToTemplate, children))
 
 export const portalWithSelector = <State, Action, Query = unknown>(
   options: { selector: string },
@@ -76,7 +76,7 @@ export const portalWithSelector = <State, Action, Query = unknown>(
 
 export const headPortal = <State, Action, Query = unknown>(...children: DOMChild<State, Action, Query>[])
     : DOMTemplate<State, Action, Query> =>
-  new DOMPortalTemplate<State, Action, Query>(
+  new PortalTemplate<State, Action, Query>(
     (doc: Document) => doc.head!,
     (doc: Document, node: Node) => doc.head!.appendChild(node),
     map(domChildToTemplate, children)
@@ -84,7 +84,7 @@ export const headPortal = <State, Action, Query = unknown>(...children: DOMChild
 
 export const bodyPortal = <State, Action, Query = unknown>(...children: DOMChild<State, Action, Query>[])
     : DOMTemplate<State, Action, Query> =>
-  new DOMPortalTemplate<State, Action, Query>(
+  new PortalTemplate<State, Action, Query>(
     (doc: Document) => doc.body,
     (doc: Document, node: Node) => doc.body.appendChild(node),
     map(domChildToTemplate, children)

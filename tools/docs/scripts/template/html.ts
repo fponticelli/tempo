@@ -5,7 +5,7 @@ const COMMENT_PSEUDO_COMMENT_OR_LT_BANG = new RegExp(
   + '<!---+>?'  // A comment with no body
   + '|<!(?![dD][oO][cC][tT][yY][pP][eE]|\\[CDATA\\[)[^>]*>?'
   + '|<[?][^>]*>?',  // A pseudo-comment
-  'g');
+  'g')
 
 export const formatHtml = (html: string) => {
   html = html.replace(COMMENT_PSEUDO_COMMENT_OR_LT_BANG, '')

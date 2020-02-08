@@ -16,7 +16,7 @@ import { keys } from 'tempo-std/lib/objects'
 import { replace } from 'tempo-std/lib/strings'
 import { DOMTemplate } from './template'
 import { DOMContext } from './context'
-import { DOMAttribute } from './value'
+import { Attribute } from './value'
 import { headPortal } from './portal'
 import { el } from './element'
 import { text } from './text'
@@ -82,7 +82,7 @@ export const nestedAtRules: (
 ]
 
 export type StyleDeclarations<State> = {
-  [K in keyof CSSStyleDeclaration]?: K extends number ? never : DOMAttribute<State, CSSStyleDeclaration[K]>
+  [K in keyof CSSStyleDeclaration]?: K extends number ? never : Attribute<State, CSSStyleDeclaration[K]>
 }
 
 export interface MediaQuery<State> {

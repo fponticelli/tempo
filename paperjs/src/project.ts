@@ -12,7 +12,7 @@ limitations under the License.
 */
 
 import { el } from 'tempo-dom/lib/element'
-import { DOMAttribute } from 'tempo-dom/lib/value'
+import { Attribute } from 'tempo-dom/lib/value'
 import { Item, PaperScope } from 'paper'
 import { PaperTemplate } from './template'
 import { PaperContext } from './context'
@@ -29,10 +29,10 @@ interface PaperLocal<State, Action, Query> {
 
 export const project = <State, Action, Query>(
   options: {
-    width: DOMAttribute<State, number>
-    height: DOMAttribute<State, number>
+    width: Attribute<State, number>
+    height: Attribute<State, number>
     scope?: PaperScope
-    active?: DOMAttribute<State, boolean>
+    active?: Attribute<State, boolean>
     respond?: (
       query: Query,
       el: HTMLCanvasElement,

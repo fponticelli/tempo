@@ -12,7 +12,7 @@ limitations under the License.
 */
 
 import { DerivedValue } from 'tempo-core/lib/value'
-import { DOMAttribute, DOMEventHandler, DOMStyleAttribute } from '../value'
+import { Attribute, EventHandler, StyleAttribute } from '../value'
 import { htmlAttributeMap as attributeMap } from '../dom_attributes_mapper'
 import { setAttribute, setOneStyle } from './set_attribute'
 import { DOMChild, DOMTemplate } from '../template'
@@ -54,7 +54,7 @@ export type Acc<State> = ((state: State) => void)[]
 export function processAttribute<State, Value>(
   el: Element,
   name: string,
-  value: DOMAttribute<State, Value>,
+  value: Attribute<State, Value>,
   acc: Acc<State>
 ): Acc<State> {
   let set = attributeMap[name] || setAttribute
@@ -94,7 +94,7 @@ export function processEvent<
 >(
   el: El,
   name: string,
-  value: DOMEventHandler<State, Action, Ev, El>,
+  value: EventHandler<State, Action, Ev, El>,
   dispatch: (action: Action) => void,
   acc: Acc<State>
 ): Acc<State> {
@@ -117,7 +117,7 @@ export function processEvent<
 export function processStyle<State, Value>(
   el: Element,
   name: string,
-  value: DOMStyleAttribute<State, Value>,
+  value: StyleAttribute<State, Value>,
   acc: Acc<State>
 ): Acc<State> {
   if (typeof value === 'function') {

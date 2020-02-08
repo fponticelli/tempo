@@ -23,7 +23,7 @@ import { Maybe, Just } from 'tempo-std/lib/maybe'
 import { Result, Success, Failure } from 'tempo-std/lib/result'
 import { Async, Loading, Outcome } from 'tempo-std/lib/async'
 import { AsyncResult } from 'tempo-std/lib/async_result'
-import { DOMAttribute, resolveAttribute } from './value'
+import { Attribute, resolveAttribute } from './value'
 
 export class MatchTemplate<
   Path extends IndexType[],
@@ -104,7 +104,7 @@ export class MatchBoolTemplate<
   Query
 > implements DOMTemplate<State, Action, Query> {
   constructor(
-    readonly condition: DOMAttribute<State, boolean>,
+    readonly condition: Attribute<State, boolean>,
     readonly trueTemplate: DOMTemplate<State, Action, Query>,
     readonly falseTemplate: DOMTemplate<State, Action, Query>,
     readonly refId: string
@@ -141,7 +141,7 @@ export class MatchBoolTemplate<
 
 export const matchBool = <State, Action, Query = unknown>(
   options: {
-    condition: DOMAttribute<State, boolean>,
+    condition: Attribute<State, boolean>,
     true: DOMChild<State, Action, Query>,
     false: DOMChild<State, Action, Query>,
     refId?: string

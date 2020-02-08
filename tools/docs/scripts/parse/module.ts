@@ -9,7 +9,10 @@ import { TypeAlias, typeAliasOfDeclaration } from './type_alias'
 import { ClassT, classOfDeclaration } from './class'
 import { Export, exportOfDeclaration } from './export'
 import { Variable, variableOfDeclaration } from './variable'
-import { Directory, VariableDeclarationList, CatchClause, ts, VariableStatement, ForStatement, ForOfStatement, ForInStatement, TypeGuards } from 'ts-morph'
+import {
+  Directory, VariableDeclarationList, CatchClause, ts,
+  VariableStatement, ForStatement, ForOfStatement, ForInStatement,
+  TypeGuards } from 'ts-morph'
 import { none } from 'tempo-std/lib/option'
 
 export interface Module extends BaseDoc {

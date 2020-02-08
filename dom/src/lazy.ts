@@ -15,7 +15,7 @@ import { View } from 'tempo-core/lib/view'
 import { DOMContext } from './context'
 import { DOMTemplate } from './template'
 
-export class DOMLazyTemplate<State, Action, Query> implements DOMTemplate<State, Action, Query> {
+export class LazyTemplate<State, Action, Query> implements DOMTemplate<State, Action, Query> {
   constructor(
     readonly f: () => DOMTemplate<State, Action, Query>
   ) {}
@@ -28,4 +28,4 @@ export class DOMLazyTemplate<State, Action, Query> implements DOMTemplate<State,
 
 export const lazy = <State, Action, Query = unknown>(
   f: () => DOMTemplate<State, Action, Query>
-): DOMTemplate<State, Action, Query> => new DOMLazyTemplate<State, Action, Query>(f)
+): DOMTemplate<State, Action, Query> => new LazyTemplate<State, Action, Query>(f)

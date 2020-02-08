@@ -19,9 +19,7 @@ limitations under the License.
 /**
  * Describes a `Value` that can only be inferred from some other value `State`.
  */
-export type DerivedValue<State, Value> = (
-  state: State
-) => Value | undefined
+export type DerivedValue<State, Value> = (state: State) => Value | undefined
 
 /**
  * A value that can be either a literal or derived from a state.

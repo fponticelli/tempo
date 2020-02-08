@@ -16,7 +16,7 @@ import { DOMContext } from './context'
 import { View } from 'tempo-core/lib/view'
 import { DOMElement, el } from './element'
 import { DerivedValue } from 'tempo-core/lib/value'
-import { DOMTextValue } from './value'
+import { TextValue } from './value'
 
 const renderLiteral = <State, Action, Query = unknown, El extends Element = Element, T = unknown>
 (
@@ -71,9 +71,9 @@ const renderFunction = <State, Action, Query, El extends Element = Element, T = 
   }
 }
 
-export class DOMUnsafeHtml<State, Action, Query, El extends Element = Element, T = unknown> implements DOMTemplate<State, Action, Query> {
+export class UnsafeHtml<State, Action, Query, El extends Element = Element, T = unknown> implements DOMTemplate<State, Action, Query> {
   constructor(
-    readonly content: DOMTextValue<State>,
+    readonly content: TextValue<State>,
     readonly element: DOMElement<State, Action, Query, El, T>,
     readonly transform: (source: string) => string
   ) {}
@@ -101,12 +101,12 @@ export class DOMUnsafeHtml<State, Action, Query, El extends Element = Element, T
 
 export const unsafeHtml = <State, Action, Query = unknown, El extends Element = Element, T = unknown>(
   options: {
-    content: DOMTextValue<State>
+    content: TextValue<State>
     element?: DOMElement<State, Action, Query, El, T>
     transform?: (source: string) => string
   }
 ): DOMTemplate<State, Action, Query> =>
-  new DOMUnsafeHtml<State, Action, Query, El, T>(
+  new UnsafeHtml<State, Action, Query, El, T>(
     options.content,
     options.element || el<State, Action, Query, El, T>('div', {}),
     options.transform || (s => s)

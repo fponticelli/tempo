@@ -5,7 +5,7 @@ import { toHref, Route } from '../route'
 import { a, span } from 'tempo-dom/lib/html'
 import { getUnsafe, Option, toBoolean } from 'tempo-std/lib/option'
 import {
-  DOMAttribute,
+  Attribute,
   mapAttribute,
   attributeToHandler
 } from 'tempo-dom/lib/value'
@@ -13,8 +13,8 @@ import { DOMChild } from 'tempo-dom/lib/template'
 
 export const maybeLink = <State>(
   label: DOMChild<State, Action>,
-  route: DOMAttribute<State, Option<Route>>,
-  className?: DOMAttribute<State, string>
+  route: Attribute<State, Option<Route>>,
+  className?: Attribute<State, string>
 ) =>
   fragment<State, Action>(
     matchBool({
@@ -35,8 +35,8 @@ export const maybeLink = <State>(
 
 export const link = <State>(
   label: DOMChild<State, Action>,
-  route: DOMAttribute<State, Route>,
-  className?: DOMAttribute<State, string>
+  route: Attribute<State, Route>,
+  className?: Attribute<State, string>
 ) =>
   a(
     {
