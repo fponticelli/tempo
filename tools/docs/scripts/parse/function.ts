@@ -1,5 +1,6 @@
 import { FunctionDeclaration } from 'ts-morph'
 import { docOfJsDoc, BaseDoc } from './jsdoc'
+import { adjustSignature } from './signature'
 
 export interface Function extends BaseDoc {
   kind: 'function'
@@ -18,7 +19,7 @@ function getFunctionDeclarationSignature(fun: FunctionDeclaration): string {
   if (text.endsWith(')')) {
     text += ': ' + fun.getReturnType().getText()
   }
-  return text
+  return adjustSignature(text)
 }
 
 export const functionOfDeclaration = (fun: FunctionDeclaration): Function => {

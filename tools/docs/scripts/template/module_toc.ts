@@ -3,6 +3,7 @@ import { mapState } from 'tempo-dom/lib/map'
 import { compare } from 'tempo-std/lib/strings'
 import { forEach } from 'tempo-dom/lib/for_each'
 import { State } from './state'
+import { when } from 'tempo-dom/lib/when'
 
 const mapModuleToToc = (state: State) => {
   const mod = state.module
@@ -27,19 +28,22 @@ export const moduleToc = nav<State, unknown>(
   {},
   mapState(
     { map: mapModuleToToc },
-    ul(
-      { attrs: { class: 'module-toc-list' } },
-      forEach(
-        {},
-        li(
-          { attrs: {} },
-          a(
-            { attrs: { href: s => s.path } },
-            // span(
-            //   { attrs: { class: s => `icon icon-${s.kind}` } }
-            // ),
-            // ' ',
-            s => s.name
+    when(
+      { condition: s => s.length > 5 },
+      ul(
+        { attrs: { class: 'module-toc-list' } },
+        forEach(
+          {},
+          li(
+            { attrs: {} },
+            a(
+              { attrs: { href: s => s.path, class: 'is-family-monospace' } },
+              // span(
+              //   { attrs: { class: s => `icon icon-${s.kind}` } }
+              // ),
+              // ' ',
+              s => s.name
+            )
           )
         )
       )

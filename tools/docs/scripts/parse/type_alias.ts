@@ -3,7 +3,7 @@ import { docOfJsDoc, BaseDoc } from './jsdoc'
 import { adjustSignature } from './signature'
 
 export interface TypeAlias extends BaseDoc {
-  kind: 'type_alias'
+  kind: 'type_alias' | 'interface'
   name: string
   signature: string
 }

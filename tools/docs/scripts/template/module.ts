@@ -3,7 +3,7 @@ import { mapState } from 'tempo-dom/lib/map'
 import { when } from 'tempo-dom/lib/when'
 import { forEach } from 'tempo-dom/lib/for_each'
 import { DOMChild } from 'tempo-dom/lib/template'
-import { interfaceTemplate } from './interface_template'
+// import { interfaceTemplate } from './interface_template'
 import { typeAliasTemplate } from './type_alias_template'
 import { exportTemplate } from './export_template'
 import { functionTemplate } from './function_template'
@@ -12,6 +12,9 @@ import { classTemplate } from './class_template'
 import { baseDoc } from './base_doc'
 import { moduleToc } from './module_toc'
 import { State } from './state'
+import { Interface } from '../parse/interface'
+import { TypeAlias } from '../parse/type_alias'
+import { compare } from 'tempo-std/lib/strings'
 
 export const list = <State extends any[], Inner>(title: string, element: DOMChild<State[number], unknown>) => {
   return when<State, unknown>(
@@ -35,12 +38,19 @@ export const module = article<State, unknown>(
     baseDoc
   ),
   moduleToc,
+  // mapState(
+  //   { map: s => s.module.interfaces },
+  //   list('interfaces', interfaceTemplate)
+  // ),
   mapState(
-    { map: s => s.module.interfaces },
-    list('interfaces', interfaceTemplate)
-  ),
-  mapState(
-    { map: s => s.module.typeAliases },
+    {
+      map: s => {
+        const a = [] as (Interface | TypeAlias)[]
+        a.push(...s.module.typeAliases)
+        a.push(...s.module.interfaces)
+        return a.sort((a, b) => compare(a.name, b.name))
+      }
+    },
     list('types', typeAliasTemplate)
   ),
   mapState(
@@ -53,7 +63,7 @@ export const module = article<State, unknown>(
   ),
   mapState(
     { map: s => s.module.variables },
-    list('variables', variableTemplate)
+    list('values', variableTemplate)
   ),
   mapState(
     { map: s => s.module.classes },
