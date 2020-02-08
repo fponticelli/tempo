@@ -11,10 +11,14 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+/**
+ * Utility functions to manipulate `Array` values.
+ */
+
 import { Maybe, nothing } from './maybe'
 import { Ordering } from './ord'
 
-export const map = <A, B>(f: (a: A) => B, arr: A[]): B[] => {
+export function map<A, B>(f: (a: A) => B, arr: A[]): B[] {
   const length = arr.length
   const buff = new Array(length)
   for (let i = 0; i < length; i++) {
@@ -23,7 +27,7 @@ export const map = <A, B>(f: (a: A) => B, arr: A[]): B[] => {
   return buff
 }
 
-export const flatMap = <A, B>(f: (a: A) => B[], arr: A[]): B[] => {
+export function flatMap<A, B>(f: (a: A) => B[], arr: A[]): B[] {
   const buff = new Array()
   for (const el of arr) {
     buff.push(...f(el))
@@ -31,10 +35,15 @@ export const flatMap = <A, B>(f: (a: A) => B[], arr: A[]): B[] => {
   return buff
 }
 
-export const head = <A>(arr: A[]): Maybe<A> => arr.length > 0 ? arr[0] : nothing
-export const tail = <A>(arr: A[]): A[] => arr.slice(1)
+export function head<A>(arr: A[]): Maybe<A> {
+  return arr.length > 0 ? arr[0] : nothing
+}
 
-export const equals = <T>(predicate: (a: T, b: T) => boolean, a: T[], b: T[]): boolean => {
+export function tail<A>(arr: A[]): A[] {
+  return arr.slice(1)
+}
+
+export function equals<T>(predicate: (a: T, b: T) => boolean, a: T[], b: T[]): boolean {
   if (a.length !== b.length)
     return false
   else {
@@ -45,10 +54,15 @@ export const equals = <T>(predicate: (a: T, b: T) => boolean, a: T[], b: T[]): b
   }
 }
 
-export const isEmpty = <T>(arr: T[]): arr is [] => arr.length === 0
-export const hasValues = <T>(arr: T[]): arr is [T, ...T[]] => arr.length > 0
+export function isEmpty<T>(arr: T[]): arr is [] {
+  return arr.length === 0
+}
 
-export const filter = <T>(predicate: (v: T) => boolean, arr: T[]): T[] => {
+export function hasValues<T>(arr: T[]): arr is [T, ...T[]] {
+  return arr.length > 0
+}
+
+export function filter<T>(predicate: (v: T) => boolean, arr: T[]): T[] {
   const buff = [] as T[]
   for (const a of arr)
     if (predicate(a))
@@ -56,18 +70,18 @@ export const filter = <T>(predicate: (v: T) => boolean, arr: T[]): T[] => {
   return buff
 }
 
-export const flatten = <T>(arr: T[][]): T[] => {
+export function flatten<T>(arr: T[][]): T[] {
   return ([] as T[]).concat(...arr)
 }
 
-export const foldLeft = <T, B>(f: (acc: B, curr: T) => B, arr: T[], b: B): B => {
+export function foldLeft<T, B>(f: (acc: B, curr: T) => B, arr: T[], b: B): B {
   for (const a of arr) {
     b = f(b, a)
   }
   return b
 }
 
-export const all = <T>(predicate: (v: T) => boolean, arr: T[]): boolean => {
+export function all<T>(predicate: (v: T) => boolean, arr: T[]): boolean {
   for (const a of arr) {
     if (!predicate(a)) {
       return false
@@ -76,7 +90,7 @@ export const all = <T>(predicate: (v: T) => boolean, arr: T[]): boolean => {
   return true
 }
 
-export const any = <T>(predicate: (v: T) => boolean, arr: T[]): boolean => {
+export function any<T>(predicate: (v: T) => boolean, arr: T[]): boolean {
   for (const a of arr) {
     if (predicate(a)) {
       return true
@@ -85,24 +99,30 @@ export const any = <T>(predicate: (v: T) => boolean, arr: T[]): boolean => {
   return false
 }
 
-export const each = <T>(f: (v: T) => void, arr: T[]): void => {
+export function each<T>(f: (v: T) => void, arr: T[]): void {
   for (const a of arr)
     f(a)
 }
 
-export const concat = <A>(...arrs: A[][]): A[] =>
-  ([] as A[]).concat(...arrs)
+export function concat<A>(...arrs: A[][]): A[] {
+  return ([] as A[]).concat(...arrs)
+}
 
-export const sort = <A>(compare: (a: A, b: A) => Ordering, arr: A[]): A[] =>
-  arr.slice().sort(compare)
+export function sort<A>(compare: (a: A, b: A) => Ordering, arr: A[]): A[] {
+  return arr.slice().sort(compare)
+}
 
-export const range = <A>(length: number, f: (index: number) => A) => {
+export function range<A>(length: number, f: (index: number) => A) {
   const buff = new Array(length)
   for (let i = 0; i < length; i++)
     buff[i] = f(i)
   return buff
 }
 
-export const numbersRange = (length: number, startAt = 0) => range(length, i => startAt + i)
+export function numbersRange(length: number, startAt = 0) {
+  return range(length, i => startAt + i)
+}
 
-export const fill = <A>(length: number, value: A) => range(length, () => value)
+export function fill<A>(length: number, value: A) {
+  return range(length, () => value)
+}

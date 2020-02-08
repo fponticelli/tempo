@@ -1,4 +1,7 @@
 import { none, some, Option } from './option'
+/**
+ * Utility functions to manipulate `boolean` values.
+ */
 
 /**
  * Returns a comparison value (`Int`) from two boolean values.

@@ -11,15 +11,25 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+/**
+ * Utility functions to manipulate string values.
+ */
+
 import { Ord } from './ord'
 import { range, any, all, fill } from './arrays'
 import { map as mapR } from './regexps'
 
-export const replace = (
+/**
+ * Replaces all occurrances of `placeholder` in `subject` with the value `replacement`.
+ * @param subject
+ * @param placeholder
+ * @param replacement
+ */
+export function replace(
   subject: string,
   placeholder: string,
   replacement: string
-) => subject.split(placeholder).join(replacement)
+) { return subject.split(placeholder).join(replacement) }
 
 /**
  * `after` searches for the first occurrance of `searchFor` and returns the text after that.

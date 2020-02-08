@@ -1,9 +1,10 @@
 import { Newtype, NewtypeClass } from './newtype'
 
 /**
- * Helper functions to generate [UUID](http://en.wikipedia.org/wiki/Universally_unique_identifier)
+ * Helper functions to generate and validate [UUID](http://en.wikipedia.org/wiki/Universally_unique_identifier)
  * strings (version 4).
  */
+
 const random = (max: number) => Math.floor(Math.random() * max)
 const srandom = () => '0123456789abcdef'.charAt(random(0x10))
 
