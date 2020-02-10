@@ -12,6 +12,7 @@ export type Route =
   | { kind: 'Page', path: string }
   | { kind: 'Demos' }
   | { kind: 'Demo', path: string }
+  | { kind: 'Project', name: string }
   | { kind: 'Api', name: string, path: string }
   | { kind: 'Changelog', name: string }
   | { kind: 'NotFound', path: string }
@@ -22,6 +23,7 @@ export const toHref = matchKind<Route, string>({
   Demos: o => `#/demo`,
   Demo: o => `#/demo/${o.path}`,
   Page: o => `#/page/${o.path}`,
+  Project: o => `#/project/${o.name}`,
   Api: o => `#/api/${o.name}/${o.path}`,
   NotFound: o => o.path,
   Changelog: o => `#/changelog/${o.name}`
@@ -33,6 +35,7 @@ export const toContentUrl = matchKind<Route, Option<string>>({
   Demos: _ => none,
   Demo: o => some(`demo/${o.path}`),
   Page: o => some(`pages/${o.path}`),
+  Project: _ => none,
   NotFound: _ => none,
   Changelog: o => some(`changelog/${o.name}.html`)
 })
@@ -48,6 +51,7 @@ export const Route = {
     else
       return { kind: 'Page', path }
   },
+  project: (name: string): Route => ({ kind: 'Project', name }),
   changelog: (name: string): Route => ({ kind: 'Changelog', name }),
   notFound: (path: string): Route => ({ kind: 'NotFound', path })
 }
@@ -94,10 +98,12 @@ export const parseUrl = (url: string): Route => {
       return Route.demos
     } else if (url.startsWith('/demo/')) {
       return Route.demo(url.substring(6))
+    } else if (url.startsWith('/project/')) {
+      return Route.project(url.substring(9))
     } else if (url.startsWith('/page/')) {
       return Route.page(url.substring(6))
     } else if (url.startsWith('/changelog/')) {
-      return Route.page(url.substring(11))
+      return Route.changelog(url.substring(11))
     } else {
       return Route.notFound(url)
     }
@@ -111,6 +117,9 @@ export const isApiProjectRoute = (route: Route, name: string) => {
 export const contentFromRoute = (store: Store<State, Action>, toc: Toc, route: Route) => {
   if (route.kind === 'Demo') {
     location.href = getUnsafe(toContentUrl(route))
+  } else if (route.kind === 'Project') {
+    const proj = toc.projects.find(p => p.name === route.name)!
+    store.process(Action.loadedContent(success(Content.project(proj))))
   } else if (route.kind === 'Demos') {
     store.process(Action.loadedContent(success(Content.demos(toc.demos))))
   } else {

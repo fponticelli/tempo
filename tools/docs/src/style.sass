@@ -19,9 +19,6 @@ html, body, #app
 .menu
   padding: 1em 0
 
-article.content
-  padding: 1em 0
-
 main.container
   padding: 0 12px
 
@@ -29,18 +26,22 @@ main.container
   height: calc(100vh - 40px)
   overflow-y: auto
 
-.content .tag, .content .number
-  display: inline
-  padding: inherit
-  font-size: inherit
-  line-height: inherit
-  text-align: inherit
-  vertical-align: inherit
-  border-radius: inherit
-  font-weight: inherit
-  white-space: inherit
-  background: inherit
-  margin: inherit
+pre
+  .content .tag, .content .number
+    display: inline
+    padding: inherit
+    font-size: inherit
+    line-height: inherit
+    text-align: inherit
+    vertical-align: inherit
+    border-radius: inherit
+    font-weight: inherit
+    white-space: inherit
+    background: inherit
+    margin: inherit
+
+article.content
+  padding: 1em 0
 
 .wrap
   flex-wrap: wrap
@@ -86,7 +87,7 @@ h3[id]
   scroll-margin: 20px
 
 ul.module-toc-list
-  column-width: 120px
+  columns: 200px 4
   list-style: none
   margin: 1em 0
   li

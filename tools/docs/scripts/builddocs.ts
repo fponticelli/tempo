@@ -299,8 +299,10 @@ async function createApis(projects: string[], root: string, dst: string): Promis
 
 async function collectProject(project: string, src: string): Promise<{ priority: number, data: ProjectRef }> {
   const p = path.join(src, project, 'package.json')
-  const content = await fs.readFile(p, 'utf8')
-  const pack = JSON.parse(content)
+  const packageJson = await fs.readFile(p, 'utf8')
+  const pack = JSON.parse(packageJson)
+  const projectPath = path.join(src, project, 'PROJECT.md')
+  const content = markdown(fse.existsSync(projectPath) ? await fs.readFile(projectPath, 'utf8') : '')
   return {
     priority: pack.priority ?? 0,
     data: {
@@ -308,7 +310,8 @@ async function collectProject(project: string, src: string): Promise<{ priority:
       title: pack.title ?? pack.name ?? project,
       description: pack.description,
       version: pack.version,
-      keywords: pack.keywords ?? []
+      keywords: pack.keywords ?? [],
+      content
     }
   }
 }

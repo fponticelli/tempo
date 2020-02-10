@@ -11,7 +11,8 @@ import {
   pageToRoute,
   projectChangelogMatchesRoute,
   apiMatchesRoute,
-  isApiProjectRoute
+  isApiProjectRoute,
+  sameRoute
 } from '../route'
 import { some, none } from 'tempo-std/lib/option'
 import { keys } from 'tempo-std/lib/objects'
@@ -102,15 +103,19 @@ const project = div<[ProjectRef, Sidebar, number], Action>(
     maybeLink(
       ([p]) => p.title,
       ([p, s]) =>
-        apiMatchesRoute(p.name, 'index.html', s.route)
+        sameRoute(Route.project(p.name), s.route)
           ? none
-          : some(Route.api(p.name, 'index.html')),
+          : some(Route.project(p.name)),
       'is-uppercase has-text-weight-bold'
     )
   ),
-  div({ attrs: { class: 'is-size-7' } }, ([s]) => s.description),
   when(
-    { condition: ([p, s]) => isApiProjectRoute(s.route, p.name) },
+    {
+      condition: ([p, s]) =>
+        isApiProjectRoute(s.route, p.name) ||
+        sameRoute(Route.project(p.name), s.route)
+    },
+    div({ attrs: { class: 'is-size-7' } }, ([s]) => s.description),
     div(
       { attrs: { class: 'box api-box' } },
       mapState(

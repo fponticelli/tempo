@@ -7,6 +7,7 @@ import { HttpError } from '../request'
 import { matchAsyncResult, matchKind } from 'tempo-dom/lib/match'
 import { mapState } from 'tempo-dom/lib/map'
 import { demosContent } from './demos_content'
+import { projectContent } from './project_content'
 
 export const content = article<
   AsyncResult<Content, HttpError, unknown>,
@@ -22,7 +23,8 @@ export const content = article<
     NotAsked: '',
     Success: matchKind({
       HtmlPage: htmlContent,
-      Demos: mapState({ map: c => c.demos }, demosContent)
+      Demos: mapState({ map: c => c.demos }, demosContent),
+      Project: mapState({ map: c => c.project }, projectContent)
     })
   })
 )

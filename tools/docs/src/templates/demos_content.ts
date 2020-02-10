@@ -16,11 +16,12 @@ const demo = div<DemoRef, Action>(
         s => Route.demo(s.path)
       )
     ),
-    p({ attrs: { class: 'content' } }, s => s.description)
+    p({ attrs: { class: 'description' } }, s => s.description)
   )
 )
 
 export const demosContent = div<DemoRef[], Action>(
-  { attrs: { class: 'tile is-ancestor wrap' } },
-  forEach({}, demo)
+  {},
+  p({ attrs: { class: 'title' } }, 'Demos'),
+  div({ attrs: { class: 'tile is-ancestor wrap' } }, forEach({}, demo))
 )
