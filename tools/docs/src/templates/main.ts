@@ -95,7 +95,7 @@ export const template = div<State, Action>(
                     { getArray: s => s.projects },
                     link<ProjectRef>(
                       s => s.title,
-                      s => Route.api(s.name, 'index.html'),
+                      s => Route.project(s.name),
                       'navbar-item'
                     )
                   )
