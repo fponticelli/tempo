@@ -12,4 +12,16 @@
   <h3 class="is-family-monospace has-text-grey-dark" id="WhenTemplate">
     WhenTemplate
   </h3>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">class</span> <span class="token class-name">WhenTemplate</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span> <span class="token keyword">implements</span> <span class="token class-name">DOMTemplate</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+  
+  
+  <span class="token keyword">constructor</span><span class="token punctuation">(</span>
+    <span class="token parameter"><span class="token keyword">readonly</span> options<span class="token operator">:</span> WhenOptions<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+    <span class="token keyword">readonly</span> children<span class="token operator">:</span> DOMTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">[</span><span class="token punctuation">]</span></span>
+  <span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+  <span class="token keyword">readonly</span> options<span class="token operator">:</span> WhenOptions<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span><span class="token punctuation">,</span><span class="token keyword">readonly</span> children<span class="token operator">:</span> DOMTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
+  <span class="token function">render</span><span class="token punctuation">(</span>ctx<span class="token operator">:</span> DOMContext<span class="token operator">&lt;</span>Action<span class="token operator">&gt;</span><span class="token punctuation">,</span> state<span class="token operator">:</span> State<span class="token punctuation">)</span><span class="token operator">:</span> View<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+<span class="token punctuation">}</span></div></pre>
 </article>
