@@ -1,0 +1,84 @@
+<article>
+  <h1>module 'value'</h1>
+  <nav>
+    <ul class="module-toc-list">
+      <li>
+        <a class="is-family-monospace" href="#/api/dom/value.html#Attribute"
+          >Attribute</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/dom/value.html#AttributeValue"
+          >AttributeValue</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/dom/value.html#Attributes"
+          >Attributes</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/dom/value.html#EventHandler"
+          >EventHandler</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/dom/value.html#StyleAttribute"
+          >StyleAttribute</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/dom/value.html#TextValue"
+          >TextValue</a
+        >
+      </li>
+    </ul>
+  </nav>
+  <h2>types</h2>
+  <h3 class="is-family-monospace has-text-grey-dark" id="Attribute">
+    Attribute
+  </h3>
+  <pre>
+type Attribute&lt;State, Value&gt; = DerivedOrLiteralValue&lt;State, Value | undefined&gt; | undefined</pre
+  >
+  <h3 class="is-family-monospace has-text-grey-dark" id="AttributeValue">
+    AttributeValue
+  </h3>
+  <pre>type AttributeValue = string | number | boolean | string[]</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="Attributes">
+    Attributes
+  </h3>
+  <pre>
+interface Attributes&lt;State, Action, Query = unknown, El extends Element = Element, T = unknown&gt; {
+  attrs?: Record&lt;string, Attribute&lt;State, AttributeValue&gt;&gt;
+  events?: Record&lt;string, EventHandler&lt;State, Action, any, El&gt;&gt;
+  styles?: Record&lt;string, StyleAttribute&lt;State, string&gt;&gt;
+  afterrender?:  (state: State, el: El, ctx: DOMContext&lt;Action&gt;) =&gt; T | undefined
+  beforechange?: (state: State, el: El, ctx: DOMContext&lt;Action&gt;, value: T | undefined) =&gt; T | undefined
+  afterchange?:  (state: State, el: El, ctx: DOMContext&lt;Action&gt;, value: T | undefined) =&gt; T | undefined
+  beforedestroy?: (el: El, ctx: DOMContext&lt;Action&gt;, value: T | undefined) =&gt; void
+  respond?: (query: Query, el: El, ctx: DOMContext&lt;Action&gt;, value: T | undefined) =&gt; T | undefined
+}</pre
+  >
+  <h3 class="is-family-monospace has-text-grey-dark" id="EventHandler">
+    EventHandler
+  </h3>
+  <pre>
+type EventHandler&lt;S, Action, Ev extends Event = Event, El extends Element = Element&gt; =
+  (state: S, event: Ev, element: El) =&gt; Action | undefined</pre
+  >
+  <h3 class="is-family-monospace has-text-grey-dark" id="StyleAttribute">
+    StyleAttribute
+  </h3>
+  <pre>
+type StyleAttribute&lt;State, Value&gt; = DerivedOrLiteralValue&lt;State, Value | undefined&gt;</pre
+  >
+  <h3 class="is-family-monospace has-text-grey-dark" id="TextValue">
+    TextValue
+  </h3>
+  <pre>type TextValue&lt;S&gt; = Attribute&lt;S, string&gt;</pre>
+</article>

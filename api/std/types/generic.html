@@ -1,0 +1,30 @@
+<article>
+  <h1>module 'types/generic'</h1>
+  <div><p>// TYPE TESTS</p></div>
+  <nav></nav>
+  <h2>types</h2>
+  <h3 class="is-family-monospace has-text-grey-dark" id="Cast">Cast</h3>
+  <pre>type Cast&lt;A, B&gt; = A extends B ? A : B</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="DeRef">DeRef</h3>
+  <pre>
+type DeRef&lt;T extends () =&gt; any&gt; = T extends () =&gt; infer Ret ? Ret : never</pre
+  >
+  <h3 class="is-family-monospace has-text-grey-dark" id="Pointer">Pointer</h3>
+  <pre>type Pointer&lt;T&gt; = () =&gt; T</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="WhenEquals">
+    WhenEquals
+  </h3>
+  <pre>
+type WhenEquals&lt;X, Y, A = X, B = never&gt; = Equals&lt;X, Y&gt; extends true
+  ? A
+  : B</pre
+  >
+  <h3 class="is-family-monospace has-text-grey-dark" id="WhenNotEquals">
+    WhenNotEquals
+  </h3>
+  <pre>
+type WhenNotEquals&lt;X, Y, A = X, B = never&gt; = NotEquals&lt;X, Y&gt; extends true
+  ? A
+  : B</pre
+  >
+</article>

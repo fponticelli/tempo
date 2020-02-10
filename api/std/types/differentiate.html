@@ -1,0 +1,51 @@
+<article>
+  <h1>module 'types/differentiate'</h1>
+  <div><p>// TYPE TESTS</p></div>
+  <nav></nav>
+  <h2>types</h2>
+  <h3 class="is-family-monospace has-text-grey-dark" id="Differentiate">
+    Differentiate
+  </h3>
+  <pre>
+type Differentiate&lt;
+  Field extends IndexType,
+  State extends ObjectWithField&lt;Field, any&gt;,
+  ExpectedType extends State[Field]
+&gt; = State extends ObjectWithField&lt;Field, ExpectedType&gt; ? State : never</pre
+  >
+  <h3 class="is-family-monospace has-text-grey-dark" id="DifferentiateAt">
+    DifferentiateAt
+  </h3>
+  <pre>
+type DifferentiateAt&lt;
+  Path extends IndexType[],
+  State,
+  ExpectedType
+&gt; = Path extends []
+  ? State
+  : Path extends [infer T]
+  ? T extends keyof State
+    ? ExpectedType extends State[T]
+      ? Differentiate&lt;T, State, ExpectedType&gt;
+      : never
+    : never
+  : Path extends [infer K, ...any[]]
+  ? K extends keyof State
+    ? Tail&lt;Path&gt; extends infer Rest
+      ? Rest extends IndexType[]
+        ? State &amp; { [k in K]: DifferentiateAt&lt;Rest, State[k], ExpectedType&gt; }
+        : never
+      : never
+    : never
+  : never</pre
+  >
+  <h3 class="is-family-monospace has-text-grey-dark" id="DifferentiateByKind">
+    DifferentiateByKind
+  </h3>
+  <pre>
+type DifferentiateByKind&lt;
+  State extends { kind: any },
+  K extends State['kind']
+&gt; = Differentiate&lt;'kind', State, K&gt;</pre
+  >
+</article>

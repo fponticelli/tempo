@@ -1,0 +1,38 @@
+<article>
+  <h1>module 'item'</h1>
+  <nav></nav>
+  <h2>types</h2>
+  <h3 class="is-family-monospace has-text-grey-dark" id="FrameEvent">
+    FrameEvent
+  </h3>
+  <pre>
+interface FrameEvent extends Event {
+  // the number of times the frame event was fired
+  count: number
+  // the total amount of time passed since the first frame event in seconds
+  time: number
+  // the time passed in seconds since the last frame event
+  delta: number
+}</pre
+  >
+  <h3 class="is-family-monospace has-text-grey-dark" id="ItemEvents">
+    ItemEvents
+  </h3>
+  <pre>
+interface ItemEvents&lt;State, Action, El&gt; {
+  onFrame?: PaperEventHandler&lt;State, Action, FrameEvent, El&gt;
+  onMouseDown?: PaperEventHandler&lt;State, Action, MouseEvent, El&gt;
+  onMouseDrag?: PaperEventHandler&lt;State, Action, MouseEvent, El&gt;
+  onMouseUp?: PaperEventHandler&lt;State, Action, MouseEvent, El&gt;
+  onClick?: PaperEventHandler&lt;State, Action, MouseEvent, El&gt;
+  onDoubleClick?: PaperEventHandler&lt;State, Action, MouseEvent, El&gt;
+  onMouseMove?: PaperEventHandler&lt;State, Action, MouseEvent, El&gt;
+  onMouseEnter?: PaperEventHandler&lt;State, Action, MouseEvent, El&gt;
+  onMouseLeave?: PaperEventHandler&lt;State, Action, MouseEvent, El&gt;
+}</pre
+  >
+  <h2>classes</h2>
+  <h3 class="is-family-monospace has-text-grey-dark" id="ItemTemplate">
+    ItemTemplate
+  </h3>
+</article>

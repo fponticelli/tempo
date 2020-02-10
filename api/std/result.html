@@ -1,0 +1,244 @@
+<article>
+  <h1>module 'result'</h1>
+  <nav>
+    <ul class="module-toc-list">
+      <li>
+        <a class="is-family-monospace" href="#/api/std/result.html#Failure"
+          >Failure</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/result.html#Result"
+          >Result</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/result.html#Success"
+          >Success</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/result.html#T">T</a>
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/result.html#apN">apN</a>
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/std/result.html#apNWithCombine"
+          >apNWithCombine</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/result.html#flatMapN"
+          >flatMapN</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/std/result.html#flatMapNWithCombine"
+          >flatMapNWithCombine</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/result.html#mapN"
+          >mapN</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/std/result.html#mapNWithCombine"
+          >mapNWithCombine</a
+        >
+      </li>
+    </ul>
+  </nav>
+  <h2>types</h2>
+  <h3 class="is-family-monospace has-text-grey-dark" id="Failure">Failure</h3>
+  <pre>type Failure&lt;E&gt; = { kind: 'Failure', error: E }</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="Result">Result</h3>
+  <pre>
+type Result&lt;T, E&gt; =
+  | Success&lt;T&gt;
+  | Failure&lt;E&gt;</pre
+  >
+  <h3 class="is-family-monospace has-text-grey-dark" id="Success">Success</h3>
+  <pre>type Success&lt;T&gt; = { kind: 'Success', value: T }</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="T">T</h3>
+  <pre>type T&lt;V, E&gt; = Result&lt;V, E&gt;</pre>
+  <h2>functions</h2>
+  <h3 class="is-family-monospace has-text-grey-dark" id="apN">apN</h3>
+  <pre>
+function apN&lt;A, B, C, Err&gt;(f: Result&lt;Fun2&lt;A, B, C&gt;, Err&gt;, a: Result&lt;A, Err&gt;, b: Result&lt;B, Err&gt;): Result&lt;C, Err&gt;</pre
+  >
+  <pre>
+function apN&lt;A, B, C, D, Err&gt;(
+  f: Result&lt;Fun3&lt;A, B, C, D&gt;, Err&gt;,
+  a: Result&lt;A, Err&gt;, b: Result&lt;B, Err&gt;, c: Result&lt;C, Err&gt;): Result&lt;D, Err&gt;</pre
+  >
+  <pre>
+function apN&lt;A, B, C, D, E, Err&gt;(
+  f: Result&lt;Fun4&lt;A, B, C, D, E&gt;, Err&gt;,
+  a: Result&lt;A, Err&gt;, b: Result&lt;B, Err&gt;, c: Result&lt;C, Err&gt;, d: Result&lt;D, Err&gt;): Result&lt;E, Err&gt;</pre
+  >
+  <pre>
+function apN&lt;A, B, C, D, E, F, Err&gt;(
+  f: Result&lt;Fun5&lt;A, B, C, D, E, F&gt;, Err&gt;,
+  a: Result&lt;A, Err&gt;, b: Result&lt;B, Err&gt;, c: Result&lt;C, Err&gt;, d: Result&lt;D, Err&gt;, e: Result&lt;E, Err&gt;): Result&lt;F, Err&gt;</pre
+  >
+  <pre>
+function apN&lt;A, B, C, D, E, F, G, Err&gt;(
+  f: Result&lt;Fun6&lt;A, B, C, D, E, F, G&gt;, Err&gt;,
+  a: Result&lt;A, Err&gt;, b: Result&lt;B, Err&gt;, c: Result&lt;C, Err&gt;, d: Result&lt;D, Err&gt;, e: Result&lt;E, Err&gt;, g: Result&lt;F, Err&gt;): Result&lt;G, Err&gt;</pre
+  >
+  <h3 class="is-family-monospace has-text-grey-dark" id="apNWithCombine">
+    apNWithCombine
+  </h3>
+  <pre>
+function apNWithCombine&lt;A, B, C, Err&gt;(
+  f: Result&lt;Fun2&lt;A, B, C&gt;, Err&gt;,
+  combineErrors: (e1: Err, e2: Err) =&gt; Err,
+  a: Result&lt;A, Err&gt;, b: Result&lt;B, Err&gt;): Result&lt;C, Err&gt;</pre
+  >
+  <pre>
+function apNWithCombine&lt;A, B, C, D, Err&gt;(
+  f: Result&lt;Fun3&lt;A, B, C, D&gt;, Err&gt;,
+  combineErrors: (e1: Err, e2: Err) =&gt; Err,
+  a: Result&lt;A, Err&gt;, b: Result&lt;B, Err&gt;, c: Result&lt;C, Err&gt;): Result&lt;D, Err&gt;</pre
+  >
+  <pre>
+function apNWithCombine&lt;A, B, C, D, E, Err&gt;(
+  f: Result&lt;Fun4&lt;A, B, C, D, E&gt;, Err&gt;,
+  combineErrors: (e1: Err, e2: Err) =&gt; Err,
+  a: Result&lt;A, Err&gt;, b: Result&lt;B, Err&gt;, c: Result&lt;C, Err&gt;, d: Result&lt;D, Err&gt;): Result&lt;E, Err&gt;</pre
+  >
+  <pre>
+function apNWithCombine&lt;A, B, C, D, E, F, Err&gt;(
+  f: Result&lt;Fun5&lt;A, B, C, D, E, F&gt;, Err&gt;,
+  combineErrors: (e1: Err, e2: Err) =&gt; Err,
+  a: Result&lt;A, Err&gt;, b: Result&lt;B, Err&gt;, c: Result&lt;C, Err&gt;, d: Result&lt;D, Err&gt;, e: Result&lt;E, Err&gt;): Result&lt;F, Err&gt;</pre
+  >
+  <pre>
+function apNWithCombine&lt;A, B, C, D, E, F, G, Err&gt;(
+  f: Result&lt;Fun6&lt;A, B, C, D, E, F, G&gt;, Err&gt;,
+  combineErrors: (e1: Err, e2: Err) =&gt; Err,
+  a: Result&lt;A, Err&gt;, b: Result&lt;B, Err&gt;, c: Result&lt;C, Err&gt;, d: Result&lt;D, Err&gt;, e: Result&lt;E, Err&gt;, g: Result&lt;F, Err&gt;): Result&lt;G, Err&gt;</pre
+  >
+  <h3 class="is-family-monospace has-text-grey-dark" id="flatMapN">flatMapN</h3>
+  <pre>
+function flatMapN&lt;A, B, C, Err&gt;(
+  f: Fun2&lt;A, B, Result&lt;C, Err&gt;&gt;,
+  a: Result&lt;A, Err&gt;, b: Result&lt;B, Err&gt;): Result&lt;C, Err&gt;</pre
+  >
+  <pre>
+function flatMapN&lt;A, B, C, D, Err&gt;(
+  f: Fun3&lt;A, B, C, Result&lt;D, Err&gt;&gt;,
+  a: Result&lt;A, Err&gt;, b: Result&lt;B, Err&gt;, c: Result&lt;C, Err&gt;): Result&lt;D, Err&gt;</pre
+  >
+  <pre>
+function flatMapN&lt;A, B, C, D, E, Err&gt;(
+  f: Fun4&lt;A, B, C, D, Result&lt;E, Err&gt;&gt;,
+  a: Result&lt;A, Err&gt;, b: Result&lt;B, Err&gt;, c: Result&lt;C, Err&gt;, d: Result&lt;D, Err&gt;): Result&lt;E, Err&gt;</pre
+  >
+  <pre>
+function flatMapN&lt;A, B, C, D, E, F, Err&gt;(
+  f: Fun5&lt;A, B, C, D, E, Result&lt;F, Err&gt;&gt;,
+  a: Result&lt;A, Err&gt;, b: Result&lt;B, Err&gt;, c: Result&lt;C, Err&gt;, d: Result&lt;D, Err&gt;, e: Result&lt;E, Err&gt;): Result&lt;F, Err&gt;</pre
+  >
+  <pre>
+function flatMapN&lt;A, B, C, D, E, F, G, Err&gt;(
+  f: Fun6&lt;A, B, C, D, E, F, Result&lt;G, Err&gt;&gt;,
+  a: Result&lt;A, Err&gt;, b: Result&lt;B, Err&gt;, c: Result&lt;C, Err&gt;, d: Result&lt;D, Err&gt;, e: Result&lt;E, Err&gt;, g: Result&lt;F, Err&gt;): Result&lt;G, Err&gt;</pre
+  >
+  <h3 class="is-family-monospace has-text-grey-dark" id="flatMapNWithCombine">
+    flatMapNWithCombine
+  </h3>
+  <pre>
+function flatMapNWithCombine&lt;A, B, C, Err&gt;(
+  f: Fun2&lt;A, B, Result&lt;C, Err&gt;&gt;,
+  combineErrors: (e1: Err, e2: Err) =&gt; Err,
+  a: Result&lt;A, Err&gt;, b: Result&lt;B, Err&gt;): Result&lt;C, Err&gt;</pre
+  >
+  <pre>
+function flatMapNWithCombine&lt;A, B, C, D, Err&gt;(
+  f: Fun3&lt;A, B, C, Result&lt;D, Err&gt;&gt;,
+  combineErrors: (e1: Err, e2: Err) =&gt; Err,
+  a: Result&lt;A, Err&gt;, b: Result&lt;B, Err&gt;, c: Result&lt;C, Err&gt;): Result&lt;D, Err&gt;</pre
+  >
+  <pre>
+function flatMapNWithCombine&lt;A, B, C, D, E, Err&gt;(
+  f: Fun4&lt;A, B, C, D, Result&lt;E, Err&gt;&gt;,
+  combineErrors: (e1: Err, e2: Err) =&gt; Err,
+  a: Result&lt;A, Err&gt;, b: Result&lt;B, Err&gt;, c: Result&lt;C, Err&gt;, d: Result&lt;D, Err&gt;): Result&lt;E, Err&gt;</pre
+  >
+  <pre>
+function flatMapNWithCombine&lt;A, B, C, D, E, F, Err&gt;(
+  f: Fun5&lt;A, B, C, D, E, Result&lt;F, Err&gt;&gt;,
+  combineErrors: (e1: Err, e2: Err) =&gt; Err,
+  a: Result&lt;A, Err&gt;, b: Result&lt;B, Err&gt;, c: Result&lt;C, Err&gt;, d: Result&lt;D, Err&gt;, e: Result&lt;E, Err&gt;): Result&lt;F, Err&gt;</pre
+  >
+  <pre>
+function flatMapNWithCombine&lt;A, B, C, D, E, F, G, Err&gt;(
+  f: Fun6&lt;A, B, C, D, E, F, Result&lt;G, Err&gt;&gt;,
+  combineErrors: (e1: Err, e2: Err) =&gt; Err,
+  a: Result&lt;A, Err&gt;, b: Result&lt;B, Err&gt;, c: Result&lt;C, Err&gt;, d: Result&lt;D, Err&gt;, e: Result&lt;E, Err&gt;, g: Result&lt;F, Err&gt;): Result&lt;G, Err&gt;</pre
+  >
+  <h3 class="is-family-monospace has-text-grey-dark" id="mapN">mapN</h3>
+  <pre>
+function mapN&lt;A, B, C, Err&gt;(f: Fun2&lt;A, B, C&gt;, a: Result&lt;A, Err&gt;, b: Result&lt;B, Err&gt;): Result&lt;C, Err&gt;</pre
+  >
+  <pre>
+function mapN&lt;A, B, C, D, Err&gt;(f: Fun3&lt;A, B, C, D&gt;, a: Result&lt;A, Err&gt;, b: Result&lt;B, Err&gt;, c: Result&lt;C, Err&gt;): Result&lt;D, Err&gt;</pre
+  >
+  <pre>
+function mapN&lt;A, B, C, D, E, Err&gt;(
+  f: Fun4&lt;A, B, C, D, E&gt;,
+  a: Result&lt;A, Err&gt;, b: Result&lt;B, Err&gt;, c: Result&lt;C, Err&gt;, d: Result&lt;D, Err&gt;): Result&lt;E, Err&gt;</pre
+  >
+  <pre>
+function mapN&lt;A, B, C, D, E, F, Err&gt;(
+  f: Fun5&lt;A, B, C, D, E, F&gt;,
+  a: Result&lt;A, Err&gt;, b: Result&lt;B, Err&gt;, c: Result&lt;C, Err&gt;, d: Result&lt;D, Err&gt;, e: Result&lt;E, Err&gt;): Result&lt;F, Err&gt;</pre
+  >
+  <pre>
+function mapN&lt;A, B, C, D, E, F, G, Err&gt;(
+  f: Fun6&lt;A, B, C, D, E, F, G&gt;,
+  a: Result&lt;A, Err&gt;, b: Result&lt;B, Err&gt;, c: Result&lt;C, Err&gt;, d: Result&lt;D, Err&gt;, e: Result&lt;E, Err&gt;, g: Result&lt;F, Err&gt;): Result&lt;G, Err&gt;</pre
+  >
+  <h3 class="is-family-monospace has-text-grey-dark" id="mapNWithCombine">
+    mapNWithCombine
+  </h3>
+  <pre>
+function mapNWithCombine&lt;A, B, C, Err&gt;(
+  f: Fun2&lt;A, B, C&gt;,
+  combineErrors: (e1: Err, e2: Err) =&gt; Err,
+  a: Result&lt;A, Err&gt;, b: Result&lt;B, Err&gt;): Result&lt;C, Err&gt;</pre
+  >
+  <pre>
+function mapNWithCombine&lt;A, B, C, D, Err&gt;(
+  f: Fun3&lt;A, B, C, D&gt;,
+  combineErrors: (e1: Err, e2: Err) =&gt; Err,
+  a: Result&lt;A, Err&gt;, b: Result&lt;B, Err&gt;, c: Result&lt;C, Err&gt;): Result&lt;D, Err&gt;</pre
+  >
+  <pre>
+function mapNWithCombine&lt;A, B, C, D, E, Err&gt;(
+  f: Fun4&lt;A, B, C, D, E&gt;,
+  combineErrors: (e1: Err, e2: Err) =&gt; Err,
+  a: Result&lt;A, Err&gt;, b: Result&lt;B, Err&gt;, c: Result&lt;C, Err&gt;, d: Result&lt;D, Err&gt;): Result&lt;E, Err&gt;</pre
+  >
+  <pre>
+function mapNWithCombine&lt;A, B, C, D, E, F, Err&gt;(
+  f: Fun5&lt;A, B, C, D, E, F&gt;,
+  combineErrors: (e1: Err, e2: Err) =&gt; Err,
+  a: Result&lt;A, Err&gt;, b: Result&lt;B, Err&gt;, c: Result&lt;C, Err&gt;, d: Result&lt;D, Err&gt;, e: Result&lt;E, Err&gt;): Result&lt;F, Err&gt;</pre
+  >
+  <pre>
+function mapNWithCombine&lt;A, B, C, D, E, F, G, Err&gt;(
+  f: Fun6&lt;A, B, C, D, E, F, G&gt;,
+  combineErrors: (e1: Err, e2: Err) =&gt; Err,
+  a: Result&lt;A, Err&gt;, b: Result&lt;B, Err&gt;, c: Result&lt;C, Err&gt;, d: Result&lt;D, Err&gt;, e: Result&lt;E, Err&gt;, g: Result&lt;F, Err&gt;): Result&lt;G, Err&gt;</pre
+  >
+</article>

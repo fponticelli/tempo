@@ -1,0 +1,115 @@
+<article>
+  <h1>module 'types/assert'</h1>
+  <div>
+    <p>// do not use with <code>any</code></p>
+  </div>
+  <nav>
+    <ul class="module-toc-list">
+      <li>
+        <a class="is-family-monospace" href="#/api/std/types/assert.html#Assert"
+          >Assert</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/std/types/assert.html#AssertNot"
+          >AssertNot</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/types/assert.html#Equals"
+          >Equals</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/std/types/assert.html#Extends"
+          >Extends</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/std/types/assert.html#IsNever"
+          >IsNever</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/std/types/assert.html#NotEquals"
+          >NotEquals</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/std/types/assert.html#NotSame"
+          >NotSame</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/types/assert.html#Same"
+          >Same</a
+        >
+      </li>
+    </ul>
+  </nav>
+  <h2>types</h2>
+  <h3 class="is-family-monospace has-text-grey-dark" id="Assert">Assert</h3>
+  <pre>
+type Assert&lt;A extends true&gt; = A extends never
+  ? 'FAIL'
+  : A extends true
+  ? 'PASS'
+  : 'FAIL'</pre
+  >
+  <h3 class="is-family-monospace has-text-grey-dark" id="AssertNot">
+    AssertNot
+  </h3>
+  <pre>
+type AssertNot&lt;A extends false&gt; = A extends never
+  ? 'FAIL'
+  : A extends false
+  ? 'PASS'
+  : 'FAIL'</pre
+  >
+  <h3 class="is-family-monospace has-text-grey-dark" id="Equals">Equals</h3>
+  <pre>
+type Equals&lt;A, B&gt; = (&lt;T&gt;() =&gt; T extends A ? 1 : 2) extends &lt;
+  T
+&gt;() =&gt; T extends B ? 1 : 2
+  ? true
+  : false</pre
+  >
+  <h3 class="is-family-monospace has-text-grey-dark" id="Extends">Extends</h3>
+  <pre>type Extends&lt;A, B&gt; = A extends B ? true : false</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="IsNever">IsNever</h3>
+  <pre>
+type IsNever&lt;T&gt; = Pointer&lt;T&gt; extends Pointer&lt;never&gt; ? true : false</pre
+  >
+  <h3 class="is-family-monospace has-text-grey-dark" id="NotEquals">
+    NotEquals
+  </h3>
+  <pre>
+type NotEquals&lt;A, B&gt; = Equals&lt;A, B&gt; extends true ? false : true</pre
+  >
+  <h3 class="is-family-monospace has-text-grey-dark" id="NotSame">NotSame</h3>
+  <pre>
+type NotSame&lt;A, B&gt; = Pointer&lt;A&gt; extends Pointer&lt;B&gt;
+  ? Pointer&lt;B&gt; extends Pointer&lt;A&gt;
+    ? false
+    : true
+  : true</pre
+  >
+  <h3 class="is-family-monospace has-text-grey-dark" id="Same">Same</h3>
+  <pre>
+type Same&lt;A, B&gt; = Pointer&lt;A&gt; extends Pointer&lt;B&gt;
+  ? Pointer&lt;B&gt; extends Pointer&lt;A&gt;
+    ? true
+    : false
+  : false</pre
+  >
+</article>

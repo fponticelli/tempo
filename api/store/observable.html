@@ -1,0 +1,95 @@
+<article>
+  <h1>module 'observable'</h1>
+  <nav>
+    <ul class="module-toc-list">
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/store/observable.html#Observable"
+          >Observable</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/store/observable.html#Observable1"
+          >Observable1</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/store/observable.html#Observable2"
+          >Observable2</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/store/observable.html#Observable3"
+          >Observable3</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/store/observable.html#Observable4"
+          >Observable4</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/store/observable.html#Observable5"
+          >Observable5</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/store/observable.html#Observable6"
+          >Observable6</a
+        >
+      </li>
+    </ul>
+  </nav>
+  <h2>types</h2>
+  <h3 class="is-family-monospace has-text-grey-dark" id="Observable">
+    Observable
+  </h3>
+  <pre>
+interface Observable&lt;T extends any[]&gt; {
+  on(listener: Listener&lt;T&gt;): void
+  off(listener: Listener&lt;T&gt;): boolean
+  once(listener: Listener&lt;T&gt;): void
+}</pre
+  >
+  <h3 class="is-family-monospace has-text-grey-dark" id="Observable1">
+    Observable1
+  </h3>
+  <pre>type Observable1&lt;T&gt; = Observable&lt;[T]&gt;</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="Observable2">
+    Observable2
+  </h3>
+  <pre>type Observable2&lt;A, B&gt; = Observable&lt;[A, B]&gt;</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="Observable3">
+    Observable3
+  </h3>
+  <pre>type Observable3&lt;A, B, C&gt; = Observable&lt;[A, B, C]&gt;</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="Observable4">
+    Observable4
+  </h3>
+  <pre>type Observable4&lt;A, B, C, D&gt; = Observable&lt;[A, B, C, D]&gt;</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="Observable5">
+    Observable5
+  </h3>
+  <pre>
+type Observable5&lt;A, B, C, D, E&gt; = Observable&lt;[A, B, C, D, E]&gt;</pre
+  >
+  <h3 class="is-family-monospace has-text-grey-dark" id="Observable6">
+    Observable6
+  </h3>
+  <pre>
+type Observable6&lt;A, B, C, D, E, F&gt; = Observable&lt;[A, B, C, D, E, F]&gt;</pre
+  >
+</article>

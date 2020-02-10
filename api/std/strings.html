@@ -1,0 +1,1117 @@
+<article>
+  <h1>module 'strings'</h1>
+  <div><p>Utility functions to manipulate string values.</p></div>
+  <nav>
+    <ul class="module-toc-list">
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/std/strings.html#BASE64_ALPHABET"
+          >BASE64_ALPHABET</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/strings.html#after"
+          >after</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/strings.html#afterLast"
+          >afterLast</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/strings.html#before"
+          >before</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/strings.html#beforeLast"
+          >beforeLast</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/std/strings.html#canonicalizeNewlines"
+          >canonicalizeNewlines</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/strings.html#capitalize"
+          >capitalize</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/std/strings.html#capitalizeWords"
+          >capitalizeWords</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/strings.html#collapse"
+          >collapse</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/strings.html#compare"
+          >compare</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/std/strings.html#compareCaseInsensitive"
+          >compareCaseInsensitive</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/strings.html#contains"
+          >contains</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/strings.html#containsAll"
+          >containsAll</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/std/strings.html#containsAllCaseInsensitive"
+          >containsAllCaseInsensitive</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/strings.html#containsAny"
+          >containsAny</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/std/strings.html#containsAnyCaseInsensitive"
+          >containsAnyCaseInsensitive</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/std/strings.html#containsCaseInsensitive"
+          >containsCaseInsensitive</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/strings.html#count"
+          >count</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/strings.html#dasherize"
+          >dasherize</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/strings.html#diffAt"
+          >diffAt</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/strings.html#ellipsis"
+          >ellipsis</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/std/strings.html#ellipsisMiddle"
+          >ellipsisMiddle</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/strings.html#endsWith"
+          >endsWith</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/strings.html#endsWithAny"
+          >endsWithAny</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/std/strings.html#endsWithAnyCaseInsensitive"
+          >endsWithAnyCaseInsensitive</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/std/strings.html#endsWithCaseInsensitive"
+          >endsWithCaseInsensitive</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/strings.html#filter"
+          >filter</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/std/strings.html#filterCharcode"
+          >filterCharcode</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/strings.html#from"
+          >from</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/strings.html#hasContent"
+          >hasContent</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/strings.html#hashCode"
+          >hashCode</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/strings.html#humanize"
+          >humanize</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/strings.html#ifEmpty"
+          >ifEmpty</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/strings.html#isAlpha"
+          >isAlpha</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/strings.html#isAlphaNum"
+          >isAlphaNum</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/std/strings.html#isBreakingWhitespace"
+          >isBreakingWhitespace</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/std/strings.html#isDigitsOnly"
+          >isDigitsOnly</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/strings.html#isEmpty"
+          >isEmpty</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/strings.html#isLowerCase"
+          >isLowerCase</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/strings.html#isSpaceAt"
+          >isSpaceAt</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/strings.html#isUpperCase"
+          >isUpperCase</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/std/strings.html#lowerCaseFirst"
+          >lowerCaseFirst</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/strings.html#lpad"
+          >lpad</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/strings.html#map">map</a>
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/strings.html#order"
+          >order</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/strings.html#quote"
+          >quote</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/strings.html#random"
+          >random</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/std/strings.html#randomSequence"
+          >randomSequence</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/std/strings.html#randomSequence64"
+          >randomSequence64</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/strings.html#remove"
+          >remove</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/strings.html#removeAfter"
+          >removeAfter</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/strings.html#removeAt"
+          >removeAt</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/std/strings.html#removeBefore"
+          >removeBefore</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/strings.html#removeOne"
+          >removeOne</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/strings.html#repeat"
+          >repeat</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/strings.html#replace"
+          >replace</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/strings.html#reverse"
+          >reverse</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/strings.html#rpad"
+          >rpad</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/strings.html#splitOnce"
+          >splitOnce</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/strings.html#startsWith"
+          >startsWith</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/std/strings.html#startsWithAny"
+          >startsWithAny</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/std/strings.html#startsWithAnyCaseInsensitive"
+          >startsWithAnyCaseInsensitive</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/std/strings.html#startsWithCaseInsensitive"
+          >startsWithCaseInsensitive</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/strings.html#stripTags"
+          >stripTags</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/strings.html#surround"
+          >surround</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/strings.html#toArray"
+          >toArray</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/strings.html#toCharcodes"
+          >toCharcodes</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/strings.html#toChunks"
+          >toChunks</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/strings.html#toLines"
+          >toLines</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/strings.html#trimChars"
+          >trimChars</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/std/strings.html#trimCharsLeft"
+          >trimCharsLeft</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/std/strings.html#trimCharsRight"
+          >trimCharsRight</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/strings.html#underscore"
+          >underscore</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/strings.html#upTo"
+          >upTo</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/std/strings.html#upperCaseFirst"
+          >upperCaseFirst</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/strings.html#wrapColumns"
+          >wrapColumns</a
+        >
+      </li>
+    </ul>
+  </nav>
+  <h2>functions</h2>
+  <h3 class="is-family-monospace has-text-grey-dark" id="after">after</h3>
+  <div>
+    <p>
+      <code>after</code> searches for the first occurrance of
+      <code>searchFor</code> and returns the text after that. If
+      <code>searchFor</code> is not found, an empty string is returned.
+    </p>
+  </div>
+  <pre>function after(value: string, searchFor: string): string</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="afterLast">
+    afterLast
+  </h3>
+  <div>
+    <p>
+      <code>afterLast</code> searches for the last occurrance of
+      <code>searchFor</code> and returns the text after that. If
+      <code>searchFor</code> is not found, an empty string is returned.
+    </p>
+  </div>
+  <pre>function afterLast(value: string, searchFor: string): string</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="before">before</h3>
+  <div>
+    <p>
+      <code>before</code> searches for the first occurrance of
+      <code>searchFor</code> and returns the text before that. If
+      <code>searchFor</code> is not found, an empty string is returned.
+    </p>
+  </div>
+  <pre>function before(value: string, searchFor: string): string</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="beforeLast">
+    beforeLast
+  </h3>
+  <div>
+    <p>
+      <code>beforeLast</code> searches for the last occurrance of
+      <code>searchFor</code> and returns the text before that. If
+      <code>searchFor</code> is not found, an empty string is returned.
+    </p>
+  </div>
+  <pre>function beforeLast(value: string, searchFor: string): string</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="canonicalizeNewlines">
+    canonicalizeNewlines
+  </h3>
+  <div>
+    <p>
+      Replaces occurrances of <code>\r\n</code>, <code>\n\r</code>,
+      <code>\r</code> with <code>\n</code>
+    </p>
+  </div>
+  <pre>function canonicalizeNewlines(value: string): string</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="capitalize">
+    capitalize
+  </h3>
+  <div>
+    <p>
+      <code>capitalize</code> returns a string with the first character convert
+      to upper case.
+    </p>
+  </div>
+  <pre>function capitalize(s: string): string</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="capitalizeWords">
+    capitalizeWords
+  </h3>
+  <div>
+    <p>
+      Capitalize the first letter of every word in <code>value</code>. If
+      <code>whiteSpaceOnly</code> is set to <code>true</code> the process is
+      limited to whitespace separated words.
+    </p>
+  </div>
+  <pre>
+function capitalizeWords(value: string, whiteSpaceOnly = false): string</pre
+  >
+  <h3 class="is-family-monospace has-text-grey-dark" id="collapse">collapse</h3>
+  <div>
+    <p>
+      It cleans up all the whitespaces in the passed <code>value</code>.
+      <code>collapse</code> does the following:
+    </p>
+    <ul>
+      <li>remove trailing/leading whitespaces</li>
+      <li>
+        within the string, it collapses seqeunces of whitespaces into a single
+        space character For whitespaces in this description, it is intended to
+        be anything that is matched by the regular expression <code>\s</code>.
+      </li>
+    </ul>
+  </div>
+  <pre>function collapse(value: string): string</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="compare">compare</h3>
+  <div>
+    <p>
+      It compares to string and it returns a negative number if
+      <code>a</code> is inferior to <code>b</code>, zero if they are the same,
+      or otherwise a positive non-sero number.
+    </p>
+  </div>
+  <pre>function compare(a: string, b: string): 1 | -1 | 0</pre>
+  <h3
+    class="is-family-monospace has-text-grey-dark"
+    id="compareCaseInsensitive"
+  >
+    compareCaseInsensitive
+  </h3>
+  <div><p>Compares two strings ignoring their case.</p></div>
+  <pre>function compareCaseInsensitive(a: string, b: string): number</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="contains">contains</h3>
+  <div>
+    <p>
+      <code>contains</code> returns <code>true</code> if <code>s</code> contains
+      one or more occurrences of <code>test</code>.
+    </p>
+  </div>
+  <pre>function contains(s: string, test: string): boolean</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="containsAll">
+    containsAll
+  </h3>
+  <div>
+    <p>
+      <code>contains</code> returns <code>true</code> if <code>s</code> contains
+      all of the strings in <code>tests</code>
+    </p>
+  </div>
+  <pre>
+function containsAll(s: string, tests: Array&lt;string&gt;): boolean</pre
+  >
+  <h3
+    class="is-family-monospace has-text-grey-dark"
+    id="containsAllCaseInsensitive"
+  >
+    containsAllCaseInsensitive
+  </h3>
+  <div>
+    <p>
+      <code>contains</code> returns <code>true</code> if <code>s</code> contains
+      all of the strings in <code>tests</code> regardless of the text case
+    </p>
+  </div>
+  <pre>
+function containsAllCaseInsensitive(s: string, tests: Array&lt;string&gt;): boolean</pre
+  >
+  <h3 class="is-family-monospace has-text-grey-dark" id="containsAny">
+    containsAny
+  </h3>
+  <div>
+    <p>
+      <code>contains</code> returns <code>true</code> if <code>s</code> contains
+      any of the strings in <code>tests</code>
+    </p>
+  </div>
+  <pre>
+function containsAny(s: string, tests: Array&lt;string&gt;): boolean</pre
+  >
+  <h3
+    class="is-family-monospace has-text-grey-dark"
+    id="containsAnyCaseInsensitive"
+  >
+    containsAnyCaseInsensitive
+  </h3>
+  <div>
+    <p>
+      <code>contains</code> returns <code>true</code> if <code>s</code> contains
+      any of the strings in <code>tests</code> regardless of the text case
+    </p>
+  </div>
+  <pre>
+function containsAnyCaseInsensitive(s: string, tests: Array&lt;string&gt;): boolean</pre
+  >
+  <h3
+    class="is-family-monospace has-text-grey-dark"
+    id="containsCaseInsensitive"
+  >
+    containsCaseInsensitive
+  </h3>
+  <div>
+    <p>
+      <code>contains</code> returns <code>true</code> if <code>s</code> contains
+      one or more occurrences of <code>test</code> regardless of the text case.
+    </p>
+  </div>
+  <pre>function containsCaseInsensitive(s: string, test: string): boolean</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="count">count</h3>
+  <div>
+    <p>
+      Return the number of occurances of <code>test</code> in <code>s</code>.
+    </p>
+  </div>
+  <pre>function count(s: string, test: string): number</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="dasherize">
+    dasherize
+  </h3>
+  <div>
+    <p>
+      <code>dasherize</code> replaces all the occurrances of <code>_</code> with
+      <code>-</code>
+    </p>
+  </div>
+  <pre>function dasherize(s: string): string</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="diffAt">diffAt</h3>
+  <div>
+    <p>
+      Compares strings <code>a</code> and <code>b</code> and returns the
+      position where they differ.
+    </p>
+    <pre><code class="ts language-ts">diffAt('abcdef', 'abc123') // returns 3
+</code></pre>
+  </div>
+  <pre>function diffAt(a: string, b: string): number</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="ellipsis">ellipsis</h3>
+  <div>
+    <p>
+      <code>ellipsis</code> truncates <code>s</code> at len
+      <code>maxlen</code> replaces the last characters with the content of
+      <code>symbol</code>.
+    </p>
+    <pre><code class="ts language-ts">ellipsis('tempo is a nice library', 9) // returns 'tempo is …'
+</code></pre>
+  </div>
+  <pre>function ellipsis(s: string, maxlen = 20, symbol = '…'): string</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="ellipsisMiddle">
+    ellipsisMiddle
+  </h3>
+  <div>
+    <p>
+      Same as <code>ellipsis</code> but puts the symbol in the middle of the
+      string and not to the end.
+    </p>
+    <pre><code class="ts language-ts">ellipsisMiddle('tempo is a nice library', 18) // returns 'tempo is … library'
+</code></pre>
+  </div>
+  <pre>
+function ellipsisMiddle(s: string, maxlen = 20, symbol = '…'): string</pre
+  >
+  <h3 class="is-family-monospace has-text-grey-dark" id="endsWith">endsWith</h3>
+  <pre>function endsWith(s: string, end: string): boolean</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="endsWithAny">
+    endsWithAny
+  </h3>
+  <div>
+    <p>
+      Returns <code>true</code> if <code>s</code> ends with any of the values in
+      <code>values</code>.
+    </p>
+  </div>
+  <pre>function endsWithAny(s: string, values: string[]): boolean</pre>
+  <h3
+    class="is-family-monospace has-text-grey-dark"
+    id="endsWithAnyCaseInsensitive"
+  >
+    endsWithAnyCaseInsensitive
+  </h3>
+  <div>
+    <p>
+      Compares a string <code>s</code> with many <code>values</code> and see if
+      one of them matches its end ignoring their case.
+    </p>
+  </div>
+  <pre>
+function endsWithAnyCaseInsensitive(s: string, values: Array&lt;string&gt;): boolean</pre
+  >
+  <h3
+    class="is-family-monospace has-text-grey-dark"
+    id="endsWithCaseInsensitive"
+  >
+    endsWithCaseInsensitive
+  </h3>
+  <pre>function endsWithCaseInsensitive(s: string, end: string): boolean</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="filter">filter</h3>
+  <div>
+    <p>
+      <code>filter</code> applies <code>predicate</code> character by character
+      to <code>s</code> and it returns a filtered version of the string.
+    </p>
+  </div>
+  <pre>
+function filter(s: string, predicate: (s: string) =&gt; boolean): string</pre
+  >
+  <h3 class="is-family-monospace has-text-grey-dark" id="filterCharcode">
+    filterCharcode
+  </h3>
+  <div>
+    <p>
+      Same as <code>filter</code> but <code>predicate</code> operates on integer
+      char codes instead of string characters.
+    </p>
+  </div>
+  <pre>
+function filterCharcode(s: string, predicate: (n: number) =&gt; boolean): string</pre
+  >
+  <h3 class="is-family-monospace has-text-grey-dark" id="from">from</h3>
+  <div>
+    <p>
+      <code>from</code> searches for the first occurrance of
+      <code>searchFor</code> and returns the text from that point on. If
+      <code>searchFor</code> is not found, an empty string is returned.
+    </p>
+  </div>
+  <pre>function from(value: string, searchFor: string): string</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="hasContent">
+    hasContent
+  </h3>
+  <div>
+    <p>
+      Returns <code>true</code> if <code>value</code> is not
+      <code>null</code> and contains at least one character.
+    </p>
+  </div>
+  <pre>function hasContent(value: string): boolean</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="hashCode">hashCode</h3>
+  <pre>function hashCode(value: string, seed = 0x811c9dc5): number</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="humanize">humanize</h3>
+  <div>
+    <p>
+      Works the same as <code>underscore</code> but also replaces underscores
+      with whitespaces.
+    </p>
+  </div>
+  <pre>function humanize(s: string): string</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="ifEmpty">ifEmpty</h3>
+  <div>
+    <p>
+      <code>ifEmpty</code> returns <code>value</code> if it is neither
+      <code>null</code> or empty, otherwise it returns <code>alt</code>
+    </p>
+  </div>
+  <pre>function ifEmpty(value: string, alt: string): string</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="isAlpha">isAlpha</h3>
+  <div>
+    <p>
+      Checks if <code>s</code> contains only (and at least one) alphabetical
+      characters.
+    </p>
+  </div>
+  <pre>function isAlpha(s: string): boolean</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="isAlphaNum">
+    isAlphaNum
+  </h3>
+  <div>
+    <p>
+      <code>isAlphaNum</code> returns <code>true</code> if the string only
+      contains alpha-numeric characters.
+    </p>
+  </div>
+  <pre>function isAlphaNum(value: string): boolean</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="isBreakingWhitespace">
+    isBreakingWhitespace
+  </h3>
+  <pre>function isBreakingWhitespace(value: string): boolean</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="isDigitsOnly">
+    isDigitsOnly
+  </h3>
+  <div>
+    <p>
+      <code>isDigitsOnly</code> returns <code>true</code> if the string only
+      contains digits.
+    </p>
+  </div>
+  <pre>function isDigitsOnly(value: string): boolean</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="isEmpty">isEmpty</h3>
+  <div>
+    <p>
+      <code>isEmpty</code> returns true if either <code>value</code> is null or
+      is an empty string.
+    </p>
+  </div>
+  <pre>function isEmpty(value: string): boolean</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="isLowerCase">
+    isLowerCase
+  </h3>
+  <div>
+    <p>
+      Returns <code>true</code> if the value string is composed of only lower
+      cased characters or case neutral characters.
+    </p>
+  </div>
+  <pre>function isLowerCase(value: string): boolean</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="isSpaceAt">
+    isSpaceAt
+  </h3>
+  <pre>function isSpaceAt(s: string, pos: number): boolean</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="isUpperCase">
+    isUpperCase
+  </h3>
+  <div>
+    <p>
+      Returns <code>true</code> if the value string is composed of only upper
+      cased characters or case neutral characters.
+    </p>
+  </div>
+  <pre>function isUpperCase(value: string): boolean</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="lowerCaseFirst">
+    lowerCaseFirst
+  </h3>
+  <div>
+    <p>Convert first letter in <code>value</code> to lower case.</p>
+  </div>
+  <pre>function lowerCaseFirst(value: string): string</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="lpad">lpad</h3>
+  <pre>function lpad(s: string, char: string, length: number): string</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="map">map</h3>
+  <div>
+    <p>It maps a string character by character using <code>callback</code>.</p>
+  </div>
+  <pre>
+function map&lt;T&gt;(callback: (c: string) =&gt; T, value: string): Array&lt;T&gt;</pre
+  >
+  <h3 class="is-family-monospace has-text-grey-dark" id="quote">quote</h3>
+  <div><p>Converts a string in a quoted string.</p></div>
+  <pre>function quote(s: string): string</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="random">random</h3>
+  <div>
+    <p>
+      Returns a random substring from the <code>value</code> argument. The
+      length of such value is by default <code>1</code>.
+    </p>
+  </div>
+  <pre>function random(value: string, length = 1): string</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="randomSequence">
+    randomSequence
+  </h3>
+  <div>
+    <p>
+      Returns a random sampling of the specified length from the seed string.
+    </p>
+  </div>
+  <pre>function randomSequence(alphabet: string, length: number): string</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="randomSequence64">
+    randomSequence64
+  </h3>
+  <div>
+    <p>
+      Like <code>randomSequence</code>, but automatically uses the base64
+      sequence as the seed string.
+    </p>
+  </div>
+  <pre>function randomSequence64(length: number): string</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="remove">remove</h3>
+  <div>
+    <p>
+      If present, it removes all the occurrences of <code>toremove</code> from
+      <code>value</code>.
+    </p>
+  </div>
+  <pre>function remove(value: string, toremove: string): string</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="removeAfter">
+    removeAfter
+  </h3>
+  <div>
+    <p>
+      If present, it removes the <code>toremove</code> text from the end of
+      <code>value</code>.
+    </p>
+  </div>
+  <pre>function removeAfter(value: string, toremove: string): string</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="removeAt">removeAt</h3>
+  <div>
+    <p>
+      Removes a slice from <code>index</code> to
+      <code>index + length</code> from <code>value</code>.
+    </p>
+  </div>
+  <pre>
+function removeAt(value: string, index: number, length: number): string</pre
+  >
+  <h3 class="is-family-monospace has-text-grey-dark" id="removeBefore">
+    removeBefore
+  </h3>
+  <div>
+    <p>
+      If present, it removes the <code>toremove</code> text from the beginning
+      of <code>value</code>.
+    </p>
+  </div>
+  <pre>function removeBefore(value: string, toremove: string): string</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="removeOne">
+    removeOne
+  </h3>
+  <div>
+    <p>
+      If present, it removes the first occurrence of <code>toremove</code> from
+      <code>value</code>.
+    </p>
+  </div>
+  <pre>function removeOne(value: string, toremove: string): string</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="repeat">repeat</h3>
+  <div>
+    <p>
+      <code>repeat</code> builds a new string by repeating the argument
+      <code>s</code>, n <code>times</code>.
+    </p>
+    <pre><code class="ts language-ts">repeat('Xy', 3) // generates 'XyXyXy'
+</code></pre>
+  </div>
+  <pre>function repeat(s: string, times: number): string</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="replace">replace</h3>
+  <div>
+    <p>
+      Replaces all occurrances of <code>placeholder</code> in
+      <code>subject</code> with the value <code>replacement</code>.
+    </p>
+  </div>
+  <pre>
+function replace(
+  subject: string,
+  placeholder: string,
+  replacement: string
+): string</pre
+  >
+  <h3 class="is-family-monospace has-text-grey-dark" id="reverse">reverse</h3>
+  <div><p>Returns a new string whose characters are in reverse order.</p></div>
+  <pre>function reverse(s: string): string</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="rpad">rpad</h3>
+  <pre>function rpad(s: string, char: string, length: number): string</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="splitOnce">
+    splitOnce
+  </h3>
+  <div><p>It only splits on the first occurrance of separator.</p></div>
+  <pre>function splitOnce(s: string, separator: string): string[]</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="startsWith">
+    startsWith
+  </h3>
+  <pre>function startsWith(s: string, start: string): boolean</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="startsWithAny">
+    startsWithAny
+  </h3>
+  <div>
+    <p>
+      Returns <code>true</code> if <code>s</code> starts with any of the values
+      in <code>values</code>.
+    </p>
+  </div>
+  <pre>function startsWithAny(s: string, values: string[]): boolean</pre>
+  <h3
+    class="is-family-monospace has-text-grey-dark"
+    id="startsWithAnyCaseInsensitive"
+  >
+    startsWithAnyCaseInsensitive
+  </h3>
+  <div>
+    <p>
+      Compares a string <code>s</code> with many <code>values</code> and see if
+      one of them matches its beginning ignoring their case.
+    </p>
+  </div>
+  <pre>
+function startsWithAnyCaseInsensitive(s: string, values: Array&lt;string&gt;): boolean</pre
+  >
+  <h3
+    class="is-family-monospace has-text-grey-dark"
+    id="startsWithCaseInsensitive"
+  >
+    startsWithCaseInsensitive
+  </h3>
+  <pre>
+function startsWithCaseInsensitive(s: string, start: string): boolean</pre
+  >
+  <h3 class="is-family-monospace has-text-grey-dark" id="stripTags">
+    stripTags
+  </h3>
+  <div>
+    <p>
+      <code>stripTags</code> removes any HTML/XML markup from the string leaving
+      only the concatenation of the existing text nodes.
+    </p>
+  </div>
+  <pre>function stripTags(s: string): string</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="surround">surround</h3>
+  <div>
+    <p>
+      Surrounds a string with the contents of <code>left</code> and
+      <code>right</code>. If <code>right</code> is omitted,
+      <code>left</code> will be used on both sides
+    </p>
+  </div>
+  <pre>function surround(s: string, left: string, right = left): string</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="toArray">toArray</h3>
+  <div>
+    <p>It transforms a string into an <code>Array</code> of characters.</p>
+  </div>
+  <pre>function toArray(s: string): string[]</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="toCharcodes">
+    toCharcodes
+  </h3>
+  <div>
+    <p>
+      It transforms a string into an <code>Array</code> of char codes in integer
+      format.
+    </p>
+  </div>
+  <pre>function toCharcodes(s: string): Array&lt;number&gt;</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="toChunks">toChunks</h3>
+  <div>
+    <p>
+      Returns an array of <code>string</code> whose elements are equally long
+      (using <code>len</code>). If the string <code>s</code> is not exactly
+      divisible by <code>len</code> the last element of the array will be
+      shorter.
+    </p>
+  </div>
+  <pre>function toChunks(s: string, len: number): Array&lt;string&gt;</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="toLines">toLines</h3>
+  <div>
+    <p>Returns an array of <code>string</code> split by line breaks.</p>
+  </div>
+  <pre>function toLines(s: string): string[]</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="trimChars">
+    trimChars
+  </h3>
+  <div>
+    <p>
+      <code>trimChars</code> removes from the beginning and the end of the
+      string any character that is present in <code>charlist</code>.
+    </p>
+  </div>
+  <pre>function trimChars(value: string, charlist: string): string</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="trimCharsLeft">
+    trimCharsLeft
+  </h3>
+  <div>
+    <p>
+      <code>trimCharsLeft</code> removes from the beginning of the string any
+      character that is present in <code>charlist</code>.
+    </p>
+  </div>
+  <pre>function trimCharsLeft(value: string, charlist: string): string</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="trimCharsRight">
+    trimCharsRight
+  </h3>
+  <div>
+    <p>
+      <code>trimCharsRight</code> removes from the end of the string any
+      character that is present in <code>charlist</code>.
+    </p>
+  </div>
+  <pre>function trimCharsRight(value: string, charlist: string): string</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="underscore">
+    underscore
+  </h3>
+  <div>
+    <p>
+      <code>underscore</code> finds UpperCase characters and turns them into
+      LowerCase and prepends them with a whtiespace. Sequences of more than one
+      UpperCase character are left untouched.
+    </p>
+  </div>
+  <pre>function underscore(s: string): string</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="upperCaseFirst">
+    upperCaseFirst
+  </h3>
+  <div>
+    <p>Convert first letter in <code>value</code> to upper case.</p>
+  </div>
+  <pre>function upperCaseFirst(value: string): string</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="upTo">upTo</h3>
+  <div>
+    <p>
+      <code>upTo</code> searches for the first occurrance of
+      <code>searchFor</code> and returns the text up to that point. If
+      <code>searchFor</code> is not found, the entire string is returned.
+    </p>
+  </div>
+  <pre>function upTo(value: string, searchFor: string): string</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="wrapColumns">
+    wrapColumns
+  </h3>
+  <div>
+    <p>
+      <code>wrapColumns</code> splits a long string into lines that are at most
+      <code>columns</code> long. Words whose length exceeds
+      <code>columns</code> are not split.
+    </p>
+  </div>
+  <pre>
+function wrapColumns(s: string, columns = 78, indent = '', newline = '\n'): string</pre
+  >
+  <h2>values</h2>
+  <h3 class="is-family-monospace has-text-grey-dark" id="BASE64_ALPHABET">
+    BASE64_ALPHABET
+  </h3>
+  <pre>
+const BASE64_ALPHABET: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"</pre
+  >
+  <h3 class="is-family-monospace has-text-grey-dark" id="order">order</h3>
+  <pre>const order: Ord&lt;string&gt;</pre>
+</article>

@@ -1,0 +1,24 @@
+<article>
+  <h1>module 'value'</h1>
+  <nav></nav>
+  <h2>types</h2>
+  <h3 class="is-family-monospace has-text-grey-dark" id="PaperAttribute">
+    PaperAttribute
+  </h3>
+  <pre>
+type PaperAttribute&lt;State, Value&gt; =
+  | DerivedOrLiteralValue&lt;State, Value | undefined&gt;
+  | undefined</pre
+  >
+  <h3 class="is-family-monospace has-text-grey-dark" id="PaperEventHandler">
+    PaperEventHandler
+  </h3>
+  <pre>
+type PaperEventHandler&lt;State, Action, Event, Target&gt; = (
+  state: State,
+  event: Event,
+  target: Target,
+  project: Project
+) =&gt; Action | undefined</pre
+  >
+</article>

@@ -1,0 +1,113 @@
+<article>
+  <h1>module 'utils/dom'</h1>
+  <nav>
+    <ul class="module-toc-list">
+      <li>
+        <a class="is-family-monospace" href="#/api/dom/utils/dom.html#Acc"
+          >Acc</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/dom/utils/dom.html#domChildToTemplate"
+          >domChildToTemplate</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/dom/utils/dom.html#insertFBefore"
+          >insertFBefore</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/dom/utils/dom.html#processAttribute"
+          >processAttribute</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/dom/utils/dom.html#processEvent"
+          >processEvent</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/dom/utils/dom.html#processStyle"
+          >processStyle</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/dom/utils/dom.html#removeNode"
+          >removeNode</a
+        >
+      </li>
+    </ul>
+  </nav>
+  <h2>types</h2>
+  <h3 class="is-family-monospace has-text-grey-dark" id="Acc">Acc</h3>
+  <pre>type Acc&lt;State&gt; = ((state: State) =&gt; void)[]</pre>
+  <h2>functions</h2>
+  <h3 class="is-family-monospace has-text-grey-dark" id="domChildToTemplate">
+    domChildToTemplate
+  </h3>
+  <pre>
+function domChildToTemplate&lt;State, Action, Query&gt;(
+  dom: DOMChild&lt;State, Action, Query&gt;
+): DOMTemplate&lt;State, Action, Query&gt;</pre
+  >
+  <h3 class="is-family-monospace has-text-grey-dark" id="insertFBefore">
+    insertFBefore
+  </h3>
+  <pre>function insertFBefore(ref: Node): (node: Node) =&gt; void</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="processAttribute">
+    processAttribute
+  </h3>
+  <pre>
+function processAttribute&lt;State, Value&gt;(
+  el: Element,
+  name: string,
+  value: Attribute&lt;State, Value&gt;,
+  acc: Acc&lt;State&gt;
+): Acc&lt;State&gt;</pre
+  >
+  <h3 class="is-family-monospace has-text-grey-dark" id="processEvent">
+    processEvent
+  </h3>
+  <pre>
+function processEvent&lt;
+  State,
+  El extends Element,
+  Ev extends Event,
+  Action
+&gt;(
+  el: El,
+  name: string,
+  value: EventHandler&lt;State, Action, Ev, El&gt;,
+  dispatch: (action: Action) =&gt; void,
+  acc: Acc&lt;State&gt;
+): Acc&lt;State&gt;</pre
+  >
+  <h3 class="is-family-monospace has-text-grey-dark" id="processStyle">
+    processStyle
+  </h3>
+  <pre>
+function processStyle&lt;State, Value&gt;(
+  el: Element,
+  name: string,
+  value: StyleAttribute&lt;State, Value&gt;,
+  acc: Acc&lt;State&gt;
+): Acc&lt;State&gt;</pre
+  >
+  <h3 class="is-family-monospace has-text-grey-dark" id="removeNode">
+    removeNode
+  </h3>
+  <pre>function removeNode(node: Node): void</pre>
+</article>

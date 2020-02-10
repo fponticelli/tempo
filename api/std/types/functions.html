@@ -1,0 +1,153 @@
+<article>
+  <h1>module 'types/functions'</h1>
+  <div><p>// TYPE TESTS</p></div>
+  <nav>
+    <ul class="module-toc-list">
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/std/types/functions.html#AnyFunction"
+          >AnyFunction</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/std/types/functions.html#FirstArgument"
+          >FirstArgument</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/types/functions.html#Fun"
+          >Fun</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/std/types/functions.html#Fun1"
+          >Fun1</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/std/types/functions.html#Fun2"
+          >Fun2</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/std/types/functions.html#Fun3"
+          >Fun3</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/std/types/functions.html#Fun4"
+          >Fun4</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/std/types/functions.html#Fun5"
+          >Fun5</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/std/types/functions.html#Fun6"
+          >Fun6</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/std/types/functions.html#FunctionsChain"
+          >FunctionsChain</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/std/types/functions.html#Lazy"
+          >Lazy</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/std/types/functions.html#OnlyIfDoesNotReturnNever"
+          >OnlyIfDoesNotReturnNever</a
+        >
+      </li>
+    </ul>
+  </nav>
+  <h2>types</h2>
+  <h3 class="is-family-monospace has-text-grey-dark" id="AnyFunction">
+    AnyFunction
+  </h3>
+  <pre>type AnyFunction = Fun | Function</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="FirstArgument">
+    FirstArgument
+  </h3>
+  <pre>
+type FirstArgument&lt;F extends AnyFunction&gt; = F extends (a: infer A) =&gt; any
+  ? unknown extends A
+    ? never
+    : A
+  : never</pre
+  >
+  <h3 class="is-family-monospace has-text-grey-dark" id="Fun">Fun</h3>
+  <pre>type Fun = (...args: any[]) =&gt; any</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="Fun1">Fun1</h3>
+  <pre>type Fun1&lt;A, T&gt; = (a1: A) =&gt; T</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="Fun2">Fun2</h3>
+  <pre>type Fun2&lt;A, B, T&gt; = (a1: A, a2: B) =&gt; T</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="Fun3">Fun3</h3>
+  <pre>type Fun3&lt;A, B, C, T&gt; = (a1: A, a2: B, a3: C) =&gt; T</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="Fun4">Fun4</h3>
+  <pre>
+type Fun4&lt;A, B, C, D, T&gt; = (a1: A, a2: B, a3: C, a4: D) =&gt; T</pre
+  >
+  <h3 class="is-family-monospace has-text-grey-dark" id="Fun5">Fun5</h3>
+  <pre>
+type Fun5&lt;A, B, C, D, E, T&gt; = (a1: A, a2: B, a3: C, a4: D, a5: E) =&gt; T</pre
+  >
+  <h3 class="is-family-monospace has-text-grey-dark" id="Fun6">Fun6</h3>
+  <pre>
+type Fun6&lt;A, B, C, D, E, F, T&gt; = (
+  a1: A,
+  a2: B,
+  a3: C,
+  a4: D,
+  a5: E,
+  a6: F
+) =&gt; T</pre
+  >
+  <h3 class="is-family-monospace has-text-grey-dark" id="FunctionsChain">
+    FunctionsChain
+  </h3>
+  <pre>
+type FunctionsChain&lt;In, Args extends Fun[]&gt; = OnlyIfDoesNotReturnNever&lt;
+  CheckFunctionsChain&lt;In, Args&gt;
+&gt;</pre
+  >
+  <h3 class="is-family-monospace has-text-grey-dark" id="Lazy">Lazy</h3>
+  <pre>type Lazy&lt;T&gt; = () =&gt; T</pre>
+  <h3
+    class="is-family-monospace has-text-grey-dark"
+    id="OnlyIfDoesNotReturnNever"
+  >
+    OnlyIfDoesNotReturnNever
+  </h3>
+  <pre>
+type OnlyIfDoesNotReturnNever&lt;F extends Fun&gt; = F extends Fun1&lt;any, never&gt;
+  ? never
+  : F</pre
+  >
+</article>

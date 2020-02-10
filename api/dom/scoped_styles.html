@@ -1,0 +1,287 @@
+<article>
+  <h1>module 'scoped_styles'</h1>
+  <nav>
+    <ul class="module-toc-list">
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/dom/scoped_styles.html#MediaQueries"
+          >MediaQueries</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/dom/scoped_styles.html#MediaQuery"
+          >MediaQuery</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/dom/scoped_styles.html#StyleDeclarations"
+          >StyleDeclarations</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/dom/scoped_styles.html#StyleDefinitions"
+          >StyleDefinitions</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/dom/scoped_styles.html#annotation"
+          >annotation</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/dom/scoped_styles.html#atRules"
+          >atRules</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/dom/scoped_styles.html#characterVariant"
+          >characterVariant</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/dom/scoped_styles.html#charset"
+          >charset</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/dom/scoped_styles.html#counterStyle"
+          >counterStyle</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/dom/scoped_styles.html#fontFace"
+          >fontFace</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/dom/scoped_styles.html#fontFeatureValues"
+          >fontFeatureValues</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/dom/scoped_styles.html#importRule"
+          >importRule</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/dom/scoped_styles.html#keyframes"
+          >keyframes</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/dom/scoped_styles.html#media"
+          >media</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/dom/scoped_styles.html#namespace"
+          >namespace</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/dom/scoped_styles.html#nestedAtRules"
+          >nestedAtRules</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/dom/scoped_styles.html#ornaments"
+          >ornaments</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/dom/scoped_styles.html#page"
+          >page</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/dom/scoped_styles.html#styleset"
+          >styleset</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/dom/scoped_styles.html#stylistic"
+          >stylistic</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/dom/scoped_styles.html#supports"
+          >supports</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/dom/scoped_styles.html#swash"
+          >swash</a
+        >
+      </li>
+    </ul>
+  </nav>
+  <h2>types</h2>
+  <h3 class="is-family-monospace has-text-grey-dark" id="MediaQueries">
+    MediaQueries
+  </h3>
+  <pre>
+interface MediaQueries&lt;State&gt; {
+  [importRule]?: DerivedOrLiteralValue&lt;State, string&gt;[]
+  [charset]?: DerivedOrLiteralValue&lt;State, string&gt;[]
+  [namespace]?: DerivedOrLiteralValue&lt;State, string&gt;[]
+
+  [media]?: MediaQuery&lt;State&gt;
+  [supports]?: MediaQuery&lt;State&gt;
+  [page]?: MediaQuery&lt;State&gt;
+  [fontFace]?: MediaQuery&lt;State&gt;
+  [keyframes]?: MediaQuery&lt;State&gt;
+  [counterStyle]?: MediaQuery&lt;State&gt;
+  [fontFeatureValues]?: MediaQuery&lt;State&gt;
+  [swash]?: MediaQuery&lt;State&gt;
+  [ornaments]?: MediaQuery&lt;State&gt;
+  [annotation]?: MediaQuery&lt;State&gt;
+  [stylistic]?: MediaQuery&lt;State&gt;
+  [styleset]?: MediaQuery&lt;State&gt;
+  [characterVariant]?: MediaQuery&lt;State&gt;
+}</pre
+  >
+  <h3 class="is-family-monospace has-text-grey-dark" id="MediaQuery">
+    MediaQuery
+  </h3>
+  <pre>
+interface MediaQuery&lt;State&gt; {
+  [query: string]: StyleDefinitions&lt;State&gt;
+}</pre
+  >
+  <h3 class="is-family-monospace has-text-grey-dark" id="StyleDeclarations">
+    StyleDeclarations
+  </h3>
+  <pre>
+type StyleDeclarations&lt;State&gt; = {
+  [K in keyof CSSStyleDeclaration]?: K extends number ? never : Attribute&lt;State, CSSStyleDeclaration[K]&gt;
+}</pre
+  >
+  <h3 class="is-family-monospace has-text-grey-dark" id="StyleDefinitions">
+    StyleDefinitions
+  </h3>
+  <pre>
+type StyleDefinitions&lt;State&gt; =
+  &amp; Record&lt;string, StyleDeclarations&lt;State&gt;&gt;
+  &amp; MediaQueries&lt;State&gt;</pre
+  >
+  <h2>values</h2>
+  <h3 class="is-family-monospace has-text-grey-dark" id="annotation">
+    annotation
+  </h3>
+  <pre>const annotation: typeof annotation</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="atRules">atRules</h3>
+  <pre>
+const atRules: (
+  typeof importRule |
+  typeof charset |
+  typeof namespace
+)[]</pre
+  >
+  <h3 class="is-family-monospace has-text-grey-dark" id="characterVariant">
+    characterVariant
+  </h3>
+  <pre>const characterVariant: typeof characterVariant</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="charset">charset</h3>
+  <pre>const charset: typeof charset</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="counterStyle">
+    counterStyle
+  </h3>
+  <pre>const counterStyle: typeof counterStyle</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="fontFace">fontFace</h3>
+  <pre>const fontFace: typeof fontFace</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="fontFeatureValues">
+    fontFeatureValues
+  </h3>
+  <pre>const fontFeatureValues: typeof fontFeatureValues</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="importRule">
+    importRule
+  </h3>
+  <pre>const importRule: typeof importRule</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="keyframes">
+    keyframes
+  </h3>
+  <pre>const keyframes: typeof keyframes</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="media">media</h3>
+  <pre>const media: typeof media</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="namespace">
+    namespace
+  </h3>
+  <pre>const namespace: typeof namespace</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="nestedAtRules">
+    nestedAtRules
+  </h3>
+  <pre>
+const nestedAtRules: (
+  typeof media |
+  typeof supports |
+  typeof page |
+  typeof fontFace |
+  typeof keyframes |
+  typeof counterStyle |
+  typeof fontFeatureValues |
+  typeof swash |
+  typeof ornaments |
+  typeof annotation |
+  typeof stylistic |
+  typeof styleset |
+  typeof characterVariant
+)[]</pre
+  >
+  <h3 class="is-family-monospace has-text-grey-dark" id="ornaments">
+    ornaments
+  </h3>
+  <pre>const ornaments: typeof ornaments</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="page">page</h3>
+  <pre>const page: typeof page</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="styleset">styleset</h3>
+  <pre>const styleset: typeof styleset</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="stylistic">
+    stylistic
+  </h3>
+  <pre>const stylistic: typeof stylistic</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="supports">supports</h3>
+  <pre>const supports: typeof supports</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="swash">swash</h3>
+  <pre>const swash: typeof swash</pre>
+  <h2>classes</h2>
+  <h3 class="is-family-monospace has-text-grey-dark" id="ScopedStyles">
+    ScopedStyles
+  </h3>
+</article>

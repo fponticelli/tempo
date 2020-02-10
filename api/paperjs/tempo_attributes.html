@@ -1,0 +1,42 @@
+<article>
+  <h1>module 'tempo_attributes'</h1>
+  <nav></nav>
+  <h2>types</h2>
+  <h3 class="is-family-monospace has-text-grey-dark" id="TempoAttributes">
+    TempoAttributes
+  </h3>
+  <pre>
+interface TempoAttributes&lt;State, Action, Query, El, T&gt; {
+  readonly afterrender?:
+    | undefined
+    | ((state: State, el: El, ctx: PaperContext&lt;Action&gt;) =&gt; T | undefined)
+  readonly beforechange?:
+    | undefined
+    | ((
+        state: State,
+        el: El,
+        ctx: PaperContext&lt;Action&gt;,
+        value: T | undefined
+      ) =&gt; T | undefined)
+  readonly afterchange?:
+    | undefined
+    | ((
+        state: State,
+        el: El,
+        ctx: PaperContext&lt;Action&gt;,
+        value: T | undefined
+      ) =&gt; T | undefined)
+  readonly beforedestroy?:
+    | undefined
+    | ((el: El, ctx: PaperContext&lt;Action&gt;, value: T | undefined) =&gt; void)
+  readonly request?:
+    | undefined
+    | ((
+        query: Query,
+        el: El,
+        ctx: PaperContext&lt;Action&gt;,
+        value: T | undefined
+      ) =&gt; void)
+}</pre
+  >
+</article>

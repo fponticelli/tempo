@@ -1,0 +1,124 @@
+<article>
+  <h1>module 'option'</h1>
+  <nav>
+    <ul class="module-toc-list">
+      <li>
+        <a class="is-family-monospace" href="#/api/std/option.html#None"
+          >None</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/option.html#Option"
+          >Option</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/option.html#Some"
+          >Some</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/option.html#T">T</a>
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/option.html#apN">apN</a>
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/option.html#flatMapN"
+          >flatMapN</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/option.html#mapN"
+          >mapN</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/option.html#none"
+          >none</a
+        >
+      </li>
+    </ul>
+  </nav>
+  <h2>types</h2>
+  <h3 class="is-family-monospace has-text-grey-dark" id="None">None</h3>
+  <pre>type None = { kind: 'None' }</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="Option">Option</h3>
+  <pre>
+type Option&lt;T&gt; =
+  | Some&lt;T&gt;
+  | None</pre
+  >
+  <h3 class="is-family-monospace has-text-grey-dark" id="Some">Some</h3>
+  <pre>type Some&lt;T&gt; = { kind: 'Some', value: T }</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="T">T</h3>
+  <pre>type T&lt;V&gt; = Option&lt;V&gt;</pre>
+  <h2>functions</h2>
+  <h3 class="is-family-monospace has-text-grey-dark" id="apN">apN</h3>
+  <pre>
+function apN&lt;A, B, C&gt;(f: Option&lt;Fun2&lt;A, B, C&gt;&gt;, a: Option&lt;A&gt;, b: Option&lt;B&gt;): Option&lt;C&gt;</pre
+  >
+  <pre>
+function apN&lt;A, B, C, D&gt;(f: Option&lt;Fun3&lt;A, B, C, D&gt;&gt;, a: Option&lt;A&gt;, b: Option&lt;B&gt;, c: Option&lt;C&gt;): Option&lt;D&gt;</pre
+  >
+  <pre>
+function apN&lt;A, B, C, D, E&gt;(
+  f: Option&lt;Fun4&lt;A, B, C, D, E&gt;&gt;,
+  a: Option&lt;A&gt;, b: Option&lt;B&gt;, c: Option&lt;C&gt;, d: Option&lt;D&gt;): Option&lt;E&gt;</pre
+  >
+  <pre>
+function apN&lt;A, B, C, D, E, F&gt;(
+  f: Option&lt;Fun5&lt;A, B, C, D, E, F&gt;&gt;,
+  a: Option&lt;A&gt;, b: Option&lt;B&gt;, c: Option&lt;C&gt;, d: Option&lt;D&gt;, e: Option&lt;E&gt;): Option&lt;F&gt;</pre
+  >
+  <pre>
+function apN&lt;A, B, C, D, E, F, G&gt;(
+  f: Option&lt;Fun6&lt;A, B, C, D, E, F, G&gt;&gt;,
+  a: Option&lt;A&gt;, b: Option&lt;B&gt;, c: Option&lt;C&gt;, d: Option&lt;D&gt;, e: Option&lt;E&gt;, g: Option&lt;F&gt;): Option&lt;G&gt;</pre
+  >
+  <h3 class="is-family-monospace has-text-grey-dark" id="flatMapN">flatMapN</h3>
+  <pre>
+function flatMapN&lt;A, B, C&gt;(f: Fun2&lt;A, B, Option&lt;C&gt;&gt;, a: Option&lt;A&gt;, b: Option&lt;B&gt;): Option&lt;C&gt;</pre
+  >
+  <pre>
+function flatMapN&lt;A, B, C, D&gt;(f: Fun3&lt;A, B, C, Option&lt;D&gt;&gt;, a: Option&lt;A&gt;, b: Option&lt;B&gt;, c: Option&lt;C&gt;): Option&lt;D&gt;</pre
+  >
+  <pre>
+function flatMapN&lt;A, B, C, D, E&gt;(f: Fun4&lt;A, B, C, D, Option&lt;E&gt;&gt;, a: Option&lt;A&gt;, b: Option&lt;B&gt;, c: Option&lt;C&gt;, d: Option&lt;D&gt;): Option&lt;E&gt;</pre
+  >
+  <pre>
+function flatMapN&lt;A, B, C, D, E, F&gt;(
+  f: Fun5&lt;A, B, C, D, E, Option&lt;F&gt;&gt;,
+  a: Option&lt;A&gt;, b: Option&lt;B&gt;, c: Option&lt;C&gt;, d: Option&lt;D&gt;, e: Option&lt;E&gt;): Option&lt;F&gt;</pre
+  >
+  <pre>
+function flatMapN&lt;A, B, C, D, E, F, G&gt;(
+  f: Fun6&lt;A, B, C, D, E, F, Option&lt;G&gt;&gt;,
+  a: Option&lt;A&gt;, b: Option&lt;B&gt;, c: Option&lt;C&gt;, d: Option&lt;D&gt;, e: Option&lt;E&gt;, g: Option&lt;F&gt;): Option&lt;G&gt;</pre
+  >
+  <h3 class="is-family-monospace has-text-grey-dark" id="mapN">mapN</h3>
+  <pre>
+function mapN&lt;A, B, C&gt;(f: Fun2&lt;A, B, C&gt;, a: Option&lt;A&gt;, b: Option&lt;B&gt;): Option&lt;C&gt;</pre
+  >
+  <pre>
+function mapN&lt;A, B, C, D&gt;(f: Fun3&lt;A, B, C, D&gt;, a: Option&lt;A&gt;, b: Option&lt;B&gt;, c: Option&lt;C&gt;): Option&lt;D&gt;</pre
+  >
+  <pre>
+function mapN&lt;A, B, C, D, E&gt;(
+  f: Fun4&lt;A, B, C, D, E&gt;,
+  a: Option&lt;A&gt;, b: Option&lt;B&gt;, c: Option&lt;C&gt;, d: Option&lt;D&gt;): Option&lt;E&gt;</pre
+  >
+  <pre>
+function mapN&lt;A, B, C, D, E, F&gt;(
+  f: Fun5&lt;A, B, C, D, E, F&gt;,
+  a: Option&lt;A&gt;, b: Option&lt;B&gt;, c: Option&lt;C&gt;, d: Option&lt;D&gt;, e: Option&lt;E&gt;): Option&lt;F&gt;</pre
+  >
+  <pre>
+function mapN&lt;A, B, C, D, E, F, G&gt;(
+  f: Fun6&lt;A, B, C, D, E, F, G&gt;,
+  a: Option&lt;A&gt;, b: Option&lt;B&gt;, c: Option&lt;C&gt;, d: Option&lt;D&gt;, e: Option&lt;E&gt;, g: Option&lt;F&gt;): Option&lt;G&gt;</pre
+  >
+  <h2>values</h2>
+  <h3 class="is-family-monospace has-text-grey-dark" id="none">none</h3>
+  <pre>const none: Option&lt;never&gt;</pre>
+</article>

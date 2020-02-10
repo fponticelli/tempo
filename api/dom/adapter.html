@@ -1,0 +1,21 @@
+<article>
+  <h1>module 'adapter'</h1>
+  <nav></nav>
+  <h2>types</h2>
+  <h3 class="is-family-monospace has-text-grey-dark" id="PropagateArg">
+    PropagateArg
+  </h3>
+  <pre>
+interface PropagateArg&lt;OuterState, InnerState, OuterAction, InnerAction&gt; {
+  action: InnerAction
+  innerState: InnerState
+  outerState: OuterState
+  dispatchInner: (action: InnerAction) =&gt; void
+  dispatchOuter: (action: OuterAction) =&gt; void
+}</pre
+  >
+  <h2>classes</h2>
+  <h3 class="is-family-monospace has-text-grey-dark" id="AdapterTemplate">
+    AdapterTemplate
+  </h3>
+</article>

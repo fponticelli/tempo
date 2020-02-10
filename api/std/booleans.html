@@ -1,0 +1,86 @@
+<article>
+  <h1>module 'booleans'</h1>
+  <div>
+    <p>Utility functions to manipulate <code>boolean</code> values.</p>
+  </div>
+  <nav>
+    <ul class="module-toc-list">
+      <li>
+        <a class="is-family-monospace" href="#/api/std/booleans.html#canParse"
+          >canParse</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/booleans.html#compare"
+          >compare</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/booleans.html#option"
+          >option</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/booleans.html#parse"
+          >parse</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/booleans.html#toInt"
+          >toInt</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/booleans.html#xor"
+          >xor</a
+        >
+      </li>
+    </ul>
+  </nav>
+  <h2>functions</h2>
+  <h3 class="is-family-monospace has-text-grey-dark" id="canParse">canParse</h3>
+  <div>
+    <p>
+      Returns <code>true</code> if the passed value is either
+      <code>true</code> or <code>false</code> (case insensitive).
+    </p>
+  </div>
+  <pre>function canParse(v: string): boolean</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="compare">compare</h3>
+  <div>
+    <p>
+      Returns a comparison value (<code>Int</code>) from two boolean values.
+    </p>
+  </div>
+  <pre>function compare(a: boolean, b: boolean): 1 | -1 | 0</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="option">option</h3>
+  <div>
+    <p>
+      Depending upon the condition, return the provided value wrapped in a
+      <code>some</code>, or <code>none</code> if the condition is false.
+    </p>
+  </div>
+  <pre>function option&lt;A&gt;(cond: boolean, a: A): Option&lt;A&gt;</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="parse">parse</h3>
+  <div>
+    <p>
+      Returns <code>true</code>/<code>false</code> if the passed value is
+      <code>true</code>/<code>false</code> (case insensitive) with any other
+      value it will return null.
+    </p>
+  </div>
+  <pre>function parse(v: string): boolean</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="toInt">toInt</h3>
+  <div>
+    <p>
+      Converts a boolean to an integer value (<code>true</code> =&gt;
+      <code>1</code>, <code>false</code> =&gt; <code>0</code>).
+    </p>
+  </div>
+  <pre>function toInt(v: boolean): 1 | 0</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="xor">xor</h3>
+  <div>
+    <p>Returns <code>true</code> when arguments are different.</p>
+  </div>
+  <pre>function xor(a: boolean, b: boolean): boolean</pre>
+</article>

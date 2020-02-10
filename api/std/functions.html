@@ -1,0 +1,68 @@
+<article>
+  <h1>module 'functions'</h1>
+  <nav></nav>
+  <h2>functions</h2>
+  <h3 class="is-family-monospace has-text-grey-dark" id="compose">compose</h3>
+  <pre>function compose&lt;A&gt;(): (a: A) =&gt; A</pre>
+  <pre>function compose&lt;A, B&gt;(f1: (a: A) =&gt; B): (a: A) =&gt; B</pre>
+  <pre>
+function compose&lt;A, B, C&gt;(f1: (a: A) =&gt; B, f2: (b: B) =&gt; C): (a: A) =&gt; C</pre
+  >
+  <pre>
+function compose&lt;A, B, C, D&gt;(f1: (a: A) =&gt; B, f2: (b: B) =&gt; C, f3: (c: C) =&gt; D): (a: A) =&gt; D</pre
+  >
+  <pre>
+function compose&lt;A, B, C, D, E&gt;(f1: (a: A) =&gt; B, f2: (b: B) =&gt; C, f3: (c: C) =&gt; D, f4: (d: D) =&gt; E): (a: A) =&gt; E</pre
+  >
+  <pre>
+function compose&lt;A, B, C, D, E, F&gt;(f1: (a: A) =&gt; B, f2: (b: B) =&gt; C, f3: (c: C) =&gt; D, f4: (d: D) =&gt; E, f5: (e: E) =&gt; F): (a: A) =&gt; F</pre
+  >
+  <pre>
+function compose&lt;A, B, C, D, E, F, G&gt;
+  (f1: (a: A) =&gt; B, f2: (b: B) =&gt; C, f3: (c: C) =&gt; D, f4: (d: D) =&gt; E, f5: (e: E) =&gt; F, f6: (f: F) =&gt; G): (a: A) =&gt; G</pre
+  >
+  <h3 class="is-family-monospace has-text-grey-dark" id="curryRight">
+    curryRight
+  </h3>
+  <pre>
+function curryRight&lt;A, B, C, D&gt;
+  (f: (a: A, b: B, c: C) =&gt; D): (a: A, b: B) =&gt; (c: C) =&gt; D</pre
+  >
+  <pre>
+function curryRight&lt;A, B, C, D, E&gt;
+  (f: (a: A, b: B, c: C, d: D) =&gt; E): (a: A, b: B, c: C) =&gt; (d: D) =&gt; E</pre
+  >
+  <pre>
+function curryRight&lt;A, B, C, D, E, F&gt;
+  (f: (a: A, b: B, c: C, d: D, e: E) =&gt; F): (a: A, b: B, c: C, d: D) =&gt; (e: E) =&gt; F</pre
+  >
+  <pre>
+function curryRight&lt;A, B, C, D, E, F, G&gt;
+  (f: (a: A, b: B, c: C, d: D, e: E, f: F) =&gt; G): (a: A, b: B, c: C, d: D, e: E) =&gt; (f: F) =&gt; G</pre
+  >
+  <h3 class="is-family-monospace has-text-grey-dark" id="flip">flip</h3>
+  <pre>
+function flip&lt;A, B, C&gt;
+  (f: (a: A, b: B) =&gt; C): (b: B, a: A) =&gt; C</pre
+  >
+  <pre>
+function flip&lt;A, B, C, D&gt;
+  (f: (a: A, b: B, c: C) =&gt; D): (c: C, b: B, a: A) =&gt; D</pre
+  >
+  <pre>
+function flip&lt;A, B, C, D, E&gt;
+  (f: (a: A, b: B, c: C, d: D) =&gt; E): (d: D, c: C, b: B, a: A) =&gt; E</pre
+  >
+  <pre>
+function flip&lt;A, B, C, D, E&gt;
+  (f: (a: A, b: B, c: C, d: D) =&gt; E): (d: D, c: C, b: B, a: A) =&gt; E</pre
+  >
+  <pre>
+function flip&lt;A, B, C, D, E, F&gt;
+  (f: (a: A, b: B, c: C, d: D, e: E) =&gt; F): (e: E, d: D, c: C, b: B, a: A) =&gt; F</pre
+  >
+  <pre>
+function flip&lt;A, B, C, D, E, F, G&gt;
+  (f: (a: A, b: B, c: C, d: D, e: E, f: F) =&gt; G): (f: F, e: E, d: D, c: C, b: B, a: A) =&gt; G</pre
+  >
+</article>

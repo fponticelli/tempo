@@ -1,0 +1,216 @@
+<article>
+  <h1>module 'types/objects'</h1>
+  <div>
+    <p>// TODO express as literal object but preserve readonly/optional</p>
+  </div>
+  <nav>
+    <ul class="module-toc-list">
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/std/types/objects.html#ExcludeFunctionFields"
+          >ExcludeFunctionFields</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/std/types/objects.html#KeysWithFieldType"
+          >KeysWithFieldType</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/std/types/objects.html#KeysWithoutFieldType"
+          >KeysWithoutFieldType</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/types/objects.html#Merge"
+          >Merge</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/std/types/objects.html#ObjectWithField"
+          >ObjectWithField</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/std/types/objects.html#ObjectWithPath"
+          >ObjectWithPath</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/std/types/objects.html#ReadonlyFields"
+          >ReadonlyFields</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/std/types/objects.html#ReadonlyKeys"
+          >ReadonlyKeys</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/std/types/objects.html#RemoveNullableFromFields"
+          >RemoveNullableFromFields</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/std/types/objects.html#TypeAtPath"
+          >TypeAtPath</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/std/types/objects.html#WritableFields"
+          >WritableFields</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/std/types/objects.html#WritableKeys"
+          >WritableKeys</a
+        >
+      </li>
+    </ul>
+  </nav>
+  <h2>types</h2>
+  <h3 class="is-family-monospace has-text-grey-dark" id="ExcludeFunctionFields">
+    ExcludeFunctionFields
+  </h3>
+  <pre>
+type ExcludeFunctionFields&lt;T&gt; = Pick&lt;
+  T,
+  KeysWithoutFieldType&lt;T, AnyFunction&gt;
+&gt;</pre
+  >
+  <h3 class="is-family-monospace has-text-grey-dark" id="KeysWithFieldType">
+    KeysWithFieldType
+  </h3>
+  <pre>
+type KeysWithFieldType&lt;T, Condition&gt; = {
+  [K in keyof T]: WhenEquals&lt;T[K], Condition, K&gt;
+}[keyof T]</pre
+  >
+  <h3 class="is-family-monospace has-text-grey-dark" id="KeysWithoutFieldType">
+    KeysWithoutFieldType
+  </h3>
+  <pre>
+type KeysWithoutFieldType&lt;T, Condition&gt; = {
+  [K in keyof T]: WhenEquals&lt;T[K], Condition, never, K&gt;
+}[keyof T]</pre
+  >
+  <h3 class="is-family-monospace has-text-grey-dark" id="Merge">Merge</h3>
+  <pre>type Merge&lt;A, B&gt; = A &amp; B</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="ObjectWithField">
+    ObjectWithField
+  </h3>
+  <pre>
+type ObjectWithField&lt;F extends IndexType, V&gt; = { [_ in F]: V }</pre
+  >
+  <h3 class="is-family-monospace has-text-grey-dark" id="ObjectWithPath">
+    ObjectWithPath
+  </h3>
+  <pre>
+type ObjectWithPath&lt;Path extends IndexType[], V&gt; = Path extends []
+  ? {}
+  : Path extends [infer T]
+  ? T extends IndexType
+    ? { [_ in T]: V }
+    : never
+  : Path extends [infer K, ...any[]]
+  ? K extends IndexType
+    ? Tail&lt;Path&gt; extends infer Rest
+      ? Rest extends IndexType[]
+        ? { [_ in K]: ObjectWithPath&lt;Rest, V&gt; }
+        : never
+      : never
+    : never
+  : never</pre
+  >
+  <h3 class="is-family-monospace has-text-grey-dark" id="ReadonlyFields">
+    ReadonlyFields
+  </h3>
+  <pre>type ReadonlyFields&lt;T&gt; = Pick&lt;T, ReadonlyKeys&lt;T&gt;&gt;</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="ReadonlyKeys">
+    ReadonlyKeys
+  </h3>
+  <pre>
+type ReadonlyKeys&lt;T&gt; = {
+  [P in keyof T]-?: WhenEquals&lt;
+    { [Q in P]: T[P] },
+    { -readonly [Q in P]: T[P] },
+    never,
+    P
+  &gt;
+}[keyof T]</pre
+  >
+  <h3
+    class="is-family-monospace has-text-grey-dark"
+    id="RemoveNullableFromFields"
+  >
+    RemoveNullableFromFields
+  </h3>
+  <pre>
+type RemoveNullableFromFields&lt;T&gt; = {
+  [K in keyof T]: NonNullable&lt;T[K]&gt;
+}</pre
+  >
+  <h3 class="is-family-monospace has-text-grey-dark" id="TypeAtPath">
+    TypeAtPath
+  </h3>
+  <pre>
+type TypeAtPath&lt;Path extends IndexType[], O&gt; = {
+  next: Path extends [infer K, ...any[]]
+    ? K extends IndexType
+      ? Tail&lt;Path&gt; extends infer Rest
+        ? O extends Record&lt;IndexType, any&gt;
+          ? Rest extends IndexType[]
+            ? TypeAtPath&lt;Rest, O[K]&gt;
+            : never
+          : never
+        : never
+      : never
+    : never
+  empty: O
+  done: O extends Record&lt;IndexType, any&gt;
+    ? Path extends [infer K]
+      ? K extends IndexType
+        ? O[K]
+        : never
+      : never
+    : never
+}[Path extends [] ? 'empty' : Path extends [any] ? 'done' : 'next']</pre
+  >
+  <h3 class="is-family-monospace has-text-grey-dark" id="WritableFields">
+    WritableFields
+  </h3>
+  <pre>type WritableFields&lt;T&gt; = Pick&lt;T, WritableKeys&lt;T&gt;&gt;</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="WritableKeys">
+    WritableKeys
+  </h3>
+  <pre>
+type WritableKeys&lt;T&gt; = {
+  [K in keyof T]-?: WhenEquals&lt;
+    { [Q in K]: T[K] },
+    { -readonly [Q in K]: T[K] },
+    K
+  &gt;
+}[keyof T]</pre
+  >
+</article>

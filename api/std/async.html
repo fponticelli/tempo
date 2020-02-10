@@ -1,0 +1,111 @@
+<article>
+  <h1>module 'async'</h1>
+  <nav>
+    <ul class="module-toc-list">
+      <li>
+        <a class="is-family-monospace" href="#/api/std/async.html#Async"
+          >Async</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/async.html#Loading"
+          >Loading</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/async.html#NotAsked"
+          >NotAsked</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/async.html#Outcome"
+          >Outcome</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/async.html#T">T</a>
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/async.html#flatMapN"
+          >flatMapN</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/async.html#mapN">mapN</a>
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/async.html#notAsked"
+          >notAsked</a
+        >
+      </li>
+    </ul>
+  </nav>
+  <h2>types</h2>
+  <h3 class="is-family-monospace has-text-grey-dark" id="Async">Async</h3>
+  <pre>
+type Async&lt;T, P&gt; =
+  | Outcome&lt;T&gt;
+  | NotAsked
+  | Loading&lt;P&gt;</pre
+  >
+  <h3 class="is-family-monospace has-text-grey-dark" id="Loading">Loading</h3>
+  <pre>type Loading&lt;P&gt; = { kind: 'Loading', progress: P }</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="NotAsked">NotAsked</h3>
+  <pre>type NotAsked = { kind: 'NotAsked' }</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="Outcome">Outcome</h3>
+  <pre>type Outcome&lt;T&gt; = { kind: 'Outcome', value: T }</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="T">T</h3>
+  <pre>type T&lt;V, E&gt; = Async&lt;V, E&gt;</pre>
+  <h2>functions</h2>
+  <h3 class="is-family-monospace has-text-grey-dark" id="flatMapN">flatMapN</h3>
+  <pre>
+function flatMapN&lt;A, B, C, Prog&gt;(
+  f: Fun2&lt;A, B, Async&lt;C, Prog&gt;&gt;,
+  a: Async&lt;A, Prog&gt;, b: Async&lt;B, Prog&gt;): Async&lt;C, Prog&gt;</pre
+  >
+  <pre>
+function flatMapN&lt;A, B, C, D, Prog&gt;(
+  f: Fun3&lt;A, B, C, Async&lt;D, Prog&gt;&gt;,
+  a: Async&lt;A, Prog&gt;, b: Async&lt;B, Prog&gt;, c: Async&lt;C, Prog&gt;): Async&lt;D, Prog&gt;</pre
+  >
+  <pre>
+function flatMapN&lt;A, B, C, D, E, Prog&gt;(
+  f: Fun4&lt;A, B, C, D, Async&lt;E, Prog&gt;&gt;,
+  a: Async&lt;A, Prog&gt;, b: Async&lt;B, Prog&gt;, c: Async&lt;C, Prog&gt;, d: Async&lt;D, Prog&gt;): Async&lt;E, Prog&gt;</pre
+  >
+  <pre>
+function flatMapN&lt;A, B, C, D, E, F, Prog&gt;(
+  f: Fun5&lt;A, B, C, D, E, Async&lt;F, Prog&gt;&gt;,
+  a: Async&lt;A, Prog&gt;, b: Async&lt;B, Prog&gt;, c: Async&lt;C, Prog&gt;, d: Async&lt;D, Prog&gt;, e: Async&lt;E, Prog&gt;): Async&lt;F, Prog&gt;</pre
+  >
+  <pre>
+function flatMapN&lt;A, B, C, D, E, F, G, Prog&gt;(
+  f: Fun6&lt;A, B, C, D, E, F, Async&lt;G, Prog&gt;&gt;,
+  a: Async&lt;A, Prog&gt;, b: Async&lt;B, Prog&gt;, c: Async&lt;C, Prog&gt;, d: Async&lt;D, Prog&gt;, e: Async&lt;E, Prog&gt;, g: Async&lt;F, Prog&gt;): Async&lt;G, Prog&gt;</pre
+  >
+  <h3 class="is-family-monospace has-text-grey-dark" id="mapN">mapN</h3>
+  <pre>
+function mapN&lt;A, B, C, Prog&gt;(f: Fun2&lt;A, B, C&gt;, a: Async&lt;A, Prog&gt;, b: Async&lt;B, Prog&gt;): Async&lt;C, Prog&gt;</pre
+  >
+  <pre>
+function mapN&lt;A, B, C, D, Prog&gt;(f: Fun3&lt;A, B, C, D&gt;, a: Async&lt;A, Prog&gt;, b: Async&lt;B, Prog&gt;, c: Async&lt;C, Prog&gt;): Async&lt;D, Prog&gt;</pre
+  >
+  <pre>
+function mapN&lt;A, B, C, D, E, Prog&gt;(
+  f: Fun4&lt;A, B, C, D, E&gt;,
+  a: Async&lt;A, Prog&gt;, b: Async&lt;B, Prog&gt;, c: Async&lt;C, Prog&gt;, d: Async&lt;D, Prog&gt;): Async&lt;E, Prog&gt;</pre
+  >
+  <pre>
+function mapN&lt;A, B, C, D, E, F, Prog&gt;(
+  f: Fun5&lt;A, B, C, D, E, F&gt;,
+  a: Async&lt;A, Prog&gt;, b: Async&lt;B, Prog&gt;, c: Async&lt;C, Prog&gt;, d: Async&lt;D, Prog&gt;, e: Async&lt;E, Prog&gt;): Async&lt;F, Prog&gt;</pre
+  >
+  <pre>
+function mapN&lt;A, B, C, D, E, F, G, Prog&gt;(
+  f: Fun6&lt;A, B, C, D, E, F, G&gt;,
+  a: Async&lt;A, Prog&gt;, b: Async&lt;B, Prog&gt;, c: Async&lt;C, Prog&gt;, d: Async&lt;D, Prog&gt;, e: Async&lt;E, Prog&gt;, g: Async&lt;F, Prog&gt;): Async&lt;G, Prog&gt;</pre
+  >
+  <h2>values</h2>
+  <h3 class="is-family-monospace has-text-grey-dark" id="notAsked">notAsked</h3>
+  <pre>const notAsked: Async&lt;never, never&gt;</pre>
+</article>

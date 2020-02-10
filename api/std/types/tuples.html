@@ -1,0 +1,115 @@
+<article>
+  <h1>module 'types/tuples'</h1>
+  <div>
+    <p>// export type Concat<a extends="" any[],="" b="" any[]=""> =</a></p>
+  </div>
+  <nav>
+    <ul class="module-toc-list">
+      <li>
+        <a class="is-family-monospace" href="#/api/std/types/tuples.html#DropN"
+          >DropN</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/types/tuples.html#Head"
+          >Head</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/types/tuples.html#Last"
+          >Last</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/types/tuples.html#Length"
+          >Length</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/std/types/tuples.html#LoseLastImpl"
+          >LoseLastImpl</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/std/types/tuples.html#Prepend"
+          >Prepend</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/std/types/tuples.html#Reverse"
+          >Reverse</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/types/tuples.html#Tail"
+          >Tail</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/std/types/tuples.html#TupleToUnion"
+          >TupleToUnion</a
+        >
+      </li>
+    </ul>
+  </nav>
+  <h2>types</h2>
+  <h3 class="is-family-monospace has-text-grey-dark" id="DropN">DropN</h3>
+  <pre>
+type DropN&lt;N extends number, T extends any[]&gt; = DropNImpl&lt;N, T, []&gt;</pre
+  >
+  <h3 class="is-family-monospace has-text-grey-dark" id="Head">Head</h3>
+  <pre>
+type Head&lt;T extends any[]&gt; = T extends [infer H, ...any[]] ? H : never</pre
+  >
+  <h3 class="is-family-monospace has-text-grey-dark" id="Last">Last</h3>
+  <pre>
+type Last&lt;T extends any[]&gt; = {
+  n: Last&lt;Tail&lt;T&gt;&gt;
+  one: T extends [infer H] ? H : never
+  empty: never
+}[T extends [] ? 'empty' : T extends [any] ? 'one' : 'n']</pre
+  >
+  <h3 class="is-family-monospace has-text-grey-dark" id="Length">Length</h3>
+  <pre>type Length&lt;T extends any[]&gt; = T['length']</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="LoseLastImpl">
+    LoseLastImpl
+  </h3>
+  <pre>
+type LoseLastImpl&lt;A extends any[], B extends any[]&gt; = {
+  empty: A
+  next: LoseLastImpl&lt;Prepend&lt;B[0], A&gt;, Tail&lt;B&gt;&gt;
+}[B extends [] ? 'empty' : B extends [any] ? 'empty' : 'next']</pre
+  >
+  <h3 class="is-family-monospace has-text-grey-dark" id="Prepend">Prepend</h3>
+  <pre>
+type Prepend&lt;Insert, Tail extends any[]&gt; = ((
+  i: Insert,
+  ...tail: Tail
+) =&gt; void) extends (...tuple: infer Tuple) =&gt; void
+  ? Tuple
+  : never</pre
+  >
+  <h3 class="is-family-monospace has-text-grey-dark" id="Reverse">Reverse</h3>
+  <pre>type Reverse&lt;T extends any[]&gt; = ReverseImpl&lt;T, [], []&gt;</pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="Tail">Tail</h3>
+  <pre>
+type Tail&lt;T extends any[]&gt; = ((...args: T) =&gt; void) extends (
+  _: any,
+  ...rest: infer Rest
+) =&gt; void
+  ? Rest
+  : never</pre
+  >
+  <h3 class="is-family-monospace has-text-grey-dark" id="TupleToUnion">
+    TupleToUnion
+  </h3>
+  <pre>type TupleToUnion&lt;T extends any[]&gt; = T[number]</pre>
+</article>

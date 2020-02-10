@@ -152,26 +152,37 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 Object.defineProperty(exports, "__esModule", { value: true });
+/**
+ * Utility functions to manipulate `Array` values.
+ */
 var maybe_1 = require("./maybe");
-exports.map = function (f, arr) {
+function map(f, arr) {
     var length = arr.length;
     var buff = new Array(length);
     for (var i = 0; i < length; i++) {
         buff[i] = f(arr[i]);
     }
     return buff;
-};
-exports.flatMap = function (f, arr) {
+}
+exports.map = map;
+function flatMap(f, arr) {
     var buff = new Array();
     for (var _i = 0, arr_1 = arr; _i < arr_1.length; _i++) {
         var el = arr_1[_i];
         buff.push.apply(buff, f(el));
     }
     return buff;
-};
-exports.head = function (arr) { return arr.length > 0 ? arr[0] : maybe_1.nothing; };
-exports.tail = function (arr) { return arr.slice(1); };
-exports.equals = function (predicate, a, b) {
+}
+exports.flatMap = flatMap;
+function head(arr) {
+    return arr.length > 0 ? arr[0] : maybe_1.nothing;
+}
+exports.head = head;
+function tail(arr) {
+    return arr.slice(1);
+}
+exports.tail = tail;
+function equals(predicate, a, b) {
     if (a.length !== b.length)
         return false;
     else {
@@ -181,10 +192,17 @@ exports.equals = function (predicate, a, b) {
         }
         return true;
     }
-};
-exports.isEmpty = function (arr) { return arr.length === 0; };
-exports.hasValues = function (arr) { return arr.length > 0; };
-exports.filter = function (predicate, arr) {
+}
+exports.equals = equals;
+function isEmpty(arr) {
+    return arr.length === 0;
+}
+exports.isEmpty = isEmpty;
+function hasValues(arr) {
+    return arr.length > 0;
+}
+exports.hasValues = hasValues;
+function filter(predicate, arr) {
     var buff = [];
     for (var _i = 0, arr_2 = arr; _i < arr_2.length; _i++) {
         var a = arr_2[_i];
@@ -192,19 +210,22 @@ exports.filter = function (predicate, arr) {
             buff.push(a);
     }
     return buff;
-};
-exports.flatten = function (arr) {
+}
+exports.filter = filter;
+function flatten(arr) {
     var _a;
     return (_a = []).concat.apply(_a, arr);
-};
-exports.foldLeft = function (f, arr, b) {
+}
+exports.flatten = flatten;
+function foldLeft(f, arr, b) {
     for (var _i = 0, arr_3 = arr; _i < arr_3.length; _i++) {
         var a = arr_3[_i];
         b = f(b, a);
     }
     return b;
-};
-exports.all = function (predicate, arr) {
+}
+exports.foldLeft = foldLeft;
+function all(predicate, arr) {
     for (var _i = 0, arr_4 = arr; _i < arr_4.length; _i++) {
         var a = arr_4[_i];
         if (!predicate(a)) {
@@ -212,8 +233,9 @@ exports.all = function (predicate, arr) {
         }
     }
     return true;
-};
-exports.any = function (predicate, arr) {
+}
+exports.all = all;
+function any(predicate, arr) {
     for (var _i = 0, arr_5 = arr; _i < arr_5.length; _i++) {
         var a = arr_5[_i];
         if (predicate(a)) {
@@ -221,35 +243,62 @@ exports.any = function (predicate, arr) {
         }
     }
     return false;
-};
-exports.each = function (f, arr) {
+}
+exports.any = any;
+function each(f, arr) {
     for (var _i = 0, arr_6 = arr; _i < arr_6.length; _i++) {
         var a = arr_6[_i];
         f(a);
     }
-};
-exports.concat = function () {
+}
+exports.each = each;
+function concat() {
     var _a;
     var arrs = [];
     for (var _i = 0; _i < arguments.length; _i++) {
         arrs[_i] = arguments[_i];
     }
     return (_a = []).concat.apply(_a, arrs);
-};
-exports.sort = function (compare, arr) {
+}
+exports.concat = concat;
+function makeCompare(comparef, shorterFirst) {
+    if (shorterFirst === void 0) { shorterFirst = true; }
+    return function (a, b) {
+        if (a.length < b.length) {
+            return -1 * (shorterFirst ? 1 : -1);
+        }
+        else if (a.length > b.length) {
+            return 1 * (shorterFirst ? 1 : -1);
+        }
+        for (var i = 0; i < a.length; i++) {
+            var ord = comparef(a[i], b[i]);
+            if (ord !== 0)
+                return ord;
+        }
+        return 0;
+    };
+}
+exports.makeCompare = makeCompare;
+function sort(compare, arr) {
     return arr.slice().sort(compare);
-};
-exports.range = function (length, f) {
+}
+exports.sort = sort;
+function range(length, f) {
     var buff = new Array(length);
     for (var i = 0; i < length; i++)
         buff[i] = f(i);
     return buff;
-};
-exports.numbersRange = function (length, startAt) {
+}
+exports.range = range;
+function numbersRange(length, startAt) {
     if (startAt === void 0) { startAt = 0; }
-    return exports.range(length, function (i) { return startAt + i; });
-};
-exports.fill = function (length, value) { return exports.range(length, function () { return value; }); };
+    return range(length, function (i) { return startAt + i; });
+}
+exports.numbersRange = numbersRange;
+function fill(length, value) {
+    return range(length, function () { return value; });
+}
+exports.fill = fill;
 
 },{"./maybe":"pwth"}],"BEVE":[function(require,module,exports) {
 "use strict";
@@ -348,7 +397,7 @@ function setSpaceSeparated(el, name, values) {
 }
 exports.setSpaceSeparated = setSpaceSeparated;
 
-},{"tempo-std/lib/arrays":"LAOm"}],"UKQ2":[function(require,module,exports) {
+},{"tempo-std/lib/arrays":"LAOm"}],"ClC2":[function(require,module,exports) {
 "use strict";
 /*
 Copyright 2019 Google LLC
@@ -364,7 +413,7 @@ limitations under the License.
 */
 Object.defineProperty(exports, "__esModule", { value: true });
 /* istanbul ignore file */
-var set_attribute_1 = require("./utils/set_attribute");
+var set_attribute_1 = require("./set_attribute");
 exports.attributeNameMap = {
     acceptcharset: 'accept-charset',
     asattr: 'as',
@@ -411,7 +460,7 @@ exports.htmlAttributeMap = {
     value: set_attribute_1.setProperty
 };
 
-},{"./utils/set_attribute":"BEVE"}],"GqEk":[function(require,module,exports) {
+},{"./set_attribute":"BEVE"}],"GqEk":[function(require,module,exports) {
 "use strict";
 /*
 Copyright 2019 Google LLC
@@ -427,11 +476,11 @@ limitations under the License.
 */
 Object.defineProperty(exports, "__esModule", { value: true });
 var dom_1 = require("./utils/dom");
-var DOMDerivedTextTemplate = /** @class */ (function () {
-    function DOMDerivedTextTemplate(makeContent) {
+var DerivedTextTemplate = /** @class */ (function () {
+    function DerivedTextTemplate(makeContent) {
         this.makeContent = makeContent;
     }
-    DOMDerivedTextTemplate.prototype.render = function (ctx, state) {
+    DerivedTextTemplate.prototype.render = function (ctx, state) {
         var makeContent = this.makeContent;
         var content = makeContent(state) || '';
         var node = ctx.doc.createTextNode(content);
@@ -451,14 +500,14 @@ var DOMDerivedTextTemplate = /** @class */ (function () {
             request: function (_) { }
         };
     };
-    return DOMDerivedTextTemplate;
+    return DerivedTextTemplate;
 }());
-exports.DOMDerivedTextTemplate = DOMDerivedTextTemplate;
-var DOMLiteralTextTemplate = /** @class */ (function () {
-    function DOMLiteralTextTemplate(content) {
+exports.DerivedTextTemplate = DerivedTextTemplate;
+var LiteralTextTemplate = /** @class */ (function () {
+    function LiteralTextTemplate(content) {
         this.content = content;
     }
-    DOMLiteralTextTemplate.prototype.render = function (ctx, _) {
+    LiteralTextTemplate.prototype.render = function (ctx, _) {
         var node = ctx.doc.createTextNode(this.content);
         ctx.append(node);
         return {
@@ -469,15 +518,15 @@ var DOMLiteralTextTemplate = /** @class */ (function () {
             request: function (_) { }
         };
     };
-    return DOMLiteralTextTemplate;
+    return LiteralTextTemplate;
 }());
-exports.DOMLiteralTextTemplate = DOMLiteralTextTemplate;
+exports.LiteralTextTemplate = LiteralTextTemplate;
 exports.text = function (content) {
     if (typeof content === 'function') {
-        return new DOMDerivedTextTemplate(content);
+        return new DerivedTextTemplate(content);
     }
     else {
-        return new DOMLiteralTextTemplate(content || '');
+        return new LiteralTextTemplate(content || '');
     }
 };
 
@@ -496,7 +545,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 Object.defineProperty(exports, "__esModule", { value: true });
-var dom_attributes_mapper_1 = require("../dom_attributes_mapper");
+var attributes_mapper_1 = require("./attributes_mapper");
 var set_attribute_1 = require("./set_attribute");
 var text_1 = require("../text");
 function removeNode(node) {
@@ -529,7 +578,7 @@ function domChildToTemplate(dom) {
 }
 exports.domChildToTemplate = domChildToTemplate;
 function processAttribute(el, name, value, acc) {
-    var set = dom_attributes_mapper_1.htmlAttributeMap[name] || set_attribute_1.setAttribute;
+    var set = attributes_mapper_1.htmlAttributeMap[name] || set_attribute_1.setAttribute;
     if (typeof value === 'function') {
         // state in inputs can incorrectly map to state
         if (el.nodeName === 'INPUT' || el.nodeName === 'TEXTAREA') {
@@ -611,7 +660,7 @@ exports.containerSize = function (el) {
     return size;
 };
 
-},{"../dom_attributes_mapper":"UKQ2","./set_attribute":"BEVE","../text":"GqEk"}],"bbLX":[function(require,module,exports) {
+},{"./attributes_mapper":"ClC2","./set_attribute":"BEVE","../text":"GqEk"}],"bbLX":[function(require,module,exports) {
 "use strict";
 /*
 Copyright 2019 Google LLC
@@ -628,7 +677,7 @@ limitations under the License.
 Object.defineProperty(exports, "__esModule", { value: true });
 var dom_1 = require("./utils/dom");
 var arrays_1 = require("tempo-std/lib/arrays");
-var dom_attributes_mapper_1 = require("./dom_attributes_mapper");
+var attributes_mapper_1 = require("./utils/attributes_mapper");
 var applyChange = function (change, el, ctx) { return function (state, value) {
     return change(state, el, ctx, value);
 }; };
@@ -729,7 +778,7 @@ exports.DOMElement = DOMElement;
 function extractAttrs(attrs) {
     return arrays_1.map(function (attName) {
         var name = attName.toLowerCase();
-        name = dom_attributes_mapper_1.attributeNameMap[name] || name;
+        name = attributes_mapper_1.attributeNameMap[name] || name;
         return {
             name: name,
             value: attrs[attName]
@@ -788,7 +837,7 @@ exports.elNS2 = function (namespace, name) { return function (attributes) {
     return new DOMElement(makeCreateElementNS(namespace, name), extractAttrs(attributes.attrs), extractEvents(attributes.events), extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, attributes.respond, arrays_1.map(dom_1.domChildToTemplate, children));
 }; };
 
-},{"./utils/dom":"TnZD","tempo-std/lib/arrays":"LAOm","./dom_attributes_mapper":"UKQ2"}],"zQMt":[function(require,module,exports) {
+},{"./utils/dom":"TnZD","tempo-std/lib/arrays":"LAOm","./utils/attributes_mapper":"ClC2"}],"zQMt":[function(require,module,exports) {
 "use strict";
 /*
 Copyright 2019 Google LLC
@@ -943,12 +992,12 @@ limitations under the License.
 Object.defineProperty(exports, "__esModule", { value: true });
 var dom_1 = require("./utils/dom");
 var arrays_1 = require("tempo-std/lib/arrays");
-var DOMUntilTemplate = /** @class */ (function () {
-    function DOMUntilTemplate(options, children) {
+var UntilTemplate = /** @class */ (function () {
+    function UntilTemplate(options, children) {
         this.options = options;
         this.children = children;
     }
-    DOMUntilTemplate.prototype.render = function (ctx, state) {
+    UntilTemplate.prototype.render = function (ctx, state) {
         var children = this.children;
         var _a = this.options, refId = _a.refId, repeatUntil = _a.repeatUntil;
         var _b = ctx.withAppendToReference(refId), newCtx = _b.ctx, ref = _b.ref;
@@ -1015,15 +1064,15 @@ var DOMUntilTemplate = /** @class */ (function () {
         view.change(state);
         return view;
     };
-    return DOMUntilTemplate;
+    return UntilTemplate;
 }());
-exports.DOMUntilTemplate = DOMUntilTemplate;
+exports.UntilTemplate = UntilTemplate;
 exports.until = function (options) {
     var children = [];
     for (var _i = 1; _i < arguments.length; _i++) {
         children[_i - 1] = arguments[_i];
     }
-    return new DOMUntilTemplate(options, arrays_1.map(dom_1.domChildToTemplate, children));
+    return new UntilTemplate(options, arrays_1.map(dom_1.domChildToTemplate, children));
 };
 
 },{"./utils/dom":"TnZD","tempo-std/lib/arrays":"LAOm"}],"kxUV":[function(require,module,exports) {
@@ -1100,19 +1149,8 @@ exports.deep = html_1.div({
 })), html_1.article({}, function (s) {
   return s.paragraph;
 })));
-},{"tempo-dom/lib/html":"zQMt"}],"Na9D":[function(require,module,exports) {
+},{"tempo-dom/lib/html":"zQMt"}],"OJrv":[function(require,module,exports) {
 "use strict";
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
-Object.defineProperty(exports, "__esModule", { value: true });
-__export(require("./dom"));
-__export(require("./set_attribute"));
-
-},{"./dom":"TnZD","./set_attribute":"BEVE"}],"OJrv":[function(require,module,exports) {
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var utils_1 = require("./utils");
 /*
 Copyright 2019 Google LLC
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -1125,6 +1163,8 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
+Object.defineProperty(exports, "__esModule", { value: true });
+var dom_1 = require("./utils/dom");
 var DOMContext = /** @class */ (function () {
     function DOMContext(doc, append, parent, dispatch) {
         this.doc = doc;
@@ -1156,7 +1196,7 @@ var DOMContext = /** @class */ (function () {
         var ref = this.doc.createComment(refId || 't:ref');
         this.append(ref);
         return {
-            ctx: this.withAppend(utils_1.insertFBefore(ref)),
+            ctx: this.withAppend(dom_1.insertFBefore(ref)),
             ref: ref
         };
     };
@@ -1173,7 +1213,7 @@ var DOMContext = /** @class */ (function () {
 }());
 exports.DOMContext = DOMContext;
 
-},{"./utils":"Na9D"}],"izmn":[function(require,module,exports) {
+},{"./utils/dom":"TnZD"}],"izmn":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {

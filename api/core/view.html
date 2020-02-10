@@ -1,0 +1,39 @@
+<article>
+  <h1>module 'view'</h1>
+  <div>
+    <p>
+      A <code>Template</code> is a declarative representation of a
+      <code>View</code>. The <code>Template</code> will be interpreted and
+      realized into a <code>View</code> by invoking the
+      <code>render</code> method.
+    </p>
+  </div>
+  <nav></nav>
+  <h2>types</h2>
+  <h3 class="is-family-monospace has-text-grey-dark" id="View">View</h3>
+  <div>
+    <p>Function signature for the <code>Template.render()</code> method.</p>
+  </div>
+  <pre>
+interface View&lt;State, Query&gt; {
+  /**
+   * `change` takes a new `State` value and immediately updates its realization
+   * to match the new state.
+   * @param value
+   */
+  change(value: State): void
+
+  /**
+   * Removes its own realization from the DOM permanently.
+   */
+  destroy(): void
+
+  /**
+   * Allows the container App that holds a reference to a view to query the view
+   * itself for information that it owns.
+   * @param query
+   */
+  request(query: Query): void
+}</pre
+  >
+</article>
