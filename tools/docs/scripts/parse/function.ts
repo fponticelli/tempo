@@ -8,7 +8,7 @@ export interface Function extends BaseDoc {
   signatures: string[]
 }
 
-function getFunctionDeclarationSignature(fun: FunctionDeclaration): string {
+export function getFunctionDeclarationSignature(fun: FunctionDeclaration): string {
   let text = fun.getText()
   const body = fun.compilerNode.body
   if (body !== undefined) {
