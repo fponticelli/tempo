@@ -1,4 +1,4 @@
-import { SourceFile } from 'ts-morph' // TypeGuards
+import { SourceFile } from 'ts-morph'
 import { functionOfDeclaration } from './function'
 import { docOfContent, BaseDoc } from './jsdoc'
 import { flatMap, flatten } from 'tempo-std/lib/arrays'

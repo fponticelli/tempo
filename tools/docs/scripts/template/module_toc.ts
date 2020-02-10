@@ -12,6 +12,7 @@ const mapModuleToToc = (state: State) => {
   const interfaces = mod.interfaces.map(e => ({ kind: 'interfaces', name: e.name }))
   const typeAliases = mod.typeAliases.map(e => ({ kind: 'type_alias', name: e.name }))
   const variables = mod.variables.map(e => ({ kind: 'variable', name: e.name }))
+
   return exports
     .concat(functions)
     .concat(interfaces)

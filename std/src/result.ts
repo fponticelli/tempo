@@ -13,7 +13,7 @@ limitations under the License.
 
 import { Maybe, nothing, just } from './maybe'
 import { map as mapArray } from './arrays'
-import { Fun2, Fun3, Fun4, Fun5, Fun6 } from './types'
+import { Fun2, Fun3, Fun4, Fun5, Fun6 } from './types/functions'
 import { Option, none, some } from './option'
 
 export type Success<T> = { kind: 'Success', value: T }

@@ -16,7 +16,7 @@ limitations under the License.
  */
 
 import { Maybe, nothing } from './maybe'
-import { Ordering } from './ord'
+import { Ordering, Compare } from './ord'
 
 export function map<A, B>(f: (a: A) => B, arr: A[]): B[] {
   const length = arr.length
@@ -106,6 +106,22 @@ export function each<T>(f: (v: T) => void, arr: T[]): void {
 
 export function concat<A>(...arrs: A[][]): A[] {
   return ([] as A[]).concat(...arrs)
+}
+
+export function makeCompare<A>(comparef: Compare<A>, shorterFirst = true) {
+  return function (a: A[], b: A[]) {
+    if (a.length < b.length) {
+      return -1 * (shorterFirst ? 1 : -1)
+    } else if (a.length > b.length) {
+      return 1 * (shorterFirst ? 1 : -1)
+    }
+    for (let i = 0; i < a.length; i++) {
+      const ord = comparef(a[i], b[i])
+      if (ord !== 0)
+        return ord
+    }
+    return 0
+  }
 }
 
 export function sort<A>(compare: (a: A, b: A) => Ordering, arr: A[]): A[] {

@@ -17,7 +17,7 @@ import { View } from 'tempo-core/lib/view'
 import { processAttribute, processEvent, processStyle, domChildToTemplate, removeNode } from './utils/dom'
 import { Attributes, Attribute, AttributeValue, EventHandler, StyleAttribute } from './value'
 import { map } from 'tempo-std/lib/arrays'
-import { attributeNameMap } from './dom_attributes_mapper'
+import { attributeNameMap } from './utils/attributes_mapper'
 
 const applyChange = <State, Action, El extends Element, T>(
   change: (state: State, el: El, ctx: DOMContext<Action>, value: T | undefined) => T | undefined,

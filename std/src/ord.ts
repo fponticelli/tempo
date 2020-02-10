@@ -4,13 +4,16 @@ export enum Ordering {
   GT = 1
 }
 
+export type CompareOrd<T> = (a: T, b: T) => Ordering
+export type Compare<T> = (a: T, b: T) => number
+
 export class Ord<T> {
   static fromNumberComparison<T>(compare: (a: T, b: T) => number) {
     return new Ord<T>(fromNumberComparison(compare))
   }
 
   constructor(
-    readonly compare: (a: T, b: T) => Ordering
+    readonly compare: CompareOrd<T>
   ) {}
 
   max(a: T, b: T) {

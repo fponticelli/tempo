@@ -13,7 +13,7 @@ limitations under the License.
 
 import { DerivedValue } from 'tempo-core/lib/value'
 import { Attribute, EventHandler, StyleAttribute } from '../value'
-import { htmlAttributeMap as attributeMap } from '../dom_attributes_mapper'
+import { htmlAttributeMap as attributeMap } from './attributes_mapper'
 import { setAttribute, setOneStyle } from './set_attribute'
 import { DOMChild, DOMTemplate } from '../template'
 import { text } from '../text'

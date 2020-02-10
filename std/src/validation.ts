@@ -11,7 +11,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { Fun2, Fun3, Fun4, Fun5, Fun6 } from './types'
+import { Fun2, Fun3, Fun4, Fun5, Fun6 } from './types/functions'
 import * as Res from './result'
 import { Nel, ofValue, concat, map } from './nel'
 

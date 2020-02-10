@@ -11,7 +11,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { map, head, tail, numbersRange, fill } from '../src/arrays'
+import { map, head, tail, numbersRange, fill, makeCompare } from '../src/arrays'
+import { compare as compareString } from '../src/strings'
 
 describe('arrays:map', () => {
   it('should work with empty arrays', () => {
@@ -55,5 +56,41 @@ describe('arrays', () => {
 
   it('fill', () => {
     expect(fill(4, 'x')).toEqual(['x', 'x', 'x', 'x'])
+  })
+})
+
+describe('arrays:makeCompare', () => {
+  it('should compare arrays of the same length', () => {
+    const tests = [
+      { a: ['a'], b: ['b'], r: -1 },
+      { a: ['b'], b: ['a'], r: 1 },
+      { a: ['a'], b: ['a'], r: 0 },
+      { a: ['a', 'b'], b: ['a', 'b'], r: 0 }
+    ]
+
+    let compare = makeCompare(compareString, true)
+    tests.forEach(test => {
+      expect(compare(test.a, test.b)).toBe(test.r)
+    })
+  })
+
+  it('should compare arrays with different lengths', () => {
+    const tests = [
+      { a: [], b: ['a'], r: -1 },
+      { a: ['a'], b: [], r: 1 },
+      { a: ['a'], b: ['a', 'b'], r: -1 },
+      { a: ['b'], b: ['a', 'b'], r: -1 },
+      { a: ['b', 'b'], b: ['a', 'b', 'c'], r: -1 }
+    ]
+
+    let compare = makeCompare(compareString, true)
+    tests.forEach(test => {
+      expect(compare(test.a, test.b)).toBe(test.r)
+    })
+
+    compare = makeCompare(compareString, false)
+    tests.forEach(test => {
+      expect(compare(test.a, test.b)).toBe(test.r * -1)
+    })
   })
 })

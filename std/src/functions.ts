@@ -1,4 +1,4 @@
-import { Fun1, FirstArgument } from './types'
+import { Fun1, FirstArgument } from './types/functions'
 
 export function compose<A>(): (a: A) => A
 export function compose<A, B>(f1: (a: A) => B): (a: A) => B

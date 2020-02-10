@@ -14,7 +14,6 @@ import {
   isApiProjectRoute
 } from '../route'
 import { some, none } from 'tempo-std/lib/option'
-import { compareCaseInsensitive } from 'tempo-std/lib/strings'
 import { keys } from 'tempo-std/lib/objects'
 import { SectionRef, ProjectRef } from '../toc'
 import { DOMTemplate } from 'tempo-dom/lib/template'
@@ -129,43 +128,13 @@ const project = div<[ProjectRef, Sidebar, number], Action>(
         >(
           {
             map: state => ({
-              apis: state.apis
-                .filter(a => a.type === 'module')
-                .sort((a, b) => compareCaseInsensitive(a.title, b.title)),
+              apis: state.apis,
               project: state.project,
               route: state.route
             })
           },
           when(
             { condition: state => state.apis.length > 0 },
-            p({ attrs: { class: 'title is-6 is-marginless' } }, 'modules'),
-            ul(
-              { attrs: { class: 'links-list' } },
-              iterate<
-                { apis: ApiRef[]; project: ProjectRef; route: Route },
-                ApiRef[],
-                Action
-              >({ getArray: state => state.apis }, li({}, api))
-            )
-          )
-        ),
-        mapState<
-          { apis: ApiRef[]; project: ProjectRef; route: Route },
-          { apis: ApiRef[]; project: ProjectRef; route: Route },
-          Action
-        >(
-          {
-            map: state => ({
-              apis: state.apis
-                .filter(a => a.type !== 'module')
-                .sort((a, b) => compareCaseInsensitive(a.title, b.title)),
-              project: state.project,
-              route: state.route
-            })
-          },
-          when(
-            { condition: state => state.apis.length > 0 },
-            p({ attrs: { class: 'title is-6 is-marginless' } }, 'types'),
             ul(
               { attrs: { class: 'links-list' } },
               iterate<

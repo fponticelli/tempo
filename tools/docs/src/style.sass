@@ -48,19 +48,31 @@ main.container
 .tile-width
   min-width: 300px
 
+// ul.links-list
+//   li
+//     display: inline-block
+//     padding: 0 0.2em 0 0
+//     &::after
+//       color: $grey-light
+//       content: ', '
+//     &:nth-last-child(2)
+//       &::after
+//         content: ' and '
+//     &:last-child
+//       &::after
+//         content: ''
+
 ul.links-list
+  margin: 0
+  padding: 0
+  column-count: 2
   li
-    display: inline-block
-    padding: 0 0.2em 0 0
-    &::after
-      color: $grey-light
-      content: ', '
-    &:nth-last-child(2)
-      &::after
-        content: ' and '
-    &:last-child
-      &::after
-        content: ''
+    padding: 0
+    a, span
+      display: block
+      max-width: 100%
+      overflow: hidden
+      text-overflow: ellipsis
 
 .api-box
   margin: 0.6em 0
