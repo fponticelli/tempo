@@ -57,39 +57,43 @@
   <h3 class="is-family-monospace has-text-grey-dark" id="Observable">
     Observable
   </h3>
-  <pre>
-interface Observable&lt;T extends any[]&gt; {
-  on(listener: Listener&lt;T&gt;): void
-  off(listener: Listener&lt;T&gt;): boolean
-  once(listener: Listener&lt;T&gt;): void
-}</pre
-  >
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">type</span> Emitter1<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span> <span class="token operator">=</span> Emitter<span class="token operator">&lt;</span><span class="token punctuation">[</span><span class="token constant">T</span><span class="token punctuation">]</span><span class="token operator">&gt;</span></div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="Observable1">
     Observable1
   </h3>
-  <pre>type Observable1&lt;T&gt; = Observable&lt;[T]&gt;</pre>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">type</span> Observable1<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span> <span class="token operator">=</span> Observable<span class="token operator">&lt;</span><span class="token punctuation">[</span><span class="token constant">T</span><span class="token punctuation">]</span><span class="token operator">&gt;</span></div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="Observable2">
     Observable2
   </h3>
-  <pre>type Observable2&lt;A, B&gt; = Observable&lt;[A, B]&gt;</pre>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">type</span> Observable2<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token operator">&gt;</span> <span class="token operator">=</span> Observable<span class="token operator">&lt;</span><span class="token punctuation">[</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">]</span><span class="token operator">&gt;</span></div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="Observable3">
     Observable3
   </h3>
-  <pre>type Observable3&lt;A, B, C&gt; = Observable&lt;[A, B, C]&gt;</pre>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">type</span> Observable3<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token operator">&gt;</span> <span class="token operator">=</span> Observable<span class="token operator">&lt;</span><span class="token punctuation">[</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">]</span><span class="token operator">&gt;</span></div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="Observable4">
     Observable4
   </h3>
-  <pre>type Observable4&lt;A, B, C, D&gt; = Observable&lt;[A, B, C, D]&gt;</pre>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">type</span> Observable4<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token operator">&gt;</span> <span class="token operator">=</span> Observable<span class="token operator">&lt;</span><span class="token punctuation">[</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">]</span><span class="token operator">&gt;</span></div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="Observable5">
     Observable5
   </h3>
-  <pre>
-type Observable5&lt;A, B, C, D, E&gt; = Observable&lt;[A, B, C, D, E]&gt;</pre
-  >
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">type</span> Observable5<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span> <span class="token operator">=</span> Observable<span class="token operator">&lt;</span><span class="token punctuation">[</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">]</span><span class="token operator">&gt;</span></div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="Observable6">
     Observable6
   </h3>
-  <pre>
-type Observable6&lt;A, B, C, D, E, F&gt; = Observable&lt;[A, B, C, D, E, F]&gt;</pre
-  >
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">type</span> Observable6<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token operator">&gt;</span> <span class="token operator">=</span> Observable<span class="token operator">&lt;</span><span class="token punctuation">[</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token punctuation">]</span><span class="token operator">&gt;</span></div></pre>
 </article>

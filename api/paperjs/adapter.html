@@ -5,20 +5,20 @@
   <h3 class="is-family-monospace has-text-grey-dark" id="PropagateArg">
     PropagateArg
   </h3>
-  <pre>
-interface PropagateArg&lt;
-  OuterState,
-  InnerState,
-  OuterAction,
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">interface</span> <span class="token class-name">PropagateArg</span><span class="token operator">&lt;</span>
+  OuterState<span class="token punctuation">,</span>
+  InnerState<span class="token punctuation">,</span>
+  OuterAction<span class="token punctuation">,</span>
   InnerAction
-&gt; {
-  action: InnerAction
-  innerState: InnerState
-  outerState: OuterState
-  dispatchInner: (action: InnerAction) =&gt; void
-  dispatchOuter: (action: OuterAction) =&gt; void
-}</pre
-  >
+<span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+  action<span class="token operator">:</span> InnerAction
+  innerState<span class="token operator">:</span> InnerState
+  outerState<span class="token operator">:</span> OuterState
+  <span class="token function-variable function">dispatchInner</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">action<span class="token operator">:</span> InnerAction</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+  <span class="token function-variable function">dispatchOuter</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">action<span class="token operator">:</span> OuterAction</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+<span class="token punctuation">}</span></div></pre>
   <h2>classes</h2>
   <h3 class="is-family-monospace has-text-grey-dark" id="PaperAdapterTemplate">
     PaperAdapterTemplate

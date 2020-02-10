@@ -5,38 +5,38 @@
   <h3 class="is-family-monospace has-text-grey-dark" id="TempoAttributes">
     TempoAttributes
   </h3>
-  <pre>
-interface TempoAttributes&lt;State, Action, Query, El, T&gt; {
-  readonly afterrender?:
-    | undefined
-    | ((state: State, el: El, ctx: PaperContext&lt;Action&gt;) =&gt; T | undefined)
-  readonly beforechange?:
-    | undefined
-    | ((
-        state: State,
-        el: El,
-        ctx: PaperContext&lt;Action&gt;,
-        value: T | undefined
-      ) =&gt; T | undefined)
-  readonly afterchange?:
-    | undefined
-    | ((
-        state: State,
-        el: El,
-        ctx: PaperContext&lt;Action&gt;,
-        value: T | undefined
-      ) =&gt; T | undefined)
-  readonly beforedestroy?:
-    | undefined
-    | ((el: El, ctx: PaperContext&lt;Action&gt;, value: T | undefined) =&gt; void)
-  readonly request?:
-    | undefined
-    | ((
-        query: Query,
-        el: El,
-        ctx: PaperContext&lt;Action&gt;,
-        value: T | undefined
-      ) =&gt; void)
-}</pre
-  >
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">interface</span> <span class="token class-name">TempoAttributes</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> El<span class="token punctuation">,</span> <span class="token constant">T</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">readonly</span> afterrender<span class="token operator">?</span><span class="token operator">:</span>
+    <span class="token operator">|</span> <span class="token keyword">undefined</span>
+    <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">state<span class="token operator">:</span> State<span class="token punctuation">,</span> el<span class="token operator">:</span> El<span class="token punctuation">,</span> ctx<span class="token operator">:</span> PaperContext<span class="token operator">&lt;</span>Action<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">T</span> <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">)</span>
+  <span class="token keyword">readonly</span> beforechange<span class="token operator">?</span><span class="token operator">:</span>
+    <span class="token operator">|</span> <span class="token keyword">undefined</span>
+    <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>
+        <span class="token parameter">state<span class="token operator">:</span> State<span class="token punctuation">,</span>
+        el<span class="token operator">:</span> El<span class="token punctuation">,</span>
+        ctx<span class="token operator">:</span> PaperContext<span class="token operator">&lt;</span>Action<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+        value<span class="token operator">:</span> <span class="token constant">T</span> <span class="token operator">|</span> <span class="token keyword">undefined</span></span>
+      <span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">T</span> <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">)</span>
+  <span class="token keyword">readonly</span> afterchange<span class="token operator">?</span><span class="token operator">:</span>
+    <span class="token operator">|</span> <span class="token keyword">undefined</span>
+    <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>
+        <span class="token parameter">state<span class="token operator">:</span> State<span class="token punctuation">,</span>
+        el<span class="token operator">:</span> El<span class="token punctuation">,</span>
+        ctx<span class="token operator">:</span> PaperContext<span class="token operator">&lt;</span>Action<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+        value<span class="token operator">:</span> <span class="token constant">T</span> <span class="token operator">|</span> <span class="token keyword">undefined</span></span>
+      <span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">T</span> <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">)</span>
+  <span class="token keyword">readonly</span> beforedestroy<span class="token operator">?</span><span class="token operator">:</span>
+    <span class="token operator">|</span> <span class="token keyword">undefined</span>
+    <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">el<span class="token operator">:</span> El<span class="token punctuation">,</span> ctx<span class="token operator">:</span> PaperContext<span class="token operator">&lt;</span>Action<span class="token operator">&gt;</span><span class="token punctuation">,</span> value<span class="token operator">:</span> <span class="token constant">T</span> <span class="token operator">|</span> <span class="token keyword">undefined</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span><span class="token punctuation">)</span>
+  <span class="token keyword">readonly</span> request<span class="token operator">?</span><span class="token operator">:</span>
+    <span class="token operator">|</span> <span class="token keyword">undefined</span>
+    <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>
+        <span class="token parameter">query<span class="token operator">:</span> Query<span class="token punctuation">,</span>
+        el<span class="token operator">:</span> El<span class="token punctuation">,</span>
+        ctx<span class="token operator">:</span> PaperContext<span class="token operator">&lt;</span>Action<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+        value<span class="token operator">:</span> <span class="token constant">T</span> <span class="token operator">|</span> <span class="token keyword">undefined</span></span>
+      <span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span></div></pre>
 </article>

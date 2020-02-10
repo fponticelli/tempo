@@ -5,20 +5,20 @@
   <h3 class="is-family-monospace has-text-grey-dark" id="PaperAttribute">
     PaperAttribute
   </h3>
-  <pre>
-type PaperAttribute&lt;State, Value&gt; =
-  | DerivedOrLiteralValue&lt;State, Value | undefined&gt;
-  | undefined</pre
-  >
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">type</span> PaperAttribute<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Value<span class="token operator">&gt;</span> <span class="token operator">=</span>
+  <span class="token operator">|</span> DerivedOrLiteralValue<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Value <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token operator">&gt;</span>
+  <span class="token operator">|</span> <span class="token keyword">undefined</span></div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="PaperEventHandler">
     PaperEventHandler
   </h3>
-  <pre>
-type PaperEventHandler&lt;State, Action, Event, Target&gt; = (
-  state: State,
-  event: Event,
-  target: Target,
-  project: Project
-) =&gt; Action | undefined</pre
-  >
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">type</span> PaperEventHandler<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Event<span class="token punctuation">,</span> Target<span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">(</span>
+  <span class="token parameter">state<span class="token operator">:</span> State<span class="token punctuation">,</span>
+  event<span class="token operator">:</span> Event<span class="token punctuation">,</span>
+  target<span class="token operator">:</span> Target<span class="token punctuation">,</span>
+  project<span class="token operator">:</span> Project</span>
+<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Action <span class="token operator">|</span> <span class="token keyword">undefined</span></div></pre>
 </article>

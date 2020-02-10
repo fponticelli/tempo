@@ -156,130 +156,162 @@
   <h3 class="is-family-monospace has-text-grey-dark" id="MediaQueries">
     MediaQueries
   </h3>
-  <pre>
-interface MediaQueries&lt;State&gt; {
-  [importRule]?: DerivedOrLiteralValue&lt;State, string&gt;[]
-  [charset]?: DerivedOrLiteralValue&lt;State, string&gt;[]
-  [namespace]?: DerivedOrLiteralValue&lt;State, string&gt;[]
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">interface</span> <span class="token class-name">MediaQueries</span><span class="token operator">&lt;</span>State<span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+  <span class="token punctuation">[</span>importRule<span class="token punctuation">]</span><span class="token operator">?</span><span class="token operator">:</span> DerivedOrLiteralValue<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> <span class="token builtin">string</span><span class="token operator">&gt;</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
+  <span class="token punctuation">[</span>charset<span class="token punctuation">]</span><span class="token operator">?</span><span class="token operator">:</span> DerivedOrLiteralValue<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> <span class="token builtin">string</span><span class="token operator">&gt;</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
+  <span class="token punctuation">[</span><span class="token keyword">namespace</span><span class="token punctuation">]</span><span class="token operator">?</span><span class="token operator">:</span> DerivedOrLiteralValue<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> <span class="token builtin">string</span><span class="token operator">&gt;</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
 
-  [media]?: MediaQuery&lt;State&gt;
-  [supports]?: MediaQuery&lt;State&gt;
-  [page]?: MediaQuery&lt;State&gt;
-  [fontFace]?: MediaQuery&lt;State&gt;
-  [keyframes]?: MediaQuery&lt;State&gt;
-  [counterStyle]?: MediaQuery&lt;State&gt;
-  [fontFeatureValues]?: MediaQuery&lt;State&gt;
-  [swash]?: MediaQuery&lt;State&gt;
-  [ornaments]?: MediaQuery&lt;State&gt;
-  [annotation]?: MediaQuery&lt;State&gt;
-  [stylistic]?: MediaQuery&lt;State&gt;
-  [styleset]?: MediaQuery&lt;State&gt;
-  [characterVariant]?: MediaQuery&lt;State&gt;
-}</pre
-  >
+  <span class="token punctuation">[</span>media<span class="token punctuation">]</span><span class="token operator">?</span><span class="token operator">:</span> MediaQuery<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span>
+  <span class="token punctuation">[</span>supports<span class="token punctuation">]</span><span class="token operator">?</span><span class="token operator">:</span> MediaQuery<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span>
+  <span class="token punctuation">[</span>page<span class="token punctuation">]</span><span class="token operator">?</span><span class="token operator">:</span> MediaQuery<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span>
+  <span class="token punctuation">[</span>fontFace<span class="token punctuation">]</span><span class="token operator">?</span><span class="token operator">:</span> MediaQuery<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span>
+  <span class="token punctuation">[</span>keyframes<span class="token punctuation">]</span><span class="token operator">?</span><span class="token operator">:</span> MediaQuery<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span>
+  <span class="token punctuation">[</span>counterStyle<span class="token punctuation">]</span><span class="token operator">?</span><span class="token operator">:</span> MediaQuery<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span>
+  <span class="token punctuation">[</span>fontFeatureValues<span class="token punctuation">]</span><span class="token operator">?</span><span class="token operator">:</span> MediaQuery<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span>
+  <span class="token punctuation">[</span>swash<span class="token punctuation">]</span><span class="token operator">?</span><span class="token operator">:</span> MediaQuery<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span>
+  <span class="token punctuation">[</span>ornaments<span class="token punctuation">]</span><span class="token operator">?</span><span class="token operator">:</span> MediaQuery<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span>
+  <span class="token punctuation">[</span>annotation<span class="token punctuation">]</span><span class="token operator">?</span><span class="token operator">:</span> MediaQuery<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span>
+  <span class="token punctuation">[</span>stylistic<span class="token punctuation">]</span><span class="token operator">?</span><span class="token operator">:</span> MediaQuery<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span>
+  <span class="token punctuation">[</span>styleset<span class="token punctuation">]</span><span class="token operator">?</span><span class="token operator">:</span> MediaQuery<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span>
+  <span class="token punctuation">[</span>characterVariant<span class="token punctuation">]</span><span class="token operator">?</span><span class="token operator">:</span> MediaQuery<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span>
+<span class="token punctuation">}</span></div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="MediaQuery">
     MediaQuery
   </h3>
-  <pre>
-interface MediaQuery&lt;State&gt; {
-  [query: string]: StyleDefinitions&lt;State&gt;
-}</pre
-  >
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">interface</span> <span class="token class-name">MediaQuery</span><span class="token operator">&lt;</span>State<span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+  <span class="token punctuation">[</span>query<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">]</span><span class="token operator">:</span> StyleDefinitions<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span>
+<span class="token punctuation">}</span></div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="StyleDeclarations">
     StyleDeclarations
   </h3>
-  <pre>
-type StyleDeclarations&lt;State&gt; = {
-  [K in keyof CSSStyleDeclaration]?: K extends number ? never : Attribute&lt;State, CSSStyleDeclaration[K]&gt;
-}</pre
-  >
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">type</span> StyleDeclarations<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token punctuation">[</span><span class="token constant">K</span> <span class="token keyword">in</span> <span class="token keyword">keyof</span> CSSStyleDeclaration<span class="token punctuation">]</span><span class="token operator">?</span><span class="token operator">:</span> <span class="token constant">K</span> <span class="token keyword">extends</span> <span class="token class-name">number</span> <span class="token operator">?</span> <span class="token builtin">never</span> <span class="token operator">:</span> Attribute<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> CSSStyleDeclaration<span class="token punctuation">[</span><span class="token constant">K</span><span class="token punctuation">]</span><span class="token operator">&gt;</span>
+<span class="token punctuation">}</span></div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="StyleDefinitions">
     StyleDefinitions
   </h3>
-  <pre>
-type StyleDefinitions&lt;State&gt; =
-  &amp; Record&lt;string, StyleDeclarations&lt;State&gt;&gt;
-  &amp; MediaQueries&lt;State&gt;</pre
-  >
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">type</span> StyleDefinitions<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span> <span class="token operator">=</span>
+  <span class="token operator">&amp;</span> Record<span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token punctuation">,</span> StyleDeclarations<span class="token operator">&lt;</span>State<span class="token operator">&gt;&gt;</span>
+  <span class="token operator">&amp;</span> MediaQueries<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span></div></pre>
   <h2>values</h2>
   <h3 class="is-family-monospace has-text-grey-dark" id="annotation">
     annotation
   </h3>
-  <pre>const annotation: typeof annotation</pre>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">const</span> annotation<span class="token operator">:</span> <span class="token keyword">typeof</span> annotation</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="atRules">atRules</h3>
-  <pre>
-const atRules: (
-  typeof importRule |
-  typeof charset |
-  typeof namespace
-)[]</pre
-  >
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">const</span> atRules<span class="token operator">:</span> <span class="token punctuation">(</span>
+  <span class="token keyword">typeof</span> importRule <span class="token operator">|</span>
+  <span class="token keyword">typeof</span> charset <span class="token operator">|</span>
+  <span class="token keyword">typeof</span> <span class="token keyword">namespace</span>
+<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token punctuation">]</span></div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="characterVariant">
     characterVariant
   </h3>
-  <pre>const characterVariant: typeof characterVariant</pre>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">const</span> characterVariant<span class="token operator">:</span> <span class="token keyword">typeof</span> characterVariant</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="charset">charset</h3>
-  <pre>const charset: typeof charset</pre>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">const</span> charset<span class="token operator">:</span> <span class="token keyword">typeof</span> charset</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="counterStyle">
     counterStyle
   </h3>
-  <pre>const counterStyle: typeof counterStyle</pre>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">const</span> counterStyle<span class="token operator">:</span> <span class="token keyword">typeof</span> counterStyle</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="fontFace">fontFace</h3>
-  <pre>const fontFace: typeof fontFace</pre>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">const</span> fontFace<span class="token operator">:</span> <span class="token keyword">typeof</span> fontFace</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="fontFeatureValues">
     fontFeatureValues
   </h3>
-  <pre>const fontFeatureValues: typeof fontFeatureValues</pre>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">const</span> fontFeatureValues<span class="token operator">:</span> <span class="token keyword">typeof</span> fontFeatureValues</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="importRule">
     importRule
   </h3>
-  <pre>const importRule: typeof importRule</pre>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">const</span> importRule<span class="token operator">:</span> <span class="token keyword">typeof</span> importRule</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="keyframes">
     keyframes
   </h3>
-  <pre>const keyframes: typeof keyframes</pre>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">const</span> keyframes<span class="token operator">:</span> <span class="token keyword">typeof</span> keyframes</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="media">media</h3>
-  <pre>const media: typeof media</pre>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">const</span> media<span class="token operator">:</span> <span class="token keyword">typeof</span> media</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="namespace">
     namespace
   </h3>
-  <pre>const namespace: typeof namespace</pre>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">const</span> <span class="token keyword">namespace</span><span class="token operator">:</span> <span class="token keyword">typeof</span> <span class="token keyword">namespace</span></div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="nestedAtRules">
     nestedAtRules
   </h3>
-  <pre>
-const nestedAtRules: (
-  typeof media |
-  typeof supports |
-  typeof page |
-  typeof fontFace |
-  typeof keyframes |
-  typeof counterStyle |
-  typeof fontFeatureValues |
-  typeof swash |
-  typeof ornaments |
-  typeof annotation |
-  typeof stylistic |
-  typeof styleset |
-  typeof characterVariant
-)[]</pre
-  >
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">const</span> nestedAtRules<span class="token operator">:</span> <span class="token punctuation">(</span>
+  <span class="token keyword">typeof</span> media <span class="token operator">|</span>
+  <span class="token keyword">typeof</span> supports <span class="token operator">|</span>
+  <span class="token keyword">typeof</span> page <span class="token operator">|</span>
+  <span class="token keyword">typeof</span> fontFace <span class="token operator">|</span>
+  <span class="token keyword">typeof</span> keyframes <span class="token operator">|</span>
+  <span class="token keyword">typeof</span> counterStyle <span class="token operator">|</span>
+  <span class="token keyword">typeof</span> fontFeatureValues <span class="token operator">|</span>
+  <span class="token keyword">typeof</span> swash <span class="token operator">|</span>
+  <span class="token keyword">typeof</span> ornaments <span class="token operator">|</span>
+  <span class="token keyword">typeof</span> annotation <span class="token operator">|</span>
+  <span class="token keyword">typeof</span> stylistic <span class="token operator">|</span>
+  <span class="token keyword">typeof</span> styleset <span class="token operator">|</span>
+  <span class="token keyword">typeof</span> characterVariant
+<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token punctuation">]</span></div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="ornaments">
     ornaments
   </h3>
-  <pre>const ornaments: typeof ornaments</pre>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">const</span> ornaments<span class="token operator">:</span> <span class="token keyword">typeof</span> ornaments</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="page">page</h3>
-  <pre>const page: typeof page</pre>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">const</span> page<span class="token operator">:</span> <span class="token keyword">typeof</span> page</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="styleset">styleset</h3>
-  <pre>const styleset: typeof styleset</pre>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">const</span> styleset<span class="token operator">:</span> <span class="token keyword">typeof</span> styleset</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="stylistic">
     stylistic
   </h3>
-  <pre>const stylistic: typeof stylistic</pre>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">const</span> stylistic<span class="token operator">:</span> <span class="token keyword">typeof</span> stylistic</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="supports">supports</h3>
-  <pre>const supports: typeof supports</pre>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">const</span> supports<span class="token operator">:</span> <span class="token keyword">typeof</span> supports</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="swash">swash</h3>
-  <pre>const swash: typeof swash</pre>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">const</span> swash<span class="token operator">:</span> <span class="token keyword">typeof</span> swash</div></pre>
   <h2>classes</h2>
   <h3 class="is-family-monospace has-text-grey-dark" id="ScopedStyles">
     ScopedStyles

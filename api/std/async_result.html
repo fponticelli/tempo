@@ -204,187 +204,188 @@
   <h3 class="is-family-monospace has-text-grey-dark" id="AsyncResult">
     AsyncResult
   </h3>
-  <pre>
-type AsyncResult&lt;T, E, P = unknown&gt; = Async&lt;Result&lt;T, E&gt;, P&gt;</pre
-  >
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">type</span> AsyncResult<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">P</span> <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span> <span class="token operator">=</span> Async<span class="token operator">&lt;</span>Result<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> <span class="token constant">P</span><span class="token operator">&gt;</span></div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="T">T</h3>
-  <pre>type T&lt;V, E&gt; = AsyncResult&lt;V, E&gt;</pre>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">function</span> flatMapN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  f<span class="token operator">:</span> Fun2<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> AsyncResult<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token punctuation">,</span> Prog<span class="token operator">&gt;&gt;</span><span class="token punctuation">,</span>
+  a<span class="token operator">:</span> AsyncResult<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Err<span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">,</span> b<span class="token operator">:</span> AsyncResult<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> AsyncResult<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span></div></pre>
   <h2>functions</h2>
   <h3 class="is-family-monospace has-text-grey-dark" id="all">all</h3>
-  <pre>
-function all&lt;T, P&gt;(f: (v: T) =&gt; boolean, async: AsyncResult&lt;T, P&gt;): boolean</pre
-  >
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">function</span> all<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token function-variable function">predicate</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">v<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">boolean</span><span class="token punctuation">,</span> arr<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span></div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="any">any</h3>
-  <pre>
-function any&lt;T, P&gt;(f: (v: T) =&gt; boolean, async: AsyncResult&lt;T, P&gt;): boolean</pre
-  >
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">function</span> <span class="token builtin">any</span><span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token function-variable function">predicate</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">v<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">boolean</span><span class="token punctuation">,</span> arr<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span></div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="cata">cata</h3>
-  <pre>
-function cata&lt;A, B, Prog&gt;(f: (a: A) =&gt; B, async: AsyncResult&lt;A, Prog&gt;, ifNotOutcome: B): B</pre
-  >
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">function</span> concat<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token operator">...</span>arrs<span class="token operator">:</span> <span class="token constant">A</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token constant">A</span><span class="token punctuation">[</span><span class="token punctuation">]</span></div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="cataLazy">cataLazy</h3>
-  <pre>
-function cataLazy&lt;A, B, Prog&gt;(f: (a: A) =&gt; B, async: AsyncResult&lt;A, Prog&gt;, ifNotOutcome: () =&gt; B): B</pre
-  >
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">function</span> each<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">v<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span><span class="token punctuation">,</span> arr<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">void</span></div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="each">each</h3>
-  <pre>
-function each&lt;T, P&gt;(f: (v: T) =&gt; void, async: AsyncResult&lt;T, P&gt;): void</pre
-  >
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">function</span> equals<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token function-variable function">predicate</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">,</span> b<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">boolean</span><span class="token punctuation">,</span> a<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> b<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span></div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="failure">failure</h3>
-  <pre>
-function failure&lt;T, E, P = unknown&gt;(error: E): AsyncResult&lt;T, E, P&gt;</pre
-  >
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">function</span> fill<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>length<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">,</span> value<span class="token operator">:</span> <span class="token constant">A</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">[</span><span class="token punctuation">]</span></div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="firstSuccess">
     firstSuccess
   </h3>
-  <pre>
-function firstSuccess&lt;A, Prog&gt;(...args: AsyncResult&lt;A, Prog&gt;[]): AsyncResult&lt;A, Prog&gt;</pre
-  >
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">function</span> filter<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token function-variable function">predicate</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">v<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">boolean</span><span class="token punctuation">,</span> arr<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token punctuation">]</span></div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="flatMap">flatMap</h3>
-  <pre>
-function flatMap&lt;A, B, Err, Prog&gt;(
-  f: (a: A) =&gt; AsyncResult&lt;B, Err, Prog&gt;,
-  async: AsyncResult&lt;A, Err, Prog&gt;): AsyncResult&lt;B, Err, Prog&gt;</pre
-  >
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">function</span> flatMap<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token constant">A</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">B</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> arr<span class="token operator">:</span> <span class="token constant">A</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token constant">B</span><span class="token punctuation">[</span><span class="token punctuation">]</span></div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="flatMapN">flatMapN</h3>
-  <pre>
-function flatMapN&lt;A, B, C, Err, Prog&gt;(
-  f: Fun2&lt;A, B, AsyncResult&lt;C, Err, Prog&gt;&gt;,
-  a: AsyncResult&lt;A, Err, Prog&gt;, b: AsyncResult&lt;B, Err, Prog&gt;): AsyncResult&lt;C, Err, Prog&gt;</pre
-  >
-  <pre>
-function flatMapN&lt;A, B, C, D, Err, Prog&gt;(
-  f: Fun3&lt;A, B, C, AsyncResult&lt;D, Err, Prog&gt;&gt;,
-  a: AsyncResult&lt;A, Err, Prog&gt;, b: AsyncResult&lt;B, Err, Prog&gt;, c: AsyncResult&lt;C, Err, Prog&gt;): AsyncResult&lt;D, Err, Prog&gt;</pre
-  >
-  <pre>
-function flatMapN&lt;A, B, C, D, E, Err, Prog&gt;(
-  f: Fun4&lt;A, B, C, D, AsyncResult&lt;E, Err, Prog&gt;&gt;,
-  a: AsyncResult&lt;A, Err, Prog&gt;, b: AsyncResult&lt;B, Err, Prog&gt;, c: AsyncResult&lt;C, Err, Prog&gt;,
-  d: AsyncResult&lt;D, Err, Prog&gt;): AsyncResult&lt;E, Err, Prog&gt;</pre
-  >
-  <pre>
-function flatMapN&lt;A, B, C, D, E, F, Err, Prog&gt;(
-  f: Fun5&lt;A, B, C, D, E, AsyncResult&lt;F, Err, Prog&gt;&gt;,
-  a: AsyncResult&lt;A, Err, Prog&gt;, b: AsyncResult&lt;B, Err, Prog&gt;, c: AsyncResult&lt;C, Err, Prog&gt;,
-  d: AsyncResult&lt;D, Err, Prog&gt;, e: AsyncResult&lt;E, Err, Prog&gt;): AsyncResult&lt;F, Err, Prog&gt;</pre
-  >
-  <pre>
-function flatMapN&lt;A, B, C, D, E, F, G, Err, Prog&gt;(
-  f: Fun6&lt;A, B, C, D, E, F, AsyncResult&lt;G, Err, Prog&gt;&gt;,
-  a: AsyncResult&lt;A, Err, Prog&gt;, b: AsyncResult&lt;B, Err, Prog&gt;, c: AsyncResult&lt;C, Err, Prog&gt;,
-  d: AsyncResult&lt;D, Err, Prog&gt;, e: AsyncResult&lt;E, Err, Prog&gt;, g: AsyncResult&lt;F, Err, Prog&gt;): AsyncResult&lt;G, Err, Prog&gt;</pre
-  >
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">function</span> flatten<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>arr<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token punctuation">]</span></div></pre>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">function</span> flatMapN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> Err<span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  f<span class="token operator">:</span> Fun3<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> AsyncResult<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token punctuation">,</span> Err<span class="token punctuation">,</span> Prog<span class="token operator">&gt;&gt;</span><span class="token punctuation">,</span>
+  a<span class="token operator">:</span> AsyncResult<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Err<span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">,</span> b<span class="token operator">:</span> AsyncResult<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">,</span> c<span class="token operator">:</span> AsyncResult<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> AsyncResult<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token punctuation">,</span> Err<span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span></div></pre>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">function</span> flatMapN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> Err<span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  f<span class="token operator">:</span> Fun4<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> AsyncResult<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token punctuation">,</span> Err<span class="token punctuation">,</span> Prog<span class="token operator">&gt;&gt;</span><span class="token punctuation">,</span>
+  a<span class="token operator">:</span> AsyncResult<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Err<span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">,</span> b<span class="token operator">:</span> AsyncResult<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">,</span> c<span class="token operator">:</span> AsyncResult<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  d<span class="token operator">:</span> AsyncResult<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token punctuation">,</span> Err<span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> AsyncResult<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token punctuation">,</span> Err<span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span></div></pre>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">function</span> flatMapN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token punctuation">,</span> Err<span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  f<span class="token operator">:</span> Fun5<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> AsyncResult<span class="token operator">&lt;</span><span class="token constant">F</span><span class="token punctuation">,</span> Err<span class="token punctuation">,</span> Prog<span class="token operator">&gt;&gt;</span><span class="token punctuation">,</span>
+  a<span class="token operator">:</span> AsyncResult<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Err<span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">,</span> b<span class="token operator">:</span> AsyncResult<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">,</span> c<span class="token operator">:</span> AsyncResult<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  d<span class="token operator">:</span> AsyncResult<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token punctuation">,</span> Err<span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">,</span> e<span class="token operator">:</span> AsyncResult<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token punctuation">,</span> Err<span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> AsyncResult<span class="token operator">&lt;</span><span class="token constant">F</span><span class="token punctuation">,</span> Err<span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span></div></pre>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">function</span> isSuccess<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">P</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token keyword">async</span><span class="token operator">:</span> AsyncResult<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">P</span><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">async</span> <span class="token keyword">is</span> Outcome<span class="token operator">&lt;</span>Success<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;&gt;</span></div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="flatten">flatten</h3>
-  <pre>
-function flatten&lt;T, E, P&gt;(async: AsyncResult&lt;AsyncResult&lt;T, E, P&gt;, E, P&gt;): AsyncResult&lt;T, E, P&gt;</pre
-  >
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">function</span> foldLeft<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">acc<span class="token operator">:</span> <span class="token constant">B</span><span class="token punctuation">,</span> curr<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">B</span><span class="token punctuation">,</span> arr<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> b<span class="token operator">:</span> <span class="token constant">B</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token constant">B</span></div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="foldLeft">foldLeft</h3>
-  <pre>
-function foldLeft&lt;T, B, Prog&gt;(f: (acc: B, curr: T) =&gt; B, async: AsyncResult&lt;T, Prog&gt;, b: B): B</pre
-  >
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">function</span> hasValues<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>arr<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">:</span> arr <span class="token keyword">is</span> <span class="token punctuation">[</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token operator">...</span><span class="token constant">T</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">]</span></div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="forEach">forEach</h3>
-  <pre>
-function forEach&lt;A, Err&gt;(f: (a: A) =&gt; void, result: AsyncResult&lt;A, Err&gt;): void</pre
-  >
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">function</span> head<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>arr<span class="token operator">:</span> <span class="token constant">A</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">:</span> Maybe<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span></div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="getOrElse">
     getOrElse
   </h3>
-  <pre>
-function getOrElse&lt;T, P&gt;(async: AsyncResult&lt;T, P&gt;, alt: T): T</pre
-  >
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">function</span> isEmpty<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>arr<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">:</span> arr <span class="token keyword">is</span> <span class="token punctuation">[</span><span class="token punctuation">]</span></div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="getOrElseLazy">
     getOrElseLazy
   </h3>
-  <pre>
-function getOrElseLazy&lt;T, P&gt;(async: AsyncResult&lt;T, P&gt;, alt: () =&gt; T): T</pre
-  >
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">function</span> makeCompare<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>comparef<span class="token operator">:</span> Compare<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> shorterFirst <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token constant">A</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> b<span class="token operator">:</span> <span class="token constant">A</span><span class="token punctuation">[</span><span class="token punctuation">]</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">number</span></div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="getOrThrow">
     getOrThrow
   </h3>
-  <pre>
-function getOrThrow&lt;T, P&gt;(async: AsyncResult&lt;T, P&gt;): Maybe&lt;T&gt;</pre
-  >
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">function</span> map<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token constant">A</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">B</span><span class="token punctuation">,</span> arr<span class="token operator">:</span> <span class="token constant">A</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token constant">B</span><span class="token punctuation">[</span><span class="token punctuation">]</span></div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="isFailure">
     isFailure
   </h3>
-  <pre>
-function isFailure&lt;T, E, P&gt;(async: AsyncResult&lt;T, E, P&gt;): async is Outcome&lt;Failure&lt;E&gt;&gt;</pre
-  >
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">function</span> <span class="token function">numbersRange</span><span class="token punctuation">(</span><span class="token parameter">length<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">,</span> startAt <span class="token operator">=</span> <span class="token number">0</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">[</span><span class="token punctuation">]</span></div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="isLoading">
     isLoading
   </h3>
-  <pre>
-function isLoading&lt;T, E, P&gt;(async: AsyncResult&lt;T, E, P&gt;): async is Loading&lt;P&gt;</pre
-  >
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">function</span> range<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>length<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">,</span> <span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">index<span class="token operator">:</span> <span class="token builtin">number</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">A</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">[</span><span class="token punctuation">]</span></div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="isNotAsked">
     isNotAsked
   </h3>
-  <pre>
-function isNotAsked&lt;T, E, P&gt;(async: AsyncResult&lt;T, E, P&gt;): async is NotAsked</pre
-  >
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">function</span> sort<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token function-variable function">compare</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token constant">A</span><span class="token punctuation">,</span> b<span class="token operator">:</span> <span class="token constant">A</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Ordering<span class="token punctuation">,</span> arr<span class="token operator">:</span> <span class="token constant">A</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token constant">A</span><span class="token punctuation">[</span><span class="token punctuation">]</span></div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="isSuccess">
     isSuccess
   </h3>
-  <pre>
-function isSuccess&lt;T, E, P&gt;(async: AsyncResult&lt;T, E, P&gt;): async is Outcome&lt;Success&lt;T&gt;&gt;</pre
-  >
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">function</span> tail<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>arr<span class="token operator">:</span> <span class="token constant">A</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token constant">A</span><span class="token punctuation">[</span><span class="token punctuation">]</span></div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="loading">loading</h3>
-  <pre>
-function loading&lt;T, E, P = unknown&gt;(progress: P): AsyncResult&lt;T, E, P&gt;</pre
-  >
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">function</span> loading<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">P</span> <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>progress<span class="token operator">:</span> <span class="token constant">P</span><span class="token punctuation">)</span><span class="token operator">:</span> AsyncResult<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">P</span><span class="token operator">&gt;</span></div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="map">map</h3>
-  <pre>
-function map&lt;A, B, Err, Prog&gt;(f: (a: A) =&gt; B, async: AsyncResult&lt;A, Err, Prog&gt;): AsyncResult&lt;B, Err, Prog&gt;</pre
-  >
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">function</span> map<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token constant">A</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token keyword">async</span><span class="token operator">:</span> AsyncResult<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Err<span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> AsyncResult<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span></div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="mapN">mapN</h3>
-  <pre>
-function mapN&lt;A, B, C, Err, Prog&gt;(
-  f: Fun2&lt;A, B, C&gt;,
-  a: AsyncResult&lt;A, Err, Prog&gt;, b: AsyncResult&lt;B, Err, Prog&gt;): AsyncResult&lt;C, Err, Prog&gt;</pre
-  >
-  <pre>
-function mapN&lt;A, B, C, D, Err, Prog&gt;(
-  f: Fun3&lt;A, B, C, D&gt;,
-  a: AsyncResult&lt;A, Err, Prog&gt;, b: AsyncResult&lt;B, Err, Prog&gt;, c: AsyncResult&lt;C, Err, Prog&gt;): AsyncResult&lt;D, Err, Prog&gt;</pre
-  >
-  <pre>
-function mapN&lt;A, B, C, D, E, Err, Prog&gt;(
-  f: Fun4&lt;A, B, C, D, E&gt;,
-  a: AsyncResult&lt;A, Err, Prog&gt;, b: AsyncResult&lt;B, Err, Prog&gt;, c: AsyncResult&lt;C, Err, Prog&gt;,
-  d: AsyncResult&lt;D, Err, Prog&gt;): AsyncResult&lt;E, Err, Prog&gt;</pre
-  >
-  <pre>
-function mapN&lt;A, B, C, D, E, F, Err, Prog&gt;(
-  f: Fun5&lt;A, B, C, D, E, F&gt;,
-  a: AsyncResult&lt;A, Err, Prog&gt;, b: AsyncResult&lt;B, Err, Prog&gt;, c: AsyncResult&lt;C, Err, Prog&gt;, d: AsyncResult&lt;D, Err, Prog&gt;,
-  e: AsyncResult&lt;E, Err, Prog&gt;): AsyncResult&lt;F, Err, Prog&gt;</pre
-  >
-  <pre>
-function mapN&lt;A, B, C, D, E, F, G, Err, Prog&gt;(
-  f: Fun6&lt;A, B, C, D, E, F, G&gt;,
-  a: AsyncResult&lt;A, Err, Prog&gt;, b: AsyncResult&lt;B, Err, Prog&gt;, c: AsyncResult&lt;C, Err, Prog&gt;, d: AsyncResult&lt;D, Err, Prog&gt;,
-  e: AsyncResult&lt;E, Err, Prog&gt;, g: AsyncResult&lt;F, Err, Prog&gt;): AsyncResult&lt;G, Err, Prog&gt;</pre
-  >
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">function</span> mapN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  f<span class="token operator">:</span> Fun2<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  a<span class="token operator">:</span> AsyncResult<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Err<span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">,</span> b<span class="token operator">:</span> AsyncResult<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> AsyncResult<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span></div></pre>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">function</span> mapN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> Err<span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  f<span class="token operator">:</span> Fun3<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  a<span class="token operator">:</span> AsyncResult<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Err<span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">,</span> b<span class="token operator">:</span> AsyncResult<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">,</span> c<span class="token operator">:</span> AsyncResult<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> AsyncResult<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token punctuation">,</span> Err<span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span></div></pre>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">function</span> mapN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> Err<span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  f<span class="token operator">:</span> Fun4<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  a<span class="token operator">:</span> AsyncResult<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Err<span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">,</span> b<span class="token operator">:</span> AsyncResult<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">,</span> c<span class="token operator">:</span> AsyncResult<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  d<span class="token operator">:</span> AsyncResult<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token punctuation">,</span> Err<span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> AsyncResult<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token punctuation">,</span> Err<span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span></div></pre>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">function</span> mapN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token punctuation">,</span> Err<span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  f<span class="token operator">:</span> Fun5<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  a<span class="token operator">:</span> AsyncResult<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Err<span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">,</span> b<span class="token operator">:</span> AsyncResult<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">,</span> c<span class="token operator">:</span> AsyncResult<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">,</span> d<span class="token operator">:</span> AsyncResult<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token punctuation">,</span> Err<span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  e<span class="token operator">:</span> AsyncResult<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token punctuation">,</span> Err<span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> AsyncResult<span class="token operator">&lt;</span><span class="token constant">F</span><span class="token punctuation">,</span> Err<span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span></div></pre>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">function</span> mapN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token punctuation">,</span> <span class="token constant">G</span><span class="token punctuation">,</span> Err<span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  f<span class="token operator">:</span> Fun6<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token punctuation">,</span> <span class="token constant">G</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  a<span class="token operator">:</span> AsyncResult<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Err<span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">,</span> b<span class="token operator">:</span> AsyncResult<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">,</span> c<span class="token operator">:</span> AsyncResult<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">,</span> d<span class="token operator">:</span> AsyncResult<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token punctuation">,</span> Err<span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  e<span class="token operator">:</span> AsyncResult<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token punctuation">,</span> Err<span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">,</span> g<span class="token operator">:</span> AsyncResult<span class="token operator">&lt;</span><span class="token constant">F</span><span class="token punctuation">,</span> Err<span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> AsyncResult<span class="token operator">&lt;</span><span class="token constant">G</span><span class="token punctuation">,</span> Err<span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span></div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="recover">recover</h3>
-  <pre>
-function recover&lt;T, E, P&gt;(async: AsyncResult&lt;T, E, P&gt;, whenNoOutcome: T): AsyncResult&lt;T, E, P&gt;</pre
-  >
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">function</span> recover<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">P</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token keyword">async</span><span class="token operator">:</span> AsyncResult<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">P</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> whenNoOutcome<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">)</span><span class="token operator">:</span> AsyncResult<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">P</span><span class="token operator">&gt;</span></div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="success">success</h3>
-  <pre>
-function success&lt;T, E, P = unknown&gt;(value: T): AsyncResult&lt;T, E, P&gt;</pre
-  >
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">function</span> success<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">P</span> <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>value<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">)</span><span class="token operator">:</span> AsyncResult<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">P</span><span class="token operator">&gt;</span></div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="toArray">toArray</h3>
-  <pre>function toArray&lt;T, P&gt;(async: AsyncResult&lt;T, P&gt;): T[]</pre>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">function</span> toArray<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">P</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token keyword">async</span><span class="token operator">:</span> AsyncResult<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">P</span><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token punctuation">]</span></div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="toMaybe">toMaybe</h3>
-  <pre>
-function toMaybe&lt;T, P&gt;(async: AsyncResult&lt;T, P&gt;): Maybe&lt;T&gt;</pre
-  >
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">function</span> toMaybe<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">P</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token keyword">async</span><span class="token operator">:</span> AsyncResult<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">P</span><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> Maybe<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span></div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="toOption">toOption</h3>
-  <pre>
-function toOption&lt;T, P&gt;(async: AsyncResult&lt;T, P&gt;): Option&lt;T&gt;</pre
-  >
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">function</span> toOption<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">P</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token keyword">async</span><span class="token operator">:</span> AsyncResult<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">P</span><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span></div></pre>
   <h2>values</h2>
   <h3 class="is-family-monospace has-text-grey-dark" id="notAsked">notAsked</h3>
-  <pre>const notAsked: Async&lt;Result&lt;never, never&gt;, unknown&gt;</pre>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">const</span> notAsked<span class="token operator">:</span> Async<span class="token operator">&lt;</span>Result<span class="token operator">&lt;</span><span class="token builtin">never</span><span class="token punctuation">,</span> <span class="token builtin">never</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span></div></pre>
 </article>

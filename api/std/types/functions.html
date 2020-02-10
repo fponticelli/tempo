@@ -91,63 +91,75 @@
   <h3 class="is-family-monospace has-text-grey-dark" id="AnyFunction">
     AnyFunction
   </h3>
-  <pre>type AnyFunction = Fun | Function</pre>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">type</span> <span class="token constant">T</span><span class="token operator">&lt;</span><span class="token constant">V</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span> <span class="token operator">=</span> Validation<span class="token operator">&lt;</span><span class="token constant">V</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span></div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="FirstArgument">
     FirstArgument
   </h3>
-  <pre>
-type FirstArgument&lt;F extends AnyFunction&gt; = F extends (a: infer A) =&gt; any
-  ? unknown extends A
-    ? never
-    : A
-  : never</pre
-  >
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">type</span> Validation<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span> <span class="token operator">=</span> Res<span class="token punctuation">.</span><span class="token constant">T</span><span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> Nel<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token operator">&gt;&gt;</span></div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="Fun">Fun</h3>
-  <pre>type Fun = (...args: any[]) =&gt; any</pre>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">type</span> Equals<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">T</span> <span class="token keyword">extends</span> <span class="token class-name">A</span> <span class="token operator">?</span> <span class="token number">1</span> <span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token keyword">extends</span> <span class="token operator">&lt;</span>
+  <span class="token constant">T</span>
+<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">T</span> <span class="token keyword">extends</span> <span class="token class-name">B</span> <span class="token operator">?</span> <span class="token number">1</span> <span class="token operator">:</span> <span class="token number">2</span>
+  <span class="token operator">?</span> <span class="token boolean">true</span>
+  <span class="token operator">:</span> <span class="token boolean">false</span></div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="Fun1">Fun1</h3>
-  <pre>type Fun1&lt;A, T&gt; = (a1: A) =&gt; T</pre>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">type</span> Fun1<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">T</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">a1<span class="token operator">:</span> <span class="token constant">A</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">T</span></div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="Fun2">Fun2</h3>
-  <pre>type Fun2&lt;A, B, T&gt; = (a1: A, a2: B) =&gt; T</pre>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">type</span> Fun2<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">T</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">a1<span class="token operator">:</span> <span class="token constant">A</span><span class="token punctuation">,</span> a2<span class="token operator">:</span> <span class="token constant">B</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">T</span></div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="Fun3">Fun3</h3>
-  <pre>type Fun3&lt;A, B, C, T&gt; = (a1: A, a2: B, a3: C) =&gt; T</pre>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">type</span> Fun3<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">T</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">a1<span class="token operator">:</span> <span class="token constant">A</span><span class="token punctuation">,</span> a2<span class="token operator">:</span> <span class="token constant">B</span><span class="token punctuation">,</span> a3<span class="token operator">:</span> <span class="token constant">C</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">T</span></div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="Fun4">Fun4</h3>
-  <pre>
-type Fun4&lt;A, B, C, D, T&gt; = (a1: A, a2: B, a3: C, a4: D) =&gt; T</pre
-  >
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">type</span> Fun4<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">T</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">a1<span class="token operator">:</span> <span class="token constant">A</span><span class="token punctuation">,</span> a2<span class="token operator">:</span> <span class="token constant">B</span><span class="token punctuation">,</span> a3<span class="token operator">:</span> <span class="token constant">C</span><span class="token punctuation">,</span> a4<span class="token operator">:</span> <span class="token constant">D</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">T</span></div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="Fun5">Fun5</h3>
-  <pre>
-type Fun5&lt;A, B, C, D, E, T&gt; = (a1: A, a2: B, a3: C, a4: D, a5: E) =&gt; T</pre
-  >
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">type</span> Fun5<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">T</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">a1<span class="token operator">:</span> <span class="token constant">A</span><span class="token punctuation">,</span> a2<span class="token operator">:</span> <span class="token constant">B</span><span class="token punctuation">,</span> a3<span class="token operator">:</span> <span class="token constant">C</span><span class="token punctuation">,</span> a4<span class="token operator">:</span> <span class="token constant">D</span><span class="token punctuation">,</span> a5<span class="token operator">:</span> <span class="token constant">E</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">T</span></div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="Fun6">Fun6</h3>
-  <pre>
-type Fun6&lt;A, B, C, D, E, F, T&gt; = (
-  a1: A,
-  a2: B,
-  a3: C,
-  a4: D,
-  a5: E,
-  a6: F
-) =&gt; T</pre
-  >
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">type</span> Fun6<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token punctuation">,</span> <span class="token constant">T</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">(</span>
+  <span class="token parameter">a1<span class="token operator">:</span> <span class="token constant">A</span><span class="token punctuation">,</span>
+  a2<span class="token operator">:</span> <span class="token constant">B</span><span class="token punctuation">,</span>
+  a3<span class="token operator">:</span> <span class="token constant">C</span><span class="token punctuation">,</span>
+  a4<span class="token operator">:</span> <span class="token constant">D</span><span class="token punctuation">,</span>
+  a5<span class="token operator">:</span> <span class="token constant">E</span><span class="token punctuation">,</span>
+  a6<span class="token operator">:</span> <span class="token constant">F</span></span>
+<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">T</span></div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="FunctionsChain">
     FunctionsChain
   </h3>
-  <pre>
-type FunctionsChain&lt;In, Args extends Fun[]&gt; = OnlyIfDoesNotReturnNever&lt;
-  CheckFunctionsChain&lt;In, Args&gt;
-&gt;</pre
-  >
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">type</span> FunctionsChain<span class="token operator">&lt;</span>In<span class="token punctuation">,</span> Args <span class="token keyword">extends</span> <span class="token class-name">Fun</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">&gt;</span> <span class="token operator">=</span> OnlyIfDoesNotReturnNever<span class="token operator">&lt;</span>
+  CheckFunctionsChain<span class="token operator">&lt;</span>In<span class="token punctuation">,</span> Args<span class="token operator">&gt;</span>
+<span class="token operator">&gt;</span></div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="Lazy">Lazy</h3>
-  <pre>type Lazy&lt;T&gt; = () =&gt; T</pre>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">type</span> Lazy<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">T</span></div></pre>
   <h3
     class="is-family-monospace has-text-grey-dark"
     id="OnlyIfDoesNotReturnNever"
   >
     OnlyIfDoesNotReturnNever
   </h3>
-  <pre>
-type OnlyIfDoesNotReturnNever&lt;F extends Fun&gt; = F extends Fun1&lt;any, never&gt;
-  ? never
-  : F</pre
-  >
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">type</span> OnlyIfDoesNotReturnNever<span class="token operator">&lt;</span><span class="token constant">F</span> <span class="token keyword">extends</span> <span class="token class-name">Fun</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token constant">F</span> <span class="token keyword">extends</span> <span class="token class-name">Fun1</span><span class="token operator">&lt;</span><span class="token builtin">any</span><span class="token punctuation">,</span> <span class="token builtin">never</span><span class="token operator">&gt;</span>
+  <span class="token operator">?</span> <span class="token builtin">never</span>
+  <span class="token operator">:</span> <span class="token constant">F</span></div></pre>
 </article>

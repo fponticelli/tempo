@@ -4,27 +4,31 @@
   <nav></nav>
   <h2>types</h2>
   <h3 class="is-family-monospace has-text-grey-dark" id="Cast">Cast</h3>
-  <pre>type Cast&lt;A, B&gt; = A extends B ? A : B</pre>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">type</span> <span class="token constant">T</span><span class="token operator">&lt;</span><span class="token constant">V</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span> <span class="token operator">=</span> Validation<span class="token operator">&lt;</span><span class="token constant">V</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span></div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="DeRef">DeRef</h3>
-  <pre>
-type DeRef&lt;T extends () =&gt; any&gt; = T extends () =&gt; infer Ret ? Ret : never</pre
-  >
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">type</span> Validation<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span> <span class="token operator">=</span> Res<span class="token punctuation">.</span><span class="token constant">T</span><span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> Nel<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token operator">&gt;&gt;</span></div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="Pointer">Pointer</h3>
-  <pre>type Pointer&lt;T&gt; = () =&gt; T</pre>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">type</span> Equals<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">T</span> <span class="token keyword">extends</span> <span class="token class-name">A</span> <span class="token operator">?</span> <span class="token number">1</span> <span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token keyword">extends</span> <span class="token operator">&lt;</span>
+  <span class="token constant">T</span>
+<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">T</span> <span class="token keyword">extends</span> <span class="token class-name">B</span> <span class="token operator">?</span> <span class="token number">1</span> <span class="token operator">:</span> <span class="token number">2</span>
+  <span class="token operator">?</span> <span class="token boolean">true</span>
+  <span class="token operator">:</span> <span class="token boolean">false</span></div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="WhenEquals">
     WhenEquals
   </h3>
-  <pre>
-type WhenEquals&lt;X, Y, A = X, B = never&gt; = Equals&lt;X, Y&gt; extends true
-  ? A
-  : B</pre
-  >
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">type</span> Fun1<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">T</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">a1<span class="token operator">:</span> <span class="token constant">A</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">T</span></div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="WhenNotEquals">
     WhenNotEquals
   </h3>
-  <pre>
-type WhenNotEquals&lt;X, Y, A = X, B = never&gt; = NotEquals&lt;X, Y&gt; extends true
-  ? A
-  : B</pre
-  >
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">type</span> Fun2<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">T</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">a1<span class="token operator">:</span> <span class="token constant">A</span><span class="token punctuation">,</span> a2<span class="token operator">:</span> <span class="token constant">B</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">T</span></div></pre>
 </article>

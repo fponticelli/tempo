@@ -93,124 +93,127 @@
   <h3 class="is-family-monospace has-text-grey-dark" id="ExcludeFunctionFields">
     ExcludeFunctionFields
   </h3>
-  <pre>
-type ExcludeFunctionFields&lt;T&gt; = Pick&lt;
-  T,
-  KeysWithoutFieldType&lt;T, AnyFunction&gt;
-&gt;</pre
-  >
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">type</span> <span class="token constant">T</span><span class="token operator">&lt;</span><span class="token constant">V</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span> <span class="token operator">=</span> Validation<span class="token operator">&lt;</span><span class="token constant">V</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span></div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="KeysWithFieldType">
     KeysWithFieldType
   </h3>
-  <pre>
-type KeysWithFieldType&lt;T, Condition&gt; = {
-  [K in keyof T]: WhenEquals&lt;T[K], Condition, K&gt;
-}[keyof T]</pre
-  >
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">type</span> KeysWithFieldType<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> Condition<span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token punctuation">[</span><span class="token constant">K</span> <span class="token keyword">in</span> <span class="token keyword">keyof</span> <span class="token constant">T</span><span class="token punctuation">]</span><span class="token operator">:</span> WhenEquals<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">[</span><span class="token constant">K</span><span class="token punctuation">]</span><span class="token punctuation">,</span> Condition<span class="token punctuation">,</span> <span class="token constant">K</span><span class="token operator">&gt;</span>
+<span class="token punctuation">}</span><span class="token punctuation">[</span><span class="token keyword">keyof</span> <span class="token constant">T</span><span class="token punctuation">]</span></div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="KeysWithoutFieldType">
     KeysWithoutFieldType
   </h3>
-  <pre>
-type KeysWithoutFieldType&lt;T, Condition&gt; = {
-  [K in keyof T]: WhenEquals&lt;T[K], Condition, never, K&gt;
-}[keyof T]</pre
-  >
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">type</span> KeysWithoutFieldType<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> Condition<span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token punctuation">[</span><span class="token constant">K</span> <span class="token keyword">in</span> <span class="token keyword">keyof</span> <span class="token constant">T</span><span class="token punctuation">]</span><span class="token operator">:</span> WhenEquals<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">[</span><span class="token constant">K</span><span class="token punctuation">]</span><span class="token punctuation">,</span> Condition<span class="token punctuation">,</span> <span class="token builtin">never</span><span class="token punctuation">,</span> <span class="token constant">K</span><span class="token operator">&gt;</span>
+<span class="token punctuation">}</span><span class="token punctuation">[</span><span class="token keyword">keyof</span> <span class="token constant">T</span><span class="token punctuation">]</span></div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="Merge">Merge</h3>
-  <pre>type Merge&lt;A, B&gt; = A &amp; B</pre>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">type</span> Merge<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token constant">A</span> <span class="token operator">&amp;</span> <span class="token constant">B</span></div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="ObjectWithField">
     ObjectWithField
   </h3>
-  <pre>
-type ObjectWithField&lt;F extends IndexType, V&gt; = { [_ in F]: V }</pre
-  >
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">type</span> ObjectWithField<span class="token operator">&lt;</span><span class="token constant">F</span> <span class="token keyword">extends</span> <span class="token class-name">IndexType</span><span class="token punctuation">,</span> <span class="token constant">V</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token punctuation">[</span>_ <span class="token keyword">in</span> <span class="token constant">F</span><span class="token punctuation">]</span><span class="token operator">:</span> <span class="token constant">V</span> <span class="token punctuation">}</span></div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="ObjectWithPath">
     ObjectWithPath
   </h3>
-  <pre>
-type ObjectWithPath&lt;Path extends IndexType[], V&gt; = Path extends []
-  ? {}
-  : Path extends [infer T]
-  ? T extends IndexType
-    ? { [_ in T]: V }
-    : never
-  : Path extends [infer K, ...any[]]
-  ? K extends IndexType
-    ? Tail&lt;Path&gt; extends infer Rest
-      ? Rest extends IndexType[]
-        ? { [_ in K]: ObjectWithPath&lt;Rest, V&gt; }
-        : never
-      : never
-    : never
-  : never</pre
-  >
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">type</span> ObjectWithPath<span class="token operator">&lt;</span>Path <span class="token keyword">extends</span> <span class="token class-name">IndexType</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token constant">V</span><span class="token operator">&gt;</span> <span class="token operator">=</span> Path <span class="token keyword">extends</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+  <span class="token operator">?</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+  <span class="token operator">:</span> Path <span class="token keyword">extends</span> <span class="token punctuation">[</span>infer <span class="token constant">T</span><span class="token punctuation">]</span>
+  <span class="token operator">?</span> <span class="token constant">T</span> <span class="token keyword">extends</span> <span class="token class-name">IndexType</span>
+    <span class="token operator">?</span> <span class="token punctuation">{</span> <span class="token punctuation">[</span>_ <span class="token keyword">in</span> <span class="token constant">T</span><span class="token punctuation">]</span><span class="token operator">:</span> <span class="token constant">V</span> <span class="token punctuation">}</span>
+    <span class="token operator">:</span> <span class="token builtin">never</span>
+  <span class="token operator">:</span> Path <span class="token keyword">extends</span> <span class="token punctuation">[</span>infer <span class="token constant">K</span><span class="token punctuation">,</span> <span class="token operator">...</span><span class="token builtin">any</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+  <span class="token operator">?</span> <span class="token constant">K</span> <span class="token keyword">extends</span> <span class="token class-name">IndexType</span>
+    <span class="token operator">?</span> Tail<span class="token operator">&lt;</span>Path<span class="token operator">&gt;</span> <span class="token keyword">extends</span> <span class="token class-name">infer</span> Rest
+      <span class="token operator">?</span> Rest <span class="token keyword">extends</span> <span class="token class-name">IndexType</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
+        <span class="token operator">?</span> <span class="token punctuation">{</span> <span class="token punctuation">[</span>_ <span class="token keyword">in</span> <span class="token constant">K</span><span class="token punctuation">]</span><span class="token operator">:</span> ObjectWithPath<span class="token operator">&lt;</span>Rest<span class="token punctuation">,</span> <span class="token constant">V</span><span class="token operator">&gt;</span> <span class="token punctuation">}</span>
+        <span class="token operator">:</span> <span class="token builtin">never</span>
+      <span class="token operator">:</span> <span class="token builtin">never</span>
+    <span class="token operator">:</span> <span class="token builtin">never</span>
+  <span class="token operator">:</span> <span class="token builtin">never</span></div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="ReadonlyFields">
     ReadonlyFields
   </h3>
-  <pre>type ReadonlyFields&lt;T&gt; = Pick&lt;T, ReadonlyKeys&lt;T&gt;&gt;</pre>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">type</span> ReadonlyFields<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span> <span class="token operator">=</span> Pick<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> ReadonlyKeys<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;&gt;</span></div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="ReadonlyKeys">
     ReadonlyKeys
   </h3>
-  <pre>
-type ReadonlyKeys&lt;T&gt; = {
-  [P in keyof T]-?: WhenEquals&lt;
-    { [Q in P]: T[P] },
-    { -readonly [Q in P]: T[P] },
-    never,
-    P
-  &gt;
-}[keyof T]</pre
-  >
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">type</span> ReadonlyKeys<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token punctuation">[</span><span class="token constant">P</span> <span class="token keyword">in</span> <span class="token keyword">keyof</span> <span class="token constant">T</span><span class="token punctuation">]</span><span class="token operator">-</span><span class="token operator">?</span><span class="token operator">:</span> WhenEquals<span class="token operator">&lt;</span>
+    <span class="token punctuation">{</span> <span class="token punctuation">[</span><span class="token constant">Q</span> <span class="token keyword">in</span> <span class="token constant">P</span><span class="token punctuation">]</span><span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token constant">P</span><span class="token punctuation">]</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span> <span class="token operator">-</span><span class="token keyword">readonly</span> <span class="token punctuation">[</span><span class="token constant">Q</span> <span class="token keyword">in</span> <span class="token constant">P</span><span class="token punctuation">]</span><span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token constant">P</span><span class="token punctuation">]</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token builtin">never</span><span class="token punctuation">,</span>
+    <span class="token constant">P</span>
+  <span class="token operator">&gt;</span>
+<span class="token punctuation">}</span><span class="token punctuation">[</span><span class="token keyword">keyof</span> <span class="token constant">T</span><span class="token punctuation">]</span></div></pre>
   <h3
     class="is-family-monospace has-text-grey-dark"
     id="RemoveNullableFromFields"
   >
     RemoveNullableFromFields
   </h3>
-  <pre>
-type RemoveNullableFromFields&lt;T&gt; = {
-  [K in keyof T]: NonNullable&lt;T[K]&gt;
-}</pre
-  >
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">type</span> RemoveNullableFromFields<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token punctuation">[</span><span class="token constant">K</span> <span class="token keyword">in</span> <span class="token keyword">keyof</span> <span class="token constant">T</span><span class="token punctuation">]</span><span class="token operator">:</span> NonNullable<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">[</span><span class="token constant">K</span><span class="token punctuation">]</span><span class="token operator">&gt;</span>
+<span class="token punctuation">}</span></div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="TypeAtPath">
     TypeAtPath
   </h3>
-  <pre>
-type TypeAtPath&lt;Path extends IndexType[], O&gt; = {
-  next: Path extends [infer K, ...any[]]
-    ? K extends IndexType
-      ? Tail&lt;Path&gt; extends infer Rest
-        ? O extends Record&lt;IndexType, any&gt;
-          ? Rest extends IndexType[]
-            ? TypeAtPath&lt;Rest, O[K]&gt;
-            : never
-          : never
-        : never
-      : never
-    : never
-  empty: O
-  done: O extends Record&lt;IndexType, any&gt;
-    ? Path extends [infer K]
-      ? K extends IndexType
-        ? O[K]
-        : never
-      : never
-    : never
-}[Path extends [] ? 'empty' : Path extends [any] ? 'done' : 'next']</pre
-  >
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">type</span> TypeAtPath<span class="token operator">&lt;</span>Path <span class="token keyword">extends</span> <span class="token class-name">IndexType</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token constant">O</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
+  next<span class="token operator">:</span> Path <span class="token keyword">extends</span> <span class="token punctuation">[</span>infer <span class="token constant">K</span><span class="token punctuation">,</span> <span class="token operator">...</span><span class="token builtin">any</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+    <span class="token operator">?</span> <span class="token constant">K</span> <span class="token keyword">extends</span> <span class="token class-name">IndexType</span>
+      <span class="token operator">?</span> Tail<span class="token operator">&lt;</span>Path<span class="token operator">&gt;</span> <span class="token keyword">extends</span> <span class="token class-name">infer</span> Rest
+        <span class="token operator">?</span> <span class="token constant">O</span> <span class="token keyword">extends</span> <span class="token class-name">Record</span><span class="token operator">&lt;</span>IndexType<span class="token punctuation">,</span> <span class="token builtin">any</span><span class="token operator">&gt;</span>
+          <span class="token operator">?</span> Rest <span class="token keyword">extends</span> <span class="token class-name">IndexType</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
+            <span class="token operator">?</span> TypeAtPath<span class="token operator">&lt;</span>Rest<span class="token punctuation">,</span> <span class="token constant">O</span><span class="token punctuation">[</span><span class="token constant">K</span><span class="token punctuation">]</span><span class="token operator">&gt;</span>
+            <span class="token operator">:</span> <span class="token builtin">never</span>
+          <span class="token operator">:</span> <span class="token builtin">never</span>
+        <span class="token operator">:</span> <span class="token builtin">never</span>
+      <span class="token operator">:</span> <span class="token builtin">never</span>
+    <span class="token operator">:</span> <span class="token builtin">never</span>
+  empty<span class="token operator">:</span> <span class="token constant">O</span>
+  done<span class="token operator">:</span> <span class="token constant">O</span> <span class="token keyword">extends</span> <span class="token class-name">Record</span><span class="token operator">&lt;</span>IndexType<span class="token punctuation">,</span> <span class="token builtin">any</span><span class="token operator">&gt;</span>
+    <span class="token operator">?</span> Path <span class="token keyword">extends</span> <span class="token punctuation">[</span>infer <span class="token constant">K</span><span class="token punctuation">]</span>
+      <span class="token operator">?</span> <span class="token constant">K</span> <span class="token keyword">extends</span> <span class="token class-name">IndexType</span>
+        <span class="token operator">?</span> <span class="token constant">O</span><span class="token punctuation">[</span><span class="token constant">K</span><span class="token punctuation">]</span>
+        <span class="token operator">:</span> <span class="token builtin">never</span>
+      <span class="token operator">:</span> <span class="token builtin">never</span>
+    <span class="token operator">:</span> <span class="token builtin">never</span>
+<span class="token punctuation">}</span><span class="token punctuation">[</span>Path <span class="token keyword">extends</span> <span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">?</span> <span class="token string">'empty'</span> <span class="token operator">:</span> Path <span class="token keyword">extends</span> <span class="token punctuation">[</span><span class="token builtin">any</span><span class="token punctuation">]</span> <span class="token operator">?</span> <span class="token string">'done'</span> <span class="token operator">:</span> <span class="token string">'next'</span><span class="token punctuation">]</span></div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="WritableFields">
     WritableFields
   </h3>
-  <pre>type WritableFields&lt;T&gt; = Pick&lt;T, WritableKeys&lt;T&gt;&gt;</pre>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">type</span> WritableFields<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span> <span class="token operator">=</span> Pick<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> WritableKeys<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;&gt;</span></div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="WritableKeys">
     WritableKeys
   </h3>
-  <pre>
-type WritableKeys&lt;T&gt; = {
-  [K in keyof T]-?: WhenEquals&lt;
-    { [Q in K]: T[K] },
-    { -readonly [Q in K]: T[K] },
-    K
-  &gt;
-}[keyof T]</pre
-  >
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">type</span> WritableKeys<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token punctuation">[</span><span class="token constant">K</span> <span class="token keyword">in</span> <span class="token keyword">keyof</span> <span class="token constant">T</span><span class="token punctuation">]</span><span class="token operator">-</span><span class="token operator">?</span><span class="token operator">:</span> WhenEquals<span class="token operator">&lt;</span>
+    <span class="token punctuation">{</span> <span class="token punctuation">[</span><span class="token constant">Q</span> <span class="token keyword">in</span> <span class="token constant">K</span><span class="token punctuation">]</span><span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token constant">K</span><span class="token punctuation">]</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span> <span class="token operator">-</span><span class="token keyword">readonly</span> <span class="token punctuation">[</span><span class="token constant">Q</span> <span class="token keyword">in</span> <span class="token constant">K</span><span class="token punctuation">]</span><span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token constant">K</span><span class="token punctuation">]</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token constant">K</span>
+  <span class="token operator">&gt;</span>
+<span class="token punctuation">}</span><span class="token punctuation">[</span><span class="token keyword">keyof</span> <span class="token constant">T</span><span class="token punctuation">]</span></div></pre>
 </article>

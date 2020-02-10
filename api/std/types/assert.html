@@ -59,57 +59,51 @@
   </nav>
   <h2>types</h2>
   <h3 class="is-family-monospace has-text-grey-dark" id="Assert">Assert</h3>
-  <pre>
-type Assert&lt;A extends true&gt; = A extends never
-  ? 'FAIL'
-  : A extends true
-  ? 'PASS'
-  : 'FAIL'</pre
-  >
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">type</span> <span class="token constant">T</span><span class="token operator">&lt;</span><span class="token constant">V</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span> <span class="token operator">=</span> Validation<span class="token operator">&lt;</span><span class="token constant">V</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span></div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="AssertNot">
     AssertNot
   </h3>
-  <pre>
-type AssertNot&lt;A extends false&gt; = A extends never
-  ? 'FAIL'
-  : A extends false
-  ? 'PASS'
-  : 'FAIL'</pre
-  >
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">type</span> Validation<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span> <span class="token operator">=</span> Res<span class="token punctuation">.</span><span class="token constant">T</span><span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> Nel<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token operator">&gt;&gt;</span></div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="Equals">Equals</h3>
-  <pre>
-type Equals&lt;A, B&gt; = (&lt;T&gt;() =&gt; T extends A ? 1 : 2) extends &lt;
-  T
-&gt;() =&gt; T extends B ? 1 : 2
-  ? true
-  : false</pre
-  >
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">type</span> Equals<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">T</span> <span class="token keyword">extends</span> <span class="token class-name">A</span> <span class="token operator">?</span> <span class="token number">1</span> <span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token keyword">extends</span> <span class="token operator">&lt;</span>
+  <span class="token constant">T</span>
+<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">T</span> <span class="token keyword">extends</span> <span class="token class-name">B</span> <span class="token operator">?</span> <span class="token number">1</span> <span class="token operator">:</span> <span class="token number">2</span>
+  <span class="token operator">?</span> <span class="token boolean">true</span>
+  <span class="token operator">:</span> <span class="token boolean">false</span></div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="Extends">Extends</h3>
-  <pre>type Extends&lt;A, B&gt; = A extends B ? true : false</pre>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">type</span> Extends<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token constant">A</span> <span class="token keyword">extends</span> <span class="token class-name">B</span> <span class="token operator">?</span> <span class="token boolean">true</span> <span class="token operator">:</span> <span class="token boolean">false</span></div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="IsNever">IsNever</h3>
-  <pre>
-type IsNever&lt;T&gt; = Pointer&lt;T&gt; extends Pointer&lt;never&gt; ? true : false</pre
-  >
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">type</span> IsNever<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span> <span class="token operator">=</span> Pointer<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span> <span class="token keyword">extends</span> <span class="token class-name">Pointer</span><span class="token operator">&lt;</span><span class="token builtin">never</span><span class="token operator">&gt;</span> <span class="token operator">?</span> <span class="token boolean">true</span> <span class="token operator">:</span> <span class="token boolean">false</span></div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="NotEquals">
     NotEquals
   </h3>
-  <pre>
-type NotEquals&lt;A, B&gt; = Equals&lt;A, B&gt; extends true ? false : true</pre
-  >
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">type</span> NotEquals<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token operator">&gt;</span> <span class="token operator">=</span> Equals<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token operator">&gt;</span> <span class="token keyword">extends</span> <span class="token class-name">true</span> <span class="token operator">?</span> <span class="token boolean">false</span> <span class="token operator">:</span> <span class="token boolean">true</span></div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="NotSame">NotSame</h3>
-  <pre>
-type NotSame&lt;A, B&gt; = Pointer&lt;A&gt; extends Pointer&lt;B&gt;
-  ? Pointer&lt;B&gt; extends Pointer&lt;A&gt;
-    ? false
-    : true
-  : true</pre
-  >
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">type</span> NotSame<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token operator">&gt;</span> <span class="token operator">=</span> Pointer<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span> <span class="token keyword">extends</span> <span class="token class-name">Pointer</span><span class="token operator">&lt;</span><span class="token constant">B</span><span class="token operator">&gt;</span>
+  <span class="token operator">?</span> Pointer<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token operator">&gt;</span> <span class="token keyword">extends</span> <span class="token class-name">Pointer</span><span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span>
+    <span class="token operator">?</span> <span class="token boolean">false</span>
+    <span class="token operator">:</span> <span class="token boolean">true</span>
+  <span class="token operator">:</span> <span class="token boolean">true</span></div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="Same">Same</h3>
-  <pre>
-type Same&lt;A, B&gt; = Pointer&lt;A&gt; extends Pointer&lt;B&gt;
-  ? Pointer&lt;B&gt; extends Pointer&lt;A&gt;
-    ? true
-    : false
-  : false</pre
-  >
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">type</span> Same<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token operator">&gt;</span> <span class="token operator">=</span> Pointer<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span> <span class="token keyword">extends</span> <span class="token class-name">Pointer</span><span class="token operator">&lt;</span><span class="token constant">B</span><span class="token operator">&gt;</span>
+  <span class="token operator">?</span> Pointer<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token operator">&gt;</span> <span class="token keyword">extends</span> <span class="token class-name">Pointer</span><span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span>
+    <span class="token operator">?</span> <span class="token boolean">true</span>
+    <span class="token operator">:</span> <span class="token boolean">false</span>
+  <span class="token operator">:</span> <span class="token boolean">false</span></div></pre>
 </article>

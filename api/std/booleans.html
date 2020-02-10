@@ -45,14 +45,18 @@
       <code>true</code> or <code>false</code> (case insensitive).
     </p>
   </div>
-  <pre>function canParse(v: string): boolean</pre>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">function</span> all<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token function-variable function">predicate</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">v<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">boolean</span><span class="token punctuation">,</span> arr<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span></div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="compare">compare</h3>
   <div>
     <p>
       Returns a comparison value (<code>Int</code>) from two boolean values.
     </p>
   </div>
-  <pre>function compare(a: boolean, b: boolean): 1 | -1 | 0</pre>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">function</span> <span class="token builtin">any</span><span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token function-variable function">predicate</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">v<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">boolean</span><span class="token punctuation">,</span> arr<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span></div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="option">option</h3>
   <div>
     <p>
@@ -60,7 +64,9 @@
       <code>some</code>, or <code>none</code> if the condition is false.
     </p>
   </div>
-  <pre>function option&lt;A&gt;(cond: boolean, a: A): Option&lt;A&gt;</pre>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">function</span> option<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>cond<span class="token operator">:</span> <span class="token builtin">boolean</span><span class="token punctuation">,</span> a<span class="token operator">:</span> <span class="token constant">A</span><span class="token punctuation">)</span><span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span></div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="parse">parse</h3>
   <div>
     <p>
@@ -69,7 +75,9 @@
       value it will return null.
     </p>
   </div>
-  <pre>function parse(v: string): boolean</pre>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">function</span> <span class="token function">parse</span><span class="token punctuation">(</span><span class="token parameter">v<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span></div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="toInt">toInt</h3>
   <div>
     <p>
@@ -77,10 +85,14 @@
       <code>1</code>, <code>false</code> =&gt; <code>0</code>).
     </p>
   </div>
-  <pre>function toInt(v: boolean): 1 | 0</pre>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">function</span> <span class="token function">toInt</span><span class="token punctuation">(</span><span class="token parameter">v<span class="token operator">:</span> <span class="token builtin">boolean</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token number">1</span> <span class="token operator">|</span> <span class="token number">0</span></div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="xor">xor</h3>
   <div>
     <p>Returns <code>true</code> when arguments are different.</p>
   </div>
-  <pre>function xor(a: boolean, b: boolean): boolean</pre>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">function</span> <span class="token function">xor</span><span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token builtin">boolean</span><span class="token punctuation">,</span> b<span class="token operator">:</span> <span class="token builtin">boolean</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span></div></pre>
 </article>

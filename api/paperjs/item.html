@@ -5,32 +5,32 @@
   <h3 class="is-family-monospace has-text-grey-dark" id="FrameEvent">
     FrameEvent
   </h3>
-  <pre>
-interface FrameEvent extends Event {
-  // the number of times the frame event was fired
-  count: number
-  // the total amount of time passed since the first frame event in seconds
-  time: number
-  // the time passed in seconds since the last frame event
-  delta: number
-}</pre
-  >
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">interface</span> <span class="token class-name">FrameEvent</span> <span class="token keyword">extends</span> <span class="token class-name">Event</span> <span class="token punctuation">{</span>
+  <span class="token comment">// the number of times the frame event was fired</span>
+  count<span class="token operator">:</span> <span class="token builtin">number</span>
+  <span class="token comment">// the total amount of time passed since the first frame event in seconds</span>
+  time<span class="token operator">:</span> <span class="token builtin">number</span>
+  <span class="token comment">// the time passed in seconds since the last frame event</span>
+  delta<span class="token operator">:</span> <span class="token builtin">number</span>
+<span class="token punctuation">}</span></div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="ItemEvents">
     ItemEvents
   </h3>
-  <pre>
-interface ItemEvents&lt;State, Action, El&gt; {
-  onFrame?: PaperEventHandler&lt;State, Action, FrameEvent, El&gt;
-  onMouseDown?: PaperEventHandler&lt;State, Action, MouseEvent, El&gt;
-  onMouseDrag?: PaperEventHandler&lt;State, Action, MouseEvent, El&gt;
-  onMouseUp?: PaperEventHandler&lt;State, Action, MouseEvent, El&gt;
-  onClick?: PaperEventHandler&lt;State, Action, MouseEvent, El&gt;
-  onDoubleClick?: PaperEventHandler&lt;State, Action, MouseEvent, El&gt;
-  onMouseMove?: PaperEventHandler&lt;State, Action, MouseEvent, El&gt;
-  onMouseEnter?: PaperEventHandler&lt;State, Action, MouseEvent, El&gt;
-  onMouseLeave?: PaperEventHandler&lt;State, Action, MouseEvent, El&gt;
-}</pre
-  >
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">interface</span> <span class="token class-name">ItemEvents</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> El<span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+  onFrame<span class="token operator">?</span><span class="token operator">:</span> PaperEventHandler<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> FrameEvent<span class="token punctuation">,</span> El<span class="token operator">&gt;</span>
+  onMouseDown<span class="token operator">?</span><span class="token operator">:</span> PaperEventHandler<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> MouseEvent<span class="token punctuation">,</span> El<span class="token operator">&gt;</span>
+  onMouseDrag<span class="token operator">?</span><span class="token operator">:</span> PaperEventHandler<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> MouseEvent<span class="token punctuation">,</span> El<span class="token operator">&gt;</span>
+  onMouseUp<span class="token operator">?</span><span class="token operator">:</span> PaperEventHandler<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> MouseEvent<span class="token punctuation">,</span> El<span class="token operator">&gt;</span>
+  onClick<span class="token operator">?</span><span class="token operator">:</span> PaperEventHandler<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> MouseEvent<span class="token punctuation">,</span> El<span class="token operator">&gt;</span>
+  onDoubleClick<span class="token operator">?</span><span class="token operator">:</span> PaperEventHandler<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> MouseEvent<span class="token punctuation">,</span> El<span class="token operator">&gt;</span>
+  onMouseMove<span class="token operator">?</span><span class="token operator">:</span> PaperEventHandler<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> MouseEvent<span class="token punctuation">,</span> El<span class="token operator">&gt;</span>
+  onMouseEnter<span class="token operator">?</span><span class="token operator">:</span> PaperEventHandler<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> MouseEvent<span class="token punctuation">,</span> El<span class="token operator">&gt;</span>
+  onMouseLeave<span class="token operator">?</span><span class="token operator">:</span> PaperEventHandler<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> MouseEvent<span class="token punctuation">,</span> El<span class="token operator">&gt;</span>
+<span class="token punctuation">}</span></div></pre>
   <h2>classes</h2>
   <h3 class="is-family-monospace has-text-grey-dark" id="ItemTemplate">
     ItemTemplate

@@ -14,26 +14,7 @@
   <div>
     <p>Function signature for the <code>Template.render()</code> method.</p>
   </div>
-  <pre>
-interface View&lt;State, Query&gt; {
-  /**
-   * `change` takes a new `State` value and immediately updates its realization
-   * to match the new state.
-   * @param value
-   */
-  change(value: State): void
-
-  /**
-   * Removes its own realization from the DOM permanently.
-   */
-  destroy(): void
-
-  /**
-   * Allows the container App that holds a reference to a view to query the view
-   * itself for information that it owns.
-   * @param query
-   */
-  request(query: Query): void
-}</pre
-  >
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">type</span> <span class="token constant">T</span><span class="token operator">&lt;</span><span class="token constant">V</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span> <span class="token operator">=</span> Validation<span class="token operator">&lt;</span><span class="token constant">V</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span></div></pre>
 </article>

@@ -53,61 +53,67 @@
   </nav>
   <h2>types</h2>
   <h3 class="is-family-monospace has-text-grey-dark" id="Acc">Acc</h3>
-  <pre>type Acc&lt;State&gt; = ((state: State) =&gt; void)[]</pre>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">type</span> Acc<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">state<span class="token operator">:</span> State</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token punctuation">]</span></div></pre>
   <h2>functions</h2>
   <h3 class="is-family-monospace has-text-grey-dark" id="domChildToTemplate">
     domChildToTemplate
   </h3>
-  <pre>
-function domChildToTemplate&lt;State, Action, Query&gt;(
-  dom: DOMChild&lt;State, Action, Query&gt;
-): DOMTemplate&lt;State, Action, Query&gt;</pre
-  >
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">function</span> domChildToTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  dom<span class="token operator">:</span> DOMChild<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> DOMTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="insertFBefore">
     insertFBefore
   </h3>
-  <pre>function insertFBefore(ref: Node): (node: Node) =&gt; void</pre>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">function</span> <span class="token function">insertFBefore</span><span class="token punctuation">(</span><span class="token parameter">ref<span class="token operator">:</span> Node</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">node<span class="token operator">:</span> Node</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span></div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="processAttribute">
     processAttribute
   </h3>
-  <pre>
-function processAttribute&lt;State, Value&gt;(
-  el: Element,
-  name: string,
-  value: Attribute&lt;State, Value&gt;,
-  acc: Acc&lt;State&gt;
-): Acc&lt;State&gt;</pre
-  >
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">function</span> processAttribute<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Value<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  el<span class="token operator">:</span> Element<span class="token punctuation">,</span>
+  name<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span>
+  value<span class="token operator">:</span> Attribute<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Value<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  acc<span class="token operator">:</span> Acc<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> Acc<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span></div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="processEvent">
     processEvent
   </h3>
-  <pre>
-function processEvent&lt;
-  State,
-  El extends Element,
-  Ev extends Event,
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">function</span> processEvent<span class="token operator">&lt;</span>
+  State<span class="token punctuation">,</span>
+  El <span class="token keyword">extends</span> <span class="token class-name">Element</span><span class="token punctuation">,</span>
+  Ev <span class="token keyword">extends</span> <span class="token class-name">Event</span><span class="token punctuation">,</span>
   Action
-&gt;(
-  el: El,
-  name: string,
-  value: EventHandler&lt;State, Action, Ev, El&gt;,
-  dispatch: (action: Action) =&gt; void,
-  acc: Acc&lt;State&gt;
-): Acc&lt;State&gt;</pre
-  >
+<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  el<span class="token operator">:</span> El<span class="token punctuation">,</span>
+  name<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span>
+  value<span class="token operator">:</span> EventHandler<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Ev<span class="token punctuation">,</span> El<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  <span class="token function-variable function">dispatch</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">action<span class="token operator">:</span> Action</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span><span class="token punctuation">,</span>
+  acc<span class="token operator">:</span> Acc<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> Acc<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span></div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="processStyle">
     processStyle
   </h3>
-  <pre>
-function processStyle&lt;State, Value&gt;(
-  el: Element,
-  name: string,
-  value: StyleAttribute&lt;State, Value&gt;,
-  acc: Acc&lt;State&gt;
-): Acc&lt;State&gt;</pre
-  >
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">function</span> processStyle<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Value<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  el<span class="token operator">:</span> Element<span class="token punctuation">,</span>
+  name<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span>
+  value<span class="token operator">:</span> StyleAttribute<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Value<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  acc<span class="token operator">:</span> Acc<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> Acc<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span></div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="removeNode">
     removeNode
   </h3>
-  <pre>function removeNode(node: Node): void</pre>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">function</span> <span class="token function">removeNode</span><span class="token punctuation">(</span><span class="token parameter">node<span class="token operator">:</span> Node</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">void</span></div></pre>
 </article>
