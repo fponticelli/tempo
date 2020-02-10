@@ -109,13 +109,13 @@ const project = div<[ProjectRef, Sidebar, number], Action>(
       'is-uppercase has-text-weight-bold'
     )
   ),
+  div({ attrs: { class: 'is-size-7' } }, ([s]) => s.description),
   when(
     {
       condition: ([p, s]) =>
         isApiProjectRoute(s.route, p.name) ||
         sameRoute(Route.project(p.name), s.route)
     },
-    div({ attrs: { class: 'is-size-7' } }, ([s]) => s.description),
     div(
       { attrs: { class: 'box api-box' } },
       mapState(
