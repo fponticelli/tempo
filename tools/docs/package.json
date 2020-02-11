@@ -15,10 +15,9 @@
   "license": "Apache-2.0",
   "private": false,
   "scripts": {
-    "docs:update": "rush rebuild && rush docs && npm run docs:maketoc",
-    "docs:buildandtoc": "npm run build && npm run docs:maketoc",
-    "docs:maketoc": "ts-node --project tsconfig.script.json ./scripts/builddocs.ts",
-    "docs:gen": "ts-node --project tsconfig.script.json ./scripts/gendocs.ts",
+    "docs:all": "rush rebuild && npm run docs:maketoc",
+    "docs:buildandmaketoc": "npm run build && npm run docs:maketoc",
+    "docs:maketoc": "ts-node --project tsconfig.script.json ./scripts/build_docs.ts",
     "compile": "webpack --mode=production",
     "clean": "rm -rf dist/* && rm -rf docs/* && rm -rf ../../docs/demo/paper/*",
     "build": "npm run clean && npm run compile",

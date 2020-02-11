@@ -7,6 +7,7 @@ import { JSDOM } from 'jsdom'
 import * as fse from 'fs-extra'
 import { formatHtml } from './template/html'
 import { State } from './template/state'
+import { ApiRef } from '../src/toc'
 
 const getModules = (basePath: string, name: string) => {
   const projectPath = path.join(basePath, name)
@@ -40,9 +41,7 @@ const processProject = (destPath: string, basePath: string, renderModule: (modul
     fse.writeFileSync(destFile, html, 'utf8')
   })
 
-  // temporary
-  const json = fse.readJSONSync('../../docs/toc.json')
-  json.apis[name] = modules.map(m => {
+  return modules.map(m => {
     const path = moduleToHtmlPath(m.path)
     return {
       path,
@@ -51,13 +50,6 @@ const processProject = (destPath: string, basePath: string, renderModule: (modul
       type: 'module'
     }
   })
-  fse.writeJSONSync('../../docs/toc.json', json, { spaces: 2 })
-  /*
-    "path": "modules/text.html",
-    "id": "_text_",
-    "title": "text",
-    "type": "module"
-  */
 }
 
 const makeView = () => {
@@ -72,15 +64,21 @@ const makeView = () => {
   return { view, getHtml }
 }
 
-const main = (destPath: string, basePath: string, projects: string[]) => {
+export const generateDocs = async (projects: string[], basePath: string, destPath: string): Promise<Record<string, ApiRef[]>> => {
   const { view, getHtml } = makeView()
   const renderModule = (state: State) => {
     view.change(state)
     return getHtml()
   }
-  fse.emptyDirSync(destPath)
+  await fse.emptyDir(destPath)
   const process = processProject(destPath, basePath, renderModule)
-  projects.forEach(process)
+  return projects.reduce((acc, project) => {
+    const modules = process(project)
+    return {
+      ...acc,
+      [project]: modules
+    }
+  }, {})
 }
 
-main('../../docs/api', '../..', ['std', 'core', 'dom', 'store', 'paperjs'])
+// main('../../docs/api', '../..', ['std', 'core', 'dom', 'store', 'paperjs'])
