@@ -11,12 +11,12 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { Newtype, NewtypeClass } from './newtype'
-
 /**
  * Helper functions to generate and validate [UUID](http://en.wikipedia.org/wiki/Universally_unique_identifier)
  * strings (version 4).
  */
+
+import { Newtype, NewtypeClass } from './newtype'
 
 const random = (max: number) => Math.floor(Math.random() * max)
 const srandom = () => '0123456789abcdef'.charAt(random(0x10))
@@ -24,7 +24,7 @@ const srandom = () => '0123456789abcdef'.charAt(random(0x10))
 /**
  * `Uuid.create()` returns a string value representing a random UUID string.
  */
-export const create = () => {
+export function create() {
   const s = [] as string[]
   let i = 0
   for (i = 0; i < 8; i++)
@@ -53,8 +53,10 @@ const pattern = /^[0123456789abcdef]{8}-[0123456789abcdef]{4}-4[0123456789abcdef
  */
 export type UUID = Newtype<string, { readonly UUID: unique symbol }>
 
-export const UUID = new class extends NewtypeClass<UUID> {
+export const UUID: NewtypeClass<UUID> = new class extends NewtypeClass<UUID> {
   isValid(uuid: string) { return pattern.test(uuid) }
 }()
 
-export const toString = (uuid: UUID) => UUID.get(uuid)
+export function toString(uuid: UUID) {
+  return UUID.get(uuid)
+}

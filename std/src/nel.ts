@@ -11,6 +11,11 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+/**
+ * `nel` stands for 'non-empty list'. This module provides functions
+ * to manipulate and generate `Nel<T>` values.
+ */
+
 import { Newtype, NewtypeClass } from './newtype'
 import * as Arr from './arrays'
 import { Ordering } from './ord'

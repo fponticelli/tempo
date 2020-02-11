@@ -11,6 +11,10 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+/**
+ *
+ */
+
 import { Equals, NotEquals } from './assert'
 
 export type Pointer<T> = () => T

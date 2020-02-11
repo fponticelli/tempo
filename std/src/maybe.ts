@@ -17,7 +17,13 @@ export type Nothing = undefined | null
 export type Just<T> = T
 
 export const nothing: Maybe<never> = undefined
-export const just = <T>(value: T): Maybe<T> => value
+export function just<T>(value: T): Maybe<T> {
+  return value
+}
 
-export const isNothing = <T>(maybe: Maybe<T>): maybe is Nothing => maybe == null
-export const isJust = <T>(maybe: Maybe<T>): maybe is Just<T> => maybe != null
+export function isNothing<T>(maybe: Maybe<T>): maybe is Nothing {
+  return maybe == null
+}
+export function isJust<T>(maybe: Maybe<T>): maybe is Just<T> {
+  return maybe != null
+}

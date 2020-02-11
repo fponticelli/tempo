@@ -13,6 +13,8 @@ limitations under the License.
 
 /**
  * Usage:
+ *
+ * ```ts
  * export interface Int extends Newtype<
  *   number,
  *   { readonly Int: unique symbol }
@@ -21,10 +23,13 @@ limitations under the License.
  * export const Int = new class extends NewtypeClass<Int> {
  *   isValid(v: number) { return Number.isInteger(v) }
  * }()
+ * ```
  */
 
 import { Option, ofValue } from './option'
 import { Maybe } from './maybe'
+
+export type TypeOfN<T extends Newtype<unknown, unknown>> = T['_T']
 
 export interface Newtype<V, S> {
   readonly _T: V
@@ -32,27 +37,27 @@ export interface Newtype<V, S> {
 }
 
 export abstract class NewtypeClass<T extends Newtype<any, any>> {
-  abstract isValid(v: T['_T']): boolean
-  unsafeOf(v: T['_T']): T {
+  abstract isValid(v: TypeOfN<T>): boolean
+  unsafeOf(v: TypeOfN<T>): T {
     return v as unknown as T
   }
-  of(v: T['_T']): Option<T> {
+  of(v: TypeOfN<T>): Option<T> {
     return ofValue(this.maybeOf(v))
   }
-  maybeOf(v: T['_T']): Maybe<T> {
+  maybeOf(v: TypeOfN<T>): Maybe<T> {
     return this.isValid(v) ? v as unknown as T : undefined
   }
-  get(v: T): T['_T'] {
-    return v as unknown as T['_T']
+  get(v: T): TypeOfN<T> {
+    return v as unknown as TypeOfN<T>
   }
-  maybeModify(f: (v: T['_T']) => T['_T']): (value: T) => Maybe<T> {
+  maybeModify(f: (v: TypeOfN<T>) => TypeOfN<T>): (value: T) => Maybe<T> {
     return (value: T) => this.maybeOf(f(this.get(value)))
   }
-  modify(f: (v: T['_T']) => T['_T']): (value: T) => Option<T> {
+  modify(f: (v: TypeOfN<T>) => TypeOfN<T>): (value: T) => Option<T> {
     const mf = this.maybeModify(f)
     return (value: T) => ofValue(mf(value))
   }
-  unsafeModify(f: (v: T['_T']) => T['_T']): (value: T) => T {
+  unsafeModify(f: (v: TypeOfN<T>) => TypeOfN<T>): (value: T) => T {
     return (value: T) => this.unsafeOf(f(this.get(value)))
   }
 }

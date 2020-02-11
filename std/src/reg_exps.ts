@@ -11,7 +11,21 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-export const map = (f: (...s: string[]) => string, pattern: RegExp, subject: string) => {
+/**
+ * Utility module to manipulate `RegExp` instances.
+ */
+
+/**
+ * Map the function `f` on each occurance matched by the pattern.
+ * @param f
+ * @param pattern
+ * @param subject
+ */
+export function map(
+  f: (...s: string[]) => string,
+  pattern: RegExp,
+  subject: string
+): string {
   const buff = [] as string[]
   let pos = 0
   let result: RegExpExecArray | null

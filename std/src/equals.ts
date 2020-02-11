@@ -11,11 +11,11 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-export const strictEqual = <A>(a: A, b: A): boolean => {
+export function strictEqual<A>(a: A, b: A): boolean {
   return a === b || (a !== a && b !== b)
 }
 
-export const deepEqual = <A>(a: A, b: A): boolean => {
+export function deepEqual<A>(a: A, b: A): boolean {
   if (strictEqual(a, b)) return true
   if (a == null || b == null) return false
   const aIsArr = Array.isArray(a)

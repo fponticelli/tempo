@@ -13,9 +13,9 @@ limitations under the License.
 
 import {
   map
-} from '../src/regexps'
+} from '../src/reg_exps'
 
-describe('regexps.ts', () => {
+describe('reg_exps.ts', () => {
   it('Map with non-global pattern', () => {
     const pattern = /xx|yyy/
     expect(map(v => v.toUpperCase(), pattern, 'axxbbyyyc')).toBe('aXXbbYYYc')

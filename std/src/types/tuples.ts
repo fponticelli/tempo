@@ -11,6 +11,10 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+/**
+ *
+ */
+
 import { Pointer, DeRef } from './generic'
 
 export type Tail<T extends any[]> = ((...args: T) => void) extends (

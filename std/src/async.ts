@@ -29,7 +29,7 @@ export const outcome = <T, P>(value: T): Async<T, P> => ({ kind: 'Outcome', valu
 export const notAsked = { kind: 'NotAsked' } as Async<never, never>
 export const loading = <T, P>(progress: P): Async<T, P> => ({ kind: 'Loading', progress })
 
-export const map = <A, B, P>(f: (a: A) => B, async: Async<A, P>): Async<B, P> => {
+export function map<A, B, P>(f: (a: A) => B, async: Async<A, P>): Async<B, P> {
   switch (async.kind) {
     case 'Loading':
     case 'NotAsked': return async
@@ -37,7 +37,7 @@ export const map = <A, B, P>(f: (a: A) => B, async: Async<A, P>): Async<B, P> =>
   }
 }
 
-export const mapLoading = <A, E1, E2>(f: (e: E1) => E2, async: Async<A, E1>): Async<A, E2> => {
+export function mapLoading<A, E1, E2>(f: (e: E1) => E2, async: Async<A, E1>): Async<A, E2> {
   switch (async.kind) {
     case 'Loading': return loading(f(async.progress))
     case 'NotAsked': return async
@@ -65,7 +65,7 @@ export function mapN<Prog, Ret>(f: (...args: any[]) => Ret, ...args: Async<any, 
   return outcome(f(...results))
 }
 
-export const flatMap = <A, B, Prog>(f: (a: A) => Async<B, Prog>, async: Async<A, Prog>): Async<B, Prog> => {
+export function flatMap<A, B, Prog>(f: (a: A) => Async<B, Prog>, async: Async<A, Prog>): Async<B, Prog> {
   switch (async.kind) {
     case 'NotAsked':
     case 'Loading': return async
@@ -101,11 +101,19 @@ export function flatMapN<Args extends any[], Prog, Ret>(
   return f(...results as Args)
 }
 
-export const isOutcome = <T, P>(async: Async<T, P>): async is Outcome<T> => async.kind === 'Outcome'
-export const isLoading = <T, P>(async: Async<T, P>): async is Loading<P> => async.kind === 'Loading'
-export const isNotAsked = <T, P>(async: Async<T, P>): async is NotAsked => async.kind === 'NotAsked'
+export function isOutcome<T, P>(async: Async<T, P>): async is Outcome<T> {
+  return async.kind === 'Outcome'
+}
 
-export const getOrThrow = <T, P>(async: Async<T, P>): Maybe<T> => {
+export function isLoading<T, P>(async: Async<T, P>): async is Loading<P> {
+  return async.kind === 'Loading'
+}
+
+export function isNotAsked<T, P>(async: Async<T, P>): async is NotAsked {
+  return async.kind === 'NotAsked'
+}
+
+export function getOrThrow<T, P>(async: Async<T, P>): Maybe<T> {
   switch (async.kind) {
     case 'NotAsked': throw 'Can\'t retrieve value from NotAsked'
     case 'Loading': throw 'Can\'t retrieve value from Loading: ' + async.progress
@@ -113,7 +121,7 @@ export const getOrThrow = <T, P>(async: Async<T, P>): Maybe<T> => {
   }
 }
 
-export const getOrElse = <T, P>(async: Async<T, P>, alt: T): T => {
+export function getOrElse<T, P>(async: Async<T, P>, alt: T): T {
   switch (async.kind) {
     case 'NotAsked':
     case 'Loading': return alt
@@ -121,7 +129,7 @@ export const getOrElse = <T, P>(async: Async<T, P>, alt: T): T => {
   }
 }
 
-export const getOrElseLazy = <T, P>(async: Async<T, P>, alt: () => T): T => {
+export function getOrElseLazy<T, P>(async: Async<T, P>, alt: () => T): T {
   switch (async.kind) {
     case 'NotAsked':
     case 'Loading': return alt()
@@ -129,7 +137,7 @@ export const getOrElseLazy = <T, P>(async: Async<T, P>, alt: () => T): T => {
   }
 }
 
-export const toArray = <T, P>(async: Async<T, P>): T[] => {
+export function toArray<T, P>(async: Async<T, P>): T[] {
   switch (async.kind) {
     case 'NotAsked':
     case 'Loading': return []
@@ -137,7 +145,7 @@ export const toArray = <T, P>(async: Async<T, P>): T[] => {
   }
 }
 
-export const toMaybe = <T, P>(async: Async<T, P>): Maybe<T> => {
+export function toMaybe<T, P>(async: Async<T, P>): Maybe<T> {
   switch (async.kind) {
     case 'NotAsked':
     case 'Loading': return nothing
@@ -145,7 +153,7 @@ export const toMaybe = <T, P>(async: Async<T, P>): Maybe<T> => {
   }
 }
 
-export const toOption = <T, P>(async: Async<T, P>): Option<T> => {
+export function toOption<T, P>(async: Async<T, P>): Option<T> {
   switch (async.kind) {
     case 'NotAsked':
     case 'Loading': return none
@@ -153,7 +161,7 @@ export const toOption = <T, P>(async: Async<T, P>): Option<T> => {
   }
 }
 
-export const flatten = <T, P>(async: Async<Async<T, P>, P>): Async<T, P> => {
+export function flatten<T, P>(async: Async<Async<T, P>, P>): Async<T, P> {
   switch (async.kind) {
     case 'NotAsked': return notAsked
     case 'Loading': return loading(async.progress)
@@ -161,7 +169,7 @@ export const flatten = <T, P>(async: Async<Async<T, P>, P>): Async<T, P> => {
   }
 }
 
-export const cata = <A, B, Prog>(f: (a: A) => B, async: Async<A, Prog>, ifNotOutcome: B): B => {
+export function cata<A, B, Prog>(f: (a: A) => B, async: Async<A, Prog>, ifNotOutcome: B): B {
   switch (async.kind) {
     case 'NotAsked':
     case 'Loading': return ifNotOutcome
@@ -169,7 +177,7 @@ export const cata = <A, B, Prog>(f: (a: A) => B, async: Async<A, Prog>, ifNotOut
   }
 }
 
-export const cataLazy = <A, B, Prog>(f: (a: A) => B, async: Async<A, Prog>, ifNotOutcome: () => B): B => {
+export function cataLazy<A, B, Prog>(f: (a: A) => B, async: Async<A, Prog>, ifNotOutcome: () => B): B {
   switch (async.kind) {
     case 'NotAsked':
     case 'Loading': return ifNotOutcome()
@@ -177,7 +185,7 @@ export const cataLazy = <A, B, Prog>(f: (a: A) => B, async: Async<A, Prog>, ifNo
   }
 }
 
-export const foldLeft = <T, B, Prog>(f: (acc: B, curr: T) => B, async: Async<T, Prog>, b: B): B => {
+export function foldLeft<T, B, Prog>(f: (acc: B, curr: T) => B, async: Async<T, Prog>, b: B): B {
   switch (async.kind) {
     case 'NotAsked':
     case 'Loading': return b
@@ -185,7 +193,7 @@ export const foldLeft = <T, B, Prog>(f: (acc: B, curr: T) => B, async: Async<T, 
   }
 }
 
-export const all = <T, P>(f: (v: T) => boolean, async: Async<T, P>): boolean => {
+export function all<T, P>(f: (v: T) => boolean, async: Async<T, P>): boolean {
   switch (async.kind) {
     case 'NotAsked':
     case 'Loading': return true
@@ -193,7 +201,7 @@ export const all = <T, P>(f: (v: T) => boolean, async: Async<T, P>): boolean => 
   }
 }
 
-export const any = <T, P>(f: (v: T) => boolean, async: Async<T, P>): boolean => {
+export function any<T, P>(f: (v: T) => boolean, async: Async<T, P>): boolean {
   switch (async.kind) {
     case 'NotAsked':
     case 'Loading': return false
@@ -201,7 +209,7 @@ export const any = <T, P>(f: (v: T) => boolean, async: Async<T, P>): boolean => 
   }
 }
 
-export const each = <T, P>(f: (v: T) => void, async: Async<T, P>): void => {
+export function each<T, P>(f: (v: T) => void, async: Async<T, P>): void {
   switch (async.kind) {
     case 'NotAsked':
     case 'Loading': return
@@ -209,7 +217,7 @@ export const each = <T, P>(f: (v: T) => void, async: Async<T, P>): void => {
   }
 }
 
-export const firstOutcome = <A, Prog>(...args: Async<A, Prog>[]): Async<A, Prog> => {
+export function firstOutcome<A, Prog>(...args: Async<A, Prog>[]): Async<A, Prog> {
   for (const a of args) {
     if (isOutcome(a))
       return a
@@ -220,7 +228,7 @@ export const firstOutcome = <A, Prog>(...args: Async<A, Prog>[]): Async<A, Prog>
   throw 'cannot use `firstOutcome` with empty argument list'
 }
 
-export const recover = <T, P>(async: Async<T, P>, whenNoOutcome: T) => {
+export function recover<T, P>(async: Async<T, P>, whenNoOutcome: T) {
   switch (async.kind) {
     case 'NotAsked':
     case 'Loading': return outcome(whenNoOutcome)

@@ -25,10 +25,15 @@ export function compose<Args extends Fun1<any, any>[]>(...args: Args) {
   return (a: FirstArgument<Args[0]>) => args.reduce((acc, f) => f(acc), a)
 }
 
-export const identity = <T>(v: T) => v
+export function identity<T>(v: T) {
+  return v
+}
 
-export const curryLeft = <A, Rest extends any[], Ret>(f: (a: A, ...rest: Rest) => Ret) =>
-  (a: A) => (...rest: Rest): Ret => f(a, ...rest)
+export function curryLeft<A, Rest extends any[], Ret>(
+  f: (a: A, ...rest: Rest) => Ret
+) {
+  return (a: A) => (...rest: Rest): Ret => f(a, ...rest)
+}
 
 export function curryRight<A, B, C, D>
   (f: (a: A, b: B, c: C) => D): (a: A, b: B) => (c: C) => D

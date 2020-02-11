@@ -128,8 +128,8 @@ export function sort<A>(compare: (a: A, b: A) => Ordering, arr: A[]): A[] {
   return arr.slice().sort(compare)
 }
 
-export function range<A>(length: number, f: (index: number) => A) {
-  const buff = new Array(length)
+export function range<A>(length: number, f: (index: number) => A): A[] {
+  const buff = new Array(length) as A[]
   for (let i = 0; i < length; i++)
     buff[i] = f(i)
   return buff
@@ -139,6 +139,6 @@ export function numbersRange(length: number, startAt = 0) {
   return range(length, i => startAt + i)
 }
 
-export function fill<A>(length: number, value: A) {
+export function fill<A>(length: number, value: A): A[] {
   return range(length, () => value)
 }

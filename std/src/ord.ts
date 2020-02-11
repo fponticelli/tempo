@@ -71,12 +71,14 @@ export class Ord<T> {
   }
 }
 
-export const fromNumberComparison = <A>(f: (a: A, b: A) => number) => (a: A, b: A) => {
-  const r = f(a, b)
-  if (r < 0)
-    return Ordering.LT
-  else if (r === 0)
-    return Ordering.EQ
-  else
-    return Ordering.GT
+export function fromNumberComparison<A>(f: (a: A, b: A) => number) {
+  return function compare(a: A, b: A) {
+    const r = f(a, b)
+    if (r < 0)
+      return Ordering.LT
+    else if (r === 0)
+      return Ordering.EQ
+    else
+      return Ordering.GT
+  }
 }
