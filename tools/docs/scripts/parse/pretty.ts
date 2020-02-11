@@ -11,15 +11,16 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { stripImportTypes } from './utils'
-import { makePretty } from './pretty'
-import { replace } from 'tempo-std/lib/strings'
+import * as fse from 'fs-extra'
+import { format } from 'prettier'
 
-export const adjustSignature = (signature: string ) => {
-  signature = signature.trim()
-  signature = replace(signature, 'export ', '')
-  signature = stripImportTypes(signature)
-  signature = makePretty(signature)
-  // signature = replace(signature, 'declare ', '')
-  return signature
+const config = fse.readJsonSync('../../.prettierrc')
+
+export function makePretty(code: string)  {
+  try {
+    return format(code, config)
+  } catch (_) {
+    console.log(code)
+    return code
+  }
 }

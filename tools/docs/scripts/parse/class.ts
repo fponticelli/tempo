@@ -12,7 +12,7 @@ export interface ClassT extends BaseDoc {
   signature: string
 }
 
-function getMethodDeclarationSignature(fun: MethodDeclaration, isStatic: boolean): string {
+function getMethodDeclarationSignature(fun: MethodDeclaration): string {
   let text = fun.getText()
   const body = fun.compilerNode.body
   if (body !== undefined) {
@@ -23,10 +23,10 @@ function getMethodDeclarationSignature(fun: MethodDeclaration, isStatic: boolean
   if (text.endsWith(')')) {
     text += ': ' + fun.getReturnType().getText()
   }
-  return (isStatic ? 'static ' : '') + adjustSignature(text)
+  return adjustSignature(text)
 }
 
-function getValueDeclarationSignature(o: ClassStaticPropertyTypes | ClassInstancePropertyTypes, isStatic: boolean): string {
+function getValueDeclarationSignature(o: ClassStaticPropertyTypes | ClassInstancePropertyTypes): string {
   const text = o.getText()
   // console.log(text)
   // const lt = text.indexOf('<')
@@ -39,8 +39,10 @@ function getValueDeclarationSignature(o: ClassStaticPropertyTypes | ClassInstanc
   // if (s.indexOf(':') === -1) {
   //   s += ': ' + o.getType().getText(o)
   // }
-  return (isStatic ? 'static ' : '') + text
+  return text
 }
+
+const keywordsToRemove = ['readonly', 'private', 'public']
 
 function getConstructorDeclarationSignature(o: ConstructorDeclaration): string {
   let text = o.getText()
@@ -49,9 +51,11 @@ function getConstructorDeclarationSignature(o: ConstructorDeclaration): string {
     const end = body.getStart() - o.getStart() - 1
     text = text.substring(0, end)
   }
-  text = replace(text, 'readonly ', '')
+  keywordsToRemove.forEach(k => {
+    text = replace(text, ` ${k} `, ' ')
+  })
   text = text.trim()
-  return text + ' {}'
+  return text
 }
 
 function getSignature(cls: ClassDeclaration) {
@@ -70,19 +74,18 @@ function getSignature(cls: ClassDeclaration) {
 
   let abstract = cls.getAbstractKeyword() ?? ''
   if (abstract) {
-    abstract = `${abstract} `
+    abstract = `abstract `
   }
 
-
   const lines = flatten([
-    cls.getStaticMethods().map(m => getMethodDeclarationSignature(m, true)),
-    cls.getStaticProperties().map(m => getValueDeclarationSignature(m, true)),
+    cls.getStaticProperties().map(m => getValueDeclarationSignature(m)),
+    cls.getStaticMethods().map(m => getMethodDeclarationSignature(m)),
     cls.getConstructors().map(c => getConstructorDeclarationSignature(c)),
-    cls.getInstanceMethods().map(m => getMethodDeclarationSignature(m, false)),
-    cls.getInstanceProperties().map(m => getValueDeclarationSignature(m, false))
+    cls.getInstanceProperties().map(m => getValueDeclarationSignature(m)),
+    cls.getInstanceMethods().map(m => getMethodDeclarationSignature(m)),
   ]).join('\n  ')
 
-  return `${abstract}class ${cls.getName()}${tp}${ext}${impl} {
+  return `declare ${abstract}class ${cls.getName()}${tp}${ext}${impl} {
   ${lines}
 }`
 }
