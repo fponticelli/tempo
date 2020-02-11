@@ -34,7 +34,9 @@ export const functionOfDeclaration = (fun: FunctionDeclaration): Function => {
     throw `Function name required in module ${fun.getSourceFile().getFilePath()}`
   }
   const overloads = fun.getOverloads()
-  const signatures = overloads.length > 0 ? overloads.map(getFunctionDeclarationSignature) : [getFunctionDeclarationSignature(fun)]
+  const signatures = overloads.length > 0 ?
+    overloads.map(o => getFunctionDeclarationSignature(o)) :
+    [getFunctionDeclarationSignature(fun)]
 
   return {
     ...docOfJsDoc(fun.getJsDocs()),

@@ -1,21 +1,3 @@
-// TODO
-// - [x] collect demo
-// - [x] copy demos
-// - [x] collect api
-// - [x] transform api MDs to HTMLs
-// - [x] collect changelog
-// - [x] transform changelog MDs to HTMLs
-// - [x] collect pages
-// - [x] transform pages MDs to HTMLs
-// - [x] projects metadata
-// - [x] layout
-// - [x] style site
-// - [ ] generate API docs
-// - [ ] style API
-// - [ ] make sub hash scroll to the right header
-// - [ ] search
-// - [x] better API links (mixed modules and types, index.md and globals.md)
-
 import { Toc, DemoRef, PageRef, ProjectRef, SectionRef } from '../src/toc'
 import { promises as fs } from 'fs'
 import * as fse from 'fs-extra'
@@ -89,18 +71,6 @@ async function loadPackage(dir: string) {
   const content = await fs.readFile(path.join(dir, 'package.json'), 'utf8')
   return JSON.parse(content)
 }
-
-// function loadHtml(dir: string): JSDOM {
-//   const content = fs.readFileSync(path.join(dir, 'build/index.html'), 'utf8')
-//   return new JSDOM(content)
-// }
-
-// function extractDemoInfo(dom: JSDOM) {
-//   const title = dom.window.document.title
-//   const description = dom.window.document.querySelector('meta[name=description]')?.getAttribute('content') || ''
-//   const priority = Number(dom.window.document.querySelector('meta[name=priority]')?.getAttribute('content'))
-//   return { title, description, priority }
-// }
 
 function filterDirectories(dirs: string[]) {
   return dirs.filter(dir => !dir.startsWith('.'))
@@ -225,77 +195,6 @@ async function createChangeLogs(projects: string[], root: string, dst: string) {
     })
   )
 }
-
-// const mangleApiHref = (name: string, base: string) => (url: string) => {
-//   if (url.endsWith('.md')) {
-//     url = url.substring(0, url.length - 3) + '.html'
-//   } else if (url.indexOf('.md#')) {
-//     url = url.replace('.md#', '.html#')
-//   }
-//   const p = path.join(name, base, url)
-//   return `#/api/${p}`
-// }
-
-// async function createApi(project: string, root: string, dst: string): Promise<ApiRef[]> {
-//   const p = path.join(root, project, 'docs')
-//   if (!fse.existsSync(p)) {
-//     return []
-//   }
-//   const mdFiles = await listAllMDFiles(p)
-//   const data = await Promise.all(mdFiles.map(async file => ({
-//     dest: renameHtml(renameMdToHtml(file)),
-//     ...await makeHtml(path.join(p, file), mangleApiHref(project, path.dirname(file)))
-//   })))
-
-//   const mapName: Record<string, string> = {
-//     modules: 'module',
-//     classes: 'class',
-//     interfaces: 'interface',
-//     enums: 'enum'
-//   }
-
-//   data
-//     .forEach(d => {
-//       const parts = d.dest.split('/')
-//       if (parts.length === 1) return
-//       delete d.data.sidebar_label
-//       const ctx = parts[0]!
-//       if (!!mapName[ctx]) {
-//         d.data.type = mapName[ctx]
-//       } else {
-//         console.log(`unkown type ${ctx}`)
-//       }
-//     })
-//   await Promise.all(data.map(async o => {
-//     const p = path.join(dst, project, o.dest)
-//     const base = path.dirname(p)
-//     await fse.ensureDir(base)
-//     await fs.writeFile(p, o.html)
-//   }))
-//   return data
-//     .filter(d => !!d.data.type)
-//     .map(d => ({
-//       path: d.dest,
-//       ...d.data
-//     }))
-// }
-
-// async function createApis(projects: string[], root: string, dst: string): Promise<Record<string, ApiRef[]>> {
-//   const modules = generateDocs(dst, root, projects)
-//   const list = await Promise.all(
-//     projects
-//       .map(async project => ({
-//         project,
-//         list: await createApi(project, root, dst)
-//       }))
-//   )
-//   return list.reduce((acc, curr) => {
-//     return {
-//       ...acc,
-//       [curr.project]: curr.list
-//     }
-//   }, {})
-// }
 
 async function collectProject(project: string, src: string): Promise<{ priority: number, data: ProjectRef }> {
   const p = path.join(src, project, 'package.json')

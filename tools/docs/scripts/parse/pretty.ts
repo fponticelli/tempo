@@ -20,7 +20,7 @@ export function makePretty(code: string)  {
   try {
     return format(code, config)
   } catch (_) {
-    console.log(code)
+    // console.log(code)
     return code
   }
 }

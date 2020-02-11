@@ -16,7 +16,7 @@ import { Interface } from '../parse/interface'
 import { TypeAlias } from '../parse/type_alias'
 import { compare } from 'tempo-std/lib/strings'
 
-export const list = <State extends any[], Inner>(title: string, element: DOMChild<State[number], unknown>) => {
+export const list = <State extends any[]>(title: string, element: DOMChild<State[number], unknown>) => {
   return when<State, unknown>(
     { condition: state => state.length > 0 },
     h2({}, title),

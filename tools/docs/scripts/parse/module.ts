@@ -10,9 +10,8 @@ import { ClassT, classOfDeclaration } from './class'
 import { Export, exportOfDeclaration } from './export'
 import { Variable, variableOfDeclaration } from './variable'
 import {
-  Directory, VariableDeclarationList, CatchClause, ts,
-  VariableStatement, ForStatement, ForOfStatement, ForInStatement,
-  TypeGuards } from 'ts-morph'
+  Directory
+} from 'ts-morph'
 import { none } from 'tempo-std/lib/option'
 
 export interface Module extends BaseDoc {
@@ -79,34 +78,10 @@ const exportOfSource = (source: SourceFile) => {
           .sort((a, b) => compareCaseInsensitive(a.name, b.name))
 }
 
-const isVariableDeclarationList = (
-  u: VariableDeclarationList | CatchClause
-): u is VariableDeclarationList => u.getKind() === ts.SyntaxKind.VariableDeclarationList
-
-const isVariableStatement = (
-  u: VariableStatement | ForStatement | ForOfStatement | ForInStatement
-): u is VariableStatement => u.getKind() === ts.SyntaxKind.VariableStatement
-
 const variablesOfSource = (source: SourceFile) => {
-  const variablesDeclarations = source
+  return source
     .getVariableDeclarations()
-    .filter(vd => {
-      const parent = vd.getParent()
-      if (typeof parent !== 'undefined' && isVariableDeclarationList(parent)) {
-        const vs = (parent as VariableDeclarationList).getParent()
-        if (typeof vs !== 'undefined' && isVariableStatement(vs)) {
-          const initializer = vd.getInitializer()
-          return (
-            initializer !== undefined &&
-            (vs as VariableStatement).isExported() &&
-            !TypeGuards.isFunctionLikeDeclaration(initializer)
-          )
-        }
-      }
-      return false
-    })
-
-  return variablesDeclarations
+    .filter(f => f.isExported())
     .map(variableOfDeclaration)
     .sort((a, b) => compareCaseInsensitive(a.name, b.name))
 }

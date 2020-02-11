@@ -1,5 +1,5 @@
 import { Project } from 'ts-morph'
-import { moduleFromSourceFile, empty } from './parse/module'
+import { moduleFromSourceFile } from './parse/module'
 import * as path from 'path'
 import { module } from './template/module'
 import { DOMContext } from 'tempo-dom/lib/context'
@@ -52,23 +52,16 @@ const processProject = (destPath: string, basePath: string, renderModule: (modul
   })
 }
 
-const makeView = () => {
+const makeHtml = (state: State) => {
   const dom = new JSDOM()
-  const body = dom.window.document.body
-  const ctx = DOMContext.fromElement(body, () => ({}))
-  const view = module.render(ctx, { module: empty, project: '' })
-  const getHtml = () => {
-    const html = body.innerHTML
-    return formatHtml(html)
-  }
-  return { view, getHtml }
+  const ctx = DOMContext.fromElement(dom.window.document.body, () => ({}))
+  module.render(ctx, state)
+  return formatHtml(dom.window.document.body.innerHTML)
 }
 
 export const generateDocs = async (projects: string[], basePath: string, destPath: string): Promise<Record<string, ApiRef[]>> => {
-  const { view, getHtml } = makeView()
   const renderModule = (state: State) => {
-    view.change(state)
-    return getHtml()
+    return makeHtml(state)
   }
   await fse.emptyDir(destPath)
   const process = processProject(destPath, basePath, renderModule)
@@ -80,5 +73,3 @@ export const generateDocs = async (projects: string[], basePath: string, destPat
     }
   }, {})
 }
-
-// main('../../docs/api', '../..', ['std', 'core', 'dom', 'store', 'paperjs'])
