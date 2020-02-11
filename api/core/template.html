@@ -18,7 +18,11 @@
   </div>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">type</span> <span class="token constant">T</span><span class="token operator">&lt;</span><span class="token constant">V</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span> <span class="token operator">=</span> Validation<span class="token operator">&lt;</span><span class="token constant">V</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span></div></pre>
+  ><div><span class="token keyword">type</span> RenderMethod<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> Context<span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">(</span>
+  <span class="token parameter">ctx<span class="token operator">:</span> Context<span class="token punctuation">,</span>
+  state<span class="token operator">:</span> State</span>
+<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> View<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="Template">Template</h3>
   <div>
     <p>
@@ -28,7 +32,8 @@
   </div>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">type</span> KeysWithFieldType<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> Condition<span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
-  <span class="token punctuation">[</span><span class="token constant">K</span> <span class="token keyword">in</span> <span class="token keyword">keyof</span> <span class="token constant">T</span><span class="token punctuation">]</span><span class="token operator">:</span> WhenEquals<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">[</span><span class="token constant">K</span><span class="token punctuation">]</span><span class="token punctuation">,</span> Condition<span class="token punctuation">,</span> <span class="token constant">K</span><span class="token operator">&gt;</span>
-<span class="token punctuation">}</span><span class="token punctuation">[</span><span class="token keyword">keyof</span> <span class="token constant">T</span><span class="token punctuation">]</span></div></pre>
+  ><div><span class="token keyword">interface</span> <span class="token class-name">Template</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> Context<span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+  render<span class="token operator">:</span> RenderMethod<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> Context<span class="token operator">&gt;</span>
+<span class="token punctuation">}</span>
+</div></pre>
 </article>

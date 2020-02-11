@@ -21,12 +21,106 @@
         <a class="is-family-monospace" href="#/api/std/option.html#T">T</a>
       </li>
       <li>
+        <a class="is-family-monospace" href="#/api/std/option.html#all">all</a>
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/option.html#any">any</a>
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/option.html#ap">ap</a>
+      </li>
+      <li>
         <a class="is-family-monospace" href="#/api/std/option.html#apN">apN</a>
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/option.html#cata"
+          >cata</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/option.html#cataLazy"
+          >cataLazy</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/option.html#combine"
+          >combine</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/option.html#each"
+          >each</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/option.html#equals"
+          >equals</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/option.html#filter"
+          >filter</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/option.html#firstSome"
+          >firstSome</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/option.html#flatMap"
+          >flatMap</a
+        >
       </li>
       <li>
         <a class="is-family-monospace" href="#/api/std/option.html#flatMapN"
           >flatMapN</a
         >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/option.html#flatten"
+          >flatten</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/option.html#foldLeft"
+          >foldLeft</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/option.html#getOrElse"
+          >getOrElse</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/std/option.html#getOrElseLazy"
+          >getOrElseLazy</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/option.html#getOrThrow"
+          >getOrThrow</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/option.html#getUnsafe"
+          >getUnsafe</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/option.html#isNone"
+          >isNone</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/option.html#isSome"
+          >isSome</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/option.html#map">map</a>
       </li>
       <li>
         <a class="is-family-monospace" href="#/api/std/option.html#mapN"
@@ -38,92 +132,399 @@
           >none</a
         >
       </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/option.html#ofValue"
+          >ofValue</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/option.html#recover"
+          >recover</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/option.html#recoverLazy"
+          >recoverLazy</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/option.html#some"
+          >some</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/option.html#spread"
+          >spread</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/option.html#toArray"
+          >toArray</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/option.html#toBoolean"
+          >toBoolean</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/option.html#toMaybe"
+          >toMaybe</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/option.html#toResult"
+          >toResult</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/option.html#toResultLazy"
+          >toResultLazy</a
+        >
+      </li>
     </ul>
   </nav>
   <h2>types</h2>
   <h3 class="is-family-monospace has-text-grey-dark" id="None">None</h3>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">type</span> None <span class="token operator">=</span> <span class="token punctuation">{</span> kind<span class="token operator">:</span> <span class="token string">'None'</span> <span class="token punctuation">}</span></div></pre>
+  ><div><span class="token keyword">type</span> None <span class="token operator">=</span> <span class="token punctuation">{</span> kind<span class="token operator">:</span> <span class="token string">'None'</span> <span class="token punctuation">}</span>
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="Option">Option</h3>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">type</span> Option<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span> <span class="token operator">=</span>
-  <span class="token operator">|</span> Some<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span>
-  <span class="token operator">|</span> None</div></pre>
+  ><div><span class="token keyword">type</span> Option<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span> <span class="token operator">=</span> Some<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span> <span class="token operator">|</span> None
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="Some">Some</h3>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">type</span> Some<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">{</span> kind<span class="token operator">:</span> <span class="token string">'Some'</span><span class="token punctuation">,</span> value<span class="token operator">:</span> <span class="token constant">T</span> <span class="token punctuation">}</span></div></pre>
+  ><div><span class="token keyword">type</span> Some<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">{</span> kind<span class="token operator">:</span> <span class="token string">'Some'</span><span class="token punctuation">;</span> value<span class="token operator">:</span> <span class="token constant">T</span> <span class="token punctuation">}</span>
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="T">T</h3>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">type</span> <span class="token constant">T</span><span class="token operator">&lt;</span><span class="token constant">V</span><span class="token operator">&gt;</span> <span class="token operator">=</span> Option<span class="token operator">&lt;</span><span class="token constant">V</span><span class="token operator">&gt;</span></div></pre>
+  ><div><span class="token keyword">type</span> <span class="token constant">T</span><span class="token operator">&lt;</span><span class="token constant">V</span><span class="token operator">&gt;</span> <span class="token operator">=</span> Option<span class="token operator">&lt;</span><span class="token constant">V</span><span class="token operator">&gt;</span>
+</div></pre>
   <h2>functions</h2>
+  <h3 class="is-family-monospace has-text-grey-dark" id="all">all</h3>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">function</span> all<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">v<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">boolean</span><span class="token punctuation">,</span> option<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span>
+</div></pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="any">any</h3>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">function</span> <span class="token builtin">any</span><span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">v<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">boolean</span><span class="token punctuation">,</span> option<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span>
+</div></pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="ap">ap</h3>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">function</span> ap<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>optf<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token constant">A</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> opt<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token operator">&gt;</span>
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="apN">apN</h3>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">function</span> apN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>f<span class="token operator">:</span> Option<span class="token operator">&lt;</span>Fun2<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token operator">&gt;&gt;</span><span class="token punctuation">,</span> a<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> b<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token operator">&gt;</span></div></pre>
+  ><div><span class="token keyword">function</span> apN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  f<span class="token operator">:</span> Option<span class="token operator">&lt;</span>Fun2<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token operator">&gt;&gt;</span><span class="token punctuation">,</span>
+  a<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  b<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token operator">&gt;</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token operator">&gt;</span>
+</div></pre>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">function</span> apN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>f<span class="token operator">:</span> Option<span class="token operator">&lt;</span>Fun3<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token operator">&gt;&gt;</span><span class="token punctuation">,</span> a<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> b<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> c<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token operator">&gt;</span></div></pre>
+  ><div><span class="token keyword">function</span> apN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  f<span class="token operator">:</span> Option<span class="token operator">&lt;</span>Fun3<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token operator">&gt;&gt;</span><span class="token punctuation">,</span>
+  a<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  b<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  c<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token operator">&gt;</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token operator">&gt;</span>
+</div></pre>
   <pre
     class="ts language-ts"
   ><div><span class="token keyword">function</span> apN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
   f<span class="token operator">:</span> Option<span class="token operator">&lt;</span>Fun4<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;&gt;</span><span class="token punctuation">,</span>
-  a<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> b<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> c<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> d<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token operator">&gt;</span></div></pre>
+  a<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  b<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  c<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  d<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token operator">&gt;</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token operator">&gt;</span>
+</div></pre>
   <pre
     class="ts language-ts"
   ><div><span class="token keyword">function</span> apN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
   f<span class="token operator">:</span> Option<span class="token operator">&lt;</span>Fun5<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token operator">&gt;&gt;</span><span class="token punctuation">,</span>
-  a<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> b<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> c<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> d<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> e<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">F</span><span class="token operator">&gt;</span></div></pre>
+  a<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  b<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  c<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  d<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  e<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token operator">&gt;</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">F</span><span class="token operator">&gt;</span>
+</div></pre>
   <pre
     class="ts language-ts"
   ><div><span class="token keyword">function</span> apN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token punctuation">,</span> <span class="token constant">G</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
   f<span class="token operator">:</span> Option<span class="token operator">&lt;</span>Fun6<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token punctuation">,</span> <span class="token constant">G</span><span class="token operator">&gt;&gt;</span><span class="token punctuation">,</span>
-  a<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> b<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> c<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> d<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> e<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> g<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">F</span><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">G</span><span class="token operator">&gt;</span></div></pre>
+  a<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  b<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  c<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  d<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  e<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  g<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">F</span><span class="token operator">&gt;</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">G</span><span class="token operator">&gt;</span>
+</div></pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="cata">cata</h3>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">function</span> cata<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token constant">A</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">B</span><span class="token punctuation">,</span> option<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> ifNone<span class="token operator">:</span> <span class="token constant">B</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token constant">B</span>
+</div></pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="cataLazy">cataLazy</h3>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">function</span> cataLazy<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token constant">A</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">B</span><span class="token punctuation">,</span> option<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> <span class="token function-variable function">ifNone</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">B</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token constant">B</span>
+</div></pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="combine">combine</h3>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">function</span> combine<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>a<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> b<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token punctuation">[</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">]</span><span class="token operator">&gt;</span>
+</div></pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="each">each</h3>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">function</span> each<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">v<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span><span class="token punctuation">,</span> option<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">void</span>
+</div></pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="equals">equals</h3>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">function</span> equals<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  <span class="token function-variable function">predicate</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">,</span> b<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">boolean</span><span class="token punctuation">,</span>
+  a<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  b<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span>
+</div></pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="filter">filter</h3>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">function</span> filter<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token function-variable function">predicate</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">v<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">boolean</span><span class="token punctuation">,</span> option<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span>
+</div></pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="firstSome">
+    firstSome
+  </h3>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">function</span> firstSome<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token operator">...</span>args<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span>
+</div></pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="flatMap">flatMap</h3>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">function</span> flatMap<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token constant">A</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Option<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> opt<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token operator">&gt;</span>
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="flatMapN">flatMapN</h3>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">function</span> flatMapN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>f<span class="token operator">:</span> Fun2<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> Option<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token operator">&gt;&gt;</span><span class="token punctuation">,</span> a<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> b<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token operator">&gt;</span></div></pre>
+  ><div><span class="token keyword">function</span> flatMapN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  f<span class="token operator">:</span> Fun2<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> Option<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token operator">&gt;&gt;</span><span class="token punctuation">,</span>
+  a<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  b<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token operator">&gt;</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token operator">&gt;</span>
+</div></pre>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">function</span> flatMapN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>f<span class="token operator">:</span> Fun3<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> Option<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token operator">&gt;&gt;</span><span class="token punctuation">,</span> a<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> b<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> c<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token operator">&gt;</span></div></pre>
+  ><div><span class="token keyword">function</span> flatMapN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  f<span class="token operator">:</span> Fun3<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> Option<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token operator">&gt;&gt;</span><span class="token punctuation">,</span>
+  a<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  b<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  c<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token operator">&gt;</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token operator">&gt;</span>
+</div></pre>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">function</span> flatMapN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>f<span class="token operator">:</span> Fun4<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> Option<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token operator">&gt;&gt;</span><span class="token punctuation">,</span> a<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> b<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> c<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> d<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token operator">&gt;</span></div></pre>
+  ><div><span class="token keyword">function</span> flatMapN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  f<span class="token operator">:</span> Fun4<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> Option<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token operator">&gt;&gt;</span><span class="token punctuation">,</span>
+  a<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  b<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  c<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  d<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token operator">&gt;</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token operator">&gt;</span>
+</div></pre>
   <pre
     class="ts language-ts"
   ><div><span class="token keyword">function</span> flatMapN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
   f<span class="token operator">:</span> Fun5<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> Option<span class="token operator">&lt;</span><span class="token constant">F</span><span class="token operator">&gt;&gt;</span><span class="token punctuation">,</span>
-  a<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> b<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> c<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> d<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> e<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">F</span><span class="token operator">&gt;</span></div></pre>
+  a<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  b<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  c<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  d<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  e<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token operator">&gt;</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">F</span><span class="token operator">&gt;</span>
+</div></pre>
   <pre
     class="ts language-ts"
   ><div><span class="token keyword">function</span> flatMapN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token punctuation">,</span> <span class="token constant">G</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
   f<span class="token operator">:</span> Fun6<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token punctuation">,</span> Option<span class="token operator">&lt;</span><span class="token constant">G</span><span class="token operator">&gt;&gt;</span><span class="token punctuation">,</span>
-  a<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> b<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> c<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> d<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> e<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> g<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">F</span><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">G</span><span class="token operator">&gt;</span></div></pre>
+  a<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  b<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  c<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  d<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  e<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  g<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">F</span><span class="token operator">&gt;</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">G</span><span class="token operator">&gt;</span>
+</div></pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="flatten">flatten</h3>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">function</span> flatten<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>option<span class="token operator">:</span> Option<span class="token operator">&lt;</span>Option<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span>
+</div></pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="foldLeft">foldLeft</h3>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">function</span> foldLeft<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">acc<span class="token operator">:</span> <span class="token constant">B</span><span class="token punctuation">,</span> curr<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">B</span><span class="token punctuation">,</span> option<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> b<span class="token operator">:</span> <span class="token constant">B</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token constant">B</span>
+</div></pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="getOrElse">
+    getOrElse
+  </h3>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">function</span> getOrElse<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>option<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> alt<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token constant">T</span>
+</div></pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="getOrElseLazy">
+    getOrElseLazy
+  </h3>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">function</span> getOrElseLazy<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>option<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> <span class="token function-variable function">alt</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">T</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token constant">T</span>
+</div></pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="getOrThrow">
+    getOrThrow
+  </h3>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">function</span> getOrThrow<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>option<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> exception<span class="token operator">:</span> <span class="token constant">E</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token constant">T</span>
+</div></pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="getUnsafe">
+    getUnsafe
+  </h3>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">function</span> getUnsafe<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>option<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token constant">T</span>
+</div></pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="isNone">isNone</h3>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">function</span> isNone<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>option<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> option <span class="token keyword">is</span> None
+</div></pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="isSome">isSome</h3>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">function</span> isSome<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>option<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> option <span class="token keyword">is</span> Some<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span>
+</div></pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="map">map</h3>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">function</span> map<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token constant">A</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">B</span><span class="token punctuation">,</span> opt<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token operator">&gt;</span>
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="mapN">mapN</h3>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">function</span> mapN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>f<span class="token operator">:</span> Fun2<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> a<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> b<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token operator">&gt;</span></div></pre>
+  ><div><span class="token keyword">function</span> mapN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>f<span class="token operator">:</span> Fun2<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> a<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> b<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token operator">&gt;</span>
+</div></pre>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">function</span> mapN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>f<span class="token operator">:</span> Fun3<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> a<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> b<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> c<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token operator">&gt;</span></div></pre>
+  ><div><span class="token keyword">function</span> mapN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  f<span class="token operator">:</span> Fun3<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  a<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  b<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  c<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token operator">&gt;</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token operator">&gt;</span>
+</div></pre>
   <pre
     class="ts language-ts"
   ><div><span class="token keyword">function</span> mapN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
   f<span class="token operator">:</span> Fun4<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  a<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> b<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> c<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> d<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token operator">&gt;</span></div></pre>
+  a<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  b<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  c<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  d<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token operator">&gt;</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token operator">&gt;</span>
+</div></pre>
   <pre
     class="ts language-ts"
   ><div><span class="token keyword">function</span> mapN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
   f<span class="token operator">:</span> Fun5<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  a<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> b<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> c<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> d<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> e<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">F</span><span class="token operator">&gt;</span></div></pre>
+  a<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  b<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  c<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  d<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  e<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token operator">&gt;</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">F</span><span class="token operator">&gt;</span>
+</div></pre>
   <pre
     class="ts language-ts"
   ><div><span class="token keyword">function</span> mapN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token punctuation">,</span> <span class="token constant">G</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
   f<span class="token operator">:</span> Fun6<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token punctuation">,</span> <span class="token constant">G</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  a<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> b<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> c<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> d<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> e<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> g<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">F</span><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">G</span><span class="token operator">&gt;</span></div></pre>
+  a<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  b<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  c<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  d<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  e<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  g<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">F</span><span class="token operator">&gt;</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">G</span><span class="token operator">&gt;</span>
+</div></pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="ofValue">ofValue</h3>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">function</span> ofValue<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>value<span class="token operator">:</span> <span class="token constant">T</span> <span class="token operator">|</span> <span class="token keyword">undefined</span> <span class="token operator">|</span> <span class="token keyword">null</span><span class="token punctuation">)</span><span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span>
+</div></pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="recover">recover</h3>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">function</span> recover<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>result<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> whenFailure<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">)</span><span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span>
+</div></pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="recoverLazy">
+    recoverLazy
+  </h3>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">function</span> recoverLazy<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>result<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> <span class="token function-variable function">whenFailuref</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">T</span><span class="token punctuation">)</span><span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span>
+</div></pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="some">some</h3>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">function</span> some<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>value<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">)</span><span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span>
+</div></pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="spread">spread</h3>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">function</span> spread<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token constant">A</span><span class="token punctuation">,</span> b<span class="token operator">:</span> <span class="token constant">B</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">C</span><span class="token punctuation">,</span> v<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token punctuation">[</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">]</span><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token operator">&gt;</span>
+</div></pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="toArray">toArray</h3>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">function</span> toArray<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>option<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
+</div></pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="toBoolean">
+    toBoolean
+  </h3>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">function</span> <span class="token function">toBoolean</span><span class="token punctuation">(</span><span class="token parameter">option<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token builtin">unknown</span><span class="token operator">&gt;</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span>
+</div></pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="toMaybe">toMaybe</h3>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">function</span> toMaybe<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>option<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> Maybe<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span>
+</div></pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="toResult">toResult</h3>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">function</span> toResult<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>option<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> error<span class="token operator">:</span> <span class="token constant">E</span><span class="token punctuation">)</span><span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span>
+</div></pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="toResultLazy">
+    toResultLazy
+  </h3>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">function</span> toResultLazy<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>option<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> <span class="token function-variable function">errorf</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">E</span><span class="token punctuation">)</span><span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span>
+</div></pre>
   <h2>values</h2>
   <h3 class="is-family-monospace has-text-grey-dark" id="none">none</h3>
   <pre

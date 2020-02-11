@@ -1,53 +1,47 @@
 <article>
   <h1>module 'newtype'</h1>
   <div>
-    <p>
-      Usage: export interface Int extends Newtype&lt; number, { readonly Int:
-      unique symbol }
-    </p>
-    <blockquote>
-      <p>{}</p>
-    </blockquote>
-    <p>
-      export const Int = new class extends NewtypeClass<int>
-        { isValid(v: number) { return Number.isInteger(v) } }()</int
-      >
-    </p>
+    <p>Usage:</p>
+    <pre><code class="ts language-ts">export interface Int extends Newtype&lt;
+  number,
+  { readonly Int: unique symbol }
+&gt; {}
+
+export const Int = new class extends NewtypeClass&lt;Int&gt; {
+  isValid(v: number) { return Number.isInteger(v) }
+}()
+</code></pre>
   </div>
   <nav></nav>
   <h2>types</h2>
   <h3 class="is-family-monospace has-text-grey-dark" id="Newtype">Newtype</h3>
-  <div>
-    <p>
-      Usage: export interface Int extends Newtype&lt; number, { readonly Int:
-      unique symbol }
-    </p>
-    <blockquote>
-      <p>{}</p>
-    </blockquote>
-    <p>
-      export const Int = new class extends NewtypeClass<int>
-        { isValid(v: number) { return Number.isInteger(v) } }()</int
-      >
-    </p>
-  </div>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">type</span> Just<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token constant">T</span></div></pre>
+  ><div><span class="token keyword">interface</span> <span class="token class-name">Newtype</span><span class="token operator">&lt;</span><span class="token constant">V</span><span class="token punctuation">,</span> <span class="token constant">S</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">readonly</span> _T<span class="token operator">:</span> <span class="token constant">V</span>
+  <span class="token keyword">readonly</span> _S<span class="token operator">:</span> <span class="token constant">S</span>
+<span class="token punctuation">}</span>
+</div></pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="TypeOfN">TypeOfN</h3>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">type</span> TypeOfN<span class="token operator">&lt;</span><span class="token constant">T</span> <span class="token keyword">extends</span> <span class="token class-name">Newtype</span><span class="token operator">&lt;</span><span class="token builtin">unknown</span><span class="token punctuation">,</span> <span class="token builtin">unknown</span><span class="token operator">&gt;&gt;</span> <span class="token operator">=</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token string">'_T'</span><span class="token punctuation">]</span>
+</div></pre>
   <h2>classes</h2>
   <h3 class="is-family-monospace has-text-grey-dark" id="NewtypeClass">
     NewtypeClass
   </h3>
   <pre
     class="ts language-ts"
-  ><div><span class="token punctuation">[</span>object Object<span class="token punctuation">]</span> <span class="token keyword">class</span> <span class="token class-name">NewtypeClass</span><span class="token operator">&lt;</span><span class="token constant">T</span> <span class="token keyword">extends</span> <span class="token class-name">Newtype</span><span class="token operator">&lt;</span><span class="token builtin">any</span><span class="token punctuation">,</span> <span class="token builtin">any</span><span class="token operator">&gt;&gt;</span> <span class="token punctuation">{</span>
-  <span class="token keyword">abstract</span> <span class="token function">isValid</span><span class="token punctuation">(</span>v<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token string">'_T'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span>
-  <span class="token function">unsafeOf</span><span class="token punctuation">(</span>v<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token string">'_T'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token constant">T</span>
-  <span class="token keyword">of</span><span class="token punctuation">(</span>v<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token string">'_T'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span>
-  <span class="token function">maybeOf</span><span class="token punctuation">(</span>v<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token string">'_T'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">:</span> Maybe<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span>
-  <span class="token keyword">get</span><span class="token punctuation">(</span>v<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token string">'_T'</span><span class="token punctuation">]</span>
-  <span class="token function">maybeModify</span><span class="token punctuation">(</span>f<span class="token operator">:</span> <span class="token punctuation">(</span>v<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token string">'_T'</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token string">'_T'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">value<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Maybe<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span>
-  <span class="token function">modify</span><span class="token punctuation">(</span>f<span class="token operator">:</span> <span class="token punctuation">(</span>v<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token string">'_T'</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token string">'_T'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">value<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Option<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span>
-  <span class="token function">unsafeModify</span><span class="token punctuation">(</span>f<span class="token operator">:</span> <span class="token punctuation">(</span>v<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token string">'_T'</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token string">'_T'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">value<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">T</span>
-<span class="token punctuation">}</span></div></pre>
+  ><div><span class="token keyword">declare</span> <span class="token keyword">abstract</span> <span class="token keyword">class</span> <span class="token class-name">NewtypeClass</span><span class="token operator">&lt;</span><span class="token constant">T</span> <span class="token keyword">extends</span> <span class="token class-name">Newtype</span><span class="token operator">&lt;</span><span class="token builtin">any</span><span class="token punctuation">,</span> <span class="token builtin">any</span><span class="token operator">&gt;&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">abstract</span> <span class="token function">isValid</span><span class="token punctuation">(</span>v<span class="token operator">:</span> TypeOfN<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span>
+  <span class="token function">unsafeOf</span><span class="token punctuation">(</span>v<span class="token operator">:</span> TypeOfN<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token constant">T</span>
+  <span class="token keyword">of</span><span class="token punctuation">(</span>v<span class="token operator">:</span> TypeOfN<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span>
+  <span class="token function">maybeOf</span><span class="token punctuation">(</span>v<span class="token operator">:</span> TypeOfN<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> Maybe<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span>
+  <span class="token keyword">get</span><span class="token punctuation">(</span>v<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">)</span><span class="token operator">:</span> TypeOfN<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span>
+  <span class="token function">maybeModify</span><span class="token punctuation">(</span><span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">v<span class="token operator">:</span> TypeOfN<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> TypeOfN<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">value<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Maybe<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span>
+  <span class="token function">modify</span><span class="token punctuation">(</span><span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">v<span class="token operator">:</span> TypeOfN<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> TypeOfN<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">value<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Option<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span>
+  <span class="token function">unsafeModify</span><span class="token punctuation">(</span><span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">v<span class="token operator">:</span> TypeOfN<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> TypeOfN<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">value<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">T</span>
+<span class="token punctuation">}</span>
+</div></pre>
 </article>

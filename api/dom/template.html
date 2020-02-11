@@ -5,11 +5,16 @@
   <h3 class="is-family-monospace has-text-grey-dark" id="DOMChild">DOMChild</h3>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">type</span> DOMChild<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span> <span class="token operator">=</span> DOMTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span> <span class="token operator">|</span> TextValue<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span></div></pre>
+  ><div><span class="token keyword">type</span> DOMChild<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span> <span class="token operator">=</span>
+  <span class="token operator">|</span> DOMTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+  <span class="token operator">|</span> TextValue<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span>
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="DOMTemplate">
     DOMTemplate
   </h3>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">interface</span> <span class="token class-name">DOMTemplate</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span> <span class="token keyword">extends</span> <span class="token class-name">Template</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> DOMContext<span class="token operator">&lt;</span>Action<span class="token operator">&gt;&gt;</span> <span class="token punctuation">{</span><span class="token punctuation">}</span></div></pre>
+  ><div><span class="token keyword">interface</span> <span class="token class-name">DOMTemplate</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span>
+  <span class="token keyword">extends</span> <span class="token class-name">Template</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> DOMContext<span class="token operator">&lt;</span>Action<span class="token operator">&gt;&gt;</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+</div></pre>
 </article>

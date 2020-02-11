@@ -1,4 +1,25 @@
 <article>
   <h1>module 'objects'</h1>
   <nav></nav>
+  <h2>functions</h2>
+  <h3 class="is-family-monospace has-text-grey-dark" id="keys">keys</h3>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">function</span> keys<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>object<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token keyword">keyof</span> <span class="token constant">T</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
+</div></pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="merge">merge</h3>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">function</span> merge<span class="token operator">&lt;</span><span class="token constant">A</span> <span class="token keyword">extends</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token constant">B</span> <span class="token keyword">extends</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>a<span class="token operator">:</span> <span class="token constant">A</span><span class="token punctuation">,</span> b<span class="token operator">:</span> <span class="token constant">B</span><span class="token punctuation">)</span><span class="token operator">:</span> Merge<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token operator">&gt;</span>
+</div></pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="removeFields">
+    removeFields
+  </h3>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">function</span> removeFields<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">F</span> <span class="token keyword">extends</span> <span class="token punctuation">(</span><span class="token keyword">keyof</span> <span class="token constant">T</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  ob<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">,</span>
+  <span class="token operator">...</span>fields<span class="token operator">:</span> <span class="token constant">F</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> Omit<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> TupleToUnion<span class="token operator">&lt;</span><span class="token constant">F</span><span class="token operator">&gt;&gt;</span>
+</div></pre>
 </article>

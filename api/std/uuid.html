@@ -1,6 +1,14 @@
 <article>
   <h1>module 'uuid'</h1>
-  <div><p>Utility functions to manipulate string values.</p></div>
+  <div>
+    <p>
+      Helper functions to generate and validate
+      <a href="http://en.wikipedia.org/wiki/Universally_unique_identifier"
+        >UUID</a
+      >
+      strings (version 4).
+    </p>
+  </div>
   <nav></nav>
   <h2>types</h2>
   <h3 class="is-family-monospace has-text-grey-dark" id="UUID">UUID</h3>
@@ -12,10 +20,28 @@
   </div>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">const</span> <span class="token constant">UUID</span><span class="token operator">:</span> <span class="token punctuation">(</span>Anonymous <span class="token keyword">class</span><span class="token punctuation">)</span></div></pre>
+  ><div><span class="token keyword">type</span> <span class="token constant">UUID</span> <span class="token operator">=</span> Newtype<span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token punctuation">,</span> <span class="token punctuation">{</span> <span class="token keyword">readonly</span> <span class="token constant">UUID</span><span class="token operator">:</span> unique <span class="token builtin">symbol</span> <span class="token punctuation">}</span><span class="token operator">&gt;</span>
+</div></pre>
+  <h2>functions</h2>
+  <h3 class="is-family-monospace has-text-grey-dark" id="create">create</h3>
+  <div>
+    <p>
+      <code>Uuid.create()</code> returns a string value representing a random
+      UUID string.
+    </p>
+  </div>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">function</span> <span class="token function">create</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token constant">UUID</span>
+</div></pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="toString">toString</h3>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">function</span> <span class="token function">toString</span><span class="token punctuation">(</span><span class="token parameter">uuid<span class="token operator">:</span> <span class="token constant">UUID</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span>
+</div></pre>
   <h2>values</h2>
   <h3 class="is-family-monospace has-text-grey-dark" id="UUID">UUID</h3>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">const</span> <span class="token constant">BASE64_ALPHABET</span><span class="token operator">:</span> <span class="token string">"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"</span></div></pre>
+  ><div><span class="token keyword">const</span> <span class="token constant">UUID</span><span class="token operator">:</span> NewtypeClass<span class="token operator">&lt;</span><span class="token constant">UUID</span><span class="token operator">&gt;</span></div></pre>
 </article>

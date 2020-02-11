@@ -9,7 +9,8 @@
     class="ts language-ts"
   ><div><span class="token keyword">type</span> PaperAttribute<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Value<span class="token operator">&gt;</span> <span class="token operator">=</span>
   <span class="token operator">|</span> DerivedOrLiteralValue<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Value <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token operator">&gt;</span>
-  <span class="token operator">|</span> <span class="token keyword">undefined</span></div></pre>
+  <span class="token operator">|</span> <span class="token keyword">undefined</span>
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="PaperEventHandler">
     PaperEventHandler
   </h3>
@@ -20,5 +21,13 @@
   event<span class="token operator">:</span> Event<span class="token punctuation">,</span>
   target<span class="token operator">:</span> Target<span class="token punctuation">,</span>
   project<span class="token operator">:</span> Project</span>
-<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Action <span class="token operator">|</span> <span class="token keyword">undefined</span></div></pre>
+<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Action <span class="token operator">|</span> <span class="token keyword">undefined</span>
+</div></pre>
+  <h2>values</h2>
+  <h3 class="is-family-monospace has-text-grey-dark" id="resolveAttribute">
+    resolveAttribute
+  </h3>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">const</span> resolveAttribute<span class="token operator">:</span> <span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Value<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token parameter">attr<span class="token operator">:</span> DerivedOrLiteralValue<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Value <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">(</span><span class="token parameter">state<span class="token operator">:</span> State</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Value <span class="token operator">|</span> <span class="token keyword">undefined</span></div></pre>
 </article>

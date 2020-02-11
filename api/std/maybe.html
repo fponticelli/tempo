@@ -1,22 +1,77 @@
 <article>
   <h1>module 'maybe'</h1>
-  <nav></nav>
+  <nav>
+    <ul class="module-toc-list">
+      <li>
+        <a class="is-family-monospace" href="#/api/std/maybe.html#Just">Just</a>
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/maybe.html#Maybe"
+          >Maybe</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/maybe.html#Nothing"
+          >Nothing</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/maybe.html#isJust"
+          >isJust</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/maybe.html#isNothing"
+          >isNothing</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/maybe.html#just">just</a>
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/maybe.html#nothing"
+          >nothing</a
+        >
+      </li>
+    </ul>
+  </nav>
   <h2>types</h2>
   <h3 class="is-family-monospace has-text-grey-dark" id="Just">Just</h3>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">type</span> Just<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token constant">T</span></div></pre>
+  ><div><span class="token keyword">type</span> Just<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token constant">T</span>
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="Maybe">Maybe</h3>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">type</span> Maybe<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span> <span class="token operator">=</span> Just<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span> <span class="token operator">|</span> Nothing</div></pre>
+  ><div><span class="token keyword">type</span> Maybe<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span> <span class="token operator">=</span> Just<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span> <span class="token operator">|</span> Nothing
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="Nothing">Nothing</h3>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">const</span> nothing<span class="token operator">:</span> Maybe<span class="token operator">&lt;</span><span class="token builtin">never</span><span class="token operator">&gt;</span></div></pre>
+  ><div><span class="token keyword">type</span> Nothing <span class="token operator">=</span> <span class="token keyword">undefined</span> <span class="token operator">|</span> <span class="token keyword">null</span>
+</div></pre>
+  <h2>functions</h2>
+  <h3 class="is-family-monospace has-text-grey-dark" id="isJust">isJust</h3>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">function</span> isJust<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>maybe<span class="token operator">:</span> Maybe<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> maybe <span class="token keyword">is</span> Just<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span>
+</div></pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="isNothing">
+    isNothing
+  </h3>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">function</span> isNothing<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>maybe<span class="token operator">:</span> Maybe<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> maybe <span class="token keyword">is</span> Nothing
+</div></pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="just">just</h3>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">function</span> just<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>value<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">)</span><span class="token operator">:</span> Maybe<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span>
+</div></pre>
   <h2>values</h2>
   <h3 class="is-family-monospace has-text-grey-dark" id="nothing">nothing</h3>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">const</span> matchKind<span class="token operator">:</span> <span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>matcher<span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token punctuation">[</span>k <span class="token keyword">in</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token string">"kind"</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token operator">:</span> <span class="token punctuation">(</span>arg<span class="token operator">:</span> Differentiate<span class="token operator">&lt;</span><span class="token string">"kind"</span><span class="token punctuation">,</span> <span class="token constant">T</span><span class="token punctuation">,</span> k<span class="token operator">&gt;</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">B</span><span class="token punctuation">;</span> <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">(</span><span class="token parameter">input<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">B</span></div></pre>
+  ><div><span class="token keyword">const</span> nothing<span class="token operator">:</span> Maybe<span class="token operator">&lt;</span><span class="token builtin">never</span><span class="token operator">&gt;</span></div></pre>
 </article>

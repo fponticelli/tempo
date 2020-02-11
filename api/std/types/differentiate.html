@@ -1,6 +1,5 @@
 <article>
   <h1>module 'types/differentiate'</h1>
-  <div><p>// TYPE TESTS</p></div>
   <nav></nav>
   <h2>types</h2>
   <h3 class="is-family-monospace has-text-grey-dark" id="Differentiate">
@@ -8,21 +7,47 @@
   </h3>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">type</span> <span class="token constant">T</span><span class="token operator">&lt;</span><span class="token constant">V</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span> <span class="token operator">=</span> Validation<span class="token operator">&lt;</span><span class="token constant">V</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span></div></pre>
+  ><div><span class="token keyword">type</span> Differentiate<span class="token operator">&lt;</span>
+  Field <span class="token keyword">extends</span> <span class="token class-name">IndexType</span><span class="token punctuation">,</span>
+  State <span class="token keyword">extends</span> <span class="token class-name">ObjectWithField</span><span class="token operator">&lt;</span>Field<span class="token punctuation">,</span> <span class="token builtin">any</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  ExpectedType <span class="token keyword">extends</span> <span class="token class-name">State</span><span class="token punctuation">[</span>Field<span class="token punctuation">]</span>
+<span class="token operator">&gt;</span> <span class="token operator">=</span> State <span class="token keyword">extends</span> <span class="token class-name">ObjectWithField</span><span class="token operator">&lt;</span>Field<span class="token punctuation">,</span> ExpectedType<span class="token operator">&gt;</span> <span class="token operator">?</span> State <span class="token operator">:</span> <span class="token builtin">never</span>
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="DifferentiateAt">
     DifferentiateAt
   </h3>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">type</span> Validation<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span> <span class="token operator">=</span> Res<span class="token punctuation">.</span><span class="token constant">T</span><span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> Nel<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token operator">&gt;&gt;</span></div></pre>
+  ><div><span class="token keyword">type</span> DifferentiateAt<span class="token operator">&lt;</span>
+  Path <span class="token keyword">extends</span> <span class="token class-name">IndexType</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  State<span class="token punctuation">,</span>
+  ExpectedType
+<span class="token operator">&gt;</span> <span class="token operator">=</span> Path <span class="token keyword">extends</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+  <span class="token operator">?</span> State
+  <span class="token operator">:</span> Path <span class="token keyword">extends</span> <span class="token punctuation">[</span>infer <span class="token constant">T</span><span class="token punctuation">]</span>
+  <span class="token operator">?</span> <span class="token constant">T</span> <span class="token keyword">extends</span> <span class="token class-name">keyof</span> State
+    <span class="token operator">?</span> ExpectedType <span class="token keyword">extends</span> <span class="token class-name">State</span><span class="token punctuation">[</span><span class="token constant">T</span><span class="token punctuation">]</span>
+      <span class="token operator">?</span> Differentiate<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> State<span class="token punctuation">,</span> ExpectedType<span class="token operator">&gt;</span>
+      <span class="token operator">:</span> <span class="token builtin">never</span>
+    <span class="token operator">:</span> <span class="token builtin">never</span>
+  <span class="token operator">:</span> Path <span class="token keyword">extends</span> <span class="token punctuation">[</span>infer <span class="token constant">K</span><span class="token punctuation">,</span> <span class="token operator">...</span><span class="token builtin">any</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+  <span class="token operator">?</span> <span class="token constant">K</span> <span class="token keyword">extends</span> <span class="token class-name">keyof</span> State
+    <span class="token operator">?</span> Tail<span class="token operator">&lt;</span>Path<span class="token operator">&gt;</span> <span class="token keyword">extends</span> <span class="token class-name">infer</span> Rest
+      <span class="token operator">?</span> Rest <span class="token keyword">extends</span> <span class="token class-name">IndexType</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
+        <span class="token operator">?</span> State <span class="token operator">&amp;</span> <span class="token punctuation">{</span> <span class="token punctuation">[</span>k <span class="token keyword">in</span> <span class="token constant">K</span><span class="token punctuation">]</span><span class="token operator">:</span> DifferentiateAt<span class="token operator">&lt;</span>Rest<span class="token punctuation">,</span> State<span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">,</span> ExpectedType<span class="token operator">&gt;</span> <span class="token punctuation">}</span>
+        <span class="token operator">:</span> <span class="token builtin">never</span>
+      <span class="token operator">:</span> <span class="token builtin">never</span>
+    <span class="token operator">:</span> <span class="token builtin">never</span>
+  <span class="token operator">:</span> <span class="token builtin">never</span>
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="DifferentiateByKind">
     DifferentiateByKind
   </h3>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">type</span> Equals<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">T</span> <span class="token keyword">extends</span> <span class="token class-name">A</span> <span class="token operator">?</span> <span class="token number">1</span> <span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token keyword">extends</span> <span class="token operator">&lt;</span>
-  <span class="token constant">T</span>
-<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">T</span> <span class="token keyword">extends</span> <span class="token class-name">B</span> <span class="token operator">?</span> <span class="token number">1</span> <span class="token operator">:</span> <span class="token number">2</span>
-  <span class="token operator">?</span> <span class="token boolean">true</span>
-  <span class="token operator">:</span> <span class="token boolean">false</span></div></pre>
+  ><div><span class="token keyword">type</span> DifferentiateByKind<span class="token operator">&lt;</span>
+  State <span class="token keyword">extends</span> <span class="token punctuation">{</span> kind<span class="token operator">:</span> <span class="token builtin">any</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token constant">K</span> <span class="token keyword">extends</span> <span class="token class-name">State</span><span class="token punctuation">[</span><span class="token string">'kind'</span><span class="token punctuation">]</span>
+<span class="token operator">&gt;</span> <span class="token operator">=</span> Differentiate<span class="token operator">&lt;</span><span class="token string">'kind'</span><span class="token punctuation">,</span> State<span class="token punctuation">,</span> <span class="token constant">K</span><span class="token operator">&gt;</span>
+</div></pre>
 </article>

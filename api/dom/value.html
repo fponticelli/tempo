@@ -36,6 +36,25 @@
           >TextValue</a
         >
       </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/dom/value.html#attributeToHandler"
+          >attributeToHandler</a
+        >
+      </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/dom/value.html#mapAttribute"
+          >mapAttribute</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/dom/value.html#resolveAttribute"
+          >resolveAttribute</a
+        >
+      </li>
     </ul>
   </nav>
   <h2>types</h2>
@@ -44,45 +63,104 @@
   </h3>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">type</span> Attribute<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Value<span class="token operator">&gt;</span> <span class="token operator">=</span> DerivedOrLiteralValue<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Value <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token operator">&gt;</span> <span class="token operator">|</span> <span class="token keyword">undefined</span></div></pre>
+  ><div><span class="token keyword">type</span> Attribute<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Value<span class="token operator">&gt;</span> <span class="token operator">=</span>
+  <span class="token operator">|</span> DerivedOrLiteralValue<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Value <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token operator">&gt;</span>
+  <span class="token operator">|</span> <span class="token keyword">undefined</span>
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="AttributeValue">
     AttributeValue
   </h3>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">type</span> AttributeValue <span class="token operator">=</span> <span class="token builtin">string</span> <span class="token operator">|</span> <span class="token builtin">number</span> <span class="token operator">|</span> <span class="token builtin">boolean</span> <span class="token operator">|</span> <span class="token builtin">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span></div></pre>
+  ><div><span class="token keyword">type</span> AttributeValue <span class="token operator">=</span> <span class="token builtin">string</span> <span class="token operator">|</span> <span class="token builtin">number</span> <span class="token operator">|</span> <span class="token builtin">boolean</span> <span class="token operator">|</span> <span class="token builtin">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="Attributes">
     Attributes
   </h3>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">interface</span> <span class="token class-name">Attributes</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token punctuation">,</span> El <span class="token keyword">extends</span> <span class="token class-name">Element</span> <span class="token operator">=</span> Element<span class="token punctuation">,</span> <span class="token constant">T</span> <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+  ><div><span class="token keyword">interface</span> <span class="token class-name">Attributes</span><span class="token operator">&lt;</span>
+  State<span class="token punctuation">,</span>
+  Action<span class="token punctuation">,</span>
+  Query <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token punctuation">,</span>
+  El <span class="token keyword">extends</span> <span class="token class-name">Element</span> <span class="token operator">=</span> Element<span class="token punctuation">,</span>
+  <span class="token constant">T</span> <span class="token operator">=</span> <span class="token builtin">unknown</span>
+<span class="token operator">&gt;</span> <span class="token punctuation">{</span>
   attrs<span class="token operator">?</span><span class="token operator">:</span> Record<span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token punctuation">,</span> Attribute<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> AttributeValue<span class="token operator">&gt;&gt;</span>
   events<span class="token operator">?</span><span class="token operator">:</span> Record<span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token punctuation">,</span> EventHandler<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> <span class="token builtin">any</span><span class="token punctuation">,</span> El<span class="token operator">&gt;&gt;</span>
   styles<span class="token operator">?</span><span class="token operator">:</span> Record<span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token punctuation">,</span> StyleAttribute<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> <span class="token builtin">string</span><span class="token operator">&gt;&gt;</span>
-  afterrender<span class="token operator">?</span><span class="token operator">:</span>  <span class="token punctuation">(</span><span class="token parameter">state<span class="token operator">:</span> State<span class="token punctuation">,</span> el<span class="token operator">:</span> El<span class="token punctuation">,</span> ctx<span class="token operator">:</span> DOMContext<span class="token operator">&lt;</span>Action<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">T</span> <span class="token operator">|</span> <span class="token keyword">undefined</span>
-  beforechange<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">state<span class="token operator">:</span> State<span class="token punctuation">,</span> el<span class="token operator">:</span> El<span class="token punctuation">,</span> ctx<span class="token operator">:</span> DOMContext<span class="token operator">&lt;</span>Action<span class="token operator">&gt;</span><span class="token punctuation">,</span> value<span class="token operator">:</span> <span class="token constant">T</span> <span class="token operator">|</span> <span class="token keyword">undefined</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">T</span> <span class="token operator">|</span> <span class="token keyword">undefined</span>
-  afterchange<span class="token operator">?</span><span class="token operator">:</span>  <span class="token punctuation">(</span><span class="token parameter">state<span class="token operator">:</span> State<span class="token punctuation">,</span> el<span class="token operator">:</span> El<span class="token punctuation">,</span> ctx<span class="token operator">:</span> DOMContext<span class="token operator">&lt;</span>Action<span class="token operator">&gt;</span><span class="token punctuation">,</span> value<span class="token operator">:</span> <span class="token constant">T</span> <span class="token operator">|</span> <span class="token keyword">undefined</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">T</span> <span class="token operator">|</span> <span class="token keyword">undefined</span>
-  beforedestroy<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">el<span class="token operator">:</span> El<span class="token punctuation">,</span> ctx<span class="token operator">:</span> DOMContext<span class="token operator">&lt;</span>Action<span class="token operator">&gt;</span><span class="token punctuation">,</span> value<span class="token operator">:</span> <span class="token constant">T</span> <span class="token operator">|</span> <span class="token keyword">undefined</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
-  respond<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">query<span class="token operator">:</span> Query<span class="token punctuation">,</span> el<span class="token operator">:</span> El<span class="token punctuation">,</span> ctx<span class="token operator">:</span> DOMContext<span class="token operator">&lt;</span>Action<span class="token operator">&gt;</span><span class="token punctuation">,</span> value<span class="token operator">:</span> <span class="token constant">T</span> <span class="token operator">|</span> <span class="token keyword">undefined</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">T</span> <span class="token operator">|</span> <span class="token keyword">undefined</span>
-<span class="token punctuation">}</span></div></pre>
+  afterrender<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">state<span class="token operator">:</span> State<span class="token punctuation">,</span> el<span class="token operator">:</span> El<span class="token punctuation">,</span> ctx<span class="token operator">:</span> DOMContext<span class="token operator">&lt;</span>Action<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">T</span> <span class="token operator">|</span> <span class="token keyword">undefined</span>
+  beforechange<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span>
+    <span class="token parameter">state<span class="token operator">:</span> State<span class="token punctuation">,</span>
+    el<span class="token operator">:</span> El<span class="token punctuation">,</span>
+    ctx<span class="token operator">:</span> DOMContext<span class="token operator">&lt;</span>Action<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+    value<span class="token operator">:</span> <span class="token constant">T</span> <span class="token operator">|</span> <span class="token keyword">undefined</span></span>
+  <span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">T</span> <span class="token operator">|</span> <span class="token keyword">undefined</span>
+  afterchange<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span>
+    <span class="token parameter">state<span class="token operator">:</span> State<span class="token punctuation">,</span>
+    el<span class="token operator">:</span> El<span class="token punctuation">,</span>
+    ctx<span class="token operator">:</span> DOMContext<span class="token operator">&lt;</span>Action<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+    value<span class="token operator">:</span> <span class="token constant">T</span> <span class="token operator">|</span> <span class="token keyword">undefined</span></span>
+  <span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">T</span> <span class="token operator">|</span> <span class="token keyword">undefined</span>
+  beforedestroy<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span>
+    <span class="token parameter">el<span class="token operator">:</span> El<span class="token punctuation">,</span>
+    ctx<span class="token operator">:</span> DOMContext<span class="token operator">&lt;</span>Action<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+    value<span class="token operator">:</span> <span class="token constant">T</span> <span class="token operator">|</span> <span class="token keyword">undefined</span></span>
+  <span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+  respond<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span>
+    <span class="token parameter">query<span class="token operator">:</span> Query<span class="token punctuation">,</span>
+    el<span class="token operator">:</span> El<span class="token punctuation">,</span>
+    ctx<span class="token operator">:</span> DOMContext<span class="token operator">&lt;</span>Action<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+    value<span class="token operator">:</span> <span class="token constant">T</span> <span class="token operator">|</span> <span class="token keyword">undefined</span></span>
+  <span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">T</span> <span class="token operator">|</span> <span class="token keyword">undefined</span>
+<span class="token punctuation">}</span>
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="EventHandler">
     EventHandler
   </h3>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">type</span> EventHandler<span class="token operator">&lt;</span><span class="token constant">S</span><span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Ev <span class="token keyword">extends</span> <span class="token class-name">Event</span> <span class="token operator">=</span> Event<span class="token punctuation">,</span> El <span class="token keyword">extends</span> <span class="token class-name">Element</span> <span class="token operator">=</span> Element<span class="token operator">&gt;</span> <span class="token operator">=</span>
-  <span class="token punctuation">(</span><span class="token parameter">state<span class="token operator">:</span> <span class="token constant">S</span><span class="token punctuation">,</span> event<span class="token operator">:</span> Ev<span class="token punctuation">,</span> element<span class="token operator">:</span> El</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Action <span class="token operator">|</span> <span class="token keyword">undefined</span></div></pre>
+  ><div><span class="token keyword">type</span> EventHandler<span class="token operator">&lt;</span>
+  <span class="token constant">S</span><span class="token punctuation">,</span>
+  Action<span class="token punctuation">,</span>
+  Ev <span class="token keyword">extends</span> <span class="token class-name">Event</span> <span class="token operator">=</span> Event<span class="token punctuation">,</span>
+  El <span class="token keyword">extends</span> <span class="token class-name">Element</span> <span class="token operator">=</span> Element
+<span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">state<span class="token operator">:</span> <span class="token constant">S</span><span class="token punctuation">,</span> event<span class="token operator">:</span> Ev<span class="token punctuation">,</span> element<span class="token operator">:</span> El</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Action <span class="token operator">|</span> <span class="token keyword">undefined</span>
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="StyleAttribute">
     StyleAttribute
   </h3>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">type</span> StyleAttribute<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Value<span class="token operator">&gt;</span> <span class="token operator">=</span> DerivedOrLiteralValue<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Value <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token operator">&gt;</span></div></pre>
+  ><div><span class="token keyword">type</span> StyleAttribute<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Value<span class="token operator">&gt;</span> <span class="token operator">=</span> DerivedOrLiteralValue<span class="token operator">&lt;</span>
+  State<span class="token punctuation">,</span>
+  Value <span class="token operator">|</span> <span class="token keyword">undefined</span>
+<span class="token operator">&gt;</span>
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="TextValue">
     TextValue
   </h3>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">type</span> TextValue<span class="token operator">&lt;</span><span class="token constant">S</span><span class="token operator">&gt;</span> <span class="token operator">=</span> Attribute<span class="token operator">&lt;</span><span class="token constant">S</span><span class="token punctuation">,</span> <span class="token builtin">string</span><span class="token operator">&gt;</span></div></pre>
+  ><div><span class="token keyword">type</span> TextValue<span class="token operator">&lt;</span><span class="token constant">S</span><span class="token operator">&gt;</span> <span class="token operator">=</span> Attribute<span class="token operator">&lt;</span><span class="token constant">S</span><span class="token punctuation">,</span> <span class="token builtin">string</span><span class="token operator">&gt;</span>
+</div></pre>
+  <h2>values</h2>
+  <h3 class="is-family-monospace has-text-grey-dark" id="attributeToHandler">
+    attributeToHandler
+  </h3>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">const</span> attributeToHandler<span class="token operator">:</span> <span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Value<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Ev <span class="token keyword">extends</span> <span class="token class-name">Event</span><span class="token punctuation">,</span> El <span class="token keyword">extends</span> <span class="token class-name">Element</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token parameter">attr<span class="token operator">:</span> DerivedOrLiteralValue<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Value <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> handler<span class="token operator">:</span> EventHandler<span class="token operator">&lt;</span>Value<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Ev<span class="token punctuation">,</span> El<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> EventHandler<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Ev<span class="token punctuation">,</span> El<span class="token operator">&gt;</span></div></pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="mapAttribute">
+    mapAttribute
+  </h3>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">const</span> mapAttribute<span class="token operator">:</span> <span class="token operator">&lt;</span>State<span class="token punctuation">,</span> <span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>attr<span class="token operator">:</span> DerivedOrLiteralValue<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> <span class="token constant">A</span> <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> <span class="token function-variable function">map</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token constant">A</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">B</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> DerivedOrLiteralValue<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> <span class="token constant">B</span> <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token operator">&gt;</span></div></pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="resolveAttribute">
+    resolveAttribute
+  </h3>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">const</span> resolveAttribute<span class="token operator">:</span> <span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Value<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token parameter">attr<span class="token operator">:</span> DerivedOrLiteralValue<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Value <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">(</span><span class="token parameter">state<span class="token operator">:</span> State</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Value <span class="token operator">|</span> <span class="token keyword">undefined</span></div></pre>
 </article>

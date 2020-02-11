@@ -127,6 +127,20 @@
       <li>
         <a
           class="is-family-monospace"
+          href="#/api/dom/scoped_styles.html#resetCache"
+          >resetCache</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/dom/scoped_styles.html#scopedStyles"
+          >scopedStyles</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
           href="#/api/dom/scoped_styles.html#styleset"
           >styleset</a
         >
@@ -176,7 +190,8 @@
   <span class="token punctuation">[</span>stylistic<span class="token punctuation">]</span><span class="token operator">?</span><span class="token operator">:</span> MediaQuery<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span>
   <span class="token punctuation">[</span>styleset<span class="token punctuation">]</span><span class="token operator">?</span><span class="token operator">:</span> MediaQuery<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span>
   <span class="token punctuation">[</span>characterVariant<span class="token punctuation">]</span><span class="token operator">?</span><span class="token operator">:</span> MediaQuery<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span>
-<span class="token punctuation">}</span></div></pre>
+<span class="token punctuation">}</span>
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="MediaQuery">
     MediaQuery
   </h3>
@@ -184,23 +199,27 @@
     class="ts language-ts"
   ><div><span class="token keyword">interface</span> <span class="token class-name">MediaQuery</span><span class="token operator">&lt;</span>State<span class="token operator">&gt;</span> <span class="token punctuation">{</span>
   <span class="token punctuation">[</span>query<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">]</span><span class="token operator">:</span> StyleDefinitions<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span>
-<span class="token punctuation">}</span></div></pre>
+<span class="token punctuation">}</span>
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="StyleDeclarations">
     StyleDeclarations
   </h3>
   <pre
     class="ts language-ts"
   ><div><span class="token keyword">type</span> StyleDeclarations<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
-  <span class="token punctuation">[</span><span class="token constant">K</span> <span class="token keyword">in</span> <span class="token keyword">keyof</span> CSSStyleDeclaration<span class="token punctuation">]</span><span class="token operator">?</span><span class="token operator">:</span> <span class="token constant">K</span> <span class="token keyword">extends</span> <span class="token class-name">number</span> <span class="token operator">?</span> <span class="token builtin">never</span> <span class="token operator">:</span> Attribute<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> CSSStyleDeclaration<span class="token punctuation">[</span><span class="token constant">K</span><span class="token punctuation">]</span><span class="token operator">&gt;</span>
-<span class="token punctuation">}</span></div></pre>
+  <span class="token punctuation">[</span><span class="token constant">K</span> <span class="token keyword">in</span> <span class="token keyword">keyof</span> CSSStyleDeclaration<span class="token punctuation">]</span><span class="token operator">?</span><span class="token operator">:</span> <span class="token constant">K</span> <span class="token keyword">extends</span> <span class="token class-name">number</span>
+    <span class="token operator">?</span> <span class="token builtin">never</span>
+    <span class="token operator">:</span> Attribute<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> CSSStyleDeclaration<span class="token punctuation">[</span><span class="token constant">K</span><span class="token punctuation">]</span><span class="token operator">&gt;</span>
+<span class="token punctuation">}</span>
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="StyleDefinitions">
     StyleDefinitions
   </h3>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">type</span> StyleDefinitions<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span> <span class="token operator">=</span>
-  <span class="token operator">&amp;</span> Record<span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token punctuation">,</span> StyleDeclarations<span class="token operator">&lt;</span>State<span class="token operator">&gt;&gt;</span>
-  <span class="token operator">&amp;</span> MediaQueries<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span></div></pre>
+  ><div><span class="token keyword">type</span> StyleDefinitions<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span> <span class="token operator">=</span> Record<span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token punctuation">,</span> StyleDeclarations<span class="token operator">&lt;</span>State<span class="token operator">&gt;&gt;</span> <span class="token operator">&amp;</span>
+  MediaQueries<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span>
+</div></pre>
   <h2>values</h2>
   <h3 class="is-family-monospace has-text-grey-dark" id="annotation">
     annotation
@@ -294,6 +313,18 @@
   <pre
     class="ts language-ts"
   ><div><span class="token keyword">const</span> page<span class="token operator">:</span> <span class="token keyword">typeof</span> page</div></pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="resetCache">
+    resetCache
+  </h3>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">const</span> <span class="token function-variable function">resetCache</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span></div></pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="scopedStyles">
+    scopedStyles
+  </h3>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">const</span> scopedStyles<span class="token operator">:</span> <span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token parameter">definitions<span class="token operator">:</span> StyleDefinitions<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> ScopedStyles<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="styleset">styleset</h3>
   <pre
     class="ts language-ts"
@@ -311,28 +342,26 @@
   <h3 class="is-family-monospace has-text-grey-dark" id="swash">swash</h3>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">class</span> <span class="token class-name">ScopedStyles</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span> <span class="token keyword">implements</span> <span class="token class-name">DOMTemplate</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span> <span class="token punctuation">{</span>
-  <span class="token keyword">constructor</span> <span class="token punctuation">(</span>
-    literal<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-    derived<span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">state<span class="token operator">:</span> State</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">string</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
-  <span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
-  <span class="token function">render</span><span class="token punctuation">(</span>ctx<span class="token operator">:</span> DOMContext<span class="token operator">&lt;</span>Action<span class="token operator">&gt;</span><span class="token punctuation">,</span> state<span class="token operator">:</span> State<span class="token punctuation">)</span><span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token function-variable function">change</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">state<span class="token operator">:</span> State</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span><span class="token punctuation">;</span> <span class="token function-variable function">request</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">query<span class="token operator">:</span> Query</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span><span class="token punctuation">;</span> <span class="token function-variable function">destroy</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
-  <span class="token keyword">readonly</span> literal<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
-  <span class="token keyword">readonly</span> derived<span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">state<span class="token operator">:</span> State</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">string</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
-<span class="token punctuation">}</span></div></pre>
+  ><div><span class="token keyword">const</span> swash<span class="token operator">:</span> <span class="token keyword">typeof</span> swash</div></pre>
   <h2>classes</h2>
   <h3 class="is-family-monospace has-text-grey-dark" id="ScopedStyles">
     ScopedStyles
   </h3>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">class</span> <span class="token class-name">MapActionTemplate</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> OuterAction<span class="token punctuation">,</span> InnerAction<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span> <span class="token keyword">implements</span> <span class="token class-name">DOMTemplate</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> OuterAction<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span> <span class="token punctuation">{</span>
-  <span class="token keyword">constructor</span><span class="token punctuation">(</span>
-    <span class="token function-variable function">map</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">value<span class="token operator">:</span> InnerAction</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> OuterAction <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">,</span>
-    children<span class="token operator">:</span> DOMTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> InnerAction<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
-  <span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
-  <span class="token function">render</span><span class="token punctuation">(</span>ctx<span class="token operator">:</span> DOMContext<span class="token operator">&lt;</span>OuterAction<span class="token operator">&gt;</span><span class="token punctuation">,</span> state<span class="token operator">:</span> State<span class="token punctuation">)</span><span class="token operator">:</span> View<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
-  <span class="token keyword">readonly</span> <span class="token function-variable function">map</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">value<span class="token operator">:</span> InnerAction</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> OuterAction <span class="token operator">|</span> <span class="token keyword">undefined</span>
-  <span class="token keyword">readonly</span> children<span class="token operator">:</span> DOMTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> InnerAction<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
-<span class="token punctuation">}</span></div></pre>
+  ><div><span class="token keyword">declare</span> <span class="token keyword">class</span> <span class="token class-name">ScopedStyles</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+  <span class="token keyword">implements</span> <span class="token class-name">DOMTemplate</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">constructor</span><span class="token punctuation">(</span>literal<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> derived<span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">state<span class="token operator">:</span> State</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">string</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+  <span class="token keyword">readonly</span> literal<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
+  <span class="token keyword">readonly</span> derived<span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">state<span class="token operator">:</span> State</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">string</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
+  <span class="token function">render</span><span class="token punctuation">(</span>
+    ctx<span class="token operator">:</span> DOMContext<span class="token operator">&lt;</span>Action<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+    state<span class="token operator">:</span> State
+  <span class="token punctuation">)</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token function-variable function">change</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">state<span class="token operator">:</span> State</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+    <span class="token function-variable function">request</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">query<span class="token operator">:</span> Query</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+    <span class="token function-variable function">destroy</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</div></pre>
 </article>

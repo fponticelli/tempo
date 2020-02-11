@@ -5,20 +5,18 @@
   <h3 class="is-family-monospace has-text-grey-dark" id="Store">Store</h3>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">class</span> <span class="token class-name">Store</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token operator">&gt;</span> <span class="token punctuation">{</span>
-  <span class="token keyword">static</span> <span class="token keyword">static</span> ofState<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token operator">&gt;</span><span class="token punctuation">(</span>options<span class="token operator">:</span> <span class="token punctuation">{</span>
+  ><div><span class="token keyword">declare</span> <span class="token keyword">class</span> <span class="token class-name">Store</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">static</span> ofState<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token operator">&gt;</span><span class="token punctuation">(</span>options<span class="token operator">:</span> <span class="token punctuation">{</span>
     state<span class="token operator">:</span> State
     reducer<span class="token operator">:</span> Reducer<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token operator">&gt;</span>
     equal<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> State<span class="token punctuation">,</span> b<span class="token operator">:</span> State</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">boolean</span>
   <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token operator">:</span> Store<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token operator">&gt;</span>
-  <span class="token keyword">constructor</span><span class="token punctuation">(</span>
-    <span class="token parameter">property<span class="token operator">:</span> Property<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-    <span class="token keyword">private</span> reducer<span class="token operator">:</span> Reducer<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token operator">&gt;</span></span>
-  <span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
-  <span class="token function">process</span><span class="token punctuation">(</span>action<span class="token operator">:</span> Action<span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span>
+  <span class="token keyword">constructor</span><span class="token punctuation">(</span>property<span class="token operator">:</span> Property<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span><span class="token punctuation">,</span> reducer<span class="token operator">:</span> Reducer<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token operator">&gt;</span><span class="token punctuation">)</span>
   <span class="token keyword">readonly</span> observable<span class="token operator">:</span> Observable4<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> State<span class="token punctuation">,</span> <span class="token builtin">boolean</span><span class="token operator">&gt;</span>
   <span class="token keyword">readonly</span> property<span class="token operator">:</span> Property<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span>
   <span class="token keyword">private</span> <span class="token keyword">readonly</span> reducer<span class="token operator">:</span> Reducer<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token operator">&gt;</span>
   <span class="token keyword">private</span> <span class="token keyword">readonly</span> emitter<span class="token operator">:</span> Emitter4<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> State<span class="token punctuation">,</span> <span class="token builtin">boolean</span><span class="token operator">&gt;</span>
-<span class="token punctuation">}</span></div></pre>
+  <span class="token function">process</span><span class="token punctuation">(</span>action<span class="token operator">:</span> Action<span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span>
+<span class="token punctuation">}</span>
+</div></pre>
 </article>

@@ -10,6 +10,13 @@
       <li>
         <a
           class="is-family-monospace"
+          href="#/api/dom/utils/dom.html#containerSize"
+          >containerSize</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
           href="#/api/dom/utils/dom.html#domChildToTemplate"
           >domChildToTemplate</a
         >
@@ -55,7 +62,8 @@
   <h3 class="is-family-monospace has-text-grey-dark" id="Acc">Acc</h3>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">type</span> Acc<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">state<span class="token operator">:</span> State</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token punctuation">]</span></div></pre>
+  ><div><span class="token keyword">type</span> Acc<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">state<span class="token operator">:</span> State</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
+</div></pre>
   <h2>functions</h2>
   <h3 class="is-family-monospace has-text-grey-dark" id="domChildToTemplate">
     domChildToTemplate
@@ -64,13 +72,15 @@
     class="ts language-ts"
   ><div><span class="token keyword">function</span> domChildToTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">(</span>
   dom<span class="token operator">:</span> DOMChild<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
-<span class="token punctuation">)</span><span class="token operator">:</span> DOMTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></div></pre>
+<span class="token punctuation">)</span><span class="token operator">:</span> DOMTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="insertFBefore">
     insertFBefore
   </h3>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">function</span> <span class="token function">insertFBefore</span><span class="token punctuation">(</span><span class="token parameter">ref<span class="token operator">:</span> Node</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">node<span class="token operator">:</span> Node</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span></div></pre>
+  ><div><span class="token keyword">function</span> <span class="token function">insertFBefore</span><span class="token punctuation">(</span><span class="token parameter">ref<span class="token operator">:</span> Node</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">node<span class="token operator">:</span> Node</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="processAttribute">
     processAttribute
   </h3>
@@ -81,24 +91,21 @@
   name<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span>
   value<span class="token operator">:</span> Attribute<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Value<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   acc<span class="token operator">:</span> Acc<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span>
-<span class="token punctuation">)</span><span class="token operator">:</span> Acc<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span></div></pre>
+<span class="token punctuation">)</span><span class="token operator">:</span> Acc<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span>
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="processEvent">
     processEvent
   </h3>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">function</span> processEvent<span class="token operator">&lt;</span>
-  State<span class="token punctuation">,</span>
-  El <span class="token keyword">extends</span> <span class="token class-name">Element</span><span class="token punctuation">,</span>
-  Ev <span class="token keyword">extends</span> <span class="token class-name">Event</span><span class="token punctuation">,</span>
-  Action
-<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  ><div><span class="token keyword">function</span> processEvent<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> El <span class="token keyword">extends</span> <span class="token class-name">Element</span><span class="token punctuation">,</span> Ev <span class="token keyword">extends</span> <span class="token class-name">Event</span><span class="token punctuation">,</span> Action<span class="token operator">&gt;</span><span class="token punctuation">(</span>
   el<span class="token operator">:</span> El<span class="token punctuation">,</span>
   name<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span>
   value<span class="token operator">:</span> EventHandler<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Ev<span class="token punctuation">,</span> El<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   <span class="token function-variable function">dispatch</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">action<span class="token operator">:</span> Action</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span><span class="token punctuation">,</span>
   acc<span class="token operator">:</span> Acc<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span>
-<span class="token punctuation">)</span><span class="token operator">:</span> Acc<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span></div></pre>
+<span class="token punctuation">)</span><span class="token operator">:</span> Acc<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span>
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="processStyle">
     processStyle
   </h3>
@@ -109,11 +116,20 @@
   name<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span>
   value<span class="token operator">:</span> StyleAttribute<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Value<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   acc<span class="token operator">:</span> Acc<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span>
-<span class="token punctuation">)</span><span class="token operator">:</span> Acc<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span></div></pre>
+<span class="token punctuation">)</span><span class="token operator">:</span> Acc<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span>
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="removeNode">
     removeNode
   </h3>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">function</span> <span class="token function">removeNode</span><span class="token punctuation">(</span><span class="token parameter">node<span class="token operator">:</span> Node</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">void</span></div></pre>
+  ><div><span class="token keyword">function</span> <span class="token function">removeNode</span><span class="token punctuation">(</span><span class="token parameter">node<span class="token operator">:</span> Node</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">void</span>
+</div></pre>
+  <h2>values</h2>
+  <h3 class="is-family-monospace has-text-grey-dark" id="containerSize">
+    containerSize
+  </h3>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">const</span> <span class="token function-variable function">containerSize</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">el<span class="token operator">:</span> HTMLElement</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span> width<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span> height<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span> <span class="token punctuation">}</span></div></pre>
 </article>

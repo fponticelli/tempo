@@ -4,13 +4,6 @@
   <nav>
     <ul class="module-toc-list">
       <li>
-        <a
-          class="is-family-monospace"
-          href="#/api/std/strings.html#BASE64_ALPHABET"
-          >BASE64_ALPHABET</a
-        >
-      </li>
-      <li>
         <a class="is-family-monospace" href="#/api/std/strings.html#after"
           >after</a
         >
@@ -113,6 +106,13 @@
         >
       </li>
       <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/std/strings.html#decodeBase64"
+          >decodeBase64</a
+        >
+      </li>
+      <li>
         <a class="is-family-monospace" href="#/api/std/strings.html#diffAt"
           >diffAt</a
         >
@@ -127,6 +127,13 @@
           class="is-family-monospace"
           href="#/api/std/strings.html#ellipsisMiddle"
           >ellipsisMiddle</a
+        >
+      </li>
+      <li>
+        <a
+          class="is-family-monospace"
+          href="#/api/std/strings.html#encodeBase64"
+          >encodeBase64</a
         >
       </li>
       <li>
@@ -427,6 +434,11 @@
           >wrapColumns</a
         >
       </li>
+      <li>
+        <a class="is-family-monospace" href="#/api/std/strings.html#wrapLine"
+          >wrapLine</a
+        >
+      </li>
     </ul>
   </nav>
   <h2>functions</h2>
@@ -440,7 +452,8 @@
   </div>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">function</span> apN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">(</span>f<span class="token operator">:</span> Result<span class="token operator">&lt;</span>Fun2<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span> a<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span> b<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span></div></pre>
+  ><div><span class="token keyword">function</span> <span class="token function">after</span><span class="token punctuation">(</span><span class="token parameter">value<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> searchFor<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span>
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="afterLast">
     afterLast
   </h3>
@@ -453,10 +466,8 @@
   </div>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">function</span> apNWithCombine<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  f<span class="token operator">:</span> Result<span class="token operator">&lt;</span>Fun2<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  <span class="token function-variable function">combineErrors</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">e1<span class="token operator">:</span> Err<span class="token punctuation">,</span> e2<span class="token operator">:</span> Err</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Err<span class="token punctuation">,</span>
-  a<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span> b<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span></div></pre>
+  ><div><span class="token keyword">function</span> <span class="token function">afterLast</span><span class="token punctuation">(</span><span class="token parameter">value<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> searchFor<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span>
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="before">before</h3>
   <div>
     <p>
@@ -467,9 +478,8 @@
   </div>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">function</span> flatMapN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  f<span class="token operator">:</span> Fun2<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> Result<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;&gt;</span><span class="token punctuation">,</span>
-  a<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span> b<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span></div></pre>
+  ><div><span class="token keyword">function</span> <span class="token function">before</span><span class="token punctuation">(</span><span class="token parameter">value<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> searchFor<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span>
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="beforeLast">
     beforeLast
   </h3>
@@ -482,10 +492,8 @@
   </div>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">function</span> flatMapNWithCombine<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  f<span class="token operator">:</span> Fun2<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> Result<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;&gt;</span><span class="token punctuation">,</span>
-  <span class="token function-variable function">combineErrors</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">e1<span class="token operator">:</span> Err<span class="token punctuation">,</span> e2<span class="token operator">:</span> Err</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Err<span class="token punctuation">,</span>
-  a<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span> b<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span></div></pre>
+  ><div><span class="token keyword">function</span> <span class="token function">beforeLast</span><span class="token punctuation">(</span><span class="token parameter">value<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> searchFor<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span>
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="canonicalizeNewlines">
     canonicalizeNewlines
   </h3>
@@ -497,7 +505,8 @@
   </div>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">function</span> mapN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">(</span>f<span class="token operator">:</span> Fun2<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> a<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span> b<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span></div></pre>
+  ><div><span class="token keyword">function</span> <span class="token function">canonicalizeNewlines</span><span class="token punctuation">(</span><span class="token parameter">value<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span>
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="capitalize">
     capitalize
   </h3>
@@ -509,10 +518,8 @@
   </div>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">function</span> mapNWithCombine<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  f<span class="token operator">:</span> Fun2<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  <span class="token function-variable function">combineErrors</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">e1<span class="token operator">:</span> Err<span class="token punctuation">,</span> e2<span class="token operator">:</span> Err</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Err<span class="token punctuation">,</span>
-  a<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span> b<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span></div></pre>
+  ><div><span class="token keyword">function</span> <span class="token function">capitalize</span><span class="token punctuation">(</span><span class="token parameter">s<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span>
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="capitalizeWords">
     capitalizeWords
   </h3>
@@ -525,7 +532,8 @@
   </div>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">function</span> <span class="token function">capitalizeWords</span><span class="token punctuation">(</span><span class="token parameter">value<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> whiteSpaceOnly <span class="token operator">=</span> <span class="token boolean">false</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span></div></pre>
+  ><div><span class="token keyword">function</span> <span class="token function">capitalizeWords</span><span class="token punctuation">(</span><span class="token parameter">value<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> whiteSpaceOnly <span class="token operator">=</span> <span class="token boolean">false</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span>
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="collapse">collapse</h3>
   <div>
     <p>
@@ -543,7 +551,8 @@
   </div>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">function</span> <span class="token function">collapse</span><span class="token punctuation">(</span><span class="token parameter">value<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span></div></pre>
+  ><div><span class="token keyword">function</span> <span class="token function">collapse</span><span class="token punctuation">(</span><span class="token parameter">value<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span>
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="compare">compare</h3>
   <div>
     <p>
@@ -554,7 +563,8 @@
   </div>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">function</span> <span class="token function">compare</span><span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> b<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token number">1</span> <span class="token operator">|</span> <span class="token operator">-</span><span class="token number">1</span> <span class="token operator">|</span> <span class="token number">0</span></div></pre>
+  ><div><span class="token keyword">function</span> <span class="token function">compare</span><span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> b<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token number">1</span> <span class="token operator">|</span> <span class="token operator">-</span><span class="token number">1</span> <span class="token operator">|</span> <span class="token number">0</span>
+</div></pre>
   <h3
     class="is-family-monospace has-text-grey-dark"
     id="compareCaseInsensitive"
@@ -564,7 +574,8 @@
   <div><p>Compares two strings ignoring their case.</p></div>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">function</span> <span class="token function">compareCaseInsensitive</span><span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> b<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">number</span></div></pre>
+  ><div><span class="token keyword">function</span> <span class="token function">compareCaseInsensitive</span><span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> b<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">number</span>
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="contains">contains</h3>
   <div>
     <p>
@@ -574,7 +585,8 @@
   </div>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">function</span> <span class="token function">contains</span><span class="token punctuation">(</span><span class="token parameter">s<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> test<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span></div></pre>
+  ><div><span class="token keyword">function</span> <span class="token function">contains</span><span class="token punctuation">(</span><span class="token parameter">s<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> test<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span>
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="containsAll">
     containsAll
   </h3>
@@ -586,7 +598,8 @@
   </div>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">function</span> <span class="token function">containsAll</span><span class="token punctuation">(</span><span class="token parameter">s<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> tests<span class="token operator">:</span> <span class="token builtin">Array</span><span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token operator">&gt;</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span></div></pre>
+  ><div><span class="token keyword">function</span> <span class="token function">containsAll</span><span class="token punctuation">(</span><span class="token parameter">s<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> tests<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span>
+</div></pre>
   <h3
     class="is-family-monospace has-text-grey-dark"
     id="containsAllCaseInsensitive"
@@ -601,7 +614,8 @@
   </div>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">function</span> <span class="token function">containsAllCaseInsensitive</span><span class="token punctuation">(</span><span class="token parameter">s<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> tests<span class="token operator">:</span> <span class="token builtin">Array</span><span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token operator">&gt;</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span></div></pre>
+  ><div><span class="token keyword">function</span> <span class="token function">containsAllCaseInsensitive</span><span class="token punctuation">(</span><span class="token parameter">s<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> tests<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span>
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="containsAny">
     containsAny
   </h3>
@@ -613,7 +627,8 @@
   </div>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">function</span> <span class="token function">containsAny</span><span class="token punctuation">(</span><span class="token parameter">s<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> tests<span class="token operator">:</span> <span class="token builtin">Array</span><span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token operator">&gt;</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span></div></pre>
+  ><div><span class="token keyword">function</span> <span class="token function">containsAny</span><span class="token punctuation">(</span><span class="token parameter">s<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> tests<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span>
+</div></pre>
   <h3
     class="is-family-monospace has-text-grey-dark"
     id="containsAnyCaseInsensitive"
@@ -628,7 +643,8 @@
   </div>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">function</span> <span class="token function">containsAnyCaseInsensitive</span><span class="token punctuation">(</span><span class="token parameter">s<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> tests<span class="token operator">:</span> <span class="token builtin">Array</span><span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token operator">&gt;</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span></div></pre>
+  ><div><span class="token keyword">function</span> <span class="token function">containsAnyCaseInsensitive</span><span class="token punctuation">(</span><span class="token parameter">s<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> tests<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span>
+</div></pre>
   <h3
     class="is-family-monospace has-text-grey-dark"
     id="containsCaseInsensitive"
@@ -643,7 +659,8 @@
   </div>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">function</span> <span class="token function">containsCaseInsensitive</span><span class="token punctuation">(</span><span class="token parameter">s<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> test<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span></div></pre>
+  ><div><span class="token keyword">function</span> <span class="token function">containsCaseInsensitive</span><span class="token punctuation">(</span><span class="token parameter">s<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> test<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span>
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="count">count</h3>
   <div>
     <p>
@@ -652,7 +669,8 @@
   </div>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">function</span> <span class="token function">count</span><span class="token punctuation">(</span><span class="token parameter">s<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> test<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">number</span></div></pre>
+  ><div><span class="token keyword">function</span> <span class="token function">count</span><span class="token punctuation">(</span><span class="token parameter">s<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> test<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">number</span>
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="dasherize">
     dasherize
   </h3>
@@ -664,7 +682,15 @@
   </div>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">function</span> <span class="token function">dasherize</span><span class="token punctuation">(</span><span class="token parameter">s<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span></div></pre>
+  ><div><span class="token keyword">function</span> <span class="token function">dasherize</span><span class="token punctuation">(</span><span class="token parameter">s<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span>
+</div></pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="decodeBase64">
+    decodeBase64
+  </h3>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">function</span> <span class="token function">decodeBase64</span><span class="token punctuation">(</span><span class="token parameter">s<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span>
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="diffAt">diffAt</h3>
   <div>
     <p>
@@ -676,7 +702,8 @@
   </div>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">function</span> <span class="token function">diffAt</span><span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> b<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">number</span></div></pre>
+  ><div><span class="token keyword">function</span> <span class="token function">diffAt</span><span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> b<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">number</span>
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="ellipsis">ellipsis</h3>
   <div>
     <p>
@@ -689,7 +716,8 @@
   </div>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">function</span> <span class="token function">ellipsis</span><span class="token punctuation">(</span>s<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> maxlen <span class="token operator">=</span> <span class="token number">20</span><span class="token punctuation">,</span> <span class="token builtin">symbol</span> <span class="token operator">=</span> <span class="token string">'…'</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span></div></pre>
+  ><div><span class="token keyword">function</span> <span class="token function">ellipsis</span><span class="token punctuation">(</span>s<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> maxlen <span class="token operator">=</span> <span class="token number">20</span><span class="token punctuation">,</span> <span class="token builtin">symbol</span> <span class="token operator">=</span> <span class="token string">'…'</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span>
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="ellipsisMiddle">
     ellipsisMiddle
   </h3>
@@ -703,11 +731,20 @@
   </div>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">function</span> <span class="token function">ellipsisMiddle</span><span class="token punctuation">(</span>s<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> maxlen <span class="token operator">=</span> <span class="token number">20</span><span class="token punctuation">,</span> <span class="token builtin">symbol</span> <span class="token operator">=</span> <span class="token string">'…'</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span></div></pre>
+  ><div><span class="token keyword">function</span> <span class="token function">ellipsisMiddle</span><span class="token punctuation">(</span>s<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> maxlen <span class="token operator">=</span> <span class="token number">20</span><span class="token punctuation">,</span> <span class="token builtin">symbol</span> <span class="token operator">=</span> <span class="token string">'…'</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span>
+</div></pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="encodeBase64">
+    encodeBase64
+  </h3>
+  <pre
+    class="ts language-ts"
+  ><div><span class="token keyword">function</span> <span class="token function">encodeBase64</span><span class="token punctuation">(</span><span class="token parameter">s<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span>
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="endsWith">endsWith</h3>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">function</span> <span class="token function">endsWith</span><span class="token punctuation">(</span><span class="token parameter">s<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> end<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span></div></pre>
+  ><div><span class="token keyword">function</span> <span class="token function">endsWith</span><span class="token punctuation">(</span><span class="token parameter">s<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> end<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span>
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="endsWithAny">
     endsWithAny
   </h3>
@@ -719,7 +756,8 @@
   </div>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">function</span> <span class="token function">endsWithAny</span><span class="token punctuation">(</span><span class="token parameter">s<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> values<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span></div></pre>
+  ><div><span class="token keyword">function</span> <span class="token function">endsWithAny</span><span class="token punctuation">(</span><span class="token parameter">s<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> values<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span>
+</div></pre>
   <h3
     class="is-family-monospace has-text-grey-dark"
     id="endsWithAnyCaseInsensitive"
@@ -734,7 +772,8 @@
   </div>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">function</span> <span class="token function">endsWithAnyCaseInsensitive</span><span class="token punctuation">(</span><span class="token parameter">s<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> values<span class="token operator">:</span> <span class="token builtin">Array</span><span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token operator">&gt;</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span></div></pre>
+  ><div><span class="token keyword">function</span> <span class="token function">endsWithAnyCaseInsensitive</span><span class="token punctuation">(</span><span class="token parameter">s<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> values<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span>
+</div></pre>
   <h3
     class="is-family-monospace has-text-grey-dark"
     id="endsWithCaseInsensitive"
@@ -743,7 +782,8 @@
   </h3>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">function</span> <span class="token function">endsWithCaseInsensitive</span><span class="token punctuation">(</span><span class="token parameter">s<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> end<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span></div></pre>
+  ><div><span class="token keyword">function</span> <span class="token function">endsWithCaseInsensitive</span><span class="token punctuation">(</span><span class="token parameter">s<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> end<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span>
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="filter">filter</h3>
   <div>
     <p>
@@ -753,7 +793,8 @@
   </div>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">function</span> <span class="token function">filter</span><span class="token punctuation">(</span>s<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> <span class="token function-variable function">predicate</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">s<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">boolean</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span></div></pre>
+  ><div><span class="token keyword">function</span> <span class="token function">filter</span><span class="token punctuation">(</span>s<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> <span class="token function-variable function">predicate</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">s<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">boolean</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span>
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="filterCharcode">
     filterCharcode
   </h3>
@@ -765,7 +806,8 @@
   </div>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">function</span> <span class="token function">filterCharcode</span><span class="token punctuation">(</span>s<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> <span class="token function-variable function">predicate</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">n<span class="token operator">:</span> <span class="token builtin">number</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">boolean</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span></div></pre>
+  ><div><span class="token keyword">function</span> <span class="token function">filterCharcode</span><span class="token punctuation">(</span>s<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> <span class="token function-variable function">predicate</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">n<span class="token operator">:</span> <span class="token builtin">number</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">boolean</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span>
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="from">from</h3>
   <div>
     <p>
@@ -776,7 +818,8 @@
   </div>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">function</span> <span class="token keyword">from</span><span class="token punctuation">(</span><span class="token parameter">value<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> searchFor<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span></div></pre>
+  ><div><span class="token keyword">function</span> <span class="token keyword">from</span><span class="token punctuation">(</span><span class="token parameter">value<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> searchFor<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span>
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="hasContent">
     hasContent
   </h3>
@@ -788,11 +831,13 @@
   </div>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">function</span> <span class="token function">hasContent</span><span class="token punctuation">(</span><span class="token parameter">value<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span></div></pre>
+  ><div><span class="token keyword">function</span> <span class="token function">hasContent</span><span class="token punctuation">(</span><span class="token parameter">value<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span>
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="hashCode">hashCode</h3>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">function</span> <span class="token function">hashCode</span><span class="token punctuation">(</span><span class="token parameter">value<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> seed <span class="token operator">=</span> <span class="token number">0x811c9dc5</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">number</span></div></pre>
+  ><div><span class="token keyword">function</span> <span class="token function">hashCode</span><span class="token punctuation">(</span><span class="token parameter">value<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> seed <span class="token operator">=</span> <span class="token number">0x811c9dc5</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">number</span>
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="humanize">humanize</h3>
   <div>
     <p>
@@ -802,7 +847,8 @@
   </div>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">function</span> <span class="token function">humanize</span><span class="token punctuation">(</span><span class="token parameter">s<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span></div></pre>
+  ><div><span class="token keyword">function</span> <span class="token function">humanize</span><span class="token punctuation">(</span><span class="token parameter">s<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span>
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="ifEmpty">ifEmpty</h3>
   <div>
     <p>
@@ -812,7 +858,8 @@
   </div>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">function</span> <span class="token function">ifEmpty</span><span class="token punctuation">(</span><span class="token parameter">value<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> alt<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span></div></pre>
+  ><div><span class="token keyword">function</span> <span class="token function">ifEmpty</span><span class="token punctuation">(</span><span class="token parameter">value<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> alt<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span>
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="isAlpha">isAlpha</h3>
   <div>
     <p>
@@ -822,7 +869,8 @@
   </div>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">function</span> <span class="token function">isAlpha</span><span class="token punctuation">(</span><span class="token parameter">s<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span></div></pre>
+  ><div><span class="token keyword">function</span> <span class="token function">isAlpha</span><span class="token punctuation">(</span><span class="token parameter">s<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span>
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="isAlphaNum">
     isAlphaNum
   </h3>
@@ -834,13 +882,15 @@
   </div>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">function</span> <span class="token function">isAlphaNum</span><span class="token punctuation">(</span><span class="token parameter">value<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span></div></pre>
+  ><div><span class="token keyword">function</span> <span class="token function">isAlphaNum</span><span class="token punctuation">(</span><span class="token parameter">value<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span>
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="isBreakingWhitespace">
     isBreakingWhitespace
   </h3>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">function</span> <span class="token function">isBreakingWhitespace</span><span class="token punctuation">(</span><span class="token parameter">value<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span></div></pre>
+  ><div><span class="token keyword">function</span> <span class="token function">isBreakingWhitespace</span><span class="token punctuation">(</span><span class="token parameter">value<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span>
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="isDigitsOnly">
     isDigitsOnly
   </h3>
@@ -852,7 +902,8 @@
   </div>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">function</span> <span class="token function">isDigitsOnly</span><span class="token punctuation">(</span><span class="token parameter">value<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span></div></pre>
+  ><div><span class="token keyword">function</span> <span class="token function">isDigitsOnly</span><span class="token punctuation">(</span><span class="token parameter">value<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span>
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="isEmpty">isEmpty</h3>
   <div>
     <p>
@@ -862,7 +913,8 @@
   </div>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">function</span> <span class="token function">isEmpty</span><span class="token punctuation">(</span><span class="token parameter">value<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span></div></pre>
+  ><div><span class="token keyword">function</span> <span class="token function">isEmpty</span><span class="token punctuation">(</span><span class="token parameter">value<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span>
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="isLowerCase">
     isLowerCase
   </h3>
@@ -874,13 +926,15 @@
   </div>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">function</span> <span class="token function">isLowerCase</span><span class="token punctuation">(</span><span class="token parameter">value<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span></div></pre>
+  ><div><span class="token keyword">function</span> <span class="token function">isLowerCase</span><span class="token punctuation">(</span><span class="token parameter">value<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span>
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="isSpaceAt">
     isSpaceAt
   </h3>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">function</span> <span class="token function">isSpaceAt</span><span class="token punctuation">(</span><span class="token parameter">s<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> pos<span class="token operator">:</span> <span class="token builtin">number</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span></div></pre>
+  ><div><span class="token keyword">function</span> <span class="token function">isSpaceAt</span><span class="token punctuation">(</span><span class="token parameter">s<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> pos<span class="token operator">:</span> <span class="token builtin">number</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span>
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="isUpperCase">
     isUpperCase
   </h3>
@@ -892,7 +946,8 @@
   </div>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">function</span> <span class="token function">isUpperCase</span><span class="token punctuation">(</span><span class="token parameter">value<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span></div></pre>
+  ><div><span class="token keyword">function</span> <span class="token function">isUpperCase</span><span class="token punctuation">(</span><span class="token parameter">value<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span>
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="lowerCaseFirst">
     lowerCaseFirst
   </h3>
@@ -901,23 +956,27 @@
   </div>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">function</span> <span class="token function">lowerCaseFirst</span><span class="token punctuation">(</span><span class="token parameter">value<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span></div></pre>
+  ><div><span class="token keyword">function</span> <span class="token function">lowerCaseFirst</span><span class="token punctuation">(</span><span class="token parameter">value<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span>
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="lpad">lpad</h3>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">function</span> <span class="token function">lpad</span><span class="token punctuation">(</span><span class="token parameter">s<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> char<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> length<span class="token operator">:</span> <span class="token builtin">number</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span></div></pre>
+  ><div><span class="token keyword">function</span> <span class="token function">lpad</span><span class="token punctuation">(</span><span class="token parameter">s<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> char<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> length<span class="token operator">:</span> <span class="token builtin">number</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span>
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="map">map</h3>
   <div>
     <p>It maps a string character by character using <code>callback</code>.</p>
   </div>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">function</span> map<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token function-variable function">callback</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">c<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">T</span><span class="token punctuation">,</span> value<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">Array</span><span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span></div></pre>
+  ><div><span class="token keyword">function</span> map<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token function-variable function">callback</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">c<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">T</span><span class="token punctuation">,</span> value<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="quote">quote</h3>
   <div><p>Converts a string in a quoted string.</p></div>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">function</span> <span class="token function">quote</span><span class="token punctuation">(</span><span class="token parameter">s<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span></div></pre>
+  ><div><span class="token keyword">function</span> <span class="token function">quote</span><span class="token punctuation">(</span><span class="token parameter">s<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span>
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="random">random</h3>
   <div>
     <p>
@@ -927,7 +986,8 @@
   </div>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">function</span> <span class="token function">random</span><span class="token punctuation">(</span><span class="token parameter">value<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> length <span class="token operator">=</span> <span class="token number">1</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span></div></pre>
+  ><div><span class="token keyword">function</span> <span class="token function">random</span><span class="token punctuation">(</span><span class="token parameter">value<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> length <span class="token operator">=</span> <span class="token number">1</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span>
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="randomSequence">
     randomSequence
   </h3>
@@ -938,7 +998,8 @@
   </div>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">function</span> <span class="token function">randomSequence</span><span class="token punctuation">(</span><span class="token parameter">alphabet<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> length<span class="token operator">:</span> <span class="token builtin">number</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span></div></pre>
+  ><div><span class="token keyword">function</span> <span class="token function">randomSequence</span><span class="token punctuation">(</span><span class="token parameter">alphabet<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> length<span class="token operator">:</span> <span class="token builtin">number</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span>
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="randomSequence64">
     randomSequence64
   </h3>
@@ -950,7 +1011,8 @@
   </div>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">function</span> <span class="token function">randomSequence64</span><span class="token punctuation">(</span><span class="token parameter">length<span class="token operator">:</span> <span class="token builtin">number</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span></div></pre>
+  ><div><span class="token keyword">function</span> <span class="token function">randomSequence64</span><span class="token punctuation">(</span><span class="token parameter">length<span class="token operator">:</span> <span class="token builtin">number</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span>
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="remove">remove</h3>
   <div>
     <p>
@@ -960,7 +1022,8 @@
   </div>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">function</span> <span class="token function">remove</span><span class="token punctuation">(</span><span class="token parameter">value<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> toremove<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span></div></pre>
+  ><div><span class="token keyword">function</span> <span class="token function">remove</span><span class="token punctuation">(</span><span class="token parameter">value<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> toremove<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span>
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="removeAfter">
     removeAfter
   </h3>
@@ -972,7 +1035,8 @@
   </div>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">function</span> <span class="token function">removeAfter</span><span class="token punctuation">(</span><span class="token parameter">value<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> toremove<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span></div></pre>
+  ><div><span class="token keyword">function</span> <span class="token function">removeAfter</span><span class="token punctuation">(</span><span class="token parameter">value<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> toremove<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span>
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="removeAt">removeAt</h3>
   <div>
     <p>
@@ -982,7 +1046,8 @@
   </div>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">function</span> <span class="token function">removeAt</span><span class="token punctuation">(</span><span class="token parameter">value<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> index<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">,</span> length<span class="token operator">:</span> <span class="token builtin">number</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span></div></pre>
+  ><div><span class="token keyword">function</span> <span class="token function">removeAt</span><span class="token punctuation">(</span><span class="token parameter">value<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> index<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">,</span> length<span class="token operator">:</span> <span class="token builtin">number</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span>
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="removeBefore">
     removeBefore
   </h3>
@@ -994,7 +1059,8 @@
   </div>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">function</span> <span class="token function">removeBefore</span><span class="token punctuation">(</span><span class="token parameter">value<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> toremove<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span></div></pre>
+  ><div><span class="token keyword">function</span> <span class="token function">removeBefore</span><span class="token punctuation">(</span><span class="token parameter">value<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> toremove<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span>
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="removeOne">
     removeOne
   </h3>
@@ -1006,7 +1072,8 @@
   </div>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">function</span> <span class="token function">removeOne</span><span class="token punctuation">(</span><span class="token parameter">value<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> toremove<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span></div></pre>
+  ><div><span class="token keyword">function</span> <span class="token function">removeOne</span><span class="token punctuation">(</span><span class="token parameter">value<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> toremove<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span>
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="repeat">repeat</h3>
   <div>
     <p>
@@ -1018,7 +1085,8 @@
   </div>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">function</span> <span class="token function">repeat</span><span class="token punctuation">(</span><span class="token parameter">s<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> times<span class="token operator">:</span> <span class="token builtin">number</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span></div></pre>
+  ><div><span class="token keyword">function</span> <span class="token function">repeat</span><span class="token punctuation">(</span><span class="token parameter">s<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> times<span class="token operator">:</span> <span class="token builtin">number</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span>
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="replace">replace</h3>
   <div>
     <p>
@@ -1032,29 +1100,34 @@
   <span class="token parameter">subject<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span>
   placeholder<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span>
   replacement<span class="token operator">:</span> <span class="token builtin">string</span></span>
-<span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span></div></pre>
+<span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span>
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="reverse">reverse</h3>
   <div><p>Returns a new string whose characters are in reverse order.</p></div>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">function</span> <span class="token function">reverse</span><span class="token punctuation">(</span><span class="token parameter">s<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span></div></pre>
+  ><div><span class="token keyword">function</span> <span class="token function">reverse</span><span class="token punctuation">(</span><span class="token parameter">s<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span>
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="rpad">rpad</h3>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">function</span> <span class="token function">rpad</span><span class="token punctuation">(</span><span class="token parameter">s<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> char<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> length<span class="token operator">:</span> <span class="token builtin">number</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span></div></pre>
+  ><div><span class="token keyword">function</span> <span class="token function">rpad</span><span class="token punctuation">(</span><span class="token parameter">s<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> char<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> length<span class="token operator">:</span> <span class="token builtin">number</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span>
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="splitOnce">
     splitOnce
   </h3>
   <div><p>It only splits on the first occurrance of separator.</p></div>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">function</span> <span class="token function">splitOnce</span><span class="token punctuation">(</span><span class="token parameter">s<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> separator<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span></div></pre>
+  ><div><span class="token keyword">function</span> <span class="token function">splitOnce</span><span class="token punctuation">(</span><span class="token parameter">s<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> separator<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="startsWith">
     startsWith
   </h3>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">function</span> <span class="token function">startsWith</span><span class="token punctuation">(</span><span class="token parameter">s<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> start<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span></div></pre>
+  ><div><span class="token keyword">function</span> <span class="token function">startsWith</span><span class="token punctuation">(</span><span class="token parameter">s<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> start<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span>
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="startsWithAny">
     startsWithAny
   </h3>
@@ -1066,7 +1139,8 @@
   </div>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">function</span> <span class="token function">startsWithAny</span><span class="token punctuation">(</span><span class="token parameter">s<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> values<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span></div></pre>
+  ><div><span class="token keyword">function</span> <span class="token function">startsWithAny</span><span class="token punctuation">(</span><span class="token parameter">s<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> values<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span>
+</div></pre>
   <h3
     class="is-family-monospace has-text-grey-dark"
     id="startsWithAnyCaseInsensitive"
@@ -1081,7 +1155,8 @@
   </div>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">function</span> <span class="token function">startsWithAnyCaseInsensitive</span><span class="token punctuation">(</span><span class="token parameter">s<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> values<span class="token operator">:</span> <span class="token builtin">Array</span><span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token operator">&gt;</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span></div></pre>
+  ><div><span class="token keyword">function</span> <span class="token function">startsWithAnyCaseInsensitive</span><span class="token punctuation">(</span><span class="token parameter">s<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> values<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span>
+</div></pre>
   <h3
     class="is-family-monospace has-text-grey-dark"
     id="startsWithCaseInsensitive"
@@ -1090,7 +1165,8 @@
   </h3>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">function</span> <span class="token function">startsWithCaseInsensitive</span><span class="token punctuation">(</span><span class="token parameter">s<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> start<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span></div></pre>
+  ><div><span class="token keyword">function</span> <span class="token function">startsWithCaseInsensitive</span><span class="token punctuation">(</span><span class="token parameter">s<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> start<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span>
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="stripTags">
     stripTags
   </h3>
@@ -1102,7 +1178,8 @@
   </div>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">function</span> <span class="token function">stripTags</span><span class="token punctuation">(</span><span class="token parameter">s<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span></div></pre>
+  ><div><span class="token keyword">function</span> <span class="token function">stripTags</span><span class="token punctuation">(</span><span class="token parameter">s<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span>
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="surround">surround</h3>
   <div>
     <p>
@@ -1113,14 +1190,16 @@
   </div>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">function</span> <span class="token function">surround</span><span class="token punctuation">(</span><span class="token parameter">s<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> left<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> right <span class="token operator">=</span> left</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span></div></pre>
+  ><div><span class="token keyword">function</span> <span class="token function">surround</span><span class="token punctuation">(</span><span class="token parameter">s<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> left<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> right <span class="token operator">=</span> left</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span>
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="toArray">toArray</h3>
   <div>
     <p>It transforms a string into an <code>Array</code> of characters.</p>
   </div>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">function</span> <span class="token function">toArray</span><span class="token punctuation">(</span><span class="token parameter">s<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span></div></pre>
+  ><div><span class="token keyword">function</span> <span class="token function">toArray</span><span class="token punctuation">(</span><span class="token parameter">s<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="toCharcodes">
     toCharcodes
   </h3>
@@ -1132,7 +1211,8 @@
   </div>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">function</span> <span class="token function">toCharcodes</span><span class="token punctuation">(</span><span class="token parameter">s<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">Array</span><span class="token operator">&lt;</span><span class="token builtin">number</span><span class="token operator">&gt;</span></div></pre>
+  ><div><span class="token keyword">function</span> <span class="token function">toCharcodes</span><span class="token punctuation">(</span><span class="token parameter">s<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="toChunks">toChunks</h3>
   <div>
     <p>
@@ -1144,14 +1224,16 @@
   </div>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">function</span> <span class="token function">toChunks</span><span class="token punctuation">(</span><span class="token parameter">s<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> len<span class="token operator">:</span> <span class="token builtin">number</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">Array</span><span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token operator">&gt;</span></div></pre>
+  ><div><span class="token keyword">function</span> <span class="token function">toChunks</span><span class="token punctuation">(</span><span class="token parameter">s<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> len<span class="token operator">:</span> <span class="token builtin">number</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="toLines">toLines</h3>
   <div>
     <p>Returns an array of <code>string</code> split by line breaks.</p>
   </div>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">function</span> <span class="token function">toLines</span><span class="token punctuation">(</span><span class="token parameter">s<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span></div></pre>
+  ><div><span class="token keyword">function</span> <span class="token function">toLines</span><span class="token punctuation">(</span><span class="token parameter">s<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="trimChars">
     trimChars
   </h3>
@@ -1163,7 +1245,8 @@
   </div>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">function</span> <span class="token function">trimChars</span><span class="token punctuation">(</span><span class="token parameter">value<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> charlist<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span></div></pre>
+  ><div><span class="token keyword">function</span> <span class="token function">trimChars</span><span class="token punctuation">(</span><span class="token parameter">value<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> charlist<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span>
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="trimCharsLeft">
     trimCharsLeft
   </h3>
@@ -1175,7 +1258,8 @@
   </div>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">function</span> <span class="token function">trimCharsLeft</span><span class="token punctuation">(</span><span class="token parameter">value<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> charlist<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span></div></pre>
+  ><div><span class="token keyword">function</span> <span class="token function">trimCharsLeft</span><span class="token punctuation">(</span><span class="token parameter">value<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> charlist<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span>
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="trimCharsRight">
     trimCharsRight
   </h3>
@@ -1187,7 +1271,8 @@
   </div>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">function</span> <span class="token function">trimCharsRight</span><span class="token punctuation">(</span><span class="token parameter">value<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> charlist<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span></div></pre>
+  ><div><span class="token keyword">function</span> <span class="token function">trimCharsRight</span><span class="token punctuation">(</span><span class="token parameter">value<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> charlist<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span>
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="underscore">
     underscore
   </h3>
@@ -1200,7 +1285,8 @@
   </div>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">function</span> <span class="token function">underscore</span><span class="token punctuation">(</span><span class="token parameter">s<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span></div></pre>
+  ><div><span class="token keyword">function</span> <span class="token function">underscore</span><span class="token punctuation">(</span><span class="token parameter">s<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span>
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="upperCaseFirst">
     upperCaseFirst
   </h3>
@@ -1209,7 +1295,8 @@
   </div>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">function</span> <span class="token function">upperCaseFirst</span><span class="token punctuation">(</span><span class="token parameter">value<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span></div></pre>
+  ><div><span class="token keyword">function</span> <span class="token function">upperCaseFirst</span><span class="token punctuation">(</span><span class="token parameter">value<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span>
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="upTo">upTo</h3>
   <div>
     <p>
@@ -1220,7 +1307,8 @@
   </div>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">function</span> <span class="token function">upTo</span><span class="token punctuation">(</span><span class="token parameter">value<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> searchFor<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span></div></pre>
+  ><div><span class="token keyword">function</span> <span class="token function">upTo</span><span class="token punctuation">(</span><span class="token parameter">value<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> searchFor<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span>
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="wrapColumns">
     wrapColumns
   </h3>
@@ -1233,14 +1321,24 @@
   </div>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">function</span> <span class="token function">wrapColumns</span><span class="token punctuation">(</span>s<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> columns <span class="token operator">=</span> <span class="token number">78</span><span class="token punctuation">,</span> indent <span class="token operator">=</span> <span class="token string">''</span><span class="token punctuation">,</span> newline <span class="token operator">=</span> <span class="token string">'\n'</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span></div></pre>
-  <h2>values</h2>
-  <h3 class="is-family-monospace has-text-grey-dark" id="BASE64_ALPHABET">
-    BASE64_ALPHABET
-  </h3>
+  ><div><span class="token keyword">function</span> <span class="token function">wrapColumns</span><span class="token punctuation">(</span>
+  s<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span>
+  columns <span class="token operator">=</span> <span class="token number">78</span><span class="token punctuation">,</span>
+  indent <span class="token operator">=</span> <span class="token string">''</span><span class="token punctuation">,</span>
+  newline <span class="token operator">=</span> <span class="token string">'\n'</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span>
+</div></pre>
+  <h3 class="is-family-monospace has-text-grey-dark" id="wrapLine">wrapLine</h3>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">const</span> <span class="token constant">BASE64_ALPHABET</span><span class="token operator">:</span> <span class="token string">"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"</span></div></pre>
+  ><div><span class="token keyword">function</span> <span class="token function">wrapLine</span><span class="token punctuation">(</span>
+  <span class="token parameter">s<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span>
+  columns<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">,</span>
+  indent<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span>
+  newline<span class="token operator">:</span> <span class="token builtin">string</span></span>
+<span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span>
+</div></pre>
+  <h2>values</h2>
   <h3 class="is-family-monospace has-text-grey-dark" id="order">order</h3>
   <pre
     class="ts language-ts"

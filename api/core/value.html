@@ -2,10 +2,8 @@
   <h1>module 'value'</h1>
   <div>
     <p>
-      A <code>Template</code> is a declarative representation of a
-      <code>View</code>. The <code>Template</code> will be interpreted and
-      realized into a <code>View</code> by invoking the
-      <code>render</code> method.
+      All attributes and DOM values in a Tempo app are described by either
+      literal values or values that are derived from the app current state.
     </p>
   </div>
   <nav></nav>
@@ -14,11 +12,12 @@
     DerivedOrLiteralValue
   </h3>
   <div>
-    <p>Function signature for the <code>Template.render()</code> method.</p>
+    <p>A value that can be either a literal or derived from a state.</p>
   </div>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">type</span> <span class="token constant">T</span><span class="token operator">&lt;</span><span class="token constant">V</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span> <span class="token operator">=</span> Validation<span class="token operator">&lt;</span><span class="token constant">V</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span></div></pre>
+  ><div><span class="token keyword">type</span> DerivedOrLiteralValue<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Value<span class="token operator">&gt;</span> <span class="token operator">=</span> Value <span class="token operator">|</span> DerivedValue<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Value<span class="token operator">&gt;</span>
+</div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="DerivedValue">
     DerivedValue
   </h3>
@@ -30,7 +29,6 @@
   </div>
   <pre
     class="ts language-ts"
-  ><div><span class="token keyword">type</span> KeysWithFieldType<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> Condition<span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
-  <span class="token punctuation">[</span><span class="token constant">K</span> <span class="token keyword">in</span> <span class="token keyword">keyof</span> <span class="token constant">T</span><span class="token punctuation">]</span><span class="token operator">:</span> WhenEquals<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">[</span><span class="token constant">K</span><span class="token punctuation">]</span><span class="token punctuation">,</span> Condition<span class="token punctuation">,</span> <span class="token constant">K</span><span class="token operator">&gt;</span>
-<span class="token punctuation">}</span><span class="token punctuation">[</span><span class="token keyword">keyof</span> <span class="token constant">T</span><span class="token punctuation">]</span></div></pre>
+  ><div><span class="token keyword">type</span> DerivedValue<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Value<span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">state<span class="token operator">:</span> State</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Value <span class="token operator">|</span> <span class="token keyword">undefined</span>
+</div></pre>
 </article>
