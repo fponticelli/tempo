@@ -11,8 +11,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { stripImportTypes } from './utils'
-import { makePretty } from './pretty'
+import { stripImportTypes } from '../utils/strip_imports'
+import { makePretty } from '../utils/pretty'
 import { replace } from 'tempo-std/lib/strings'
 
 export const adjustSignature = (signature: string ) => {

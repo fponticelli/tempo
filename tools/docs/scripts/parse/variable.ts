@@ -1,6 +1,6 @@
 import { VariableDeclaration } from 'ts-morph'
 import { BaseDoc, docOfJsDoc } from './jsdoc'
-import { stripImportTypes } from './utils'
+import { stripImportTypes } from '../utils/strip_imports'
 
 export interface Variable extends BaseDoc {
   kind: 'variable'

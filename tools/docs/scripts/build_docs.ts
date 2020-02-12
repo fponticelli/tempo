@@ -2,13 +2,8 @@ import { Toc, DemoRef, PageRef, ProjectRef, SectionRef } from '../src/toc'
 import { promises as fs } from 'fs'
 import * as fse from 'fs-extra'
 import * as path from 'path'
-import { JSDOM } from 'jsdom'
-import Prism from 'prismjs'
-const loadLanguages: any = require('prismjs/components/')
-loadLanguages(['typescript'])
-import fm from 'front-matter'
 import { trimChars } from 'tempo-std/lib/strings'
-import { markdown } from './template/markdown'
+import { markdown, markdownWithFM } from './utils/markdown'
 import { generateDocs } from './generate_docs'
 
 const rootFolder = '../..'
@@ -101,28 +96,7 @@ async function listAllMDFiles(src: string): Promise<string[]> {
 
 async function makeHtml(mdFile: string, anchorMangler: (url: string) => string) {
   const content = await fs.readFile(mdFile, 'utf8')
-  const parsed = fm(content)
-  const rawHtml = markdown(parsed.body)
-  const dom = new JSDOM(rawHtml)
-  const codes = dom.window.document.querySelectorAll('.language-ts')
-  for (let i = 0; i < codes.length; i++) {
-    const code = codes[i]
-    code.parentElement?.classList.add('language-ts')
-    code.innerHTML = Prism.highlight(code.textContent || '', Prism.languages.typescript, 'typescript')
-  }
-
-  const anchors = dom.window.document.querySelectorAll('a')
-  for (let i = 0; i < anchors.length; i++) {
-    const a = anchors[i]
-    const href = a.href
-    if (href.startsWith('http:') || href.startsWith('https:')) continue
-    a.href = renameHtml(anchorMangler(href))
-  }
-
-  return {
-    data: parsed.attributes as any,
-    html: dom.window.document.body.innerHTML
-  }
+  return markdownWithFM(content, anchorMangler)
 }
 
 function renameMdToHtml(file: string) {
@@ -172,10 +146,6 @@ async function createPages(src: string, dst: string) {
         path: d.dest,
         title: d.data.title
       })
-    //   ({
-    //   path: d.dest,
-    //   title: d.data.title
-    // })
     })
   return section
 }
@@ -185,7 +155,7 @@ async function createChangeLogs(projects: string[], root: string, dst: string) {
     projects.map(async project => {
       const p = path.join(root, project, 'CHANGELOG.md')
       const content = await fs.readFile(p, 'utf8')
-      const html = markdown(content)
+      const html = markdown(content, s => s)
       return { project, html }
     })
   )
@@ -201,7 +171,7 @@ async function collectProject(project: string, src: string): Promise<{ priority:
   const packageJson = await fs.readFile(p, 'utf8')
   const pack = JSON.parse(packageJson)
   const projectPath = path.join(src, project, 'PROJECT.md')
-  const content = markdown(fse.existsSync(projectPath) ? await fs.readFile(projectPath, 'utf8') : '')
+  const content = markdown(fse.existsSync(projectPath) ? await fs.readFile(projectPath, 'utf8') : '', s => s)
   return {
     priority: pack.priority ?? 0,
     data: {
