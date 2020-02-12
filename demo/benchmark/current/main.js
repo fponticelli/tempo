@@ -133,18 +133,9 @@ limitations under the License.
 */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.nothing = undefined;
-function just(value) {
-    return value;
-}
-exports.just = just;
-function isNothing(maybe) {
-    return maybe == null;
-}
-exports.isNothing = isNothing;
-function isJust(maybe) {
-    return maybe != null;
-}
-exports.isJust = isJust;
+exports.just = function (value) { return value; };
+exports.isNothing = function (maybe) { return maybe == null; };
+exports.isJust = function (maybe) { return maybe != null; };
 
 },{}],"LAOm":[function(require,module,exports) {
 "use strict";
