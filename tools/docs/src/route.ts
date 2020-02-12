@@ -21,7 +21,7 @@ export type Route =
 export const toHref = matchKind<Route, string>({
   Home: _ => '',
   Demos: o => `#/demo`,
-  Demo: o => `#/demo/${o.path}`,
+  Demo: o => `demo/${o.path}`,
   Page: o => `#/page/${o.path}`,
   Project: o => `#/project/${o.name}`,
   Api: o => `#/api/${o.name}/${o.path}`,
@@ -116,7 +116,7 @@ export const isApiProjectRoute = (route: Route, name: string) => {
 
 export const contentFromRoute = (store: Store<State, Action>, toc: Toc, route: Route) => {
   if (route.kind === 'Demo') {
-    location.href = getUnsafe(toContentUrl(route))
+    location.assign(getUnsafe(toContentUrl(route)))
   } else if (route.kind === 'Project') {
     const proj = toc.projects.find(p => p.name === route.name)!
     store.process(Action.loadedContent(success(Content.project(proj))))

@@ -32,7 +32,7 @@ export const template = div<State, Action>(
         { attrs: { class: 'navbar-brand' } },
         link(
           img({
-            attrs: { src: 'assets/icon-512x512.png', width: '32', height: '32' }
+            attrs: { src: 'assets/icon-512x512.png' }
           }),
           Route.home,
           'navbar-item'
@@ -67,13 +67,7 @@ export const template = div<State, Action>(
                 href: 'https://github.com/fponticelli/tempo'
               }
             },
-            img({
-              attrs: {
-                src: 'assets/github-mark-64px.png',
-                width: '32',
-                height: '32'
-              }
-            })
+            img({ attrs: { src: 'assets/github-mark-64px.png' } })
           ),
           maybeLink(
             'Demos',
