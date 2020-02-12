@@ -42,7 +42,10 @@ export const projectContent = article<ProjectRef, Action>(
       ' (',
       a(
         { attrs: {} },
-        link('change log', p => Route.changelog(p.name))
+        link({
+          label: 'change log',
+          route: p => Route.changelog(p.name)
+        })
       ),
       ')'
     ),

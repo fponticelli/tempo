@@ -42,11 +42,11 @@ section = lazy(() =>
           { getArray: ([_, s]) => s.pages },
           li(
             {},
-            maybeLink(
-              ([page]) => page.title,
-              ([page, [_1, _2, route]]) =>
+            maybeLink({
+              label: ([page]) => page.title,
+              route: ([page, [_1, _2, route]]) =>
                 pageMatchesRoute(page, route) ? none : some(pageToRoute(page))
-            )
+            })
           )
         ),
         when(
@@ -79,35 +79,35 @@ const api = fragment<
   [ApiRef, { apis: ApiRef[]; project: ProjectRef; route: Route }, number],
   Action
 >(
-  maybeLink(
-    ([r]) => r.title,
-    ([r, p]) =>
+  maybeLink({
+    label: ([r]) => r.title,
+    route: ([r, p]) =>
       apiMatchesRoute(p.project.name, r.path, p.route)
         ? none
         : some(Route.api(p.project.name, r.path))
-  )
+  })
 )
 
 const project = div<[ProjectRef, Sidebar, number], Action>(
   {},
   p(
     { attrs: { class: '' } },
-    maybeLink(
-      ([s]) => `v.${s.version}`,
-      ([p, s]) =>
+    maybeLink({
+      label: ([s]) => `v.${s.version}`,
+      route: ([p, s]) =>
         projectChangelogMatchesRoute(p, s.route)
           ? none
           : some(Route.changelog(p.name)),
-      'is-pulled-right is-size-7'
-    ),
-    maybeLink(
-      ([p]) => p.title,
-      ([p, s]) =>
+      class: 'is-pulled-right is-size-7'
+    }),
+    maybeLink({
+      label: ([p]) => p.title,
+      route: ([p, s]) =>
         sameRoute(Route.project(p.name), s.route)
           ? none
           : some(Route.project(p.name)),
-      'is-uppercase has-text-weight-bold'
-    )
+      class: 'is-uppercase has-text-weight-bold'
+    })
   ),
   div({ attrs: { class: 'is-size-7' } }, ([s]) => s.description),
   when(

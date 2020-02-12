@@ -1,9 +1,7 @@
 import { Action } from '../action'
 import { DemoRef } from '../toc'
-import { div, p } from 'tempo-dom/lib/html'
+import { div, p, a } from 'tempo-dom/lib/html'
 import { forEach } from 'tempo-dom/lib/for_each'
-import { Route } from '../route'
-import { link } from './link'
 
 const demo = div<DemoRef, Action>(
   { attrs: { class: 'tile is-parent tile-width' } },
@@ -11,9 +9,9 @@ const demo = div<DemoRef, Action>(
     { attrs: { class: 'tile is-child box' } },
     p(
       { attrs: { class: 'title is-5' } },
-      link(
-        s => s.title,
-        s => Route.demo(s.path)
+      a(
+        { attrs: { href: s => `demo/${s.path}/` } },
+        s => s.title
       )
     ),
     p({ attrs: { class: 'description' } }, s => s.description)

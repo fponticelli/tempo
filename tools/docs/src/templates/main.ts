@@ -30,13 +30,13 @@ export const template = div<State, Action>(
       { attrs: { class: 'container' } },
       div(
         { attrs: { class: 'navbar-brand' } },
-        link(
-          img({
+        link({
+          label: img({
             attrs: { src: 'assets/icon-512x512.png' }
           }),
-          Route.home,
-          'navbar-item'
-        )
+          route: Route.home,
+          class: 'navbar-item'
+        })
         // a(
         //   {
         //     attrs: {
@@ -56,7 +56,11 @@ export const template = div<State, Action>(
         { attrs: { class: 'navbar-menu' } },
         div(
           { attrs: { class: 'navbar-start' } },
-          link('Tempo', Route.home, 'navbar-item')
+          link({
+            label: 'Tempo',
+            route: Route.home,
+            class: 'navbar-item'
+          })
         ),
         div(
           { attrs: { class: 'navbar-end' } },
@@ -69,11 +73,11 @@ export const template = div<State, Action>(
             },
             img({ attrs: { src: 'assets/github-mark-64px.png' } })
           ),
-          maybeLink(
-            'Demos',
-            s => (sameRoute(Route.demos, s.route) ? none : some(Route.demos)),
-            'navbar-item'
-          ),
+          maybeLink({
+            label: 'Demos',
+            route: s => (sameRoute(Route.demos, s.route) ? none : some(Route.demos)),
+            class: 'navbar-item'
+          }),
           div(
             { attrs: { class: 'navbar-item has-dropdown is-hoverable' } },
             a({ attrs: { class: 'navbar-link' } }, 'Projects'),
@@ -87,11 +91,11 @@ export const template = div<State, Action>(
                   NotAsked: '',
                   Success: iterateItems(
                     { getArray: s => s.projects },
-                    link<ProjectRef>(
-                      s => s.title,
-                      s => Route.project(s.name),
-                      'navbar-item'
-                    )
+                    link<ProjectRef>({
+                      label: s => s.title,
+                      route: s => Route.project(s.name),
+                      class: 'navbar-item'
+                    })
                   )
                 })
               )

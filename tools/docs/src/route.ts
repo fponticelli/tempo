@@ -1,6 +1,6 @@
 import { matchKind } from 'tempo-std/lib/match'
 import { deepEqual } from 'tempo-std/lib/equals'
-import { Option, some, none, getUnsafe } from 'tempo-std/lib/option'
+import { Option, some, none } from 'tempo-std/lib/option'
 import { PageRef, Toc } from './toc'
 import { ProjectRef } from './toc'
 import { Store } from 'tempo-store/lib/store'
@@ -11,7 +11,7 @@ import { success } from 'tempo-std/lib/async_result'
 export type Route =
   | { kind: 'Page', path: string }
   | { kind: 'Demos' }
-  | { kind: 'Demo', path: string }
+  // | { kind: 'Demo', path: string }
   | { kind: 'Project', name: string }
   | { kind: 'Api', name: string, path: string }
   | { kind: 'Changelog', name: string }
@@ -21,7 +21,7 @@ export type Route =
 export const toHref = matchKind<Route, string>({
   Home: _ => '',
   Demos: o => `#/demo`,
-  Demo: o => `demo/${o.path}`,
+  // Demo: o => `demo/${o.path}`,
   Page: o => `#/page/${o.path}`,
   Project: o => `#/project/${o.name}`,
   Api: o => `#/api/${o.name}/${o.path}`,
@@ -33,7 +33,7 @@ export const toContentUrl = matchKind<Route, Option<string>>({
   Home: _ => some('pages/index.html'),
   Api: o => some(`api/${o.name}/${o.path}`),
   Demos: _ => none,
-  Demo: o => some(`demo/${o.path}`),
+  // Demo: o => some(`demo/${o.path}`),
   Page: o => some(`pages/${o.path}`),
   Project: _ => none,
   NotFound: _ => none,
@@ -44,7 +44,7 @@ export const Route = {
   home: ({ kind: 'Home' }) as Route,
   api: (name: string, path: string): Route => ({ kind: 'Api', name, path }),
   demos: ({ kind: 'Demos' }) as Route,
-  demo: (path: string): Route => ({ kind: 'Demo', path }),
+  // demo: (path: string): Route => ({ kind: 'Demo', path }),
   page: (path: string): Route => {
     if (path === 'index.html')
       return Route.home
@@ -96,8 +96,8 @@ export const parseUrl = (url: string): Route => {
       return Route.api(name, path)
     } else if (url === '/demo') {
       return Route.demos
-    } else if (url.startsWith('/demo/')) {
-      return Route.demo(url.substring(6))
+    // } else if (url.startsWith('/demo/')) {
+      // return Route.demo(url.substring(6))
     } else if (url.startsWith('/project/')) {
       return Route.project(url.substring(9))
     } else if (url.startsWith('/page/')) {
@@ -115,9 +115,10 @@ export const isApiProjectRoute = (route: Route, name: string) => {
 }
 
 export const contentFromRoute = (store: Store<State, Action>, toc: Toc, route: Route) => {
-  if (route.kind === 'Demo') {
-    location.assign(getUnsafe(toContentUrl(route)))
-  } else if (route.kind === 'Project') {
+  // if (route.kind === 'Demo') {
+  //   location.assign(getUnsafe(toContentUrl(route)))
+  // } else
+  if (route.kind === 'Project') {
     const proj = toc.projects.find(p => p.name === route.name)!
     store.process(Action.loadedContent(success(Content.project(proj))))
   } else if (route.kind === 'Demos') {
