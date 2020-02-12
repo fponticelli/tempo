@@ -64,22 +64,25 @@ Object.defineProperty($pwth$exports, "__esModule", {
 var $pwth$export$nothing = undefined;
 $pwth$exports.nothing = $pwth$export$nothing;
 
-var $pwth$export$just = function (value) {
+function $pwth$var$just(value) {
   return value;
-};
+}
 
+var $pwth$export$just = $pwth$var$just;
 $pwth$exports.just = $pwth$export$just;
 
-var $pwth$export$isNothing = function (maybe) {
+function $pwth$var$isNothing(maybe) {
   return maybe == null;
-};
+}
 
+var $pwth$export$isNothing = $pwth$var$isNothing;
 $pwth$exports.isNothing = $pwth$export$isNothing;
 
-var $pwth$export$isJust = function (maybe) {
+function $pwth$var$isJust(maybe) {
   return maybe != null;
-};
+}
 
+var $pwth$export$isJust = $pwth$var$isJust;
 $pwth$exports.isJust = $pwth$export$isJust; //# sourceMappingURL=maybe.js.map
 
 // ASSET: ../node_modules/tempo-dom/node_modules/tempo-std/lib/arrays.js
@@ -1040,14 +1043,15 @@ Object.defineProperty($fRdy$exports, "__esModule", {
   value: true
 });
 
-var $fRdy$export$strictEqual = function (a, b) {
+function $fRdy$var$strictEqual(a, b) {
   return a === b || a !== a && b !== b;
-};
+}
 
+var $fRdy$export$strictEqual = $fRdy$var$strictEqual;
 $fRdy$exports.strictEqual = $fRdy$export$strictEqual;
 
-var $fRdy$export$deepEqual = function (a, b) {
-  if ($fRdy$export$strictEqual(a, b)) return true;
+function $fRdy$var$deepEqual(a, b) {
+  if ($fRdy$var$strictEqual(a, b)) return true;
   if (a == null || b == null) return false;
   var aIsArr = Array.isArray(a);
   var bIsArr = Array.isArray(b);
@@ -1060,7 +1064,7 @@ var $fRdy$export$deepEqual = function (a, b) {
     if (aLength !== bArr.length) return false;
 
     for (var i = 0; i < aLength; i++) {
-      if (!$fRdy$export$deepEqual(aArr[i], bArr[i])) return false;
+      if (!$fRdy$var$deepEqual(aArr[i], bArr[i])) return false;
     }
 
     return true;
@@ -1109,7 +1113,7 @@ var $fRdy$export$deepEqual = function (a, b) {
     while (true) {
       var curr = it_2.next();
       if (curr.done) break;
-      if (!$fRdy$export$deepEqual(aMap.get(curr.value), bMap.get(curr.value))) return false;
+      if (!$fRdy$var$deepEqual(aMap.get(curr.value), bMap.get(curr.value))) return false;
     }
 
     return true;
@@ -1130,15 +1134,16 @@ var $fRdy$export$deepEqual = function (a, b) {
     for (var i = 0; i < aLength; i++) {
       var field = aFields[i];
       if (!bObj.hasOwnProperty(field)) return false;
-      if (!$fRdy$export$deepEqual(aObj[field], bObj[field])) return false;
+      if (!$fRdy$var$deepEqual(aObj[field], bObj[field])) return false;
     }
 
     return true;
   }
 
   return false;
-};
+}
 
+var $fRdy$export$deepEqual = $fRdy$var$deepEqual;
 $fRdy$exports.deepEqual = $fRdy$export$deepEqual; //# sourceMappingURL=equals.js.map
 
 // ASSET: ../node_modules/tempo-store/lib/property.js
@@ -1311,22 +1316,25 @@ Object.defineProperty($KScB$exports, "__esModule", {
 var $KScB$export$nothing = undefined;
 $KScB$exports.nothing = $KScB$export$nothing;
 
-var $KScB$export$just = function (value) {
+function $KScB$var$just(value) {
   return value;
-};
+}
 
+var $KScB$export$just = $KScB$var$just;
 $KScB$exports.just = $KScB$export$just;
 
-var $KScB$export$isNothing = function (maybe) {
+function $KScB$var$isNothing(maybe) {
   return maybe == null;
-};
+}
 
+var $KScB$export$isNothing = $KScB$var$isNothing;
 $KScB$exports.isNothing = $KScB$export$isNothing;
 
-var $KScB$export$isJust = function (maybe) {
+function $KScB$var$isJust(maybe) {
   return maybe != null;
-};
+}
 
+var $KScB$export$isJust = $KScB$var$isJust;
 $KScB$exports.isJust = $KScB$export$isJust;
 // ASSET: ../node_modules/tempo-std/lib/arrays.js
 var $o25q$exports = {};

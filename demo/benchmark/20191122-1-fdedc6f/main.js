@@ -117,7 +117,7 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"pwth":[function(require,module,exports) {
+})({"AxMU":[function(require,module,exports) {
 "use strict";
 /*
 Copyright 2019 Google LLC
@@ -132,281 +132,87 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.nothing = undefined;
-function just(value) {
-    return value;
-}
-exports.just = just;
-function isNothing(maybe) {
-    return maybe == null;
-}
-exports.isNothing = isNothing;
-function isJust(maybe) {
-    return maybe != null;
-}
-exports.isJust = isJust;
-
-},{}],"LAOm":[function(require,module,exports) {
-"use strict";
-/*
-Copyright 2019 Google LLC
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-    https://www.apache.org/licenses/LICENSE-2.0
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-*/
-Object.defineProperty(exports, "__esModule", { value: true });
-/**
- * Utility functions to manipulate `Array` values.
- */
-var maybe_1 = require("./maybe");
-function map(f, arr) {
-    var length = arr.length;
-    var buff = new Array(length);
-    for (var i = 0; i < length; i++) {
-        buff[i] = f(arr[i]);
-    }
-    return buff;
-}
-exports.map = map;
-function flatMap(f, arr) {
-    var buff = new Array();
-    for (var _i = 0, arr_1 = arr; _i < arr_1.length; _i++) {
-        var el = arr_1[_i];
-        buff.push.apply(buff, f(el));
-    }
-    return buff;
-}
-exports.flatMap = flatMap;
-function head(arr) {
-    return arr.length > 0 ? arr[0] : maybe_1.nothing;
-}
-exports.head = head;
-function tail(arr) {
-    return arr.slice(1);
-}
-exports.tail = tail;
-function equals(predicate, a, b) {
-    if (a.length !== b.length)
-        return false;
-    else {
-        for (var i = 0; i < a.length; i++) {
-            if (!predicate(a[i], b[i]))
-                return false;
-        }
-        return true;
-    }
-}
-exports.equals = equals;
-function isEmpty(arr) {
-    return arr.length === 0;
-}
-exports.isEmpty = isEmpty;
-function hasValues(arr) {
-    return arr.length > 0;
-}
-exports.hasValues = hasValues;
-function filter(predicate, arr) {
-    var buff = [];
-    for (var _i = 0, arr_2 = arr; _i < arr_2.length; _i++) {
-        var a = arr_2[_i];
-        if (predicate(a))
-            buff.push(a);
-    }
-    return buff;
-}
-exports.filter = filter;
-function flatten(arr) {
-    var _a;
-    return (_a = []).concat.apply(_a, arr);
-}
-exports.flatten = flatten;
-function foldLeft(f, arr, b) {
-    for (var _i = 0, arr_3 = arr; _i < arr_3.length; _i++) {
-        var a = arr_3[_i];
-        b = f(b, a);
-    }
-    return b;
-}
-exports.foldLeft = foldLeft;
-function all(predicate, arr) {
-    for (var _i = 0, arr_4 = arr; _i < arr_4.length; _i++) {
-        var a = arr_4[_i];
-        if (!predicate(a)) {
-            return false;
-        }
-    }
-    return true;
-}
-exports.all = all;
-function any(predicate, arr) {
-    for (var _i = 0, arr_5 = arr; _i < arr_5.length; _i++) {
-        var a = arr_5[_i];
-        if (predicate(a)) {
-            return true;
-        }
-    }
-    return false;
-}
-exports.any = any;
-function each(f, arr) {
-    for (var _i = 0, arr_6 = arr; _i < arr_6.length; _i++) {
-        var a = arr_6[_i];
-        f(a);
-    }
-}
-exports.each = each;
-function concat() {
-    var _a;
-    var arrs = [];
-    for (var _i = 0; _i < arguments.length; _i++) {
-        arrs[_i] = arguments[_i];
-    }
-    return (_a = []).concat.apply(_a, arrs);
-}
-exports.concat = concat;
-function makeCompare(comparef, shorterFirst) {
-    if (shorterFirst === void 0) { shorterFirst = true; }
-    return function (a, b) {
-        if (a.length < b.length) {
-            return -1 * (shorterFirst ? 1 : -1);
-        }
-        else if (a.length > b.length) {
-            return 1 * (shorterFirst ? 1 : -1);
-        }
-        for (var i = 0; i < a.length; i++) {
-            var ord = comparef(a[i], b[i]);
-            if (ord !== 0)
-                return ord;
-        }
-        return 0;
-    };
-}
-exports.makeCompare = makeCompare;
-function sort(compare, arr) {
-    return arr.slice().sort(compare);
-}
-exports.sort = sort;
-function range(length, f) {
-    var buff = new Array(length);
-    for (var i = 0; i < length; i++)
-        buff[i] = f(i);
-    return buff;
-}
-exports.range = range;
-function numbersRange(length, startAt) {
-    if (startAt === void 0) { startAt = 0; }
-    return range(length, function (i) { return startAt + i; });
-}
-exports.numbersRange = numbersRange;
-function fill(length, value) {
-    return range(length, function () { return value; });
-}
-exports.fill = fill;
-
-},{"./maybe":"pwth"}],"BEVE":[function(require,module,exports) {
-"use strict";
-/*
-Copyright 2019 Google LLC
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-    https://www.apache.org/licenses/LICENSE-2.0
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-*/
-Object.defineProperty(exports, "__esModule", { value: true });
-var arrays_1 = require("tempo-std/lib/arrays");
-function setOneStyle(el, name, value) {
+exports.setOneStyle = function (el, name, value) {
     var anyStyle = el.style;
     if (value == null) {
         anyStyle[name] = null;
     }
     else {
-        anyStyle[name] = value;
+        var s = String(value);
+        if (s !== anyStyle[name]) {
+            anyStyle[name] = String(value);
+        }
     }
-}
-exports.setOneStyle = setOneStyle;
-function setAttribute(el, name, value) {
+};
+exports.setAttribute = function (el, name, value) {
     if (value == null) {
         el.removeAttribute(name);
     }
     else {
-        el.setAttribute(name, value);
+        var s = String(value);
+        if (s !== el.getAttribute(name)) {
+            el.setAttribute(name, s);
+        }
     }
-}
-exports.setAttribute = setAttribute;
-function setProperty(el, name, value) {
+};
+exports.setProperty = function (el, name, value) {
     var anyEl = el;
-    if (value == null) {
+    if (value == null && anyEl[name] != null) {
         anyEl[name] = null;
     }
-    else {
+    else if (anyEl[name] !== value) {
         anyEl[name] = value;
     }
-}
-exports.setProperty = setProperty;
-function setStyleAttribute(el, name, value) {
+};
+exports.setStyleAttribute = function (el, name, value) {
     var html = el;
     if (value == null) {
         html.removeAttribute(name);
     }
     else if (typeof value === 'string') {
-        setAttribute(el, name, value);
+        exports.setAttribute(el, name, value);
     }
     else {
-        var s = arrays_1.map(function (k) { return k + ": " + value[k] + ";"; }, Object.keys(value)).join(' ');
-        setAttribute(el, name, (s.length && s) || null);
+        var s = Object.keys(value)
+            .map(function (k) {
+            return k + ": " + value[k] + ";";
+        })
+            .join(' ');
+        exports.setAttribute(el, name, (s.length && s) || null);
     }
-}
-exports.setStyleAttribute = setStyleAttribute;
-function setBoolProperty(el, name, value) {
+};
+exports.setBoolProperty = function (el, name, value) {
     var anyEl = el;
     if (value == null) {
         anyEl[name] = null;
     }
     else {
         var bool = value === true || value === 'true';
-        anyEl[name] = bool;
+        if (anyEl[name] !== bool) {
+            anyEl[name] = bool;
+        }
     }
-}
-exports.setBoolProperty = setBoolProperty;
-function setEnumBoolAttribute(el, name, value) {
-    setAttribute(el, name, value === true || value === 'true'
-        ? 'true'
-        : value === false
-            ? 'false'
-            : null);
-}
-exports.setEnumBoolAttribute = setEnumBoolAttribute;
-function setBoolAttribute(el, name, value) {
-    setAttribute(el, name, value === true || value === 'true' ? '' : null);
-}
-exports.setBoolAttribute = setBoolAttribute;
-function setCommaSeparated(el, name, values) {
+};
+exports.setEnumBoolAttribute = function (el, name, value) {
+    exports.setAttribute(el, name, value === true || value === 'true' ? 'true' : value === false ? 'false' : null);
+};
+exports.setBoolAttribute = function (el, name, value) {
+    exports.setAttribute(el, name, value === true || value === 'true' ? '' : null);
+};
+exports.setCommaSeparated = function (el, name, values) {
     if (Array.isArray(values))
-        setAttribute(el, name, values.join(', ') || null);
+        exports.setAttribute(el, name, values.join(', ') || null);
     else
-        setAttribute(el, name, (values && String(values)) || null);
-}
-exports.setCommaSeparated = setCommaSeparated;
-function setSpaceSeparated(el, name, values) {
+        exports.setAttribute(el, name, (values && String(values)) || null);
+};
+exports.setSpaceSeparated = function (el, name, values) {
     if (Array.isArray(values))
-        setAttribute(el, name, values.join(' ') || null);
+        exports.setAttribute(el, name, values.join(' ') || null);
     else
-        setAttribute(el, name, (values && String(values)) || null);
-}
-exports.setSpaceSeparated = setSpaceSeparated;
+        exports.setAttribute(el, name, (values && String(values)) || null);
+};
 
-},{"tempo-std/lib/arrays":"LAOm"}],"ClC2":[function(require,module,exports) {
+},{}],"QBLY":[function(require,module,exports) {
 "use strict";
 /*
 Copyright 2019 Google LLC
@@ -422,8 +228,8 @@ limitations under the License.
 */
 Object.defineProperty(exports, "__esModule", { value: true });
 /* istanbul ignore file */
-var set_attribute_1 = require("./set_attribute");
-exports.attributeNameMap = {
+var set_attribute_1 = require("./utils/set_attribute");
+exports.htmlAttributeNameMap = {
     acceptcharset: 'accept-charset',
     asattr: 'as',
     classname: 'class',
@@ -469,7 +275,7 @@ exports.htmlAttributeMap = {
     value: set_attribute_1.setProperty
 };
 
-},{"./set_attribute":"BEVE"}],"GqEk":[function(require,module,exports) {
+},{"./utils/set_attribute":"AxMU"}],"TJFn":[function(require,module,exports) {
 "use strict";
 /*
 Copyright 2019 Google LLC
@@ -483,63 +289,65 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 Object.defineProperty(exports, "__esModule", { value: true });
 var dom_1 = require("./utils/dom");
-var DerivedTextTemplate = /** @class */ (function () {
-    function DerivedTextTemplate(makeContent) {
-        this.makeContent = makeContent;
+var DOMBaseNodeView = /** @class */ (function () {
+    function DOMBaseNodeView(node, children, beforeDestroy) {
+        this.node = node;
+        this.children = children;
+        this.beforeDestroy = beforeDestroy;
     }
-    DerivedTextTemplate.prototype.render = function (ctx, state) {
-        var makeContent = this.makeContent;
-        var content = makeContent(state) || '';
-        var node = ctx.doc.createTextNode(content);
-        ctx.append(node);
-        return {
-            change: function (state) {
-                var newContent = makeContent(state) || '';
-                if (newContent !== content) {
-                    node.nodeValue = newContent;
-                    if (newContent.length < 5000)
-                        content = newContent;
-                }
-            },
-            destroy: function () {
-                dom_1.removeNode(node);
-            },
-            request: function (_) { }
-        };
+    DOMBaseNodeView.prototype.destroy = function () {
+        if (this.beforeDestroy)
+            this.beforeDestroy();
+        dom_1.removeNode(this.node);
+        for (var _i = 0, _a = this.children; _i < _a.length; _i++) {
+            var c = _a[_i];
+            c.destroy();
+        }
     };
-    return DerivedTextTemplate;
+    return DOMBaseNodeView;
 }());
-exports.DerivedTextTemplate = DerivedTextTemplate;
-var LiteralTextTemplate = /** @class */ (function () {
-    function LiteralTextTemplate(content) {
-        this.content = content;
+exports.DOMBaseNodeView = DOMBaseNodeView;
+var DOMStaticNodeView = /** @class */ (function (_super) {
+    __extends(DOMStaticNodeView, _super);
+    function DOMStaticNodeView() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.kind = 'static';
+        return _this;
     }
-    LiteralTextTemplate.prototype.render = function (ctx, _) {
-        var node = ctx.doc.createTextNode(this.content);
-        ctx.append(node);
-        return {
-            change: function (_) { },
-            destroy: function () {
-                dom_1.removeNode(node);
-            },
-            request: function (_) { }
-        };
-    };
-    return LiteralTextTemplate;
-}());
-exports.LiteralTextTemplate = LiteralTextTemplate;
-exports.text = function (content) {
-    if (typeof content === 'function') {
-        return new DerivedTextTemplate(content);
+    return DOMStaticNodeView;
+}(DOMBaseNodeView));
+exports.DOMStaticNodeView = DOMStaticNodeView;
+var DOMDynamicNodeView = /** @class */ (function (_super) {
+    __extends(DOMDynamicNodeView, _super);
+    function DOMDynamicNodeView(node, children, change, beforeDestroy) {
+        var _this = _super.call(this, node, children, beforeDestroy) || this;
+        _this.node = node;
+        _this.children = children;
+        _this.change = change;
+        _this.beforeDestroy = beforeDestroy;
+        _this.kind = 'dynamic';
+        return _this;
     }
-    else {
-        return new LiteralTextTemplate(content || '');
-    }
-};
+    return DOMDynamicNodeView;
+}(DOMBaseNodeView));
+exports.DOMDynamicNodeView = DOMDynamicNodeView;
 
-},{"./utils/dom":"TnZD"}],"TnZD":[function(require,module,exports) {
+},{"./utils/dom":"KfbX"}],"jTie":[function(require,module,exports) {
 "use strict";
 /*
 Copyright 2019 Google LLC
@@ -554,122 +362,120 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 Object.defineProperty(exports, "__esModule", { value: true });
-var attributes_mapper_1 = require("./attributes_mapper");
+var node_view_1 = require("./node_view");
+var renderLiteral = function (ctx, value) {
+    var node = ctx.doc.createTextNode(value || '');
+    var view = new node_view_1.DOMStaticNodeView(node, []);
+    ctx.append(node);
+    return view;
+};
+var renderFunction = function (ctx, state, map) {
+    var node = ctx.doc.createTextNode(map(state) || '');
+    var f = function (state) {
+        var newContent = map(state) || '';
+        node.nodeValue = newContent;
+    };
+    var view = new node_view_1.DOMDynamicNodeView(node, [], f);
+    ctx.append(node);
+    return view;
+};
+var DOMText = /** @class */ (function () {
+    function DOMText(content) {
+        this.content = content;
+    }
+    DOMText.prototype.render = function (ctx, state) {
+        if (typeof this.content === 'function') {
+            return renderFunction(ctx, state, this.content);
+        }
+        else {
+            return renderLiteral(ctx, this.content);
+        }
+    };
+    return DOMText;
+}());
+exports.DOMText = DOMText;
+exports.text = function (content) { return new DOMText(content); };
+
+},{"./node_view":"TJFn"}],"KfbX":[function(require,module,exports) {
+"use strict";
+/*
+Copyright 2019 Google LLC
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+    https://www.apache.org/licenses/LICENSE-2.0
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+Object.defineProperty(exports, "__esModule", { value: true });
+var dom_attributes_mapper_1 = require("../dom_attributes_mapper");
 var set_attribute_1 = require("./set_attribute");
 var text_1 = require("../text");
-function removeNode(node) {
+exports.removeNode = function (node) {
     var el = node;
     if (el && el.onblur) {
         el.onblur = null;
     }
-    if (!node || node.ownerDocument === undefined)
-        return;
-    if (node.parentElement) {
+    if (node && node.parentElement) {
         node.parentElement.removeChild(node);
     }
-}
-exports.removeNode = removeNode;
-function insertFBefore(ref) {
-    return function (node) {
-        if (ref.parentElement != null) {
-            ref.parentElement.insertBefore(node, ref);
-        }
-    };
-}
-exports.insertFBefore = insertFBefore;
-function domChildToTemplate(dom) {
-    if (typeof dom === 'string' ||
-        typeof dom === 'function' ||
-        typeof dom === 'undefined')
+};
+exports.insertBefore = function (ref) { return function (node) {
+    if (ref.parentElement != null) {
+        ref.parentElement.insertBefore(node, ref);
+    }
+}; };
+exports.filterDynamics = function (children) {
+    return children.filter(function (child) { return child.kind === 'dynamic'; });
+};
+exports.domChildToTemplate = function (dom) {
+    if (typeof dom === 'string' || typeof dom === 'function')
         return text_1.text(dom);
     else
         return dom;
-}
-exports.domChildToTemplate = domChildToTemplate;
-function processAttribute(el, name, value, acc) {
-    var set = attributes_mapper_1.htmlAttributeMap[name] || set_attribute_1.setAttribute;
+};
+exports.processAttribute = function (el, name, value, acc) {
+    name = name.toLowerCase();
+    name = dom_attributes_mapper_1.htmlAttributeNameMap[name] || name;
+    var set = dom_attributes_mapper_1.htmlAttributeMap[name] || set_attribute_1.setAttribute;
     if (typeof value === 'function') {
-        // state in inputs can incorrectly map to state
-        if (el.nodeName === 'INPUT' || el.nodeName === 'TEXTAREA') {
-            var f = function (state) {
-                var newValue = value(state);
-                set(el, name, newValue);
-            };
-            acc.push(f);
-        }
-        else {
-            var oldValue_1 = undefined;
-            var f = function (state) {
-                var newValue = value(state);
-                if (newValue !== oldValue_1) {
-                    set(el, name, newValue);
-                    if (String(newValue).length < 50000) {
-                        oldValue_1 = newValue;
-                    }
-                }
-            };
-            acc.push(f);
-        }
+        var f = function (state) { return set(el, name, value(state)); };
+        acc.push(f);
     }
     else {
         set(el, name, value);
     }
     return acc;
-}
-exports.processAttribute = processAttribute;
-function processEvent(el, name, value, dispatch, acc) {
-    var localState;
+};
+exports.processEvent = function (el, name, value, dispatch, acc) {
     var anyEl = el;
-    anyEl[name] = function (ev) {
-        var r = value(localState, ev, el);
-        if (typeof r !== 'undefined') {
-            dispatch(r);
-        }
-    };
+    name = 'on' + name.toLowerCase();
     var f = function (state) {
-        localState = state;
+        anyEl[name] = function (ev) {
+            var r = value(state, ev, el);
+            if (r != null) {
+                dispatch(r);
+            }
+        };
     };
     acc.push(f);
     return acc;
-}
-exports.processEvent = processEvent;
-function processStyle(el, name, value, acc) {
+};
+exports.processStyle = function (el, name, value, acc) {
     if (typeof value === 'function') {
-        var oldValue_2;
-        var f = function (state) {
-            var newValue = value(state);
-            if (newValue !== oldValue_2) {
-                set_attribute_1.setOneStyle(el, name, newValue);
-                oldValue_2 = newValue;
-            }
-        };
+        var f = function (state) { return set_attribute_1.setOneStyle(el, name, value(state)); };
         acc.push(f);
     }
     else {
         set_attribute_1.setOneStyle(el, name, value);
     }
     return acc;
-}
-exports.processStyle = processStyle;
-exports.containerSize = function (el) {
-    var prev = [];
-    for (var i = 0; i < el.children.length; i++) {
-        var child = el.children[i];
-        prev[i] = child.style.display;
-        child.style.display = 'none';
-    }
-    var size = {
-        width: el.offsetWidth,
-        height: el.offsetHeight
-    };
-    for (var i = 0; i < el.children.length; i++) {
-        var child = el.children[i];
-        child.style.display = prev[i];
-    }
-    return size;
 };
 
-},{"./attributes_mapper":"ClC2","./set_attribute":"BEVE","../text":"GqEk"}],"bbLX":[function(require,module,exports) {
+},{"../dom_attributes_mapper":"QBLY","./set_attribute":"AxMU","../text":"jTie"}],"Mmj0":[function(require,module,exports) {
 "use strict";
 /*
 Copyright 2019 Google LLC
@@ -685,13 +491,12 @@ limitations under the License.
 */
 Object.defineProperty(exports, "__esModule", { value: true });
 var dom_1 = require("./utils/dom");
-var arrays_1 = require("tempo-std/lib/arrays");
-var attributes_mapper_1 = require("./utils/attributes_mapper");
+var node_view_1 = require("./node_view");
 var applyChange = function (change, el, ctx) { return function (state, value) {
     return change(state, el, ctx, value);
 }; };
 var applyAfterRender = function (attr, el, ctx, state) {
-    if (typeof attr !== undefined) {
+    if (attr != null) {
         return attr(state, el, ctx);
     }
     else {
@@ -699,130 +504,79 @@ var applyAfterRender = function (attr, el, ctx, state) {
     }
 };
 var DOMElement = /** @class */ (function () {
-    function DOMElement(createElement, attrs, events, styles, afterrender, beforechange, afterchange, beforedestroy, respond, children) {
+    function DOMElement(createElement, attributes, children) {
         this.createElement = createElement;
-        this.attrs = attrs;
-        this.events = events;
-        this.styles = styles;
-        this.afterrender = afterrender;
-        this.beforechange = beforechange;
-        this.afterchange = afterchange;
-        this.beforedestroy = beforedestroy;
-        this.respond = respond;
+        this.attributes = attributes;
         this.children = children;
     }
     DOMElement.prototype.render = function (ctx, state) {
-        var _this = this;
         var el = this.createElement(ctx.doc);
         var value = undefined;
-        var allChanges = [];
-        for (var _i = 0, _a = this.attrs; _i < _a.length; _i++) {
-            var o = _a[_i];
-            dom_1.processAttribute(el, o.name, o.value, allChanges);
+        var _a = this.attributes, attrs = _a.attrs, events = _a.events, styles = _a.styles, afterrender = _a.afterrender, beforechange = _a.beforechange, afterchange = _a.afterchange, beforedestroy = _a.beforedestroy;
+        var beforedestroyf = beforedestroy && (function () { return beforedestroy(el, ctx, value); });
+        var allDynamics = [];
+        if (attrs) {
+            Object.keys(attrs).forEach(function (key) { return dom_1.processAttribute(el, key, attrs[key], allDynamics); });
         }
-        for (var _b = 0, _c = this.events; _b < _c.length; _b++) {
-            var o = _c[_b];
-            dom_1.processEvent(el, o.name, o.value, ctx.dispatch, allChanges);
+        if (events) {
+            Object.keys(events).forEach(function (key) { return dom_1.processEvent(el, key, events[key], ctx.dispatch, allDynamics); });
         }
-        for (var _d = 0, _e = this.styles; _d < _e.length; _d++) {
-            var o = _e[_d];
-            dom_1.processStyle(el, o.name, o.value, allChanges);
+        if (styles) {
+            Object.keys(styles).forEach(function (key) { return dom_1.processStyle(el, key, styles[key], allDynamics); });
         }
-        for (var _f = 0, allChanges_1 = allChanges; _f < allChanges_1.length; _f++) {
-            var change = allChanges_1[_f];
-            change(state);
+        for (var _i = 0, allDynamics_1 = allDynamics; _i < allDynamics_1.length; _i++) {
+            var dy = allDynamics_1[_i];
+            dy(state);
         }
         // children
         var appendChild = function (n) { return el.appendChild(n); };
         var newCtx = ctx.withAppend(appendChild).withParent(el);
-        var views = arrays_1.map(function (child) { return child.render(newCtx, state); }, this.children);
+        var views = this.children.map(function (child) { return child.render(newCtx, state); });
         ctx.append(el);
-        if (this.afterrender) {
-            value = applyAfterRender(this.afterrender, el, ctx, state);
+        if (afterrender) {
+            value = applyAfterRender(afterrender, el, ctx, state);
         }
-        var viewChanges = arrays_1.map(function (child) { return function (state) { return child.change(state); }; }, views);
-        allChanges.push.apply(allChanges, viewChanges);
-        if (this.beforechange) {
-            var change_1 = applyChange(this.beforechange, el, ctx);
+        var dynamicChildren = dom_1.filterDynamics(views).map(function (child) { return function (state) { return child.change(state); }; });
+        allDynamics.push.apply(allDynamics, dynamicChildren);
+        if (beforechange) {
+            var change_1 = applyChange(beforechange, el, ctx);
             var update = function (state) { value = change_1(state, value); };
-            allChanges.unshift(update);
+            allDynamics.unshift(update);
         }
-        if (this.afterchange) {
-            var change_2 = applyChange(this.afterchange, el, ctx);
+        if (afterchange) {
+            var change_2 = applyChange(afterchange, el, ctx);
             var update = function (state) { value = change_2(state, value); };
-            allChanges.push(update);
+            allDynamics.push(update);
         }
-        var beforedestroyf = this.beforedestroy && (function () { return _this.beforedestroy(el, ctx, value); });
-        var respond = this.respond;
-        return {
-            change: function (state) {
-                for (var _i = 0, allChanges_2 = allChanges; _i < allChanges_2.length; _i++) {
-                    var change = allChanges_2[_i];
-                    change(state);
+        if (allDynamics.length > 0) {
+            return new node_view_1.DOMDynamicNodeView(el, views, function (state) {
+                for (var _i = 0, allDynamics_2 = allDynamics; _i < allDynamics_2.length; _i++) {
+                    var f = allDynamics_2[_i];
+                    f(state);
                 }
-            },
-            destroy: function () {
-                if (beforedestroyf)
-                    beforedestroyf();
-                dom_1.removeNode(el);
-                for (var _i = 0, views_1 = views; _i < views_1.length; _i++) {
-                    var view = views_1[_i];
-                    view.destroy();
-                }
-            },
-            request: function (query) {
-                if (respond) {
-                    value = respond(query, el, ctx, value);
-                }
-                for (var _i = 0, views_2 = views; _i < views_2.length; _i++) {
-                    var view = views_2[_i];
-                    view.request(query);
-                }
-            }
-        };
+            }, beforedestroyf);
+        }
+        else {
+            return new node_view_1.DOMStaticNodeView(el, views, beforedestroyf);
+        }
     };
     return DOMElement;
 }());
 exports.DOMElement = DOMElement;
-function extractAttrs(attrs) {
-    return arrays_1.map(function (attName) {
-        var name = attName.toLowerCase();
-        name = attributes_mapper_1.attributeNameMap[name] || name;
-        return {
-            name: name,
-            value: attrs[attName]
-        };
-    }, Object.keys(attrs || {}));
-}
-function extractEvents(attrs) {
-    return arrays_1.map(function (eventName) {
-        var name = "on" + eventName.toLowerCase();
-        return {
-            name: name,
-            value: attrs[eventName]
-        };
-    }, Object.keys(attrs || {}));
-}
-function extractStyles(attrs) {
-    return arrays_1.map(function (name) { return ({
-        name: name,
-        value: attrs[name]
-    }); }, Object.keys(attrs || {}));
-}
 var makeCreateElement = function (name) { return function (doc) { return doc.createElement(name); }; };
 exports.el = function (name, attributes) {
     var children = [];
     for (var _i = 2; _i < arguments.length; _i++) {
         children[_i - 2] = arguments[_i];
     }
-    return new DOMElement(makeCreateElement(name), extractAttrs(attributes.attrs), extractEvents(attributes.events), extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, attributes.respond, arrays_1.map(dom_1.domChildToTemplate, children));
+    return new DOMElement(makeCreateElement(name), attributes, children.map(dom_1.domChildToTemplate));
 };
 exports.el2 = function (name) { return function (attributes) {
     var children = [];
     for (var _i = 1; _i < arguments.length; _i++) {
         children[_i - 1] = arguments[_i];
     }
-    return new DOMElement(makeCreateElement(name), extractAttrs(attributes.attrs), extractEvents(attributes.events), extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, attributes.respond, arrays_1.map(dom_1.domChildToTemplate, children));
+    return new DOMElement(makeCreateElement(name), attributes, children.map(dom_1.domChildToTemplate));
 }; };
 exports.defaultNamespaces = {
     'svg': 'http://www.w3.org/2000/svg'
@@ -836,17 +590,17 @@ exports.elNS = function (ns, name, attributes) {
         children[_i - 3] = arguments[_i];
     }
     var namespace = exports.defaultNamespaces[ns] || ns;
-    return new DOMElement(makeCreateElementNS(namespace, name), extractAttrs(attributes.attrs), extractEvents(attributes.events), extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, attributes.respond, arrays_1.map(dom_1.domChildToTemplate, children));
+    return new DOMElement(makeCreateElementNS(namespace, name), attributes, children.map(dom_1.domChildToTemplate));
 };
 exports.elNS2 = function (namespace, name) { return function (attributes) {
     var children = [];
     for (var _i = 1; _i < arguments.length; _i++) {
         children[_i - 1] = arguments[_i];
     }
-    return new DOMElement(makeCreateElementNS(namespace, name), extractAttrs(attributes.attrs), extractEvents(attributes.events), extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, attributes.respond, arrays_1.map(dom_1.domChildToTemplate, children));
+    return new DOMElement(makeCreateElementNS(namespace, name), attributes, children.map(dom_1.domChildToTemplate));
 }; };
 
-},{"./utils/dom":"TnZD","tempo-std/lib/arrays":"LAOm","./utils/attributes_mapper":"ClC2"}],"zQMt":[function(require,module,exports) {
+},{"./utils/dom":"KfbX","./node_view":"TJFn"}],"YzxN":[function(require,module,exports) {
 "use strict";
 /*
 Copyright 2019 Google LLC
@@ -984,7 +738,7 @@ exports.video = element_1.el2('video');
 exports.wbr = element_1.el2('wbr');
 exports.xmp = element_1.el2('xmp');
 
-},{"./element":"bbLX"}],"UU8h":[function(require,module,exports) {
+},{"./element":"Mmj0"}],"hYCi":[function(require,module,exports) {
 "use strict";
 /*
 Copyright 2019 Google LLC
@@ -1000,91 +754,83 @@ limitations under the License.
 */
 Object.defineProperty(exports, "__esModule", { value: true });
 var dom_1 = require("./utils/dom");
-var arrays_1 = require("tempo-std/lib/arrays");
-var UntilTemplate = /** @class */ (function () {
-    function UntilTemplate(options, children) {
+var DOMUntilView = /** @class */ (function () {
+    function DOMUntilView(ref, repeatUntil, ctx, children) {
+        this.ref = ref;
+        this.repeatUntil = repeatUntil;
+        this.ctx = ctx;
+        this.children = children;
+        this.kind = 'dynamic';
+        this.childrenView = [];
+    }
+    DOMUntilView.prototype.destroy = function () {
+        dom_1.removeNode(this.ref);
+        for (var _i = 0, _a = this.childrenView; _i < _a.length; _i++) {
+            var c = _a[_i];
+            for (var _b = 0, c_1 = c; _b < c_1.length; _b++) {
+                var e = c_1[_b];
+                e.destroy();
+            }
+        }
+        this.childrenView = [];
+    };
+    DOMUntilView.prototype.change = function (state) {
+        var _this = this;
+        var currentViewLength = this.childrenView.length;
+        var count = 0;
+        var value;
+        while ((value = this.repeatUntil(state, count)) !== undefined) {
+            if (count < currentViewLength) {
+                // replace existing
+                for (var _i = 0, _a = dom_1.filterDynamics(this.childrenView[count]); _i < _a.length; _i++) {
+                    var v = _a[_i];
+                    v.change(value);
+                }
+            }
+            else {
+                // add node
+                this.childrenView.push(this.children.map(function (el) { return el.render(_this.ctx, value); }));
+            }
+            count++;
+        }
+        var i = count;
+        while (i < currentViewLength) {
+            // remove extra nodes
+            for (var _b = 0, _c = this.childrenView[i]; _b < _c.length; _b++) {
+                var c = _c[_b];
+                c.destroy();
+            }
+            i++;
+        }
+        this.childrenView = this.childrenView.slice(0, count);
+    };
+    return DOMUntilView;
+}());
+exports.DOMUntilView = DOMUntilView;
+var DOMUntilTemplate = /** @class */ (function () {
+    function DOMUntilTemplate(options, children) {
         this.options = options;
         this.children = children;
     }
-    UntilTemplate.prototype.render = function (ctx, state) {
-        var children = this.children;
-        var _a = this.options, refId = _a.refId, repeatUntil = _a.repeatUntil;
-        var _b = ctx.withAppendToReference(refId), newCtx = _b.ctx, ref = _b.ref;
-        var childrenViews = [];
-        var view = {
-            change: function (state) {
-                var currentLength = childrenViews.length;
-                var index = 0;
-                var _loop_1 = function () {
-                    var value = repeatUntil(state, index);
-                    if (typeof value === 'undefined')
-                        return "break";
-                    if (index < currentLength) {
-                        // replace existing
-                        var filteredViews = childrenViews[index];
-                        for (var _i = 0, filteredViews_1 = filteredViews; _i < filteredViews_1.length; _i++) {
-                            var view_1 = filteredViews_1[_i];
-                            view_1.change(value);
-                        }
-                    }
-                    else {
-                        // add node
-                        childrenViews.push(arrays_1.map(function (el) { return el.render(newCtx, value); }, children));
-                    }
-                    index++;
-                };
-                while (true) {
-                    var state_1 = _loop_1();
-                    if (state_1 === "break")
-                        break;
-                }
-                var i = index;
-                // remove extra nodes
-                while (i < currentLength) {
-                    for (var _i = 0, _a = childrenViews[i]; _i < _a.length; _i++) {
-                        var c = _a[_i];
-                        c.destroy();
-                    }
-                    i++;
-                }
-                childrenViews = childrenViews.slice(0, index);
-            },
-            destroy: function () {
-                dom_1.removeNode(ref);
-                for (var _i = 0, childrenViews_1 = childrenViews; _i < childrenViews_1.length; _i++) {
-                    var childViews = childrenViews_1[_i];
-                    for (var _a = 0, childViews_1 = childViews; _a < childViews_1.length; _a++) {
-                        var view_2 = childViews_1[_a];
-                        view_2.destroy();
-                    }
-                }
-                childrenViews = [];
-            },
-            request: function (query) {
-                for (var _i = 0, childrenViews_2 = childrenViews; _i < childrenViews_2.length; _i++) {
-                    var childViews = childrenViews_2[_i];
-                    for (var _a = 0, childViews_2 = childViews; _a < childViews_2.length; _a++) {
-                        var view_3 = childViews_2[_a];
-                        view_3.request(query);
-                    }
-                }
-            }
-        };
+    DOMUntilTemplate.prototype.render = function (ctx, state) {
+        var ref = ctx.doc.createComment(this.options.refId || 'md:until');
+        ctx.append(ref);
+        var view = new DOMUntilView(ref, this.options.repeatUntil, ctx.withAppend(dom_1.insertBefore(ref)), this.children);
         view.change(state);
         return view;
     };
-    return UntilTemplate;
+    return DOMUntilTemplate;
 }());
-exports.UntilTemplate = UntilTemplate;
+exports.DOMUntilTemplate = DOMUntilTemplate;
 exports.until = function (options) {
     var children = [];
     for (var _i = 1; _i < arguments.length; _i++) {
         children[_i - 1] = arguments[_i];
     }
-    return new UntilTemplate(options, arrays_1.map(dom_1.domChildToTemplate, children));
+    return new DOMUntilTemplate(options, children.map(dom_1.domChildToTemplate));
 };
 
-},{"./utils/dom":"TnZD","tempo-std/lib/arrays":"LAOm"}],"kxUV":[function(require,module,exports) {
+},{"./utils/dom":"KfbX"}],"xmUo":[function(require,module,exports) {
 "use strict";
 /*
 Copyright 2019 Google LLC
@@ -1113,35 +859,35 @@ exports.forEach = function (options) {
         children[_i - 1] = arguments[_i];
     }
     return until_1.until.apply(void 0, __spreadArrays([{
-            refId: options.refId || 't:for_each',
+            refId: options.refId || 'md:for_each',
             repeatUntil: function (state, index) { return state[index]; }
         }], children));
 };
 
-},{"./until":"UU8h"}],"dozB":[function(require,module,exports) {
+},{"./until":"hYCi"}],"dozB":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var html_1 = require("tempo-dom/lib/html");
+var html_1 = require("@tempo/dom/lib/html");
 
-var for_each_1 = require("tempo-dom/lib/for_each");
+var for_each_1 = require("@tempo/dom/lib/for_each");
 
 exports.list = html_1.ul({}, for_each_1.forEach({}, html_1.li({
   attrs: {
     className: String
   }
 }, String)));
-},{"tempo-dom/lib/html":"zQMt","tempo-dom/lib/for_each":"kxUV"}],"JKII":[function(require,module,exports) {
+},{"@tempo/dom/lib/html":"YzxN","@tempo/dom/lib/for_each":"xmUo"}],"JKII":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var html_1 = require("tempo-dom/lib/html");
+var html_1 = require("@tempo/dom/lib/html");
 
 exports.deep = html_1.div({
   attrs: {
@@ -1158,7 +904,7 @@ exports.deep = html_1.div({
 })), html_1.article({}, function (s) {
   return s.paragraph;
 })));
-},{"tempo-dom/lib/html":"zQMt"}],"OJrv":[function(require,module,exports) {
+},{"@tempo/dom/lib/html":"YzxN"}],"TsAd":[function(require,module,exports) {
 "use strict";
 /*
 Copyright 2019 Google LLC
@@ -1173,7 +919,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 Object.defineProperty(exports, "__esModule", { value: true });
-var dom_1 = require("./utils/dom");
 var DOMContext = /** @class */ (function () {
     function DOMContext(doc, append, parent, dispatch) {
         this.doc = doc;
@@ -1196,18 +941,10 @@ var DOMContext = /** @class */ (function () {
         var _this = this;
         return new DOMContext(this.doc, this.append, this.parent, function (action) {
             var newAction = f(action);
-            if (typeof newAction !== 'undefined') {
+            if (newAction !== undefined) {
                 _this.dispatch(newAction);
             }
         });
-    };
-    DOMContext.prototype.withAppendToReference = function (refId) {
-        var ref = this.doc.createComment(refId || 't:ref');
-        this.append(ref);
-        return {
-            ctx: this.withAppend(dom_1.insertFBefore(ref)),
-            ref: ref
-        };
     };
     DOMContext.prototype.withAppend = function (append) {
         return new DOMContext(this.doc, append, this.parent, this.dispatch);
@@ -1222,14 +959,14 @@ var DOMContext = /** @class */ (function () {
 }());
 exports.DOMContext = DOMContext;
 
-},{"./utils/dom":"TnZD"}],"izmn":[function(require,module,exports) {
+},{}],"izmn":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var html_1 = require("tempo-dom/lib/html");
+var html_1 = require("@tempo/dom/lib/html");
 
 exports.attribute = html_1.div({
   attrs: {
@@ -1244,14 +981,14 @@ exports.attribute = html_1.div({
     }
   }
 }, 'content');
-},{"tempo-dom/lib/html":"zQMt"}],"qnhq":[function(require,module,exports) {
+},{"@tempo/dom/lib/html":"YzxN"}],"qnhq":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var html_1 = require("tempo-dom/lib/html");
+var html_1 = require("@tempo/dom/lib/html");
 
 exports.style = html_1.div({
   styles: {
@@ -1266,14 +1003,14 @@ exports.style = html_1.div({
     }
   }
 }, 'content');
-},{"tempo-dom/lib/html":"zQMt"}],"jpZy":[function(require,module,exports) {
+},{"@tempo/dom/lib/html":"YzxN"}],"jpZy":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var html_1 = require("tempo-dom/lib/html");
+var html_1 = require("@tempo/dom/lib/html");
 
 exports.event = html_1.button({
   events: {
@@ -1282,26 +1019,7 @@ exports.event = html_1.button({
     }
   }
 }, 'click me');
-},{"tempo-dom/lib/html":"zQMt"}],"YbU7":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var html_1 = require("tempo-dom/lib/html");
-
-exports.property = html_1.input({
-  attrs: {
-    value: function value(s) {
-      return s.value;
-    },
-    disabled: function disabled(s) {
-      return s.disabled;
-    }
-  }
-});
-},{"tempo-dom/lib/html":"zQMt"}],"ZCfc":[function(require,module,exports) {
+},{"@tempo/dom/lib/html":"YzxN"}],"ZCfc":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1312,15 +1030,13 @@ var list_1 = require("./template/list");
 
 var deep_1 = require("./template/deep");
 
-var context_1 = require("tempo-dom/lib/context");
+var context_1 = require("@tempo/dom/lib/context");
 
 var attribute_1 = require("./template/attribute");
 
 var styles_1 = require("./template/styles");
 
 var events_1 = require("./template/events");
-
-var property_1 = require("./template/property");
 
 var ctx = context_1.DOMContext.fromElement(document.getElementById('test'), function () {});
 
@@ -1360,20 +1076,11 @@ exports.updateAttributes = function (values) {
   }
 };
 
-exports.updateProperty = function (values) {
-  var view = property_1.property.render(ctx, values[0]);
-
-  for (var _i = 0, values_3 = values; _i < values_3.length; _i++) {
-    var v = values_3[_i];
-    view.change(v);
-  }
-};
-
 exports.updateStyles = function (values) {
   var view = styles_1.style.render(ctx, values[0]);
 
-  for (var _i = 0, values_4 = values; _i < values_4.length; _i++) {
-    var v = values_4[_i];
+  for (var _i = 0, values_3 = values; _i < values_3.length; _i++) {
+    var v = values_3[_i];
     view.change(v);
   }
 };
@@ -1382,8 +1089,8 @@ exports.updateAndTriggerEvents = function (values) {
   var view = events_1.event.render(ctx, values[0]);
   var el = document.getElementById('test').firstElementChild;
 
-  for (var _i = 0, values_5 = values; _i < values_5.length; _i++) {
-    var v = values_5[_i];
+  for (var _i = 0, values_4 = values; _i < values_4.length; _i++) {
+    var v = values_4[_i];
     el.click();
     view.change(v);
   }
@@ -1397,8 +1104,7 @@ anyWin.__tests__ = {
   renderDeepAndUpdate: exports.renderDeepAndUpdate,
   updateAttributes: exports.updateAttributes,
   updateStyles: exports.updateStyles,
-  updateProperty: exports.updateProperty,
   updateAndTriggerEvents: exports.updateAndTriggerEvents
 };
-},{"./template/list":"dozB","./template/deep":"JKII","tempo-dom/lib/context":"OJrv","./template/attribute":"izmn","./template/styles":"qnhq","./template/events":"jpZy","./template/property":"YbU7"}]},{},["ZCfc"], null)
+},{"./template/list":"dozB","./template/deep":"JKII","@tempo/dom/lib/context":"TsAd","./template/attribute":"izmn","./template/styles":"qnhq","./template/events":"jpZy"}]},{},["ZCfc"], null)
 //# sourceMappingURL=main.js.map
