@@ -4,31 +4,31 @@
   <h2>types</h2>
   <h3 class="is-family-monospace has-text-grey-dark" id="Cast">Cast</h3>
   <pre
-    class="ts language-ts"
+    class="ts language-ts signature"
   ><div><span class="token keyword">type</span> Cast<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token constant">A</span> <span class="token keyword">extends</span> <span class="token class-name">B</span> <span class="token operator">?</span> <span class="token constant">A</span> <span class="token operator">:</span> <span class="token constant">B</span>
 </div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="DeRef">DeRef</h3>
   <pre
-    class="ts language-ts"
+    class="ts language-ts signature"
   ><div><span class="token keyword">type</span> DeRef<span class="token operator">&lt;</span><span class="token constant">T</span> <span class="token keyword">extends</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">any</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token constant">T</span> <span class="token keyword">extends</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> infer Ret <span class="token operator">?</span> Ret <span class="token operator">:</span> <span class="token builtin">never</span>
 </div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="Pointer">Pointer</h3>
   <pre
-    class="ts language-ts"
+    class="ts language-ts signature"
   ><div><span class="token keyword">type</span> Pointer<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">T</span>
 </div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="WhenEquals">
     WhenEquals
   </h3>
   <pre
-    class="ts language-ts"
+    class="ts language-ts signature"
   ><div><span class="token keyword">type</span> WhenEquals<span class="token operator">&lt;</span><span class="token constant">X</span><span class="token punctuation">,</span> <span class="token constant">Y</span><span class="token punctuation">,</span> <span class="token constant">A</span> <span class="token operator">=</span> <span class="token constant">X</span><span class="token punctuation">,</span> <span class="token constant">B</span> <span class="token operator">=</span> <span class="token builtin">never</span><span class="token operator">&gt;</span> <span class="token operator">=</span> Equals<span class="token operator">&lt;</span><span class="token constant">X</span><span class="token punctuation">,</span> <span class="token constant">Y</span><span class="token operator">&gt;</span> <span class="token keyword">extends</span> <span class="token class-name">true</span> <span class="token operator">?</span> <span class="token constant">A</span> <span class="token operator">:</span> <span class="token constant">B</span>
 </div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="WhenNotEquals">
     WhenNotEquals
   </h3>
   <pre
-    class="ts language-ts"
+    class="ts language-ts signature"
   ><div><span class="token keyword">type</span> WhenNotEquals<span class="token operator">&lt;</span><span class="token constant">X</span><span class="token punctuation">,</span> <span class="token constant">Y</span><span class="token punctuation">,</span> <span class="token constant">A</span> <span class="token operator">=</span> <span class="token constant">X</span><span class="token punctuation">,</span> <span class="token constant">B</span> <span class="token operator">=</span> <span class="token builtin">never</span><span class="token operator">&gt;</span> <span class="token operator">=</span> NotEquals<span class="token operator">&lt;</span><span class="token constant">X</span><span class="token punctuation">,</span> <span class="token constant">Y</span><span class="token operator">&gt;</span> <span class="token keyword">extends</span> <span class="token class-name">true</span>
   <span class="token operator">?</span> <span class="token constant">A</span>
   <span class="token operator">:</span> <span class="token constant">B</span>

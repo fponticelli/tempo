@@ -51,28 +51,28 @@
     JSONArray
   </h3>
   <pre
-    class="ts language-ts"
+    class="ts language-ts signature"
   ><div><span class="token keyword">type</span> JSONArray <span class="token operator">=</span> JSONValue<span class="token punctuation">[</span><span class="token punctuation">]</span>
 </div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="JSONObject">
     JSONObject
   </h3>
   <pre
-    class="ts language-ts"
+    class="ts language-ts signature"
   ><div><span class="token keyword">interface</span> <span class="token class-name">JSONObject</span> <span class="token keyword">extends</span> <span class="token class-name">Record</span><span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token punctuation">,</span> JSONValue<span class="token operator">&gt;</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
 </div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="JSONPrimitive">
     JSONPrimitive
   </h3>
   <pre
-    class="ts language-ts"
+    class="ts language-ts signature"
   ><div><span class="token keyword">type</span> JSONPrimitive <span class="token operator">=</span> <span class="token builtin">string</span> <span class="token operator">|</span> <span class="token builtin">boolean</span> <span class="token operator">|</span> <span class="token builtin">number</span> <span class="token operator">|</span> <span class="token keyword">null</span>
 </div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="JSONValue">
     JSONValue
   </h3>
   <pre
-    class="ts language-ts"
+    class="ts language-ts signature"
   ><div><span class="token keyword">type</span> JSONValue <span class="token operator">=</span> JSONPrimitive <span class="token operator">|</span> JSONObject <span class="token operator">|</span> JSONArray
 </div></pre>
   <h2>functions</h2>
@@ -80,14 +80,14 @@
     deserialize
   </h3>
   <pre
-    class="ts language-ts"
+    class="ts language-ts signature"
   ><div><span class="token keyword">function</span> <span class="token function">deserialize</span><span class="token punctuation">(</span><span class="token parameter">s<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> Result<span class="token operator">&lt;</span>JSONValue<span class="token punctuation">,</span> <span class="token builtin">string</span><span class="token operator">&gt;</span>
 </div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="makeSerializer">
     makeSerializer
   </h3>
   <pre
-    class="ts language-ts"
+    class="ts language-ts signature"
   ><div><span class="token keyword">function</span> <span class="token function">makeSerializer</span><span class="token punctuation">(</span><span class="token parameter">options<span class="token operator">:</span> <span class="token punctuation">{</span>
   minified<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">boolean</span>
   whitelist<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
@@ -97,14 +97,14 @@
     serialize
   </h3>
   <pre
-    class="ts language-ts"
+    class="ts language-ts signature"
   ><div><span class="token keyword">function</span> <span class="token function">serialize</span><span class="token punctuation">(</span><span class="token parameter">v<span class="token operator">:</span> JSONValue</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span>
 </div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="serializeMinified">
     serializeMinified
   </h3>
   <pre
-    class="ts language-ts"
+    class="ts language-ts signature"
   ><div><span class="token keyword">function</span> <span class="token function">serializeMinified</span><span class="token punctuation">(</span><span class="token parameter">v<span class="token operator">:</span> JSONValue</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span>
 </div></pre>
 </article>

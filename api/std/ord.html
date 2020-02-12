@@ -4,14 +4,14 @@
   <h2>types</h2>
   <h3 class="is-family-monospace has-text-grey-dark" id="Compare">Compare</h3>
   <pre
-    class="ts language-ts"
+    class="ts language-ts signature"
   ><div><span class="token keyword">type</span> Compare<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">,</span> b<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">number</span>
 </div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="CompareOrd">
     CompareOrd
   </h3>
   <pre
-    class="ts language-ts"
+    class="ts language-ts signature"
   ><div><span class="token keyword">type</span> CompareOrd<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">,</span> b<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Ordering
 </div></pre>
   <h2>functions</h2>
@@ -19,7 +19,7 @@
     fromNumberComparison
   </h3>
   <pre
-    class="ts language-ts"
+    class="ts language-ts signature"
   ><div><span class="token keyword">function</span> fromNumberComparison<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
   <span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token constant">A</span><span class="token punctuation">,</span> b<span class="token operator">:</span> <span class="token constant">A</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">number</span>
 <span class="token punctuation">)</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token constant">A</span><span class="token punctuation">,</span> b<span class="token operator">:</span> <span class="token constant">A</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Ordering
@@ -27,7 +27,7 @@
   <h2>classes</h2>
   <h3 class="is-family-monospace has-text-grey-dark" id="Ord">Ord</h3>
   <pre
-    class="ts language-ts"
+    class="ts language-ts signature"
   ><div><span class="token keyword">declare</span> <span class="token keyword">class</span> <span class="token class-name">Ord</span><span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
   <span class="token keyword">static</span> fromNumberComparison<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token function-variable function">compare</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">,</span> b<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">number</span><span class="token punctuation">)</span><span class="token operator">:</span> Ord<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span>
   <span class="token keyword">constructor</span><span class="token punctuation">(</span>compare<span class="token operator">:</span> CompareOrd<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">)</span>

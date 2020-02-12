@@ -60,17 +60,17 @@
   <h2>types</h2>
   <h3 class="is-family-monospace has-text-grey-dark" id="DropN">DropN</h3>
   <pre
-    class="ts language-ts"
+    class="ts language-ts signature"
   ><div><span class="token keyword">type</span> DropN<span class="token operator">&lt;</span><span class="token constant">N</span> <span class="token keyword">extends</span> <span class="token class-name">number</span><span class="token punctuation">,</span> <span class="token constant">T</span> <span class="token keyword">extends</span> <span class="token class-name">any</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">&gt;</span> <span class="token operator">=</span> DropNImpl<span class="token operator">&lt;</span><span class="token constant">N</span><span class="token punctuation">,</span> <span class="token constant">T</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">&gt;</span>
 </div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="Head">Head</h3>
   <pre
-    class="ts language-ts"
+    class="ts language-ts signature"
   ><div><span class="token keyword">type</span> Head<span class="token operator">&lt;</span><span class="token constant">T</span> <span class="token keyword">extends</span> <span class="token class-name">any</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token constant">T</span> <span class="token keyword">extends</span> <span class="token punctuation">[</span>infer <span class="token constant">H</span><span class="token punctuation">,</span> <span class="token operator">...</span><span class="token builtin">any</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">]</span> <span class="token operator">?</span> <span class="token constant">H</span> <span class="token operator">:</span> <span class="token builtin">never</span>
 </div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="Last">Last</h3>
   <pre
-    class="ts language-ts"
+    class="ts language-ts signature"
   ><div><span class="token keyword">type</span> Last<span class="token operator">&lt;</span><span class="token constant">T</span> <span class="token keyword">extends</span> <span class="token class-name">any</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
   n<span class="token operator">:</span> Last<span class="token operator">&lt;</span>Tail<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;&gt;</span>
   one<span class="token operator">:</span> <span class="token constant">T</span> <span class="token keyword">extends</span> <span class="token punctuation">[</span>infer <span class="token constant">H</span><span class="token punctuation">]</span> <span class="token operator">?</span> <span class="token constant">H</span> <span class="token operator">:</span> <span class="token builtin">never</span>
@@ -79,14 +79,14 @@
 </div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="Length">Length</h3>
   <pre
-    class="ts language-ts"
+    class="ts language-ts signature"
   ><div><span class="token keyword">type</span> Length<span class="token operator">&lt;</span><span class="token constant">T</span> <span class="token keyword">extends</span> <span class="token class-name">any</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token string">'length'</span><span class="token punctuation">]</span>
 </div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="LoseLastImpl">
     LoseLastImpl
   </h3>
   <pre
-    class="ts language-ts"
+    class="ts language-ts signature"
   ><div><span class="token keyword">type</span> LoseLastImpl<span class="token operator">&lt;</span><span class="token constant">A</span> <span class="token keyword">extends</span> <span class="token class-name">any</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token constant">B</span> <span class="token keyword">extends</span> <span class="token class-name">any</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
   empty<span class="token operator">:</span> <span class="token constant">A</span>
   next<span class="token operator">:</span> LoseLastImpl<span class="token operator">&lt;</span>Prepend<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> Tail<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token operator">&gt;&gt;</span>
@@ -94,7 +94,7 @@
 </div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="Prepend">Prepend</h3>
   <pre
-    class="ts language-ts"
+    class="ts language-ts signature"
   ><div><span class="token keyword">type</span> Prepend<span class="token operator">&lt;</span>Insert<span class="token punctuation">,</span> Tail <span class="token keyword">extends</span> <span class="token class-name">any</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>
   <span class="token parameter">i<span class="token operator">:</span> Insert<span class="token punctuation">,</span>
   <span class="token operator">...</span>tail<span class="token operator">:</span> Tail</span>
@@ -104,12 +104,12 @@
 </div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="Reverse">Reverse</h3>
   <pre
-    class="ts language-ts"
+    class="ts language-ts signature"
   ><div><span class="token keyword">type</span> Reverse<span class="token operator">&lt;</span><span class="token constant">T</span> <span class="token keyword">extends</span> <span class="token class-name">any</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">&gt;</span> <span class="token operator">=</span> ReverseImpl<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">&gt;</span>
 </div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="Tail">Tail</h3>
   <pre
-    class="ts language-ts"
+    class="ts language-ts signature"
   ><div><span class="token keyword">type</span> Tail<span class="token operator">&lt;</span><span class="token constant">T</span> <span class="token keyword">extends</span> <span class="token class-name">any</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter"><span class="token operator">...</span>args<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span><span class="token punctuation">)</span> <span class="token keyword">extends</span> <span class="token punctuation">(</span>
   <span class="token parameter">_<span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">,</span>
   <span class="token operator">...</span>rest<span class="token operator">:</span> infer Rest</span>
@@ -121,7 +121,7 @@
     TupleToUnion
   </h3>
   <pre
-    class="ts language-ts"
+    class="ts language-ts signature"
   ><div><span class="token keyword">type</span> TupleToUnion<span class="token operator">&lt;</span><span class="token constant">T</span> <span class="token keyword">extends</span> <span class="token class-name">any</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token builtin">number</span><span class="token punctuation">]</span>
 </div></pre>
 </article>
