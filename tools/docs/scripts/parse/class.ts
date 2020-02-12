@@ -1,6 +1,7 @@
 import {
   ClassDeclaration, MethodDeclaration, ClassStaticPropertyTypes,
-  ConstructorDeclaration, ClassInstancePropertyTypes } from 'ts-morph'
+  ConstructorDeclaration, ClassInstancePropertyTypes,
+  ts } from 'ts-morph'
 import { docOfJsDoc, BaseDoc } from './jsdoc'
 import { adjustSignature } from './signature'
 import { flatten } from 'tempo-std/lib/arrays'
@@ -58,6 +59,15 @@ function getConstructorDeclarationSignature(o: ConstructorDeclaration): string {
   return text
 }
 
+function isPublic(
+  p: ClassStaticPropertyTypes | MethodDeclaration |
+  ConstructorDeclaration | ClassInstancePropertyTypes
+): boolean {
+  return p.hasModifier(ts.SyntaxKind.PublicKeyword)
+    || (!p.hasModifier(ts.SyntaxKind.PrivateKeyword)
+    && !p.hasModifier(ts.SyntaxKind.ProtectedKeyword))
+}
+
 function getSignature(cls: ClassDeclaration) {
   let tp = cls.getTypeParameters()?.map(t => t.getText()).join(', ') ?? ''
   if (tp) {
@@ -78,11 +88,11 @@ function getSignature(cls: ClassDeclaration) {
   }
 
   const lines = flatten([
-    cls.getStaticProperties().map(m => getValueDeclarationSignature(m)),
-    cls.getStaticMethods().map(m => getMethodDeclarationSignature(m)),
-    cls.getConstructors().map(c => getConstructorDeclarationSignature(c)),
-    cls.getInstanceProperties().map(m => getValueDeclarationSignature(m)),
-    cls.getInstanceMethods().map(m => getMethodDeclarationSignature(m)),
+    cls.getStaticProperties().filter(isPublic).map(m => getValueDeclarationSignature(m)),
+    cls.getStaticMethods().filter(isPublic).map(m => getMethodDeclarationSignature(m)),
+    cls.getConstructors().filter(isPublic).map(c => getConstructorDeclarationSignature(c)),
+    cls.getInstanceProperties().filter(isPublic).map(m => getValueDeclarationSignature(m)),
+    cls.getInstanceMethods().filter(isPublic).map(m => getMethodDeclarationSignature(m)),
   ]).join('\n  ')
 
   return `declare ${abstract}class ${cls.getName()}${tp}${ext}${impl} {
