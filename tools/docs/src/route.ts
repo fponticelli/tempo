@@ -27,6 +27,15 @@ export const toHref = matchKind<Route, string>({
   Changelog: o => `#/changelog/${o.name}`
 })
 
+export const toUrlForAnalytics = (r: Route) => {
+  const href = toHref(r)
+  if (!href)
+    return '/'
+  if (href.startsWith('#'))
+    return href.substring(1)
+  return href
+}
+
 export const toContentUrl = matchKind<Route, Option<string>>({
   Home: _ => some('pages/index.html'),
   Api: o => some(`api/${o.name}/${o.path}`),
@@ -105,9 +114,6 @@ export const isApiProjectRoute = (route: Route, name: string) => {
 }
 
 export const contentFromRoute = (store: Store<State, Action>, toc: Toc, route: Route) => {
-  // if (route.kind === 'Demo') {
-  //   location.assign(getUnsafe(toContentUrl(route)))
-  // } else
   if (route.kind === 'Project') {
     const proj = toc.projects.find(p => p.name === route.name)!
     store.process(Action.loadedContent(success(Content.project(proj))))

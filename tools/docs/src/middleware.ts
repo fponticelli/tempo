@@ -7,8 +7,10 @@ import { forEach } from 'tempo-std/lib/async_result'
 import { Toc } from './toc'
 import { HttpError } from './request'
 import { Result, map } from 'tempo-std/lib/result'
-import { toContentUrl, contentFromRoute, sameRoute } from './route'
+import { toContentUrl, contentFromRoute, sameRoute, toUrlForAnalytics } from './route'
 import { each } from 'tempo-std/lib/option'
+
+declare const ga: any
 
 export const scrollTo = () => {
   const ref = location.hash.split('#').pop()
@@ -53,6 +55,11 @@ export const middleware = (store: Store<State, Action>) => (
       break
     case 'GoTo':
       if (!sameRoute(action.route, prev.route)) {
+        const path = toUrlForAnalytics(action.route)
+        if (ga) {
+          ga('set', 'page', path)
+          ga('send', 'pageview')
+        }
         forEach(
           toc => contentFromRoute(store, toc, action.route),
           state.toc
