@@ -11,7 +11,6 @@ import { success } from 'tempo-std/lib/async_result'
 export type Route =
   | { kind: 'Page', path: string }
   | { kind: 'Demos' }
-  // | { kind: 'Demo', path: string }
   | { kind: 'Project', name: string }
   | { kind: 'Api', name: string, path: string }
   | { kind: 'Changelog', name: string }
@@ -21,7 +20,6 @@ export type Route =
 export const toHref = matchKind<Route, string>({
   Home: _ => '',
   Demos: o => `#/demo`,
-  // Demo: o => `demo/${o.path}`,
   Page: o => `#/page/${o.path}`,
   Project: o => `#/project/${o.name}`,
   Api: o => `#/api/${o.name}/${o.path}`,
@@ -33,7 +31,6 @@ export const toContentUrl = matchKind<Route, Option<string>>({
   Home: _ => some('pages/index.html'),
   Api: o => some(`api/${o.name}/${o.path}`),
   Demos: _ => none,
-  // Demo: o => some(`demo/${o.path}`),
   Page: o => some(`pages/${o.path}`),
   Project: _ => none,
   NotFound: _ => none,
@@ -44,7 +41,6 @@ export const Route = {
   home: ({ kind: 'Home' }) as Route,
   api: (name: string, path: string): Route => ({ kind: 'Api', name, path }),
   demos: ({ kind: 'Demos' }) as Route,
-  // demo: (path: string): Route => ({ kind: 'Demo', path }),
   page: (path: string): Route => {
     if (path === 'index.html')
       return Route.home
@@ -60,10 +56,6 @@ export type Link = {
   label: string
   route: Option<Route>
 }
-
-// export const pageToLink = (page: PageRef, active: Boolean): Link => {
-//   return ({ label: page.title, route: active ? none : some(Route.page(page.path)) })
-// }
 
 export const pageToRoute = (page: PageRef): Route => {
   return Route.page(page.path)
@@ -96,8 +88,6 @@ export const parseUrl = (url: string): Route => {
       return Route.api(name, path)
     } else if (url === '/demo') {
       return Route.demos
-    // } else if (url.startsWith('/demo/')) {
-      // return Route.demo(url.substring(6))
     } else if (url.startsWith('/project/')) {
       return Route.project(url.substring(9))
     } else if (url.startsWith('/page/')) {
