@@ -4,6 +4,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
 const path = require('path');
+const WorkboxPlugin = require('workbox-webpack-plugin');
 
 module.exports = {
   entry: './src/main.ts',
@@ -36,18 +37,40 @@ module.exports = {
     // publicPath: '.'
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      title: 'Tempo'
-    }),
-    new MiniCssExtractPlugin({
-      filename: '[name].css',
-      chunkFilename: '[id].css',
-    }),
     new FaviconsWebpackPlugin({
       logo: '../../pages/assets/icon-512x512.png',
       publicPath: '.',
       outputPath: './assets'
     }),
+    new HtmlWebpackPlugin({
+      inject: false,
+      template: require('html-webpack-template'),
+      title: 'Tempo',
+      googleAnalytics: {
+        trackingId: 'UA-589893-23',
+        pageViewOnLoad: true
+      },
+      meta: [
+        {
+          name: 'description',
+          content: 'Documentation site for Tempo libraries.'
+        }
+      ],
+      favicon: '../../pages/assets/icon-512x512.png',
+      mobile: true,
+      lang: 'en-US',
+      inlineManifestWebpackName: 'webpackManifest'
+    }),
+    new MiniCssExtractPlugin({
+      filename: '[name].css',
+      chunkFilename: '[id].css',
+    }),
+    new WorkboxPlugin.GenerateSW({
+      exclude: [/\.(?:ts)$/],
+      swDest: 'sw.js',
+      clientsClaim: true,
+      skipWaiting: true,
+    })
   ],
   optimization: {
     splitChunks: {

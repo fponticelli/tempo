@@ -12,7 +12,7 @@ import { link, maybeLink } from './link'
 import { Route, sameRoute } from '../route'
 import { none, some } from 'tempo-std/lib/option'
 import { iterateItems } from 'tempo-dom/lib/iterate'
-import { ProjectRef } from 'tools/docs/build/toc'
+import { ProjectRef } from '../toc'
 
 const { capture, release } = holdState<State>()
 
@@ -37,20 +37,6 @@ export const template = div<State, Action>(
           route: Route.home,
           class: 'navbar-item'
         })
-        // a(
-        //   {
-        //     attrs: {
-        //       class: 'navbar-burger burger',
-        //       role: 'button',
-        //       'aria-label': 'menu',
-        //       'aria-expanded': 'false',
-        //       'data-target': 'navbarBasicExample'
-        //     }
-        //   },
-        //   span({ attrs: { 'aria-hidden': 'true' } }),
-        //   span({ attrs: { 'aria-hidden': 'true' } }),
-        //   span({ attrs: { 'aria-hidden': 'true' } })
-        // )
       ),
       div(
         { attrs: { class: 'navbar-menu' } },
