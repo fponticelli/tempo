@@ -738,6 +738,24 @@ export function rpad(s: string, char: string, length: number) {
   }
 }
 
+export function splitOnLast(s: string, find: string): [string] | [string, string] {
+  const x = s.lastIndexOf(find)
+  if (x >= 0) {
+    return [s.substring(0, x), s.substring(x + find.length)]
+  } else {
+    return [s]
+  }
+}
+
+export function splitOnFirst(s: string, find: string): [string] | [string, string] {
+  const x = s.indexOf(find)
+  if (x >= 0) {
+    return [s.substring(0, x), s.substring(x + find.length)]
+  } else {
+    return [s]
+  }
+}
+
 const BASE64_ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
 const UCWORDS = /[^a-zA-Z]([a-z])/g
 const IS_BREAKINGWHITESPACE = /[^\t\n\r ]/
