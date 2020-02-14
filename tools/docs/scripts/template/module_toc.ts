@@ -1,4 +1,4 @@
-import { nav, ul, li, a } from 'tempo-dom/lib/html'
+import { nav, ul, li, a, p } from 'tempo-dom/lib/html'
 import { mapState } from 'tempo-dom/lib/map'
 import { compare } from 'tempo-std/lib/strings'
 import { forEach } from 'tempo-dom/lib/for_each'
@@ -31,6 +31,10 @@ export const moduleToc = nav<State, unknown>(
     { map: mapModuleToToc },
     when(
       { condition: s => s.length > 5 },
+      p(
+        { attrs: { class: 'title is-6' } },
+        'Table of Contents'
+      ),
       ul(
         { attrs: { class: 'module-toc-list' } },
         forEach(

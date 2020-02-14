@@ -1,9 +1,8 @@
-import { article, h1, h2 } from 'tempo-dom/lib/html'
+import { article, h1, h2, div, a } from 'tempo-dom/lib/html'
 import { mapState } from 'tempo-dom/lib/map'
 import { when } from 'tempo-dom/lib/when'
 import { forEach } from 'tempo-dom/lib/for_each'
 import { DOMChild } from 'tempo-dom/lib/template'
-// import { interfaceTemplate } from './interface_template'
 import { typeAliasTemplate } from './type_alias_template'
 import { exportTemplate } from './export_template'
 import { functionTemplate } from './function_template'
@@ -15,6 +14,10 @@ import { State } from './state'
 import { Interface } from '../parse/interface'
 import { TypeAlias } from '../parse/type_alias'
 import { compare } from 'tempo-std/lib/strings'
+
+const getUrl = (project: string, module: string) => {
+  return `https://github.com/fponticelli/tempo/edit/master/${project}/src/${module}`
+}
 
 export const list = <State extends any[]>(title: string, element: DOMChild<State[number], unknown>) => {
   return when<State, unknown>(
@@ -29,6 +32,13 @@ export const list = <State extends any[]>(title: string, element: DOMChild<State
 
 export const module = article<State, unknown>(
   {},
+  div(
+    { attrs: { class: 'is-pulled-right' } },
+    a(
+      { attrs: { href: s => getUrl(s.project, s.module.path) } },
+      '✏️ edit this module'
+    )
+  ),
   h1(
     {},
     m => `module '${m.module.title}'`
@@ -38,10 +48,6 @@ export const module = article<State, unknown>(
     baseDoc
   ),
   moduleToc,
-  // mapState(
-  //   { map: s => s.module.interfaces },
-  //   list('interfaces', interfaceTemplate)
-  // ),
   mapState(
     {
       map: s => {
@@ -54,19 +60,19 @@ export const module = article<State, unknown>(
     list('types', typeAliasTemplate)
   ),
   mapState(
-    { map: s => s.module.exports },
+    { map: s => s.module.exports.map(e => ({ module: s.module.path, project: s.project, ...e })) },
     list('exports', exportTemplate)
   ),
   mapState(
-    { map: s => s.module.functions },
+    { map: s => s.module.functions.map(e => ({ module: s.module.path, project: s.project, ...e })) },
     list('functions', functionTemplate)
   ),
   mapState(
-    { map: s => s.module.variables },
+    { map: s => s.module.variables.map(e => ({ module: s.module.path, project: s.project, ...e })) },
     list('values', variableTemplate)
   ),
   mapState(
-    { map: s => s.module.classes },
+    { map: s => s.module.classes.map(e => ({ module: s.module.path, project: s.project, ...e })) },
     list('classes', classTemplate)
   )
 )

@@ -2,15 +2,15 @@ import {
   ClassDeclaration, MethodDeclaration, ClassStaticPropertyTypes,
   ConstructorDeclaration, ClassInstancePropertyTypes,
   ts } from 'ts-morph'
-import { docOfJsDoc, BaseDoc } from './jsdoc'
+import { docOfJsDoc } from './jsdoc'
 import { adjustSignature } from './signature'
 import { flatten } from 'tempo-std/lib/arrays'
 import { replace } from 'tempo-std/lib/strings'
+import { Entity } from './entity'
+import { getLineNumber } from './line_number'
 
-export interface ClassT extends BaseDoc {
+export interface ClassT extends Entity {
   kind: 'class'
-  name: string
-  signature: string
 }
 
 function getMethodDeclarationSignature(fun: MethodDeclaration): string {
@@ -101,7 +101,7 @@ function getSignature(cls: ClassDeclaration) {
 }
 
 export const classOfDeclaration = (ta: ClassDeclaration): ClassT => {
-  const signature = adjustSignature(getSignature(ta))
+  const signatures = [adjustSignature(getSignature(ta))]
   const name = ta.getName()
   if (!name) {
     throw `Class has no name in modle ${ta.getSourceFile().getFilePath()}`
@@ -111,6 +111,7 @@ export const classOfDeclaration = (ta: ClassDeclaration): ClassT => {
     ...docOfJsDoc(ta.getJsDocs()),
     kind: 'class',
     name,
-    signature
+    line: getLineNumber(ta),
+    signatures
   }
 }

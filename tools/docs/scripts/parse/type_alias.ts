@@ -1,21 +1,22 @@
 import { TypeAliasDeclaration } from 'ts-morph'
-import { docOfJsDoc, BaseDoc } from './jsdoc'
+import { docOfJsDoc } from './jsdoc'
 import { adjustSignature } from './signature'
+import { Entity } from './entity'
+import { getLineNumber } from './line_number'
 
-export interface TypeAlias extends BaseDoc {
+export interface TypeAlias extends Entity {
   kind: 'type_alias' | 'interface'
-  name: string
-  signature: string
 }
 
 export const typeAliasOfDeclaration = (ta: TypeAliasDeclaration): TypeAlias => {
-  const signature = adjustSignature(ta.getText()) // TODO ?
+  const signatures = [adjustSignature(ta.getText())]
   const name = ta.getName()
 
   return {
     ...docOfJsDoc(ta.getJsDocs()),
     kind: 'type_alias',
     name,
-    signature
+    line: getLineNumber(ta),
+    signatures
   }
 }

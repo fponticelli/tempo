@@ -1,6 +1,7 @@
 import { JSDoc } from 'ts-morph'
 import { parse, Annotation, Tag } from 'doctrine'
 import { ofValue, Option, none } from 'tempo-std/lib/option'
+import { makePretty } from '../utils/pretty'
 
 const annotationOfJsDoc = (docs: JSDoc[]): Annotation => {
   const doc = docs[docs.length - 1]?.getText() || ''
@@ -33,20 +34,10 @@ const getTagsNamed = (name: string, tags: Tag[]): string[] => {
 }
 
 const docOfAnnotation = (annotation: Annotation) => {
-  // TODO @see, @throws ?
-  // TODO resolve links to other APIs
-  /*
-   * See {@link MyClass} and [MyClass's foo property]{@link MyClass#foo}.
-   * Also, check out {@link http://www.google.com|Google} and
-   * {@link https://github.com GitHub}.
-   * See {@tutorial gettingstarted} and [Configuring the Dashboard]{@tutorial dashboard}.
-   * For more information, see {@tutorial create|Creating a Widget} and
-   * {@tutorial destroy Destroying a Widget}.
-   */
   const description = ofValue(annotation.description || undefined)
   const isDeprecated = hasTagNamed('deprecated', annotation.tags)
   const since = getTagNamed('since', annotation.tags)
-  const examples = getTagsNamed('example', annotation.tags)
+  const examples = getTagsNamed('example', annotation.tags).map(makePretty)
   const todos = getTagsNamed('todo', annotation.tags)
   return { description, isDeprecated, since, examples, todos }
 }

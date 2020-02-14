@@ -1,15 +1,7 @@
 import { fragment } from 'tempo-dom/lib/fragment'
 import { Interface } from '../parse/interface'
-import { baseDoc } from './base_doc'
-import { mapState } from 'tempo-dom/lib/map'
-import { signature } from './signature'
-import { title } from './title'
+import { entityTemplate } from './entity_template'
 
-export const interfaceTemplate = fragment<Interface, unknown>(
-  title,
-  baseDoc,
-  mapState(
-    { map: s => s.signature },
-    signature
-  )
+export const interfaceTemplate = fragment<Interface & { project: string, module: string }, unknown>(
+  entityTemplate
 )

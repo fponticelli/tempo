@@ -1,11 +1,8 @@
 import { Converter } from 'showdown'
 import { JSDOM } from 'jsdom'
-import Prism from 'prismjs'
 import fm from 'front-matter'
 import { trimChars } from 'tempo-std/lib/strings'
-
-const loadLanguages: any = require('prismjs/components/')
-loadLanguages(['typescript'])
+import { highlight } from './highlight'
 
 const converter = new Converter({
   parseImgDimensions: true,
@@ -32,7 +29,7 @@ export const markdown = (content: string, anchorMangler: (s: string) => string) 
   for (let i = 0; i < codes.length; i++) {
     const code = codes[i]
     code.parentElement?.classList.add('language-ts')
-    code.innerHTML = Prism.highlight(code.textContent || '', Prism.languages.typescript, 'typescript')
+    code.innerHTML = highlight(code.textContent || '')
   }
 
   const anchors = dom.window.document.querySelectorAll('a')

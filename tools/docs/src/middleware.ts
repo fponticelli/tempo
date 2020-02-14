@@ -9,6 +9,7 @@ import { HttpError } from './request'
 import { Result, map } from 'tempo-std/lib/result'
 import { toContentUrl, contentFromRoute, sameRoute, toUrlForAnalytics } from './route'
 import { each } from 'tempo-std/lib/option'
+import { splitOnLast } from 'tempo-std/lib/strings'
 
 declare const ga: any
 
@@ -19,6 +20,15 @@ export const scrollTo = () => {
     if (el) {
       el.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' })
     }
+  }
+}
+
+const urlToGitHubContent = (url: string) => {
+  if (url.startsWith('pages/')) {
+    const path = splitOnLast(url, '.')[0] + '.md'
+    return `https://github.com/fponticelli/tempo/edit/master/${path}`
+  } else {
+    return undefined
   }
 }
 
@@ -44,7 +54,11 @@ export const middleware = (store: Store<State, Action>) => (
         (url: string) => {
           loadText(url).then(
             (htmlResult: Result<string, HttpError>) =>
-              store.process(Action.loadedContent(outcome(map(h => Content.htmlPage(undefined, h), htmlResult))))
+              store.process(Action.loadedContent(outcome(map(
+                h => Content.htmlPage(undefined, h, urlToGitHubContent(url)),
+                htmlResult
+              )))
+            )
           )
         },
         toContentUrl(state.route)

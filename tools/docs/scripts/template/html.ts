@@ -19,7 +19,7 @@ export const formatHtml = (html: string) => {
       parser: 'html'
     })
   } catch {
-    console.warn(`unable to format the following html\n${html}`)
+    // console.warn(`unable to format the following html\n${html}`)
     return html
   }
 }

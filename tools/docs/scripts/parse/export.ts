@@ -1,11 +1,11 @@
 import { ExportDeclaration, ExportSpecifier } from 'ts-morph'
-import { BaseDoc, docOfContent } from './jsdoc'
+import { docOfContent } from './jsdoc'
 import { adjustSignature } from './signature'
+import { Entity } from './entity'
+import { getLineNumber } from './line_number'
 
-export interface Export extends BaseDoc {
+export interface Export extends Entity {
   kind: 'export'
-  name: string
-  signature: string
 }
 
 export const exportOfDeclaration = (e: ExportDeclaration): Export[] => {
@@ -13,7 +13,7 @@ export const exportOfDeclaration = (e: ExportDeclaration): Export[] => {
 }
 
 const exportOfSpecifier = (e: ExportSpecifier): Export => {
-  const signature = adjustSignature(e.getType().getText(e)) // TODO signature seems wrong ?
+  const signatures = [adjustSignature(e.getType().getText(e))] // TODO signature seems wrong ?
   const name = e.compilerNode.name.text
   const comment = e.getLeadingCommentRanges()[0]?.getText()
   const doc = docOfContent(comment ?? '')
@@ -21,6 +21,7 @@ const exportOfSpecifier = (e: ExportSpecifier): Export => {
     ...doc,
     kind: 'export',
     name,
-    signature
+    line: getLineNumber(e),
+    signatures
   }
 }

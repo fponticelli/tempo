@@ -1,19 +1,7 @@
 import { fragment } from 'tempo-dom/lib/fragment'
 import { Function } from '../parse/function'
-import { baseDoc } from './base_doc'
-import { mapState } from 'tempo-dom/lib/map'
-import { forEach } from 'tempo-dom/lib/for_each'
-import { signature } from './signature'
-import { title } from './title'
+import { entityTemplate } from './entity_template'
 
-export const functionTemplate = fragment<Function, unknown>(
-  title,
-  baseDoc,
-  mapState(
-    { map: s => s.signatures },
-    forEach(
-      {},
-      signature
-    )
-  )
+export const functionTemplate = fragment<Function & { project: string, module: string }, unknown>(
+  entityTemplate
 )

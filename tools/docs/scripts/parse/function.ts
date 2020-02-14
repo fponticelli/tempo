@@ -1,11 +1,11 @@
 import { FunctionDeclaration } from 'ts-morph'
-import { docOfJsDoc, BaseDoc } from './jsdoc'
+import { docOfJsDoc } from './jsdoc'
 import { adjustSignature } from './signature'
+import { Entity } from './entity'
+import { getLineNumber } from './line_number'
 
-export interface Function extends BaseDoc {
+export interface Function extends Entity {
   kind: 'function'
-  name: string
-  signatures: string[]
 }
 
 export function getFunctionDeclarationSignature(fun: FunctionDeclaration): string {
@@ -28,7 +28,6 @@ export const functionOfDeclaration = (fun: FunctionDeclaration): Function => {
   // fun.getReturnType
   // fun.getSignature
   // fun.getStatement
-  // fun.
   const name = fun.getName()
   if (!name) {
     throw `Function name required in module ${fun.getSourceFile().getFilePath()}`
@@ -37,11 +36,13 @@ export const functionOfDeclaration = (fun: FunctionDeclaration): Function => {
   const signatures = overloads.length > 0 ?
     overloads.map(o => getFunctionDeclarationSignature(o)) :
     [getFunctionDeclarationSignature(fun)]
+  const ref = overloads.length > 0 ? overloads[0] : fun
 
   return {
     ...docOfJsDoc(fun.getJsDocs()),
     kind: 'function',
     name,
+    line: getLineNumber(ref),
     signatures
   }
 }
