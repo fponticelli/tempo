@@ -1,4 +1,9 @@
 <article>
+  <div class="is-pulled-right">
+    <a href="https://github.com/fponticelli/tempo/edit/master/dom/src/portal.ts"
+      >✏️ edit this module</a
+    >
+  </div>
   <h1>module 'portal'</h1>
   <nav></nav>
   <h2>values</h2>
@@ -8,22 +13,62 @@
   <pre
     class="ts language-ts signature"
   ><div><span class="token keyword">const</span> bodyPortal<span class="token operator">:</span> <span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token parameter"><span class="token operator">...</span>children<span class="token operator">:</span> DOMChild<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">[</span><span class="token punctuation">]</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> DOMTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></div></pre>
+  <p>
+    defined in
+    <a
+      href="https://github.com/fponticelli/tempo/blob/master/dom/src/portal.ts#L85"
+      >dom/src/portal.ts at line 85</a
+    >
+  </p>
+  <pre
+    class="import-code ts language-ts"
+  ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> bodyPortal <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/portal.ts'</span></div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="headPortal">
     headPortal
   </h3>
   <pre
     class="ts language-ts signature"
   ><div><span class="token keyword">const</span> headPortal<span class="token operator">:</span> <span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token parameter"><span class="token operator">...</span>children<span class="token operator">:</span> DOMChild<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">[</span><span class="token punctuation">]</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> DOMTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></div></pre>
+  <p>
+    defined in
+    <a
+      href="https://github.com/fponticelli/tempo/blob/master/dom/src/portal.ts#L77"
+      >dom/src/portal.ts at line 77</a
+    >
+  </p>
+  <pre
+    class="import-code ts language-ts"
+  ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> headPortal <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/portal.ts'</span></div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="portal">portal</h3>
   <pre
     class="ts language-ts signature"
   ><div><span class="token keyword">const</span> portal<span class="token operator">:</span> <span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>options<span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token function-variable function">getParent</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">doc<span class="token operator">:</span> Document</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Element<span class="token punctuation">;</span> <span class="token function-variable function">append</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">doc<span class="token operator">:</span> Document<span class="token punctuation">,</span> node<span class="token operator">:</span> Node</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span><span class="token punctuation">;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token operator">...</span>children<span class="token operator">:</span> DOMChild<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> DOMTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></div></pre>
+  <p>
+    defined in
+    <a
+      href="https://github.com/fponticelli/tempo/blob/master/dom/src/portal.ts#L45"
+      >dom/src/portal.ts at line 45</a
+    >
+  </p>
+  <pre
+    class="import-code ts language-ts"
+  ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> portal <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/portal.ts'</span></div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="portalWithSelector">
     portalWithSelector
   </h3>
   <pre
     class="ts language-ts signature"
   ><div><span class="token keyword">const</span> portalWithSelector<span class="token operator">:</span> <span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token parameter">options<span class="token operator">:</span> <span class="token punctuation">{</span> selector<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token operator">...</span>children<span class="token operator">:</span> DOMChild<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">[</span><span class="token punctuation">]</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> DOMTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></div></pre>
+  <p>
+    defined in
+    <a
+      href="https://github.com/fponticelli/tempo/blob/master/dom/src/portal.ts#L54"
+      >dom/src/portal.ts at line 54</a
+    >
+  </p>
+  <pre
+    class="import-code ts language-ts"
+  ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> portalWithSelector <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/portal.ts'</span></div></pre>
   <h2>classes</h2>
   <h3 class="is-family-monospace has-text-grey-dark" id="PortalTemplate">
     PortalTemplate
@@ -50,4 +95,14 @@
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 </div></pre>
+  <p>
+    defined in
+    <a
+      href="https://github.com/fponticelli/tempo/blob/master/dom/src/portal.ts#L19"
+      >dom/src/portal.ts at line 19</a
+    >
+  </p>
+  <pre
+    class="import-code ts language-ts"
+  ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> PortalTemplate <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/portal.ts'</span></div></pre>
 </article>

@@ -1,4 +1,10 @@
 <article>
+  <div class="is-pulled-right">
+    <a
+      href="https://github.com/fponticelli/tempo/edit/master/store/src/reducer.ts"
+      >✏️ edit this module</a
+    >
+  </div>
   <h1>module 'reducer'</h1>
   <nav></nav>
   <h2>types</h2>
@@ -7,21 +13,61 @@
     class="ts language-ts signature"
   ><div><span class="token keyword">type</span> Reducer<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">state<span class="token operator">:</span> State<span class="token punctuation">,</span> action<span class="token operator">:</span> Action</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> State
 </div></pre>
+  <p>
+    defined in
+    <a
+      href="https://github.com/fponticelli/tempo/blob/master/undefined/src/undefined#L14"
+      >undefined/src/undefined at line 14</a
+    >
+  </p>
+  <pre
+    class="import-code ts language-ts"
+  ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> Reducer <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-undefined/lib/undefined'</span></div></pre>
   <h2>values</h2>
   <h3 class="is-family-monospace has-text-grey-dark" id="compose">compose</h3>
   <pre
     class="ts language-ts signature"
   ><div><span class="token keyword">const</span> compose<span class="token operator">:</span> <span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token parameter">reducer<span class="token operator">:</span> Reducer<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token operator">&gt;</span><span class="token punctuation">,</span> <span class="token operator">...</span>others<span class="token operator">:</span> Reducer<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token operator">&gt;</span><span class="token punctuation">[</span><span class="token punctuation">]</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">(</span><span class="token parameter">state<span class="token operator">:</span> State<span class="token punctuation">,</span> action<span class="token operator">:</span> Action</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> State</div></pre>
+  <p>
+    defined in
+    <a
+      href="https://github.com/fponticelli/tempo/blob/master/store/src/reducer.ts#L16"
+      >store/src/reducer.ts at line 16</a
+    >
+  </p>
+  <pre
+    class="import-code ts language-ts"
+  ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> compose <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-store/lib/reducer.ts'</span></div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="matchReduce">
     matchReduce
   </h3>
   <pre
     class="ts language-ts signature"
   ><div><span class="token keyword">const</span> matchReduce<span class="token operator">:</span> <span class="token operator">&lt;</span>Field <span class="token keyword">extends</span> <span class="token class-name">string</span> <span class="token operator">|</span> <span class="token builtin">number</span> <span class="token operator">|</span> <span class="token builtin">symbol</span><span class="token punctuation">,</span> State<span class="token punctuation">,</span> Action <span class="token keyword">extends</span> <span class="token punctuation">{</span> <span class="token punctuation">[</span>_ <span class="token keyword">in</span> Field<span class="token punctuation">]</span><span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">;</span> <span class="token punctuation">}</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token parameter">field<span class="token operator">:</span> Field<span class="token punctuation">,</span> matches<span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token punctuation">[</span>k <span class="token keyword">in</span> Action<span class="token punctuation">[</span>Field<span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">state<span class="token operator">:</span> State<span class="token punctuation">,</span> action<span class="token operator">:</span> Action <span class="token keyword">extends</span> <span class="token punctuation">{</span> <span class="token punctuation">[</span>_ <span class="token keyword">in</span> Field<span class="token punctuation">]</span><span class="token operator">:</span> k<span class="token punctuation">;</span> <span class="token punctuation">}</span> <span class="token operator">?</span> Action <span class="token operator">:</span> <span class="token builtin">never</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> State<span class="token punctuation">;</span> <span class="token punctuation">}</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Reducer<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token operator">&gt;</span></div></pre>
+  <p>
+    defined in
+    <a
+      href="https://github.com/fponticelli/tempo/blob/master/store/src/reducer.ts#L23"
+      >store/src/reducer.ts at line 23</a
+    >
+  </p>
+  <pre
+    class="import-code ts language-ts"
+  ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> matchReduce <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-store/lib/reducer.ts'</span></div></pre>
   <h3 class="is-family-monospace has-text-grey-dark" id="reduceOnKind">
     reduceOnKind
   </h3>
   <pre
     class="ts language-ts signature"
   ><div><span class="token keyword">const</span> reduceOnKind<span class="token operator">:</span> <span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action <span class="token keyword">extends</span> <span class="token punctuation">{</span> kind<span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">;</span> <span class="token punctuation">}</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>matches<span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token punctuation">[</span>k <span class="token keyword">in</span> Action<span class="token punctuation">[</span><span class="token string">"kind"</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">state<span class="token operator">:</span> State<span class="token punctuation">,</span> action<span class="token operator">:</span> Action <span class="token keyword">extends</span> <span class="token punctuation">{</span> kind<span class="token operator">:</span> k<span class="token punctuation">;</span> <span class="token punctuation">}</span> <span class="token operator">?</span> Action <span class="token operator">:</span> <span class="token builtin">never</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> State<span class="token punctuation">;</span> <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Reducer<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token operator">&gt;</span></div></pre>
+  <p>
+    defined in
+    <a
+      href="https://github.com/fponticelli/tempo/blob/master/store/src/reducer.ts#L42"
+      >store/src/reducer.ts at line 42</a
+    >
+  </p>
+  <pre
+    class="import-code ts language-ts"
+  ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> reduceOnKind <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-store/lib/reducer.ts'</span></div></pre>
 </article>
