@@ -4,6 +4,7 @@
 
 $code: #433221
 $family-sans-serif: "Nunito", sans-serif
+$navbar-breakpoint: 0
 
 @import '../node_modules/bulma/sass/utilities/_all'
 @import '../node_modules/bulma/sass/base/_all'
@@ -20,10 +21,11 @@ $family-sans-serif: "Nunito", sans-serif
 
 @import '../node_modules/prismjs/themes/prism.css', '../node_modules/prism-themes/themes/prism-vs.css'
 
-html, body, #app
+html, body, .app
   height: 100%
+  overflow: hidden
 
-#app
+.app
   min-height: 100%
 
 @media screen and (max-width: 768px)
@@ -108,40 +110,6 @@ ul.module-toc-list
   pre.signature
     margin-bottom: 0
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-.navbar-menu-fixed
-  align-items: stretch
-  display: flex
-  flex-grow: 1
-  flex-shrink: 0
-  .navbar-start
-    justify-content: flex-start
-    margin-right: auto
-    align-items: stretch
-    display: flex
-  .navbar-end
-    justify-content: flex-end
-    margin-left: auto
-    align-items: stretch
-    display: flex
-.navbar > .container,
-.container > .navbar
-  .navbar-menu-fixed
-    margin-right: -.75rem
-
 article.content
   h1, .is-pulled-right+h1
     margin-top: 0.5em
@@ -150,3 +118,34 @@ article.content
   position: absolute
   top: 2em
   right: 2em
+
+.side-control
+  max-width: 360px
+
+.main-column
+  margin: 1em 0
+
+@media screen and (min-width: 768px) and (max-width: 1024px)
+  .navbar > .container
+    .navbar-brand
+      margin-left: 0.25em
+    .navbar-end
+      margin-right: 0.75em
+
+@media screen and (max-width: 768px)
+  .side-control
+    display: none
+  .side-control.is-active
+    display: block
+    position: absolute
+    box-shadow: $box-shadow
+  .navbar-brand
+    .navbar-burger
+        display: block
+        margin-left: .75em
+
+@media screen and (max-width: 420px)
+  .navbar-end
+    margin-right: 0.75em
+  .navbar-item.has-dropdown
+    display: none

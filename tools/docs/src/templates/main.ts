@@ -1,4 +1,4 @@
-import { div, nav, a, img, main } from 'tempo-dom/lib/html'
+import { div, nav, a, img, main, span } from 'tempo-dom/lib/html'
 import { matchAsyncResult } from 'tempo-dom/lib/match'
 import { mapState } from 'tempo-dom/lib/map'
 import { State } from '../state'
@@ -16,6 +16,27 @@ import { ProjectRef } from '../toc'
 
 const { capture, release } = holdState<State>()
 
+const toggleMenu = (_s: State, _e: MouseEvent, element: HTMLAnchorElement): Action | undefined => {
+  const side = document.querySelector('.side-control')!
+  const main = document.querySelector('.main-column')!
+
+  function close() {
+    console.log('CLOSE')
+    element.classList.remove('is-active')
+    side.classList.remove('is-active')
+    main.removeEventListener('mouseup', close, true)
+  }
+
+  if (element.classList.contains('is-active')) {
+    close()
+  } else {
+    element.classList.add('is-active')
+    side.classList.add('is-active')
+    main.addEventListener('mouseup', close, true)
+  }
+  return undefined
+}
+
 export const template = div<State, Action>(
   { attrs: { class: 'app' } },
   nav(
@@ -30,6 +51,15 @@ export const template = div<State, Action>(
       { attrs: { class: 'container' } },
       div(
         { attrs: { class: 'navbar-brand' } },
+        a(
+          {
+            attrs: { role: 'button',  class: 'navbar-burger burger', 'aria-label': 'menu', 'aria-expanded': 'false', 'data-target': 'navbarBasicExample' },
+            events: { click: toggleMenu }
+          },
+          span({ attrs: { 'aria-hidden': true }}),
+          span({ attrs: { 'aria-hidden': true }}),
+          span({ attrs: { 'aria-hidden': true }})
+        ),
         link({
           label: img({
             attrs: { src: 'assets/icon-512x512.png' }
@@ -102,23 +132,20 @@ export const template = div<State, Action>(
             main(
               { attrs: { class: 'container' } },
               div(
-                { attrs: { class: 'columns' } },
+                { attrs: { class: 'columns is-mobile' } },
                 div(
                   {
                     attrs: {
-                      class: 'column is-narrow has-background-light scrollable'
+                      class: 'column has-background-light side-control scrollable'
                     }
                   },
-                  div(
-                    { attrs: { class: '', style: 'width: 300px;' } },
-                    mapState(
-                      { map: ([state, toc]) => ({ toc, route: state.route }) },
-                      sidebar
-                    )
+                  mapState(
+                    { map: ([state, toc]) => ({ toc, route: state.route }) },
+                    sidebar
                   )
                 ),
                 div(
-                  { attrs: { class: 'column scrollable' } },
+                  { attrs: { class: 'column scrollable main-column' } },
                   mapState({ map: ([state]) => state.content }, content)
                 )
               )
