@@ -1,12 +1,8 @@
 import { FunctionDeclaration } from 'ts-morph'
 import { docOfJsDoc } from './jsdoc'
 import { adjustSignature } from './signature'
-import { Entity } from './entity'
+import { DocEntity } from './doc_entity'
 import { getLineNumber } from './line_number'
-
-export interface Function extends Entity {
-  kind: 'function'
-}
 
 export function getFunctionDeclarationSignature(fun: FunctionDeclaration): string {
   let text = fun.getText()
@@ -22,7 +18,7 @@ export function getFunctionDeclarationSignature(fun: FunctionDeclaration): strin
   return adjustSignature(text)
 }
 
-export const functionOfDeclaration = (fun: FunctionDeclaration): Function => {
+export const functionOfDeclaration = (fun: FunctionDeclaration): DocEntity => {
   // fun.getModifiers
   // fun.getParameters
   // fun.getReturnType

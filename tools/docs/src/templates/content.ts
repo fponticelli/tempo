@@ -8,15 +8,15 @@ import { matchAsyncResult, matchKind } from 'tempo-dom/lib/match'
 import { mapState } from 'tempo-dom/lib/map'
 import { demosContent } from './demos_content'
 import { projectContent } from './project_content'
+import { fragment } from 'tempo-dom/lib/fragment'
 
-export const content = article<
+export const content = fragment<
   AsyncResult<Content, HttpError, unknown>,
   Action
 >(
-  { attrs: { className: 'content' } },
   matchAsyncResult({
     Failure: article(
-      { attrs: { class: 'message is-danger' } },
+      { attrs: { class: 'content message is-danger' } },
       div({ attrs: { class: 'message-body' } }, s => s.message)
     ),
     Loading: '...',

@@ -97,8 +97,7 @@ export const template = div<State, Action>(
       matchAsyncResult<Toc, HttpError, unknown, Action>({
         NotAsked: '',
         Loading: '...',
-        Success: div(
-          {},
+        Success:
           release(
             main(
               { attrs: { class: 'container' } },
@@ -124,8 +123,7 @@ export const template = div<State, Action>(
                 )
               )
             )
-          )
-        ),
+          ),
         Failure: div({}, e => e.message)
       })
     )

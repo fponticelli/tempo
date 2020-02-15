@@ -1,14 +1,10 @@
 import { InterfaceDeclaration } from 'ts-morph'
 import { docOfJsDoc as docOfJsDocs } from './jsdoc'
 import { adjustSignature } from './signature'
-import { Entity } from './entity'
+import { DocEntity } from './doc_entity'
 import { getLineNumber } from './line_number'
 
-export interface Interface extends Entity {
-  kind: 'interface'
-}
-
-export const interfaceOfDeclaration = (interf: InterfaceDeclaration): Interface => {
+export const interfaceOfDeclaration = (interf: InterfaceDeclaration): DocEntity => {
   const doc = docOfJsDocs(interf.getJsDocs())
   const name = interf.getName()
   const signatures = [adjustSignature(interf.getText())]

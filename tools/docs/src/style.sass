@@ -1,9 +1,23 @@
-@charset "utf-8"
+@charset 'utf-8'
 
 @import url('https://fonts.googleapis.com/css?family=Nunito:400,700')
+
+$code: #433221
 $family-sans-serif: "Nunito", sans-serif
 
-@import '../node_modules/bulma/bulma.sass'
+@import '../node_modules/bulma/sass/utilities/_all'
+@import '../node_modules/bulma/sass/base/_all'
+@import '../node_modules/bulma/sass/elements/box'
+@import '../node_modules/bulma/sass/elements/container'
+@import '../node_modules/bulma/sass/elements/content'
+@import '../node_modules/bulma/sass/elements/table'
+@import '../node_modules/bulma/sass/elements/tag'
+@import '../node_modules/bulma/sass/elements/title'
+@import '../node_modules/bulma/sass/components/menu'
+@import '../node_modules/bulma/sass/components/navbar'
+@import '../node_modules/bulma/sass/grid/tiles'
+@import '../node_modules/bulma/sass/grid/columns'
+
 @import '../node_modules/prismjs/themes/prism.css', '../node_modules/prism-themes/themes/prism-vs.css'
 
 html, body, #app
@@ -41,27 +55,13 @@ main.container
     margin: inherit
 
 article.content
-  padding: 1em 0
+  padding: 0 1em 0 0
 
 .wrap
   flex-wrap: wrap
 
 .tile-width
   min-width: 300px
-
-// ul.links-list
-//   li
-//     display: inline-block
-//     padding: 0 0.2em 0 0
-//     &::after
-//       color: $grey-light
-//       content: ', '
-//     &:nth-last-child(2)
-//       &::after
-//         content: ' and '
-//     &:last-child
-//       &::after
-//         content: ''
 
 ul.links-list
   margin: 0
@@ -98,3 +98,55 @@ ul.module-toc-list
     overflow: hidden
     text-overflow: ellipsis
     padding-right: 0.25em
+
+.defined-in
+  font-size: 0.8em
+  margin: 0 0 0.5em
+  text-align: right
+
+.content
+  pre.signature
+    margin-bottom: 0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.navbar-menu-fixed
+  align-items: stretch
+  display: flex
+  flex-grow: 1
+  flex-shrink: 0
+  .navbar-start
+    justify-content: flex-start
+    margin-right: auto
+    align-items: stretch
+    display: flex
+  .navbar-end
+    justify-content: flex-end
+    margin-left: auto
+    align-items: stretch
+    display: flex
+.navbar > .container,
+.container > .navbar
+  .navbar-menu-fixed
+    margin-right: -.75rem
+
+article.content
+  h1, .is-pulled-right+h1
+    margin-top: 0.5em
+
+.top-right
+  position: absolute
+  top: 2em
+  right: 2em

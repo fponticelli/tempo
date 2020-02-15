@@ -21,6 +21,7 @@ const changelogFolderDst = path.join(docsFolder, 'changelog')
 const apiFolderDst = path.join(docsFolder, 'api')
 
 const tocFile = path.join(docsFolder, 'toc.json')
+const cnameFile = path.join(docsFolder, 'CNAME')
 
 const renameHtml = (path: string) => {
   const hasLeadingHash = path.startsWith('#')
@@ -247,6 +248,9 @@ async function main() {
   }
 
   await fs.writeFile(tocFile, JSON.stringify(outputContent, null, 2))
+
+  // CNAME
+  await fs.writeFile(cnameFile, 'tempots.com')
 
   console.timeEnd('main')
 }

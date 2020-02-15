@@ -3,7 +3,7 @@ import { description, todos, examples, tags } from './base_doc'
 import { title } from './title'
 import { signature } from './signature'
 import { mapState } from 'tempo-dom/lib/map'
-import { Entity } from '../parse/entity'
+import { DocEntity } from '../parse/doc_entity'
 import { forEach } from 'tempo-dom/lib/for_each'
 import { a, p, pre } from 'tempo-dom/lib/html'
 import { unsafeHtml } from 'tempo-dom/lib/unsafe_html'
@@ -21,8 +21,8 @@ const getImport = (name: string, project: string, module: string) => {
   return `import { ${name} } from 'tempo-${project}/lib/${module}'`
 }
 
-export const signatures = fragment<Entity & { project: string, module: string }, unknown>(
-  mapState<Entity, string[], unknown>(
+export const signatures = fragment<DocEntity & { project: string, module: string }, unknown>(
+  mapState<DocEntity, string[], unknown>(
     { map: s => s.signatures },
     forEach(
       {},
@@ -30,7 +30,7 @@ export const signatures = fragment<Entity & { project: string, module: string },
     )
   ),
   p(
-    {},
+    { attrs: { class: 'defined-in' } },
     'defined in ',
     a(
       { attrs: { href: s => getUrl(s.project, s.module, s.line) } },
@@ -47,7 +47,7 @@ export const signatures = fragment<Entity & { project: string, module: string },
   )
 )
 
-export const entityTemplate = fragment<Entity & { project: string, module: string }, unknown>(
+export const entityTemplate = fragment<DocEntity & { project: string, module: string }, unknown>(
   title,
   tags,
   description,

@@ -1,12 +1,8 @@
 import { VariableDeclaration } from 'ts-morph'
 import { docOfJsDoc } from './jsdoc'
 import { stripImportTypes } from '../utils/strip_imports'
-import { Entity } from './entity'
+import { DocEntity } from './doc_entity'
 import { getLineNumber } from './line_number'
-
-export interface Variable extends Entity {
-  kind: 'variable'
-}
 
 function getConstantVariableDeclarationSignature(vd: VariableDeclaration): string {
   const text = vd.getText()
@@ -23,7 +19,7 @@ function getConstantVariableDeclarationSignature(vd: VariableDeclaration): strin
   return `const ${s}`
 }
 
-export const variableOfDeclaration = (v: VariableDeclaration): Variable => {
+export const variableOfDeclaration = (v: VariableDeclaration): DocEntity => {
   const doc = docOfJsDoc(((v.getParent() as any)?.getParent() as any)?.getJsDocs() || '')
   const name = v.getName()
   const signatures = [getConstantVariableDeclarationSignature(v)]

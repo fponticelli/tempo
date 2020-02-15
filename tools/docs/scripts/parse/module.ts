@@ -2,34 +2,23 @@ import { SourceFile } from 'ts-morph'
 import { functionOfDeclaration } from './function'
 import { docOfContent, BaseDoc } from './jsdoc'
 import { flatMap, flatten } from 'tempo-std/lib/arrays'
-import { compareCaseInsensitive } from 'tempo-std/lib/strings'
-import { interfaceOfDeclaration, Interface } from './interface'
-import { Function } from './function'
-import { TypeAlias, typeAliasOfDeclaration } from './type_alias'
-import { ClassT, classOfDeclaration } from './class'
-import { Export, exportOfDeclaration } from './export'
-import { Variable, variableOfDeclaration } from './variable'
+import { compare } from 'tempo-std/lib/strings'
+import { interfaceOfDeclaration } from './interface'
+import { enumOfDeclaration } from './enum'
+import { typeAliasOfDeclaration } from './type_alias'
+import { classOfDeclaration } from './class'
+import { exportOfDeclaration } from './export'
+import { variableOfDeclaration } from './variable'
 import {
   Directory
 } from 'ts-morph'
-import { none } from 'tempo-std/lib/option'
+import { DocEntity } from './doc_entity'
 
 export interface Module extends BaseDoc {
   kind: 'module'
   title: string
   path: string
-  interfaces: Interface[]
-  functions: Function[]
-  typeAliases: TypeAlias[]
-  classes: ClassT[]
-  exports: Export[]
-  variables: Variable[]
-}
-
-export const empty: Module = {
-  kind: 'module', path: '', title: '', interfaces: [], functions: [], exports: [], classes: [],
-  typeAliases: [], description: none, examples: [], isDeprecated: false, since: none,
-  todos: [], variables: []
+  docEntities: DocEntity[]
 }
 
 const moduleDocOfSource = (source: SourceFile) => {
@@ -46,28 +35,30 @@ const interfacesOfSource = (source: SourceFile) => {
   return source.getInterfaces()
     .filter(i => i.isExported())
     .map(interfaceOfDeclaration)
-    .sort((a, b) => compareCaseInsensitive(a.name, b.name))
+}
+
+const enumsOfSource = (source: SourceFile) => {
+  return source.getEnums()
+    .filter(i => i.isExported())
+    .map(enumOfDeclaration)
 }
 
 const functionsOfSource = (source: SourceFile) => {
   return source.getFunctions()
     .filter(i => i.isExported())
     .map(functionOfDeclaration)
-    .sort((a, b) => compareCaseInsensitive(a.name, b.name))
 }
 
 const typeAliasesOfSource = (source: SourceFile) => {
   return source.getTypeAliases()
     .filter(i => i.isExported())
     .map(typeAliasOfDeclaration)
-    .sort((a, b) => compareCaseInsensitive(a.name, b.name))
 }
 
 const classesOfSource = (source: SourceFile) => {
   return source.getClasses()
     .filter(i => i.isExported())
     .map(classOfDeclaration)
-    .sort((a, b) => compareCaseInsensitive(a.name, b.name))
 }
 
 const exportOfSource = (source: SourceFile) => {
@@ -75,7 +66,6 @@ const exportOfSource = (source: SourceFile) => {
             source.getExportDeclarations()
               .map(exportOfDeclaration)
           )
-          .sort((a, b) => compareCaseInsensitive(a.name, b.name))
 }
 
 const variablesOfSource = (source: SourceFile) => {
@@ -83,30 +73,34 @@ const variablesOfSource = (source: SourceFile) => {
     .getVariableDeclarations()
     .filter(f => f.isExported())
     .map(variableOfDeclaration)
-    .sort((a, b) => compareCaseInsensitive(a.name, b.name))
 }
 
 export const moduleFromSourceFile = (dir: Directory, source: SourceFile): Module => {
   const path = dir.getRelativePathTo(source)
   const title = path.substring(0, path.length - 3)
   const doc = moduleDocOfSource(source)
+  const enums = enumsOfSource(source)
   const interfaces = interfacesOfSource(source)
   const functions = functionsOfSource(source)
   const typeAliases = typeAliasesOfSource(source)
   const classes = classesOfSource(source)
   const exports = exportOfSource(source)
   const variables = variablesOfSource(source)
-
-  return {
-    kind: 'module',
-    ...doc,
-    path,
-    title,
+  const docEntities = flatten([
+    enums,
     interfaces,
     functions,
     typeAliases,
     classes,
     exports,
     variables
+  ]).sort((a, b) => compare(a.name, b.name))
+
+  return {
+    kind: 'module',
+    ...doc,
+    path,
+    title,
+    docEntities
   }
 }

@@ -1,6 +1,6 @@
 import { Action } from '../action'
 import { ProjectRef } from '../toc'
-import { div, p, a, span, article, img, br } from 'tempo-dom/lib/html'
+import { div, p, a, span, article, img, br, h1 } from 'tempo-dom/lib/html'
 import { mapState } from 'tempo-dom/lib/map'
 import { when } from 'tempo-dom/lib/when'
 import { forEach } from 'tempo-dom/lib/for_each'
@@ -9,48 +9,45 @@ import { link } from './link'
 import { unsafeHtml } from 'tempo-dom/lib/unsafe_html'
 
 export const projectContent = article<ProjectRef, Action>(
-  { attrs: { class: '' } },
-  div(
-    { attrs: { class: '' } },
-    p({ attrs: { class: 'title' } }, s => s.title),
-    p({ attrs: { class: 'subtitle' } }, s => s.description),
-    mapState<ProjectRef, string[], Action>(
-      { map: p => p.keywords },
-      when(
-        { condition: tags => tags.length > 0 },
-        div(
-          { attrs: { class: 'tags' } },
-          forEach(
-            {},
-            span({ attrs: { class: 'tag' } }, s => s)
-          )
+  { attrs: { class: 'content' } },
+  h1({ attrs: { class: 'title' } }, s => s.title),
+  p({ attrs: { class: 'subtitle' } }, s => s.description),
+  mapState<ProjectRef, string[], Action>(
+    { map: p => p.keywords },
+    when(
+      { condition: tags => tags.length > 0 },
+      div(
+        { attrs: { class: 'tags' } },
+        forEach(
+          {},
+          span({ attrs: { class: 'tag' } }, s => s)
         )
       )
-    ),
-    p(
-      { attrs: { class: 'version' } },
-      a(
+    )
+  ),
+  p(
+    { attrs: { class: 'version' } },
+    a(
+      { attrs: {
+        href: s => `https://www.npmjs.com/package/tempo-${s.name}`
+      } },
+      img(
         { attrs: {
-          href: s => `https://www.npmjs.com/package/tempo-${s.name}`
-        } },
-        img(
-          { attrs: {
-            src: s => `https://img.shields.io/npm/v/tempo-${s.name}?label=npm%3A%20tempo-${s.name}`,
-            alt: s => `npm tempo ${s.name}`
-          } }
-        )
-      ),
-      br({}),
-      a(
-        { attrs: {} },
-        link({
-          label: 'change log',
-          route: p => Route.changelog(p.name)
-        })
+          src: s => `https://img.shields.io/npm/v/tempo-${s.name}?label=npm%3A%20tempo-${s.name}`,
+          alt: s => `npm tempo ${s.name}`
+        } }
       )
     ),
-    unsafeHtml({
-      content: s => s.content
-    })
-  )
+    br({}),
+    a(
+      { attrs: {} },
+      link({
+        label: 'change log',
+        route: p => Route.changelog(p.name)
+      })
+    )
+  ),
+  unsafeHtml({
+    content: s => s.content
+  })
 )

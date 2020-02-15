@@ -6,12 +6,8 @@ import { docOfJsDoc } from './jsdoc'
 import { adjustSignature } from './signature'
 import { flatten } from 'tempo-std/lib/arrays'
 import { replace } from 'tempo-std/lib/strings'
-import { Entity } from './entity'
+import { DocEntity } from './doc_entity'
 import { getLineNumber } from './line_number'
-
-export interface ClassT extends Entity {
-  kind: 'class'
-}
 
 function getMethodDeclarationSignature(fun: MethodDeclaration): string {
   let text = fun.getText()
@@ -100,7 +96,7 @@ function getSignature(cls: ClassDeclaration) {
 }`
 }
 
-export const classOfDeclaration = (ta: ClassDeclaration): ClassT => {
+export const classOfDeclaration = (ta: ClassDeclaration): DocEntity => {
   const signatures = [adjustSignature(getSignature(ta))]
   const name = ta.getName()
   if (!name) {
