@@ -6,7 +6,10 @@
 <h1>module 'adapter'</h1>
 <nav></nav>
 <h3 class="is-family-monospace has-text-grey-dark" id="AdapterTemplate">
-  AdapterTemplate
+  AdapterTemplate<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >class</span
+  >
 </h3>
 <pre
   class="ts language-ts signature"
@@ -52,7 +55,10 @@
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> AdapterTemplate <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/adapter.ts'</span></div></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="PropagateArg">
-  PropagateArg
+  PropagateArg<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >interface</span
+  >
 </h3>
 <pre
   class="ts language-ts signature"
@@ -74,7 +80,11 @@
 <pre
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> PropagateArg <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/adapter.ts'</span></div></pre>
-<h3 class="is-family-monospace has-text-grey-dark" id="adapter">adapter</h3>
+<h3 class="is-family-monospace has-text-grey-dark" id="adapter">
+  adapter<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >variable</span
+  >
+</h3>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">const</span> adapter<span class="token operator">:</span> <span class="token operator">&lt;</span>OuterState<span class="token punctuation">,</span> InnerState<span class="token punctuation">,</span> OuterAction<span class="token punctuation">,</span> InnerAction<span class="token punctuation">,</span> Query <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>options<span class="token operator">:</span> <span class="token punctuation">{</span> mergeStates<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">outerState<span class="token operator">:</span> OuterState<span class="token punctuation">,</span> innerState<span class="token operator">:</span> InnerState</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> InnerState <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">)</span> <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span> propagate<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">args<span class="token operator">:</span> PropagateArg<span class="token operator">&lt;</span>OuterState<span class="token punctuation">,</span> InnerState<span class="token punctuation">,</span> OuterAction<span class="token punctuation">,</span> InnerAction<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span><span class="token punctuation">)</span> <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> child<span class="token operator">:</span> ComponentTemplate<span class="token operator">&lt;</span>InnerState<span class="token punctuation">,</span> InnerAction<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> DOMTemplate<span class="token operator">&lt;</span>OuterState<span class="token punctuation">,</span> OuterAction<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></div></pre>

@@ -6,7 +6,10 @@
 <h1>module 'until'</h1>
 <nav></nav>
 <h3 class="is-family-monospace has-text-grey-dark" id="UntilTemplate">
-  UntilTemplate
+  UntilTemplate<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >class</span
+  >
 </h3>
 <pre
   class="ts language-ts signature"
@@ -37,7 +40,11 @@
 <pre
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> UntilTemplate <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/until.ts'</span></div></pre>
-<h3 class="is-family-monospace has-text-grey-dark" id="until">until</h3>
+<h3 class="is-family-monospace has-text-grey-dark" id="until">
+  until<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >variable</span
+  >
+</h3>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">const</span> until<span class="token operator">:</span> <span class="token operator">&lt;</span>OuterState<span class="token punctuation">,</span> InnerState<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>options<span class="token operator">:</span> <span class="token punctuation">{</span> refId<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">string</span> <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span> <span class="token function-variable function">repeatUntil</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">state<span class="token operator">:</span> OuterState<span class="token punctuation">,</span> index<span class="token operator">:</span> <span class="token builtin">number</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> InnerState <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token operator">...</span>children<span class="token operator">:</span> DOMChild<span class="token operator">&lt;</span>InnerState<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> DOMTemplate<span class="token operator">&lt;</span>OuterState<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></div></pre>

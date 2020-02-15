@@ -54,7 +54,11 @@
     </li>
   </ul>
 </nav>
-<h3 class="is-family-monospace has-text-grey-dark" id="Assert">Assert</h3>
+<h3 class="is-family-monospace has-text-grey-dark" id="Assert">
+  Assert<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >type alias</span
+  >
+</h3>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">type</span> Assert<span class="token operator">&lt;</span><span class="token constant">A</span> <span class="token keyword">extends</span> <span class="token class-name">true</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token constant">A</span> <span class="token keyword">extends</span> <span class="token class-name">never</span>
@@ -73,7 +77,11 @@
 <pre
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> Assert <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/types/assert.ts'</span></div></pre>
-<h3 class="is-family-monospace has-text-grey-dark" id="AssertNot">AssertNot</h3>
+<h3 class="is-family-monospace has-text-grey-dark" id="AssertNot">
+  AssertNot<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >type alias</span
+  >
+</h3>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">type</span> AssertNot<span class="token operator">&lt;</span><span class="token constant">A</span> <span class="token keyword">extends</span> <span class="token class-name">false</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token constant">A</span> <span class="token keyword">extends</span> <span class="token class-name">never</span>
@@ -92,7 +100,11 @@
 <pre
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> AssertNot <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/types/assert.ts'</span></div></pre>
-<h3 class="is-family-monospace has-text-grey-dark" id="Equals">Equals</h3>
+<h3 class="is-family-monospace has-text-grey-dark" id="Equals">
+  Equals<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >type alias</span
+  >
+</h3>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">type</span> Equals<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">T</span> <span class="token keyword">extends</span> <span class="token class-name">A</span> <span class="token operator">?</span> <span class="token number">1</span> <span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token keyword">extends</span> <span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">T</span> <span class="token keyword">extends</span> <span class="token class-name">B</span>
@@ -111,7 +123,11 @@
 <pre
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> Equals <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/types/assert.ts'</span></div></pre>
-<h3 class="is-family-monospace has-text-grey-dark" id="Extends">Extends</h3>
+<h3 class="is-family-monospace has-text-grey-dark" id="Extends">
+  Extends<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >type alias</span
+  >
+</h3>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">type</span> Extends<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token constant">A</span> <span class="token keyword">extends</span> <span class="token class-name">B</span> <span class="token operator">?</span> <span class="token boolean">true</span> <span class="token operator">:</span> <span class="token boolean">false</span>
@@ -126,7 +142,11 @@
 <pre
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> Extends <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/types/assert.ts'</span></div></pre>
-<h3 class="is-family-monospace has-text-grey-dark" id="IsNever">IsNever</h3>
+<h3 class="is-family-monospace has-text-grey-dark" id="IsNever">
+  IsNever<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >type alias</span
+  >
+</h3>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">type</span> IsNever<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span> <span class="token operator">=</span> Pointer<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span> <span class="token keyword">extends</span> <span class="token class-name">Pointer</span><span class="token operator">&lt;</span><span class="token builtin">never</span><span class="token operator">&gt;</span> <span class="token operator">?</span> <span class="token boolean">true</span> <span class="token operator">:</span> <span class="token boolean">false</span>
@@ -141,7 +161,11 @@
 <pre
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> IsNever <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/types/assert.ts'</span></div></pre>
-<h3 class="is-family-monospace has-text-grey-dark" id="NotEquals">NotEquals</h3>
+<h3 class="is-family-monospace has-text-grey-dark" id="NotEquals">
+  NotEquals<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >type alias</span
+  >
+</h3>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">type</span> NotEquals<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token operator">&gt;</span> <span class="token operator">=</span> Equals<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token operator">&gt;</span> <span class="token keyword">extends</span> <span class="token class-name">true</span> <span class="token operator">?</span> <span class="token boolean">false</span> <span class="token operator">:</span> <span class="token boolean">true</span>
@@ -156,7 +180,11 @@
 <pre
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> NotEquals <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/types/assert.ts'</span></div></pre>
-<h3 class="is-family-monospace has-text-grey-dark" id="NotSame">NotSame</h3>
+<h3 class="is-family-monospace has-text-grey-dark" id="NotSame">
+  NotSame<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >type alias</span
+  >
+</h3>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">type</span> NotSame<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token operator">&gt;</span> <span class="token operator">=</span> Pointer<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span> <span class="token keyword">extends</span> <span class="token class-name">Pointer</span><span class="token operator">&lt;</span><span class="token constant">B</span><span class="token operator">&gt;</span>
@@ -175,7 +203,11 @@
 <pre
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> NotSame <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/types/assert.ts'</span></div></pre>
-<h3 class="is-family-monospace has-text-grey-dark" id="Same">Same</h3>
+<h3 class="is-family-monospace has-text-grey-dark" id="Same">
+  Same<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >type alias</span
+  >
+</h3>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">type</span> Same<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token operator">&gt;</span> <span class="token operator">=</span> Pointer<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span> <span class="token keyword">extends</span> <span class="token class-name">Pointer</span><span class="token operator">&lt;</span><span class="token constant">B</span><span class="token operator">&gt;</span>

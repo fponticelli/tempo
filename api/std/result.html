@@ -208,7 +208,11 @@
     </li>
   </ul>
 </nav>
-<h3 class="is-family-monospace has-text-grey-dark" id="Failure">Failure</h3>
+<h3 class="is-family-monospace has-text-grey-dark" id="Failure">
+  Failure<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >type alias</span
+  >
+</h3>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">type</span> Failure<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">{</span> kind<span class="token operator">:</span> <span class="token string">'Failure'</span><span class="token punctuation">;</span> error<span class="token operator">:</span> <span class="token constant">E</span> <span class="token punctuation">}</span>
@@ -223,7 +227,11 @@
 <pre
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> Failure <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/result.ts'</span></div></pre>
-<h3 class="is-family-monospace has-text-grey-dark" id="Result">Result</h3>
+<h3 class="is-family-monospace has-text-grey-dark" id="Result">
+  Result<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >type alias</span
+  >
+</h3>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">type</span> Result<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span> <span class="token operator">=</span> Success<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span> <span class="token operator">|</span> Failure<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token operator">&gt;</span>
@@ -238,7 +246,11 @@
 <pre
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> Result <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/result.ts'</span></div></pre>
-<h3 class="is-family-monospace has-text-grey-dark" id="Success">Success</h3>
+<h3 class="is-family-monospace has-text-grey-dark" id="Success">
+  Success<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >type alias</span
+  >
+</h3>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">type</span> Success<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">{</span> kind<span class="token operator">:</span> <span class="token string">'Success'</span><span class="token punctuation">;</span> value<span class="token operator">:</span> <span class="token constant">T</span> <span class="token punctuation">}</span>
@@ -253,7 +265,11 @@
 <pre
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> Success <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/result.ts'</span></div></pre>
-<h3 class="is-family-monospace has-text-grey-dark" id="T">T</h3>
+<h3 class="is-family-monospace has-text-grey-dark" id="T">
+  T<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >type alias</span
+  >
+</h3>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">type</span> <span class="token constant">T</span><span class="token operator">&lt;</span><span class="token constant">V</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span> <span class="token operator">=</span> Result<span class="token operator">&lt;</span><span class="token constant">V</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span>
@@ -268,7 +284,11 @@
 <pre
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> <span class="token constant">T</span> <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/result.ts'</span></div></pre>
-<h3 class="is-family-monospace has-text-grey-dark" id="all">all</h3>
+<h3 class="is-family-monospace has-text-grey-dark" id="all">
+  all<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> all<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">v<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">boolean</span><span class="token punctuation">,</span> result<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span>
@@ -283,7 +303,11 @@
 <pre
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> all <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/result.ts'</span></div></pre>
-<h3 class="is-family-monospace has-text-grey-dark" id="any">any</h3>
+<h3 class="is-family-monospace has-text-grey-dark" id="any">
+  any<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> <span class="token builtin">any</span><span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">v<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">boolean</span><span class="token punctuation">,</span> result<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span>
@@ -298,7 +322,11 @@
 <pre
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> <span class="token builtin">any</span> <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/result.ts'</span></div></pre>
-<h3 class="is-family-monospace has-text-grey-dark" id="ap">ap</h3>
+<h3 class="is-family-monospace has-text-grey-dark" id="ap">
+  ap<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> ap<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">(</span>
@@ -316,7 +344,11 @@
 <pre
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> ap <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/result.ts'</span></div></pre>
-<h3 class="is-family-monospace has-text-grey-dark" id="apN">apN</h3>
+<h3 class="is-family-monospace has-text-grey-dark" id="apN">
+  apN<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> apN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">(</span>
@@ -378,7 +410,10 @@
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> apN <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/result.ts'</span></div></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="apNWithCombine">
-  apNWithCombine
+  apNWithCombine<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
 </h3>
 <pre
   class="ts language-ts signature"
@@ -445,7 +480,11 @@
 <pre
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> apNWithCombine <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/result.ts'</span></div></pre>
-<h3 class="is-family-monospace has-text-grey-dark" id="cata">cata</h3>
+<h3 class="is-family-monospace has-text-grey-dark" id="cata">
+  cata<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> cata<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token constant">A</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">B</span><span class="token punctuation">,</span> result<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span> ifNone<span class="token operator">:</span> <span class="token constant">B</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token constant">B</span>
@@ -460,7 +499,11 @@
 <pre
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> cata <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/result.ts'</span></div></pre>
-<h3 class="is-family-monospace has-text-grey-dark" id="cataLazy">cataLazy</h3>
+<h3 class="is-family-monospace has-text-grey-dark" id="cataLazy">
+  cataLazy<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> cataLazy<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">(</span>
@@ -479,7 +522,11 @@
 <pre
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> cataLazy <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/result.ts'</span></div></pre>
-<h3 class="is-family-monospace has-text-grey-dark" id="combine">combine</h3>
+<h3 class="is-family-monospace has-text-grey-dark" id="combine">
+  combine<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> combine<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">(</span>
@@ -497,7 +544,11 @@
 <pre
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> combine <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/result.ts'</span></div></pre>
-<h3 class="is-family-monospace has-text-grey-dark" id="each">each</h3>
+<h3 class="is-family-monospace has-text-grey-dark" id="each">
+  each<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> each<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">v<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span><span class="token punctuation">,</span> result<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">void</span>
@@ -512,7 +563,11 @@
 <pre
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> each <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/result.ts'</span></div></pre>
-<h3 class="is-family-monospace has-text-grey-dark" id="equals">equals</h3>
+<h3 class="is-family-monospace has-text-grey-dark" id="equals">
+  equals<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> equals<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
@@ -531,7 +586,11 @@
 <pre
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> equals <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/result.ts'</span></div></pre>
-<h3 class="is-family-monospace has-text-grey-dark" id="failure">failure</h3>
+<h3 class="is-family-monospace has-text-grey-dark" id="failure">
+  failure<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> failure<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>error<span class="token operator">:</span> <span class="token constant">E</span><span class="token punctuation">)</span><span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span>
@@ -546,7 +605,11 @@
 <pre
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> failure <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/result.ts'</span></div></pre>
-<h3 class="is-family-monospace has-text-grey-dark" id="filter">filter</h3>
+<h3 class="is-family-monospace has-text-grey-dark" id="filter">
+  filter<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> filter<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
@@ -566,7 +629,10 @@
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> filter <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/result.ts'</span></div></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="filterLazy">
-  filterLazy
+  filterLazy<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
 </h3>
 <pre
   class="ts language-ts signature"
@@ -587,7 +653,10 @@
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> filterLazy <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/result.ts'</span></div></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="firstSuccess">
-  firstSuccess
+  firstSuccess<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
 </h3>
 <pre
   class="ts language-ts signature"
@@ -603,7 +672,11 @@
 <pre
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> firstSuccess <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/result.ts'</span></div></pre>
-<h3 class="is-family-monospace has-text-grey-dark" id="flatMap">flatMap</h3>
+<h3 class="is-family-monospace has-text-grey-dark" id="flatMap">
+  flatMap<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> flatMap<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">(</span>
@@ -621,7 +694,11 @@
 <pre
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> flatMap <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/result.ts'</span></div></pre>
-<h3 class="is-family-monospace has-text-grey-dark" id="flatMapN">flatMapN</h3>
+<h3 class="is-family-monospace has-text-grey-dark" id="flatMapN">
+  flatMapN<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> flatMapN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">(</span>
@@ -683,7 +760,10 @@
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> flatMapN <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/result.ts'</span></div></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="flatMapNWithCombine">
-  flatMapNWithCombine
+  flatMapNWithCombine<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
 </h3>
 <pre
   class="ts language-ts signature"
@@ -750,7 +830,11 @@
 <pre
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> flatMapNWithCombine <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/result.ts'</span></div></pre>
-<h3 class="is-family-monospace has-text-grey-dark" id="flatten">flatten</h3>
+<h3 class="is-family-monospace has-text-grey-dark" id="flatten">
+  flatten<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> flatten<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>result<span class="token operator">:</span> Result<span class="token operator">&lt;</span>Result<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span>
@@ -765,7 +849,11 @@
 <pre
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> flatten <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/result.ts'</span></div></pre>
-<h3 class="is-family-monospace has-text-grey-dark" id="foldLeft">foldLeft</h3>
+<h3 class="is-family-monospace has-text-grey-dark" id="foldLeft">
+  foldLeft<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> foldLeft<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">(</span>
@@ -784,7 +872,11 @@
 <pre
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> foldLeft <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/result.ts'</span></div></pre>
-<h3 class="is-family-monospace has-text-grey-dark" id="forEach">forEach</h3>
+<h3 class="is-family-monospace has-text-grey-dark" id="forEach">
+  forEach<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> forEach<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token constant">A</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span><span class="token punctuation">,</span> result<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">void</span>
@@ -799,7 +891,11 @@
 <pre
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> forEach <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/result.ts'</span></div></pre>
-<h3 class="is-family-monospace has-text-grey-dark" id="getOrElse">getOrElse</h3>
+<h3 class="is-family-monospace has-text-grey-dark" id="getOrElse">
+  getOrElse<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> getOrElse<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>result<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> alt<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token constant">T</span>
@@ -815,7 +911,10 @@
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> getOrElse <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/result.ts'</span></div></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="getOrElseLazy">
-  getOrElseLazy
+  getOrElseLazy<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
 </h3>
 <pre
   class="ts language-ts signature"
@@ -832,7 +931,10 @@
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> getOrElseLazy <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/result.ts'</span></div></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="getOrThrow">
-  getOrThrow
+  getOrThrow<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
 </h3>
 <pre
   class="ts language-ts signature"
@@ -848,7 +950,11 @@
 <pre
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> getOrThrow <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/result.ts'</span></div></pre>
-<h3 class="is-family-monospace has-text-grey-dark" id="isFailure">isFailure</h3>
+<h3 class="is-family-monospace has-text-grey-dark" id="isFailure">
+  isFailure<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> isFailure<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>result<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> result <span class="token keyword">is</span> Failure<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token operator">&gt;</span>
@@ -863,7 +969,11 @@
 <pre
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> isFailure <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/result.ts'</span></div></pre>
-<h3 class="is-family-monospace has-text-grey-dark" id="isSuccess">isSuccess</h3>
+<h3 class="is-family-monospace has-text-grey-dark" id="isSuccess">
+  isSuccess<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> isSuccess<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>result<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> result <span class="token keyword">is</span> Success<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span>
@@ -878,7 +988,11 @@
 <pre
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> isSuccess <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/result.ts'</span></div></pre>
-<h3 class="is-family-monospace has-text-grey-dark" id="map">map</h3>
+<h3 class="is-family-monospace has-text-grey-dark" id="map">
+  map<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> map<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token constant">A</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">B</span><span class="token punctuation">,</span> result<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
@@ -893,7 +1007,11 @@
 <pre
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> map <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/result.ts'</span></div></pre>
-<h3 class="is-family-monospace has-text-grey-dark" id="mapError">mapError</h3>
+<h3 class="is-family-monospace has-text-grey-dark" id="mapError">
+  mapError<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> mapError<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">E1</span><span class="token punctuation">,</span> <span class="token constant">E2</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
@@ -911,7 +1029,11 @@
 <pre
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> mapError <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/result.ts'</span></div></pre>
-<h3 class="is-family-monospace has-text-grey-dark" id="mapN">mapN</h3>
+<h3 class="is-family-monospace has-text-grey-dark" id="mapN">
+  mapN<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> mapN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">(</span>
@@ -973,7 +1095,10 @@
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> mapN <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/result.ts'</span></div></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="mapNWithCombine">
-  mapNWithCombine
+  mapNWithCombine<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
 </h3>
 <pre
   class="ts language-ts signature"
@@ -1041,7 +1166,10 @@
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> mapNWithCombine <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/result.ts'</span></div></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="ofNullable">
-  ofNullable
+  ofNullable<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
 </h3>
 <pre
   class="ts language-ts signature"
@@ -1057,7 +1185,11 @@
 <pre
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> ofNullable <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/result.ts'</span></div></pre>
-<h3 class="is-family-monospace has-text-grey-dark" id="recover">recover</h3>
+<h3 class="is-family-monospace has-text-grey-dark" id="recover">
+  recover<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> recover<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>result<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> whenFailure<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">)</span><span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span>
@@ -1073,7 +1205,10 @@
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> recover <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/result.ts'</span></div></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="recoverFromError">
-  recoverFromError
+  recoverFromError<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
 </h3>
 <pre
   class="ts language-ts signature"
@@ -1092,7 +1227,11 @@
 <pre
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> recoverFromError <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/result.ts'</span></div></pre>
-<h3 class="is-family-monospace has-text-grey-dark" id="spread">spread</h3>
+<h3 class="is-family-monospace has-text-grey-dark" id="spread">
+  spread<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> spread<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">(</span>
@@ -1110,7 +1249,11 @@
 <pre
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> spread <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/result.ts'</span></div></pre>
-<h3 class="is-family-monospace has-text-grey-dark" id="success">success</h3>
+<h3 class="is-family-monospace has-text-grey-dark" id="success">
+  success<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> success<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>value<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">)</span><span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span>
@@ -1125,7 +1268,11 @@
 <pre
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> success <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/result.ts'</span></div></pre>
-<h3 class="is-family-monospace has-text-grey-dark" id="swap">swap</h3>
+<h3 class="is-family-monospace has-text-grey-dark" id="swap">
+  swap<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> swap<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>result<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">T</span><span class="token operator">&gt;</span>
@@ -1140,7 +1287,11 @@
 <pre
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> swap <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/result.ts'</span></div></pre>
-<h3 class="is-family-monospace has-text-grey-dark" id="toArray">toArray</h3>
+<h3 class="is-family-monospace has-text-grey-dark" id="toArray">
+  toArray<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> toArray<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>result<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
@@ -1155,7 +1306,11 @@
 <pre
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> toArray <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/result.ts'</span></div></pre>
-<h3 class="is-family-monospace has-text-grey-dark" id="toBoolean">toBoolean</h3>
+<h3 class="is-family-monospace has-text-grey-dark" id="toBoolean">
+  toBoolean<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> <span class="token function">toBoolean</span><span class="token punctuation">(</span><span class="token parameter">result<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token builtin">unknown</span><span class="token punctuation">,</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span>
@@ -1170,7 +1325,11 @@
 <pre
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> toBoolean <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/result.ts'</span></div></pre>
-<h3 class="is-family-monospace has-text-grey-dark" id="toMaybe">toMaybe</h3>
+<h3 class="is-family-monospace has-text-grey-dark" id="toMaybe">
+  toMaybe<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> toMaybe<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>result<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> Maybe<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span>
@@ -1185,7 +1344,11 @@
 <pre
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> toMaybe <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/result.ts'</span></div></pre>
-<h3 class="is-family-monospace has-text-grey-dark" id="toOption">toOption</h3>
+<h3 class="is-family-monospace has-text-grey-dark" id="toOption">
+  toOption<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> toOption<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>result<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span>

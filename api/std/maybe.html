@@ -38,7 +38,11 @@
     </li>
   </ul>
 </nav>
-<h3 class="is-family-monospace has-text-grey-dark" id="Just">Just</h3>
+<h3 class="is-family-monospace has-text-grey-dark" id="Just">
+  Just<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >type alias</span
+  >
+</h3>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">type</span> Just<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token constant">T</span>
@@ -53,7 +57,11 @@
 <pre
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> Just <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/maybe.ts'</span></div></pre>
-<h3 class="is-family-monospace has-text-grey-dark" id="Maybe">Maybe</h3>
+<h3 class="is-family-monospace has-text-grey-dark" id="Maybe">
+  Maybe<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >type alias</span
+  >
+</h3>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">type</span> Maybe<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span> <span class="token operator">=</span> Just<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span> <span class="token operator">|</span> Nothing
@@ -68,7 +76,11 @@
 <pre
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> Maybe <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/maybe.ts'</span></div></pre>
-<h3 class="is-family-monospace has-text-grey-dark" id="Nothing">Nothing</h3>
+<h3 class="is-family-monospace has-text-grey-dark" id="Nothing">
+  Nothing<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >type alias</span
+  >
+</h3>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">type</span> Nothing <span class="token operator">=</span> <span class="token keyword">undefined</span> <span class="token operator">|</span> <span class="token keyword">null</span>
@@ -83,7 +95,11 @@
 <pre
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> Nothing <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/maybe.ts'</span></div></pre>
-<h3 class="is-family-monospace has-text-grey-dark" id="isJust">isJust</h3>
+<h3 class="is-family-monospace has-text-grey-dark" id="isJust">
+  isJust<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> isJust<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>maybe<span class="token operator">:</span> Maybe<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> maybe <span class="token keyword">is</span> Just<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span>
@@ -98,7 +114,11 @@
 <pre
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> isJust <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/maybe.ts'</span></div></pre>
-<h3 class="is-family-monospace has-text-grey-dark" id="isNothing">isNothing</h3>
+<h3 class="is-family-monospace has-text-grey-dark" id="isNothing">
+  isNothing<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> isNothing<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>maybe<span class="token operator">:</span> Maybe<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> maybe <span class="token keyword">is</span> Nothing
@@ -113,7 +133,11 @@
 <pre
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> isNothing <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/maybe.ts'</span></div></pre>
-<h3 class="is-family-monospace has-text-grey-dark" id="just">just</h3>
+<h3 class="is-family-monospace has-text-grey-dark" id="just">
+  just<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> just<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>value<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">)</span><span class="token operator">:</span> Maybe<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span>
@@ -128,7 +152,11 @@
 <pre
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> just <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/maybe.ts'</span></div></pre>
-<h3 class="is-family-monospace has-text-grey-dark" id="nothing">nothing</h3>
+<h3 class="is-family-monospace has-text-grey-dark" id="nothing">
+  nothing<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >variable</span
+  >
+</h3>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">const</span> nothing<span class="token operator">:</span> Maybe<span class="token operator">&lt;</span><span class="token builtin">never</span><span class="token operator">&gt;</span></div></pre>

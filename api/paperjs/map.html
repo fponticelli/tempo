@@ -60,7 +60,10 @@
   </ul>
 </nav>
 <h3 class="is-family-monospace has-text-grey-dark" id="MapActionTemplate">
-  MapActionTemplate
+  MapActionTemplate<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >class</span
+  >
 </h3>
 <pre
   class="ts language-ts signature"
@@ -86,7 +89,10 @@
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> MapActionTemplate <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-paperjs/lib/map.ts'</span></div></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="MapQueryTemplate">
-  MapQueryTemplate
+  MapQueryTemplate<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >class</span
+  >
 </h3>
 <pre
   class="ts language-ts signature"
@@ -112,7 +118,10 @@
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> MapQueryTemplate <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-paperjs/lib/map.ts'</span></div></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="MapStateTemplate">
-  MapStateTemplate
+  MapStateTemplate<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >class</span
+  >
 </h3>
 <pre
   class="ts language-ts signature"
@@ -137,7 +146,11 @@
 <pre
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> MapStateTemplate <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-paperjs/lib/map.ts'</span></div></pre>
-<h3 class="is-family-monospace has-text-grey-dark" id="mapAction">mapAction</h3>
+<h3 class="is-family-monospace has-text-grey-dark" id="mapAction">
+  mapAction<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >variable</span
+  >
+</h3>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">const</span> mapAction<span class="token operator">:</span> <span class="token operator">&lt;</span>State<span class="token punctuation">,</span> OuterAction<span class="token punctuation">,</span> InnerAction<span class="token punctuation">,</span> Query <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>options<span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token function-variable function">map</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">value<span class="token operator">:</span> InnerAction</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> OuterAction <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token operator">...</span>children<span class="token operator">:</span> PaperTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> InnerAction<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> PaperTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> OuterAction<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></div></pre>
@@ -151,7 +164,11 @@
 <pre
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> mapAction <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-paperjs/lib/map.ts'</span></div></pre>
-<h3 class="is-family-monospace has-text-grey-dark" id="mapQuery">mapQuery</h3>
+<h3 class="is-family-monospace has-text-grey-dark" id="mapQuery">
+  mapQuery<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >variable</span
+  >
+</h3>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">const</span> mapQuery<span class="token operator">:</span> <span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> OuterQuery<span class="token punctuation">,</span> InnerQuery<span class="token operator">&gt;</span><span class="token punctuation">(</span>options<span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token function-variable function">map</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">value<span class="token operator">:</span> OuterQuery</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> InnerQuery<span class="token punctuation">;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token operator">...</span>children<span class="token operator">:</span> PaperTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> InnerQuery<span class="token operator">&gt;</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> PaperTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> OuterQuery<span class="token operator">&gt;</span></div></pre>
@@ -166,7 +183,10 @@
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> mapQuery <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-paperjs/lib/map.ts'</span></div></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="mapQueryConditional">
-  mapQueryConditional
+  mapQueryConditional<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >variable</span
+  >
 </h3>
 <pre
   class="ts language-ts signature"
@@ -181,7 +201,11 @@
 <pre
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> mapQueryConditional <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-paperjs/lib/map.ts'</span></div></pre>
-<h3 class="is-family-monospace has-text-grey-dark" id="mapState">mapState</h3>
+<h3 class="is-family-monospace has-text-grey-dark" id="mapState">
+  mapState<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >variable</span
+  >
+</h3>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">const</span> mapState<span class="token operator">:</span> <span class="token operator">&lt;</span>OuterState<span class="token punctuation">,</span> InnerState<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>options<span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token function-variable function">map</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">value<span class="token operator">:</span> OuterState</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> InnerState<span class="token punctuation">;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token operator">...</span>children<span class="token operator">:</span> PaperTemplate<span class="token operator">&lt;</span>InnerState<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> PaperTemplate<span class="token operator">&lt;</span>OuterState<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></div></pre>
@@ -196,7 +220,10 @@
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> mapState <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-paperjs/lib/map.ts'</span></div></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="mapStateAndKeep">
-  mapStateAndKeep
+  mapStateAndKeep<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >variable</span
+  >
 </h3>
 <pre
   class="ts language-ts signature"
