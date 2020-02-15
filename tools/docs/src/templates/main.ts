@@ -13,6 +13,7 @@ import { Route, sameRoute } from '../route'
 import { none, some } from 'tempo-std/lib/option'
 import { iterateItems } from 'tempo-dom/lib/iterate'
 import { ProjectRef } from '../toc'
+import { loader } from './loader'
 
 const { capture, release } = holdState<State>()
 
@@ -62,7 +63,11 @@ export const template = div<State, Action>(
         ),
         link({
           label: img({
-            attrs: { src: 'assets/icon-512x512.png' }
+            attrs: {
+              src: 'assets/icon-512x512.png',
+              alt: 'Tempo',
+              'aria-hidden': true
+            }
           }),
           route: Route.home,
           class: 'navbar-item'
@@ -87,7 +92,10 @@ export const template = div<State, Action>(
                 href: 'https://github.com/fponticelli/tempo'
               }
             },
-            img({ attrs: { src: 'assets/github-mark-64px.png' } })
+            img({ attrs: {
+              src: 'assets/github-mark-64px.png',
+              alt: 'Github Project'
+            } })
           ),
           maybeLink({
             label: 'Demos',
@@ -126,7 +134,7 @@ export const template = div<State, Action>(
       { map: state => state.toc },
       matchAsyncResult<Toc, HttpError, unknown, Action>({
         NotAsked: '',
-        Loading: '...',
+        Loading: loader,
         Success:
           release(
             main(

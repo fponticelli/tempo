@@ -2,9 +2,10 @@
 
 @import url('https://fonts.googleapis.com/css?family=Nunito:400,700')
 
-$code: #433221
+$code: #201912
 $family-sans-serif: "Nunito", sans-serif
 $navbar-breakpoint: 0
+$link: #1d2a90
 
 @import '../node_modules/bulma/sass/utilities/_all'
 @import '../node_modules/bulma/sass/base/_all'
@@ -151,3 +152,15 @@ article.content
 
 .main-column article.content h1
   margin-top: 0
+
+.loader
+  height: 100%
+  display: flex
+  align-items: center
+  justify-content: center
+
+  .loading
+    max-width 300px
+
+.kind
+  margin-left: 0.5em

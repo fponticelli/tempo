@@ -9,6 +9,7 @@ import { mapState } from 'tempo-dom/lib/map'
 import { demosContent } from './demos_content'
 import { projectContent } from './project_content'
 import { fragment } from 'tempo-dom/lib/fragment'
+import { loader } from './loader'
 
 export const content = fragment<
   AsyncResult<Content, HttpError, unknown>,
@@ -19,7 +20,7 @@ export const content = fragment<
       { attrs: { class: 'content message is-danger' } },
       div({ attrs: { class: 'message-body' } }, s => s.message)
     ),
-    Loading: '...',
+    Loading: loader,
     NotAsked: '',
     Success: matchKind({
       HtmlPage: htmlContent,

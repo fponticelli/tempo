@@ -23,11 +23,11 @@ dependencies:
   acorn: 7.1.0
   babel-types: 6.26.0
   bulma: 0.8.0
+  bulma-extensions: 6.2.7
   css-loader: 3.3.2_webpack@4.41.6
   cssnano: 4.1.10
   doctrine: 3.0.0
   dompurify: 2.0.7
-  favicons-webpack-plugin: 2.1.0_webpack@4.41.6
   front-matter: 3.1.0
   fs-extra: 8.1.0
   gh-pages: 2.2.0
@@ -2675,6 +2675,10 @@ packages:
     dev: false
     resolution:
       integrity: sha1-hZgoeOIbmOHGZCXgPQF0eI9Wnug=
+  /bulma-extensions/6.2.7:
+    dev: false
+    resolution:
+      integrity: sha512-y3dHsxlCYkuxUg87KKN9H4InM8NCk8tdnrlxLkYak8sd2WQdllg3wP2Nv41lj8X46uPXX2ADP0MO65LlXPHt/Q==
   /bulma/0.8.0:
     dev: false
     resolution:
@@ -6480,6 +6484,9 @@ packages:
       node: '>=6'
     peerDependencies:
       jest-resolve: '*'
+    peerDependenciesMeta:
+      jest-resolve:
+        optional: true
     resolution:
       integrity: sha512-pgFw2tm54fzgYvc/OHrnysABEObZCUNFnhjoRjaVOCN8NYc032/gVjPaHD4Aq6ApkSieWtfKAFQtmDKAmhupnQ==
   /jest-regex-util/25.1.0:
@@ -12752,6 +12759,7 @@ packages:
       acorn: 7.1.0
       babel-types: 6.26.0
       bulma: 0.8.0
+      bulma-extensions: 6.2.7
       css-loader: 3.3.2_webpack@4.41.6
       cssnano: 4.1.10
       doctrine: 3.0.0
@@ -12788,7 +12796,7 @@ packages:
     peerDependencies:
       sass: '*'
     resolution:
-      integrity: sha512-I22N/Y9heCpws2716wDqtkE08kw+wFLG1t4B2mboLdXchZNFieQoEBGfmpdtzW+UGQ4BI/kGHr7kYCjITOwing==
+      integrity: sha512-IGVMLNMUVKae+lXvUm1tNeyzcsxTUkDL6V2I2WykT3OOqOn6BM6e2qFKYNl2JNV3GwsECoFYIayzu/LL2uc6RA==
       tarball: 'file:projects/tempo-tools.docs.tgz'
     version: 0.0.0
 registry: ''
@@ -12817,11 +12825,11 @@ specifiers:
   acorn: 7.1.0
   babel-types: 6.26.0
   bulma: 0.8.0
+  bulma-extensions: 6.2.7
   css-loader: 3.3.2
   cssnano: 4.1.10
   doctrine: 3.0.0
   dompurify: 2.0.7
-  favicons-webpack-plugin: 2.1.0
   front-matter: 3.1.0
   fs-extra: 8.1.0
   gh-pages: 2.2.0
