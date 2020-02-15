@@ -1,0 +1,23 @@
+{
+  "changes": [
+    {
+      "packageName": "tempo-std",
+      "comment": "arrays: Add `makeCompare`",
+      "type": "minor"
+    }, {
+      "packageName": "tempo-std",
+      "comment": "json: Add serialization/deserialization functions",
+      "type": "minor"
+    }, {
+      "packageName": "tempo-std",
+      "comment": "newtype: Make the signature clearer of the wrapped type of NewType",
+      "type": "minor"
+    }, {
+      "packageName": "tempo-std",
+      "comment": "strings: Add `encodeBase64`, `splitOnLast` and `splitOnFirst`",
+      "type": "minor"
+    }
+  ],
+  "packageName": "tempo-std",
+  "email": "franco.ponticelli@gmail.com"
+}

@@ -1,0 +1,15 @@
+{
+  "changes": [
+    {
+      "packageName": "tempo-paper",
+      "comment": "Remove DOM prefix where not needed and export less types",
+      "type": "patch"
+    }, {
+      "packageName": "tempo-paper",
+      "comment": "Remove `index` file (imports must point specific modules)",
+      "type": "patch"
+    }
+  ],
+  "packageName": "tempo-paper",
+  "email": "franco.ponticelli@gmail.com"
+}

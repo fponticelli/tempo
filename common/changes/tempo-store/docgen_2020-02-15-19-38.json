@@ -1,0 +1,19 @@
+{
+  "changes": [
+    {
+      "packageName": "tempo-store",
+      "comment": "Change signature of `Store.observable` to expose the previous state along with the new one",
+      "type": "minor"
+    }, {
+      "packageName": "tempo-store",
+      "comment": "Remove `index` file (imports must point specific modules)",
+      "type": "minor"
+    }, {
+      "packageName": "tempo-store",
+      "comment": "Increase number of arguments for `Emitter` and `Observable` up to 6",
+      "type": "minor"
+    }
+  ],
+  "packageName": "tempo-store",
+  "email": "franco.ponticelli@gmail.com"
+}
