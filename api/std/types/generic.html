@@ -1,92 +1,89 @@
-<article>
-  <div class="is-pulled-right">
-    <a
-      href="https://github.com/fponticelli/tempo/edit/master/std/src/types/generic.ts"
-      >✏️ edit this module</a
-    >
-  </div>
-  <h1>module 'types/generic'</h1>
-  <nav></nav>
-  <h2>types</h2>
-  <h3 class="is-family-monospace has-text-grey-dark" id="Cast">Cast</h3>
-  <pre
-    class="ts language-ts signature"
-  ><div><span class="token keyword">type</span> Cast<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token constant">A</span> <span class="token keyword">extends</span> <span class="token class-name">B</span> <span class="token operator">?</span> <span class="token constant">A</span> <span class="token operator">:</span> <span class="token constant">B</span>
+<div class="top-right">
+  <a
+    href="https://github.com/fponticelli/tempo/edit/master/std/src/types/generic.ts"
+    >✏️ edit this module</a
+  >
+</div>
+<h1>module 'types/generic'</h1>
+<nav></nav>
+<h3 class="is-family-monospace has-text-grey-dark" id="Cast">Cast</h3>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">type</span> Cast<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token constant">A</span> <span class="token keyword">extends</span> <span class="token class-name">B</span> <span class="token operator">?</span> <span class="token constant">A</span> <span class="token operator">:</span> <span class="token constant">B</span>
 </div></pre>
-  <p>
-    defined in
-    <a
-      href="https://github.com/fponticelli/tempo/blob/master/undefined/src/undefined#L31"
-      >undefined/src/undefined at line 31</a
-    >
-  </p>
-  <pre
-    class="import-code ts language-ts"
-  ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> Cast <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-undefined/lib/undefined'</span></div></pre>
-  <h3 class="is-family-monospace has-text-grey-dark" id="DeRef">DeRef</h3>
-  <pre
-    class="ts language-ts signature"
-  ><div><span class="token keyword">type</span> DeRef<span class="token operator">&lt;</span><span class="token constant">T</span> <span class="token keyword">extends</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">any</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token constant">T</span> <span class="token keyword">extends</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> infer Ret <span class="token operator">?</span> Ret <span class="token operator">:</span> <span class="token builtin">never</span>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/types/generic.ts#L31"
+    >std/src/types/generic.ts at line 31</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> Cast <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/types/generic.ts'</span></div></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="DeRef">DeRef</h3>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">type</span> DeRef<span class="token operator">&lt;</span><span class="token constant">T</span> <span class="token keyword">extends</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">any</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token constant">T</span> <span class="token keyword">extends</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> infer Ret <span class="token operator">?</span> Ret <span class="token operator">:</span> <span class="token builtin">never</span>
 </div></pre>
-  <p>
-    defined in
-    <a
-      href="https://github.com/fponticelli/tempo/blob/master/undefined/src/undefined#L21"
-      >undefined/src/undefined at line 21</a
-    >
-  </p>
-  <pre
-    class="import-code ts language-ts"
-  ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> DeRef <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-undefined/lib/undefined'</span></div></pre>
-  <h3 class="is-family-monospace has-text-grey-dark" id="Pointer">Pointer</h3>
-  <pre
-    class="ts language-ts signature"
-  ><div><span class="token keyword">type</span> Pointer<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">T</span>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/types/generic.ts#L21"
+    >std/src/types/generic.ts at line 21</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> DeRef <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/types/generic.ts'</span></div></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="Pointer">Pointer</h3>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">type</span> Pointer<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">T</span>
 </div></pre>
-  <p>
-    defined in
-    <a
-      href="https://github.com/fponticelli/tempo/blob/master/undefined/src/undefined#L20"
-      >undefined/src/undefined at line 20</a
-    >
-  </p>
-  <pre
-    class="import-code ts language-ts"
-  ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> Pointer <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-undefined/lib/undefined'</span></div></pre>
-  <h3 class="is-family-monospace has-text-grey-dark" id="WhenEquals">
-    WhenEquals
-  </h3>
-  <pre
-    class="ts language-ts signature"
-  ><div><span class="token keyword">type</span> WhenEquals<span class="token operator">&lt;</span><span class="token constant">X</span><span class="token punctuation">,</span> <span class="token constant">Y</span><span class="token punctuation">,</span> <span class="token constant">A</span> <span class="token operator">=</span> <span class="token constant">X</span><span class="token punctuation">,</span> <span class="token constant">B</span> <span class="token operator">=</span> <span class="token builtin">never</span><span class="token operator">&gt;</span> <span class="token operator">=</span> Equals<span class="token operator">&lt;</span><span class="token constant">X</span><span class="token punctuation">,</span> <span class="token constant">Y</span><span class="token operator">&gt;</span> <span class="token keyword">extends</span> <span class="token class-name">true</span> <span class="token operator">?</span> <span class="token constant">A</span> <span class="token operator">:</span> <span class="token constant">B</span>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/types/generic.ts#L20"
+    >std/src/types/generic.ts at line 20</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> Pointer <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/types/generic.ts'</span></div></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="WhenEquals">
+  WhenEquals
+</h3>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">type</span> WhenEquals<span class="token operator">&lt;</span><span class="token constant">X</span><span class="token punctuation">,</span> <span class="token constant">Y</span><span class="token punctuation">,</span> <span class="token constant">A</span> <span class="token operator">=</span> <span class="token constant">X</span><span class="token punctuation">,</span> <span class="token constant">B</span> <span class="token operator">=</span> <span class="token builtin">never</span><span class="token operator">&gt;</span> <span class="token operator">=</span> Equals<span class="token operator">&lt;</span><span class="token constant">X</span><span class="token punctuation">,</span> <span class="token constant">Y</span><span class="token operator">&gt;</span> <span class="token keyword">extends</span> <span class="token class-name">true</span> <span class="token operator">?</span> <span class="token constant">A</span> <span class="token operator">:</span> <span class="token constant">B</span>
 </div></pre>
-  <p>
-    defined in
-    <a
-      href="https://github.com/fponticelli/tempo/blob/master/undefined/src/undefined#L23"
-      >undefined/src/undefined at line 23</a
-    >
-  </p>
-  <pre
-    class="import-code ts language-ts"
-  ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> WhenEquals <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-undefined/lib/undefined'</span></div></pre>
-  <h3 class="is-family-monospace has-text-grey-dark" id="WhenNotEquals">
-    WhenNotEquals
-  </h3>
-  <pre
-    class="ts language-ts signature"
-  ><div><span class="token keyword">type</span> WhenNotEquals<span class="token operator">&lt;</span><span class="token constant">X</span><span class="token punctuation">,</span> <span class="token constant">Y</span><span class="token punctuation">,</span> <span class="token constant">A</span> <span class="token operator">=</span> <span class="token constant">X</span><span class="token punctuation">,</span> <span class="token constant">B</span> <span class="token operator">=</span> <span class="token builtin">never</span><span class="token operator">&gt;</span> <span class="token operator">=</span> NotEquals<span class="token operator">&lt;</span><span class="token constant">X</span><span class="token punctuation">,</span> <span class="token constant">Y</span><span class="token operator">&gt;</span> <span class="token keyword">extends</span> <span class="token class-name">true</span>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/types/generic.ts#L23"
+    >std/src/types/generic.ts at line 23</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> WhenEquals <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/types/generic.ts'</span></div></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="WhenNotEquals">
+  WhenNotEquals
+</h3>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">type</span> WhenNotEquals<span class="token operator">&lt;</span><span class="token constant">X</span><span class="token punctuation">,</span> <span class="token constant">Y</span><span class="token punctuation">,</span> <span class="token constant">A</span> <span class="token operator">=</span> <span class="token constant">X</span><span class="token punctuation">,</span> <span class="token constant">B</span> <span class="token operator">=</span> <span class="token builtin">never</span><span class="token operator">&gt;</span> <span class="token operator">=</span> NotEquals<span class="token operator">&lt;</span><span class="token constant">X</span><span class="token punctuation">,</span> <span class="token constant">Y</span><span class="token operator">&gt;</span> <span class="token keyword">extends</span> <span class="token class-name">true</span>
   <span class="token operator">?</span> <span class="token constant">A</span>
   <span class="token operator">:</span> <span class="token constant">B</span>
 </div></pre>
-  <p>
-    defined in
-    <a
-      href="https://github.com/fponticelli/tempo/blob/master/undefined/src/undefined#L27"
-      >undefined/src/undefined at line 27</a
-    >
-  </p>
-  <pre
-    class="import-code ts language-ts"
-  ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> WhenNotEquals <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-undefined/lib/undefined'</span></div></pre>
-</article>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/types/generic.ts#L27"
+    >std/src/types/generic.ts at line 27</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> WhenNotEquals <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/types/generic.ts'</span></div></pre>

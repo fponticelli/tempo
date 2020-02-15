@@ -1,171 +1,163 @@
-<article>
-  <div class="is-pulled-right">
-    <a
-      href="https://github.com/fponticelli/tempo/edit/master/std/src/booleans.ts"
-      >✏️ edit this module</a
-    >
-  </div>
-  <h1>module 'booleans'</h1>
-  <div>
-    <p>Utility functions to manipulate <code>boolean</code> values.</p>
-  </div>
-  <nav>
-    <p class="title is-6">Table of Contents</p>
-    <ul class="module-toc-list">
-      <li>
-        <a class="is-family-monospace" href="#/api/std/booleans.html#canParse"
-          >canParse</a
-        >
-      </li>
-      <li>
-        <a class="is-family-monospace" href="#/api/std/booleans.html#compare"
-          >compare</a
-        >
-      </li>
-      <li>
-        <a class="is-family-monospace" href="#/api/std/booleans.html#option"
-          >option</a
-        >
-      </li>
-      <li>
-        <a class="is-family-monospace" href="#/api/std/booleans.html#parse"
-          >parse</a
-        >
-      </li>
-      <li>
-        <a class="is-family-monospace" href="#/api/std/booleans.html#toInt"
-          >toInt</a
-        >
-      </li>
-      <li>
-        <a class="is-family-monospace" href="#/api/std/booleans.html#xor"
-          >xor</a
-        >
-      </li>
-    </ul>
-  </nav>
-  <h2>functions</h2>
-  <h3 class="is-family-monospace has-text-grey-dark" id="canParse">canParse</h3>
-  <div>
-    <p>
-      Returns <code>true</code> if the passed value is either
-      <code>true</code> or <code>false</code> (case insensitive).
-    </p>
-  </div>
-  <pre
-    class="ts language-ts signature"
-  ><div><span class="token keyword">function</span> <span class="token function">canParse</span><span class="token punctuation">(</span><span class="token parameter">v<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span>
-</div></pre>
+<div class="top-right">
+  <a href="https://github.com/fponticelli/tempo/edit/master/std/src/booleans.ts"
+    >✏️ edit this module</a
+  >
+</div>
+<h1>module 'booleans'</h1>
+<div>
+  <p>Utility functions to manipulate <code>boolean</code> values.</p>
+</div>
+<nav>
+  <p class="title is-6">Table of Contents</p>
+  <ul class="module-toc-list">
+    <li>
+      <a class="is-family-monospace" href="#/api/std/booleans.html#canParse"
+        >canParse</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/std/booleans.html#compare"
+        >compare</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/std/booleans.html#option"
+        >option</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/std/booleans.html#parse"
+        >parse</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/std/booleans.html#toInt"
+        >toInt</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/std/booleans.html#xor">xor</a>
+    </li>
+  </ul>
+</nav>
+<h3 class="is-family-monospace has-text-grey-dark" id="canParse">canParse</h3>
+<div>
   <p>
-    defined in
-    <a
-      href="https://github.com/fponticelli/tempo/blob/master/std/src/booleans.ts#L34"
-      >std/src/booleans.ts at line 34</a
-    >
+    Returns <code>true</code> if the passed value is either <code>true</code> or
+    <code>false</code> (case insensitive).
   </p>
-  <pre
-    class="import-code ts language-ts"
-  ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> canParse <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/booleans.ts'</span></div></pre>
-  <h3 class="is-family-monospace has-text-grey-dark" id="compare">compare</h3>
-  <div>
-    <p>
-      Returns a comparison value (<code>Int</code>) from two boolean values.
-    </p>
-  </div>
-  <pre
-    class="ts language-ts signature"
-  ><div><span class="token keyword">function</span> <span class="token function">compare</span><span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token builtin">boolean</span><span class="token punctuation">,</span> b<span class="token operator">:</span> <span class="token builtin">boolean</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token number">1</span> <span class="token operator">|</span> <span class="token operator">-</span><span class="token number">1</span> <span class="token operator">|</span> <span class="token number">0</span>
+</div>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">function</span> <span class="token function">canParse</span><span class="token punctuation">(</span><span class="token parameter">v<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span>
 </div></pre>
-  <p>
-    defined in
-    <a
-      href="https://github.com/fponticelli/tempo/blob/master/std/src/booleans.ts#L20"
-      >std/src/booleans.ts at line 20</a
-    >
-  </p>
-  <pre
-    class="import-code ts language-ts"
-  ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> compare <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/booleans.ts'</span></div></pre>
-  <h3 class="is-family-monospace has-text-grey-dark" id="option">option</h3>
-  <div>
-    <p>
-      Depending upon the condition, return the provided value wrapped in a
-      <code>some</code>, or <code>none</code> if the condition is false.
-    </p>
-  </div>
-  <pre
-    class="ts language-ts signature"
-  ><div><span class="token keyword">function</span> option<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>cond<span class="token operator">:</span> <span class="token builtin">boolean</span><span class="token punctuation">,</span> a<span class="token operator">:</span> <span class="token constant">A</span><span class="token punctuation">)</span><span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/booleans.ts#L34"
+    >std/src/booleans.ts at line 34</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> canParse <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/booleans.ts'</span></div></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="compare">compare</h3>
+<div>
+  <p>Returns a comparison value (<code>Int</code>) from two boolean values.</p>
+</div>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">function</span> <span class="token function">compare</span><span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token builtin">boolean</span><span class="token punctuation">,</span> b<span class="token operator">:</span> <span class="token builtin">boolean</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token number">1</span> <span class="token operator">|</span> <span class="token operator">-</span><span class="token number">1</span> <span class="token operator">|</span> <span class="token number">0</span>
 </div></pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/booleans.ts#L20"
+    >std/src/booleans.ts at line 20</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> compare <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/booleans.ts'</span></div></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="option">option</h3>
+<div>
   <p>
-    defined in
-    <a
-      href="https://github.com/fponticelli/tempo/blob/master/std/src/booleans.ts#L77"
-      >std/src/booleans.ts at line 77</a
-    >
+    Depending upon the condition, return the provided value wrapped in a
+    <code>some</code>, or <code>none</code> if the condition is false.
   </p>
-  <pre
-    class="import-code ts language-ts"
-  ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> option <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/booleans.ts'</span></div></pre>
-  <h3 class="is-family-monospace has-text-grey-dark" id="parse">parse</h3>
-  <div>
-    <p>
-      Returns <code>true</code>/<code>false</code> if the passed value is
-      <code>true</code>/<code>false</code> (case insensitive) with any other
-      value it will return null.
-    </p>
-  </div>
-  <pre
-    class="ts language-ts signature"
-  ><div><span class="token keyword">function</span> <span class="token function">parse</span><span class="token punctuation">(</span><span class="token parameter">v<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span>
+</div>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">function</span> option<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>cond<span class="token operator">:</span> <span class="token builtin">boolean</span><span class="token punctuation">,</span> a<span class="token operator">:</span> <span class="token constant">A</span><span class="token punctuation">)</span><span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span>
 </div></pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/booleans.ts#L77"
+    >std/src/booleans.ts at line 77</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> option <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/booleans.ts'</span></div></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="parse">parse</h3>
+<div>
   <p>
-    defined in
-    <a
-      href="https://github.com/fponticelli/tempo/blob/master/std/src/booleans.ts#L52"
-      >std/src/booleans.ts at line 52</a
-    >
+    Returns <code>true</code>/<code>false</code> if the passed value is
+    <code>true</code>/<code>false</code> (case insensitive) with any other value
+    it will return null.
   </p>
-  <pre
-    class="import-code ts language-ts"
-  ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> parse <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/booleans.ts'</span></div></pre>
-  <h3 class="is-family-monospace has-text-grey-dark" id="toInt">toInt</h3>
-  <div>
-    <p>
-      Converts a boolean to an integer value (<code>true</code> =&gt;
-      <code>1</code>, <code>false</code> =&gt; <code>0</code>).
-    </p>
-  </div>
-  <pre
-    class="ts language-ts signature"
-  ><div><span class="token keyword">function</span> <span class="token function">toInt</span><span class="token punctuation">(</span><span class="token parameter">v<span class="token operator">:</span> <span class="token builtin">boolean</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token number">1</span> <span class="token operator">|</span> <span class="token number">0</span>
+</div>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">function</span> <span class="token function">parse</span><span class="token punctuation">(</span><span class="token parameter">v<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span>
 </div></pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/booleans.ts#L52"
+    >std/src/booleans.ts at line 52</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> parse <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/booleans.ts'</span></div></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="toInt">toInt</h3>
+<div>
   <p>
-    defined in
-    <a
-      href="https://github.com/fponticelli/tempo/blob/master/std/src/booleans.ts#L27"
-      >std/src/booleans.ts at line 27</a
-    >
+    Converts a boolean to an integer value (<code>true</code> =&gt;
+    <code>1</code>, <code>false</code> =&gt; <code>0</code>).
   </p>
-  <pre
-    class="import-code ts language-ts"
-  ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> toInt <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/booleans.ts'</span></div></pre>
-  <h3 class="is-family-monospace has-text-grey-dark" id="xor">xor</h3>
-  <div>
-    <p>Returns <code>true</code> when arguments are different.</p>
-  </div>
-  <pre
-    class="ts language-ts signature"
-  ><div><span class="token keyword">function</span> <span class="token function">xor</span><span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token builtin">boolean</span><span class="token punctuation">,</span> b<span class="token operator">:</span> <span class="token builtin">boolean</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span>
+</div>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">function</span> <span class="token function">toInt</span><span class="token punctuation">(</span><span class="token parameter">v<span class="token operator">:</span> <span class="token builtin">boolean</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token number">1</span> <span class="token operator">|</span> <span class="token number">0</span>
 </div></pre>
-  <p>
-    defined in
-    <a
-      href="https://github.com/fponticelli/tempo/blob/master/std/src/booleans.ts#L70"
-      >std/src/booleans.ts at line 70</a
-    >
-  </p>
-  <pre
-    class="import-code ts language-ts"
-  ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> xor <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/booleans.ts'</span></div></pre>
-</article>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/booleans.ts#L27"
+    >std/src/booleans.ts at line 27</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> toInt <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/booleans.ts'</span></div></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="xor">xor</h3>
+<div>
+  <p>Returns <code>true</code> when arguments are different.</p>
+</div>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">function</span> <span class="token function">xor</span><span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token builtin">boolean</span><span class="token punctuation">,</span> b<span class="token operator">:</span> <span class="token builtin">boolean</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span>
+</div></pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/booleans.ts#L70"
+    >std/src/booleans.ts at line 70</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> xor <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/booleans.ts'</span></div></pre>

@@ -1,34 +1,17 @@
-<article>
-  <div class="is-pulled-right">
-    <a
-      href="https://github.com/fponticelli/tempo/edit/master/paperjs/src/until.ts"
-      >✏️ edit this module</a
-    >
-  </div>
-  <h1>module 'until'</h1>
-  <nav></nav>
-  <h2>values</h2>
-  <h3 class="is-family-monospace has-text-grey-dark" id="until">until</h3>
-  <pre
-    class="ts language-ts signature"
-  ><div><span class="token keyword">const</span> until<span class="token operator">:</span> <span class="token operator">&lt;</span>OuterState<span class="token punctuation">,</span> InnerState<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>options<span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token function-variable function">repeatUntil</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">state<span class="token operator">:</span> OuterState<span class="token punctuation">,</span> index<span class="token operator">:</span> <span class="token builtin">number</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> InnerState <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token operator">...</span>children<span class="token operator">:</span> PaperTemplate<span class="token operator">&lt;</span>InnerState<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> PaperTemplate<span class="token operator">&lt;</span>OuterState<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></div></pre>
-  <p>
-    defined in
-    <a
-      href="https://github.com/fponticelli/tempo/blob/master/paperjs/src/until.ts#L80"
-      >paperjs/src/until.ts at line 80</a
-    >
-  </p>
-  <pre
-    class="import-code ts language-ts"
-  ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> until <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-paperjs/lib/until.ts'</span></div></pre>
-  <h2>classes</h2>
-  <h3 class="is-family-monospace has-text-grey-dark" id="PaperUntilTemplate">
-    PaperUntilTemplate
-  </h3>
-  <pre
-    class="ts language-ts signature"
-  ><div><span class="token keyword">declare</span> <span class="token keyword">class</span> <span class="token class-name">PaperUntilTemplate</span><span class="token operator">&lt;</span>OuterState<span class="token punctuation">,</span> InnerState<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+<div class="top-right">
+  <a
+    href="https://github.com/fponticelli/tempo/edit/master/paperjs/src/until.ts"
+    >✏️ edit this module</a
+  >
+</div>
+<h1>module 'until'</h1>
+<nav></nav>
+<h3 class="is-family-monospace has-text-grey-dark" id="PaperUntilTemplate">
+  PaperUntilTemplate
+</h3>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">declare</span> <span class="token keyword">class</span> <span class="token class-name">PaperUntilTemplate</span><span class="token operator">&lt;</span>OuterState<span class="token punctuation">,</span> InnerState<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
   <span class="token keyword">implements</span> <span class="token class-name">PaperTemplate</span><span class="token operator">&lt;</span>OuterState<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span> <span class="token punctuation">{</span>
   <span class="token keyword">constructor</span><span class="token punctuation">(</span>
     options<span class="token operator">:</span> <span class="token punctuation">{</span>
@@ -43,14 +26,27 @@
   <span class="token function">render</span><span class="token punctuation">(</span>ctx<span class="token operator">:</span> PaperContext<span class="token operator">&lt;</span>Action<span class="token operator">&gt;</span><span class="token punctuation">,</span> state<span class="token operator">:</span> OuterState<span class="token punctuation">)</span><span class="token operator">:</span> View<span class="token operator">&lt;</span>OuterState<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
 <span class="token punctuation">}</span>
 </div></pre>
-  <p>
-    defined in
-    <a
-      href="https://github.com/fponticelli/tempo/blob/master/paperjs/src/until.ts#L20"
-      >paperjs/src/until.ts at line 20</a
-    >
-  </p>
-  <pre
-    class="import-code ts language-ts"
-  ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> PaperUntilTemplate <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-paperjs/lib/until.ts'</span></div></pre>
-</article>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/paperjs/src/until.ts#L20"
+    >paperjs/src/until.ts at line 20</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> PaperUntilTemplate <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-paperjs/lib/until.ts'</span></div></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="until">until</h3>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">const</span> until<span class="token operator">:</span> <span class="token operator">&lt;</span>OuterState<span class="token punctuation">,</span> InnerState<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>options<span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token function-variable function">repeatUntil</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">state<span class="token operator">:</span> OuterState<span class="token punctuation">,</span> index<span class="token operator">:</span> <span class="token builtin">number</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> InnerState <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token operator">...</span>children<span class="token operator">:</span> PaperTemplate<span class="token operator">&lt;</span>InnerState<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> PaperTemplate<span class="token operator">&lt;</span>OuterState<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></div></pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/paperjs/src/until.ts#L80"
+    >paperjs/src/until.ts at line 80</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> until <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-paperjs/lib/until.ts'</span></div></pre>

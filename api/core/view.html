@@ -1,29 +1,27 @@
-<article>
-  <div class="is-pulled-right">
-    <a href="https://github.com/fponticelli/tempo/edit/master/core/src/view.ts"
-      >✏️ edit this module</a
-    >
-  </div>
-  <h1>module 'view'</h1>
-  <div>
-    <p>
-      A <code>View</code> represents the realization of a <code>Template</code>.
-    </p>
-  </div>
-  <nav></nav>
-  <h2>types</h2>
-  <h3 class="is-family-monospace has-text-grey-dark" id="View">View</h3>
-  <div>
-    <p>
-      A <code>View</code> is attached to its realiazion (DOM nodes) and it
-      controls its behavior after the first render. It is possible to update
-      (<code>change</code>), remove (<code>destroy</code>) or query
-      (<code>request</code>) a view.
-    </p>
-  </div>
-  <pre
-    class="ts language-ts signature"
-  ><div><span class="token keyword">interface</span> <span class="token class-name">View</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+<div class="top-right">
+  <a href="https://github.com/fponticelli/tempo/edit/master/core/src/view.ts"
+    >✏️ edit this module</a
+  >
+</div>
+<h1>module 'view'</h1>
+<div>
+  <p>
+    A <code>View</code> represents the realization of a <code>Template</code>.
+  </p>
+</div>
+<nav></nav>
+<h3 class="is-family-monospace has-text-grey-dark" id="View">View</h3>
+<div>
+  <p>
+    A <code>View</code> is attached to its realiazion (DOM nodes) and it
+    controls its behavior after the first render. It is possible to update
+    (<code>change</code>), remove (<code>destroy</code>) or query
+    (<code>request</code>) a view.
+  </p>
+</div>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">interface</span> <span class="token class-name">View</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span> <span class="token punctuation">{</span>
   <span class="token comment">/**
    * `change` takes a new `State` value and immediately updates its realization
    * to match the new state.
@@ -44,14 +42,13 @@
   <span class="token function">request</span><span class="token punctuation">(</span>query<span class="token operator">:</span> Query<span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">void</span>
 <span class="token punctuation">}</span>
 </div></pre>
-  <p>
-    defined in
-    <a
-      href="https://github.com/fponticelli/tempo/blob/master/undefined/src/undefined#L14"
-      >undefined/src/undefined at line 14</a
-    >
-  </p>
-  <pre
-    class="import-code ts language-ts"
-  ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> View <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-undefined/lib/undefined'</span></div></pre>
-</article>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/core/src/view.ts#L14"
+    >core/src/view.ts at line 14</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> View <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-core/lib/view.ts'</span></div></pre>

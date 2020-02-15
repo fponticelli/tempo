@@ -1,196 +1,178 @@
-<article>
-  <div class="is-pulled-right">
-    <a href="https://github.com/fponticelli/tempo/edit/master/std/src/json.ts"
-      >✏️ edit this module</a
-    >
-  </div>
-  <h1>module 'json'</h1>
-  <nav>
-    <p class="title is-6">Table of Contents</p>
-    <ul class="module-toc-list">
-      <li>
-        <a class="is-family-monospace" href="#/api/std/json.html#JSONArray"
-          >JSONArray</a
-        >
-      </li>
-      <li>
-        <a class="is-family-monospace" href="#/api/std/json.html#JSONObject"
-          >JSONObject</a
-        >
-      </li>
-      <li>
-        <a class="is-family-monospace" href="#/api/std/json.html#JSONPrimitive"
-          >JSONPrimitive</a
-        >
-      </li>
-      <li>
-        <a class="is-family-monospace" href="#/api/std/json.html#JSONValue"
-          >JSONValue</a
-        >
-      </li>
-      <li>
-        <a class="is-family-monospace" href="#/api/std/json.html#deserialize"
-          >deserialize</a
-        >
-      </li>
-      <li>
-        <a class="is-family-monospace" href="#/api/std/json.html#makeSerializer"
-          >makeSerializer</a
-        >
-      </li>
-      <li>
-        <a class="is-family-monospace" href="#/api/std/json.html#serialize"
-          >serialize</a
-        >
-      </li>
-      <li>
-        <a
-          class="is-family-monospace"
-          href="#/api/std/json.html#serializeMinified"
-          >serializeMinified</a
-        >
-      </li>
-    </ul>
-  </nav>
-  <h2>types</h2>
-  <h3 class="is-family-monospace has-text-grey-dark" id="JSONArray">
-    JSONArray
-  </h3>
-  <pre
-    class="ts language-ts signature"
-  ><div><span class="token keyword">type</span> JSONArray <span class="token operator">=</span> JSONValue<span class="token punctuation">[</span><span class="token punctuation">]</span>
+<div class="top-right">
+  <a href="https://github.com/fponticelli/tempo/edit/master/std/src/json.ts"
+    >✏️ edit this module</a
+  >
+</div>
+<h1>module 'json'</h1>
+<nav>
+  <p class="title is-6">Table of Contents</p>
+  <ul class="module-toc-list">
+    <li>
+      <a class="is-family-monospace" href="#/api/std/json.html#JSONArray"
+        >JSONArray</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/std/json.html#JSONObject"
+        >JSONObject</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/std/json.html#JSONPrimitive"
+        >JSONPrimitive</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/std/json.html#JSONValue"
+        >JSONValue</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/std/json.html#deserialize"
+        >deserialize</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/std/json.html#makeSerializer"
+        >makeSerializer</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/std/json.html#serialize"
+        >serialize</a
+      >
+    </li>
+    <li>
+      <a
+        class="is-family-monospace"
+        href="#/api/std/json.html#serializeMinified"
+        >serializeMinified</a
+      >
+    </li>
+  </ul>
+</nav>
+<h3 class="is-family-monospace has-text-grey-dark" id="JSONArray">JSONArray</h3>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">type</span> JSONArray <span class="token operator">=</span> JSONValue<span class="token punctuation">[</span><span class="token punctuation">]</span>
 </div></pre>
-  <p>
-    defined in
-    <a
-      href="https://github.com/fponticelli/tempo/blob/master/undefined/src/undefined#L18"
-      >undefined/src/undefined at line 18</a
-    >
-  </p>
-  <pre
-    class="import-code ts language-ts"
-  ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> JSONArray <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-undefined/lib/undefined'</span></div></pre>
-  <h3 class="is-family-monospace has-text-grey-dark" id="JSONObject">
-    JSONObject
-  </h3>
-  <pre
-    class="ts language-ts signature"
-  ><div><span class="token keyword">interface</span> <span class="token class-name">JSONObject</span> <span class="token keyword">extends</span> <span class="token class-name">Record</span><span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token punctuation">,</span> JSONValue<span class="token operator">&gt;</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+<p class="defined-in">
+  defined in
+  <a href="https://github.com/fponticelli/tempo/blob/master/std/src/json.ts#L18"
+    >std/src/json.ts at line 18</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> JSONArray <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/json.ts'</span></div></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="JSONObject">
+  JSONObject
+</h3>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">interface</span> <span class="token class-name">JSONObject</span> <span class="token keyword">extends</span> <span class="token class-name">Record</span><span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token punctuation">,</span> JSONValue<span class="token operator">&gt;</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
 </div></pre>
-  <p>
-    defined in
-    <a
-      href="https://github.com/fponticelli/tempo/blob/master/undefined/src/undefined#L17"
-      >undefined/src/undefined at line 17</a
-    >
-  </p>
-  <pre
-    class="import-code ts language-ts"
-  ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> JSONObject <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-undefined/lib/undefined'</span></div></pre>
-  <h3 class="is-family-monospace has-text-grey-dark" id="JSONPrimitive">
-    JSONPrimitive
-  </h3>
-  <pre
-    class="ts language-ts signature"
-  ><div><span class="token keyword">type</span> JSONPrimitive <span class="token operator">=</span> <span class="token builtin">string</span> <span class="token operator">|</span> <span class="token builtin">boolean</span> <span class="token operator">|</span> <span class="token builtin">number</span> <span class="token operator">|</span> <span class="token keyword">null</span>
+<p class="defined-in">
+  defined in
+  <a href="https://github.com/fponticelli/tempo/blob/master/std/src/json.ts#L17"
+    >std/src/json.ts at line 17</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> JSONObject <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/json.ts'</span></div></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="JSONPrimitive">
+  JSONPrimitive
+</h3>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">type</span> JSONPrimitive <span class="token operator">=</span> <span class="token builtin">string</span> <span class="token operator">|</span> <span class="token builtin">boolean</span> <span class="token operator">|</span> <span class="token builtin">number</span> <span class="token operator">|</span> <span class="token keyword">null</span>
 </div></pre>
-  <p>
-    defined in
-    <a
-      href="https://github.com/fponticelli/tempo/blob/master/undefined/src/undefined#L16"
-      >undefined/src/undefined at line 16</a
-    >
-  </p>
-  <pre
-    class="import-code ts language-ts"
-  ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> JSONPrimitive <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-undefined/lib/undefined'</span></div></pre>
-  <h3 class="is-family-monospace has-text-grey-dark" id="JSONValue">
-    JSONValue
-  </h3>
-  <pre
-    class="ts language-ts signature"
-  ><div><span class="token keyword">type</span> JSONValue <span class="token operator">=</span> JSONPrimitive <span class="token operator">|</span> JSONObject <span class="token operator">|</span> JSONArray
+<p class="defined-in">
+  defined in
+  <a href="https://github.com/fponticelli/tempo/blob/master/std/src/json.ts#L16"
+    >std/src/json.ts at line 16</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> JSONPrimitive <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/json.ts'</span></div></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="JSONValue">JSONValue</h3>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">type</span> JSONValue <span class="token operator">=</span> JSONPrimitive <span class="token operator">|</span> JSONObject <span class="token operator">|</span> JSONArray
 </div></pre>
-  <p>
-    defined in
-    <a
-      href="https://github.com/fponticelli/tempo/blob/master/undefined/src/undefined#L19"
-      >undefined/src/undefined at line 19</a
-    >
-  </p>
-  <pre
-    class="import-code ts language-ts"
-  ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> JSONValue <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-undefined/lib/undefined'</span></div></pre>
-  <h2>functions</h2>
-  <h3 class="is-family-monospace has-text-grey-dark" id="deserialize">
-    deserialize
-  </h3>
-  <pre
-    class="ts language-ts signature"
-  ><div><span class="token keyword">function</span> <span class="token function">deserialize</span><span class="token punctuation">(</span><span class="token parameter">s<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> Result<span class="token operator">&lt;</span>JSONValue<span class="token punctuation">,</span> <span class="token builtin">string</span><span class="token operator">&gt;</span>
+<p class="defined-in">
+  defined in
+  <a href="https://github.com/fponticelli/tempo/blob/master/std/src/json.ts#L19"
+    >std/src/json.ts at line 19</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> JSONValue <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/json.ts'</span></div></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="deserialize">
+  deserialize
+</h3>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">function</span> <span class="token function">deserialize</span><span class="token punctuation">(</span><span class="token parameter">s<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> Result<span class="token operator">&lt;</span>JSONValue<span class="token punctuation">,</span> <span class="token builtin">string</span><span class="token operator">&gt;</span>
 </div></pre>
-  <p>
-    defined in
-    <a
-      href="https://github.com/fponticelli/tempo/blob/master/std/src/json.ts#L21"
-      >std/src/json.ts at line 21</a
-    >
-  </p>
-  <pre
-    class="import-code ts language-ts"
-  ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> deserialize <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/json.ts'</span></div></pre>
-  <h3 class="is-family-monospace has-text-grey-dark" id="makeSerializer">
-    makeSerializer
-  </h3>
-  <pre
-    class="ts language-ts signature"
-  ><div><span class="token keyword">function</span> <span class="token function">makeSerializer</span><span class="token punctuation">(</span><span class="token parameter">options<span class="token operator">:</span> <span class="token punctuation">{</span>
+<p class="defined-in">
+  defined in
+  <a href="https://github.com/fponticelli/tempo/blob/master/std/src/json.ts#L21"
+    >std/src/json.ts at line 21</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> deserialize <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/json.ts'</span></div></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="makeSerializer">
+  makeSerializer
+</h3>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">function</span> <span class="token function">makeSerializer</span><span class="token punctuation">(</span><span class="token parameter">options<span class="token operator">:</span> <span class="token punctuation">{</span>
   minified<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">boolean</span>
   whitelist<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
 <span class="token punctuation">}</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">v<span class="token operator">:</span> JSONValue</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">string</span>
 </div></pre>
-  <p>
-    defined in
-    <a
-      href="https://github.com/fponticelli/tempo/blob/master/std/src/json.ts#L29"
-      >std/src/json.ts at line 29</a
-    >
-  </p>
-  <pre
-    class="import-code ts language-ts"
-  ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> makeSerializer <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/json.ts'</span></div></pre>
-  <h3 class="is-family-monospace has-text-grey-dark" id="serialize">
-    serialize
-  </h3>
-  <pre
-    class="ts language-ts signature"
-  ><div><span class="token keyword">function</span> <span class="token function">serialize</span><span class="token punctuation">(</span><span class="token parameter">v<span class="token operator">:</span> JSONValue</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span>
+<p class="defined-in">
+  defined in
+  <a href="https://github.com/fponticelli/tempo/blob/master/std/src/json.ts#L29"
+    >std/src/json.ts at line 29</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> makeSerializer <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/json.ts'</span></div></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="serialize">serialize</h3>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">function</span> <span class="token function">serialize</span><span class="token punctuation">(</span><span class="token parameter">v<span class="token operator">:</span> JSONValue</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span>
 </div></pre>
-  <p>
-    defined in
-    <a
-      href="https://github.com/fponticelli/tempo/blob/master/std/src/json.ts#L35"
-      >std/src/json.ts at line 35</a
-    >
-  </p>
-  <pre
-    class="import-code ts language-ts"
-  ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> serialize <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/json.ts'</span></div></pre>
-  <h3 class="is-family-monospace has-text-grey-dark" id="serializeMinified">
-    serializeMinified
-  </h3>
-  <pre
-    class="ts language-ts signature"
-  ><div><span class="token keyword">function</span> <span class="token function">serializeMinified</span><span class="token punctuation">(</span><span class="token parameter">v<span class="token operator">:</span> JSONValue</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span>
+<p class="defined-in">
+  defined in
+  <a href="https://github.com/fponticelli/tempo/blob/master/std/src/json.ts#L35"
+    >std/src/json.ts at line 35</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> serialize <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/json.ts'</span></div></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="serializeMinified">
+  serializeMinified
+</h3>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">function</span> <span class="token function">serializeMinified</span><span class="token punctuation">(</span><span class="token parameter">v<span class="token operator">:</span> JSONValue</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span>
 </div></pre>
-  <p>
-    defined in
-    <a
-      href="https://github.com/fponticelli/tempo/blob/master/std/src/json.ts#L39"
-      >std/src/json.ts at line 39</a
-    >
-  </p>
-  <pre
-    class="import-code ts language-ts"
-  ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> serializeMinified <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/json.ts'</span></div></pre>
-</article>
+<p class="defined-in">
+  defined in
+  <a href="https://github.com/fponticelli/tempo/blob/master/std/src/json.ts#L39"
+    >std/src/json.ts at line 39</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> serializeMinified <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/json.ts'</span></div></pre>

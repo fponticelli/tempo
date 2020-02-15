@@ -1,346 +1,316 @@
-<article>
-  <div class="is-pulled-right">
-    <a href="https://github.com/fponticelli/tempo/edit/master/std/src/nel.ts"
-      >✏️ edit this module</a
-    >
-  </div>
-  <h1>module 'nel'</h1>
-  <div>
-    <p>
-      <code>nel</code> stands for 'non-empty list'. This module provides
-      functions to manipulate and generate <code>Nel&lt;T&gt;</code> values.
-    </p>
-  </div>
-  <nav>
-    <p class="title is-6">Table of Contents</p>
-    <ul class="module-toc-list">
-      <li>
-        <a class="is-family-monospace" href="#/api/std/nel.html#Nel">Nel</a>
-      </li>
-      <li>
-        <a class="is-family-monospace" href="#/api/std/nel.html#Nel">Nel</a>
-      </li>
-      <li>
-        <a class="is-family-monospace" href="#/api/std/nel.html#all">all</a>
-      </li>
-      <li>
-        <a class="is-family-monospace" href="#/api/std/nel.html#any">any</a>
-      </li>
-      <li>
-        <a class="is-family-monospace" href="#/api/std/nel.html#concat"
-          >concat</a
-        >
-      </li>
-      <li>
-        <a class="is-family-monospace" href="#/api/std/nel.html#each">each</a>
-      </li>
-      <li>
-        <a class="is-family-monospace" href="#/api/std/nel.html#equals"
-          >equals</a
-        >
-      </li>
-      <li>
-        <a class="is-family-monospace" href="#/api/std/nel.html#filter"
-          >filter</a
-        >
-      </li>
-      <li>
-        <a class="is-family-monospace" href="#/api/std/nel.html#flatMap"
-          >flatMap</a
-        >
-      </li>
-      <li>
-        <a class="is-family-monospace" href="#/api/std/nel.html#flatten"
-          >flatten</a
-        >
-      </li>
-      <li>
-        <a class="is-family-monospace" href="#/api/std/nel.html#foldLeft"
-          >foldLeft</a
-        >
-      </li>
-      <li>
-        <a class="is-family-monospace" href="#/api/std/nel.html#head">head</a>
-      </li>
-      <li>
-        <a class="is-family-monospace" href="#/api/std/nel.html#isValid"
-          >isValid</a
-        >
-      </li>
-      <li>
-        <a class="is-family-monospace" href="#/api/std/nel.html#length"
-          >length</a
-        >
-      </li>
-      <li>
-        <a class="is-family-monospace" href="#/api/std/nel.html#map">map</a>
-      </li>
-      <li>
-        <a class="is-family-monospace" href="#/api/std/nel.html#ofValue"
-          >ofValue</a
-        >
-      </li>
-      <li>
-        <a class="is-family-monospace" href="#/api/std/nel.html#sort">sort</a>
-      </li>
-      <li>
-        <a class="is-family-monospace" href="#/api/std/nel.html#tail">tail</a>
-      </li>
-    </ul>
-  </nav>
-  <h2>types</h2>
-  <h3 class="is-family-monospace has-text-grey-dark" id="Nel">Nel</h3>
-  <pre
-    class="ts language-ts signature"
-  ><div><span class="token keyword">type</span> Nel<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span> <span class="token operator">=</span> Newtype<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">{</span> <span class="token keyword">readonly</span> Nel<span class="token operator">:</span> unique <span class="token builtin">symbol</span> <span class="token punctuation">}</span><span class="token operator">&gt;</span>
+<div class="top-right">
+  <a href="https://github.com/fponticelli/tempo/edit/master/std/src/nel.ts"
+    >✏️ edit this module</a
+  >
+</div>
+<h1>module 'nel'</h1>
+<div>
+  <p>
+    <code>nel</code> stands for 'non-empty list'. This module provides functions
+    to manipulate and generate <code>Nel&lt;T&gt;</code> values.
+  </p>
+</div>
+<nav>
+  <p class="title is-6">Table of Contents</p>
+  <ul class="module-toc-list">
+    <li>
+      <a class="is-family-monospace" href="#/api/std/nel.html#Nel">Nel</a>
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/std/nel.html#Nel">Nel</a>
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/std/nel.html#all">all</a>
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/std/nel.html#any">any</a>
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/std/nel.html#concat">concat</a>
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/std/nel.html#each">each</a>
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/std/nel.html#equals">equals</a>
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/std/nel.html#filter">filter</a>
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/std/nel.html#flatMap"
+        >flatMap</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/std/nel.html#flatten"
+        >flatten</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/std/nel.html#foldLeft"
+        >foldLeft</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/std/nel.html#head">head</a>
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/std/nel.html#isValid"
+        >isValid</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/std/nel.html#length">length</a>
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/std/nel.html#map">map</a>
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/std/nel.html#ofValue"
+        >ofValue</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/std/nel.html#sort">sort</a>
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/std/nel.html#tail">tail</a>
+    </li>
+  </ul>
+</nav>
+<h3 class="is-family-monospace has-text-grey-dark" id="Nel">Nel</h3>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">type</span> Nel<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span> <span class="token operator">=</span> Newtype<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">{</span> <span class="token keyword">readonly</span> Nel<span class="token operator">:</span> unique <span class="token builtin">symbol</span> <span class="token punctuation">}</span><span class="token operator">&gt;</span>
 </div></pre>
-  <p>
-    defined in
-    <a
-      href="https://github.com/fponticelli/tempo/blob/master/undefined/src/undefined#L23"
-      >undefined/src/undefined at line 23</a
-    >
-  </p>
-  <pre
-    class="import-code ts language-ts"
-  ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> Nel <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-undefined/lib/undefined'</span></div></pre>
-  <h2>values</h2>
-  <h3 class="is-family-monospace has-text-grey-dark" id="all">all</h3>
-  <pre
-    class="ts language-ts signature"
-  ><div><span class="token keyword">const</span> all<span class="token operator">:</span> <span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token function-variable function">predicate</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">v<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">boolean</span><span class="token punctuation">,</span> nel<span class="token operator">:</span> Nel<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">boolean</span></div></pre>
-  <p>
-    defined in
-    <a
-      href="https://github.com/fponticelli/tempo/blob/master/std/src/nel.ts#L63"
-      >std/src/nel.ts at line 63</a
-    >
-  </p>
-  <pre
-    class="import-code ts language-ts"
-  ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> all <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/nel.ts'</span></div></pre>
-  <h3 class="is-family-monospace has-text-grey-dark" id="any">any</h3>
-  <pre
-    class="ts language-ts signature"
-  ><div><span class="token keyword">const</span> <span class="token builtin">any</span><span class="token operator">:</span> <span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token function-variable function">predicate</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">v<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">boolean</span><span class="token punctuation">,</span> nel<span class="token operator">:</span> Nel<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">boolean</span></div></pre>
-  <p>
-    defined in
-    <a
-      href="https://github.com/fponticelli/tempo/blob/master/std/src/nel.ts#L66"
-      >std/src/nel.ts at line 66</a
-    >
-  </p>
-  <pre
-    class="import-code ts language-ts"
-  ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> <span class="token builtin">any</span> <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/nel.ts'</span></div></pre>
-  <h3 class="is-family-monospace has-text-grey-dark" id="concat">concat</h3>
-  <pre
-    class="ts language-ts signature"
-  ><div><span class="token keyword">const</span> concat<span class="token operator">:</span> <span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token parameter"><span class="token operator">...</span>nels<span class="token operator">:</span> Nel<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">[</span><span class="token punctuation">]</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Nel<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span></div></pre>
-  <p>
-    defined in
-    <a
-      href="https://github.com/fponticelli/tempo/blob/master/std/src/nel.ts#L72"
-      >std/src/nel.ts at line 72</a
-    >
-  </p>
-  <pre
-    class="import-code ts language-ts"
-  ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> concat <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/nel.ts'</span></div></pre>
-  <h3 class="is-family-monospace has-text-grey-dark" id="each">each</h3>
-  <pre
-    class="ts language-ts signature"
-  ><div><span class="token keyword">const</span> each<span class="token operator">:</span> <span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">v<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span><span class="token punctuation">,</span> nel<span class="token operator">:</span> Nel<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span></div></pre>
-  <p>
-    defined in
-    <a
-      href="https://github.com/fponticelli/tempo/blob/master/std/src/nel.ts#L69"
-      >std/src/nel.ts at line 69</a
-    >
-  </p>
-  <pre
-    class="import-code ts language-ts"
-  ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> each <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/nel.ts'</span></div></pre>
-  <h3 class="is-family-monospace has-text-grey-dark" id="equals">equals</h3>
-  <pre
-    class="ts language-ts signature"
-  ><div><span class="token keyword">const</span> equals<span class="token operator">:</span> <span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token function-variable function">predicate</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">,</span> b<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">boolean</span><span class="token punctuation">,</span> a<span class="token operator">:</span> Nel<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> b<span class="token operator">:</span> Nel<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">boolean</span></div></pre>
-  <p>
-    defined in
-    <a
-      href="https://github.com/fponticelli/tempo/blob/master/std/src/nel.ts#L51"
-      >std/src/nel.ts at line 51</a
-    >
-  </p>
-  <pre
-    class="import-code ts language-ts"
-  ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> equals <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/nel.ts'</span></div></pre>
-  <h3 class="is-family-monospace has-text-grey-dark" id="filter">filter</h3>
-  <pre
-    class="ts language-ts signature"
-  ><div><span class="token keyword">const</span> filter<span class="token operator">:</span> <span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token function-variable function">predicate</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">v<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">boolean</span><span class="token punctuation">,</span> nel<span class="token operator">:</span> Nel<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token punctuation">]</span></div></pre>
-  <p>
-    defined in
-    <a
-      href="https://github.com/fponticelli/tempo/blob/master/std/src/nel.ts#L54"
-      >std/src/nel.ts at line 54</a
-    >
-  </p>
-  <pre
-    class="import-code ts language-ts"
-  ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> filter <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/nel.ts'</span></div></pre>
-  <h3 class="is-family-monospace has-text-grey-dark" id="flatMap">flatMap</h3>
-  <pre
-    class="ts language-ts signature"
-  ><div><span class="token keyword">const</span> flatMap<span class="token operator">:</span> <span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token constant">A</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Nel<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> nel<span class="token operator">:</span> Nel<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Nel<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token operator">&gt;</span></div></pre>
-  <p>
-    defined in
-    <a
-      href="https://github.com/fponticelli/tempo/blob/master/std/src/nel.ts#L45"
-      >std/src/nel.ts at line 45</a
-    >
-  </p>
-  <pre
-    class="import-code ts language-ts"
-  ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> flatMap <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/nel.ts'</span></div></pre>
-  <h3 class="is-family-monospace has-text-grey-dark" id="flatten">flatten</h3>
-  <pre
-    class="ts language-ts signature"
-  ><div><span class="token keyword">const</span> flatten<span class="token operator">:</span> <span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token parameter">nel<span class="token operator">:</span> Nel<span class="token operator">&lt;</span>Nel<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Nel<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span></div></pre>
-  <p>
-    defined in
-    <a
-      href="https://github.com/fponticelli/tempo/blob/master/std/src/nel.ts#L57"
-      >std/src/nel.ts at line 57</a
-    >
-  </p>
-  <pre
-    class="import-code ts language-ts"
-  ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> flatten <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/nel.ts'</span></div></pre>
-  <h3 class="is-family-monospace has-text-grey-dark" id="foldLeft">foldLeft</h3>
-  <pre
-    class="ts language-ts signature"
-  ><div><span class="token keyword">const</span> foldLeft<span class="token operator">:</span> <span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">acc<span class="token operator">:</span> <span class="token constant">B</span><span class="token punctuation">,</span> curr<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">B</span><span class="token punctuation">,</span> nel<span class="token operator">:</span> Nel<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> b<span class="token operator">:</span> <span class="token constant">B</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">B</span></div></pre>
-  <p>
-    defined in
-    <a
-      href="https://github.com/fponticelli/tempo/blob/master/std/src/nel.ts#L60"
-      >std/src/nel.ts at line 60</a
-    >
-  </p>
-  <pre
-    class="import-code ts language-ts"
-  ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> foldLeft <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/nel.ts'</span></div></pre>
-  <h3 class="is-family-monospace has-text-grey-dark" id="head">head</h3>
-  <pre
-    class="ts language-ts signature"
-  ><div><span class="token keyword">const</span> head<span class="token operator">:</span> <span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token parameter">nel<span class="token operator">:</span> Nel<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">A</span></div></pre>
-  <p>
-    defined in
-    <a
-      href="https://github.com/fponticelli/tempo/blob/master/std/src/nel.ts#L48"
-      >std/src/nel.ts at line 48</a
-    >
-  </p>
-  <pre
-    class="import-code ts language-ts"
-  ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> head <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/nel.ts'</span></div></pre>
-  <h3 class="is-family-monospace has-text-grey-dark" id="isValid">isValid</h3>
-  <pre
-    class="ts language-ts signature"
-  ><div><span class="token keyword">const</span> isValid<span class="token operator">:</span> <span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token parameter">arr<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token punctuation">]</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">boolean</span></div></pre>
-  <p>
-    defined in
-    <a
-      href="https://github.com/fponticelli/tempo/blob/master/std/src/nel.ts#L34"
-      >std/src/nel.ts at line 34</a
-    >
-  </p>
-  <pre
-    class="import-code ts language-ts"
-  ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> isValid <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/nel.ts'</span></div></pre>
-  <h3 class="is-family-monospace has-text-grey-dark" id="length">length</h3>
-  <pre
-    class="ts language-ts signature"
-  ><div><span class="token keyword">const</span> length<span class="token operator">:</span> <span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token parameter">nel<span class="token operator">:</span> Nel<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">number</span></div></pre>
-  <p>
-    defined in
-    <a
-      href="https://github.com/fponticelli/tempo/blob/master/std/src/nel.ts#L40"
-      >std/src/nel.ts at line 40</a
-    >
-  </p>
-  <pre
-    class="import-code ts language-ts"
-  ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> length <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/nel.ts'</span></div></pre>
-  <h3 class="is-family-monospace has-text-grey-dark" id="map">map</h3>
-  <pre
-    class="ts language-ts signature"
-  ><div><span class="token keyword">const</span> map<span class="token operator">:</span> <span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token constant">A</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">B</span><span class="token punctuation">,</span> nel<span class="token operator">:</span> Nel<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Nel<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token operator">&gt;</span></div></pre>
-  <p>
-    defined in
-    <a
-      href="https://github.com/fponticelli/tempo/blob/master/std/src/nel.ts#L42"
-      >std/src/nel.ts at line 42</a
-    >
-  </p>
-  <pre
-    class="import-code ts language-ts"
-  ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> map <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/nel.ts'</span></div></pre>
-  <h3 class="is-family-monospace has-text-grey-dark" id="Nel">Nel</h3>
-  <pre
-    class="ts language-ts signature"
-  ><div><span class="token keyword">const</span> Nel<span class="token operator">:</span> <span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> NelTypeClass<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span></div></pre>
-  <p>
-    defined in
-    <a
-      href="https://github.com/fponticelli/tempo/blob/master/std/src/nel.ts#L32"
-      >std/src/nel.ts at line 32</a
-    >
-  </p>
-  <pre
-    class="import-code ts language-ts"
-  ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> Nel <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/nel.ts'</span></div></pre>
-  <h3 class="is-family-monospace has-text-grey-dark" id="ofValue">ofValue</h3>
-  <pre
-    class="ts language-ts signature"
-  ><div><span class="token keyword">const</span> ofValue<span class="token operator">:</span> <span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token parameter">value<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Nel<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span></div></pre>
-  <p>
-    defined in
-    <a
-      href="https://github.com/fponticelli/tempo/blob/master/std/src/nel.ts#L38"
-      >std/src/nel.ts at line 38</a
-    >
-  </p>
-  <pre
-    class="import-code ts language-ts"
-  ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> ofValue <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/nel.ts'</span></div></pre>
-  <h3 class="is-family-monospace has-text-grey-dark" id="sort">sort</h3>
-  <pre
-    class="ts language-ts signature"
-  ><div><span class="token keyword">const</span> sort<span class="token operator">:</span> <span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token function-variable function">compare</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token constant">A</span><span class="token punctuation">,</span> b<span class="token operator">:</span> <span class="token constant">A</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Ordering<span class="token punctuation">,</span> arr<span class="token operator">:</span> Nel<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Nel<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span></div></pre>
-  <p>
-    defined in
-    <a
-      href="https://github.com/fponticelli/tempo/blob/master/std/src/nel.ts#L75"
-      >std/src/nel.ts at line 75</a
-    >
-  </p>
-  <pre
-    class="import-code ts language-ts"
-  ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> sort <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/nel.ts'</span></div></pre>
-  <h3 class="is-family-monospace has-text-grey-dark" id="tail">tail</h3>
-  <pre
-    class="ts language-ts signature"
-  ><div><span class="token keyword">const</span> tail<span class="token operator">:</span> <span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token parameter">nel<span class="token operator">:</span> Nel<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">A</span><span class="token punctuation">[</span><span class="token punctuation">]</span></div></pre>
-  <p>
-    defined in
-    <a
-      href="https://github.com/fponticelli/tempo/blob/master/std/src/nel.ts#L49"
-      >std/src/nel.ts at line 49</a
-    >
-  </p>
-  <pre
-    class="import-code ts language-ts"
-  ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> tail <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/nel.ts'</span></div></pre>
-</article>
+<p class="defined-in">
+  defined in
+  <a href="https://github.com/fponticelli/tempo/blob/master/std/src/nel.ts#L23"
+    >std/src/nel.ts at line 23</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> Nel <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/nel.ts'</span></div></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="Nel">Nel</h3>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">const</span> Nel<span class="token operator">:</span> <span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> NelTypeClass<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span></div></pre>
+<p class="defined-in">
+  defined in
+  <a href="https://github.com/fponticelli/tempo/blob/master/std/src/nel.ts#L32"
+    >std/src/nel.ts at line 32</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> Nel <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/nel.ts'</span></div></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="all">all</h3>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">const</span> all<span class="token operator">:</span> <span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token function-variable function">predicate</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">v<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">boolean</span><span class="token punctuation">,</span> nel<span class="token operator">:</span> Nel<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">boolean</span></div></pre>
+<p class="defined-in">
+  defined in
+  <a href="https://github.com/fponticelli/tempo/blob/master/std/src/nel.ts#L63"
+    >std/src/nel.ts at line 63</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> all <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/nel.ts'</span></div></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="any">any</h3>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">const</span> <span class="token builtin">any</span><span class="token operator">:</span> <span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token function-variable function">predicate</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">v<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">boolean</span><span class="token punctuation">,</span> nel<span class="token operator">:</span> Nel<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">boolean</span></div></pre>
+<p class="defined-in">
+  defined in
+  <a href="https://github.com/fponticelli/tempo/blob/master/std/src/nel.ts#L66"
+    >std/src/nel.ts at line 66</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> <span class="token builtin">any</span> <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/nel.ts'</span></div></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="concat">concat</h3>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">const</span> concat<span class="token operator">:</span> <span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token parameter"><span class="token operator">...</span>nels<span class="token operator">:</span> Nel<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">[</span><span class="token punctuation">]</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Nel<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span></div></pre>
+<p class="defined-in">
+  defined in
+  <a href="https://github.com/fponticelli/tempo/blob/master/std/src/nel.ts#L72"
+    >std/src/nel.ts at line 72</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> concat <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/nel.ts'</span></div></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="each">each</h3>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">const</span> each<span class="token operator">:</span> <span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">v<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span><span class="token punctuation">,</span> nel<span class="token operator">:</span> Nel<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span></div></pre>
+<p class="defined-in">
+  defined in
+  <a href="https://github.com/fponticelli/tempo/blob/master/std/src/nel.ts#L69"
+    >std/src/nel.ts at line 69</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> each <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/nel.ts'</span></div></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="equals">equals</h3>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">const</span> equals<span class="token operator">:</span> <span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token function-variable function">predicate</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">,</span> b<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">boolean</span><span class="token punctuation">,</span> a<span class="token operator">:</span> Nel<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> b<span class="token operator">:</span> Nel<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">boolean</span></div></pre>
+<p class="defined-in">
+  defined in
+  <a href="https://github.com/fponticelli/tempo/blob/master/std/src/nel.ts#L51"
+    >std/src/nel.ts at line 51</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> equals <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/nel.ts'</span></div></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="filter">filter</h3>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">const</span> filter<span class="token operator">:</span> <span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token function-variable function">predicate</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">v<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">boolean</span><span class="token punctuation">,</span> nel<span class="token operator">:</span> Nel<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token punctuation">]</span></div></pre>
+<p class="defined-in">
+  defined in
+  <a href="https://github.com/fponticelli/tempo/blob/master/std/src/nel.ts#L54"
+    >std/src/nel.ts at line 54</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> filter <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/nel.ts'</span></div></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="flatMap">flatMap</h3>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">const</span> flatMap<span class="token operator">:</span> <span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token constant">A</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Nel<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> nel<span class="token operator">:</span> Nel<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Nel<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token operator">&gt;</span></div></pre>
+<p class="defined-in">
+  defined in
+  <a href="https://github.com/fponticelli/tempo/blob/master/std/src/nel.ts#L45"
+    >std/src/nel.ts at line 45</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> flatMap <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/nel.ts'</span></div></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="flatten">flatten</h3>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">const</span> flatten<span class="token operator">:</span> <span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token parameter">nel<span class="token operator">:</span> Nel<span class="token operator">&lt;</span>Nel<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Nel<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span></div></pre>
+<p class="defined-in">
+  defined in
+  <a href="https://github.com/fponticelli/tempo/blob/master/std/src/nel.ts#L57"
+    >std/src/nel.ts at line 57</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> flatten <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/nel.ts'</span></div></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="foldLeft">foldLeft</h3>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">const</span> foldLeft<span class="token operator">:</span> <span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">acc<span class="token operator">:</span> <span class="token constant">B</span><span class="token punctuation">,</span> curr<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">B</span><span class="token punctuation">,</span> nel<span class="token operator">:</span> Nel<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> b<span class="token operator">:</span> <span class="token constant">B</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">B</span></div></pre>
+<p class="defined-in">
+  defined in
+  <a href="https://github.com/fponticelli/tempo/blob/master/std/src/nel.ts#L60"
+    >std/src/nel.ts at line 60</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> foldLeft <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/nel.ts'</span></div></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="head">head</h3>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">const</span> head<span class="token operator">:</span> <span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token parameter">nel<span class="token operator">:</span> Nel<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">A</span></div></pre>
+<p class="defined-in">
+  defined in
+  <a href="https://github.com/fponticelli/tempo/blob/master/std/src/nel.ts#L48"
+    >std/src/nel.ts at line 48</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> head <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/nel.ts'</span></div></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="isValid">isValid</h3>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">const</span> isValid<span class="token operator">:</span> <span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token parameter">arr<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token punctuation">]</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">boolean</span></div></pre>
+<p class="defined-in">
+  defined in
+  <a href="https://github.com/fponticelli/tempo/blob/master/std/src/nel.ts#L34"
+    >std/src/nel.ts at line 34</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> isValid <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/nel.ts'</span></div></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="length">length</h3>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">const</span> length<span class="token operator">:</span> <span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token parameter">nel<span class="token operator">:</span> Nel<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">number</span></div></pre>
+<p class="defined-in">
+  defined in
+  <a href="https://github.com/fponticelli/tempo/blob/master/std/src/nel.ts#L40"
+    >std/src/nel.ts at line 40</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> length <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/nel.ts'</span></div></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="map">map</h3>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">const</span> map<span class="token operator">:</span> <span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token constant">A</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">B</span><span class="token punctuation">,</span> nel<span class="token operator">:</span> Nel<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Nel<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token operator">&gt;</span></div></pre>
+<p class="defined-in">
+  defined in
+  <a href="https://github.com/fponticelli/tempo/blob/master/std/src/nel.ts#L42"
+    >std/src/nel.ts at line 42</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> map <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/nel.ts'</span></div></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="ofValue">ofValue</h3>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">const</span> ofValue<span class="token operator">:</span> <span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token parameter">value<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Nel<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span></div></pre>
+<p class="defined-in">
+  defined in
+  <a href="https://github.com/fponticelli/tempo/blob/master/std/src/nel.ts#L38"
+    >std/src/nel.ts at line 38</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> ofValue <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/nel.ts'</span></div></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="sort">sort</h3>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">const</span> sort<span class="token operator">:</span> <span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token function-variable function">compare</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token constant">A</span><span class="token punctuation">,</span> b<span class="token operator">:</span> <span class="token constant">A</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Ordering<span class="token punctuation">,</span> arr<span class="token operator">:</span> Nel<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Nel<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span></div></pre>
+<p class="defined-in">
+  defined in
+  <a href="https://github.com/fponticelli/tempo/blob/master/std/src/nel.ts#L75"
+    >std/src/nel.ts at line 75</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> sort <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/nel.ts'</span></div></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="tail">tail</h3>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">const</span> tail<span class="token operator">:</span> <span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token parameter">nel<span class="token operator">:</span> Nel<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">A</span><span class="token punctuation">[</span><span class="token punctuation">]</span></div></pre>
+<p class="defined-in">
+  defined in
+  <a href="https://github.com/fponticelli/tempo/blob/master/std/src/nel.ts#L49"
+    >std/src/nel.ts at line 49</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> tail <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/nel.ts'</span></div></pre>

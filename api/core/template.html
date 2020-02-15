@@ -1,65 +1,62 @@
-<article>
-  <div class="is-pulled-right">
-    <a
-      href="https://github.com/fponticelli/tempo/edit/master/core/src/template.ts"
-      >✏️ edit this module</a
-    >
-  </div>
-  <h1>module 'template'</h1>
-  <div>
-    <p>
-      A <code>Template</code> is a declarative representation of a
-      <code>View</code>. The <code>Template</code> will be interpreted and
-      realized into a <code>View</code> by invoking the
-      <code>render</code> method.
-    </p>
-  </div>
-  <nav></nav>
-  <h2>types</h2>
-  <h3 class="is-family-monospace has-text-grey-dark" id="RenderMethod">
-    RenderMethod
-  </h3>
-  <div>
-    <p>Function signature for the <code>Template.render()</code> method.</p>
-  </div>
-  <pre
-    class="ts language-ts signature"
-  ><div><span class="token keyword">type</span> RenderMethod<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> Context<span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">(</span>
+<div class="top-right">
+  <a
+    href="https://github.com/fponticelli/tempo/edit/master/core/src/template.ts"
+    >✏️ edit this module</a
+  >
+</div>
+<h1>module 'template'</h1>
+<div>
+  <p>
+    A <code>Template</code> is a declarative representation of a
+    <code>View</code>. The <code>Template</code> will be interpreted and
+    realized into a <code>View</code> by invoking the
+    <code>render</code> method.
+  </p>
+</div>
+<nav></nav>
+<h3 class="is-family-monospace has-text-grey-dark" id="RenderMethod">
+  RenderMethod
+</h3>
+<div>
+  <p>Function signature for the <code>Template.render()</code> method.</p>
+</div>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">type</span> RenderMethod<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> Context<span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">(</span>
   <span class="token parameter">ctx<span class="token operator">:</span> Context<span class="token punctuation">,</span>
   state<span class="token operator">:</span> State</span>
 <span class="token punctuation">)</span> <span class="token operator">=&gt;</span> View<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
 </div></pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/core/src/template.ts#L28"
+    >core/src/template.ts at line 28</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> RenderMethod <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-core/lib/template.ts'</span></div></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="Template">Template</h3>
+<div>
   <p>
-    defined in
-    <a
-      href="https://github.com/fponticelli/tempo/blob/master/undefined/src/undefined#L28"
-      >undefined/src/undefined at line 28</a
-    >
+    An object representing a <code>Template</code> that can be rendered into a
+    <code>View</code>.
   </p>
-  <pre
-    class="import-code ts language-ts"
-  ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> RenderMethod <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-undefined/lib/undefined'</span></div></pre>
-  <h3 class="is-family-monospace has-text-grey-dark" id="Template">Template</h3>
-  <div>
-    <p>
-      An object representing a <code>Template</code> that can be rendered into a
-      <code>View</code>.
-    </p>
-  </div>
-  <pre
-    class="ts language-ts signature"
-  ><div><span class="token keyword">interface</span> <span class="token class-name">Template</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> Context<span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+</div>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">interface</span> <span class="token class-name">Template</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> Context<span class="token operator">&gt;</span> <span class="token punctuation">{</span>
   render<span class="token operator">:</span> RenderMethod<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> Context<span class="token operator">&gt;</span>
 <span class="token punctuation">}</span>
 </div></pre>
-  <p>
-    defined in
-    <a
-      href="https://github.com/fponticelli/tempo/blob/master/undefined/src/undefined#L21"
-      >undefined/src/undefined at line 21</a
-    >
-  </p>
-  <pre
-    class="import-code ts language-ts"
-  ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> Template <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-undefined/lib/undefined'</span></div></pre>
-</article>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/core/src/template.ts#L21"
+    >core/src/template.ts at line 21</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> Template <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-core/lib/template.ts'</span></div></pre>

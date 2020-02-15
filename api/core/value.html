@@ -1,59 +1,54 @@
-<article>
-  <div class="is-pulled-right">
-    <a href="https://github.com/fponticelli/tempo/edit/master/core/src/value.ts"
-      >✏️ edit this module</a
-    >
-  </div>
-  <h1>module 'value'</h1>
-  <div>
-    <p>
-      All attributes and DOM values in a Tempo app are described by either
-      literal values or values that are derived from the app current state.
-    </p>
-  </div>
-  <nav></nav>
-  <h2>types</h2>
-  <h3 class="is-family-monospace has-text-grey-dark" id="DerivedOrLiteralValue">
-    DerivedOrLiteralValue
-  </h3>
-  <div>
-    <p>A value that can be either a literal or derived from a state.</p>
-  </div>
-  <pre
-    class="ts language-ts signature"
-  ><div><span class="token keyword">type</span> DerivedOrLiteralValue<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Value<span class="token operator">&gt;</span> <span class="token operator">=</span> Value <span class="token operator">|</span> DerivedValue<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Value<span class="token operator">&gt;</span>
-</div></pre>
+<div class="top-right">
+  <a href="https://github.com/fponticelli/tempo/edit/master/core/src/value.ts"
+    >✏️ edit this module</a
+  >
+</div>
+<h1>module 'value'</h1>
+<div>
   <p>
-    defined in
-    <a
-      href="https://github.com/fponticelli/tempo/blob/master/undefined/src/undefined#L24"
-      >undefined/src/undefined at line 24</a
-    >
+    All attributes and DOM values in a Tempo app are described by either literal
+    values or values that are derived from the app current state.
   </p>
-  <pre
-    class="import-code ts language-ts"
-  ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> DerivedOrLiteralValue <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-undefined/lib/undefined'</span></div></pre>
-  <h3 class="is-family-monospace has-text-grey-dark" id="DerivedValue">
-    DerivedValue
-  </h3>
-  <div>
-    <p>
-      Describes a <code>Value</code> that can only be inferred from some other
-      value <code>State</code>.
-    </p>
-  </div>
-  <pre
-    class="ts language-ts signature"
-  ><div><span class="token keyword">type</span> DerivedValue<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Value<span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">state<span class="token operator">:</span> State</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Value <span class="token operator">|</span> <span class="token keyword">undefined</span>
+</div>
+<nav></nav>
+<h3 class="is-family-monospace has-text-grey-dark" id="DerivedOrLiteralValue">
+  DerivedOrLiteralValue
+</h3>
+<div><p>A value that can be either a literal or derived from a state.</p></div>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">type</span> DerivedOrLiteralValue<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Value<span class="token operator">&gt;</span> <span class="token operator">=</span> Value <span class="token operator">|</span> DerivedValue<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Value<span class="token operator">&gt;</span>
 </div></pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/core/src/value.ts#L24"
+    >core/src/value.ts at line 24</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> DerivedOrLiteralValue <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-core/lib/value.ts'</span></div></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="DerivedValue">
+  DerivedValue
+</h3>
+<div>
   <p>
-    defined in
-    <a
-      href="https://github.com/fponticelli/tempo/blob/master/undefined/src/undefined#L14"
-      >undefined/src/undefined at line 14</a
-    >
+    Describes a <code>Value</code> that can only be inferred from some other
+    value <code>State</code>.
   </p>
-  <pre
-    class="import-code ts language-ts"
-  ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> DerivedValue <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-undefined/lib/undefined'</span></div></pre>
-</article>
+</div>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">type</span> DerivedValue<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Value<span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">state<span class="token operator">:</span> State</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Value <span class="token operator">|</span> <span class="token keyword">undefined</span>
+</div></pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/core/src/value.ts#L14"
+    >core/src/value.ts at line 14</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> DerivedValue <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-core/lib/value.ts'</span></div></pre>

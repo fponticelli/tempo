@@ -1,58 +1,17 @@
-<article>
-  <div class="is-pulled-right">
-    <a
-      href="https://github.com/fponticelli/tempo/edit/master/paperjs/src/adapter.ts"
-      >✏️ edit this module</a
-    >
-  </div>
-  <h1>module 'adapter'</h1>
-  <nav></nav>
-  <h2>types</h2>
-  <h3 class="is-family-monospace has-text-grey-dark" id="PropagateArg">
-    PropagateArg
-  </h3>
-  <pre
-    class="ts language-ts signature"
-  ><div><span class="token keyword">interface</span> <span class="token class-name">PropagateArg</span><span class="token operator">&lt;</span>OuterState<span class="token punctuation">,</span> InnerState<span class="token punctuation">,</span> OuterAction<span class="token punctuation">,</span> InnerAction<span class="token operator">&gt;</span> <span class="token punctuation">{</span>
-  action<span class="token operator">:</span> InnerAction
-  innerState<span class="token operator">:</span> InnerState
-  outerState<span class="token operator">:</span> OuterState
-  <span class="token function-variable function">dispatchInner</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">action<span class="token operator">:</span> InnerAction</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
-  <span class="token function-variable function">dispatchOuter</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">action<span class="token operator">:</span> OuterAction</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
-<span class="token punctuation">}</span>
-</div></pre>
-  <p>
-    defined in
-    <a
-      href="https://github.com/fponticelli/tempo/blob/master/undefined/src/undefined#L82"
-      >undefined/src/undefined at line 82</a
-    >
-  </p>
-  <pre
-    class="import-code ts language-ts"
-  ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> PropagateArg <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-undefined/lib/undefined'</span></div></pre>
-  <h2>values</h2>
-  <h3 class="is-family-monospace has-text-grey-dark" id="adapter">adapter</h3>
-  <pre
-    class="ts language-ts signature"
-  ><div><span class="token keyword">const</span> adapter<span class="token operator">:</span> <span class="token operator">&lt;</span>OuterState<span class="token punctuation">,</span> InnerState<span class="token punctuation">,</span> OuterAction<span class="token punctuation">,</span> InnerAction<span class="token punctuation">,</span> Query <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>options<span class="token operator">:</span> <span class="token punctuation">{</span> mergeStates<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">outerState<span class="token operator">:</span> OuterState<span class="token punctuation">,</span> innerState<span class="token operator">:</span> InnerState</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> InnerState <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">)</span> <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span> propagate<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">args<span class="token operator">:</span> PropagateArg<span class="token operator">&lt;</span>OuterState<span class="token punctuation">,</span> InnerState<span class="token punctuation">,</span> OuterAction<span class="token punctuation">,</span> InnerAction<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span><span class="token punctuation">)</span> <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> child<span class="token operator">:</span> PaperComponentTemplate<span class="token operator">&lt;</span>InnerState<span class="token punctuation">,</span> InnerAction<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> PaperTemplate<span class="token operator">&lt;</span>OuterState<span class="token punctuation">,</span> OuterAction<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></div></pre>
-  <p>
-    defined in
-    <a
-      href="https://github.com/fponticelli/tempo/blob/master/paperjs/src/adapter.ts#L95"
-      >paperjs/src/adapter.ts at line 95</a
-    >
-  </p>
-  <pre
-    class="import-code ts language-ts"
-  ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> adapter <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-paperjs/lib/adapter.ts'</span></div></pre>
-  <h2>classes</h2>
-  <h3 class="is-family-monospace has-text-grey-dark" id="PaperAdapterTemplate">
-    PaperAdapterTemplate
-  </h3>
-  <pre
-    class="ts language-ts signature"
-  ><div><span class="token keyword">declare</span> <span class="token keyword">class</span> <span class="token class-name">PaperAdapterTemplate</span><span class="token operator">&lt;</span>
+<div class="top-right">
+  <a
+    href="https://github.com/fponticelli/tempo/edit/master/paperjs/src/adapter.ts"
+    >✏️ edit this module</a
+  >
+</div>
+<h1>module 'adapter'</h1>
+<nav></nav>
+<h3 class="is-family-monospace has-text-grey-dark" id="PaperAdapterTemplate">
+  PaperAdapterTemplate
+</h3>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">declare</span> <span class="token keyword">class</span> <span class="token class-name">PaperAdapterTemplate</span><span class="token operator">&lt;</span>
   OuterState<span class="token punctuation">,</span>
   InnerState<span class="token punctuation">,</span>
   OuterAction<span class="token punctuation">,</span>
@@ -83,14 +42,50 @@
   <span class="token punctuation">)</span><span class="token operator">:</span> View<span class="token operator">&lt;</span>OuterState<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
 <span class="token punctuation">}</span>
 </div></pre>
-  <p>
-    defined in
-    <a
-      href="https://github.com/fponticelli/tempo/blob/master/paperjs/src/adapter.ts#L19"
-      >paperjs/src/adapter.ts at line 19</a
-    >
-  </p>
-  <pre
-    class="import-code ts language-ts"
-  ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> PaperAdapterTemplate <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-paperjs/lib/adapter.ts'</span></div></pre>
-</article>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/paperjs/src/adapter.ts#L19"
+    >paperjs/src/adapter.ts at line 19</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> PaperAdapterTemplate <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-paperjs/lib/adapter.ts'</span></div></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="PropagateArg">
+  PropagateArg
+</h3>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">interface</span> <span class="token class-name">PropagateArg</span><span class="token operator">&lt;</span>OuterState<span class="token punctuation">,</span> InnerState<span class="token punctuation">,</span> OuterAction<span class="token punctuation">,</span> InnerAction<span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+  action<span class="token operator">:</span> InnerAction
+  innerState<span class="token operator">:</span> InnerState
+  outerState<span class="token operator">:</span> OuterState
+  <span class="token function-variable function">dispatchInner</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">action<span class="token operator">:</span> InnerAction</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+  <span class="token function-variable function">dispatchOuter</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">action<span class="token operator">:</span> OuterAction</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+<span class="token punctuation">}</span>
+</div></pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/paperjs/src/adapter.ts#L82"
+    >paperjs/src/adapter.ts at line 82</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> PropagateArg <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-paperjs/lib/adapter.ts'</span></div></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="adapter">adapter</h3>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">const</span> adapter<span class="token operator">:</span> <span class="token operator">&lt;</span>OuterState<span class="token punctuation">,</span> InnerState<span class="token punctuation">,</span> OuterAction<span class="token punctuation">,</span> InnerAction<span class="token punctuation">,</span> Query <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>options<span class="token operator">:</span> <span class="token punctuation">{</span> mergeStates<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">outerState<span class="token operator">:</span> OuterState<span class="token punctuation">,</span> innerState<span class="token operator">:</span> InnerState</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> InnerState <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">)</span> <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span> propagate<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">args<span class="token operator">:</span> PropagateArg<span class="token operator">&lt;</span>OuterState<span class="token punctuation">,</span> InnerState<span class="token punctuation">,</span> OuterAction<span class="token punctuation">,</span> InnerAction<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span><span class="token punctuation">)</span> <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> child<span class="token operator">:</span> PaperComponentTemplate<span class="token operator">&lt;</span>InnerState<span class="token punctuation">,</span> InnerAction<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> PaperTemplate<span class="token operator">&lt;</span>OuterState<span class="token punctuation">,</span> OuterAction<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></div></pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/paperjs/src/adapter.ts#L95"
+    >paperjs/src/adapter.ts at line 95</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> adapter <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-paperjs/lib/adapter.ts'</span></div></pre>

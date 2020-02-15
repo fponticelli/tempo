@@ -1,69 +1,62 @@
-<article>
-  <div class="is-pulled-right">
-    <a href="https://github.com/fponticelli/tempo/edit/master/dom/src/text.ts"
-      >✏️ edit this module</a
-    >
-  </div>
-  <h1>module 'text'</h1>
-  <nav></nav>
-  <h2>values</h2>
-  <h3 class="is-family-monospace has-text-grey-dark" id="text">text</h3>
-  <pre
-    class="ts language-ts signature"
-  ><div><span class="token keyword">const</span> text<span class="token operator">:</span> <span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token parameter">content<span class="token operator">:</span> DerivedOrLiteralValue<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> <span class="token builtin">string</span> <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> DOMTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></div></pre>
-  <p>
-    defined in
-    <a
-      href="https://github.com/fponticelli/tempo/blob/master/dom/src/text.ts#L63"
-      >dom/src/text.ts at line 63</a
-    >
-  </p>
-  <pre
-    class="import-code ts language-ts"
-  ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> text <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/text.ts'</span></div></pre>
-  <h2>classes</h2>
-  <h3 class="is-family-monospace has-text-grey-dark" id="DerivedTextTemplate">
-    DerivedTextTemplate
-  </h3>
-  <pre
-    class="ts language-ts signature"
-  ><div><span class="token keyword">declare</span> <span class="token keyword">class</span> <span class="token class-name">DerivedTextTemplate</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+<div class="top-right">
+  <a href="https://github.com/fponticelli/tempo/edit/master/dom/src/text.ts"
+    >✏️ edit this module</a
+  >
+</div>
+<h1>module 'text'</h1>
+<nav></nav>
+<h3 class="is-family-monospace has-text-grey-dark" id="DerivedTextTemplate">
+  DerivedTextTemplate
+</h3>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">declare</span> <span class="token keyword">class</span> <span class="token class-name">DerivedTextTemplate</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
   <span class="token keyword">implements</span> <span class="token class-name">DOMTemplate</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span> <span class="token punctuation">{</span>
   <span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="token keyword">readonly</span> makeContent<span class="token operator">:</span> DerivedValue<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> <span class="token builtin">string</span><span class="token operator">&gt;</span><span class="token punctuation">)</span>
   <span class="token keyword">readonly</span> makeContent<span class="token operator">:</span> DerivedValue<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> <span class="token builtin">string</span><span class="token operator">&gt;</span>
   <span class="token function">render</span><span class="token punctuation">(</span>ctx<span class="token operator">:</span> DOMContext<span class="token operator">&lt;</span>Action<span class="token operator">&gt;</span><span class="token punctuation">,</span> state<span class="token operator">:</span> State<span class="token punctuation">)</span><span class="token operator">:</span> View<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
 <span class="token punctuation">}</span>
 </div></pre>
-  <p>
-    defined in
-    <a
-      href="https://github.com/fponticelli/tempo/blob/master/dom/src/text.ts#L21"
-      >dom/src/text.ts at line 21</a
-    >
-  </p>
-  <pre
-    class="import-code ts language-ts"
-  ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> DerivedTextTemplate <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/text.ts'</span></div></pre>
-  <h3 class="is-family-monospace has-text-grey-dark" id="LiteralTextTemplate">
-    LiteralTextTemplate
-  </h3>
-  <pre
-    class="ts language-ts signature"
-  ><div><span class="token keyword">declare</span> <span class="token keyword">class</span> <span class="token class-name">LiteralTextTemplate</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+<p class="defined-in">
+  defined in
+  <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/text.ts#L21"
+    >dom/src/text.ts at line 21</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> DerivedTextTemplate <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/text.ts'</span></div></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="LiteralTextTemplate">
+  LiteralTextTemplate
+</h3>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">declare</span> <span class="token keyword">class</span> <span class="token class-name">LiteralTextTemplate</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
   <span class="token keyword">implements</span> <span class="token class-name">DOMTemplate</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span> <span class="token punctuation">{</span>
   <span class="token keyword">constructor</span><span class="token punctuation">(</span>content<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">)</span>
   <span class="token keyword">readonly</span> content<span class="token operator">:</span> <span class="token builtin">string</span>
   <span class="token function">render</span><span class="token punctuation">(</span>ctx<span class="token operator">:</span> DOMContext<span class="token operator">&lt;</span>Action<span class="token operator">&gt;</span><span class="token punctuation">,</span> _<span class="token operator">:</span> State<span class="token punctuation">)</span><span class="token operator">:</span> View<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
 <span class="token punctuation">}</span>
 </div></pre>
-  <p>
-    defined in
-    <a
-      href="https://github.com/fponticelli/tempo/blob/master/dom/src/text.ts#L46"
-      >dom/src/text.ts at line 46</a
-    >
-  </p>
-  <pre
-    class="import-code ts language-ts"
-  ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> LiteralTextTemplate <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/text.ts'</span></div></pre>
-</article>
+<p class="defined-in">
+  defined in
+  <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/text.ts#L46"
+    >dom/src/text.ts at line 46</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> LiteralTextTemplate <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/text.ts'</span></div></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="text">text</h3>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">const</span> text<span class="token operator">:</span> <span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token parameter">content<span class="token operator">:</span> DerivedOrLiteralValue<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> <span class="token builtin">string</span> <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> DOMTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></div></pre>
+<p class="defined-in">
+  defined in
+  <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/text.ts#L63"
+    >dom/src/text.ts at line 63</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> text <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/text.ts'</span></div></pre>

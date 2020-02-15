@@ -1,16 +1,14 @@
-<article>
-  <div class="is-pulled-right">
-    <a
-      href="https://github.com/fponticelli/tempo/edit/master/std/src/newtype.ts"
-      >✏️ edit this module</a
-    >
-  </div>
-  <h1>module 'newtype'</h1>
-  <div>
-    <p>Usage:</p>
-    <pre
-      class="language-ts"
-    ><code class="ts language-ts"><span class="token keyword">export</span> <span class="token keyword">interface</span> <span class="token class-name">Int</span> <span class="token keyword">extends</span> <span class="token class-name">Newtype</span><span class="token operator">&lt;</span>
+<div class="top-right">
+  <a href="https://github.com/fponticelli/tempo/edit/master/std/src/newtype.ts"
+    >✏️ edit this module</a
+  >
+</div>
+<h1>module 'newtype'</h1>
+<div>
+  <p>Usage:</p>
+  <pre
+    class="language-ts"
+  ><code class="ts language-ts"><span class="token keyword">export</span> <span class="token keyword">interface</span> <span class="token class-name">Int</span> <span class="token keyword">extends</span> <span class="token class-name">Newtype</span><span class="token operator">&lt;</span>
   <span class="token builtin">number</span><span class="token punctuation">,</span>
   <span class="token punctuation">{</span> <span class="token keyword">readonly</span> Int<span class="token operator">:</span> unique <span class="token builtin">symbol</span> <span class="token punctuation">}</span>
 <span class="token operator">&gt;</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
@@ -19,49 +17,32 @@
   <span class="token function">isValid</span><span class="token punctuation">(</span><span class="token parameter">v<span class="token operator">:</span> <span class="token builtin">number</span></span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> Number<span class="token punctuation">.</span><span class="token function">isInteger</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span> <span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 </code></pre>
-  </div>
-  <nav></nav>
-  <h2>types</h2>
-  <h3 class="is-family-monospace has-text-grey-dark" id="Newtype">Newtype</h3>
-  <pre
-    class="ts language-ts signature"
-  ><div><span class="token keyword">interface</span> <span class="token class-name">Newtype</span><span class="token operator">&lt;</span><span class="token constant">V</span><span class="token punctuation">,</span> <span class="token constant">S</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+</div>
+<nav></nav>
+<h3 class="is-family-monospace has-text-grey-dark" id="Newtype">Newtype</h3>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">interface</span> <span class="token class-name">Newtype</span><span class="token operator">&lt;</span><span class="token constant">V</span><span class="token punctuation">,</span> <span class="token constant">S</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
   <span class="token keyword">readonly</span> _T<span class="token operator">:</span> <span class="token constant">V</span>
   <span class="token keyword">readonly</span> _S<span class="token operator">:</span> <span class="token constant">S</span>
 <span class="token punctuation">}</span>
 </div></pre>
-  <p>
-    defined in
-    <a
-      href="https://github.com/fponticelli/tempo/blob/master/undefined/src/undefined#L34"
-      >undefined/src/undefined at line 34</a
-    >
-  </p>
-  <pre
-    class="import-code ts language-ts"
-  ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> Newtype <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-undefined/lib/undefined'</span></div></pre>
-  <h3 class="is-family-monospace has-text-grey-dark" id="TypeOfN">TypeOfN</h3>
-  <pre
-    class="ts language-ts signature"
-  ><div><span class="token keyword">type</span> TypeOfN<span class="token operator">&lt;</span><span class="token constant">T</span> <span class="token keyword">extends</span> <span class="token class-name">Newtype</span><span class="token operator">&lt;</span><span class="token builtin">unknown</span><span class="token punctuation">,</span> <span class="token builtin">unknown</span><span class="token operator">&gt;&gt;</span> <span class="token operator">=</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token string">'_T'</span><span class="token punctuation">]</span>
-</div></pre>
-  <p>
-    defined in
-    <a
-      href="https://github.com/fponticelli/tempo/blob/master/undefined/src/undefined#L32"
-      >undefined/src/undefined at line 32</a
-    >
-  </p>
-  <pre
-    class="import-code ts language-ts"
-  ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> TypeOfN <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-undefined/lib/undefined'</span></div></pre>
-  <h2>classes</h2>
-  <h3 class="is-family-monospace has-text-grey-dark" id="NewtypeClass">
-    NewtypeClass
-  </h3>
-  <pre
-    class="ts language-ts signature"
-  ><div><span class="token keyword">declare</span> <span class="token keyword">abstract</span> <span class="token keyword">class</span> <span class="token class-name">NewtypeClass</span><span class="token operator">&lt;</span><span class="token constant">T</span> <span class="token keyword">extends</span> <span class="token class-name">Newtype</span><span class="token operator">&lt;</span><span class="token builtin">any</span><span class="token punctuation">,</span> <span class="token builtin">any</span><span class="token operator">&gt;&gt;</span> <span class="token punctuation">{</span>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/newtype.ts#L34"
+    >std/src/newtype.ts at line 34</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> Newtype <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/newtype.ts'</span></div></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="NewtypeClass">
+  NewtypeClass
+</h3>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">declare</span> <span class="token keyword">abstract</span> <span class="token keyword">class</span> <span class="token class-name">NewtypeClass</span><span class="token operator">&lt;</span><span class="token constant">T</span> <span class="token keyword">extends</span> <span class="token class-name">Newtype</span><span class="token operator">&lt;</span><span class="token builtin">any</span><span class="token punctuation">,</span> <span class="token builtin">any</span><span class="token operator">&gt;&gt;</span> <span class="token punctuation">{</span>
   <span class="token keyword">abstract</span> <span class="token function">isValid</span><span class="token punctuation">(</span>v<span class="token operator">:</span> TypeOfN<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span>
   <span class="token function">unsafeOf</span><span class="token punctuation">(</span>v<span class="token operator">:</span> TypeOfN<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token constant">T</span>
   <span class="token keyword">of</span><span class="token punctuation">(</span>v<span class="token operator">:</span> TypeOfN<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span>
@@ -72,14 +53,28 @@
   <span class="token function">unsafeModify</span><span class="token punctuation">(</span><span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">v<span class="token operator">:</span> TypeOfN<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> TypeOfN<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">value<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">T</span>
 <span class="token punctuation">}</span>
 </div></pre>
-  <p>
-    defined in
-    <a
-      href="https://github.com/fponticelli/tempo/blob/master/std/src/newtype.ts#L39"
-      >std/src/newtype.ts at line 39</a
-    >
-  </p>
-  <pre
-    class="import-code ts language-ts"
-  ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> NewtypeClass <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/newtype.ts'</span></div></pre>
-</article>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/newtype.ts#L39"
+    >std/src/newtype.ts at line 39</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> NewtypeClass <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/newtype.ts'</span></div></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="TypeOfN">TypeOfN</h3>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">type</span> TypeOfN<span class="token operator">&lt;</span><span class="token constant">T</span> <span class="token keyword">extends</span> <span class="token class-name">Newtype</span><span class="token operator">&lt;</span><span class="token builtin">unknown</span><span class="token punctuation">,</span> <span class="token builtin">unknown</span><span class="token operator">&gt;&gt;</span> <span class="token operator">=</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token string">'_T'</span><span class="token punctuation">]</span>
+</div></pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/newtype.ts#L32"
+    >std/src/newtype.ts at line 32</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> TypeOfN <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/newtype.ts'</span></div></pre>

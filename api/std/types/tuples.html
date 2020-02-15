@@ -1,224 +1,217 @@
-<article>
-  <div class="is-pulled-right">
-    <a
-      href="https://github.com/fponticelli/tempo/edit/master/std/src/types/tuples.ts"
-      >✏️ edit this module</a
-    >
-  </div>
-  <h1>module 'types/tuples'</h1>
-  <nav>
-    <p class="title is-6">Table of Contents</p>
-    <ul class="module-toc-list">
-      <li>
-        <a class="is-family-monospace" href="#/api/std/types/tuples.html#DropN"
-          >DropN</a
-        >
-      </li>
-      <li>
-        <a class="is-family-monospace" href="#/api/std/types/tuples.html#Head"
-          >Head</a
-        >
-      </li>
-      <li>
-        <a class="is-family-monospace" href="#/api/std/types/tuples.html#Last"
-          >Last</a
-        >
-      </li>
-      <li>
-        <a class="is-family-monospace" href="#/api/std/types/tuples.html#Length"
-          >Length</a
-        >
-      </li>
-      <li>
-        <a
-          class="is-family-monospace"
-          href="#/api/std/types/tuples.html#LoseLastImpl"
-          >LoseLastImpl</a
-        >
-      </li>
-      <li>
-        <a
-          class="is-family-monospace"
-          href="#/api/std/types/tuples.html#Prepend"
-          >Prepend</a
-        >
-      </li>
-      <li>
-        <a
-          class="is-family-monospace"
-          href="#/api/std/types/tuples.html#Reverse"
-          >Reverse</a
-        >
-      </li>
-      <li>
-        <a class="is-family-monospace" href="#/api/std/types/tuples.html#Tail"
-          >Tail</a
-        >
-      </li>
-      <li>
-        <a
-          class="is-family-monospace"
-          href="#/api/std/types/tuples.html#TupleToUnion"
-          >TupleToUnion</a
-        >
-      </li>
-    </ul>
-  </nav>
-  <h2>types</h2>
-  <h3 class="is-family-monospace has-text-grey-dark" id="DropN">DropN</h3>
-  <pre
-    class="ts language-ts signature"
-  ><div><span class="token keyword">type</span> DropN<span class="token operator">&lt;</span><span class="token constant">N</span> <span class="token keyword">extends</span> <span class="token class-name">number</span><span class="token punctuation">,</span> <span class="token constant">T</span> <span class="token keyword">extends</span> <span class="token class-name">any</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">&gt;</span> <span class="token operator">=</span> DropNImpl<span class="token operator">&lt;</span><span class="token constant">N</span><span class="token punctuation">,</span> <span class="token constant">T</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">&gt;</span>
+<div class="top-right">
+  <a
+    href="https://github.com/fponticelli/tempo/edit/master/std/src/types/tuples.ts"
+    >✏️ edit this module</a
+  >
+</div>
+<h1>module 'types/tuples'</h1>
+<nav>
+  <p class="title is-6">Table of Contents</p>
+  <ul class="module-toc-list">
+    <li>
+      <a class="is-family-monospace" href="#/api/std/types/tuples.html#DropN"
+        >DropN</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/std/types/tuples.html#Head"
+        >Head</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/std/types/tuples.html#Last"
+        >Last</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/std/types/tuples.html#Length"
+        >Length</a
+      >
+    </li>
+    <li>
+      <a
+        class="is-family-monospace"
+        href="#/api/std/types/tuples.html#LoseLastImpl"
+        >LoseLastImpl</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/std/types/tuples.html#Prepend"
+        >Prepend</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/std/types/tuples.html#Reverse"
+        >Reverse</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/std/types/tuples.html#Tail"
+        >Tail</a
+      >
+    </li>
+    <li>
+      <a
+        class="is-family-monospace"
+        href="#/api/std/types/tuples.html#TupleToUnion"
+        >TupleToUnion</a
+      >
+    </li>
+  </ul>
+</nav>
+<h3 class="is-family-monospace has-text-grey-dark" id="DropN">DropN</h3>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">type</span> DropN<span class="token operator">&lt;</span><span class="token constant">N</span> <span class="token keyword">extends</span> <span class="token class-name">number</span><span class="token punctuation">,</span> <span class="token constant">T</span> <span class="token keyword">extends</span> <span class="token class-name">any</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">&gt;</span> <span class="token operator">=</span> DropNImpl<span class="token operator">&lt;</span><span class="token constant">N</span><span class="token punctuation">,</span> <span class="token constant">T</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">&gt;</span>
 </div></pre>
-  <p>
-    defined in
-    <a
-      href="https://github.com/fponticelli/tempo/blob/master/undefined/src/undefined#L32"
-      >undefined/src/undefined at line 32</a
-    >
-  </p>
-  <pre
-    class="import-code ts language-ts"
-  ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> DropN <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-undefined/lib/undefined'</span></div></pre>
-  <h3 class="is-family-monospace has-text-grey-dark" id="Head">Head</h3>
-  <pre
-    class="ts language-ts signature"
-  ><div><span class="token keyword">type</span> Head<span class="token operator">&lt;</span><span class="token constant">T</span> <span class="token keyword">extends</span> <span class="token class-name">any</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token constant">T</span> <span class="token keyword">extends</span> <span class="token punctuation">[</span>infer <span class="token constant">H</span><span class="token punctuation">,</span> <span class="token operator">...</span><span class="token builtin">any</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">]</span> <span class="token operator">?</span> <span class="token constant">H</span> <span class="token operator">:</span> <span class="token builtin">never</span>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/types/tuples.ts#L32"
+    >std/src/types/tuples.ts at line 32</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> DropN <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/types/tuples.ts'</span></div></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="Head">Head</h3>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">type</span> Head<span class="token operator">&lt;</span><span class="token constant">T</span> <span class="token keyword">extends</span> <span class="token class-name">any</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token constant">T</span> <span class="token keyword">extends</span> <span class="token punctuation">[</span>infer <span class="token constant">H</span><span class="token punctuation">,</span> <span class="token operator">...</span><span class="token builtin">any</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">]</span> <span class="token operator">?</span> <span class="token constant">H</span> <span class="token operator">:</span> <span class="token builtin">never</span>
 </div></pre>
-  <p>
-    defined in
-    <a
-      href="https://github.com/fponticelli/tempo/blob/master/undefined/src/undefined#L41"
-      >undefined/src/undefined at line 41</a
-    >
-  </p>
-  <pre
-    class="import-code ts language-ts"
-  ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> Head <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-undefined/lib/undefined'</span></div></pre>
-  <h3 class="is-family-monospace has-text-grey-dark" id="Last">Last</h3>
-  <pre
-    class="ts language-ts signature"
-  ><div><span class="token keyword">type</span> Last<span class="token operator">&lt;</span><span class="token constant">T</span> <span class="token keyword">extends</span> <span class="token class-name">any</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/types/tuples.ts#L41"
+    >std/src/types/tuples.ts at line 41</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> Head <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/types/tuples.ts'</span></div></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="Last">Last</h3>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">type</span> Last<span class="token operator">&lt;</span><span class="token constant">T</span> <span class="token keyword">extends</span> <span class="token class-name">any</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
   n<span class="token operator">:</span> Last<span class="token operator">&lt;</span>Tail<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;&gt;</span>
   one<span class="token operator">:</span> <span class="token constant">T</span> <span class="token keyword">extends</span> <span class="token punctuation">[</span>infer <span class="token constant">H</span><span class="token punctuation">]</span> <span class="token operator">?</span> <span class="token constant">H</span> <span class="token operator">:</span> <span class="token builtin">never</span>
   empty<span class="token operator">:</span> <span class="token builtin">never</span>
 <span class="token punctuation">}</span><span class="token punctuation">[</span><span class="token constant">T</span> <span class="token keyword">extends</span> <span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">?</span> <span class="token string">'empty'</span> <span class="token operator">:</span> <span class="token constant">T</span> <span class="token keyword">extends</span> <span class="token punctuation">[</span><span class="token builtin">any</span><span class="token punctuation">]</span> <span class="token operator">?</span> <span class="token string">'one'</span> <span class="token operator">:</span> <span class="token string">'n'</span><span class="token punctuation">]</span>
 </div></pre>
-  <p>
-    defined in
-    <a
-      href="https://github.com/fponticelli/tempo/blob/master/undefined/src/undefined#L43"
-      >undefined/src/undefined at line 43</a
-    >
-  </p>
-  <pre
-    class="import-code ts language-ts"
-  ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> Last <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-undefined/lib/undefined'</span></div></pre>
-  <h3 class="is-family-monospace has-text-grey-dark" id="Length">Length</h3>
-  <pre
-    class="ts language-ts signature"
-  ><div><span class="token keyword">type</span> Length<span class="token operator">&lt;</span><span class="token constant">T</span> <span class="token keyword">extends</span> <span class="token class-name">any</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token string">'length'</span><span class="token punctuation">]</span>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/types/tuples.ts#L43"
+    >std/src/types/tuples.ts at line 43</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> Last <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/types/tuples.ts'</span></div></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="Length">Length</h3>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">type</span> Length<span class="token operator">&lt;</span><span class="token constant">T</span> <span class="token keyword">extends</span> <span class="token class-name">any</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token string">'length'</span><span class="token punctuation">]</span>
 </div></pre>
-  <p>
-    defined in
-    <a
-      href="https://github.com/fponticelli/tempo/blob/master/undefined/src/undefined#L58"
-      >undefined/src/undefined at line 58</a
-    >
-  </p>
-  <pre
-    class="import-code ts language-ts"
-  ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> Length <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-undefined/lib/undefined'</span></div></pre>
-  <h3 class="is-family-monospace has-text-grey-dark" id="LoseLastImpl">
-    LoseLastImpl
-  </h3>
-  <pre
-    class="ts language-ts signature"
-  ><div><span class="token keyword">type</span> LoseLastImpl<span class="token operator">&lt;</span><span class="token constant">A</span> <span class="token keyword">extends</span> <span class="token class-name">any</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token constant">B</span> <span class="token keyword">extends</span> <span class="token class-name">any</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/types/tuples.ts#L58"
+    >std/src/types/tuples.ts at line 58</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> Length <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/types/tuples.ts'</span></div></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="LoseLastImpl">
+  LoseLastImpl
+</h3>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">type</span> LoseLastImpl<span class="token operator">&lt;</span><span class="token constant">A</span> <span class="token keyword">extends</span> <span class="token class-name">any</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token constant">B</span> <span class="token keyword">extends</span> <span class="token class-name">any</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
   empty<span class="token operator">:</span> <span class="token constant">A</span>
   next<span class="token operator">:</span> LoseLastImpl<span class="token operator">&lt;</span>Prepend<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> Tail<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token operator">&gt;&gt;</span>
 <span class="token punctuation">}</span><span class="token punctuation">[</span><span class="token constant">B</span> <span class="token keyword">extends</span> <span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">?</span> <span class="token string">'empty'</span> <span class="token operator">:</span> <span class="token constant">B</span> <span class="token keyword">extends</span> <span class="token punctuation">[</span><span class="token builtin">any</span><span class="token punctuation">]</span> <span class="token operator">?</span> <span class="token string">'empty'</span> <span class="token operator">:</span> <span class="token string">'next'</span><span class="token punctuation">]</span>
 </div></pre>
-  <p>
-    defined in
-    <a
-      href="https://github.com/fponticelli/tempo/blob/master/undefined/src/undefined#L67"
-      >undefined/src/undefined at line 67</a
-    >
-  </p>
-  <pre
-    class="import-code ts language-ts"
-  ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> LoseLastImpl <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-undefined/lib/undefined'</span></div></pre>
-  <h3 class="is-family-monospace has-text-grey-dark" id="Prepend">Prepend</h3>
-  <pre
-    class="ts language-ts signature"
-  ><div><span class="token keyword">type</span> Prepend<span class="token operator">&lt;</span>Insert<span class="token punctuation">,</span> Tail <span class="token keyword">extends</span> <span class="token class-name">any</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/types/tuples.ts#L67"
+    >std/src/types/tuples.ts at line 67</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> LoseLastImpl <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/types/tuples.ts'</span></div></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="Prepend">Prepend</h3>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">type</span> Prepend<span class="token operator">&lt;</span>Insert<span class="token punctuation">,</span> Tail <span class="token keyword">extends</span> <span class="token class-name">any</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>
   <span class="token parameter">i<span class="token operator">:</span> Insert<span class="token punctuation">,</span>
   <span class="token operator">...</span>tail<span class="token operator">:</span> Tail</span>
 <span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span><span class="token punctuation">)</span> <span class="token keyword">extends</span> <span class="token punctuation">(</span><span class="token parameter"><span class="token operator">...</span>tuple<span class="token operator">:</span> infer Tuple</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
   <span class="token operator">?</span> Tuple
   <span class="token operator">:</span> <span class="token builtin">never</span>
 </div></pre>
-  <p>
-    defined in
-    <a
-      href="https://github.com/fponticelli/tempo/blob/master/undefined/src/undefined#L51"
-      >undefined/src/undefined at line 51</a
-    >
-  </p>
-  <pre
-    class="import-code ts language-ts"
-  ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> Prepend <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-undefined/lib/undefined'</span></div></pre>
-  <h3 class="is-family-monospace has-text-grey-dark" id="Reverse">Reverse</h3>
-  <pre
-    class="ts language-ts signature"
-  ><div><span class="token keyword">type</span> Reverse<span class="token operator">&lt;</span><span class="token constant">T</span> <span class="token keyword">extends</span> <span class="token class-name">any</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">&gt;</span> <span class="token operator">=</span> ReverseImpl<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">&gt;</span>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/types/tuples.ts#L51"
+    >std/src/types/tuples.ts at line 51</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> Prepend <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/types/tuples.ts'</span></div></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="Reverse">Reverse</h3>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">type</span> Reverse<span class="token operator">&lt;</span><span class="token constant">T</span> <span class="token keyword">extends</span> <span class="token class-name">any</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">&gt;</span> <span class="token operator">=</span> ReverseImpl<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">&gt;</span>
 </div></pre>
-  <p>
-    defined in
-    <a
-      href="https://github.com/fponticelli/tempo/blob/master/undefined/src/undefined#L39"
-      >undefined/src/undefined at line 39</a
-    >
-  </p>
-  <pre
-    class="import-code ts language-ts"
-  ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> Reverse <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-undefined/lib/undefined'</span></div></pre>
-  <h3 class="is-family-monospace has-text-grey-dark" id="Tail">Tail</h3>
-  <pre
-    class="ts language-ts signature"
-  ><div><span class="token keyword">type</span> Tail<span class="token operator">&lt;</span><span class="token constant">T</span> <span class="token keyword">extends</span> <span class="token class-name">any</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter"><span class="token operator">...</span>args<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span><span class="token punctuation">)</span> <span class="token keyword">extends</span> <span class="token punctuation">(</span>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/types/tuples.ts#L39"
+    >std/src/types/tuples.ts at line 39</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> Reverse <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/types/tuples.ts'</span></div></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="Tail">Tail</h3>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">type</span> Tail<span class="token operator">&lt;</span><span class="token constant">T</span> <span class="token keyword">extends</span> <span class="token class-name">any</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter"><span class="token operator">...</span>args<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span><span class="token punctuation">)</span> <span class="token keyword">extends</span> <span class="token punctuation">(</span>
   <span class="token parameter">_<span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">,</span>
   <span class="token operator">...</span>rest<span class="token operator">:</span> infer Rest</span>
 <span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
   <span class="token operator">?</span> Rest
   <span class="token operator">:</span> <span class="token builtin">never</span>
 </div></pre>
-  <p>
-    defined in
-    <a
-      href="https://github.com/fponticelli/tempo/blob/master/undefined/src/undefined#L20"
-      >undefined/src/undefined at line 20</a
-    >
-  </p>
-  <pre
-    class="import-code ts language-ts"
-  ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> Tail <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-undefined/lib/undefined'</span></div></pre>
-  <h3 class="is-family-monospace has-text-grey-dark" id="TupleToUnion">
-    TupleToUnion
-  </h3>
-  <pre
-    class="ts language-ts signature"
-  ><div><span class="token keyword">type</span> TupleToUnion<span class="token operator">&lt;</span><span class="token constant">T</span> <span class="token keyword">extends</span> <span class="token class-name">any</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token builtin">number</span><span class="token punctuation">]</span>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/types/tuples.ts#L20"
+    >std/src/types/tuples.ts at line 20</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> Tail <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/types/tuples.ts'</span></div></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="TupleToUnion">
+  TupleToUnion
+</h3>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">type</span> TupleToUnion<span class="token operator">&lt;</span><span class="token constant">T</span> <span class="token keyword">extends</span> <span class="token class-name">any</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token builtin">number</span><span class="token punctuation">]</span>
 </div></pre>
-  <p>
-    defined in
-    <a
-      href="https://github.com/fponticelli/tempo/blob/master/undefined/src/undefined#L49"
-      >undefined/src/undefined at line 49</a
-    >
-  </p>
-  <pre
-    class="import-code ts language-ts"
-  ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> TupleToUnion <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-undefined/lib/undefined'</span></div></pre>
-</article>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/types/tuples.ts#L49"
+    >std/src/types/tuples.ts at line 49</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> TupleToUnion <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/types/tuples.ts'</span></div></pre>
