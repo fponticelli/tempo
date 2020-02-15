@@ -24,8 +24,8 @@ export interface Module extends BaseDoc {
 const moduleDocOfSource = (source: SourceFile) => {
   const comments =
     flatMap(
-      s => s.getLeadingCommentRanges().map(c => c.getText()),
-      source.getStatements()
+      source.getStatements(),
+      s => s.getLeadingCommentRanges().map(c => c.getText())
     )
     .filter(c => c.indexOf('Copyright 2019 Google') < 0)
   return docOfContent(comments[0] ?? '')
