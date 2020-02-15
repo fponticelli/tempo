@@ -34,7 +34,7 @@ export function loading<T, E, P = unknown>(progress: P): AsyncResult<T, E, P> {
   return { kind: 'Loading', progress }
 }
 
-export function forEach<A, Err>(f: (a: A) => void, result: AsyncResult<A, Err>): void {
+export function forEach<A, Err>(result: AsyncResult<A, Err>, f: (a: A) => void): void {
   switch (result.kind) {
     case 'Loading':
     case 'NotAsked':
@@ -44,37 +44,56 @@ export function forEach<A, Err>(f: (a: A) => void, result: AsyncResult<A, Err>):
   }
 }
 
-export function map<A, B, Err, Prog>(f: (a: A) => B, async: AsyncResult<A, Err, Prog>): AsyncResult<B, Err, Prog> {
-  return mapA(r => mapR(f, r), async)
+export function map<A, B, Err, Prog>(async: AsyncResult<A, Err, Prog>, f: (a: A) => B): AsyncResult<B, Err, Prog> {
+  return mapA(async, r => mapR(f, r))
 }
 
 export function mapN<A, B, C, Err, Prog>(
-  f: Fun2<A, B, C>,
-  a: AsyncResult<A, Err, Prog>, b: AsyncResult<B, Err, Prog>): AsyncResult<C, Err, Prog>
+  a: AsyncResult<A, Err, Prog>,
+  b: AsyncResult<B, Err, Prog>,
+  f: Fun2<A, B, C>
+): AsyncResult<C, Err, Prog>
 export function mapN<A, B, C, D, Err, Prog>(
-  f: Fun3<A, B, C, D>,
-  a: AsyncResult<A, Err, Prog>, b: AsyncResult<B, Err, Prog>, c: AsyncResult<C, Err, Prog>): AsyncResult<D, Err, Prog>
+  a: AsyncResult<A, Err, Prog>,
+  b: AsyncResult<B, Err, Prog>,
+  c: AsyncResult<C, Err, Prog>,
+  f: Fun3<A, B, C, D>
+): AsyncResult<D, Err, Prog>
 export function mapN<A, B, C, D, E, Err, Prog>(
-  f: Fun4<A, B, C, D, E>,
-  a: AsyncResult<A, Err, Prog>, b: AsyncResult<B, Err, Prog>, c: AsyncResult<C, Err, Prog>,
-  d: AsyncResult<D, Err, Prog>): AsyncResult<E, Err, Prog>
+  a: AsyncResult<A, Err, Prog>,
+  b: AsyncResult<B, Err, Prog>,
+  c: AsyncResult<C, Err, Prog>,
+  d: AsyncResult<D, Err, Prog>,
+  f: Fun4<A, B, C, D, E>
+): AsyncResult<E, Err, Prog>
 export function mapN<A, B, C, D, E, F, Err, Prog>(
-  f: Fun5<A, B, C, D, E, F>,
-  a: AsyncResult<A, Err, Prog>, b: AsyncResult<B, Err, Prog>, c: AsyncResult<C, Err, Prog>, d: AsyncResult<D, Err, Prog>,
-  e: AsyncResult<E, Err, Prog>): AsyncResult<F, Err, Prog>
+  a: AsyncResult<A, Err, Prog>,
+  b: AsyncResult<B, Err, Prog>,
+  c: AsyncResult<C, Err, Prog>,
+  d: AsyncResult<D, Err, Prog>,
+  e: AsyncResult<E, Err, Prog>,
+  f: Fun5<A, B, C, D, E, F>
+): AsyncResult<F, Err, Prog>
 export function mapN<A, B, C, D, E, F, G, Err, Prog>(
-  f: Fun6<A, B, C, D, E, F, G>,
-  a: AsyncResult<A, Err, Prog>, b: AsyncResult<B, Err, Prog>, c: AsyncResult<C, Err, Prog>, d: AsyncResult<D, Err, Prog>,
-  e: AsyncResult<E, Err, Prog>, g: AsyncResult<F, Err, Prog>): AsyncResult<G, Err, Prog>
+  a: AsyncResult<A, Err, Prog>,
+  b: AsyncResult<B, Err, Prog>,
+  c: AsyncResult<C, Err, Prog>,
+  d: AsyncResult<D, Err, Prog>,
+  e: AsyncResult<E, Err, Prog>,
+  g: AsyncResult<F, Err, Prog>,
+  f: Fun6<A, B, C, D, E, F, G>
+): AsyncResult<G, Err, Prog>
 export function mapN<Err, Prog, Ret>(
-  f: (...args: any[]) => Ret, ...args: AsyncResult<any, Err, Prog>[]
+  ...args: any[]
 ): AsyncResult<Ret, Err, Prog> {
+  const f = args.pop()
   return (mapNA as Function)((...r: any[]) => (mapNR as Function)(f, ...r), ...args)
 }
 
 export function flatMap<A, B, Err, Prog>(
-  f: (a: A) => AsyncResult<B, Err, Prog>,
-  async: AsyncResult<A, Err, Prog>): AsyncResult<B, Err, Prog> {
+  async: AsyncResult<A, Err, Prog>,
+  f: (a: A) => AsyncResult<B, Err, Prog>
+): AsyncResult<B, Err, Prog> {
   switch (async.kind) {
     case 'NotAsked':
     case 'Loading': return async
@@ -89,27 +108,44 @@ export function flatMap<A, B, Err, Prog>(
 }
 
 export function flatMapN<A, B, C, Err, Prog>(
-  f: Fun2<A, B, AsyncResult<C, Err, Prog>>,
-  a: AsyncResult<A, Err, Prog>, b: AsyncResult<B, Err, Prog>): AsyncResult<C, Err, Prog>
+  a: AsyncResult<A, Err, Prog>,
+  b: AsyncResult<B, Err, Prog>,
+  f: Fun2<A, B, AsyncResult<C, Err, Prog>>
+): AsyncResult<C, Err, Prog>
 export function flatMapN<A, B, C, D, Err, Prog>(
-  f: Fun3<A, B, C, AsyncResult<D, Err, Prog>>,
-  a: AsyncResult<A, Err, Prog>, b: AsyncResult<B, Err, Prog>, c: AsyncResult<C, Err, Prog>): AsyncResult<D, Err, Prog>
+  a: AsyncResult<A, Err, Prog>,
+  b: AsyncResult<B, Err, Prog>,
+  c: AsyncResult<C, Err, Prog>,
+  f: Fun3<A, B, C, AsyncResult<D, Err, Prog>>
+): AsyncResult<D, Err, Prog>
 export function flatMapN<A, B, C, D, E, Err, Prog>(
-  f: Fun4<A, B, C, D, AsyncResult<E, Err, Prog>>,
-  a: AsyncResult<A, Err, Prog>, b: AsyncResult<B, Err, Prog>, c: AsyncResult<C, Err, Prog>,
-  d: AsyncResult<D, Err, Prog>): AsyncResult<E, Err, Prog>
+  a: AsyncResult<A, Err, Prog>,
+  b: AsyncResult<B, Err, Prog>,
+  c: AsyncResult<C, Err, Prog>,
+  d: AsyncResult<D, Err, Prog>,
+  f: Fun4<A, B, C, D, AsyncResult<E, Err, Prog>>
+): AsyncResult<E, Err, Prog>
 export function flatMapN<A, B, C, D, E, F, Err, Prog>(
-  f: Fun5<A, B, C, D, E, AsyncResult<F, Err, Prog>>,
-  a: AsyncResult<A, Err, Prog>, b: AsyncResult<B, Err, Prog>, c: AsyncResult<C, Err, Prog>,
-  d: AsyncResult<D, Err, Prog>, e: AsyncResult<E, Err, Prog>): AsyncResult<F, Err, Prog>
+  a: AsyncResult<A, Err, Prog>,
+  b: AsyncResult<B, Err, Prog>,
+  c: AsyncResult<C, Err, Prog>,
+  d: AsyncResult<D, Err, Prog>,
+  e: AsyncResult<E, Err, Prog>,
+  f: Fun5<A, B, C, D, E, AsyncResult<F, Err, Prog>>
+): AsyncResult<F, Err, Prog>
 export function flatMapN<A, B, C, D, E, F, G, Err, Prog>(
-  f: Fun6<A, B, C, D, E, F, AsyncResult<G, Err, Prog>>,
-  a: AsyncResult<A, Err, Prog>, b: AsyncResult<B, Err, Prog>, c: AsyncResult<C, Err, Prog>,
-  d: AsyncResult<D, Err, Prog>, e: AsyncResult<E, Err, Prog>, g: AsyncResult<F, Err, Prog>): AsyncResult<G, Err, Prog>
+  a: AsyncResult<A, Err, Prog>,
+  b: AsyncResult<B, Err, Prog>,
+  c: AsyncResult<C, Err, Prog>,
+  d: AsyncResult<D, Err, Prog>,
+  e: AsyncResult<E, Err, Prog>,
+  g: AsyncResult<F, Err, Prog>,
+  f: Fun6<A, B, C, D, E, F, AsyncResult<G, Err, Prog>>
+): AsyncResult<G, Err, Prog>
 export function flatMapN<Args extends any[], Err, Prog, Ret>(
-  f: (...args: Args) => AsyncResult<Ret, Err, Prog>,
-  ...args: AsyncResult<any, Err, Prog>[]
+  ...args: any[]
 ): AsyncResult<Ret, Err, Prog> {
+  const f = args.pop()
   for (const a of args) {
     if (a.kind === 'Loading' || a.kind === 'NotAsked') {
       return a
@@ -193,7 +229,7 @@ export function flatten<T, E, P>(async: AsyncResult<AsyncResult<T, E, P>, E, P>)
   }
 }
 
-export function cata<A, B, Prog>(f: (a: A) => B, async: AsyncResult<A, Prog>, ifNotOutcome: B): B {
+export function cata<A, B, Prog>(async: AsyncResult<A, Prog>, f: (a: A) => B, ifNotOutcome: B): B {
   switch (async.kind) {
     case 'NotAsked':
     case 'Loading': return ifNotOutcome
@@ -201,7 +237,7 @@ export function cata<A, B, Prog>(f: (a: A) => B, async: AsyncResult<A, Prog>, if
   }
 }
 
-export function cataLazy<A, B, Prog>(f: (a: A) => B, async: AsyncResult<A, Prog>, ifNotOutcome: () => B): B {
+export function cataLazy<A, B, Prog>(async: AsyncResult<A, Prog>, f: (a: A) => B, ifNotOutcome: () => B): B {
   switch (async.kind) {
     case 'NotAsked':
     case 'Loading': return ifNotOutcome()
@@ -209,7 +245,7 @@ export function cataLazy<A, B, Prog>(f: (a: A) => B, async: AsyncResult<A, Prog>
   }
 }
 
-export function foldLeft<T, B, Prog>(f: (acc: B, curr: T) => B, async: AsyncResult<T, Prog>, b: B): B {
+export function foldLeft<T, B, Prog>(async: AsyncResult<T, Prog>, f: (acc: B, curr: T) => B, b: B): B {
   switch (async.kind) {
     case 'NotAsked':
     case 'Loading': return b
@@ -217,7 +253,7 @@ export function foldLeft<T, B, Prog>(f: (acc: B, curr: T) => B, async: AsyncResu
   }
 }
 
-export function all<T, P>(f: (v: T) => boolean, async: AsyncResult<T, P>): boolean {
+export function all<T, P>(async: AsyncResult<T, P>, f: (v: T) => boolean): boolean {
   switch (async.kind) {
     case 'NotAsked':
     case 'Loading': return true
@@ -225,7 +261,7 @@ export function all<T, P>(f: (v: T) => boolean, async: AsyncResult<T, P>): boole
   }
 }
 
-export function any<T, P>(f: (v: T) => boolean, async: AsyncResult<T, P>): boolean {
+export function any<T, P>(async: AsyncResult<T, P>, f: (v: T) => boolean): boolean {
   switch (async.kind) {
     case 'NotAsked':
     case 'Loading': return false
@@ -233,7 +269,7 @@ export function any<T, P>(f: (v: T) => boolean, async: AsyncResult<T, P>): boole
   }
 }
 
-export function each<T, P>(f: (v: T) => void, async: AsyncResult<T, P>): void {
+export function each<T, P>(async: AsyncResult<T, P>, f: (v: T) => void): void {
   switch (async.kind) {
     case 'NotAsked':
     case 'Loading': return

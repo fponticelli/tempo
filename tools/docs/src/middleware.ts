@@ -75,8 +75,8 @@ export const middleware = (store: Store<State, Action>) => (
           ga('send', 'pageview')
         }
         forEach(
-          toc => contentFromRoute(store, toc, action.route),
-          state.toc
+          state.toc,
+          toc => contentFromRoute(store, toc, action.route)
         )
       } else {
         scrollTo()
