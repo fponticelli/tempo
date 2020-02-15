@@ -20,9 +20,9 @@ export function match<
   T extends ObjectWithField<F, any>,
   B
 >(
+  input: T,
   field: F,
-  matcher: { [k in T[F]]: (arg: Differentiate<F, T, k>) => B },
-  input: T
+  matcher: { [k in T[F]]: (arg: Differentiate<F, T, k>) => B }
 ): B {
   const k = input[field]
   return matcher[k](input as any)
@@ -33,11 +33,11 @@ export function deepMatch<
   T extends ObjectWithPath<Path, any>,
   B
 >(
+  input: T,
   path: Path,
   matcher: {
     [k in TypeAtPath<Path, T>]: (arg: DifferentiateAt<Path, T, k>) => B
-  },
-  input: T
+  }
 ): B {
   const k = path.reduce((res: any, key) => res[key], input) as TypeAtPath<
     Path,

@@ -53,7 +53,7 @@ export function apN<Args extends any[], Err, Ret>(
 
 export function mapError<A, E1, E2>(f: (e: E1) => E2, result: Validation<A, E1>): Validation<A, E2> {
   switch (result.kind) {
-    case 'Failure': return failures(map(f, result.error))
+    case 'Failure': return failures(map(result.error, f))
     case 'Success': return success(result.value)
   }
 }

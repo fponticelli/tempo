@@ -17,7 +17,7 @@ const NelNumber = Nel<number>()
 
 describe('nel:map', () => {
   it('should work with any array', () => {
-    expect(map(a => a + 1, NelNumber.maybeOf([1, 2, 3])!)).toEqual([2, 3, 4])
+    expect(map(NelNumber.maybeOf([1, 2, 3])!, a => a + 1)).toEqual([2, 3, 4])
   })
 })
 

@@ -22,9 +22,9 @@ limitations under the License.
  * @param subject
  */
 export function map(
-  f: (...s: string[]) => string,
+  subject: string,
   pattern: RegExp,
-  subject: string
+  f: (...s: string[]) => string
 ): string {
   const buff = [] as string[]
   let pos = 0

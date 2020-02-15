@@ -33,23 +33,48 @@ export function ofNullable<T, E>(value: T | undefined | null, error: E): Result<
     return success(value)
 }
 
-export function ap<A, B, Err>(resultf: Result<(a: A) => B, Err>, result: Result<A, Err>): Result<B, Err> {
-  return flatten(map(f => map(v => f(v), result), resultf))
+export function ap<A, B, Err>(result: Result<A, Err>, resultf: Result<(a: A) => B, Err>): Result<B, Err> {
+  return flatten(map(resultf, f => map(result, v => f(v))))
 }
-export function apN<A, B, C, Err>(f: Result<Fun2<A, B, C>, Err>, a: Result<A, Err>, b: Result<B, Err>): Result<C, Err>
+export function apN<A, B, C, Err>(
+  a: Result<A, Err>,
+  b: Result<B, Err>,
+  f: Result<Fun2<A, B, C>, Err>
+): Result<C, Err>
 export function apN<A, B, C, D, Err>(
-  f: Result<Fun3<A, B, C, D>, Err>,
-  a: Result<A, Err>, b: Result<B, Err>, c: Result<C, Err>): Result<D, Err>
+  a: Result<A, Err>,
+  b: Result<B, Err>,
+  c: Result<C, Err>,
+  f: Result<Fun3<A, B, C, D>, Err>
+): Result<D, Err>
 export function apN<A, B, C, D, E, Err>(
-  f: Result<Fun4<A, B, C, D, E>, Err>,
-  a: Result<A, Err>, b: Result<B, Err>, c: Result<C, Err>, d: Result<D, Err>): Result<E, Err>
+  a: Result<A, Err>,
+  b: Result<B, Err>,
+  c: Result<C, Err>,
+  d: Result<D, Err>,
+  f: Result<Fun4<A, B, C, D, E>, Err>
+): Result<E, Err>
 export function apN<A, B, C, D, E, F, Err>(
-  f: Result<Fun5<A, B, C, D, E, F>, Err>,
-  a: Result<A, Err>, b: Result<B, Err>, c: Result<C, Err>, d: Result<D, Err>, e: Result<E, Err>): Result<F, Err>
+  a: Result<A, Err>,
+  b: Result<B, Err>,
+  c: Result<C, Err>,
+  d: Result<D, Err>,
+  e: Result<E, Err>,
+  f: Result<Fun5<A, B, C, D, E, F>, Err>
+): Result<F, Err>
 export function apN<A, B, C, D, E, F, G, Err>(
-  f: Result<Fun6<A, B, C, D, E, F, G>, Err>,
-  a: Result<A, Err>, b: Result<B, Err>, c: Result<C, Err>, d: Result<D, Err>, e: Result<E, Err>, g: Result<F, Err>): Result<G, Err>
-export function apN<Args extends any[], Err, Ret>(f: Result<(...args: Args) => Ret, Err>, ...args: Result<any, Err>[]): Result<Ret, Err> {
+  a: Result<A, Err>,
+  b: Result<B, Err>,
+  c: Result<C, Err>,
+  d: Result<D, Err>,
+  e: Result<E, Err>,
+  g: Result<F, Err>,
+  f: Result<Fun6<A, B, C, D, E, F, G>, Err>
+): Result<G, Err>
+export function apN<Args extends any[], Err, Ret>(
+  ...args: any[]
+): Result<Ret, Err> {
+  const f = args.pop()
   if (f.kind === 'Failure')
     return f
   for (const a of args)
@@ -59,29 +84,50 @@ export function apN<Args extends any[], Err, Ret>(f: Result<(...args: Args) => R
 }
 
 export function apNWithCombine<A, B, C, Err>(
+  a: Result<A, Err>,
+  b: Result<B, Err>,
   f: Result<Fun2<A, B, C>, Err>,
-  combineErrors: (e1: Err, e2: Err) => Err,
-  a: Result<A, Err>, b: Result<B, Err>): Result<C, Err>
+  combineErrors: (e1: Err, e2: Err) => Err
+): Result<C, Err>
 export function apNWithCombine<A, B, C, D, Err>(
+  a: Result<A, Err>,
+  b: Result<B, Err>,
+  c: Result<C, Err>,
   f: Result<Fun3<A, B, C, D>, Err>,
-  combineErrors: (e1: Err, e2: Err) => Err,
-  a: Result<A, Err>, b: Result<B, Err>, c: Result<C, Err>): Result<D, Err>
+  combineErrors: (e1: Err, e2: Err) => Err
+): Result<D, Err>
 export function apNWithCombine<A, B, C, D, E, Err>(
+  a: Result<A, Err>,
+  b: Result<B, Err>,
+  c: Result<C, Err>,
+  d: Result<D, Err>,
   f: Result<Fun4<A, B, C, D, E>, Err>,
-  combineErrors: (e1: Err, e2: Err) => Err,
-  a: Result<A, Err>, b: Result<B, Err>, c: Result<C, Err>, d: Result<D, Err>): Result<E, Err>
+  combineErrors: (e1: Err, e2: Err) => Err
+): Result<E, Err>
 export function apNWithCombine<A, B, C, D, E, F, Err>(
+  a: Result<A, Err>,
+  b: Result<B, Err>,
+  c: Result<C, Err>,
+  d: Result<D, Err>,
+  e: Result<E, Err>,
   f: Result<Fun5<A, B, C, D, E, F>, Err>,
-  combineErrors: (e1: Err, e2: Err) => Err,
-  a: Result<A, Err>, b: Result<B, Err>, c: Result<C, Err>, d: Result<D, Err>, e: Result<E, Err>): Result<F, Err>
+  combineErrors: (e1: Err, e2: Err) => Err
+): Result<F, Err>
 export function apNWithCombine<A, B, C, D, E, F, G, Err>(
+  a: Result<A, Err>,
+  b: Result<B, Err>,
+  c: Result<C, Err>,
+  d: Result<D, Err>,
+  e: Result<E, Err>,
+  g: Result<F, Err>,
   f: Result<Fun6<A, B, C, D, E, F, G>, Err>,
-  combineErrors: (e1: Err, e2: Err) => Err,
-  a: Result<A, Err>, b: Result<B, Err>, c: Result<C, Err>, d: Result<D, Err>, e: Result<E, Err>, g: Result<F, Err>): Result<G, Err>
+  combineErrors: (e1: Err, e2: Err) => Err
+): Result<G, Err>
 export function apNWithCombine<Args extends any[], Err, Ret>(
-  f: Result<(...args: Args) => Ret, Err>,
-  combineErrors: (e1: Err, e2: Err) => Err,
-  ...args: Result<any, Err>[]): Result<Ret, Err> {
+  ...args: any[]
+): Result<Ret, Err> {
+  const combineErrors = args.pop()
+  const f = args.pop()
   let err: Err | null = null
   if (f.kind === 'Failure')
     err = f.error
@@ -101,39 +147,66 @@ export function apNWithCombine<Args extends any[], Err, Ret>(
   }
 }
 
-export function forEach<A, Err>(f: (a: A) => void, result: Result<A, Err>): void {
+export function forEach<A, Err>(result: Result<A, Err>, f: (a: A) => void): void {
   switch (result.kind) {
     case 'Failure': return
     case 'Success': f(result.value)
   }
 }
 
-export function map<A, B, Err>(f: (a: A) => B, result: Result<A, Err>): Result<B, Err> {
+export function map<A, B, Err>(result: Result<A, Err>, f: (a: A) => B): Result<B, Err> {
   switch (result.kind) {
     case 'Failure': return result
     case 'Success': return success(f(result.value))
   }
 }
 
-export function mapError<A, E1, E2>(f: (e: E1) => E2, result: Result<A, E1>): Result<A, E2> {
+export function mapError<A, E1, E2>(result: Result<A, E1>, f: (e: E1) => E2): Result<A, E2> {
   switch (result.kind) {
     case 'Failure': return failure(f(result.error))
     case 'Success': return success(result.value)
   }
 }
 
-export function mapN<A, B, C, Err>(f: Fun2<A, B, C>, a: Result<A, Err>, b: Result<B, Err>): Result<C, Err>
-export function mapN<A, B, C, D, Err>(f: Fun3<A, B, C, D>, a: Result<A, Err>, b: Result<B, Err>, c: Result<C, Err>): Result<D, Err>
+export function mapN<A, B, C, Err>(
+  a: Result<A, Err>,
+  b: Result<B, Err>,
+  f: Fun2<A, B, C>
+): Result<C, Err>
+export function mapN<A, B, C, D, Err>(
+  a: Result<A, Err>,
+  b: Result<B, Err>,
+  c: Result<C, Err>,
+  f: Fun3<A, B, C, D>
+): Result<D, Err>
 export function mapN<A, B, C, D, E, Err>(
-  f: Fun4<A, B, C, D, E>,
-  a: Result<A, Err>, b: Result<B, Err>, c: Result<C, Err>, d: Result<D, Err>): Result<E, Err>
+  a: Result<A, Err>,
+  b: Result<B, Err>,
+  c: Result<C, Err>,
+  d: Result<D, Err>,
+  f: Fun4<A, B, C, D, E>
+): Result<E, Err>
 export function mapN<A, B, C, D, E, F, Err>(
-  f: Fun5<A, B, C, D, E, F>,
-  a: Result<A, Err>, b: Result<B, Err>, c: Result<C, Err>, d: Result<D, Err>, e: Result<E, Err>): Result<F, Err>
+  a: Result<A, Err>,
+  b: Result<B, Err>,
+  c: Result<C, Err>,
+  d: Result<D, Err>,
+  e: Result<E, Err>,
+  f: Fun5<A, B, C, D, E, F>
+): Result<F, Err>
 export function mapN<A, B, C, D, E, F, G, Err>(
-  f: Fun6<A, B, C, D, E, F, G>,
-  a: Result<A, Err>, b: Result<B, Err>, c: Result<C, Err>, d: Result<D, Err>, e: Result<E, Err>, g: Result<F, Err>): Result<G, Err>
-export function mapN<Args extends any[], Err, Ret>(f: (...args: Args) => Ret, ...args: Result<any, Err>[]): Result<Ret, Err> {
+  a: Result<A, Err>,
+  b: Result<B, Err>,
+  c: Result<C, Err>,
+  d: Result<D, Err>,
+  e: Result<E, Err>,
+  g: Result<F, Err>,
+  f: Fun6<A, B, C, D, E, F, G>
+): Result<G, Err>
+export function mapN<Args extends any[], Err, Ret>(
+  ...args: any[]
+): Result<Ret, Err> {
+  const f = args.pop()
   for (const a of args) {
     if (a.kind === 'Failure')
       return a
@@ -143,30 +216,50 @@ export function mapN<Args extends any[], Err, Ret>(f: (...args: Args) => Ret, ..
 }
 
 export function mapNWithCombine<A, B, C, Err>(
+  a: Result<A, Err>,
+  b: Result<B, Err>,
   f: Fun2<A, B, C>,
-  combineErrors: (e1: Err, e2: Err) => Err,
-  a: Result<A, Err>, b: Result<B, Err>): Result<C, Err>
+  combineErrors: (e1: Err, e2: Err) => Err
+): Result<C, Err>
 export function mapNWithCombine<A, B, C, D, Err>(
+  a: Result<A, Err>,
+  b: Result<B, Err>,
+  c: Result<C, Err>,
   f: Fun3<A, B, C, D>,
-  combineErrors: (e1: Err, e2: Err) => Err,
-  a: Result<A, Err>, b: Result<B, Err>, c: Result<C, Err>): Result<D, Err>
+  combineErrors: (e1: Err, e2: Err) => Err
+): Result<D, Err>
 export function mapNWithCombine<A, B, C, D, E, Err>(
+  a: Result<A, Err>,
+  b: Result<B, Err>,
+  c: Result<C, Err>,
+  d: Result<D, Err>,
   f: Fun4<A, B, C, D, E>,
-  combineErrors: (e1: Err, e2: Err) => Err,
-  a: Result<A, Err>, b: Result<B, Err>, c: Result<C, Err>, d: Result<D, Err>): Result<E, Err>
+  combineErrors: (e1: Err, e2: Err) => Err
+): Result<E, Err>
 export function mapNWithCombine<A, B, C, D, E, F, Err>(
+  a: Result<A, Err>,
+  b: Result<B, Err>,
+  c: Result<C, Err>,
+  d: Result<D, Err>,
+  e: Result<E, Err>,
   f: Fun5<A, B, C, D, E, F>,
-  combineErrors: (e1: Err, e2: Err) => Err,
-  a: Result<A, Err>, b: Result<B, Err>, c: Result<C, Err>, d: Result<D, Err>, e: Result<E, Err>): Result<F, Err>
+  combineErrors: (e1: Err, e2: Err) => Err
+): Result<F, Err>
 export function mapNWithCombine<A, B, C, D, E, F, G, Err>(
+  a: Result<A, Err>,
+  b: Result<B, Err>,
+  c: Result<C, Err>,
+  d: Result<D, Err>,
+  e: Result<E, Err>,
+  g: Result<F, Err>,
   f: Fun6<A, B, C, D, E, F, G>,
-  combineErrors: (e1: Err, e2: Err) => Err,
-  a: Result<A, Err>, b: Result<B, Err>, c: Result<C, Err>, d: Result<D, Err>, e: Result<E, Err>, g: Result<F, Err>): Result<G, Err>
+  combineErrors: (e1: Err, e2: Err) => Err
+): Result<G, Err>
 export function mapNWithCombine<Args extends any[], Err, Ret>(
-  f: (...args: Args) => Ret,
-  combineErrors: (e1: Err, e2: Err) => Err,
-  ...args: Result<any, Err>[]
+  ...args: any[]
 ): Result<Ret, Err> {
+  const combineErrors = args.pop()
+  const f = args.pop()
   let error: Err | null = null
   for (const a of args) {
     if (a.kind === 'Failure') {
@@ -184,7 +277,7 @@ export function mapNWithCombine<Args extends any[], Err, Ret>(
   }
 }
 
-export function flatMap<A, B, Err>(f: (a: A) => Result<B, Err>, result: Result<A, Err>): Result<B, Err> {
+export function flatMap<A, B, Err>(result: Result<A, Err>, f: (a: A) => Result<B, Err>): Result<B, Err> {
   switch (result.kind) {
     case 'Failure': return result
     case 'Success': return f(result.value)
@@ -192,24 +285,35 @@ export function flatMap<A, B, Err>(f: (a: A) => Result<B, Err>, result: Result<A
 }
 
 export function flatMapN<A, B, C, Err>(
-  f: Fun2<A, B, Result<C, Err>>,
-  a: Result<A, Err>, b: Result<B, Err>): Result<C, Err>
+  a: Result<A, Err>,
+  b: Result<B, Err>,
+  f: Fun2<A, B, Result<C, Err>>
+): Result<C, Err>
 export function flatMapN<A, B, C, D, Err>(
-  f: Fun3<A, B, C, Result<D, Err>>,
-  a: Result<A, Err>, b: Result<B, Err>, c: Result<C, Err>): Result<D, Err>
+  a: Result<A, Err>,
+  b: Result<B, Err>, c: Result<C, Err>,
+  f: Fun3<A, B, C, Result<D, Err>>
+): Result<D, Err>
 export function flatMapN<A, B, C, D, E, Err>(
-  f: Fun4<A, B, C, D, Result<E, Err>>,
-  a: Result<A, Err>, b: Result<B, Err>, c: Result<C, Err>, d: Result<D, Err>): Result<E, Err>
+  a: Result<A, Err>,
+  b: Result<B, Err>, c: Result<C, Err>, d: Result<D, Err>,
+  f: Fun4<A, B, C, D, Result<E, Err>>
+): Result<E, Err>
 export function flatMapN<A, B, C, D, E, F, Err>(
-  f: Fun5<A, B, C, D, E, Result<F, Err>>,
-  a: Result<A, Err>, b: Result<B, Err>, c: Result<C, Err>, d: Result<D, Err>, e: Result<E, Err>): Result<F, Err>
+  a: Result<A, Err>,
+  b: Result<B, Err>, c: Result<C, Err>, d: Result<D, Err>, e: Result<E, Err>,
+  f: Fun5<A, B, C, D, E, Result<F, Err>>
+): Result<F, Err>
 export function flatMapN<A, B, C, D, E, F, G, Err>(
-  f: Fun6<A, B, C, D, E, F, Result<G, Err>>,
-  a: Result<A, Err>, b: Result<B, Err>, c: Result<C, Err>, d: Result<D, Err>, e: Result<E, Err>, g: Result<F, Err>): Result<G, Err>
+  a: Result<A, Err>,
+  b: Result<B, Err>, c: Result<C, Err>, d: Result<D, Err>, e: Result<E, Err>,
+  g: Result<F, Err>,
+  f: Fun6<A, B, C, D, E, F, Result<G, Err>>
+): Result<G, Err>
 export function flatMapN<Args extends any[], Err, Ret>(
-  f: (...args: Args) => Result<Ret, Err>,
-  ...args: Result<any, Err>[]
+  ...args: any[]
 ): Result<Ret, Err> {
+  const f = args.pop()
   for (const a of args) {
     if (a.kind === 'Failure') {
       return a
@@ -220,30 +324,41 @@ export function flatMapN<Args extends any[], Err, Ret>(
 }
 
 export function flatMapNWithCombine<A, B, C, Err>(
+  a: Result<A, Err>,
+  b: Result<B, Err>,
   f: Fun2<A, B, Result<C, Err>>,
-  combineErrors: (e1: Err, e2: Err) => Err,
-  a: Result<A, Err>, b: Result<B, Err>): Result<C, Err>
+  combineErrors: (e1: Err, e2: Err) => Err
+): Result<C, Err>
 export function flatMapNWithCombine<A, B, C, D, Err>(
+  a: Result<A, Err>,
+  b: Result<B, Err>, c: Result<C, Err>,
   f: Fun3<A, B, C, Result<D, Err>>,
-  combineErrors: (e1: Err, e2: Err) => Err,
-  a: Result<A, Err>, b: Result<B, Err>, c: Result<C, Err>): Result<D, Err>
+  combineErrors: (e1: Err, e2: Err) => Err
+): Result<D, Err>
 export function flatMapNWithCombine<A, B, C, D, E, Err>(
+  a: Result<A, Err>,
+  b: Result<B, Err>, c: Result<C, Err>, d: Result<D, Err>,
   f: Fun4<A, B, C, D, Result<E, Err>>,
-  combineErrors: (e1: Err, e2: Err) => Err,
-  a: Result<A, Err>, b: Result<B, Err>, c: Result<C, Err>, d: Result<D, Err>): Result<E, Err>
+  combineErrors: (e1: Err, e2: Err) => Err
+): Result<E, Err>
 export function flatMapNWithCombine<A, B, C, D, E, F, Err>(
+  a: Result<A, Err>,
+  b: Result<B, Err>, c: Result<C, Err>, d: Result<D, Err>, e: Result<E, Err>,
   f: Fun5<A, B, C, D, E, Result<F, Err>>,
-  combineErrors: (e1: Err, e2: Err) => Err,
-  a: Result<A, Err>, b: Result<B, Err>, c: Result<C, Err>, d: Result<D, Err>, e: Result<E, Err>): Result<F, Err>
+  combineErrors: (e1: Err, e2: Err) => Err
+): Result<F, Err>
 export function flatMapNWithCombine<A, B, C, D, E, F, G, Err>(
+  a: Result<A, Err>,
+  b: Result<B, Err>, c: Result<C, Err>, d: Result<D, Err>, e: Result<E, Err>,
+  g: Result<F, Err>,
   f: Fun6<A, B, C, D, E, F, Result<G, Err>>,
-  combineErrors: (e1: Err, e2: Err) => Err,
-  a: Result<A, Err>, b: Result<B, Err>, c: Result<C, Err>, d: Result<D, Err>, e: Result<E, Err>, g: Result<F, Err>): Result<G, Err>
+  combineErrors: (e1: Err, e2: Err) => Err
+): Result<G, Err>
 export function flatMapNWithCombine<Args extends any[], Err, Ret>(
-  f: (...args: Args) => Result<Ret, Err>,
-  combineErrors: (e1: Err, e2: Err) => Err,
-  ...args: Result<any, Err>[]
+  ...args: any[]
 ): Result<Ret, Err> {
+  const combineErrors = args.pop()
+  const f = args.pop()
   let error: Err | null = null
   for (const a of args) {
     if (a.kind === 'Failure') {
@@ -261,13 +376,23 @@ export function flatMapNWithCombine<Args extends any[], Err, Ret>(
   }
 }
 
-export function equals<T, E>(predicate: (a: T, b: T) => boolean, a: Result<T, E>, b: Result<T, E>): boolean {
+export function equals<T, E>(
+  a: Result<T, E>,
+  b: Result<T, E>,
+  predicate: (a: T, b: T) => boolean
+): boolean {
   if (a.kind !== b.kind)
     return false
   else if (a.kind === 'Failure' && b.kind === 'Failure')
     return true
   else
     return predicate((a as { kind: 'Success', value: T }).value, (b as { kind: 'Success', value: T }).value)
+}
+
+export function makeEquals<T, E>(predicate: (a: T, b: T) => boolean) {
+  return function(a: Result<T, E>, b: Result<T, E>) {
+    return equals(a, b, predicate)
+  }
 }
 
 export function isFailure<T, E>(result: Result<T, E>): result is Failure<E> {
@@ -278,7 +403,7 @@ export function isSuccess<T, E>(result: Result<T, E>): result is Success<T> {
   return result.kind === 'Success'
 }
 
-export function filter<T, E>(predicate: (v: T) => boolean, error: E, result: Result<T, E>): Result<T, E> {
+export function filter<T, E>(result: Result<T, E>, predicate: (v: T) => boolean, error: E): Result<T, E> {
   switch (result.kind) {
     case 'Failure': return result
     case 'Success':
@@ -290,7 +415,7 @@ export function filter<T, E>(predicate: (v: T) => boolean, error: E, result: Res
   }
 }
 
-export function filterLazy<T, E>(predicate: (v: T) => boolean, errorf: () => E, result: Result<T, E>): Result<T, E> {
+export function filterLazy<T, E>(result: Result<T, E>, predicate: (v: T) => boolean, errorf: () => E): Result<T, E> {
   switch (result.kind) {
     case 'Failure': return result
     case 'Success':
@@ -358,42 +483,42 @@ export function flatten<T, E>(result: Result<Result<T, E>, E>): Result<T, E> {
   }
 }
 
-export function cata<A, B, Err>(f: (a: A) => B, result: Result<A, Err>, ifNone: B): B {
+export function cata<A, B, Err>(result: Result<A, Err>, f: (a: A) => B, ifNone: B): B {
   switch (result.kind) {
     case 'Failure': return ifNone
     case 'Success': return f(result.value)
   }
 }
 
-export function cataLazy<A, B, Err>(f: (a: A) => B, result: Result<A, Err>, ifNone: () => B): B {
+export function cataLazy<A, B, Err>(result: Result<A, Err>, f: (a: A) => B, ifNone: () => B): B {
   switch (result.kind) {
     case 'Failure': return ifNone()
     case 'Success': return f(result.value)
   }
 }
 
-export function foldLeft<T, B, Err>(f: (acc: B, curr: T) => B, result: Result<T, Err>, b: B): B {
+export function foldLeft<T, B, Err>(result: Result<T, Err>, f: (acc: B, curr: T) => B, b: B): B {
   switch (result.kind) {
     case 'Failure': return b
     case 'Success': return f(b, result.value)
   }
 }
 
-export function all<T, E>(f: (v: T) => boolean, result: Result<T, E>): boolean {
+export function all<T, E>(result: Result<T, E>, f: (v: T) => boolean): boolean {
   switch (result.kind) {
     case 'Failure': return true
     case 'Success': return f(result.value)
   }
 }
 
-export function any<T, E>(f: (v: T) => boolean, result: Result<T, E>): boolean {
+export function any<T, E>(result: Result<T, E>, f: (v: T) => boolean): boolean {
   switch (result.kind) {
     case 'Failure': return false
     case 'Success': return f(result.value)
   }
 }
 
-export function each<T, E>(f: (v: T) => void, result: Result<T, E>): void {
+export function each<T, E>(result: Result<T, E>, f: (v: T) => void): void {
   switch (result.kind) {
     case 'Failure': return
     case 'Success': return f(result.value)
@@ -432,12 +557,13 @@ export function swap<T, E>(result: Result<T, E>): Result<E, T> {
   }
 }
 
-export function combine<A, B, Err>(a: Result<A, Err>, b: Result<B, Err>): Result<[A, B], Err> {
-  return mapN((a, b) => [a, b], a, b)
+export function combine<A, B, Err>(a: Result<A, Err>,
+  b: Result<B, Err>): Result<[A, B], Err> {
+  return mapN(a, b, (a, b) => [a, b])
 }
 
 export function spread<A, B, C, Err>(f: (a: A, b: B) => C, v: Result<[A, B], Err>): Result<C, Err> {
-  return map((t) => f(t[0], t[1]), v)
+  return map(v, (t) => f(t[0], t[1]))
 }
 
 export type T<V, E> = Result<V, E>

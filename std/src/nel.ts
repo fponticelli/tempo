@@ -39,11 +39,11 @@ export function ofValue<T>(value: T): Nel<T> { return Nel<T>().unsafeOf([value])
 
 export function length<T>(nel: Nel<T>) { return Nel<T>().get(nel).length }
 
-export function map<A, B>(f: (a: A) => B, nel: Nel<A>): Nel<B> {
+export function map<A, B>(nel: Nel<A>, f: (a: A) => B): Nel<B> {
   return Nel<B>().unsafeOf(Arr.map(Nel<A>().get(nel), f))!
 }
 
-export function flatMap<A, B>(f: (a: A) => Nel<B>, nel: Nel<A>): Nel<B> {
+export function flatMap<A, B>(nel: Nel<A>, f: (a: A) => Nel<B>): Nel<B> {
   return Nel<B>().unsafeOf(Arr.flatMap(Nel<A>().get(nel), v => Nel<B>().get(f(v))))!
 }
 
@@ -54,7 +54,7 @@ export function equals<T>(predicate: (a: T, b: T) => boolean, a: Nel<T>, b: Nel<
   return Arr.equals(Nel<T>().get(a), Nel<T>().get(b), predicate)
 }
 
-export function filter<T>(predicate: (v: T) => boolean, nel: Nel<T>): T[] {
+export function filter<T>(nel: Nel<T>, predicate: (v: T) => boolean): T[] {
   return Arr.filter(Nel<T>().get(nel), predicate)
 }
 
@@ -62,19 +62,19 @@ export function flatten<T>(nel: Nel<Nel<T>>): Nel<T> {
   return Nel<T>().unsafeOf(Arr.flatten(nel as unknown as T[][]))
 }
 
-export function foldLeft<T, B>(f: (acc: B, curr: T) => B, nel: Nel<T>, b: B): B {
+export function foldLeft<T, B>(nel: Nel<T>, f: (acc: B, curr: T) => B, b: B): B {
   return Arr.foldLeft(Nel<T>().get(nel), f, b)
 }
 
-export function all<T>(predicate: (v: T) => boolean, nel: Nel<T>): boolean {
+export function all<T>(nel: Nel<T>, predicate: (v: T) => boolean): boolean {
   return Arr.all(Nel<T>().get(nel), predicate)
 }
 
-export function any<T>(predicate: (v: T) => boolean, nel: Nel<T>): boolean {
+export function any<T>(nel: Nel<T>, predicate: (v: T) => boolean): boolean {
   return Arr.any(Nel<T>().get(nel), predicate)
 }
 
-export function each<T>(f: (v: T) => void, nel: Nel<T>): void {
+export function each<T>(nel: Nel<T>, f: (v: T) => void): void {
   return Arr.each(Nel<T>().get(nel), f)
 }
 
@@ -82,6 +82,6 @@ export function concat<A>(...nels: Nel<A>[]): Nel<A> {
   return Nel<A>().unsafeOf(Arr.concat(...nels as unknown as A[][]))
 }
 
-export function sort<A>(compare: (a: A, b: A) => Ordering, arr: Nel<A>): Nel<A> {
+export function sort<A>(arr: Nel<A>, compare: (a: A, b: A) => Ordering): Nel<A> {
   return Nel<A>().unsafeOf(Arr.sort(compare, Nel<A>().get(arr)))
 }

@@ -40,12 +40,12 @@ export function forEach<A, Err>(result: AsyncResult<A, Err>, f: (a: A) => void):
     case 'NotAsked':
       return
     case 'Outcome':
-      forEachR(f, result.value)
+      forEachR(result.value, f)
   }
 }
 
 export function map<A, B, Err, Prog>(async: AsyncResult<A, Err, Prog>, f: (a: A) => B): AsyncResult<B, Err, Prog> {
-  return mapA(async, r => mapR(f, r))
+  return mapA(async, r => mapR(r, f))
 }
 
 export function mapN<A, B, C, Err, Prog>(
@@ -233,7 +233,7 @@ export function cata<A, B, Prog>(async: AsyncResult<A, Prog>, f: (a: A) => B, if
   switch (async.kind) {
     case 'NotAsked':
     case 'Loading': return ifNotOutcome
-    case 'Outcome': return cataR(f, async.value, ifNotOutcome)
+    case 'Outcome': return cataR(async.value, f, ifNotOutcome)
   }
 }
 
@@ -241,7 +241,7 @@ export function cataLazy<A, B, Prog>(async: AsyncResult<A, Prog>, f: (a: A) => B
   switch (async.kind) {
     case 'NotAsked':
     case 'Loading': return ifNotOutcome()
-    case 'Outcome': return cataLazyR(f, async.value, ifNotOutcome)
+    case 'Outcome': return cataLazyR(async.value, f, ifNotOutcome)
   }
 }
 
@@ -249,7 +249,7 @@ export function foldLeft<T, B, Prog>(async: AsyncResult<T, Prog>, f: (acc: B, cu
   switch (async.kind) {
     case 'NotAsked':
     case 'Loading': return b
-    case 'Outcome': return foldLeftR(f, async.value, b)
+    case 'Outcome': return foldLeftR(async.value, f, b)
   }
 }
 
@@ -257,7 +257,7 @@ export function all<T, P>(async: AsyncResult<T, P>, f: (v: T) => boolean): boole
   switch (async.kind) {
     case 'NotAsked':
     case 'Loading': return true
-    case 'Outcome': return allR(f, async.value)
+    case 'Outcome': return allR(async.value, f)
   }
 }
 
@@ -265,7 +265,7 @@ export function any<T, P>(async: AsyncResult<T, P>, f: (v: T) => boolean): boole
   switch (async.kind) {
     case 'NotAsked':
     case 'Loading': return false
-    case 'Outcome': return anyR(f, async.value)
+    case 'Outcome': return anyR(async.value, f)
   }
 }
 
@@ -273,7 +273,7 @@ export function each<T, P>(async: AsyncResult<T, P>, f: (v: T) => void): void {
   switch (async.kind) {
     case 'NotAsked':
     case 'Loading': return
-    case 'Outcome': return eachR(f, async.value)
+    case 'Outcome': return eachR(async.value, f)
   }
 }
 

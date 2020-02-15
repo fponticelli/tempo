@@ -42,10 +42,13 @@ export const middleware = (store: Store<State, Action>) => (
     case 'RequestToc':
       loadJson('toc.json')
         .then((json) => {
-          const toc = map(t => ({
-            ...t,
-            pages: t.pages.filter(p => p.path !== 'index.html')
-          }), json as Result<Toc, HttpError>)
+          const toc = map(
+            json as Result<Toc, HttpError>,
+              t => ({
+              ...t,
+              pages: t.pages.filter(p => p.path !== 'index.html')
+            })
+          )
           store.process(Action.loadedToc(outcome(toc)))
         }) // TODO parse Toc
       break
@@ -55,8 +58,8 @@ export const middleware = (store: Store<State, Action>) => (
           loadText(url).then(
             (htmlResult: Result<string, HttpError>) =>
               store.process(Action.loadedContent(outcome(map(
-                h => Content.htmlPage(undefined, h, urlToGitHubContent(url)),
-                htmlResult
+                htmlResult,
+                h => Content.htmlPage(undefined, h, urlToGitHubContent(url))
               )))
             )
           )

@@ -94,9 +94,9 @@ const upperMatch = (s: string) => s.toUpperCase()
  */
 export function capitalizeWords(value: string, whiteSpaceOnly = false): string {
   if (whiteSpaceOnly) {
-    return mapR(upperMatch, UCWORDSWS, capitalize(value))
+    return mapR(capitalize(value), UCWORDSWS, upperMatch)
   } else {
-    return mapR(upperMatch, UCWORDS, capitalize(value))
+    return mapR(capitalize(value), UCWORDS, upperMatch)
   }
 }
 

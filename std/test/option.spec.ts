@@ -46,40 +46,89 @@ describe('Option', () => {
   })
 
   it('should ap', () => {
-    expect(ap(some((i: number): number => i * 3), some(2))).toEqual(some(6))
-    expect(ap(none, some(2))).toEqual(none)
+    expect(ap(some(2), some((i: number): number => i * 3))).toEqual(some(6))
+    expect(ap(some(2), none)).toEqual(none)
     expect(ap(none, none)).toEqual(none)
 
     expect(apN(
-      some((i: number, s: string, b: boolean): number => i * 3 + s.length + (b ? 1 : 0)),
-      some(2), some('a'), some(true))).toEqual(some(8))
-    expect(apN(some((i: number, s: string, b: boolean): number => i * 3 + s.length + (b ? 1 : 0)), some(2), some('a'), none)).toEqual(none)
-    expect(apN(none, some(2), some('a'), some(true))).toEqual(none)
+      some(2), some('a'), some(true),
+      some((i: number, s: string, b: boolean): number => i * 3 + s.length + (b ? 1 : 0))
+    )).toEqual(some(8))
+    expect(apN(
+      some(2), some('a'), none,
+      some((i: number, s: string, b: boolean): number => i * 3 + s.length + (b ? 1 : 0))
+    )).toEqual(none)
+    expect(apN(
+      some(2), some('a'), some(true),
+      none,
+    )).toEqual(none)
   })
 
   it('should map', () => {
-    expect(map(i => i * 3, some(2))).toEqual(some(6))
-    expect(map(i => i * 3, none)).toEqual(none)
+    expect(map(
+      some(2),
+      i => i * 3
+    )).toEqual(some(6))
+    expect(map(
+      none,
+      i => i * 3
+    )).toEqual(none)
 
-    expect(mapN((i, s, b) => i * 3 + s.length + (b ? 1 : 0), some(2), some('a'), some(true))).toEqual(some(8))
-    expect(mapN((i, s, b) => i * 3 + s.length + (b ? 1 : 0), some(2), some('a'), none)).toEqual(none)
+    expect(mapN(
+      some(2), some('a'), some(true),
+      (i, s, b) => i * 3 + s.length + (b ? 1 : 0)
+    )).toEqual(some(8))
+    expect(mapN(
+      some(2), some('a'), none,
+      (i, s, b) => i * 3 + s.length + (b ? 1 : 0)
+    )).toEqual(none)
   })
 
   it('should flatMap', () => {
-    expect(flatMap(i => some(i * 3), some(2))).toEqual(some(6))
-    expect(flatMap(_ => none, some(2))).toEqual(none)
-    expect(flatMap(i => some(i * 3), none)).toEqual(none)
-    expect(flatMap(_ => none, none)).toEqual(none)
+    expect(flatMap(
+      some(2),
+      i => some(i * 3)
+    )).toEqual(some(6))
+    expect(flatMap(
+      some(2),
+      _ => none
+    )).toEqual(none)
+    expect(flatMap(
+      none,
+      i => some(i * 3)
+    )).toEqual(none)
+    expect(flatMap(
+      none,
+      _ => none
+    )).toEqual(none)
 
-    expect(flatMapN((i, s, b) => some(i * 3 + s.length + (b ? 1 : 0)), some(2), some('a'), some(true))).toEqual(some(8))
-    expect(flatMapN((i, s, b) => some(i * 3 + s.length + (b ? 1 : 0)), some(2), some('a'), none)).toEqual(none)
+    expect(flatMapN(
+      some(2), some('a'), some(true),
+      (i, s, b) => some(i * 3 + s.length + (b ? 1 : 0))
+    )).toEqual(some(8))
+    expect(flatMapN(
+      some(2), some('a'), none,
+      (i, s, b) => some(i * 3 + s.length + (b ? 1 : 0))
+    )).toEqual(none)
   })
 
   it('equals should work', () => {
-    expect(equals((a, b) => a === b, none, none)).toBe(true)
-    expect(equals((a, b) => a === b, some(1), none)).toBe(false)
-    expect(equals((a, b) => a === b, some(1), some(1))).toBe(true)
-    expect(equals((a, b) => a === b, some(1), some(2))).toBe(false)
+    expect(equals(
+      none, none,
+      (a, b) => a === b
+    )).toBe(true)
+    expect(equals(
+      some(1), none,
+      (a, b) => a === b
+    )).toBe(false)
+    expect(equals(
+      some(1), some(1),
+      (a, b) => a === b
+    )).toBe(true)
+    expect(equals(
+      some(1), some(2),
+      (a, b) => a === b
+    )).toBe(false)
   })
 
   it('isNone should work', () => {
@@ -93,9 +142,9 @@ describe('Option', () => {
   })
 
   it('filter should work', () => {
-    expect(filter(a => a === 1, some(1))).toEqual(some(1))
-    expect(filter(a => a === 1, some(2))).toEqual(none)
-    expect(filter(a => a === 1, none)).toEqual(none)
+    expect(filter(some(1), a => a === 1)).toEqual(some(1))
+    expect(filter(some(2), a => a === 1)).toEqual(none)
+    expect(filter(none, a => a === 1)).toEqual(none)
   })
 
   it('getOrThrow should work', () => {

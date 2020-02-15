@@ -16,11 +16,11 @@ import { compare as compareString } from '../src/strings'
 
 describe('arrays:map', () => {
   it('should work with empty arrays', () => {
-    expect(map(a => a, [])).toEqual([])
+    expect(map([], a => a)).toEqual([])
   })
 
   it('should work with any array', () => {
-    expect(map(a => a + 1, [1, 2, 3])).toEqual([2, 3, 4])
+    expect(map([1, 2, 3], a => a + 1)).toEqual([2, 3, 4])
   })
 })
 

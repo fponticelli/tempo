@@ -41,87 +41,142 @@ describe('Option', () => {
   })
 
   it('should ap', () => {
-    expect(ap(success((i: number): number => i * 3), success(2))).toEqual(success(6))
-    expect(ap(failure<(i: number) => number, string>('x'), success(2))).toEqual(failure('x'))
-    expect(ap(failure<(i: number) => number, string>('x'), failure('x'))).toEqual(failure('x'))
+    expect(ap(success(2), success((i: number): number => i * 3))).toEqual(success(6))
+    expect(ap(success(2), failure<(i: number) => number, string>('x'))).toEqual(failure('x'))
+    expect(ap(failure<number, string>('x'), failure<(i: number) => number, string>('x'))).toEqual(failure('x'))
 
     expect(apN(
-      success((i: number, s: string, b: boolean): number => i * 3 + s.length + (b ? 1 : 0)),
-      success(2), success('a'), success(true))).toEqual(success(8))
+      success(2), success('a'), success(true),
+      success((i: number, s: string, b: boolean): number => i * 3 + s.length + (b ? 1 : 0))
+    )).toEqual(success(8))
     expect(apN(
-      success((i: number, s: string, b: boolean): number => i * 3 + s.length + (b ? 1 : 0)),
-      success(2), success('a'), failure('x'))).toEqual(failure('x'))
+      success<number, string>(2), success<string, string>('a'), failure<boolean, string>('x'),
+      success((i: number, s: string, b: boolean): number => i * 3 + s.length + (b ? 1 : 0))
+    )).toEqual(failure('x'))
     expect(apN(
-      failure<(i: number, s: string, b: boolean) => number, string>('x'),
-      success(2), success('a'), success(true))).toEqual(failure('x'))
+      success(2), success('a'), success(true),
+      failure<(i: number, s: string, b: boolean) => number, string>('x')
+    )).toEqual(failure('x'))
 
     expect(apNWithCombine<number, string, boolean, number, string[]>(
+      success(2), success('a'), success(true),
       success((i: number, s: string, b: boolean): number => i * 3 + s.length + (b ? 1 : 0)),
-      (a: string[], b: string[]) => a.concat(b),
-      success(2), success('a'), success(true))).toEqual(success(8))
+      (a: string[], b: string[]) => a.concat(b)
+    )).toEqual(success(8))
     expect(apNWithCombine<number, string, boolean, number, string[]>(
+      success(2), success('a'), failure(['x']),
       success((i: number, s: string, b: boolean): number => i * 3 + s.length + (b ? 1 : 0)),
-      (a: string[], b: string[]) => a.concat(b),
-      success(2), success('a'), failure(['x']))).toEqual(failure(['x']))
+      (a: string[], b: string[]) => a.concat(b)
+    )).toEqual(failure(['x']))
     expect(apNWithCombine<number, string, boolean, number, string[]>(
+      success(2), failure(['x']), failure(['y']),
       success((i: number, s: string, b: boolean): number => i * 3 + s.length + (b ? 1 : 0)),
-      (a: string[], b: string[]) => a.concat(b),
-      success(2), failure(['x']), failure(['y']))).toEqual(failure(['x', 'y']))
+      (a: string[], b: string[]) => a.concat(b)
+    )).toEqual(failure(['x', 'y']))
     expect(apNWithCombine<number, string, boolean, number, string[]>(
+      success(2), success('a'), success(true),
       failure<(i: number, s: string, b: boolean) => number, [string]>(['x']),
-      (a: string[], b: string[]) => a.concat(b),
-      success(2), success('a'), success(true))).toEqual(failure(['x']))
+      (a: string[], b: string[]) => a.concat(b)
+    )).toEqual(failure(['x']))
   })
 
   it('should map', () => {
-    expect(map(i => i * 3, success(2))).toEqual(success(6))
-    expect(map((i: number) => i * 3, failure('x'))).toEqual(failure('x'))
+    expect(map(
+      success<number, string>(2),
+      i => i * 3
+    )).toEqual(success(6))
+    expect(map(
+      failure<number, string>('x'),
+      (i: number) => i * 3
+    )).toEqual(failure('x'))
 
-    expect(mapN((i, s, b) => i * 3 + s.length + (b ? 1 : 0), success(2), success('a'), success(true))).toEqual(success(8))
-    expect(mapN((i, s, b) => i * 3 + s.length + (b ? 1 : 0), success(2), success('a'), failure('x'))).toEqual(failure('x'))
+    expect(mapN(
+      success(2), success('a'), success(true),
+      (i, s, b) => i * 3 + s.length + (b ? 1 : 0)
+    )).toEqual(success(8))
+    expect(mapN(
+      success(2), success('a'), failure('x'),
+      (i, s, b) => i * 3 + s.length + (b ? 1 : 0)
+    )).toEqual(failure('x'))
 
     expect(mapNWithCombine(
+      success<number, string[]>(2), success<string, string[]>('a'), success<boolean, string[]>(true),
       (i: number, s: string, b: boolean): number => i * 3 + s.length + (b ? 1 : 0),
-      (a: string[], b: string[]) => a.concat(b),
-      success(2), success('a'), success(true))).toEqual(success(8))
+      (a: string[], b: string[]) => a.concat(b)
+    )).toEqual(success(8))
     expect(mapNWithCombine(
+      success<number, string[]>(2), success<string, string[]>('a'), failure<boolean, string[]>(['x']),
       (i: number, s: string, b: boolean): number => i * 3 + s.length + (b ? 1 : 0),
-      (a: string[], b: string[]) => a.concat(b),
-      success(2), success('a'), failure(['x']))).toEqual(failure(['x']))
+      (a: string[], b: string[]) => a.concat(b)
+    )).toEqual(failure(['x']))
     expect(mapNWithCombine(
+      success<number, string[]>(2), failure<string, string[]>(['x']), failure<boolean, string[]>(['y']),
       (i: number, s: string, b: boolean): number => i * 3 + s.length + (b ? 1 : 0),
-      (a: string[], b: string[]) => a.concat(b),
-      success(2), failure(['x']), failure(['y']))).toEqual(failure(['x', 'y']))
+      (a: string[], b: string[]) => a.concat(b)
+    )).toEqual(failure(['x', 'y']))
   })
 
   it('should flatMap', () => {
-    expect(flatMap(i => success(i * 3), success(2))).toEqual(success(6))
-    expect(flatMap(_ => failure('x'), success(2))).toEqual(failure('x'))
-    expect(flatMap((i: number) => success(i * 3), failure('x'))).toEqual(failure('x'))
-    expect(flatMap(_ => failure('x'), failure('x'))).toEqual(failure('x'))
+    expect(flatMap(
+      success(2),
+      i => success(i * 3)
+    )).toEqual(success(6))
+    expect(flatMap(
+      success(2),
+      _ => failure('x')
+    )).toEqual(failure('x'))
+    expect(flatMap(
+      failure<number, string>('x'),
+      (i: number) => success(i * 3)
+    )).toEqual(failure('x'))
+    expect(flatMap(
+      failure<number, string>('x'),
+      _ => failure('x')
+    )).toEqual(failure('x'))
 
-    expect(flatMapN((i, s, b) => success(i * 3 + s.length + (b ? 1 : 0)), success(2), success('a'), success(true))).toEqual(success(8))
-    expect(flatMapN((i, s, b) => success(i * 3 + s.length + (b ? 1 : 0)), success(2), success('a'), failure('x'))).toEqual(failure('x'))
+    expect(flatMapN(
+      success(2), success('a'), success(true),
+      (i, s, b) => success(i * 3 + s.length + (b ? 1 : 0))
+    )).toEqual(success(8))
+    expect(flatMapN(
+      success(2), success('a'), failure('x'),
+      (i, s, b) => success(i * 3 + s.length + (b ? 1 : 0))
+    )).toEqual(failure('x'))
 
     expect(flatMapNWithCombine<number, string, boolean, number, string[]>(
+      success(2), success('a'), success(true),
       (i: number, s: string, b: boolean) => success(i * 3 + s.length + (b ? 1 : 0)),
-      (a: string[], b: string[]) => a.concat(b),
-      success(2), success('a'), success(true))).toEqual(success(8))
+      (a: string[], b: string[]) => a.concat(b)
+    )).toEqual(success(8))
     expect(flatMapNWithCombine<number, string, boolean, number, string[]>(
+      success(2), success('a'), failure(['x']),
       (i: number, s: string, b: boolean) => success(i * 3 + s.length + (b ? 1 : 0)),
-      (a: string[], b: string[]) => a.concat(b),
-      success(2), success('a'), failure(['x']))).toEqual(failure(['x']))
+      (a: string[], b: string[]) => a.concat(b)
+    )).toEqual(failure(['x']))
     expect(flatMapNWithCombine<number, string, boolean, number, string[]>(
+      success(2), failure(['x']), failure(['y']),
       (i: number, s: string, b: boolean) => success(i * 3 + s.length + (b ? 1 : 0)),
-      (a: string[], b: string[]) => a.concat(b),
-      success(2), failure(['x']), failure(['y']))).toEqual(failure(['x', 'y']))
+      (a: string[], b: string[]) => a.concat(b)
+    )).toEqual(failure(['x', 'y']))
   })
 
   it('equals should work', () => {
-    expect(equals((a, b) => a === b, failure('x'), failure('x'))).toBe(true)
-    expect(equals((a, b) => a === b, success(1), failure('x'))).toBe(false)
-    expect(equals((a, b) => a === b, success(1), success(1))).toBe(true)
-    expect(equals((a, b) => a === b, success(1), success(2))).toBe(false)
+    expect(equals(
+      failure('x'), failure('x'),
+      (a, b) => a === b
+    )).toBe(true)
+    expect(equals(
+      success(1), failure('x'),
+      (a, b) => a === b
+    )).toBe(false)
+    expect(equals(
+      success(1), success(1),
+      (a, b) => a === b
+    )).toBe(true)
+    expect(equals(
+      success(1), success(2),
+      (a, b) => a === b
+    )).toBe(false)
   })
 
   it('isFailure should work', () => {
@@ -135,15 +190,15 @@ describe('Option', () => {
   })
 
   it('filter should work', () => {
-    expect(filter((a: number) => a === 1, 'x', success(1))).toEqual(success(1))
-    expect(filter((a: number) => a === 1, 'x', success(2))).toEqual(failure('x'))
-    expect(filter((a: number) => a === 1, 'x', failure('x'))).toEqual(failure('x'))
+    expect(filter(success(1), (a: number) => a === 1, 'x')).toEqual(success(1))
+    expect(filter(success(2), (a: number) => a === 1, 'x')).toEqual(failure('x'))
+    expect(filter(failure<number, string>('x'), (a: number) => a === 1, 'x')).toEqual(failure('x'))
   })
 
   it('filterLazy should work', () => {
-    expect(filterLazy((a: number) => a === 1, () => 'x', success(1))).toEqual(success(1))
-    expect(filterLazy((a: number) => a === 1, () => 'x', success(2))).toEqual(failure('x'))
-    expect(filterLazy((a: number) => a === 1, () => 'x', failure('x'))).toEqual(failure('x'))
+    expect(filterLazy(success(1), (a: number) => a === 1, () => 'x')).toEqual(success(1))
+    expect(filterLazy(success(2), (a: number) => a === 1, () => 'x')).toEqual(failure('x'))
+    expect(filterLazy<number, string>(failure('x'), (a: number) => a === 1, () => 'x')).toEqual(failure('x'))
   })
 
   it('getOrThrow should work', () => {
@@ -181,24 +236,24 @@ describe('Option', () => {
     expect(flatten(failure('x'))).toEqual(failure('x'))
   })
   it('cata should work', () => {
-    expect(cata(v => v, success(1), 2)).toBe(1)
-    expect(cata(v => v, failure('x'), 2)).toBe(2)
+    expect(cata(success(1), v => v, 2)).toBe(1)
+    expect(cata(failure('x'), v => v, 2)).toBe(2)
   })
   it('cataLazy should work', () => {
-    expect(cataLazy(v => v, success(1), () => 2)).toBe(1)
-    expect(cataLazy(v => v, failure('x'), () => 2)).toBe(2)
+    expect(cataLazy(success(1), v => v, () => 2)).toBe(1)
+    expect(cataLazy(failure('x'), v => v, () => 2)).toBe(2)
   })
   it('foldLeft should work', () => {
-    expect(foldLeft((acc: number, curr: number) => acc + curr, failure('x'), 0)).toBe(0)
-    expect(foldLeft((acc: number, curr: number) => acc + curr, success(1), 2)).toBe(3)
+    expect(foldLeft(failure<number, string>('x'), (acc: number, curr: number) => acc + curr, 0)).toBe(0)
+    expect(foldLeft(success(1), (acc: number, curr: number) => acc + curr, 2)).toBe(3)
   })
   it('all should work', () => {
-    expect(all(v => v === 1, failure('x'))).toBe(true)
-    expect(all(v => v === 1, success(1))).toBe(true)
+    expect(all(failure('x'), v => v === 1)).toBe(true)
+    expect(all(success(1), v => v === 1)).toBe(true)
   })
   it('any should work', () => {
-    expect(any(v => v === 1, failure('x'))).toBe(false)
-    expect(any(v => v === 1, success(1))).toBe(true)
+    expect(any(failure('x'), v => v === 1)).toBe(false)
+    expect(any(success(1), v => v === 1)).toBe(true)
   })
   it('recover should work', () => {
     expect(recover(failure('x'), 1)).toEqual(success(1))
@@ -211,9 +266,9 @@ describe('Option', () => {
   it('each should work', () => {
     let count = 0
     const f = (a: number): number => count = a
-    each(f, failure('x'))
+    each(failure<number, string>('x'), f)
     expect(count).toBe(0)
-    each(f, success(2))
+    each(success(2), f)
     expect(count).toBe(2)
   })
   it('firstSuccess should work', () => {
