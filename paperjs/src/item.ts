@@ -18,7 +18,7 @@ import { PaperTemplate } from './template'
 import { PaperContext } from './context'
 import { TempoAttributes } from './tempo_attributes'
 import { removeFields } from 'tempo-std/lib//objects'
-import { UnwrappedDerivedValue, UnwrappedValue } from 'tempo-core/lib/value'
+import { DerivedValue, DerivedOrLiteralValue } from 'tempo-core/lib/value'
 import { Merge } from 'tempo-std/lib/types/objects'
 
 export interface FrameEvent extends Event {
@@ -84,7 +84,7 @@ export class ItemTemplate<
   }
 }
 
-export const createItem = <State, Action, Query, I extends Item, T, Option>(
+export function createItem<State, Action, Query, I extends Item, T, Option>(
   makeItem: (state: State) => I,
   options: Partial<
     Merge<
@@ -93,7 +93,7 @@ export const createItem = <State, Action, Query, I extends Item, T, Option>(
     >
   >,
   children?: PaperTemplate<State, Action, Query>[] | undefined
-) => {
+) {
   const { afterchange, afterrender, beforechange, beforedestroy } = options
   const attributes = removeFields(
     options,
@@ -103,7 +103,7 @@ export const createItem = <State, Action, Query, I extends Item, T, Option>(
     'beforedestroy'
   )
   const setters = Object.keys(attributes).map(k => {
-    const attr = (attributes as any)[k] as UnwrappedValue<State, any>
+    const attr = (attributes as any)[k] as DerivedOrLiteralValue<State, any>
     if (k.substring(0, 2) === 'on') {
       const attrf = attr as PaperEventHandler<State, Action, any, I>
       return {
@@ -120,7 +120,7 @@ export const createItem = <State, Action, Query, I extends Item, T, Option>(
         }
       }
     } else if (typeof attr === 'function') {
-      const attrf = attr as UnwrappedDerivedValue<State, any>
+      const attrf = attr as DerivedValue<State, any>
       return {
         kind: 'dynamic',
         f: (state: State, item: I) => {

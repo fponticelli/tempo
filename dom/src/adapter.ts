@@ -12,16 +12,16 @@ limitations under the License.
 */
 
 import { View } from 'tempo-core/lib/view'
-import { DOMComponentTemplate } from './component'
+import { Component } from './component'
 import { DOMTemplate } from './template'
 import { DOMContext } from './context'
 
-export class DOMAdapterTemplate<OuterState, InnerState, OuterAction, InnerAction, Query>
+class AdapterTemplate<OuterState, InnerState, OuterAction, InnerAction, Query>
   implements DOMTemplate<OuterState, OuterAction, Query> {
   constructor(
     readonly mergeStates: (outerState: OuterState, innerState: InnerState) => InnerState | undefined,
     readonly propagate: (args: PropagateArg<OuterState, InnerState, OuterAction, InnerAction>) => void,
-    readonly child: DOMComponentTemplate<InnerState, InnerAction, Query>
+    readonly child: Component<InnerState, InnerAction, Query>
   ) {}
 
   render(ctx: DOMContext<OuterAction>, outerState: OuterState): View<OuterState, Query> {
@@ -68,16 +68,17 @@ export interface PropagateArg<OuterState, InnerState, OuterAction, InnerAction> 
   dispatchOuter: (action: OuterAction) => void
 }
 
-export const adapter = <OuterState, InnerState, OuterAction, InnerAction, Query = unknown>(
+export function adapter<OuterState, InnerState, OuterAction, InnerAction, Query = unknown>(
   options: {
     mergeStates?: (outerState: OuterState, innerState: InnerState) => InnerState | undefined
     propagate?: (args: PropagateArg<OuterState, InnerState, OuterAction, InnerAction>) => void
   },
-  child: DOMComponentTemplate<InnerState, InnerAction, Query>
-): DOMTemplate<OuterState, OuterAction, Query> =>
-  new DOMAdapterTemplate(
+  child: Component<InnerState, InnerAction, Query>
+): DOMTemplate<OuterState, OuterAction, Query> {
+  return new AdapterTemplate(
     options.mergeStates || ((_u: OuterState, _d: InnerState) => undefined),
     /* istanbul ignore next */
     options.propagate || (() => undefined),
     child
   )
+}

@@ -11,9 +11,9 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { UnwrappedDerivedValue } from 'tempo-core/lib/value'
-import { DOMAttribute, DOMEventHandler, DOMStyleAttribute } from '../value'
-import { htmlAttributeMap as attributeMap } from '../dom_attributes_mapper'
+import { DerivedValue } from 'tempo-core/lib/value'
+import { Attribute, EventHandler, StyleAttribute } from '../value'
+import { htmlAttributeMap as attributeMap } from './attributes_mapper'
 import { setAttribute, setOneStyle } from './set_attribute'
 import { DOMChild, DOMTemplate } from '../template'
 import { text } from '../text'
@@ -54,7 +54,7 @@ export type Acc<State> = ((state: State) => void)[]
 export function processAttribute<State, Value>(
   el: Element,
   name: string,
-  value: DOMAttribute<State, Value>,
+  value: Attribute<State, Value>,
   acc: Acc<State>
 ): Acc<State> {
   let set = attributeMap[name] || setAttribute
@@ -63,14 +63,14 @@ export function processAttribute<State, Value>(
     // state in inputs can incorrectly map to state
     if (el.nodeName === 'INPUT' || el.nodeName === 'TEXTAREA') {
       const f = (state: State) => {
-        const newValue = (value as UnwrappedDerivedValue<State, Value>)(state)
+        const newValue = (value as DerivedValue<State, Value>)(state)
         set(el, name, newValue)
       }
       acc.push(f)
     } else {
       let oldValue: Value | undefined = undefined
       const f = (state: State) => {
-        const newValue = (value as UnwrappedDerivedValue<State, Value>)(state)
+        const newValue = (value as DerivedValue<State, Value>)(state)
         if (newValue !== oldValue) {
           set(el, name, newValue)
           if (String(newValue).length < 50000) {
@@ -94,7 +94,7 @@ export function processEvent<
 >(
   el: El,
   name: string,
-  value: DOMEventHandler<State, Action, Ev, El>,
+  value: EventHandler<State, Action, Ev, El>,
   dispatch: (action: Action) => void,
   acc: Acc<State>
 ): Acc<State> {
@@ -117,13 +117,13 @@ export function processEvent<
 export function processStyle<State, Value>(
   el: Element,
   name: string,
-  value: DOMStyleAttribute<State, Value>,
+  value: StyleAttribute<State, Value>,
   acc: Acc<State>
 ): Acc<State> {
   if (typeof value === 'function') {
     let oldValue: Value | undefined
     const f = (state: State) => {
-      const newValue = (value as UnwrappedDerivedValue<State, Value>)(state)
+      const newValue = (value as DerivedValue<State, Value>)(state)
       if (newValue !== oldValue) {
         setOneStyle(el, name, newValue)
         oldValue = newValue
@@ -136,7 +136,7 @@ export function processStyle<State, Value>(
   return acc
 }
 
-export const containerSize = (el: HTMLElement) => {
+export function containerSize(el: HTMLElement) {
   const prev = []
   for (let i = 0; i < el.children.length; i++) {
     const child = el.children[i] as HTMLElement

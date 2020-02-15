@@ -11,6 +11,10 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+/**
+ *
+ */
+
 export type Lazy<T> = () => T
 export type Fun = (...args: any[]) => any
 export type Fun1<A, T> = (a1: A) => T

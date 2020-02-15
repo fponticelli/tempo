@@ -1,40 +1,10 @@
-// TODO
-// - [x] collect demo
-// - [x] copy demos
-// - [x] collect api
-// - [x] transform api MDs to HTMLs
-// - [x] collect changelog
-// - [x] transform changelog MDs to HTMLs
-// - [x] collect pages
-// - [x] transform pages MDs to HTMLs
-// - [x] projects metadata
-// - [ ] layout
-// - [ ] style site
-// - [ ] style API
-// - [ ] make sub hash scroll to the right header
-// - [ ] search
-// - [x] better API links (mixed modules and types, index.md and globals.md)
-
-import { Toc, DemoRef, ApiRef, PageRef, ProjectRef, SectionRef } from '../src/toc'
+import { Toc, DemoRef, PageRef, ProjectRef, SectionRef } from '../src/toc'
 import { promises as fs } from 'fs'
 import * as fse from 'fs-extra'
 import * as path from 'path'
-import { Converter } from 'showdown'
-import { JSDOM } from 'jsdom'
-import Prism from 'prismjs'
-const loadLanguages: any = require('prismjs/components/')
-loadLanguages(['typescript'])
-import fm from 'front-matter'
 import { trimChars } from 'tempo-std/lib/strings'
-
-const markdown = new Converter({
-  parseImgDimensions: true,
-  strikethrough: true,
-  tables: true,
-  tasklists: true
-})
-
-// import { JSDOM } from 'jsdom'
+import { markdown, markdownWithFM } from './utils/markdown'
+import { generateDocs } from './generate_docs'
 
 const rootFolder = '../..'
 const docsFolder = path.join(rootFolder, 'docs')
@@ -51,6 +21,7 @@ const changelogFolderDst = path.join(docsFolder, 'changelog')
 const apiFolderDst = path.join(docsFolder, 'api')
 
 const tocFile = path.join(docsFolder, 'toc.json')
+const cnameFile = path.join(docsFolder, 'CNAME')
 
 const renameHtml = (path: string) => {
   const hasLeadingHash = path.startsWith('#')
@@ -97,18 +68,6 @@ async function loadPackage(dir: string) {
   return JSON.parse(content)
 }
 
-// function loadHtml(dir: string): JSDOM {
-//   const content = fs.readFileSync(path.join(dir, 'build/index.html'), 'utf8')
-//   return new JSDOM(content)
-// }
-
-// function extractDemoInfo(dom: JSDOM) {
-//   const title = dom.window.document.title
-//   const description = dom.window.document.querySelector('meta[name=description]')?.getAttribute('content') || ''
-//   const priority = Number(dom.window.document.querySelector('meta[name=priority]')?.getAttribute('content'))
-//   return { title, description, priority }
-// }
-
 function filterDirectories(dirs: string[]) {
   return dirs.filter(dir => !dir.startsWith('.'))
 }
@@ -138,28 +97,7 @@ async function listAllMDFiles(src: string): Promise<string[]> {
 
 async function makeHtml(mdFile: string, anchorMangler: (url: string) => string) {
   const content = await fs.readFile(mdFile, 'utf8')
-  const parsed = fm(content)
-  const rawHtml = markdown.makeHtml(parsed.body)
-  const dom = new JSDOM(rawHtml)
-  const codes = dom.window.document.querySelectorAll('.language-ts')
-  for (let i = 0; i < codes.length; i++) {
-    const code = codes[i]
-    code.parentElement?.classList.add('language-ts')
-    code.innerHTML = Prism.highlight(code.textContent || '', Prism.languages.typescript, 'typescript')
-  }
-
-  const anchors = dom.window.document.querySelectorAll('a')
-  for (let i = 0; i < anchors.length; i++) {
-    const a = anchors[i]
-    const href = a.href
-    if (href.startsWith('http:') || href.startsWith('https:')) continue
-    a.href = renameHtml(anchorMangler(href))
-  }
-
-  return {
-    data: parsed.attributes as any,
-    html: dom.window.document.body.innerHTML
-  }
+  return markdownWithFM(content, anchorMangler)
 }
 
 function renameMdToHtml(file: string) {
@@ -209,10 +147,6 @@ async function createPages(src: string, dst: string) {
         path: d.dest,
         title: d.data.title
       })
-    //   ({
-    //   path: d.dest,
-    //   title: d.data.title
-    // })
     })
   return section
 }
@@ -222,7 +156,7 @@ async function createChangeLogs(projects: string[], root: string, dst: string) {
     projects.map(async project => {
       const p = path.join(root, project, 'CHANGELOG.md')
       const content = await fs.readFile(p, 'utf8')
-      const html = markdown.makeHtml(content)
+      const html = markdown(content, s => s)
       return { project, html }
     })
   )
@@ -233,80 +167,12 @@ async function createChangeLogs(projects: string[], root: string, dst: string) {
   )
 }
 
-const mangleApiHref = (name: string, base: string) => (url: string) => {
-  if (url.endsWith('.md')) {
-    url = url.substring(0, url.length - 3) + '.html'
-  } else if (url.indexOf('.md#')) {
-    url = url.replace('.md#', '.html#')
-  }
-  const p = path.join(name, base, url)
-  return `#/api/${p}`
-}
-
-async function createApi(project: string, root: string, dst: string): Promise<ApiRef[]> {
-  const p = path.join(root, project, 'docs')
-  if (!fse.existsSync(p)) {
-    return []
-  }
-  const mdFiles = await listAllMDFiles(p)
-  const data = await Promise.all(mdFiles.map(async file => ({
-    dest: renameHtml(renameMdToHtml(file)),
-    ...await makeHtml(path.join(p, file), mangleApiHref(project, path.dirname(file)))
-  })))
-
-  const mapName: Record<string, string> = {
-    modules: 'module',
-    classes: 'class',
-    interfaces: 'interface',
-    enums: 'enum'
-  }
-
-  data
-    .forEach(d => {
-      const parts = d.dest.split('/')
-      if (parts.length === 1) return
-      delete d.data.sidebar_label
-      const ctx = parts[0]!
-      if (!!mapName[ctx]) {
-        d.data.type = mapName[ctx]
-      } else {
-        console.log(`unkown type ${ctx}`)
-      }
-    })
-  await Promise.all(data.map(async o => {
-    const p = path.join(dst, project, o.dest)
-    const base = path.dirname(p)
-    await fse.ensureDir(base)
-    await fs.writeFile(p, o.html)
-  }))
-  return data
-    .filter(d => !!d.data.type)
-    .map(d => ({
-      path: d.dest,
-      ...d.data
-    }))
-}
-
-async function createApis(projects: string[], root: string, dst: string): Promise<Record<string, ApiRef[]>> {
-  const list = await Promise.all(
-    projects
-      .map(async project => ({
-        project,
-        list: await createApi(project, root, dst)
-      }))
-  )
-  return list.reduce((acc, curr) => {
-    return {
-      ...acc,
-      [curr.project]: curr.list
-    }
-  }, {})
-}
-
 async function collectProject(project: string, src: string): Promise<{ priority: number, data: ProjectRef }> {
   const p = path.join(src, project, 'package.json')
-  const content = await fs.readFile(p, 'utf8')
-  const pack = JSON.parse(content)
+  const packageJson = await fs.readFile(p, 'utf8')
+  const pack = JSON.parse(packageJson)
+  const projectPath = path.join(src, project, 'PROJECT.md')
+  const content = markdown(fse.existsSync(projectPath) ? await fs.readFile(projectPath, 'utf8') : '', s => s)
   return {
     priority: pack.priority ?? 0,
     data: {
@@ -314,7 +180,8 @@ async function collectProject(project: string, src: string): Promise<{ priority:
       title: pack.title ?? pack.name ?? project,
       description: pack.description,
       version: pack.version,
-      keywords: pack.keywords ?? []
+      keywords: pack.keywords ?? [],
+      content
     }
   }
 }
@@ -368,7 +235,7 @@ async function main() {
 
   // api
   await prepDir(apiFolderDst)
-  const apis = await createApis(projects, rootFolder, apiFolderDst)
+  const apis = await generateDocs(projects, rootFolder, apiFolderDst)
 
   // projects
   const projectsData = await collectProjects(projects, rootFolder)
@@ -381,6 +248,9 @@ async function main() {
   }
 
   await fs.writeFile(tocFile, JSON.stringify(outputContent, null, 2))
+
+  // CNAME
+  await fs.writeFile(cnameFile, 'tempots.com')
 
   console.timeEnd('main')
 }

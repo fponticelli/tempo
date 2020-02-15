@@ -12,14 +12,14 @@ limitations under the License.
 */
 
 import { View } from 'tempo-core/lib/view'
-import { UnwrappedDerivedValue } from 'tempo-core/lib/value'
+import { DerivedValue } from 'tempo-core/lib/value'
 import { removeNode } from './utils/dom'
 import { DOMTemplate } from './template'
 import { DOMContext } from './context'
-import { DOMTextValue } from './value'
+import { TextValue } from './value'
 
-export class DOMDerivedTextTemplate<State, Action, Query> implements DOMTemplate<State, Action, Query> {
-  constructor(readonly makeContent: UnwrappedDerivedValue<State, string>) {}
+class DerivedTextTemplate<State, Action, Query> implements DOMTemplate<State, Action, Query> {
+  constructor(readonly makeContent: DerivedValue<State, string>) {}
 
   render(ctx: DOMContext<Action>, state: State): View<State, Query> {
     const { makeContent } = this
@@ -43,7 +43,7 @@ export class DOMDerivedTextTemplate<State, Action, Query> implements DOMTemplate
   }
 }
 
-export class DOMLiteralTextTemplate<State, Action, Query> implements DOMTemplate<State, Action, Query> {
+class LiteralTextTemplate<State, Action, Query> implements DOMTemplate<State, Action, Query> {
   constructor(
     readonly content: string
   ) {}
@@ -60,10 +60,10 @@ export class DOMLiteralTextTemplate<State, Action, Query> implements DOMTemplate
   }
 }
 
-export const text = <State, Action, Query = unknown>(content: DOMTextValue<State>): DOMTemplate<State, Action, Query> => {
+export function text<State, Action, Query = unknown>(content: TextValue<State>): DOMTemplate<State, Action, Query> {
   if (typeof content === 'function') {
-    return new DOMDerivedTextTemplate<State, Action, Query>(content as UnwrappedDerivedValue<State, string>)
+    return new DerivedTextTemplate<State, Action, Query>(content as DerivedValue<State, string>)
   } else {
-    return new DOMLiteralTextTemplate<State, Action, Query>(content || '')
+    return new LiteralTextTemplate<State, Action, Query>(content || '')
   }
 }

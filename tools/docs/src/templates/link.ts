@@ -5,53 +5,62 @@ import { toHref, Route } from '../route'
 import { a, span } from 'tempo-dom/lib/html'
 import { getUnsafe, Option, toBoolean } from 'tempo-std/lib/option'
 import {
-  DOMAttribute,
+  Attribute,
   mapAttribute,
   attributeToHandler
 } from 'tempo-dom/lib/value'
 import { DOMChild } from 'tempo-dom/lib/template'
 
-export const maybeLink = <State>(
-  label: DOMChild<State, Action>,
-  route: DOMAttribute<State, Option<Route>>,
-  className?: DOMAttribute<State, string>
-) =>
+export const maybeLink = <State>(attrs: {
+  label: DOMChild<State, Action>
+  route: Attribute<State, Option<Route>>
+  class?: Attribute<State, string>
+}) =>
   fragment<State, Action>(
     matchBool({
-      condition: mapAttribute(route, toBoolean),
+      condition: mapAttribute(attrs.route, toBoolean),
       false: span(
         {
           attrs: {
-            class: mapAttribute(className || '', v =>
+            class: mapAttribute(attrs.class || '', v =>
               (v ? [v] : []).concat(['is-active']).join(' ')
             )
           }
         },
-        label
+        attrs.label
       ),
-      true: link(label, mapAttribute(route, getUnsafe), className)
+      true: link({
+        label: attrs.label,
+        route: mapAttribute(attrs.route, getUnsafe),
+        class: attrs.class
+      })
     })
   )
 
-export const link = <State>(
-  label: DOMChild<State, Action>,
-  route: DOMAttribute<State, Route>,
-  className?: DOMAttribute<State, string>
-) =>
+export const link = <State>(attrs: {
+  label: DOMChild<State, Action>
+  route: Attribute<State, Route>
+  class?: Attribute<State, string>
+}) =>
   a(
     {
       attrs: {
-        class: className,
-        href: mapAttribute<State, Route, string>(route, route => toHref(route))
+        class: attrs.class,
+        href: mapAttribute<State, Route, string>(attrs.route, route =>
+          toHref(route)
+        )
       },
       events: {
-        click: attributeToHandler(route, (route: Route, e: MouseEvent) => {
-          e.preventDefault()
-          const url = toHref(route)
-          history.pushState(null, '', url || './')
-          return Action.goTo(route)
-        })
+        click: attributeToHandler(
+          attrs.route,
+          (route: Route, e: MouseEvent) => {
+            e.preventDefault()
+            const url = toHref(route)
+            history.pushState(null, '', url || './')
+            return Action.goTo(route)
+          }
+        )
       }
     },
-    label
+    attrs.label
   )

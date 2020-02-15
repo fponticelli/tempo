@@ -35,4 +35,5 @@ export interface ProjectRef {
   description: string | undefined
   version: string
   keywords: string[]
+  content: string
 }

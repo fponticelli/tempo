@@ -11,12 +11,12 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { UnwrappedValue } from 'tempo-core/lib/value'
+import { DerivedOrLiteralValue } from 'tempo-core/lib/value'
 import { keys } from 'tempo-std/lib/objects'
 import { replace } from 'tempo-std/lib/strings'
 import { DOMTemplate } from './template'
 import { DOMContext } from './context'
-import { DOMAttribute } from './value'
+import { Attribute } from './value'
 import { headPortal } from './portal'
 import { el } from './element'
 import { text } from './text'
@@ -82,7 +82,7 @@ export const nestedAtRules: (
 ]
 
 export type StyleDeclarations<State> = {
-  [K in keyof CSSStyleDeclaration]?: K extends number ? never : DOMAttribute<State, CSSStyleDeclaration[K]>
+  [K in keyof CSSStyleDeclaration]?: K extends number ? never : Attribute<State, CSSStyleDeclaration[K]>
 }
 
 export interface MediaQuery<State> {
@@ -90,9 +90,9 @@ export interface MediaQuery<State> {
 }
 
 export interface MediaQueries<State> {
-  [importRule]?: UnwrappedValue<State, string>[]
-  [charset]?: UnwrappedValue<State, string>[]
-  [namespace]?: UnwrappedValue<State, string>[]
+  [importRule]?: DerivedOrLiteralValue<State, string>[]
+  [charset]?: DerivedOrLiteralValue<State, string>[]
+  [namespace]?: DerivedOrLiteralValue<State, string>[]
 
   [media]?: MediaQuery<State>
   [supports]?: MediaQuery<State>
@@ -188,7 +188,7 @@ const processNestedAtRule = <State>
   )
 }
 
-const processOneAtRule = <State>(prefix: string, rule: UnwrappedValue<State, string>) => {
+const processOneAtRule = <State>(prefix: string, rule: DerivedOrLiteralValue<State, string>) => {
   if (typeof rule === 'function') {
     return {
       literal: [],
@@ -202,7 +202,7 @@ const processOneAtRule = <State>(prefix: string, rule: UnwrappedValue<State, str
   }
 }
 
-const processtAtRule = <State>(prefix: string, rules: UnwrappedValue<State, string>[]) => {
+const processtAtRule = <State>(prefix: string, rules: DerivedOrLiteralValue<State, string>[]) => {
   return rules.reduce(
     (acc, curr) => {
       const res = processOneAtRule(prefix, curr)
@@ -256,7 +256,7 @@ type CacheItem = {
 const cacheByName = new Map<string, CacheItem>()
 const cacheByContent = new Map<string, string>()
 
-export const resetCache = () => {
+export function resetCache() {
   counter = 0
   cacheByName.clear()
   cacheByContent.clear()
@@ -288,7 +288,7 @@ function make<State, Action, Query>(
   return name
 }
 
-export class ScopedStyles<State, Action, Query> implements DOMTemplate<State, Action, Query> {
+class ScopedStyles<State, Action, Query> implements DOMTemplate<State, Action, Query> {
   constructor (
     readonly literal: string[],
     readonly derived: ((state: State) => string)[]
@@ -332,9 +332,9 @@ export class ScopedStyles<State, Action, Query> implements DOMTemplate<State, Ac
   }
 }
 
-export const scopedStyles = <State, Action, Query>(
+export function scopedStyles<State, Action, Query>(
   definitions: StyleDefinitions<State>
-) => {
+) {
   const { literal, derived } = processDefinitions(definitions)
   return new ScopedStyles<State, Action, Query>(literal, derived)
 }

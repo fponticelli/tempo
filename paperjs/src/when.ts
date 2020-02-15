@@ -21,7 +21,7 @@ export interface WhenOptions<State> {
   condition: (state: State) => boolean
 }
 
-export class PaperWhenTemplate<State, Action, Query>
+class PaperWhenTemplate<State, Action, Query>
   implements PaperTemplate<State, Action, Query> {
   constructor(
     readonly options: WhenOptions<State>,
@@ -64,19 +64,21 @@ export class PaperWhenTemplate<State, Action, Query>
   }
 }
 
-export const when = <State, Action, Query = unknown>(
+export function when<State, Action, Query = unknown>(
   options: WhenOptions<State>,
   ...children: PaperTemplate<State, Action, Query>[]
-): PaperTemplate<State, Action, Query> =>
-  new PaperWhenTemplate<State, Action, Query>(options, children)
+): PaperTemplate<State, Action, Query> {
+  return new PaperWhenTemplate<State, Action, Query>(options, children)
+}
 
-export const unless = <State, Action, Query = unknown>(
+export function unless<State, Action, Query = unknown>(
   options: WhenOptions<State>,
   ...children: PaperTemplate<State, Action, Query>[]
-): PaperTemplate<State, Action, Query> =>
-  new PaperWhenTemplate<State, Action, Query>(
+): PaperTemplate<State, Action, Query> {
+  return new PaperWhenTemplate<State, Action, Query>(
     {
       condition: (v: State) => !options.condition(v)
     },
     children
   )
+}

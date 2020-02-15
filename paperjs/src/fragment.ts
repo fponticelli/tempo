@@ -16,7 +16,7 @@ import { PaperTemplate } from './template'
 import { PaperContext } from './context'
 import { map } from 'tempo-std/lib/arrays'
 
-export class PaperFragmentTemplate<State, Action, Query>
+class PaperFragmentTemplate<State, Action, Query>
   implements PaperTemplate<State, Action, Query> {
   constructor(readonly children: PaperTemplate<State, Action, Query>[]) {}
 
@@ -36,7 +36,8 @@ export class PaperFragmentTemplate<State, Action, Query>
   }
 }
 
-export const fragment = <State, Action, Query = unknown>(
+export function fragment<State, Action, Query = unknown>(
   ...children: PaperTemplate<State, Action, Query>[]
-): PaperTemplate<State, Action, Query> =>
-  new PaperFragmentTemplate<State, Action, Query>(children)
+): PaperTemplate<State, Action, Query> {
+  return new PaperFragmentTemplate<State, Action, Query>(children)
+}

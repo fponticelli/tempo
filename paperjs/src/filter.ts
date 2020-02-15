@@ -16,7 +16,7 @@ import { View } from 'tempo-core/lib/view'
 import { PaperContext } from './context'
 import { map } from 'tempo-std/lib/arrays'
 
-export class FilterStateTemplate<State, Action, Query>
+class FilterStateTemplate<State, Action, Query>
   implements PaperTemplate<State, Action, Query> {
   constructor(
     readonly isSame: (prev: State, next: State) => boolean,
@@ -45,11 +45,12 @@ export class FilterStateTemplate<State, Action, Query>
   }
 }
 
-export const filterState = <State, Action, Query = unknown>(
+export function filterState<State, Action, Query = unknown>(
   options: { isSame?: (prev: State, next: State) => boolean },
   ...children: PaperTemplate<State, Action, Query>[]
-): PaperTemplate<State, Action, Query> =>
-  new FilterStateTemplate(
+): PaperTemplate<State, Action, Query> {
+  return new FilterStateTemplate(
     options.isSame || ((a: State, b: State) => a === b),
     children
   )
+}

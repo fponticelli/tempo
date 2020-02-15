@@ -11,10 +11,16 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-export * from './assert'
-export * from './functions'
-export * from './generic'
-export * from './differentiate'
-export * from './index_type'
-export * from './objects'
-export * from './tuples'
+import * as fse from 'fs-extra'
+import { format } from 'prettier'
+
+const config = fse.readJsonSync('../../.prettierrc')
+
+export function makePretty(code: string)  {
+  try {
+    return format(code, config)
+  } catch (_) {
+    // console.log(code)
+    return code
+  }
+}

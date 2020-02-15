@@ -13,8 +13,6 @@
   "sideEffects": false,
   "private": false,
   "scripts": {
-    "docs:clear": "rm -rf docs",
-    "docs": "npm run docs:clear && typedoc --plugin typedoc-plugin-markdown --options ../typedoc.json --out ./docs src && mv ./website/sidebars.json ./docs/toc.json && rm -rf website",
     "clean": "rm -rf lib/* && rm -rf es6/*",
     "build": "npm run clean && npx tsc && npx tsc -p tsconfig.es6.json",
     "test": "jest --passWithNoTests",
@@ -35,15 +33,13 @@
     "url": "https://github.com/fponticelli"
   },
   "devDependencies": {
-    "typedoc": "0.16.7",
-    "typedoc-plugin-markdown": "2.2.16",
-    "@types/jest": "24.0.22",
-    "@types/node": "10.12.18",
-    "jest": "24.9.0",
+    "@types/jest": "25.1.2",
+    "@types/node": "12.12.6",
+    "jest": "25.1.0",
     "prettier": "1.19.1",
-    "ts-jest": "24.1.0",
-    "tslint": "5.20.1",
-    "typescript": "3.7.2"
+    "ts-jest": "25.2.0",
+    "tslint": "6.0.0",
+    "typescript": "3.7.5"
   },
   "main": "lib/index.js",
   "module": "es6/index.js",

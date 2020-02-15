@@ -1,9 +1,22 @@
+/*
+Copyright 2019 Google LLC
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+    https://www.apache.org/licenses/LICENSE-2.0
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+
 import { DOMTemplate, DOMChild } from './template'
 import { DOMContext } from './context'
 import { map as mapA, each } from 'tempo-std/lib/arrays'
-import { domChildToTemplate } from './utils'
+import { domChildToTemplate } from './utils/dom'
 
-export const holdMappedState = <State, HeldState>(map: (s: State) => HeldState) => {
+export function holdMappedState<State, HeldState>(map: (s: State) => HeldState) {
   let counter = 0
   const stateCache = new Map<number, HeldState>()
   const capture = <Action, Query>(...children: DOMChild<State, Action, Query>[]): DOMTemplate<State, Action, Query> => {
@@ -55,4 +68,6 @@ export const holdMappedState = <State, HeldState>(map: (s: State) => HeldState) 
   return { capture, release }
 }
 
-export const holdState = <State>() => holdMappedState<State, State>(a => a)
+export function holdState<State>() {
+  return holdMappedState<State, State>(a => a)
+}

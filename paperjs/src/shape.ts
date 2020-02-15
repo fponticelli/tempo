@@ -42,10 +42,10 @@ type ShapeOptions<State, Action, Query, T, Sub> = Partial<
   >
 >
 
-export const circle = <State, Action, Query = unknown, T = unknown>(
+export function circle<State, Action, Query = unknown, T = unknown>(
   options: ShapeOptions<State, Action, Query, T, Shape.Circle>
-) =>
-  createItem<
+) {
+  return createItem<
     State,
     Action,
     Query,
@@ -59,11 +59,12 @@ export const circle = <State, Action, Query = unknown, T = unknown>(
         : new Shape.Circle(new Point(0, 0), 0),
     options
   )
+}
 
-export const rectangle = <State, Action, Query = unknown, T = unknown>(
+export function rectangle<State, Action, Query = unknown, T = unknown>(
   options: ShapeOptions<State, Action, Query, T, Shape.Rectangle>
-) =>
-  createItem<
+) {
+  return createItem<
     State,
     Action,
     Query,
@@ -77,11 +78,12 @@ export const rectangle = <State, Action, Query = unknown, T = unknown>(
         : new Shape.Rectangle(new Point(0, 0), new Point(0, 0)),
     options
   )
+}
 
-export const ellipse = <State, Action, Query = unknown, T = unknown>(
+export function ellipse<State, Action, Query = unknown, T = unknown>(
   options: ShapeOptions<State, Action, Query, T, Shape.Ellipse>
-) =>
-  createItem<
+) {
+  return createItem<
     State,
     Action,
     Query,
@@ -98,3 +100,4 @@ export const ellipse = <State, Action, Query = unknown, T = unknown>(
           }),
     options
   )
+}

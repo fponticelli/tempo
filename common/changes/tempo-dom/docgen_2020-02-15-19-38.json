@@ -1,0 +1,15 @@
+{
+  "changes": [
+    {
+      "packageName": "tempo-dom",
+      "comment": "Remove DOM prefix where not needed and export less types",
+      "type": "minor"
+    }, {
+      "packageName": "tempo-dom",
+      "comment": "Remove `index` file (imports must point specific modules)",
+      "type": "minor"
+    }
+  ],
+  "packageName": "tempo-dom",
+  "email": "franco.ponticelli@gmail.com"
+}

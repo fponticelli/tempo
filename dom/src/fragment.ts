@@ -17,7 +17,7 @@ import { DOMTemplate, DOMChild } from './template'
 import { DOMContext } from './context'
 import { map } from 'tempo-std/lib/arrays'
 
-export class DOMFragmentTemplate<State, Action, Query> implements DOMTemplate<State, Action, Query> {
+class FragmentTemplate<State, Action, Query> implements DOMTemplate<State, Action, Query> {
   constructor(
     readonly children: DOMTemplate<State, Action, Query>[]
   ) {}
@@ -38,6 +38,7 @@ export class DOMFragmentTemplate<State, Action, Query> implements DOMTemplate<St
   }
 }
 
-export const fragment = <State, Action, Query = unknown>(...children: DOMChild<State, Action, Query>[])
-    : DOMTemplate<State, Action, Query> =>
-  new DOMFragmentTemplate<State, Action, Query>(map(domChildToTemplate, children))
+export function fragment<State, Action, Query = unknown>(...children: DOMChild<State, Action, Query>[])
+    : DOMTemplate<State, Action, Query> {
+  return new FragmentTemplate<State, Action, Query>(map(domChildToTemplate, children))
+}

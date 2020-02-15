@@ -11,21 +11,21 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { UnwrappedValue, UnwrappedDerivedValue } from 'tempo-core/lib/value'
+import { DerivedOrLiteralValue, DerivedValue } from 'tempo-core/lib/value'
 import { DOMContext } from './context'
 
-export type DOMAttribute<State, Value> = UnwrappedValue<State, Value | undefined> | undefined
-export type DOMTextValue<S> = DOMAttribute<S, string>
-export type DOMEventHandler<S, Action, Ev extends Event = Event, El extends Element = Element> =
+export type Attribute<State, Value> = DerivedOrLiteralValue<State, Value | undefined> | undefined
+export type TextValue<S> = Attribute<S, string>
+export type EventHandler<S, Action, Ev extends Event = Event, El extends Element = Element> =
   (state: S, event: Ev, element: El) => Action | undefined
-export type DOMStyleAttribute<State, Value> = UnwrappedValue<State, Value | undefined>
+export type StyleAttribute<State, Value> = DerivedOrLiteralValue<State, Value | undefined>
 
 export type AttributeValue = string | number | boolean | string[]
 
-export interface DOMAttributes<State, Action, Query = unknown, El extends Element = Element, T = unknown> {
-  attrs?: Record<string, DOMAttribute<State, AttributeValue>>
-  events?: Record<string, DOMEventHandler<State, Action, any, El>>
-  styles?: Record<string, DOMStyleAttribute<State, string>>
+export interface Attributes<State, Action, Query = unknown, El extends Element = Element, T = unknown> {
+  attrs?: Record<string, Attribute<State, AttributeValue>>
+  events?: Record<string, EventHandler<State, Action, any, El>>
+  styles?: Record<string, StyleAttribute<State, string>>
   afterrender?:  (state: State, el: El, ctx: DOMContext<Action>) => T | undefined
   beforechange?: (state: State, el: El, ctx: DOMContext<Action>, value: T | undefined) => T | undefined
   afterchange?:  (state: State, el: El, ctx: DOMContext<Action>, value: T | undefined) => T | undefined
@@ -33,12 +33,12 @@ export interface DOMAttributes<State, Action, Query = unknown, El extends Elemen
   respond?: (query: Query, el: El, ctx: DOMContext<Action>, value: T | undefined) => T | undefined
 }
 
-export const mapAttribute = <State, A, B>(attr: DOMAttribute<State, A>, map: (a: A) => B): DOMAttribute<State, B> => {
+export function mapAttribute<State, A, B>(attr: Attribute<State, A>, map: (a: A) => B): Attribute<State, B> {
   if (typeof attr === 'undefined') {
     return undefined
   } else if (typeof attr === 'function') {
     return (state: State) => {
-      const res = (attr as UnwrappedDerivedValue<State, A>)(state)
+      const res = (attr as DerivedValue<State, A>)(state)
       if (res !== undefined)
         return map(res)
       else
@@ -49,15 +49,15 @@ export const mapAttribute = <State, A, B>(attr: DOMAttribute<State, A>, map: (a:
   }
 }
 
-export const attributeToHandler = <State, Value, Action, Ev extends Event, El extends Element>(
-  attr: DOMAttribute<State, Value>,
-  handler: DOMEventHandler<Value, Action, Ev, El>
-): DOMEventHandler<State, Action, Ev, El> => {
+export function attributeToHandler<State, Value, Action, Ev extends Event, El extends Element>(
+  attr: Attribute<State, Value>,
+  handler: EventHandler<Value, Action, Ev, El>
+): EventHandler<State, Action, Ev, El> {
   if (typeof attr === 'undefined') {
     return () => { return undefined }
   } else if (typeof attr === 'function') {
     return (state: State, event: Ev, element: El) => {
-      const res = (attr as UnwrappedDerivedValue<State, Value>)(state)
+      const res = (attr as DerivedValue<State, Value>)(state)
       if (res !== undefined)
         return handler(res, event, element)
       else
@@ -70,9 +70,9 @@ export const attributeToHandler = <State, Value, Action, Ev extends Event, El ex
   }
 }
 
-export const resolveAttribute = <State, Value>(attr: DOMAttribute<State, Value>): ((state: State) => Value | undefined) =>  {
+export function resolveAttribute<State, Value>(attr: Attribute<State, Value>): ((state: State) => Value | undefined) {
   if (typeof attr === 'function') {
-    return (attr as UnwrappedDerivedValue<State, Value>)
+    return (attr as DerivedValue<State, Value>)
   } else {
     return (_: State): Value | undefined => attr
   }

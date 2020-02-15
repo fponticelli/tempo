@@ -11,10 +11,19 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-export type UnwrappedLiteralValue<Value> = Value
-export type UnwrappedDerivedValue<State, Value> = (
-  state: State
-) => Value | undefined
-export type UnwrappedValue<State, Value> =
-  | UnwrappedLiteralValue<Value>
-  | UnwrappedDerivedValue<State, Value>
+/**
+ * All attributes and DOM values in a Tempo app are described by either literal
+ * values or values that are derived from the app current state.
+ */
+
+/**
+ * Describes a `Value` that can only be inferred from some other value `State`.
+ */
+export type DerivedValue<State, Value> = (state: State) => Value | undefined
+
+/**
+ * A value that can be either a literal or derived from a state.
+ */
+export type DerivedOrLiteralValue<State, Value> =
+  | Value
+  | DerivedValue<State, Value>

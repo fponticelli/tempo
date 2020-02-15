@@ -1,6 +1,6 @@
 import { matchKind } from 'tempo-std/lib/match'
 import { deepEqual } from 'tempo-std/lib/equals'
-import { Option, some, none, getUnsafe } from 'tempo-std/lib/option'
+import { Option, some, none } from 'tempo-std/lib/option'
 import { PageRef, Toc } from './toc'
 import { ProjectRef } from './toc'
 import { Store } from 'tempo-store/lib/store'
@@ -11,7 +11,7 @@ import { success } from 'tempo-std/lib/async_result'
 export type Route =
   | { kind: 'Page', path: string }
   | { kind: 'Demos' }
-  | { kind: 'Demo', path: string }
+  | { kind: 'Project', name: string }
   | { kind: 'Api', name: string, path: string }
   | { kind: 'Changelog', name: string }
   | { kind: 'NotFound', path: string }
@@ -20,19 +20,28 @@ export type Route =
 export const toHref = matchKind<Route, string>({
   Home: _ => '',
   Demos: o => `#/demo`,
-  Demo: o => `#/demo/${o.path}`,
   Page: o => `#/page/${o.path}`,
+  Project: o => `#/project/${o.name}`,
   Api: o => `#/api/${o.name}/${o.path}`,
   NotFound: o => o.path,
   Changelog: o => `#/changelog/${o.name}`
 })
 
+export const toUrlForAnalytics = (r: Route) => {
+  const href = toHref(r)
+  if (!href)
+    return '/'
+  if (href.startsWith('#'))
+    return href.substring(1)
+  return href
+}
+
 export const toContentUrl = matchKind<Route, Option<string>>({
   Home: _ => some('pages/index.html'),
   Api: o => some(`api/${o.name}/${o.path}`),
   Demos: _ => none,
-  Demo: o => some(`demo/${o.path}`),
   Page: o => some(`pages/${o.path}`),
+  Project: _ => none,
   NotFound: _ => none,
   Changelog: o => some(`changelog/${o.name}.html`)
 })
@@ -41,13 +50,13 @@ export const Route = {
   home: ({ kind: 'Home' }) as Route,
   api: (name: string, path: string): Route => ({ kind: 'Api', name, path }),
   demos: ({ kind: 'Demos' }) as Route,
-  demo: (path: string): Route => ({ kind: 'Demo', path }),
   page: (path: string): Route => {
     if (path === 'index.html')
       return Route.home
     else
       return { kind: 'Page', path }
   },
+  project: (name: string): Route => ({ kind: 'Project', name }),
   changelog: (name: string): Route => ({ kind: 'Changelog', name }),
   notFound: (path: string): Route => ({ kind: 'NotFound', path })
 }
@@ -56,10 +65,6 @@ export type Link = {
   label: string
   route: Option<Route>
 }
-
-// export const pageToLink = (page: PageRef, active: Boolean): Link => {
-//   return ({ label: page.title, route: active ? none : some(Route.page(page.path)) })
-// }
 
 export const pageToRoute = (page: PageRef): Route => {
   return Route.page(page.path)
@@ -92,12 +97,12 @@ export const parseUrl = (url: string): Route => {
       return Route.api(name, path)
     } else if (url === '/demo') {
       return Route.demos
-    } else if (url.startsWith('/demo/')) {
-      return Route.demo(url.substring(6))
+    } else if (url.startsWith('/project/')) {
+      return Route.project(url.substring(9))
     } else if (url.startsWith('/page/')) {
       return Route.page(url.substring(6))
     } else if (url.startsWith('/changelog/')) {
-      return Route.page(url.substring(11))
+      return Route.changelog(url.substring(11))
     } else {
       return Route.notFound(url)
     }
@@ -109,11 +114,17 @@ export const isApiProjectRoute = (route: Route, name: string) => {
 }
 
 export const contentFromRoute = (store: Store<State, Action>, toc: Toc, route: Route) => {
-  if (route.kind === 'Demo') {
-    location.href = getUnsafe(toContentUrl(route))
+  if (route.kind === 'Project') {
+    const proj = toc.projects.find(p => p.name === route.name)!
+    store.process(Action.loadedContent(success(Content.project(proj))))
   } else if (route.kind === 'Demos') {
     store.process(Action.loadedContent(success(Content.demos(toc.demos))))
   } else {
     store.process(Action.requestPageContent)
   }
+}
+
+export const parseLocation = () => {
+  const url = location.pathname.split('/').pop() + location.hash
+  return parseUrl(url)
 }

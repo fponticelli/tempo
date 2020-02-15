@@ -3,15 +3,23 @@ import { JSONValue } from 'tempo-std/lib/json'
 
 export type HttpError = { kind: 'HttpError'; message: string }
 
-export const loadText = async (
+const cache = new Map<string, Promise<Result<string, HttpError>>>()
+
+export const loadText = (
   path: string
 ): Promise<Result<string, HttpError>> => {
-  try {
-    const response = await fetch(path)
-    return success(await response.text())
-  } catch (e) {
-    return failure({ kind: 'HttpError', message: String(e) })
+  if (cache.has(path)) {
+    return cache.get(path)!
   }
+
+  const promise = fetch(path)
+    .then(r => r.text())
+    .then(v => success<string, HttpError>(v))
+    .catch(e => failure<string, HttpError>({ kind: 'HttpError', message: String(e) }))
+
+  cache.set(path, promise)
+
+  return promise
 }
 
 export const loadJson = async (

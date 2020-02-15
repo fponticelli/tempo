@@ -11,13 +11,24 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+/**
+ * A `Template` is a declarative representation of a `View`. The `Template` will
+ * be interpreted and realized into a `View` by invoking the `render` method.
+ */
+
 import { View } from './view'
 
+/**
+ * An object representing a `Template` that can be rendered into a `View`.
+ */
+export interface Template<State, Query, Context> {
+  render: RenderMethod<State, Query, Context>
+}
+
+/**
+ * Function signature for the `Template.render()` method.
+ */
 export type RenderMethod<State, Query, Context> = (
   ctx: Context,
   state: State
 ) => View<State, Query>
-
-export interface Template<State, Query, Context> {
-  render: RenderMethod<State, Query, Context>
-}

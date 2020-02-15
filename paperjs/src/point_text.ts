@@ -42,10 +42,10 @@ type ShapeOptions<State, Action, Query, T, Sub> = Partial<
   >
 >
 
-export const shape = <State, Action, Query = unknown, T = unknown>(
+export function shape<State, Action, Query = unknown, T = unknown>(
   options: ShapeOptions<State, Action, Query, T, PointText>
-) =>
-  createItem<
+) {
+  return createItem<
     State,
     Action,
     Query,
@@ -53,3 +53,4 @@ export const shape = <State, Action, Query = unknown, T = unknown>(
     T,
     ShapeOptions<State, Action, Query, T, PointText>
   >((_: State) => new PointText(new Point(0, 0)), options)
+}

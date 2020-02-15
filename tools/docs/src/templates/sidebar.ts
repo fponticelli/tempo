@@ -11,10 +11,10 @@ import {
   pageToRoute,
   projectChangelogMatchesRoute,
   apiMatchesRoute,
-  isApiProjectRoute
+  isApiProjectRoute,
+  sameRoute
 } from '../route'
 import { some, none } from 'tempo-std/lib/option'
-import { compareCaseInsensitive } from 'tempo-std/lib/strings'
 import { keys } from 'tempo-std/lib/objects'
 import { SectionRef, ProjectRef } from '../toc'
 import { DOMTemplate } from 'tempo-dom/lib/template'
@@ -42,11 +42,11 @@ section = lazy(() =>
           { getArray: ([_, s]) => s.pages },
           li(
             {},
-            maybeLink(
-              ([page]) => page.title,
-              ([page, [_1, _2, route]]) =>
+            maybeLink({
+              label: ([page]) => page.title,
+              route: ([page, [_1, _2, route]]) =>
                 pageMatchesRoute(page, route) ? none : some(pageToRoute(page))
-            )
+            })
           )
         ),
         when(
@@ -79,39 +79,43 @@ const api = fragment<
   [ApiRef, { apis: ApiRef[]; project: ProjectRef; route: Route }, number],
   Action
 >(
-  maybeLink(
-    ([r]) => r.title,
-    ([r, p]) =>
+  maybeLink({
+    label: ([r]) => r.title,
+    route: ([r, p]) =>
       apiMatchesRoute(p.project.name, r.path, p.route)
         ? none
         : some(Route.api(p.project.name, r.path))
-  )
+  })
 )
 
 const project = div<[ProjectRef, Sidebar, number], Action>(
   {},
   p(
     { attrs: { class: '' } },
-    maybeLink(
-      ([s]) => `v.${s.version}`,
-      ([p, s]) =>
+    maybeLink({
+      label: ([s]) => `v.${s.version}`,
+      route: ([p, s]) =>
         projectChangelogMatchesRoute(p, s.route)
           ? none
           : some(Route.changelog(p.name)),
-      'is-pulled-right is-size-7'
-    ),
-    maybeLink(
-      ([p]) => p.title,
-      ([p, s]) =>
-        apiMatchesRoute(p.name, 'index.html', s.route)
+      class: 'is-pulled-right is-size-7'
+    }),
+    maybeLink({
+      label: ([p]) => p.title,
+      route: ([p, s]) =>
+        sameRoute(Route.project(p.name), s.route)
           ? none
-          : some(Route.api(p.name, 'index.html')),
-      'is-uppercase has-text-weight-bold'
-    )
+          : some(Route.project(p.name)),
+      class: 'is-uppercase has-text-weight-bold'
+    })
   ),
   div({ attrs: { class: 'is-size-7' } }, ([s]) => s.description),
   when(
-    { condition: ([p, s]) => isApiProjectRoute(s.route, p.name) },
+    {
+      condition: ([p, s]) =>
+        isApiProjectRoute(s.route, p.name) ||
+        sameRoute(Route.project(p.name), s.route)
+    },
     div(
       { attrs: { class: 'box api-box' } },
       mapState(
@@ -129,43 +133,13 @@ const project = div<[ProjectRef, Sidebar, number], Action>(
         >(
           {
             map: state => ({
-              apis: state.apis
-                .filter(a => a.type === 'module')
-                .sort((a, b) => compareCaseInsensitive(a.title, b.title)),
+              apis: state.apis,
               project: state.project,
               route: state.route
             })
           },
           when(
             { condition: state => state.apis.length > 0 },
-            p({ attrs: { class: 'title is-6 is-marginless' } }, 'modules'),
-            ul(
-              { attrs: { class: 'links-list' } },
-              iterate<
-                { apis: ApiRef[]; project: ProjectRef; route: Route },
-                ApiRef[],
-                Action
-              >({ getArray: state => state.apis }, li({}, api))
-            )
-          )
-        ),
-        mapState<
-          { apis: ApiRef[]; project: ProjectRef; route: Route },
-          { apis: ApiRef[]; project: ProjectRef; route: Route },
-          Action
-        >(
-          {
-            map: state => ({
-              apis: state.apis
-                .filter(a => a.type !== 'module')
-                .sort((a, b) => compareCaseInsensitive(a.title, b.title)),
-              project: state.project,
-              route: state.route
-            })
-          },
-          when(
-            { condition: state => state.apis.length > 0 },
-            p({ attrs: { class: 'title is-6 is-marginless' } }, 'types'),
             ul(
               { attrs: { class: 'links-list' } },
               iterate<

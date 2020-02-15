@@ -13,7 +13,7 @@
     "angular-alternative"
   ],
   "scripts": {
-    "publish:npm": "rush publish -a -b master -p -r https://registry.npmjs.org/ --include-all && npm run changelog:all",
+    "npm:publish": "rush publish -a -b master -p -r https://registry.npmjs.org/ --include-all",
     "build": "echo \"nothing to build at root\"",
     "test:all": "(cd std && npm run test) && (cd core && npm run test) && (cd store && npm run test) && (cd dom && npm run test)",
     "docs:generate": "(cd tools/docs && npm run docs:update)",
@@ -31,11 +31,11 @@
     "url": "https://github.com/fponticelli"
   },
   "dependencies": {
-    "@types/jest": "24.0.22",
-    "jest": "24.9.0",
-    "jsdom": "15.1.1",
-    "ts-jest": "24.1.0",
-    "typescript": "3.7.2",
+    "@types/jest": "25.1.2",
+    "jest": "25.1.0",
+    "jsdom": "16.1.0",
+    "ts-jest": "25.2.0",
+    "typescript": "3.7.5",
     "gh-pages": "2.2.0"
   }
 }

@@ -15,7 +15,7 @@ import { PaperTemplate } from './template'
 import { mapState } from './map'
 import { until } from './until'
 
-export const iterate = <
+export function iterate<
   OuterState,
   InnerState extends any[],
   Action,
@@ -30,7 +30,7 @@ export const iterate = <
     Action,
     Query
   >[]
-): PaperTemplate<OuterState, Action, Query> => {
+): PaperTemplate<OuterState, Action, Query> {
   let outerState: OuterState
   return mapState<OuterState, InnerState, Action, Query>(
     {
@@ -49,7 +49,7 @@ export const iterate = <
   )
 }
 
-export const iterateItems = <
+export function iterateItems<
   OuterState,
   InnerState extends any[],
   Action,
@@ -60,7 +60,7 @@ export const iterateItems = <
     getArray: (outer: OuterState) => InnerState
   },
   ...children: PaperTemplate<InnerState[number], Action, Query>[]
-): PaperTemplate<OuterState, Action, Query> => {
+): PaperTemplate<OuterState, Action, Query> {
   return mapState<OuterState, InnerState, Action, Query>(
     {
       map: outer => options.getArray(outer)

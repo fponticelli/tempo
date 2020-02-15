@@ -14,12 +14,12 @@ limitations under the License.
 import { JSDOM } from 'jsdom'
 import { DOMContext } from '../src/context'
 
-export const getWindow = (): Window => {
+export function getWindow(): Window {
   const dom = new JSDOM(`<!DOCTYPE html>`)
   return dom.window
 }
 
-export const createContext = <Action>(dispatch?: (action: Action) => void): DOMContext<Action> => {
+export function createContext<Action>(dispatch?: (action: Action) => void): DOMContext<Action> {
   const { document } = getWindow()
   return new DOMContext(
     document,
@@ -29,25 +29,25 @@ export const createContext = <Action>(dispatch?: (action: Action) => void): DOMC
   )
 }
 
-export const createDiv = () => {
+export function createDiv() {
   return getWindow().document.createElement('div')
 }
 
-export const createA = () => {
+export function createA() {
   return getWindow().document.createElement('a')
 }
 
-export const createImg = () => {
+export function createImg() {
   return getWindow().document.createElement('img')
 }
 
-export const createInput = (type = 'text') => {
+export function createInput(type = 'text') {
   const el = getWindow().document.createElement('input')
   el.setAttribute('type', type)
   return el
 }
 
-export const createTextInput = () => {
+export function createTextInput() {
   const input = getWindow().document.createElement('input')
   input.type = 'text'
   return input

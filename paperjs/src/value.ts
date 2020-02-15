@@ -11,11 +11,11 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { UnwrappedValue, UnwrappedDerivedValue } from 'tempo-core/lib/value'
+import { DerivedOrLiteralValue, DerivedValue } from 'tempo-core/lib/value'
 import { Project } from 'paper'
 
 export type PaperAttribute<State, Value> =
-  | UnwrappedValue<State, Value | undefined>
+  | DerivedOrLiteralValue<State, Value | undefined>
   | undefined
 
 export type PaperEventHandler<State, Action, Event, Target> = (
@@ -25,11 +25,11 @@ export type PaperEventHandler<State, Action, Event, Target> = (
   project: Project
 ) => Action | undefined
 
-export const resolveAttribute = <State, Value>(
+export function resolveAttribute<State, Value>(
   attr: PaperAttribute<State, Value>
-): ((state: State) => Value | undefined) => {
+): (state: State) => Value | undefined {
   if (typeof attr === 'function') {
-    return attr as UnwrappedDerivedValue<State, Value>
+    return attr as DerivedValue<State, Value>
   } else {
     return (_: State): Value | undefined => attr
   }

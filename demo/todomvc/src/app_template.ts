@@ -26,7 +26,7 @@ import {
   p,
   button
 } from 'tempo-dom/lib/html'
-import { DOMEventHandler } from 'tempo-dom/lib/value'
+import { EventHandler } from 'tempo-dom/lib/value'
 import { filterState } from 'tempo-dom/lib/filter'
 import { iterate } from 'tempo-dom/lib/iterate'
 import { when } from 'tempo-dom/lib/when'
@@ -35,7 +35,7 @@ import { State, Filter, Todo } from './state'
 
 const changeF = <El extends Element>(
   filter: Filter
-): DOMEventHandler<State, Action, MouseEvent, El> => (state: State) =>
+): EventHandler<State, Action, MouseEvent, El> => (state: State) =>
   state.filter === filter ? undefined : Action.toggleFilter(filter)
 
 const selectedF = (filter: Filter) => (state: State) =>

@@ -20,7 +20,7 @@ import {
   setStyleAttribute,
   setBoolProperty,
   setProperty
-} from './utils/set_attribute'
+} from './set_attribute'
 
 export const attributeNameMap: Record<string, string> = {
   acceptcharset: 'accept-charset',
@@ -30,7 +30,10 @@ export const attributeNameMap: Record<string, string> = {
   htmlfor: 'for'
 }
 
-export const htmlAttributeMap: Record<string, (el: Element, name: string, value: any) => void> = {
+export const htmlAttributeMap: Record<
+  string,
+  (el: Element, name: string, value: any) => void
+> = {
   'accept-charset': setSpaceSeparated,
   class: setSpaceSeparated,
   acceptcharset: setSpaceSeparated,

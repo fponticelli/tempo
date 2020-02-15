@@ -11,6 +11,11 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+/**
+ * `nel` stands for 'non-empty list'. This module provides functions
+ * to manipulate and generate `Nel<T>` values.
+ */
+
 import { Newtype, NewtypeClass } from './newtype'
 import * as Arr from './arrays'
 import { Ordering } from './ord'
@@ -24,48 +29,59 @@ class NelTypeClass<T> extends NewtypeClass<Nel<T>> {
 
 const inst = new NelTypeClass<unknown>()
 
-export const Nel = <T>() => inst as NelTypeClass<T>
+export function Nel<T>() { return inst as NelTypeClass<T> }
 
-export const isValid = <T>(arr: T[]) => arr.length > 0
+export function isValid<T>(arr: T[]) { return arr.length > 0 }
 
-// export const makeNel = <T>(arr: T[]) => makeWrap<Nel<T>>(isValid)(arr)
+// export function makeNel<T>(arr: T[]) { return makeWrap<Nel<T>>(isValid)(arr) }
 
-export const ofValue = <T>(value: T): Nel<T> => Nel<T>().unsafeOf([value])
+export function ofValue<T>(value: T): Nel<T> { return Nel<T>().unsafeOf([value]) }
 
-export const length = <T>(nel: Nel<T>) => Nel<T>().get(nel).length
+export function length<T>(nel: Nel<T>) { return Nel<T>().get(nel).length }
 
-export const map = <A, B>(f: (a: A) => B, nel: Nel<A>): Nel<B> =>
-  Nel<B>().unsafeOf(Arr.map(f, Nel<A>().get(nel)))!
+export function map<A, B>(f: (a: A) => B, nel: Nel<A>): Nel<B> {
+  return Nel<B>().unsafeOf(Arr.map(f, Nel<A>().get(nel)))!
+}
 
-export const flatMap = <A, B>(f: (a: A) => Nel<B>, nel: Nel<A>): Nel<B> =>
-  Nel<B>().unsafeOf(Arr.flatMap(v => Nel<B>().get(f(v)), Nel<A>().get(nel)))!
+export function flatMap<A, B>(f: (a: A) => Nel<B>, nel: Nel<A>): Nel<B> {
+  return Nel<B>().unsafeOf(Arr.flatMap(v => Nel<B>().get(f(v)), Nel<A>().get(nel)))!
+}
 
-export const head = <A>(nel: Nel<A>): A => Nel<A>().get(nel)[0]
-export const tail = <A>(nel: Nel<A>): A[] => Nel<A>().get(nel).slice(1)
+export function head<A>(nel: Nel<A>): A { return Nel<A>().get(nel)[0] }
+export function tail<A>(nel: Nel<A>): A[] { return Nel<A>().get(nel).slice(1) }
 
-export const equals = <T>(predicate: (a: T, b: T) => boolean, a: Nel<T>, b: Nel<T>): boolean =>
-  Arr.equals(predicate, Nel<T>().get(a), Nel<T>().get(b))
+export function equals<T>(predicate: (a: T, b: T) => boolean, a: Nel<T>, b: Nel<T>): boolean {
+  return Arr.equals(predicate, Nel<T>().get(a), Nel<T>().get(b))
+}
 
-export const filter = <T>(predicate: (v: T) => boolean, nel: Nel<T>): T[] =>
-  Arr.filter(predicate, Nel<T>().get(nel))
+export function filter<T>(predicate: (v: T) => boolean, nel: Nel<T>): T[] {
+  return Arr.filter(predicate, Nel<T>().get(nel))
+}
 
-export const flatten = <T>(nel: Nel<Nel<T>>): Nel<T> =>
-  Nel<T>().unsafeOf(Arr.flatten(nel as unknown as T[][]))
+export function flatten<T>(nel: Nel<Nel<T>>): Nel<T> {
+  return Nel<T>().unsafeOf(Arr.flatten(nel as unknown as T[][]))
+}
 
-export const foldLeft = <T, B>(f: (acc: B, curr: T) => B, nel: Nel<T>, b: B): B =>
-  Arr.foldLeft(f, Nel<T>().get(nel), b)
+export function foldLeft<T, B>(f: (acc: B, curr: T) => B, nel: Nel<T>, b: B): B {
+  return Arr.foldLeft(f, Nel<T>().get(nel), b)
+}
 
-export const all = <T>(predicate: (v: T) => boolean, nel: Nel<T>): boolean =>
-  Arr.all(predicate, Nel<T>().get(nel))
+export function all<T>(predicate: (v: T) => boolean, nel: Nel<T>): boolean {
+  return Arr.all(predicate, Nel<T>().get(nel))
+}
 
-export const any = <T>(predicate: (v: T) => boolean, nel: Nel<T>): boolean =>
-  Arr.any(predicate, Nel<T>().get(nel))
+export function any<T>(predicate: (v: T) => boolean, nel: Nel<T>): boolean {
+  return Arr.any(predicate, Nel<T>().get(nel))
+}
 
-export const each = <T>(f: (v: T) => void, nel: Nel<T>): void =>
-  Arr.each(f, Nel<T>().get(nel))
+export function each<T>(f: (v: T) => void, nel: Nel<T>): void {
+  return Arr.each(f, Nel<T>().get(nel))
+}
 
-export const concat = <A>(...nels: Nel<A>[]): Nel<A> =>
-  Nel<A>().unsafeOf(Arr.concat(...nels as unknown as A[][]))
+export function concat<A>(...nels: Nel<A>[]): Nel<A> {
+  return Nel<A>().unsafeOf(Arr.concat(...nels as unknown as A[][]))
+}
 
-export const sort = <A>(compare: (a: A, b: A) => Ordering, arr: Nel<A>): Nel<A> =>
-  Nel<A>().unsafeOf(Arr.sort(compare, Nel<A>().get(arr)))
+export function sort<A>(compare: (a: A, b: A) => Ordering, arr: Nel<A>): Nel<A> {
+  return Nel<A>().unsafeOf(Arr.sort(compare, Nel<A>().get(arr)))
+}

@@ -58,10 +58,10 @@ type PathConstrOptions<State, Action, Query, T> = Merge<
   >
 >
 
-export const path = <State, Action, Query = unknown, T = unknown>(
+export function path<State, Action, Query = unknown, T = unknown>(
   options: PathOptions<State, Action, Query, T>
-) =>
-  createItem<
+) {
+  return createItem<
     State,
     Action,
     Query,
@@ -75,11 +75,12 @@ export const path = <State, Action, Query = unknown, T = unknown>(
         : new Path([]),
     options
   )
+}
 
-export const pathLine = <State, Action, Query = unknown, T = unknown>(
+export function pathLine<State, Action, Query = unknown, T = unknown>(
   options: PathConstrOptions<State, Action, Query, T>
-) =>
-  createItem<
+) {
+  return createItem<
     State,
     Action,
     Query,
@@ -87,11 +88,12 @@ export const pathLine = <State, Action, Query = unknown, T = unknown>(
     T,
     PathOptions<State, Action, Query, T>
   >((_: State) => new Path.Line(options.args), options)
+}
 
-export const pathCircle = <State, Action, Query = unknown, T = unknown>(
+export function pathCircle<State, Action, Query = unknown, T = unknown>(
   options: PathConstrOptions<State, Action, Query, T>
-) =>
-  createItem<
+) {
+  return createItem<
     State,
     Action,
     Query,
@@ -99,11 +101,12 @@ export const pathCircle = <State, Action, Query = unknown, T = unknown>(
     T,
     PathOptions<State, Action, Query, T>
   >((_: State) => new Path.Circle(options.args), options)
+}
 
-export const pathRectangle = <State, Action, Query = unknown, T = unknown>(
+export function pathRectangle<State, Action, Query = unknown, T = unknown>(
   options: PathConstrOptions<State, Action, Query, T>
-) =>
-  createItem<
+) {
+  return createItem<
     State,
     Action,
     Query,
@@ -111,11 +114,12 @@ export const pathRectangle = <State, Action, Query = unknown, T = unknown>(
     T,
     PathOptions<State, Action, Query, T>
   >((_: State) => new Path.Rectangle(options.args), options)
+}
 
-export const pathEllipse = <State, Action, Query, T = unknown>(
+export function pathEllipse<State, Action, Query, T = unknown>(
   options: PathConstrOptions<State, Action, Query, T>
-) =>
-  createItem<
+) {
+  return createItem<
     State,
     Action,
     Query,
@@ -123,11 +127,12 @@ export const pathEllipse = <State, Action, Query, T = unknown>(
     T,
     PathOptions<State, Action, Query, T>
   >((_: State) => new Path.Ellipse(options.args), options)
+}
 
-export const pathArc = <State, Action, Query = unknown, T = unknown>(
+export function pathArc<State, Action, Query = unknown, T = unknown>(
   options: PathConstrOptions<State, Action, Query, T>
-) =>
-  createItem<
+) {
+  return createItem<
     State,
     Action,
     Query,
@@ -135,11 +140,12 @@ export const pathArc = <State, Action, Query = unknown, T = unknown>(
     T,
     PathOptions<State, Action, Query, T>
   >((_: State) => new Path.Arc(options.args), options)
+}
 
-export const pathRegularPolygon = <State, Action, Query = unknown, T = unknown>(
+export function pathRegularPolygon<State, Action, Query = unknown, T = unknown>(
   options: PathConstrOptions<State, Action, Query, T>
-) =>
-  createItem<
+) {
+  return createItem<
     State,
     Action,
     Query,
@@ -147,11 +153,12 @@ export const pathRegularPolygon = <State, Action, Query = unknown, T = unknown>(
     T,
     PathOptions<State, Action, Query, T>
   >((_: State) => new Path.RegularPolygon(options.args), options)
+}
 
-export const pathStar = <State, Action, Query = unknown, T = unknown>(
+export function pathStar<State, Action, Query = unknown, T = unknown>(
   options: PathConstrOptions<State, Action, Query, T>
-) =>
-  createItem<
+) {
+  return createItem<
     State,
     Action,
     Query,
@@ -159,3 +166,4 @@ export const pathStar = <State, Action, Query = unknown, T = unknown>(
     T,
     PathOptions<State, Action, Query, T>
   >((_: State) => new Path.Star(options.args), options)
+}

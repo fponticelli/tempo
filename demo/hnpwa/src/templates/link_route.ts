@@ -14,17 +14,13 @@ limitations under the License.
 import { Action } from '../action'
 import { Route, toUrl, toTitle } from '../route'
 import { a } from 'tempo-dom/lib/html'
-import {
-  DOMAttribute,
-  mapAttribute,
-  resolveAttribute
-} from 'tempo-dom/lib/value'
+import { Attribute, mapAttribute, resolveAttribute } from 'tempo-dom/lib/value'
 import { DOMChild } from 'tempo-dom/lib/template'
 
 export const linkRoute = <State>(
   opts: {
-    route: DOMAttribute<State, Route>
-    className?: DOMAttribute<State, string>
+    route: Attribute<State, Route>
+    className?: Attribute<State, string>
   },
   ...children: DOMChild<State, Action>[]
 ) => {

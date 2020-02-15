@@ -17,7 +17,7 @@ import { PaperTemplate } from './template'
 import { map } from 'tempo-std/lib/arrays'
 import { Group } from 'paper'
 
-export class PaperUntilTemplate<OuterState, InnerState, Action, Query>
+class PaperUntilTemplate<OuterState, InnerState, Action, Query>
   implements PaperTemplate<OuterState, Action, Query> {
   constructor(
     readonly options: {
@@ -77,13 +77,14 @@ export class PaperUntilTemplate<OuterState, InnerState, Action, Query>
   }
 }
 
-export const until = <OuterState, InnerState, Action, Query = unknown>(
+export function until<OuterState, InnerState, Action, Query = unknown>(
   options: {
     repeatUntil: (state: OuterState, index: number) => InnerState | undefined
   },
   ...children: PaperTemplate<InnerState, Action, Query>[]
-): PaperTemplate<OuterState, Action, Query> =>
-  new PaperUntilTemplate<OuterState, InnerState, Action, Query>(
+): PaperTemplate<OuterState, Action, Query> {
+  return new PaperUntilTemplate<OuterState, InnerState, Action, Query>(
     options,
     children
   )
+}

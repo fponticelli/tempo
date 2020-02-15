@@ -15,7 +15,7 @@ import { Differentiate, DifferentiateAt } from './types/differentiate'
 import { IndexType } from './types/index_type'
 import { ObjectWithField, ObjectWithPath, TypeAtPath } from './types/objects'
 
-export const match = <
+export function match<
   F extends IndexType,
   T extends ObjectWithField<F, any>,
   B
@@ -23,12 +23,12 @@ export const match = <
   field: F,
   matcher: { [k in T[F]]: (arg: Differentiate<F, T, k>) => B },
   input: T
-): B => {
+): B {
   const k = input[field]
   return matcher[k](input as any)
 }
 
-export const deepMatch = <
+export function deepMatch<
   Path extends IndexType[],
   T extends ObjectWithPath<Path, any>,
   B
@@ -38,7 +38,7 @@ export const deepMatch = <
     [k in TypeAtPath<Path, T>]: (arg: DifferentiateAt<Path, T, k>) => B
   },
   input: T
-): B => {
+): B {
   const k = path.reduce((res: any, key) => res[key], input) as TypeAtPath<
     Path,
     T
@@ -46,29 +46,34 @@ export const deepMatch = <
   return matcher[k](input as any)
 }
 
-export const createMatch = <F extends IndexType>(field: F) => <
-  T extends ObjectWithField<F, any>,
-  B
->(
-  matcher: { [k in T[F]]: (arg: Differentiate<F, T, k>) => B }
-) => (input: T): B => {
-  const k = input[field]
-  return matcher[k](input as any)
-}
-
-export const createDeepMatch = <Path extends IndexType[]>(...path: Path) => <
-  T extends ObjectWithPath<Path, any>,
-  B
->(
-  matcher: {
-    [k in TypeAtPath<Path, T>]: (arg: DifferentiateAt<Path, T, k>) => B
+export function createMatch<F extends IndexType>(field: F) {
+  return <
+    T extends ObjectWithField<F, any>,
+    B
+  >(
+    matcher: { [k in T[F]]: (arg: Differentiate<F, T, k>) => B }
+  ) => (input: T): B => {
+    const k = input[field]
+    return matcher[k](input as any)
   }
-) => (input: T): B => {
-  const k = path.reduce((res: any, key) => res[key], input) as TypeAtPath<
-    Path,
-    T
-  >
-  return matcher[k](input as any)
 }
+
+export const createDeepMatch = <Path extends IndexType[]>(
+  ...path: Path
+) =>
+  <
+    T extends ObjectWithPath<Path, any>,
+    B
+  >(
+    matcher: {
+      [k in TypeAtPath<Path, T>]: (arg: DifferentiateAt<Path, T, k>) => B
+    }
+  ) => (input: T): B => {
+    const k = path.reduce((res: any, key) => res[key], input) as TypeAtPath<
+      Path,
+      T
+    >
+    return matcher[k](input as any)
+  }
 
 export const matchKind = createMatch('kind')

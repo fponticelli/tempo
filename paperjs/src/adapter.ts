@@ -12,11 +12,11 @@ limitations under the License.
 */
 
 import { View } from 'tempo-core/lib/view'
-import { PaperComponentTemplate } from './component'
+import { Component } from './component'
 import { PaperTemplate } from './template'
 import { PaperContext } from './context'
 
-export class PaperAdapterTemplate<
+class PaperAdapterTemplate<
   OuterState,
   InnerState,
   OuterAction,
@@ -31,7 +31,7 @@ export class PaperAdapterTemplate<
     readonly propagate: (
       args: PropagateArg<OuterState, InnerState, OuterAction, InnerAction>
     ) => void,
-    readonly child: PaperComponentTemplate<InnerState, InnerAction, Query>
+    readonly child: Component<InnerState, InnerAction, Query>
   ) {}
 
   render(
@@ -92,7 +92,7 @@ export interface PropagateArg<
   dispatchOuter: (action: OuterAction) => void
 }
 
-export const adapter = <
+export function adapter<
   OuterState,
   InnerState,
   OuterAction,
@@ -108,11 +108,12 @@ export const adapter = <
       args: PropagateArg<OuterState, InnerState, OuterAction, InnerAction>
     ) => void
   },
-  child: PaperComponentTemplate<InnerState, InnerAction, Query>
-): PaperTemplate<OuterState, OuterAction, Query> =>
-  new PaperAdapterTemplate(
+  child: Component<InnerState, InnerAction, Query>
+): PaperTemplate<OuterState, OuterAction, Query> {
+  return new PaperAdapterTemplate(
     options.mergeStates || ((_u: OuterState, _d: InnerState) => undefined),
     /* istanbul ignore next */
     options.propagate || (() => undefined),
     child
   )
+}

@@ -1,16 +1,30 @@
-import { Newtype, NewtypeClass } from './newtype'
+/*
+Copyright 2019 Google LLC
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+    https://www.apache.org/licenses/LICENSE-2.0
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 
 /**
- * Helper functions to generate [UUID](http://en.wikipedia.org/wiki/Universally_unique_identifier)
+ * Helper functions to generate and validate [UUID](http://en.wikipedia.org/wiki/Universally_unique_identifier)
  * strings (version 4).
  */
+
+import { Newtype, NewtypeClass } from './newtype'
+
 const random = (max: number) => Math.floor(Math.random() * max)
 const srandom = () => '0123456789abcdef'.charAt(random(0x10))
 
 /**
  * `Uuid.create()` returns a string value representing a random UUID string.
  */
-export const create = () => {
+export function create() {
   const s = [] as string[]
   let i = 0
   for (i = 0; i < 8; i++)
@@ -39,8 +53,10 @@ const pattern = /^[0123456789abcdef]{8}-[0123456789abcdef]{4}-4[0123456789abcdef
  */
 export type UUID = Newtype<string, { readonly UUID: unique symbol }>
 
-export const UUID = new class extends NewtypeClass<UUID> {
+export const UUID: NewtypeClass<UUID> = new class extends NewtypeClass<UUID> {
   isValid(uuid: string) { return pattern.test(uuid) }
 }()
 
-export const toString = (uuid: UUID) => UUID.get(uuid)
+export function toString(uuid: UUID) {
+  return UUID.get(uuid)
+}

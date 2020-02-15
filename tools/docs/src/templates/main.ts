@@ -1,4 +1,4 @@
-import { div, nav, a, img, main } from 'tempo-dom/lib/html'
+import { div, nav, a, img, main, span } from 'tempo-dom/lib/html'
 import { matchAsyncResult } from 'tempo-dom/lib/match'
 import { mapState } from 'tempo-dom/lib/map'
 import { State } from '../state'
@@ -12,9 +12,35 @@ import { link, maybeLink } from './link'
 import { Route, sameRoute } from '../route'
 import { none, some } from 'tempo-std/lib/option'
 import { iterateItems } from 'tempo-dom/lib/iterate'
-import { ProjectRef } from 'tools/docs/build/toc'
+import { ProjectRef } from '../toc'
+import { loader } from './loader'
 
 const { capture, release } = holdState<State>()
+
+const toggleMenu = (
+  _s: State,
+  _e: MouseEvent,
+  element: HTMLAnchorElement
+): Action | undefined => {
+  const side = document.querySelector('.side-control')!
+  const main = document.querySelector('.main-column')!
+
+  function close() {
+    console.log('CLOSE')
+    element.classList.remove('is-active')
+    side.classList.remove('is-active')
+    main.removeEventListener('mouseup', close, true)
+  }
+
+  if (element.classList.contains('is-active')) {
+    close()
+  } else {
+    element.classList.add('is-active')
+    side.classList.add('is-active')
+    main.addEventListener('mouseup', close, true)
+  }
+  return undefined
+}
 
 export const template = div<State, Action>(
   { attrs: { class: 'app' } },
@@ -30,33 +56,42 @@ export const template = div<State, Action>(
       { attrs: { class: 'container' } },
       div(
         { attrs: { class: 'navbar-brand' } },
-        link(
-          img({
-            attrs: { src: 'assets/icon-512x512.png', width: '32', height: '32' }
+        a(
+          {
+            attrs: {
+              role: 'button',
+              class: 'navbar-burger burger',
+              'aria-label': 'menu',
+              'aria-expanded': 'false',
+              'data-target': 'navbarBasicExample'
+            },
+            events: { click: toggleMenu }
+          },
+          span({ attrs: { 'aria-hidden': true } }),
+          span({ attrs: { 'aria-hidden': true } }),
+          span({ attrs: { 'aria-hidden': true } })
+        ),
+        link({
+          label: img({
+            attrs: {
+              src: 'assets/icon-512x512.png',
+              alt: 'Tempo',
+              'aria-hidden': true
+            }
           }),
-          Route.home,
-          'navbar-item'
-        )
-        // a(
-        //   {
-        //     attrs: {
-        //       class: 'navbar-burger burger',
-        //       role: 'button',
-        //       'aria-label': 'menu',
-        //       'aria-expanded': 'false',
-        //       'data-target': 'navbarBasicExample'
-        //     }
-        //   },
-        //   span({ attrs: { 'aria-hidden': 'true' } }),
-        //   span({ attrs: { 'aria-hidden': 'true' } }),
-        //   span({ attrs: { 'aria-hidden': 'true' } })
-        // )
+          route: Route.home,
+          class: 'navbar-item'
+        })
       ),
       div(
         { attrs: { class: 'navbar-menu' } },
         div(
           { attrs: { class: 'navbar-start' } },
-          link('Tempo', Route.home, 'navbar-item')
+          link({
+            label: 'Tempo',
+            route: Route.home,
+            class: 'navbar-item'
+          })
         ),
         div(
           { attrs: { class: 'navbar-end' } },
@@ -70,16 +105,16 @@ export const template = div<State, Action>(
             img({
               attrs: {
                 src: 'assets/github-mark-64px.png',
-                width: '32',
-                height: '32'
+                alt: 'Github Project'
               }
             })
           ),
-          maybeLink(
-            'Demos',
-            s => (sameRoute(Route.demos, s.route) ? none : some(Route.demos)),
-            'navbar-item'
-          ),
+          maybeLink({
+            label: 'Demos',
+            route: s =>
+              sameRoute(Route.demos, s.route) ? none : some(Route.demos),
+            class: 'navbar-item'
+          }),
           div(
             { attrs: { class: 'navbar-item has-dropdown is-hoverable' } },
             a({ attrs: { class: 'navbar-link' } }, 'Projects'),
@@ -93,11 +128,11 @@ export const template = div<State, Action>(
                   NotAsked: '',
                   Success: iterateItems(
                     { getArray: s => s.projects },
-                    link<ProjectRef>(
-                      s => s.title,
-                      s => Route.api(s.name, 'index.html'),
-                      'navbar-item'
-                    )
+                    link<ProjectRef>({
+                      label: s => s.title,
+                      route: s => Route.project(s.name),
+                      class: 'navbar-item'
+                    })
                   )
                 })
               )
@@ -112,32 +147,26 @@ export const template = div<State, Action>(
       { map: state => state.toc },
       matchAsyncResult<Toc, HttpError, unknown, Action>({
         NotAsked: '',
-        Loading: '...',
-        Success: div(
-          {},
-          release(
-            main(
-              { attrs: { class: 'container' } },
+        Loading: loader,
+        Success: release(
+          main(
+            { attrs: { class: 'container' } },
+            div(
+              { attrs: { class: 'columns is-mobile' } },
               div(
-                { attrs: { class: 'columns' } },
-                div(
-                  {
-                    attrs: {
-                      class: 'column is-narrow has-background-light scrollable'
-                    }
-                  },
-                  div(
-                    { attrs: { class: '', style: 'width: 300px;' } },
-                    mapState(
-                      { map: ([state, toc]) => ({ toc, route: state.route }) },
-                      sidebar
-                    )
-                  )
-                ),
-                div(
-                  { attrs: { class: 'column scrollable' } },
-                  mapState({ map: ([state]) => state.content }, content)
+                {
+                  attrs: {
+                    class: 'column has-background-light side-control scrollable'
+                  }
+                },
+                mapState(
+                  { map: ([state, toc]) => ({ toc, route: state.route }) },
+                  sidebar
                 )
+              ),
+              div(
+                { attrs: { class: 'column scrollable main-column' } },
+                mapState({ map: ([state]) => state.content }, content)
               )
             )
           )

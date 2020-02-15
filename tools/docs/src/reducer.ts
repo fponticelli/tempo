@@ -6,12 +6,16 @@ import { HttpError } from './request'
 
 export const reducer = reduceOnKind<State, Action>({
   GoTo: (state, action) => {
-    const content =
-      action.route.kind === 'Demos' &&
-      state.toc.kind === 'Outcome' &&
-      state.toc.value.kind === 'Success' ?
-        success<Content, HttpError>(Content.demos(state.toc.value.value.demos)) :
-        state.content
+    let content = state.content
+
+    if (state.toc.kind === 'Outcome' && state.toc.value.kind === 'Success') {
+      if (action.route.kind === 'Demos') {
+        content = success<Content, HttpError>(Content.demos(state.toc.value.value.demos))
+      } else if (action.route.kind === 'Api') {
+
+      }
+    }
+
     return {
       ...state,
       route: action.route,

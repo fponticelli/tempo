@@ -7,8 +7,11 @@ import { forEach } from 'tempo-std/lib/async_result'
 import { Toc } from './toc'
 import { HttpError } from './request'
 import { Result, map } from 'tempo-std/lib/result'
-import { toContentUrl, contentFromRoute } from './route'
+import { toContentUrl, contentFromRoute, sameRoute, toUrlForAnalytics } from './route'
 import { each } from 'tempo-std/lib/option'
+import { splitOnLast } from 'tempo-std/lib/strings'
+
+declare const ga: any
 
 export const scrollTo = () => {
   const ref = location.hash.split('#').pop()
@@ -20,9 +23,19 @@ export const scrollTo = () => {
   }
 }
 
+const urlToGitHubContent = (url: string) => {
+  if (url.startsWith('pages/')) {
+    const path = splitOnLast(url, '.')[0] + '.md'
+    return `https://github.com/fponticelli/tempo/edit/master/${path}`
+  } else {
+    return undefined
+  }
+}
+
 export const middleware = (store: Store<State, Action>) => (
   state: State,
-  action: Action
+  action: Action,
+  prev: State
 ) => {
   // console.log(state)
   switch (action.kind) {
@@ -41,7 +54,11 @@ export const middleware = (store: Store<State, Action>) => (
         (url: string) => {
           loadText(url).then(
             (htmlResult: Result<string, HttpError>) =>
-              store.process(Action.loadedContent(outcome(map(h => Content.htmlPage(undefined, h), htmlResult))))
+              store.process(Action.loadedContent(outcome(map(
+                h => Content.htmlPage(undefined, h, urlToGitHubContent(url)),
+                htmlResult
+              )))
+            )
           )
         },
         toContentUrl(state.route)
@@ -51,7 +68,19 @@ export const middleware = (store: Store<State, Action>) => (
       scrollTo()
       break
     case 'GoTo':
-      forEach(toc => contentFromRoute(store, toc, action.route), state.toc)
+      if (!sameRoute(action.route, prev.route)) {
+        const path = toUrlForAnalytics(action.route)
+        if (ga) {
+          ga('set', 'page', path)
+          ga('send', 'pageview')
+        }
+        forEach(
+          toc => contentFromRoute(store, toc, action.route),
+          state.toc
+        )
+      } else {
+        scrollTo()
+      }
       break
   }
 }

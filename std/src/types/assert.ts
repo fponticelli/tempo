@@ -11,6 +11,10 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+/**
+ *
+ */
+
 import { Pointer } from './generic'
 
 export type Assert<A extends true> = A extends never

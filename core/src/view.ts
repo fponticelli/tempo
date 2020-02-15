@@ -11,8 +11,32 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+/**
+ * A `View` represents the realization of a `Template`.
+ */
+
+/**
+ * A `View` is attached to its realiazion (DOM nodes) and it controls its behavior
+ * after the first render. It is possible to update (`change`), remove (`destroy`)
+ * or query (`request`) a view.
+ */
 export interface View<State, Query> {
+  /**
+   * `change` takes a new `State` value and immediately updates its realization
+   * to match the new state.
+   * @param value
+   */
   change(value: State): void
+
+  /**
+   * Removes its own realization from the DOM permanently.
+   */
   destroy(): void
+
+  /**
+   * Allows the container App that holds a reference to a view to query the view
+   * itself for information that it owns.
+   * @param query
+   */
   request(query: Query): void
 }

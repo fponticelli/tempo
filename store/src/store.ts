@@ -13,8 +13,8 @@ limitations under the License.
 
 import { Property } from './property'
 import { Reducer } from './reducer'
-import { Observable3 } from './observable'
-import { Emitter, Emitter3 } from './emitter'
+import { Observable4 } from './observable'
+import { Emitter, Emitter4 } from './emitter'
 
 export class Store<State, Action> {
   static ofState<State, Action>(options: {
@@ -28,21 +28,27 @@ export class Store<State, Action> {
     )
   }
 
-  readonly observable: Observable3<State, Action, boolean>
+  readonly observable: Observable4<State, Action, State, boolean>
 
   constructor(
     readonly property: Property<State>,
     private readonly reducer: Reducer<State, Action>
   ) {
-    this.observable = this.emitter = Emitter.ofThree<State, Action, boolean>()
+    this.observable = this.emitter = Emitter.ofFour<
+      State,
+      Action,
+      State,
+      boolean
+    >()
   }
 
   process(action: Action) {
-    const value = this.reducer(this.property.get(), action)
+    const curr = this.property.get()
+    const value = this.reducer(curr, action)
     const result = this.property.set(value)
-    this.emitter.emit(value, action, result)
+    this.emitter.emit(value, action, curr, result)
     return result
   }
 
-  private readonly emitter: Emitter3<State, Action, boolean>
+  private readonly emitter: Emitter4<State, Action, State, boolean>
 }

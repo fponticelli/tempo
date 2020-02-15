@@ -43,11 +43,11 @@ type GroupOptions<State, Action, Query, T> = Partial<
   >
 >
 
-export const group = <State, Action, Query, T = unknown>(
+export function group<State, Action, Query, T = unknown>(
   options: GroupOptions<State, Action, Query, T>,
   ...children: PaperTemplate<State, Action, Query>[]
-) =>
-  createItem<
+) {
+  return createItem<
     State,
     Action,
     Query,
@@ -55,3 +55,4 @@ export const group = <State, Action, Query, T = unknown>(
     T,
     GroupOptions<State, Action, Query, T>
   >((_: State) => new Group(new Size(0, 0)), options, children)
+}

@@ -1,12 +1,10 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/rush/v5/rush.schema.json",
-  "rushVersion": "5.17.2",
-  "pnpmVersion": "4.6.0",
+  "rushVersion": "5.20.0",
+  "pnpmVersion": "4.9.3",
   "pnpmOptions": {
-    // "strictPeerDependencies": true
+    "strictPeerDependencies": true
   },
-
-  "nodeSupportedVersionRange": ">=10.13.0 <11.0.0",
   "projectFolderMaxDepth": 3,
 
   "gitPolicy": {

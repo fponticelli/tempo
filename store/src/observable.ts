@@ -22,3 +22,6 @@ export interface Observable<T extends any[]> {
 export type Observable1<T> = Observable<[T]>
 export type Observable2<A, B> = Observable<[A, B]>
 export type Observable3<A, B, C> = Observable<[A, B, C]>
+export type Observable4<A, B, C, D> = Observable<[A, B, C, D]>
+export type Observable5<A, B, C, D, E> = Observable<[A, B, C, D, E]>
+export type Observable6<A, B, C, D, E, F> = Observable<[A, B, C, D, E, F]>

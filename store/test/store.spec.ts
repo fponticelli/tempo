@@ -23,7 +23,7 @@ describe('store', () => {
       })
       return action
     }
-    const middleware = (state: string, action: string, changed: boolean) => {
+    const middleware = (state: string, action: string, curr: string, changed: boolean) => {
       collect.push({
         state, action, type: 'middleware', changed
       })

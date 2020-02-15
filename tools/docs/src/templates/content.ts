@@ -7,22 +7,25 @@ import { HttpError } from '../request'
 import { matchAsyncResult, matchKind } from 'tempo-dom/lib/match'
 import { mapState } from 'tempo-dom/lib/map'
 import { demosContent } from './demos_content'
+import { projectContent } from './project_content'
+import { fragment } from 'tempo-dom/lib/fragment'
+import { loader } from './loader'
 
-export const content = article<
+export const content = fragment<
   AsyncResult<Content, HttpError, unknown>,
   Action
 >(
-  { attrs: { className: 'content' } },
   matchAsyncResult({
     Failure: article(
-      { attrs: { class: 'message is-danger' } },
+      { attrs: { class: 'content message is-danger' } },
       div({ attrs: { class: 'message-body' } }, s => s.message)
     ),
-    Loading: '...',
+    Loading: loader,
     NotAsked: '',
     Success: matchKind({
       HtmlPage: htmlContent,
-      Demos: mapState({ map: c => c.demos }, demosContent)
+      Demos: mapState({ map: c => c.demos }, demosContent),
+      Project: mapState({ map: c => c.project }, projectContent)
     })
   })
 )

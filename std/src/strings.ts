@@ -11,15 +11,25 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+/**
+ * Utility functions to manipulate string values.
+ */
+
 import { Ord } from './ord'
 import { range, any, all, fill } from './arrays'
-import { map as mapR } from './regexps'
+import { map as mapR } from './reg_exps'
 
-export const replace = (
+/**
+ * Replaces all occurrances of `placeholder` in `subject` with the value `replacement`.
+ * @param subject
+ * @param placeholder
+ * @param replacement
+ */
+export function replace(
   subject: string,
   placeholder: string,
   replacement: string
-) => subject.split(placeholder).join(replacement)
+) { return subject.split(placeholder).join(replacement) }
 
 /**
  * `after` searches for the first occurrance of `searchFor` and returns the text after that.
@@ -129,14 +139,14 @@ export function startsWithCaseInsensitive(s: string, start: string) {
 /**
  * Compares a string `s` with many `values` and see if one of them matches its end ignoring their case.
  */
-export function endsWithAnyCaseInsensitive(s: string, values: Array<string>): boolean {
+export function endsWithAnyCaseInsensitive(s: string, values: string[]): boolean {
   return endsWithAny(s.toLowerCase(), values.map((v) => v.toLowerCase()))
 }
 
 /**
  * Compares a string `s` with many `values` and see if one of them matches its beginning ignoring their case.
  */
-export function startsWithAnyCaseInsensitive(s: string, values: Array<string>): boolean {
+export function startsWithAnyCaseInsensitive(s: string, values: string[]): boolean {
   return startsWithAny(s.toLowerCase(), values.map((v) => v.toLowerCase()))
 }
 
@@ -184,28 +194,28 @@ export function count(s: string, test: string) {
 /**
  * `contains` returns `true` if `s` contains any of the strings in `tests` regardless of the text case
  */
-export function containsAnyCaseInsensitive(s: string, tests: Array<string>) {
+export function containsAnyCaseInsensitive(s: string, tests: string[]) {
   return any(t => containsCaseInsensitive(s, t), tests)
 }
 
 /**
  * `contains` returns `true` if `s` contains any of the strings in `tests`
  */
-export function containsAny(s: string, tests: Array<string>) {
+export function containsAny(s: string, tests: string[]) {
   return any(t => contains(s, t), tests)
 }
 
 /**
  * `contains` returns `true` if `s` contains all of the strings in `tests` regardless of the text case
  */
-export function containsAllCaseInsensitive(s: string, tests: Array<string>) {
+export function containsAllCaseInsensitive(s: string, tests: string[]) {
   return all(t => containsCaseInsensitive(s, t), tests)
 }
 
 /**
  * `contains` returns `true` if `s` contains all of the strings in `tests`
  */
-export function containsAll(s: string, tests: Array<string>) {
+export function containsAll(s: string, tests: string[]) {
   return all(t => contains(s, t), tests)
 }
 
@@ -291,7 +301,7 @@ export function filter(s: string, predicate: (s: string) => boolean) {
  * Same as `filter` but `predicate` operates on integer char codes instead of string characters.
  */
 export function filterCharcode(s: string, predicate: (n: number) => boolean) {
-  const codes: Array<number> = toCharcodes(s).filter(predicate)
+  const codes: number[] = toCharcodes(s).filter(predicate)
   return codes
     .map((i: number) => String.fromCharCode(i))
     .join('')
@@ -421,7 +431,7 @@ export function randomSequence64(length: number): string {
 /**
  * It maps a string character by character using `callback`.
  */
-export function map<T>(callback: (c: string) => T, value: string): Array<T> {
+export function map<T>(callback: (c: string) => T, value: string): T[] {
   return toArray(value).map(callback)
 }
 
@@ -537,7 +547,7 @@ export function toArray(s: string) {
 /**
  * It transforms a string into an `Array` of char codes in integer format.
  */
-export function toCharcodes(s: string): Array<number> {
+export function toCharcodes(s: string): number[] {
   return range(s.length, i => s.charCodeAt(i))
 }
 
@@ -545,7 +555,7 @@ export function toCharcodes(s: string): Array<number> {
  * Returns an array of `string` whose elements are equally long (using `len`). If the string `s`
  * is not exactly divisible by `len` the last element of the array will be shorter.
  */
-export function toChunks(s: string, len: number): Array<string> {
+export function toChunks(s: string, len: number): string[] {
   const chunks = []
   while (s.length > 0) {
     chunks.push(s.substr(0, len))
@@ -651,7 +661,35 @@ export function isSpaceAt(s: string, pos: number) {
   return (char === 9 || char === 10 || char === 11 || char === 12 || char === 13  || char === 32)
 }
 
-function wrapLine(s: string, columns: number, indent: string, newline: string) {
+export function encodeBase64(s: string): string {
+  // @ts-ignore
+  if (typeof Buffer !== 'undefined') {
+    // @ts-ignore
+    return Buffer.from(s).toString('base64')
+  // @ts-ignore
+  } else if (typeof btoa !== undefined) {
+    // @ts-ignore
+    return btoa(s)
+  } else {
+    throw 'no implementation provided for base64 encoding'
+  }
+}
+
+export function decodeBase64(s: string): string {
+  // @ts-ignore
+  if (typeof Buffer !== 'undefined') {
+    // @ts-ignore
+    return Buffer.from(s, 'base64').toString('utf8')
+  // @ts-ignore
+  } else if (typeof atob !== undefined) {
+    // @ts-ignore
+    return atob(s)
+  } else {
+    throw 'no implementation provided for base64 decoding'
+  }
+}
+
+export function wrapLine(s: string, columns: number, indent: string, newline: string) {
   const parts = []
   const len = s.length
   const ilen = indent.length
@@ -700,8 +738,25 @@ export function rpad(s: string, char: string, length: number) {
   }
 }
 
-export const BASE64_ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
+export function splitOnLast(s: string, find: string): [string] | [string, string] {
+  const x = s.lastIndexOf(find)
+  if (x >= 0) {
+    return [s.substring(0, x), s.substring(x + find.length)]
+  } else {
+    return [s]
+  }
+}
 
+export function splitOnFirst(s: string, find: string): [string] | [string, string] {
+  const x = s.indexOf(find)
+  if (x >= 0) {
+    return [s.substring(0, x), s.substring(x + find.length)]
+  } else {
+    return [s]
+  }
+}
+
+const BASE64_ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
 const UCWORDS = /[^a-zA-Z]([a-z])/g
 const IS_BREAKINGWHITESPACE = /[^\t\n\r ]/
 const IS_ALPHA = /[^a-zA-Z]/

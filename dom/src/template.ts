@@ -13,8 +13,8 @@ limitations under the License.
 
 import { Template } from 'tempo-core/lib/template'
 import { DOMContext } from './context'
-import { DOMTextValue } from './value'
+import { TextValue } from './value'
 
 export interface DOMTemplate<State, Action, Query = unknown> extends Template<State, Query, DOMContext<Action>> {}
 
-export type DOMChild<State, Action, Query = unknown> = DOMTemplate<State, Action, Query> | DOMTextValue<State>
+export type DOMChild<State, Action, Query = unknown> = DOMTemplate<State, Action, Query> | TextValue<State>

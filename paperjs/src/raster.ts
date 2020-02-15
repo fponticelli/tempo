@@ -53,10 +53,10 @@ type RasterOptions<State, Action, Query, T> = Partial<
   >
 >
 
-export const raster = <State, Action, Query = unknown, T = unknown>(
+export function raster<State, Action, Query = unknown, T = unknown>(
   options: RasterOptions<State, Action, Query, T>
-) =>
-  createItem<
+) {
+  return createItem<
     State,
     Action,
     Query,
@@ -68,3 +68,4 @@ export const raster = <State, Action, Query = unknown, T = unknown>(
       typeof options.args ? new Raster(options.args as any) : new Raster(),
     options
   )
+}
