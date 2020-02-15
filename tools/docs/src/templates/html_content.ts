@@ -14,7 +14,7 @@ export const htmlContent = fragment<
       { attrs: { class: 'top-right' } },
       a(
         { attrs: { href: s => s.path } },
-        '✏️ edit this content'
+        '✏️ edit me'
       )
     )
   ),

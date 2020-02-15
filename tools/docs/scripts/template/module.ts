@@ -16,7 +16,7 @@ export const module = fragment<State, unknown>(
     { attrs: { class: 'top-right' } },
     a(
       { attrs: { href: s => getUrl(s.project, s.module.path) } },
-      '✏️ edit this module'
+      '✏️ edit me'
     )
   ),
   h1(
