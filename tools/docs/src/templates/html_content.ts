@@ -5,22 +5,19 @@ import { when } from 'tempo-dom/lib/when'
 import { div, a, article } from 'tempo-dom/lib/html'
 
 export const htmlContent = fragment<
-  { title: string | undefined, html: string, path: string | undefined },
+  { title: string | undefined; html: string; path: string | undefined },
   Action
 >(
   when(
     { condition: s => typeof s.path === 'string' },
     div(
       { attrs: { class: 'top-right' } },
-      a(
-        { attrs: { href: s => s.path } },
-        '✏️ edit me'
-      )
+      a({ attrs: { href: s => s.path } }, '✏️ edit me')
     )
   ),
-  when(
-    { condition: s => typeof s === 'string' },
-    s => s.title
-  ),
-  unsafeHtml({ content: s => s.html, element: article({ attrs: { class: 'content' } }) })
+  when({ condition: s => typeof s === 'string' }, s => s.title),
+  unsafeHtml({
+    content: s => s.html,
+    element: article({ attrs: { class: 'content' } })
+  })
 )

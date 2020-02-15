@@ -18,7 +18,7 @@ import { DOMTemplate } from './template'
 import { DOMContext } from './context'
 import { TextValue } from './value'
 
-export class DerivedTextTemplate<State, Action, Query> implements DOMTemplate<State, Action, Query> {
+class DerivedTextTemplate<State, Action, Query> implements DOMTemplate<State, Action, Query> {
   constructor(readonly makeContent: DerivedValue<State, string>) {}
 
   render(ctx: DOMContext<Action>, state: State): View<State, Query> {
@@ -43,7 +43,7 @@ export class DerivedTextTemplate<State, Action, Query> implements DOMTemplate<St
   }
 }
 
-export class LiteralTextTemplate<State, Action, Query> implements DOMTemplate<State, Action, Query> {
+class LiteralTextTemplate<State, Action, Query> implements DOMTemplate<State, Action, Query> {
   constructor(
     readonly content: string
   ) {}
@@ -60,7 +60,7 @@ export class LiteralTextTemplate<State, Action, Query> implements DOMTemplate<St
   }
 }
 
-export const text = <State, Action, Query = unknown>(content: TextValue<State>): DOMTemplate<State, Action, Query> => {
+export function text<State, Action, Query = unknown>(content: TextValue<State>): DOMTemplate<State, Action, Query> {
   if (typeof content === 'function') {
     return new DerivedTextTemplate<State, Action, Query>(content as DerivedValue<State, string>)
   } else {

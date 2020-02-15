@@ -33,7 +33,7 @@ export interface Attributes<State, Action, Query = unknown, El extends Element =
   respond?: (query: Query, el: El, ctx: DOMContext<Action>, value: T | undefined) => T | undefined
 }
 
-export const mapAttribute = <State, A, B>(attr: Attribute<State, A>, map: (a: A) => B): Attribute<State, B> => {
+export function mapAttribute<State, A, B>(attr: Attribute<State, A>, map: (a: A) => B): Attribute<State, B> {
   if (typeof attr === 'undefined') {
     return undefined
   } else if (typeof attr === 'function') {
@@ -49,10 +49,10 @@ export const mapAttribute = <State, A, B>(attr: Attribute<State, A>, map: (a: A)
   }
 }
 
-export const attributeToHandler = <State, Value, Action, Ev extends Event, El extends Element>(
+export function attributeToHandler<State, Value, Action, Ev extends Event, El extends Element>(
   attr: Attribute<State, Value>,
   handler: EventHandler<Value, Action, Ev, El>
-): EventHandler<State, Action, Ev, El> => {
+): EventHandler<State, Action, Ev, El> {
   if (typeof attr === 'undefined') {
     return () => { return undefined }
   } else if (typeof attr === 'function') {
@@ -70,7 +70,7 @@ export const attributeToHandler = <State, Value, Action, Ev extends Event, El ex
   }
 }
 
-export const resolveAttribute = <State, Value>(attr: Attribute<State, Value>): ((state: State) => Value | undefined) =>  {
+export function resolveAttribute<State, Value>(attr: Attribute<State, Value>): ((state: State) => Value | undefined) {
   if (typeof attr === 'function') {
     return (attr as DerivedValue<State, Value>)
   } else {

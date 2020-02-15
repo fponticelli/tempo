@@ -16,8 +16,13 @@ import { PaperTemplate } from './template'
 import { PaperContext } from './context'
 import { map } from 'tempo-std/lib/arrays'
 
-export class PaperComponentTemplate<State, Action, Query>
-  implements PaperTemplate<State, Action, Query> {
+export interface Component<State, Action, Query>
+  extends PaperTemplate<State, Action, Query> {
+  store: Store<State, Action>
+}
+
+class PaperComponentTemplate<State, Action, Query>
+  implements Component<State, Action, Query> {
   constructor(
     readonly store: Store<State, Action>,
     readonly children: PaperTemplate<State, Action, Query>[],
@@ -72,15 +77,16 @@ export class PaperComponentTemplate<State, Action, Query>
   }
 }
 
-export const component = <State, Action, Query = unknown>(
+export function component<State, Action, Query = unknown>(
   attributes: {
     store: Store<State, Action>
     delayed?: boolean
   },
   ...children: PaperTemplate<State, Action, Query>[]
-) =>
-  new PaperComponentTemplate<State, Action, Query>(
+) {
+  return new PaperComponentTemplate<State, Action, Query>(
     attributes.store,
     children,
     attributes.delayed || false
   )
+}

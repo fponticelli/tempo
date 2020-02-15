@@ -159,11 +159,11 @@ function extractStyles<State>(
 
 const makeCreateElement = <El extends Element>(name: string) => (doc: Document) => doc.createElement(name) as any as El
 
-export const el = <State, Action, Query = unknown, El extends Element = Element, T = unknown>(
+export function el<State, Action, Query = unknown, El extends Element = Element, T = unknown>(
   name: string,
   attributes: Attributes<State, Action, Query, El, T>,
   ...children: DOMChild<State, Action, Query>[]
-) => {
+) {
   return new DOMElement<State, Action, Query, El, T>(
     makeCreateElement(name),
     extractAttrs(attributes.attrs),
@@ -178,9 +178,11 @@ export const el = <State, Action, Query = unknown, El extends Element = Element,
   )
 }
 
-export const el2 = <El extends Element>(name: string) => <State, Action, Query = unknown, T = unknown>(
-  attributes: Attributes<State, Action, Query, El, T>,
-  ...children: DOMChild<State, Action, Query>[]) => {
+export function el2<El extends Element>(name: string) {
+  return function <State, Action, Query = unknown, T = unknown>(
+    attributes: Attributes<State, Action, Query, El, T>,
+    ...children: DOMChild<State, Action, Query>[]
+  ) {
     return new DOMElement<State, Action, Query, El, T>(
       makeCreateElement(name),
       extractAttrs(attributes.attrs),
@@ -194,6 +196,7 @@ export const el2 = <El extends Element>(name: string) => <State, Action, Query =
       map(domChildToTemplate, children)
     )
   }
+}
 
 export const defaultNamespaces: Record<string, string> = {
   'svg': 'http://www.w3.org/2000/svg'
@@ -202,12 +205,12 @@ export const defaultNamespaces: Record<string, string> = {
 const makeCreateElementNS = <El extends Element>(namespace: string, name: string) =>
   (doc: Document) => doc.createElementNS(namespace, name) as any as El
 
-export const elNS = <State, Action, Query = unknown, El extends Element = Element, T = unknown>(
+export function elNS<State, Action, Query = unknown, El extends Element = Element, T = unknown>(
   ns: string,
   name: string,
   attributes: Attributes<State, Action, Query, El, T>,
   ...children: DOMChild<State, Action, Query>[]
-) => {
+) {
   const namespace = defaultNamespaces[ns] || ns
   return new DOMElement<State, Action, Query, El, T>(
     makeCreateElementNS(namespace, name),
@@ -223,9 +226,11 @@ export const elNS = <State, Action, Query = unknown, El extends Element = Elemen
   )
 }
 
-export const elNS2 = <El extends Element>(namespace: string, name: string) => <State, Action, Query = unknown, T = unknown>(
-  attributes: Attributes<State, Action, Query, El, T>,
-  ...children: DOMChild<State, Action, Query>[]) => {
+export function elNS2<El extends Element>(namespace: string, name: string) {
+  return function<State, Action, Query = unknown, T = unknown>(
+    attributes: Attributes<State, Action, Query, El, T>,
+    ...children: DOMChild<State, Action, Query>[]
+  ) {
     return new DOMElement<State, Action, Query, El, T>(
       makeCreateElementNS(namespace, name),
       extractAttrs(attributes.attrs),
@@ -239,3 +244,4 @@ export const elNS2 = <El extends Element>(namespace: string, name: string) => <S
       map(domChildToTemplate, children)
     )
   }
+}

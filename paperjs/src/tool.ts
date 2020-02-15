@@ -59,9 +59,9 @@ type ToolOptions<State, Action, Query, T> = Partial<
   >
 >
 
-export const tool = <State, Action, Query = unknown, T = unknown>(
+export function tool<State, Action, Query = unknown, T = unknown>(
   options: ToolOptions<State, Action, Query, T>
-): PaperTemplate<State, Action, Query> => {
+): PaperTemplate<State, Action, Query> {
   return {
     render(ctx: PaperContext<Action>, state: State) {
       const tool = new ctx.scope.Tool() as Tool

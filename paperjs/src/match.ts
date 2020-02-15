@@ -21,7 +21,7 @@ import {
   ObjectWithField
 } from 'tempo-std/lib/types/objects'
 
-export class MatchTemplate<
+class MatchTemplate<
   Path extends IndexType[],
   State extends ObjectWithPath<Path, any>,
   Action,
@@ -68,7 +68,7 @@ export class MatchTemplate<
   }
 }
 
-export const match = <
+export function match<
   Path extends IndexType[],
   State extends ObjectWithPath<Path, any>,
   Action,
@@ -82,7 +82,7 @@ export const match = <
       Query
     >
   }
-): PaperTemplate<State, Action, Query> => {
+): PaperTemplate<State, Action, Query> {
   return new MatchTemplate<Path, State, Action, Query>(
     path,
     Object.keys(matcher).reduce(
@@ -103,7 +103,7 @@ export const match = <
   )
 }
 
-export const matchKind = <
+export function matchKind<
   State extends ObjectWithField<'kind', any>,
   Action,
   Query = unknown
@@ -115,10 +115,11 @@ export const matchKind = <
       Query
     >
   }
-): PaperTemplate<State, Action, Query> =>
-  match<['kind'], State, Action, Query>(['kind'], matchers)
+): PaperTemplate<State, Action, Query> {
+  return match<['kind'], State, Action, Query>(['kind'], matchers)
+}
 
-export class MatchBoolTemplate<State, Action, Query>
+class MatchBoolTemplate<State, Action, Query>
   implements PaperTemplate<State, Action, Query> {
   constructor(
     readonly condition: (state: State) => boolean,
@@ -154,18 +155,19 @@ export class MatchBoolTemplate<State, Action, Query>
   }
 }
 
-export const matchBool = <State, Action, Query = unknown>(options: {
+export function matchBool<State, Action, Query = unknown>(options: {
   condition: (state: State) => boolean
   true: PaperTemplate<State, Action, Query>
   false: PaperTemplate<State, Action, Query>
-}): PaperTemplate<State, Action, Query> =>
-  new MatchBoolTemplate<State, Action, Query>(
+}): PaperTemplate<State, Action, Query> {
+  return new MatchBoolTemplate<State, Action, Query>(
     options.condition,
     options.true,
     options.false
   )
+}
 
-export class MatchValueTemplate<State, Action, Query>
+class MatchValueTemplate<State, Action, Query>
   implements PaperTemplate<State, Action, Query> {
   constructor(
     readonly path: IndexType[],
@@ -201,7 +203,7 @@ export class MatchValueTemplate<State, Action, Query>
   }
 }
 
-export const matchValue = <
+export function matchValue<
   Path extends IndexType[],
   State extends ObjectWithPath<Path, string>,
   Action,
@@ -212,8 +214,8 @@ export const matchValue = <
     [_ in string | number]: PaperTemplate<State, Action, Query>
   },
   orElse: PaperTemplate<State, Action, Query>
-): PaperTemplate<State, Action, Query> =>
-  new MatchValueTemplate<State, Action, Query>(
+): PaperTemplate<State, Action, Query> {
+  return new MatchValueTemplate<State, Action, Query>(
     path,
     Object.keys(matchers).reduce(
       (
@@ -229,3 +231,4 @@ export const matchValue = <
     ),
     orElse
   )
+}

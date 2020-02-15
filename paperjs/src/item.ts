@@ -84,7 +84,7 @@ export class ItemTemplate<
   }
 }
 
-export const createItem = <State, Action, Query, I extends Item, T, Option>(
+export function createItem<State, Action, Query, I extends Item, T, Option>(
   makeItem: (state: State) => I,
   options: Partial<
     Merge<
@@ -93,7 +93,7 @@ export const createItem = <State, Action, Query, I extends Item, T, Option>(
     >
   >,
   children?: PaperTemplate<State, Action, Query>[] | undefined
-) => {
+) {
   const { afterchange, afterrender, beforechange, beforedestroy } = options
   const attributes = removeFields(
     options,

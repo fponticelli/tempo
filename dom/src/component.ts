@@ -17,7 +17,11 @@ import { DOMContext } from './context'
 import { domChildToTemplate } from './utils/dom'
 import { map } from 'tempo-std/lib/arrays'
 
-export class ComponentTemplate<State, Action, Query> implements DOMTemplate<State, Action, Query> {
+export interface Component<State, Action, Query> extends DOMTemplate<State, Action, Query> {
+  store: Store<State, Action>
+}
+
+class ComponentTemplate<State, Action, Query> implements Component<State, Action, Query> {
   constructor(
     readonly store: Store<State, Action>,
     readonly children: DOMTemplate<State, Action, Query>[],
@@ -69,10 +73,12 @@ export class ComponentTemplate<State, Action, Query> implements DOMTemplate<Stat
   }
 }
 
-export const component = <State, Action, Query = unknown>(
+export function component<State, Action, Query = unknown>(
   attributes: {
     store: Store<State, Action>
     delayed?: boolean
   },
   ...children: DOMChild<State, Action, Query>[]
-) => new ComponentTemplate<State, Action, Query>(attributes.store, map(domChildToTemplate, children), attributes.delayed || false)
+): Component<State, Action, Query> {
+  return new ComponentTemplate<State, Action, Query>(attributes.store, map(domChildToTemplate, children), attributes.delayed || false)
+}

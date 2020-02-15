@@ -25,9 +25,9 @@ export type Async<T, P> =
   | NotAsked
   | Loading<P>
 
-export const outcome = <T, P>(value: T): Async<T, P> => ({ kind: 'Outcome', value })
+export function outcome<T, P>(value: T): Async<T, P> { return { kind: 'Outcome', value }}
 export const notAsked = { kind: 'NotAsked' } as Async<never, never>
-export const loading = <T, P>(progress: P): Async<T, P> => ({ kind: 'Loading', progress })
+export function loading<T, P>(progress: P): Async<T, P> { return { kind: 'Loading', progress }}
 
 export function map<A, B, P>(f: (a: A) => B, async: Async<A, P>): Async<B, P> {
   switch (async.kind) {

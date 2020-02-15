@@ -28,15 +28,18 @@ export const projectContent = article<ProjectRef, Action>(
   p(
     { attrs: { class: 'version' } },
     a(
-      { attrs: {
-        href: s => `https://www.npmjs.com/package/tempo-${s.name}`
-      } },
-      img(
-        { attrs: {
-          src: s => `https://img.shields.io/npm/v/tempo-${s.name}?label=npm%3A%20tempo-${s.name}`,
+      {
+        attrs: {
+          href: s => `https://www.npmjs.com/package/tempo-${s.name}`
+        }
+      },
+      img({
+        attrs: {
+          src: s =>
+            `https://img.shields.io/npm/v/tempo-${s.name}?label=npm%3A%20tempo-${s.name}`,
           alt: s => `npm tempo ${s.name}`
-        } }
-      )
+        }
+      })
     ),
     br({}),
     a(

@@ -9,10 +9,7 @@ const demo = div<DemoRef, Action>(
     { attrs: { class: 'tile is-child box' } },
     p(
       { attrs: { class: 'title is-5' } },
-      a(
-        { attrs: { href: s => `demo/${s.path}/` } },
-        s => s.title
-      )
+      a({ attrs: { href: s => `demo/${s.path}/` } }, s => s.title)
     ),
     p({ attrs: { class: 'description' } }, s => s.description)
   )

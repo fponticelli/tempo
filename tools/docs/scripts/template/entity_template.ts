@@ -37,7 +37,7 @@ export const signatures = fragment<DocEntity & { project: string, module: string
       s => getModule(s.project, s.module),
       ' at line ',
       s => String(s.line)
-    ),
+    )
   ),
   pre(
     { attrs: { class: 'import-code ts language-ts' } },
@@ -53,5 +53,5 @@ export const entityTemplate = fragment<DocEntity & { project: string, module: st
   description,
   todos,
   signatures,
-  examples,
+  examples
 )

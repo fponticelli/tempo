@@ -12,21 +12,21 @@ limitations under the License.
 */
 
 import { createContext } from './common'
-import { DerivedTextTemplate, LiteralTextTemplate } from '../src/text'
+import { text } from '../src/text'
 
 describe('dom_text', () => {
   it('create static undefined', () => {
     const ctx = createContext()
-    const nodeUndefined = new LiteralTextTemplate(undefined as any).render(ctx, 1)
+    const nodeUndefined = text(undefined as any).render(ctx, 1)
     // undefined normalization is done in the helper function `text`
-    expect(ctx.doc.body.innerHTML).toEqual('undefined')
+    expect(ctx.doc.body.innerHTML).toEqual('')
     nodeUndefined.destroy()
     expect(ctx.doc.body.innerHTML).toEqual('')
   })
 
   it('create static with literal value', () => {
     const ctx = createContext()
-    const node = new LiteralTextTemplate('abc').render(ctx, 1)
+    const node = text('abc').render(ctx, 1)
     expect(ctx.doc.body.innerHTML).toEqual('abc')
     node.destroy()
     expect(ctx.doc.body.innerHTML).toEqual('')
@@ -34,7 +34,7 @@ describe('dom_text', () => {
 
   it('create static with function value', () => {
     const ctx = createContext()
-    const node = new DerivedTextTemplate((r: string) => r).render(ctx, 'abc')
+    const node = text((r: string) => r).render(ctx, 'abc')
     expect(ctx.doc.body.innerHTML).toEqual('abc')
     node.change('abc')
     expect(ctx.doc.body.innerHTML).toEqual('abc')
@@ -44,7 +44,7 @@ describe('dom_text', () => {
     expect(ctx.doc.body.innerHTML).toEqual('xyz')
     node.destroy()
     expect(ctx.doc.body.innerHTML).toEqual('')
-    const t = new DerivedTextTemplate((r: string) => r)
+    const t = text((r: string) => r)
     t.render(ctx, undefined as any)
     expect(ctx.doc.body.innerHTML).toEqual('')
   })

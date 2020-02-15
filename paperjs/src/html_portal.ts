@@ -17,13 +17,13 @@ import { DOMChild } from 'tempo-dom/lib/template'
 import { DOMContext } from 'tempo-dom/lib/context'
 import { PaperContext } from './context'
 
-export const htmlPortal = <State, Action, Query = unknown>(
+export function htmlPortal<State, Action, Query = unknown>(
   options: {
     getParent: (doc: Document) => Element
     append: (doc: Document, node: Node) => void
   },
   ...children: DOMChild<State, Action, Query>[]
-): PaperTemplate<State, Action, Query> => {
+): PaperTemplate<State, Action, Query> {
   return {
     render(ctx: PaperContext<Action>, state: State) {
       const doc = ctx.canvas.ownerDocument!
@@ -51,11 +51,11 @@ export const htmlPortal = <State, Action, Query = unknown>(
   }
 }
 
-export const htmlPortalWithSelector = <State, Action, Query = unknown>(
+export function htmlPortalWithSelector<State, Action, Query = unknown>(
   options: { selector: string },
   ...children: DOMChild<State, Action, Query>[]
-): PaperTemplate<State, Action, Query> =>
-  htmlPortal<State, Action, Query>(
+): PaperTemplate<State, Action, Query> {
+  return htmlPortal<State, Action, Query>(
     {
       getParent: (doc: Document) => {
         const el = doc.querySelector(options.selector)
@@ -75,25 +75,28 @@ export const htmlPortalWithSelector = <State, Action, Query = unknown>(
     },
     ...children
   )
+}
 
-export const htmlHeadPortal = <State, Action, Query = unknown>(
+export function htmlHeadPortal<State, Action, Query = unknown>(
   ...children: DOMChild<State, Action, Query>[]
-): PaperTemplate<State, Action, Query> =>
-  htmlPortal<State, Action, Query>(
+): PaperTemplate<State, Action, Query> {
+  return htmlPortal<State, Action, Query>(
     {
       getParent: (doc: Document) => doc.head!,
       append: (doc: Document, node: Node) => doc.head!.appendChild(node)
     },
     ...children
   )
+}
 
-export const htmlBodyPortal = <State, Action, Query = unknown>(
+export function htmlBodyPortal<State, Action, Query = unknown>(
   ...children: DOMChild<State, Action, Query>[]
-): PaperTemplate<State, Action, Query> =>
-  htmlPortal<State, Action, Query>(
+): PaperTemplate<State, Action, Query> {
+  return htmlPortal<State, Action, Query>(
     {
       getParent: (doc: Document) => doc.body,
       append: (doc: Document, node: Node) => doc.body.appendChild(node)
     },
     ...children
   )
+}

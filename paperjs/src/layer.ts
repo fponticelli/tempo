@@ -46,11 +46,11 @@ type LayerOptions<State, Action, Query, T> = Partial<
   >
 >
 
-export const layer = <State, Action, Query = unknown, T = unknown>(
+export function layer<State, Action, Query = unknown, T = unknown>(
   options: LayerOptions<State, Action, Query, T>,
   ...children: PaperTemplate<State, Action, Query>[]
-) =>
-  createItem<
+) {
+  return createItem<
     State,
     Action,
     Query,
@@ -65,3 +65,4 @@ export const layer = <State, Action, Query = unknown, T = unknown>(
     options,
     children
   )
+}

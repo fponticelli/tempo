@@ -69,25 +69,23 @@ export type Emitter4<A, B, C, D> = Emitter<[A, B, C, D]>
 export type Emitter5<A, B, C, D, E> = Emitter<[A, B, C, D, E]>
 export type Emitter6<A, B, C, D, E, F> = Emitter<[A, B, C, D, E, F]>
 
-export const debounce = (delay: number) => <T extends any[]>(
-  listener: Listener<T>
-): Listener<T> => {
-  let running = false
-  let acc: T
-  return (...values: T) => {
-    acc = values
-    if (running) return
-    running = true
-    setTimeout(() => {
-      running = false
-      listener(...acc)
-    }, delay)
+export function debounce(delay: number) {
+  return function<T extends any[]>(listener: Listener<T>): Listener<T> {
+    let running = false
+    let acc: T
+    return (...values: T) => {
+      acc = values
+      if (running) return
+      running = true
+      setTimeout(() => {
+        running = false
+        listener(...acc)
+      }, delay)
+    }
   }
 }
 
-export const nextFrame = <T extends any[]>(
-  listener: Listener<T>
-): Listener<T> => {
+export function nextFrame<T extends any[]>(listener: Listener<T>): Listener<T> {
   let running = false
   let acc: T
   return (...values: T) => {

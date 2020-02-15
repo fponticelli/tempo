@@ -15,7 +15,7 @@ import { View } from 'tempo-core/lib/view'
 import { PaperContext } from './context'
 import { PaperTemplate } from './template'
 
-export class PaperLazyTemplate<State, Action, Query>
+class PaperLazyTemplate<State, Action, Query>
   implements PaperTemplate<State, Action, Query> {
   constructor(readonly f: () => PaperTemplate<State, Action, Query>) {}
 
@@ -25,7 +25,8 @@ export class PaperLazyTemplate<State, Action, Query>
   }
 }
 
-export const lazy = <State, Action, Query = unknown>(
+export function lazy<State, Action, Query = unknown>(
   f: () => PaperTemplate<State, Action, Query>
-): PaperTemplate<State, Action, Query> =>
-  new PaperLazyTemplate<State, Action, Query>(f)
+): PaperTemplate<State, Action, Query> {
+  return new PaperLazyTemplate<State, Action, Query>(f)
+}

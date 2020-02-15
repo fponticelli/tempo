@@ -15,13 +15,13 @@ import { DOMChild, DOMTemplate } from './template'
 import { mapState } from './map'
 import { until } from './until'
 
-export const iterate = <OuterState, InnerState extends any[], Action, Query = unknown>(
+export function iterate<OuterState, InnerState extends any[], Action, Query = unknown>(
   options: {
     refId?: string
     getArray: (outer: OuterState) => InnerState
   },
   ...children: DOMChild<[InnerState[number], OuterState, number], Action, Query>[]
-): DOMTemplate<OuterState, Action, Query> => {
+): DOMTemplate<OuterState, Action, Query> {
   let outerState: OuterState
   return mapState<OuterState, InnerState, Action, Query>(
     {
@@ -40,13 +40,13 @@ export const iterate = <OuterState, InnerState extends any[], Action, Query = un
   )
 }
 
-export const iterateItems = <OuterState, InnerState extends any[], Action, Query = unknown>(
+export function iterateItems<OuterState, InnerState extends any[], Action, Query = unknown>(
   options: {
     refId?: string
     getArray: (outer: OuterState) => InnerState
   },
   ...children: DOMChild<InnerState[number], Action, Query>[]
-): DOMTemplate<OuterState, Action, Query> => {
+): DOMTemplate<OuterState, Action, Query> {
   return mapState<OuterState, InnerState, Action, Query>(
     {
       map: (outer) => options.getArray(outer)

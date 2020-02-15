@@ -2,7 +2,7 @@ import { SourceFile } from 'ts-morph'
 import { functionOfDeclaration } from './function'
 import { docOfContent, BaseDoc } from './jsdoc'
 import { flatMap, flatten } from 'tempo-std/lib/arrays'
-import { compare } from 'tempo-std/lib/strings'
+import { compareCaseInsensitive } from 'tempo-std/lib/strings'
 import { interfaceOfDeclaration } from './interface'
 import { enumOfDeclaration } from './enum'
 import { typeAliasOfDeclaration } from './type_alias'
@@ -94,7 +94,7 @@ export const moduleFromSourceFile = (dir: Directory, source: SourceFile): Module
     classes,
     exports,
     variables
-  ]).sort((a, b) => compare(a.name, b.name))
+  ]).sort((a, b) => compareCaseInsensitive(a.name, b.name))
 
   return {
     kind: 'module',

@@ -256,7 +256,7 @@ type CacheItem = {
 const cacheByName = new Map<string, CacheItem>()
 const cacheByContent = new Map<string, string>()
 
-export const resetCache = () => {
+export function resetCache() {
   counter = 0
   cacheByName.clear()
   cacheByContent.clear()
@@ -288,7 +288,7 @@ function make<State, Action, Query>(
   return name
 }
 
-export class ScopedStyles<State, Action, Query> implements DOMTemplate<State, Action, Query> {
+class ScopedStyles<State, Action, Query> implements DOMTemplate<State, Action, Query> {
   constructor (
     readonly literal: string[],
     readonly derived: ((state: State) => string)[]
@@ -332,9 +332,9 @@ export class ScopedStyles<State, Action, Query> implements DOMTemplate<State, Ac
   }
 }
 
-export const scopedStyles = <State, Action, Query>(
+export function scopedStyles<State, Action, Query>(
   definitions: StyleDefinitions<State>
-) => {
+) {
   const { literal, derived } = processDefinitions(definitions)
   return new ScopedStyles<State, Action, Query>(literal, derived)
 }

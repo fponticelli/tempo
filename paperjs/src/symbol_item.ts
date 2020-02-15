@@ -49,10 +49,10 @@ type SymbolItemOptions<State, Action, Query, T, Sub> =
 // { definition: PaperAttribute<State, SymbolDefinition> }
 // >
 
-export const symbolItem = <State, Action, Query = unknown, T = unknown>(
+export function symbolItem<State, Action, Query = unknown, T = unknown>(
   options: SymbolItemOptions<State, Action, Query, T, SymbolItem>
-) =>
-  createItem<
+) {
+  return createItem<
     State,
     Action,
     Query,
@@ -63,3 +63,4 @@ export const symbolItem = <State, Action, Query = unknown, T = unknown>(
     (_: State) => new SymbolItem(options.definition as SymbolDefinition),
     options
   )
+}

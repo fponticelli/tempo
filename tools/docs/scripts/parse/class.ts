@@ -88,7 +88,7 @@ function getSignature(cls: ClassDeclaration) {
     cls.getStaticMethods().filter(isPublic).map(m => getMethodDeclarationSignature(m)),
     cls.getConstructors().filter(isPublic).map(c => getConstructorDeclarationSignature(c)),
     cls.getInstanceProperties().filter(isPublic).map(m => getValueDeclarationSignature(m)),
-    cls.getInstanceMethods().filter(isPublic).map(m => getMethodDeclarationSignature(m)),
+    cls.getInstanceMethods().filter(isPublic).map(m => getMethodDeclarationSignature(m))
   ]).join('\n  ')
 
   return `declare ${abstract}class ${cls.getName()}${tp}${ext}${impl} {

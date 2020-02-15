@@ -71,7 +71,7 @@ const renderFunction = <State, Action, Query, El extends Element = Element, T = 
   }
 }
 
-export class UnsafeHtml<State, Action, Query, El extends Element = Element, T = unknown> implements DOMTemplate<State, Action, Query> {
+class UnsafeHtml<State, Action, Query, El extends Element = Element, T = unknown> implements DOMTemplate<State, Action, Query> {
   constructor(
     readonly content: TextValue<State>,
     readonly element: DOMElement<State, Action, Query, El, T>,
@@ -99,15 +99,16 @@ export class UnsafeHtml<State, Action, Query, El extends Element = Element, T = 
   }
 }
 
-export const unsafeHtml = <State, Action, Query = unknown, El extends Element = Element, T = unknown>(
+export function unsafeHtml<State, Action, Query = unknown, El extends Element = Element, T = unknown>(
   options: {
     content: TextValue<State>
     element?: DOMElement<State, Action, Query, El, T>
     transform?: (source: string) => string
   }
-): DOMTemplate<State, Action, Query> =>
-  new UnsafeHtml<State, Action, Query, El, T>(
+): DOMTemplate<State, Action, Query> {
+  return new UnsafeHtml<State, Action, Query, El, T>(
     options.content,
     options.element || el<State, Action, Query, El, T>('div', {}),
     options.transform || (s => s)
   )
+}

@@ -27,7 +27,7 @@ interface PaperLocal<State, Action, Query> {
   context: PaperContext<Action>
 }
 
-export const project = <State, Action, Query>(
+export function project<State, Action, Query>(
   options: {
     width: Attribute<State, number>
     height: Attribute<State, number>
@@ -41,7 +41,7 @@ export const project = <State, Action, Query>(
     ) => void
   },
   ...children: PaperTemplate<State, Action, Query>[]
-) => {
+) {
   return el<
     State,
     Action,

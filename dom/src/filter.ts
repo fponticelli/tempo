@@ -17,7 +17,7 @@ import { DOMContext } from './context'
 import { domChildToTemplate } from './utils/dom'
 import { map } from 'tempo-std/lib/arrays'
 
-export class FilterStateTemplate<State, Action, Query> implements DOMTemplate<State, Action, Query> {
+class FilterStateTemplate<State, Action, Query> implements DOMTemplate<State, Action, Query> {
   constructor(
     readonly isSame: (prev: State, next: State ) => boolean,
     readonly children: DOMTemplate<State, Action, Query>[]
@@ -45,10 +45,12 @@ export class FilterStateTemplate<State, Action, Query> implements DOMTemplate<St
   }
 }
 
-export const filterState = <State, Action, Query = unknown>(
+export function filterState<State, Action, Query = unknown>(
   options: { isSame?: (prev: State, next: State ) => boolean },
   ...children: DOMChild<State, Action, Query>[]
-): DOMTemplate<State, Action, Query> => new FilterStateTemplate(
-  options.isSame || ((a: State, b: State) => a === b),
-  map(domChildToTemplate, children)
-)
+): DOMTemplate<State, Action, Query> {
+  return new FilterStateTemplate(
+    options.isSame || ((a: State, b: State) => a === b),
+    map(domChildToTemplate, children)
+  )
+}

@@ -22,7 +22,7 @@ export interface WhenOptions<State> {
   refId?: string
 }
 
-export class WhenTemplate<State, Action, Query> implements DOMTemplate<State, Action, Query> {
+class WhenTemplate<State, Action, Query> implements DOMTemplate<State, Action, Query> {
   constructor(
     readonly options: WhenOptions<State>,
     readonly children: DOMTemplate<State, Action, Query>[]
@@ -62,16 +62,22 @@ export class WhenTemplate<State, Action, Query> implements DOMTemplate<State, Ac
   }
 }
 
-export const when = <State, Action, Query = unknown>(options: WhenOptions<State>, ...children: DOMChild<State, Action, Query>[]):
-    DOMTemplate<State, Action, Query> =>
-  new WhenTemplate<State, Action, Query>(options, map(domChildToTemplate, children))
+export function when<State, Action, Query = unknown>(
+  options: WhenOptions<State>,
+  ...children: DOMChild<State, Action, Query>[]
+): DOMTemplate<State, Action, Query> {
+  return new WhenTemplate<State, Action, Query>(options, map(domChildToTemplate, children))
+}
 
-export const unless = <State, Action, Query = unknown>(options: WhenOptions<State>, ...children: DOMChild<State, Action, Query>[]):
-    DOMTemplate<State, Action, Query> =>
-  new WhenTemplate<State, Action, Query>(
+export function unless<State, Action, Query = unknown>(
+  options: WhenOptions<State>,
+  ...children: DOMChild<State, Action, Query>[]
+): DOMTemplate<State, Action, Query> {
+  return new WhenTemplate<State, Action, Query>(
     {
       condition: (v: State) => !options.condition(v),
       refId: options.refId || 't:unless'
     },
     map(domChildToTemplate, children)
   )
+}

@@ -49,11 +49,11 @@ type CompoundPathOptions<State, Action, Query, T> = Partial<
   >
 >
 
-export const compoundPath = <State, Action, Query, T = unknown>(
+export function compoundPath<State, Action, Query, T = unknown>(
   options: CompoundPathOptions<State, Action, Query, T>,
   ...children: PaperTemplate<State, Action, Query>[]
-) =>
-  createItem<
+) {
+  return createItem<
     State,
     Action,
     Query,
@@ -68,3 +68,4 @@ export const compoundPath = <State, Action, Query, T = unknown>(
     options,
     children
   )
+}

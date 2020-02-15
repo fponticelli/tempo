@@ -16,7 +16,7 @@ import { View } from 'tempo-core/lib/view'
 import { PaperContext } from './context'
 import { map as mapArray } from 'tempo-std/lib/arrays'
 
-export class MapStateTemplate<OuterState, InnerState, Action, Query>
+class MapStateTemplate<OuterState, InnerState, Action, Query>
   implements PaperTemplate<OuterState, Action, Query> {
   constructor(
     readonly map: (value: OuterState) => InnerState,
@@ -46,13 +46,14 @@ export class MapStateTemplate<OuterState, InnerState, Action, Query>
   }
 }
 
-export const mapState = <OuterState, InnerState, Action, Query = unknown>(
+export function mapState<OuterState, InnerState, Action, Query = unknown>(
   options: { map: (value: OuterState) => InnerState },
   ...children: PaperTemplate<InnerState, Action, Query>[]
-): PaperTemplate<OuterState, Action, Query> =>
-  new MapStateTemplate(options.map, children)
+): PaperTemplate<OuterState, Action, Query> {
+  return new MapStateTemplate(options.map, children)
+}
 
-export const mapStateAndKeep = <
+export function mapStateAndKeep<
   OuterState,
   InnerState,
   Action,
@@ -60,13 +61,16 @@ export const mapStateAndKeep = <
 >(
   options: { map: (value: OuterState) => InnerState },
   ...children: PaperTemplate<[InnerState, OuterState], Action, Query>[]
-): PaperTemplate<OuterState, Action, Query> =>
-  new MapStateTemplate<OuterState, [InnerState, OuterState], Action, Query>(
-    (state: OuterState) => [options.map(state), state],
-    children
-  )
+): PaperTemplate<OuterState, Action, Query> {
+  return new MapStateTemplate<
+    OuterState,
+    [InnerState, OuterState],
+    Action,
+    Query
+  >((state: OuterState) => [options.map(state), state], children)
+}
 
-export class MapActionTemplate<State, OuterAction, InnerAction, Query>
+class MapActionTemplate<State, OuterAction, InnerAction, Query>
   implements PaperTemplate<State, OuterAction, Query> {
   constructor(
     readonly map: (value: InnerAction) => OuterAction | undefined,
@@ -91,16 +95,17 @@ export class MapActionTemplate<State, OuterAction, InnerAction, Query>
   }
 }
 
-export const mapAction = <State, OuterAction, InnerAction, Query = unknown>(
+export function mapAction<State, OuterAction, InnerAction, Query = unknown>(
   options: { map: (value: InnerAction) => OuterAction | undefined },
   ...children: PaperTemplate<State, InnerAction, Query>[]
-): PaperTemplate<State, OuterAction, Query> =>
-  new MapActionTemplate<State, OuterAction, InnerAction, Query>(
+): PaperTemplate<State, OuterAction, Query> {
+  return new MapActionTemplate<State, OuterAction, InnerAction, Query>(
     options.map,
     children
   )
+}
 
-export class MapQueryTemplate<State, Action, OuterQuery, InnerQuery>
+class MapQueryTemplate<State, Action, OuterQuery, InnerQuery>
   implements PaperTemplate<State, Action, OuterQuery> {
   constructor(
     readonly map: (value: OuterQuery) => InnerQuery | undefined,
@@ -127,20 +132,22 @@ export class MapQueryTemplate<State, Action, OuterQuery, InnerQuery>
   }
 }
 
-export const mapQuery = <State, Action, OuterQuery, InnerQuery>(
+export function mapQuery<State, Action, OuterQuery, InnerQuery>(
   options: { map: (value: OuterQuery) => InnerQuery },
   ...children: PaperTemplate<State, Action, InnerQuery>[]
-): PaperTemplate<State, Action, OuterQuery> =>
-  new MapQueryTemplate<State, Action, OuterQuery, InnerQuery>(
+): PaperTemplate<State, Action, OuterQuery> {
+  return new MapQueryTemplate<State, Action, OuterQuery, InnerQuery>(
     options.map,
     children
   )
+}
 
-export const mapQueryConditional = <State, Action, OuterQuery, InnerQuery>(
+export function mapQueryConditional<State, Action, OuterQuery, InnerQuery>(
   options: { map: (value: OuterQuery) => InnerQuery | undefined },
   ...children: PaperTemplate<State, Action, InnerQuery>[]
-): PaperTemplate<State, Action, OuterQuery> =>
-  new MapQueryTemplate<State, Action, OuterQuery, InnerQuery>(
+): PaperTemplate<State, Action, OuterQuery> {
+  return new MapQueryTemplate<State, Action, OuterQuery, InnerQuery>(
     options.map,
     children
   )
+}

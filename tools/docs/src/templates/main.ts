@@ -17,7 +17,11 @@ import { loader } from './loader'
 
 const { capture, release } = holdState<State>()
 
-const toggleMenu = (_s: State, _e: MouseEvent, element: HTMLAnchorElement): Action | undefined => {
+const toggleMenu = (
+  _s: State,
+  _e: MouseEvent,
+  element: HTMLAnchorElement
+): Action | undefined => {
   const side = document.querySelector('.side-control')!
   const main = document.querySelector('.main-column')!
 
@@ -54,12 +58,18 @@ export const template = div<State, Action>(
         { attrs: { class: 'navbar-brand' } },
         a(
           {
-            attrs: { role: 'button',  class: 'navbar-burger burger', 'aria-label': 'menu', 'aria-expanded': 'false', 'data-target': 'navbarBasicExample' },
+            attrs: {
+              role: 'button',
+              class: 'navbar-burger burger',
+              'aria-label': 'menu',
+              'aria-expanded': 'false',
+              'data-target': 'navbarBasicExample'
+            },
             events: { click: toggleMenu }
           },
-          span({ attrs: { 'aria-hidden': true }}),
-          span({ attrs: { 'aria-hidden': true }}),
-          span({ attrs: { 'aria-hidden': true }})
+          span({ attrs: { 'aria-hidden': true } }),
+          span({ attrs: { 'aria-hidden': true } }),
+          span({ attrs: { 'aria-hidden': true } })
         ),
         link({
           label: img({
@@ -92,14 +102,17 @@ export const template = div<State, Action>(
                 href: 'https://github.com/fponticelli/tempo'
               }
             },
-            img({ attrs: {
-              src: 'assets/github-mark-64px.png',
-              alt: 'Github Project'
-            } })
+            img({
+              attrs: {
+                src: 'assets/github-mark-64px.png',
+                alt: 'Github Project'
+              }
+            })
           ),
           maybeLink({
             label: 'Demos',
-            route: s => (sameRoute(Route.demos, s.route) ? none : some(Route.demos)),
+            route: s =>
+              sameRoute(Route.demos, s.route) ? none : some(Route.demos),
             class: 'navbar-item'
           }),
           div(
@@ -135,30 +148,29 @@ export const template = div<State, Action>(
       matchAsyncResult<Toc, HttpError, unknown, Action>({
         NotAsked: '',
         Loading: loader,
-        Success:
-          release(
-            main(
-              { attrs: { class: 'container' } },
+        Success: release(
+          main(
+            { attrs: { class: 'container' } },
+            div(
+              { attrs: { class: 'columns is-mobile' } },
               div(
-                { attrs: { class: 'columns is-mobile' } },
-                div(
-                  {
-                    attrs: {
-                      class: 'column has-background-light side-control scrollable'
-                    }
-                  },
-                  mapState(
-                    { map: ([state, toc]) => ({ toc, route: state.route }) },
-                    sidebar
-                  )
-                ),
-                div(
-                  { attrs: { class: 'column scrollable main-column' } },
-                  mapState({ map: ([state]) => state.content }, content)
+                {
+                  attrs: {
+                    class: 'column has-background-light side-control scrollable'
+                  }
+                },
+                mapState(
+                  { map: ([state, toc]) => ({ toc, route: state.route }) },
+                  sidebar
                 )
+              ),
+              div(
+                { attrs: { class: 'column scrollable main-column' } },
+                mapState({ map: ([state]) => state.content }, content)
               )
             )
-          ),
+          )
+        ),
         Failure: div({}, e => e.message)
       })
     )

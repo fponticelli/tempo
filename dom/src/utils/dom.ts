@@ -136,7 +136,7 @@ export function processStyle<State, Value>(
   return acc
 }
 
-export const containerSize = (el: HTMLElement) => {
+export function containerSize(el: HTMLElement) {
   const prev = []
   for (let i = 0; i < el.children.length; i++) {
     const child = el.children[i] as HTMLElement

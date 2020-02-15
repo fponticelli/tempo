@@ -13,14 +13,16 @@ limitations under the License.
 
 export type Reducer<State, Action> = (state: State, action: Action) => State
 
-export const compose = <State, Action>(
+export function compose<State, Action>(
   reducer: Reducer<State, Action>,
   ...others: Reducer<State, Action>[]
-) => (state: State, action: Action) => {
-  return others.reduce((s, f) => f(s, action), reducer(state, action))
+) {
+  return function(state: State, action: Action) {
+    return others.reduce((s, f) => f(s, action), reducer(state, action))
+  }
 }
 
-export const matchReduce = <
+export function matchReduce<
   Field extends string | number | symbol,
   State,
   Action extends { [_ in Field]: any }
@@ -32,21 +34,21 @@ export const matchReduce = <
       action: Action extends { [_ in Field]: k } ? Action : never
     ) => State
   }
-): Reducer<State, Action> => {
+): Reducer<State, Action> {
   return function(state: State, action: Action) {
     const key = action[field] as Action[Field]
     return matches[key](state, action as any)
   }
 }
 
-export const reduceOnKind = <State, Action extends { kind: any }>(
+export function reduceOnKind<State, Action extends { kind: any }>(
   matches: {
     [k in Action['kind']]: (
       state: State,
       action: Action extends { kind: k } ? Action : never
     ) => State
   }
-): Reducer<State, Action> => {
+): Reducer<State, Action> {
   return function(state: State, action: Action) {
     const key = action.kind as Action['kind']
     return matches[key](state, action as any)
