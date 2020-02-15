@@ -1,6 +1,14 @@
 # Change Log - tempo-core
 
-This log was last generated on Sat, 18 Jan 2020 05:08:11 GMT and should not be manually modified.
+This log was last generated on Sat, 15 Feb 2020 20:16:59 GMT and should not be manually modified.
+
+## 1.7.0
+Sat, 15 Feb 2020 20:16:59 GMT
+
+### Minor changes
+
+- Simplify `DerivedValue` signature
+- Remove `index` file (imports must point specific modules)
 
 ## 1.6.0
 Sat, 18 Jan 2020 05:08:11 GMT

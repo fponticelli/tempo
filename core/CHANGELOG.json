@@ -2,6 +2,21 @@
   "name": "tempo-core",
   "entries": [
     {
+      "version": "1.7.0",
+      "tag": "tempo-core_v1.7.0",
+      "date": "Sat, 15 Feb 2020 20:16:59 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Simplify `DerivedValue` signature"
+          },
+          {
+            "comment": "Remove `index` file (imports must point specific modules)"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.6.0",
       "tag": "tempo-core_v1.6.0",
       "date": "Sat, 18 Jan 2020 05:08:11 GMT",

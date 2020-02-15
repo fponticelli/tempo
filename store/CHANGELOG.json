@@ -2,6 +2,32 @@
   "name": "tempo-store",
   "entries": [
     {
+      "version": "1.2.0",
+      "tag": "tempo-store_v1.2.0",
+      "date": "Sat, 15 Feb 2020 20:16:59 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Change signature of `Store.observable` to expose the previous state along with the new one"
+          },
+          {
+            "comment": "Remove `index` file (imports must point specific modules)"
+          },
+          {
+            "comment": "Increase number of arguments for `Emitter` and `Observable` up to 6"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"tempo-core\" from `1.6.0` to `1.7.0`"
+          },
+          {
+            "comment": "Updating dependency \"tempo-std\" from `0.2.0` to `0.3.0`"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.1.2",
       "tag": "tempo-store_v1.1.2",
       "date": "Sat, 18 Jan 2020 05:08:11 GMT",

@@ -1,6 +1,14 @@
 # Change Log - tempo-dom
 
-This log was last generated on Sat, 18 Jan 2020 05:08:11 GMT and should not be manually modified.
+This log was last generated on Sat, 15 Feb 2020 20:16:59 GMT and should not be manually modified.
+
+## 0.15.0
+Sat, 15 Feb 2020 20:16:59 GMT
+
+### Minor changes
+
+- Remove DOM prefix where not needed and export less types
+- Remove `index` file (imports must point specific modules)
 
 ## 0.14.0
 Sat, 18 Jan 2020 05:08:11 GMT

@@ -2,6 +2,32 @@
   "name": "tempo-std",
   "entries": [
     {
+      "version": "0.3.0",
+      "tag": "tempo-std_v0.3.0",
+      "date": "Sat, 15 Feb 2020 20:16:59 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "arrays: Add `makeCompare`"
+          },
+          {
+            "comment": "json: Add serialization/deserialization functions"
+          },
+          {
+            "comment": "newtype: Make the signature clearer of the wrapped type of NewType"
+          },
+          {
+            "comment": "strings: Add `encodeBase64`, `splitOnLast` and `splitOnFirst`"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "Add strings.ts module and refactor Newtype implementation"
+          }
+        ]
+      }
+    },
+    {
       "version": "0.2.0",
       "tag": "tempo-std_v0.2.0",
       "date": "Sat, 18 Jan 2020 05:08:11 GMT",

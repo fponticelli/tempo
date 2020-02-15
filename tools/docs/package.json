@@ -15,7 +15,7 @@
   "license": "Apache-2.0",
   "private": false,
   "scripts": {
-    "docs:all": "rush rebuild && npm run docs:maketoc",
+    "docs:all": "rush build && npm run docs:maketoc",
     "docs:buildandmaketoc": "npm run build && npm run docs:maketoc",
     "docs:maketoc": "ts-node --project tsconfig.script.json ./scripts/build_docs.ts",
     "compile": "webpack --mode=production",
@@ -39,10 +39,10 @@
   },
   "dependencies": {
     "acorn": "7.1.0",
-    "tempo-std": "0.2.0",
-    "tempo-core": "1.6.0",
-    "tempo-dom": "0.14.0",
-    "tempo-store": "1.1.2"
+    "tempo-std": "0.3.0",
+    "tempo-core": "1.7.0",
+    "tempo-dom": "0.15.0",
+    "tempo-store": "1.2.0"
   },
   "devDependencies": {
     "html-webpack-template": "6.2.0",

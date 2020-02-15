@@ -1,6 +1,6 @@
 {
   "name": "tempo-store",
-  "version": "1.1.2",
+  "version": "1.2.0",
   "priority": 20,
   "description": "Super simple state management library",
   "license": "Apache-2.0",
@@ -35,8 +35,8 @@
     "url": "https://github.com/fponticelli"
   },
   "dependencies": {
-    "tempo-core": "1.6.0",
-    "tempo-std": "0.2.0"
+    "tempo-core": "1.7.0",
+    "tempo-std": "0.3.0"
   },
   "devDependencies": {
     "@types/jest": "25.1.2",
