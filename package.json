@@ -14,6 +14,7 @@
   ],
   "scripts": {
     "npm:publish": "rush publish -a -b master -p -r https://registry.npmjs.org/ --include-all",
+    "npm:publish-no-include": "rush publish -a -b master -p -r https://registry.npmjs.org/",
     "build": "echo \"nothing to build at root\"",
     "test:all": "(cd std && npm run test) && (cd core && npm run test) && (cd store && npm run test) && (cd dom && npm run test)",
     "docs:generate": "(cd tools/docs && npm run docs:update)",
