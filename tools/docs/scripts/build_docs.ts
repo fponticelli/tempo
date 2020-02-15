@@ -22,6 +22,7 @@ const apiFolderDst = path.join(docsFolder, 'api')
 
 const tocFile = path.join(docsFolder, 'toc.json')
 const cnameFile = path.join(docsFolder, 'CNAME')
+const nojekyll = path.join(docsFolder, '.nojekyll')
 
 const renameHtml = (path: string) => {
   const hasLeadingHash = path.startsWith('#')
@@ -223,7 +224,7 @@ async function main() {
   await fse.copy(binFolderSrc, binFolderDst)
 
   // ensure no jekyll
-  await fse.createFile(path.join(docsFolder, '.nojekyll'))
+  await fse.createFile(nojekyll)
 
   // pages
   await prepDir(pagesFolderDst)
