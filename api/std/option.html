@@ -8,18 +8,6 @@
   <p class="title is-6">Table of Contents</p>
   <ul class="module-toc-list">
     <li>
-      <a class="is-family-monospace" href="#/api/std/option.html#None">None</a>
-    </li>
-    <li>
-      <a class="is-family-monospace" href="#/api/std/option.html#Option"
-        >Option</a
-      >
-    </li>
-    <li>
-      <a class="is-family-monospace" href="#/api/std/option.html#Some">Some</a>
-    </li>
-    <li><a class="is-family-monospace" href="#/api/std/option.html#T">T</a></li>
-    <li>
       <a class="is-family-monospace" href="#/api/std/option.html#all">all</a>
     </li>
     <li>
@@ -122,8 +110,16 @@
       <a class="is-family-monospace" href="#/api/std/option.html#none">none</a>
     </li>
     <li>
+      <a class="is-family-monospace" href="#/api/std/option.html#None">None</a>
+    </li>
+    <li>
       <a class="is-family-monospace" href="#/api/std/option.html#ofValue"
         >ofValue</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/std/option.html#Option"
+        >Option</a
       >
     </li>
     <li>
@@ -140,10 +136,14 @@
       <a class="is-family-monospace" href="#/api/std/option.html#some">some</a>
     </li>
     <li>
+      <a class="is-family-monospace" href="#/api/std/option.html#Some">Some</a>
+    </li>
+    <li>
       <a class="is-family-monospace" href="#/api/std/option.html#spread"
         >spread</a
       >
     </li>
+    <li><a class="is-family-monospace" href="#/api/std/option.html#T">T</a></li>
     <li>
       <a class="is-family-monospace" href="#/api/std/option.html#toArray"
         >toArray</a
@@ -171,82 +171,6 @@
     </li>
   </ul>
 </nav>
-<h3 class="is-family-monospace has-text-grey-dark" id="None">
-  None<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
-    >type alias</span
-  >
-</h3>
-<pre
-  class="ts language-ts signature"
-><div><span class="token keyword">type</span> None <span class="token operator">=</span> <span class="token punctuation">{</span> kind<span class="token operator">:</span> <span class="token string">'None'</span> <span class="token punctuation">}</span>
-</div></pre>
-<p class="defined-in">
-  defined in
-  <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L20"
-    >std/src/option.ts at line 20</a
-  >
-</p>
-<pre
-  class="import-code ts language-ts"
-><div><span class="token keyword">import</span> <span class="token punctuation">{</span> None <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/option.ts'</span></div></pre>
-<h3 class="is-family-monospace has-text-grey-dark" id="Option">
-  Option<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
-    >type alias</span
-  >
-</h3>
-<pre
-  class="ts language-ts signature"
-><div><span class="token keyword">type</span> Option<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span> <span class="token operator">=</span> Some<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span> <span class="token operator">|</span> None
-</div></pre>
-<p class="defined-in">
-  defined in
-  <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L22"
-    >std/src/option.ts at line 22</a
-  >
-</p>
-<pre
-  class="import-code ts language-ts"
-><div><span class="token keyword">import</span> <span class="token punctuation">{</span> Option <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/option.ts'</span></div></pre>
-<h3 class="is-family-monospace has-text-grey-dark" id="Some">
-  Some<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
-    >type alias</span
-  >
-</h3>
-<pre
-  class="ts language-ts signature"
-><div><span class="token keyword">type</span> Some<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">{</span> kind<span class="token operator">:</span> <span class="token string">'Some'</span><span class="token punctuation">;</span> value<span class="token operator">:</span> <span class="token constant">T</span> <span class="token punctuation">}</span>
-</div></pre>
-<p class="defined-in">
-  defined in
-  <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L19"
-    >std/src/option.ts at line 19</a
-  >
-</p>
-<pre
-  class="import-code ts language-ts"
-><div><span class="token keyword">import</span> <span class="token punctuation">{</span> Some <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/option.ts'</span></div></pre>
-<h3 class="is-family-monospace has-text-grey-dark" id="T">
-  T<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
-    >type alias</span
-  >
-</h3>
-<pre
-  class="ts language-ts signature"
-><div><span class="token keyword">type</span> <span class="token constant">T</span><span class="token operator">&lt;</span><span class="token constant">V</span><span class="token operator">&gt;</span> <span class="token operator">=</span> Option<span class="token operator">&lt;</span><span class="token constant">V</span><span class="token operator">&gt;</span>
-</div></pre>
-<p class="defined-in">
-  defined in
-  <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L276"
-    >std/src/option.ts at line 276</a
-  >
-</p>
-<pre
-  class="import-code ts language-ts"
-><div><span class="token keyword">import</span> <span class="token punctuation">{</span> <span class="token constant">T</span> <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/option.ts'</span></div></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="all">
   all<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
     >function</span
@@ -842,6 +766,25 @@
 <pre
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> none <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/option.ts'</span></div></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="None">
+  None<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >type alias</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">type</span> None <span class="token operator">=</span> <span class="token punctuation">{</span> kind<span class="token operator">:</span> <span class="token string">'None'</span> <span class="token punctuation">}</span>
+</div></pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L20"
+    >std/src/option.ts at line 20</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> None <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/option.ts'</span></div></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="ofValue">
   ofValue<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
     >function</span
@@ -861,6 +804,25 @@
 <pre
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> ofValue <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/option.ts'</span></div></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="Option">
+  Option<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >type alias</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">type</span> Option<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span> <span class="token operator">=</span> Some<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span> <span class="token operator">|</span> None
+</div></pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L22"
+    >std/src/option.ts at line 22</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> Option <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/option.ts'</span></div></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="recover">
   recover<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
     >function</span
@@ -919,6 +881,25 @@
 <pre
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> some <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/option.ts'</span></div></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="Some">
+  Some<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >type alias</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">type</span> Some<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">{</span> kind<span class="token operator">:</span> <span class="token string">'Some'</span><span class="token punctuation">;</span> value<span class="token operator">:</span> <span class="token constant">T</span> <span class="token punctuation">}</span>
+</div></pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L19"
+    >std/src/option.ts at line 19</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> Some <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/option.ts'</span></div></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="spread">
   spread<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
     >function</span
@@ -938,6 +919,25 @@
 <pre
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> spread <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/option.ts'</span></div></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="T">
+  T<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >type alias</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">type</span> <span class="token constant">T</span><span class="token operator">&lt;</span><span class="token constant">V</span><span class="token operator">&gt;</span> <span class="token operator">=</span> Option<span class="token operator">&lt;</span><span class="token constant">V</span><span class="token operator">&gt;</span>
+</div></pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L276"
+    >std/src/option.ts at line 276</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> <span class="token constant">T</span> <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/option.ts'</span></div></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="toArray">
   toArray<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
     >function</span

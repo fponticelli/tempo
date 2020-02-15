@@ -8,12 +8,15 @@
 <nav></nav>
 <h3 class="is-family-monospace has-text-grey-dark" id="circle">
   circle<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
-    >variable</span
+    >function</span
   >
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">const</span> circle<span class="token operator">:</span> <span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token punctuation">,</span> <span class="token constant">T</span> <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token parameter">options<span class="token operator">:</span> Partial<span class="token operator">&lt;</span>Merge<span class="token operator">&lt;</span>Merge<span class="token operator">&lt;</span>WritableShapeOptions<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span><span class="token punctuation">,</span> Merge<span class="token operator">&lt;</span><span class="token punctuation">{</span> args<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span> <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> TempoAttributes<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> Shape<span class="token punctuation">,</span> <span class="token constant">T</span><span class="token operator">&gt;&gt;&gt;</span><span class="token punctuation">,</span> ItemEvents<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Shape<span class="token operator">&gt;&gt;&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> ItemTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> Shape<span class="token punctuation">,</span> <span class="token constant">T</span><span class="token operator">&gt;</span></div></pre>
+><div><span class="token keyword">function</span> circle<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token punctuation">,</span> <span class="token constant">T</span> <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  options<span class="token operator">:</span> ShapeOptions<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> <span class="token constant">T</span><span class="token punctuation">,</span> Shape<span class="token punctuation">.</span>Circle<span class="token operator">&gt;</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> ItemTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> paper<span class="token punctuation">.</span>Shape<span class="token punctuation">,</span> <span class="token constant">T</span><span class="token operator">&gt;</span>
+</div></pre>
 <p class="defined-in">
   defined in
   <a
@@ -26,17 +29,20 @@
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> circle <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-paperjs/lib/shape.ts'</span></div></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="ellipse">
   ellipse<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
-    >variable</span
+    >function</span
   >
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">const</span> ellipse<span class="token operator">:</span> <span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token punctuation">,</span> <span class="token constant">T</span> <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token parameter">options<span class="token operator">:</span> Partial<span class="token operator">&lt;</span>Merge<span class="token operator">&lt;</span>Merge<span class="token operator">&lt;</span>WritableShapeOptions<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span><span class="token punctuation">,</span> Merge<span class="token operator">&lt;</span><span class="token punctuation">{</span> args<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span> <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> TempoAttributes<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> Shape<span class="token punctuation">,</span> <span class="token constant">T</span><span class="token operator">&gt;&gt;&gt;</span><span class="token punctuation">,</span> ItemEvents<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Shape<span class="token operator">&gt;&gt;&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> ItemTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> Shape<span class="token punctuation">,</span> <span class="token constant">T</span><span class="token operator">&gt;</span></div></pre>
+><div><span class="token keyword">function</span> ellipse<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token punctuation">,</span> <span class="token constant">T</span> <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  options<span class="token operator">:</span> ShapeOptions<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> <span class="token constant">T</span><span class="token punctuation">,</span> Shape<span class="token punctuation">.</span>Ellipse<span class="token operator">&gt;</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> ItemTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> paper<span class="token punctuation">.</span>Shape<span class="token punctuation">,</span> <span class="token constant">T</span><span class="token operator">&gt;</span>
+</div></pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/paperjs/src/shape.ts#L81"
-    >paperjs/src/shape.ts at line 81</a
+    href="https://github.com/fponticelli/tempo/blob/master/paperjs/src/shape.ts#L83"
+    >paperjs/src/shape.ts at line 83</a
   >
 </p>
 <pre
@@ -44,17 +50,20 @@
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> ellipse <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-paperjs/lib/shape.ts'</span></div></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="rectangle">
   rectangle<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
-    >variable</span
+    >function</span
   >
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">const</span> rectangle<span class="token operator">:</span> <span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token punctuation">,</span> <span class="token constant">T</span> <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token parameter">options<span class="token operator">:</span> Partial<span class="token operator">&lt;</span>Merge<span class="token operator">&lt;</span>Merge<span class="token operator">&lt;</span>WritableShapeOptions<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span><span class="token punctuation">,</span> Merge<span class="token operator">&lt;</span><span class="token punctuation">{</span> args<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span> <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> TempoAttributes<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> Shape<span class="token punctuation">,</span> <span class="token constant">T</span><span class="token operator">&gt;&gt;&gt;</span><span class="token punctuation">,</span> ItemEvents<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Shape<span class="token operator">&gt;&gt;&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> ItemTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> Shape<span class="token punctuation">,</span> <span class="token constant">T</span><span class="token operator">&gt;</span></div></pre>
+><div><span class="token keyword">function</span> rectangle<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token punctuation">,</span> <span class="token constant">T</span> <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  options<span class="token operator">:</span> ShapeOptions<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> <span class="token constant">T</span><span class="token punctuation">,</span> Shape<span class="token punctuation">.</span>Rectangle<span class="token operator">&gt;</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> ItemTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> paper<span class="token punctuation">.</span>Shape<span class="token punctuation">,</span> <span class="token constant">T</span><span class="token operator">&gt;</span>
+</div></pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/paperjs/src/shape.ts#L63"
-    >paperjs/src/shape.ts at line 63</a
+    href="https://github.com/fponticelli/tempo/blob/master/paperjs/src/shape.ts#L64"
+    >paperjs/src/shape.ts at line 64</a
   >
 </p>
 <pre

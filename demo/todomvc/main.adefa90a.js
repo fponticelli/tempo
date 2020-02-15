@@ -510,9 +510,6 @@ function () {
   return DerivedTextTemplate;
 }();
 
-var $GqEk$export$DerivedTextTemplate = $GqEk$var$DerivedTextTemplate;
-$GqEk$exports.DerivedTextTemplate = $GqEk$export$DerivedTextTemplate;
-
 var $GqEk$var$LiteralTextTemplate =
 /** @class */
 function () {
@@ -535,17 +532,15 @@ function () {
   return LiteralTextTemplate;
 }();
 
-var $GqEk$export$LiteralTextTemplate = $GqEk$var$LiteralTextTemplate;
-$GqEk$exports.LiteralTextTemplate = $GqEk$export$LiteralTextTemplate;
-
-var $GqEk$export$text = function (content) {
+function $GqEk$var$text(content) {
   if (typeof content === 'function') {
     return new $GqEk$var$DerivedTextTemplate(content);
   } else {
     return new $GqEk$var$LiteralTextTemplate(content || '');
   }
-};
+}
 
+var $GqEk$export$text = $GqEk$var$text;
 $GqEk$exports.text = $GqEk$export$text; //# sourceMappingURL=text.js.map
 
 // ASSET: ../node_modules/tempo-dom/lib/utils/dom.js
@@ -675,7 +670,7 @@ function $TnZD$var$processStyle(el, name, value, acc) {
 var $TnZD$export$processStyle = $TnZD$var$processStyle;
 $TnZD$exports.processStyle = $TnZD$export$processStyle;
 
-var $TnZD$export$containerSize = function (el) {
+function $TnZD$var$containerSize(el) {
   var prev = [];
 
   for (var i = 0; i < el.children.length; i++) {
@@ -695,8 +690,9 @@ var $TnZD$export$containerSize = function (el) {
   }
 
   return size;
-};
+}
 
+var $TnZD$export$containerSize = $TnZD$var$containerSize;
 $TnZD$exports.containerSize = $TnZD$export$containerSize; //# sourceMappingURL=dom.js.map
 
 // ASSET: ../node_modules/tempo-dom/lib/component.js
@@ -778,10 +774,7 @@ function () {
   return ComponentTemplate;
 }();
 
-var $yVFQ$export$ComponentTemplate = $yVFQ$var$ComponentTemplate;
-$yVFQ$exports.ComponentTemplate = $yVFQ$export$ComponentTemplate;
-
-var $yVFQ$export$component = function (attributes) {
+function $yVFQ$var$component(attributes) {
   var children = [];
 
   for (var _i = 1; _i < arguments.length; _i++) {
@@ -789,8 +782,9 @@ var $yVFQ$export$component = function (attributes) {
   }
 
   return new $yVFQ$var$ComponentTemplate(attributes.store, $LAOm$export$map($TnZD$export$domChildToTemplate, children), attributes.delayed || false);
-};
+}
 
+var $yVFQ$export$component = $yVFQ$var$component;
 $yVFQ$exports.component = $yVFQ$export$component; //# sourceMappingURL=component.js.map
 
 // ASSET: ../node_modules/tempo-dom/lib/context.js
@@ -991,7 +985,7 @@ function () {
 var $bXMb$export$Emitter = $bXMb$var$Emitter;
 $bXMb$exports.Emitter = $bXMb$export$Emitter;
 
-var $bXMb$export$debounce = function (delay) {
+function $bXMb$var$debounce(delay) {
   return function (listener) {
     var running = false;
     var acc;
@@ -1011,11 +1005,12 @@ var $bXMb$export$debounce = function (delay) {
       }, delay);
     };
   };
-};
+}
 
+var $bXMb$export$debounce = $bXMb$var$debounce;
 $bXMb$exports.debounce = $bXMb$export$debounce;
 
-var $bXMb$export$nextFrame = function (listener) {
+function $bXMb$var$nextFrame(listener) {
   var running = false;
   var acc;
   return function () {
@@ -1033,8 +1028,9 @@ var $bXMb$export$nextFrame = function (listener) {
       listener.apply(void 0, acc);
     });
   };
-};
+}
 
+var $bXMb$export$nextFrame = $bXMb$var$nextFrame;
 $bXMb$exports.nextFrame = $bXMb$export$nextFrame; //# sourceMappingURL=emitter.js.map
 
 // ASSET: ../node_modules/tempo-store/node_modules/tempo-std/lib/equals.js
@@ -1951,7 +1947,7 @@ var $bbLX$var$makeCreateElement = function (name) {
   };
 };
 
-var $bbLX$export$el = function (name, attributes) {
+function $bbLX$var$el(name, attributes) {
   var children = [];
 
   for (var _i = 2; _i < arguments.length; _i++) {
@@ -1959,11 +1955,12 @@ var $bbLX$export$el = function (name, attributes) {
   }
 
   return new $bbLX$var$DOMElement($bbLX$var$makeCreateElement(name), $bbLX$var$extractAttrs(attributes.attrs), $bbLX$var$extractEvents(attributes.events), $bbLX$var$extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, attributes.respond, $LAOm$export$map($TnZD$export$domChildToTemplate, children));
-};
+}
 
+var $bbLX$export$el = $bbLX$var$el;
 $bbLX$exports.el = $bbLX$export$el;
 
-var $bbLX$export$el2 = function (name) {
+function $bbLX$var$el2(name) {
   return function (attributes) {
     var children = [];
 
@@ -1973,8 +1970,9 @@ var $bbLX$export$el2 = function (name) {
 
     return new $bbLX$var$DOMElement($bbLX$var$makeCreateElement(name), $bbLX$var$extractAttrs(attributes.attrs), $bbLX$var$extractEvents(attributes.events), $bbLX$var$extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, attributes.respond, $LAOm$export$map($TnZD$export$domChildToTemplate, children));
   };
-};
+}
 
+var $bbLX$export$el2 = $bbLX$var$el2;
 $bbLX$exports.el2 = $bbLX$export$el2;
 var $bbLX$export$defaultNamespaces = {
   'svg': 'http://www.w3.org/2000/svg'
@@ -1987,7 +1985,7 @@ var $bbLX$var$makeCreateElementNS = function (namespace, name) {
   };
 };
 
-var $bbLX$export$elNS = function (ns, name, attributes) {
+function $bbLX$var$elNS(ns, name, attributes) {
   var children = [];
 
   for (var _i = 3; _i < arguments.length; _i++) {
@@ -1996,11 +1994,12 @@ var $bbLX$export$elNS = function (ns, name, attributes) {
 
   var namespace = $bbLX$export$defaultNamespaces[ns] || ns;
   return new $bbLX$var$DOMElement($bbLX$var$makeCreateElementNS(namespace, name), $bbLX$var$extractAttrs(attributes.attrs), $bbLX$var$extractEvents(attributes.events), $bbLX$var$extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, attributes.respond, $LAOm$export$map($TnZD$export$domChildToTemplate, children));
-};
+}
 
+var $bbLX$export$elNS = $bbLX$var$elNS;
 $bbLX$exports.elNS = $bbLX$export$elNS;
 
-var $bbLX$export$elNS2 = function (namespace, name) {
+function $bbLX$var$elNS2(namespace, name) {
   return function (attributes) {
     var children = [];
 
@@ -2010,8 +2009,9 @@ var $bbLX$export$elNS2 = function (namespace, name) {
 
     return new $bbLX$var$DOMElement($bbLX$var$makeCreateElementNS(namespace, name), $bbLX$var$extractAttrs(attributes.attrs), $bbLX$var$extractEvents(attributes.events), $bbLX$var$extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, attributes.respond, $LAOm$export$map($TnZD$export$domChildToTemplate, children));
   };
-};
+}
 
+var $bbLX$export$elNS2 = $bbLX$var$elNS2;
 $bbLX$exports.elNS2 = $bbLX$export$elNS2; //# sourceMappingURL=element.js.map
 
 // ASSET: ../node_modules/tempo-dom/lib/html.js
@@ -2314,10 +2314,7 @@ function () {
   return FilterStateTemplate;
 }();
 
-var $Utso$export$FilterStateTemplate = $Utso$var$FilterStateTemplate;
-$Utso$exports.FilterStateTemplate = $Utso$export$FilterStateTemplate;
-
-var $Utso$export$filterState = function (options) {
+function $Utso$var$filterState(options) {
   var children = [];
 
   for (var _i = 1; _i < arguments.length; _i++) {
@@ -2327,8 +2324,9 @@ var $Utso$export$filterState = function (options) {
   return new $Utso$var$FilterStateTemplate(options.isSame || function (a, b) {
     return a === b;
   }, $LAOm$export$map($TnZD$export$domChildToTemplate, children));
-};
+}
 
+var $Utso$export$filterState = $Utso$var$filterState;
 $Utso$exports.filterState = $Utso$export$filterState; //# sourceMappingURL=filter.js.map
 
 // ASSET: ../node_modules/tempo-dom/lib/map.js
@@ -2381,10 +2379,7 @@ function () {
   return MapStateTemplate;
 }();
 
-var $qep0$export$MapStateTemplate = $qep0$var$MapStateTemplate;
-$qep0$exports.MapStateTemplate = $qep0$export$MapStateTemplate;
-
-var $qep0$export$mapState = function (options) {
+function $qep0$var$mapState(options) {
   var children = [];
 
   for (var _i = 1; _i < arguments.length; _i++) {
@@ -2392,11 +2387,12 @@ var $qep0$export$mapState = function (options) {
   }
 
   return new $qep0$var$MapStateTemplate(options.map, $LAOm$export$map($TnZD$export$domChildToTemplate, children));
-};
+}
 
+var $qep0$export$mapState = $qep0$var$mapState;
 $qep0$exports.mapState = $qep0$export$mapState;
 
-var $qep0$export$mapStateAndKeep = function (options) {
+function $qep0$var$mapStateAndKeep(options) {
   var children = [];
 
   for (var _i = 1; _i < arguments.length; _i++) {
@@ -2406,8 +2402,9 @@ var $qep0$export$mapStateAndKeep = function (options) {
   return new $qep0$var$MapStateTemplate(function (state) {
     return [options.map(state), state];
   }, $LAOm$export$map($TnZD$export$domChildToTemplate, children));
-};
+}
 
+var $qep0$export$mapStateAndKeep = $qep0$var$mapStateAndKeep;
 $qep0$exports.mapStateAndKeep = $qep0$export$mapStateAndKeep;
 
 var $qep0$var$MapActionTemplate =
@@ -2452,10 +2449,7 @@ function () {
   return MapActionTemplate;
 }();
 
-var $qep0$export$MapActionTemplate = $qep0$var$MapActionTemplate;
-$qep0$exports.MapActionTemplate = $qep0$export$MapActionTemplate;
-
-var $qep0$export$mapAction = function (options) {
+function $qep0$var$mapAction(options) {
   var children = [];
 
   for (var _i = 1; _i < arguments.length; _i++) {
@@ -2463,8 +2457,9 @@ var $qep0$export$mapAction = function (options) {
   }
 
   return new $qep0$var$MapActionTemplate(options.map, $LAOm$export$map($TnZD$export$domChildToTemplate, children));
-};
+}
 
+var $qep0$export$mapAction = $qep0$var$mapAction;
 $qep0$exports.mapAction = $qep0$export$mapAction;
 
 var $qep0$var$MapQueryTemplate =
@@ -2511,10 +2506,7 @@ function () {
   return MapQueryTemplate;
 }();
 
-var $qep0$export$MapQueryTemplate = $qep0$var$MapQueryTemplate;
-$qep0$exports.MapQueryTemplate = $qep0$export$MapQueryTemplate;
-
-var $qep0$export$mapQuery = function (options) {
+function $qep0$var$mapQuery(options) {
   var children = [];
 
   for (var _i = 1; _i < arguments.length; _i++) {
@@ -2522,11 +2514,12 @@ var $qep0$export$mapQuery = function (options) {
   }
 
   return new $qep0$var$MapQueryTemplate(options.map, $LAOm$export$map($TnZD$export$domChildToTemplate, children));
-};
+}
 
+var $qep0$export$mapQuery = $qep0$var$mapQuery;
 $qep0$exports.mapQuery = $qep0$export$mapQuery;
 
-var $qep0$export$mapQueryConditional = function (options) {
+function $qep0$var$mapQueryConditional(options) {
   var children = [];
 
   for (var _i = 1; _i < arguments.length; _i++) {
@@ -2534,8 +2527,9 @@ var $qep0$export$mapQueryConditional = function (options) {
   }
 
   return new $qep0$var$MapQueryTemplate(options.map, $LAOm$export$map($TnZD$export$domChildToTemplate, children));
-};
+}
 
+var $qep0$export$mapQueryConditional = $qep0$var$mapQueryConditional;
 $qep0$exports.mapQueryConditional = $qep0$export$mapQueryConditional; //# sourceMappingURL=map.js.map
 
 // ASSET: ../node_modules/tempo-dom/lib/until.js
@@ -2641,10 +2635,7 @@ function () {
   return UntilTemplate;
 }();
 
-var $UU8h$export$UntilTemplate = $UU8h$var$UntilTemplate;
-$UU8h$exports.UntilTemplate = $UU8h$export$UntilTemplate;
-
-var $UU8h$export$until = function (options) {
+function $UU8h$var$until(options) {
   var children = [];
 
   for (var _i = 1; _i < arguments.length; _i++) {
@@ -2652,8 +2643,9 @@ var $UU8h$export$until = function (options) {
   }
 
   return new $UU8h$var$UntilTemplate(options, $LAOm$export$map($TnZD$export$domChildToTemplate, children));
-};
+}
 
+var $UU8h$export$until = $UU8h$var$until;
 $UU8h$exports.until = $UU8h$export$until; //# sourceMappingURL=until.js.map
 
 // ASSET: ../node_modules/tempo-dom/lib/iterate.js
@@ -2671,7 +2663,7 @@ Object.defineProperty($GBq0$exports, "__esModule", {
   value: true
 });
 
-var $GBq0$export$iterate = function (options) {
+function $GBq0$var$iterate(options) {
   var children = [];
 
   for (var _i = 1; _i < arguments.length; _i++) {
@@ -2689,11 +2681,12 @@ var $GBq0$export$iterate = function (options) {
       return value[index] && [value[index], outerState, index];
     }
   }], children)));
-};
+}
 
+var $GBq0$export$iterate = $GBq0$var$iterate;
 $GBq0$exports.iterate = $GBq0$export$iterate;
 
-var $GBq0$export$iterateItems = function (options) {
+function $GBq0$var$iterateItems(options) {
   var children = [];
 
   for (var _i = 1; _i < arguments.length; _i++) {
@@ -2709,8 +2702,9 @@ var $GBq0$export$iterateItems = function (options) {
       return value[index];
     }
   }], children)));
-};
+}
 
+var $GBq0$export$iterateItems = $GBq0$var$iterateItems;
 $GBq0$exports.iterateItems = $GBq0$export$iterateItems; //# sourceMappingURL=iterate.js.map
 
 // ASSET: ../node_modules/tempo-dom/lib/when.js
@@ -2788,10 +2782,7 @@ function () {
   return WhenTemplate;
 }();
 
-var $Qev4$export$WhenTemplate = $Qev4$var$WhenTemplate;
-$Qev4$exports.WhenTemplate = $Qev4$export$WhenTemplate;
-
-var $Qev4$export$when = function (options) {
+function $Qev4$var$when(options) {
   var children = [];
 
   for (var _i = 1; _i < arguments.length; _i++) {
@@ -2799,11 +2790,12 @@ var $Qev4$export$when = function (options) {
   }
 
   return new $Qev4$var$WhenTemplate(options, $LAOm$export$map($TnZD$export$domChildToTemplate, children));
-};
+}
 
+var $Qev4$export$when = $Qev4$var$when;
 $Qev4$exports.when = $Qev4$export$when;
 
-var $Qev4$export$unless = function (options) {
+function $Qev4$var$unless(options) {
   var children = [];
 
   for (var _i = 1; _i < arguments.length; _i++) {
@@ -2816,8 +2808,9 @@ var $Qev4$export$unless = function (options) {
     },
     refId: options.refId || 't:unless'
   }, $LAOm$export$map($TnZD$export$domChildToTemplate, children));
-};
+}
 
+var $Qev4$export$unless = $Qev4$var$unless;
 $Qev4$exports.unless = $Qev4$export$unless; //# sourceMappingURL=when.js.map
 
 // ASSET: action.ts

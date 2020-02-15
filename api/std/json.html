@@ -8,6 +8,11 @@
   <p class="title is-6">Table of Contents</p>
   <ul class="module-toc-list">
     <li>
+      <a class="is-family-monospace" href="#/api/std/json.html#deserialize"
+        >deserialize</a
+      >
+    </li>
+    <li>
       <a class="is-family-monospace" href="#/api/std/json.html#JSONArray"
         >JSONArray</a
       >
@@ -25,11 +30,6 @@
     <li>
       <a class="is-family-monospace" href="#/api/std/json.html#JSONValue"
         >JSONValue</a
-      >
-    </li>
-    <li>
-      <a class="is-family-monospace" href="#/api/std/json.html#deserialize"
-        >deserialize</a
       >
     </li>
     <li>
@@ -51,6 +51,25 @@
     </li>
   </ul>
 </nav>
+<h3 class="is-family-monospace has-text-grey-dark" id="deserialize">
+  deserialize<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">function</span> <span class="token function">deserialize</span><span class="token punctuation">(</span><span class="token parameter">s<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> Result<span class="token operator">&lt;</span>JSONValue<span class="token punctuation">,</span> <span class="token builtin">string</span><span class="token operator">&gt;</span>
+</div></pre>
+<p class="defined-in">
+  defined in
+  <a href="https://github.com/fponticelli/tempo/blob/master/std/src/json.ts#L21"
+    >std/src/json.ts at line 21</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> deserialize <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/json.ts'</span></div></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="JSONArray">
   JSONArray<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
     >type alias</span
@@ -125,25 +144,6 @@
 <pre
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> JSONValue <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/json.ts'</span></div></pre>
-<h3 class="is-family-monospace has-text-grey-dark" id="deserialize">
-  deserialize<span
-    class="kind is-family-sans-serif has-text-grey-light is-size-6"
-    >function</span
-  >
-</h3>
-<pre
-  class="ts language-ts signature"
-><div><span class="token keyword">function</span> <span class="token function">deserialize</span><span class="token punctuation">(</span><span class="token parameter">s<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> Result<span class="token operator">&lt;</span>JSONValue<span class="token punctuation">,</span> <span class="token builtin">string</span><span class="token operator">&gt;</span>
-</div></pre>
-<p class="defined-in">
-  defined in
-  <a href="https://github.com/fponticelli/tempo/blob/master/std/src/json.ts#L21"
-    >std/src/json.ts at line 21</a
-  >
-</p>
-<pre
-  class="import-code ts language-ts"
-><div><span class="token keyword">import</span> <span class="token punctuation">{</span> deserialize <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/json.ts'</span></div></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="makeSerializer">
   makeSerializer<span
     class="kind is-family-sans-serif has-text-grey-light is-size-6"

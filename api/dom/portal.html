@@ -5,58 +5,23 @@
 </div>
 <h1>module 'portal'</h1>
 <nav></nav>
-<h3 class="is-family-monospace has-text-grey-dark" id="PortalTemplate">
-  PortalTemplate<span
+<h3 class="is-family-monospace has-text-grey-dark" id="bodyPortal">
+  bodyPortal<span
     class="kind is-family-sans-serif has-text-grey-light is-size-6"
-    >class</span
+    >function</span
   >
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">declare</span> <span class="token keyword">class</span> <span class="token class-name">PortalTemplate</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
-  <span class="token keyword">implements</span> <span class="token class-name">DOMTemplate</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span> <span class="token punctuation">{</span>
-  <span class="token keyword">constructor</span><span class="token punctuation">(</span>
-    <span class="token function-variable function">getParent</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">doc<span class="token operator">:</span> Document</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Element<span class="token punctuation">,</span>
-    <span class="token function-variable function">append</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">doc<span class="token operator">:</span> Document<span class="token punctuation">,</span> node<span class="token operator">:</span> Node</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span><span class="token punctuation">,</span>
-    children<span class="token operator">:</span> DOMTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
-  <span class="token punctuation">)</span>
-  <span class="token keyword">readonly</span> <span class="token function-variable function">getParent</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">doc<span class="token operator">:</span> Document</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Element
-  <span class="token keyword">readonly</span> <span class="token function-variable function">append</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">doc<span class="token operator">:</span> Document<span class="token punctuation">,</span> node<span class="token operator">:</span> Node</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
-  <span class="token keyword">readonly</span> children<span class="token operator">:</span> DOMTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
-  <span class="token function">render</span><span class="token punctuation">(</span>
-    ctx<span class="token operator">:</span> DOMContext<span class="token operator">&lt;</span>Action<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-    state<span class="token operator">:</span> State
-  <span class="token punctuation">)</span><span class="token operator">:</span> <span class="token punctuation">{</span>
-    <span class="token function-variable function">change</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">state<span class="token operator">:</span> State</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
-    <span class="token function-variable function">destroy</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
-    <span class="token function-variable function">request</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">query<span class="token operator">:</span> Query</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
-  <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
+><div><span class="token keyword">function</span> bodyPortal<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  <span class="token operator">...</span>children<span class="token operator">:</span> DOMChild<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> DOMTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
 </div></pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/portal.ts#L19"
-    >dom/src/portal.ts at line 19</a
-  >
-</p>
-<pre
-  class="import-code ts language-ts"
-><div><span class="token keyword">import</span> <span class="token punctuation">{</span> PortalTemplate <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/portal.ts'</span></div></pre>
-<h3 class="is-family-monospace has-text-grey-dark" id="bodyPortal">
-  bodyPortal<span
-    class="kind is-family-sans-serif has-text-grey-light is-size-6"
-    >variable</span
-  >
-</h3>
-<pre
-  class="ts language-ts signature"
-><div><span class="token keyword">const</span> bodyPortal<span class="token operator">:</span> <span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token parameter"><span class="token operator">...</span>children<span class="token operator">:</span> DOMChild<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">[</span><span class="token punctuation">]</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> DOMTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></div></pre>
-<p class="defined-in">
-  defined in
-  <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/portal.ts#L85"
-    >dom/src/portal.ts at line 85</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/portal.ts#L89"
+    >dom/src/portal.ts at line 89</a
   >
 </p>
 <pre
@@ -65,17 +30,20 @@
 <h3 class="is-family-monospace has-text-grey-dark" id="headPortal">
   headPortal<span
     class="kind is-family-sans-serif has-text-grey-light is-size-6"
-    >variable</span
+    >function</span
   >
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">const</span> headPortal<span class="token operator">:</span> <span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token parameter"><span class="token operator">...</span>children<span class="token operator">:</span> DOMChild<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">[</span><span class="token punctuation">]</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> DOMTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></div></pre>
+><div><span class="token keyword">function</span> headPortal<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  <span class="token operator">...</span>children<span class="token operator">:</span> DOMChild<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> DOMTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</div></pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/portal.ts#L77"
-    >dom/src/portal.ts at line 77</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/portal.ts#L79"
+    >dom/src/portal.ts at line 79</a
   >
 </p>
 <pre
@@ -83,12 +51,19 @@
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> headPortal <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/portal.ts'</span></div></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="portal">
   portal<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
-    >variable</span
+    >function</span
   >
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">const</span> portal<span class="token operator">:</span> <span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>options<span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token function-variable function">getParent</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">doc<span class="token operator">:</span> Document</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Element<span class="token punctuation">;</span> <span class="token function-variable function">append</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">doc<span class="token operator">:</span> Document<span class="token punctuation">,</span> node<span class="token operator">:</span> Node</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span><span class="token punctuation">;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token operator">...</span>children<span class="token operator">:</span> DOMChild<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> DOMTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></div></pre>
+><div><span class="token keyword">function</span> portal<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  options<span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token function-variable function">getParent</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">doc<span class="token operator">:</span> Document</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Element
+    <span class="token function-variable function">append</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">doc<span class="token operator">:</span> Document<span class="token punctuation">,</span> node<span class="token operator">:</span> Node</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token operator">...</span>children<span class="token operator">:</span> DOMChild<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> DOMTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</div></pre>
 <p class="defined-in">
   defined in
   <a
@@ -102,17 +77,21 @@
 <h3 class="is-family-monospace has-text-grey-dark" id="portalWithSelector">
   portalWithSelector<span
     class="kind is-family-sans-serif has-text-grey-light is-size-6"
-    >variable</span
+    >function</span
   >
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">const</span> portalWithSelector<span class="token operator">:</span> <span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token parameter">options<span class="token operator">:</span> <span class="token punctuation">{</span> selector<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token operator">...</span>children<span class="token operator">:</span> DOMChild<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">[</span><span class="token punctuation">]</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> DOMTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></div></pre>
+><div><span class="token keyword">function</span> portalWithSelector<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  options<span class="token operator">:</span> <span class="token punctuation">{</span> selector<span class="token operator">:</span> <span class="token builtin">string</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token operator">...</span>children<span class="token operator">:</span> DOMChild<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> DOMTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</div></pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/portal.ts#L54"
-    >dom/src/portal.ts at line 54</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/portal.ts#L55"
+    >dom/src/portal.ts at line 55</a
   >
 </p>
 <pre

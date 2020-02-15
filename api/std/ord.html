@@ -42,6 +42,27 @@
 <pre
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> CompareOrd <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/ord.ts'</span></div></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="fromNumberComparison">
+  fromNumberComparison<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">function</span> fromNumberComparison<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  <span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token constant">A</span><span class="token punctuation">,</span> b<span class="token operator">:</span> <span class="token constant">A</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">number</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token constant">A</span><span class="token punctuation">,</span> b<span class="token operator">:</span> <span class="token constant">A</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Ordering
+</div></pre>
+<p class="defined-in">
+  defined in
+  <a href="https://github.com/fponticelli/tempo/blob/master/std/src/ord.ts#L74"
+    >std/src/ord.ts at line 74</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> fromNumberComparison <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/ord.ts'</span></div></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="Ord">
   Ord<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
     >class</span
@@ -92,24 +113,3 @@
 <pre
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> Ordering <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/ord.ts'</span></div></pre>
-<h3 class="is-family-monospace has-text-grey-dark" id="fromNumberComparison">
-  fromNumberComparison<span
-    class="kind is-family-sans-serif has-text-grey-light is-size-6"
-    >function</span
-  >
-</h3>
-<pre
-  class="ts language-ts signature"
-><div><span class="token keyword">function</span> fromNumberComparison<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  <span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token constant">A</span><span class="token punctuation">,</span> b<span class="token operator">:</span> <span class="token constant">A</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">number</span>
-<span class="token punctuation">)</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token constant">A</span><span class="token punctuation">,</span> b<span class="token operator">:</span> <span class="token constant">A</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Ordering
-</div></pre>
-<p class="defined-in">
-  defined in
-  <a href="https://github.com/fponticelli/tempo/blob/master/std/src/ord.ts#L74"
-    >std/src/ord.ts at line 74</a
-  >
-</p>
-<pre
-  class="import-code ts language-ts"
-><div><span class="token keyword">import</span> <span class="token punctuation">{</span> fromNumberComparison <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/ord.ts'</span></div></pre>

@@ -511,7 +511,6 @@ var DerivedTextTemplate = /** @class */ (function () {
     };
     return DerivedTextTemplate;
 }());
-exports.DerivedTextTemplate = DerivedTextTemplate;
 var LiteralTextTemplate = /** @class */ (function () {
     function LiteralTextTemplate(content) {
         this.content = content;
@@ -529,15 +528,15 @@ var LiteralTextTemplate = /** @class */ (function () {
     };
     return LiteralTextTemplate;
 }());
-exports.LiteralTextTemplate = LiteralTextTemplate;
-exports.text = function (content) {
+function text(content) {
     if (typeof content === 'function') {
         return new DerivedTextTemplate(content);
     }
     else {
         return new LiteralTextTemplate(content || '');
     }
-};
+}
+exports.text = text;
 
 },{"./utils/dom":"TnZD"}],"TnZD":[function(require,module,exports) {
 "use strict";
@@ -651,7 +650,7 @@ function processStyle(el, name, value, acc) {
     return acc;
 }
 exports.processStyle = processStyle;
-exports.containerSize = function (el) {
+function containerSize(el) {
     var prev = [];
     for (var i = 0; i < el.children.length; i++) {
         var child = el.children[i];
@@ -667,7 +666,8 @@ exports.containerSize = function (el) {
         child.style.display = prev[i];
     }
     return size;
-};
+}
+exports.containerSize = containerSize;
 
 },{"./attributes_mapper":"ClC2","./set_attribute":"BEVE","../text":"GqEk"}],"bbLX":[function(require,module,exports) {
 "use strict";
@@ -810,41 +810,49 @@ function extractStyles(attrs) {
     }); }, Object.keys(attrs || {}));
 }
 var makeCreateElement = function (name) { return function (doc) { return doc.createElement(name); }; };
-exports.el = function (name, attributes) {
+function el(name, attributes) {
     var children = [];
     for (var _i = 2; _i < arguments.length; _i++) {
         children[_i - 2] = arguments[_i];
     }
     return new DOMElement(makeCreateElement(name), extractAttrs(attributes.attrs), extractEvents(attributes.events), extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, attributes.respond, arrays_1.map(dom_1.domChildToTemplate, children));
-};
-exports.el2 = function (name) { return function (attributes) {
-    var children = [];
-    for (var _i = 1; _i < arguments.length; _i++) {
-        children[_i - 1] = arguments[_i];
-    }
-    return new DOMElement(makeCreateElement(name), extractAttrs(attributes.attrs), extractEvents(attributes.events), extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, attributes.respond, arrays_1.map(dom_1.domChildToTemplate, children));
-}; };
+}
+exports.el = el;
+function el2(name) {
+    return function (attributes) {
+        var children = [];
+        for (var _i = 1; _i < arguments.length; _i++) {
+            children[_i - 1] = arguments[_i];
+        }
+        return new DOMElement(makeCreateElement(name), extractAttrs(attributes.attrs), extractEvents(attributes.events), extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, attributes.respond, arrays_1.map(dom_1.domChildToTemplate, children));
+    };
+}
+exports.el2 = el2;
 exports.defaultNamespaces = {
     'svg': 'http://www.w3.org/2000/svg'
 };
 var makeCreateElementNS = function (namespace, name) {
     return function (doc) { return doc.createElementNS(namespace, name); };
 };
-exports.elNS = function (ns, name, attributes) {
+function elNS(ns, name, attributes) {
     var children = [];
     for (var _i = 3; _i < arguments.length; _i++) {
         children[_i - 3] = arguments[_i];
     }
     var namespace = exports.defaultNamespaces[ns] || ns;
     return new DOMElement(makeCreateElementNS(namespace, name), extractAttrs(attributes.attrs), extractEvents(attributes.events), extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, attributes.respond, arrays_1.map(dom_1.domChildToTemplate, children));
-};
-exports.elNS2 = function (namespace, name) { return function (attributes) {
-    var children = [];
-    for (var _i = 1; _i < arguments.length; _i++) {
-        children[_i - 1] = arguments[_i];
-    }
-    return new DOMElement(makeCreateElementNS(namespace, name), extractAttrs(attributes.attrs), extractEvents(attributes.events), extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, attributes.respond, arrays_1.map(dom_1.domChildToTemplate, children));
-}; };
+}
+exports.elNS = elNS;
+function elNS2(namespace, name) {
+    return function (attributes) {
+        var children = [];
+        for (var _i = 1; _i < arguments.length; _i++) {
+            children[_i - 1] = arguments[_i];
+        }
+        return new DOMElement(makeCreateElementNS(namespace, name), extractAttrs(attributes.attrs), extractEvents(attributes.events), extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, attributes.respond, arrays_1.map(dom_1.domChildToTemplate, children));
+    };
+}
+exports.elNS2 = elNS2;
 
 },{"./utils/dom":"TnZD","tempo-std/lib/arrays":"LAOm","./utils/attributes_mapper":"ClC2"}],"zQMt":[function(require,module,exports) {
 "use strict";
@@ -1075,14 +1083,14 @@ var UntilTemplate = /** @class */ (function () {
     };
     return UntilTemplate;
 }());
-exports.UntilTemplate = UntilTemplate;
-exports.until = function (options) {
+function until(options) {
     var children = [];
     for (var _i = 1; _i < arguments.length; _i++) {
         children[_i - 1] = arguments[_i];
     }
     return new UntilTemplate(options, arrays_1.map(dom_1.domChildToTemplate, children));
-};
+}
+exports.until = until;
 
 },{"./utils/dom":"TnZD","tempo-std/lib/arrays":"LAOm"}],"kxUV":[function(require,module,exports) {
 "use strict";
@@ -1107,7 +1115,7 @@ var __spreadArrays = (this && this.__spreadArrays) || function () {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var until_1 = require("./until");
-exports.forEach = function (options) {
+function forEach(options) {
     var children = [];
     for (var _i = 1; _i < arguments.length; _i++) {
         children[_i - 1] = arguments[_i];
@@ -1116,7 +1124,8 @@ exports.forEach = function (options) {
             refId: options.refId || 't:for_each',
             repeatUntil: function (state, index) { return state[index]; }
         }], children));
-};
+}
+exports.forEach = forEach;
 
 },{"./until":"UU8h"}],"dozB":[function(require,module,exports) {
 "use strict";

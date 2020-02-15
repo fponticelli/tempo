@@ -5,6 +5,35 @@
 </div>
 <h1>module 'item'</h1>
 <nav></nav>
+<h3 class="is-family-monospace has-text-grey-dark" id="createItem">
+  createItem<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">function</span> createItem<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> <span class="token constant">I</span> <span class="token keyword">extends</span> <span class="token class-name">Item</span><span class="token punctuation">,</span> <span class="token constant">T</span><span class="token punctuation">,</span> Option<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  <span class="token function-variable function">makeItem</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">state<span class="token operator">:</span> State</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">I</span><span class="token punctuation">,</span>
+  options<span class="token operator">:</span> Partial<span class="token operator">&lt;</span>
+    Merge<span class="token operator">&lt;</span>
+      <span class="token punctuation">{</span> args<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      Merge<span class="token operator">&lt;</span>Option<span class="token punctuation">,</span> TempoAttributes<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> <span class="token constant">I</span><span class="token punctuation">,</span> <span class="token constant">T</span><span class="token operator">&gt;&gt;</span>
+    <span class="token operator">&gt;</span>
+  <span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  children<span class="token operator">?</span><span class="token operator">:</span> PaperTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">|</span> <span class="token keyword">undefined</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> ItemTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> <span class="token constant">I</span><span class="token punctuation">,</span> <span class="token constant">T</span><span class="token operator">&gt;</span>
+</div></pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/paperjs/src/item.ts#L87"
+    >paperjs/src/item.ts at line 87</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> createItem <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-paperjs/lib/item.ts'</span></div></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="FrameEvent">
   FrameEvent<span
     class="kind is-family-sans-serif has-text-grey-light is-size-6"
@@ -143,22 +172,3 @@
 <pre
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> ItemTemplate <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-paperjs/lib/item.ts'</span></div></pre>
-<h3 class="is-family-monospace has-text-grey-dark" id="createItem">
-  createItem<span
-    class="kind is-family-sans-serif has-text-grey-light is-size-6"
-    >variable</span
-  >
-</h3>
-<pre
-  class="ts language-ts signature"
-><div><span class="token keyword">const</span> createItem<span class="token operator">:</span> <span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> <span class="token constant">I</span> <span class="token keyword">extends</span> <span class="token class-name">Item</span><span class="token punctuation">,</span> <span class="token constant">T</span><span class="token punctuation">,</span> Option<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token function-variable function">makeItem</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">state<span class="token operator">:</span> State</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">I</span><span class="token punctuation">,</span> options<span class="token operator">:</span> Partial<span class="token operator">&lt;</span>Merge<span class="token operator">&lt;</span><span class="token punctuation">{</span> args<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span> <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> Merge<span class="token operator">&lt;</span>Option<span class="token punctuation">,</span> TempoAttributes<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> <span class="token constant">I</span><span class="token punctuation">,</span> <span class="token constant">T</span><span class="token operator">&gt;&gt;&gt;</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> children<span class="token operator">?</span><span class="token operator">:</span> PaperTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> ItemTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> <span class="token constant">I</span><span class="token punctuation">,</span> <span class="token constant">T</span><span class="token operator">&gt;</span></div></pre>
-<p class="defined-in">
-  defined in
-  <a
-    href="https://github.com/fponticelli/tempo/blob/master/paperjs/src/item.ts#L87"
-    >paperjs/src/item.ts at line 87</a
-  >
-</p>
-<pre
-  class="import-code ts language-ts"
-><div><span class="token keyword">import</span> <span class="token punctuation">{</span> createItem <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-paperjs/lib/item.ts'</span></div></pre>

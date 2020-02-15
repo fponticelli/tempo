@@ -13,28 +13,8 @@
       >
     </li>
     <li>
-      <a class="is-family-monospace" href="#/api/dom/value.html#AttributeValue"
-        >AttributeValue</a
-      >
-    </li>
-    <li>
       <a class="is-family-monospace" href="#/api/dom/value.html#Attributes"
         >Attributes</a
-      >
-    </li>
-    <li>
-      <a class="is-family-monospace" href="#/api/dom/value.html#EventHandler"
-        >EventHandler</a
-      >
-    </li>
-    <li>
-      <a class="is-family-monospace" href="#/api/dom/value.html#StyleAttribute"
-        >StyleAttribute</a
-      >
-    </li>
-    <li>
-      <a class="is-family-monospace" href="#/api/dom/value.html#TextValue"
-        >TextValue</a
       >
     </li>
     <li>
@@ -42,6 +22,16 @@
         class="is-family-monospace"
         href="#/api/dom/value.html#attributeToHandler"
         >attributeToHandler</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/dom/value.html#AttributeValue"
+        >AttributeValue</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/dom/value.html#EventHandler"
+        >EventHandler</a
       >
     </li>
     <li>
@@ -54,6 +44,16 @@
         class="is-family-monospace"
         href="#/api/dom/value.html#resolveAttribute"
         >resolveAttribute</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/dom/value.html#StyleAttribute"
+        >StyleAttribute</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/dom/value.html#TextValue"
+        >TextValue</a
       >
     </li>
   </ul>
@@ -79,26 +79,6 @@
 <pre
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> Attribute <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/value.ts'</span></div></pre>
-<h3 class="is-family-monospace has-text-grey-dark" id="AttributeValue">
-  AttributeValue<span
-    class="kind is-family-sans-serif has-text-grey-light is-size-6"
-    >type alias</span
-  >
-</h3>
-<pre
-  class="ts language-ts signature"
-><div><span class="token keyword">type</span> AttributeValue <span class="token operator">=</span> <span class="token builtin">string</span> <span class="token operator">|</span> <span class="token builtin">number</span> <span class="token operator">|</span> <span class="token builtin">boolean</span> <span class="token operator">|</span> <span class="token builtin">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
-</div></pre>
-<p class="defined-in">
-  defined in
-  <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/value.ts#L23"
-    >dom/src/value.ts at line 23</a
-  >
-</p>
-<pre
-  class="import-code ts language-ts"
-><div><span class="token keyword">import</span> <span class="token punctuation">{</span> AttributeValue <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/value.ts'</span></div></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="Attributes">
   Attributes<span
     class="kind is-family-sans-serif has-text-grey-light is-size-6"
@@ -153,6 +133,55 @@
 <pre
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> Attributes <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/value.ts'</span></div></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="attributeToHandler">
+  attributeToHandler<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">function</span> attributeToHandler<span class="token operator">&lt;</span>
+  State<span class="token punctuation">,</span>
+  Value<span class="token punctuation">,</span>
+  Action<span class="token punctuation">,</span>
+  Ev <span class="token keyword">extends</span> <span class="token class-name">Event</span><span class="token punctuation">,</span>
+  El <span class="token keyword">extends</span> <span class="token class-name">Element</span>
+<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  attr<span class="token operator">:</span> Attribute<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Value<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  handler<span class="token operator">:</span> EventHandler<span class="token operator">&lt;</span>Value<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Ev<span class="token punctuation">,</span> El<span class="token operator">&gt;</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> EventHandler<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Ev<span class="token punctuation">,</span> El<span class="token operator">&gt;</span>
+</div></pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/value.ts#L52"
+    >dom/src/value.ts at line 52</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> attributeToHandler <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/value.ts'</span></div></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="AttributeValue">
+  AttributeValue<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >type alias</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">type</span> AttributeValue <span class="token operator">=</span> <span class="token builtin">string</span> <span class="token operator">|</span> <span class="token builtin">number</span> <span class="token operator">|</span> <span class="token builtin">boolean</span> <span class="token operator">|</span> <span class="token builtin">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
+</div></pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/value.ts#L23"
+    >dom/src/value.ts at line 23</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> AttributeValue <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/value.ts'</span></div></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="EventHandler">
   EventHandler<span
     class="kind is-family-sans-serif has-text-grey-light is-size-6"
@@ -178,6 +207,48 @@
 <pre
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> EventHandler <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/value.ts'</span></div></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="mapAttribute">
+  mapAttribute<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">function</span> mapAttribute<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> <span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  attr<span class="token operator">:</span> Attribute<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> <span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  <span class="token function-variable function">map</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token constant">A</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">B</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> Attribute<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> <span class="token constant">B</span><span class="token operator">&gt;</span>
+</div></pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/value.ts#L36"
+    >dom/src/value.ts at line 36</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> mapAttribute <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/value.ts'</span></div></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="resolveAttribute">
+  resolveAttribute<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">function</span> resolveAttribute<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Value<span class="token operator">&gt;</span><span class="token punctuation">(</span>attr<span class="token operator">:</span> Attribute<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Value<span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">state<span class="token operator">:</span> State</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Value <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">state<span class="token operator">:</span> State</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Value <span class="token operator">|</span> <span class="token keyword">undefined</span></div></pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/value.ts#L73"
+    >dom/src/value.ts at line 73</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> resolveAttribute <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/value.ts'</span></div></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="StyleAttribute">
   StyleAttribute<span
     class="kind is-family-sans-serif has-text-grey-light is-size-6"
@@ -220,60 +291,3 @@
 <pre
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> TextValue <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/value.ts'</span></div></pre>
-<h3 class="is-family-monospace has-text-grey-dark" id="attributeToHandler">
-  attributeToHandler<span
-    class="kind is-family-sans-serif has-text-grey-light is-size-6"
-    >variable</span
-  >
-</h3>
-<pre
-  class="ts language-ts signature"
-><div><span class="token keyword">const</span> attributeToHandler<span class="token operator">:</span> <span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Value<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Ev <span class="token keyword">extends</span> <span class="token class-name">Event</span><span class="token punctuation">,</span> El <span class="token keyword">extends</span> <span class="token class-name">Element</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token parameter">attr<span class="token operator">:</span> DerivedOrLiteralValue<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Value <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> handler<span class="token operator">:</span> EventHandler<span class="token operator">&lt;</span>Value<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Ev<span class="token punctuation">,</span> El<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> EventHandler<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Ev<span class="token punctuation">,</span> El<span class="token operator">&gt;</span></div></pre>
-<p class="defined-in">
-  defined in
-  <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/value.ts#L52"
-    >dom/src/value.ts at line 52</a
-  >
-</p>
-<pre
-  class="import-code ts language-ts"
-><div><span class="token keyword">import</span> <span class="token punctuation">{</span> attributeToHandler <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/value.ts'</span></div></pre>
-<h3 class="is-family-monospace has-text-grey-dark" id="mapAttribute">
-  mapAttribute<span
-    class="kind is-family-sans-serif has-text-grey-light is-size-6"
-    >variable</span
-  >
-</h3>
-<pre
-  class="ts language-ts signature"
-><div><span class="token keyword">const</span> mapAttribute<span class="token operator">:</span> <span class="token operator">&lt;</span>State<span class="token punctuation">,</span> <span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>attr<span class="token operator">:</span> DerivedOrLiteralValue<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> <span class="token constant">A</span> <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> <span class="token function-variable function">map</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token constant">A</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">B</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> DerivedOrLiteralValue<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> <span class="token constant">B</span> <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token operator">&gt;</span></div></pre>
-<p class="defined-in">
-  defined in
-  <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/value.ts#L36"
-    >dom/src/value.ts at line 36</a
-  >
-</p>
-<pre
-  class="import-code ts language-ts"
-><div><span class="token keyword">import</span> <span class="token punctuation">{</span> mapAttribute <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/value.ts'</span></div></pre>
-<h3 class="is-family-monospace has-text-grey-dark" id="resolveAttribute">
-  resolveAttribute<span
-    class="kind is-family-sans-serif has-text-grey-light is-size-6"
-    >variable</span
-  >
-</h3>
-<pre
-  class="ts language-ts signature"
-><div><span class="token keyword">const</span> resolveAttribute<span class="token operator">:</span> <span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Value<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token parameter">attr<span class="token operator">:</span> DerivedOrLiteralValue<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Value <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">(</span><span class="token parameter">state<span class="token operator">:</span> State</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Value <span class="token operator">|</span> <span class="token keyword">undefined</span></div></pre>
-<p class="defined-in">
-  defined in
-  <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/value.ts#L73"
-    >dom/src/value.ts at line 73</a
-  >
-</p>
-<pre
-  class="import-code ts language-ts"
-><div><span class="token keyword">import</span> <span class="token punctuation">{</span> resolveAttribute <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/value.ts'</span></div></pre>

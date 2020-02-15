@@ -55,12 +55,15 @@
 </nav>
 <h3 class="is-family-monospace has-text-grey-dark" id="path">
   path<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
-    >variable</span
+    >function</span
   >
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">const</span> path<span class="token operator">:</span> <span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token punctuation">,</span> <span class="token constant">T</span> <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token parameter">options<span class="token operator">:</span> Partial<span class="token operator">&lt;</span>Merge<span class="token operator">&lt;</span><span class="token punctuation">{</span> args<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span> <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> Merge<span class="token operator">&lt;</span>Merge<span class="token operator">&lt;</span>WritablePathOptions<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span><span class="token punctuation">,</span> TempoAttributes<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> Path<span class="token punctuation">,</span> <span class="token constant">T</span><span class="token operator">&gt;&gt;</span><span class="token punctuation">,</span> ItemEvents<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Path<span class="token operator">&gt;&gt;&gt;</span><span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> ItemTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> Path<span class="token punctuation">,</span> <span class="token constant">T</span><span class="token operator">&gt;</span></div></pre>
+><div><span class="token keyword">function</span> path<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token punctuation">,</span> <span class="token constant">T</span> <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  options<span class="token operator">:</span> PathOptions<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> <span class="token constant">T</span><span class="token operator">&gt;</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> ItemTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> paper<span class="token punctuation">.</span>Path<span class="token punctuation">,</span> <span class="token constant">T</span><span class="token operator">&gt;</span>
+</div></pre>
 <p class="defined-in">
   defined in
   <a
@@ -73,17 +76,20 @@
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> path <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-paperjs/lib/path.ts'</span></div></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="pathArc">
   pathArc<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
-    >variable</span
+    >function</span
   >
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">const</span> pathArc<span class="token operator">:</span> <span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token punctuation">,</span> <span class="token constant">T</span> <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token parameter">options<span class="token operator">:</span> Merge<span class="token operator">&lt;</span><span class="token punctuation">{</span> args<span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> Partial<span class="token operator">&lt;</span>Merge<span class="token operator">&lt;</span>Merge<span class="token operator">&lt;</span>WritablePathOptions<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span><span class="token punctuation">,</span> TempoAttributes<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> Path<span class="token punctuation">,</span> <span class="token constant">T</span><span class="token operator">&gt;&gt;</span><span class="token punctuation">,</span> ItemEvents<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Path<span class="token operator">&gt;&gt;&gt;</span><span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> ItemTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> Path<span class="token punctuation">,</span> <span class="token constant">T</span><span class="token operator">&gt;</span></div></pre>
+><div><span class="token keyword">function</span> pathArc<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token punctuation">,</span> <span class="token constant">T</span> <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  options<span class="token operator">:</span> PathConstrOptions<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> <span class="token constant">T</span><span class="token operator">&gt;</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> ItemTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> paper<span class="token punctuation">.</span>Path<span class="token punctuation">,</span> <span class="token constant">T</span><span class="token operator">&gt;</span>
+</div></pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/paperjs/src/path.ts#L127"
-    >paperjs/src/path.ts at line 127</a
+    href="https://github.com/fponticelli/tempo/blob/master/paperjs/src/path.ts#L132"
+    >paperjs/src/path.ts at line 132</a
   >
 </p>
 <pre
@@ -92,17 +98,20 @@
 <h3 class="is-family-monospace has-text-grey-dark" id="pathCircle">
   pathCircle<span
     class="kind is-family-sans-serif has-text-grey-light is-size-6"
-    >variable</span
+    >function</span
   >
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">const</span> pathCircle<span class="token operator">:</span> <span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token punctuation">,</span> <span class="token constant">T</span> <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token parameter">options<span class="token operator">:</span> Merge<span class="token operator">&lt;</span><span class="token punctuation">{</span> args<span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> Partial<span class="token operator">&lt;</span>Merge<span class="token operator">&lt;</span>Merge<span class="token operator">&lt;</span>WritablePathOptions<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span><span class="token punctuation">,</span> TempoAttributes<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> Path<span class="token punctuation">,</span> <span class="token constant">T</span><span class="token operator">&gt;&gt;</span><span class="token punctuation">,</span> ItemEvents<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Path<span class="token operator">&gt;&gt;&gt;</span><span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> ItemTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> Path<span class="token punctuation">,</span> <span class="token constant">T</span><span class="token operator">&gt;</span></div></pre>
+><div><span class="token keyword">function</span> pathCircle<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token punctuation">,</span> <span class="token constant">T</span> <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  options<span class="token operator">:</span> PathConstrOptions<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> <span class="token constant">T</span><span class="token operator">&gt;</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> ItemTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> paper<span class="token punctuation">.</span>Path<span class="token punctuation">,</span> <span class="token constant">T</span><span class="token operator">&gt;</span>
+</div></pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/paperjs/src/path.ts#L91"
-    >paperjs/src/path.ts at line 91</a
+    href="https://github.com/fponticelli/tempo/blob/master/paperjs/src/path.ts#L93"
+    >paperjs/src/path.ts at line 93</a
   >
 </p>
 <pre
@@ -111,17 +120,20 @@
 <h3 class="is-family-monospace has-text-grey-dark" id="pathEllipse">
   pathEllipse<span
     class="kind is-family-sans-serif has-text-grey-light is-size-6"
-    >variable</span
+    >function</span
   >
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">const</span> pathEllipse<span class="token operator">:</span> <span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> <span class="token constant">T</span> <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token parameter">options<span class="token operator">:</span> Merge<span class="token operator">&lt;</span><span class="token punctuation">{</span> args<span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> Partial<span class="token operator">&lt;</span>Merge<span class="token operator">&lt;</span>Merge<span class="token operator">&lt;</span>WritablePathOptions<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span><span class="token punctuation">,</span> TempoAttributes<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> Path<span class="token punctuation">,</span> <span class="token constant">T</span><span class="token operator">&gt;&gt;</span><span class="token punctuation">,</span> ItemEvents<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Path<span class="token operator">&gt;&gt;&gt;</span><span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> ItemTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> Path<span class="token punctuation">,</span> <span class="token constant">T</span><span class="token operator">&gt;</span></div></pre>
+><div><span class="token keyword">function</span> pathEllipse<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> <span class="token constant">T</span> <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  options<span class="token operator">:</span> PathConstrOptions<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> <span class="token constant">T</span><span class="token operator">&gt;</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> ItemTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> paper<span class="token punctuation">.</span>Path<span class="token punctuation">,</span> <span class="token constant">T</span><span class="token operator">&gt;</span>
+</div></pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/paperjs/src/path.ts#L115"
-    >paperjs/src/path.ts at line 115</a
+    href="https://github.com/fponticelli/tempo/blob/master/paperjs/src/path.ts#L119"
+    >paperjs/src/path.ts at line 119</a
   >
 </p>
 <pre
@@ -129,17 +141,20 @@
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> pathEllipse <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-paperjs/lib/path.ts'</span></div></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="pathLine">
   pathLine<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
-    >variable</span
+    >function</span
   >
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">const</span> pathLine<span class="token operator">:</span> <span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token punctuation">,</span> <span class="token constant">T</span> <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token parameter">options<span class="token operator">:</span> Merge<span class="token operator">&lt;</span><span class="token punctuation">{</span> args<span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> Partial<span class="token operator">&lt;</span>Merge<span class="token operator">&lt;</span>Merge<span class="token operator">&lt;</span>WritablePathOptions<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span><span class="token punctuation">,</span> TempoAttributes<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> Path<span class="token punctuation">,</span> <span class="token constant">T</span><span class="token operator">&gt;&gt;</span><span class="token punctuation">,</span> ItemEvents<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Path<span class="token operator">&gt;&gt;&gt;</span><span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> ItemTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> Path<span class="token punctuation">,</span> <span class="token constant">T</span><span class="token operator">&gt;</span></div></pre>
+><div><span class="token keyword">function</span> pathLine<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token punctuation">,</span> <span class="token constant">T</span> <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  options<span class="token operator">:</span> PathConstrOptions<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> <span class="token constant">T</span><span class="token operator">&gt;</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> ItemTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> paper<span class="token punctuation">.</span>Path<span class="token punctuation">,</span> <span class="token constant">T</span><span class="token operator">&gt;</span>
+</div></pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/paperjs/src/path.ts#L79"
-    >paperjs/src/path.ts at line 79</a
+    href="https://github.com/fponticelli/tempo/blob/master/paperjs/src/path.ts#L80"
+    >paperjs/src/path.ts at line 80</a
   >
 </p>
 <pre
@@ -148,17 +163,20 @@
 <h3 class="is-family-monospace has-text-grey-dark" id="pathRectangle">
   pathRectangle<span
     class="kind is-family-sans-serif has-text-grey-light is-size-6"
-    >variable</span
+    >function</span
   >
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">const</span> pathRectangle<span class="token operator">:</span> <span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token punctuation">,</span> <span class="token constant">T</span> <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token parameter">options<span class="token operator">:</span> Merge<span class="token operator">&lt;</span><span class="token punctuation">{</span> args<span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> Partial<span class="token operator">&lt;</span>Merge<span class="token operator">&lt;</span>Merge<span class="token operator">&lt;</span>WritablePathOptions<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span><span class="token punctuation">,</span> TempoAttributes<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> Path<span class="token punctuation">,</span> <span class="token constant">T</span><span class="token operator">&gt;&gt;</span><span class="token punctuation">,</span> ItemEvents<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Path<span class="token operator">&gt;&gt;&gt;</span><span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> ItemTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> Path<span class="token punctuation">,</span> <span class="token constant">T</span><span class="token operator">&gt;</span></div></pre>
+><div><span class="token keyword">function</span> pathRectangle<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token punctuation">,</span> <span class="token constant">T</span> <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  options<span class="token operator">:</span> PathConstrOptions<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> <span class="token constant">T</span><span class="token operator">&gt;</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> ItemTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> paper<span class="token punctuation">.</span>Path<span class="token punctuation">,</span> <span class="token constant">T</span><span class="token operator">&gt;</span>
+</div></pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/paperjs/src/path.ts#L103"
-    >paperjs/src/path.ts at line 103</a
+    href="https://github.com/fponticelli/tempo/blob/master/paperjs/src/path.ts#L106"
+    >paperjs/src/path.ts at line 106</a
   >
 </p>
 <pre
@@ -167,17 +185,20 @@
 <h3 class="is-family-monospace has-text-grey-dark" id="pathRegularPolygon">
   pathRegularPolygon<span
     class="kind is-family-sans-serif has-text-grey-light is-size-6"
-    >variable</span
+    >function</span
   >
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">const</span> pathRegularPolygon<span class="token operator">:</span> <span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token punctuation">,</span> <span class="token constant">T</span> <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token parameter">options<span class="token operator">:</span> Merge<span class="token operator">&lt;</span><span class="token punctuation">{</span> args<span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> Partial<span class="token operator">&lt;</span>Merge<span class="token operator">&lt;</span>Merge<span class="token operator">&lt;</span>WritablePathOptions<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span><span class="token punctuation">,</span> TempoAttributes<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> Path<span class="token punctuation">,</span> <span class="token constant">T</span><span class="token operator">&gt;&gt;</span><span class="token punctuation">,</span> ItemEvents<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Path<span class="token operator">&gt;&gt;&gt;</span><span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> ItemTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> Path<span class="token punctuation">,</span> <span class="token constant">T</span><span class="token operator">&gt;</span></div></pre>
+><div><span class="token keyword">function</span> pathRegularPolygon<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token punctuation">,</span> <span class="token constant">T</span> <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  options<span class="token operator">:</span> PathConstrOptions<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> <span class="token constant">T</span><span class="token operator">&gt;</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> ItemTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> paper<span class="token punctuation">.</span>Path<span class="token punctuation">,</span> <span class="token constant">T</span><span class="token operator">&gt;</span>
+</div></pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/paperjs/src/path.ts#L139"
-    >paperjs/src/path.ts at line 139</a
+    href="https://github.com/fponticelli/tempo/blob/master/paperjs/src/path.ts#L145"
+    >paperjs/src/path.ts at line 145</a
   >
 </p>
 <pre
@@ -185,17 +206,20 @@
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> pathRegularPolygon <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-paperjs/lib/path.ts'</span></div></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="pathStar">
   pathStar<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
-    >variable</span
+    >function</span
   >
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">const</span> pathStar<span class="token operator">:</span> <span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token punctuation">,</span> <span class="token constant">T</span> <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token parameter">options<span class="token operator">:</span> Merge<span class="token operator">&lt;</span><span class="token punctuation">{</span> args<span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> Partial<span class="token operator">&lt;</span>Merge<span class="token operator">&lt;</span>Merge<span class="token operator">&lt;</span>WritablePathOptions<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span><span class="token punctuation">,</span> TempoAttributes<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> Path<span class="token punctuation">,</span> <span class="token constant">T</span><span class="token operator">&gt;&gt;</span><span class="token punctuation">,</span> ItemEvents<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Path<span class="token operator">&gt;&gt;&gt;</span><span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> ItemTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> Path<span class="token punctuation">,</span> <span class="token constant">T</span><span class="token operator">&gt;</span></div></pre>
+><div><span class="token keyword">function</span> pathStar<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token punctuation">,</span> <span class="token constant">T</span> <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  options<span class="token operator">:</span> PathConstrOptions<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> <span class="token constant">T</span><span class="token operator">&gt;</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> ItemTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> paper<span class="token punctuation">.</span>Path<span class="token punctuation">,</span> <span class="token constant">T</span><span class="token operator">&gt;</span>
+</div></pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/paperjs/src/path.ts#L151"
-    >paperjs/src/path.ts at line 151</a
+    href="https://github.com/fponticelli/tempo/blob/master/paperjs/src/path.ts#L158"
+    >paperjs/src/path.ts at line 158</a
   >
 </p>
 <pre

@@ -11,41 +11,6 @@
     <li>
       <a
         class="is-family-monospace"
-        href="#/api/dom/scoped_styles.html#MediaQueries"
-        >MediaQueries</a
-      >
-    </li>
-    <li>
-      <a
-        class="is-family-monospace"
-        href="#/api/dom/scoped_styles.html#MediaQuery"
-        >MediaQuery</a
-      >
-    </li>
-    <li>
-      <a
-        class="is-family-monospace"
-        href="#/api/dom/scoped_styles.html#ScopedStyles"
-        >ScopedStyles</a
-      >
-    </li>
-    <li>
-      <a
-        class="is-family-monospace"
-        href="#/api/dom/scoped_styles.html#StyleDeclarations"
-        >StyleDeclarations</a
-      >
-    </li>
-    <li>
-      <a
-        class="is-family-monospace"
-        href="#/api/dom/scoped_styles.html#StyleDefinitions"
-        >StyleDefinitions</a
-      >
-    </li>
-    <li>
-      <a
-        class="is-family-monospace"
         href="#/api/dom/scoped_styles.html#annotation"
         >annotation</a
       >
@@ -110,6 +75,20 @@
     <li>
       <a
         class="is-family-monospace"
+        href="#/api/dom/scoped_styles.html#MediaQueries"
+        >MediaQueries</a
+      >
+    </li>
+    <li>
+      <a
+        class="is-family-monospace"
+        href="#/api/dom/scoped_styles.html#MediaQuery"
+        >MediaQuery</a
+      >
+    </li>
+    <li>
+      <a
+        class="is-family-monospace"
         href="#/api/dom/scoped_styles.html#namespace"
         >namespace</a
       >
@@ -150,6 +129,20 @@
     <li>
       <a
         class="is-family-monospace"
+        href="#/api/dom/scoped_styles.html#StyleDeclarations"
+        >StyleDeclarations</a
+      >
+    </li>
+    <li>
+      <a
+        class="is-family-monospace"
+        href="#/api/dom/scoped_styles.html#StyleDefinitions"
+        >StyleDefinitions</a
+      >
+    </li>
+    <li>
+      <a
+        class="is-family-monospace"
         href="#/api/dom/scoped_styles.html#styleset"
         >styleset</a
       >
@@ -175,144 +168,6 @@
     </li>
   </ul>
 </nav>
-<h3 class="is-family-monospace has-text-grey-dark" id="MediaQueries">
-  MediaQueries<span
-    class="kind is-family-sans-serif has-text-grey-light is-size-6"
-    >interface</span
-  >
-</h3>
-<pre
-  class="ts language-ts signature"
-><div><span class="token keyword">interface</span> <span class="token class-name">MediaQueries</span><span class="token operator">&lt;</span>State<span class="token operator">&gt;</span> <span class="token punctuation">{</span>
-  <span class="token punctuation">[</span>importRule<span class="token punctuation">]</span><span class="token operator">?</span><span class="token operator">:</span> DerivedOrLiteralValue<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> <span class="token builtin">string</span><span class="token operator">&gt;</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
-  <span class="token punctuation">[</span>charset<span class="token punctuation">]</span><span class="token operator">?</span><span class="token operator">:</span> DerivedOrLiteralValue<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> <span class="token builtin">string</span><span class="token operator">&gt;</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
-  <span class="token punctuation">[</span><span class="token keyword">namespace</span><span class="token punctuation">]</span><span class="token operator">?</span><span class="token operator">:</span> DerivedOrLiteralValue<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> <span class="token builtin">string</span><span class="token operator">&gt;</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
-
-  <span class="token punctuation">[</span>media<span class="token punctuation">]</span><span class="token operator">?</span><span class="token operator">:</span> MediaQuery<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span>
-  <span class="token punctuation">[</span>supports<span class="token punctuation">]</span><span class="token operator">?</span><span class="token operator">:</span> MediaQuery<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span>
-  <span class="token punctuation">[</span>page<span class="token punctuation">]</span><span class="token operator">?</span><span class="token operator">:</span> MediaQuery<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span>
-  <span class="token punctuation">[</span>fontFace<span class="token punctuation">]</span><span class="token operator">?</span><span class="token operator">:</span> MediaQuery<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span>
-  <span class="token punctuation">[</span>keyframes<span class="token punctuation">]</span><span class="token operator">?</span><span class="token operator">:</span> MediaQuery<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span>
-  <span class="token punctuation">[</span>counterStyle<span class="token punctuation">]</span><span class="token operator">?</span><span class="token operator">:</span> MediaQuery<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span>
-  <span class="token punctuation">[</span>fontFeatureValues<span class="token punctuation">]</span><span class="token operator">?</span><span class="token operator">:</span> MediaQuery<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span>
-  <span class="token punctuation">[</span>swash<span class="token punctuation">]</span><span class="token operator">?</span><span class="token operator">:</span> MediaQuery<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span>
-  <span class="token punctuation">[</span>ornaments<span class="token punctuation">]</span><span class="token operator">?</span><span class="token operator">:</span> MediaQuery<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span>
-  <span class="token punctuation">[</span>annotation<span class="token punctuation">]</span><span class="token operator">?</span><span class="token operator">:</span> MediaQuery<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span>
-  <span class="token punctuation">[</span>stylistic<span class="token punctuation">]</span><span class="token operator">?</span><span class="token operator">:</span> MediaQuery<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span>
-  <span class="token punctuation">[</span>styleset<span class="token punctuation">]</span><span class="token operator">?</span><span class="token operator">:</span> MediaQuery<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span>
-  <span class="token punctuation">[</span>characterVariant<span class="token punctuation">]</span><span class="token operator">?</span><span class="token operator">:</span> MediaQuery<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span>
-<span class="token punctuation">}</span>
-</div></pre>
-<p class="defined-in">
-  defined in
-  <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/scoped_styles.ts#L92"
-    >dom/src/scoped_styles.ts at line 92</a
-  >
-</p>
-<pre
-  class="import-code ts language-ts"
-><div><span class="token keyword">import</span> <span class="token punctuation">{</span> MediaQueries <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/scoped_styles.ts'</span></div></pre>
-<h3 class="is-family-monospace has-text-grey-dark" id="MediaQuery">
-  MediaQuery<span
-    class="kind is-family-sans-serif has-text-grey-light is-size-6"
-    >interface</span
-  >
-</h3>
-<pre
-  class="ts language-ts signature"
-><div><span class="token keyword">interface</span> <span class="token class-name">MediaQuery</span><span class="token operator">&lt;</span>State<span class="token operator">&gt;</span> <span class="token punctuation">{</span>
-  <span class="token punctuation">[</span>query<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">]</span><span class="token operator">:</span> StyleDefinitions<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span>
-<span class="token punctuation">}</span>
-</div></pre>
-<p class="defined-in">
-  defined in
-  <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/scoped_styles.ts#L88"
-    >dom/src/scoped_styles.ts at line 88</a
-  >
-</p>
-<pre
-  class="import-code ts language-ts"
-><div><span class="token keyword">import</span> <span class="token punctuation">{</span> MediaQuery <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/scoped_styles.ts'</span></div></pre>
-<h3 class="is-family-monospace has-text-grey-dark" id="ScopedStyles">
-  ScopedStyles<span
-    class="kind is-family-sans-serif has-text-grey-light is-size-6"
-    >class</span
-  >
-</h3>
-<pre
-  class="ts language-ts signature"
-><div><span class="token keyword">declare</span> <span class="token keyword">class</span> <span class="token class-name">ScopedStyles</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
-  <span class="token keyword">implements</span> <span class="token class-name">DOMTemplate</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span> <span class="token punctuation">{</span>
-  <span class="token keyword">constructor</span><span class="token punctuation">(</span>literal<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> derived<span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">state<span class="token operator">:</span> State</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">string</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-  <span class="token keyword">readonly</span> literal<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
-  <span class="token keyword">readonly</span> derived<span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">state<span class="token operator">:</span> State</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">string</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
-  <span class="token function">render</span><span class="token punctuation">(</span>
-    ctx<span class="token operator">:</span> DOMContext<span class="token operator">&lt;</span>Action<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-    state<span class="token operator">:</span> State
-  <span class="token punctuation">)</span><span class="token operator">:</span> <span class="token punctuation">{</span>
-    <span class="token function-variable function">change</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">state<span class="token operator">:</span> State</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
-    <span class="token function-variable function">request</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">query<span class="token operator">:</span> Query</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
-    <span class="token function-variable function">destroy</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
-  <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-</div></pre>
-<p class="defined-in">
-  defined in
-  <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/scoped_styles.ts#L291"
-    >dom/src/scoped_styles.ts at line 291</a
-  >
-</p>
-<pre
-  class="import-code ts language-ts"
-><div><span class="token keyword">import</span> <span class="token punctuation">{</span> ScopedStyles <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/scoped_styles.ts'</span></div></pre>
-<h3 class="is-family-monospace has-text-grey-dark" id="StyleDeclarations">
-  StyleDeclarations<span
-    class="kind is-family-sans-serif has-text-grey-light is-size-6"
-    >type alias</span
-  >
-</h3>
-<pre
-  class="ts language-ts signature"
-><div><span class="token keyword">type</span> StyleDeclarations<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
-  <span class="token punctuation">[</span><span class="token constant">K</span> <span class="token keyword">in</span> <span class="token keyword">keyof</span> CSSStyleDeclaration<span class="token punctuation">]</span><span class="token operator">?</span><span class="token operator">:</span> <span class="token constant">K</span> <span class="token keyword">extends</span> <span class="token class-name">number</span>
-    <span class="token operator">?</span> <span class="token builtin">never</span>
-    <span class="token operator">:</span> Attribute<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> CSSStyleDeclaration<span class="token punctuation">[</span><span class="token constant">K</span><span class="token punctuation">]</span><span class="token operator">&gt;</span>
-<span class="token punctuation">}</span>
-</div></pre>
-<p class="defined-in">
-  defined in
-  <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/scoped_styles.ts#L84"
-    >dom/src/scoped_styles.ts at line 84</a
-  >
-</p>
-<pre
-  class="import-code ts language-ts"
-><div><span class="token keyword">import</span> <span class="token punctuation">{</span> StyleDeclarations <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/scoped_styles.ts'</span></div></pre>
-<h3 class="is-family-monospace has-text-grey-dark" id="StyleDefinitions">
-  StyleDefinitions<span
-    class="kind is-family-sans-serif has-text-grey-light is-size-6"
-    >type alias</span
-  >
-</h3>
-<pre
-  class="ts language-ts signature"
-><div><span class="token keyword">type</span> StyleDefinitions<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span> <span class="token operator">=</span> Record<span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token punctuation">,</span> StyleDeclarations<span class="token operator">&lt;</span>State<span class="token operator">&gt;&gt;</span> <span class="token operator">&amp;</span>
-  MediaQueries<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span>
-</div></pre>
-<p class="defined-in">
-  defined in
-  <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/scoped_styles.ts#L112"
-    >dom/src/scoped_styles.ts at line 112</a
-  >
-</p>
-<pre
-  class="import-code ts language-ts"
-><div><span class="token keyword">import</span> <span class="token punctuation">{</span> StyleDefinitions <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/scoped_styles.ts'</span></div></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="annotation">
   annotation<span
     class="kind is-family-sans-serif has-text-grey-light is-size-6"
@@ -502,6 +357,66 @@
 <pre
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> media <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/scoped_styles.ts'</span></div></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="MediaQueries">
+  MediaQueries<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >interface</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">interface</span> <span class="token class-name">MediaQueries</span><span class="token operator">&lt;</span>State<span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+  <span class="token punctuation">[</span>importRule<span class="token punctuation">]</span><span class="token operator">?</span><span class="token operator">:</span> DerivedOrLiteralValue<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> <span class="token builtin">string</span><span class="token operator">&gt;</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
+  <span class="token punctuation">[</span>charset<span class="token punctuation">]</span><span class="token operator">?</span><span class="token operator">:</span> DerivedOrLiteralValue<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> <span class="token builtin">string</span><span class="token operator">&gt;</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
+  <span class="token punctuation">[</span><span class="token keyword">namespace</span><span class="token punctuation">]</span><span class="token operator">?</span><span class="token operator">:</span> DerivedOrLiteralValue<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> <span class="token builtin">string</span><span class="token operator">&gt;</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
+
+  <span class="token punctuation">[</span>media<span class="token punctuation">]</span><span class="token operator">?</span><span class="token operator">:</span> MediaQuery<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span>
+  <span class="token punctuation">[</span>supports<span class="token punctuation">]</span><span class="token operator">?</span><span class="token operator">:</span> MediaQuery<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span>
+  <span class="token punctuation">[</span>page<span class="token punctuation">]</span><span class="token operator">?</span><span class="token operator">:</span> MediaQuery<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span>
+  <span class="token punctuation">[</span>fontFace<span class="token punctuation">]</span><span class="token operator">?</span><span class="token operator">:</span> MediaQuery<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span>
+  <span class="token punctuation">[</span>keyframes<span class="token punctuation">]</span><span class="token operator">?</span><span class="token operator">:</span> MediaQuery<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span>
+  <span class="token punctuation">[</span>counterStyle<span class="token punctuation">]</span><span class="token operator">?</span><span class="token operator">:</span> MediaQuery<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span>
+  <span class="token punctuation">[</span>fontFeatureValues<span class="token punctuation">]</span><span class="token operator">?</span><span class="token operator">:</span> MediaQuery<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span>
+  <span class="token punctuation">[</span>swash<span class="token punctuation">]</span><span class="token operator">?</span><span class="token operator">:</span> MediaQuery<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span>
+  <span class="token punctuation">[</span>ornaments<span class="token punctuation">]</span><span class="token operator">?</span><span class="token operator">:</span> MediaQuery<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span>
+  <span class="token punctuation">[</span>annotation<span class="token punctuation">]</span><span class="token operator">?</span><span class="token operator">:</span> MediaQuery<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span>
+  <span class="token punctuation">[</span>stylistic<span class="token punctuation">]</span><span class="token operator">?</span><span class="token operator">:</span> MediaQuery<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span>
+  <span class="token punctuation">[</span>styleset<span class="token punctuation">]</span><span class="token operator">?</span><span class="token operator">:</span> MediaQuery<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span>
+  <span class="token punctuation">[</span>characterVariant<span class="token punctuation">]</span><span class="token operator">?</span><span class="token operator">:</span> MediaQuery<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span>
+<span class="token punctuation">}</span>
+</div></pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/scoped_styles.ts#L92"
+    >dom/src/scoped_styles.ts at line 92</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> MediaQueries <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/scoped_styles.ts'</span></div></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="MediaQuery">
+  MediaQuery<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >interface</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">interface</span> <span class="token class-name">MediaQuery</span><span class="token operator">&lt;</span>State<span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+  <span class="token punctuation">[</span>query<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">]</span><span class="token operator">:</span> StyleDefinitions<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span>
+<span class="token punctuation">}</span>
+</div></pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/scoped_styles.ts#L88"
+    >dom/src/scoped_styles.ts at line 88</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> MediaQuery <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/scoped_styles.ts'</span></div></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="namespace">
   namespace<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
     >variable</span
@@ -592,12 +507,13 @@
 <h3 class="is-family-monospace has-text-grey-dark" id="resetCache">
   resetCache<span
     class="kind is-family-sans-serif has-text-grey-light is-size-6"
-    >variable</span
+    >function</span
   >
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">const</span> <span class="token function-variable function">resetCache</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span></div></pre>
+><div><span class="token keyword">function</span> <span class="token function">resetCache</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">void</span>
+</div></pre>
 <p class="defined-in">
   defined in
   <a
@@ -611,12 +527,15 @@
 <h3 class="is-family-monospace has-text-grey-dark" id="scopedStyles">
   scopedStyles<span
     class="kind is-family-sans-serif has-text-grey-light is-size-6"
-    >variable</span
+    >function</span
   >
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">const</span> scopedStyles<span class="token operator">:</span> <span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token parameter">definitions<span class="token operator">:</span> StyleDefinitions<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> ScopedStyles<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></div></pre>
+><div><span class="token keyword">function</span> scopedStyles<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  definitions<span class="token operator">:</span> StyleDefinitions<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> ScopedStyles<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</div></pre>
 <p class="defined-in">
   defined in
   <a
@@ -627,6 +546,51 @@
 <pre
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> scopedStyles <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/scoped_styles.ts'</span></div></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="StyleDeclarations">
+  StyleDeclarations<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >type alias</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">type</span> StyleDeclarations<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token punctuation">[</span><span class="token constant">K</span> <span class="token keyword">in</span> <span class="token keyword">keyof</span> CSSStyleDeclaration<span class="token punctuation">]</span><span class="token operator">?</span><span class="token operator">:</span> <span class="token constant">K</span> <span class="token keyword">extends</span> <span class="token class-name">number</span>
+    <span class="token operator">?</span> <span class="token builtin">never</span>
+    <span class="token operator">:</span> Attribute<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> CSSStyleDeclaration<span class="token punctuation">[</span><span class="token constant">K</span><span class="token punctuation">]</span><span class="token operator">&gt;</span>
+<span class="token punctuation">}</span>
+</div></pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/scoped_styles.ts#L84"
+    >dom/src/scoped_styles.ts at line 84</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> StyleDeclarations <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/scoped_styles.ts'</span></div></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="StyleDefinitions">
+  StyleDefinitions<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >type alias</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">type</span> StyleDefinitions<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span> <span class="token operator">=</span> Record<span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token punctuation">,</span> StyleDeclarations<span class="token operator">&lt;</span>State<span class="token operator">&gt;&gt;</span> <span class="token operator">&amp;</span>
+  MediaQueries<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span>
+</div></pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/scoped_styles.ts#L112"
+    >dom/src/scoped_styles.ts at line 112</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> StyleDefinitions <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/scoped_styles.ts'</span></div></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="styleset">
   styleset<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
     >variable</span

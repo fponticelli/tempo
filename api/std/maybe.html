@@ -8,17 +8,6 @@
   <p class="title is-6">Table of Contents</p>
   <ul class="module-toc-list">
     <li>
-      <a class="is-family-monospace" href="#/api/std/maybe.html#Just">Just</a>
-    </li>
-    <li>
-      <a class="is-family-monospace" href="#/api/std/maybe.html#Maybe">Maybe</a>
-    </li>
-    <li>
-      <a class="is-family-monospace" href="#/api/std/maybe.html#Nothing"
-        >Nothing</a
-      >
-    </li>
-    <li>
       <a class="is-family-monospace" href="#/api/std/maybe.html#isJust"
         >isJust</a
       >
@@ -32,69 +21,23 @@
       <a class="is-family-monospace" href="#/api/std/maybe.html#just">just</a>
     </li>
     <li>
+      <a class="is-family-monospace" href="#/api/std/maybe.html#Just">Just</a>
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/std/maybe.html#Maybe">Maybe</a>
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/std/maybe.html#Nothing"
+        >Nothing</a
+      >
+    </li>
+    <li>
       <a class="is-family-monospace" href="#/api/std/maybe.html#nothing"
         >nothing</a
       >
     </li>
   </ul>
 </nav>
-<h3 class="is-family-monospace has-text-grey-dark" id="Just">
-  Just<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
-    >type alias</span
-  >
-</h3>
-<pre
-  class="ts language-ts signature"
-><div><span class="token keyword">type</span> Just<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token constant">T</span>
-</div></pre>
-<p class="defined-in">
-  defined in
-  <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/maybe.ts#L17"
-    >std/src/maybe.ts at line 17</a
-  >
-</p>
-<pre
-  class="import-code ts language-ts"
-><div><span class="token keyword">import</span> <span class="token punctuation">{</span> Just <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/maybe.ts'</span></div></pre>
-<h3 class="is-family-monospace has-text-grey-dark" id="Maybe">
-  Maybe<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
-    >type alias</span
-  >
-</h3>
-<pre
-  class="ts language-ts signature"
-><div><span class="token keyword">type</span> Maybe<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span> <span class="token operator">=</span> Just<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span> <span class="token operator">|</span> Nothing
-</div></pre>
-<p class="defined-in">
-  defined in
-  <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/maybe.ts#L14"
-    >std/src/maybe.ts at line 14</a
-  >
-</p>
-<pre
-  class="import-code ts language-ts"
-><div><span class="token keyword">import</span> <span class="token punctuation">{</span> Maybe <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/maybe.ts'</span></div></pre>
-<h3 class="is-family-monospace has-text-grey-dark" id="Nothing">
-  Nothing<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
-    >type alias</span
-  >
-</h3>
-<pre
-  class="ts language-ts signature"
-><div><span class="token keyword">type</span> Nothing <span class="token operator">=</span> <span class="token keyword">undefined</span> <span class="token operator">|</span> <span class="token keyword">null</span>
-</div></pre>
-<p class="defined-in">
-  defined in
-  <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/maybe.ts#L16"
-    >std/src/maybe.ts at line 16</a
-  >
-</p>
-<pre
-  class="import-code ts language-ts"
-><div><span class="token keyword">import</span> <span class="token punctuation">{</span> Nothing <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/maybe.ts'</span></div></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="isJust">
   isJust<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
     >function</span
@@ -152,6 +95,63 @@
 <pre
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> just <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/maybe.ts'</span></div></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="Just">
+  Just<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >type alias</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">type</span> Just<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token constant">T</span>
+</div></pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/maybe.ts#L17"
+    >std/src/maybe.ts at line 17</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> Just <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/maybe.ts'</span></div></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="Maybe">
+  Maybe<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >type alias</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">type</span> Maybe<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span> <span class="token operator">=</span> Just<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span> <span class="token operator">|</span> Nothing
+</div></pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/maybe.ts#L14"
+    >std/src/maybe.ts at line 14</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> Maybe <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/maybe.ts'</span></div></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="Nothing">
+  Nothing<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >type alias</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">type</span> Nothing <span class="token operator">=</span> <span class="token keyword">undefined</span> <span class="token operator">|</span> <span class="token keyword">null</span>
+</div></pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/maybe.ts#L16"
+    >std/src/maybe.ts at line 16</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> Nothing <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/maybe.ts'</span></div></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="nothing">
   nothing<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
     >variable</span

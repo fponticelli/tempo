@@ -324,6 +324,11 @@
       <a class="is-family-monospace" href="#/api/std/strings.html#rpad">rpad</a>
     </li>
     <li>
+      <a class="is-family-monospace" href="#/api/std/strings.html#splitOnce"
+        >splitOnce</a
+      >
+    </li>
+    <li>
       <a class="is-family-monospace" href="#/api/std/strings.html#splitOnFirst"
         >splitOnFirst</a
       >
@@ -331,11 +336,6 @@
     <li>
       <a class="is-family-monospace" href="#/api/std/strings.html#splitOnLast"
         >splitOnLast</a
-      >
-    </li>
-    <li>
-      <a class="is-family-monospace" href="#/api/std/strings.html#splitOnce"
-        >splitOnce</a
       >
     </li>
     <li>
@@ -415,14 +415,14 @@
       >
     </li>
     <li>
-      <a class="is-family-monospace" href="#/api/std/strings.html#upTo">upTo</a>
-    </li>
-    <li>
       <a
         class="is-family-monospace"
         href="#/api/std/strings.html#upperCaseFirst"
         >upperCaseFirst</a
       >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/std/strings.html#upTo">upTo</a>
     </li>
     <li>
       <a class="is-family-monospace" href="#/api/std/strings.html#wrapColumns"
@@ -1896,6 +1896,26 @@
 <pre
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> rpad <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/strings.ts'</span></div></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="splitOnce">
+  splitOnce<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<div><p>It only splits on the first occurrance of separator.</p></div>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">function</span> <span class="token function">splitOnce</span><span class="token punctuation">(</span><span class="token parameter">s<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> separator<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
+</div></pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/strings.ts#L507"
+    >std/src/strings.ts at line 507</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> splitOnce <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/strings.ts'</span></div></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="splitOnFirst">
   splitOnFirst<span
     class="kind is-family-sans-serif has-text-grey-light is-size-6"
@@ -1936,26 +1956,6 @@
 <pre
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> splitOnLast <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/strings.ts'</span></div></pre>
-<h3 class="is-family-monospace has-text-grey-dark" id="splitOnce">
-  splitOnce<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
-    >function</span
-  >
-</h3>
-<div><p>It only splits on the first occurrance of separator.</p></div>
-<pre
-  class="ts language-ts signature"
-><div><span class="token keyword">function</span> <span class="token function">splitOnce</span><span class="token punctuation">(</span><span class="token parameter">s<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> separator<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
-</div></pre>
-<p class="defined-in">
-  defined in
-  <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/strings.ts#L507"
-    >std/src/strings.ts at line 507</a
-  >
-</p>
-<pre
-  class="import-code ts language-ts"
-><div><span class="token keyword">import</span> <span class="token punctuation">{</span> splitOnce <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/strings.ts'</span></div></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="startsWith">
   startsWith<span
     class="kind is-family-sans-serif has-text-grey-light is-size-6"
@@ -2305,6 +2305,29 @@
 <pre
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> underscore <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/strings.ts'</span></div></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="upperCaseFirst">
+  upperCaseFirst<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<div>
+  <p>Convert first letter in <code>value</code> to upper case.</p>
+</div>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">function</span> <span class="token function">upperCaseFirst</span><span class="token punctuation">(</span><span class="token parameter">value<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span>
+</div></pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/strings.ts#L623"
+    >std/src/strings.ts at line 623</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> upperCaseFirst <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/strings.ts'</span></div></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="upTo">
   upTo<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
     >function</span
@@ -2331,29 +2354,6 @@
 <pre
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> upTo <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/strings.ts'</span></div></pre>
-<h3 class="is-family-monospace has-text-grey-dark" id="upperCaseFirst">
-  upperCaseFirst<span
-    class="kind is-family-sans-serif has-text-grey-light is-size-6"
-    >function</span
-  >
-</h3>
-<div>
-  <p>Convert first letter in <code>value</code> to upper case.</p>
-</div>
-<pre
-  class="ts language-ts signature"
-><div><span class="token keyword">function</span> <span class="token function">upperCaseFirst</span><span class="token punctuation">(</span><span class="token parameter">value<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span>
-</div></pre>
-<p class="defined-in">
-  defined in
-  <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/strings.ts#L623"
-    >std/src/strings.ts at line 623</a
-  >
-</p>
-<pre
-  class="import-code ts language-ts"
-><div><span class="token keyword">import</span> <span class="token punctuation">{</span> upperCaseFirst <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/strings.ts'</span></div></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="wrapColumns">
   wrapColumns<span
     class="kind is-family-sans-serif has-text-grey-light is-size-6"

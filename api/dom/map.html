@@ -4,149 +4,23 @@
   >
 </div>
 <h1>module 'map'</h1>
-<nav>
-  <p class="title is-6">Table of Contents</p>
-  <ul class="module-toc-list">
-    <li>
-      <a class="is-family-monospace" href="#/api/dom/map.html#MapActionTemplate"
-        >MapActionTemplate</a
-      >
-    </li>
-    <li>
-      <a class="is-family-monospace" href="#/api/dom/map.html#MapQueryTemplate"
-        >MapQueryTemplate</a
-      >
-    </li>
-    <li>
-      <a class="is-family-monospace" href="#/api/dom/map.html#MapStateTemplate"
-        >MapStateTemplate</a
-      >
-    </li>
-    <li>
-      <a class="is-family-monospace" href="#/api/dom/map.html#mapAction"
-        >mapAction</a
-      >
-    </li>
-    <li>
-      <a class="is-family-monospace" href="#/api/dom/map.html#mapQuery"
-        >mapQuery</a
-      >
-    </li>
-    <li>
-      <a
-        class="is-family-monospace"
-        href="#/api/dom/map.html#mapQueryConditional"
-        >mapQueryConditional</a
-      >
-    </li>
-    <li>
-      <a class="is-family-monospace" href="#/api/dom/map.html#mapState"
-        >mapState</a
-      >
-    </li>
-    <li>
-      <a class="is-family-monospace" href="#/api/dom/map.html#mapStateAndKeep"
-        >mapStateAndKeep</a
-      >
-    </li>
-  </ul>
-</nav>
-<h3 class="is-family-monospace has-text-grey-dark" id="MapActionTemplate">
-  MapActionTemplate<span
-    class="kind is-family-sans-serif has-text-grey-light is-size-6"
-    >class</span
-  >
-</h3>
-<pre
-  class="ts language-ts signature"
-><div><span class="token keyword">declare</span> <span class="token keyword">class</span> <span class="token class-name">MapActionTemplate</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> OuterAction<span class="token punctuation">,</span> InnerAction<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
-  <span class="token keyword">implements</span> <span class="token class-name">DOMTemplate</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> OuterAction<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span> <span class="token punctuation">{</span>
-  <span class="token keyword">constructor</span><span class="token punctuation">(</span>
-    <span class="token function-variable function">map</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">value<span class="token operator">:</span> InnerAction</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> OuterAction <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">,</span>
-    children<span class="token operator">:</span> DOMTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> InnerAction<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
-  <span class="token punctuation">)</span>
-  <span class="token keyword">readonly</span> <span class="token function-variable function">map</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">value<span class="token operator">:</span> InnerAction</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> OuterAction <span class="token operator">|</span> <span class="token keyword">undefined</span>
-  <span class="token keyword">readonly</span> children<span class="token operator">:</span> DOMTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> InnerAction<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
-  <span class="token function">render</span><span class="token punctuation">(</span>ctx<span class="token operator">:</span> DOMContext<span class="token operator">&lt;</span>OuterAction<span class="token operator">&gt;</span><span class="token punctuation">,</span> state<span class="token operator">:</span> State<span class="token punctuation">)</span><span class="token operator">:</span> View<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
-<span class="token punctuation">}</span>
-</div></pre>
-<p class="defined-in">
-  defined in
-  <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/map.ts#L59"
-    >dom/src/map.ts at line 59</a
-  >
-</p>
-<pre
-  class="import-code ts language-ts"
-><div><span class="token keyword">import</span> <span class="token punctuation">{</span> MapActionTemplate <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/map.ts'</span></div></pre>
-<h3 class="is-family-monospace has-text-grey-dark" id="MapQueryTemplate">
-  MapQueryTemplate<span
-    class="kind is-family-sans-serif has-text-grey-light is-size-6"
-    >class</span
-  >
-</h3>
-<pre
-  class="ts language-ts signature"
-><div><span class="token keyword">declare</span> <span class="token keyword">class</span> <span class="token class-name">MapQueryTemplate</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> OuterQuery<span class="token punctuation">,</span> InnerQuery<span class="token operator">&gt;</span>
-  <span class="token keyword">implements</span> <span class="token class-name">DOMTemplate</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> OuterQuery<span class="token operator">&gt;</span> <span class="token punctuation">{</span>
-  <span class="token keyword">constructor</span><span class="token punctuation">(</span>
-    <span class="token function-variable function">map</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">value<span class="token operator">:</span> OuterQuery</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> InnerQuery <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">,</span>
-    children<span class="token operator">:</span> DOMTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> InnerQuery<span class="token operator">&gt;</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
-  <span class="token punctuation">)</span>
-  <span class="token keyword">readonly</span> <span class="token function-variable function">map</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">value<span class="token operator">:</span> OuterQuery</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> InnerQuery <span class="token operator">|</span> <span class="token keyword">undefined</span>
-  <span class="token keyword">readonly</span> children<span class="token operator">:</span> DOMTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> InnerQuery<span class="token operator">&gt;</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
-  <span class="token function">render</span><span class="token punctuation">(</span>ctx<span class="token operator">:</span> DOMContext<span class="token operator">&lt;</span>Action<span class="token operator">&gt;</span><span class="token punctuation">,</span> state<span class="token operator">:</span> State<span class="token punctuation">)</span><span class="token operator">:</span> View<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> OuterQuery<span class="token operator">&gt;</span>
-<span class="token punctuation">}</span>
-</div></pre>
-<p class="defined-in">
-  defined in
-  <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/map.ts#L89"
-    >dom/src/map.ts at line 89</a
-  >
-</p>
-<pre
-  class="import-code ts language-ts"
-><div><span class="token keyword">import</span> <span class="token punctuation">{</span> MapQueryTemplate <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/map.ts'</span></div></pre>
-<h3 class="is-family-monospace has-text-grey-dark" id="MapStateTemplate">
-  MapStateTemplate<span
-    class="kind is-family-sans-serif has-text-grey-light is-size-6"
-    >class</span
-  >
-</h3>
-<pre
-  class="ts language-ts signature"
-><div><span class="token keyword">declare</span> <span class="token keyword">class</span> <span class="token class-name">MapStateTemplate</span><span class="token operator">&lt;</span>OuterState<span class="token punctuation">,</span> InnerState<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
-  <span class="token keyword">implements</span> <span class="token class-name">DOMTemplate</span><span class="token operator">&lt;</span>OuterState<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span> <span class="token punctuation">{</span>
-  <span class="token keyword">constructor</span><span class="token punctuation">(</span>
-    <span class="token function-variable function">map</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">value<span class="token operator">:</span> OuterState</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> InnerState<span class="token punctuation">,</span>
-    children<span class="token operator">:</span> DOMTemplate<span class="token operator">&lt;</span>InnerState<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
-  <span class="token punctuation">)</span>
-  <span class="token keyword">readonly</span> <span class="token function-variable function">map</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">value<span class="token operator">:</span> OuterState</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> InnerState
-  <span class="token keyword">readonly</span> children<span class="token operator">:</span> DOMTemplate<span class="token operator">&lt;</span>InnerState<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
-  <span class="token function">render</span><span class="token punctuation">(</span>ctx<span class="token operator">:</span> DOMContext<span class="token operator">&lt;</span>Action<span class="token operator">&gt;</span><span class="token punctuation">,</span> state<span class="token operator">:</span> OuterState<span class="token punctuation">)</span><span class="token operator">:</span> View<span class="token operator">&lt;</span>OuterState<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
-<span class="token punctuation">}</span>
-</div></pre>
-<p class="defined-in">
-  defined in
-  <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/map.ts#L20"
-    >dom/src/map.ts at line 20</a
-  >
-</p>
-<pre
-  class="import-code ts language-ts"
-><div><span class="token keyword">import</span> <span class="token punctuation">{</span> MapStateTemplate <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/map.ts'</span></div></pre>
+<nav></nav>
 <h3 class="is-family-monospace has-text-grey-dark" id="mapAction">
   mapAction<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
-    >variable</span
+    >function</span
   >
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">const</span> mapAction<span class="token operator">:</span> <span class="token operator">&lt;</span>State<span class="token punctuation">,</span> OuterAction<span class="token punctuation">,</span> InnerAction<span class="token punctuation">,</span> Query <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>options<span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token function-variable function">map</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">value<span class="token operator">:</span> InnerAction</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> OuterAction <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token operator">...</span>children<span class="token operator">:</span> DOMChild<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> InnerAction<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> DOMTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> OuterAction<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></div></pre>
+><div><span class="token keyword">function</span> mapAction<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> OuterAction<span class="token punctuation">,</span> InnerAction<span class="token punctuation">,</span> Query <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  options<span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token function-variable function">map</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">value<span class="token operator">:</span> InnerAction</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> OuterAction <span class="token operator">|</span> <span class="token keyword">undefined</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token operator">...</span>children<span class="token operator">:</span> DOMChild<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> InnerAction<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> DOMTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> OuterAction<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</div></pre>
 <p class="defined-in">
   defined in
-  <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/map.ts#L83"
-    >dom/src/map.ts at line 83</a
+  <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/map.ts#L87"
+    >dom/src/map.ts at line 87</a
   >
 </p>
 <pre
@@ -154,16 +28,20 @@
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> mapAction <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/map.ts'</span></div></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="mapQuery">
   mapQuery<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
-    >variable</span
+    >function</span
   >
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">const</span> mapQuery<span class="token operator">:</span> <span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> OuterQuery<span class="token punctuation">,</span> InnerQuery<span class="token operator">&gt;</span><span class="token punctuation">(</span>options<span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token function-variable function">map</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">value<span class="token operator">:</span> OuterQuery</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> InnerQuery<span class="token punctuation">;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token operator">...</span>children<span class="token operator">:</span> DOMChild<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> InnerQuery<span class="token operator">&gt;</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> DOMTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> OuterQuery<span class="token operator">&gt;</span></div></pre>
+><div><span class="token keyword">function</span> mapQuery<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> OuterQuery<span class="token punctuation">,</span> InnerQuery<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  options<span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token function-variable function">map</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">value<span class="token operator">:</span> OuterQuery</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> InnerQuery <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token operator">...</span>children<span class="token operator">:</span> DOMChild<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> InnerQuery<span class="token operator">&gt;</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> DOMTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> OuterQuery<span class="token operator">&gt;</span>
+</div></pre>
 <p class="defined-in">
   defined in
-  <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/map.ts#L115"
-    >dom/src/map.ts at line 115</a
+  <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/map.ts#L120"
+    >dom/src/map.ts at line 120</a
   >
 </p>
 <pre
@@ -172,16 +50,20 @@
 <h3 class="is-family-monospace has-text-grey-dark" id="mapQueryConditional">
   mapQueryConditional<span
     class="kind is-family-sans-serif has-text-grey-light is-size-6"
-    >variable</span
+    >function</span
   >
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">const</span> mapQueryConditional<span class="token operator">:</span> <span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> OuterQuery<span class="token punctuation">,</span> InnerQuery<span class="token operator">&gt;</span><span class="token punctuation">(</span>options<span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token function-variable function">map</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">value<span class="token operator">:</span> OuterQuery</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> InnerQuery <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token operator">...</span>children<span class="token operator">:</span> DOMChild<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> InnerQuery<span class="token operator">&gt;</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> DOMTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> OuterQuery<span class="token operator">&gt;</span></div></pre>
+><div><span class="token keyword">function</span> mapQueryConditional<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> OuterQuery<span class="token punctuation">,</span> InnerQuery<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  options<span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token function-variable function">map</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">value<span class="token operator">:</span> OuterQuery</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> InnerQuery <span class="token operator">|</span> <span class="token keyword">undefined</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token operator">...</span>children<span class="token operator">:</span> DOMChild<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> InnerQuery<span class="token operator">&gt;</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> DOMTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> OuterQuery<span class="token operator">&gt;</span>
+</div></pre>
 <p class="defined-in">
   defined in
-  <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/map.ts#L121"
-    >dom/src/map.ts at line 121</a
+  <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/map.ts#L127"
+    >dom/src/map.ts at line 127</a
   >
 </p>
 <pre
@@ -189,12 +71,16 @@
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> mapQueryConditional <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/map.ts'</span></div></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="mapState">
   mapState<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
-    >variable</span
+    >function</span
   >
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">const</span> mapState<span class="token operator">:</span> <span class="token operator">&lt;</span>OuterState<span class="token punctuation">,</span> InnerState<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>options<span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token function-variable function">map</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">value<span class="token operator">:</span> OuterState</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> InnerState<span class="token punctuation">;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token operator">...</span>children<span class="token operator">:</span> DOMChild<span class="token operator">&lt;</span>InnerState<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> DOMTemplate<span class="token operator">&lt;</span>OuterState<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></div></pre>
+><div><span class="token keyword">function</span> mapState<span class="token operator">&lt;</span>OuterState<span class="token punctuation">,</span> InnerState<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  options<span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token function-variable function">map</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">value<span class="token operator">:</span> OuterState</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> InnerState <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token operator">...</span>children<span class="token operator">:</span> DOMChild<span class="token operator">&lt;</span>InnerState<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> DOMTemplate<span class="token operator">&lt;</span>OuterState<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</div></pre>
 <p class="defined-in">
   defined in
   <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/map.ts#L46"
@@ -207,16 +93,20 @@
 <h3 class="is-family-monospace has-text-grey-dark" id="mapStateAndKeep">
   mapStateAndKeep<span
     class="kind is-family-sans-serif has-text-grey-light is-size-6"
-    >variable</span
+    >function</span
   >
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">const</span> mapStateAndKeep<span class="token operator">:</span> <span class="token operator">&lt;</span>OuterState<span class="token punctuation">,</span> InnerState<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>options<span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token function-variable function">map</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">value<span class="token operator">:</span> OuterState</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> InnerState<span class="token punctuation">;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token operator">...</span>children<span class="token operator">:</span> DOMChild<span class="token operator">&lt;</span><span class="token punctuation">[</span>InnerState<span class="token punctuation">,</span> OuterState<span class="token punctuation">]</span><span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> DOMTemplate<span class="token operator">&lt;</span>OuterState<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></div></pre>
+><div><span class="token keyword">function</span> mapStateAndKeep<span class="token operator">&lt;</span>OuterState<span class="token punctuation">,</span> InnerState<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  options<span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token function-variable function">map</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">value<span class="token operator">:</span> OuterState</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> InnerState <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token operator">...</span>children<span class="token operator">:</span> DOMChild<span class="token operator">&lt;</span><span class="token punctuation">[</span>InnerState<span class="token punctuation">,</span> OuterState<span class="token punctuation">]</span><span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> DOMTemplate<span class="token operator">&lt;</span>OuterState<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</div></pre>
 <p class="defined-in">
   defined in
-  <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/map.ts#L51"
-    >dom/src/map.ts at line 51</a
+  <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/map.ts#L53"
+    >dom/src/map.ts at line 53</a
   >
 </p>
 <pre

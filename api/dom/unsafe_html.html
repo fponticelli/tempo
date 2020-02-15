@@ -6,51 +6,26 @@
 </div>
 <h1>module 'unsafe_html'</h1>
 <nav></nav>
-<h3 class="is-family-monospace has-text-grey-dark" id="UnsafeHtml">
-  UnsafeHtml<span
-    class="kind is-family-sans-serif has-text-grey-light is-size-6"
-    >class</span
-  >
-</h3>
-<pre
-  class="ts language-ts signature"
-><div><span class="token keyword">declare</span> <span class="token keyword">class</span> <span class="token class-name">UnsafeHtml</span><span class="token operator">&lt;</span>
-  State<span class="token punctuation">,</span>
-  Action<span class="token punctuation">,</span>
-  Query<span class="token punctuation">,</span>
-  El <span class="token keyword">extends</span> <span class="token class-name">Element</span> <span class="token operator">=</span> Element<span class="token punctuation">,</span>
-  <span class="token constant">T</span> <span class="token operator">=</span> <span class="token builtin">unknown</span>
-<span class="token operator">&gt;</span> <span class="token keyword">implements</span> <span class="token class-name">DOMTemplate</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span> <span class="token punctuation">{</span>
-  <span class="token keyword">constructor</span><span class="token punctuation">(</span>
-    content<span class="token operator">:</span> TextValue<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-    element<span class="token operator">:</span> DOMElement<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> El<span class="token punctuation">,</span> <span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
-    <span class="token function-variable function">transform</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">source<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">string</span>
-  <span class="token punctuation">)</span>
-  <span class="token keyword">readonly</span> content<span class="token operator">:</span> TextValue<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span>
-  <span class="token keyword">readonly</span> element<span class="token operator">:</span> DOMElement<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> El<span class="token punctuation">,</span> <span class="token constant">T</span><span class="token operator">&gt;</span>
-  <span class="token keyword">readonly</span> <span class="token function-variable function">transform</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">source<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">string</span>
-  <span class="token function">render</span><span class="token punctuation">(</span>ctx<span class="token operator">:</span> DOMContext<span class="token operator">&lt;</span>Action<span class="token operator">&gt;</span><span class="token punctuation">,</span> state<span class="token operator">:</span> State<span class="token punctuation">)</span><span class="token operator">:</span> View<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
-<span class="token punctuation">}</span>
-</div></pre>
-<p class="defined-in">
-  defined in
-  <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/unsafe_html.ts#L74"
-    >dom/src/unsafe_html.ts at line 74</a
-  >
-</p>
-<pre
-  class="import-code ts language-ts"
-><div><span class="token keyword">import</span> <span class="token punctuation">{</span> UnsafeHtml <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/unsafe_html.ts'</span></div></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="unsafeHtml">
   unsafeHtml<span
     class="kind is-family-sans-serif has-text-grey-light is-size-6"
-    >variable</span
+    >function</span
   >
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">const</span> unsafeHtml<span class="token operator">:</span> <span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token punctuation">,</span> El <span class="token keyword">extends</span> <span class="token class-name">Element</span> <span class="token operator">=</span> Element<span class="token punctuation">,</span> <span class="token constant">T</span> <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>options<span class="token operator">:</span> <span class="token punctuation">{</span> content<span class="token operator">:</span> DerivedOrLiteralValue<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> <span class="token builtin">string</span> <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token operator">&gt;</span><span class="token punctuation">;</span> element<span class="token operator">?</span><span class="token operator">:</span> DOMElement<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> El<span class="token punctuation">,</span> <span class="token constant">T</span><span class="token operator">&gt;</span> <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span> transform<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">source<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span> <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> DOMTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></div></pre>
+><div><span class="token keyword">function</span> unsafeHtml<span class="token operator">&lt;</span>
+  State<span class="token punctuation">,</span>
+  Action<span class="token punctuation">,</span>
+  Query <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token punctuation">,</span>
+  El <span class="token keyword">extends</span> <span class="token class-name">Element</span> <span class="token operator">=</span> Element<span class="token punctuation">,</span>
+  <span class="token constant">T</span> <span class="token operator">=</span> <span class="token builtin">unknown</span>
+<span class="token operator">&gt;</span><span class="token punctuation">(</span>options<span class="token operator">:</span> <span class="token punctuation">{</span>
+  content<span class="token operator">:</span> TextValue<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span>
+  element<span class="token operator">?</span><span class="token operator">:</span> DOMElement<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> El<span class="token punctuation">,</span> <span class="token constant">T</span><span class="token operator">&gt;</span>
+  transform<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">source<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">string</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token operator">:</span> DOMTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</div></pre>
 <p class="defined-in">
   defined in
   <a

@@ -8,15 +8,15 @@
   <p class="title is-6">Table of Contents</p>
   <ul class="module-toc-list">
     <li>
-      <a class="is-family-monospace" href="#/api/dom/element.html#DOMElement"
-        >DOMElement</a
-      >
-    </li>
-    <li>
       <a
         class="is-family-monospace"
         href="#/api/dom/element.html#defaultNamespaces"
         >defaultNamespaces</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/dom/element.html#DOMElement"
+        >DOMElement</a
       >
     </li>
     <li>
@@ -35,6 +35,25 @@
     </li>
   </ul>
 </nav>
+<h3 class="is-family-monospace has-text-grey-dark" id="defaultNamespaces">
+  defaultNamespaces<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >variable</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">const</span> defaultNamespaces<span class="token operator">:</span> Record<span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token punctuation">,</span> <span class="token builtin">string</span><span class="token operator">&gt;</span></div></pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/element.ts#L201"
+    >dom/src/element.ts at line 201</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> defaultNamespaces <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/element.ts'</span></div></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="DOMElement">
   DOMElement<span
     class="kind is-family-sans-serif has-text-grey-light is-size-6"
@@ -135,33 +154,25 @@
 <pre
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> DOMElement <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/element.ts'</span></div></pre>
-<h3 class="is-family-monospace has-text-grey-dark" id="defaultNamespaces">
-  defaultNamespaces<span
-    class="kind is-family-sans-serif has-text-grey-light is-size-6"
-    >variable</span
-  >
-</h3>
-<pre
-  class="ts language-ts signature"
-><div><span class="token keyword">const</span> defaultNamespaces<span class="token operator">:</span> Record<span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token punctuation">,</span> <span class="token builtin">string</span><span class="token operator">&gt;</span></div></pre>
-<p class="defined-in">
-  defined in
-  <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/element.ts#L198"
-    >dom/src/element.ts at line 198</a
-  >
-</p>
-<pre
-  class="import-code ts language-ts"
-><div><span class="token keyword">import</span> <span class="token punctuation">{</span> defaultNamespaces <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/element.ts'</span></div></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="el">
   el<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
-    >variable</span
+    >function</span
   >
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">const</span> el<span class="token operator">:</span> <span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token punctuation">,</span> El <span class="token keyword">extends</span> <span class="token class-name">Element</span> <span class="token operator">=</span> Element<span class="token punctuation">,</span> <span class="token constant">T</span> <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token parameter">name<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> attributes<span class="token operator">:</span> Attributes<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> El<span class="token punctuation">,</span> <span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> <span class="token operator">...</span>children<span class="token operator">:</span> DOMChild<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">[</span><span class="token punctuation">]</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> DOMElement<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> El<span class="token punctuation">,</span> <span class="token constant">T</span><span class="token operator">&gt;</span></div></pre>
+><div><span class="token keyword">function</span> el<span class="token operator">&lt;</span>
+  State<span class="token punctuation">,</span>
+  Action<span class="token punctuation">,</span>
+  Query <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token punctuation">,</span>
+  El <span class="token keyword">extends</span> <span class="token class-name">Element</span> <span class="token operator">=</span> Element<span class="token punctuation">,</span>
+  <span class="token constant">T</span> <span class="token operator">=</span> <span class="token builtin">unknown</span>
+<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  name<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span>
+  attributes<span class="token operator">:</span> Attributes<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> El<span class="token punctuation">,</span> <span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  <span class="token operator">...</span>children<span class="token operator">:</span> DOMChild<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> DOMElement<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> El<span class="token punctuation">,</span> <span class="token constant">T</span><span class="token operator">&gt;</span>
+</div></pre>
 <p class="defined-in">
   defined in
   <a
@@ -174,12 +185,18 @@
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> el <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/element.ts'</span></div></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="el2">
   el2<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
-    >variable</span
+    >function</span
   >
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">const</span> el2<span class="token operator">:</span> <span class="token operator">&lt;</span>El <span class="token keyword">extends</span> <span class="token class-name">Element</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token parameter">name<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token punctuation">,</span> <span class="token constant">T</span> <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token parameter">attributes<span class="token operator">:</span> Attributes<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> El<span class="token punctuation">,</span> <span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> <span class="token operator">...</span>children<span class="token operator">:</span> DOMChild<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">[</span><span class="token punctuation">]</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> DOMElement<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> El<span class="token punctuation">,</span> <span class="token constant">T</span><span class="token operator">&gt;</span></div></pre>
+><div><span class="token keyword">function</span> el2<span class="token operator">&lt;</span>El <span class="token keyword">extends</span> <span class="token class-name">Element</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  name<span class="token operator">:</span> <span class="token builtin">string</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> <span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token punctuation">,</span> <span class="token constant">T</span> <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  <span class="token parameter">attributes<span class="token operator">:</span> Attributes<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> El<span class="token punctuation">,</span> <span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  <span class="token operator">...</span>children<span class="token operator">:</span> DOMChild<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">[</span><span class="token punctuation">]</span></span>
+<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> DOMElement<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> El<span class="token punctuation">,</span> <span class="token constant">T</span><span class="token operator">&gt;</span>
+</div></pre>
 <p class="defined-in">
   defined in
   <a
@@ -192,17 +209,29 @@
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> el2 <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/element.ts'</span></div></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="elNS">
   elNS<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
-    >variable</span
+    >function</span
   >
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">const</span> elNS<span class="token operator">:</span> <span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token punctuation">,</span> El <span class="token keyword">extends</span> <span class="token class-name">Element</span> <span class="token operator">=</span> Element<span class="token punctuation">,</span> <span class="token constant">T</span> <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token parameter">ns<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> name<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> attributes<span class="token operator">:</span> Attributes<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> El<span class="token punctuation">,</span> <span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> <span class="token operator">...</span>children<span class="token operator">:</span> DOMChild<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">[</span><span class="token punctuation">]</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> DOMElement<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> El<span class="token punctuation">,</span> <span class="token constant">T</span><span class="token operator">&gt;</span></div></pre>
+><div><span class="token keyword">function</span> elNS<span class="token operator">&lt;</span>
+  State<span class="token punctuation">,</span>
+  Action<span class="token punctuation">,</span>
+  Query <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token punctuation">,</span>
+  El <span class="token keyword">extends</span> <span class="token class-name">Element</span> <span class="token operator">=</span> Element<span class="token punctuation">,</span>
+  <span class="token constant">T</span> <span class="token operator">=</span> <span class="token builtin">unknown</span>
+<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  ns<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span>
+  name<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span>
+  attributes<span class="token operator">:</span> Attributes<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> El<span class="token punctuation">,</span> <span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  <span class="token operator">...</span>children<span class="token operator">:</span> DOMChild<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> DOMElement<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> El<span class="token punctuation">,</span> <span class="token constant">T</span><span class="token operator">&gt;</span>
+</div></pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/element.ts#L205"
-    >dom/src/element.ts at line 205</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/element.ts#L208"
+    >dom/src/element.ts at line 208</a
   >
 </p>
 <pre
@@ -210,17 +239,24 @@
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> elNS <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/element.ts'</span></div></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="elNS2">
   elNS2<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
-    >variable</span
+    >function</span
   >
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">const</span> elNS2<span class="token operator">:</span> <span class="token operator">&lt;</span>El <span class="token keyword">extends</span> <span class="token class-name">Element</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token parameter"><span class="token keyword">namespace</span><span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> name<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token punctuation">,</span> <span class="token constant">T</span> <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token parameter">attributes<span class="token operator">:</span> Attributes<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> El<span class="token punctuation">,</span> <span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> <span class="token operator">...</span>children<span class="token operator">:</span> DOMChild<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">[</span><span class="token punctuation">]</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> DOMElement<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> El<span class="token punctuation">,</span> <span class="token constant">T</span><span class="token operator">&gt;</span></div></pre>
+><div><span class="token keyword">function</span> elNS2<span class="token operator">&lt;</span>El <span class="token keyword">extends</span> <span class="token class-name">Element</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  <span class="token keyword">namespace</span><span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span>
+  name<span class="token operator">:</span> <span class="token builtin">string</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> <span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token punctuation">,</span> <span class="token constant">T</span> <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  <span class="token parameter">attributes<span class="token operator">:</span> Attributes<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> El<span class="token punctuation">,</span> <span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  <span class="token operator">...</span>children<span class="token operator">:</span> DOMChild<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">[</span><span class="token punctuation">]</span></span>
+<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> DOMElement<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> El<span class="token punctuation">,</span> <span class="token constant">T</span><span class="token operator">&gt;</span>
+</div></pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/element.ts#L226"
-    >dom/src/element.ts at line 226</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/element.ts#L229"
+    >dom/src/element.ts at line 229</a
   >
 </p>
 <pre
