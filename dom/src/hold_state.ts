@@ -20,21 +20,21 @@ export function holdMappedState<State, HeldState>(map: (s: State) => HeldState) 
   let counter = 0
   const stateCache = new Map<number, HeldState>()
   const capture = <Action, Query>(...children: DOMChild<State, Action, Query>[]): DOMTemplate<State, Action, Query> => {
-    const childTemplates = mapA(domChildToTemplate, children)
+    const childTemplates = mapA(children, domChildToTemplate)
     return {
       render(ctx: DOMContext<Action>, state: State) {
-        const views = mapA(t => t.render(ctx, state), childTemplates)
+        const views = mapA(childTemplates, t => t.render(ctx, state))
         const id = ++counter
         return {
           change(state: State) {
             stateCache.set(id,  map(state))
-            each(v => v.change(state), views)
+            each(views, v => v.change(state))
           },
           destroy() {
             stateCache.delete(id)
-            each(v => v.destroy(), views)
+            each(views, v => v.destroy())
           },
-          request(query: Query) { each(v => v.request(query), views) }
+          request(query: Query) { each(views, v => v.request(query)) }
         }
       }
     }
@@ -43,23 +43,23 @@ export function holdMappedState<State, HeldState>(map: (s: State) => HeldState) 
   const release = <InnerState, InnerAction, InnerQuery>(
     ...children: DOMChild<[HeldState, InnerState], InnerAction, InnerQuery>[]
   ): DOMTemplate<InnerState, InnerAction, InnerQuery> => {
-    const childTemplates = mapA(domChildToTemplate, children)
+    const childTemplates = mapA(children, domChildToTemplate)
     return {
       render(ctx: DOMContext<InnerAction>, state: InnerState) {
         const id = counter // TODO this is not a very robust solution
         const heldState = stateCache.get(id)
         if (typeof heldState === 'undefined') throw 'held state is not available at render, make sure that your `release` template is nested inside `capture`.'
         const combinedState = [heldState, state] as [HeldState, InnerState]
-        const views = mapA(t => t.render(ctx, combinedState), childTemplates)
+        const views = mapA(childTemplates, t => t.render(ctx, combinedState))
         return {
           change(state: InnerState) {
             const heldState = stateCache.get(id)
             if (typeof heldState === 'undefined') throw 'held state is not available at change, make sure that your `release` template is nested inside `capture`.'
             const combinedState = [heldState, state] as [HeldState, InnerState]
-            each(v => v.change(combinedState), views)
+            each(views, v => v.change(combinedState))
           },
-          destroy() { each(v => v.destroy(), views) },
-          request(query: InnerQuery) { each(v => v.request(query), views) }
+          destroy() { each(views, v => v.destroy()) },
+          request(query: InnerQuery) { each(views, v => v.request(query)) }
         }
       }
     }

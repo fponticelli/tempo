@@ -55,9 +55,8 @@ class PaperComponentTemplate<State, Action, Query>
       store.process(action)
     }
     const newCtx = ctx.withDispatch(innerDispatch)
-    const views = map(
-      child => child.render(newCtx, property.get()),
-      this.children
+    const views = map(this.children, child =>
+      child.render(newCtx, property.get())
     )
     const view = {
       change: (state: State) => {

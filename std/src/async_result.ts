@@ -115,7 +115,7 @@ export function flatMapN<Args extends any[], Err, Prog, Ret>(
       return a
     }
   }
-  const results = mapArray(a => a.value, args as { kind: 'Outcome', value: any }[])
+  const results = mapArray(args as { kind: 'Outcome', value: any }[], a => a.value)
   return f(...results as Args)
 }
 

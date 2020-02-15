@@ -54,7 +54,7 @@ export function apN<Args extends any[], Ret>(f: Option<(...args: Args) => Ret>, 
     return none
   for (const a of args)
     if (a.kind === 'None') return none
-  const results = mapArray(a => a.value, args as { kind: 'Some', value: any }[])
+  const results = mapArray(args as { kind: 'Some', value: any }[], a => a.value)
   return some(f.value(...results as Args))
 }
 
@@ -79,7 +79,7 @@ export function mapN<A, B, C, D, E, F, G>(
 export function mapN<Args extends any[], Ret>(f: (...args: Args) => Ret, ...args: Option<any>[]): Option<Ret> {
   for (const a of args)
     if (a.kind === 'None') return none
-  const results = mapArray(a => a.value, args as { kind: 'Some', value: any }[])
+  const results = mapArray(args as { kind: 'Some', value: any }[], a => a.value)
   return some(f(...results as Args))
 }
 
@@ -102,7 +102,7 @@ export function flatMapN<A, B, C, D, E, F, G>(
 export function flatMapN<Args extends any[], Ret>(f: (...args: Args) => Option<Ret>, ...args: Option<any>[]): Option<Ret> {
   for (const a of args)
     if (a.kind === 'None') return none
-  const results = mapArray(a => a.value, args as { kind: 'Some', value: any }[])
+  const results = mapArray(args as { kind: 'Some', value: any }[], a => a.value)
   return f(...results as Args)
 }
 

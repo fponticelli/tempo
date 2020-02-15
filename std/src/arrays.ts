@@ -18,7 +18,7 @@ limitations under the License.
 import { Maybe, nothing } from './maybe'
 import { Ordering, Compare } from './ord'
 
-export function map<A, B>(f: (a: A) => B, arr: A[]): B[] {
+export function map<A, B>(arr: A[], f: (a: A) => B): B[] {
   const length = arr.length
   const buff = new Array(length)
   for (let i = 0; i < length; i++) {
@@ -27,7 +27,7 @@ export function map<A, B>(f: (a: A) => B, arr: A[]): B[] {
   return buff
 }
 
-export function flatMap<A, B>(f: (a: A) => B[], arr: A[]): B[] {
+export function flatMap<A, B>(arr: A[], f: (a: A) => B[]): B[] {
   const buff = new Array()
   for (const el of arr) {
     buff.push(...f(el))
@@ -43,7 +43,7 @@ export function tail<A>(arr: A[]): A[] {
   return arr.slice(1)
 }
 
-export function equals<T>(predicate: (a: T, b: T) => boolean, a: T[], b: T[]): boolean {
+export function equals<T>(a: T[], b: T[], predicate: (a: T, b: T) => boolean): boolean {
   if (a.length !== b.length)
     return false
   else {
@@ -51,6 +51,12 @@ export function equals<T>(predicate: (a: T, b: T) => boolean, a: T[], b: T[]): b
       if (!predicate(a[i], b[i])) return false
     }
     return true
+  }
+}
+
+export function makeEquals<T>(predicate: (a: T, b: T) => boolean) {
+  return function(a: T[], b: T[]) {
+    return equals(a, b, predicate)
   }
 }
 
@@ -62,7 +68,7 @@ export function hasValues<T>(arr: T[]): arr is [T, ...T[]] {
   return arr.length > 0
 }
 
-export function filter<T>(predicate: (v: T) => boolean, arr: T[]): T[] {
+export function filter<T>(arr: T[], predicate: (v: T) => boolean): T[] {
   const buff = [] as T[]
   for (const a of arr)
     if (predicate(a))
@@ -74,14 +80,14 @@ export function flatten<T>(arr: T[][]): T[] {
   return ([] as T[]).concat(...arr)
 }
 
-export function foldLeft<T, B>(f: (acc: B, curr: T) => B, arr: T[], b: B): B {
+export function foldLeft<T, B>(arr: T[], f: (acc: B, curr: T) => B, b: B): B {
   for (const a of arr) {
     b = f(b, a)
   }
   return b
 }
 
-export function all<T>(predicate: (v: T) => boolean, arr: T[]): boolean {
+export function all<T>(arr: T[], predicate: (v: T) => boolean): boolean {
   for (const a of arr) {
     if (!predicate(a)) {
       return false
@@ -90,7 +96,7 @@ export function all<T>(predicate: (v: T) => boolean, arr: T[]): boolean {
   return true
 }
 
-export function any<T>(predicate: (v: T) => boolean, arr: T[]): boolean {
+export function any<T>(arr: T[], predicate: (v: T) => boolean): boolean {
   for (const a of arr) {
     if (predicate(a)) {
       return true
@@ -99,7 +105,7 @@ export function any<T>(predicate: (v: T) => boolean, arr: T[]): boolean {
   return false
 }
 
-export function each<T>(f: (v: T) => void, arr: T[]): void {
+export function each<T>(arr: T[], f: (v: T) => void): void {
   for (const a of arr)
     f(a)
 }

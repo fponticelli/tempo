@@ -26,7 +26,7 @@ class MapStateTemplate<OuterState, InnerState, Action, Query> implements DOMTemp
   render(ctx: DOMContext<Action>, state: OuterState): View<OuterState, Query> {
     const { children, map } = this
     const innerState = map(state)
-    const views = mapArray(c => c.render(ctx, innerState), children)
+    const views = mapArray(children, c => c.render(ctx, innerState))
 
     return {
       change: (state: OuterState) => {
@@ -47,7 +47,7 @@ export function mapState<OuterState, InnerState, Action, Query = unknown>(
   options: { map: (value: OuterState) => InnerState },
   ...children: DOMChild<InnerState, Action, Query>[]
 ): DOMTemplate<OuterState, Action, Query> {
-  return new MapStateTemplate(options.map, mapArray(domChildToTemplate, children))
+  return new MapStateTemplate(options.map, mapArray(children, domChildToTemplate))
 }
 
 export function mapStateAndKeep<OuterState, InnerState, Action, Query = unknown>(
@@ -56,7 +56,7 @@ export function mapStateAndKeep<OuterState, InnerState, Action, Query = unknown>
 ): DOMTemplate<OuterState, Action, Query> {
   return new MapStateTemplate<OuterState, [InnerState, OuterState], Action, Query>(
     (state: OuterState) => ([options.map(state), state]),
-    mapArray(domChildToTemplate, children)
+    mapArray(children, domChildToTemplate)
   )
 }
 
@@ -69,7 +69,7 @@ class MapActionTemplate<State, OuterAction, InnerAction, Query> implements DOMTe
   render(ctx: DOMContext<OuterAction>, state: State): View<State, Query> {
     const { children, map } = this
     const newCtx = ctx.conditionalMapAction(map)
-    const views = mapArray(c => c.render(newCtx, state), children)
+    const views = mapArray(children, c => c.render(newCtx, state))
     return {
       change: (state: State) => {
         for (const view of views) view.change(state)
@@ -88,7 +88,7 @@ export function mapAction<State, OuterAction, InnerAction, Query = unknown>(
   options: { map: (value: InnerAction) => OuterAction | undefined },
   ...children: DOMChild<State, InnerAction, Query>[]
 ): DOMTemplate<State, OuterAction, Query> {
-  return new MapActionTemplate<State, OuterAction, InnerAction, Query>(options.map, mapArray(domChildToTemplate, children))
+  return new MapActionTemplate<State, OuterAction, InnerAction, Query>(options.map, mapArray(children, domChildToTemplate))
 }
 
 class MapQueryTemplate<State, Action, OuterQuery, InnerQuery> implements DOMTemplate<State, Action, OuterQuery> {
@@ -99,7 +99,7 @@ class MapQueryTemplate<State, Action, OuterQuery, InnerQuery> implements DOMTemp
 
   render(ctx: DOMContext<Action>, state: State): View<State, OuterQuery> {
     const { children, map } = this
-    const views = mapArray(c => c.render(ctx, state), children)
+    const views = mapArray(children, c => c.render(ctx, state))
     return {
       change: (state: State) => {
         for (const view of views) view.change(state)
@@ -121,12 +121,12 @@ export function mapQuery<State, Action, OuterQuery, InnerQuery>(
   options: { map: (value: OuterQuery) => InnerQuery },
   ...children: DOMChild<State, Action, InnerQuery>[]
 ): DOMTemplate<State, Action, OuterQuery> {
-  return new MapQueryTemplate<State, Action, OuterQuery, InnerQuery>(options.map, mapArray(domChildToTemplate, children))
+  return new MapQueryTemplate<State, Action, OuterQuery, InnerQuery>(options.map, mapArray(children, domChildToTemplate))
 }
 
 export function mapQueryConditional<State, Action, OuterQuery, InnerQuery>(
   options: { map: (value: OuterQuery) => InnerQuery | undefined },
   ...children: DOMChild<State, Action, InnerQuery>[]
 ): DOMTemplate<State, Action, OuterQuery> {
-  return new MapQueryTemplate<State, Action, OuterQuery, InnerQuery>(options.map, mapArray(domChildToTemplate, children))
+  return new MapQueryTemplate<State, Action, OuterQuery, InnerQuery>(options.map, mapArray(children, domChildToTemplate))
 }

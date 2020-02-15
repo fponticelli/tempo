@@ -45,7 +45,7 @@ class UntilTemplate<OuterState, InnerState, Action, Query> implements DOMTemplat
             for (const view of filteredViews) view.change(value!)
           } else {
             // add node
-            childrenViews.push(map(el => el.render(newCtx, value!), children))
+            childrenViews.push(map(children, el => el.render(newCtx, value!)))
           }
           index++
         }
@@ -82,5 +82,5 @@ export function until<OuterState, InnerState, Action, Query = unknown>(
   },
   ...children: DOMChild<InnerState, Action, Query>[]
 ): DOMTemplate<OuterState, Action, Query> {
-  return new UntilTemplate<OuterState, InnerState, Action, Query>(options, map(domChildToTemplate, children))
+  return new UntilTemplate<OuterState, InnerState, Action, Query>(options, map(children, domChildToTemplate))
 }

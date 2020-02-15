@@ -46,7 +46,7 @@ export function setStyleAttribute(el: Element, name: string, value: any) {
   } else if (typeof value === 'string') {
     setAttribute(el, name, value)
   } else {
-    const s = map(k => `${k}: ${(value as any)[k]!};`, Object.keys(value)).join(
+    const s = map(Object.keys(value), k => `${k}: ${(value as any)[k]!};`).join(
       ' '
     )
     setAttribute(el, name, (s.length && s) || (null as any))

@@ -195,28 +195,28 @@ export function count(s: string, test: string) {
  * `contains` returns `true` if `s` contains any of the strings in `tests` regardless of the text case
  */
 export function containsAnyCaseInsensitive(s: string, tests: string[]) {
-  return any(t => containsCaseInsensitive(s, t), tests)
+  return any(tests, t => containsCaseInsensitive(s, t))
 }
 
 /**
  * `contains` returns `true` if `s` contains any of the strings in `tests`
  */
 export function containsAny(s: string, tests: string[]) {
-  return any(t => contains(s, t), tests)
+  return any(tests, t => contains(s, t))
 }
 
 /**
  * `contains` returns `true` if `s` contains all of the strings in `tests` regardless of the text case
  */
 export function containsAllCaseInsensitive(s: string, tests: string[]) {
-  return all(t => containsCaseInsensitive(s, t), tests)
+  return all(tests, t => containsCaseInsensitive(s, t))
 }
 
 /**
  * `contains` returns `true` if `s` contains all of the strings in `tests`
  */
 export function containsAll(s: string, tests: string[]) {
-  return all(t => contains(s, t), tests)
+  return all(tests, t => contains(s, t))
 }
 
 /**
@@ -284,7 +284,7 @@ export function ellipsisMiddle(s: string, maxlen = 20, symbol = '…') {
  * Returns `true` if `s` ends with any of the values in `values`.
  */
 export function endsWithAny(s: string, values: string[]): boolean {
-  return any((end) => endsWith(s, end), values)
+  return any(values, (end) => endsWith(s, end))
 }
 
 /**
@@ -518,7 +518,7 @@ export function splitOnce(s: string, separator: string) {
  * Returns `true` if `s` starts with any of the values in `values`.
  */
 export function startsWithAny(s: string, values: string[]): boolean {
-  return any((start) => s.startsWith(start), values)
+  return any(values, (start) => s.startsWith(start))
 }
 
 /**

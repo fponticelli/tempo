@@ -38,7 +38,7 @@ class PaperWhenTemplate<State, Action, Query>
         if (condition(state)) {
           if (typeof views === 'undefined') {
             // it has never been rendered before
-            views = map(c => c.render(newCtx, state), this.children)
+            views = map(this.children, c => c.render(newCtx, state))
           } else {
             for (const view of views) view.change(state)
           }

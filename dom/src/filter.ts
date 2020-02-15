@@ -25,7 +25,7 @@ class FilterStateTemplate<State, Action, Query> implements DOMTemplate<State, Ac
 
   render(ctx: DOMContext<Action>, state: State): View<State, Query> {
     const { children, isSame: filter } = this
-    const views = map(c => c.render(ctx, state), children)
+    const views = map(children, c => c.render(ctx, state))
 
     let prevState = state
     return {
@@ -51,6 +51,6 @@ export function filterState<State, Action, Query = unknown>(
 ): DOMTemplate<State, Action, Query> {
   return new FilterStateTemplate(
     options.isSame || ((a: State, b: State) => a === b),
-    map(domChildToTemplate, children)
+    map(children, domChildToTemplate)
   )
 }

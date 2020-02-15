@@ -49,7 +49,7 @@ class PaperUntilTemplate<OuterState, InnerState, Action, Query>
             for (const view of filteredViews) view.change(value!)
           } else {
             // add node
-            childrenViews.push(map(el => el.render(newCtx, value!), children))
+            childrenViews.push(map(children, el => el.render(newCtx, value!)))
           }
           index++
         }

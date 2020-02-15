@@ -111,7 +111,7 @@ export const reducer = (state: State, action: Action) => {
       }
     case 'toggle-all-todo':
       const allCompleted = state.completed === state.todos.length
-      const todos4 = map(todo => {
+      const todos4 = map(state.todos, todo => {
         if (todo.completed !== allCompleted) {
           return todo
         } else {
@@ -120,7 +120,7 @@ export const reducer = (state: State, action: Action) => {
             completed: !allCompleted
           }
         }
-      }, state.todos)
+      })
       const filtered4 = filterTodos(todos4, state.filter)
       return {
         ...state,

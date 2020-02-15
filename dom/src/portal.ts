@@ -27,7 +27,7 @@ class PortalTemplate<State, Action, Query> implements DOMTemplate<State, Action,
     const append = (node: Node) => this.append(ctx.doc, node)
     const parent = this.getParent(ctx.doc)
     const newCtx = ctx.withAppend(append).withParent(parent)
-    const views = map(child => child.render(newCtx, state), this.children)
+    const views = map(this.children, child => child.render(newCtx, state))
     return {
       change: (state: State) => {
         for (const view of views) view.change(state)
@@ -49,7 +49,7 @@ export function portal<State, Action, Query = unknown>(
   },
   ...children: DOMChild<State, Action, Query>[]
 ): DOMTemplate<State, Action, Query> {
-  return new PortalTemplate<State, Action, Query>(options.getParent, options.append, map(domChildToTemplate, children))
+  return new PortalTemplate<State, Action, Query>(options.getParent, options.append, map(children, domChildToTemplate))
 }
 
 export function portalWithSelector<State, Action, Query = unknown>(
@@ -82,7 +82,7 @@ export function headPortal<State, Action, Query = unknown>(
   return new PortalTemplate<State, Action, Query>(
     (doc: Document) => doc.head!,
     (doc: Document, node: Node) => doc.head!.appendChild(node),
-    map(domChildToTemplate, children)
+    map(children, domChildToTemplate)
   )
 }
 
@@ -92,6 +92,6 @@ export function bodyPortal<State, Action, Query = unknown>(
   return new PortalTemplate<State, Action, Query>(
     (doc: Document) => doc.body,
     (doc: Document, node: Node) => doc.body.appendChild(node),
-    map(domChildToTemplate, children)
+    map(children, domChildToTemplate)
   )
 }

@@ -29,7 +29,7 @@ class MapStateTemplate<OuterState, InnerState, Action, Query>
   ): View<OuterState, Query> {
     const { children, map } = this
     const innerState = map(state)
-    const views = mapArray(c => c.render(ctx, innerState), children)
+    const views = mapArray(children, c => c.render(ctx, innerState))
 
     return {
       change: (state: OuterState) => {
@@ -80,7 +80,7 @@ class MapActionTemplate<State, OuterAction, InnerAction, Query>
   render(ctx: PaperContext<OuterAction>, state: State): View<State, Query> {
     const { children, map } = this
     const newCtx = ctx.conditionalMapAction(map)
-    const views = mapArray(c => c.render(newCtx, state), children)
+    const views = mapArray(children, c => c.render(newCtx, state))
     return {
       change: (state: State) => {
         for (const view of views) view.change(state)
@@ -114,7 +114,7 @@ class MapQueryTemplate<State, Action, OuterQuery, InnerQuery>
 
   render(ctx: PaperContext<Action>, state: State): View<State, OuterQuery> {
     const { children, map } = this
-    const views = mapArray(c => c.render(ctx, state), children)
+    const views = mapArray(children, c => c.render(ctx, state))
     return {
       change: (state: State) => {
         for (const view of views) view.change(state)

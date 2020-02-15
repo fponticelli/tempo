@@ -61,7 +61,7 @@ export function mapN<Prog, Ret>(f: (...args: any[]) => Ret, ...args: Async<any, 
     if (a.kind === 'Loading' || a.kind === 'NotAsked')
       return a
   }
-  const results = mapArray(a => a.value, args as { kind: 'Outcome', value: any }[])
+  const results = mapArray(args as { kind: 'Outcome', value: any }[], a => a.value)
   return outcome(f(...results))
 }
 
@@ -97,7 +97,7 @@ export function flatMapN<Args extends any[], Prog, Ret>(
       return a
     }
   }
-  const results = mapArray(a => a.value, args as { kind: 'Outcome', value: any }[])
+  const results = mapArray(args as { kind: 'Outcome', value: any }[], a => a.value)
   return f(...results as Args)
 }
 

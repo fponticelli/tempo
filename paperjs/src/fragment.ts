@@ -21,7 +21,7 @@ class PaperFragmentTemplate<State, Action, Query>
   constructor(readonly children: PaperTemplate<State, Action, Query>[]) {}
 
   render(ctx: PaperContext<Action>, state: State): View<State, Query> {
-    const views = map(child => child.render(ctx, state), this.children)
+    const views = map(this.children, child => child.render(ctx, state))
     return {
       change: (state: State) => {
         for (const view of views) view.change(state)

@@ -54,7 +54,7 @@ export function apN<Args extends any[], Err, Ret>(f: Result<(...args: Args) => R
     return f
   for (const a of args)
     if (a.kind === 'Failure') return a
-  const results = mapArray(a => a.value, args as { kind: 'Success', value: any }[])
+  const results = mapArray(args as { kind: 'Success', value: any }[], a => a.value)
   return success(f.value(...results as Args))
 }
 
@@ -96,7 +96,7 @@ export function apNWithCombine<Args extends any[], Err, Ret>(
   if (err !== null) {
     return failure(err)
   } else {
-    const results = mapArray(a => a.value, args as { kind: 'Success', value: any }[])
+    const results = mapArray(args as { kind: 'Success', value: any }[], a => a.value)
     return success((f as Success<(...args: Args) => Ret>).value(...results as Args))
   }
 }
@@ -138,7 +138,7 @@ export function mapN<Args extends any[], Err, Ret>(f: (...args: Args) => Ret, ..
     if (a.kind === 'Failure')
       return a
   }
-  const results = mapArray(a => a.value, args as { kind: 'Success', value: any }[])
+  const results = mapArray(args as { kind: 'Success', value: any }[], a => a.value)
   return success(f(...results as Args))
 }
 
@@ -179,7 +179,7 @@ export function mapNWithCombine<Args extends any[], Err, Ret>(
   if (error !== null) {
     return failure(error)
   } else {
-    const results = mapArray(a => a.value, args as { kind: 'Success', value: any }[])
+    const results = mapArray(args as { kind: 'Success', value: any }[], a => a.value)
     return success(f(...results as Args))
   }
 }
@@ -215,7 +215,7 @@ export function flatMapN<Args extends any[], Err, Ret>(
       return a
     }
   }
-  const results = mapArray(a => a.value, args as { kind: 'Success', value: any }[])
+  const results = mapArray(args as { kind: 'Success', value: any }[], a => a.value)
   return f(...results as Args)
 }
 
@@ -256,7 +256,7 @@ export function flatMapNWithCombine<Args extends any[], Err, Ret>(
   if (error !== null) {
     return failure(error)
   } else {
-    const results = mapArray(a => a.value, args as { kind: 'Success', value: any }[])
+    const results = mapArray(args as { kind: 'Success', value: any }[], a => a.value)
     return f(...results as Args)
   }
 }

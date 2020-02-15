@@ -25,7 +25,7 @@ class FilterStateTemplate<State, Action, Query>
 
   render(ctx: PaperContext<Action>, state: State): View<State, Query> {
     const { children, isSame: filter } = this
-    const views = map(c => c.render(ctx, state), children)
+    const views = map(children, c => c.render(ctx, state))
 
     let prevState = state
     return {

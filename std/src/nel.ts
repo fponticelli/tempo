@@ -40,22 +40,22 @@ export function ofValue<T>(value: T): Nel<T> { return Nel<T>().unsafeOf([value])
 export function length<T>(nel: Nel<T>) { return Nel<T>().get(nel).length }
 
 export function map<A, B>(f: (a: A) => B, nel: Nel<A>): Nel<B> {
-  return Nel<B>().unsafeOf(Arr.map(f, Nel<A>().get(nel)))!
+  return Nel<B>().unsafeOf(Arr.map(Nel<A>().get(nel), f))!
 }
 
 export function flatMap<A, B>(f: (a: A) => Nel<B>, nel: Nel<A>): Nel<B> {
-  return Nel<B>().unsafeOf(Arr.flatMap(v => Nel<B>().get(f(v)), Nel<A>().get(nel)))!
+  return Nel<B>().unsafeOf(Arr.flatMap(Nel<A>().get(nel), v => Nel<B>().get(f(v))))!
 }
 
 export function head<A>(nel: Nel<A>): A { return Nel<A>().get(nel)[0] }
 export function tail<A>(nel: Nel<A>): A[] { return Nel<A>().get(nel).slice(1) }
 
 export function equals<T>(predicate: (a: T, b: T) => boolean, a: Nel<T>, b: Nel<T>): boolean {
-  return Arr.equals(predicate, Nel<T>().get(a), Nel<T>().get(b))
+  return Arr.equals(Nel<T>().get(a), Nel<T>().get(b), predicate)
 }
 
 export function filter<T>(predicate: (v: T) => boolean, nel: Nel<T>): T[] {
-  return Arr.filter(predicate, Nel<T>().get(nel))
+  return Arr.filter(Nel<T>().get(nel), predicate)
 }
 
 export function flatten<T>(nel: Nel<Nel<T>>): Nel<T> {
@@ -63,19 +63,19 @@ export function flatten<T>(nel: Nel<Nel<T>>): Nel<T> {
 }
 
 export function foldLeft<T, B>(f: (acc: B, curr: T) => B, nel: Nel<T>, b: B): B {
-  return Arr.foldLeft(f, Nel<T>().get(nel), b)
+  return Arr.foldLeft(Nel<T>().get(nel), f, b)
 }
 
 export function all<T>(predicate: (v: T) => boolean, nel: Nel<T>): boolean {
-  return Arr.all(predicate, Nel<T>().get(nel))
+  return Arr.all(Nel<T>().get(nel), predicate)
 }
 
 export function any<T>(predicate: (v: T) => boolean, nel: Nel<T>): boolean {
-  return Arr.any(predicate, Nel<T>().get(nel))
+  return Arr.any(Nel<T>().get(nel), predicate)
 }
 
 export function each<T>(f: (v: T) => void, nel: Nel<T>): void {
-  return Arr.each(f, Nel<T>().get(nel))
+  return Arr.each(Nel<T>().get(nel), f)
 }
 
 export function concat<A>(...nels: Nel<A>[]): Nel<A> {

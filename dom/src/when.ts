@@ -36,7 +36,7 @@ class WhenTemplate<State, Action, Query> implements DOMTemplate<State, Action, Q
         if (condition(state)) {
           if (typeof views === 'undefined') {
             // it has never been rendered before
-            views = map(c => c.render(newCtx, state), this.children)
+            views = map(this.children, c => c.render(newCtx, state))
           } else {
             for (const view of views) view.change(state)
           }
@@ -66,7 +66,7 @@ export function when<State, Action, Query = unknown>(
   options: WhenOptions<State>,
   ...children: DOMChild<State, Action, Query>[]
 ): DOMTemplate<State, Action, Query> {
-  return new WhenTemplate<State, Action, Query>(options, map(domChildToTemplate, children))
+  return new WhenTemplate<State, Action, Query>(options, map(children, domChildToTemplate))
 }
 
 export function unless<State, Action, Query = unknown>(
@@ -78,6 +78,6 @@ export function unless<State, Action, Query = unknown>(
       condition: (v: State) => !options.condition(v),
       refId: options.refId || 't:unless'
     },
-    map(domChildToTemplate, children)
+    map(children, domChildToTemplate)
   )
 }

@@ -23,7 +23,7 @@ class FragmentTemplate<State, Action, Query> implements DOMTemplate<State, Actio
   ) {}
 
   render(ctx: DOMContext<Action>, state: State): View<State, Query> {
-    const views = map(child => child.render(ctx, state), this.children)
+    const views = map(this.children, child => child.render(ctx, state))
     return {
       change: (state: State) => {
         for (const view of views) view.change(state)
@@ -40,5 +40,5 @@ class FragmentTemplate<State, Action, Query> implements DOMTemplate<State, Actio
 
 export function fragment<State, Action, Query = unknown>(...children: DOMChild<State, Action, Query>[])
     : DOMTemplate<State, Action, Query> {
-  return new FragmentTemplate<State, Action, Query>(map(domChildToTemplate, children))
+  return new FragmentTemplate<State, Action, Query>(map(children, domChildToTemplate))
 }

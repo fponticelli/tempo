@@ -72,7 +72,7 @@ export class DOMElement<State, Action, Query = unknown, El extends Element = Ele
     // children
     const appendChild = (n: Node) => el.appendChild(n)
     const newCtx = ctx.withAppend(appendChild).withParent(el)
-    const views = map(child => child.render(newCtx, state), this.children)
+    const views = map(this.children, child => child.render(newCtx, state))
 
     ctx.append(el)
 
@@ -80,7 +80,7 @@ export class DOMElement<State, Action, Query = unknown, El extends Element = Ele
       value = applyAfterRender(this.afterrender, el, ctx, state)
     }
 
-    const viewChanges = map(child => (state: State) => child.change(state), views)
+    const viewChanges = map(views, child => (state: State) => child.change(state))
 
     allChanges.push(...viewChanges)
 
@@ -126,35 +126,35 @@ function extractAttrs<State>(
   name: string,
   value: Attribute<State, AttributeValue>
 }[] {
-  return map(attName =>  {
+  return map(Object.keys(attrs || {}), attName =>  {
     let name = attName.toLowerCase()
     name = attributeNameMap[name] || name
     return {
       name,
       value: attrs![attName]
     }
-  }, Object.keys(attrs || {}))
+  })
 }
 
 function extractEvents<State, Action, El extends Element>(
   attrs: Record<string, EventHandler<State, Action, any, El>> | undefined
 ): { name: string, value: EventHandler<State, Action, any, El>}[] {
-  return map(eventName => {
+  return map(Object.keys(attrs || {}), eventName => {
     let name = `on${eventName.toLowerCase()}`
     return {
       name,
       value: attrs![eventName]
     }
-  }, Object.keys(attrs || {}))
+  })
 }
 
 function extractStyles<State>(
   attrs: Record<string, StyleAttribute<State, string>> | undefined
 ): { name: string, value: StyleAttribute<State, string>}[] {
-  return map(name => ({
+  return map(Object.keys(attrs || {}), name => ({
     name,
     value: attrs![name]
-  }), Object.keys(attrs || {}))
+  }))
 }
 
 const makeCreateElement = <El extends Element>(name: string) => (doc: Document) => doc.createElement(name) as any as El
@@ -174,7 +174,7 @@ export function el<State, Action, Query = unknown, El extends Element = Element,
     attributes.afterchange,
     attributes.beforedestroy,
     attributes.respond,
-    map(domChildToTemplate, children)
+    map(children, domChildToTemplate)
   )
 }
 
@@ -193,7 +193,7 @@ export function el2<El extends Element>(name: string) {
       attributes.afterchange,
       attributes.beforedestroy,
       attributes.respond,
-      map(domChildToTemplate, children)
+      map(children, domChildToTemplate)
     )
   }
 }
@@ -222,7 +222,7 @@ export function elNS<State, Action, Query = unknown, El extends Element = Elemen
     attributes.afterchange,
     attributes.beforedestroy,
     attributes.respond,
-    map(domChildToTemplate, children)
+    map(children, domChildToTemplate)
   )
 }
 
@@ -241,7 +241,7 @@ export function elNS2<El extends Element>(namespace: string, name: string) {
       attributes.afterchange,
       attributes.beforedestroy,
       attributes.respond,
-      map(domChildToTemplate, children)
+      map(children, domChildToTemplate)
     )
   }
 }

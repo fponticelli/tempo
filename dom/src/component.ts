@@ -54,7 +54,7 @@ class ComponentTemplate<State, Action, Query> implements Component<State, Action
       store.process(action)
     }
     const newCtx = ctx.withDispatch(innerDispatch)
-    const views = map(child => child.render(newCtx, property.get()), this.children)
+    const views = map(this.children, child => child.render(newCtx, property.get()))
     const view = {
       change: (state: State) => {
         store.property.set(state)
@@ -80,5 +80,5 @@ export function component<State, Action, Query = unknown>(
   },
   ...children: DOMChild<State, Action, Query>[]
 ): Component<State, Action, Query> {
-  return new ComponentTemplate<State, Action, Query>(attributes.store, map(domChildToTemplate, children), attributes.delayed || false)
+  return new ComponentTemplate<State, Action, Query>(attributes.store, map(children, domChildToTemplate), attributes.delayed || false)
 }
