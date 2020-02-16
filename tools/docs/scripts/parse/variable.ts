@@ -3,6 +3,7 @@ import { docOfJsDoc } from './jsdoc'
 import { stripImportTypes } from '../utils/strip_imports'
 import { DocEntity } from './doc_entity'
 import { getLineNumber } from './line_number'
+import { makePretty } from '../utils/pretty'
 
 function getConstantVariableDeclarationSignature(vd: VariableDeclaration): string {
   const text = vd.getText()
@@ -22,7 +23,7 @@ function getConstantVariableDeclarationSignature(vd: VariableDeclaration): strin
 export const variableOfDeclaration = (v: VariableDeclaration): DocEntity => {
   const doc = docOfJsDoc(((v.getParent() as any)?.getParent() as any)?.getJsDocs() || '')
   const name = v.getName()
-  const signatures = [getConstantVariableDeclarationSignature(v)]
+  const signatures = [makePretty(getConstantVariableDeclarationSignature(v))]
   return {
     ...doc,
     kind: 'variable',
