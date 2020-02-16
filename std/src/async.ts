@@ -29,8 +29,6 @@ export function outcome<T, P>(value: T): Async<T, P> { return { kind: 'Outcome',
 export const notAsked = { kind: 'NotAsked' } as Async<never, never>
 export function loading<T, P>(progress: P): Async<T, P> { return { kind: 'Loading', progress }}
 
-
-
 export function match<A, B, Prog = unknown>(
   result: Async<A, Prog>,
   f: (a: A) => B,
