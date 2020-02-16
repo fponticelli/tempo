@@ -2349,6 +2349,15 @@ $Utso$exports.filterState = $Utso$export$filterState; //# sourceMappingURL=filte
 
 // ASSET: ../node_modules/tempo-dom/lib/map.js
 var $qep0$exports = {};
+
+var $qep0$var$__spreadArrays = $qep0$exports && $qep0$exports.__spreadArrays || function () {
+  for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
+
+  for (var r = Array(s), k = 0, i = 0; i < il; i++) for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++) r[k] = a[j];
+
+  return r;
+};
+
 Object.defineProperty($qep0$exports, "__esModule", {
   value: true
 });
@@ -2409,6 +2418,23 @@ function $qep0$var$mapState(options) {
 
 var $qep0$export$mapState = $qep0$var$mapState;
 $qep0$exports.mapState = $qep0$export$mapState;
+
+function $qep0$var$mapField(options) {
+  var children = [];
+
+  for (var _i = 1; _i < arguments.length; _i++) {
+    children[_i - 1] = arguments[_i];
+  }
+
+  return $qep0$var$mapState.apply(void 0, $qep0$var$__spreadArrays([{
+    map: function (v) {
+      return v[options.field];
+    }
+  }], children));
+}
+
+var $qep0$export$mapField = $qep0$var$mapField;
+$qep0$exports.mapField = $qep0$export$mapField;
 
 function $qep0$var$mapStateAndKeep(options) {
   var children = [];

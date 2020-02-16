@@ -4,7 +4,43 @@
   >
 </div>
 <h1>module 'map'</h1>
-<nav></nav>
+<nav>
+  <p class="title is-6">Table of Contents</p>
+  <ul class="module-toc-list">
+    <li>
+      <a class="is-family-monospace" href="#/api/dom/map.html#mapAction"
+        >mapAction</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/dom/map.html#mapField"
+        >mapField</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/dom/map.html#mapQuery"
+        >mapQuery</a
+      >
+    </li>
+    <li>
+      <a
+        class="is-family-monospace"
+        href="#/api/dom/map.html#mapQueryConditional"
+        >mapQueryConditional</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/dom/map.html#mapState"
+        >mapState</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/dom/map.html#mapStateAndKeep"
+        >mapStateAndKeep</a
+      >
+    </li>
+  </ul>
+</nav>
 <h3 class="is-family-monospace has-text-grey-dark" id="mapAction">
   mapAction<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
     >function</span
@@ -19,13 +55,39 @@
 </div></pre>
 <p class="defined-in">
   defined in
-  <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/map.ts#L87"
-    >dom/src/map.ts at line 87</a
+  <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/map.ts#L97"
+    >dom/src/map.ts at line 97</a
   >
 </p>
 <pre
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> mapAction <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/map.ts'</span></div></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="mapField">
+  mapField<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">function</span> mapField<span class="token operator">&lt;</span>
+  OuterState<span class="token punctuation">,</span>
+  Key <span class="token keyword">extends</span> <span class="token class-name">keyof</span> OuterState<span class="token punctuation">,</span>
+  Action<span class="token punctuation">,</span>
+  Query <span class="token operator">=</span> <span class="token builtin">unknown</span>
+<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  options<span class="token operator">:</span> <span class="token punctuation">{</span> field<span class="token operator">:</span> Key <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token operator">...</span>children<span class="token operator">:</span> DOMChild<span class="token operator">&lt;</span>OuterState<span class="token punctuation">[</span>Key<span class="token punctuation">]</span><span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> DOMTemplate<span class="token operator">&lt;</span>OuterState<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</div></pre>
+<p class="defined-in">
+  defined in
+  <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/map.ts#L53"
+    >dom/src/map.ts at line 53</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> mapField <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/map.ts'</span></div></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="mapQuery">
   mapQuery<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
     >function</span
@@ -40,8 +102,8 @@
 </div></pre>
 <p class="defined-in">
   defined in
-  <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/map.ts#L120"
-    >dom/src/map.ts at line 120</a
+  <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/map.ts#L130"
+    >dom/src/map.ts at line 130</a
   >
 </p>
 <pre
@@ -62,8 +124,8 @@
 </div></pre>
 <p class="defined-in">
   defined in
-  <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/map.ts#L127"
-    >dom/src/map.ts at line 127</a
+  <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/map.ts#L137"
+    >dom/src/map.ts at line 137</a
   >
 </p>
 <pre
@@ -105,8 +167,8 @@
 </div></pre>
 <p class="defined-in">
   defined in
-  <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/map.ts#L53"
-    >dom/src/map.ts at line 53</a
+  <a href="https://github.com/fponticelli/tempo/blob/master/dom/src/map.ts#L63"
+    >dom/src/map.ts at line 63</a
   >
 </p>
 <pre
