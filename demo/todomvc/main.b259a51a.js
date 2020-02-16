@@ -1227,92 +1227,6 @@ function () {
 var $xN6r$export$Store = $xN6r$var$Store;
 $xN6r$exports.Store = $xN6r$export$Store; //# sourceMappingURL=store.js.map
 
-// ASSET: utils.ts
-var $UnXq$exports = {};
-Object.defineProperty($UnXq$exports, "__esModule", {
-  value: true
-});
-
-var $UnXq$var$Utils =
-/** @class */
-function () {
-  function Utils() {}
-
-  Utils.uuid = function () {
-    var uuid = '';
-
-    for (var i = 0; i < 32; i++) {
-      var random = Math.random() * 16 | 0;
-
-      if (i === 8 || i === 12 || i === 16 || i === 20) {
-        uuid += '-';
-      } // tslint:disable-next-line:no-bitwise
-
-
-      uuid += (i === 12 ? 4 : i === 16 ? random & 3 | 8 : random).toString(16);
-    }
-
-    return uuid;
-  };
-
-  Utils.pluralize = function (count, word) {
-    return count === 1 ? word : word + 's';
-  };
-
-  return Utils;
-}();
-
-var $UnXq$export$Utils = $UnXq$var$Utils;
-$UnXq$exports.Utils = $UnXq$export$Utils;
-// ASSET: state.ts
-var $mIWh$export$Filter,
-    $mIWh$exports = {};
-/*
-Copyright 2019 Google LLC
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-    https://www.apache.org/licenses/LICENSE-2.0
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-*/
-
-Object.defineProperty($mIWh$exports, "__esModule", {
-  value: true
-});
-var $mIWh$var$Filter;
-
-(function (Filter) {
-  Filter[Filter["All"] = 0] = "All";
-  Filter[Filter["Active"] = 1] = "Active";
-  Filter[Filter["Completed"] = 2] = "Completed";
-})($mIWh$var$Filter = $mIWh$export$Filter || ($mIWh$export$Filter = {}, $mIWh$exports.Filter = $mIWh$export$Filter));
-
-var $mIWh$export$createTodo = function (title) {
-  return {
-    id: $UnXq$export$Utils.uuid(),
-    title: title,
-    completed: false
-  };
-};
-
-$mIWh$exports.createTodo = $mIWh$export$createTodo;
-
-var $mIWh$export$emptyState = function () {
-  return {
-    filter: $mIWh$var$Filter.All,
-    filtered: [],
-    todos: [],
-    completed: 0,
-    adding: undefined,
-    editing: undefined
-  };
-};
-
-$mIWh$exports.emptyState = $mIWh$export$emptyState;
 // ASSET: ../node_modules/tempo-std/lib/maybe.js
 var $KScB$exports = {};
 Object.defineProperty($KScB$exports, "__esModule", {
@@ -1578,6 +1492,1276 @@ function $o25q$var$fill(length, value) {
 
 var $o25q$export$fill = $o25q$var$fill;
 $o25q$exports.fill = $o25q$export$fill;
+// ASSET: ../node_modules/tempo-std/lib/result.js
+var $NUZN$exports = {};
+Object.defineProperty($NUZN$exports, "__esModule", {
+  value: true
+});
+
+function $NUZN$var$success(value) {
+  return {
+    kind: 'Success',
+    value: value
+  };
+}
+
+var $NUZN$export$success = $NUZN$var$success;
+$NUZN$exports.success = $NUZN$export$success;
+
+function $NUZN$var$failure(error) {
+  return {
+    kind: 'Failure',
+    error: error
+  };
+}
+
+var $NUZN$export$failure = $NUZN$var$failure;
+$NUZN$exports.failure = $NUZN$export$failure;
+
+function $NUZN$var$ofNullable(value, error) {
+  if (value == null) return $NUZN$var$failure(error);else return $NUZN$var$success(value);
+}
+
+var $NUZN$export$ofNullable = $NUZN$var$ofNullable;
+$NUZN$exports.ofNullable = $NUZN$export$ofNullable;
+
+function $NUZN$var$ap(result, resultf) {
+  return $NUZN$var$flatten($NUZN$var$map(resultf, function (f) {
+    return $NUZN$var$map(result, function (v) {
+      return f(v);
+    });
+  }));
+}
+
+var $NUZN$export$ap = $NUZN$var$ap;
+$NUZN$exports.ap = $NUZN$export$ap;
+
+function $NUZN$var$apN() {
+  var args = [];
+
+  for (var _i = 0; _i < arguments.length; _i++) {
+    args[_i] = arguments[_i];
+  }
+
+  var f = args.pop();
+  if (f.kind === 'Failure') return f;
+
+  for (var _a = 0, args_1 = args; _a < args_1.length; _a++) {
+    var a = args_1[_a];
+    if (a.kind === 'Failure') return a;
+  }
+
+  var results = $o25q$export$map(args, function (a) {
+    return a.value;
+  });
+  return $NUZN$var$success(f.value.apply(f, results));
+}
+
+var $NUZN$export$apN = $NUZN$var$apN;
+$NUZN$exports.apN = $NUZN$export$apN;
+
+function $NUZN$var$apNWithCombine() {
+  var _a;
+
+  var args = [];
+
+  for (var _i = 0; _i < arguments.length; _i++) {
+    args[_i] = arguments[_i];
+  }
+
+  var combineErrors = args.pop();
+  var f = args.pop();
+  var err = null;
+  if (f.kind === 'Failure') err = f.error;
+
+  for (var _b = 0, args_2 = args; _b < args_2.length; _b++) {
+    var a = args_2[_b];
+
+    if (a.kind === 'Failure') {
+      if (err !== null) {
+        err = combineErrors(err, a.error);
+      } else {
+        err = a.error;
+      }
+    }
+  }
+
+  if (err !== null) {
+    return $NUZN$var$failure(err);
+  } else {
+    var results = $o25q$export$map(args, function (a) {
+      return a.value;
+    });
+    return $NUZN$var$success((_a = f).value.apply(_a, results));
+  }
+}
+
+var $NUZN$export$apNWithCombine = $NUZN$var$apNWithCombine;
+$NUZN$exports.apNWithCombine = $NUZN$export$apNWithCombine;
+
+function $NUZN$var$forEach(result, f) {
+  switch (result.kind) {
+    case 'Failure':
+      return;
+
+    case 'Success':
+      f(result.value);
+  }
+}
+
+var $NUZN$export$forEach = $NUZN$var$forEach;
+$NUZN$exports.forEach = $NUZN$export$forEach;
+
+function $NUZN$var$map(result, f) {
+  switch (result.kind) {
+    case 'Failure':
+      return result;
+
+    case 'Success':
+      return $NUZN$var$success(f(result.value));
+  }
+}
+
+var $NUZN$export$map = $NUZN$var$map;
+$NUZN$exports.map = $NUZN$export$map;
+
+function $NUZN$var$mapError(result, f) {
+  switch (result.kind) {
+    case 'Failure':
+      return $NUZN$var$failure(f(result.error));
+
+    case 'Success':
+      return $NUZN$var$success(result.value);
+  }
+}
+
+var $NUZN$export$mapError = $NUZN$var$mapError;
+$NUZN$exports.mapError = $NUZN$export$mapError;
+
+function $NUZN$var$mapN() {
+  var args = [];
+
+  for (var _i = 0; _i < arguments.length; _i++) {
+    args[_i] = arguments[_i];
+  }
+
+  var f = args.pop();
+
+  for (var _a = 0, args_3 = args; _a < args_3.length; _a++) {
+    var a = args_3[_a];
+    if (a.kind === 'Failure') return a;
+  }
+
+  var results = $o25q$export$map(args, function (a) {
+    return a.value;
+  });
+  return $NUZN$var$success(f.apply(void 0, results));
+}
+
+var $NUZN$export$mapN = $NUZN$var$mapN;
+$NUZN$exports.mapN = $NUZN$export$mapN;
+
+function $NUZN$var$mapNWithCombine() {
+  var args = [];
+
+  for (var _i = 0; _i < arguments.length; _i++) {
+    args[_i] = arguments[_i];
+  }
+
+  var combineErrors = args.pop();
+  var f = args.pop();
+  var error = null;
+
+  for (var _a = 0, args_4 = args; _a < args_4.length; _a++) {
+    var a = args_4[_a];
+
+    if (a.kind === 'Failure') {
+      if (error !== null) error = combineErrors(error, a.error);else error = a.error;
+    }
+  }
+
+  if (error !== null) {
+    return $NUZN$var$failure(error);
+  } else {
+    var results = $o25q$export$map(args, function (a) {
+      return a.value;
+    });
+    return $NUZN$var$success(f.apply(void 0, results));
+  }
+}
+
+var $NUZN$export$mapNWithCombine = $NUZN$var$mapNWithCombine;
+$NUZN$exports.mapNWithCombine = $NUZN$export$mapNWithCombine;
+
+function $NUZN$var$flatMap(result, f) {
+  switch (result.kind) {
+    case 'Failure':
+      return result;
+
+    case 'Success':
+      return f(result.value);
+  }
+}
+
+var $NUZN$export$flatMap = $NUZN$var$flatMap;
+$NUZN$exports.flatMap = $NUZN$export$flatMap;
+
+function $NUZN$var$flatMapN() {
+  var args = [];
+
+  for (var _i = 0; _i < arguments.length; _i++) {
+    args[_i] = arguments[_i];
+  }
+
+  var f = args.pop();
+
+  for (var _a = 0, args_5 = args; _a < args_5.length; _a++) {
+    var a = args_5[_a];
+
+    if (a.kind === 'Failure') {
+      return a;
+    }
+  }
+
+  var results = $o25q$export$map(args, function (a) {
+    return a.value;
+  });
+  return f.apply(void 0, results);
+}
+
+var $NUZN$export$flatMapN = $NUZN$var$flatMapN;
+$NUZN$exports.flatMapN = $NUZN$export$flatMapN;
+
+function $NUZN$var$flatMapNWithCombine() {
+  var args = [];
+
+  for (var _i = 0; _i < arguments.length; _i++) {
+    args[_i] = arguments[_i];
+  }
+
+  var combineErrors = args.pop();
+  var f = args.pop();
+  var error = null;
+
+  for (var _a = 0, args_6 = args; _a < args_6.length; _a++) {
+    var a = args_6[_a];
+
+    if (a.kind === 'Failure') {
+      if (error !== null) error = combineErrors(error, a.error);else error = a.error;
+    }
+  }
+
+  if (error !== null) {
+    return $NUZN$var$failure(error);
+  } else {
+    var results = $o25q$export$map(args, function (a) {
+      return a.value;
+    });
+    return f.apply(void 0, results);
+  }
+}
+
+var $NUZN$export$flatMapNWithCombine = $NUZN$var$flatMapNWithCombine;
+$NUZN$exports.flatMapNWithCombine = $NUZN$export$flatMapNWithCombine;
+
+function $NUZN$var$equals(a, b, predicate) {
+  if (a.kind !== b.kind) return false;else if (a.kind === 'Failure' && b.kind === 'Failure') return true;else return predicate(a.value, b.value);
+}
+
+var $NUZN$export$equals = $NUZN$var$equals;
+$NUZN$exports.equals = $NUZN$export$equals;
+
+function $NUZN$var$makeEquals(predicate) {
+  return function (a, b) {
+    return $NUZN$var$equals(a, b, predicate);
+  };
+}
+
+var $NUZN$export$makeEquals = $NUZN$var$makeEquals;
+$NUZN$exports.makeEquals = $NUZN$export$makeEquals;
+
+function $NUZN$var$isFailure(result) {
+  return result.kind === 'Failure';
+}
+
+var $NUZN$export$isFailure = $NUZN$var$isFailure;
+$NUZN$exports.isFailure = $NUZN$export$isFailure;
+
+function $NUZN$var$isSuccess(result) {
+  return result.kind === 'Success';
+}
+
+var $NUZN$export$isSuccess = $NUZN$var$isSuccess;
+$NUZN$exports.isSuccess = $NUZN$export$isSuccess;
+
+function $NUZN$var$filter(result, predicate, error) {
+  switch (result.kind) {
+    case 'Failure':
+      return result;
+
+    case 'Success':
+      if (predicate(result.value)) {
+        return result;
+      } else {
+        return $NUZN$var$failure(error);
+      }
+
+  }
+}
+
+var $NUZN$export$filter = $NUZN$var$filter;
+$NUZN$exports.filter = $NUZN$export$filter;
+
+function $NUZN$var$filterLazy(result, predicate, errorf) {
+  switch (result.kind) {
+    case 'Failure':
+      return result;
+
+    case 'Success':
+      if (predicate(result.value)) {
+        return result;
+      } else {
+        return $NUZN$var$failure(errorf());
+      }
+
+  }
+}
+
+var $NUZN$export$filterLazy = $NUZN$var$filterLazy;
+$NUZN$exports.filterLazy = $NUZN$export$filterLazy;
+
+function $NUZN$var$getOrThrow(result) {
+  switch (result.kind) {
+    case 'Failure':
+      throw result.error;
+
+    case 'Success':
+      return result.value;
+  }
+}
+
+var $NUZN$export$getOrThrow = $NUZN$var$getOrThrow;
+$NUZN$exports.getOrThrow = $NUZN$export$getOrThrow;
+
+function $NUZN$var$getOrElse(result, alt) {
+  switch (result.kind) {
+    case 'Failure':
+      return alt;
+
+    case 'Success':
+      return result.value;
+  }
+}
+
+var $NUZN$export$getOrElse = $NUZN$var$getOrElse;
+$NUZN$exports.getOrElse = $NUZN$export$getOrElse;
+
+function $NUZN$var$getOrElseLazy(result, alt) {
+  switch (result.kind) {
+    case 'Failure':
+      return alt();
+
+    case 'Success':
+      return result.value;
+  }
+}
+
+var $NUZN$export$getOrElseLazy = $NUZN$var$getOrElseLazy;
+$NUZN$exports.getOrElseLazy = $NUZN$export$getOrElseLazy;
+
+function $NUZN$var$toBoolean(result) {
+  switch (result.kind) {
+    case 'Failure':
+      return false;
+
+    case 'Success':
+      return true;
+  }
+}
+
+var $NUZN$export$toBoolean = $NUZN$var$toBoolean;
+$NUZN$exports.toBoolean = $NUZN$export$toBoolean;
+
+function $NUZN$var$toArray(result) {
+  switch (result.kind) {
+    case 'Failure':
+      return [];
+
+    case 'Success':
+      return [result.value];
+  }
+}
+
+var $NUZN$export$toArray = $NUZN$var$toArray;
+$NUZN$exports.toArray = $NUZN$export$toArray;
+
+function $NUZN$var$toMaybe(result) {
+  switch (result.kind) {
+    case 'Failure':
+      return $KScB$export$nothing;
+
+    case 'Success':
+      return $KScB$export$just(result.value);
+  }
+}
+
+var $NUZN$export$toMaybe = $NUZN$var$toMaybe;
+$NUZN$exports.toMaybe = $NUZN$export$toMaybe;
+
+function $NUZN$var$toOption(result) {
+  switch (result.kind) {
+    case 'Failure':
+      return $pF3E$export$none;
+
+    case 'Success':
+      return $pF3E$export$some(result.value);
+  }
+}
+
+var $NUZN$export$toOption = $NUZN$var$toOption;
+$NUZN$exports.toOption = $NUZN$export$toOption;
+
+function $NUZN$var$flatten(result) {
+  switch (result.kind) {
+    case 'Failure':
+      return $NUZN$var$failure(result.error);
+
+    case 'Success':
+      return result.value;
+  }
+}
+
+var $NUZN$export$flatten = $NUZN$var$flatten;
+$NUZN$exports.flatten = $NUZN$export$flatten;
+
+function $NUZN$var$match(result, f, fErr) {
+  switch (result.kind) {
+    case 'Success':
+      return f(result.value);
+
+    case 'Failure':
+      return fErr(result.error);
+  }
+}
+
+var $NUZN$export$match = $NUZN$var$match;
+$NUZN$exports.match = $NUZN$export$match;
+
+function $NUZN$var$cata(result, f, ifNone) {
+  switch (result.kind) {
+    case 'Failure':
+      return ifNone;
+
+    case 'Success':
+      return f(result.value);
+  }
+}
+
+var $NUZN$export$cata = $NUZN$var$cata;
+$NUZN$exports.cata = $NUZN$export$cata;
+
+function $NUZN$var$cataLazy(result, f, ifNone) {
+  switch (result.kind) {
+    case 'Failure':
+      return ifNone();
+
+    case 'Success':
+      return f(result.value);
+  }
+}
+
+var $NUZN$export$cataLazy = $NUZN$var$cataLazy;
+$NUZN$exports.cataLazy = $NUZN$export$cataLazy;
+
+function $NUZN$var$foldLeft(result, f, b) {
+  switch (result.kind) {
+    case 'Failure':
+      return b;
+
+    case 'Success':
+      return f(b, result.value);
+  }
+}
+
+var $NUZN$export$foldLeft = $NUZN$var$foldLeft;
+$NUZN$exports.foldLeft = $NUZN$export$foldLeft;
+
+function $NUZN$var$all(result, f) {
+  switch (result.kind) {
+    case 'Failure':
+      return true;
+
+    case 'Success':
+      return f(result.value);
+  }
+}
+
+var $NUZN$export$all = $NUZN$var$all;
+$NUZN$exports.all = $NUZN$export$all;
+
+function $NUZN$var$any(result, f) {
+  switch (result.kind) {
+    case 'Failure':
+      return false;
+
+    case 'Success':
+      return f(result.value);
+  }
+}
+
+var $NUZN$export$any = $NUZN$var$any;
+$NUZN$exports.any = $NUZN$export$any;
+
+function $NUZN$var$each(result, f) {
+  switch (result.kind) {
+    case 'Failure':
+      return;
+
+    case 'Success':
+      return f(result.value);
+  }
+}
+
+var $NUZN$export$each = $NUZN$var$each;
+$NUZN$exports.each = $NUZN$export$each;
+
+function $NUZN$var$firstSuccess() {
+  var args = [];
+
+  for (var _i = 0; _i < arguments.length; _i++) {
+    args[_i] = arguments[_i];
+  }
+
+  for (var _a = 0, args_7 = args; _a < args_7.length; _a++) {
+    var a = args_7[_a];
+    if ($NUZN$var$isSuccess(a)) return a;
+  }
+
+  for (var _b = 0, args_8 = args; _b < args_8.length; _b++) {
+    var a = args_8[_b];
+    return a;
+  }
+
+  throw 'cannot use `firstSuccess` with empty argument list';
+}
+
+var $NUZN$export$firstSuccess = $NUZN$var$firstSuccess;
+$NUZN$exports.firstSuccess = $NUZN$export$firstSuccess;
+
+function $NUZN$var$recover(result, whenFailure) {
+  switch (result.kind) {
+    case 'Failure':
+      return $NUZN$var$success(whenFailure);
+
+    case 'Success':
+      return result;
+  }
+}
+
+var $NUZN$export$recover = $NUZN$var$recover;
+$NUZN$exports.recover = $NUZN$export$recover;
+
+function $NUZN$var$recoverFromError(result, whenFailuref) {
+  switch (result.kind) {
+    case 'Failure':
+      return $NUZN$var$success(whenFailuref(result.error));
+
+    case 'Success':
+      return result;
+  }
+}
+
+var $NUZN$export$recoverFromError = $NUZN$var$recoverFromError;
+$NUZN$exports.recoverFromError = $NUZN$export$recoverFromError;
+
+function $NUZN$var$swap(result) {
+  switch (result.kind) {
+    case 'Failure':
+      return $NUZN$var$success(result.error);
+
+    case 'Success':
+      return $NUZN$var$failure(result.value);
+  }
+}
+
+var $NUZN$export$swap = $NUZN$var$swap;
+$NUZN$exports.swap = $NUZN$export$swap;
+
+function $NUZN$var$combine(a, b) {
+  return $NUZN$var$mapN(a, b, function (a, b) {
+    return [a, b];
+  });
+}
+
+var $NUZN$export$combine = $NUZN$var$combine;
+$NUZN$exports.combine = $NUZN$export$combine;
+
+function $NUZN$var$spread(f, v) {
+  return $NUZN$var$map(v, function (t) {
+    return f(t[0], t[1]);
+  });
+}
+
+var $NUZN$export$spread = $NUZN$var$spread;
+$NUZN$exports.spread = $NUZN$export$spread; //# sourceMappingURL=result.js.map
+
+// ASSET: ../node_modules/tempo-std/lib/option.js
+var $pF3E$exports = {};
+Object.defineProperty($pF3E$exports, "__esModule", {
+  value: true
+});
+
+function $pF3E$var$some(value) {
+  return {
+    kind: 'Some',
+    value: value
+  };
+}
+
+var $pF3E$export$some = $pF3E$var$some;
+$pF3E$exports.some = $pF3E$export$some;
+var $pF3E$export$none = {
+  kind: 'None'
+};
+$pF3E$exports.none = $pF3E$export$none;
+
+function $pF3E$var$ofValue(value) {
+  if (value == null) return $pF3E$export$none;else return $pF3E$var$some(value);
+}
+
+var $pF3E$export$ofValue = $pF3E$var$ofValue;
+$pF3E$exports.ofValue = $pF3E$export$ofValue;
+
+function $pF3E$var$ap(opt, optf) {
+  return $pF3E$var$flatten($pF3E$var$map(optf, function (f) {
+    return $pF3E$var$map(opt, function (v) {
+      return f(v);
+    });
+  }));
+}
+
+var $pF3E$export$ap = $pF3E$var$ap;
+$pF3E$exports.ap = $pF3E$export$ap;
+
+function $pF3E$var$apN() {
+  var args = [];
+
+  for (var _i = 0; _i < arguments.length; _i++) {
+    args[_i] = arguments[_i];
+  }
+
+  var f = args.pop();
+  if (f.kind === 'None') return $pF3E$export$none;
+
+  for (var _a = 0, args_1 = args; _a < args_1.length; _a++) {
+    var a = args_1[_a];
+    if (a.kind === 'None') return $pF3E$export$none;
+  }
+
+  var results = $o25q$export$map(args, function (a) {
+    return a.value;
+  });
+  return $pF3E$var$some(f.value.apply(f, results));
+}
+
+var $pF3E$export$apN = $pF3E$var$apN;
+$pF3E$exports.apN = $pF3E$export$apN;
+
+function $pF3E$var$map(opt, f) {
+  switch (opt.kind) {
+    case 'None':
+      return opt;
+
+    case 'Some':
+      return $pF3E$var$some(f(opt.value));
+  }
+}
+
+var $pF3E$export$map = $pF3E$var$map;
+$pF3E$exports.map = $pF3E$export$map;
+
+function $pF3E$var$mapN() {
+  var args = [];
+
+  for (var _i = 0; _i < arguments.length; _i++) {
+    args[_i] = arguments[_i];
+  }
+
+  var f = args.pop();
+
+  for (var _a = 0, args_2 = args; _a < args_2.length; _a++) {
+    var a = args_2[_a];
+    if (a.kind === 'None') return $pF3E$export$none;
+  }
+
+  var results = $o25q$export$map(args, function (a) {
+    return a.value;
+  });
+  return $pF3E$var$some(f.apply(void 0, results));
+}
+
+var $pF3E$export$mapN = $pF3E$var$mapN;
+$pF3E$exports.mapN = $pF3E$export$mapN;
+
+function $pF3E$var$flatMap(opt, f) {
+  switch (opt.kind) {
+    case 'None':
+      return opt;
+
+    case 'Some':
+      return f(opt.value);
+  }
+}
+
+var $pF3E$export$flatMap = $pF3E$var$flatMap;
+$pF3E$exports.flatMap = $pF3E$export$flatMap;
+
+function $pF3E$var$flatMapN() {
+  var args = [];
+
+  for (var _i = 0; _i < arguments.length; _i++) {
+    args[_i] = arguments[_i];
+  }
+
+  var f = args.pop();
+
+  for (var _a = 0, args_3 = args; _a < args_3.length; _a++) {
+    var a = args_3[_a];
+    if (a.kind === 'None') return $pF3E$export$none;
+  }
+
+  var results = $o25q$export$map(args, function (a) {
+    return a.value;
+  });
+  return f.apply(void 0, results);
+}
+
+var $pF3E$export$flatMapN = $pF3E$var$flatMapN;
+$pF3E$exports.flatMapN = $pF3E$export$flatMapN;
+
+function $pF3E$var$equals(a, b, predicate) {
+  if (a.kind !== b.kind) return false;else if (a.kind === 'None' && b.kind === 'None') return true;else return predicate(a.value, b.value);
+}
+
+var $pF3E$export$equals = $pF3E$var$equals;
+$pF3E$exports.equals = $pF3E$export$equals;
+
+function $pF3E$var$makeEquals(predicate) {
+  return function (a, b) {
+    return $pF3E$var$equals(a, b, predicate);
+  };
+}
+
+var $pF3E$export$makeEquals = $pF3E$var$makeEquals;
+$pF3E$exports.makeEquals = $pF3E$export$makeEquals;
+
+function $pF3E$var$isNone(option) {
+  return option.kind === 'None';
+}
+
+var $pF3E$export$isNone = $pF3E$var$isNone;
+$pF3E$exports.isNone = $pF3E$export$isNone;
+
+function $pF3E$var$isSome(option) {
+  return option.kind === 'Some';
+}
+
+var $pF3E$export$isSome = $pF3E$var$isSome;
+$pF3E$exports.isSome = $pF3E$export$isSome;
+
+function $pF3E$var$filter(option, predicate) {
+  switch (option.kind) {
+    case 'None':
+      return $pF3E$export$none;
+
+    case 'Some':
+      if (predicate(option.value)) {
+        return option;
+      } else {
+        return $pF3E$export$none;
+      }
+
+  }
+}
+
+var $pF3E$export$filter = $pF3E$var$filter;
+$pF3E$exports.filter = $pF3E$export$filter;
+
+function $pF3E$var$getOrThrow(option, exception) {
+  switch (option.kind) {
+    case 'None':
+      throw exception;
+
+    case 'Some':
+      return option.value;
+  }
+}
+
+var $pF3E$export$getOrThrow = $pF3E$var$getOrThrow;
+$pF3E$exports.getOrThrow = $pF3E$export$getOrThrow;
+
+function $pF3E$var$toMaybe(option) {
+  switch (option.kind) {
+    case 'None':
+      return undefined;
+
+    case 'Some':
+      return option.value;
+  }
+}
+
+var $pF3E$export$toMaybe = $pF3E$var$toMaybe;
+$pF3E$exports.toMaybe = $pF3E$export$toMaybe;
+
+function $pF3E$var$getUnsafe(option) {
+  return $pF3E$var$getOrThrow(option, 'unable to extract value from None');
+}
+
+var $pF3E$export$getUnsafe = $pF3E$var$getUnsafe;
+$pF3E$exports.getUnsafe = $pF3E$export$getUnsafe;
+
+function $pF3E$var$getOrElse(option, alt) {
+  switch (option.kind) {
+    case 'None':
+      return alt;
+
+    case 'Some':
+      return option.value;
+  }
+}
+
+var $pF3E$export$getOrElse = $pF3E$var$getOrElse;
+$pF3E$exports.getOrElse = $pF3E$export$getOrElse;
+
+function $pF3E$var$getOrElseLazy(option, alt) {
+  switch (option.kind) {
+    case 'None':
+      return alt();
+
+    case 'Some':
+      return option.value;
+  }
+}
+
+var $pF3E$export$getOrElseLazy = $pF3E$var$getOrElseLazy;
+$pF3E$exports.getOrElseLazy = $pF3E$export$getOrElseLazy;
+
+function $pF3E$var$toBoolean(option) {
+  switch (option.kind) {
+    case 'None':
+      return false;
+
+    case 'Some':
+      return true;
+  }
+}
+
+var $pF3E$export$toBoolean = $pF3E$var$toBoolean;
+$pF3E$exports.toBoolean = $pF3E$export$toBoolean;
+
+function $pF3E$var$toArray(option) {
+  switch (option.kind) {
+    case 'None':
+      return [];
+
+    case 'Some':
+      return [option.value];
+  }
+}
+
+var $pF3E$export$toArray = $pF3E$var$toArray;
+$pF3E$exports.toArray = $pF3E$export$toArray;
+
+function $pF3E$var$toResult(option, error) {
+  switch (option.kind) {
+    case 'None':
+      return $NUZN$export$failure(error);
+
+    case 'Some':
+      return $NUZN$export$success(option.value);
+  }
+}
+
+var $pF3E$export$toResult = $pF3E$var$toResult;
+$pF3E$exports.toResult = $pF3E$export$toResult;
+
+function $pF3E$var$toResultLazy(option, errorf) {
+  switch (option.kind) {
+    case 'None':
+      return $NUZN$export$failure(errorf());
+
+    case 'Some':
+      return $NUZN$export$success(option.value);
+  }
+}
+
+var $pF3E$export$toResultLazy = $pF3E$var$toResultLazy;
+$pF3E$exports.toResultLazy = $pF3E$export$toResultLazy;
+
+function $pF3E$var$flatten(option) {
+  switch (option.kind) {
+    case 'None':
+      return $pF3E$export$none;
+
+    case 'Some':
+      return option.value;
+  }
+}
+
+var $pF3E$export$flatten = $pF3E$var$flatten;
+$pF3E$exports.flatten = $pF3E$export$flatten;
+
+function $pF3E$var$cata(f, option, ifNone) {
+  switch (option.kind) {
+    case 'None':
+      return ifNone;
+
+    case 'Some':
+      return f(option.value);
+  }
+}
+
+var $pF3E$export$cata = $pF3E$var$cata;
+$pF3E$exports.cata = $pF3E$export$cata;
+
+function $pF3E$var$cataLazy(f, option, ifNone) {
+  switch (option.kind) {
+    case 'None':
+      return ifNone();
+
+    case 'Some':
+      return f(option.value);
+  }
+}
+
+var $pF3E$export$cataLazy = $pF3E$var$cataLazy;
+$pF3E$exports.cataLazy = $pF3E$export$cataLazy;
+
+function $pF3E$var$foldLeft(f, option, b) {
+  switch (option.kind) {
+    case 'None':
+      return b;
+
+    case 'Some':
+      return f(b, option.value);
+  }
+}
+
+var $pF3E$export$foldLeft = $pF3E$var$foldLeft;
+$pF3E$exports.foldLeft = $pF3E$export$foldLeft;
+
+function $pF3E$var$all(f, option) {
+  switch (option.kind) {
+    case 'None':
+      return true;
+
+    case 'Some':
+      return f(option.value);
+  }
+}
+
+var $pF3E$export$all = $pF3E$var$all;
+$pF3E$exports.all = $pF3E$export$all;
+
+function $pF3E$var$any(f, option) {
+  switch (option.kind) {
+    case 'None':
+      return false;
+
+    case 'Some':
+      return f(option.value);
+  }
+}
+
+var $pF3E$export$any = $pF3E$var$any;
+$pF3E$exports.any = $pF3E$export$any;
+
+function $pF3E$var$each(f, option) {
+  switch (option.kind) {
+    case 'None':
+      return;
+
+    case 'Some':
+      return f(option.value);
+  }
+}
+
+var $pF3E$export$each = $pF3E$var$each;
+$pF3E$exports.each = $pF3E$export$each;
+
+function $pF3E$var$firstSome() {
+  var args = [];
+
+  for (var _i = 0; _i < arguments.length; _i++) {
+    args[_i] = arguments[_i];
+  }
+
+  for (var _a = 0, args_4 = args; _a < args_4.length; _a++) {
+    var a = args_4[_a];
+    if ($pF3E$var$isSome(a)) return a;
+  }
+
+  return $pF3E$export$none;
+}
+
+var $pF3E$export$firstSome = $pF3E$var$firstSome;
+$pF3E$exports.firstSome = $pF3E$export$firstSome;
+
+function $pF3E$var$recover(result, whenFailure) {
+  switch (result.kind) {
+    case 'None':
+      return $pF3E$var$some(whenFailure);
+
+    case 'Some':
+      return result;
+  }
+}
+
+var $pF3E$export$recover = $pF3E$var$recover;
+$pF3E$exports.recover = $pF3E$export$recover;
+
+function $pF3E$var$recoverLazy(result, whenFailuref) {
+  switch (result.kind) {
+    case 'None':
+      return $pF3E$var$some(whenFailuref());
+
+    case 'Some':
+      return result;
+  }
+}
+
+var $pF3E$export$recoverLazy = $pF3E$var$recoverLazy;
+$pF3E$exports.recoverLazy = $pF3E$export$recoverLazy;
+
+function $pF3E$var$combine(a, b) {
+  return $pF3E$var$mapN(a, b, function (a, b) {
+    return [a, b];
+  });
+}
+
+var $pF3E$export$combine = $pF3E$var$combine;
+$pF3E$exports.combine = $pF3E$export$combine;
+
+function $pF3E$var$spread(f, v) {
+  return $pF3E$var$map(v, function (t) {
+    return f(t[0], t[1]);
+  });
+}
+
+var $pF3E$export$spread = $pF3E$var$spread;
+$pF3E$exports.spread = $pF3E$export$spread; //# sourceMappingURL=option.js.map
+
+// ASSET: ../node_modules/tempo-std/lib/newtype.js
+var $fPXN$exports = {};
+Object.defineProperty($fPXN$exports, "__esModule", {
+  value: true
+});
+
+var $fPXN$var$NewtypeClass =
+/** @class */
+function () {
+  function NewtypeClass() {}
+
+  NewtypeClass.prototype.unsafeOf = function (v) {
+    return v;
+  };
+
+  NewtypeClass.prototype.of = function (v) {
+    return $pF3E$export$ofValue(this.maybeOf(v));
+  };
+
+  NewtypeClass.prototype.maybeOf = function (v) {
+    return this.isValid(v) ? v : undefined;
+  };
+
+  NewtypeClass.prototype.get = function (v) {
+    return v;
+  };
+
+  NewtypeClass.prototype.maybeModify = function (f) {
+    var _this = this;
+
+    return function (value) {
+      return _this.maybeOf(f(_this.get(value)));
+    };
+  };
+
+  NewtypeClass.prototype.modify = function (f) {
+    var mf = this.maybeModify(f);
+    return function (value) {
+      return $pF3E$export$ofValue(mf(value));
+    };
+  };
+
+  NewtypeClass.prototype.unsafeModify = function (f) {
+    var _this = this;
+
+    return function (value) {
+      return _this.unsafeOf(f(_this.get(value)));
+    };
+  };
+
+  return NewtypeClass;
+}();
+
+var $fPXN$export$NewtypeClass = $fPXN$var$NewtypeClass;
+$fPXN$exports.NewtypeClass = $fPXN$export$NewtypeClass; //# sourceMappingURL=newtype.js.map
+
+// ASSET: ../node_modules/tempo-std/lib/uuid.js
+var $MFoz$exports = {};
+
+var $MFoz$var$__extends = $MFoz$exports && $MFoz$exports.__extends || function () {
+  var extendStatics = function (d, b) {
+    extendStatics = Object.setPrototypeOf || {
+      __proto__: []
+    } instanceof Array && function (d, b) {
+      d.__proto__ = b;
+    } || function (d, b) {
+      for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    };
+
+    return extendStatics(d, b);
+  };
+
+  return function (d, b) {
+    extendStatics(d, b);
+
+    function __() {
+      this.constructor = d;
+    }
+
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+}();
+
+Object.defineProperty($MFoz$exports, "__esModule", {
+  value: true
+});
+/**
+ * Helper functions to generate and validate [UUID](http://en.wikipedia.org/wiki/Universally_unique_identifier)
+ * strings (version 4).
+ */
+
+var $MFoz$var$random = function (max) {
+  return Math.floor(Math.random() * max);
+};
+
+var $MFoz$var$srandom = function () {
+  return '0123456789abcdef'.charAt($MFoz$var$random(0x10));
+};
+/**
+ * `Uuid.create()` returns a string value representing a random UUID string.
+ */
+
+
+function $MFoz$var$create() {
+  var s = [];
+  var i = 0;
+
+  for (i = 0; i < 8; i++) s[i] = $MFoz$var$srandom();
+
+  s[8] = '-';
+
+  for (i = 9; i < 13; i++) s[i] = $MFoz$var$srandom();
+
+  s[13] = '-';
+  s[14] = '4';
+
+  for (i = 15; i < 18; i++) s[i] = $MFoz$var$srandom();
+
+  s[18] = '-';
+  s[19] = '89AB'.charAt($MFoz$var$random(0x3));
+
+  for (i = 20; i < 23; i++) s[i] = $MFoz$var$srandom();
+
+  s[23] = '-';
+
+  for (i = 24; i < 36; i++) s[i] = $MFoz$var$srandom();
+
+  return $MFoz$export$UUID.unsafeOf(s.join(''));
+}
+
+var $MFoz$export$create = $MFoz$var$create;
+$MFoz$exports.create = $MFoz$export$create;
+var $MFoz$var$pattern = /^[0123456789abcdef]{8}-[0123456789abcdef]{4}-4[0123456789abcdef]{3}-[89ab][0123456789abcdef]{3}-[0123456789abcdef]{12}$/i;
+var $MFoz$export$UUID = new (
+/** @class */
+function (_super) {
+  $MFoz$var$__extends(class_1, _super);
+
+  function class_1() {
+    return _super !== null && _super.apply(this, arguments) || this;
+  }
+
+  class_1.prototype.isValid = function (uuid) {
+    return $MFoz$var$pattern.test(uuid);
+  };
+
+  return class_1;
+}($fPXN$export$NewtypeClass))();
+$MFoz$exports.UUID = $MFoz$export$UUID;
+
+function $MFoz$var$toString(uuid) {
+  return $MFoz$export$UUID.get(uuid);
+}
+
+var $MFoz$export$toString = $MFoz$var$toString;
+$MFoz$exports.toString = $MFoz$export$toString; //# sourceMappingURL=uuid.js.map
+
+// ASSET: state.ts
+var $mIWh$export$Filter,
+    $mIWh$exports = {};
+/*
+Copyright 2019 Google LLC
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+    https://www.apache.org/licenses/LICENSE-2.0
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+
+Object.defineProperty($mIWh$exports, "__esModule", {
+  value: true
+});
+
+function $mIWh$var$makeUUID() {
+  return $MFoz$export$UUID.get($MFoz$export$create());
+}
+
+var $mIWh$var$Filter;
+
+(function (Filter) {
+  Filter[Filter["All"] = 0] = "All";
+  Filter[Filter["Active"] = 1] = "Active";
+  Filter[Filter["Completed"] = 2] = "Completed";
+})($mIWh$var$Filter = $mIWh$export$Filter || ($mIWh$export$Filter = {}, $mIWh$exports.Filter = $mIWh$export$Filter));
+
+var $mIWh$export$createTodo = function (title) {
+  return {
+    id: $mIWh$var$makeUUID(),
+    title: title,
+    completed: false
+  };
+};
+
+$mIWh$exports.createTodo = $mIWh$export$createTodo;
+
+var $mIWh$export$emptyState = function () {
+  return {
+    filter: $mIWh$var$Filter.All,
+    filtered: [],
+    todos: [],
+    completed: 0,
+    adding: undefined,
+    editing: undefined
+  };
+};
+
+$mIWh$exports.emptyState = $mIWh$export$emptyState;
 // ASSET: reducer.ts
 var $pSX2$exports = {};
 

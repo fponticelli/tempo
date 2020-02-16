@@ -54,6 +54,11 @@
       >
     </li>
     <li>
+      <a class="is-family-monospace" href="#/api/std/validation.html#match"
+        >match</a
+      >
+    </li>
+    <li>
       <a class="is-family-monospace" href="#/api/std/validation.html#ofNullable"
         >ofNullable</a
       >
@@ -98,58 +103,58 @@
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> apN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  f<span class="token operator">:</span> Validation<span class="token operator">&lt;</span>Fun2<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   a<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  b<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
+  b<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  f<span class="token operator">:</span> Validation<span class="token operator">&lt;</span>Fun2<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
 <span class="token punctuation">)</span><span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
 </div></pre>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> apN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  f<span class="token operator">:</span> Validation<span class="token operator">&lt;</span>Fun3<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   a<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   b<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  c<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
+  c<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  f<span class="token operator">:</span> Validation<span class="token operator">&lt;</span>Fun3<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
 <span class="token punctuation">)</span><span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
 </div></pre>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> apN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  f<span class="token operator">:</span> Validation<span class="token operator">&lt;</span>Fun4<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   a<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   b<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   c<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  d<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
+  d<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  f<span class="token operator">:</span> Validation<span class="token operator">&lt;</span>Fun4<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
 <span class="token punctuation">)</span><span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
 </div></pre>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> apN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  f<span class="token operator">:</span> Validation<span class="token operator">&lt;</span>Fun5<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  a<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  b<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  c<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  d<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  e<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
-<span class="token punctuation">)</span><span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">F</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
-</div></pre>
-<pre
-  class="ts language-ts signature"
-><div><span class="token keyword">function</span> apN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token punctuation">,</span> <span class="token constant">G</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  f<span class="token operator">:</span> Validation<span class="token operator">&lt;</span>Fun6<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token punctuation">,</span> <span class="token constant">G</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   a<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   b<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   c<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   d<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   e<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  g<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">F</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
+  f<span class="token operator">:</span> Validation<span class="token operator">&lt;</span>Fun5<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">F</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
+</div></pre>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">function</span> apN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token punctuation">,</span> <span class="token constant">G</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  a<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  b<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  c<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  d<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  e<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  g<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">F</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  f<span class="token operator">:</span> Validation<span class="token operator">&lt;</span>Fun6<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token punctuation">,</span> <span class="token constant">G</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
 <span class="token punctuation">)</span><span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">G</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
 </div></pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/validation.ts#L34"
-    >std/src/validation.ts at line 34</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/validation.ts#L42"
+    >std/src/validation.ts at line 42</a
   >
 </p>
 <pre
@@ -201,16 +206,16 @@
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> filter<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  result<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
   <span class="token function-variable function">predicate</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">v<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">boolean</span><span class="token punctuation">,</span>
-  error<span class="token operator">:</span> <span class="token constant">E</span><span class="token punctuation">,</span>
-  result<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span>
+  error<span class="token operator">:</span> <span class="token constant">E</span>
 <span class="token punctuation">)</span><span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span>
 </div></pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/validation.ts#L104"
-    >std/src/validation.ts at line 104</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/validation.ts#L173"
+    >std/src/validation.ts at line 173</a
   >
 </p>
 <pre
@@ -225,16 +230,16 @@
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> filterLazy<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  result<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
   <span class="token function-variable function">predicate</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">v<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">boolean</span><span class="token punctuation">,</span>
-  <span class="token function-variable function">errorf</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">E</span><span class="token punctuation">,</span>
-  result<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span>
+  <span class="token function-variable function">errorf</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">E</span>
 <span class="token punctuation">)</span><span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span>
 </div></pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/validation.ts#L116"
-    >std/src/validation.ts at line 116</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/validation.ts#L185"
+    >std/src/validation.ts at line 185</a
   >
 </p>
 <pre
@@ -248,58 +253,58 @@
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> flatMapN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  f<span class="token operator">:</span> Fun2<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> Validation<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;&gt;</span><span class="token punctuation">,</span>
   a<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  b<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
+  b<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  f<span class="token operator">:</span> Fun2<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> Validation<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;&gt;</span>
 <span class="token punctuation">)</span><span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
 </div></pre>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> flatMapN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  f<span class="token operator">:</span> Fun3<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> Validation<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;&gt;</span><span class="token punctuation">,</span>
   a<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   b<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  c<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
+  c<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  f<span class="token operator">:</span> Fun3<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> Validation<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;&gt;</span>
 <span class="token punctuation">)</span><span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
 </div></pre>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> flatMapN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  f<span class="token operator">:</span> Fun4<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> Validation<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;&gt;</span><span class="token punctuation">,</span>
   a<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   b<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   c<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  d<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
+  d<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  f<span class="token operator">:</span> Fun4<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> Validation<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;&gt;</span>
 <span class="token punctuation">)</span><span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
 </div></pre>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> flatMapN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  f<span class="token operator">:</span> Fun5<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> Validation<span class="token operator">&lt;</span><span class="token constant">F</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;&gt;</span><span class="token punctuation">,</span>
-  a<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  b<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  c<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  d<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  e<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
-<span class="token punctuation">)</span><span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">F</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
-</div></pre>
-<pre
-  class="ts language-ts signature"
-><div><span class="token keyword">function</span> flatMapN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token punctuation">,</span> <span class="token constant">G</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  f<span class="token operator">:</span> Fun6<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token punctuation">,</span> Validation<span class="token operator">&lt;</span><span class="token constant">G</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;&gt;</span><span class="token punctuation">,</span>
   a<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   b<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   c<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   d<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   e<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  g<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">F</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
+  f<span class="token operator">:</span> Fun5<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> Validation<span class="token operator">&lt;</span><span class="token constant">F</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;&gt;</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">F</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
+</div></pre>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">function</span> flatMapN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token punctuation">,</span> <span class="token constant">G</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  a<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  b<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  c<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  d<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  e<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  g<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">F</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  f<span class="token operator">:</span> Fun6<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token punctuation">,</span> Validation<span class="token operator">&lt;</span><span class="token constant">G</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;&gt;</span>
 <span class="token punctuation">)</span><span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">G</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
 </div></pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/validation.ts#L81"
-    >std/src/validation.ts at line 81</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/validation.ts#L131"
+    >std/src/validation.ts at line 131</a
   >
 </p>
 <pre
@@ -319,8 +324,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/validation.ts#L128"
-    >std/src/validation.ts at line 128</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/validation.ts#L197"
+    >std/src/validation.ts at line 197</a
   >
 </p>
 <pre
@@ -334,15 +339,15 @@
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> mapError<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">E1</span><span class="token punctuation">,</span> <span class="token constant">E2</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  <span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">e<span class="token operator">:</span> <span class="token constant">E1</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">E2</span><span class="token punctuation">,</span>
-  result<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">E1</span><span class="token operator">&gt;</span>
+  result<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">E1</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  <span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">e<span class="token operator">:</span> <span class="token constant">E1</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">E2</span>
 <span class="token punctuation">)</span><span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">E2</span><span class="token operator">&gt;</span>
 </div></pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/validation.ts#L54"
-    >std/src/validation.ts at line 54</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/validation.ts#L84"
+    >std/src/validation.ts at line 84</a
   >
 </p>
 <pre
@@ -356,63 +361,86 @@
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> mapN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  f<span class="token operator">:</span> Fun2<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
   a<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  b<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
+  b<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  f<span class="token operator">:</span> Fun2<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token operator">&gt;</span>
 <span class="token punctuation">)</span><span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
 </div></pre>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> mapN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  f<span class="token operator">:</span> Fun3<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
   a<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   b<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  c<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
+  c<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  f<span class="token operator">:</span> Fun3<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token operator">&gt;</span>
 <span class="token punctuation">)</span><span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
 </div></pre>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> mapN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  f<span class="token operator">:</span> Fun4<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
   a<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   b<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   c<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  d<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
+  d<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  f<span class="token operator">:</span> Fun4<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span>
 <span class="token punctuation">)</span><span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
 </div></pre>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> mapN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  f<span class="token operator">:</span> Fun5<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  a<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  b<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  c<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  d<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  e<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
-<span class="token punctuation">)</span><span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">F</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
-</div></pre>
-<pre
-  class="ts language-ts signature"
-><div><span class="token keyword">function</span> mapN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token punctuation">,</span> <span class="token constant">G</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  f<span class="token operator">:</span> Fun6<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token punctuation">,</span> <span class="token constant">G</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
   a<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   b<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   c<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   d<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   e<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  g<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">F</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
+  f<span class="token operator">:</span> Fun5<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token operator">&gt;</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">F</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
+</div></pre>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">function</span> mapN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token punctuation">,</span> <span class="token constant">G</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  a<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  b<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  c<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  d<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  e<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  g<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">F</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  f<span class="token operator">:</span> Fun6<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token punctuation">,</span> <span class="token constant">G</span><span class="token operator">&gt;</span>
 <span class="token punctuation">)</span><span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">G</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
 </div></pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/validation.ts#L61"
-    >std/src/validation.ts at line 61</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/validation.ts#L91"
+    >std/src/validation.ts at line 91</a
   >
 </p>
 <pre
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> mapN <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/validation.ts'</span></div></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="match">
+  match<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">function</span> match<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  value<span class="token operator">:</span> Validation<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  <span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">v<span class="token operator">:</span> <span class="token constant">A</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">B</span><span class="token punctuation">,</span>
+  <span class="token function-variable function">fErr</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">e<span class="token operator">:</span> Nel<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">B</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> <span class="token constant">B</span>
+</div></pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/validation.ts#L35"
+    >std/src/validation.ts at line 35</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> match <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/validation.ts'</span></div></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="ofNullable">
   ofNullable<span
     class="kind is-family-sans-serif has-text-grey-light is-size-6"
@@ -429,8 +457,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/validation.ts#L30"
-    >std/src/validation.ts at line 30</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/validation.ts#L31"
+    >std/src/validation.ts at line 31</a
   >
 </p>
 <pre
@@ -451,8 +479,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/validation.ts#L135"
-    >std/src/validation.ts at line 135</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/validation.ts#L205"
+    >std/src/validation.ts at line 205</a
   >
 </p>
 <pre
@@ -474,8 +502,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/validation.ts#L142"
-    >std/src/validation.ts at line 142</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/validation.ts#L212"
+    >std/src/validation.ts at line 212</a
   >
 </p>
 <pre
@@ -512,8 +540,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/validation.ts#L149"
-    >std/src/validation.ts at line 149</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/validation.ts#L219"
+    >std/src/validation.ts at line 219</a
   >
 </p>
 <pre
@@ -531,8 +559,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/validation.ts#L156"
-    >std/src/validation.ts at line 156</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/validation.ts#L226"
+    >std/src/validation.ts at line 226</a
   >
 </p>
 <pre

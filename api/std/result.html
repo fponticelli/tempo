@@ -151,6 +151,11 @@
       >
     </li>
     <li>
+      <a class="is-family-monospace" href="#/api/std/result.html#match"
+        >match</a
+      >
+    </li>
+    <li>
       <a class="is-family-monospace" href="#/api/std/result.html#ofNullable"
         >ofNullable</a
       >
@@ -178,13 +183,13 @@
       >
     </li>
     <li>
-      <a class="is-family-monospace" href="#/api/std/result.html#success"
-        >success</a
+      <a class="is-family-monospace" href="#/api/std/result.html#Success"
+        >Success</a
       >
     </li>
     <li>
-      <a class="is-family-monospace" href="#/api/std/result.html#Success"
-        >Success</a
+      <a class="is-family-monospace" href="#/api/std/result.html#success"
+        >success</a
       >
     </li>
     <li>
@@ -225,8 +230,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L507"
-    >std/src/result.ts at line 507</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L514"
+    >std/src/result.ts at line 514</a
   >
 </p>
 <pre
@@ -244,8 +249,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L514"
-    >std/src/result.ts at line 514</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L521"
+    >std/src/result.ts at line 521</a
   >
 </p>
 <pre
@@ -421,8 +426,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L486"
-    >std/src/result.ts at line 486</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L493"
+    >std/src/result.ts at line 493</a
   >
 </p>
 <pre
@@ -444,8 +449,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L493"
-    >std/src/result.ts at line 493</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L500"
+    >std/src/result.ts at line 500</a
   >
 </p>
 <pre
@@ -466,8 +471,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L560"
-    >std/src/result.ts at line 560</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L567"
+    >std/src/result.ts at line 567</a
   >
 </p>
 <pre
@@ -485,8 +490,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L521"
-    >std/src/result.ts at line 521</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L528"
+    >std/src/result.ts at line 528</a
   >
 </p>
 <pre
@@ -613,8 +618,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L528"
-    >std/src/result.ts at line 528</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L535"
+    >std/src/result.ts at line 535</a
   >
 </p>
 <pre
@@ -813,8 +818,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L500"
-    >std/src/result.ts at line 500</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L507"
+    >std/src/result.ts at line 507</a
   >
 </p>
 <pre
@@ -1135,6 +1140,29 @@
 <pre
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> mapNWithCombine <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/result.ts'</span></div></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="match">
+  match<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">function</span> match<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  result<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  <span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token constant">A</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">B</span><span class="token punctuation">,</span>
+  <span class="token function-variable function">fErr</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">e<span class="token operator">:</span> Err</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">B</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> <span class="token constant">B</span>
+</div></pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L486"
+    >std/src/result.ts at line 486</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> match <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/result.ts'</span></div></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="ofNullable">
   ofNullable<span
     class="kind is-family-sans-serif has-text-grey-light is-size-6"
@@ -1167,8 +1195,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L539"
-    >std/src/result.ts at line 539</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L546"
+    >std/src/result.ts at line 546</a
   >
 </p>
 <pre
@@ -1190,8 +1218,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L546"
-    >std/src/result.ts at line 546</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L553"
+    >std/src/result.ts at line 553</a
   >
 </p>
 <pre
@@ -1231,32 +1259,13 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L565"
-    >std/src/result.ts at line 565</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L572"
+    >std/src/result.ts at line 572</a
   >
 </p>
 <pre
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> spread <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/result.ts'</span></div></pre>
-<h3 class="is-family-monospace has-text-grey-dark" id="success">
-  success<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
-    >function</span
-  >
-</h3>
-<pre
-  class="ts language-ts signature"
-><div><span class="token keyword">function</span> success<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>value<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">)</span><span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span>
-</div></pre>
-<p class="defined-in">
-  defined in
-  <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L26"
-    >std/src/result.ts at line 26</a
-  >
-</p>
-<pre
-  class="import-code ts language-ts"
-><div><span class="token keyword">import</span> <span class="token punctuation">{</span> success <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/result.ts'</span></div></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="Success">
   Success<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
     >type alias</span
@@ -1276,6 +1285,25 @@
 <pre
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> Success <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/result.ts'</span></div></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="success">
+  success<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">function</span> success<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>value<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">)</span><span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span>
+</div></pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L26"
+    >std/src/result.ts at line 26</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> success <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/result.ts'</span></div></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="swap">
   swap<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
     >function</span
@@ -1288,8 +1316,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L553"
-    >std/src/result.ts at line 553</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L560"
+    >std/src/result.ts at line 560</a
   >
 </p>
 <pre
@@ -1307,8 +1335,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L569"
-    >std/src/result.ts at line 569</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L576"
+    >std/src/result.ts at line 576</a
   >
 </p>
 <pre
