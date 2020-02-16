@@ -11,7 +11,11 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { Utils } from './utils'
+import { create, UUID } from 'tempo-std/lib/uuid'
+
+function makeUUID() {
+  return UUID.get(create())
+}
 
 export enum Filter {
   All,
@@ -40,7 +44,7 @@ export interface Todo {
 }
 
 export const createTodo = (title: string): Todo => ({
-  id: Utils.uuid(),
+  id: makeUUID(),
   title,
   completed: false
 })
