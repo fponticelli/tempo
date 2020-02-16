@@ -60,11 +60,11 @@
   <span class="token constant">T</span> <span class="token keyword">extends</span> <span class="token class-name">ObjectWithPath</span><span class="token operator">&lt;</span>Path<span class="token punctuation">,</span> <span class="token builtin">any</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
   <span class="token constant">B</span>
 <span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  input<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">,</span>
   path<span class="token operator">:</span> Path<span class="token punctuation">,</span>
   matcher<span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token punctuation">[</span>k <span class="token keyword">in</span> TypeAtPath<span class="token operator">&lt;</span>Path<span class="token punctuation">,</span> <span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">]</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">arg<span class="token operator">:</span> DifferentiateAt<span class="token operator">&lt;</span>Path<span class="token punctuation">,</span> <span class="token constant">T</span><span class="token punctuation">,</span> k<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">B</span>
-  <span class="token punctuation">}</span><span class="token punctuation">,</span>
-  input<span class="token operator">:</span> <span class="token constant">T</span>
+  <span class="token punctuation">}</span>
 <span class="token punctuation">)</span><span class="token operator">:</span> <span class="token constant">B</span>
 </div></pre>
 <p class="defined-in">
@@ -85,9 +85,9 @@
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> match<span class="token operator">&lt;</span><span class="token constant">F</span> <span class="token keyword">extends</span> <span class="token class-name">IndexType</span><span class="token punctuation">,</span> <span class="token constant">T</span> <span class="token keyword">extends</span> <span class="token class-name">ObjectWithField</span><span class="token operator">&lt;</span><span class="token constant">F</span><span class="token punctuation">,</span> <span class="token builtin">any</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  input<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">,</span>
   field<span class="token operator">:</span> <span class="token constant">F</span><span class="token punctuation">,</span>
-  matcher<span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token punctuation">[</span>k <span class="token keyword">in</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token constant">F</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">arg<span class="token operator">:</span> Differentiate<span class="token operator">&lt;</span><span class="token constant">F</span><span class="token punctuation">,</span> <span class="token constant">T</span><span class="token punctuation">,</span> k<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">B</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
-  input<span class="token operator">:</span> <span class="token constant">T</span>
+  matcher<span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token punctuation">[</span>k <span class="token keyword">in</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token constant">F</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">arg<span class="token operator">:</span> Differentiate<span class="token operator">&lt;</span><span class="token constant">F</span><span class="token punctuation">,</span> <span class="token constant">T</span><span class="token punctuation">,</span> k<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">B</span> <span class="token punctuation">}</span>
 <span class="token punctuation">)</span><span class="token operator">:</span> <span class="token constant">B</span>
 </div></pre>
 <p class="defined-in">

@@ -153,13 +153,13 @@
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">function</span> all<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">P</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">v<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">boolean</span><span class="token punctuation">,</span> <span class="token keyword">async</span><span class="token operator">:</span> Async<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">P</span><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span>
+><div><span class="token keyword">function</span> all<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">P</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token keyword">async</span><span class="token operator">:</span> Async<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">P</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> <span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">v<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">boolean</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span>
 </div></pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/async.ts#L196"
-    >std/src/async.ts at line 196</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/async.ts#L243"
+    >std/src/async.ts at line 243</a
   >
 </p>
 <pre
@@ -172,13 +172,13 @@
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">function</span> <span class="token builtin">any</span><span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">P</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">v<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">boolean</span><span class="token punctuation">,</span> <span class="token keyword">async</span><span class="token operator">:</span> Async<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">P</span><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span>
+><div><span class="token keyword">function</span> <span class="token builtin">any</span><span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">P</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token keyword">async</span><span class="token operator">:</span> Async<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">P</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> <span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">v<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">boolean</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span>
 </div></pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/async.ts#L204"
-    >std/src/async.ts at line 204</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/async.ts#L251"
+    >std/src/async.ts at line 251</a
   >
 </p>
 <pre
@@ -211,16 +211,16 @@
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> cata<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  <span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token constant">A</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">B</span><span class="token punctuation">,</span>
   <span class="token keyword">async</span><span class="token operator">:</span> Async<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  <span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token constant">A</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">B</span><span class="token punctuation">,</span>
   ifNotOutcome<span class="token operator">:</span> <span class="token constant">B</span>
 <span class="token punctuation">)</span><span class="token operator">:</span> <span class="token constant">B</span>
 </div></pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/async.ts#L172"
-    >std/src/async.ts at line 172</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/async.ts#L219"
+    >std/src/async.ts at line 219</a
   >
 </p>
 <pre
@@ -234,16 +234,16 @@
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> cataLazy<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  <span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token constant">A</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">B</span><span class="token punctuation">,</span>
   <span class="token keyword">async</span><span class="token operator">:</span> Async<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  <span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token constant">A</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">B</span><span class="token punctuation">,</span>
   <span class="token function-variable function">ifNotOutcome</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">B</span>
 <span class="token punctuation">)</span><span class="token operator">:</span> <span class="token constant">B</span>
 </div></pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/async.ts#L180"
-    >std/src/async.ts at line 180</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/async.ts#L227"
+    >std/src/async.ts at line 227</a
   >
 </p>
 <pre
@@ -256,13 +256,13 @@
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">function</span> each<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">P</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">v<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span><span class="token punctuation">,</span> <span class="token keyword">async</span><span class="token operator">:</span> Async<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">P</span><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">void</span>
+><div><span class="token keyword">function</span> each<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">P</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token keyword">async</span><span class="token operator">:</span> Async<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">P</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> <span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">v<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">void</span>
 </div></pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/async.ts#L212"
-    >std/src/async.ts at line 212</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/async.ts#L259"
+    >std/src/async.ts at line 259</a
   >
 </p>
 <pre
@@ -281,8 +281,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/async.ts#L220"
-    >std/src/async.ts at line 220</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/async.ts#L267"
+    >std/src/async.ts at line 267</a
   >
 </p>
 <pre
@@ -296,15 +296,15 @@
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> flatMap<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  <span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token constant">A</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Async<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  <span class="token keyword">async</span><span class="token operator">:</span> Async<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span>
+  <span class="token keyword">async</span><span class="token operator">:</span> Async<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  <span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token constant">A</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Async<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span>
 <span class="token punctuation">)</span><span class="token operator">:</span> Async<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span>
 </div></pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/async.ts#L68"
-    >std/src/async.ts at line 68</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/async.ts#L95"
+    >std/src/async.ts at line 95</a
   >
 </p>
 <pre
@@ -318,58 +318,58 @@
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> flatMapN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  f<span class="token operator">:</span> Fun2<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> Async<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;&gt;</span><span class="token punctuation">,</span>
   a<span class="token operator">:</span> Async<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  b<span class="token operator">:</span> Async<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span>
+  b<span class="token operator">:</span> Async<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  f<span class="token operator">:</span> Fun2<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> Async<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;&gt;</span>
 <span class="token punctuation">)</span><span class="token operator">:</span> Async<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span>
 </div></pre>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> flatMapN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  f<span class="token operator">:</span> Fun3<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> Async<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;&gt;</span><span class="token punctuation">,</span>
   a<span class="token operator">:</span> Async<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   b<span class="token operator">:</span> Async<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  c<span class="token operator">:</span> Async<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span>
+  c<span class="token operator">:</span> Async<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  f<span class="token operator">:</span> Fun3<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> Async<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;&gt;</span>
 <span class="token punctuation">)</span><span class="token operator">:</span> Async<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span>
 </div></pre>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> flatMapN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  f<span class="token operator">:</span> Fun4<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> Async<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;&gt;</span><span class="token punctuation">,</span>
   a<span class="token operator">:</span> Async<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   b<span class="token operator">:</span> Async<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   c<span class="token operator">:</span> Async<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  d<span class="token operator">:</span> Async<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span>
+  d<span class="token operator">:</span> Async<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  f<span class="token operator">:</span> Fun4<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> Async<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;&gt;</span>
 <span class="token punctuation">)</span><span class="token operator">:</span> Async<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span>
 </div></pre>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> flatMapN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  f<span class="token operator">:</span> Fun5<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> Async<span class="token operator">&lt;</span><span class="token constant">F</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;&gt;</span><span class="token punctuation">,</span>
-  a<span class="token operator">:</span> Async<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  b<span class="token operator">:</span> Async<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  c<span class="token operator">:</span> Async<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  d<span class="token operator">:</span> Async<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  e<span class="token operator">:</span> Async<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span>
-<span class="token punctuation">)</span><span class="token operator">:</span> Async<span class="token operator">&lt;</span><span class="token constant">F</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span>
-</div></pre>
-<pre
-  class="ts language-ts signature"
-><div><span class="token keyword">function</span> flatMapN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token punctuation">,</span> <span class="token constant">G</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  f<span class="token operator">:</span> Fun6<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token punctuation">,</span> Async<span class="token operator">&lt;</span><span class="token constant">G</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;&gt;</span><span class="token punctuation">,</span>
   a<span class="token operator">:</span> Async<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   b<span class="token operator">:</span> Async<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   c<span class="token operator">:</span> Async<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   d<span class="token operator">:</span> Async<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   e<span class="token operator">:</span> Async<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  g<span class="token operator">:</span> Async<span class="token operator">&lt;</span><span class="token constant">F</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span>
+  f<span class="token operator">:</span> Fun5<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> Async<span class="token operator">&lt;</span><span class="token constant">F</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;&gt;</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> Async<span class="token operator">&lt;</span><span class="token constant">F</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span>
+</div></pre>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">function</span> flatMapN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token punctuation">,</span> <span class="token constant">G</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  a<span class="token operator">:</span> Async<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  b<span class="token operator">:</span> Async<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  c<span class="token operator">:</span> Async<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  d<span class="token operator">:</span> Async<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  e<span class="token operator">:</span> Async<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  g<span class="token operator">:</span> Async<span class="token operator">&lt;</span><span class="token constant">F</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  f<span class="token operator">:</span> Fun6<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token punctuation">,</span> Async<span class="token operator">&lt;</span><span class="token constant">G</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;&gt;</span>
 <span class="token punctuation">)</span><span class="token operator">:</span> Async<span class="token operator">&lt;</span><span class="token constant">G</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span>
 </div></pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/async.ts#L76"
-    >std/src/async.ts at line 76</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/async.ts#L103"
+    >std/src/async.ts at line 103</a
   >
 </p>
 <pre
@@ -387,8 +387,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/async.ts#L164"
-    >std/src/async.ts at line 164</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/async.ts#L211"
+    >std/src/async.ts at line 211</a
   >
 </p>
 <pre
@@ -402,16 +402,16 @@
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> foldLeft<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  <span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">acc<span class="token operator">:</span> <span class="token constant">B</span><span class="token punctuation">,</span> curr<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">B</span><span class="token punctuation">,</span>
   <span class="token keyword">async</span><span class="token operator">:</span> Async<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  <span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">acc<span class="token operator">:</span> <span class="token constant">B</span><span class="token punctuation">,</span> curr<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">B</span><span class="token punctuation">,</span>
   b<span class="token operator">:</span> <span class="token constant">B</span>
 <span class="token punctuation">)</span><span class="token operator">:</span> <span class="token constant">B</span>
 </div></pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/async.ts#L188"
-    >std/src/async.ts at line 188</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/async.ts#L235"
+    >std/src/async.ts at line 235</a
   >
 </p>
 <pre
@@ -429,8 +429,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/async.ts#L124"
-    >std/src/async.ts at line 124</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/async.ts#L171"
+    >std/src/async.ts at line 171</a
   >
 </p>
 <pre
@@ -449,8 +449,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/async.ts#L132"
-    >std/src/async.ts at line 132</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/async.ts#L179"
+    >std/src/async.ts at line 179</a
   >
 </p>
 <pre
@@ -469,8 +469,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/async.ts#L116"
-    >std/src/async.ts at line 116</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/async.ts#L163"
+    >std/src/async.ts at line 163</a
   >
 </p>
 <pre
@@ -488,8 +488,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/async.ts#L108"
-    >std/src/async.ts at line 108</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/async.ts#L155"
+    >std/src/async.ts at line 155</a
   >
 </p>
 <pre
@@ -508,8 +508,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/async.ts#L112"
-    >std/src/async.ts at line 112</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/async.ts#L159"
+    >std/src/async.ts at line 159</a
   >
 </p>
 <pre
@@ -527,8 +527,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/async.ts#L104"
-    >std/src/async.ts at line 104</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/async.ts#L151"
+    >std/src/async.ts at line 151</a
   >
 </p>
 <pre
@@ -579,7 +579,7 @@
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">function</span> map<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">P</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token constant">A</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token keyword">async</span><span class="token operator">:</span> Async<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">P</span><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> Async<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">P</span><span class="token operator">&gt;</span>
+><div><span class="token keyword">function</span> map<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">P</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token keyword">async</span><span class="token operator">:</span> Async<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">P</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> <span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token constant">A</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">B</span><span class="token punctuation">)</span><span class="token operator">:</span> Async<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">P</span><span class="token operator">&gt;</span>
 </div></pre>
 <p class="defined-in">
   defined in
@@ -600,8 +600,8 @@
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> mapLoading<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">E1</span><span class="token punctuation">,</span> <span class="token constant">E2</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  <span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">e<span class="token operator">:</span> <span class="token constant">E1</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">E2</span><span class="token punctuation">,</span>
-  <span class="token keyword">async</span><span class="token operator">:</span> Async<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">E1</span><span class="token operator">&gt;</span>
+  <span class="token keyword">async</span><span class="token operator">:</span> Async<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">E1</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  <span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">e<span class="token operator">:</span> <span class="token constant">E1</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">E2</span>
 <span class="token punctuation">)</span><span class="token operator">:</span> Async<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">E2</span><span class="token operator">&gt;</span>
 </div></pre>
 <p class="defined-in">
@@ -622,51 +622,51 @@
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> mapN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  f<span class="token operator">:</span> Fun2<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
   a<span class="token operator">:</span> Async<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  b<span class="token operator">:</span> Async<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span>
+  b<span class="token operator">:</span> Async<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  f<span class="token operator">:</span> Fun2<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token operator">&gt;</span>
 <span class="token punctuation">)</span><span class="token operator">:</span> Async<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span>
 </div></pre>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> mapN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  f<span class="token operator">:</span> Fun3<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
   a<span class="token operator">:</span> Async<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   b<span class="token operator">:</span> Async<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  c<span class="token operator">:</span> Async<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span>
+  c<span class="token operator">:</span> Async<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  f<span class="token operator">:</span> Fun3<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token operator">&gt;</span>
 <span class="token punctuation">)</span><span class="token operator">:</span> Async<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span>
 </div></pre>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> mapN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  f<span class="token operator">:</span> Fun4<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
   a<span class="token operator">:</span> Async<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   b<span class="token operator">:</span> Async<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   c<span class="token operator">:</span> Async<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  d<span class="token operator">:</span> Async<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span>
+  d<span class="token operator">:</span> Async<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  f<span class="token operator">:</span> Fun4<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span>
 <span class="token punctuation">)</span><span class="token operator">:</span> Async<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span>
 </div></pre>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> mapN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  f<span class="token operator">:</span> Fun5<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  a<span class="token operator">:</span> Async<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  b<span class="token operator">:</span> Async<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  c<span class="token operator">:</span> Async<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  d<span class="token operator">:</span> Async<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  e<span class="token operator">:</span> Async<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span>
-<span class="token punctuation">)</span><span class="token operator">:</span> Async<span class="token operator">&lt;</span><span class="token constant">F</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span>
-</div></pre>
-<pre
-  class="ts language-ts signature"
-><div><span class="token keyword">function</span> mapN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token punctuation">,</span> <span class="token constant">G</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  f<span class="token operator">:</span> Fun6<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token punctuation">,</span> <span class="token constant">G</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
   a<span class="token operator">:</span> Async<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   b<span class="token operator">:</span> Async<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   c<span class="token operator">:</span> Async<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   d<span class="token operator">:</span> Async<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   e<span class="token operator">:</span> Async<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  g<span class="token operator">:</span> Async<span class="token operator">&lt;</span><span class="token constant">F</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span>
+  f<span class="token operator">:</span> Fun5<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token operator">&gt;</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> Async<span class="token operator">&lt;</span><span class="token constant">F</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span>
+</div></pre>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">function</span> mapN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token punctuation">,</span> <span class="token constant">G</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  a<span class="token operator">:</span> Async<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  b<span class="token operator">:</span> Async<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  c<span class="token operator">:</span> Async<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  d<span class="token operator">:</span> Async<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  e<span class="token operator">:</span> Async<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  g<span class="token operator">:</span> Async<span class="token operator">&lt;</span><span class="token constant">F</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  f<span class="token operator">:</span> Fun6<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token punctuation">,</span> <span class="token constant">G</span><span class="token operator">&gt;</span>
 <span class="token punctuation">)</span><span class="token operator">:</span> Async<span class="token operator">&lt;</span><span class="token constant">G</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span>
 </div></pre>
 <p class="defined-in">
@@ -766,8 +766,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/async.ts#L231"
-    >std/src/async.ts at line 231</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/async.ts#L278"
+    >std/src/async.ts at line 278</a
   >
 </p>
 <pre
@@ -785,8 +785,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/async.ts#L239"
-    >std/src/async.ts at line 239</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/async.ts#L286"
+    >std/src/async.ts at line 286</a
   >
 </p>
 <pre
@@ -804,8 +804,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/async.ts#L140"
-    >std/src/async.ts at line 140</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/async.ts#L187"
+    >std/src/async.ts at line 187</a
   >
 </p>
 <pre
@@ -823,8 +823,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/async.ts#L148"
-    >std/src/async.ts at line 148</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/async.ts#L195"
+    >std/src/async.ts at line 195</a
   >
 </p>
 <pre
@@ -842,8 +842,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/async.ts#L156"
-    >std/src/async.ts at line 156</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/async.ts#L203"
+    >std/src/async.ts at line 203</a
   >
 </p>
 <pre

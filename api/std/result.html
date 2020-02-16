@@ -128,6 +128,11 @@
       >
     </li>
     <li>
+      <a class="is-family-monospace" href="#/api/std/result.html#makeEquals"
+        >makeEquals</a
+      >
+    </li>
+    <li>
       <a class="is-family-monospace" href="#/api/std/result.html#map">map</a>
     </li>
     <li>
@@ -215,13 +220,13 @@
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">function</span> all<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">v<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">boolean</span><span class="token punctuation">,</span> result<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span>
+><div><span class="token keyword">function</span> all<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>result<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> <span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">v<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">boolean</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span>
 </div></pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L382"
-    >std/src/result.ts at line 382</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L507"
+    >std/src/result.ts at line 507</a
   >
 </p>
 <pre
@@ -234,13 +239,13 @@
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">function</span> <span class="token builtin">any</span><span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">v<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">boolean</span><span class="token punctuation">,</span> result<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span>
+><div><span class="token keyword">function</span> <span class="token builtin">any</span><span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>result<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> <span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">v<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">boolean</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span>
 </div></pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L389"
-    >std/src/result.ts at line 389</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L514"
+    >std/src/result.ts at line 514</a
   >
 </p>
 <pre
@@ -254,8 +259,8 @@
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> ap<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  resultf<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token constant">A</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  result<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
+  result<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  resultf<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token constant">A</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
 <span class="token punctuation">)</span><span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
 </div></pre>
 <p class="defined-in">
@@ -276,51 +281,51 @@
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> apN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  f<span class="token operator">:</span> Result<span class="token operator">&lt;</span>Fun2<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   a<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  b<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
+  b<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  f<span class="token operator">:</span> Result<span class="token operator">&lt;</span>Fun2<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
 <span class="token punctuation">)</span><span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
 </div></pre>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> apN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  f<span class="token operator">:</span> Result<span class="token operator">&lt;</span>Fun3<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   a<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   b<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  c<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
+  c<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  f<span class="token operator">:</span> Result<span class="token operator">&lt;</span>Fun3<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
 <span class="token punctuation">)</span><span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
 </div></pre>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> apN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  f<span class="token operator">:</span> Result<span class="token operator">&lt;</span>Fun4<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   a<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   b<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   c<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  d<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
+  d<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  f<span class="token operator">:</span> Result<span class="token operator">&lt;</span>Fun4<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
 <span class="token punctuation">)</span><span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
 </div></pre>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> apN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  f<span class="token operator">:</span> Result<span class="token operator">&lt;</span>Fun5<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  a<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  b<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  c<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  d<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  e<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
-<span class="token punctuation">)</span><span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">F</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
-</div></pre>
-<pre
-  class="ts language-ts signature"
-><div><span class="token keyword">function</span> apN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token punctuation">,</span> <span class="token constant">G</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  f<span class="token operator">:</span> Result<span class="token operator">&lt;</span>Fun6<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token punctuation">,</span> <span class="token constant">G</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   a<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   b<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   c<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   d<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   e<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  g<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">F</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
+  f<span class="token operator">:</span> Result<span class="token operator">&lt;</span>Fun5<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">F</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
+</div></pre>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">function</span> apN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token punctuation">,</span> <span class="token constant">G</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  a<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  b<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  c<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  d<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  e<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  g<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">F</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  f<span class="token operator">:</span> Result<span class="token operator">&lt;</span>Fun6<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token punctuation">,</span> <span class="token constant">G</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
 <span class="token punctuation">)</span><span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">G</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
 </div></pre>
 <p class="defined-in">
@@ -342,63 +347,63 @@
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> apNWithCombine<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  f<span class="token operator">:</span> Result<span class="token operator">&lt;</span>Fun2<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  <span class="token function-variable function">combineErrors</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">e1<span class="token operator">:</span> Err<span class="token punctuation">,</span> e2<span class="token operator">:</span> Err</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Err<span class="token punctuation">,</span>
   a<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  b<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
+  b<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  f<span class="token operator">:</span> Result<span class="token operator">&lt;</span>Fun2<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  <span class="token function-variable function">combineErrors</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">e1<span class="token operator">:</span> Err<span class="token punctuation">,</span> e2<span class="token operator">:</span> Err</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Err
 <span class="token punctuation">)</span><span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
 </div></pre>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> apNWithCombine<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  f<span class="token operator">:</span> Result<span class="token operator">&lt;</span>Fun3<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  <span class="token function-variable function">combineErrors</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">e1<span class="token operator">:</span> Err<span class="token punctuation">,</span> e2<span class="token operator">:</span> Err</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Err<span class="token punctuation">,</span>
   a<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   b<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  c<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
+  c<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  f<span class="token operator">:</span> Result<span class="token operator">&lt;</span>Fun3<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  <span class="token function-variable function">combineErrors</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">e1<span class="token operator">:</span> Err<span class="token punctuation">,</span> e2<span class="token operator">:</span> Err</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Err
 <span class="token punctuation">)</span><span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
 </div></pre>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> apNWithCombine<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  f<span class="token operator">:</span> Result<span class="token operator">&lt;</span>Fun4<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  <span class="token function-variable function">combineErrors</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">e1<span class="token operator">:</span> Err<span class="token punctuation">,</span> e2<span class="token operator">:</span> Err</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Err<span class="token punctuation">,</span>
   a<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   b<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   c<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  d<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
+  d<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  f<span class="token operator">:</span> Result<span class="token operator">&lt;</span>Fun4<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  <span class="token function-variable function">combineErrors</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">e1<span class="token operator">:</span> Err<span class="token punctuation">,</span> e2<span class="token operator">:</span> Err</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Err
 <span class="token punctuation">)</span><span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
 </div></pre>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> apNWithCombine<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  f<span class="token operator">:</span> Result<span class="token operator">&lt;</span>Fun5<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  <span class="token function-variable function">combineErrors</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">e1<span class="token operator">:</span> Err<span class="token punctuation">,</span> e2<span class="token operator">:</span> Err</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Err<span class="token punctuation">,</span>
-  a<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  b<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  c<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  d<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  e<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
-<span class="token punctuation">)</span><span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">F</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
-</div></pre>
-<pre
-  class="ts language-ts signature"
-><div><span class="token keyword">function</span> apNWithCombine<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token punctuation">,</span> <span class="token constant">G</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  f<span class="token operator">:</span> Result<span class="token operator">&lt;</span>Fun6<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token punctuation">,</span> <span class="token constant">G</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  <span class="token function-variable function">combineErrors</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">e1<span class="token operator">:</span> Err<span class="token punctuation">,</span> e2<span class="token operator">:</span> Err</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Err<span class="token punctuation">,</span>
   a<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   b<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   c<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   d<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   e<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  g<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">F</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
+  f<span class="token operator">:</span> Result<span class="token operator">&lt;</span>Fun5<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  <span class="token function-variable function">combineErrors</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">e1<span class="token operator">:</span> Err<span class="token punctuation">,</span> e2<span class="token operator">:</span> Err</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Err
+<span class="token punctuation">)</span><span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">F</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
+</div></pre>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">function</span> apNWithCombine<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token punctuation">,</span> <span class="token constant">G</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  a<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  b<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  c<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  d<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  e<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  g<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">F</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  f<span class="token operator">:</span> Result<span class="token operator">&lt;</span>Fun6<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token punctuation">,</span> <span class="token constant">G</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  <span class="token function-variable function">combineErrors</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">e1<span class="token operator">:</span> Err<span class="token punctuation">,</span> e2<span class="token operator">:</span> Err</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Err
 <span class="token punctuation">)</span><span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">G</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
 </div></pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L61"
-    >std/src/result.ts at line 61</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L86"
+    >std/src/result.ts at line 86</a
   >
 </p>
 <pre
@@ -411,13 +416,13 @@
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">function</span> cata<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token constant">A</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">B</span><span class="token punctuation">,</span> result<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span> ifNone<span class="token operator">:</span> <span class="token constant">B</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token constant">B</span>
+><div><span class="token keyword">function</span> cata<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">(</span>result<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span> <span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token constant">A</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">B</span><span class="token punctuation">,</span> ifNone<span class="token operator">:</span> <span class="token constant">B</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token constant">B</span>
 </div></pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L361"
-    >std/src/result.ts at line 361</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L486"
+    >std/src/result.ts at line 486</a
   >
 </p>
 <pre
@@ -431,16 +436,16 @@
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> cataLazy<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  <span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token constant">A</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">B</span><span class="token punctuation">,</span>
   result<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  <span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token constant">A</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">B</span><span class="token punctuation">,</span>
   <span class="token function-variable function">ifNone</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">B</span>
 <span class="token punctuation">)</span><span class="token operator">:</span> <span class="token constant">B</span>
 </div></pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L368"
-    >std/src/result.ts at line 368</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L493"
+    >std/src/result.ts at line 493</a
   >
 </p>
 <pre
@@ -461,8 +466,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L435"
-    >std/src/result.ts at line 435</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L560"
+    >std/src/result.ts at line 560</a
   >
 </p>
 <pre
@@ -475,13 +480,13 @@
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">function</span> each<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">v<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span><span class="token punctuation">,</span> result<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">void</span>
+><div><span class="token keyword">function</span> each<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>result<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> <span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">v<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">void</span>
 </div></pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L396"
-    >std/src/result.ts at line 396</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L521"
+    >std/src/result.ts at line 521</a
   >
 </p>
 <pre
@@ -495,16 +500,16 @@
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> equals<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  <span class="token function-variable function">predicate</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">,</span> b<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">boolean</span><span class="token punctuation">,</span>
   a<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  b<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span>
+  b<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  <span class="token function-variable function">predicate</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">,</span> b<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">boolean</span>
 <span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span>
 </div></pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L264"
-    >std/src/result.ts at line 264</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L379"
+    >std/src/result.ts at line 379</a
   >
 </p>
 <pre
@@ -556,16 +561,16 @@
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> filter<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  result<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
   <span class="token function-variable function">predicate</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">v<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">boolean</span><span class="token punctuation">,</span>
-  error<span class="token operator">:</span> <span class="token constant">E</span><span class="token punctuation">,</span>
-  result<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span>
+  error<span class="token operator">:</span> <span class="token constant">E</span>
 <span class="token punctuation">)</span><span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span>
 </div></pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L281"
-    >std/src/result.ts at line 281</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L406"
+    >std/src/result.ts at line 406</a
   >
 </p>
 <pre
@@ -580,16 +585,16 @@
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> filterLazy<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  result<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
   <span class="token function-variable function">predicate</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">v<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">boolean</span><span class="token punctuation">,</span>
-  <span class="token function-variable function">errorf</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">E</span><span class="token punctuation">,</span>
-  result<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span>
+  <span class="token function-variable function">errorf</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">E</span>
 <span class="token punctuation">)</span><span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span>
 </div></pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L293"
-    >std/src/result.ts at line 293</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L418"
+    >std/src/result.ts at line 418</a
   >
 </p>
 <pre
@@ -608,8 +613,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L403"
-    >std/src/result.ts at line 403</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L528"
+    >std/src/result.ts at line 528</a
   >
 </p>
 <pre
@@ -623,15 +628,15 @@
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> flatMap<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  <span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token constant">A</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Result<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  result<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
+  result<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  <span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token constant">A</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Result<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
 <span class="token punctuation">)</span><span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
 </div></pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L187"
-    >std/src/result.ts at line 187</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L280"
+    >std/src/result.ts at line 280</a
   >
 </p>
 <pre
@@ -645,58 +650,58 @@
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> flatMapN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  f<span class="token operator">:</span> Fun2<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> Result<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;&gt;</span><span class="token punctuation">,</span>
   a<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  b<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
+  b<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  f<span class="token operator">:</span> Fun2<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> Result<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;&gt;</span>
 <span class="token punctuation">)</span><span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
 </div></pre>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> flatMapN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  f<span class="token operator">:</span> Fun3<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> Result<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;&gt;</span><span class="token punctuation">,</span>
   a<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   b<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  c<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
+  c<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  f<span class="token operator">:</span> Fun3<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> Result<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;&gt;</span>
 <span class="token punctuation">)</span><span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
 </div></pre>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> flatMapN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  f<span class="token operator">:</span> Fun4<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> Result<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;&gt;</span><span class="token punctuation">,</span>
   a<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   b<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   c<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  d<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
+  d<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  f<span class="token operator">:</span> Fun4<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> Result<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;&gt;</span>
 <span class="token punctuation">)</span><span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
 </div></pre>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> flatMapN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  f<span class="token operator">:</span> Fun5<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> Result<span class="token operator">&lt;</span><span class="token constant">F</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;&gt;</span><span class="token punctuation">,</span>
-  a<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  b<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  c<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  d<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  e<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
-<span class="token punctuation">)</span><span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">F</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
-</div></pre>
-<pre
-  class="ts language-ts signature"
-><div><span class="token keyword">function</span> flatMapN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token punctuation">,</span> <span class="token constant">G</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  f<span class="token operator">:</span> Fun6<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token punctuation">,</span> Result<span class="token operator">&lt;</span><span class="token constant">G</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;&gt;</span><span class="token punctuation">,</span>
   a<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   b<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   c<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   d<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   e<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  g<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">F</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
+  f<span class="token operator">:</span> Fun5<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> Result<span class="token operator">&lt;</span><span class="token constant">F</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;&gt;</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">F</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
+</div></pre>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">function</span> flatMapN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token punctuation">,</span> <span class="token constant">G</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  a<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  b<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  c<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  d<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  e<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  g<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">F</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  f<span class="token operator">:</span> Fun6<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token punctuation">,</span> Result<span class="token operator">&lt;</span><span class="token constant">G</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;&gt;</span>
 <span class="token punctuation">)</span><span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">G</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
 </div></pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L194"
-    >std/src/result.ts at line 194</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L287"
+    >std/src/result.ts at line 287</a
   >
 </p>
 <pre
@@ -711,63 +716,63 @@
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> flatMapNWithCombine<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  f<span class="token operator">:</span> Fun2<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> Result<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;&gt;</span><span class="token punctuation">,</span>
-  <span class="token function-variable function">combineErrors</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">e1<span class="token operator">:</span> Err<span class="token punctuation">,</span> e2<span class="token operator">:</span> Err</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Err<span class="token punctuation">,</span>
   a<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  b<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
+  b<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  f<span class="token operator">:</span> Fun2<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> Result<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;&gt;</span><span class="token punctuation">,</span>
+  <span class="token function-variable function">combineErrors</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">e1<span class="token operator">:</span> Err<span class="token punctuation">,</span> e2<span class="token operator">:</span> Err</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Err
 <span class="token punctuation">)</span><span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
 </div></pre>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> flatMapNWithCombine<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  f<span class="token operator">:</span> Fun3<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> Result<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;&gt;</span><span class="token punctuation">,</span>
-  <span class="token function-variable function">combineErrors</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">e1<span class="token operator">:</span> Err<span class="token punctuation">,</span> e2<span class="token operator">:</span> Err</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Err<span class="token punctuation">,</span>
   a<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   b<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  c<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
+  c<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  f<span class="token operator">:</span> Fun3<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> Result<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;&gt;</span><span class="token punctuation">,</span>
+  <span class="token function-variable function">combineErrors</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">e1<span class="token operator">:</span> Err<span class="token punctuation">,</span> e2<span class="token operator">:</span> Err</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Err
 <span class="token punctuation">)</span><span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
 </div></pre>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> flatMapNWithCombine<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  f<span class="token operator">:</span> Fun4<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> Result<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;&gt;</span><span class="token punctuation">,</span>
-  <span class="token function-variable function">combineErrors</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">e1<span class="token operator">:</span> Err<span class="token punctuation">,</span> e2<span class="token operator">:</span> Err</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Err<span class="token punctuation">,</span>
   a<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   b<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   c<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  d<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
+  d<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  f<span class="token operator">:</span> Fun4<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> Result<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;&gt;</span><span class="token punctuation">,</span>
+  <span class="token function-variable function">combineErrors</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">e1<span class="token operator">:</span> Err<span class="token punctuation">,</span> e2<span class="token operator">:</span> Err</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Err
 <span class="token punctuation">)</span><span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
 </div></pre>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> flatMapNWithCombine<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  f<span class="token operator">:</span> Fun5<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> Result<span class="token operator">&lt;</span><span class="token constant">F</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;&gt;</span><span class="token punctuation">,</span>
-  <span class="token function-variable function">combineErrors</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">e1<span class="token operator">:</span> Err<span class="token punctuation">,</span> e2<span class="token operator">:</span> Err</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Err<span class="token punctuation">,</span>
-  a<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  b<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  c<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  d<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  e<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
-<span class="token punctuation">)</span><span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">F</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
-</div></pre>
-<pre
-  class="ts language-ts signature"
-><div><span class="token keyword">function</span> flatMapNWithCombine<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token punctuation">,</span> <span class="token constant">G</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  f<span class="token operator">:</span> Fun6<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token punctuation">,</span> Result<span class="token operator">&lt;</span><span class="token constant">G</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;&gt;</span><span class="token punctuation">,</span>
-  <span class="token function-variable function">combineErrors</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">e1<span class="token operator">:</span> Err<span class="token punctuation">,</span> e2<span class="token operator">:</span> Err</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Err<span class="token punctuation">,</span>
   a<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   b<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   c<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   d<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   e<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  g<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">F</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
+  f<span class="token operator">:</span> Fun5<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> Result<span class="token operator">&lt;</span><span class="token constant">F</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;&gt;</span><span class="token punctuation">,</span>
+  <span class="token function-variable function">combineErrors</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">e1<span class="token operator">:</span> Err<span class="token punctuation">,</span> e2<span class="token operator">:</span> Err</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Err
+<span class="token punctuation">)</span><span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">F</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
+</div></pre>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">function</span> flatMapNWithCombine<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token punctuation">,</span> <span class="token constant">G</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  a<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  b<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  c<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  d<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  e<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  g<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">F</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  f<span class="token operator">:</span> Fun6<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token punctuation">,</span> Result<span class="token operator">&lt;</span><span class="token constant">G</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;&gt;</span><span class="token punctuation">,</span>
+  <span class="token function-variable function">combineErrors</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">e1<span class="token operator">:</span> Err<span class="token punctuation">,</span> e2<span class="token operator">:</span> Err</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Err
 <span class="token punctuation">)</span><span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">G</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
 </div></pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L222"
-    >std/src/result.ts at line 222</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L326"
+    >std/src/result.ts at line 326</a
   >
 </p>
 <pre
@@ -785,8 +790,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L354"
-    >std/src/result.ts at line 354</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L479"
+    >std/src/result.ts at line 479</a
   >
 </p>
 <pre
@@ -800,16 +805,16 @@
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> foldLeft<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  <span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">acc<span class="token operator">:</span> <span class="token constant">B</span><span class="token punctuation">,</span> curr<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">B</span><span class="token punctuation">,</span>
   result<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  <span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">acc<span class="token operator">:</span> <span class="token constant">B</span><span class="token punctuation">,</span> curr<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">B</span><span class="token punctuation">,</span>
   b<span class="token operator">:</span> <span class="token constant">B</span>
 <span class="token punctuation">)</span><span class="token operator">:</span> <span class="token constant">B</span>
 </div></pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L375"
-    >std/src/result.ts at line 375</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L500"
+    >std/src/result.ts at line 500</a
   >
 </p>
 <pre
@@ -822,13 +827,13 @@
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">function</span> forEach<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token constant">A</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span><span class="token punctuation">,</span> result<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">void</span>
+><div><span class="token keyword">function</span> forEach<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">(</span>result<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span> <span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token constant">A</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">void</span>
 </div></pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L104"
-    >std/src/result.ts at line 104</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L150"
+    >std/src/result.ts at line 150</a
   >
 </p>
 <pre
@@ -846,8 +851,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L312"
-    >std/src/result.ts at line 312</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L437"
+    >std/src/result.ts at line 437</a
   >
 </p>
 <pre
@@ -866,8 +871,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L319"
-    >std/src/result.ts at line 319</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L444"
+    >std/src/result.ts at line 444</a
   >
 </p>
 <pre
@@ -886,8 +891,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L305"
-    >std/src/result.ts at line 305</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L430"
+    >std/src/result.ts at line 430</a
   >
 </p>
 <pre
@@ -905,8 +910,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L273"
-    >std/src/result.ts at line 273</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L398"
+    >std/src/result.ts at line 398</a
   >
 </p>
 <pre
@@ -924,13 +929,35 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L277"
-    >std/src/result.ts at line 277</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L402"
+    >std/src/result.ts at line 402</a
   >
 </p>
 <pre
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> isSuccess <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/result.ts'</span></div></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="makeEquals">
+  makeEquals<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">function</span> makeEquals<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  <span class="token function-variable function">predicate</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">,</span> b<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">boolean</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> b<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">boolean</span>
+</div></pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L392"
+    >std/src/result.ts at line 392</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> makeEquals <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/result.ts'</span></div></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="map">
   map<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
     >function</span
@@ -938,13 +965,13 @@
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">function</span> map<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token constant">A</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">B</span><span class="token punctuation">,</span> result<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
+><div><span class="token keyword">function</span> map<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">(</span>result<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span> <span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token constant">A</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">B</span><span class="token punctuation">)</span><span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
 </div></pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L111"
-    >std/src/result.ts at line 111</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L157"
+    >std/src/result.ts at line 157</a
   >
 </p>
 <pre
@@ -958,15 +985,15 @@
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> mapError<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">E1</span><span class="token punctuation">,</span> <span class="token constant">E2</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  <span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">e<span class="token operator">:</span> <span class="token constant">E1</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">E2</span><span class="token punctuation">,</span>
-  result<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">E1</span><span class="token operator">&gt;</span>
+  result<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">E1</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  <span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">e<span class="token operator">:</span> <span class="token constant">E1</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">E2</span>
 <span class="token punctuation">)</span><span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">E2</span><span class="token operator">&gt;</span>
 </div></pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L118"
-    >std/src/result.ts at line 118</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L164"
+    >std/src/result.ts at line 164</a
   >
 </p>
 <pre
@@ -980,58 +1007,58 @@
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> mapN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  f<span class="token operator">:</span> Fun2<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
   a<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  b<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
+  b<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  f<span class="token operator">:</span> Fun2<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token operator">&gt;</span>
 <span class="token punctuation">)</span><span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
 </div></pre>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> mapN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  f<span class="token operator">:</span> Fun3<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
   a<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   b<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  c<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
+  c<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  f<span class="token operator">:</span> Fun3<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token operator">&gt;</span>
 <span class="token punctuation">)</span><span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
 </div></pre>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> mapN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  f<span class="token operator">:</span> Fun4<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
   a<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   b<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   c<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  d<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
+  d<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  f<span class="token operator">:</span> Fun4<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span>
 <span class="token punctuation">)</span><span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
 </div></pre>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> mapN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  f<span class="token operator">:</span> Fun5<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  a<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  b<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  c<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  d<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  e<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
-<span class="token punctuation">)</span><span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">F</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
-</div></pre>
-<pre
-  class="ts language-ts signature"
-><div><span class="token keyword">function</span> mapN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token punctuation">,</span> <span class="token constant">G</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  f<span class="token operator">:</span> Fun6<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token punctuation">,</span> <span class="token constant">G</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
   a<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   b<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   c<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   d<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   e<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  g<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">F</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
+  f<span class="token operator">:</span> Fun5<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token operator">&gt;</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">F</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
+</div></pre>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">function</span> mapN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token punctuation">,</span> <span class="token constant">G</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  a<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  b<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  c<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  d<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  e<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  g<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">F</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  f<span class="token operator">:</span> Fun6<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token punctuation">,</span> <span class="token constant">G</span><span class="token operator">&gt;</span>
 <span class="token punctuation">)</span><span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">G</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
 </div></pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L125"
-    >std/src/result.ts at line 125</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L171"
+    >std/src/result.ts at line 171</a
   >
 </p>
 <pre
@@ -1046,63 +1073,63 @@
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> mapNWithCombine<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  f<span class="token operator">:</span> Fun2<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  <span class="token function-variable function">combineErrors</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">e1<span class="token operator">:</span> Err<span class="token punctuation">,</span> e2<span class="token operator">:</span> Err</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Err<span class="token punctuation">,</span>
   a<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  b<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
+  b<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  f<span class="token operator">:</span> Fun2<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  <span class="token function-variable function">combineErrors</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">e1<span class="token operator">:</span> Err<span class="token punctuation">,</span> e2<span class="token operator">:</span> Err</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Err
 <span class="token punctuation">)</span><span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
 </div></pre>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> mapNWithCombine<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  f<span class="token operator">:</span> Fun3<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  <span class="token function-variable function">combineErrors</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">e1<span class="token operator">:</span> Err<span class="token punctuation">,</span> e2<span class="token operator">:</span> Err</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Err<span class="token punctuation">,</span>
   a<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   b<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  c<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
+  c<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  f<span class="token operator">:</span> Fun3<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  <span class="token function-variable function">combineErrors</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">e1<span class="token operator">:</span> Err<span class="token punctuation">,</span> e2<span class="token operator">:</span> Err</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Err
 <span class="token punctuation">)</span><span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
 </div></pre>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> mapNWithCombine<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  f<span class="token operator">:</span> Fun4<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  <span class="token function-variable function">combineErrors</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">e1<span class="token operator">:</span> Err<span class="token punctuation">,</span> e2<span class="token operator">:</span> Err</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Err<span class="token punctuation">,</span>
   a<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   b<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   c<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  d<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
+  d<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  f<span class="token operator">:</span> Fun4<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  <span class="token function-variable function">combineErrors</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">e1<span class="token operator">:</span> Err<span class="token punctuation">,</span> e2<span class="token operator">:</span> Err</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Err
 <span class="token punctuation">)</span><span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
 </div></pre>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> mapNWithCombine<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  f<span class="token operator">:</span> Fun5<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  <span class="token function-variable function">combineErrors</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">e1<span class="token operator">:</span> Err<span class="token punctuation">,</span> e2<span class="token operator">:</span> Err</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Err<span class="token punctuation">,</span>
-  a<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  b<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  c<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  d<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  e<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
-<span class="token punctuation">)</span><span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">F</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
-</div></pre>
-<pre
-  class="ts language-ts signature"
-><div><span class="token keyword">function</span> mapNWithCombine<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token punctuation">,</span> <span class="token constant">G</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  f<span class="token operator">:</span> Fun6<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token punctuation">,</span> <span class="token constant">G</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  <span class="token function-variable function">combineErrors</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">e1<span class="token operator">:</span> Err<span class="token punctuation">,</span> e2<span class="token operator">:</span> Err</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Err<span class="token punctuation">,</span>
   a<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   b<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   c<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   d<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   e<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  g<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">F</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
+  f<span class="token operator">:</span> Fun5<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  <span class="token function-variable function">combineErrors</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">e1<span class="token operator">:</span> Err<span class="token punctuation">,</span> e2<span class="token operator">:</span> Err</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Err
+<span class="token punctuation">)</span><span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">F</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
+</div></pre>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">function</span> mapNWithCombine<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token punctuation">,</span> <span class="token constant">G</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  a<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  b<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  c<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  d<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  e<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  g<span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">F</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  f<span class="token operator">:</span> Fun6<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token punctuation">,</span> <span class="token constant">G</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  <span class="token function-variable function">combineErrors</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">e1<span class="token operator">:</span> Err<span class="token punctuation">,</span> e2<span class="token operator">:</span> Err</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Err
 <span class="token punctuation">)</span><span class="token operator">:</span> Result<span class="token operator">&lt;</span><span class="token constant">G</span><span class="token punctuation">,</span> Err<span class="token operator">&gt;</span>
 </div></pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L145"
-    >std/src/result.ts at line 145</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L218"
+    >std/src/result.ts at line 218</a
   >
 </p>
 <pre
@@ -1140,8 +1167,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L414"
-    >std/src/result.ts at line 414</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L539"
+    >std/src/result.ts at line 539</a
   >
 </p>
 <pre
@@ -1163,8 +1190,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L421"
-    >std/src/result.ts at line 421</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L546"
+    >std/src/result.ts at line 546</a
   >
 </p>
 <pre
@@ -1204,8 +1231,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L439"
-    >std/src/result.ts at line 439</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L565"
+    >std/src/result.ts at line 565</a
   >
 </p>
 <pre
@@ -1261,8 +1288,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L428"
-    >std/src/result.ts at line 428</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L553"
+    >std/src/result.ts at line 553</a
   >
 </p>
 <pre
@@ -1280,8 +1307,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L443"
-    >std/src/result.ts at line 443</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L569"
+    >std/src/result.ts at line 569</a
   >
 </p>
 <pre
@@ -1299,8 +1326,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L333"
-    >std/src/result.ts at line 333</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L458"
+    >std/src/result.ts at line 458</a
   >
 </p>
 <pre
@@ -1318,8 +1345,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L326"
-    >std/src/result.ts at line 326</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L451"
+    >std/src/result.ts at line 451</a
   >
 </p>
 <pre
@@ -1337,8 +1364,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L340"
-    >std/src/result.ts at line 340</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L465"
+    >std/src/result.ts at line 465</a
   >
 </p>
 <pre
@@ -1356,8 +1383,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L347"
-    >std/src/result.ts at line 347</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L472"
+    >std/src/result.ts at line 472</a
   >
 </p>
 <pre

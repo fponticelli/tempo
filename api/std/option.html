@@ -101,6 +101,11 @@
       >
     </li>
     <li>
+      <a class="is-family-monospace" href="#/api/std/option.html#makeEquals"
+        >makeEquals</a
+      >
+    </li>
+    <li>
       <a class="is-family-monospace" href="#/api/std/option.html#map">map</a>
     </li>
     <li>
@@ -133,10 +138,10 @@
       >
     </li>
     <li>
-      <a class="is-family-monospace" href="#/api/std/option.html#some">some</a>
+      <a class="is-family-monospace" href="#/api/std/option.html#Some">Some</a>
     </li>
     <li>
-      <a class="is-family-monospace" href="#/api/std/option.html#Some">Some</a>
+      <a class="is-family-monospace" href="#/api/std/option.html#some">some</a>
     </li>
     <li>
       <a class="is-family-monospace" href="#/api/std/option.html#spread"
@@ -183,8 +188,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L225"
-    >std/src/option.ts at line 225</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L317"
+    >std/src/option.ts at line 317</a
   >
 </p>
 <pre
@@ -202,8 +207,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L232"
-    >std/src/option.ts at line 232</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L324"
+    >std/src/option.ts at line 324</a
   >
 </p>
 <pre
@@ -216,7 +221,7 @@
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">function</span> ap<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>optf<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token constant">A</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> opt<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token operator">&gt;</span>
+><div><span class="token keyword">function</span> ap<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>opt<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> optf<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token constant">A</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token operator">&gt;</span>
 </div></pre>
 <p class="defined-in">
   defined in
@@ -236,51 +241,51 @@
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> apN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  f<span class="token operator">:</span> Option<span class="token operator">&lt;</span>Fun2<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token operator">&gt;&gt;</span><span class="token punctuation">,</span>
   a<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  b<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token operator">&gt;</span>
+  b<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  f<span class="token operator">:</span> Option<span class="token operator">&lt;</span>Fun2<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token operator">&gt;&gt;</span>
 <span class="token punctuation">)</span><span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token operator">&gt;</span>
 </div></pre>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> apN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  f<span class="token operator">:</span> Option<span class="token operator">&lt;</span>Fun3<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token operator">&gt;&gt;</span><span class="token punctuation">,</span>
   a<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
   b<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  c<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token operator">&gt;</span>
+  c<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  f<span class="token operator">:</span> Option<span class="token operator">&lt;</span>Fun3<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token operator">&gt;&gt;</span>
 <span class="token punctuation">)</span><span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token operator">&gt;</span>
 </div></pre>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> apN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  f<span class="token operator">:</span> Option<span class="token operator">&lt;</span>Fun4<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;&gt;</span><span class="token punctuation">,</span>
   a<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
   b<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
   c<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  d<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token operator">&gt;</span>
+  d<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  f<span class="token operator">:</span> Option<span class="token operator">&lt;</span>Fun4<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;&gt;</span>
 <span class="token punctuation">)</span><span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token operator">&gt;</span>
 </div></pre>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> apN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  f<span class="token operator">:</span> Option<span class="token operator">&lt;</span>Fun5<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token operator">&gt;&gt;</span><span class="token punctuation">,</span>
-  a<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  b<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  c<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  d<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  e<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token operator">&gt;</span>
-<span class="token punctuation">)</span><span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">F</span><span class="token operator">&gt;</span>
-</div></pre>
-<pre
-  class="ts language-ts signature"
-><div><span class="token keyword">function</span> apN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token punctuation">,</span> <span class="token constant">G</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  f<span class="token operator">:</span> Option<span class="token operator">&lt;</span>Fun6<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token punctuation">,</span> <span class="token constant">G</span><span class="token operator">&gt;&gt;</span><span class="token punctuation">,</span>
   a<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
   b<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
   c<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
   d<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
   e<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  g<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">F</span><span class="token operator">&gt;</span>
+  f<span class="token operator">:</span> Option<span class="token operator">&lt;</span>Fun5<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token operator">&gt;&gt;</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">F</span><span class="token operator">&gt;</span>
+</div></pre>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">function</span> apN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token punctuation">,</span> <span class="token constant">G</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  a<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  b<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  c<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  d<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  e<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  g<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">F</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  f<span class="token operator">:</span> Option<span class="token operator">&lt;</span>Fun6<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token punctuation">,</span> <span class="token constant">G</span><span class="token operator">&gt;&gt;</span>
 <span class="token punctuation">)</span><span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">G</span><span class="token operator">&gt;</span>
 </div></pre>
 <p class="defined-in">
@@ -305,8 +310,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L204"
-    >std/src/option.ts at line 204</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L295"
+    >std/src/option.ts at line 295</a
   >
 </p>
 <pre
@@ -324,8 +329,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L211"
-    >std/src/option.ts at line 211</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L302"
+    >std/src/option.ts at line 302</a
   >
 </p>
 <pre
@@ -343,8 +348,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L268"
-    >std/src/option.ts at line 268</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L360"
+    >std/src/option.ts at line 360</a
   >
 </p>
 <pre
@@ -362,8 +367,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L239"
-    >std/src/option.ts at line 239</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L331"
+    >std/src/option.ts at line 331</a
   >
 </p>
 <pre
@@ -377,16 +382,16 @@
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> equals<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  <span class="token function-variable function">predicate</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">,</span> b<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">boolean</span><span class="token punctuation">,</span>
   a<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  b<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span>
+  b<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  <span class="token function-variable function">predicate</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">,</span> b<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">boolean</span>
 <span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span>
 </div></pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L109"
-    >std/src/option.ts at line 109</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L190"
+    >std/src/option.ts at line 190</a
   >
 </p>
 <pre
@@ -399,13 +404,13 @@
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">function</span> filter<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token function-variable function">predicate</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">v<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">boolean</span><span class="token punctuation">,</span> option<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span>
+><div><span class="token keyword">function</span> filter<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>option<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> <span class="token function-variable function">predicate</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">v<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">boolean</span><span class="token punctuation">)</span><span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span>
 </div></pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L125"
-    >std/src/option.ts at line 125</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L216"
+    >std/src/option.ts at line 216</a
   >
 </p>
 <pre
@@ -423,8 +428,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L246"
-    >std/src/option.ts at line 246</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L338"
+    >std/src/option.ts at line 338</a
   >
 </p>
 <pre
@@ -437,13 +442,13 @@
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">function</span> flatMap<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token constant">A</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Option<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> opt<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token operator">&gt;</span>
+><div><span class="token keyword">function</span> flatMap<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>opt<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> <span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token constant">A</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Option<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token operator">&gt;</span>
 </div></pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L86"
-    >std/src/option.ts at line 86</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L138"
+    >std/src/option.ts at line 138</a
   >
 </p>
 <pre
@@ -457,58 +462,58 @@
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> flatMapN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  f<span class="token operator">:</span> Fun2<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> Option<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token operator">&gt;&gt;</span><span class="token punctuation">,</span>
   a<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  b<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token operator">&gt;</span>
+  b<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  f<span class="token operator">:</span> Fun2<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> Option<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token operator">&gt;&gt;</span>
 <span class="token punctuation">)</span><span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token operator">&gt;</span>
 </div></pre>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> flatMapN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  f<span class="token operator">:</span> Fun3<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> Option<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token operator">&gt;&gt;</span><span class="token punctuation">,</span>
   a<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
   b<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  c<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token operator">&gt;</span>
+  c<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  f<span class="token operator">:</span> Fun3<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> Option<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token operator">&gt;&gt;</span>
 <span class="token punctuation">)</span><span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token operator">&gt;</span>
 </div></pre>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> flatMapN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  f<span class="token operator">:</span> Fun4<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> Option<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token operator">&gt;&gt;</span><span class="token punctuation">,</span>
   a<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
   b<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
   c<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  d<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token operator">&gt;</span>
+  d<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  f<span class="token operator">:</span> Fun4<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> Option<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token operator">&gt;&gt;</span>
 <span class="token punctuation">)</span><span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token operator">&gt;</span>
 </div></pre>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> flatMapN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  f<span class="token operator">:</span> Fun5<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> Option<span class="token operator">&lt;</span><span class="token constant">F</span><span class="token operator">&gt;&gt;</span><span class="token punctuation">,</span>
-  a<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  b<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  c<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  d<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  e<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token operator">&gt;</span>
-<span class="token punctuation">)</span><span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">F</span><span class="token operator">&gt;</span>
-</div></pre>
-<pre
-  class="ts language-ts signature"
-><div><span class="token keyword">function</span> flatMapN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token punctuation">,</span> <span class="token constant">G</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  f<span class="token operator">:</span> Fun6<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token punctuation">,</span> Option<span class="token operator">&lt;</span><span class="token constant">G</span><span class="token operator">&gt;&gt;</span><span class="token punctuation">,</span>
   a<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
   b<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
   c<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
   d<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
   e<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  g<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">F</span><span class="token operator">&gt;</span>
+  f<span class="token operator">:</span> Fun5<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> Option<span class="token operator">&lt;</span><span class="token constant">F</span><span class="token operator">&gt;&gt;</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">F</span><span class="token operator">&gt;</span>
+</div></pre>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">function</span> flatMapN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token punctuation">,</span> <span class="token constant">G</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  a<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  b<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  c<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  d<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  e<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  g<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">F</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  f<span class="token operator">:</span> Fun6<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token punctuation">,</span> Option<span class="token operator">&lt;</span><span class="token constant">G</span><span class="token operator">&gt;&gt;</span>
 <span class="token punctuation">)</span><span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">G</span><span class="token operator">&gt;</span>
 </div></pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L93"
-    >std/src/option.ts at line 93</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L145"
+    >std/src/option.ts at line 145</a
   >
 </p>
 <pre
@@ -526,8 +531,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L197"
-    >std/src/option.ts at line 197</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L288"
+    >std/src/option.ts at line 288</a
   >
 </p>
 <pre
@@ -545,8 +550,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L218"
-    >std/src/option.ts at line 218</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L309"
+    >std/src/option.ts at line 309</a
   >
 </p>
 <pre
@@ -564,8 +569,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L155"
-    >std/src/option.ts at line 155</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L246"
+    >std/src/option.ts at line 246</a
   >
 </p>
 <pre
@@ -584,8 +589,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L162"
-    >std/src/option.ts at line 162</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L253"
+    >std/src/option.ts at line 253</a
   >
 </p>
 <pre
@@ -604,8 +609,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L137"
-    >std/src/option.ts at line 137</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L228"
+    >std/src/option.ts at line 228</a
   >
 </p>
 <pre
@@ -623,8 +628,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L151"
-    >std/src/option.ts at line 151</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L242"
+    >std/src/option.ts at line 242</a
   >
 </p>
 <pre
@@ -642,8 +647,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L118"
-    >std/src/option.ts at line 118</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L209"
+    >std/src/option.ts at line 209</a
   >
 </p>
 <pre
@@ -661,13 +666,35 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L121"
-    >std/src/option.ts at line 121</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L212"
+    >std/src/option.ts at line 212</a
   >
 </p>
 <pre
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> isSome <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/option.ts'</span></div></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="makeEquals">
+  makeEquals<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">function</span> makeEquals<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  <span class="token function-variable function">predicate</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">,</span> b<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">boolean</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> b<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">boolean</span>
+</div></pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L203"
+    >std/src/option.ts at line 203</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> makeEquals <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/option.ts'</span></div></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="map">
   map<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
     >function</span
@@ -675,13 +702,13 @@
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">function</span> map<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token constant">A</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">B</span><span class="token punctuation">,</span> opt<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token operator">&gt;</span>
+><div><span class="token keyword">function</span> map<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>opt<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> <span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token constant">A</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">B</span><span class="token punctuation">)</span><span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token operator">&gt;</span>
 </div></pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L61"
-    >std/src/option.ts at line 61</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L88"
+    >std/src/option.ts at line 88</a
   >
 </p>
 <pre
@@ -694,55 +721,55 @@
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">function</span> mapN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>f<span class="token operator">:</span> Fun2<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> a<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> b<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token operator">&gt;</span>
+><div><span class="token keyword">function</span> mapN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>a<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> b<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> f<span class="token operator">:</span> Fun2<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token operator">&gt;</span>
 </div></pre>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> mapN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  f<span class="token operator">:</span> Fun3<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
   a<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
   b<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  c<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token operator">&gt;</span>
+  c<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  f<span class="token operator">:</span> Fun3<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token operator">&gt;</span>
 <span class="token punctuation">)</span><span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token operator">&gt;</span>
 </div></pre>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> mapN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  f<span class="token operator">:</span> Fun4<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
   a<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
   b<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
   c<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  d<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token operator">&gt;</span>
+  d<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  f<span class="token operator">:</span> Fun4<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span>
 <span class="token punctuation">)</span><span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token operator">&gt;</span>
 </div></pre>
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> mapN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  f<span class="token operator">:</span> Fun5<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  a<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  b<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  c<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  d<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  e<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token operator">&gt;</span>
-<span class="token punctuation">)</span><span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">F</span><span class="token operator">&gt;</span>
-</div></pre>
-<pre
-  class="ts language-ts signature"
-><div><span class="token keyword">function</span> mapN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token punctuation">,</span> <span class="token constant">G</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  f<span class="token operator">:</span> Fun6<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token punctuation">,</span> <span class="token constant">G</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
   a<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
   b<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
   c<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
   d<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
   e<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  g<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">F</span><span class="token operator">&gt;</span>
+  f<span class="token operator">:</span> Fun5<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token operator">&gt;</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">F</span><span class="token operator">&gt;</span>
+</div></pre>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">function</span> mapN<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token punctuation">,</span> <span class="token constant">G</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  a<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  b<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  c<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">C</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  d<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">D</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  e<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  g<span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">F</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  f<span class="token operator">:</span> Fun6<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token punctuation">,</span> <span class="token constant">G</span><span class="token operator">&gt;</span>
 <span class="token punctuation">)</span><span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">G</span><span class="token operator">&gt;</span>
 </div></pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L68"
-    >std/src/option.ts at line 68</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L95"
+    >std/src/option.ts at line 95</a
   >
 </p>
 <pre
@@ -835,8 +862,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L254"
-    >std/src/option.ts at line 254</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L346"
+    >std/src/option.ts at line 346</a
   >
 </p>
 <pre
@@ -855,32 +882,13 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L261"
-    >std/src/option.ts at line 261</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L353"
+    >std/src/option.ts at line 353</a
   >
 </p>
 <pre
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> recoverLazy <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/option.ts'</span></div></pre>
-<h3 class="is-family-monospace has-text-grey-dark" id="some">
-  some<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
-    >function</span
-  >
-</h3>
-<pre
-  class="ts language-ts signature"
-><div><span class="token keyword">function</span> some<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>value<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">)</span><span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span>
-</div></pre>
-<p class="defined-in">
-  defined in
-  <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L26"
-    >std/src/option.ts at line 26</a
-  >
-</p>
-<pre
-  class="import-code ts language-ts"
-><div><span class="token keyword">import</span> <span class="token punctuation">{</span> some <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/option.ts'</span></div></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="Some">
   Some<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
     >type alias</span
@@ -900,6 +908,25 @@
 <pre
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> Some <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/option.ts'</span></div></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="some">
+  some<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">function</span> some<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>value<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">)</span><span class="token operator">:</span> Option<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span>
+</div></pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L26"
+    >std/src/option.ts at line 26</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> some <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/option.ts'</span></div></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="spread">
   spread<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
     >function</span
@@ -912,8 +939,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L272"
-    >std/src/option.ts at line 272</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L365"
+    >std/src/option.ts at line 365</a
   >
 </p>
 <pre
@@ -931,8 +958,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L276"
-    >std/src/option.ts at line 276</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L369"
+    >std/src/option.ts at line 369</a
   >
 </p>
 <pre
@@ -950,8 +977,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L176"
-    >std/src/option.ts at line 176</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L267"
+    >std/src/option.ts at line 267</a
   >
 </p>
 <pre
@@ -969,8 +996,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L169"
-    >std/src/option.ts at line 169</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L260"
+    >std/src/option.ts at line 260</a
   >
 </p>
 <pre
@@ -988,8 +1015,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L144"
-    >std/src/option.ts at line 144</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L235"
+    >std/src/option.ts at line 235</a
   >
 </p>
 <pre
@@ -1007,8 +1034,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L183"
-    >std/src/option.ts at line 183</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L274"
+    >std/src/option.ts at line 274</a
   >
 </p>
 <pre
@@ -1027,8 +1054,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L190"
-    >std/src/option.ts at line 190</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/option.ts#L281"
+    >std/src/option.ts at line 281</a
   >
 </p>
 <pre
