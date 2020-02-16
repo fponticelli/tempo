@@ -44,6 +44,24 @@ export function forEach<A, Err>(result: AsyncResult<A, Err>, f: (a: A) => void):
   }
 }
 
+export function match<A, B, Err, Prog = unknown>(
+  result: AsyncResult<A, Err, Prog>,
+  f: (a: A) => B,
+  fErr: (e: Err) => B,
+  notAsked: B,
+  fProg: (p: Prog) => B
+): B {
+  switch (result.kind) {
+    case 'Loading': return fProg(result.progress)
+    case 'NotAsked': return notAsked
+    case 'Outcome':
+      switch (result.value.kind) {
+        case 'Success': return f(result.value.value)
+        case 'Failure': return fErr(result.value.error)
+      }
+  }
+}
+
 export function map<A, B, Err, Prog>(async: AsyncResult<A, Err, Prog>, f: (a: A) => B): AsyncResult<B, Err, Prog> {
   return mapA(async, r => mapR(r, f))
 }

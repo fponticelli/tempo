@@ -23,7 +23,8 @@ export function success<T, E>(value: T): Validation<T, E> {
 export function failure<T, E>(error: E): Validation<T, E> {
   return { kind: 'Failure', error: ofValue(error) }
 }
-export function failures<T, E>(errors: Nel<E>): Validation<T, E> {
+export function failures<T, E>(errors: Nel<E>
+): Validation<T, E> {
   return { kind: 'Failure', error: errors }
 }
 
@@ -31,27 +32,56 @@ export function ofNullable<T, E>(value: T | undefined | null, error: E): Validat
   return Res.ofNullable(value, ofValue(error))
 }
 
-export function apN<A, B, C, Err>(f: Validation<Fun2<A, B, C>, Err>, a: Validation<A, Err>, b: Validation<B, Err>): Validation<C, Err>
+export function match<A, B, E>(value: Validation<A, E>, f: (v: A) => B, fErr: (e: Nel<E>) => B): B {
+  switch (value.kind) {
+    case 'Success': return f(value.value)
+    case 'Failure': return fErr(value.error)
+  }
+}
+
+export function apN<A, B, C, Err>(
+  a: Validation<A, Err>,
+  b: Validation<B, Err>,
+  f: Validation<Fun2<A, B, C>, Err>
+): Validation<C, Err>
 export function apN<A, B, C, D, Err>(
-  f: Validation<Fun3<A, B, C, D>, Err>,
-  a: Validation<A, Err>, b: Validation<B, Err>, c: Validation<C, Err>): Validation<D, Err>
+  a: Validation<A, Err>,
+  b: Validation<B, Err>,
+  c: Validation<C, Err>,
+  f: Validation<Fun3<A, B, C, D>, Err>
+): Validation<D, Err>
 export function apN<A, B, C, D, E, Err>(
-  f: Validation<Fun4<A, B, C, D, E>, Err>,
-  a: Validation<A, Err>, b: Validation<B, Err>, c: Validation<C, Err>, d: Validation<D, Err>): Validation<E, Err>
+  a: Validation<A, Err>,
+  b: Validation<B, Err>,
+  c: Validation<C, Err>,
+  d: Validation<D, Err>,
+  f: Validation<Fun4<A, B, C, D, E>, Err>
+): Validation<E, Err>
 export function apN<A, B, C, D, E, F, Err>(
-  f: Validation<Fun5<A, B, C, D, E, F>, Err>,
-  a: Validation<A, Err>, b: Validation<B, Err>, c: Validation<C, Err>, d: Validation<D, Err>, e: Validation<E, Err>): Validation<F, Err>
+  a: Validation<A, Err>,
+  b: Validation<B, Err>,
+  c: Validation<C, Err>,
+  d: Validation<D, Err>,
+  e: Validation<E, Err>,
+  f: Validation<Fun5<A, B, C, D, E, F>, Err>
+): Validation<F, Err>
 export function apN<A, B, C, D, E, F, G, Err>(
-  f: Validation<Fun6<A, B, C, D, E, F, G>, Err>,
-  a: Validation<A, Err>, b: Validation<B, Err>, c: Validation<C, Err>,
-  d: Validation<D, Err>, e: Validation<E, Err>, g: Validation<F, Err>): Validation<G, Err>
+  a: Validation<A, Err>,
+  b: Validation<B, Err>,
+  c: Validation<C, Err>,
+  d: Validation<D, Err>,
+  e: Validation<E, Err>,
+  g: Validation<F, Err>,
+  f: Validation<Fun6<A, B, C, D, E, F, G>, Err>
+): Validation<G, Err>
 export function apN<Args extends any[], Err, Ret>(
-  f: Validation<(...args: Args) => Ret, Err>,
-  ...args: Validation<any, Err>[]): Validation<Ret, Err> {
+  ...args: Validation<any, Err>[]
+): Validation<Ret, Err> {
+  const f = args.pop()
   return (Res.apNWithCombine as Function)(f, concat, ...args)
 }
 
-export function mapError<A, E1, E2>(f: (e: E1) => E2, result: Validation<A, E1>): Validation<A, E2> {
+export function mapError<A, E1, E2>(result: Validation<A, E1>, f: (e: E1) => E2): Validation<A, E2> {
   switch (result.kind) {
     case 'Failure': return failures(map(result.error, f))
     case 'Success': return success(result.value)
@@ -59,49 +89,88 @@ export function mapError<A, E1, E2>(f: (e: E1) => E2, result: Validation<A, E1>)
 }
 
 export function mapN<A, B, C, Err>(
-  f: Fun2<A, B, C>,
-  a: Validation<A, Err>, b: Validation<B, Err>): Validation<C, Err>
+  a: Validation<A, Err>,
+  b: Validation<B, Err>,
+  f: Fun2<A, B, C>
+): Validation<C, Err>
 export function mapN<A, B, C, D, Err>(
-  f: Fun3<A, B, C, D>,
-  a: Validation<A, Err>, b: Validation<B, Err>, c: Validation<C, Err>): Validation<D, Err>
+  a: Validation<A, Err>,
+  b: Validation<B, Err>,
+  c: Validation<C, Err>,
+  f: Fun3<A, B, C, D>
+): Validation<D, Err>
 export function mapN<A, B, C, D, E, Err>(
-  f: Fun4<A, B, C, D, E>,
-  a: Validation<A, Err>, b: Validation<B, Err>, c: Validation<C, Err>, d: Validation<D, Err>): Validation<E, Err>
+  a: Validation<A, Err>,
+  b: Validation<B, Err>,
+  c: Validation<C, Err>,
+  d: Validation<D, Err>,
+  f: Fun4<A, B, C, D, E>
+): Validation<E, Err>
 export function mapN<A, B, C, D, E, F, Err>(
-  f: Fun5<A, B, C, D, E, F>,
-  a: Validation<A, Err>, b: Validation<B, Err>, c: Validation<C, Err>, d: Validation<D, Err>, e: Validation<E, Err>): Validation<F, Err>
+  a: Validation<A, Err>,
+  b: Validation<B, Err>,
+  c: Validation<C, Err>,
+  d: Validation<D, Err>,
+  e: Validation<E, Err>,
+  f: Fun5<A, B, C, D, E, F>
+): Validation<F, Err>
 export function mapN<A, B, C, D, E, F, G, Err>(
-  f: Fun6<A, B, C, D, E, F, G>,
-  a: Validation<A, Err>, b: Validation<B, Err>, c: Validation<C, Err>,
-  d: Validation<D, Err>, e: Validation<E, Err>, g: Validation<F, Err>): Validation<G, Err>
-export function mapN<Args extends any[], Err, Ret>(f: (...args: Args) => Ret, ...args: Validation<any, Err>[]): Validation<Ret, Err> {
+  a: Validation<A, Err>,
+  b: Validation<B, Err>,
+  c: Validation<C, Err>,
+  d: Validation<D, Err>,
+  e: Validation<E, Err>,
+  g: Validation<F, Err>,
+  f: Fun6<A, B, C, D, E, F, G>
+): Validation<G, Err>
+export function mapN<Args extends any[], Err, Ret>(...args: any[]): Validation<Ret, Err> {
+  const f = args.pop()
   return (Res.mapNWithCombine as Function)(f, concat, ...args)
 }
 
 export function flatMapN<A, B, C, Err>(
-  f: Fun2<A, B, Validation<C, Err>>,
-  a: Validation<A, Err>, b: Validation<B, Err>): Validation<C, Err>
+  a: Validation<A, Err>,
+  b: Validation<B, Err>,
+  f: Fun2<A, B, Validation<C, Err>>
+): Validation<C, Err>
 export function flatMapN<A, B, C, D, Err>(
-  f: Fun3<A, B, C, Validation<D, Err>>,
-  a: Validation<A, Err>, b: Validation<B, Err>, c: Validation<C, Err>): Validation<D, Err>
+  a: Validation<A, Err>,
+  b: Validation<B, Err>,
+  c: Validation<C, Err>,
+  f: Fun3<A, B, C, Validation<D, Err>>
+): Validation<D, Err>
 export function flatMapN<A, B, C, D, E, Err>(
-  f: Fun4<A, B, C, D, Validation<E, Err>>,
-  a: Validation<A, Err>, b: Validation<B, Err>, c: Validation<C, Err>, d: Validation<D, Err>): Validation<E, Err>
+  a: Validation<A, Err>,
+  b: Validation<B, Err>,
+  c: Validation<C, Err>,
+  d: Validation<D, Err>,
+  f: Fun4<A, B, C, D, Validation<E, Err>>
+): Validation<E, Err>
 export function flatMapN<A, B, C, D, E, F, Err>(
-  f: Fun5<A, B, C, D, E, Validation<F, Err>>,
-  a: Validation<A, Err>, b: Validation<B, Err>, c: Validation<C, Err>, d: Validation<D, Err>, e: Validation<E, Err>): Validation<F, Err>
+  a: Validation<A, Err>,
+  b: Validation<B, Err>,
+  c: Validation<C, Err>,
+  d: Validation<D, Err>,
+  e: Validation<E, Err>,
+  f: Fun5<A, B, C, D, E, Validation<F, Err>>
+): Validation<F, Err>
 export function flatMapN<A, B, C, D, E, F, G, Err>(
-  f: Fun6<A, B, C, D, E, F, Validation<G, Err>>,
-  a: Validation<A, Err>, b: Validation<B, Err>, c: Validation<C, Err>,
-  d: Validation<D, Err>, e: Validation<E, Err>, g: Validation<F, Err>): Validation<G, Err>
+  a: Validation<A, Err>,
+  b: Validation<B, Err>,
+  c: Validation<C, Err>,
+  d: Validation<D, Err>,
+  e: Validation<E, Err>,
+  g: Validation<F, Err>,
+  f: Fun6<A, B, C, D, E, F, Validation<G, Err>>
+): Validation<G, Err>
 export function flatMapN<Args extends any[], Err, Ret>(
-  f: (...args: Args) => Validation<Ret, Err>,
-  ...args: Validation<any, Err>[]
+  ...args: any[]
 ): Validation<Ret, Err> {
+  const f = args.pop()
   return (Res.flatMapNWithCombine as Function)(f, concat, ...args)
 }
 
-export function filter<T, E>(predicate: (v: T) => boolean, error: E, result: Validation<T, E>): Validation<T, E> {
+export function filter<T, E>(result: Validation<T, E>, predicate: (v: T) => boolean, error: E): Validation<T, E> {
   switch (result.kind) {
     case 'Failure': return result
     case 'Success':
@@ -113,7 +182,7 @@ export function filter<T, E>(predicate: (v: T) => boolean, error: E, result: Val
   }
 }
 
-export function filterLazy<T, E>(predicate: (v: T) => boolean, errorf: () => E, result: Validation<T, E>): Validation<T, E> {
+export function filterLazy<T, E>(result: Validation<T, E>, predicate: (v: T) => boolean, errorf: () => E): Validation<T, E> {
   switch (result.kind) {
     case 'Failure': return result
     case 'Success':
@@ -125,7 +194,8 @@ export function filterLazy<T, E>(predicate: (v: T) => boolean, errorf: () => E, 
   }
 }
 
-export function flatten<T, E>(result: Validation<Validation<T, E>, E>): Validation<T, E> {
+export function flatten<T, E>(result: Validation<Validation<T, E>, E>
+): Validation<T, E> {
   switch (result.kind) {
     case 'Failure': return failures(result.error)
     case 'Success': return result.value

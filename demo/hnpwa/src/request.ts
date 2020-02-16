@@ -12,10 +12,10 @@ limitations under the License.
 */
 
 import { DecodeResult } from 'partsing/core/result'
-import { Result } from './result'
 import { HttpError } from './http_error'
 import { Feed } from './route'
 import { decodeItem, decodeUser, decodeFeed } from './decoders'
+import { success, failure, Result } from 'tempo-std/lib/result'
 
 const RESET_CACHE_AFTER = 120000
 const base = 'https://api.hnpwa.com'
@@ -38,16 +38,16 @@ const makeRequest = async <Out>(path: string[], parse: (input: any) => DecodeRes
           const json = await response.json()
           const result = parse(json)
           if (result.isSuccess()) {
-            return Result.success<Out, HttpError>(result.value)
+            return success<Out, HttpError>(result.value)
           } else {
-            return Result.error<Out, HttpError>(HttpError.badBody(result.failures.join(';')))
+            return failure<Out, HttpError>(HttpError.badBody(result.failures.join(';')))
           }
         } else {
-          return Result.error<Out, HttpError>(HttpError.badStatus(response.status))
+          return failure<Out, HttpError>(HttpError.badStatus(response.status))
         }
       } catch (e) {
         console.error(e)
-        return Result.error<Out, HttpError>(HttpError.networkError)
+        return failure<Out, HttpError>(HttpError.networkError)
       }
     })()
     cache.set(endpoint, output)

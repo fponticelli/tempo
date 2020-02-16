@@ -29,6 +29,21 @@ export function outcome<T, P>(value: T): Async<T, P> { return { kind: 'Outcome',
 export const notAsked = { kind: 'NotAsked' } as Async<never, never>
 export function loading<T, P>(progress: P): Async<T, P> { return { kind: 'Loading', progress }}
 
+
+
+export function match<A, B, Prog = unknown>(
+  result: Async<A, Prog>,
+  f: (a: A) => B,
+  notAsked: B,
+  fProg: (p: Prog) => B
+): B {
+  switch (result.kind) {
+    case 'Loading':  return fProg(result.progress)
+    case 'NotAsked': return notAsked
+    case 'Outcome':  return f(result.value)
+  }
+}
+
 export function map<A, B, P>(async: Async<A, P>, f: (a: A) => B): Async<B, P> {
   switch (async.kind) {
     case 'Loading':

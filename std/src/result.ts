@@ -483,6 +483,13 @@ export function flatten<T, E>(result: Result<Result<T, E>, E>): Result<T, E> {
   }
 }
 
+export function match<A, B, Err>(result: Result<A, Err>, f: (a: A) => B, fErr: (e: Err) => B): B {
+  switch (result.kind) {
+    case 'Success': return f(result.value)
+    case 'Failure': return fErr(result.error)
+  }
+}
+
 export function cata<A, B, Err>(result: Result<A, Err>, f: (a: A) => B, ifNone: B): B {
   switch (result.kind) {
     case 'Failure': return ifNone

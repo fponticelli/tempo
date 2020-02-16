@@ -14,6 +14,7 @@ limitations under the License.
 import { Action } from './action'
 import { State, Page } from './state'
 import { reduceOnKind } from 'tempo-store/lib/reducer'
+import { match } from 'tempo-std/lib/result'
 
 export const reducer = reduceOnKind<State, Action>({
   LinkClicked: (state, action) => {
@@ -35,11 +36,12 @@ export const reducer = reduceOnKind<State, Action>({
   },
   GotItem: (state, action) => ({
     ...state,
-    page: action.result.match(Page.article, Page.error)
+    page: match(action.result, Page.article, Page.error)
   }),
   GotFeed: (state, action) => ({
     ...state,
-    page: action.result.match(
+    page: match(
+      action.result,
       items => {
         const page = (state.route.kind === 'FeedsRoute') ? state.route.page : 1
         return Page.feed(action.feed, page, items)
@@ -49,6 +51,6 @@ export const reducer = reduceOnKind<State, Action>({
   }),
   GotUser: (state, action) => ({
     ...state,
-    page: action.result.match(Page.profile, Page.error)
+    page: match(action.result, Page.profile, Page.error)
   })
 })

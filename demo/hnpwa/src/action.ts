@@ -11,10 +11,10 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { Result } from './result'
 import { HttpError } from './http_error'
 import { Item, User } from './state'
 import { Route, Feed } from './route'
+import { Result } from 'tempo-std/lib/result'
 
 export interface LinkClicked {
   readonly kind: 'LinkClicked'
