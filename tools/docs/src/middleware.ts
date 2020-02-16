@@ -16,9 +16,14 @@ declare const ga: any
 export const scrollTo = () => {
   const ref = location.hash.split('#').pop()
   if (ref) {
-    const el = document.getElementById(ref)
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' })
+    const refEl = document.getElementById(ref)
+    let el: null | HTMLElement = refEl
+    while (el && !el?.classList.contains('scrollable')) {
+      el = el.parentElement
+    }
+    if (refEl && el && el.parentElement) {
+      el.scrollTop = refEl.offsetTop - el.offsetTop
+      // el.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' })
     }
   }
 }
