@@ -4,7 +4,7 @@
       "name": "dom",
       "title": "tempo-dom",
       "description": "Fully-typed frontend framework alternative to React and Angular",
-      "version": "0.15.0",
+      "version": "0.15.1",
       "keywords": [
         "tempo",
         "ui",
@@ -20,7 +20,7 @@
       "name": "std",
       "title": "tempo-std",
       "description": "Std library for TypeScript. Natural complement to the tempo libs.",
-      "version": "0.3.0",
+      "version": "0.4.0",
       "keywords": [
         "tempo",
         "framework",
@@ -46,7 +46,7 @@
       "name": "store",
       "title": "tempo-store",
       "description": "Super simple state management library",
-      "version": "1.2.0",
+      "version": "1.2.1",
       "keywords": [
         "tempo",
         "unidirectional-flow",
@@ -61,7 +61,7 @@
       "name": "paperjs",
       "title": "tempo-paper",
       "description": "Integration of PaperJS api using Tempo to create a declarative Document Object Model.",
-      "version": "0.3.1",
+      "version": "0.3.2",
       "keywords": [
         "tempo",
         "paperjs",
