@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "tempo-dom",
+      "comment": "Add `mapField`",
+      "type": "minor"
+    }
+  ],
+  "packageName": "tempo-dom",
+  "email": "franco.ponticelli@gmail.com"
+}
