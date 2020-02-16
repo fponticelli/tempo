@@ -2,6 +2,21 @@
   "name": "tempo-std",
   "entries": [
     {
+      "version": "0.5.0",
+      "tag": "tempo-std_v0.5.0",
+      "date": "Sun, 16 Feb 2020 03:58:19 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Put subject first in Validation functions"
+          },
+          {
+            "comment": "Add `match` functions"
+          }
+        ]
+      }
+    },
+    {
       "version": "0.4.0",
       "tag": "tempo-std_v0.4.0",
       "date": "Sun, 16 Feb 2020 00:01:24 GMT",

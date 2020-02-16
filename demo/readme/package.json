@@ -17,8 +17,8 @@
   },
   "dependencies": {
     "tempo-core": "1.7.0",
-    "tempo-dom": "0.15.1",
-    "tempo-store": "1.2.1"
+    "tempo-dom": "0.16.0",
+    "tempo-store": "1.2.2"
   },
   "devDependencies": {
     "cssnano": "4.1.10",

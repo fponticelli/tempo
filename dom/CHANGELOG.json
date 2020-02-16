@@ -2,6 +2,26 @@
   "name": "tempo-dom",
   "entries": [
     {
+      "version": "0.16.0",
+      "tag": "tempo-dom_v0.16.0",
+      "date": "Sun, 16 Feb 2020 03:58:19 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Add `mapField`"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"tempo-std\" from `0.4.0` to `0.5.0`"
+          },
+          {
+            "comment": "Updating dependency \"tempo-store\" from `1.2.1` to `1.2.2`"
+          }
+        ]
+      }
+    },
+    {
       "version": "0.15.1",
       "tag": "tempo-dom_v0.15.1",
       "date": "Sun, 16 Feb 2020 00:01:24 GMT",

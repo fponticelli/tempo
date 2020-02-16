@@ -1,6 +1,6 @@
 {
   "name": "tempo-paper",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "priority": 100,
   "description": "Integration of PaperJS api using Tempo to create a declarative Document Object Model.",
   "sideEffects": false,
@@ -35,9 +35,9 @@
   "dependencies": {
     "paper": "0.12.3",
     "tempo-core": "1.7.0",
-    "tempo-dom": "0.15.1",
-    "tempo-std": "0.4.0",
-    "tempo-store": "1.2.1"
+    "tempo-dom": "0.16.0",
+    "tempo-std": "0.5.0",
+    "tempo-store": "1.2.2"
   },
   "devDependencies": {
     "@types/jest": "25.1.2",

@@ -1,6 +1,13 @@
 # Change Log - tempo-dom
 
-This log was last generated on Sun, 16 Feb 2020 00:01:24 GMT and should not be manually modified.
+This log was last generated on Sun, 16 Feb 2020 03:58:19 GMT and should not be manually modified.
+
+## 0.16.0
+Sun, 16 Feb 2020 03:58:19 GMT
+
+### Minor changes
+
+- Add `mapField`
 
 ## 0.15.1
 Sun, 16 Feb 2020 00:01:24 GMT
