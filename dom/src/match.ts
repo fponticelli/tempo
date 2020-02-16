@@ -17,11 +17,11 @@ import { DOMContext } from './context'
 import { domChildToTemplate, removeNode } from './utils/dom'
 import { IndexType } from 'tempo-std/lib/types/index_type'
 import { ObjectWithPath, TypeAtPath, ObjectWithField } from 'tempo-std/lib/types/objects'
-import { Option, Some } from 'tempo-std/lib/option'
-import { mapState } from './map'
+import { Option } from 'tempo-std/lib/option'
+import { mapState, mapField } from './map'
 import { Maybe, Just } from 'tempo-std/lib/maybe'
-import { Result, Success, Failure } from 'tempo-std/lib/result'
-import { Async, Loading, Outcome } from 'tempo-std/lib/async'
+import { Result } from 'tempo-std/lib/result'
+import { Async, Outcome } from 'tempo-std/lib/async'
 import { AsyncResult } from 'tempo-std/lib/async_result'
 import { Attribute, resolveAttribute } from './value'
 
@@ -228,7 +228,7 @@ export function matchOption<State, Action, Query = unknown>(
   refId = 't-match-option'
 ): DOMTemplate<Option<State>, Action, Query> {
   return matchKind({
-    Some:  mapState({ map: (o: Some<State>) => o.value }, matchers.Some),
+    Some:  mapField({ field: 'value' }, matchers.Some),
     None:  mapState({ map: () => null }, matchers.None)
   }, refId)
 }
@@ -259,8 +259,8 @@ export function matchResult<State, Error, Action, Query = unknown>(
   refId = 't-match-result'
 ): DOMTemplate<Result<State, Error>, Action, Query> {
   return matchKind({
-    Success:  mapState({ map: (o: Success<State>) => o.value }, matchers.Success),
-    Failure:  mapState({ map: (o: Failure<Error>) => o.error }, matchers.Failure)
+    Success:  mapField({ field: 'value' }, matchers.Success),
+    Failure:  mapField({ field: 'error' }, matchers.Failure)
   }, refId)
 }
 
@@ -273,8 +273,8 @@ export function matchAsync<State, Progress, Action, Query = unknown>(
   refId = 't-match-async'
 ): DOMTemplate<Async<State, Progress>, Action, Query> {
   return matchKind({
-    Outcome:  mapState({ map: (o: Outcome<State>) => o.value }, matchers.Outcome),
-    Loading:  mapState({ map: (o: Loading<Progress>) => o.progress }, matchers.Loading),
+    Outcome:  mapField({ field: 'value' }, matchers.Outcome),
+    Loading:  mapField({ field: 'progress' }, matchers.Loading),
     NotAsked: mapState({ map: () => null }, matchers.NotAsked)
   }, refId)
 }
@@ -296,7 +296,7 @@ export function matchAsyncResult<State, Error, Progress, Action, Query = unknown
         Failure: matchers.Failure
       }, `${refId}-sub`)
     ),
-    Loading:  mapState({ map: (o: Loading<Progress>) => o.progress }, matchers.Loading),
+    Loading:  mapField({ field: 'progress' }, matchers.Loading),
     NotAsked: mapState({ map: () => null }, matchers.NotAsked)
   }, refId)
 }

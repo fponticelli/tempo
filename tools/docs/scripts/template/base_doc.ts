@@ -2,24 +2,24 @@ import { fragment } from 'tempo-dom/lib/fragment'
 import { BaseDoc } from '../parse/jsdoc'
 import { div, span, h2, ul, li, input, pre, p } from 'tempo-dom/lib/html'
 import { when } from 'tempo-dom/lib/when'
-import { mapState } from 'tempo-dom/lib/map'
+import { mapField, mapState } from 'tempo-dom/lib/map'
 import { matchOption } from 'tempo-dom/lib/match'
 import { unsafeHtml } from 'tempo-dom/lib/unsafe_html'
-import { Option, isSome } from 'tempo-std/lib/option'
+import { isSome } from 'tempo-std/lib/option'
 import { markdown } from '../utils/markdown'
 import { forEach } from 'tempo-dom/lib/for_each'
 import { highlight } from '../utils/highlight'
 
-export const description = mapState<BaseDoc, Option<string>, unknown>(
-  { map: doc => doc.description },
+export const description = mapField<BaseDoc, 'description', unknown>(
+  { field: 'description' },
   matchOption({
     Some: unsafeHtml({ content: s => markdown(s, s => s) }),
     None: ''
   })
 )
 
-export const todos = mapState<BaseDoc, string[], unknown>(
-  { map: doc => doc.todos },
+export const todos = mapField<BaseDoc, 'todos', unknown>(
+  { field: 'todos' },
   when(
     { condition: todos => todos.length > 0 },
     h2({}, 'TODOs'),
@@ -38,8 +38,8 @@ export const todos = mapState<BaseDoc, string[], unknown>(
   )
 )
 
-export const examples = mapState<BaseDoc, string[], unknown>(
-  { map: doc => doc.examples },
+export const examples = mapField<BaseDoc, 'examples', unknown>(
+  { field: 'examples' },
   when(
     { condition: todos => todos.length > 0 },
     p(

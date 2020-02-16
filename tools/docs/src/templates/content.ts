@@ -5,7 +5,7 @@ import { Action } from '../action'
 import { AsyncResult } from 'tempo-std/lib/async_result'
 import { HttpError } from '../request'
 import { matchAsyncResult, matchKind } from 'tempo-dom/lib/match'
-import { mapState } from 'tempo-dom/lib/map'
+import { mapField } from 'tempo-dom/lib/map'
 import { demosContent } from './demos_content'
 import { projectContent } from './project_content'
 import { fragment } from 'tempo-dom/lib/fragment'
@@ -24,8 +24,8 @@ export const content = fragment<
     NotAsked: '',
     Success: matchKind({
       HtmlPage: htmlContent,
-      Demos: mapState({ map: c => c.demos }, demosContent),
-      Project: mapState({ map: c => c.project }, projectContent)
+      Demos: mapField({ field: 'demos' }, demosContent),
+      Project: mapField({ field: 'project' }, projectContent)
     })
   })
 )

@@ -62,9 +62,7 @@ export function iterateItems<
   ...children: PaperTemplate<InnerState[number], Action, Query>[]
 ): PaperTemplate<OuterState, Action, Query> {
   return mapState<OuterState, InnerState, Action, Query>(
-    {
-      map: outer => options.getArray(outer)
-    },
+    { map: outer => options.getArray(outer) },
     until<InnerState, InnerState[number], Action, Query>(
       {
         repeatUntil: (value: InnerState, index: number) => value[index]

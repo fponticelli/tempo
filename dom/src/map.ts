@@ -50,6 +50,16 @@ export function mapState<OuterState, InnerState, Action, Query = unknown>(
   return new MapStateTemplate(options.map, mapArray(children, domChildToTemplate))
 }
 
+export function mapField<OuterState, Key extends keyof OuterState, Action, Query = unknown>(
+  options: { field: Key },
+  ...children: DOMChild<OuterState[Key], Action, Query>[]
+): DOMTemplate<OuterState, Action, Query> {
+  return mapState<OuterState, OuterState[Key], Action, Query>(
+    { map: (v: OuterState) => v[options.field] },
+    ...children
+  )
+}
+
 export function mapStateAndKeep<OuterState, InnerState, Action, Query = unknown>(
   options: { map: (value: OuterState) => InnerState },
   ...children: DOMChild<[InnerState, OuterState], Action, Query>[]

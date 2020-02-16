@@ -1,7 +1,7 @@
 import { Action } from '../action'
 import { ProjectRef } from '../toc'
 import { div, p, a, span, article, img, br, h1 } from 'tempo-dom/lib/html'
-import { mapState } from 'tempo-dom/lib/map'
+import { mapField } from 'tempo-dom/lib/map'
 import { when } from 'tempo-dom/lib/when'
 import { forEach } from 'tempo-dom/lib/for_each'
 import { Route } from '../route'
@@ -12,8 +12,8 @@ export const projectContent = article<ProjectRef, Action>(
   { attrs: { class: 'content' } },
   h1({ attrs: { class: 'title' } }, s => s.title),
   p({ attrs: { class: 'subtitle' } }, s => s.description),
-  mapState<ProjectRef, string[], Action>(
-    { map: p => p.keywords },
+  mapField<ProjectRef, 'keywords', Action>(
+    { field: 'keywords' },
     when(
       { condition: tags => tags.length > 0 },
       div(

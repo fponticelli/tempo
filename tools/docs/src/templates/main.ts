@@ -1,6 +1,6 @@
 import { div, nav, a, img, main, span } from 'tempo-dom/lib/html'
 import { matchAsyncResult } from 'tempo-dom/lib/match'
-import { mapState } from 'tempo-dom/lib/map'
+import { mapState, mapField } from 'tempo-dom/lib/map'
 import { State } from '../state'
 import { Action } from '../action'
 import { Toc } from '../toc'
@@ -120,8 +120,8 @@ export const template = div<State, Action>(
             a({ attrs: { class: 'navbar-link' } }, 'Projects'),
             div(
               { attrs: { class: 'navbar-dropdown' } },
-              mapState(
-                { map: s => s.toc },
+              mapField(
+                { field: 'toc' },
                 matchAsyncResult<Toc, HttpError, unknown, Action>({
                   Failure: '',
                   Loading: '',
@@ -143,8 +143,8 @@ export const template = div<State, Action>(
     )
   ),
   capture(
-    mapState(
-      { map: state => state.toc },
+    mapField(
+      { field: 'toc' },
       matchAsyncResult<Toc, HttpError, unknown, Action>({
         NotAsked: '',
         Loading: loader,

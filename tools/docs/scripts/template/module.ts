@@ -1,5 +1,5 @@
 import { h1, div, a } from 'tempo-dom/lib/html'
-import { mapState } from 'tempo-dom/lib/map'
+import { mapState, mapField } from 'tempo-dom/lib/map'
 import { forEach } from 'tempo-dom/lib/for_each'
 import { entityTemplate } from './entity_template'
 import { baseDoc } from './base_doc'
@@ -23,8 +23,8 @@ export const module = fragment<State, unknown>(
     {},
     m => `module '${m.module.title}'`
   ),
-  mapState(
-    { map: s => s.module },
+  mapField(
+    { field: 'module' },
     baseDoc
   ),
   moduleToc,
