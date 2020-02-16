@@ -558,7 +558,7 @@ export function swap<T, E>(result: Result<T, E>): Result<E, T> {
 }
 
 export function combine<A, B, Err>(a: Result<A, Err>,
-  b: Result<B, Err>): Result<[A, B], Err> {
+                                   b: Result<B, Err>): Result<[A, B], Err> {
   return mapN(a, b, (a, b) => [a, b])
 }
 

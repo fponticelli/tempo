@@ -9,10 +9,8 @@ import { link } from './link'
 import { unsafeHtml } from 'tempo-dom/lib/unsafe_html'
 
 function renamePackage(s: string) {
-  if (s === 'paperjs')
-    return 'paper'
-  else
-    return s
+  if (s === 'paperjs') return 'paper'
+  else return s
 }
 
 export const projectContent = article<ProjectRef, Action>(
@@ -37,13 +35,16 @@ export const projectContent = article<ProjectRef, Action>(
     a(
       {
         attrs: {
-          href: s => `https://www.npmjs.com/package/tempo-${renamePackage(s.name)}`
+          href: s =>
+            `https://www.npmjs.com/package/tempo-${renamePackage(s.name)}`
         }
       },
       img({
         attrs: {
           src: s =>
-            `https://img.shields.io/npm/v/tempo-${renamePackage(s.name)}?label=npm%3A%20tempo-${renamePackage(s.name)}`,
+            `https://img.shields.io/npm/v/tempo-${renamePackage(
+              s.name
+            )}?label=npm%3A%20tempo-${renamePackage(s.name)}`,
           alt: s => `npm tempo ${s.name}`
         }
       })

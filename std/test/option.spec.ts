@@ -60,7 +60,7 @@ describe('Option', () => {
     )).toEqual(none)
     expect(apN(
       some(2), some('a'), some(true),
-      none,
+      none
     )).toEqual(none)
   })
 

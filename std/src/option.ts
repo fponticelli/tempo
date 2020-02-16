@@ -307,7 +307,7 @@ export function cataLazy<A, B>(f: (a: A) => B, option: Option<A>, ifNone: () => 
 }
 
 export function foldLeft<T, B>(f: (acc: B, curr: T) => B, option: Option<T>,
-b: B): B {
+                               b: B): B {
   switch (option.kind) {
     case 'None': return b
     case 'Some': return f(b, option.value)
@@ -358,7 +358,7 @@ export function recoverLazy<T>(result: Option<T>, whenFailuref: () => T) {
 }
 
 export function combine<A, B>(a: Option<A>,
-  b: Option<B>): Option<[A, B]> {
+                              b: Option<B>): Option<[A, B]> {
   return mapN(a, b, (a, b) => [a, b])
 }
 
