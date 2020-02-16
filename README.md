@@ -6,18 +6,18 @@
 [![npm tempo paper](https://img.shields.io/npm/v/tempo-paper?label=npm%3A%20tempo-paper)](https://www.npmjs.com/package/tempo-paper)
 [![GitHub stars](https://img.shields.io/github/stars/fponticelli/tempo?label=Star%20me%20on%20Github&style=social)](https://github.com/fponticelli/tempo)
 
-[Project Homepage](https://fponticelli.github.io/tempo/)
+[Project Homepage](https://tempots.com/)
 
 Tempo is a framework to build dynamic front end applications.
 
 This is not an officially supported Google product.
 
-[TODO MVC demo](https://fponticelli.github.io/tempo/demo/todomvc/)
+[TODO MVC demo](https://tempots.com/demo/todomvc/)
 
-[HNPWA demo](https://fponticelli.github.io/tempo/demo/hnpwa/)
+[HNPWA demo](https://tempots.com/demo/hnpwa/)
 
-[Sample Application demo](https://fponticelli.github.io/tempo/demo/readme/)
+[Sample Application demo](https://tempots.com/demo/readme/)
 
-[PaperJS integration demo](https://fponticelli.github.io/tempo/demo/paper/)
+[PaperJS integration demo](https://tempots.com/demo/paper/)
 
-[Performance app](https://fponticelli.github.io/tempo/demo/benchmark/) to track improvements/regressions with new versions of the library.
+[Performance app](https://tempots.com/demo/benchmark/) to track improvements/regressions with new versions of the library.
