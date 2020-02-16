@@ -1,6 +1,11 @@
 # Change Log - tempo-store
 
-This log was last generated on Sat, 15 Feb 2020 20:16:59 GMT and should not be manually modified.
+This log was last generated on Sun, 16 Feb 2020 00:01:24 GMT and should not be manually modified.
+
+## 1.2.1
+Sun, 16 Feb 2020 00:01:24 GMT
+
+*Version update only*
 
 ## 1.2.0
 Sat, 15 Feb 2020 20:16:59 GMT

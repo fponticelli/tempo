@@ -39,10 +39,10 @@
   },
   "dependencies": {
     "acorn": "7.1.0",
-    "tempo-std": "0.3.0",
+    "tempo-std": "0.4.0",
     "tempo-core": "1.7.0",
-    "tempo-dom": "0.15.0",
-    "tempo-store": "1.2.0"
+    "tempo-dom": "0.15.1",
+    "tempo-store": "1.2.1"
   },
   "devDependencies": {
     "html-webpack-template": "6.2.0",

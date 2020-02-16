@@ -1,6 +1,6 @@
 {
   "name": "tempo-dom",
-  "version": "0.15.0",
+  "version": "0.15.1",
   "priority": 1,
   "description": "Fully-typed frontend framework alternative to React and Angular",
   "keywords": [
@@ -37,8 +37,8 @@
   },
   "dependencies": {
     "tempo-core": "1.7.0",
-    "tempo-std": "0.3.0",
-    "tempo-store": "1.2.0"
+    "tempo-std": "0.4.0",
+    "tempo-store": "1.2.1"
   },
   "devDependencies": {
     "@types/jest": "25.1.2",

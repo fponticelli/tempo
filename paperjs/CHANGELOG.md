@@ -1,6 +1,11 @@
 # Change Log - tempo-paper
 
-This log was last generated on Sat, 15 Feb 2020 20:16:59 GMT and should not be manually modified.
+This log was last generated on Sun, 16 Feb 2020 00:01:24 GMT and should not be manually modified.
+
+## 0.3.2
+Sun, 16 Feb 2020 00:01:24 GMT
+
+*Version update only*
 
 ## 0.3.1
 Sat, 15 Feb 2020 20:16:59 GMT

@@ -19,11 +19,11 @@
   ],
   "dependencies": {
     "acorn": "7.1.0",
-    "tempo-std": "0.3.0",
+    "tempo-std": "0.4.0",
     "tempo-core": "1.7.0",
-    "tempo-dom": "0.15.0",
-    "tempo-store": "1.2.0",
-    "tempo-paper": "0.3.1",
+    "tempo-dom": "0.15.1",
+    "tempo-store": "1.2.1",
+    "tempo-paper": "0.3.2",
     "paper": "0.12.3"
   },
   "devDependencies": {

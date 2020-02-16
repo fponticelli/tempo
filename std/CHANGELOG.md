@@ -1,6 +1,13 @@
 # Change Log - tempo-std
 
-This log was last generated on Sat, 15 Feb 2020 20:16:59 GMT and should not be manually modified.
+This log was last generated on Sun, 16 Feb 2020 00:01:24 GMT and should not be manually modified.
+
+## 0.4.0
+Sun, 16 Feb 2020 00:01:24 GMT
+
+### Minor changes
+
+- put subject first in all functions
 
 ## 0.3.0
 Sat, 15 Feb 2020 20:16:59 GMT

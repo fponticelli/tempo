@@ -2,6 +2,24 @@
   "name": "tempo-paper",
   "entries": [
     {
+      "version": "0.3.2",
+      "tag": "tempo-paper_v0.3.2",
+      "date": "Sun, 16 Feb 2020 00:01:24 GMT",
+      "comments": {
+        "dependency": [
+          {
+            "comment": "Updating dependency \"tempo-dom\" from `0.15.0` to `0.15.1`"
+          },
+          {
+            "comment": "Updating dependency \"tempo-std\" from `0.3.0` to `0.4.0`"
+          },
+          {
+            "comment": "Updating dependency \"tempo-store\" from `1.2.0` to `1.2.1`"
+          }
+        ]
+      }
+    },
+    {
       "version": "0.3.1",
       "tag": "tempo-paper_v0.3.1",
       "date": "Sat, 15 Feb 2020 20:16:59 GMT",
