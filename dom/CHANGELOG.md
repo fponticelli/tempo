@@ -1,6 +1,14 @@
 # Change Log - tempo-dom
 
-This log was last generated on Sun, 16 Feb 2020 03:58:19 GMT and should not be manually modified.
+This log was last generated on Mon, 17 Feb 2020 19:18:30 GMT and should not be manually modified.
+
+## 0.17.0
+Mon, 17 Feb 2020 19:18:30 GMT
+
+### Minor changes
+
+- Change signature of `unsafeHtml`
+- Change signature of `matchX` functions
 
 ## 0.16.0
 Sun, 16 Feb 2020 03:58:19 GMT
