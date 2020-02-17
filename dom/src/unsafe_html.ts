@@ -22,22 +22,20 @@ const renderLiteral = <State, Action, Query = unknown, El extends Element = Elem
 (
   element: DOMElement<State, Action, Query, El, T>,
   ctx: DOMContext<Action>,
-  transform: (source: string) => string,
   state: State,
   value: string | undefined
 ): View<State, Query> => {
   const view = element.render(ctx, state)
   const el = ctx.parent
-  el.innerHTML = transform(value || '')
+  el.innerHTML = value || ''
   return view
 }
 
 const renderFunction = <State, Action, Query, El extends Element = Element, T = unknown>(
   element: DOMElement<State, Action, Query, El, T>,
   ctx: DOMContext<Action>,
-  transform: (source: string) => string,
   state: State,
-  map: DerivedValue<State, string>
+  derivedValue: DerivedValue<State, string>
 ): View<State, Query> => {
   const prevAfterRender = element.afterrender
   let localEl: El
@@ -50,12 +48,12 @@ const renderFunction = <State, Action, Query, El extends Element = Element, T = 
     }
   }
   const view = element.render(ctx, state)
-  const value = map(state) || ''
-  localEl!.innerHTML = transform(value || '')
+  const value = derivedValue(state) || ''
+  localEl!.innerHTML = value || ''
   let oldContent = ''
   return {
     change: (state: State) => {
-      const newContent = transform(map(state) || '')
+      const newContent = derivedValue(state) || ''
       if (newContent !== oldContent) {
         localEl.innerHTML = newContent
         if (newContent.length < 20000)
@@ -71,44 +69,34 @@ const renderFunction = <State, Action, Query, El extends Element = Element, T = 
   }
 }
 
-class UnsafeHtml<State, Action, Query, El extends Element = Element, T = unknown> implements DOMTemplate<State, Action, Query> {
-  constructor(
-    readonly content: TextValue<State>,
-    readonly element: DOMElement<State, Action, Query, El, T>,
-    readonly transform: (source: string) => string
-  ) {}
-
-  render(ctx: DOMContext<Action>, state: State): View<State, Query> {
-    if (typeof this.content === 'function') {
-      return renderFunction<State, Action, Query, El, T>(
-        this.element,
-        ctx,
-        this.transform,
-        state,
-        this.content as DerivedValue<State, string>
-      )
-    } else {
-      return renderLiteral<State, Action, Query, El, T>(
-        this.element,
-        ctx,
-        this.transform,
-        state,
-        this.content
-      )
+export function unsafeHtml<State, Action, Query = unknown, El extends Element = Element, T = unknown>(
+  props: {
+    element?: DOMElement<State, Action, Query, El, T>
+  },
+  content: TextValue<State>
+): DOMTemplate<State, Action, Query> {
+  const element = props.element ?? el<State, Action, Query, El, T>('div', {})
+  if (typeof content === 'function') {
+    return {
+      render(ctx: DOMContext<Action>, state: State): View<State, Query> {
+        return renderFunction<State, Action, Query, El, T>(
+          element,
+          ctx,
+          state,
+          content as DerivedValue<State, string>
+        )
+      }
+    }
+  } else {
+    return {
+      render(ctx: DOMContext<Action>, state: State): View<State, Query> {
+        return renderLiteral<State, Action, Query, El, T>(
+          element,
+          ctx,
+          state,
+          content
+        )
+      }
     }
   }
-}
-
-export function unsafeHtml<State, Action, Query = unknown, El extends Element = Element, T = unknown>(
-  options: {
-    content: TextValue<State>
-    element?: DOMElement<State, Action, Query, El, T>
-    transform?: (source: string) => string
-  }
-): DOMTemplate<State, Action, Query> {
-  return new UnsafeHtml<State, Action, Query, El, T>(
-    options.content,
-    options.element || el<State, Action, Query, El, T>('div', {}),
-    options.transform || (s => s)
-  )
 }

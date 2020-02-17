@@ -19,7 +19,7 @@ import {
   RemoveNullableFromFields,
   Merge
 } from 'tempo-std/lib/types/objects'
-import { TempoAttributes } from './tempo_attributes'
+import { Props } from './value'
 import { ItemEvents, createItem } from './item'
 
 type WritableSymbolItem = ExcludeFunctionFields<
@@ -28,20 +28,20 @@ type WritableSymbolItem = ExcludeFunctionFields<
 
 type WritableSymbolItemOptionKeys = keyof WritableSymbolItem
 
-type WritableSymbolItemOptions<State> = {
+type WritableSymbolItemProps<State> = {
   [K in WritableSymbolItemOptionKeys]?: PaperAttribute<
     State,
     WritableSymbolItem[K]
   >
 }
 
-type SymbolItemOptions<State, Action, Query, T, Sub> =
+type SymbolItemProps<State, Action, Query, T, Sub> =
   // Merge<
   Partial<
     Merge<
       Merge<
-        WritableSymbolItemOptions<State>,
-        TempoAttributes<State, Action, Query, SymbolItem, T>
+        WritableSymbolItemProps<State>,
+        Props<State, Action, Query, SymbolItem, T>
       >,
       ItemEvents<State, Action, SymbolItem>
     >
@@ -50,7 +50,7 @@ type SymbolItemOptions<State, Action, Query, T, Sub> =
 // >
 
 export function symbolItem<State, Action, Query = unknown, T = unknown>(
-  options: SymbolItemOptions<State, Action, Query, T, SymbolItem>
+  props: SymbolItemProps<State, Action, Query, T, SymbolItem>
 ) {
   return createItem<
     State,
@@ -58,9 +58,9 @@ export function symbolItem<State, Action, Query = unknown, T = unknown>(
     Query,
     SymbolItem,
     T,
-    SymbolItemOptions<State, Action, Query, T, SymbolItem>
+    SymbolItemProps<State, Action, Query, T, SymbolItem>
   >(
-    (_: State) => new SymbolItem(options.definition as SymbolDefinition),
-    options
+    (_: State) => new SymbolItem(props.definition as SymbolDefinition),
+    props
   )
 }

@@ -16,7 +16,7 @@ import { mapState } from './map'
 import { until } from './until'
 
 export function iterate<OuterState, InnerState extends any[], Action, Query = unknown>(
-  options: {
+  props: {
     refId?: string
     getArray: (outer: OuterState) => InnerState
   },
@@ -27,7 +27,7 @@ export function iterate<OuterState, InnerState extends any[], Action, Query = un
     {
       map: (outer) => {
         outerState = outer
-        return options.getArray(outer)
+        return props.getArray(outer)
       }
     },
     until<InnerState, InnerState[number], Action, Query>(
@@ -41,7 +41,7 @@ export function iterate<OuterState, InnerState extends any[], Action, Query = un
 }
 
 export function iterateItems<OuterState, InnerState extends any[], Action, Query = unknown>(
-  options: {
+  props: {
     refId?: string
     getArray: (outer: OuterState) => InnerState
   },
@@ -49,7 +49,7 @@ export function iterateItems<OuterState, InnerState extends any[], Action, Query
 ): DOMTemplate<OuterState, Action, Query> {
   return mapState<OuterState, InnerState, Action, Query>(
     {
-      map: (outer) => options.getArray(outer)
+      map: (outer) => props.getArray(outer)
     },
     until<InnerState, InnerState[number], Action, Query>(
       {

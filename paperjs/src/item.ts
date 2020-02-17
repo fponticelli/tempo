@@ -16,7 +16,7 @@ import { MouseEvent, Item } from 'paper'
 import { View } from 'tempo-core/lib/view'
 import { PaperTemplate } from './template'
 import { PaperContext } from './context'
-import { TempoAttributes } from './tempo_attributes'
+import { Props } from './value'
 import { removeFields } from 'tempo-std/lib//objects'
 import { DerivedValue, DerivedOrLiteralValue } from 'tempo-core/lib/value'
 import { Merge } from 'tempo-std/lib/types/objects'
@@ -86,17 +86,17 @@ export class ItemTemplate<
 
 export function createItem<State, Action, Query, I extends Item, T, Option>(
   makeItem: (state: State) => I,
-  options: Partial<
+  props: Partial<
     Merge<
       { args?: {} },
-      Merge<Option, TempoAttributes<State, Action, Query, I, T>>
+      Merge<Option, Props<State, Action, Query, I, T>>
     >
   >,
   children?: PaperTemplate<State, Action, Query>[] | undefined
 ) {
-  const { afterchange, afterrender, beforechange, beforedestroy } = options
+  const { afterchange, afterrender, beforechange, beforedestroy } = props
   const attributes = removeFields(
-    options,
+    props,
     'afterchange',
     'afterrender',
     'beforechange',
@@ -193,8 +193,8 @@ export function createItem<State, Action, Query, I extends Item, T, Option>(
       views: View<State, Query>[] | undefined
     ) => (query: Query) => {
       views?.forEach(view => view.request(query))
-      if (typeof options.request !== 'undefined') {
-        options.request(query, item, ctx, wrapper.value)
+      if (typeof props.request !== 'undefined') {
+        props.request(query, item, ctx, wrapper.value)
       }
     }
   )

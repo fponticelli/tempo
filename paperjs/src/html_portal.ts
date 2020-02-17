@@ -18,7 +18,7 @@ import { DOMContext } from 'tempo-dom/lib/context'
 import { PaperContext } from './context'
 
 export function htmlPortal<State, Action, Query = unknown>(
-  options: {
+  props: {
     getParent: (doc: Document) => Element
     append: (doc: Document, node: Node) => void
   },
@@ -28,12 +28,12 @@ export function htmlPortal<State, Action, Query = unknown>(
     render(ctx: PaperContext<Action>, state: State) {
       const doc = ctx.canvas.ownerDocument!
       const append = (doc: Document, node: Node) => {
-        options.append(doc, node)
+        props.append(doc, node)
       }
       const domCtx = new DOMContext(doc!, () => {}, ctx.canvas, ctx.dispatch)
 
       const port = portal(
-        { append, getParent: options.getParent },
+        { append, getParent: props.getParent },
         ...children
       ).render(domCtx, state)
       return {
@@ -52,16 +52,16 @@ export function htmlPortal<State, Action, Query = unknown>(
 }
 
 export function htmlPortalWithSelector<State, Action, Query = unknown>(
-  options: { selector: string },
+  props: { selector: string },
   ...children: DOMChild<State, Action, Query>[]
 ): PaperTemplate<State, Action, Query> {
   return htmlPortal<State, Action, Query>(
     {
       getParent: (doc: Document) => {
-        const el = doc.querySelector(options.selector)
+        const el = doc.querySelector(props.selector)
         if (!el) {
           throw new Error(
-            `selector doesn't match any element: "${options.selector}"`
+            `selector doesn't match any element: "${props.selector}"`
           )
         }
         return el
@@ -69,7 +69,7 @@ export function htmlPortalWithSelector<State, Action, Query = unknown>(
       append: (doc: Document, node: Node) => {
         // Parent should always be available given the guarantee from `getParent`.
         // If parent has been removed from unsafe manipulation of the dom, an exception will occurr.
-        const parent = doc.querySelector(options.selector)!
+        const parent = doc.querySelector(props.selector)!
         parent.appendChild(node)
       }
     },

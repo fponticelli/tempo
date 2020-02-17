@@ -47,7 +47,7 @@ export const profileTemplate = section<Profile, Action>(
         tr(
           {},
           td({}, 'about:'),
-          td({}, unsafeHtml({ content: user => user.about }))
+          td({}, unsafeHtml({}, user => user.about))
         )
       )
     )

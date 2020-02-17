@@ -21,7 +21,7 @@ export function iterate<
   Action,
   Query = unknown
 >(
-  options: {
+  props: {
     refId?: string
     getArray: (outer: OuterState) => InnerState
   },
@@ -36,7 +36,7 @@ export function iterate<
     {
       map: outer => {
         outerState = outer
-        return options.getArray(outer)
+        return props.getArray(outer)
       }
     },
     until<InnerState, InnerState[number], Action, Query>(
@@ -55,14 +55,14 @@ export function iterateItems<
   Action,
   Query = unknown
 >(
-  options: {
+  props: {
     refId?: string
     getArray: (outer: OuterState) => InnerState
   },
   ...children: PaperTemplate<InnerState[number], Action, Query>[]
 ): PaperTemplate<OuterState, Action, Query> {
   return mapState<OuterState, InnerState, Action, Query>(
-    { map: outer => options.getArray(outer) },
+    { map: outer => props.getArray(outer) },
     until<InnerState, InnerState[number], Action, Query>(
       {
         repeatUntil: (value: InnerState, index: number) => value[index]

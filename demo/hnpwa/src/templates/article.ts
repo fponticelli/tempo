@@ -29,7 +29,7 @@ export const articleTemplate = article<Article, Action>(
       span({ attrs: { className: 'domain' } }, item => item.domain),
       itemFooterTemplate
     ),
-    unsafeHtml({ content: item => item.content }),
+    unsafeHtml({}, item => item.content),
     section(
       { attrs: { className: 'comments-view' } },
       mapState({ map: item => item.comments || [] }, commentsTemplate)

@@ -44,28 +44,28 @@ class MapStateTemplate<OuterState, InnerState, Action, Query> implements DOMTemp
 }
 
 export function mapState<OuterState, InnerState, Action, Query = unknown>(
-  options: { map: (value: OuterState) => InnerState },
+  props: { map: (value: OuterState) => InnerState },
   ...children: DOMChild<InnerState, Action, Query>[]
 ): DOMTemplate<OuterState, Action, Query> {
-  return new MapStateTemplate(options.map, mapArray(children, domChildToTemplate))
+  return new MapStateTemplate(props.map, mapArray(children, domChildToTemplate))
 }
 
 export function mapField<OuterState, Key extends keyof OuterState, Action, Query = unknown>(
-  options: { field: Key },
+  props: { field: Key },
   ...children: DOMChild<OuterState[Key], Action, Query>[]
 ): DOMTemplate<OuterState, Action, Query> {
   return mapState<OuterState, OuterState[Key], Action, Query>(
-    { map: (v: OuterState) => v[options.field] },
+    { map: (v: OuterState) => v[props.field] },
     ...children
   )
 }
 
 export function mapStateAndKeep<OuterState, InnerState, Action, Query = unknown>(
-  options: { map: (value: OuterState) => InnerState },
+  props: { map: (value: OuterState) => InnerState },
   ...children: DOMChild<[InnerState, OuterState], Action, Query>[]
 ): DOMTemplate<OuterState, Action, Query> {
   return new MapStateTemplate<OuterState, [InnerState, OuterState], Action, Query>(
-    (state: OuterState) => ([options.map(state), state]),
+    (state: OuterState) => ([props.map(state), state]),
     mapArray(children, domChildToTemplate)
   )
 }
@@ -95,10 +95,10 @@ class MapActionTemplate<State, OuterAction, InnerAction, Query> implements DOMTe
 }
 
 export function mapAction<State, OuterAction, InnerAction, Query = unknown>(
-  options: { map: (value: InnerAction) => OuterAction | undefined },
+  props: { map: (value: InnerAction) => OuterAction | undefined },
   ...children: DOMChild<State, InnerAction, Query>[]
 ): DOMTemplate<State, OuterAction, Query> {
-  return new MapActionTemplate<State, OuterAction, InnerAction, Query>(options.map, mapArray(children, domChildToTemplate))
+  return new MapActionTemplate<State, OuterAction, InnerAction, Query>(props.map, mapArray(children, domChildToTemplate))
 }
 
 class MapQueryTemplate<State, Action, OuterQuery, InnerQuery> implements DOMTemplate<State, Action, OuterQuery> {
@@ -128,15 +128,15 @@ class MapQueryTemplate<State, Action, OuterQuery, InnerQuery> implements DOMTemp
 }
 
 export function mapQuery<State, Action, OuterQuery, InnerQuery>(
-  options: { map: (value: OuterQuery) => InnerQuery },
+  props: { map: (value: OuterQuery) => InnerQuery },
   ...children: DOMChild<State, Action, InnerQuery>[]
 ): DOMTemplate<State, Action, OuterQuery> {
-  return new MapQueryTemplate<State, Action, OuterQuery, InnerQuery>(options.map, mapArray(children, domChildToTemplate))
+  return new MapQueryTemplate<State, Action, OuterQuery, InnerQuery>(props.map, mapArray(children, domChildToTemplate))
 }
 
 export function mapQueryConditional<State, Action, OuterQuery, InnerQuery>(
-  options: { map: (value: OuterQuery) => InnerQuery | undefined },
+  props: { map: (value: OuterQuery) => InnerQuery | undefined },
   ...children: DOMChild<State, Action, InnerQuery>[]
 ): DOMTemplate<State, Action, OuterQuery> {
-  return new MapQueryTemplate<State, Action, OuterQuery, InnerQuery>(options.map, mapArray(children, domChildToTemplate))
+  return new MapQueryTemplate<State, Action, OuterQuery, InnerQuery>(props.map, mapArray(children, domChildToTemplate))
 }

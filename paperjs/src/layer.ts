@@ -19,7 +19,7 @@ import {
   RemoveNullableFromFields,
   Merge
 } from 'tempo-std/lib/types/objects'
-import { TempoAttributes } from './tempo_attributes'
+import { Props } from './value'
 import { ItemEvents, createItem } from './item'
 import { PaperTemplate } from './template'
 
@@ -29,17 +29,17 @@ type WritableLayer = ExcludeFunctionFields<
 
 type WritableLayerOptionKeys = keyof WritableLayer
 
-type WritableLayerOptions<State> = {
+type WritableLayerProps<State> = {
   [K in WritableLayerOptionKeys]?: PaperAttribute<State, WritableLayer[K]>
 }
 
-type LayerOptions<State, Action, Query, T> = Partial<
+type LayerProps<State, Action, Query, T> = Partial<
   Merge<
     { args?: {} },
     Merge<
       Merge<
-        WritableLayerOptions<State>,
-        TempoAttributes<State, Action, Query, Layer, T>
+        WritableLayerProps<State>,
+        Props<State, Action, Query, Layer, T>
       >,
       ItemEvents<State, Action, Layer>
     >
@@ -47,7 +47,7 @@ type LayerOptions<State, Action, Query, T> = Partial<
 >
 
 export function layer<State, Action, Query = unknown, T = unknown>(
-  options: LayerOptions<State, Action, Query, T>,
+  props: LayerProps<State, Action, Query, T>,
   ...children: PaperTemplate<State, Action, Query>[]
 ) {
   return createItem<
@@ -56,13 +56,13 @@ export function layer<State, Action, Query = unknown, T = unknown>(
     Query,
     Layer,
     T,
-    LayerOptions<State, Action, Query, T>
+    LayerProps<State, Action, Query, T>
   >(
     (_: State) =>
-      typeof options.args !== 'undefined'
-        ? new Layer(options.args)
+      typeof props.args !== 'undefined'
+        ? new Layer(props.args)
         : new Layer([]),
-    options,
+    props,
     children
   )
 }

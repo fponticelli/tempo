@@ -15,7 +15,7 @@ import { DOMTemplate, DOMChild } from './template'
 import { DOMContext } from './context'
 import { View } from 'tempo-core/lib/view'
 import { processAttribute, processEvent, processStyle, domChildToTemplate, removeNode } from './utils/dom'
-import { Attributes, Attribute, AttributeValue, EventHandler, StyleAttribute } from './value'
+import { Props, Attribute, AttributeValue, EventHandler, StyleAttribute } from './value'
 import { map } from 'tempo-std/lib/arrays'
 import { attributeNameMap } from './utils/attributes_mapper'
 
@@ -161,38 +161,38 @@ const makeCreateElement = <El extends Element>(name: string) => (doc: Document) 
 
 export function el<State, Action, Query = unknown, El extends Element = Element, T = unknown>(
   name: string,
-  attributes: Attributes<State, Action, Query, El, T>,
+  props: Props<State, Action, Query, El, T>,
   ...children: DOMChild<State, Action, Query>[]
 ) {
   return new DOMElement<State, Action, Query, El, T>(
     makeCreateElement(name),
-    extractAttrs(attributes.attrs),
-    extractEvents(attributes.events),
-    extractStyles(attributes.styles),
-    attributes.afterrender,
-    attributes.beforechange,
-    attributes.afterchange,
-    attributes.beforedestroy,
-    attributes.respond,
+    extractAttrs(props.attrs),
+    extractEvents(props.events),
+    extractStyles(props.styles),
+    props.afterrender,
+    props.beforechange,
+    props.afterchange,
+    props.beforedestroy,
+    props.respond,
     map(children, domChildToTemplate)
   )
 }
 
 export function el2<El extends Element>(name: string) {
   return function <State, Action, Query = unknown, T = unknown>(
-    attributes: Attributes<State, Action, Query, El, T>,
+    props: Props<State, Action, Query, El, T>,
     ...children: DOMChild<State, Action, Query>[]
   ) {
     return new DOMElement<State, Action, Query, El, T>(
       makeCreateElement(name),
-      extractAttrs(attributes.attrs),
-      extractEvents(attributes.events),
-      extractStyles(attributes.styles),
-      attributes.afterrender,
-      attributes.beforechange,
-      attributes.afterchange,
-      attributes.beforedestroy,
-      attributes.respond,
+      extractAttrs(props.attrs),
+      extractEvents(props.events),
+      extractStyles(props.styles),
+      props.afterrender,
+      props.beforechange,
+      props.afterchange,
+      props.beforedestroy,
+      props.respond,
       map(children, domChildToTemplate)
     )
   }
@@ -208,39 +208,39 @@ const makeCreateElementNS = <El extends Element>(namespace: string, name: string
 export function elNS<State, Action, Query = unknown, El extends Element = Element, T = unknown>(
   ns: string,
   name: string,
-  attributes: Attributes<State, Action, Query, El, T>,
+  props: Props<State, Action, Query, El, T>,
   ...children: DOMChild<State, Action, Query>[]
 ) {
   const namespace = defaultNamespaces[ns] || ns
   return new DOMElement<State, Action, Query, El, T>(
     makeCreateElementNS(namespace, name),
-    extractAttrs(attributes.attrs),
-    extractEvents(attributes.events),
-    extractStyles(attributes.styles),
-    attributes.afterrender,
-    attributes.beforechange,
-    attributes.afterchange,
-    attributes.beforedestroy,
-    attributes.respond,
+    extractAttrs(props.attrs),
+    extractEvents(props.events),
+    extractStyles(props.styles),
+    props.afterrender,
+    props.beforechange,
+    props.afterchange,
+    props.beforedestroy,
+    props.respond,
     map(children, domChildToTemplate)
   )
 }
 
 export function elNS2<El extends Element>(namespace: string, name: string) {
   return function<State, Action, Query = unknown, T = unknown>(
-    attributes: Attributes<State, Action, Query, El, T>,
+    props: Props<State, Action, Query, El, T>,
     ...children: DOMChild<State, Action, Query>[]
   ) {
     return new DOMElement<State, Action, Query, El, T>(
       makeCreateElementNS(namespace, name),
-      extractAttrs(attributes.attrs),
-      extractEvents(attributes.events),
-      extractStyles(attributes.styles),
-      attributes.afterrender,
-      attributes.beforechange,
-      attributes.afterchange,
-      attributes.beforedestroy,
-      attributes.respond,
+      extractAttrs(props.attrs),
+      extractEvents(props.events),
+      extractStyles(props.styles),
+      props.afterrender,
+      props.beforechange,
+      props.afterchange,
+      props.beforedestroy,
+      props.respond,
       map(children, domChildToTemplate)
     )
   }

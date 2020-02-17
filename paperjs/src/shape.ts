@@ -19,7 +19,7 @@ import {
   RemoveNullableFromFields,
   Merge
 } from 'tempo-std/lib/types/objects'
-import { TempoAttributes } from './tempo_attributes'
+import { Props } from './value'
 import { ItemEvents, createItem } from './item'
 
 type WritableShape = ExcludeFunctionFields<
@@ -28,22 +28,22 @@ type WritableShape = ExcludeFunctionFields<
 
 type WritableShapeOptionKeys = keyof WritableShape
 
-type WritableShapeOptions<State> = {
+type WritableShapeProps<State> = {
   [K in WritableShapeOptionKeys]?: PaperAttribute<State, WritableShape[K]>
 }
 
-type ShapeOptions<State, Action, Query, T, Sub> = Partial<
+type ShapeProps<State, Action, Query, T, Sub> = Partial<
   Merge<
     Merge<
-      WritableShapeOptions<State>,
-      Merge<{ args?: {} }, TempoAttributes<State, Action, Query, Shape, T>>
+      WritableShapeProps<State>,
+      Merge<{ args?: {} }, Props<State, Action, Query, Shape, T>>
     >,
     ItemEvents<State, Action, Shape>
   >
 >
 
 export function circle<State, Action, Query = unknown, T = unknown>(
-  options: ShapeOptions<State, Action, Query, T, Shape.Circle>
+  props: ShapeProps<State, Action, Query, T, Shape.Circle>
 ) {
   return createItem<
     State,
@@ -51,18 +51,18 @@ export function circle<State, Action, Query = unknown, T = unknown>(
     Query,
     Shape,
     T,
-    ShapeOptions<State, Action, Query, T, Shape.Circle>
+    ShapeProps<State, Action, Query, T, Shape.Circle>
   >(
     (_: State) =>
-      typeof options.args !== 'undefined'
-        ? new Shape.Circle(options.args)
+      typeof props.args !== 'undefined'
+        ? new Shape.Circle(props.args)
         : new Shape.Circle(new Point(0, 0), 0),
-    options
+    props
   )
 }
 
 export function rectangle<State, Action, Query = unknown, T = unknown>(
-  options: ShapeOptions<State, Action, Query, T, Shape.Rectangle>
+  props: ShapeProps<State, Action, Query, T, Shape.Rectangle>
 ) {
   return createItem<
     State,
@@ -70,18 +70,18 @@ export function rectangle<State, Action, Query = unknown, T = unknown>(
     Query,
     Shape,
     T,
-    ShapeOptions<State, Action, Query, T, Shape.Rectangle>
+    ShapeProps<State, Action, Query, T, Shape.Rectangle>
   >(
     (_: State) =>
-      typeof options.args !== 'undefined'
-        ? new Shape.Rectangle(options.args)
+      typeof props.args !== 'undefined'
+        ? new Shape.Rectangle(props.args)
         : new Shape.Rectangle(new Point(0, 0), new Point(0, 0)),
-    options
+    props
   )
 }
 
 export function ellipse<State, Action, Query = unknown, T = unknown>(
-  options: ShapeOptions<State, Action, Query, T, Shape.Ellipse>
+  props: ShapeProps<State, Action, Query, T, Shape.Ellipse>
 ) {
   return createItem<
     State,
@@ -89,15 +89,15 @@ export function ellipse<State, Action, Query = unknown, T = unknown>(
     Query,
     Shape,
     T,
-    ShapeOptions<State, Action, Query, T, Shape.Ellipse>
+    ShapeProps<State, Action, Query, T, Shape.Ellipse>
   >(
     (_: State) =>
-      typeof options.args !== 'undefined'
-        ? new Shape.Ellipse(options.args)
+      typeof props.args !== 'undefined'
+        ? new Shape.Ellipse(props.args)
         : new Shape.Ellipse({
             center: new Point(0, 0),
             size: new Size(0, 0)
           }),
-    options
+    props
   )
 }

@@ -155,15 +155,15 @@ class MatchBoolTemplate<State, Action, Query>
   }
 }
 
-export function matchBool<State, Action, Query = unknown>(options: {
+export function matchBool<State, Action, Query = unknown>(props: {
   condition: (state: State) => boolean
   true: PaperTemplate<State, Action, Query>
   false: PaperTemplate<State, Action, Query>
 }): PaperTemplate<State, Action, Query> {
   return new MatchBoolTemplate<State, Action, Query>(
-    options.condition,
-    options.true,
-    options.false
+    props.condition,
+    props.true,
+    props.false
   )
 }
 

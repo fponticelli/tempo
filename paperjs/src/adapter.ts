@@ -99,7 +99,7 @@ export function adapter<
   InnerAction,
   Query = unknown
 >(
-  options: {
+  props: {
     mergeStates?: (
       outerState: OuterState,
       innerState: InnerState
@@ -111,9 +111,8 @@ export function adapter<
   child: Component<InnerState, InnerAction, Query>
 ): PaperTemplate<OuterState, OuterAction, Query> {
   return new PaperAdapterTemplate(
-    options.mergeStates || ((_u: OuterState, _d: InnerState) => undefined),
-    /* istanbul ignore next */
-    options.propagate || (() => undefined),
+    props.mergeStates || ((_u: OuterState, _d: InnerState) => undefined),
+    props.propagate || (() => undefined),
     child
   )
 }

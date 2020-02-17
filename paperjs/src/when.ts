@@ -17,18 +17,18 @@ import { View } from 'tempo-core/lib/view'
 import { map } from 'tempo-std/lib/arrays'
 import { Group } from 'paper'
 
-export interface WhenOptions<State> {
+export interface WhenProps<State> {
   condition: (state: State) => boolean
 }
 
 class PaperWhenTemplate<State, Action, Query>
   implements PaperTemplate<State, Action, Query> {
   constructor(
-    readonly options: WhenOptions<State>,
+    readonly props: WhenProps<State>,
     readonly children: PaperTemplate<State, Action, Query>[]
   ) {}
   render(ctx: PaperContext<Action>, state: State): View<State, Query> {
-    const { condition } = this.options
+    const { condition } = this.props
     const ref = new Group()
     ctx.append(ref)
     const newCtx = ctx.withAppend(item => ref.addChild(item))
@@ -65,19 +65,19 @@ class PaperWhenTemplate<State, Action, Query>
 }
 
 export function when<State, Action, Query = unknown>(
-  options: WhenOptions<State>,
+  props: WhenProps<State>,
   ...children: PaperTemplate<State, Action, Query>[]
 ): PaperTemplate<State, Action, Query> {
-  return new PaperWhenTemplate<State, Action, Query>(options, children)
+  return new PaperWhenTemplate<State, Action, Query>(props, children)
 }
 
 export function unless<State, Action, Query = unknown>(
-  options: WhenOptions<State>,
+  props: WhenProps<State>,
   ...children: PaperTemplate<State, Action, Query>[]
 ): PaperTemplate<State, Action, Query> {
   return new PaperWhenTemplate<State, Action, Query>(
     {
-      condition: (v: State) => !options.condition(v)
+      condition: (v: State) => !props.condition(v)
     },
     children
   )

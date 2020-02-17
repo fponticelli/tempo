@@ -19,7 +19,7 @@ import {
   RemoveNullableFromFields,
   Merge
 } from 'tempo-std/lib/types/objects'
-import { TempoAttributes } from './tempo_attributes'
+import { Props } from './value'
 import { ItemEvents, createItem } from './item'
 import { PaperTemplate } from './template'
 
@@ -27,22 +27,22 @@ type WritableCompoundPath = ExcludeFunctionFields<
   RemoveNullableFromFields<WritableFields<CompoundPath>>
 >
 
-type WritableCompoundPathOptionKeys = keyof WritableCompoundPath
+type WritableCompoundPathPorpsKeys = keyof WritableCompoundPath
 
-type WritableCompoundPathOptions<State> = {
-  [K in WritableCompoundPathOptionKeys]?: PaperAttribute<
+type WritableCompoundPathProps<State> = {
+  [K in WritableCompoundPathPorpsKeys]?: PaperAttribute<
     State,
     WritableCompoundPath[K]
   >
 }
 
-type CompoundPathOptions<State, Action, Query, T> = Partial<
+type CompoundPathProps<State, Action, Query, T> = Partial<
   Merge<
     { args?: {} },
     Merge<
       Merge<
-        WritableCompoundPathOptions<State>,
-        TempoAttributes<State, Action, Query, CompoundPath, T>
+        WritableCompoundPathProps<State>,
+        Props<State, Action, Query, CompoundPath, T>
       >,
       ItemEvents<State, Action, CompoundPath>
     >
@@ -50,7 +50,7 @@ type CompoundPathOptions<State, Action, Query, T> = Partial<
 >
 
 export function compoundPath<State, Action, Query, T = unknown>(
-  options: CompoundPathOptions<State, Action, Query, T>,
+  props: CompoundPathProps<State, Action, Query, T>,
   ...children: PaperTemplate<State, Action, Query>[]
 ) {
   return createItem<
@@ -59,13 +59,13 @@ export function compoundPath<State, Action, Query, T = unknown>(
     Query,
     CompoundPath,
     T,
-    CompoundPathOptions<State, Action, Query, T>
+    CompoundPathProps<State, Action, Query, T>
   >(
     (_: State) =>
-      typeof options.args !== 'undefined'
-        ? new CompoundPath(options.args)
+      typeof props.args !== 'undefined'
+        ? new CompoundPath(props.args)
         : new CompoundPath([]),
-    options,
+    props,
     children
   )
 }

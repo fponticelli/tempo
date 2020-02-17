@@ -142,7 +142,7 @@ class MatchBoolTemplate<
 }
 
 export function matchBool<State, Action, Query = unknown>(
-  options: {
+  props: {
     condition: Attribute<State, boolean>,
     true: DOMChild<State, Action, Query>,
     false: DOMChild<State, Action, Query>,
@@ -150,10 +150,10 @@ export function matchBool<State, Action, Query = unknown>(
   }
 ): DOMTemplate<State, Action, Query> {
   return new MatchBoolTemplate<State, Action, Query>(
-    options.condition,
-    domChildToTemplate(options.true),
-    domChildToTemplate(options.false),
-    options.refId || 't:match-bool'
+    props.condition,
+    domChildToTemplate(props.true),
+    domChildToTemplate(props.false),
+    props.refId || 't:match-bool'
   )
 }
 

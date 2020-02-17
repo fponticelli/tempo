@@ -28,7 +28,7 @@ interface PaperLocal<State, Action, Query> {
 }
 
 export function project<State, Action, Query>(
-  options: {
+  props: {
     width: Attribute<State, number>
     height: Attribute<State, number>
     scope?: PaperScope
@@ -50,8 +50,8 @@ export function project<State, Action, Query>(
     PaperLocal<State, Action, Query>
   >('canvas', {
     attrs: {
-      width: options.width,
-      height: options.height
+      width: props.width,
+      height: props.height
     },
     afterrender: (
       state: State,
@@ -59,11 +59,11 @@ export function project<State, Action, Query>(
       ctx: DOMContext<Action>
     ) => {
       const scope =
-        options.scope || ((PaperScope.get(0) as unknown) as PaperScope)
+        props.scope || ((PaperScope.get(0) as unknown) as PaperScope)
       const derived = [] as ((state: State) => void)[]
       scope.setup(el)
       scope.install(window)
-      const active = resolveAttribute(options.active)(state)
+      const active = resolveAttribute(props.active)(state)
       if (typeof active === 'undefined' || active === true) {
         scope.activate()
       }
@@ -73,25 +73,25 @@ export function project<State, Action, Query>(
         project.activate()
       }
 
-      if (typeof options.active === 'function')
+      if (typeof props.active === 'function')
         derived.push((state: State) => {
-          const fun = options.active! as DerivedValue<State, boolean>
+          const fun = props.active! as DerivedValue<State, boolean>
           if (fun(state)) {
             scope.activate()
             project.activate()
           }
         })
 
-      if (typeof options.width === 'function') {
+      if (typeof props.width === 'function') {
         derived.push((state: State) => {
-          const f = options.width as DerivedValue<State, number>
+          const f = props.width as DerivedValue<State, number>
           project.view.viewSize!.width = f(state) || null
         })
       }
 
-      if (typeof options.height === 'function') {
+      if (typeof props.height === 'function') {
         derived.push((state: State) => {
-          const f = options.height as DerivedValue<State, number>
+          const f = props.height as DerivedValue<State, number>
           project.view.viewSize!.height = f(state) || null
         })
       }
@@ -137,8 +137,8 @@ export function project<State, Action, Query>(
       if (typeof scope !== undefined) {
         const { views } = scope!
         views.forEach(view => view.request(query))
-        if (options.respond) {
-          options.respond(query, el, ctx, scope)
+        if (props.respond) {
+          props.respond(query, el, ctx, scope)
         }
         return scope
       } else {

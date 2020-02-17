@@ -74,11 +74,11 @@ class ComponentTemplate<State, Action, Query> implements Component<State, Action
 }
 
 export function component<State, Action, Query = unknown>(
-  attributes: {
+  props: {
     store: Store<State, Action>
     delayed?: boolean
   },
   ...children: DOMChild<State, Action, Query>[]
 ): Component<State, Action, Query> {
-  return new ComponentTemplate<State, Action, Query>(attributes.store, map(children, domChildToTemplate), attributes.delayed || false)
+  return new ComponentTemplate<State, Action, Query>(props.store, map(children, domChildToTemplate), props.delayed || false)
 }

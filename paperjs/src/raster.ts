@@ -19,7 +19,7 @@ import {
   RemoveNullableFromFields,
   Merge
 } from 'tempo-std/lib/types/objects'
-import { TempoAttributes } from './tempo_attributes'
+import { Props } from './value'
 import { ItemEvents, createItem } from './item'
 
 export interface RasterSpecificEvents<State, Action, El> {
@@ -33,17 +33,17 @@ type WritableRaster = ExcludeFunctionFields<
 
 type WritableRasterOptionKeys = keyof WritableRaster
 
-type WritableRasterOptions<State> = {
+type WritableRasterProps<State> = {
   [K in WritableRasterOptionKeys]?: PaperAttribute<State, WritableRaster[K]>
 }
 
-type RasterOptions<State, Action, Query, T> = Partial<
+type RasterProps<State, Action, Query, T> = Partial<
   Merge<
     { args?: {} },
     Merge<
       Merge<
-        WritableRasterOptions<State>,
-        TempoAttributes<State, Action, Query, Raster, T>
+        WritableRasterProps<State>,
+        Props<State, Action, Query, Raster, T>
       >,
       Merge<
         ItemEvents<State, Action, Raster>,
@@ -54,7 +54,7 @@ type RasterOptions<State, Action, Query, T> = Partial<
 >
 
 export function raster<State, Action, Query = unknown, T = unknown>(
-  options: RasterOptions<State, Action, Query, T>
+  props: RasterProps<State, Action, Query, T>
 ) {
   return createItem<
     State,
@@ -62,10 +62,10 @@ export function raster<State, Action, Query = unknown, T = unknown>(
     Query,
     Raster,
     T,
-    RasterOptions<State, Action, Query, T>
+    RasterProps<State, Action, Query, T>
   >(
     (_: State) =>
-      typeof options.args ? new Raster(options.args as any) : new Raster(),
-    options
+      typeof props.args ? new Raster(props.args as any) : new Raster(),
+    props
   )
 }

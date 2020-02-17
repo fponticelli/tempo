@@ -19,7 +19,7 @@ import { map } from 'tempo-std/lib/arrays'
 
 class UntilTemplate<OuterState, InnerState, Action, Query> implements DOMTemplate<OuterState, Action, Query> {
   constructor(
-    readonly options: {
+    readonly props: {
       refId?: string
       repeatUntil: (state: OuterState, index: number) => InnerState | undefined
     },
@@ -28,7 +28,7 @@ class UntilTemplate<OuterState, InnerState, Action, Query> implements DOMTemplat
 
   render(ctx: DOMContext<Action>, state: OuterState): View<OuterState, Query> {
     const { children } = this
-    const { refId, repeatUntil } = this.options
+    const { refId, repeatUntil } = this.props
     const { ctx: newCtx, ref } = ctx.withAppendToReference(refId)
     let childrenViews: View<InnerState, Query>[][] = []
     const view = {
@@ -76,11 +76,11 @@ class UntilTemplate<OuterState, InnerState, Action, Query> implements DOMTemplat
 }
 
 export function until<OuterState, InnerState, Action, Query = unknown>(
-  options: {
+  props: {
     refId?: string
     repeatUntil: (state: OuterState, index: number) => InnerState | undefined
   },
   ...children: DOMChild<InnerState, Action, Query>[]
 ): DOMTemplate<OuterState, Action, Query> {
-  return new UntilTemplate<OuterState, InnerState, Action, Query>(options, map(children, domChildToTemplate))
+  return new UntilTemplate<OuterState, InnerState, Action, Query>(props, map(children, domChildToTemplate))
 }

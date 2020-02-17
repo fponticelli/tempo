@@ -47,10 +47,10 @@ class MapStateTemplate<OuterState, InnerState, Action, Query>
 }
 
 export function mapState<OuterState, InnerState, Action, Query = unknown>(
-  options: { map: (value: OuterState) => InnerState },
+  props: { map: (value: OuterState) => InnerState },
   ...children: PaperTemplate<InnerState, Action, Query>[]
 ): PaperTemplate<OuterState, Action, Query> {
-  return new MapStateTemplate(options.map, children)
+  return new MapStateTemplate(props.map, children)
 }
 
 export function mapStateAndKeep<
@@ -59,7 +59,7 @@ export function mapStateAndKeep<
   Action,
   Query = unknown
 >(
-  options: { map: (value: OuterState) => InnerState },
+  props: { map: (value: OuterState) => InnerState },
   ...children: PaperTemplate<[InnerState, OuterState], Action, Query>[]
 ): PaperTemplate<OuterState, Action, Query> {
   return new MapStateTemplate<
@@ -67,7 +67,7 @@ export function mapStateAndKeep<
     [InnerState, OuterState],
     Action,
     Query
-  >((state: OuterState) => [options.map(state), state], children)
+  >((state: OuterState) => [props.map(state), state], children)
 }
 
 class MapActionTemplate<State, OuterAction, InnerAction, Query>
@@ -96,11 +96,11 @@ class MapActionTemplate<State, OuterAction, InnerAction, Query>
 }
 
 export function mapAction<State, OuterAction, InnerAction, Query = unknown>(
-  options: { map: (value: InnerAction) => OuterAction | undefined },
+  props: { map: (value: InnerAction) => OuterAction | undefined },
   ...children: PaperTemplate<State, InnerAction, Query>[]
 ): PaperTemplate<State, OuterAction, Query> {
   return new MapActionTemplate<State, OuterAction, InnerAction, Query>(
-    options.map,
+    props.map,
     children
   )
 }
@@ -133,21 +133,21 @@ class MapQueryTemplate<State, Action, OuterQuery, InnerQuery>
 }
 
 export function mapQuery<State, Action, OuterQuery, InnerQuery>(
-  options: { map: (value: OuterQuery) => InnerQuery },
+  props: { map: (value: OuterQuery) => InnerQuery },
   ...children: PaperTemplate<State, Action, InnerQuery>[]
 ): PaperTemplate<State, Action, OuterQuery> {
   return new MapQueryTemplate<State, Action, OuterQuery, InnerQuery>(
-    options.map,
+    props.map,
     children
   )
 }
 
 export function mapQueryConditional<State, Action, OuterQuery, InnerQuery>(
-  options: { map: (value: OuterQuery) => InnerQuery | undefined },
+  props: { map: (value: OuterQuery) => InnerQuery | undefined },
   ...children: PaperTemplate<State, Action, InnerQuery>[]
 ): PaperTemplate<State, Action, OuterQuery> {
   return new MapQueryTemplate<State, Action, OuterQuery, InnerQuery>(
-    options.map,
+    props.map,
     children
   )
 }

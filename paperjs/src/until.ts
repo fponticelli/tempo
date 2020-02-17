@@ -20,7 +20,7 @@ import { Group } from 'paper'
 class PaperUntilTemplate<OuterState, InnerState, Action, Query>
   implements PaperTemplate<OuterState, Action, Query> {
   constructor(
-    readonly options: {
+    readonly props: {
       repeatUntil: (state: OuterState, index: number) => InnerState | undefined
     },
     readonly children: PaperTemplate<InnerState, Action, Query>[]
@@ -31,7 +31,7 @@ class PaperUntilTemplate<OuterState, InnerState, Action, Query>
     state: OuterState
   ): View<OuterState, Query> {
     const { children } = this
-    const { repeatUntil } = this.options
+    const { repeatUntil } = this.props
     const ref = new Group()
     ctx.append(ref)
     const newCtx = ctx.withAppend(item => ref.addChild(item))
@@ -78,13 +78,13 @@ class PaperUntilTemplate<OuterState, InnerState, Action, Query>
 }
 
 export function until<OuterState, InnerState, Action, Query = unknown>(
-  options: {
+  props: {
     repeatUntil: (state: OuterState, index: number) => InnerState | undefined
   },
   ...children: PaperTemplate<InnerState, Action, Query>[]
 ): PaperTemplate<OuterState, Action, Query> {
   return new PaperUntilTemplate<OuterState, InnerState, Action, Query>(
-    options,
+    props,
     children
   )
 }

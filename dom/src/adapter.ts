@@ -69,16 +69,16 @@ export interface PropagateArg<OuterState, InnerState, OuterAction, InnerAction> 
 }
 
 export function adapter<OuterState, InnerState, OuterAction, InnerAction, Query = unknown>(
-  options: {
+  props: {
     mergeStates?: (outerState: OuterState, innerState: InnerState) => InnerState | undefined
     propagate?: (args: PropagateArg<OuterState, InnerState, OuterAction, InnerAction>) => void
   },
   child: Component<InnerState, InnerAction, Query>
 ): DOMTemplate<OuterState, OuterAction, Query> {
   return new AdapterTemplate(
-    options.mergeStates || ((_u: OuterState, _d: InnerState) => undefined),
+    props.mergeStates || ((_u: OuterState, _d: InnerState) => undefined),
     /* istanbul ignore next */
-    options.propagate || (() => undefined),
+    props.propagate || (() => undefined),
     child
   )
 }

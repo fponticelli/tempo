@@ -19,7 +19,7 @@ import {
   RemoveNullableFromFields,
   Merge
 } from 'tempo-std/lib/types/objects'
-import { TempoAttributes } from './tempo_attributes'
+import { Props } from './value'
 import { PaperTemplate } from './template'
 import { PaperContext } from './context'
 import { DerivedValue } from 'tempo-core/lib/value'
@@ -31,7 +31,7 @@ type WritableTool = ExcludeFunctionFields<
 
 type WritableToolOptionKeys = keyof WritableTool
 
-type WritableToolOptions<State> = {
+type WritableToolProps<State> = {
   [K in WritableToolOptionKeys]?: PaperAttribute<State, WritableTool[K]>
 }
 
@@ -49,52 +49,52 @@ interface ToolEvents<State, Action> {
   onKeyUp?: PaperEventHandler<State, Action, KeyEvent, Tool>
 }
 
-type ToolOptions<State, Action, Query, T> = Partial<
+type ToolProps<State, Action, Query, T> = Partial<
   Merge<
     Merge<
-      WritableToolOptions<State>,
-      TempoAttributes<State, Action, Query, Tool, T>
+      WritableToolProps<State>,
+      Props<State, Action, Query, Tool, T>
     >,
     Merge<ToolAttributes<State>, ToolEvents<State, Action>>
   >
 >
 
 export function tool<State, Action, Query = unknown, T = unknown>(
-  options: ToolOptions<State, Action, Query, T>
+  props: ToolProps<State, Action, Query, T>
 ): PaperTemplate<State, Action, Query> {
   return {
     render(ctx: PaperContext<Action>, state: State) {
       const tool = new ctx.scope.Tool() as Tool
       let value: T | undefined
-      if (options.afterrender) value = options.afterrender(state, tool, ctx)
-      const active = resolveAttribute(options.active)(state)
+      if (props.afterrender) value = props.afterrender(state, tool, ctx)
+      const active = resolveAttribute(props.active)(state)
       if (typeof active === 'undefined' || active === true) tool.activate()
 
       const derived = [] as ((state: State) => void)[]
 
       derived.push((newState: State) => (state = newState))
 
-      if (typeof options.active === 'function')
+      if (typeof props.active === 'function')
         derived.push((state: State) => {
-          const fun = options.active! as DerivedValue<State, boolean>
+          const fun = props.active! as DerivedValue<State, boolean>
           if (fun(state)) tool.activate()
         })
 
       const anyTool = tool as any
-      keys(options).forEach(attr => {
+      keys(props).forEach(attr => {
         if (attr.startsWith('on')) {
-          const f = options[attr] as PaperEventHandler<State, Action, any, Tool>
+          const f = props[attr] as PaperEventHandler<State, Action, any, Tool>
           anyTool[attr] = (event: any) => {
             const action = f(state, event, tool, ctx.project)
             if (typeof action !== 'undefined') ctx.dispatch(action)
           }
         } else {
-          const value = resolveAttribute(options[attr])
+          const value = resolveAttribute(props[attr])
           anyTool[attr] = value
-          if (typeof options[attr] === 'function') {
-            const k = attr as keyof ToolOptions<State, Action, Query, T>
+          if (typeof props[attr] === 'function') {
+            const k = attr as keyof ToolProps<State, Action, Query, T>
             derived.push((state: State) => {
-              const fun = options[k]! as DerivedValue<State, boolean>
+              const fun = props[k]! as DerivedValue<State, boolean>
               anyTool[k] = fun(state)
             })
           }
@@ -103,16 +103,16 @@ export function tool<State, Action, Query = unknown, T = unknown>(
 
       return {
         change(state: State) {
-          if (options.beforechange)
-            value = options.beforechange(state, tool, ctx, value)
+          if (props.beforechange)
+            value = props.beforechange(state, tool, ctx, value)
 
           derived.forEach(d => d(state))
 
-          if (options.afterchange)
-            value = options.afterchange(state, tool, ctx, value)
+          if (props.afterchange)
+            value = props.afterchange(state, tool, ctx, value)
         },
         destroy() {
-          if (options.beforedestroy) options.beforedestroy(tool, ctx, value)
+          if (props.beforedestroy) props.beforedestroy(tool, ctx, value)
           tool.remove()
         },
         request(query: Query) {}

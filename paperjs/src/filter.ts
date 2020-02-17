@@ -46,11 +46,11 @@ class FilterStateTemplate<State, Action, Query>
 }
 
 export function filterState<State, Action, Query = unknown>(
-  options: { isSame?: (prev: State, next: State) => boolean },
+  props: { isSame?: (prev: State, next: State) => boolean },
   ...children: PaperTemplate<State, Action, Query>[]
 ): PaperTemplate<State, Action, Query> {
   return new FilterStateTemplate(
-    options.isSame || ((a: State, b: State) => a === b),
+    props.isSame || ((a: State, b: State) => a === b),
     children
   )
 }

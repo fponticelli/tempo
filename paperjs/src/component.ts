@@ -77,15 +77,15 @@ class PaperComponentTemplate<State, Action, Query>
 }
 
 export function component<State, Action, Query = unknown>(
-  attributes: {
+  props: {
     store: Store<State, Action>
     delayed?: boolean
   },
   ...children: PaperTemplate<State, Action, Query>[]
 ) {
   return new PaperComponentTemplate<State, Action, Query>(
-    attributes.store,
+    props.store,
     children,
-    attributes.delayed || false
+    props.delayed || false
   )
 }

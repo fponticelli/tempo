@@ -19,7 +19,7 @@ import {
   RemoveNullableFromFields,
   Merge
 } from 'tempo-std/lib/types/objects'
-import { TempoAttributes } from './tempo_attributes'
+import { Props } from './value'
 import { ItemEvents, createItem } from './item'
 
 type WritableShape = ExcludeFunctionFields<
@@ -28,22 +28,22 @@ type WritableShape = ExcludeFunctionFields<
 
 type WritableShapeOptionKeys = keyof WritableShape
 
-type WritableShapeOptions<State> = {
+type WritableShapeProps<State> = {
   [K in WritableShapeOptionKeys]?: PaperAttribute<State, WritableShape[K]>
 }
 
-type ShapeOptions<State, Action, Query, T, Sub> = Partial<
+type ShapeProps<State, Action, Query, T, Sub> = Partial<
   Merge<
     Merge<
-      WritableShapeOptions<State>,
-      TempoAttributes<State, Action, Query, PointText, T>
+      WritableShapeProps<State>,
+      Props<State, Action, Query, PointText, T>
     >,
     ItemEvents<State, Action, PointText>
   >
 >
 
 export function shape<State, Action, Query = unknown, T = unknown>(
-  options: ShapeOptions<State, Action, Query, T, PointText>
+  props: ShapeProps<State, Action, Query, T, PointText>
 ) {
   return createItem<
     State,
@@ -51,6 +51,6 @@ export function shape<State, Action, Query = unknown, T = unknown>(
     Query,
     PointText,
     T,
-    ShapeOptions<State, Action, Query, T, PointText>
-  >((_: State) => new PointText(new Point(0, 0)), options)
+    ShapeProps<State, Action, Query, T, PointText>
+  >((_: State) => new PointText(new Point(0, 0)), props)
 }

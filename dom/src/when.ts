@@ -17,18 +17,18 @@ import { View } from 'tempo-core/lib/view'
 import { domChildToTemplate, removeNode } from './utils/dom'
 import { map } from 'tempo-std/lib/arrays'
 
-export interface WhenOptions<State> {
+export interface WhenProps<State> {
   condition: (state: State) => boolean
   refId?: string
 }
 
 class WhenTemplate<State, Action, Query> implements DOMTemplate<State, Action, Query> {
   constructor(
-    readonly options: WhenOptions<State>,
+    readonly props: WhenProps<State>,
     readonly children: DOMTemplate<State, Action, Query>[]
   ) {}
   render(ctx: DOMContext<Action>, state: State): View<State, Query> {
-    const { condition, refId } = this.options
+    const { condition, refId } = this.props
     const { ctx: newCtx, ref } = ctx.withAppendToReference(refId || 't:when')
     let views: View<State, Query>[] | undefined
     const view = {
@@ -63,20 +63,20 @@ class WhenTemplate<State, Action, Query> implements DOMTemplate<State, Action, Q
 }
 
 export function when<State, Action, Query = unknown>(
-  options: WhenOptions<State>,
+  props: WhenProps<State>,
   ...children: DOMChild<State, Action, Query>[]
 ): DOMTemplate<State, Action, Query> {
-  return new WhenTemplate<State, Action, Query>(options, map(children, domChildToTemplate))
+  return new WhenTemplate<State, Action, Query>(props, map(children, domChildToTemplate))
 }
 
 export function unless<State, Action, Query = unknown>(
-  options: WhenOptions<State>,
+  props: WhenProps<State>,
   ...children: DOMChild<State, Action, Query>[]
 ): DOMTemplate<State, Action, Query> {
   return new WhenTemplate<State, Action, Query>(
     {
-      condition: (v: State) => !options.condition(v),
-      refId: options.refId || 't:unless'
+      condition: (v: State) => !props.condition(v),
+      refId: props.refId || 't:unless'
     },
     map(children, domChildToTemplate)
   )

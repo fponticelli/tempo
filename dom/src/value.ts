@@ -22,7 +22,7 @@ export type StyleAttribute<State, Value> = DerivedOrLiteralValue<State, Value | 
 
 export type AttributeValue = string | number | boolean | string[]
 
-export interface Attributes<State, Action, Query = unknown, El extends Element = Element, T = unknown> {
+export interface Props<State, Action, Query = unknown, El extends Element = Element, T = unknown> {
   attrs?: Record<string, Attribute<State, AttributeValue>>
   events?: Record<string, EventHandler<State, Action, any, El>>
   styles?: Record<string, StyleAttribute<State, string>>

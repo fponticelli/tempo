@@ -19,7 +19,7 @@ import {
   RemoveNullableFromFields,
   Merge
 } from 'tempo-std/lib/types/objects'
-import { TempoAttributes } from './tempo_attributes'
+import { Props } from './value'
 import { ItemEvents, createItem } from './item'
 import { PaperTemplate } from './template'
 
@@ -29,22 +29,22 @@ type WritableGroup = ExcludeFunctionFields<
 
 type WritableGroupOptionKeys = keyof WritableGroup
 
-type WritableGroupOptions<State> = {
+type WritableGroupProps<State> = {
   [K in WritableGroupOptionKeys]?: PaperAttribute<State, WritableGroup[K]>
 }
 
-type GroupOptions<State, Action, Query, T> = Partial<
+type GroupProps<State, Action, Query, T> = Partial<
   Merge<
     Merge<
-      WritableGroupOptions<State>,
-      TempoAttributes<State, Action, Query, Group, T>
+      WritableGroupProps<State>,
+      Props<State, Action, Query, Group, T>
     >,
     ItemEvents<State, Action, Group>
   >
 >
 
 export function group<State, Action, Query, T = unknown>(
-  options: GroupOptions<State, Action, Query, T>,
+  props: GroupProps<State, Action, Query, T>,
   ...children: PaperTemplate<State, Action, Query>[]
 ) {
   return createItem<
@@ -53,6 +53,6 @@ export function group<State, Action, Query, T = unknown>(
     Query,
     Group,
     T,
-    GroupOptions<State, Action, Query, T>
-  >((_: State) => new Group(new Size(0, 0)), options, children)
+    GroupProps<State, Action, Query, T>
+  >((_: State) => new Group(new Size(0, 0)), props, children)
 }

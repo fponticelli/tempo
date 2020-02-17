@@ -19,7 +19,7 @@ import {
   RemoveNullableFromFields,
   Merge
 } from 'tempo-std/lib/types/objects'
-import { TempoAttributes } from './tempo_attributes'
+import { Props } from './value'
 import { ItemEvents, createItem } from './item'
 
 type WritablePath = ExcludeFunctionFields<
@@ -28,30 +28,30 @@ type WritablePath = ExcludeFunctionFields<
 
 type WritablePathOptionKeys = keyof WritablePath
 
-type WritablePathOptions<State> = {
+type WritablePathProps<State> = {
   [K in WritablePathOptionKeys]?: PaperAttribute<State, WritablePath[K]>
 }
 
-type PathOptions<State, Action, Query, T> = Partial<
+type PathProps<State, Action, Query, T> = Partial<
   Merge<
     { args?: {} },
     Merge<
       Merge<
-        WritablePathOptions<State>,
-        TempoAttributes<State, Action, Query, Path, T>
+        WritablePathProps<State>,
+        Props<State, Action, Query, Path, T>
       >,
       ItemEvents<State, Action, Path>
     >
   >
 >
 
-type PathConstrOptions<State, Action, Query, T> = Merge<
+type PathConstrProps<State, Action, Query, T> = Merge<
   { args: any },
   Partial<
     Merge<
       Merge<
-        WritablePathOptions<State>,
-        TempoAttributes<State, Action, Query, Path, T>
+        WritablePathProps<State>,
+        Props<State, Action, Query, Path, T>
       >,
       ItemEvents<State, Action, Path>
     >
@@ -59,7 +59,7 @@ type PathConstrOptions<State, Action, Query, T> = Merge<
 >
 
 export function path<State, Action, Query = unknown, T = unknown>(
-  options: PathOptions<State, Action, Query, T>
+  props: PathProps<State, Action, Query, T>
 ) {
   return createItem<
     State,
@@ -67,18 +67,18 @@ export function path<State, Action, Query = unknown, T = unknown>(
     Query,
     Path,
     T,
-    PathOptions<State, Action, Query, T>
+    PathProps<State, Action, Query, T>
   >(
     (_: State) =>
-      typeof options.args !== 'undefined'
-        ? new Path(options.args)
+      typeof props.args !== 'undefined'
+        ? new Path(props.args)
         : new Path([]),
-    options
+    props
   )
 }
 
 export function pathLine<State, Action, Query = unknown, T = unknown>(
-  options: PathConstrOptions<State, Action, Query, T>
+  props: PathConstrProps<State, Action, Query, T>
 ) {
   return createItem<
     State,
@@ -86,12 +86,12 @@ export function pathLine<State, Action, Query = unknown, T = unknown>(
     Query,
     Path,
     T,
-    PathOptions<State, Action, Query, T>
-  >((_: State) => new Path.Line(options.args), options)
+    PathProps<State, Action, Query, T>
+  >((_: State) => new Path.Line(props.args), props)
 }
 
 export function pathCircle<State, Action, Query = unknown, T = unknown>(
-  options: PathConstrOptions<State, Action, Query, T>
+  props: PathConstrProps<State, Action, Query, T>
 ) {
   return createItem<
     State,
@@ -99,12 +99,12 @@ export function pathCircle<State, Action, Query = unknown, T = unknown>(
     Query,
     Path,
     T,
-    PathOptions<State, Action, Query, T>
-  >((_: State) => new Path.Circle(options.args), options)
+    PathProps<State, Action, Query, T>
+  >((_: State) => new Path.Circle(props.args), props)
 }
 
 export function pathRectangle<State, Action, Query = unknown, T = unknown>(
-  options: PathConstrOptions<State, Action, Query, T>
+  props: PathConstrProps<State, Action, Query, T>
 ) {
   return createItem<
     State,
@@ -112,12 +112,12 @@ export function pathRectangle<State, Action, Query = unknown, T = unknown>(
     Query,
     Path,
     T,
-    PathOptions<State, Action, Query, T>
-  >((_: State) => new Path.Rectangle(options.args), options)
+    PathProps<State, Action, Query, T>
+  >((_: State) => new Path.Rectangle(props.args), props)
 }
 
 export function pathEllipse<State, Action, Query, T = unknown>(
-  options: PathConstrOptions<State, Action, Query, T>
+  props: PathConstrProps<State, Action, Query, T>
 ) {
   return createItem<
     State,
@@ -125,12 +125,12 @@ export function pathEllipse<State, Action, Query, T = unknown>(
     Query,
     Path,
     T,
-    PathOptions<State, Action, Query, T>
-  >((_: State) => new Path.Ellipse(options.args), options)
+    PathProps<State, Action, Query, T>
+  >((_: State) => new Path.Ellipse(props.args), props)
 }
 
 export function pathArc<State, Action, Query = unknown, T = unknown>(
-  options: PathConstrOptions<State, Action, Query, T>
+  props: PathConstrProps<State, Action, Query, T>
 ) {
   return createItem<
     State,
@@ -138,12 +138,12 @@ export function pathArc<State, Action, Query = unknown, T = unknown>(
     Query,
     Path,
     T,
-    PathOptions<State, Action, Query, T>
-  >((_: State) => new Path.Arc(options.args), options)
+    PathProps<State, Action, Query, T>
+  >((_: State) => new Path.Arc(props.args), props)
 }
 
 export function pathRegularPolygon<State, Action, Query = unknown, T = unknown>(
-  options: PathConstrOptions<State, Action, Query, T>
+  props: PathConstrProps<State, Action, Query, T>
 ) {
   return createItem<
     State,
@@ -151,12 +151,12 @@ export function pathRegularPolygon<State, Action, Query = unknown, T = unknown>(
     Query,
     Path,
     T,
-    PathOptions<State, Action, Query, T>
-  >((_: State) => new Path.RegularPolygon(options.args), options)
+    PathProps<State, Action, Query, T>
+  >((_: State) => new Path.RegularPolygon(props.args), props)
 }
 
 export function pathStar<State, Action, Query = unknown, T = unknown>(
-  options: PathConstrOptions<State, Action, Query, T>
+  props: PathConstrProps<State, Action, Query, T>
 ) {
   return createItem<
     State,
@@ -164,6 +164,6 @@ export function pathStar<State, Action, Query = unknown, T = unknown>(
     Query,
     Path,
     T,
-    PathOptions<State, Action, Query, T>
-  >((_: State) => new Path.Star(options.args), options)
+    PathProps<State, Action, Query, T>
+  >((_: State) => new Path.Star(props.args), props)
 }
