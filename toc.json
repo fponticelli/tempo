@@ -4,7 +4,7 @@
       "name": "dom",
       "title": "tempo-dom",
       "description": "Fully-typed frontend framework alternative to React and Angular",
-      "version": "0.16.0",
+      "version": "0.17.0",
       "keywords": [
         "tempo",
         "ui",
@@ -61,7 +61,7 @@
       "name": "paperjs",
       "title": "tempo-paper",
       "description": "Integration of PaperJS api using Tempo to create a declarative Document Object Model.",
-      "version": "0.3.3",
+      "version": "0.4.0",
       "keywords": [
         "tempo",
         "paperjs",
