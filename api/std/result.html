@@ -46,13 +46,13 @@
       >
     </li>
     <li>
-      <a class="is-family-monospace" href="#/api/std/result.html#Failure"
-        >Failure</a
+      <a class="is-family-monospace" href="#/api/std/result.html#failure"
+        >failure</a
       >
     </li>
     <li>
-      <a class="is-family-monospace" href="#/api/std/result.html#failure"
-        >failure</a
+      <a class="is-family-monospace" href="#/api/std/result.html#Failure"
+        >Failure</a
       >
     </li>
     <li>
@@ -183,13 +183,13 @@
       >
     </li>
     <li>
-      <a class="is-family-monospace" href="#/api/std/result.html#Success"
-        >Success</a
+      <a class="is-family-monospace" href="#/api/std/result.html#success"
+        >success</a
       >
     </li>
     <li>
-      <a class="is-family-monospace" href="#/api/std/result.html#success"
-        >success</a
+      <a class="is-family-monospace" href="#/api/std/result.html#Success"
+        >Success</a
       >
     </li>
     <li>
@@ -520,25 +520,6 @@
 <pre
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> equals <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/result.ts'</span></div></pre>
-<h3 class="is-family-monospace has-text-grey-dark" id="Failure">
-  Failure<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
-    >type alias</span
-  >
-</h3>
-<pre
-  class="ts language-ts signature"
-><div><span class="token keyword">type</span> Failure<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">{</span> kind<span class="token operator">:</span> <span class="token string">'Failure'</span><span class="token punctuation">;</span> error<span class="token operator">:</span> <span class="token constant">E</span> <span class="token punctuation">}</span>
-</div></pre>
-<p class="defined-in">
-  defined in
-  <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L20"
-    >std/src/result.ts at line 20</a
-  >
-</p>
-<pre
-  class="import-code ts language-ts"
-><div><span class="token keyword">import</span> <span class="token punctuation">{</span> Failure <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/result.ts'</span></div></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="failure">
   failure<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
     >function</span
@@ -558,6 +539,25 @@
 <pre
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> failure <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/result.ts'</span></div></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="Failure">
+  Failure<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >type alias</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">type</span> Failure<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">{</span> kind<span class="token operator">:</span> <span class="token string">'Failure'</span><span class="token punctuation">;</span> error<span class="token operator">:</span> <span class="token constant">E</span> <span class="token punctuation">}</span>
+</div></pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L20"
+    >std/src/result.ts at line 20</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> Failure <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/result.ts'</span></div></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="filter">
   filter<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
     >function</span
@@ -1266,25 +1266,6 @@
 <pre
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> spread <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/result.ts'</span></div></pre>
-<h3 class="is-family-monospace has-text-grey-dark" id="Success">
-  Success<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
-    >type alias</span
-  >
-</h3>
-<pre
-  class="ts language-ts signature"
-><div><span class="token keyword">type</span> Success<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">{</span> kind<span class="token operator">:</span> <span class="token string">'Success'</span><span class="token punctuation">;</span> value<span class="token operator">:</span> <span class="token constant">T</span> <span class="token punctuation">}</span>
-</div></pre>
-<p class="defined-in">
-  defined in
-  <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L19"
-    >std/src/result.ts at line 19</a
-  >
-</p>
-<pre
-  class="import-code ts language-ts"
-><div><span class="token keyword">import</span> <span class="token punctuation">{</span> Success <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/result.ts'</span></div></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="success">
   success<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
     >function</span
@@ -1304,6 +1285,25 @@
 <pre
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> success <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/result.ts'</span></div></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="Success">
+  Success<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >type alias</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><div><span class="token keyword">type</span> Success<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">{</span> kind<span class="token operator">:</span> <span class="token string">'Success'</span><span class="token punctuation">;</span> value<span class="token operator">:</span> <span class="token constant">T</span> <span class="token punctuation">}</span>
+</div></pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/result.ts#L19"
+    >std/src/result.ts at line 19</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> Success <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/result.ts'</span></div></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="swap">
   swap<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
     >function</span
