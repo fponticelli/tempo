@@ -1585,28 +1585,28 @@ var $bbLX$var$makeCreateElement = function (name) {
   };
 };
 
-function $bbLX$var$el(name, attributes) {
+function $bbLX$var$el(name, props) {
   var children = [];
 
   for (var _i = 2; _i < arguments.length; _i++) {
     children[_i - 2] = arguments[_i];
   }
 
-  return new $bbLX$var$DOMElement($bbLX$var$makeCreateElement(name), $bbLX$var$extractAttrs(attributes.attrs), $bbLX$var$extractEvents(attributes.events), $bbLX$var$extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, attributes.respond, $LAOm$export$map(children, $TnZD$export$domChildToTemplate));
+  return new $bbLX$var$DOMElement($bbLX$var$makeCreateElement(name), $bbLX$var$extractAttrs(props.attrs), $bbLX$var$extractEvents(props.events), $bbLX$var$extractStyles(props.styles), props.afterrender, props.beforechange, props.afterchange, props.beforedestroy, props.respond, $LAOm$export$map(children, $TnZD$export$domChildToTemplate));
 }
 
 var $bbLX$export$el = $bbLX$var$el;
 $bbLX$exports.el = $bbLX$export$el;
 
 function $bbLX$var$el2(name) {
-  return function (attributes) {
+  return function (props) {
     var children = [];
 
     for (var _i = 1; _i < arguments.length; _i++) {
       children[_i - 1] = arguments[_i];
     }
 
-    return new $bbLX$var$DOMElement($bbLX$var$makeCreateElement(name), $bbLX$var$extractAttrs(attributes.attrs), $bbLX$var$extractEvents(attributes.events), $bbLX$var$extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, attributes.respond, $LAOm$export$map(children, $TnZD$export$domChildToTemplate));
+    return new $bbLX$var$DOMElement($bbLX$var$makeCreateElement(name), $bbLX$var$extractAttrs(props.attrs), $bbLX$var$extractEvents(props.events), $bbLX$var$extractStyles(props.styles), props.afterrender, props.beforechange, props.afterchange, props.beforedestroy, props.respond, $LAOm$export$map(children, $TnZD$export$domChildToTemplate));
   };
 }
 
@@ -1623,7 +1623,7 @@ var $bbLX$var$makeCreateElementNS = function (namespace, name) {
   };
 };
 
-function $bbLX$var$elNS(ns, name, attributes) {
+function $bbLX$var$elNS(ns, name, props) {
   var children = [];
 
   for (var _i = 3; _i < arguments.length; _i++) {
@@ -1631,21 +1631,21 @@ function $bbLX$var$elNS(ns, name, attributes) {
   }
 
   var namespace = $bbLX$export$defaultNamespaces[ns] || ns;
-  return new $bbLX$var$DOMElement($bbLX$var$makeCreateElementNS(namespace, name), $bbLX$var$extractAttrs(attributes.attrs), $bbLX$var$extractEvents(attributes.events), $bbLX$var$extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, attributes.respond, $LAOm$export$map(children, $TnZD$export$domChildToTemplate));
+  return new $bbLX$var$DOMElement($bbLX$var$makeCreateElementNS(namespace, name), $bbLX$var$extractAttrs(props.attrs), $bbLX$var$extractEvents(props.events), $bbLX$var$extractStyles(props.styles), props.afterrender, props.beforechange, props.afterchange, props.beforedestroy, props.respond, $LAOm$export$map(children, $TnZD$export$domChildToTemplate));
 }
 
 var $bbLX$export$elNS = $bbLX$var$elNS;
 $bbLX$exports.elNS = $bbLX$export$elNS;
 
 function $bbLX$var$elNS2(namespace, name) {
-  return function (attributes) {
+  return function (props) {
     var children = [];
 
     for (var _i = 1; _i < arguments.length; _i++) {
       children[_i - 1] = arguments[_i];
     }
 
-    return new $bbLX$var$DOMElement($bbLX$var$makeCreateElementNS(namespace, name), $bbLX$var$extractAttrs(attributes.attrs), $bbLX$var$extractEvents(attributes.events), $bbLX$var$extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, attributes.respond, $LAOm$export$map(children, $TnZD$export$domChildToTemplate));
+    return new $bbLX$var$DOMElement($bbLX$var$makeCreateElementNS(namespace, name), $bbLX$var$extractAttrs(props.attrs), $bbLX$var$extractEvents(props.events), $bbLX$var$extractStyles(props.styles), props.afterrender, props.beforechange, props.afterchange, props.beforedestroy, props.respond, $LAOm$export$map(children, $TnZD$export$domChildToTemplate));
   };
 }
 
@@ -2051,20 +2051,20 @@ function () {
   return MapStateTemplate;
 }();
 
-function $qep0$var$mapState(options) {
+function $qep0$var$mapState(props) {
   var children = [];
 
   for (var _i = 1; _i < arguments.length; _i++) {
     children[_i - 1] = arguments[_i];
   }
 
-  return new $qep0$var$MapStateTemplate(options.map, $LAOm$export$map(children, $TnZD$export$domChildToTemplate));
+  return new $qep0$var$MapStateTemplate(props.map, $LAOm$export$map(children, $TnZD$export$domChildToTemplate));
 }
 
 var $qep0$export$mapState = $qep0$var$mapState;
 $qep0$exports.mapState = $qep0$export$mapState;
 
-function $qep0$var$mapField(options) {
+function $qep0$var$mapField(props) {
   var children = [];
 
   for (var _i = 1; _i < arguments.length; _i++) {
@@ -2073,7 +2073,7 @@ function $qep0$var$mapField(options) {
 
   return $qep0$var$mapState.apply(void 0, $qep0$var$__spreadArrays([{
     map: function (v) {
-      return v[options.field];
+      return v[props.field];
     }
   }], children));
 }
@@ -2081,7 +2081,7 @@ function $qep0$var$mapField(options) {
 var $qep0$export$mapField = $qep0$var$mapField;
 $qep0$exports.mapField = $qep0$export$mapField;
 
-function $qep0$var$mapStateAndKeep(options) {
+function $qep0$var$mapStateAndKeep(props) {
   var children = [];
 
   for (var _i = 1; _i < arguments.length; _i++) {
@@ -2089,7 +2089,7 @@ function $qep0$var$mapStateAndKeep(options) {
   }
 
   return new $qep0$var$MapStateTemplate(function (state) {
-    return [options.map(state), state];
+    return [props.map(state), state];
   }, $LAOm$export$map(children, $TnZD$export$domChildToTemplate));
 }
 
@@ -2138,14 +2138,14 @@ function () {
   return MapActionTemplate;
 }();
 
-function $qep0$var$mapAction(options) {
+function $qep0$var$mapAction(props) {
   var children = [];
 
   for (var _i = 1; _i < arguments.length; _i++) {
     children[_i - 1] = arguments[_i];
   }
 
-  return new $qep0$var$MapActionTemplate(options.map, $LAOm$export$map(children, $TnZD$export$domChildToTemplate));
+  return new $qep0$var$MapActionTemplate(props.map, $LAOm$export$map(children, $TnZD$export$domChildToTemplate));
 }
 
 var $qep0$export$mapAction = $qep0$var$mapAction;
@@ -2195,27 +2195,27 @@ function () {
   return MapQueryTemplate;
 }();
 
-function $qep0$var$mapQuery(options) {
+function $qep0$var$mapQuery(props) {
   var children = [];
 
   for (var _i = 1; _i < arguments.length; _i++) {
     children[_i - 1] = arguments[_i];
   }
 
-  return new $qep0$var$MapQueryTemplate(options.map, $LAOm$export$map(children, $TnZD$export$domChildToTemplate));
+  return new $qep0$var$MapQueryTemplate(props.map, $LAOm$export$map(children, $TnZD$export$domChildToTemplate));
 }
 
 var $qep0$export$mapQuery = $qep0$var$mapQuery;
 $qep0$exports.mapQuery = $qep0$export$mapQuery;
 
-function $qep0$var$mapQueryConditional(options) {
+function $qep0$var$mapQueryConditional(props) {
   var children = [];
 
   for (var _i = 1; _i < arguments.length; _i++) {
     children[_i - 1] = arguments[_i];
   }
 
-  return new $qep0$var$MapQueryTemplate(options.map, $LAOm$export$map(children, $TnZD$export$domChildToTemplate));
+  return new $qep0$var$MapQueryTemplate(props.map, $LAOm$export$map(children, $TnZD$export$domChildToTemplate));
 }
 
 var $qep0$export$mapQueryConditional = $qep0$var$mapQueryConditional;
@@ -2230,14 +2230,14 @@ Object.defineProperty($UU8h$exports, "__esModule", {
 var $UU8h$var$UntilTemplate =
 /** @class */
 function () {
-  function UntilTemplate(options, children) {
-    this.options = options;
+  function UntilTemplate(props, children) {
+    this.props = props;
     this.children = children;
   }
 
   UntilTemplate.prototype.render = function (ctx, state) {
     var children = this.children;
-    var _a = this.options,
+    var _a = this.props,
         refId = _a.refId,
         repeatUntil = _a.repeatUntil;
 
@@ -2324,14 +2324,14 @@ function () {
   return UntilTemplate;
 }();
 
-function $UU8h$var$until(options) {
+function $UU8h$var$until(props) {
   var children = [];
 
   for (var _i = 1; _i < arguments.length; _i++) {
     children[_i - 1] = arguments[_i];
   }
 
-  return new $UU8h$var$UntilTemplate(options, $LAOm$export$map(children, $TnZD$export$domChildToTemplate));
+  return new $UU8h$var$UntilTemplate(props, $LAOm$export$map(children, $TnZD$export$domChildToTemplate));
 }
 
 var $UU8h$export$until = $UU8h$var$until;
@@ -2352,7 +2352,7 @@ Object.defineProperty($kxUV$exports, "__esModule", {
   value: true
 });
 
-function $kxUV$var$forEach(options) {
+function $kxUV$var$forEach(props) {
   var children = [];
 
   for (var _i = 1; _i < arguments.length; _i++) {
@@ -2360,7 +2360,7 @@ function $kxUV$var$forEach(options) {
   }
 
   return $UU8h$export$until.apply(void 0, $kxUV$var$__spreadArrays([{
-    refId: options.refId || 't:for_each',
+    refId: props.refId || 't:for_each',
     repeatUntil: function (state, index) {
       return state[index];
     }
@@ -2379,15 +2379,15 @@ Object.defineProperty($Qev4$exports, "__esModule", {
 var $Qev4$var$WhenTemplate =
 /** @class */
 function () {
-  function WhenTemplate(options, children) {
-    this.options = options;
+  function WhenTemplate(props, children) {
+    this.props = props;
     this.children = children;
   }
 
   WhenTemplate.prototype.render = function (ctx, state) {
     var _this = this;
 
-    var _a = this.options,
+    var _a = this.props,
         condition = _a.condition,
         refId = _a.refId;
 
@@ -2445,20 +2445,20 @@ function () {
   return WhenTemplate;
 }();
 
-function $Qev4$var$when(options) {
+function $Qev4$var$when(props) {
   var children = [];
 
   for (var _i = 1; _i < arguments.length; _i++) {
     children[_i - 1] = arguments[_i];
   }
 
-  return new $Qev4$var$WhenTemplate(options, $LAOm$export$map(children, $TnZD$export$domChildToTemplate));
+  return new $Qev4$var$WhenTemplate(props, $LAOm$export$map(children, $TnZD$export$domChildToTemplate));
 }
 
 var $Qev4$export$when = $Qev4$var$when;
 $Qev4$exports.when = $Qev4$export$when;
 
-function $Qev4$var$unless(options) {
+function $Qev4$var$unless(props) {
   var children = [];
 
   for (var _i = 1; _i < arguments.length; _i++) {
@@ -2467,9 +2467,9 @@ function $Qev4$var$unless(options) {
 
   return new $Qev4$var$WhenTemplate({
     condition: function (v) {
-      return !options.condition(v);
+      return !props.condition(v);
     },
-    refId: options.refId || 't:unless'
+    refId: props.refId || 't:unless'
   }, $LAOm$export$map(children, $TnZD$export$domChildToTemplate));
 }
 
@@ -3199,14 +3199,14 @@ function () {
   return ComponentTemplate;
 }();
 
-function $yVFQ$var$component(attributes) {
+function $yVFQ$var$component(props) {
   var children = [];
 
   for (var _i = 1; _i < arguments.length; _i++) {
     children[_i - 1] = arguments[_i];
   }
 
-  return new $yVFQ$var$ComponentTemplate(attributes.store, $LAOm$export$map(children, $TnZD$export$domChildToTemplate), attributes.delayed || false);
+  return new $yVFQ$var$ComponentTemplate(props.store, $LAOm$export$map(children, $TnZD$export$domChildToTemplate), props.delayed || false);
 }
 
 var $yVFQ$export$component = $yVFQ$var$component;

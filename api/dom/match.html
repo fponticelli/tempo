@@ -66,17 +66,17 @@
   State <span class="token keyword">extends</span> <span class="token class-name">ObjectWithPath</span><span class="token operator">&lt;</span>Path<span class="token punctuation">,</span> <span class="token builtin">any</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
   Action<span class="token punctuation">,</span>
   Query <span class="token operator">=</span> <span class="token builtin">unknown</span>
-<span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  path<span class="token operator">:</span> Path<span class="token punctuation">,</span>
-  matcher<span class="token operator">:</span> <span class="token punctuation">{</span>
+<span class="token operator">&gt;</span><span class="token punctuation">(</span>props<span class="token operator">:</span> <span class="token punctuation">{</span>
+  path<span class="token operator">:</span> Path
+  matchers<span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token punctuation">[</span>k <span class="token keyword">in</span> TypeAtPath<span class="token operator">&lt;</span>Path<span class="token punctuation">,</span> State<span class="token operator">&gt;</span><span class="token punctuation">]</span><span class="token operator">:</span> DOMChild<span class="token operator">&lt;</span>
       DifferentiateAt<span class="token operator">&lt;</span>Path<span class="token punctuation">,</span> State<span class="token punctuation">,</span> k<span class="token operator">&gt;</span><span class="token punctuation">,</span>
       Action<span class="token punctuation">,</span>
       Query
     <span class="token operator">&gt;</span>
-  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span>
   refId<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">string</span>
-<span class="token punctuation">)</span><span class="token operator">:</span> DOMTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token operator">:</span> DOMTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
 </div></pre>
 <p class="defined-in">
   defined in
@@ -96,20 +96,18 @@
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">function</span> matchAsync<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Progress<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  matchers<span class="token operator">:</span> <span class="token punctuation">{</span>
-    Outcome<span class="token operator">:</span> DOMChild<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
-    NotAsked<span class="token operator">:</span> DOMChild<span class="token operator">&lt;</span><span class="token builtin">unknown</span><span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
-    Loading<span class="token operator">:</span> DOMChild<span class="token operator">&lt;</span>Progress<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
-  <span class="token punctuation">}</span><span class="token punctuation">,</span>
-  refId <span class="token operator">=</span> <span class="token string">'t-match-async'</span>
-<span class="token punctuation">)</span><span class="token operator">:</span> DOMTemplate<span class="token operator">&lt;</span>Async<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Progress<span class="token operator">&gt;</span><span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+><div><span class="token keyword">function</span> matchAsync<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Progress<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>props<span class="token operator">:</span> <span class="token punctuation">{</span>
+  Outcome<span class="token operator">:</span> DOMChild<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+  NotAsked<span class="token operator">:</span> DOMChild<span class="token operator">&lt;</span><span class="token builtin">unknown</span><span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+  Loading<span class="token operator">:</span> DOMChild<span class="token operator">&lt;</span>Progress<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+  refId<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">string</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token operator">:</span> DOMTemplate<span class="token operator">&lt;</span>Async<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Progress<span class="token operator">&gt;</span><span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
 </div></pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/match.ts#L267"
-    >dom/src/match.ts at line 267</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/match.ts#L272"
+    >dom/src/match.ts at line 272</a
   >
 </p>
 <pre
@@ -123,21 +121,25 @@
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">function</span> matchAsyncResult<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Error<span class="token punctuation">,</span> Progress<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  matchers<span class="token operator">:</span> <span class="token punctuation">{</span>
-    Success<span class="token operator">:</span> DOMChild<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
-    Failure<span class="token operator">:</span> DOMChild<span class="token operator">&lt;</span>Error<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
-    NotAsked<span class="token operator">:</span> DOMChild<span class="token operator">&lt;</span><span class="token builtin">unknown</span><span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
-    Loading<span class="token operator">:</span> DOMChild<span class="token operator">&lt;</span>Progress<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
-  <span class="token punctuation">}</span><span class="token punctuation">,</span>
-  refId <span class="token operator">=</span> <span class="token string">'t-match-async-result'</span>
-<span class="token punctuation">)</span><span class="token operator">:</span> DOMTemplate<span class="token operator">&lt;</span>AsyncResult<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Error<span class="token punctuation">,</span> Progress<span class="token operator">&gt;</span><span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+><div><span class="token keyword">function</span> matchAsyncResult<span class="token operator">&lt;</span>
+  State<span class="token punctuation">,</span>
+  Error<span class="token punctuation">,</span>
+  Progress<span class="token punctuation">,</span>
+  Action<span class="token punctuation">,</span>
+  Query <span class="token operator">=</span> <span class="token builtin">unknown</span>
+<span class="token operator">&gt;</span><span class="token punctuation">(</span>props<span class="token operator">:</span> <span class="token punctuation">{</span>
+  Success<span class="token operator">:</span> DOMChild<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+  Failure<span class="token operator">:</span> DOMChild<span class="token operator">&lt;</span>Error<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+  NotAsked<span class="token operator">:</span> DOMChild<span class="token operator">&lt;</span><span class="token builtin">unknown</span><span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+  Loading<span class="token operator">:</span> DOMChild<span class="token operator">&lt;</span>Progress<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+  refId<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">string</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token operator">:</span> DOMTemplate<span class="token operator">&lt;</span>AsyncResult<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Error<span class="token punctuation">,</span> Progress<span class="token operator">&gt;</span><span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
 </div></pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/match.ts#L282"
-    >dom/src/match.ts at line 282</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/match.ts#L290"
+    >dom/src/match.ts at line 290</a
   >
 </p>
 <pre
@@ -150,7 +152,7 @@
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">function</span> matchBool<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>options<span class="token operator">:</span> <span class="token punctuation">{</span>
+><div><span class="token keyword">function</span> matchBool<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>props<span class="token operator">:</span> <span class="token punctuation">{</span>
   condition<span class="token operator">:</span> Attribute<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> <span class="token builtin">boolean</span><span class="token operator">&gt;</span>
   <span class="token boolean">true</span><span class="token operator">:</span> DOMChild<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
   <span class="token boolean">false</span><span class="token operator">:</span> DOMChild<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
@@ -160,8 +162,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/match.ts#L144"
-    >dom/src/match.ts at line 144</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/match.ts#L146"
+    >dom/src/match.ts at line 146</a
   >
 </p>
 <pre
@@ -178,16 +180,16 @@
   State <span class="token keyword">extends</span> <span class="token class-name">ObjectWithField</span><span class="token operator">&lt;</span><span class="token string">'kind'</span><span class="token punctuation">,</span> <span class="token builtin">any</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
   Action<span class="token punctuation">,</span>
   Query <span class="token operator">=</span> <span class="token builtin">unknown</span>
-<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+<span class="token operator">&gt;</span><span class="token punctuation">(</span>props<span class="token operator">:</span> <span class="token punctuation">{</span>
   matchers<span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token punctuation">[</span>k <span class="token keyword">in</span> State<span class="token punctuation">[</span><span class="token string">'kind'</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token operator">:</span> DOMChild<span class="token operator">&lt;</span>
       DifferentiateAt<span class="token operator">&lt;</span><span class="token punctuation">[</span><span class="token string">'kind'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> State<span class="token punctuation">,</span> k<span class="token operator">&gt;</span><span class="token punctuation">,</span>
       Action<span class="token punctuation">,</span>
       Query
     <span class="token operator">&gt;</span>
-  <span class="token punctuation">}</span><span class="token punctuation">,</span>
-  refId <span class="token operator">=</span> <span class="token string">'t-match-kind'</span>
-<span class="token punctuation">)</span><span class="token operator">:</span> DOMTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+  <span class="token punctuation">}</span>
+  refId<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">string</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token operator">:</span> DOMTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
 </div></pre>
 <p class="defined-in">
   defined in
@@ -207,19 +209,17 @@
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">function</span> matchMaybe<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  matchers<span class="token operator">:</span> <span class="token punctuation">{</span>
-    Just<span class="token operator">:</span> DOMChild<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
-    Nothing<span class="token operator">?</span><span class="token operator">:</span> DOMChild<span class="token operator">&lt;</span><span class="token builtin">unknown</span><span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
-  <span class="token punctuation">}</span><span class="token punctuation">,</span>
-  refId <span class="token operator">=</span> <span class="token string">'t-match-option'</span>
-<span class="token punctuation">)</span><span class="token operator">:</span> DOMTemplate<span class="token operator">&lt;</span>Maybe<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span><span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+><div><span class="token keyword">function</span> matchMaybe<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>props<span class="token operator">:</span> <span class="token punctuation">{</span>
+  Just<span class="token operator">:</span> DOMChild<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+  Nothing<span class="token operator">?</span><span class="token operator">:</span> DOMChild<span class="token operator">&lt;</span><span class="token builtin">unknown</span><span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+  refId<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">string</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token operator">:</span> DOMTemplate<span class="token operator">&lt;</span>Maybe<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span><span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
 </div></pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/match.ts#L236"
-    >dom/src/match.ts at line 236</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/match.ts#L240"
+    >dom/src/match.ts at line 240</a
   >
 </p>
 <pre
@@ -233,19 +233,17 @@
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">function</span> matchOption<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  matchers<span class="token operator">:</span> <span class="token punctuation">{</span>
-    Some<span class="token operator">:</span> DOMChild<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
-    None<span class="token operator">:</span> DOMChild<span class="token operator">&lt;</span><span class="token builtin">unknown</span><span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
-  <span class="token punctuation">}</span><span class="token punctuation">,</span>
-  refId <span class="token operator">=</span> <span class="token string">'t-match-option'</span>
-<span class="token punctuation">)</span><span class="token operator">:</span> DOMTemplate<span class="token operator">&lt;</span>Option<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span><span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+><div><span class="token keyword">function</span> matchOption<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>props<span class="token operator">:</span> <span class="token punctuation">{</span>
+  Some<span class="token operator">:</span> DOMChild<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+  None<span class="token operator">:</span> DOMChild<span class="token operator">&lt;</span><span class="token builtin">unknown</span><span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+  refId<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">string</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token operator">:</span> DOMTemplate<span class="token operator">&lt;</span>Option<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span><span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
 </div></pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/match.ts#L223"
-    >dom/src/match.ts at line 223</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/match.ts#L225"
+    >dom/src/match.ts at line 225</a
   >
 </p>
 <pre
@@ -259,19 +257,17 @@
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">function</span> matchResult<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Error<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  matchers<span class="token operator">:</span> <span class="token punctuation">{</span>
-    Success<span class="token operator">:</span> DOMChild<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
-    Failure<span class="token operator">:</span> DOMChild<span class="token operator">&lt;</span>Error<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
-  <span class="token punctuation">}</span><span class="token punctuation">,</span>
-  refId <span class="token operator">=</span> <span class="token string">'t-match-result'</span>
-<span class="token punctuation">)</span><span class="token operator">:</span> DOMTemplate<span class="token operator">&lt;</span>Result<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Error<span class="token operator">&gt;</span><span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+><div><span class="token keyword">function</span> matchResult<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Error<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>props<span class="token operator">:</span> <span class="token punctuation">{</span>
+  Success<span class="token operator">:</span> DOMChild<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+  Failure<span class="token operator">:</span> DOMChild<span class="token operator">&lt;</span>Error<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+  refId<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">string</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token operator">:</span> DOMTemplate<span class="token operator">&lt;</span>Result<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Error<span class="token operator">&gt;</span><span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
 </div></pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/match.ts#L254"
-    >dom/src/match.ts at line 254</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/match.ts#L257"
+    >dom/src/match.ts at line 257</a
   >
 </p>
 <pre
@@ -290,20 +286,20 @@
   State <span class="token keyword">extends</span> <span class="token class-name">ObjectWithPath</span><span class="token operator">&lt;</span>Path<span class="token punctuation">,</span> <span class="token builtin">string</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
   Action<span class="token punctuation">,</span>
   Query <span class="token operator">=</span> <span class="token builtin">unknown</span>
-<span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  path<span class="token operator">:</span> Path<span class="token punctuation">,</span>
+<span class="token operator">&gt;</span><span class="token punctuation">(</span>props<span class="token operator">:</span> <span class="token punctuation">{</span>
+  path<span class="token operator">:</span> Path
   matchers<span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token punctuation">[</span>_ <span class="token keyword">in</span> <span class="token builtin">string</span> <span class="token operator">|</span> <span class="token builtin">number</span><span class="token punctuation">]</span><span class="token operator">:</span> DOMChild<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
-  <span class="token punctuation">}</span><span class="token punctuation">,</span>
-  orElse<span class="token operator">:</span> DOMChild<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span>
+  orElse<span class="token operator">:</span> DOMChild<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
   refId<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">string</span>
-<span class="token punctuation">)</span><span class="token operator">:</span> DOMTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token operator">:</span> DOMTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
 </div></pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/match.ts#L202"
-    >dom/src/match.ts at line 202</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/match.ts#L204"
+    >dom/src/match.ts at line 204</a
   >
 </p>
 <pre

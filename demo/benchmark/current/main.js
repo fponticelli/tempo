@@ -816,21 +816,21 @@ function extractStyles(attrs) {
     }); });
 }
 var makeCreateElement = function (name) { return function (doc) { return doc.createElement(name); }; };
-function el(name, attributes) {
+function el(name, props) {
     var children = [];
     for (var _i = 2; _i < arguments.length; _i++) {
         children[_i - 2] = arguments[_i];
     }
-    return new DOMElement(makeCreateElement(name), extractAttrs(attributes.attrs), extractEvents(attributes.events), extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, attributes.respond, arrays_1.map(children, dom_1.domChildToTemplate));
+    return new DOMElement(makeCreateElement(name), extractAttrs(props.attrs), extractEvents(props.events), extractStyles(props.styles), props.afterrender, props.beforechange, props.afterchange, props.beforedestroy, props.respond, arrays_1.map(children, dom_1.domChildToTemplate));
 }
 exports.el = el;
 function el2(name) {
-    return function (attributes) {
+    return function (props) {
         var children = [];
         for (var _i = 1; _i < arguments.length; _i++) {
             children[_i - 1] = arguments[_i];
         }
-        return new DOMElement(makeCreateElement(name), extractAttrs(attributes.attrs), extractEvents(attributes.events), extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, attributes.respond, arrays_1.map(children, dom_1.domChildToTemplate));
+        return new DOMElement(makeCreateElement(name), extractAttrs(props.attrs), extractEvents(props.events), extractStyles(props.styles), props.afterrender, props.beforechange, props.afterchange, props.beforedestroy, props.respond, arrays_1.map(children, dom_1.domChildToTemplate));
     };
 }
 exports.el2 = el2;
@@ -840,22 +840,22 @@ exports.defaultNamespaces = {
 var makeCreateElementNS = function (namespace, name) {
     return function (doc) { return doc.createElementNS(namespace, name); };
 };
-function elNS(ns, name, attributes) {
+function elNS(ns, name, props) {
     var children = [];
     for (var _i = 3; _i < arguments.length; _i++) {
         children[_i - 3] = arguments[_i];
     }
     var namespace = exports.defaultNamespaces[ns] || ns;
-    return new DOMElement(makeCreateElementNS(namespace, name), extractAttrs(attributes.attrs), extractEvents(attributes.events), extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, attributes.respond, arrays_1.map(children, dom_1.domChildToTemplate));
+    return new DOMElement(makeCreateElementNS(namespace, name), extractAttrs(props.attrs), extractEvents(props.events), extractStyles(props.styles), props.afterrender, props.beforechange, props.afterchange, props.beforedestroy, props.respond, arrays_1.map(children, dom_1.domChildToTemplate));
 }
 exports.elNS = elNS;
 function elNS2(namespace, name) {
-    return function (attributes) {
+    return function (props) {
         var children = [];
         for (var _i = 1; _i < arguments.length; _i++) {
             children[_i - 1] = arguments[_i];
         }
-        return new DOMElement(makeCreateElementNS(namespace, name), extractAttrs(attributes.attrs), extractEvents(attributes.events), extractStyles(attributes.styles), attributes.afterrender, attributes.beforechange, attributes.afterchange, attributes.beforedestroy, attributes.respond, arrays_1.map(children, dom_1.domChildToTemplate));
+        return new DOMElement(makeCreateElementNS(namespace, name), extractAttrs(props.attrs), extractEvents(props.events), extractStyles(props.styles), props.afterrender, props.beforechange, props.afterchange, props.beforedestroy, props.respond, arrays_1.map(children, dom_1.domChildToTemplate));
     };
 }
 exports.elNS2 = elNS2;
@@ -1016,13 +1016,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var dom_1 = require("./utils/dom");
 var arrays_1 = require("tempo-std/lib/arrays");
 var UntilTemplate = /** @class */ (function () {
-    function UntilTemplate(options, children) {
-        this.options = options;
+    function UntilTemplate(props, children) {
+        this.props = props;
         this.children = children;
     }
     UntilTemplate.prototype.render = function (ctx, state) {
         var children = this.children;
-        var _a = this.options, refId = _a.refId, repeatUntil = _a.repeatUntil;
+        var _a = this.props, refId = _a.refId, repeatUntil = _a.repeatUntil;
         var _b = ctx.withAppendToReference(refId), newCtx = _b.ctx, ref = _b.ref;
         var childrenViews = [];
         var view = {
@@ -1089,12 +1089,12 @@ var UntilTemplate = /** @class */ (function () {
     };
     return UntilTemplate;
 }());
-function until(options) {
+function until(props) {
     var children = [];
     for (var _i = 1; _i < arguments.length; _i++) {
         children[_i - 1] = arguments[_i];
     }
-    return new UntilTemplate(options, arrays_1.map(children, dom_1.domChildToTemplate));
+    return new UntilTemplate(props, arrays_1.map(children, dom_1.domChildToTemplate));
 }
 exports.until = until;
 
@@ -1121,13 +1121,13 @@ var __spreadArrays = (this && this.__spreadArrays) || function () {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var until_1 = require("./until");
-function forEach(options) {
+function forEach(props) {
     var children = [];
     for (var _i = 1; _i < arguments.length; _i++) {
         children[_i - 1] = arguments[_i];
     }
     return until_1.until.apply(void 0, __spreadArrays([{
-            refId: options.refId || 't:for_each',
+            refId: props.refId || 't:for_each',
             repeatUntil: function (state, index) { return state[index]; }
         }], children));
 }

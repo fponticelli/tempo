@@ -13,7 +13,7 @@
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> unless<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  options<span class="token operator">:</span> WhenOptions<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  props<span class="token operator">:</span> WhenProps<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   <span class="token operator">...</span>children<span class="token operator">:</span> PaperTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
 <span class="token punctuation">)</span><span class="token operator">:</span> PaperTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
 </div></pre>
@@ -35,7 +35,7 @@
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> when<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  options<span class="token operator">:</span> WhenOptions<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  props<span class="token operator">:</span> WhenProps<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   <span class="token operator">...</span>children<span class="token operator">:</span> PaperTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
 <span class="token punctuation">)</span><span class="token operator">:</span> PaperTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
 </div></pre>
@@ -49,15 +49,14 @@
 <pre
   class="import-code ts language-ts"
 ><div><span class="token keyword">import</span> <span class="token punctuation">{</span> when <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-paperjs/lib/when.ts'</span></div></pre>
-<h3 class="is-family-monospace has-text-grey-dark" id="WhenOptions">
-  WhenOptions<span
-    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+<h3 class="is-family-monospace has-text-grey-dark" id="WhenProps">
+  WhenProps<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
     >interface</span
   >
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">interface</span> <span class="token class-name">WhenOptions</span><span class="token operator">&lt;</span>State<span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+><div><span class="token keyword">interface</span> <span class="token class-name">WhenProps</span><span class="token operator">&lt;</span>State<span class="token operator">&gt;</span> <span class="token punctuation">{</span>
   <span class="token function-variable function">condition</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">state<span class="token operator">:</span> State</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">boolean</span>
 <span class="token punctuation">}</span>
 </div></pre>
@@ -70,4 +69,4 @@
 </p>
 <pre
   class="import-code ts language-ts"
-><div><span class="token keyword">import</span> <span class="token punctuation">{</span> WhenOptions <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-paperjs/lib/when.ts'</span></div></pre>
+><div><span class="token keyword">import</span> <span class="token punctuation">{</span> WhenProps <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-paperjs/lib/when.ts'</span></div></pre>

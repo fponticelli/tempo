@@ -431,12 +431,6 @@
         "type": "module"
       },
       {
-        "path": "tempo_attributes.html",
-        "id": "tempo_attributes.html",
-        "title": "tempo_attributes",
-        "type": "module"
-      },
-      {
         "path": "tool.html",
         "id": "tool.html",
         "title": "tool",

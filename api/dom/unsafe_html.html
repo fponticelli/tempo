@@ -20,17 +20,18 @@
   Query <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token punctuation">,</span>
   El <span class="token keyword">extends</span> <span class="token class-name">Element</span> <span class="token operator">=</span> Element<span class="token punctuation">,</span>
   <span class="token constant">T</span> <span class="token operator">=</span> <span class="token builtin">unknown</span>
-<span class="token operator">&gt;</span><span class="token punctuation">(</span>options<span class="token operator">:</span> <span class="token punctuation">{</span>
+<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  props<span class="token operator">:</span> <span class="token punctuation">{</span>
+    element<span class="token operator">?</span><span class="token operator">:</span> DOMElement<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> El<span class="token punctuation">,</span> <span class="token constant">T</span><span class="token operator">&gt;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
   content<span class="token operator">:</span> TextValue<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span>
-  element<span class="token operator">?</span><span class="token operator">:</span> DOMElement<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> El<span class="token punctuation">,</span> <span class="token constant">T</span><span class="token operator">&gt;</span>
-  transform<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">source<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">string</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token operator">:</span> DOMTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> DOMTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
 </div></pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/unsafe_html.ts#L102"
-    >dom/src/unsafe_html.ts at line 102</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/unsafe_html.ts#L72"
+    >dom/src/unsafe_html.ts at line 72</a
   >
 </p>
 <pre

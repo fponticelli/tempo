@@ -14,7 +14,7 @@
 <pre
   class="ts language-ts signature"
 ><div><span class="token keyword">function</span> iterate<span class="token operator">&lt;</span>OuterState<span class="token punctuation">,</span> InnerState <span class="token keyword">extends</span> <span class="token class-name">any</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  options<span class="token operator">:</span> <span class="token punctuation">{</span>
+  props<span class="token operator">:</span> <span class="token punctuation">{</span>
     refId<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">string</span>
     <span class="token function-variable function">getArray</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">outer<span class="token operator">:</span> OuterState</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> InnerState
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -49,7 +49,7 @@
   Action<span class="token punctuation">,</span>
   Query <span class="token operator">=</span> <span class="token builtin">unknown</span>
 <span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  options<span class="token operator">:</span> <span class="token punctuation">{</span>
+  props<span class="token operator">:</span> <span class="token punctuation">{</span>
     refId<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">string</span>
     <span class="token function-variable function">getArray</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">outer<span class="token operator">:</span> OuterState</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> InnerState
   <span class="token punctuation">}</span><span class="token punctuation">,</span>

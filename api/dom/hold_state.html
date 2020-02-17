@@ -14,9 +14,9 @@
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">function</span> holdMappedState<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> HeldState<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+><div><span class="token keyword">function</span> holdMappedState<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> HeldState<span class="token operator">&gt;</span><span class="token punctuation">(</span>props<span class="token operator">:</span> <span class="token punctuation">{</span>
   <span class="token function-variable function">map</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">s<span class="token operator">:</span> State</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> HeldState
-<span class="token punctuation">)</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token punctuation">{</span>
   capture<span class="token operator">:</span> <span class="token operator">&lt;</span>Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">(</span>
     <span class="token parameter"><span class="token operator">...</span>children<span class="token operator">:</span> DOMChild<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">[</span><span class="token punctuation">]</span></span>
   <span class="token punctuation">)</span> <span class="token operator">=&gt;</span> DOMTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
