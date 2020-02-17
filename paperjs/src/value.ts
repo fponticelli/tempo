@@ -27,7 +27,7 @@ export type PaperEventHandler<State, Action, Event, Target> = (
 
 export function resolveAttribute<State, Value>(
   attr: PaperAttribute<State, Value>
-): (state: State) => Value | undefined {
+) {
   if (typeof attr === 'function') {
     return attr as DerivedValue<State, Value>
   } else {

@@ -13,56 +13,36 @@ limitations under the License.
 
 import { Tempo } from 'tempo-dom/lib/tempo'
 import { div, button } from 'tempo-dom/lib/html'
-import { mapState } from 'tempo-dom/lib/map'
 import { Store } from 'tempo-store/lib/store'
 
-interface State {
-  count: number
-}
+const state = 0
 
-const state = { count: 0 }
+type Action = 'increment' | 'decrement'
 
-interface Increment {
-  kind: 'increment'
-}
-interface Decrement {
-  kind: 'decrement'
-}
-type Action = Increment | Decrement
-
-const decrement = (): Action => ({ kind: 'decrement' })
-const increment = (): Action => ({ kind: 'increment' })
-
-const reducer = (state: State, action: Action): State => {
-  switch (action.kind) {
-    case 'increment':
-      return { count: state.count + 1 }
-    case 'decrement':
-      return { count: state.count - 1 }
-    default:
-      throw `this should never happen`
+const reducer = (state: number, action: Action): number => {
+  switch (action) {
+    case 'increment': return state + 1
+    case 'decrement': return state - 1
+    default: throw `this should never happen`
   }
 }
 
 const store = Store.ofState({ state, reducer })
 
-const template = div<State, Action>(
-  { attrs: { className: 'app' } },
-  mapState(
-    { map: (state: State) => state.count },
-    div({ attrs: { className: 'count count-small' } }, 'count'),
-    div({ attrs: { className: 'count' } }, String),
-    div(
-      { attrs: { className: 'buttons' } },
-      button(
-        {
-          events: { click: decrement },
-          attrs: { disabled: (count: number) => count <= 0 }
-        },
-        '-'
-      ),
-      button({ events: { click: increment } }, '+')
-    )
+const template = div<number, Action>(
+  { attrs: { class: 'app' } },
+  div({ attrs: { class: 'count count-small' } }, 'count'),
+  div({ attrs: { class: 'count' } }, String),
+  div(
+    { attrs: { class: 'buttons' } },
+    button(
+      {
+        events: { click: () => 'decrement' },
+        attrs: { disabled: count => count <= 0 }
+      },
+      '-'
+    ),
+    button({ events: { click: () => 'increment' } }, '+')
   )
 )
 

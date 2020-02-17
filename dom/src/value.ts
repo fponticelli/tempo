@@ -70,7 +70,7 @@ export function attributeToHandler<State, Value, Action, Ev extends Event, El ex
   }
 }
 
-export function resolveAttribute<State, Value>(attr: Attribute<State, Value>): ((state: State) => Value | undefined) {
+export function resolveAttribute<State, Value>(attr: Attribute<State, Value>) {
   if (typeof attr === 'function') {
     return (attr as DerivedValue<State, Value>)
   } else {

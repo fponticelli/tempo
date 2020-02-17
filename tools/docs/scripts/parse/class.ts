@@ -20,7 +20,7 @@ function getMethodDeclarationSignature(fun: MethodDeclaration): string {
   if (text.endsWith(')')) {
     text += ': ' + fun.getReturnType().getText()
   }
-  return adjustSignature(text)
+  return text
 }
 
 function getValueDeclarationSignature(o: ClassStaticPropertyTypes | ClassInstancePropertyTypes): string {
@@ -91,9 +91,9 @@ function getSignature(cls: ClassDeclaration) {
     cls.getInstanceMethods().filter(isPublic).map(m => getMethodDeclarationSignature(m))
   ]).join('\n  ')
 
-  return `declare ${abstract}class ${cls.getName()}${tp}${ext}${impl} {
+  return adjustSignature(`declare ${abstract}class ${cls.getName()}${tp}${ext}${impl} {
   ${lines}
-}`
+}`)
 }
 
 export const classOfDeclaration = (ta: ClassDeclaration): DocEntity => {
