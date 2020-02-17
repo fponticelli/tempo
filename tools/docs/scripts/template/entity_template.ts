@@ -41,9 +41,7 @@ export const signatures = fragment<DocEntity & { project: string, module: string
   ),
   pre(
     { attrs: { class: 'import-code ts language-ts' } },
-    unsafeHtml({
-      content: s => highlight(getImport(s.name, s.project, s.module))
-    })
+    unsafeHtml({}, s => highlight(getImport(s.name, s.project, s.module)))
   )
 )
 

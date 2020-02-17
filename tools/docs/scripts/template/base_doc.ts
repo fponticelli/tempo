@@ -13,7 +13,7 @@ import { highlight } from '../utils/highlight'
 export const description = mapField<BaseDoc, 'description', unknown>(
   { field: 'description' },
   matchOption({
-    Some: unsafeHtml({ content: s => markdown(s, s => s) }),
+    Some: unsafeHtml({}, s => markdown(s, s => s)),
     None: ''
   })
 )

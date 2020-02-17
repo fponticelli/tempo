@@ -6,7 +6,5 @@ loadLanguages(['typescript'])
 
 export const signature = pre<string, unknown>(
   { attrs: { class: 'ts language-ts signature' }},
-  unsafeHtml({
-    content: s => Prism.highlight(s, Prism.languages.typescript, 'typescript')
-  })
+  unsafeHtml({}, s => Prism.highlight(s, Prism.languages.typescript, 'typescript'))
 )
