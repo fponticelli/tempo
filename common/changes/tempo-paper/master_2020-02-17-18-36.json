@@ -2,8 +2,8 @@
   "changes": [
     {
       "packageName": "tempo-paper",
-      "comment": "",
-      "type": "none"
+      "comment": "Change signature of `matchX` functions",
+      "type": "minor"
     }
   ],
   "packageName": "tempo-paper",

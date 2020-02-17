@@ -4,6 +4,10 @@
       "packageName": "tempo-dom",
       "comment": "Change signature of `unsafeHtml`",
       "type": "minor"
+    }, {
+      "packageName": "tempo-dom",
+      "comment": "Change signature of `matchX` functions",
+      "type": "minor"
     }
   ],
   "packageName": "tempo-dom",
