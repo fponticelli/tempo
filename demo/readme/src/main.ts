@@ -21,9 +21,12 @@ type Action = 'increment' | 'decrement'
 
 const reducer = (state: number, action: Action): number => {
   switch (action) {
-    case 'increment': return state + 1
-    case 'decrement': return state - 1
-    default: throw `this should never happen`
+    case 'increment':
+      return state + 1
+    case 'decrement':
+      return state - 1
+    default:
+      throw `this should never happen`
   }
 }
 

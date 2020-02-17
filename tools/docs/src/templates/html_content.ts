@@ -16,7 +16,10 @@ export const htmlContent = fragment<
     )
   ),
   when({ condition: s => typeof s === 'string' }, s => s.title),
-  unsafeHtml({
-    element: article({ attrs: { class: 'content' } })
-  }, s => s.html)
+  unsafeHtml(
+    {
+      element: article({ attrs: { class: 'content' } })
+    },
+    s => s.html
+  )
 )

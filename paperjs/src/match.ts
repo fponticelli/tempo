@@ -73,23 +73,23 @@ export function match<
   State extends ObjectWithPath<Path, any>,
   Action,
   Query = unknown
->(
-  path: Path,
-  matcher: {
+>(props: {
+  path: Path
+  matchers: {
     [k in TypeAtPath<Path, State>]: PaperTemplate<
       DifferentiateAt<Path, State, k>,
       Action,
       Query
     >
   }
-): PaperTemplate<State, Action, Query> {
+}): PaperTemplate<State, Action, Query> {
   return new MatchTemplate<Path, State, Action, Query>(
-    path,
-    Object.keys(matcher).reduce(
+    props.path,
+    Object.keys(props.matchers).reduce(
       (acc, key) => {
         return {
           ...acc,
-          [key]: matcher[key as keyof typeof matcher]
+          [key]: props.matchers[key as keyof typeof props.matchers]
         }
       },
       {} as {
@@ -107,7 +107,7 @@ export function matchKind<
   State extends ObjectWithField<'kind', any>,
   Action,
   Query = unknown
->(
+>(props: {
   matchers: {
     [k in State['kind']]: PaperTemplate<
       DifferentiateAt<['kind'], State, k>,
@@ -115,8 +115,11 @@ export function matchKind<
       Query
     >
   }
-): PaperTemplate<State, Action, Query> {
-  return match<['kind'], State, Action, Query>(['kind'], matchers)
+}): PaperTemplate<State, Action, Query> {
+  return match<['kind'], State, Action, Query>({
+    path: ['kind'],
+    matchers: props.matchers
+  })
 }
 
 class MatchBoolTemplate<State, Action, Query>
@@ -208,27 +211,27 @@ export function matchValue<
   State extends ObjectWithPath<Path, string>,
   Action,
   Query = unknown
->(
-  path: Path,
+>(props: {
+  path: Path
   matchers: {
     [_ in string | number]: PaperTemplate<State, Action, Query>
-  },
+  }
   orElse: PaperTemplate<State, Action, Query>
-): PaperTemplate<State, Action, Query> {
+}): PaperTemplate<State, Action, Query> {
   return new MatchValueTemplate<State, Action, Query>(
-    path,
-    Object.keys(matchers).reduce(
+    props.path,
+    Object.keys(props.matchers).reduce(
       (
         acc: { [_ in string | number]: PaperTemplate<State, Action, Query> },
         key: string
       ) => {
         return {
           ...acc,
-          [key]: matchers[key]
+          [key]: props.matchers[key]
         }
       },
       {}
     ),
-    orElse
+    props.orElse
   )
 }

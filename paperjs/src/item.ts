@@ -87,10 +87,7 @@ export class ItemTemplate<
 export function createItem<State, Action, Query, I extends Item, T, Option>(
   makeItem: (state: State) => I,
   props: Partial<
-    Merge<
-      { args?: {} },
-      Merge<Option, Props<State, Action, Query, I, T>>
-    >
+    Merge<{ args?: {} }, Merge<Option, Props<State, Action, Query, I, T>>>
   >,
   children?: PaperTemplate<State, Action, Query>[] | undefined
 ) {

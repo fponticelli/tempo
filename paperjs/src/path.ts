@@ -36,10 +36,7 @@ type PathProps<State, Action, Query, T> = Partial<
   Merge<
     { args?: {} },
     Merge<
-      Merge<
-        WritablePathProps<State>,
-        Props<State, Action, Query, Path, T>
-      >,
+      Merge<WritablePathProps<State>, Props<State, Action, Query, Path, T>>,
       ItemEvents<State, Action, Path>
     >
   >
@@ -49,10 +46,7 @@ type PathConstrProps<State, Action, Query, T> = Merge<
   { args: any },
   Partial<
     Merge<
-      Merge<
-        WritablePathProps<State>,
-        Props<State, Action, Query, Path, T>
-      >,
+      Merge<WritablePathProps<State>, Props<State, Action, Query, Path, T>>,
       ItemEvents<State, Action, Path>
     >
   >
@@ -70,9 +64,7 @@ export function path<State, Action, Query = unknown, T = unknown>(
     PathProps<State, Action, Query, T>
   >(
     (_: State) =>
-      typeof props.args !== 'undefined'
-        ? new Path(props.args)
-        : new Path([]),
+      typeof props.args !== 'undefined' ? new Path(props.args) : new Path([]),
     props
   )
 }

@@ -333,8 +333,8 @@ class ScopedStyles<State, Action, Query> implements DOMTemplate<State, Action, Q
 }
 
 export function scopedStyles<State, Action, Query>(
-  definitions: StyleDefinitions<State>
+  props: StyleDefinitions<State>
 ) {
-  const { literal, derived } = processDefinitions(definitions)
+  const { literal, derived } = processDefinitions(props)
   return new ScopedStyles<State, Action, Query>(literal, derived)
 }

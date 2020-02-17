@@ -37,10 +37,7 @@ type LayerProps<State, Action, Query, T> = Partial<
   Merge<
     { args?: {} },
     Merge<
-      Merge<
-        WritableLayerProps<State>,
-        Props<State, Action, Query, Layer, T>
-      >,
+      Merge<WritableLayerProps<State>, Props<State, Action, Query, Layer, T>>,
       ItemEvents<State, Action, Layer>
     >
   >
@@ -59,9 +56,7 @@ export function layer<State, Action, Query = unknown, T = unknown>(
     LayerProps<State, Action, Query, T>
   >(
     (_: State) =>
-      typeof props.args !== 'undefined'
-        ? new Layer(props.args)
-        : new Layer([]),
+      typeof props.args !== 'undefined' ? new Layer(props.args) : new Layer([]),
     props,
     children
   )

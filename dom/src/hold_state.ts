@@ -16,7 +16,7 @@ import { DOMContext } from './context'
 import { map as mapA, each } from 'tempo-std/lib/arrays'
 import { domChildToTemplate } from './utils/dom'
 
-export function holdMappedState<State, HeldState>(map: (s: State) => HeldState) {
+export function holdMappedState<State, HeldState>(props: { map: (s: State) => HeldState }) {
   let counter = 0
   const stateCache = new Map<number, HeldState>()
   const capture = <Action, Query>(...children: DOMChild<State, Action, Query>[]): DOMTemplate<State, Action, Query> => {
@@ -27,7 +27,7 @@ export function holdMappedState<State, HeldState>(map: (s: State) => HeldState) 
         const id = ++counter
         return {
           change(state: State) {
-            stateCache.set(id,  map(state))
+            stateCache.set(id, props.map(state))
             each(views, v => v.change(state))
           },
           destroy() {
@@ -69,5 +69,5 @@ export function holdMappedState<State, HeldState>(map: (s: State) => HeldState) 
 }
 
 export function holdState<State>() {
-  return holdMappedState<State, State>(a => a)
+  return holdMappedState<State, State>({ map: a => a })
 }

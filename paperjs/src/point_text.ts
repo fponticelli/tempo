@@ -34,10 +34,7 @@ type WritableShapeProps<State> = {
 
 type ShapeProps<State, Action, Query, T, Sub> = Partial<
   Merge<
-    Merge<
-      WritableShapeProps<State>,
-      Props<State, Action, Query, PointText, T>
-    >,
+    Merge<WritableShapeProps<State>, Props<State, Action, Query, PointText, T>>,
     ItemEvents<State, Action, PointText>
   >
 >

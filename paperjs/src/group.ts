@@ -35,10 +35,7 @@ type WritableGroupProps<State> = {
 
 type GroupProps<State, Action, Query, T> = Partial<
   Merge<
-    Merge<
-      WritableGroupProps<State>,
-      Props<State, Action, Query, Group, T>
-    >,
+    Merge<WritableGroupProps<State>, Props<State, Action, Query, Group, T>>,
     ItemEvents<State, Action, Group>
   >
 >

@@ -51,10 +51,7 @@ interface ToolEvents<State, Action> {
 
 type ToolProps<State, Action, Query, T> = Partial<
   Merge<
-    Merge<
-      WritableToolProps<State>,
-      Props<State, Action, Query, Tool, T>
-    >,
+    Merge<WritableToolProps<State>, Props<State, Action, Query, Tool, T>>,
     Merge<ToolAttributes<State>, ToolEvents<State, Action>>
   >
 >

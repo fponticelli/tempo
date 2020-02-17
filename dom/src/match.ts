@@ -70,34 +70,36 @@ export function match<
   State extends ObjectWithPath<Path, any>,
   Action,
   Query = unknown
->(
+>(props: {
   path: Path,
-  matcher: {
+  matchers: {
     [k in TypeAtPath<Path, State>]: DOMChild<DifferentiateAt<Path, State, k>, Action, Query>
   },
   refId?: string
-): DOMTemplate<State, Action, Query> {
+}): DOMTemplate<State, Action, Query> {
   return new MatchTemplate<Path, State, Action, Query>(
-    path,
-    Object.keys(matcher).reduce((acc, key) => {
+    props.path,
+    Object.keys(props.matchers).reduce((acc, key) => {
       return {
         ...acc,
-        [key]: domChildToTemplate(matcher[key as keyof typeof matcher])
+        [key]: domChildToTemplate(props.matchers[key as keyof typeof props.matchers])
       }
     }, {} as {
       [k in TypeAtPath<Path, State>]: DOMTemplate<DifferentiateAt<Path, State, k>, Action, Query>
     }),
-    refId || 't:match'
+    props.refId || 't:match'
   )
 }
 
-export function matchKind<State extends ObjectWithField<'kind', any>, Action, Query = unknown>(
+export function matchKind<State extends ObjectWithField<'kind', any>, Action, Query = unknown>(props: {
   matchers: {
     [k in State['kind']]: DOMChild<DifferentiateAt<['kind'], State, k>, Action, Query>
   },
-  refId = 't-match-kind'
+  refId?: string
+}
 ): DOMTemplate<State, Action, Query> {
-  return match<['kind'], State, Action, Query>(['kind'], matchers, refId)
+  const refId = props.refId ?? 't-match-kind'
+  return match<['kind'], State, Action, Query>({ path: ['kind'], matchers: props.matchers, refId })
 }
 
 class MatchBoolTemplate<
@@ -199,104 +201,113 @@ class MatchValueTemplate<
   }
 }
 
-export function matchValue<Path extends IndexType[], State extends ObjectWithPath<Path, string>, Action, Query = unknown>(
+export function matchValue<Path extends IndexType[], State extends ObjectWithPath<Path, string>, Action, Query = unknown>(props: {
   path: Path,
   matchers: {
     [_ in (string | number)]: DOMChild<State, Action, Query>
   },
   orElse: DOMChild<State, Action, Query>,
   refId?: string
-): DOMTemplate<State, Action, Query> {
+}): DOMTemplate<State, Action, Query> {
   return new MatchValueTemplate<State, Action, Query>(
-    path,
-    Object.keys(matchers).reduce((acc: { [_ in (string | number)]: DOMTemplate<State, Action, Query> }, key: string) => {
+    props.path,
+    Object.keys(props.matchers).reduce((acc: { [_ in (string | number)]: DOMTemplate<State, Action, Query> }, key: string) => {
       return {
         ...acc,
-        [key]: domChildToTemplate(matchers[key])
+        [key]: domChildToTemplate(props.matchers[key])
       }
     }, {}),
-    domChildToTemplate(orElse),
-    refId || 't:match-value'
+    domChildToTemplate(props.orElse),
+    props.refId || 't:match-value'
   )
 }
 
-export function matchOption<State, Action, Query = unknown>(
-  matchers: {
-    Some:  DOMChild<State, Action, Query>,
-    None: DOMChild<unknown, Action, Query>
-  },
-  refId = 't-match-option'
-): DOMTemplate<Option<State>, Action, Query> {
+export function matchOption<State, Action, Query = unknown>(props: {
+  Some:  DOMChild<State, Action, Query>,
+  None: DOMChild<unknown, Action, Query>
+  refId?: string
+}): DOMTemplate<Option<State>, Action, Query> {
+  const refId = props.refId ?? 't-match-option'
   return matchKind({
-    Some:  mapField({ field: 'value' }, matchers.Some),
-    None:  mapState({ map: () => null }, matchers.None)
-  }, refId)
+    matchers: {
+      Some:  mapField({ field: 'value' }, props.Some),
+      None:  mapState({ map: () => null }, props.None)
+    },
+    refId
+  })
 }
 
-export function matchMaybe<State, Action, Query = unknown>(
-  matchers: {
-    Just: DOMChild<State, Action, Query>,
-    Nothing?: DOMChild<unknown, Action, Query>
-  },
-  refId = 't-match-option'
-): DOMTemplate<Maybe<State>, Action, Query> {
+export function matchMaybe<State, Action, Query = unknown>(props: {
+  Just: DOMChild<State, Action, Query>,
+  Nothing?: DOMChild<unknown, Action, Query>
+  refId?: string
+}): DOMTemplate<Maybe<State>, Action, Query> {
+  const refId = props.refId ?? 't-match-maybe'
   return new MatchBoolTemplate<Maybe<State>, Action, Query>(
     v => typeof v !== 'undefined',
     mapState(
       { map: (opt: Maybe<State>) => (opt as Just<State>) },
-      domChildToTemplate(matchers.Just)
+      domChildToTemplate(props.Just)
     ),
-    domChildToTemplate(matchers.Nothing),
+    domChildToTemplate(props.Nothing),
     refId
   )
 }
 
-export function matchResult<State, Error, Action, Query = unknown>(
-  matchers: {
-    Success:  DOMChild<State, Action, Query>,
-    Failure: DOMChild<Error, Action, Query>
-  },
-  refId = 't-match-result'
-): DOMTemplate<Result<State, Error>, Action, Query> {
+export function matchResult<State, Error, Action, Query = unknown>(props: {
+  Success:  DOMChild<State, Action, Query>,
+  Failure: DOMChild<Error, Action, Query>,
+  refId?: string
+}): DOMTemplate<Result<State, Error>, Action, Query> {
+  const refId = props.refId ?? 't-match-result'
   return matchKind({
-    Success:  mapField({ field: 'value' }, matchers.Success),
-    Failure:  mapField({ field: 'error' }, matchers.Failure)
-  }, refId)
+    matchers: {
+      Success:  mapField({ field: 'value' }, props.Success),
+      Failure:  mapField({ field: 'error' }, props.Failure)
+    },
+    refId
+  })
 }
 
-export function matchAsync<State, Progress, Action, Query = unknown>(
-  matchers: {
-    Outcome:  DOMChild<State, Action, Query>,
-    NotAsked: DOMChild<unknown, Action, Query>,
-    Loading:  DOMChild<Progress, Action, Query>
-  },
-  refId = 't-match-async'
+export function matchAsync<State, Progress, Action, Query = unknown>(props: {
+  Outcome:  DOMChild<State, Action, Query>,
+  NotAsked: DOMChild<unknown, Action, Query>,
+  Loading:  DOMChild<Progress, Action, Query>
+  refId?: string
+}
 ): DOMTemplate<Async<State, Progress>, Action, Query> {
+  const refId = props.refId ?? 't-match-async'
   return matchKind({
-    Outcome:  mapField({ field: 'value' }, matchers.Outcome),
-    Loading:  mapField({ field: 'progress' }, matchers.Loading),
-    NotAsked: mapState({ map: () => null }, matchers.NotAsked)
-  }, refId)
+    matchers: {
+      Outcome:  mapField({ field: 'value' }, props.Outcome),
+      Loading:  mapField({ field: 'progress' }, props.Loading),
+      NotAsked: mapState({ map: () => null }, props.NotAsked)
+    },
+    refId
+  })
 }
 
-export function matchAsyncResult<State, Error, Progress, Action, Query = unknown>(
-  matchers: {
-    Success:  DOMChild<State, Action, Query>,
-    Failure:  DOMChild<Error, Action, Query>,
-    NotAsked: DOMChild<unknown, Action, Query>,
-    Loading:  DOMChild<Progress, Action, Query>
-  },
-  refId = 't-match-async-result'
-): DOMTemplate<AsyncResult<State, Error, Progress>, Action, Query> {
+export function matchAsyncResult<State, Error, Progress, Action, Query = unknown>(props: {
+  Success:  DOMChild<State, Action, Query>,
+  Failure:  DOMChild<Error, Action, Query>,
+  NotAsked: DOMChild<unknown, Action, Query>,
+  Loading:  DOMChild<Progress, Action, Query>,
+  refId?: string
+}): DOMTemplate<AsyncResult<State, Error, Progress>, Action, Query> {
+  const refId = props.refId ?? 't-match-async-result'
   return matchKind<AsyncResult<State, Error, Progress>, Action, Query>({
-    Outcome:  mapState(
-      { map: (o: Outcome<Result<State, Error>>) => o.value },
-      matchResult<State, Error, Action, Query>({
-        Success: matchers.Success,
-        Failure: matchers.Failure
-      }, `${refId}-sub`)
-    ),
-    Loading:  mapField({ field: 'progress' }, matchers.Loading),
-    NotAsked: mapState({ map: () => null }, matchers.NotAsked)
-  }, refId)
+    matchers: {
+      Outcome:  mapState(
+        { map: (o: Outcome<Result<State, Error>>) => o.value },
+        matchResult<State, Error, Action, Query>({
+          Success: props.Success,
+          Failure: props.Failure,
+          refId: `${refId}-sub`
+        })
+      ),
+      Loading:  mapField({ field: 'progress' }, props.Loading),
+      NotAsked: mapState({ map: () => null }, props.NotAsked)
+    },
+    refId
+  })
 }

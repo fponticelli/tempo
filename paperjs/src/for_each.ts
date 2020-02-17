@@ -15,7 +15,7 @@ import { PaperTemplate } from './template'
 import { until } from './until'
 
 export function forEach<State extends any[], Action, Query = unknown>(
-  props: { },
+  props: {},
   ...children: PaperTemplate<State[number], Action, Query>[]
 ): PaperTemplate<State, Action, Query> {
   return until(

@@ -59,8 +59,5 @@ export function symbolItem<State, Action, Query = unknown, T = unknown>(
     SymbolItem,
     T,
     SymbolItemProps<State, Action, Query, T, SymbolItem>
-  >(
-    (_: State) => new SymbolItem(props.definition as SymbolDefinition),
-    props
-  )
+  >((_: State) => new SymbolItem(props.definition as SymbolDefinition), props)
 }

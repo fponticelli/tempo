@@ -41,10 +41,7 @@ type RasterProps<State, Action, Query, T> = Partial<
   Merge<
     { args?: {} },
     Merge<
-      Merge<
-        WritableRasterProps<State>,
-        Props<State, Action, Query, Raster, T>
-      >,
+      Merge<WritableRasterProps<State>, Props<State, Action, Query, Raster, T>>,
       Merge<
         ItemEvents<State, Action, Raster>,
         RasterSpecificEvents<State, Action, Raster>
