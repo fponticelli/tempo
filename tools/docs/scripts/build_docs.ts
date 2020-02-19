@@ -12,6 +12,8 @@ const binFolderSrc = './dist'
 const binFolderDst = docsFolder
 const demoFolderSrc = path.join(rootFolder, 'demo')
 const demoFolderDst = path.join(docsFolder, 'demo')
+const banchmarkHistoryFolderSrc = path.join(rootFolder, 'demo', 'benchmark', 'history')
+const banchmarkHistoryFolderDst = path.join(docsFolder, 'demo', 'benchmark')
 const assetsFolderSrc = path.join(rootFolder, 'pages/assets')
 const assetsFolderDst = path.join(docsFolder, 'assets')
 const pagesFolderSrc = path.join(rootFolder, 'pages')
@@ -207,8 +209,21 @@ async function main() {
 
   await prepDir(docsFolder)
 
-  // copy demos
   await prepDir(demoFolderDst)
+
+  // copy benchmark history
+  const dirs = (await fse.readdir(banchmarkHistoryFolderSrc))
+    .filter(dir => dir !== '.' && dir !== '..')
+    .filter(async dir => (await (await fs.stat(path.join(banchmarkHistoryFolderSrc, dir))).isDirectory()))
+  await Promise.all(
+    dirs.map(dir => {
+      const src = path.join(banchmarkHistoryFolderSrc, dir)
+      const dst = path.join(banchmarkHistoryFolderDst, dir)
+      return fse.copy(src, dst, { overwrite: false })
+    })
+  )
+
+  // copy demos
   await Promise.all(demos.map(demo => {
     let src = path.join(demoFolderSrc, demo.path, 'dist')
     if (!fse.existsSync(src))

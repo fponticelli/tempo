@@ -168,6 +168,6 @@ When the template is defined, nothing happens except that we have an instance of
 
 These methods are managed and wired automatically when `store` and `template` are passed to `Tempo.render()`.
 
-The entire app fits 6.6kb when gzipped!
+The entire app fits 6.3kb when gzipped!
 
 This [simple app tracks performance](./demo/benchmark/) improvements/regressions with new versions of the library.

@@ -14,7 +14,7 @@ limitations under the License.
 const fs = require('fs');
 const path = require('path');
 
-const distFolder = path.join(__dirname, '../build');
+const distFolder = path.join(__dirname, '../history');
 const directoryNames = fs.readdirSync(distFolder).filter(file => {
   const stat = fs.statSync(path.join(distFolder, file));
   return stat.isDirectory() && file !== '.' && file !== '..';
@@ -23,7 +23,7 @@ const directoryNames = fs.readdirSync(distFolder).filter(file => {
 const configPath = path.join(__dirname, '../build', 'config.json');
 
 const content = {
-  versions: directoryNames
+  versions: ['current', ...directoryNames]
 };
 
 fs.writeFileSync(configPath, JSON.stringify(content, null, 2), 'utf8');
