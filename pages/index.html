@@ -115,5 +115,5 @@ Tempo<span class="token punctuation">.</span><span class="token function">render
 <p>Just for fun we added <code>disabled</code> and made it dependent on <code>count</code>. When <code>count</code> is zero or less we will not be able to click it.</p>
 <p>When the template is defined, nothing happens except that we have an instance of <code>DOMElement&lt;State, Action, HTMLDivElement&gt;</code>. This instance implements <code>DOMTemplate&lt;State, Action&gt;</code> which exposes the method <code>render: (ctx: DOMContext, state: State) =&gt; View&lt;State&gt;</code>. When that method is invoked, it will perform the actual creation and modification of the browser's DOM elements. The <code>View</code> returned by the <code>render</code> method has a method <code>destroy()</code> to remove what has been generated and <code>change(state: State)</code> to update its content.</p>
 <p>These methods are managed and wired automatically when <code>store</code> and <code>template</code> are passed to <code>Tempo.render()</code>.</p>
-<p>The entire app fits 6.6kb when gzipped!</p>
+<p>The entire app fits 6.3kb when gzipped!</p>
 <p>This <a href="demo/benchmark/">simple app tracks performance</a> improvements/regressions with new versions of the library.</p>
