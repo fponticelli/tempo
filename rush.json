@@ -77,6 +77,14 @@
       "packageName": "tempo-tools.docs",
       "projectFolder": "./tools/docs",
       "shouldPublish": false
+    }, {
+      "packageName": "tempo-ui",
+      "projectFolder": "./ui",
+      "shouldPublish": true
+    }, {
+      "packageName": "tempo-demo.ui",
+      "projectFolder": "./demo/ui",
+      "shouldPublish": false
     }
   ],
   "ensureConsistentVersions": true

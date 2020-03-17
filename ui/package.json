@@ -1,0 +1,62 @@
+{
+  "name": "tempo-ui",
+  "version": "0.1.0",
+  "priority": 1,
+  "description": "Fully-typed frontend framework alternative to React and Angular",
+  "keywords": [
+    "tempo",
+    "ui",
+    "framework",
+    "typescript"
+  ],
+  "sideEffects": false,
+  "license": "Apache-2.0",
+  "private": false,
+  "scripts": {
+    "clean": "rm -rf lib/* && rm -rf es6/*",
+    "build": "npm run clean && npx tsc && npx tsc -p tsconfig.es6.json",
+    "test": "jest",
+    "test-watch": "jest --watch",
+    "tslint": "tslint -p ./tslint.json",
+    "tslint-fix": "tslint -p ./tslint.json --fix",
+    "prettier": "prettier -c src/**/*.ts",
+    "prettier-fix": "prettier --write src/**/*.ts",
+    "prepublish": "npm run build"
+  },
+  "homepage": "https://github.com/fponticelli/tempo",
+  "bugs": {
+    "url": "https://github.com/fponticelli/tempo/issues"
+  },
+  "author": {
+    "name": "Franco Ponticelli",
+    "email": "franco.ponticelli@gmail.com",
+    "url": "https://github.com/fponticelli"
+  },
+  "dependencies": {
+    "tempo-core": "1.7.0",
+    "tempo-dom": "0.17.0",
+    "tempo-std": "0.5.0",
+    "tempo-store": "1.2.2"
+  },
+  "devDependencies": {
+    "@types/jest": "25.1.2",
+    "@types/jsdom": "12.2.4",
+    "jest": "25.1.0",
+    "jsdom": "16.1.0",
+    "lodash": "4.17.15",
+    "prettier": "1.19.1",
+    "request": "2.88.0",
+    "request-promise-native": "1.0.7",
+    "stealthy-require": "1.0.0",
+    "ts-jest": "25.2.0",
+    "tslint": "6.0.0",
+    "typescript": "3.7.5"
+  },
+  "main": "lib/index.js",
+  "module": "es6/index.js",
+  "typings": "lib/index.d.ts",
+  "files": [
+    "lib",
+    "es6"
+  ]
+}
