@@ -20,6 +20,9 @@ export type EventHandler<S, Action, Ev extends Event = Event, El extends Element
   (state: S, event: Ev, element: El) => Action | undefined
 export type StyleAttribute<State, Value> = DerivedOrLiteralValue<State, Value | undefined>
 
+export type ValueOfAttribute<Att extends Attribute<any, any>> =
+  Att extends Attribute<any, infer Value> ? Value : never
+
 export type AttributeValue = string | number | boolean | string[]
 
 export interface Props<State, Action, Query = unknown, El extends Element = Element, T = unknown> {

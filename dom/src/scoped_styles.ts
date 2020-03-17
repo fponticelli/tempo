@@ -139,7 +139,6 @@ const processRules = <State>(rules: StyleDefinitions<State>): Acc<State> => {
               derived: acc.derived,
               literal: [...acc.literal, s ? `  ${property}: ${s};` : `  /* ${property} */`]
             }
-            return acc
           }
         },
         {
@@ -150,11 +149,11 @@ const processRules = <State>(rules: StyleDefinitions<State>): Acc<State> => {
       return {
         literal: all.literal.length > 0 ?
           [...acc.literal, `${selector as string} {\n${all.literal.join('\n')}\n}\n`] :
-          all.literal,
+          acc.literal,
         derived: all.derived.length > 0 ?
           [...acc.derived, (state: State) =>
             `${selector as string} {\n${all.derived.map(f => f(state)).join('\n')}\n}\n`] :
-          all.derived
+          acc.derived
       }
     },
     {
@@ -277,13 +276,13 @@ function make<State, Action, Query>(
       if (!update) item.hits++
     } else {
       name = '' + (++counter)
-      const content = replace(originalContent, ':scope', `[data-tescope-${type}=${name}]`)
+      const content = replace(originalContent, ':scope', `[data-te-scope-${type}="${name}"]`)
       const template = headPortal<State, Action, Query>(el('style', { attrs: { [`data-tedef-${type}`]: name } }, text(content)))
       const view = template.render(ctx, state)
       cacheByName.set(name, { hits: 1, view, content: originalContent })
       cacheByContent.set(originalContent, name)
     }
-    ctx.parent.setAttribute(`data-tescope-${type}`, name)
+    ctx.parent.setAttribute(`data-te-scope-${type}`, name)
   }
   return name
 }
