@@ -1,1 +1,1 @@
-This is the Dom implementation for `tempo`.
+Design toolkit for `Tempo`. Heavily inspired by [elm-ui](https://package.elm-lang.org/packages/mdgriffith/elm-ui/latest/).
