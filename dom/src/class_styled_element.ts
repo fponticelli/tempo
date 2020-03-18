@@ -18,7 +18,7 @@ import { DOMContext } from './context'
 import { map } from 'tempo-std/lib/arrays'
 
 export interface Rule {
-  cls: string | undefined
+  cls?: string | undefined
   selector: string
   definitions: () => string[]
 }

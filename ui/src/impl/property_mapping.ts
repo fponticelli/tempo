@@ -1,139 +1,235 @@
-import { Attribute, ValueOfAttribute } from 'tempo-dom/lib/value'
-import { Padding, Length } from '../property_types'
+import { Attribute, ValueOfAttribute, Props } from 'tempo-dom/lib/value'
+import { Padding, Length, Background, fill } from '../property_types'
 import { keys } from 'tempo-std/lib/objects'
+import { toHex } from 'tempo-std/lib/numbers'
+import { matchKind } from 'tempo-std/lib/match'
 import { Rule } from 'dom/lib/class_styled_element'
+import { toRGB, getAlpha, toCSS3 } from 'tempo-colors/lib/color'
+import { red, green, blue } from 'tempo-colors/lib/rgb'
 
 export interface ElStyleProperties<State> {
+  background?: Attribute<State, Background>
+  height?: Attribute<State, Length>
   padding?: Attribute<State, Padding>
   width?: Attribute<State, Length>
-  height?: Attribute<State, Length>
 }
 
-export interface PropertyRecord<K extends keyof ElStyleProperties<unknown> = keyof ElStyleProperties<unknown>> {
-  kind: K
-  value: ValueOfAttribute<ElStyleProperties<unknown>[K]>
+export interface PropertyRecord<T extends Record<string, Attribute<any, any>>> {
+  kind: keyof T
+  value: ValueOfAttribute<T[keyof T]>
 }
 
-function paddingRules(p: Padding): Rule[] {
-  switch (p.kind) {
-    case 'PaddingAll':
-      const cls1 = `pa-${p.value}`
-      const selector1 = `.${cls1}`
-      return [{
-        cls: cls1, selector: selector1,
-        definitions: () => [`padding: ${p.value}px;`]
-      }]
-    case 'PaddingHV':
-      const cls2 = `phv-${p.v}-${p.h}`
-      const selector2 = `.${cls2}`
-      return [{
-        cls: cls2, selector: selector2,
-        definitions: () => [`padding: ${p.v}px ${p.h}px;`]
-      }]
-    case 'PaddingEach':
-      const cls3 = `pe-${p.top}-${p.right}-${p.bottom}-${p.left}`
-      const selector3 = `.${cls3}`
-      return [{
-        cls: cls3, selector: selector3,
-        definitions: () => [`padding: ${p.top}px ${p.right}px ${p.bottom}px ${p.left}px;`]
-      }]
-    default:
-      throw `Invalid padding '${p}'`
-  }
+function paddingRules(padding: Padding): Rule[] {
+  return matchKind(
+    padding,
+    {
+      PaddingAll: p => {
+        const cls = `pa${p.value}`
+        const selector = `.${cls}`
+        return [{
+          cls, selector,
+          definitions: () => [`padding: ${p.value}px;`]
+        }]
+      },
+      PaddingHV: p => {
+        const cls = `phv${p.v}-${p.h}`
+        const selector = `.${cls}`
+        return [{
+          cls, selector,
+          definitions: () => [`padding: ${p.v}px ${p.h}px;`]
+        }]
+      },
+      PaddingEach: p => {
+        const cls = `pe${p.top}-${p.right}-${p.bottom}-${p.left}`
+        const selector = `.${cls}`
+        return [{
+          cls, selector,
+          definitions: () => [
+            `padding: ${p.top}px ${p.right}px ${p.bottom}px ${p.left}px;`
+          ]
+        }]
+      }
+    }
+  )
 }
 
-function widthRules(l: Length): Rule[] {
-  switch (l.kind) {
-    case 'LengthFill':
-      const cls1 = 'wf'
-      const selector1 = `.${cls1}`
-      return [{
-        cls: cls1, selector: selector1,
-        definitions: () => ['width: 100%;']
-      }]
-    case 'LengthMax':
-      const cls2 = 'wmx'
-      const selector2 = `.${cls2}`
-      return [{
-        cls: cls2, selector: selector2,
-        definitions: () => [`max-width: ${l.max}px; ${widthRules(l.length)};`]
-      }]
-    case 'LengthMin':
-      const cls3 = 'wmi'
-      const selector3 = `.${cls3}`
-      return [{
-        cls: cls3, selector: selector3,
-        definitions: () => [`min-width: ${l.min}px; ${widthRules(l.length)};`]
-      }]
-    case 'LengthPx':
-      const cls4 = 'wpx'
-      const selector4 = `.${cls4}`
-      return [{
-        cls: cls4, selector: selector4,
-        definitions: () => [`width: ${l.value}px;`]
-      }]
-    case 'LengthShrink':
-      const cls5 = 'ws'
-      const selector5 = `.${cls5}`
-      return [{
-        cls: cls5, selector: selector5,
-        definitions: () => [`width: auto;`] // TODO or `max-content` / `min-content` ?
-      }]
-    default:
-      throw `Invalid width length '${l}'`
-  }
+function widthRules(length: Length): Rule[] {
+  return matchKind(
+    length,
+    {
+      LengthFill: _ => {
+        const cls = 'wf'
+        const selector = `.${cls}`
+        return [{
+          cls, selector,
+          definitions: () => ['width: 100%;']
+        }]
+      },
+      LengthMax: l => {
+        const inner = widthRules(l.length)[0]
+        const cls = `wmx${l.length}-${inner.cls}`
+        const selector = `.${cls}`
+        return [{
+          cls, selector,
+          definitions: () => [`max-width: ${l.max}px; ${widthRules(l.length)};`]
+        }]
+      },
+      LengthMin: l => {
+        const inner = widthRules(l.length)[0]
+        const cls = `wmi${l.length}-${inner.cls}`
+        const selector = `.${cls}`
+        return [{
+          cls, selector,
+          definitions: () => [`min-width: ${l.min}px; ${widthRules(l.length)};`]
+        }]
+      },
+      LengthFillPortion: l => {
+        if (l.portion === 1) {
+          return widthRules(fill)
+        } else {
+          const cls = `wlfp${l.portion}`
+          const selector = `.${cls}`
+          return [{
+            cls, selector,
+            definitions: () => [``]
+          }, {
+            cls: undefined, selector: `.r > .${cls}`,
+            definitions: () => [`flex-grow: ${l.portion * 10000}px;`]
+          }]
+        }
+      },
+      LengthPx: l => {
+        const cls = `wpx${l.value}`
+        const selector = `.${cls}`
+        return [{
+          cls, selector,
+          definitions: () => [`width: ${l.value}px;`]
+        }]
+      },
+      LengthShrink: _ => {
+        const cls = 'ws'
+        const selector = `.${cls}`
+        return [{
+          cls, selector,
+          definitions: () => [`width: auto;`] // TODO or `max-content` / `min-content` ?
+        }]
+      }
+    }
+  )
 }
 
-function heightRules(l: Length): Rule[] {
-  switch (l.kind) {
-    case 'LengthFill':
-      const cls1 = 'hf'
-      const selector1 = `.${cls1}`
-      return [{
-        cls: cls1, selector: selector1,
-        definitions: () => ['height: 100%;']
-      }]
-    case 'LengthMax':
-      const cls2 = 'hmx'
-      const selector2 = `.${cls2}`
-      return [{
-        cls: cls2, selector: selector2,
-        definitions: () => [`max-height: ${l.max}px; ${widthRules(l.length)};`]
-      }]
-    case 'LengthMin':
-      const cls3 = 'hmi'
-      const selector3 = `.${cls3}`
-      return [{
-        cls: cls3, selector: selector3,
-        definitions: () => [`min-height: ${l.min}px; ${widthRules(l.length)};`]
-      }]
-    case 'LengthPx':
-      const cls4 = 'hpx'
-      const selector4 = `.${cls4}`
-      return [{
-        cls: cls4, selector: selector4,
-        definitions: () => [`height: ${l.value}px;`]
-      }]
-    case 'LengthShrink':
-      const cls5 = 'hs'
-      const selector5 = `.${cls5}`
-      return [{
-        cls: cls5, selector: selector5,
-        definitions: () => [`height: auto;`]
-      }]
-    default:
-      throw `Invalid height length '${l}'`
-  }
+function heightRules(length: Length): Rule[] {
+  return matchKind(
+    length,
+    {
+      LengthFill: l => {
+        const cls = 'hf'
+        const selector = `.${cls}`
+        return [{
+          cls, selector,
+          definitions: () => ['height: 100%;']
+        }]
+      },
+      LengthMax: l => {
+        const cls = 'hmx'
+        const selector = `.${cls}`
+        return [{
+          cls, selector,
+          definitions: () => [
+            `max-height: ${l.max}px; ${widthRules(l.length)};`]
+          }
+        ]
+      },
+      LengthMin: l => {
+        const cls = 'hmi'
+        const selector = `.${cls}`
+        return [{
+          cls, selector,
+          definitions: () => [
+            `min-height: ${l.min}px; ${widthRules(l.length)};`]
+          }
+        ]
+      },
+      LengthFillPortion: l => {
+        if (l.portion === 1) {
+          return widthRules(fill)
+        } else {
+          const cls = `hlfp${l.portion}`
+          const selector = `.${cls}`
+          return [{
+            cls, selector,
+            definitions: () => [``]
+          }, {
+            cls: undefined, selector: `.r > .${cls}`,
+            definitions: () => [`flex-grow: ${l.portion * 10000}px;`]
+          }]
+        }
+      },
+      LengthPx: l => {
+        const cls = 'hpx'
+        const selector = `.${cls}`
+        return [{
+          cls, selector,
+          definitions: () => [`height: ${l.value}px;`]
+        }]
+      },
+      LengthShrink: l => {
+        const cls = 'hs'
+        const selector = `.${cls}`
+        return [{
+          cls, selector,
+          definitions: () => [`height: auto;`]
+        }]
+      }
+    }
+  )
 }
 
-const mappingRules = {
+function backgroundRules(b: Background): Rule[] {
+  return matchKind(
+    b,
+    {
+      BackgroundColor: bg => {
+        const color = toRGB(bg.color)
+        const r = toHex(red(color), 2)
+        const g = toHex(green(color), 2)
+        const b = toHex(blue(color), 2)
+        const alpha = getAlpha(bg.color)
+        const a = alpha === 1 ? '' : toHex(Math.round(alpha * 255), 2)
+        const cls = `b${r}${g}${b}${a}`
+        const selector = `.${cls}`
+        return [{
+          cls, selector,
+          definitions: () => [`background-color: ${toCSS3(bg.color)};`]
+        }]
+      }
+    }
+  )
+}
+
+const elMappingRules = {
+  background: backgroundRules,
   padding: paddingRules,
   width: widthRules,
   height: heightRules
 } as Record<keyof ElStyleProperties<any>, (arg: any) => Rule[]> // TODO type better
 
-export function makeRules(prop: PropertyRecord): Rule[] {
-  return mappingRules[prop.kind](prop.value)
+export function makeElRules(
+  prop: PropertyRecord<ElStyleProperties<any>>
+): Rule[] {
+  return elMappingRules[prop.kind](prop.value)
 }
 
-export const styleProperties = keys(mappingRules)
+export function extractLifeCycle<State, Action, Query, El extends Element, T>(
+  props: Props<State, Action, Query, El, T>
+) {
+  return {
+    afterrender: props.afterrender,
+    beforechange: props.beforechange,
+    afterchange: props.afterchange,
+    beforedestroy: props.beforedestroy,
+    respond: props.respond
+  }
+}
+
+export const elStyleProperties = keys(elMappingRules)

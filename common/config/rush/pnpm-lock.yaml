@@ -1,4 +1,5 @@
 dependencies:
+  '@rush-temp/tempo-colors': 'file:projects/tempo-colors.tgz'
   '@rush-temp/tempo-core': 'file:projects/tempo-core.tgz'
   '@rush-temp/tempo-demo.benchmark': 'file:projects/tempo-demo.benchmark.tgz'
   '@rush-temp/tempo-demo.hnpwa': 'file:projects/tempo-demo.hnpwa.tgz'
@@ -12527,6 +12528,21 @@ packages:
       node: '>=6'
     resolution:
       integrity: sha512-Ux4ygGWsu2c7isFWe8Yu1YluJmqVhxqK2cLXNQA5AcC3QfbGNpM7fu0Y8b/z16pXLnFxZYvWhd3fhBY9DLmC6Q==
+  'file:projects/tempo-colors.tgz':
+    dependencies:
+      '@types/jest': 25.1.2
+      '@types/node': 12.12.6
+      jest: 25.1.0
+      prettier: 1.19.1
+      ts-jest: 25.2.0_jest@25.1.0
+      tslint: 6.0.0_typescript@3.7.5
+      typescript: 3.7.5
+    dev: false
+    name: '@rush-temp/tempo-colors'
+    resolution:
+      integrity: sha512-HCjdcS2AFOV8vIuTMqXms3YfuErPAHUcEm2N3iWXJshbi0O7uGlFV8AeyM0nb6fb+tzDdFKcHoNcn1QtDqNFgQ==
+      tarball: 'file:projects/tempo-colors.tgz'
+    version: 0.0.0
   'file:projects/tempo-core.tgz':
     dependencies:
       '@types/jest': 25.1.2
@@ -12674,7 +12690,7 @@ packages:
     peerDependencies:
       sass: '*'
     resolution:
-      integrity: sha512-oT8P+McggWuXvoNjsXwsfepvapPKaHKKrutT8azeY7atXdS9B0FLVD6wkZchUzv5AfoPcjHMPqKtIlXiEju8VA==
+      integrity: sha512-Jr4nAlXLa/6hP755ypcWFz/6idZLvOcLc4QspAB6r929/GZ550qqAKTGZwGAdl8JeoMo2Kw3y0BrXhIXZ9hpgw==
       tarball: 'file:projects/tempo-demo.ui.tgz'
     version: 0.0.0
   'file:projects/tempo-dom.tgz':
@@ -12849,6 +12865,7 @@ packages:
     version: 0.0.0
 registry: ''
 specifiers:
+  '@rush-temp/tempo-colors': 'file:./projects/tempo-colors.tgz'
   '@rush-temp/tempo-core': 'file:./projects/tempo-core.tgz'
   '@rush-temp/tempo-demo.benchmark': 'file:./projects/tempo-demo.benchmark.tgz'
   '@rush-temp/tempo-demo.hnpwa': 'file:./projects/tempo-demo.hnpwa.tgz'

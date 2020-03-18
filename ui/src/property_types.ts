@@ -1,3 +1,5 @@
+import { Color } from 'tempo-colors/lib/color'
+
 // PADDING
 
 export type Padding =
@@ -43,4 +45,13 @@ export function maxLength(max: number, length: Length): Length {
 }
 export function minLength(min: number, length: Length): Length {
   return { kind: 'LengthMin', min, length }
+}
+
+// BACKGROUND
+
+export type Background =
+  | { kind: 'BackgroundColor', color: Color }
+
+export function bgColor(color: Color): Background {
+  return { kind: 'BackgroundColor', color }
 }

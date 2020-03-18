@@ -14,8 +14,9 @@ limitations under the License.
 import { Tempo } from 'tempo-dom/lib/tempo'
 import { el } from 'tempo-ui/lib/layout'
 import { resetStyles } from 'tempo-ui/lib/reset'
-import { fill, shrink } from 'tempo-ui/lib/property_types'
+import { fill, shrink, bgColor, paddingAll } from 'tempo-ui/lib/property_types'
 import { Store } from 'tempo-store/lib/store'
+import { ofRGB } from 'tempo-colors/lib/rgb'
 
 const state = 0
 
@@ -32,25 +33,25 @@ const reducer = (state: number, action: Action): number => {
 
 const store = Store.ofState({ state, reducer })
 
-const template =
-  el<number, Action>(
-    {
-      width: shrink,
-      height: fill
-    },
-    'Some Text Here'
-  )
-  // div<number, Action>(
-  //   {},
-  //   button<number, Action>(
-  //     { label: (v: number) => `clicked: ${v}` }
-  //   ),
-  //   button<number, Action>(
-  //     { label: (v: number) => `other button clicked: ${v}` }
-  //   )
-  // )
+const template = el<number, Action>(
+  {
+    width: shrink,
+    height: fill,
+    background: bgColor(ofRGB(240, 240, 240)),
+    padding: paddingAll(10)
+  },
+  'Some Text Here'
+)
+// div<number, Action>(
+//   {},
+//   button<number, Action>(
+//     { label: (v: number) => `clicked: ${v}` }
+//   ),
+//   button<number, Action>(
+//     { label: (v: number) => `other button clicked: ${v}` }
+//   )
+// )
 
 resetStyles()
 
 Tempo.render({ store, template })
-
