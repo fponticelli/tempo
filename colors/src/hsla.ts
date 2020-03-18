@@ -148,7 +148,7 @@ export function max(a: HSLA, b: HSLA) {
 }
 
 export function toCSS3(hsla: HSLA) {
-  return `hsla(${hue(hsla)},${saturation(hsla) * 100}%,${lightness(hsla) * 100}%,${alpha(hsla)})`
+  return `hsl(${hue(hsla)},${saturation(hsla) * 100}%,${lightness(hsla) * 100}%,${alpha(hsla)})`
 }
 
 export function toHSL(hsla: HSLA): HSL {

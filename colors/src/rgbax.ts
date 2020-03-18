@@ -6,7 +6,7 @@ import {
   roundTo as nRoundTo
 } from 'tempo-std/lib/numbers'
 import { ofRGB, RGB } from './rgb'
-import { RGBA, ofRGBA, toCSS3 as rgbaToCSS3 } from './rgba'
+import { RGBA, ofRGBA } from './rgba'
 import { RGBX, ofRGBX, toHSL as rgbxToHSL } from './rgbx'
 import { withAlpha as hslWithAlpha } from './hsl'
 import { HSLA } from './hsla'
@@ -111,7 +111,7 @@ export function roundTo(rgbax: RGBAX, decimals: number) {
 }
 
 export function toCSS3(rgbax: RGBAX) {
-  return rgbaToCSS3(toRGBA(rgbax))
+  return `rgb(${red(rgbax) * 100}%,${green(rgbax) * 100}%,${blue(rgbax) * 100}%,${alpha(rgbax)})`
 }
 
 export function toRGB(rgbax: RGBAX): RGB {

@@ -106,7 +106,7 @@ export function max(a: RGBA, b: RGBA) {
 }
 
 export function toCSS3(rgba: RGBA) {
-  return `rgba(${red(rgba)},${green(rgba)},${blue(rgba)},${alpha(rgba)})`
+  return `rgb(${red(rgba)},${green(rgba)},${blue(rgba)},${alpha(rgba)})`
 }
 
 export function toHex(rgba: RGBA, prefix = '#') {

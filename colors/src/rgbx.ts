@@ -101,7 +101,7 @@ export function roundTo(rgbx: RGBX, decimals: number) {
 }
 
 export function toCSS3(rgbx: RGBX) {
-  return `rgbx(${red(rgbx) * 100}%,${green(rgbx) * 100}%,${blue(rgbx) * 100}%)`
+  return `rgb(${red(rgbx) * 100}%,${green(rgbx) * 100}%,${blue(rgbx) * 100}%)`
 }
 
 export function toRGB(rgbx: RGBX): RGB {
