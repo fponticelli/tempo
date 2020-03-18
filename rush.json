@@ -85,6 +85,10 @@
       "packageName": "tempo-demo.ui",
       "projectFolder": "./demo/ui",
       "shouldPublish": false
+    }, {
+      "packageName": "tempo-colors",
+      "projectFolder": "./colors",
+      "shouldPublish": true
     }
   ],
   "ensureConsistentVersions": true
