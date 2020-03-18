@@ -103,14 +103,17 @@ const feedToTitle = (feed: Feed) => {
   return s.substring(0, 1).toUpperCase() + s.substring(1)
 }
 
-export const toRouteData = matchKind<Route, RouteData>({
-  FeedsRoute: (route) => routeData(feedToTitle(route.feed), route.page === 1 ? `/${route.feed}` : `/${route.feed}/page/${route.page}`),
-  ItemRoute: (route) => routeData('Item', `/item/${route.item}`),
-  NotFoundRoute: () => routeData('404', '/404'),
-  RootRoute: () => routeData('Top', '/'),
-  UserRoute: (route) => routeData(route.user, `/user/${route.user}`),
-  ExternalRoute: (route) => routeData('External', route.path)
-})
+export const toRouteData = (route: Route) => matchKind<Route, RouteData>(
+  route,
+  {
+    FeedsRoute: (route) => routeData(feedToTitle(route.feed), route.page === 1 ? `/${route.feed}` : `/${route.feed}/page/${route.page}`),
+    ItemRoute: (route) => routeData('Item', `/item/${route.item}`),
+    NotFoundRoute: () => routeData('404', '/404'),
+    RootRoute: () => routeData('Top', '/'),
+    UserRoute: (route) => routeData(route.user, `/user/${route.user}`),
+    ExternalRoute: (route) => routeData('External', route.path)
+  }
+)
 
 export const toTitle = (route: Route): string => toRouteData(route).title
 export const toUrl = (route: Route): string => toRouteData(route).url

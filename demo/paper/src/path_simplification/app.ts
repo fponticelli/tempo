@@ -83,10 +83,13 @@ export const makeApp = (store: Store<State, Action>) =>
         strokeWidth: 1,
         strokeColor: new Color(0.2, 0.2, 0.2),
         fullySelected: ([_, state, index]) =>
-          matchKind<Mode, boolean>({
-            drawing: () => false,
-            editing: ({ pathIndex }) => pathIndex === index
-          })(state.mode)
+          matchKind<Mode, boolean>(
+            state.mode,
+            {
+              drawing: () => false,
+              editing: ({ pathIndex }) => pathIndex === index
+            }
+          )
       })
     )
   )

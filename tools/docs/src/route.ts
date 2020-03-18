@@ -17,15 +17,18 @@ export type Route =
   | { kind: 'NotFound', path: string }
   | { kind: 'Home' }
 
-export const toHref = matchKind<Route, string>({
-  Home: _ => '',
-  Demos: o => `#/demo`,
-  Page: o => `#/page/${o.path}`,
-  Project: o => `#/project/${o.name}`,
-  Api: o => `#/api/${o.name}/${o.path}`,
-  NotFound: o => o.path,
-  Changelog: o => `#/changelog/${o.name}`
-})
+export const toHref = (route: Route) => matchKind<Route, string>(
+  route,
+  {
+    Home: _ => '',
+    Demos: o => `#/demo`,
+    Page: o => `#/page/${o.path}`,
+    Project: o => `#/project/${o.name}`,
+    Api: o => `#/api/${o.name}/${o.path}`,
+    NotFound: o => o.path,
+    Changelog: o => `#/changelog/${o.name}`
+  }
+)
 
 export const toUrlForAnalytics = (r: Route) => {
   const href = toHref(r)
@@ -36,15 +39,18 @@ export const toUrlForAnalytics = (r: Route) => {
   return href
 }
 
-export const toContentUrl = matchKind<Route, Option<string>>({
-  Home: _ => some('pages/index.html'),
-  Api: o => some(`api/${o.name}/${o.path}`),
-  Demos: _ => none,
-  Page: o => some(`pages/${o.path}`),
-  Project: _ => none,
-  NotFound: _ => none,
-  Changelog: o => some(`changelog/${o.name}.html`)
-})
+export const toContentUrl = (route: Route) => matchKind<Route, Option<string>>(
+  route,
+  {
+    Home: _ => some('pages/index.html'),
+    Api: o => some(`api/${o.name}/${o.path}`),
+    Demos: _ => none,
+    Page: o => some(`pages/${o.path}`),
+    Project: _ => none,
+    NotFound: _ => none,
+    Changelog: o => some(`changelog/${o.name}.html`)
+  }
+)
 
 export const Route = {
   home: ({ kind: 'Home' }) as Route,

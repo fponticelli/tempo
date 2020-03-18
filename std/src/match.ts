@@ -51,8 +51,9 @@ export function createMatch<F extends IndexType>(field: F) {
     T extends ObjectWithField<F, any>,
     B
   >(
+    input: T,
     matcher: { [k in T[F]]: (arg: Differentiate<F, T, k>) => B }
-  ) => (input: T): B => {
+  ): B => {
     const k = input[field]
     return matcher[k](input as any)
   }
@@ -65,10 +66,11 @@ export const createDeepMatch = <Path extends IndexType[]>(
     T extends ObjectWithPath<Path, any>,
     B
   >(
+    input: T,
     matcher: {
       [k in TypeAtPath<Path, T>]: (arg: DifferentiateAt<Path, T, k>) => B
     }
-  ) => (input: T): B => {
+  ): B => {
     const k = path.reduce((res: any, key) => res[key], input) as TypeAtPath<
       Path,
       T
