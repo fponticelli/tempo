@@ -11,36 +11,99 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+import { matchKind } from 'tempo-std/lib/match'
 import { Tempo } from 'tempo-dom/lib/tempo'
-import { el } from 'tempo-ui/lib/layout'
+import { input, button } from 'tempo-dom/lib/html'
+import { container } from 'tempo-ui/lib/ui'
 import { resetStyles } from 'tempo-ui/lib/reset'
-import { fill, shrink, bgColor, paddingAll } from 'tempo-ui/lib/property_types'
 import { Store } from 'tempo-store/lib/store'
-import { ofGrey } from 'tempo-colors/lib/grey'
+import {
+  Background,
+  Padding,
+  Transition,
+  Size
+} from 'tempo-ui/lib/ui_attributes'
 
-const state = 0
+type Action = {
+  kind: 'ChangePadding'
+  value: number
+}
+type State = {
+  padding: number
+}
 
-type Action = 'increment'
+const reducer = (state: State, action: Action): State =>
+  matchKind(action, {
+    ChangePadding: p => ({ ...state, padding: p.value })
+  })
 
-const reducer = (state: number, action: Action): number => {
-  switch (action) {
-    case 'increment':
-      return state + 1
-    default:
-      throw `this should never happen`
-  }
+const state: State = {
+  padding: 10
 }
 
 const store = Store.ofState({ state, reducer })
 
-const template = el<number, Action>(
+const template = container<State, Action>(
   {
-    width: shrink,
-    height: fill,
-    background: bgColor(ofGrey(0.9)),
-    padding: paddingAll(10)
+    orientation: 'row'
   },
-  'Some Text Here'
+  container(
+    {
+      padding: p => Padding.each(p.padding, 20),
+      background: Background.hsl(-10, 0.9, 0.95),
+      transition: Transition.make('background', '2s'),
+      hover: {
+        background: Background.hsl(20, 0.9, 0.6)
+      },
+      active: {
+        transition: Transition.make('background', '0.5s'),
+        background: Background.hsl(30, 0.3, 0.9)
+      },
+      width: Size.px(50)
+    },
+    'A'
+  ),
+  container(
+    {
+      orientation: 'col',
+      background: Background.hsl(60, 0.8, 0.8),
+      transition: Transition.make('background', '1s'),
+      padding: p => Padding.all(p.padding),
+      active: {
+        background: Background.hsl(30, 0.3, 0.9)
+      }
+    },
+    input({
+      attrs: {
+        value: p => String(p.padding)
+      },
+      events: {
+        input: (_s, _e, e) => ({
+          kind: 'ChangePadding',
+          value: Number(e.value)
+        })
+      }
+    }),
+    button({}, 'click me')
+  ),
+  container(
+    {
+      transition: Transition.multi(
+        Transition.make('padding', '1s'),
+        Transition.make('background', '0.5s')
+      ),
+      background: Background.hsl(120, 0.8, 0.8),
+      padding: Padding.each(0),
+      hover: {
+        padding: p => Padding.each(p.padding)
+      },
+      active: {
+        padding: p => Padding.each(p.padding * 2),
+        background: p => Background.hsl(120 + p.padding, 0.8, 0.8)
+      }
+    },
+    'C'
+  )
 )
 
 resetStyles()

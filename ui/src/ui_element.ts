@@ -11,50 +11,93 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { DOMTemplate, DOMChild } from './template'
-import { DOMContext } from './context'
-import { View } from 'tempo-core/lib/view'
-import {
-  processAttribute,
-  processEvent,
-  processStyle,
-  domChildToTemplate,
-  removeNode
-} from './utils/dom'
-import {
-  Props,
-  Attribute,
-  AttributeValue,
-  EventHandler,
-  StyleAttribute
-} from './value'
-import { map } from 'tempo-std/lib/arrays'
+import { DOMTemplate, DOMChild } from 'tempo-dom/lib/template'
 import {
   applyAfterRender,
   applyChange,
   makeCreateElement,
-  extractAttrs,
-  extractEvents,
-  extractStyles,
+  defaultNamespaces,
   makeCreateElementNS,
-  defaultNamespaces
-} from './impl/apply_element'
+  extractEvents
+} from 'tempo-dom/lib/impl/apply_element'
+import { DOMContext } from 'tempo-dom/lib/context'
+import { View } from 'tempo-core/lib/view'
+import {
+  processEvent,
+  domChildToTemplate,
+  removeNode
+} from 'tempo-dom/lib/utils/dom'
+import { Attribute, EventHandler } from 'tempo-dom/lib/value'
+import { map } from 'tempo-std/lib/arrays'
+import { keys } from 'tempo-std/lib/objects'
 
-export class DOMElement<
+function applyAttributes(
+  el: HTMLElement,
+  attributes: { classes: string[]; styles: Record<string, string> } | undefined
+) {
+  if (typeof attributes === 'undefined') return
+  const { classes, styles } = attributes
+  el.className = classes.join(' ')
+  keys(styles).forEach(k => {
+    el.style.setProperty(`--${k}`, styles[k])
+  })
+}
+
+function processAttributes<State>(
+  el: HTMLElement,
+  attributes: Attribute<
+    State,
+    { classes: string[]; styles: Record<string, string> }
+  >,
+  changes: ((state: State) => void)[]
+) {
+  if (typeof attributes === 'function') {
+    changes.push(state => applyAttributes(el, attributes(state)))
+  } else {
+    applyAttributes(el, attributes)
+  }
+}
+
+function resetStyles(el: HTMLElement) {
+  console.log('reset styles', el.getAttribute('style'))
+  // fastest method but erases all styles
+  // el.setAttribute('style', '')
+  // const styles = el
+  //   ?.split(';')
+  //   .map(v => v.substring(0, v.indexOf(':')))
+  // console.log(styles)
+  // console.log(getComputedStyle(el).)
+  // for (let p in el.style) {
+  //   if (p.startsWith('--')) {
+  //     el.style.removeProperty(p)
+  //     console.log('removed ' + p)
+  //   } else {
+  //     console.log(p)
+  //   }
+  // }
+}
+
+export class DOMUIElement<
   State,
   Action,
   Query = unknown,
-  El extends Element = Element,
+  El extends HTMLElement = HTMLElement,
   T = unknown
 > implements DOMTemplate<State, Action, Query> {
   constructor(
     public createElement: (doc: Document) => El,
-    public attrs: { name: string; value: Attribute<State, AttributeValue> }[],
+    public attrsf:
+      | ((
+          doc: Document
+        ) => Attribute<
+          State,
+          { classes: string[]; styles: Record<string, string> }
+        >)
+      | undefined,
     public events: {
       name: string
       value: EventHandler<State, Action, any, El>
     }[],
-    public styles: { name: string; value: StyleAttribute<State, string> }[],
     public afterrender:
       | undefined
       | ((state: State, el: El, ctx: DOMContext<Action>) => T | undefined),
@@ -94,13 +137,10 @@ export class DOMElement<
 
     const allChanges = [] as ((state: State) => void)[]
 
-    for (const o of this.attrs)
-      processAttribute(el, o.name, o.value, allChanges)
+    processAttributes(el, this.attrsf && this.attrsf(ctx.doc), allChanges)
 
     for (const o of this.events)
       processEvent(el, o.name, o.value, ctx.dispatch, allChanges)
-
-    for (const o of this.styles) processStyle(el, o.name, o.value, allChanges)
 
     for (const change of allChanges) change(state)
 
@@ -143,6 +183,7 @@ export class DOMElement<
 
     return {
       change: (state: State) => {
+        resetStyles(el)
         for (const change of allChanges) change(state)
       },
       destroy: () => {
@@ -162,22 +203,58 @@ export class DOMElement<
   }
 }
 
-export function el<
+export interface UIProps<
   State,
   Action,
   Query = unknown,
   El extends Element = Element,
   T = unknown
+> {
+  attrsf?: (
+    doc: Document
+  ) => Attribute<State, { classes: string[]; styles: Record<string, string> }>
+  events?: Record<string, EventHandler<State, Action, any, El>>
+  afterrender?: (state: State, el: El, ctx: DOMContext<Action>) => T | undefined
+  beforechange?: (
+    state: State,
+    el: El,
+    ctx: DOMContext<Action>,
+    value: T | undefined
+  ) => T | undefined
+  afterchange?: (
+    state: State,
+    el: El,
+    ctx: DOMContext<Action>,
+    value: T | undefined
+  ) => T | undefined
+  beforedestroy?: (
+    el: El,
+    ctx: DOMContext<Action>,
+    value: T | undefined
+  ) => void
+  respond?: (
+    query: Query,
+    el: El,
+    ctx: DOMContext<Action>,
+    value: T | undefined
+  ) => T | undefined
+}
+
+export function el<
+  State,
+  Action,
+  Query = unknown,
+  El extends HTMLElement = HTMLElement,
+  T = unknown
 >(
   name: string,
-  props: Props<State, Action, Query, El, T>,
+  props: UIProps<State, Action, Query, El, T>,
   ...children: DOMChild<State, Action, Query>[]
 ) {
-  return new DOMElement<State, Action, Query, El, T>(
+  return new DOMUIElement<State, Action, Query, El, T>(
     makeCreateElement(name),
-    extractAttrs(props.attrs),
+    props.attrsf,
     extractEvents(props.events),
-    extractStyles(props.styles),
     props.afterrender,
     props.beforechange,
     props.afterchange,
@@ -185,46 +262,25 @@ export function el<
     props.respond,
     map(children, domChildToTemplate)
   )
-}
-
-export function el2<El extends Element>(name: string) {
-  return function<State, Action, Query = unknown, T = unknown>(
-    props: Props<State, Action, Query, El, T>,
-    ...children: DOMChild<State, Action, Query>[]
-  ) {
-    return new DOMElement<State, Action, Query, El, T>(
-      makeCreateElement(name),
-      extractAttrs(props.attrs),
-      extractEvents(props.events),
-      extractStyles(props.styles),
-      props.afterrender,
-      props.beforechange,
-      props.afterchange,
-      props.beforedestroy,
-      props.respond,
-      map(children, domChildToTemplate)
-    )
-  }
 }
 
 export function elNS<
   State,
   Action,
   Query = unknown,
-  El extends Element = Element,
+  El extends HTMLElement = HTMLElement,
   T = unknown
 >(
   ns: string,
   name: string,
-  props: Props<State, Action, Query, El, T>,
+  props: UIProps<State, Action, Query, El, T>,
   ...children: DOMChild<State, Action, Query>[]
 ) {
   const namespace = defaultNamespaces[ns] || ns
-  return new DOMElement<State, Action, Query, El, T>(
+  return new DOMUIElement<State, Action, Query, El, T>(
     makeCreateElementNS(namespace, name),
-    extractAttrs(props.attrs),
+    props.attrsf,
     extractEvents(props.events),
-    extractStyles(props.styles),
     props.afterrender,
     props.beforechange,
     props.afterchange,
@@ -232,24 +288,4 @@ export function elNS<
     props.respond,
     map(children, domChildToTemplate)
   )
-}
-
-export function elNS2<El extends Element>(namespace: string, name: string) {
-  return function<State, Action, Query = unknown, T = unknown>(
-    props: Props<State, Action, Query, El, T>,
-    ...children: DOMChild<State, Action, Query>[]
-  ) {
-    return new DOMElement<State, Action, Query, El, T>(
-      makeCreateElementNS(namespace, name),
-      extractAttrs(props.attrs),
-      extractEvents(props.events),
-      extractStyles(props.styles),
-      props.afterrender,
-      props.beforechange,
-      props.afterchange,
-      props.beforedestroy,
-      props.respond,
-      map(children, domChildToTemplate)
-    )
-  }
 }

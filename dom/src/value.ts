@@ -11,60 +11,126 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+import { keys } from 'tempo-std/lib/objects'
 import { DerivedOrLiteralValue, DerivedValue } from 'tempo-core/lib/value'
 import { DOMContext } from './context'
 
-export type Attribute<State, Value> = DerivedOrLiteralValue<State, Value | undefined> | undefined
+export type Attribute<State, Value> =
+  | DerivedOrLiteralValue<State, Value | undefined>
+  | undefined
 export type TextValue<S> = Attribute<S, string>
-export type EventHandler<S, Action, Ev extends Event = Event, El extends Element = Element> =
-  (state: S, event: Ev, element: El) => Action | undefined
-export type StyleAttribute<State, Value> = DerivedOrLiteralValue<State, Value | undefined>
+export type EventHandler<
+  S,
+  Action,
+  Ev extends Event = Event,
+  El extends Element = Element
+> = (state: S, event: Ev, element: El) => Action | undefined
+export type StyleAttribute<State, Value> = DerivedOrLiteralValue<
+  State,
+  Value | undefined
+>
 
-export type ValueOfAttribute<Att extends Attribute<any, any>> =
-  Att extends Attribute<any, infer Value> ? Value : never
+export type ValueOfAttribute<
+  Att extends Attribute<any, any>
+> = Att extends Attribute<any, infer Value> ? Value : never
 
 export type AttributeValue = string | number | boolean | string[]
 
-export interface Props<State, Action, Query = unknown, El extends Element = Element, T = unknown> {
+export interface Props<
+  State,
+  Action,
+  Query = unknown,
+  El extends Element = Element,
+  T = unknown
+> {
   attrs?: Record<string, Attribute<State, AttributeValue>>
   events?: Record<string, EventHandler<State, Action, any, El>>
   styles?: Record<string, StyleAttribute<State, string>>
-  afterrender?:  (state: State, el: El, ctx: DOMContext<Action>) => T | undefined
-  beforechange?: (state: State, el: El, ctx: DOMContext<Action>, value: T | undefined) => T | undefined
-  afterchange?:  (state: State, el: El, ctx: DOMContext<Action>, value: T | undefined) => T | undefined
-  beforedestroy?: (el: El, ctx: DOMContext<Action>, value: T | undefined) => void
-  respond?: (query: Query, el: El, ctx: DOMContext<Action>, value: T | undefined) => T | undefined
+  afterrender?: (state: State, el: El, ctx: DOMContext<Action>) => T | undefined
+  beforechange?: (
+    state: State,
+    el: El,
+    ctx: DOMContext<Action>,
+    value: T | undefined
+  ) => T | undefined
+  afterchange?: (
+    state: State,
+    el: El,
+    ctx: DOMContext<Action>,
+    value: T | undefined
+  ) => T | undefined
+  beforedestroy?: (
+    el: El,
+    ctx: DOMContext<Action>,
+    value: T | undefined
+  ) => void
+  respond?: (
+    query: Query,
+    el: El,
+    ctx: DOMContext<Action>,
+    value: T | undefined
+  ) => T | undefined
 }
 
-export function mapAttribute<State, A, B>(attr: Attribute<State, A>, map: (a: A) => B): Attribute<State, B> {
+export function mapAttribute<State, A, B>(
+  attr: Attribute<State, A>,
+  map: (a: A) => B
+): Attribute<State, B> {
   if (typeof attr === 'undefined') {
     return undefined
   } else if (typeof attr === 'function') {
     return (state: State) => {
       const res = (attr as DerivedValue<State, A>)(state)
-      if (res !== undefined)
-        return map(res)
-      else
-        return undefined
+      if (res !== undefined) return map(res)
+      else return undefined
     }
   } else {
     return map(attr)
   }
 }
 
-export function attributeToHandler<State, Value, Action, Ev extends Event, El extends Element>(
+export function mapAttributes<
+  State,
+  T extends { [_ in string]: Attribute<State, any> },
+  B
+>(
+  attributes: T,
+  map: (values: { [K in keyof T]: ValueOfAttribute<T[K]> }) => B
+): Attribute<State, B> {
+  const ks = keys(attributes)
+  const isDynamic = ks.some(k => typeof attributes[k] === 'function')
+  if (isDynamic) {
+    return (state: State) => {
+      const o = ks.reduce((acc: T, k: keyof T) => {
+        acc[k] = resolveAttribute(attributes[k])(state) as T[typeof k]
+        return acc
+      }, {} as T)
+      return map(o)
+    }
+  } else {
+    return map(attributes as T)
+  }
+}
+
+export function attributeToHandler<
+  State,
+  Value,
+  Action,
+  Ev extends Event,
+  El extends Element
+>(
   attr: Attribute<State, Value>,
   handler: EventHandler<Value, Action, Ev, El>
 ): EventHandler<State, Action, Ev, El> {
   if (typeof attr === 'undefined') {
-    return () => { return undefined }
+    return () => {
+      return undefined
+    }
   } else if (typeof attr === 'function') {
     return (state: State, event: Ev, element: El) => {
       const res = (attr as DerivedValue<State, Value>)(state)
-      if (res !== undefined)
-        return handler(res, event, element)
-      else
-        return undefined
+      if (res !== undefined) return handler(res, event, element)
+      else return undefined
     }
   } else {
     return (_: State, event: Ev, element: El) => {
@@ -75,7 +141,7 @@ export function attributeToHandler<State, Value, Action, Ev extends Event, El ex
 
 export function resolveAttribute<State, Value>(attr: Attribute<State, Value>) {
   if (typeof attr === 'function') {
-    return (attr as DerivedValue<State, Value>)
+    return attr as DerivedValue<State, Value>
   } else {
     return (_: State): Value | undefined => attr
   }

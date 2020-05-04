@@ -11,17 +11,22 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-const defaultStyles = `
+const defaultBodyStyles = `
 html, body {
+  margin: 0;
+  padding: 0;
   height: 100%;
 }
+`
 
-\* {
+const defaultStyles = (selector: string) => `
+${selector}, ${selector} * {
   border: none;
   border-style: solid;
   border-width: 0;
   box-sizing: border-box;
   color: inherit;
+  display: flex;
   flex-basis: auto;
   flex-direction: row;
   flex-shrink: 0;
@@ -38,17 +43,20 @@ html, body {
   text-decoration: none;
 }
 
-body \* {
-  display: flex;
+${selector} > .c, ${selector} > .r {
+  width: 100%;
 }
 
-\*:focus {
+${selector} *:focus {
   outline: none;
 }
 `
 
-export function resetStyles(doc = document) {
+export function resetStyles(selector = 'body', doc = document) {
   const style = doc.createElement('style')
-  style.textContent = defaultStyles
+  if (selector === 'body') {
+    style.textContent = defaultBodyStyles
+  }
+  style.textContent += defaultStyles(selector)
   doc.head.appendChild(style)
 }

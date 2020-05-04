@@ -17,6 +17,8 @@ limitations under the License.
 
 import { Maybe, nothing } from './maybe'
 import { Ordering, Compare } from './ord'
+import { Primitive } from './primitive'
+import { keys } from './objects'
 
 export function map<A, B>(arr: A[], f: (a: A) => B): B[] {
   const length = arr.length
@@ -43,9 +45,12 @@ export function tail<A>(arr: A[]): A[] {
   return arr.slice(1)
 }
 
-export function equals<T>(a: T[], b: T[], predicate: (a: T, b: T) => boolean): boolean {
-  if (a.length !== b.length)
-    return false
+export function equals<T>(
+  a: T[],
+  b: T[],
+  predicate: (a: T, b: T) => boolean
+): boolean {
+  if (a.length !== b.length) return false
   else {
     for (let i = 0; i < a.length; i++) {
       if (!predicate(a[i], b[i])) return false
@@ -70,9 +75,7 @@ export function hasValues<T>(arr: T[]): arr is [T, ...T[]] {
 
 export function filter<T>(arr: T[], predicate: (v: T) => boolean): T[] {
   const buff = [] as T[]
-  for (const a of arr)
-    if (predicate(a))
-      buff.push(a)
+  for (const a of arr) if (predicate(a)) buff.push(a)
   return buff
 }
 
@@ -106,8 +109,7 @@ export function any<T>(arr: T[], predicate: (v: T) => boolean): boolean {
 }
 
 export function each<T>(arr: T[], f: (v: T) => void): void {
-  for (const a of arr)
-    f(a)
+  for (const a of arr) f(a)
 }
 
 export function concat<A>(...arrs: A[][]): A[] {
@@ -115,7 +117,7 @@ export function concat<A>(...arrs: A[][]): A[] {
 }
 
 export function makeCompare<A>(comparef: Compare<A>, shorterFirst = true) {
-  return function (a: A[], b: A[]) {
+  return function(a: A[], b: A[]) {
     if (a.length < b.length) {
       return -1 * (shorterFirst ? 1 : -1)
     } else if (a.length > b.length) {
@@ -123,8 +125,7 @@ export function makeCompare<A>(comparef: Compare<A>, shorterFirst = true) {
     }
     for (let i = 0; i < a.length; i++) {
       const ord = comparef(a[i], b[i])
-      if (ord !== 0)
-        return ord
+      if (ord !== 0) return ord
     }
     return 0
   }
@@ -136,8 +137,7 @@ export function sort<A>(compare: (a: A, b: A) => Ordering, arr: A[]): A[] {
 
 export function range<A>(length: number, f: (index: number) => A): A[] {
   const buff = new Array(length) as A[]
-  for (let i = 0; i < length; i++)
-    buff[i] = f(i)
+  for (let i = 0; i < length; i++) buff[i] = f(i)
   return buff
 }
 
@@ -147,4 +147,19 @@ export function numbersRange(length: number, startAt = 0) {
 
 export function fill<A>(length: number, value: A): A[] {
   return range(length, () => value)
+}
+
+export function distinctPrimitive<T extends Primitive>(values: T[]): T[] {
+  return Array.from(new Set(values))
+}
+
+export function distinctByPredicate<T>(
+  values: T[],
+  predicate: (a: T) => string
+): T[] {
+  const map = {} as Record<string, T>
+  values.forEach(v => {
+    map[predicate(v)] = v
+  })
+  return keys(map).map(k => map[k])
 }
