@@ -59,22 +59,8 @@ function processAttributes<State>(
 }
 
 function resetStyles(el: HTMLElement) {
-  console.log('reset styles', el.getAttribute('style'))
-  // fastest method but erases all styles
-  // el.setAttribute('style', '')
-  // const styles = el
-  //   ?.split(';')
-  //   .map(v => v.substring(0, v.indexOf(':')))
-  // console.log(styles)
-  // console.log(getComputedStyle(el).)
-  // for (let p in el.style) {
-  //   if (p.startsWith('--')) {
-  //     el.style.removeProperty(p)
-  //     console.log('removed ' + p)
-  //   } else {
-  //     console.log(p)
-  //   }
-  // }
+  // fastest way to achieve resetting CSS variables
+  el.setAttribute('style', '')
 }
 
 export class DOMUIElement<

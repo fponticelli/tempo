@@ -25,10 +25,6 @@ export const features = {
         {
           selector: '.r',
           rules: ['display: flex']
-        },
-        {
-          selector: '.r > *',
-          rules: ['flex-grow: 1', 'flex-shrink: 1', 'flex-basis: 10%']
         }
       ]
     },
@@ -38,10 +34,6 @@ export const features = {
         {
           selector: '.c',
           rules: ['display: flex', 'flex-direction: column']
-        },
-        {
-          selector: '.c > *',
-          rules: ['flex-grow: 1', 'flex-shrink: 1', 'flex-basis: 10%']
         }
       ]
     }
