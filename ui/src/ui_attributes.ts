@@ -72,21 +72,37 @@ export const Transition = {
 
 export type Size =
   | {
-      kind: 'SizePX'
+      kind: 'SizeFixed'
       value: number
     }
   | {
       kind: 'SizeFill'
       ratio: number
     }
+  | {
+      kind: 'SizeMin'
+      value: number
+    }
+  | {
+      kind: 'SizeMax'
+      value: number
+    }
 export const Size = {
-  px: (value: number): Size => ({
-    kind: 'SizePX',
+  fixed: (value: number): Size => ({
+    kind: 'SizeFixed',
     value
   }),
   fill: (ratio = 1): Size => ({
     kind: 'SizeFill',
     ratio
+  }),
+  min: (value: number): Size => ({
+    kind: 'SizeMin',
+    value
+  }),
+  max: (value: number): Size => ({
+    kind: 'SizeMax',
+    value
   })
 }
 
@@ -115,3 +131,69 @@ export type Border =
       bottom: BorderProperties
       left: BorderProperties
     }
+
+export const Border = {
+  all: (width: number, color: Color, style?: BorderStyle): Border => ({
+    kind: 'BorderAll',
+    all: {
+      width,
+      color,
+      style: style ?? 'solid'
+    }
+  }),
+  each: (
+    top: BorderProperties,
+    right = top,
+    bottom = top,
+    left = right
+  ): Border => ({
+    kind: 'BorderEach',
+    top,
+    right,
+    bottom,
+    left
+  })
+}
+
+export type Length =
+  | { kind: 'Px'; value: number }
+  | { kind: 'Percent'; value: number }
+
+export const Length = {
+  px: (value: number): Length => ({ kind: 'Px', value }),
+  percent: (value: number): Length => ({ kind: 'Percent', value })
+}
+
+export interface BorderRadiusProperties {
+  first: Length
+  second?: Length
+}
+
+export type BorderRadius =
+  | { kind: 'BorderRadiusAll'; all: BorderRadiusProperties }
+  | {
+      kind: 'BorderRadiusEach'
+      tl: BorderRadiusProperties
+      tr: BorderRadiusProperties
+      br: BorderRadiusProperties
+      bl: BorderRadiusProperties
+    }
+
+export const Radius = {
+  all: (first: Length, second?: Length): BorderRadius => ({
+    kind: 'BorderRadiusAll',
+    all: { first, second }
+  }),
+  each: (
+    tl: BorderRadiusProperties,
+    tr = tl,
+    br = tl,
+    bl = tr
+  ): BorderRadius => ({
+    kind: 'BorderRadiusEach',
+    tl,
+    tr,
+    br,
+    bl
+  })
+}

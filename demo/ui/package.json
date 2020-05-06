@@ -24,7 +24,8 @@
     "tempo-colors": "0.1.0",
     "tempo-dom": "0.17.0",
     "tempo-store": "1.2.2",
-    "tempo-ui": "0.1.0"
+    "tempo-ui": "0.1.0",
+    "uood": "0.1.0"
   },
   "devDependencies": {
     "babel-types": "6.26.0",

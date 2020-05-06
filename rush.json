@@ -89,6 +89,10 @@
       "packageName": "tempo-colors",
       "projectFolder": "./colors",
       "shouldPublish": true
+    }, {
+      "packageName": "uood",
+      "projectFolder": "./uood",
+      "shouldPublish": true
     }
   ],
   "ensureConsistentVersions": true

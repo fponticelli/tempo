@@ -13,8 +13,9 @@ limitations under the License.
 
 import { matchKind } from 'tempo-std/lib/match'
 import { Tempo } from 'tempo-dom/lib/tempo'
-import { input, button } from 'tempo-dom/lib/html'
-import { container } from 'tempo-ui/lib/ui'
+import { input } from 'tempo-dom/lib/html'
+import { button } from 'uood/lib/button'
+import { container, block } from 'tempo-ui/lib/ui'
 import { resetStyles } from 'tempo-ui/lib/reset'
 import { Store } from 'tempo-store/lib/store'
 import {
@@ -59,7 +60,7 @@ const template = container<State, Action>(
         transition: Transition.make('background', '0.5s'),
         background: Background.hsl(30, 0.3, 0.9)
       },
-      width: Size.px(50)
+      width: Size.fixed(50)
     },
     'A'
   ),
@@ -84,7 +85,12 @@ const template = container<State, Action>(
         })
       }
     }),
-    button({}, 'click me')
+    block(
+      {},
+      button({
+        label: 'Click Me!'
+      })
+    )
   ),
   container(
     {

@@ -14,6 +14,7 @@ dependencies:
   '@rush-temp/tempo-store': 'file:projects/tempo-store.tgz'
   '@rush-temp/tempo-tools.docs': 'file:projects/tempo-tools.docs.tgz_sass@1.23.7'
   '@rush-temp/tempo-ui': 'file:projects/tempo-ui.tgz'
+  '@rush-temp/uood': 'file:projects/uood.tgz'
   '@types/doctrine': 0.0.3
   '@types/dompurify': 2.0.0
   '@types/fs-extra': 8.0.1
@@ -12690,7 +12691,7 @@ packages:
     peerDependencies:
       sass: '*'
     resolution:
-      integrity: sha512-Jr4nAlXLa/6hP755ypcWFz/6idZLvOcLc4QspAB6r929/GZ550qqAKTGZwGAdl8JeoMo2Kw3y0BrXhIXZ9hpgw==
+      integrity: sha512-UVRZNxnEF230QtM08oxozr4C6u2LjZ+AaZg2Du9SLdYgjfo346LWeg6NTfo9i8qri/5/YpB1XTpcM61LHpwy1A==
       tarball: 'file:projects/tempo-demo.ui.tgz'
     version: 0.0.0
   'file:projects/tempo-dom.tgz':
@@ -12860,8 +12861,28 @@ packages:
     dev: false
     name: '@rush-temp/tempo-ui'
     resolution:
-      integrity: sha512-7kauOHFOQgArwv+SIHtLTxJbnhOTlc+GKulVAWLIGgsyXVHrZUXekN0CZ1/NVDi0dRxc8ypNhIZAJKgRvvNqaQ==
+      integrity: sha512-4xvNyT+Jmuh8FJFhZHs8BFsrO0EN2O9/ESPC3aEc5IGlhFoNqqxchhWjcIvPsvSvV7T1ufrXm7OzgRoZiqIznw==
       tarball: 'file:projects/tempo-ui.tgz'
+    version: 0.0.0
+  'file:projects/uood.tgz':
+    dependencies:
+      '@types/jest': 25.1.2
+      '@types/jsdom': 12.2.4
+      jest: 25.1.0
+      jsdom: 16.1.0
+      lodash: 4.17.15
+      prettier: 1.19.1
+      request: 2.88.0
+      request-promise-native: 1.0.7_request@2.88.0
+      stealthy-require: 1.0.0
+      ts-jest: 25.2.0_jest@25.1.0
+      tslint: 6.0.0_typescript@3.7.5
+      typescript: 3.7.5
+    dev: false
+    name: '@rush-temp/uood'
+    resolution:
+      integrity: sha512-j7AP7ooBaBam3vsVoxQdPtU2dbzr/wmLAXuvZD5lDlQmTgoCk2J2R7T74BytcouOa63a8nIED/cVBDA/hVgXxA==
+      tarball: 'file:projects/uood.tgz'
     version: 0.0.0
 registry: ''
 specifiers:
@@ -12880,6 +12901,7 @@ specifiers:
   '@rush-temp/tempo-store': 'file:./projects/tempo-store.tgz'
   '@rush-temp/tempo-tools.docs': 'file:./projects/tempo-tools.docs.tgz'
   '@rush-temp/tempo-ui': 'file:./projects/tempo-ui.tgz'
+  '@rush-temp/uood': 'file:./projects/uood.tgz'
   '@types/doctrine': 0.0.3
   '@types/dompurify': 2.0.0
   '@types/fs-extra': 8.0.1

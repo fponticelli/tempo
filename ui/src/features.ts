@@ -38,12 +38,30 @@ export const features = {
       ]
     }
   },
+  inline: {
+    cls: 'i',
+    desc: [
+      {
+        selector: '.i',
+        rules: ['display: inline-block']
+      }
+    ]
+  },
   background: (prefix: string, pseudo: string) => ({
     cls: `${prefix}bg`,
     desc: [
       {
         selector: `.${prefix}bg${pseudo}`,
         rules: [`background: var(--${prefix}bg)`]
+      }
+    ]
+  }),
+  borderRadius: (prefix: string, pseudo: string): ClassDescription => ({
+    cls: `${prefix}br`,
+    desc: [
+      {
+        selector: `${prefix}.br${pseudo}`,
+        rules: [`border-radius: var(--${prefix}br)`]
       }
     ]
   }),
@@ -61,6 +79,24 @@ export const features = {
       }
     ]
   }),
+  fontSize: (prefix: string, pseudo: string): ClassDescription => ({
+    cls: `${prefix}fs`,
+    desc: [
+      {
+        selector: `.${prefix}fs${pseudo}`,
+        rules: [`font-size: var(--${prefix}fs)`]
+      }
+    ]
+  }),
+  textColor: (prefix: string, pseudo: string): ClassDescription => ({
+    cls: `${prefix}tc`,
+    desc: [
+      {
+        selector: `.${prefix}tc${pseudo}`,
+        rules: [`color: var(--${prefix}tc)`]
+      }
+    ]
+  }),
   transition: (prefix: string, pseudo: string) => ({
     cls: `${prefix}t`,
     desc: [
@@ -75,7 +111,10 @@ export const features = {
     desc: [
       {
         selector: `.${prefix}w${pseudo}`,
-        rules: [`min-width: var(--${prefix}w)`, `max-width: var(--${prefix}w)`]
+        rules: [
+          `min-width: var(--${prefix}w-mi, var(--${prefix}w))`,
+          `max-width: var(--${prefix}w-ma, var(--${prefix}w))`
+        ]
       }
     ]
   }),
@@ -85,8 +124,8 @@ export const features = {
       {
         selector: `.${prefix}h${pseudo}`,
         rules: [
-          `min-height: var(--${prefix}h)`,
-          `max-height: var(--${prefix}h)`
+          `min-height: var(--${prefix}h-mi, var(--${prefix}h))`,
+          `max-height: var(--${prefix}h-ma, var(--${prefix}h))`
         ]
       }
     ]
@@ -161,14 +200,14 @@ export const features = {
   //   key: `${prefix}:br`,
   //   variables: [
   //     `${prefix}br-tl`, `${prefix}br-tr`, `${prefix}br-br`,
-  //     `${prefix}br-bl`, `${prefix}br-a`
+  //     `${prefix}br-bl`, `${prefix}br`
   //   ],
   //   desc: [{
   //     selector: '.br',
   //     rules: [
-  //       `border-radius: var(--${prefix}br-tl, var(--${prefix}br-a)) ` +
-  //       `var(--${prefix}br-tr, var(--${prefix}br-a)) var(--${prefix}br-br, ` +
-  //       `var(--${prefix}br-a)) var(--${prefix}br-bl, var(--${prefix}br-a))`
+  //       `border-radius: var(--${prefix}br-tl, var(--${prefix}br)) ` +
+  //       `var(--${prefix}br-tr, var(--${prefix}br)) var(--${prefix}br-br, ` +
+  //       `var(--${prefix}br)) var(--${prefix}br-bl, var(--${prefix}br))`
   //     ]
   //   }]
   // }),
