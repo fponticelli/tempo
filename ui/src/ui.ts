@@ -32,7 +32,12 @@ import {
   Size,
   Length,
   Border,
-  BorderStyle
+  BorderStyle,
+  Cursor,
+  Distribution,
+  TextShadow,
+  Shadow,
+  FontWeight
 } from './ui_attributes'
 import { matchKind } from 'tempo-std/lib/match'
 import { toCSS3, Color } from 'tempo-colors/lib/color'
@@ -43,6 +48,9 @@ export interface ElProperties {
 
 export interface ElContainerProperties<State> {
   orientation?: Attribute<State, Orientation>
+  distribution?: Attribute<State, Distribution>
+  alignament?: Attribute<State, Distribution>
+  spacing?: Attribute<State, number>
 }
 
 export interface ElBlockProperties<State> {
@@ -53,17 +61,22 @@ export interface ElBlockProperties<State> {
   transition?: Attribute<State, Transition>
   width?: Attribute<State, Size>
   height?: Attribute<State, Size>
+  alignament?: Attribute<State, Distribution>
+  shadow?: Attribute<State, Shadow>
 }
 
 export interface ElTextProperties<State> {
   fontSize?: Attribute<State, number>
   textColor?: Attribute<State, Color>
+  textShadow?: Attribute<State, TextShadow>
+  fontWeight?: Attribute<State, FontWeight>
 }
 
 export interface ElMouseProperties<State> {
   hover?: ElBlockProperties<State> & ElTextProperties<State>
   active?: ElBlockProperties<State> & ElTextProperties<State>
   focusWithin?: ElBlockProperties<State> & ElTextProperties<State>
+  cursor?: Attribute<State, Cursor>
 }
 
 export interface ElLifecycleProperties<State, Action, Query, TScope> {
@@ -144,6 +157,18 @@ function borderToString(b: Border): string {
   })
 }
 
+function cursorToString(cursor: Cursor): string {
+  if (typeof cursor === 'string') return cursor
+
+  const { url, x, y } = cursor
+
+  if (typeof x !== 'undefined' || typeof y !== 'undefined') {
+    return `url(${url}) ${x ?? 0} ${y ?? 0}`
+  } else {
+    return `url(${url})`
+  }
+}
+
 function borderRadiusToString(b: BorderRadius): string {
   return matchKind(b, {
     BorderRadiusAll: b => {
@@ -192,6 +217,41 @@ function oneTransitionToString(t: OneTransition) {
   if (typeof t.timingFunction !== 'undefined') buff.push(t.timingFunction)
   if (typeof t.delay !== 'undefined') buff.push(t.delay)
   return buff.join(' ')
+}
+
+function shadowToString(s: Shadow): string {
+  return matchKind(s, {
+    DropShadow: ({ offsetX, offsetY, blurRadius, spreadRadius }) =>
+      [
+        `${offsetX}px`,
+        `${offsetY}px`,
+        (blurRadius && `${blurRadius}px`) ?? (spreadRadius && '0px'),
+        spreadRadius && `${spreadRadius}px`
+      ]
+        .filter(f => typeof f !== 'undefined')
+        .join(' '),
+    InsetShadow: ({ offsetX, offsetY, blurRadius, spreadRadius }) =>
+      [
+        'inset',
+        `${offsetX}px`,
+        `${offsetY}px`,
+        (blurRadius && `${blurRadius}px`) ?? (spreadRadius && '0px'),
+        spreadRadius && `${spreadRadius}px`
+      ]
+        .filter(f => typeof f !== 'undefined')
+        .join(' '),
+    MultiShadow: ({ shadows }) => shadows.map(shadowToString).join(', ')
+  })
+}
+
+function textShadowToString(s: TextShadow): string {
+  return matchKind(s, {
+    OneTextShadow: ({ offsetX, offsetY, blurRadius }) =>
+      [`${offsetX}px`, `${offsetY}px`, blurRadius && `${blurRadius}px`]
+        .filter(f => typeof f !== 'undefined')
+        .join(' '),
+    MultiTextShadow: ({ shadows }) => shadows.map(textShadowToString).join(', ')
+  })
 }
 
 function applyBlockProps<State>(
@@ -265,6 +325,16 @@ function applyBlockProps<State>(
     properties.push(features.borderRadius(prefix, pseudo))
     styles[`${prefix}br`] = borderRadiusToString(v.borderRadius)
   }
+
+  if (typeof v.alignament !== 'undefined') {
+    properties.push(features.alignSelf)
+    styles[`sa`] = v.alignament
+  }
+
+  if (typeof v.shadow !== 'undefined') {
+    properties.push(features.boxShadow(prefix, pseudo))
+    styles[`bs`] = shadowToString(v.shadow)
+  }
 }
 
 function applyTextProps<State>(
@@ -282,13 +352,26 @@ function applyTextProps<State>(
     properties.push(features.fontSize(prefix, pseudo))
     styles[`${prefix}fs`] = `${v.fontSize}px`
   }
+
   if (typeof v.textColor !== 'undefined') {
     properties.push(features.textColor(prefix, pseudo))
     styles[`${prefix}tc`] = toCSS3(v.textColor)
   }
+
+  if (typeof v.textShadow !== 'undefined') {
+    properties.push(features.textShadow(prefix, pseudo))
+    styles[`bs`] = textShadowToString(v.textShadow)
+  }
+
+  if (typeof v.fontWeight !== 'undefined') {
+    properties.push(features.fontWeight(prefix, pseudo))
+    styles[`fw`] = String(v.fontWeight)
+  }
 }
 
 function applyMouseProps<State>(
+  prefix: string,
+  pseudo: string,
   state: State,
   v: {
     [K in keyof ElMouseProperties<State>]: ValueOfAttribute<
@@ -328,6 +411,11 @@ function applyMouseProps<State>(
       )
     )(state)
   }
+
+  if (typeof v.cursor !== 'undefined') {
+    properties.push(features.cursor(prefix, pseudo))
+    styles[`${prefix}cu`] = cursorToString(v.cursor)
+  }
 }
 
 export function container<State, Action, Query = unknown, TScope = unknown>(
@@ -353,9 +441,24 @@ export function container<State, Action, Query = unknown, TScope = unknown>(
         const properties = [features.orientation[v.orientation ?? 'row']]
         const styles: Record<string, string> = {}
 
+        if (typeof v.spacing !== 'undefined') {
+          properties.push(features.spacing)
+          styles[`sp`] = `${v.spacing}px`
+        }
+
+        if (typeof v.distribution !== 'undefined') {
+          properties.push(features.justifyContent)
+          styles[`d`] = v.distribution
+        }
+
+        if (typeof v.alignament !== 'undefined') {
+          properties.push(features.alignItems)
+          styles[`d`] = v.alignament
+        }
+
         applyBlockProps('', '', v, properties, styles)
         applyTextProps('', '', v, properties, styles)
-        applyMouseProps(state, v, properties, styles)
+        applyMouseProps('', '', state, v, properties, styles)
 
         properties.forEach(prop => includeStyle(doc, prop.cls, prop.desc))
         const classes = properties.map(p => p.cls)
@@ -405,7 +508,7 @@ export function block<State, Action, Query = unknown, TScope = unknown>(
 
         applyBlockProps('', '', v, properties, styles)
         applyTextProps('', '', v, properties, styles)
-        applyMouseProps(state, v, properties, styles)
+        applyMouseProps('', '', state, v, properties, styles)
 
         properties.forEach(prop => includeStyle(doc, prop.cls, prop.desc))
         const classes = properties.map(p => p.cls)
@@ -455,7 +558,7 @@ export function inline<State, Action, Query = unknown, TScope = unknown>(
 
         applyBlockProps('', '', v, properties, styles)
         applyTextProps('', '', v, properties, styles)
-        applyMouseProps(state, v, properties, styles)
+        applyMouseProps('', '', state, v, properties, styles)
 
         properties.forEach(prop => includeStyle(doc, prop.cls, prop.desc))
         const classes = properties.map(p => p.cls)

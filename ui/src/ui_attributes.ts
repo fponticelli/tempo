@@ -197,3 +197,270 @@ export const Radius = {
     bl
   })
 }
+
+export type PredefinedCursors =
+  | 'cursor'
+  | 'alias'
+  | 'all-scroll'
+  | 'auto'
+  | 'ew-resize'
+  | 'nesw-resize'
+  | 'ns-resize'
+  | 'nwse-resize'
+  | 'cell'
+  | 'col-resize'
+  | 'context-menu'
+  | 'copy'
+  | 'crosshair'
+  | 'default'
+  | 'grab'
+  | 'grabbing'
+  | 'help'
+  | 'move'
+  | 'no-drop'
+  | 'none'
+  | 'not-allowed'
+  | 'pointer'
+  | 'progress'
+  | 'row-resize'
+  | 'text'
+  | 'n-resize'
+  | 'e-resize'
+  | 's-resize'
+  | 'w-resize'
+  | 'ne-resize'
+  | 'nw-resize'
+  | 'se-resize'
+  | 'sw-resize'
+  | 'vertical-text'
+  | 'wait'
+  | 'zoom-in'
+  | 'zoom-out'
+
+export type Cursor =
+  | {
+      kind: 'CustomCursor'
+      url: string
+      x?: number
+      y?: number
+    }
+  | PredefinedCursors
+
+export const Cursor = {
+  custom: (url: string, x = 0, y = 0): Cursor => ({
+    kind: 'CustomCursor',
+    url,
+    x,
+    y
+  }),
+  cursor: 'cursor' as Cursor,
+  alias: 'alias' as Cursor,
+  allScroll: 'all-scroll' as Cursor,
+  auto: 'auto' as Cursor,
+  ewResize: 'ew-resize' as Cursor,
+  neswResize: 'nesw-resize' as Cursor,
+  nsResize: 'ns-resize' as Cursor,
+  nwseResize: 'nwse-resize' as Cursor,
+  cell: 'cell' as Cursor,
+  colResize: 'col-resize' as Cursor,
+  contextMenu: 'context-menu' as Cursor,
+  copy: 'copy' as Cursor,
+  crosshair: 'crosshair' as Cursor,
+  default: 'default' as Cursor,
+  grab: 'grab' as Cursor,
+  grabbing: 'grabbing' as Cursor,
+  help: 'help' as Cursor,
+  move: 'move' as Cursor,
+  noDrop: 'no-drop' as Cursor,
+  none: 'none' as Cursor,
+  notAllowed: 'not-allowed' as Cursor,
+  pointer: 'pointer' as Cursor,
+  progress: 'progress' as Cursor,
+  rowResize: 'row-resize' as Cursor,
+  text: 'text' as Cursor,
+  nResize: 'n-resize' as Cursor,
+  eResize: 'e-resize' as Cursor,
+  sResize: 's-resize' as Cursor,
+  wResize: 'w-resize' as Cursor,
+  neResize: 'ne-resize' as Cursor,
+  nwResize: 'nw-resize' as Cursor,
+  seResize: 'se-resize' as Cursor,
+  swResize: 'sw-resize' as Cursor,
+  verticalText: 'vertical-text' as Cursor,
+  wait: 'wait' as Cursor,
+  zoomIn: 'zoom-in' as Cursor,
+  zoomOut: 'zoom-out' as Cursor
+}
+
+export type Distribution =
+  | 'flex-start'
+  | 'flex-end'
+  | 'center'
+  | 'baseline'
+  | 'space-between'
+  | 'space-around'
+  | 'space-evenly'
+
+export const Distribution = {
+  start: 'flex-start',
+  flexend: 'flex-end',
+  center: 'center',
+  baseline: 'baseline',
+  spaceBetween: 'space-between',
+  spaceAround: 'space-around',
+  spaceEvenly: 'space-evenly'
+}
+
+export interface DropShadow {
+  kind: 'DropShadow'
+  offsetX: number
+  offsetY: number
+  blurRadius?: number
+  spreadRadius?: number
+  color: Color
+}
+
+export interface InsetShadow {
+  kind: 'InsetShadow'
+  offsetX: number
+  offsetY: number
+  blurRadius?: number
+  spreadRadius?: number
+  color: Color
+}
+
+export type Shadow =
+  | DropShadow
+  | InsetShadow
+  | { kind: 'MultiShadow'; shadows: (DropShadow | InsetShadow)[] }
+
+export const Shadow = {
+  drop: ({
+    offsetX,
+    offsetY,
+    blurRadius,
+    spreadRadius,
+    color
+  }: {
+    offsetX: number
+    offsetY: number
+    blurRadius?: number
+    spreadRadius?: number
+    color: Color
+  }): Shadow => ({
+    kind: 'DropShadow',
+    offsetX,
+    offsetY,
+    blurRadius,
+    spreadRadius,
+    color
+  }),
+  inset: ({
+    offsetX,
+    offsetY,
+    blurRadius,
+    spreadRadius,
+    color
+  }: {
+    offsetX: number
+    offsetY: number
+    blurRadius?: number
+    spreadRadius?: number
+    color: Color
+  }): Shadow => ({
+    kind: 'InsetShadow',
+    offsetX,
+    offsetY,
+    blurRadius,
+    spreadRadius,
+    color
+  }),
+  multi: (...shadows: (DropShadow | InsetShadow)[]): Shadow => ({
+    kind: 'MultiShadow',
+    shadows
+  })
+}
+
+export interface OneTextShadow {
+  kind: 'OneTextShadow'
+  offsetX: number
+  offsetY: number
+  blurRadius?: number
+  color: Color
+}
+
+export type TextShadow =
+  | OneTextShadow
+  | { kind: 'MultiTextShadow'; shadows: OneTextShadow[] }
+
+export const TextShadow = {
+  drop: ({
+    offsetX,
+    offsetY,
+    blurRadius,
+    color
+  }: {
+    offsetX: number
+    offsetY: number
+    blurRadius?: number
+    color: Color
+  }): TextShadow => ({
+    kind: 'OneTextShadow',
+    offsetX,
+    offsetY,
+    blurRadius,
+    color
+  }),
+  multi: (...shadows: OneTextShadow[]): TextShadow => ({
+    kind: 'MultiTextShadow',
+    shadows
+  })
+}
+
+export type FontWeight =
+  | 'bold'
+  | 'lighter'
+  | 'bolder'
+  | 100
+  | 200
+  | 300
+  | 400
+  | 500
+  | 600
+  | 700
+  | 800
+  | 900
+
+export const FontWeight = {
+  bold: 'bold',
+  lighter: 'lighter',
+  bolder: 'bolder',
+  w100: 100,
+  w200: 200,
+  w300: 300,
+  w400: 400,
+  w500: 500,
+  w600: 600,
+  w700: 700,
+  w800: 800,
+  w900: 900
+}
+
+// letterSpacing
+// lineHeight
+// textAlign
+// wordSpacing
+
+// TODO
+// - [ ] overflowHorizontal
+// - [ ] overflowVertical
+// - [ ] textDirection
+// - [ ] fontVariantLigatures
+// - [ ] fontVariantNumeric
+// - [ ] tabSize
+// - [ ] whiteSpace
+// - [ ] textOverflow
+// - [ ] textDecoration
+// - [ ] textTransform
+// - [ ] wordBreak
+// - [ ] writingMode

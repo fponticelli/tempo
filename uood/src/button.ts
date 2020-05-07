@@ -19,39 +19,40 @@ import {
   Radius,
   Length,
   Background,
-  Border
+  Border,
+  Cursor
 } from 'tempo-ui/lib/ui_attributes'
 import { ofRGB } from 'tempo-colors/lib/rgb'
 
 export type ButtonVariant =
   | { kind: 'ButtonCTA' }
-  | { kind: 'ButtonOverBackground'; quiet: Boolean }
-  | { kind: 'ButtonPrimary'; quiet: Boolean }
-  | { kind: 'ButtonSecondary'; quiet: Boolean }
-  | { kind: 'ButtonWarning'; quiet: Boolean }
+  | { kind: 'ButtonOverBackground'; quiet: boolean }
+  | { kind: 'ButtonPrimary'; quiet: boolean }
+  | { kind: 'ButtonSecondary'; quiet: boolean }
+  | { kind: 'ButtonWarning'; quiet: boolean }
 
 export const Variant = {
   cta: { kind: 'ButtonCTA' } as ButtonVariant,
-  overBackground: (quiet: Boolean): ButtonVariant => ({
+  overBackground: (quiet: boolean): ButtonVariant => ({
     kind: 'ButtonOverBackground',
     quiet
   }),
-  primary: (quiet: Boolean): ButtonVariant => ({
+  primary: (quiet: boolean): ButtonVariant => ({
     kind: 'ButtonPrimary',
     quiet
   }),
-  secondary: (quiet: Boolean): ButtonVariant => ({
+  secondary: (quiet: boolean): ButtonVariant => ({
     kind: 'ButtonSecondary',
     quiet
   }),
-  warning: (quiet: Boolean): ButtonVariant => ({ kind: 'ButtonWarning', quiet })
+  warning: (quiet: boolean): ButtonVariant => ({ kind: 'ButtonWarning', quiet })
 }
 
 export function button<State, Action, Query = unknown, T = unknown>(attrs: {
   label: Attribute<State, string>
   variant?: Attribute<State, ButtonVariant>
   // icon: Attribute<State, Icon>
-  disabled?: Attribute<State, Boolean>
+  disabled?: Attribute<State, boolean>
 
   // focus
   // padding width = height / 2
@@ -71,6 +72,7 @@ export function button<State, Action, Query = unknown, T = unknown>(attrs: {
       border: Border.all(2, ofRGB(75, 75, 75), 'solid'),
       fontSize: 14,
       textColor: ofRGB(75, 75, 75),
+      cursor: Cursor.pointer,
       hover: {
         background: Background.rgba(75, 75, 75, 1),
         textColor: ofRGB(255, 255, 255)
