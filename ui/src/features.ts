@@ -60,7 +60,7 @@ export const features = {
     cls: `${prefix}br`,
     desc: [
       {
-        selector: `${prefix}.br${pseudo}`,
+        selector: `.${prefix}br${pseudo}`,
         rules: [`border-radius: var(--${prefix}br)`]
       }
     ]
@@ -69,7 +69,7 @@ export const features = {
     cls: `${prefix}cu`,
     desc: [
       {
-        selector: `${prefix}.cu${pseudo}`,
+        selector: `.${prefix}cu${pseudo}`,
         rules: [`cursor: var(--${prefix}cu)`]
       }
     ]
@@ -131,8 +131,13 @@ export const features = {
         selector: `.${prefix}w${pseudo}`,
         rules: [
           `min-width: var(--${prefix}w-mi, var(--${prefix}w))`,
-          `max-width: var(--${prefix}w-ma, var(--${prefix}w))`
+          `max-width: var(--${prefix}w-ma, var(--${prefix}w))`,
+          `flex: var(--${prefix}w-f) var(--${prefix}w-f) 0`
         ]
+      },
+      {
+        selector: `.uood > .${prefix}w${pseudo}`,
+        rules: [`width: calc(var(--${prefix}w-f) / var(--${prefix}w-f) * 100%)`]
       }
     ]
   }),
@@ -143,7 +148,14 @@ export const features = {
         selector: `.${prefix}h${pseudo}`,
         rules: [
           `min-height: var(--${prefix}h-mi, var(--${prefix}h))`,
-          `max-height: var(--${prefix}h-ma, var(--${prefix}h))`
+          `max-height: var(--${prefix}h-ma, var(--${prefix}h))`,
+          `flex: var(--${prefix}h-f) var(--${prefix}h-f) 0`
+        ]
+      },
+      {
+        selector: `.uood > .${prefix}h${pseudo}`,
+        rules: [
+          `height: calc(var(--${prefix}h-f) / var(--${prefix}h-f) * 100%)`
         ]
       }
     ]

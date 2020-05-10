@@ -46,17 +46,19 @@ const store = Store.ofState({ state, reducer })
 
 const template = container<State, Action>(
   {
-    orientation: 'row'
+    orientation: 'row',
+    height: Size.fill(),
+    width: Size.fill()
   },
   container(
     {
       padding: p => Padding.each(p.padding, 20),
       background: Background.hsl(-10, 0.9, 0.95),
       transition: Transition.make('background', '2s'),
-      hover: {
+      whenHover: {
         background: Background.hsl(20, 0.9, 0.6)
       },
-      active: {
+      whenActive: {
         transition: Transition.make('background', '0.5s'),
         background: Background.hsl(30, 0.3, 0.9)
       },
@@ -70,7 +72,7 @@ const template = container<State, Action>(
       background: Background.hsl(60, 0.8, 0.8),
       transition: Transition.make('background', '1s'),
       padding: p => Padding.all(p.padding),
-      active: {
+      whenActive: {
         background: Background.hsl(30, 0.3, 0.9)
       }
     },
@@ -89,21 +91,26 @@ const template = container<State, Action>(
       {},
       button({
         label: 'Click Me!'
+      }),
+      button({
+        label: 'Disabled Button',
+        disabled: (s: State) => s.padding >= 10 // true
       })
     )
   ),
   container(
     {
+      width: Size.fill(),
       transition: Transition.multi(
         Transition.make('padding', '1s'),
         Transition.make('background', '0.5s')
       ),
       background: Background.hsl(120, 0.8, 0.8),
       padding: Padding.each(0),
-      hover: {
+      whenHover: {
         padding: p => Padding.each(p.padding)
       },
-      active: {
+      whenActive: {
         padding: p => Padding.each(p.padding * 2),
         background: p => Background.hsl(120 + p.padding, 0.8, 0.8)
       }

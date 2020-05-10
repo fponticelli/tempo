@@ -19,17 +19,13 @@ html, body {
 }
 `
 
-const defaultStyles = (selector: string) => `
-${selector}, ${selector} * {
+const defaultStyles = `
+.uood, .uood * {
   border: none;
   border-style: solid;
   border-width: 0;
   box-sizing: border-box;
   color: inherit;
-  display: flex;
-  flex-basis: auto;
-  flex-direction: row;
-  flex-shrink: 0;
   font-family: sans-serif;
   font-feature-settings: inherit;
   font-size: inherit;
@@ -43,20 +39,17 @@ ${selector}, ${selector} * {
   text-decoration: none;
 }
 
-${selector} > .c, ${selector} > .r {
-  width: 100%;
-}
-
-${selector} *:focus {
+.uood *:focus {
   outline: none;
 }
 `
 
 export function resetStyles(selector = 'body', doc = document) {
+  doc.querySelector(selector)?.classList.add('uood')
   const style = doc.createElement('style')
   if (selector === 'body') {
     style.textContent = defaultBodyStyles
   }
-  style.textContent += defaultStyles(selector)
+  style.textContent += defaultStyles
   doc.head.appendChild(style)
 }

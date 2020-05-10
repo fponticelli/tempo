@@ -39,7 +39,7 @@ export const Padding = {
   })
 }
 
-export type TransitionTarget = 'background' | 'padding'
+export type TransitionTarget = 'background' | 'padding' | 'text-color'
 export interface OneTransition {
   kind: 'Transition'
   target: TransitionTarget
@@ -446,10 +446,7 @@ export const FontWeight = {
   w900: 900
 }
 
-// letterSpacing
-// lineHeight
-// textAlign
-// wordSpacing
+export type TextAlign = 'left' | 'center' | 'right' | 'justify'
 
 // TODO
 // - [ ] overflowHorizontal

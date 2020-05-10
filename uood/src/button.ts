@@ -12,7 +12,7 @@ limitations under the License.
 */
 
 import { Attribute } from 'tempo-dom/lib/value'
-import { inline } from 'tempo-ui/lib/ui'
+import { control } from 'tempo-ui/lib/ui'
 import {
   Padding,
   Size,
@@ -20,7 +20,8 @@ import {
   Length,
   Background,
   Border,
-  Cursor
+  Cursor,
+  Transition
 } from 'tempo-ui/lib/ui_attributes'
 import { ofRGB } from 'tempo-colors/lib/rgb'
 
@@ -61,7 +62,7 @@ export function button<State, Action, Query = unknown, T = unknown>(attrs: {
   // RTL has icon mirrored
   // triggers on space or enter
 }) {
-  return inline<State, Action, Query, T>(
+  return control<State, Action, Query, T>(
     {
       elementName: 'button',
       padding: Padding.each(9 - 2, 16), // padding - border
@@ -73,25 +74,29 @@ export function button<State, Action, Query = unknown, T = unknown>(attrs: {
       fontSize: 14,
       textColor: ofRGB(75, 75, 75),
       cursor: Cursor.pointer,
-      hover: {
+      textAlign: 'center',
+      transition: Transition.multi(
+        Transition.make('background', '0.25s'),
+        Transition.make('text-color', '0.25s')
+      ),
+      whenHover: {
         background: Background.rgba(75, 75, 75, 1),
         textColor: ofRGB(255, 255, 255)
       },
-      active: {
+      whenActive: {
         border: Border.all(2, ofRGB(44, 44, 44), 'solid'),
         background: Background.rgba(44, 44, 44, 1),
         textColor: ofRGB(255, 255, 255)
-      }
-      // text align center
-      // font size
-      // rounded corners
-      // hover
-      // border
-      // activex
+      },
+      whenDisabled: {
+        background: Background.rgb(234, 234, 234),
+        border: Border.all(2, ofRGB(234, 234, 234)),
+        textColor: ofRGB(179, 179, 179),
+        cursor: 'auto'
+      },
+      disabled: attrs.disabled
       // margins
       // variant
-      // disabled
-      // bg color
     },
     attrs.label
   )

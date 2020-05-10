@@ -19,7 +19,8 @@ import {
   mapAttributes,
   EventHandler,
   ValueOfAttribute,
-  resolveAttribute
+  resolveAttribute,
+  AttributeValue
 } from 'tempo-dom/lib/value'
 import { features, RuleDescription, ClassDescription } from './features'
 import {
@@ -37,7 +38,9 @@ import {
   Distribution,
   TextShadow,
   Shadow,
-  FontWeight
+  FontWeight,
+  TextAlign,
+  TransitionTarget
 } from './ui_attributes'
 import { matchKind } from 'tempo-std/lib/match'
 import { toCSS3, Color } from 'tempo-colors/lib/color'
@@ -70,13 +73,38 @@ export interface ElTextProperties<State> {
   textColor?: Attribute<State, Color>
   textShadow?: Attribute<State, TextShadow>
   fontWeight?: Attribute<State, FontWeight>
+  letterSpacing?: Attribute<State, number>
+  wordSpacing?: Attribute<State, number>
+}
+
+export interface ElTextBlockProperties<State> {
+  lineHeight?: Attribute<State, number>
+  textAlign?: Attribute<State, TextAlign>
 }
 
 export interface ElMouseProperties<State> {
-  hover?: ElBlockProperties<State> & ElTextProperties<State>
-  active?: ElBlockProperties<State> & ElTextProperties<State>
-  focusWithin?: ElBlockProperties<State> & ElTextProperties<State>
+  whenHover?: ElBlockProperties<State> &
+    ElTextProperties<State> &
+    ElTextBlockProperties<State>
+  whenActive?: ElBlockProperties<State> &
+    ElTextProperties<State> &
+    ElTextBlockProperties<State>
+  whenFocusWithin?: ElBlockProperties<State> &
+    ElTextProperties<State> &
+    ElTextBlockProperties<State>
   cursor?: Attribute<State, Cursor>
+}
+
+export interface ElControlProperties<State> {
+  whenDisabled?: ElBlockProperties<State> &
+    ElTextProperties<State> &
+    ElTextBlockProperties<State> &
+    ElMouseProperties<State>
+  whenFocused?: ElBlockProperties<State> &
+    ElTextProperties<State> &
+    ElTextBlockProperties<State> &
+    ElMouseProperties<State>
+  disabled?: Attribute<State, boolean>
 }
 
 export interface ElLifecycleProperties<State, Action, Query, TScope> {
@@ -211,8 +239,13 @@ function borderRadiusToString(b: BorderRadius): string {
   })
 }
 
+function transitionTargetToString(target: TransitionTarget) {
+  if (target === 'text-color') return 'color'
+  else return target
+}
+
 function oneTransitionToString(t: OneTransition) {
-  const buff = [String(t.target)]
+  const buff = [transitionTargetToString(t.target)]
   if (typeof t.duration !== 'undefined') buff.push(t.duration)
   if (typeof t.timingFunction !== 'undefined') buff.push(t.timingFunction)
   if (typeof t.delay !== 'undefined') buff.push(t.delay)
@@ -299,7 +332,7 @@ function applyBlockProps<State>(
   if (typeof v.width !== 'undefined') {
     properties.push(features.width(prefix, pseudo))
     matchKind(v.width, {
-      SizeFill: s => (styles[`${prefix}f`] = String(s.ratio)),
+      SizeFill: s => (styles[`${prefix}w-f`] = String(s.ratio)),
       SizeFixed: s => (styles[`${prefix}w`] = `${s.value}px`),
       SizeMin: s => (styles[`${prefix}w-mi`] = `${s.value}px`),
       SizeMax: s => (styles[`${prefix}w-ma`] = `${s.value}px`)
@@ -309,7 +342,7 @@ function applyBlockProps<State>(
   if (typeof v.height !== 'undefined') {
     properties.push(features.height(prefix, pseudo))
     matchKind(v.height, {
-      SizeFill: s => (styles[`${prefix}f`] = String(s.ratio)),
+      SizeFill: s => (styles[`${prefix}h-f`] = String(s.ratio)),
       SizeFixed: s => (styles[`${prefix}h`] = `${s.value}px`),
       SizeMin: s => (styles[`${prefix}h-mi`] = `${s.value}px`),
       SizeMax: s => (styles[`${prefix}h-ma`] = `${s.value}px`)
@@ -334,6 +367,69 @@ function applyBlockProps<State>(
   if (typeof v.shadow !== 'undefined') {
     properties.push(features.boxShadow(prefix, pseudo))
     styles[`bs`] = shadowToString(v.shadow)
+  }
+}
+
+function applyControlProps<State>(
+  prefix: string,
+  pseudo: string,
+  state: State,
+  v: {
+    [K in keyof ElControlProperties<State>]: ValueOfAttribute<
+      ElControlProperties<State>[K]
+    >
+  },
+  properties: ClassDescription[],
+  styles: Record<string, string>
+) {
+  if (typeof v.whenFocused !== 'undefined') {
+    resolveAttribute(
+      mapAttributes(v.whenFocused, x => {
+        applyBlockProps(`${prefix}F`, ':focus', x, properties, styles)
+        applyTextBlockProps(`${prefix}F`, ':focus', x, properties, styles)
+        applyTextProps(`${prefix}F`, ':focus', x, properties, styles)
+        applyMouseProps(`${prefix}F`, ':focus', state, x, properties, styles)
+      })
+    )(state)
+  }
+
+  if (typeof v.whenDisabled !== 'undefined') {
+    resolveAttribute(
+      mapAttributes(v.whenDisabled, x => {
+        applyBlockProps(`${prefix}D`, '[disabled]', x, properties, styles)
+        applyTextBlockProps(`${prefix}D`, '[disabled]', x, properties, styles)
+        applyTextProps(`${prefix}D`, '[disabled]', x, properties, styles)
+        applyMouseProps(
+          `${prefix}D`,
+          '[disabled]',
+          state,
+          x,
+          properties,
+          styles
+        )
+      })
+    )(state)
+  }
+}
+
+function applyTextBlockProps<State>(
+  prefix: string,
+  pseudo: string,
+  v: {
+    [K in keyof ElTextBlockProperties<State>]: ValueOfAttribute<
+      ElTextBlockProperties<State>[K]
+    >
+  },
+  properties: ClassDescription[],
+  styles: Record<string, string>
+) {
+  if (typeof v.lineHeight !== 'undefined') {
+    properties.push(features.lineHeight(prefix, pseudo))
+    styles[`${prefix}lh`] = `${v.lineHeight}px`
+  }
+  if (typeof v.textAlign !== 'undefined') {
+    properties.push(features.textAlign(prefix, pseudo))
+    styles[`${prefix}ta`] = v.textAlign
   }
 }
 
@@ -367,6 +463,16 @@ function applyTextProps<State>(
     properties.push(features.fontWeight(prefix, pseudo))
     styles[`fw`] = String(v.fontWeight)
   }
+
+  if (typeof v.letterSpacing !== 'undefined') {
+    properties.push(features.letterSpacing(prefix, pseudo))
+    styles[`ls`] = String(v.letterSpacing)
+  }
+
+  if (typeof v.wordSpacing !== 'undefined') {
+    properties.push(features.wordSpacing(prefix, pseudo))
+    styles[`wsp`] = String(v.wordSpacing)
+  }
 }
 
 function applyMouseProps<State>(
@@ -381,34 +487,33 @@ function applyMouseProps<State>(
   properties: ClassDescription[],
   styles: Record<string, string>
 ) {
-  if (typeof v.hover !== 'undefined') {
+  if (typeof v.whenHover !== 'undefined') {
     resolveAttribute(
-      mapAttributes(v.hover, x => {
+      mapAttributes(v.whenHover, x => {
         applyBlockProps('H', ':hover', x, properties, styles)
         applyTextProps('H', ':hover', x, properties, styles)
+        applyTextBlockProps('H', ':hover', x, properties, styles)
       })
     )(state)
   }
 
-  if (typeof v.active !== 'undefined') {
+  if (typeof v.whenActive !== 'undefined') {
     resolveAttribute(
-      mapAttributes(v.active, x =>
+      mapAttributes(v.whenActive, x => {
         applyBlockProps('A', ':active', x, properties, styles)
-      )
+        applyTextProps('A', ':active', x, properties, styles)
+        applyTextBlockProps('A', ':active', x, properties, styles)
+      })
     )(state)
   }
 
-  // if (typeof v.focus !== 'undefined') {
-  //   resolveAttribute(mapAttributes(v.focus, x =>
-  //     applyStyleProps('f-', ':focus', x, properties, styles)
-  //   ))(state)
-  // }
-
-  if (typeof v.focusWithin !== 'undefined') {
+  if (typeof v.whenFocusWithin !== 'undefined') {
     resolveAttribute(
-      mapAttributes(v.focusWithin, x =>
+      mapAttributes(v.whenFocusWithin, x => {
         applyBlockProps('FW', ':focus-within', x, properties, styles)
-      )
+        applyTextBlockProps('FW', ':focus-within', x, properties, styles)
+        applyTextProps('FW', ':focus-within', x, properties, styles)
+      })
     )(state)
   }
 
@@ -422,6 +527,7 @@ export function container<State, Action, Query = unknown, TScope = unknown>(
   props: ElProperties &
     ElBlockProperties<State> &
     ElTextProperties<State> &
+    ElTextBlockProperties<State> &
     ElLifecycleProperties<State, Action, Query, TScope> &
     ElContainerProperties<State> &
     ElMouseProperties<State>,
@@ -457,6 +563,7 @@ export function container<State, Action, Query = unknown, TScope = unknown>(
         }
 
         applyBlockProps('', '', v, properties, styles)
+        applyTextBlockProps('', '', v, properties, styles)
         applyTextProps('', '', v, properties, styles)
         applyMouseProps('', '', state, v, properties, styles)
 
@@ -487,6 +594,7 @@ export function block<State, Action, Query = unknown, TScope = unknown>(
   props: ElProperties &
     ElBlockProperties<State> &
     ElTextProperties<State> &
+    ElTextBlockProperties<State> &
     ElLifecycleProperties<State, Action, Query, TScope> &
     ElContainerProperties<State> &
     ElMouseProperties<State>,
@@ -508,6 +616,7 @@ export function block<State, Action, Query = unknown, TScope = unknown>(
 
         applyBlockProps('', '', v, properties, styles)
         applyTextProps('', '', v, properties, styles)
+        applyTextBlockProps('', '', v, properties, styles)
         applyMouseProps('', '', state, v, properties, styles)
 
         properties.forEach(prop => includeStyle(doc, prop.cls, prop.desc))
@@ -537,8 +646,8 @@ export function inline<State, Action, Query = unknown, TScope = unknown>(
   props: ElProperties &
     ElBlockProperties<State> &
     ElTextProperties<State> &
+    ElTextBlockProperties<State> &
     ElLifecycleProperties<State, Action, Query, TScope> &
-    ElContainerProperties<State> &
     ElMouseProperties<State>,
   ...children: DOMChild<State, Action, Query>[]
 ) {
@@ -558,6 +667,7 @@ export function inline<State, Action, Query = unknown, TScope = unknown>(
 
         applyBlockProps('', '', v, properties, styles)
         applyTextProps('', '', v, properties, styles)
+        applyTextBlockProps('', '', v, properties, styles)
         applyMouseProps('', '', state, v, properties, styles)
 
         properties.forEach(prop => includeStyle(doc, prop.cls, prop.desc))
@@ -571,6 +681,65 @@ export function inline<State, Action, Query = unknown, TScope = unknown>(
     elementName,
     {
       ...lifecycle,
+      attrsf,
+      events: props.events,
+      afterrender: props.afterrender,
+      beforechange: props.beforechange,
+      afterchange: props.afterchange,
+      beforedestroy: props.beforedestroy,
+      respond: props.respond
+    },
+    ...children
+  )
+}
+
+export function control<State, Action, Query = unknown, TScope = unknown>(
+  props: ElProperties &
+    ElBlockProperties<State> &
+    ElTextProperties<State> &
+    ElTextBlockProperties<State> &
+    ElLifecycleProperties<State, Action, Query, TScope> &
+    ElControlProperties<State> &
+    ElMouseProperties<State>,
+  ...children: DOMChild<State, Action, Query>[]
+) {
+  const elementName = props?.elementName ?? 'div'
+  const lifecycle = {
+    afterrender: props.afterrender,
+    beforechange: props.beforechange,
+    afterchange: props.afterchange,
+    beforedestroy: props.beforedestroy,
+    respond: props.respond
+  }
+  const attrs: Record<string, Attribute<State, AttributeValue>> = {
+    disabled: props.disabled
+  }
+  const attrsf = (doc: Document) => (state: State) => {
+    return resolveAttribute(
+      mapAttributes(props, v => {
+        const properties = [
+          /* features.inline */
+        ] as ClassDescription[]
+        const styles: Record<string, string> = {}
+
+        applyBlockProps('', '', v, properties, styles)
+        applyTextProps('', '', v, properties, styles)
+        applyTextBlockProps('', '', v, properties, styles)
+        applyMouseProps('', '', state, v, properties, styles)
+        applyControlProps('', '', state, v, properties, styles)
+
+        properties.forEach(prop => includeStyle(doc, prop.cls, prop.desc))
+        const classes = properties.map(p => p.cls)
+
+        return { classes, styles }
+      })
+    )(state)
+  }
+  return el(
+    elementName,
+    {
+      ...lifecycle,
+      attrs,
       attrsf,
       events: props.events,
       afterrender: props.afterrender,

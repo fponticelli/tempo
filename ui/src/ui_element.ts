@@ -18,16 +18,18 @@ import {
   makeCreateElement,
   defaultNamespaces,
   makeCreateElementNS,
-  extractEvents
+  extractEvents,
+  extractAttrs
 } from 'tempo-dom/lib/impl/apply_element'
 import { DOMContext } from 'tempo-dom/lib/context'
 import { View } from 'tempo-core/lib/view'
 import {
   processEvent,
   domChildToTemplate,
-  removeNode
+  removeNode,
+  processAttribute
 } from 'tempo-dom/lib/utils/dom'
-import { Attribute, EventHandler } from 'tempo-dom/lib/value'
+import { Attribute, EventHandler, AttributeValue } from 'tempo-dom/lib/value'
 import { map } from 'tempo-std/lib/arrays'
 import { keys } from 'tempo-std/lib/objects'
 
@@ -72,6 +74,7 @@ export class DOMUIElement<
 > implements DOMTemplate<State, Action, Query> {
   constructor(
     public createElement: (doc: Document) => El,
+    public attrs: { name: string; value: Attribute<State, AttributeValue> }[],
     public attrsf:
       | ((
           doc: Document
@@ -122,6 +125,9 @@ export class DOMUIElement<
     let value: T | undefined = undefined
 
     const allChanges = [] as ((state: State) => void)[]
+
+    for (const o of this.attrs)
+      processAttribute(el, o.name, o.value, allChanges)
 
     processAttributes(el, this.attrsf && this.attrsf(ctx.doc), allChanges)
 
@@ -196,6 +202,7 @@ export interface UIProps<
   El extends Element = Element,
   T = unknown
 > {
+  attrs?: Record<string, Attribute<State, AttributeValue>>
   attrsf?: (
     doc: Document
   ) => Attribute<State, { classes: string[]; styles: Record<string, string> }>
@@ -239,6 +246,7 @@ export function el<
 ) {
   return new DOMUIElement<State, Action, Query, El, T>(
     makeCreateElement(name),
+    extractAttrs(props.attrs),
     props.attrsf,
     extractEvents(props.events),
     props.afterrender,
@@ -265,6 +273,7 @@ export function elNS<
   const namespace = defaultNamespaces[ns] || ns
   return new DOMUIElement<State, Action, Query, El, T>(
     makeCreateElementNS(namespace, name),
+    extractAttrs(props.attrs),
     props.attrsf,
     extractEvents(props.events),
     props.afterrender,
