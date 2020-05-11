@@ -53,7 +53,6 @@ export interface ElContainerProperties<State> {
   orientation?: Attribute<State, Orientation>
   distribution?: Attribute<State, Distribution>
   alignament?: Attribute<State, Distribution>
-  spacing?: Attribute<State, number>
 }
 
 export interface ElBlockProperties<State> {
@@ -66,6 +65,7 @@ export interface ElBlockProperties<State> {
   height?: Attribute<State, Size>
   alignament?: Attribute<State, Distribution>
   shadow?: Attribute<State, Shadow>
+  spacing?: Attribute<State, number>
 }
 
 export interface ElTextProperties<State> {
@@ -254,22 +254,24 @@ function oneTransitionToString(t: OneTransition) {
 
 function shadowToString(s: Shadow): string {
   return matchKind(s, {
-    DropShadow: ({ offsetX, offsetY, blurRadius, spreadRadius }) =>
+    DropShadow: ({ offsetX, offsetY, blurRadius, spreadRadius, color }) =>
       [
         `${offsetX}px`,
         `${offsetY}px`,
-        (blurRadius && `${blurRadius}px`) ?? (spreadRadius && '0px'),
-        spreadRadius && `${spreadRadius}px`
+        (blurRadius && `${blurRadius}px`) ?? (spreadRadius && '0'),
+        spreadRadius && `${spreadRadius}px`,
+        color && toCSS3(color)
       ]
         .filter(f => typeof f !== 'undefined')
         .join(' '),
-    InsetShadow: ({ offsetX, offsetY, blurRadius, spreadRadius }) =>
+    InsetShadow: ({ offsetX, offsetY, blurRadius, spreadRadius, color }) =>
       [
         'inset',
         `${offsetX}px`,
         `${offsetY}px`,
-        (blurRadius && `${blurRadius}px`) ?? (spreadRadius && '0px'),
-        spreadRadius && `${spreadRadius}px`
+        (blurRadius && `${blurRadius}px`) ?? (spreadRadius && '0'),
+        spreadRadius && `${spreadRadius}px`,
+        color && toCSS3(color)
       ]
         .filter(f => typeof f !== 'undefined')
         .join(' '),
@@ -279,8 +281,13 @@ function shadowToString(s: Shadow): string {
 
 function textShadowToString(s: TextShadow): string {
   return matchKind(s, {
-    OneTextShadow: ({ offsetX, offsetY, blurRadius }) =>
-      [`${offsetX}px`, `${offsetY}px`, blurRadius && `${blurRadius}px`]
+    OneTextShadow: ({ offsetX, offsetY, blurRadius, color }) =>
+      [
+        `${offsetX}px`,
+        `${offsetY}px`,
+        blurRadius ?? `${blurRadius}px`,
+        color && toCSS3(color)
+      ]
         .filter(f => typeof f !== 'undefined')
         .join(' '),
     MultiTextShadow: ({ shadows }) => shadows.map(textShadowToString).join(', ')
@@ -298,6 +305,11 @@ function applyBlockProps<State>(
   properties: ClassDescription[],
   styles: Record<string, string>
 ) {
+  if (typeof v.spacing !== 'undefined') {
+    properties.push(features.spacing)
+    styles[`${prefix}sp`] = `${v.spacing}px`
+  }
+
   if (typeof v.background !== 'undefined') {
     properties.push(features.background(prefix, pseudo))
     styles[`${prefix}bg`] = matchKind(v.background, {
@@ -361,12 +373,12 @@ function applyBlockProps<State>(
 
   if (typeof v.alignament !== 'undefined') {
     properties.push(features.alignSelf)
-    styles[`sa`] = v.alignament
+    styles[`${prefix}sa`] = v.alignament
   }
 
   if (typeof v.shadow !== 'undefined') {
     properties.push(features.boxShadow(prefix, pseudo))
-    styles[`bs`] = shadowToString(v.shadow)
+    styles[`${prefix}bs`] = shadowToString(v.shadow)
   }
 }
 
@@ -456,22 +468,22 @@ function applyTextProps<State>(
 
   if (typeof v.textShadow !== 'undefined') {
     properties.push(features.textShadow(prefix, pseudo))
-    styles[`bs`] = textShadowToString(v.textShadow)
+    styles[`${prefix}ts`] = textShadowToString(v.textShadow)
   }
 
   if (typeof v.fontWeight !== 'undefined') {
     properties.push(features.fontWeight(prefix, pseudo))
-    styles[`fw`] = String(v.fontWeight)
+    styles[`${prefix}fw`] = String(v.fontWeight)
   }
 
   if (typeof v.letterSpacing !== 'undefined') {
     properties.push(features.letterSpacing(prefix, pseudo))
-    styles[`ls`] = String(v.letterSpacing)
+    styles[`${prefix}ls`] = String(v.letterSpacing)
   }
 
   if (typeof v.wordSpacing !== 'undefined') {
     properties.push(features.wordSpacing(prefix, pseudo))
-    styles[`wsp`] = String(v.wordSpacing)
+    styles[`${prefix}wsp`] = String(v.wordSpacing)
   }
 }
 
@@ -546,11 +558,6 @@ export function container<State, Action, Query = unknown, TScope = unknown>(
       mapAttributes(props, v => {
         const properties = [features.orientation[v.orientation ?? 'row']]
         const styles: Record<string, string> = {}
-
-        if (typeof v.spacing !== 'undefined') {
-          properties.push(features.spacing)
-          styles[`sp`] = `${v.spacing}px`
-        }
 
         if (typeof v.distribution !== 'undefined') {
           properties.push(features.justifyContent)
@@ -718,6 +725,7 @@ export function control<State, Action, Query = unknown, TScope = unknown>(
     return resolveAttribute(
       mapAttributes(props, v => {
         const properties = [
+          features.control
           /* features.inline */
         ] as ClassDescription[]
         const styles: Record<string, string> = {}

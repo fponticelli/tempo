@@ -62,7 +62,7 @@ function processAttributes<State>(
 
 function resetStyles(el: HTMLElement) {
   // fastest way to achieve resetting CSS variables
-  el.setAttribute('style', '')
+  // el.setAttribute('style', '')
 }
 
 export class DOMUIElement<

@@ -88,13 +88,20 @@ const template = container<State, Action>(
       }
     }),
     block(
-      {},
+      {
+        spacing: 10
+      },
       button({
-        label: 'Click Me!'
+        label: '+',
+        onPress: (s: State) => ({ kind: 'ChangePadding', value: s.padding + 1 })
       }),
       button({
-        label: 'Disabled Button',
-        disabled: (s: State) => s.padding >= 10 // true
+        label: '-',
+        onPress: (s: State) => ({
+          kind: 'ChangePadding',
+          value: s.padding - 1
+        }),
+        disabled: (s: State) => s.padding < 10 // true
       })
     )
   ),

@@ -38,6 +38,10 @@ export const features = {
       ]
     } as ClassDescription
   },
+  control: {
+    cls: 'ctrl',
+    desc: []
+  },
   inline: {
     cls: 'i',
     desc: [
@@ -243,6 +247,14 @@ export const features = {
       {
         selector: `.sp > p`,
         rules: [`margin-bottom: var(--sp)`]
+      },
+      {
+        selector: `.ctrl`,
+        rules: [`margin-right: var(--sp)`]
+      },
+      {
+        selector: `.ctrl:last-child`,
+        rules: [`margin-right: 0`]
       }
     ]
   } as ClassDescription,

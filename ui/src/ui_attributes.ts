@@ -342,15 +342,15 @@ export const Shadow = {
     spreadRadius,
     color
   }: {
-    offsetX: number
-    offsetY: number
+    offsetX?: number
+    offsetY?: number
     blurRadius?: number
     spreadRadius?: number
     color: Color
   }): Shadow => ({
     kind: 'DropShadow',
-    offsetX,
-    offsetY,
+    offsetX: offsetX ?? 0,
+    offsetY: offsetY ?? 0,
     blurRadius,
     spreadRadius,
     color
@@ -362,15 +362,15 @@ export const Shadow = {
     spreadRadius,
     color
   }: {
-    offsetX: number
-    offsetY: number
+    offsetX?: number
+    offsetY?: number
     blurRadius?: number
     spreadRadius?: number
     color: Color
   }): Shadow => ({
     kind: 'InsetShadow',
-    offsetX,
-    offsetY,
+    offsetX: offsetX ?? 0,
+    offsetY: offsetY ?? 0,
     blurRadius,
     spreadRadius,
     color
@@ -400,14 +400,14 @@ export const TextShadow = {
     blurRadius,
     color
   }: {
-    offsetX: number
-    offsetY: number
+    offsetX?: number
+    offsetY?: number
     blurRadius?: number
     color: Color
   }): TextShadow => ({
     kind: 'OneTextShadow',
-    offsetX,
-    offsetY,
+    offsetX: offsetX ?? 0,
+    offsetY: offsetY ?? 0,
     blurRadius,
     color
   }),

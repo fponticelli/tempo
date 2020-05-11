@@ -35,7 +35,7 @@ export function ofHSLA(h: number, s: number, l: number, a: number): HSLA {
   h = clamp(h, 0, 360)
   s = clamp(s, 0, 1)
   l = clamp(l, 0, 1)
-  a = clamp(l, 0, 1)
+  a = clamp(a, 0, 1)
   return { kind: 'HSLA', channels: [h, s, l, a] }
 }
 
@@ -71,15 +71,30 @@ export function nearEquals(a: HSLA, b: HSLA, tolerance = EPSILON): boolean {
 }
 
 export function darker(hsla: HSLA, t: number) {
-  return ofHSLA(hue(hsla), saturation(hsla), nInterpolate(lightness(hsla), 0, t), alpha(hsla))
+  return ofHSLA(
+    hue(hsla),
+    saturation(hsla),
+    nInterpolate(lightness(hsla), 0, t),
+    alpha(hsla)
+  )
 }
 
 export function lighter(hsla: HSLA, t: number) {
-  return ofHSLA(hue(hsla), saturation(hsla), nInterpolate(lightness(hsla), 1, t), alpha(hsla))
+  return ofHSLA(
+    hue(hsla),
+    saturation(hsla),
+    nInterpolate(lightness(hsla), 1, t),
+    alpha(hsla)
+  )
 }
 
 export function rotate(hsla: HSLA, rotation: number) {
-  return ofHSLA(hue(hsla) + rotation, saturation(hsla), lightness(hsla), alpha(hsla))
+  return ofHSLA(
+    hue(hsla) + rotation,
+    saturation(hsla),
+    lightness(hsla),
+    alpha(hsla)
+  )
 }
 
 export function analogous(hsla: HSLA, spread = 30.0) {
@@ -161,7 +176,8 @@ export function max(a: HSLA, b: HSLA) {
 }
 
 export function toCSS3(hsla: HSLA) {
-  return `hsl(${hue(hsla)},${saturation(hsla) * 100}%,${lightness(hsla) * 100}%,${alpha(hsla)})`
+  return `hsl(${hue(hsla)},${saturation(hsla) * 100}%,${lightness(hsla) *
+    100}%,${alpha(hsla)})`
 }
 
 export function toHSL(hsla: HSLA): HSL {

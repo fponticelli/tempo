@@ -21,9 +21,11 @@ import {
   Background,
   Border,
   Cursor,
-  Transition
+  Transition,
+  Shadow
 } from 'tempo-ui/lib/ui_attributes'
 import { ofRGB } from 'tempo-colors/lib/rgb'
+import { ofHSLA } from 'tempo-colors/lib/hsla'
 
 export type ButtonVariant =
   | { kind: 'ButtonCTA' }
@@ -54,11 +56,10 @@ export function button<State, Action, Query = unknown, T = unknown>(attrs: {
   variant?: Attribute<State, ButtonVariant>
   // icon: Attribute<State, Icon>
   disabled?: Attribute<State, boolean>
+  onPress?: undefined | ((state: State) => Action)
 
-  // focus
   // padding width = height / 2
   // min width = height * 2.25 (min doesn't apply for quiet)
-  // centered text
   // RTL has icon mirrored
   // triggers on space or enter
 }) {
@@ -79,6 +80,13 @@ export function button<State, Action, Query = unknown, T = unknown>(attrs: {
         Transition.make('background', '0.25s'),
         Transition.make('text-color', '0.25s')
       ),
+      whenFocused: {
+        shadow: Shadow.drop({
+          color: ofHSLA(0, 0, 0.3, 0.125),
+          spreadRadius: 4,
+          blurRadius: 2
+        })
+      },
       whenHover: {
         background: Background.rgba(75, 75, 75, 1),
         textColor: ofRGB(255, 255, 255)
@@ -94,8 +102,14 @@ export function button<State, Action, Query = unknown, T = unknown>(attrs: {
         textColor: ofRGB(179, 179, 179),
         cursor: 'auto'
       },
-      disabled: attrs.disabled
-      // margins
+      disabled: attrs.disabled,
+      events: {
+        click:
+          attrs.onPress &&
+          ((state: State, ev: MouseEvent, el: Element) => {
+            return attrs.onPress!(state)
+          })
+      }
       // variant
     },
     attrs.label

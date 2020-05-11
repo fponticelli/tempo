@@ -24,7 +24,7 @@ export type EventHandler<
   Action,
   Ev extends Event = Event,
   El extends Element = Element
-> = (state: S, event: Ev, element: El) => Action | undefined
+> = ((state: S, event: Ev, element: El) => Action | undefined) | undefined
 export type StyleAttribute<State, Value> = DerivedOrLiteralValue<
   State,
   Value | undefined
@@ -121,11 +121,9 @@ export function attributeToHandler<
 >(
   attr: Attribute<State, Value>,
   handler: EventHandler<Value, Action, Ev, El>
-): EventHandler<State, Action, Ev, El> {
-  if (typeof attr === 'undefined') {
-    return () => {
-      return undefined
-    }
+): EventHandler<State, Action, Ev, El> | undefined {
+  if (typeof attr === 'undefined' || typeof handler === 'undefined') {
+    return undefined
   } else if (typeof attr === 'function') {
     return (state: State, event: Ev, element: El) => {
       const res = (attr as DerivedValue<State, Value>)(state)
