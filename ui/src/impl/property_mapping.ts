@@ -33,191 +33,231 @@ export interface PropertyRecord<T extends Record<string, Attribute<any, any>>> {
 }
 
 function paddingRules(padding: Padding): Rule[] {
-  return matchKind(
-    padding,
-    {
-      PaddingAll: p => {
-        const cls = `pa${p.value}`
-        const selector = `.${cls}`
-        return [{
-          cls, selector,
+  return matchKind(padding, {
+    PaddingAll: p => {
+      const cls = `pa${p.value}`
+      const selector = `.${cls}`
+      return [
+        {
+          cls,
+          selector,
           definitions: () => [`padding: ${p.value}px;`]
-        }]
-      },
-      PaddingHV: p => {
-        const cls = `phv${p.v}-${p.h}`
-        const selector = `.${cls}`
-        return [{
-          cls, selector,
+        }
+      ]
+    },
+    PaddingHV: p => {
+      const cls = `phv${p.v}-${p.h}`
+      const selector = `.${cls}`
+      return [
+        {
+          cls,
+          selector,
           definitions: () => [`padding: ${p.v}px ${p.h}px;`]
-        }]
-      },
-      PaddingEach: p => {
-        const cls = `pe${p.top}-${p.right}-${p.bottom}-${p.left}`
-        const selector = `.${cls}`
-        return [{
-          cls, selector,
+        }
+      ]
+    },
+    PaddingEach: p => {
+      const cls = `pe${p.top}-${p.right}-${p.bottom}-${p.left}`
+      const selector = `.${cls}`
+      return [
+        {
+          cls,
+          selector,
           definitions: () => [
             `padding: ${p.top}px ${p.right}px ${p.bottom}px ${p.left}px;`
           ]
-        }]
-      }
+        }
+      ]
     }
-  )
+  })
 }
 
 function widthRules(length: Length): Rule[] {
-  return matchKind(
-    length,
-    {
-      LengthFill: _ => {
-        const cls = 'wf'
-        const selector = `.${cls}`
-        return [{
-          cls, selector,
+  return matchKind(length, {
+    LengthFill: _ => {
+      const cls = 'wf'
+      const selector = `.${cls}`
+      return [
+        {
+          cls,
+          selector,
           definitions: () => ['width: 100%;']
-        }]
-      },
-      LengthMax: l => {
-        const inner = widthRules(l.length)[0]
-        const cls = `wmx${l.length}-${inner.cls}`
-        const selector = `.${cls}`
-        return [{
-          cls, selector,
-          definitions: () => [`max-width: ${l.max}px; ${widthRules(l.length)};`]
-        }]
-      },
-      LengthMin: l => {
-        const inner = widthRules(l.length)[0]
-        const cls = `wmi${l.length}-${inner.cls}`
-        const selector = `.${cls}`
-        return [{
-          cls, selector,
-          definitions: () => [`min-width: ${l.min}px; ${widthRules(l.length)};`]
-        }]
-      },
-      LengthFillPortion: l => {
-        if (l.portion === 1) {
-          return widthRules(fill)
-        } else {
-          const cls = `wlfp${l.portion}`
-          const selector = `.${cls}`
-          return [{
-            cls, selector,
-            definitions: () => [``]
-          }, {
-            cls: undefined, selector: `.r > .${cls}`,
-            definitions: () => [`flex-grow: ${l.portion * 10000}px;`]
-          }]
         }
-      },
-      LengthPx: l => {
-        const cls = `wpx${l.value}`
+      ]
+    },
+    LengthMax: l => {
+      const inner = widthRules(l.length)[0]
+      const cls = `wmx${l.length}-${inner.cls}`
+      const selector = `.${cls}`
+      return [
+        {
+          cls,
+          selector,
+          definitions: () => [`max-width: ${l.max}px; ${widthRules(l.length)};`]
+        }
+      ]
+    },
+    LengthMin: l => {
+      const inner = widthRules(l.length)[0]
+      const cls = `wmi${l.length}-${inner.cls}`
+      const selector = `.${cls}`
+      return [
+        {
+          cls,
+          selector,
+          definitions: () => [`min-width: ${l.min}px; ${widthRules(l.length)};`]
+        }
+      ]
+    },
+    LengthFillPortion: l => {
+      if (l.portion === 1) {
+        return widthRules(fill)
+      } else {
+        const cls = `wlfp${l.portion}`
         const selector = `.${cls}`
-        return [{
-          cls, selector,
-          definitions: () => [`width: ${l.value}px;`]
-        }]
-      },
-      LengthShrink: _ => {
-        const cls = 'ws'
-        const selector = `.${cls}`
-        return [{
-          cls, selector,
-          definitions: () => [`width: auto;`] // TODO or `max-content` / `min-content` ?
-        }]
+        return [
+          {
+            cls,
+            selector,
+            definitions: () => [``]
+          },
+          {
+            cls: undefined,
+            selector: `.r > .${cls}`,
+            definitions: () => [`flex-grow: ${l.portion * 10000}px;`]
+          }
+        ]
       }
+    },
+    LengthPx: l => {
+      const cls = `wpx${l.value}`
+      const selector = `.${cls}`
+      return [
+        {
+          cls,
+          selector,
+          definitions: () => [`width: ${l.value}px;`]
+        }
+      ]
+    },
+    LengthShrink: _ => {
+      const cls = 'ws'
+      const selector = `.${cls}`
+      return [
+        {
+          cls,
+          selector,
+          definitions: () => [`width: auto;`] // TODO or `max-content` / `min-content` ?
+        }
+      ]
     }
-  )
+  })
 }
 
 function heightRules(length: Length): Rule[] {
-  return matchKind(
-    length,
-    {
-      LengthFill: l => {
-        const cls = 'hf'
-        const selector = `.${cls}`
-        return [{
-          cls, selector,
+  return matchKind(length, {
+    LengthFill: l => {
+      const cls = 'hf'
+      const selector = `.${cls}`
+      return [
+        {
+          cls,
+          selector,
           definitions: () => ['height: 100%;']
-        }]
-      },
-      LengthMax: l => {
-        const cls = 'hmx'
-        const selector = `.${cls}`
-        return [{
-          cls, selector,
-          definitions: () => [
-            `max-height: ${l.max}px; ${widthRules(l.length)};`]
-          }
-        ]
-      },
-      LengthMin: l => {
-        const cls = 'hmi'
-        const selector = `.${cls}`
-        return [{
-          cls, selector,
-          definitions: () => [
-            `min-height: ${l.min}px; ${widthRules(l.length)};`]
-          }
-        ]
-      },
-      LengthFillPortion: l => {
-        if (l.portion === 1) {
-          return widthRules(fill)
-        } else {
-          const cls = `hlfp${l.portion}`
-          const selector = `.${cls}`
-          return [{
-            cls, selector,
-            definitions: () => [``]
-          }, {
-            cls: undefined, selector: `.r > .${cls}`,
-            definitions: () => [`flex-grow: ${l.portion * 10000}px;`]
-          }]
         }
-      },
-      LengthPx: l => {
-        const cls = 'hpx'
+      ]
+    },
+    LengthMax: l => {
+      const cls = 'hmx'
+      const selector = `.${cls}`
+      return [
+        {
+          cls,
+          selector,
+          definitions: () => [
+            `max-height: ${l.max}px; ${widthRules(l.length)};`
+          ]
+        }
+      ]
+    },
+    LengthMin: l => {
+      const cls = 'hmi'
+      const selector = `.${cls}`
+      return [
+        {
+          cls,
+          selector,
+          definitions: () => [
+            `min-height: ${l.min}px; ${widthRules(l.length)};`
+          ]
+        }
+      ]
+    },
+    LengthFillPortion: l => {
+      if (l.portion === 1) {
+        return widthRules(fill)
+      } else {
+        const cls = `hlfp${l.portion}`
         const selector = `.${cls}`
-        return [{
-          cls, selector,
-          definitions: () => [`height: ${l.value}px;`]
-        }]
-      },
-      LengthShrink: l => {
-        const cls = 'hs'
-        const selector = `.${cls}`
-        return [{
-          cls, selector,
-          definitions: () => [`height: auto;`]
-        }]
+        return [
+          {
+            cls,
+            selector,
+            definitions: () => [``]
+          },
+          {
+            cls: undefined,
+            selector: `.r > .${cls}`,
+            definitions: () => [`flex-grow: ${l.portion * 10000}px;`]
+          }
+        ]
       }
+    },
+    LengthPx: l => {
+      const cls = 'hpx'
+      const selector = `.${cls}`
+      return [
+        {
+          cls,
+          selector,
+          definitions: () => [`height: ${l.value}px;`]
+        }
+      ]
+    },
+    LengthShrink: l => {
+      const cls = 'hs'
+      const selector = `.${cls}`
+      return [
+        {
+          cls,
+          selector,
+          definitions: () => [`height: auto;`]
+        }
+      ]
     }
-  )
+  })
 }
 
 function backgroundRules(b: Background): Rule[] {
-  return matchKind(
-    b,
-    {
-      BackgroundColor: bg => {
-        const color = toRGB(bg.color)
-        const r = toHex(red(color), 2)
-        const g = toHex(green(color), 2)
-        const b = toHex(blue(color), 2)
-        const alpha = getAlpha(bg.color)
-        const a = alpha === 1 ? '' : toHex(Math.round(alpha * 255), 2)
-        const cls = `b${r}${g}${b}${a}`
-        const selector = `.${cls}`
-        return [{
-          cls, selector,
+  return matchKind(b, {
+    BackgroundColor: bg => {
+      const color = toRGB(bg.color)
+      const r = toHex(red(color), 2)
+      const g = toHex(green(color), 2)
+      const b = toHex(blue(color), 2)
+      const alpha = getAlpha(bg.color)
+      const a = alpha === 1 ? '' : toHex(Math.round(alpha * 255), 2)
+      const cls = `b${r}${g}${b}${a}`
+      const selector = `.${cls}`
+      return [
+        {
+          cls,
+          selector,
           definitions: () => [`background-color: ${toCSS3(bg.color)};`]
-        }]
-      }
+        }
+      ]
     }
-  )
+  })
 }
 
 const elMappingRules = {

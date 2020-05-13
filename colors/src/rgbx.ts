@@ -55,9 +55,11 @@ export function equals(a: RGBX, b: RGBX) {
 }
 
 export function nearEquals(a: RGBX, b: RGBX, tolerance = EPSILON) {
-  return nNearEquals(red(a), red(b), tolerance) &&
-         nNearEquals(green(a), green(b), tolerance) &&
-         nNearEquals(blue(a), blue(b), tolerance)
+  return (
+    nNearEquals(red(a), red(b), tolerance) &&
+    nNearEquals(green(a), green(b), tolerance) &&
+    nNearEquals(blue(a), blue(b), tolerance)
+  )
 }
 
 export function darker(rgbx: RGBX, t: number) {
@@ -130,14 +132,18 @@ export enum GreyMode {
 export function toGrey(rgbx: RGBX, mode = GreyMode.Standard): Grey {
   switch (mode) {
     case GreyMode.Standard:
-      return ofGrey(red(rgbx) * 0.2126 + green(rgbx) * 0.7152 + blue(rgbx) * 0.0722)
+      return ofGrey(
+        red(rgbx) * 0.2126 + green(rgbx) * 0.7152 + blue(rgbx) * 0.0722
+      )
     case GreyMode.Perceived:
-      return ofGrey(red(rgbx) * 0.299 + green(rgbx) * 0.587 + blue(rgbx) * 0.114)
+      return ofGrey(
+        red(rgbx) * 0.299 + green(rgbx) * 0.587 + blue(rgbx) * 0.114
+      )
     case GreyMode.PerceivedAccurate:
       return ofGrey(
         Math.pow(red(rgbx), 2) * 0.241 +
-        Math.pow(green(rgbx), 2) * 0.691 +
-        Math.pow(blue(rgbx), 2) * 0.068
+          Math.pow(green(rgbx), 2) * 0.691 +
+          Math.pow(blue(rgbx), 2) * 0.068
       )
   }
 }

@@ -56,14 +56,21 @@ export function alpha(rgbax: RGBAX) {
 }
 
 export function equals(a: RGBAX, b: RGBAX) {
-  return red(a) === red(b) && green(a) === green(b) && blue(a) === blue(b) && alpha(a) === alpha(b)
+  return (
+    red(a) === red(b) &&
+    green(a) === green(b) &&
+    blue(a) === blue(b) &&
+    alpha(a) === alpha(b)
+  )
 }
 
 export function nearEquals(a: RGBAX, b: RGBAX, tolerance = EPSILON) {
-  return nNearEquals(red(a), red(b), tolerance) &&
-         nNearEquals(green(a), green(b), tolerance) &&
-         nNearEquals(blue(a), blue(b), tolerance) &&
-         nNearEquals(alpha(a), alpha(b), tolerance)
+  return (
+    nNearEquals(red(a), red(b), tolerance) &&
+    nNearEquals(green(a), green(b), tolerance) &&
+    nNearEquals(blue(a), blue(b), tolerance) &&
+    nNearEquals(alpha(a), alpha(b), tolerance)
+  )
 }
 
 export function darker(rgbax: RGBAX, t: number) {
@@ -124,7 +131,8 @@ export function roundTo(rgbax: RGBAX, decimals: number) {
 }
 
 export function toCSS3(rgbax: RGBAX) {
-  return `rgb(${red(rgbax) * 100}%,${green(rgbax) * 100}%,${blue(rgbax) * 100}%,${alpha(rgbax)})`
+  return `rgb(${red(rgbax) * 100}%,${green(rgbax) * 100}%,${blue(rgbax) *
+    100}%,${alpha(rgbax)})`
 }
 
 export function toRGB(rgbax: RGBAX): RGB {
@@ -136,7 +144,12 @@ export function toRGBX(rgbax: RGBAX): RGBX {
 }
 
 export function toRGBA(rgbax: RGBAX): RGBA {
-  return ofRGBA(red(rgbax) * 255, green(rgbax) * 255, blue(rgbax) * 255, alpha(rgbax) * 255) // normalization happens in ofRGB
+  return ofRGBA(
+    red(rgbax) * 255,
+    green(rgbax) * 255,
+    blue(rgbax) * 255,
+    alpha(rgbax) * 255
+  ) // normalization happens in ofRGB
 }
 
 export function toHSLA(rgbax: RGBAX): HSLA {

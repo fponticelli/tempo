@@ -35,7 +35,12 @@ export function ofRGBA(r: number, g: number, b: number, a: number): RGBA {
   g = clamp(Math.trunc(g), 0, 255)
   b = clamp(Math.trunc(b), 0, 255)
   a = clamp(Math.trunc(a), 0, 255)
-  return makeUnsafe(((r & 0xff) << 24) | ((g & 0xff) << 16) | ((b & 0xff) << 8) | ((a & 0xff) << 0))
+  return makeUnsafe(
+    ((r & 0xff) << 24) |
+      ((g & 0xff) << 16) |
+      ((b & 0xff) << 8) |
+      ((a & 0xff) << 0)
+  )
 }
 
 export function ofHex(hex: number) {
@@ -124,7 +129,11 @@ export function toCSS3(rgba: RGBA) {
 
 export function toHex(rgba: RGBA, prefix = '#') {
   return (
-    prefix + nToHex(red(rgba), 2) + nToHex(green(rgba), 2) + nToHex(blue(rgba), 2) + nToHex(alpha(rgba), 2)
+    prefix +
+    nToHex(red(rgba), 2) +
+    nToHex(green(rgba), 2) +
+    nToHex(blue(rgba), 2) +
+    nToHex(alpha(rgba), 2)
   )
 }
 
@@ -133,5 +142,10 @@ export function toRGBX(rgba: RGBA): RGBX {
 }
 
 export function toRGBAX(rgba: RGBA): RGBAX {
-  return ofRGBAX(red(rgba) / 255, green(rgba) / 255, blue(rgba) / 255, alpha(rgba) / 255)
+  return ofRGBAX(
+    red(rgba) / 255,
+    green(rgba) / 255,
+    blue(rgba) / 255,
+    alpha(rgba) / 255
+  )
 }
