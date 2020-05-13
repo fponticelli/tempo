@@ -129,6 +129,7 @@ export interface BorderProperties {
 }
 
 export type Border =
+  | { kind: 'BorderNone' }
   | { kind: 'BorderAll'; all: BorderProperties }
   | {
       kind: 'BorderEach'
@@ -139,6 +140,7 @@ export type Border =
     }
 
 export const Border = {
+  none: { kind: 'BorderNone' } as Border,
   all: (width: number, color: Color, style?: BorderStyle): Border => ({
     kind: 'BorderAll',
     all: {
@@ -353,7 +355,7 @@ export const Shadow = {
     blurRadius?: number
     spreadRadius?: number
     color: Color
-  }): Shadow => ({
+  }): DropShadow => ({
     kind: 'DropShadow',
     offsetX: offsetX ?? 0,
     offsetY: offsetY ?? 0,
@@ -373,7 +375,7 @@ export const Shadow = {
     blurRadius?: number
     spreadRadius?: number
     color: Color
-  }): Shadow => ({
+  }): InsetShadow => ({
     kind: 'InsetShadow',
     offsetX: offsetX ?? 0,
     offsetY: offsetY ?? 0,

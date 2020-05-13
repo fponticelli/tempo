@@ -22,8 +22,15 @@ import {
   Background,
   Padding,
   Transition,
-  Size
+  Size,
+  Shadow,
+  Radius,
+  Length,
+  Border
 } from 'tempo-ui/lib/ui_attributes'
+import { Theme } from 'uood/lib/theme'
+import { ofRGBA } from 'uood/node_modules/tempo-colors/lib/rgba'
+import { ofRGB } from 'uood/node_modules/tempo-colors/lib/rgb'
 
 type Action = {
   kind: 'ChangePadding'
@@ -44,6 +51,58 @@ const state: State = {
 
 const store = Store.ofState({ state, reducer })
 
+const bp: Theme<State> = {
+  button: {
+    shadow: Shadow.multi(
+      Shadow.inset({ spreadRadius: 1, color: ofRGBA(16, 22, 26, 51) }),
+      Shadow.inset({ offsetY: -1, color: ofRGBA(16, 22, 26, 25) })
+    ),
+    textColor: ofRGB(0x18, 0x20, 0x26),
+    background: Background.rgb(0xf5, 0xf8, 0xfa),
+    border: Border.none,
+    borderRadius: Radius.all(Length.px(3))
+  }
+}
+
+const material: Theme<State> = {
+  button: {}
+}
+
+const controls = (theme?: Theme<State>) => [
+  block<State, Action>(
+    {},
+    textField({
+      value: p => String(p.padding),
+      placeholder: 'placeholder ...'
+      // events: {
+      //   input: (_s, _e, e) => ({
+      //     kind: 'ChangePadding',
+      //     value: Number(e.value)
+      //   })
+      // }
+    })
+  ),
+  block<State, Action>(
+    {
+      spacing: 10
+    },
+    button({
+      theme,
+      label: '+',
+      onPress: (s: State) => ({ kind: 'ChangePadding', value: s.padding + 1 })
+    }),
+    button({
+      theme,
+      label: '-',
+      onPress: (s: State) => ({
+        kind: 'ChangePadding',
+        value: s.padding - 1
+      }),
+      disabled: (s: State) => s.padding < 10 // true
+    })
+  )
+]
+
 const template = container<State, Action>(
   {
     orientation: 'row',
@@ -55,10 +114,10 @@ const template = container<State, Action>(
       padding: p => Padding.each(p.padding, 20),
       background: Background.hsl(-10, 0.9, 0.95),
       transition: Transition.make('background', '2s'),
-      whenHover: {
+      hoverStyle: {
         background: Background.hsl(20, 0.9, 0.6)
       },
-      whenActive: {
+      activeStyle: {
         transition: Transition.make('background', '0.5s'),
         background: Background.hsl(30, 0.3, 0.9)
       },
@@ -69,46 +128,29 @@ const template = container<State, Action>(
   container(
     {
       orientation: 'col',
-      background: Background.hsl(60, 0.8, 0.8),
-      transition: Transition.make('background', '1s'),
-      padding: p => Padding.all(p.padding),
-      whenActive: {
-        background: Background.hsl(30, 0.3, 0.9)
-      }
+      padding: Padding.all(10),
+      spacing: 10,
+      background: Background.rgb(245, 245, 245)
     },
-    block(
-      {},
-      textField({
-        value: p => String(p.padding),
-        placeholder: 'placeholder ...'
-        // attrs: {
-        //   value: p => String(p.padding)
-        // }
-        // events: {
-        //   input: (_s, _e, e) => ({
-        //     kind: 'ChangePadding',
-        //     value: Number(e.value)
-        //   })
-        // }
-      })
-    ),
-    block(
-      {
-        spacing: 10
-      },
-      button({
-        label: '+',
-        onPress: (s: State) => ({ kind: 'ChangePadding', value: s.padding + 1 })
-      }),
-      button({
-        label: '-',
-        onPress: (s: State) => ({
-          kind: 'ChangePadding',
-          value: s.padding - 1
-        }),
-        disabled: (s: State) => s.padding < 10 // true
-      })
-    )
+    ...controls(undefined)
+  ),
+  container(
+    {
+      orientation: 'col',
+      padding: Padding.all(10),
+      spacing: 10,
+      background: Background.rgb(245, 245, 245)
+    },
+    ...controls(bp)
+  ),
+  container(
+    {
+      orientation: 'col',
+      padding: Padding.all(10),
+      spacing: 10,
+      background: Background.rgb(245, 245, 245)
+    },
+    ...controls(material)
   ),
   container(
     {
@@ -119,10 +161,10 @@ const template = container<State, Action>(
       ),
       background: Background.hsl(120, 0.8, 0.8),
       padding: Padding.each(0),
-      whenHover: {
+      hoverStyle: {
         padding: p => Padding.each(p.padding)
       },
-      whenActive: {
+      activeStyle: {
         padding: p => Padding.each(p.padding * 2),
         background: p => Background.hsl(120 + p.padding, 0.8, 0.8)
       }

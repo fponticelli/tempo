@@ -26,6 +26,7 @@ import {
 } from 'tempo-ui/lib/ui_attributes'
 import { ofRGB } from 'tempo-colors/lib/rgb'
 import { ofHSLA } from 'tempo-colors/lib/hsla'
+import { Theme } from './theme'
 
 export type ButtonVariant =
   | { kind: 'ButtonCTA' }
@@ -52,6 +53,7 @@ export const Variant = {
 }
 
 export function button<State, Action, Query = unknown, T = unknown>(attrs: {
+  theme?: Theme<State>
   label: Attribute<State, string>
   variant?: Attribute<State, ButtonVariant>
   // icon: Attribute<State, Icon>
@@ -61,40 +63,41 @@ export function button<State, Action, Query = unknown, T = unknown>(attrs: {
   // padding width = height / 2
   // min width = height * 2.25 (min doesn't apply for quiet)
 }) {
+  const theme = attrs.theme?.button
   return control<State, Action, Query, T>(
     {
       elementName: 'button',
-      padding: Padding.each(9 - 2, 16), // padding - border
-      width: Size.min(32 * 2.25),
-      height: Size.min(32),
-      borderRadius: Radius.all(Length.px(16)),
-      background: Background.rgba(0, 0, 0, 0),
-      border: Border.all(2, ofRGB(75, 75, 75), 'solid'),
-      fontSize: 14,
-      textColor: ofRGB(75, 75, 75),
+      padding: theme?.padding ?? Padding.each(9 - 2, 16), // padding - border
+      width: theme?.width ?? Size.min(32 * 2.25),
+      height: theme?.height ?? Size.min(32),
+      borderRadius: theme?.borderRadius ?? Radius.all(Length.px(16)),
+      background: theme?.background ?? Background.rgba(0, 0, 0, 0),
+      border: theme?.border ?? Border.all(2, ofRGB(75, 75, 75), 'solid'),
+      fontSize: theme?.fontSize ?? 14,
+      textColor: theme?.textColor ?? ofRGB(75, 75, 75),
       cursor: Cursor.pointer,
-      textAlign: 'center',
-      transition: Transition.make(
-        ['background', 'text-color', 'shadow'],
-        '0.25s'
-      ),
-      whenFocused: {
+      textAlign: theme?.textAlign ?? 'center',
+      shadow: theme?.shadow,
+      transition:
+        theme?.transition ??
+        Transition.make(['background', 'text-color', 'shadow'], '0.25s'),
+      focusedStyle: {
         shadow: Shadow.drop({
-          color: ofHSLA(0, 0, 0.3, 0.125),
+          color: ofHSLA(0, 0, 0.2, 0.125),
           spreadRadius: 4,
           blurRadius: 2
         })
       },
-      whenHover: {
+      hoverStyle: {
         background: Background.rgba(75, 75, 75, 1),
         textColor: ofRGB(255, 255, 255)
       },
-      whenActive: {
+      activeStyle: {
         border: Border.all(2, ofRGB(44, 44, 44), 'solid'),
         background: Background.rgba(44, 44, 44, 1),
         textColor: ofRGB(255, 255, 255)
       },
-      whenDisabled: {
+      disabledStyle: {
         background: Background.rgb(234, 234, 234),
         border: Border.all(2, ofRGB(234, 234, 234)),
         textColor: ofRGB(179, 179, 179),

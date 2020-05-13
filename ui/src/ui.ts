@@ -85,24 +85,24 @@ export interface ElTextBlockProperties<State> {
 }
 
 export interface ElMouseProperties<State> {
-  whenHover?: ElBlockProperties<State> &
+  hoverStyle?: ElBlockProperties<State> &
     ElTextProperties<State> &
     ElTextBlockProperties<State>
-  whenActive?: ElBlockProperties<State> &
+  activeStyle?: ElBlockProperties<State> &
     ElTextProperties<State> &
     ElTextBlockProperties<State>
-  whenFocusWithin?: ElBlockProperties<State> &
+  focusWithinStyle?: ElBlockProperties<State> &
     ElTextProperties<State> &
     ElTextBlockProperties<State>
   cursor?: Attribute<State, Cursor>
 }
 
 export interface ElControlProperties<State> {
-  whenDisabled?: ElBlockProperties<State> &
+  disabledStyle?: ElBlockProperties<State> &
     ElTextProperties<State> &
     ElTextBlockProperties<State> &
     ElMouseProperties<State>
-  whenFocused?: ElBlockProperties<State> &
+  focusedStyle?: ElBlockProperties<State> &
     ElTextProperties<State> &
     ElTextBlockProperties<State> &
     ElMouseProperties<State>
@@ -179,6 +179,7 @@ function borderOneToString(width: number, style: BorderStyle, color: Color) {
 
 function borderToString(b: Border): string {
   return matchKind(b, {
+    BorderNone: () => 'none',
     BorderAll: b => borderOneToString(b.all.width, b.all.style, b.all.color),
     BorderEach: b =>
       [
@@ -409,9 +410,9 @@ function applyControlProps<State>(
   properties: ClassDescription[],
   styles: Record<string, string>
 ) {
-  if (typeof v.whenFocused !== 'undefined') {
+  if (typeof v.focusedStyle !== 'undefined') {
     resolveAttribute(
-      mapAttributes(v.whenFocused, x => {
+      mapAttributes(v.focusedStyle, x => {
         applyBlockProps(`${prefix}F`, ':focus', x, properties, styles)
         applyTextBlockProps(`${prefix}F`, ':focus', x, properties, styles)
         applyTextProps(`${prefix}F`, ':focus', x, properties, styles)
@@ -420,9 +421,9 @@ function applyControlProps<State>(
     )(state)
   }
 
-  if (typeof v.whenDisabled !== 'undefined') {
+  if (typeof v.disabledStyle !== 'undefined') {
     resolveAttribute(
-      mapAttributes(v.whenDisabled, x => {
+      mapAttributes(v.disabledStyle, x => {
         applyBlockProps(`${prefix}D`, '[disabled]', x, properties, styles)
         applyTextBlockProps(`${prefix}D`, '[disabled]', x, properties, styles)
         applyTextProps(`${prefix}D`, '[disabled]', x, properties, styles)
@@ -519,9 +520,9 @@ function applyMouseProps<State>(
   properties: ClassDescription[],
   styles: Record<string, string>
 ) {
-  if (typeof v.whenHover !== 'undefined') {
+  if (typeof v.hoverStyle !== 'undefined') {
     resolveAttribute(
-      mapAttributes(v.whenHover, x => {
+      mapAttributes(v.hoverStyle, x => {
         applyBlockProps('H', ':hover', x, properties, styles)
         applyTextProps('H', ':hover', x, properties, styles)
         applyTextBlockProps('H', ':hover', x, properties, styles)
@@ -529,9 +530,9 @@ function applyMouseProps<State>(
     )(state)
   }
 
-  if (typeof v.whenActive !== 'undefined') {
+  if (typeof v.activeStyle !== 'undefined') {
     resolveAttribute(
-      mapAttributes(v.whenActive, x => {
+      mapAttributes(v.activeStyle, x => {
         applyBlockProps('A', ':active', x, properties, styles)
         applyTextProps('A', ':active', x, properties, styles)
         applyTextBlockProps('A', ':active', x, properties, styles)
@@ -539,9 +540,9 @@ function applyMouseProps<State>(
     )(state)
   }
 
-  if (typeof v.whenFocusWithin !== 'undefined') {
+  if (typeof v.focusWithinStyle !== 'undefined') {
     resolveAttribute(
-      mapAttributes(v.whenFocusWithin, x => {
+      mapAttributes(v.focusWithinStyle, x => {
         applyBlockProps('FW', ':focus-within', x, properties, styles)
         applyTextBlockProps('FW', ':focus-within', x, properties, styles)
         applyTextProps('FW', ':focus-within', x, properties, styles)

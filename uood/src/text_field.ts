@@ -78,18 +78,18 @@ export function textField<State, Action, Query = unknown, T = unknown>(attrs: {
       textColor: ofRGB(112, 112, 112),
       fontStyle: 'italic'
     },
-    whenFocused: {
+    focusedStyle: {
       shadow: Shadow.drop({
-        color: ofHSLA(0, 0, 0.3, 0.125),
+        color: ofHSLA(0, 0, 0.2, 0.125),
         spreadRadius: 4,
         blurRadius: 2
       }),
       border: Border.all(1, ofRGB(20, 115, 230))
     },
-    whenHover: {
+    hoverStyle: {
       textColor: ofRGB(75, 75, 75)
     },
-    whenDisabled: {
+    disabledStyle: {
       background: Background.rgb(234, 234, 234),
       border: Border.all(2, ofRGB(234, 234, 234)),
       textColor: ofRGB(179, 179, 179),
