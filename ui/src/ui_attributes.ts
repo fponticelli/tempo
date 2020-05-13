@@ -39,10 +39,16 @@ export const Padding = {
   })
 }
 
-export type TransitionTarget = 'background' | 'padding' | 'text-color'
+export type TransitionTarget =
+  | 'background'
+  | 'padding'
+  | 'text-color'
+  | 'shadow'
+  | 'text-shadow'
+  | 'border'
 export interface OneTransition {
   kind: 'Transition'
-  target: TransitionTarget
+  targets: TransitionTarget[]
   duration?: string
   timingFunction?: string
   delay?: string
@@ -53,13 +59,13 @@ export type Transition =
 
 export const Transition = {
   make: (
-    target: TransitionTarget,
+    target: TransitionTarget | TransitionTarget[],
     duration?: string,
     timingFunction?: string,
     delay?: string
   ): OneTransition => ({
     kind: 'Transition',
-    target,
+    targets: typeof target === 'string' ? [target] : target,
     duration,
     timingFunction,
     delay
@@ -417,6 +423,8 @@ export const TextShadow = {
   })
 }
 
+export type FontStyle = 'italic' | 'oblique'
+
 export type FontWeight =
   | 'bold'
   | 'lighter'
@@ -446,7 +454,7 @@ export const FontWeight = {
   w900: 900
 }
 
-export type TextAlign = 'left' | 'center' | 'right' | 'justify'
+export type TextAlign = 'start' | 'center' | 'end' | 'justify'
 
 // TODO
 // - [ ] overflowHorizontal

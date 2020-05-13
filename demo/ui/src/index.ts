@@ -13,8 +13,8 @@ limitations under the License.
 
 import { matchKind } from 'tempo-std/lib/match'
 import { Tempo } from 'tempo-dom/lib/tempo'
-import { input } from 'tempo-dom/lib/html'
 import { button } from 'uood/lib/button'
+import { textField } from 'uood/lib/text_field'
 import { container, block } from 'tempo-ui/lib/ui'
 import { resetStyles } from 'tempo-ui/lib/reset'
 import { Store } from 'tempo-store/lib/store'
@@ -76,17 +76,22 @@ const template = container<State, Action>(
         background: Background.hsl(30, 0.3, 0.9)
       }
     },
-    input({
-      attrs: {
-        value: p => String(p.padding)
-      },
-      events: {
-        input: (_s, _e, e) => ({
-          kind: 'ChangePadding',
-          value: Number(e.value)
-        })
-      }
-    }),
+    block(
+      {},
+      textField({
+        value: p => String(p.padding),
+        placeholder: 'placeholder ...'
+        // attrs: {
+        //   value: p => String(p.padding)
+        // }
+        // events: {
+        //   input: (_s, _e, e) => ({
+        //     kind: 'ChangePadding',
+        //     value: Number(e.value)
+        //   })
+        // }
+      })
+    ),
     block(
       {
         spacing: 10

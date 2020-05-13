@@ -40,7 +40,8 @@ import {
   Shadow,
   FontWeight,
   TextAlign,
-  TransitionTarget
+  TransitionTarget,
+  FontStyle
 } from './ui_attributes'
 import { matchKind } from 'tempo-std/lib/match'
 import { toCSS3, Color } from 'tempo-colors/lib/color'
@@ -69,6 +70,7 @@ export interface ElBlockProperties<State> {
 }
 
 export interface ElTextProperties<State> {
+  fontStyle?: Attribute<State, FontStyle>
   fontSize?: Attribute<State, number>
   textColor?: Attribute<State, Color>
   textShadow?: Attribute<State, TextShadow>
@@ -104,7 +106,10 @@ export interface ElControlProperties<State> {
     ElTextProperties<State> &
     ElTextBlockProperties<State> &
     ElMouseProperties<State>
+  placeholderStyle?: ElTextProperties<State>
+  placeholder?: Attribute<State, string>
   disabled?: Attribute<State, boolean>
+  value?: Attribute<State, string>
 }
 
 export interface ElLifecycleProperties<State, Action, Query, TScope> {
@@ -240,16 +245,26 @@ function borderRadiusToString(b: BorderRadius): string {
 }
 
 function transitionTargetToString(target: TransitionTarget) {
-  if (target === 'text-color') return 'color'
-  else return target
+  switch (target) {
+    case 'text-color':
+      return 'color'
+    case 'shadow':
+      return 'box-shadow'
+    default:
+      return target
+  }
 }
 
 function oneTransitionToString(t: OneTransition) {
-  const buff = [transitionTargetToString(t.target)]
-  if (typeof t.duration !== 'undefined') buff.push(t.duration)
-  if (typeof t.timingFunction !== 'undefined') buff.push(t.timingFunction)
-  if (typeof t.delay !== 'undefined') buff.push(t.delay)
-  return buff.join(' ')
+  return t.targets
+    .map(target => {
+      const buff = [transitionTargetToString(target)]
+      if (typeof t.duration !== 'undefined') buff.push(t.duration)
+      if (typeof t.timingFunction !== 'undefined') buff.push(t.timingFunction)
+      if (typeof t.delay !== 'undefined') buff.push(t.delay)
+      return buff.join(' ')
+    })
+    .join(', ')
 }
 
 function shadowToString(s: Shadow): string {
@@ -441,7 +456,7 @@ function applyTextBlockProps<State>(
   }
   if (typeof v.textAlign !== 'undefined') {
     properties.push(features.textAlign(prefix, pseudo))
-    styles[`${prefix}ta`] = v.textAlign
+    styles[`${prefix}ta`] = mapTextAlign(v.textAlign)
   }
 }
 
@@ -469,6 +484,11 @@ function applyTextProps<State>(
   if (typeof v.textShadow !== 'undefined') {
     properties.push(features.textShadow(prefix, pseudo))
     styles[`${prefix}ts`] = textShadowToString(v.textShadow)
+  }
+
+  if (typeof v.fontStyle !== 'undefined') {
+    properties.push(features.fontStyle(prefix, pseudo))
+    styles[`${prefix}fst`] = v.fontStyle
   }
 
   if (typeof v.fontWeight !== 'undefined') {
@@ -532,6 +552,17 @@ function applyMouseProps<State>(
   if (typeof v.cursor !== 'undefined') {
     properties.push(features.cursor(prefix, pseudo))
     styles[`${prefix}cu`] = cursorToString(v.cursor)
+  }
+}
+
+function mapTextAlign(align: TextAlign): string {
+  switch (align) {
+    case 'start':
+      return 'left'
+    case 'end':
+      return 'right'
+    default:
+      return align
   }
 }
 
@@ -719,7 +750,9 @@ export function control<State, Action, Query = unknown, TScope = unknown>(
     respond: props.respond
   }
   const attrs: Record<string, Attribute<State, AttributeValue>> = {
-    disabled: props.disabled
+    value: props.value,
+    disabled: props.disabled,
+    placeholder: props.placeholder
   }
   const attrsf = (doc: Document) => (state: State) => {
     return resolveAttribute(
@@ -735,6 +768,14 @@ export function control<State, Action, Query = unknown, TScope = unknown>(
         applyTextBlockProps('', '', v, properties, styles)
         applyMouseProps('', '', state, v, properties, styles)
         applyControlProps('', '', state, v, properties, styles)
+
+        if (typeof v.placeholderStyle !== 'undefined') {
+          resolveAttribute(
+            mapAttributes(v.placeholderStyle, x => {
+              applyTextProps('PL', '::placeholder', x, properties, styles)
+            })
+          )(state)
+        }
 
         properties.forEach(prop => includeStyle(doc, prop.cls, prop.desc))
         const classes = properties.map(p => p.cls)

@@ -321,6 +321,15 @@ export const features = {
       }
     ]
   }),
+  fontStyle: (prefix: string, pseudo: string): ClassDescription => ({
+    cls: `${prefix}fst`,
+    desc: [
+      {
+        selector: `.${prefix}fst${pseudo}`,
+        rules: [`font-style: var(--${prefix}fst)`]
+      }
+    ]
+  }),
   fontWeight: (prefix: string, pseudo: string): ClassDescription => ({
     cls: `${prefix}fw`,
     desc: [

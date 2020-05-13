@@ -51,65 +51,59 @@ export const Variant = {
   warning: (quiet: boolean): ButtonVariant => ({ kind: 'ButtonWarning', quiet })
 }
 
-export function button<State, Action, Query = unknown, T = unknown>(attrs: {
-  label: Attribute<State, string>
+export function textField<State, Action, Query = unknown, T = unknown>(attrs: {
+  value: Attribute<State, string>
+  placeholder?: Attribute<State, string>
   variant?: Attribute<State, ButtonVariant>
   // icon: Attribute<State, Icon>
   // RTL has icon mirrored
   disabled?: Attribute<State, boolean>
   onPress?: undefined | ((state: State) => Action)
-  // padding width = height / 2
-  // min width = height * 2.25 (min doesn't apply for quiet)
 }) {
-  return control<State, Action, Query, T>(
-    {
-      elementName: 'button',
-      padding: Padding.each(9 - 2, 16), // padding - border
-      width: Size.min(32 * 2.25),
-      height: Size.min(32),
-      borderRadius: Radius.all(Length.px(16)),
-      background: Background.rgba(0, 0, 0, 0),
-      border: Border.all(2, ofRGB(75, 75, 75), 'solid'),
-      fontSize: 14,
-      textColor: ofRGB(75, 75, 75),
-      cursor: Cursor.pointer,
-      textAlign: 'center',
-      transition: Transition.make(
-        ['background', 'text-color', 'shadow'],
-        '0.25s'
-      ),
-      whenFocused: {
-        shadow: Shadow.drop({
-          color: ofHSLA(0, 0, 0.3, 0.125),
-          spreadRadius: 4,
-          blurRadius: 2
-        })
-      },
-      whenHover: {
-        background: Background.rgba(75, 75, 75, 1),
-        textColor: ofRGB(255, 255, 255)
-      },
-      whenActive: {
-        border: Border.all(2, ofRGB(44, 44, 44), 'solid'),
-        background: Background.rgba(44, 44, 44, 1),
-        textColor: ofRGB(255, 255, 255)
-      },
-      whenDisabled: {
-        background: Background.rgb(234, 234, 234),
-        border: Border.all(2, ofRGB(234, 234, 234)),
-        textColor: ofRGB(179, 179, 179),
-        cursor: 'auto'
-      },
-      disabled: attrs.disabled,
-      events: {
-        click:
-          attrs.onPress &&
-          ((state: State, ev: MouseEvent, el: Element) => {
-            return attrs.onPress!(state)
-          })
-      }
-      // variant
+  return control<State, Action, Query, T>({
+    elementName: 'input',
+    padding: Padding.each(9 - 2, 12), // padding - border
+    width: Size.min(48),
+    height: Size.min(32),
+    borderRadius: Radius.all(Length.px(4)),
+    background: Background.rgb(255, 255, 255),
+    border: Border.all(1, ofRGB(225, 225, 225), 'solid'),
+    fontSize: 14,
+    textColor: ofRGB(75, 75, 75),
+    cursor: Cursor.text,
+    textAlign: 'start',
+    transition: Transition.make(['border', 'shadow'], '0.25s'),
+    placeholder: attrs.placeholder,
+    placeholderStyle: {
+      textColor: ofRGB(112, 112, 112),
+      fontStyle: 'italic'
     },
-    attrs.label
-  )
+    whenFocused: {
+      shadow: Shadow.drop({
+        color: ofHSLA(0, 0, 0.3, 0.125),
+        spreadRadius: 4,
+        blurRadius: 2
+      }),
+      border: Border.all(1, ofRGB(20, 115, 230))
+    },
+    whenHover: {
+      textColor: ofRGB(75, 75, 75)
+    },
+    whenDisabled: {
+      background: Background.rgb(234, 234, 234),
+      border: Border.all(2, ofRGB(234, 234, 234)),
+      textColor: ofRGB(179, 179, 179),
+      cursor: 'auto'
+    },
+    disabled: attrs.disabled,
+    value: attrs.value,
+    events: {
+      click:
+        attrs.onPress &&
+        ((state: State, ev: MouseEvent, el: Element) => {
+          return attrs.onPress!(state)
+        })
+    }
+    // variant
+  })
 }
