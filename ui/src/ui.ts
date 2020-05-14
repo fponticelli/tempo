@@ -41,7 +41,9 @@ import {
   FontWeight,
   TextAlign,
   TransitionTarget,
-  FontStyle
+  FontStyle,
+  GradientAngle,
+  ColorStop
 } from './ui_attributes'
 import { matchKind } from 'tempo-std/lib/match'
 import { toCSS3, Color } from 'tempo-colors/lib/color'
@@ -166,7 +168,7 @@ function includeStyle(doc: Document, cls: string, descs: RuleDescription[]) {
   }
 }
 
-function lengthToString(length: Length) {
+function lengthToString(length: Length): string {
   return matchKind(length, {
     Percent: l => `${l.value}%`,
     Px: l => `${l.value}px`
@@ -291,7 +293,8 @@ function shadowToString(s: Shadow): string {
       ]
         .filter(f => typeof f !== 'undefined')
         .join(' '),
-    MultiShadow: ({ shadows }) => shadows.map(shadowToString).join(', ')
+    MultiShadow: ({ shadows }) => shadows.map(shadowToString).join(', '),
+    NoShadow: () => 'none'
   })
 }
 
@@ -307,6 +310,62 @@ function textShadowToString(s: TextShadow): string {
         .filter(f => typeof f !== 'undefined')
         .join(' '),
     MultiTextShadow: ({ shadows }) => shadows.map(textShadowToString).join(', ')
+  })
+}
+
+function gradientAngleToString(angle: GradientAngle): string {
+  return matchKind(angle, {
+    GradientAngleBottom: () => 'to bottom',
+    GradientAngleBottomLeft: () => 'to bottom left',
+    GradientAngleBottomRight: () => 'to bottom right',
+    GradientAngleLeft: () => 'to left',
+    GradientAngleRight: () => 'to right',
+    GradientAngleTop: () => 'to top',
+    GradientAngleTopLeft: () => 'to top left',
+    GradientAngleTopRight: () => 'to top right',
+    GradientAngleDegrees: g => `${g.value}deg`
+  })
+}
+
+function stopToString(color: ColorStop | Color): string {
+  if (color.kind === 'ColorStop') {
+    const buff: string[] = [toCSS3(color.color)]
+    if (typeof color.length !== 'undefined') {
+      const length: Length | [Length, Length] = color.length!
+      if (Array.isArray(length)) {
+        buff.push(...length.map(lengthToString))
+      } else {
+        buff.push(lengthToString(length))
+      }
+    }
+    return buff.join(' ')
+  } else {
+    return toCSS3(color)
+  }
+}
+
+function linearGradientArg({
+  stops,
+  angle
+}: {
+  angle?: GradientAngle
+  stops: (ColorStop | Color)[]
+}): string {
+  const buff = [] as string[]
+  if (typeof angle !== 'undefined') {
+    buff.push(gradientAngleToString(angle))
+  }
+  buff.push(...stops.map(stopToString))
+  return buff.join(', ')
+}
+
+function backgroundToString(background: Background): string {
+  return matchKind(background, {
+    BackgroundColor: bg => toCSS3(bg.color),
+    BackgroundLinearGradient: bg => `linear-gradient(${linearGradientArg(bg)})`,
+    BackgroundRepeatingLinearGradient: bg =>
+      `repeating-linear-gradient(${linearGradientArg(bg)})`,
+    BackgroundMulti: bg => bg.backgrounds.map(backgroundToString).join(', ')
   })
 }
 
@@ -328,9 +387,7 @@ function applyBlockProps<State>(
 
   if (typeof v.background !== 'undefined') {
     properties.push(features.background(prefix, pseudo))
-    styles[`${prefix}bg`] = matchKind(v.background, {
-      BackgroundColor: bg => toCSS3(bg.color)
-    })
+    styles[`${prefix}bg`] = backgroundToString(v.background)
   }
 
   if (typeof v.padding !== 'undefined') {

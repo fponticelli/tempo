@@ -22,15 +22,11 @@ import {
   Background,
   Padding,
   Transition,
-  Size,
-  Shadow,
-  Radius,
-  Length,
-  Border
+  Size
 } from 'tempo-ui/lib/ui_attributes'
 import { Theme } from 'uood/lib/theme'
-import { ofRGBA } from 'uood/node_modules/tempo-colors/lib/rgba'
-import { ofRGB } from 'uood/node_modules/tempo-colors/lib/rgb'
+import { theme as blueprint } from 'uood/lib/theme/blueprint'
+import { theme as material } from 'uood/lib/theme/material'
 
 type Action = {
   kind: 'ChangePadding'
@@ -50,23 +46,6 @@ const state: State = {
 }
 
 const store = Store.ofState({ state, reducer })
-
-const bp: Theme<State> = {
-  button: {
-    shadow: Shadow.multi(
-      Shadow.inset({ spreadRadius: 1, color: ofRGBA(16, 22, 26, 51) }),
-      Shadow.inset({ offsetY: -1, color: ofRGBA(16, 22, 26, 25) })
-    ),
-    textColor: ofRGB(0x18, 0x20, 0x26),
-    background: Background.rgb(0xf5, 0xf8, 0xfa),
-    border: Border.none,
-    borderRadius: Radius.all(Length.px(3))
-  }
-}
-
-const material: Theme<State> = {
-  button: {}
-}
 
 const controls = (theme?: Theme<State>) => [
   block<State, Action>(
@@ -88,12 +67,12 @@ const controls = (theme?: Theme<State>) => [
     },
     button({
       theme,
-      label: '+',
+      label: 'add',
       onPress: (s: State) => ({ kind: 'ChangePadding', value: s.padding + 1 })
     }),
     button({
       theme,
-      label: '-',
+      label: 'remove',
       onPress: (s: State) => ({
         kind: 'ChangePadding',
         value: s.padding - 1
@@ -141,7 +120,7 @@ const template = container<State, Action>(
       spacing: 10,
       background: Background.rgb(245, 245, 245)
     },
-    ...controls(bp)
+    ...controls(blueprint)
   ),
   container(
     {

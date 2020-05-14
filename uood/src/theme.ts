@@ -12,6 +12,13 @@ import {
 import { Attribute } from 'tempo-dom/lib/value'
 import { Color } from 'tempo-colors/lib/color'
 
+export interface SubStyle<State> {
+  border?: Attribute<State, Border>
+  background?: Attribute<State, Background>
+  textColor?: Attribute<State, Color>
+  shadow?: Attribute<State, Shadow>
+}
+
 export interface Theme<State> {
   button?: {
     padding?: Attribute<State, Padding>
@@ -26,5 +33,9 @@ export interface Theme<State> {
     shadow?: Attribute<State, Shadow>
     textAlign?: Attribute<State, TextAlign>
     transition?: Attribute<State, Transition>
+    focusedStyle?: SubStyle<State>
+    hoverStyle?: SubStyle<State>
+    activeStyle?: SubStyle<State>
+    disabledStyle?: SubStyle<State>
   }
 }

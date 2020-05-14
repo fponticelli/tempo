@@ -6,7 +6,88 @@ import { ofRGBA } from 'tempo-colors/lib/rgba'
 
 export type Orientation = 'row' | 'col'
 
-export type Background = { kind: 'BackgroundColor'; color: Color }
+export type GradientAngle =
+  | { kind: 'GradientAngleTop' }
+  | { kind: 'GradientAngleTopLeft' }
+  | { kind: 'GradientAngleTopRight' }
+  | { kind: 'GradientAngleBottom' }
+  | { kind: 'GradientAngleBottomLeft' }
+  | { kind: 'GradientAngleBottomRight' }
+  | { kind: 'GradientAngleLeft' }
+  | { kind: 'GradientAngleRight' }
+  | { kind: 'GradientAngleDegrees'; value: number }
+
+export const GradientAngle = {
+  top: { kind: 'GradientAngleTop' } as GradientAngle,
+  topLeft: { kind: 'GradientAngleTopLeft' } as GradientAngle,
+  topRight: { kind: 'GradientAngleTopRight' } as GradientAngle,
+  bottom: { kind: 'GradientAngleBottom' } as GradientAngle,
+  bottomLeft: { kind: 'GradientAngleBottomLeft' } as GradientAngle,
+  bottomRight: { kind: 'GradientAngleBottomRight' } as GradientAngle,
+  left: { kind: 'GradientAngleLeft' } as GradientAngle,
+  right: { kind: 'GradientAngleRight' } as GradientAngle,
+  degrees: (value: number): GradientAngle => ({
+    kind: 'GradientAngleDegrees',
+    value
+  })
+}
+
+export type ColorStop = {
+  kind: 'ColorStop'
+  color: Color
+  length?: Length | [Length, Length]
+}
+
+export const ColorStop = {
+  color: (color: Color, length?: Length | [Length, Length]): ColorStop => ({
+    kind: 'ColorStop',
+    color,
+    length
+  }),
+  hsl: (
+    h: number,
+    s: number,
+    l: number,
+    length?: Length | [Length, Length]
+  ): ColorStop => ColorStop.color(ofHSL(h, s, l), length),
+  hsla: (
+    h: number,
+    s: number,
+    l: number,
+    a: number,
+    length?: Length | [Length, Length]
+  ): ColorStop => ColorStop.color(ofHSLA(h, s, l, a), length),
+  rgb: (
+    r: number,
+    g: number,
+    b: number,
+    length?: Length | [Length, Length]
+  ): ColorStop => ColorStop.color(ofRGB(r, g, b), length),
+  rgba: (
+    r: number,
+    g: number,
+    b: number,
+    a: number,
+    length?: Length | [Length, Length]
+  ): ColorStop => ColorStop.color(ofRGBA(r, g, b, a), length)
+}
+
+export type Background =
+  | { kind: 'BackgroundColor'; color: Color }
+  | {
+      kind: 'BackgroundLinearGradient'
+      angle?: GradientAngle
+      stops: (ColorStop | Color)[]
+    }
+  | {
+      kind: 'BackgroundRepeatingLinearGradient'
+      angle?: GradientAngle
+      stops: (ColorStop | Color)[]
+    }
+  | {
+      kind: 'BackgroundMulti'
+      backgrounds: Background[]
+    }
 export const Background = {
   color: (color: Color): Background => ({ kind: 'BackgroundColor', color }),
   hsl: (h: number, s: number, l: number): Background =>
@@ -16,7 +97,27 @@ export const Background = {
   rgb: (r: number, g: number, b: number): Background =>
     Background.color(ofRGB(r, g, b)),
   rgba: (r: number, g: number, b: number, a: number): Background =>
-    Background.color(ofRGBA(r, g, b, a))
+    Background.color(ofRGBA(r, g, b, a)),
+  linearGradient: (
+    stops: (ColorStop | Color)[],
+    angle?: GradientAngle
+  ): Background => ({
+    kind: 'BackgroundLinearGradient',
+    stops,
+    angle
+  }),
+  repeatingLinearGradient: (
+    stops: (ColorStop | Color)[],
+    angle?: GradientAngle
+  ): Background => ({
+    kind: 'BackgroundRepeatingLinearGradient',
+    stops,
+    angle
+  }),
+  multi: (...backgrounds: Background[]): Background => ({
+    kind: 'BackgroundMulti',
+    backgrounds
+  })
 }
 
 export type Padding =
@@ -319,6 +420,9 @@ export const Distribution = {
   spaceEvenly: 'space-evenly'
 }
 
+export interface NoShadow {
+  kind: 'NoShadow'
+}
 export interface DropShadow {
   kind: 'DropShadow'
   offsetX: number
@@ -338,11 +442,13 @@ export interface InsetShadow {
 }
 
 export type Shadow =
+  | NoShadow
   | DropShadow
   | InsetShadow
   | { kind: 'MultiShadow'; shadows: (DropShadow | InsetShadow)[] }
 
 export const Shadow = {
+  none: { kind: 'NoShadow' } as Shadow,
   drop: ({
     offsetX,
     offsetY,
