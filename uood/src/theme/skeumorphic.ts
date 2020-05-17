@@ -98,26 +98,27 @@ export function make<State>(options: ThemeOptions<State> = {}): Theme<State> {
       disabledStyle: {
         textColor: ofRGBA(0, 0, 0, 255 * 0.2),
         background: Background.rgba(0, 0, 0, 255 * 0.05),
-        shadow: Shadow.multi(
-          Shadow.inset({
-            x: 8,
-            y: 8,
-            blur: 12,
-            color: ofRGBA(55, 84, 170, 255 * 0.1)
-          }),
-          Shadow.inset({
-            x: -8,
-            y: -8,
-            blur: 12,
-            color: ofRGBA(255, 255, 255, 255 * 0.2)
-          }),
-          Shadow.drop({
-            x: 0,
-            y: 0,
-            blur: 4,
-            color: ofRGBA(255, 255, 255, 255 * 0.2)
-          })
-        )
+        shadow: Shadow.multi(...pressedShadows)
+        //   Shadow.multi(
+        //   Shadow.inset({
+        //     x: 8,
+        //     y: 8,
+        //     blur: 12,
+        //     color: ofRGBA(55, 84, 170, 255 * 0.1)
+        //   }),
+        //   Shadow.inset({
+        //     x: -8,
+        //     y: -8,
+        //     blur: 12,
+        //     color: ofRGBA(255, 255, 255, 255 * 0.2)
+        //   }),
+        //   Shadow.drop({
+        //     x: 0,
+        //     y: 0,
+        //     blur: 4,
+        //     color: ofRGBA(255, 255, 255, 255 * 0.2)
+        //   })
+        // )
       },
       activeStyle: {
         shadow: Shadow.multi(...pressedShadows)

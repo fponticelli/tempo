@@ -79,6 +79,7 @@ export function button<State, Action, Query = unknown, T = unknown>(attrs: {
       elementName: 'button',
       cursor: Cursor.pointer,
       disabled: attrs.disabled,
+      userSelect: 'none',
       textTransform: button?.textTransform ?? dButton?.textTransform,
       fontFamily: button?.fontFamily ?? dButton?.fontFamily,
       fontWeight: button?.fontWeight ?? dButton?.fontWeight,

@@ -578,6 +578,15 @@ export type TextAlign = 'start' | 'center' | 'end' | 'justify'
 
 export type TextTransform = 'capitalize' | 'uppercase' | 'lowercase' | 'none'
 
+export type UserSelect = 'auto' | 'text' | 'all' | 'none'
+
+export const UserSelect = {
+  auto: 'auto',
+  text: 'text',
+  all: 'all',
+  none: 'none'
+}
+
 // TODO
 // - [ ] overflowHorizontal
 // - [ ] overflowVertical

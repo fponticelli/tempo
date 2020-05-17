@@ -44,7 +44,8 @@ import {
   FontStyle,
   GradientAngle,
   ColorStop,
-  TextTransform
+  TextTransform,
+  UserSelect
 } from './ui_attributes'
 import { matchKind } from 'tempo-std/lib/match'
 import { toCSS3, Color } from 'tempo-colors/lib/color'
@@ -115,6 +116,7 @@ export interface ElControlProperties<State> {
   placeholder?: Attribute<State, string>
   disabled?: Attribute<State, boolean>
   value?: Attribute<State, string>
+  userSelect?: Attribute<State, UserSelect>
 }
 
 export interface ElLifecycleProperties<State, Action, Query, TScope> {
@@ -848,6 +850,11 @@ export function control<State, Action, Query = unknown, TScope = unknown>(
               applyTextProps('PL', '::placeholder', x, properties, styles)
             })
           )(state)
+        }
+
+        if (typeof v.userSelect !== 'undefined') {
+          properties.push(features.userSelect('', ''))
+          styles[`us`] = v.userSelect
         }
 
         properties.forEach(prop => includeStyle(doc, prop.cls, prop.desc))

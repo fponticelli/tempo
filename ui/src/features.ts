@@ -92,6 +92,15 @@ export const features = {
       }
     ]
   }),
+  userSelect: (prefix: string, pseudo: string): ClassDescription => ({
+    cls: `${prefix}us`,
+    desc: [
+      {
+        selector: `.${prefix}us${pseudo}`,
+        rules: [`user-select: var(--${prefix}us)`]
+      }
+    ]
+  }),
   fontFamily: (prefix: string, pseudo: string): ClassDescription => ({
     cls: `${prefix}ff`,
     desc: [
