@@ -43,7 +43,8 @@ import {
   TransitionTarget,
   FontStyle,
   GradientAngle,
-  ColorStop
+  ColorStop,
+  TextTransform
 } from './ui_attributes'
 import { matchKind } from 'tempo-std/lib/match'
 import { toCSS3, Color } from 'tempo-colors/lib/color'
@@ -72,6 +73,8 @@ export interface ElBlockProperties<State> {
 }
 
 export interface ElTextProperties<State> {
+  textTransform?: Attribute<State, TextTransform>
+  fontFamily?: Attribute<State, string>
   fontStyle?: Attribute<State, FontStyle>
   fontSize?: Attribute<State, number>
   textColor?: Attribute<State, Color>
@@ -272,23 +275,23 @@ function oneTransitionToString(t: OneTransition) {
 
 function shadowToString(s: Shadow): string {
   return matchKind(s, {
-    DropShadow: ({ offsetX, offsetY, blurRadius, spreadRadius, color }) =>
+    DropShadow: ({ x, y, blur, spread, color }) =>
       [
-        `${offsetX}px`,
-        `${offsetY}px`,
-        (blurRadius && `${blurRadius}px`) ?? (spreadRadius && '0'),
-        spreadRadius && `${spreadRadius}px`,
+        `${x}px`,
+        `${y}px`,
+        (blur && `${blur}px`) ?? (spread && '0'),
+        spread && `${spread}px`,
         color && toCSS3(color)
       ]
         .filter(f => typeof f !== 'undefined')
         .join(' '),
-    InsetShadow: ({ offsetX, offsetY, blurRadius, spreadRadius, color }) =>
+    InsetShadow: ({ x, y, blur, spread, color }) =>
       [
         'inset',
-        `${offsetX}px`,
-        `${offsetY}px`,
-        (blurRadius && `${blurRadius}px`) ?? (spreadRadius && '0'),
-        spreadRadius && `${spreadRadius}px`,
+        `${x}px`,
+        `${y}px`,
+        (blur && `${blur}px`) ?? (spread && '0'),
+        spread && `${spread}px`,
         color && toCSS3(color)
       ]
         .filter(f => typeof f !== 'undefined')
@@ -300,13 +303,8 @@ function shadowToString(s: Shadow): string {
 
 function textShadowToString(s: TextShadow): string {
   return matchKind(s, {
-    OneTextShadow: ({ offsetX, offsetY, blurRadius, color }) =>
-      [
-        `${offsetX}px`,
-        `${offsetY}px`,
-        blurRadius ?? `${blurRadius}px`,
-        color && toCSS3(color)
-      ]
+    OneTextShadow: ({ x, y, blur, color }) =>
+      [`${x}px`, `${y}px`, blur ?? `${blur}px`, color && toCSS3(color)]
         .filter(f => typeof f !== 'undefined')
         .join(' '),
     MultiTextShadow: ({ shadows }) => shadows.map(textShadowToString).join(', ')
@@ -361,6 +359,7 @@ function linearGradientArg({
 
 function backgroundToString(background: Background): string {
   return matchKind(background, {
+    BackgroundNone: () => 'none',
     BackgroundColor: bg => toCSS3(bg.color),
     BackgroundLinearGradient: bg => `linear-gradient(${linearGradientArg(bg)})`,
     BackgroundRepeatingLinearGradient: bg =>
@@ -481,12 +480,18 @@ function applyControlProps<State>(
   if (typeof v.disabledStyle !== 'undefined') {
     resolveAttribute(
       mapAttributes(v.disabledStyle, x => {
-        applyBlockProps(`${prefix}D`, '[disabled]', x, properties, styles)
-        applyTextBlockProps(`${prefix}D`, '[disabled]', x, properties, styles)
-        applyTextProps(`${prefix}D`, '[disabled]', x, properties, styles)
+        applyBlockProps(`${prefix}D`, ':disabled[class]', x, properties, styles)
+        applyTextBlockProps(
+          `${prefix}D`,
+          ':disabled[class]',
+          x,
+          properties,
+          styles
+        )
+        applyTextProps(`${prefix}D`, ':disabled[class]', x, properties, styles)
         applyMouseProps(
           `${prefix}D`,
-          '[disabled]',
+          ':disabled[class]',
           state,
           x,
           properties,
@@ -542,6 +547,16 @@ function applyTextProps<State>(
   if (typeof v.textShadow !== 'undefined') {
     properties.push(features.textShadow(prefix, pseudo))
     styles[`${prefix}ts`] = textShadowToString(v.textShadow)
+  }
+
+  if (typeof v.textTransform !== 'undefined') {
+    properties.push(features.textTransform(prefix, pseudo))
+    styles[`${prefix}tt`] = v.textTransform
+  }
+
+  if (typeof v.fontFamily !== 'undefined') {
+    properties.push(features.fontFamily(prefix, pseudo))
+    styles[`${prefix}ff`] = v.fontFamily
   }
 
   if (typeof v.fontStyle !== 'undefined') {

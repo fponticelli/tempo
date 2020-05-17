@@ -3,6 +3,7 @@ import { ofHSL } from 'tempo-colors/lib/hsl'
 import { ofRGB } from 'tempo-colors/lib/rgb'
 import { ofHSLA } from 'tempo-colors/lib/hsla'
 import { ofRGBA } from 'tempo-colors/lib/rgba'
+import { matchKind } from 'tempo-std/lib/match'
 
 export type Orientation = 'row' | 'col'
 
@@ -88,13 +89,17 @@ export type Background =
       kind: 'BackgroundMulti'
       backgrounds: Background[]
     }
+  | {
+      kind: 'BackgroundNone'
+    }
 export const Background = {
+  none: { kind: 'BackgroundNone' } as Background,
   color: (color: Color): Background => ({ kind: 'BackgroundColor', color }),
   hsl: (h: number, s: number, l: number): Background =>
     Background.color(ofHSL(h, s, l)),
   hsla: (h: number, s: number, l: number, a: number): Background =>
     Background.color(ofHSLA(h, s, l, a)),
-  rgb: (r: number, g: number, b: number): Background =>
+  rgb: (r: number, g: number = r, b: number = r): Background =>
     Background.color(ofRGB(r, g, b)),
   rgba: (r: number, g: number, b: number, a: number): Background =>
     Background.color(ofRGBA(r, g, b, a)),
@@ -425,19 +430,19 @@ export interface NoShadow {
 }
 export interface DropShadow {
   kind: 'DropShadow'
-  offsetX: number
-  offsetY: number
-  blurRadius?: number
-  spreadRadius?: number
+  x: number
+  y: number
+  blur?: number
+  spread?: number
   color: Color
 }
 
 export interface InsetShadow {
   kind: 'InsetShadow'
-  offsetX: number
-  offsetY: number
-  blurRadius?: number
-  spreadRadius?: number
+  x: number
+  y: number
+  blur?: number
+  spread?: number
   color: Color
 }
 
@@ -449,57 +454,64 @@ export type Shadow =
 
 export const Shadow = {
   none: { kind: 'NoShadow' } as Shadow,
+  swap: (shadows: (InsetShadow | DropShadow)[]): (DropShadow | InsetShadow)[] =>
+    shadows.map(s =>
+      matchKind(s, {
+        DropShadow: s => Shadow.inset({ ...s }),
+        InsetShadow: s => Shadow.drop({ ...s })
+      })
+    ),
   drop: ({
-    offsetX,
-    offsetY,
-    blurRadius,
-    spreadRadius,
+    x,
+    y,
+    blur,
+    spread,
     color
   }: {
-    offsetX?: number
-    offsetY?: number
-    blurRadius?: number
-    spreadRadius?: number
+    x?: number
+    y?: number
+    blur?: number
+    spread?: number
     color: Color
   }): DropShadow => ({
     kind: 'DropShadow',
-    offsetX: offsetX ?? 0,
-    offsetY: offsetY ?? 0,
-    blurRadius,
-    spreadRadius,
+    x: x ?? 0,
+    y: y ?? 0,
+    blur,
+    spread,
     color
   }),
   inset: ({
-    offsetX,
-    offsetY,
-    blurRadius,
-    spreadRadius,
+    x,
+    y,
+    blur,
+    spread,
     color
   }: {
-    offsetX?: number
-    offsetY?: number
-    blurRadius?: number
-    spreadRadius?: number
+    x?: number
+    y?: number
+    blur?: number
+    spread?: number
     color: Color
   }): InsetShadow => ({
     kind: 'InsetShadow',
-    offsetX: offsetX ?? 0,
-    offsetY: offsetY ?? 0,
-    blurRadius,
-    spreadRadius,
+    x: x ?? 0,
+    y: y ?? 0,
+    blur,
+    spread,
     color
   }),
-  multi: (...shadows: (DropShadow | InsetShadow)[]): Shadow => ({
+  multi: (...x: (DropShadow | InsetShadow)[]): Shadow => ({
     kind: 'MultiShadow',
-    shadows
+    shadows: x
   })
 }
 
 export interface OneTextShadow {
   kind: 'OneTextShadow'
-  offsetX: number
-  offsetY: number
-  blurRadius?: number
+  x: number
+  y: number
+  blur?: number
   color: Color
 }
 
@@ -509,20 +521,20 @@ export type TextShadow =
 
 export const TextShadow = {
   drop: ({
-    offsetX,
-    offsetY,
-    blurRadius,
+    x,
+    y,
+    blur,
     color
   }: {
-    offsetX?: number
-    offsetY?: number
-    blurRadius?: number
+    x?: number
+    y?: number
+    blur?: number
     color: Color
   }): TextShadow => ({
     kind: 'OneTextShadow',
-    offsetX: offsetX ?? 0,
-    offsetY: offsetY ?? 0,
-    blurRadius,
+    x: x ?? 0,
+    y: y ?? 0,
+    blur,
     color
   }),
   multi: (...shadows: OneTextShadow[]): TextShadow => ({
@@ -564,6 +576,8 @@ export const FontWeight = {
 
 export type TextAlign = 'start' | 'center' | 'end' | 'justify'
 
+export type TextTransform = 'capitalize' | 'uppercase' | 'lowercase' | 'none'
+
 // TODO
 // - [ ] overflowHorizontal
 // - [ ] overflowVertical
@@ -574,6 +588,5 @@ export type TextAlign = 'start' | 'center' | 'end' | 'justify'
 // - [ ] whiteSpace
 // - [ ] textOverflow
 // - [ ] textDecoration
-// - [ ] textTransform
 // - [ ] wordBreak
 // - [ ] writingMode

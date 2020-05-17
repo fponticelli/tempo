@@ -12,7 +12,7 @@ limitations under the License.
 */
 
 import { Attribute } from 'tempo-dom/lib/value'
-import { control } from 'tempo-ui/lib/ui'
+import { control, inline } from 'tempo-ui/lib/ui'
 import { Cursor } from 'tempo-ui/lib/ui_attributes'
 import { Theme, SubStyle } from './theme'
 import { theme as dTheme } from './theme/default'
@@ -43,13 +43,14 @@ export const Variant = {
 
 function subStyle<State>(
   t1: SubStyle<State> | undefined,
-  t2: SubStyle<State> | undefined
+  t2: SubStyle<State> | undefined,
+  t3: SubStyle<State> | undefined
 ): SubStyle<State> {
   return {
-    background: t1?.background ?? t2?.background,
-    border: t1?.border ?? t2?.border,
-    shadow: t1?.shadow ?? t2?.shadow,
-    textColor: t1?.textColor ?? t2?.textColor
+    background: t1?.background ?? t2?.background ?? t3?.background,
+    border: t1?.border ?? t2?.border ?? t3?.border,
+    shadow: t1?.shadow ?? t2?.shadow ?? t3?.shadow,
+    textColor: t1?.textColor ?? t2?.textColor ?? t3?.textColor
   }
 }
 
@@ -78,6 +79,9 @@ export function button<State, Action, Query = unknown, T = unknown>(attrs: {
       elementName: 'button',
       cursor: Cursor.pointer,
       disabled: attrs.disabled,
+      textTransform: button?.textTransform ?? dButton?.textTransform,
+      fontFamily: button?.fontFamily ?? dButton?.fontFamily,
+      fontWeight: button?.fontWeight ?? dButton?.fontWeight,
       padding: button?.padding ?? dButton?.padding,
       width: button?.width ?? dButton?.width,
       height: button?.height ?? dButton?.height,
@@ -89,12 +93,12 @@ export function button<State, Action, Query = unknown, T = unknown>(attrs: {
       textAlign: button?.textAlign ?? dButton?.textAlign,
       shadow: button?.shadow ?? dButton?.shadow,
       transition: button?.transition ?? dButton?.transition,
-      focusedStyle: subStyle(focusedStyle, dFocusedStyle),
-      hoverStyle: subStyle(hoverStyle, dHoverStyle),
-      activeStyle: subStyle(activeStyle, dActiveStyle),
+      focusedStyle: subStyle(focusedStyle, button, dFocusedStyle),
+      hoverStyle: subStyle(hoverStyle, button, dHoverStyle),
+      activeStyle: subStyle(activeStyle, button, dActiveStyle),
       disabledStyle: {
         cursor: 'auto',
-        ...subStyle(disabledStyle, dDisabledStyle)
+        ...subStyle(disabledStyle, button, dDisabledStyle)
       },
       events: {
         click:
@@ -105,6 +109,11 @@ export function button<State, Action, Query = unknown, T = unknown>(attrs: {
       }
       // variant
     },
-    attrs.label
+    inline(
+      {
+        elementName: 'span'
+      },
+      attrs.label
+    )
   )
 }

@@ -5,7 +5,9 @@ import {
   Border,
   Radius,
   Length,
-  Transition
+  Transition,
+  Padding,
+  Size
 } from 'tempo-ui/lib/ui_attributes'
 import { ofRGBA } from 'tempo-colors/lib/rgba'
 import { ofRGB } from 'tempo-colors/lib/rgb'
@@ -15,26 +17,31 @@ export interface ThemeOptions<State> {}
 export function make<State>(options: ThemeOptions<State> = {}): Theme<State> {
   return {
     button: {
+      fontFamily: 'Roboto, sans-serif',
+      textTransform: 'uppercase',
+      padding: Padding.each(0, 16), // padding - border
+      width: Size.min(64),
+      height: Size.min(36),
       shadow: Shadow.multi(
         Shadow.drop({
-          offsetX: 0,
-          offsetY: 3,
-          blurRadius: 1,
-          spreadRadius: -2,
+          x: 0,
+          y: 3,
+          blur: 1,
+          spread: -2,
           color: ofRGBA(0, 0, 0, 51)
         }),
         Shadow.drop({
-          offsetX: 0,
-          offsetY: 2,
-          blurRadius: 2,
-          spreadRadius: 0,
+          x: 0,
+          y: 2,
+          blur: 2,
+          spread: 0,
           color: ofRGBA(0, 0, 0, 36)
         }),
         Shadow.drop({
-          offsetX: 0,
-          offsetY: 1,
-          blurRadius: 5,
-          spreadRadius: 0,
+          x: 0,
+          y: 1,
+          blur: 5,
+          spread: 0,
           color: ofRGBA(0, 0, 0, 31)
         })
       ),
@@ -48,96 +55,96 @@ export function make<State>(options: ThemeOptions<State> = {}): Theme<State> {
         textColor: ofRGB(255, 255, 255),
         shadow: Shadow.multi(
           Shadow.drop({
-            offsetX: 0,
-            offsetY: 2,
-            blurRadius: 4,
-            spreadRadius: -1,
+            x: 0,
+            y: 2,
+            blur: 4,
+            spread: -1,
             color: ofRGBA(0, 0, 0, 51)
           }),
           Shadow.drop({
-            offsetX: 0,
-            offsetY: 4,
-            blurRadius: 5,
-            spreadRadius: 0,
+            x: 0,
+            y: 4,
+            blur: 5,
+            spread: 0,
             color: ofRGBA(0, 0, 0, 36)
           }),
           Shadow.drop({
-            offsetX: 0,
-            offsetY: 1,
-            blurRadius: 10,
-            spreadRadius: 0,
+            x: 0,
+            y: 1,
+            blur: 10,
+            spread: 0,
             color: ofRGBA(0, 0, 0, 31)
           })
         )
       },
       activeStyle: {
-        textColor: ofRGB(255, 255, 255),
+        textColor: ofRGBA(0, 0, 0, 94),
         border: Border.none,
         background: Background.rgb(0x94, 0x52, 0xf3),
         shadow: Shadow.multi(
           Shadow.drop({
-            offsetX: 0,
-            offsetY: 5,
-            blurRadius: 5,
-            spreadRadius: -3,
+            x: 0,
+            y: 5,
+            blur: 5,
+            spread: -3,
             color: ofRGBA(0, 0, 0, 51)
           }),
           Shadow.drop({
-            offsetX: 0,
-            offsetY: 8,
-            blurRadius: 10,
-            spreadRadius: 1,
+            x: 0,
+            y: 8,
+            blur: 10,
+            spread: 1,
             color: ofRGBA(0, 0, 0, 36)
           }),
           Shadow.drop({
-            offsetX: 0,
-            offsetY: 3,
-            blurRadius: 14,
-            spreadRadius: 2,
+            x: 0,
+            y: 3,
+            blur: 14,
+            spread: 2,
             color: ofRGBA(0, 0, 0, 31)
           })
         )
       },
       disabledStyle: {
-        background: Background.rgba(206, 217, 224, 112),
-        textColor: ofRGBA(92, 112, 128, 153),
+        background: Background.rgba(0, 0, 0, 31),
+        textColor: ofRGBA(0, 0, 0, 94),
         shadow: Shadow.none
       },
       focusedStyle: {
         shadow: Shadow.multi(
           Shadow.drop({
-            offsetX: 0,
-            offsetY: 0,
-            blurRadius: 0,
-            spreadRadius: 1,
+            x: 0,
+            y: 0,
+            blur: 0,
+            spread: 1,
             color: ofRGBA(255, 255, 255, 204)
           }),
           Shadow.drop({
-            offsetX: 0,
-            offsetY: 0,
-            blurRadius: 0,
-            spreadRadius: 4,
+            x: 0,
+            y: 0,
+            blur: 0,
+            spread: 4,
             color: ofRGBA(50, 50, 255, 51)
           }),
           Shadow.drop({
-            offsetX: 0,
-            offsetY: 3,
-            blurRadius: 1,
-            spreadRadius: -2,
+            x: 0,
+            y: 3,
+            blur: 1,
+            spread: -2,
             color: ofRGBA(0, 0, 0, 51)
           }),
           Shadow.drop({
-            offsetX: 0,
-            offsetY: 2,
-            blurRadius: 2,
-            spreadRadius: 0,
+            x: 0,
+            y: 2,
+            blur: 2,
+            spread: 0,
             color: ofRGBA(0, 0, 0, 36)
           }),
           Shadow.drop({
-            offsetX: 0,
-            offsetY: 1,
-            blurRadius: 5,
-            spreadRadius: 0,
+            x: 0,
+            y: 1,
+            blur: 5,
+            spread: 0,
             color: ofRGBA(0, 0, 0, 31)
           })
         )

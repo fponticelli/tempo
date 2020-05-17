@@ -18,7 +18,7 @@ export interface ThemeOptions<State> {}
 export function make<State>(options: ThemeOptions<State> = {}): Theme<State> {
   return {
     button: {
-      padding: Padding.each(9 - 2, 16), // padding - border
+      padding: Padding.each(0, 16), // padding - border
       width: Size.min(32 * 2.25),
       height: Size.min(32),
       borderRadius: Radius.all(Length.px(16)),
@@ -36,8 +36,8 @@ export function make<State>(options: ThemeOptions<State> = {}): Theme<State> {
       focusedStyle: {
         shadow: Shadow.drop({
           color: ofHSLA(0, 0, 0.2, 0.125),
-          spreadRadius: 4,
-          blurRadius: 2
+          spread: 4,
+          blur: 2
         })
       },
       hoverStyle: {

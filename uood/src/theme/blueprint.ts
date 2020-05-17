@@ -7,7 +7,9 @@ import {
   Length,
   GradientAngle,
   ColorStop,
-  Transition
+  Transition,
+  Padding,
+  Size
 } from 'tempo-ui/lib/ui_attributes'
 import { ofRGBA } from 'tempo-colors/lib/rgba'
 import { ofRGB } from 'tempo-colors/lib/rgb'
@@ -17,9 +19,14 @@ export interface ThemeOptions<State> {}
 export function make<State>(options: ThemeOptions<State> = {}): Theme<State> {
   return {
     button: {
+      fontFamily:
+        '-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Open Sans,Helvetica Neue,Icons16,sans-serif',
+      padding: Padding.each(0, 15),
+      width: Size.min(30),
+      height: Size.min(30),
       shadow: Shadow.multi(
-        Shadow.inset({ spreadRadius: 1, color: ofRGBA(16, 22, 26, 51) }),
-        Shadow.inset({ offsetY: -1, color: ofRGBA(16, 22, 26, 25) })
+        Shadow.inset({ spread: 1, color: ofRGBA(16, 22, 26, 51) }),
+        Shadow.inset({ y: -1, color: ofRGBA(16, 22, 26, 25) })
       ),
       textColor: ofRGB(0x18, 0x20, 0x26),
       background: Background.multi(
@@ -47,11 +54,11 @@ export function make<State>(options: ThemeOptions<State> = {}): Theme<State> {
         border: Border.none,
         background: Background.rgb(0xd8, 0xe1, 0xe8),
         shadow: Shadow.multi(
-          Shadow.inset({ spreadRadius: 1, color: ofRGBA(16, 22, 26, 51) }),
+          Shadow.inset({ spread: 1, color: ofRGBA(16, 22, 26, 51) }),
           Shadow.inset({
-            offsetX: 0,
-            offsetY: 1,
-            blurRadius: 2,
+            x: 0,
+            y: 1,
+            blur: 2,
             color: ofRGBA(16, 22, 26, 51)
           })
         ),
@@ -64,20 +71,20 @@ export function make<State>(options: ThemeOptions<State> = {}): Theme<State> {
       },
       focusedStyle: {
         shadow: Shadow.multi(
-          Shadow.inset({ spreadRadius: 1, color: ofRGBA(16, 22, 26, 51) }),
-          Shadow.inset({ offsetY: -1, color: ofRGBA(16, 22, 26, 25) }),
+          Shadow.inset({ spread: 1, color: ofRGBA(16, 22, 26, 51) }),
+          Shadow.inset({ y: -1, color: ofRGBA(16, 22, 26, 25) }),
           Shadow.drop({
-            offsetX: 0,
-            offsetY: 0,
-            blurRadius: 0,
-            spreadRadius: 3,
+            x: 0,
+            y: 0,
+            blur: 0,
+            spread: 3,
             color: ofRGBA(255, 255, 255, 179)
           }),
           Shadow.drop({
-            offsetX: 0,
-            offsetY: 0,
-            blurRadius: 0,
-            spreadRadius: 4,
+            x: 0,
+            y: 0,
+            blur: 0,
+            spread: 4,
             color: ofRGBA(50, 50, 255, 51)
           })
         )

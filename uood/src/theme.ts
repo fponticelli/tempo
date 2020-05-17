@@ -7,7 +7,9 @@ import {
   Border,
   Cursor,
   Transition,
-  Shadow
+  Shadow,
+  TextTransform,
+  FontWeight
 } from 'tempo-ui/lib/ui_attributes'
 import { Attribute } from 'tempo-dom/lib/value'
 import { Color } from 'tempo-colors/lib/color'
@@ -21,6 +23,9 @@ export interface SubStyle<State> {
 
 export interface Theme<State> {
   button?: {
+    fontFamily?: Attribute<State, string>
+    fontWeight?: Attribute<State, FontWeight>
+    textTransform?: Attribute<State, TextTransform>
     padding?: Attribute<State, Padding>
     width?: Attribute<State, Size>
     height?: Attribute<State, Size>

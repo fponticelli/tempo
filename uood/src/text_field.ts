@@ -81,8 +81,8 @@ export function textField<State, Action, Query = unknown, T = unknown>(attrs: {
     focusedStyle: {
       shadow: Shadow.drop({
         color: ofHSLA(0, 0, 0.2, 0.125),
-        spreadRadius: 4,
-        blurRadius: 2
+        spread: 4,
+        blur: 2
       }),
       border: Border.all(1, ofRGB(20, 115, 230))
     },

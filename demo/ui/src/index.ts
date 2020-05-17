@@ -18,15 +18,12 @@ import { textField } from 'uood/lib/text_field'
 import { container, block } from 'tempo-ui/lib/ui'
 import { resetStyles } from 'tempo-ui/lib/reset'
 import { Store } from 'tempo-store/lib/store'
-import {
-  Background,
-  Padding,
-  Transition,
-  Size
-} from 'tempo-ui/lib/ui_attributes'
+import { Background, Padding, Size } from 'tempo-ui/lib/ui_attributes'
 import { Theme } from 'uood/lib/theme'
 import { theme as blueprint } from 'uood/lib/theme/blueprint'
 import { theme as material } from 'uood/lib/theme/material'
+import { theme as neumorphic } from 'uood/lib/theme/neumorphic'
+import { theme as skeumorphic } from 'uood/lib/theme/skeumorphic'
 
 type Action = {
   kind: 'ChangePadding'
@@ -90,22 +87,6 @@ const template = container<State, Action>(
   },
   container(
     {
-      padding: p => Padding.each(p.padding, 20),
-      background: Background.hsl(-10, 0.9, 0.95),
-      transition: Transition.make('background', '2s'),
-      hoverStyle: {
-        background: Background.hsl(20, 0.9, 0.6)
-      },
-      activeStyle: {
-        transition: Transition.make('background', '0.5s'),
-        background: Background.hsl(30, 0.3, 0.9)
-      },
-      width: Size.fixed(50)
-    },
-    'A'
-  ),
-  container(
-    {
       orientation: 'col',
       padding: Padding.all(10),
       spacing: 10,
@@ -133,22 +114,25 @@ const template = container<State, Action>(
   ),
   container(
     {
-      width: Size.fill(),
-      transition: Transition.multi(
-        Transition.make('padding', '1s'),
-        Transition.make('background', '0.5s')
-      ),
-      background: Background.hsl(120, 0.8, 0.8),
-      padding: Padding.each(0),
-      hoverStyle: {
-        padding: p => Padding.each(p.padding)
-      },
-      activeStyle: {
-        padding: p => Padding.each(p.padding * 2),
-        background: p => Background.hsl(120 + p.padding, 0.8, 0.8)
-      }
+      orientation: 'col',
+      padding: Padding.all(10),
+      spacing: 10,
+      // #E4EBF5
+      background: Background.rgb(0xe4, 0xeb, 0xf5)
+      // background: Background.rgb(0xeb, 0xec, 0xf0)
     },
-    'C'
+    ...controls(neumorphic)
+  ),
+  container(
+    {
+      orientation: 'col',
+      padding: Padding.all(10),
+      spacing: 10,
+      // #E4EBF5
+      background: Background.rgb(0xf2)
+      // background: Background.rgb(0xeb, 0xec, 0xf0)
+    },
+    ...controls(skeumorphic)
   )
 )
 
