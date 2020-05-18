@@ -184,17 +184,21 @@ function borderOneToString(width: number, style: BorderStyle, color: Color) {
   return `${width}px ${style} ${toCSS3(color)}`
 }
 
-function borderToString(b: Border): string {
+function borderToString(
+  side: 'top' | 'right' | 'bottom' | 'left',
+  b: Border
+): string {
   return matchKind(b, {
     BorderNone: () => 'none',
     BorderAll: b => borderOneToString(b.all.width, b.all.style, b.all.color),
-    BorderEach: b =>
-      [
-        borderOneToString(b.top.width, b.top.style, b.top.color),
-        borderOneToString(b.right.width, b.right.style, b.right.color),
-        borderOneToString(b.bottom.width, b.bottom.style, b.bottom.color),
-        borderOneToString(b.left.width, b.left.style, b.left.color)
-      ].join(', ')
+    BorderEach: b => {
+      const bs = b[side]
+      if (bs.kind === 'BorderNone') {
+        return 'none'
+      } else {
+        return borderOneToString(bs.width, bs.style, bs.color)
+      }
+    }
   })
 }
 
@@ -212,6 +216,7 @@ function cursorToString(cursor: Cursor): string {
 
 function borderRadiusToString(b: BorderRadius): string {
   return matchKind(b, {
+    BorderRadiusNone: _ => 'none',
     BorderRadiusAll: b => {
       const v = [lengthToString(b.all.first)]
       if (typeof b.all.second !== 'undefined')
@@ -279,8 +284,8 @@ function shadowToString(s: Shadow): string {
   return matchKind(s, {
     DropShadow: ({ x, y, blur, spread, color }) =>
       [
-        `${x}px`,
-        `${y}px`,
+        (x && `${x}px`) ?? `0`,
+        (y && `${y}px`) ?? `0`,
         (blur && `${blur}px`) ?? (spread && '0'),
         spread && `${spread}px`,
         color && toCSS3(color)
@@ -290,8 +295,8 @@ function shadowToString(s: Shadow): string {
     InsetShadow: ({ x, y, blur, spread, color }) =>
       [
         'inset',
-        `${x}px`,
-        `${y}px`,
+        (x && `${x}px`) ?? `0`,
+        (y && `${y}px`) ?? `0`,
         (blur && `${blur}px`) ?? (spread && '0'),
         spread && `${spread}px`,
         color && toCSS3(color)
@@ -437,7 +442,10 @@ function applyBlockProps<State>(
 
   if (typeof v.border !== 'undefined') {
     properties.push(features.border(prefix, pseudo))
-    styles[`${prefix}b`] = borderToString(v.border)
+    styles[`${prefix}b-t`] = borderToString('top', v.border)
+    styles[`${prefix}b-r`] = borderToString('right', v.border)
+    styles[`${prefix}b-b`] = borderToString('bottom', v.border)
+    styles[`${prefix}b-l`] = borderToString('left', v.border)
   }
 
   if (typeof v.borderRadius !== 'undefined') {

@@ -18,6 +18,8 @@ export interface ThemeOptions<State> {}
 export function make<State>(options: ThemeOptions<State> = {}): Theme<State> {
   return {
     button: {
+      textTransform: 'none',
+      shadow: Shadow.none,
       padding: Padding.each(0, 16), // padding - border
       width: Size.min(32 * 2.25),
       height: Size.min(32),
@@ -28,7 +30,6 @@ export function make<State>(options: ThemeOptions<State> = {}): Theme<State> {
       textColor: ofRGB(75, 75, 75),
       cursor: Cursor.pointer,
       textAlign: 'center',
-      // shadow,
       transition: Transition.make(
         ['background', 'text-color', 'shadow'],
         '0.25s'
@@ -53,6 +54,38 @@ export function make<State>(options: ThemeOptions<State> = {}): Theme<State> {
         background: Background.rgb(234, 234, 234),
         border: Border.all(2, ofRGB(234, 234, 234)),
         textColor: ofRGB(179, 179, 179)
+      }
+    },
+    textField: {
+      background: Background.rgb(255, 255, 255),
+      border: Border.all(1, ofRGB(225, 225, 225), 'solid'),
+      borderRadius: Radius.all(Length.px(4)),
+      fontFamily: 'sans-serif',
+      fontSize: 14,
+      fontWeight: 400,
+      height: Size.min(32),
+      padding: Padding.each(0, 12),
+      textAlign: 'start',
+      textColor: ofRGB(75, 75, 75),
+      transition: Transition.make(['border', 'shadow'], '0.25s'),
+      width: Size.min(48),
+      shadow: Shadow.none,
+      hoverStyle: {
+        shadow: Shadow.none,
+        border: Border.all(1, ofRGB(20, 115, 230))
+      },
+      focusedStyle: {
+        shadow: Shadow.none,
+        border: Border.all(1, ofRGB(20, 115, 230))
+      },
+      disabledStyle: {
+        background: Background.rgb(234, 234, 234),
+        border: Border.all(2, ofRGB(234, 234, 234)),
+        textColor: ofRGB(179, 179, 179)
+      },
+      placeholderStyle: {
+        textColor: ofRGB(112, 112, 112),
+        fontStyle: 'italic'
       }
     }
   }

@@ -24,6 +24,10 @@ import { theme as blueprint } from 'uood/lib/theme/blueprint'
 import { theme as material } from 'uood/lib/theme/material'
 import { theme as neumorphic } from 'uood/lib/theme/neumorphic'
 import { theme as skeumorphic } from 'uood/lib/theme/skeumorphic'
+import { theme as spectrum } from 'uood/lib/theme/spectrum'
+
+// import { Uood } from 'uood/lib/uood'
+// Uood.setDefaultTheme(skeumorphic)
 
 type Action = {
   kind: 'ChangePadding'
@@ -48,14 +52,15 @@ const controls = (theme?: Theme<State>) => [
   block<State, Action>(
     {},
     textField({
+      theme,
       value: p => String(p.padding),
       placeholder: 'placeholder ...'
-      // events: {
-      //   input: (_s, _e, e) => ({
-      //     kind: 'ChangePadding',
-      //     value: Number(e.value)
-      //   })
-      // }
+    }),
+    textField({
+      theme,
+      disabled: true,
+      value: '',
+      placeholder: 'placeholder ...'
     })
   ),
   block<State, Action>(
@@ -81,15 +86,16 @@ const controls = (theme?: Theme<State>) => [
 
 const template = container<State, Action>(
   {
-    orientation: 'row',
+    orientation: 'col',
+    spacing: 20,
     height: Size.fill(),
     width: Size.fill()
   },
   container(
     {
       orientation: 'col',
-      padding: Padding.all(10),
-      spacing: 10,
+      padding: Padding.all(20),
+      spacing: 20,
       background: Background.rgb(245, 245, 245)
     },
     ...controls(undefined)
@@ -97,26 +103,35 @@ const template = container<State, Action>(
   container(
     {
       orientation: 'col',
-      padding: Padding.all(10),
-      spacing: 10,
+      padding: Padding.all(20),
+      spacing: 20,
       background: Background.rgb(245, 245, 245)
+    },
+    ...controls(spectrum)
+  ),
+  container(
+    {
+      orientation: 'col',
+      padding: Padding.all(20),
+      spacing: 20,
+      background: Background.rgb(255, 255, 255)
     },
     ...controls(blueprint)
   ),
   container(
     {
       orientation: 'col',
-      padding: Padding.all(10),
-      spacing: 10,
-      background: Background.rgb(245, 245, 245)
+      padding: Padding.all(20),
+      spacing: 20,
+      background: Background.rgb(255, 255, 255)
     },
     ...controls(material)
   ),
   container(
     {
       orientation: 'col',
-      padding: Padding.all(10),
-      spacing: 10,
+      padding: Padding.all(20),
+      spacing: 20,
       // #E4EBF5
       background: Background.rgb(0xe4, 0xeb, 0xf5)
       // background: Background.rgb(0xeb, 0xec, 0xf0)
@@ -126,8 +141,8 @@ const template = container<State, Action>(
   container(
     {
       orientation: 'col',
-      padding: Padding.all(10),
-      spacing: 10,
+      padding: Padding.all(20),
+      spacing: 20,
       // #E4EBF5
       background: Background.rgb(0xf2)
       // background: Background.rgb(0xeb, 0xec, 0xf0)

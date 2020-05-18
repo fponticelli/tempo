@@ -199,7 +199,13 @@ export const features = {
     desc: [
       {
         selector: `.${prefix}b${pseudo}`,
-        rules: [`border: var(--${prefix}b)`, `border-image: var(--${prefix}bi)`]
+        rules: [
+          `border-top: var(--${prefix}b-t)`,
+          `border-right: var(--${prefix}b-r)`,
+          `border-bottom: var(--${prefix}b-b)`,
+          `border-left: var(--${prefix}b-l)`,
+          `border-image: var(--${prefix}bi)`
+        ]
       }
     ]
   }),

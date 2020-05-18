@@ -15,7 +15,7 @@ import { Attribute } from 'tempo-dom/lib/value'
 import { control, inline } from 'tempo-ui/lib/ui'
 import { Cursor } from 'tempo-ui/lib/ui_attributes'
 import { Theme, SubStyle } from './theme'
-import { theme as dTheme } from './theme/default'
+import { Uood } from './uood'
 
 export type ButtonVariant =
   | { kind: 'ButtonCTA' }
@@ -41,17 +41,28 @@ export const Variant = {
   warning: (quiet: boolean): ButtonVariant => ({ kind: 'ButtonWarning', quiet })
 }
 
-function subStyle<State>(
+export function applyKeys<T extends {}>(
+  keys: (keyof T)[],
+  ...ts: (T | undefined)[]
+): T {
+  const t = {} as T
+  for (const k of keys) {
+    for (const c of ts) {
+      if (typeof c !== 'undefined' && typeof c[k] !== 'undefined') {
+        t[k] = c[k]
+        break
+      }
+    }
+  }
+  return t
+}
+
+export function subStyle<State>(
   t1: SubStyle<State> | undefined,
   t2: SubStyle<State> | undefined,
   t3: SubStyle<State> | undefined
 ): SubStyle<State> {
-  return {
-    background: t1?.background ?? t2?.background ?? t3?.background,
-    border: t1?.border ?? t2?.border ?? t3?.border,
-    shadow: t1?.shadow ?? t2?.shadow ?? t3?.shadow,
-    textColor: t1?.textColor ?? t2?.textColor ?? t3?.textColor
-  }
+  return applyKeys(['background', 'border', 'shadow', 'textColor'], t1, t2, t3)
 }
 
 export function button<State, Action, Query = unknown, T = unknown>(attrs: {
@@ -66,7 +77,7 @@ export function button<State, Action, Query = unknown, T = unknown>(attrs: {
   // min width = height * 2.25 (min doesn't apply for quiet)
 }) {
   const button = attrs.theme?.button
-  const dButton = dTheme?.button
+  const dButton = Uood.theme?.button
   const { focusedStyle, hoverStyle, activeStyle, disabledStyle } = button ?? {}
   const {
     focusedStyle: dFocusedStyle,

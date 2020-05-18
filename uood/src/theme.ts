@@ -13,6 +13,7 @@ import {
 } from 'tempo-ui/lib/ui_attributes'
 import { Attribute } from 'tempo-dom/lib/value'
 import { Color } from 'tempo-colors/lib/color'
+import { ElTextProperties } from 'tempo-ui/lib/ui'
 
 export interface SubStyle<State> {
   border?: Attribute<State, Border>
@@ -23,24 +24,46 @@ export interface SubStyle<State> {
 
 export interface Theme<State> {
   button?: {
-    fontFamily?: Attribute<State, string>
-    fontWeight?: Attribute<State, FontWeight>
-    textTransform?: Attribute<State, TextTransform>
-    padding?: Attribute<State, Padding>
-    width?: Attribute<State, Size>
-    height?: Attribute<State, Size>
-    borderRadius?: Attribute<State, BorderRadius>
     background?: Attribute<State, Background>
     border?: Attribute<State, Border>
-    fontSize?: Attribute<State, number>
-    textColor?: Attribute<State, Color>
+    borderRadius?: Attribute<State, BorderRadius>
     cursor?: Attribute<State, Cursor>
+    fontFamily?: Attribute<State, string>
+    fontSize?: Attribute<State, number>
+    fontWeight?: Attribute<State, FontWeight>
+    height?: Attribute<State, Size>
+    padding?: Attribute<State, Padding>
     shadow?: Attribute<State, Shadow>
     textAlign?: Attribute<State, TextAlign>
+    textColor?: Attribute<State, Color>
+    textTransform?: Attribute<State, TextTransform>
     transition?: Attribute<State, Transition>
-    focusedStyle?: SubStyle<State>
-    hoverStyle?: SubStyle<State>
+    width?: Attribute<State, Size>
+
     activeStyle?: SubStyle<State>
     disabledStyle?: SubStyle<State>
+    focusedStyle?: SubStyle<State>
+    hoverStyle?: SubStyle<State>
+  }
+  textField?: {
+    background?: Attribute<State, Background>
+    border?: Attribute<State, Border>
+    borderRadius?: Attribute<State, BorderRadius>
+    fontFamily?: Attribute<State, string>
+    fontSize?: Attribute<State, number>
+    fontWeight?: Attribute<State, FontWeight>
+    height?: Attribute<State, Size>
+    padding?: Attribute<State, Padding>
+    shadow?: Attribute<State, Shadow>
+    textAlign?: Attribute<State, TextAlign>
+    textColor?: Attribute<State, Color>
+    textTransform?: Attribute<State, TextTransform>
+    transition?: Attribute<State, Transition>
+    width?: Attribute<State, Size>
+
+    disabledStyle?: SubStyle<State>
+    focusedStyle?: SubStyle<State>
+    hoverStyle?: SubStyle<State>
+    placeholderStyle?: ElTextProperties<State>
   }
 }

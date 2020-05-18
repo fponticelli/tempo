@@ -229,6 +229,7 @@ export type BorderStyle =
   | 'outset'
 
 export interface BorderProperties {
+  kind: 'BorderProperty'
   width: number
   color: Color
   style: BorderStyle
@@ -239,24 +240,39 @@ export type Border =
   | { kind: 'BorderAll'; all: BorderProperties }
   | {
       kind: 'BorderEach'
-      top: BorderProperties
-      right: BorderProperties
-      bottom: BorderProperties
-      left: BorderProperties
+      top: BorderProperties | { kind: 'BorderNone' }
+      right: BorderProperties | { kind: 'BorderNone' }
+      bottom: BorderProperties | { kind: 'BorderNone' }
+      left: BorderProperties | { kind: 'BorderNone' }
     }
 
 export const Border = {
-  none: { kind: 'BorderNone' } as Border,
-  all: (width: number, color: Color, style?: BorderStyle): Border => ({
+  none: { kind: 'BorderNone' } as const,
+  make: (
+    width: number = 1,
+    color: Color = ofRGB(0, 0, 0),
+    style: BorderStyle = 'solid'
+  ): BorderProperties => ({
+    kind: 'BorderProperty',
+    width,
+    color,
+    style
+  }),
+  all: (
+    width: number = 1,
+    color: Color = ofRGB(0, 0, 0),
+    style: BorderStyle = 'solid'
+  ): Border => ({
     kind: 'BorderAll',
     all: {
+      kind: 'BorderProperty',
       width,
       color,
-      style: style ?? 'solid'
+      style
     }
   }),
   each: (
-    top: BorderProperties,
+    top: BorderProperties | { kind: 'BorderNone' },
     right = top,
     bottom = top,
     left = right
@@ -284,6 +300,7 @@ export interface BorderRadiusProperties {
 }
 
 export type BorderRadius =
+  | { kind: 'BorderRadiusNone' }
   | { kind: 'BorderRadiusAll'; all: BorderRadiusProperties }
   | {
       kind: 'BorderRadiusEach'
@@ -294,6 +311,7 @@ export type BorderRadius =
     }
 
 export const Radius = {
+  none: { kind: 'BorderRadiusNone' } as BorderRadius,
   all: (first: Length, second?: Length): BorderRadius => ({
     kind: 'BorderRadiusAll',
     all: { first, second }
@@ -493,17 +511,20 @@ export const Shadow = {
     blur?: number
     spread?: number
     color: Color
-  }): InsetShadow => ({
-    kind: 'InsetShadow',
-    x: x ?? 0,
-    y: y ?? 0,
-    blur,
-    spread,
-    color
-  }),
-  multi: (...x: (DropShadow | InsetShadow)[]): Shadow => ({
+  }): InsetShadow => {
+    console.log('y', y, y ?? 0)
+    return {
+      kind: 'InsetShadow',
+      x: x ?? 0,
+      y: y ?? 0,
+      blur,
+      spread,
+      color
+    }
+  },
+  multi: (...shadows: (DropShadow | InsetShadow)[]): Shadow => ({
     kind: 'MultiShadow',
-    shadows: x
+    shadows
   })
 }
 

@@ -15,9 +15,16 @@ import { ofRGB } from 'tempo-colors/lib/rgb'
 export interface ThemeOptions<State> {}
 
 export function make<State>(options: ThemeOptions<State> = {}): Theme<State> {
+  const textFieldBorders = Border.each(
+    Border.none,
+    Border.none,
+    Border.make(),
+    Border.none
+  )
   return {
     button: {
       fontFamily: 'Roboto, sans-serif',
+      fontSize: 14,
       textTransform: 'uppercase',
       padding: Padding.each(0, 16), // padding - border
       width: Size.min(64),
@@ -148,6 +155,39 @@ export function make<State>(options: ThemeOptions<State> = {}): Theme<State> {
             color: ofRGBA(0, 0, 0, 31)
           })
         )
+      }
+    },
+    textField: {
+      background: Background.rgb(245, 245, 245),
+      border: textFieldBorders,
+      borderRadius: Radius.none,
+      fontFamily: 'sans-serif',
+      fontSize: 16,
+      height: Size.min(56),
+      padding: Padding.each(0, 16),
+      textAlign: 'start',
+      textColor: ofRGB(75, 75, 75),
+      transition: Transition.make(['border', 'shadow'], '0.25s'),
+      width: Size.min(48),
+      // shadow: Shadow.multi(...basicInputShadow),
+      hoverStyle: {
+        // shadow: Shadow.multi(...selectedInputShadow),
+        background: Background.rgb(0xec, 0xec, 0xec),
+        border: textFieldBorders
+      },
+
+      focusedStyle: {
+        // shadow: Shadow.multi(...selectedInputShadow),
+        border: textFieldBorders
+      },
+      disabledStyle: {
+        background: Background.rgb(234, 234, 234),
+        border: Border.all(2, ofRGB(234, 234, 234)),
+        textColor: ofRGB(179, 179, 179)
+      },
+      placeholderStyle: {
+        textColor: ofRGB(112, 112, 112),
+        fontStyle: 'italic'
       }
     }
   }

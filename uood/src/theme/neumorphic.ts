@@ -68,11 +68,16 @@ export function make<State>(options: ThemeOptions<State> = {}): Theme<State> {
   const focusShadows = [
     ...topShadows,
     Shadow.inset({
-      x: 0,
-      y: 0,
-      blur: 0,
-      spread: 2,
-      color: ofRGBA(255, 255, 255, 255 * 0.4)
+      x: 2,
+      y: 2,
+      blur: 2,
+      color: ofRGBA(55, 84, 170, 255 * 0.15)
+    }),
+    Shadow.inset({
+      x: -2,
+      y: -2,
+      blur: 2,
+      color: ofRGBA(255, 255, 255, 255)
     }),
     ...bottomShadows
   ]
@@ -88,6 +93,7 @@ export function make<State>(options: ThemeOptions<State> = {}): Theme<State> {
     button: {
       fontSize: 20,
       fontFamily: 'Poppins, sans-serif',
+      background: Background.rgba(0, 0, 0, 0),
       border: Border.none,
       padding: Padding.each(0, 40),
       height: Size.min(40),
