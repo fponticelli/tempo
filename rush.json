@@ -77,6 +77,10 @@
       "packageName": "tempo-tools.docs",
       "projectFolder": "./tools/docs",
       "shouldPublish": false
+    }, {
+      "packageName": "tempo-template-dom",
+      "projectFolder": "./template/dom",
+      "shouldPublish": false
     }
   ],
   "ensureConsistentVersions": true
