@@ -128,6 +128,30 @@ export function make<State>(options: ThemeOptions<State> = {}): Theme<State> {
       //   border: Border.all(2, ofRGB(234, 234, 234)),
       //   textColor: ofRGB(179, 179, 179)
       // }
+    },
+    textField: {
+      border: Border.none,
+      borderRadius: Radius.all(Length.px(16)),
+      background: Background.rgba(255, 255, 255, 0.6 * 255),
+      shadow: Shadow.multi(...Shadow.swap(normalShadows)),
+
+      fontSize: 13,
+      fontFamily: 'sans-serif',
+      fontWeight: 400,
+      padding: Padding.each(8, 12, 7),
+      textColor: ofRGB(0x6d, 0x75, 0x87),
+      transition: Transition.make('shadow', '0.25s', 'ease'),
+      width: Size.min(28),
+      height: Size.min(28),
+      hoverStyle: {
+        border: Border.none,
+        shadow: Shadow.multi(...Shadow.swap(hoverShadows))
+      },
+      focusedStyle: {
+        border: Border.none,
+        background: Background.rgba(255, 255, 255, 0.8 * 255),
+        shadow: Shadow.multi(...Shadow.swap(pressedShadows))
+      }
     }
   }
 }

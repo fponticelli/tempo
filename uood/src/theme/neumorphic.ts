@@ -18,13 +18,15 @@ export interface ThemeOptions<State> {}
 export function make<State>(options: ThemeOptions<State> = {}): Theme<State> {
   let mul = 1
   let multiplier = 2
-  let steps = 3
+  let steps = 4
+  const lightShadowColor = ofRGBA(255, 255, 255, 255 * 0.6)
+  const darkShadowColor = ofRGBA(0, 0, 0, 255 * 0.1)
   const topShadows = range(steps, _ => {
     const shadow = Shadow.drop({
       x: -mul,
       y: -mul,
       blur: mul * 1.5,
-      color: ofRGBA(255, 255, 255, 255 * 1)
+      color: lightShadowColor
     })
     mul *= multiplier
     return shadow
@@ -35,7 +37,7 @@ export function make<State>(options: ThemeOptions<State> = {}): Theme<State> {
       x: mul,
       y: mul,
       blur: mul * 1.5,
-      color: ofRGBA(55, 84, 170, 255 * 0.15)
+      color: darkShadowColor
     })
     mul *= multiplier
     return shadow
@@ -48,7 +50,7 @@ export function make<State>(options: ThemeOptions<State> = {}): Theme<State> {
       x: -mul,
       y: -mul,
       blur: mul * 1.5,
-      color: ofRGBA(255, 255, 255, 255 * 1)
+      color: lightShadowColor
     })
     mul *= multiplier
     return shadow
@@ -59,7 +61,7 @@ export function make<State>(options: ThemeOptions<State> = {}): Theme<State> {
       x: mul,
       y: mul,
       blur: mul * 1.5,
-      color: ofRGBA(55, 84, 170, 255 * 0.15)
+      color: darkShadowColor
     })
     mul *= multiplier
     return shadow
@@ -71,13 +73,13 @@ export function make<State>(options: ThemeOptions<State> = {}): Theme<State> {
       x: 2,
       y: 2,
       blur: 2,
-      color: ofRGBA(55, 84, 170, 255 * 0.15)
+      color: darkShadowColor
     }),
     Shadow.inset({
       x: -2,
       y: -2,
       blur: 2,
-      color: ofRGBA(255, 255, 255, 255)
+      color: lightShadowColor
     }),
     ...bottomShadows
   ]
@@ -89,6 +91,40 @@ export function make<State>(options: ThemeOptions<State> = {}): Theme<State> {
   ]
   const activeShadows = [...hoverTopShadows, ...hoverBottomShadows]
   // const pressedShadows = [baseShadow, ...innerShadows, ...outerPressedShadows]
+
+  // 2px 2px 3px rgba(55, 84, 170, .15), inset 0px 0px 4px rgba(255, 255, 255, 0),
+  // inset 7px 7px 15px rgba(55, 84, 170, .15),
+  // inset -7px -7px 20px rgba(255, 255, 255, 1), 0px 0px 4px rgba(255, 255, 255, .2)
+  // const inputShadows = [
+  //   Shadow.drop({
+  //     x: 2,
+  //     y: 3,
+  //     blur: 4,
+  //     color: ofRGBA(75, 75, 75, 0.15 * 255)
+  //   }),
+  //   Shadow.inset({
+  //     blur: 4,
+  //     color: ofRGBA(255, 255, 255, 0)
+  //   }),
+  //   Shadow.inset({
+  //     x: 7,
+  //     y: 7,
+  //     blur: 15,
+  //     color: ofRGBA(75, 75, 75, 0.15 * 255)
+  //   }),
+  //   Shadow.inset({
+  //     x: -7,
+  //     y: -7,
+  //     blur: 20,
+  //     color: ofRGBA(255, 255, 255, 1 * 255)
+  //   }),
+  //   Shadow.drop({
+  //     blur: 4,
+  //     color: ofRGBA(255, 255, 255, 0.2 * 255)
+  //   })
+  //   // ...hoverTopShadows
+  //   // ...hoverBottomShadows
+  // ] as (InsetShadow | DropShadow)[]
   return {
     button: {
       fontSize: 20,
@@ -139,6 +175,22 @@ export function make<State>(options: ThemeOptions<State> = {}): Theme<State> {
           // })
         )
       }
+    },
+    textField: {
+      background: Background.rgba(255, 255, 255, 0.4 * 255),
+      border: Border.none, // Border.all(3, ofRGBA(255, 255, 255, 255 * 0.4)),
+      borderRadius: Radius.all(Length.px(10)),
+      padding: Padding.each(0, 14),
+      height: Size.fixed(40),
+      shadow: Shadow.multi(
+        Shadow.drop({
+          spread: 1,
+          color: darkShadowColor
+        }),
+        Shadow.drop({ spread: 3, color: ofRGBA(255, 255, 255, 0.9 * 255) }),
+        Shadow.drop({ spread: 3, blur: 5, color: ofRGBA(0, 0, 0, 0.1 * 255) }),
+        ...activeShadows
+      )
     }
   }
 }
