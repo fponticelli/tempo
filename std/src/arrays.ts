@@ -43,9 +43,12 @@ export function tail<A>(arr: A[]): A[] {
   return arr.slice(1)
 }
 
-export function equals<T>(a: T[], b: T[], predicate: (a: T, b: T) => boolean): boolean {
-  if (a.length !== b.length)
-    return false
+export function equals<T>(
+  a: T[],
+  b: T[],
+  predicate: (a: T, b: T) => boolean
+): boolean {
+  if (a.length !== b.length) return false
   else {
     for (let i = 0; i < a.length; i++) {
       if (!predicate(a[i], b[i])) return false
@@ -70,9 +73,7 @@ export function hasValues<T>(arr: T[]): arr is [T, ...T[]] {
 
 export function filter<T>(arr: T[], predicate: (v: T) => boolean): T[] {
   const buff = [] as T[]
-  for (const a of arr)
-    if (predicate(a))
-      buff.push(a)
+  for (const a of arr) if (predicate(a)) buff.push(a)
   return buff
 }
 
@@ -106,8 +107,7 @@ export function any<T>(arr: T[], predicate: (v: T) => boolean): boolean {
 }
 
 export function each<T>(arr: T[], f: (v: T) => void): void {
-  for (const a of arr)
-    f(a)
+  for (const a of arr) f(a)
 }
 
 export function concat<A>(...arrs: A[][]): A[] {
@@ -115,7 +115,7 @@ export function concat<A>(...arrs: A[][]): A[] {
 }
 
 export function makeCompare<A>(comparef: Compare<A>, shorterFirst = true) {
-  return function (a: A[], b: A[]) {
+  return function(a: A[], b: A[]) {
     if (a.length < b.length) {
       return -1 * (shorterFirst ? 1 : -1)
     } else if (a.length > b.length) {
@@ -123,8 +123,7 @@ export function makeCompare<A>(comparef: Compare<A>, shorterFirst = true) {
     }
     for (let i = 0; i < a.length; i++) {
       const ord = comparef(a[i], b[i])
-      if (ord !== 0)
-        return ord
+      if (ord !== 0) return ord
     }
     return 0
   }
@@ -136,8 +135,7 @@ export function sort<A>(compare: (a: A, b: A) => Ordering, arr: A[]): A[] {
 
 export function range<A>(length: number, f: (index: number) => A): A[] {
   const buff = new Array(length) as A[]
-  for (let i = 0; i < length; i++)
-    buff[i] = f(i)
+  for (let i = 0; i < length; i++) buff[i] = f(i)
   return buff
 }
 
@@ -147,4 +145,31 @@ export function numbersRange(length: number, startAt = 0) {
 
 export function fill<A>(length: number, value: A): A[] {
   return range(length, () => value)
+}
+
+export function remove<A>(
+  arr: A[],
+  item: A,
+  predicate?: (a: A) => boolean
+): boolean {
+  let index
+  if (typeof predicate !== 'undefined') {
+    index = arr.findIndex(predicate)
+  } else {
+    index = arr.indexOf(item)
+  }
+  if (index < 0) {
+    return false
+  } else {
+    arr.splice(index, 1)
+    return true
+  }
+}
+
+export function ofIterableIterator<A>(it: IterableIterator<A>): A[] {
+  const buff = [] as A[]
+  for (let r = it.next(); !r.done; r = it.next()) {
+    buff.push(r.value)
+  }
+  return buff
 }
