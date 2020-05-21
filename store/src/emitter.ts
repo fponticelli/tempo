@@ -36,7 +36,7 @@ export class Emitter<T extends any[]> implements Observable<T> {
 
   readonly listeners: Listener<T>[] = []
 
-  private constructor() {}
+  public constructor() {}
 
   emit(...value: T) {
     for (const l of this.listeners) l(...value)

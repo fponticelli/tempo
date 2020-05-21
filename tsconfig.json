@@ -12,6 +12,7 @@
 
     "strict": true,
 
+    "downlevelIteration": true,
     "forceConsistentCasingInFileNames": true,
     "noErrorTruncation": true,
     "noFallthroughCasesInSwitch": true,
