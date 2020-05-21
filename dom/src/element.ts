@@ -14,13 +14,30 @@ limitations under the License.
 import { DOMTemplate, DOMChild } from './template'
 import { DOMContext } from './context'
 import { View } from 'tempo-core/lib/view'
-import { processAttribute, processEvent, processStyle, domChildToTemplate, removeNode } from './utils/dom'
-import { Props, Attribute, AttributeValue, EventHandler, StyleAttribute } from './value'
+import {
+  processAttribute,
+  processEvent,
+  processStyle,
+  domChildToTemplate,
+  removeNode
+} from './utils/dom'
+import {
+  Props,
+  Attribute,
+  AttributeValue,
+  EventHandler,
+  StyleAttribute
+} from './value'
 import { map } from 'tempo-std/lib/arrays'
 import { attributeNameMap } from './utils/attributes_mapper'
 
 const applyChange = <State, Action, El extends Element, T>(
-  change: (state: State, el: El, ctx: DOMContext<Action>, value: T | undefined) => T | undefined,
+  change: (
+    state: State,
+    el: El,
+    ctx: DOMContext<Action>,
+    value: T | undefined
+  ) => T | undefined,
   el: El,
   ctx: DOMContext<Action>
 ) => (state: State, value: T | undefined): T | undefined => {
@@ -40,18 +57,51 @@ const applyAfterRender = <State, Action, El extends Element, T>(
   }
 }
 
-export class DOMElement<State, Action, Query = unknown, El extends Element = Element, T = unknown>
-    implements DOMTemplate<State, Action, Query> {
+export class DOMElement<
+  State,
+  Action,
+  Query = unknown,
+  El extends Element = Element,
+  T = unknown
+> implements DOMTemplate<State, Action, Query> {
   constructor(
     public createElement: (doc: Document) => El,
-    public attrs: { name: string, value: Attribute<State, AttributeValue>}[],
-    public events: { name: string, value: EventHandler<State, Action, any, El>}[],
-    public styles: { name: string, value: StyleAttribute<State, string>}[],
-    public afterrender:  undefined | ((state: State, el: El, ctx: DOMContext<Action>) => T | undefined),
-    public beforechange: undefined | ((state: State, el: El, ctx: DOMContext<Action>, value: T | undefined) => T | undefined),
-    public afterchange:  undefined | ((state: State, el: El, ctx: DOMContext<Action>, value: T | undefined) => T | undefined),
-    public beforedestroy: undefined | (((el: El, ctx: DOMContext<Action>, value: T | undefined) => void)),
-    public respond: undefined | ((query: Query, el: El, ctx: DOMContext<Action>, value: T | undefined) => T | undefined),
+    public attrs: { name: string; value: Attribute<State, AttributeValue> }[],
+    public events: {
+      name: string
+      value: EventHandler<State, Action, any, El>
+    }[],
+    public styles: { name: string; value: StyleAttribute<State, string> }[],
+    public afterrender:
+      | undefined
+      | ((state: State, el: El, ctx: DOMContext<Action>) => T | undefined),
+    public beforechange:
+      | undefined
+      | ((
+          state: State,
+          el: El,
+          ctx: DOMContext<Action>,
+          value: T | undefined
+        ) => T | undefined),
+    public afterchange:
+      | undefined
+      | ((
+          state: State,
+          el: El,
+          ctx: DOMContext<Action>,
+          value: T | undefined
+        ) => T | undefined),
+    public beforedestroy:
+      | undefined
+      | ((el: El, ctx: DOMContext<Action>, value: T | undefined) => void),
+    public respond:
+      | undefined
+      | ((
+          query: Query,
+          el: El,
+          ctx: DOMContext<Action>,
+          value: T | undefined
+        ) => T | undefined),
     public children: DOMTemplate<State, Action, Query>[]
   ) {}
 
@@ -61,9 +111,11 @@ export class DOMElement<State, Action, Query = unknown, El extends Element = Ele
 
     const allChanges = [] as ((state: State) => void)[]
 
-    for (const o of this.attrs) processAttribute(el, o.name, o.value, allChanges)
+    for (const o of this.attrs)
+      processAttribute(el, o.name, o.value, allChanges)
 
-    for (const o of this.events) processEvent(el, o.name, o.value, ctx.dispatch, allChanges)
+    for (const o of this.events)
+      processEvent(el, o.name, o.value, ctx.dispatch, allChanges)
 
     for (const o of this.styles) processStyle(el, o.name, o.value, allChanges)
 
@@ -80,23 +132,30 @@ export class DOMElement<State, Action, Query = unknown, El extends Element = Ele
       value = applyAfterRender(this.afterrender, el, ctx, state)
     }
 
-    const viewChanges = map(views, child => (state: State) => child.change(state))
+    const viewChanges = map(views, child => (state: State) =>
+      child.change(state)
+    )
 
     allChanges.push(...viewChanges)
 
     if (this.beforechange) {
       const change = applyChange(this.beforechange, el, ctx)
-      const update = (state: State) => { value = change(state, value) }
+      const update = (state: State) => {
+        value = change(state, value)
+      }
       allChanges.unshift(update)
     }
 
     if (this.afterchange) {
       const change = applyChange(this.afterchange, el, ctx)
-      const update = (state: State) => { value = change(state, value) }
+      const update = (state: State) => {
+        value = change(state, value)
+      }
       allChanges.push(update)
     }
 
-    const beforedestroyf = this.beforedestroy && (() => this.beforedestroy!(el, ctx, value))
+    const beforedestroyf =
+      this.beforedestroy && (() => this.beforedestroy!(el, ctx, value))
     const { respond } = this
 
     return {
@@ -123,11 +182,11 @@ export class DOMElement<State, Action, Query = unknown, El extends Element = Ele
 function extractAttrs<State>(
   attrs: Record<string, Attribute<State, AttributeValue>> | undefined
 ): {
-  name: string,
+  name: string
   value: Attribute<State, AttributeValue>
 }[] {
-  return map(Object.keys(attrs || {}), attName =>  {
-    let name = attName.toLowerCase()
+  return map(Object.keys(attrs || {}), attName => {
+    let name = attName // .toLowerCase()
     name = attributeNameMap[name] || name
     return {
       name,
@@ -138,7 +197,7 @@ function extractAttrs<State>(
 
 function extractEvents<State, Action, El extends Element>(
   attrs: Record<string, EventHandler<State, Action, any, El>> | undefined
-): { name: string, value: EventHandler<State, Action, any, El>}[] {
+): { name: string; value: EventHandler<State, Action, any, El> }[] {
   return map(Object.keys(attrs || {}), eventName => {
     let name = `on${eventName.toLowerCase()}`
     return {
@@ -150,16 +209,24 @@ function extractEvents<State, Action, El extends Element>(
 
 function extractStyles<State>(
   attrs: Record<string, StyleAttribute<State, string>> | undefined
-): { name: string, value: StyleAttribute<State, string>}[] {
+): { name: string; value: StyleAttribute<State, string> }[] {
   return map(Object.keys(attrs || {}), name => ({
     name,
     value: attrs![name]
   }))
 }
 
-const makeCreateElement = <El extends Element>(name: string) => (doc: Document) => doc.createElement(name) as any as El
+const makeCreateElement = <El extends Element>(name: string) => (
+  doc: Document
+) => (doc.createElement(name) as any) as El
 
-export function el<State, Action, Query = unknown, El extends Element = Element, T = unknown>(
+export function el<
+  State,
+  Action,
+  Query = unknown,
+  El extends Element = Element,
+  T = unknown
+>(
   name: string,
   props: Props<State, Action, Query, El, T>,
   ...children: DOMChild<State, Action, Query>[]
@@ -179,7 +246,7 @@ export function el<State, Action, Query = unknown, El extends Element = Element,
 }
 
 export function el2<El extends Element>(name: string) {
-  return function <State, Action, Query = unknown, T = unknown>(
+  return function<State, Action, Query = unknown, T = unknown>(
     props: Props<State, Action, Query, El, T>,
     ...children: DOMChild<State, Action, Query>[]
   ) {
@@ -199,13 +266,21 @@ export function el2<El extends Element>(name: string) {
 }
 
 export const defaultNamespaces: Record<string, string> = {
-  'svg': 'http://www.w3.org/2000/svg'
+  svg: 'http://www.w3.org/2000/svg'
 }
 
-const makeCreateElementNS = <El extends Element>(namespace: string, name: string) =>
-  (doc: Document) => doc.createElementNS(namespace, name) as any as El
+const makeCreateElementNS = <El extends Element>(
+  namespace: string,
+  name: string
+) => (doc: Document) => (doc.createElementNS(namespace, name) as any) as El
 
-export function elNS<State, Action, Query = unknown, El extends Element = Element, T = unknown>(
+export function elNS<
+  State,
+  Action,
+  Query = unknown,
+  El extends Element = Element,
+  T = unknown
+>(
   ns: string,
   name: string,
   props: Props<State, Action, Query, El, T>,

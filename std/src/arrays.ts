@@ -165,3 +165,11 @@ export function remove<A>(
     return true
   }
 }
+
+export function ofIterableIterator<A>(it: IterableIterator<A>): A[] {
+  const buff = [] as A[]
+  for (let r = it.next(); !r.done; r = it.next()) {
+    buff.push(r.value)
+  }
+  return buff
+}
