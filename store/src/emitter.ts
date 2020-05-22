@@ -70,7 +70,7 @@ export type Emitter5<A, B, C, D, E> = Emitter<[A, B, C, D, E]>
 export type Emitter6<A, B, C, D, E, F> = Emitter<[A, B, C, D, E, F]>
 
 export function debounce(delay: number) {
-  return function<T extends any[]>(listener: Listener<T>): Listener<T> {
+  return function <T extends any[]>(listener: Listener<T>): Listener<T> {
     let running = false
     let acc: T
     return (...values: T) => {
