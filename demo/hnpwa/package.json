@@ -18,7 +18,6 @@
     "cssnano": "4.1.10",
     "parcel-bundler": "1.12.4",
     "prettier": "1.19.1",
-    "tslint": "6.0.0",
     "typescript": "3.7.5",
     "babel-types": "6.26.0",
     "sass": "1.23.7",
@@ -29,8 +28,6 @@
     "clean": "rm -rf dist/* && rm -rf ./build/*",
     "build": "npm run clean && npm run compile",
     "watch": "parcel src/index.html",
-    "tslint": "tslint -p ./tslint.json",
-    "tslint-fix": "tslint -p ./tslint.json --fix",
     "prettier": "prettier -c src/**/*.ts",
     "prettier-fix": "prettier --write src/**/*.ts"
   }

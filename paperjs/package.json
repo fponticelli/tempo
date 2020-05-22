@@ -17,8 +17,6 @@
     "build": "npm run clean && npx tsc -p tsconfig.es6.json && npx tsc",
     "test": "jest --passWithNoTests",
     "test-watch": "jest --watch",
-    "tslint": "tslint -p ./tslint.json",
-    "tslint-fix": "tslint -p ./tslint.json --fix",
     "prettier": "prettier -c src/**/*.ts",
     "prettier-fix": "prettier --write src/**/*.ts",
     "prepublish": "npm run build"
@@ -50,7 +48,6 @@
     "request-promise-native": "1.0.7",
     "stealthy-require": "1.0.0",
     "ts-jest": "25.2.0",
-    "tslint": "6.0.0",
     "typescript": "3.7.5",
     "webpack-cli": "3.3.10"
   },

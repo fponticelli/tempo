@@ -19,8 +19,6 @@
     "build": "npm run clean && npx tsc && npx tsc -p tsconfig.es6.json",
     "test": "jest",
     "test-watch": "jest --watch",
-    "tslint": "tslint -p ./tslint.json",
-    "tslint-fix": "tslint -p ./tslint.json --fix",
     "prettier": "prettier -c src/**/*.ts",
     "prettier-fix": "prettier --write src/**/*.ts",
     "prepublish": "npm run build"
@@ -43,7 +41,6 @@
     "jest": "25.1.0",
     "prettier": "1.19.1",
     "ts-jest": "25.2.0",
-    "tslint": "6.0.0",
     "typescript": "3.7.5"
   },
   "main": "lib/index.js",

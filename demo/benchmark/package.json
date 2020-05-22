@@ -25,7 +25,6 @@
     "cssnano": "4.1.10",
     "parcel-bundler": "1.12.4",
     "prettier": "1.19.1",
-    "tslint": "6.0.0",
     "typescript": "3.7.5",
     "babel-types": "6.26.0"
   },
@@ -35,8 +34,6 @@
     "compile": "NODE_ENV=production && npx tsc --noEmit && npm run compile:test && npm run compile:html && node tools/create_config.js",
     "clean": "rm -f ./build/current/* && rm -f ./build/*.css && rm -f ./build/*.js* && rm -f ./build/*.html",
     "build": "npm run clean && npm run compile",
-    "tslint": "tslint -p ./tslint.json",
-    "tslint-fix": "tslint -p ./tslint.json --fix",
     "prettier": "prettier -c src/**/*.ts",
     "prettier-fix": "prettier --write src/**/*.ts"
   }
