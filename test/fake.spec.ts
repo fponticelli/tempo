@@ -11,12 +11,11 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-module.exports = {
-  preset: 'ts-jest',
-  rootDir: './test',
-  globals: {
-    'ts-jest': {
-      packageJson: 'package.json'
-    }
-  }
-}
+// this fake test is to make the project conform to
+// the others. This project does not contain any business
+// logic that needs to be tested
+describe('fake', () => {
+  it('test', () => {
+    expect(true).toEqual(true)
+  })
+})

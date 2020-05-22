@@ -24,10 +24,15 @@ import {
 
 export const attributeNameMap: Record<string, string> = {
   acceptcharset: 'accept-charset',
+  acceptCharset: 'accept-charset',
   asattr: 'as',
+  asAttr: 'as',
   classname: 'class',
+  className: 'class',
   httpequiv: 'http-equiv',
-  htmlfor: 'for'
+  httpEquiv: 'http-equiv',
+  htmlfor: 'for',
+  htmlFor: 'for'
 }
 
 export const htmlAttributeMap: Record<
