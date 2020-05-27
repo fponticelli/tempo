@@ -2,6 +2,18 @@
   "name": "tempo-dom",
   "entries": [
     {
+      "version": "0.17.2",
+      "tag": "tempo-dom_v0.17.2",
+      "date": "Wed, 27 May 2020 03:26:39 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fix Adapter not disconnecting from Store on destroy"
+          }
+        ]
+      }
+    },
+    {
       "version": "0.17.1",
       "tag": "tempo-dom_v0.17.0",
       "date": "Thu, 21 May 2020 21:07:30 GMT",
@@ -9,12 +21,14 @@
         "minor": [
           {
             "comment": "Do not change attributes casing."
-          }, {
+          },
+          {
             "comment": "Fix scoped styles."
           }
         ]
       }
-    },{
+    },
+    {
       "version": "0.17.0",
       "tag": "tempo-dom_v0.17.0",
       "date": "Mon, 17 Feb 2020 19:18:30 GMT",

@@ -1,6 +1,21 @@
 # Change Log - tempo-dom
 
-This log was last generated on Mon, 17 Feb 2020 19:18:30 GMT and should not be manually modified.
+This log was last generated on Wed, 27 May 2020 03:26:39 GMT and should not be manually modified.
+
+## 0.17.2
+Wed, 27 May 2020 03:26:39 GMT
+
+### Patches
+
+- Fix Adapter not disconnecting from Store on destroy
+
+## 0.17.1
+Thu, 21 May 2020 21:07:30 GMT
+
+### Minor changes
+
+- Do not change attributes casing.
+- Fix scoped styles.
 
 ## 0.17.0
 Mon, 17 Feb 2020 19:18:30 GMT

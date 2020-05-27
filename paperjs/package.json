@@ -33,7 +33,7 @@
   "dependencies": {
     "paper": "0.12.3",
     "tempo-core": "^1.7.0",
-    "tempo-dom": "^0.17.1",
+    "tempo-dom": "^0.17.2",
     "tempo-std": "^0.5.1",
     "tempo-store": "^1.2.2"
   },
