@@ -18,40 +18,63 @@ import { DOMContext } from './context'
 
 class AdapterTemplate<OuterState, InnerState, OuterAction, InnerAction, Query>
   implements DOMTemplate<OuterState, OuterAction, Query> {
+  private dispatchPropagate:
+    | undefined
+    | ((state: InnerState, action: InnerAction) => void)
+
   constructor(
-    readonly mergeStates: (outerState: OuterState, innerState: InnerState) => InnerState | undefined,
-    readonly propagate: (args: PropagateArg<OuterState, InnerState, OuterAction, InnerAction>) => void,
+    readonly mergeStates: (
+      outerState: OuterState,
+      innerState: InnerState
+    ) => InnerState | undefined,
+    readonly propagate: (
+      args: PropagateArg<OuterState, InnerState, OuterAction, InnerAction>
+    ) => void,
     readonly child: Component<InnerState, InnerAction, Query>
   ) {}
 
-  render(ctx: DOMContext<OuterAction>, outerState: OuterState): View<OuterState, Query> {
+  render(
+    ctx: DOMContext<OuterAction>,
+    outerState: OuterState
+  ): View<OuterState, Query> {
     const mergedState =
-      (this.mergeStates && this.mergeStates(outerState, this.child.store.property.get())) ||
+      (this.mergeStates &&
+        this.mergeStates(outerState, this.child.store.property.get())) ||
       this.child.store.property.get()
 
     const viewComponent = this.child.render(
-      ctx.withDispatch(() => { /* COMPONENT IS DETACHED FROM CONTAINER AND DOESN'T PROPAGATE */ }),
+      ctx.withDispatch(() => {
+        /* COMPONENT IS DETACHED FROM CONTAINER AND DOESN'T PROPAGATE */
+      }),
       mergedState
     )
 
-    this.child.store.observable.on((state: InnerState, action: InnerAction) => {
+    this.dispatchPropagate = (state: InnerState, action: InnerAction) => {
       this.propagate({
         action,
         innerState: state,
         outerState,
-        dispatchInner: (action: InnerAction) => this.child.store.process(action),
+        dispatchInner: (action: InnerAction) =>
+          this.child.store.process(action),
         dispatchOuter: ctx.dispatch
       })
-    })
+    }
+
+    this.child.store.observable.on(this.dispatchPropagate)
 
     return {
       change: (state: OuterState) => {
-        const newState = this.mergeStates(state, this.child.store.property.get())
-        if (typeof newState !== 'undefined')
-          viewComponent.change(newState)
+        const newState = this.mergeStates(
+          state,
+          this.child.store.property.get()
+        )
+        if (typeof newState !== 'undefined') viewComponent.change(newState)
       },
       destroy: () => {
         viewComponent.destroy()
+        if (typeof this.dispatchPropagate !== 'undefined') {
+          this.child.store.observable.off(this.dispatchPropagate)
+        }
       },
       request: (query: Query) => {
         viewComponent.request(query)
@@ -60,7 +83,12 @@ class AdapterTemplate<OuterState, InnerState, OuterAction, InnerAction, Query>
   }
 }
 
-export interface PropagateArg<OuterState, InnerState, OuterAction, InnerAction> {
+export interface PropagateArg<
+  OuterState,
+  InnerState,
+  OuterAction,
+  InnerAction
+> {
   action: InnerAction
   innerState: InnerState
   outerState: OuterState
@@ -68,10 +96,21 @@ export interface PropagateArg<OuterState, InnerState, OuterAction, InnerAction> 
   dispatchOuter: (action: OuterAction) => void
 }
 
-export function adapter<OuterState, InnerState, OuterAction, InnerAction, Query = unknown>(
+export function adapter<
+  OuterState,
+  InnerState,
+  OuterAction,
+  InnerAction,
+  Query = unknown
+>(
   props: {
-    mergeStates?: (outerState: OuterState, innerState: InnerState) => InnerState | undefined
-    propagate?: (args: PropagateArg<OuterState, InnerState, OuterAction, InnerAction>) => void
+    mergeStates?: (
+      outerState: OuterState,
+      innerState: InnerState
+    ) => InnerState | undefined
+    propagate?: (
+      args: PropagateArg<OuterState, InnerState, OuterAction, InnerAction>
+    ) => void
   },
   child: Component<InnerState, InnerAction, Query>
 ): DOMTemplate<OuterState, OuterAction, Query> {
