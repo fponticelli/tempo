@@ -32,7 +32,8 @@
     "request-promise-native": "^1.0.8",
     "stealthy-require": "^1.1.1",
     "ts-jest": "^26.0.0",
-    "typescript": "^3.9.3"
+    "typescript": "^3.9.3",
+    "canvas": "^2.6.1"
   },
   "scripts": {
     "compile": "NODE_ENV=production && npx tsc --noEmit && parcel build src/index.html --public-url . --out-dir ./dist --experimental-scope-hoisting",

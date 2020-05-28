@@ -16,12 +16,16 @@ import { PaperContext } from './context'
 import { PaperTemplate } from './template'
 import { map } from 'tempo-std/lib/arrays'
 import { Group } from 'paper'
+import { PaperAttribute, resolveAttribute } from './value'
 
 class PaperUntilTemplate<OuterState, InnerState, Action, Query>
   implements PaperTemplate<OuterState, Action, Query> {
   constructor(
     readonly props: {
-      repeatUntil: (state: OuterState, index: number) => InnerState | undefined
+      repeatUntil: PaperAttribute<
+        { state: OuterState; index: number },
+        InnerState | undefined
+      >
     },
     readonly children: PaperTemplate<InnerState, Action, Query>[]
   ) {}
@@ -41,7 +45,7 @@ class PaperUntilTemplate<OuterState, InnerState, Action, Query>
         const currentLength = childrenViews.length
         let index = 0
         while (true) {
-          const value = repeatUntil(state, index)
+          const value = resolveAttribute(repeatUntil)({ state, index })
           if (typeof value === 'undefined') break
           if (index < currentLength) {
             // replace existing
@@ -79,7 +83,10 @@ class PaperUntilTemplate<OuterState, InnerState, Action, Query>
 
 export function until<OuterState, InnerState, Action, Query = unknown>(
   props: {
-    repeatUntil: (state: OuterState, index: number) => InnerState | undefined
+    repeatUntil: PaperAttribute<
+      { state: OuterState; index: number },
+      InnerState | undefined
+    >
   },
   ...children: PaperTemplate<InnerState, Action, Query>[]
 ): PaperTemplate<OuterState, Action, Query> {

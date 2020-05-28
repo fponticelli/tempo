@@ -49,7 +49,8 @@
     "stealthy-require": "^1.1.1",
     "ts-jest": "^26.0.0",
     "typescript": "^3.9.3",
-    "webpack-cli": "^3.3.11"
+    "webpack-cli": "^3.3.11",
+    "canvas": "^2.6.1"
   },
   "main": "lib/index.js",
   "module": "es6/index.js",

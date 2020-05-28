@@ -1,5 +1,5 @@
 dependencies:
-  '@rush-temp/tempo-core': 'file:projects/tempo-core.tgz'
+  '@rush-temp/tempo-core': 'file:projects/tempo-core.tgz_canvas@2.6.1'
   '@rush-temp/tempo-demo.benchmark': 'file:projects/tempo-demo.benchmark.tgz'
   '@rush-temp/tempo-demo.hnpwa': 'file:projects/tempo-demo.hnpwa.tgz'
   '@rush-temp/tempo-demo.paper': 'file:projects/tempo-demo.paper.tgz_sass@1.23.7'
@@ -8,8 +8,8 @@ dependencies:
   '@rush-temp/tempo-dom': 'file:projects/tempo-dom.tgz'
   '@rush-temp/tempo-paper': 'file:projects/tempo-paper.tgz_webpack@4.43.0'
   '@rush-temp/tempo-root': 'file:projects/tempo-root.tgz'
-  '@rush-temp/tempo-std': 'file:projects/tempo-std.tgz'
-  '@rush-temp/tempo-store': 'file:projects/tempo-store.tgz'
+  '@rush-temp/tempo-std': 'file:projects/tempo-std.tgz_canvas@2.6.1'
+  '@rush-temp/tempo-store': 'file:projects/tempo-store.tgz_canvas@2.6.1'
   '@rush-temp/tempo-template-dom': 'file:projects/tempo-template-dom.tgz'
   '@rush-temp/tempo-tools.docs': 'file:projects/tempo-tools.docs.tgz_sass@1.23.7'
   '@types/doctrine': 0.0.3
@@ -24,6 +24,7 @@ dependencies:
   acorn: 7.2.0
   babel-types: 6.26.0
   bulma: 0.8.2
+  canvas: 2.6.1
   css-loader: 3.5.3_webpack@4.43.0
   cssnano: 4.1.10
   doctrine: 3.0.0
@@ -32,8 +33,8 @@ dependencies:
   fs-extra: 9.0.0
   gh-pages: 2.2.0
   html-webpack-plugin: 4.3.0_webpack@4.43.0
-  jest: 26.0.1
-  jsdom: 16.2.2
+  jest: 26.0.1_canvas@2.6.1
+  jsdom: 16.2.2_canvas@2.6.1
   lodash: 4.17.15
   mini-css-extract-plugin: 0.9.0_webpack@4.43.0
   node-sass: 4.14.1
@@ -1158,7 +1159,7 @@ packages:
       node: '>= 10.14.2'
     resolution:
       integrity: sha512-9t1KUe/93coV1rBSxMmBAOIK3/HVpwxArCA1CxskKyRiv6o8J70V8C/V3OJminVCTa2M0hQI9AWRd5wxu2dAHw==
-  /@jest/core/26.0.1:
+  /@jest/core/26.0.1_canvas@2.6.1:
     dependencies:
       '@jest/console': 26.0.1
       '@jest/reporters': 26.0.1
@@ -1170,14 +1171,14 @@ packages:
       exit: 0.1.2
       graceful-fs: 4.2.4
       jest-changed-files: 26.0.1
-      jest-config: 26.0.1
+      jest-config: 26.0.1_canvas@2.6.1
       jest-haste-map: 26.0.1
       jest-message-util: 26.0.1
       jest-regex-util: 26.0.0
       jest-resolve: 26.0.1_jest-resolve@26.0.1
       jest-resolve-dependencies: 26.0.1
-      jest-runner: 26.0.1
-      jest-runtime: 26.0.1
+      jest-runner: 26.0.1_canvas@2.6.1
+      jest-runtime: 26.0.1_canvas@2.6.1
       jest-snapshot: 26.0.1
       jest-util: 26.0.1
       jest-validate: 26.0.1
@@ -1190,6 +1191,8 @@ packages:
     dev: false
     engines:
       node: '>= 10.14.2'
+    peerDependencies:
+      canvas: '*'
     resolution:
       integrity: sha512-Xq3eqYnxsG9SjDC+WLeIgf7/8KU6rddBxH+SCt18gEpOhAGYC/Mq+YbtlNcIdwjnnT+wDseXSbU0e5X84Y4jTQ==
   /@jest/environment/26.0.1:
@@ -1278,16 +1281,18 @@ packages:
       node: '>= 10.14.2'
     resolution:
       integrity: sha512-oKwHvOI73ICSYRPe8WwyYPTtiuOAkLSbY8/MfWF3qDEd/sa8EDyZzin3BaXTqufir/O/Gzea4E8Zl14XU4Mlyg==
-  /@jest/test-sequencer/26.0.1:
+  /@jest/test-sequencer/26.0.1_canvas@2.6.1:
     dependencies:
       '@jest/test-result': 26.0.1
       graceful-fs: 4.2.4
       jest-haste-map: 26.0.1
-      jest-runner: 26.0.1
-      jest-runtime: 26.0.1
+      jest-runner: 26.0.1_canvas@2.6.1
+      jest-runtime: 26.0.1_canvas@2.6.1
     dev: false
     engines:
       node: '>= 10.14.2'
+    peerDependencies:
+      canvas: '*'
     resolution:
       integrity: sha512-ssga8XlwfP8YjbDcmVhwNlrmblddMfgUeAkWIXts1V22equp2GMIHxm7cyeD5Q/B0ZgKPK/tngt45sH99yLLGg==
   /@jest/transform/26.0.1:
@@ -3393,6 +3398,17 @@ packages:
     dev: false
     resolution:
       integrity: sha512-ei9ZqeOnN7edDrb24QfJ0OZicpEbsWxv7WusOiQGz/f2SfvBgHHbOEwBJ8HKGVSyx8Z6ndPjxzR6m0NQq+0bfw==
+  /canvas/2.6.1:
+    dependencies:
+      nan: 2.14.0
+      node-pre-gyp: 0.11.0
+      simple-get: 3.1.0
+    dev: false
+    engines:
+      node: '>=6'
+    requiresBuild: true
+    resolution:
+      integrity: sha512-S98rKsPcuhfTcYbtF53UIJhcbgIAK533d1kJKMwsMwAIFgfd58MOyxRud3kktlzWiEkFliaJtvyZCBtud/XVEA==
   /capture-exit/2.0.0:
     dependencies:
       rsvp: 4.8.5
@@ -5501,6 +5517,12 @@ packages:
       node: '>=10'
     resolution:
       integrity: sha512-pmEYSk3vYsG/bF651KPUXZ+hvjpgWYw/Gc7W9NFUe3ZVLczKKWIij3IKpOrQcdw4TILtibFslZ0UmR8Vvzig4g==
+  /fs-minipass/1.2.7:
+    dependencies:
+      minipass: 2.9.0
+    dev: false
+    resolution:
+      integrity: sha512-GWSSJGFy4e9GUeCcbIkED+bgAoFyj7XF1mV8rma3QW4NIqX9Kyx79N/PF61H5udOV3aY1IaMLs6pGbH71nlCTA==
   /fs-minipass/2.1.0:
     dependencies:
       minipass: 3.1.1
@@ -6265,6 +6287,12 @@ packages:
     dev: false
     resolution:
       integrity: sha1-xg7taebY/bazEEofy8ocGS3FtQE=
+  /ignore-walk/3.0.3:
+    dependencies:
+      minimatch: 3.0.4
+    dev: false
+    resolution:
+      integrity: sha512-m7o6xuOaT1aqheYHKf8W6J5pYH85ZI9w077erOzLje3JsB1gkafkAhHHY19dqjulgIZHFm32Cp5uNZgcQqdJKw==
   /image-size/0.5.5:
     dev: false
     engines:
@@ -6950,9 +6978,9 @@ packages:
       node: '>= 10.14.2'
     resolution:
       integrity: sha512-q8LP9Sint17HaE2LjxQXL+oYWW/WeeXMPE2+Op9X3mY8IEGFVc14xRxFjUuXUbcPAlDLhtWdIEt59GdQbn76Hw==
-  /jest-cli/26.0.1:
+  /jest-cli/26.0.1_canvas@2.6.1:
     dependencies:
-      '@jest/core': 26.0.1
+      '@jest/core': 26.0.1_canvas@2.6.1
       '@jest/test-result': 26.0.1
       '@jest/types': 26.0.1
       chalk: 4.0.0
@@ -6960,7 +6988,7 @@ packages:
       graceful-fs: 4.2.4
       import-local: 3.0.2
       is-ci: 2.0.0
-      jest-config: 26.0.1
+      jest-config: 26.0.1_canvas@2.6.1
       jest-util: 26.0.1
       jest-validate: 26.0.1
       prompts: 2.3.0
@@ -6969,22 +6997,24 @@ packages:
     engines:
       node: '>= 10.14.2'
     hasBin: true
+    peerDependencies:
+      canvas: '*'
     resolution:
       integrity: sha512-pFLfSOBcbG9iOZWaMK4Een+tTxi/Wcm34geqZEqrst9cZDkTQ1LZ2CnBrTlHWuYAiTMFr0EQeK52ScyFU8wK+w==
-  /jest-config/26.0.1:
+  /jest-config/26.0.1_canvas@2.6.1:
     dependencies:
       '@babel/core': 7.7.7
-      '@jest/test-sequencer': 26.0.1
+      '@jest/test-sequencer': 26.0.1_canvas@2.6.1
       '@jest/types': 26.0.1
       babel-jest: 26.0.1_@babel+core@7.7.7
       chalk: 4.0.0
       deepmerge: 4.2.2
       glob: 7.1.6
       graceful-fs: 4.2.4
-      jest-environment-jsdom: 26.0.1
+      jest-environment-jsdom: 26.0.1_canvas@2.6.1
       jest-environment-node: 26.0.1
       jest-get-type: 26.0.0
-      jest-jasmine2: 26.0.1
+      jest-jasmine2: 26.0.1_canvas@2.6.1
       jest-regex-util: 26.0.0
       jest-resolve: 26.0.1_jest-resolve@26.0.1
       jest-util: 26.0.1
@@ -6994,6 +7024,8 @@ packages:
     dev: false
     engines:
       node: '>= 10.14.2'
+    peerDependencies:
+      canvas: '*'
     resolution:
       integrity: sha512-9mWKx2L1LFgOXlDsC4YSeavnblN6A4CPfXFiobq+YYLaBMymA/SczN7xYTSmLaEYHZOcB98UdoN4m5uNt6tztg==
   /jest-diff/25.5.0:
@@ -7038,17 +7070,19 @@ packages:
       node: '>= 10.14.2'
     resolution:
       integrity: sha512-OTgJlwXCAR8NIWaXFL5DBbeS4QIYPuNASkzSwMCJO+ywo9BEa6TqkaSWsfR7VdbMLdgYJqSfQcIyjJCNwl5n4Q==
-  /jest-environment-jsdom/26.0.1:
+  /jest-environment-jsdom/26.0.1_canvas@2.6.1:
     dependencies:
       '@jest/environment': 26.0.1
       '@jest/fake-timers': 26.0.1
       '@jest/types': 26.0.1
       jest-mock: 26.0.1
       jest-util: 26.0.1
-      jsdom: 16.2.2
+      jsdom: 16.2.2_canvas@2.6.1
     dev: false
     engines:
       node: '>= 10.14.2'
+    peerDependencies:
+      canvas: '*'
     resolution:
       integrity: sha512-u88NJa3aptz2Xix2pFhihRBAatwZHWwSiRLBDBQE1cdJvDjPvv7ZGA0NQBxWwDDn7D0g1uHqxM8aGgfA9Bx49g==
   /jest-environment-node/26.0.1:
@@ -7096,7 +7130,7 @@ packages:
       fsevents: 2.1.2
     resolution:
       integrity: sha512-J9kBl/EdjmDsvyv7CiyKY5+DsTvVOScenprz/fGqfLg/pm1gdjbwwQ98nW0t+OIt+f+5nAVaElvn/6wP5KO7KA==
-  /jest-jasmine2/26.0.1:
+  /jest-jasmine2/26.0.1_canvas@2.6.1:
     dependencies:
       '@babel/traverse': 7.9.6
       '@jest/environment': 26.0.1
@@ -7110,7 +7144,7 @@ packages:
       jest-each: 26.0.1
       jest-matcher-utils: 26.0.1
       jest-message-util: 26.0.1
-      jest-runtime: 26.0.1
+      jest-runtime: 26.0.1_canvas@2.6.1
       jest-snapshot: 26.0.1
       jest-util: 26.0.1
       pretty-format: 26.0.1
@@ -7118,6 +7152,8 @@ packages:
     dev: false
     engines:
       node: '>= 10.14.2'
+    peerDependencies:
+      canvas: '*'
     resolution:
       integrity: sha512-ILaRyiWxiXOJ+RWTKupzQWwnPaeXPIoLS5uW41h18varJzd9/7I0QJGqg69fhTT1ev9JpSSo9QtalriUN0oqOg==
   /jest-leak-detector/26.0.1:
@@ -7209,7 +7245,7 @@ packages:
       jest-resolve: '*'
     resolution:
       integrity: sha512-6jWxk0IKZkPIVTvq6s72RH735P8f9eCJW3IM5CX/SJFeKq1p2cZx0U49wf/SdMlhaB/anann5J2nCJj6HrbezQ==
-  /jest-runner/26.0.1:
+  /jest-runner/26.0.1_canvas@2.6.1:
     dependencies:
       '@jest/console': 26.0.1
       '@jest/environment': 26.0.1
@@ -7218,14 +7254,14 @@ packages:
       chalk: 4.0.0
       exit: 0.1.2
       graceful-fs: 4.2.4
-      jest-config: 26.0.1
+      jest-config: 26.0.1_canvas@2.6.1
       jest-docblock: 26.0.0
       jest-haste-map: 26.0.1
-      jest-jasmine2: 26.0.1
+      jest-jasmine2: 26.0.1_canvas@2.6.1
       jest-leak-detector: 26.0.1
       jest-message-util: 26.0.1
       jest-resolve: 26.0.1_jest-resolve@26.0.1
-      jest-runtime: 26.0.1
+      jest-runtime: 26.0.1_canvas@2.6.1
       jest-util: 26.0.1
       jest-worker: 26.0.0
       source-map-support: 0.5.19
@@ -7233,9 +7269,11 @@ packages:
     dev: false
     engines:
       node: '>= 10.14.2'
+    peerDependencies:
+      canvas: '*'
     resolution:
       integrity: sha512-CApm0g81b49Znm4cZekYQK67zY7kkB4umOlI2Dx5CwKAzdgw75EN+ozBHRvxBzwo1ZLYZ07TFxkaPm+1t4d8jA==
-  /jest-runtime/26.0.1:
+  /jest-runtime/26.0.1_canvas@2.6.1:
     dependencies:
       '@jest/console': 26.0.1
       '@jest/environment': 26.0.1
@@ -7251,7 +7289,7 @@ packages:
       exit: 0.1.2
       glob: 7.1.6
       graceful-fs: 4.2.4
-      jest-config: 26.0.1
+      jest-config: 26.0.1_canvas@2.6.1
       jest-haste-map: 26.0.1
       jest-message-util: 26.0.1
       jest-mock: 26.0.1
@@ -7267,6 +7305,8 @@ packages:
     engines:
       node: '>= 10.14.2'
     hasBin: true
+    peerDependencies:
+      canvas: '*'
     resolution:
       integrity: sha512-Ci2QhYFmANg5qaXWf78T2Pfo6GtmIBn2rRaLnklRyEucmPccmCKvS9JPljcmtVamsdMmkyNkVFb9pBTD6si9Lw==
   /jest-serializer/26.0.0:
@@ -7355,15 +7395,17 @@ packages:
       node: '>= 10.14.2'
     resolution:
       integrity: sha512-pPaYa2+JnwmiZjK9x7p9BoZht+47ecFCDFA/CJxspHzeDvQcfVBLWzCiWyo+EGrSiQMWZtCFo9iSvMZnAAo8vw==
-  /jest/26.0.1:
+  /jest/26.0.1_canvas@2.6.1:
     dependencies:
-      '@jest/core': 26.0.1
+      '@jest/core': 26.0.1_canvas@2.6.1
       import-local: 3.0.2
-      jest-cli: 26.0.1
+      jest-cli: 26.0.1_canvas@2.6.1
     dev: false
     engines:
       node: '>= 10.14.2'
     hasBin: true
+    peerDependencies:
+      canvas: '*'
     resolution:
       integrity: sha512-29Q54kn5Bm7ZGKIuH2JRmnKl85YRigp0o0asTc6Sb6l2ch1DCXIeZTLLFy9ultJvhkTqbswF5DEx4+RlkmCxWg==
   /jimp/0.2.28:
@@ -7467,11 +7509,12 @@ packages:
       node: '>=8'
     resolution:
       integrity: sha512-O901mfJSuTdwU2w3Sn+74T+RnDVP+FuV5fH8tcPWyqrseRAb0s5xOtPgCFiPOtLcyK7CLIJwPyD83ZqQWvA5ng==
-  /jsdom/16.2.2:
+  /jsdom/16.2.2_canvas@2.6.1:
     dependencies:
       abab: 2.0.3
       acorn: 7.2.0
       acorn-globals: 6.0.0
+      canvas: 2.6.1
       cssom: 0.4.4
       cssstyle: 2.2.0
       data-urls: 2.0.0
@@ -8209,6 +8252,13 @@ packages:
       node: '>=8'
     resolution:
       integrity: sha512-3JS5A2DKhD2g0Gg8x3yamO0pj7YeKGwVlDS90pF++kxptwx/F+B//roxf9SqYil5tQo65bijy+dAuAFZmYOouA==
+  /minipass/2.9.0:
+    dependencies:
+      safe-buffer: 5.2.0
+      yallist: 3.1.1
+    dev: false
+    resolution:
+      integrity: sha512-wxfUjg9WebH+CUDX/CdbRlh5SmfZiy/hpkxaRI16Y9W56Pa75sWgd/rvFilSgrauD9NyFymP/+JFV3KwzIsJeg==
   /minipass/3.1.1:
     dependencies:
       yallist: 4.0.0
@@ -8217,6 +8267,12 @@ packages:
       node: '>=8'
     resolution:
       integrity: sha512-UFqVihv6PQgwj8/yTGvl9kPz7xIAY+R5z6XYjRInD3Gk3qx6QGSD6zEcpeG4Dy/lQnv1J6zv8ejV90hyYIKf3w==
+  /minizlib/1.3.3:
+    dependencies:
+      minipass: 2.9.0
+    dev: false
+    resolution:
+      integrity: sha512-6ZYMOEnmVsdCeTJVE0W9ZD+pVnE8h9Hma/iOwwRDsdQoePpoX56/8B6z3P9VNwppJuBKNRuFDRNRqRWexT9G9Q==
   /minizlib/2.1.0:
     dependencies:
       minipass: 3.1.1
@@ -8359,6 +8415,17 @@ packages:
     dev: false
     resolution:
       integrity: sha1-Sr6/7tdUHywnrPspvbvRXI1bpPc=
+  /needle/2.5.0:
+    dependencies:
+      debug: 3.2.6
+      iconv-lite: 0.4.24
+      sax: 1.2.4
+    dev: false
+    engines:
+      node: '>= 4.4.x'
+    hasBin: true
+    resolution:
+      integrity: sha512-o/qITSDR0JCyCKEQ1/1bnUXMmznxabbwi/Y4WwJElf+evwJNFNwIDMCCt5IigFVxgeGBJESLohGtIS9gEzo1fA==
   /negotiator/0.6.2:
     dev: false
     engines:
@@ -8476,6 +8543,22 @@ packages:
     optional: true
     resolution:
       integrity: sha512-y8ThJESxsHcak81PGpzWwQKxzk+5YtP3IxR8AYdpXQ1IB6FmcVzFdZXrkPin49F/DKUCfeeiziB8ptY9npzGuA==
+  /node-pre-gyp/0.11.0:
+    dependencies:
+      detect-libc: 1.0.3
+      mkdirp: 0.5.5
+      needle: 2.5.0
+      nopt: 4.0.3
+      npm-packlist: 1.4.8
+      npmlog: 4.1.2
+      rc: 1.2.8
+      rimraf: 2.7.1
+      semver: 5.7.1
+      tar: 4.4.13
+    dev: false
+    hasBin: true
+    resolution:
+      integrity: sha512-TwWAOZb0j7e9eGaf9esRx3ZcLaE5tQ2lvYy1pb5IAaG1a2e2Kv5Lms1Y4hpj+ciXJRofIxxlt5haeQ/2ANeE0Q==
   /node-releases/1.1.56:
     dev: false
     resolution:
@@ -8517,6 +8600,14 @@ packages:
     hasBin: true
     resolution:
       integrity: sha1-xkZdvwirzU2zWTF/eaxopkayj/k=
+  /nopt/4.0.3:
+    dependencies:
+      abbrev: 1.1.1
+      osenv: 0.1.5
+    dev: false
+    hasBin: true
+    resolution:
+      integrity: sha512-CvaGwVMztSMJLOeXPrez7fyfObdZqNUK1cPAEzLHrTybIua9pMdmmPR5YwtfNftIOMv3DPUhFaxsZMNTQO20Kg==
   /normalize-html-whitespace/1.0.0:
     dev: false
     engines:
@@ -8563,6 +8654,24 @@ packages:
       node: '>=6'
     resolution:
       integrity: sha512-U+JJi7duF1o+u2pynbp2zXDW2/PADgC30f0GsHZtRh+HOcXHnw137TrNlyxxRvWW5fjKd3bcLHPxofWuCjaeZg==
+  /npm-bundled/1.1.1:
+    dependencies:
+      npm-normalize-package-bin: 1.0.1
+    dev: false
+    resolution:
+      integrity: sha512-gqkfgGePhTpAEgUsGEgcq1rqPXA+tv/aVBlgEzfXwA1yiUJF7xtEt3CtVwOjNYQOVknDk0F20w58Fnm3EtG0fA==
+  /npm-normalize-package-bin/1.0.1:
+    dev: false
+    resolution:
+      integrity: sha512-EPfafl6JL5/rU+ot6P3gRSCpPDW5VmIzX959Ob1+ySFUuuYHWHekXpwdUZcKP5C+DS4GEtdJluwBjnsNDl+fSA==
+  /npm-packlist/1.4.8:
+    dependencies:
+      ignore-walk: 3.0.3
+      npm-bundled: 1.1.1
+      npm-normalize-package-bin: 1.0.1
+    dev: false
+    resolution:
+      integrity: sha512-5+AZgwru5IevF5ZdnFglB5wNlHG1AOOuw28WhUq8/8emhBmLv6jX5by4WJCh7lW0uSYZYS6DXqIsyZVIXRZU9A==
   /npm-run-path/2.0.2:
     dependencies:
       path-key: 2.0.1
@@ -10086,7 +10195,7 @@ packages:
     dependencies:
       deep-extend: 0.6.0
       ini: 1.3.5
-      minimist: 1.2.0
+      minimist: 1.2.5
       strip-json-comments: 2.0.1
     dev: false
     hasBin: true
@@ -11703,6 +11812,20 @@ packages:
     dev: false
     resolution:
       integrity: sha512-FCEhQ/4rE1zYv9rYXJw/msRqsnmlje5jHP6huWeBZ704jUTy02c5AZyWujpMR1ax6mVw9NyJMfuK2CMDWVIfgA==
+  /tar/4.4.13:
+    dependencies:
+      chownr: 1.1.3
+      fs-minipass: 1.2.7
+      minipass: 2.9.0
+      minizlib: 1.3.3
+      mkdirp: 0.5.5
+      safe-buffer: 5.2.0
+      yallist: 3.1.1
+    dev: false
+    engines:
+      node: '>=4.5'
+    resolution:
+      integrity: sha512-w2VwSrBoHa5BsSyH+KxEqeQBAllHhccyMFVHtGtdMpF4W7IRWfZjFiQceJPChOeTsSDVUpER2T8FA93pr0L+QA==
   /tar/5.0.5:
     dependencies:
       chownr: 1.1.3
@@ -12092,7 +12215,7 @@ packages:
       bs-logger: 0.2.6
       buffer-from: 1.1.1
       fast-json-stable-stringify: 2.1.0
-      jest: 26.0.1
+      jest: 26.0.1_canvas@2.6.1
       json5: 2.1.3
       lodash.memoize: 4.1.2
       make-error: 1.3.5
@@ -12172,7 +12295,31 @@ packages:
       semver: 5.7.1
       tslib: 1.10.0
       tsutils: 2.29.0_typescript@3.7.5
-      typescript: 3.7.5
+    deprecated: 'TSLint has been deprecated in favor of ESLint. Please see https://github.com/palantir/tslint/issues/4534 for more information.'
+    dev: false
+    engines:
+      node: '>=4.8.0'
+    hasBin: true
+    peerDependencies:
+      typescript: '>=2.3.0-dev || >=2.4.0-dev || >=2.5.0-dev || >=2.6.0-dev || >=2.7.0-dev || >=2.8.0-dev || >=2.9.0-dev || >=3.0.0-dev || >= 3.1.0-dev || >= 3.2.0-dev'
+    resolution:
+      integrity: sha512-9nLya8GBtlFmmFMW7oXXwoXS1NkrccqTqAtwXzdPV9e2mqSEvCki6iHL/Fbzi5oqbugshzgGPk7KBb2qNP1DSA==
+  /tslint/6.0.0_typescript@3.9.3:
+    dependencies:
+      '@babel/code-frame': 7.5.5
+      builtin-modules: 1.1.1
+      chalk: 2.4.2
+      commander: 2.20.3
+      diff: 4.0.1
+      glob: 7.1.6
+      js-yaml: 3.13.1
+      minimatch: 3.0.4
+      mkdirp: 0.5.1
+      resolve: 1.14.1
+      semver: 5.7.1
+      tslib: 1.10.0
+      tsutils: 2.29.0_typescript@3.9.3
+      typescript: 3.9.3
     deprecated: 'TSLint has been deprecated in favor of ESLint. Please see https://github.com/palantir/tslint/issues/4534 for more information.'
     dev: false
     engines:
@@ -12185,7 +12332,15 @@ packages:
   /tsutils/2.29.0_typescript@3.7.5:
     dependencies:
       tslib: 1.10.0
-      typescript: 3.7.5
+    dev: false
+    peerDependencies:
+      typescript: '>=2.1.0 || >=2.1.0-dev || >=2.2.0-dev || >=2.3.0-dev || >=2.4.0-dev || >=2.5.0-dev || >=2.6.0-dev || >=2.7.0-dev || >=2.8.0-dev || >=2.9.0-dev || >= 3.0.0-dev || >= 3.1.0-dev'
+    resolution:
+      integrity: sha512-g5JVHCIJwzfISaXpXE1qvNalca5Jwob6FjI4AoPlqMusJ6ftFE7IkkFoMhVLRgK+4Kx3gkzb8UZK5t5yTTvEmA==
+  /tsutils/2.29.0_typescript@3.9.3:
+    dependencies:
+      tslib: 1.10.0
+      typescript: 3.9.3
     dev: false
     peerDependencies:
       typescript: '>=2.1.0 || >=2.1.0-dev || >=2.2.0-dev || >=2.3.0-dev || >=2.4.0-dev || >=2.5.0-dev || >=2.6.0-dev || >=2.7.0-dev || >=2.8.0-dev || >=2.9.0-dev || >= 3.0.0-dev || >= 3.1.0-dev'
@@ -12305,13 +12460,6 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-ml7V7JfiN2Xwvcer+XAf2csGO1bPBdRbFCkYBczNZggrBZ9c7G3riSUeJmqEU5uOtXNPMhE3n+R4FA/3YOAWOQ==
-  /typescript/3.7.5:
-    dev: false
-    engines:
-      node: '>=4.2.0'
-    hasBin: true
-    resolution:
-      integrity: sha512-/P5lkRXkWHNAbcJIiHPfRoKqyd7bsyCma1hZNUGfn20qm64T6ZBlrzprymeu918H+mB/0rIg2gGK/BXkhhYgBw==
   /typescript/3.9.3:
     dev: false
     engines:
@@ -13404,19 +13552,22 @@ packages:
       node: '>=6'
     resolution:
       integrity: sha512-Ux4ygGWsu2c7isFWe8Yu1YluJmqVhxqK2cLXNQA5AcC3QfbGNpM7fu0Y8b/z16pXLnFxZYvWhd3fhBY9DLmC6Q==
-  'file:projects/tempo-core.tgz':
+  'file:projects/tempo-core.tgz_canvas@2.6.1':
     dependencies:
       '@types/jest': 25.2.3
       '@types/node': 14.0.5
-      jest: 26.0.1
+      jest: 26.0.1_canvas@2.6.1
       prettier: 2.0.5
       ts-jest: 26.0.0_jest@26.0.1+typescript@3.9.3
-      tslint: 6.0.0_typescript@3.7.5
+      tslint: 6.0.0_typescript@3.9.3
       typedoc: 0.16.7
       typedoc-plugin-markdown: 2.2.16_typedoc@0.16.7
       typescript: 3.9.3
     dev: false
+    id: 'file:projects/tempo-core.tgz'
     name: '@rush-temp/tempo-core'
+    peerDependencies:
+      canvas: '*'
     resolution:
       integrity: sha512-E1FlZz7peAOMGatGZhcK8dAAA7eVycUijeFHIRDjaxPnQ4ABobthsQe9tHMij4FsSwWlYi784F2S+Ag+PyD1zQ==
       tarball: 'file:projects/tempo-core.tgz'
@@ -13436,7 +13587,7 @@ packages:
     dev: false
     name: '@rush-temp/tempo-demo.benchmark'
     resolution:
-      integrity: sha512-UwObuqJJV7TsJllGBKI+j6cLPZuShe0AOzpWhoEsUxxqg1yMaaGlrlB6qxNGZBWZAHTSD7mxrlH/Pu6UsvZWaw==
+      integrity: sha512-AI4/OulMhZHeUkJnC6ctQyvbRGrpfk02kTo2wEL0CAoF2orEHPu7DQ4ZcVAAE7+3k5/CY04h5lDqiVG6CKUDhg==
       tarball: 'file:projects/tempo-demo.benchmark.tgz'
     version: 0.0.0
   'file:projects/tempo-demo.hnpwa.tgz':
@@ -13458,7 +13609,7 @@ packages:
     dev: false
     name: '@rush-temp/tempo-demo.hnpwa'
     resolution:
-      integrity: sha512-o1fn/dv3xUPO5VgbhRMIrxK37FFrm0DmqIQkVaTKRL1o1xATJIIRdLFlz7oo8NPnj78m9xxxMW2z3RuNBmmSng==
+      integrity: sha512-cqC9Jb4RbJPjxsRZiyfPBR0Dbjs+6fDIAm+7VwdhSCWWDg9E9xB6ym2Epb094GonyYeGMIa658vD+Sny/OUAJw==
       tarball: 'file:projects/tempo-demo.hnpwa.tgz'
     version: 0.0.0
   'file:projects/tempo-demo.paper.tgz_sass@1.23.7':
@@ -13488,7 +13639,7 @@ packages:
     peerDependencies:
       sass: '*'
     resolution:
-      integrity: sha512-PZ6MAOwG3DJT6s7pyFYG0kO3hlW9OOL2b1IOsgCQDueT/MxGlkt0rgYgDmnL1md3ELrxUNNzNWzijgkKtE9Waw==
+      integrity: sha512-cTZT7jh5okbegRIh+9krWvQnWtmGmDnFRV/DGPNui6nNeEkCLpFps39ndXDGkc6Lvodq4PL1EhvD9j1vZ4U+Qg==
       tarball: 'file:projects/tempo-demo.paper.tgz'
     version: 0.0.0
   'file:projects/tempo-demo.readme.tgz':
@@ -13505,7 +13656,7 @@ packages:
     dev: false
     name: '@rush-temp/tempo-demo.readme'
     resolution:
-      integrity: sha512-AnuKEns1I2vu04fjq/C0xkFFZRdwM/nzRCRTYtjZeYuPte5gUErl9klUYL7oLc5/cSDL2F1z54nQQUQ27yq6wg==
+      integrity: sha512-hTyVhJ0sNqzkX97wBfqHxRiljrhir+5hbQxONasMV/+DiTnAfPeUNCBRGmAKVIF5VV8rR7UUl/wk3roUib/8OQ==
       tarball: 'file:projects/tempo-demo.readme.tgz'
     version: 0.0.0
   'file:projects/tempo-demo.todomvc.tgz':
@@ -13524,15 +13675,16 @@ packages:
     dev: false
     name: '@rush-temp/tempo-demo.todomvc'
     resolution:
-      integrity: sha512-JRZR/7iNDsNEQZwtpOjZSLapWfNk/SgTApvGW8HHYdbpuHlKB7FQpd3QuSfLhMeY1WXInlx7GK1WvHLfW0vZCA==
+      integrity: sha512-rV93JQaeXklX8ngT2RTPxgKaq0KnZQMOmlES5Q4MLp/l0PleMyqItMlNToeL6oVhL5KYf1tD6m5dRrXw+Fe2Rg==
       tarball: 'file:projects/tempo-demo.todomvc.tgz'
     version: 0.0.0
   'file:projects/tempo-dom.tgz':
     dependencies:
       '@types/jest': 25.2.3
       '@types/jsdom': 16.2.3
-      jest: 26.0.1
-      jsdom: 16.2.2
+      canvas: 2.6.1
+      jest: 26.0.1_canvas@2.6.1
+      jsdom: 16.2.2_canvas@2.6.1
       lodash: 4.17.15
       prettier: 2.0.5
       request: 2.88.2
@@ -13548,15 +13700,16 @@ packages:
     dev: false
     name: '@rush-temp/tempo-dom'
     resolution:
-      integrity: sha512-9IxpMlQG81bVQoHBQJDhjf8omwyw98JOBc26VgFCrfcXila1a6zLr5q9YsLdhF61ycdpM4lKzSC8hexfNcWf6A==
+      integrity: sha512-xHts5m7W6V9WxvNtpEqVpgaHx8lLkykHrFB6xO8HXNKCJzjGfwXWtBp/Mse711pwSQC5zUjS2644rBzBLjJdUQ==
       tarball: 'file:projects/tempo-dom.tgz'
     version: 0.0.0
   'file:projects/tempo-paper.tgz_webpack@4.43.0':
     dependencies:
       '@types/jest': 25.2.3
       '@types/jsdom': 16.2.3
-      jest: 26.0.1
-      jsdom: 16.2.2
+      canvas: 2.6.1
+      jest: 26.0.1_canvas@2.6.1
+      jsdom: 16.2.2_canvas@2.6.1
       lodash: 4.17.15
       paper: 0.12.3
       prettier: 2.0.5
@@ -13572,55 +13725,58 @@ packages:
     peerDependencies:
       webpack: '*'
     resolution:
-      integrity: sha512-CvSaEWB/pCTqK9p7smaIm3cbEytXOIWINrYQ61xkagLC/GmkQPSxYgvtO6gQzGfaZnVl5JplOxsFOVvQvGn0OA==
+      integrity: sha512-rpxpVY2pOtdRRRD9nCjPhQOcS0f/Nh/VbZXV1jG1fp3sc/1wzSY7YpEq0xp1w3sJ+szWMi39MHAtGjlFcLqnHA==
       tarball: 'file:projects/tempo-paper.tgz'
     version: 0.0.0
   'file:projects/tempo-root.tgz':
     dependencies:
       '@types/jest': 25.2.3
+      canvas: 2.6.1
       gh-pages: 2.2.0
-      jest: 26.0.1
-      jsdom: 16.2.2
+      jest: 26.0.1_canvas@2.6.1
+      jsdom: 16.2.2_canvas@2.6.1
       ts-jest: 26.0.0_jest@26.0.1+typescript@3.9.3
       typescript: 3.9.3
     dev: false
     name: '@rush-temp/tempo-root'
     resolution:
-      integrity: sha512-Go+EIjkYm+xh8zk5Q88W9O09cmvgOnrA41Ex7Yn5toJ483Dr9BKz7VQFOHBj0TuL6UFaEjzykm+MvBEY0LHPJw==
+      integrity: sha512-tLf3OP2qTgyk9WvCxyHquEXaw19hWuwAGb7DAy2zv9Q2FL9onxxe0FwebSuQDnwgXLtXtQDq10S3c/PF/QayCA==
       tarball: 'file:projects/tempo-root.tgz'
     version: 0.0.0
-  'file:projects/tempo-std.tgz':
+  'file:projects/tempo-std.tgz_canvas@2.6.1':
     dependencies:
       '@types/jest': 25.2.3
       '@types/node': 14.0.5
-      jest: 26.0.1
+      jest: 26.0.1_canvas@2.6.1
       prettier: 2.0.5
       ts-jest: 26.0.0_jest@26.0.1+typescript@3.9.3
-      tslint: 6.0.0_typescript@3.7.5
+      tslint: 6.0.0_typescript@3.9.3
       typedoc: 0.16.7
       typedoc-plugin-markdown: 2.2.16_typedoc@0.16.7
       typescript: 3.9.3
     dev: false
+    id: 'file:projects/tempo-std.tgz'
     name: '@rush-temp/tempo-std'
+    peerDependencies:
+      canvas: '*'
     resolution:
       integrity: sha512-rcDmDJDw8QGpf6alQlEANX7/I9KzjnS4LJbibBpSoIucDODoXOTsBLEqRYr4DRdUmYE3gbLhYfdL55iGOEhFfQ==
       tarball: 'file:projects/tempo-std.tgz'
     version: 0.0.0
-  'file:projects/tempo-store.tgz':
+  'file:projects/tempo-store.tgz_canvas@2.6.1':
     dependencies:
       '@types/jest': 25.2.3
-      jest: 26.0.1
+      jest: 26.0.1_canvas@2.6.1
       prettier: 2.0.5
-      tempo-core: 1.2.0
       ts-jest: 26.0.0_jest@26.0.1+typescript@3.9.3
-      tslint: 6.0.0_typescript@3.7.5
-      typedoc: 0.16.7
-      typedoc-plugin-markdown: 2.2.16_typedoc@0.16.7
       typescript: 3.9.3
     dev: false
+    id: 'file:projects/tempo-store.tgz'
     name: '@rush-temp/tempo-store'
+    peerDependencies:
+      canvas: '*'
     resolution:
-      integrity: sha512-1jQWuQFE5h16YFsPeivQmvn+0ztQ5MmR1kvTL9lR8fHjlcrXEBE/JZwKETdYQ+1fwTiGCOUyftuUNXat68xJ+Q==
+      integrity: sha512-UeTXbsceePY+Vp2PbcXcOBvBFJQkZUg8cLs1WHTxOsFmRiwoMiXlMCEPejh3b+HvLtG7n9CPTPwzMIt4gp2emw==
       tarball: 'file:projects/tempo-store.tgz'
     version: 0.0.0
   'file:projects/tempo-template-dom.tgz':
@@ -13628,9 +13784,10 @@ packages:
       '@types/jest': 25.2.3
       '@types/jsdom': 16.2.3
       babel-types: 6.26.0
+      canvas: 2.6.1
       cssnano: 4.1.10
-      jest: 26.0.1
-      jsdom: 16.2.2
+      jest: 26.0.1_canvas@2.6.1
+      jsdom: 16.2.2_canvas@2.6.1
       lodash: 4.17.15
       parcel-bundler: 1.12.4
       prettier: 2.0.5
@@ -13643,7 +13800,7 @@ packages:
     dev: false
     name: '@rush-temp/tempo-template-dom'
     resolution:
-      integrity: sha512-euDHRc0u1KifS0cuJQU3OS5TGCwdV5XIS+GMXclJUrrHtlCDoVojscfGJLnd07DGl/uPaBqykTzOQb4BPoO2RQ==
+      integrity: sha512-vCOWgfYlpi32KGK4YsZwof0HKA4jv7x6dKo42mPvhrqoAmv85s2b8YJNevTIvvDIwmgL/frRmeRibsgeYPMGlg==
       tarball: 'file:projects/tempo-template-dom.tgz'
     version: 0.0.0
   'file:projects/tempo-tools.docs.tgz_sass@1.23.7':
@@ -13660,6 +13817,7 @@ packages:
       babel-types: 6.26.0
       bulma: 0.8.2
       bulma-extensions: 6.2.7
+      canvas: 2.6.1
       css-loader: 3.5.3_webpack@4.43.0
       cssnano: 4.1.10
       doctrine: 3.0.0
@@ -13669,7 +13827,7 @@ packages:
       highlight.js: 9.18.0
       html-webpack-plugin: 4.3.0_webpack@4.43.0
       html-webpack-template: 6.2.0_html-webpack-plugin@3.2.0
-      jsdom: 16.2.2
+      jsdom: 16.2.2_canvas@2.6.1
       mini-css-extract-plugin: 0.9.0_webpack@4.43.0
       node-sass: 4.14.1
       optimize-css-assets-webpack-plugin: 5.0.3_webpack@4.43.0
@@ -13696,7 +13854,7 @@ packages:
     peerDependencies:
       sass: '*'
     resolution:
-      integrity: sha512-WGCzeK19FdYCE8qf3KNZUdERDsPsT0K/QNHGBnWRFkBG0vE0DVvet+DjfP+sj7tlq7YNVJx+gHV36DmgXWSkUw==
+      integrity: sha512-/29xzai9Xj++We8GHlyzQx+hsqkM3e+8uPFslERViGJVPkNo11Wb7z+/pKJRhdJNkPoCgGAOygeXARlnPtC/8Q==
       tarball: 'file:projects/tempo-tools.docs.tgz'
     version: 0.0.0
 registry: ''
@@ -13726,6 +13884,7 @@ specifiers:
   acorn: ^7.2.0
   babel-types: ^6.26.0
   bulma: ^0.8.2
+  canvas: ^2.6.1
   css-loader: ^3.5.3
   cssnano: ^4.1.10
   doctrine: ^3.0.0
