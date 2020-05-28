@@ -1,6 +1,13 @@
 # Change Log - tempo-paper
 
-This log was last generated on Mon, 17 Feb 2020 19:18:30 GMT and should not be manually modified.
+This log was last generated on Thu, 28 May 2020 23:50:31 GMT and should not be manually modified.
+
+## 0.5.0
+Thu, 28 May 2020 23:50:31 GMT
+
+### Minor changes
+
+- Change signature of `repeatUntil` for `repeat` to b
 
 ## 0.4.0
 Mon, 17 Feb 2020 19:18:30 GMT
