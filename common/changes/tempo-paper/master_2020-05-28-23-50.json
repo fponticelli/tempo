@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "tempo-paper",
+      "comment": "Change signature of `repeatUntil` for `repeat` to b",
+      "type": "minor"
+    }
+  ],
+  "packageName": "tempo-paper",
+  "email": "franco.ponticelli@gmail.com"
+}
