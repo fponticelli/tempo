@@ -1,6 +1,20 @@
 # Change Log - tempo-std
 
-This log was last generated on Sun, 16 Feb 2020 03:58:19 GMT and should not be manually modified.
+This log was last generated on Thu, 28 May 2020 01:39:13 GMT and should not be manually modified.
+
+## 0.5.2
+Thu, 28 May 2020 01:39:13 GMT
+
+### Patches
+
+- Add matchLiteral to `match.ts`.
+
+## 0.5.1
+Thu, 21 May 2020 21:12:19 GMT
+
+### Minor changes
+
+- Add `remove` and `ofIterableIterator` to arrays
 
 ## 0.5.0
 Sun, 16 Feb 2020 03:58:19 GMT

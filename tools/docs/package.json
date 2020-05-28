@@ -39,7 +39,7 @@
     "acorn": "^7.2.0",
     "tempo-core": "^1.7.0",
     "tempo-dom": "^0.17.2",
-    "tempo-std": "^0.5.1",
+    "tempo-std": "^0.5.2",
     "tempo-store": "^1.2.2"
   },
   "devDependencies": {
