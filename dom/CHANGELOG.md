@@ -1,6 +1,13 @@
 # Change Log - tempo-dom
 
-This log was last generated on Fri, 29 May 2020 03:36:19 GMT and should not be manually modified.
+This log was last generated on Fri, 29 May 2020 03:55:30 GMT and should not be manually modified.
+
+## 0.19.1
+Fri, 29 May 2020 03:55:30 GMT
+
+### Patches
+
+- Add `applyAttributes` to join two attributes into one.
 
 ## 0.19.0
 Fri, 29 May 2020 03:36:19 GMT
