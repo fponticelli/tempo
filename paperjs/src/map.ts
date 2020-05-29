@@ -15,11 +15,13 @@ import { PaperTemplate } from './template'
 import { View } from 'tempo-core/lib/view'
 import { PaperContext } from './context'
 import { map as mapArray } from 'tempo-std/lib/arrays'
+import { PaperAttribute, resolveAttribute } from './value'
 
 class MapStateTemplate<OuterState, InnerState, Action, Query>
   implements PaperTemplate<OuterState, Action, Query> {
   constructor(
-    readonly map: (value: OuterState) => InnerState,
+    readonly map: PaperAttribute<OuterState, InnerState>,
+    readonly whenUndefined: PaperTemplate<unknown, Action, Query> | undefined,
     readonly children: PaperTemplate<InnerState, Action, Query>[]
   ) {}
 
@@ -27,18 +29,49 @@ class MapStateTemplate<OuterState, InnerState, Action, Query>
     ctx: PaperContext<Action>,
     state: OuterState
   ): View<OuterState, Query> {
-    const { children, map } = this
-    const innerState = map(state)
-    const views = mapArray(children, c => c.render(ctx, innerState))
+    const { children, map, whenUndefined } = this
+
+    let isUndefined = true
+    let views: View<InnerState, Query>[] = []
+
+    const innerState = resolveAttribute(map)(state)
+
+    if (typeof innerState !== 'undefined') {
+      isUndefined = false
+      views = mapArray(children, c => c.render(ctx, innerState))
+    } else {
+      isUndefined = true
+      views =
+        typeof whenUndefined === 'undefined'
+          ? []
+          : [whenUndefined.render(ctx, state)]
+    }
+
+    function destroy() {
+      for (const view of views) view.destroy()
+    }
 
     return {
       change: (state: OuterState) => {
-        const innerState = map(state)
-        for (const view of views) view.change(innerState)
+        const innerState = resolveAttribute(map)(state)
+        if (typeof innerState !== 'undefined') {
+          if (isUndefined) {
+            destroy()
+            views = mapArray(children, c => c.render(ctx, innerState))
+          } else {
+            for (const view of views) view.change(innerState)
+          }
+          isUndefined = false
+        } else {
+          destroy()
+          views =
+            typeof whenUndefined === 'undefined'
+              ? []
+              : [whenUndefined.render(ctx, state)]
+          isUndefined = true
+        }
       },
-      destroy: () => {
-        for (const view of views) view.destroy()
-      },
+      destroy,
       request: (query: Query) => {
         for (const view of views) view.request(query)
       }
@@ -47,10 +80,13 @@ class MapStateTemplate<OuterState, InnerState, Action, Query>
 }
 
 export function mapState<OuterState, InnerState, Action, Query = unknown>(
-  props: { map: (value: OuterState) => InnerState },
+  props: {
+    map: PaperAttribute<OuterState, InnerState>
+    whenUndefined?: PaperTemplate<unknown, Action, Query>
+  },
   ...children: PaperTemplate<InnerState, Action, Query>[]
 ): PaperTemplate<OuterState, Action, Query> {
-  return new MapStateTemplate(props.map, children)
+  return new MapStateTemplate(props.map, props.whenUndefined, children)
 }
 
 export function mapStateAndKeep<
@@ -59,7 +95,10 @@ export function mapStateAndKeep<
   Action,
   Query = unknown
 >(
-  props: { map: (value: OuterState) => InnerState },
+  props: {
+    map: PaperAttribute<OuterState, InnerState>
+    whenUndefined?: PaperTemplate<unknown, Action, Query>
+  },
   ...children: PaperTemplate<[InnerState, OuterState], Action, Query>[]
 ): PaperTemplate<OuterState, Action, Query> {
   return new MapStateTemplate<
@@ -67,7 +106,18 @@ export function mapStateAndKeep<
     [InnerState, OuterState],
     Action,
     Query
-  >((state: OuterState) => [props.map(state), state], children)
+  >(
+    (state: OuterState) => {
+      const inner = resolveAttribute(props.map)(state)
+      if (typeof inner !== 'undefined') {
+        return [inner, state]
+      } else {
+        return undefined
+      }
+    },
+    props.whenUndefined,
+    children
+  )
 }
 
 class MapActionTemplate<State, OuterAction, InnerAction, Query>

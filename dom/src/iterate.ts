@@ -14,47 +14,63 @@ limitations under the License.
 import { DOMChild, DOMTemplate } from './template'
 import { mapState } from './map'
 import { until } from './until'
+import { Attribute, resolveAttribute } from './value'
 
-export function iterate<OuterState, InnerState extends any[], Action, Query = unknown>(
+export function iterate<
+  OuterState,
+  InnerState extends any[],
+  Action,
+  Query = unknown
+>(
   props: {
     refId?: string
-    getArray: (outer: OuterState) => InnerState
+    getArray: Attribute<OuterState, InnerState>
   },
-  ...children: DOMChild<[InnerState[number], OuterState, number], Action, Query>[]
+  ...children: DOMChild<
+    [InnerState[number], OuterState, number],
+    Action,
+    Query
+  >[]
 ): DOMTemplate<OuterState, Action, Query> {
   let outerState: OuterState
   return mapState<OuterState, InnerState, Action, Query>(
     {
-      map: (outer) => {
+      map: (outer: OuterState) => {
         outerState = outer
-        return props.getArray(outer)
+        return resolveAttribute(props.getArray)(outerState)
       }
     },
     until<InnerState, InnerState[number], Action, Query>(
       {
-        repeatUntil:
-          (value: InnerState, index: number) => value[index] && ([value[index], outerState, index])
+        repeatUntil: ({ state, index }: { state: InnerState; index: number }) =>
+          state[index] && [state[index], outerState, index]
       },
       ...children
     )
   )
 }
 
-export function iterateItems<OuterState, InnerState extends any[], Action, Query = unknown>(
+export function iterateItems<
+  OuterState,
+  InnerState extends any[],
+  Action,
+  Query = unknown
+>(
   props: {
     refId?: string
-    getArray: (outer: OuterState) => InnerState
+    getArray: Attribute<OuterState, InnerState>
+    whenUndefined?: DOMChild<unknown, Action, Query>
   },
   ...children: DOMChild<InnerState[number], Action, Query>[]
 ): DOMTemplate<OuterState, Action, Query> {
   return mapState<OuterState, InnerState, Action, Query>(
     {
-      map: (outer) => props.getArray(outer)
+      map: outer => resolveAttribute(props.getArray)(outer)
     },
     until<InnerState, InnerState[number], Action, Query>(
       {
-        repeatUntil:
-          (value: InnerState, index: number) => value[index]
+        repeatUntil: ({ state, index }: { state: InnerState; index: number }) =>
+          state[index]
       },
       ...children
     )

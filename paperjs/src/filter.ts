@@ -15,24 +15,28 @@ import { PaperTemplate } from './template'
 import { View } from 'tempo-core/lib/view'
 import { PaperContext } from './context'
 import { map } from 'tempo-std/lib/arrays'
+import { PaperAttribute, resolveAttribute } from './value'
 
 class FilterStateTemplate<State, Action, Query>
   implements PaperTemplate<State, Action, Query> {
   constructor(
-    readonly isSame: (prev: State, next: State) => boolean,
+    readonly stateHasChanged: PaperAttribute<
+      { current: State; next: State },
+      boolean
+    >,
     readonly children: PaperTemplate<State, Action, Query>[]
   ) {}
 
   render(ctx: PaperContext<Action>, state: State): View<State, Query> {
-    const { children, isSame: filter } = this
+    const { children, stateHasChanged } = this
     const views = map(children, c => c.render(ctx, state))
 
-    let prevState = state
+    let current = state
     return {
-      change: (newState: State) => {
-        if (!filter(prevState, newState)) {
-          prevState = newState
-          for (const view of views) view.change(newState)
+      change: (next: State) => {
+        if (resolveAttribute(stateHasChanged)({ current, next })) {
+          current = next
+          for (const view of views) view.change(next)
         }
       },
       destroy: () => {
@@ -46,11 +50,10 @@ class FilterStateTemplate<State, Action, Query>
 }
 
 export function filterState<State, Action, Query = unknown>(
-  props: { isSame?: (prev: State, next: State) => boolean },
+  props: {
+    stateHasChanged?: PaperAttribute<{ current: State; next: State }, boolean>
+  },
   ...children: PaperTemplate<State, Action, Query>[]
 ): PaperTemplate<State, Action, Query> {
-  return new FilterStateTemplate(
-    props.isSame || ((a: State, b: State) => a === b),
-    children
-  )
+  return new FilterStateTemplate(props.stateHasChanged, children)
 }

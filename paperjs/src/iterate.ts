@@ -14,6 +14,7 @@ limitations under the License.
 import { PaperTemplate } from './template'
 import { mapState } from './map'
 import { until } from './until'
+import { PaperAttribute, resolveAttribute } from './value'
 
 export function iterate<
   OuterState,
@@ -23,7 +24,7 @@ export function iterate<
 >(
   props: {
     refId?: string
-    getArray: (outer: OuterState) => InnerState
+    getArray: PaperAttribute<OuterState, InnerState>
   },
   ...children: PaperTemplate<
     [InnerState[number], OuterState, number],
@@ -34,15 +35,15 @@ export function iterate<
   let outerState: OuterState
   return mapState<OuterState, InnerState, Action, Query>(
     {
-      map: outer => {
+      map: (outer: OuterState) => {
         outerState = outer
-        return props.getArray(outer)
+        return resolveAttribute(props.getArray)(outerState)
       }
     },
     until<InnerState, InnerState[number], Action, Query>(
       {
-        repeatUntil: (value: InnerState, index: number) =>
-          value[index] && [value[index], outerState, index]
+        repeatUntil: ({ state, index }: { state: InnerState; index: number }) =>
+          state[index] && [state[index], outerState, index]
       },
       ...children
     )
@@ -57,15 +58,16 @@ export function iterateItems<
 >(
   props: {
     refId?: string
-    getArray: (outer: OuterState) => InnerState
+    getArray: PaperAttribute<OuterState, InnerState>
   },
   ...children: PaperTemplate<InnerState[number], Action, Query>[]
 ): PaperTemplate<OuterState, Action, Query> {
   return mapState<OuterState, InnerState, Action, Query>(
-    { map: outer => props.getArray(outer) },
+    { map: outer => resolveAttribute(props.getArray)(outer) },
     until<InnerState, InnerState[number], Action, Query>(
       {
-        repeatUntil: (value: InnerState, index: number) => value[index]
+        repeatUntil: ({ state, index }: { state: InnerState; index: number }) =>
+          state[index]
       },
       ...children
     )

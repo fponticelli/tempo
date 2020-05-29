@@ -24,7 +24,7 @@ class PaperUntilTemplate<OuterState, InnerState, Action, Query>
     readonly props: {
       repeatUntil: PaperAttribute<
         { state: OuterState; index: number },
-        InnerState | undefined
+        InnerState
       >
     },
     readonly children: PaperTemplate<InnerState, Action, Query>[]
@@ -85,7 +85,7 @@ export function until<OuterState, InnerState, Action, Query = unknown>(
   props: {
     repeatUntil: PaperAttribute<
       { state: OuterState; index: number },
-      InnerState | undefined
+      InnerState
     >
   },
   ...children: PaperTemplate<InnerState, Action, Query>[]

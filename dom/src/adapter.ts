@@ -15,6 +15,7 @@ import { View } from 'tempo-core/lib/view'
 import { Component } from './component'
 import { DOMTemplate } from './template'
 import { DOMContext } from './context'
+import { Attribute, resolveAttribute } from './value'
 
 class AdapterTemplate<OuterState, InnerState, OuterAction, InnerAction, Query>
   implements DOMTemplate<OuterState, OuterAction, Query> {
@@ -23,10 +24,10 @@ class AdapterTemplate<OuterState, InnerState, OuterAction, InnerAction, Query>
     | ((state: InnerState, action: InnerAction) => void)
 
   constructor(
-    readonly mergeStates: (
-      outerState: OuterState,
-      innerState: InnerState
-    ) => InnerState | undefined,
+    readonly mergeStates: Attribute<
+      { outerState: OuterState; innerState: InnerState },
+      InnerState
+    >,
     readonly propagate: (
       args: PropagateArg<OuterState, InnerState, OuterAction, InnerAction>
     ) => void,
@@ -37,10 +38,15 @@ class AdapterTemplate<OuterState, InnerState, OuterAction, InnerAction, Query>
     ctx: DOMContext<OuterAction>,
     outerState: OuterState
   ): View<OuterState, Query> {
+    const innerState = this.child.store.property.get()
     const mergedState =
-      (this.mergeStates &&
-        this.mergeStates(outerState, this.child.store.property.get())) ||
-      this.child.store.property.get()
+      resolveAttribute(this.mergeStates)({
+        outerState,
+        innerState
+      }) ?? innerState
+    // (this.mergeStates &&
+    //   this.mergeStates(outerState, this.child.store.property.get())) ||
+    //   this.child.store.property.get()
 
     const viewComponent = this.child.render(
       ctx.withDispatch(() => {
@@ -64,10 +70,11 @@ class AdapterTemplate<OuterState, InnerState, OuterAction, InnerAction, Query>
 
     return {
       change: (state: OuterState) => {
-        const newState = this.mergeStates(
-          state,
-          this.child.store.property.get()
-        )
+        const innerState = this.child.store.property.get()
+        const newState = resolveAttribute(this.mergeStates)({
+          outerState: state,
+          innerState
+        })
         if (typeof newState !== 'undefined') viewComponent.change(newState)
       },
       destroy: () => {
@@ -104,10 +111,13 @@ export function adapter<
   Query = unknown
 >(
   props: {
-    mergeStates?: (
-      outerState: OuterState,
-      innerState: InnerState
-    ) => InnerState | undefined
+    mergeStates?: Attribute<
+      {
+        outerState: OuterState
+        innerState: InnerState
+      },
+      InnerState
+    >
     propagate?: (
       args: PropagateArg<OuterState, InnerState, OuterAction, InnerAction>
     ) => void
@@ -115,7 +125,7 @@ export function adapter<
   child: Component<InnerState, InnerAction, Query>
 ): DOMTemplate<OuterState, OuterAction, Query> {
   return new AdapterTemplate(
-    props.mergeStates || ((_u: OuterState, _d: InnerState) => undefined),
+    props.mergeStates,
     /* istanbul ignore next */
     props.propagate || (() => undefined),
     child

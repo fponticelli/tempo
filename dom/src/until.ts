@@ -23,10 +23,7 @@ class UntilTemplate<OuterState, InnerState, Action, Query>
   constructor(
     readonly props: {
       refId?: string
-      repeatUntil: Attribute<
-        { state: OuterState; index: number },
-        InnerState | undefined
-      >
+      repeatUntil: Attribute<{ state: OuterState; index: number }, InnerState>
     },
     readonly children: DOMTemplate<InnerState, Action, Query>[]
   ) {}
@@ -81,10 +78,7 @@ class UntilTemplate<OuterState, InnerState, Action, Query>
 export function until<OuterState, InnerState, Action, Query = unknown>(
   props: {
     refId?: string
-    repeatUntil: Attribute<
-      { state: OuterState; index: number },
-      InnerState | undefined
-    >
+    repeatUntil: Attribute<{ state: OuterState; index: number }, InnerState>
   },
   ...children: DOMChild<InnerState, Action, Query>[]
 ): DOMTemplate<OuterState, Action, Query> {
