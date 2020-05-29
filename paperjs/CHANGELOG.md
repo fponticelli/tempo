@@ -1,6 +1,13 @@
 # Change Log - tempo-paper
 
-This log was last generated on Thu, 28 May 2020 23:50:31 GMT and should not be manually modified.
+This log was last generated on Fri, 29 May 2020 03:36:19 GMT and should not be manually modified.
+
+## 0.6.0
+Fri, 29 May 2020 03:36:19 GMT
+
+### Minor changes
+
+- Changed elements to use more PaperAttributes types.
 
 ## 0.5.0
 Thu, 28 May 2020 23:50:31 GMT

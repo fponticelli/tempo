@@ -2,6 +2,18 @@
   "name": "tempo-std",
   "entries": [
     {
+      "version": "0.5.3",
+      "tag": "tempo-std_v0.5.3",
+      "date": "Fri, 29 May 2020 03:36:19 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Add `memoize` function."
+          }
+        ]
+      }
+    },
+    {
       "version": "0.5.2",
       "tag": "tempo-std_v0.5.2",
       "date": "Thu, 28 May 2020 01:39:13 GMT",

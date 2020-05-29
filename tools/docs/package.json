@@ -38,8 +38,8 @@
   "dependencies": {
     "acorn": "^7.2.0",
     "tempo-core": "^1.7.0",
-    "tempo-dom": "^0.18.0",
-    "tempo-std": "^0.5.2",
+    "tempo-dom": "^0.19.0",
+    "tempo-std": "^0.5.3",
     "tempo-store": "^1.2.2"
   },
   "devDependencies": {

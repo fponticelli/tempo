@@ -1,6 +1,13 @@
 # Change Log - tempo-std
 
-This log was last generated on Thu, 28 May 2020 01:39:13 GMT and should not be manually modified.
+This log was last generated on Fri, 29 May 2020 03:36:19 GMT and should not be manually modified.
+
+## 0.5.3
+Fri, 29 May 2020 03:36:19 GMT
+
+### Patches
+
+- Add `memoize` function.
 
 ## 0.5.2
 Thu, 28 May 2020 01:39:13 GMT
