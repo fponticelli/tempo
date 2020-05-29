@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "tempo-std",
+      "comment": "Add `memoize` function.",
+      "type": "patch"
+    }
+  ],
+  "packageName": "tempo-std",
+  "email": "franco.ponticelli@gmail.com"
+}

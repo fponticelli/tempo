@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "tempo-paper",
+      "comment": "Changed elements to use more PaperAttributes types.",
+      "type": "minor"
+    }
+  ],
+  "packageName": "tempo-paper",
+  "email": "franco.ponticelli@gmail.com"
+}
