@@ -1,6 +1,13 @@
 # Change Log - tempo-dom
 
-This log was last generated on Fri, 29 May 2020 03:55:30 GMT and should not be manually modified.
+This log was last generated on Sun, 31 May 2020 01:59:27 GMT and should not be manually modified.
+
+## 0.19.2
+Sun, 31 May 2020 01:59:27 GMT
+
+### Patches
+
+- Use reference node for `mapState`.
 
 ## 0.19.1
 Fri, 29 May 2020 03:55:30 GMT

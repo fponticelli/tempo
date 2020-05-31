@@ -1,6 +1,13 @@
 # Change Log - tempo-paper
 
-This log was last generated on Fri, 29 May 2020 03:36:19 GMT and should not be manually modified.
+This log was last generated on Sun, 31 May 2020 01:59:27 GMT and should not be manually modified.
+
+## 0.6.1
+Sun, 31 May 2020 01:59:27 GMT
+
+### Patches
+
+- Use reference node for `mapState`.
 
 ## 0.6.0
 Fri, 29 May 2020 03:36:19 GMT

@@ -18,7 +18,7 @@
   "dependencies": {
     "tempo-std": "^0.5.3",
     "tempo-core": "^1.7.0",
-    "tempo-dom": "^0.19.1",
+    "tempo-dom": "^0.19.2",
     "tempo-store": "^1.2.2",
     "todomvc-app-css": "2.2.0",
     "todomvc-common": "1.0.5"
