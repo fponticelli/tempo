@@ -246,7 +246,7 @@ export function el<
 }
 
 export function el2<El extends Element>(name: string) {
-  return function<State, Action, Query = unknown, T = unknown>(
+  return function <State, Action, Query = unknown, T = unknown>(
     props: Props<State, Action, Query, El, T>,
     ...children: DOMChild<State, Action, Query>[]
   ) {
@@ -302,7 +302,7 @@ export function elNS<
 }
 
 export function elNS2<El extends Element>(namespace: string, name: string) {
-  return function<State, Action, Query = unknown, T = unknown>(
+  return function <State, Action, Query = unknown, T = unknown>(
     props: Props<State, Action, Query, El, T>,
     ...children: DOMChild<State, Action, Query>[]
   ) {

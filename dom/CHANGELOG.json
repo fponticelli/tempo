@@ -49,7 +49,7 @@
       "comments": {
         "minor": [
           {
-            "comment": "Change signature of `repeatUntil` for `repeat` to be an `Attribute`."
+            "comment": "Change signature of `next` for `repeat` to be an `Attribute`."
           }
         ]
       }

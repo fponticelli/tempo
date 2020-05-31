@@ -22,10 +22,7 @@ class PaperUntilTemplate<OuterState, InnerState, Action, Query>
   implements PaperTemplate<OuterState, Action, Query> {
   constructor(
     readonly props: {
-      repeatUntil: PaperAttribute<
-        { state: OuterState; index: number },
-        InnerState
-      >
+      next: PaperAttribute<{ state: OuterState; index: number }, InnerState>
     },
     readonly children: PaperTemplate<InnerState, Action, Query>[]
   ) {}
@@ -35,7 +32,7 @@ class PaperUntilTemplate<OuterState, InnerState, Action, Query>
     state: OuterState
   ): View<OuterState, Query> {
     const { children } = this
-    const { repeatUntil } = this.props
+    const { next } = this.props
     const ref = new Group()
     ctx.append(ref)
     const newCtx = ctx.withAppend(item => ref.addChild(item))
@@ -45,7 +42,7 @@ class PaperUntilTemplate<OuterState, InnerState, Action, Query>
         const currentLength = childrenViews.length
         let index = 0
         while (true) {
-          const value = resolveAttribute(repeatUntil)({ state, index })
+          const value = resolveAttribute(next)({ state, index })
           if (typeof value === 'undefined') break
           if (index < currentLength) {
             // replace existing
@@ -83,10 +80,7 @@ class PaperUntilTemplate<OuterState, InnerState, Action, Query>
 
 export function until<OuterState, InnerState, Action, Query = unknown>(
   props: {
-    repeatUntil: PaperAttribute<
-      { state: OuterState; index: number },
-      InnerState
-    >
+    next: PaperAttribute<{ state: OuterState; index: number }, InnerState>
   },
   ...children: PaperTemplate<InnerState, Action, Query>[]
 ): PaperTemplate<OuterState, Action, Query> {

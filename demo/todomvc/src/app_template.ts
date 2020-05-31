@@ -106,7 +106,7 @@ export const template = section<State, Action>(
       ul(
         { attrs: { className: 'todo-list' } },
         iterate(
-          { getArray: (state: State) => state.filtered },
+          { map: (state: State) => state.filtered },
           filterState<[Todo, State, number], Action>(
             {
               stateHasChanged: ({ current: [a, sa], next: [b, sb] }) =>

@@ -75,7 +75,7 @@ export const makeApp = (store: Store<State, Action>) =>
       selected: true
     }),
     iterate(
-      { getArray: state => state.paths },
+      { map: state => state.paths },
       path<[PathItem, State, number], Action>({
         applyMatrix: false,
         position: ([item]) => item.position,

@@ -89,7 +89,7 @@ export const makeApp = () => {
       fillColor: new Color(1, 0, 0)
     }),
     iterate(
-      { getArray: state => state.stars },
+      { map: state => state.stars },
       symbolItem<
         [{ pos: Point; rotation: number }, State, number],
         unknown,

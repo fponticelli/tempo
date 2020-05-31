@@ -23,23 +23,23 @@ class UntilTemplate<OuterState, InnerState, Action, Query>
   constructor(
     readonly props: {
       refId?: string
-      repeatUntil: Attribute<{ state: OuterState; index: number }, InnerState>
+      next: Attribute<{ state: OuterState; index: number }, InnerState>
     },
     readonly children: DOMTemplate<InnerState, Action, Query>[]
   ) {}
 
   render(ctx: DOMContext<Action>, state: OuterState): View<OuterState, Query> {
     const { children } = this
-    const { refId, repeatUntil } = this.props
+    const { refId, next } = this.props
     const { ctx: newCtx, ref } = ctx.withAppendToReference(refId)
     let childrenViews: View<InnerState, Query>[][] = []
-    // TODO, when repeatUntil is a static literal it can be optimized to only render once
+    // TODO, when next is a static literal it can be optimized to only render once
     const view = {
       change: (state: OuterState) => {
         const currentLength = childrenViews.length
         let index = 0
         while (true) {
-          const value = resolveAttribute(repeatUntil)({ state, index })
+          const value = resolveAttribute(next)({ state, index })
           if (typeof value === 'undefined') break
           if (index < currentLength) {
             // replace existing
@@ -78,7 +78,7 @@ class UntilTemplate<OuterState, InnerState, Action, Query>
 export function until<OuterState, InnerState, Action, Query = unknown>(
   props: {
     refId?: string
-    repeatUntil: Attribute<{ state: OuterState; index: number }, InnerState>
+    next: Attribute<{ state: OuterState; index: number }, InnerState>
   },
   ...children: DOMChild<InnerState, Action, Query>[]
 ): DOMTemplate<OuterState, Action, Query> {

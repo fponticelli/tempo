@@ -24,7 +24,7 @@ export function iterate<
 >(
   props: {
     refId?: string
-    getArray: Attribute<OuterState, InnerState>
+    map: Attribute<OuterState, InnerState>
   },
   ...children: DOMChild<
     [InnerState[number], OuterState, number],
@@ -37,12 +37,12 @@ export function iterate<
     {
       map: (outer: OuterState) => {
         outerState = outer
-        return resolveAttribute(props.getArray)(outerState)
+        return resolveAttribute(props.map)(outerState)
       }
     },
     until<InnerState, InnerState[number], Action, Query>(
       {
-        repeatUntil: ({ state, index }: { state: InnerState; index: number }) =>
+        next: ({ state, index }: { state: InnerState; index: number }) =>
           state[index] && [state[index], outerState, index]
       },
       ...children
@@ -58,18 +58,19 @@ export function iterateItems<
 >(
   props: {
     refId?: string
-    getArray: Attribute<OuterState, InnerState>
+    map: Attribute<OuterState, InnerState>
     whenUndefined?: DOMChild<unknown, Action, Query>
   },
   ...children: DOMChild<InnerState[number], Action, Query>[]
 ): DOMTemplate<OuterState, Action, Query> {
   return mapState<OuterState, InnerState, Action, Query>(
     {
-      map: outer => resolveAttribute(props.getArray)(outer)
+      map: outer => resolveAttribute(props.map)(outer),
+      whenUndefined: props.whenUndefined
     },
     until<InnerState, InnerState[number], Action, Query>(
       {
-        repeatUntil: ({ state, index }: { state: InnerState; index: number }) =>
+        next: ({ state, index }: { state: InnerState; index: number }) =>
           state[index]
       },
       ...children

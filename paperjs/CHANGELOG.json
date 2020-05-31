@@ -45,7 +45,7 @@
       "comments": {
         "minor": [
           {
-            "comment": "Change signature of `repeatUntil` for `repeat` to b"
+            "comment": "Change signature of `next` for `repeat` to b"
           }
         ],
         "dependency": [

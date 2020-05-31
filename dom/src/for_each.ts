@@ -21,8 +21,7 @@ export function forEach<State extends any[], Action, Query = unknown>(
   return until(
     {
       refId: props.refId || 't:for_each',
-      repeatUntil: ({ state, index }: { state: State; index: number }) =>
-        state[index]
+      next: ({ state, index }: { state: State; index: number }) => state[index]
     },
     ...children
   )
