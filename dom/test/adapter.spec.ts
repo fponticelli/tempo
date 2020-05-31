@@ -19,7 +19,7 @@ import { Store } from 'tempo-store/lib/store'
 
 describe('adapter', () => {
   it('noOptions', () => {
-    type InnerState = { inner: map; outer: map }
+    type InnerState = { inner: string; outer: string }
 
     const ctx = createContext(() => {})
     const store = Store.ofState({
@@ -48,8 +48,8 @@ describe('adapter', () => {
   })
 
   it('mergeStates', () => {
-    type OuterState = { outer: map }
-    type InnerState = { inner: map; outer: map }
+    type OuterState = { outer: string }
+    type InnerState = { inner: string; outer: string }
 
     const ctx = createContext(() => {})
     const store = Store.ofState({
@@ -86,8 +86,8 @@ describe('adapter', () => {
 
   // TODO this test is almost impossible to follow and understand
   it('propagate', () => {
-    const state = ['inner-state'] as map[]
-    const store = Store.ofState<map[], map>({
+    const state = ['inner-state'] as string[]
+    const store = Store.ofState<string[], string>({
       state,
       reducer: (s, a) => {
         if (a === 'inner-action') {
@@ -101,8 +101,8 @@ describe('adapter', () => {
 
     const comp = component(
       { store },
-      div<map[], map>(
-        { events: { click: (_s: map[], _: MouseEvent) => 'click' } },
+      div<string[], string>(
+        { events: { click: (_s: string[], _: MouseEvent) => 'click' } },
         s => s.join(', ')
       )
     )
@@ -111,7 +111,9 @@ describe('adapter', () => {
     let didCallOuterDispatcher = false
     let didCallInnerDispatcher = false
 
-    const propagate = (args: PropagateArg<map, map[], map, map>) => {
+    const propagate = (
+      args: PropagateArg<string, string[], string, string>
+    ) => {
       // dispatch it only once
       if (args.action === 'click') {
         didCallPropagate = true
@@ -133,13 +135,13 @@ describe('adapter', () => {
       outerState,
       innerState
     }: {
-      outerState: map
-      innerState: map[]
+      outerState: string
+      innerState: string[]
     }) => innerState.concat([outerState])
 
     const adapt = adapter({ propagate, mergeStates }, comp)
 
-    const ctx = createContext((a: map) => {
+    const ctx = createContext((a: string) => {
       expect(a).toBe('outer-action')
       didCallOuterDispatcher = true
     })
