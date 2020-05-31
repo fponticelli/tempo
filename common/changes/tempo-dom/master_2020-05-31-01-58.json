@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "tempo-dom",
+      "comment": "Use reference node for `mapState`.",
+      "type": "patch"
+    }
+  ],
+  "packageName": "tempo-dom",
+  "email": "franco.ponticelli@gmail.com"
+}
