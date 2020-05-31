@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "tempo-core": "^1.7.0",
-    "tempo-dom": "^0.19.2",
+    "tempo-dom": "^0.20.0",
     "tempo-store": "^1.2.2"
   },
   "devDependencies": {

@@ -2,6 +2,18 @@
   "name": "tempo-dom",
   "entries": [
     {
+      "version": "0.20.0",
+      "tag": "tempo-dom_v0.20.0",
+      "date": "Sun, 31 May 2020 02:48:23 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Renamae iterate.getArray to iterate.map and until.repeatUntil to until.next."
+          }
+        ]
+      }
+    },
+    {
       "version": "0.19.2",
       "tag": "tempo-dom_v0.19.2",
       "date": "Sun, 31 May 2020 01:59:27 GMT",

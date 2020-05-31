@@ -1,6 +1,13 @@
 # Change Log - tempo-paper
 
-This log was last generated on Sun, 31 May 2020 01:59:27 GMT and should not be manually modified.
+This log was last generated on Sun, 31 May 2020 02:48:23 GMT and should not be manually modified.
+
+## 0.7.0
+Sun, 31 May 2020 02:48:23 GMT
+
+### Minor changes
+
+- Renamae iterate.getArray to iterate.map and until.repeatUntil to until.next.
 
 ## 0.6.1
 Sun, 31 May 2020 01:59:27 GMT
@@ -21,7 +28,7 @@ Thu, 28 May 2020 23:50:31 GMT
 
 ### Minor changes
 
-- Change signature of `repeatUntil` for `repeat` to b
+- Change signature of `next` for `repeat` to b
 
 ## 0.4.0
 Mon, 17 Feb 2020 19:18:30 GMT

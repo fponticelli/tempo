@@ -9,7 +9,7 @@
   "dependencies": {
     "tempo-std": "^0.5.3",
     "tempo-core": "^1.7.0",
-    "tempo-dom": "^0.19.2",
+    "tempo-dom": "^0.20.0",
     "tempo-store": "^1.2.2",
     "partsing": "0.7.3",
     "dompurify": "2.0.7"
