@@ -16,6 +16,7 @@ import { View } from 'tempo-core/lib/view'
 import { PaperContext } from './context'
 import { map as mapArray } from 'tempo-std/lib/arrays'
 import { PaperAttribute, resolveAttribute } from './value'
+import { Group } from 'paper'
 
 class MapStateTemplate<OuterState, InnerState, Action, Query>
   implements PaperTemplate<OuterState, Action, Query> {
@@ -34,17 +35,21 @@ class MapStateTemplate<OuterState, InnerState, Action, Query>
     let isUndefined = true
     let views: View<InnerState, Query>[] = []
 
+    const ref = new Group()
+    ctx.append(ref)
+    const newCtx = ctx.withAppend(item => ref.addChild(item))
+
     const innerState = resolveAttribute(map)(state)
 
     if (typeof innerState !== 'undefined') {
       isUndefined = false
-      views = mapArray(children, c => c.render(ctx, innerState))
+      views = mapArray(children, c => c.render(newCtx, innerState))
     } else {
       isUndefined = true
       views =
         typeof whenUndefined === 'undefined'
           ? []
-          : [whenUndefined.render(ctx, state)]
+          : [whenUndefined.render(newCtx, state)]
     }
 
     function destroy() {
@@ -57,7 +62,7 @@ class MapStateTemplate<OuterState, InnerState, Action, Query>
         if (typeof innerState !== 'undefined') {
           if (isUndefined) {
             destroy()
-            views = mapArray(children, c => c.render(ctx, innerState))
+            views = mapArray(children, c => c.render(newCtx, innerState))
           } else {
             for (const view of views) view.change(innerState)
           }
@@ -67,11 +72,14 @@ class MapStateTemplate<OuterState, InnerState, Action, Query>
           views =
             typeof whenUndefined === 'undefined'
               ? []
-              : [whenUndefined.render(ctx, state)]
+              : [whenUndefined.render(newCtx, state)]
           isUndefined = true
         }
       },
-      destroy,
+      destroy: () => {
+        ref.remove()
+        destroy()
+      },
       request: (query: Query) => {
         for (const view of views) view.request(query)
       }
