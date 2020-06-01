@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "tempo-colors",
+      "comment": "Add tempo-colors.",
+      "type": "patch"
+    }
+  ],
+  "packageName": "tempo-colors",
+  "email": "franco.ponticelli@gmail.com"
+}
