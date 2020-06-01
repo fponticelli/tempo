@@ -26,7 +26,10 @@ const makeSave = (name: string, type: string) => (file: Blob) => {
 const saveSVG = makeSave('export.svg', 'application/svg+xml')
 const savePNG = makeSave('export.png', 'image/png')
 
-export const makeMiddleware = (view: View<CanvasState, Query>) => (state: CanvasState, action: CanvasAction) => {
+export const makeMiddleware = (view: View<CanvasState, Query>) => (
+  state: CanvasState,
+  action: CanvasAction
+) => {
   switch (action.kind) {
     case 'ExportPNG':
       return view.request(Query.exportPNG(savePNG))

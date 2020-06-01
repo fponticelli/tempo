@@ -18,8 +18,11 @@ export function forEach<State extends any[], Action, Query = unknown>(
   props: { refId?: string },
   ...children: DOMChild<State[number], Action, Query>[]
 ): DOMTemplate<State, Action, Query> {
-  return until({
-    refId: props.refId || 't:for_each',
-    repeatUntil: (state: State, index: number) => state[index]
-  }, ...children)
+  return until(
+    {
+      refId: props.refId || 't:for_each',
+      next: ({ state, index }: { state: State; index: number }) => state[index]
+    },
+    ...children
+  )
 }

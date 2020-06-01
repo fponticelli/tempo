@@ -29,16 +29,34 @@ import {
   StyleAttribute
 } from './value'
 import { map } from 'tempo-std/lib/arrays'
-import {
-  applyAfterRender,
-  applyChange,
-  makeCreateElement,
-  extractAttrs,
-  extractEvents,
-  extractStyles,
-  makeCreateElementNS,
-  defaultNamespaces
-} from './impl/apply_element'
+
+import { attributeNameMap } from './utils/attributes_mapper'
+
+const applyChange = <State, Action, El extends Element, T>(
+  change: (
+    state: State,
+    el: El,
+    ctx: DOMContext<Action>,
+    value: T | undefined
+  ) => T | undefined,
+  el: El,
+  ctx: DOMContext<Action>
+) => (state: State, value: T | undefined): T | undefined => {
+  return change(state, el, ctx, value)
+}
+
+const applyAfterRender = <State, Action, El extends Element, T>(
+  attr: (state: State, el: El, ctx: DOMContext<Action>) => T | undefined,
+  el: El,
+  ctx: DOMContext<Action>,
+  state: State
+) => {
+  if (typeof attr !== undefined) {
+    return attr(state, el, ctx)
+  } else {
+    return undefined
+  }
+}
 
 export class DOMElement<
   State,
@@ -162,6 +180,47 @@ export class DOMElement<
   }
 }
 
+function extractAttrs<State>(
+  attrs: Record<string, Attribute<State, AttributeValue>> | undefined
+): {
+  name: string
+  value: Attribute<State, AttributeValue>
+}[] {
+  return map(Object.keys(attrs || {}), attName => {
+    let name = attName // .toLowerCase()
+    name = attributeNameMap[name] || name
+    return {
+      name,
+      value: attrs![attName]
+    }
+  })
+}
+
+function extractEvents<State, Action, El extends Element>(
+  attrs: Record<string, EventHandler<State, Action, any, El>> | undefined
+): { name: string; value: EventHandler<State, Action, any, El> }[] {
+  return map(Object.keys(attrs || {}), eventName => {
+    let name = `on${eventName.toLowerCase()}`
+    return {
+      name,
+      value: attrs![eventName]
+    }
+  })
+}
+
+function extractStyles<State>(
+  attrs: Record<string, StyleAttribute<State, string>> | undefined
+): { name: string; value: StyleAttribute<State, string> }[] {
+  return map(Object.keys(attrs || {}), name => ({
+    name,
+    value: attrs![name]
+  }))
+}
+
+const makeCreateElement = <El extends Element>(name: string) => (
+  doc: Document
+) => (doc.createElement(name) as any) as El
+
 export function el<
   State,
   Action,
@@ -188,7 +247,7 @@ export function el<
 }
 
 export function el2<El extends Element>(name: string) {
-  return function<State, Action, Query = unknown, T = unknown>(
+  return function <State, Action, Query = unknown, T = unknown>(
     props: Props<State, Action, Query, El, T>,
     ...children: DOMChild<State, Action, Query>[]
   ) {
@@ -206,6 +265,15 @@ export function el2<El extends Element>(name: string) {
     )
   }
 }
+
+export const defaultNamespaces: Record<string, string> = {
+  svg: 'http://www.w3.org/2000/svg'
+}
+
+const makeCreateElementNS = <El extends Element>(
+  namespace: string,
+  name: string
+) => (doc: Document) => (doc.createElementNS(namespace, name) as any) as El
 
 export function elNS<
   State,
@@ -235,7 +303,7 @@ export function elNS<
 }
 
 export function elNS2<El extends Element>(namespace: string, name: string) {
-  return function<State, Action, Query = unknown, T = unknown>(
+  return function <State, Action, Query = unknown, T = unknown>(
     props: Props<State, Action, Query, El, T>,
     ...children: DOMChild<State, Action, Query>[]
   ) {

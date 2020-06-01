@@ -18,7 +18,8 @@ import { DOMTemplate } from './template'
 import { DOMContext } from './context'
 import { TextValue } from './value'
 
-class DerivedTextTemplate<State, Action, Query> implements DOMTemplate<State, Action, Query> {
+class DerivedTextTemplate<State, Action, Query>
+  implements DOMTemplate<State, Action, Query> {
   constructor(readonly makeContent: DerivedValue<State, string>) {}
 
   render(ctx: DOMContext<Action>, state: State): View<State, Query> {
@@ -31,8 +32,7 @@ class DerivedTextTemplate<State, Action, Query> implements DOMTemplate<State, Ac
         const newContent = makeContent(state) || ''
         if (newContent !== content) {
           node.nodeValue = newContent
-          if (newContent.length < 5000)
-            content = newContent
+          if (newContent.length < 5000) content = newContent
         }
       },
       destroy() {
@@ -43,10 +43,9 @@ class DerivedTextTemplate<State, Action, Query> implements DOMTemplate<State, Ac
   }
 }
 
-class LiteralTextTemplate<State, Action, Query> implements DOMTemplate<State, Action, Query> {
-  constructor(
-    readonly content: string
-  ) {}
+class LiteralTextTemplate<State, Action, Query>
+  implements DOMTemplate<State, Action, Query> {
+  constructor(readonly content: string) {}
   render(ctx: DOMContext<Action>, _: State): View<State, Query> {
     const node = ctx.doc.createTextNode(this.content)
     ctx.append(node)
@@ -60,9 +59,13 @@ class LiteralTextTemplate<State, Action, Query> implements DOMTemplate<State, Ac
   }
 }
 
-export function text<State, Action, Query = unknown>(content: TextValue<State>): DOMTemplate<State, Action, Query> {
+export function text<State, Action, Query = unknown>(
+  content: TextValue<State>
+): DOMTemplate<State, Action, Query> {
   if (typeof content === 'function') {
-    return new DerivedTextTemplate<State, Action, Query>(content as DerivedValue<State, string>)
+    return new DerivedTextTemplate<State, Action, Query>(
+      content as DerivedValue<State, string>
+    )
   } else {
     return new LiteralTextTemplate<State, Action, Query>(content || '')
   }

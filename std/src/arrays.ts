@@ -60,7 +60,7 @@ export function equals<T>(
 }
 
 export function makeEquals<T>(predicate: (a: T, b: T) => boolean) {
-  return function(a: T[], b: T[]) {
+  return function (a: T[], b: T[]) {
     return equals(a, b, predicate)
   }
 }
@@ -117,7 +117,7 @@ export function concat<A>(...arrs: A[][]): A[] {
 }
 
 export function makeCompare<A>(comparef: Compare<A>, shorterFirst = true) {
-  return function(a: A[], b: A[]) {
+  return function (a: A[], b: A[]) {
     if (a.length < b.length) {
       return -1 * (shorterFirst ? 1 : -1)
     } else if (a.length > b.length) {
@@ -162,4 +162,31 @@ export function distinctByPredicate<T>(
     map[predicate(v)] = v
   })
   return keys(map).map(k => map[k])
+}
+
+export function remove<A>(
+  arr: A[],
+  item: A,
+  predicate?: (a: A) => boolean
+): boolean {
+  let index
+  if (typeof predicate !== 'undefined') {
+    index = arr.findIndex(predicate)
+  } else {
+    index = arr.indexOf(item)
+  }
+  if (index < 0) {
+    return false
+  } else {
+    arr.splice(index, 1)
+    return true
+  }
+}
+
+export function ofIterableIterator<A>(it: IterableIterator<A>): A[] {
+  const buff = [] as A[]
+  for (let r = it.next(); !r.done; r = it.next()) {
+    buff.push(r.value)
+  }
+  return buff
 }

@@ -2,6 +2,77 @@
   "name": "tempo-paper",
   "entries": [
     {
+      "version": "0.7.0",
+      "tag": "tempo-paper_v0.7.0",
+      "date": "Sun, 31 May 2020 02:48:23 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Renamae iterate.getArray to iterate.map and until.repeatUntil to until.next."
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"tempo-dom\" from `^0.19.2` to `^0.20.0`"
+          }
+        ]
+      }
+    },
+    {
+      "version": "0.6.1",
+      "tag": "tempo-paper_v0.6.1",
+      "date": "Sun, 31 May 2020 01:59:27 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Use reference node for `mapState`."
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"tempo-dom\" from `^0.19.1` to `^0.19.2`"
+          }
+        ]
+      }
+    },
+    {
+      "version": "0.6.0",
+      "tag": "tempo-paper_v0.6.0",
+      "date": "Fri, 29 May 2020 03:36:19 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Changed elements to use more PaperAttributes types."
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"tempo-dom\" from `^0.18.0` to `^0.19.0`"
+          },
+          {
+            "comment": "Updating dependency \"tempo-std\" from `^0.5.2` to `^0.5.3`"
+          }
+        ]
+      }
+    },
+    {
+      "version": "0.5.0",
+      "tag": "tempo-paper_v0.5.0",
+      "date": "Thu, 28 May 2020 23:50:31 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Change signature of `next` for `repeat` to b"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"tempo-dom\" from `^0.17.2` to `^0.18.0`"
+          }
+        ]
+      }
+    },
+    {
       "version": "0.4.0",
       "tag": "tempo-paper_v0.4.0",
       "date": "Mon, 17 Feb 2020 19:18:30 GMT",

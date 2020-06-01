@@ -52,7 +52,15 @@ export const template = section<State, Action>(
       { attrs: { className: 'header' } },
       h1({}, 'todos'),
       filterState(
-        { isSame: (a, b) => false },
+        {
+          stateHasChanged: ({
+            current,
+            next
+          }: {
+            current: State
+            next: State
+          }) => true
+        },
         input({
           attrs: {
             type: 'text',
@@ -98,10 +106,11 @@ export const template = section<State, Action>(
       ul(
         { attrs: { className: 'todo-list' } },
         iterate(
-          { getArray: (state: State) => state.filtered },
+          { map: (state: State) => state.filtered },
           filterState<[Todo, State, number], Action>(
             {
-              isSame: ([a, sa], [b, sb]) => a === b && sa.editing === sb.editing
+              stateHasChanged: ({ current: [a, sa], next: [b, sb] }) =>
+                a !== b || sa.editing !== sb.editing
             },
             li(
               {
@@ -201,10 +210,10 @@ export const template = section<State, Action>(
     ),
     filterState(
       {
-        isSame: (a, b) =>
-          a.filter === b.filter &&
-          a.completed === b.completed &&
-          a.todos.length === b.todos.length
+        stateHasChanged: ({ current, next }) =>
+          current.filter !== next.filter ||
+          current.completed !== next.completed ||
+          current.todos.length !== next.todos.length
       },
       footer(
         {

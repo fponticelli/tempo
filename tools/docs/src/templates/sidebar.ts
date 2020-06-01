@@ -39,7 +39,7 @@ section = lazy(() =>
       ul(
         { attrs: { class: '' } },
         iterate<[string, SectionRef, Route], PageRef[], Action>(
-          { getArray: ([_, s]) => s.pages },
+          { map: ([_, s]) => s.pages },
           li(
             {},
             maybeLink({
@@ -59,7 +59,7 @@ section = lazy(() =>
               Action
             >(
               {
-                getArray: ([_, section, route]) =>
+                map: ([_, section, route]) =>
                   keys(section.sections).map(sub => [
                     sub,
                     section.sections[sub],
@@ -146,7 +146,7 @@ const project = div<[ProjectRef, Sidebar, number], Action>(
                 { apis: ApiRef[]; project: ProjectRef; route: Route },
                 ApiRef[],
                 Action
-              >({ getArray: state => state.apis }, li({}, api))
+              >({ map: state => state.apis }, li({}, api))
             )
           )
         )
@@ -169,8 +169,5 @@ export const sidebar = aside<Sidebar, Action>(
     section
   ),
   hr({ attrs: { class: 'sidebar-separator' } }),
-  iterate<Sidebar, ProjectRef[], Action>(
-    { getArray: s => s.toc.projects },
-    project
-  )
+  iterate<Sidebar, ProjectRef[], Action>({ map: s => s.toc.projects }, project)
 )

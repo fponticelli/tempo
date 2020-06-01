@@ -101,7 +101,7 @@ export const pageFeedTemplate = section<PageFeed, Action>(
   {
     attrs: { className: 'list-view' }
   },
-  ul({}, iterate({ getArray: state => state.items }, listItemTemplate)),
+  ul({}, iterate({ map: state => state.items }, listItemTemplate)),
   mapState(
     {
       map: state => ({ feed: state.feed, page: state.page })

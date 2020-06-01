@@ -16,29 +16,31 @@ import { DOMContext } from './context'
 import { DOMTemplate, DOMChild } from './template'
 import { removeNode, domChildToTemplate } from './utils/dom'
 import { map } from 'tempo-std/lib/arrays'
+import { Attribute, resolveAttribute } from './value'
 
-class UntilTemplate<OuterState, InnerState, Action, Query> implements DOMTemplate<OuterState, Action, Query> {
+class UntilTemplate<OuterState, InnerState, Action, Query>
+  implements DOMTemplate<OuterState, Action, Query> {
   constructor(
     readonly props: {
       refId?: string
-      repeatUntil: (state: OuterState, index: number) => InnerState | undefined
+      next: Attribute<{ state: OuterState; index: number }, InnerState>
     },
     readonly children: DOMTemplate<InnerState, Action, Query>[]
   ) {}
 
   render(ctx: DOMContext<Action>, state: OuterState): View<OuterState, Query> {
     const { children } = this
-    const { refId, repeatUntil } = this.props
+    const { refId, next } = this.props
     const { ctx: newCtx, ref } = ctx.withAppendToReference(refId)
     let childrenViews: View<InnerState, Query>[][] = []
+    // TODO, when next is a static literal it can be optimized to only render once
     const view = {
       change: (state: OuterState) => {
         const currentLength = childrenViews.length
         let index = 0
         while (true) {
-          const value = repeatUntil(state, index)
-          if (typeof value === 'undefined')
-            break
+          const value = resolveAttribute(next)({ state, index })
+          if (typeof value === 'undefined') break
           if (index < currentLength) {
             // replace existing
             const filteredViews = childrenViews[index]
@@ -60,14 +62,12 @@ class UntilTemplate<OuterState, InnerState, Action, Query> implements DOMTemplat
       destroy: () => {
         removeNode(ref)
         for (const childViews of childrenViews)
-          for (const view of childViews)
-            view.destroy()
+          for (const view of childViews) view.destroy()
         childrenViews = []
       },
       request: (query: Query) => {
         for (const childViews of childrenViews)
-          for (const view of childViews)
-            view.request(query)
+          for (const view of childViews) view.request(query)
       }
     }
     view.change(state)
@@ -78,9 +78,12 @@ class UntilTemplate<OuterState, InnerState, Action, Query> implements DOMTemplat
 export function until<OuterState, InnerState, Action, Query = unknown>(
   props: {
     refId?: string
-    repeatUntil: (state: OuterState, index: number) => InnerState | undefined
+    next: Attribute<{ state: OuterState; index: number }, InnerState>
   },
   ...children: DOMChild<InnerState, Action, Query>[]
 ): DOMTemplate<OuterState, Action, Query> {
-  return new UntilTemplate<OuterState, InnerState, Action, Query>(props, map(children, domChildToTemplate))
+  return new UntilTemplate<OuterState, InnerState, Action, Query>(
+    props,
+    map(children, domChildToTemplate)
+  )
 }

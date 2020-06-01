@@ -17,19 +17,27 @@ import { createContext } from './common'
 
 describe('map', () => {
   it('mapState', () => {
-    const template = el('div', {}, mapState({ map: (v: number) => `#${v}` }, s => s))
+    const template = el(
+      'div',
+      {},
+      mapState({ map: (v: number) => `#${v}` }, s => s)
+    )
     const ctx = createContext()
     const view = template.render(ctx, 1)
-    expect(ctx.doc.body.innerHTML).toEqual('<div>#1</div>')
+    expect(ctx.doc.body.innerHTML).toEqual('<div>#1<!--t:map--></div>')
     view.change(2)
-    expect(ctx.doc.body.innerHTML).toEqual('<div>#2</div>')
+    expect(ctx.doc.body.innerHTML).toEqual('<div>#2<!--t:map--></div>')
   })
 
   it('mapState only static', () => {
-    const template = el('div', {}, mapState({ map: (v: number) => `#${v}` }, 'X'))
+    const template = el(
+      'div',
+      {},
+      mapState({ map: (v: number) => `#${v}` }, 'X')
+    )
     const ctx = createContext()
     template.render(ctx, 1)
-    expect(ctx.doc.body.innerHTML).toEqual('<div>X</div>')
+    expect(ctx.doc.body.innerHTML).toEqual('<div>X<!--t:map--></div>')
   })
 
   it('mapAction', () => {
@@ -38,14 +46,18 @@ describe('map', () => {
     const template = el<string, string, HTMLDivElement>(
       'div',
       {},
-      mapAction({ map: (v: number) => `#${v}` }, el<string, number, HTMLDivElement>('div', { events: { click } }, s => s))
+      mapAction(
+        { map: (v: number) => `#${v}` },
+        el<string, number, HTMLDivElement>('div', { events: { click } }, s => s)
+      )
     )
     const ctx = createContext((n: string) => {
       ref = n
     })
     const view = template.render(ctx, 'A')
     expect(ctx.doc.body.innerHTML).toEqual('<div><div>A</div></div>')
-    const domEl = ctx.doc.body.firstElementChild!.firstElementChild! as HTMLDivElement
+    const domEl = ctx.doc.body.firstElementChild!
+      .firstElementChild! as HTMLDivElement
     domEl.click()
     expect(ref).toEqual('#1')
     view.destroy()
@@ -68,7 +80,8 @@ describe('map', () => {
     })
     const view = template.render(ctx, 'A')
     expect(ctx.doc.body.innerHTML).toEqual('<div><div>A</div></div>')
-    const domEl = ctx.doc.body.firstElementChild!.firstElementChild! as HTMLDivElement
+    const domEl = ctx.doc.body.firstElementChild!
+      .firstElementChild! as HTMLDivElement
     domEl.click()
     expect(ref).toEqual('ORIG')
     view.destroy()
@@ -81,14 +94,18 @@ describe('map', () => {
     const template = el<string, string, HTMLDivElement>(
       'div',
       {},
-      mapAction({ map: (v: number) => `#${v}` }, el<string, number, HTMLDivElement>('div', { events: { click } }, 'X'))
+      mapAction(
+        { map: (v: number) => `#${v}` },
+        el<string, number, HTMLDivElement>('div', { events: { click } }, 'X')
+      )
     )
     const ctx = createContext((n: string) => {
       ref = n
     })
     const view = template.render(ctx, 'A')
     expect(ctx.doc.body.innerHTML).toEqual('<div><div>X</div></div>')
-    const domEl = ctx.doc.body.firstElementChild!.firstElementChild! as HTMLDivElement
+    const domEl = ctx.doc.body.firstElementChild!
+      .firstElementChild! as HTMLDivElement
     domEl.click()
     expect(ref).toEqual('#1')
     view.destroy()

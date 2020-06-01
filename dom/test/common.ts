@@ -14,12 +14,14 @@ limitations under the License.
 import { JSDOM } from 'jsdom'
 import { DOMContext } from '../src/context'
 
-export function getWindow(): Window {
+export function getWindow() {
   const dom = new JSDOM(`<!DOCTYPE html>`)
   return dom.window
 }
 
-export function createContext<Action>(dispatch?: (action: Action) => void): DOMContext<Action> {
+export function createContext<Action>(
+  dispatch?: (action: Action) => void
+): DOMContext<Action> {
   const { document } = getWindow()
   return new DOMContext(
     document,

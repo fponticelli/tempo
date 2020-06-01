@@ -20,8 +20,14 @@ import { State, Action, makeApp } from './app'
 export const template = lazy(() =>
   adapter<SampleState, State, CanvasAction, Action>(
     {
-      mergeStates: (outer, inner): State => {
-        return { ...inner, size: outer.size }
+      mergeStates: ({
+        outerState,
+        innerState
+      }: {
+        outerState: SampleState
+        innerState: State
+      }): State => {
+        return { ...innerState, size: outerState.size }
       }
     },
     makeApp()

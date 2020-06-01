@@ -127,7 +127,7 @@ export const template = div<State, Action>(
                   Loading: '',
                   NotAsked: '',
                   Success: iterateItems(
-                    { getArray: s => s.projects },
+                    { map: s => s.projects },
                     link<ProjectRef>({
                       label: s => s.title,
                       route: s => Route.project(s.name),

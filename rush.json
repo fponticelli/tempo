@@ -6,93 +6,102 @@
     "strictPeerDependencies": true
   },
   "projectFolderMaxDepth": 3,
-
-  "gitPolicy": {
-
-  },
-
+  "gitPolicy": {},
   "repository": {
     "url": "git@github.com:fponticelli/tempo.git"
   },
-
   "eventHooks": {
     "preRushInstall": [],
-
     "postRushInstall": [],
-
     "preRushBuild": [],
-
     "postRushBuild": []
   },
-
-  "variants": [
-  ],
-
+  "variants": [],
   "projects": [
     {
       "packageName": "tempo-root",
       "projectFolder": ".",
       "shouldPublish": false
-    }, {
+    },
+    {
       "packageName": "tempo-std",
       "projectFolder": "./std",
       "shouldPublish": true
-    }, {
+    },
+    {
       "packageName": "tempo-core",
       "projectFolder": "./core",
       "shouldPublish": true
-    }, {
+    },
+    {
       "packageName": "tempo-store",
       "projectFolder": "./store",
       "shouldPublish": true
-    }, {
+    },
+    {
       "packageName": "tempo-dom",
       "projectFolder": "./dom",
       "shouldPublish": true
-    }, {
+    },
+    {
       "packageName": "tempo-demo.todomvc",
       "projectFolder": "./demo/todomvc",
       "shouldPublish": false
-    }, {
+    },
+    {
       "packageName": "tempo-demo.readme",
       "projectFolder": "./demo/readme",
       "shouldPublish": false
-    }, {
+    },
+    {
       "packageName": "tempo-demo.benchmark",
       "projectFolder": "./demo/benchmark",
       "shouldPublish": false
-    }, {
+    },
+    {
       "packageName": "tempo-demo.hnpwa",
       "projectFolder": "./demo/hnpwa",
       "shouldPublish": false
-    }, {
+    },
+    {
       "packageName": "tempo-paper",
       "projectFolder": "./paperjs",
       "shouldPublish": true
-    }, {
+    },
+    {
       "packageName": "tempo-demo.paper",
       "projectFolder": "./demo/paper",
       "shouldPublish": false
-    }, {
+    },
+    {
       "packageName": "tempo-tools.docs",
       "projectFolder": "./tools/docs",
       "shouldPublish": false
-    }, {
+    },
+    {
       "packageName": "tempo-ui",
       "projectFolder": "./ui",
       "shouldPublish": true
-    }, {
+    },
+    {
       "packageName": "tempo-demo.ui",
       "projectFolder": "./demo/ui",
       "shouldPublish": false
-    }, {
+    },
+    {
       "packageName": "tempo-colors",
       "projectFolder": "./colors",
       "shouldPublish": true
-    }, {
+    },
+    {
       "packageName": "uood",
       "projectFolder": "./uood",
       "shouldPublish": true
+    },
+    {
+      "packageName": "tempo-template-dom",
+      "projectFolder": "./template/dom",
+      "shouldPublish": false
     }
   ],
   "ensureConsistentVersions": true

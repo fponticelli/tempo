@@ -14,7 +14,10 @@ limitations under the License.
 import { insertFBefore as makeInsertBefore } from './utils/dom'
 
 export class DOMContext<Action> {
-  static fromElement<Action>(element: Element, dispatch: (action: Action) => void): DOMContext<Action> {
+  static fromElement<Action>(
+    element: Element,
+    dispatch: (action: Action) => void
+  ): DOMContext<Action> {
     return new DOMContext<Action>(
       /* istanbul ignore next */
       element.ownerDocument || (window && window.document),
@@ -32,18 +35,28 @@ export class DOMContext<Action> {
   ) {}
 
   mapAction<OtherAction>(f: (action: OtherAction) => Action) {
-    return new DOMContext<OtherAction>(this.doc, this.append, this.parent, (action: OtherAction) =>
-      this.dispatch(f(action))
+    return new DOMContext<OtherAction>(
+      this.doc,
+      this.append,
+      this.parent,
+      (action: OtherAction) => this.dispatch(f(action))
     )
   }
 
-  conditionalMapAction<OtherAction>(f: (action: OtherAction) => Action | undefined) {
-    return new DOMContext<OtherAction>(this.doc, this.append, this.parent, (action: OtherAction) => {
-      const newAction = f(action)
-      if (typeof newAction !== 'undefined') {
-        this.dispatch(newAction)
+  conditionalMapAction<OtherAction>(
+    f: (action: OtherAction) => Action | undefined
+  ) {
+    return new DOMContext<OtherAction>(
+      this.doc,
+      this.append,
+      this.parent,
+      (action: OtherAction) => {
+        const newAction = f(action)
+        if (typeof newAction !== 'undefined') {
+          this.dispatch(newAction)
+        }
       }
-    })
+    )
   }
 
   withAppendToReference(refId?: string) {
@@ -64,6 +77,11 @@ export class DOMContext<Action> {
   }
 
   withDispatch<OtherAction>(dispatch: (action: OtherAction) => void) {
-    return new DOMContext<OtherAction>(this.doc, this.append, this.parent, dispatch)
+    return new DOMContext<OtherAction>(
+      this.doc,
+      this.append,
+      this.parent,
+      dispatch
+    )
   }
 }

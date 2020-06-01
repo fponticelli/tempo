@@ -14,7 +14,18 @@ limitations under the License.
 import './style.sass'
 
 import { Tempo } from 'tempo-dom/lib/tempo'
-import { main, li, span, a, article, section, header, ul, div, button } from 'tempo-dom/lib/html'
+import {
+  main,
+  li,
+  span,
+  a,
+  article,
+  section,
+  header,
+  ul,
+  div,
+  button
+} from 'tempo-dom/lib/html'
 import { iterate } from 'tempo-dom/lib/iterate'
 import { containerSize } from 'tempo-dom/lib/utils/dom'
 import { matchBool } from 'tempo-dom/lib/match'
@@ -74,16 +85,13 @@ const template = article<CanvasState, CanvasAction, Query>(
         {},
         iterate(
           {
-            getArray: state => state.examples as unknown as Example[] // TODO
+            map: state => (state.examples as unknown) as Example[] // TODO
           },
           li<[Example, CanvasState, number], CanvasAction, unknown>(
             {},
             matchBool({
               condition: ([item, state, index]) => item === state.selected,
-              true: span(
-                {},
-                ([item]) => item.split('_').join(' ')
-              ),
+              true: span({}, ([item]) => item.split('_').join(' ')),
               false: a(
                 {
                   attrs: { href: ([item]) => `#${item}` },
@@ -109,11 +117,13 @@ const template = article<CanvasState, CanvasAction, Query>(
       matchBool({
         condition: state => typeof state.mainAreaSize !== 'undefined',
         true: mapState(
-          { map: state => ({ size: state.mainAreaSize!, kind: state.selected }) },
+          {
+            map: state => ({ size: state.mainAreaSize!, kind: state.selected })
+          },
           project<SampleState, any, any>(
             {
-              width: ({size}) => size.width!,
-              height: ({size}) => size.height!,
+              width: ({ size }) => size.width!,
+              height: ({ size }) => size.height!,
               respond(query: Query, el, ctx, scope) {
                 if (!scope) return
                 if (query.kind === 'ExportSVG') {
@@ -121,10 +131,15 @@ const template = article<CanvasState, CanvasAction, Query>(
                     asString: true,
                     embedImages: true
                   }) as string
-                  const file = new Blob([content], { type: 'application/svg+xml' })
+                  const file = new Blob([content], {
+                    type: 'application/svg+xml'
+                  })
                   query.callback(file)
                 } else if (query.kind === 'ExportPNG') {
-                  scope.context.canvas.toBlob(blob => query.callback(blob!), 'image/png')
+                  scope.context.canvas.toBlob(
+                    blob => query.callback(blob!),
+                    'image/png'
+                  )
                 }
               }
             },
@@ -152,6 +167,10 @@ const updateSizeQuery = Query.mainAreaSize(size => {
 
 view.request(updateSizeQuery)
 
-window.addEventListener('resize', () => {
-  view.request(updateSizeQuery)
-}, false)
+window.addEventListener(
+  'resize',
+  () => {
+    view.request(updateSizeQuery)
+  },
+  false
+)

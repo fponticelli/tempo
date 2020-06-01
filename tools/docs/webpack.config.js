@@ -1,9 +1,9 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const TerserJSPlugin = require('terser-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const path = require('path');
-const WorkboxPlugin = require('workbox-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const TerserJSPlugin = require('terser-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const path = require('path')
+const WorkboxPlugin = require('workbox-webpack-plugin')
 
 module.exports = {
   entry: './src/main.ts',
@@ -13,7 +13,7 @@ module.exports = {
       {
         test: /\.ts$/,
         use: 'ts-loader',
-        exclude: /node_modules/,
+        exclude: /node_modules/
       },
       {
         test: /\.s[ac]ss$/i,
@@ -22,23 +22,23 @@ module.exports = {
           // Translates CSS into CommonJS
           'css-loader',
           // Compiles Sass to CSS
-          'sass-loader',
-        ],
-      },
-    ],
+          'sass-loader'
+        ]
+      }
+    ]
   },
   resolve: {
-    extensions: [ '.ts', '.js' ],
+    extensions: ['.ts', '.js']
   },
   output: {
     filename: 'index.js',
-    path: path.resolve(__dirname, './dist'),
+    path: path.resolve(__dirname, './dist')
     // publicPath: '.'
   },
   plugins: [
     new HtmlWebpackPlugin({
       inject: false,
-      template: require('html-webpack-template'),
+      // template: require('html-webpack-template'),
       title: 'Tempo',
       googleAnalytics: {
         trackingId: 'UA-589893-23',
@@ -57,13 +57,13 @@ module.exports = {
     }),
     new MiniCssExtractPlugin({
       filename: '[name].css',
-      chunkFilename: '[id].css',
+      chunkFilename: '[id].css'
     }),
     new WorkboxPlugin.GenerateSW({
       exclude: [/\.(?:ts)$/],
       swDest: 'sw.js',
       clientsClaim: true,
-      skipWaiting: true,
+      skipWaiting: true
     })
   ],
   optimization: {
@@ -84,4 +84,4 @@ module.exports = {
     port: 1234
     // contentBase: './build'
   }
-};
+}

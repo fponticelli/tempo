@@ -13,10 +13,10 @@ limitations under the License.
 
 module.exports = {
   preset: 'ts-jest',
-  rootDir: 'test',
+  rootDir: './test',
   globals: {
     'ts-jest': {
       packageJson: 'package.json'
     }
   }
-};
+}

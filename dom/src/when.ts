@@ -16,13 +16,15 @@ import { DOMContext } from './context'
 import { View } from 'tempo-core/lib/view'
 import { domChildToTemplate, removeNode } from './utils/dom'
 import { map } from 'tempo-std/lib/arrays'
+import { Attribute, resolveAttribute, mapAttribute } from './value'
 
 export interface WhenProps<State> {
-  condition: (state: State) => boolean
+  condition: Attribute<State, boolean>
   refId?: string
 }
 
-class WhenTemplate<State, Action, Query> implements DOMTemplate<State, Action, Query> {
+class WhenTemplate<State, Action, Query>
+  implements DOMTemplate<State, Action, Query> {
   constructor(
     readonly props: WhenProps<State>,
     readonly children: DOMTemplate<State, Action, Query>[]
@@ -33,7 +35,7 @@ class WhenTemplate<State, Action, Query> implements DOMTemplate<State, Action, Q
     let views: View<State, Query>[] | undefined
     const view = {
       change: (state: State) => {
-        if (condition(state)) {
+        if (resolveAttribute(condition)(state)) {
           if (typeof views === 'undefined') {
             // it has never been rendered before
             views = map(this.children, c => c.render(newCtx, state))
@@ -66,7 +68,10 @@ export function when<State, Action, Query = unknown>(
   props: WhenProps<State>,
   ...children: DOMChild<State, Action, Query>[]
 ): DOMTemplate<State, Action, Query> {
-  return new WhenTemplate<State, Action, Query>(props, map(children, domChildToTemplate))
+  return new WhenTemplate<State, Action, Query>(
+    props,
+    map(children, domChildToTemplate)
+  )
 }
 
 export function unless<State, Action, Query = unknown>(
@@ -75,7 +80,7 @@ export function unless<State, Action, Query = unknown>(
 ): DOMTemplate<State, Action, Query> {
   return new WhenTemplate<State, Action, Query>(
     {
-      condition: (v: State) => !props.condition(v),
+      condition: mapAttribute(props.condition, v => !v),
       refId: props.refId || 't:unless'
     },
     map(children, domChildToTemplate)

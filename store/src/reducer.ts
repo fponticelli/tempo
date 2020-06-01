@@ -17,7 +17,7 @@ export function compose<State, Action>(
   reducer: Reducer<State, Action>,
   ...others: Reducer<State, Action>[]
 ) {
-  return function(state: State, action: Action) {
+  return function (state: State, action: Action) {
     return others.reduce((s, f) => f(s, action), reducer(state, action))
   }
 }
@@ -35,7 +35,7 @@ export function matchReduce<
     ) => State
   }
 ): Reducer<State, Action> {
-  return function(state: State, action: Action) {
+  return function (state: State, action: Action) {
     const key = action[field] as Action[Field]
     return matches[key](state, action as any)
   }
@@ -49,7 +49,7 @@ export function reduceOnKind<State, Action extends { kind: any }>(
     ) => State
   }
 ): Reducer<State, Action> {
-  return function(state: State, action: Action) {
+  return function (state: State, action: Action) {
     const key = action.kind as Action['kind']
     return matches[key](state, action as any)
   }

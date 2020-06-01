@@ -72,6 +72,37 @@ export interface Props<
   ) => T | undefined
 }
 
+export function applyAttributes<State, A, B, C>(
+  attrA: Attribute<State, A>,
+  attrB: Attribute<State, B>,
+  apply: (a: A, b: B) => C
+): Attribute<State, C> {
+  if (typeof attrA === 'undefined') return undefined
+  if (typeof attrB === 'undefined') return undefined
+  if (typeof attrA === 'function' && typeof attrB === 'function') {
+    return (state: State) => {
+      const resA = (attrA as DerivedValue<State, A>)(state)
+      const resB = (attrB as DerivedValue<State, B>)(state)
+      if (resA !== undefined && resB !== undefined) return apply(resA, resB)
+      else return undefined
+    }
+  } else if (typeof attrA === 'function') {
+    return (state: State) => {
+      const resA = (attrA as DerivedValue<State, A>)(state)
+      if (resA !== undefined) return apply(resA, attrB as B)
+      else return undefined
+    }
+  } else if (typeof attrB === 'function') {
+    return (state: State) => {
+      const resB = (attrB as DerivedValue<State, B>)(state)
+      if (resB !== undefined) return apply(attrA as A, resB)
+      else return undefined
+    }
+  } else {
+    return apply(attrA, attrB)
+  }
+}
+
 export function mapAttribute<State, A, B>(
   attr: Attribute<State, A>,
   map: (a: A) => B
@@ -123,7 +154,9 @@ export function attributeToHandler<
   handler: EventHandler<Value, Action, Ev, El>
 ): EventHandler<State, Action, Ev, El> | undefined {
   if (typeof attr === 'undefined' || typeof handler === 'undefined') {
-    return undefined
+    return () => {
+      return undefined
+    }
   } else if (typeof attr === 'function') {
     return (state: State, event: Ev, element: El) => {
       const res = (attr as DerivedValue<State, Value>)(state)

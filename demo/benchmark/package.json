@@ -16,18 +16,17 @@
     "url": "https://github.com/fponticelli"
   },
   "dependencies": {
-    "tempo-core": "1.7.0",
-    "tempo-dom": "0.17.0",
-    "tempo-store": "1.2.2",
-    "tslib": "1.10.0"
+    "tempo-core": "^1.7.0",
+    "tempo-dom": "^0.20.0",
+    "tempo-store": "^1.2.2",
+    "tslib": "^2.0.0"
   },
   "devDependencies": {
-    "cssnano": "4.1.10",
-    "parcel-bundler": "1.12.4",
-    "prettier": "1.19.1",
-    "tslint": "6.0.0",
-    "typescript": "3.7.5",
-    "babel-types": "6.26.0"
+    "babel-types": "^6.26.0",
+    "cssnano": "^4.1.10",
+    "parcel-bundler": "^1.12.4",
+    "prettier": "^2.0.5",
+    "typescript": "^3.9.3"
   },
   "scripts": {
     "compile:test": "parcel build test/main.ts --no-minify --public-url . --out-dir ./build/current/",
@@ -35,8 +34,6 @@
     "compile": "NODE_ENV=production && npx tsc --noEmit && npm run compile:test && npm run compile:html && node tools/create_config.js",
     "clean": "rm -f ./build/current/* && rm -f ./build/*.css && rm -f ./build/*.js* && rm -f ./build/*.html",
     "build": "npm run clean && npm run compile",
-    "tslint": "tslint -p ./tslint.json",
-    "tslint-fix": "tslint -p ./tslint.json --fix",
     "prettier": "prettier -c src/**/*.ts",
     "prettier-fix": "prettier --write src/**/*.ts"
   }

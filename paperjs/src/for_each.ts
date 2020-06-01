@@ -20,7 +20,7 @@ export function forEach<State extends any[], Action, Query = unknown>(
 ): PaperTemplate<State, Action, Query> {
   return until(
     {
-      repeatUntil: (state: State, index: number) => state[index]
+      next: ({ state, index }: { state: State; index: number }) => state[index]
     },
     ...children
   )

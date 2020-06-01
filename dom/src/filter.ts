@@ -16,23 +16,28 @@ import { View } from 'tempo-core/lib/view'
 import { DOMContext } from './context'
 import { domChildToTemplate } from './utils/dom'
 import { map } from 'tempo-std/lib/arrays'
+import { Attribute, resolveAttribute } from './value'
 
-class FilterStateTemplate<State, Action, Query> implements DOMTemplate<State, Action, Query> {
+class FilterStateTemplate<State, Action, Query>
+  implements DOMTemplate<State, Action, Query> {
   constructor(
-    readonly isSame: (prev: State, next: State ) => boolean,
+    readonly stateHasChanged: Attribute<
+      { current: State; next: State },
+      boolean
+    >,
     readonly children: DOMTemplate<State, Action, Query>[]
   ) {}
 
   render(ctx: DOMContext<Action>, state: State): View<State, Query> {
-    const { children, isSame: filter } = this
+    const { children, stateHasChanged } = this
     const views = map(children, c => c.render(ctx, state))
 
-    let prevState = state
+    let current = state
     return {
-      change: (newState: State) => {
-        if (!filter(prevState, newState)) {
-          prevState = newState
-          for (const view of views) view.change(newState)
+      change: (next: State) => {
+        if (resolveAttribute(stateHasChanged)({ current, next })) {
+          current = next
+          for (const view of views) view.change(next)
         }
       },
       destroy: () => {
@@ -46,11 +51,13 @@ class FilterStateTemplate<State, Action, Query> implements DOMTemplate<State, Ac
 }
 
 export function filterState<State, Action, Query = unknown>(
-  props: { isSame?: (prev: State, next: State ) => boolean },
+  props: {
+    stateHasChanged?: (state: { current: State; next: State }) => boolean
+  },
   ...children: DOMChild<State, Action, Query>[]
 ): DOMTemplate<State, Action, Query> {
   return new FilterStateTemplate(
-    props.isSame || ((a: State, b: State) => a === b),
+    props.stateHasChanged ?? (({ current, next }) => current !== next),
     map(children, domChildToTemplate)
   )
 }

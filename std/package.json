@@ -3,7 +3,7 @@
   "license": "Apache-2.0",
   "priority": 10,
   "description": "Std library for TypeScript. Natural complement to the tempo libs.",
-  "version": "0.5.0",
+  "version": "0.5.3",
   "keywords": [
     "tempo",
     "framework",
@@ -17,8 +17,6 @@
     "build": "npm run clean && npx tsc && npx tsc -p tsconfig.es6.json",
     "test": "jest",
     "test-watch": "jest --watch",
-    "tslint": "tslint -p ./tslint.json",
-    "tslint-fix": "tslint -p ./tslint.json --fix",
     "prettier": "prettier -c src/**/*.ts",
     "prettier-fix": "prettier --write src/**/*.ts",
     "prepublish": "npm run build"
@@ -33,13 +31,12 @@
     "url": "https://github.com/fponticelli"
   },
   "devDependencies": {
-    "@types/jest": "25.1.2",
-    "@types/node": "12.12.6",
-    "jest": "25.1.0",
-    "prettier": "1.19.1",
-    "ts-jest": "25.2.0",
-    "tslint": "6.0.0",
-    "typescript": "3.7.5"
+    "@types/jest": "^25.2.3",
+    "@types/node": "^12.12.6",
+    "jest": "^26.0.1",
+    "prettier": "^2.0.5",
+    "ts-jest": "^26.1.0",
+    "typescript": "^3.9.3"
   },
   "files": [
     "lib",

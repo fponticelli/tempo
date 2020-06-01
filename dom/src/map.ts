@@ -14,27 +14,61 @@ limitations under the License.
 import { DOMChild, DOMTemplate } from './template'
 import { View } from 'tempo-core/lib/view'
 import { DOMContext } from './context'
-import { domChildToTemplate } from './utils/dom'
+import { domChildToTemplate, removeNode } from './utils/dom'
 import { map as mapArray } from 'tempo-std/lib/arrays'
+import { Attribute, resolveAttribute } from './value'
 
-class MapStateTemplate<OuterState, InnerState, Action, Query> implements DOMTemplate<OuterState, Action, Query> {
+class MapStateTemplate<OuterState, InnerState, Action, Query>
+  implements DOMTemplate<OuterState, Action, Query> {
   constructor(
-    readonly map: (value: OuterState) => InnerState,
+    readonly map: Attribute<OuterState, InnerState>,
+    readonly whenUndefined: DOMTemplate<unknown, Action, Query>,
+    readonly refId: string,
     readonly children: DOMTemplate<InnerState, Action, Query>[]
   ) {}
 
   render(ctx: DOMContext<Action>, state: OuterState): View<OuterState, Query> {
-    const { children, map } = this
-    const innerState = map(state)
-    const views = mapArray(children, c => c.render(ctx, innerState))
+    const { children, map, refId, whenUndefined } = this
+
+    let isUndefined = true
+    let views: View<InnerState, Query>[] = []
+
+    const { ctx: newCtx, ref } = ctx.withAppendToReference(refId)
+
+    const innerState = resolveAttribute(map)(state)
+
+    if (typeof innerState !== 'undefined') {
+      isUndefined = false
+      views = mapArray(children, c => c.render(newCtx, innerState))
+    } else {
+      isUndefined = true
+      views = [whenUndefined.render(newCtx, state)]
+    }
+
+    function destroy() {
+      for (const view of views) view.destroy()
+    }
 
     return {
       change: (state: OuterState) => {
-        const innerState = map(state)
-        for (const view of views) view.change(innerState)
+        const innerState = resolveAttribute(map)(state)
+        if (typeof innerState !== 'undefined') {
+          if (isUndefined) {
+            destroy()
+            views = mapArray(children, c => c.render(newCtx, innerState))
+          } else {
+            for (const view of views) view.change(innerState)
+          }
+          isUndefined = false
+        } else {
+          destroy()
+          views = [whenUndefined.render(newCtx, state)]
+          isUndefined = true
+        }
       },
       destroy: () => {
-        for (const view of views) view.destroy()
+        destroy()
+        removeNode(ref)
       },
       request: (query: Query) => {
         for (const view of views) view.request(query)
@@ -44,33 +78,72 @@ class MapStateTemplate<OuterState, InnerState, Action, Query> implements DOMTemp
 }
 
 export function mapState<OuterState, InnerState, Action, Query = unknown>(
-  props: { map: (value: OuterState) => InnerState },
+  props: {
+    map: Attribute<OuterState, InnerState>
+    whenUndefined?: DOMChild<unknown, Action, Query>
+    refId?: string
+  },
   ...children: DOMChild<InnerState, Action, Query>[]
 ): DOMTemplate<OuterState, Action, Query> {
-  return new MapStateTemplate(props.map, mapArray(children, domChildToTemplate))
-}
-
-export function mapField<OuterState, Key extends keyof OuterState, Action, Query = unknown>(
-  props: { field: Key },
-  ...children: DOMChild<OuterState[Key], Action, Query>[]
-): DOMTemplate<OuterState, Action, Query> {
-  return mapState<OuterState, OuterState[Key], Action, Query>(
-    { map: (v: OuterState) => v[props.field] },
-    ...children
-  )
-}
-
-export function mapStateAndKeep<OuterState, InnerState, Action, Query = unknown>(
-  props: { map: (value: OuterState) => InnerState },
-  ...children: DOMChild<[InnerState, OuterState], Action, Query>[]
-): DOMTemplate<OuterState, Action, Query> {
-  return new MapStateTemplate<OuterState, [InnerState, OuterState], Action, Query>(
-    (state: OuterState) => ([props.map(state), state]),
+  return new MapStateTemplate(
+    props.map,
+    domChildToTemplate(props.whenUndefined),
+    props.refId ?? 't:map',
     mapArray(children, domChildToTemplate)
   )
 }
 
-class MapActionTemplate<State, OuterAction, InnerAction, Query> implements DOMTemplate<State, OuterAction, Query> {
+export function mapField<
+  OuterState,
+  Key extends keyof OuterState,
+  Action,
+  Query = unknown
+>(
+  props: { field: Key; whenUndefined?: DOMChild<unknown, Action, Query> },
+  ...children: DOMChild<OuterState[Key], Action, Query>[]
+): DOMTemplate<OuterState, Action, Query> {
+  const { field, whenUndefined } = props
+  return mapState<OuterState, OuterState[Key], Action, Query>(
+    { map: (v: OuterState) => v[field], whenUndefined },
+    ...children
+  )
+}
+
+export function mapStateAndKeep<
+  OuterState,
+  InnerState,
+  Action,
+  Query = unknown
+>(
+  props: {
+    map: Attribute<OuterState, InnerState>
+    whenUndefined?: DOMChild<unknown, Action, Query>
+    refId?: string
+  },
+  ...children: DOMChild<[InnerState, OuterState], Action, Query>[]
+): DOMTemplate<OuterState, Action, Query> {
+  return new MapStateTemplate<
+    OuterState,
+    [InnerState, OuterState],
+    Action,
+    Query
+  >(
+    (state: OuterState) => {
+      const inner = resolveAttribute(props.map)(state)
+      if (typeof inner !== 'undefined') {
+        return [inner, state]
+      } else {
+        return undefined
+      }
+    },
+    domChildToTemplate(props.whenUndefined),
+    props.refId ?? 't:map_keep',
+    mapArray(children, domChildToTemplate)
+  )
+}
+
+class MapActionTemplate<State, OuterAction, InnerAction, Query>
+  implements DOMTemplate<State, OuterAction, Query> {
   constructor(
     readonly map: (value: InnerAction) => OuterAction | undefined,
     readonly children: DOMTemplate<State, InnerAction, Query>[]
@@ -98,10 +171,14 @@ export function mapAction<State, OuterAction, InnerAction, Query = unknown>(
   props: { map: (value: InnerAction) => OuterAction | undefined },
   ...children: DOMChild<State, InnerAction, Query>[]
 ): DOMTemplate<State, OuterAction, Query> {
-  return new MapActionTemplate<State, OuterAction, InnerAction, Query>(props.map, mapArray(children, domChildToTemplate))
+  return new MapActionTemplate<State, OuterAction, InnerAction, Query>(
+    props.map,
+    mapArray(children, domChildToTemplate)
+  )
 }
 
-class MapQueryTemplate<State, Action, OuterQuery, InnerQuery> implements DOMTemplate<State, Action, OuterQuery> {
+class MapQueryTemplate<State, Action, OuterQuery, InnerQuery>
+  implements DOMTemplate<State, Action, OuterQuery> {
   constructor(
     readonly map: (value: OuterQuery) => InnerQuery | undefined,
     readonly children: DOMTemplate<State, Action, InnerQuery>[]
@@ -131,12 +208,18 @@ export function mapQuery<State, Action, OuterQuery, InnerQuery>(
   props: { map: (value: OuterQuery) => InnerQuery },
   ...children: DOMChild<State, Action, InnerQuery>[]
 ): DOMTemplate<State, Action, OuterQuery> {
-  return new MapQueryTemplate<State, Action, OuterQuery, InnerQuery>(props.map, mapArray(children, domChildToTemplate))
+  return new MapQueryTemplate<State, Action, OuterQuery, InnerQuery>(
+    props.map,
+    mapArray(children, domChildToTemplate)
+  )
 }
 
 export function mapQueryConditional<State, Action, OuterQuery, InnerQuery>(
   props: { map: (value: OuterQuery) => InnerQuery | undefined },
   ...children: DOMChild<State, Action, InnerQuery>[]
 ): DOMTemplate<State, Action, OuterQuery> {
-  return new MapQueryTemplate<State, Action, OuterQuery, InnerQuery>(props.map, mapArray(children, domChildToTemplate))
+  return new MapQueryTemplate<State, Action, OuterQuery, InnerQuery>(
+    props.map,
+    mapArray(children, domChildToTemplate)
+  )
 }

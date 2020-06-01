@@ -29,7 +29,9 @@ export function replace(
   subject: string,
   placeholder: string,
   replacement: string
-) { return subject.split(placeholder).join(replacement) }
+) {
+  return subject.split(placeholder).join(replacement)
+}
 
 /**
  * `after` searches for the first occurrance of `searchFor` and returns the text after that.
@@ -37,10 +39,8 @@ export function replace(
  */
 export function after(value: string, searchFor: string) {
   const pos = value.indexOf(searchFor)
-  if (pos < 0)
-    return ''
-  else
-    return value.substring(pos + searchFor.length)
+  if (pos < 0) return ''
+  else return value.substring(pos + searchFor.length)
 }
 
 /**
@@ -48,12 +48,10 @@ export function after(value: string, searchFor: string) {
  * If `searchFor` is not found, an empty string is returned.
  */
 export function afterLast(value: string, searchFor: string) {
-    const pos = value.lastIndexOf(searchFor)
-    if (pos < 0)
-      return ''
-    else
-      return value.substring(pos + searchFor.length)
-  }
+  const pos = value.lastIndexOf(searchFor)
+  if (pos < 0) return ''
+  else return value.substring(pos + searchFor.length)
+}
 
 /**
  * `before` searches for the first occurrance of `searchFor` and returns the text before that.
@@ -61,10 +59,8 @@ export function afterLast(value: string, searchFor: string) {
  */
 export function before(value: string, searchFor: string) {
   const pos = value.indexOf(searchFor)
-  if (pos < 0)
-    return ''
-  else
-    return value.substring(0, pos)
+  if (pos < 0) return ''
+  else return value.substring(0, pos)
 }
 
 /**
@@ -72,12 +68,10 @@ export function before(value: string, searchFor: string) {
  * If `searchFor` is not found, an empty string is returned.
  */
 export function beforeLast(value: string, searchFor: string) {
-    const pos = value.lastIndexOf(searchFor)
-    if (pos < 0)
-      return ''
-    else
-      return value.substring(0, pos)
-  }
+  const pos = value.lastIndexOf(searchFor)
+  if (pos < 0) return ''
+  else return value.substring(0, pos)
+}
 
 /**
  * `capitalize` returns a string with the first character convert to upper case.
@@ -111,12 +105,9 @@ export function canonicalizeNewlines(value: string): string {
  * Compares two strings ignoring their case.
  */
 export function compareCaseInsensitive(a: string, b: string): number {
-  if (null == a && null == b)
-    return 0
-  if (null == a)
-    return -1
-  else if (null == b)
-    return 1
+  if (null == a && null == b) return 0
+  if (null == a) return -1
+  else if (null == b) return 1
   return compare(a.toLowerCase(), b.toLowerCase())
 }
 
@@ -125,7 +116,9 @@ export function endsWith(s: string, end: string) {
 }
 
 export function endsWithCaseInsensitive(s: string, end: string) {
-  return s.substring(0, s.length - end.length).toLowerCase() === end.toLowerCase()
+  return (
+    s.substring(0, s.length - end.length).toLowerCase() === end.toLowerCase()
+  )
 }
 
 export function startsWith(s: string, start: string) {
@@ -139,15 +132,27 @@ export function startsWithCaseInsensitive(s: string, start: string) {
 /**
  * Compares a string `s` with many `values` and see if one of them matches its end ignoring their case.
  */
-export function endsWithAnyCaseInsensitive(s: string, values: string[]): boolean {
-  return endsWithAny(s.toLowerCase(), values.map((v) => v.toLowerCase()))
+export function endsWithAnyCaseInsensitive(
+  s: string,
+  values: string[]
+): boolean {
+  return endsWithAny(
+    s.toLowerCase(),
+    values.map(v => v.toLowerCase())
+  )
 }
 
 /**
  * Compares a string `s` with many `values` and see if one of them matches its beginning ignoring their case.
  */
-export function startsWithAnyCaseInsensitive(s: string, values: string[]): boolean {
-  return startsWithAny(s.toLowerCase(), values.map((v) => v.toLowerCase()))
+export function startsWithAnyCaseInsensitive(
+  s: string,
+  values: string[]
+): boolean {
+  return startsWithAny(
+    s.toLowerCase(),
+    values.map(v => v.toLowerCase())
+  )
 }
 
 /**
@@ -165,7 +170,7 @@ export function collapse(value: string) {
  * or otherwise a positive non-sero number.
  */
 export function compare(a: string, b: string) {
-  return a < b ? -1 : (a > b ? 1 : 0)
+  return a < b ? -1 : a > b ? 1 : 0
 }
 
 export const order: Ord<string> = Ord.fromNumberComparison(compare)
@@ -235,8 +240,7 @@ export function dasherize(s: string) {
 export function diffAt(a: string, b: string) {
   const min = Math.min(a.length, b.length)
   for (let i = 0; i < min; i++)
-    if (a.substring(i, i + 1) !== b.substring(i, i + 1))
-      return i
+    if (a.substring(i, i + 1) !== b.substring(i, i + 1)) return i
   return min
 }
 
@@ -249,15 +253,14 @@ export function diffAt(a: string, b: string) {
  */
 export function ellipsis(s: string, maxlen = 20, symbol = '…') {
   const sl = s.length,
-      symboll = symbol.length
+    symboll = symbol.length
   if (sl > maxlen) {
     if (maxlen < symboll) {
       return symbol.substr(symboll - maxlen, maxlen)
     } else {
       return s.substr(0, maxlen - symboll) + symbol
     }
-  } else
-    return s
+  } else return s
 }
 
 /**
@@ -268,23 +271,22 @@ export function ellipsis(s: string, maxlen = 20, symbol = '…') {
  */
 export function ellipsisMiddle(s: string, maxlen = 20, symbol = '…') {
   const sl = s.length,
-      symboll = symbol.length
+    symboll = symbol.length
   if (sl > maxlen) {
     if (maxlen <= symboll) {
       return ellipsis(s, maxlen, symbol)
     }
     const hll = Math.ceil((maxlen - symboll) / 2),
-        hlr = Math.floor((maxlen - symboll) / 2)
+      hlr = Math.floor((maxlen - symboll) / 2)
     return s.substr(0, hll) + symbol + s.substr(sl - hlr, hlr)
-  } else
-    return s
+  } else return s
 }
 
 /**
  * Returns `true` if `s` ends with any of the values in `values`.
  */
 export function endsWithAny(s: string, values: string[]): boolean {
-  return any(values, (end) => endsWith(s, end))
+  return any(values, end => endsWith(s, end))
 }
 
 /**
@@ -292,9 +294,7 @@ export function endsWithAny(s: string, values: string[]): boolean {
  * version of the string.
  */
 export function filter(s: string, predicate: (s: string) => boolean) {
-  return toArray(s)
-    .filter(predicate)
-    .join('')
+  return toArray(s).filter(predicate).join('')
 }
 
 /**
@@ -302,9 +302,7 @@ export function filter(s: string, predicate: (s: string) => boolean) {
  */
 export function filterCharcode(s: string, predicate: (n: number) => boolean) {
   const codes: number[] = toCharcodes(s).filter(predicate)
-  return codes
-    .map((i: number) => String.fromCharCode(i))
-    .join('')
+  return codes.map((i: number) => String.fromCharCode(i)).join('')
 }
 
 /**
@@ -313,21 +311,16 @@ export function filterCharcode(s: string, predicate: (n: number) => boolean) {
  */
 export function from(value: string, searchFor: string) {
   const pos = value.indexOf(searchFor)
-  if (pos < 0)
-    return ''
-  else
-    return value.substring(pos)
+  if (pos < 0) return ''
+  else return value.substring(pos)
 }
 
 export function hashCode(value: string, seed = 0x811c9dc5) {
   let hval = seed
   for (let i = 0, l = value.length; i < l; i++) {
-    // tslint:disable-next-line
     hval ^= value.charCodeAt(i)
-    // tslint:disable-next-line
     hval += (hval << 1) + (hval << 4) + (hval << 7) + (hval << 8) + (hval << 24)
   }
-  // tslint:disable-next-line
   return hval >>> 0
 }
 
@@ -411,7 +404,10 @@ export function lowerCaseFirst(value: string): string {
  * Returns a random substring from the `value` argument. The length of such value is by default `1`.
  */
 export function random(value: string, length = 1) {
-  return value.substr(Math.floor((value.length - length + 1) * Math.random()), length)
+  return value.substr(
+    Math.floor((value.length - length + 1) * Math.random()),
+    length
+  )
 }
 
 /**
@@ -446,7 +442,9 @@ export function remove(value: string, toremove: string): string {
  * If present, it removes the `toremove` text from the end of `value`.
  */
 export function removeAfter(value: string, toremove: string): string {
-  return endsWith(value, toremove) ? value.substring(0, value.length - toremove.length) : value
+  return endsWith(value, toremove)
+    ? value.substring(0, value.length - toremove.length)
+    : value
 }
 
 /**
@@ -468,8 +466,7 @@ export function removeBefore(value: string, toremove: string): string {
  */
 export function removeOne(value: string, toremove: string): string {
   const pos = value.indexOf(toremove)
-  if (pos < 0)
-    return value
+  if (pos < 0) return value
   return value.substring(0, pos) + value.substring(pos + toremove.length)
 }
 
@@ -496,12 +493,9 @@ export function reverse(s: string) {
  * Converts a string in a quoted string.
  */
 export function quote(s: string) {
-  if (s.indexOf('"') < 0)
-    return '"' + s + '"'
-  else if (s.indexOf("'") < 0)
-    return "'" + s + "'"
-  else
-    return '"' + replace(s, '"', '\\"') + '"'
+  if (s.indexOf('"') < 0) return '"' + s + '"'
+  else if (s.indexOf("'") < 0) return "'" + s + "'"
+  else return '"' + replace(s, '"', '\\"') + '"'
 }
 
 /**
@@ -509,8 +503,7 @@ export function quote(s: string) {
  */
 export function splitOnce(s: string, separator: string) {
   const pos = s.indexOf(separator)
-  if (pos < 0)
-    return [s]
+  if (pos < 0) return [s]
   return [s.substring(0, pos), s.substring(pos + separator.length)]
 }
 
@@ -518,7 +511,7 @@ export function splitOnce(s: string, separator: string) {
  * Returns `true` if `s` starts with any of the values in `values`.
  */
 export function startsWithAny(s: string, values: string[]): boolean {
-  return any(values, (start) => s.startsWith(start))
+  return any(values, start => s.startsWith(start))
 }
 
 /**
@@ -583,11 +576,9 @@ export function trimChars(value: string, charlist: string): string {
  */
 export function trimCharsLeft(value: string, charlist: string): string {
   let pos = 0
-  for (let i = 0; i < value.length; i ++)
-    if (contains(charlist, value.charAt(i)))
-      pos++
-    else
-      break
+  for (let i = 0; i < value.length; i++)
+    if (contains(charlist, value.charAt(i))) pos++
+    else break
   return value.substring(pos)
 }
 
@@ -600,10 +591,8 @@ export function trimCharsRight(value: string, charlist: string): string {
   let i
   for (let j = 0; j < len; j++) {
     i = len - j - 1
-    if (contains(charlist, value.charAt(i)))
-      pos = i
-    else
-      break
+    if (contains(charlist, value.charAt(i))) pos = i
+    else break
   }
   return value.substring(0, pos)
 }
@@ -633,24 +622,24 @@ export function upperCaseFirst(value: string): string {
  */
 export function upTo(value: string, searchFor: string) {
   const pos = value.indexOf(searchFor)
-  if (pos < 0)
-    return value
-  else
-    return value.substring(0, pos)
+  if (pos < 0) return value
+  else return value.substring(0, pos)
 }
 
 /**
  * `wrapColumns` splits a long string into lines that are at most `columns` long.
  * Words whose length exceeds `columns` are not split.
  */
-export function wrapColumns(s: string, columns = 78, indent = '', newline = '\n') {
+export function wrapColumns(
+  s: string,
+  columns = 78,
+  indent = '',
+  newline = '\n'
+) {
   return s
     .split(SPLIT_LINES)
     .map(part =>
-      wrapLine(
-        part.replace(WSG, ' ').trim(),
-        columns, indent, newline
-      )
+      wrapLine(part.replace(WSG, ' ').trim(), columns, indent, newline)
     )
     .join(newline)
 }
@@ -658,7 +647,14 @@ export function wrapColumns(s: string, columns = 78, indent = '', newline = '\n'
 export function isSpaceAt(s: string, pos: number) {
   if (pos < 0 || pos >= s.length) return false
   const char = s.charCodeAt(pos)
-  return (char === 9 || char === 10 || char === 11 || char === 12 || char === 13  || char === 32)
+  return (
+    char === 9 ||
+    char === 10 ||
+    char === 11 ||
+    char === 12 ||
+    char === 13 ||
+    char === 32
+  )
 }
 
 export function encodeBase64(s: string): string {
@@ -666,7 +662,7 @@ export function encodeBase64(s: string): string {
   if (typeof Buffer !== 'undefined') {
     // @ts-ignore
     return Buffer.from(s).toString('base64')
-  // @ts-ignore
+    // @ts-ignore
   } else if (typeof btoa !== undefined) {
     // @ts-ignore
     return btoa(s)
@@ -680,7 +676,7 @@ export function decodeBase64(s: string): string {
   if (typeof Buffer !== 'undefined') {
     // @ts-ignore
     return Buffer.from(s, 'base64').toString('utf8')
-  // @ts-ignore
+    // @ts-ignore
   } else if (typeof atob !== undefined) {
     // @ts-ignore
     return atob(s)
@@ -689,7 +685,12 @@ export function decodeBase64(s: string): string {
   }
 }
 
-export function wrapLine(s: string, columns: number, indent: string, newline: string) {
+export function wrapLine(
+  s: string,
+  columns: number,
+  indent: string,
+  newline: string
+) {
   const parts = []
   const len = s.length
   const ilen = indent.length
@@ -702,13 +703,11 @@ export function wrapLine(s: string, columns: number, indent: string, newline: st
     }
 
     let i = 0
-    while (!isSpaceAt(s, pos + columns - i) && i < columns)
-      i++
+    while (!isSpaceAt(s, pos + columns - i) && i < columns) i++
     if (i === columns) {
       // search ahead
       i = 0
-      while (!isSpaceAt(s, pos + columns + i) && pos + columns + i < len)
-        i++
+      while (!isSpaceAt(s, pos + columns + i) && pos + columns + i < len) i++
       parts.push(s.substring(pos, pos + columns + i))
       pos += columns + i + 1
     } else {
@@ -738,7 +737,10 @@ export function rpad(s: string, char: string, length: number) {
   }
 }
 
-export function splitOnLast(s: string, find: string): [string] | [string, string] {
+export function splitOnLast(
+  s: string,
+  find: string
+): [string] | [string, string] {
   const x = s.lastIndexOf(find)
   if (x >= 0) {
     return [s.substring(0, x), s.substring(x + find.length)]
@@ -747,7 +749,10 @@ export function splitOnLast(s: string, find: string): [string] | [string, string
   }
 }
 
-export function splitOnFirst(s: string, find: string): [string] | [string, string] {
+export function splitOnFirst(
+  s: string,
+  find: string
+): [string] | [string, string] {
   const x = s.indexOf(find)
   if (x >= 0) {
     return [s.substring(0, x), s.substring(x + find.length)]
@@ -756,7 +761,8 @@ export function splitOnFirst(s: string, find: string): [string] | [string, strin
   }
 }
 
-const BASE64_ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
+const BASE64_ALPHABET =
+  'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
 const UCWORDS = /[^a-zA-Z]([a-z])/g
 const IS_BREAKINGWHITESPACE = /[^\t\n\r ]/
 const IS_ALPHA = /[^a-zA-Z]/
