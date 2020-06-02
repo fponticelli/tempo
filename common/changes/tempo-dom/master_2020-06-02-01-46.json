@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "tempo-dom",
+      "comment": "Add simpleComponent for elements where State matches Action.",
+      "type": "patch"
+    }
+  ],
+  "packageName": "tempo-dom",
+  "email": "franco.ponticelli@gmail.com"
+}
