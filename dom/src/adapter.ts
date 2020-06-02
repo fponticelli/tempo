@@ -44,9 +44,6 @@ class AdapterTemplate<OuterState, InnerState, OuterAction, InnerAction, Query>
         outerState,
         innerState
       }) ?? innerState
-    // (this.mergeStates &&
-    //   this.mergeStates(outerState, this.child.store.property.get())) ||
-    //   this.child.store.property.get()
 
     const viewComponent = this.child.render(
       ctx.withDispatch(() => {

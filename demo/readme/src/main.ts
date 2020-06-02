@@ -13,40 +13,26 @@ limitations under the License.
 
 import { Tempo } from 'tempo-dom/lib/tempo'
 import { div, button } from 'tempo-dom/lib/html'
-import { Store } from 'tempo-store/lib/store'
+import { simpleComponent } from 'tempo-dom/lib/simple_component'
 
-const state = 0
-
-type Action = 'increment' | 'decrement'
-
-const reducer = (state: number, action: Action): number => {
-  switch (action) {
-    case 'increment':
-      return state + 1
-    case 'decrement':
-      return state - 1
-    default:
-      throw `this should never happen`
-  }
-}
-
-const store = Store.ofState({ state, reducer })
-
-const template = div<number, Action>(
-  { attrs: { class: 'app' } },
-  div({ attrs: { class: 'count count-small' } }, 'count'),
-  div({ attrs: { class: 'count' } }, String),
+const component = simpleComponent<number>(
+  {},
   div(
-    { attrs: { class: 'buttons' } },
-    button(
-      {
-        events: { click: () => 'decrement' },
-        attrs: { disabled: count => count <= 0 }
-      },
-      '-'
-    ),
-    button({ events: { click: () => 'increment' } }, '+')
+    { attrs: { class: 'app' } },
+    div({ attrs: { class: 'count count-small' } }, 'count'),
+    div({ attrs: { class: 'count' } }, String),
+    div(
+      { attrs: { class: 'buttons' } },
+      button(
+        {
+          events: { click: count => count - 1 },
+          attrs: { disabled: count => count <= 0 }
+        },
+        '-'
+      ),
+      button({ events: { click: count => count + 1 } }, '+')
+    )
   )
 )
 
-Tempo.render({ store, template })
+Tempo.renderSimple({ component, state: 0 })
