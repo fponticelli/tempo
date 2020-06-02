@@ -1,6 +1,13 @@
 # Change Log - tempo-dom
 
-This log was last generated on Sun, 31 May 2020 02:48:23 GMT and should not be manually modified.
+This log was last generated on Tue, 02 Jun 2020 01:47:10 GMT and should not be manually modified.
+
+## 0.20.1
+Tue, 02 Jun 2020 01:47:10 GMT
+
+### Patches
+
+- Add simpleComponent for elements where State matches Action.
 
 ## 0.20.0
 Sun, 31 May 2020 02:48:23 GMT
