@@ -24,25 +24,25 @@ class MapStateTemplate<OuterState, InnerState, Action, Query>
     readonly map: Attribute<OuterState, InnerState>,
     readonly whenUndefined: DOMTemplate<unknown, Action, Query>,
     readonly refId: string,
+    readonly equals: (a: InnerState, b: InnerState) => boolean,
     readonly children: DOMTemplate<InnerState, Action, Query>[]
   ) {}
 
   render(ctx: DOMContext<Action>, state: OuterState): View<OuterState, Query> {
-    const { children, map, refId, whenUndefined } = this
+    const { children, map, refId, whenUndefined, equals } = this
 
-    let isUndefined = true
     let views: View<InnerState, Query>[] = []
 
     const { ctx: newCtx, ref } = ctx.withAppendToReference(refId)
 
-    const innerState = resolveAttribute(map)(state)
+    let current: InnerState | undefined = undefined
+    const next = resolveAttribute(map)(state)
 
-    if (typeof innerState !== 'undefined') {
-      isUndefined = false
-      views = mapArray(children, c => c.render(newCtx, innerState))
-    } else {
-      isUndefined = true
+    if (typeof next === 'undefined') {
       views = [whenUndefined.render(newCtx, state)]
+    } else {
+      current = next
+      views = mapArray(children, c => c.render(newCtx, next))
     }
 
     function destroy() {
@@ -51,19 +51,22 @@ class MapStateTemplate<OuterState, InnerState, Action, Query>
 
     return {
       change: (state: OuterState) => {
-        const innerState = resolveAttribute(map)(state)
-        if (typeof innerState !== 'undefined') {
-          if (isUndefined) {
+        const next = resolveAttribute(map)(state)
+        if (typeof next !== 'undefined') {
+          if (typeof current === 'undefined') {
             destroy()
-            views = mapArray(children, c => c.render(newCtx, innerState))
-          } else {
-            for (const view of views) view.change(innerState)
+            current = next
+            views = mapArray(children, c => c.render(newCtx, next))
+          } else if (!equals(current, next)) {
+            current = next
+            for (const view of views) view.change(next)
           }
-          isUndefined = false
         } else {
-          destroy()
-          views = [whenUndefined.render(newCtx, state)]
-          isUndefined = true
+          if (typeof current !== 'undefined') {
+            current = undefined
+            destroy()
+            views = [whenUndefined.render(newCtx, state)]
+          }
         }
       },
       destroy: () => {
@@ -82,6 +85,7 @@ export function mapState<OuterState, InnerState, Action, Query = unknown>(
     map: Attribute<OuterState, InnerState>
     whenUndefined?: DOMChild<unknown, Action, Query>
     refId?: string
+    equals?: (a: InnerState, b: InnerState) => boolean
   },
   ...children: DOMChild<InnerState, Action, Query>[]
 ): DOMTemplate<OuterState, Action, Query> {
@@ -89,6 +93,7 @@ export function mapState<OuterState, InnerState, Action, Query = unknown>(
     props.map,
     domChildToTemplate(props.whenUndefined),
     props.refId ?? 't:map',
+    props.equals ?? ((a: InnerState, b: InnerState) => false),
     mapArray(children, domChildToTemplate)
   )
 }
@@ -99,12 +104,16 @@ export function mapField<
   Action,
   Query = unknown
 >(
-  props: { field: Key; whenUndefined?: DOMChild<unknown, Action, Query> },
+  props: {
+    field: Key
+    whenUndefined?: DOMChild<unknown, Action, Query>
+    equals?: (a: OuterState[Key], b: OuterState[Key]) => boolean
+  },
   ...children: DOMChild<OuterState[Key], Action, Query>[]
 ): DOMTemplate<OuterState, Action, Query> {
-  const { field, whenUndefined } = props
+  const { field, whenUndefined, equals } = props
   return mapState<OuterState, OuterState[Key], Action, Query>(
-    { map: (v: OuterState) => v[field], whenUndefined },
+    { map: (v: OuterState) => v[field], whenUndefined, equals },
     ...children
   )
 }
@@ -119,6 +128,10 @@ export function mapStateAndKeep<
     map: Attribute<OuterState, InnerState>
     whenUndefined?: DOMChild<unknown, Action, Query>
     refId?: string
+    equals?: (
+      a: [InnerState, OuterState],
+      b: [InnerState, OuterState]
+    ) => boolean
   },
   ...children: DOMChild<[InnerState, OuterState], Action, Query>[]
 ): DOMTemplate<OuterState, Action, Query> {
@@ -138,6 +151,8 @@ export function mapStateAndKeep<
     },
     domChildToTemplate(props.whenUndefined),
     props.refId ?? 't:map_keep',
+    props.equals ??
+      ((a: [InnerState, OuterState], b: [InnerState, OuterState]) => false),
     mapArray(children, domChildToTemplate)
   )
 }
