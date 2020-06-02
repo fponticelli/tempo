@@ -16,6 +16,7 @@ import { Component, component } from './component'
 import { DOMContext } from './context'
 import { DOMChild } from './template'
 import { View } from 'tempo-core/lib/view'
+import { SimpleComponent } from './simple_component'
 
 export type TempoView<State, Action, Query> = Readonly<{
   view: View<State, Query>
@@ -34,12 +35,7 @@ export const Tempo = {
     const el = maybeElement || doc.body
     const append = (node: Node) => el.appendChild(node)
     const view = component.render(
-      new DOMContext(
-        doc,
-        append,
-        el,
-        () => {}
-      ),
+      new DOMContext(doc, append, el, () => {}),
       store.property.get()
     )
 
@@ -59,5 +55,18 @@ export const Tempo = {
     const { el, store, document, template, delayed } = options
     const comp = component({ store, delayed }, template)
     return Tempo.renderComponent({ el, component: comp, document })
+  },
+
+  renderSimple<State, Query = unknown>(options: {
+    el?: HTMLElement
+    component: SimpleComponent<State, Query>
+    state: State
+    document?: Document
+  }): View<State, Query> {
+    const { el: maybeElement, component, state } = options
+    const doc = options.document || document
+    const el = maybeElement || doc.body
+    const append = (node: Node) => el.appendChild(node)
+    return component.render(new DOMContext(doc, append, el, () => {}), state)
   }
 }

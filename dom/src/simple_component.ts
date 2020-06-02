@@ -11,39 +11,20 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { Store } from 'tempo-store/lib/store'
 import { DOMTemplate, DOMChild } from './template'
 import { DOMContext } from './context'
 import { domChildToTemplate } from './utils/dom'
 import { map } from 'tempo-std/lib/arrays'
 
-export interface Component<State, Action, Query>
-  extends DOMTemplate<State, Action, Query> {
-  store: Store<State, Action>
-}
+export type SimpleComponent<State, Query> = DOMTemplate<State, State, Query>
 
-export function makeDelayedUpdate<State>(change: (state: State) => void) {
-  let shouldRender = true
-  return (state: State) => {
-    if (shouldRender) {
-      shouldRender = false
-      setTimeout(() => {
-        change(state)
-        shouldRender = true
-      })
-    }
-  }
-}
-
-class ComponentTemplate<State, Action, Query>
-  implements Component<State, Action, Query> {
+class ComponentTemplate<State, Query> implements SimpleComponent<State, Query> {
   constructor(
-    readonly store: Store<State, Action>,
-    readonly children: DOMTemplate<State, Action, Query>[],
+    readonly children: DOMTemplate<State, State, Query>[],
     readonly delayed: boolean
   ) {}
 
-  render(ctx: DOMContext<Action>, state: State) {
+  render(ctx: DOMContext<State>, state: State) {
     let update: (state: State) => void
     if (this.delayed) {
       let shouldRender = true
@@ -61,44 +42,32 @@ class ComponentTemplate<State, Action, Query>
         view.change(state)
       }
     }
-    const { store } = this
-    const { property } = store
 
-    property.observable.on(update)
-    const innerDispatch = (action: Action) => {
-      store.process(action)
-    }
-    const newCtx = ctx.withDispatch(innerDispatch)
-    const views = map(this.children, child =>
-      child.render(newCtx, property.get())
-    )
+    const newCtx = ctx.withDispatch(update)
+    const views = map(this.children, child => child.render(newCtx, state))
+
     const view = {
       change: (state: State) => {
-        store.property.set(state)
         for (const view of views) view.change(state)
       },
       destroy: () => {
-        property.observable.off(update)
         for (const view of views) view.destroy()
       },
       request: (query: Query) => {
         for (const view of views) view.request(query)
       }
     }
-    property.set(state)
     return view
   }
 }
 
-export function component<State, Action, Query = unknown>(
+export function simpleComponent<State, Query = unknown>(
   props: {
-    store: Store<State, Action>
     delayed?: boolean
   },
-  ...children: DOMChild<State, Action, Query>[]
-): Component<State, Action, Query> {
-  return new ComponentTemplate<State, Action, Query>(
-    props.store,
+  ...children: DOMChild<State, State, Query>[]
+): SimpleComponent<State, Query> {
+  return new ComponentTemplate<State, Query>(
     map(children, domChildToTemplate),
     props.delayed || false
   )
