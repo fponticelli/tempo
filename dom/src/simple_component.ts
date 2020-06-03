@@ -43,7 +43,7 @@ class ComponentTemplate<State, Query> implements SimpleComponent<State, Query> {
       }
     }
 
-    const newCtx = ctx.withDispatch(update)
+    const newCtx = ctx.withInterceptDispatch(update)
     const views = map(this.children, child => child.render(newCtx, state))
 
     const view = {

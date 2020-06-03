@@ -84,4 +84,16 @@ export class DOMContext<Action> {
       dispatch
     )
   }
+
+  withInterceptDispatch(dispatch: (action: Action) => void) {
+    return new DOMContext<Action>(
+      this.doc,
+      this.append,
+      this.parent,
+      (action: Action) => {
+        this.dispatch(action)
+        dispatch(action)
+      }
+    )
+  }
 }
