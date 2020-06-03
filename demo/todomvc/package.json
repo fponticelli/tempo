@@ -34,7 +34,7 @@
     "compile": "NODE_ENV=production && npx tsc --noEmit && parcel build src/index.html --public-url . --out-dir ./dist --experimental-scope-hoisting --no-minify",
     "clean": "rm -rf dist/* && rm -rf ./build/*",
     "build": "npm run clean && npm run compile",
-    "watch": "parcel src/index.html",
+    "start": "parcel src/index.html",
     "prettier": "prettier -c src/**/*.ts",
     "prettier-fix": "prettier --write src/**/*.ts"
   }
