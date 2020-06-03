@@ -23,7 +23,6 @@ export function iterate<
   Query = unknown
 >(
   props: {
-    refId?: string
     map: Attribute<OuterState, InnerState>
   },
   ...children: DOMChild<
@@ -57,7 +56,6 @@ export function iterateItems<
   Query = unknown
 >(
   props: {
-    refId?: string
     map: Attribute<OuterState, InnerState>
     whenUndefined?: DOMChild<unknown, Action, Query>
   },

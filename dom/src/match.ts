@@ -16,7 +16,11 @@ import { DOMTemplate, DOMChild } from './template'
 import { DOMContext } from './context'
 import { domChildToTemplate, removeNode } from './utils/dom'
 import { IndexType } from 'tempo-std/lib/types/index_type'
-import { ObjectWithPath, TypeAtPath, ObjectWithField } from 'tempo-std/lib/types/objects'
+import {
+  ObjectWithPath,
+  TypeAtPath,
+  ObjectWithField
+} from 'tempo-std/lib/types/objects'
 import { Option } from 'tempo-std/lib/option'
 import { mapState, mapField } from './map'
 import { Maybe, Just } from 'tempo-std/lib/maybe'
@@ -34,18 +38,27 @@ class MatchTemplate<
   constructor(
     readonly path: Path,
     readonly matcher: {
-      [k in TypeAtPath<Path, State>]: DOMTemplate<DifferentiateAt<Path, State, k>, Action, Query>
-    },
-    readonly refId: string
+      [k in TypeAtPath<Path, State>]: DOMTemplate<
+        DifferentiateAt<Path, State, k>,
+        Action,
+        Query
+      >
+    }
   ) {}
   render(ctx: DOMContext<Action>, state: State) {
-    const { ctx: newCtx, ref } = ctx.withAppendToReference(this.refId)
-    let key = this.path.reduce((acc: any, key) => acc[key], state) as TypeAtPath<Path, State>
+    const { ctx: newCtx, ref } = ctx.withAppendToReference()
+    let key = this.path.reduce(
+      (acc: any, key) => acc[key],
+      state
+    ) as TypeAtPath<Path, State>
     let view = this.matcher[key].render(newCtx, state as any)
     const { matcher, path } = this
     return {
       change: (state: State) => {
-        const newKey = path.reduce((acc: any, key) => acc[key], state) as TypeAtPath<Path, State>
+        const newKey = path.reduce(
+          (acc: any, key) => acc[key],
+          state
+        ) as TypeAtPath<Path, State>
         if (newKey === key) {
           view.change(state as any)
         } else {
@@ -71,54 +84,71 @@ export function match<
   Action,
   Query = unknown
 >(props: {
-  path: Path,
+  path: Path
   matchers: {
-    [k in TypeAtPath<Path, State>]: DOMChild<DifferentiateAt<Path, State, k>, Action, Query>
-  },
-  refId?: string
+    [k in TypeAtPath<Path, State>]: DOMChild<
+      DifferentiateAt<Path, State, k>,
+      Action,
+      Query
+    >
+  }
 }): DOMTemplate<State, Action, Query> {
   return new MatchTemplate<Path, State, Action, Query>(
     props.path,
-    Object.keys(props.matchers).reduce((acc, key) => {
-      return {
-        ...acc,
-        [key]: domChildToTemplate(props.matchers[key as keyof typeof props.matchers])
+    Object.keys(props.matchers).reduce(
+      (acc, key) => {
+        return {
+          ...acc,
+          [key]: domChildToTemplate(
+            props.matchers[key as keyof typeof props.matchers]
+          )
+        }
+      },
+      {} as {
+        [k in TypeAtPath<Path, State>]: DOMTemplate<
+          DifferentiateAt<Path, State, k>,
+          Action,
+          Query
+        >
       }
-    }, {} as {
-      [k in TypeAtPath<Path, State>]: DOMTemplate<DifferentiateAt<Path, State, k>, Action, Query>
-    }),
-    props.refId || 't:match'
+    )
   )
 }
 
-export function matchKind<State extends ObjectWithField<'kind', any>, Action, Query = unknown>(props: {
+export function matchKind<
+  State extends ObjectWithField<'kind', any>,
+  Action,
+  Query = unknown
+>(props: {
   matchers: {
-    [k in State['kind']]: DOMChild<DifferentiateAt<['kind'], State, k>, Action, Query>
-  },
-  refId?: string
-}
-): DOMTemplate<State, Action, Query> {
-  const refId = props.refId ?? 't-match-kind'
-  return match<['kind'], State, Action, Query>({ path: ['kind'], matchers: props.matchers, refId })
+    [k in State['kind']]: DOMChild<
+      DifferentiateAt<['kind'], State, k>,
+      Action,
+      Query
+    >
+  }
+}): DOMTemplate<State, Action, Query> {
+  return match<['kind'], State, Action, Query>({
+    path: ['kind'],
+    matchers: props.matchers
+  })
 }
 
-class MatchBoolTemplate<
-  State,
-  Action,
-  Query
-> implements DOMTemplate<State, Action, Query> {
+class MatchBoolTemplate<State, Action, Query>
+  implements DOMTemplate<State, Action, Query> {
   constructor(
     readonly condition: Attribute<State, boolean>,
     readonly trueTemplate: DOMTemplate<State, Action, Query>,
-    readonly falseTemplate: DOMTemplate<State, Action, Query>,
-    readonly refId: string
+    readonly falseTemplate: DOMTemplate<State, Action, Query>
   ) {}
   render(ctx: DOMContext<Action>, state: State) {
-    const { ctx: newCtx, ref } = ctx.withAppendToReference(this.refId)
+    const { ctx: newCtx, ref } = ctx.withAppendToReference()
     const { trueTemplate, falseTemplate } = this
     const condition = resolveAttribute(this.condition)
     let lastEvaluation = condition(state)
-    let view = lastEvaluation ? trueTemplate.render(newCtx, state) : falseTemplate.render(newCtx, state)
+    let view = lastEvaluation
+      ? trueTemplate.render(newCtx, state)
+      : falseTemplate.render(newCtx, state)
     return {
       change: (state: State) => {
         const newEvaluation = condition(state)
@@ -127,9 +157,9 @@ class MatchBoolTemplate<
         } else {
           view.destroy()
           lastEvaluation = newEvaluation
-          view = newEvaluation ?
-            trueTemplate.render(newCtx, state) :
-            falseTemplate.render(newCtx, state)
+          view = newEvaluation
+            ? trueTemplate.render(newCtx, state)
+            : falseTemplate.render(newCtx, state)
         }
       },
       destroy: () => {
@@ -143,38 +173,30 @@ class MatchBoolTemplate<
   }
 }
 
-export function matchBool<State, Action, Query = unknown>(
-  props: {
-    condition: Attribute<State, boolean>,
-    true: DOMChild<State, Action, Query>,
-    false: DOMChild<State, Action, Query>,
-    refId?: string
-  }
-): DOMTemplate<State, Action, Query> {
+export function matchBool<State, Action, Query = unknown>(props: {
+  condition: Attribute<State, boolean>
+  true: DOMChild<State, Action, Query>
+  false: DOMChild<State, Action, Query>
+}): DOMTemplate<State, Action, Query> {
   return new MatchBoolTemplate<State, Action, Query>(
     props.condition,
     domChildToTemplate(props.true),
-    domChildToTemplate(props.false),
-    props.refId || 't:match-bool'
+    domChildToTemplate(props.false)
   )
 }
 
-class MatchValueTemplate<
-  State,
-  Action,
-  Query
-> implements DOMTemplate<State, Action, Query> {
+class MatchValueTemplate<State, Action, Query>
+  implements DOMTemplate<State, Action, Query> {
   constructor(
     readonly path: IndexType[],
     readonly matchers: {
-      [_ in (string | number)]: DOMTemplate<State, Action, Query>
+      [_ in string | number]: DOMTemplate<State, Action, Query>
     },
-    readonly orElse: DOMTemplate<State, Action, Query>,
-    readonly refId: string
+    readonly orElse: DOMTemplate<State, Action, Query>
   ) {}
   render(ctx: DOMContext<Action>, state: State) {
     const { matchers, orElse } = this
-    const { ctx: newCtx, ref } = ctx.withAppendToReference(this.refId)
+    const { ctx: newCtx, ref } = ctx.withAppendToReference()
     let oldKey = this.path.reduce((acc: any, key) => acc[key], state)
     const template = this.matchers[oldKey] || this.orElse
     let view = template.render(newCtx, state)
@@ -201,113 +223,111 @@ class MatchValueTemplate<
   }
 }
 
-export function matchValue<Path extends IndexType[], State extends ObjectWithPath<Path, string>, Action, Query = unknown>(props: {
-  path: Path,
+export function matchValue<
+  Path extends IndexType[],
+  State extends ObjectWithPath<Path, string>,
+  Action,
+  Query = unknown
+>(props: {
+  path: Path
   matchers: {
-    [_ in (string | number)]: DOMChild<State, Action, Query>
-  },
-  orElse: DOMChild<State, Action, Query>,
-  refId?: string
+    [_ in string | number]: DOMChild<State, Action, Query>
+  }
+  orElse: DOMChild<State, Action, Query>
 }): DOMTemplate<State, Action, Query> {
   return new MatchValueTemplate<State, Action, Query>(
     props.path,
-    Object.keys(props.matchers).reduce((acc: { [_ in (string | number)]: DOMTemplate<State, Action, Query> }, key: string) => {
-      return {
-        ...acc,
-        [key]: domChildToTemplate(props.matchers[key])
-      }
-    }, {}),
-    domChildToTemplate(props.orElse),
-    props.refId || 't:match-value'
+    Object.keys(props.matchers).reduce(
+      (
+        acc: { [_ in string | number]: DOMTemplate<State, Action, Query> },
+        key: string
+      ) => {
+        return {
+          ...acc,
+          [key]: domChildToTemplate(props.matchers[key])
+        }
+      },
+      {}
+    ),
+    domChildToTemplate(props.orElse)
   )
 }
 
 export function matchOption<State, Action, Query = unknown>(props: {
-  Some:  DOMChild<State, Action, Query>,
+  Some: DOMChild<State, Action, Query>
   None: DOMChild<unknown, Action, Query>
-  refId?: string
 }): DOMTemplate<Option<State>, Action, Query> {
-  const refId = props.refId ?? 't-match-option'
   return matchKind({
     matchers: {
-      Some:  mapField({ field: 'value' }, props.Some),
-      None:  mapState({ map: () => null }, props.None)
-    },
-    refId
+      Some: mapField({ field: 'value' }, props.Some),
+      None: mapState({ map: () => null }, props.None)
+    }
   })
 }
 
 export function matchMaybe<State, Action, Query = unknown>(props: {
-  Just: DOMChild<State, Action, Query>,
+  Just: DOMChild<State, Action, Query>
   Nothing?: DOMChild<unknown, Action, Query>
-  refId?: string
 }): DOMTemplate<Maybe<State>, Action, Query> {
-  const refId = props.refId ?? 't-match-maybe'
   return new MatchBoolTemplate<Maybe<State>, Action, Query>(
     v => typeof v !== 'undefined',
     mapState(
-      { map: (opt: Maybe<State>) => (opt as Just<State>) },
+      { map: (opt: Maybe<State>) => opt as Just<State> },
       domChildToTemplate(props.Just)
     ),
-    domChildToTemplate(props.Nothing),
-    refId
+    domChildToTemplate(props.Nothing)
   )
 }
 
 export function matchResult<State, Error, Action, Query = unknown>(props: {
-  Success:  DOMChild<State, Action, Query>,
-  Failure: DOMChild<Error, Action, Query>,
-  refId?: string
+  Success: DOMChild<State, Action, Query>
+  Failure: DOMChild<Error, Action, Query>
 }): DOMTemplate<Result<State, Error>, Action, Query> {
-  const refId = props.refId ?? 't-match-result'
   return matchKind({
     matchers: {
-      Success:  mapField({ field: 'value' }, props.Success),
-      Failure:  mapField({ field: 'error' }, props.Failure)
-    },
-    refId
+      Success: mapField({ field: 'value' }, props.Success),
+      Failure: mapField({ field: 'error' }, props.Failure)
+    }
   })
 }
 
 export function matchAsync<State, Progress, Action, Query = unknown>(props: {
-  Outcome:  DOMChild<State, Action, Query>,
-  NotAsked: DOMChild<unknown, Action, Query>,
-  Loading:  DOMChild<Progress, Action, Query>
-  refId?: string
-}
-): DOMTemplate<Async<State, Progress>, Action, Query> {
-  const refId = props.refId ?? 't-match-async'
+  Outcome: DOMChild<State, Action, Query>
+  NotAsked: DOMChild<unknown, Action, Query>
+  Loading: DOMChild<Progress, Action, Query>
+}): DOMTemplate<Async<State, Progress>, Action, Query> {
   return matchKind({
     matchers: {
-      Outcome:  mapField({ field: 'value' }, props.Outcome),
-      Loading:  mapField({ field: 'progress' }, props.Loading),
+      Outcome: mapField({ field: 'value' }, props.Outcome),
+      Loading: mapField({ field: 'progress' }, props.Loading),
       NotAsked: mapState({ map: () => null }, props.NotAsked)
-    },
-    refId
+    }
   })
 }
 
-export function matchAsyncResult<State, Error, Progress, Action, Query = unknown>(props: {
-  Success:  DOMChild<State, Action, Query>,
-  Failure:  DOMChild<Error, Action, Query>,
-  NotAsked: DOMChild<unknown, Action, Query>,
-  Loading:  DOMChild<Progress, Action, Query>,
-  refId?: string
+export function matchAsyncResult<
+  State,
+  Error,
+  Progress,
+  Action,
+  Query = unknown
+>(props: {
+  Success: DOMChild<State, Action, Query>
+  Failure: DOMChild<Error, Action, Query>
+  NotAsked: DOMChild<unknown, Action, Query>
+  Loading: DOMChild<Progress, Action, Query>
 }): DOMTemplate<AsyncResult<State, Error, Progress>, Action, Query> {
-  const refId = props.refId ?? 't-match-async-result'
   return matchKind<AsyncResult<State, Error, Progress>, Action, Query>({
     matchers: {
-      Outcome:  mapState(
+      Outcome: mapState(
         { map: (o: Outcome<Result<State, Error>>) => o.value },
         matchResult<State, Error, Action, Query>({
           Success: props.Success,
-          Failure: props.Failure,
-          refId: `${refId}-sub`
+          Failure: props.Failure
         })
       ),
-      Loading:  mapField({ field: 'progress' }, props.Loading),
+      Loading: mapField({ field: 'progress' }, props.Loading),
       NotAsked: mapState({ map: () => null }, props.NotAsked)
-    },
-    refId
+    }
   })
 }

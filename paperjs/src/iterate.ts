@@ -23,7 +23,6 @@ export function iterate<
   Query = unknown
 >(
   props: {
-    refId?: string
     map: PaperAttribute<OuterState, InnerState>
   },
   ...children: PaperTemplate<
@@ -57,7 +56,6 @@ export function iterateItems<
   Query = unknown
 >(
   props: {
-    refId?: string
     map: PaperAttribute<OuterState, InnerState>
   },
   ...children: PaperTemplate<InnerState[number], Action, Query>[]

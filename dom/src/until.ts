@@ -22,7 +22,6 @@ class UntilTemplate<OuterState, InnerState, Action, Query>
   implements DOMTemplate<OuterState, Action, Query> {
   constructor(
     readonly props: {
-      refId?: string
       next: Attribute<{ state: OuterState; index: number }, InnerState>
     },
     readonly children: DOMTemplate<InnerState, Action, Query>[]
@@ -30,8 +29,8 @@ class UntilTemplate<OuterState, InnerState, Action, Query>
 
   render(ctx: DOMContext<Action>, state: OuterState): View<OuterState, Query> {
     const { children } = this
-    const { refId, next } = this.props
-    const { ctx: newCtx, ref } = ctx.withAppendToReference(refId)
+    const { next } = this.props
+    const { ctx: newCtx, ref } = ctx.withAppendToReference()
     let childrenViews: View<InnerState, Query>[][] = []
     // TODO, when next is a static literal it can be optimized to only render once
     const view = {
@@ -77,7 +76,6 @@ class UntilTemplate<OuterState, InnerState, Action, Query>
 
 export function until<OuterState, InnerState, Action, Query = unknown>(
   props: {
-    refId?: string
     next: Attribute<{ state: OuterState; index: number }, InnerState>
   },
   ...children: DOMChild<InnerState, Action, Query>[]

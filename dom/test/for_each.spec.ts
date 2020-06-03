@@ -20,30 +20,38 @@ describe('repeat', () => {
     const ctx = createContext()
     const template = forEach({}, div({}, String))
     const view = template.render(ctx, [])
-    expect(ctx.doc.body.innerHTML).toEqual('<!--t:for_each-->')
+    expect(ctx.doc.body.innerHTML).toEqual('')
     view.change([1, 2, 3])
-    expect(ctx.doc.body.innerHTML).toEqual('<div>1</div><div>2</div><div>3</div><!--t:for_each-->')
+    expect(ctx.doc.body.innerHTML).toEqual(
+      '<div>1</div><div>2</div><div>3</div>'
+    )
     view.change([4, 5])
-    expect(ctx.doc.body.innerHTML).toEqual('<div>4</div><div>5</div><!--t:for_each-->')
+    expect(ctx.doc.body.innerHTML).toEqual('<div>4</div><div>5</div>')
     view.change([1, 2, 3])
-    expect(ctx.doc.body.innerHTML).toEqual('<div>1</div><div>2</div><div>3</div><!--t:for_each-->')
+    expect(ctx.doc.body.innerHTML).toEqual(
+      '<div>1</div><div>2</div><div>3</div>'
+    )
     view.change([])
-    expect(ctx.doc.body.innerHTML).toEqual('<!--t:for_each-->')
+    expect(ctx.doc.body.innerHTML).toEqual('')
     view.destroy()
     expect(ctx.doc.body.innerHTML).toEqual('')
   })
 
   it('repeat starting full', () => {
     const ctx = createContext()
-    const template = forEach({ refId: 'A' }, div({}, String))
+    const template = forEach({}, div({}, String))
     const view = template.render(ctx, [1, 2, 3])
-    expect(ctx.doc.body.innerHTML).toEqual('<div>1</div><div>2</div><div>3</div><!--A-->')
+    expect(ctx.doc.body.innerHTML).toEqual(
+      '<div>1</div><div>2</div><div>3</div>'
+    )
     view.change([4, 5])
-    expect(ctx.doc.body.innerHTML).toEqual('<div>4</div><div>5</div><!--A-->')
+    expect(ctx.doc.body.innerHTML).toEqual('<div>4</div><div>5</div>')
     view.change([1, 2, 3])
-    expect(ctx.doc.body.innerHTML).toEqual('<div>1</div><div>2</div><div>3</div><!--A-->')
+    expect(ctx.doc.body.innerHTML).toEqual(
+      '<div>1</div><div>2</div><div>3</div>'
+    )
     view.change([])
-    expect(ctx.doc.body.innerHTML).toEqual('<!--A-->')
+    expect(ctx.doc.body.innerHTML).toEqual('')
     view.destroy()
     expect(ctx.doc.body.innerHTML).toEqual('')
   })

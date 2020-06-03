@@ -59,8 +59,8 @@ export class DOMContext<Action> {
     )
   }
 
-  withAppendToReference(refId?: string) {
-    const ref = this.doc.createComment(refId || 't:ref')
+  withAppendToReference() {
+    const ref = this.doc.createTextNode('')
     this.append(ref)
     return {
       ctx: this.withAppend(makeInsertBefore(ref)),

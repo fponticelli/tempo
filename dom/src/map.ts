@@ -23,17 +23,16 @@ class MapStateTemplate<OuterState, InnerState, Action, Query>
   constructor(
     readonly map: Attribute<OuterState, InnerState>,
     readonly whenUndefined: DOMTemplate<unknown, Action, Query>,
-    readonly refId: string,
     readonly equals: (a: InnerState, b: InnerState) => boolean,
     readonly children: DOMTemplate<InnerState, Action, Query>[]
   ) {}
 
   render(ctx: DOMContext<Action>, state: OuterState): View<OuterState, Query> {
-    const { children, map, refId, whenUndefined, equals } = this
+    const { children, map, whenUndefined, equals } = this
 
     let views: View<InnerState, Query>[] = []
 
-    const { ctx: newCtx, ref } = ctx.withAppendToReference(refId)
+    const { ctx: newCtx, ref } = ctx.withAppendToReference()
 
     let current: InnerState | undefined = undefined
     const next = resolveAttribute(map)(state)
@@ -84,7 +83,6 @@ export function mapState<OuterState, InnerState, Action, Query = unknown>(
   props: {
     map: Attribute<OuterState, InnerState>
     whenUndefined?: DOMChild<unknown, Action, Query>
-    refId?: string
     equals?: (a: InnerState, b: InnerState) => boolean
   },
   ...children: DOMChild<InnerState, Action, Query>[]
@@ -92,7 +90,6 @@ export function mapState<OuterState, InnerState, Action, Query = unknown>(
   return new MapStateTemplate(
     props.map,
     domChildToTemplate(props.whenUndefined),
-    props.refId ?? 't:map',
     props.equals ?? ((a: InnerState, b: InnerState) => false),
     mapArray(children, domChildToTemplate)
   )
@@ -127,7 +124,6 @@ export function mapStateAndKeep<
   props: {
     map: Attribute<OuterState, InnerState>
     whenUndefined?: DOMChild<unknown, Action, Query>
-    refId?: string
     equals?: (
       a: [InnerState, OuterState],
       b: [InnerState, OuterState]
@@ -150,7 +146,6 @@ export function mapStateAndKeep<
       }
     },
     domChildToTemplate(props.whenUndefined),
-    props.refId ?? 't:map_keep',
     props.equals ??
       ((a: [InnerState, OuterState], b: [InnerState, OuterState]) => false),
     mapArray(children, domChildToTemplate)

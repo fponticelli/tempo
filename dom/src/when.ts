@@ -20,7 +20,6 @@ import { Attribute, resolveAttribute, mapAttribute } from './value'
 
 export interface WhenProps<State> {
   condition: Attribute<State, boolean>
-  refId?: string
 }
 
 class WhenTemplate<State, Action, Query>
@@ -30,8 +29,8 @@ class WhenTemplate<State, Action, Query>
     readonly children: DOMTemplate<State, Action, Query>[]
   ) {}
   render(ctx: DOMContext<Action>, state: State): View<State, Query> {
-    const { condition, refId } = this.props
-    const { ctx: newCtx, ref } = ctx.withAppendToReference(refId || 't:when')
+    const { condition } = this.props
+    const { ctx: newCtx, ref } = ctx.withAppendToReference()
     let views: View<State, Query>[] | undefined
     const view = {
       change: (state: State) => {
@@ -80,8 +79,7 @@ export function unless<State, Action, Query = unknown>(
 ): DOMTemplate<State, Action, Query> {
   return new WhenTemplate<State, Action, Query>(
     {
-      condition: mapAttribute(props.condition, v => !v),
-      refId: props.refId || 't:unless'
+      condition: mapAttribute(props.condition, v => !v)
     },
     map(children, domChildToTemplate)
   )

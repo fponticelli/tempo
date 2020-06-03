@@ -24,9 +24,9 @@ describe('map', () => {
     )
     const ctx = createContext()
     const view = template.render(ctx, 1)
-    expect(ctx.doc.body.innerHTML).toEqual('<div>#1<!--t:map--></div>')
+    expect(ctx.doc.body.innerHTML).toEqual('<div>#1</div>')
     view.change(2)
-    expect(ctx.doc.body.innerHTML).toEqual('<div>#2<!--t:map--></div>')
+    expect(ctx.doc.body.innerHTML).toEqual('<div>#2</div>')
   })
 
   it('mapState only static', () => {
@@ -37,7 +37,7 @@ describe('map', () => {
     )
     const ctx = createContext()
     template.render(ctx, 1)
-    expect(ctx.doc.body.innerHTML).toEqual('<div>X<!--t:map--></div>')
+    expect(ctx.doc.body.innerHTML).toEqual('<div>X</div>')
   })
 
   it('mapAction', () => {

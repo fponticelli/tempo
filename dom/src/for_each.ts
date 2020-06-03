@@ -15,12 +15,11 @@ import { DOMChild, DOMTemplate } from './template'
 import { until } from './until'
 
 export function forEach<State extends any[], Action, Query = unknown>(
-  props: { refId?: string },
+  props: {},
   ...children: DOMChild<State[number], Action, Query>[]
 ): DOMTemplate<State, Action, Query> {
   return until(
     {
-      refId: props.refId || 't:for_each',
       next: ({ state, index }: { state: State; index: number }) => state[index]
     },
     ...children
