@@ -18,7 +18,7 @@ export const projectContent = article<ProjectRef, Action>(
   h1({ attrs: { class: 'title' } }, s => s.title),
   p({ attrs: { class: 'subtitle' } }, s => s.description),
   mapField<ProjectRef, 'keywords', Action>(
-    { field: 'keywords' },
+    'keywords',
     when(
       { condition: tags => tags.length > 0 },
       div(

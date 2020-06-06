@@ -21,13 +21,13 @@ const getImport = (name: string, project: string, module: string) => {
   return `import { ${name} } from 'tempo-${project}/lib/${module}'`
 }
 
-export const signatures = fragment<DocEntity & { project: string, module: string }, unknown>(
+export const signatures = fragment<
+  DocEntity & { project: string; module: string },
+  unknown
+>(
   mapField<DocEntity, 'signatures', unknown>(
-    { field: 'signatures' },
-    forEach(
-      {},
-      signature
-    )
+    'signatures',
+    forEach({}, signature)
   ),
   p(
     { attrs: { class: 'defined-in' } },
@@ -45,11 +45,7 @@ export const signatures = fragment<DocEntity & { project: string, module: string
   )
 )
 
-export const entityTemplate = fragment<DocEntity & { project: string, module: string }, unknown>(
-  title,
-  tags,
-  description,
-  todos,
-  signatures,
-  examples
-)
+export const entityTemplate = fragment<
+  DocEntity & { project: string; module: string },
+  unknown
+>(title, tags, description, todos, signatures, examples)

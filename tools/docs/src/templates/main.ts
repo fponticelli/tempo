@@ -121,7 +121,7 @@ export const template = div<State, Action>(
             div(
               { attrs: { class: 'navbar-dropdown' } },
               mapField(
-                { field: 'toc' },
+                'toc',
                 matchAsyncResult<Toc, HttpError, unknown, Action>({
                   Failure: '',
                   Loading: '',
@@ -144,7 +144,7 @@ export const template = div<State, Action>(
   ),
   capture(
     mapField(
-      { field: 'toc' },
+      'toc',
       matchAsyncResult<Toc, HttpError, unknown, Action>({
         NotAsked: '',
         Loading: loader,

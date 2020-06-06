@@ -14,25 +14,20 @@ const getUrl = (project: string, module: string) => {
 export const module = fragment<State, unknown>(
   div(
     { attrs: { class: 'top-right' } },
-    a(
-      { attrs: { href: s => getUrl(s.project, s.module.path) } },
-      '✏️ edit me'
-    )
+    a({ attrs: { href: s => getUrl(s.project, s.module.path) } }, '✏️ edit me')
   ),
-  h1(
-    {},
-    m => `module '${m.module.title}'`
-  ),
-  mapField(
-    { field: 'module' },
-    baseDoc
-  ),
+  h1({}, m => `module '${m.module.title}'`),
+  mapField('module', baseDoc),
   moduleToc,
   mapState(
-    { map: s => s.module.docEntities.map(e => ({ module: s.module.path, project: s.project, ...e })) },
-    forEach(
-      {},
-      entityTemplate
-    )
+    {
+      map: s =>
+        s.module.docEntities.map(e => ({
+          module: s.module.path,
+          project: s.project,
+          ...e
+        }))
+    },
+    forEach({}, entityTemplate)
   )
 )

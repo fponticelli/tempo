@@ -101,18 +101,27 @@ export function mapField<
   Action,
   Query = unknown
 >(
-  props: {
-    field: Key
-    whenUndefined?: DOMChild<unknown, Action, Query>
-    equals?: (a: OuterState[Key], b: OuterState[Key]) => boolean
-  },
+  props:
+    | {
+        field: Key
+        whenUndefined?: DOMChild<unknown, Action, Query>
+        equals?: (a: OuterState[Key], b: OuterState[Key]) => boolean
+      }
+    | Key,
   ...children: DOMChild<OuterState[Key], Action, Query>[]
 ): DOMTemplate<OuterState, Action, Query> {
-  const { field, whenUndefined, equals } = props
-  return mapState<OuterState, OuterState[Key], Action, Query>(
-    { map: (v: OuterState) => v[field], whenUndefined, equals },
-    ...children
-  )
+  if (typeof props === 'object') {
+    const { field, whenUndefined, equals } = props
+    return mapState<OuterState, OuterState[Key], Action, Query>(
+      { map: (v: OuterState) => v[field], whenUndefined, equals },
+      ...children
+    )
+  } else {
+    return mapState<OuterState, OuterState[Key], Action, Query>(
+      { map: (v: OuterState) => v[props] },
+      ...children
+    )
+  }
 }
 
 export function mapStateAndKeep<

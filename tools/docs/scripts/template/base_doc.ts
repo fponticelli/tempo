@@ -11,7 +11,7 @@ import { forEach } from 'tempo-dom/lib/for_each'
 import { highlight } from '../utils/highlight'
 
 export const description = mapField<BaseDoc, 'description', unknown>(
-  { field: 'description' },
+  'description',
   matchOption({
     Some: unsafeHtml({}, s => markdown(s, s => s)),
     None: ''
@@ -19,7 +19,7 @@ export const description = mapField<BaseDoc, 'description', unknown>(
 )
 
 export const todos = mapField<BaseDoc, 'todos', unknown>(
-  { field: 'todos' },
+  'todos',
   when(
     { condition: todos => todos.length > 0 },
     h2({}, 'TODOs'),
@@ -29,7 +29,7 @@ export const todos = mapField<BaseDoc, 'todos', unknown>(
         {},
         li(
           { attrs: { class: 'list-item' } },
-          input({ attrs: { type: 'checkbox', disabled: true }}),
+          input({ attrs: { type: 'checkbox', disabled: true } }),
           ' ',
           s => s
         )
@@ -39,12 +39,11 @@ export const todos = mapField<BaseDoc, 'todos', unknown>(
 )
 
 export const examples = mapField<BaseDoc, 'examples', unknown>(
-  { field: 'examples' },
+  'examples',
   when(
     { condition: todos => todos.length > 0 },
-    p(
-      { attrs: { class: 'title is-6' } },
-      s => s.length > 1 ? 'Examples' : 'Example'
+    p({ attrs: { class: 'title is-6' } }, s =>
+      s.length > 1 ? 'Examples' : 'Example'
     ),
     ul(
       { attrs: { class: 'list examples' } },
@@ -52,25 +51,27 @@ export const examples = mapField<BaseDoc, 'examples', unknown>(
         {},
         li(
           { attrs: { class: 'list-item' } },
-          pre(
-            { attrs: { class: 'ts language-ts example' } },
-            s => highlight(s)
-          )
+          pre({ attrs: { class: 'ts language-ts example' } }, s => highlight(s))
         )
       )
     )
   )
 )
 
-export const tags = mapState<BaseDoc, { type: string, name: string }[], unknown>(
-  { map: doc => {
-    const tags = [] as { type: string, name: string }[]
-    if (doc.isDeprecated)
-      tags.push({ type: 'danger', name: 'deprecated' })
-    if (isSome(doc.since))
-      tags.push({ type: 'info', name: `since v${doc.since.value}` })
-    return tags
-  }},
+export const tags = mapState<
+  BaseDoc,
+  { type: string; name: string }[],
+  unknown
+>(
+  {
+    map: doc => {
+      const tags = [] as { type: string; name: string }[]
+      if (doc.isDeprecated) tags.push({ type: 'danger', name: 'deprecated' })
+      if (isSome(doc.since))
+        tags.push({ type: 'info', name: `since v${doc.since.value}` })
+      return tags
+    }
+  },
   when(
     { condition: tags => tags.length > 0 },
     div(

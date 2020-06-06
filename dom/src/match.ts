@@ -258,7 +258,7 @@ export function matchOption<State, Action, Query = unknown>(props: {
   None: DOMChild<unknown, Action, Query>
 }): DOMTemplate<Option<State>, Action, Query> {
   return matchKind({
-    Some: mapField({ field: 'value' }, props.Some),
+    Some: mapField('value', props.Some),
     None: mapState({ map: () => null }, props.None)
   })
 }
@@ -282,8 +282,8 @@ export function matchResult<State, Error, Action, Query = unknown>(props: {
   Failure: DOMChild<Error, Action, Query>
 }): DOMTemplate<Result<State, Error>, Action, Query> {
   return matchKind({
-    Success: mapField({ field: 'value' }, props.Success),
-    Failure: mapField({ field: 'error' }, props.Failure)
+    Success: mapField('value', props.Success),
+    Failure: mapField('error', props.Failure)
   })
 }
 
@@ -293,8 +293,8 @@ export function matchAsync<State, Progress, Action, Query = unknown>(props: {
   Loading: DOMChild<Progress, Action, Query>
 }): DOMTemplate<Async<State, Progress>, Action, Query> {
   return matchKind({
-    Outcome: mapField({ field: 'value' }, props.Outcome),
-    Loading: mapField({ field: 'progress' }, props.Loading),
+    Outcome: mapField('value', props.Outcome),
+    Loading: mapField('progress', props.Loading),
     NotAsked: mapState({ map: () => null }, props.NotAsked)
   })
 }
@@ -319,7 +319,7 @@ export function matchAsyncResult<
         Failure: props.Failure
       })
     ),
-    Loading: mapField({ field: 'progress' }, props.Loading),
+    Loading: mapField('progress', props.Loading),
     NotAsked: mapState({ map: () => null }, props.NotAsked)
   })
 }

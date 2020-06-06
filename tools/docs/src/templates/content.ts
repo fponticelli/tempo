@@ -24,8 +24,8 @@ export const content = fragment<
     NotAsked: '',
     Success: matchKind({
       HtmlPage: htmlContent,
-      Demos: mapField({ field: 'demos' }, demosContent),
-      Project: mapField({ field: 'project' }, projectContent)
+      Demos: mapField('demos', demosContent),
+      Project: mapField('project', projectContent)
     })
   })
 )
