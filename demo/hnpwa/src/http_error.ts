@@ -35,8 +35,11 @@ export const HttpError = {
   badBody: (message: string): HttpError => ({ kind: 'HttpBadBody', message })
 }
 
-export const errorToMessage = (error: HttpError) => matchKind<HttpError, string>({
-  HttpNetworkError: () => 'NetworkError | You seem to be offline',
-  HttpBadStatus: (e) => `BadStatus | The server gave me a ${e.status} error`,
-  HttpBadBody: () => 'BadPayload | The server gave me back something I did not expect'
-})(error)
+export const errorToMessage = (error: HttpError) => matchKind<HttpError, string>(
+  error,
+  {
+    HttpNetworkError: () => 'NetworkError | You seem to be offline',
+    HttpBadStatus: (e) => `BadStatus | The server gave me a ${e.status} error`,
+    HttpBadBody: () => 'BadPayload | The server gave me back something I did not expect'
+  }
+)

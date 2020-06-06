@@ -29,6 +29,7 @@ import {
   StyleAttribute
 } from './value'
 import { map } from 'tempo-std/lib/arrays'
+
 import { attributeNameMap } from './utils/attributes_mapper'
 
 const applyChange = <State, Action, El extends Element, T>(

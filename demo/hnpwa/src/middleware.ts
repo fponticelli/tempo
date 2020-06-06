@@ -31,26 +31,29 @@ export const setTitle = (state: State) => {
 }
 
 export const loadRoute = (store: Store<State, Action>) => (route: Route) => {
-  matchKind<Route, void>({
-    FeedsRoute: async r => {
-      const result = await Request.feed(r.feed, r.page)
-      store.process(Action.gotFeed(r.feed, result))
-    },
-    ItemRoute: async r => {
-      const result = await Request.item(r.item)
-      store.process(Action.gotItem(r.item, result))
-    },
-    NotFoundRoute: () => {},
-    RootRoute: async r => {
-      const result = await Request.feed(Feed.top, 1)
-      store.process(Action.gotFeed(Feed.top, result))
-    },
-    UserRoute: async r => {
-      const result = await Request.user(r.user)
-      store.process(Action.gotUser(r.user, result))
-    },
-    ExternalRoute: () => {}
-  })(route)
+  matchKind<Route, void>(
+    route,
+    {
+      FeedsRoute: async r => {
+        const result = await Request.feed(r.feed, r.page)
+        store.process(Action.gotFeed(r.feed, result))
+      },
+      ItemRoute: async r => {
+        const result = await Request.item(r.item)
+        store.process(Action.gotItem(r.item, result))
+      },
+      NotFoundRoute: () => {},
+      RootRoute: async r => {
+        const result = await Request.feed(Feed.top, 1)
+        store.process(Action.gotFeed(Feed.top, result))
+      },
+      UserRoute: async r => {
+        const result = await Request.user(r.user)
+        store.process(Action.gotUser(r.user, result))
+      },
+      ExternalRoute: () => {}
+    }
+  )
 }
 
 let current = ''

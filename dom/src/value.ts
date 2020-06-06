@@ -11,6 +11,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+import { keys } from 'tempo-std/lib/objects'
 import { DerivedOrLiteralValue, DerivedValue } from 'tempo-core/lib/value'
 import { DOMContext } from './context'
 
@@ -23,7 +24,7 @@ export type EventHandler<
   Action,
   Ev extends Event = Event,
   El extends Element = Element
-> = (state: S, event: Ev, element: El) => Action | undefined
+> = ((state: S, event: Ev, element: El) => Action | undefined) | undefined
 export type StyleAttribute<State, Value> = DerivedOrLiteralValue<
   State,
   Value | undefined
@@ -119,6 +120,29 @@ export function mapAttribute<State, A, B>(
   }
 }
 
+export function mapAttributes<
+  State,
+  T extends { [_ in string]: Attribute<State, any> },
+  B
+>(
+  attributes: T,
+  map: (values: { [K in keyof T]: ValueOfAttribute<T[K]> }) => B
+): Attribute<State, B> {
+  const ks = keys(attributes)
+  const isDynamic = ks.some(k => typeof attributes[k] === 'function')
+  if (isDynamic) {
+    return (state: State) => {
+      const o = ks.reduce((acc: T, k: keyof T) => {
+        acc[k] = resolveAttribute(attributes[k])(state) as T[typeof k]
+        return acc
+      }, {} as T)
+      return map(o)
+    }
+  } else {
+    return map(attributes as T)
+  }
+}
+
 export function attributeToHandler<
   State,
   Value,
@@ -128,8 +152,8 @@ export function attributeToHandler<
 >(
   attr: Attribute<State, Value>,
   handler: EventHandler<Value, Action, Ev, El>
-): EventHandler<State, Action, Ev, El> {
-  if (typeof attr === 'undefined') {
+): EventHandler<State, Action, Ev, El> | undefined {
+  if (typeof attr === 'undefined' || typeof handler === 'undefined') {
     return () => {
       return undefined
     }

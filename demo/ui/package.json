@@ -1,0 +1,57 @@
+{
+  "name": "tempo-demo.ui",
+  "title": "Tempo UI",
+  "priority": 20,
+  "version": "0.1.0",
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/fponticelli/tempo",
+  "description": "",
+  "bugs": {
+    "url": "https://github.com/fponticelli/tempo/issues"
+  },
+  "author": {
+    "name": "Franco Ponticelli",
+    "email": "franco.ponticelli@gmail.com",
+    "url": "https://github.com/fponticelli"
+  },
+  "sideEffects": [
+    "*.sass"
+  ],
+  "dependencies": {
+    "acorn": "^7.2.0",
+    "tempo-std": "^0.5.3",
+    "tempo-core": "^1.7.0",
+    "tempo-colors": "0.1.0",
+    "tempo-dom": "^0.20.0",
+    "tempo-store": "^1.2.2",
+    "tempo-ui": "0.1.0",
+    "uood": "0.1.0"
+  },
+  "devDependencies": {
+    "babel-types": "^6.26.0",
+    "cssnano": "^4.1.10",
+    "prettier": "^2.0.5",
+    "tslint": "^6.1.2",
+    "typescript": "^3.9.3",
+    "ts-loader": "^7.0.5",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.11.0",
+    "html-webpack-plugin": "^4.3.0",
+    "style-loader": "^1.2.1",
+    "css-loader": "^3.5.3",
+    "sass-loader": "^8.0.2",
+    "node-sass": "^4.14.1"
+  },
+  "scripts": {
+    "compile": "webpack --mode=production",
+    "clean": "rm -rf dist/* && rm -rf ../../docs/demo/ui/*",
+    "build": "webpack",
+    "watch": "webpack --watch",
+    "tslint": "tslint -p ./tslint.json",
+    "tslint-fix": "tslint -p ./tslint.json --fix",
+    "prettier": "prettier -c src/**/*.ts",
+    "prettier-fix": "prettier --write src/**/*.ts",
+    "start": "webpack-dev-server --open"
+  }
+}

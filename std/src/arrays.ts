@@ -17,6 +17,8 @@ limitations under the License.
 
 import { Maybe, nothing } from './maybe'
 import { Ordering, Compare } from './ord'
+import { Primitive } from './primitive'
+import { keys } from './objects'
 
 export function map<A, B>(arr: A[], f: (a: A) => B): B[] {
   const length = arr.length
@@ -58,7 +60,7 @@ export function equals<T>(
 }
 
 export function makeEquals<T>(predicate: (a: T, b: T) => boolean) {
-  return function(a: T[], b: T[]) {
+  return function (a: T[], b: T[]) {
     return equals(a, b, predicate)
   }
 }
@@ -115,7 +117,7 @@ export function concat<A>(...arrs: A[][]): A[] {
 }
 
 export function makeCompare<A>(comparef: Compare<A>, shorterFirst = true) {
-  return function(a: A[], b: A[]) {
+  return function (a: A[], b: A[]) {
     if (a.length < b.length) {
       return -1 * (shorterFirst ? 1 : -1)
     } else if (a.length > b.length) {
@@ -145,6 +147,21 @@ export function numbersRange(length: number, startAt = 0) {
 
 export function fill<A>(length: number, value: A): A[] {
   return range(length, () => value)
+}
+
+export function distinctPrimitive<T extends Primitive>(values: T[]): T[] {
+  return Array.from(new Set(values))
+}
+
+export function distinctByPredicate<T>(
+  values: T[],
+  predicate: (a: T) => string
+): T[] {
+  const map = {} as Record<string, T>
+  values.forEach(v => {
+    map[predicate(v)] = v
+  })
+  return keys(map).map(k => map[k])
 }
 
 export function remove<A>(

@@ -98,19 +98,20 @@ export function processEvent<
   dispatch: (action: Action) => void,
   acc: Acc<State>
 ): Acc<State> {
-  let localState: State
-  const anyEl = el as any
-  anyEl[name] = (ev: Ev) => {
-    const r = value(localState, ev as Ev, el)
-    if (typeof r !== 'undefined') {
-      dispatch(r)
+  if (typeof value !== 'undefined') {
+    let localState: State
+    const anyEl = el as any
+    anyEl[name] = (ev: Ev) => {
+      const r = value(localState, ev as Ev, el)
+      if (typeof r !== 'undefined') {
+        dispatch(r)
+      }
     }
+    const f = (state: State) => {
+      localState = state
+    }
+    acc.push(f)
   }
-
-  const f = (state: State) => {
-    localState = state
-  }
-  acc.push(f)
   return acc
 }
 
