@@ -22,7 +22,7 @@
     "tempo-std": "^0.5.3",
     "tempo-core": "^1.7.0",
     "tempo-colors": "0.1.0",
-    "tempo-dom": "^0.20.0",
+    "tempo-dom": "^0.20.1",
     "tempo-store": "^1.2.2",
     "tempo-ui": "0.1.0",
     "uood": "0.1.0"
