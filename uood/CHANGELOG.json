@@ -2,6 +2,21 @@
   "name": "uood",
   "entries": [
     {
+      "version": "0.1.2",
+      "tag": "uood_v0.1.2",
+      "date": "Sat, 06 Jun 2020 17:37:18 GMT",
+      "comments": {
+        "dependency": [
+          {
+            "comment": "Updating dependency \"tempo-dom\" from `^0.21.0` to `^0.22.0`"
+          },
+          {
+            "comment": "Updating dependency \"tempo-ui\" from `0.1.1` to `0.1.2`"
+          }
+        ]
+      }
+    },
+    {
       "version": "0.1.1",
       "tag": "uood_v0.1.1",
       "date": "Sat, 06 Jun 2020 17:17:05 GMT",

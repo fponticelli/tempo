@@ -2,6 +2,23 @@
   "name": "tempo-dom",
   "entries": [
     {
+      "version": "0.22.0",
+      "tag": "tempo-dom_v0.22.0",
+      "date": "Sat, 06 Jun 2020 17:37:18 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Removed `matchers` where not necessary."
+          }
+        ],
+        "patch": [
+          {
+            "comment": "Provide alternative syntax for `mapField`."
+          }
+        ]
+      }
+    },
+    {
       "version": "0.21.0",
       "tag": "tempo-dom_v0.21.0",
       "date": "Sat, 06 Jun 2020 17:17:05 GMT",

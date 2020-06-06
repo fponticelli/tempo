@@ -21,8 +21,8 @@
     "acorn": "^7.2.0",
     "paper": "0.12.3",
     "tempo-core": "^1.7.0",
-    "tempo-dom": "^0.21.0",
-    "tempo-paper": "^0.7.1",
+    "tempo-dom": "^0.22.0",
+    "tempo-paper": "^0.8.0",
     "tempo-std": "^0.5.3",
     "tempo-store": "^1.2.2"
   },

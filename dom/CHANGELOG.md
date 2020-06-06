@@ -1,6 +1,17 @@
 # Change Log - tempo-dom
 
-This log was last generated on Sat, 06 Jun 2020 17:17:05 GMT and should not be manually modified.
+This log was last generated on Sat, 06 Jun 2020 17:37:18 GMT and should not be manually modified.
+
+## 0.22.0
+Sat, 06 Jun 2020 17:37:18 GMT
+
+### Minor changes
+
+- Removed `matchers` where not necessary.
+
+### Patches
+
+- Provide alternative syntax for `mapField`.
 
 ## 0.21.0
 Sat, 06 Jun 2020 17:17:05 GMT

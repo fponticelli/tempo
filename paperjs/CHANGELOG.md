@@ -1,6 +1,13 @@
 # Change Log - tempo-paper
 
-This log was last generated on Sat, 06 Jun 2020 17:17:05 GMT and should not be manually modified.
+This log was last generated on Sat, 06 Jun 2020 17:37:18 GMT and should not be manually modified.
+
+## 0.8.0
+Sat, 06 Jun 2020 17:37:18 GMT
+
+### Minor changes
+
+- Removed `matchers` where not necessary.
 
 ## 0.7.1
 Sat, 06 Jun 2020 17:17:05 GMT

@@ -22,10 +22,10 @@
     "tempo-std": "^0.5.3",
     "tempo-core": "^1.7.0",
     "tempo-colors": "0.1.1",
-    "tempo-dom": "^0.21.0",
+    "tempo-dom": "^0.22.0",
     "tempo-store": "^1.2.2",
-    "tempo-ui": "0.1.1",
-    "uood": "0.1.1"
+    "tempo-ui": "0.1.2",
+    "uood": "0.1.2"
   },
   "devDependencies": {
     "babel-types": "^6.26.0",

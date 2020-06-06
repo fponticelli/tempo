@@ -2,6 +2,18 @@
   "name": "tempo-ui",
   "entries": [
     {
+      "version": "0.1.2",
+      "tag": "tempo-ui_v0.1.2",
+      "date": "Sat, 06 Jun 2020 17:37:18 GMT",
+      "comments": {
+        "dependency": [
+          {
+            "comment": "Updating dependency \"tempo-dom\" from `^0.21.0` to `^0.22.0`"
+          }
+        ]
+      }
+    },
+    {
       "version": "0.1.1",
       "tag": "tempo-ui_v0.1.1",
       "date": "Sat, 06 Jun 2020 17:17:05 GMT",
