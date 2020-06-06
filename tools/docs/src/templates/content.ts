@@ -23,11 +23,9 @@ export const content = fragment<
     Loading: loader,
     NotAsked: '',
     Success: matchKind({
-      matchers: {
-        HtmlPage: htmlContent,
-        Demos: mapField({ field: 'demos' }, demosContent),
-        Project: mapField({ field: 'project' }, projectContent)
-      }
+      HtmlPage: htmlContent,
+      Demos: mapField({ field: 'demos' }, demosContent),
+      Project: mapField({ field: 'project' }, projectContent)
     })
   })
 )

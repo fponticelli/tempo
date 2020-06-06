@@ -144,10 +144,8 @@ const template = article<CanvasState, CanvasAction, Query>(
               }
             },
             matchKind<SampleState, any, any>({
-              matchers: {
-                symbol: symbolTemplate,
-                path_simplification: pathSimplificationTemplate
-              }
+              symbol: symbolTemplate,
+              path_simplification: pathSimplificationTemplate
             })
           )
         ),

@@ -107,7 +107,7 @@ export function matchKind<
   State extends ObjectWithField<'kind', any>,
   Action,
   Query = unknown
->(props: {
+>(
   matchers: {
     [k in State['kind']]: PaperTemplate<
       DifferentiateAt<['kind'], State, k>,
@@ -115,10 +115,10 @@ export function matchKind<
       Query
     >
   }
-}): PaperTemplate<State, Action, Query> {
+): PaperTemplate<State, Action, Query> {
   return match<['kind'], State, Action, Query>({
     path: ['kind'],
-    matchers: props.matchers
+    matchers
   })
 }
 

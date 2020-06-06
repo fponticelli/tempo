@@ -22,12 +22,10 @@ import { pageFeedTemplate } from './page_feed'
 import { profileTemplate } from './profile'
 
 export const pageTemplate = matchKind<Page, Action>({
-  matchers: {
-    Article: articleTemplate,
-    Error: errorTemplate,
-    Loading: loadingTemplate,
-    NotFound: notFoundTemplate,
-    PageFeed: pageFeedTemplate,
-    Profile: profileTemplate
-  }
+  Article: articleTemplate,
+  Error: errorTemplate,
+  Loading: loadingTemplate,
+  NotFound: notFoundTemplate,
+  PageFeed: pageFeedTemplate,
+  Profile: profileTemplate
 })
