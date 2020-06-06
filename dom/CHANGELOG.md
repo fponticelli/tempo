@@ -1,6 +1,17 @@
 # Change Log - tempo-dom
 
-This log was last generated on Tue, 02 Jun 2020 01:47:10 GMT and should not be manually modified.
+This log was last generated on Sat, 06 Jun 2020 17:17:05 GMT and should not be manually modified.
+
+## 0.21.0
+Sat, 06 Jun 2020 17:17:05 GMT
+
+### Minor changes
+
+- Make SimpleComponent propagate actions and remove reference ids from elements that do not always generated nodes in the DOM.
+
+### Patches
+
+- Add `equals` to `MapState`.
 
 ## 0.20.1
 Tue, 02 Jun 2020 01:47:10 GMT

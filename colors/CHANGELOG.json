@@ -1,0 +1,20 @@
+{
+  "name": "tempo-colors",
+  "entries": [
+    {
+      "version": "0.1.1",
+      "tag": "tempo-colors_v0.1.1",
+      "date": "Sat, 06 Jun 2020 17:17:05 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "First implementation of tempo-color."
+          },
+          {
+            "comment": "Add tempo-colors."
+          }
+        ]
+      }
+    }
+  ]
+}

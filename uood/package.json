@@ -1,6 +1,6 @@
 {
   "name": "uood",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "priority": 1,
   "description": "Fully-typed frontend framework alternative to React and Angular",
   "keywords": [
@@ -34,11 +34,11 @@
   },
   "dependencies": {
     "tempo-core": "^1.7.0",
-    "tempo-dom": "^0.20.1",
+    "tempo-dom": "^0.21.0",
     "tempo-std": "^0.5.3",
-    "tempo-colors": "0.1.0",
+    "tempo-colors": "0.1.1",
     "tempo-store": "^1.2.2",
-    "tempo-ui": "0.1.0"
+    "tempo-ui": "0.1.1"
   },
   "devDependencies": {
     "@types/jest": "^25.2.3",

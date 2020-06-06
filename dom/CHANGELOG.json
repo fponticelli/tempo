@@ -2,6 +2,23 @@
   "name": "tempo-dom",
   "entries": [
     {
+      "version": "0.21.0",
+      "tag": "tempo-dom_v0.21.0",
+      "date": "Sat, 06 Jun 2020 17:17:05 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Add `equals` to `MapState`."
+          }
+        ],
+        "minor": [
+          {
+            "comment": "Make SimpleComponent propagate actions and remove reference ids from elements that do not always generated nodes in the DOM."
+          }
+        ]
+      }
+    },
+    {
       "version": "0.20.1",
       "tag": "tempo-dom_v0.20.1",
       "date": "Tue, 02 Jun 2020 01:47:10 GMT",
