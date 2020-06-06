@@ -50,5 +50,13 @@ export class Store<State, Action> {
     return result
   }
 
+  processMany(...actions: Action[]) {
+    return actions.reduce((changed, action) => {
+      const newResult = this.process(action)
+      if (changed || newResult) return true
+      else return false
+    }, false)
+  }
+
   private readonly emitter: Emitter4<State, Action, State, boolean>
 }
