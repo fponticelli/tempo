@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "tempo-core": "^1.7.0",
-    "tempo-dom": "^0.22.0"
+    "tempo-dom": "^0.23.0"
   },
   "devDependencies": {
     "babel-types": "^6.26.0",
