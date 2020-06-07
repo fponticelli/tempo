@@ -19,7 +19,7 @@
   ],
   "dependencies": {
     "acorn": "^7.2.0",
-    "tempo-std": "^0.5.3",
+    "tempo-std": "^0.5.4",
     "tempo-core": "^1.7.0",
     "tempo-colors": "^0.1.1",
     "tempo-dom": "^0.22.0",
