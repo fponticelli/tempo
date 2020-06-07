@@ -26,7 +26,7 @@ const toggleMenu = (
   const main = document.querySelector('.main-column')!
 
   function close() {
-    console.log('CLOSE')
+    // console.log('CLOSE')
     element.classList.remove('is-active')
     side.classList.remove('is-active')
     main.removeEventListener('mouseup', close, true)

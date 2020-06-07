@@ -11,15 +11,16 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { matchKind } from 'tempo-std/lib/match'
 import { Tempo } from 'tempo-dom/lib/tempo'
 import { button } from 'uood/lib/button'
 import { textField } from 'uood/lib/text_field'
-import { container, block } from 'tempo-ui/lib/ui'
+import { container } from 'tempo-ui/lib/ui'
 import { resetStyles } from 'tempo-ui/lib/reset'
 import { Store } from 'tempo-store/lib/store'
-import { Background, Padding, Size } from 'tempo-ui/lib/ui_attributes'
+import { Size } from 'tempo-ui/lib/ui_attributes'
 import { Theme } from 'uood/lib/theme'
+import { card } from 'uood/lib/card'
+import { stage } from 'uood/lib/stage'
 import { theme as blueprint } from 'uood/lib/theme/blueprint'
 import { theme as material } from 'uood/lib/theme/material'
 import { theme as neumorphic } from 'uood/lib/theme/neumorphic'
@@ -29,126 +30,59 @@ import { theme as spectrum } from 'uood/lib/theme/spectrum'
 // import { Uood } from 'uood/lib/uood'
 // Uood.setDefaultTheme(skeumorphic)
 
-type Action = {
-  kind: 'ChangePadding'
-  value: number
-}
-type State = {
-  padding: number
-}
+type Action = {}
+type State = {}
 
-const reducer = (state: State, action: Action): State =>
-  matchKind(action, {
-    ChangePadding: p => ({ ...state, padding: p.value })
-  })
+const reducer = (state: State, action: Action): State => state
 
-const state: State = {
-  padding: 10
-}
+const state: State = {}
 
 const store = Store.ofState({ state, reducer })
 
-const controls = (theme?: Theme<State>) => [
-  block<State, Action>(
-    {},
-    textField({
-      theme,
-      value: p => String(p.padding),
-      placeholder: 'placeholder ...'
-    }),
-    textField({
-      theme,
-      disabled: true,
-      value: '',
-      placeholder: 'placeholder ...'
-    })
-  ),
-  block<State, Action>(
-    {
-      spacing: 10
-    },
-    button({
-      theme,
-      label: 'add',
-      onPress: (s: State) => ({ kind: 'ChangePadding', value: s.padding + 1 })
-    }),
-    button({
-      theme,
-      label: 'remove',
-      onPress: (s: State) => ({
-        kind: 'ChangePadding',
-        value: s.padding - 1
+const controls = (name: string, theme?: Theme<State>) =>
+  stage<State, Action>(
+    { theme },
+    card(
+      {
+        theme,
+        header: name
+      },
+      textField({
+        theme,
+        value: '',
+        placeholder: 'placeholder ...'
       }),
-      disabled: (s: State) => s.padding < 10 // true
-    })
+      textField({
+        theme,
+        disabled: true,
+        value: '',
+        placeholder: 'placeholder ...'
+      }),
+      button({
+        theme,
+        label: 'add'
+        // onPress: (s: State) => ({ kind: 'ChangePadding', value: s.padding + 1 })
+      }),
+      button({
+        theme,
+        disabled: true,
+        label: 'remove'
+      })
+    )
   )
-]
 
 const template = container<State, Action>(
   {
-    orientation: 'col',
-    spacing: 20,
+    orientation: 'row',
     height: Size.fill(),
     width: Size.fill()
   },
-  container(
-    {
-      orientation: 'col',
-      padding: Padding.all(20),
-      spacing: 20,
-      background: Background.rgb(245, 245, 245)
-    },
-    ...controls(undefined)
-  ),
-  container(
-    {
-      orientation: 'col',
-      padding: Padding.all(20),
-      spacing: 20,
-      background: Background.rgb(245, 245, 245)
-    },
-    ...controls(spectrum)
-  ),
-  container(
-    {
-      orientation: 'col',
-      padding: Padding.all(20),
-      spacing: 20,
-      background: Background.rgb(255, 255, 255)
-    },
-    ...controls(blueprint)
-  ),
-  container(
-    {
-      orientation: 'col',
-      padding: Padding.all(20),
-      spacing: 20,
-      background: Background.rgb(255, 255, 255)
-    },
-    ...controls(material)
-  ),
-  container(
-    {
-      orientation: 'col',
-      padding: Padding.all(20),
-      spacing: 20,
-      // #E4EBF5
-      background: Background.rgb(0xe4, 0xeb, 0xf5)
-      // background: Background.rgb(0xeb, 0xec, 0xf0)
-    },
-    ...controls(neumorphic)
-  ),
-  container(
-    {
-      orientation: 'col',
-      padding: Padding.all(20),
-      spacing: 20,
-      // #E4EBF5
-      background: Background.rgb(0xf2)
-      // background: Background.rgb(0xeb, 0xec, 0xf0)
-    },
-    ...controls(skeumorphic)
-  )
+  controls('default', undefined),
+  controls('spectrum', spectrum),
+  controls('blueprint', blueprint),
+  controls('material', material),
+  controls('neumorphic', neumorphic),
+  controls('skeumorphic', skeumorphic)
 )
 
 resetStyles()

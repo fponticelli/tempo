@@ -17,6 +17,20 @@ import { ofRGB } from 'tempo-colors/lib/rgb'
 export interface ThemeOptions<State> {}
 
 export function make<State>(options: ThemeOptions<State> = {}): Theme<State> {
+  const padding = {
+    big: Padding.all(24),
+    medium: Padding.all(20)
+  }
+  const spacing = {
+    big: 12,
+    medium: 10
+  }
+  const stage = {
+    background: Background.rgb(252, 252, 252)
+  }
+  const card = {
+    background: Background.rgb(255, 255, 255)
+  }
   const basicInputShadow = [
     Shadow.inset({ spread: 1, color: ofRGBA(16, 22, 26, 255 * 0.15) }),
     Shadow.inset({ y: 1, blur: 1, color: ofRGBA(16, 22, 26, 255 * 0.2) })
@@ -31,13 +45,26 @@ export function make<State>(options: ThemeOptions<State> = {}): Theme<State> {
     })
   ]
   return {
+    stage: {
+      padding: padding.big,
+      spacing: spacing.big,
+      background: stage.background
+    },
+    card: {
+      padding: padding.medium,
+      spacing: spacing.medium,
+      background: card.background,
+      border: Border.all(1, ofRGB(219, 220, 221)),
+      borderRadius: Radius.all(Length.px(3)),
+      transition: Transition.none
+    },
     button: {
       fontSize: 14,
       fontFamily:
         '-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Open Sans,Helvetica Neue,Icons16,sans-serif',
       padding: Padding.each(0, 15),
       width: Size.min(30),
-      height: Size.min(30),
+      height: Size.fixed(30),
       shadow: Shadow.multi(
         Shadow.inset({ spread: 1, color: ofRGBA(16, 22, 26, 51) }),
         Shadow.inset({ y: -1, color: ofRGBA(16, 22, 26, 25) })
@@ -111,7 +138,7 @@ export function make<State>(options: ThemeOptions<State> = {}): Theme<State> {
       borderRadius: Radius.all(Length.px(3)),
       fontFamily: 'sans-serif',
       fontSize: 14,
-      height: Size.min(32),
+      height: Size.fixed(32),
       padding: Padding.each(0, 10),
       textAlign: 'start',
       textColor: ofRGB(75, 75, 75),

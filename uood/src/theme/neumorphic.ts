@@ -7,7 +7,9 @@ import {
   Transition,
   Shadow,
   Background,
-  Size
+  Size,
+  ColorStop,
+  GradientAngle
 } from 'tempo-ui/lib/ui_attributes'
 import { ofRGB } from 'tempo-colors/lib/rgb'
 import { ofRGBA } from 'tempo-colors/lib/rgba'
@@ -90,53 +92,49 @@ export function make<State>(options: ThemeOptions<State> = {}): Theme<State> {
     ...hoverBottomShadows
   ]
   const activeShadows = [...hoverTopShadows, ...hoverBottomShadows]
-  // const pressedShadows = [baseShadow, ...innerShadows, ...outerPressedShadows]
 
-  // 2px 2px 3px rgba(55, 84, 170, .15), inset 0px 0px 4px rgba(255, 255, 255, 0),
-  // inset 7px 7px 15px rgba(55, 84, 170, .15),
-  // inset -7px -7px 20px rgba(255, 255, 255, 1), 0px 0px 4px rgba(255, 255, 255, .2)
-  // const inputShadows = [
-  //   Shadow.drop({
-  //     x: 2,
-  //     y: 3,
-  //     blur: 4,
-  //     color: ofRGBA(75, 75, 75, 0.15 * 255)
-  //   }),
-  //   Shadow.inset({
-  //     blur: 4,
-  //     color: ofRGBA(255, 255, 255, 0)
-  //   }),
-  //   Shadow.inset({
-  //     x: 7,
-  //     y: 7,
-  //     blur: 15,
-  //     color: ofRGBA(75, 75, 75, 0.15 * 255)
-  //   }),
-  //   Shadow.inset({
-  //     x: -7,
-  //     y: -7,
-  //     blur: 20,
-  //     color: ofRGBA(255, 255, 255, 1 * 255)
-  //   }),
-  //   Shadow.drop({
-  //     blur: 4,
-  //     color: ofRGBA(255, 255, 255, 0.2 * 255)
-  //   })
-  //   // ...hoverTopShadows
-  //   // ...hoverBottomShadows
-  // ] as (InsetShadow | DropShadow)[]
+  const padding = {
+    big: Padding.all(36),
+    medium: Padding.all(24)
+  }
+  const spacing = {
+    big: 36,
+    medium: 24
+  }
+  const card = {
+    background: Background.linearGradient(
+      [ColorStop.hsla(0, 0, 1, 0.2), ColorStop.hsla(0, 0, 0, 0.01)],
+      GradientAngle.degrees(-60)
+    )
+  }
+  const stage = {
+    background: Background.rgb(237, 239, 243)
+  }
   return {
+    stage: {
+      padding: padding.big,
+      spacing: spacing.big,
+      background: stage.background
+    },
+    card: {
+      padding: padding.medium,
+      spacing: spacing.medium,
+      background: card.background,
+      transition: Transition.none,
+      borderRadius: Radius.all(Length.px(24)),
+      shadow: Shadow.multi(...normalShadows)
+    },
     button: {
       fontSize: 20,
       fontFamily: 'Poppins, sans-serif',
       background: Background.rgba(0, 0, 0, 0),
       border: Border.none,
       padding: Padding.each(0, 40),
-      height: Size.min(40),
+      height: Size.fixed(40),
       width: Size.min(80),
       borderRadius: Radius.all(Length.px(40)),
       textColor: ofRGB(0x6d, 0x75, 0x87),
-      textTransform: 'capitalize',
+      // textTransform: 'capitalize',
       transition: Transition.make('shadow', '0.25s', 'ease'),
       shadow: Shadow.multi(...normalShadows),
       hoverStyle: {

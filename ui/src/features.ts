@@ -166,7 +166,7 @@ export const features = {
         ]
       },
       {
-        selector: `.uood > .${prefix}h${pseudo}`,
+        selector: `.uood > .${prefix}h${pseudo}, .r > .${prefix}h${pseudo}`,
         rules: [
           `height: calc(var(--${prefix}h-f) / var(--${prefix}h-f) * 100%)`
         ]
@@ -269,6 +269,10 @@ export const features = {
       },
       {
         selector: `.ctrl:last-child`,
+        rules: [`margin-right: 0`]
+      },
+      {
+        selector: `.c > .ctrl`,
         rules: [`margin-right: 0`]
       }
     ]

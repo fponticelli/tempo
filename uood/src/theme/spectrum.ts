@@ -16,13 +16,47 @@ import { ofHSLA } from 'tempo-colors/lib/hsla'
 export interface ThemeOptions<State> {}
 
 export function make<State>(options: ThemeOptions<State> = {}): Theme<State> {
+  const padding = {
+    big: Padding.each(32, 40),
+    medium: Padding.each(20, 24)
+  }
+
+  const spacing = {
+    big: 24,
+    medium: 14
+  }
+  const card = {
+    background: Background.rgb(255, 255, 255),
+    border: Border.all(1, ofRGB(234, 234, 234), 'solid'),
+    borderHover: Border.all(1, ofRGB(202, 202, 202), 'solid'),
+    borderRadius: Radius.all(Length.px(4))
+  }
+  const stage = {
+    background: Background.rgb(245, 245, 245)
+  }
   return {
+    stage: {
+      padding: padding.big,
+      spacing: spacing.big,
+      background: stage.background
+    },
+    card: {
+      padding: padding.medium,
+      spacing: spacing.medium,
+      background: card.background,
+      border: card.border,
+      borderRadius: card.borderRadius,
+      transition: Transition.make(['border'], '0.25s'),
+      hoverStyle: {
+        border: card.borderHover
+      }
+    },
     button: {
       textTransform: 'none',
       shadow: Shadow.none,
       padding: Padding.each(0, 16), // padding - border
       width: Size.min(32 * 2.25),
-      height: Size.min(32),
+      height: Size.fixed(32),
       borderRadius: Radius.all(Length.px(16)),
       background: Background.rgba(0, 0, 0, 0),
       border: Border.all(2, ofRGB(75, 75, 75), 'solid'),
@@ -63,7 +97,7 @@ export function make<State>(options: ThemeOptions<State> = {}): Theme<State> {
       fontFamily: 'sans-serif',
       fontSize: 14,
       fontWeight: 400,
-      height: Size.min(32),
+      height: Size.fixed(32),
       padding: Padding.each(0, 12),
       textAlign: 'start',
       textColor: ofRGB(75, 75, 75),

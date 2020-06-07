@@ -23,6 +23,28 @@ export interface SubStyle<State> {
 }
 
 export interface Theme<State> {
+  card?: {
+    background?: Attribute<State, Background>
+    border?: Attribute<State, Border>
+    borderRadius?: Attribute<State, BorderRadius>
+    height?: Attribute<State, Size>
+    padding?: Attribute<State, Padding>
+    spacing?: Attribute<State, number>
+    shadow?: Attribute<State, Shadow>
+    width?: Attribute<State, Size>
+    transition?: Attribute<State, Transition>
+    hoverStyle?: SubStyle<State>
+  }
+  stage?: {
+    background?: Attribute<State, Background>
+    border?: Attribute<State, Border>
+    borderRadius?: Attribute<State, BorderRadius>
+    height?: Attribute<State, Size>
+    padding?: Attribute<State, Padding>
+    spacing?: Attribute<State, number>
+    shadow?: Attribute<State, Shadow>
+    width?: Attribute<State, Size>
+  }
   button?: {
     background?: Attribute<State, Background>
     border?: Attribute<State, Border>

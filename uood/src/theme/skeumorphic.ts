@@ -72,7 +72,34 @@ export function make<State>(options: ThemeOptions<State> = {}): Theme<State> {
   const normalShadows = [baseShadow, ...innerShadows, ...outerShadows]
   const hoverShadows = [baseShadow, ...innerShadows, ...outerHoverShadows]
   const pressedShadows = [baseShadow, ...innerShadows, ...outerPressedShadows]
+  const padding = {
+    big: Padding.each(20, 20),
+    medium: Padding.each(16, 16)
+  }
+  const spacing = {
+    big: 16,
+    medium: 12
+  }
+  const stage = {
+    background: Background.rgb(0xf2)
+  }
+  const card = {
+    background: Background.rgba(0, 0, 0, 255 * 0.03)
+  }
   return {
+    stage: {
+      padding: padding.big,
+      spacing: spacing.big,
+      background: stage.background
+    },
+    card: {
+      padding: padding.medium,
+      spacing: spacing.medium,
+      transition: Transition.none,
+      background: card.background,
+      borderRadius: Radius.all(Length.px(3)),
+      shadow: Shadow.multi(...pressedShadows)
+    },
     button: {
       fontSize: 13,
       fontFamily: 'sans-serif',
@@ -82,11 +109,11 @@ export function make<State>(options: ThemeOptions<State> = {}): Theme<State> {
       padding: Padding.each(0, 8),
       borderRadius: Radius.all(Length.px(6)),
       textColor: ofRGB(0x6d, 0x75, 0x87),
-      textTransform: 'capitalize',
+      // textTransform: 'capitalize',
       transition: Transition.make('shadow', '0.25s', 'ease'),
       shadow: Shadow.multi(...normalShadows),
       width: Size.min(28),
-      height: Size.min(28),
+      height: Size.fixed(28),
       hoverStyle: {
         background: Background.none,
         shadow: Shadow.multi(...hoverShadows)
@@ -142,7 +169,7 @@ export function make<State>(options: ThemeOptions<State> = {}): Theme<State> {
       textColor: ofRGB(0x6d, 0x75, 0x87),
       transition: Transition.make('shadow', '0.25s', 'ease'),
       width: Size.min(28),
-      height: Size.min(28),
+      height: Size.fixed(28),
       hoverStyle: {
         border: Border.none,
         shadow: Shadow.multi(...Shadow.swap(hoverShadows))

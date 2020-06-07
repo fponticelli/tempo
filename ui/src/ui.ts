@@ -371,7 +371,8 @@ function backgroundToString(background: Background): string {
     BackgroundLinearGradient: bg => `linear-gradient(${linearGradientArg(bg)})`,
     BackgroundRepeatingLinearGradient: bg =>
       `repeating-linear-gradient(${linearGradientArg(bg)})`,
-    BackgroundMulti: bg => bg.backgrounds.map(backgroundToString).join(', ')
+    BackgroundMulti: bg => bg.backgrounds.map(backgroundToString).join(', '),
+    BackgroundTransparent: _ => 'transparent'
   })
 }
 
@@ -416,7 +417,8 @@ function applyBlockProps<State>(
       MultiTransition: t =>
         (styles[`${prefix}t`] = t.transitions
           .map(oneTransitionToString)
-          .join(', '))
+          .join(', ')),
+      NoTransition: _ => 'none'
     })
   }
 

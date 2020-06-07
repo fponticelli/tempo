@@ -92,6 +92,9 @@ export type Background =
   | {
       kind: 'BackgroundNone'
     }
+  | {
+      kind: 'BackgroundTransparent'
+    }
 export const Background = {
   none: { kind: 'BackgroundNone' } as Background,
   color: (color: Color): Background => ({ kind: 'BackgroundColor', color }),
@@ -122,7 +125,8 @@ export const Background = {
   multi: (...backgrounds: Background[]): Background => ({
     kind: 'BackgroundMulti',
     backgrounds
-  })
+  }),
+  transparent: { kind: 'BackgroundTransparent' } as Background
 }
 
 export type Padding =
@@ -162,6 +166,7 @@ export interface OneTransition {
 export type Transition =
   | OneTransition
   | { kind: 'MultiTransition'; transitions: OneTransition[] }
+  | { kind: 'NoTransition' }
 
 export const Transition = {
   make: (
@@ -179,7 +184,8 @@ export const Transition = {
   multi: (...transitions: OneTransition[]): Transition => ({
     kind: 'MultiTransition',
     transitions
-  })
+  }),
+  none: { kind: 'NoTransition' } as Transition
 }
 
 export type Size =
@@ -512,7 +518,6 @@ export const Shadow = {
     spread?: number
     color: Color
   }): InsetShadow => {
-    console.log('y', y, y ?? 0)
     return {
       kind: 'InsetShadow',
       x: x ?? 0,
