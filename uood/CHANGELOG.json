@@ -2,6 +2,21 @@
   "name": "uood",
   "entries": [
     {
+      "version": "0.1.5",
+      "tag": "uood_v0.1.5",
+      "date": "Sun, 07 Jun 2020 23:32:43 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Add reset styles to Uood."
+          },
+          {
+            "comment": "Wire width/height into Card and Stage elements."
+          }
+        ]
+      }
+    },
+    {
       "version": "0.1.4",
       "tag": "uood_v0.1.4",
       "date": "Sun, 07 Jun 2020 21:16:37 GMT",

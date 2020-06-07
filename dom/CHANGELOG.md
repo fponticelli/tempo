@@ -1,6 +1,11 @@
 # Change Log - tempo-dom
 
-This log was last generated on Sat, 06 Jun 2020 17:37:18 GMT and should not be manually modified.
+This log was last generated on Sun, 07 Jun 2020 23:32:43 GMT and should not be manually modified.
+
+## 0.23.0
+Sun, 07 Jun 2020 23:32:43 GMT
+
+*Version update only*
 
 ## 0.22.0
 Sat, 06 Jun 2020 17:37:18 GMT

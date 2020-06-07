@@ -1,6 +1,6 @@
 {
   "name": "uood",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "priority": 1,
   "description": "Fully-typed frontend framework alternative to React and Angular",
   "keywords": [
