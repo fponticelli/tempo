@@ -11,25 +11,22 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import {
-  ElProperties,
-  ElBlockProperties,
-  ElLifecycleProperties,
-  ElContainerProperties,
-  container
-} from 'tempo-ui/lib/ui'
+import { container } from 'tempo-ui/lib/ui'
 import { Theme } from './theme'
 import { Uood } from './uood'
 import { DOMChild } from 'tempo-dom/lib/template'
-import { Size } from 'tempo-ui/lib/ui_attributes'
+import { Size, Distribution, Orientation } from 'tempo-ui/lib/ui_attributes'
+import { Attribute } from 'tempo-dom/lib/value'
 
 export function stage<State, Action, Query = unknown, T = unknown>(
   props: {
     theme?: Theme<State>
-  } & ElProperties &
-    ElBlockProperties<State> &
-    ElLifecycleProperties<State, Action, Query, T> &
-    ElContainerProperties<State>,
+    height?: Attribute<State, Size>
+    width?: Attribute<State, Size>
+    alignament?: Attribute<State, Distribution>
+    orientation?: Attribute<State, Orientation>
+    distribution?: Attribute<State, Distribution>
+  },
   ...children: DOMChild<State, Action, Query>[]
 ) {
   const stage = props.theme?.stage
@@ -41,8 +38,8 @@ export function stage<State, Action, Query = unknown, T = unknown>(
       alignament: props.alignament ?? 'center',
       distribution: props.distribution ?? 'center',
       padding: stage?.padding ?? dStage?.padding,
-      width: stage?.width ?? dStage?.width ?? Size.fill(1),
-      height: stage?.height ?? dStage?.height ?? Size.fill(1),
+      width: props.width ?? stage?.width ?? dStage?.width ?? Size.fill(1),
+      height: props.height ?? stage?.height ?? dStage?.height ?? Size.fill(1),
       borderRadius: stage?.borderRadius ?? dStage?.borderRadius,
       background: stage?.background ?? dStage?.background,
       spacing: stage?.spacing ?? dStage?.spacing,

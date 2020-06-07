@@ -11,26 +11,24 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import {
-  ElProperties,
-  ElBlockProperties,
-  ElLifecycleProperties,
-  ElContainerProperties,
-  container
-} from 'tempo-ui/lib/ui'
+import { container } from 'tempo-ui/lib/ui'
 import { Theme } from './theme'
 import { Uood } from './uood'
 import { DOMChild } from 'tempo-dom/lib/template'
 import { subStyle } from './button'
+import { Attribute } from 'tempo-dom/lib/value'
+import { Size, Distribution, Orientation } from 'tempo-ui/lib/ui_attributes'
 
 export function card<State, Action, Query = unknown, T = unknown>(
   props: {
-    header?: DOMChild<State, Action, Query> | DOMChild<State, Action, Query>[]
     theme?: Theme<State>
-  } & ElProperties &
-    ElBlockProperties<State> &
-    ElLifecycleProperties<State, Action, Query, T> &
-    ElContainerProperties<State>,
+    header?: DOMChild<State, Action, Query> | DOMChild<State, Action, Query>[]
+    height?: Attribute<State, Size>
+    width?: Attribute<State, Size>
+    alignament?: Attribute<State, Distribution>
+    orientation?: Attribute<State, Orientation>
+    distribution?: Attribute<State, Distribution>
+  },
   ...children: DOMChild<State, Action, Query>[]
 ) {
   const card = props.theme?.card
@@ -46,14 +44,14 @@ export function card<State, Action, Query = unknown, T = unknown>(
       border: card?.border ?? dCard?.border,
       borderRadius: card?.borderRadius ?? dCard?.borderRadius,
       distribution: props.distribution ?? 'center',
-      height: card?.height ?? dCard?.height,
+      height: props.height ?? card?.height ?? dCard?.height,
       hoverStyle: subStyle(hoverStyle, card, dHoverStyle),
       orientation: props.orientation ?? 'col',
       padding: card?.padding ?? dCard?.padding,
       shadow: card?.shadow ?? dCard?.shadow,
       spacing: card?.spacing ?? dCard?.spacing,
       transition: card?.transition ?? dCard?.transition,
-      width: card?.width ?? dCard?.width
+      width: props.width ?? card?.width ?? dCard?.width
     },
     ...children
   )
