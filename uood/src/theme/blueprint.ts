@@ -160,8 +160,7 @@ export function make<State>(options: ThemeOptions<State> = {}): Theme<State> {
         textColor: ofRGB(179, 179, 179)
       },
       placeholderStyle: {
-        textColor: ofRGB(112, 112, 112),
-        fontStyle: 'italic'
+        textColor: ofRGBA(92, 112, 128, 255 * 0.6)
       }
     }
   }

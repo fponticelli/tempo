@@ -16,8 +16,8 @@ export interface ThemeOptions<State> {}
 
 export function make<State>(options: ThemeOptions<State> = {}): Theme<State> {
   const padding = {
-    big: Padding.all(24),
-    medium: Padding.all(16)
+    big: Padding.all(18),
+    medium: Padding.all(12)
   }
   const spacing = {
     big: 10,
@@ -46,9 +46,9 @@ export function make<State>(options: ThemeOptions<State> = {}): Theme<State> {
     button: {
       fontSize: 14,
       fontFamily: 'sans-serif',
-      padding: Padding.each(0, 15),
-      width: Size.min(30),
-      height: Size.fixed(30),
+      padding: Padding.each(0, 12),
+      width: Size.min(24),
+      height: Size.fixed(24),
       textColor: ofRGB(0x18, 0x20, 0x26),
       textTransform: 'none',
       background: Background.rgb(0xf5, 0xf8, 0xfa),
@@ -74,12 +74,12 @@ export function make<State>(options: ThemeOptions<State> = {}): Theme<State> {
       border: Border.all(1, ofRGB(220, 220, 220)),
       fontFamily: 'sans-serif',
       fontSize: 14,
-      height: Size.fixed(32),
-      padding: Padding.each(0, 10),
+      height: Size.fixed(24),
+      padding: Padding.each(0, 8),
       textAlign: 'start',
       textColor: ofRGB(75, 75, 75),
       transition: Transition.make(['border', 'shadow'], '0.25s'),
-      width: Size.min(48),
+      width: Size.min(40),
       hoverStyle: {
         border: Border.all(1, ofRGB(210, 210, 210))
       },
@@ -92,8 +92,7 @@ export function make<State>(options: ThemeOptions<State> = {}): Theme<State> {
         textColor: ofRGB(179, 179, 179)
       },
       placeholderStyle: {
-        textColor: ofRGB(112, 112, 112),
-        fontStyle: 'italic'
+        textColor: ofRGB(160, 160, 160)
       }
     }
   }

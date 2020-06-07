@@ -178,6 +178,9 @@ export function make<State>(options: ThemeOptions<State> = {}): Theme<State> {
         border: Border.none,
         background: Background.rgba(255, 255, 255, 0.8 * 255),
         shadow: Shadow.multi(...Shadow.swap(pressedShadows))
+      },
+      disabledStyle: {
+        background: Background.rgba(0, 0, 0, 0.1 * 255)
       }
     }
   }

@@ -21,7 +21,7 @@ export function make<State>(options: ThemeOptions<State> = {}): Theme<State> {
   let mul = 1
   let multiplier = 2
   let steps = 4
-  const lightShadowColor = ofRGBA(255, 255, 255, 255 * 0.6)
+  const lightShadowColor = ofRGBA(255, 255, 255, 255 * 0.3)
   const darkShadowColor = ofRGBA(0, 0, 0, 255 * 0.1)
   const topShadows = range(steps, _ => {
     const shadow = Shadow.drop({
@@ -110,6 +110,17 @@ export function make<State>(options: ThemeOptions<State> = {}): Theme<State> {
   const stage = {
     background: Background.rgb(237, 239, 243)
   }
+
+  const textFieldShadows = [
+    Shadow.drop({
+      spread: 1,
+      color: darkShadowColor
+    }),
+    Shadow.drop({ spread: 3, color: ofRGBA(255, 255, 255, 0.5 * 255) }),
+    Shadow.drop({ spread: 3, blur: 3, color: ofRGBA(0, 0, 0, 0.15 * 255) }),
+    ...activeShadows
+  ]
+
   return {
     stage: {
       padding: padding.big,
@@ -151,27 +162,7 @@ export function make<State>(options: ThemeOptions<State> = {}): Theme<State> {
       disabledStyle: {
         textColor: ofRGBA(0, 0, 0, 255 * 0.2),
         background: Background.rgba(0, 0, 0, 255 * 0.05),
-        shadow: Shadow.multi(
-          ...activeShadows
-          // Shadow.inset({
-          //   x: 8,
-          //   y: 8,
-          //   blur: 12,
-          //   color: ofRGBA(55, 84, 170, 255 * 0.1)
-          // }),
-          // Shadow.inset({
-          //   x: -8,
-          //   y: -8,
-          //   blur: 12,
-          //   color: ofRGBA(255, 255, 255, 255 * 0.2)
-          // }),
-          // Shadow.drop({
-          //   x: 0,
-          //   y: 0,
-          //   blur: 4,
-          //   color: ofRGBA(255, 255, 255, 255 * 0.2)
-          // })
-        )
+        shadow: Shadow.multi(...activeShadows)
       }
     },
     textField: {
@@ -180,15 +171,14 @@ export function make<State>(options: ThemeOptions<State> = {}): Theme<State> {
       borderRadius: Radius.all(Length.px(10)),
       padding: Padding.each(0, 14),
       height: Size.fixed(40),
-      shadow: Shadow.multi(
-        Shadow.drop({
-          spread: 1,
-          color: darkShadowColor
-        }),
-        Shadow.drop({ spread: 3, color: ofRGBA(255, 255, 255, 0.9 * 255) }),
-        Shadow.drop({ spread: 3, blur: 5, color: ofRGBA(0, 0, 0, 0.1 * 255) }),
-        ...activeShadows
-      )
+      shadow: Shadow.multi(...textFieldShadows),
+      focusedStyle: {
+        shadow: Shadow.multi(...normalShadows, ...textFieldShadows)
+      },
+      disabledStyle: {
+        shadow: Shadow.multi(...textFieldShadows),
+        background: Background.rgba(0, 0, 0, 255 * 0.04)
+      }
     }
   }
 }
