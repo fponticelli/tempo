@@ -1,4 +1,5 @@
 import { Theme } from './theme'
+import { resetStyles } from 'tempo-ui/lib/reset'
 
 let defaultTheme: undefined | Theme<any>
 
@@ -11,5 +12,8 @@ export const Uood = {
   },
   setDefaultTheme(theme: Theme<any>) {
     defaultTheme = theme
+  },
+  resetStyles(selector = 'body', doc = document) {
+    resetStyles(selector, doc)
   }
 }
