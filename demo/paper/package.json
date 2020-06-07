@@ -24,7 +24,7 @@
     "tempo-dom": "^0.22.0",
     "tempo-paper": "^0.8.0",
     "tempo-std": "^0.5.3",
-    "tempo-store": "^1.2.2"
+    "tempo-store": "^1.2.3"
   },
   "devDependencies": {
     "babel-types": "^6.26.0",

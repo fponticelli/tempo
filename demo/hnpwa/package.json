@@ -10,7 +10,7 @@
     "tempo-std": "^0.5.3",
     "tempo-core": "^1.7.0",
     "tempo-dom": "^0.22.0",
-    "tempo-store": "^1.2.2",
+    "tempo-store": "^1.2.3",
     "partsing": "0.7.3",
     "dompurify": "2.0.7"
   },

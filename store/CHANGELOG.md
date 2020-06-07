@@ -1,6 +1,13 @@
 # Change Log - tempo-store
 
-This log was last generated on Sun, 16 Feb 2020 03:58:19 GMT and should not be manually modified.
+This log was last generated on Sun, 07 Jun 2020 04:31:53 GMT and should not be manually modified.
+
+## 1.2.3
+Sun, 07 Jun 2020 04:31:53 GMT
+
+### Patches
+
+- Add processMany to Store.
 
 ## 1.2.2
 Sun, 16 Feb 2020 03:58:19 GMT

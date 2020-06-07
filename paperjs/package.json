@@ -35,7 +35,7 @@
     "tempo-core": "^1.7.0",
     "tempo-dom": "^0.22.0",
     "tempo-std": "^0.5.3",
-    "tempo-store": "^1.2.2"
+    "tempo-store": "^1.2.3"
   },
   "devDependencies": {
     "@types/jest": "^25.2.3",

@@ -1,6 +1,13 @@
 # Change Log - uood
 
-This log was last generated on Sat, 06 Jun 2020 17:37:18 GMT and should not be manually modified.
+This log was last generated on Sun, 07 Jun 2020 04:31:53 GMT and should not be manually modified.
+
+## 0.1.3
+Sun, 07 Jun 2020 04:31:53 GMT
+
+### Patches
+
+- Added `stage`, `card` and changed default theme.
 
 ## 0.1.2
 Sat, 06 Jun 2020 17:37:18 GMT
