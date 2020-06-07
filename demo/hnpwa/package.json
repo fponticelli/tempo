@@ -11,8 +11,8 @@
     "tempo-core": "^1.7.0",
     "tempo-dom": "^0.22.0",
     "tempo-store": "^1.2.3",
-    "partsing": "0.7.3",
-    "dompurify": "2.0.7"
+    "partsing": "^0.7.3",
+    "dompurify": "^2.0.7"
   },
   "devDependencies": {
     "cssnano": "^4.1.10",
@@ -20,8 +20,8 @@
     "prettier": "^2.0.5",
     "typescript": "^3.9.3",
     "babel-types": "^6.26.0",
-    "sass": "1.23.7",
-    "@types/dompurify": "2.0.0"
+    "sass": "^1.23.7",
+    "@types/dompurify": "^2.0.0"
   },
   "scripts": {
     "compile": "NODE_ENV=production && npx tsc --noEmit && parcel build src/index.html --public-url . --out-dir ./build --experimental-scope-hoisting",

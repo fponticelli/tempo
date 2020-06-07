@@ -43,7 +43,7 @@
     "tempo-store": "^1.2.3"
   },
   "devDependencies": {
-    "@types/doctrine": "0.0.3",
+    "@types/doctrine": "^0.0.3",
     "@types/fs-extra": "^9.0.1",
     "@types/jsdom": "^16.2.3",
     "@types/node": "^12.12.6",

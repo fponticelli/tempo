@@ -3,7 +3,7 @@
   "license": "Apache-2.0",
   "priority": 10,
   "description": "Std library for TypeScript. Natural complement to the tempo libs.",
-  "version": "0.5.3",
+  "version": "0.5.4",
   "keywords": [
     "tempo",
     "framework",
