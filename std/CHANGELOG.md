@@ -1,6 +1,11 @@
 # Change Log - tempo-std
 
-This log was last generated on Fri, 29 May 2020 03:36:19 GMT and should not be manually modified.
+This log was last generated on Sun, 07 Jun 2020 21:36:06 GMT and should not be manually modified.
+
+## 0.5.4
+Sun, 07 Jun 2020 21:36:06 GMT
+
+*Version update only*
 
 ## 0.5.3
 Fri, 29 May 2020 03:36:19 GMT
