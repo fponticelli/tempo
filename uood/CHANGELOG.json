@@ -2,6 +2,18 @@
   "name": "uood",
   "entries": [
     {
+      "version": "0.1.4",
+      "tag": "uood_v0.1.4",
+      "date": "Sun, 07 Jun 2020 21:16:37 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Update some theme styles."
+          }
+        ]
+      }
+    },
+    {
       "version": "0.1.3",
       "tag": "uood_v0.1.3",
       "date": "Sun, 07 Jun 2020 04:31:53 GMT",
