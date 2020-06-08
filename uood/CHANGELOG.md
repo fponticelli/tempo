@@ -1,6 +1,13 @@
 # Change Log - uood
 
-This log was last generated on Sun, 07 Jun 2020 23:32:43 GMT and should not be manually modified.
+This log was last generated on Mon, 08 Jun 2020 02:51:47 GMT and should not be manually modified.
+
+## 0.1.6
+Mon, 08 Jun 2020 02:51:47 GMT
+
+### Patches
+
+- Add events for textField.
 
 ## 0.1.5
 Sun, 07 Jun 2020 23:32:43 GMT
