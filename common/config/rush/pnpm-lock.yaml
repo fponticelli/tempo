@@ -3,12 +3,10 @@ dependencies:
   '@rush-temp/tempo-core': 'file:projects/tempo-core.tgz_canvas@2.6.1'
   '@rush-temp/tempo-demo.benchmark': 'file:projects/tempo-demo.benchmark.tgz'
   '@rush-temp/tempo-demo.hnpwa': 'file:projects/tempo-demo.hnpwa.tgz'
-  '@rush-temp/tempo-demo.paper': 'file:projects/tempo-demo.paper.tgz_sass@1.26.8'
   '@rush-temp/tempo-demo.readme': 'file:projects/tempo-demo.readme.tgz'
   '@rush-temp/tempo-demo.todomvc': 'file:projects/tempo-demo.todomvc.tgz'
   '@rush-temp/tempo-demo.ui': 'file:projects/tempo-demo.ui.tgz_sass@1.26.8'
   '@rush-temp/tempo-dom': 'file:projects/tempo-dom.tgz'
-  '@rush-temp/tempo-paper': 'file:projects/tempo-paper.tgz_webpack@4.43.0'
   '@rush-temp/tempo-root': 'file:projects/tempo-root.tgz'
   '@rush-temp/tempo-std': 'file:projects/tempo-std.tgz_canvas@2.6.1'
   '@rush-temp/tempo-store': 'file:projects/tempo-store.tgz_canvas@2.6.1'
@@ -43,7 +41,6 @@ dependencies:
   mini-css-extract-plugin: 0.9.0_webpack@4.43.0
   node-sass: 4.14.1
   optimize-css-assets-webpack-plugin: 5.0.3_webpack@4.43.0
-  paper: 0.12.8
   parcel-bundler: 1.12.4
   partsing: 0.7.3
   prettier: 2.0.5
@@ -7742,12 +7739,6 @@ packages:
     dev: false
     resolution:
       integrity: sha512-4hLB8Py4zZce5s4yd9XzopqwVv/yGNhV1Bl8NTmCq1763HeK2+EwVTv+leGeL13Dnh2wfbqowVPXCIO0z4taYw==
-  /paper/0.12.8:
-    dev: false
-    engines:
-      node: '>=8.0.0'
-    resolution:
-      integrity: sha512-aFzTOs4UgLPVJaCHkWp4KD9H3e5ibM61h+wNEjN4ZJu+JMLoivm1GKU2PdqL4DL/Ye490cQOIuUmeSz8dVdN6Q==
   /parallel-transform/1.2.0:
     dependencies:
       cyclist: 1.0.1
@@ -11513,7 +11504,7 @@ packages:
     peerDependencies:
       canvas: '*'
     resolution:
-      integrity: sha512-mO/2K09CGI1qsJCcGC4NbG1COqBvs6NKrOlA2uUSe/VY3eqLkOPFVqVlol7FSGCi5xq+e9Cb+LGq/aaeBky87w==
+      integrity: sha512-7iJVyTYaVEac1CxOwQW/0l/7aq6NBFNjzKIbjCj5ee6LB7d6TFHWxJedjKbffpU4/en5NTvt9Y67u19UvnxgPA==
       tarball: 'file:projects/tempo-colors.tgz'
     version: 0.0.0
   'file:projects/tempo-core.tgz_canvas@2.6.1':
@@ -11530,7 +11521,7 @@ packages:
     peerDependencies:
       canvas: '*'
     resolution:
-      integrity: sha512-W4Mz07bqybKvFZMeqXLrMWKtY627j/Er2ZzNdK7V9Lp1z+KUkyt0adiXMOsbmzFx6xT1IcPhMCMsexPIpF8S1Q==
+      integrity: sha512-mdZORYR3j8EBolj9fvi8k2tbQsMmPasbjqC4QK+wBXh0VOoP0zzGWBvGMUtFIjzCB15xxN3FnlvYphhlC4CYNA==
       tarball: 'file:projects/tempo-core.tgz'
     version: 0.0.0
   'file:projects/tempo-demo.benchmark.tgz':
@@ -11544,7 +11535,7 @@ packages:
     dev: false
     name: '@rush-temp/tempo-demo.benchmark'
     resolution:
-      integrity: sha512-9yD9YAtcuhUpVwzQIjHF9pyqxI9hoMRNMOW8KXMASSJQFOlR6Y0YFqXBrCPOf3tuyTA65tiChzNYNNqT34s8sw==
+      integrity: sha512-adIHG4D+cZvtSLTiauAHZP7YyJXPFUF8jYB1pmHI9lCxK0tE03IgyMCoqgHY8AsJb1Uc+24ru6CmJvlfqftXfQ==
       tarball: 'file:projects/tempo-demo.benchmark.tgz'
     version: 0.0.0
   'file:projects/tempo-demo.hnpwa.tgz':
@@ -11561,34 +11552,8 @@ packages:
     dev: false
     name: '@rush-temp/tempo-demo.hnpwa'
     resolution:
-      integrity: sha512-PdfG8mpx4NZNtYIZFrWahgoB70NlTtWf++ijqx42nPko908g6S1QXE7UuozEuCboB5tTdw8p4fuGo8SrvDbqZg==
+      integrity: sha512-HyGuEG73EesNDYR2yPbmcQWrpwKQyoovBMVBxwMpLRsoN6ekyItHRsbZ9+CO5VcEco2BNan7E1+tqSf+iBfklA==
       tarball: 'file:projects/tempo-demo.hnpwa.tgz'
-    version: 0.0.0
-  'file:projects/tempo-demo.paper.tgz_sass@1.26.8':
-    dependencies:
-      acorn: 7.2.0
-      babel-types: 6.26.0
-      css-loader: 3.5.3_webpack@4.43.0
-      cssnano: 4.1.10
-      html-webpack-plugin: 4.3.0_webpack@4.43.0
-      node-sass: 4.14.1
-      paper: 0.12.8
-      prettier: 2.0.5
-      sass-loader: 8.0.2_7e4d28589b7e94eb435a154172ec69c3
-      style-loader: 1.2.1_webpack@4.43.0
-      ts-loader: 7.0.5_typescript@3.9.5
-      typescript: 3.9.5
-      webpack: 4.43.0_webpack@4.43.0
-      webpack-cli: 3.3.11_webpack@4.43.0
-      webpack-dev-server: 3.11.0_6bb071789035dbb53b131cf2ad63510b
-    dev: false
-    id: 'file:projects/tempo-demo.paper.tgz'
-    name: '@rush-temp/tempo-demo.paper'
-    peerDependencies:
-      sass: '*'
-    resolution:
-      integrity: sha512-qYcMtQqPhxSENp/YpFJTTrVXV9PqaWYpyRj2fqKcQymc/W3150NwEOKM5IPlCdAAnbKyrtY1k/GmYoBMe9cRdw==
-      tarball: 'file:projects/tempo-demo.paper.tgz'
     version: 0.0.0
   'file:projects/tempo-demo.readme.tgz':
     dependencies:
@@ -11600,7 +11565,7 @@ packages:
     dev: false
     name: '@rush-temp/tempo-demo.readme'
     resolution:
-      integrity: sha512-VrnogZVCJeQZGA7wvXKEZ6DQq/PMCG6uIRZve6wMtdPiWuJupJR1MAxa6jMJ0+XNUDgka+ZCtWszQJqL0HiuPw==
+      integrity: sha512-B1ZP2w64F6b2suzHC1sChioyauC/mzNw0E+VHB8C1Y1O2ZcCEbMQvEh5bMm7ytqC3ZYucJzBNStte0udGUX/Qw==
       tarball: 'file:projects/tempo-demo.readme.tgz'
     version: 0.0.0
   'file:projects/tempo-demo.todomvc.tgz':
@@ -11615,7 +11580,7 @@ packages:
     dev: false
     name: '@rush-temp/tempo-demo.todomvc'
     resolution:
-      integrity: sha512-6LG0/P0TKielk6ZFyIYDiXh6jQH+BYVEvZG74LCkSXlrYH8K6Fiae1qY3KSeF6mqOxaiZJ8Y/IAydNUfBOjKKw==
+      integrity: sha512-DhlrpbryuMLy6Pq0hvax3qbvodARyBEZ9RotNdGRw1MPbWW7SwD9cqVM8zyWR9iud6amTpEqRhTkMTbBxloXhA==
       tarball: 'file:projects/tempo-demo.todomvc.tgz'
     version: 0.0.0
   'file:projects/tempo-demo.ui.tgz_sass@1.26.8':
@@ -11641,7 +11606,7 @@ packages:
     peerDependencies:
       sass: '*'
     resolution:
-      integrity: sha512-fI/1QoCiCkYndWgb/AuOQ0LVlk4sisJ3k/mNdPLkxp5cXtGdSb/1KPmqJq6MdOZlQ7EQtsv1w1rLxO0uFJhnYQ==
+      integrity: sha512-jNqRnlYW1A332Le+Vnwc90VNlNANq24rfHu+rKXy2c9iRYYU9f3VcN1WO7+2KH+fypEvB+ljLv5VA36p3dNiUQ==
       tarball: 'file:projects/tempo-demo.ui.tgz'
     version: 0.0.0
   'file:projects/tempo-dom.tgz':
@@ -11661,33 +11626,8 @@ packages:
     dev: false
     name: '@rush-temp/tempo-dom'
     resolution:
-      integrity: sha512-5r5jHwIVcOuzy1avzfR8xbHD4uFTpI80LtfUEiyyPrWSB9rQZ/sDwuJfK9a4hGLijNSoQZqrjnBUlng7DvROGw==
+      integrity: sha512-wElAPMqLmcJh1iidXrJH/zmOiNU4GLWPCQYR9/oLifY+hztY+j+SS5x8cUSEh9ABmCO8zlVs8YprsiqJJqJzUA==
       tarball: 'file:projects/tempo-dom.tgz'
-    version: 0.0.0
-  'file:projects/tempo-paper.tgz_webpack@4.43.0':
-    dependencies:
-      '@types/jest': 25.2.3
-      '@types/jsdom': 16.2.3
-      canvas: 2.6.1
-      jest: 26.0.1_canvas@2.6.1
-      jsdom: 16.2.2_canvas@2.6.1
-      lodash: 4.17.15
-      paper: 0.12.8
-      prettier: 2.0.5
-      request: 2.88.2
-      request-promise-native: 1.0.8_request@2.88.2
-      stealthy-require: 1.1.1
-      ts-jest: 26.1.0_jest@26.0.1+typescript@3.9.5
-      typescript: 3.9.5
-      webpack-cli: 3.3.11_webpack@4.43.0
-    dev: false
-    id: 'file:projects/tempo-paper.tgz'
-    name: '@rush-temp/tempo-paper'
-    peerDependencies:
-      webpack: '*'
-    resolution:
-      integrity: sha512-RFHQ3/nhWsNrBb2WUob/G7AG8BlEBQhyDCoLkVPFB6hJCMeZ/DHloEbpBLnp3Um46t/WWlU5LCBnNtyU5UryDQ==
-      tarball: 'file:projects/tempo-paper.tgz'
     version: 0.0.0
   'file:projects/tempo-root.tgz':
     dependencies:
@@ -11701,7 +11641,7 @@ packages:
     dev: false
     name: '@rush-temp/tempo-root'
     resolution:
-      integrity: sha512-X9wLULsjgNPonylC3whvjh9h+dWf1dqkZ8Fj0NxO/u0QEY52qLkKPaR8fRUL689LicDCByA1YjJqRaU/gDysgg==
+      integrity: sha512-Fk7xc3QzrcMHKJc5rZXqzzin07U5UFbwKvjzTaOKe8SdH6Dcc4UsMMqfQySxPI2eVil8Px393wnT3M+r6Ghrdw==
       tarball: 'file:projects/tempo-root.tgz'
     version: 0.0.0
   'file:projects/tempo-std.tgz_canvas@2.6.1':
@@ -11718,7 +11658,7 @@ packages:
     peerDependencies:
       canvas: '*'
     resolution:
-      integrity: sha512-0ZCbxjA3B9S3c+BvqojCkrSThhlxHI3IHSyg0cSnA+FTP42mfTvskOuA2vFR5WveIZUXtEH60BZx+Y+07limBw==
+      integrity: sha512-FTlujCytdbhSpzjhpGQiCcYlEiYd+gC/pgZPZjFtW8OZUUsv+y6fp7AYe57fBxfmQITYtqK7P0/0ExIDiSp/zA==
       tarball: 'file:projects/tempo-std.tgz'
     version: 0.0.0
   'file:projects/tempo-store.tgz_canvas@2.6.1':
@@ -11734,7 +11674,7 @@ packages:
     peerDependencies:
       canvas: '*'
     resolution:
-      integrity: sha512-TyU2113k05WYBdHINzCiWRyndmb2G4n+NrEw3sA6MFZrG2owO672w/S9WJ/6/ZOhYT9UQb4M5uQfIcPdDZo3ww==
+      integrity: sha512-9Vy+DtVA1fiOb5gdBtlfDkn1FHqhnd/rVf/2QlCUQ/cY4/YMw+Ne6dDMBXVIeBZ81D6AvUh1qxooqI2lbbQpwA==
       tarball: 'file:projects/tempo-store.tgz'
     version: 0.0.0
   'file:projects/tempo-template-dom.tgz':
@@ -11757,7 +11697,7 @@ packages:
     dev: false
     name: '@rush-temp/tempo-template-dom'
     resolution:
-      integrity: sha512-05ZkNMx2/nz0AP6TRZGD5/KXHsLcnspJIZrzdDhw2ye2IWgVbki6vq5xJTLAUzkg3fuR6F7aMEr9A4HoejALfA==
+      integrity: sha512-QZTI/X+/x6GGIIkP9BJvDylR7D8SssicSrWbZVXs97U1ol76JNnDCVS2Z++RGiJNrn6lQIPZRv3foPeYHsDo7Q==
       tarball: 'file:projects/tempo-template-dom.tgz'
     version: 0.0.0
   'file:projects/tempo-tools.docs.tgz_sass@1.26.8':
@@ -11804,7 +11744,7 @@ packages:
     peerDependencies:
       sass: '*'
     resolution:
-      integrity: sha512-XHQfSZrOwAyVsnTX+ZuslzTLMAcC6bEZ1VZepX0A23t+bT9O5YwomblP48xeHzq/eXlkpp6qhtFce9psRZtvwQ==
+      integrity: sha512-c04qC879c5F2pzLlRdgEiOFYUvuX1yy8Tqoya5o28D70V0SuvnI/sJC0AZrXYlTYt9egVfl5SvMvVG9ixFRBBA==
       tarball: 'file:projects/tempo-tools.docs.tgz'
     version: 0.0.0
   'file:projects/tempo-ui.tgz_canvas@2.6.1':
@@ -11827,7 +11767,7 @@ packages:
     peerDependencies:
       canvas: '*'
     resolution:
-      integrity: sha512-sbAHcYaHL0b/G3DoRH2Jg8pzxGHKcyWOo9zxii47lRSU3inDiT8B74SksfzEOMu1OudVtYrTAiTuf20OpCYi5w==
+      integrity: sha512-n0sfMahYpLRjirb1fGjjcb4Izu3rinJAlG88oI3Wu8tHUSrH89OuZFRfxCMKxV24npb2GcCZ9wrEJTA0KCOD8w==
       tarball: 'file:projects/tempo-ui.tgz'
     version: 0.0.0
   'file:projects/uood.tgz_canvas@2.6.1':
@@ -11850,7 +11790,7 @@ packages:
     peerDependencies:
       canvas: '*'
     resolution:
-      integrity: sha512-2cvs279+Nrhrb3F3R+hZUR6qDm5cbiP54Ifq/YDsMB56tP1Ud3di2Bj7mhR7xcikXRm+e3m/l1vZ+rNr0Zrm8Q==
+      integrity: sha512-cLJ64Lyg6REtImZWDvOE+pLMZYlWHXciyzlohxzdNpM2FldpZJyV5Nt7D7VyiKT3pFResiVadyAu1xfiLz+EEA==
       tarball: 'file:projects/uood.tgz'
     version: 0.0.0
 registry: ''
@@ -11859,12 +11799,10 @@ specifiers:
   '@rush-temp/tempo-core': 'file:./projects/tempo-core.tgz'
   '@rush-temp/tempo-demo.benchmark': 'file:./projects/tempo-demo.benchmark.tgz'
   '@rush-temp/tempo-demo.hnpwa': 'file:./projects/tempo-demo.hnpwa.tgz'
-  '@rush-temp/tempo-demo.paper': 'file:./projects/tempo-demo.paper.tgz'
   '@rush-temp/tempo-demo.readme': 'file:./projects/tempo-demo.readme.tgz'
   '@rush-temp/tempo-demo.todomvc': 'file:./projects/tempo-demo.todomvc.tgz'
   '@rush-temp/tempo-demo.ui': 'file:./projects/tempo-demo.ui.tgz'
   '@rush-temp/tempo-dom': 'file:./projects/tempo-dom.tgz'
-  '@rush-temp/tempo-paper': 'file:./projects/tempo-paper.tgz'
   '@rush-temp/tempo-root': 'file:./projects/tempo-root.tgz'
   '@rush-temp/tempo-std': 'file:./projects/tempo-std.tgz'
   '@rush-temp/tempo-store': 'file:./projects/tempo-store.tgz'
@@ -11899,7 +11837,6 @@ specifiers:
   mini-css-extract-plugin: ^0.9.0
   node-sass: ^4.14.1
   optimize-css-assets-webpack-plugin: ^5.0.3
-  paper: ^0.12.3
   parcel-bundler: ^1.12.4
   partsing: ^0.7.3
   prettier: ^2.0.5
@@ -11921,7 +11858,7 @@ specifiers:
   ts-node: ^8.10.1
   tslib: ^2.0.0
   tslint: ^6.1.2
-  typescript: ^3.9.3
+  typescript: ^3.9.5
   webpack: ^4.43.0
   webpack-cli: ^3.3.11
   webpack-dev-server: ^3.11.0
