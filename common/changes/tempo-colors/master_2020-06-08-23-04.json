@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "tempo-colors",
+      "comment": "Update dependencies.",
+      "type": "patch"
+    }
+  ],
+  "packageName": "tempo-colors",
+  "email": "franco.ponticelli@gmail.com"
+}

@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "tempo-ui",
+      "comment": "Update depend",
+      "type": "patch"
+    }
+  ],
+  "packageName": "tempo-ui",
+  "email": "franco.ponticelli@gmail.com"
+}
