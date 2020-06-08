@@ -19,7 +19,6 @@ export class DOMContext<Action> {
     dispatch: (action: Action) => void
   ): DOMContext<Action> {
     return new DOMContext<Action>(
-      /* istanbul ignore next */
       element.ownerDocument || (window && window.document),
       (node: Node) => element.appendChild(node),
       element,

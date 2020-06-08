@@ -123,7 +123,19 @@ export function adapter<
 ): DOMTemplate<OuterState, OuterAction, Query> {
   return new AdapterTemplate(
     props.mergeStates,
-    /* istanbul ignore next */
+    props.propagate || (() => undefined),
+    child
+  )
+}
+
+export function localAdapter<State, Action, Query = unknown>(
+  props: {
+    propagate?: (args: PropagateArg<State, State, Action, Action>) => void
+  },
+  child: Component<State, Action, Query>
+): DOMTemplate<State, Action, Query> {
+  return new AdapterTemplate(
+    ({ outerState }) => outerState,
     props.propagate || (() => undefined),
     child
   )
