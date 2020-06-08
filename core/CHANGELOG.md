@@ -1,6 +1,13 @@
 # Change Log - tempo-core
 
-This log was last generated on Sat, 15 Feb 2020 20:16:59 GMT and should not be manually modified.
+This log was last generated on Mon, 08 Jun 2020 23:05:13 GMT and should not be manually modified.
+
+## 1.7.1
+Mon, 08 Jun 2020 23:05:13 GMT
+
+### Patches
+
+- Update depend
 
 ## 1.7.0
 Sat, 15 Feb 2020 20:16:59 GMT

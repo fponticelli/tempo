@@ -36,10 +36,10 @@
   },
   "dependencies": {
     "acorn": "^7.2.0",
-    "tempo-core": "^1.7.0",
-    "tempo-dom": "^0.23.0",
-    "tempo-std": "^0.5.4",
-    "tempo-store": "^1.2.3"
+    "tempo-core": "^1.7.1",
+    "tempo-dom": "^0.24.0",
+    "tempo-std": "^0.5.5",
+    "tempo-store": "^1.2.4"
   },
   "devDependencies": {
     "@types/doctrine": "^0.0.3",
