@@ -18,7 +18,7 @@
     "cssnano": "^4.1.10",
     "parcel-bundler": "^1.12.4",
     "prettier": "^2.0.5",
-    "typescript": "^3.9.3",
+    "typescript": "^3.9.5",
     "babel-types": "^6.26.0",
     "sass": "^1.23.7",
     "@types/dompurify": "^2.0.0"

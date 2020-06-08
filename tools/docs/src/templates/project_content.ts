@@ -9,8 +9,7 @@ import { link } from './link'
 import { unsafeHtml } from 'tempo-dom/lib/unsafe_html'
 
 function renamePackage(s: string) {
-  if (s === 'paperjs') return 'paper'
-  else return s
+  return s
 }
 
 export const projectContent = article<ProjectRef, Action>(

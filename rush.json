@@ -64,16 +64,6 @@
       "shouldPublish": false
     },
     {
-      "packageName": "tempo-paper",
-      "projectFolder": "./paperjs",
-      "shouldPublish": true
-    },
-    {
-      "packageName": "tempo-demo.paper",
-      "projectFolder": "./demo/paper",
-      "shouldPublish": false
-    },
-    {
       "packageName": "tempo-tools.docs",
       "projectFolder": "./tools/docs",
       "shouldPublish": false

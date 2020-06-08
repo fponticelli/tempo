@@ -12,13 +12,18 @@ const binFolderSrc = './dist'
 const binFolderDst = docsFolder
 const demoFolderSrc = path.join(rootFolder, 'demo')
 const demoFolderDst = path.join(docsFolder, 'demo')
-const banchmarkHistoryFolderSrc = path.join(rootFolder, 'demo', 'benchmark', 'history')
+const banchmarkHistoryFolderSrc = path.join(
+  rootFolder,
+  'demo',
+  'benchmark',
+  'history'
+)
 const banchmarkHistoryFolderDst = path.join(docsFolder, 'demo', 'benchmark')
 const assetsFolderSrc = path.join(rootFolder, 'pages/assets')
 const assetsFolderDst = path.join(docsFolder, 'assets')
 const pagesFolderSrc = path.join(rootFolder, 'pages')
 const pagesFolderDst = path.join(docsFolder, 'pages')
-const projects = ['core', 'dom', 'paperjs', 'std', 'store']
+const projects = ['core', 'dom', 'std', 'store']
 const changelogFolderDst = path.join(docsFolder, 'changelog')
 const apiFolderDst = path.join(docsFolder, 'api')
 
@@ -31,19 +36,23 @@ const renameHtml = (path: string) => {
   const parts = path.split('#').filter(a => !!a)
   if (!parts[0].endsWith('.html')) return path
   function processPart(part: string) {
-    return part.split('.').map(p => trimChars(p, '_')).join('.')
+    return part
+      .split('.')
+      .map(p => trimChars(p, '_'))
+      .join('.')
   }
   const res = parts[0].split('/').map(processPart).join('/')
-  return (hasLeadingHash ? [''] : []).concat([res].concat(parts.slice(1))).join('#')
+  return (hasLeadingHash ? [''] : [])
+    .concat([res].concat(parts.slice(1)))
+    .join('#')
 }
 
 async function getDemos(folder: string): Promise<DemoRef[]> {
   const dirs = filterDirectories(await fs.readdir(folder))
-  const data = dirs
-    .map(dir => ({
-      dir: path.join(folder, dir),
-      path: dir
-    }))
+  const data = dirs.map(dir => ({
+    dir: path.join(folder, dir),
+    path: dir
+  }))
   const contents = await Promise.all(
     data.map(async o => {
       const { dir, path } = o
@@ -61,9 +70,7 @@ async function getDemos(folder: string): Promise<DemoRef[]> {
       }
     })
   )
-  return contents
-    .sort((a, b) => a.priority - b.priority)
-    .map(a => a.data)
+  return contents.sort((a, b) => a.priority - b.priority).map(a => a.data)
 }
 
 async function loadPackage(dir: string) {
@@ -89,7 +96,7 @@ async function listAllMDFiles(src: string): Promise<string[]> {
       buff.push(file)
     } else {
       const filePath = path.join(src, file)
-      if (((await fs.stat(filePath)).isDirectory())) {
+      if ((await fs.stat(filePath)).isDirectory()) {
         const collect = await listAllMDFiles(filePath)
         buff.push(...collect.map(c => path.join(file, c)))
       }
@@ -98,7 +105,10 @@ async function listAllMDFiles(src: string): Promise<string[]> {
   return buff
 }
 
-async function makeHtml(mdFile: string, anchorMangler: (url: string) => string) {
+async function makeHtml(
+  mdFile: string,
+  anchorMangler: (url: string) => string
+) {
   const content = await fs.readFile(mdFile, 'utf8')
   return markdownWithFM(content, anchorMangler)
 }
@@ -114,16 +124,20 @@ function manglePageHref(url: string) {
 
 async function createPages(src: string, dst: string) {
   const mdFiles = await listAllMDFiles(src)
-  const data = await Promise.all(mdFiles.map(async file => ({
-    dest: renameHtml(renameMdToHtml(file)),
-    ...await makeHtml(path.join(src, file), manglePageHref)
-  })))
-  await Promise.all(data.map(async o => {
-    const p = path.join(dst, o.dest)
-    const base = path.dirname(p)
-    await fse.ensureDir(base)
-    await fs.writeFile(p, o.html)
-  }))
+  const data = await Promise.all(
+    mdFiles.map(async file => ({
+      dest: renameHtml(renameMdToHtml(file)),
+      ...(await makeHtml(path.join(src, file), manglePageHref))
+    }))
+  )
+  await Promise.all(
+    data.map(async o => {
+      const p = path.join(dst, o.dest)
+      const base = path.dirname(p)
+      await fse.ensureDir(base)
+      await fs.writeFile(p, o.html)
+    })
+  )
   const section = {
     pages: [] as PageRef[],
     sections: {} as Record<string, SectionRef>
@@ -170,12 +184,18 @@ async function createChangeLogs(projects: string[], root: string, dst: string) {
   )
 }
 
-async function collectProject(project: string, src: string): Promise<{ priority: number, data: ProjectRef }> {
+async function collectProject(
+  project: string,
+  src: string
+): Promise<{ priority: number; data: ProjectRef }> {
   const p = path.join(src, project, 'package.json')
   const packageJson = await fs.readFile(p, 'utf8')
   const pack = JSON.parse(packageJson)
   const projectPath = path.join(src, project, 'PROJECT.md')
-  const content = markdown(fse.existsSync(projectPath) ? await fs.readFile(projectPath, 'utf8') : '', s => s)
+  const content = markdown(
+    fse.existsSync(projectPath) ? await fs.readFile(projectPath, 'utf8') : '',
+    s => s
+  )
   return {
     priority: pack.priority ?? 0,
     data: {
@@ -191,11 +211,10 @@ async function collectProject(project: string, src: string): Promise<{ priority:
 
 async function collectProjects(projects: string[], src: string) {
   const list = await Promise.all(
-    projects
-      .map(async project => ({
-        project,
-        data: await collectProject(project, src)
-      }))
+    projects.map(async project => ({
+      project,
+      data: await collectProject(project, src)
+    }))
   )
   return list
     .sort((a, b) => a.data.priority - b.data.priority)
@@ -214,7 +233,12 @@ async function main() {
   // copy benchmark history
   const dirs = (await fse.readdir(banchmarkHistoryFolderSrc))
     .filter(dir => dir !== '.' && dir !== '..')
-    .filter(async dir => (await (await fs.stat(path.join(banchmarkHistoryFolderSrc, dir))).isDirectory()))
+    .filter(
+      async dir =>
+        await (
+          await fs.stat(path.join(banchmarkHistoryFolderSrc, dir))
+        ).isDirectory()
+    )
   await Promise.all(
     dirs.map(dir => {
       const src = path.join(banchmarkHistoryFolderSrc, dir)
@@ -224,12 +248,14 @@ async function main() {
   )
 
   // copy demos
-  await Promise.all(demos.map(demo => {
-    let src = path.join(demoFolderSrc, demo.path, 'dist')
-    if (!fse.existsSync(src))
-      src = path.join(demoFolderSrc, demo.path, 'build')
-    fse.copy(src, path.join(demoFolderDst, demo.path))
-  }))
+  await Promise.all(
+    demos.map(demo => {
+      let src = path.join(demoFolderSrc, demo.path, 'dist')
+      if (!fse.existsSync(src))
+        src = path.join(demoFolderSrc, demo.path, 'build')
+      fse.copy(src, path.join(demoFolderDst, demo.path))
+    })
+  )
 
   // copy assets
   await prepDir(assetsFolderDst)

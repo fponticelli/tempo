@@ -8,7 +8,6 @@
   ],
   "keywords": [
     "tempo",
-    "paperjs",
     "2d",
     "graphics"
   ],
@@ -19,7 +18,7 @@
     "docs:buildandmaketoc": "npm run build && npm run docs:maketoc",
     "docs:maketoc": "ts-node --project tsconfig.script.json ./scripts/build_docs.ts",
     "compile": "webpack --mode=production",
-    "clean": "rm -rf dist/* && rm -rf docs/* && rm -rf ../../docs/demo/paper/*",
+    "clean": "rm -rf dist/* && rm -rf docs/*",
     "build": "npm run clean && npm run compile",
     "watch": "webpack --watch",
     "prettier": "prettier -c src/**/*.ts",
@@ -72,7 +71,7 @@
     "ts-loader": "^7.0.5",
     "ts-morph": "^7.1.0",
     "ts-node": "^8.10.1",
-    "typescript": "^3.9.3",
+    "typescript": "^3.9.5",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.11.0",
