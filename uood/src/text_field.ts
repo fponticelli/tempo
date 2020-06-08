@@ -22,6 +22,8 @@ export function textField<State, Action, Query = unknown, T = unknown>(attrs: {
   theme?: Theme<State>
   value: Attribute<State, string>
   placeholder?: Attribute<State, string>
+  onChange?: undefined | ((value: string, state: State) => Action)
+  onInput?: undefined | ((value: string, state: State) => Action)
   // variant?: Attribute<State, ButtonVariant>
   // icon: Attribute<State, Icon>
   // RTL has icon mirrored
@@ -80,14 +82,18 @@ export function textField<State, Action, Query = unknown, T = unknown>(attrs: {
       ...subStyle(disabledStyle, textField, dDisabledStyle)
     },
     disabled: attrs.disabled,
-    value: attrs.value
-    // events: {
-    //   click:
-    //     attrs.onPress &&
-    //     ((state: State, ev: MouseEvent, el: Element) => {
-    //       return attrs.onPress!(state)
-    //     })
-    // }
-    // variant
+    value: attrs.value,
+    events: {
+      change:
+        attrs.onChange &&
+        ((state: State, _: MouseEvent, el: Element) => {
+          return attrs.onChange!((el as HTMLInputElement).value, state)
+        }),
+      input:
+        attrs.onInput &&
+        ((state: State, _: MouseEvent, el: Element) => {
+          return attrs.onInput!((el as HTMLInputElement).value, state)
+        })
+    }
   })
 }

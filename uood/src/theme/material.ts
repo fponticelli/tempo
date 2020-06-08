@@ -134,7 +134,7 @@ export function make<State>(options: ThemeOptions<State> = {}): Theme<State> {
         )
       },
       activeStyle: {
-        textColor: ofRGBA(0, 0, 0, 94),
+        textColor: ofRGB(255, 255, 255),
         border: Border.none,
         background: Background.rgb(0x94, 0x52, 0xf3),
         shadow: Shadow.multi(
