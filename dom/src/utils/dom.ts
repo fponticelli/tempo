@@ -40,11 +40,7 @@ export function insertFBefore(ref: Node) {
 export function domChildToTemplate<State, Action, Query>(
   dom: DOMChild<State, Action, Query>
 ): DOMTemplate<State, Action, Query> {
-  if (
-    typeof dom === 'string' ||
-    typeof dom === 'function' ||
-    typeof dom === 'undefined'
-  )
+  if (typeof dom === 'string' || typeof dom === 'function' || dom === undefined)
     return text(dom)
   else return dom
 }
@@ -98,12 +94,12 @@ export function processEvent<
   dispatch: (action: Action) => void,
   acc: Acc<State>
 ): Acc<State> {
-  if (typeof value !== 'undefined') {
+  if (value !== undefined) {
     let localState: State
     const anyEl = el as any
     anyEl[name] = (ev: Ev) => {
       const r = value(localState, ev as Ev, el)
-      if (typeof r !== 'undefined') {
+      if (r !== undefined) {
         dispatch(r)
       }
     }

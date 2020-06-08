@@ -75,7 +75,7 @@ class PaperAdapterTemplate<
           innerState
         })
 
-        if (typeof newState !== 'undefined') viewComponent.change(newState)
+        if (newState !== undefined) viewComponent.change(newState)
       },
       destroy: () => {
         viewComponent.destroy()

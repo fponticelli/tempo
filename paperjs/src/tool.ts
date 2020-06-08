@@ -65,7 +65,7 @@ export function tool<State, Action, Query = unknown, T = unknown>(
       let value: T | undefined
       if (props.afterrender) value = props.afterrender(state, tool, ctx)
       const active = resolveAttribute(props.active)(state)
-      if (typeof active === 'undefined' || active === true) tool.activate()
+      if (active === undefined || active === true) tool.activate()
 
       const derived = [] as ((state: State) => void)[]
 
@@ -83,7 +83,7 @@ export function tool<State, Action, Query = unknown, T = unknown>(
           const f = props[attr] as PaperEventHandler<State, Action, any, Tool>
           anyTool[attr] = (event: any) => {
             const action = f(state, event, tool, ctx.project)
-            if (typeof action !== 'undefined') ctx.dispatch(action)
+            if (action !== undefined) ctx.dispatch(action)
           }
         } else {
           const value = resolveAttribute(props[attr])

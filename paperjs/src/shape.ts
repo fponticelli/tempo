@@ -54,7 +54,7 @@ export function circle<State, Action, Query = unknown, T = unknown>(
     ShapeProps<State, Action, Query, T, Shape.Circle>
   >(
     (_: State) =>
-      typeof props.args !== 'undefined'
+      props.args !== undefined
         ? new Shape.Circle(props.args)
         : new Shape.Circle(new Point(0, 0), 0),
     props
@@ -73,7 +73,7 @@ export function rectangle<State, Action, Query = unknown, T = unknown>(
     ShapeProps<State, Action, Query, T, Shape.Rectangle>
   >(
     (_: State) =>
-      typeof props.args !== 'undefined'
+      props.args !== undefined
         ? new Shape.Rectangle(props.args)
         : new Shape.Rectangle(new Point(0, 0), new Point(0, 0)),
     props
@@ -92,7 +92,7 @@ export function ellipse<State, Action, Query = unknown, T = unknown>(
     ShapeProps<State, Action, Query, T, Shape.Ellipse>
   >(
     (_: State) =>
-      typeof props.args !== 'undefined'
+      props.args !== undefined
         ? new Shape.Ellipse(props.args)
         : new Shape.Ellipse({
             center: new Point(0, 0),

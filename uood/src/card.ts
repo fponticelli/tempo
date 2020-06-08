@@ -35,7 +35,6 @@ export function card<State, Action, Query = unknown, T = unknown>(
   const dCard = Uood.theme?.card
   const { hoverStyle } = card ?? {}
   const { hoverStyle: dHoverStyle } = dCard ?? {}
-  console.log(card?.border, dCard?.border)
   return container<State, Action, Query, T>(
     {
       elementName: 'div',

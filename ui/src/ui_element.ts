@@ -37,7 +37,7 @@ function applyAttributes(
   el: HTMLElement,
   attributes: { classes: string[]; styles: Record<string, string> } | undefined
 ) {
-  if (typeof attributes === 'undefined') return
+  if (attributes === undefined) return
   const { classes, styles } = attributes
   el.className = classes.join(' ')
   keys(styles).forEach(k => {
@@ -147,8 +147,9 @@ export class DOMUIElement<
       value = applyAfterRender(this.afterrender, el, ctx, state)
     }
 
-    const viewChanges = map(views, child => (state: State) =>
-      child.change(state)
+    const viewChanges = map(
+      views,
+      (child: View<State, Query>) => (state: State) => child.change(state)
     )
 
     allChanges.push(...viewChanges)

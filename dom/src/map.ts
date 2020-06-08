@@ -37,7 +37,7 @@ class MapStateTemplate<OuterState, InnerState, Action, Query>
     let current: InnerState | undefined = undefined
     const next = resolveAttribute(map)(state)
 
-    if (typeof next === 'undefined') {
+    if (next === undefined) {
       views = [whenUndefined.render(newCtx, state)]
     } else {
       current = next
@@ -51,8 +51,8 @@ class MapStateTemplate<OuterState, InnerState, Action, Query>
     return {
       change: (state: OuterState) => {
         const next = resolveAttribute(map)(state)
-        if (typeof next !== 'undefined') {
-          if (typeof current === 'undefined') {
+        if (next !== undefined) {
+          if (current === undefined) {
             destroy()
             current = next
             views = mapArray(children, c => c.render(newCtx, next))
@@ -61,7 +61,7 @@ class MapStateTemplate<OuterState, InnerState, Action, Query>
             for (const view of views) view.change(next)
           }
         } else {
-          if (typeof current !== 'undefined') {
+          if (current !== undefined) {
             current = undefined
             destroy()
             views = [whenUndefined.render(newCtx, state)]
@@ -148,7 +148,7 @@ export function mapStateAndKeep<
   >(
     (state: OuterState) => {
       const inner = resolveAttribute(props.map)(state)
-      if (typeof inner !== 'undefined') {
+      if (inner !== undefined) {
         return [inner, state]
       } else {
         return undefined
@@ -215,7 +215,7 @@ class MapQueryTemplate<State, Action, OuterQuery, InnerQuery>
       },
       request: (query: OuterQuery) => {
         const innerQuery = map(query)
-        if (typeof innerQuery !== 'undefined') {
+        if (innerQuery !== undefined) {
           views.forEach(view => view.request(innerQuery))
         }
       }

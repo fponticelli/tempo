@@ -32,9 +32,9 @@ export const charset = Symbol('charset')
 export const namespace = Symbol('namespace')
 
 export const atRules: (
-  typeof importRule |
-  typeof charset |
-  typeof namespace
+  | typeof importRule
+  | typeof charset
+  | typeof namespace
 )[] = [importRule, charset, namespace]
 
 export const media = Symbol('media')
@@ -52,19 +52,19 @@ export const styleset = Symbol('styleset')
 export const characterVariant = Symbol('character-variant')
 
 export const nestedAtRules: (
-  typeof media |
-  typeof supports |
-  typeof page |
-  typeof fontFace |
-  typeof keyframes |
-  typeof counterStyle |
-  typeof fontFeatureValues |
-  typeof swash |
-  typeof ornaments |
-  typeof annotation |
-  typeof stylistic |
-  typeof styleset |
-  typeof characterVariant
+  | typeof media
+  | typeof supports
+  | typeof page
+  | typeof fontFace
+  | typeof keyframes
+  | typeof counterStyle
+  | typeof fontFeatureValues
+  | typeof swash
+  | typeof ornaments
+  | typeof annotation
+  | typeof stylistic
+  | typeof styleset
+  | typeof characterVariant
 )[] = [
   media,
   supports,
@@ -82,7 +82,9 @@ export const nestedAtRules: (
 ]
 
 export type StyleDeclarations<State> = {
-  [K in keyof CSSStyleDeclaration]?: K extends number ? never : Attribute<State, CSSStyleDeclaration[K]>
+  [K in keyof CSSStyleDeclaration]?: K extends number
+    ? never
+    : Attribute<State, CSSStyleDeclaration[K]>
 }
 
 export interface MediaQuery<State> {
@@ -109,9 +111,8 @@ export interface MediaQueries<State> {
   [characterVariant]?: MediaQuery<State>
 }
 
-export type StyleDefinitions<State> =
-  & Record<string, StyleDeclarations<State>>
-  & MediaQueries<State>
+export type StyleDefinitions<State> = Record<string, StyleDeclarations<State>> &
+  MediaQueries<State>
 
 type Acc<State> = {
   literal: string[]
@@ -124,20 +125,28 @@ const processRules = <State>(rules: StyleDefinitions<State>): Acc<State> => {
       const rule = rules[selector] as Record<string, any>
       const all = keys(rule).reduce(
         (acc: Acc<State>, property: any) => {
-          const declaration = rule[property] as ((state: State) => string) | string
+          const declaration = rule[property] as
+            | ((state: State) => string)
+            | string
           if (typeof declaration === 'function') {
             return {
-              derived: [...acc.derived, (state: State) => {
-                const s = declaration(state)
-                return s ? `  ${property}: ${s};` : `  /* ${property} */`
-              }],
+              derived: [
+                ...acc.derived,
+                (state: State) => {
+                  const s = declaration(state)
+                  return s ? `  ${property}: ${s};` : `  /* ${property} */`
+                }
+              ],
               literal: acc.literal
             }
           } else {
             const s = declaration
             return {
               derived: acc.derived,
-              literal: [...acc.literal, s ? `  ${property}: ${s};` : `  /* ${property} */`]
+              literal: [
+                ...acc.literal,
+                s ? `  ${property}: ${s};` : `  /* ${property} */`
+              ]
             }
           }
         },
@@ -147,13 +156,23 @@ const processRules = <State>(rules: StyleDefinitions<State>): Acc<State> => {
         } as Acc<State>
       )
       return {
-        literal: all.literal.length > 0 ?
-          [...acc.literal, `${selector as string} {\n${all.literal.join('\n')}\n}\n`] :
-          acc.literal,
-        derived: all.derived.length > 0 ?
-          [...acc.derived, (state: State) =>
-            `${selector as string} {\n${all.derived.map(f => f(state)).join('\n')}\n}\n`] :
-          acc.derived
+        literal:
+          all.literal.length > 0
+            ? [
+                ...acc.literal,
+                `${selector as string} {\n${all.literal.join('\n')}\n}\n`
+              ]
+            : acc.literal,
+        derived:
+          all.derived.length > 0
+            ? [
+                ...acc.derived,
+                (state: State) =>
+                  `${selector as string} {\n${all.derived
+                    .map(f => f(state))
+                    .join('\n')}\n}\n`
+              ]
+            : acc.derived
       }
     },
     {
@@ -163,21 +182,28 @@ const processRules = <State>(rules: StyleDefinitions<State>): Acc<State> => {
   )
 }
 
-const processNestedAtRule = <State>
-    (nestedAtRule: string, queries: MediaQuery<State>) => {
+const processNestedAtRule = <State>(
+  nestedAtRule: string,
+  queries: MediaQuery<State>
+) => {
   return keys(queries).reduce(
     (acc: Acc<State>, query: string | number) => {
       const definitions = queries[query]
       const r = processDefinitions(definitions)
       return {
-        literal: [`@${nestedAtRule} ${query} {\n${r.literal.map(v => `  ${v.split('\n').join('\n  ')}`).join('\n')}\n}`],
-        derived:
-          r.derived.map(f => {
-            return (state: State) => {
-              const values = r.derived.map(f => '  ' + f(state).split('\n').join('\n  '))
-              return `@${nestedAtRule} ${query} {\n${values.join('\n')}\n}`
-            }
-          })
+        literal: [
+          `@${nestedAtRule} ${query} {\n${r.literal
+            .map(v => `  ${v.split('\n').join('\n  ')}`)
+            .join('\n')}\n}`
+        ],
+        derived: r.derived.map(f => {
+          return (state: State) => {
+            const values = r.derived.map(
+              f => '  ' + f(state).split('\n').join('\n  ')
+            )
+            return `@${nestedAtRule} ${query} {\n${values.join('\n')}\n}`
+          }
+        })
       }
     },
     {
@@ -187,7 +213,10 @@ const processNestedAtRule = <State>
   )
 }
 
-const processOneAtRule = <State>(prefix: string, rule: DerivedOrLiteralValue<State, string>) => {
+const processOneAtRule = <State>(
+  prefix: string,
+  rule: DerivedOrLiteralValue<State, string>
+) => {
   if (typeof rule === 'function') {
     return {
       literal: [],
@@ -201,7 +230,10 @@ const processOneAtRule = <State>(prefix: string, rule: DerivedOrLiteralValue<Sta
   }
 }
 
-const processtAtRule = <State>(prefix: string, rules: DerivedOrLiteralValue<State, string>[]) => {
+const processtAtRule = <State>(
+  prefix: string,
+  rules: DerivedOrLiteralValue<State, string>[]
+) => {
   return rules.reduce(
     (acc, curr) => {
       const res = processOneAtRule(prefix, curr)
@@ -217,10 +249,11 @@ const processtAtRule = <State>(prefix: string, rules: DerivedOrLiteralValue<Stat
   )
 }
 
-const processDefinitions =
-    <State>(definitions: StyleDefinitions<State>): Acc<State> => {
+const processDefinitions = <State>(
+  definitions: StyleDefinitions<State>
+): Acc<State> => {
   let literal = [] as string[]
-  let derived =  [] as ((state: State) => string)[]
+  let derived = [] as ((state: State) => string)[]
 
   for (let i = 0; i < atRules.length; i++) {
     const sym = atRules[i]
@@ -271,13 +304,19 @@ function make<State, Action, Query>(
   let name: string | undefined
   if (originalContent) {
     name = cacheByContent.get(originalContent)
-    if (typeof name !== 'undefined') {
+    if (name !== undefined) {
       const item = cacheByName.get(name)!
       if (!update) item.hits++
     } else {
-      name = '' + (++counter)
-      const content = replace(originalContent, ':scope', `[data-te-scope-${type}="${name}"]`)
-      const template = headPortal<State, Action, Query>(el('style', { attrs: { [`data-tedef-${type}`]: name } }, text(content)))
+      name = '' + ++counter
+      const content = replace(
+        originalContent,
+        ':scope',
+        `[data-te-scope-${type}="${name}"]`
+      )
+      const template = headPortal<State, Action, Query>(
+        el('style', { attrs: { [`data-tedef-${type}`]: name } }, text(content))
+      )
       const view = template.render(ctx, state)
       cacheByName.set(name, { hits: 1, view, content: originalContent })
       cacheByContent.set(originalContent, name)
@@ -287,23 +326,38 @@ function make<State, Action, Query>(
   return name
 }
 
-class ScopedStyles<State, Action, Query> implements DOMTemplate<State, Action, Query> {
-  constructor (
+class ScopedStyles<State, Action, Query>
+  implements DOMTemplate<State, Action, Query> {
+  constructor(
     readonly literal: string[],
     readonly derived: ((state: State) => string)[]
   ) {}
   render(ctx: DOMContext<Action>, state: State) {
     const { literal, derived } = this
-    const literalName = make(false, ctx, 'lit', state, literal.length > 0 ? ('\n' + literal.join('\n')) : undefined)
+    const literalName = make(
+      false,
+      ctx,
+      'lit',
+      state,
+      literal.length > 0 ? '\n' + literal.join('\n') : undefined
+    )
 
     const makeDerived = (state: State, update: boolean) =>
-      make(update, ctx, 'der', state, derived.length > 0 ? ('\n' + derived.map(f => f(state)).join('\n')) : undefined)
+      make(
+        update,
+        ctx,
+        'der',
+        state,
+        derived.length > 0
+          ? '\n' + derived.map(f => f(state)).join('\n')
+          : undefined
+      )
     let derivedName = makeDerived(state, false)
 
     let destroy = (name: string | undefined) => {
-      if (typeof name !== 'undefined') {
+      if (name !== undefined) {
         const item = cacheByName.get(name)
-        if (typeof item !== 'undefined') {
+        if (item !== undefined) {
           item.hits--
           if (item.hits === 0) {
             item.view.destroy()

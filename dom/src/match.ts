@@ -268,7 +268,7 @@ export function matchMaybe<State, Action, Query = unknown>(props: {
   Nothing?: DOMChild<unknown, Action, Query>
 }): DOMTemplate<Maybe<State>, Action, Query> {
   return new MatchBoolTemplate<Maybe<State>, Action, Query>(
-    v => typeof v !== 'undefined',
+    v => v !== undefined,
     mapState(
       { map: (opt: Maybe<State>) => opt as Just<State> },
       domChildToTemplate(props.Just)

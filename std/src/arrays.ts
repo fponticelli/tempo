@@ -170,7 +170,7 @@ export function remove<A>(
   predicate?: (a: A) => boolean
 ): boolean {
   let index
-  if (typeof predicate !== 'undefined') {
+  if (predicate !== undefined) {
     index = arr.findIndex(predicate)
   } else {
     index = arr.indexOf(item)

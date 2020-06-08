@@ -42,7 +42,7 @@ export class PaperContext<Action> {
       this.append,
       (action: OtherAction) => {
         const newAction = f(action)
-        if (typeof newAction !== 'undefined') {
+        if (newAction !== undefined) {
           this.dispatch(newAction)
         }
       }

@@ -62,7 +62,7 @@ export function raster<State, Action, Query = unknown, T = unknown>(
     RasterProps<State, Action, Query, T>
   >(
     (_: State) =>
-      typeof props.args ? new Raster(props.args as any) : new Raster(),
+      props.args !== undefined ? new Raster(props.args as any) : new Raster(),
     props
   )
 }

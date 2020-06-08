@@ -41,15 +41,13 @@ class MapStateTemplate<OuterState, InnerState, Action, Query>
 
     const innerState = resolveAttribute(map)(state)
 
-    if (typeof innerState !== 'undefined') {
+    if (innerState !== undefined) {
       isUndefined = false
       views = mapArray(children, c => c.render(newCtx, innerState))
     } else {
       isUndefined = true
       views =
-        typeof whenUndefined === 'undefined'
-          ? []
-          : [whenUndefined.render(newCtx, state)]
+        whenUndefined === undefined ? [] : [whenUndefined.render(newCtx, state)]
     }
 
     function destroy() {
@@ -59,7 +57,7 @@ class MapStateTemplate<OuterState, InnerState, Action, Query>
     return {
       change: (state: OuterState) => {
         const innerState = resolveAttribute(map)(state)
-        if (typeof innerState !== 'undefined') {
+        if (innerState !== undefined) {
           if (isUndefined) {
             destroy()
             views = mapArray(children, c => c.render(newCtx, innerState))
@@ -70,7 +68,7 @@ class MapStateTemplate<OuterState, InnerState, Action, Query>
         } else {
           destroy()
           views =
-            typeof whenUndefined === 'undefined'
+            whenUndefined === undefined
               ? []
               : [whenUndefined.render(newCtx, state)]
           isUndefined = true
@@ -117,7 +115,7 @@ export function mapStateAndKeep<
   >(
     (state: OuterState) => {
       const inner = resolveAttribute(props.map)(state)
-      if (typeof inner !== 'undefined') {
+      if (inner !== undefined) {
         return [inner, state]
       } else {
         return undefined
@@ -182,7 +180,7 @@ class MapQueryTemplate<State, Action, OuterQuery, InnerQuery>
       },
       request: (query: OuterQuery) => {
         const innerQuery = map(query)
-        if (typeof innerQuery !== 'undefined') {
+        if (innerQuery !== undefined) {
           views.forEach(view => view.request(innerQuery))
         }
       }

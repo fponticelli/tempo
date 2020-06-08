@@ -23,8 +23,14 @@ export interface Rule {
   definitions: () => string[]
 }
 
-export interface ElWithClassRulesProps<T, State, Action, Query, El extends Element, TScope>
-  extends Props<State, Action, Query, El, TScope> {
+export interface ElWithClassRulesProps<
+  T,
+  State,
+  Action,
+  Query,
+  El extends Element,
+  TScope
+> extends Props<State, Action, Query, El, TScope> {
   el: string
   values: Attribute<State, T[]>
   makeRules: (value: T) => Rule[]
@@ -34,7 +40,7 @@ const allSelectors = new Set<string>()
 let styleEl: HTMLStyleElement
 
 function ensureStyleElement(doc: Document) {
-  if (typeof styleEl === 'undefined') {
+  if (styleEl === undefined) {
     styleEl = doc.createElement('style')
     styleEl.textContent = '\n'
     doc.head.appendChild(styleEl)
@@ -46,7 +52,7 @@ function ensureStyleElement(doc: Document) {
 //   cls: string,
 //   makeRules: (v: T) => Rule[]
 // ): Rule[] {
-//   if (typeof value !== 'undefined' && !allSelectors.has(cls)) {
+//   if (value !== undefined && !allSelectors.has(cls)) {
 //     allSelectors.add(cls)
 //     return makeRules(value)
 //   } else {
@@ -76,13 +82,10 @@ function applyClasses<T>(
   //   },
   //   { classes: [], rules: [] } as { classes: string[], rules: Rule[] }
   // )
-  const rules = values.reduce(
-    (acc, curr) => {
-      acc.push(...makeRules(curr))
-      return acc
-    },
-    [] as Rule[]
-  )
+  const rules = values.reduce((acc, curr) => {
+    acc.push(...makeRules(curr))
+    return acc
+  }, [] as Rule[])
 
   const rulesToApply = rules.filter(rule => !allSelectors.has(rule.selector))
 
@@ -91,22 +94,33 @@ function applyClasses<T>(
     styleEl.textContent += map(rulesToApply, renderRule).join('\n') + '\n'
   }
 
-  const classes = rules.filter(rule => typeof rule.cls !== 'undefined').map(rule => rule.cls!)
+  const classes = rules
+    .filter(rule => rule.cls !== undefined)
+    .map(rule => rule.cls!)
 
   if (classes.length > 0) {
-    if (el.className)
-      classes.unshift(el.className)
+    if (el.className) classes.unshift(el.className)
     el.className = classes.join(' ')
   }
 }
 
-export function classStyledElement<T, State, Action, Query, El extends Element, TScope>(
+export function classStyledElement<
+  T,
+  State,
+  Action,
+  Query,
+  El extends Element,
+  TScope
+>(
   props: ElWithClassRulesProps<T, State, Action, Query, El, TScope>,
   ...children: DOMChild<State, Action>[]
 ) {
   const { values, makeRules } = props
-  if (typeof props?.attrs?.class === 'undefined' && typeof props?.attrs?.className === 'undefined') {
-    if (typeof props.attrs === 'undefined') {
+  if (
+    props?.attrs?.class === undefined &&
+    props?.attrs?.className === undefined
+  ) {
+    if (props.attrs === undefined) {
       props.attrs = { class: '' }
     } else {
       props.attrs.class = ''

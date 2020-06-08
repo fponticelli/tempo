@@ -151,6 +151,10 @@ export const features = {
       {
         selector: `.uood > .${prefix}w${pseudo}`,
         rules: [`width: calc(var(--${prefix}w-f) / var(--${prefix}w-f) * 100%)`]
+      },
+      {
+        selector: `.c > .w`,
+        rules: [`flex: none`]
       }
     ]
   }),
@@ -464,89 +468,4 @@ export const features = {
       }
     ]
   })
-  // content: (prefix: string, pseudo: string): ClassDescription => {
-  //   const feats =$ [
-  //     features.background,
-  //     features.width,
-  //     features.height,
-  //     features.overflowHorizontal,
-  //     features.overflowVertical,
-  //     features.border,
-  //     features.borderRadius,
-  //     features.padding,
-  //     features.boxShadow,
-  //     features.textShadow,
-  //     features.textColor,
-  //     features.textDirection,
-  //     features.fontFamily,
-  //     features.fontSize,
-  //     features.fontVariantLigatures,
-  //     features.fontVariantNumeric,
-  //     features.fontWeight,
-  //     features.letterSpacing,
-  //     features.textAlign,
-  //     features.textDecoration,
-  //     features.textTransform,
-  //     features.wordSpacing,
-  //     features.writingMode
-  //   ]
-  //   const descs = feats.map(f => f('co-'))
-  //   const variables = flatten(descs.map(o => o.variables))
-  //   const rules = flatten(flatten(descs.map(o => o.desc)).map(r => r.rules))
-  //   rules.push(`display: var(--co-di, inline-block)`)
-
-  //   return {
-  //     cls: `${prefix}co`,
-  //     key: `${prefix}:co`,
-  //     variables: [
-  //       `${prefix}co-a`, `${prefix}co-sp-a`, `${prefix}co-sp`,
-  //       `${prefix}co-b`, `${prefix}co-sp-b`
-  //     ].concat(variables),
-  //     desc: [{
-  //       selector: '.co::after',
-  //       rules: [
-  //         `content: var(--${prefix}co-a)`,
-  //         `margin-left: var(--${prefix}co-sp-a, var(--${prefix}co-sp))`
-  //       ]
-  //     }, {
-  //       selector: '.co::before',
-  //       rules: [
-  //         `content: var(--${prefix}co-b)`,
-  //         `margin-right: var(--${prefix}co-sp-b, var(--${prefix}co-sp))`
-  //       ]
-  //     }, {
-  //       selector: '.co::after, .co::before',
-  //       rules
-  //     }]
-  //   }
-  // }
 }
-
-// export type FontFormat = 'embedded-opentype' | 'opentype' | 'svg' | 'truetype' | 'woff' | 'woff2'
-
-// export const fontFace = (
-//   family: string,
-//   sources: [string, FontFormat][],
-//   fontStyle?: string,
-//   fontWeight?: string,
-//   fontDisplay?: string,
-//   unicodeRange?: string
-// ) => {
-//   const parts = []
-//   parts.push(`font-family: '${family}'`)
-//   parts.push(`src: ` + sources.map((url, format) => `url('${url}') format('${format}')`).join(', '))
-
-//   if (typeof fontStyle !== 'undefined') {
-//     parts.push(`font-style: ${fontStyle}`)
-//   }
-//   if (typeof fontWeight !== 'undefined') {
-//     parts.push(`font-weight: ${fontWeight}`)
-//   }
-//   if (typeof fontDisplay !== 'undefined') {
-//     parts.push(`font-display: ${fontDisplay}`)
-//   }
-//   if (typeof unicodeRange !== 'undefined') {
-//     parts.push(`unicode-range: ${unicodeRange}`)
-//   }
-//   return parts
-// }

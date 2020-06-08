@@ -55,14 +55,14 @@ export function holdMappedState<State, HeldState>(props: {
       render(ctx: DOMContext<InnerAction>, state: InnerState) {
         const id = counter // TODO this is not a very robust solution
         const heldState = stateCache.get(id)
-        if (typeof heldState === 'undefined')
+        if (heldState === undefined)
           throw 'held state is not available at render, make sure that your `release` template is nested inside `capture`.'
         const combinedState = [heldState, state] as [HeldState, InnerState]
         const views = mapA(childTemplates, t => t.render(ctx, combinedState))
         return {
           change(state: InnerState) {
             const heldState = stateCache.get(id)
-            if (typeof heldState === 'undefined')
+            if (heldState === undefined)
               throw 'held state is not available at change, make sure that your `release` template is nested inside `capture`.'
             const combinedState = [heldState, state] as [HeldState, InnerState]
             each(views, v => v.change(combinedState))

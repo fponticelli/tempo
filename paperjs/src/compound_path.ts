@@ -62,7 +62,7 @@ export function compoundPath<State, Action, Query, T = unknown>(
     CompoundPathProps<State, Action, Query, T>
   >(
     (_: State) =>
-      typeof props.args !== 'undefined'
+      props.args !== undefined
         ? new CompoundPath(props.args)
         : new CompoundPath([]),
     props,

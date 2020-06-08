@@ -48,7 +48,7 @@ export function applyKeys<T extends {}>(
   const t = {} as T
   for (const k of keys) {
     for (const c of ts) {
-      if (typeof c !== 'undefined' && typeof c[k] !== 'undefined') {
+      if (c !== undefined && c[k] !== undefined) {
         t[k] = c[k]
         break
       }

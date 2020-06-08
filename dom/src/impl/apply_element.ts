@@ -29,7 +29,7 @@ export function applyAfterRender<State, Action, El extends Element, T>(
   ctx: DOMContext<Action>,
   state: State
 ) {
-  if (typeof attr !== undefined) {
+  if (attr !== undefined) {
     return attr(state, el, ctx)
   } else {
     return undefined

@@ -115,7 +115,7 @@ const template = article<CanvasState, CanvasAction, Query>(
         }
       },
       matchBool({
-        condition: state => typeof state.mainAreaSize !== 'undefined',
+        condition: state => state.mainAreaSize !== undefined,
         true: mapState(
           {
             map: state => ({ size: state.mainAreaSize!, kind: state.selected })

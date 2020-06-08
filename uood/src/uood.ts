@@ -5,7 +5,7 @@ let defaultTheme: undefined | Theme<any>
 
 export const Uood = {
   get theme(): Theme<any> {
-    if (typeof defaultTheme === 'undefined') {
+    if (defaultTheme === undefined) {
       defaultTheme = require('./theme/default').theme
     }
     return defaultTheme!

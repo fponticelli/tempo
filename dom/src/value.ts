@@ -77,8 +77,8 @@ export function applyAttributes<State, A, B, C>(
   attrB: Attribute<State, B>,
   apply: (a: A, b: B) => C
 ): Attribute<State, C> {
-  if (typeof attrA === 'undefined') return undefined
-  if (typeof attrB === 'undefined') return undefined
+  if (attrA === undefined) return undefined
+  if (attrB === undefined) return undefined
   if (typeof attrA === 'function' && typeof attrB === 'function') {
     return (state: State) => {
       const resA = (attrA as DerivedValue<State, A>)(state)
@@ -107,7 +107,7 @@ export function mapAttribute<State, A, B>(
   attr: Attribute<State, A>,
   map: (a: A) => B
 ): Attribute<State, B> {
-  if (typeof attr === 'undefined') {
+  if (attr === undefined) {
     return undefined
   } else if (typeof attr === 'function') {
     return (state: State) => {
@@ -153,7 +153,7 @@ export function attributeToHandler<
   attr: Attribute<State, Value>,
   handler: EventHandler<Value, Action, Ev, El>
 ): EventHandler<State, Action, Ev, El> | undefined {
-  if (typeof attr === 'undefined' || typeof handler === 'undefined') {
+  if (attr === undefined || handler === undefined) {
     return () => {
       return undefined
     }

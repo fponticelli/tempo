@@ -64,7 +64,7 @@ export function path<State, Action, Query = unknown, T = unknown>(
     PathProps<State, Action, Query, T>
   >(
     (_: State) =>
-      typeof props.args !== 'undefined' ? new Path(props.args) : new Path([]),
+      props.args !== undefined ? new Path(props.args) : new Path([]),
     props
   )
 }

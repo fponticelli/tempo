@@ -39,7 +39,7 @@ class UntilTemplate<OuterState, InnerState, Action, Query>
         let index = 0
         while (true) {
           const value = resolveAttribute(next)({ state, index })
-          if (typeof value === 'undefined') break
+          if (value === undefined) break
           if (index < currentLength) {
             // replace existing
             const filteredViews = childrenViews[index]

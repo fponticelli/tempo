@@ -663,7 +663,7 @@ export function encodeBase64(s: string): string {
     // @ts-ignore
     return Buffer.from(s).toString('base64')
     // @ts-ignore
-  } else if (typeof btoa !== undefined) {
+  } else if (typeof btoa !== 'undefined') {
     // @ts-ignore
     return btoa(s)
   } else {
@@ -677,7 +677,7 @@ export function decodeBase64(s: string): string {
     // @ts-ignore
     return Buffer.from(s, 'base64').toString('utf8')
     // @ts-ignore
-  } else if (typeof atob !== undefined) {
+  } else if (typeof atob !== 'undefined') {
     // @ts-ignore
     return atob(s)
   } else {

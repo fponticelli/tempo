@@ -155,7 +155,7 @@ let styleEl: HTMLElement | undefined
 let appliedToStyle = new Set()
 
 function includeStyle(doc: Document, cls: string, descs: RuleDescription[]) {
-  if (typeof styleEl === 'undefined') {
+  if (styleEl === undefined) {
     styleEl = doc.createElement('style')
     styleEl.textContent += '\n'
     doc.head.appendChild(styleEl)
@@ -207,7 +207,7 @@ function cursorToString(cursor: Cursor): string {
 
   const { url, x, y } = cursor
 
-  if (typeof x !== 'undefined' || typeof y !== 'undefined') {
+  if (x !== undefined || y !== undefined) {
     return `url(${url}) ${x ?? 0} ${y ?? 0}`
   } else {
     return `url(${url})`
@@ -219,8 +219,7 @@ function borderRadiusToString(b: BorderRadius): string {
     BorderRadiusNone: _ => 'none',
     BorderRadiusAll: b => {
       const v = [lengthToString(b.all.first)]
-      if (typeof b.all.second !== 'undefined')
-        v.push(lengthToString(b.all.second))
+      if (b.all.second !== undefined) v.push(lengthToString(b.all.second))
       return v.join(' / ')
     },
     BorderRadiusEach: b => {
@@ -234,10 +233,7 @@ function borderRadiusToString(b: BorderRadius): string {
           ' ' +
           lengthToString(bl.first)
       ]
-      if (
-        typeof (tl.second ?? tr.second ?? br.second ?? bl.second) !==
-        'undefined'
-      ) {
+      if ((tl.second ?? tr.second ?? br.second ?? bl.second) !== undefined) {
         const tls = tl.second ?? tl.first
         const trs = tr.second ?? tr.first
         const bls = bl.second ?? bl.first
@@ -272,9 +268,9 @@ function oneTransitionToString(t: OneTransition) {
   return t.targets
     .map(target => {
       const buff = [transitionTargetToString(target)]
-      if (typeof t.duration !== 'undefined') buff.push(t.duration)
-      if (typeof t.timingFunction !== 'undefined') buff.push(t.timingFunction)
-      if (typeof t.delay !== 'undefined') buff.push(t.delay)
+      if (t.duration !== undefined) buff.push(t.duration)
+      if (t.timingFunction !== undefined) buff.push(t.timingFunction)
+      if (t.delay !== undefined) buff.push(t.delay)
       return buff.join(' ')
     })
     .join(', ')
@@ -290,7 +286,7 @@ function shadowToString(s: Shadow): string {
         spread && `${spread}px`,
         color && toCSS3(color)
       ]
-        .filter(f => typeof f !== 'undefined')
+        .filter(f => f !== undefined)
         .join(' '),
     InsetShadow: ({ x, y, blur, spread, color }) =>
       [
@@ -301,7 +297,7 @@ function shadowToString(s: Shadow): string {
         spread && `${spread}px`,
         color && toCSS3(color)
       ]
-        .filter(f => typeof f !== 'undefined')
+        .filter(f => f !== undefined)
         .join(' '),
     MultiShadow: ({ shadows }) => shadows.map(shadowToString).join(', '),
     NoShadow: () => 'none'
@@ -312,7 +308,7 @@ function textShadowToString(s: TextShadow): string {
   return matchKind(s, {
     OneTextShadow: ({ x, y, blur, color }) =>
       [`${x}px`, `${y}px`, blur ?? `${blur}px`, color && toCSS3(color)]
-        .filter(f => typeof f !== 'undefined')
+        .filter(f => f !== undefined)
         .join(' '),
     MultiTextShadow: ({ shadows }) => shadows.map(textShadowToString).join(', ')
   })
@@ -335,7 +331,7 @@ function gradientAngleToString(angle: GradientAngle): string {
 function stopToString(color: ColorStop | Color): string {
   if (color.kind === 'ColorStop') {
     const buff: string[] = [toCSS3(color.color)]
-    if (typeof color.length !== 'undefined') {
+    if (color.length !== undefined) {
       const length: Length | [Length, Length] = color.length!
       if (Array.isArray(length)) {
         buff.push(...length.map(lengthToString))
@@ -357,7 +353,7 @@ function linearGradientArg({
   stops: (ColorStop | Color)[]
 }): string {
   const buff = [] as string[]
-  if (typeof angle !== 'undefined') {
+  if (angle !== undefined) {
     buff.push(gradientAngleToString(angle))
   }
   buff.push(...stops.map(stopToString))
@@ -387,17 +383,17 @@ function applyBlockProps<State>(
   properties: ClassDescription[],
   styles: Record<string, string>
 ) {
-  if (typeof v.spacing !== 'undefined') {
+  if (v.spacing !== undefined) {
     properties.push(features.spacing)
     styles[`${prefix}sp`] = `${v.spacing}px`
   }
 
-  if (typeof v.background !== 'undefined') {
+  if (v.background !== undefined) {
     properties.push(features.background(prefix, pseudo))
     styles[`${prefix}bg`] = backgroundToString(v.background)
   }
 
-  if (typeof v.padding !== 'undefined') {
+  if (v.padding !== undefined) {
     properties.push(features.padding(prefix, pseudo))
     matchKind(v.padding, {
       PaddingAll: pad => (styles.p = `${pad.value}px`),
@@ -410,7 +406,7 @@ function applyBlockProps<State>(
     })
   }
 
-  if (typeof v.transition !== 'undefined') {
+  if (v.transition !== undefined) {
     properties.push(features.transition(prefix, pseudo))
     matchKind(v.transition, {
       Transition: t => (styles[`${prefix}t`] = oneTransitionToString(t)),
@@ -422,7 +418,7 @@ function applyBlockProps<State>(
     })
   }
 
-  if (typeof v.width !== 'undefined') {
+  if (v.width !== undefined) {
     properties.push(features.width(prefix, pseudo))
     matchKind(v.width, {
       SizeFill: s => (styles[`${prefix}w-f`] = String(s.ratio)),
@@ -432,7 +428,7 @@ function applyBlockProps<State>(
     })
   }
 
-  if (typeof v.height !== 'undefined') {
+  if (v.height !== undefined) {
     properties.push(features.height(prefix, pseudo))
     matchKind(v.height, {
       SizeFill: s => (styles[`${prefix}h-f`] = String(s.ratio)),
@@ -442,7 +438,7 @@ function applyBlockProps<State>(
     })
   }
 
-  if (typeof v.border !== 'undefined') {
+  if (v.border !== undefined) {
     properties.push(features.border(prefix, pseudo))
     styles[`${prefix}b-t`] = borderToString('top', v.border)
     styles[`${prefix}b-r`] = borderToString('right', v.border)
@@ -450,17 +446,17 @@ function applyBlockProps<State>(
     styles[`${prefix}b-l`] = borderToString('left', v.border)
   }
 
-  if (typeof v.borderRadius !== 'undefined') {
+  if (v.borderRadius !== undefined) {
     properties.push(features.borderRadius(prefix, pseudo))
     styles[`${prefix}br`] = borderRadiusToString(v.borderRadius)
   }
 
-  if (typeof v.alignament !== 'undefined') {
+  if (v.alignament !== undefined) {
     properties.push(features.alignSelf)
     styles[`${prefix}sa`] = v.alignament
   }
 
-  if (typeof v.shadow !== 'undefined') {
+  if (v.shadow !== undefined) {
     properties.push(features.boxShadow(prefix, pseudo))
     styles[`${prefix}bs`] = shadowToString(v.shadow)
   }
@@ -478,7 +474,7 @@ function applyControlProps<State>(
   properties: ClassDescription[],
   styles: Record<string, string>
 ) {
-  if (typeof v.focusedStyle !== 'undefined') {
+  if (v.focusedStyle !== undefined) {
     resolveAttribute(
       mapAttributes(v.focusedStyle, x => {
         applyBlockProps(`${prefix}F`, ':focus', x, properties, styles)
@@ -489,7 +485,7 @@ function applyControlProps<State>(
     )(state)
   }
 
-  if (typeof v.disabledStyle !== 'undefined') {
+  if (v.disabledStyle !== undefined) {
     resolveAttribute(
       mapAttributes(v.disabledStyle, x => {
         applyBlockProps(`${prefix}D`, ':disabled[class]', x, properties, styles)
@@ -525,11 +521,11 @@ function applyTextBlockProps<State>(
   properties: ClassDescription[],
   styles: Record<string, string>
 ) {
-  if (typeof v.lineHeight !== 'undefined') {
+  if (v.lineHeight !== undefined) {
     properties.push(features.lineHeight(prefix, pseudo))
     styles[`${prefix}lh`] = `${v.lineHeight}px`
   }
-  if (typeof v.textAlign !== 'undefined') {
+  if (v.textAlign !== undefined) {
     properties.push(features.textAlign(prefix, pseudo))
     styles[`${prefix}ta`] = mapTextAlign(v.textAlign)
   }
@@ -546,47 +542,47 @@ function applyTextProps<State>(
   properties: ClassDescription[],
   styles: Record<string, string>
 ) {
-  if (typeof v.fontSize !== 'undefined') {
+  if (v.fontSize !== undefined) {
     properties.push(features.fontSize(prefix, pseudo))
     styles[`${prefix}fs`] = `${v.fontSize}px`
   }
 
-  if (typeof v.textColor !== 'undefined') {
+  if (v.textColor !== undefined) {
     properties.push(features.textColor(prefix, pseudo))
     styles[`${prefix}tc`] = toCSS3(v.textColor)
   }
 
-  if (typeof v.textShadow !== 'undefined') {
+  if (v.textShadow !== undefined) {
     properties.push(features.textShadow(prefix, pseudo))
     styles[`${prefix}ts`] = textShadowToString(v.textShadow)
   }
 
-  if (typeof v.textTransform !== 'undefined') {
+  if (v.textTransform !== undefined) {
     properties.push(features.textTransform(prefix, pseudo))
     styles[`${prefix}tt`] = v.textTransform
   }
 
-  if (typeof v.fontFamily !== 'undefined') {
+  if (v.fontFamily !== undefined) {
     properties.push(features.fontFamily(prefix, pseudo))
     styles[`${prefix}ff`] = v.fontFamily
   }
 
-  if (typeof v.fontStyle !== 'undefined') {
+  if (v.fontStyle !== undefined) {
     properties.push(features.fontStyle(prefix, pseudo))
     styles[`${prefix}fst`] = v.fontStyle
   }
 
-  if (typeof v.fontWeight !== 'undefined') {
+  if (v.fontWeight !== undefined) {
     properties.push(features.fontWeight(prefix, pseudo))
     styles[`${prefix}fw`] = String(v.fontWeight)
   }
 
-  if (typeof v.letterSpacing !== 'undefined') {
+  if (v.letterSpacing !== undefined) {
     properties.push(features.letterSpacing(prefix, pseudo))
     styles[`${prefix}ls`] = String(v.letterSpacing)
   }
 
-  if (typeof v.wordSpacing !== 'undefined') {
+  if (v.wordSpacing !== undefined) {
     properties.push(features.wordSpacing(prefix, pseudo))
     styles[`${prefix}wsp`] = String(v.wordSpacing)
   }
@@ -604,7 +600,7 @@ function applyMouseProps<State>(
   properties: ClassDescription[],
   styles: Record<string, string>
 ) {
-  if (typeof v.hoverStyle !== 'undefined') {
+  if (v.hoverStyle !== undefined) {
     resolveAttribute(
       mapAttributes(v.hoverStyle, x => {
         applyBlockProps('H', ':hover', x, properties, styles)
@@ -614,7 +610,7 @@ function applyMouseProps<State>(
     )(state)
   }
 
-  if (typeof v.activeStyle !== 'undefined') {
+  if (v.activeStyle !== undefined) {
     resolveAttribute(
       mapAttributes(v.activeStyle, x => {
         applyBlockProps('A', ':active', x, properties, styles)
@@ -624,7 +620,7 @@ function applyMouseProps<State>(
     )(state)
   }
 
-  if (typeof v.focusWithinStyle !== 'undefined') {
+  if (v.focusWithinStyle !== undefined) {
     resolveAttribute(
       mapAttributes(v.focusWithinStyle, x => {
         applyBlockProps('FW', ':focus-within', x, properties, styles)
@@ -634,7 +630,7 @@ function applyMouseProps<State>(
     )(state)
   }
 
-  if (typeof v.cursor !== 'undefined') {
+  if (v.cursor !== undefined) {
     properties.push(features.cursor(prefix, pseudo))
     styles[`${prefix}cu`] = cursorToString(v.cursor)
   }
@@ -675,12 +671,12 @@ export function container<State, Action, Query = unknown, TScope = unknown>(
         const properties = [features.orientation[v.orientation ?? 'row']]
         const styles: Record<string, string> = {}
 
-        if (typeof v.distribution !== 'undefined') {
+        if (v.distribution !== undefined) {
           properties.push(features.justifyContent)
           styles[`d`] = v.distribution
         }
 
-        if (typeof v.alignament !== 'undefined') {
+        if (v.alignament !== undefined) {
           properties.push(features.alignItems)
           styles[`d`] = v.alignament
         }
@@ -854,7 +850,7 @@ export function control<State, Action, Query = unknown, TScope = unknown>(
         applyMouseProps('', '', state, v, properties, styles)
         applyControlProps('', '', state, v, properties, styles)
 
-        if (typeof v.placeholderStyle !== 'undefined') {
+        if (v.placeholderStyle !== undefined) {
           resolveAttribute(
             mapAttributes(v.placeholderStyle, x => {
               applyTextProps('PL', '::placeholder', x, properties, styles)
@@ -862,7 +858,7 @@ export function control<State, Action, Query = unknown, TScope = unknown>(
           )(state)
         }
 
-        if (typeof v.userSelect !== 'undefined') {
+        if (v.userSelect !== undefined) {
           properties.push(features.userSelect('', ''))
           styles[`us`] = v.userSelect
         }

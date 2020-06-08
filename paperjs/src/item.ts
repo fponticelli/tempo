@@ -110,7 +110,7 @@ export function createItem<State, Action, Query, I extends Item, T, Option>(
 
           anyItem[k] = (e: any) => {
             const action = attrf(state, e, item, ctx.project)
-            if (typeof action !== 'undefined') {
+            if (action !== undefined) {
               ctx.dispatch(action)
             }
           }
@@ -190,7 +190,7 @@ export function createItem<State, Action, Query, I extends Item, T, Option>(
       views: View<State, Query>[] | undefined
     ) => (query: Query) => {
       views?.forEach(view => view.request(query))
-      if (typeof props.request !== 'undefined') {
+      if (props.request !== undefined) {
         props.request(query, item, ctx, wrapper.value)
       }
     }

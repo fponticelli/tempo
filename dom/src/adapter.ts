@@ -72,11 +72,11 @@ class AdapterTemplate<OuterState, InnerState, OuterAction, InnerAction, Query>
           outerState: state,
           innerState
         })
-        if (typeof newState !== 'undefined') viewComponent.change(newState)
+        if (newState !== undefined) viewComponent.change(newState)
       },
       destroy: () => {
         viewComponent.destroy()
-        if (typeof this.dispatchPropagate !== 'undefined') {
+        if (this.dispatchPropagate !== undefined) {
           this.child.store.observable.off(this.dispatchPropagate)
         }
       },

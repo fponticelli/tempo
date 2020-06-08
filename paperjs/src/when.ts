@@ -38,25 +38,25 @@ class PaperWhenTemplate<State, Action, Query>
     const view = {
       change: (state: State) => {
         if (resolveAttribute(condition)(state)) {
-          if (typeof views === 'undefined') {
+          if (views === undefined) {
             // it has never been rendered before
             views = map(this.children, c => c.render(newCtx, state))
           } else {
             for (const view of views) view.change(state)
           }
-        } else if (typeof views !== 'undefined') {
+        } else if (views !== undefined) {
           for (const view of views) view.destroy()
           views = undefined
         }
       },
       destroy: () => {
         ref.remove()
-        if (typeof views !== 'undefined') {
+        if (views !== undefined) {
           for (const view of views) view.destroy()
         }
       },
       request: (query: Query) => {
-        if (typeof views !== 'undefined') {
+        if (views !== undefined) {
           for (const view of views) view.request(query)
         }
       }

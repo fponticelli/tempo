@@ -64,12 +64,12 @@ export function project<State, Action, Query>(
       scope.setup(el)
       scope.install(window)
       const active = resolveAttribute(props.active)(state)
-      if (typeof active === 'undefined' || active === true) {
+      if (active === undefined || active === true) {
         scope.activate()
       }
 
       const project = scope.project!
-      if (typeof active === 'undefined' || active === true) {
+      if (active === undefined || active === true) {
         project.activate()
       }
 
@@ -122,7 +122,7 @@ export function project<State, Action, Query>(
       ctx,
       scope: PaperLocal<State, Action, Query> | undefined
     ) => {
-      if (typeof scope !== undefined) {
+      if (scope !== undefined) {
         const { context, views } = scope!
         views.forEach(view => view.destroy())
         context.project.remove()
@@ -134,7 +134,7 @@ export function project<State, Action, Query>(
       ctx: DOMContext<Action>,
       scope: PaperLocal<State, Action, Query> | undefined
     ) => {
-      if (typeof scope !== undefined) {
+      if (scope !== undefined) {
         const { views } = scope!
         views.forEach(view => view.request(query))
         if (props.respond) {
