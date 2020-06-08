@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "uood",
+      "comment": "Add events for textField.",
+      "type": "patch"
+    }
+  ],
+  "packageName": "uood",
+  "email": "franco.ponticelli@gmail.com"
+}
