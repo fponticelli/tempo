@@ -12,11 +12,12 @@ limitations under the License.
 */
 
 import { Store } from 'tempo-store/lib/store'
-import { Component, component } from './component'
+import { component, ComponentTemplate } from './component'
 import { DOMContext } from './context'
 import { DOMChild } from './template'
 import { View } from 'tempo-core/lib/view'
 import { SimpleComponent } from './simple_component'
+import { Reducer } from 'tempo-store/lib/reducer'
 
 export type TempoView<State, Action, Query> = Readonly<{
   view: View<State, Query>
@@ -26,35 +27,37 @@ export type TempoView<State, Action, Query> = Readonly<{
 export const Tempo = {
   renderComponent<State, Action, Query = unknown>(options: {
     el?: HTMLElement
-    component: Component<State, Action, Query>
+    state: State
+    component: ComponentTemplate<State, Action, Query>
     document?: Document
   }): TempoView<State, Action, Query> {
-    const { el: maybeElement, component } = options
-    const { store } = component
+    const { el: maybeElement, component, state } = options
     const doc = options.document || document
     const el = maybeElement || doc.body
     const append = (node: Node) => el.appendChild(node)
     const view = component.render(
       new DOMContext(doc, append, el, () => {}),
-      store.property.get()
+      state
     )
 
     return {
       view,
-      store
+      store: view.store
     }
   },
 
   render<State, Action, Query = unknown>(options: {
     el?: HTMLElement
     template: DOMChild<State, Action, Query>
-    store: Store<State, Action>
+    state: State
+    reducer: Reducer<State, Action>
+    equal?: (a: State, b: State) => boolean
     document?: Document
     delayed?: boolean
   }): TempoView<State, Action, Query> {
-    const { el, store, document, template, delayed } = options
-    const comp = component({ store, delayed }, template)
-    return Tempo.renderComponent({ el, component: comp, document })
+    const { el, state, reducer, equal, document, template, delayed } = options
+    const comp = component({ reducer, equal, delayed }, template)
+    return Tempo.renderComponent({ el, component: comp, state, document })
   },
 
   renderSimple<State, Query = unknown>(options: {

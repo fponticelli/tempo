@@ -16,11 +16,7 @@ import { DOMTemplate, DOMChild } from './template'
 import { DOMContext } from './context'
 import { domChildToTemplate } from './utils/dom'
 import { map } from 'tempo-std/lib/arrays'
-
-export interface Component<State, Action, Query>
-  extends DOMTemplate<State, Action, Query> {
-  store: Store<State, Action>
-}
+import { View } from 'tempo-core/lib/view'
 
 export function makeDelayedUpdate<State>(change: (state: State) => void) {
   let shouldRender = true
@@ -35,15 +31,24 @@ export function makeDelayedUpdate<State>(change: (state: State) => void) {
   }
 }
 
-class ComponentTemplate<State, Action, Query>
-  implements Component<State, Action, Query> {
+export interface ComponentView<State, Action, Query>
+  extends View<State, Query> {
+  store: Store<State, Action>
+}
+
+export class ComponentTemplate<State, Action, Query>
+  implements DOMTemplate<State, Action, Query> {
   constructor(
-    readonly store: Store<State, Action>,
-    readonly children: DOMTemplate<State, Action, Query>[],
-    readonly delayed: boolean
+    readonly delayed: boolean,
+    readonly reducer: (state: State, action: Action) => State,
+    readonly equal: undefined | ((a: State, b: State) => boolean),
+    readonly children: DOMTemplate<State, Action, Query>[]
   ) {}
 
-  render(ctx: DOMContext<Action>, state: State) {
+  render(
+    ctx: DOMContext<Action>,
+    state: State
+  ): ComponentView<State, Action, Query> {
     let update: (state: State) => void
     if (this.delayed) {
       let shouldRender = true
@@ -61,14 +66,18 @@ class ComponentTemplate<State, Action, Query>
         view.change(state)
       }
     }
-    const { store } = this
+    const store = Store.ofState({
+      state,
+      reducer: this.reducer,
+      equal: this.equal
+    })
     const { property } = store
 
     property.observable.on(update)
     const innerDispatch = (action: Action) => {
       store.process(action)
     }
-    const newCtx = ctx.withDispatch(innerDispatch)
+    const newCtx = ctx.withInterceptDispatch(innerDispatch)
     const views = map(this.children, child =>
       child.render(newCtx, property.get())
     )
@@ -83,7 +92,8 @@ class ComponentTemplate<State, Action, Query>
       },
       request: (query: Query) => {
         for (const view of views) view.request(query)
-      }
+      },
+      store
     }
     property.set(state)
     return view
@@ -92,14 +102,16 @@ class ComponentTemplate<State, Action, Query>
 
 export function component<State, Action, Query = unknown>(
   props: {
-    store: Store<State, Action>
     delayed?: boolean
+    reducer: (state: State, action: Action) => State
+    equal?: (a: State, b: State) => boolean
   },
   ...children: DOMChild<State, Action, Query>[]
-): Component<State, Action, Query> {
+) {
   return new ComponentTemplate<State, Action, Query>(
-    props.store,
-    map(children, domChildToTemplate),
-    props.delayed || false
+    props.delayed || false,
+    props.reducer,
+    props.equal,
+    map(children, domChildToTemplate)
   )
 }

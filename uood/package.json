@@ -37,7 +37,6 @@
     "tempo-dom": "^0.23.0",
     "tempo-std": "^0.5.4",
     "tempo-colors": "^0.1.1",
-    "tempo-store": "^1.2.3",
     "tempo-ui": "^0.1.3"
   },
   "devDependencies": {

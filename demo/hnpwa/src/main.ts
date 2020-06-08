@@ -12,7 +12,6 @@ limitations under the License.
 */
 
 import { Tempo } from 'tempo-dom/lib/tempo'
-import { Store } from 'tempo-store/lib/store'
 import { template } from './templates/app'
 import { reducer } from './reducer'
 import { createState, Page } from './state'
@@ -23,18 +22,10 @@ import { getCurrentPath } from './config'
 
 const route = Route.fromUrl(getCurrentPath())
 
-const state = createState(
-  Route.root,
-  Page.loading
-)
-
-const store = Store.ofState({
-  state,
-  reducer
-})
+const state = createState(Route.root, Page.loading)
 
 document.body.innerHTML = ''
-Tempo.render({ store, template })
+const { store } = Tempo.render({ state, reducer, template })
 
 setTitle(state)
 
@@ -43,7 +34,7 @@ store.observable.on(middleware(store))
 
 store.process(Action.linkClicked(route))
 
-window.addEventListener('popstate', (event) => {
+window.addEventListener('popstate', event => {
   const route = Route.fromUrl(getCurrentPath())
   store.process(Action.linkClicked(route))
 })

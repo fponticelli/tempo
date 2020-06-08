@@ -12,7 +12,7 @@ limitations under the License.
 */
 
 import { View } from 'tempo-core/lib/view'
-import { Component } from './component'
+import { ComponentTemplate } from './component'
 import { DOMTemplate } from './template'
 import { DOMContext } from './context'
 import { Attribute, resolveAttribute } from './value'
@@ -24,6 +24,7 @@ class AdapterTemplate<OuterState, InnerState, OuterAction, InnerAction, Query>
     | ((state: InnerState, action: InnerAction) => void)
 
   constructor(
+    readonly bootstrapState: (outer: OuterState) => InnerState,
     readonly mergeStates: Attribute<
       { outerState: OuterState; innerState: InnerState },
       InnerState
@@ -31,14 +32,14 @@ class AdapterTemplate<OuterState, InnerState, OuterAction, InnerAction, Query>
     readonly propagate: (
       args: PropagateArg<OuterState, InnerState, OuterAction, InnerAction>
     ) => void,
-    readonly child: Component<InnerState, InnerAction, Query>
+    readonly child: ComponentTemplate<InnerState, InnerAction, Query>
   ) {}
 
   render(
     ctx: DOMContext<OuterAction>,
     outerState: OuterState
   ): View<OuterState, Query> {
-    const innerState = this.child.store.property.get()
+    const innerState = this.bootstrapState(outerState)
     const mergedState =
       resolveAttribute(this.mergeStates)({
         outerState,
@@ -52,22 +53,23 @@ class AdapterTemplate<OuterState, InnerState, OuterAction, InnerAction, Query>
       mergedState
     )
 
+    const store = viewComponent.store
+
     this.dispatchPropagate = (state: InnerState, action: InnerAction) => {
       this.propagate({
         action,
         innerState: state,
         outerState,
-        dispatchInner: (action: InnerAction) =>
-          this.child.store.process(action),
+        dispatchInner: (action: InnerAction) => store.process(action),
         dispatchOuter: ctx.dispatch
       })
     }
 
-    this.child.store.observable.on(this.dispatchPropagate)
+    store.observable.on(this.dispatchPropagate)
 
     return {
       change: (state: OuterState) => {
-        const innerState = this.child.store.property.get()
+        const innerState = store.property.get()
         const newState = resolveAttribute(this.mergeStates)({
           outerState: state,
           innerState
@@ -77,7 +79,7 @@ class AdapterTemplate<OuterState, InnerState, OuterAction, InnerAction, Query>
       destroy: () => {
         viewComponent.destroy()
         if (this.dispatchPropagate !== undefined) {
-          this.child.store.observable.off(this.dispatchPropagate)
+          store.observable.off(this.dispatchPropagate)
         }
       },
       request: (query: Query) => {
@@ -108,6 +110,7 @@ export function adapter<
   Query = unknown
 >(
   props: {
+    bootstrapState: (outer: OuterState) => InnerState
     mergeStates?: Attribute<
       {
         outerState: OuterState
@@ -119,9 +122,10 @@ export function adapter<
       args: PropagateArg<OuterState, InnerState, OuterAction, InnerAction>
     ) => void
   },
-  child: Component<InnerState, InnerAction, Query>
+  child: ComponentTemplate<InnerState, InnerAction, Query>
 ): DOMTemplate<OuterState, OuterAction, Query> {
   return new AdapterTemplate(
+    props.bootstrapState,
     props.mergeStates,
     props.propagate || (() => undefined),
     child
@@ -132,9 +136,10 @@ export function localAdapter<State, Action, Query = unknown>(
   props: {
     propagate?: (args: PropagateArg<State, State, Action, Action>) => void
   },
-  child: Component<State, Action, Query>
+  child: ComponentTemplate<State, Action, Query>
 ): DOMTemplate<State, Action, Query> {
   return new AdapterTemplate(
+    state => state,
     ({ outerState }) => outerState,
     props.propagate || (() => undefined),
     child

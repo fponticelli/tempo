@@ -19,7 +19,7 @@ dependencies:
   '@types/fs-extra': 9.0.1
   '@types/jest': 25.2.3
   '@types/jsdom': 16.2.3
-  '@types/node': 12.12.44
+  '@types/node': 12.12.45
   '@types/prettier': 2.0.1
   '@types/prismjs': 1.16.1
   '@types/showdown': 1.9.3
@@ -1502,20 +1502,20 @@ packages:
       integrity: sha512-iaIVzr+w2ZJ5HkidlZ3EJM8VTZb2MJLCjw3V+505yVts0gRC4UMvjw0d1HPtGqI/HQC/KdsYtayfzl+AXY2R8g==
   /@types/fs-extra/9.0.1:
     dependencies:
-      '@types/node': 12.12.44
+      '@types/node': 12.12.45
     dev: false
     resolution:
       integrity: sha512-B42Sxuaz09MhC3DDeW5kubRcQ5by4iuVQ0cRRWM2lggLzAa/KVom0Aft/208NgMvNQQZ86s5rVcqDdn/SH0/mg==
   /@types/glob/7.1.2:
     dependencies:
       '@types/minimatch': 3.0.3
-      '@types/node': 12.12.44
+      '@types/node': 12.12.45
     dev: false
     resolution:
       integrity: sha512-VgNIkxK+j7Nz5P7jvUZlRvhuPSmsEfS03b0alKcq5V/STUKAa3Plemsn5mrQUO7am6OErJ4rhGEGJbACclrtRA==
   /@types/graceful-fs/4.1.3:
     dependencies:
-      '@types/node': 12.12.44
+      '@types/node': 12.12.45
     dev: false
     resolution:
       integrity: sha512-AiHRaEB50LQg0pZmm659vNBb9f4SJ0qrAnteuzhSeAUcJKxoYgEnprg/83kppCnc2zvtCKbdZry1a5pVY3lOTQ==
@@ -1549,7 +1549,7 @@ packages:
       integrity: sha512-JXc1nK/tXHiDhV55dvfzqtmP4S3sy3T3ouV2tkViZgxY/zeUkcpQcQPGRlgF4KmWzWW5oiWYSZwtCB+2RsE4Fw==
   /@types/jsdom/16.2.3:
     dependencies:
-      '@types/node': 12.12.44
+      '@types/node': 12.12.45
       '@types/parse5': 5.0.3
       '@types/tough-cookie': 4.0.0
     dev: false
@@ -1563,10 +1563,10 @@ packages:
     dev: false
     resolution:
       integrity: sha512-tHq6qdbT9U1IRSGf14CL0pUlULksvY9OZ+5eEgl1N7t+OA3tGvNpxJCzuKQlsNgCVwbAs670L1vcVQi8j9HjnA==
-  /@types/node/12.12.44:
+  /@types/node/12.12.45:
     dev: false
     resolution:
-      integrity: sha512-jM6QVv0Sm5d3nW+nUD5jSzPcO6oPqboitSNcwgBay9hifVq/Rauq1PYnROnsmuw45JMBiTnsPAno0bKu2e2xrg==
+      integrity: sha512-9w50wqeS0qQH9bo1iIRcQhDXRxoDzyAqCL5oJG+Nuu7cAoe6omGo+YDE0spAGK5sPrdLDhQLbQxq0DnxyndPKA==
   /@types/normalize-package-data/2.4.0:
     dev: false
     resolution:
@@ -1589,7 +1589,7 @@ packages:
       integrity: sha512-1HcDas8SEj4z1Wc696tH56G8OlRaH/sqZOynNNB+HF0WOeXPaxTtbYzJY2oEfiUxjSKjhCKr+MvR7dCHcEelug==
   /@types/resolve/0.0.8:
     dependencies:
-      '@types/node': 12.12.44
+      '@types/node': 12.12.45
     dev: false
     resolution:
       integrity: sha512-auApPaJf3NPfe18hSoJkp8EbZzer2ISk7o8mCC3M9he/a04+gbMF97NkpD2S8riMGvm4BMRI59/SZQSaLTKpsQ==
@@ -1625,7 +1625,7 @@ packages:
       integrity: sha512-d6dIfpPbF+8B7WiCi2ELY7m0w1joD8cRW4ms88Emdb2w062NeEpbNCeWwVCgzLRpVG+5e74VFSg4rgJ2xXjEiQ==
   /@types/webpack-sources/1.4.0:
     dependencies:
-      '@types/node': 12.12.44
+      '@types/node': 12.12.45
       '@types/source-list-map': 0.1.2
       source-map: 0.7.3
     dev: false
@@ -1634,7 +1634,7 @@ packages:
   /@types/webpack/4.41.17:
     dependencies:
       '@types/anymatch': 1.3.1
-      '@types/node': 12.12.44
+      '@types/node': 12.12.45
       '@types/tapable': 1.0.5
       '@types/uglify-js': 3.9.2
       '@types/webpack-sources': 1.4.0
@@ -2488,7 +2488,7 @@ packages:
   /browserslist/4.12.0:
     dependencies:
       caniuse-lite: 1.0.30001079
-      electron-to-chromium: 1.3.464
+      electron-to-chromium: 1.3.465
       node-releases: 1.1.58
       pkg-up: 2.0.0
     dev: false
@@ -3871,10 +3871,10 @@ packages:
     requiresBuild: true
     resolution:
       integrity: sha512-7vmuyh5+kuUyJKePhQfRQBhXV5Ce+RnaeeQArKu1EAMpL3WbgMt5WG6uQZpEVvYSSsxMXRKOewtDk9RaTKXRlA==
-  /electron-to-chromium/1.3.464:
+  /electron-to-chromium/1.3.465:
     dev: false
     resolution:
-      integrity: sha512-Oo+0+CN9d2z6FToQW6Hwvi9ez09Y/usKwr0tsDsyg43a871zVJCi1nR0v03djLbRNcaCKjtrnVf2XJhTxEpPCg==
+      integrity: sha512-K/lUeT3NLAsJ5SHRDhK3/zd0tw7OUllYD8w+fTOXm6ljCPsp2qq+vMzxpLo8u1M27ZjZAjRbsA6rirvne2nAMQ==
   /elliptic/6.5.2:
     dependencies:
       bn.js: 4.11.9
@@ -4670,7 +4670,7 @@ packages:
       integrity: sha1-LANAXHU4w51+s3sxcCLjJfsBi/c=
   /gaze/1.1.3:
     dependencies:
-      globule: 1.3.1
+      globule: 1.3.2
     dev: false
     engines:
       node: '>= 4.0.0'
@@ -4840,7 +4840,7 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha1-9abXDoOV4hyFj7BInWTfAkJNUGw=
-  /globule/1.3.1:
+  /globule/1.3.2:
     dependencies:
       glob: 7.1.6
       lodash: 4.17.15
@@ -4849,7 +4849,7 @@ packages:
     engines:
       node: '>= 0.10'
     resolution:
-      integrity: sha512-OVyWOHgw29yosRHCHo7NncwR1hW5ew0W/UrvtwvjefVJeQ26q4/8r8FmPsSF1hJ93IgWkyv16pCTz6WblMzm/g==
+      integrity: sha512-7IDTQTIu2xzXkT+6mlluidnWo+BypnbSoEVVQCGfzqnl5Ik8d3e1d4wycb8Rj9tWW+Z39uPWsdlquqiqPCd/pA==
   /good-listener/1.2.2:
     dependencies:
       delegate: 3.2.0
@@ -9157,7 +9157,7 @@ packages:
   /rollup/1.32.1:
     dependencies:
       '@types/estree': 0.0.44
-      '@types/node': 12.12.44
+      '@types/node': 12.12.45
       acorn: 7.2.0
     dev: false
     hasBin: true
@@ -11492,7 +11492,7 @@ packages:
   'file:projects/tempo-colors.tgz_canvas@2.6.1':
     dependencies:
       '@types/jest': 25.2.3
-      '@types/node': 12.12.44
+      '@types/node': 12.12.45
       jest: 26.0.1_canvas@2.6.1
       prettier: 2.0.5
       ts-jest: 26.1.0_jest@26.0.1+typescript@3.9.5
@@ -11510,7 +11510,7 @@ packages:
   'file:projects/tempo-core.tgz_canvas@2.6.1':
     dependencies:
       '@types/jest': 25.2.3
-      '@types/node': 12.12.44
+      '@types/node': 12.12.45
       jest: 26.0.1_canvas@2.6.1
       prettier: 2.0.5
       ts-jest: 26.1.0_jest@26.0.1+typescript@3.9.5
@@ -11535,7 +11535,7 @@ packages:
     dev: false
     name: '@rush-temp/tempo-demo.benchmark'
     resolution:
-      integrity: sha512-adIHG4D+cZvtSLTiauAHZP7YyJXPFUF8jYB1pmHI9lCxK0tE03IgyMCoqgHY8AsJb1Uc+24ru6CmJvlfqftXfQ==
+      integrity: sha512-JBTj5uIKmFm/a/7qJliDK+MU0m9zMOpE/bRaG/UT6AmJFmCAXIKb7U4L8Fcnt++yzQUdLULYEbhynemf/PfOhw==
       tarball: 'file:projects/tempo-demo.benchmark.tgz'
     version: 0.0.0
   'file:projects/tempo-demo.hnpwa.tgz':
@@ -11552,7 +11552,7 @@ packages:
     dev: false
     name: '@rush-temp/tempo-demo.hnpwa'
     resolution:
-      integrity: sha512-HyGuEG73EesNDYR2yPbmcQWrpwKQyoovBMVBxwMpLRsoN6ekyItHRsbZ9+CO5VcEco2BNan7E1+tqSf+iBfklA==
+      integrity: sha512-K6UkK8nTTRD3vdy3QWeNTGRs62Qe5MJ0nlRCrt46SXYePT5PP3Ty0XocfAEiGKVAJl5kjTil+pRICB8gNnOScw==
       tarball: 'file:projects/tempo-demo.hnpwa.tgz'
     version: 0.0.0
   'file:projects/tempo-demo.readme.tgz':
@@ -11580,7 +11580,7 @@ packages:
     dev: false
     name: '@rush-temp/tempo-demo.todomvc'
     resolution:
-      integrity: sha512-DhlrpbryuMLy6Pq0hvax3qbvodARyBEZ9RotNdGRw1MPbWW7SwD9cqVM8zyWR9iud6amTpEqRhTkMTbBxloXhA==
+      integrity: sha512-GmguOyZa9HpmHQXjxXg5m2KAeL0mGM6SNB02AhM8KoVchU+Qa7crPZleqbzMw478IC5GiGzHkS4SEkBdmeURjw==
       tarball: 'file:projects/tempo-demo.todomvc.tgz'
     version: 0.0.0
   'file:projects/tempo-demo.ui.tgz_sass@1.26.8':
@@ -11606,7 +11606,7 @@ packages:
     peerDependencies:
       sass: '*'
     resolution:
-      integrity: sha512-jNqRnlYW1A332Le+Vnwc90VNlNANq24rfHu+rKXy2c9iRYYU9f3VcN1WO7+2KH+fypEvB+ljLv5VA36p3dNiUQ==
+      integrity: sha512-pAVIyX7BzKW3yK6egZAAQZZ+MRDSBZNjatX5iZThLUCkboJOIS9LaYvK0Lzz0iYcj9n4u4jjYwxKIgAlOYl2bw==
       tarball: 'file:projects/tempo-demo.ui.tgz'
     version: 0.0.0
   'file:projects/tempo-dom.tgz':
@@ -11647,7 +11647,7 @@ packages:
   'file:projects/tempo-std.tgz_canvas@2.6.1':
     dependencies:
       '@types/jest': 25.2.3
-      '@types/node': 12.12.44
+      '@types/node': 12.12.45
       jest: 26.0.1_canvas@2.6.1
       prettier: 2.0.5
       ts-jest: 26.1.0_jest@26.0.1+typescript@3.9.5
@@ -11697,7 +11697,7 @@ packages:
     dev: false
     name: '@rush-temp/tempo-template-dom'
     resolution:
-      integrity: sha512-QZTI/X+/x6GGIIkP9BJvDylR7D8SssicSrWbZVXs97U1ol76JNnDCVS2Z++RGiJNrn6lQIPZRv3foPeYHsDo7Q==
+      integrity: sha512-9mgH3eprKWIr7CVNzNEL7gAz/SJwQ8r9KEdoarOLElSN9OID0mBhxROpnYl8DfiyAR6cqUtMBpa3u7aCrd9Dew==
       tarball: 'file:projects/tempo-template-dom.tgz'
     version: 0.0.0
   'file:projects/tempo-tools.docs.tgz_sass@1.26.8':
@@ -11705,7 +11705,7 @@ packages:
       '@types/doctrine': 0.0.3
       '@types/fs-extra': 9.0.1
       '@types/jsdom': 16.2.3
-      '@types/node': 12.12.44
+      '@types/node': 12.12.45
       '@types/prettier': 2.0.1
       '@types/prismjs': 1.16.1
       '@types/showdown': 1.9.3
@@ -11767,7 +11767,7 @@ packages:
     peerDependencies:
       canvas: '*'
     resolution:
-      integrity: sha512-n0sfMahYpLRjirb1fGjjcb4Izu3rinJAlG88oI3Wu8tHUSrH89OuZFRfxCMKxV24npb2GcCZ9wrEJTA0KCOD8w==
+      integrity: sha512-xOBryIUviaGndnUzke8WqV4egzjn4qfRDtIU3dbOfyrC6hvZBzrGiHwl7Oi148FqQ00GgAAAE0TKuQkVw/bppQ==
       tarball: 'file:projects/tempo-ui.tgz'
     version: 0.0.0
   'file:projects/uood.tgz_canvas@2.6.1':
@@ -11790,7 +11790,7 @@ packages:
     peerDependencies:
       canvas: '*'
     resolution:
-      integrity: sha512-cLJ64Lyg6REtImZWDvOE+pLMZYlWHXciyzlohxzdNpM2FldpZJyV5Nt7D7VyiKT3pFResiVadyAu1xfiLz+EEA==
+      integrity: sha512-MoH7T1PyE78tgqvk5PUzkMwafTufrWHyg64vMPW2prt4hO6VY9GJ3zXRY8eeA03x5H8xJu6IV7esXgGEVtACUQ==
       tarball: 'file:projects/uood.tgz'
     version: 0.0.0
 registry: ''

@@ -1,7 +1,6 @@
 import './style.sass'
 
 import { Tempo } from 'tempo-dom/lib/tempo'
-import { Store } from 'tempo-store/lib/store'
 import { makeState } from './state'
 import { reducer } from './reducer'
 import { template } from './templates/main'
@@ -14,9 +13,7 @@ import { isSuccess } from 'tempo-std/lib/async_result'
 const route = parseLocation()
 const state = makeState(route)
 
-const store = Store.ofState<State, Action>({ state, reducer })
-
-Tempo.render({ store, template })
+const { store } = Tempo.render({ state, reducer, template })
 
 store.observable.on(middleware(store))
 

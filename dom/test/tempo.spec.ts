@@ -15,26 +15,24 @@ import { createContext } from './common'
 import { Tempo } from '../src/tempo'
 import { component } from '../src/component'
 import { div } from '../src/html'
-import { Store } from 'tempo-store/lib/store'
-import { Property } from 'tempo-store/lib/property'
 
 describe('Tempo', () => {
   it('render', () => {
     const ctx = createContext()
-    const store = new Store(
-      new Property('hello'),
-      (state: string, action: string) => action
-    )
+    const reducer = (state: string, action: string) => action
+    const state = 'hello'
 
     const comp = component(
-      { store },
+      { reducer },
       div({}, a => a)
     )
-    const { view } = Tempo.renderComponent({
+    const { view, store } = Tempo.renderComponent({
       el: ctx.doc.body,
       component: comp,
-      document: ctx.doc
+      document: ctx.doc,
+      state
     })
+
     expect(ctx.doc.body.innerHTML).toEqual('<div>hello</div>')
     store.property.set('world')
     expect(ctx.doc.body.innerHTML).toEqual('<div>world</div>')
@@ -48,28 +46,28 @@ describe('Tempo', () => {
     const ctx = createContext()
     let result = ['', '']
 
-    const store = new Store(
-      new Property('hello'),
-      (state: string, action: string) => action.toUpperCase()
-    )
+    const state = 'hello'
+    const reducer = (state: string, action: string) => action.toUpperCase()
 
     const middleware = (s: string, a: string) => {
       result[0] = s
       result[1] = a
     }
 
-    store.observable.on(middleware)
-
     const comp = component(
-      { store },
+      { reducer },
       div({}, a => a)
     )
 
-    Tempo.renderComponent({
+    const { store } = Tempo.renderComponent({
       el: ctx.doc.body,
       component: comp,
-      document: ctx.doc
+      document: ctx.doc,
+      state
     })
+
+    store.observable.on(middleware)
+
     expect(result[0]).toEqual('')
     expect(result[1]).toEqual('')
     store.process('foo')

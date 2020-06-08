@@ -16,68 +16,76 @@ import { Tempo } from '../src/tempo'
 import { component } from '../src/component'
 import { portalWithSelector, headPortal, bodyPortal } from '../src/portal'
 import { span, style } from '../src/html'
-import { Store } from 'tempo-store/lib/store'
 
 describe('portal', () => {
   it('portalWithSelector', () => {
     const ctx = createContext()
     ctx.doc.body.innerHTML = '<div id="main"></div><div id="container"></div>'
-    const store = Store.ofState({
-      state: 'hello',
-      reducer: (_: string, a: string) => a
-    })
+
+    const state = 'hello'
+    const reducer = (_: string, a: string) => a
     const comp = component(
-      { store },
-      portalWithSelector({ selector: '#container' }, span({ attrs: { className: (s: string) => s } }))
+      { reducer },
+      portalWithSelector(
+        { selector: '#container' },
+        span({ attrs: { className: (s: string) => s } })
+      )
     )
-    const { view } = Tempo.renderComponent({
+    const { view, store } = Tempo.renderComponent({
       el: ctx.doc.getElementById('main')!,
       component: comp,
-      document: ctx.doc
+      document: ctx.doc,
+      state
     })
-    expect(ctx.doc.body.innerHTML).toEqual('<div id="main"></div><div id="container"><span class="hello"></span></div>')
+    expect(ctx.doc.body.innerHTML).toEqual(
+      '<div id="main"></div><div id="container"><span class="hello"></span></div>'
+    )
     store.process('foo')
-    expect(ctx.doc.body.innerHTML).toEqual('<div id="main"></div><div id="container"><span class="foo"></span></div>')
+    expect(ctx.doc.body.innerHTML).toEqual(
+      '<div id="main"></div><div id="container"><span class="foo"></span></div>'
+    )
     view.destroy()
-    expect(ctx.doc.body.innerHTML).toEqual('<div id="main"></div><div id="container"></div>')
+    expect(ctx.doc.body.innerHTML).toEqual(
+      '<div id="main"></div><div id="container"></div>'
+    )
   })
 
   it('portalWithSelector throws if element is not found', () => {
     const ctx = createContext()
     ctx.doc.body.innerHTML = '<div id="main"></div><div id="container"></div>'
-    const store = Store.ofState({
-      state: 'hello',
-      reducer: (_: string, a: string) => a
-    })
+    const state = 'hello'
+    const reducer = (_: string, a: string) => a
     const comp = component(
-      { store },
-      portalWithSelector({ selector: '#doesnotexist' }, span({ attrs: { className: (s: string) => s } }))
+      { reducer },
+      portalWithSelector(
+        { selector: '#doesnotexist' },
+        span({ attrs: { className: (s: string) => s } })
+      )
     )
     expect(() => {
       Tempo.renderComponent({
         el: ctx.doc.getElementById('main')!,
         component: comp,
-        document: ctx.doc
+        document: ctx.doc,
+        state
       })
     }).toThrow()
   })
 
   it('headPortal', () => {
     const ctx = createContext()
-    const store = Store.ofState({
-      state: 'background-color: red',
-      reducer: (_: string, a: string) => a
-    })
-    const comp = component(
-      { store },
-      headPortal(style({}, s => s))
-    )
-    const { view } = Tempo.renderComponent({
+    const state = 'background-color: red'
+    const reducer = (_: string, a: string) => a
+    const comp = component({ reducer }, headPortal(style({}, s => s)))
+    const { view, store } = Tempo.renderComponent({
       el: ctx.doc.body!,
       component: comp,
-      document: ctx.doc
+      document: ctx.doc,
+      state
     })
-    expect(ctx.doc.head.innerHTML).toEqual('<style>background-color: red</style>')
+    expect(ctx.doc.head.innerHTML).toEqual(
+      '<style>background-color: red</style>'
+    )
     store.process('color: black')
     expect(ctx.doc.head.innerHTML).toEqual('<style>color: black</style>')
     view.destroy()
@@ -86,20 +94,18 @@ describe('portal', () => {
 
   it('bodyPortal', () => {
     const ctx = createContext()
-    const store = Store.ofState({
-      state: 'background-color: red',
-      reducer: (_: string, a: string) => a
-    })
-    const comp = component(
-      { store },
-      bodyPortal(style({}, s => s))
-    )
-    const { view } = Tempo.renderComponent({
+    const state = 'background-color: red'
+    const reducer = (_: string, a: string) => a
+    const comp = component({ reducer }, bodyPortal(style({}, s => s)))
+    const { view, store } = Tempo.renderComponent({
       el: ctx.doc.body!,
       component: comp,
-      document: ctx.doc
+      document: ctx.doc,
+      state
     })
-    expect(ctx.doc.body.innerHTML).toEqual('<style>background-color: red</style>')
+    expect(ctx.doc.body.innerHTML).toEqual(
+      '<style>background-color: red</style>'
+    )
     store.process('color: black')
     expect(ctx.doc.body.innerHTML).toEqual('<style>color: black</style>')
     view.destroy()

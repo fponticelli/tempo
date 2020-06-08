@@ -16,7 +16,6 @@ import { button } from 'uood/lib/button'
 import { textField } from 'uood/lib/text_field'
 import { container } from 'tempo-ui/lib/ui'
 import { resetStyles } from 'tempo-ui/lib/reset'
-import { Store } from 'tempo-store/lib/store'
 import { Size } from 'tempo-ui/lib/ui_attributes'
 import { Theme } from 'uood/lib/theme'
 import { card } from 'uood/lib/card'
@@ -36,8 +35,6 @@ type State = {}
 const reducer = (state: State, action: Action): State => state
 
 const state: State = {}
-
-const store = Store.ofState({ state, reducer })
 
 const controls = (name: string, theme?: Theme<State>) =>
   stage<State, Action>(
@@ -87,4 +84,4 @@ const template = container<State, Action>(
 
 resetStyles()
 
-Tempo.render({ store, template })
+Tempo.render({ state, reducer, template })

@@ -15,24 +15,19 @@ import { createContext } from './common'
 import { div } from '../src/html'
 import { adapter, PropagateArg } from '../src/adapter'
 import { component } from '../src/component'
-import { Store } from 'tempo-store/lib/store'
 
 describe('adapter', () => {
   it('noOptions', () => {
     type InnerState = { inner: string; outer: string }
 
     const ctx = createContext(() => {})
-    const store = Store.ofState({
-      state: { inner: 'in', outer: 'out' },
-      reducer: (state: InnerState) => {
-        return state
-      }
-    })
-
+    const reducer = (state: InnerState) => state
     const template = adapter(
-      {},
+      {
+        bootstrapState: outer => ({ inner: 'in', outer: 'out' })
+      },
       component(
-        { store },
+        { reducer },
         'inner: ',
         s => s.inner,
         ', outer: ',
@@ -51,15 +46,11 @@ describe('adapter', () => {
     type OuterState = { outer: string }
     type InnerState = { inner: string; outer: string }
 
+    const reducer = (state: InnerState) => state
     const ctx = createContext(() => {})
-    const store = Store.ofState({
-      state: { inner: 'in', outer: '' },
-      reducer: (state: InnerState) => {
-        return state
-      }
-    })
     const template = adapter(
       {
+        bootstrapState: () => ({ inner: 'in', outer: '' }),
         mergeStates: ({
           outerState,
           innerState
@@ -71,7 +62,7 @@ describe('adapter', () => {
         }
       },
       component(
-        { store },
+        { reducer },
         'inner: ',
         s => s.inner,
         ', outer: ',
@@ -86,21 +77,18 @@ describe('adapter', () => {
 
   // TODO this test is almost impossible to follow and understand
   it('propagate', () => {
-    const state = ['inner-state'] as string[]
-    const store = Store.ofState<string[], string>({
-      state,
-      reducer: (s, a) => {
-        if (a === 'inner-action') {
-          didCallInnerDispatcher = true
-          return s.concat([a])
-        } else {
-          return s.concat([a])
-        }
+    // const state = ['inner-state'] as string[]
+    const reducer = (s: string[], a: string) => {
+      if (a === 'inner-action') {
+        didCallInnerDispatcher = true
+        return s.concat([a])
+      } else {
+        return s.concat([a])
       }
-    })
+    }
 
     const comp = component(
-      { store },
+      { reducer },
       div<string[], string>(
         { events: { click: (_s: string[], _: MouseEvent) => 'click' } },
         s => s.join(', ')
@@ -139,7 +127,14 @@ describe('adapter', () => {
       innerState: string[]
     }) => innerState.concat([outerState])
 
-    const adapt = adapter({ propagate, mergeStates }, comp)
+    const adapt = adapter(
+      {
+        bootstrapState: () => ['inner-state'],
+        propagate,
+        mergeStates
+      },
+      comp
+    )
 
     const ctx = createContext((a: string) => {
       expect(a).toBe('outer-action')
