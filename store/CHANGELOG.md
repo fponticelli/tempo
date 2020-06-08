@@ -1,6 +1,13 @@
 # Change Log - tempo-store
 
-This log was last generated on Sun, 07 Jun 2020 04:31:53 GMT and should not be manually modified.
+This log was last generated on Mon, 08 Jun 2020 23:05:13 GMT and should not be manually modified.
+
+## 1.2.4
+Mon, 08 Jun 2020 23:05:13 GMT
+
+### Patches
+
+- Update depend
 
 ## 1.2.3
 Sun, 07 Jun 2020 04:31:53 GMT

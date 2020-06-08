@@ -1,6 +1,13 @@
 # Change Log - uood
 
-This log was last generated on Mon, 08 Jun 2020 02:51:47 GMT and should not be manually modified.
+This log was last generated on Mon, 08 Jun 2020 23:05:13 GMT and should not be manually modified.
+
+## 0.1.7
+Mon, 08 Jun 2020 23:05:13 GMT
+
+### Patches
+
+- Update depend
 
 ## 0.1.6
 Mon, 08 Jun 2020 02:51:47 GMT

@@ -2,6 +2,23 @@
   "name": "tempo-colors",
   "entries": [
     {
+      "version": "0.1.2",
+      "tag": "tempo-colors_v0.1.2",
+      "date": "Mon, 08 Jun 2020 23:05:13 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Update dependencies."
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"tempo-std\" from `^0.5.4` to `^0.5.5`"
+          }
+        ]
+      }
+    },
+    {
       "version": "0.1.1",
       "tag": "tempo-colors_v0.1.1",
       "date": "Sat, 06 Jun 2020 17:17:05 GMT",

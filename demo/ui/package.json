@@ -19,12 +19,12 @@
   ],
   "dependencies": {
     "acorn": "^7.2.0",
-    "tempo-std": "^0.5.4",
-    "tempo-core": "^1.7.0",
-    "tempo-colors": "^0.1.1",
-    "tempo-dom": "^0.23.0",
-    "tempo-ui": "^0.1.3",
-    "uood": "^0.1.6"
+    "tempo-std": "^0.5.5",
+    "tempo-core": "^1.7.1",
+    "tempo-colors": "^0.1.2",
+    "tempo-dom": "^0.24.0",
+    "tempo-ui": "^0.1.4",
+    "uood": "^0.1.7"
   },
   "devDependencies": {
     "babel-types": "^6.26.0",

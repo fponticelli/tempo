@@ -1,6 +1,17 @@
 # Change Log - tempo-dom
 
-This log was last generated on Sun, 07 Jun 2020 23:32:43 GMT and should not be manually modified.
+This log was last generated on Mon, 08 Jun 2020 23:05:13 GMT and should not be manually modified.
+
+## 0.24.0
+Mon, 08 Jun 2020 23:05:13 GMT
+
+### Minor changes
+
+- Encapsulate Store into Component lifecycle. Makes a cleaner and easier to reason API.
+
+### Patches
+
+- Add localAdapter.
 
 ## 0.23.0
 Sun, 07 Jun 2020 23:32:43 GMT
