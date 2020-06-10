@@ -1,3 +1,5 @@
+// https://fonts.google.com/specimen/Work+Sans?sidebar.open&selection.family=Work+Sans#standard-styles
+
 import {
   Padding,
   Size,
@@ -9,7 +11,8 @@ import {
   Transition,
   Shadow,
   TextTransform,
-  FontWeight
+  FontWeight,
+  TextShadow
 } from 'tempo-ui/lib/ui_attributes'
 import { Attribute } from 'tempo-dom/lib/value'
 import { Color } from 'tempo-colors/lib/color'
@@ -87,5 +90,24 @@ export interface Theme<State> {
     focusedStyle?: SubStyle<State>
     hoverStyle?: SubStyle<State>
     placeholderStyle?: ElTextProperties<State>
+  }
+  headline?: (
+    level: 1 | 2 | 3 | 4 | 5 | 6
+  ) => {
+    padding?: Attribute<State, Padding>
+    borderRadius?: Attribute<State, BorderRadius>
+    background?: Attribute<State, Background>
+    spacing?: Attribute<State, number>
+    border?: Attribute<State, Border>
+    shadow?: Attribute<State, Shadow>
+    textTransform?: Attribute<State, TextTransform>
+    fontFamily?: Attribute<State, string>
+    fontWeight?: Attribute<State, FontWeight>
+    fontSize?: Attribute<State, number>
+    textColor?: Attribute<State, Color>
+    textAlign?: Attribute<State, TextAlign>
+    textShadow?: Attribute<State, TextShadow>
+    transition?: Attribute<State, Transition>
+    lineHeight?: Attribute<State, number>
   }
 }

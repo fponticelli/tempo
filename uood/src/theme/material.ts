@@ -238,6 +238,40 @@ export function make<State>(options: ThemeOptions<State> = {}): Theme<State> {
       placeholderStyle: {
         textColor: ofRGBA(0, 0, 0, 255 * 0.6)
       }
+    },
+    headline: (level: 1 | 2 | 3 | 4 | 5 | 6) => {
+      switch (level) {
+        case 1:
+          return {
+            fontSize: 24,
+            lineHeight: 30
+          }
+        case 2:
+          return {
+            fontSize: 22,
+            lineHeight: 28
+          }
+        case 3:
+          return {
+            fontSize: 20,
+            lineHeight: 26
+          }
+        case 4:
+          return {
+            fontSize: 18,
+            lineHeight: 24
+          }
+        case 5:
+          return {
+            fontSize: 16,
+            lineHeight: 22
+          }
+        case 6:
+          return {
+            fontSize: 14,
+            lineHeight: 20
+          }
+      }
     }
   }
 }

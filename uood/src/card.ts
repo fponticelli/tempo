@@ -18,7 +18,13 @@ import { DOMChild } from 'tempo-dom/lib/template'
 import { when } from 'tempo-dom/lib/when'
 import { subStyle } from './button'
 import { Attribute, mapAttribute } from 'tempo-dom/lib/value'
-import { Size, Distribution, Orientation } from 'tempo-ui/lib/ui_attributes'
+import {
+  Size,
+  Distribution,
+  Orientation,
+  Padding
+} from 'tempo-ui/lib/ui_attributes'
+import { headline } from './headline'
 
 export type CardHeader<State, Action, Query> = {
   headerText?: DOMChild<State, Action, Query>
@@ -92,7 +98,16 @@ export function card<State, Action, Query = unknown, T = unknown>(
   if (props.header !== undefined) {
     const left = []
     if (props.header?.thumbnail !== undefined) {
-      left.push(wrap(props.header?.thumbnail, c => block({}, c)))
+      left.push(
+        wrap(props.header?.thumbnail, c =>
+          block(
+            {
+              padding: Padding.each(0, 0, 0, 16)
+            },
+            c
+          )
+        )
+      )
     }
     if (
       props.header?.headerText !== undefined ||
@@ -100,16 +115,26 @@ export function card<State, Action, Query = unknown, T = unknown>(
     ) {
       const headerTitles = []
       if (props.header?.headerText !== undefined) {
-        headerTitles.push(wrap(props.header?.headerText, c => block({}, c)))
+        headerTitles.push(
+          wrap(props.header?.headerText, c =>
+            headline({ theme: props.theme, level: 3 }, c)
+          )
+        )
       }
       if (props.header?.subhead !== undefined) {
-        headerTitles.push(wrap(props.header?.subhead, c => block({}, c)))
+        headerTitles.push(
+          wrap(props.header?.subhead, c =>
+            headline({ theme: props.theme, level: 6 }, c)
+          )
+        )
       }
       left.push(
         container(
           {
-            orientation: 'col',
-            spacing: 10 // TODO
+            padding: Padding.each(16, 0, 16, 16), // TODO
+            orientation: 'col'
+            // verticalDistribution: 'center',
+            // spacing: 16 // TODO
           },
           ...headerTitles
         )
@@ -134,25 +159,27 @@ export function card<State, Action, Query = unknown, T = unknown>(
         container(
           {
             orientation: 'row',
-            spacing: 10, // TODO
+            spacing: 16, // TODO
             verticalDistribution: 'center',
             horizontalDistribution: 'space-between'
+            // padding: Padding.each(0, 0, 0, 16)
           },
           container(
             {
               orientation: 'row',
-              spacing: 10, // TODO
-              verticalDistribution: 'center',
-              horizontalDistribution: 'flex-start'
+              // spacing: 16, // TODO
+              verticalDistribution: 'center'
+              // horizontalDistribution: 'flex-start'
             },
             ...left
           ),
           container(
             {
               orientation: 'row',
-              spacing: 10, // TODO
-              verticalDistribution: 'center',
-              horizontalDistribution: 'flex-end'
+              padding: Padding.each(16, 16, 16, 0)
+              // spacing: 10, // TODO
+              // verticalDistribution: 'center',
+              // horizontalDistribution: 'flex-end'
             },
             ...right
           )
