@@ -1,6 +1,13 @@
 # Change Log - tempo-ui
 
-This log was last generated on Mon, 08 Jun 2020 23:05:13 GMT and should not be manually modified.
+This log was last generated on Wed, 10 Jun 2020 20:24:12 GMT and should not be manually modified.
+
+## 0.1.5
+Wed, 10 Jun 2020 20:24:12 GMT
+
+### Patches
+
+- Add support for overflow and make sure that some properties do not propagate to children elements.
 
 ## 0.1.4
 Mon, 08 Jun 2020 23:05:13 GMT

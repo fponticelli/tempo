@@ -1,6 +1,13 @@
 # Change Log - uood
 
-This log was last generated on Mon, 08 Jun 2020 23:05:13 GMT and should not be manually modified.
+This log was last generated on Wed, 10 Jun 2020 20:24:12 GMT and should not be manually modified.
+
+## 0.1.8
+Wed, 10 Jun 2020 20:24:12 GMT
+
+### Patches
+
+- Support media position in cards.
 
 ## 0.1.7
 Mon, 08 Jun 2020 23:05:13 GMT
