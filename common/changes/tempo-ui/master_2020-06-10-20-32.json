@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "tempo-ui",
+      "comment": "Fix horizontal distribution for column containers.",
+      "type": "patch"
+    }
+  ],
+  "packageName": "tempo-ui",
+  "email": "franco.ponticelli@gmail.com"
+}
