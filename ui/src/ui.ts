@@ -45,7 +45,8 @@ import {
   GradientAngle,
   ColorStop,
   TextTransform,
-  UserSelect
+  UserSelect,
+  Overflow
 } from './ui_attributes'
 import { matchKind } from 'tempo-std/lib/match'
 import { toCSS3, Color } from 'tempo-colors/lib/color'
@@ -75,6 +76,7 @@ export interface ElBlockProperties<State> {
   height?: Attribute<State, Size>
   shadow?: Attribute<State, Shadow>
   spacing?: Attribute<State, number>
+  overflow?: Attribute<State, Overflow>
 }
 
 export interface ElTextProperties<State> {
@@ -395,6 +397,12 @@ function applyBlockProps<State>(
   if (v.background !== undefined) {
     properties.push(features.background(prefix, pseudo))
     styles[`${prefix}bg`] = backgroundToString(v.background)
+  }
+
+  if (v.overflow !== undefined) {
+    properties.push(features.overflow(prefix, pseudo))
+    styles[`${prefix}oh`] = v.overflow.horizontal
+    styles[`${prefix}ov`] = v.overflow.vertical
   }
 
   if (v.padding !== undefined) {

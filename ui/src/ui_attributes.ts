@@ -619,9 +619,29 @@ export const UserSelect = {
   none: 'none'
 }
 
+export type OverflowValue =
+  | 'visible'
+  | 'hidden'
+  | 'scroll'
+  | 'auto'
+  | 'inherit'
+  | 'initial'
+  | 'unset'
+
+export type Overflow = {
+  kind: 'Overflow'
+  horizontal: OverflowValue
+  vertical: OverflowValue
+}
+
+export const Overflow = {
+  make(horizontal: OverflowValue, vertical?: OverflowValue): Overflow {
+    if (vertical === undefined) vertical = horizontal
+    return { kind: 'Overflow', horizontal, vertical }
+  }
+}
+
 // TODO
-// - [ ] overflowHorizontal
-// - [ ] overflowVertical
 // - [ ] textDirection
 // - [ ] fontVariantLigatures
 // - [ ] fontVariantNumeric
