@@ -28,7 +28,7 @@ import {
 import { headline } from './headline'
 
 export type CardHeader<State, Action, Query> = {
-  headerText?: DOMChild<State, Action, Query>
+  title?: DOMChild<State, Action, Query>
   subhead?: DOMChild<State, Action, Query>
   thumbnail?: DOMChild<State, Action, Query>
   context?: DOMChild<State, Action, Query>
@@ -116,13 +116,13 @@ export function card<State, Action, Query = unknown, T = unknown>(
       )
     }
     if (
-      props.header?.headerText !== undefined ||
+      props.header?.title !== undefined ||
       props.header?.subhead !== undefined
     ) {
       const headerTitles = []
-      if (props.header?.headerText !== undefined) {
+      if (props.header?.title !== undefined) {
         headerTitles.push(
-          wrap(props.header?.headerText, c =>
+          wrap(props.header?.title, c =>
             headline({ theme: props.theme, level: 3 }, c)
           )
         )

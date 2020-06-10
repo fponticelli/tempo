@@ -43,7 +43,7 @@ const controls = (name: string, theme?: Theme<State>) =>
     card(
       {
         header: {
-          headerText: name,
+          title: name,
           context: 'C',
           subhead: 'subhead',
           thumbnail: 'T'
