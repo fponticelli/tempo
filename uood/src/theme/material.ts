@@ -47,6 +47,7 @@ export function make<State>(options: ThemeOptions<State> = {}): Theme<State> {
       background: card.background,
       transition: Transition.none,
       borderRadius: Radius.all(Length.px(4)),
+      width: Size.fixed(344),
       shadow: Shadow.multi(
         Shadow.drop({
           x: 0,

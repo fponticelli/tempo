@@ -84,10 +84,10 @@ export const features = {
       {
         selector: `.${prefix}p${pseudo}`,
         rules: [
-          `padding-top: var(--${prefix}p-t, var(--${prefix}p))`,
-          `padding-right: var(--${prefix}p-r, var(--${prefix}p))`,
-          `padding-bottom: var(--${prefix}p-b, var(--${prefix}p))`,
-          `padding-left: var(--${prefix}p-l, var(--${prefix}p))`
+          `padding-top: var(--${prefix}p-t)`,
+          `padding-right: var(--${prefix}p-r)`,
+          `padding-bottom: var(--${prefix}p-b)`,
+          `padding-left: var(--${prefix}p-l)`
         ]
       }
     ]
@@ -143,8 +143,8 @@ export const features = {
       {
         selector: `.${prefix}w${pseudo}`,
         rules: [
-          `min-width: var(--${prefix}w-mi, var(--${prefix}w))`,
-          `max-width: var(--${prefix}w-ma, var(--${prefix}w))`,
+          `min-width: var(--${prefix}w-mi)`,
+          `max-width: var(--${prefix}w-ma)`,
           `flex: var(--${prefix}w-f) var(--${prefix}w-f) 0`
         ]
       },
@@ -164,8 +164,8 @@ export const features = {
       {
         selector: `.${prefix}h${pseudo}`,
         rules: [
-          `min-height: var(--${prefix}h-mi, var(--${prefix}h))`,
-          `max-height: var(--${prefix}h-ma, var(--${prefix}h))`,
+          `min-height: var(--${prefix}h-mi)`,
+          `max-height: var(--${prefix}h-ma)`,
           `flex: var(--${prefix}h-f) var(--${prefix}h-f) 0`
         ]
       },
@@ -231,15 +231,6 @@ export const features = {
       }
     ]
   }),
-  justifyContent: {
-    cls: `d`,
-    desc: [
-      {
-        selector: `.d`,
-        rules: [`justify-content: var(--d)`]
-      }
-    ]
-  } as ClassDescription,
   spacing: {
     cls: `sp`,
     desc: [
@@ -259,14 +250,14 @@ export const features = {
         selector: `.c.sp > *:last-child`,
         rules: [`margin-bottom: 0`]
       },
-      {
-        selector: `.sp > p:last-child`,
-        rules: [`margin-bottom: 0`]
-      },
-      {
-        selector: `.sp > p`,
-        rules: [`margin-bottom: var(--sp)`]
-      },
+      // {
+      //   selector: `.sp > p:last-child`,
+      //   rules: [`margin-bottom: 0`]
+      // },
+      // {
+      //   selector: `.sp > .r`,
+      //   rules: [`margin-bottom: var(--sp)`]
+      // },
       {
         selector: `.ctrl`,
         rules: [`margin-right: var(--sp)`]
@@ -281,24 +272,96 @@ export const features = {
       }
     ]
   } as ClassDescription,
-  alignItems: {
-    cls: `a`,
+  horizontalDistribution: {
+    cls: `hd`,
     desc: [
       {
-        selector: `.a`,
-        rules: [`align-items: var(--a)`]
+        selector: `.r.hd`,
+        rules: [`justify-content: var(--hd)`]
+      },
+      {
+        selector: `.c.hd`,
+        rules: [`align-content: var(--hd)`]
       }
     ]
   } as ClassDescription,
-  alignSelf: {
-    cls: `sa`,
+  verticalDistribution: {
+    cls: `vd`,
     desc: [
       {
-        selector: `.sa`,
-        rules: [`align-self: var(--sa)`]
+        selector: `.r.vd`,
+        rules: [`align-items: var(--vd)`]
+      },
+      {
+        selector: `.c.vd`,
+        rules: [`justify-content: var(--vd)`]
       }
     ]
   } as ClassDescription,
+  selfHorizontalDistribution: {
+    cls: `shd`,
+    desc: [
+      {
+        selector: `.r > .shd`,
+        rules: [`justify-self: var(--shd)`]
+      },
+      {
+        selector: `.c > .shd`,
+        rules: [`align-self: var(--shd)`]
+      }
+    ]
+  } as ClassDescription,
+  selfVerticalDistribution: {
+    cls: `svd`,
+    desc: [
+      {
+        selector: `.r > .svd`,
+        rules: [`align-self: var(--svd)`]
+      },
+      {
+        selector: `.c > .svd`,
+        rules: [`justify-self: var(--svd)`]
+      }
+    ]
+  } as ClassDescription,
+
+  // alignItems: {
+  //   cls: `a`,
+  //   desc: [
+  //     {
+  //       selector: `.a`,
+  //       rules: [`align-content: var(--a)`]
+  //     }
+  //   ]
+  // } as ClassDescription,
+  // alignSelf: {
+  //   cls: `sa`,
+  //   desc: [
+  //     {
+  //       selector: `.sa`,
+  //       rules: [`align-self: var(--sa)`]
+  //     }
+  //   ]
+  // } as ClassDescription,
+
+  // justifyContent: {
+  //   cls: `d`,
+  //   desc: [
+  //     {
+  //       selector: `.d`,
+  //       rules: [`justify-content: var(--d)`]
+  //     }
+  //   ]
+  // } as ClassDescription,
+  // justifySelf: {
+  //   cls: `da`,
+  //   desc: [
+  //     {
+  //       selector: `.da`,
+  //       rules: [`justify-self: var(--da)`]
+  //     }
+  //   ]
+  // } as ClassDescription,
   boxShadow: (prefix: string, pseudo: string): ClassDescription => ({
     cls: `${prefix}bs`,
     desc: [

@@ -12,6 +12,7 @@ limitations under the License.
 */
 
 import { Tempo } from 'tempo-dom/lib/tempo'
+import { img } from 'tempo-dom/lib/html'
 import { button } from 'uood/lib/button'
 import { textField } from 'uood/lib/text_field'
 import { container } from 'tempo-ui/lib/ui'
@@ -41,8 +42,23 @@ const controls = (name: string, theme?: Theme<State>) =>
     { theme },
     card(
       {
-        theme,
-        header: name
+        header: {
+          headerText: name,
+          context: 'C',
+          subhead: 'subhead',
+          thumbnail: 'T'
+        },
+        media: {
+          content: img({
+            attrs: {
+              width: '100%',
+              src:
+                'https://www.cameraegg.org/wp-content/uploads/2015/06/canon-powershot-g3-x-sample-images-1.jpg'
+            }
+          })
+        },
+        footer: 'footer',
+        theme
       },
       textField({
         theme,

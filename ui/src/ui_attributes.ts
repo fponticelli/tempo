@@ -205,6 +205,7 @@ export type Size =
       kind: 'SizeMax'
       value: number
     }
+  | { kind: 'SizeBetween'; min: number; max: number }
 export const Size = {
   fixed: (value: number): Size => ({
     kind: 'SizeFixed',
@@ -221,6 +222,11 @@ export const Size = {
   max: (value: number): Size => ({
     kind: 'SizeMax',
     value
+  }),
+  between: (min: number, max: number): Size => ({
+    kind: 'SizeBetween',
+    min,
+    max
   })
 }
 
@@ -447,7 +453,7 @@ export const Distribution = {
   spaceBetween: 'space-between',
   spaceAround: 'space-around',
   spaceEvenly: 'space-evenly'
-}
+} as const
 
 export interface NoShadow {
   kind: 'NoShadow'

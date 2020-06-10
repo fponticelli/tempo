@@ -24,7 +24,7 @@ export function make<State>(options: ThemeOptions<State> = {}): Theme<State> {
     medium: 8
   }
   const stage = {
-    background: Background.rgb(248, 248, 248)
+    background: Background.rgb(240, 240, 240)
   }
   const card = {
     background: Background.rgb(255, 255, 255)
@@ -40,7 +40,8 @@ export function make<State>(options: ThemeOptions<State> = {}): Theme<State> {
       padding: padding.medium,
       spacing: spacing.medium,
       background: card.background,
-      transition: Transition.none
+      transition: Transition.none,
+      width: Size.between(240, 360)
       // border: Border.all(1, ofRGB(220, 220, 220))
     },
     button: {

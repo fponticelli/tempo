@@ -56,7 +56,8 @@ export function make<State>(options: ThemeOptions<State> = {}): Theme<State> {
       background: card.background,
       border: Border.all(1, ofRGB(219, 220, 221)),
       borderRadius: Radius.all(Length.px(3)),
-      transition: Transition.none
+      transition: Transition.none,
+      width: Size.between(280, 400)
     },
     button: {
       fontSize: 14,

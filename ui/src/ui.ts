@@ -56,8 +56,13 @@ export interface ElProperties {
 
 export interface ElContainerProperties<State> {
   orientation?: Attribute<State, Orientation>
-  distribution?: Attribute<State, Distribution>
-  alignament?: Attribute<State, Distribution>
+  horizontalDistribution?: Attribute<State, Distribution>
+  verticalDistribution?: Attribute<State, Distribution>
+}
+
+export interface ElSelfAlignProperties<State> {
+  selfVerticalDistribution?: Attribute<State, Distribution>
+  selfHorizontalDistribution?: Attribute<State, Distribution>
 }
 
 export interface ElBlockProperties<State> {
@@ -68,7 +73,6 @@ export interface ElBlockProperties<State> {
   transition?: Attribute<State, Transition>
   width?: Attribute<State, Size>
   height?: Attribute<State, Size>
-  alignament?: Attribute<State, Distribution>
   shadow?: Attribute<State, Shadow>
   spacing?: Attribute<State, number>
 }
@@ -396,7 +400,12 @@ function applyBlockProps<State>(
   if (v.padding !== undefined) {
     properties.push(features.padding(prefix, pseudo))
     matchKind(v.padding, {
-      PaddingAll: pad => (styles.p = `${pad.value}px`),
+      PaddingAll: pad => {
+        styles[`${prefix}p-t`] = `${pad.value}px`
+        styles[`${prefix}p-r`] = `${pad.value}px`
+        styles[`${prefix}p-b`] = `${pad.value}px`
+        styles[`${prefix}p-l`] = `${pad.value}px`
+      },
       PaddingEach: pad => {
         styles[`${prefix}p-t`] = `${pad.top}px`
         styles[`${prefix}p-r`] = `${pad.right}px`
@@ -421,20 +430,72 @@ function applyBlockProps<State>(
   if (v.width !== undefined) {
     properties.push(features.width(prefix, pseudo))
     matchKind(v.width, {
-      SizeFill: s => (styles[`${prefix}w-f`] = String(s.ratio)),
-      SizeFixed: s => (styles[`${prefix}w`] = `${s.value}px`),
-      SizeMin: s => (styles[`${prefix}w-mi`] = `${s.value}px`),
-      SizeMax: s => (styles[`${prefix}w-ma`] = `${s.value}px`)
+      SizeFill: s => {
+        styles[`${prefix}w-f`] = String(s.ratio)
+
+        styles[`${prefix}w-mi`] = `reset`
+        styles[`${prefix}w-ma`] = `reset`
+      },
+      SizeFixed: s => {
+        styles[`${prefix}w-mi`] = `${s.value}px`
+        styles[`${prefix}w-ma`] = `${s.value}px`
+
+        styles[`${prefix}w-f`] = `reset`
+      },
+      SizeMin: s => {
+        styles[`${prefix}w-mi`] = `${s.value}px`
+
+        styles[`${prefix}w-f`] = `reset`
+        styles[`${prefix}w-ma`] = `reset`
+      },
+      SizeMax: s => {
+        styles[`${prefix}w-ma`] = `${s.value}px`
+
+        styles[`${prefix}w-mi`] = `reset`
+        styles[`${prefix}w-f`] = `reset`
+      },
+      SizeBetween: s => {
+        styles[`${prefix}w-mi`] = `${s.min}px`
+        styles[`${prefix}w-ma`] = `${s.max}px`
+
+        styles[`${prefix}w-f`] = `reset`
+      }
     })
   }
 
   if (v.height !== undefined) {
     properties.push(features.height(prefix, pseudo))
     matchKind(v.height, {
-      SizeFill: s => (styles[`${prefix}h-f`] = String(s.ratio)),
-      SizeFixed: s => (styles[`${prefix}h`] = `${s.value}px`),
-      SizeMin: s => (styles[`${prefix}h-mi`] = `${s.value}px`),
-      SizeMax: s => (styles[`${prefix}h-ma`] = `${s.value}px`)
+      SizeFill: s => {
+        styles[`${prefix}h-f`] = String(s.ratio)
+
+        styles[`${prefix}h-mi`] = `reset`
+        styles[`${prefix}h-ma`] = `reset`
+      },
+      SizeFixed: s => {
+        styles[`${prefix}h-mi`] = `${s.value}px`
+        styles[`${prefix}h-ma`] = `${s.value}px`
+
+        styles[`${prefix}h-f`] = `reset`
+      },
+      SizeMin: s => {
+        styles[`${prefix}h-mi`] = `${s.value}px`
+
+        styles[`${prefix}h-f`] = `reset`
+        styles[`${prefix}h-ma`] = `reset`
+      },
+      SizeMax: s => {
+        styles[`${prefix}h-ma`] = `${s.value}px`
+
+        styles[`${prefix}h-mi`] = `reset`
+        styles[`${prefix}h-f`] = `reset`
+      },
+      SizeBetween: s => {
+        styles[`${prefix}h-mi`] = `${s.min}px`
+        styles[`${prefix}h-ma`] = `${s.max}px`
+
+        styles[`${prefix}h-f`] = `reset`
+      }
     })
   }
 
@@ -451,14 +512,30 @@ function applyBlockProps<State>(
     styles[`${prefix}br`] = borderRadiusToString(v.borderRadius)
   }
 
-  if (v.alignament !== undefined) {
-    properties.push(features.alignSelf)
-    styles[`${prefix}sa`] = v.alignament
-  }
-
   if (v.shadow !== undefined) {
     properties.push(features.boxShadow(prefix, pseudo))
     styles[`${prefix}bs`] = shadowToString(v.shadow)
+  }
+}
+
+function applySelfAlignProps<State>(
+  prefix: string,
+  pseudo: string,
+  v: {
+    [K in keyof ElSelfAlignProperties<State>]: ValueOfAttribute<
+      ElSelfAlignProperties<State>[K]
+    >
+  },
+  properties: ClassDescription[],
+  styles: Record<string, string>
+) {
+  if (v.selfHorizontalDistribution !== undefined) {
+    properties.push(features.selfHorizontalDistribution)
+    styles[`${prefix}shd`] = v.selfHorizontalDistribution
+  }
+  if (v.selfVerticalDistribution !== undefined) {
+    properties.push(features.selfVerticalDistribution)
+    styles[`${prefix}svd`] = v.selfVerticalDistribution
   }
 }
 
@@ -650,6 +727,7 @@ function mapTextAlign(align: TextAlign): string {
 export function container<State, Action, Query = unknown, TScope = unknown>(
   props: ElProperties &
     ElBlockProperties<State> &
+    ElSelfAlignProperties<State> &
     ElTextProperties<State> &
     ElTextBlockProperties<State> &
     ElLifecycleProperties<State, Action, Query, TScope> &
@@ -671,17 +749,18 @@ export function container<State, Action, Query = unknown, TScope = unknown>(
         const properties = [features.orientation[v.orientation ?? 'row']]
         const styles: Record<string, string> = {}
 
-        if (v.distribution !== undefined) {
-          properties.push(features.justifyContent)
-          styles[`d`] = v.distribution
+        if (v.horizontalDistribution !== undefined) {
+          properties.push(features.horizontalDistribution)
+          styles[`hd`] = v.horizontalDistribution
         }
 
-        if (v.alignament !== undefined) {
-          properties.push(features.alignItems)
-          styles[`d`] = v.alignament
+        if (v.verticalDistribution !== undefined) {
+          properties.push(features.verticalDistribution)
+          styles[`vd`] = v.verticalDistribution
         }
 
         applyBlockProps('', '', v, properties, styles)
+        applySelfAlignProps('', '', v, properties, styles)
         applyTextBlockProps('', '', v, properties, styles)
         applyTextProps('', '', v, properties, styles)
         applyMouseProps('', '', state, v, properties, styles)
@@ -712,10 +791,10 @@ export function container<State, Action, Query = unknown, TScope = unknown>(
 export function block<State, Action, Query = unknown, TScope = unknown>(
   props: ElProperties &
     ElBlockProperties<State> &
+    ElSelfAlignProperties<State> &
     ElTextProperties<State> &
     ElTextBlockProperties<State> &
     ElLifecycleProperties<State, Action, Query, TScope> &
-    ElContainerProperties<State> &
     ElMouseProperties<State>,
   ...children: DOMChild<State, Action, Query>[]
 ) {
@@ -734,6 +813,7 @@ export function block<State, Action, Query = unknown, TScope = unknown>(
         const styles: Record<string, string> = {}
 
         applyBlockProps('', '', v, properties, styles)
+        applySelfAlignProps('', '', v, properties, styles)
         applyTextProps('', '', v, properties, styles)
         applyTextBlockProps('', '', v, properties, styles)
         applyMouseProps('', '', state, v, properties, styles)

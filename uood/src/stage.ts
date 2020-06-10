@@ -23,9 +23,9 @@ export function stage<State, Action, Query = unknown, T = unknown>(
     theme?: Theme<State>
     height?: Attribute<State, Size>
     width?: Attribute<State, Size>
-    alignament?: Attribute<State, Distribution>
+    verticalDistribution?: Attribute<State, Distribution>
     orientation?: Attribute<State, Orientation>
-    distribution?: Attribute<State, Distribution>
+    horizontalDistribution?: Attribute<State, Distribution>
   },
   ...children: DOMChild<State, Action, Query>[]
 ) {
@@ -35,8 +35,8 @@ export function stage<State, Action, Query = unknown, T = unknown>(
     {
       elementName: 'div',
       orientation: props.orientation ?? 'col',
-      alignament: props.alignament ?? 'center',
-      distribution: props.distribution ?? 'center',
+      verticalDistribution: props.verticalDistribution ?? 'center',
+      horizontalDistribution: props.horizontalDistribution ?? 'center',
       padding: stage?.padding ?? dStage?.padding,
       width: props.width ?? stage?.width ?? dStage?.width ?? Size.fill(1),
       height: props.height ?? stage?.height ?? dStage?.height ?? Size.fill(1),

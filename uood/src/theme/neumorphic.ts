@@ -133,7 +133,8 @@ export function make<State>(options: ThemeOptions<State> = {}): Theme<State> {
       background: card.background,
       transition: Transition.none,
       borderRadius: Radius.all(Length.px(24)),
-      shadow: Shadow.multi(...normalShadows)
+      shadow: Shadow.multi(...normalShadows),
+      width: Size.between(360, 500)
     },
     button: {
       fontSize: 20,

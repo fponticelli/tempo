@@ -46,6 +46,7 @@ export function make<State>(options: ThemeOptions<State> = {}): Theme<State> {
       background: card.background,
       border: card.border,
       borderRadius: card.borderRadius,
+      width: Size.fixed(240),
       transition: Transition.make(['border'], '0.25s'),
       hoverStyle: {
         border: card.borderHover
