@@ -272,7 +272,7 @@ export const features = {
       },
       {
         selector: `.c.hd`,
-        rules: [`align-content: var(--hd)`]
+        rules: [`align-items: var(--hd)`]
       }
     ]
   } as ClassDescription,
