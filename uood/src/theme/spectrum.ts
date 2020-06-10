@@ -50,7 +50,8 @@ export function make<State>(options: ThemeOptions<State> = {}): Theme<State> {
       transition: Transition.make(['border'], '0.25s'),
       hoverStyle: {
         border: card.borderHover
-      }
+      },
+      mediaLocation: 'top'
     },
     button: {
       textTransform: 'none',

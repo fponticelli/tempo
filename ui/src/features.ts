@@ -213,21 +213,12 @@ export const features = {
       }
     ]
   }),
-  overflowHorizontal: (prefix: string, pseudo: string): ClassDescription => ({
-    cls: `${prefix}oh`,
+  overflow: (prefix: string, pseudo: string): ClassDescription => ({
+    cls: `${prefix}o`,
     desc: [
       {
-        selector: `.${prefix}oh${pseudo}`,
-        rules: [`overflow-x: var(--${prefix}oh)`]
-      }
-    ]
-  }),
-  overflowVertical: (prefix: string, pseudo: string): ClassDescription => ({
-    cls: `${prefix}ov`,
-    desc: [
-      {
-        selector: `.${prefix}ov${pseudo}`,
-        rules: [`overflow-y: var(--${prefix}ov)`]
+        selector: `.${prefix}o${pseudo}`,
+        rules: [`overflow: var(--${prefix}oh) var(--${prefix}ov)`]
       }
     ]
   }),

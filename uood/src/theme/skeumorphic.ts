@@ -99,7 +99,8 @@ export function make<State>(options: ThemeOptions<State> = {}): Theme<State> {
       background: card.background,
       borderRadius: Radius.all(Length.px(3)),
       shadow: Shadow.multi(...pressedShadows),
-      width: Size.between(280, 360)
+      width: Size.between(280, 360),
+      mediaLocation: 'top'
     },
     button: {
       fontSize: 13,

@@ -22,6 +22,7 @@ import {
   Size,
   Distribution,
   Orientation,
+  Overflow,
   Padding
 } from 'tempo-ui/lib/ui_attributes'
 import { headline } from './headline'
@@ -90,8 +91,13 @@ export function card<State, Action, Query = unknown, T = unknown>(
   const { hoverStyle: dHoverStyle } = dCard ?? {}
 
   const blocks = []
+  const mediaLocation =
+    props.media?.location ??
+    card?.mediaLocation ??
+    dCard?.mediaLocation ??
+    'center'
 
-  if (props.media && props.media?.location === 'top') {
+  if (props.media && mediaLocation === 'top') {
     blocks.push(props.media.content)
   }
 
@@ -188,10 +194,7 @@ export function card<State, Action, Query = unknown, T = unknown>(
     }
   }
 
-  if (
-    props.media &&
-    (props.media?.location === 'center' || props.media?.location === undefined)
-  ) {
+  if (props.media && mediaLocation === 'center') {
     blocks.push(wrap(props.media.content, c => block({}, c)))
   }
 
@@ -212,7 +215,16 @@ export function card<State, Action, Query = unknown, T = unknown>(
   }
 
   if (props.footer !== undefined) {
-    blocks.push(wrap(props.footer, c => block({}, c)))
+    blocks.push(
+      wrap(props.footer, c =>
+        container(
+          {
+            padding: Padding.each(0, 16, 16, 16)
+          },
+          c
+        )
+      )
+    )
   }
 
   return container<State, Action, Query, T>(
@@ -225,7 +237,8 @@ export function card<State, Action, Query = unknown, T = unknown>(
       orientation: props.orientation ?? 'col',
       shadow: card?.shadow ?? dCard?.shadow,
       transition: card?.transition ?? dCard?.transition,
-      width: props.width ?? card?.width ?? dCard?.width
+      width: props.width ?? card?.width ?? dCard?.width,
+      overflow: Overflow.make('hidden')
     },
     ...blocks
   )

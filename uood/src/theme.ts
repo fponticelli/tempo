@@ -37,6 +37,7 @@ export interface Theme<State> {
     width?: Attribute<State, Size>
     transition?: Attribute<State, Transition>
     hoverStyle?: SubStyle<State>
+    mediaLocation?: 'top' | 'center'
   }
   stage?: {
     background?: Attribute<State, Background>

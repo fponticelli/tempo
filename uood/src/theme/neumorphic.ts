@@ -134,7 +134,8 @@ export function make<State>(options: ThemeOptions<State> = {}): Theme<State> {
       transition: Transition.none,
       borderRadius: Radius.all(Length.px(24)),
       shadow: Shadow.multi(...normalShadows),
-      width: Size.between(360, 500)
+      width: Size.between(360, 500),
+      mediaLocation: 'top'
     },
     button: {
       fontSize: 20,
