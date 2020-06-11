@@ -23,7 +23,11 @@ import {
   Distribution,
   Orientation,
   Overflow,
-  Padding
+  Padding,
+  Radius,
+  Background,
+  Length
+  // Padding
 } from 'tempo-ui/lib/ui_attributes'
 import { headline } from './headline'
 
@@ -90,6 +94,9 @@ export function card<State, Action, Query = unknown, T = unknown>(
   const { hoverStyle } = card ?? {}
   const { hoverStyle: dHoverStyle } = dCard ?? {}
 
+  const paddingSize = 16
+  const spacingSize = 12
+
   const blocks = []
   const mediaLocation =
     props.media?.location ??
@@ -106,9 +113,15 @@ export function card<State, Action, Query = unknown, T = unknown>(
     if (props.header?.thumbnail !== undefined) {
       left.push(
         wrap(props.header?.thumbnail, c =>
-          block(
+          container(
             {
-              padding: Padding.each(0, 0, 0, 16)
+              width: Size.fixed(46),
+              height: Size.fixed(46),
+              borderRadius: Radius.all(Length.percent(50)),
+              background: Background.hsla(0, 0, 0, 0.1),
+              verticalDistribution: 'center',
+              horizontalDistribution: 'center',
+              overflow: Overflow.make('hidden')
             },
             c
           )
@@ -137,10 +150,9 @@ export function card<State, Action, Query = unknown, T = unknown>(
       left.push(
         container(
           {
-            padding: Padding.each(16, 0, 16, 16), // TODO
+            // padding: Padding.each(16, 0, 16, 16), // TODO
             orientation: 'col'
             // verticalDistribution: 'center',
-            // spacing: 16 // TODO
           },
           ...headerTitles
         )
@@ -165,7 +177,13 @@ export function card<State, Action, Query = unknown, T = unknown>(
         container(
           {
             orientation: 'row',
-            spacing: 16, // TODO
+            padding: Padding.each(
+              props.media && mediaLocation === 'center' ? paddingSize : 0,
+              paddingSize,
+              0,
+              paddingSize
+            ), // or Padding.each(0, 16, 0, 16) when media is centered // TODO
+            spacing: spacingSize, // 16 TODO
             verticalDistribution: 'center',
             horizontalDistribution: 'space-between'
             // padding: Padding.each(0, 0, 0, 16)
@@ -174,15 +192,16 @@ export function card<State, Action, Query = unknown, T = unknown>(
             {
               orientation: 'row',
               // spacing: 16, // TODO
-              verticalDistribution: 'center'
+              verticalDistribution: 'center',
+              spacing: spacingSize // 16 TODO
               // horizontalDistribution: 'flex-start'
             },
             ...left
           ),
           container(
             {
-              orientation: 'row',
-              padding: Padding.each(16, 16, 16, 0)
+              orientation: 'row'
+              // padding: Padding.each(16, 16, 16, 0)
               // spacing: 10, // TODO
               // verticalDistribution: 'center',
               // horizontalDistribution: 'flex-end'
@@ -207,7 +226,13 @@ export function card<State, Action, Query = unknown, T = unknown>(
           orientation: props.orientation ?? 'col',
           verticalDistribution: props.verticalDistribution ?? 'center',
           horizontalDistribution: props.horizontalDistribution ?? 'center',
-          padding: card?.padding ?? dCard?.padding
+          padding: Padding.each(
+            props.media || props.header ? 0 : paddingSize,
+            paddingSize,
+            props.footer ? 0 : paddingSize,
+            paddingSize
+          )
+          // padding: card?.padding ?? dCard?.padding
         },
         ...children
       )
@@ -219,7 +244,7 @@ export function card<State, Action, Query = unknown, T = unknown>(
       wrap(props.footer, c =>
         container(
           {
-            padding: Padding.each(0, 16, 16, 16)
+            // padding: Padding.each(0, 16, 16, 16)
           },
           c
         )
@@ -238,7 +263,8 @@ export function card<State, Action, Query = unknown, T = unknown>(
       shadow: card?.shadow ?? dCard?.shadow,
       transition: card?.transition ?? dCard?.transition,
       width: props.width ?? card?.width ?? dCard?.width,
-      overflow: Overflow.make('hidden')
+      overflow: Overflow.make('hidden'),
+      spacing: spacingSize
     },
     ...blocks
   )

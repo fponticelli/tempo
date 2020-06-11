@@ -26,7 +26,6 @@ export function headline<State, Action, Query = unknown, T = unknown>(
   const level = props.level
   const headline = props.theme?.headline && props.theme?.headline(level)
   const dHeadline = Uood.theme?.headline && Uood.theme?.headline(level)
-  console.log(headline, dHeadline)
   return block<State, Action, Query, T>(
     {
       elementName: `h${level}`,
