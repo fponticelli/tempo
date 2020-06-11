@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "uood",
+      "comment": "Improved styling for cards.",
+      "type": "patch"
+    }
+  ],
+  "packageName": "uood",
+  "email": "franco.ponticelli@gmail.com"
+}
