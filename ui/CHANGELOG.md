@@ -1,6 +1,13 @@
 # Change Log - tempo-ui
 
-This log was last generated on Wed, 10 Jun 2020 20:24:12 GMT and should not be manually modified.
+This log was last generated on Thu, 11 Jun 2020 16:25:12 GMT and should not be manually modified.
+
+## 0.1.6
+Thu, 11 Jun 2020 16:25:12 GMT
+
+### Patches
+
+- Fix horizontal distribution for column containers.
 
 ## 0.1.5
 Wed, 10 Jun 2020 20:24:12 GMT

@@ -23,8 +23,8 @@
     "tempo-core": "^1.7.1",
     "tempo-colors": "^0.1.2",
     "tempo-dom": "^0.24.0",
-    "tempo-ui": "^0.1.5",
-    "uood": "^0.1.8"
+    "tempo-ui": "^0.1.6",
+    "uood": "^0.1.9"
   },
   "devDependencies": {
     "babel-types": "^6.26.0",

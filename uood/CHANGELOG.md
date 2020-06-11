@@ -1,6 +1,13 @@
 # Change Log - uood
 
-This log was last generated on Wed, 10 Jun 2020 20:24:12 GMT and should not be manually modified.
+This log was last generated on Thu, 11 Jun 2020 16:25:12 GMT and should not be manually modified.
+
+## 0.1.9
+Thu, 11 Jun 2020 16:25:12 GMT
+
+### Patches
+
+- Improved styling for cards.
 
 ## 0.1.8
 Wed, 10 Jun 2020 20:24:12 GMT
