@@ -74,18 +74,8 @@
       "shouldPublish": true
     },
     {
-      "packageName": "tempo-demo.ui",
-      "projectFolder": "./demo/ui",
-      "shouldPublish": false
-    },
-    {
       "packageName": "tempo-colors",
       "projectFolder": "./colors",
-      "shouldPublish": true
-    },
-    {
-      "packageName": "uood",
-      "projectFolder": "./uood",
       "shouldPublish": true
     },
     {
