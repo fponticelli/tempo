@@ -36,16 +36,13 @@ export type ValueOfAttribute<
 
 export type AttributeValue = string | number | boolean | string[]
 
-export interface Props<
+export interface Lifecycle<
   State,
   Action,
-  Query = unknown,
+  Query,
   El extends Element = Element,
   T = unknown
 > {
-  attrs?: Record<string, Attribute<State, AttributeValue>>
-  events?: Record<string, EventHandler<State, Action, any, El>>
-  styles?: Record<string, StyleAttribute<State, string>>
   afterrender?: (state: State, el: El, ctx: DOMContext<Action>) => T | undefined
   beforechange?: (
     state: State,
@@ -70,6 +67,18 @@ export interface Props<
     ctx: DOMContext<Action>,
     value: T | undefined
   ) => T | undefined
+}
+
+export interface Props<
+  State,
+  Action,
+  Query = unknown,
+  El extends Element = Element,
+  T = unknown
+> extends Lifecycle<State, Action, Query, El, T> {
+  attrs?: Record<string, Attribute<State, AttributeValue>>
+  events?: Record<string, EventHandler<State, Action, any, El>>
+  styles?: Record<string, StyleAttribute<State, string>>
 }
 
 export function applyAttributes<State, A, B, C>(

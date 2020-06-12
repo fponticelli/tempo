@@ -15,9 +15,10 @@ import { container, block } from 'tempo-ui/lib/ui'
 import { Theme } from './theme'
 import { Uood } from './uood'
 import { DOMChild } from 'tempo-dom/lib/template'
+import { hiddenWhenEmpty } from 'tempo-dom/lib/hidden_when_empty'
 import { when } from 'tempo-dom/lib/when'
 import { subStyle } from './button'
-import { Attribute, mapAttribute } from 'tempo-dom/lib/value'
+import { Attribute, mapAttribute, mapAttributes } from 'tempo-dom/lib/value'
 import {
   Size,
   Distribution,
@@ -43,61 +44,58 @@ export type CardMedia<State, Action, Query> = {
   content: DOMChild<State, Action, Query>
 }
 
-function childToArray<State, Action, Query>(
-  c:
-    | undefined
-    | DOMChild<State, Action, Query>
-    | DOMChild<State, Action, Query>[]
-): DOMChild<State, Action, Query>[] {
-  if (c === undefined) return []
-  if (Array.isArray(c)) return c
-  else return [c]
-}
+// function childToArray<State, Action, Query>(
+//   c:
+//     | undefined
+//     | DOMChild<State, Action, Query>
+//     | DOMChild<State, Action, Query>[]
+// ): DOMChild<State, Action, Query>[] {
+//   if (c === undefined) return []
+//   if (Array.isArray(c)) return c
+//   else return [c]
+// }
 
-function wrap<State, Action, Query>(
-  child:
-    | undefined
-    | DOMChild<State, Action, Query>
-    | DOMChild<State, Action, Query>[],
-  wrapper: (
-    ...c: DOMChild<State, Action, Query>[]
-  ) => DOMChild<State, Action, Query> = c => c
-): DOMChild<State, Action, Query> {
-  return when(
-    {
-      condition: mapAttribute(
-        child,
-        s => s !== undefined && (!Array.isArray(s) || s[0] !== undefined)
-      )
-    },
-    wrapper(...childToArray(child))
-  )
-}
+// function wrap<State, Action, Query>(
+//   child: undefined | DOMChild<State, Action, Query>,
+//   wrapper: (
+//     c: DOMChild<State, Action, Query>
+//   ) => DOMChild<State, Action, Query> = c => c
+// ): DOMChild<State, Action, Query> {
+//   return when(
+//     {
+//       condition: mapAttribute(child, s => {
+//         console.log(s)
+//         return s !== undefined
+//       })
+//     },
+//     wrapper(child)
+//   )
+// }
 
-export function card<State, Action, Query = unknown, T = unknown>(
-  props: {
-    theme?: Theme<State>
-    header?: CardHeader<State, Action, Query>
-    footer?: DOMChild<State, Action, Query>
-    media?: CardMedia<State, Action, Query>
+export function card<State, Action, Query = unknown, T = unknown>(props: {
+  theme?: Theme<State>
+  header?: CardHeader<State, Action, Query>
+  footer?: DOMChild<State, Action, Query>
+  media?: CardMedia<State, Action, Query>
+  content?: DOMChild<State, Action, Query>
 
-    height?: Attribute<State, Size>
-    width?: Attribute<State, Size>
-    verticalDistribution?: Attribute<State, Distribution>
-    orientation?: Attribute<State, Orientation>
-    horizontalDistribution?: Attribute<State, Distribution>
-  },
-  ...children: DOMChild<State, Action, Query>[]
-) {
+  height?: Attribute<State, Size>
+  width?: Attribute<State, Size>
+  verticalDistribution?: Attribute<State, Distribution>
+  orientation?: Attribute<State, Orientation>
+  horizontalDistribution?: Attribute<State, Distribution>
+}) {
   const card = props.theme?.card
   const dCard = Uood.theme?.card
   const { hoverStyle } = card ?? {}
   const { hoverStyle: dHoverStyle } = dCard ?? {}
 
-  const paddingSize = 16
-  const spacingSize = 12
+  const topPadding = 16
+  const bottomPadding = 16
+  const horizontalPadding = 16
+  const spacing = 12
 
-  const blocks = []
+  const blocks = [] as DOMChild<State, Action, Query>[]
   const mediaLocation =
     props.media?.location ??
     card?.mediaLocation ??
@@ -112,7 +110,8 @@ export function card<State, Action, Query = unknown, T = unknown>(
     const left = []
     if (props.header?.thumbnail !== undefined) {
       left.push(
-        wrap(props.header?.thumbnail, c =>
+        hiddenWhenEmpty(
+          {},
           container(
             {
               width: Size.fixed(46),
@@ -123,7 +122,7 @@ export function card<State, Action, Query = unknown, T = unknown>(
               horizontalDistribution: 'center',
               overflow: Overflow.make('hidden')
             },
-            c
+            props.header?.thumbnail
           )
         )
       )
@@ -135,15 +134,17 @@ export function card<State, Action, Query = unknown, T = unknown>(
       const headerTitles = []
       if (props.header?.title !== undefined) {
         headerTitles.push(
-          wrap(props.header?.title, c =>
-            headline({ theme: props.theme, level: 3 }, c)
+          hiddenWhenEmpty(
+            {},
+            headline({ theme: props.theme, level: 3 }, props.header?.title)
           )
         )
       }
       if (props.header?.subhead !== undefined) {
         headerTitles.push(
-          wrap(props.header?.subhead, c =>
-            headline({ theme: props.theme, level: 6 }, c)
+          hiddenWhenEmpty(
+            {},
+            headline({ theme: props.theme, level: 6 }, props.header?.subhead)
           )
         )
       }
@@ -162,51 +163,67 @@ export function card<State, Action, Query = unknown, T = unknown>(
     let right = []
     if (props.header?.context !== undefined) {
       right.push(
-        wrap(props.header?.context, c =>
+        hiddenWhenEmpty(
+          {},
           block(
             {
               selfHorizontalDistribution: 'flex-end'
             },
-            c
+            props.header?.context
           )
         )
       )
     }
     if (left.length > 0 || right.length > 0) {
       blocks.push(
-        container(
+        when(
           {
-            orientation: 'row',
-            padding: Padding.each(
-              props.media && mediaLocation === 'center' ? paddingSize : 0,
-              paddingSize,
-              0,
-              paddingSize
-            ), // or Padding.each(0, 16, 0, 16) when media is centered // TODO
-            spacing: spacingSize, // 16 TODO
-            verticalDistribution: 'center',
-            horizontalDistribution: 'space-between'
-            // padding: Padding.each(0, 0, 0, 16)
+            condition: mapAttributes(
+              {
+                thumbnail: props.header.thumbnail,
+                title: props.header.title,
+                subhead: props.header.subhead,
+                context: props.header.context
+              },
+              o => {
+                return (
+                  o.thumbnail !== undefined ||
+                  o.title !== undefined ||
+                  o.subhead !== undefined ||
+                  o.context !== undefined
+                )
+              }
+            )
           },
           container(
             {
               orientation: 'row',
-              // spacing: 16, // TODO
+              padding: Padding.each(0, horizontalPadding, 0, horizontalPadding), // or Padding.each(0, 16, 0, 16) when media is centered // TODO
+              spacing, // 16 TODO
               verticalDistribution: 'center',
-              spacing: spacingSize // 16 TODO
-              // horizontalDistribution: 'flex-start'
+              horizontalDistribution: 'space-between'
+              // padding: Padding.each(0, 0, 0, 16)
             },
-            ...left
-          ),
-          container(
-            {
-              orientation: 'row'
-              // padding: Padding.each(16, 16, 16, 0)
-              // spacing: 10, // TODO
-              // verticalDistribution: 'center',
-              // horizontalDistribution: 'flex-end'
-            },
-            ...right
+            container(
+              {
+                orientation: 'row',
+                // spacing: 16, // TODO
+                verticalDistribution: 'center',
+                spacing // 16 TODO
+                // horizontalDistribution: 'flex-start'
+              },
+              ...left
+            ),
+            container(
+              {
+                orientation: 'row'
+                // padding: Padding.each(16, 16, 16, 0)
+                // spacing: 10, // TODO
+                // verticalDistribution: 'center',
+                // horizontalDistribution: 'flex-end'
+              },
+              ...right
+            )
           )
         )
       )
@@ -214,39 +231,38 @@ export function card<State, Action, Query = unknown, T = unknown>(
   }
 
   if (props.media && mediaLocation === 'center') {
-    blocks.push(wrap(props.media.content, c => block({}, c)))
+    blocks.push(hiddenWhenEmpty({}, block({}, props.media.content)))
   }
 
-  if (children.length > 0) {
+  if (props.content !== undefined) {
     blocks.push(
-      container(
-        {
-          width: Size.fill(),
-          spacing: card?.spacing ?? dCard?.spacing,
-          orientation: props.orientation ?? 'col',
-          verticalDistribution: props.verticalDistribution ?? 'center',
-          horizontalDistribution: props.horizontalDistribution ?? 'center',
-          padding: Padding.each(
-            props.media || props.header ? 0 : paddingSize,
-            paddingSize,
-            props.footer ? 0 : paddingSize,
-            paddingSize
-          )
-          // padding: card?.padding ?? dCard?.padding
-        },
-        ...children
+      hiddenWhenEmpty(
+        {},
+        container(
+          {
+            width: Size.fill(),
+            spacing: card?.spacing ?? dCard?.spacing,
+            orientation: props.orientation ?? 'col',
+            verticalDistribution: props.verticalDistribution ?? 'center',
+            horizontalDistribution: props.horizontalDistribution ?? 'center',
+            padding: Padding.each(0, horizontalPadding, 0, horizontalPadding)
+            // padding: card?.padding ?? dCard?.padding
+          },
+          props.content
+        )
       )
     )
   }
 
   if (props.footer !== undefined) {
     blocks.push(
-      wrap(props.footer, c =>
+      hiddenWhenEmpty(
+        {},
         container(
           {
             // padding: Padding.each(0, 16, 16, 16)
           },
-          c
+          props.footer
         )
       )
     )
@@ -254,6 +270,33 @@ export function card<State, Action, Query = unknown, T = unknown>(
 
   return container<State, Action, Query, T>(
     {
+      padding: mapAttribute(
+        mapAttributes(
+          {
+            media: props.media,
+            header: props.header,
+            content: props.content,
+            footer: props.footer
+          },
+          o => {
+            return {
+              showPaddingTop:
+                o.media === undefined || mediaLocation === 'center',
+              showPaddingBottom:
+                o.media !== undefined &&
+                o.content === undefined &&
+                o.footer === undefined
+            }
+          }
+        ),
+        ({ showPaddingTop, showPaddingBottom }) =>
+          Padding.each(
+            showPaddingTop ? topPadding : 0,
+            0,
+            showPaddingBottom ? bottomPadding : 0,
+            0
+          )
+      ),
       background: card?.background ?? dCard?.background,
       border: card?.border ?? dCard?.border,
       borderRadius: card?.borderRadius ?? dCard?.borderRadius,
@@ -264,7 +307,7 @@ export function card<State, Action, Query = unknown, T = unknown>(
       transition: card?.transition ?? dCard?.transition,
       width: props.width ?? card?.width ?? dCard?.width,
       overflow: Overflow.make('hidden'),
-      spacing: spacingSize
+      spacing
     },
     ...blocks
   )

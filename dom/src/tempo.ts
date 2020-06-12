@@ -65,11 +65,23 @@ export const Tempo = {
     component: SimpleComponent<State, Query>
     state: State
     document?: Document
-  }): View<State, Query> {
+  }) {
     const { el: maybeElement, component, state } = options
     const doc = options.document || document
     const el = maybeElement || doc.body
     const append = (node: Node) => el.appendChild(node)
-    return component.render(new DOMContext(doc, append, el, () => {}), state)
+    const onChange = (state: State) => {}
+
+    const result = {
+      ...component.render(
+        new DOMContext(doc, append, el, (state: State) => {
+          result.onChange(state)
+        }),
+        state
+      ),
+      onChange
+    }
+
+    return result
   }
 }
