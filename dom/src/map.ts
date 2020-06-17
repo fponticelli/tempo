@@ -22,7 +22,7 @@ class MapStateTemplate<OuterState, InnerState, Action, Query>
   implements DOMTemplate<OuterState, Action, Query> {
   constructor(
     readonly map: Attribute<OuterState, InnerState>,
-    readonly whenUndefined: DOMTemplate<unknown, Action, Query>,
+    readonly whenUndefined: DOMTemplate<OuterState, Action, Query>,
     readonly equals: (a: InnerState, b: InnerState) => boolean,
     readonly children: DOMTemplate<InnerState, Action, Query>[]
   ) {}
@@ -30,7 +30,7 @@ class MapStateTemplate<OuterState, InnerState, Action, Query>
   render(ctx: DOMContext<Action>, state: OuterState): View<OuterState, Query> {
     const { children, map, whenUndefined, equals } = this
 
-    let views: View<InnerState, Query>[] = []
+    let views: View<InnerState | OuterState, Query>[] = []
 
     const { ctx: newCtx, ref } = ctx.withAppendToReference()
 
@@ -65,6 +65,8 @@ class MapStateTemplate<OuterState, InnerState, Action, Query>
             current = undefined
             destroy()
             views = [whenUndefined.render(newCtx, state)]
+          } else {
+            for (const view of views) view.change(state)
           }
         }
       },
@@ -82,7 +84,7 @@ class MapStateTemplate<OuterState, InnerState, Action, Query>
 export function mapState<OuterState, InnerState, Action, Query = unknown>(
   props: {
     map: Attribute<OuterState, InnerState>
-    whenUndefined?: DOMChild<unknown, Action, Query>
+    whenUndefined?: DOMChild<OuterState, Action, Query>
     equals?: (a: InnerState, b: InnerState) => boolean
   },
   ...children: DOMChild<InnerState, Action, Query>[]
@@ -104,7 +106,7 @@ export function mapField<
   props:
     | {
         field: Key
-        whenUndefined?: DOMChild<unknown, Action, Query>
+        whenUndefined?: DOMChild<OuterState, Action, Query>
         equals?: (a: OuterState[Key], b: OuterState[Key]) => boolean
       }
     | Key,
@@ -132,7 +134,7 @@ export function mapStateAndKeep<
 >(
   props: {
     map: Attribute<OuterState, InnerState>
-    whenUndefined?: DOMChild<unknown, Action, Query>
+    whenUndefined?: DOMChild<OuterState, Action, Query>
     equals?: (
       a: [InnerState, OuterState],
       b: [InnerState, OuterState]

@@ -129,13 +129,31 @@ export function mapAttribute<State, A, B>(
   }
 }
 
+export function mapAttributeOrElse<State, A, B>(
+  attr: Attribute<State, A>,
+  map: (a: A) => B,
+  alt: B
+): Attribute<State, B> {
+  if (attr === undefined) {
+    return alt
+  } else if (typeof attr === 'function') {
+    return (state: State) => {
+      const res = (attr as DerivedValue<State, A>)(state)
+      if (res !== undefined) return map(res)
+      else return alt
+    }
+  } else {
+    return map(attr)
+  }
+}
+
 export function mapAttributes<
   State,
   T extends { [_ in string]: Attribute<State, any> },
   B
 >(
   attributes: T,
-  map: (values: { [K in keyof T]: ValueOfAttribute<T[K]> }) => B
+  map: (values: { [K in keyof T]?: ValueOfAttribute<T[K]> }) => B
 ): Attribute<State, B> {
   const ks = keys(attributes)
   const isDynamic = ks.some(k => typeof attributes[k] === 'function')
