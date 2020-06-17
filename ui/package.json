@@ -1,6 +1,6 @@
 {
   "name": "tempo-ui",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "priority": 1,
   "description": "Fully-typed frontend framework alternative to React and Angular",
   "keywords": [
@@ -34,10 +34,10 @@
   },
   "dependencies": {
     "tempo-core": "^1.7.1",
-    "tempo-dom": "^0.24.0",
+    "tempo-dom": "^0.25.0",
     "tempo-std": "^0.5.5",
     "tempo-colors": "^0.1.2",
-    "tempo-ui": "^0.1.6"
+    "tempo-ui": "^0.1.7"
   },
   "devDependencies": {
     "@types/jest": "^25.2.3",

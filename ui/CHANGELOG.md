@@ -1,6 +1,11 @@
 # Change Log - tempo-ui
 
-This log was last generated on Thu, 11 Jun 2020 16:25:12 GMT and should not be manually modified.
+This log was last generated on Wed, 17 Jun 2020 02:04:09 GMT and should not be manually modified.
+
+## 0.1.7
+Wed, 17 Jun 2020 02:04:09 GMT
+
+*Version update only*
 
 ## 0.1.6
 Thu, 11 Jun 2020 16:25:12 GMT

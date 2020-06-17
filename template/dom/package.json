@@ -14,7 +14,7 @@
   "main": "index.js",
   "dependencies": {
     "tempo-core": "^1.7.1",
-    "tempo-dom": "^0.24.0",
+    "tempo-dom": "^0.25.0",
     "tempo-std": "^0.5.5"
   },
   "devDependencies": {

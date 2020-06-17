@@ -1,6 +1,13 @@
 # Change Log - tempo-dom
 
-This log was last generated on Mon, 08 Jun 2020 23:05:13 GMT and should not be manually modified.
+This log was last generated on Wed, 17 Jun 2020 02:04:09 GMT and should not be manually modified.
+
+## 0.25.0
+Wed, 17 Jun 2020 02:04:09 GMT
+
+### Minor changes
+
+- Use `OuterState` for `whenUndefined` in `mapState` and add `mapAttributeOrElse`.
 
 ## 0.24.0
 Mon, 08 Jun 2020 23:05:13 GMT
