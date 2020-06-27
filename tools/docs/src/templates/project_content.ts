@@ -57,5 +57,7 @@ export const projectContent = article<ProjectRef, Action>(
       })
     )
   ),
-  unsafeHtml({}, s => s.content)
+  div({
+    lifecycle: unsafeHtml(s => s.content)
+  })
 )

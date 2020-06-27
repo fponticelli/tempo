@@ -33,7 +33,9 @@ export const commentTemplate: DOMTemplate<Item, Action> = lazy<Item, Action>(
         ' ',
         item => item.time_ago
       ),
-      unsafeHtml({}, item => item.content),
+      div({
+        lifecycle: unsafeHtml(item => item.content)
+      }),
       mapState<Item, Item[], Action>(
         { map: item => item.comments || [] },
         commentsTemplate

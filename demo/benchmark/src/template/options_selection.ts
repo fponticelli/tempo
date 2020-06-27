@@ -35,7 +35,8 @@ export const optionsSelection = div<TestOptions, Action>(
             value: options => options.maxTime
           },
           events: {
-            change: (_s, _e, el) => Action.changeOptionMaxTime(Number(el.value))
+            change: (_s, _e, el) =>
+              Action.changeOptionMaxTime(Number((el as HTMLInputElement).value))
           }
         })
       )

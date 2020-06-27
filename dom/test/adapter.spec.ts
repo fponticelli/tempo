@@ -90,7 +90,7 @@ describe('adapter', () => {
     const comp = component(
       { reducer },
       div<string[], string>(
-        { events: { click: (_s: string[], _: MouseEvent) => 'click' } },
+        { events: { click: (_s: string[], _: Event) => 'click' } },
         s => s.join(', ')
       )
     )

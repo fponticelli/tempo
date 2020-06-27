@@ -30,13 +30,13 @@ import { EventHandler } from 'tempo-dom/lib/value'
 import { filterState } from 'tempo-dom/lib/filter'
 import { iterate } from 'tempo-dom/lib/iterate'
 import { when } from 'tempo-dom/lib/when'
+import { focusElement } from 'tempo-dom/lib/lifecycle'
 import { Action } from './action'
 import { State, Filter, Todo } from './state'
 
-const changeF = <El extends Element>(
-  filter: Filter
-): EventHandler<State, Action, MouseEvent, El> => (state: State) =>
-  state.filter === filter ? undefined : Action.toggleFilter(filter)
+const changeF = (filter: Filter): EventHandler<State, Action> => (
+  state: State
+) => (state.filter === filter ? undefined : Action.toggleFilter(filter))
 
 const selectedF = (filter: Filter) => (state: State) =>
   state.filter === filter ? 'selected' : undefined
@@ -70,7 +70,9 @@ export const template = section<State, Action>(
             value: (state: State) => state.adding
           },
           events: {
-            keydown: (_: State, e: KeyboardEvent, input: HTMLInputElement) => {
+            keydown: (_, ev, el) => {
+              const e = ev as KeyboardEvent
+              const input = el as HTMLInputElement
               if (e.keyCode === 13) {
                 return Action.createTodo(input.value.trim())
               } else if (e.keyCode === 27) {
@@ -162,7 +164,7 @@ export const template = section<State, Action>(
                     isEditing(state, todo) /* todo.editing */
                 },
                 input({
-                  afterrender: (_, el) => el.focus(),
+                  lifecycle: focusElement,
                   attrs: {
                     type: 'text',
                     className: 'edit',
@@ -170,11 +172,9 @@ export const template = section<State, Action>(
                       state.editing && state.editing.title
                   },
                   events: {
-                    keydown: (
-                      [todo]: [Todo, State, number],
-                      e: KeyboardEvent,
-                      input: HTMLInputElement
-                    ) => {
+                    keydown: ([todo]: [Todo, State, number], ev, el) => {
+                      const e = ev as KeyboardEvent
+                      const input = el as HTMLInputElement
                       if (e.keyCode === 13) {
                         const value = input.value.trim()
                         if (value !== '') {
@@ -188,11 +188,8 @@ export const template = section<State, Action>(
                         return Action.editingTodo(todo.id, input.value)
                       }
                     },
-                    blur: (
-                      [todo]: [Todo, State, number],
-                      e: MouseEvent,
-                      input: HTMLInputElement
-                    ) => {
+                    blur: ([todo]: [Todo, State, number], _, el) => {
+                      const input = el as HTMLInputElement
                       const value = input.value.trim()
                       if (value !== '') {
                         return Action.updateTodo(todo.id, value)

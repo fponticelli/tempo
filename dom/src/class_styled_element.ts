@@ -16,6 +16,7 @@ import { el } from './element'
 import { DOMChild } from './template'
 import { DOMContext } from './context'
 import { map } from 'tempo-std/lib/arrays'
+import { Lifecycle, compose } from './lifecycle'
 
 export interface Rule {
   cls?: string | undefined
@@ -23,14 +24,8 @@ export interface Rule {
   definitions: () => string[]
 }
 
-export interface ElWithClassRulesProps<
-  T,
-  State,
-  Action,
-  Query,
-  El extends Element,
-  TScope
-> extends Props<State, Action, Query, El, TScope> {
+export interface ElWithClassRulesProps<T, State, Action, Query>
+  extends Props<State, Action, Query> {
   el: string
   values: Attribute<State, T[]>
   makeRules: (value: T) => Rule[]
@@ -47,18 +42,27 @@ function ensureStyleElement(doc: Document) {
   }
 }
 
-// function makeStyleDefinition<T>(
-//   value: T | undefined,
-//   cls: string,
-//   makeRules: (v: T) => Rule[]
-// ): Rule[] {
-//   if (value !== undefined && !allSelectors.has(cls)) {
-//     allSelectors.add(cls)
-//     return makeRules(value)
-//   } else {
-//     return []
-//   }
-// }
+const makeLifecycle = <State, Action, T>(
+  values: Attribute<State, T[]>,
+  makeRules: (value: T) => Rule[]
+) => (
+  state: State,
+  element: HTMLElement,
+  ctx: DOMContext<Action>
+): Lifecycle<State> => {
+  ensureStyleElement(ctx.doc)
+  const derived = resolveAttribute(values)(state) || []
+  applyClasses(derived, makeRules, element)
+
+  return {
+    afterChange(state: State) {
+      const derived = resolveAttribute(values)(state) || []
+      applyClasses(derived, makeRules, element)
+    },
+    beforeChange(state: State) {},
+    beforeDestroy() {}
+  }
+}
 
 function renderRule(rule: Rule) {
   return `${rule.selector} {\n  ${rule.definitions().join('\n  ')}\n}`
@@ -69,19 +73,6 @@ function applyClasses<T>(
   makeRules: (value: T) => Rule[],
   el: Element
 ) {
-  // const { classes, rules } = values.reduce(
-  //   (acc: { classes: string[], rules: Rule[] }, curr) => {
-  //     const rule = makeRules(curr)
-  //     acc.classes.push(cls)
-
-  //     const rules = makeStyleDefinition(curr, cls, makeRules)
-  //     if (rules.length > 0)
-  //       acc.rules.push(...rules)
-
-  //     return acc
-  //   },
-  //   { classes: [], rules: [] } as { classes: string[], rules: Rule[] }
-  // )
   const rules = values.reduce((acc, curr) => {
     acc.push(...makeRules(curr))
     return acc
@@ -104,18 +95,16 @@ function applyClasses<T>(
   }
 }
 
-export function classStyledElement<
-  T,
-  State,
-  Action,
-  Query,
-  El extends Element,
-  TScope
->(
-  props: ElWithClassRulesProps<T, State, Action, Query, El, TScope>,
+export function classStyledElement<T, State, Action, Query>(
+  props: ElWithClassRulesProps<T, State, Action, Query>,
   ...children: DOMChild<State, Action>[]
 ) {
   const { values, makeRules } = props
+  let lifecycle = makeLifecycle<State, Action, T>(values, makeRules)
+  if (props.lifecycle !== undefined) {
+    lifecycle = compose(lifecycle, props.lifecycle)
+  }
+
   if (
     props?.attrs?.class === undefined &&
     props?.attrs?.className === undefined
@@ -127,45 +116,11 @@ export function classStyledElement<
     }
   }
 
-  const afterrender = (
-    state: State,
-    el: El,
-    ctx: DOMContext<Action>
-  ): TScope | undefined => {
-    ensureStyleElement(ctx.doc)
-
-    const derived = resolveAttribute(values)(state) || []
-    applyClasses(derived, makeRules, el)
-
-    if (props.afterrender) {
-      return props.afterrender(state, el, ctx)
-    } else {
-      return undefined
-    }
-  }
-
-  const afterchange = (
-    state: State,
-    el: El,
-    ctx: DOMContext<Action>,
-    scopeValue: TScope | undefined
-  ): TScope | undefined => {
-    const derived = resolveAttribute(values)(state) || []
-    applyClasses(derived, makeRules, el)
-
-    if (props.afterchange) {
-      return props.afterchange(state, el, ctx, scopeValue)
-    } else {
-      return undefined
-    }
-  }
-
   return el(
     props.el,
     {
       ...props,
-      afterrender,
-      afterchange
+      lifecycle
     },
     ...children
   )

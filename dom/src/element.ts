@@ -31,84 +31,27 @@ import {
 import { map } from 'tempo-std/lib/arrays'
 
 import { attributeNameMap } from './utils/attributes_mapper'
+import { MakeLifecycle } from './lifecycle'
 
-const applyChange = <State, Action, El extends Element, T>(
-  change: (
-    state: State,
-    el: El,
-    ctx: DOMContext<Action>,
-    value: T | undefined
-  ) => T | undefined,
-  el: El,
-  ctx: DOMContext<Action>
-) => (state: State, value: T | undefined): T | undefined => {
-  return change(state, el, ctx, value)
-}
-
-const applyAfterRender = <State, Action, El extends Element, T>(
-  attr: (state: State, el: El, ctx: DOMContext<Action>) => T | undefined,
-  el: El,
-  ctx: DOMContext<Action>,
-  state: State
-) => {
-  if (attr !== undefined) {
-    return attr(state, el, ctx)
-  } else {
-    return undefined
-  }
-}
-
-export class DOMElement<
-  State,
-  Action,
-  Query = unknown,
-  El extends Element = Element,
-  T = unknown
-> implements DOMTemplate<State, Action, Query> {
+export class DOMElement<State, Action, Query = unknown>
+  implements DOMTemplate<State, Action, Query> {
   constructor(
-    public createElement: (doc: Document) => El,
+    public createElement: (doc: Document) => HTMLElement,
     public attrs: { name: string; value: Attribute<State, AttributeValue> }[],
     public events: {
       name: string
-      value: EventHandler<State, Action, any, El>
+      value: EventHandler<State, Action>
     }[],
     public styles: { name: string; value: StyleAttribute<State, string> }[],
-    public afterrender:
-      | undefined
-      | ((state: State, el: El, ctx: DOMContext<Action>) => T | undefined),
-    public beforechange:
-      | undefined
-      | ((
-          state: State,
-          el: El,
-          ctx: DOMContext<Action>,
-          value: T | undefined
-        ) => T | undefined),
-    public afterchange:
-      | undefined
-      | ((
-          state: State,
-          el: El,
-          ctx: DOMContext<Action>,
-          value: T | undefined
-        ) => T | undefined),
-    public beforedestroy:
-      | undefined
-      | ((el: El, ctx: DOMContext<Action>, value: T | undefined) => void),
+    public makeLifecycle: MakeLifecycle<State, Action>,
     public respond:
       | undefined
-      | ((
-          query: Query,
-          el: El,
-          ctx: DOMContext<Action>,
-          value: T | undefined
-        ) => T | undefined),
+      | ((query: Query, el: HTMLElement, ctx: DOMContext<Action>) => void),
     public children: DOMTemplate<State, Action, Query>[]
   ) {}
 
   render(ctx: DOMContext<Action>, state: State): View<State, Query> {
     const el = this.createElement(ctx.doc)
-    let value: T | undefined = undefined
 
     const allChanges = [] as ((state: State) => void)[]
 
@@ -129,9 +72,7 @@ export class DOMElement<
 
     ctx.append(el)
 
-    if (this.afterrender) {
-      value = applyAfterRender(this.afterrender, el, ctx, state)
-    }
+    const lifecycle = this.makeLifecycle(state, el, ctx)
 
     const viewChanges = map(views, child => (state: State) =>
       child.change(state)
@@ -139,38 +80,22 @@ export class DOMElement<
 
     allChanges.push(...viewChanges)
 
-    if (this.beforechange) {
-      const change = applyChange(this.beforechange, el, ctx)
-      const update = (state: State) => {
-        value = change(state, value)
-      }
-      allChanges.unshift(update)
-    }
-
-    if (this.afterchange) {
-      const change = applyChange(this.afterchange, el, ctx)
-      const update = (state: State) => {
-        value = change(state, value)
-      }
-      allChanges.push(update)
-    }
-
-    const beforedestroyf =
-      this.beforedestroy && (() => this.beforedestroy!(el, ctx, value))
     const { respond } = this
 
     return {
       change: (state: State) => {
+        lifecycle.beforeChange(state)
         for (const change of allChanges) change(state)
+        lifecycle.afterChange(state)
       },
       destroy: () => {
-        if (beforedestroyf) beforedestroyf()
+        lifecycle.beforeDestroy()
         removeNode(el)
         for (const view of views) view.destroy()
       },
       request: (query: Query) => {
         if (respond) {
-          value = respond(query, el, ctx, value)
+          respond(query, el, ctx)
         }
         for (const view of views) {
           view.request(query)
@@ -196,9 +121,9 @@ function extractAttrs<State>(
   })
 }
 
-function extractEvents<State, Action, El extends Element>(
-  attrs: Record<string, EventHandler<State, Action, any, El>> | undefined
-): { name: string; value: EventHandler<State, Action, any, El> }[] {
+function extractEvents<State, Action>(
+  attrs: Record<string, EventHandler<State, Action>> | undefined
+): { name: string; value: EventHandler<State, Action> }[] {
   return map(Object.keys(attrs || {}), eventName => {
     let name = `on${eventName.toLowerCase()}`
     return {
@@ -217,49 +142,36 @@ function extractStyles<State>(
   }))
 }
 
-const makeCreateElement = <El extends Element>(name: string) => (
-  doc: Document
-) => (doc.createElement(name) as any) as El
+const makeCreateElement = (name: string) => (doc: Document) =>
+  doc.createElement(name)
 
-export function el<
-  State,
-  Action,
-  Query = unknown,
-  El extends Element = Element,
-  T = unknown
->(
+export function el<State, Action, Query = unknown>(
   name: string,
-  props: Props<State, Action, Query, El, T>,
+  props: Props<State, Action, Query>,
   ...children: DOMChild<State, Action, Query>[]
 ) {
-  return new DOMElement<State, Action, Query, El, T>(
+  return new DOMElement<State, Action, Query>(
     makeCreateElement(name),
     extractAttrs(props.attrs),
     extractEvents(props.events),
     extractStyles(props.styles),
-    props.afterrender,
-    props.beforechange,
-    props.afterchange,
-    props.beforedestroy,
+    props.lifecycle ?? (() => defaultLifecycle),
     props.respond,
     map(children, domChildToTemplate)
   )
 }
 
-export function el2<El extends Element>(name: string) {
-  return function <State, Action, Query = unknown, T = unknown>(
-    props: Props<State, Action, Query, El, T>,
+export function el2(name: string) {
+  return function <State, Action, Query = unknown>(
+    props: Props<State, Action, Query>,
     ...children: DOMChild<State, Action, Query>[]
   ) {
-    return new DOMElement<State, Action, Query, El, T>(
+    return new DOMElement<State, Action, Query>(
       makeCreateElement(name),
       extractAttrs(props.attrs),
       extractEvents(props.events),
       extractStyles(props.styles),
-      props.afterrender,
-      props.beforechange,
-      props.afterchange,
-      props.beforedestroy,
+      props.lifecycle ?? (() => defaultLifecycle),
       props.respond,
       map(children, domChildToTemplate)
     )
@@ -270,52 +182,45 @@ export const defaultNamespaces: Record<string, string> = {
   svg: 'http://www.w3.org/2000/svg'
 }
 
-const makeCreateElementNS = <El extends Element>(
-  namespace: string,
-  name: string
-) => (doc: Document) => (doc.createElementNS(namespace, name) as any) as El
+const makeCreateElementNS = (namespace: string, name: string) => (
+  doc: Document
+) => doc.createElementNS(namespace, name) as HTMLElement // TODO
 
-export function elNS<
-  State,
-  Action,
-  Query = unknown,
-  El extends Element = Element,
-  T = unknown
->(
+export function elNS<State, Action, Query = unknown>(
   ns: string,
   name: string,
-  props: Props<State, Action, Query, El, T>,
+  props: Props<State, Action, Query>,
   ...children: DOMChild<State, Action, Query>[]
 ) {
   const namespace = defaultNamespaces[ns] || ns
-  return new DOMElement<State, Action, Query, El, T>(
+  return new DOMElement<State, Action, Query>(
     makeCreateElementNS(namespace, name),
     extractAttrs(props.attrs),
     extractEvents(props.events),
     extractStyles(props.styles),
-    props.afterrender,
-    props.beforechange,
-    props.afterchange,
-    props.beforedestroy,
+    props.lifecycle ?? (() => defaultLifecycle),
     props.respond,
     map(children, domChildToTemplate)
   )
 }
 
-export function elNS2<El extends Element>(namespace: string, name: string) {
-  return function <State, Action, Query = unknown, T = unknown>(
-    props: Props<State, Action, Query, El, T>,
+const defaultLifecycle = {
+  beforeChange: () => {},
+  afterChange: () => {},
+  beforeDestroy: () => {}
+}
+
+export function elNS2(namespace: string, name: string) {
+  return function <State, Action, Query = unknown>(
+    props: Props<State, Action, Query>,
     ...children: DOMChild<State, Action, Query>[]
   ) {
-    return new DOMElement<State, Action, Query, El, T>(
+    return new DOMElement<State, Action, Query>(
       makeCreateElementNS(namespace, name),
       extractAttrs(props.attrs),
       extractEvents(props.events),
       extractStyles(props.styles),
-      props.afterrender,
-      props.beforechange,
-      props.afterchange,
-      props.beforedestroy,
+      props.lifecycle ?? (() => defaultLifecycle),
       props.respond,
       map(children, domChildToTemplate)
     )

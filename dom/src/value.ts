@@ -14,17 +14,15 @@ limitations under the License.
 import { keys } from 'tempo-std/lib/objects'
 import { DerivedOrLiteralValue, DerivedValue } from 'tempo-core/lib/value'
 import { DOMContext } from './context'
+import { MakeLifecycle } from './lifecycle'
 
 export type Attribute<State, Value> =
   | DerivedOrLiteralValue<State, Value | undefined>
   | undefined
 export type TextValue<S> = Attribute<S, string>
-export type EventHandler<
-  S,
-  Action,
-  Ev extends Event = Event,
-  El extends Element = Element
-> = ((state: S, event: Ev, element: El) => Action | undefined) | undefined
+export type EventHandler<S, Action> =
+  | ((state: S, event: Event, element: HTMLElement) => Action | undefined)
+  | undefined
 export type StyleAttribute<State, Value> = DerivedOrLiteralValue<
   State,
   Value | undefined
@@ -36,49 +34,12 @@ export type ValueOfAttribute<
 
 export type AttributeValue = string | number | boolean | string[]
 
-export interface Lifecycle<
-  State,
-  Action,
-  Query,
-  El extends Element = Element,
-  T = unknown
-> {
-  afterrender?: (state: State, el: El, ctx: DOMContext<Action>) => T | undefined
-  beforechange?: (
-    state: State,
-    el: El,
-    ctx: DOMContext<Action>,
-    value: T | undefined
-  ) => T | undefined
-  afterchange?: (
-    state: State,
-    el: El,
-    ctx: DOMContext<Action>,
-    value: T | undefined
-  ) => T | undefined
-  beforedestroy?: (
-    el: El,
-    ctx: DOMContext<Action>,
-    value: T | undefined
-  ) => void
-  respond?: (
-    query: Query,
-    el: El,
-    ctx: DOMContext<Action>,
-    value: T | undefined
-  ) => T | undefined
-}
-
-export interface Props<
-  State,
-  Action,
-  Query = unknown,
-  El extends Element = Element,
-  T = unknown
-> extends Lifecycle<State, Action, Query, El, T> {
+export interface Props<State, Action, Query = unknown> {
   attrs?: Record<string, Attribute<State, AttributeValue>>
-  events?: Record<string, EventHandler<State, Action, any, El>>
+  events?: Record<string, EventHandler<State, Action>>
   styles?: Record<string, StyleAttribute<State, string>>
+  lifecycle?: MakeLifecycle<State, Action>
+  respond?: (query: Query, el: HTMLElement, ctx: DOMContext<Action>) => void
 }
 
 export function applyAttributes<State, A, B, C>(
@@ -170,28 +131,22 @@ export function mapAttributes<
   }
 }
 
-export function attributeToHandler<
-  State,
-  Value,
-  Action,
-  Ev extends Event,
-  El extends Element
->(
+export function attributeToHandler<State, Value, Action>(
   attr: Attribute<State, Value>,
-  handler: EventHandler<Value, Action, Ev, El>
-): EventHandler<State, Action, Ev, El> | undefined {
+  handler: EventHandler<Value, Action>
+): EventHandler<State, Action> | undefined {
   if (attr === undefined || handler === undefined) {
     return () => {
       return undefined
     }
   } else if (typeof attr === 'function') {
-    return (state: State, event: Ev, element: El) => {
+    return (state: State, event: Event, element: HTMLElement) => {
       const res = (attr as DerivedValue<State, Value>)(state)
       if (res !== undefined) return handler(res, event, element)
       else return undefined
     }
   } else {
-    return (_: State, event: Ev, element: El) => {
+    return (_: State, event: Event, element: HTMLElement) => {
       return handler(attr, event, element)
     }
   }

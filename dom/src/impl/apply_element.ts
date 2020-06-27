@@ -8,14 +8,14 @@ import {
 import { map } from 'tempo-std/lib/arrays'
 import { attributeNameMap } from '../utils/attributes_mapper'
 
-export function applyChange<State, Action, El extends Element, T>(
+export function applyChange<State, Action, T>(
   change: (
     state: State,
-    el: El,
+    el: HTMLElement,
     ctx: DOMContext<Action>,
     value: T | undefined
   ) => T | undefined,
-  el: El,
+  el: HTMLElement,
   ctx: DOMContext<Action>
 ) {
   return (state: State, value: T | undefined): T | undefined => {
@@ -23,9 +23,13 @@ export function applyChange<State, Action, El extends Element, T>(
   }
 }
 
-export function applyAfterRender<State, Action, El extends Element, T>(
-  attr: (state: State, el: El, ctx: DOMContext<Action>) => T | undefined,
-  el: El,
+export function applyAfterRender<State, Action, T>(
+  attr: (
+    state: State,
+    el: HTMLElement,
+    ctx: DOMContext<Action>
+  ) => T | undefined,
+  el: HTMLElement,
   ctx: DOMContext<Action>,
   state: State
 ) {
@@ -52,9 +56,9 @@ export function extractAttrs<State>(
   })
 }
 
-export function extractEvents<State, Action, El extends Element>(
-  attrs: Record<string, EventHandler<State, Action, any, El>> | undefined
-): { name: string; value: EventHandler<State, Action, any, El> }[] {
+export function extractEvents<State, Action>(
+  attrs: Record<string, EventHandler<State, Action>> | undefined
+): { name: string; value: EventHandler<State, Action> }[] {
   return map(Object.keys(attrs || {}), eventName => {
     let name = `on${eventName.toLowerCase()}`
     return {
@@ -73,15 +77,12 @@ export function extractStyles<State>(
   }))
 }
 
-export function makeCreateElement<El extends Element>(name: string) {
-  return (doc: Document) => (doc.createElement(name) as any) as El
+export function makeCreateElement(name: string) {
+  return (doc: Document) => (doc.createElement(name) as any) as HTMLElement
 }
 
-export function makeCreateElementNS<El extends Element>(
-  namespace: string,
-  name: string
-) {
-  return (doc: Document) => (doc.createElementNS(namespace, name) as any) as El
+export function makeCreateElementNS(namespace: string, name: string) {
+  return (doc: Document) => doc.createElementNS(namespace, name) as HTMLElement // TODO
 }
 
 export const defaultNamespaces: Record<string, string> = {

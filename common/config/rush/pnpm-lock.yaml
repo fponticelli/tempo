@@ -11,7 +11,6 @@ dependencies:
   '@rush-temp/tempo-store': 'file:projects/tempo-store.tgz_canvas@2.6.1'
   '@rush-temp/tempo-template-dom': 'file:projects/tempo-template-dom.tgz'
   '@rush-temp/tempo-tools.docs': 'file:projects/tempo-tools.docs.tgz_sass@1.26.8'
-  '@rush-temp/tempo-ui': 'file:projects/tempo-ui.tgz_canvas@2.6.1'
   '@types/doctrine': 0.0.3
   '@types/dompurify': 2.0.2
   '@types/fs-extra': 9.0.1
@@ -11533,7 +11532,7 @@ packages:
     dev: false
     name: '@rush-temp/tempo-demo.benchmark'
     resolution:
-      integrity: sha512-84QUWcATBiE8+JOlJewoQPaV0B5W2QpG9c4BuYK+yuvp/+jjVlQY38H9IBXIf5m7VTPfSVKQKyF4vHl9eG++5A==
+      integrity: sha512-OeKVJLtCQNVZlB2ydmuuWVYs3J3D9yUFtLnoMKvq61D+Qrig4Z/Goc9MlqTjls2c3P1rFac2QzEsC1NZ3OvMFQ==
       tarball: 'file:projects/tempo-demo.benchmark.tgz'
     version: 0.0.0
   'file:projects/tempo-demo.hnpwa.tgz':
@@ -11550,7 +11549,7 @@ packages:
     dev: false
     name: '@rush-temp/tempo-demo.hnpwa'
     resolution:
-      integrity: sha512-vV/G8SDPm3bF6/wOGwiM1VCglYDCkmvKdzCxYBATtqNKQjmoGUXkeiJadIEuw18O4PFCxIoYhZp0CVGWLbsbjA==
+      integrity: sha512-uCkMMnUw0KTm+7kpk4NiaEIhNK45flcT7VVbTLzmaNYM2HVewrnHje3WyLg8jUgGCMsL1DUw0kCzJFTdDxwOMg==
       tarball: 'file:projects/tempo-demo.hnpwa.tgz'
     version: 0.0.0
   'file:projects/tempo-demo.readme.tgz':
@@ -11563,7 +11562,7 @@ packages:
     dev: false
     name: '@rush-temp/tempo-demo.readme'
     resolution:
-      integrity: sha512-uZ115bQXYmL0ylcgIpQm/Il0+d7a+xeTC35M58+6aM3sagF60AMxzGAnpSAwDYBDwmYg34E5dworQ2RRSqzmTw==
+      integrity: sha512-F33uuO77Vr0yrEswKOc0js7L+CGXk/5IWU9r/IURWfQSJhMviqgWQSEM965xu0D7mjW6hxaNsk1bTQMhOhiVfA==
       tarball: 'file:projects/tempo-demo.readme.tgz'
     version: 0.0.0
   'file:projects/tempo-demo.todomvc.tgz':
@@ -11578,7 +11577,7 @@ packages:
     dev: false
     name: '@rush-temp/tempo-demo.todomvc'
     resolution:
-      integrity: sha512-Hk5jx4KaILb38Q5Zf+n4PnRdhlhbV/UnzyaPHHzdnZ0V1ZyxcUIzM3zBW4bGm2ly3Q+BHWWG5EnBuNCzl8r7Tg==
+      integrity: sha512-bloMvFI2O1k6pe/P39bakhI0ic589AA/kfqnyBUnjRZzdpVvCQYzsIHPnZgy5Y1KkQWMIkTAskfLL2uXDfu3aA==
       tarball: 'file:projects/tempo-demo.todomvc.tgz'
     version: 0.0.0
   'file:projects/tempo-dom.tgz':
@@ -11669,7 +11668,7 @@ packages:
     dev: false
     name: '@rush-temp/tempo-template-dom'
     resolution:
-      integrity: sha512-EYwiIhwJ0F8SPHWChlEoA4RU6g+uazCyOBnzlA+8TxyzmhRuCs6/x9iPLEonHqGMOhuRAlPLytp9M7NWmF/5+Q==
+      integrity: sha512-Nwl616j0vuj/l+1FskoVF6c/t4fUS6SNlt+KDyru4kH8W61JIc00xNh30WYettZUYPnw8VkxDU7wuHq+QTMx9g==
       tarball: 'file:projects/tempo-template-dom.tgz'
     version: 0.0.0
   'file:projects/tempo-tools.docs.tgz_sass@1.26.8':
@@ -11716,31 +11715,8 @@ packages:
     peerDependencies:
       sass: '*'
     resolution:
-      integrity: sha512-9VTDh+PTcv+b8Sn8e4mTZInNUoGnCJ4Wvl8lcV02y71ALS166PV9r7REfbI9shlF9z4i9y8BFKEukJ3c7hAdJg==
+      integrity: sha512-rDuSpt5BvoxO3L2PZqCefS3WI6AZwCH9r4HAFOsQc73bNhwjjy95sNcw7QyUeTZO2l1bpNmtl2oIhd+32RQDlg==
       tarball: 'file:projects/tempo-tools.docs.tgz'
-    version: 0.0.0
-  'file:projects/tempo-ui.tgz_canvas@2.6.1':
-    dependencies:
-      '@types/jest': 25.2.3
-      '@types/jsdom': 16.2.3
-      jest: 26.0.1_canvas@2.6.1
-      jsdom: 16.2.2_canvas@2.6.1
-      lodash: 4.17.15
-      prettier: 2.0.5
-      request: 2.88.2
-      request-promise-native: 1.0.8_request@2.88.2
-      stealthy-require: 1.1.1
-      ts-jest: 26.1.0_jest@26.0.1+typescript@3.9.5
-      tslint: 6.1.2_typescript@3.9.5
-      typescript: 3.9.5
-    dev: false
-    id: 'file:projects/tempo-ui.tgz'
-    name: '@rush-temp/tempo-ui'
-    peerDependencies:
-      canvas: '*'
-    resolution:
-      integrity: sha512-3qZ2C2fh9UUD+pR17mK5kP955k4VXtC1gtxbYzsDtQf1qumNXo4wSUlfcmotgRH1dQbIbp5XIE589IBvygiOOA==
-      tarball: 'file:projects/tempo-ui.tgz'
     version: 0.0.0
 registry: ''
 specifiers:
@@ -11756,7 +11732,6 @@ specifiers:
   '@rush-temp/tempo-store': 'file:./projects/tempo-store.tgz'
   '@rush-temp/tempo-template-dom': 'file:./projects/tempo-template-dom.tgz'
   '@rush-temp/tempo-tools.docs': 'file:./projects/tempo-tools.docs.tgz'
-  '@rush-temp/tempo-ui': 'file:./projects/tempo-ui.tgz'
   '@types/doctrine': ^0.0.3
   '@types/dompurify': ^2.0.0
   '@types/fs-extra': ^9.0.1

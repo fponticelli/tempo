@@ -11,7 +11,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { article, section, span } from 'tempo-dom/lib/html'
+import { article, section, span, div } from 'tempo-dom/lib/html'
 import { Article } from '../state'
 import { Action } from '../action'
 import { commentsTemplate } from './comments'
@@ -29,7 +29,9 @@ export const articleTemplate = article<Article, Action>(
       span({ attrs: { className: 'domain' } }, item => item.domain),
       itemFooterTemplate
     ),
-    unsafeHtml({}, item => item.content),
+    div({
+      lifecycle: unsafeHtml(item => item.content)
+    }),
     section(
       { attrs: { className: 'comments-view' } },
       mapState({ map: item => item.comments || [] }, commentsTemplate)

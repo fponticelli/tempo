@@ -15,19 +15,20 @@ import { Action } from '../action'
 import { Route, toUrl, toTitle } from '../route'
 import { a } from 'tempo-dom/lib/html'
 import { Attribute, mapAttribute, resolveAttribute } from 'tempo-dom/lib/value'
-import { DOMChild } from 'tempo-dom/lib/template'
+import { DOMChild, DOMTemplate } from 'tempo-dom/lib/template'
+// import 'tempo-dom/lib/value'
 
-export const linkRoute = <State>(
+export function linkRoute<State, Action, Query>(
   opts: {
     route: Attribute<State, Route>
     className?: Attribute<State, string>
   },
-  ...children: DOMChild<State, Action>[]
-) => {
+  ...children: DOMChild<State, Action, Query>[]
+): DOMTemplate<State, Action, Query> {
   if (children.length === 0) {
     children.push(mapAttribute(opts.route, toTitle))
   }
-  return a(
+  return a<State, Action, Query>(
     {
       attrs: {
         href: mapAttribute(opts.route, toUrl),
@@ -40,10 +41,10 @@ export const linkRoute = <State>(
         )
       },
       events: {
-        click: (state: State, e: MouseEvent) => {
-          e.preventDefault()
-          const route = resolveAttribute(opts.route)(state)
-          return Action.linkClicked(route!)
+        click: (state: State, ev, el) => {
+          ev.preventDefault()
+          const route = resolveAttribute(opts.route)(state)!
+          return (Action.linkClicked(route) as unknown) as Action // TODO not sure why this is needed
         }
       }
     },

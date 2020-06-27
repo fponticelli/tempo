@@ -51,15 +51,12 @@ export const link = <State>(attrs: {
         )
       },
       events: {
-        click: attributeToHandler(
-          attrs.route,
-          (route: Route, e: MouseEvent) => {
-            e.preventDefault()
-            const url = toHref(route)
-            history.pushState(null, '', url || './')
-            return Action.goTo(route)
-          }
-        )
+        click: attributeToHandler(attrs.route, (route: Route, e: Event) => {
+          e.preventDefault()
+          const url = toHref(route)
+          history.pushState(null, '', url || './')
+          return Action.goTo(route)
+        })
       }
     },
     attrs.label

@@ -82,23 +82,18 @@ export function processAttribute<State, Value>(
   return acc
 }
 
-export function processEvent<
-  State,
-  El extends Element,
-  Ev extends Event,
-  Action
->(
-  el: El,
+export function processEvent<State, Action>(
+  el: HTMLElement,
   name: string,
-  value: EventHandler<State, Action, Ev, El>,
+  value: EventHandler<State, Action>,
   dispatch: (action: Action) => void,
   acc: Acc<State>
 ): Acc<State> {
   if (value !== undefined) {
     let localState: State
     const anyEl = el as any
-    anyEl[name] = (ev: Ev) => {
-      const r = value(localState, ev as Ev, el)
+    anyEl[name] = (ev: Event) => {
+      const r = value(localState, ev, el)
       if (r !== undefined) {
         dispatch(r)
       }

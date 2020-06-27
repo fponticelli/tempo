@@ -34,7 +34,7 @@ import { paginationTemplate } from './pagination'
 export const itemUrlTemplate = match<['url', 'kind'], Item, Action>({
   path: ['url', 'kind'],
   matchers: {
-    External: linkRoute<Item & { url: External }>(
+    External: linkRoute<Item & { url: External }, Action, unknown>(
       { route: item => Route.externalRoute(item.url.path) },
       h2({}, (item: Item) => item.title)
     ),
@@ -48,7 +48,7 @@ export const itemUrlTemplate = match<['url', 'kind'], Item, Action>({
 export const listItemUrlTemplate = match<['url', 'kind'], Item, Action>({
   path: ['url', 'kind'],
   matchers: {
-    External: linkRoute<Item & { url: External }>(
+    External: linkRoute<Item & { url: External }, Action, unknown>(
       { route: item => Route.externalRoute(item.url.path) },
       (item: Item) => item.title
     ),

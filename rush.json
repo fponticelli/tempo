@@ -69,11 +69,6 @@
       "shouldPublish": false
     },
     {
-      "packageName": "tempo-ui",
-      "projectFolder": "./ui",
-      "shouldPublish": true
-    },
-    {
       "packageName": "tempo-colors",
       "projectFolder": "./colors",
       "shouldPublish": true

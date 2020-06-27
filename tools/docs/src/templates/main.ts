@@ -19,8 +19,8 @@ const { capture, release } = holdState<State>()
 
 const toggleMenu = (
   _s: State,
-  _e: MouseEvent,
-  element: HTMLAnchorElement
+  _e: Event,
+  element: HTMLElement
 ): Action | undefined => {
   const side = document.querySelector('.side-control')!
   const main = document.querySelector('.main-column')!
