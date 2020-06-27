@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "tempo-dom",
+      "comment": "Removed T and El type parameters from DOMElement.",
+      "type": "minor"
+    }
+  ],
+  "packageName": "tempo-dom",
+  "email": "franco.ponticelli@gmail.com"
+}
