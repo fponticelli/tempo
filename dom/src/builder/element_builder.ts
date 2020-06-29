@@ -33,7 +33,79 @@ function extractDerived<State>(
   }, [] as { name: string; resolve: DerivedValue<State, string | undefined> }[])
 }
 
-function classToString(src: string | string[] | Record<string, boolean>) {
+export type AriaRole =
+  | 'alert'
+  | 'alertdialog'
+  | 'application'
+  | 'article'
+  | 'banner'
+  | 'button'
+  | 'checkbox'
+  | 'cell'
+  | 'columnheader'
+  | 'combobox'
+  | 'complementary'
+  | 'contentinfo'
+  | 'definition'
+  | 'dialog'
+  | 'directory'
+  | 'document'
+  | 'feed'
+  | 'figure'
+  | 'form'
+  | 'grid'
+  | 'gridcell'
+  | 'group'
+  | 'heading'
+  | 'img'
+  | 'link'
+  | 'list'
+  | 'listbox'
+  | 'listitem'
+  | 'log'
+  | 'main'
+  | 'marquee'
+  | 'math'
+  | 'menu'
+  | 'menubar'
+  | 'menuitem'
+  | 'menuitemcheckbox'
+  | 'menuitemradio'
+  | 'navigation'
+  | 'none'
+  | 'note'
+  | 'option'
+  | 'presentation'
+  | 'progressbar'
+  | 'radio'
+  | 'radiogroup'
+  | 'region'
+  | 'row'
+  | 'rowgroup'
+  | 'rowheader'
+  | 'scrollbar'
+  | 'search'
+  | 'searchbox'
+  | 'separator'
+  | 'spinbutton'
+  | 'status'
+  | 'switch'
+  | 'tab'
+  | 'table'
+  | 'tablist'
+  | 'tabpanel'
+  | 'term'
+  | 'textbox'
+  | 'timer'
+  | 'toolbar'
+  | 'tooltip'
+  | 'tree'
+  | 'treegrid'
+  | 'treeitem'
+
+export function spaceSeparatedToString(
+  src: string | string[] | Record<string, boolean>
+) {
   if (typeof src === 'string') {
     return src
   } else if (Array.isArray(src)) {
@@ -136,7 +208,7 @@ export class ElementBuilder<State, Action, Query, El extends HTMLElement>
       string | string[] | Record<string, boolean> | undefined
     >
   ) {
-    return this.attr('class', mapAttribute(value, classToString))
+    return this.attr('class', mapAttribute(value, spaceSeparatedToString))
   }
   contentEditable(value: DerivedOrLiteralValue<State, boolean | undefined>) {
     return this.attr('contenteditable', mapAttribute(value, booleanToString))
@@ -199,9 +271,9 @@ export class ElementBuilder<State, Action, Query, El extends HTMLElement>
       string | string[] | Record<string, boolean> | undefined
     >
   ) {
-    return this.attr('part', mapAttribute(value, classToString))
+    return this.attr('part', mapAttribute(value, spaceSeparatedToString))
   }
-  role(value: DerivedOrLiteralValue<State, string | undefined>) {
+  role(value: DerivedOrLiteralValue<State, AriaRole | undefined>) {
     return this.attr('role', value)
   }
   slot(value: DerivedOrLiteralValue<State, string | undefined>) {
@@ -222,6 +294,257 @@ export class ElementBuilder<State, Action, Query, El extends HTMLElement>
   }
   title(value: DerivedOrLiteralValue<State, string | undefined>) {
     return this.attr('title', value)
+  }
+
+  // aria
+  ariaActiveDescendant(
+    value: DerivedOrLiteralValue<State, string | undefined>
+  ) {
+    return this.attr('aria-activedescendant', value)
+  }
+  ariaAtomic(value: DerivedOrLiteralValue<State, boolean | undefined>) {
+    return this.attr('aria-atomic', mapAttribute(value, booleanToString))
+  }
+  ariaAutocomplete(
+    value: DerivedOrLiteralValue<
+      State,
+      'inline' | 'list' | 'both' | 'none' | undefined
+    >
+  ) {
+    return this.attr('aria-autocomplete', value)
+  }
+  ariaBusy(value: DerivedOrLiteralValue<State, boolean | undefined>) {
+    return this.attr('aria-busy', mapAttribute(value, booleanToString))
+  }
+  ariaChecked(
+    value: DerivedOrLiteralValue<
+      State,
+      'true' | 'false' | 'mixed' | true | false | undefined
+    >
+  ) {
+    return this.attr(
+      'aria-checked',
+      mapAttribute(value, v =>
+        v === true ? 'true' : v === false ? 'false' : v
+      )
+    )
+  }
+  ariaColCount(value: DerivedOrLiteralValue<State, number | undefined>) {
+    return this.attr('aria-colcount', mapAttribute(value, String))
+  }
+  ariaColIndex(value: DerivedOrLiteralValue<State, number | undefined>) {
+    return this.attr('aria-colindex', mapAttribute(value, String))
+  }
+  ariaColSpan(value: DerivedOrLiteralValue<State, number | undefined>) {
+    return this.attr('aria-colspan', mapAttribute(value, String))
+  }
+  ariaControls(value: DerivedOrLiteralValue<State, string | undefined>) {
+    return this.attr('aria-controls', value)
+  }
+  ariaCurrent(
+    value: DerivedOrLiteralValue<
+      State,
+      | 'page'
+      | 'step'
+      | 'location'
+      | 'date'
+      | 'time'
+      | 'true'
+      | 'false'
+      | true
+      | false
+      | undefined
+    >
+  ) {
+    return this.attr(
+      'aria-current',
+      mapAttribute(value, v =>
+        v === true ? 'true' : v === false ? 'false' : v
+      )
+    )
+  }
+  ariaDescribedBy(value: DerivedOrLiteralValue<State, string | undefined>) {
+    return this.attr('aria-describedby', value)
+  }
+  ariaDetails(value: DerivedOrLiteralValue<State, string | undefined>) {
+    return this.attr('aria-details', value)
+  }
+  ariaDisabled(value: DerivedOrLiteralValue<State, boolean | undefined>) {
+    return this.attr('aria-disabled', mapAttribute(value, booleanToString))
+  }
+  ariaDropEffect(
+    value: DerivedOrLiteralValue<
+      State,
+      'copy' | 'execute' | 'link' | 'move' | 'none' | 'popup' | undefined
+    >
+  ) {
+    return this.attr('aria-dropeffect', value)
+  }
+  ariaErrorMessage(
+    value: DerivedOrLiteralValue<
+      State,
+      'grammar' | 'false' | false | 'spelling' | 'true' | true | undefined
+    >
+  ) {
+    return this.attr(
+      'aria-errormessage',
+      mapAttribute(value, v =>
+        v === true ? 'true' : v === false ? 'false' : v
+      )
+    )
+  }
+  ariaExpanded(value: DerivedOrLiteralValue<State, boolean | undefined>) {
+    return this.attr('aria-expanded', mapAttribute(value, booleanToString))
+  }
+  ariaFlowTo(value: DerivedOrLiteralValue<State, string | undefined>) {
+    return this.attr('aria-flowto', value)
+  }
+  ariaGrabbed(value: DerivedOrLiteralValue<State, boolean | undefined>) {
+    return this.attr('aria-grabbed', mapAttribute(value, booleanToString))
+  }
+  ariaHasPopup(
+    value: DerivedOrLiteralValue<
+      State,
+      | 'true'
+      | 'false'
+      | 'menu'
+      | 'listbox'
+      | 'tree'
+      | 'grid'
+      | 'dialog'
+      | true
+      | false
+      | undefined
+    >
+  ) {
+    return this.attr(
+      'aria-haspopup',
+      mapAttribute(value, v =>
+        v === true ? 'true' : v === false ? 'false' : v
+      )
+    )
+  }
+  ariaHidden(value: DerivedOrLiteralValue<State, string | undefined>) {
+    return this.attr('aria-hidden', value)
+  }
+  ariaInvalid(value: DerivedOrLiteralValue<State, string | undefined>) {
+    return this.attr('aria-invalid', value)
+  }
+  ariaKeyShortcuts(value: DerivedOrLiteralValue<State, string | undefined>) {
+    return this.attr('aria-keyshortcuts', value)
+  }
+  ariaLabel(value: DerivedOrLiteralValue<State, string | undefined>) {
+    return this.attr('aria-label', value)
+  }
+  ariaLabelledBy(value: DerivedOrLiteralValue<State, string | undefined>) {
+    return this.attr('aria-labelledby', value)
+  }
+  ariaLevel(value: DerivedOrLiteralValue<State, number | undefined>) {
+    return this.attr('aria-level', mapAttribute(value, String))
+  }
+  ariaLive(
+    value: DerivedOrLiteralValue<
+      State,
+      'assertive' | 'off' | 'polite' | undefined
+    >
+  ) {
+    return this.attr('aria-live', value)
+  }
+  ariaModal(value: DerivedOrLiteralValue<State, boolean | undefined>) {
+    return this.attr('aria-modal', mapAttribute(value, booleanToString))
+  }
+  ariaMultiLine(value: DerivedOrLiteralValue<State, boolean | undefined>) {
+    return this.attr('aria-multiline', mapAttribute(value, booleanToString))
+  }
+  ariaMultiSelectable(
+    value: DerivedOrLiteralValue<State, boolean | undefined>
+  ) {
+    return this.attr(
+      'aria-multiselectable',
+      mapAttribute(value, booleanToString)
+    )
+  }
+  ariaOrientation(
+    value: DerivedOrLiteralValue<State, 'horizontal' | 'vertical' | undefined>
+  ) {
+    return this.attr('aria-orientation', value)
+  }
+  ariaOwns(value: DerivedOrLiteralValue<State, string | undefined>) {
+    return this.attr('aria-owns', value)
+  }
+  ariaPlaceHolder(value: DerivedOrLiteralValue<State, string | undefined>) {
+    return this.attr('aria-placeholder', value)
+  }
+  ariaPointSet(value: DerivedOrLiteralValue<State, number | undefined>) {
+    return this.attr('aria-pointset', mapAttribute(value, String))
+  }
+  ariaPosInSet(value: DerivedOrLiteralValue<State, string | undefined>) {
+    return this.attr('aria-posinset', value)
+  }
+  ariaPressed(
+    value: DerivedOrLiteralValue<
+      State,
+      'true' | 'false' | 'mixed' | true | false | undefined
+    >
+  ) {
+    return this.attr(
+      'aria-pressed',
+      mapAttribute(value, v =>
+        v === true ? 'true' : v === false ? 'false' : v
+      )
+    )
+  }
+  ariaReadonly(value: DerivedOrLiteralValue<State, boolean | undefined>) {
+    return this.attr('aria-readonly', mapAttribute(value, booleanToString))
+  }
+  ariaRequired(value: DerivedOrLiteralValue<State, boolean | undefined>) {
+    return this.attr('aria-required', mapAttribute(value, booleanToString))
+  }
+  ariaRelevant(
+    value: DerivedOrLiteralValue<
+      State,
+      'addition' | 'additions text' | 'all' | 'removals' | 'text' | undefined
+    >
+  ) {
+    return this.attr('aria-relevant', value)
+  }
+  ariaRoleDescription(value: DerivedOrLiteralValue<State, string | undefined>) {
+    return this.attr('aria-roledescription', value)
+  }
+  ariaRowCount(value: DerivedOrLiteralValue<State, number | undefined>) {
+    return this.attr('aria-rowcount', mapAttribute(value, String))
+  }
+  ariaRowIndex(value: DerivedOrLiteralValue<State, number | undefined>) {
+    return this.attr('aria-rowindex', mapAttribute(value, String))
+  }
+  ariaRowSpan(value: DerivedOrLiteralValue<State, number | undefined>) {
+    return this.attr('aria-rowspan', mapAttribute(value, String))
+  }
+  ariaSelected(value: DerivedOrLiteralValue<State, boolean | undefined>) {
+    return this.attr('aria-selected', mapAttribute(value, booleanToString))
+  }
+  ariaSetSize(value: DerivedOrLiteralValue<State, number | undefined>) {
+    return this.attr('aria-setsize', mapAttribute(value, String))
+  }
+  ariaSort(
+    value: DerivedOrLiteralValue<
+      State,
+      'ascending' | 'descending' | 'none' | 'other' | undefined
+    >
+  ) {
+    return this.attr('aria-sort', value)
+  }
+  ariaValueMax(value: DerivedOrLiteralValue<State, number | undefined>) {
+    return this.attr('aria-valuemax', mapAttribute(value, String))
+  }
+  ariaValueMin(value: DerivedOrLiteralValue<State, number | undefined>) {
+    return this.attr('aria-valuemin', mapAttribute(value, String))
+  }
+  ariaValueNow(value: DerivedOrLiteralValue<State, number | undefined>) {
+    return this.attr('aria-valuenow', mapAttribute(value, String))
+  }
+  ariaValueText(value: DerivedOrLiteralValue<State, string | undefined>) {
+    return this.attr('aria-valuetext', value)
   }
 
   // event shortcuts
