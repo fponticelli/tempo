@@ -18,7 +18,7 @@ import { domChildToTemplate, removeNode } from './utils/dom'
 import { map as mapArray } from 'tempo-std/lib/arrays'
 import { Attribute, resolveAttribute } from './value'
 
-class MapStateTemplate<OuterState, InnerState, Action, Query>
+export class MapStateTemplate<OuterState, InnerState, Action, Query>
   implements DOMTemplate<OuterState, Action, Query> {
   constructor(
     readonly map: Attribute<OuterState, InnerState>,

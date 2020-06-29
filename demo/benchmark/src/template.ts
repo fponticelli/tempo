@@ -20,9 +20,6 @@ import { tableView } from './template/table_view'
 
 export const template = div<State, Action>(
   { attrs: { className: 'display_test' } },
-  mapState(
-    { map: state => state.options },
-    optionsSelection
-  ),
+  mapState({ map: state => state.options }, optionsSelection),
   tableView
 )

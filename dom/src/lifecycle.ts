@@ -36,6 +36,18 @@ export function compose<State, Action>(
   }
 }
 
+export function makeEmptyLifecycle<State, Action, HTMLElement>(
+  state: State,
+  element: HTMLElement,
+  ctx: DOMContext<Action>
+) {
+  return {
+    beforeChange(state: State) {},
+    afterChange(state: State) {},
+    beforeDestroy() {}
+  }
+}
+
 export function focusElement<State, Action, HTMLElement>(
   state: State,
   element: HTMLElement,

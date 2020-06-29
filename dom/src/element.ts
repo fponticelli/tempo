@@ -19,7 +19,8 @@ import {
   processEvent,
   processStyle,
   domChildToTemplate,
-  removeNode
+  removeNode,
+  setElAttribute
 } from './utils/dom'
 import {
   Props,
@@ -32,6 +33,7 @@ import { map } from 'tempo-std/lib/arrays'
 
 import { attributeNameMap } from './utils/attributes_mapper'
 import { MakeLifecycle } from './lifecycle'
+import { DerivedValue } from 'tempo-core/lib/value'
 
 export class DOMElement<State, Action, Query = unknown>
   implements DOMTemplate<State, Action, Query> {
@@ -97,6 +99,95 @@ export class DOMElement<State, Action, Query = unknown>
         if (respond) {
           respond(query, el, ctx)
         }
+        for (const view of views) {
+          view.request(query)
+        }
+      }
+    }
+  }
+}
+
+export class DOMElement2<State, Action, Query = unknown>
+  implements DOMTemplate<State, Action, Query> {
+  constructor(
+    public createElement: (doc: Document) => HTMLElement,
+    public literalAttrs: { name: string; value: string }[],
+    public derivedAttrs: {
+      name: string
+      resolve: DerivedValue<State, string | undefined>
+    }[],
+    public literalStyles: { name: string; value: string }[],
+    public derivedStyles: {
+      name: string
+      resolve: DerivedValue<State, string | undefined>
+    }[],
+    public handlers: {
+      name: string
+      callback: EventHandler<State, Action>
+    }[],
+    public makeLifecycle: MakeLifecycle<State, Action>,
+    public respond: (
+      query: Query,
+      el: HTMLElement,
+      ctx: DOMContext<Action>
+    ) => void,
+    public children: DOMTemplate<State, Action, Query>[]
+  ) {}
+
+  render(ctx: DOMContext<Action>, state: State): View<State, Query> {
+    const { respond } = this
+    let localState = state
+    const el = this.createElement(ctx.doc)
+
+    for (const att of this.literalAttrs) setElAttribute(el, att.name, att.value)
+
+    for (const att of this.derivedAttrs) {
+      setElAttribute(el, att.name, att.resolve(localState))
+    }
+
+    for (const handler of this.handlers) {
+      el.addEventListener(
+        handler.name,
+        (event: Event) => {
+          const action = handler.callback(localState, event, el)
+          if (action !== undefined) {
+            ctx.dispatch(action)
+          }
+        },
+        false
+      )
+    }
+
+    // children
+    const appendChild = (n: Node) => el.appendChild(n)
+    const newCtx = ctx.withAppend(appendChild).withParent(el)
+    const views = map(this.children, child => child.render(newCtx, localState))
+
+    ctx.append(el)
+
+    const lifecycle = this.makeLifecycle(localState, el, ctx)
+
+    return {
+      change: (state: State) => {
+        localState = state
+        lifecycle.beforeChange(localState)
+
+        for (const att of this.derivedAttrs) {
+          setElAttribute(el, att.name, att.resolve(localState))
+        }
+        for (const view of views) {
+          view.change(localState)
+        }
+
+        lifecycle.afterChange(localState)
+      },
+      destroy: () => {
+        lifecycle.beforeDestroy()
+        removeNode(el)
+        for (const view of views) view.destroy()
+      },
+      request: (query: Query) => {
+        respond(query, el, ctx)
         for (const view of views) {
           view.request(query)
         }

@@ -20,9 +20,17 @@ export type Attribute<State, Value> =
   | DerivedOrLiteralValue<State, Value | undefined>
   | undefined
 export type TextValue<S> = Attribute<S, string>
-export type EventHandler<S, Action> =
-  | ((state: S, event: Event, element: HTMLElement) => Action | undefined)
-  | undefined
+export type EventHandler<S, Action> = (
+  state: S,
+  event: Event,
+  element: HTMLElement
+) => Action | undefined
+export type EventHandlerTE<
+  S,
+  Action,
+  Ev extends Event,
+  El extends HTMLElement
+> = (state: S, event: Ev, element: El) => Action | undefined
 export type StyleAttribute<State, Value> = DerivedOrLiteralValue<
   State,
   Value | undefined

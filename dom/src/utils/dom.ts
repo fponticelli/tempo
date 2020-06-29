@@ -12,7 +12,12 @@ limitations under the License.
 */
 
 import { DerivedValue } from 'tempo-core/lib/value'
-import { Attribute, EventHandler, StyleAttribute } from '../value'
+import {
+  Attribute,
+  EventHandler,
+  StyleAttribute,
+  AttributeValue
+} from '../value'
 import { htmlAttributeMap as attributeMap } from './attributes_mapper'
 import { setAttribute, setOneStyle } from './set_attribute'
 import { DOMChild, DOMTemplate } from '../template'
@@ -41,11 +46,20 @@ export function domChildToTemplate<State, Action, Query>(
   dom: DOMChild<State, Action, Query>
 ): DOMTemplate<State, Action, Query> {
   if (typeof dom === 'string' || typeof dom === 'function' || dom === undefined)
-    return text(dom)
+    return text(dom ?? '')
   else return dom
 }
 
 export type Acc<State> = ((state: State) => void)[]
+
+export function setElAttribute(
+  el: Element,
+  name: string,
+  value: AttributeValue | undefined
+) {
+  let set = attributeMap[name] || setAttribute
+  set(el, name, value)
+}
 
 export function processAttribute<State, Value>(
   el: Element,
