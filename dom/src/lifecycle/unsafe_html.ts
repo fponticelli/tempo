@@ -11,9 +11,9 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { DOMContext } from './context'
+import { DOMContext } from '../context'
 import { DerivedOrLiteralValue } from 'tempo-core/lib/value'
-import { Lifecycle } from './lifecycle'
+import { Lifecycle } from '../lifecycle'
 
 export function unsafeHtml<State, Action>(
   html: DerivedOrLiteralValue<State, string>

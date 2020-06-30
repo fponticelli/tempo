@@ -12,13 +12,12 @@ limitations under the License.
 */
 
 import { View } from 'tempo-core/lib/view'
-import { DOMContext } from './context'
-import { DOMTemplate } from './template'
+import { DOMContext } from '../context'
+import { DOMTemplate } from '../template'
 
-class LazyTemplate<State, Action, Query> implements DOMTemplate<State, Action, Query> {
-  constructor(
-    readonly f: () => DOMTemplate<State, Action, Query>
-  ) {}
+export class LazyTemplate<State, Action, Query>
+  implements DOMTemplate<State, Action, Query> {
+  constructor(readonly f: () => DOMTemplate<State, Action, Query>) {}
 
   render(ctx: DOMContext<Action>, state: State): View<State, Query> {
     const template = this.f()

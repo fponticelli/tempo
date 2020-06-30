@@ -11,25 +11,21 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { DOMChild, DOMTemplate } from './template'
-import { DOMContext } from './context'
+import { DOMChild, DOMTemplate } from '../template'
+import { DOMContext } from '../context'
 import { View } from 'tempo-core/lib/view'
-import { domChildToTemplate, removeNode } from './utils/dom'
+import { domChildToTemplate, removeNode } from '../utils/dom'
 import { map } from 'tempo-std/lib/arrays'
-import { Attribute, resolveAttribute, mapAttribute } from './value'
+import { Attribute, resolveAttribute, mapAttribute } from '../value'
 
-export interface WhenProps<State> {
-  condition: Attribute<State, boolean>
-}
-
-class WhenTemplate<State, Action, Query>
+export class WhenTemplate<State, Action, Query>
   implements DOMTemplate<State, Action, Query> {
   constructor(
-    readonly props: WhenProps<State>,
+    readonly condition: Attribute<State, boolean>,
     readonly children: DOMTemplate<State, Action, Query>[]
   ) {}
   render(ctx: DOMContext<Action>, state: State): View<State, Query> {
-    const { condition } = this.props
+    const condition = this.condition
     const { ctx: newCtx, ref } = ctx.withAppendToReference()
     let views: View<State, Query>[] | undefined
     const view = {
@@ -64,23 +60,21 @@ class WhenTemplate<State, Action, Query>
 }
 
 export function when<State, Action, Query = unknown>(
-  props: WhenProps<State>,
+  condition: Attribute<State, boolean>,
   ...children: DOMChild<State, Action, Query>[]
 ): DOMTemplate<State, Action, Query> {
   return new WhenTemplate<State, Action, Query>(
-    props,
+    condition,
     map(children, domChildToTemplate)
   )
 }
 
 export function unless<State, Action, Query = unknown>(
-  props: WhenProps<State>,
+  condition: Attribute<State, boolean>,
   ...children: DOMChild<State, Action, Query>[]
 ): DOMTemplate<State, Action, Query> {
   return new WhenTemplate<State, Action, Query>(
-    {
-      condition: mapAttribute(props.condition, v => !v)
-    },
+    mapAttribute(condition, v => !v),
     map(children, domChildToTemplate)
   )
 }

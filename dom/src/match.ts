@@ -22,7 +22,7 @@ import {
   ObjectWithField
 } from 'tempo-std/lib/types/objects'
 import { Option } from 'tempo-std/lib/option'
-import { mapState, mapField } from './map'
+import { mapState, mapField } from './impl/map_state'
 import { Maybe, Just } from 'tempo-std/lib/maybe'
 import { Result } from 'tempo-std/lib/result'
 import { Async, Outcome } from 'tempo-std/lib/async'

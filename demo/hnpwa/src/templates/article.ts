@@ -11,13 +11,13 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { article, section, span, div } from 'tempo-dom/lib/html'
+import { article, section, span, div } from 'dom/lib/html_old'
 import { Article } from '../state'
 import { Action } from '../action'
 import { commentsTemplate } from './comments'
 import { itemFooterTemplate, itemUrlTemplate } from './page_feed'
-import { mapState } from 'tempo-dom/lib/map'
-import { unsafeHtml } from 'tempo-dom/lib/unsafe_html'
+import { mapState } from 'dom/lib/map_state'
+import { unsafeHtml } from 'dom/lib/lifecycle/unsafe_html'
 
 export const articleTemplate = article<Article, Action>(
   {},

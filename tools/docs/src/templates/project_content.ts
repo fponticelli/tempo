@@ -1,12 +1,12 @@
 import { Action } from '../action'
 import { ProjectRef } from '../toc'
-import { div, p, a, span, article, img, br, h1 } from 'tempo-dom/lib/html'
-import { mapField } from 'tempo-dom/lib/map'
-import { when } from 'tempo-dom/lib/when'
-import { forEach } from 'tempo-dom/lib/for_each'
+import { div, p, a, span, article, img, br, h1 } from 'dom/lib/html_old'
+import { mapField } from 'dom/lib/map_state'
+import { when } from 'dom/lib/impl/when'
+import { forEach } from 'dom/lib/impl/for_each'
 import { Route } from '../route'
 import { link } from './link'
-import { unsafeHtml } from 'tempo-dom/lib/unsafe_html'
+import { unsafeHtml } from 'dom/lib/lifecycle/unsafe_html'
 
 function renamePackage(s: string) {
   return s

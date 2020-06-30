@@ -11,7 +11,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { div, input, label, table, tr, td, th } from 'tempo-dom/lib/html'
+import { div, input, label, table, tr, td, th } from 'dom/lib/html_old'
 import { Action } from '../action'
 import { TestOptions } from '../state'
 

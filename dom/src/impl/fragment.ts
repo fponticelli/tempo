@@ -11,34 +11,21 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { DOMChild, DOMTemplate } from './template'
 import { View } from 'tempo-core/lib/view'
-import { DOMContext } from './context'
-import { domChildToTemplate } from './utils/dom'
+import { domChildToTemplate } from '../utils/dom'
+import { DOMTemplate, DOMChild } from '../template'
+import { DOMContext } from '../context'
 import { map } from 'tempo-std/lib/arrays'
-import { Attribute, resolveAttribute } from './value'
 
-class FilterStateTemplate<State, Action, Query>
+export class FragmentTemplate<State, Action, Query>
   implements DOMTemplate<State, Action, Query> {
-  constructor(
-    readonly stateHasChanged: Attribute<
-      { current: State; next: State },
-      boolean
-    >,
-    readonly children: DOMTemplate<State, Action, Query>[]
-  ) {}
+  constructor(readonly children: DOMTemplate<State, Action, Query>[]) {}
 
   render(ctx: DOMContext<Action>, state: State): View<State, Query> {
-    const { children, stateHasChanged } = this
-    const views = map(children, c => c.render(ctx, state))
-
-    let current = state
+    const views = map(this.children, child => child.render(ctx, state))
     return {
-      change: (next: State) => {
-        if (resolveAttribute(stateHasChanged)({ current, next })) {
-          current = next
-          for (const view of views) view.change(next)
-        }
+      change: (state: State) => {
+        for (const view of views) view.change(state)
       },
       destroy: () => {
         for (const view of views) view.destroy()
@@ -50,14 +37,10 @@ class FilterStateTemplate<State, Action, Query>
   }
 }
 
-export function filterState<State, Action, Query = unknown>(
-  props: {
-    stateHasChanged?: (state: { current: State; next: State }) => boolean
-  },
+export function fragment<State, Action, Query = unknown>(
   ...children: DOMChild<State, Action, Query>[]
 ): DOMTemplate<State, Action, Query> {
-  return new FilterStateTemplate(
-    props.stateHasChanged ?? (({ current, next }) => current !== next),
+  return new FragmentTemplate<State, Action, Query>(
     map(children, domChildToTemplate)
   )
 }

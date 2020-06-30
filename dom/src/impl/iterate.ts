@@ -11,10 +11,10 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { DOMChild, DOMTemplate } from './template'
-import { mapState } from './map'
+import { DOMChild, DOMTemplate } from '../template'
+import { mapState } from './map_state'
 import { until } from './until'
-import { Attribute, resolveAttribute } from './value'
+import { Attribute, resolveAttribute } from '../value'
 
 export function iterate<
   OuterState,
@@ -40,10 +40,8 @@ export function iterate<
       }
     },
     until<InnerState, InnerState[number], Action, Query>(
-      {
-        next: ({ state, index }: { state: InnerState; index: number }) =>
-          state[index] && [state[index], outerState, index]
-      },
+      ({ state, index }: { state: InnerState; index: number }) =>
+        state[index] && [state[index], outerState, index],
       ...children
     )
   )
@@ -57,20 +55,17 @@ export function iterateItems<
 >(
   props: {
     map: Attribute<OuterState, InnerState>
-    whenUndefined?: DOMChild<unknown, Action, Query>
+    whenNot?: DOMChild<unknown, Action, Query>
   },
   ...children: DOMChild<InnerState[number], Action, Query>[]
 ): DOMTemplate<OuterState, Action, Query> {
   return mapState<OuterState, InnerState, Action, Query>(
     {
       map: outer => resolveAttribute(props.map)(outer),
-      whenUndefined: props.whenUndefined
+      whenNot: props.whenNot
     },
     until<InnerState, InnerState[number], Action, Query>(
-      {
-        next: ({ state, index }: { state: InnerState; index: number }) =>
-          state[index]
-      },
+      ({ state, index }: { state: InnerState; index: number }) => state[index],
       ...children
     )
   )

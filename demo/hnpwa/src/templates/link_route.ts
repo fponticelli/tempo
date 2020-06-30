@@ -13,7 +13,7 @@ limitations under the License.
 
 import { Action } from '../action'
 import { Route, toUrl, toTitle } from '../route'
-import { a } from 'tempo-dom/lib/html'
+import { a } from 'dom/lib/html_old'
 import { Attribute, mapAttribute, resolveAttribute } from 'tempo-dom/lib/value'
 import { DOMChild, DOMTemplate } from 'tempo-dom/lib/template'
 // import 'tempo-dom/lib/value'

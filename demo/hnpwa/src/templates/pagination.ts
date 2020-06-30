@@ -11,13 +11,13 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { section, nav, div, span } from 'tempo-dom/lib/html'
+import { section, nav, div, span } from 'dom/lib/html_old'
 import { Feed, maxPage, Route } from '../route'
 import { Action } from '../action'
 import { matchBool } from 'tempo-dom/lib/match'
 import { linkRoute } from './link_route'
-import { mapState } from 'tempo-dom/lib/map'
-import { forEach } from 'tempo-dom/lib/for_each'
+import { mapState } from 'dom/lib/map_state'
+import { forEach } from 'dom/lib/impl/for_each'
 
 const paginationDesktop = matchBool<
   { feed: Feed; page: number; current: number },

@@ -22,13 +22,13 @@ import {
   span,
   button,
   b
-} from 'tempo-dom/lib/html'
+} from 'dom/lib/html_old'
 import { Action } from '../action'
 import { TestInfo, State, VersionWithSelected, makeTestRunId } from '../state'
-import { forEach } from 'tempo-dom/lib/for_each'
-import { mapState } from 'tempo-dom/lib/map'
-import { when } from 'tempo-dom/lib/when'
-import { fragment } from 'tempo-dom/lib/fragment'
+import { forEach } from 'dom/lib/impl/for_each'
+import { mapState } from 'dom/lib/map_state'
+import { when } from 'dom/lib/impl/when'
+import { fragment } from 'dom/lib/impl/fragment'
 
 const resultToOpsPerSec = (r: TestResult) => {
   return r.hz.toFixed(r.hz < 100 ? 2 : 0)

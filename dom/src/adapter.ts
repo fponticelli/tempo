@@ -12,13 +12,18 @@ limitations under the License.
 */
 
 import { View } from 'tempo-core/lib/view'
-import { ComponentTemplate } from './component'
+import { ComponentTemplate } from './impl/component'
 import { DOMTemplate } from './template'
 import { DOMContext } from './context'
 import { Attribute, resolveAttribute } from './value'
 
-class AdapterTemplate<OuterState, InnerState, OuterAction, InnerAction, Query>
-  implements DOMTemplate<OuterState, OuterAction, Query> {
+export class AdapterTemplate<
+  OuterState,
+  InnerState,
+  OuterAction,
+  InnerAction,
+  Query
+> implements DOMTemplate<OuterState, OuterAction, Query> {
   private dispatchPropagate:
     | undefined
     | ((state: InnerState, action: InnerAction) => void)

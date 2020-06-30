@@ -11,7 +11,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { div } from 'tempo-dom/lib/html'
+import { div } from 'dom/lib/html_old'
 import { DOMChild } from 'tempo-dom/lib/template'
 
 export const notification = <State, Action>(

@@ -11,8 +11,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { DOMTemplate, DOMChild } from './template'
-import { DOMContext } from './context'
+import { DOMTemplate, DOMChild } from '../template'
+import { DOMContext } from '../context'
 import { View } from 'tempo-core/lib/view'
 import {
   processAttribute,
@@ -21,18 +21,18 @@ import {
   domChildToTemplate,
   removeNode,
   setElAttribute
-} from './utils/dom'
+} from '../utils/dom'
 import {
   Props,
   Attribute,
   AttributeValue,
   EventHandler,
   StyleAttribute
-} from './value'
+} from '../value'
 import { map } from 'tempo-std/lib/arrays'
 
-import { attributeNameMap } from './utils/attributes_mapper'
-import { MakeLifecycle } from './lifecycle'
+import { attributeNameMap } from '../utils/attributes_mapper'
+import { MakeLifecycle } from '../lifecycle'
 import { DerivedValue } from 'tempo-core/lib/value'
 
 export class DOMElement<State, Action, Query = unknown>

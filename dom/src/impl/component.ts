@@ -12,9 +12,9 @@ limitations under the License.
 */
 
 import { Store } from 'tempo-store/lib/store'
-import { DOMTemplate, DOMChild } from './template'
-import { DOMContext } from './context'
-import { domChildToTemplate } from './utils/dom'
+import { DOMTemplate, DOMChild } from '../template'
+import { DOMContext } from '../context'
+import { domChildToTemplate } from '../utils/dom'
 import { map } from 'tempo-std/lib/arrays'
 import { View } from 'tempo-core/lib/view'
 

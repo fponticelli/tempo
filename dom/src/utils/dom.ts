@@ -21,7 +21,7 @@ import {
 import { htmlAttributeMap as attributeMap } from './attributes_mapper'
 import { setAttribute, setOneStyle } from './set_attribute'
 import { DOMChild, DOMTemplate } from '../template'
-import { text } from '../text'
+import { text } from '../impl/text'
 
 export function removeNode(node: Node) {
   const el = node as HTMLElement

@@ -1,7 +1,7 @@
 import { BaseBuilder } from './base_builder'
 import { DerivedOrLiteralValue, DerivedValue } from 'tempo-core/lib/value'
 import { EventHandler, mapAttribute, EventHandlerTE } from '../value'
-import { DOMElement2 } from '../element'
+import { DOMElement2 } from '../impl/element'
 import { makeCreateElement } from '../impl/apply_element'
 import { makeEmptyLifecycle } from '../lifecycle'
 import { keys } from 'tempo-std/lib/objects'

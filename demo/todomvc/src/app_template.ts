@@ -25,11 +25,11 @@ import {
   a,
   p,
   button
-} from 'tempo-dom/lib/html'
+} from 'dom/lib/html_old'
 import { EventHandler } from 'tempo-dom/lib/value'
 import { filterState } from 'tempo-dom/lib/filter'
-import { iterate } from 'tempo-dom/lib/iterate'
-import { when } from 'tempo-dom/lib/when'
+import { iterate } from 'dom/lib/impl/iterate'
+import { when } from 'dom/lib/impl/when'
 import { focusElement } from 'tempo-dom/lib/lifecycle'
 import { Action } from './action'
 import { State, Filter, Todo } from './state'

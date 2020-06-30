@@ -12,7 +12,7 @@ limitations under the License.
 */
 
 import { Tempo } from 'tempo-dom/lib/tempo'
-import { div, button } from 'tempo-dom/lib/html'
+import { div, button } from 'dom/lib/html_old'
 import { simpleComponent } from 'tempo-dom/lib/simple_component'
 
 const component = simpleComponent<number>(

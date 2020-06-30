@@ -11,8 +11,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { mapState } from 'tempo-dom/lib/map'
-import { main, section } from 'tempo-dom/lib/html'
+import { mapState } from 'dom/lib/map_state'
+import { main, section } from 'dom/lib/html_old'
 import { State } from '../state'
 import { Action } from '../action'
 import { appHeader } from './header'

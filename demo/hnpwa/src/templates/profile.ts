@@ -11,12 +11,12 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { section, table, tr, td, b } from 'tempo-dom/lib/html'
+import { section, table, tr, td, b } from 'dom/lib/html_old'
 import { Profile, User } from '../state'
 import { Action } from '../action'
-import { mapState } from 'tempo-dom/lib/map'
-import { when } from 'tempo-dom/lib/when'
-import { unsafeHtml } from 'tempo-dom/lib/unsafe_html'
+import { mapState } from 'dom/lib/map_state'
+import { when } from 'dom/lib/impl/when'
+import { unsafeHtml } from 'dom/lib/lifecycle/unsafe_html'
 
 export const profileTemplate = section<Profile, Action>(
   { attrs: { className: 'user-view' } },

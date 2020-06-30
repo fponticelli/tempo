@@ -11,7 +11,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { elNS2 } from './element'
+import { elNS2 } from './impl/element'
 
 const ns = 'http://www.w3.org/2000/svg'
 

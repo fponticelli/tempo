@@ -1,7 +1,7 @@
-import { div, ul, li, aside, p, hr } from 'tempo-dom/lib/html'
-import { lazy } from 'tempo-dom/lib/lazy'
-import { iterate } from 'tempo-dom/lib/iterate'
-import { when } from 'tempo-dom/lib/when'
+import { div, ul, li, aside, p, hr } from 'dom/lib/html_old'
+import { lazy } from 'dom/lib/impl/lazy'
+import { iterate } from 'dom/lib/impl/iterate'
+import { when } from 'dom/lib/impl/when'
 import { Action } from '../action'
 import { Toc, PageRef, ApiRef } from '../toc'
 import { maybeLink } from './link'
@@ -18,8 +18,8 @@ import { some, none } from 'tempo-std/lib/option'
 import { keys } from 'tempo-std/lib/objects'
 import { SectionRef, ProjectRef } from '../toc'
 import { DOMTemplate } from 'tempo-dom/lib/template'
-import { mapState } from 'tempo-dom/lib/map'
-import { fragment } from 'tempo-dom/lib/fragment'
+import { mapState } from 'dom/lib/map_state'
+import { fragment } from 'dom/lib/impl/fragment'
 
 type Sidebar = { toc: Toc; route: Route }
 

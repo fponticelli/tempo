@@ -1,13 +1,13 @@
 import { BaseBuilder } from './base_builder'
 import { Attribute } from '../value'
-import { MapStateTemplate } from '../map'
+import { MapStateTemplate } from '../impl/map_state'
 import { DOMChild } from '../template'
 import { IBuilder, childOrBuilderToTemplate } from './ibuilder'
 
 export class MapStateBuilder<State, StateB, Action, Query>
   extends BaseBuilder<StateB, Action, Query>
   implements IBuilder<State, Action, Query> {
-  public whenUndefined:
+  public whenNot:
     | DOMChild<State, Action, Query>
     | IBuilder<State, Action, Query>
     | undefined
@@ -18,7 +18,7 @@ export class MapStateBuilder<State, StateB, Action, Query>
   build() {
     return new MapStateTemplate<State, StateB, Action, Query>(
       this.map,
-      childOrBuilderToTemplate(this.whenUndefined),
+      childOrBuilderToTemplate(this.whenNot),
       this.equals,
       this._children
     )

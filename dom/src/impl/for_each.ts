@@ -11,7 +11,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { DOMChild, DOMTemplate } from './template'
+import { DOMChild, DOMTemplate } from '../template'
 import { until } from './until'
 
 export function forEach<State extends any[], Action, Query = unknown>(

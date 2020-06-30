@@ -11,12 +11,13 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { DOMTemplate, DOMChild } from './template'
-import { DOMContext } from './context'
-import { domChildToTemplate } from './utils/dom'
+import { DOMTemplate, DOMChild } from '../template'
+import { DOMContext } from '../context'
+import { domChildToTemplate } from '../utils/dom'
 import { map } from 'tempo-std/lib/arrays'
 
-class PortalTemplate<State, Action, Query> implements DOMTemplate<State, Action, Query> {
+export class PortalTemplate<State, Action, Query>
+  implements DOMTemplate<State, Action, Query> {
   constructor(
     readonly getParent: (doc: Document) => Element,
     readonly append: (doc: Document, node: Node) => void,
@@ -49,7 +50,11 @@ export function portal<State, Action, Query = unknown>(
   },
   ...children: DOMChild<State, Action, Query>[]
 ): DOMTemplate<State, Action, Query> {
-  return new PortalTemplate<State, Action, Query>(props.getParent, props.append, map(children, domChildToTemplate))
+  return new PortalTemplate<State, Action, Query>(
+    props.getParent,
+    props.append,
+    map(children, domChildToTemplate)
+  )
 }
 
 export function portalWithSelector<State, Action, Query = unknown>(
@@ -61,7 +66,9 @@ export function portalWithSelector<State, Action, Query = unknown>(
       getParent: (doc: Document) => {
         const el = doc.querySelector(props.selector)
         if (!el) {
-          throw new Error(`selector doesn't match any element: "${props.selector}"`)
+          throw new Error(
+            `selector doesn't match any element: "${props.selector}"`
+          )
         }
         return el
       },

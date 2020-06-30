@@ -1,8 +1,8 @@
-import { unsafeHtml } from 'tempo-dom/lib/unsafe_html'
+import { unsafeHtml } from 'dom/lib/lifecycle/unsafe_html'
 import { Action } from '../action'
-import { fragment } from 'tempo-dom/lib/fragment'
-import { when } from 'tempo-dom/lib/when'
-import { div, a, article } from 'tempo-dom/lib/html'
+import { fragment } from 'dom/lib/impl/fragment'
+import { when } from 'dom/lib/impl/when'
+import { div, a, article } from 'dom/lib/html_old'
 
 export const htmlContent = fragment<
   { title: string | undefined; html: string; path: string | undefined },

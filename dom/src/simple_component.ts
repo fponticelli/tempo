@@ -18,10 +18,11 @@ import { map } from 'tempo-std/lib/arrays'
 
 export type SimpleComponent<State, Query> = DOMTemplate<State, State, Query>
 
-class ComponentTemplate<State, Query> implements SimpleComponent<State, Query> {
+export class SimpleComponentTemplate<State, Query>
+  implements SimpleComponent<State, Query> {
   constructor(
-    readonly children: DOMTemplate<State, State, Query>[],
-    readonly delayed: boolean
+    readonly delayed: boolean,
+    readonly children: DOMTemplate<State, State, Query>[]
   ) {}
 
   render(ctx: DOMContext<State>, state: State) {
@@ -67,8 +68,8 @@ export function simpleComponent<State, Query = unknown>(
   },
   ...children: DOMChild<State, State, Query>[]
 ): SimpleComponent<State, Query> {
-  return new ComponentTemplate<State, Query>(
-    map(children, domChildToTemplate),
-    props.delayed || false
+  return new SimpleComponentTemplate<State, Query>(
+    props.delayed || false,
+    map(children, domChildToTemplate)
   )
 }

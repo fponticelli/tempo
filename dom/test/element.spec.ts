@@ -12,8 +12,8 @@ limitations under the License.
 */
 
 import { createContext } from './common'
-import { el } from '../src/element'
-import { div, span, a } from '../src/html'
+import { el } from '../src/impl/element'
+import { div, span, a } from '../src/html_old'
 import { MakeLifecycle } from '../src/lifecycle'
 
 describe('dom_element', () => {

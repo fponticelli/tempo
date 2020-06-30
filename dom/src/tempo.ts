@@ -12,12 +12,13 @@ limitations under the License.
 */
 
 import { Store } from 'tempo-store/lib/store'
-import { component, ComponentTemplate } from './component'
+import { component, ComponentTemplate } from './impl/component'
 import { DOMContext } from './context'
 import { DOMChild } from './template'
 import { View } from 'tempo-core/lib/view'
 import { SimpleComponent } from './simple_component'
 import { Reducer } from 'tempo-store/lib/reducer'
+import { IBuilder, childOrBuilderToTemplate } from './builder/ibuilder'
 
 export type TempoView<State, Action, Query> = Readonly<{
   view: View<State, Query>
@@ -48,7 +49,7 @@ export const Tempo = {
 
   render<State, Action, Query = unknown>(options: {
     el?: HTMLElement
-    template: DOMChild<State, Action, Query>
+    template: DOMChild<State, Action, Query> | IBuilder<State, Action, Query>
     state: State
     reducer: Reducer<State, Action>
     equal?: (a: State, b: State) => boolean
@@ -56,7 +57,10 @@ export const Tempo = {
     delayed?: boolean
   }): TempoView<State, Action, Query> {
     const { el, state, reducer, equal, document, template, delayed } = options
-    const comp = component({ reducer, equal, delayed }, template)
+    const comp = component(
+      { reducer, equal, delayed },
+      childOrBuilderToTemplate(template)
+    )
     return Tempo.renderComponent({ el, component: comp, state, document })
   },
 

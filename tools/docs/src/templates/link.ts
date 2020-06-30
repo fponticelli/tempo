@@ -1,8 +1,8 @@
-import { fragment } from 'tempo-dom/lib/fragment'
+import { fragment } from 'dom/lib/impl/fragment'
 import { matchBool } from 'tempo-dom/lib/match'
 import { Action } from '../action'
 import { toHref, Route } from '../route'
-import { a, span } from 'tempo-dom/lib/html'
+import { a, span } from 'dom/lib/html_old'
 import { getUnsafe, Option, toBoolean } from 'tempo-std/lib/option'
 import {
   Attribute,

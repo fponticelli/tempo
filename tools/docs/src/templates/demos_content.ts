@@ -1,7 +1,7 @@
 import { Action } from '../action'
 import { DemoRef } from '../toc'
-import { div, p, a } from 'tempo-dom/lib/html'
-import { forEach } from 'tempo-dom/lib/for_each'
+import { div, p, a } from 'dom/lib/html_old'
+import { forEach } from 'dom/lib/impl/for_each'
 
 function demoSrc(path: string) {
   return `https://github.com/fponticelli/tempo/tree/master/demo/${path}`

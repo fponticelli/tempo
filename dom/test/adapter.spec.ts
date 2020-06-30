@@ -12,7 +12,7 @@ limitations under the License.
 */
 
 import { createContext } from './common'
-import { div } from '../src/html'
+import { div } from '../src/html_old'
 import { adapter, PropagateArg } from '../src/adapter'
 import { component } from '../src/component'
 

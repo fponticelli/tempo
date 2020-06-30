@@ -12,24 +12,22 @@ limitations under the License.
 */
 
 import { View } from 'tempo-core/lib/view'
-import { DOMContext } from './context'
-import { DOMTemplate, DOMChild } from './template'
-import { removeNode, domChildToTemplate } from './utils/dom'
+import { DOMContext } from '../context'
+import { DOMTemplate, DOMChild } from '../template'
+import { removeNode, domChildToTemplate } from '../utils/dom'
 import { map } from 'tempo-std/lib/arrays'
-import { Attribute, resolveAttribute } from './value'
+import { Attribute, resolveAttribute } from '../value'
 
-class UntilTemplate<OuterState, InnerState, Action, Query>
+export class UntilTemplate<OuterState, InnerState, Action, Query>
   implements DOMTemplate<OuterState, Action, Query> {
   constructor(
-    readonly props: {
-      next: Attribute<{ state: OuterState; index: number }, InnerState>
-    },
+    readonly next: Attribute<{ state: OuterState; index: number }, InnerState>,
     readonly children: DOMTemplate<InnerState, Action, Query>[]
   ) {}
 
   render(ctx: DOMContext<Action>, state: OuterState): View<OuterState, Query> {
     const { children } = this
-    const { next } = this.props
+    const next = this.next
     const { ctx: newCtx, ref } = ctx.withAppendToReference()
     let childrenViews: View<InnerState, Query>[][] = []
     // TODO, when next is a static literal it can be optimized to only render once
@@ -75,13 +73,11 @@ class UntilTemplate<OuterState, InnerState, Action, Query>
 }
 
 export function until<OuterState, InnerState, Action, Query = unknown>(
-  props: {
-    next: Attribute<{ state: OuterState; index: number }, InnerState>
-  },
+  next: Attribute<{ state: OuterState; index: number }, InnerState>,
   ...children: DOMChild<InnerState, Action, Query>[]
 ): DOMTemplate<OuterState, Action, Query> {
   return new UntilTemplate<OuterState, InnerState, Action, Query>(
-    props,
+    next,
     map(children, domChildToTemplate)
   )
 }

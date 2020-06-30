@@ -1,4 +1,4 @@
-import { div } from 'tempo-dom/lib/html'
+import { div } from 'dom/lib/html_old'
 
 export const loader = div<any, any>(
   { attrs: { class: 'loader' } },
