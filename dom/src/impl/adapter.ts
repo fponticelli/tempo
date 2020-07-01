@@ -12,10 +12,10 @@ limitations under the License.
 */
 
 import { View } from 'tempo-core/lib/view'
-import { ComponentTemplate } from './impl/component'
-import { DOMTemplate } from './template'
-import { DOMContext } from './context'
-import { Attribute, resolveAttribute } from './value'
+import { ComponentTemplate } from './component'
+import { DOMTemplate } from '../template'
+import { DOMContext } from '../context'
+import { Attribute, resolveAttribute } from '../value'
 
 export class AdapterTemplate<
   OuterState,

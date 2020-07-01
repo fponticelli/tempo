@@ -68,7 +68,7 @@ import { FragmentBuilder } from './builder/fragment_builder'
 import { UntilBuilder } from './builder/until_builder'
 import { PortalBuilder } from './builder/portal_builder'
 import { SimpleComponentBuilder } from './builder/simple_component_builder'
-import { AdapterTemplate, PropagateArg } from './adapter'
+import { AdapterTemplate, PropagateArg } from './impl/adapter'
 import { ComponentTemplate } from './impl/component'
 
 // dom generic

@@ -1,4 +1,4 @@
-import { DOMTemplate } from '../template'
+import { DOMTemplate, DOMChild } from '../template'
 import { ElementBuilder } from './element_builder'
 import { DerivedOrLiteralValue, DerivedValue } from 'tempo-core/lib/value'
 import { text } from '../impl/text'
@@ -49,16 +49,17 @@ import { TableHeaderCellElementBuilder } from './tableheadercell_element_builder
 import { TimeElementBuilder } from './time_element_builder'
 import { TrackElementBuilder } from './track_element_builder'
 import { VideoElementBuilder } from './video_element_builder'
-import { resolveAttribute, mapAttribute, Attribute } from '../value'
+import { resolveAttribute, Attribute } from '../value'
 import { MapActionBuilder } from './map_action_builder'
 import { MapQueryBuilder } from './map_query_builder'
 import { LazyTemplate } from '../impl/lazy'
 import { FragmentBuilder } from './fragment_builder'
 import { UntilBuilder } from './until_builder'
 import { PortalBuilder } from './portal_builder'
-import { SimpleComponentBuilder } from './simple_component_builder'
-import { PropagateArg, AdapterTemplate } from '../adapter'
+// import { SimpleComponentBuilder } from './simple_component_builder'
+import { PropagateArg, AdapterTemplate } from '../impl/adapter'
 import { ComponentTemplate } from '../impl/component'
+import { IBuilder, childOrBuilderToTemplate } from './ibuilder'
 
 function initBuilder<
   T extends ElementBuilder<any, any, any, any>,
@@ -71,8 +72,10 @@ function initBuilder<
 export class BaseBuilder<State, Action, Query> {
   protected _children: DOMTemplate<State, Action, Query>[] = []
   // children
-  append(el: DOMTemplate<State, Action, Query>): this {
-    this._children.push(el)
+  append(
+    el: DOMChild<State, Action, Query> | IBuilder<State, Action, Query>
+  ): this {
+    this._children.push(childOrBuilderToTemplate(el))
     return this
   }
   el(
