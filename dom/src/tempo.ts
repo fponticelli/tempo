@@ -16,7 +16,7 @@ import { ComponentTemplate } from './impl/component'
 import { DOMContext } from './context'
 import { DOMChild } from './template'
 import { View } from 'tempo-core/lib/view'
-import { SimpleComponent } from './simple_component'
+import { SimpleComponent } from './impl/simple_component'
 import { Reducer } from 'tempo-store/lib/reducer'
 import {
   IBuilder,
@@ -49,10 +49,7 @@ export const Tempo = {
       Action,
       Query
     >
-    const view = template.render(
-      new DOMContext(doc, append, el, () => {}),
-      state
-    )
+    const view = template.render(new DOMContext(doc, append, () => {}), state)
 
     return {
       view,
@@ -95,7 +92,7 @@ export const Tempo = {
 
     const result = {
       ...template.render(
-        new DOMContext(doc, append, el, (state: State) => {
+        new DOMContext(doc, append, (state: State) => {
           result.onChange(state)
         }),
         state

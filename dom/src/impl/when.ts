@@ -58,23 +58,3 @@ export class WhenTemplate<State, Action, Query>
     return view
   }
 }
-
-// export function when<State, Action, Query = unknown>(
-//   condition: Attribute<State, boolean>,
-//   ...children: DOMChild<State, Action, Query>[]
-// ): DOMTemplate<State, Action, Query> {
-//   return new WhenTemplate<State, Action, Query>(
-//     condition,
-//     map(children, domChildToTemplate)
-//   )
-// }
-
-// export function unless<State, Action, Query = unknown>(
-//   condition: Attribute<State, boolean>,
-//   ...children: DOMChild<State, Action, Query>[]
-// ): DOMTemplate<State, Action, Query> {
-//   return new WhenTemplate<State, Action, Query>(
-//     mapAttribute(condition, v => !v),
-//     map(children, domChildToTemplate)
-//   )
-// }

@@ -13,15 +13,14 @@ import { PropagateArg, AdapterTemplate } from './adapter'
 import { ComponentTemplate } from './component'
 import { keys } from 'tempo-std/lib/objects'
 import { DOMContext } from '../context'
-// import { makeCreateElement } from './apply_element'
 import { makeEmptyLifecycle } from '../lifecycle'
-import { DOMElement2 } from './element'
+import { DOMElement } from './element'
 import { MapStateTemplate } from './map_state'
 import { FragmentTemplate } from './fragment'
 import { MapActionTemplate } from './map_action'
 import { MapQueryTemplate } from './map_query'
 import { UntilTemplate } from './until'
-import { SimpleComponentTemplate } from '../simple_component'
+import { SimpleComponentTemplate } from './simple_component'
 import { PortalTemplate } from './portal'
 import { LazyTemplate } from './lazy'
 
@@ -229,10 +228,10 @@ export class BaseBuilder<State, Action, Query> {
   }
 
   portal(
-    getParent: (doc: Document) => Element,
+    appendChild: (doc: Document) => Element,
     init: (builder: PortalBuilder<State, Action, Query>) => void
   ): this {
-    const builder = new PortalBuilder<State, Action, Query>(getParent)
+    const builder = new PortalBuilder<State, Action, Query>(appendChild)
     init(builder)
     return this.append(builder.build())
   }
@@ -803,6 +802,162 @@ export class BaseBuilder<State, Action, Query> {
       this
     )
   }
+
+  inputButton(
+    init?: (builder: InputElementBuilder<State, Action, Query>) => void
+  ): this {
+    const builder = new InputElementBuilder<State, Action, Query>()
+    builder.type('button')
+    return initBuilder(builder, init, this)
+  }
+  inputCheckbox(
+    init?: (builder: InputCheckedElementBuilder<State, Action, Query>) => void
+  ): this {
+    const builder = new InputCheckedElementBuilder<State, Action, Query>()
+    builder.type('checkbox')
+    return initBuilder(builder, init, this)
+  }
+  inputColor(
+    init?: (builder: InputElementBuilder<State, Action, Query>) => void
+  ): this {
+    const builder = new InputElementBuilder<State, Action, Query>()
+    builder.type('color')
+    return initBuilder(builder, init, this)
+  }
+  inputDate(
+    init?: (builder: InputDateElementBuilder<State, Action, Query>) => void
+  ): this {
+    const builder = new InputDateElementBuilder<State, Action, Query>()
+    builder.type('date')
+    return initBuilder(builder, init, this)
+  }
+  inputDatetimeLocal(
+    init?: (builder: InputDateElementBuilder<State, Action, Query>) => void
+  ): this {
+    const builder = new InputDateElementBuilder<State, Action, Query>()
+    builder.type('datetime-local')
+    return initBuilder(builder, init, this)
+  }
+  inputEmail(
+    init?: (builder: InputEmailElementBuilder<State, Action, Query>) => void
+  ): this {
+    const builder = new InputEmailElementBuilder<State, Action, Query>()
+    builder.type('email')
+    return initBuilder(builder, init, this)
+  }
+  inputFile(
+    init?: (builder: InputFileElementBuilder<State, Action, Query>) => void
+  ): this {
+    const builder = new InputFileElementBuilder<State, Action, Query>()
+    builder.type('file')
+    return initBuilder(builder, init, this)
+  }
+  inputHidden(
+    init?: (builder: InputElementBuilder<State, Action, Query>) => void
+  ): this {
+    const builder = new InputElementBuilder<State, Action, Query>()
+    builder.type('hidden')
+    return initBuilder(builder, init, this)
+  }
+  inputImage(
+    init?: (builder: InputImageElementBuilder<State, Action, Query>) => void
+  ): this {
+    const builder = new InputImageElementBuilder<State, Action, Query>()
+    builder.type('image')
+    return initBuilder(builder, init, this)
+  }
+  inputMonth(
+    init?: (builder: InputDateElementBuilder<State, Action, Query>) => void
+  ): this {
+    const builder = new InputDateElementBuilder<State, Action, Query>()
+    builder.type('month')
+    return initBuilder(builder, init, this)
+  }
+  inputNumber(
+    init?: (builder: InputNumberElementBuilder<State, Action, Query>) => void
+  ): this {
+    const builder = new InputNumberElementBuilder<State, Action, Query>()
+    builder.type('number')
+    return initBuilder(builder, init, this)
+  }
+  inputPassword(
+    init?: (builder: InputPasswordElementBuilder<State, Action, Query>) => void
+  ): this {
+    const builder = new InputPasswordElementBuilder<State, Action, Query>()
+    builder.type('password')
+    return initBuilder(builder, init, this)
+  }
+  inputRadio(
+    init?: (builder: InputCheckedElementBuilder<State, Action, Query>) => void
+  ): this {
+    const builder = new InputCheckedElementBuilder<State, Action, Query>()
+    builder.type('radio')
+    return initBuilder(builder, init, this)
+  }
+  inputRange(
+    init?: (builder: InputNumberElementBuilder<State, Action, Query>) => void
+  ): this {
+    const builder = new InputNumberElementBuilder<State, Action, Query>()
+    builder.type('range')
+    return initBuilder(builder, init, this)
+  }
+  inputReset(
+    init?: (builder: InputElementBuilder<State, Action, Query>) => void
+  ): this {
+    const builder = new InputElementBuilder<State, Action, Query>()
+    builder.type('reset')
+    return initBuilder(builder, init, this)
+  }
+  inputSearch(
+    init?: (builder: InputSearchElementBuilder<State, Action, Query>) => void
+  ): this {
+    const builder = new InputSearchElementBuilder<State, Action, Query>()
+    builder.type('search')
+    return initBuilder(builder, init, this)
+  }
+  inputSubmit(
+    init?: (builder: InputSubmitElementBuilder<State, Action, Query>) => void
+  ): this {
+    const builder = new InputSubmitElementBuilder<State, Action, Query>()
+    builder.type('submit')
+    return initBuilder(builder, init, this)
+  }
+  inputTel(
+    init?: (builder: InputTelElementBuilder<State, Action, Query>) => void
+  ): this {
+    const builder = new InputTelElementBuilder<State, Action, Query>()
+    builder.type('tel')
+    return initBuilder(builder, init, this)
+  }
+  inputText(
+    init?: (builder: InputTextElementBuilder<State, Action, Query>) => void
+  ): this {
+    const builder = new InputTextElementBuilder<State, Action, Query>()
+    builder.type('text')
+    return initBuilder(builder, init, this)
+  }
+  inputTime(
+    init?: (builder: InputDateElementBuilder<State, Action, Query>) => void
+  ): this {
+    const builder = new InputDateElementBuilder<State, Action, Query>()
+    builder.type('time')
+    return initBuilder(builder, init, this)
+  }
+  inputUrl(
+    init?: (builder: InputUrlElementBuilder<State, Action, Query>) => void
+  ): this {
+    const builder = new InputUrlElementBuilder<State, Action, Query>()
+    builder.type('url')
+    return initBuilder(builder, init, this)
+  }
+  inputWeek(
+    init?: (builder: InputDateElementBuilder<State, Action, Query>) => void
+  ): this {
+    const builder = new InputDateElementBuilder<State, Action, Query>()
+    builder.type('week')
+    return initBuilder(builder, init, this)
+  }
+
   ins(init?: (builder: ModElementBuilder<State, Action, Query>) => void): this {
     return initBuilder(
       new ModElementBuilder<State, Action, Query>('ins'),
@@ -1444,21 +1599,34 @@ export type AriaRole =
   | 'treegrid'
   | 'treeitem'
 
-export function spaceSeparatedToString(
-  src: string | string[] | Record<string, boolean>
+export function separatedToString(
+  src: string | string[] | Record<string, boolean>,
+  separator: string
 ) {
   if (typeof src === 'string') {
     return src
   } else if (Array.isArray(src)) {
-    return src.join(' ')
+    return src.join(separator)
   } else {
     return keys(src)
       .reduce((list, key) => {
         if (src[key]) list.push(key)
         return list
       }, [] as string[])
-      .join(' ')
+      .join(separator)
   }
+}
+
+export function spaceSeparatedToString(
+  src: string | string[] | Record<string, boolean>
+) {
+  return separatedToString(src, ' ')
+}
+
+export function commaSeparatedToString(
+  src: string | string[] | Record<string, boolean>
+) {
+  return separatedToString(src, ', ')
 }
 
 function stylesToString(src: string | Record<string, string | undefined>) {
@@ -1506,8 +1674,8 @@ export class ElementBuilder<State, Action, Query, El extends HTMLElement>
     super()
   }
 
-  build(): DOMElement2<State, Action, Query> {
-    return new DOMElement2<State, Action, Query>(
+  build(): DOMElement<State, Action, Query> {
+    return new DOMElement<State, Action, Query>(
       makeCreateElement(this.tagName),
       extractLiterals(this._attributes),
       extractDerived(this._attributes),
@@ -2350,13 +2518,407 @@ export class ImageElementBuilder<State, Action, Query> extends ElementBuilder<
   // TODO https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img
 }
 
+export type AutocompleteValue =
+  | 'on'
+  | 'off'
+  | 'name'
+  | 'honorific-prefix'
+  | 'given-name'
+  | 'additional-name'
+  | 'family-name'
+  | 'honorific-suffix'
+  | 'nickname'
+  | 'email'
+  | 'username'
+  | 'new-password'
+  | 'current-password'
+  | 'one-time-code'
+  | 'organization-title'
+  | 'organization'
+  | 'street-address'
+  | 'address-line1'
+  | 'address-line2'
+  | 'address-line3'
+  | 'address-level4'
+  | 'address-level3'
+  | 'address-level2'
+  | 'address-level1'
+  | 'country'
+  | 'country-name'
+  | 'postal-code'
+  | 'cc-name'
+  | 'cc-given-name'
+  | 'cc-additional-name'
+  | 'cc-family-name'
+  | 'cc-number'
+  | 'cc-exp'
+  | 'cc-exp-month'
+  | 'cc-exp-year'
+  | 'cc-csc'
+  | 'cc-type'
+  | 'transaction-currency'
+  | 'transaction-amount'
+  | 'language'
+  | 'bday'
+  | 'bday-day'
+  | 'bday-month'
+  | 'bday-year'
+  | 'sex'
+  | 'tel'
+  | 'tel-country-code'
+  | 'tel-national'
+  | 'tel-area-code'
+  | 'tel-local'
+  | 'tel-extension'
+  | 'impp'
+  | 'url'
+  | 'photo'
+
+export type InputTypeValue =
+  | 'button'
+  | 'checkbox'
+  | 'color'
+  | 'date'
+  | 'datetime-local'
+  | 'email'
+  | 'file'
+  | 'hidden'
+  | 'image'
+  | 'month'
+  | 'number'
+  | 'password'
+  | 'radio'
+  | 'range'
+  | 'reset'
+  | 'search'
+  | 'submit'
+  | 'tel'
+  | 'text'
+  | 'time'
+  | 'url'
+  | 'week'
+
 export class InputElementBuilder<State, Action, Query> extends ElementBuilder<
   State,
   Action,
   Query,
   HTMLInputElement
 > {
-  // TODO https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input
+  type(value: DerivedOrLiteralValue<State, InputTypeValue | undefined>) {
+    return this.attr('type', value)
+  }
+  autocomplete(
+    value: DerivedOrLiteralValue<
+      State,
+      | AutocompleteValue
+      | AutocompleteValue[]
+      | Record<AutocompleteValue, boolean>
+      | undefined
+    >
+  ) {
+    return this.attr(
+      'autocomplete',
+      mapAttribute(value, spaceSeparatedToString)
+    )
+  }
+  autofocus(value: DerivedOrLiteralValue<State, string | undefined>) {
+    return this.attr('autofocus', value)
+  }
+  disabled(value: DerivedOrLiteralValue<State, boolean | undefined>) {
+    return this.attr(
+      'disabled',
+      mapAttribute(value, toggleToString('disabled'))
+    )
+  }
+  form(value: DerivedOrLiteralValue<State, string | undefined>) {
+    return this.attr('form', value)
+  }
+  list(value: DerivedOrLiteralValue<State, string | undefined>) {
+    return this.attr('list', value)
+  }
+  name(value: DerivedOrLiteralValue<State, string | undefined>) {
+    return this.attr('name', value)
+  }
+  readonly(value: DerivedOrLiteralValue<State, boolean | undefined>) {
+    return this.attr(
+      'readonly',
+      mapAttribute(value, toggleToString('readonly'))
+    )
+  }
+  required(value: DerivedOrLiteralValue<State, boolean | undefined>) {
+    return this.attr(
+      'required',
+      mapAttribute(value, toggleToString('required'))
+    )
+  }
+  value(value: DerivedOrLiteralValue<State, string | undefined>) {
+    return this.attr('value', value)
+  }
+}
+
+export class InputCheckedElementBuilder<
+  State,
+  Action,
+  Query
+> extends InputElementBuilder<State, Action, Query> {
+  checked(value: DerivedOrLiteralValue<State, boolean | undefined>) {
+    return this.attr('checked', mapAttribute(value, toggleToString('checked')))
+  }
+}
+
+export class InputDateElementBuilder<
+  State,
+  Action,
+  Query
+> extends InputElementBuilder<State, Action, Query> {
+  max(value: DerivedOrLiteralValue<State, string | undefined>) {
+    return this.attr('max', value)
+  }
+  min(value: DerivedOrLiteralValue<State, string | undefined>) {
+    return this.attr('min', value)
+  }
+  step(value: DerivedOrLiteralValue<State, number | undefined>) {
+    return this.attr('step', mapAttribute(value, String))
+  }
+}
+
+export class InputEmailElementBuilder<
+  State,
+  Action,
+  Query
+> extends InputElementBuilder<State, Action, Query> {
+  multiple(value: DerivedOrLiteralValue<State, boolean | undefined>) {
+    return this.attr(
+      'multiple',
+      mapAttribute(value, toggleToString('multiple'))
+    )
+  }
+  size(value: DerivedOrLiteralValue<State, number | undefined>) {
+    return this.attr('size', mapAttribute(value, String))
+  }
+}
+
+export class InputFileElementBuilder<
+  State,
+  Action,
+  Query
+> extends InputElementBuilder<State, Action, Query> {
+  accept(
+    value: DerivedOrLiteralValue<
+      State,
+      string | string[] | Record<string, boolean> | undefined
+    >
+  ) {
+    return this.attr('accept', mapAttribute(value, commaSeparatedToString))
+  }
+  capture(value: DerivedOrLiteralValue<State, string | undefined>) {
+    return this.attr('capture', value)
+  }
+  multiple(value: DerivedOrLiteralValue<State, boolean | undefined>) {
+    return this.attr(
+      'multiple',
+      mapAttribute(value, toggleToString('multiple'))
+    )
+  }
+}
+
+export class InputImageElementBuilder<
+  State,
+  Action,
+  Query
+> extends InputElementBuilder<State, Action, Query> {
+  alt(value: DerivedOrLiteralValue<State, string | undefined>) {
+    return this.attr('alt', value)
+  }
+  formaction(value: DerivedOrLiteralValue<State, string | undefined>) {
+    return this.attr('formaction', value)
+  }
+  formenctype(
+    value: DerivedOrLiteralValue<
+      State,
+      | 'application/x-www-form-urlencoded'
+      | 'multipart/form-data'
+      | 'text/plain'
+      | undefined
+    >
+  ) {
+    return this.attr('formenctype', value)
+  }
+  formmethod(
+    value: DerivedOrLiteralValue<State, 'get' | 'post' | 'dialog' | undefined>
+  ) {
+    return this.attr('formmethod', value)
+  }
+  formvalidate(value: DerivedOrLiteralValue<State, string | undefined>) {
+    return this.attr('formvalidate', value)
+  }
+  formtarget(value: DerivedOrLiteralValue<State, string | undefined>) {
+    return this.attr('formtarget', value)
+  }
+  height(value: DerivedOrLiteralValue<State, number | undefined>) {
+    return this.attr('height', mapAttribute(value, String))
+  }
+  src(value: DerivedOrLiteralValue<State, string | undefined>) {
+    return this.attr('src', value)
+  }
+  width(value: DerivedOrLiteralValue<State, number | undefined>) {
+    return this.attr('width', mapAttribute(value, String))
+  }
+}
+
+export class InputNumberElementBuilder<
+  State,
+  Action,
+  Query
+> extends InputElementBuilder<State, Action, Query> {
+  max(value: DerivedOrLiteralValue<State, number | undefined>) {
+    return this.attr('max', mapAttribute(value, String))
+  }
+  min(value: DerivedOrLiteralValue<State, number | undefined>) {
+    return this.attr('min', mapAttribute(value, String))
+  }
+  step(value: DerivedOrLiteralValue<State, number | undefined>) {
+    return this.attr('step', mapAttribute(value, String))
+  }
+}
+
+export class InputPasswordElementBuilder<
+  State,
+  Action,
+  Query
+> extends InputElementBuilder<State, Action, Query> {
+  maxlength(value: DerivedOrLiteralValue<State, number | undefined>) {
+    return this.attr('maxlength', mapAttribute(value, String))
+  }
+  minlength(value: DerivedOrLiteralValue<State, number | undefined>) {
+    return this.attr('minlength', mapAttribute(value, String))
+  }
+  pattern(value: DerivedOrLiteralValue<State, string | undefined>) {
+    return this.attr('pattern', value)
+  }
+  placeholder(value: DerivedOrLiteralValue<State, string | undefined>) {
+    return this.attr('placeholder', value)
+  }
+  size(value: DerivedOrLiteralValue<State, number | undefined>) {
+    return this.attr('size', mapAttribute(value, String))
+  }
+}
+
+export class InputSearchElementBuilder<
+  State,
+  Action,
+  Query
+> extends InputElementBuilder<State, Action, Query> {
+  dirname(value: DerivedOrLiteralValue<State, string | undefined>) {
+    return this.attr('dirname', value)
+  }
+  maxlength(value: DerivedOrLiteralValue<State, number | undefined>) {
+    return this.attr('maxlength', mapAttribute(value, String))
+  }
+  minlength(value: DerivedOrLiteralValue<State, number | undefined>) {
+    return this.attr('minlength', mapAttribute(value, String))
+  }
+  placeholder(value: DerivedOrLiteralValue<State, string | undefined>) {
+    return this.attr('placeholder', value)
+  }
+}
+
+export class InputSubmitElementBuilder<
+  State,
+  Action,
+  Query
+> extends InputElementBuilder<State, Action, Query> {
+  formaction(value: DerivedOrLiteralValue<State, string | undefined>) {
+    return this.attr('formaction', value)
+  }
+  formenctype(
+    value: DerivedOrLiteralValue<
+      State,
+      | 'application/x-www-form-urlencoded'
+      | 'multipart/form-data'
+      | 'text/plain'
+      | undefined
+    >
+  ) {
+    return this.attr('formenctype', value)
+  }
+  formmethod(
+    value: DerivedOrLiteralValue<State, 'get' | 'post' | 'dialog' | undefined>
+  ) {
+    return this.attr('formmethod', value)
+  }
+  formvalidate(value: DerivedOrLiteralValue<State, boolean | undefined>) {
+    return this.attr(
+      'formvalidate',
+      mapAttribute(value, toggleToString('formvalidate'))
+    )
+  }
+  formtarget(value: DerivedOrLiteralValue<State, string | undefined>) {
+    return this.attr('formtarget', value)
+  }
+}
+
+export class InputTelElementBuilder<
+  State,
+  Action,
+  Query
+> extends InputElementBuilder<State, Action, Query> {
+  maxlength(value: DerivedOrLiteralValue<State, number | undefined>) {
+    return this.attr('maxlength', mapAttribute(value, String))
+  }
+  minlength(value: DerivedOrLiteralValue<State, number | undefined>) {
+    return this.attr('minlength', mapAttribute(value, String))
+  }
+  pattern(value: DerivedOrLiteralValue<State, string | undefined>) {
+    return this.attr('pattern', value)
+  }
+  placeholder(value: DerivedOrLiteralValue<State, string | undefined>) {
+    return this.attr('placeholder', value)
+  }
+  size(value: DerivedOrLiteralValue<State, number | undefined>) {
+    return this.attr('size', mapAttribute(value, String))
+  }
+}
+
+export class InputTextElementBuilder<
+  State,
+  Action,
+  Query
+> extends InputElementBuilder<State, Action, Query> {
+  dirname(value: DerivedOrLiteralValue<State, string | undefined>) {
+    return this.attr('dirname', value)
+  }
+  maxlength(value: DerivedOrLiteralValue<State, number | undefined>) {
+    return this.attr('maxlength', mapAttribute(value, String))
+  }
+  minlength(value: DerivedOrLiteralValue<State, number | undefined>) {
+    return this.attr('minlength', mapAttribute(value, String))
+  }
+  pattern(value: DerivedOrLiteralValue<State, string | undefined>) {
+    return this.attr('pattern', value)
+  }
+  placeholder(value: DerivedOrLiteralValue<State, string | undefined>) {
+    return this.attr('placeholder', value)
+  }
+  size(value: DerivedOrLiteralValue<State, number | undefined>) {
+    return this.attr('size', mapAttribute(value, String))
+  }
+}
+
+export class InputUrlElementBuilder<
+  State,
+  Action,
+  Query
+> extends InputElementBuilder<State, Action, Query> {
+  maxlength(value: DerivedOrLiteralValue<State, number | undefined>) {
+    return this.attr('maxlength', mapAttribute(value, String))
+  }
+  minlength(value: DerivedOrLiteralValue<State, number | undefined>) {
+    return this.attr('minlength', mapAttribute(value, String))
+  }
+  placeholder(value: DerivedOrLiteralValue<State, string | undefined>) {
+    return this.attr('placeholder', value)
+  }
 }
 
 export class LabelElementBuilder<State, Action, Query> extends ElementBuilder<
@@ -2710,17 +3272,11 @@ export class MapStateBuilder<State, StateB, Action, Query>
 export class PortalBuilder<State, Action, Query>
   extends BaseBuilder<State, Action, Query>
   implements IBuilder<State, Action, Query> {
-  public appendChild: (doc: Document, node: Node) => void
-  constructor(readonly getParent: (doc: Document) => Element) {
+  constructor(readonly appendChild: (doc: Document, node: Node) => void) {
     super()
-    this.appendChild = (doc: Document, node: Node) => {
-      const parent = getParent(doc)
-      parent.appendChild(node)
-    }
   }
   build() {
     return new PortalTemplate<State, Action, Query>(
-      this.getParent,
       this.appendChild,
       this._children
     )

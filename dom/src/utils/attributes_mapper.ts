@@ -11,15 +11,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import {
-  // setBoolAttribute,
-  // setCommaSeparated,
-  // setEnumBoolAttribute,
-  // setSpaceSeparated,
-  setStyleAttribute,
-  setBoolProperty,
-  setProperty
-} from './set_attribute'
+import { setBoolProperty, setProperty } from './set_attribute'
 
 export const attributeNameMap: Record<string, string> = {
   acceptcharset: 'accept-charset',
@@ -38,13 +30,18 @@ export const htmlAttributeMap: Record<
   string,
   (el: Element, name: string, value: any) => void
 > = {
+  checked: setBoolProperty,
+  multiple: setBoolProperty,
+  muted: setBoolProperty,
+  selected: setBoolProperty,
+  value: setProperty
+
   // 'accept-charset': setSpaceSeparated,
-  // class: setSpaceSeparated,
   // acceptcharset: setSpaceSeparated,
   // async: setBoolAttribute,
   // autofocus: setBoolAttribute,
   // autoplay: setBoolAttribute,
-  checked: setBoolProperty,
+  // class: setSpaceSeparated,
   // contenteditable: setEnumBoolAttribute,
   // controls: setBoolAttribute,
   // default: setBoolAttribute,
@@ -57,8 +54,6 @@ export const htmlAttributeMap: Record<
   // ismap: setBoolAttribute,
   // itemscope: setBoolAttribute,
   // loop: setBoolAttribute,
-  multiple: setBoolProperty,
-  muted: setBoolProperty,
   // nomodule: setBoolAttribute,
   // novalidate: setBoolAttribute,
   // open: setBoolAttribute,
@@ -68,10 +63,8 @@ export const htmlAttributeMap: Record<
   // rel: setSpaceSeparated,
   // required: setBoolAttribute,
   // reversed: setBoolAttribute,
-  selected: setBoolProperty,
   // sizes: setCommaSeparated,
   // srcset: setCommaSeparated,
-  style: setStyleAttribute,
+  // style: setStyleAttribute,
   // typemustmatch: setBoolAttribute,
-  value: setProperty
 }

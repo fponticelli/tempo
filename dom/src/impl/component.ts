@@ -14,22 +14,8 @@ limitations under the License.
 import { Store } from 'tempo-store/lib/store'
 import { DOMTemplate } from '../template'
 import { DOMContext } from '../context'
-// import { domChildToTemplate } from '../utils/dom'
 import { map } from 'tempo-std/lib/arrays'
 import { View } from 'tempo-core/lib/view'
-
-// export function makeDelayedUpdate<State>(change: (state: State) => void) {
-//   let shouldRender = true
-//   return (state: State) => {
-//     if (shouldRender) {
-//       shouldRender = false
-//       setTimeout(() => {
-//         change(state)
-//         shouldRender = true
-//       })
-//     }
-//   }
-// }
 
 export interface ComponentView<State, Action, Query>
   extends View<State, Query> {
@@ -99,19 +85,3 @@ export class ComponentTemplate<State, Action, Query>
     return view
   }
 }
-
-// export function component<State, Action, Query = unknown>(
-//   props: {
-//     delayed?: boolean
-//     reducer: (state: State, action: Action) => State
-//     equal?: (a: State, b: State) => boolean
-//   },
-//   ...children: DOMChild<State, Action, Query>[]
-// ) {
-//   return new ComponentTemplate<State, Action, Query>(
-//     props.delayed || false,
-//     props.reducer,
-//     props.equal,
-//     map(children, domChildToTemplate)
-//   )
-// }

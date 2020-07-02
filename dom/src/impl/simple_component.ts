@@ -11,8 +11,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { DOMTemplate } from './template'
-import { DOMContext } from './context'
+import { DOMTemplate } from '../template'
+import { DOMContext } from '../context'
 import { map } from 'tempo-std/lib/arrays'
 
 export type SimpleComponent<State, Query> = DOMTemplate<State, State, Query>

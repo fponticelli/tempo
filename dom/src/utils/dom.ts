@@ -11,17 +11,9 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-// import { DerivedValue } from 'tempo-core/lib/value'
-import {
-  // Attribute,
-  // EventHandler,
-  // StyleAttribute,
-  AttributeValue
-} from '../value'
+import { AttributeValue } from '../value'
 import { htmlAttributeMap as attributeMap } from './attributes_mapper'
 import { setAttribute } from './set_attribute'
-// import { DOMChild, DOMTemplate } from '../template'
-// import { text } from '../impl/text'
 
 export function removeNode(node: Node) {
   const el = node as HTMLElement
@@ -50,14 +42,6 @@ export function makeCreateElementNS(namespace: string, name: string) {
   return (doc: Document) => doc.createElementNS(namespace, name) as HTMLElement // TODO
 }
 
-// export function domChildToTemplate<State, Action, Query>(
-//   dom: DOMChild<State, Action, Query>
-// ): DOMTemplate<State, Action, Query> {
-//   if (typeof dom === 'string' || typeof dom === 'function' || dom === undefined)
-//     return text(dom ?? '')
-//   else return dom
-// }
-
 export type Acc<State> = ((state: State) => void)[]
 
 export function setElAttribute(
@@ -67,103 +51,4 @@ export function setElAttribute(
 ) {
   let set = attributeMap[name] || setAttribute
   set(el, name, value)
-}
-
-// export function processAttribute<State, Value>(
-//   el: Element,
-//   name: string,
-//   value: Attribute<State, Value>,
-//   acc: Acc<State>
-// ): Acc<State> {
-//   let set = attributeMap[name] || setAttribute
-
-//   if (typeof value === 'function') {
-//     // state in inputs can incorrectly map to state
-//     if (el.nodeName === 'INPUT' || el.nodeName === 'TEXTAREA') {
-//       const f = (state: State) => {
-//         const newValue = (value as DerivedValue<State, Value>)(state)
-//         set(el, name, newValue)
-//       }
-//       acc.push(f)
-//     } else {
-//       let oldValue: Value | undefined = undefined
-//       const f = (state: State) => {
-//         const newValue = (value as DerivedValue<State, Value>)(state)
-//         if (newValue !== oldValue) {
-//           set(el, name, newValue)
-//           if (String(newValue).length < 50000) {
-//             oldValue = newValue
-//           }
-//         }
-//       }
-//       acc.push(f)
-//     }
-//   } else {
-//     set(el, name, value)
-//   }
-//   return acc
-// }
-
-// export function processEvent<State, Action>(
-//   el: HTMLElement,
-//   name: string,
-//   value: EventHandler<State, Action>,
-//   dispatch: (action: Action) => void,
-//   acc: Acc<State>
-// ): Acc<State> {
-//   if (value !== undefined) {
-//     let localState: State
-//     const anyEl = el as any
-//     anyEl[name] = (ev: Event) => {
-//       const r = value(localState, ev, el)
-//       if (r !== undefined) {
-//         dispatch(r)
-//       }
-//     }
-//     const f = (state: State) => {
-//       localState = state
-//     }
-//     acc.push(f)
-//   }
-//   return acc
-// }
-
-// export function processStyle<State, Value>(
-//   el: Element,
-//   name: string,
-//   value: StyleAttribute<State, Value>,
-//   acc: Acc<State>
-// ): Acc<State> {
-//   if (typeof value === 'function') {
-//     let oldValue: Value | undefined
-//     const f = (state: State) => {
-//       const newValue = (value as DerivedValue<State, Value>)(state)
-//       if (newValue !== oldValue) {
-//         setOneStyle(el, name, newValue)
-//         oldValue = newValue
-//       }
-//     }
-//     acc.push(f)
-//   } else {
-//     setOneStyle(el, name, value)
-//   }
-//   return acc
-// }
-
-export function containerSize(el: HTMLElement) {
-  const prev = []
-  for (let i = 0; i < el.children.length; i++) {
-    const child = el.children[i] as HTMLElement
-    prev[i] = child.style.display
-    child.style.display = 'none'
-  }
-  const size = {
-    width: el.offsetWidth,
-    height: el.offsetHeight
-  }
-  for (let i = 0; i < el.children.length; i++) {
-    const child = el.children[i] as HTMLElement
-    child.style.display = prev[i]
-  }
-  return size
 }

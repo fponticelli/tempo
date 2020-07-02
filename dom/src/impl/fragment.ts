@@ -12,7 +12,6 @@ limitations under the License.
 */
 
 import { View } from 'tempo-core/lib/view'
-// import { domChildToTemplate } from '../utils/dom'
 import { DOMTemplate } from '../template'
 import { DOMContext } from '../context'
 import { map } from 'tempo-std/lib/arrays'
@@ -36,11 +35,3 @@ export class FragmentTemplate<State, Action, Query>
     }
   }
 }
-
-// export function fragment<State, Action, Query = unknown>(
-//   ...children: DOMChild<State, Action, Query>[]
-// ): DOMTemplate<State, Action, Query> {
-//   return new FragmentTemplate<State, Action, Query>(
-//     map(children, domChildToTemplate)
-//   )
-// }

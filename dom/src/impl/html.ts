@@ -1277,10 +1277,10 @@ export function fragment<State, Action, Query>(
 }
 
 export function portal<State, Action, Query>(
-  getParent: (doc: Document) => Element,
+  appendChild: (doc: Document, node: Node) => void,
   init: (builder: PortalBuilder<State, Action, Query>) => void
 ) {
-  const builder = new PortalBuilder<State, Action, Query>(getParent)
+  const builder = new PortalBuilder<State, Action, Query>(appendChild)
   init(builder)
   return builder
 }
@@ -1289,12 +1289,12 @@ export function portalWithSelector<State, Action, Query>(
   selector: string,
   init: (builder: PortalBuilder<State, Action, Query>) => void
 ) {
-  return portal(doc => {
+  return portal((doc: HTMLDocument, node: Node) => {
     const el = doc.querySelector(selector)
     if (!el) {
       throw new Error(`selector doesn't match any element: "${selector}"`)
     }
-    return el
+    el.appendChild(node)
   }, init)
 }
 

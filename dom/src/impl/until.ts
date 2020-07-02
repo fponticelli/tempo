@@ -71,13 +71,3 @@ export class UntilTemplate<OuterState, InnerState, Action, Query>
     return view
   }
 }
-
-// export function until<OuterState, InnerState, Action, Query = unknown>(
-//   next: Attribute<{ state: OuterState; index: number }, InnerState>,
-//   ...children: DOMChild<InnerState, Action, Query>[]
-// ): DOMTemplate<OuterState, Action, Query> {
-//   return new UntilTemplate<OuterState, InnerState, Action, Query>(
-//     next,
-//     map(children, domChildToTemplate)
-//   )
-// }

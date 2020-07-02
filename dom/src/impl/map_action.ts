@@ -14,7 +14,6 @@ limitations under the License.
 import { DOMTemplate } from '../template'
 import { View } from 'tempo-core/lib/view'
 import { DOMContext } from '../context'
-// import { domChildToTemplate } from '../utils/dom'
 import { map as mapArray } from 'tempo-std/lib/arrays'
 
 export class MapActionTemplate<State, OuterAction, InnerAction, Query>
@@ -41,13 +40,3 @@ export class MapActionTemplate<State, OuterAction, InnerAction, Query>
     }
   }
 }
-
-// export function mapAction<State, OuterAction, InnerAction, Query = unknown>(
-//   props: { map: (value: InnerAction) => OuterAction | undefined },
-//   ...children: DOMChild<State, InnerAction, Query>[]
-// ): DOMTemplate<State, OuterAction, Query> {
-//   return new MapActionTemplate<State, OuterAction, InnerAction, Query>(
-//     props.map,
-//     mapArray(children, domChildToTemplate)
-//   )
-// }

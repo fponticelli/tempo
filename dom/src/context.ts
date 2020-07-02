@@ -21,7 +21,6 @@ export class DOMContext<Action> {
     return new DOMContext<Action>(
       element.ownerDocument || (window && window.document),
       (node: Node) => element.appendChild(node),
-      element,
       dispatch
     )
   }
@@ -29,7 +28,6 @@ export class DOMContext<Action> {
   constructor(
     readonly doc: Document,
     readonly append: (node: Node) => void,
-    readonly parent: Element,
     readonly dispatch: (action: Action) => void
   ) {}
 
@@ -37,7 +35,6 @@ export class DOMContext<Action> {
     return new DOMContext<OtherAction>(
       this.doc,
       this.append,
-      this.parent,
       (action: OtherAction) => this.dispatch(f(action))
     )
   }
@@ -48,7 +45,6 @@ export class DOMContext<Action> {
     return new DOMContext<OtherAction>(
       this.doc,
       this.append,
-      this.parent,
       (action: OtherAction) => {
         const newAction = f(action)
         if (newAction !== undefined) {
@@ -68,31 +64,17 @@ export class DOMContext<Action> {
   }
 
   withAppend(append: (node: Node) => void) {
-    return new DOMContext<Action>(this.doc, append, this.parent, this.dispatch)
-  }
-
-  withParent(parent: Element) {
-    return new DOMContext<Action>(this.doc, this.append, parent, this.dispatch)
+    return new DOMContext<Action>(this.doc, append, this.dispatch)
   }
 
   withDispatch<OtherAction>(dispatch: (action: OtherAction) => void) {
-    return new DOMContext<OtherAction>(
-      this.doc,
-      this.append,
-      this.parent,
-      dispatch
-    )
+    return new DOMContext<OtherAction>(this.doc, this.append, dispatch)
   }
 
   withInterceptDispatch(dispatch: (action: Action) => void) {
-    return new DOMContext<Action>(
-      this.doc,
-      this.append,
-      this.parent,
-      (action: Action) => {
-        this.dispatch(action)
-        dispatch(action)
-      }
-    )
+    return new DOMContext<Action>(this.doc, this.append, (action: Action) => {
+      this.dispatch(action)
+      dispatch(action)
+    })
   }
 }
