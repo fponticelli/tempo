@@ -133,11 +133,11 @@ function stylesToString(src: string | Record<string, string | undefined>) {
   }
 }
 
-function booleanToString(src: boolean) {
+export function booleanToString(src: boolean) {
   return `${src}`
 }
 
-function toggleToString(name: string) {
+export function toggleToString(name: string) {
   return (src: boolean) => name
 }
 

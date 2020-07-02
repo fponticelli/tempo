@@ -658,7 +658,7 @@ export class BaseBuilder<State, Action, Query> {
       this
     )
   }
-  form(
+  formEl(
     init?: (builder: FormElementBuilder<State, Action, Query>) => void
   ): this {
     return initBuilder(

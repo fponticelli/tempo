@@ -12,27 +12,43 @@ limitations under the License.
 */
 
 import { Tempo } from 'tempo-dom/lib/tempo'
-import { div, button } from 'dom/lib/html_old'
-import { simpleComponent } from 'tempo-dom/lib/simple_component'
+import * as html from 'tempo-dom/lib/html'
 
-const component = simpleComponent<number>(
-  {},
-  div(
-    { attrs: { class: 'app' } },
-    div({ attrs: { class: 'count count-small' } }, 'count'),
-    div({ attrs: { class: 'count' } }, String),
-    div(
-      { attrs: { class: 'buttons' } },
-      button(
-        {
-          events: { click: count => count - 1 },
-          attrs: { disabled: count => count <= 0 }
-        },
-        '-'
-      ),
-      button({ events: { click: count => count + 1 } }, '+')
-    )
-  )
+const component = html.simpleComponent<number, unknown>(
+  n => {
+    n.div(n => {
+      n.class('app').div(n => {
+        n.div(n => n.class('count count-small').text('count')).div(n =>
+          n.class('count').text(String)
+        )
+        n.class('buttons')
+          .button(b => {
+            b.onClick(count => count - 1)
+              .disabled(count => count <= 0)
+              .text('-')
+          })
+          .button(b => {
+            b.onClick(count => count + 1).text('+')
+          })
+      })
+    })
+  }
+  // div(
+  //   { attrs: { class: 'app' } },
+  //   div({ attrs: { class: 'count count-small' } }, 'count'),
+  //   div({ attrs: { class: 'count' } }, String),
+  //   div(
+  //     { attrs: { class: 'buttons' } },
+  //     button(
+  //       {
+  //         events: { click: count => count - 1 },
+  //         attrs: { disabled: count => count <= 0 }
+  //       },
+  //       '-'
+  //     ),
+  //     button({ events: { click: count => count + 1 } }, '+')
+  //   )
+  // )
 )
 
 Tempo.renderSimple({ component, state: 0 })

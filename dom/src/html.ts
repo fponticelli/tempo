@@ -62,7 +62,7 @@ import { resolveAttribute, Attribute } from './value'
 import { DerivedValue } from 'tempo-core/lib/value'
 import { MapActionBuilder } from './builder/map_action_builder'
 import { MapQueryBuilder } from './builder/map_query_builder'
-import { DOMTemplate } from './template'
+import { DOMTemplate, DOMChild } from './template'
 import { LazyTemplate } from './impl/lazy'
 import { FragmentBuilder } from './builder/fragment_builder'
 import { UntilBuilder } from './builder/until_builder'
@@ -70,6 +70,22 @@ import { PortalBuilder } from './builder/portal_builder'
 import { SimpleComponentBuilder } from './builder/simple_component_builder'
 import { AdapterTemplate, PropagateArg } from './impl/adapter'
 import { ComponentTemplate } from './impl/component'
+import { MatchTemplate } from './impl/match_template'
+import {
+  ObjectWithField,
+  ObjectWithPath,
+  TypeAtPath
+} from 'tempo-std/lib/types/objects'
+import { DifferentiateAt } from 'tempo-std/lib/types/differentiate'
+import { IBuilder } from './builder/ibuilder'
+import { MatchBoolTemplate } from './impl/match_bool_template'
+import { IndexType } from 'tempo-std/lib/types/index_type'
+import { MatchValueTemplate } from './impl/match_value_template'
+import { Maybe, Just } from 'tempo-std/lib/maybe'
+import { Option } from 'tempo-std/lib/option'
+import { AsyncResult } from 'tempo-std/lib/async_result'
+import { Result } from 'tempo-std/lib/result'
+import { Async, Outcome } from 'tempo-std/lib/async'
 
 // dom generic
 export function el<State, Action, Query, El extends HTMLElement = HTMLElement>(
@@ -1048,14 +1064,17 @@ export function mapState<State, StateB, Action, Query>(
   return builder
 }
 
-export function mapField<State, Action, Query>(
-  field: keyof State,
-  init: (
-    builder: MapStateBuilder<State, State[typeof field], Action, Query>
-  ) => void
+export function mapField<
+  State,
+  Action,
+  Query,
+  K extends keyof State = keyof State
+>(
+  field: K,
+  init: (builder: MapStateBuilder<State, State[K], Action, Query>) => void
 ) {
-  return mapState<State, State[typeof field], Action, Query>(
-    (v: State): State[typeof field] => v[field],
+  return mapState<State, State[K], Action, Query>(
+    (v: State): State[K] => v[field],
     init
   )
 }
@@ -1092,6 +1111,158 @@ export function mapQuery<State, Action, Query, QueryB>(
   const builder = new MapQueryBuilder<State, Action, Query, QueryB>(map)
   init(builder)
   return builder
+}
+
+export function match<
+  Path extends IndexType[],
+  State extends ObjectWithPath<Path, any>,
+  Action,
+  Query = unknown
+>(props: {
+  path: Path
+  matcher: {
+    [k in TypeAtPath<Path, State>]:
+      | DOMChild<DifferentiateAt<Path, State, k>, Action, Query>
+      | IBuilder<DifferentiateAt<Path, State, k>, Action, Query>
+  }
+}): DOMTemplate<State, Action, Query> {
+  return new MatchTemplate<Path, State, Action, Query>(
+    props.path,
+    props.matcher
+  )
+}
+
+export function matchKind<
+  State extends ObjectWithField<'kind', any>,
+  Action,
+  Query = unknown
+>(
+  matcher: {
+    [k in State['kind']]:
+      | DOMChild<DifferentiateAt<['kind'], State, k>, Action, Query>
+      | IBuilder<DifferentiateAt<['kind'], State, k>, Action, Query>
+  }
+): DOMTemplate<State, Action, Query> {
+  return match<['kind'], State, Action, Query>({
+    path: ['kind'],
+    matcher
+  })
+}
+
+export function matchBool<State, Action, Query = unknown>(props: {
+  condition: Attribute<State, boolean>
+  true: DOMChild<State, Action, Query> | IBuilder<State, Action, Query>
+  false: DOMChild<State, Action, Query> | IBuilder<State, Action, Query>
+}): DOMTemplate<State, Action, Query> {
+  return new MatchBoolTemplate<State, Action, Query>(
+    props.condition,
+    props.true,
+    props.false
+  )
+}
+
+export function matchValue<
+  Path extends IndexType[],
+  State extends ObjectWithPath<Path, string>,
+  Action,
+  Query = unknown
+>(props: {
+  path: Path
+  matcher: {
+    [_ in string | number]:
+      | DOMChild<State, Action, Query>
+      | IBuilder<State, Action, Query>
+  }
+  orElse: DOMChild<State, Action, Query> | IBuilder<State, Action, Query>
+}): DOMTemplate<State, Action, Query> {
+  return new MatchValueTemplate<State, Action, Query>(
+    props.path,
+    props.matcher,
+    props.orElse
+  )
+}
+
+export function matchOption<State, Action, Query = unknown>(props: {
+  Some: DOMChild<State, Action, Query> | IBuilder<State, Action, Query>
+  None: DOMChild<unknown, Action, Query> | IBuilder<unknown, Action, Query>
+}): DOMTemplate<Option<State>, Action, Query> {
+  return matchKind({
+    Some: mapField('value', n => n.append(props.Some)),
+    None: mapState(
+      () => null,
+      n => n.append(props.None)
+    )
+  })
+}
+
+export function matchMaybe<State, Action, Query = unknown>(props: {
+  Just: DOMChild<State, Action, Query> | IBuilder<State, Action, Query>
+  Nothing?: DOMChild<unknown, Action, Query> | IBuilder<State, Action, Query>
+}): DOMTemplate<Maybe<State>, Action, Query> {
+  return new MatchBoolTemplate<Maybe<State>, Action, Query>(
+    v => v !== undefined,
+    mapState(
+      (opt: Maybe<State>) => opt as Just<State>,
+      n => n.append(props.Just)
+    ),
+    props.Nothing as DOMChild<unknown, Action, Query>
+  )
+}
+
+export function matchResult<State, Error, Action, Query = unknown>(props: {
+  Success: DOMChild<State, Action, Query> | IBuilder<State, Action, Query>
+  Failure: DOMChild<Error, Action, Query> | IBuilder<Error, Action, Query>
+}): DOMTemplate<Result<State, Error>, Action, Query> {
+  return matchKind({
+    Success: mapField('value', n => n.append(props.Success)),
+    Failure: mapField('error', n => n.append(props.Failure))
+  })
+}
+
+export function matchAsync<State, Progress, Action, Query = unknown>(props: {
+  Outcome: DOMChild<State, Action, Query> | IBuilder<State, Action, Query>
+  NotAsked: DOMChild<unknown, Action, Query> | IBuilder<unknown, Action, Query>
+  Loading: DOMChild<Progress, Action, Query> | IBuilder<Progress, Action, Query>
+}): DOMTemplate<Async<State, Progress>, Action, Query> {
+  return matchKind({
+    Outcome: mapField('value', n => n.append(props.Outcome)),
+    Loading: mapField('progress', n => n.append(props.Loading)),
+    NotAsked: mapState(
+      () => null,
+      n => n.append(props.NotAsked)
+    )
+  })
+}
+
+export function matchAsyncResult<
+  State,
+  Error,
+  Progress,
+  Action,
+  Query = unknown
+>(props: {
+  Success: DOMChild<State, Action, Query> | IBuilder<State, Action, Query>
+  Failure: DOMChild<Error, Action, Query> | IBuilder<Error, Action, Query>
+  NotAsked: DOMChild<unknown, Action, Query> | IBuilder<unknown, Action, Query>
+  Loading: DOMChild<Progress, Action, Query> | IBuilder<Progress, Action, Query>
+}): DOMTemplate<AsyncResult<State, Error, Progress>, Action, Query> {
+  return matchKind<AsyncResult<State, Error, Progress>, Action, Query>({
+    Outcome: mapState(
+      (o: Outcome<Result<State, Error>>) => o.value,
+      n =>
+        n.append(
+          matchResult<State, Error, Action, Query>({
+            Success: props.Success,
+            Failure: props.Failure
+          })
+        )
+    ),
+    Loading: mapField('progress', n => n.append(props.Loading)),
+    NotAsked: mapState(
+      () => null,
+      n => n.append(props.NotAsked)
+    )
+  })
 }
 
 export function lazy<State, Action, Query>(

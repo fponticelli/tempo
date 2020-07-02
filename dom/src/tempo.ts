@@ -19,6 +19,8 @@ import { View } from 'tempo-core/lib/view'
 import { SimpleComponent } from './simple_component'
 import { Reducer } from 'tempo-store/lib/reducer'
 import { IBuilder, childOrBuilderToTemplate } from './builder/ibuilder'
+import { SimpleComponentBuilder } from './builder/simple_component_builder'
+import { ComponentBuilder } from './builder/component_builder'
 
 export type TempoView<State, Action, Query> = Readonly<{
   view: View<State, Query>
@@ -29,14 +31,21 @@ export const Tempo = {
   renderComponent<State, Action, Query = unknown>(options: {
     el?: HTMLElement
     state: State
-    component: ComponentTemplate<State, Action, Query>
+    component:
+      | ComponentTemplate<State, Action, Query>
+      | ComponentBuilder<State, Action, Query>
     document?: Document
   }): TempoView<State, Action, Query> {
     const { el: maybeElement, component, state } = options
     const doc = options.document || document
     const el = maybeElement || doc.body
     const append = (node: Node) => el.appendChild(node)
-    const view = component.render(
+    const template = childOrBuilderToTemplate(component) as ComponentTemplate<
+      State,
+      Action,
+      Query
+    >
+    const view = template.render(
       new DOMContext(doc, append, el, () => {}),
       state
     )
@@ -66,7 +75,9 @@ export const Tempo = {
 
   renderSimple<State, Query = unknown>(options: {
     el?: HTMLElement
-    component: SimpleComponent<State, Query>
+    component:
+      | SimpleComponent<State, Query>
+      | SimpleComponentBuilder<State, Query>
     state: State
     document?: Document
   }) {
@@ -75,9 +86,10 @@ export const Tempo = {
     const el = maybeElement || doc.body
     const append = (node: Node) => el.appendChild(node)
     const onChange = (state: State) => {}
+    const template = childOrBuilderToTemplate(component)
 
     const result = {
-      ...component.render(
+      ...template.render(
         new DOMContext(doc, append, el, (state: State) => {
           result.onChange(state)
         }),
