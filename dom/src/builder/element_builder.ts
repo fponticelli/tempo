@@ -1,4 +1,4 @@
-import { BaseBuilder } from './base_builder'
+import { BaseBuilder, IBuilder } from './internal'
 import { DerivedOrLiteralValue, DerivedValue } from 'tempo-core/lib/value'
 import { EventHandler, mapAttribute, EventHandlerTE } from '../value'
 import { DOMElement2 } from '../impl/element'
@@ -6,7 +6,6 @@ import { makeCreateElement } from '../impl/apply_element'
 import { makeEmptyLifecycle } from '../lifecycle'
 import { keys } from 'tempo-std/lib/objects'
 import { DOMContext } from '../context'
-import { IBuilder } from './ibuilder'
 
 function extractLiterals<State>(
   record: Record<string, DerivedOrLiteralValue<State, string | undefined>>

@@ -1,8 +1,7 @@
-import { BaseBuilder } from './base_builder'
+import { BaseBuilder, IBuilder, childOrBuilderToTemplate } from './internal'
 import { Attribute } from '../value'
 import { MapStateTemplate } from '../impl/map_state'
 import { DOMChild } from '../template'
-import { IBuilder, childOrBuilderToTemplate } from './ibuilder'
 
 export class MapStateBuilder<State, StateB, Action, Query>
   extends BaseBuilder<StateB, Action, Query>

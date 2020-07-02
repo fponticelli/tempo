@@ -1,4 +1,4 @@
-import { MediaElementBuilder } from './media_element_builder'
+import { MediaElementBuilder } from './internal'
 
 export class AudioElementBuilder<
   State,

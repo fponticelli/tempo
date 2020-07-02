@@ -1,4 +1,4 @@
-import { ElementBuilder, toggleToString } from './element_builder'
+import { ElementBuilder, toggleToString } from './internal'
 import { DerivedOrLiteralValue } from 'tempo-core/lib/value'
 import { mapAttribute } from '../value'
 
@@ -8,8 +8,6 @@ export class ButtonElementBuilder<State, Action, Query> extends ElementBuilder<
   Query,
   HTMLButtonElement
 > {
-  // TODO https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button
-
   autofocus(value: DerivedOrLiteralValue<State, boolean | undefined>) {
     return this.attr(
       'autofocus',

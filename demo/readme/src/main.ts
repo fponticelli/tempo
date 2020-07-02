@@ -11,44 +11,51 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+console.log('BEFORE import')
+
 import { Tempo } from 'tempo-dom/lib/tempo'
-import * as html from 'tempo-dom/lib/html'
+console.log(Tempo)
 
-const component = html.simpleComponent<number, unknown>(
-  n => {
-    n.div(n => {
-      n.class('app').div(n => {
-        n.div(n => n.class('count count-small').text('count')).div(n =>
-          n.class('count').text(String)
-        )
-        n.class('buttons')
-          .button(b => {
-            b.onClick(count => count - 1)
-              .disabled(count => count <= 0)
-              .text('-')
-          })
-          .button(b => {
-            b.onClick(count => count + 1).text('+')
-          })
-      })
-    })
-  }
-  // div(
-  //   { attrs: { class: 'app' } },
-  //   div({ attrs: { class: 'count count-small' } }, 'count'),
-  //   div({ attrs: { class: 'count' } }, String),
-  //   div(
-  //     { attrs: { class: 'buttons' } },
-  //     button(
-  //       {
-  //         events: { click: count => count - 1 },
-  //         attrs: { disabled: count => count <= 0 }
-  //       },
-  //       '-'
-  //     ),
-  //     button({ events: { click: count => count + 1 } }, '+')
-  //   )
-  // )
-)
+import { a } from 'tempo-dom/lib/html'
+console.log(a)
 
-Tempo.renderSimple({ component, state: 0 })
+// const component = simpleComponent<number, unknown>(
+//   n => {
+//     n.div(n => {
+//       n.class('app').div(n => {
+//         n.div(n => n.class('count count-small').text('count')).div(n =>
+//           n.class('count').text(String)
+//         )
+//         n.class('buttons')
+//           .button(b => {
+//             b.onClick(count => count - 1)
+//               .disabled(count => count <= 0)
+//               .text('-')
+//           })
+//           .button(b => {
+//             b.onClick(count => count + 1).text('+')
+//           })
+//       })
+//     })
+//   }
+//   // div(
+//   //   { attrs: { class: 'app' } },
+//   //   div({ attrs: { class: 'count count-small' } }, 'count'),
+//   //   div({ attrs: { class: 'count' } }, String),
+//   //   div(
+//   //     { attrs: { class: 'buttons' } },
+//   //     button(
+//   //       {
+//   //         events: { click: count => count - 1 },
+//   //         attrs: { disabled: count => count <= 0 }
+//   //       },
+//   //       '-'
+//   //     ),
+//   //     button({ events: { click: count => count + 1 } }, '+')
+//   //   )
+//   // )
+// )
+
+// console.log(component)
+
+// Tempo.renderSimple({ component, state: 0 })

@@ -1,65 +1,67 @@
 import { DOMTemplate, DOMChild } from '../template'
-import { ElementBuilder } from './element_builder'
+import { ElementBuilder } from './internal'
 import { DerivedOrLiteralValue, DerivedValue } from 'tempo-core/lib/value'
 import { text } from '../impl/text'
-import { MapStateBuilder } from './map_state_builder'
-import { el } from '../html'
-import { AnchorElementBuilder } from './anchor_element_builder'
-import { AreaElementBuilder } from './area_element_builder'
-import { AudioElementBuilder } from './audio_element_builder'
-import { BaseElementBuilder } from './base_element_builder'
-import { ComponentBuilder } from './component_builder'
-import { QuoteElementBuilder } from './quote_element_builder'
-import { ButtonElementBuilder } from './button_element_builder'
-import { CanvasElementBuilder } from './canvas_element_builder'
-import { TableColElementBuilder } from './tablecol_element_builder'
-import { DataElementBuilder } from './data_element_builder'
-import { ModElementBuilder } from './mod_element_builder'
-import { DialogElementBuilder } from './dialog_element_builder'
-import { EmbedElementBuilder } from './embed_element_builder'
-import { FieldSetElementBuilder } from './fieldset_element_builder'
-import { DetailsElementBuilder } from './details_element_builder'
-import { FormElementBuilder } from './form_element_builder'
-import { IFrameElementBuilder } from './iframe_element_builder'
-import { ImageElementBuilder } from './image_element_builder'
-import { InputElementBuilder } from './input_element_builder'
-import { HtmlElementBuilder } from './html_element_builder'
-import { LabelElementBuilder } from './label_element_builder'
-import { LIElementBuilder } from './li_element_builder'
-import { LinkElementBuilder } from './link_element_builder'
-import { MetaElementBuilder } from './meta_element_builder'
-import { MapElementBuilder } from './map_element_builder'
-import { MeterElementBuilder } from './meter_element_builder'
-import { ObjectElementBuilder } from './object_element_builder'
-import { OListElementBuilder } from './olist_element_builder'
-import { OptGroupElementBuilder } from './optgroup_element_builder'
-import { OptionElementBuilder } from './option_element_builder'
-import { OutputElementBuilder } from './output_element_builder'
-import { ParamElementBuilder } from './param_element_builder'
-import { PictureElementBuilder } from './picture_element_builder'
-import { ProgressElementBuilder } from './progress_element_builder'
-import { ScriptElementBuilder } from './script_element_builder'
-import { SelectElementBuilder } from './select_element_builder'
-import { SlotElementBuilder } from './slot_element_builder'
-import { SourceElementBuilder } from './source_element_builder'
-import { StyleElementBuilder } from './style_element_builder'
-import { TableDataCellElementBuilder } from './tabledatacell_element_builder'
-import { TextAreaElementBuilder } from './textarea_element_builder'
-import { TableHeaderCellElementBuilder } from './tableheadercell_element_builder'
-import { TimeElementBuilder } from './time_element_builder'
-import { TrackElementBuilder } from './track_element_builder'
-import { VideoElementBuilder } from './video_element_builder'
+import { el } from '../impl/html'
+import {
+  AnchorElementBuilder,
+  AreaElementBuilder,
+  AudioElementBuilder,
+  BaseElementBuilder,
+  ButtonElementBuilder,
+  CanvasElementBuilder,
+  childOrBuilderToTemplate,
+  ComponentBuilder,
+  DataElementBuilder,
+  DetailsElementBuilder,
+  DialogElementBuilder,
+  EmbedElementBuilder,
+  FieldSetElementBuilder,
+  FormElementBuilder,
+  FragmentBuilder,
+  HtmlElementBuilder,
+  IBuilder,
+  IFrameElementBuilder,
+  ImageElementBuilder,
+  InputElementBuilder,
+  LabelElementBuilder,
+  LIElementBuilder,
+  LinkElementBuilder,
+  MapActionBuilder,
+  MapElementBuilder,
+  MapQueryBuilder,
+  MapStateBuilder,
+  MetaElementBuilder,
+  MeterElementBuilder,
+  ModElementBuilder,
+  ObjectElementBuilder,
+  OListElementBuilder,
+  OptGroupElementBuilder,
+  OptionElementBuilder,
+  OutputElementBuilder,
+  ParamElementBuilder,
+  PictureElementBuilder,
+  PortalBuilder,
+  ProgressElementBuilder,
+  QuoteElementBuilder,
+  ScriptElementBuilder,
+  SelectElementBuilder,
+  SlotElementBuilder,
+  SourceElementBuilder,
+  StyleElementBuilder,
+  TableColElementBuilder,
+  TableDataCellElementBuilder,
+  TableHeaderCellElementBuilder,
+  TextAreaElementBuilder,
+  TimeElementBuilder,
+  TrackElementBuilder,
+  UntilBuilder,
+  VideoElementBuilder
+} from './internal'
 import { resolveAttribute, Attribute } from '../value'
-import { MapActionBuilder } from './map_action_builder'
-import { MapQueryBuilder } from './map_query_builder'
 import { LazyTemplate } from '../impl/lazy'
-import { FragmentBuilder } from './fragment_builder'
-import { UntilBuilder } from './until_builder'
-import { PortalBuilder } from './portal_builder'
-// import { SimpleComponentBuilder } from './simple_component_builder'
 import { PropagateArg, AdapterTemplate } from '../impl/adapter'
 import { ComponentTemplate } from '../impl/component'
-import { IBuilder, childOrBuilderToTemplate } from './ibuilder'
 
 function initBuilder<
   T extends ElementBuilder<any, any, any, any>,
@@ -71,6 +73,7 @@ function initBuilder<
 
 export class BaseBuilder<State, Action, Query> {
   protected _children: DOMTemplate<State, Action, Query>[] = []
+  constructor() {}
   // children
   append(
     el: DOMChild<State, Action, Query> | IBuilder<State, Action, Query>

@@ -18,9 +18,12 @@ import { DOMChild } from './template'
 import { View } from 'tempo-core/lib/view'
 import { SimpleComponent } from './simple_component'
 import { Reducer } from 'tempo-store/lib/reducer'
-import { IBuilder, childOrBuilderToTemplate } from './builder/ibuilder'
-import { SimpleComponentBuilder } from './builder/simple_component_builder'
-import { ComponentBuilder } from './builder/component_builder'
+import {
+  IBuilder,
+  childOrBuilderToTemplate,
+  SimpleComponentBuilder,
+  ComponentBuilder
+} from './builder/internal'
 
 export type TempoView<State, Action, Query> = Readonly<{
   view: View<State, Query>

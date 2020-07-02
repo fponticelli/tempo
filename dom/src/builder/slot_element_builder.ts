@@ -1,4 +1,4 @@
-import { ElementBuilder } from './element_builder'
+import { ElementBuilder } from './internal'
 import { EventHandlerTE, EventHandler } from '../value'
 
 export class SlotElementBuilder<State, Action, Query> extends ElementBuilder<

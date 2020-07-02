@@ -1,4 +1,4 @@
-import { ElementBuilder } from './element_builder'
+import { ElementBuilder } from './internal'
 
 export class IFrameElementBuilder<State, Action, Query> extends ElementBuilder<
   State,

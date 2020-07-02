@@ -13,9 +13,12 @@ limitations under the License.
 
 import { DOMTemplate } from '../template'
 import { DOMContext } from '../context'
-import { FragmentBuilder } from '../builder/fragment_builder'
+import {
+  FragmentBuilder,
+  IBuilder,
+  childOrBuilderToTemplate
+} from '../builder/internal'
 import { mapState } from '../html'
-import { IBuilder, childOrBuilderToTemplate } from '../builder/ibuilder'
 
 export type ReleaseF<StateA, StateB, StateC, Action, Query> = (
   merge: (a: StateA, b: StateB) => StateC,

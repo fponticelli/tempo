@@ -1,4 +1,4 @@
-import { ElementBuilder } from './element_builder'
+import { ElementBuilder } from './internal'
 
 export class InputElementBuilder<State, Action, Query> extends ElementBuilder<
   State,

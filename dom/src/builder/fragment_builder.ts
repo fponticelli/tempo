@@ -1,5 +1,4 @@
-import { BaseBuilder } from './base_builder'
-import { IBuilder } from './ibuilder'
+import { BaseBuilder, IBuilder } from './internal'
 import { FragmentTemplate } from '../impl/fragment'
 
 export class FragmentBuilder<State, Action, Query>

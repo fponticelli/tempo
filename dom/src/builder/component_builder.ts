@@ -1,5 +1,4 @@
-import { BaseBuilder } from './base_builder'
-import { IBuilder } from './ibuilder'
+import { BaseBuilder, IBuilder } from './internal'
 import { ComponentTemplate } from '../impl/component'
 
 export class ComponentBuilder<State, Action, Query>

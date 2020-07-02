@@ -1,5 +1,4 @@
-import { BaseBuilder } from './base_builder'
-import { IBuilder } from './ibuilder'
+import { BaseBuilder, IBuilder } from './internal'
 import { PortalTemplate } from '../impl/portal'
 
 export class PortalBuilder<State, Action, Query>

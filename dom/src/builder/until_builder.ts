@@ -1,5 +1,4 @@
-import { BaseBuilder } from './base_builder'
-import { IBuilder } from './ibuilder'
+import { BaseBuilder, IBuilder } from './internal'
 import { UntilTemplate } from '../impl/until'
 import { DerivedOrLiteralValue } from 'tempo-core/lib/value'
 

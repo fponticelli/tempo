@@ -1,4 +1,4 @@
-import { ElementBuilder, spaceSeparatedToString } from './element_builder'
+import { ElementBuilder, spaceSeparatedToString } from './internal'
 import { Attribute, mapAttribute } from '../value'
 
 export class AnchorElementBuilder<State, Action, Query> extends ElementBuilder<

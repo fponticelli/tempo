@@ -1,5 +1,4 @@
-import { BaseBuilder } from './base_builder'
-import { IBuilder } from './ibuilder'
+import { BaseBuilder, IBuilder } from './internal'
 import { DerivedValue } from 'tempo-core/lib/value'
 import { MapActionTemplate } from '../impl/map_action'
 
