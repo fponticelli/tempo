@@ -60,15 +60,3 @@ export class SimpleComponentTemplate<State, Query>
     return view
   }
 }
-
-// export function simpleComponent<State, Query = unknown>(
-//   props: {
-//     delayed?: boolean
-//   },
-//   ...children: DOMChild<State, State, Query>[]
-// ): SimpleComponent<State, Query> {
-//   return new SimpleComponentTemplate<State, Query>(
-//     props.delayed || false,
-//     map(children, domChildToTemplate)
-//   )
-// }
