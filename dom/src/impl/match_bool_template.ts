@@ -15,7 +15,7 @@ import { DOMTemplate, DOMChild } from '../template'
 import { DOMContext } from '../context'
 import { removeNode } from '../utils/dom'
 import { Attribute, resolveAttribute } from '../value'
-import { IBuilder, childOrBuilderToTemplate } from '../builder/ibuilder'
+import { IBuilder, childOrBuilderToTemplate } from '../impl/builder'
 
 export class MatchBoolTemplate<State, Action, Query>
   implements DOMTemplate<State, Action, Query> {

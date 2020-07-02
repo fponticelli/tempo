@@ -25,8 +25,8 @@ export class LazyTemplate<State, Action, Query>
   }
 }
 
-export function lazy<State, Action, Query = unknown>(
-  f: () => DOMTemplate<State, Action, Query>
-): DOMTemplate<State, Action, Query> {
-  return new LazyTemplate<State, Action, Query>(f)
-}
+// export function lazy<State, Action, Query = unknown>(
+//   f: () => DOMTemplate<State, Action, Query>
+// ): DOMTemplate<State, Action, Query> {
+//   return new LazyTemplate<State, Action, Query>(f)
+// }

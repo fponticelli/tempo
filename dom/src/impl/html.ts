@@ -11,58 +11,86 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { ElementBuilder } from '../builder/internal'
-import { AnchorElementBuilder } from '../builder/internal'
-import { AreaElementBuilder } from '../builder/internal'
-import { AudioElementBuilder } from '../builder/internal'
-import { BaseElementBuilder } from '../builder/internal'
-import { QuoteElementBuilder } from '../builder/internal'
-import { ButtonElementBuilder } from '../builder/internal'
-import { CanvasElementBuilder } from '../builder/internal'
-import { TableColElementBuilder } from '../builder/internal'
-import { DataElementBuilder } from '../builder/internal'
-import { ModElementBuilder } from '../builder/internal'
-import { DialogElementBuilder } from '../builder/internal'
-import { EmbedElementBuilder } from '../builder/internal'
-import { FieldSetElementBuilder } from '../builder/internal'
-import { DetailsElementBuilder } from '../builder/internal'
-import { FormElementBuilder } from '../builder/internal'
-import { IFrameElementBuilder } from '../builder/internal'
-import { ImageElementBuilder } from '../builder/internal'
-import { InputElementBuilder } from '../builder/internal'
-import { HtmlElementBuilder } from '../builder/internal'
-import { LabelElementBuilder } from '../builder/internal'
-import { LIElementBuilder } from '../builder/internal'
-import { LinkElementBuilder } from '../builder/internal'
-import { MetaElementBuilder } from '../builder/internal'
-import { MapElementBuilder } from '../builder/internal'
-import { MeterElementBuilder } from '../builder/internal'
-import { ObjectElementBuilder } from '../builder/internal'
-import { OListElementBuilder } from '../builder/internal'
-import { OptGroupElementBuilder } from '../builder/internal'
-import { OptionElementBuilder } from '../builder/internal'
-import { OutputElementBuilder } from '../builder/internal'
-import { ParamElementBuilder } from '../builder/internal'
-import { PictureElementBuilder } from '../builder/internal'
-import { ProgressElementBuilder } from '../builder/internal'
-import { ScriptElementBuilder } from '../builder/internal'
-import { SelectElementBuilder } from '../builder/internal'
-import { SlotElementBuilder } from '../builder/internal'
-import { SourceElementBuilder } from '../builder/internal'
-import { StyleElementBuilder } from '../builder/internal'
-import { TableDataCellElementBuilder } from '../builder/internal'
-import { TextAreaElementBuilder } from '../builder/internal'
-import { TableHeaderCellElementBuilder } from '../builder/internal'
-import { TimeElementBuilder } from '../builder/internal'
-import { TrackElementBuilder } from '../builder/internal'
-import { VideoElementBuilder } from '../builder/internal'
+import {
+  ElementBuilder,
+  AnchorElementBuilder,
+  AreaElementBuilder,
+  AudioElementBuilder,
+  BaseElementBuilder,
+  QuoteElementBuilder,
+  ButtonElementBuilder,
+  CanvasElementBuilder,
+  TableColElementBuilder,
+  DataElementBuilder,
+  ModElementBuilder,
+  DialogElementBuilder,
+  EmbedElementBuilder,
+  FieldSetElementBuilder,
+  DetailsElementBuilder,
+  FormElementBuilder,
+  IFrameElementBuilder,
+  ImageElementBuilder,
+  InputElementBuilder,
+  HtmlElementBuilder,
+  LabelElementBuilder,
+  LIElementBuilder,
+  LinkElementBuilder,
+  MetaElementBuilder,
+  MapElementBuilder,
+  MeterElementBuilder,
+  ObjectElementBuilder,
+  OListElementBuilder,
+  OptGroupElementBuilder,
+  OptionElementBuilder,
+  OutputElementBuilder,
+  ParamElementBuilder,
+  PictureElementBuilder,
+  ProgressElementBuilder,
+  ScriptElementBuilder,
+  SelectElementBuilder,
+  SlotElementBuilder,
+  SourceElementBuilder,
+  StyleElementBuilder,
+  TableDataCellElementBuilder,
+  TextAreaElementBuilder,
+  TableHeaderCellElementBuilder,
+  TimeElementBuilder,
+  TrackElementBuilder,
+  VideoElementBuilder,
+  el,
+  ComponentBuilder,
+  MapStateBuilder,
+  MapActionBuilder,
+  MapQueryBuilder,
+  IBuilder,
+  UntilBuilder,
+  FragmentBuilder,
+  PortalBuilder,
+  SimpleComponentBuilder
+} from './builder'
+import { Attribute, resolveAttribute } from '../value'
+import { ComponentTemplate } from './component'
+import { PropagateArg, AdapterTemplate } from './adapter'
+import { DerivedValue } from 'tempo-core/lib/value'
+import { IndexType } from 'tempo-std/lib/types/index_type'
+import {
+  ObjectWithPath,
+  TypeAtPath,
+  ObjectWithField
+} from 'tempo-std/lib/types/objects'
+import { DOMChild, DOMTemplate } from '../template'
+import { DifferentiateAt } from 'tempo-std/lib/types/differentiate'
+import { MatchTemplate } from './match_template'
+import { MatchBoolTemplate } from './match_bool_template'
+import { MatchValueTemplate } from './match_value_template'
+import { Option } from 'tempo-std/lib/option'
+import { Maybe, Just } from 'tempo-std/lib/maybe'
+import { Result } from 'tempo-std/lib/result'
+import { Async, Outcome } from 'tempo-std/lib/async'
+import { AsyncResult } from 'tempo-std/lib/async_result'
+import { LazyTemplate } from './lazy'
 
-// dom generic
-export function el<State, Action, Query, El extends HTMLElement = HTMLElement>(
-  name: string = 'div'
-) {
-  return new ElementBuilder<State, Action, Query, El>()
-}
+export { el }
 
 // dom specific
 export function a<State, Action, Query>(
@@ -954,5 +982,357 @@ export function wbr<State, Action, Query>(
 ) {
   const builder = new ElementBuilder<State, Action, Query, HTMLElement>('wbr')
   if (init !== undefined) init(builder)
+  return builder
+}
+
+export function adapter<State, StateB, Action, ActionB, Query>(props: {
+  bootstrapState: (outer: State) => StateB
+  mergeStates?: Attribute<
+    {
+      outerState: State
+      innerState: StateB
+    },
+    StateB
+  >
+  propagate?: (args: PropagateArg<State, StateB, Action, ActionB>) => void
+  child: ComponentTemplate<StateB, ActionB, Query>
+}) {
+  return new AdapterTemplate(
+    props.bootstrapState,
+    props.mergeStates,
+    props.propagate || (() => undefined),
+    props.child
+  )
+}
+
+export function localAdapter<State, Action, Query>(props: {
+  propagate?: (args: PropagateArg<State, State, Action, Action>) => void
+  child: ComponentTemplate<State, Action, Query>
+}) {
+  return new AdapterTemplate(
+    state => state,
+    ({ outerState }) => outerState,
+    props.propagate || (() => undefined),
+    props.child
+  )
+}
+
+export function component<State, Action, Query>(
+  reducer: (state: State, action: Action) => State,
+  init: (builder: ComponentBuilder<State, Action, Query>) => void
+) {
+  const builder = new ComponentBuilder<State, Action, Query>(reducer)
+  init(builder)
+  return builder
+}
+
+export function iterate<State, Items extends any[], Action, Query>(
+  map: DerivedValue<State, Items>,
+  init: (
+    builder: UntilBuilder<
+      [Items, State],
+      [Items[number], State, number],
+      Action,
+      Query
+    >
+  ) => void
+) {
+  return mapState<State, [Items, State], Action, Query>(
+    (outer: State): [Items, State] | undefined => {
+      const items = resolveAttribute(map)(outer)
+      return items !== undefined ? [items, outer] : undefined
+    },
+    n => {
+      n.until<[Items[number], State, number]>(
+        ({ state: [items, state], index }) =>
+          items[index] && [items[index], state, index],
+        init
+      )
+    }
+  )
+}
+
+export function mapState<State, StateB, Action, Query>(
+  map: (state: State) => StateB | undefined,
+  init: (builder: MapStateBuilder<State, StateB, Action, Query>) => void
+) {
+  const builder = new MapStateBuilder<State, StateB, Action, Query>(map)
+  init(builder)
+  return builder
+}
+
+export function mapField<
+  State,
+  Action,
+  Query,
+  K extends keyof State = keyof State
+>(
+  field: K,
+  init: (builder: MapStateBuilder<State, State[K], Action, Query>) => void
+) {
+  return mapState<State, State[K], Action, Query>(
+    (v: State): State[K] => v[field],
+    init
+  )
+}
+
+export function mapStateAndKeep<State, StateB, Action, Query>(
+  map: (state: State) => StateB | undefined,
+  init: (
+    builder: MapStateBuilder<State, [StateB, State], Action, Query>
+  ) => void
+) {
+  return mapState<State, [StateB, State], Action, Query>((state: State) => {
+    const inner = resolveAttribute(map)(state)
+    if (inner !== undefined) {
+      return [inner, state]
+    } else {
+      return undefined
+    }
+  }, init)
+}
+
+export function mapAction<State, Action, ActionB, Query>(
+  map: DerivedValue<ActionB, Action>,
+  init: (builder: MapActionBuilder<State, Action, ActionB, Query>) => void
+) {
+  const builder = new MapActionBuilder<State, Action, ActionB, Query>(map)
+  init(builder)
+  return builder
+}
+
+export function mapQuery<State, Action, Query, QueryB>(
+  map: DerivedValue<Query, QueryB>,
+  init: (builder: MapQueryBuilder<State, Action, Query, QueryB>) => void
+) {
+  const builder = new MapQueryBuilder<State, Action, Query, QueryB>(map)
+  init(builder)
+  return builder
+}
+
+export function match<
+  Path extends IndexType[],
+  State extends ObjectWithPath<Path, any>,
+  Action,
+  Query = unknown
+>(props: {
+  path: Path
+  matcher: {
+    [k in TypeAtPath<Path, State>]:
+      | DOMChild<DifferentiateAt<Path, State, k>, Action, Query>
+      | IBuilder<DifferentiateAt<Path, State, k>, Action, Query>
+  }
+}): DOMTemplate<State, Action, Query> {
+  return new MatchTemplate<Path, State, Action, Query>(
+    props.path,
+    props.matcher
+  )
+}
+
+export function matchKind<
+  State extends ObjectWithField<'kind', any>,
+  Action,
+  Query = unknown
+>(
+  matcher: {
+    [k in State['kind']]:
+      | DOMChild<DifferentiateAt<['kind'], State, k>, Action, Query>
+      | IBuilder<DifferentiateAt<['kind'], State, k>, Action, Query>
+  }
+): DOMTemplate<State, Action, Query> {
+  return match<['kind'], State, Action, Query>({
+    path: ['kind'],
+    matcher
+  })
+}
+
+export function matchBool<State, Action, Query = unknown>(props: {
+  condition: Attribute<State, boolean>
+  true: DOMChild<State, Action, Query> | IBuilder<State, Action, Query>
+  false: DOMChild<State, Action, Query> | IBuilder<State, Action, Query>
+}): DOMTemplate<State, Action, Query> {
+  return new MatchBoolTemplate<State, Action, Query>(
+    props.condition,
+    props.true,
+    props.false
+  )
+}
+
+export function matchValue<
+  Path extends IndexType[],
+  State extends ObjectWithPath<Path, string>,
+  Action,
+  Query = unknown
+>(props: {
+  path: Path
+  matcher: {
+    [_ in string | number]:
+      | DOMChild<State, Action, Query>
+      | IBuilder<State, Action, Query>
+  }
+  orElse: DOMChild<State, Action, Query> | IBuilder<State, Action, Query>
+}): DOMTemplate<State, Action, Query> {
+  return new MatchValueTemplate<State, Action, Query>(
+    props.path,
+    props.matcher,
+    props.orElse
+  )
+}
+
+export function matchOption<State, Action, Query = unknown>(props: {
+  Some: DOMChild<State, Action, Query> | IBuilder<State, Action, Query>
+  None: DOMChild<unknown, Action, Query> | IBuilder<unknown, Action, Query>
+}): DOMTemplate<Option<State>, Action, Query> {
+  return matchKind({
+    Some: mapField('value', n => n.append(props.Some)),
+    None: mapState(
+      () => null,
+      n => n.append(props.None)
+    )
+  })
+}
+
+export function matchMaybe<State, Action, Query = unknown>(props: {
+  Just: DOMChild<State, Action, Query> | IBuilder<State, Action, Query>
+  Nothing?: DOMChild<unknown, Action, Query> | IBuilder<State, Action, Query>
+}): DOMTemplate<Maybe<State>, Action, Query> {
+  return new MatchBoolTemplate<Maybe<State>, Action, Query>(
+    v => v !== undefined,
+    mapState(
+      (opt: Maybe<State>) => opt as Just<State>,
+      n => n.append(props.Just)
+    ),
+    props.Nothing as DOMChild<unknown, Action, Query>
+  )
+}
+
+export function matchResult<State, Error, Action, Query = unknown>(props: {
+  Success: DOMChild<State, Action, Query> | IBuilder<State, Action, Query>
+  Failure: DOMChild<Error, Action, Query> | IBuilder<Error, Action, Query>
+}): DOMTemplate<Result<State, Error>, Action, Query> {
+  return matchKind({
+    Success: mapField('value', n => n.append(props.Success)),
+    Failure: mapField('error', n => n.append(props.Failure))
+  })
+}
+
+export function matchAsync<State, Progress, Action, Query = unknown>(props: {
+  Outcome: DOMChild<State, Action, Query> | IBuilder<State, Action, Query>
+  NotAsked: DOMChild<unknown, Action, Query> | IBuilder<unknown, Action, Query>
+  Loading: DOMChild<Progress, Action, Query> | IBuilder<Progress, Action, Query>
+}): DOMTemplate<Async<State, Progress>, Action, Query> {
+  return matchKind({
+    Outcome: mapField('value', n => n.append(props.Outcome)),
+    Loading: mapField('progress', n => n.append(props.Loading)),
+    NotAsked: mapState(
+      () => null,
+      n => n.append(props.NotAsked)
+    )
+  })
+}
+
+export function matchAsyncResult<
+  State,
+  Error,
+  Progress,
+  Action,
+  Query = unknown
+>(props: {
+  Success: DOMChild<State, Action, Query> | IBuilder<State, Action, Query>
+  Failure: DOMChild<Error, Action, Query> | IBuilder<Error, Action, Query>
+  NotAsked: DOMChild<unknown, Action, Query> | IBuilder<unknown, Action, Query>
+  Loading: DOMChild<Progress, Action, Query> | IBuilder<Progress, Action, Query>
+}): DOMTemplate<AsyncResult<State, Error, Progress>, Action, Query> {
+  return matchKind<AsyncResult<State, Error, Progress>, Action, Query>({
+    Outcome: mapState(
+      (o: Outcome<Result<State, Error>>) => o.value,
+      n =>
+        n.append(
+          matchResult<State, Error, Action, Query>({
+            Success: props.Success,
+            Failure: props.Failure
+          })
+        )
+    ),
+    Loading: mapField('progress', n => n.append(props.Loading)),
+    NotAsked: mapState(
+      () => null,
+      n => n.append(props.NotAsked)
+    )
+  })
+}
+
+export function lazy<State, Action, Query>(
+  lazyf: () => DOMTemplate<State, Action, Query>
+) {
+  return new LazyTemplate(lazyf)
+}
+
+export function fragment<State, Action, Query>(
+  init: (builder: FragmentBuilder<State, Action, Query>) => void
+) {
+  const builder = new FragmentBuilder<State, Action, Query>()
+  init(builder)
+  return builder
+}
+
+export function portal<State, Action, Query>(
+  getParent: (doc: Document) => Element,
+  init: (builder: PortalBuilder<State, Action, Query>) => void
+) {
+  const builder = new PortalBuilder<State, Action, Query>(getParent)
+  init(builder)
+  return builder
+}
+
+export function portalWithSelector<State, Action, Query>(
+  selector: string,
+  init: (builder: PortalBuilder<State, Action, Query>) => void
+) {
+  return portal(doc => {
+    const el = doc.querySelector(selector)
+    if (!el) {
+      throw new Error(`selector doesn't match any element: "${selector}"`)
+    }
+    return el
+  }, init)
+}
+
+export function simpleComponent<State, Query>(
+  init: (builder: SimpleComponentBuilder<State, Query>) => void
+) {
+  const builder = new SimpleComponentBuilder<State, Query>()
+  init(builder)
+  return builder
+}
+
+export function unless<State, Action, Query>(
+  condition: DerivedValue<State, boolean>,
+  init: (builder: MapStateBuilder<State, State, Action, Query>) => void
+) {
+  return when(s => !condition(s), init)
+}
+
+export function until<State, StateB, Action, Query>(
+  next: DerivedValue<{ state: State; index: number }, StateB>,
+  init: (builder: UntilBuilder<State, StateB, Action, Query>) => void
+) {
+  const builder = new UntilBuilder<State, StateB, Action, Query>(next)
+  init(builder)
+  return builder
+}
+
+export function when<State, Action, Query>(
+  condition: DerivedValue<State, boolean>,
+  init: (builder: MapStateBuilder<State, State, Action, Query>) => void
+) {
+  const builder = new MapStateBuilder<State, State, Action, Query>(s => {
+    if (condition(s)) {
+      return s
+    } else {
+      return undefined
+    }
+  })
+  init(builder)
   return builder
 }

@@ -11,9 +11,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { DOMTemplate, DOMChild } from './template'
+import { DOMTemplate } from './template'
 import { DOMContext } from './context'
-import { domChildToTemplate } from './utils/dom'
 import { map } from 'tempo-std/lib/arrays'
 
 export type SimpleComponent<State, Query> = DOMTemplate<State, State, Query>
@@ -62,14 +61,14 @@ export class SimpleComponentTemplate<State, Query>
   }
 }
 
-export function simpleComponent<State, Query = unknown>(
-  props: {
-    delayed?: boolean
-  },
-  ...children: DOMChild<State, State, Query>[]
-): SimpleComponent<State, Query> {
-  return new SimpleComponentTemplate<State, Query>(
-    props.delayed || false,
-    map(children, domChildToTemplate)
-  )
-}
+// export function simpleComponent<State, Query = unknown>(
+//   props: {
+//     delayed?: boolean
+//   },
+//   ...children: DOMChild<State, State, Query>[]
+// ): SimpleComponent<State, Query> {
+//   return new SimpleComponentTemplate<State, Query>(
+//     props.delayed || false,
+//     map(children, domChildToTemplate)
+//   )
+// }

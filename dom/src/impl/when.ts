@@ -11,12 +11,12 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { DOMChild, DOMTemplate } from '../template'
+import { DOMTemplate } from '../template'
 import { DOMContext } from '../context'
 import { View } from 'tempo-core/lib/view'
-import { domChildToTemplate, removeNode } from '../utils/dom'
+import { removeNode } from '../utils/dom'
 import { map } from 'tempo-std/lib/arrays'
-import { Attribute, resolveAttribute, mapAttribute } from '../value'
+import { Attribute, resolveAttribute } from '../value'
 
 export class WhenTemplate<State, Action, Query>
   implements DOMTemplate<State, Action, Query> {
@@ -59,22 +59,22 @@ export class WhenTemplate<State, Action, Query>
   }
 }
 
-export function when<State, Action, Query = unknown>(
-  condition: Attribute<State, boolean>,
-  ...children: DOMChild<State, Action, Query>[]
-): DOMTemplate<State, Action, Query> {
-  return new WhenTemplate<State, Action, Query>(
-    condition,
-    map(children, domChildToTemplate)
-  )
-}
+// export function when<State, Action, Query = unknown>(
+//   condition: Attribute<State, boolean>,
+//   ...children: DOMChild<State, Action, Query>[]
+// ): DOMTemplate<State, Action, Query> {
+//   return new WhenTemplate<State, Action, Query>(
+//     condition,
+//     map(children, domChildToTemplate)
+//   )
+// }
 
-export function unless<State, Action, Query = unknown>(
-  condition: Attribute<State, boolean>,
-  ...children: DOMChild<State, Action, Query>[]
-): DOMTemplate<State, Action, Query> {
-  return new WhenTemplate<State, Action, Query>(
-    mapAttribute(condition, v => !v),
-    map(children, domChildToTemplate)
-  )
-}
+// export function unless<State, Action, Query = unknown>(
+//   condition: Attribute<State, boolean>,
+//   ...children: DOMChild<State, Action, Query>[]
+// ): DOMTemplate<State, Action, Query> {
+//   return new WhenTemplate<State, Action, Query>(
+//     mapAttribute(condition, v => !v),
+//     map(children, domChildToTemplate)
+//   )
+// }

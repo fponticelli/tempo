@@ -11,9 +11,9 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { DOMTemplate, DOMChild } from '../template'
+import { DOMTemplate } from '../template'
 import { DOMContext } from '../context'
-import { domChildToTemplate } from '../utils/dom'
+// import { domChildToTemplate } from '../utils/dom'
 import { map } from 'tempo-std/lib/arrays'
 
 export class PortalTemplate<State, Action, Query>
@@ -43,62 +43,62 @@ export class PortalTemplate<State, Action, Query>
   }
 }
 
-export function portal<State, Action, Query = unknown>(
-  props: {
-    getParent: (doc: Document) => Element
-    append: (doc: Document, node: Node) => void
-  },
-  ...children: DOMChild<State, Action, Query>[]
-): DOMTemplate<State, Action, Query> {
-  return new PortalTemplate<State, Action, Query>(
-    props.getParent,
-    props.append,
-    map(children, domChildToTemplate)
-  )
-}
+// export function portal<State, Action, Query = unknown>(
+//   props: {
+//     getParent: (doc: Document) => Element
+//     append: (doc: Document, node: Node) => void
+//   },
+//   ...children: DOMChild<State, Action, Query>[]
+// ): DOMTemplate<State, Action, Query> {
+//   return new PortalTemplate<State, Action, Query>(
+//     props.getParent,
+//     props.append,
+//     map(children, domChildToTemplate)
+//   )
+// }
 
-export function portalWithSelector<State, Action, Query = unknown>(
-  props: { selector: string },
-  ...children: DOMChild<State, Action, Query>[]
-): DOMTemplate<State, Action, Query> {
-  return portal<State, Action, Query>(
-    {
-      getParent: (doc: Document) => {
-        const el = doc.querySelector(props.selector)
-        if (!el) {
-          throw new Error(
-            `selector doesn't match any element: "${props.selector}"`
-          )
-        }
-        return el
-      },
-      append: (doc: Document, node: Node) => {
-        // Parent should always be available given the guarantee from `getParent`.
-        // If parent has been removed from unsafe manipulation of the dom, an exception will occurr.
-        const parent = doc.querySelector(props.selector)!
-        parent.appendChild(node)
-      }
-    },
-    ...children
-  )
-}
+// export function portalWithSelector<State, Action, Query = unknown>(
+//   props: { selector: string },
+//   ...children: DOMChild<State, Action, Query>[]
+// ): DOMTemplate<State, Action, Query> {
+//   return portal<State, Action, Query>(
+//     {
+//       getParent: (doc: Document) => {
+//         const el = doc.querySelector(props.selector)
+//         if (!el) {
+//           throw new Error(
+//             `selector doesn't match any element: "${props.selector}"`
+//           )
+//         }
+//         return el
+//       },
+//       append: (doc: Document, node: Node) => {
+//         // Parent should always be available given the guarantee from `getParent`.
+//         // If parent has been removed from unsafe manipulation of the dom, an exception will occurr.
+//         const parent = doc.querySelector(props.selector)!
+//         parent.appendChild(node)
+//       }
+//     },
+//     ...children
+//   )
+// }
 
-export function headPortal<State, Action, Query = unknown>(
-  ...children: DOMChild<State, Action, Query>[]
-): DOMTemplate<State, Action, Query> {
-  return new PortalTemplate<State, Action, Query>(
-    (doc: Document) => doc.head!,
-    (doc: Document, node: Node) => doc.head!.appendChild(node),
-    map(children, domChildToTemplate)
-  )
-}
+// export function headPortal<State, Action, Query = unknown>(
+//   ...children: DOMChild<State, Action, Query>[]
+// ): DOMTemplate<State, Action, Query> {
+//   return new PortalTemplate<State, Action, Query>(
+//     (doc: Document) => doc.head!,
+//     (doc: Document, node: Node) => doc.head!.appendChild(node),
+//     map(children, domChildToTemplate)
+//   )
+// }
 
-export function bodyPortal<State, Action, Query = unknown>(
-  ...children: DOMChild<State, Action, Query>[]
-): DOMTemplate<State, Action, Query> {
-  return new PortalTemplate<State, Action, Query>(
-    (doc: Document) => doc.body,
-    (doc: Document, node: Node) => doc.body.appendChild(node),
-    map(children, domChildToTemplate)
-  )
-}
+// export function bodyPortal<State, Action, Query = unknown>(
+//   ...children: DOMChild<State, Action, Query>[]
+// ): DOMTemplate<State, Action, Query> {
+//   return new PortalTemplate<State, Action, Query>(
+//     (doc: Document) => doc.body,
+//     (doc: Document, node: Node) => doc.body.appendChild(node),
+//     map(children, domChildToTemplate)
+//   )
+// }

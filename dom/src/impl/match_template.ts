@@ -17,7 +17,7 @@ import { DOMContext } from '../context'
 import { removeNode } from '../utils/dom'
 import { IndexType } from 'tempo-std/lib/types/index_type'
 import { ObjectWithPath, TypeAtPath } from 'tempo-std/lib/types/objects'
-import { IBuilder, childOrBuilderToTemplate } from '../builder/ibuilder'
+import { IBuilder, childOrBuilderToTemplate } from '../impl/builder'
 import { keys } from 'tempo-std/lib/objects'
 
 export class MatchTemplate<

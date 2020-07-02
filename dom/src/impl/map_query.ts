@@ -1,8 +1,8 @@
-import { DOMChild, DOMTemplate } from '../template'
+import { DOMTemplate } from '../template'
 import { DOMContext } from '../context'
 import { View } from 'tempo-core/lib/view'
 import { map as mapArray } from 'tempo-std/lib/arrays'
-import { domChildToTemplate } from '../utils/dom'
+// import { domChildToTemplate } from '../utils/dom'
 
 export class MapQueryTemplate<State, Action, OuterQuery, InnerQuery>
   implements DOMTemplate<State, Action, OuterQuery> {
@@ -31,22 +31,22 @@ export class MapQueryTemplate<State, Action, OuterQuery, InnerQuery>
   }
 }
 
-export function mapQuery<State, Action, OuterQuery, InnerQuery>(
-  props: { map: (value: OuterQuery) => InnerQuery },
-  ...children: DOMChild<State, Action, InnerQuery>[]
-): DOMTemplate<State, Action, OuterQuery> {
-  return new MapQueryTemplate<State, Action, OuterQuery, InnerQuery>(
-    props.map,
-    mapArray(children, domChildToTemplate)
-  )
-}
+// export function mapQuery<State, Action, OuterQuery, InnerQuery>(
+//   props: { map: (value: OuterQuery) => InnerQuery },
+//   ...children: DOMChild<State, Action, InnerQuery>[]
+// ): DOMTemplate<State, Action, OuterQuery> {
+//   return new MapQueryTemplate<State, Action, OuterQuery, InnerQuery>(
+//     props.map,
+//     mapArray(children, domChildToTemplate)
+//   )
+// }
 
-export function mapQueryConditional<State, Action, OuterQuery, InnerQuery>(
-  props: { map: (value: OuterQuery) => InnerQuery | undefined },
-  ...children: DOMChild<State, Action, InnerQuery>[]
-): DOMTemplate<State, Action, OuterQuery> {
-  return new MapQueryTemplate<State, Action, OuterQuery, InnerQuery>(
-    props.map,
-    mapArray(children, domChildToTemplate)
-  )
-}
+// export function mapQueryConditional<State, Action, OuterQuery, InnerQuery>(
+//   props: { map: (value: OuterQuery) => InnerQuery | undefined },
+//   ...children: DOMChild<State, Action, InnerQuery>[]
+// ): DOMTemplate<State, Action, OuterQuery> {
+//   return new MapQueryTemplate<State, Action, OuterQuery, InnerQuery>(
+//     props.map,
+//     mapArray(children, domChildToTemplate)
+//   )
+// }

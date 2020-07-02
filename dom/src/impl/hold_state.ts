@@ -17,7 +17,7 @@ import {
   FragmentBuilder,
   IBuilder,
   childOrBuilderToTemplate
-} from '../builder/internal'
+} from '../impl/builder'
 import { mapState } from '../html'
 
 export type ReleaseF<StateA, StateB, StateC, Action, Query> = (

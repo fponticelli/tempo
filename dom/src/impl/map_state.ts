@@ -11,10 +11,10 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { DOMChild, DOMTemplate } from '../template'
+import { DOMTemplate } from '../template'
 import { View } from 'tempo-core/lib/view'
 import { DOMContext } from '../context'
-import { domChildToTemplate, removeNode } from '../utils/dom'
+import { removeNode } from '../utils/dom'
 import { map as mapArray } from 'tempo-std/lib/arrays'
 import { Attribute, resolveAttribute } from '../value'
 
@@ -81,84 +81,84 @@ export class MapStateTemplate<OuterState, InnerState, Action, Query>
   }
 }
 
-export function mapState<OuterState, InnerState, Action, Query = unknown>(
-  props: {
-    map: Attribute<OuterState, InnerState>
-    whenNot?: DOMChild<OuterState, Action, Query>
-    equals?: (a: InnerState, b: InnerState) => boolean
-  },
-  ...children: DOMChild<InnerState, Action, Query>[]
-): DOMTemplate<OuterState, Action, Query> {
-  return new MapStateTemplate(
-    props.map,
-    domChildToTemplate(props.whenNot),
-    props.equals ?? ((a: InnerState, b: InnerState) => false),
-    mapArray(children, domChildToTemplate)
-  )
-}
+// export function mapState<OuterState, InnerState, Action, Query = unknown>(
+//   props: {
+//     map: Attribute<OuterState, InnerState>
+//     whenNot?: DOMChild<OuterState, Action, Query>
+//     equals?: (a: InnerState, b: InnerState) => boolean
+//   },
+//   ...children: DOMChild<InnerState, Action, Query>[]
+// ): DOMTemplate<OuterState, Action, Query> {
+//   return new MapStateTemplate(
+//     props.map,
+//     domChildToTemplate(props.whenNot),
+//     props.equals ?? ((a: InnerState, b: InnerState) => false),
+//     mapArray(children, domChildToTemplate)
+//   )
+// }
 
-export function mapField<
-  OuterState,
-  Key extends keyof OuterState,
-  Action,
-  Query = unknown
->(
-  props:
-    | {
-        field: Key
-        whenNot?: DOMChild<OuterState, Action, Query>
-        equals?: (a: OuterState[Key], b: OuterState[Key]) => boolean
-      }
-    | Key,
-  ...children: DOMChild<OuterState[Key], Action, Query>[]
-): DOMTemplate<OuterState, Action, Query> {
-  if (typeof props === 'object') {
-    const { field, whenNot, equals } = props
-    return mapState<OuterState, OuterState[Key], Action, Query>(
-      { map: (v: OuterState) => v[field], whenNot, equals },
-      ...children
-    )
-  } else {
-    return mapState<OuterState, OuterState[Key], Action, Query>(
-      { map: (v: OuterState) => v[props] },
-      ...children
-    )
-  }
-}
+// export function mapField<
+//   OuterState,
+//   Key extends keyof OuterState,
+//   Action,
+//   Query = unknown
+// >(
+//   props:
+//     | {
+//         field: Key
+//         whenNot?: DOMChild<OuterState, Action, Query>
+//         equals?: (a: OuterState[Key], b: OuterState[Key]) => boolean
+//       }
+//     | Key,
+//   ...children: DOMChild<OuterState[Key], Action, Query>[]
+// ): DOMTemplate<OuterState, Action, Query> {
+//   if (typeof props === 'object') {
+//     const { field, whenNot, equals } = props
+//     return mapState<OuterState, OuterState[Key], Action, Query>(
+//       { map: (v: OuterState) => v[field], whenNot, equals },
+//       ...children
+//     )
+//   } else {
+//     return mapState<OuterState, OuterState[Key], Action, Query>(
+//       { map: (v: OuterState) => v[props] },
+//       ...children
+//     )
+//   }
+// }
 
-export function mapStateAndKeep<
-  OuterState,
-  InnerState,
-  Action,
-  Query = unknown
->(
-  props: {
-    map: Attribute<OuterState, InnerState>
-    whenNot?: DOMChild<OuterState, Action, Query>
-    equals?: (
-      a: [InnerState, OuterState],
-      b: [InnerState, OuterState]
-    ) => boolean
-  },
-  ...children: DOMChild<[InnerState, OuterState], Action, Query>[]
-): DOMTemplate<OuterState, Action, Query> {
-  return new MapStateTemplate<
-    OuterState,
-    [InnerState, OuterState],
-    Action,
-    Query
-  >(
-    (state: OuterState) => {
-      const inner = resolveAttribute(props.map)(state)
-      if (inner !== undefined) {
-        return [inner, state]
-      } else {
-        return undefined
-      }
-    },
-    domChildToTemplate(props.whenNot),
-    props.equals ??
-      ((a: [InnerState, OuterState], b: [InnerState, OuterState]) => false),
-    mapArray(children, domChildToTemplate)
-  )
-}
+// export function mapStateAndKeep<
+//   OuterState,
+//   InnerState,
+//   Action,
+//   Query = unknown
+// >(
+//   props: {
+//     map: Attribute<OuterState, InnerState>
+//     whenNot?: DOMChild<OuterState, Action, Query>
+//     equals?: (
+//       a: [InnerState, OuterState],
+//       b: [InnerState, OuterState]
+//     ) => boolean
+//   },
+//   ...children: DOMChild<[InnerState, OuterState], Action, Query>[]
+// ): DOMTemplate<OuterState, Action, Query> {
+//   return new MapStateTemplate<
+//     OuterState,
+//     [InnerState, OuterState],
+//     Action,
+//     Query
+//   >(
+//     (state: OuterState) => {
+//       const inner = resolveAttribute(props.map)(state)
+//       if (inner !== undefined) {
+//         return [inner, state]
+//       } else {
+//         return undefined
+//       }
+//     },
+//     domChildToTemplate(props.whenNot),
+//     props.equals ??
+//       ((a: [InnerState, OuterState], b: [InnerState, OuterState]) => false),
+//     mapArray(children, domChildToTemplate)
+//   )
+// }

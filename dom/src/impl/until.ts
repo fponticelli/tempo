@@ -13,8 +13,8 @@ limitations under the License.
 
 import { View } from 'tempo-core/lib/view'
 import { DOMContext } from '../context'
-import { DOMTemplate, DOMChild } from '../template'
-import { removeNode, domChildToTemplate } from '../utils/dom'
+import { DOMTemplate } from '../template'
+import { removeNode } from '../utils/dom'
 import { map } from 'tempo-std/lib/arrays'
 import { Attribute, resolveAttribute } from '../value'
 
@@ -72,12 +72,12 @@ export class UntilTemplate<OuterState, InnerState, Action, Query>
   }
 }
 
-export function until<OuterState, InnerState, Action, Query = unknown>(
-  next: Attribute<{ state: OuterState; index: number }, InnerState>,
-  ...children: DOMChild<InnerState, Action, Query>[]
-): DOMTemplate<OuterState, Action, Query> {
-  return new UntilTemplate<OuterState, InnerState, Action, Query>(
-    next,
-    map(children, domChildToTemplate)
-  )
-}
+// export function until<OuterState, InnerState, Action, Query = unknown>(
+//   next: Attribute<{ state: OuterState; index: number }, InnerState>,
+//   ...children: DOMChild<InnerState, Action, Query>[]
+// ): DOMTemplate<OuterState, Action, Query> {
+//   return new UntilTemplate<OuterState, InnerState, Action, Query>(
+//     next,
+//     map(children, domChildToTemplate)
+//   )
+// }

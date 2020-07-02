@@ -23,6 +23,7 @@ export function setOneStyle(el: Element, name: string, value: any) {
 }
 
 export function setAttribute(el: Element, name: string, value: any) {
+  console.log(name, value)
   if (value == null) {
     el.removeAttribute(name)
   } else {
@@ -63,34 +64,34 @@ export function setBoolProperty(el: Element, name: string, value: any) {
   }
 }
 
-export function setEnumBoolAttribute(el: Element, name: string, value: any) {
-  setAttribute(
-    el,
-    name,
-    value === true || value === 'true'
-      ? 'true'
-      : value === false
-      ? 'false'
-      : (null as any)
-  )
-}
+// export function setEnumBoolAttribute(el: Element, name: string, value: any) {
+//   setAttribute(
+//     el,
+//     name,
+//     value === true || value === 'true'
+//       ? 'true'
+//       : value === false
+//       ? 'false'
+//       : (null as any)
+//   )
+// }
 
-export function setBoolAttribute(el: Element, name: string, value: any) {
-  setAttribute(
-    el,
-    name,
-    value === true || value === 'true' ? '' : (null as any)
-  )
-}
+// export function setBoolAttribute(el: Element, name: string, value: any) {
+//   setAttribute(
+//     el,
+//     name,
+//     value === true || value === 'true' ? '' : (null as any)
+//   )
+// }
 
-export function setCommaSeparated(el: Element, name: string, values: any) {
-  if (Array.isArray(values))
-    setAttribute(el, name, values.join(', ') || (null as any))
-  else setAttribute(el, name, (values && String(values)) || (null as any))
-}
+// export function setCommaSeparated(el: Element, name: string, values: any) {
+//   if (Array.isArray(values))
+//     setAttribute(el, name, values.join(', ') || (null as any))
+//   else setAttribute(el, name, (values && String(values)) || (null as any))
+// }
 
-export function setSpaceSeparated(el: Element, name: string, values: any) {
-  if (Array.isArray(values))
-    setAttribute(el, name, values.join(' ') || (null as any))
-  else setAttribute(el, name, (values && String(values)) || (null as any))
-}
+// export function setSpaceSeparated(el: Element, name: string, values: any) {
+//   if (Array.isArray(values))
+//     setAttribute(el, name, values.join(' ') || (null as any))
+//   else setAttribute(el, name, (values && String(values)) || (null as any))
+// }
