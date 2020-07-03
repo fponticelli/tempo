@@ -13,7 +13,7 @@ import { PropagateArg, AdapterTemplate } from './adapter'
 import { ComponentTemplate } from './component'
 import { keys } from 'tempo-std/lib/objects'
 import { DOMContext } from '../context'
-import { makeEmptyLifecycle } from '../lifecycle'
+import { makeEmptyLifecycle, MakeLifecycle } from '../lifecycle'
 import { DOMElement } from './element'
 import { MapStateTemplate } from './map_state'
 import { FragmentTemplate } from './fragment'
@@ -23,6 +23,7 @@ import { UntilTemplate } from './until'
 import { SimpleComponentTemplate } from './simple_component'
 import { PortalTemplate } from './portal'
 import { LazyTemplate } from './lazy'
+import { MatchBoolTemplate } from './match_bool_template'
 
 export interface IBuilder<State, Action, Query> {
   build(): DOMTemplate<State, Action, Query>
@@ -50,6 +51,12 @@ export class BaseBuilder<State, Action, Query> {
     el: DOMChild<State, Action, Query> | IBuilder<State, Action, Query>
   ): this {
     this._children.push(childOrBuilderToTemplate(el))
+    return this
+  }
+  appendMany(
+    ...els: (DOMChild<State, Action, Query> | IBuilder<State, Action, Query>)[]
+  ): this {
+    this._children.push(...els.map(childOrBuilderToTemplate))
     return this
   }
   el(
@@ -165,6 +172,20 @@ export class BaseBuilder<State, Action, Query> {
     const builder = new MapQueryBuilder<State, Action, Query, QueryB>(map)
     init(builder)
     return this.append(builder.build())
+  }
+
+  matchBool(props: {
+    condition: Attribute<State, boolean>
+    true: DOMChild<State, Action, Query> | IBuilder<State, Action, Query>
+    false: DOMChild<State, Action, Query> | IBuilder<State, Action, Query>
+  }): this {
+    return this.append(
+      new MatchBoolTemplate<State, Action, Query>(
+        props.condition,
+        props.true,
+        props.false
+      )
+    )
   }
 
   lazy(lazyf: () => DOMTemplate<State, Action, Query>) {
@@ -1673,6 +1694,7 @@ export class ElementBuilder<State, Action, Query, El extends HTMLElement>
     DerivedOrLiteralValue<State, string | undefined>
   > = {}
   private _handlers: Record<string, EventHandler<State, Action>> = {}
+  private _lifecycle: MakeLifecycle<State, Action> | undefined
 
   constructor(public tagName: string) {
     super()
@@ -1689,7 +1711,7 @@ export class ElementBuilder<State, Action, Query, El extends HTMLElement>
         name,
         callback: this._handlers[name]
       })),
-      makeEmptyLifecycle,
+      this._lifecycle ?? makeEmptyLifecycle,
       (query: Query, el: HTMLElement, ctx: DOMContext<Action>) => {},
       this._children
     )
@@ -1713,6 +1735,9 @@ export class ElementBuilder<State, Action, Query, El extends HTMLElement>
   handle(name: string, callback: EventHandler<State, Action>) {
     this._handlers[name] = callback
     return this
+  }
+  lifecycle(makeLifecycle: MakeLifecycle<State, Action>) {
+    this._lifecycle = makeLifecycle
   }
 
   // attribute shortcuts

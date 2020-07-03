@@ -11,41 +11,37 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { li, ul, div } from 'dom/lib/html_old'
-import { mapState } from 'dom/lib/map_state'
-import { forEach } from 'dom/lib/impl/for_each'
-import { Route } from '../route'
 import { Item } from '../state'
 import { Action } from '../action'
-import { lazy } from 'dom/lib/impl/lazy'
-import { DOMTemplate } from 'tempo-dom/lib/template'
-import { when } from 'dom/lib/impl/when'
-import { unsafeHtml } from 'dom/lib/lifecycle/unsafe_html'
+import { lazy, li, when } from 'tempo-dom/lib/html'
 import { linkRoute } from './link_route'
+import { Route } from '../route'
+import { unsafeHtml } from 'tempo-dom/lib/lifecycle/unsafe_html'
+import { DOMTemplate } from 'tempo-dom/lib/template'
 
-export const commentTemplate: DOMTemplate<Item, Action> = lazy<Item, Action>(
-  () =>
-    li<Item, Action>(
-      {},
-      div(
-        { attrs: { className: 'comment-meta' } },
-        linkRoute({ route: item => Route.user(item.user) }),
-        ' ',
-        item => item.time_ago
-      ),
-      div({
-        lifecycle: unsafeHtml(item => item.content)
-      }),
-      mapState<Item, Item[], Action>(
-        { map: item => item.comments || [] },
-        commentsTemplate
-      )
+export const commentTemplate: DOMTemplate<Item, Action, unknown> = lazy<
+  Item,
+  Action,
+  unknown
+>(() =>
+  li<Item, Action, unknown>($ =>
+    $.div($ =>
+      $.class('comment-meta')
+        .append(linkRoute({ route: item => Route.user(item.user) }))
+        .text(' ')
+        .text(s => s.time_ago)
     )
+      .div($ => $.lifecycle(unsafeHtml(s => s.content)))
+      .mapState(
+        s => s.comments ?? [],
+        $ => $.append(commentsTemplate)
+      )
+  )
 )
 
-export const commentsTemplate = lazy<Item[], Action>(() =>
+export const commentsTemplate = lazy<Item[], Action, unknown>(() =>
   when(
-    { condition: comments => comments.length > 0 },
-    ul({}, forEach({}, commentTemplate))
+    comments => comments.length > 0,
+    $ => $.ul($ => $.forEach($ => $.append(commentTemplate)))
   )
 )

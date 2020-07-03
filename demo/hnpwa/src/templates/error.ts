@@ -16,6 +16,6 @@ import { Action } from '../action'
 import { notification } from './notification'
 import { errorToMessage } from '../http_error'
 
-export const errorTemplate = notification<Error, Action>(s =>
+export const errorTemplate = notification<Error, Action, unknown>(s =>
   errorToMessage(s.error)
 )

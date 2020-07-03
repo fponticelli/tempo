@@ -59,75 +59,71 @@ export const template = fragment<State, Action, unknown>($ =>
             )
             .label($ => $.for('toggle-all').text('Mark all as complete'))
             .ul($ =>
-              $.class('todo-list')
-                // a !== b || sa.editing !== sb.editing
-                .iterate(
-                  s => s.filtered,
-                  $ =>
-                    $.li($ =>
-                      $.class(([todo, state]) => ({
-                        completed: todo.completed,
-                        editing: isEditing(state, todo)
-                      }))
-                        .div($ =>
-                          $.class('view')
-                            .inputCheckbox($ =>
-                              $.class('toggle')
-                                .checked(([todo]) => todo.completed)
-                                .onChange(([todo]) =>
-                                  Action.toggleTodo(todo.id)
-                                )
+              $.class('todo-list').iterate(
+                s => s.filtered,
+                $ =>
+                  $.li($ =>
+                    $.class(([todo, state]) => ({
+                      completed: todo.completed,
+                      editing: isEditing(state, todo)
+                    }))
+                      .div($ =>
+                        $.class('view')
+                          .inputCheckbox($ =>
+                            $.class('toggle')
+                              .checked(([todo]) => todo.completed)
+                              .onChange(([todo]) => Action.toggleTodo(todo.id))
+                          )
+                          .label($ =>
+                            $.onDblClick(([todo]) =>
+                              Action.editingTodo(todo.id, todo.title)
+                            ).text(([todo]) => todo.title)
+                          )
+                          .button($ =>
+                            $.class('destroy').onClick(([todo]) =>
+                              Action.removeTodo(todo.id)
                             )
-                            .label($ =>
-                              $.onDblClick(([todo]) =>
-                                Action.editingTodo(todo.id, todo.title)
-                              ).text(([todo]) => todo.title)
-                            )
-                            .button($ =>
-                              $.class('destroy').onClick(([todo]) =>
-                                Action.removeTodo(todo.id)
+                          )
+                      )
+                      .when(
+                        ([todo, state]) => isEditing(state, todo),
+                        $ =>
+                          $.inputText($ =>
+                            $.class('edit')
+                              .value(
+                                ([_, state]) =>
+                                  state.editing && state.editing.title
                               )
-                            )
-                        )
-                        .when(
-                          ([todo, state]) => isEditing(state, todo),
-                          $ =>
-                            $.inputText($ =>
-                              $.class('edit')
-                                .value(
-                                  ([_, state]) =>
-                                    state.editing && state.editing.title
-                                )
-                                .onKeyDown(([todo], ev, input) => {
-                                  if (ev.keyCode === 13) {
-                                    const value = input.value.trim()
-                                    if (value !== '') {
-                                      return Action.updateTodo(todo.id, value)
-                                    } else {
-                                      return Action.removeTodo(todo.id)
-                                    }
-                                  } else if (ev.keyCode === 27) {
-                                    return Action.cancelEditingTodo
-                                  } else {
-                                    return Action.editingTodo(
-                                      todo.id,
-                                      input.value
-                                    )
-                                  }
-                                })
-                                .onBlur(([todo], _, el) => {
-                                  const input = el as HTMLInputElement
+                              .onKeyDown(([todo], ev, input) => {
+                                if (ev.keyCode === 13) {
                                   const value = input.value.trim()
                                   if (value !== '') {
                                     return Action.updateTodo(todo.id, value)
                                   } else {
                                     return Action.removeTodo(todo.id)
                                   }
-                                })
-                            )
-                        )
-                    )
-                )
+                                } else if (ev.keyCode === 27) {
+                                  return Action.cancelEditingTodo
+                                } else {
+                                  return Action.editingTodo(
+                                    todo.id,
+                                    input.value
+                                  )
+                                }
+                              })
+                              .onBlur(([todo], _, el) => {
+                                const input = el as HTMLInputElement
+                                const value = input.value.trim()
+                                if (value !== '') {
+                                  return Action.updateTodo(todo.id, value)
+                                } else {
+                                  return Action.removeTodo(todo.id)
+                                }
+                              })
+                          )
+                      )
+                  )
+              )
             )
         )
       )

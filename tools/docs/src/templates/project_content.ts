@@ -1,6 +1,6 @@
 import { Action } from '../action'
 import { ProjectRef } from '../toc'
-import { div, p, a, span, article, img, br, h1 } from 'dom/lib/html_old'
+import { div, p, a, span, article, img, br, h1 } from 'tempo-dom/lib/html'
 import { mapField } from 'dom/lib/map_state'
 import { when } from 'dom/lib/impl/when'
 import { forEach } from 'dom/lib/impl/for_each'

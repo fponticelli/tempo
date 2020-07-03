@@ -26,7 +26,10 @@ const makeUrl = (path: string[]) => {
 
 const cache = new Map<string, any>()
 
-const makeRequest = async <Out>(path: string[], parse: (input: any) => DecodeResult<any, Out, string>): Promise<Result<Out, HttpError>> => {
+const makeRequest = async <Out>(
+  path: string[],
+  parse: (input: any) => DecodeResult<any, Out, string>
+): Promise<Result<Out, HttpError>> => {
   const endpoint = makeUrl(path)
   if (cache.has(endpoint)) {
     return cache.get(endpoint)
@@ -40,7 +43,9 @@ const makeRequest = async <Out>(path: string[], parse: (input: any) => DecodeRes
           if (result.isSuccess()) {
             return success<Out, HttpError>(result.value)
           } else {
-            return failure<Out, HttpError>(HttpError.badBody(result.failures.join(';')))
+            return failure<Out, HttpError>(
+              HttpError.badBody(result.failures.join(';'))
+            )
           }
         } else {
           return failure<Out, HttpError>(HttpError.badStatus(response.status))
@@ -51,19 +56,27 @@ const makeRequest = async <Out>(path: string[], parse: (input: any) => DecodeRes
       }
     })()
     cache.set(endpoint, output)
-    setTimeout(() => { cache.delete(endpoint) }, RESET_CACHE_AFTER) // reset cache entry after elapsed time
+    setTimeout(() => {
+      cache.delete(endpoint)
+    }, RESET_CACHE_AFTER) // reset cache entry after elapsed time
     return output
   }
 }
 
 const feedName = (feed: Feed) => {
   switch (feed) {
-    case Feed.ask: return 'ask'
-    case Feed.jobs: return 'jobs'
-    case Feed.new: return 'newest'
-    case Feed.top: return 'news'
-    case Feed.show: return 'show'
-    default: throw `unkown value ${feed}`
+    case Feed.ask:
+      return 'ask'
+    case Feed.jobs:
+      return 'jobs'
+    case Feed.new:
+      return 'newest'
+    case Feed.top:
+      return 'news'
+    case Feed.show:
+      return 'show'
+    default:
+      throw `unkown value ${feed}`
   }
 }
 

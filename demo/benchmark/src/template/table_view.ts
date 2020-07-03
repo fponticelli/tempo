@@ -22,7 +22,7 @@ import {
   span,
   button,
   b
-} from 'dom/lib/html_old'
+} from 'tempo-dom/lib/html'
 import { Action } from '../action'
 import { TestInfo, State, VersionWithSelected, makeTestRunId } from '../state'
 import { forEach } from 'dom/lib/impl/for_each'

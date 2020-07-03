@@ -1,4 +1,4 @@
-import { div, ul, li, aside, p, hr } from 'dom/lib/html_old'
+import { div, ul, li, aside, p, hr } from 'tempo-dom/lib/html'
 import { lazy } from 'dom/lib/impl/lazy'
 import { iterate } from 'dom/lib/impl/iterate'
 import { when } from 'dom/lib/impl/when'

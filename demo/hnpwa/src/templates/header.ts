@@ -13,23 +13,21 @@ limitations under the License.
 
 import { Action } from '../action'
 import { Route, Feed, toTitle } from '../route'
-import { header, i, nav, span } from 'dom/lib/html_old'
-import { g, svg, rect } from 'dom/lib/svg_old'
-import { when, unless } from 'dom/lib/impl/when'
-import { fragment } from 'dom/lib/impl/fragment'
+import { header, i, div, fragment } from 'tempo-dom/lib/html'
 import { linkRoute } from './link_route'
 
-const logo = svg<Route, Action>(
-  { attrs: { width: 32, height: 32, viewBox: `0 0 32 32` } },
-  g(
-    { styles: { fill: 'none' } },
-    rect({ attrs: { x: 0, y: 0, fill: '#ffffff', width: 8, height: 8 } }),
-    rect({ attrs: { x: 11, y: 0, fill: '#ffffff', width: 8, height: 8 } }),
-    rect({ attrs: { x: 22, y: 0, fill: '#ffffff', width: 8, height: 8 } }),
-    rect({ attrs: { x: 11, y: 11, fill: '#ffffff', width: 8, height: 8 } }),
-    rect({ attrs: { x: 11, y: 22, fill: '#ffffff', width: 8, height: 8 } })
-  )
-)
+const logo = div<Route, Action, unknown>($ => $.text('LOGO'))
+// svg<Route, Action>(
+//   { attrs: { width: 32, height: 32, viewBox: `0 0 32 32` } },
+//   g(
+//     { styles: { fill: 'none' } },
+//     rect({ attrs: { x: 0, y: 0, fill: '#ffffff', width: 8, height: 8 } }),
+//     rect({ attrs: { x: 11, y: 0, fill: '#ffffff', width: 8, height: 8 } }),
+//     rect({ attrs: { x: 22, y: 0, fill: '#ffffff', width: 8, height: 8 } }),
+//     rect({ attrs: { x: 11, y: 11, fill: '#ffffff', width: 8, height: 8 } }),
+//     rect({ attrs: { x: 11, y: 22, fill: '#ffffff', width: 8, height: 8 } })
+//   )
+// )
 
 const headerLink = (feed: Feed) => {
   const condition = (route: Route) => {
@@ -40,30 +38,37 @@ const headerLink = (feed: Feed) => {
         return false
     }
   }
-  return fragment<Route, Action>(
-    when(
-      { condition },
-      span({ attrs: { 'aria-current': 'page' } }, toTitle(Route.feeds(feed, 1)))
-    ),
-    unless({ condition }, linkRoute({ route: Route.feeds(feed, 1) }))
+  return fragment<Route, Action, unknown>($ =>
+    $.when(condition, $ =>
+      $.span($ => $.ariaCurrent('page').append(toTitle(Route.feeds(feed, 1))))
+    )
+    .unless(condition, $ =>
+      $.append(linkRoute({ route: Route.feeds(feed, 1) }))
+    )
   )
 }
 
-export const appHeader = header<Route, Action>(
-  {},
-  linkRoute(
-    { route: Route.root },
-    i({ attrs: { 'aria-label': 'Homepage', className: 'logo' } }, logo)
-  ),
-  nav(
-    {},
-    ...[Feed.top, Feed.new, Feed.ask, Feed.show, Feed.jobs].map(headerLink)
-  ),
-  linkRoute(
-    {
-      className: 'githublink',
-      route: Route.externalRoute('https://github.com/fponticelli/tempo')
-    },
-    'About'
+export const appHeader = header<Route, Action, unknown>($ =>
+  $.append(
+    linkRoute(
+      { route: Route.root },
+      i<Route, Action, unknown>($ =>
+        $.ariaLabel('Homepage').class('logo').append(logo)
+      ).build()
+    )
   )
+    .nav($ =>
+      $.appendMany(
+        ...[Feed.top, Feed.new, Feed.ask, Feed.show, Feed.jobs].map(headerLink)
+      )
+    )
+    .append(
+      linkRoute(
+        {
+          className: 'githublink',
+          route: Route.externalRoute('https://github.com/fponticelli/tempo')
+        },
+        'About'
+      )
+    )
 )

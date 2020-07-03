@@ -11,18 +11,23 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { mapState } from 'dom/lib/map_state'
-import { main, section } from 'dom/lib/html_old'
+import { main } from 'tempo-dom/lib/html'
 import { State } from '../state'
 import { Action } from '../action'
 import { appHeader } from './header'
 import { pageTemplate } from './page'
 
-export const template = main<State, Action>(
-  {},
-  mapState({ map: state => state.route }, appHeader),
-  section(
-    { attrs: { id: 'content' } },
-    mapState({ map: state => state.page }, pageTemplate)
+export const template = main<State, Action, unknown>($ =>
+  $.mapState(
+    s => s.route,
+    $ => $.append(appHeader)
+  ).section($ =>
+    $.id('content').mapState(
+      s => {
+        console.log(s.page)
+        return s.page
+      },
+      $ => $.append(pageTemplate)
+    )
   )
 )

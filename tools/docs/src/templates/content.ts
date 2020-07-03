@@ -1,4 +1,4 @@
-import { div, article } from 'dom/lib/html_old'
+import { div, article } from 'tempo-dom/lib/html'
 import { htmlContent } from './html_content'
 import { Content } from '../state'
 import { Action } from '../action'

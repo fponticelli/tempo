@@ -13,6 +13,7 @@ limitations under the License.
 
 import { Item, ItemUrl, User } from './state'
 import { sanitize } from 'dompurify'
+import { Marked } from '@ts-stack/markdown'
 
 import {
   ValueDecoder,
@@ -26,15 +27,22 @@ import {
 
 import { lazy } from 'partsing/core/decoder'
 
-const itemUrlDecoder = stringValue.map((s: string): ItemUrl => {
-  if (s.indexOf('item?id=') >= 0) {
-    return ItemUrl.internal
-  } else {
-    return ItemUrl.external(s)
+const itemUrlDecoder = stringValue.map(
+  (s: string): ItemUrl => {
+    if (s.indexOf('item?id=') >= 0) {
+      return ItemUrl.internal
+    } else {
+      return ItemUrl.external(s)
+    }
   }
-})
+)
 
-const itemDecoder: ValueDecoder<Item> = objectValue({
+const markdownToHtml = (s: string) => {
+  return sanitize(Marked.parse(s))
+}
+
+const itemDecoder: ValueDecoder<Item> = objectValue(
+  {
     id: integerValue,
     title: stringValue,
     points: nullValue.map(() => 0).or(integerValue),
@@ -44,18 +52,23 @@ const itemDecoder: ValueDecoder<Item> = objectValue({
     domain: stringValue,
     comments_count: integerValue,
     comments: lazy(() => arrayValue(itemDecoder)),
-    content: stringValue.map(s => sanitize(s)),
+    content: stringValue.map(markdownToHtml),
     type: stringValue
-  }, ['comments', 'content', 'domain', 'points', 'title', 'user'])
+  },
+  ['comments', 'content', 'domain', 'points', 'title', 'user']
+)
 
 export const decodeItem = decodeValue<Item>(itemDecoder)
 export const decodeFeed = decodeValue<Item[]>(arrayValue(itemDecoder))
 
-const userDecoder = objectValue({
-  about: stringValue.map(s => sanitize(s)),
-  created: stringValue,
-  id: stringValue,
-  karma: integerValue
-}, ['about'])
+const userDecoder = objectValue(
+  {
+    about: stringValue.map(markdownToHtml),
+    created: stringValue,
+    id: stringValue,
+    karma: integerValue
+  },
+  ['about']
+)
 
 export const decodeUser = decodeValue<User>(userDecoder)

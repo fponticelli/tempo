@@ -11,7 +11,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { div } from 'dom/lib/html_old'
+import { div } from 'tempo-dom/lib/html'
 import { State } from './state'
 import { Action } from './action'
 import { optionsSelection } from './template/options_selection'

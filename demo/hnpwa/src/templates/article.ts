@@ -11,30 +11,28 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { article, section, span, div } from 'dom/lib/html_old'
+import { article } from 'tempo-dom/lib/html'
 import { Article } from '../state'
 import { Action } from '../action'
 import { commentsTemplate } from './comments'
 import { itemFooterTemplate, itemUrlTemplate } from './page_feed'
-import { mapState } from 'dom/lib/map_state'
-import { unsafeHtml } from 'dom/lib/lifecycle/unsafe_html'
+import { unsafeHtml } from 'tempo-dom/lib/lifecycle/unsafe_html'
 
-export const articleTemplate = article<Article, Action>(
-  {},
-  mapState(
-    { map: (article: Article) => article.item },
-    section(
-      {},
-      itemUrlTemplate,
-      span({ attrs: { className: 'domain' } }, item => item.domain),
-      itemFooterTemplate
-    ),
-    div({
-      lifecycle: unsafeHtml(item => item.content)
-    }),
-    section(
-      { attrs: { className: 'comments-view' } },
-      mapState({ map: item => item.comments || [] }, commentsTemplate)
-    )
+export const articleTemplate = article<Article, Action, unknown>($ =>
+  $.mapState(
+    s => s.item,
+    $ =>
+      $.section($ =>
+        $.append(itemUrlTemplate)
+          .span($ => $.class('domain').text(s => s.domain))
+          .append(itemFooterTemplate)
+      )
+        .div($ => $.lifecycle(unsafeHtml(s => s.content)))
+        .section($ =>
+          $.class('comments-view').mapState(
+            s => s.comments ?? [],
+            $ => $.append(commentsTemplate)
+          )
+        )
   )
 )

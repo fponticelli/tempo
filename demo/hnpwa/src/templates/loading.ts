@@ -11,11 +11,11 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { div } from 'dom/lib/html_old'
+import { div } from 'tempo-dom/lib/html'
 import { notification } from './notification'
 import { Loading } from '../state'
 import { Action } from '../action'
 
-export const loadingTemplate = notification<Loading, Action>(
-  div({ attrs: { className: 'spinner' } })
+export const loadingTemplate = notification<Loading, Action, unknown>(
+  div($ => $.class('spinner'))
 )

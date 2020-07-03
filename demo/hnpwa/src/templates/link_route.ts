@@ -13,7 +13,7 @@ limitations under the License.
 
 import { Action } from '../action'
 import { Route, toUrl, toTitle } from '../route'
-import { a } from 'dom/lib/html_old'
+import { a } from 'tempo-dom/lib/html'
 import { Attribute, mapAttribute, resolveAttribute } from 'tempo-dom/lib/value'
 import { DOMChild, DOMTemplate } from 'tempo-dom/lib/template'
 // import 'tempo-dom/lib/value'
@@ -28,26 +28,24 @@ export function linkRoute<State, Action, Query>(
   if (children.length === 0) {
     children.push(mapAttribute(opts.route, toTitle))
   }
-  return a<State, Action, Query>(
-    {
-      attrs: {
-        href: mapAttribute(opts.route, toUrl),
-        className: opts.className,
-        target: mapAttribute(opts.route, a =>
+  return a<State, Action, Query>($ =>
+    $.href(mapAttribute(opts.route, toUrl))
+      .class(opts.className)
+      .target(
+        mapAttribute(opts.route, a =>
           a.kind === 'ExternalRoute' ? '_blank' : undefined
-        ),
-        rel: mapAttribute(opts.route, a =>
+        )
+      )
+      .rel(
+        mapAttribute(opts.route, a =>
           a.kind === 'ExternalRoute' ? 'noopener' : undefined
         )
-      },
-      events: {
-        click: (state: State, ev, el) => {
-          ev.preventDefault()
-          const route = resolveAttribute(opts.route)(state)!
-          return (Action.linkClicked(route) as unknown) as Action // TODO not sure why this is needed
-        }
-      }
-    },
-    ...children
-  )
+      )
+      .onClick((state: State, ev, el) => {
+        ev.preventDefault()
+        const route = resolveAttribute(opts.route)(state)!
+        return (Action.linkClicked(route) as unknown) as Action // TODO not sure why this is needed
+      })
+      .appendMany(...children)
+  ).build()
 }

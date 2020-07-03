@@ -14,13 +14,21 @@ limitations under the License.
 import { View } from 'tempo-core/lib/view'
 import { DOMContext } from '../context'
 import { DOMTemplate } from '../template'
+import { IBuilder, childOrBuilderToTemplate } from './builder'
 
 export class LazyTemplate<State, Action, Query>
   implements DOMTemplate<State, Action, Query> {
-  constructor(readonly f: () => DOMTemplate<State, Action, Query>) {}
+  constructor(
+    readonly f: () =>
+      | DOMTemplate<State, Action, Query>
+      | IBuilder<State, Action, Query>
+  ) {}
 
+  private template: DOMTemplate<State, Action, Query> | undefined
   render(ctx: DOMContext<Action>, state: State): View<State, Query> {
-    const template = this.f()
-    return template.render(ctx, state)
+    if (this.template === undefined) {
+      this.template = childOrBuilderToTemplate(this.f())
+    }
+    return this.template.render(ctx, state)
   }
 }

@@ -7,12 +7,14 @@
   "license": "Apache-2.0",
   "private": true,
   "dependencies": {
-    "tempo-std": "^0.5.5",
+    "dom": "0.0.3",
+    "dompurify": "^2.0.7",
+    "partsing": "^0.7.3",
     "tempo-core": "^1.7.1",
     "tempo-dom": "^0.25.0",
+    "tempo-std": "^0.5.5",
     "tempo-store": "^1.2.4",
-    "partsing": "^0.7.3",
-    "dompurify": "^2.0.7"
+    "@ts-stack/markdown": "^1.2.0"
   },
   "devDependencies": {
     "cssnano": "^4.1.10",
@@ -27,7 +29,7 @@
     "compile": "NODE_ENV=production && npx tsc --noEmit && parcel build src/index.html --public-url . --out-dir ./build --experimental-scope-hoisting",
     "clean": "rm -rf dist/* && rm -rf ./build/*",
     "build": "npm run clean && npm run compile",
-    "watch": "parcel src/index.html",
+    "start": "parcel src/index.html",
     "prettier": "prettier -c src/**/*.ts",
     "prettier-fix": "prettier --write src/**/*.ts"
   }

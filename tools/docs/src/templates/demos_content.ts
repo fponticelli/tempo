@@ -1,6 +1,6 @@
 import { Action } from '../action'
 import { DemoRef } from '../toc'
-import { div, p, a } from 'dom/lib/html_old'
+import { div, p, a } from 'tempo-dom/lib/html'
 import { forEach } from 'dom/lib/impl/for_each'
 
 function demoSrc(path: string) {

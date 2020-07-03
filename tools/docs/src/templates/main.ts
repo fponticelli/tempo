@@ -1,4 +1,4 @@
-import { div, nav, a, img, main, span } from 'dom/lib/html_old'
+import { div, nav, a, img, main, span } from 'tempo-dom/lib/html'
 import { matchAsyncResult } from 'tempo-dom/lib/match'
 import { mapState, mapField } from 'dom/lib/map_state'
 import { State } from '../state'

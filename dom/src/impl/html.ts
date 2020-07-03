@@ -1263,7 +1263,9 @@ export function matchAsyncResult<
 }
 
 export function lazy<State, Action, Query>(
-  lazyf: () => DOMTemplate<State, Action, Query>
+  lazyf: () =>
+    | DOMTemplate<State, Action, Query>
+    | IBuilder<State, Action, Query>
 ) {
   return new LazyTemplate(lazyf)
 }

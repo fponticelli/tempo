@@ -11,43 +11,40 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { section, nav, div, span } from 'dom/lib/html_old'
+import { section, span, matchBool } from 'tempo-dom/lib/html'
 import { Feed, maxPage, Route } from '../route'
 import { Action } from '../action'
-import { matchBool } from 'tempo-dom/lib/match'
 import { linkRoute } from './link_route'
-import { mapState } from 'dom/lib/map_state'
-import { forEach } from 'dom/lib/impl/for_each'
 
 const paginationDesktop = matchBool<
   { feed: Feed; page: number; current: number },
-  Action
+  Action,
+  unknown
 >({
-  condition: state => state.page === state.current,
-  true: span({ attrs: { 'aria-current': 'page' } }, state => `${state.page}`),
+  condition: s => s.page === s.current,
+  true: span($ => $.ariaCurrent('page').text(s => `${s.page}`)),
   false: linkRoute(
     { route: state => Route.feeds(state.feed, state.page) },
     state => String(state.page)
   )
 })
 
-const previousPageLink = section<{ feed: Feed; page: number }, Action>(
-  {},
-  matchBool({
-    condition: state => state.page === 1,
-    true: span({ attrs: { class: 'inactive' } }, 'Previous'),
-    false: linkRoute(
-      { route: state => Route.feeds(state.feed, state.page - 1) },
-      'Previous'
-    )
-  })
+const previousPageLink = section<{ feed: Feed; page: number }, Action, unknown>(
+  $ =>
+    $.matchBool({
+      condition: s => s.page === 1,
+      true: span($ => $.class('inactive').text('Previous')),
+      false: linkRoute(
+        { route: state => Route.feeds(state.feed, state.page - 1) },
+        'Previous'
+      )
+    })
 )
 
-const nextPageLink = section<{ feed: Feed; page: number }, Action>(
-  {},
-  matchBool({
-    condition: state => maxPage(state.feed) === state.page,
-    true: span({ attrs: { className: 'inactive' } }, 'Next'),
+const nextPageLink = section<{ feed: Feed; page: number }, Action, unknown>($ =>
+  $.matchBool({
+    condition: s => maxPage(s.feed) === s.page,
+    true: span($ => $.class('inactive').text('Next')),
     false: linkRoute(
       { route: state => Route.feeds(state.feed, state.page + 1) },
       'Next'
@@ -65,23 +62,24 @@ const pageRange = (
   return arr
 }
 
-export const paginationTemplate = section<{ feed: Feed; page: number }, Action>(
-  {
-    attrs: { className: 'pagination' }
-  },
-  previousPageLink,
-  nav(
-    {},
-    mapState(
-      { map: state => pageRange(state.feed, state.page) },
-      forEach({}, paginationDesktop)
+export const paginationTemplate = section<
+  { feed: Feed; page: number },
+  Action,
+  unknown
+>($ =>
+  $.class('pagination')
+    .append(previousPageLink)
+    .nav($ =>
+      $.mapState(
+        s => pageRange(s.feed, s.page),
+        $ => $.forEach($ => $.append(paginationDesktop))
+      )
     )
-  ),
-  div(
-    { attrs: { className: 'mobile' } },
-    span({}, state => `${state.page}`),
-    span({}, '/'),
-    span({}, state => `${maxPage(state.feed)}`)
-  ),
-  nextPageLink
+    .div($ =>
+      $.class('mobile')
+        .span($ => $.text(s => String(s.page)))
+        .span($ => $.text('/'))
+        .span($ => $.text(s => String(maxPage(s.feed))))
+    )
+    .append(nextPageLink)
 )

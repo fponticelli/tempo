@@ -11,47 +11,36 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { section, table, tr, td, b } from 'dom/lib/html_old'
-import { Profile, User } from '../state'
+import { section } from 'tempo-dom/lib/html'
+import { Profile } from '../state'
 import { Action } from '../action'
-import { mapState } from 'dom/lib/map_state'
-import { when } from 'dom/lib/impl/when'
-import { unsafeHtml } from 'dom/lib/lifecycle/unsafe_html'
+import { unsafeHtml } from 'tempo-dom/lib/lifecycle/unsafe_html'
 
-export const profileTemplate = section<Profile, Action>(
-  { attrs: { className: 'user-view' } },
-  mapState(
-    { map: profile => profile.user },
-    table<User, Action>(
-      {},
-      tr(
-        {},
-        td({}, 'user:'),
-        td(
-          {},
-          b({}, user => user.id)
+export const profileTemplate = section<Profile, Action, unknown>($ =>
+  $.class('user-view').mapState(
+    profile => profile.user,
+    $ =>
+      $.table($ =>
+        $.tr($ =>
+          $.td($ => $.text('user:')).td($ => $.b($ => $.text(user => user.id)))
         )
-      ),
-      tr(
-        {},
-        td({}, 'created:'),
-        td({}, user => user.created)
-      ),
-      tr(
-        {},
-        td({}, 'karma:'),
-        td({}, user => String(user.karma))
-      ),
-      when(
-        { condition: user => !!user.about },
-        tr(
-          {},
-          td({}, 'about:'),
-          td({
-            lifecycle: unsafeHtml(user => user.about)
-          })
-        )
+          .tr($ =>
+            $.td($ => $.text('created:')).td($ => $.text(user => user.created))
+          )
+          .tr($ =>
+            $.td($ => $.text('karma:')).td($ =>
+              $.text(user => String(user.karma))
+            )
+          )
+          .when(
+            user => user.about !== undefined,
+            $ =>
+              $.tr($ =>
+                $.td($ => $.text('about:')).td($ =>
+                  $.lifecycle(unsafeHtml(user => user.about))
+                )
+              )
+          )
       )
-    )
   )
 )
