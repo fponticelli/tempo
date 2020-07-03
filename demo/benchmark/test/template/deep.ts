@@ -23,17 +23,14 @@ export interface Deep {
   paragraph: string
 }
 
-export const deep = div<Deep, unknown>(
-  { attrs: { id: s => s.id } },
-  div(
-    {},
-    h1({}, 'Welcome ', s => s.name),
-    address(
-      {},
-      div({}, 'Address:'),
-      div({}, s => s.address.line1),
-      div({}, s => s.address.line2)
-    ),
-    article({}, s => s.paragraph)
+export const deep = div<Deep, unknown, unknown>($ =>
+  $.id(s => s.id).div($ =>
+    $.h1($ => $.text('Welcome ').text(s => s.name))
+      .address($ =>
+        $.div($ => $.text('Address: '))
+          .div($ => $.text(s => s.address.line1))
+          .div($ => $.text(s => s.address.line2))
+      )
+      .article($ => $.text(s => s.paragraph))
   )
-)
+).build()

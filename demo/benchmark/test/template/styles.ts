@@ -19,7 +19,9 @@ export interface TestStyles {
   border: string
 }
 
-export const style = div<TestStyles, unknown>(
-  { styles: { backgroundColor: s => s.backgroundColor, color: s => s.color, border: s => s.border } },
-  'content'
-)
+export const style = div<TestStyles, unknown, unknown>($ =>
+  $.style('backgroundColor', s => s.backgroundColor)
+    .style('color', s => s.color)
+    .style('border', s => s.border)
+    .text('content')
+).build()

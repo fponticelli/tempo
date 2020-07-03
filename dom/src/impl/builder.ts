@@ -1630,6 +1630,8 @@ export function separatedToString(
 ) {
   if (typeof src === 'string') {
     return src
+  } else if (src == null) {
+    return undefined
   } else if (Array.isArray(src)) {
     return src.join(separator)
   } else {
@@ -2811,6 +2813,9 @@ export class InputNumberElementBuilder<
   }
   step(value: DerivedOrLiteralValue<State, number | undefined>) {
     return this.attr('step', mapAttribute(value, String))
+  }
+  value(value: DerivedOrLiteralValue<State, string | number | undefined>) {
+    return this.attr('value', mapAttribute(value, String))
   }
 }
 

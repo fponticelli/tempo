@@ -48,8 +48,13 @@ export function setElAttribute(
   name: string,
   value: string | undefined
 ) {
-  let set = attributeMap[name] || setAttribute
-  set(el, name, value)
+  if (attributeMap[name] !== undefined) {
+    attributeMap[name](el, name, value)
+  } else {
+    setAttribute(el, name, value)
+  }
+  // let set = attributeMap[name] || setAttribute
+  // set(el, name, value)
 }
 
 export function setElStyle(

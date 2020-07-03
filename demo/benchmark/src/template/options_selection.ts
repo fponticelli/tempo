@@ -11,34 +11,24 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { div, input, label, table, tr, td, th } from 'tempo-dom/lib/html'
+import { div } from 'tempo-dom/lib/html'
 import { Action } from '../action'
 import { TestOptions } from '../state'
 
-export const optionsSelection = div<TestOptions, Action>(
-  {},
-  table(
-    {},
-    tr(
-      {},
-      th(
-        {},
-        label({ attrs: { for: 'options_max_time' } }, 'max execution time')
-      ),
-      td(
-        { attrs: { className: 'option-value' } },
-        input({
-          attrs: {
-            id: 'options_max_time',
-            type: 'number',
-            min: 0,
-            value: options => options.maxTime
-          },
-          events: {
-            change: (_s, _e, el) =>
-              Action.changeOptionMaxTime(Number((el as HTMLInputElement).value))
-          }
-        })
+export const optionsSelection = div<TestOptions, Action, unknown>($ =>
+  $.table($ =>
+    $.tr($ =>
+      $.th($ =>
+        $.label($ => $.for('options_max_time').text('max execution time'))
+      ).td($ =>
+        $.class('option-value').inputNumber($ =>
+          $.id('options_max_time')
+            .min(0)
+            .value(s => s.maxTime)
+            .onChange((_s, _ev, el) =>
+              Action.changeOptionMaxTime(el.valueAsNumber)
+            )
+        )
       )
     )
   )

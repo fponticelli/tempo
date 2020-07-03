@@ -13,13 +13,6 @@ limitations under the License.
 
 import { button } from 'tempo-dom/lib/html'
 
-export const event = button<string, string>(
-  {
-    events: {
-      click: (state: string): string => {
-        return state
-      }
-    }
-  },
-  'click me'
-)
+export const event = button<string, string, unknown>($ =>
+  $.onClick(s => s).text('click me')
+).build()

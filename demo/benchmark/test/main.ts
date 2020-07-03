@@ -20,7 +20,10 @@ import { TestStyles, style } from './template/styles'
 import { event } from './template/events'
 import { TestProperties, property } from './template/property'
 
-const ctx = DOMContext.fromElement(document.getElementById('test')!, () => {})
+const ctx = DOMContext.fromElement<string>(
+  document.getElementById('test')!,
+  () => {}
+)
 
 export const renderListElements = (numbers: number[]) => {
   list.render(ctx, numbers)
@@ -28,8 +31,7 @@ export const renderListElements = (numbers: number[]) => {
 
 export const renderListAndUpdate = (numbers: number[][]) => {
   const view = list.render(ctx, [])
-  for (const nums of numbers)
-    view.change(nums)
+  for (const nums of numbers) view.change(nums)
 }
 
 export const renderListElementsAndDestroy = (numbers: number[]) => {
@@ -39,31 +41,30 @@ export const renderListElementsAndDestroy = (numbers: number[]) => {
 
 export const renderDeepAndUpdate = (values: Deep[]) => {
   const view = deep.render(ctx, values[0]!)
-  for (const v of values)
-    view.change(v)
+  for (const v of values) view.change(v)
 }
 
 export const updateAttributes = (values: TestAttributes[]) => {
   const view = attribute.render(ctx, values[0]!)
-  for (const v of values)
+  for (const v of values) {
     view.change(v)
+  }
 }
 
 export const updateProperty = (values: TestProperties[]) => {
   const view = property.render(ctx, values[0]!)
-  for (const v of values)
-    view.change(v)
+  for (const v of values) view.change(v)
 }
 
 export const updateStyles = (values: TestStyles[]) => {
   const view = style.render(ctx, values[0]!)
-  for (const v of values)
-    view.change(v)
+  for (const v of values) view.change(v)
 }
 
 export const updateAndTriggerEvents = (values: string[]) => {
   const view = event.render(ctx, values[0]!)
-  const el = document.getElementById('test').firstElementChild! as HTMLButtonElement
+  const el = document.getElementById('test')
+    .firstElementChild! as HTMLButtonElement
   for (const v of values) {
     el.click()
     view.change(v)

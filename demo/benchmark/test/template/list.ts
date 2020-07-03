@@ -11,10 +11,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { ul, li } from 'tempo-dom/lib/html'
-import { forEach } from 'tempo-dom/lib/for_each'
+import { ul } from 'tempo-dom/lib/html'
 
-export const list = ul<number[], unknown>(
-  {},
-  forEach({}, li({ attrs: { className: String } }, String))
-)
+export const list = ul<number[], unknown, unknown>($ =>
+  $.forEach($ => $.li($ => $.class(String).text(String)))
+).build()

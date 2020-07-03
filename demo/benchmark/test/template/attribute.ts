@@ -19,7 +19,10 @@ export interface TestAttributes {
   title: string
 }
 
-export const attribute = div<TestAttributes, unknown>(
-  { attrs: { id: s => s.id, className: s => s.className, title: s => s.title } },
-  'content'
-)
+export const attribute = div<TestAttributes, unknown, unknown>($ =>
+  $.id(s => s.id)
+    // .attr('class', s => s.className)
+    .class(s => s.className)
+    .title(s => s.title)
+    .text('content')
+).build()

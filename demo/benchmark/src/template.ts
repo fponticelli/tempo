@@ -15,11 +15,13 @@ import { div } from 'tempo-dom/lib/html'
 import { State } from './state'
 import { Action } from './action'
 import { optionsSelection } from './template/options_selection'
-import { mapState } from 'dom/lib/map_state'
 import { tableView } from './template/table_view'
 
-export const template = div<State, Action>(
-  { attrs: { className: 'display_test' } },
-  mapState({ map: state => state.options }, optionsSelection),
-  tableView
+export const template = div<State, Action, unknown>($ =>
+  $.class('display_test')
+    .mapState(
+      s => s.options,
+      $ => $.append(optionsSelection)
+    )
+    .append(tableView)
 )

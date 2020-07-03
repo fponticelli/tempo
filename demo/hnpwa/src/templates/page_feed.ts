@@ -93,10 +93,7 @@ export const pageFeedTemplate = section<PageFeed, Action, unknown>($ =>
   $.class('list-view')
     .ul($ =>
       $.iterate(
-        s => {
-          console.log(s.items)
-          return s.items
-        },
+        s => s.items,
         $ => $.append(listItemTemplate)
       )
     )

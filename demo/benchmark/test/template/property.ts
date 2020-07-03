@@ -18,6 +18,6 @@ export interface TestProperties {
   disabled: boolean
 }
 
-export const property = input<TestProperties, unknown>(
-  { attrs: { value: s => s.value, disabled: s => s.disabled } }
-)
+export const property = input<TestProperties, unknown, unknown>($ =>
+  $.value(s => s.value).disabled(s => s.disabled)
+).build()

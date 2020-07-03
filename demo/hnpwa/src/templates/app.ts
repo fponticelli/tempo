@@ -23,10 +23,7 @@ export const template = main<State, Action, unknown>($ =>
     $ => $.append(appHeader)
   ).section($ =>
     $.id('content').mapState(
-      s => {
-        console.log(s.page)
-        return s.page
-      },
+      s => s.page,
       $ => $.append(pageTemplate)
     )
   )

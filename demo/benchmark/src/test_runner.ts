@@ -13,31 +13,40 @@ limitations under the License.
 
 import { TestDescription, TestOptions } from './state'
 
-function setup() { }
+function setup() {}
 
 function teardown() {
   document.getElementById('test')!.innerHTML = ''
 }
 
-const loadScript = (runnerId: string): Promise<any> => new Promise((resolve, reject) => {
-  const script = document.createElement('script')
-  script.onload = () => {
-    console.log(`loaded tests for ${runnerId}, now executing ...`)
-    const anyWin = window as any
-    const mod = anyWin.__tests__
-    delete anyWin.__tests__
-    document.body.removeChild(script)
-    resolve(mod)
-  }
-  script.src = `./${runnerId}/main.js`
-  document.body.appendChild(script)
-})
+const loadScript = (runnerId: string): Promise<any> =>
+  new Promise((resolve, reject) => {
+    try {
+      const script = document.createElement('script')
+      script.onload = () => {
+        console.log(`loaded tests for '${runnerId}', executing now ...`)
+        const anyWin = window as any
+        const mod = anyWin.__tests__
+        delete anyWin.__tests__
+        document.body.removeChild(script)
+        resolve(mod)
+      }
+      script.src = `./${runnerId}/main.js`
+      document.body.appendChild(script)
+    } catch (e) {
+      reject(e)
+    }
+  })
 
 const makeSuite = (
   runnerId: string,
   testDescriptions: TestDescription[],
   options: TestOptions,
-  dispatch: (runnerId: string, testId: string, target: TestResult | undefined) => void
+  dispatch: (
+    runnerId: string,
+    testId: string,
+    target: TestResult | undefined
+  ) => void
 ) =>
   new Promise<Record<string, TestResult>>(async resolve => {
     const mod = await loadScript(runnerId)
@@ -53,7 +62,9 @@ const makeSuite = (
       suite.add({
         id: test.id,
         async: true,
-        fn: function() { mod[test.fn](test.args) },
+        fn: function () {
+          mod[test.fn](test.args)
+        },
         name: test.name,
         setup: setup,
         teardown: teardown,
@@ -61,7 +72,7 @@ const makeSuite = (
       })
     }
 
-    suite.on('cycle', function(event: { target: TestResult }) {
+    suite.on('cycle', function (event: { target: TestResult }) {
       console.log(`${runnerId}: ${String(event.target)}`)
       dispatch(runnerId, event.target.id, event.target)
     })
@@ -75,7 +86,11 @@ export const runTests = async (
   runnerIds: string[],
   testDescriptions: TestDescription[],
   options: TestOptions,
-  dispatch: (runnerId: string, testId: string, target: TestResult | undefined) => void
+  dispatch: (
+    runnerId: string,
+    testId: string,
+    target: TestResult | undefined
+  ) => void
 ) => {
   for (const id of runnerIds) {
     await makeSuite(id, testDescriptions, options, dispatch)

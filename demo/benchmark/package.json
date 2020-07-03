@@ -33,6 +33,7 @@
     "compile": "NODE_ENV=production && npx tsc --noEmit && npm run compile:test && npm run compile:html && node tools/create_config.js",
     "clean": "rm -f ./build/current/* && rm -f ./build/*.css && rm -f ./build/*.js* && rm -f ./build/*.html",
     "build": "npm run clean && npm run compile",
+    "start": "parcel src/index.html --out-dir ./build/",
     "prettier": "prettier -c src/**/*.ts",
     "prettier-fix": "prettier --write src/**/*.ts"
   }
