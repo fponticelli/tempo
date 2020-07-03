@@ -11,8 +11,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-export function setAttribute(el: Element, name: string, value: any) {
-  console.log(name, value)
+export function setAttribute(el: Element, name: string, value: string) {
   if (value == null) {
     el.removeAttribute(name)
   } else {
@@ -20,7 +19,7 @@ export function setAttribute(el: Element, name: string, value: any) {
   }
 }
 
-export function setProperty(el: Element, name: string, value: any) {
+export function setProperty(el: Element, name: string, value: string) {
   const anyEl = el as any
   if (value == null) {
     anyEl[name] = null
@@ -29,12 +28,11 @@ export function setProperty(el: Element, name: string, value: any) {
   }
 }
 
-export function setBoolProperty(el: Element, name: string, value: any) {
+export function setBoolProperty(el: Element, name: string, value: string) {
   const anyEl = el as any
   if (value == null) {
     anyEl[name] = null
   } else {
-    const bool = value === true || value === 'true'
-    anyEl[name] = bool
+    anyEl[name] = value === name
   }
 }

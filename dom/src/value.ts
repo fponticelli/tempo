@@ -13,8 +13,6 @@ limitations under the License.
 
 import { keys } from 'tempo-std/lib/objects'
 import { DerivedOrLiteralValue, DerivedValue } from 'tempo-core/lib/value'
-import { DOMContext } from './context'
-import { MakeLifecycle } from './lifecycle'
 
 export type Attribute<State, Value> =
   | DerivedOrLiteralValue<State, Value | undefined>
@@ -39,16 +37,6 @@ export type StyleAttribute<State, Value> = DerivedOrLiteralValue<
 export type ValueOfAttribute<
   Att extends Attribute<any, any>
 > = Att extends Attribute<any, infer Value> ? Value : never
-
-export type AttributeValue = string | number | boolean | string[]
-
-export interface Props<State, Action, Query = unknown> {
-  attrs?: Record<string, Attribute<State, AttributeValue>>
-  events?: Record<string, EventHandler<State, Action>>
-  styles?: Record<string, StyleAttribute<State, string>>
-  lifecycle?: MakeLifecycle<State, Action>
-  respond?: (query: Query, el: HTMLElement, ctx: DOMContext<Action>) => void
-}
 
 export function applyAttributes<State, A, B, C>(
   attrA: Attribute<State, A>,

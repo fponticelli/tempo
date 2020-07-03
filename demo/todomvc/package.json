@@ -16,9 +16,10 @@
     "url": "https://github.com/fponticelli"
   },
   "dependencies": {
-    "tempo-std": "^0.5.5",
+    "dom": "0.0.3",
     "tempo-core": "^1.7.1",
     "tempo-dom": "^0.25.0",
+    "tempo-std": "^0.5.5",
     "todomvc-app-css": "2.2.0",
     "todomvc-common": "1.0.5"
   },

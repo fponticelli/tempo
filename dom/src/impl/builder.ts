@@ -31,14 +31,12 @@ export interface IBuilder<State, Action, Query> {
 export function childOrBuilderToTemplate<State, Action, Query>(
   src: DOMChild<State, Action, Query> | IBuilder<State, Action, Query>
 ): DOMTemplate<State, Action, Query> {
-  if (typeof (src as any).build === 'function') {
+  if (src === undefined) {
+    return text('')
+  } else if (typeof (src as any).build === 'function') {
     return (src as IBuilder<State, Action, Query>).build()
-  } else if (
-    typeof src === 'string' ||
-    typeof src === 'function' ||
-    src === undefined
-  ) {
-    return text(src ?? '')
+  } else if (typeof src === 'string' || typeof src === 'function') {
+    return text(src)
   } else {
     return src as DOMTemplate<State, Action, Query>
   }
@@ -806,154 +804,160 @@ export class BaseBuilder<State, Action, Query> {
   inputButton(
     init?: (builder: InputElementBuilder<State, Action, Query>) => void
   ): this {
-    const builder = new InputElementBuilder<State, Action, Query>()
+    const builder = new InputElementBuilder<State, Action, Query>('input')
     builder.type('button')
     return initBuilder(builder, init, this)
   }
   inputCheckbox(
     init?: (builder: InputCheckedElementBuilder<State, Action, Query>) => void
   ): this {
-    const builder = new InputCheckedElementBuilder<State, Action, Query>()
+    const builder = new InputCheckedElementBuilder<State, Action, Query>(
+      'input'
+    )
     builder.type('checkbox')
     return initBuilder(builder, init, this)
   }
   inputColor(
     init?: (builder: InputElementBuilder<State, Action, Query>) => void
   ): this {
-    const builder = new InputElementBuilder<State, Action, Query>()
+    const builder = new InputElementBuilder<State, Action, Query>('input')
     builder.type('color')
     return initBuilder(builder, init, this)
   }
   inputDate(
     init?: (builder: InputDateElementBuilder<State, Action, Query>) => void
   ): this {
-    const builder = new InputDateElementBuilder<State, Action, Query>()
+    const builder = new InputDateElementBuilder<State, Action, Query>('input')
     builder.type('date')
     return initBuilder(builder, init, this)
   }
   inputDatetimeLocal(
     init?: (builder: InputDateElementBuilder<State, Action, Query>) => void
   ): this {
-    const builder = new InputDateElementBuilder<State, Action, Query>()
+    const builder = new InputDateElementBuilder<State, Action, Query>('input')
     builder.type('datetime-local')
     return initBuilder(builder, init, this)
   }
   inputEmail(
     init?: (builder: InputEmailElementBuilder<State, Action, Query>) => void
   ): this {
-    const builder = new InputEmailElementBuilder<State, Action, Query>()
+    const builder = new InputEmailElementBuilder<State, Action, Query>('input')
     builder.type('email')
     return initBuilder(builder, init, this)
   }
   inputFile(
     init?: (builder: InputFileElementBuilder<State, Action, Query>) => void
   ): this {
-    const builder = new InputFileElementBuilder<State, Action, Query>()
+    const builder = new InputFileElementBuilder<State, Action, Query>('input')
     builder.type('file')
     return initBuilder(builder, init, this)
   }
   inputHidden(
     init?: (builder: InputElementBuilder<State, Action, Query>) => void
   ): this {
-    const builder = new InputElementBuilder<State, Action, Query>()
+    const builder = new InputElementBuilder<State, Action, Query>('input')
     builder.type('hidden')
     return initBuilder(builder, init, this)
   }
   inputImage(
     init?: (builder: InputImageElementBuilder<State, Action, Query>) => void
   ): this {
-    const builder = new InputImageElementBuilder<State, Action, Query>()
+    const builder = new InputImageElementBuilder<State, Action, Query>('input')
     builder.type('image')
     return initBuilder(builder, init, this)
   }
   inputMonth(
     init?: (builder: InputDateElementBuilder<State, Action, Query>) => void
   ): this {
-    const builder = new InputDateElementBuilder<State, Action, Query>()
+    const builder = new InputDateElementBuilder<State, Action, Query>('input')
     builder.type('month')
     return initBuilder(builder, init, this)
   }
   inputNumber(
     init?: (builder: InputNumberElementBuilder<State, Action, Query>) => void
   ): this {
-    const builder = new InputNumberElementBuilder<State, Action, Query>()
+    const builder = new InputNumberElementBuilder<State, Action, Query>('input')
     builder.type('number')
     return initBuilder(builder, init, this)
   }
   inputPassword(
     init?: (builder: InputPasswordElementBuilder<State, Action, Query>) => void
   ): this {
-    const builder = new InputPasswordElementBuilder<State, Action, Query>()
+    const builder = new InputPasswordElementBuilder<State, Action, Query>(
+      'input'
+    )
     builder.type('password')
     return initBuilder(builder, init, this)
   }
   inputRadio(
     init?: (builder: InputCheckedElementBuilder<State, Action, Query>) => void
   ): this {
-    const builder = new InputCheckedElementBuilder<State, Action, Query>()
+    const builder = new InputCheckedElementBuilder<State, Action, Query>(
+      'input'
+    )
     builder.type('radio')
     return initBuilder(builder, init, this)
   }
   inputRange(
     init?: (builder: InputNumberElementBuilder<State, Action, Query>) => void
   ): this {
-    const builder = new InputNumberElementBuilder<State, Action, Query>()
+    const builder = new InputNumberElementBuilder<State, Action, Query>('input')
     builder.type('range')
     return initBuilder(builder, init, this)
   }
   inputReset(
     init?: (builder: InputElementBuilder<State, Action, Query>) => void
   ): this {
-    const builder = new InputElementBuilder<State, Action, Query>()
+    const builder = new InputElementBuilder<State, Action, Query>('input')
     builder.type('reset')
     return initBuilder(builder, init, this)
   }
   inputSearch(
     init?: (builder: InputSearchElementBuilder<State, Action, Query>) => void
   ): this {
-    const builder = new InputSearchElementBuilder<State, Action, Query>()
+    const builder = new InputSearchElementBuilder<State, Action, Query>('input')
     builder.type('search')
     return initBuilder(builder, init, this)
   }
   inputSubmit(
     init?: (builder: InputSubmitElementBuilder<State, Action, Query>) => void
   ): this {
-    const builder = new InputSubmitElementBuilder<State, Action, Query>()
+    const builder = new InputSubmitElementBuilder<State, Action, Query>('input')
     builder.type('submit')
     return initBuilder(builder, init, this)
   }
   inputTel(
     init?: (builder: InputTelElementBuilder<State, Action, Query>) => void
   ): this {
-    const builder = new InputTelElementBuilder<State, Action, Query>()
+    const builder = new InputTelElementBuilder<State, Action, Query>('input')
     builder.type('tel')
     return initBuilder(builder, init, this)
   }
   inputText(
     init?: (builder: InputTextElementBuilder<State, Action, Query>) => void
   ): this {
-    const builder = new InputTextElementBuilder<State, Action, Query>()
+    const builder = new InputTextElementBuilder<State, Action, Query>('input')
     builder.type('text')
     return initBuilder(builder, init, this)
   }
   inputTime(
     init?: (builder: InputDateElementBuilder<State, Action, Query>) => void
   ): this {
-    const builder = new InputDateElementBuilder<State, Action, Query>()
+    const builder = new InputDateElementBuilder<State, Action, Query>('input')
     builder.type('time')
     return initBuilder(builder, init, this)
   }
   inputUrl(
     init?: (builder: InputUrlElementBuilder<State, Action, Query>) => void
   ): this {
-    const builder = new InputUrlElementBuilder<State, Action, Query>()
+    const builder = new InputUrlElementBuilder<State, Action, Query>('input')
     builder.type('url')
     return initBuilder(builder, init, this)
   }
   inputWeek(
     init?: (builder: InputDateElementBuilder<State, Action, Query>) => void
   ): this {
-    const builder = new InputDateElementBuilder<State, Action, Query>()
+    const builder = new InputDateElementBuilder<State, Action, Query>('input')
     builder.type('week')
     return initBuilder(builder, init, this)
   }
@@ -1652,9 +1656,9 @@ export function toggleToString(name: string) {
 
 // dom generic
 export function el<State, Action, Query, El extends HTMLElement = HTMLElement>(
-  name: string = 'div'
+  tagName: string = 'div'
 ) {
-  return new ElementBuilder<State, Action, Query, El>()
+  return new ElementBuilder<State, Action, Query, El>(tagName)
 }
 
 export class ElementBuilder<State, Action, Query, El extends HTMLElement>
@@ -1670,7 +1674,7 @@ export class ElementBuilder<State, Action, Query, El extends HTMLElement>
   > = {}
   private _handlers: Record<string, EventHandler<State, Action>> = {}
 
-  constructor(public tagName: string = 'div') {
+  constructor(public tagName: string) {
     super()
   }
 
@@ -2297,36 +2301,36 @@ export class AnchorElementBuilder<State, Action, Query> extends ElementBuilder<
   Query,
   HTMLAnchorElement
 > {
-  download(filename: Attribute<State, string | undefined>) {
-    this.attr('download', filename)
+  download(filename: Attribute<State, string | undefined>): this {
+    return this.attr('download', filename)
   }
-  href(url: Attribute<State, string | undefined>) {
-    this.attr('href', url)
+  href(url: Attribute<State, string | undefined>): this {
+    return this.attr('href', url)
   }
-  hreflang(lang: Attribute<State, string | undefined>) {
-    this.attr('hreflang', lang)
+  hreflang(lang: Attribute<State, string | undefined>): this {
+    return this.attr('hreflang', lang)
   }
   ping(
     url: Attribute<
       State,
       string | string[] | Record<string, boolean> | undefined
     >
-  ) {
-    this.attr('ping', mapAttribute(url, spaceSeparatedToString))
+  ): this {
+    return this.attr('ping', mapAttribute(url, spaceSeparatedToString))
   }
   rel(
     value: Attribute<
       State,
       string | string[] | Record<string, boolean> | undefined
     >
-  ) {
-    this.attr('rel', mapAttribute(value, spaceSeparatedToString))
+  ): this {
+    return this.attr('rel', mapAttribute(value, spaceSeparatedToString))
   }
-  target(name: Attribute<State, string | undefined>) {
-    this.attr('target', name)
+  target(name: Attribute<State, string | undefined>): this {
+    return this.attr('target', name)
   }
-  type(name: Attribute<State, string | undefined>) {
-    this.attr('type', name)
+  type(name: Attribute<State, string | undefined>): this {
+    return this.attr('type', name)
   }
 }
 
@@ -2621,8 +2625,11 @@ export class InputElementBuilder<State, Action, Query> extends ElementBuilder<
       mapAttribute(value, spaceSeparatedToString)
     )
   }
-  autofocus(value: DerivedOrLiteralValue<State, string | undefined>) {
-    return this.attr('autofocus', value)
+  autofocus(value: DerivedOrLiteralValue<State, boolean | undefined>) {
+    return this.attr(
+      'autofocus',
+      mapAttribute(value, toggleToString('disabled'))
+    )
   }
   disabled(value: DerivedOrLiteralValue<State, boolean | undefined>) {
     return this.attr(
@@ -2927,7 +2934,9 @@ export class LabelElementBuilder<State, Action, Query> extends ElementBuilder<
   Query,
   HTMLLabelElement
 > {
-  // TODO https://developer.mozilla.org/en-US/docs/Web/HTML/Element/label
+  for(value: DerivedOrLiteralValue<State, string | undefined>) {
+    return this.attr('for', value)
+  }
 }
 
 export class LIElementBuilder<State, Action, Query> extends ElementBuilder<
@@ -3251,7 +3260,7 @@ export class MapQueryBuilder<State, Action, Query, QueryB>
 export class MapStateBuilder<State, StateB, Action, Query>
   extends BaseBuilder<StateB, Action, Query>
   implements IBuilder<State, Action, Query> {
-  public whenNot:
+  public orElse:
     | DOMChild<State, Action, Query>
     | IBuilder<State, Action, Query>
     | undefined
@@ -3262,7 +3271,7 @@ export class MapStateBuilder<State, StateB, Action, Query>
   build() {
     return new MapStateTemplate<State, StateB, Action, Query>(
       this.map,
-      childOrBuilderToTemplate(this.whenNot),
+      childOrBuilderToTemplate(this.orElse),
       this.equals,
       this._children
     )

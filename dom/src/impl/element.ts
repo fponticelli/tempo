@@ -14,7 +14,7 @@ limitations under the License.
 import { DOMTemplate } from '../template'
 import { DOMContext } from '../context'
 import { View } from 'tempo-core/lib/view'
-import { removeNode, setElAttribute } from '../utils/dom'
+import { removeNode, setElAttribute, setElStyle } from '../utils/dom'
 import { EventHandler } from '../value'
 import { map } from 'tempo-std/lib/arrays'
 
@@ -54,9 +54,13 @@ export class DOMElement<State, Action, Query = unknown>
     const el = this.createElement(ctx.doc)
 
     for (const att of this.literalAttrs) setElAttribute(el, att.name, att.value)
-
     for (const att of this.derivedAttrs) {
       setElAttribute(el, att.name, att.resolve(localState))
+    }
+
+    for (const stl of this.literalStyles) setElStyle(el, stl.name, stl.value)
+    for (const stl of this.derivedStyles) {
+      setElStyle(el, stl.name, stl.resolve(localState))
     }
 
     for (const handler of this.handlers) {
@@ -88,6 +92,9 @@ export class DOMElement<State, Action, Query = unknown>
 
         for (const att of this.derivedAttrs) {
           setElAttribute(el, att.name, att.resolve(localState))
+        }
+        for (const stl of this.derivedStyles) {
+          setElStyle(el, stl.name, stl.resolve(localState))
         }
         for (const view of views) {
           view.change(localState)

@@ -11,7 +11,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { AttributeValue } from '../value'
 import { htmlAttributeMap as attributeMap } from './attributes_mapper'
 import { setAttribute } from './set_attribute'
 
@@ -45,10 +44,22 @@ export function makeCreateElementNS(namespace: string, name: string) {
 export type Acc<State> = ((state: State) => void)[]
 
 export function setElAttribute(
-  el: Element,
+  el: HTMLElement,
   name: string,
-  value: AttributeValue | undefined
+  value: string | undefined
 ) {
   let set = attributeMap[name] || setAttribute
   set(el, name, value)
+}
+
+export function setElStyle(
+  el: HTMLElement,
+  name: string,
+  value: string | undefined
+) {
+  if (value == null) {
+    el.style.removeProperty(name)
+  } else {
+    el.style.setProperty(name, value)
+  }
 }

@@ -22,13 +22,13 @@ export class MapStateTemplate<OuterState, InnerState, Action, Query>
   implements DOMTemplate<OuterState, Action, Query> {
   constructor(
     readonly map: Attribute<OuterState, InnerState>,
-    readonly whenNot: DOMTemplate<OuterState, Action, Query>,
+    readonly orElse: DOMTemplate<OuterState, Action, Query>,
     readonly equals: (a: InnerState, b: InnerState) => boolean,
     readonly children: DOMTemplate<InnerState, Action, Query>[]
   ) {}
 
   render(ctx: DOMContext<Action>, state: OuterState): View<OuterState, Query> {
-    const { children, map, whenNot, equals } = this
+    const { children, map, orElse, equals } = this
 
     let views: View<InnerState | OuterState, Query>[] = []
 
@@ -38,7 +38,7 @@ export class MapStateTemplate<OuterState, InnerState, Action, Query>
     const next = resolveAttribute(map)(state)
 
     if (next === undefined) {
-      views = [whenNot.render(newCtx, state)]
+      views = [orElse.render(newCtx, state)]
     } else {
       current = next
       views = mapArray(children, c => c.render(newCtx, next))
@@ -64,7 +64,7 @@ export class MapStateTemplate<OuterState, InnerState, Action, Query>
           if (current !== undefined) {
             current = undefined
             destroy()
-            views = [whenNot.render(newCtx, state)]
+            views = [orElse.render(newCtx, state)]
           } else {
             for (const view of views) view.change(state)
           }
