@@ -13,7 +13,7 @@ limitations under the License.
 
 import { DOMTemplate, DOMChild } from '../template'
 import { DOMContext } from '../context'
-import { removeNode } from '../utils/dom'
+import { removeNode } from './dom'
 import { Attribute, resolveAttribute } from '../value'
 import { IBuilder, childOrBuilderToTemplate } from '../impl/builder'
 

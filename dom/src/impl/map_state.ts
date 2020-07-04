@@ -14,7 +14,7 @@ limitations under the License.
 import { DOMTemplate } from '../template'
 import { View } from 'tempo-core/lib/view'
 import { DOMContext } from '../context'
-import { removeNode } from '../utils/dom'
+import { removeNode } from './dom'
 import { map as mapArray } from 'tempo-std/lib/arrays'
 import { Attribute, resolveAttribute } from '../value'
 

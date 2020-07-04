@@ -13,7 +13,7 @@ limitations under the License.
 
 import { View } from 'tempo-core/lib/view'
 import { DerivedValue } from 'tempo-core/lib/value'
-import { removeNode } from '../utils/dom'
+import { removeNode } from './dom'
 import { DOMTemplate } from '../template'
 import { DOMContext } from '../context'
 import { TextValue } from '../value'

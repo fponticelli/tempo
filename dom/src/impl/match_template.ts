@@ -14,7 +14,7 @@ limitations under the License.
 import { DifferentiateAt } from 'tempo-std/lib/types/differentiate'
 import { DOMTemplate, DOMChild } from '../template'
 import { DOMContext } from '../context'
-import { removeNode } from '../utils/dom'
+import { removeNode } from './dom'
 import { IndexType } from 'tempo-std/lib/types/index_type'
 import { ObjectWithPath, TypeAtPath } from 'tempo-std/lib/types/objects'
 import { IBuilder, childOrBuilderToTemplate } from '../impl/builder'

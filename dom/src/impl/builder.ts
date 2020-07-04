@@ -1,5 +1,5 @@
 import { DOMTemplate, DOMChild } from '../template'
-import { makeCreateElement } from '../utils/dom'
+import { makeCreateElement } from './dom'
 import { DerivedOrLiteralValue, DerivedValue } from 'tempo-core/lib/value'
 import { text } from './text'
 import {
