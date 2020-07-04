@@ -36,26 +36,30 @@ export function holdState<StateA, StateB, StateC, Action, Query>(
 
 export class HoldStateTemplate<StateA, StateB, StateC, Action, Query>
   implements DOMTemplate<StateA, Action, Query> {
-  constructor(readonly holdf: HoldF<StateA, StateB, StateC, Action, Query>) {}
-  render(ctx: DOMContext<Action>, state: StateA) {
-    let localState = state
-    let template: DOMTemplate<StateA, Action, Query> = childOrBuilderToTemplate(
+  private template: DOMTemplate<StateA, Action, Query>
+  private localState!: StateA
+  constructor(readonly holdf: HoldF<StateA, StateB, StateC, Action, Query>) {
+    this.template = childOrBuilderToTemplate(
       this.holdf((merge, init) => {
         const builder = new FragmentBuilder<StateC, Action, Query>()
         init(builder)
         const innerTemplate = builder.build()
         return mapState<StateB, StateC, Action, Query>(
-          (b: StateB) => merge(localState, b),
+          (b: StateB) => merge(this.localState, b),
           n => n.append(innerTemplate)
         ).build()
       })
     )
+  }
+  render(ctx: DOMContext<Action>, state: StateA) {
+    const self = this
+    self.localState = state
 
-    const view = template.render(ctx, localState)
+    const view = this.template.render(ctx, self.localState)
     return {
       change(state: StateA) {
-        localState = state
-        view.change(localState)
+        self.localState = state
+        view.change(self.localState)
       },
       request(query: Query) {
         view.request(query)

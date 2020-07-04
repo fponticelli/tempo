@@ -1,12 +1,8 @@
-import { fragment } from 'tempo-dom/lib/fragment'
 import { description, todos, examples, tags } from './base_doc'
 import { title } from './title'
 import { signature } from './signature'
-import { mapField } from 'tempo-dom/lib/map'
 import { DocEntity } from '../parse/doc_entity'
-import { forEach } from 'tempo-dom/lib/for_each'
 import { a, p, pre } from 'tempo-dom/lib/html'
-import { unsafeHtml } from 'tempo-dom/lib/unsafe_html'
 import { highlight } from '../utils/highlight'
 
 const getUrl = (project: string, module: string, line: number) => {

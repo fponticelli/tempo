@@ -51,7 +51,7 @@ const colHeader = fragment<{ id: string; selected: boolean }, Action, unknown>(
           },
           $ =>
             $.div($ => $.class('date').text(s => s.date.toDateString()))
-              .span($ => $.class('commit').text(s => s.commit))
+              .spanEl($ => $.class('commit').text(s => s.commit))
               .text(' ')
               .text(s => (s.selected ? '✅' : '⛔️'))
         )
@@ -65,7 +65,7 @@ export const tableView = table<State, Action, unknown>($ =>
         $.when(
           s => s.processing.size > 0,
           $ =>
-            $.span($ =>
+            $.spanEl($ =>
               $.class('details')
                 .text(s => ` running ${s.processing.size} tests`)
                 .br()
@@ -185,7 +185,7 @@ export const tableView = table<State, Action, unknown>($ =>
                           s => s.result != null,
                           $ =>
                             $.text(s => resultToOpsPerSec(s.result!))
-                              .span($ =>
+                              .spanEl($ =>
                                 $.class('details')
                                   .title(s => resultToSamples(s.result!))
                                   .text(' ops/sec')
@@ -194,7 +194,7 @@ export const tableView = table<State, Action, unknown>($ =>
                               .when(
                                 s => !!s.faster && s.faster >= 0.05,
                                 $ =>
-                                  $.span($ =>
+                                  $.spanEl($ =>
                                     $.class('details').b($ =>
                                       $.text(
                                         s =>

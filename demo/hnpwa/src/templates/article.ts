@@ -24,7 +24,7 @@ export const articleTemplate = article<Article, Action, unknown>($ =>
     $ =>
       $.section($ =>
         $.append(itemUrlTemplate)
-          .span($ => $.class('domain').text(s => s.domain))
+          .spanEl($ => $.class('domain').text(s => s.domain))
           .append(itemFooterTemplate)
       )
         .div($ => $.lifecycle(unsafeHtml(s => s.content)))

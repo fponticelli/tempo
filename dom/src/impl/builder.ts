@@ -24,6 +24,9 @@ import { SimpleComponentTemplate } from './simple_component'
 import { PortalTemplate } from './portal'
 import { LazyTemplate } from './lazy'
 import { MatchBoolTemplate } from './match_bool_template'
+import { HoldF, HoldStateTemplate } from './hold_state'
+
+export type ListValue<T extends string> = T | T[] | Record<T, boolean>
 
 export interface IBuilder<State, Action, Query> {
   build(): DOMTemplate<State, Action, Query>
@@ -109,6 +112,12 @@ export class BaseBuilder<State, Action, Query> {
         props.child
       )
     )
+  }
+
+  holdState<StateB, StateC>(
+    holdf: HoldF<State, StateB, StateC, Action, Query>
+  ): this {
+    return this.append(new HoldStateTemplate(holdf))
   }
 
   component(
@@ -329,7 +338,7 @@ export class BaseBuilder<State, Action, Query> {
       this
     )
   }
-  abbr(
+  abbrEl(
     init?: (builder: ElementBuilder<State, Action, Query, HTMLElement>) => void
   ): this {
     return initBuilder(
@@ -481,7 +490,7 @@ export class BaseBuilder<State, Action, Query> {
       this
     )
   }
-  cite(
+  citeEl(
     init?: (builder: QuoteElementBuilder<State, Action, Query>) => void
   ): this {
     return initBuilder(
@@ -999,7 +1008,7 @@ export class BaseBuilder<State, Action, Query> {
       this
     )
   }
-  label(
+  labelEl(
     init?: (builder: LabelElementBuilder<State, Action, Query>) => void
   ): this {
     return initBuilder(
@@ -1298,7 +1307,7 @@ export class BaseBuilder<State, Action, Query> {
       this
     )
   }
-  span(
+  spanEl(
     init?: (
       builder: ElementBuilder<State, Action, Query, HTMLSpanElement>
     ) => void
@@ -1530,7 +1539,7 @@ export class BaseBuilder<State, Action, Query> {
 }
 
 function extractLiterals<State>(
-  record: Record<string, DerivedOrLiteralValue<State, string | undefined>>
+  record: Record<string, DerivedOrLiteralValue<State, string>>
 ) {
   return keys(record).reduce((list, name) => {
     if (typeof record[name] === 'string') {
@@ -1541,17 +1550,17 @@ function extractLiterals<State>(
 }
 
 function extractDerived<State>(
-  record: Record<string, DerivedOrLiteralValue<State, string | undefined>>
+  record: Record<string, DerivedOrLiteralValue<State, string>>
 ) {
   return keys(record).reduce((list, name) => {
     if (typeof record[name] === 'function') {
       list.push({
         name,
-        resolve: record[name] as DerivedValue<State, string | undefined>
+        resolve: record[name] as DerivedValue<State, string>
       })
     }
     return list
-  }, [] as { name: string; resolve: DerivedValue<State, string | undefined> }[])
+  }, [] as { name: string; resolve: DerivedValue<State, string> }[])
 }
 
 export type AriaRole =
@@ -1624,10 +1633,7 @@ export type AriaRole =
   | 'treegrid'
   | 'treeitem'
 
-export function separatedToString(
-  src: string | string[] | Record<string, boolean>,
-  separator: string
-) {
+export function separatedToString(src: ListValue<string>, separator: string) {
   if (typeof src === 'string') {
     return src
   } else if (src == null) {
@@ -1644,19 +1650,15 @@ export function separatedToString(
   }
 }
 
-export function spaceSeparatedToString(
-  src: string | string[] | Record<string, boolean>
-) {
+export function spaceSeparatedToString(src: ListValue<string>) {
   return separatedToString(src, ' ')
 }
 
-export function commaSeparatedToString(
-  src: string | string[] | Record<string, boolean>
-) {
+export function commaSeparatedToString(src: ListValue<string>) {
   return separatedToString(src, ', ')
 }
 
-function stylesToString(src: string | Record<string, string | undefined>) {
+function stylesToString(src: string | Record<string, string>) {
   if (typeof src === 'string') {
     return src
   } else {
@@ -1687,14 +1689,8 @@ export function el<State, Action, Query, El extends HTMLElement = HTMLElement>(
 export class ElementBuilder<State, Action, Query, El extends HTMLElement>
   extends BaseBuilder<State, Action, Query>
   implements IBuilder<State, Action, Query> {
-  private _attributes: Record<
-    string,
-    DerivedOrLiteralValue<State, string | undefined>
-  > = {}
-  private _styles: Record<
-    string,
-    DerivedOrLiteralValue<State, string | undefined>
-  > = {}
+  private _attributes: Record<string, DerivedOrLiteralValue<State, string>> = {}
+  private _styles: Record<string, DerivedOrLiteralValue<State, string>> = {}
   private _handlers: Record<string, EventHandler<State, Action>> = {}
   private _lifecycle: MakeLifecycle<State, Action> | undefined
 
@@ -1720,22 +1716,22 @@ export class ElementBuilder<State, Action, Query, El extends HTMLElement>
   }
 
   // attributes, styles and handlers
-  attr(
-    name: string,
-    value: DerivedOrLiteralValue<State, string | undefined>
-  ): this {
-    this._attributes[name] = value
+  attr(name: string, value: Attribute<State, string>): this {
+    if (value != null) {
+      this._attributes[name] = value as DerivedOrLiteralValue<State, string>
+    }
     return this
   }
-  style(
-    name: string,
-    value: DerivedOrLiteralValue<State, string | undefined>
-  ): this {
-    this._styles[name] = value
+  style(name: string, value: Attribute<State, string>): this {
+    if (value != null) {
+      this._styles[name] = value as DerivedOrLiteralValue<State, string>
+    }
     return this
   }
-  handle(name: string, callback: EventHandler<State, Action>) {
-    this._handlers[name] = callback
+  handle(name: string, callback: EventHandler<State, Action> | undefined) {
+    if (callback != null) {
+      this._handlers[name] = callback
+    }
     return this
   }
   lifecycle(makeLifecycle: MakeLifecycle<State, Action>) {
@@ -1743,40 +1739,35 @@ export class ElementBuilder<State, Action, Query, El extends HTMLElement>
   }
 
   // attribute shortcuts
-  accessKey(value: DerivedOrLiteralValue<State, string | undefined>) {
+  accessKey(value: Attribute<State, string>) {
     return this.attr('accesskey', value)
   }
-  aria(name: string, value: DerivedOrLiteralValue<State, string | undefined>) {
+  aria(name: string, value: Attribute<State, string>) {
     return this.attr(`aria-${name}`, value)
   }
-  class(
-    value: DerivedOrLiteralValue<
-      State,
-      string | string[] | Record<string, boolean> | undefined
-    >
-  ) {
+  class(value: Attribute<State, ListValue<string>>) {
     return this.attr('class', mapAttribute(value, spaceSeparatedToString))
   }
-  contentEditable(value: DerivedOrLiteralValue<State, boolean | undefined>) {
+  contentEditable(value: Attribute<State, boolean>) {
     return this.attr('contenteditable', mapAttribute(value, booleanToString))
   }
-  data(name: string, value: DerivedOrLiteralValue<State, string | undefined>) {
+  data(name: string, value: Attribute<State, string>) {
     return this.attr(`data-${name}`, value)
   }
-  dir(value: DerivedOrLiteralValue<State, 'ltr' | 'rtl' | 'auto' | undefined>) {
+  dir(value: Attribute<State, 'ltr' | 'rtl' | 'auto'>) {
     return this.attr('role', value)
   }
-  draggable(value: DerivedOrLiteralValue<State, boolean | undefined>) {
+  draggable(value: Attribute<State, boolean>) {
     return this.attr('draggable', mapAttribute(value, booleanToString))
   }
-  hidden(value: DerivedOrLiteralValue<State, boolean | undefined>) {
+  hidden(value: Attribute<State, boolean>) {
     return this.attr('hidden', mapAttribute(value, toggleToString('hidden')))
   }
-  id(value: DerivedOrLiteralValue<State, string | undefined>) {
+  id(value: Attribute<State, string>) {
     return this.attr('id', value)
   }
   inputMode(
-    value: DerivedOrLiteralValue<
+    value: Attribute<
       State,
       | 'none'
       | 'text'
@@ -1786,88 +1777,70 @@ export class ElementBuilder<State, Action, Query, El extends HTMLElement>
       | 'search'
       | 'email'
       | 'url'
-      | undefined
     >
   ) {
     return this.attr('inputmode', value)
   }
-  is(value: DerivedOrLiteralValue<State, string | undefined>) {
+  is(value: Attribute<State, string>) {
     return this.attr('is', value)
   }
-  itemId(value: DerivedOrLiteralValue<State, string | undefined>) {
+  itemId(value: Attribute<State, string>) {
     return this.attr('itemid', value)
   }
-  itemProp(value: DerivedOrLiteralValue<State, string | undefined>) {
+  itemProp(value: Attribute<State, string>) {
     return this.attr('itemprop', value)
   }
-  itemRef(value: DerivedOrLiteralValue<State, string | undefined>) {
+  itemRef(value: Attribute<State, string>) {
     return this.attr('itemref', value)
   }
-  itemScope(value: DerivedOrLiteralValue<State, string | undefined>) {
+  itemScope(value: Attribute<State, string>) {
     return this.attr('itemscope', value)
   }
-  itemType(value: DerivedOrLiteralValue<State, string | undefined>) {
+  itemType(value: Attribute<State, string>) {
     return this.attr('itemtype', value)
   }
-  lang(value: DerivedOrLiteralValue<State, string | undefined>) {
+  lang(value: Attribute<State, string>) {
     return this.attr('lang', value)
   }
-  part(
-    value: DerivedOrLiteralValue<
-      State,
-      string | string[] | Record<string, boolean> | undefined
-    >
-  ) {
+  part(value: Attribute<State, ListValue<string>>) {
     return this.attr('part', mapAttribute(value, spaceSeparatedToString))
   }
-  role(value: DerivedOrLiteralValue<State, AriaRole | undefined>) {
+  role(value: Attribute<State, AriaRole>) {
     return this.attr('role', value)
   }
-  slot(value: DerivedOrLiteralValue<State, string | undefined>) {
+  slot(value: Attribute<State, string>) {
     return this.attr('slot', value)
   }
-  spellCheck(value: DerivedOrLiteralValue<State, boolean | undefined>) {
+  spellCheck(value: Attribute<State, boolean>) {
     return this.attr('spellcheck', mapAttribute(value, booleanToString))
   }
-  styles(
-    value:
-      | DerivedOrLiteralValue<State, string | Record<string, string>>
-      | undefined
-  ) {
+  styles(value: Attribute<State, string | Record<string, string>>) {
     return this.attr('style', mapAttribute(value, stylesToString))
   }
-  tabIndex(value: DerivedOrLiteralValue<State, number | undefined>) {
+  tabIndex(value: Attribute<State, number>) {
     return this.attr('tabindex', mapAttribute(value, String))
   }
-  title(value: DerivedOrLiteralValue<State, string | undefined>) {
+  title(value: Attribute<State, string>) {
     return this.attr('title', value)
   }
 
   // aria
-  ariaActiveDescendant(
-    value: DerivedOrLiteralValue<State, string | undefined>
-  ) {
+  ariaActiveDescendant(value: Attribute<State, string>) {
     return this.attr('aria-activedescendant', value)
   }
-  ariaAtomic(value: DerivedOrLiteralValue<State, boolean | undefined>) {
+  ariaAtomic(value: Attribute<State, boolean>) {
     return this.attr('aria-atomic', mapAttribute(value, booleanToString))
   }
   ariaAutocomplete(
-    value: DerivedOrLiteralValue<
-      State,
-      'inline' | 'list' | 'both' | 'none' | undefined
-    >
+    value: Attribute<State, 'inline' | 'list' | 'both' | 'none'>
   ) {
     return this.attr('aria-autocomplete', value)
   }
-  ariaBusy(value: DerivedOrLiteralValue<State, boolean | undefined>) {
+  ariaBusy(value: Attribute<State, boolean>) {
     return this.attr('aria-busy', mapAttribute(value, booleanToString))
   }
   ariaChecked(
-    value: DerivedOrLiteralValue<
-      State,
-      'true' | 'false' | 'mixed' | true | false | undefined
-    >
+    value: Attribute<State, 'true' | 'false' | 'mixed' | true | false>
   ) {
     return this.attr(
       'aria-checked',
@@ -1876,20 +1849,20 @@ export class ElementBuilder<State, Action, Query, El extends HTMLElement>
       )
     )
   }
-  ariaColCount(value: DerivedOrLiteralValue<State, number | undefined>) {
+  ariaColCount(value: Attribute<State, number>) {
     return this.attr('aria-colcount', mapAttribute(value, String))
   }
-  ariaColIndex(value: DerivedOrLiteralValue<State, number | undefined>) {
+  ariaColIndex(value: Attribute<State, number>) {
     return this.attr('aria-colindex', mapAttribute(value, String))
   }
-  ariaColSpan(value: DerivedOrLiteralValue<State, number | undefined>) {
+  ariaColSpan(value: Attribute<State, number>) {
     return this.attr('aria-colspan', mapAttribute(value, String))
   }
-  ariaControls(value: DerivedOrLiteralValue<State, string | undefined>) {
+  ariaControls(value: Attribute<State, string>) {
     return this.attr('aria-controls', value)
   }
   ariaCurrent(
-    value: DerivedOrLiteralValue<
+    value: Attribute<
       State,
       | 'page'
       | 'step'
@@ -1900,7 +1873,6 @@ export class ElementBuilder<State, Action, Query, El extends HTMLElement>
       | 'false'
       | true
       | false
-      | undefined
     >
   ) {
     return this.attr(
@@ -1910,27 +1882,27 @@ export class ElementBuilder<State, Action, Query, El extends HTMLElement>
       )
     )
   }
-  ariaDescribedBy(value: DerivedOrLiteralValue<State, string | undefined>) {
+  ariaDescribedBy(value: Attribute<State, string>) {
     return this.attr('aria-describedby', value)
   }
-  ariaDetails(value: DerivedOrLiteralValue<State, string | undefined>) {
+  ariaDetails(value: Attribute<State, string>) {
     return this.attr('aria-details', value)
   }
-  ariaDisabled(value: DerivedOrLiteralValue<State, boolean | undefined>) {
+  ariaDisabled(value: Attribute<State, boolean>) {
     return this.attr('aria-disabled', mapAttribute(value, booleanToString))
   }
   ariaDropEffect(
-    value: DerivedOrLiteralValue<
+    value: Attribute<
       State,
-      'copy' | 'execute' | 'link' | 'move' | 'none' | 'popup' | undefined
+      'copy' | 'execute' | 'link' | 'move' | 'none' | 'popup'
     >
   ) {
     return this.attr('aria-dropeffect', value)
   }
   ariaErrorMessage(
-    value: DerivedOrLiteralValue<
+    value: Attribute<
       State,
-      'grammar' | 'false' | false | 'spelling' | 'true' | true | undefined
+      'grammar' | 'false' | false | 'spelling' | 'true' | true
     >
   ) {
     return this.attr(
@@ -1940,17 +1912,17 @@ export class ElementBuilder<State, Action, Query, El extends HTMLElement>
       )
     )
   }
-  ariaExpanded(value: DerivedOrLiteralValue<State, boolean | undefined>) {
+  ariaExpanded(value: Attribute<State, boolean>) {
     return this.attr('aria-expanded', mapAttribute(value, booleanToString))
   }
-  ariaFlowTo(value: DerivedOrLiteralValue<State, string | undefined>) {
+  ariaFlowTo(value: Attribute<State, string>) {
     return this.attr('aria-flowto', value)
   }
-  ariaGrabbed(value: DerivedOrLiteralValue<State, boolean | undefined>) {
+  ariaGrabbed(value: Attribute<State, boolean>) {
     return this.attr('aria-grabbed', mapAttribute(value, booleanToString))
   }
   ariaHasPopup(
-    value: DerivedOrLiteralValue<
+    value: Attribute<
       State,
       | 'true'
       | 'false'
@@ -1961,7 +1933,6 @@ export class ElementBuilder<State, Action, Query, El extends HTMLElement>
       | 'dialog'
       | true
       | false
-      | undefined
     >
   ) {
     return this.attr(
@@ -1971,68 +1942,56 @@ export class ElementBuilder<State, Action, Query, El extends HTMLElement>
       )
     )
   }
-  ariaHidden(value: DerivedOrLiteralValue<State, string | undefined>) {
-    return this.attr('aria-hidden', value)
+  ariaHidden(value: Attribute<State, boolean>) {
+    return this.attr('aria-hidden', mapAttribute(value, booleanToString))
   }
-  ariaInvalid(value: DerivedOrLiteralValue<State, string | undefined>) {
+  ariaInvalid(value: Attribute<State, string>) {
     return this.attr('aria-invalid', value)
   }
-  ariaKeyShortcuts(value: DerivedOrLiteralValue<State, string | undefined>) {
+  ariaKeyShortcuts(value: Attribute<State, string>) {
     return this.attr('aria-keyshortcuts', value)
   }
-  ariaLabel(value: DerivedOrLiteralValue<State, string | undefined>) {
+  ariaLabel(value: Attribute<State, string>) {
     return this.attr('aria-label', value)
   }
-  ariaLabelledBy(value: DerivedOrLiteralValue<State, string | undefined>) {
+  ariaLabelledBy(value: Attribute<State, string>) {
     return this.attr('aria-labelledby', value)
   }
-  ariaLevel(value: DerivedOrLiteralValue<State, number | undefined>) {
+  ariaLevel(value: Attribute<State, number>) {
     return this.attr('aria-level', mapAttribute(value, String))
   }
-  ariaLive(
-    value: DerivedOrLiteralValue<
-      State,
-      'assertive' | 'off' | 'polite' | undefined
-    >
-  ) {
+  ariaLive(value: Attribute<State, 'assertive' | 'off' | 'polite'>) {
     return this.attr('aria-live', value)
   }
-  ariaModal(value: DerivedOrLiteralValue<State, boolean | undefined>) {
+  ariaModal(value: Attribute<State, boolean>) {
     return this.attr('aria-modal', mapAttribute(value, booleanToString))
   }
-  ariaMultiLine(value: DerivedOrLiteralValue<State, boolean | undefined>) {
+  ariaMultiLine(value: Attribute<State, boolean>) {
     return this.attr('aria-multiline', mapAttribute(value, booleanToString))
   }
-  ariaMultiSelectable(
-    value: DerivedOrLiteralValue<State, boolean | undefined>
-  ) {
+  ariaMultiSelectable(value: Attribute<State, boolean>) {
     return this.attr(
       'aria-multiselectable',
       mapAttribute(value, booleanToString)
     )
   }
-  ariaOrientation(
-    value: DerivedOrLiteralValue<State, 'horizontal' | 'vertical' | undefined>
-  ) {
+  ariaOrientation(value: Attribute<State, 'horizontal' | 'vertical'>) {
     return this.attr('aria-orientation', value)
   }
-  ariaOwns(value: DerivedOrLiteralValue<State, string | undefined>) {
+  ariaOwns(value: Attribute<State, string>) {
     return this.attr('aria-owns', value)
   }
-  ariaPlaceHolder(value: DerivedOrLiteralValue<State, string | undefined>) {
+  ariaPlaceHolder(value: Attribute<State, string>) {
     return this.attr('aria-placeholder', value)
   }
-  ariaPointSet(value: DerivedOrLiteralValue<State, number | undefined>) {
+  ariaPointSet(value: Attribute<State, number>) {
     return this.attr('aria-pointset', mapAttribute(value, String))
   }
-  ariaPosInSet(value: DerivedOrLiteralValue<State, string | undefined>) {
+  ariaPosInSet(value: Attribute<State, string>) {
     return this.attr('aria-posinset', value)
   }
   ariaPressed(
-    value: DerivedOrLiteralValue<
-      State,
-      'true' | 'false' | 'mixed' | true | false | undefined
-    >
+    value: Attribute<State, 'true' | 'false' | 'mixed' | true | false>
   ) {
     return this.attr(
       'aria-pressed',
@@ -2041,91 +2000,92 @@ export class ElementBuilder<State, Action, Query, El extends HTMLElement>
       )
     )
   }
-  ariaReadonly(value: DerivedOrLiteralValue<State, boolean | undefined>) {
+  ariaReadonly(value: Attribute<State, boolean>) {
     return this.attr('aria-readonly', mapAttribute(value, booleanToString))
   }
-  ariaRequired(value: DerivedOrLiteralValue<State, boolean | undefined>) {
+  ariaRequired(value: Attribute<State, boolean>) {
     return this.attr('aria-required', mapAttribute(value, booleanToString))
   }
   ariaRelevant(
-    value: DerivedOrLiteralValue<
+    value: Attribute<
       State,
-      'addition' | 'additions text' | 'all' | 'removals' | 'text' | undefined
+      'addition' | 'additions text' | 'all' | 'removals' | 'text'
     >
   ) {
     return this.attr('aria-relevant', value)
   }
-  ariaRoleDescription(value: DerivedOrLiteralValue<State, string | undefined>) {
+  ariaRoleDescription(value: Attribute<State, string>) {
     return this.attr('aria-roledescription', value)
   }
-  ariaRowCount(value: DerivedOrLiteralValue<State, number | undefined>) {
+  ariaRowCount(value: Attribute<State, number>) {
     return this.attr('aria-rowcount', mapAttribute(value, String))
   }
-  ariaRowIndex(value: DerivedOrLiteralValue<State, number | undefined>) {
+  ariaRowIndex(value: Attribute<State, number>) {
     return this.attr('aria-rowindex', mapAttribute(value, String))
   }
-  ariaRowSpan(value: DerivedOrLiteralValue<State, number | undefined>) {
+  ariaRowSpan(value: Attribute<State, number>) {
     return this.attr('aria-rowspan', mapAttribute(value, String))
   }
-  ariaSelected(value: DerivedOrLiteralValue<State, boolean | undefined>) {
+  ariaSelected(value: Attribute<State, boolean>) {
     return this.attr('aria-selected', mapAttribute(value, booleanToString))
   }
-  ariaSetSize(value: DerivedOrLiteralValue<State, number | undefined>) {
+  ariaSetSize(value: Attribute<State, number>) {
     return this.attr('aria-setsize', mapAttribute(value, String))
   }
   ariaSort(
-    value: DerivedOrLiteralValue<
-      State,
-      'ascending' | 'descending' | 'none' | 'other' | undefined
-    >
+    value: Attribute<State, 'ascending' | 'descending' | 'none' | 'other'>
   ) {
     return this.attr('aria-sort', value)
   }
-  ariaValueMax(value: DerivedOrLiteralValue<State, number | undefined>) {
+  ariaValueMax(value: Attribute<State, number>) {
     return this.attr('aria-valuemax', mapAttribute(value, String))
   }
-  ariaValueMin(value: DerivedOrLiteralValue<State, number | undefined>) {
+  ariaValueMin(value: Attribute<State, number>) {
     return this.attr('aria-valuemin', mapAttribute(value, String))
   }
-  ariaValueNow(value: DerivedOrLiteralValue<State, number | undefined>) {
+  ariaValueNow(value: Attribute<State, number>) {
     return this.attr('aria-valuenow', mapAttribute(value, String))
   }
-  ariaValueText(value: DerivedOrLiteralValue<State, string | undefined>) {
+  ariaValueText(value: Attribute<State, string>) {
     return this.attr('aria-valuetext', value)
   }
 
   // event shortcuts
-  onAbort(handler: EventHandlerTE<State, Action, UIEvent, El>) {
+  onAbort(handler: EventHandlerTE<State, Action, UIEvent, El> | undefined) {
     return this.handle('abort', handler as EventHandler<State, Action>)
   }
-  onAutoComplete(handler: EventHandlerTE<State, Action, Event, El>) {
+  onAutoComplete(
+    handler: EventHandlerTE<State, Action, Event, El> | undefined
+  ) {
     return this.handle('autocomplete', handler as EventHandler<State, Action>)
   }
-  onAutoCompleteError(handler: EventHandlerTE<State, Action, Event, El>) {
+  onAutoCompleteError(
+    handler: EventHandlerTE<State, Action, Event, El> | undefined
+  ) {
     return this.handle(
       'autocompleteerror',
       handler as EventHandler<State, Action>
     )
   }
-  onBlur(handler: EventHandlerTE<State, Action, FocusEvent, El>) {
+  onBlur(handler: EventHandlerTE<State, Action, FocusEvent, El> | undefined) {
     return this.handle('blur', handler as EventHandler<State, Action>)
   }
-  onCancel(handler: EventHandlerTE<State, Action, Event, El>) {
+  onCancel(handler: EventHandlerTE<State, Action, Event, El> | undefined) {
     return this.handle('cancel', handler as EventHandler<State, Action>)
   }
-  onChange(handler: EventHandlerTE<State, Action, Event, El>) {
+  onChange(handler: EventHandlerTE<State, Action, Event, El> | undefined) {
     return this.handle('change', handler as EventHandler<State, Action>)
   }
-  onClick(handler: EventHandlerTE<State, Action, MouseEvent, El>) {
+  onClick(handler: EventHandlerTE<State, Action, MouseEvent, El> | undefined) {
     return this.handle('click', handler as EventHandler<State, Action>)
   }
   onCompositionEnd(
-    handler: EventHandlerTE<State, Action, CompositionEvent, El>
+    handler: EventHandlerTE<State, Action, CompositionEvent, El> | undefined
   ) {
     return this.handle('compositionend', handler as EventHandler<State, Action>)
   }
   onCompositionStart(
-    handler: EventHandlerTE<State, Action, CompositionEvent, El>
+    handler: EventHandlerTE<State, Action, CompositionEvent, El> | undefined
   ) {
     return this.handle(
       'compositionstart',
@@ -2133,119 +2093,163 @@ export class ElementBuilder<State, Action, Query, El extends HTMLElement>
     )
   }
   onCompositionUpdate(
-    handler: EventHandlerTE<State, Action, CompositionEvent, El>
+    handler: EventHandlerTE<State, Action, CompositionEvent, El> | undefined
   ) {
     return this.handle(
       'compositionupdate',
       handler as EventHandler<State, Action>
     )
   }
-  onContextMenu(handler: EventHandlerTE<State, Action, MouseEvent, El>) {
+  onContextMenu(
+    handler: EventHandlerTE<State, Action, MouseEvent, El> | undefined
+  ) {
     return this.handle('contextmenu', handler as EventHandler<State, Action>)
   }
-  onDblClick(handler: EventHandlerTE<State, Action, MouseEvent, El>) {
+  onDblClick(
+    handler: EventHandlerTE<State, Action, MouseEvent, El> | undefined
+  ) {
     return this.handle('dblclick', handler as EventHandler<State, Action>)
   }
-  onDrag(handler: EventHandlerTE<State, Action, DragEvent, El>) {
+  onDrag(handler: EventHandlerTE<State, Action, DragEvent, El> | undefined) {
     return this.handle('drag', handler as EventHandler<State, Action>)
   }
-  onDragEnd(handler: EventHandlerTE<State, Action, DragEvent, El>) {
+  onDragEnd(handler: EventHandlerTE<State, Action, DragEvent, El> | undefined) {
     return this.handle('dragend', handler as EventHandler<State, Action>)
   }
-  onDragEnter(handler: EventHandlerTE<State, Action, DragEvent, El>) {
+  onDragEnter(
+    handler: EventHandlerTE<State, Action, DragEvent, El> | undefined
+  ) {
     return this.handle('dragenter', handler as EventHandler<State, Action>)
   }
-  onDragExit(handler: EventHandlerTE<State, Action, DragEvent, El>) {
+  onDragExit(
+    handler: EventHandlerTE<State, Action, DragEvent, El> | undefined
+  ) {
     return this.handle('dragexit', handler as EventHandler<State, Action>)
   }
-  onDragLeave(handler: EventHandlerTE<State, Action, DragEvent, El>) {
+  onDragLeave(
+    handler: EventHandlerTE<State, Action, DragEvent, El> | undefined
+  ) {
     return this.handle('dragleave', handler as EventHandler<State, Action>)
   }
-  onDragOver(handler: EventHandlerTE<State, Action, DragEvent, El>) {
+  onDragOver(
+    handler: EventHandlerTE<State, Action, DragEvent, El> | undefined
+  ) {
     return this.handle('dragover', handler as EventHandler<State, Action>)
   }
-  onDragStart(handler: EventHandlerTE<State, Action, DragEvent, El>) {
+  onDragStart(
+    handler: EventHandlerTE<State, Action, DragEvent, El> | undefined
+  ) {
     return this.handle('dragstart', handler as EventHandler<State, Action>)
   }
-  onDrop(handler: EventHandlerTE<State, Action, DragEvent, El>) {
+  onDrop(handler: EventHandlerTE<State, Action, DragEvent, El> | undefined) {
     return this.handle('drop', handler as EventHandler<State, Action>)
   }
-  onError(handler: EventHandlerTE<State, Action, UIEvent, El>) {
+  onError(handler: EventHandlerTE<State, Action, UIEvent, El> | undefined) {
     return this.handle('error', handler as EventHandler<State, Action>)
   }
-  onFocus(handler: EventHandlerTE<State, Action, FocusEvent, El>) {
+  onFocus(handler: EventHandlerTE<State, Action, FocusEvent, El> | undefined) {
     return this.handle('focus', handler as EventHandler<State, Action>)
   }
-  onFocusIn(handler: EventHandlerTE<State, Action, FocusEvent, El>) {
+  onFocusIn(
+    handler: EventHandlerTE<State, Action, FocusEvent, El> | undefined
+  ) {
     return this.handle('focusin', handler as EventHandler<State, Action>)
   }
-  onFocusOut(handler: EventHandlerTE<State, Action, FocusEvent, El>) {
+  onFocusOut(
+    handler: EventHandlerTE<State, Action, FocusEvent, El> | undefined
+  ) {
     return this.handle('focusout', handler as EventHandler<State, Action>)
   }
-  onInput(handler: EventHandlerTE<State, Action, Event, El>) {
+  onInput(handler: EventHandlerTE<State, Action, Event, El> | undefined) {
     return this.handle('input', handler as EventHandler<State, Action>)
   }
-  onInvalid(handler: EventHandlerTE<State, Action, Event, El>) {
+  onInvalid(handler: EventHandlerTE<State, Action, Event, El> | undefined) {
     return this.handle('invalid', handler as EventHandler<State, Action>)
   }
-  onKeyDown(handler: EventHandlerTE<State, Action, KeyboardEvent, El>) {
+  onKeyDown(
+    handler: EventHandlerTE<State, Action, KeyboardEvent, El> | undefined
+  ) {
     return this.handle('keydown', handler as EventHandler<State, Action>)
   }
-  onKeyUp(handler: EventHandlerTE<State, Action, KeyboardEvent, El>) {
+  onKeyUp(
+    handler: EventHandlerTE<State, Action, KeyboardEvent, El> | undefined
+  ) {
     return this.handle('keyup', handler as EventHandler<State, Action>)
   }
-  onLoad(handler: EventHandlerTE<State, Action, UIEvent, El>) {
+  onLoad(handler: EventHandlerTE<State, Action, UIEvent, El> | undefined) {
     return this.handle('load', handler as EventHandler<State, Action>)
   }
-  onMouseDown(handler: EventHandlerTE<State, Action, MouseEvent, El>) {
+  onMouseDown(
+    handler: EventHandlerTE<State, Action, MouseEvent, El> | undefined
+  ) {
     return this.handle('mousedown', handler as EventHandler<State, Action>)
   }
-  onMouseEnter(handler: EventHandlerTE<State, Action, MouseEvent, El>) {
+  onMouseEnter(
+    handler: EventHandlerTE<State, Action, MouseEvent, El> | undefined
+  ) {
     return this.handle('mouseenter', handler as EventHandler<State, Action>)
   }
-  onMouseLeave(handler: EventHandlerTE<State, Action, MouseEvent, El>) {
+  onMouseLeave(
+    handler: EventHandlerTE<State, Action, MouseEvent, El> | undefined
+  ) {
     return this.handle('mouseleave', handler as EventHandler<State, Action>)
   }
-  onMouseMove(handler: EventHandlerTE<State, Action, MouseEvent, El>) {
+  onMouseMove(
+    handler: EventHandlerTE<State, Action, MouseEvent, El> | undefined
+  ) {
     return this.handle('mousemove', handler as EventHandler<State, Action>)
   }
-  onMouseOut(handler: EventHandlerTE<State, Action, MouseEvent, El>) {
+  onMouseOut(
+    handler: EventHandlerTE<State, Action, MouseEvent, El> | undefined
+  ) {
     return this.handle('mouseout', handler as EventHandler<State, Action>)
   }
-  onMouseOver(handler: EventHandlerTE<State, Action, MouseEvent, El>) {
+  onMouseOver(
+    handler: EventHandlerTE<State, Action, MouseEvent, El> | undefined
+  ) {
     return this.handle('mouseover', handler as EventHandler<State, Action>)
   }
-  onMouseUp(handler: EventHandlerTE<State, Action, MouseEvent, El>) {
+  onMouseUp(
+    handler: EventHandlerTE<State, Action, MouseEvent, El> | undefined
+  ) {
     return this.handle('mouseup', handler as EventHandler<State, Action>)
   }
-  onReset(handler: EventHandlerTE<State, Action, Event, El>) {
+  onReset(handler: EventHandlerTE<State, Action, Event, El> | undefined) {
     return this.handle('reset', handler as EventHandler<State, Action>)
   }
-  onScroll(handler: EventHandlerTE<State, Action, UIEvent, El>) {
+  onScroll(handler: EventHandlerTE<State, Action, UIEvent, El> | undefined) {
     return this.handle('scroll', handler as EventHandler<State, Action>)
   }
-  onSelect(handler: EventHandlerTE<State, Action, UIEvent, El>) {
+  onSelect(handler: EventHandlerTE<State, Action, UIEvent, El> | undefined) {
     return this.handle('select', handler as EventHandler<State, Action>)
   }
-  onShow(handler: EventHandlerTE<State, Action, MouseEvent, El>) {
+  onShow(handler: EventHandlerTE<State, Action, MouseEvent, El> | undefined) {
     return this.handle('show', handler as EventHandler<State, Action>)
   }
-  onSubmit(handler: EventHandlerTE<State, Action, Event, El>) {
+  onSubmit(handler: EventHandlerTE<State, Action, Event, El> | undefined) {
     return this.handle('submit', handler as EventHandler<State, Action>)
   }
-  onTouchCancel(handler: EventHandlerTE<State, Action, TouchEvent, El>) {
+  onTouchCancel(
+    handler: EventHandlerTE<State, Action, TouchEvent, El> | undefined
+  ) {
     return this.handle('touchcancel', handler as EventHandler<State, Action>)
   }
-  onTouchEnd(handler: EventHandlerTE<State, Action, TouchEvent, El>) {
+  onTouchEnd(
+    handler: EventHandlerTE<State, Action, TouchEvent, El> | undefined
+  ) {
     return this.handle('touchend', handler as EventHandler<State, Action>)
   }
-  onTouchMove(handler: EventHandlerTE<State, Action, TouchEvent, El>) {
+  onTouchMove(
+    handler: EventHandlerTE<State, Action, TouchEvent, El> | undefined
+  ) {
     return this.handle('touchmove', handler as EventHandler<State, Action>)
   }
-  onTouchStart(handler: EventHandlerTE<State, Action, TouchEvent, El>) {
+  onTouchStart(
+    handler: EventHandlerTE<State, Action, TouchEvent, El> | undefined
+  ) {
     return this.handle('touchstart', handler as EventHandler<State, Action>)
   }
-  onWheel(handler: EventHandlerTE<State, Action, WheelEvent, El>) {
+  onWheel(handler: EventHandlerTE<State, Action, WheelEvent, El> | undefined) {
     return this.handle('wheel', handler as EventHandler<State, Action>)
   }
 }
@@ -2258,66 +2262,109 @@ function initBuilder<
   return parent.append(builder.build())
 }
 
-// element builders
+export type PreloadValue = 'none' | 'metadata' | 'auto'
+
 export class MediaElementBuilder<
   State,
   Action,
   Query,
   El extends HTMLMediaElement
 > extends ElementBuilder<State, Action, Query, El> {
-  // TODO https://developer.mozilla.org/en-US/docs/Web/HTML/Element/audio
-  onAbortMedia(handler: EventHandlerTE<State, Action, Event, El>) {
+  autoPlay(value: Attribute<State, boolean>): this {
+    return this.attr(
+      'autoplay',
+      mapAttribute(value, toggleToString('autoplay'))
+    )
+  }
+  controls(value: Attribute<State, boolean>): this {
+    return this.attr(
+      'controls',
+      mapAttribute(value, toggleToString('controls'))
+    )
+  }
+  crossOrigin(value: Attribute<State, CrossOriginValue>) {
+    return this.attr('crossorigin', value)
+  }
+  loop(value: Attribute<State, boolean>): this {
+    return this.attr('loop', mapAttribute(value, toggleToString('loop')))
+  }
+  muted(value: Attribute<State, boolean>): this {
+    return this.attr('muted', mapAttribute(value, toggleToString('muted')))
+  }
+  preload(value: Attribute<State, PreloadValue>) {
+    return this.attr('preload', value)
+  }
+  src(value: Attribute<State, string>) {
+    return this.attr('src', value)
+  }
+
+  onAbortMedia(handler: EventHandlerTE<State, Action, Event, El> | undefined) {
     return this.handle('abort', handler as EventHandler<State, Action>)
   }
-  onCanPlay(handler: EventHandlerTE<State, Action, Event, El>) {
+  onCanPlay(handler: EventHandlerTE<State, Action, Event, El> | undefined) {
     return this.handle('canplay', handler as EventHandler<State, Action>)
   }
-  onCanPlayThrough(handler: EventHandlerTE<State, Action, Event, El>) {
+  onCanPlayThrough(
+    handler: EventHandlerTE<State, Action, Event, El> | undefined
+  ) {
     return this.handle('canplaythrough', handler as EventHandler<State, Action>)
   }
-  onDurationChange(handler: EventHandlerTE<State, Action, Event, El>) {
+  onComplete(
+    handler:
+      | EventHandlerTE<State, Action, OfflineAudioCompletionEvent, El>
+      | undefined
+  ) {
+    return this.handle('complete', handler as EventHandler<State, Action>)
+  }
+  onDurationChange(
+    handler: EventHandlerTE<State, Action, Event, El> | undefined
+  ) {
     return this.handle('durationchange', handler as EventHandler<State, Action>)
   }
-  onEmptied(handler: EventHandlerTE<State, Action, Event, El>) {
+  onEmptied(handler: EventHandlerTE<State, Action, Event, El> | undefined) {
     return this.handle('emptied', handler as EventHandler<State, Action>)
   }
-  onEnded(handler: EventHandlerTE<State, Action, Event, El>) {
+  onEnded(handler: EventHandlerTE<State, Action, Event, El> | undefined) {
     return this.handle('ended', handler as EventHandler<State, Action>)
   }
-  onLoadedData(handler: EventHandlerTE<State, Action, Event, El>) {
+  onLoadedData(handler: EventHandlerTE<State, Action, Event, El> | undefined) {
     return this.handle('loadeddata', handler as EventHandler<State, Action>)
   }
-  onLoadedMetadata(handler: EventHandlerTE<State, Action, Event, El>) {
+  onLoadedMetadata(
+    handler: EventHandlerTE<State, Action, Event, El> | undefined
+  ) {
     return this.handle('loadedmetadata', handler as EventHandler<State, Action>)
   }
-  onPause(handler: EventHandlerTE<State, Action, Event, El>) {
+  onPause(handler: EventHandlerTE<State, Action, Event, El> | undefined) {
     return this.handle('pause', handler as EventHandler<State, Action>)
   }
-  onPlay(handler: EventHandlerTE<State, Action, Event, El>) {
+  onPlay(handler: EventHandlerTE<State, Action, Event, El> | undefined) {
     return this.handle('play', handler as EventHandler<State, Action>)
   }
-  onPlaying(handler: EventHandlerTE<State, Action, Event, El>) {
+  onPlaying(handler: EventHandlerTE<State, Action, Event, El> | undefined) {
     return this.handle('playing', handler as EventHandler<State, Action>)
   }
-  onSeeked(handler: EventHandlerTE<State, Action, Event, El>) {
+  onSeeked(handler: EventHandlerTE<State, Action, Event, El> | undefined) {
     return this.handle('seeked', handler as EventHandler<State, Action>)
   }
-  onSeeking(handler: EventHandlerTE<State, Action, Event, El>) {
+  onSeeking(handler: EventHandlerTE<State, Action, Event, El> | undefined) {
     return this.handle('seeking', handler as EventHandler<State, Action>)
   }
-  onStalled(handler: EventHandlerTE<State, Action, Event, El>) {
+  onStalled(handler: EventHandlerTE<State, Action, Event, El> | undefined) {
     return this.handle('stalled', handler as EventHandler<State, Action>)
   }
-  onSuspend(handler: EventHandlerTE<State, Action, Event, El>) {
+  onSuspend(handler: EventHandlerTE<State, Action, Event, El> | undefined) {
     return this.handle('suspend', handler as EventHandler<State, Action>)
   }
-  onTimeUpdate(handler: EventHandlerTE<State, Action, Event, El>) {
+  onTimeUpdate(handler: EventHandlerTE<State, Action, Event, El> | undefined) {
     return this.handle('timeupdate', handler as EventHandler<State, Action>)
   }
-  onVolumeChange(handler: EventHandlerTE<State, Action, Event, El>) {
+  onVolumeChange(
+    handler: EventHandlerTE<State, Action, Event, El> | undefined
+  ) {
     return this.handle('volumechange', handler as EventHandler<State, Action>)
   }
-  onWaiting(handler: EventHandlerTE<State, Action, Event, El>) {
+  onWaiting(handler: EventHandlerTE<State, Action, Event, El> | undefined) {
     return this.handle('waiting', handler as EventHandler<State, Action>)
   }
 }
@@ -2328,35 +2375,25 @@ export class AnchorElementBuilder<State, Action, Query> extends ElementBuilder<
   Query,
   HTMLAnchorElement
 > {
-  download(filename: Attribute<State, string | undefined>): this {
+  download(filename: Attribute<State, string>): this {
     return this.attr('download', filename)
   }
-  href(url: Attribute<State, string | undefined>): this {
+  href(url: Attribute<State, string>): this {
     return this.attr('href', url)
   }
-  hreflang(lang: Attribute<State, string | undefined>): this {
+  hreflang(lang: Attribute<State, string>): this {
     return this.attr('hreflang', lang)
   }
-  ping(
-    url: Attribute<
-      State,
-      string | string[] | Record<string, boolean> | undefined
-    >
-  ): this {
+  ping(url: Attribute<State, ListValue<string>>): this {
     return this.attr('ping', mapAttribute(url, spaceSeparatedToString))
   }
-  rel(
-    value: Attribute<
-      State,
-      string | string[] | Record<string, boolean> | undefined
-    >
-  ): this {
+  rel(value: Attribute<State, ListValue<string>>): this {
     return this.attr('rel', mapAttribute(value, spaceSeparatedToString))
   }
-  target(name: Attribute<State, string | undefined>): this {
+  target(name: Attribute<State, string>): this {
     return this.attr('target', name)
   }
-  type(name: Attribute<State, string | undefined>): this {
+  type(name: Attribute<State, string>): this {
     return this.attr('type', name)
   }
 }
@@ -2367,16 +2404,40 @@ export class AreaElementBuilder<State, Action, Query> extends ElementBuilder<
   Query,
   HTMLAreaElement
 > {
-  // TODO https://developer.mozilla.org/en-US/docs/Web/HTML/Element/area
+  alt(name: Attribute<State, string>): this {
+    return this.attr('alt', name)
+  }
+  coords(name: Attribute<State, string>): this {
+    return this.attr('coords', name)
+  }
+  download(name: Attribute<State, string>): this {
+    return this.attr('download', name)
+  }
+  href(name: Attribute<State, string>): this {
+    return this.attr('href', name)
+  }
+  hreflang(name: Attribute<State, string>): this {
+    return this.attr('hreflang', name)
+  }
+  ping(name: Attribute<State, string>): this {
+    return this.attr('ping', name)
+  }
+  rel(name: Attribute<State, string>): this {
+    return this.attr('rel', name)
+  }
+  shape(name: Attribute<State, 'rect' | 'circle' | 'poly' | 'default'>): this {
+    return this.attr('shape', name)
+  }
+  target(name: Attribute<State, string>): this {
+    return this.attr('target', name)
+  }
 }
 
 export class AudioElementBuilder<
   State,
   Action,
   Query
-> extends MediaElementBuilder<State, Action, Query, HTMLAudioElement> {
-  // TODO https://developer.mozilla.org/en-US/docs/Web/HTML/Element/audio
-}
+> extends MediaElementBuilder<State, Action, Query, HTMLAudioElement> {}
 
 export class BaseElementBuilder<State, Action, Query> extends ElementBuilder<
   State,
@@ -2384,8 +2445,20 @@ export class BaseElementBuilder<State, Action, Query> extends ElementBuilder<
   Query,
   HTMLBaseElement
 > {
-  // TODO https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
+  href(name: Attribute<State, string>): this {
+    return this.attr('href', name)
+  }
+  target(name: Attribute<State, string>): this {
+    return this.attr('target', name)
+  }
 }
+
+export type FormEncTypeValue =
+  | 'application/x-www-form-urlencoded'
+  | 'multipart/form-data'
+  | 'text/plain'
+
+export type FormMethodValue = 'post' | 'get' | 'dialog'
 
 export class ButtonElementBuilder<State, Action, Query> extends ElementBuilder<
   State,
@@ -2393,69 +2466,46 @@ export class ButtonElementBuilder<State, Action, Query> extends ElementBuilder<
   Query,
   HTMLButtonElement
 > {
-  autofocus(value: DerivedOrLiteralValue<State, boolean | undefined>) {
+  autofocus(value: Attribute<State, boolean>) {
     return this.attr(
       'autofocus',
       mapAttribute(value, toggleToString('autofocus'))
     )
   }
-
-  disabled(value: DerivedOrLiteralValue<State, boolean | undefined>) {
+  disabled(value: Attribute<State, boolean>) {
     return this.attr(
       'disabled',
       mapAttribute(value, toggleToString('disabled'))
     )
   }
-
-  form(value: DerivedOrLiteralValue<State, string | undefined>) {
+  form(value: Attribute<State, string>) {
     return this.attr('form', value)
   }
-
-  formAction(value: DerivedOrLiteralValue<State, string | undefined>) {
+  formAction(value: Attribute<State, string>) {
     return this.attr('formaction', value)
   }
-
-  formEncType(
-    value: DerivedOrLiteralValue<
-      State,
-      | 'application/x-www-form-urlencoded'
-      | 'multipart/form-data'
-      | 'text/plain'
-      | undefined
-    >
-  ) {
+  formEncType(value: Attribute<State, FormEncTypeValue>) {
     return this.attr('formenctype', value)
   }
-
-  formMethod(value: DerivedOrLiteralValue<State, 'post' | 'get' | undefined>) {
+  formMethod(value: Attribute<State, FormMethodValue>) {
     return this.attr('formmethod', value)
   }
-
-  formNoValidate(value: DerivedOrLiteralValue<State, boolean | undefined>) {
+  formNoValidate(value: Attribute<State, boolean>) {
     return this.attr(
       'formnovalidate',
       mapAttribute(value, toggleToString('formnovalidate'))
     )
   }
-
-  formTarget(value: DerivedOrLiteralValue<State, string | undefined>) {
+  formTarget(value: Attribute<State, string>) {
     return this.attr('formtarget', value)
   }
-
-  name(value: DerivedOrLiteralValue<State, string | undefined>) {
+  name(value: Attribute<State, string>) {
     return this.attr('name', value)
   }
-
-  type(
-    value: DerivedOrLiteralValue<
-      State,
-      'submit' | 'reset' | 'button' | undefined
-    >
-  ) {
+  type(value: Attribute<State, 'submit' | 'reset' | 'button'>) {
     return this.attr('type', value)
   }
-
-  value(value: DerivedOrLiteralValue<State, string | undefined>) {
+  value(value: Attribute<State, string>) {
     return this.attr('value', value)
   }
 }
@@ -2466,7 +2516,12 @@ export class CanvasElementBuilder<State, Action, Query> extends ElementBuilder<
   Query,
   HTMLCanvasElement
 > {
-  // TODO https://developer.mozilla.org/en-US/docs/Web/HTML/Element/canvas
+  height(value: Attribute<State, number>) {
+    return this.attr('height', mapAttribute(value, String))
+  }
+  width(value: Attribute<State, number>) {
+    return this.attr('width', mapAttribute(value, String))
+  }
 }
 
 export class DataElementBuilder<State, Action, Query> extends ElementBuilder<
@@ -2475,7 +2530,9 @@ export class DataElementBuilder<State, Action, Query> extends ElementBuilder<
   Query,
   HTMLDataElement
 > {
-  // TODO https://developer.mozilla.org/en-US/docs/Web/HTML/Element/data
+  value(value: Attribute<State, string>) {
+    return this.attr('value', value)
+  }
 }
 
 export class DetailsElementBuilder<State, Action, Query> extends ElementBuilder<
@@ -2484,7 +2541,9 @@ export class DetailsElementBuilder<State, Action, Query> extends ElementBuilder<
   Query,
   HTMLDetailsElement
 > {
-  // TODO https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details
+  open(value: Attribute<State, boolean>) {
+    return this.attr('open', mapAttribute(value, toggleToString('open')))
+  }
 }
 
 export class DialogElementBuilder<State, Action, Query> extends ElementBuilder<
@@ -2493,7 +2552,9 @@ export class DialogElementBuilder<State, Action, Query> extends ElementBuilder<
   Query,
   HTMLDialogElement
 > {
-  // TODO https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog
+  open(value: Attribute<State, boolean>) {
+    return this.attr('open', mapAttribute(value, toggleToString('open')))
+  }
 }
 
 export class EmbedElementBuilder<State, Action, Query> extends ElementBuilder<
@@ -2502,7 +2563,18 @@ export class EmbedElementBuilder<State, Action, Query> extends ElementBuilder<
   Query,
   HTMLEmbedElement
 > {
-  // TODO https://developer.mozilla.org/en-US/docs/Web/HTML/Element/embed
+  height(value: Attribute<State, number>) {
+    return this.attr('height', mapAttribute(value, String))
+  }
+  src(value: Attribute<State, string>) {
+    return this.attr('src', value)
+  }
+  type(value: Attribute<State, string>) {
+    return this.attr('type', value)
+  }
+  width(value: Attribute<State, number>) {
+    return this.attr('width', mapAttribute(value, String))
+  }
 }
 
 export class FieldSetElementBuilder<
@@ -2510,7 +2582,18 @@ export class FieldSetElementBuilder<
   Action,
   Query
 > extends ElementBuilder<State, Action, Query, HTMLFieldSetElement> {
-  // TODO https://developer.mozilla.org/en-US/docs/Web/HTML/Element/fieldset
+  disabled(value: Attribute<State, boolean>) {
+    return this.attr(
+      'disabled',
+      mapAttribute(value, toggleToString('disabled'))
+    )
+  }
+  form(value: Attribute<State, string>) {
+    return this.attr('form', value)
+  }
+  name(value: Attribute<State, string>) {
+    return this.attr('name', value)
+  }
 }
 
 export class FormElementBuilder<State, Action, Query> extends ElementBuilder<
@@ -2519,7 +2602,39 @@ export class FormElementBuilder<State, Action, Query> extends ElementBuilder<
   Query,
   HTMLFormElement
 > {
-  // TODO https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form
+  acceptCharset(value: Attribute<State, ListValue<string>>) {
+    return this.attr(
+      'accept-charset',
+      mapAttribute(value, spaceSeparatedToString)
+    )
+  }
+  action(value: Attribute<State, string>) {
+    return this.attr('action', value)
+  }
+  autoComplete(value: Attribute<State, 'on' | 'off'>) {
+    return this.attr('autocomplete', value)
+  }
+  encType(value: Attribute<State, FormEncTypeValue>) {
+    return this.attr('enctype', value)
+  }
+  method(value: Attribute<State, FormMethodValue>) {
+    return this.attr('method', value)
+  }
+  name(value: Attribute<State, string>) {
+    return this.attr('name', value)
+  }
+  noValidate(value: Attribute<State, boolean>) {
+    return this.attr(
+      'novalidate',
+      mapAttribute(value, toggleToString('novalidate'))
+    )
+  }
+  rel(value: Attribute<State, string>) {
+    return this.attr('rel', value)
+  }
+  target(value: Attribute<State, string>) {
+    return this.attr('target', value)
+  }
 }
 
 export class HtmlElementBuilder<State, Action, Query> extends ElementBuilder<
@@ -2528,7 +2643,9 @@ export class HtmlElementBuilder<State, Action, Query> extends ElementBuilder<
   Query,
   HTMLHtmlElement
 > {
-  // TODO https://developer.mozilla.org/en-US/docs/Web/HTML/Element/html
+  xmlns(value: Attribute<State, string>) {
+    return this.attr('xmlns', value)
+  }
 }
 
 export class IFrameElementBuilder<State, Action, Query> extends ElementBuilder<
@@ -2537,8 +2654,69 @@ export class IFrameElementBuilder<State, Action, Query> extends ElementBuilder<
   Query,
   HTMLIFrameElement
 > {
-  // TODO https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe
+  allow(value: Attribute<State, string>) {
+    return this.attr('allow', value)
+  }
+  allowfullscreen(value: Attribute<State, boolean>) {
+    return this.attr('allowfullscreen', mapAttribute(value, booleanToString))
+  }
+  allowpaymentrequest(value: Attribute<State, boolean>) {
+    return this.attr(
+      'allowpaymentrequest',
+      mapAttribute(value, booleanToString)
+    )
+  }
+  height(value: Attribute<State, number>) {
+    return this.attr('height', mapAttribute(value, String))
+  }
+  name(value: Attribute<State, string>) {
+    return this.attr('name', value)
+  }
+  referrerpolicy(
+    value: Attribute<
+      State,
+      | 'no-referrer'
+      | 'no-referrer-when-downgrade'
+      | 'origin'
+      | 'origin-when-cross-origin'
+      | 'same-origin'
+      | 'strict-origin'
+      | 'strict-origin-when-cross-origin'
+      | 'unsafe-url'
+    >
+  ) {
+    return this.attr('referrerpolicy', value)
+  }
+  sandbox(
+    value: Attribute<
+      State,
+      | 'allow-forms'
+      | 'allow-modals'
+      | 'allow-orientation-lock'
+      | 'allow-pointer-lock'
+      | 'allow-popups'
+      | 'allow-popups-to-escape-sandbox'
+      | 'allow-presentation'
+      | 'allow-same-origin'
+      | 'allow-scripts'
+      | 'allow-top-navigation'
+      | 'allow-top-navigation-by-user-activation'
+    >
+  ) {
+    return this.attr('sandbox', value)
+  }
+  src(value: Attribute<State, string>) {
+    return this.attr('src', value)
+  }
+  srcdoc(value: Attribute<State, string>) {
+    return this.attr('srcdoc', value)
+  }
+  width(value: Attribute<State, number>) {
+    return this.attr('width', mapAttribute(value, String))
+  }
 }
+
+export type CrossOriginValue = 'anonymous' | 'use-credentials'
 
 export class ImageElementBuilder<State, Action, Query> extends ElementBuilder<
   State,
@@ -2546,10 +2724,42 @@ export class ImageElementBuilder<State, Action, Query> extends ElementBuilder<
   Query,
   HTMLImageElement
 > {
-  // TODO https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img
+  alt(value: Attribute<State, string>) {
+    return this.attr('alt', value)
+  }
+  crossOrigin(value: Attribute<State, CrossOriginValue>) {
+    return this.attr('crossorigin', value)
+  }
+  decoding(value: Attribute<State, 'sync' | 'async' | 'auto'>) {
+    return this.attr('decoding', value)
+  }
+  height(value: Attribute<State, number>) {
+    return this.attr('height', mapAttribute(value, String))
+  }
+  ismap(value: Attribute<State, boolean>) {
+    return this.attr('ismap', mapAttribute(value, toggleToString('ismap')))
+  }
+  loading(value: Attribute<State, 'eager' | 'lazy'>) {
+    return this.attr('loading', value)
+  }
+  sizes(value: Attribute<State, ListValue<string>>) {
+    return this.attr('sizes', mapAttribute(value, commaSeparatedToString))
+  }
+  src(value: Attribute<State, string>) {
+    return this.attr('src', value)
+  }
+  srcset(value: Attribute<State, ListValue<string>>) {
+    return this.attr('srcset', mapAttribute(value, commaSeparatedToString))
+  }
+  usemap(value: Attribute<State, string>) {
+    return this.attr('usemap', value)
+  }
+  width(value: Attribute<State, number>) {
+    return this.attr('width', mapAttribute(value, String))
+  }
 }
 
-export type AutocompleteValue =
+export type AutoCompleteValue =
   | 'on'
   | 'off'
   | 'name'
@@ -2635,57 +2845,49 @@ export class InputElementBuilder<State, Action, Query> extends ElementBuilder<
   Query,
   HTMLInputElement
 > {
-  type(value: DerivedOrLiteralValue<State, InputTypeValue | undefined>) {
+  type(value: Attribute<State, InputTypeValue>) {
     return this.attr('type', value)
   }
-  autocomplete(
-    value: DerivedOrLiteralValue<
-      State,
-      | AutocompleteValue
-      | AutocompleteValue[]
-      | Record<AutocompleteValue, boolean>
-      | undefined
-    >
-  ) {
+  autoComplete(value: Attribute<State, ListValue<AutoCompleteValue>>) {
     return this.attr(
       'autocomplete',
       mapAttribute(value, spaceSeparatedToString)
     )
   }
-  autofocus(value: DerivedOrLiteralValue<State, boolean | undefined>) {
+  autoFocus(value: Attribute<State, boolean>) {
     return this.attr(
       'autofocus',
       mapAttribute(value, toggleToString('disabled'))
     )
   }
-  disabled(value: DerivedOrLiteralValue<State, boolean | undefined>) {
+  disabled(value: Attribute<State, boolean>) {
     return this.attr(
       'disabled',
       mapAttribute(value, toggleToString('disabled'))
     )
   }
-  form(value: DerivedOrLiteralValue<State, string | undefined>) {
+  form(value: Attribute<State, string>) {
     return this.attr('form', value)
   }
-  list(value: DerivedOrLiteralValue<State, string | undefined>) {
+  list(value: Attribute<State, string>) {
     return this.attr('list', value)
   }
-  name(value: DerivedOrLiteralValue<State, string | undefined>) {
+  name(value: Attribute<State, string>) {
     return this.attr('name', value)
   }
-  readonly(value: DerivedOrLiteralValue<State, boolean | undefined>) {
+  readonly(value: Attribute<State, boolean>) {
     return this.attr(
       'readonly',
       mapAttribute(value, toggleToString('readonly'))
     )
   }
-  required(value: DerivedOrLiteralValue<State, boolean | undefined>) {
+  required(value: Attribute<State, boolean>) {
     return this.attr(
       'required',
       mapAttribute(value, toggleToString('required'))
     )
   }
-  value(value: DerivedOrLiteralValue<State, string | undefined>) {
+  value(value: Attribute<State, string>) {
     return this.attr('value', value)
   }
 }
@@ -2695,7 +2897,7 @@ export class InputCheckedElementBuilder<
   Action,
   Query
 > extends InputElementBuilder<State, Action, Query> {
-  checked(value: DerivedOrLiteralValue<State, boolean | undefined>) {
+  checked(value: Attribute<State, boolean>) {
     return this.attr('checked', mapAttribute(value, toggleToString('checked')))
   }
 }
@@ -2705,13 +2907,13 @@ export class InputDateElementBuilder<
   Action,
   Query
 > extends InputElementBuilder<State, Action, Query> {
-  max(value: DerivedOrLiteralValue<State, string | undefined>) {
+  max(value: Attribute<State, string>) {
     return this.attr('max', value)
   }
-  min(value: DerivedOrLiteralValue<State, string | undefined>) {
+  min(value: Attribute<State, string>) {
     return this.attr('min', value)
   }
-  step(value: DerivedOrLiteralValue<State, number | undefined>) {
+  step(value: Attribute<State, number>) {
     return this.attr('step', mapAttribute(value, String))
   }
 }
@@ -2721,13 +2923,13 @@ export class InputEmailElementBuilder<
   Action,
   Query
 > extends InputElementBuilder<State, Action, Query> {
-  multiple(value: DerivedOrLiteralValue<State, boolean | undefined>) {
+  multiple(value: Attribute<State, boolean>) {
     return this.attr(
       'multiple',
       mapAttribute(value, toggleToString('multiple'))
     )
   }
-  size(value: DerivedOrLiteralValue<State, number | undefined>) {
+  size(value: Attribute<State, number>) {
     return this.attr('size', mapAttribute(value, String))
   }
 }
@@ -2737,18 +2939,13 @@ export class InputFileElementBuilder<
   Action,
   Query
 > extends InputElementBuilder<State, Action, Query> {
-  accept(
-    value: DerivedOrLiteralValue<
-      State,
-      string | string[] | Record<string, boolean> | undefined
-    >
-  ) {
+  accept(value: Attribute<State, ListValue<string>>) {
     return this.attr('accept', mapAttribute(value, commaSeparatedToString))
   }
-  capture(value: DerivedOrLiteralValue<State, string | undefined>) {
+  capture(value: Attribute<State, string>) {
     return this.attr('capture', value)
   }
-  multiple(value: DerivedOrLiteralValue<State, boolean | undefined>) {
+  multiple(value: Attribute<State, boolean>) {
     return this.attr(
       'multiple',
       mapAttribute(value, toggleToString('multiple'))
@@ -2761,41 +2958,31 @@ export class InputImageElementBuilder<
   Action,
   Query
 > extends InputElementBuilder<State, Action, Query> {
-  alt(value: DerivedOrLiteralValue<State, string | undefined>) {
+  alt(value: Attribute<State, string>) {
     return this.attr('alt', value)
   }
-  formaction(value: DerivedOrLiteralValue<State, string | undefined>) {
+  formAction(value: Attribute<State, string>) {
     return this.attr('formaction', value)
   }
-  formenctype(
-    value: DerivedOrLiteralValue<
-      State,
-      | 'application/x-www-form-urlencoded'
-      | 'multipart/form-data'
-      | 'text/plain'
-      | undefined
-    >
-  ) {
+  formEncType(value: Attribute<State, FormEncTypeValue>) {
     return this.attr('formenctype', value)
   }
-  formmethod(
-    value: DerivedOrLiteralValue<State, 'get' | 'post' | 'dialog' | undefined>
-  ) {
+  formMethod(value: Attribute<State, FormMethodValue>) {
     return this.attr('formmethod', value)
   }
-  formvalidate(value: DerivedOrLiteralValue<State, string | undefined>) {
+  formValidate(value: Attribute<State, string>) {
     return this.attr('formvalidate', value)
   }
-  formtarget(value: DerivedOrLiteralValue<State, string | undefined>) {
+  formTarget(value: Attribute<State, string>) {
     return this.attr('formtarget', value)
   }
-  height(value: DerivedOrLiteralValue<State, number | undefined>) {
+  height(value: Attribute<State, number>) {
     return this.attr('height', mapAttribute(value, String))
   }
-  src(value: DerivedOrLiteralValue<State, string | undefined>) {
+  src(value: Attribute<State, string>) {
     return this.attr('src', value)
   }
-  width(value: DerivedOrLiteralValue<State, number | undefined>) {
+  width(value: Attribute<State, number>) {
     return this.attr('width', mapAttribute(value, String))
   }
 }
@@ -2805,16 +2992,16 @@ export class InputNumberElementBuilder<
   Action,
   Query
 > extends InputElementBuilder<State, Action, Query> {
-  max(value: DerivedOrLiteralValue<State, number | undefined>) {
+  max(value: Attribute<State, number>) {
     return this.attr('max', mapAttribute(value, String))
   }
-  min(value: DerivedOrLiteralValue<State, number | undefined>) {
+  min(value: Attribute<State, number>) {
     return this.attr('min', mapAttribute(value, String))
   }
-  step(value: DerivedOrLiteralValue<State, number | undefined>) {
+  step(value: Attribute<State, number>) {
     return this.attr('step', mapAttribute(value, String))
   }
-  value(value: DerivedOrLiteralValue<State, string | number | undefined>) {
+  value(value: Attribute<State, string | number>) {
     return this.attr('value', mapAttribute(value, String))
   }
 }
@@ -2824,19 +3011,19 @@ export class InputPasswordElementBuilder<
   Action,
   Query
 > extends InputElementBuilder<State, Action, Query> {
-  maxlength(value: DerivedOrLiteralValue<State, number | undefined>) {
+  maxlength(value: Attribute<State, number>) {
     return this.attr('maxlength', mapAttribute(value, String))
   }
-  minlength(value: DerivedOrLiteralValue<State, number | undefined>) {
+  minlength(value: Attribute<State, number>) {
     return this.attr('minlength', mapAttribute(value, String))
   }
-  pattern(value: DerivedOrLiteralValue<State, string | undefined>) {
+  pattern(value: Attribute<State, string>) {
     return this.attr('pattern', value)
   }
-  placeholder(value: DerivedOrLiteralValue<State, string | undefined>) {
+  placeholder(value: Attribute<State, string>) {
     return this.attr('placeholder', value)
   }
-  size(value: DerivedOrLiteralValue<State, number | undefined>) {
+  size(value: Attribute<State, number>) {
     return this.attr('size', mapAttribute(value, String))
   }
 }
@@ -2846,16 +3033,16 @@ export class InputSearchElementBuilder<
   Action,
   Query
 > extends InputElementBuilder<State, Action, Query> {
-  dirname(value: DerivedOrLiteralValue<State, string | undefined>) {
+  dirname(value: Attribute<State, string>) {
     return this.attr('dirname', value)
   }
-  maxlength(value: DerivedOrLiteralValue<State, number | undefined>) {
+  maxlength(value: Attribute<State, number>) {
     return this.attr('maxlength', mapAttribute(value, String))
   }
-  minlength(value: DerivedOrLiteralValue<State, number | undefined>) {
+  minlength(value: Attribute<State, number>) {
     return this.attr('minlength', mapAttribute(value, String))
   }
-  placeholder(value: DerivedOrLiteralValue<State, string | undefined>) {
+  placeholder(value: Attribute<State, string>) {
     return this.attr('placeholder', value)
   }
 }
@@ -2865,32 +3052,22 @@ export class InputSubmitElementBuilder<
   Action,
   Query
 > extends InputElementBuilder<State, Action, Query> {
-  formaction(value: DerivedOrLiteralValue<State, string | undefined>) {
+  formAction(value: Attribute<State, string>) {
     return this.attr('formaction', value)
   }
-  formenctype(
-    value: DerivedOrLiteralValue<
-      State,
-      | 'application/x-www-form-urlencoded'
-      | 'multipart/form-data'
-      | 'text/plain'
-      | undefined
-    >
-  ) {
+  formEncType(value: Attribute<State, FormEncTypeValue>) {
     return this.attr('formenctype', value)
   }
-  formmethod(
-    value: DerivedOrLiteralValue<State, 'get' | 'post' | 'dialog' | undefined>
-  ) {
+  formMethod(value: Attribute<State, FormMethodValue>) {
     return this.attr('formmethod', value)
   }
-  formvalidate(value: DerivedOrLiteralValue<State, boolean | undefined>) {
+  formValidate(value: Attribute<State, boolean>) {
     return this.attr(
       'formvalidate',
       mapAttribute(value, toggleToString('formvalidate'))
     )
   }
-  formtarget(value: DerivedOrLiteralValue<State, string | undefined>) {
+  formTarget(value: Attribute<State, string>) {
     return this.attr('formtarget', value)
   }
 }
@@ -2900,19 +3077,19 @@ export class InputTelElementBuilder<
   Action,
   Query
 > extends InputElementBuilder<State, Action, Query> {
-  maxlength(value: DerivedOrLiteralValue<State, number | undefined>) {
+  maxlength(value: Attribute<State, number>) {
     return this.attr('maxlength', mapAttribute(value, String))
   }
-  minlength(value: DerivedOrLiteralValue<State, number | undefined>) {
+  minlength(value: Attribute<State, number>) {
     return this.attr('minlength', mapAttribute(value, String))
   }
-  pattern(value: DerivedOrLiteralValue<State, string | undefined>) {
+  pattern(value: Attribute<State, string>) {
     return this.attr('pattern', value)
   }
-  placeholder(value: DerivedOrLiteralValue<State, string | undefined>) {
+  placeholder(value: Attribute<State, string>) {
     return this.attr('placeholder', value)
   }
-  size(value: DerivedOrLiteralValue<State, number | undefined>) {
+  size(value: Attribute<State, number>) {
     return this.attr('size', mapAttribute(value, String))
   }
 }
@@ -2922,22 +3099,22 @@ export class InputTextElementBuilder<
   Action,
   Query
 > extends InputElementBuilder<State, Action, Query> {
-  dirname(value: DerivedOrLiteralValue<State, string | undefined>) {
+  dirname(value: Attribute<State, string>) {
     return this.attr('dirname', value)
   }
-  maxlength(value: DerivedOrLiteralValue<State, number | undefined>) {
+  maxlength(value: Attribute<State, number>) {
     return this.attr('maxlength', mapAttribute(value, String))
   }
-  minlength(value: DerivedOrLiteralValue<State, number | undefined>) {
+  minlength(value: Attribute<State, number>) {
     return this.attr('minlength', mapAttribute(value, String))
   }
-  pattern(value: DerivedOrLiteralValue<State, string | undefined>) {
+  pattern(value: Attribute<State, string>) {
     return this.attr('pattern', value)
   }
-  placeholder(value: DerivedOrLiteralValue<State, string | undefined>) {
+  placeholder(value: Attribute<State, string>) {
     return this.attr('placeholder', value)
   }
-  size(value: DerivedOrLiteralValue<State, number | undefined>) {
+  size(value: Attribute<State, number>) {
     return this.attr('size', mapAttribute(value, String))
   }
 }
@@ -2947,13 +3124,13 @@ export class InputUrlElementBuilder<
   Action,
   Query
 > extends InputElementBuilder<State, Action, Query> {
-  maxlength(value: DerivedOrLiteralValue<State, number | undefined>) {
+  maxlength(value: Attribute<State, number>) {
     return this.attr('maxlength', mapAttribute(value, String))
   }
-  minlength(value: DerivedOrLiteralValue<State, number | undefined>) {
+  minlength(value: Attribute<State, number>) {
     return this.attr('minlength', mapAttribute(value, String))
   }
-  placeholder(value: DerivedOrLiteralValue<State, string | undefined>) {
+  placeholder(value: Attribute<State, string>) {
     return this.attr('placeholder', value)
   }
 }
@@ -2964,7 +3141,7 @@ export class LabelElementBuilder<State, Action, Query> extends ElementBuilder<
   Query,
   HTMLLabelElement
 > {
-  for(value: DerivedOrLiteralValue<State, string | undefined>) {
+  for(value: DerivedOrLiteralValue<State, string>) {
     return this.attr('for', value)
   }
 }
@@ -2975,7 +3152,9 @@ export class LIElementBuilder<State, Action, Query> extends ElementBuilder<
   Query,
   HTMLLIElement
 > {
-  // TODO https://developer.mozilla.org/en-US/docs/Web/HTML/Element/li
+  value(value: DerivedOrLiteralValue<State, string>) {
+    return this.attr('value', value)
+  }
 }
 
 export class LinkElementBuilder<State, Action, Query> extends ElementBuilder<
@@ -2984,7 +3163,55 @@ export class LinkElementBuilder<State, Action, Query> extends ElementBuilder<
   Query,
   HTMLLinkElement
 > {
-  // TODO https://developer.mozilla.org/en-US/docs/Web/HTML/Element/link
+  as(
+    value: DerivedOrLiteralValue<
+      State,
+      | 'audio'
+      | 'document'
+      | 'embed'
+      | 'fetch'
+      | 'font'
+      | 'image'
+      | 'object'
+      | 'script'
+      | 'style'
+      | 'track'
+      | 'video'
+      | 'worker'
+    >
+  ) {
+    return this.attr('as', value)
+  }
+  crossOrigin(value: Attribute<State, CrossOriginValue>) {
+    return this.attr('crossorigin', value)
+  }
+  disabled(value: Attribute<State, boolean>) {
+    return this.attr(
+      'disabled',
+      mapAttribute(value, toggleToString('disabled'))
+    )
+  }
+  href(value: Attribute<State, string>) {
+    return this.attr('href', value)
+  }
+  hreflang(value: Attribute<State, string>) {
+    return this.attr('hreflang', value)
+  }
+  media(value: Attribute<State, string>) {
+    return this.attr('media', value)
+  }
+  rel(value: Attribute<State, string>) {
+    return this.attr('rel', value)
+  }
+  sizes(value: Attribute<State, ListValue<string>>) {
+    return this.attr('sizes', mapAttribute(value, commaSeparatedToString))
+  }
+  title(value: Attribute<State, string>) {
+    return this.attr('title', value)
+  }
+  type(value: Attribute<State, string>) {
+    return this.attr('type', value)
+  }
 }
 
 export class MapElementBuilder<State, Action, Query> extends ElementBuilder<
@@ -2993,8 +3220,17 @@ export class MapElementBuilder<State, Action, Query> extends ElementBuilder<
   Query,
   HTMLMapElement
 > {
-  // TODO https://developer.mozilla.org/en-US/docs/Web/HTML/Element/map
+  name(value: Attribute<State, string>) {
+    return this.attr('name', value)
+  }
 }
+
+export type HttpEquivValue =
+  | 'content-security-policy'
+  | 'content-type'
+  | 'default-style'
+  | 'x-ua-compatible'
+  | 'refresh'
 
 export class MetaElementBuilder<State, Action, Query> extends ElementBuilder<
   State,
@@ -3002,7 +3238,18 @@ export class MetaElementBuilder<State, Action, Query> extends ElementBuilder<
   Query,
   HTMLMetaElement
 > {
-  // TODO https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta
+  charset(value: Attribute<State, string>) {
+    return this.attr('charset', value)
+  }
+  content(value: Attribute<State, string>) {
+    return this.attr('content', value)
+  }
+  httpEquiv(value: Attribute<State, HttpEquivValue>) {
+    return this.attr('http-equiv', value)
+  }
+  name(value: Attribute<State, string>) {
+    return this.attr('name', value)
+  }
 }
 
 export class MeterElementBuilder<State, Action, Query> extends ElementBuilder<
@@ -3011,7 +3258,27 @@ export class MeterElementBuilder<State, Action, Query> extends ElementBuilder<
   Query,
   HTMLMeterElement
 > {
-  // TODO https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meter
+  form(value: Attribute<State, string>) {
+    return this.attr('step', value)
+  }
+  high(value: Attribute<State, number>) {
+    return this.attr('high', mapAttribute(value, String))
+  }
+  low(value: Attribute<State, number>) {
+    return this.attr('low', mapAttribute(value, String))
+  }
+  max(value: Attribute<State, number>) {
+    return this.attr('max', mapAttribute(value, String))
+  }
+  min(value: Attribute<State, number>) {
+    return this.attr('min', mapAttribute(value, String))
+  }
+  optimum(value: Attribute<State, number>) {
+    return this.attr('optimum', mapAttribute(value, String))
+  }
+  value(value: Attribute<State, number>) {
+    return this.attr('value', mapAttribute(value, String))
+  }
 }
 
 export class ModElementBuilder<State, Action, Query> extends ElementBuilder<
@@ -3020,7 +3287,12 @@ export class ModElementBuilder<State, Action, Query> extends ElementBuilder<
   Query,
   HTMLModElement
 > {
-  // TODO https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ins
+  cite(value: Attribute<State, string>) {
+    return this.attr('cite', value)
+  }
+  dateTime(value: Attribute<State, string>) {
+    return this.attr('datetime', value)
+  }
 }
 
 export class ObjectElementBuilder<State, Action, Query> extends ElementBuilder<
@@ -3029,8 +3301,33 @@ export class ObjectElementBuilder<State, Action, Query> extends ElementBuilder<
   Query,
   HTMLObjectElement
 > {
-  // TODO https://developer.mozilla.org/en-US/docs/Web/HTML/Element/object
+  data(value: Attribute<State, string>) {
+    return this.attr('data', value)
+  }
+  form(value: Attribute<State, string>) {
+    return this.attr('form', value)
+  }
+  height(value: Attribute<State, number>) {
+    return this.attr('height', mapAttribute(value, String))
+  }
+  name(value: Attribute<State, string>) {
+    return this.attr('name', value)
+  }
+  type(value: Attribute<State, string>) {
+    return this.attr('type', value)
+  }
+  typemustmatch(value: Attribute<State, string>) {
+    return this.attr('typemustmatch', value)
+  }
+  usemap(value: Attribute<State, string>) {
+    return this.attr('usemap', value)
+  }
+  width(value: Attribute<State, number>) {
+    return this.attr('width', mapAttribute(value, String))
+  }
 }
+
+export type OLTypeValue = 'a' | 'A' | 'i' | 'I' | '1' | 1
 
 export class OListElementBuilder<State, Action, Query> extends ElementBuilder<
   State,
@@ -3038,7 +3335,18 @@ export class OListElementBuilder<State, Action, Query> extends ElementBuilder<
   Query,
   HTMLOListElement
 > {
-  // TODO https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ol
+  reversed(value: Attribute<State, boolean>) {
+    return this.attr(
+      'reversed',
+      mapAttribute(value, toggleToString('reversed'))
+    )
+  }
+  start(value: Attribute<State, number>) {
+    return this.attr('start', mapAttribute(value, String))
+  }
+  type(value: Attribute<State, OLTypeValue>) {
+    return this.attr('type', mapAttribute(value, String))
+  }
 }
 
 export class OptGroupElementBuilder<
@@ -3046,7 +3354,15 @@ export class OptGroupElementBuilder<
   Action,
   Query
 > extends ElementBuilder<State, Action, Query, HTMLOptGroupElement> {
-  // TODO https://developer.mozilla.org/en-US/docs/Web/HTML/Element/optgroup
+  disabled(value: Attribute<State, boolean>) {
+    return this.attr(
+      'disabled',
+      mapAttribute(value, toggleToString('disabled'))
+    )
+  }
+  label(value: Attribute<State, string>) {
+    return this.attr('label', value)
+  }
 }
 
 export class OptionElementBuilder<State, Action, Query> extends ElementBuilder<
@@ -3055,7 +3371,24 @@ export class OptionElementBuilder<State, Action, Query> extends ElementBuilder<
   Query,
   HTMLOptionElement
 > {
-  // TODO https://developer.mozilla.org/en-US/docs/Web/HTML/Element/option
+  disabled(value: Attribute<State, boolean>) {
+    return this.attr(
+      'disabled',
+      mapAttribute(value, toggleToString('disabled'))
+    )
+  }
+  label(value: Attribute<State, string>) {
+    return this.attr('label', value)
+  }
+  selected(value: Attribute<State, boolean>) {
+    return this.attr(
+      'selected',
+      mapAttribute(value, toggleToString('selected'))
+    )
+  }
+  value(value: Attribute<State, string>) {
+    return this.attr('value', value)
+  }
 }
 
 export class OutputElementBuilder<State, Action, Query> extends ElementBuilder<
@@ -3064,7 +3397,15 @@ export class OutputElementBuilder<State, Action, Query> extends ElementBuilder<
   Query,
   HTMLOutputElement
 > {
-  // TODO https://developer.mozilla.org/en-US/docs/Web/HTML/Element/output
+  for(value: Attribute<State, string>) {
+    return this.attr('for', value)
+  }
+  form(value: Attribute<State, string>) {
+    return this.attr('form', value)
+  }
+  name(value: Attribute<State, string>) {
+    return this.attr('name', value)
+  }
 }
 
 export class ParamElementBuilder<State, Action, Query> extends ElementBuilder<
@@ -3073,7 +3414,12 @@ export class ParamElementBuilder<State, Action, Query> extends ElementBuilder<
   Query,
   HTMLParamElement
 > {
-  // TODO https://developer.mozilla.org/en-US/docs/Web/HTML/Element/param
+  name(value: Attribute<State, string>) {
+    return this.attr('name', value)
+  }
+  value(value: Attribute<State, string>) {
+    return this.attr('value', value)
+  }
 }
 
 export class PictureElementBuilder<State, Action, Query> extends ElementBuilder<
@@ -3082,7 +3428,7 @@ export class PictureElementBuilder<State, Action, Query> extends ElementBuilder<
   Query,
   HTMLPictureElement
 > {
-  // TODO https://developer.mozilla.org/en-US/docs/Web/HTML/Element/picture
+  // This element includes only global attributes.
 }
 
 export class ProgressElementBuilder<
@@ -3090,24 +3436,37 @@ export class ProgressElementBuilder<
   Action,
   Query
 > extends ElementBuilder<State, Action, Query, HTMLProgressElement> {
-  // TODO https://developer.mozilla.org/en-US/docs/Web/HTML/Element/progress
+  max(value: Attribute<State, number>) {
+    return this.attr('max', mapAttribute(value, String))
+  }
+  value(value: Attribute<State, number>) {
+    return this.attr('value', mapAttribute(value, String))
+  }
   onLoadEnd(
-    handler: EventHandlerTE<State, Action, ProgressEvent, HTMLProgressElement>
+    handler:
+      | EventHandlerTE<State, Action, ProgressEvent, HTMLProgressElement>
+      | undefined
   ) {
     return this.handle('loaddnd', handler as EventHandler<State, Action>)
   }
   onLoadStart(
-    handler: EventHandlerTE<State, Action, ProgressEvent, HTMLProgressElement>
+    handler:
+      | EventHandlerTE<State, Action, ProgressEvent, HTMLProgressElement>
+      | undefined
   ) {
     return this.handle('loadstart', handler as EventHandler<State, Action>)
   }
   onProgress(
-    handler: EventHandlerTE<State, Action, ProgressEvent, HTMLProgressElement>
+    handler:
+      | EventHandlerTE<State, Action, ProgressEvent, HTMLProgressElement>
+      | undefined
   ) {
     return this.handle('progress', handler as EventHandler<State, Action>)
   }
   onRateChange(
-    handler: EventHandlerTE<State, Action, PointerEvent, HTMLProgressElement>
+    handler:
+      | EventHandlerTE<State, Action, PointerEvent, HTMLProgressElement>
+      | undefined
   ) {
     return this.handle('ratechange', handler as EventHandler<State, Action>)
   }
@@ -3119,7 +3478,9 @@ export class QuoteElementBuilder<State, Action, Query> extends ElementBuilder<
   Query,
   HTMLQuoteElement
 > {
-  // TODO https://developer.mozilla.org/en-US/docs/Web/HTML/Element/quote
+  cite(value: Attribute<State, string>) {
+    return this.attr('cite', value)
+  }
 }
 
 export class ScriptElementBuilder<State, Action, Query> extends ElementBuilder<
@@ -3128,7 +3489,48 @@ export class ScriptElementBuilder<State, Action, Query> extends ElementBuilder<
   Query,
   HTMLScriptElement
 > {
-  // TODO https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script
+  async(value: Attribute<State, boolean>) {
+    return this.attr('async', mapAttribute(value, toggleToString('async')))
+  }
+  crossOrigin(value: Attribute<State, CrossOriginValue>) {
+    return this.attr('crossorigin', value)
+  }
+  defer(value: Attribute<State, boolean>) {
+    return this.attr('defer', mapAttribute(value, toggleToString('defer')))
+  }
+  integrity(value: Attribute<State, string>) {
+    return this.attr('integrity', value)
+  }
+  nomodule(value: Attribute<State, boolean>) {
+    return this.attr(
+      'nomodule',
+      mapAttribute(value, toggleToString('nomodule'))
+    )
+  }
+  nonce(value: Attribute<State, string>) {
+    return this.attr('nonce', value)
+  }
+  referrerpolicy(
+    value: Attribute<
+      State,
+      | 'no-referrer'
+      | 'no-referrer-when-downgrade'
+      | 'origin'
+      | 'origin-when-cross-origin'
+      | 'same-origin'
+      | 'strict-origin'
+      | 'strict-origin-when-cross-origin'
+      | 'unsafe-url'
+    >
+  ) {
+    return this.attr('referrerpolicy', value)
+  }
+  src(value: Attribute<State, string>) {
+    return this.attr('src', value)
+  }
+  type(value: Attribute<State, string>) {
+    return this.attr('type', value)
+  }
 }
 
 export class SelectElementBuilder<State, Action, Query> extends ElementBuilder<
@@ -3137,7 +3539,45 @@ export class SelectElementBuilder<State, Action, Query> extends ElementBuilder<
   Query,
   HTMLSelectElement
 > {
-  // TODO https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select
+  autoComplete(value: Attribute<State, ListValue<AutoCompleteValue>>) {
+    return this.attr(
+      'autocomplete',
+      mapAttribute(value, spaceSeparatedToString)
+    )
+  }
+  autoFocus(value: Attribute<State, boolean>) {
+    return this.attr(
+      'autofocus',
+      mapAttribute(value, toggleToString('disabled'))
+    )
+  }
+  disabled(value: Attribute<State, boolean>) {
+    return this.attr(
+      'disabled',
+      mapAttribute(value, toggleToString('disabled'))
+    )
+  }
+  form(value: Attribute<State, string>) {
+    return this.attr('form', value)
+  }
+  multiple(value: Attribute<State, boolean>) {
+    return this.attr(
+      'multiple',
+      mapAttribute(value, toggleToString('multiple'))
+    )
+  }
+  name(value: Attribute<State, string>) {
+    return this.attr('name', value)
+  }
+  required(value: Attribute<State, boolean>) {
+    return this.attr(
+      'required',
+      mapAttribute(value, toggleToString('required'))
+    )
+  }
+  size(value: Attribute<State, number>) {
+    return this.attr('size', mapAttribute(value, String))
+  }
 }
 
 export class SlotElementBuilder<State, Action, Query> extends ElementBuilder<
@@ -3146,9 +3586,11 @@ export class SlotElementBuilder<State, Action, Query> extends ElementBuilder<
   Query,
   HTMLSlotElement
 > {
-  // TODO https://developer.mozilla.org/en-US/docs/Web/HTML/Element/slot
+  name(value: Attribute<State, string>) {
+    return this.attr('name', value)
+  }
   onSlotChange(
-    handler: EventHandlerTE<State, Action, UIEvent, HTMLSlotElement>
+    handler: EventHandlerTE<State, Action, UIEvent, HTMLSlotElement> | undefined
   ) {
     return this.handle('slotchange', handler as EventHandler<State, Action>)
   }
@@ -3160,7 +3602,21 @@ export class SourceElementBuilder<State, Action, Query> extends ElementBuilder<
   Query,
   HTMLSourceElement
 > {
-  // TODO https://developer.mozilla.org/en-US/docs/Web/HTML/Element/source
+  media(value: Attribute<State, string>) {
+    return this.attr('media', value)
+  }
+  sizes(value: Attribute<State, ListValue<string>>) {
+    return this.attr('sizes', mapAttribute(value, commaSeparatedToString))
+  }
+  src(value: Attribute<State, string>) {
+    return this.attr('src', value)
+  }
+  srcset(value: Attribute<State, string>) {
+    return this.attr('srcset', value)
+  }
+  type(value: Attribute<State, string>) {
+    return this.attr('type', value)
+  }
 }
 
 export class StyleElementBuilder<State, Action, Query> extends ElementBuilder<
@@ -3169,7 +3625,18 @@ export class StyleElementBuilder<State, Action, Query> extends ElementBuilder<
   Query,
   HTMLStyleElement
 > {
-  // TODO https://developer.mozilla.org/en-US/docs/Web/HTML/Element/style
+  type(value: Attribute<State, string>) {
+    return this.attr('type', value)
+  }
+  media(value: Attribute<State, string>) {
+    return this.attr('media', value)
+  }
+  nonce(value: Attribute<State, string>) {
+    return this.attr('nonce', value)
+  }
+  title(value: Attribute<State, string>) {
+    return this.attr('title', value)
+  }
 }
 
 export class TableColElementBuilder<
@@ -3177,7 +3644,9 @@ export class TableColElementBuilder<
   Action,
   Query
 > extends ElementBuilder<State, Action, Query, HTMLTableColElement> {
-  // TODO https://developer.mozilla.org/en-US/docs/Web/HTML/Element/col
+  span(value: Attribute<State, number>) {
+    return this.attr('span', mapAttribute(value, String))
+  }
 }
 
 export class TableDataCellElementBuilder<
@@ -3185,23 +3654,106 @@ export class TableDataCellElementBuilder<
   Action,
   Query
 > extends ElementBuilder<State, Action, Query, HTMLTableDataCellElement> {
-  // TODO https://developer.mozilla.org/en-US/docs/Web/HTML/Element/td
+  colSpan(value: Attribute<State, number>) {
+    return this.attr('colspan', mapAttribute(value, String))
+  }
+  headers(value: Attribute<State, ListValue<string>>) {
+    return this.attr('headers', mapAttribute(value, spaceSeparatedToString))
+  }
+  rowSpan(value: Attribute<State, number>) {
+    return this.attr('rowspan', mapAttribute(value, String))
+  }
 }
+
+export type THCellScope = 'row' | 'col' | 'rowgroup' | 'colgroup' | 'auto'
 
 export class TableHeaderCellElementBuilder<
   State,
   Action,
   Query
 > extends ElementBuilder<State, Action, Query, HTMLTableHeaderCellElement> {
-  // TODO https://developer.mozilla.org/en-US/docs/Web/HTML/Element/th
+  abbr(value: Attribute<State, number>) {
+    return this.attr('abbr', mapAttribute(value, String))
+  }
+  colSpan(value: Attribute<State, number>) {
+    return this.attr('colspan', mapAttribute(value, String))
+  }
+  headers(value: Attribute<State, ListValue<string>>) {
+    return this.attr('headers', mapAttribute(value, spaceSeparatedToString))
+  }
+  rowSpan(value: Attribute<State, number>) {
+    return this.attr('rowspan', mapAttribute(value, String))
+  }
+  scope(value: Attribute<State, THCellScope>) {
+    return this.attr('scope', value)
+  }
 }
+
+export type SpellCheckValue = true | false | 'true' | 'false' | 'default'
+export type WrapValue = 'hard' | 'soft'
 
 export class TextAreaElementBuilder<
   State,
   Action,
   Query
 > extends ElementBuilder<State, Action, Query, HTMLTextAreaElement> {
-  // TODO https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea
+  autoComplete(value: Attribute<State, ListValue<AutoCompleteValue>>) {
+    return this.attr(
+      'autocomplete',
+      mapAttribute(value, spaceSeparatedToString)
+    )
+  }
+  autoFocus(value: Attribute<State, boolean>) {
+    return this.attr(
+      'autofocus',
+      mapAttribute(value, toggleToString('autofocus'))
+    )
+  }
+  cols(value: Attribute<State, number>) {
+    return this.attr('cols', mapAttribute(value, String))
+  }
+  disabled(value: Attribute<State, boolean>) {
+    return this.attr(
+      'disabled',
+      mapAttribute(value, toggleToString('disabled'))
+    )
+  }
+  form(value: Attribute<State, string>) {
+    return this.attr('form', value)
+  }
+  maxlength(value: Attribute<State, number>) {
+    return this.attr('maxlength', mapAttribute(value, String))
+  }
+  minlength(value: Attribute<State, number>) {
+    return this.attr('minlength', mapAttribute(value, String))
+  }
+  name(value: Attribute<State, string>) {
+    return this.attr('name', value)
+  }
+  placeholder(value: Attribute<State, string>) {
+    return this.attr('placeholder', value)
+  }
+  readonly(value: Attribute<State, boolean>) {
+    return this.attr(
+      'readonly',
+      mapAttribute(value, toggleToString('readonly'))
+    )
+  }
+  required(value: Attribute<State, boolean>) {
+    return this.attr(
+      'required',
+      mapAttribute(value, toggleToString('required'))
+    )
+  }
+  rows(value: Attribute<State, number>) {
+    return this.attr('rows', mapAttribute(value, String))
+  }
+  spellCheck(value: Attribute<State, SpellCheckValue>) {
+    return this.attr('spellcheck', mapAttribute(value, String))
+  }
+  wrap(value: Attribute<State, WrapValue>) {
+    return this.attr('wrap', mapAttribute(value, String))
+  }
 }
 
 export class TimeElementBuilder<State, Action, Query> extends ElementBuilder<
@@ -3210,8 +3762,17 @@ export class TimeElementBuilder<State, Action, Query> extends ElementBuilder<
   Query,
   HTMLTimeElement
 > {
-  // TODO https://developer.mozilla.org/en-US/docs/Web/HTML/Element/time
+  dateTime(value: Attribute<State, string>) {
+    return this.attr('datetime', value)
+  }
 }
+
+export type TrackKindValue =
+  | 'subtitles'
+  | 'captions'
+  | 'descriptions'
+  | 'chapters'
+  | 'metadata'
 
 export class TrackElementBuilder<State, Action, Query> extends ElementBuilder<
   State,
@@ -3219,8 +3780,24 @@ export class TrackElementBuilder<State, Action, Query> extends ElementBuilder<
   Query,
   HTMLTrackElement
 > {
-  // TODO https://developer.mozilla.org/en-US/docs/Web/HTML/Element/track
-  onCueChange(handler: EventHandlerTE<State, Action, Event, HTMLTrackElement>) {
+  default(value: Attribute<State, boolean>) {
+    return this.attr('default', mapAttribute(value, toggleToString('default')))
+  }
+  kind(value: Attribute<State, TrackKindValue>) {
+    return this.attr('kind', value)
+  }
+  label(value: Attribute<State, string>) {
+    return this.attr('label', value)
+  }
+  src(value: Attribute<State, string>) {
+    return this.attr('src', value)
+  }
+  srclang(value: Attribute<State, string>) {
+    return this.attr('srclang', value)
+  }
+  onCueChange(
+    handler: EventHandlerTE<State, Action, Event, HTMLTrackElement> | undefined
+  ) {
     return this.handle('cuechange', handler as EventHandler<State, Action>)
   }
 }
@@ -3230,7 +3807,21 @@ export class VideoElementBuilder<
   Action,
   Query
 > extends MediaElementBuilder<State, Action, Query, HTMLVideoElement> {
-  // TODO https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video
+  height(value: Attribute<State, number>) {
+    return this.attr('height', mapAttribute(value, String))
+  }
+  playsInline(value: Attribute<State, boolean>): this {
+    return this.attr(
+      'playsinline',
+      mapAttribute(value, toggleToString('playsinline'))
+    )
+  }
+  poster(value: Attribute<State, string>) {
+    return this.attr('poster', value)
+  }
+  width(value: Attribute<State, number>) {
+    return this.attr('width', mapAttribute(value, String))
+  }
 }
 
 // transforms

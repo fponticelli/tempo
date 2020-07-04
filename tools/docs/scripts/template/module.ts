@@ -1,11 +1,8 @@
 import { h1, div, a } from 'tempo-dom/lib/html'
-import { mapState, mapField } from 'tempo-dom/lib/map'
-import { forEach } from 'tempo-dom/lib/for_each'
 import { entityTemplate } from './entity_template'
 import { baseDoc } from './base_doc'
 import { moduleToc } from './module_toc'
 import { State } from './state'
-import { fragment } from 'tempo-dom/lib/fragment'
 
 const getUrl = (project: string, module: string) => {
   return `https://github.com/fponticelli/tempo/edit/master/${project}/src/${module}`

@@ -19,7 +19,7 @@ export const optionsSelection = div<TestOptions, Action, unknown>($ =>
   $.table($ =>
     $.tr($ =>
       $.th($ =>
-        $.label($ => $.for('options_max_time').text('max execution time'))
+        $.labelEl($ => $.for('options_max_time').text('max execution time'))
       ).td($ =>
         $.class('option-value').inputNumber($ =>
           $.id('options_max_time')

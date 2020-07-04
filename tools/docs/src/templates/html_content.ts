@@ -1,25 +1,22 @@
 import { unsafeHtml } from 'dom/lib/lifecycle/unsafe_html'
 import { Action } from '../action'
-import { fragment } from 'dom/lib/impl/fragment'
-import { when } from 'dom/lib/impl/when'
-import { div, a, article } from 'tempo-dom/lib/html'
+import { fragment } from 'tempo-dom/lib/html'
 
 export const htmlContent = fragment<
   { title: string | undefined; html: string; path: string | undefined },
-  Action
->(
-  when(
-    { condition: s => typeof s.path === 'string' },
-    div(
-      { attrs: { class: 'top-right' } },
-      a({ attrs: { href: s => s.path } }, '✏️ edit me')
+  Action,
+  unknown
+>($ =>
+  $.when(
+    s => typeof s.path === 'string',
+    $ =>
+      $.div($ =>
+        $.class('top-right').a($ => $.href(s => s.path).text('✏️ edit me'))
+      )
+  )
+    .when(
+      s => typeof s === 'string',
+      $ => $.text(s => s.title)
     )
-  ),
-  when({ condition: s => typeof s === 'string' }, s => s.title),
-  article({
-    attrs: {
-      class: 'content'
-    },
-    lifecycle: unsafeHtml(s => s.html)
-  })
+    .article($ => $.class('content').lifecycle(unsafeHtml(s => s.html)))
 )

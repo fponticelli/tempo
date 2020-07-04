@@ -36,7 +36,7 @@ export const template = fragment<State, Action, unknown>($ =>
             .inputText($ =>
               $.class('new-todo')
                 .placeholder('What needs to be done?')
-                .autofocus(s => s.editing == null)
+                .autoFocus(s => s.editing == null)
                 .value(s => s.adding)
                 .onKeyDown((_, ev, input) => {
                   if (ev.keyCode === 13) {
@@ -57,7 +57,7 @@ export const template = fragment<State, Action, unknown>($ =>
                 .checked(s => s.completed === s.todos.length)
                 .onClick(() => Action.toggleAllTodo)
             )
-            .label($ => $.for('toggle-all').text('Mark all as complete'))
+            .labelEl($ => $.for('toggle-all').text('Mark all as complete'))
             .ul($ =>
               $.class('todo-list').iterate(
                 s => s.filtered,
@@ -74,7 +74,7 @@ export const template = fragment<State, Action, unknown>($ =>
                               .checked(([todo]) => todo.completed)
                               .onChange(([todo]) => Action.toggleTodo(todo.id))
                           )
-                          .label($ =>
+                          .labelEl($ =>
                             $.onDblClick(([todo]) =>
                               Action.editingTodo(todo.id, todo.title)
                             ).text(([todo]) => todo.title)
@@ -130,7 +130,7 @@ export const template = fragment<State, Action, unknown>($ =>
       .footer($ =>
         $.class('footer')
           .style('display', s => (s.todos.length === 0 ? 'none' : 'block'))
-          .span($ =>
+          .spanEl($ =>
             $.class('todo-count').text(s => {
               const left = s.todos.length - s.completed
               if (left === 1) {

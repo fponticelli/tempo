@@ -1,21 +1,21 @@
-import { div, nav, a, img, main, span } from 'tempo-dom/lib/html'
-import { matchAsyncResult } from 'tempo-dom/lib/match'
-import { mapState, mapField } from 'dom/lib/map_state'
-import { State } from '../state'
+import {
+  div,
+  img,
+  matchAsyncResult,
+  iterate,
+  mapField
+} from 'tempo-dom/lib/html'
+import { State, Content } from '../state'
 import { Action } from '../action'
 import { Toc } from '../toc'
-import { HttpError } from '../request'
 import { content } from './content'
-import { sidebar } from './sidebar'
-import { holdState } from 'dom/lib/impl/hold_state'
+import { HttpError } from '../request'
 import { link, maybeLink } from './link'
 import { Route, sameRoute } from '../route'
 import { none, some } from 'tempo-std/lib/option'
-import { iterateItems } from 'dom/lib/impl/iterate'
-import { ProjectRef } from '../toc'
 import { loader } from './loader'
-
-const { capture, release } = holdState<State>()
+import { sidebar } from './sidebar'
+import { AsyncResult } from 'tempo-std/lib/async_result'
 
 const toggleMenu = (
   _s: State,
@@ -42,137 +42,148 @@ const toggleMenu = (
   return undefined
 }
 
-export const template = div<State, Action>(
-  { attrs: { class: 'app' } },
-  nav(
-    {
-      attrs: {
-        class: 'navbar has-shadow',
-        role: 'navigation',
-        'aria-label': 'main navigation'
-      }
-    },
-    div(
-      { attrs: { class: 'container' } },
-      div(
-        { attrs: { class: 'navbar-brand' } },
-        a(
-          {
-            attrs: {
-              role: 'button',
-              class: 'navbar-burger burger',
-              'aria-label': 'menu',
-              'aria-expanded': 'false',
-              'data-target': 'navbarBasicExample'
-            },
-            events: { click: toggleMenu }
-          },
-          span({ attrs: { 'aria-hidden': true } }),
-          span({ attrs: { 'aria-hidden': true } }),
-          span({ attrs: { 'aria-hidden': true } })
-        ),
-        link({
-          label: img({
-            attrs: {
-              src: 'assets/icon-512x512.png',
-              alt: 'Tempo',
-              'aria-hidden': true
-            }
-          }),
-          route: Route.home,
-          class: 'navbar-item'
-        })
-      ),
-      div(
-        { attrs: { class: 'navbar-menu' } },
-        div(
-          { attrs: { class: 'navbar-start' } },
-          link({
-            label: 'Tempo',
-            route: Route.home,
-            class: 'navbar-item'
-          })
-        ),
-        div(
-          { attrs: { class: 'navbar-end' } },
-          a(
-            {
-              attrs: {
-                class: 'navbar-item',
-                href: 'https://github.com/fponticelli/tempo'
-              }
-            },
-            img({
-              attrs: {
-                src: 'assets/github-mark-64px.png',
-                alt: 'Github Project'
-              }
-            })
-          ),
-          maybeLink({
-            label: 'Demos',
-            route: s =>
-              sameRoute(Route.demos, s.route) ? none : some(Route.demos),
-            class: 'navbar-item'
-          }),
-          div(
-            { attrs: { class: 'navbar-item has-dropdown is-hoverable' } },
-            a({ attrs: { class: 'navbar-link' } }, 'Projects'),
-            div(
-              { attrs: { class: 'navbar-dropdown' } },
-              mapField(
-                'toc',
-                matchAsyncResult<Toc, HttpError, unknown, Action>({
-                  Failure: '',
-                  Loading: '',
-                  NotAsked: '',
-                  Success: iterateItems(
-                    { map: s => s.projects },
-                    link<ProjectRef>({
-                      label: s => s.title,
-                      route: s => Route.project(s.name),
+export const template = div<State, Action, unknown>($ =>
+  $.class('app')
+    .nav($ =>
+      $.class('navbar has-shadow')
+        .role('navigation')
+        .ariaLabel('main navigation')
+        .div($ =>
+          $.class('container')
+            .div($ =>
+              $.class('navabar-brand')
+                .a($ =>
+                  $.role('button')
+                    .class('navbar-burger burger')
+                    .ariaLabel('menu')
+                    .ariaExpanded(false)
+                    .data('target', 'navbarBasicExample')
+                    .onClick(toggleMenu)
+                    .spanEl($ => $.ariaHidden(true))
+                    .spanEl($ => $.ariaHidden(true))
+                    .spanEl($ => $.ariaHidden(true))
+                )
+                .append(
+                  link({
+                    label: img($ =>
+                      $.src('assets/icon-512x512.png')
+                        .alt('Tempo')
+                        .ariaHidden(true)
+                    ),
+                    route: Route.home,
+                    class: 'navbar-item'
+                  })
+                )
+            )
+            .div($ =>
+              $.class('navbar-menu')
+                .div($ =>
+                  $.class('navabar-start').append(
+                    link({
+                      label: 'Tempo',
+                      route: Route.home,
                       class: 'navbar-item'
                     })
                   )
-                })
-              )
+                )
+                .div($ =>
+                  $.class('navabar-end')
+                    .a($ =>
+                      $.class('navbar-item')
+                        .href('https://github.com/fponticelli/tempo')
+                        .img($ =>
+                          $.src('assets/github-mark-64px.png').text(
+                            'Github Project'
+                          )
+                        )
+                    )
+                    .append(
+                      maybeLink({
+                        label: 'Demos',
+                        route: s =>
+                          sameRoute(Route.demos, s.route)
+                            ? none
+                            : some(Route.demos),
+                        class: 'navbar-item'
+                      })
+                    )
+                    .div($ =>
+                      $.class('navbar-item has-dropdown is-hoverable')
+                        .a($ => $.class('navbar-link').text('Projects'))
+                        .div($ =>
+                          $.class('navbar-dropdown').mapField('toc', $ =>
+                            $.append(
+                              matchAsyncResult<
+                                Toc,
+                                HttpError,
+                                unknown,
+                                Action,
+                                unknown
+                              >({
+                                Failure: '',
+                                Loading: '',
+                                NotAsked: '',
+                                Success: iterate(
+                                  s => s.projects,
+                                  $ =>
+                                    $.append(
+                                      link({
+                                        label: ([s]) => s.title,
+                                        route: ([s]) => Route.project(s.name),
+                                        class: 'navbar-item'
+                                      })
+                                    )
+                                )
+                              })
+                            )
+                          )
+                        )
+                    )
+                )
             )
-          )
+        )
+    )
+    //
+    .holdState<
+      Toc,
+      {
+        route: Route
+        content: AsyncResult<Content, HttpError, unknown>
+        toc: Toc
+      }
+    >(release =>
+      mapField('toc', $ =>
+        $.append(
+          matchAsyncResult({
+            NotAsked: '',
+            Loading: loader,
+            Success: release(
+              (state, toc) => ({
+                route: state.route,
+                content: state.content,
+                toc
+              }),
+              $ =>
+                $.main($ =>
+                  $.class('container').div($ =>
+                    $.class('columns is-mobile')
+                      .div($ =>
+                        $.class(
+                          'column has-background-light side-control scrollable'
+                        ).append(sidebar)
+                      )
+                      .div($ =>
+                        $.class('column scrollable main-column').mapState(
+                          ({ content }) => content,
+                          $ => $.append(content)
+                        )
+                      )
+                  )
+                )
+            ),
+            Failure: div($ => $.text(e => e.message))
+          })
         )
       )
     )
-  ),
-  capture(
-    mapField(
-      'toc',
-      matchAsyncResult<Toc, HttpError, unknown, Action>({
-        NotAsked: '',
-        Loading: loader,
-        Success: release(
-          main(
-            { attrs: { class: 'container' } },
-            div(
-              { attrs: { class: 'columns is-mobile' } },
-              div(
-                {
-                  attrs: {
-                    class: 'column has-background-light side-control scrollable'
-                  }
-                },
-                mapState(
-                  { map: ([state, toc]) => ({ toc, route: state.route }) },
-                  sidebar
-                )
-              ),
-              div(
-                { attrs: { class: 'column scrollable main-column' } },
-                mapState({ map: ([state]) => state.content }, content)
-              )
-            )
-          )
-        ),
-        Failure: div({}, e => e.message)
-      })
-    )
-  )
 )

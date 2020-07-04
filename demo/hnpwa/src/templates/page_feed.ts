@@ -80,7 +80,7 @@ const listItemTemplate = li<[Item, PageFeed, number], Action, unknown>($ =>
     $.mapState(
       ([item]) => item,
       $ =>
-        $.append(listItemUrlTemplate).span($ =>
+        $.append(listItemUrlTemplate).spanEl($ =>
           $.class('domain')
             .text(s => s.domain)
             .append(itemFooterTemplate)

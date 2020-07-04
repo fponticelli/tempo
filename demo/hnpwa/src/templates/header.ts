@@ -40,9 +40,8 @@ const headerLink = (feed: Feed) => {
   }
   return fragment<Route, Action, unknown>($ =>
     $.when(condition, $ =>
-      $.span($ => $.ariaCurrent('page').append(toTitle(Route.feeds(feed, 1))))
-    )
-    .unless(condition, $ =>
+      $.spanEl($ => $.ariaCurrent('page').append(toTitle(Route.feeds(feed, 1))))
+    ).unless(condition, $ =>
       $.append(linkRoute({ route: Route.feeds(feed, 1) }))
     )
   )

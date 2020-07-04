@@ -77,9 +77,9 @@ export const paginationTemplate = section<
     )
     .div($ =>
       $.class('mobile')
-        .span($ => $.text(s => String(s.page)))
-        .span($ => $.text('/'))
-        .span($ => $.text(s => String(maxPage(s.feed))))
+        .spanEl($ => $.text(s => String(s.page)))
+        .spanEl($ => $.text('/'))
+        .spanEl($ => $.text(s => String(maxPage(s.feed))))
     )
     .append(nextPageLink)
 )

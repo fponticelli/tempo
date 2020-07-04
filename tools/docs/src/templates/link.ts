@@ -1,8 +1,6 @@
-import { fragment } from 'dom/lib/impl/fragment'
-import { matchBool } from 'tempo-dom/lib/match'
 import { Action } from '../action'
 import { toHref, Route } from '../route'
-import { a, span } from 'tempo-dom/lib/html'
+import { a, span, fragment } from 'tempo-dom/lib/html'
 import { getUnsafe, Option, toBoolean } from 'tempo-std/lib/option'
 import {
   Attribute,
@@ -10,24 +8,23 @@ import {
   attributeToHandler
 } from 'tempo-dom/lib/value'
 import { DOMChild } from 'tempo-dom/lib/template'
+import { IBuilder } from 'tempo-dom/lib/impl/builder'
+import 'tempo-core/lib/value'
 
 export const maybeLink = <State>(attrs: {
-  label: DOMChild<State, Action>
+  label: DOMChild<State, Action> | IBuilder<State, Action, unknown>
   route: Attribute<State, Option<Route>>
   class?: Attribute<State, string>
-}) =>
-  fragment<State, Action>(
-    matchBool({
+}): IBuilder<State, Action, unknown> =>
+  fragment<State, Action, unknown>($ =>
+    $.matchBool({
       condition: mapAttribute(attrs.route, toBoolean),
-      false: span(
-        {
-          attrs: {
-            class: mapAttribute(attrs.class || '', v =>
-              (v ? [v] : []).concat(['is-active']).join(' ')
-            )
-          }
-        },
-        attrs.label
+      false: span($ =>
+        $.class(
+          mapAttribute(attrs.class || '', v =>
+            (v ? [v] : []).concat(['is-active']).join(' ')
+          )
+        ).append(attrs.label)
       ),
       true: link({
         label: attrs.label,
@@ -38,26 +35,25 @@ export const maybeLink = <State>(attrs: {
   )
 
 export const link = <State>(attrs: {
-  label: DOMChild<State, Action>
+  label: DOMChild<State, Action> | IBuilder<State, Action, unknown>
   route: Attribute<State, Route>
   class?: Attribute<State, string>
-}) =>
-  a(
-    {
-      attrs: {
-        class: attrs.class,
-        href: mapAttribute<State, Route, string>(attrs.route, route =>
-          toHref(route)
+}): IBuilder<State, Action, unknown> =>
+  a<State, Action, unknown>($ =>
+    $.class(attrs.class)
+      .href(
+        mapAttribute<State, Route, string>(attrs.route, route => toHref(route))
+      )
+      .onClick(
+        attributeToHandler(
+          attrs.route,
+          (route: Route, e: Event): Action => {
+            e.preventDefault()
+            const url = toHref(route)
+            history.pushState(null, '', url || './')
+            return Action.goTo(route)
+          }
         )
-      },
-      events: {
-        click: attributeToHandler(attrs.route, (route: Route, e: Event) => {
-          e.preventDefault()
-          const url = toHref(route)
-          history.pushState(null, '', url || './')
-          return Action.goTo(route)
-        })
-      }
-    },
-    attrs.label
+      )
+      .append(attrs.label)
   )

@@ -1,9 +1,6 @@
 import { Action } from '../action'
 import { ProjectRef } from '../toc'
-import { div, p, a, span, article, img, br, h1 } from 'tempo-dom/lib/html'
-import { mapField } from 'dom/lib/map_state'
-import { when } from 'dom/lib/impl/when'
-import { forEach } from 'dom/lib/impl/for_each'
+import { article } from 'tempo-dom/lib/html'
 import { Route } from '../route'
 import { link } from './link'
 import { unsafeHtml } from 'dom/lib/lifecycle/unsafe_html'
@@ -12,52 +9,47 @@ function renamePackage(s: string) {
   return s
 }
 
-export const projectContent = article<ProjectRef, Action>(
-  { attrs: { class: 'content' } },
-  h1({ attrs: { class: 'title' } }, s => s.title),
-  p({ attrs: { class: 'subtitle' } }, s => s.description),
-  mapField<ProjectRef, 'keywords', Action>(
-    'keywords',
-    when(
-      { condition: tags => tags.length > 0 },
-      div(
-        { attrs: { class: 'tags' } },
-        forEach(
-          {},
-          span({ attrs: { class: 'tag' } }, s => s)
+export const projectContent = article<ProjectRef, Action, unknown>($ =>
+  $.class('content').h1($ =>
+    $.class('title')
+      .text(s => s.title)
+      .p($ => $.class('subtitile').text(s => s.description))
+      .mapField('keywords', $ =>
+        $.when(
+          tags => tags.length > 0,
+          $ =>
+            $.div($ =>
+              $.class('tags').forEach($ =>
+                $.spanEl($ => $.class('tag').text(s => s))
+              )
+            )
         )
       )
-    )
-  ),
-  p(
-    { attrs: { class: 'version' } },
-    a(
-      {
-        attrs: {
-          href: s =>
-            `https://www.npmjs.com/package/tempo-${renamePackage(s.name)}`
-        }
-      },
-      img({
-        attrs: {
-          src: s =>
-            `https://img.shields.io/npm/v/tempo-${renamePackage(
-              s.name
-            )}?label=npm%3A%20tempo-${renamePackage(s.name)}`,
-          alt: s => `npm tempo ${s.name}`
-        }
-      })
-    ),
-    br({}),
-    a(
-      { attrs: {} },
-      link({
-        label: 'change log',
-        route: p => Route.changelog(p.name)
-      })
-    )
-  ),
-  div({
-    lifecycle: unsafeHtml(s => s.content)
-  })
+      .p($ =>
+        $.class('version')
+          .a($ =>
+            $.href(
+              s =>
+                `https://www.npmjs.com/package/tempo-${renamePackage(s.name)}`
+            ).img($ =>
+              $.src(
+                s =>
+                  `https://img.shields.io/npm/v/tempo-${renamePackage(
+                    s.name
+                  )}?label=npm%3A%20tempo-${renamePackage(s.name)}`
+              ).alt(s => `npm tempo ${s.name}`)
+            )
+          )
+          .br()
+          .a($ =>
+            $.append(
+              link({
+                label: 'change log',
+                route: p => Route.changelog(p.name)
+              })
+            )
+          )
+      )
+      .div($ => $.lifecycle(unsafeHtml(s => s.content)))
+  )
 )

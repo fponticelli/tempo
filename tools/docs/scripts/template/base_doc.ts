@@ -1,13 +1,7 @@
-import { fragment } from 'tempo-dom/lib/fragment'
 import { BaseDoc } from '../parse/jsdoc'
 import { div, span, h2, ul, li, input, pre, p } from 'tempo-dom/lib/html'
-import { when } from 'tempo-dom/lib/when'
-import { mapField, mapState } from 'tempo-dom/lib/map'
-import { matchOption } from 'tempo-dom/lib/match'
-import { unsafeHtml } from 'tempo-dom/lib/unsafe_html'
 import { isSome } from 'tempo-std/lib/option'
 import { markdown } from '../utils/markdown'
-import { forEach } from 'tempo-dom/lib/for_each'
 import { highlight } from '../utils/highlight'
 
 export const description = mapField<BaseDoc, 'description', unknown>(
