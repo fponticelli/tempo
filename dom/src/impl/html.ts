@@ -91,6 +91,7 @@ import { AsyncResult } from 'tempo-std/lib/async_result'
 import { LazyTemplate } from './lazy'
 
 export { el }
+export { childOrBuilderToTemplate } from './builder'
 
 // dom specific
 export function a<State, Action, Query>(

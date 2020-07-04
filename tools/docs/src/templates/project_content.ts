@@ -3,7 +3,7 @@ import { ProjectRef } from '../toc'
 import { article } from 'tempo-dom/lib/html'
 import { Route } from '../route'
 import { link } from './link'
-import { unsafeHtml } from 'dom/lib/lifecycle/unsafe_html'
+import { unsafeHtml } from 'tempo-dom/lib/lifecycle/unsafe_html'
 
 function renamePackage(s: string) {
   return s

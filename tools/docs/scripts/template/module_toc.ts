@@ -1,4 +1,4 @@
-import { nav, ul, li, a, p } from 'tempo-dom/lib/html'
+import { nav } from 'tempo-dom/lib/html'
 import { State } from './state'
 
 const mapModuleToToc = (state: State) => {
@@ -12,26 +12,22 @@ const mapModuleToToc = (state: State) => {
   }))
 }
 
-export const moduleToc = nav<State, unknown>(
-  {},
-  mapState(
-    { map: mapModuleToToc },
-    when(
-      { condition: s => s.length > 5 },
-      p({ attrs: { class: 'title is-6' } }, 'Table of Contents'),
-      ul(
-        { attrs: { class: 'module-toc-list' } },
-        forEach(
-          {},
-          li(
-            { attrs: {} },
-            a(
-              { attrs: { href: s => s.path, class: 'is-family-monospace' } },
-              s => s.name
+export const moduleToc = nav<State, unknown, unknown>($ =>
+  $.mapState(mapModuleToToc, $ =>
+    $.when(
+      s => s.length > 5,
+      $ =>
+        $.p($ => $.class('title is-6').text('Table of Contents')).ul($ =>
+          $.class('module-toc-list').forEach($ =>
+            $.li($ =>
+              $.a($ =>
+                $.href(s => s.path)
+                  .class('is-family-monospace')
+                  .text(s => s.name)
+              )
             )
           )
         )
-      )
     )
   )
 )

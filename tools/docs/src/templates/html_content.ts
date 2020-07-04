@@ -1,4 +1,4 @@
-import { unsafeHtml } from 'dom/lib/lifecycle/unsafe_html'
+import { unsafeHtml } from 'tempo-dom/lib/lifecycle/unsafe_html'
 import { Action } from '../action'
 import { fragment } from 'tempo-dom/lib/html'
 

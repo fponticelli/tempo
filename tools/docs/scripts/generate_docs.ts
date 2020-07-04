@@ -3,6 +3,7 @@ import { moduleFromSourceFile } from './parse/module'
 import * as path from 'path'
 import { module } from './template/module'
 import { DOMContext } from 'tempo-dom/lib/context'
+import { childOrBuilderToTemplate } from 'tempo-dom/lib/html'
 import { JSDOM } from 'jsdom'
 import * as fse from 'fs-extra'
 import { formatHtml } from './template/html'
@@ -28,7 +29,11 @@ const moduleToHtmlPath = (mod: string) => {
   return mod.substring(0, mod.length - 3) + '.html'
 }
 
-const processProject = (destPath: string, basePath: string, renderModule: (module: State) => string) => (name: string) => {
+const processProject = (
+  destPath: string,
+  basePath: string,
+  renderModule: (module: State) => string
+) => (name: string) => {
   const modules = getModules(basePath, name)
   modules.forEach(module => {
     const state = {
@@ -55,11 +60,15 @@ const processProject = (destPath: string, basePath: string, renderModule: (modul
 const makeHtml = (state: State) => {
   const dom = new JSDOM()
   const ctx = DOMContext.fromElement(dom.window.document.body, () => ({}))
-  module.render(ctx, state)
+  childOrBuilderToTemplate(module).render(ctx, state)
   return formatHtml(dom.window.document.body.innerHTML)
 }
 
-export const generateDocs = async (projects: string[], basePath: string, destPath: string): Promise<Record<string, ApiRef[]>> => {
+export const generateDocs = async (
+  projects: string[],
+  basePath: string,
+  destPath: string
+): Promise<Record<string, ApiRef[]>> => {
   const renderModule = (state: State) => {
     return makeHtml(state)
   }

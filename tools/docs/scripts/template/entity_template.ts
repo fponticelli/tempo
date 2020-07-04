@@ -2,8 +2,9 @@ import { description, todos, examples, tags } from './base_doc'
 import { title } from './title'
 import { signature } from './signature'
 import { DocEntity } from '../parse/doc_entity'
-import { a, p, pre } from 'tempo-dom/lib/html'
+import { fragment } from 'tempo-dom/lib/html'
 import { highlight } from '../utils/highlight'
+import { unsafeHtml } from 'tempo-dom/lib/lifecycle/unsafe_html'
 
 const getUrl = (project: string, module: string, line: number) => {
   return `https://github.com/fponticelli/tempo/blob/master/${project}/src/${module}#L${line}`
@@ -19,29 +20,29 @@ const getImport = (name: string, project: string, module: string) => {
 
 export const signatures = fragment<
   DocEntity & { project: string; module: string },
+  unknown,
   unknown
->(
-  mapField<DocEntity, 'signatures', unknown>(
-    'signatures',
-    forEach({}, signature)
-  ),
-  p(
-    { attrs: { class: 'defined-in' } },
-    'defined in ',
-    a(
-      { attrs: { href: s => getUrl(s.project, s.module, s.line) } },
-      s => getModule(s.project, s.module),
-      ' at line ',
-      s => String(s.line)
+>($ =>
+  $.mapField('signatures', $ => $.forEach($ => $.append(signature)))
+    .p($ =>
+      $.class('defined-in')
+        .text('defined in ')
+        .a($ =>
+          $.href(s => getUrl(s.project, s.module, s.line))
+            .text(s => getModule(s.project, s.module))
+            .text(' at line ')
+            .text(s => String(s.line))
+        )
     )
-  ),
-  pre(
-    { attrs: { class: 'import-code ts language-ts' } },
-    unsafeHtml({}, s => highlight(getImport(s.name, s.project, s.module)))
-  )
+    .pre($ =>
+      $.class('import-code ts language-ts').lifecycle(
+        unsafeHtml(s => highlight(getImport(s.name, s.project, s.module)))
+      )
+    )
 )
 
 export const entityTemplate = fragment<
   DocEntity & { project: string; module: string },
+  unknown,
   unknown
->(title, tags, description, todos, signatures, examples)
+>($ => $.appendMany(title, tags, description, todos, signatures, examples))
