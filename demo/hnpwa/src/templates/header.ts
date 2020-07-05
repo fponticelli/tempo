@@ -13,21 +13,23 @@ limitations under the License.
 
 import { Action } from '../action'
 import { Route, Feed, toTitle } from '../route'
-import { header, i, div, fragment } from 'tempo-dom/lib/html'
+import { header, i, fragment } from 'tempo-dom/lib/html'
 import { linkRoute } from './link_route'
+import { svg } from 'tempo-dom/lib/svg'
 
-const logo = div<Route, Action, unknown>($ => $.text('LOGO'))
-// svg<Route, Action>(
-//   { attrs: { width: 32, height: 32, viewBox: `0 0 32 32` } },
-//   g(
-//     { styles: { fill: 'none' } },
-//     rect({ attrs: { x: 0, y: 0, fill: '#ffffff', width: 8, height: 8 } }),
-//     rect({ attrs: { x: 11, y: 0, fill: '#ffffff', width: 8, height: 8 } }),
-//     rect({ attrs: { x: 22, y: 0, fill: '#ffffff', width: 8, height: 8 } }),
-//     rect({ attrs: { x: 11, y: 11, fill: '#ffffff', width: 8, height: 8 } }),
-//     rect({ attrs: { x: 11, y: 22, fill: '#ffffff', width: 8, height: 8 } })
-//   )
-// )
+const logo = svg<Route, Action, unknown>($ =>
+  $.width(32)
+    .height(32)
+    .viewBox('0 0 32 32')
+    .g($ =>
+      $.fill('#ffffff')
+        .rect($ => $.x(0).y(0).width(8).height(8))
+        .rect($ => $.x(11).y(0).width(8).height(8))
+        .rect($ => $.x(22).y(0).width(8).height(8))
+        .rect($ => $.x(11).y(11).width(8).height(8))
+        .rect($ => $.x(11).y(22).width(8).height(8))
+    )
+)
 
 const headerLink = (feed: Feed) => {
   const condition = (route: Route) => {

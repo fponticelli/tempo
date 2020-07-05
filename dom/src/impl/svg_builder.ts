@@ -909,13 +909,10 @@ export class BaseSVGBuilder<State, Action, Query> extends DOMBuilder<
     )
   }
   rect(
-    // TODO
-    init?: (
-      builder: SVGElementBuilder<State, Action, Query, SVGRectElement>
-    ) => void
+    init?: (builder: SVGRectElementBuilder<State, Action, Query>) => void
   ): this {
     return initBuilder(
-      new SVGElementBuilder<State, Action, Query, SVGRectElement>('rect'),
+      new SVGRectElementBuilder<State, Action, Query>(),
       init,
       this
     )
@@ -1161,7 +1158,25 @@ export class SVGElementBuilder<State, Action, Query, El extends SVGElement>
 
   // presentation attributes // TODO
   // https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/clip-path
-  // clip-path, clip-rule, color, color-interpolation, color-rendering, cursor, display, fill, fill-opacity, fill-rule, filter, mask, opacity, pointer-events, shape-rendering, stroke, stroke-dasharray, stroke-dashoffset, stroke-linecap, stroke-linejoin, stroke-miterlimit, stroke-opacity, stroke-width, transform, vector-effect, visibility
+  // clip-path, clip-rule, color, color-interpolation, color-rendering, cursor, display,
+  fill(value: Attribute<State, string>) {
+    return this.attr('fill', value)
+  }
+  fillOpacity(value: Attribute<State, number | string>): this {
+    return this.attr('fill-opacity', mapAttribute(value, String))
+  }
+  fillRule(value: Attribute<State, 'nonzero' | 'evenodd'>): this {
+    return this.attr('fill-rule', value)
+  }
+  // filter, mask, opacity, pointer-events, shape-rendering,
+  stroke(value: Attribute<State, string>) {
+    return this.attr('stroke', value)
+  }
+  // stroke-dasharray, stroke-dashoffset, stroke-linecap, stroke-linejoin, stroke-miterlimit, stroke-opacity
+  strokeWidth(value: Attribute<State, number | string>): this {
+    return this.attr('stroke-width', mapAttribute(value, String))
+  }
+  // transform, vector-effect, visibility
 
   // aria
   ariaActiveDescendant(value: Attribute<State, string>) {
@@ -1608,11 +1623,23 @@ export class SVGSVGElementBuilder<
   constructor() {
     super('svg')
   }
-  viewport(value: Attribute<State, string>) {
-    return this.attr('viewport', value)
+  height(value: Attribute<State, number | string>): this {
+    return this.attr('height', mapAttribute(value, String))
   }
-  useCurrentView(value: Attribute<State, boolean>) {
-    return this.attr('useCurrentView', mapAttribute(value, booleanToString))
+  preserveAspectRatio(value: Attribute<State, string>): this {
+    return this.attr('preserveAspectRatio', value)
+  }
+  viewBox(value: Attribute<State, string>) {
+    return this.attr('viewBox', value)
+  }
+  width(value: Attribute<State, number | string>): this {
+    return this.attr('width', mapAttribute(value, String))
+  }
+  x(value: Attribute<State, number | string>): this {
+    return this.attr('x', mapAttribute(value, String))
+  }
+  y(value: Attribute<State, number | string>): this {
+    return this.attr('y', mapAttribute(value, String))
   }
 }
 
@@ -1859,5 +1886,36 @@ export class SVGFEBlendElementBuilder<
   }
   mode(value: Attribute<State, BlendMode>): this {
     return this.attr('mode', value)
+  }
+}
+
+export class SVGRectElementBuilder<
+  State,
+  Action,
+  Query
+> extends SVGElementBuilder<State, Action, Query, SVGRectElement> {
+  constructor() {
+    super('rect')
+  }
+  x(value: Attribute<State, number | string>): this {
+    return this.attr('x', mapAttribute(value, String))
+  }
+  y(value: Attribute<State, number | string>): this {
+    return this.attr('y', mapAttribute(value, String))
+  }
+  width(value: Attribute<State, number | string>): this {
+    return this.attr('width', mapAttribute(value, String))
+  }
+  height(value: Attribute<State, number | string>): this {
+    return this.attr('height', mapAttribute(value, String))
+  }
+  rx(value: Attribute<State, number | string>): this {
+    return this.attr('rx', mapAttribute(value, String))
+  }
+  ry(value: Attribute<State, number | string>): this {
+    return this.attr('ry', mapAttribute(value, String))
+  }
+  pathLength(value: Attribute<State, number | string>): this {
+    return this.attr('pathLength', mapAttribute(value, String))
   }
 }
