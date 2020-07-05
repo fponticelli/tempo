@@ -23,6 +23,19 @@ export function setAttribute(
   }
 }
 
+export function setNumberProperty(
+  el: Element,
+  name: string,
+  value: string | undefined
+) {
+  const anyEl = el as any
+  if (value == null) {
+    anyEl[name] = null
+  } else {
+    anyEl[name] = Number(value)
+  }
+}
+
 export function setProperty(
   el: Element,
   name: string,

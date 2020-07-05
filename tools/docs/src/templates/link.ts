@@ -8,7 +8,7 @@ import {
   attributeToHandler
 } from 'tempo-dom/lib/value'
 import { DOMChild } from 'tempo-dom/lib/template'
-import { IBuilder } from 'tempo-dom/lib/impl/builder'
+import { IBuilder } from 'tempo-dom/lib/impl/dom_builder'
 import 'tempo-core/lib/value'
 
 export const maybeLink = <State>(attrs: {

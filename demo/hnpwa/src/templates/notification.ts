@@ -13,7 +13,7 @@ limitations under the License.
 
 import { div } from 'tempo-dom/lib/html'
 import { DOMChild } from 'tempo-dom/lib/template'
-import { IBuilder } from 'tempo-dom/lib/impl/builder'
+import { IBuilder } from 'tempo-dom/lib/impl/dom_builder'
 
 export const notification: <State, Action, Query>(
   ...children: (

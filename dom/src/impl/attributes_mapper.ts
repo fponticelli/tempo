@@ -11,7 +11,11 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { setBoolProperty, setProperty } from './set_attribute'
+import {
+  setBoolProperty,
+  setNumberProperty,
+  setProperty
+} from './set_attribute'
 
 export const attributeNameMap: Record<string, string> = {
   acceptcharset: 'accept-charset',
@@ -30,11 +34,17 @@ export const htmlAttributeMap: Record<
   string,
   (el: Element, name: string, value: any) => void
 > = {
+  // html
   checked: setBoolProperty,
   multiple: setBoolProperty,
   muted: setBoolProperty,
   selected: setBoolProperty,
-  value: setProperty
+  value: setProperty,
+
+  // svg
+  useCurrentView: setBoolProperty,
+  currentView: setProperty,
+  currentScale: setNumberProperty
 
   // 'accept-charset': setSpaceSeparated,
   // acceptcharset: setSpaceSeparated,

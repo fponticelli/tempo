@@ -12,13 +12,22 @@ limitations under the License.
 */
 
 import { View } from 'tempo-core/lib/view'
-import { DOMTemplate } from '../template'
+import { DOMTemplate, DOMChild } from '../template'
 import { DOMContext } from '../context'
 import { map } from 'tempo-std/lib/arrays'
+import { IBuilder, childOrBuilderToTemplate } from './dom_builder'
 
 export class FragmentTemplate<State, Action, Query>
   implements DOMTemplate<State, Action, Query> {
-  constructor(readonly children: DOMTemplate<State, Action, Query>[]) {}
+  readonly children: DOMTemplate<State, Action, Query>[]
+  constructor(
+    children: (
+      | DOMChild<State, Action, Query>
+      | IBuilder<State, Action, Query>
+    )[]
+  ) {
+    this.children = children.map(childOrBuilderToTemplate)
+  }
 
   render(ctx: DOMContext<Action>, state: State): View<State, Query> {
     const views = map(this.children, child => child.render(ctx, state))

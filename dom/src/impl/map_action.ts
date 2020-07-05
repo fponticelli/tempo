@@ -11,17 +11,24 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { DOMTemplate } from '../template'
+import { DOMTemplate, DOMChild } from '../template'
 import { View } from 'tempo-core/lib/view'
 import { DOMContext } from '../context'
 import { map as mapArray } from 'tempo-std/lib/arrays'
+import { IBuilder, childOrBuilderToTemplate } from './dom_builder'
 
 export class MapActionTemplate<State, OuterAction, InnerAction, Query>
   implements DOMTemplate<State, OuterAction, Query> {
+  readonly children: DOMTemplate<State, InnerAction, Query>[]
   constructor(
     readonly map: (value: InnerAction) => OuterAction | undefined,
-    readonly children: DOMTemplate<State, InnerAction, Query>[]
-  ) {}
+    children: (
+      | DOMChild<State, InnerAction, Query>
+      | IBuilder<State, InnerAction, Query>
+    )[]
+  ) {
+    this.children = children.map(childOrBuilderToTemplate)
+  }
 
   render(ctx: DOMContext<OuterAction>, state: State): View<State, Query> {
     const { children, map } = this

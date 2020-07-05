@@ -13,40 +13,53 @@ limitations under the License.
 
 import { DOMTemplate } from '../template'
 import { DOMContext } from '../context'
-import {
-  FragmentBuilder,
-  IBuilder,
-  childOrBuilderToTemplate
-} from '../impl/builder'
+import { IBuilder, childOrBuilderToTemplate } from './dom_builder'
 import { mapState } from '../html'
 
-export type ReleaseF<StateA, StateB, StateC, Action, Query> = (
+export type ReleaseF<
+  StateA,
+  StateB,
+  StateC,
+  Action,
+  Query,
+  Builder extends IBuilder<StateC, Action, Query>
+> = (
   merge: (a: StateA, b: StateB) => StateC,
-  init: (builder: FragmentBuilder<StateC, Action, Query>) => void
+  init: (builder: Builder) => void
 ) => DOMTemplate<StateB, Action, Query>
-export type HoldF<StateA, StateB, StateC, Action, Query> = (
-  releasef: ReleaseF<StateA, StateB, StateC, Action, Query>
+export type HoldF<
+  StateA,
+  StateB,
+  StateC,
+  Action,
+  Query,
+  Builder extends IBuilder<StateC, Action, Query>
+> = (
+  releasef: ReleaseF<StateA, StateB, StateC, Action, Query, Builder>
 ) => DOMTemplate<StateA, Action, Query> | IBuilder<StateA, Action, Query>
 
-export function holdState<StateA, StateB, StateC, Action, Query>(
-  holdf: HoldF<StateA, StateB, StateC, Action, Query>
-): DOMTemplate<StateA, Action, Query> {
-  return new HoldStateTemplate(holdf)
-}
-
-export class HoldStateTemplate<StateA, StateB, StateC, Action, Query>
-  implements DOMTemplate<StateA, Action, Query> {
+export class HoldStateTemplate<
+  StateA,
+  StateB,
+  StateC,
+  Action,
+  Query,
+  Builder extends IBuilder<StateC, Action, Query>
+> implements DOMTemplate<StateA, Action, Query> {
   private template: DOMTemplate<StateA, Action, Query>
   private localState!: StateA
-  constructor(readonly holdf: HoldF<StateA, StateB, StateC, Action, Query>) {
+  constructor(
+    readonly holdf: HoldF<StateA, StateB, StateC, Action, Query, Builder>,
+    builder: Builder
+  ) {
     this.template = childOrBuilderToTemplate(
       this.holdf((merge, init) => {
-        const builder = new FragmentBuilder<StateC, Action, Query>()
+        // const builder = new FragmentBuilder<StateC, Action, Query>()
         init(builder)
         const innerTemplate = builder.build()
         return mapState<StateB, StateC, Action, Query>(
           (b: StateB) => merge(this.localState, b),
-          n => n.append(innerTemplate)
+          $ => $.append(innerTemplate)
         ).build()
       })
     )

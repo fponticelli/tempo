@@ -14,7 +14,7 @@ limitations under the License.
 import { View } from 'tempo-core/lib/view'
 import { DOMContext } from '../context'
 import { DOMTemplate } from '../template'
-import { IBuilder, childOrBuilderToTemplate } from './builder'
+import { IBuilder, childOrBuilderToTemplate } from './dom_builder'
 
 export class LazyTemplate<State, Action, Query>
   implements DOMTemplate<State, Action, Query> {

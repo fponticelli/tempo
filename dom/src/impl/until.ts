@@ -13,17 +13,24 @@ limitations under the License.
 
 import { View } from 'tempo-core/lib/view'
 import { DOMContext } from '../context'
-import { DOMTemplate } from '../template'
+import { DOMTemplate, DOMChild } from '../template'
 import { removeNode } from './dom'
 import { map } from 'tempo-std/lib/arrays'
 import { Attribute, resolveAttribute } from '../value'
+import { IBuilder, childOrBuilderToTemplate } from './dom_builder'
 
 export class UntilTemplate<OuterState, InnerState, Action, Query>
   implements DOMTemplate<OuterState, Action, Query> {
+  readonly children: DOMTemplate<InnerState, Action, Query>[]
   constructor(
     readonly next: Attribute<{ state: OuterState; index: number }, InnerState>,
-    readonly children: DOMTemplate<InnerState, Action, Query>[]
-  ) {}
+    children: (
+      | DOMChild<InnerState, Action, Query>
+      | IBuilder<InnerState, Action, Query>
+    )[]
+  ) {
+    this.children = children.map(childOrBuilderToTemplate)
+  }
 
   render(ctx: DOMContext<Action>, state: OuterState): View<OuterState, Query> {
     const { children } = this

@@ -12,10 +12,11 @@ limitations under the License.
 */
 
 import { Store } from 'tempo-store/lib/store'
-import { DOMTemplate } from '../template'
+import { DOMTemplate, DOMChild } from '../template'
 import { DOMContext } from '../context'
 import { map } from 'tempo-std/lib/arrays'
 import { View } from 'tempo-core/lib/view'
+import { IBuilder, childOrBuilderToTemplate } from './dom_builder'
 
 export interface ComponentView<State, Action, Query>
   extends View<State, Query> {
@@ -24,12 +25,18 @@ export interface ComponentView<State, Action, Query>
 
 export class ComponentTemplate<State, Action, Query>
   implements DOMTemplate<State, Action, Query> {
+  readonly children: DOMTemplate<State, Action, Query>[]
   constructor(
     readonly delayed: boolean,
     readonly reducer: (state: State, action: Action) => State,
     readonly equal: undefined | ((a: State, b: State) => boolean),
-    readonly children: DOMTemplate<State, Action, Query>[]
-  ) {}
+    children: (
+      | DOMChild<State, Action, Query>
+      | IBuilder<State, Action, Query>
+    )[]
+  ) {
+    this.children = children.map(childOrBuilderToTemplate)
+  }
 
   render(
     ctx: DOMContext<Action>,

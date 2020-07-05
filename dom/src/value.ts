@@ -21,14 +21,13 @@ export type TextValue<S> = Attribute<S, string>
 export type EventHandler<S, Action> = (
   state: S,
   event: Event,
-  element: HTMLElement
+  element: Element
 ) => Action | undefined
-export type EventHandlerTE<
-  S,
-  Action,
-  Ev extends Event,
-  El extends HTMLElement
-> = (state: S, event: Ev, element: El) => Action | undefined
+export type EventHandlerTE<S, Action, Ev extends Event, El extends Element> = (
+  state: S,
+  event: Ev,
+  element: El
+) => Action | undefined
 export type StyleAttribute<State, Value> = DerivedOrLiteralValue<
   State,
   Value | undefined
@@ -136,13 +135,13 @@ export function attributeToHandler<State, Value, Action>(
       return undefined
     }
   } else if (typeof attr === 'function') {
-    return (state: State, event: Event, element: HTMLElement) => {
+    return (state: State, event: Event, element: Element) => {
       const res = (attr as DerivedValue<State, Value>)(state)
       if (res !== undefined) return handler(res, event, element)
       else return undefined
     }
   } else {
-    return (_: State, event: Event, element: HTMLElement) => {
+    return (_: State, event: Event, element: Element) => {
       return handler(attr, event, element)
     }
   }

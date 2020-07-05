@@ -11,21 +11,28 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { DOMTemplate } from '../template'
+import { DOMTemplate, DOMChild } from '../template'
 import { View } from 'tempo-core/lib/view'
 import { DOMContext } from '../context'
 import { removeNode } from './dom'
 import { map as mapArray } from 'tempo-std/lib/arrays'
 import { Attribute, resolveAttribute } from '../value'
+import { IBuilder, childOrBuilderToTemplate } from './dom_builder'
 
 export class MapStateTemplate<OuterState, InnerState, Action, Query>
   implements DOMTemplate<OuterState, Action, Query> {
+  readonly children: DOMTemplate<InnerState, Action, Query>[]
   constructor(
     readonly map: Attribute<OuterState, InnerState>,
     readonly orElse: DOMTemplate<OuterState, Action, Query>,
     readonly equals: (a: InnerState, b: InnerState) => boolean,
-    readonly children: DOMTemplate<InnerState, Action, Query>[]
-  ) {}
+    children: (
+      | DOMChild<InnerState, Action, Query>
+      | IBuilder<InnerState, Action, Query>
+    )[]
+  ) {
+    this.children = children.map(childOrBuilderToTemplate)
+  }
 
   render(ctx: DOMContext<Action>, state: OuterState): View<OuterState, Query> {
     const { children, map, orElse, equals } = this

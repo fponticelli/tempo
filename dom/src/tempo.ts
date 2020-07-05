@@ -19,11 +19,10 @@ import { View } from 'tempo-core/lib/view'
 import { SimpleComponent } from './impl/simple_component'
 import { Reducer } from 'tempo-store/lib/reducer'
 import {
-  IBuilder,
-  childOrBuilderToTemplate,
-  SimpleComponentBuilder,
-  ComponentBuilder
-} from './impl/builder'
+  SimpleComponentHTMLBuilder,
+  ComponentHTMLBuilder
+} from './impl/html_builder'
+import { IBuilder, childOrBuilderToTemplate } from './impl/dom_builder'
 import { component } from './impl/html'
 
 export type TempoView<State, Action, Query> = Readonly<{
@@ -37,7 +36,7 @@ export const Tempo = {
     state: State
     component:
       | ComponentTemplate<State, Action, Query>
-      | ComponentBuilder<State, Action, Query>
+      | ComponentHTMLBuilder<State, Action, Query>
     document?: Document
   }): TempoView<State, Action, Query> {
     const { el: maybeElement, component, state } = options
@@ -79,7 +78,7 @@ export const Tempo = {
     el?: HTMLElement
     component:
       | SimpleComponent<State, Query>
-      | SimpleComponentBuilder<State, Query>
+      | SimpleComponentHTMLBuilder<State, Query>
     state: State
     document?: Document
   }) {

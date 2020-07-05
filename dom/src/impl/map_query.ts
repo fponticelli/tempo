@@ -1,14 +1,21 @@
-import { DOMTemplate } from '../template'
+import { DOMTemplate, DOMChild } from '../template'
 import { DOMContext } from '../context'
 import { View } from 'tempo-core/lib/view'
 import { map as mapArray } from 'tempo-std/lib/arrays'
+import { IBuilder, childOrBuilderToTemplate } from './dom_builder'
 
 export class MapQueryTemplate<State, Action, OuterQuery, InnerQuery>
   implements DOMTemplate<State, Action, OuterQuery> {
+  readonly children: DOMTemplate<State, Action, InnerQuery>[]
   constructor(
     readonly map: (value: OuterQuery) => InnerQuery | undefined,
-    readonly children: DOMTemplate<State, Action, InnerQuery>[]
-  ) {}
+    children: (
+      | DOMChild<State, Action, InnerQuery>
+      | IBuilder<State, Action, InnerQuery>
+    )[]
+  ) {
+    this.children = children.map(childOrBuilderToTemplate)
+  }
 
   render(ctx: DOMContext<Action>, state: State): View<State, OuterQuery> {
     const { children, map } = this

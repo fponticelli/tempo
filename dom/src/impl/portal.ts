@@ -11,16 +11,23 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { DOMTemplate } from '../template'
+import { DOMTemplate, DOMChild } from '../template'
 import { DOMContext } from '../context'
 import { map } from 'tempo-std/lib/arrays'
+import { IBuilder, childOrBuilderToTemplate } from './dom_builder'
 
 export class PortalTemplate<State, Action, Query>
   implements DOMTemplate<State, Action, Query> {
+  readonly children: DOMTemplate<State, Action, Query>[]
   constructor(
     readonly append: (doc: Document, node: Node) => void,
-    readonly children: DOMTemplate<State, Action, Query>[]
-  ) {}
+    children: (
+      | DOMChild<State, Action, Query>
+      | IBuilder<State, Action, Query>
+    )[]
+  ) {
+    this.children = children.map(childOrBuilderToTemplate)
+  }
 
   render(ctx: DOMContext<Action>, state: State) {
     const append = (node: Node) => this.append(ctx.doc, node)

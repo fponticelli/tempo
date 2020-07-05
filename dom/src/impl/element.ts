@@ -116,7 +116,3 @@ export class DOMElement<State, Action, Query = unknown>
     }
   }
 }
-
-export const defaultNamespaces: Record<string, string> = {
-  svg: 'http://www.w3.org/2000/svg'
-}

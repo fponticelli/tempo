@@ -15,7 +15,7 @@ import { DOMTemplate, DOMChild } from '../template'
 import { DOMContext } from '../context'
 import { removeNode } from './dom'
 import { IndexType } from 'tempo-std/lib/types/index_type'
-import { IBuilder, childOrBuilderToTemplate } from '../impl/builder'
+import { IBuilder, childOrBuilderToTemplate } from './dom_builder'
 import { keys } from 'tempo-std/lib/objects'
 
 export class MatchValueTemplate<State, Action, Query>

@@ -11,19 +11,26 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { DOMTemplate } from '../template'
+import { DOMTemplate, DOMChild } from '../template'
 import { DOMContext } from '../context'
 import { View } from 'tempo-core/lib/view'
 import { removeNode } from './dom'
 import { map } from 'tempo-std/lib/arrays'
 import { Attribute, resolveAttribute } from '../value'
+import { IBuilder, childOrBuilderToTemplate } from './dom_builder'
 
 export class WhenTemplate<State, Action, Query>
   implements DOMTemplate<State, Action, Query> {
+  readonly children: DOMTemplate<State, Action, Query>[]
   constructor(
     readonly condition: Attribute<State, boolean>,
-    readonly children: DOMTemplate<State, Action, Query>[]
-  ) {}
+    children: (
+      | DOMChild<State, Action, Query>
+      | IBuilder<State, Action, Query>
+    )[]
+  ) {
+    this.children = children.map(childOrBuilderToTemplate)
+  }
   render(ctx: DOMContext<Action>, state: State): View<State, Query> {
     const condition = this.condition
     const { ctx: newCtx, ref } = ctx.withAppendToReference()

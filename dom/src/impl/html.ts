@@ -12,62 +12,62 @@ limitations under the License.
 */
 
 import {
-  ElementBuilder,
-  AnchorElementBuilder,
-  AreaElementBuilder,
-  AudioElementBuilder,
-  BaseElementBuilder,
-  QuoteElementBuilder,
-  ButtonElementBuilder,
-  CanvasElementBuilder,
-  TableColElementBuilder,
-  DataElementBuilder,
-  ModElementBuilder,
-  DialogElementBuilder,
-  EmbedElementBuilder,
-  FieldSetElementBuilder,
-  DetailsElementBuilder,
-  FormElementBuilder,
-  IFrameElementBuilder,
-  ImageElementBuilder,
-  InputElementBuilder,
-  HtmlElementBuilder,
-  LabelElementBuilder,
-  LIElementBuilder,
-  LinkElementBuilder,
-  MetaElementBuilder,
-  MapElementBuilder,
-  MeterElementBuilder,
-  ObjectElementBuilder,
-  OListElementBuilder,
-  OptGroupElementBuilder,
-  OptionElementBuilder,
-  OutputElementBuilder,
-  ParamElementBuilder,
-  PictureElementBuilder,
-  ProgressElementBuilder,
-  ScriptElementBuilder,
-  SelectElementBuilder,
-  SlotElementBuilder,
-  SourceElementBuilder,
-  StyleElementBuilder,
-  TableDataCellElementBuilder,
-  TextAreaElementBuilder,
-  TableHeaderCellElementBuilder,
-  TimeElementBuilder,
-  TrackElementBuilder,
-  VideoElementBuilder,
+  HTMLElementBuilder,
+  HTMLAnchorElementBuilder,
+  HTMLAreaElementBuilder,
+  HTMLAudioElementBuilder,
+  HTMLBaseElementBuilder,
+  HTMLQuoteElementBuilder,
+  HTMLButtonElementBuilder,
+  HTMLCanvasElementBuilder,
+  HTMLTableColElementBuilder,
+  HTMLDataElementBuilder,
+  HTMLModElementBuilder,
+  HTMLDialogElementBuilder,
+  HTMLEmbedElementBuilder,
+  HTMLFieldSetElementBuilder,
+  HTMLDetailsElementBuilder,
+  HTMLFormElementBuilder,
+  HTMLIFrameElementBuilder,
+  HTMLImageElementBuilder,
+  HTMLInputElementBuilder,
+  HTMLHtmlElementBuilder,
+  HTMLLabelElementBuilder,
+  HTMLLIElementBuilder,
+  HTMLLinkElementBuilder,
+  HTMLMetaElementBuilder,
+  HTMLMapElementBuilder,
+  HTMLMeterElementBuilder,
+  HTMLObjectElementBuilder,
+  HTMLOListElementBuilder,
+  HTMLOptGroupElementBuilder,
+  HTMLOptionElementBuilder,
+  HTMLOutputElementBuilder,
+  HTMLParamElementBuilder,
+  HTMLPictureElementBuilder,
+  HTMLProgressElementBuilder,
+  HTMLScriptElementBuilder,
+  HTMLSelectElementBuilder,
+  HTMLSlotElementBuilder,
+  HTMLSourceElementBuilder,
+  HTMLStyleElementBuilder,
+  HTMLTableDataCellElementBuilder,
+  HTMLTextAreaElementBuilder,
+  HTMLTableHeaderCellElementBuilder,
+  HTMLTimeElementBuilder,
+  HTMLTrackElementBuilder,
+  HTMLVideoElementBuilder,
   el,
-  ComponentBuilder,
-  MapStateBuilder,
-  MapActionBuilder,
-  MapQueryBuilder,
-  IBuilder,
-  UntilBuilder,
-  FragmentBuilder,
+  ComponentHTMLBuilder,
+  MapStateHTMLBuilder,
+  MapActionHTMLBuilder,
+  MapQueryHTMLBuilder,
+  UntilHTMLBuilder,
+  FragmentHTMLBuilder,
   PortalBuilder,
-  SimpleComponentBuilder
-} from './builder'
+  SimpleComponentHTMLBuilder
+} from './html_builder'
+import { IBuilder } from './dom_builder'
 import { Attribute, resolveAttribute } from '../value'
 import { ComponentTemplate } from './component'
 import { PropagateArg, AdapterTemplate } from './adapter'
@@ -91,135 +91,162 @@ import { AsyncResult } from 'tempo-std/lib/async_result'
 import { LazyTemplate } from './lazy'
 
 export { el }
-export { childOrBuilderToTemplate } from './builder'
 
 // dom specific
 export function a<State, Action, Query>(
-  init?: (builder: AnchorElementBuilder<State, Action, Query>) => void
+  init?: (builder: HTMLAnchorElementBuilder<State, Action, Query>) => void
 ) {
-  const builder = new AnchorElementBuilder<State, Action, Query>('a')
+  const builder = new HTMLAnchorElementBuilder<State, Action, Query>('a')
   if (init !== undefined) init(builder)
   return builder
 }
 export function abbr<State, Action, Query>(
-  init?: (builder: ElementBuilder<State, Action, Query, HTMLElement>) => void
+  init?: (
+    builder: HTMLElementBuilder<State, Action, Query, HTMLElement>
+  ) => void
 ) {
-  const builder = new ElementBuilder<State, Action, Query, HTMLElement>('abbr')
+  const builder = new HTMLElementBuilder<State, Action, Query, HTMLElement>(
+    'abbr'
+  )
   if (init !== undefined) init(builder)
   return builder
 }
 export function address<State, Action, Query>(
-  init?: (builder: ElementBuilder<State, Action, Query, HTMLElement>) => void
+  init?: (
+    builder: HTMLElementBuilder<State, Action, Query, HTMLElement>
+  ) => void
 ) {
-  const builder = new ElementBuilder<State, Action, Query, HTMLElement>(
+  const builder = new HTMLElementBuilder<State, Action, Query, HTMLElement>(
     'address'
   )
   if (init !== undefined) init(builder)
   return builder
 }
 export function area<State, Action, Query>(
-  init?: (builder: AreaElementBuilder<State, Action, Query>) => void
+  init?: (builder: HTMLAreaElementBuilder<State, Action, Query>) => void
 ) {
-  const builder = new AreaElementBuilder<State, Action, Query>('area')
+  const builder = new HTMLAreaElementBuilder<State, Action, Query>('area')
   if (init !== undefined) init(builder)
   return builder
 }
 export function article<State, Action, Query>(
-  init?: (builder: ElementBuilder<State, Action, Query, HTMLElement>) => void
+  init?: (
+    builder: HTMLElementBuilder<State, Action, Query, HTMLElement>
+  ) => void
 ) {
-  const builder = new ElementBuilder<State, Action, Query, HTMLElement>(
+  const builder = new HTMLElementBuilder<State, Action, Query, HTMLElement>(
     'article'
   )
   if (init !== undefined) init(builder)
   return builder
 }
 export function aside<State, Action, Query>(
-  init?: (builder: ElementBuilder<State, Action, Query, HTMLElement>) => void
+  init?: (
+    builder: HTMLElementBuilder<State, Action, Query, HTMLElement>
+  ) => void
 ) {
-  const builder = new ElementBuilder<State, Action, Query, HTMLElement>('aside')
+  const builder = new HTMLElementBuilder<State, Action, Query, HTMLElement>(
+    'aside'
+  )
   if (init !== undefined) init(builder)
   return builder
 }
 export function audio<State, Action, Query>(
-  init?: (builder: AudioElementBuilder<State, Action, Query>) => void
+  init?: (builder: HTMLAudioElementBuilder<State, Action, Query>) => void
 ) {
-  const builder = new AudioElementBuilder<State, Action, Query>('audio')
+  const builder = new HTMLAudioElementBuilder<State, Action, Query>('audio')
   if (init !== undefined) init(builder)
   return builder
 }
 export function b<State, Action, Query>(
-  init?: (builder: ElementBuilder<State, Action, Query, HTMLElement>) => void
+  init?: (
+    builder: HTMLElementBuilder<State, Action, Query, HTMLElement>
+  ) => void
 ) {
-  const builder = new ElementBuilder<State, Action, Query, HTMLElement>('b')
+  const builder = new HTMLElementBuilder<State, Action, Query, HTMLElement>('b')
   if (init !== undefined) init(builder)
   return builder
 }
 export function base<State, Action, Query>(
-  init?: (builder: BaseElementBuilder<State, Action, Query>) => void
+  init?: (builder: HTMLBaseElementBuilder<State, Action, Query>) => void
 ) {
-  const builder = new BaseElementBuilder<State, Action, Query>('base')
+  const builder = new HTMLBaseElementBuilder<State, Action, Query>('base')
   if (init !== undefined) init(builder)
   return builder
 }
 export function bdi<State, Action, Query>(
-  init?: (builder: ElementBuilder<State, Action, Query, HTMLElement>) => void
+  init?: (
+    builder: HTMLElementBuilder<State, Action, Query, HTMLElement>
+  ) => void
 ) {
-  const builder = new ElementBuilder<State, Action, Query, HTMLElement>('bdi')
+  const builder = new HTMLElementBuilder<State, Action, Query, HTMLElement>(
+    'bdi'
+  )
   if (init !== undefined) init(builder)
   return builder
 }
 export function bdo<State, Action, Query>(
-  init?: (builder: ElementBuilder<State, Action, Query, HTMLElement>) => void
+  init?: (
+    builder: HTMLElementBuilder<State, Action, Query, HTMLElement>
+  ) => void
 ) {
-  const builder = new ElementBuilder<State, Action, Query, HTMLElement>('bdo')
+  const builder = new HTMLElementBuilder<State, Action, Query, HTMLElement>(
+    'bdo'
+  )
   if (init !== undefined) init(builder)
   return builder
 }
 export function blockquote<State, Action, Query>(
-  init?: (builder: QuoteElementBuilder<State, Action, Query>) => void
+  init?: (builder: HTMLQuoteElementBuilder<State, Action, Query>) => void
 ) {
-  const builder = new QuoteElementBuilder<State, Action, Query>('blockquote')
+  const builder = new HTMLQuoteElementBuilder<State, Action, Query>(
+    'blockquote'
+  )
   if (init !== undefined) init(builder)
   return builder
 }
 export function body<State, Action, Query>(
   init?: (
-    builder: ElementBuilder<State, Action, Query, HTMLBodyElement>
+    builder: HTMLElementBuilder<State, Action, Query, HTMLBodyElement>
   ) => void
 ) {
-  const builder = new ElementBuilder<State, Action, Query, HTMLBodyElement>(
+  const builder = new HTMLElementBuilder<State, Action, Query, HTMLBodyElement>(
     'body'
   )
   if (init !== undefined) init(builder)
   return builder
 }
 export function br<State, Action, Query>(
-  init?: (builder: ElementBuilder<State, Action, Query, HTMLBRElement>) => void
+  init?: (
+    builder: HTMLElementBuilder<State, Action, Query, HTMLBRElement>
+  ) => void
 ) {
-  const builder = new ElementBuilder<State, Action, Query, HTMLBRElement>('br')
+  const builder = new HTMLElementBuilder<State, Action, Query, HTMLBRElement>(
+    'br'
+  )
   if (init !== undefined) init(builder)
   return builder
 }
 export function button<State, Action, Query>(
-  init?: (builder: ButtonElementBuilder<State, Action, Query>) => void
+  init?: (builder: HTMLButtonElementBuilder<State, Action, Query>) => void
 ) {
-  const builder = new ButtonElementBuilder<State, Action, Query>('button')
+  const builder = new HTMLButtonElementBuilder<State, Action, Query>('button')
   if (init !== undefined) init(builder)
   return builder
 }
 export function canvas<State, Action, Query>(
-  init?: (builder: CanvasElementBuilder<State, Action, Query>) => void
+  init?: (builder: HTMLCanvasElementBuilder<State, Action, Query>) => void
 ) {
-  const builder = new CanvasElementBuilder<State, Action, Query>('canvas')
+  const builder = new HTMLCanvasElementBuilder<State, Action, Query>('canvas')
   if (init !== undefined) init(builder)
   return builder
 }
 export function caption<State, Action, Query>(
   init?: (
-    builder: ElementBuilder<State, Action, Query, HTMLTableCaptionElement>
+    builder: HTMLElementBuilder<State, Action, Query, HTMLTableCaptionElement>
   ) => void
 ) {
-  const builder = new ElementBuilder<
+  const builder = new HTMLElementBuilder<
     State,
     Action,
     Query,
@@ -229,90 +256,109 @@ export function caption<State, Action, Query>(
   return builder
 }
 export function cite<State, Action, Query>(
-  init?: (builder: QuoteElementBuilder<State, Action, Query>) => void
+  init?: (builder: HTMLQuoteElementBuilder<State, Action, Query>) => void
 ) {
-  const builder = new QuoteElementBuilder<State, Action, Query>('cite')
+  const builder = new HTMLQuoteElementBuilder<State, Action, Query>('cite')
   if (init !== undefined) init(builder)
   return builder
 }
 export function code<State, Action, Query>(
-  init?: (builder: ElementBuilder<State, Action, Query, HTMLElement>) => void
+  init?: (
+    builder: HTMLElementBuilder<State, Action, Query, HTMLElement>
+  ) => void
 ) {
-  const builder = new ElementBuilder<State, Action, Query, HTMLElement>('code')
+  const builder = new HTMLElementBuilder<State, Action, Query, HTMLElement>(
+    'code'
+  )
   if (init !== undefined) init(builder)
   return builder
 }
 export function col<State, Action, Query>(
-  init?: (builder: TableColElementBuilder<State, Action, Query>) => void
+  init?: (builder: HTMLTableColElementBuilder<State, Action, Query>) => void
 ) {
-  const builder = new TableColElementBuilder<State, Action, Query>('col')
+  const builder = new HTMLTableColElementBuilder<State, Action, Query>('col')
   if (init !== undefined) init(builder)
   return builder
 }
 export function colgroup<State, Action, Query>(
-  init?: (builder: TableColElementBuilder<State, Action, Query>) => void
+  init?: (builder: HTMLTableColElementBuilder<State, Action, Query>) => void
 ) {
-  const builder = new TableColElementBuilder<State, Action, Query>('colgroup')
+  const builder = new HTMLTableColElementBuilder<State, Action, Query>(
+    'colgroup'
+  )
   if (init !== undefined) init(builder)
   return builder
 }
 export function data<State, Action, Query>(
-  init?: (builder: DataElementBuilder<State, Action, Query>) => void
+  init?: (builder: HTMLDataElementBuilder<State, Action, Query>) => void
 ) {
-  const builder = new DataElementBuilder<State, Action, Query>('data')
+  const builder = new HTMLDataElementBuilder<State, Action, Query>('data')
   if (init !== undefined) init(builder)
   return builder
 }
 export function datalist<State, Action, Query>(
   init?: (
-    builder: ElementBuilder<State, Action, Query, HTMLDataListElement>
+    builder: HTMLElementBuilder<State, Action, Query, HTMLDataListElement>
   ) => void
 ) {
-  const builder = new ElementBuilder<State, Action, Query, HTMLDataListElement>(
-    'datalist'
-  )
+  const builder = new HTMLElementBuilder<
+    State,
+    Action,
+    Query,
+    HTMLDataListElement
+  >('datalist')
   if (init !== undefined) init(builder)
   return builder
 }
 export function dd<State, Action, Query>(
-  init?: (builder: ElementBuilder<State, Action, Query, HTMLElement>) => void
+  init?: (
+    builder: HTMLElementBuilder<State, Action, Query, HTMLElement>
+  ) => void
 ) {
-  const builder = new ElementBuilder<State, Action, Query, HTMLElement>('dd')
+  const builder = new HTMLElementBuilder<State, Action, Query, HTMLElement>(
+    'dd'
+  )
   if (init !== undefined) init(builder)
   return builder
 }
 export function del<State, Action, Query>(
-  init?: (builder: ModElementBuilder<State, Action, Query>) => void
+  init?: (builder: HTMLModElementBuilder<State, Action, Query>) => void
 ) {
-  const builder = new ModElementBuilder<State, Action, Query>('del')
+  const builder = new HTMLModElementBuilder<State, Action, Query>('del')
   if (init !== undefined) init(builder)
   return builder
 }
 export function details<State, Action, Query>(
-  init?: (builder: DetailsElementBuilder<State, Action, Query>) => void
+  init?: (builder: HTMLDetailsElementBuilder<State, Action, Query>) => void
 ) {
-  const builder = new DetailsElementBuilder<State, Action, Query>('details')
+  const builder = new HTMLDetailsElementBuilder<State, Action, Query>('details')
   if (init !== undefined) init(builder)
   return builder
 }
 export function dfn<State, Action, Query>(
-  init?: (builder: ElementBuilder<State, Action, Query, HTMLElement>) => void
+  init?: (
+    builder: HTMLElementBuilder<State, Action, Query, HTMLElement>
+  ) => void
 ) {
-  const builder = new ElementBuilder<State, Action, Query, HTMLElement>('dfn')
+  const builder = new HTMLElementBuilder<State, Action, Query, HTMLElement>(
+    'dfn'
+  )
   if (init !== undefined) init(builder)
   return builder
 }
 export function dialog<State, Action, Query>(
-  init?: (builder: DialogElementBuilder<State, Action, Query>) => void
+  init?: (builder: HTMLDialogElementBuilder<State, Action, Query>) => void
 ) {
-  const builder = new DialogElementBuilder<State, Action, Query>('dialog')
+  const builder = new HTMLDialogElementBuilder<State, Action, Query>('dialog')
   if (init !== undefined) init(builder)
   return builder
 }
 export function div<State, Action, Query>(
-  init?: (builder: ElementBuilder<State, Action, Query, HTMLDivElement>) => void
+  init?: (
+    builder: HTMLElementBuilder<State, Action, Query, HTMLDivElement>
+  ) => void
 ) {
-  const builder = new ElementBuilder<State, Action, Query, HTMLDivElement>(
+  const builder = new HTMLElementBuilder<State, Action, Query, HTMLDivElement>(
     'div'
   )
   if (init !== undefined) init(builder)
@@ -320,344 +366,416 @@ export function div<State, Action, Query>(
 }
 export function dl<State, Action, Query>(
   init?: (
-    builder: ElementBuilder<State, Action, Query, HTMLDListElement>
+    builder: HTMLElementBuilder<State, Action, Query, HTMLDListElement>
   ) => void
 ) {
-  const builder = new ElementBuilder<State, Action, Query, HTMLDListElement>(
-    'dl'
-  )
+  const builder = new HTMLElementBuilder<
+    State,
+    Action,
+    Query,
+    HTMLDListElement
+  >('dl')
   if (init !== undefined) init(builder)
   return builder
 }
 export function dt<State, Action, Query>(
-  init?: (builder: ElementBuilder<State, Action, Query, HTMLElement>) => void
+  init?: (
+    builder: HTMLElementBuilder<State, Action, Query, HTMLElement>
+  ) => void
 ) {
-  const builder = new ElementBuilder<State, Action, Query, HTMLElement>('dt')
+  const builder = new HTMLElementBuilder<State, Action, Query, HTMLElement>(
+    'dt'
+  )
   if (init !== undefined) init(builder)
   return builder
 }
 export function em<State, Action, Query>(
-  init?: (builder: ElementBuilder<State, Action, Query, HTMLElement>) => void
+  init?: (
+    builder: HTMLElementBuilder<State, Action, Query, HTMLElement>
+  ) => void
 ) {
-  const builder = new ElementBuilder<State, Action, Query, HTMLElement>('em')
+  const builder = new HTMLElementBuilder<State, Action, Query, HTMLElement>(
+    'em'
+  )
   if (init !== undefined) init(builder)
   return builder
 }
 export function embed<State, Action, Query>(
-  init?: (builder: EmbedElementBuilder<State, Action, Query>) => void
+  init?: (builder: HTMLEmbedElementBuilder<State, Action, Query>) => void
 ) {
-  const builder = new EmbedElementBuilder<State, Action, Query>('embed')
+  const builder = new HTMLEmbedElementBuilder<State, Action, Query>('embed')
   if (init !== undefined) init(builder)
   return builder
 }
 export function fieldset<State, Action, Query>(
-  init?: (builder: FieldSetElementBuilder<State, Action, Query>) => void
+  init?: (builder: HTMLFieldSetElementBuilder<State, Action, Query>) => void
 ) {
-  const builder = new FieldSetElementBuilder<State, Action, Query>('fieldset')
+  const builder = new HTMLFieldSetElementBuilder<State, Action, Query>(
+    'fieldset'
+  )
   if (init !== undefined) init(builder)
   return builder
 }
 export function figcaption<State, Action, Query>(
-  init?: (builder: ElementBuilder<State, Action, Query, HTMLElement>) => void
+  init?: (
+    builder: HTMLElementBuilder<State, Action, Query, HTMLElement>
+  ) => void
 ) {
-  const builder = new ElementBuilder<State, Action, Query, HTMLElement>(
+  const builder = new HTMLElementBuilder<State, Action, Query, HTMLElement>(
     'figcaption'
   )
   if (init !== undefined) init(builder)
   return builder
 }
 export function figure<State, Action, Query>(
-  init?: (builder: ElementBuilder<State, Action, Query, HTMLElement>) => void
+  init?: (
+    builder: HTMLElementBuilder<State, Action, Query, HTMLElement>
+  ) => void
 ) {
-  const builder = new ElementBuilder<State, Action, Query, HTMLElement>(
+  const builder = new HTMLElementBuilder<State, Action, Query, HTMLElement>(
     'figure'
   )
   if (init !== undefined) init(builder)
   return builder
 }
 export function footer<State, Action, Query>(
-  init?: (builder: ElementBuilder<State, Action, Query, HTMLElement>) => void
+  init?: (
+    builder: HTMLElementBuilder<State, Action, Query, HTMLElement>
+  ) => void
 ) {
-  const builder = new ElementBuilder<State, Action, Query, HTMLElement>(
+  const builder = new HTMLElementBuilder<State, Action, Query, HTMLElement>(
     'footer'
   )
   if (init !== undefined) init(builder)
   return builder
 }
 export function form<State, Action, Query>(
-  init?: (builder: FormElementBuilder<State, Action, Query>) => void
+  init?: (builder: HTMLFormElementBuilder<State, Action, Query>) => void
 ) {
-  const builder = new FormElementBuilder<State, Action, Query>('form')
+  const builder = new HTMLFormElementBuilder<State, Action, Query>('form')
   if (init !== undefined) init(builder)
   return builder
 }
 export function h1<State, Action, Query>(
   init?: (
-    builder: ElementBuilder<State, Action, Query, HTMLHeadingElement>
+    builder: HTMLElementBuilder<State, Action, Query, HTMLHeadingElement>
   ) => void
 ) {
-  const builder = new ElementBuilder<State, Action, Query, HTMLHeadingElement>(
-    'h1'
-  )
+  const builder = new HTMLElementBuilder<
+    State,
+    Action,
+    Query,
+    HTMLHeadingElement
+  >('h1')
   if (init !== undefined) init(builder)
   return builder
 }
 export function h2<State, Action, Query>(
   init?: (
-    builder: ElementBuilder<State, Action, Query, HTMLHeadingElement>
+    builder: HTMLElementBuilder<State, Action, Query, HTMLHeadingElement>
   ) => void
 ) {
-  const builder = new ElementBuilder<State, Action, Query, HTMLHeadingElement>(
-    'h2'
-  )
+  const builder = new HTMLElementBuilder<
+    State,
+    Action,
+    Query,
+    HTMLHeadingElement
+  >('h2')
   if (init !== undefined) init(builder)
   return builder
 }
 export function h3<State, Action, Query>(
   init?: (
-    builder: ElementBuilder<State, Action, Query, HTMLHeadingElement>
+    builder: HTMLElementBuilder<State, Action, Query, HTMLHeadingElement>
   ) => void
 ) {
-  const builder = new ElementBuilder<State, Action, Query, HTMLHeadingElement>(
-    'h3'
-  )
+  const builder = new HTMLElementBuilder<
+    State,
+    Action,
+    Query,
+    HTMLHeadingElement
+  >('h3')
   if (init !== undefined) init(builder)
   return builder
 }
 export function h4<State, Action, Query>(
   init?: (
-    builder: ElementBuilder<State, Action, Query, HTMLHeadingElement>
+    builder: HTMLElementBuilder<State, Action, Query, HTMLHeadingElement>
   ) => void
 ) {
-  const builder = new ElementBuilder<State, Action, Query, HTMLHeadingElement>(
-    'h4'
-  )
+  const builder = new HTMLElementBuilder<
+    State,
+    Action,
+    Query,
+    HTMLHeadingElement
+  >('h4')
   if (init !== undefined) init(builder)
   return builder
 }
 export function h5<State, Action, Query>(
-  init?: (builder: ElementBuilder<State, Action, Query, HTMLElement>) => void
+  init?: (
+    builder: HTMLElementBuilder<State, Action, Query, HTMLElement>
+  ) => void
 ) {
-  const builder = new ElementBuilder<State, Action, Query, HTMLElement>('h5')
+  const builder = new HTMLElementBuilder<State, Action, Query, HTMLElement>(
+    'h5'
+  )
   if (init !== undefined) init(builder)
   return builder
 }
 export function h6<State, Action, Query>(
-  init?: (builder: ElementBuilder<State, Action, Query, HTMLElement>) => void
+  init?: (
+    builder: HTMLElementBuilder<State, Action, Query, HTMLElement>
+  ) => void
 ) {
-  const builder = new ElementBuilder<State, Action, Query, HTMLElement>('h6')
+  const builder = new HTMLElementBuilder<State, Action, Query, HTMLElement>(
+    'h6'
+  )
   if (init !== undefined) init(builder)
   return builder
 }
 export function head<State, Action, Query>(
   init?: (
-    builder: ElementBuilder<State, Action, Query, HTMLHeadElement>
+    builder: HTMLElementBuilder<State, Action, Query, HTMLHeadElement>
   ) => void
 ) {
-  const builder = new ElementBuilder<State, Action, Query, HTMLHeadElement>(
+  const builder = new HTMLElementBuilder<State, Action, Query, HTMLHeadElement>(
     'head'
   )
   if (init !== undefined) init(builder)
   return builder
 }
 export function header<State, Action, Query>(
-  init?: (builder: ElementBuilder<State, Action, Query, HTMLElement>) => void
+  init?: (
+    builder: HTMLElementBuilder<State, Action, Query, HTMLElement>
+  ) => void
 ) {
-  const builder = new ElementBuilder<State, Action, Query, HTMLElement>(
+  const builder = new HTMLElementBuilder<State, Action, Query, HTMLElement>(
     'header'
   )
   if (init !== undefined) init(builder)
   return builder
 }
 export function hgroup<State, Action, Query>(
-  init?: (builder: ElementBuilder<State, Action, Query, HTMLElement>) => void
+  init?: (
+    builder: HTMLElementBuilder<State, Action, Query, HTMLElement>
+  ) => void
 ) {
-  const builder = new ElementBuilder<State, Action, Query, HTMLElement>(
+  const builder = new HTMLElementBuilder<State, Action, Query, HTMLElement>(
     'hgroup'
   )
   if (init !== undefined) init(builder)
   return builder
 }
 export function hr<State, Action, Query>(
-  init?: (builder: ElementBuilder<State, Action, Query, HTMLHRElement>) => void
+  init?: (
+    builder: HTMLElementBuilder<State, Action, Query, HTMLHRElement>
+  ) => void
 ) {
-  const builder = new ElementBuilder<State, Action, Query, HTMLHRElement>('hr')
+  const builder = new HTMLElementBuilder<State, Action, Query, HTMLHRElement>(
+    'hr'
+  )
   if (init !== undefined) init(builder)
   return builder
 }
 export function html<State, Action, Query>(
-  init?: (builder: HtmlElementBuilder<State, Action, Query>) => void
+  init?: (builder: HTMLHtmlElementBuilder<State, Action, Query>) => void
 ) {
-  const builder = new HtmlElementBuilder<State, Action, Query>('html')
+  const builder = new HTMLHtmlElementBuilder<State, Action, Query>('html')
   if (init !== undefined) init(builder)
   return builder
 }
 export function i<State, Action, Query>(
-  init?: (builder: ElementBuilder<State, Action, Query, HTMLElement>) => void
+  init?: (
+    builder: HTMLElementBuilder<State, Action, Query, HTMLElement>
+  ) => void
 ) {
-  const builder = new ElementBuilder<State, Action, Query, HTMLElement>('i')
+  const builder = new HTMLElementBuilder<State, Action, Query, HTMLElement>('i')
   if (init !== undefined) init(builder)
   return builder
 }
 export function iframe<State, Action, Query>(
-  init?: (builder: IFrameElementBuilder<State, Action, Query>) => void
+  init?: (builder: HTMLIFrameElementBuilder<State, Action, Query>) => void
 ) {
-  const builder = new IFrameElementBuilder<State, Action, Query>('iframe')
+  const builder = new HTMLIFrameElementBuilder<State, Action, Query>('iframe')
   if (init !== undefined) init(builder)
   return builder
 }
 export function img<State, Action, Query>(
-  init?: (builder: ImageElementBuilder<State, Action, Query>) => void
+  init?: (builder: HTMLImageElementBuilder<State, Action, Query>) => void
 ) {
-  const builder = new ImageElementBuilder<State, Action, Query>('img')
+  const builder = new HTMLImageElementBuilder<State, Action, Query>('img')
   if (init !== undefined) init(builder)
   return builder
 }
 export function input<State, Action, Query>(
-  init?: (builder: InputElementBuilder<State, Action, Query>) => void
+  init?: (builder: HTMLInputElementBuilder<State, Action, Query>) => void
 ) {
-  const builder = new InputElementBuilder<State, Action, Query>('input')
+  const builder = new HTMLInputElementBuilder<State, Action, Query>('input')
   if (init !== undefined) init(builder)
   return builder
 }
 export function ins<State, Action, Query>(
-  init?: (builder: ModElementBuilder<State, Action, Query>) => void
+  init?: (builder: HTMLModElementBuilder<State, Action, Query>) => void
 ) {
-  const builder = new ModElementBuilder<State, Action, Query>('ins')
+  const builder = new HTMLModElementBuilder<State, Action, Query>('ins')
   if (init !== undefined) init(builder)
   return builder
 }
 export function kbd<State, Action, Query>(
-  init?: (builder: ElementBuilder<State, Action, Query, HTMLElement>) => void
+  init?: (
+    builder: HTMLElementBuilder<State, Action, Query, HTMLElement>
+  ) => void
 ) {
-  const builder = new ElementBuilder<State, Action, Query, HTMLElement>('kbd')
+  const builder = new HTMLElementBuilder<State, Action, Query, HTMLElement>(
+    'kbd'
+  )
   if (init !== undefined) init(builder)
   return builder
 }
 export function label<State, Action, Query>(
-  init?: (builder: LabelElementBuilder<State, Action, Query>) => void
+  init?: (builder: HTMLLabelElementBuilder<State, Action, Query>) => void
 ) {
-  const builder = new LabelElementBuilder<State, Action, Query>('label')
+  const builder = new HTMLLabelElementBuilder<State, Action, Query>('label')
   if (init !== undefined) init(builder)
   return builder
 }
 export function legend<State, Action, Query>(
   init?: (
-    builder: ElementBuilder<State, Action, Query, HTMLLegendElement>
+    builder: HTMLElementBuilder<State, Action, Query, HTMLLegendElement>
   ) => void
 ) {
-  const builder = new ElementBuilder<State, Action, Query, HTMLLegendElement>(
-    'legend'
-  )
+  const builder = new HTMLElementBuilder<
+    State,
+    Action,
+    Query,
+    HTMLLegendElement
+  >('legend')
   if (init !== undefined) init(builder)
   return builder
 }
 export function li<State, Action, Query>(
-  init?: (builder: LIElementBuilder<State, Action, Query>) => void
+  init?: (builder: HTMLLIElementBuilder<State, Action, Query>) => void
 ) {
-  const builder = new LIElementBuilder<State, Action, Query>('li')
+  const builder = new HTMLLIElementBuilder<State, Action, Query>('li')
   if (init !== undefined) init(builder)
   return builder
 }
 export function link<State, Action, Query>(
-  init?: (builder: LinkElementBuilder<State, Action, Query>) => void
+  init?: (builder: HTMLLinkElementBuilder<State, Action, Query>) => void
 ) {
-  const builder = new LinkElementBuilder<State, Action, Query>('link')
+  const builder = new HTMLLinkElementBuilder<State, Action, Query>('link')
   if (init !== undefined) init(builder)
   return builder
 }
 export function main<State, Action, Query>(
-  init?: (builder: ElementBuilder<State, Action, Query, HTMLElement>) => void
+  init?: (
+    builder: HTMLElementBuilder<State, Action, Query, HTMLElement>
+  ) => void
 ) {
-  const builder = new ElementBuilder<State, Action, Query, HTMLElement>('main')
+  const builder = new HTMLElementBuilder<State, Action, Query, HTMLElement>(
+    'main'
+  )
   if (init !== undefined) init(builder)
   return builder
 }
 export function map<State, Action, Query>(
-  init?: (builder: MapElementBuilder<State, Action, Query>) => void
+  init?: (builder: HTMLMapElementBuilder<State, Action, Query>) => void
 ) {
-  const builder = new MapElementBuilder<State, Action, Query>('map')
+  const builder = new HTMLMapElementBuilder<State, Action, Query>('map')
   if (init !== undefined) init(builder)
   return builder
 }
 export function mark<State, Action, Query>(
-  init?: (builder: ElementBuilder<State, Action, Query, HTMLElement>) => void
+  init?: (
+    builder: HTMLElementBuilder<State, Action, Query, HTMLElement>
+  ) => void
 ) {
-  const builder = new ElementBuilder<State, Action, Query, HTMLElement>('mark')
+  const builder = new HTMLElementBuilder<State, Action, Query, HTMLElement>(
+    'mark'
+  )
   if (init !== undefined) init(builder)
   return builder
 }
 export function meta<State, Action, Query>(
-  init?: (builder: MetaElementBuilder<State, Action, Query>) => void
+  init?: (builder: HTMLMetaElementBuilder<State, Action, Query>) => void
 ) {
-  const builder = new MetaElementBuilder<State, Action, Query>('meta')
+  const builder = new HTMLMetaElementBuilder<State, Action, Query>('meta')
   if (init !== undefined) init(builder)
   return builder
 }
 export function meter<State, Action, Query>(
-  init?: (builder: MeterElementBuilder<State, Action, Query>) => void
+  init?: (builder: HTMLMeterElementBuilder<State, Action, Query>) => void
 ) {
-  const builder = new MeterElementBuilder<State, Action, Query>('meter')
+  const builder = new HTMLMeterElementBuilder<State, Action, Query>('meter')
   if (init !== undefined) init(builder)
   return builder
 }
 export function nav<State, Action, Query>(
-  init?: (builder: ElementBuilder<State, Action, Query, HTMLElement>) => void
+  init?: (
+    builder: HTMLElementBuilder<State, Action, Query, HTMLElement>
+  ) => void
 ) {
-  const builder = new ElementBuilder<State, Action, Query, HTMLElement>('nav')
+  const builder = new HTMLElementBuilder<State, Action, Query, HTMLElement>(
+    'nav'
+  )
   if (init !== undefined) init(builder)
   return builder
 }
 export function noscript<State, Action, Query>(
-  init?: (builder: ElementBuilder<State, Action, Query, HTMLElement>) => void
+  init?: (
+    builder: HTMLElementBuilder<State, Action, Query, HTMLElement>
+  ) => void
 ) {
-  const builder = new ElementBuilder<State, Action, Query, HTMLElement>(
+  const builder = new HTMLElementBuilder<State, Action, Query, HTMLElement>(
     'noscript'
   )
   if (init !== undefined) init(builder)
   return builder
 }
 export function object<State, Action, Query>(
-  init?: (builder: ObjectElementBuilder<State, Action, Query>) => void
+  init?: (builder: HTMLObjectElementBuilder<State, Action, Query>) => void
 ) {
-  const builder = new ObjectElementBuilder<State, Action, Query>('object')
+  const builder = new HTMLObjectElementBuilder<State, Action, Query>('object')
   if (init !== undefined) init(builder)
   return builder
 }
 export function ol<State, Action, Query>(
-  init?: (builder: OListElementBuilder<State, Action, Query>) => void
+  init?: (builder: HTMLOListElementBuilder<State, Action, Query>) => void
 ) {
-  const builder = new OListElementBuilder<State, Action, Query>('ol')
+  const builder = new HTMLOListElementBuilder<State, Action, Query>('ol')
   if (init !== undefined) init(builder)
   return builder
 }
 export function optgroup<State, Action, Query>(
-  init?: (builder: OptGroupElementBuilder<State, Action, Query>) => void
+  init?: (builder: HTMLOptGroupElementBuilder<State, Action, Query>) => void
 ) {
-  const builder = new OptGroupElementBuilder<State, Action, Query>('optgroup')
+  const builder = new HTMLOptGroupElementBuilder<State, Action, Query>(
+    'optgroup'
+  )
   if (init !== undefined) init(builder)
   return builder
 }
 export function option<State, Action, Query>(
-  init?: (builder: OptionElementBuilder<State, Action, Query>) => void
+  init?: (builder: HTMLOptionElementBuilder<State, Action, Query>) => void
 ) {
-  const builder = new OptionElementBuilder<State, Action, Query>('option')
+  const builder = new HTMLOptionElementBuilder<State, Action, Query>('option')
   if (init !== undefined) init(builder)
   return builder
 }
 export function output<State, Action, Query>(
-  init?: (builder: OutputElementBuilder<State, Action, Query>) => void
+  init?: (builder: HTMLOutputElementBuilder<State, Action, Query>) => void
 ) {
-  const builder = new OutputElementBuilder<State, Action, Query>('output')
+  const builder = new HTMLOutputElementBuilder<State, Action, Query>('output')
   if (init !== undefined) init(builder)
   return builder
 }
 export function p<State, Action, Query>(
   init?: (
-    builder: ElementBuilder<State, Action, Query, HTMLParagraphElement>
+    builder: HTMLElementBuilder<State, Action, Query, HTMLParagraphElement>
   ) => void
 ) {
-  const builder = new ElementBuilder<
+  const builder = new HTMLElementBuilder<
     State,
     Action,
     Query,
@@ -667,188 +785,231 @@ export function p<State, Action, Query>(
   return builder
 }
 export function param<State, Action, Query>(
-  init?: (builder: ParamElementBuilder<State, Action, Query>) => void
+  init?: (builder: HTMLParamElementBuilder<State, Action, Query>) => void
 ) {
-  const builder = new ParamElementBuilder<State, Action, Query>('param')
+  const builder = new HTMLParamElementBuilder<State, Action, Query>('param')
   if (init !== undefined) init(builder)
   return builder
 }
 export function picture<State, Action, Query>(
-  init?: (builder: PictureElementBuilder<State, Action, Query>) => void
+  init?: (builder: HTMLPictureElementBuilder<State, Action, Query>) => void
 ) {
-  const builder = new PictureElementBuilder<State, Action, Query>('picture')
+  const builder = new HTMLPictureElementBuilder<State, Action, Query>('picture')
   if (init !== undefined) init(builder)
   return builder
 }
 export function pre<State, Action, Query>(
-  init?: (builder: ElementBuilder<State, Action, Query, HTMLPreElement>) => void
+  init?: (
+    builder: HTMLElementBuilder<State, Action, Query, HTMLPreElement>
+  ) => void
 ) {
-  const builder = new ElementBuilder<State, Action, Query, HTMLPreElement>(
+  const builder = new HTMLElementBuilder<State, Action, Query, HTMLPreElement>(
     'pre'
   )
   if (init !== undefined) init(builder)
   return builder
 }
 export function progress<State, Action, Query>(
-  init?: (builder: ProgressElementBuilder<State, Action, Query>) => void
+  init?: (builder: HTMLProgressElementBuilder<State, Action, Query>) => void
 ) {
-  const builder = new ProgressElementBuilder<State, Action, Query>('progress')
+  const builder = new HTMLProgressElementBuilder<State, Action, Query>(
+    'progress'
+  )
   if (init !== undefined) init(builder)
   return builder
 }
 export function q<State, Action, Query>(
-  init?: (builder: QuoteElementBuilder<State, Action, Query>) => void
+  init?: (builder: HTMLQuoteElementBuilder<State, Action, Query>) => void
 ) {
-  const builder = new QuoteElementBuilder<State, Action, Query>('q')
+  const builder = new HTMLQuoteElementBuilder<State, Action, Query>('q')
   if (init !== undefined) init(builder)
   return builder
 }
 export function rp<State, Action, Query>(
-  init?: (builder: ElementBuilder<State, Action, Query, HTMLElement>) => void
+  init?: (
+    builder: HTMLElementBuilder<State, Action, Query, HTMLElement>
+  ) => void
 ) {
-  const builder = new ElementBuilder<State, Action, Query, HTMLElement>('rp')
+  const builder = new HTMLElementBuilder<State, Action, Query, HTMLElement>(
+    'rp'
+  )
   if (init !== undefined) init(builder)
   return builder
 }
 export function rt<State, Action, Query>(
-  init?: (builder: ElementBuilder<State, Action, Query, HTMLElement>) => void
+  init?: (
+    builder: HTMLElementBuilder<State, Action, Query, HTMLElement>
+  ) => void
 ) {
-  const builder = new ElementBuilder<State, Action, Query, HTMLElement>('rt')
+  const builder = new HTMLElementBuilder<State, Action, Query, HTMLElement>(
+    'rt'
+  )
   if (init !== undefined) init(builder)
   return builder
 }
 export function ruby<State, Action, Query>(
-  init?: (builder: ElementBuilder<State, Action, Query, HTMLElement>) => void
+  init?: (
+    builder: HTMLElementBuilder<State, Action, Query, HTMLElement>
+  ) => void
 ) {
-  const builder = new ElementBuilder<State, Action, Query, HTMLElement>('ruby')
+  const builder = new HTMLElementBuilder<State, Action, Query, HTMLElement>(
+    'ruby'
+  )
   if (init !== undefined) init(builder)
   return builder
 }
 export function s<State, Action, Query>(
-  init?: (builder: ElementBuilder<State, Action, Query, HTMLElement>) => void
+  init?: (
+    builder: HTMLElementBuilder<State, Action, Query, HTMLElement>
+  ) => void
 ) {
-  const builder = new ElementBuilder<State, Action, Query, HTMLElement>('s')
+  const builder = new HTMLElementBuilder<State, Action, Query, HTMLElement>('s')
   if (init !== undefined) init(builder)
   return builder
 }
 export function samp<State, Action, Query>(
-  init?: (builder: ElementBuilder<State, Action, Query, HTMLElement>) => void
+  init?: (
+    builder: HTMLElementBuilder<State, Action, Query, HTMLElement>
+  ) => void
 ) {
-  const builder = new ElementBuilder<State, Action, Query, HTMLElement>('samp')
+  const builder = new HTMLElementBuilder<State, Action, Query, HTMLElement>(
+    'samp'
+  )
   if (init !== undefined) init(builder)
   return builder
 }
 export function script<State, Action, Query>(
-  init?: (builder: ScriptElementBuilder<State, Action, Query>) => void
+  init?: (builder: HTMLScriptElementBuilder<State, Action, Query>) => void
 ) {
-  const builder = new ScriptElementBuilder<State, Action, Query>('script')
+  const builder = new HTMLScriptElementBuilder<State, Action, Query>('script')
   if (init !== undefined) init(builder)
   return builder
 }
 export function section<State, Action, Query>(
-  init?: (builder: ElementBuilder<State, Action, Query, HTMLElement>) => void
+  init?: (
+    builder: HTMLElementBuilder<State, Action, Query, HTMLElement>
+  ) => void
 ) {
-  const builder = new ElementBuilder<State, Action, Query, HTMLElement>(
+  const builder = new HTMLElementBuilder<State, Action, Query, HTMLElement>(
     'section'
   )
   if (init !== undefined) init(builder)
   return builder
 }
 export function select<State, Action, Query>(
-  init?: (builder: SelectElementBuilder<State, Action, Query>) => void
+  init?: (builder: HTMLSelectElementBuilder<State, Action, Query>) => void
 ) {
-  const builder = new SelectElementBuilder<State, Action, Query>('select')
+  const builder = new HTMLSelectElementBuilder<State, Action, Query>('select')
   if (init !== undefined) init(builder)
   return builder
 }
 export function slot<State, Action, Query>(
-  init?: (builder: SlotElementBuilder<State, Action, Query>) => void
+  init?: (builder: HTMLSlotElementBuilder<State, Action, Query>) => void
 ) {
-  const builder = new SlotElementBuilder<State, Action, Query>('slot')
+  const builder = new HTMLSlotElementBuilder<State, Action, Query>('slot')
   if (init !== undefined) init(builder)
   return builder
 }
 export function small<State, Action, Query>(
-  init?: (builder: ElementBuilder<State, Action, Query, HTMLElement>) => void
+  init?: (
+    builder: HTMLElementBuilder<State, Action, Query, HTMLElement>
+  ) => void
 ) {
-  const builder = new ElementBuilder<State, Action, Query, HTMLElement>('small')
+  const builder = new HTMLElementBuilder<State, Action, Query, HTMLElement>(
+    'small'
+  )
   if (init !== undefined) init(builder)
   return builder
 }
 export function source<State, Action, Query>(
-  init?: (builder: SourceElementBuilder<State, Action, Query>) => void
+  init?: (builder: HTMLSourceElementBuilder<State, Action, Query>) => void
 ) {
-  const builder = new SourceElementBuilder<State, Action, Query>('source')
+  const builder = new HTMLSourceElementBuilder<State, Action, Query>('source')
   if (init !== undefined) init(builder)
   return builder
 }
 export function span<State, Action, Query>(
   init?: (
-    builder: ElementBuilder<State, Action, Query, HTMLSpanElement>
+    builder: HTMLElementBuilder<State, Action, Query, HTMLSpanElement>
   ) => void
 ) {
-  const builder = new ElementBuilder<State, Action, Query, HTMLSpanElement>(
+  const builder = new HTMLElementBuilder<State, Action, Query, HTMLSpanElement>(
     'span'
   )
   if (init !== undefined) init(builder)
   return builder
 }
 export function strong<State, Action, Query>(
-  init?: (builder: ElementBuilder<State, Action, Query, HTMLElement>) => void
+  init?: (
+    builder: HTMLElementBuilder<State, Action, Query, HTMLElement>
+  ) => void
 ) {
-  const builder = new ElementBuilder<State, Action, Query, HTMLElement>(
+  const builder = new HTMLElementBuilder<State, Action, Query, HTMLElement>(
     'strong'
   )
   if (init !== undefined) init(builder)
   return builder
 }
 export function styleEl<State, Action, Query>(
-  init?: (builder: StyleElementBuilder<State, Action, Query>) => void
+  init?: (builder: HTMLStyleElementBuilder<State, Action, Query>) => void
 ) {
-  const builder = new StyleElementBuilder<State, Action, Query>('style')
+  const builder = new HTMLStyleElementBuilder<State, Action, Query>('style')
   if (init !== undefined) init(builder)
   return builder
 }
 export function sub<State, Action, Query>(
-  init?: (builder: ElementBuilder<State, Action, Query, HTMLElement>) => void
+  init?: (
+    builder: HTMLElementBuilder<State, Action, Query, HTMLElement>
+  ) => void
 ) {
-  const builder = new ElementBuilder<State, Action, Query, HTMLElement>('sub')
+  const builder = new HTMLElementBuilder<State, Action, Query, HTMLElement>(
+    'sub'
+  )
   if (init !== undefined) init(builder)
   return builder
 }
 export function summary<State, Action, Query>(
-  init?: (builder: ElementBuilder<State, Action, Query, HTMLElement>) => void
+  init?: (
+    builder: HTMLElementBuilder<State, Action, Query, HTMLElement>
+  ) => void
 ) {
-  const builder = new ElementBuilder<State, Action, Query, HTMLElement>(
+  const builder = new HTMLElementBuilder<State, Action, Query, HTMLElement>(
     'summary'
   )
   if (init !== undefined) init(builder)
   return builder
 }
 export function sup<State, Action, Query>(
-  init?: (builder: ElementBuilder<State, Action, Query, HTMLElement>) => void
+  init?: (
+    builder: HTMLElementBuilder<State, Action, Query, HTMLElement>
+  ) => void
 ) {
-  const builder = new ElementBuilder<State, Action, Query, HTMLElement>('sup')
+  const builder = new HTMLElementBuilder<State, Action, Query, HTMLElement>(
+    'sup'
+  )
   if (init !== undefined) init(builder)
   return builder
 }
 export function table<State, Action, Query>(
   init?: (
-    builder: ElementBuilder<State, Action, Query, HTMLTableElement>
+    builder: HTMLElementBuilder<State, Action, Query, HTMLTableElement>
   ) => void
 ) {
-  const builder = new ElementBuilder<State, Action, Query, HTMLTableElement>(
-    'table'
-  )
+  const builder = new HTMLElementBuilder<
+    State,
+    Action,
+    Query,
+    HTMLTableElement
+  >('table')
   if (init !== undefined) init(builder)
   return builder
 }
 export function tbody<State, Action, Query>(
   init?: (
-    builder: ElementBuilder<State, Action, Query, HTMLTableSectionElement>
+    builder: HTMLElementBuilder<State, Action, Query, HTMLTableSectionElement>
   ) => void
 ) {
-  const builder = new ElementBuilder<
+  const builder = new HTMLElementBuilder<
     State,
     Action,
     Query,
@@ -858,36 +1019,45 @@ export function tbody<State, Action, Query>(
   return builder
 }
 export function td<State, Action, Query>(
-  init?: (builder: TableDataCellElementBuilder<State, Action, Query>) => void
+  init?: (
+    builder: HTMLTableDataCellElementBuilder<State, Action, Query>
+  ) => void
 ) {
-  const builder = new TableDataCellElementBuilder<State, Action, Query>('td')
+  const builder = new HTMLTableDataCellElementBuilder<State, Action, Query>(
+    'td'
+  )
   if (init !== undefined) init(builder)
   return builder
 }
 export function template<State, Action, Query>(
   init?: (
-    builder: ElementBuilder<State, Action, Query, HTMLTemplateElement>
+    builder: HTMLElementBuilder<State, Action, Query, HTMLTemplateElement>
   ) => void
 ) {
-  const builder = new ElementBuilder<State, Action, Query, HTMLTemplateElement>(
-    'template'
-  )
+  const builder = new HTMLElementBuilder<
+    State,
+    Action,
+    Query,
+    HTMLTemplateElement
+  >('template')
   if (init !== undefined) init(builder)
   return builder
 }
 export function textarea<State, Action, Query>(
-  init?: (builder: TextAreaElementBuilder<State, Action, Query>) => void
+  init?: (builder: HTMLTextAreaElementBuilder<State, Action, Query>) => void
 ) {
-  const builder = new TextAreaElementBuilder<State, Action, Query>('textarea')
+  const builder = new HTMLTextAreaElementBuilder<State, Action, Query>(
+    'textarea'
+  )
   if (init !== undefined) init(builder)
   return builder
 }
 export function tfoot<State, Action, Query>(
   init?: (
-    builder: ElementBuilder<State, Action, Query, HTMLTableSectionElement>
+    builder: HTMLElementBuilder<State, Action, Query, HTMLTableSectionElement>
   ) => void
 ) {
-  const builder = new ElementBuilder<
+  const builder = new HTMLElementBuilder<
     State,
     Action,
     Query,
@@ -897,91 +1067,118 @@ export function tfoot<State, Action, Query>(
   return builder
 }
 export function th<State, Action, Query>(
-  init?: (builder: TableHeaderCellElementBuilder<State, Action, Query>) => void
+  init?: (
+    builder: HTMLTableHeaderCellElementBuilder<State, Action, Query>
+  ) => void
 ) {
-  const builder = new TableHeaderCellElementBuilder<State, Action, Query>('th')
+  const builder = new HTMLTableHeaderCellElementBuilder<State, Action, Query>(
+    'th'
+  )
   if (init !== undefined) init(builder)
   return builder
 }
 export function thead<State, Action, Query>(
-  init?: (builder: ElementBuilder<State, Action, Query, HTMLElement>) => void
+  init?: (
+    builder: HTMLElementBuilder<State, Action, Query, HTMLElement>
+  ) => void
 ) {
-  const builder = new ElementBuilder<State, Action, Query, HTMLElement>('thead')
+  const builder = new HTMLElementBuilder<State, Action, Query, HTMLElement>(
+    'thead'
+  )
   if (init !== undefined) init(builder)
   return builder
 }
 export function time<State, Action, Query>(
-  init?: (builder: TimeElementBuilder<State, Action, Query>) => void
+  init?: (builder: HTMLTimeElementBuilder<State, Action, Query>) => void
 ) {
-  const builder = new TimeElementBuilder<State, Action, Query>('time')
+  const builder = new HTMLTimeElementBuilder<State, Action, Query>('time')
   if (init !== undefined) init(builder)
   return builder
 }
 export function title<State, Action, Query>(
   init?: (
-    builder: ElementBuilder<State, Action, Query, HTMLTitleElement>
+    builder: HTMLElementBuilder<State, Action, Query, HTMLTitleElement>
   ) => void
 ) {
-  const builder = new ElementBuilder<State, Action, Query, HTMLTitleElement>(
-    'title'
-  )
+  const builder = new HTMLElementBuilder<
+    State,
+    Action,
+    Query,
+    HTMLTitleElement
+  >('title')
   if (init !== undefined) init(builder)
   return builder
 }
 export function tr<State, Action, Query>(
   init?: (
-    builder: ElementBuilder<State, Action, Query, HTMLTableRowElement>
+    builder: HTMLElementBuilder<State, Action, Query, HTMLTableRowElement>
   ) => void
 ) {
-  const builder = new ElementBuilder<State, Action, Query, HTMLTableRowElement>(
-    'tr'
-  )
+  const builder = new HTMLElementBuilder<
+    State,
+    Action,
+    Query,
+    HTMLTableRowElement
+  >('tr')
   if (init !== undefined) init(builder)
   return builder
 }
 export function track<State, Action, Query>(
-  init?: (builder: TrackElementBuilder<State, Action, Query>) => void
+  init?: (builder: HTMLTrackElementBuilder<State, Action, Query>) => void
 ) {
-  const builder = new TrackElementBuilder<State, Action, Query>('track')
+  const builder = new HTMLTrackElementBuilder<State, Action, Query>('track')
   if (init !== undefined) init(builder)
   return builder
 }
 export function u<State, Action, Query>(
-  init?: (builder: ElementBuilder<State, Action, Query, HTMLElement>) => void
+  init?: (
+    builder: HTMLElementBuilder<State, Action, Query, HTMLElement>
+  ) => void
 ) {
-  const builder = new ElementBuilder<State, Action, Query, HTMLElement>('u')
+  const builder = new HTMLElementBuilder<State, Action, Query, HTMLElement>('u')
   if (init !== undefined) init(builder)
   return builder
 }
 export function ul<State, Action, Query>(
   init?: (
-    builder: ElementBuilder<State, Action, Query, HTMLUListElement>
+    builder: HTMLElementBuilder<State, Action, Query, HTMLUListElement>
   ) => void
 ) {
-  const builder = new ElementBuilder<State, Action, Query, HTMLUListElement>(
-    'ul'
-  )
+  const builder = new HTMLElementBuilder<
+    State,
+    Action,
+    Query,
+    HTMLUListElement
+  >('ul')
   if (init !== undefined) init(builder)
   return builder
 }
 export function varEl<State, Action, Query>(
-  init?: (builder: ElementBuilder<State, Action, Query, HTMLElement>) => void
+  init?: (
+    builder: HTMLElementBuilder<State, Action, Query, HTMLElement>
+  ) => void
 ) {
-  const builder = new ElementBuilder<State, Action, Query, HTMLElement>('varEl')
+  const builder = new HTMLElementBuilder<State, Action, Query, HTMLElement>(
+    'varEl'
+  )
   if (init !== undefined) init(builder)
   return builder
 }
 export function video<State, Action, Query>(
-  init?: (builder: VideoElementBuilder<State, Action, Query>) => void
+  init?: (builder: HTMLVideoElementBuilder<State, Action, Query>) => void
 ) {
-  const builder = new VideoElementBuilder<State, Action, Query>('video')
+  const builder = new HTMLVideoElementBuilder<State, Action, Query>('video')
   if (init !== undefined) init(builder)
   return builder
 }
 export function wbr<State, Action, Query>(
-  init?: (builder: ElementBuilder<State, Action, Query, HTMLElement>) => void
+  init?: (
+    builder: HTMLElementBuilder<State, Action, Query, HTMLElement>
+  ) => void
 ) {
-  const builder = new ElementBuilder<State, Action, Query, HTMLElement>('wbr')
+  const builder = new HTMLElementBuilder<State, Action, Query, HTMLElement>(
+    'wbr'
+  )
   if (init !== undefined) init(builder)
   return builder
 }
@@ -1020,9 +1217,9 @@ export function localAdapter<State, Action, Query>(props: {
 
 export function component<State, Action, Query>(
   reducer: (state: State, action: Action) => State,
-  init: (builder: ComponentBuilder<State, Action, Query>) => void
+  init: (builder: ComponentHTMLBuilder<State, Action, Query>) => void
 ) {
-  const builder = new ComponentBuilder<State, Action, Query>(reducer)
+  const builder = new ComponentHTMLBuilder<State, Action, Query>(reducer)
   init(builder)
   return builder
 }
@@ -1030,7 +1227,7 @@ export function component<State, Action, Query>(
 export function iterate<State, Items extends any[], Action, Query>(
   map: DerivedValue<State, Items>,
   init: (
-    builder: UntilBuilder<
+    builder: UntilHTMLBuilder<
       [Items, State],
       [Items[number], State, number],
       Action,
@@ -1055,9 +1252,9 @@ export function iterate<State, Items extends any[], Action, Query>(
 
 export function mapState<State, StateB, Action, Query>(
   map: (state: State) => StateB | undefined,
-  init: (builder: MapStateBuilder<State, StateB, Action, Query>) => void
+  init: (builder: MapStateHTMLBuilder<State, StateB, Action, Query>) => void
 ) {
-  const builder = new MapStateBuilder<State, StateB, Action, Query>(map)
+  const builder = new MapStateHTMLBuilder<State, StateB, Action, Query>(map)
   init(builder)
   return builder
 }
@@ -1069,7 +1266,7 @@ export function mapField<
   K extends keyof State = keyof State
 >(
   field: K,
-  init: (builder: MapStateBuilder<State, State[K], Action, Query>) => void
+  init: (builder: MapStateHTMLBuilder<State, State[K], Action, Query>) => void
 ) {
   return mapState<State, State[K], Action, Query>(
     (v: State): State[K] => v[field],
@@ -1080,7 +1277,7 @@ export function mapField<
 export function mapStateAndKeep<State, StateB, Action, Query>(
   map: (state: State) => StateB | undefined,
   init: (
-    builder: MapStateBuilder<State, [StateB, State], Action, Query>
+    builder: MapStateHTMLBuilder<State, [StateB, State], Action, Query>
   ) => void
 ) {
   return mapState<State, [StateB, State], Action, Query>((state: State) => {
@@ -1095,18 +1292,18 @@ export function mapStateAndKeep<State, StateB, Action, Query>(
 
 export function mapAction<State, Action, ActionB, Query>(
   map: DerivedValue<ActionB, Action>,
-  init: (builder: MapActionBuilder<State, Action, ActionB, Query>) => void
+  init: (builder: MapActionHTMLBuilder<State, Action, ActionB, Query>) => void
 ) {
-  const builder = new MapActionBuilder<State, Action, ActionB, Query>(map)
+  const builder = new MapActionHTMLBuilder<State, Action, ActionB, Query>(map)
   init(builder)
   return builder
 }
 
 export function mapQuery<State, Action, Query, QueryB>(
   map: DerivedValue<Query, QueryB>,
-  init: (builder: MapQueryBuilder<State, Action, Query, QueryB>) => void
+  init: (builder: MapQueryHTMLBuilder<State, Action, Query, QueryB>) => void
 ) {
-  const builder = new MapQueryBuilder<State, Action, Query, QueryB>(map)
+  const builder = new MapQueryHTMLBuilder<State, Action, Query, QueryB>(map)
   init(builder)
   return builder
 }
@@ -1272,9 +1469,9 @@ export function lazy<State, Action, Query>(
 }
 
 export function fragment<State, Action, Query>(
-  init: (builder: FragmentBuilder<State, Action, Query>) => void
+  init: (builder: FragmentHTMLBuilder<State, Action, Query>) => void
 ) {
-  const builder = new FragmentBuilder<State, Action, Query>()
+  const builder = new FragmentHTMLBuilder<State, Action, Query>()
   init(builder)
   return builder
 }
@@ -1302,34 +1499,34 @@ export function portalWithSelector<State, Action, Query>(
 }
 
 export function simpleComponent<State, Query>(
-  init: (builder: SimpleComponentBuilder<State, Query>) => void
+  init: (builder: SimpleComponentHTMLBuilder<State, Query>) => void
 ) {
-  const builder = new SimpleComponentBuilder<State, Query>()
+  const builder = new SimpleComponentHTMLBuilder<State, Query>()
   init(builder)
   return builder
 }
 
 export function unless<State, Action, Query>(
   condition: DerivedValue<State, boolean>,
-  init: (builder: MapStateBuilder<State, State, Action, Query>) => void
+  init: (builder: MapStateHTMLBuilder<State, State, Action, Query>) => void
 ) {
   return when(s => !condition(s), init)
 }
 
 export function until<State, StateB, Action, Query>(
   next: DerivedValue<{ state: State; index: number }, StateB>,
-  init: (builder: UntilBuilder<State, StateB, Action, Query>) => void
+  init: (builder: UntilHTMLBuilder<State, StateB, Action, Query>) => void
 ) {
-  const builder = new UntilBuilder<State, StateB, Action, Query>(next)
+  const builder = new UntilHTMLBuilder<State, StateB, Action, Query>(next)
   init(builder)
   return builder
 }
 
 export function when<State, Action, Query>(
   condition: DerivedValue<State, boolean>,
-  init: (builder: MapStateBuilder<State, State, Action, Query>) => void
+  init: (builder: MapStateHTMLBuilder<State, State, Action, Query>) => void
 ) {
-  const builder = new MapStateBuilder<State, State, Action, Query>(s => {
+  const builder = new MapStateHTMLBuilder<State, State, Action, Query>(s => {
     if (condition(s)) {
       return s
     } else {

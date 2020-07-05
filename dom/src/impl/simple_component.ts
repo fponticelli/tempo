@@ -11,18 +11,22 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { DOMTemplate } from '../template'
+import { DOMTemplate, DOMChild } from '../template'
 import { DOMContext } from '../context'
 import { map } from 'tempo-std/lib/arrays'
+import { IBuilder, childOrBuilderToTemplate } from './dom_builder'
 
 export type SimpleComponent<State, Query> = DOMTemplate<State, State, Query>
 
 export class SimpleComponentTemplate<State, Query>
   implements SimpleComponent<State, Query> {
+  readonly children: DOMTemplate<State, State, Query>[]
   constructor(
     readonly delayed: boolean,
-    readonly children: DOMTemplate<State, State, Query>[]
-  ) {}
+    children: (DOMChild<State, State, Query> | IBuilder<State, State, Query>)[]
+  ) {
+    this.children = children.map(childOrBuilderToTemplate)
+  }
 
   render(ctx: DOMContext<State>, state: State) {
     let update: (state: State) => void
