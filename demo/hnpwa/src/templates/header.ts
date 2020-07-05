@@ -20,7 +20,7 @@ import { svg } from 'tempo-dom/lib/svg'
 const logo = svg<Route, Action, unknown>($ =>
   $.width(32)
     .height(32)
-    .viewBox('0 0 32 32')
+    .viewBox([0, 0, 32, 32])
     .g($ =>
       $.fill('#ffffff')
         .rect($ => $.x(0).y(0).width(8).height(8))

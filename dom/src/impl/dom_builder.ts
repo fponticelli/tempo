@@ -3,7 +3,8 @@ import { text } from './text'
 import { DerivedOrLiteralValue, DerivedValue } from 'tempo-core/lib/value'
 import { keys } from 'tempo-std/lib/objects'
 
-export type ListValue<T extends string> = T | T[] | Record<T, boolean>
+export type ListOrRecordValue<T extends string> = T | T[] | Record<T, boolean>
+export type ListValue<T> = T | T[]
 
 export interface IBuilder<State, Action, Query> {
   build(): DOMTemplate<State, Action, Query>
@@ -47,7 +48,10 @@ export function extractDerived<State>(
     return list
   }, [] as { name: string; resolve: DerivedValue<State, string> }[])
 }
-export function separatedToString(src: ListValue<string>, separator: string) {
+export function listOrRecordToString(
+  src: ListOrRecordValue<string>,
+  separator: string
+) {
   if (typeof src === 'string') {
     return src
   } else if (src == null) {
@@ -64,12 +68,21 @@ export function separatedToString(src: ListValue<string>, separator: string) {
   }
 }
 
-export function spaceSeparatedToString(src: ListValue<string>) {
-  return separatedToString(src, ' ')
+export function numbersListToString(src: ListValue<number>) {
+  src = Array.isArray(src) ? src : [src]
+  return src.join(' ')
 }
 
-export function commaSeparatedToString(src: ListValue<string>) {
-  return separatedToString(src, ', ')
+export function numberPairsListToString(src: [number, number][]) {
+  return src.map(([a, b]) => `${a},${b}`).join(' ')
+}
+
+export function listOrRecordToSpaceSeparated(src: ListOrRecordValue<string>) {
+  return listOrRecordToString(src, ' ')
+}
+
+export function lostOrRecordToCommaSeparated(src: ListOrRecordValue<string>) {
+  return listOrRecordToString(src, ', ')
 }
 
 export function stylesToString(src: string | Record<string, string>) {

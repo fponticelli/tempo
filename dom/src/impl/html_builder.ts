@@ -29,12 +29,12 @@ import {
   childOrBuilderToTemplate,
   extractLiterals,
   extractDerived,
-  ListValue,
-  spaceSeparatedToString,
+  ListOrRecordValue,
+  listOrRecordToSpaceSeparated,
   toggleToString,
   booleanToString,
   stylesToString,
-  commaSeparatedToString,
+  lostOrRecordToCommaSeparated,
   DOMBuilder
 } from './dom_builder'
 import { AdapterTemplate, PropagateArg } from './adapter'
@@ -1837,8 +1837,8 @@ export class HTMLElementBuilder<State, Action, Query, El extends HTMLElement>
   aria(name: string, value: Attribute<State, string>) {
     return this.attr(`aria-${name}`, value)
   }
-  class(value: Attribute<State, ListValue<string>>) {
-    return this.attr('class', mapAttribute(value, spaceSeparatedToString))
+  class(value: Attribute<State, ListOrRecordValue<string>>) {
+    return this.attr('class', mapAttribute(value, listOrRecordToSpaceSeparated))
   }
   contentEditable(value: Attribute<State, boolean>) {
     return this.attr('contenteditable', mapAttribute(value, booleanToString))
@@ -1894,8 +1894,8 @@ export class HTMLElementBuilder<State, Action, Query, El extends HTMLElement>
   lang(value: Attribute<State, string>) {
     return this.attr('lang', value)
   }
-  part(value: Attribute<State, ListValue<string>>) {
-    return this.attr('part', mapAttribute(value, spaceSeparatedToString))
+  part(value: Attribute<State, ListOrRecordValue<string>>) {
+    return this.attr('part', mapAttribute(value, listOrRecordToSpaceSeparated))
   }
   role(value: Attribute<State, AriaRole>) {
     return this.attr('role', value)
@@ -2475,11 +2475,11 @@ export class HTMLAnchorElementBuilder<
   hreflang(lang: Attribute<State, string>): this {
     return this.attr('hreflang', lang)
   }
-  ping(url: Attribute<State, ListValue<string>>): this {
-    return this.attr('ping', mapAttribute(url, spaceSeparatedToString))
+  ping(url: Attribute<State, ListOrRecordValue<string>>): this {
+    return this.attr('ping', mapAttribute(url, listOrRecordToSpaceSeparated))
   }
-  rel(value: Attribute<State, ListValue<string>>): this {
-    return this.attr('rel', mapAttribute(value, spaceSeparatedToString))
+  rel(value: Attribute<State, ListOrRecordValue<string>>): this {
+    return this.attr('rel', mapAttribute(value, listOrRecordToSpaceSeparated))
   }
   target(name: Attribute<State, string>): this {
     return this.attr('target', name)
@@ -2684,10 +2684,10 @@ export class HTMLFormElementBuilder<
   Action,
   Query
 > extends HTMLElementBuilder<State, Action, Query, HTMLFormElement> {
-  acceptCharset(value: Attribute<State, ListValue<string>>) {
+  acceptCharset(value: Attribute<State, ListOrRecordValue<string>>) {
     return this.attr(
       'accept-charset',
-      mapAttribute(value, spaceSeparatedToString)
+      mapAttribute(value, listOrRecordToSpaceSeparated)
     )
   }
   action(value: Attribute<State, string>) {
@@ -2821,14 +2821,17 @@ export class HTMLImageElementBuilder<
   loading(value: Attribute<State, 'eager' | 'lazy'>) {
     return this.attr('loading', value)
   }
-  sizes(value: Attribute<State, ListValue<string>>) {
-    return this.attr('sizes', mapAttribute(value, commaSeparatedToString))
+  sizes(value: Attribute<State, ListOrRecordValue<string>>) {
+    return this.attr('sizes', mapAttribute(value, lostOrRecordToCommaSeparated))
   }
   src(value: Attribute<State, string>) {
     return this.attr('src', value)
   }
-  srcset(value: Attribute<State, ListValue<string>>) {
-    return this.attr('srcset', mapAttribute(value, commaSeparatedToString))
+  srcset(value: Attribute<State, ListOrRecordValue<string>>) {
+    return this.attr(
+      'srcset',
+      mapAttribute(value, lostOrRecordToCommaSeparated)
+    )
   }
   usemap(value: Attribute<State, string>) {
     return this.attr('usemap', value)
@@ -2926,10 +2929,10 @@ export class HTMLInputElementBuilder<
   type(value: Attribute<State, InputTypeValue>) {
     return this.attr('type', value)
   }
-  autoComplete(value: Attribute<State, ListValue<AutoCompleteValue>>) {
+  autoComplete(value: Attribute<State, ListOrRecordValue<AutoCompleteValue>>) {
     return this.attr(
       'autocomplete',
-      mapAttribute(value, spaceSeparatedToString)
+      mapAttribute(value, listOrRecordToSpaceSeparated)
     )
   }
   autoFocus(value: Attribute<State, boolean>) {
@@ -3017,8 +3020,11 @@ export class HTMLInputFileElementBuilder<
   Action,
   Query
 > extends HTMLInputElementBuilder<State, Action, Query> {
-  accept(value: Attribute<State, ListValue<string>>) {
-    return this.attr('accept', mapAttribute(value, commaSeparatedToString))
+  accept(value: Attribute<State, ListOrRecordValue<string>>) {
+    return this.attr(
+      'accept',
+      mapAttribute(value, lostOrRecordToCommaSeparated)
+    )
   }
   capture(value: Attribute<State, string>) {
     return this.attr('capture', value)
@@ -3278,8 +3284,8 @@ export class HTMLLinkElementBuilder<
   rel(value: Attribute<State, string>) {
     return this.attr('rel', value)
   }
-  sizes(value: Attribute<State, ListValue<string>>) {
-    return this.attr('sizes', mapAttribute(value, commaSeparatedToString))
+  sizes(value: Attribute<State, ListOrRecordValue<string>>) {
+    return this.attr('sizes', mapAttribute(value, lostOrRecordToCommaSeparated))
   }
   title(value: Attribute<State, string>) {
     return this.attr('title', value)
@@ -3601,10 +3607,10 @@ export class HTMLSelectElementBuilder<
   Action,
   Query
 > extends HTMLElementBuilder<State, Action, Query, HTMLSelectElement> {
-  autoComplete(value: Attribute<State, ListValue<AutoCompleteValue>>) {
+  autoComplete(value: Attribute<State, ListOrRecordValue<AutoCompleteValue>>) {
     return this.attr(
       'autocomplete',
-      mapAttribute(value, spaceSeparatedToString)
+      mapAttribute(value, listOrRecordToSpaceSeparated)
     )
   }
   autoFocus(value: Attribute<State, boolean>) {
@@ -3665,8 +3671,8 @@ export class HTMLSourceElementBuilder<
   media(value: Attribute<State, string>) {
     return this.attr('media', value)
   }
-  sizes(value: Attribute<State, ListValue<string>>) {
-    return this.attr('sizes', mapAttribute(value, commaSeparatedToString))
+  sizes(value: Attribute<State, ListOrRecordValue<string>>) {
+    return this.attr('sizes', mapAttribute(value, lostOrRecordToCommaSeparated))
   }
   src(value: Attribute<State, string>) {
     return this.attr('src', value)
@@ -3716,8 +3722,11 @@ export class HTMLTableDataCellElementBuilder<
   colSpan(value: Attribute<State, number>) {
     return this.attr('colspan', mapAttribute(value, String))
   }
-  headers(value: Attribute<State, ListValue<string>>) {
-    return this.attr('headers', mapAttribute(value, spaceSeparatedToString))
+  headers(value: Attribute<State, ListOrRecordValue<string>>) {
+    return this.attr(
+      'headers',
+      mapAttribute(value, listOrRecordToSpaceSeparated)
+    )
   }
   rowSpan(value: Attribute<State, number>) {
     return this.attr('rowspan', mapAttribute(value, String))
@@ -3737,8 +3746,11 @@ export class HTMLTableHeaderCellElementBuilder<
   colSpan(value: Attribute<State, number>) {
     return this.attr('colspan', mapAttribute(value, String))
   }
-  headers(value: Attribute<State, ListValue<string>>) {
-    return this.attr('headers', mapAttribute(value, spaceSeparatedToString))
+  headers(value: Attribute<State, ListOrRecordValue<string>>) {
+    return this.attr(
+      'headers',
+      mapAttribute(value, listOrRecordToSpaceSeparated)
+    )
   }
   rowSpan(value: Attribute<State, number>) {
     return this.attr('rowspan', mapAttribute(value, String))
@@ -3756,10 +3768,10 @@ export class HTMLTextAreaElementBuilder<
   Action,
   Query
 > extends HTMLElementBuilder<State, Action, Query, HTMLTextAreaElement> {
-  autoComplete(value: Attribute<State, ListValue<AutoCompleteValue>>) {
+  autoComplete(value: Attribute<State, ListOrRecordValue<AutoCompleteValue>>) {
     return this.attr(
       'autocomplete',
-      mapAttribute(value, spaceSeparatedToString)
+      mapAttribute(value, listOrRecordToSpaceSeparated)
     )
   }
   autoFocus(value: Attribute<State, boolean>) {
