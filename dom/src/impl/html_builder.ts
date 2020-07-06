@@ -260,37 +260,37 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
   }
 
   Portal(
-    appendChild: (doc: Document) => Element,
-    init: (builder: PortalBuilder<State, Action, Query>) => void
+    appendChild: (doc: Document, node: Node) => void,
+    init: (builder: PortalHTMLBuilder<State, Action, Query>) => void
   ): this {
-    const builder = new PortalBuilder<State, Action, Query>(appendChild)
+    const builder = new PortalHTMLBuilder<State, Action, Query>(appendChild)
     init(builder)
     return this.Append(builder.build())
   }
 
   PortalWithSelector(
     selector: string,
-    init: (builder: PortalBuilder<State, Action, Query>) => void
+    init: (builder: PortalHTMLBuilder<State, Action, Query>) => void
   ): this {
-    return this.Portal(doc => {
+    return this.Portal((doc, node) => {
       const el = doc.querySelector(selector)
       if (!el) {
         throw new Error(`selector doesn't match any element: "${selector}"`)
       }
-      return el
+      el.appendChild(node)
     }, init)
   }
 
   HeadPortal(
-    init: (builder: PortalBuilder<State, Action, Query>) => void
+    init: (builder: PortalHTMLBuilder<State, Action, Query>) => void
   ): this {
-    return this.Portal(doc => doc.head, init)
+    return this.Portal((doc, node) => doc.head.appendChild(node), init)
   }
 
   BodyPortal(
-    init: (builder: PortalBuilder<State, Action, Query>) => void
+    init: (builder: PortalHTMLBuilder<State, Action, Query>) => void
   ): this {
-    return this.Portal(doc => doc.body, init)
+    return this.Portal((doc, node) => doc.body.appendChild(node), init)
   }
 
   // SimpleComponent(
@@ -3969,7 +3969,7 @@ export class MapStateHTMLBuilder<State, StateB, Action, Query>
   }
 }
 
-export class PortalBuilder<State, Action, Query>
+export class PortalHTMLBuilder<State, Action, Query>
   extends BaseHTMLBuilder<State, Action, Query>
   implements IBuilder<State, Action, Query> {
   constructor(readonly appendChild: (doc: Document, node: Node) => void) {

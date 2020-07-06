@@ -11,7 +11,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { div, h1, address, article } from 'tempo-dom/lib/html'
+import { DIV } from 'tempo-dom/lib/html'
 
 export interface Deep {
   id: string
@@ -23,14 +23,14 @@ export interface Deep {
   paragraph: string
 }
 
-export const deep = div<Deep, unknown, unknown>($ =>
-  $.id(s => s.id).div($ =>
-    $.h1($ => $.text('Welcome ').text(s => s.name))
-      .address($ =>
-        $.div($ => $.text('Address: '))
-          .div($ => $.text(s => s.address.line1))
-          .div($ => $.text(s => s.address.line2))
+export const deep = DIV<Deep, unknown, unknown>($ =>
+  $.id(s => s.id).DIV($ =>
+    $.H1($ => $.text('Welcome ').text(s => s.name))
+      .ADDRESS($ =>
+        $.DIV($ => $.text('Address: '))
+          .DIV($ => $.text(s => s.address.line1))
+          .DIV($ => $.text(s => s.address.line2))
       )
-      .article($ => $.text(s => s.paragraph))
+      .ARTICLE($ => $.text(s => s.paragraph))
   )
 ).build()

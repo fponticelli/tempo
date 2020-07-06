@@ -257,7 +257,7 @@ export class BaseSVGBuilder<State, Action, Query> extends DOMBuilder<
   }
 
   Portal(
-    appendChild: (doc: Document) => Element,
+    appendChild: (doc: Document, node: Node) => void,
     init: (builder: PortalSVGBuilder<State, Action, Query>) => void
   ): this {
     const builder = new PortalSVGBuilder<State, Action, Query>(appendChild)
@@ -269,25 +269,25 @@ export class BaseSVGBuilder<State, Action, Query> extends DOMBuilder<
     selector: string,
     init: (builder: PortalSVGBuilder<State, Action, Query>) => void
   ): this {
-    return this.Portal(doc => {
+    return this.Portal((doc, node) => {
       const el = doc.querySelector(selector)
       if (!el) {
         throw new Error(`selector doesn't match any element: "${selector}"`)
       }
-      return el
+      el.appendChild(node)
     }, init)
   }
 
   HeadPortal(
     init: (builder: PortalSVGBuilder<State, Action, Query>) => void
   ): this {
-    return this.Portal(doc => doc.head, init)
+    return this.Portal((doc, node) => doc.head.appendChild(node), init)
   }
 
   BodyPortal(
     init: (builder: PortalSVGBuilder<State, Action, Query>) => void
   ): this {
-    return this.Portal(doc => doc.body, init)
+    return this.Portal((doc, node) => doc.body.appendChild(node), init)
   }
 
   // SimpleComponent(

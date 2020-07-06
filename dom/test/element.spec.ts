@@ -12,14 +12,13 @@ limitations under the License.
 */
 
 import { createContext } from './common'
-import { el } from '../src/impl/element'
-import { div, span, a } from '../src/html_old'
+import { DIV } from '../src/html'
 import { MakeLifecycle } from '../src/lifecycle'
 
 describe('dom_element', () => {
   it('static empty-element', () => {
     const ctx = createContext()
-    const nodeUndefined = el('div', {}).render(ctx, 1)
+    const nodeUndefined = DIV().build().render(ctx, 1)
     expect(ctx.doc.body.innerHTML).toEqual('<div></div>')
     nodeUndefined.destroy()
     expect(ctx.doc.body.innerHTML).toEqual('')
@@ -27,11 +26,9 @@ describe('dom_element', () => {
 
   it('static nested-element', () => {
     const ctx = createContext()
-    const nodeUndefined = el(
-      'div',
-      {},
-      el('a', {}, el('span', {}, 'abc'))
-    ).render(ctx, 1)
+    const nodeUndefined = DIV($ => $.A($ => $.SPAN($ => $.text('abc'))))
+      .build()
+      .render(ctx, 1)
     expect(ctx.doc.body.innerHTML).toEqual('<div><a><span>abc</span></a></div>')
     nodeUndefined.destroy()
     expect(ctx.doc.body.innerHTML).toEqual('')
@@ -39,7 +36,9 @@ describe('dom_element', () => {
 
   it('static attribute', () => {
     const ctx = createContext()
-    const node = el('div', { attrs: { id: 'main' } }).render(ctx, 1)
+    const node = DIV($ => $.id('main'))
+      .build()
+      .render(ctx, 1)
     expect(ctx.doc.body.innerHTML).toEqual('<div id="main"></div>')
     node.destroy()
     expect(ctx.doc.body.innerHTML).toEqual('')
@@ -47,9 +46,11 @@ describe('dom_element', () => {
 
   it('dynamic attribute', () => {
     const ctx = createContext()
-    const node = el('div', {
-      attrs: { id: (v: string) => (v !== 'X' ? v : undefined) }
-    }).render(ctx, 'abc')
+    const node = DIV<string, unknown, unknown>($ =>
+      $.id((v: string) => (v !== 'X' ? v : undefined))
+    )
+      .build()
+      .render(ctx, 'abc')
     expect(ctx.doc.body.innerHTML).toEqual('<div id="abc"></div>')
     node.change('xyz')
     expect(ctx.doc.body.innerHTML).toEqual('<div id="xyz"></div>')
@@ -63,11 +64,11 @@ describe('dom_element', () => {
 
   it('dynamic child', () => {
     const ctx = createContext()
-    const node = el(
-      'div',
-      { attrs: { id: (v: string) => v } },
-      el('a', { attrs: { href: (v: string) => v && `#${v}` } })
-    ).render(ctx, 'abc')
+    const node = DIV<string, unknown, unknown>($ =>
+      $.id((v: string) => v).A($ => $.href((v: string) => v && `#${v}`))
+    )
+      .build()
+      .render(ctx, 'abc')
     expect(ctx.doc.body.innerHTML).toEqual(
       '<div id="abc"><a href="#abc"></a></div>'
     )
@@ -83,7 +84,9 @@ describe('dom_element', () => {
 
   it('static $style', () => {
     const ctx = createContext()
-    const node = el('div', { styles: { color: 'red' } }).render(ctx, 1)
+    const node = DIV<number, unknown, unknown>($ => $.styles({ color: 'red' }))
+      .build()
+      .render(ctx, 1)
     expect(ctx.doc.body.innerHTML).toEqual('<div style="color: red;"></div>')
     node.destroy()
     expect(ctx.doc.body.innerHTML).toEqual('')
@@ -91,12 +94,11 @@ describe('dom_element', () => {
 
   it('dynamic $style', () => {
     const ctx = createContext()
-    const node = el('div', {
-      styles: {
-        color: (v: number | undefined) =>
-          (v && (v === 1 ? 'red' : 'blue')) || undefined
-      }
-    }).render(ctx, 1)
+    const node = DIV<number | undefined, unknown, unknown>($ =>
+      $.style('color', v => (v && (v === 1 ? 'red' : 'blue')) || undefined)
+    )
+      .build()
+      .render(ctx, 1)
     expect(ctx.doc.body.innerHTML).toEqual('<div style="color: red;"></div>')
     node.change(2)
     expect(ctx.doc.body.innerHTML).toEqual('<div style="color: blue;"></div>')
@@ -112,9 +114,9 @@ describe('dom_element', () => {
     })
     let count = 0
     const click = (state: number, e: Event, el: Element) => 1
-    const node = el<number, number>('div', {
-      events: { click }
-    }).render(ctx, 1)
+    const node = DIV<number, number, unknown>($ => $.onClick(click))
+      .build()
+      .render(ctx, 1)
     expect(ctx.doc.body.innerHTML).toEqual('<div></div>')
     const domEl = ctx.doc.body.firstElementChild as HTMLDivElement
     expect(count).toEqual(0)
@@ -132,9 +134,9 @@ describe('dom_element', () => {
     })
     let count = 0
     const click = () => undefined
-    const node = el<number, number>('div', {
-      events: { click }
-    }).render(ctx, 1)
+    const node = DIV<number, number, unknown>($ => $.onClick(click))
+      .build()
+      .render(ctx, 1)
     expect(ctx.doc.body.innerHTML).toEqual('<div></div>')
     const domEl = ctx.doc.body.firstElementChild as HTMLDivElement
     expect(count).toEqual(0)
@@ -150,9 +152,9 @@ describe('dom_element', () => {
     })
     let count = 0
     const click = (state: number, e: Event, el: HTMLElement) => state + 1
-    const node = el<number, number>('div', {
-      events: { click }
-    }).render(ctx, 1)
+    const node = DIV<number, number, unknown>($ => $.onClick(click))
+      .build()
+      .render(ctx, 1)
     expect(ctx.doc.body.innerHTML).toEqual('<div></div>')
     const domEl = ctx.doc.body.firstElementChild as HTMLDivElement
     expect(count).toEqual(0)
@@ -168,9 +170,9 @@ describe('dom_element', () => {
     })
     let count = 0
     const click = (state: number, e: Event, el: Element) => state + 1
-    const node = el<number, number>('div', {
-      events: { click }
-    }).render(ctx, 1)
+    const node = DIV<number, number, unknown>($ => $.onClick(click))
+      .build()
+      .render(ctx, 1)
     expect(ctx.doc.body.innerHTML).toEqual('<div></div>')
     const domEl = ctx.doc.body.firstElementChild as HTMLDivElement
     expect(count).toEqual(0)
@@ -186,9 +188,9 @@ describe('dom_element', () => {
     })
     let count = 0
     const click = () => undefined
-    const node = el<number, number>('div', {
-      events: { click }
-    }).render(ctx, 1)
+    const node = DIV<number, number, unknown>($ => $.onClick(click))
+      .build()
+      .render(ctx, 1)
     const domEl = ctx.doc.body.firstElementChild as HTMLDivElement
     expect(count).toEqual(0)
     domEl.click()
@@ -197,14 +199,9 @@ describe('dom_element', () => {
   })
 
   it('generated elements', () => {
-    const template = div(
-      {},
-      span(
-        {},
-        'hello ',
-        a({ attrs: { href: '#you' } }, s => `#${s}`)
-      )
-    )
+    const template = DIV($ =>
+      $.SPAN($ => $.text('hello ').A($ => $.href('#you').text(s => `#${s}`)))
+    ).build()
     const ctx = createContext()
     template.render(ctx, 1)
     expect(ctx.doc.body.innerHTML).toEqual(
@@ -213,10 +210,9 @@ describe('dom_element', () => {
   })
 
   it('generated elements with style', () => {
-    const template = div(
-      { styles: { 'background-color': 'rgb(200, 200, 200)' } },
-      'hello'
-    )
+    const template = DIV($ =>
+      $.style('background-color', 'rgb(200, 200, 200)').text('hello')
+    ).build()
     const ctx = createContext()
     template.render(ctx, 1)
     expect(ctx.doc.body.innerHTML).toEqual(
@@ -235,9 +231,9 @@ describe('dom_element', () => {
         beforeDestroy: () => sequence.push('beforedestroy')
       }
     }
-    const template = div<string, unknown>({
-      lifecycle: makeLifecycle
-    })
+    const template = DIV<string, unknown, unknown>($ =>
+      $.Lifecycle(makeLifecycle)
+    ).build()
     const view = template.render(ctx, 'A')
     expect(sequence).toEqual(['afterrender'])
     view.change('B')
@@ -282,9 +278,9 @@ describe('dom_element', () => {
         }
       }
     }
-    const template = div<string, unknown, number>({
-      lifecycle: makeLifecycle
-    })
+    const template = DIV<string, unknown, number>($ =>
+      $.Lifecycle(makeLifecycle)
+    ).build()
     const view = template.render(ctx, 'A')
     expect(sequence).toEqual(['AR:A:DIV'])
     view.change('B')

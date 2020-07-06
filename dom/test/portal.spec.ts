@@ -13,9 +13,7 @@ limitations under the License.
 
 import { createContext } from './common'
 import { Tempo } from '../src/tempo'
-import { component } from '../src/component'
-import { portalWithSelector, headPortal, bodyPortal } from '../src/portal'
-import { span, style } from '../src/html'
+import { Component } from '../src/html'
 
 describe('portal', () => {
   it('portalWithSelector', () => {
@@ -24,11 +22,9 @@ describe('portal', () => {
 
     const state = 'hello'
     const reducer = (_: string, a: string) => a
-    const comp = component(
-      { reducer },
-      portalWithSelector(
-        { selector: '#container' },
-        span({ attrs: { className: (s: string) => s } })
+    const comp = Component(reducer, $ =>
+      $.PortalWithSelector('#container', $ =>
+        $.SPAN($ => $.class((s: string) => s))
       )
     )
     const { view, store } = Tempo.renderComponent({
@@ -55,11 +51,9 @@ describe('portal', () => {
     ctx.doc.body.innerHTML = '<div id="main"></div><div id="container"></div>'
     const state = 'hello'
     const reducer = (_: string, a: string) => a
-    const comp = component(
-      { reducer },
-      portalWithSelector(
-        { selector: '#doesnotexist' },
-        span({ attrs: { className: (s: string) => s } })
+    const comp = Component(reducer, $ =>
+      $.PortalWithSelector('#doesnotexist', $ =>
+        $.SPAN($ => $.class((s: string) => s))
       )
     )
     expect(() => {
@@ -76,7 +70,9 @@ describe('portal', () => {
     const ctx = createContext()
     const state = 'background-color: red'
     const reducer = (_: string, a: string) => a
-    const comp = component({ reducer }, headPortal(style({}, s => s)))
+    const comp = Component(reducer, $ =>
+      $.HeadPortal($ => $.STYLE($ => $.text(s => s)))
+    )
     const { view, store } = Tempo.renderComponent({
       el: ctx.doc.body!,
       component: comp,
@@ -96,7 +92,9 @@ describe('portal', () => {
     const ctx = createContext()
     const state = 'background-color: red'
     const reducer = (_: string, a: string) => a
-    const comp = component({ reducer }, bodyPortal(style({}, s => s)))
+    const comp = Component(reducer, $ =>
+      $.BodyPortal($ => $.STYLE($ => $.text(s => s)))
+    )
     const { view, store } = Tempo.renderComponent({
       el: ctx.doc.body!,
       component: comp,

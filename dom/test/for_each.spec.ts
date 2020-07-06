@@ -12,13 +12,12 @@ limitations under the License.
 */
 
 import { createContext } from './common'
-import { div } from '../src/html'
-import { forEach } from '../src/for_each'
+import { ForEach } from '../src/html'
 
 describe('repeat', () => {
   it('repeat starting empty', () => {
     const ctx = createContext()
-    const template = forEach({}, div({}, String))
+    const template = ForEach($ => $.DIV($ => $.text(String))).build()
     const view = template.render(ctx, [])
     expect(ctx.doc.body.innerHTML).toEqual('')
     view.change([1, 2, 3])
@@ -39,7 +38,7 @@ describe('repeat', () => {
 
   it('repeat starting full', () => {
     const ctx = createContext()
-    const template = forEach({}, div({}, String))
+    const template = ForEach($ => $.DIV($ => $.text(String))).build()
     const view = template.render(ctx, [1, 2, 3])
     expect(ctx.doc.body.innerHTML).toEqual(
       '<div>1</div><div>2</div><div>3</div>'

@@ -11,7 +11,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { div } from 'tempo-dom/lib/html'
+import { DIV } from 'tempo-dom/lib/html'
 
 export interface TestAttributes {
   id: string
@@ -19,9 +19,8 @@ export interface TestAttributes {
   title: string
 }
 
-export const attribute = div<TestAttributes, unknown, unknown>($ =>
+export const attribute = DIV<TestAttributes, unknown, unknown>($ =>
   $.id(s => s.id)
-    // .attr('class', s => s.className)
     .class(s => s.className)
     .title(s => s.title)
     .text('content')

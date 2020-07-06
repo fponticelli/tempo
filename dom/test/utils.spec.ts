@@ -11,7 +11,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { removeNode, insertFBefore } from '../src/utils/dom'
+import { removeNode, insertFBefore } from '../src/impl/dom'
 import { createContext } from './common'
 
 describe('utils', () => {

@@ -21,7 +21,6 @@ describe('context', () => {
     document.body.append(el)
     const ctx = DOMContext.fromElement(el, () => {})
     expect(ctx.doc).toBe(document)
-    expect(ctx.parent).toBe(el)
     const sub = document.createElement('p')
     ctx.append(sub)
     expect(document.body.innerHTML).toBe('<div><p></p></div>')

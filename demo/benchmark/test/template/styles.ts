@@ -11,7 +11,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { div } from 'tempo-dom/lib/html'
+import { DIV } from 'tempo-dom/lib/html'
 
 export interface TestStyles {
   backgroundColor: string
@@ -19,8 +19,8 @@ export interface TestStyles {
   border: string
 }
 
-export const style = div<TestStyles, unknown, unknown>($ =>
-  $.style('backgroundColor', s => s.backgroundColor)
+export const style = DIV<TestStyles, unknown, unknown>($ =>
+  $.style('background-color', s => s.backgroundColor)
     .style('color', s => s.color)
     .style('border', s => s.border)
     .text('content')

@@ -11,16 +11,16 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { div } from '../src/html'
-import { component } from '../src/component'
-import { text } from '../src/text'
+import { Component } from '../src/html'
 import { createContext } from './common'
 
 describe('component', () => {
   it('fromElements sets-up the right defaults', () => {
     const ctx = createContext<any>()
     const reducer = (state: number, action: number) => action
-    const node = component({ reducer }, div({}, text(String))).render(ctx, 2)
+    const node = Component(reducer, $ => $.DIV($ => $.text(String)))
+      .build()
+      .render(ctx, 2)
     expect(ctx.doc.body.innerHTML).toEqual('<div>2</div>')
     node.destroy()
     expect(ctx.doc.body.innerHTML).toEqual('')

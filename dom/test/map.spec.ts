@@ -11,17 +11,17 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { el } from '../src/element'
-import { mapState, mapAction } from '../src/map'
+import { DIV } from '../src/html'
 import { createContext } from './common'
 
 describe('map', () => {
-  it('mapState', () => {
-    const template = el(
-      'div',
-      {},
-      mapState({ map: (v: number) => `#${v}` }, s => s)
-    )
+  it('MapState', () => {
+    const template = DIV<number, unknown, unknown>($ =>
+      $.MapState(
+        (v: number) => `#${v}`,
+        $ => $.text(s => s)
+      )
+    ).build()
     const ctx = createContext()
     const view = template.render(ctx, 1)
     expect(ctx.doc.body.innerHTML).toEqual('<div>#1</div>')
@@ -29,28 +29,27 @@ describe('map', () => {
     expect(ctx.doc.body.innerHTML).toEqual('<div>#2</div>')
   })
 
-  it('mapState only static', () => {
-    const template = el(
-      'div',
-      {},
-      mapState({ map: (v: number) => `#${v}` }, 'X')
-    )
+  it('MapState only static', () => {
+    const template = DIV<number, unknown, unknown>($ =>
+      $.MapState(
+        (v: number) => `#${v}`,
+        $ => $.text('X')
+      )
+    ).build()
     const ctx = createContext()
     template.render(ctx, 1)
     expect(ctx.doc.body.innerHTML).toEqual('<div>X</div>')
   })
 
-  it('mapAction', () => {
+  it('MapAction', () => {
     let ref: string | undefined
     const click = (): number => 1
-    const template = el<string, string, HTMLDivElement>(
-      'div',
-      {},
-      mapAction(
-        { map: (v: number) => `#${v}` },
-        el<string, number, HTMLDivElement>('div', { events: { click } }, s => s)
+    const template = DIV<string, string, unknown>($ =>
+      $.MapAction(
+        (v: number): string | undefined => `#${v}`,
+        $ => $.DIV($ => $.onClick(click).text(s => s))
       )
-    )
+    ).build()
     const ctx = createContext((n: string) => {
       ref = n
     })
@@ -64,17 +63,15 @@ describe('map', () => {
     expect(ctx.doc.body.innerHTML).toEqual('')
   })
 
-  it('mapAction passing undefined', () => {
+  it('MapAction passing undefined', () => {
     let ref = 'ORIG'
     const click = (): string => 'X'
-    const template = el<string, string, HTMLDivElement>(
-      'div',
-      {},
-      mapAction(
-        { map: (v: string): string | undefined => undefined },
-        el<string, string, HTMLDivElement>('div', { events: { click } }, s => s)
+    const template = DIV<string, string, unknown>($ =>
+      $.MapAction(
+        (v: string): string | undefined => undefined,
+        $ => $.DIV($ => $.onClick(click).text(s => s))
       )
-    )
+    ).build()
     const ctx = createContext((n: string) => {
       ref = n
     })
@@ -88,17 +85,15 @@ describe('map', () => {
     expect(ctx.doc.body.innerHTML).toEqual('')
   })
 
-  it('mapAction only static', () => {
+  it('MapAction only static', () => {
     let ref: string | undefined
     const click = (): number => 1
-    const template = el<string, string, HTMLDivElement>(
-      'div',
-      {},
-      mapAction(
-        { map: (v: number) => `#${v}` },
-        el<string, number, HTMLDivElement>('div', { events: { click } }, 'X')
+    const template = DIV<string, string, unknown>($ =>
+      $.MapAction(
+        (v: number) => `#${v}`,
+        $ => $.DIV($ => $.onClick(click).text('X'))
       )
-    )
+    ).build()
     const ctx = createContext((n: string) => {
       ref = n
     })

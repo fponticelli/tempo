@@ -13,8 +13,7 @@ limitations under the License.
 
 import { createContext } from './common'
 import { Tempo } from '../src/tempo'
-import { component } from '../src/component'
-import { div } from '../src/html'
+import { Component } from '../src/html'
 
 describe('Tempo', () => {
   it('render', () => {
@@ -22,10 +21,7 @@ describe('Tempo', () => {
     const reducer = (state: string, action: string) => action
     const state = 'hello'
 
-    const comp = component(
-      { reducer },
-      div({}, a => a)
-    )
+    const comp = Component(reducer, $ => $.DIV($ => $.text(a => a)))
     const { view, store } = Tempo.renderComponent({
       el: ctx.doc.body,
       component: comp,
@@ -54,10 +50,7 @@ describe('Tempo', () => {
       result[1] = a
     }
 
-    const comp = component(
-      { reducer },
-      div({}, a => a)
-    )
+    const comp = Component(reducer, $ => $.DIV($ => $.text(a => a)))
 
     const { store } = Tempo.renderComponent({
       el: ctx.doc.body,

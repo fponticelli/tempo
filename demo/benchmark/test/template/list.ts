@@ -11,8 +11,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { ul } from 'tempo-dom/lib/html'
+import { UL } from 'tempo-dom/lib/html'
 
-export const list = ul<number[], unknown, unknown>($ =>
-  $.forEach($ => $.li($ => $.class(String).text(String)))
+export const list = UL<number[], unknown, unknown>($ =>
+  $.ForEach($ => $.LI($ => $.class(String).text(String)))
 ).build()

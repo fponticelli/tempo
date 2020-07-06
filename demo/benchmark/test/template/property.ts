@@ -11,13 +11,13 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { input } from 'tempo-dom/lib/html'
+import { INPUT } from 'tempo-dom/lib/html'
 
 export interface TestProperties {
   value: string
   disabled: boolean
 }
 
-export const property = input<TestProperties, unknown, unknown>($ =>
+export const property = INPUT<TestProperties, unknown, unknown>($ =>
   $.value(s => s.value).disabled(s => s.disabled)
 ).build()

@@ -141,7 +141,7 @@ export function ForEach<State, Action, Query>(
 }
 
 export function Portal<State, Action, Query>(
-  appendChild: (doc: Document) => Element,
+  appendChild: (doc: Document, node: Node) => void,
   init: (builder: PortalSVGBuilder<State, Action, Query>) => void
 ) {
   const builder = new PortalSVGBuilder<State, Action, Query>(appendChild)
@@ -165,13 +165,13 @@ export function PortalWithSelector<State, Action, Query>(
 export function HeadPortal<State, Action, Query>(
   init: (builder: PortalSVGBuilder<State, Action, Query>) => void
 ) {
-  return Portal(doc => doc.head, init)
+  return Portal((doc, node) => doc.head.appendChild(node), init)
 }
 
 export function BodyPortal<State, Action, Query>(
   init: (builder: PortalSVGBuilder<State, Action, Query>) => void
 ) {
-  return Portal(doc => doc.body, init)
+  return Portal((doc, node) => doc.body.appendChild(node), init)
 }
 
 // SimpleComponent(
@@ -917,28 +917,6 @@ export function Fragment<State, Action, Query>(
   if (init !== undefined) init(builder)
   return builder
 }
-
-// export function Portal<State, Action, Query>(
-//   appendChild: (doc: Document, node: Node) => void,
-//   init: (builder: PortalBuilder<State, Action, Query>) => void
-// ) {
-//   const builder = new PortalBuilder<State, Action, Query>(appendChild)
-//   init(builder)
-//   return builder
-// }
-
-// export function PortalWithSelector<State, Action, Query>(
-//   selector: string,
-//   init: (builder: PortalBuilder<State, Action, Query>) => void
-// ) {
-//   return Portal((doc: HTMLDocument, node: Node) => {
-//     const el = doc.querySelector(selector)
-//     if (!el) {
-//       throw new Error(`selector doesn't match any element: "${selector}"`)
-//     }
-//     el.appendChild(node)
-//   }, init)
-// }
 
 export function SimpleComponent<State, Query>(
   init: (builder: SimpleComponentSVGBuilder<State, Query>) => void

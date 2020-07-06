@@ -17,7 +17,7 @@
     "npm:publish-no-include": "rush publish -a -b master -p -r https://registry.npmjs.org/",
     "build": "echo \"nothing to build at root\"",
     "test:all": "(cd std && npm run test) && (cd core && npm run test) && (cd store && npm run test) && (cd dom && npm run test)",
-    "docs:generate": "(cd tools/docs && npm run docs:update)",
+    "docs:generate": "(cd tools/docs && npm run docs:maketoc)",
     "docs:publish": "gh-pages -d docs",
     "docs:all": "npm run docs:generate && npm run docs:publish"
   },

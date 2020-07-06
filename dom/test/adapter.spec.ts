@@ -12,9 +12,8 @@ limitations under the License.
 */
 
 import { createContext } from './common'
-import { div } from '../src/html_old'
-import { adapter, PropagateArg } from '../src/impl/adapter'
-import { component } from '../src/component'
+import { Component, Adapter } from '../src/html'
+import { PropagateArg } from '../src/impl/adapter'
 
 describe('adapter', () => {
   it('noOptions', () => {
@@ -22,18 +21,21 @@ describe('adapter', () => {
 
     const ctx = createContext(() => {})
     const reducer = (state: InnerState) => state
-    const template = adapter(
-      {
-        bootstrapState: outer => ({ inner: 'in', outer: 'out' })
-      },
-      component(
-        { reducer },
-        'inner: ',
-        s => s.inner,
-        ', outer: ',
-        s => s.outer
-      )
-    )
+    const template = Adapter<
+      { outer: string },
+      InnerState,
+      unknown,
+      unknown,
+      unknown
+    >({
+      bootstrapState: outer => ({ inner: 'in', outer: 'out' }),
+      child: Component(reducer, $ =>
+        $.text('inner: ')
+          .text(s => s.inner)
+          .text(', outer: ')
+          .text(s => s.outer)
+      ).build()
+    })
     const view = template.render(ctx, { outer: 'out' })
     expect(ctx.doc.body.innerHTML).toEqual('inner: in, outer: out')
     view.change({ outer: 'OUT' })
@@ -48,7 +50,7 @@ describe('adapter', () => {
 
     const reducer = (state: InnerState) => state
     const ctx = createContext(() => {})
-    const template = adapter(
+    const template = Adapter<OuterState, InnerState, unknown, unknown, unknown>(
       {
         bootstrapState: () => ({ inner: 'in', outer: '' }),
         mergeStates: ({
@@ -59,15 +61,14 @@ describe('adapter', () => {
           innerState: InnerState
         }) => {
           return { ...outerState, inner: innerState.inner }
-        }
-      },
-      component(
-        { reducer },
-        'inner: ',
-        s => s.inner,
-        ', outer: ',
-        s => s.outer
-      )
+        },
+        child: Component(reducer, $ =>
+          $.text('inner: ')
+            .text(s => s.inner)
+            .text(', outer: ')
+            .text(s => s.outer)
+        ).build()
+      }
     )
     const view = template.render(ctx, { outer: 'out' })
     expect(ctx.doc.body.innerHTML).toEqual('inner: in, outer: out')
@@ -87,13 +88,11 @@ describe('adapter', () => {
       }
     }
 
-    const comp = component(
-      { reducer },
-      div<string[], string>(
-        { events: { click: (_s: string[], _: Event) => 'click' } },
-        s => s.join(', ')
+    const comp = Component<string[], string, unknown>(reducer, $ =>
+      $.DIV($ =>
+        $.onClick((_s: string[], _: Event) => 'click').text(s => s.join(', '))
       )
-    )
+    ).build()
 
     let didCallPropagate = false
     let didCallOuterDispatcher = false
@@ -127,14 +126,12 @@ describe('adapter', () => {
       innerState: string[]
     }) => innerState.concat([outerState])
 
-    const adapt = adapter(
-      {
-        bootstrapState: () => ['inner-state'],
-        propagate,
-        mergeStates
-      },
-      comp
-    )
+    const adapt = Adapter<string, string[], string, string, unknown>({
+      bootstrapState: () => ['inner-state'],
+      propagate,
+      mergeStates,
+      child: comp
+    })
 
     const ctx = createContext((a: string) => {
       expect(a).toBe('outer-action')

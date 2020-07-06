@@ -26,7 +26,6 @@ export function createContext<Action>(
   return new DOMContext(
     document,
     (node: Node) => document.body.appendChild(node),
-    document.body,
     dispatch || (() => {})
   )
 }

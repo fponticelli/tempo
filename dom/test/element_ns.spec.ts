@@ -12,22 +12,22 @@ limitations under the License.
 */
 
 import { createContext } from './common'
-import { elNS } from '../src/element'
+import { SVG } from '../src/svg'
 
 describe('dom_ns_element', () => {
   it('static empty-element', () => {
     const ctx = createContext()
     // this is not the correct namespace but it is the way to make it work with JSDOM
-    const nodeUndefined = elNS('svg', 'svg', {}).render(ctx, 1)
+    const nodeUndefined = SVG<number, unknown, unknown>().build().render(ctx, 1)
     expect(ctx.doc.body.innerHTML).toEqual('<svg></svg>')
     nodeUndefined.destroy()
     expect(ctx.doc.body.innerHTML).toEqual('')
   })
   it('static nested-element', () => {
     const ctx = createContext()
-    const nodeUndefined = elNS('svg', 'svg', {},
-      elNS('svg', 'g', {}, elNS('svg', 'rect', {}))
-    ).render(ctx, 1)
+    const nodeUndefined = SVG<number, unknown, unknown>($ => $.G($ => $.RECT()))
+      .build()
+      .render(ctx, 1)
     expect(ctx.doc.body.innerHTML).toEqual('<svg><g><rect></rect></g></svg>')
     nodeUndefined.destroy()
     expect(ctx.doc.body.innerHTML).toEqual('')
@@ -35,7 +35,9 @@ describe('dom_ns_element', () => {
 
   it('static attribute', () => {
     const ctx = createContext()
-    const node = elNS('svg', 'svg', { attrs: { id: 'main' } }).render(ctx, 1)
+    const node = SVG<number, unknown, unknown>($ => $.id('main'))
+      .build()
+      .render(ctx, 1)
     expect(ctx.doc.body.innerHTML).toEqual('<svg id="main"></svg>')
     node.destroy()
     expect(ctx.doc.body.innerHTML).toEqual('')
@@ -43,11 +45,13 @@ describe('dom_ns_element', () => {
 
   it('dynamic attribute', () => {
     const ctx = createContext()
-    const node = elNS('svg', 'svg', { attrs: { id: (v: string) => v } }).render(ctx, 'abc')
+    const node = SVG<string, unknown, unknown>($ => $.id(v => v))
+      .build()
+      .render(ctx, 'abc')
     expect(ctx.doc.body.innerHTML).toEqual('<svg id="abc"></svg>')
     node.change('xyz')
     expect(ctx.doc.body.innerHTML).toEqual('<svg id="xyz"></svg>')
-    node.change(undefined as unknown as string)
+    node.change((undefined as unknown) as string)
     expect(ctx.doc.body.innerHTML).toEqual('<svg></svg>')
     node.destroy()
     expect(ctx.doc.body.innerHTML).toEqual('')
@@ -55,13 +59,19 @@ describe('dom_ns_element', () => {
 
   it('dynamic child', () => {
     const ctx = createContext()
-    const node = elNS('svg', 'svg', { attrs: { id: (v: string) => v } },
-      elNS('svg', 'a', { attrs: { href: (v: string) => v && `#${v}` } })
-    ).render(ctx, 'abc')
-    expect(ctx.doc.body.innerHTML).toEqual('<svg id="abc"><a href="#abc"></a></svg>')
+    const node = SVG<string, unknown, unknown>($ =>
+      $.id(v => v).A($ => $.href(v => v && `#${v}`))
+    )
+      .build()
+      .render(ctx, 'abc')
+    expect(ctx.doc.body.innerHTML).toEqual(
+      '<svg id="abc"><a href="#abc"></a></svg>'
+    )
     node.change('xyz')
-    expect(ctx.doc.body.innerHTML).toEqual('<svg id="xyz"><a href="#xyz"></a></svg>')
-    node.change(undefined as unknown as string)
+    expect(ctx.doc.body.innerHTML).toEqual(
+      '<svg id="xyz"><a href="#xyz"></a></svg>'
+    )
+    node.change((undefined as unknown) as string)
     expect(ctx.doc.body.innerHTML).toEqual('<svg><a></a></svg>')
     node.destroy()
     expect(ctx.doc.body.innerHTML).toEqual('')

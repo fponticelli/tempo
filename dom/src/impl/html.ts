@@ -64,7 +64,7 @@ import {
   MapQueryHTMLBuilder,
   UntilHTMLBuilder,
   FragmentHTMLBuilder,
-  PortalBuilder,
+  PortalHTMLBuilder,
   SimpleComponentHTMLBuilder
 } from './html_builder'
 import { IBuilder } from './dom_builder'
@@ -1476,18 +1476,40 @@ export function Fragment<State, Action, Query>(
   return builder
 }
 
+export function ForEach<State, Action, Query>(
+  init: (
+    builder: UntilHTMLBuilder<
+      State,
+      State extends any[] ? State[number] : never,
+      Action,
+      Query
+    >
+  ) => void
+) {
+  return Until(
+    ({
+      state,
+      index
+    }: {
+      state: State
+      index: number
+    }): State extends any[] ? State[number] : never => (state as any)[index],
+    init
+  )
+}
+
 export function Portal<State, Action, Query>(
   appendChild: (doc: Document, node: Node) => void,
-  init: (builder: PortalBuilder<State, Action, Query>) => void
+  init: (builder: PortalHTMLBuilder<State, Action, Query>) => void
 ) {
-  const builder = new PortalBuilder<State, Action, Query>(appendChild)
+  const builder = new PortalHTMLBuilder<State, Action, Query>(appendChild)
   init(builder)
   return builder
 }
 
 export function PortalWithSelector<State, Action, Query>(
   selector: string,
-  init: (builder: PortalBuilder<State, Action, Query>) => void
+  init: (builder: PortalHTMLBuilder<State, Action, Query>) => void
 ) {
   return Portal((doc: HTMLDocument, node: Node) => {
     const el = doc.querySelector(selector)
@@ -1496,6 +1518,18 @@ export function PortalWithSelector<State, Action, Query>(
     }
     el.appendChild(node)
   }, init)
+}
+
+export function HeadPortal<State, Action, Query>(
+  init: (builder: PortalHTMLBuilder<State, Action, Query>) => void
+) {
+  return Portal((doc, node) => doc.head.appendChild(node), init)
+}
+
+export function BodyPortal<State, Action, Query>(
+  init: (builder: PortalHTMLBuilder<State, Action, Query>) => void
+) {
+  return Portal((doc, node) => doc.body.appendChild(node), init)
 }
 
 export function SimpleComponent<State, Query>(

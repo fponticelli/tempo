@@ -12,7 +12,7 @@ limitations under the License.
 */
 
 import { createContext } from './common'
-import { text } from '../src/text'
+import { text } from '../src/impl/text'
 
 describe('dom_text', () => {
   it('create static undefined', () => {
@@ -38,7 +38,7 @@ describe('dom_text', () => {
     expect(ctx.doc.body.innerHTML).toEqual('abc')
     node.change('abc')
     expect(ctx.doc.body.innerHTML).toEqual('abc')
-    node.change(undefined as unknown as string)
+    node.change((undefined as unknown) as string)
     expect(ctx.doc.body.innerHTML).toEqual('')
     node.change('xyz')
     expect(ctx.doc.body.innerHTML).toEqual('xyz')

@@ -11,8 +11,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { button } from 'tempo-dom/lib/html'
+import { BUTTON } from 'tempo-dom/lib/html'
 
-export const event = button<string, string, unknown>($ =>
+export const event = BUTTON<string, string, unknown>($ =>
   $.onClick(s => s).text('click me')
 ).build()
