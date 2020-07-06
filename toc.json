@@ -4,7 +4,7 @@
       "name": "dom",
       "title": "tempo-dom",
       "description": "Fully-typed frontend framework alternative to React and Angular",
-      "version": "0.17.0",
+      "version": "0.26.0",
       "keywords": [
         "tempo",
         "ui",
@@ -20,7 +20,7 @@
       "name": "std",
       "title": "tempo-std",
       "description": "Std library for TypeScript. Natural complement to the tempo libs.",
-      "version": "0.5.0",
+      "version": "0.5.5",
       "keywords": [
         "tempo",
         "framework",
@@ -33,7 +33,7 @@
       "name": "core",
       "title": "tempo-core",
       "description": "Core types for Tempo. The tempo architecture encourages a unilateral flow in a practical way.",
-      "version": "1.7.0",
+      "version": "1.7.1",
       "keywords": [
         "tempo",
         "framework",
@@ -46,7 +46,7 @@
       "name": "store",
       "title": "tempo-store",
       "description": "Super simple state management library",
-      "version": "1.2.2",
+      "version": "1.2.4",
       "keywords": [
         "tempo",
         "unidirectional-flow",
@@ -56,19 +56,6 @@
         "typescript"
       ],
       "content": "<p><code>tempo-store</code> contains utilities to wrap a value into a <code>Store</code> instance and track its lifecycle.</p>\n<h2 id=\"property\">Property</h2>\n<p>A <code>Property</code> instance wraps a single generic value of type <code>T</code>. It exposes a field <code>observable</code> where you can add your own listeners. These will be triggered any time <code>Property.set</code> is invoked but only if the value differs from its previous state. To control such behavior it is possible to pass a function <code>equal</code>. The default implementation performs a structural equality test.</p>\n<h2 id=\"store\">Store</h2>\n<p>A <code>Store</code> instance wraps a property and adds a <code>reducer</code> function to the mix. With the <code>reducer</code> it is possible to influence the value of store by invoking <code>process(action: Action)</code>. Whenver that method is called, <code>reducer(currentState: State, action: Action): State</code> is invoked and the value of store is accordinlgy updated. It is possible to monitor state changes and action triggers by adding listeners to the <code>observable</code> field. Note that these listeners should have the shape <code>(state: State, action: Action, changed: boolean) =&gt; void</code>.</p>"
-    },
-    {
-      "name": "paperjs",
-      "title": "tempo-paper",
-      "description": "Integration of PaperJS api using Tempo to create a declarative Document Object Model.",
-      "version": "0.4.0",
-      "keywords": [
-        "tempo",
-        "paperjs",
-        "2d",
-        "graphics"
-      ],
-      "content": "<p>Tempo Paper.JS allows you to use the same principles of Tempo DOM in Paper.JS.</p>"
     }
   ],
   "demos": [
@@ -89,12 +76,6 @@
       "version": "1.0.0",
       "title": "Readme Example",
       "description": "Documentation site for Tempo."
-    },
-    {
-      "path": "paper",
-      "version": "1.0.0",
-      "title": "Paper JS Integration",
-      "description": "Example of integration between the HTML DOM and the Paper DOM represented in Tempo."
     },
     {
       "path": "benchmark",
@@ -141,51 +122,9 @@
     ],
     "dom": [
       {
-        "path": "adapter.html",
-        "id": "adapter.html",
-        "title": "adapter",
-        "type": "module"
-      },
-      {
-        "path": "component.html",
-        "id": "component.html",
-        "title": "component",
-        "type": "module"
-      },
-      {
         "path": "context.html",
         "id": "context.html",
         "title": "context",
-        "type": "module"
-      },
-      {
-        "path": "element.html",
-        "id": "element.html",
-        "title": "element",
-        "type": "module"
-      },
-      {
-        "path": "filter.html",
-        "id": "filter.html",
-        "title": "filter",
-        "type": "module"
-      },
-      {
-        "path": "for_each.html",
-        "id": "for_each.html",
-        "title": "for_each",
-        "type": "module"
-      },
-      {
-        "path": "fragment.html",
-        "id": "fragment.html",
-        "title": "fragment",
-        "type": "module"
-      },
-      {
-        "path": "hold_state.html",
-        "id": "hold_state.html",
-        "title": "hold_state",
         "type": "module"
       },
       {
@@ -195,39 +134,9 @@
         "type": "module"
       },
       {
-        "path": "iterate.html",
-        "id": "iterate.html",
-        "title": "iterate",
-        "type": "module"
-      },
-      {
-        "path": "lazy.html",
-        "id": "lazy.html",
-        "title": "lazy",
-        "type": "module"
-      },
-      {
-        "path": "map.html",
-        "id": "map.html",
-        "title": "map",
-        "type": "module"
-      },
-      {
-        "path": "match.html",
-        "id": "match.html",
-        "title": "match",
-        "type": "module"
-      },
-      {
-        "path": "portal.html",
-        "id": "portal.html",
-        "title": "portal",
-        "type": "module"
-      },
-      {
-        "path": "scoped_styles.html",
-        "id": "scoped_styles.html",
-        "title": "scoped_styles",
+        "path": "lifecycle.html",
+        "id": "lifecycle.html",
+        "title": "lifecycle",
         "type": "module"
       },
       {
@@ -249,209 +158,165 @@
         "type": "module"
       },
       {
-        "path": "text.html",
-        "id": "text.html",
-        "title": "text",
-        "type": "module"
-      },
-      {
-        "path": "unsafe_html.html",
-        "id": "unsafe_html.html",
-        "title": "unsafe_html",
-        "type": "module"
-      },
-      {
-        "path": "until.html",
-        "id": "until.html",
-        "title": "until",
-        "type": "module"
-      },
-      {
         "path": "value.html",
         "id": "value.html",
         "title": "value",
         "type": "module"
       },
       {
-        "path": "when.html",
-        "id": "when.html",
-        "title": "when",
+        "path": "impl/adapter.html",
+        "id": "impl/adapter.html",
+        "title": "impl/adapter",
         "type": "module"
       },
       {
-        "path": "utils/attributes_mapper.html",
-        "id": "utils/attributes_mapper.html",
-        "title": "utils/attributes_mapper",
+        "path": "impl/attributes_mapper.html",
+        "id": "impl/attributes_mapper.html",
+        "title": "impl/attributes_mapper",
         "type": "module"
       },
       {
-        "path": "utils/dom.html",
-        "id": "utils/dom.html",
-        "title": "utils/dom",
+        "path": "impl/component.html",
+        "id": "impl/component.html",
+        "title": "impl/component",
         "type": "module"
       },
       {
-        "path": "utils/set_attribute.html",
-        "id": "utils/set_attribute.html",
-        "title": "utils/set_attribute",
-        "type": "module"
-      }
-    ],
-    "paperjs": [
-      {
-        "path": "adapter.html",
-        "id": "adapter.html",
-        "title": "adapter",
+        "path": "impl/dom_builder.html",
+        "id": "impl/dom_builder.html",
+        "title": "impl/dom_builder",
         "type": "module"
       },
       {
-        "path": "component.html",
-        "id": "component.html",
-        "title": "component",
+        "path": "impl/dom.html",
+        "id": "impl/dom.html",
+        "title": "impl/dom",
         "type": "module"
       },
       {
-        "path": "compound_path.html",
-        "id": "compound_path.html",
-        "title": "compound_path",
+        "path": "impl/element.html",
+        "id": "impl/element.html",
+        "title": "impl/element",
         "type": "module"
       },
       {
-        "path": "context.html",
-        "id": "context.html",
-        "title": "context",
+        "path": "impl/fragment.html",
+        "id": "impl/fragment.html",
+        "title": "impl/fragment",
         "type": "module"
       },
       {
-        "path": "filter.html",
-        "id": "filter.html",
-        "title": "filter",
+        "path": "impl/hold_state.html",
+        "id": "impl/hold_state.html",
+        "title": "impl/hold_state",
         "type": "module"
       },
       {
-        "path": "for_each.html",
-        "id": "for_each.html",
-        "title": "for_each",
+        "path": "impl/html_builder.html",
+        "id": "impl/html_builder.html",
+        "title": "impl/html_builder",
         "type": "module"
       },
       {
-        "path": "fragment.html",
-        "id": "fragment.html",
-        "title": "fragment",
+        "path": "impl/html.html",
+        "id": "impl/html.html",
+        "title": "impl/html",
         "type": "module"
       },
       {
-        "path": "group.html",
-        "id": "group.html",
-        "title": "group",
+        "path": "impl/lazy.html",
+        "id": "impl/lazy.html",
+        "title": "impl/lazy",
         "type": "module"
       },
       {
-        "path": "html_portal.html",
-        "id": "html_portal.html",
-        "title": "html_portal",
+        "path": "impl/map_action.html",
+        "id": "impl/map_action.html",
+        "title": "impl/map_action",
         "type": "module"
       },
       {
-        "path": "item.html",
-        "id": "item.html",
-        "title": "item",
+        "path": "impl/map_query.html",
+        "id": "impl/map_query.html",
+        "title": "impl/map_query",
         "type": "module"
       },
       {
-        "path": "iterate.html",
-        "id": "iterate.html",
-        "title": "iterate",
+        "path": "impl/map_state.html",
+        "id": "impl/map_state.html",
+        "title": "impl/map_state",
         "type": "module"
       },
       {
-        "path": "layer.html",
-        "id": "layer.html",
-        "title": "layer",
+        "path": "impl/match_bool_template.html",
+        "id": "impl/match_bool_template.html",
+        "title": "impl/match_bool_template",
         "type": "module"
       },
       {
-        "path": "lazy.html",
-        "id": "lazy.html",
-        "title": "lazy",
+        "path": "impl/match_template.html",
+        "id": "impl/match_template.html",
+        "title": "impl/match_template",
         "type": "module"
       },
       {
-        "path": "map.html",
-        "id": "map.html",
-        "title": "map",
+        "path": "impl/match_value_template.html",
+        "id": "impl/match_value_template.html",
+        "title": "impl/match_value_template",
         "type": "module"
       },
       {
-        "path": "match.html",
-        "id": "match.html",
-        "title": "match",
+        "path": "impl/portal.html",
+        "id": "impl/portal.html",
+        "title": "impl/portal",
         "type": "module"
       },
       {
-        "path": "path.html",
-        "id": "path.html",
-        "title": "path",
+        "path": "impl/set_attribute.html",
+        "id": "impl/set_attribute.html",
+        "title": "impl/set_attribute",
         "type": "module"
       },
       {
-        "path": "point_text.html",
-        "id": "point_text.html",
-        "title": "point_text",
+        "path": "impl/simple_component.html",
+        "id": "impl/simple_component.html",
+        "title": "impl/simple_component",
         "type": "module"
       },
       {
-        "path": "project.html",
-        "id": "project.html",
-        "title": "project",
+        "path": "impl/svg_builder.html",
+        "id": "impl/svg_builder.html",
+        "title": "impl/svg_builder",
         "type": "module"
       },
       {
-        "path": "raster.html",
-        "id": "raster.html",
-        "title": "raster",
+        "path": "impl/svg.html",
+        "id": "impl/svg.html",
+        "title": "impl/svg",
         "type": "module"
       },
       {
-        "path": "shape.html",
-        "id": "shape.html",
-        "title": "shape",
+        "path": "impl/text.html",
+        "id": "impl/text.html",
+        "title": "impl/text",
         "type": "module"
       },
       {
-        "path": "symbol_item.html",
-        "id": "symbol_item.html",
-        "title": "symbol_item",
+        "path": "impl/until.html",
+        "id": "impl/until.html",
+        "title": "impl/until",
         "type": "module"
       },
       {
-        "path": "template.html",
-        "id": "template.html",
-        "title": "template",
+        "path": "impl/when.html",
+        "id": "impl/when.html",
+        "title": "impl/when",
         "type": "module"
       },
       {
-        "path": "tool.html",
-        "id": "tool.html",
-        "title": "tool",
-        "type": "module"
-      },
-      {
-        "path": "until.html",
-        "id": "until.html",
-        "title": "until",
-        "type": "module"
-      },
-      {
-        "path": "value.html",
-        "id": "value.html",
-        "title": "value",
-        "type": "module"
-      },
-      {
-        "path": "when.html",
-        "id": "when.html",
-        "title": "when",
+        "path": "lifecycle/unsafe_html.html",
+        "id": "lifecycle/unsafe_html.html",
+        "title": "lifecycle/unsafe_html",
         "type": "module"
       }
     ],
@@ -511,6 +376,12 @@
         "type": "module"
       },
       {
+        "path": "memoize.html",
+        "id": "memoize.html",
+        "title": "memoize",
+        "type": "module"
+      },
+      {
         "path": "nel.html",
         "id": "nel.html",
         "title": "nel",
@@ -520,6 +391,12 @@
         "path": "newtype.html",
         "id": "newtype.html",
         "title": "newtype",
+        "type": "module"
+      },
+      {
+        "path": "numbers.html",
+        "id": "numbers.html",
+        "title": "numbers",
         "type": "module"
       },
       {
@@ -538,6 +415,12 @@
         "path": "ord.html",
         "id": "ord.html",
         "title": "ord",
+        "type": "module"
+      },
+      {
+        "path": "primitive.html",
+        "id": "primitive.html",
+        "title": "primitive",
         "type": "module"
       },
       {

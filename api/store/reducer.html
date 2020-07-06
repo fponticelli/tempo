@@ -13,11 +13,11 @@
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">function</span> compose<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+><span class="token keyword">function</span> compose<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token operator">&gt;</span><span class="token punctuation">(</span>
   reducer<span class="token operator">:</span> Reducer<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   <span class="token operator">...</span>others<span class="token operator">:</span> Reducer<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token operator">&gt;</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
 <span class="token punctuation">)</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">state<span class="token operator">:</span> State<span class="token punctuation">,</span> action<span class="token operator">:</span> Action</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> State
-</div></pre>
+</pre>
 <p class="defined-in">
   defined in
   <a
@@ -27,7 +27,7 @@
 </p>
 <pre
   class="import-code ts language-ts"
-><div><span class="token keyword">import</span> <span class="token punctuation">{</span> compose <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-store/lib/reducer.ts'</span></div></pre>
+><span class="token keyword">import</span> <span class="token punctuation">{</span> compose <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-store/lib/reducer.ts'</span></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="matchReduce">
   matchReduce<span
     class="kind is-family-sans-serif has-text-grey-light is-size-6"
@@ -36,7 +36,7 @@
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">function</span> matchReduce<span class="token operator">&lt;</span>
+><span class="token keyword">function</span> matchReduce<span class="token operator">&lt;</span>
   Field <span class="token keyword">extends</span> <span class="token class-name">string</span> <span class="token operator">|</span> <span class="token builtin">number</span> <span class="token operator">|</span> <span class="token builtin">symbol</span><span class="token punctuation">,</span>
   State<span class="token punctuation">,</span>
   Action <span class="token keyword">extends</span> <span class="token punctuation">{</span> <span class="token punctuation">[</span>_ <span class="token keyword">in</span> Field<span class="token punctuation">]</span><span class="token operator">:</span> <span class="token builtin">any</span> <span class="token punctuation">}</span>
@@ -49,7 +49,7 @@
     <span class="token punctuation">)</span> <span class="token operator">=&gt;</span> State
   <span class="token punctuation">}</span>
 <span class="token punctuation">)</span><span class="token operator">:</span> Reducer<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token operator">&gt;</span>
-</div></pre>
+</pre>
 <p class="defined-in">
   defined in
   <a
@@ -59,7 +59,7 @@
 </p>
 <pre
   class="import-code ts language-ts"
-><div><span class="token keyword">import</span> <span class="token punctuation">{</span> matchReduce <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-store/lib/reducer.ts'</span></div></pre>
+><span class="token keyword">import</span> <span class="token punctuation">{</span> matchReduce <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-store/lib/reducer.ts'</span></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="reduceOnKind">
   reduceOnKind<span
     class="kind is-family-sans-serif has-text-grey-light is-size-6"
@@ -68,7 +68,7 @@
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">function</span> reduceOnKind<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action <span class="token keyword">extends</span> <span class="token punctuation">{</span> kind<span class="token operator">:</span> <span class="token builtin">any</span> <span class="token punctuation">}</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
+><span class="token keyword">function</span> reduceOnKind<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action <span class="token keyword">extends</span> <span class="token punctuation">{</span> kind<span class="token operator">:</span> <span class="token builtin">any</span> <span class="token punctuation">}</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
   matches<span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token punctuation">[</span>k <span class="token keyword">in</span> Action<span class="token punctuation">[</span><span class="token string">'kind'</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token operator">:</span> <span class="token punctuation">(</span>
       <span class="token parameter">state<span class="token operator">:</span> State<span class="token punctuation">,</span>
@@ -76,7 +76,7 @@
     <span class="token punctuation">)</span> <span class="token operator">=&gt;</span> State
   <span class="token punctuation">}</span>
 <span class="token punctuation">)</span><span class="token operator">:</span> Reducer<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token operator">&gt;</span>
-</div></pre>
+</pre>
 <p class="defined-in">
   defined in
   <a
@@ -86,7 +86,7 @@
 </p>
 <pre
   class="import-code ts language-ts"
-><div><span class="token keyword">import</span> <span class="token punctuation">{</span> reduceOnKind <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-store/lib/reducer.ts'</span></div></pre>
+><span class="token keyword">import</span> <span class="token punctuation">{</span> reduceOnKind <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-store/lib/reducer.ts'</span></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="Reducer">
   Reducer<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
     >type alias</span
@@ -94,8 +94,8 @@
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">type</span> Reducer<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">state<span class="token operator">:</span> State<span class="token punctuation">,</span> action<span class="token operator">:</span> Action</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> State
-</div></pre>
+><span class="token keyword">type</span> Reducer<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">state<span class="token operator">:</span> State<span class="token punctuation">,</span> action<span class="token operator">:</span> Action</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> State
+</pre>
 <p class="defined-in">
   defined in
   <a
@@ -105,4 +105,4 @@
 </p>
 <pre
   class="import-code ts language-ts"
-><div><span class="token keyword">import</span> <span class="token punctuation">{</span> Reducer <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-store/lib/reducer.ts'</span></div></pre>
+><span class="token keyword">import</span> <span class="token punctuation">{</span> Reducer <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-store/lib/reducer.ts'</span></pre>

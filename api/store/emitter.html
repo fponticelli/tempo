@@ -62,10 +62,10 @@
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">function</span> <span class="token function">debounce</span><span class="token punctuation">(</span>
+><span class="token keyword">function</span> <span class="token function">debounce</span><span class="token punctuation">(</span>
   <span class="token parameter">delay<span class="token operator">:</span> <span class="token builtin">number</span></span>
 <span class="token punctuation">)</span><span class="token operator">:</span> <span class="token operator">&lt;</span><span class="token constant">T</span> <span class="token keyword">extends</span> <span class="token class-name">any</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token parameter">listener<span class="token operator">:</span> Listener<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Listener<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span>
-</div></pre>
+</pre>
 <p class="defined-in">
   defined in
   <a
@@ -75,7 +75,7 @@
 </p>
 <pre
   class="import-code ts language-ts"
-><div><span class="token keyword">import</span> <span class="token punctuation">{</span> debounce <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-store/lib/emitter.ts'</span></div></pre>
+><span class="token keyword">import</span> <span class="token punctuation">{</span> debounce <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-store/lib/emitter.ts'</span></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="Emitter">
   Emitter<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
     >class</span
@@ -83,7 +83,7 @@
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">declare</span> <span class="token keyword">class</span> <span class="token class-name">Emitter</span><span class="token operator">&lt;</span><span class="token constant">T</span> <span class="token keyword">extends</span> <span class="token class-name">any</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">&gt;</span> <span class="token keyword">implements</span> <span class="token class-name">Observable</span><span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+><span class="token keyword">declare</span> <span class="token keyword">class</span> <span class="token class-name">Emitter</span><span class="token operator">&lt;</span><span class="token constant">T</span> <span class="token keyword">extends</span> <span class="token class-name">any</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">&gt;</span> <span class="token keyword">implements</span> <span class="token class-name">Observable</span><span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
   <span class="token keyword">static</span> ofOne<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> Emitter1<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span>
   <span class="token keyword">static</span> ofTwo<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> Emitter2<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token operator">&gt;</span>
   <span class="token keyword">static</span> ofThree<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> Emitter3<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token operator">&gt;</span>
@@ -96,7 +96,7 @@
   <span class="token function">off</span><span class="token punctuation">(</span>listener<span class="token operator">:</span> Listener<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span>
   <span class="token function">once</span><span class="token punctuation">(</span>listener<span class="token operator">:</span> Listener<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">void</span>
 <span class="token punctuation">}</span>
-</div></pre>
+</pre>
 <p class="defined-in">
   defined in
   <a
@@ -106,7 +106,7 @@
 </p>
 <pre
   class="import-code ts language-ts"
-><div><span class="token keyword">import</span> <span class="token punctuation">{</span> Emitter <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-store/lib/emitter.ts'</span></div></pre>
+><span class="token keyword">import</span> <span class="token punctuation">{</span> Emitter <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-store/lib/emitter.ts'</span></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="Emitter1">
   Emitter1<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
     >type alias</span
@@ -114,8 +114,8 @@
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">type</span> Emitter1<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span> <span class="token operator">=</span> Emitter<span class="token operator">&lt;</span><span class="token punctuation">[</span><span class="token constant">T</span><span class="token punctuation">]</span><span class="token operator">&gt;</span>
-</div></pre>
+><span class="token keyword">type</span> Emitter1<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span> <span class="token operator">=</span> Emitter<span class="token operator">&lt;</span><span class="token punctuation">[</span><span class="token constant">T</span><span class="token punctuation">]</span><span class="token operator">&gt;</span>
+</pre>
 <p class="defined-in">
   defined in
   <a
@@ -125,7 +125,7 @@
 </p>
 <pre
   class="import-code ts language-ts"
-><div><span class="token keyword">import</span> <span class="token punctuation">{</span> Emitter1 <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-store/lib/emitter.ts'</span></div></pre>
+><span class="token keyword">import</span> <span class="token punctuation">{</span> Emitter1 <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-store/lib/emitter.ts'</span></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="Emitter2">
   Emitter2<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
     >type alias</span
@@ -133,8 +133,8 @@
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">type</span> Emitter2<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token operator">&gt;</span> <span class="token operator">=</span> Emitter<span class="token operator">&lt;</span><span class="token punctuation">[</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">]</span><span class="token operator">&gt;</span>
-</div></pre>
+><span class="token keyword">type</span> Emitter2<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token operator">&gt;</span> <span class="token operator">=</span> Emitter<span class="token operator">&lt;</span><span class="token punctuation">[</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">]</span><span class="token operator">&gt;</span>
+</pre>
 <p class="defined-in">
   defined in
   <a
@@ -144,7 +144,7 @@
 </p>
 <pre
   class="import-code ts language-ts"
-><div><span class="token keyword">import</span> <span class="token punctuation">{</span> Emitter2 <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-store/lib/emitter.ts'</span></div></pre>
+><span class="token keyword">import</span> <span class="token punctuation">{</span> Emitter2 <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-store/lib/emitter.ts'</span></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="Emitter3">
   Emitter3<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
     >type alias</span
@@ -152,8 +152,8 @@
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">type</span> Emitter3<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token operator">&gt;</span> <span class="token operator">=</span> Emitter<span class="token operator">&lt;</span><span class="token punctuation">[</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">]</span><span class="token operator">&gt;</span>
-</div></pre>
+><span class="token keyword">type</span> Emitter3<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token operator">&gt;</span> <span class="token operator">=</span> Emitter<span class="token operator">&lt;</span><span class="token punctuation">[</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">]</span><span class="token operator">&gt;</span>
+</pre>
 <p class="defined-in">
   defined in
   <a
@@ -163,7 +163,7 @@
 </p>
 <pre
   class="import-code ts language-ts"
-><div><span class="token keyword">import</span> <span class="token punctuation">{</span> Emitter3 <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-store/lib/emitter.ts'</span></div></pre>
+><span class="token keyword">import</span> <span class="token punctuation">{</span> Emitter3 <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-store/lib/emitter.ts'</span></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="Emitter4">
   Emitter4<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
     >type alias</span
@@ -171,8 +171,8 @@
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">type</span> Emitter4<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token operator">&gt;</span> <span class="token operator">=</span> Emitter<span class="token operator">&lt;</span><span class="token punctuation">[</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">]</span><span class="token operator">&gt;</span>
-</div></pre>
+><span class="token keyword">type</span> Emitter4<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token operator">&gt;</span> <span class="token operator">=</span> Emitter<span class="token operator">&lt;</span><span class="token punctuation">[</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">]</span><span class="token operator">&gt;</span>
+</pre>
 <p class="defined-in">
   defined in
   <a
@@ -182,7 +182,7 @@
 </p>
 <pre
   class="import-code ts language-ts"
-><div><span class="token keyword">import</span> <span class="token punctuation">{</span> Emitter4 <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-store/lib/emitter.ts'</span></div></pre>
+><span class="token keyword">import</span> <span class="token punctuation">{</span> Emitter4 <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-store/lib/emitter.ts'</span></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="Emitter5">
   Emitter5<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
     >type alias</span
@@ -190,8 +190,8 @@
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">type</span> Emitter5<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span> <span class="token operator">=</span> Emitter<span class="token operator">&lt;</span><span class="token punctuation">[</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">]</span><span class="token operator">&gt;</span>
-</div></pre>
+><span class="token keyword">type</span> Emitter5<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span> <span class="token operator">=</span> Emitter<span class="token operator">&lt;</span><span class="token punctuation">[</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">]</span><span class="token operator">&gt;</span>
+</pre>
 <p class="defined-in">
   defined in
   <a
@@ -201,7 +201,7 @@
 </p>
 <pre
   class="import-code ts language-ts"
-><div><span class="token keyword">import</span> <span class="token punctuation">{</span> Emitter5 <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-store/lib/emitter.ts'</span></div></pre>
+><span class="token keyword">import</span> <span class="token punctuation">{</span> Emitter5 <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-store/lib/emitter.ts'</span></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="Emitter6">
   Emitter6<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
     >type alias</span
@@ -209,8 +209,8 @@
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">type</span> Emitter6<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token operator">&gt;</span> <span class="token operator">=</span> Emitter<span class="token operator">&lt;</span><span class="token punctuation">[</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token punctuation">]</span><span class="token operator">&gt;</span>
-</div></pre>
+><span class="token keyword">type</span> Emitter6<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token operator">&gt;</span> <span class="token operator">=</span> Emitter<span class="token operator">&lt;</span><span class="token punctuation">[</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">C</span><span class="token punctuation">,</span> <span class="token constant">D</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">F</span><span class="token punctuation">]</span><span class="token operator">&gt;</span>
+</pre>
 <p class="defined-in">
   defined in
   <a
@@ -220,7 +220,7 @@
 </p>
 <pre
   class="import-code ts language-ts"
-><div><span class="token keyword">import</span> <span class="token punctuation">{</span> Emitter6 <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-store/lib/emitter.ts'</span></div></pre>
+><span class="token keyword">import</span> <span class="token punctuation">{</span> Emitter6 <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-store/lib/emitter.ts'</span></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="nextFrame">
   nextFrame<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
     >function</span
@@ -228,8 +228,8 @@
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">function</span> nextFrame<span class="token operator">&lt;</span><span class="token constant">T</span> <span class="token keyword">extends</span> <span class="token class-name">any</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>listener<span class="token operator">:</span> Listener<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> Listener<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span>
-</div></pre>
+><span class="token keyword">function</span> nextFrame<span class="token operator">&lt;</span><span class="token constant">T</span> <span class="token keyword">extends</span> <span class="token class-name">any</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>listener<span class="token operator">:</span> Listener<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> Listener<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span>
+</pre>
 <p class="defined-in">
   defined in
   <a
@@ -239,4 +239,4 @@
 </p>
 <pre
   class="import-code ts language-ts"
-><div><span class="token keyword">import</span> <span class="token punctuation">{</span> nextFrame <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-store/lib/emitter.ts'</span></div></pre>
+><span class="token keyword">import</span> <span class="token punctuation">{</span> nextFrame <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-store/lib/emitter.ts'</span></pre>

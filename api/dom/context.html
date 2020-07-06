@@ -13,7 +13,7 @@
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">declare</span> <span class="token keyword">class</span> <span class="token class-name">DOMContext</span><span class="token operator">&lt;</span>Action<span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+><span class="token keyword">declare</span> <span class="token keyword">class</span> <span class="token class-name">DOMContext</span><span class="token operator">&lt;</span>Action<span class="token operator">&gt;</span> <span class="token punctuation">{</span>
   <span class="token keyword">static</span> fromElement<span class="token operator">&lt;</span>Action<span class="token operator">&gt;</span><span class="token punctuation">(</span>
     element<span class="token operator">:</span> Element<span class="token punctuation">,</span>
     <span class="token function-variable function">dispatch</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">action<span class="token operator">:</span> Action</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
@@ -21,12 +21,10 @@
   <span class="token keyword">constructor</span><span class="token punctuation">(</span>
     doc<span class="token operator">:</span> Document<span class="token punctuation">,</span>
     <span class="token function-variable function">append</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">node<span class="token operator">:</span> Node</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span><span class="token punctuation">,</span>
-    parent<span class="token operator">:</span> Element<span class="token punctuation">,</span>
     <span class="token function-variable function">dispatch</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">action<span class="token operator">:</span> Action</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
   <span class="token punctuation">)</span>
   <span class="token keyword">readonly</span> doc<span class="token operator">:</span> Document
   <span class="token keyword">readonly</span> <span class="token function-variable function">append</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">node<span class="token operator">:</span> Node</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
-  <span class="token keyword">readonly</span> parent<span class="token operator">:</span> Element
   <span class="token keyword">readonly</span> <span class="token function-variable function">dispatch</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">action<span class="token operator">:</span> Action</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
   mapAction<span class="token operator">&lt;</span>OtherAction<span class="token operator">&gt;</span><span class="token punctuation">(</span>
     <span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">action<span class="token operator">:</span> OtherAction</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Action
@@ -34,16 +32,14 @@
   conditionalMapAction<span class="token operator">&lt;</span>OtherAction<span class="token operator">&gt;</span><span class="token punctuation">(</span>
     <span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">action<span class="token operator">:</span> OtherAction</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Action <span class="token operator">|</span> <span class="token keyword">undefined</span>
   <span class="token punctuation">)</span><span class="token operator">:</span> DOMContext<span class="token operator">&lt;</span>OtherAction<span class="token operator">&gt;</span>
-  <span class="token function">withAppendToReference</span><span class="token punctuation">(</span>
-    refId<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">string</span>
-  <span class="token punctuation">)</span><span class="token operator">:</span> <span class="token punctuation">{</span> ctx<span class="token operator">:</span> DOMContext<span class="token operator">&lt;</span>Action<span class="token operator">&gt;</span><span class="token punctuation">;</span> ref<span class="token operator">:</span> Comment <span class="token punctuation">}</span>
+  <span class="token function">withAppendToReference</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token punctuation">{</span> ctx<span class="token operator">:</span> DOMContext<span class="token operator">&lt;</span>Action<span class="token operator">&gt;</span><span class="token punctuation">;</span> ref<span class="token operator">:</span> Text <span class="token punctuation">}</span>
   <span class="token function">withAppend</span><span class="token punctuation">(</span><span class="token function-variable function">append</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">node<span class="token operator">:</span> Node</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span><span class="token punctuation">)</span><span class="token operator">:</span> DOMContext<span class="token operator">&lt;</span>Action<span class="token operator">&gt;</span>
-  <span class="token function">withParent</span><span class="token punctuation">(</span>parent<span class="token operator">:</span> Element<span class="token punctuation">)</span><span class="token operator">:</span> DOMContext<span class="token operator">&lt;</span>Action<span class="token operator">&gt;</span>
   withDispatch<span class="token operator">&lt;</span>OtherAction<span class="token operator">&gt;</span><span class="token punctuation">(</span>
     <span class="token function-variable function">dispatch</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">action<span class="token operator">:</span> OtherAction</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
   <span class="token punctuation">)</span><span class="token operator">:</span> DOMContext<span class="token operator">&lt;</span>OtherAction<span class="token operator">&gt;</span>
+  <span class="token function">withInterceptDispatch</span><span class="token punctuation">(</span><span class="token function-variable function">dispatch</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">action<span class="token operator">:</span> Action</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span><span class="token punctuation">)</span><span class="token operator">:</span> DOMContext<span class="token operator">&lt;</span>Action<span class="token operator">&gt;</span>
 <span class="token punctuation">}</span>
-</div></pre>
+</pre>
 <p class="defined-in">
   defined in
   <a
@@ -53,4 +49,4 @@
 </p>
 <pre
   class="import-code ts language-ts"
-><div><span class="token keyword">import</span> <span class="token punctuation">{</span> DOMContext <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/context.ts'</span></div></pre>
+><span class="token keyword">import</span> <span class="token punctuation">{</span> DOMContext <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/context.ts'</span></pre>

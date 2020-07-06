@@ -1,0 +1,133 @@
+<div class="top-right">
+  <a
+    href="https://github.com/fponticelli/tempo/edit/master/dom/src/lifecycle.ts"
+    >✏️ edit me</a
+  >
+</div>
+<h1>module 'lifecycle'</h1>
+<nav></nav>
+<h3 class="is-family-monospace has-text-grey-dark" id="compose">
+  compose<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> compose<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  a<span class="token operator">:</span> MakeLifecycle<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  b<span class="token operator">:</span> MakeLifecycle<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token operator">&gt;</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> MakeLifecycle<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/lifecycle.ts#L15"
+    >dom/src/lifecycle.ts at line 15</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> compose <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/lifecycle.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="focusElement">
+  focusElement<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> focusElement<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> HTMLElement<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  state<span class="token operator">:</span> State<span class="token punctuation">,</span>
+  element<span class="token operator">:</span> HTMLElement<span class="token punctuation">,</span>
+  ctx<span class="token operator">:</span> DOMContext<span class="token operator">&lt;</span>Action<span class="token operator">&gt;</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+  <span class="token function">beforeChange</span><span class="token punctuation">(</span>state<span class="token operator">:</span> State<span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">void</span>
+  <span class="token function">afterChange</span><span class="token punctuation">(</span>state<span class="token operator">:</span> State<span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">void</span>
+  <span class="token function">beforeDestroy</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">void</span>
+<span class="token punctuation">}</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/lifecycle.ts#L51"
+    >dom/src/lifecycle.ts at line 51</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> focusElement <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/lifecycle.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="Lifecycle">
+  Lifecycle<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >interface</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">interface</span> <span class="token class-name">Lifecycle</span><span class="token operator">&lt;</span>State<span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+  <span class="token function">beforeChange</span><span class="token punctuation">(</span>state<span class="token operator">:</span> State<span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">void</span>
+  <span class="token function">afterChange</span><span class="token punctuation">(</span>state<span class="token operator">:</span> State<span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">void</span>
+  <span class="token function">beforeDestroy</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">void</span>
+<span class="token punctuation">}</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/lifecycle.ts#L3"
+    >dom/src/lifecycle.ts at line 3</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> Lifecycle <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/lifecycle.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="makeEmptyLifecycle">
+  makeEmptyLifecycle<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> makeEmptyLifecycle<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> HTMLElement<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  state<span class="token operator">:</span> State<span class="token punctuation">,</span>
+  element<span class="token operator">:</span> HTMLElement<span class="token punctuation">,</span>
+  ctx<span class="token operator">:</span> DOMContext<span class="token operator">&lt;</span>Action<span class="token operator">&gt;</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+  <span class="token function">beforeChange</span><span class="token punctuation">(</span>state<span class="token operator">:</span> State<span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">void</span>
+  <span class="token function">afterChange</span><span class="token punctuation">(</span>state<span class="token operator">:</span> State<span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">void</span>
+  <span class="token function">beforeDestroy</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">void</span>
+<span class="token punctuation">}</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/lifecycle.ts#L39"
+    >dom/src/lifecycle.ts at line 39</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> makeEmptyLifecycle <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/lifecycle.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="MakeLifecycle">
+  MakeLifecycle<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >type alias</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">type</span> MakeLifecycle<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">(</span>
+  <span class="token parameter">state<span class="token operator">:</span> State<span class="token punctuation">,</span>
+  element<span class="token operator">:</span> HTMLElement<span class="token punctuation">,</span>
+  ctx<span class="token operator">:</span> DOMContext<span class="token operator">&lt;</span>Action<span class="token operator">&gt;</span></span>
+<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Lifecycle<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/lifecycle.ts#L9"
+    >dom/src/lifecycle.ts at line 9</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> MakeLifecycle <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/lifecycle.ts'</span></pre>

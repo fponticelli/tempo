@@ -100,8 +100,8 @@
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">type</span> ExcludeFunctionFields<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span> <span class="token operator">=</span> Pick<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> KeysWithoutFieldType<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> AnyFunction<span class="token operator">&gt;&gt;</span>
-</div></pre>
+><span class="token keyword">type</span> ExcludeFunctionFields<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span> <span class="token operator">=</span> Pick<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> KeysWithoutFieldType<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> AnyFunction<span class="token operator">&gt;&gt;</span>
+</pre>
 <p class="defined-in">
   defined in
   <a
@@ -111,7 +111,7 @@
 </p>
 <pre
   class="import-code ts language-ts"
-><div><span class="token keyword">import</span> <span class="token punctuation">{</span> ExcludeFunctionFields <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/types/objects.ts'</span></div></pre>
+><span class="token keyword">import</span> <span class="token punctuation">{</span> ExcludeFunctionFields <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/types/objects.ts'</span></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="KeysWithFieldType">
   KeysWithFieldType<span
     class="kind is-family-sans-serif has-text-grey-light is-size-6"
@@ -120,10 +120,10 @@
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">type</span> KeysWithFieldType<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> Condition<span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
+><span class="token keyword">type</span> KeysWithFieldType<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> Condition<span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
   <span class="token punctuation">[</span><span class="token constant">K</span> <span class="token keyword">in</span> <span class="token keyword">keyof</span> <span class="token constant">T</span><span class="token punctuation">]</span><span class="token operator">:</span> WhenEquals<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">[</span><span class="token constant">K</span><span class="token punctuation">]</span><span class="token punctuation">,</span> Condition<span class="token punctuation">,</span> <span class="token constant">K</span><span class="token operator">&gt;</span>
 <span class="token punctuation">}</span><span class="token punctuation">[</span><span class="token keyword">keyof</span> <span class="token constant">T</span><span class="token punctuation">]</span>
-</div></pre>
+</pre>
 <p class="defined-in">
   defined in
   <a
@@ -133,7 +133,7 @@
 </p>
 <pre
   class="import-code ts language-ts"
-><div><span class="token keyword">import</span> <span class="token punctuation">{</span> KeysWithFieldType <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/types/objects.ts'</span></div></pre>
+><span class="token keyword">import</span> <span class="token punctuation">{</span> KeysWithFieldType <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/types/objects.ts'</span></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="KeysWithoutFieldType">
   KeysWithoutFieldType<span
     class="kind is-family-sans-serif has-text-grey-light is-size-6"
@@ -142,10 +142,10 @@
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">type</span> KeysWithoutFieldType<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> Condition<span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
+><span class="token keyword">type</span> KeysWithoutFieldType<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> Condition<span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
   <span class="token punctuation">[</span><span class="token constant">K</span> <span class="token keyword">in</span> <span class="token keyword">keyof</span> <span class="token constant">T</span><span class="token punctuation">]</span><span class="token operator">:</span> WhenEquals<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">[</span><span class="token constant">K</span><span class="token punctuation">]</span><span class="token punctuation">,</span> Condition<span class="token punctuation">,</span> <span class="token builtin">never</span><span class="token punctuation">,</span> <span class="token constant">K</span><span class="token operator">&gt;</span>
 <span class="token punctuation">}</span><span class="token punctuation">[</span><span class="token keyword">keyof</span> <span class="token constant">T</span><span class="token punctuation">]</span>
-</div></pre>
+</pre>
 <p class="defined-in">
   defined in
   <a
@@ -155,7 +155,7 @@
 </p>
 <pre
   class="import-code ts language-ts"
-><div><span class="token keyword">import</span> <span class="token punctuation">{</span> KeysWithoutFieldType <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/types/objects.ts'</span></div></pre>
+><span class="token keyword">import</span> <span class="token punctuation">{</span> KeysWithoutFieldType <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/types/objects.ts'</span></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="Merge">
   Merge<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
     >type alias</span
@@ -163,8 +163,8 @@
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">type</span> Merge<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token constant">A</span> <span class="token operator">&amp;</span> <span class="token constant">B</span>
-</div></pre>
+><span class="token keyword">type</span> Merge<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token constant">A</span> <span class="token operator">&amp;</span> <span class="token constant">B</span>
+</pre>
 <p class="defined-in">
   defined in
   <a
@@ -174,7 +174,7 @@
 </p>
 <pre
   class="import-code ts language-ts"
-><div><span class="token keyword">import</span> <span class="token punctuation">{</span> Merge <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/types/objects.ts'</span></div></pre>
+><span class="token keyword">import</span> <span class="token punctuation">{</span> Merge <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/types/objects.ts'</span></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="ObjectWithField">
   ObjectWithField<span
     class="kind is-family-sans-serif has-text-grey-light is-size-6"
@@ -183,8 +183,8 @@
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">type</span> ObjectWithField<span class="token operator">&lt;</span><span class="token constant">F</span> <span class="token keyword">extends</span> <span class="token class-name">IndexType</span><span class="token punctuation">,</span> <span class="token constant">V</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token punctuation">[</span>_ <span class="token keyword">in</span> <span class="token constant">F</span><span class="token punctuation">]</span><span class="token operator">:</span> <span class="token constant">V</span> <span class="token punctuation">}</span>
-</div></pre>
+><span class="token keyword">type</span> ObjectWithField<span class="token operator">&lt;</span><span class="token constant">F</span> <span class="token keyword">extends</span> <span class="token class-name">IndexType</span><span class="token punctuation">,</span> <span class="token constant">V</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token punctuation">[</span>_ <span class="token keyword">in</span> <span class="token constant">F</span><span class="token punctuation">]</span><span class="token operator">:</span> <span class="token constant">V</span> <span class="token punctuation">}</span>
+</pre>
 <p class="defined-in">
   defined in
   <a
@@ -194,7 +194,7 @@
 </p>
 <pre
   class="import-code ts language-ts"
-><div><span class="token keyword">import</span> <span class="token punctuation">{</span> ObjectWithField <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/types/objects.ts'</span></div></pre>
+><span class="token keyword">import</span> <span class="token punctuation">{</span> ObjectWithField <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/types/objects.ts'</span></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="ObjectWithPath">
   ObjectWithPath<span
     class="kind is-family-sans-serif has-text-grey-light is-size-6"
@@ -203,7 +203,7 @@
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">type</span> ObjectWithPath<span class="token operator">&lt;</span>Path <span class="token keyword">extends</span> <span class="token class-name">IndexType</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token constant">V</span><span class="token operator">&gt;</span> <span class="token operator">=</span> Path <span class="token keyword">extends</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+><span class="token keyword">type</span> ObjectWithPath<span class="token operator">&lt;</span>Path <span class="token keyword">extends</span> <span class="token class-name">IndexType</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token constant">V</span><span class="token operator">&gt;</span> <span class="token operator">=</span> Path <span class="token keyword">extends</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
   <span class="token operator">?</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
   <span class="token operator">:</span> Path <span class="token keyword">extends</span> <span class="token punctuation">[</span>infer <span class="token constant">T</span><span class="token punctuation">]</span>
   <span class="token operator">?</span> <span class="token constant">T</span> <span class="token keyword">extends</span> <span class="token class-name">IndexType</span>
@@ -218,7 +218,7 @@
       <span class="token operator">:</span> <span class="token builtin">never</span>
     <span class="token operator">:</span> <span class="token builtin">never</span>
   <span class="token operator">:</span> <span class="token builtin">never</span>
-</div></pre>
+</pre>
 <p class="defined-in">
   defined in
   <a
@@ -228,7 +228,7 @@
 </p>
 <pre
   class="import-code ts language-ts"
-><div><span class="token keyword">import</span> <span class="token punctuation">{</span> ObjectWithPath <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/types/objects.ts'</span></div></pre>
+><span class="token keyword">import</span> <span class="token punctuation">{</span> ObjectWithPath <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/types/objects.ts'</span></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="ReadonlyFields">
   ReadonlyFields<span
     class="kind is-family-sans-serif has-text-grey-light is-size-6"
@@ -237,8 +237,8 @@
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">type</span> ReadonlyFields<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span> <span class="token operator">=</span> Pick<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> ReadonlyKeys<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;&gt;</span>
-</div></pre>
+><span class="token keyword">type</span> ReadonlyFields<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span> <span class="token operator">=</span> Pick<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> ReadonlyKeys<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;&gt;</span>
+</pre>
 <p class="defined-in">
   defined in
   <a
@@ -248,7 +248,7 @@
 </p>
 <pre
   class="import-code ts language-ts"
-><div><span class="token keyword">import</span> <span class="token punctuation">{</span> ReadonlyFields <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/types/objects.ts'</span></div></pre>
+><span class="token keyword">import</span> <span class="token punctuation">{</span> ReadonlyFields <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/types/objects.ts'</span></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="ReadonlyKeys">
   ReadonlyKeys<span
     class="kind is-family-sans-serif has-text-grey-light is-size-6"
@@ -257,7 +257,7 @@
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">type</span> ReadonlyKeys<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
+><span class="token keyword">type</span> ReadonlyKeys<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
   <span class="token punctuation">[</span><span class="token constant">P</span> <span class="token keyword">in</span> <span class="token keyword">keyof</span> <span class="token constant">T</span><span class="token punctuation">]</span><span class="token operator">-</span><span class="token operator">?</span><span class="token operator">:</span> WhenEquals<span class="token operator">&lt;</span>
     <span class="token punctuation">{</span> <span class="token punctuation">[</span><span class="token constant">Q</span> <span class="token keyword">in</span> <span class="token constant">P</span><span class="token punctuation">]</span><span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token constant">P</span><span class="token punctuation">]</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">{</span> <span class="token operator">-</span><span class="token keyword">readonly</span> <span class="token punctuation">[</span><span class="token constant">Q</span> <span class="token keyword">in</span> <span class="token constant">P</span><span class="token punctuation">]</span><span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token constant">P</span><span class="token punctuation">]</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -265,7 +265,7 @@
     <span class="token constant">P</span>
   <span class="token operator">&gt;</span>
 <span class="token punctuation">}</span><span class="token punctuation">[</span><span class="token keyword">keyof</span> <span class="token constant">T</span><span class="token punctuation">]</span>
-</div></pre>
+</pre>
 <p class="defined-in">
   defined in
   <a
@@ -275,7 +275,7 @@
 </p>
 <pre
   class="import-code ts language-ts"
-><div><span class="token keyword">import</span> <span class="token punctuation">{</span> ReadonlyKeys <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/types/objects.ts'</span></div></pre>
+><span class="token keyword">import</span> <span class="token punctuation">{</span> ReadonlyKeys <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/types/objects.ts'</span></pre>
 <h3
   class="is-family-monospace has-text-grey-dark"
   id="RemoveNullableFromFields"
@@ -287,10 +287,10 @@
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">type</span> RemoveNullableFromFields<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
+><span class="token keyword">type</span> RemoveNullableFromFields<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
   <span class="token punctuation">[</span><span class="token constant">K</span> <span class="token keyword">in</span> <span class="token keyword">keyof</span> <span class="token constant">T</span><span class="token punctuation">]</span><span class="token operator">:</span> NonNullable<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">[</span><span class="token constant">K</span><span class="token punctuation">]</span><span class="token operator">&gt;</span>
 <span class="token punctuation">}</span>
-</div></pre>
+</pre>
 <p class="defined-in">
   defined in
   <a
@@ -300,7 +300,7 @@
 </p>
 <pre
   class="import-code ts language-ts"
-><div><span class="token keyword">import</span> <span class="token punctuation">{</span> RemoveNullableFromFields <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/types/objects.ts'</span></div></pre>
+><span class="token keyword">import</span> <span class="token punctuation">{</span> RemoveNullableFromFields <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/types/objects.ts'</span></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="TypeAtPath">
   TypeAtPath<span
     class="kind is-family-sans-serif has-text-grey-light is-size-6"
@@ -309,7 +309,7 @@
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">type</span> TypeAtPath<span class="token operator">&lt;</span>Path <span class="token keyword">extends</span> <span class="token class-name">IndexType</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token constant">O</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
+><span class="token keyword">type</span> TypeAtPath<span class="token operator">&lt;</span>Path <span class="token keyword">extends</span> <span class="token class-name">IndexType</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token constant">O</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
   next<span class="token operator">:</span> Path <span class="token keyword">extends</span> <span class="token punctuation">[</span>infer <span class="token constant">K</span><span class="token punctuation">,</span> <span class="token operator">...</span><span class="token builtin">any</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
     <span class="token operator">?</span> <span class="token constant">K</span> <span class="token keyword">extends</span> <span class="token class-name">IndexType</span>
       <span class="token operator">?</span> Tail<span class="token operator">&lt;</span>Path<span class="token operator">&gt;</span> <span class="token keyword">extends</span> <span class="token class-name">infer</span> Rest
@@ -330,7 +330,7 @@
       <span class="token operator">:</span> <span class="token builtin">never</span>
     <span class="token operator">:</span> <span class="token builtin">never</span>
 <span class="token punctuation">}</span><span class="token punctuation">[</span>Path <span class="token keyword">extends</span> <span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">?</span> <span class="token string">'empty'</span> <span class="token operator">:</span> Path <span class="token keyword">extends</span> <span class="token punctuation">[</span><span class="token builtin">any</span><span class="token punctuation">]</span> <span class="token operator">?</span> <span class="token string">'done'</span> <span class="token operator">:</span> <span class="token string">'next'</span><span class="token punctuation">]</span>
-</div></pre>
+</pre>
 <p class="defined-in">
   defined in
   <a
@@ -340,7 +340,7 @@
 </p>
 <pre
   class="import-code ts language-ts"
-><div><span class="token keyword">import</span> <span class="token punctuation">{</span> TypeAtPath <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/types/objects.ts'</span></div></pre>
+><span class="token keyword">import</span> <span class="token punctuation">{</span> TypeAtPath <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/types/objects.ts'</span></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="WritableFields">
   WritableFields<span
     class="kind is-family-sans-serif has-text-grey-light is-size-6"
@@ -349,8 +349,8 @@
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">type</span> WritableFields<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span> <span class="token operator">=</span> Pick<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> WritableKeys<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;&gt;</span>
-</div></pre>
+><span class="token keyword">type</span> WritableFields<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span> <span class="token operator">=</span> Pick<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> WritableKeys<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;&gt;</span>
+</pre>
 <p class="defined-in">
   defined in
   <a
@@ -360,7 +360,7 @@
 </p>
 <pre
   class="import-code ts language-ts"
-><div><span class="token keyword">import</span> <span class="token punctuation">{</span> WritableFields <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/types/objects.ts'</span></div></pre>
+><span class="token keyword">import</span> <span class="token punctuation">{</span> WritableFields <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/types/objects.ts'</span></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="WritableKeys">
   WritableKeys<span
     class="kind is-family-sans-serif has-text-grey-light is-size-6"
@@ -369,14 +369,14 @@
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">type</span> WritableKeys<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
+><span class="token keyword">type</span> WritableKeys<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
   <span class="token punctuation">[</span><span class="token constant">K</span> <span class="token keyword">in</span> <span class="token keyword">keyof</span> <span class="token constant">T</span><span class="token punctuation">]</span><span class="token operator">-</span><span class="token operator">?</span><span class="token operator">:</span> WhenEquals<span class="token operator">&lt;</span>
     <span class="token punctuation">{</span> <span class="token punctuation">[</span><span class="token constant">Q</span> <span class="token keyword">in</span> <span class="token constant">K</span><span class="token punctuation">]</span><span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token constant">K</span><span class="token punctuation">]</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">{</span> <span class="token operator">-</span><span class="token keyword">readonly</span> <span class="token punctuation">[</span><span class="token constant">Q</span> <span class="token keyword">in</span> <span class="token constant">K</span><span class="token punctuation">]</span><span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token constant">K</span><span class="token punctuation">]</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token constant">K</span>
   <span class="token operator">&gt;</span>
 <span class="token punctuation">}</span><span class="token punctuation">[</span><span class="token keyword">keyof</span> <span class="token constant">T</span><span class="token punctuation">]</span>
-</div></pre>
+</pre>
 <p class="defined-in">
   defined in
   <a
@@ -386,4 +386,4 @@
 </p>
 <pre
   class="import-code ts language-ts"
-><div><span class="token keyword">import</span> <span class="token punctuation">{</span> WritableKeys <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/types/objects.ts'</span></div></pre>
+><span class="token keyword">import</span> <span class="token punctuation">{</span> WritableKeys <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/types/objects.ts'</span></pre>

@@ -12,7 +12,7 @@
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">declare</span> <span class="token keyword">class</span> <span class="token class-name">Store</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+><span class="token keyword">declare</span> <span class="token keyword">class</span> <span class="token class-name">Store</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token operator">&gt;</span> <span class="token punctuation">{</span>
   <span class="token keyword">static</span> ofState<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token operator">&gt;</span><span class="token punctuation">(</span>options<span class="token operator">:</span> <span class="token punctuation">{</span>
     state<span class="token operator">:</span> State
     reducer<span class="token operator">:</span> Reducer<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token operator">&gt;</span>
@@ -22,8 +22,9 @@
   <span class="token keyword">readonly</span> observable<span class="token operator">:</span> Observable4<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> State<span class="token punctuation">,</span> <span class="token builtin">boolean</span><span class="token operator">&gt;</span>
   <span class="token keyword">readonly</span> property<span class="token operator">:</span> Property<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span>
   <span class="token function">process</span><span class="token punctuation">(</span>action<span class="token operator">:</span> Action<span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span>
+  <span class="token function">processMany</span><span class="token punctuation">(</span><span class="token operator">...</span>actions<span class="token operator">:</span> Action<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span>
 <span class="token punctuation">}</span>
-</div></pre>
+</pre>
 <p class="defined-in">
   defined in
   <a
@@ -33,4 +34,4 @@
 </p>
 <pre
   class="import-code ts language-ts"
-><div><span class="token keyword">import</span> <span class="token punctuation">{</span> Store <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-store/lib/store.ts'</span></div></pre>
+><span class="token keyword">import</span> <span class="token punctuation">{</span> Store <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-store/lib/store.ts'</span></pre>

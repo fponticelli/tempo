@@ -14,12 +14,12 @@
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">type</span> Differentiate<span class="token operator">&lt;</span>
+><span class="token keyword">type</span> Differentiate<span class="token operator">&lt;</span>
   Field <span class="token keyword">extends</span> <span class="token class-name">IndexType</span><span class="token punctuation">,</span>
   State <span class="token keyword">extends</span> <span class="token class-name">ObjectWithField</span><span class="token operator">&lt;</span>Field<span class="token punctuation">,</span> <span class="token builtin">any</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
   ExpectedType <span class="token keyword">extends</span> <span class="token class-name">State</span><span class="token punctuation">[</span>Field<span class="token punctuation">]</span>
 <span class="token operator">&gt;</span> <span class="token operator">=</span> State <span class="token keyword">extends</span> <span class="token class-name">ObjectWithField</span><span class="token operator">&lt;</span>Field<span class="token punctuation">,</span> ExpectedType<span class="token operator">&gt;</span> <span class="token operator">?</span> State <span class="token operator">:</span> <span class="token builtin">never</span>
-</div></pre>
+</pre>
 <p class="defined-in">
   defined in
   <a
@@ -29,7 +29,7 @@
 </p>
 <pre
   class="import-code ts language-ts"
-><div><span class="token keyword">import</span> <span class="token punctuation">{</span> Differentiate <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/types/differentiate.ts'</span></div></pre>
+><span class="token keyword">import</span> <span class="token punctuation">{</span> Differentiate <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/types/differentiate.ts'</span></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="DifferentiateAt">
   DifferentiateAt<span
     class="kind is-family-sans-serif has-text-grey-light is-size-6"
@@ -38,7 +38,7 @@
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">type</span> DifferentiateAt<span class="token operator">&lt;</span>
+><span class="token keyword">type</span> DifferentiateAt<span class="token operator">&lt;</span>
   Path <span class="token keyword">extends</span> <span class="token class-name">IndexType</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
   State<span class="token punctuation">,</span>
   ExpectedType
@@ -59,7 +59,7 @@
       <span class="token operator">:</span> <span class="token builtin">never</span>
     <span class="token operator">:</span> <span class="token builtin">never</span>
   <span class="token operator">:</span> <span class="token builtin">never</span>
-</div></pre>
+</pre>
 <p class="defined-in">
   defined in
   <a
@@ -69,7 +69,7 @@
 </p>
 <pre
   class="import-code ts language-ts"
-><div><span class="token keyword">import</span> <span class="token punctuation">{</span> DifferentiateAt <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/types/differentiate.ts'</span></div></pre>
+><span class="token keyword">import</span> <span class="token punctuation">{</span> DifferentiateAt <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/types/differentiate.ts'</span></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="DifferentiateByKind">
   DifferentiateByKind<span
     class="kind is-family-sans-serif has-text-grey-light is-size-6"
@@ -78,11 +78,11 @@
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">type</span> DifferentiateByKind<span class="token operator">&lt;</span>
+><span class="token keyword">type</span> DifferentiateByKind<span class="token operator">&lt;</span>
   State <span class="token keyword">extends</span> <span class="token punctuation">{</span> kind<span class="token operator">:</span> <span class="token builtin">any</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
   <span class="token constant">K</span> <span class="token keyword">extends</span> <span class="token class-name">State</span><span class="token punctuation">[</span><span class="token string">'kind'</span><span class="token punctuation">]</span>
 <span class="token operator">&gt;</span> <span class="token operator">=</span> Differentiate<span class="token operator">&lt;</span><span class="token string">'kind'</span><span class="token punctuation">,</span> State<span class="token punctuation">,</span> <span class="token constant">K</span><span class="token operator">&gt;</span>
-</div></pre>
+</pre>
 <p class="defined-in">
   defined in
   <a
@@ -92,4 +92,4 @@
 </p>
 <pre
   class="import-code ts language-ts"
-><div><span class="token keyword">import</span> <span class="token punctuation">{</span> DifferentiateByKind <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/types/differentiate.ts'</span></div></pre>
+><span class="token keyword">import</span> <span class="token punctuation">{</span> DifferentiateByKind <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/types/differentiate.ts'</span></pre>

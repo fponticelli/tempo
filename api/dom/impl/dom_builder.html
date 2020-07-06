@@ -1,0 +1,446 @@
+<div class="top-right">
+  <a
+    href="https://github.com/fponticelli/tempo/edit/master/dom/src/impl/dom_builder.ts"
+    >✏️ edit me</a
+  >
+</div>
+<h1>module 'impl/dom_builder'</h1>
+<nav>
+  <p class="title is-6">Table of Contents</p>
+  <ul class="module-toc-list">
+    <li>
+      <a
+        class="is-family-monospace"
+        href="#/api/dom/impl/dom_builder.html#booleanToString"
+        >booleanToString</a
+      >
+    </li>
+    <li>
+      <a
+        class="is-family-monospace"
+        href="#/api/dom/impl/dom_builder.html#childOrBuilderToTemplate"
+        >childOrBuilderToTemplate</a
+      >
+    </li>
+    <li>
+      <a
+        class="is-family-monospace"
+        href="#/api/dom/impl/dom_builder.html#DOMBuilder"
+        >DOMBuilder</a
+      >
+    </li>
+    <li>
+      <a
+        class="is-family-monospace"
+        href="#/api/dom/impl/dom_builder.html#extractDerived"
+        >extractDerived</a
+      >
+    </li>
+    <li>
+      <a
+        class="is-family-monospace"
+        href="#/api/dom/impl/dom_builder.html#extractLiterals"
+        >extractLiterals</a
+      >
+    </li>
+    <li>
+      <a
+        class="is-family-monospace"
+        href="#/api/dom/impl/dom_builder.html#IBuilder"
+        >IBuilder</a
+      >
+    </li>
+    <li>
+      <a
+        class="is-family-monospace"
+        href="#/api/dom/impl/dom_builder.html#listOrRecordToSpaceSeparated"
+        >listOrRecordToSpaceSeparated</a
+      >
+    </li>
+    <li>
+      <a
+        class="is-family-monospace"
+        href="#/api/dom/impl/dom_builder.html#listOrRecordToString"
+        >listOrRecordToString</a
+      >
+    </li>
+    <li>
+      <a
+        class="is-family-monospace"
+        href="#/api/dom/impl/dom_builder.html#ListOrRecordValue"
+        >ListOrRecordValue</a
+      >
+    </li>
+    <li>
+      <a
+        class="is-family-monospace"
+        href="#/api/dom/impl/dom_builder.html#ListValue"
+        >ListValue</a
+      >
+    </li>
+    <li>
+      <a
+        class="is-family-monospace"
+        href="#/api/dom/impl/dom_builder.html#lostOrRecordToCommaSeparated"
+        >lostOrRecordToCommaSeparated</a
+      >
+    </li>
+    <li>
+      <a
+        class="is-family-monospace"
+        href="#/api/dom/impl/dom_builder.html#numberPairsListToString"
+        >numberPairsListToString</a
+      >
+    </li>
+    <li>
+      <a
+        class="is-family-monospace"
+        href="#/api/dom/impl/dom_builder.html#numbersListToString"
+        >numbersListToString</a
+      >
+    </li>
+    <li>
+      <a
+        class="is-family-monospace"
+        href="#/api/dom/impl/dom_builder.html#stylesToString"
+        >stylesToString</a
+      >
+    </li>
+    <li>
+      <a
+        class="is-family-monospace"
+        href="#/api/dom/impl/dom_builder.html#toggleToString"
+        >toggleToString</a
+      >
+    </li>
+  </ul>
+</nav>
+<h3 class="is-family-monospace has-text-grey-dark" id="booleanToString">
+  booleanToString<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token function">booleanToString</span><span class="token punctuation">(</span><span class="token parameter">src<span class="token operator">:</span> <span class="token builtin">boolean</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/dom_builder.ts#L101"
+    >dom/src/impl/dom_builder.ts at line 101</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> booleanToString <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/dom_builder.ts'</span></pre>
+<h3
+  class="is-family-monospace has-text-grey-dark"
+  id="childOrBuilderToTemplate"
+>
+  childOrBuilderToTemplate<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> childOrBuilderToTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  src<span class="token operator">:</span> DOMChild<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span> <span class="token operator">|</span> IBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> DOMTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/dom_builder.ts#L13"
+    >dom/src/impl/dom_builder.ts at line 13</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> childOrBuilderToTemplate <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/dom_builder.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="DOMBuilder">
+  DOMBuilder<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >class</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">declare</span> <span class="token keyword">class</span> <span class="token class-name">DOMBuilder</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+  <span class="token function">Append</span><span class="token punctuation">(</span>
+    el<span class="token operator">:</span> DOMChild<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span> <span class="token operator">|</span> IBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+  <span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">this</span>
+  <span class="token function">AppendMany</span><span class="token punctuation">(</span>
+    <span class="token operator">...</span>els<span class="token operator">:</span> <span class="token punctuation">(</span>DOMChild<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span> <span class="token operator">|</span> IBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
+  <span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">this</span>
+<span class="token punctuation">}</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/dom_builder.ts#L109"
+    >dom/src/impl/dom_builder.ts at line 109</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> DOMBuilder <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/dom_builder.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="extractDerived">
+  extractDerived<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> extractDerived<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  record<span class="token operator">:</span> Record<span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token punctuation">,</span> DerivedOrLiteralValue<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> <span class="token builtin">string</span><span class="token operator">&gt;&gt;</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> <span class="token punctuation">{</span> name<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span> resolve<span class="token operator">:</span> DerivedValue<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> <span class="token builtin">string</span><span class="token operator">&gt;</span> <span class="token punctuation">}</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/dom_builder.ts#L38"
+    >dom/src/impl/dom_builder.ts at line 38</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> extractDerived <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/dom_builder.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="extractLiterals">
+  extractLiterals<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> extractLiterals<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  record<span class="token operator">:</span> Record<span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token punctuation">,</span> DerivedOrLiteralValue<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> <span class="token builtin">string</span><span class="token operator">&gt;&gt;</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> <span class="token punctuation">{</span> name<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span> value<span class="token operator">:</span> <span class="token builtin">string</span> <span class="token punctuation">}</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/dom_builder.ts#L27"
+    >dom/src/impl/dom_builder.ts at line 27</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> extractLiterals <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/dom_builder.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="IBuilder">
+  IBuilder<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >interface</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">interface</span> <span class="token class-name">IBuilder</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+  <span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> DOMTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+<span class="token punctuation">}</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/dom_builder.ts#L9"
+    >dom/src/impl/dom_builder.ts at line 9</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> IBuilder <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/dom_builder.ts'</span></pre>
+<h3
+  class="is-family-monospace has-text-grey-dark"
+  id="listOrRecordToSpaceSeparated"
+>
+  listOrRecordToSpaceSeparated<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token function">listOrRecordToSpaceSeparated</span><span class="token punctuation">(</span>
+  <span class="token parameter">src<span class="token operator">:</span> ListOrRecordValue<span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token operator">&gt;</span></span>
+<span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span> <span class="token operator">|</span> <span class="token keyword">undefined</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/dom_builder.ts#L80"
+    >dom/src/impl/dom_builder.ts at line 80</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> listOrRecordToSpaceSeparated <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/dom_builder.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="listOrRecordToString">
+  listOrRecordToString<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token function">listOrRecordToString</span><span class="token punctuation">(</span>
+  <span class="token parameter">src<span class="token operator">:</span> ListOrRecordValue<span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  separator<span class="token operator">:</span> <span class="token builtin">string</span></span>
+<span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span> <span class="token operator">|</span> <span class="token keyword">undefined</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/dom_builder.ts#L51"
+    >dom/src/impl/dom_builder.ts at line 51</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> listOrRecordToString <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/dom_builder.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="ListOrRecordValue">
+  ListOrRecordValue<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >type alias</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">type</span> ListOrRecordValue<span class="token operator">&lt;</span><span class="token constant">T</span> <span class="token keyword">extends</span> <span class="token class-name">string</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token constant">T</span> <span class="token operator">|</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">|</span> Record<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token builtin">boolean</span><span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/dom_builder.ts#L6"
+    >dom/src/impl/dom_builder.ts at line 6</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> ListOrRecordValue <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/dom_builder.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="ListValue">
+  ListValue<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >type alias</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">type</span> ListValue<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token constant">T</span> <span class="token operator">|</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/dom_builder.ts#L7"
+    >dom/src/impl/dom_builder.ts at line 7</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> ListValue <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/dom_builder.ts'</span></pre>
+<h3
+  class="is-family-monospace has-text-grey-dark"
+  id="lostOrRecordToCommaSeparated"
+>
+  lostOrRecordToCommaSeparated<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token function">lostOrRecordToCommaSeparated</span><span class="token punctuation">(</span>
+  <span class="token parameter">src<span class="token operator">:</span> ListOrRecordValue<span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token operator">&gt;</span></span>
+<span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span> <span class="token operator">|</span> <span class="token keyword">undefined</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/dom_builder.ts#L84"
+    >dom/src/impl/dom_builder.ts at line 84</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> lostOrRecordToCommaSeparated <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/dom_builder.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="numberPairsListToString">
+  numberPairsListToString<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token function">numberPairsListToString</span><span class="token punctuation">(</span><span class="token parameter">src<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token builtin">number</span><span class="token punctuation">,</span> <span class="token builtin">number</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token punctuation">]</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/dom_builder.ts#L76"
+    >dom/src/impl/dom_builder.ts at line 76</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> numberPairsListToString <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/dom_builder.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="numbersListToString">
+  numbersListToString<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token function">numbersListToString</span><span class="token punctuation">(</span><span class="token parameter">src<span class="token operator">:</span> ListValue<span class="token operator">&lt;</span><span class="token builtin">number</span><span class="token operator">&gt;</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/dom_builder.ts#L71"
+    >dom/src/impl/dom_builder.ts at line 71</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> numbersListToString <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/dom_builder.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="stylesToString">
+  stylesToString<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token function">stylesToString</span><span class="token punctuation">(</span><span class="token parameter">src<span class="token operator">:</span> <span class="token builtin">string</span> <span class="token operator">|</span> Record<span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token punctuation">,</span> <span class="token builtin">string</span><span class="token operator">&gt;</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/dom_builder.ts#L88"
+    >dom/src/impl/dom_builder.ts at line 88</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> stylesToString <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/dom_builder.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="toggleToString">
+  toggleToString<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token function">toggleToString</span><span class="token punctuation">(</span><span class="token parameter">name<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">src<span class="token operator">:</span> <span class="token builtin">boolean</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">string</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/dom_builder.ts#L105"
+    >dom/src/impl/dom_builder.ts at line 105</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> toggleToString <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/dom_builder.ts'</span></pre>

@@ -4,7 +4,39 @@
   >
 </div>
 <h1>module 'match'</h1>
-<nav></nav>
+<nav>
+  <p class="title is-6">Table of Contents</p>
+  <ul class="module-toc-list">
+    <li>
+      <a class="is-family-monospace" href="#/api/std/match.html#createDeepMatch"
+        >createDeepMatch</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/std/match.html#createMatch"
+        >createMatch</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/std/match.html#deepMatch"
+        >deepMatch</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/std/match.html#match">match</a>
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/std/match.html#matchKind"
+        >matchKind</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/std/match.html#matchLiteral"
+        >matchLiteral</a
+      >
+    </li>
+  </ul>
+</nav>
 <h3 class="is-family-monospace has-text-grey-dark" id="createDeepMatch">
   createDeepMatch<span
     class="kind is-family-sans-serif has-text-grey-light is-size-6"
@@ -13,9 +45,10 @@
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">const</span> createDeepMatch<span class="token operator">:</span> <span class="token operator">&lt;</span>Path <span class="token keyword">extends</span> <span class="token punctuation">(</span><span class="token builtin">string</span> <span class="token operator">|</span> <span class="token builtin">number</span> <span class="token operator">|</span> <span class="token builtin">symbol</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
+><span class="token keyword">const</span> createDeepMatch<span class="token operator">:</span> <span class="token operator">&lt;</span>Path <span class="token keyword">extends</span> <span class="token punctuation">(</span><span class="token builtin">string</span> <span class="token operator">|</span> <span class="token builtin">number</span> <span class="token operator">|</span> <span class="token builtin">symbol</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
   <span class="token parameter"><span class="token operator">...</span>path<span class="token operator">:</span> Path</span>
 <span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token operator">&lt;</span><span class="token constant">T</span> <span class="token keyword">extends</span> <span class="token class-name">ObjectWithPath</span><span class="token operator">&lt;</span>Path<span class="token punctuation">,</span> <span class="token builtin">any</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  input<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">,</span>
   matcher<span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token punctuation">[</span>k <span class="token keyword">in</span> <span class="token punctuation">{</span>
       next<span class="token operator">:</span> Path <span class="token keyword">extends</span> <span class="token punctuation">[</span>infer <span class="token constant">K</span><span class="token punctuation">,</span> <span class="token operator">...</span><span class="token builtin">any</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
@@ -567,18 +600,18 @@
       <span class="token parameter">arg<span class="token operator">:</span> DifferentiateAt<span class="token operator">&lt;</span>Path<span class="token punctuation">,</span> <span class="token constant">T</span><span class="token punctuation">,</span> k<span class="token operator">&gt;</span></span>
     <span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">B</span>
   <span class="token punctuation">}</span>
-<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">(</span><span class="token parameter">input<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">B</span>
-</div></pre>
+<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">B</span>
+</pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/match.ts#L61"
-    >std/src/match.ts at line 61</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/match.ts#L66"
+    >std/src/match.ts at line 66</a
   >
 </p>
 <pre
   class="import-code ts language-ts"
-><div><span class="token keyword">import</span> <span class="token punctuation">{</span> createDeepMatch <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/match.ts'</span></div></pre>
+><span class="token keyword">import</span> <span class="token punctuation">{</span> createDeepMatch <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/match.ts'</span></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="createMatch">
   createMatch<span
     class="kind is-family-sans-serif has-text-grey-light is-size-6"
@@ -587,22 +620,23 @@
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">function</span> createMatch<span class="token operator">&lt;</span><span class="token constant">F</span> <span class="token keyword">extends</span> <span class="token class-name">IndexType</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
+><span class="token keyword">function</span> createMatch<span class="token operator">&lt;</span><span class="token constant">F</span> <span class="token keyword">extends</span> <span class="token class-name">IndexType</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
   field<span class="token operator">:</span> <span class="token constant">F</span>
 <span class="token punctuation">)</span><span class="token operator">:</span> <span class="token operator">&lt;</span><span class="token constant">T</span> <span class="token keyword">extends</span> <span class="token class-name">ObjectWithField</span><span class="token operator">&lt;</span><span class="token constant">F</span><span class="token punctuation">,</span> <span class="token builtin">any</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  <span class="token parameter">matcher<span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token punctuation">[</span>k <span class="token keyword">in</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token constant">F</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">arg<span class="token operator">:</span> Differentiate<span class="token operator">&lt;</span><span class="token constant">F</span><span class="token punctuation">,</span> <span class="token constant">T</span><span class="token punctuation">,</span> k<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">B</span> <span class="token punctuation">}</span></span>
-<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">(</span><span class="token parameter">input<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">B</span>
-</div></pre>
+  <span class="token parameter">input<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">,</span>
+  matcher<span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token punctuation">[</span>k <span class="token keyword">in</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token constant">F</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">arg<span class="token operator">:</span> Differentiate<span class="token operator">&lt;</span><span class="token constant">F</span><span class="token punctuation">,</span> <span class="token constant">T</span><span class="token punctuation">,</span> k<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">B</span> <span class="token punctuation">}</span></span>
+<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">B</span>
+</pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/match.ts#L49"
-    >std/src/match.ts at line 49</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/match.ts#L56"
+    >std/src/match.ts at line 56</a
   >
 </p>
 <pre
   class="import-code ts language-ts"
-><div><span class="token keyword">import</span> <span class="token punctuation">{</span> createMatch <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/match.ts'</span></div></pre>
+><span class="token keyword">import</span> <span class="token punctuation">{</span> createMatch <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/match.ts'</span></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="deepMatch">
   deepMatch<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
     >function</span
@@ -610,7 +644,7 @@
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">function</span> deepMatch<span class="token operator">&lt;</span>
+><span class="token keyword">function</span> deepMatch<span class="token operator">&lt;</span>
   Path <span class="token keyword">extends</span> <span class="token class-name">IndexType</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token constant">T</span> <span class="token keyword">extends</span> <span class="token class-name">ObjectWithPath</span><span class="token operator">&lt;</span>Path<span class="token punctuation">,</span> <span class="token builtin">any</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
   <span class="token constant">B</span>
@@ -621,17 +655,17 @@
     <span class="token punctuation">[</span>k <span class="token keyword">in</span> TypeAtPath<span class="token operator">&lt;</span>Path<span class="token punctuation">,</span> <span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">]</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">arg<span class="token operator">:</span> DifferentiateAt<span class="token operator">&lt;</span>Path<span class="token punctuation">,</span> <span class="token constant">T</span><span class="token punctuation">,</span> k<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">B</span>
   <span class="token punctuation">}</span>
 <span class="token punctuation">)</span><span class="token operator">:</span> <span class="token constant">B</span>
-</div></pre>
+</pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/match.ts#L31"
-    >std/src/match.ts at line 31</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/match.ts#L38"
+    >std/src/match.ts at line 38</a
   >
 </p>
 <pre
   class="import-code ts language-ts"
-><div><span class="token keyword">import</span> <span class="token punctuation">{</span> deepMatch <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/match.ts'</span></div></pre>
+><span class="token keyword">import</span> <span class="token punctuation">{</span> deepMatch <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/match.ts'</span></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="match">
   match<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
     >function</span
@@ -639,12 +673,57 @@
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">function</span> match<span class="token operator">&lt;</span><span class="token constant">F</span> <span class="token keyword">extends</span> <span class="token class-name">IndexType</span><span class="token punctuation">,</span> <span class="token constant">T</span> <span class="token keyword">extends</span> <span class="token class-name">ObjectWithField</span><span class="token operator">&lt;</span><span class="token constant">F</span><span class="token punctuation">,</span> <span class="token builtin">any</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
+><span class="token keyword">function</span> match<span class="token operator">&lt;</span><span class="token constant">F</span> <span class="token keyword">extends</span> <span class="token class-name">IndexType</span><span class="token punctuation">,</span> <span class="token constant">T</span> <span class="token keyword">extends</span> <span class="token class-name">ObjectWithField</span><span class="token operator">&lt;</span><span class="token constant">F</span><span class="token punctuation">,</span> <span class="token builtin">any</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
   input<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">,</span>
   field<span class="token operator">:</span> <span class="token constant">F</span><span class="token punctuation">,</span>
   matcher<span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token punctuation">[</span>k <span class="token keyword">in</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token constant">F</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">arg<span class="token operator">:</span> Differentiate<span class="token operator">&lt;</span><span class="token constant">F</span><span class="token punctuation">,</span> <span class="token constant">T</span><span class="token punctuation">,</span> k<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">B</span> <span class="token punctuation">}</span>
 <span class="token punctuation">)</span><span class="token operator">:</span> <span class="token constant">B</span>
-</div></pre>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/match.ts#L25"
+    >std/src/match.ts at line 25</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> match <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/match.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="matchKind">
+  matchKind<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >variable</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">const</span> matchKind<span class="token operator">:</span> <span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  input<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">,</span>
+  matcher<span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token punctuation">[</span>k <span class="token keyword">in</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token string">'kind'</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token operator">:</span> <span class="token punctuation">(</span>arg<span class="token operator">:</span> Differentiate<span class="token operator">&lt;</span><span class="token string">'kind'</span><span class="token punctuation">,</span> <span class="token constant">T</span><span class="token punctuation">,</span> k<span class="token operator">&gt;</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">B</span> <span class="token punctuation">}</span>
+<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">B</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/match.ts#L82"
+    >std/src/match.ts at line 82</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> matchKind <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/match.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="matchLiteral">
+  matchLiteral<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> matchLiteral<span class="token operator">&lt;</span><span class="token constant">A</span> <span class="token keyword">extends</span> <span class="token class-name">IndexType</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  input<span class="token operator">:</span> <span class="token constant">A</span><span class="token punctuation">,</span>
+  matcher<span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token punctuation">[</span>k <span class="token keyword">in</span> <span class="token constant">A</span><span class="token punctuation">]</span><span class="token operator">:</span> <span class="token constant">B</span> <span class="token punctuation">}</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token punctuation">[</span>k <span class="token keyword">in</span> <span class="token constant">A</span><span class="token punctuation">]</span><span class="token operator">:</span> <span class="token constant">B</span> <span class="token punctuation">}</span><span class="token punctuation">[</span><span class="token constant">A</span><span class="token punctuation">]</span>
+</pre>
 <p class="defined-in">
   defined in
   <a
@@ -654,25 +733,4 @@
 </p>
 <pre
   class="import-code ts language-ts"
-><div><span class="token keyword">import</span> <span class="token punctuation">{</span> match <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/match.ts'</span></div></pre>
-<h3 class="is-family-monospace has-text-grey-dark" id="matchKind">
-  matchKind<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
-    >variable</span
-  >
-</h3>
-<pre
-  class="ts language-ts signature"
-><div><span class="token keyword">const</span> matchKind<span class="token operator">:</span> <span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  matcher<span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token punctuation">[</span>k <span class="token keyword">in</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token string">'kind'</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token operator">:</span> <span class="token punctuation">(</span>arg<span class="token operator">:</span> Differentiate<span class="token operator">&lt;</span><span class="token string">'kind'</span><span class="token punctuation">,</span> <span class="token constant">T</span><span class="token punctuation">,</span> k<span class="token operator">&gt;</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">B</span> <span class="token punctuation">}</span>
-<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">(</span><span class="token parameter">input<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">B</span>
-</div></pre>
-<p class="defined-in">
-  defined in
-  <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/match.ts#L79"
-    >std/src/match.ts at line 79</a
-  >
-</p>
-<pre
-  class="import-code ts language-ts"
-><div><span class="token keyword">import</span> <span class="token punctuation">{</span> matchKind <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/match.ts'</span></div></pre>
+><span class="token keyword">import</span> <span class="token punctuation">{</span> matchLiteral <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/match.ts'</span></pre>

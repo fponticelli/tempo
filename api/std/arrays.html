@@ -22,6 +22,20 @@
       >
     </li>
     <li>
+      <a
+        class="is-family-monospace"
+        href="#/api/std/arrays.html#distinctByPredicate"
+        >distinctByPredicate</a
+      >
+    </li>
+    <li>
+      <a
+        class="is-family-monospace"
+        href="#/api/std/arrays.html#distinctPrimitive"
+        >distinctPrimitive</a
+      >
+    </li>
+    <li>
       <a class="is-family-monospace" href="#/api/std/arrays.html#each">each</a>
     </li>
     <li>
@@ -84,8 +98,20 @@
       >
     </li>
     <li>
+      <a
+        class="is-family-monospace"
+        href="#/api/std/arrays.html#ofIterableIterator"
+        >ofIterableIterator</a
+      >
+    </li>
+    <li>
       <a class="is-family-monospace" href="#/api/std/arrays.html#range"
         >range</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/std/arrays.html#remove"
+        >remove</a
       >
     </li>
     <li>
@@ -103,18 +129,18 @@
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">function</span> all<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>arr<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token function-variable function">predicate</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">v<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">boolean</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span>
-</div></pre>
+><span class="token keyword">function</span> all<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>arr<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token function-variable function">predicate</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">v<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">boolean</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span>
+</pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/arrays.ts#L90"
-    >std/src/arrays.ts at line 90</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/arrays.ts#L93"
+    >std/src/arrays.ts at line 93</a
   >
 </p>
 <pre
   class="import-code ts language-ts"
-><div><span class="token keyword">import</span> <span class="token punctuation">{</span> all <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/arrays.ts'</span></div></pre>
+><span class="token keyword">import</span> <span class="token punctuation">{</span> all <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/arrays.ts'</span></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="any">
   any<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
     >function</span
@@ -122,18 +148,18 @@
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">function</span> <span class="token builtin">any</span><span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>arr<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token function-variable function">predicate</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">v<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">boolean</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span>
-</div></pre>
+><span class="token keyword">function</span> <span class="token builtin">any</span><span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>arr<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token function-variable function">predicate</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">v<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">boolean</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span>
+</pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/arrays.ts#L99"
-    >std/src/arrays.ts at line 99</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/arrays.ts#L102"
+    >std/src/arrays.ts at line 102</a
   >
 </p>
 <pre
   class="import-code ts language-ts"
-><div><span class="token keyword">import</span> <span class="token punctuation">{</span> <span class="token builtin">any</span> <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/arrays.ts'</span></div></pre>
+><span class="token keyword">import</span> <span class="token punctuation">{</span> <span class="token builtin">any</span> <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/arrays.ts'</span></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="concat">
   concat<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
     >function</span
@@ -141,18 +167,58 @@
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">function</span> concat<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token operator">...</span>arrs<span class="token operator">:</span> <span class="token constant">A</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token constant">A</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
-</div></pre>
+><span class="token keyword">function</span> concat<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token operator">...</span>arrs<span class="token operator">:</span> <span class="token constant">A</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token constant">A</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
+</pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/arrays.ts#L113"
-    >std/src/arrays.ts at line 113</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/arrays.ts#L115"
+    >std/src/arrays.ts at line 115</a
   >
 </p>
 <pre
   class="import-code ts language-ts"
-><div><span class="token keyword">import</span> <span class="token punctuation">{</span> concat <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/arrays.ts'</span></div></pre>
+><span class="token keyword">import</span> <span class="token punctuation">{</span> concat <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/arrays.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="distinctByPredicate">
+  distinctByPredicate<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> distinctByPredicate<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>values<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token function-variable function">predicate</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">string</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/arrays.ts#L156"
+    >std/src/arrays.ts at line 156</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> distinctByPredicate <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/arrays.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="distinctPrimitive">
+  distinctPrimitive<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> distinctPrimitive<span class="token operator">&lt;</span><span class="token constant">T</span> <span class="token keyword">extends</span> <span class="token class-name">Primitive</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>values<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/arrays.ts#L152"
+    >std/src/arrays.ts at line 152</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> distinctPrimitive <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/arrays.ts'</span></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="each">
   each<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
     >function</span
@@ -160,18 +226,18 @@
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">function</span> each<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>arr<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">v<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">void</span>
-</div></pre>
+><span class="token keyword">function</span> each<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>arr<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">v<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">void</span>
+</pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/arrays.ts#L108"
-    >std/src/arrays.ts at line 108</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/arrays.ts#L111"
+    >std/src/arrays.ts at line 111</a
   >
 </p>
 <pre
   class="import-code ts language-ts"
-><div><span class="token keyword">import</span> <span class="token punctuation">{</span> each <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/arrays.ts'</span></div></pre>
+><span class="token keyword">import</span> <span class="token punctuation">{</span> each <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/arrays.ts'</span></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="equals">
   equals<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
     >function</span
@@ -179,18 +245,18 @@
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">function</span> equals<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>a<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> b<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token function-variable function">predicate</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">,</span> b<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">boolean</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span>
-</div></pre>
+><span class="token keyword">function</span> equals<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>a<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> b<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token function-variable function">predicate</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">,</span> b<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">boolean</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span>
+</pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/arrays.ts#L46"
-    >std/src/arrays.ts at line 46</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/arrays.ts#L48"
+    >std/src/arrays.ts at line 48</a
   >
 </p>
 <pre
   class="import-code ts language-ts"
-><div><span class="token keyword">import</span> <span class="token punctuation">{</span> equals <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/arrays.ts'</span></div></pre>
+><span class="token keyword">import</span> <span class="token punctuation">{</span> equals <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/arrays.ts'</span></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="fill">
   fill<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
     >function</span
@@ -198,8 +264,8 @@
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">function</span> fill<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>length<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">,</span> value<span class="token operator">:</span> <span class="token constant">A</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token constant">A</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
-</div></pre>
+><span class="token keyword">function</span> fill<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>length<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">,</span> value<span class="token operator">:</span> <span class="token constant">A</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token constant">A</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
+</pre>
 <p class="defined-in">
   defined in
   <a
@@ -209,7 +275,7 @@
 </p>
 <pre
   class="import-code ts language-ts"
-><div><span class="token keyword">import</span> <span class="token punctuation">{</span> fill <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/arrays.ts'</span></div></pre>
+><span class="token keyword">import</span> <span class="token punctuation">{</span> fill <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/arrays.ts'</span></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="filter">
   filter<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
     >function</span
@@ -217,18 +283,18 @@
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">function</span> filter<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>arr<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token function-variable function">predicate</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">v<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">boolean</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
-</div></pre>
+><span class="token keyword">function</span> filter<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>arr<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token function-variable function">predicate</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">v<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">boolean</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
+</pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/arrays.ts#L71"
-    >std/src/arrays.ts at line 71</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/arrays.ts#L76"
+    >std/src/arrays.ts at line 76</a
   >
 </p>
 <pre
   class="import-code ts language-ts"
-><div><span class="token keyword">import</span> <span class="token punctuation">{</span> filter <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/arrays.ts'</span></div></pre>
+><span class="token keyword">import</span> <span class="token punctuation">{</span> filter <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/arrays.ts'</span></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="flatMap">
   flatMap<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
     >function</span
@@ -236,18 +302,18 @@
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">function</span> flatMap<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>arr<span class="token operator">:</span> <span class="token constant">A</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token constant">A</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">B</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token constant">B</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
-</div></pre>
+><span class="token keyword">function</span> flatMap<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>arr<span class="token operator">:</span> <span class="token constant">A</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token constant">A</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">B</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token constant">B</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
+</pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/arrays.ts#L30"
-    >std/src/arrays.ts at line 30</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/arrays.ts#L32"
+    >std/src/arrays.ts at line 32</a
   >
 </p>
 <pre
   class="import-code ts language-ts"
-><div><span class="token keyword">import</span> <span class="token punctuation">{</span> flatMap <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/arrays.ts'</span></div></pre>
+><span class="token keyword">import</span> <span class="token punctuation">{</span> flatMap <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/arrays.ts'</span></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="flatten">
   flatten<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
     >function</span
@@ -255,18 +321,18 @@
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">function</span> flatten<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>arr<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
-</div></pre>
+><span class="token keyword">function</span> flatten<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>arr<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
+</pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/arrays.ts#L79"
-    >std/src/arrays.ts at line 79</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/arrays.ts#L82"
+    >std/src/arrays.ts at line 82</a
   >
 </p>
 <pre
   class="import-code ts language-ts"
-><div><span class="token keyword">import</span> <span class="token punctuation">{</span> flatten <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/arrays.ts'</span></div></pre>
+><span class="token keyword">import</span> <span class="token punctuation">{</span> flatten <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/arrays.ts'</span></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="foldLeft">
   foldLeft<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
     >function</span
@@ -274,18 +340,18 @@
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">function</span> foldLeft<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>arr<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">acc<span class="token operator">:</span> <span class="token constant">B</span><span class="token punctuation">,</span> curr<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">B</span><span class="token punctuation">,</span> b<span class="token operator">:</span> <span class="token constant">B</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token constant">B</span>
-</div></pre>
+><span class="token keyword">function</span> foldLeft<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>arr<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">acc<span class="token operator">:</span> <span class="token constant">B</span><span class="token punctuation">,</span> curr<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">B</span><span class="token punctuation">,</span> b<span class="token operator">:</span> <span class="token constant">B</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token constant">B</span>
+</pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/arrays.ts#L83"
-    >std/src/arrays.ts at line 83</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/arrays.ts#L86"
+    >std/src/arrays.ts at line 86</a
   >
 </p>
 <pre
   class="import-code ts language-ts"
-><div><span class="token keyword">import</span> <span class="token punctuation">{</span> foldLeft <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/arrays.ts'</span></div></pre>
+><span class="token keyword">import</span> <span class="token punctuation">{</span> foldLeft <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/arrays.ts'</span></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="hasValues">
   hasValues<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
     >function</span
@@ -293,18 +359,18 @@
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">function</span> hasValues<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>arr<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">:</span> arr <span class="token keyword">is</span> <span class="token punctuation">[</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token operator">...</span><span class="token constant">T</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
-</div></pre>
+><span class="token keyword">function</span> hasValues<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>arr<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">:</span> arr <span class="token keyword">is</span> <span class="token punctuation">[</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token operator">...</span><span class="token constant">T</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+</pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/arrays.ts#L67"
-    >std/src/arrays.ts at line 67</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/arrays.ts#L72"
+    >std/src/arrays.ts at line 72</a
   >
 </p>
 <pre
   class="import-code ts language-ts"
-><div><span class="token keyword">import</span> <span class="token punctuation">{</span> hasValues <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/arrays.ts'</span></div></pre>
+><span class="token keyword">import</span> <span class="token punctuation">{</span> hasValues <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/arrays.ts'</span></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="head">
   head<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
     >function</span
@@ -312,18 +378,18 @@
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">function</span> head<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>arr<span class="token operator">:</span> <span class="token constant">A</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">:</span> Maybe<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span>
-</div></pre>
+><span class="token keyword">function</span> head<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>arr<span class="token operator">:</span> <span class="token constant">A</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">:</span> Maybe<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span>
+</pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/arrays.ts#L38"
-    >std/src/arrays.ts at line 38</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/arrays.ts#L40"
+    >std/src/arrays.ts at line 40</a
   >
 </p>
 <pre
   class="import-code ts language-ts"
-><div><span class="token keyword">import</span> <span class="token punctuation">{</span> head <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/arrays.ts'</span></div></pre>
+><span class="token keyword">import</span> <span class="token punctuation">{</span> head <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/arrays.ts'</span></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="isEmpty">
   isEmpty<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
     >function</span
@@ -331,18 +397,18 @@
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">function</span> isEmpty<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>arr<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">:</span> arr <span class="token keyword">is</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
-</div></pre>
+><span class="token keyword">function</span> isEmpty<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>arr<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">:</span> arr <span class="token keyword">is</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+</pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/arrays.ts#L63"
-    >std/src/arrays.ts at line 63</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/arrays.ts#L68"
+    >std/src/arrays.ts at line 68</a
   >
 </p>
 <pre
   class="import-code ts language-ts"
-><div><span class="token keyword">import</span> <span class="token punctuation">{</span> isEmpty <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/arrays.ts'</span></div></pre>
+><span class="token keyword">import</span> <span class="token punctuation">{</span> isEmpty <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/arrays.ts'</span></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="makeCompare">
   makeCompare<span
     class="kind is-family-sans-serif has-text-grey-light is-size-6"
@@ -351,21 +417,21 @@
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">function</span> makeCompare<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
+><span class="token keyword">function</span> makeCompare<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
   comparef<span class="token operator">:</span> Compare<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
   shorterFirst <span class="token operator">=</span> <span class="token boolean">true</span>
 <span class="token punctuation">)</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token constant">A</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> b<span class="token operator">:</span> <span class="token constant">A</span><span class="token punctuation">[</span><span class="token punctuation">]</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">number</span>
-</div></pre>
+</pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/arrays.ts#L117"
-    >std/src/arrays.ts at line 117</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/arrays.ts#L119"
+    >std/src/arrays.ts at line 119</a
   >
 </p>
 <pre
   class="import-code ts language-ts"
-><div><span class="token keyword">import</span> <span class="token punctuation">{</span> makeCompare <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/arrays.ts'</span></div></pre>
+><span class="token keyword">import</span> <span class="token punctuation">{</span> makeCompare <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/arrays.ts'</span></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="makeEquals">
   makeEquals<span
     class="kind is-family-sans-serif has-text-grey-light is-size-6"
@@ -374,20 +440,20 @@
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">function</span> makeEquals<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
+><span class="token keyword">function</span> makeEquals<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
   <span class="token function-variable function">predicate</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">,</span> b<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">boolean</span>
 <span class="token punctuation">)</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> b<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token punctuation">]</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">boolean</span>
-</div></pre>
+</pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/arrays.ts#L57"
-    >std/src/arrays.ts at line 57</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/arrays.ts#L62"
+    >std/src/arrays.ts at line 62</a
   >
 </p>
 <pre
   class="import-code ts language-ts"
-><div><span class="token keyword">import</span> <span class="token punctuation">{</span> makeEquals <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/arrays.ts'</span></div></pre>
+><span class="token keyword">import</span> <span class="token punctuation">{</span> makeEquals <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/arrays.ts'</span></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="map">
   map<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
     >function</span
@@ -395,18 +461,18 @@
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">function</span> map<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>arr<span class="token operator">:</span> <span class="token constant">A</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token constant">A</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">B</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token constant">B</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
-</div></pre>
+><span class="token keyword">function</span> map<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>arr<span class="token operator">:</span> <span class="token constant">A</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token constant">A</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">B</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token constant">B</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
+</pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/arrays.ts#L21"
-    >std/src/arrays.ts at line 21</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/arrays.ts#L23"
+    >std/src/arrays.ts at line 23</a
   >
 </p>
 <pre
   class="import-code ts language-ts"
-><div><span class="token keyword">import</span> <span class="token punctuation">{</span> map <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/arrays.ts'</span></div></pre>
+><span class="token keyword">import</span> <span class="token punctuation">{</span> map <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/arrays.ts'</span></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="numbersRange">
   numbersRange<span
     class="kind is-family-sans-serif has-text-grey-light is-size-6"
@@ -415,8 +481,8 @@
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">function</span> <span class="token function">numbersRange</span><span class="token punctuation">(</span><span class="token parameter">length<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">,</span> startAt <span class="token operator">=</span> <span class="token number">0</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
-</div></pre>
+><span class="token keyword">function</span> <span class="token function">numbersRange</span><span class="token punctuation">(</span><span class="token parameter">length<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">,</span> startAt <span class="token operator">=</span> <span class="token number">0</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
+</pre>
 <p class="defined-in">
   defined in
   <a
@@ -426,7 +492,27 @@
 </p>
 <pre
   class="import-code ts language-ts"
-><div><span class="token keyword">import</span> <span class="token punctuation">{</span> numbersRange <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/arrays.ts'</span></div></pre>
+><span class="token keyword">import</span> <span class="token punctuation">{</span> numbersRange <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/arrays.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="ofIterableIterator">
+  ofIterableIterator<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> ofIterableIterator<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>it<span class="token operator">:</span> IterableIterator<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token constant">A</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/arrays.ts#L186"
+    >std/src/arrays.ts at line 186</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> ofIterableIterator <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/arrays.ts'</span></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="range">
   range<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
     >function</span
@@ -434,18 +520,37 @@
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">function</span> range<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>length<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">,</span> <span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">index<span class="token operator">:</span> <span class="token builtin">number</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">A</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token constant">A</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
-</div></pre>
+><span class="token keyword">function</span> range<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>length<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">,</span> <span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">index<span class="token operator">:</span> <span class="token builtin">number</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">A</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token constant">A</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
+</pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/arrays.ts#L137"
-    >std/src/arrays.ts at line 137</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/arrays.ts#L138"
+    >std/src/arrays.ts at line 138</a
   >
 </p>
 <pre
   class="import-code ts language-ts"
-><div><span class="token keyword">import</span> <span class="token punctuation">{</span> range <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/arrays.ts'</span></div></pre>
+><span class="token keyword">import</span> <span class="token punctuation">{</span> range <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/arrays.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="remove">
+  remove<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> remove<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>arr<span class="token operator">:</span> <span class="token constant">A</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> item<span class="token operator">:</span> <span class="token constant">A</span><span class="token punctuation">,</span> predicate<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token constant">A</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">boolean</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/arrays.ts#L167"
+    >std/src/arrays.ts at line 167</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> remove <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/arrays.ts'</span></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="sort">
   sort<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
     >function</span
@@ -453,18 +558,18 @@
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">function</span> sort<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token function-variable function">compare</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token constant">A</span><span class="token punctuation">,</span> b<span class="token operator">:</span> <span class="token constant">A</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Ordering<span class="token punctuation">,</span> arr<span class="token operator">:</span> <span class="token constant">A</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token constant">A</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
-</div></pre>
+><span class="token keyword">function</span> sort<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token function-variable function">compare</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token constant">A</span><span class="token punctuation">,</span> b<span class="token operator">:</span> <span class="token constant">A</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Ordering<span class="token punctuation">,</span> arr<span class="token operator">:</span> <span class="token constant">A</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token constant">A</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
+</pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/arrays.ts#L133"
-    >std/src/arrays.ts at line 133</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/arrays.ts#L134"
+    >std/src/arrays.ts at line 134</a
   >
 </p>
 <pre
   class="import-code ts language-ts"
-><div><span class="token keyword">import</span> <span class="token punctuation">{</span> sort <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/arrays.ts'</span></div></pre>
+><span class="token keyword">import</span> <span class="token punctuation">{</span> sort <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/arrays.ts'</span></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="tail">
   tail<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
     >function</span
@@ -472,15 +577,15 @@
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">function</span> tail<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>arr<span class="token operator">:</span> <span class="token constant">A</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token constant">A</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
-</div></pre>
+><span class="token keyword">function</span> tail<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>arr<span class="token operator">:</span> <span class="token constant">A</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token constant">A</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
+</pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/arrays.ts#L42"
-    >std/src/arrays.ts at line 42</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/arrays.ts#L44"
+    >std/src/arrays.ts at line 44</a
   >
 </p>
 <pre
   class="import-code ts language-ts"
-><div><span class="token keyword">import</span> <span class="token punctuation">{</span> tail <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/arrays.ts'</span></div></pre>
+><span class="token keyword">import</span> <span class="token punctuation">{</span> tail <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/arrays.ts'</span></pre>

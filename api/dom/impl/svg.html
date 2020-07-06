@@ -1,0 +1,2496 @@
+<div class="top-right">
+  <a href="https://github.com/fponticelli/tempo/edit/master/dom/src/impl/svg.ts"
+    >✏️ edit me</a
+  >
+</div>
+<h1>module 'impl/svg'</h1>
+<div>
+  <p>
+    Copyright 2020 Google LLC Licensed under the Apache License, Version 2.0
+    (the "License"); you may not use this file except in compliance with the
+    License. You may obtain a copy of the License at
+    https://www.apache.org/licenses/LICENSE-2.0 Unless required by applicable
+    law or agreed to in writing, software distributed under the License is
+    distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+    KIND, either express or implied. See the License for the specific language
+    governing permissions and limitations under the License.
+  </p>
+</div>
+<nav>
+  <p class="title is-6">Table of Contents</p>
+  <ul class="module-toc-list">
+    <li>
+      <a class="is-family-monospace" href="#/api/dom/impl/svg.html#A">A</a>
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/dom/impl/svg.html#Adapter"
+        >Adapter</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/dom/impl/svg.html#BodyPortal"
+        >BodyPortal</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/dom/impl/svg.html#CIRCLE"
+        >CIRCLE</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/dom/impl/svg.html#CLIP_PATH"
+        >CLIP_PATH</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/dom/impl/svg.html#Component"
+        >Component</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/dom/impl/svg.html#DEFS"
+        >DEFS</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/dom/impl/svg.html#DESC"
+        >DESC</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/dom/impl/svg.html#ELLIPSE"
+        >ELLIPSE</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/dom/impl/svg.html#FE_BLEND"
+        >FE_BLEND</a
+      >
+    </li>
+    <li>
+      <a
+        class="is-family-monospace"
+        href="#/api/dom/impl/svg.html#FE_COLOR_MATRIX"
+        >FE_COLOR_MATRIX</a
+      >
+    </li>
+    <li>
+      <a
+        class="is-family-monospace"
+        href="#/api/dom/impl/svg.html#FE_COMPONENT_TRANSFER"
+        >FE_COMPONENT_TRANSFER</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/dom/impl/svg.html#FE_COMPOSITE"
+        >FE_COMPOSITE</a
+      >
+    </li>
+    <li>
+      <a
+        class="is-family-monospace"
+        href="#/api/dom/impl/svg.html#FE_CONVOLVE_MATRIX"
+        >FE_CONVOLVE_MATRIX</a
+      >
+    </li>
+    <li>
+      <a
+        class="is-family-monospace"
+        href="#/api/dom/impl/svg.html#FE_DIFFUSE_LIGHTING"
+        >FE_DIFFUSE_LIGHTING</a
+      >
+    </li>
+    <li>
+      <a
+        class="is-family-monospace"
+        href="#/api/dom/impl/svg.html#FE_DISPLACEMENT_MAP"
+        >FE_DISPLACEMENT_MAP</a
+      >
+    </li>
+    <li>
+      <a
+        class="is-family-monospace"
+        href="#/api/dom/impl/svg.html#FE_DISTANT_LIGHT"
+        >FE_DISTANT_LIGHT</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/dom/impl/svg.html#FE_FLOOD"
+        >FE_FLOOD</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/dom/impl/svg.html#FE_FUNC_A"
+        >FE_FUNC_A</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/dom/impl/svg.html#FE_FUNC_B"
+        >FE_FUNC_B</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/dom/impl/svg.html#FE_FUNC_G"
+        >FE_FUNC_G</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/dom/impl/svg.html#FE_FUNC_R"
+        >FE_FUNC_R</a
+      >
+    </li>
+    <li>
+      <a
+        class="is-family-monospace"
+        href="#/api/dom/impl/svg.html#FE_GAUSSIAN_BLUR"
+        >FE_GAUSSIAN_BLUR</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/dom/impl/svg.html#FE_IMAGE"
+        >FE_IMAGE</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/dom/impl/svg.html#FE_MERGE"
+        >FE_MERGE</a
+      >
+    </li>
+    <li>
+      <a
+        class="is-family-monospace"
+        href="#/api/dom/impl/svg.html#FE_MERGE_NODE"
+        >FE_MERGE_NODE</a
+      >
+    </li>
+    <li>
+      <a
+        class="is-family-monospace"
+        href="#/api/dom/impl/svg.html#FE_MORPHOLOGY"
+        >FE_MORPHOLOGY</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/dom/impl/svg.html#FE_OFFSET"
+        >FE_OFFSET</a
+      >
+    </li>
+    <li>
+      <a
+        class="is-family-monospace"
+        href="#/api/dom/impl/svg.html#FE_POINTLIGHT"
+        >FE_POINTLIGHT</a
+      >
+    </li>
+    <li>
+      <a
+        class="is-family-monospace"
+        href="#/api/dom/impl/svg.html#FE_SPECULAR_LIGHTING"
+        >FE_SPECULAR_LIGHTING</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/dom/impl/svg.html#FE_SPOTLIGHT"
+        >FE_SPOTLIGHT</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/dom/impl/svg.html#FE_TILE"
+        >FE_TILE</a
+      >
+    </li>
+    <li>
+      <a
+        class="is-family-monospace"
+        href="#/api/dom/impl/svg.html#FE_TURBULENCE"
+        >FE_TURBULENCE</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/dom/impl/svg.html#FILTER"
+        >FILTER</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/dom/impl/svg.html#ForEach"
+        >ForEach</a
+      >
+    </li>
+    <li>
+      <a
+        class="is-family-monospace"
+        href="#/api/dom/impl/svg.html#FOREIGN_OBJECT"
+        >FOREIGN_OBJECT</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/dom/impl/svg.html#Fragment"
+        >Fragment</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/dom/impl/svg.html#G">G</a>
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/dom/impl/svg.html#HeadPortal"
+        >HeadPortal</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/dom/impl/svg.html#HoldState"
+        >HoldState</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/dom/impl/svg.html#IMAGE"
+        >IMAGE</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/dom/impl/svg.html#Iterate"
+        >Iterate</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/dom/impl/svg.html#Lazy"
+        >Lazy</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/dom/impl/svg.html#LINE"
+        >LINE</a
+      >
+    </li>
+    <li>
+      <a
+        class="is-family-monospace"
+        href="#/api/dom/impl/svg.html#LINEAR_GRADIENT"
+        >LINEAR_GRADIENT</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/dom/impl/svg.html#LocalAdapter"
+        >LocalAdapter</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/dom/impl/svg.html#MapAction"
+        >MapAction</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/dom/impl/svg.html#MapField"
+        >MapField</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/dom/impl/svg.html#MapQuery"
+        >MapQuery</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/dom/impl/svg.html#MapState"
+        >MapState</a
+      >
+    </li>
+    <li>
+      <a
+        class="is-family-monospace"
+        href="#/api/dom/impl/svg.html#MapStateAndKeep"
+        >MapStateAndKeep</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/dom/impl/svg.html#MARKER"
+        >MARKER</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/dom/impl/svg.html#MASK"
+        >MASK</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/dom/impl/svg.html#Match"
+        >Match</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/dom/impl/svg.html#MatchAsync"
+        >MatchAsync</a
+      >
+    </li>
+    <li>
+      <a
+        class="is-family-monospace"
+        href="#/api/dom/impl/svg.html#MatchAsyncResult"
+        >MatchAsyncResult</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/dom/impl/svg.html#MatchBool"
+        >MatchBool</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/dom/impl/svg.html#MatchKind"
+        >MatchKind</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/dom/impl/svg.html#MatchMaybe"
+        >MatchMaybe</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/dom/impl/svg.html#MatchOption"
+        >MatchOption</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/dom/impl/svg.html#MatchResult"
+        >MatchResult</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/dom/impl/svg.html#MatchValue"
+        >MatchValue</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/dom/impl/svg.html#METADATA"
+        >METADATA</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/dom/impl/svg.html#PATH"
+        >PATH</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/dom/impl/svg.html#PATTERN"
+        >PATTERN</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/dom/impl/svg.html#POLYGON"
+        >POLYGON</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/dom/impl/svg.html#POLYLINE"
+        >POLYLINE</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/dom/impl/svg.html#Portal"
+        >Portal</a
+      >
+    </li>
+    <li>
+      <a
+        class="is-family-monospace"
+        href="#/api/dom/impl/svg.html#PortalWithSelector"
+        >PortalWithSelector</a
+      >
+    </li>
+    <li>
+      <a
+        class="is-family-monospace"
+        href="#/api/dom/impl/svg.html#RADIAL_GRADIENT"
+        >RADIAL_GRADIENT</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/dom/impl/svg.html#RECT"
+        >RECT</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/dom/impl/svg.html#SCRIPT"
+        >SCRIPT</a
+      >
+    </li>
+    <li>
+      <a
+        class="is-family-monospace"
+        href="#/api/dom/impl/svg.html#SimpleComponent"
+        >SimpleComponent</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/dom/impl/svg.html#STOP"
+        >STOP</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/dom/impl/svg.html#STYLE"
+        >STYLE</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/dom/impl/svg.html#SVG">SVG</a>
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/dom/impl/svg.html#svgEl"
+        >svgEl</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/dom/impl/svg.html#SWITCH"
+        >SWITCH</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/dom/impl/svg.html#SYMBOL"
+        >SYMBOL</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/dom/impl/svg.html#TEXT"
+        >TEXT</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/dom/impl/svg.html#TEXT_PATH"
+        >TEXT_PATH</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/dom/impl/svg.html#TITLE"
+        >TITLE</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/dom/impl/svg.html#TSPAN"
+        >TSPAN</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/dom/impl/svg.html#Unless"
+        >Unless</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/dom/impl/svg.html#Until"
+        >Until</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/dom/impl/svg.html#USE">USE</a>
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/dom/impl/svg.html#VIEW"
+        >VIEW</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/dom/impl/svg.html#When"
+        >When</a
+      >
+    </li>
+  </ul>
+</nav>
+<h3 class="is-family-monospace has-text-grey-dark" id="A">
+  A<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token constant">A</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  init<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">builder<span class="token operator">:</span> SVGAnchorElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> SVGAnchorElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/svg.ts#L186"
+    >dom/src/impl/svg.ts at line 186</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> <span class="token constant">A</span> <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/svg.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="Adapter">
+  Adapter<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> Adapter<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> StateB<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> ActionB<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">(</span>props<span class="token operator">:</span> <span class="token punctuation">{</span>
+  <span class="token function-variable function">bootstrapState</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">outer<span class="token operator">:</span> State</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> StateB
+  mergeStates<span class="token operator">?</span><span class="token operator">:</span> Attribute<span class="token operator">&lt;</span>
+    <span class="token punctuation">{</span>
+      outerState<span class="token operator">:</span> State
+      innerState<span class="token operator">:</span> StateB
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    StateB
+  <span class="token operator">&gt;</span>
+  propagate<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">args<span class="token operator">:</span> PropagateArg<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> StateB<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> ActionB<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+  child<span class="token operator">:</span> ComponentTemplate<span class="token operator">&lt;</span>StateB<span class="token punctuation">,</span> ActionB<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token operator">:</span> AdapterTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> StateB<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> ActionB<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/svg.ts#L628"
+    >dom/src/impl/svg.ts at line 628</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> Adapter <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/svg.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="BodyPortal">
+  BodyPortal<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> BodyPortal<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  <span class="token function-variable function">init</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">builder<span class="token operator">:</span> PortalSVGBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> PortalSVGBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/svg.ts#L171"
+    >dom/src/impl/svg.ts at line 171</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> BodyPortal <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/svg.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="CIRCLE">
+  CIRCLE<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token constant">CIRCLE</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  init<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">builder<span class="token operator">:</span> SVGCircleElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> SVGCircleElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/svg.ts#L193"
+    >dom/src/impl/svg.ts at line 193</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> <span class="token constant">CIRCLE</span> <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/svg.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="CLIP_PATH">
+  CLIP_PATH<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token constant">CLIP_PATH</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  init<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span>
+    <span class="token parameter">builder<span class="token operator">:</span> SVGElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> SVGClipPathElement<span class="token operator">&gt;</span></span>
+  <span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> SVGElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> SVGClipPathElement<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/svg.ts#L200"
+    >dom/src/impl/svg.ts at line 200</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> <span class="token constant">CLIP_PATH</span> <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/svg.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="Component">
+  Component<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> Component<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  <span class="token function-variable function">reducer</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">state<span class="token operator">:</span> State<span class="token punctuation">,</span> action<span class="token operator">:</span> Action</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> State<span class="token punctuation">,</span>
+  <span class="token function-variable function">init</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">builder<span class="token operator">:</span> ComponentSVGBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> ComponentSVGBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/svg.ts#L660"
+    >dom/src/impl/svg.ts at line 660</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> Component <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/svg.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="DEFS">
+  DEFS<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token constant">DEFS</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  init<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span>
+    <span class="token parameter">builder<span class="token operator">:</span> SVGElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> SVGDefsElement<span class="token operator">&gt;</span></span>
+  <span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> SVGElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> SVGDefsElement<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/svg.ts#L214"
+    >dom/src/impl/svg.ts at line 214</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> <span class="token constant">DEFS</span> <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/svg.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="DESC">
+  DESC<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token constant">DESC</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  init<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span>
+    <span class="token parameter">builder<span class="token operator">:</span> SVGElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> SVGDescElement<span class="token operator">&gt;</span></span>
+  <span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> SVGElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> SVGDescElement<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/svg.ts#L225"
+    >dom/src/impl/svg.ts at line 225</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> <span class="token constant">DESC</span> <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/svg.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="ELLIPSE">
+  ELLIPSE<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token constant">ELLIPSE</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  init<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">builder<span class="token operator">:</span> SVGEllipseElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> SVGEllipseElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/svg.ts#L236"
+    >dom/src/impl/svg.ts at line 236</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> <span class="token constant">ELLIPSE</span> <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/svg.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="FE_BLEND">
+  FE_BLEND<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token constant">FE_BLEND</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  init<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">builder<span class="token operator">:</span> SVGFEBlendElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> SVGFEBlendElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/svg.ts#L243"
+    >dom/src/impl/svg.ts at line 243</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> <span class="token constant">FE_BLEND</span> <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/svg.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="FE_COLOR_MATRIX">
+  FE_COLOR_MATRIX<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token constant">FE_COLOR_MATRIX</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  init<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">builder<span class="token operator">:</span> SVGFEColorMatrixElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> SVGFEColorMatrixElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/svg.ts#L250"
+    >dom/src/impl/svg.ts at line 250</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> <span class="token constant">FE_COLOR_MATRIX</span> <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/svg.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="FE_COMPONENT_TRANSFER">
+  FE_COMPONENT_TRANSFER<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token constant">FE_COMPONENT_TRANSFER</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  init<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span>
+    <span class="token parameter">builder<span class="token operator">:</span> SVGFEComponentTransferElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></span>
+  <span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> SVGFEComponentTransferElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/svg.ts#L257"
+    >dom/src/impl/svg.ts at line 257</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> <span class="token constant">FE_COMPONENT_TRANSFER</span> <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/svg.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="FE_COMPOSITE">
+  FE_COMPOSITE<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token constant">FE_COMPOSITE</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  init<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">builder<span class="token operator">:</span> SVGFeCompositeElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> SVGFeCompositeElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/svg.ts#L270"
+    >dom/src/impl/svg.ts at line 270</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> <span class="token constant">FE_COMPOSITE</span> <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/svg.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="FE_CONVOLVE_MATRIX">
+  FE_CONVOLVE_MATRIX<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token constant">FE_CONVOLVE_MATRIX</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  init<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span>
+    <span class="token parameter">builder<span class="token operator">:</span> SVGFEConvolveMatrixElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></span>
+  <span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> SVGFEConvolveMatrixElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/svg.ts#L277"
+    >dom/src/impl/svg.ts at line 277</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> <span class="token constant">FE_CONVOLVE_MATRIX</span> <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/svg.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="FE_DIFFUSE_LIGHTING">
+  FE_DIFFUSE_LIGHTING<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token constant">FE_DIFFUSE_LIGHTING</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  init<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span>
+    <span class="token parameter">builder<span class="token operator">:</span> SVGFEDiffuseLightingElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></span>
+  <span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> SVGFEDiffuseLightingElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/svg.ts#L286"
+    >dom/src/impl/svg.ts at line 286</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> <span class="token constant">FE_DIFFUSE_LIGHTING</span> <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/svg.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="FE_DISPLACEMENT_MAP">
+  FE_DISPLACEMENT_MAP<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token constant">FE_DISPLACEMENT_MAP</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  init<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span>
+    <span class="token parameter">builder<span class="token operator">:</span> SVGFEDisplacementMapElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></span>
+  <span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> SVGFEDisplacementMapElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/svg.ts#L295"
+    >dom/src/impl/svg.ts at line 295</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> <span class="token constant">FE_DISPLACEMENT_MAP</span> <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/svg.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="FE_DISTANT_LIGHT">
+  FE_DISTANT_LIGHT<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token constant">FE_DISTANT_LIGHT</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  init<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span>
+    <span class="token parameter">builder<span class="token operator">:</span> SVGFEDistantLightElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></span>
+  <span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> SVGFEDistantLightElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/svg.ts#L304"
+    >dom/src/impl/svg.ts at line 304</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> <span class="token constant">FE_DISTANT_LIGHT</span> <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/svg.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="FE_FLOOD">
+  FE_FLOOD<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token constant">FE_FLOOD</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  init<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">builder<span class="token operator">:</span> SVGFEFloodElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> SVGFEFloodElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/svg.ts#L313"
+    >dom/src/impl/svg.ts at line 313</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> <span class="token constant">FE_FLOOD</span> <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/svg.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="FE_FUNC_A">
+  FE_FUNC_A<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token constant">FE_FUNC_A</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  init<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">builder<span class="token operator">:</span> SVGFEFuncAElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> SVGFEFuncAElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/svg.ts#L320"
+    >dom/src/impl/svg.ts at line 320</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> <span class="token constant">FE_FUNC_A</span> <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/svg.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="FE_FUNC_B">
+  FE_FUNC_B<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token constant">FE_FUNC_B</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  init<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">builder<span class="token operator">:</span> SVGFEFuncBElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> SVGFEFuncBElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/svg.ts#L327"
+    >dom/src/impl/svg.ts at line 327</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> <span class="token constant">FE_FUNC_B</span> <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/svg.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="FE_FUNC_G">
+  FE_FUNC_G<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token constant">FE_FUNC_G</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  init<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">builder<span class="token operator">:</span> SVGFEFuncGElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> SVGFEFuncGElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/svg.ts#L334"
+    >dom/src/impl/svg.ts at line 334</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> <span class="token constant">FE_FUNC_G</span> <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/svg.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="FE_FUNC_R">
+  FE_FUNC_R<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token constant">FE_FUNC_R</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  init<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">builder<span class="token operator">:</span> SVGFEFuncRElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> SVGFEFuncRElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/svg.ts#L341"
+    >dom/src/impl/svg.ts at line 341</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> <span class="token constant">FE_FUNC_R</span> <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/svg.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="FE_GAUSSIAN_BLUR">
+  FE_GAUSSIAN_BLUR<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token constant">FE_GAUSSIAN_BLUR</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  init<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span>
+    <span class="token parameter">builder<span class="token operator">:</span> SVGFEGaussianBlurElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></span>
+  <span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> SVGFEGaussianBlurElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/svg.ts#L348"
+    >dom/src/impl/svg.ts at line 348</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> <span class="token constant">FE_GAUSSIAN_BLUR</span> <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/svg.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="FE_IMAGE">
+  FE_IMAGE<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token constant">FE_IMAGE</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  init<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">builder<span class="token operator">:</span> SVGFEImageElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> SVGFEImageElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/svg.ts#L357"
+    >dom/src/impl/svg.ts at line 357</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> <span class="token constant">FE_IMAGE</span> <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/svg.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="FE_MERGE">
+  FE_MERGE<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token constant">FE_MERGE</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  init<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">builder<span class="token operator">:</span> SVGFEMergeElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> SVGFEMergeElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/svg.ts#L364"
+    >dom/src/impl/svg.ts at line 364</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> <span class="token constant">FE_MERGE</span> <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/svg.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="FE_MERGE_NODE">
+  FE_MERGE_NODE<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token constant">FE_MERGE_NODE</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  init<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">builder<span class="token operator">:</span> SVGFEMergeNodeElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> SVGFEMergeNodeElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/svg.ts#L371"
+    >dom/src/impl/svg.ts at line 371</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> <span class="token constant">FE_MERGE_NODE</span> <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/svg.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="FE_MORPHOLOGY">
+  FE_MORPHOLOGY<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token constant">FE_MORPHOLOGY</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  init<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">builder<span class="token operator">:</span> SVGFEMorphologyElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> SVGFEMorphologyElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/svg.ts#L378"
+    >dom/src/impl/svg.ts at line 378</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> <span class="token constant">FE_MORPHOLOGY</span> <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/svg.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="FE_OFFSET">
+  FE_OFFSET<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token constant">FE_OFFSET</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  init<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">builder<span class="token operator">:</span> SVGFEOffsetElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> SVGFEOffsetElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/svg.ts#L385"
+    >dom/src/impl/svg.ts at line 385</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> <span class="token constant">FE_OFFSET</span> <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/svg.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="FE_POINTLIGHT">
+  FE_POINTLIGHT<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token constant">FE_POINTLIGHT</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  init<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">builder<span class="token operator">:</span> SVGFEPointLightElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> SVGFEPointLightElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/svg.ts#L392"
+    >dom/src/impl/svg.ts at line 392</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> <span class="token constant">FE_POINTLIGHT</span> <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/svg.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="FE_SPECULAR_LIGHTING">
+  FE_SPECULAR_LIGHTING<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token constant">FE_SPECULAR_LIGHTING</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  init<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span>
+    <span class="token parameter">builder<span class="token operator">:</span> SVGFESpecularLightingElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></span>
+  <span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> SVGFESpecularLightingElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/svg.ts#L399"
+    >dom/src/impl/svg.ts at line 399</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> <span class="token constant">FE_SPECULAR_LIGHTING</span> <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/svg.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="FE_SPOTLIGHT">
+  FE_SPOTLIGHT<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token constant">FE_SPOTLIGHT</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  init<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">builder<span class="token operator">:</span> SVGFESpotLightElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> SVGFESpotLightElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/svg.ts#L412"
+    >dom/src/impl/svg.ts at line 412</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> <span class="token constant">FE_SPOTLIGHT</span> <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/svg.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="FE_TILE">
+  FE_TILE<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token constant">FE_TILE</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  init<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">builder<span class="token operator">:</span> SVGFETileElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> SVGFETileElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/svg.ts#L419"
+    >dom/src/impl/svg.ts at line 419</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> <span class="token constant">FE_TILE</span> <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/svg.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="FE_TURBULENCE">
+  FE_TURBULENCE<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token constant">FE_TURBULENCE</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  init<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">builder<span class="token operator">:</span> SVGFETurbulenceElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> SVGFETurbulenceElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/svg.ts#L426"
+    >dom/src/impl/svg.ts at line 426</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> <span class="token constant">FE_TURBULENCE</span> <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/svg.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="FILTER">
+  FILTER<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token constant">FILTER</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  init<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">builder<span class="token operator">:</span> SVGFilterElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> SVGFilterElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/svg.ts#L433"
+    >dom/src/impl/svg.ts at line 433</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> <span class="token constant">FILTER</span> <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/svg.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="ForEach">
+  ForEach<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> ForEach<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  init<span class="token operator">:</span> <span class="token punctuation">(</span>
+    builder<span class="token operator">:</span> UntilSVGBuilder<span class="token operator">&lt;</span>
+      State<span class="token punctuation">,</span>
+      State <span class="token keyword">extends</span> <span class="token class-name">any</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">?</span> State<span class="token punctuation">[</span><span class="token builtin">number</span><span class="token punctuation">]</span> <span class="token operator">:</span> <span class="token builtin">never</span><span class="token punctuation">,</span>
+      Action<span class="token punctuation">,</span>
+      Query
+    <span class="token operator">&gt;</span>
+  <span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> UntilSVGBuilder<span class="token operator">&lt;</span>
+  State<span class="token punctuation">,</span>
+  State <span class="token keyword">extends</span> <span class="token class-name">any</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">?</span> State<span class="token punctuation">[</span><span class="token builtin">number</span><span class="token punctuation">]</span> <span class="token operator">:</span> <span class="token builtin">never</span><span class="token punctuation">,</span>
+  Action<span class="token punctuation">,</span>
+  Query
+<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/svg.ts#L121"
+    >dom/src/impl/svg.ts at line 121</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> ForEach <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/svg.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="FOREIGN_OBJECT">
+  FOREIGN_OBJECT<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token constant">FOREIGN_OBJECT</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  init<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">builder<span class="token operator">:</span> SVGForeignObjectElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> SVGForeignObjectElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/svg.ts#L440"
+    >dom/src/impl/svg.ts at line 440</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> <span class="token constant">FOREIGN_OBJECT</span> <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/svg.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="Fragment">
+  Fragment<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> Fragment<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  <span class="token function-variable function">init</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">builder<span class="token operator">:</span> FragmentSVGBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> FragmentSVGBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/svg.ts#L913"
+    >dom/src/impl/svg.ts at line 913</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> Fragment <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/svg.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="G">
+  G<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token constant">G</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  init<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">builder<span class="token operator">:</span> SVGGElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> SVGGElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/svg.ts#L447"
+    >dom/src/impl/svg.ts at line 447</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> <span class="token constant">G</span> <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/svg.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="HeadPortal">
+  HeadPortal<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> HeadPortal<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  <span class="token function-variable function">init</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">builder<span class="token operator">:</span> PortalSVGBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> PortalSVGBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/svg.ts#L165"
+    >dom/src/impl/svg.ts at line 165</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> HeadPortal <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/svg.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="HoldState">
+  HoldState<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> HoldState<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> StateB<span class="token punctuation">,</span> StateC<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  holdf<span class="token operator">:</span> HoldF<span class="token operator">&lt;</span>
+    State<span class="token punctuation">,</span>
+    StateB<span class="token punctuation">,</span>
+    StateC<span class="token punctuation">,</span>
+    Action<span class="token punctuation">,</span>
+    Query<span class="token punctuation">,</span>
+    FragmentSVGBuilder<span class="token operator">&lt;</span>StateC<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+  <span class="token operator">&gt;</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> HoldStateTemplate<span class="token operator">&lt;</span>
+  State<span class="token punctuation">,</span>
+  StateB<span class="token punctuation">,</span>
+  StateC<span class="token punctuation">,</span>
+  Action<span class="token punctuation">,</span>
+  Query<span class="token punctuation">,</span>
+  FragmentSVGBuilder<span class="token operator">&lt;</span>StateC<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/svg.ts#L107"
+    >dom/src/impl/svg.ts at line 107</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> HoldState <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/svg.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="IMAGE">
+  IMAGE<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token constant">IMAGE</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  init<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">builder<span class="token operator">:</span> SVGImageElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> SVGImageElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/svg.ts#L454"
+    >dom/src/impl/svg.ts at line 454</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> <span class="token constant">IMAGE</span> <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/svg.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="Iterate">
+  Iterate<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> Iterate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Items <span class="token keyword">extends</span> <span class="token class-name">any</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  map<span class="token operator">:</span> DerivedValue<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Items<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  <span class="token function-variable function">init</span><span class="token operator">:</span> <span class="token punctuation">(</span>
+    <span class="token parameter">builder<span class="token operator">:</span> UntilSVGBuilder<span class="token operator">&lt;</span>
+      <span class="token punctuation">[</span>Items<span class="token punctuation">,</span> State<span class="token punctuation">]</span><span class="token punctuation">,</span>
+      <span class="token punctuation">[</span>Items<span class="token punctuation">[</span><span class="token builtin">number</span><span class="token punctuation">]</span><span class="token punctuation">,</span> State<span class="token punctuation">,</span> <span class="token builtin">number</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+      Action<span class="token punctuation">,</span>
+      Query
+    <span class="token operator">&gt;</span></span>
+  <span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> MapStateSVGBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> <span class="token punctuation">[</span>Items<span class="token punctuation">,</span> State<span class="token punctuation">]</span><span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/svg.ts#L669"
+    >dom/src/impl/svg.ts at line 669</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> Iterate <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/svg.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="Lazy">
+  Lazy<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> Lazy<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  <span class="token function-variable function">lazyf</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span>
+    <span class="token operator">|</span> DOMTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+    <span class="token operator">|</span> IBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> LazyTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/svg.ts#L905"
+    >dom/src/impl/svg.ts at line 905</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> Lazy <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/svg.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="LINE">
+  LINE<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token constant">LINE</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  init<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">builder<span class="token operator">:</span> SVGLineElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> SVGLineElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/svg.ts#L461"
+    >dom/src/impl/svg.ts at line 461</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> <span class="token constant">LINE</span> <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/svg.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="LINEAR_GRADIENT">
+  LINEAR_GRADIENT<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token constant">LINEAR_GRADIENT</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  init<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span>
+    <span class="token parameter">builder<span class="token operator">:</span> SVGLinearGradientElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></span>
+  <span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> SVGLinearGradientElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/svg.ts#L468"
+    >dom/src/impl/svg.ts at line 468</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> <span class="token constant">LINEAR_GRADIENT</span> <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/svg.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="LocalAdapter">
+  LocalAdapter<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> LocalAdapter<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">(</span>props<span class="token operator">:</span> <span class="token punctuation">{</span>
+  propagate<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">args<span class="token operator">:</span> PropagateArg<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Action<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+  child<span class="token operator">:</span> ComponentTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token operator">:</span> AdapterTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/svg.ts#L648"
+    >dom/src/impl/svg.ts at line 648</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> LocalAdapter <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/svg.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="MapAction">
+  MapAction<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> MapAction<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> ActionB<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  map<span class="token operator">:</span> DerivedValue<span class="token operator">&lt;</span>ActionB<span class="token punctuation">,</span> Action<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  <span class="token function-variable function">init</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">builder<span class="token operator">:</span> MapActionSVGBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> ActionB<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> MapActionSVGBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> ActionB<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/svg.ts#L735"
+    >dom/src/impl/svg.ts at line 735</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> MapAction <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/svg.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="MapField">
+  MapField<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> MapField<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> <span class="token constant">K</span> <span class="token keyword">extends</span> <span class="token class-name">keyof</span> State <span class="token operator">=</span> <span class="token keyword">keyof</span> State<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  field<span class="token operator">:</span> <span class="token constant">K</span><span class="token punctuation">,</span>
+  <span class="token function-variable function">init</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">builder<span class="token operator">:</span> MapStateSVGBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> State<span class="token punctuation">[</span><span class="token constant">K</span><span class="token punctuation">]</span><span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> MapStateSVGBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> State<span class="token punctuation">[</span><span class="token constant">K</span><span class="token punctuation">]</span><span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/svg.ts#L704"
+    >dom/src/impl/svg.ts at line 704</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> MapField <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/svg.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="MapQuery">
+  MapQuery<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> MapQuery<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> QueryB<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  map<span class="token operator">:</span> DerivedValue<span class="token operator">&lt;</span>Query<span class="token punctuation">,</span> QueryB<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  <span class="token function-variable function">init</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">builder<span class="token operator">:</span> MapQuerySVGBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> QueryB<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> MapQuerySVGBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token punctuation">,</span> QueryB<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/svg.ts#L744"
+    >dom/src/impl/svg.ts at line 744</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> MapQuery <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/svg.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="MapState">
+  MapState<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> MapState<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> StateB<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  <span class="token function-variable function">map</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">state<span class="token operator">:</span> State</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> StateB <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">,</span>
+  <span class="token function-variable function">init</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">builder<span class="token operator">:</span> MapStateSVGBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> StateB<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> MapStateSVGBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> StateB<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/svg.ts#L695"
+    >dom/src/impl/svg.ts at line 695</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> MapState <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/svg.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="MapStateAndKeep">
+  MapStateAndKeep<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> MapStateAndKeep<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> StateB<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  <span class="token function-variable function">map</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">state<span class="token operator">:</span> State</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> StateB <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">,</span>
+  <span class="token function-variable function">init</span><span class="token operator">:</span> <span class="token punctuation">(</span>
+    <span class="token parameter">builder<span class="token operator">:</span> MapStateSVGBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> <span class="token punctuation">[</span>StateB<span class="token punctuation">,</span> State<span class="token punctuation">]</span><span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></span>
+  <span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> MapStateSVGBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> <span class="token punctuation">[</span>StateB<span class="token punctuation">,</span> State<span class="token punctuation">]</span><span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/svg.ts#L719"
+    >dom/src/impl/svg.ts at line 719</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> MapStateAndKeep <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/svg.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="MARKER">
+  MARKER<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token constant">MARKER</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  init<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">builder<span class="token operator">:</span> SVGMarkerElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> SVGMarkerElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/svg.ts#L477"
+    >dom/src/impl/svg.ts at line 477</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> <span class="token constant">MARKER</span> <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/svg.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="MASK">
+  MASK<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token constant">MASK</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  init<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">builder<span class="token operator">:</span> SVGMaskElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> SVGMaskElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/svg.ts#L484"
+    >dom/src/impl/svg.ts at line 484</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> <span class="token constant">MASK</span> <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/svg.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="Match">
+  Match<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> Match<span class="token operator">&lt;</span>
+  Path <span class="token keyword">extends</span> <span class="token class-name">IndexType</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  State <span class="token keyword">extends</span> <span class="token class-name">ObjectWithPath</span><span class="token operator">&lt;</span>Path<span class="token punctuation">,</span> <span class="token builtin">any</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  Action<span class="token punctuation">,</span>
+  Query <span class="token operator">=</span> <span class="token builtin">unknown</span>
+<span class="token operator">&gt;</span><span class="token punctuation">(</span>props<span class="token operator">:</span> <span class="token punctuation">{</span>
+  path<span class="token operator">:</span> Path
+  matcher<span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token punctuation">[</span>k <span class="token keyword">in</span> TypeAtPath<span class="token operator">&lt;</span>Path<span class="token punctuation">,</span> State<span class="token operator">&gt;</span><span class="token punctuation">]</span><span class="token operator">:</span>
+      <span class="token operator">|</span> DOMChild<span class="token operator">&lt;</span>DifferentiateAt<span class="token operator">&lt;</span>Path<span class="token punctuation">,</span> State<span class="token punctuation">,</span> k<span class="token operator">&gt;</span><span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+      <span class="token operator">|</span> IBuilder<span class="token operator">&lt;</span>DifferentiateAt<span class="token operator">&lt;</span>Path<span class="token punctuation">,</span> State<span class="token punctuation">,</span> k<span class="token operator">&gt;</span><span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token operator">:</span> DOMTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/svg.ts#L753"
+    >dom/src/impl/svg.ts at line 753</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> Match <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/svg.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="MatchAsync">
+  MatchAsync<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> MatchAsync<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Progress<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>props<span class="token operator">:</span> <span class="token punctuation">{</span>
+  Outcome<span class="token operator">:</span> DOMChild<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span> <span class="token operator">|</span> IBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+  NotAsked<span class="token operator">:</span> DOMChild<span class="token operator">&lt;</span><span class="token builtin">unknown</span><span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span> <span class="token operator">|</span> IBuilder<span class="token operator">&lt;</span><span class="token builtin">unknown</span><span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+  Loading<span class="token operator">:</span> DOMChild<span class="token operator">&lt;</span>Progress<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span> <span class="token operator">|</span> IBuilder<span class="token operator">&lt;</span>Progress<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token operator">:</span> DOMTemplate<span class="token operator">&lt;</span>Async<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Progress<span class="token operator">&gt;</span><span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/svg.ts#L859"
+    >dom/src/impl/svg.ts at line 859</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> MatchAsync <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/svg.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="MatchAsyncResult">
+  MatchAsyncResult<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> MatchAsyncResult<span class="token operator">&lt;</span>
+  State<span class="token punctuation">,</span>
+  Error<span class="token punctuation">,</span>
+  Progress<span class="token punctuation">,</span>
+  Action<span class="token punctuation">,</span>
+  Query <span class="token operator">=</span> <span class="token builtin">unknown</span>
+<span class="token operator">&gt;</span><span class="token punctuation">(</span>props<span class="token operator">:</span> <span class="token punctuation">{</span>
+  Success<span class="token operator">:</span> DOMChild<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span> <span class="token operator">|</span> IBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+  Failure<span class="token operator">:</span> DOMChild<span class="token operator">&lt;</span>Error<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span> <span class="token operator">|</span> IBuilder<span class="token operator">&lt;</span>Error<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+  NotAsked<span class="token operator">:</span> DOMChild<span class="token operator">&lt;</span><span class="token builtin">unknown</span><span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span> <span class="token operator">|</span> IBuilder<span class="token operator">&lt;</span><span class="token builtin">unknown</span><span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+  Loading<span class="token operator">:</span> DOMChild<span class="token operator">&lt;</span>Progress<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span> <span class="token operator">|</span> IBuilder<span class="token operator">&lt;</span>Progress<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token operator">:</span> DOMTemplate<span class="token operator">&lt;</span>AsyncResult<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Error<span class="token punctuation">,</span> Progress<span class="token operator">&gt;</span><span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/svg.ts#L874"
+    >dom/src/impl/svg.ts at line 874</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> MatchAsyncResult <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/svg.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="MatchBool">
+  MatchBool<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> MatchBool<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>props<span class="token operator">:</span> <span class="token punctuation">{</span>
+  condition<span class="token operator">:</span> Attribute<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> <span class="token builtin">boolean</span><span class="token operator">&gt;</span>
+  <span class="token boolean">true</span><span class="token operator">:</span> DOMChild<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span> <span class="token operator">|</span> IBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+  <span class="token boolean">false</span><span class="token operator">:</span> DOMChild<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span> <span class="token operator">|</span> IBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token operator">:</span> DOMTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/svg.ts#L789"
+    >dom/src/impl/svg.ts at line 789</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> MatchBool <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/svg.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="MatchKind">
+  MatchKind<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> MatchKind<span class="token operator">&lt;</span>
+  State <span class="token keyword">extends</span> <span class="token class-name">ObjectWithField</span><span class="token operator">&lt;</span><span class="token string">'kind'</span><span class="token punctuation">,</span> <span class="token builtin">any</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  Action<span class="token punctuation">,</span>
+  Query <span class="token operator">=</span> <span class="token builtin">unknown</span>
+<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  matcher<span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token punctuation">[</span>k <span class="token keyword">in</span> State<span class="token punctuation">[</span><span class="token string">'kind'</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token operator">:</span>
+      <span class="token operator">|</span> DOMChild<span class="token operator">&lt;</span>DifferentiateAt<span class="token operator">&lt;</span><span class="token punctuation">[</span><span class="token string">'kind'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> State<span class="token punctuation">,</span> k<span class="token operator">&gt;</span><span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+      <span class="token operator">|</span> IBuilder<span class="token operator">&lt;</span>DifferentiateAt<span class="token operator">&lt;</span><span class="token punctuation">[</span><span class="token string">'kind'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> State<span class="token punctuation">,</span> k<span class="token operator">&gt;</span><span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> DOMTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/svg.ts#L772"
+    >dom/src/impl/svg.ts at line 772</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> MatchKind <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/svg.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="MatchMaybe">
+  MatchMaybe<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> MatchMaybe<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>props<span class="token operator">:</span> <span class="token punctuation">{</span>
+  Just<span class="token operator">:</span> DOMChild<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span> <span class="token operator">|</span> IBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+  Nothing<span class="token operator">?</span><span class="token operator">:</span> DOMChild<span class="token operator">&lt;</span><span class="token builtin">unknown</span><span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span> <span class="token operator">|</span> IBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token operator">:</span> DOMTemplate<span class="token operator">&lt;</span>Maybe<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span><span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/svg.ts#L835"
+    >dom/src/impl/svg.ts at line 835</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> MatchMaybe <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/svg.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="MatchOption">
+  MatchOption<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> MatchOption<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>props<span class="token operator">:</span> <span class="token punctuation">{</span>
+  Some<span class="token operator">:</span> DOMChild<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span> <span class="token operator">|</span> IBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+  None<span class="token operator">:</span> DOMChild<span class="token operator">&lt;</span><span class="token builtin">unknown</span><span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span> <span class="token operator">|</span> IBuilder<span class="token operator">&lt;</span><span class="token builtin">unknown</span><span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token operator">:</span> DOMTemplate<span class="token operator">&lt;</span>Option<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span><span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/svg.ts#L822"
+    >dom/src/impl/svg.ts at line 822</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> MatchOption <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/svg.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="MatchResult">
+  MatchResult<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> MatchResult<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Error<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>props<span class="token operator">:</span> <span class="token punctuation">{</span>
+  Success<span class="token operator">:</span> DOMChild<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span> <span class="token operator">|</span> IBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+  Failure<span class="token operator">:</span> DOMChild<span class="token operator">&lt;</span>Error<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span> <span class="token operator">|</span> IBuilder<span class="token operator">&lt;</span>Error<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token operator">:</span> DOMTemplate<span class="token operator">&lt;</span>Result<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Error<span class="token operator">&gt;</span><span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/svg.ts#L849"
+    >dom/src/impl/svg.ts at line 849</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> MatchResult <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/svg.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="MatchValue">
+  MatchValue<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> MatchValue<span class="token operator">&lt;</span>
+  Path <span class="token keyword">extends</span> <span class="token class-name">IndexType</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  State <span class="token keyword">extends</span> <span class="token class-name">ObjectWithPath</span><span class="token operator">&lt;</span>Path<span class="token punctuation">,</span> <span class="token builtin">string</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  Action<span class="token punctuation">,</span>
+  Query <span class="token operator">=</span> <span class="token builtin">unknown</span>
+<span class="token operator">&gt;</span><span class="token punctuation">(</span>props<span class="token operator">:</span> <span class="token punctuation">{</span>
+  path<span class="token operator">:</span> Path
+  matcher<span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token punctuation">[</span>_ <span class="token keyword">in</span> <span class="token builtin">string</span> <span class="token operator">|</span> <span class="token builtin">number</span><span class="token punctuation">]</span><span class="token operator">:</span>
+      <span class="token operator">|</span> DOMChild<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+      <span class="token operator">|</span> IBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+  <span class="token punctuation">}</span>
+  orElse<span class="token operator">:</span> DOMChild<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span> <span class="token operator">|</span> IBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token operator">:</span> DOMTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/svg.ts#L801"
+    >dom/src/impl/svg.ts at line 801</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> MatchValue <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/svg.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="METADATA">
+  METADATA<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token constant">METADATA</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  init<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">builder<span class="token operator">:</span> SVGMetadataElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> SVGMetadataElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/svg.ts#L491"
+    >dom/src/impl/svg.ts at line 491</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> <span class="token constant">METADATA</span> <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/svg.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="PATH">
+  PATH<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token constant">PATH</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  init<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">builder<span class="token operator">:</span> SVGPathElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> SVGPathElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/svg.ts#L498"
+    >dom/src/impl/svg.ts at line 498</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> <span class="token constant">PATH</span> <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/svg.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="PATTERN">
+  PATTERN<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token constant">PATTERN</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  init<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">builder<span class="token operator">:</span> SVGPatternElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> SVGPatternElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/svg.ts#L505"
+    >dom/src/impl/svg.ts at line 505</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> <span class="token constant">PATTERN</span> <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/svg.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="POLYGON">
+  POLYGON<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token constant">POLYGON</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  init<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">builder<span class="token operator">:</span> SVGPolygonElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> SVGPolygonElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/svg.ts#L512"
+    >dom/src/impl/svg.ts at line 512</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> <span class="token constant">POLYGON</span> <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/svg.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="POLYLINE">
+  POLYLINE<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token constant">POLYLINE</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  init<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">builder<span class="token operator">:</span> SVGPolylineElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> SVGPolylineElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/svg.ts#L519"
+    >dom/src/impl/svg.ts at line 519</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> <span class="token constant">POLYLINE</span> <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/svg.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="Portal">
+  Portal<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> Portal<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  <span class="token function-variable function">appendChild</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">doc<span class="token operator">:</span> Document</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Element<span class="token punctuation">,</span>
+  <span class="token function-variable function">init</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">builder<span class="token operator">:</span> PortalSVGBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> PortalSVGBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/svg.ts#L143"
+    >dom/src/impl/svg.ts at line 143</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> Portal <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/svg.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="PortalWithSelector">
+  PortalWithSelector<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> PortalWithSelector<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  selector<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span>
+  <span class="token function-variable function">init</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">builder<span class="token operator">:</span> PortalSVGBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> PortalSVGBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/svg.ts#L152"
+    >dom/src/impl/svg.ts at line 152</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> PortalWithSelector <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/svg.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="RADIAL_GRADIENT">
+  RADIAL_GRADIENT<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token constant">RADIAL_GRADIENT</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  init<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span>
+    <span class="token parameter">builder<span class="token operator">:</span> SVGRadialGradientElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></span>
+  <span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> SVGRadialGradientElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/svg.ts#L526"
+    >dom/src/impl/svg.ts at line 526</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> <span class="token constant">RADIAL_GRADIENT</span> <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/svg.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="RECT">
+  RECT<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token constant">RECT</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  init<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">builder<span class="token operator">:</span> SVGRectElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> SVGRectElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/svg.ts#L535"
+    >dom/src/impl/svg.ts at line 535</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> <span class="token constant">RECT</span> <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/svg.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="SCRIPT">
+  SCRIPT<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token constant">SCRIPT</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  init<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">builder<span class="token operator">:</span> SVGScriptElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> SVGScriptElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/svg.ts#L542"
+    >dom/src/impl/svg.ts at line 542</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> <span class="token constant">SCRIPT</span> <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/svg.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="SimpleComponent">
+  SimpleComponent<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> SimpleComponent<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  <span class="token function-variable function">init</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">builder<span class="token operator">:</span> SimpleComponentSVGBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> SimpleComponentSVGBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/svg.ts#L943"
+    >dom/src/impl/svg.ts at line 943</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> SimpleComponent <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/svg.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="STOP">
+  STOP<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token constant">STOP</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  init<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">builder<span class="token operator">:</span> SVGStopElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> SVGStopElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/svg.ts#L549"
+    >dom/src/impl/svg.ts at line 549</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> <span class="token constant">STOP</span> <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/svg.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="STYLE">
+  STYLE<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token constant">STYLE</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  init<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">builder<span class="token operator">:</span> SVGStyleElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> SVGStyleElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/svg.ts#L556"
+    >dom/src/impl/svg.ts at line 556</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> <span class="token constant">STYLE</span> <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/svg.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="SVG">
+  SVG<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token constant">SVG</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  init<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">builder<span class="token operator">:</span> SVGSVGElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> SVGSVGElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/svg.ts#L563"
+    >dom/src/impl/svg.ts at line 563</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> <span class="token constant">SVG</span> <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/svg.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="svgEl">
+  svgEl<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >export</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">typeof</span> svgEl
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/svg.ts#L104"
+    >dom/src/impl/svg.ts at line 104</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> svgEl <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/svg.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="SWITCH">
+  SWITCH<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token constant">SWITCH</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  init<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">builder<span class="token operator">:</span> SVGSwitchElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> SVGSwitchElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/svg.ts#L570"
+    >dom/src/impl/svg.ts at line 570</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> <span class="token constant">SWITCH</span> <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/svg.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="SYMBOL">
+  SYMBOL<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token constant">SYMBOL</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  init<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">builder<span class="token operator">:</span> SVGSymbolElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> SVGSymbolElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/svg.ts#L577"
+    >dom/src/impl/svg.ts at line 577</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> <span class="token constant">SYMBOL</span> <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/svg.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="TEXT">
+  TEXT<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token constant">TEXT</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  init<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">builder<span class="token operator">:</span> SVGTextElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> SVGTextElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/svg.ts#L584"
+    >dom/src/impl/svg.ts at line 584</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> <span class="token constant">TEXT</span> <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/svg.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="TEXT_PATH">
+  TEXT_PATH<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token constant">TEXT_PATH</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  init<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">builder<span class="token operator">:</span> SVGTextPathElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> SVGTextPathElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/svg.ts#L591"
+    >dom/src/impl/svg.ts at line 591</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> <span class="token constant">TEXT_PATH</span> <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/svg.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="TITLE">
+  TITLE<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token constant">TITLE</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  init<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">builder<span class="token operator">:</span> SVGTitleElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> SVGTitleElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/svg.ts#L598"
+    >dom/src/impl/svg.ts at line 598</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> <span class="token constant">TITLE</span> <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/svg.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="TSPAN">
+  TSPAN<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token constant">TSPAN</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  init<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">builder<span class="token operator">:</span> SVGTSpanElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> SVGTSpanElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/svg.ts#L605"
+    >dom/src/impl/svg.ts at line 605</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> <span class="token constant">TSPAN</span> <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/svg.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="Unless">
+  Unless<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> Unless<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  condition<span class="token operator">:</span> DerivedValue<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> <span class="token builtin">boolean</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  <span class="token function-variable function">init</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">builder<span class="token operator">:</span> MapStateSVGBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> MapStateSVGBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/svg.ts#L951"
+    >dom/src/impl/svg.ts at line 951</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> Unless <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/svg.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="Until">
+  Until<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> Until<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> StateB<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  next<span class="token operator">:</span> DerivedValue<span class="token operator">&lt;</span><span class="token punctuation">{</span> state<span class="token operator">:</span> State<span class="token punctuation">;</span> index<span class="token operator">:</span> <span class="token builtin">number</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> StateB<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  <span class="token function-variable function">init</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">builder<span class="token operator">:</span> UntilSVGBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> StateB<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> UntilSVGBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> StateB<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/svg.ts#L958"
+    >dom/src/impl/svg.ts at line 958</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> Until <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/svg.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="USE">
+  USE<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token constant">USE</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  init<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">builder<span class="token operator">:</span> SVGUseElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> SVGUseElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/svg.ts#L612"
+    >dom/src/impl/svg.ts at line 612</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> <span class="token constant">USE</span> <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/svg.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="VIEW">
+  VIEW<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token constant">VIEW</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  init<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">builder<span class="token operator">:</span> SVGViewElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> SVGViewElementBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/svg.ts#L619"
+    >dom/src/impl/svg.ts at line 619</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> <span class="token constant">VIEW</span> <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/svg.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="When">
+  When<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> When<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  condition<span class="token operator">:</span> DerivedValue<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> <span class="token builtin">boolean</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  <span class="token function-variable function">init</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">builder<span class="token operator">:</span> MapStateSVGBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> MapStateSVGBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/svg.ts#L967"
+    >dom/src/impl/svg.ts at line 967</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> When <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/svg.ts'</span></pre>

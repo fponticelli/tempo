@@ -12,8 +12,8 @@
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">function</span> keys<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>object<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token keyword">keyof</span> <span class="token constant">T</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
-</div></pre>
+><span class="token keyword">function</span> keys<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>object<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token keyword">keyof</span> <span class="token constant">T</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
+</pre>
 <p class="defined-in">
   defined in
   <a
@@ -23,7 +23,7 @@
 </p>
 <pre
   class="import-code ts language-ts"
-><div><span class="token keyword">import</span> <span class="token punctuation">{</span> keys <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/objects.ts'</span></div></pre>
+><span class="token keyword">import</span> <span class="token punctuation">{</span> keys <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/objects.ts'</span></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="merge">
   merge<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
     >function</span
@@ -31,8 +31,8 @@
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">function</span> merge<span class="token operator">&lt;</span><span class="token constant">A</span> <span class="token keyword">extends</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token constant">B</span> <span class="token keyword">extends</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>a<span class="token operator">:</span> <span class="token constant">A</span><span class="token punctuation">,</span> b<span class="token operator">:</span> <span class="token constant">B</span><span class="token punctuation">)</span><span class="token operator">:</span> Merge<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token operator">&gt;</span>
-</div></pre>
+><span class="token keyword">function</span> merge<span class="token operator">&lt;</span><span class="token constant">A</span> <span class="token keyword">extends</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token constant">B</span> <span class="token keyword">extends</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>a<span class="token operator">:</span> <span class="token constant">A</span><span class="token punctuation">,</span> b<span class="token operator">:</span> <span class="token constant">B</span><span class="token punctuation">)</span><span class="token operator">:</span> Merge<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token operator">&gt;</span>
+</pre>
 <p class="defined-in">
   defined in
   <a
@@ -42,7 +42,7 @@
 </p>
 <pre
   class="import-code ts language-ts"
-><div><span class="token keyword">import</span> <span class="token punctuation">{</span> merge <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/objects.ts'</span></div></pre>
+><span class="token keyword">import</span> <span class="token punctuation">{</span> merge <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/objects.ts'</span></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="removeFields">
   removeFields<span
     class="kind is-family-sans-serif has-text-grey-light is-size-6"
@@ -51,11 +51,11 @@
 </h3>
 <pre
   class="ts language-ts signature"
-><div><span class="token keyword">function</span> removeFields<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">F</span> <span class="token keyword">extends</span> <span class="token punctuation">(</span><span class="token keyword">keyof</span> <span class="token constant">T</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
+><span class="token keyword">function</span> removeFields<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">F</span> <span class="token keyword">extends</span> <span class="token punctuation">(</span><span class="token keyword">keyof</span> <span class="token constant">T</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
   ob<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">,</span>
   <span class="token operator">...</span>fields<span class="token operator">:</span> <span class="token constant">F</span>
 <span class="token punctuation">)</span><span class="token operator">:</span> Omit<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> TupleToUnion<span class="token operator">&lt;</span><span class="token constant">F</span><span class="token operator">&gt;&gt;</span>
-</div></pre>
+</pre>
 <p class="defined-in">
   defined in
   <a
@@ -65,4 +65,4 @@
 </p>
 <pre
   class="import-code ts language-ts"
-><div><span class="token keyword">import</span> <span class="token punctuation">{</span> removeFields <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/objects.ts'</span></div></pre>
+><span class="token keyword">import</span> <span class="token punctuation">{</span> removeFields <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/objects.ts'</span></pre>

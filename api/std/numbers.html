@@ -1,0 +1,717 @@
+<div class="top-right">
+  <a href="https://github.com/fponticelli/tempo/edit/master/std/src/numbers.ts"
+    >✏️ edit me</a
+  >
+</div>
+<h1>module 'numbers'</h1>
+<div>
+  <p>
+    Constant value employed to see if two <code>number</code> values are very
+    close. *
+  </p>
+</div>
+<nav>
+  <p class="title is-6">Table of Contents</p>
+  <ul class="module-toc-list">
+    <li>
+      <a
+        class="is-family-monospace"
+        href="#/api/std/numbers.html#angleDifference"
+        >angleDifference</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/std/numbers.html#ceilTo"
+        >ceilTo</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/std/numbers.html#clamp"
+        >clamp</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/std/numbers.html#clampSym"
+        >clampSym</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/std/numbers.html#compare"
+        >compare</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/std/numbers.html#EPSILON"
+        >EPSILON</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/std/numbers.html#floorTo"
+        >floorTo</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/std/numbers.html#interpolate"
+        >interpolate</a
+      >
+    </li>
+    <li>
+      <a
+        class="is-family-monospace"
+        href="#/api/std/numbers.html#interpolateAngle"
+        >interpolateAngle</a
+      >
+    </li>
+    <li>
+      <a
+        class="is-family-monospace"
+        href="#/api/std/numbers.html#interpolateAngleCCW"
+        >interpolateAngleCCW</a
+      >
+    </li>
+    <li>
+      <a
+        class="is-family-monospace"
+        href="#/api/std/numbers.html#interpolateAngleCW"
+        >interpolateAngleCW</a
+      >
+    </li>
+    <li>
+      <a
+        class="is-family-monospace"
+        href="#/api/std/numbers.html#interpolateAngleWidest"
+        >interpolateAngleWidest</a
+      >
+    </li>
+    <li>
+      <a
+        class="is-family-monospace"
+        href="#/api/std/numbers.html#nearEqualAngles"
+        >nearEqualAngles</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/std/numbers.html#nearEquals"
+        >nearEquals</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/std/numbers.html#nearZero"
+        >nearZero</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/std/numbers.html#normalize"
+        >normalize</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/std/numbers.html#root">root</a>
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/std/numbers.html#roundTo"
+        >roundTo</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/std/numbers.html#sign">sign</a>
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/std/numbers.html#toHex"
+        >toHex</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/std/numbers.html#TOLERANCE"
+        >TOLERANCE</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/std/numbers.html#wrap">wrap</a>
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/std/numbers.html#wrapCircular"
+        >wrapCircular</a
+      >
+    </li>
+  </ul>
+</nav>
+<h3 class="is-family-monospace has-text-grey-dark" id="angleDifference">
+  angleDifference<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<div><p>Returns the angular distance between 2 angles. *</p></div>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token function">angleDifference</span><span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">,</span> b<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">,</span> turn <span class="token operator">=</span> <span class="token number">360.0</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">number</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/numbers.ts#L10"
+    >std/src/numbers.ts at line 10</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> angleDifference <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/numbers.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="ceilTo">
+  ceilTo<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<div><p>Rounds a number up to the specified number of decimals. *</p></div>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token function">ceilTo</span><span class="token punctuation">(</span><span class="token parameter">v<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">,</span> decimals<span class="token operator">:</span> <span class="token builtin">number</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">number</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/numbers.ts#L22"
+    >std/src/numbers.ts at line 22</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> ceilTo <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/numbers.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="clamp">
+  clamp<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<div>
+  <p><code>clamp</code> restricts a value within the specified range.</p>
+  <pre
+    class="language-ts"
+  ><code class="ts language-ts"><span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">clamp</span><span class="token punctuation">(</span><span class="token number">1.3</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">// prints 1</span>
+<span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">clamp</span><span class="token punctuation">(</span><span class="token number">0.8</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">// prints 0.8</span>
+<span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">clamp</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">0.5</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">// prints 0.0</span>
+</code></pre>
+  <p>*</p>
+</div>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token function">clamp</span><span class="token punctuation">(</span><span class="token parameter">value<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">,</span> min<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">,</span> max<span class="token operator">:</span> <span class="token builtin">number</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">number</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/numbers.ts#L30"
+    >std/src/numbers.ts at line 30</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> clamp <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/numbers.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="clampSym">
+  clampSym<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<div>
+  <p>
+    Like clamp but you only pass one argument (<code>max</code>) that is used as
+    the upper limit and the opposite (additive inverse or <code>-max</code>) as
+    the lower limit. *
+  </p>
+</div>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token function">clampSym</span><span class="token punctuation">(</span><span class="token parameter">v<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">,</span> max<span class="token operator">:</span> <span class="token builtin">number</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">number</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/numbers.ts#L42"
+    >std/src/numbers.ts at line 42</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> clampSym <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/numbers.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="compare">
+  compare<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<div>
+  <p>
+    It returns the comparison value (an integer number) between two
+    <code>float</code> values. *
+  </p>
+</div>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token function">compare</span><span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">,</span> b<span class="token operator">:</span> <span class="token builtin">number</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">number</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/numbers.ts#L50"
+    >std/src/numbers.ts at line 50</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> compare <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/numbers.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="EPSILON">
+  EPSILON<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >variable</span
+  >
+</h3>
+<div>
+  <p>
+    Constant value employed to see if two <code>number</code> values are very
+    close. *
+  </p>
+</div>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">const</span> <span class="token constant">EPSILON</span><span class="token operator">:</span> <span class="token builtin">number</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/numbers.ts#L8"
+    >std/src/numbers.ts at line 8</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> <span class="token constant">EPSILON</span> <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/numbers.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="floorTo">
+  floorTo<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<div><p>Rounds a number down to the specified number of decimals. *</p></div>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token function">floorTo</span><span class="token punctuation">(</span><span class="token parameter">v<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">,</span> decimals<span class="token operator">:</span> <span class="token builtin">number</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">number</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/numbers.ts#L57"
+    >std/src/numbers.ts at line 57</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> floorTo <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/numbers.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="interpolate">
+  interpolate<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<div>
+  <p>
+    <code>interpolate</code> returns a value between <code>a</code> and
+    <code>b</code> for any value of <code>t</code> (normally between 0 and 1). *
+  </p>
+</div>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token function">interpolate</span><span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">,</span> b<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">,</span> t<span class="token operator">:</span> <span class="token builtin">number</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">number</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/numbers.ts#L76"
+    >std/src/numbers.ts at line 76</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> interpolate <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/numbers.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="interpolateAngle">
+  interpolateAngle<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<div>
+  <p>
+    Interpolates values in a polar coordinate system looking for the narrowest
+    delta angle. It can be either clock-wise or counter-clock-wise. *
+  </p>
+</div>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token function">interpolateAngle</span><span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">,</span> b<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">,</span> t<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">,</span> turn <span class="token operator">=</span> <span class="token number">360.0</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">number</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/numbers.ts#L83"
+    >std/src/numbers.ts at line 83</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> interpolateAngle <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/numbers.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="interpolateAngleCCW">
+  interpolateAngleCCW<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<div>
+  <p>
+    Interpolates values in a polar coordinate system always in
+    counter-clock-wise direction. *
+  </p>
+</div>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token function">interpolateAngleCCW</span><span class="token punctuation">(</span>
+  <span class="token parameter">a<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">,</span>
+  b<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">,</span>
+  t<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">,</span>
+  turn<span class="token operator">:</span> <span class="token builtin">number</span> <span class="token operator">=</span> <span class="token number">360</span></span>
+<span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">number</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/numbers.ts#L110"
+    >std/src/numbers.ts at line 110</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> interpolateAngleCCW <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/numbers.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="interpolateAngleCW">
+  interpolateAngleCW<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<div>
+  <p>
+    Interpolates values in a polar coordinate system always in clock-wise
+    direction. *
+  </p>
+</div>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token function">interpolateAngleCW</span><span class="token punctuation">(</span>
+  <span class="token parameter">a<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">,</span>
+  b<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">,</span>
+  t<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">,</span>
+  turn<span class="token operator">:</span> <span class="token builtin">number</span> <span class="token operator">=</span> <span class="token number">360</span></span>
+<span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">number</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/numbers.ts#L99"
+    >std/src/numbers.ts at line 99</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> interpolateAngleCW <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/numbers.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="interpolateAngleWidest">
+  interpolateAngleWidest<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<div>
+  <p>
+    Interpolates values in a polar coordinate system looking for the wideset
+    delta angle. It can be either clock-wise or counter-clock-wise. *
+  </p>
+</div>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token function">interpolateAngleWidest</span><span class="token punctuation">(</span>
+  <span class="token parameter">a<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">,</span>
+  b<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">,</span>
+  t<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">,</span>
+  turn<span class="token operator">:</span> <span class="token builtin">number</span> <span class="token operator">=</span> <span class="token number">360</span></span>
+<span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">number</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/numbers.ts#L91"
+    >std/src/numbers.ts at line 91</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> interpolateAngleWidest <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/numbers.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="nearEqualAngles">
+  nearEqualAngles<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<div>
+  <p>
+    number numbers can sometime introduce tiny errors even for simple
+    operations. <code>nearEqualAngles</code> compares two angles (default is
+    360deg) using a tiny tollerance (last optional argument). By default the
+    tollerance is defined as <code>EPSILON</code>. *
+  </p>
+</div>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token function">nearEqualAngles</span><span class="token punctuation">(</span>
+  <span class="token parameter">a<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">,</span>
+  b<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">,</span>
+  turn <span class="token operator">=</span> <span class="token number">360.0</span><span class="token punctuation">,</span>
+  tollerance <span class="token operator">=</span> <span class="token constant">EPSILON</span></span>
+<span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/numbers.ts#L142"
+    >std/src/numbers.ts at line 142</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> nearEqualAngles <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/numbers.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="nearEquals">
+  nearEquals<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<div>
+  <p>
+    number numbers can sometime introduce tiny errors even for simple
+    operations. <code>nearEquals</code> compares two floats using a tiny
+    tollerance (last optional argument). By default it is defined as
+    <code>EPSILON</code>. *
+  </p>
+</div>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token function">nearEquals</span><span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">,</span> b<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">,</span> tollerance <span class="token operator">=</span> <span class="token constant">EPSILON</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/numbers.ts#L121"
+    >std/src/numbers.ts at line 121</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> nearEquals <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/numbers.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="nearZero">
+  nearZero<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<div>
+  <p>
+    <code>nearZero</code> finds if the passed number is zero or very close to
+    it. By default <code>EPSILON</code> is used as the tollerance value. *
+  </p>
+</div>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token function">nearZero</span><span class="token punctuation">(</span><span class="token parameter">n<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">,</span> tollerance <span class="token operator">=</span> <span class="token constant">EPSILON</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/numbers.ts#L152"
+    >std/src/numbers.ts at line 152</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> nearZero <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/numbers.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="normalize">
+  normalize<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<div>
+  <p><code>normalize</code> clamps the passwed value between 0 and 1. *</p>
+</div>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token function">normalize</span><span class="token punctuation">(</span><span class="token parameter">value<span class="token operator">:</span> <span class="token builtin">number</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">number</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/numbers.ts#L65"
+    >std/src/numbers.ts at line 65</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> normalize <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/numbers.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="root">
+  root<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<div>
+  <p>Computes the nth root (<code>index</code>) of <code>base</code>. *</p>
+</div>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token function">root</span><span class="token punctuation">(</span><span class="token parameter">base<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">,</span> index<span class="token operator">:</span> <span class="token builtin">number</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">number</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/numbers.ts#L160"
+    >std/src/numbers.ts at line 160</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> root <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/numbers.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="roundTo">
+  roundTo<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<div><p>Rounds a number to the specified number of decimals. *</p></div>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token function">roundTo</span><span class="token punctuation">(</span><span class="token parameter">f<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">,</span> decimals<span class="token operator">:</span> <span class="token builtin">number</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">number</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/numbers.ts#L167"
+    >std/src/numbers.ts at line 167</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> roundTo <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/numbers.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="sign">
+  sign<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<div>
+  <p>
+    <code>sign</code> returns <code>-1</code> if <code>value</code> is a
+    negative number, <code>1</code> otherwise.
+  </p>
+</div>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> sign<span class="token operator">&lt;</span><span class="token constant">T</span> <span class="token keyword">extends</span> <span class="token class-name">number</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>value<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">number</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/numbers.ts#L175"
+    >std/src/numbers.ts at line 175</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> sign <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/numbers.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="toHex">
+  toHex<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token function">toHex</span><span class="token punctuation">(</span><span class="token parameter">num<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">,</span> length <span class="token operator">=</span> <span class="token number">0</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/numbers.ts#L72"
+    >std/src/numbers.ts at line 72</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> toHex <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/numbers.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="TOLERANCE">
+  TOLERANCE<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >variable</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">const</span> <span class="token constant">TOLERANCE</span><span class="token operator">:</span> <span class="token builtin">number</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/numbers.ts#L3"
+    >std/src/numbers.ts at line 3</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> <span class="token constant">TOLERANCE</span> <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/numbers.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="wrap">
+  wrap<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<div>
+  <p>
+    Passed two boundaries values (<code>min</code>, <code>max</code>),
+    <code>wrap</code> ensures that the passed value <code>v</code> will be
+    included in the boundaries. If the value exceeds <code>max</code>, the value
+    is reduced by <code>min</code> repeatedely until it falls within the range.
+    Similar and inverted treatment is performed if the value is below
+    <code>min</code>. *
+  </p>
+</div>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token function">wrap</span><span class="token punctuation">(</span><span class="token parameter">v<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">,</span> min<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">,</span> max<span class="token operator">:</span> <span class="token builtin">number</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">number</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/numbers.ts#L182"
+    >std/src/numbers.ts at line 182</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> wrap <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/numbers.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="wrapCircular">
+  wrapCircular<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<div>
+  <p>
+    Similar to <code>wrap</code>, it works for numbers between 0 and
+    <code>max</code>. *
+  </p>
+</div>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token function">wrapCircular</span><span class="token punctuation">(</span><span class="token parameter">v<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">,</span> max<span class="token operator">:</span> <span class="token builtin">number</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">number</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/numbers.ts#L194"
+    >std/src/numbers.ts at line 194</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> wrapCircular <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/numbers.ts'</span></pre>

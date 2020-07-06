@@ -1,0 +1,69 @@
+<div class="top-right">
+  <a
+    href="https://github.com/fponticelli/tempo/edit/master/dom/src/impl/component.ts"
+    >✏️ edit me</a
+  >
+</div>
+<h1>module 'impl/component'</h1>
+<nav></nav>
+<h3 class="is-family-monospace has-text-grey-dark" id="ComponentTemplate">
+  ComponentTemplate<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >class</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">declare</span> <span class="token keyword">class</span> <span class="token class-name">ComponentTemplate</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+  <span class="token keyword">implements</span> <span class="token class-name">DOMTemplate</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">constructor</span><span class="token punctuation">(</span>
+    delayed<span class="token operator">:</span> <span class="token builtin">boolean</span><span class="token punctuation">,</span>
+    <span class="token function-variable function">reducer</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">state<span class="token operator">:</span> State<span class="token punctuation">,</span> action<span class="token operator">:</span> Action</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> State<span class="token punctuation">,</span>
+    equal<span class="token operator">:</span> <span class="token keyword">undefined</span> <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> State<span class="token punctuation">,</span> b<span class="token operator">:</span> State</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">boolean</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    children<span class="token operator">:</span> <span class="token punctuation">(</span>
+      <span class="token operator">|</span> DOMChild<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+      <span class="token operator">|</span> IBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+    <span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
+  <span class="token punctuation">)</span>
+  <span class="token keyword">readonly</span> children<span class="token operator">:</span> DOMTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
+  <span class="token keyword">readonly</span> delayed<span class="token operator">:</span> <span class="token builtin">boolean</span>
+  <span class="token keyword">readonly</span> <span class="token function-variable function">reducer</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">state<span class="token operator">:</span> State<span class="token punctuation">,</span> action<span class="token operator">:</span> Action</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> State
+  <span class="token keyword">readonly</span> equal<span class="token operator">:</span> <span class="token keyword">undefined</span> <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> State<span class="token punctuation">,</span> b<span class="token operator">:</span> State</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">boolean</span><span class="token punctuation">)</span>
+  <span class="token function">render</span><span class="token punctuation">(</span>
+    ctx<span class="token operator">:</span> DOMContext<span class="token operator">&lt;</span>Action<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+    state<span class="token operator">:</span> State
+  <span class="token punctuation">)</span><span class="token operator">:</span> ComponentView<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+<span class="token punctuation">}</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/component.ts#L26"
+    >dom/src/impl/component.ts at line 26</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> ComponentTemplate <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/component.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="ComponentView">
+  ComponentView<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >interface</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">interface</span> <span class="token class-name">ComponentView</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span> <span class="token keyword">extends</span> <span class="token class-name">View</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+  store<span class="token operator">:</span> Store<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token operator">&gt;</span>
+<span class="token punctuation">}</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/component.ts#L21"
+    >dom/src/impl/component.ts at line 21</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> ComponentView <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/component.ts'</span></pre>

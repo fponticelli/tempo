@@ -1,0 +1,202 @@
+<div class="top-right">
+  <a href="https://github.com/fponticelli/tempo/edit/master/dom/src/impl/dom.ts"
+    >✏️ edit me</a
+  >
+</div>
+<h1>module 'impl/dom'</h1>
+<nav>
+  <p class="title is-6">Table of Contents</p>
+  <ul class="module-toc-list">
+    <li>
+      <a class="is-family-monospace" href="#/api/dom/impl/dom.html#Acc">Acc</a>
+    </li>
+    <li>
+      <a
+        class="is-family-monospace"
+        href="#/api/dom/impl/dom.html#insertFBefore"
+        >insertFBefore</a
+      >
+    </li>
+    <li>
+      <a
+        class="is-family-monospace"
+        href="#/api/dom/impl/dom.html#makeCreateElement"
+        >makeCreateElement</a
+      >
+    </li>
+    <li>
+      <a
+        class="is-family-monospace"
+        href="#/api/dom/impl/dom.html#makeCreateElementNS"
+        >makeCreateElementNS</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/dom/impl/dom.html#removeNode"
+        >removeNode</a
+      >
+    </li>
+    <li>
+      <a
+        class="is-family-monospace"
+        href="#/api/dom/impl/dom.html#setElAttribute"
+        >setElAttribute</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/dom/impl/dom.html#setElStyle"
+        >setElStyle</a
+      >
+    </li>
+  </ul>
+</nav>
+<h3 class="is-family-monospace has-text-grey-dark" id="Acc">
+  Acc<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >type alias</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">type</span> Acc<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">state<span class="token operator">:</span> State</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/dom.ts#L44"
+    >dom/src/impl/dom.ts at line 44</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> Acc <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/dom.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="insertFBefore">
+  insertFBefore<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token function">insertFBefore</span><span class="token punctuation">(</span><span class="token parameter">ref<span class="token operator">:</span> Node</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">node<span class="token operator">:</span> Node</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/dom.ts#L28"
+    >dom/src/impl/dom.ts at line 28</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> insertFBefore <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/dom.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="makeCreateElement">
+  makeCreateElement<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token function">makeCreateElement</span><span class="token punctuation">(</span><span class="token parameter">name<span class="token operator">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">doc<span class="token operator">:</span> Document</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> HTMLElement
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/dom.ts#L36"
+    >dom/src/impl/dom.ts at line 36</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> makeCreateElement <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/dom.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="makeCreateElementNS">
+  makeCreateElementNS<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token function">makeCreateElementNS</span><span class="token punctuation">(</span>
+  <span class="token parameter"><span class="token keyword">namespace</span><span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span>
+  name<span class="token operator">:</span> <span class="token builtin">string</span></span>
+<span class="token punctuation">)</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">doc<span class="token operator">:</span> Document</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> HTMLElement
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/dom.ts#L40"
+    >dom/src/impl/dom.ts at line 40</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> makeCreateElementNS <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/dom.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="removeNode">
+  removeNode<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token function">removeNode</span><span class="token punctuation">(</span><span class="token parameter">node<span class="token operator">:</span> Node</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">void</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/dom.ts#L17"
+    >dom/src/impl/dom.ts at line 17</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> removeNode <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/dom.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="setElAttribute">
+  setElAttribute<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token function">setElAttribute</span><span class="token punctuation">(</span>
+  <span class="token parameter">el<span class="token operator">:</span> HTMLElement<span class="token punctuation">,</span>
+  name<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span>
+  value<span class="token operator">:</span> <span class="token builtin">string</span> <span class="token operator">|</span> <span class="token keyword">undefined</span></span>
+<span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">void</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/dom.ts#L46"
+    >dom/src/impl/dom.ts at line 46</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> setElAttribute <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/dom.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="setElStyle">
+  setElStyle<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> <span class="token function">setElStyle</span><span class="token punctuation">(</span>
+  <span class="token parameter">el<span class="token operator">:</span> HTMLElement<span class="token punctuation">,</span>
+  name<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span>
+  value<span class="token operator">:</span> <span class="token builtin">string</span> <span class="token operator">|</span> <span class="token keyword">undefined</span></span>
+<span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">void</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/dom.ts#L60"
+    >dom/src/impl/dom.ts at line 60</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> setElStyle <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/dom.ts'</span></pre>
