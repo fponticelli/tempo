@@ -12,21 +12,21 @@ limitations under the License.
 */
 
 import { Tempo } from 'tempo-dom/lib/tempo'
-import { simpleComponent } from 'tempo-dom/lib/html'
+import { SimpleComponent } from 'tempo-dom/lib/html'
 
-const component = simpleComponent<number, unknown>($ =>
-  $.div($ =>
-    $.class('app').div($ =>
-      $.div($ => $.class(['count', 'count-small']).text('count'))
-        .div($ => $.class('count').text(String))
-        .div($ =>
+const component = SimpleComponent<number, unknown>($ =>
+  $.DIV($ =>
+    $.class('app').DIV($ =>
+      $.DIV($ => $.class(['count', 'count-small']).text('count'))
+        .DIV($ => $.class('count').text(String))
+        .DIV($ =>
           $.class('buttons')
-            .button($ =>
+            .BUTTON($ =>
               $.onClick(count => count - 1)
                 .disabled(count => count <= 0)
                 .text('-')
             )
-            .button($ => $.onClick(count => count + 1).text('+'))
+            .BUTTON($ => $.onClick(count => count + 1).text('+'))
         )
     )
   )

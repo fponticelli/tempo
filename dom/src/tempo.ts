@@ -23,7 +23,7 @@ import {
   ComponentHTMLBuilder
 } from './impl/html_builder'
 import { IBuilder, childOrBuilderToTemplate } from './impl/dom_builder'
-import { component } from './impl/html'
+import { Component } from './impl/html'
 
 export type TempoView<State, Action, Query> = Readonly<{
   view: View<State, Query>
@@ -66,10 +66,10 @@ export const Tempo = {
     delayed?: boolean
   }): TempoView<State, Action, Query> {
     const { el, state, reducer, equal, document, template, delayed } = options
-    const comp = component(reducer, n => {
-      if (equal !== undefined) n.equals = equal
-      if (delayed !== undefined) n.delayed = delayed
-      n.append(template)
+    const comp = Component(reducer, $ => {
+      if (equal !== undefined) $.equals = equal
+      if (delayed !== undefined) $.delayed = delayed
+      $.Append(template)
     })
     return Tempo.renderComponent({ el, component: comp, state, document })
   },

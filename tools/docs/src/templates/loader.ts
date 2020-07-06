@@ -1,7 +1,7 @@
-import { div } from 'tempo-dom/lib/html'
+import { DIV } from 'tempo-dom/lib/html'
 
-export const loader = div<any, any, unknown>($ =>
-  $.class('loader').div($ =>
+export const loader = DIV<any, any, unknown>($ =>
+  $.class('loader').DIV($ =>
     $.class('title has-text-grey-light is-size-5 loading').text('Loading ...')
   )
 )

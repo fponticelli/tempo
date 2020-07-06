@@ -1,28 +1,28 @@
 import { Action } from '../action'
 import { DemoRef } from '../toc'
-import { div } from 'tempo-dom/lib/html'
+import { DIV } from 'tempo-dom/lib/html'
 
 function demoSrc(path: string) {
   return `https://github.com/fponticelli/tempo/tree/master/demo/${path}`
 }
 
-const demo = div<DemoRef, Action, unknown>($ =>
+const demo = DIV<DemoRef, Action, unknown>($ =>
   $.class('tile is-parent tile-width')
-    .div($ =>
-      $.class('tile is-child box').p($ =>
-        $.class('title is-5').a($ =>
+    .DIV($ =>
+      $.class('tile is-child box').P($ =>
+        $.class('title is-5').A($ =>
           $.href(s => `demo/${s.path}/`).text(s => s.title)
         )
       )
     )
-    .p($ => $.class('description').text(s => s.description))
-    .p($ =>
-      $.class('source').a($ => $.href(s => demoSrc(s.path)).text('source code'))
+    .P($ => $.class('description').text(s => s.description))
+    .P($ =>
+      $.class('source').A($ => $.href(s => demoSrc(s.path)).text('source code'))
     )
 )
 
-export const demosContent = div<DemoRef[], Action, unknown>($ =>
-  $.p($ => $.class('title').text('Demos')).div($ =>
-    $.class('tile is-ancestor wrap').forEach($ => $.append(demo))
+export const demosContent = DIV<DemoRef[], Action, unknown>($ =>
+  $.P($ => $.class('title').text('Demos')).DIV($ =>
+    $.class('tile is-ancestor wrap').ForEach($ => $.Append(demo))
   )
 )

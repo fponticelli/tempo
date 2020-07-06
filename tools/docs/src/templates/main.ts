@@ -1,9 +1,9 @@
 import {
-  div,
-  img,
-  matchAsyncResult,
-  iterate,
-  mapField
+  DIV,
+  IMG,
+  MatchAsyncResult,
+  Iterate,
+  MapField
 } from 'tempo-dom/lib/html'
 import { State, Content } from '../state'
 import { Action } from '../action'
@@ -42,30 +42,30 @@ const toggleMenu = (
   return undefined
 }
 
-export const template = div<State, Action, unknown>($ =>
+export const template = DIV<State, Action, unknown>($ =>
   $.class('app')
-    .nav($ =>
+    .NAV($ =>
       $.class('navbar has-shadow')
         .role('navigation')
         .ariaLabel('main navigation')
-        .div($ =>
+        .DIV($ =>
           $.class('container')
-            .div($ =>
+            .DIV($ =>
               $.class('navabar-brand')
-                .a($ =>
+                .A($ =>
                   $.role('button')
                     .class('navbar-burger burger')
                     .ariaLabel('menu')
                     .ariaExpanded(false)
                     .data('target', 'navbarBasicExample')
                     .onClick(toggleMenu)
-                    .spanEl($ => $.ariaHidden(true))
-                    .spanEl($ => $.ariaHidden(true))
-                    .spanEl($ => $.ariaHidden(true))
+                    .SPAN($ => $.ariaHidden(true))
+                    .SPAN($ => $.ariaHidden(true))
+                    .SPAN($ => $.ariaHidden(true))
                 )
-                .append(
+                .Append(
                   link({
-                    label: img($ =>
+                    label: IMG($ =>
                       $.src('assets/icon-512x512.png')
                         .alt('Tempo')
                         .ariaHidden(true)
@@ -75,10 +75,10 @@ export const template = div<State, Action, unknown>($ =>
                   })
                 )
             )
-            .div($ =>
+            .DIV($ =>
               $.class('navbar-menu')
-                .div($ =>
-                  $.class('navabar-start').append(
+                .DIV($ =>
+                  $.class('navabar-start').Append(
                     link({
                       label: 'Tempo',
                       route: Route.home,
@@ -86,18 +86,18 @@ export const template = div<State, Action, unknown>($ =>
                     })
                   )
                 )
-                .div($ =>
+                .DIV($ =>
                   $.class('navabar-end')
-                    .a($ =>
+                    .A($ =>
                       $.class('navbar-item')
                         .href('https://github.com/fponticelli/tempo')
-                        .img($ =>
+                        .IMG($ =>
                           $.src('assets/github-mark-64px.png').text(
                             'Github Project'
                           )
                         )
                     )
-                    .append(
+                    .Append(
                       maybeLink({
                         label: 'Demos',
                         route: s =>
@@ -107,13 +107,13 @@ export const template = div<State, Action, unknown>($ =>
                         class: 'navbar-item'
                       })
                     )
-                    .div($ =>
+                    .DIV($ =>
                       $.class('navbar-item has-dropdown is-hoverable')
-                        .a($ => $.class('navbar-link').text('Projects'))
-                        .div($ =>
-                          $.class('navbar-dropdown').mapField('toc', $ =>
-                            $.append(
-                              matchAsyncResult<
+                        .A($ => $.class('navbar-link').text('Projects'))
+                        .DIV($ =>
+                          $.class('navbar-dropdown').MapField('toc', $ =>
+                            $.Append(
+                              MatchAsyncResult<
                                 Toc,
                                 HttpError,
                                 unknown,
@@ -123,10 +123,10 @@ export const template = div<State, Action, unknown>($ =>
                                 Failure: '',
                                 Loading: '',
                                 NotAsked: '',
-                                Success: iterate(
+                                Success: Iterate(
                                   s => s.projects,
                                   $ =>
-                                    $.append(
+                                    $.Append(
                                       link({
                                         label: ([s]) => s.title,
                                         route: ([s]) => Route.project(s.name),
@@ -144,44 +144,44 @@ export const template = div<State, Action, unknown>($ =>
         )
     )
     //
-    .holdState<
+    .HoldState<
       Toc,
       {
         route: Route
         content: AsyncResult<Content, HttpError, unknown>
         toc: Toc
       }
-    >(release =>
-      mapField('toc', $ =>
-        $.append(
-          matchAsyncResult({
+    >(Release =>
+      MapField('toc', $ =>
+        $.Append(
+          MatchAsyncResult({
             NotAsked: '',
             Loading: loader,
-            Success: release(
+            Success: Release(
               (state, toc) => ({
                 route: state.route,
                 content: state.content,
                 toc
               }),
               $ =>
-                $.main($ =>
-                  $.class('container').div($ =>
+                $.MAIN($ =>
+                  $.class('container').DIV($ =>
                     $.class('columns is-mobile')
-                      .div($ =>
+                      .DIV($ =>
                         $.class(
                           'column has-background-light side-control scrollable'
-                        ).append(sidebar)
+                        ).Append(sidebar)
                       )
-                      .div($ =>
-                        $.class('column scrollable main-column').mapState(
+                      .DIV($ =>
+                        $.class('column scrollable main-column').MapState(
                           ({ content }) => content,
-                          $ => $.append(content)
+                          $ => $.Append(content)
                         )
                       )
                   )
                 )
             ),
-            Failure: div($ => $.text(e => e.message))
+            Failure: DIV($ => $.text(e => e.message))
           })
         )
       )

@@ -1,6 +1,6 @@
 import { Action } from '../action'
 import { toHref, Route } from '../route'
-import { a, span, fragment } from 'tempo-dom/lib/html'
+import { A, SPAN, Fragment } from 'tempo-dom/lib/html'
 import { getUnsafe, Option, toBoolean } from 'tempo-std/lib/option'
 import {
   Attribute,
@@ -16,15 +16,15 @@ export const maybeLink = <State>(attrs: {
   route: Attribute<State, Option<Route>>
   class?: Attribute<State, string>
 }): IBuilder<State, Action, unknown> =>
-  fragment<State, Action, unknown>($ =>
-    $.matchBool({
+  Fragment<State, Action, unknown>($ =>
+    $.MatchBool({
       condition: mapAttribute(attrs.route, toBoolean),
-      false: span($ =>
+      false: SPAN($ =>
         $.class(
           mapAttribute(attrs.class || '', v =>
             (v ? [v] : []).concat(['is-active']).join(' ')
           )
-        ).append(attrs.label)
+        ).Append(attrs.label)
       ),
       true: link({
         label: attrs.label,
@@ -39,7 +39,7 @@ export const link = <State>(attrs: {
   route: Attribute<State, Route>
   class?: Attribute<State, string>
 }): IBuilder<State, Action, unknown> =>
-  a<State, Action, unknown>($ =>
+  A<State, Action, unknown>($ =>
     $.class(attrs.class)
       .href(
         mapAttribute<State, Route, string>(attrs.route, route => toHref(route))
@@ -55,5 +55,5 @@ export const link = <State>(attrs: {
           }
         )
       )
-      .append(attrs.label)
+      .Append(attrs.label)
   )

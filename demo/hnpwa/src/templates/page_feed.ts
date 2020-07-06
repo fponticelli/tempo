@@ -11,28 +11,28 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { footer, section, li, h2, match, fragment } from 'tempo-dom/lib/html'
+import { FOOTER, SECTION, LI, H2, Match, Fragment } from 'tempo-dom/lib/html'
 import { PageFeed, Item, External } from '../state'
 import { Action } from '../action'
 import { Route } from '../route'
 import { linkRoute } from './link_route'
 import { paginationTemplate } from './pagination'
 
-export const itemUrlTemplate = match<['url', 'kind'], Item, Action, unknown>({
+export const itemUrlTemplate = Match<['url', 'kind'], Item, Action, unknown>({
   path: ['url', 'kind'],
   matcher: {
     External: linkRoute<Item & { url: External }, Action, unknown>(
       { route: item => Route.externalRoute(item.url.path) },
-      h2<Item, Action, unknown>($ => $.text((item: Item) => item.title)).build()
+      H2<Item, Action, unknown>($ => $.text((item: Item) => item.title)).build()
     ),
     Internal: linkRoute(
       { route: item => Route.item(item.id) },
-      h2<Item, Action, unknown>($ => $.text((item: Item) => item.title)).build()
+      H2<Item, Action, unknown>($ => $.text((item: Item) => item.title)).build()
     )
   }
 })
 
-export const listItemUrlTemplate = match<
+export const listItemUrlTemplate = Match<
   ['url', 'kind'],
   Item,
   Action,
@@ -51,18 +51,18 @@ export const listItemUrlTemplate = match<
   }
 })
 
-export const itemFooterTemplate = footer<Item, Action, unknown>($ =>
-  $.matchBool({
+export const itemFooterTemplate = FOOTER<Item, Action, unknown>($ =>
+  $.MatchBool({
     condition: item => item.type === 'job',
     true: item => item.time_ago,
-    false: fragment($ =>
+    false: Fragment($ =>
       $.text(item => String(item.points))
         .text(' points by ')
-        .append(linkRoute({ route: item => Route.user(item.user) }))
+        .Append(linkRoute({ route: item => Route.user(item.user) }))
         .text(' ')
         .text(item => item.time_ago)
         .text(' | ')
-        .append(
+        .Append(
           linkRoute(
             { route: item => Route.item(item.id) },
             item => String(item.comments_count),
@@ -73,32 +73,32 @@ export const itemFooterTemplate = footer<Item, Action, unknown>($ =>
   })
 )
 
-const listItemTemplate = li<[Item, PageFeed, number], Action, unknown>($ =>
-  $.aside($ =>
+const listItemTemplate = LI<[Item, PageFeed, number], Action, unknown>($ =>
+  $.ASIDE($ =>
     $.text(([_i, page, index]) => String((page.page - 1) * 30 + index + 1))
-  ).div($ =>
-    $.mapState(
+  ).DIV($ =>
+    $.MapState(
       ([item]) => item,
       $ =>
-        $.append(listItemUrlTemplate).spanEl($ =>
+        $.Append(listItemUrlTemplate).SPAN($ =>
           $.class('domain')
             .text(s => s.domain)
-            .append(itemFooterTemplate)
+            .Append(itemFooterTemplate)
         )
     )
   )
 )
 
-export const pageFeedTemplate = section<PageFeed, Action, unknown>($ =>
+export const pageFeedTemplate = SECTION<PageFeed, Action, unknown>($ =>
   $.class('list-view')
-    .ul($ =>
-      $.iterate(
+    .UL($ =>
+      $.Iterate(
         s => s.items,
-        $ => $.append(listItemTemplate)
+        $ => $.Append(listItemTemplate)
       )
     )
-    .mapState(
+    .MapState(
       s => ({ feed: s.feed, page: s.page }),
-      $ => $.append(paginationTemplate)
+      $ => $.Append(paginationTemplate)
     )
 )

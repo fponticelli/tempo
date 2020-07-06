@@ -11,7 +11,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { fragment, table } from 'tempo-dom/lib/html'
+import { Fragment, TABLE } from 'tempo-dom/lib/html'
 import { Action } from '../action'
 import { State, makeTestRunId } from '../state'
 
@@ -27,18 +27,18 @@ const resultToSamples = (r: TestResult) => {
   )
 }
 
-const colHeader = fragment<{ id: string; selected: boolean }, Action, unknown>(
+const colHeader = Fragment<{ id: string; selected: boolean }, Action, unknown>(
   $ =>
-    $.when(
+    $.When(
       s => s.id === 'current',
       $ =>
         $.text('current')
-          .br()
+          .BR()
           .text(s => (s.selected ? '✅' : '⛔️'))
-    ).when(
+    ).When(
       s => s.id !== 'current',
       $ =>
-        $.mapState(
+        $.MapState(
           s => {
             const parts = s.id.split('-')
             const dates = parts[0]
@@ -50,74 +50,74 @@ const colHeader = fragment<{ id: string; selected: boolean }, Action, unknown>(
             return { date, commit, selected: s.selected }
           },
           $ =>
-            $.div($ => $.class('date').text(s => s.date.toDateString()))
-              .spanEl($ => $.class('commit').text(s => s.commit))
+            $.DIV($ => $.class('date').text(s => s.date.toDateString()))
+              .SPAN($ => $.class('commit').text(s => s.commit))
               .text(' ')
               .text(s => (s.selected ? '✅' : '⛔️'))
         )
     )
 )
 
-export const tableView = table<State, Action, unknown>($ =>
-  $.tr($ =>
+export const tableView = TABLE<State, Action, unknown>($ =>
+  $.TR($ =>
     $.class('header-row')
-      .th($ =>
-        $.when(
+      .TH($ =>
+        $.When(
           s => s.processing.size > 0,
           $ =>
-            $.spanEl($ =>
+            $.SPAN($ =>
               $.class('details')
                 .text(s => ` running ${s.processing.size} tests`)
-                .br()
+                .BR()
             )
-        ).button($ =>
+        ).BUTTON($ =>
           $.onClick(() => Action.executeSelectedTests()).text(
             'execute selected tests'
           )
         )
       )
-      .th()
-      .mapState(
+      .TH()
+      .MapState(
         s => s.versions,
         $ =>
-          $.forEach($ =>
-            $.th($ =>
-              $.class('version-header').a($ =>
+          $.ForEach($ =>
+            $.TH($ =>
+              $.class('version-header').A($ =>
                 $.href('#')
                   .onClick(s => Action.toggleVersion(s.id, !s.selected))
-                  .append(colHeader)
+                  .Append(colHeader)
               )
             )
           )
       )
   )
-    .tr($ =>
+    .TR($ =>
       $.class('header-row')
-        .th($ =>
+        .TH($ =>
           $.text('toggle: ')
-            .a($ =>
+            .A($ =>
               $.href('#')
                 .onClick(() => Action.toggleAllTests())
                 .text('tests')
             )
             .text(', ')
-            .a($ =>
+            .A($ =>
               $.href('#')
                 .onClick(() => Action.toggleAllVersions())
                 .text('versions')
             )
         )
-        .th()
-        .mapState(
+        .TH()
+        .MapState(
           state =>
             state.versions.map(version => ({
               version,
               tests: state.tests.map(t => t.id)
             })),
           $ =>
-            $.forEach($ =>
-              $.th($ =>
-                $.class('hand').a($ =>
+            $.ForEach($ =>
+              $.TH($ =>
+                $.class('hand').A($ =>
                   $.href('#')
                     .onClick(s => Action.executeTests([s.version.id], s.tests))
                     .text('👇')
@@ -126,13 +126,13 @@ export const tableView = table<State, Action, unknown>($ =>
             )
         )
     )
-    .mapState(
+    .MapState(
       state => state.tests.map(test => ({ test, state })),
       $ =>
-        $.forEach($ =>
-          $.tr($ =>
-            $.th($ =>
-              $.class('header-col').a($ =>
+        $.ForEach($ =>
+          $.TR($ =>
+            $.TH($ =>
+              $.class('header-col').A($ =>
                 $.href('#')
                   .onClick(s => Action.toggleTest(s.test.id, !s.test.selected))
                   .text(
@@ -141,8 +141,8 @@ export const tableView = table<State, Action, unknown>($ =>
                   )
               )
             )
-              .th($ =>
-                $.class('hand').a($ =>
+              .TH($ =>
+                $.class('hand').A($ =>
                   $.href('#')
                     .onClick(s =>
                       Action.executeTests(
@@ -153,7 +153,7 @@ export const tableView = table<State, Action, unknown>($ =>
                     .text('👉')
                 )
               )
-              .mapState(
+              .MapState(
                 item => {
                   const testId = item.test.id
                   const results = item.state.results
@@ -173,29 +173,29 @@ export const tableView = table<State, Action, unknown>($ =>
                   })
                 },
                 $ =>
-                  $.forEach($ =>
-                    $.td($ =>
+                  $.ForEach($ =>
+                    $.TD($ =>
                       $.class(s => {
                         const buff = []
                         if (s.selected) buff.push('selected')
                         if (s.processing) buff.push('processing')
                         return buff.join(' ')
                       })
-                        .when(
+                        .When(
                           s => s.result != null,
                           $ =>
                             $.text(s => resultToOpsPerSec(s.result!))
-                              .spanEl($ =>
+                              .SPAN($ =>
                                 $.class('details')
                                   .title(s => resultToSamples(s.result!))
                                   .text(' ops/sec')
                               )
-                              .br()
-                              .when(
+                              .BR()
+                              .When(
                                 s => !!s.faster && s.faster >= 0.05,
                                 $ =>
-                                  $.spanEl($ =>
-                                    $.class('details').b($ =>
+                                  $.SPAN($ =>
+                                    $.class('details').B($ =>
                                       $.text(
                                         s =>
                                           `${(s.faster! * 100).toFixed(
@@ -205,10 +205,10 @@ export const tableView = table<State, Action, unknown>($ =>
                                     )
                                   )
                               )
-                              .when(
+                              .When(
                                 s => !s.processing,
                                 $ =>
-                                  $.a($ =>
+                                  $.A($ =>
                                     $.href('#')
                                       .onClick(s =>
                                         Action.executeTests(
@@ -220,10 +220,10 @@ export const tableView = table<State, Action, unknown>($ =>
                                   )
                               )
                         )
-                        .when(
+                        .When(
                           s => s.result == null && !s.processing,
                           $ =>
-                            $.a($ =>
+                            $.A($ =>
                               $.href('#')
                                 .onClick(s =>
                                   Action.executeTests([s.version], [s.test])

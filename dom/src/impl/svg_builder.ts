@@ -46,7 +46,7 @@ export class BaseSVGBuilder<State, Action, Query> extends DOMBuilder<
   Action,
   Query
 > {
-  svgEl(
+  SvgEl(
     init: (
       builder: SVGElementBuilder<State, Action, Query, SVGElement>
     ) => void = () => {}
@@ -58,7 +58,7 @@ export class BaseSVGBuilder<State, Action, Query> extends DOMBuilder<
   }
 
   // transform
-  adapter<StateB, ActionB>(props: {
+  Adapter<StateB, ActionB>(props: {
     bootstrapState: (outer: State) => StateB
     mergeStates?: Attribute<
       {
@@ -70,7 +70,7 @@ export class BaseSVGBuilder<State, Action, Query> extends DOMBuilder<
     propagate?: (args: PropagateArg<State, StateB, Action, ActionB>) => void
     child: ComponentTemplate<StateB, ActionB, Query>
   }) {
-    return this.append(
+    return this.Append(
       new AdapterTemplate(
         props.bootstrapState,
         props.mergeStates,
@@ -80,20 +80,20 @@ export class BaseSVGBuilder<State, Action, Query> extends DOMBuilder<
     )
   }
 
-  component(
+  Component(
     reducer: (state: State, action: Action) => State,
     init: (builder: ComponentSVGBuilder<State, Action, Query>) => void
   ) {
     const builder = new ComponentSVGBuilder<State, Action, Query>(reducer)
     init(builder)
-    return this.append(builder.build())
+    return this.Append(builder.build())
   }
 
-  localAdapter(props: {
+  LocalAdapter(props: {
     propagate?: (args: PropagateArg<State, State, Action, Action>) => void
     child: ComponentTemplate<State, Action, Query>
   }) {
-    return this.append(
+    return this.Append(
       new AdapterTemplate(
         state => state,
         ({ outerState }) => outerState,
@@ -103,7 +103,7 @@ export class BaseSVGBuilder<State, Action, Query> extends DOMBuilder<
     )
   }
 
-  holdState<StateB, StateC>(
+  HoldState<StateB, StateC>(
     holdf: HoldF<
       State,
       StateB,
@@ -113,7 +113,7 @@ export class BaseSVGBuilder<State, Action, Query> extends DOMBuilder<
       FragmentSVGBuilder<StateC, Action, Query>
     >
   ): this {
-    return this.append(
+    return this.Append(
       new HoldStateTemplate(
         holdf,
         new FragmentSVGBuilder<StateC, Action, Query>()
@@ -121,25 +121,25 @@ export class BaseSVGBuilder<State, Action, Query> extends DOMBuilder<
     )
   }
 
-  mapState<StateB>(
+  MapState<StateB>(
     map: (state: State) => StateB | undefined,
     init: (builder: MapStateSVGBuilder<State, StateB, Action, Query>) => void
   ) {
     const builder = new MapStateSVGBuilder<State, StateB, Action, Query>(map)
     init(builder)
-    return this.append(builder.build())
+    return this.Append(builder.build())
   }
 
-  mapField<Key extends keyof State>(
+  MapField<Key extends keyof State>(
     field: Key,
     init: (
       builder: MapStateSVGBuilder<State, State[Key], Action, Query>
     ) => void
   ) {
-    return this.mapState<State[Key]>((v: State): State[Key] => v[field], init)
+    return this.MapState<State[Key]>((v: State): State[Key] => v[field], init)
   }
 
-  mapStateAndKeep<StateB>(
+  MapStateAndKeep<StateB>(
     map: (state: State) => StateB | undefined,
     init: (
       builder: MapStateSVGBuilder<State, [StateB, State], Action, Query>
@@ -159,33 +159,33 @@ export class BaseSVGBuilder<State, Action, Query> extends DOMBuilder<
       }
     })
     init(builder)
-    return this.append(builder.build())
+    return this.Append(builder.build())
   }
 
-  mapAction<ActionB>(
+  MapAction<ActionB>(
     map: DerivedValue<ActionB, Action>,
     init: (builder: MapActionSVGBuilder<State, Action, ActionB, Query>) => void
   ) {
     const builder = new MapActionSVGBuilder<State, Action, ActionB, Query>(map)
     init(builder)
-    return this.append(builder.build())
+    return this.Append(builder.build())
   }
 
-  mapQuery<QueryB>(
+  MapQuery<QueryB>(
     map: DerivedValue<Query, QueryB>,
     init: (builder: MapQuerySVGBuilder<State, Action, Query, QueryB>) => void
   ) {
     const builder = new MapQuerySVGBuilder<State, Action, Query, QueryB>(map)
     init(builder)
-    return this.append(builder.build())
+    return this.Append(builder.build())
   }
 
-  matchBool(props: {
+  MatchBool(props: {
     condition: Attribute<State, boolean>
     true: DOMChild<State, Action, Query> | IBuilder<State, Action, Query>
     false: DOMChild<State, Action, Query> | IBuilder<State, Action, Query>
   }): this {
-    return this.append(
+    return this.Append(
       new MatchBoolTemplate<State, Action, Query>(
         props.condition,
         props.true,
@@ -194,15 +194,15 @@ export class BaseSVGBuilder<State, Action, Query> extends DOMBuilder<
     )
   }
 
-  lazy(
+  Lazy(
     lazyf: () =>
       | DOMTemplate<State, Action, Query>
       | IBuilder<State, Action, Query>
   ) {
-    return this.append(new LazyTemplate(lazyf))
+    return this.Append(new LazyTemplate(lazyf))
   }
 
-  forEach(
+  ForEach(
     init: (
       builder: UntilSVGBuilder<
         State,
@@ -212,7 +212,7 @@ export class BaseSVGBuilder<State, Action, Query> extends DOMBuilder<
       >
     ) => void
   ): this {
-    return this.until(
+    return this.Until(
       ({
         state,
         index
@@ -224,13 +224,13 @@ export class BaseSVGBuilder<State, Action, Query> extends DOMBuilder<
     )
   }
 
-  fragment(init: (builder: FragmentSVGBuilder<State, Action, Query>) => void) {
+  Fragment(init: (builder: FragmentSVGBuilder<State, Action, Query>) => void) {
     const builder = new FragmentSVGBuilder<State, Action, Query>()
     init(builder)
-    return this.append(builder.build())
+    return this.Append(builder.build())
   }
 
-  iterate<Items extends any[]>(
+  Iterate<Items extends any[]>(
     map: DerivedValue<State, Items>,
     init: (
       builder: UntilSVGBuilder<
@@ -241,13 +241,13 @@ export class BaseSVGBuilder<State, Action, Query> extends DOMBuilder<
       >
     ) => void
   ) {
-    return this.mapState<[Items, State]>(
+    return this.MapState<[Items, State]>(
       (outer: State): [Items, State] | undefined => {
         const items = resolveAttribute(map)(outer)
         return items !== undefined ? [items, outer] : undefined
       },
       $ => {
-        $.until<[Items[number], State, number]>(
+        $.Until<[Items[number], State, number]>(
           ({ state: [items, state], index }) =>
             items[index] && [items[index], state, index],
           init
@@ -256,20 +256,20 @@ export class BaseSVGBuilder<State, Action, Query> extends DOMBuilder<
     )
   }
 
-  portal(
+  Portal(
     appendChild: (doc: Document) => Element,
     init: (builder: PortalSVGBuilder<State, Action, Query>) => void
   ): this {
     const builder = new PortalSVGBuilder<State, Action, Query>(appendChild)
     init(builder)
-    return this.append(builder.build())
+    return this.Append(builder.build())
   }
 
-  portalWithSelector(
+  PortalWithSelector(
     selector: string,
     init: (builder: PortalSVGBuilder<State, Action, Query>) => void
   ): this {
-    return this.portal(doc => {
+    return this.Portal(doc => {
       const el = doc.querySelector(selector)
       if (!el) {
         throw new Error(`selector doesn't match any element: "${selector}"`)
@@ -278,19 +278,19 @@ export class BaseSVGBuilder<State, Action, Query> extends DOMBuilder<
     }, init)
   }
 
-  headPortal(
+  HeadPortal(
     init: (builder: PortalSVGBuilder<State, Action, Query>) => void
   ): this {
-    return this.portal(doc => doc.head, init)
+    return this.Portal(doc => doc.head, init)
   }
 
-  bodyPortal(
+  BodyPortal(
     init: (builder: PortalSVGBuilder<State, Action, Query>) => void
   ): this {
-    return this.portal(doc => doc.body, init)
+    return this.Portal(doc => doc.body, init)
   }
 
-  // simpleComponent(
+  // SimpleComponent(
   //   init: (builder: SimpleComponentBuilder<State, Query>) => void
   // ) {
   //   const builder = new SimpleComponentBuilder<State, Query>()
@@ -298,23 +298,23 @@ export class BaseSVGBuilder<State, Action, Query> extends DOMBuilder<
   //   return this.append(builder.build())
   // }
 
-  unless(
+  Unless(
     condition: DerivedValue<State, boolean>,
     init: (builder: MapStateSVGBuilder<State, State, Action, Query>) => void
   ) {
-    return this.when(s => !condition(s), init)
+    return this.When(s => !condition(s), init)
   }
 
-  until<StateB>(
+  Until<StateB>(
     next: DerivedValue<{ state: State; index: number }, StateB>,
     init: (builder: UntilSVGBuilder<State, StateB, Action, Query>) => void
   ) {
     const builder = new UntilSVGBuilder<State, StateB, Action, Query>(next)
     init(builder)
-    return this.append(builder.build())
+    return this.Append(builder.build())
   }
 
-  when(
+  When(
     condition: DerivedValue<State, boolean>,
     init: (builder: MapStateSVGBuilder<State, State, Action, Query>) => void
   ) {
@@ -326,11 +326,11 @@ export class BaseSVGBuilder<State, Action, Query> extends DOMBuilder<
       }
     })
     init(builder)
-    return this.append(builder.build())
+    return this.Append(builder.build())
   }
 
   // derived children
-  a(
+  A(
     init?: (builder: SVGAnchorElementBuilder<State, Action, Query>) => void
   ): this {
     return initBuilder(
@@ -339,7 +339,7 @@ export class BaseSVGBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  circle(
+  CIRCLE(
     init?: (builder: SVGCircleElementBuilder<State, Action, Query>) => void
   ): this {
     return initBuilder(
@@ -348,7 +348,7 @@ export class BaseSVGBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  clipPathEl(
+  CLIP_PATH(
     init?: (
       builder: SVGElementBuilder<State, Action, Query, SVGClipPathElement>
     ) => void
@@ -361,7 +361,7 @@ export class BaseSVGBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  defs(
+  DEFS(
     init?: (
       builder: SVGElementBuilder<State, Action, Query, SVGDefsElement>
     ) => void
@@ -372,7 +372,7 @@ export class BaseSVGBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  desc(
+  DESC(
     init?: (
       builder: SVGElementBuilder<State, Action, Query, SVGDescElement>
     ) => void
@@ -383,7 +383,7 @@ export class BaseSVGBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  ellipse(
+  ELLIPSE(
     init?: (builder: SVGEllipseElementBuilder<State, Action, Query>) => void
   ): this {
     return initBuilder(
@@ -392,7 +392,7 @@ export class BaseSVGBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  feBlend(
+  FE_BLEND(
     init?: (builder: SVGFEBlendElementBuilder<State, Action, Query>) => void
   ): this {
     return initBuilder(
@@ -401,7 +401,7 @@ export class BaseSVGBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  feColorMatrix(
+  FE_COLOR_MATRIX(
     init?: (
       builder: SVGFEColorMatrixElementBuilder<State, Action, Query>
     ) => void
@@ -412,7 +412,7 @@ export class BaseSVGBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  feComponentTransfer(
+  FE_COMPONENT_TRANSFER(
     init?: (
       builder: SVGFEComponentTransferElementBuilder<State, Action, Query>
     ) => void
@@ -423,7 +423,7 @@ export class BaseSVGBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  feComposite(
+  FE_COMPOSITE(
     init?: (builder: SVGFeCompositeElementBuilder<State, Action, Query>) => void
   ): this {
     return initBuilder(
@@ -432,7 +432,7 @@ export class BaseSVGBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  feConvolveMatrix(
+  FE_CONVOLVE_MATRIX(
     init?: (
       builder: SVGFEConvolveMatrixElementBuilder<State, Action, Query>
     ) => void
@@ -443,7 +443,7 @@ export class BaseSVGBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  feDiffuseLighting(
+  FE_DIFFUSE_LIGHTING(
     init?: (
       builder: SVGFEDiffuseLightingElementBuilder<State, Action, Query>
     ) => void
@@ -454,7 +454,7 @@ export class BaseSVGBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  feDisplacementMap(
+  FE_DISPLACEMENT_MAP(
     init?: (
       builder: SVGFEDisplacementMapElementBuilder<State, Action, Query>
     ) => void
@@ -465,7 +465,7 @@ export class BaseSVGBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  feDistantLight(
+  FE_DISTANT_LIGHT(
     init?: (
       builder: SVGFEDistantLightElementBuilder<State, Action, Query>
     ) => void
@@ -476,7 +476,7 @@ export class BaseSVGBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  feFlood(
+  FE_FLOOD(
     init?: (builder: SVGFEFloodElementBuilder<State, Action, Query>) => void
   ): this {
     return initBuilder(
@@ -485,7 +485,7 @@ export class BaseSVGBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  feFuncA(
+  FE_FUNC_A(
     init?: (builder: SVGFEFuncAElementBuilder<State, Action, Query>) => void
   ): this {
     return initBuilder(
@@ -494,7 +494,7 @@ export class BaseSVGBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  feFuncB(
+  FE_FUNC_B(
     init?: (builder: SVGFEFuncBElementBuilder<State, Action, Query>) => void
   ): this {
     return initBuilder(
@@ -503,7 +503,7 @@ export class BaseSVGBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  feFuncG(
+  FE_FUNC_G(
     init?: (builder: SVGFEFuncGElementBuilder<State, Action, Query>) => void
   ): this {
     return initBuilder(
@@ -512,7 +512,7 @@ export class BaseSVGBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  feFuncR(
+  FE_FUNC_R(
     init?: (builder: SVGFEFuncRElementBuilder<State, Action, Query>) => void
   ): this {
     return initBuilder(
@@ -521,7 +521,7 @@ export class BaseSVGBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  feGaussianBlur(
+  FE_GAUSSIAN_BLUR(
     init?: (
       builder: SVGFEGaussianBlurElementBuilder<State, Action, Query>
     ) => void
@@ -532,7 +532,7 @@ export class BaseSVGBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  feImage(
+  FE_IMAGE(
     init?: (builder: SVGFEImageElementBuilder<State, Action, Query>) => void
   ): this {
     return initBuilder(
@@ -541,7 +541,7 @@ export class BaseSVGBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  feMerge(
+  FE_MERGE(
     init?: (builder: SVGFEMergeElementBuilder<State, Action, Query>) => void
   ): this {
     return initBuilder(
@@ -550,7 +550,7 @@ export class BaseSVGBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  feMergeNode(
+  FE_MERGE_NODE(
     init?: (builder: SVGFEMergeNodeElementBuilder<State, Action, Query>) => void
   ): this {
     return initBuilder(
@@ -559,7 +559,7 @@ export class BaseSVGBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  feMorphology(
+  FE_MORPHOLOGY(
     init?: (
       builder: SVGFEMorphologyElementBuilder<State, Action, Query>
     ) => void
@@ -570,7 +570,7 @@ export class BaseSVGBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  feOffset(
+  FE_OFFSET(
     init?: (builder: SVGFEOffsetElementBuilder<State, Action, Query>) => void
   ): this {
     return initBuilder(
@@ -579,7 +579,7 @@ export class BaseSVGBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  fePointLight(
+  FE_POINT_LIGHT(
     init?: (
       builder: SVGFEPointLightElementBuilder<State, Action, Query>
     ) => void
@@ -590,8 +590,7 @@ export class BaseSVGBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  feSpecularLighting(
-    // TODO
+  FE_SPECULAR_LIGHTING(
     init?: (
       builder: SVGFESpecularLightingElementBuilder<State, Action, Query>
     ) => void
@@ -602,7 +601,7 @@ export class BaseSVGBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  feSpotLight(
+  FE_SPOTLIGHT(
     init?: (builder: SVGFESpotLightElementBuilder<State, Action, Query>) => void
   ): this {
     return initBuilder(
@@ -611,7 +610,7 @@ export class BaseSVGBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  feTile(
+  FE_TILE(
     init?: (builder: SVGFETileElementBuilder<State, Action, Query>) => void
   ): this {
     return initBuilder(
@@ -620,7 +619,7 @@ export class BaseSVGBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  feTurbulence(
+  FE_TURBULENCE(
     init?: (
       builder: SVGFETurbulenceElementBuilder<State, Action, Query>
     ) => void
@@ -631,8 +630,7 @@ export class BaseSVGBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  filterEl(
-    // TODO https://developer.mozilla.org/en-US/docs/Web/SVG/Element/filter
+  FILTER(
     init?: (builder: SVGFilterElementBuilder<State, Action, Query>) => void
   ): this {
     return initBuilder(
@@ -641,8 +639,7 @@ export class BaseSVGBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  foreignObject(
-    // TODO https://developer.mozilla.org/en-US/docs/Web/SVG/Element/foreignObject
+  FOREIGN_OBJECT(
     init?: (
       builder: SVGForeignObjectElementBuilder<State, Action, Query>
     ) => void
@@ -653,15 +650,14 @@ export class BaseSVGBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  g(init?: (builder: SVGGElementBuilder<State, Action, Query>) => void): this {
+  G(init?: (builder: SVGGElementBuilder<State, Action, Query>) => void): this {
     return initBuilder(
       new SVGGElementBuilder<State, Action, Query>(),
       init,
       this
     )
   }
-  image(
-    // TODO https://developer.mozilla.org/en-US/docs/Web/SVG/Element/image
+  IMAGE(
     init?: (builder: SVGImageElementBuilder<State, Action, Query>) => void
   ): this {
     return initBuilder(
@@ -670,8 +666,7 @@ export class BaseSVGBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  line(
-    // TODO https://developer.mozilla.org/en-US/docs/Web/SVG/Element/line
+  LINE(
     init?: (builder: SVGLineElementBuilder<State, Action, Query>) => void
   ): this {
     return initBuilder(
@@ -680,8 +675,7 @@ export class BaseSVGBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  linearGradient(
-    // TODO https://developer.mozilla.org/en-US/docs/Web/SVG/Element/linearGradient
+  LINEAR_GRADIENT(
     init?: (
       builder: SVGLinearGradientElementBuilder<State, Action, Query>
     ) => void
@@ -692,8 +686,7 @@ export class BaseSVGBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  marker(
-    // TODO
+  MARKER(
     init?: (builder: SVGMarkerElementBuilder<State, Action, Query>) => void
   ): this {
     return initBuilder(
@@ -702,8 +695,7 @@ export class BaseSVGBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  maskEl(
-    // TODO
+  MASK(
     init?: (builder: SVGMaskElementBuilder<State, Action, Query>) => void
   ): this {
     return initBuilder(
@@ -712,7 +704,7 @@ export class BaseSVGBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  metadata(
+  METADATA(
     init?: (builder: SVGMetadataElementBuilder<State, Action, Query>) => void
   ): this {
     return initBuilder(
@@ -721,8 +713,7 @@ export class BaseSVGBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  pathEl(
-    // TODO
+  PATH(
     init?: (builder: SVGPathElementBuilder<State, Action, Query>) => void
   ): this {
     return initBuilder(
@@ -731,8 +722,7 @@ export class BaseSVGBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  pattern(
-    // TODO
+  PATTERN(
     init?: (builder: SVGPatternElementBuilder<State, Action, Query>) => void
   ): this {
     return initBuilder(
@@ -741,8 +731,7 @@ export class BaseSVGBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  polygon(
-    // TODO
+  POLYGON(
     init?: (builder: SVGPolygonElementBuilder<State, Action, Query>) => void
   ): this {
     return initBuilder(
@@ -751,8 +740,7 @@ export class BaseSVGBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  polyline(
-    // TODO
+  POLYLINE(
     init?: (builder: SVGPolylineElementBuilder<State, Action, Query>) => void
   ): this {
     return initBuilder(
@@ -761,8 +749,7 @@ export class BaseSVGBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  radialGradient(
-    // TODO
+  RADIALGRADIENT(
     init?: (
       builder: SVGRadialGradientElementBuilder<State, Action, Query>
     ) => void
@@ -773,7 +760,7 @@ export class BaseSVGBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  rect(
+  RECT(
     init?: (builder: SVGRectElementBuilder<State, Action, Query>) => void
   ): this {
     return initBuilder(
@@ -782,7 +769,7 @@ export class BaseSVGBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  script(
+  SCRIPT(
     init?: (builder: SVGScriptElementBuilder<State, Action, Query>) => void
   ): this {
     return initBuilder(
@@ -791,8 +778,7 @@ export class BaseSVGBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  stop(
-    // TODO
+  STOP(
     init?: (builder: SVGStopElementBuilder<State, Action, Query>) => void
   ): this {
     return initBuilder(
@@ -801,8 +787,7 @@ export class BaseSVGBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  styleEl(
-    // TODO
+  STYLE(
     init?: (builder: SVGStyleElementBuilder<State, Action, Query>) => void
   ): this {
     return initBuilder(
@@ -811,7 +796,7 @@ export class BaseSVGBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  svg(
+  SVG(
     init?: (builder: SVGSVGElementBuilder<State, Action, Query>) => void
   ): this {
     return initBuilder(
@@ -820,8 +805,7 @@ export class BaseSVGBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  switchEl(
-    // TODO
+  SWITCH(
     init?: (builder: SVGSwitchElementBuilder<State, Action, Query>) => void
   ): this {
     return initBuilder(
@@ -830,8 +814,7 @@ export class BaseSVGBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  symbol(
-    // TODO https://developer.mozilla.org/en-US/docs/Web/SVG/Element/symbol
+  SYMBOL(
     init?: (builder: SVGSymbolElementBuilder<State, Action, Query>) => void
   ): this {
     return initBuilder(
@@ -840,8 +823,7 @@ export class BaseSVGBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  textEl(
-    // TODO
+  TEXT(
     init?: (builder: SVGTextElementBuilder<State, Action, Query>) => void
   ): this {
     return initBuilder(
@@ -850,8 +832,7 @@ export class BaseSVGBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  textPath(
-    // TODO
+  TEXT_PATH(
     init?: (builder: SVGTextPathElementBuilder<State, Action, Query>) => void
   ): this {
     return initBuilder(
@@ -860,7 +841,7 @@ export class BaseSVGBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  titleEl(
+  TITLE(
     init?: (builder: SVGTitleElementBuilder<State, Action, Query>) => void
   ): this {
     return initBuilder(
@@ -869,8 +850,7 @@ export class BaseSVGBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  tspan(
-    // TODO
+  TSPAN(
     init?: (builder: SVGTSpanElementBuilder<State, Action, Query>) => void
   ): this {
     return initBuilder(
@@ -879,8 +859,7 @@ export class BaseSVGBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  use(
-    // TODO
+  USE(
     init?: (builder: SVGUseElementBuilder<State, Action, Query>) => void
   ): this {
     return initBuilder(
@@ -889,8 +868,7 @@ export class BaseSVGBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  view(
-    // TODO https://developer.mozilla.org/en-US/docs/Web/SVG/Element/view
+  VIEW(
     init?: (builder: SVGViewElementBuilder<State, Action, Query>) => void
   ): this {
     return initBuilder(
@@ -963,11 +941,11 @@ export class SVGElementBuilder<State, Action, Query, El extends SVGElement>
     }
     return this
   }
-  lifecycle(makeLifecycle: MakeLifecycle<State, Action>): this {
+  Lifecycle(makeLifecycle: MakeLifecycle<State, Action>): this {
     this._lifecycle = makeLifecycle
     return this
   }
-  respond(
+  Respond(
     response: (query: Query, el: El, ctx: DOMContext<Action>) => void
   ): this {
     this._respond = response
@@ -1819,7 +1797,7 @@ function initBuilder<
   P extends BaseSVGBuilder<any, any, any>
 >(builder: T, init: undefined | ((builder: T) => void), parent: P): P {
   init && init(builder)
-  return parent.append(builder.build())
+  return parent.Append(builder.build())
 }
 
 export class SVGAnchorElementBuilder<

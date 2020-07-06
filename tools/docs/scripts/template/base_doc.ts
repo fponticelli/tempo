@@ -1,36 +1,36 @@
 import { BaseDoc } from '../parse/jsdoc'
 import {
-  div,
-  fragment,
-  mapField,
-  mapState,
-  matchOption
+  DIV,
+  Fragment,
+  MapField,
+  MapState,
+  MatchOption
 } from 'tempo-dom/lib/html'
 import { unsafeHtml } from 'tempo-dom/lib/lifecycle/unsafe_html'
 import { isSome } from 'tempo-std/lib/option'
 import { markdown } from '../utils/markdown'
 import { highlight } from '../utils/highlight'
 
-export const description = mapField<BaseDoc, unknown, unknown, 'description'>(
+export const description = MapField<BaseDoc, unknown, unknown, 'description'>(
   'description',
   $ =>
     $.append(
-      matchOption({
-        Some: div($ => $.lifecycle(unsafeHtml(s => markdown(s, s => s)))),
+      MatchOption({
+        Some: DIV($ => $.lifecycle(unsafeHtml(s => markdown(s, s => s)))),
         None: ''
       })
     )
 )
 
-export const todos = mapField<BaseDoc, unknown, unknown, 'todos'>('todos', $ =>
-  $.when(
+export const todos = MapField<BaseDoc, unknown, unknown, 'todos'>('todos', $ =>
+  $.When(
     todos => todos.length > 0,
     $ =>
-      $.h2($ => $.text('TODOs')).ul($ =>
-        $.class('list').forEach($ =>
-          $.li($ =>
+      $.H2($ => $.text('TODOs')).UL($ =>
+        $.class('list').ForEach($ =>
+          $.LI($ =>
             $.class('list-item')
-              .inputCheckbox($ => $.disabled(true))
+              .INPUT_CHECKBOX($ => $.disabled(true))
               .text(' ')
               .text(s => s)
           )
@@ -39,21 +39,21 @@ export const todos = mapField<BaseDoc, unknown, unknown, 'todos'>('todos', $ =>
   )
 )
 
-export const examples = mapField<BaseDoc, unknown, unknown, 'examples'>(
+export const examples = MapField<BaseDoc, unknown, unknown, 'examples'>(
   'examples',
   $ =>
-    $.when(
+    $.When(
       todos => todos.length > 0,
       $ =>
-        $.p($ =>
+        $.P($ =>
           $.class('title is-6').text(s =>
             s.length > 1 ? 'Examples' : 'Example'
           )
-        ).ul($ =>
-          $.class('list examples').forEach($ =>
-            $.li($ =>
-              $.class('list-item').pre($ =>
-                $.class('ts language-ts example').text(s => highlight(s))
+        ).UL($ =>
+          $.class('list examples').ForEach($ =>
+            $.LI($ =>
+              $.class('list-item').PRE($ =>
+                $.class('ts language-ts example').text(highlight)
               )
             )
           )
@@ -61,7 +61,7 @@ export const examples = mapField<BaseDoc, unknown, unknown, 'examples'>(
     )
 )
 
-export const tags = mapState<
+export const tags = MapState<
   BaseDoc,
   { type: string; name: string }[],
   unknown,
@@ -75,17 +75,17 @@ export const tags = mapState<
     return tags
   },
   $ =>
-    $.when(
+    $.When(
       tags => tags.length > 0,
       $ =>
-        $.div($ =>
-          $.class('tags').forEach($ =>
+        $.DIV($ =>
+          $.class('tags').ForEach($ =>
             $.spanEl($ => $.class(s => `tag is-${s.type}`).text(s => s.name))
           )
         )
     )
 )
 
-export const baseDoc = fragment<BaseDoc, unknown, unknown>($ =>
-  $.appendMany(tags, description, todos, examples)
+export const baseDoc = Fragment<BaseDoc, unknown, unknown>($ =>
+  $.AppendMany(tags, description, todos, examples)
 )

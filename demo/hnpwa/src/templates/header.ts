@@ -13,21 +13,21 @@ limitations under the License.
 
 import { Action } from '../action'
 import { Route, Feed, toTitle } from '../route'
-import { header, i, fragment } from 'tempo-dom/lib/html'
+import { HEADER, I, Fragment } from 'tempo-dom/lib/html'
 import { linkRoute } from './link_route'
-import { svg } from 'tempo-dom/lib/svg'
+import { SVG } from 'tempo-dom/lib/svg'
 
-const logo = svg<Route, Action, unknown>($ =>
+const logo = SVG<Route, Action, unknown>($ =>
   $.width(32)
     .height(32)
     .viewBox([0, 0, 32, 32])
-    .g($ =>
+    .G($ =>
       $.fill('#ffffff')
-        .rect($ => $.x(0).y(0).width(8).height(8))
-        .rect($ => $.x(11).y(0).width(8).height(8))
-        .rect($ => $.x(22).y(0).width(8).height(8))
-        .rect($ => $.x(11).y(11).width(8).height(8))
-        .rect($ => $.x(11).y(22).width(8).height(8))
+        .RECT($ => $.x(0).y(0).width(8).height(8))
+        .RECT($ => $.x(11).y(0).width(8).height(8))
+        .RECT($ => $.x(22).y(0).width(8).height(8))
+        .RECT($ => $.x(11).y(11).width(8).height(8))
+        .RECT($ => $.x(11).y(22).width(8).height(8))
     )
 )
 
@@ -40,30 +40,30 @@ const headerLink = (feed: Feed) => {
         return false
     }
   }
-  return fragment<Route, Action, unknown>($ =>
-    $.when(condition, $ =>
-      $.spanEl($ => $.ariaCurrent('page').append(toTitle(Route.feeds(feed, 1))))
-    ).unless(condition, $ =>
-      $.append(linkRoute({ route: Route.feeds(feed, 1) }))
+  return Fragment<Route, Action, unknown>($ =>
+    $.When(condition, $ =>
+      $.SPAN($ => $.ariaCurrent('page').Append(toTitle(Route.feeds(feed, 1))))
+    ).Unless(condition, $ =>
+      $.Append(linkRoute({ route: Route.feeds(feed, 1) }))
     )
   )
 }
 
-export const appHeader = header<Route, Action, unknown>($ =>
-  $.append(
+export const appHeader = HEADER<Route, Action, unknown>($ =>
+  $.Append(
     linkRoute(
       { route: Route.root },
-      i<Route, Action, unknown>($ =>
-        $.ariaLabel('Homepage').class('logo').append(logo)
+      I<Route, Action, unknown>($ =>
+        $.ariaLabel('Homepage').class('logo').Append(logo)
       ).build()
     )
   )
-    .nav($ =>
-      $.appendMany(
+    .NAV($ =>
+      $.AppendMany(
         ...[Feed.top, Feed.new, Feed.ask, Feed.show, Feed.jobs].map(headerLink)
       )
     )
-    .append(
+    .Append(
       linkRoute(
         {
           className: 'githublink',

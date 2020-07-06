@@ -11,17 +11,17 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { div } from 'tempo-dom/lib/html'
+import { DIV } from 'tempo-dom/lib/html'
 import { State } from './state'
 import { Action } from './action'
 import { optionsSelection } from './template/options_selection'
 import { tableView } from './template/table_view'
 
-export const template = div<State, Action, unknown>($ =>
+export const template = DIV<State, Action, unknown>($ =>
   $.class('display_test')
-    .mapState(
+    .MapState(
       s => s.options,
-      $ => $.append(optionsSelection)
+      $ => $.Append(optionsSelection)
     )
-    .append(tableView)
+    .Append(tableView)
 )

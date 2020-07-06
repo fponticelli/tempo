@@ -11,7 +11,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { fragment } from 'tempo-dom/lib/html'
+import { Fragment } from 'tempo-dom/lib/html'
 import { EventHandler } from 'tempo-dom/lib/value'
 import { Action } from './action'
 import { State, Filter, Todo } from './state'
@@ -26,14 +26,14 @@ const selectedF = (filter: Filter) => (state: State) =>
 const isEditing = (state: State, todo: Todo) =>
   (state.editing && state.editing.id === todo.id) || false
 
-export const template = fragment<State, Action, unknown>($ =>
-  $.section($ =>
+export const template = Fragment<State, Action, unknown>($ =>
+  $.SECTION($ =>
     $.class('todoapp')
-      .div($ =>
-        $.header($ =>
+      .DIV($ =>
+        $.HEADER($ =>
           $.class('header')
-            .h1($ => $.text('todos'))
-            .inputText($ =>
+            .H1($ => $.text('todos'))
+            .INPUT_TEXT($ =>
               $.class('new-todo')
                 .placeholder('What needs to be done?')
                 .autoFocus(s => s.editing == null)
@@ -48,47 +48,47 @@ export const template = fragment<State, Action, unknown>($ =>
                   }
                 })
             )
-        ).section($ =>
+        ).SECTION($ =>
           $.class('main')
             .style('visibility', s => (s.todos.length === 0 ? 'hidden' : ''))
-            .inputCheckbox($ =>
+            .INPUT_CHECKBOX($ =>
               $.id('toggle-all')
                 .class('toggle-all')
                 .checked(s => s.completed === s.todos.length)
                 .onClick(() => Action.toggleAllTodo)
             )
-            .labelEl($ => $.for('toggle-all').text('Mark all as complete'))
-            .ul($ =>
-              $.class('todo-list').iterate(
+            .LABEL($ => $.for('toggle-all').text('Mark all as complete'))
+            .UL($ =>
+              $.class('todo-list').Iterate(
                 s => s.filtered,
                 $ =>
-                  $.li($ =>
+                  $.LI($ =>
                     $.class(([todo, state]) => ({
                       completed: todo.completed,
                       editing: isEditing(state, todo)
                     }))
-                      .div($ =>
+                      .DIV($ =>
                         $.class('view')
-                          .inputCheckbox($ =>
+                          .INPUT_CHECKBOX($ =>
                             $.class('toggle')
                               .checked(([todo]) => todo.completed)
                               .onChange(([todo]) => Action.toggleTodo(todo.id))
                           )
-                          .labelEl($ =>
+                          .LABEL($ =>
                             $.onDblClick(([todo]) =>
                               Action.editingTodo(todo.id, todo.title)
                             ).text(([todo]) => todo.title)
                           )
-                          .button($ =>
+                          .BUTTON($ =>
                             $.class('destroy').onClick(([todo]) =>
                               Action.removeTodo(todo.id)
                             )
                           )
                       )
-                      .when(
+                      .When(
                         ([todo, state]) => isEditing(state, todo),
                         $ =>
-                          $.inputText($ =>
+                          $.INPUT_TEXT($ =>
                             $.class('edit')
                               .value(
                                 ([_, state]) =>
@@ -127,10 +127,10 @@ export const template = fragment<State, Action, unknown>($ =>
             )
         )
       )
-      .footer($ =>
+      .FOOTER($ =>
         $.class('footer')
           .style('display', s => (s.todos.length === 0 ? 'none' : 'block'))
-          .spanEl($ =>
+          .SPAN($ =>
             $.class('todo-count').text(s => {
               const left = s.todos.length - s.completed
               if (left === 1) {
@@ -140,26 +140,26 @@ export const template = fragment<State, Action, unknown>($ =>
               }
             })
           )
-          .ul($ =>
+          .UL($ =>
             $.class('filters')
-              .li($ =>
-                $.a($ =>
+              .LI($ =>
+                $.A($ =>
                   $.href('#/')
                     .class(selectedF(Filter.All))
                     .onClick(changeF(Filter.All))
                     .text('All')
                 )
               )
-              .li($ =>
-                $.a($ =>
+              .LI($ =>
+                $.A($ =>
                   $.href('#/active')
                     .class(selectedF(Filter.Active))
                     .onClick(changeF(Filter.Active))
                     .text('Active')
                 )
               )
-              .li($ =>
-                $.a($ =>
+              .LI($ =>
+                $.A($ =>
                   $.href('#/completed')
                     .class(selectedF(Filter.Completed))
                     .onClick(changeF(Filter.Completed))
@@ -167,26 +167,26 @@ export const template = fragment<State, Action, unknown>($ =>
                 )
               )
           )
-          .when(
+          .When(
             s => s.completed > 0,
             $ =>
-              $.button($ =>
+              $.BUTTON($ =>
                 $.class('clear-completed')
                   .onClick(() => Action.clearCompleted)
                   .text('Clear completed')
               )
           )
       )
-  ).footer($ =>
+  ).FOOTER($ =>
     $.class('info')
-      .p($ => $.text('Double-click to edit a todo'))
-      .p($ =>
+      .P($ => $.text('Double-click to edit a todo'))
+      .P($ =>
         $.text('Created by ')
-          .a($ => $.href('http://github.com/fponticelli'))
+          .A($ => $.href('http://github.com/fponticelli'))
           .text('Franco Ponticelli')
       )
-      .p($ =>
-        $.text('Part of ').a($ => $.href('http://todomvc.com').text('TodoMVC'))
+      .P($ =>
+        $.text('Part of ').A($ => $.href('http://todomvc.com').text('TodoMVC'))
       )
   )
 )

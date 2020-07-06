@@ -11,17 +11,17 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { div } from 'tempo-dom/lib/html'
+import { DIV } from 'tempo-dom/lib/html'
 import { Action } from '../action'
 import { TestOptions } from '../state'
 
-export const optionsSelection = div<TestOptions, Action, unknown>($ =>
-  $.table($ =>
-    $.tr($ =>
-      $.th($ =>
-        $.labelEl($ => $.for('options_max_time').text('max execution time'))
-      ).td($ =>
-        $.class('option-value').inputNumber($ =>
+export const optionsSelection = DIV<TestOptions, Action, unknown>($ =>
+  $.TABLE($ =>
+    $.TR($ =>
+      $.TH($ =>
+        $.LABEL($ => $.for('options_max_time').text('max execution time'))
+      ).TD($ =>
+        $.class('option-value').INPUT_NUMBER($ =>
           $.id('options_max_time')
             .min(0)
             .value(s => s.maxTime)

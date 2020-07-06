@@ -1,4 +1,4 @@
-import { div, aside, lazy, fragment } from 'tempo-dom/lib/html'
+import { DIV, ASIDE, Lazy, Fragment } from 'tempo-dom/lib/html'
 import { Action } from '../action'
 import { Toc, ApiRef } from '../toc'
 import { maybeLink } from './link'
@@ -19,21 +19,21 @@ import { DOMTemplate } from 'tempo-dom/lib/template'
 type Sidebar = { toc: Toc; route: Route }
 
 let section: DOMTemplate<[string, SectionRef, Route], Action, unknown>
-section = lazy(() =>
-  div<[string, SectionRef, Route], Action, unknown>($ =>
-    $.when(
+section = Lazy(() =>
+  DIV<[string, SectionRef, Route], Action, unknown>($ =>
+    $.When(
       ([title]) => !!title,
-      $ => $.p($ => $.class('menu-label').text(([title]) => title))
-    ).when(
+      $ => $.P($ => $.class('menu-label').text(([title]) => title))
+    ).When(
       ([_, section]) =>
         section.pages.length > 0 || keys(section.sections).length > 0,
       $ =>
-        $.ul($ =>
-          $.iterate(
+        $.UL($ =>
+          $.Iterate(
             ([_, s]) => s.pages,
             $ =>
-              $.li($ =>
-                $.append(
+              $.LI($ =>
+                $.Append(
                   maybeLink({
                     label: ([page]) => page.title,
                     route: ([page, [_1, _2, route]]) =>
@@ -43,11 +43,11 @@ section = lazy(() =>
                   })
                 )
               )
-          ).when(
+          ).When(
             ([_, section]) => keys(section.sections).length > 0,
             $ =>
-              $.li($ =>
-                $.iterate(
+              $.LI($ =>
+                $.Iterate(
                   ([_, section, route]) =>
                     keys(section.sections).map(sub => [
                       sub,
@@ -55,9 +55,9 @@ section = lazy(() =>
                       route
                     ]),
                   $ =>
-                    $.mapState(
+                    $.MapState(
                       ([_, section]) => section,
-                      $ => $.append(section)
+                      $ => $.Append(section)
                     )
                 )
               )
@@ -67,12 +67,12 @@ section = lazy(() =>
   )
 )
 
-const api = fragment<
+const api = Fragment<
   [ApiRef, { apis: ApiRef[]; project: ProjectRef; route: Route }, number],
   Action,
   unknown
 >($ =>
-  $.append(
+  $.Append(
     maybeLink({
       label: ([r]) => r.title,
       route: ([r, p]) =>
@@ -83,9 +83,9 @@ const api = fragment<
   )
 )
 
-const project = div<[ProjectRef, Sidebar, number], Action, unknown>($ =>
-  $.p($ =>
-    $.append(
+const project = DIV<[ProjectRef, Sidebar, number], Action, unknown>($ =>
+  $.P($ =>
+    $.Append(
       maybeLink({
         label: ([s]) => `v.${s.version}`,
         route: ([p, s]) =>
@@ -94,7 +94,7 @@ const project = div<[ProjectRef, Sidebar, number], Action, unknown>($ =>
             : some(Route.changelog(p.name)),
         class: 'is-pulled-right is-size-7'
       })
-    ).append(
+    ).Append(
       maybeLink({
         label: ([p]) => p.title,
         route: ([p, s]) =>
@@ -104,36 +104,36 @@ const project = div<[ProjectRef, Sidebar, number], Action, unknown>($ =>
         class: 'is-uppercase has-text-weight-bold'
       })
     )
-  ).div($ =>
+  ).DIV($ =>
     $.class('is-size-7')
       .text(([s]) => s.description)
-      .when(
+      .When(
         ([p, s]) =>
           isApiProjectRoute(s.route, p.name) ||
           sameRoute(Route.project(p.name), s.route),
         $ =>
-          $.div($ =>
-            $.class('box api-box').mapState(
+          $.DIV($ =>
+            $.class('box api-box').MapState(
               ([project, sidebar]) => ({
                 apis: sidebar.toc.apis[project.name],
                 project,
                 route: sidebar.route
               }),
               $ =>
-                $.mapState(
+                $.MapState(
                   state => ({
                     apis: state.apis,
                     project: state.project,
                     route: state.route
                   }),
                   $ =>
-                    $.when(
+                    $.When(
                       state => state.apis.length > 0,
                       $ =>
-                        $.ul($ =>
-                          $.class('links-list').iterate(
+                        $.UL($ =>
+                          $.class('links-list').Iterate(
                             state => state.apis,
-                            $ => $.li($ => $.append(api))
+                            $ => $.LI($ => $.Append(api))
                           )
                         )
                     )
@@ -144,20 +144,20 @@ const project = div<[ProjectRef, Sidebar, number], Action, unknown>($ =>
   )
 )
 
-export const sidebar = aside<Sidebar, Action, unknown>($ =>
+export const sidebar = ASIDE<Sidebar, Action, unknown>($ =>
   $.class('menu')
-    .mapState(
+    .MapState(
       sidebar =>
         ['', sidebar.toc as SectionRef, sidebar.route] as [
           string,
           SectionRef,
           Route
         ],
-      $ => $.append(section)
+      $ => $.Append(section)
     )
-    .hr($ => $.class('sidebar-separator'))
-    .iterate(
+    .HR($ => $.class('sidebar-separator'))
+    .Iterate(
       s => s.toc.projects,
-      $ => $.append(project)
+      $ => $.Append(project)
     )
 )

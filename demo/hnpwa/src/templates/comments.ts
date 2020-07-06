@@ -13,35 +13,35 @@ limitations under the License.
 
 import { Item } from '../state'
 import { Action } from '../action'
-import { lazy, li, when } from 'tempo-dom/lib/html'
+import { Lazy, LI, When } from 'tempo-dom/lib/html'
 import { linkRoute } from './link_route'
 import { Route } from '../route'
 import { unsafeHtml } from 'tempo-dom/lib/lifecycle/unsafe_html'
 import { DOMTemplate } from 'tempo-dom/lib/template'
 
-export const commentTemplate: DOMTemplate<Item, Action, unknown> = lazy<
+export const commentTemplate: DOMTemplate<Item, Action, unknown> = Lazy<
   Item,
   Action,
   unknown
 >(() =>
-  li<Item, Action, unknown>($ =>
-    $.div($ =>
+  LI<Item, Action, unknown>($ =>
+    $.DIV($ =>
       $.class('comment-meta')
-        .append(linkRoute({ route: item => Route.user(item.user) }))
+        .Append(linkRoute({ route: item => Route.user(item.user) }))
         .text(' ')
         .text(s => s.time_ago)
     )
-      .div($ => $.lifecycle(unsafeHtml(s => s.content)))
-      .mapState(
+      .DIV($ => $.Lifecycle(unsafeHtml(s => s.content)))
+      .MapState(
         s => s.comments ?? [],
-        $ => $.append(commentsTemplate)
+        $ => $.Append(commentsTemplate)
       )
   )
 )
 
-export const commentsTemplate = lazy<Item[], Action, unknown>(() =>
-  when(
+export const commentsTemplate = Lazy<Item[], Action, unknown>(() =>
+  When(
     comments => comments.length > 0,
-    $ => $.ul($ => $.forEach($ => $.append(commentTemplate)))
+    $ => $.UL($ => $.ForEach($ => $.Append(commentTemplate)))
   )
 )

@@ -11,27 +11,27 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { article } from 'tempo-dom/lib/html'
+import { ARTICLE } from 'tempo-dom/lib/html'
 import { Article } from '../state'
 import { Action } from '../action'
 import { commentsTemplate } from './comments'
 import { itemFooterTemplate, itemUrlTemplate } from './page_feed'
 import { unsafeHtml } from 'tempo-dom/lib/lifecycle/unsafe_html'
 
-export const articleTemplate = article<Article, Action, unknown>($ =>
-  $.mapState(
+export const articleTemplate = ARTICLE<Article, Action, unknown>($ =>
+  $.MapState(
     s => s.item,
     $ =>
-      $.section($ =>
-        $.append(itemUrlTemplate)
-          .spanEl($ => $.class('domain').text(s => s.domain))
-          .append(itemFooterTemplate)
+      $.SECTION($ =>
+        $.Append(itemUrlTemplate)
+          .SPAN($ => $.class('domain').text(s => s.domain))
+          .Append(itemFooterTemplate)
       )
-        .div($ => $.lifecycle(unsafeHtml(s => s.content)))
-        .section($ =>
-          $.class('comments-view').mapState(
+        .DIV($ => $.Lifecycle(unsafeHtml(s => s.content)))
+        .SECTION($ =>
+          $.class('comments-view').MapState(
             s => s.comments ?? [],
-            $ => $.append(commentsTemplate)
+            $ => $.Append(commentsTemplate)
           )
         )
   )

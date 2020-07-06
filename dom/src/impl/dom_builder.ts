@@ -109,13 +109,13 @@ export function toggleToString(name: string) {
 export class DOMBuilder<State, Action, Query> {
   protected _children: DOMTemplate<State, Action, Query>[] = []
   // children
-  append(
+  Append(
     el: DOMChild<State, Action, Query> | IBuilder<State, Action, Query>
   ): this {
     this._children.push(childOrBuilderToTemplate(el))
     return this
   }
-  appendMany(
+  AppendMany(
     ...els: (DOMChild<State, Action, Query> | IBuilder<State, Action, Query>)[]
   ): this {
     this._children.push(...els.map(childOrBuilderToTemplate))

@@ -45,12 +45,12 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
   Action,
   Query
 > {
-  el(
+  El(
     init: (
       builder: HTMLElementBuilder<State, Action, Query, HTMLElement>
     ) => void = () => {}
   ): this {
-    const builder = el<State, Action, Query>(name)
+    const builder = El<State, Action, Query>(name)
     init(builder)
     this._children.push(builder.build())
     return this
@@ -61,7 +61,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
   }
 
   // transform
-  adapter<StateB, ActionB>(props: {
+  Adapter<StateB, ActionB>(props: {
     bootstrapState: (outer: State) => StateB
     mergeStates?: Attribute<
       {
@@ -73,7 +73,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
     propagate?: (args: PropagateArg<State, StateB, Action, ActionB>) => void
     child: ComponentTemplate<StateB, ActionB, Query>
   }) {
-    return this.append(
+    return this.Append(
       new AdapterTemplate(
         props.bootstrapState,
         props.mergeStates,
@@ -83,20 +83,20 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
     )
   }
 
-  component(
+  Component(
     reducer: (state: State, action: Action) => State,
     init: (builder: ComponentHTMLBuilder<State, Action, Query>) => void
   ) {
     const builder = new ComponentHTMLBuilder<State, Action, Query>(reducer)
     init(builder)
-    return this.append(builder.build())
+    return this.Append(builder.build())
   }
 
-  localAdapter(props: {
+  LocalAdapter(props: {
     propagate?: (args: PropagateArg<State, State, Action, Action>) => void
     child: ComponentTemplate<State, Action, Query>
   }) {
-    return this.append(
+    return this.Append(
       new AdapterTemplate(
         state => state,
         ({ outerState }) => outerState,
@@ -106,7 +106,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
     )
   }
 
-  holdState<StateB, StateC>(
+  HoldState<StateB, StateC>(
     holdf: HoldF<
       State,
       StateB,
@@ -116,7 +116,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       FragmentHTMLBuilder<StateC, Action, Query>
     >
   ): this {
-    return this.append(
+    return this.Append(
       new HoldStateTemplate(
         holdf,
         new FragmentHTMLBuilder<StateC, Action, Query>()
@@ -124,25 +124,25 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
     )
   }
 
-  mapState<StateB>(
+  MapState<StateB>(
     map: (state: State) => StateB | undefined,
     init: (builder: MapStateHTMLBuilder<State, StateB, Action, Query>) => void
   ) {
     const builder = new MapStateHTMLBuilder<State, StateB, Action, Query>(map)
     init(builder)
-    return this.append(builder.build())
+    return this.Append(builder.build())
   }
 
-  mapField<Key extends keyof State>(
+  MapField<Key extends keyof State>(
     field: Key,
     init: (
       builder: MapStateHTMLBuilder<State, State[Key], Action, Query>
     ) => void
   ) {
-    return this.mapState<State[Key]>((v: State): State[Key] => v[field], init)
+    return this.MapState<State[Key]>((v: State): State[Key] => v[field], init)
   }
 
-  mapStateAndKeep<StateB>(
+  MapStateAndKeep<StateB>(
     map: (state: State) => StateB | undefined,
     init: (
       builder: MapStateHTMLBuilder<State, [StateB, State], Action, Query>
@@ -162,33 +162,33 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       }
     })
     init(builder)
-    return this.append(builder.build())
+    return this.Append(builder.build())
   }
 
-  mapAction<ActionB>(
+  MapAction<ActionB>(
     map: DerivedValue<ActionB, Action>,
     init: (builder: MapActionHTMLBuilder<State, Action, ActionB, Query>) => void
   ) {
     const builder = new MapActionHTMLBuilder<State, Action, ActionB, Query>(map)
     init(builder)
-    return this.append(builder.build())
+    return this.Append(builder.build())
   }
 
-  mapQuery<QueryB>(
+  MapQuery<QueryB>(
     map: DerivedValue<Query, QueryB>,
     init: (builder: MapQueryHTMLBuilder<State, Action, Query, QueryB>) => void
   ) {
     const builder = new MapQueryHTMLBuilder<State, Action, Query, QueryB>(map)
     init(builder)
-    return this.append(builder.build())
+    return this.Append(builder.build())
   }
 
-  matchBool(props: {
+  MatchBool(props: {
     condition: Attribute<State, boolean>
     true: DOMChild<State, Action, Query> | IBuilder<State, Action, Query>
     false: DOMChild<State, Action, Query> | IBuilder<State, Action, Query>
   }): this {
-    return this.append(
+    return this.Append(
       new MatchBoolTemplate<State, Action, Query>(
         props.condition,
         props.true,
@@ -197,15 +197,15 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
     )
   }
 
-  lazy(
+  Lazy(
     lazyf: () =>
       | DOMTemplate<State, Action, Query>
       | IBuilder<State, Action, Query>
   ) {
-    return this.append(new LazyTemplate(lazyf))
+    return this.Append(new LazyTemplate(lazyf))
   }
 
-  forEach(
+  ForEach(
     init: (
       builder: UntilHTMLBuilder<
         State,
@@ -215,7 +215,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       >
     ) => void
   ): this {
-    return this.until(
+    return this.Until(
       ({
         state,
         index
@@ -227,13 +227,13 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
     )
   }
 
-  fragment(init: (builder: FragmentHTMLBuilder<State, Action, Query>) => void) {
+  Fragment(init: (builder: FragmentHTMLBuilder<State, Action, Query>) => void) {
     const builder = new FragmentHTMLBuilder<State, Action, Query>()
     init(builder)
-    return this.append(builder.build())
+    return this.Append(builder.build())
   }
 
-  iterate<Items extends any[]>(
+  Iterate<Items extends any[]>(
     map: DerivedValue<State, Items>,
     init: (
       builder: UntilHTMLBuilder<
@@ -244,13 +244,13 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       >
     ) => void
   ) {
-    return this.mapState<[Items, State]>(
+    return this.MapState<[Items, State]>(
       (outer: State): [Items, State] | undefined => {
         const items = resolveAttribute(map)(outer)
         return items !== undefined ? [items, outer] : undefined
       },
       $ => {
-        $.until<[Items[number], State, number]>(
+        $.Until<[Items[number], State, number]>(
           ({ state: [items, state], index }) =>
             items[index] && [items[index], state, index],
           init
@@ -259,20 +259,20 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
     )
   }
 
-  portal(
+  Portal(
     appendChild: (doc: Document) => Element,
     init: (builder: PortalBuilder<State, Action, Query>) => void
   ): this {
     const builder = new PortalBuilder<State, Action, Query>(appendChild)
     init(builder)
-    return this.append(builder.build())
+    return this.Append(builder.build())
   }
 
-  portalWithSelector(
+  PortalWithSelector(
     selector: string,
     init: (builder: PortalBuilder<State, Action, Query>) => void
   ): this {
-    return this.portal(doc => {
+    return this.Portal(doc => {
       const el = doc.querySelector(selector)
       if (!el) {
         throw new Error(`selector doesn't match any element: "${selector}"`)
@@ -281,19 +281,19 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
     }, init)
   }
 
-  headPortal(
+  HeadPortal(
     init: (builder: PortalBuilder<State, Action, Query>) => void
   ): this {
-    return this.portal(doc => doc.head, init)
+    return this.Portal(doc => doc.head, init)
   }
 
-  bodyPortal(
+  BodyPortal(
     init: (builder: PortalBuilder<State, Action, Query>) => void
   ): this {
-    return this.portal(doc => doc.body, init)
+    return this.Portal(doc => doc.body, init)
   }
 
-  // simpleComponent(
+  // SimpleComponent(
   //   init: (builder: SimpleComponentBuilder<State, Query>) => void
   // ) {
   //   const builder = new SimpleComponentBuilder<State, Query>()
@@ -301,23 +301,23 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
   //   return this.append(builder.build())
   // }
 
-  unless(
+  Unless(
     condition: DerivedValue<State, boolean>,
     init: (builder: MapStateHTMLBuilder<State, State, Action, Query>) => void
   ) {
-    return this.when(s => !condition(s), init)
+    return this.When(s => !condition(s), init)
   }
 
-  until<StateB>(
+  Until<StateB>(
     next: DerivedValue<{ state: State; index: number }, StateB>,
     init: (builder: UntilHTMLBuilder<State, StateB, Action, Query>) => void
   ) {
     const builder = new UntilHTMLBuilder<State, StateB, Action, Query>(next)
     init(builder)
-    return this.append(builder.build())
+    return this.Append(builder.build())
   }
 
-  when(
+  When(
     condition: DerivedValue<State, boolean>,
     init: (builder: MapStateHTMLBuilder<State, State, Action, Query>) => void
   ) {
@@ -329,11 +329,11 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       }
     })
     init(builder)
-    return this.append(builder.build())
+    return this.Append(builder.build())
   }
 
   // derived children
-  a(
+  A(
     init?: (builder: HTMLAnchorElementBuilder<State, Action, Query>) => void
   ): this {
     return initBuilder(
@@ -342,7 +342,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  abbrEl(
+  ABBR(
     init?: (
       builder: HTMLElementBuilder<State, Action, Query, HTMLElement>
     ) => void
@@ -353,7 +353,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  address(
+  ADDRESS(
     init?: (
       builder: HTMLElementBuilder<State, Action, Query, HTMLElement>
     ) => void
@@ -364,7 +364,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  area(
+  AREA(
     init?: (builder: HTMLAreaElementBuilder<State, Action, Query>) => void
   ): this {
     return initBuilder(
@@ -373,7 +373,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  article(
+  ARTICLE(
     init?: (
       builder: HTMLElementBuilder<State, Action, Query, HTMLElement>
     ) => void
@@ -384,7 +384,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  aside(
+  ASIDE(
     init?: (
       builder: HTMLElementBuilder<State, Action, Query, HTMLElement>
     ) => void
@@ -395,7 +395,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  audio(
+  AUDIO(
     init?: (builder: HTMLAudioElementBuilder<State, Action, Query>) => void
   ): this {
     return initBuilder(
@@ -404,7 +404,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  b(
+  B(
     init?: (
       builder: HTMLElementBuilder<State, Action, Query, HTMLElement>
     ) => void
@@ -415,7 +415,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  base(
+  BASE(
     init?: (builder: HTMLBaseElementBuilder<State, Action, Query>) => void
   ): this {
     return initBuilder(
@@ -424,7 +424,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  bdi(
+  BDI(
     init?: (
       builder: HTMLElementBuilder<State, Action, Query, HTMLElement>
     ) => void
@@ -435,7 +435,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  bdo(
+  BDO(
     init?: (
       builder: HTMLElementBuilder<State, Action, Query, HTMLElement>
     ) => void
@@ -446,7 +446,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  blockquote(
+  BLOCKQUOTE(
     init?: (builder: HTMLQuoteElementBuilder<State, Action, Query>) => void
   ): this {
     return initBuilder(
@@ -455,7 +455,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  body(
+  BODY(
     init?: (
       builder: HTMLElementBuilder<State, Action, Query, HTMLBodyElement>
     ) => void
@@ -466,7 +466,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  br(
+  BR(
     init?: (
       builder: HTMLElementBuilder<State, Action, Query, HTMLBRElement>
     ) => void
@@ -477,7 +477,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  button(
+  BUTTON(
     init?: (builder: HTMLButtonElementBuilder<State, Action, Query>) => void
   ): this {
     return initBuilder(
@@ -486,7 +486,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  canvas(
+  CANVAS(
     init?: (builder: HTMLCanvasElementBuilder<State, Action, Query>) => void
   ): this {
     return initBuilder(
@@ -495,7 +495,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  caption(
+  CAPTION(
     init?: (
       builder: HTMLElementBuilder<State, Action, Query, HTMLTableCaptionElement>
     ) => void
@@ -508,7 +508,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  citeEl(
+  CITE(
     init?: (builder: HTMLQuoteElementBuilder<State, Action, Query>) => void
   ): this {
     return initBuilder(
@@ -517,7 +517,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  code(
+  CODE(
     init?: (
       builder: HTMLElementBuilder<State, Action, Query, HTMLElement>
     ) => void
@@ -528,7 +528,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  col(
+  COL(
     init?: (builder: HTMLTableColElementBuilder<State, Action, Query>) => void
   ): this {
     return initBuilder(
@@ -537,7 +537,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  colgroup(
+  COLGROUP(
     init?: (builder: HTMLTableColElementBuilder<State, Action, Query>) => void
   ): this {
     return initBuilder(
@@ -546,7 +546,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  dataEl(
+  DATA(
     init?: (builder: HTMLDataElementBuilder<State, Action, Query>) => void
   ): this {
     return initBuilder(
@@ -555,7 +555,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  datalist(
+  DATALIST(
     init?: (
       builder: HTMLElementBuilder<State, Action, Query, HTMLDataListElement>
     ) => void
@@ -568,7 +568,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  dd(
+  DD(
     init?: (
       builder: HTMLElementBuilder<State, Action, Query, HTMLElement>
     ) => void
@@ -579,7 +579,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  del(
+  DEL(
     init?: (builder: HTMLModElementBuilder<State, Action, Query>) => void
   ): this {
     return initBuilder(
@@ -588,7 +588,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  details(
+  DETAILS(
     init?: (builder: HTMLDetailsElementBuilder<State, Action, Query>) => void
   ): this {
     return initBuilder(
@@ -597,7 +597,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  dfn(
+  DFN(
     init?: (
       builder: HTMLElementBuilder<State, Action, Query, HTMLElement>
     ) => void
@@ -608,7 +608,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  dialog(
+  DIALOG(
     init?: (builder: HTMLDialogElementBuilder<State, Action, Query>) => void
   ): this {
     return initBuilder(
@@ -617,7 +617,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  div(
+  DIV(
     init?: (
       builder: HTMLElementBuilder<State, Action, Query, HTMLDivElement>
     ) => void
@@ -628,7 +628,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  dl(
+  DL(
     init?: (
       builder: HTMLElementBuilder<State, Action, Query, HTMLDListElement>
     ) => void
@@ -639,7 +639,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  dt(
+  DT(
     init?: (
       builder: HTMLElementBuilder<State, Action, Query, HTMLElement>
     ) => void
@@ -650,7 +650,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  em(
+  EM(
     init?: (
       builder: HTMLElementBuilder<State, Action, Query, HTMLElement>
     ) => void
@@ -661,7 +661,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  embed(
+  EMBED(
     init?: (builder: HTMLEmbedElementBuilder<State, Action, Query>) => void
   ): this {
     return initBuilder(
@@ -670,7 +670,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  fieldset(
+  FIELDSET(
     init?: (builder: HTMLFieldSetElementBuilder<State, Action, Query>) => void
   ): this {
     return initBuilder(
@@ -679,7 +679,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  figcaption(
+  FIG_CAPTION(
     init?: (
       builder: HTMLElementBuilder<State, Action, Query, HTMLElement>
     ) => void
@@ -690,7 +690,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  figure(
+  FIGURE(
     init?: (
       builder: HTMLElementBuilder<State, Action, Query, HTMLElement>
     ) => void
@@ -701,7 +701,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  footer(
+  FOOTER(
     init?: (
       builder: HTMLElementBuilder<State, Action, Query, HTMLElement>
     ) => void
@@ -712,7 +712,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  formEl(
+  FORM(
     init?: (builder: HTMLFormElementBuilder<State, Action, Query>) => void
   ): this {
     return initBuilder(
@@ -721,7 +721,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  h1(
+  H1(
     init?: (
       builder: HTMLElementBuilder<State, Action, Query, HTMLHeadingElement>
     ) => void
@@ -732,7 +732,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  h2(
+  H2(
     init?: (
       builder: HTMLElementBuilder<State, Action, Query, HTMLHeadingElement>
     ) => void
@@ -743,7 +743,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  h3(
+  H3(
     init?: (
       builder: HTMLElementBuilder<State, Action, Query, HTMLHeadingElement>
     ) => void
@@ -754,7 +754,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  h4(
+  H4(
     init?: (
       builder: HTMLElementBuilder<State, Action, Query, HTMLHeadingElement>
     ) => void
@@ -765,7 +765,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  h5(
+  H5(
     init?: (
       builder: HTMLElementBuilder<State, Action, Query, HTMLElement>
     ) => void
@@ -776,7 +776,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  h6(
+  H6(
     init?: (
       builder: HTMLElementBuilder<State, Action, Query, HTMLElement>
     ) => void
@@ -787,7 +787,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  head(
+  HEAD(
     init?: (
       builder: HTMLElementBuilder<State, Action, Query, HTMLHeadElement>
     ) => void
@@ -798,7 +798,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  header(
+  HEADER(
     init?: (
       builder: HTMLElementBuilder<State, Action, Query, HTMLElement>
     ) => void
@@ -809,7 +809,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  hgroup(
+  HGROUP(
     init?: (
       builder: HTMLElementBuilder<State, Action, Query, HTMLElement>
     ) => void
@@ -820,7 +820,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  hr(
+  HR(
     init?: (
       builder: HTMLElementBuilder<State, Action, Query, HTMLHRElement>
     ) => void
@@ -831,7 +831,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  html(
+  HTML(
     init?: (builder: HTMLHtmlElementBuilder<State, Action, Query>) => void
   ): this {
     return initBuilder(
@@ -840,7 +840,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  i(
+  I(
     init?: (
       builder: HTMLElementBuilder<State, Action, Query, HTMLElement>
     ) => void
@@ -851,7 +851,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  iframe(
+  IFRAME(
     init?: (builder: HTMLIFrameElementBuilder<State, Action, Query>) => void
   ): this {
     return initBuilder(
@@ -860,7 +860,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  img(
+  IMG(
     init?: (builder: HTMLImageElementBuilder<State, Action, Query>) => void
   ): this {
     return initBuilder(
@@ -869,7 +869,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  input(
+  INPUT(
     init?: (builder: HTMLInputElementBuilder<State, Action, Query>) => void
   ): this {
     return initBuilder(
@@ -879,14 +879,14 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
     )
   }
 
-  inputButton(
+  INPUT_BUTTON(
     init?: (builder: HTMLInputElementBuilder<State, Action, Query>) => void
   ): this {
     const builder = new HTMLInputElementBuilder<State, Action, Query>('input')
     builder.type('button')
     return initBuilder(builder, init, this)
   }
-  inputCheckbox(
+  INPUT_CHECKBOX(
     init?: (
       builder: HTMLInputCheckedElementBuilder<State, Action, Query>
     ) => void
@@ -897,14 +897,14 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
     builder.type('checkbox')
     return initBuilder(builder, init, this)
   }
-  inputColor(
+  INPUT_COLOR(
     init?: (builder: HTMLInputElementBuilder<State, Action, Query>) => void
   ): this {
     const builder = new HTMLInputElementBuilder<State, Action, Query>('input')
     builder.type('color')
     return initBuilder(builder, init, this)
   }
-  inputDate(
+  INPUT_DATE(
     init?: (builder: HTMLInputDateElementBuilder<State, Action, Query>) => void
   ): this {
     const builder = new HTMLInputDateElementBuilder<State, Action, Query>(
@@ -913,7 +913,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
     builder.type('date')
     return initBuilder(builder, init, this)
   }
-  inputDatetimeLocal(
+  INPUT_DATETIME_LOCAL(
     init?: (builder: HTMLInputDateElementBuilder<State, Action, Query>) => void
   ): this {
     const builder = new HTMLInputDateElementBuilder<State, Action, Query>(
@@ -922,7 +922,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
     builder.type('datetime-local')
     return initBuilder(builder, init, this)
   }
-  inputEmail(
+  INPUT_EMAIL(
     init?: (builder: HTMLInputEmailElementBuilder<State, Action, Query>) => void
   ): this {
     const builder = new HTMLInputEmailElementBuilder<State, Action, Query>(
@@ -931,7 +931,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
     builder.type('email')
     return initBuilder(builder, init, this)
   }
-  inputFile(
+  INPUT_FILE(
     init?: (builder: HTMLInputFileElementBuilder<State, Action, Query>) => void
   ): this {
     const builder = new HTMLInputFileElementBuilder<State, Action, Query>(
@@ -940,14 +940,14 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
     builder.type('file')
     return initBuilder(builder, init, this)
   }
-  inputHidden(
+  INPUT_HIDDEN(
     init?: (builder: HTMLInputElementBuilder<State, Action, Query>) => void
   ): this {
     const builder = new HTMLInputElementBuilder<State, Action, Query>('input')
     builder.type('hidden')
     return initBuilder(builder, init, this)
   }
-  inputImage(
+  INPUT_IMAGE(
     init?: (builder: HTMLInputImageElementBuilder<State, Action, Query>) => void
   ): this {
     const builder = new HTMLInputImageElementBuilder<State, Action, Query>(
@@ -956,7 +956,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
     builder.type('image')
     return initBuilder(builder, init, this)
   }
-  inputMonth(
+  INPUT_MONTH(
     init?: (builder: HTMLInputDateElementBuilder<State, Action, Query>) => void
   ): this {
     const builder = new HTMLInputDateElementBuilder<State, Action, Query>(
@@ -965,7 +965,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
     builder.type('month')
     return initBuilder(builder, init, this)
   }
-  inputNumber(
+  INPUT_NUMBER(
     init?: (
       builder: HTMLInputNumberElementBuilder<State, Action, Query>
     ) => void
@@ -976,7 +976,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
     builder.type('number')
     return initBuilder(builder, init, this)
   }
-  inputPassword(
+  INPUT_PASSWORD(
     init?: (
       builder: HTMLInputPasswordElementBuilder<State, Action, Query>
     ) => void
@@ -987,7 +987,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
     builder.type('password')
     return initBuilder(builder, init, this)
   }
-  inputRadio(
+  INPUT_RADIO(
     init?: (
       builder: HTMLInputCheckedElementBuilder<State, Action, Query>
     ) => void
@@ -998,7 +998,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
     builder.type('radio')
     return initBuilder(builder, init, this)
   }
-  inputRange(
+  INPUT_RANGE(
     init?: (
       builder: HTMLInputNumberElementBuilder<State, Action, Query>
     ) => void
@@ -1009,14 +1009,14 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
     builder.type('range')
     return initBuilder(builder, init, this)
   }
-  inputReset(
+  INPUT_RESET(
     init?: (builder: HTMLInputElementBuilder<State, Action, Query>) => void
   ): this {
     const builder = new HTMLInputElementBuilder<State, Action, Query>('input')
     builder.type('reset')
     return initBuilder(builder, init, this)
   }
-  inputSearch(
+  INPUT_SEARCH(
     init?: (
       builder: HTMLInputSearchElementBuilder<State, Action, Query>
     ) => void
@@ -1027,7 +1027,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
     builder.type('search')
     return initBuilder(builder, init, this)
   }
-  inputSubmit(
+  INPUT_SUBMIT(
     init?: (
       builder: HTMLInputSubmitElementBuilder<State, Action, Query>
     ) => void
@@ -1038,7 +1038,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
     builder.type('submit')
     return initBuilder(builder, init, this)
   }
-  inputTel(
+  INPUT_TEL(
     init?: (builder: HTMLInputTelElementBuilder<State, Action, Query>) => void
   ): this {
     const builder = new HTMLInputTelElementBuilder<State, Action, Query>(
@@ -1047,14 +1047,14 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
     builder.type('tel')
     return initBuilder(builder, init, this)
   }
-  inputText(
+  INPUT_TEXT(
     init?: (builder: InputTextElementBuilder<State, Action, Query>) => void
   ): this {
     const builder = new InputTextElementBuilder<State, Action, Query>('input')
     builder.type('text')
     return initBuilder(builder, init, this)
   }
-  inputTime(
+  INPUT_TIME(
     init?: (builder: HTMLInputDateElementBuilder<State, Action, Query>) => void
   ): this {
     const builder = new HTMLInputDateElementBuilder<State, Action, Query>(
@@ -1063,7 +1063,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
     builder.type('time')
     return initBuilder(builder, init, this)
   }
-  inputUrl(
+  INPUT_URL(
     init?: (builder: HTMLInputUrlElementBuilder<State, Action, Query>) => void
   ): this {
     const builder = new HTMLInputUrlElementBuilder<State, Action, Query>(
@@ -1072,7 +1072,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
     builder.type('url')
     return initBuilder(builder, init, this)
   }
-  inputWeek(
+  INPUT_WEEK(
     init?: (builder: HTMLInputDateElementBuilder<State, Action, Query>) => void
   ): this {
     const builder = new HTMLInputDateElementBuilder<State, Action, Query>(
@@ -1082,7 +1082,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
     return initBuilder(builder, init, this)
   }
 
-  ins(
+  INS(
     init?: (builder: HTMLModElementBuilder<State, Action, Query>) => void
   ): this {
     return initBuilder(
@@ -1091,7 +1091,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  kbd(
+  KBD(
     init?: (
       builder: HTMLElementBuilder<State, Action, Query, HTMLElement>
     ) => void
@@ -1102,7 +1102,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  labelEl(
+  LABEL(
     init?: (builder: HTMLLabelElementBuilder<State, Action, Query>) => void
   ): this {
     return initBuilder(
@@ -1111,7 +1111,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  legend(
+  LEGEND(
     init?: (
       builder: HTMLElementBuilder<State, Action, Query, HTMLLegendElement>
     ) => void
@@ -1122,7 +1122,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  li(
+  LI(
     init?: (builder: HTMLLIElementBuilder<State, Action, Query>) => void
   ): this {
     return initBuilder(
@@ -1131,7 +1131,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  link(
+  LINK(
     init?: (builder: HTMLLinkElementBuilder<State, Action, Query>) => void
   ): this {
     return initBuilder(
@@ -1140,7 +1140,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  main(
+  MAIN(
     init?: (
       builder: HTMLElementBuilder<State, Action, Query, HTMLElement>
     ) => void
@@ -1151,7 +1151,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  mapEl(
+  MAP(
     init?: (builder: HTMLMapElementBuilder<State, Action, Query>) => void
   ): this {
     return initBuilder(
@@ -1160,7 +1160,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  mark(
+  MARK(
     init?: (
       builder: HTMLElementBuilder<State, Action, Query, HTMLElement>
     ) => void
@@ -1171,7 +1171,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  meta(
+  META(
     init?: (builder: HTMLMetaElementBuilder<State, Action, Query>) => void
   ): this {
     return initBuilder(
@@ -1180,7 +1180,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  meter(
+  METER(
     init?: (builder: HTMLMeterElementBuilder<State, Action, Query>) => void
   ): this {
     return initBuilder(
@@ -1189,7 +1189,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  nav(
+  NAV(
     init?: (
       builder: HTMLElementBuilder<State, Action, Query, HTMLElement>
     ) => void
@@ -1200,7 +1200,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  noscript(
+  NOSCRIPT(
     init?: (
       builder: HTMLElementBuilder<State, Action, Query, HTMLElement>
     ) => void
@@ -1211,7 +1211,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  object(
+  OBJECT(
     init?: (builder: HTMLObjectElementBuilder<State, Action, Query>) => void
   ): this {
     return initBuilder(
@@ -1220,7 +1220,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  ol(
+  OL(
     init?: (builder: HTMLOListElementBuilder<State, Action, Query>) => void
   ): this {
     return initBuilder(
@@ -1229,7 +1229,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  optgroup(
+  OPTGROUP(
     init?: (builder: HTMLOptGroupElementBuilder<State, Action, Query>) => void
   ): this {
     return initBuilder(
@@ -1238,7 +1238,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  option(
+  OPTION(
     init?: (builder: HTMLOptionElementBuilder<State, Action, Query>) => void
   ): this {
     return initBuilder(
@@ -1247,7 +1247,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  output(
+  OUTPUT(
     init?: (builder: HTMLOutputElementBuilder<State, Action, Query>) => void
   ): this {
     return initBuilder(
@@ -1256,7 +1256,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  p(
+  P(
     init?: (
       builder: HTMLElementBuilder<State, Action, Query, HTMLParagraphElement>
     ) => void
@@ -1267,7 +1267,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  param(
+  PARAM(
     init?: (builder: HTMLParamElementBuilder<State, Action, Query>) => void
   ): this {
     return initBuilder(
@@ -1276,7 +1276,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  picture(
+  PICTURE(
     init?: (builder: HTMLPictureElementBuilder<State, Action, Query>) => void
   ): this {
     return initBuilder(
@@ -1285,7 +1285,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  pre(
+  PRE(
     init?: (
       builder: HTMLElementBuilder<State, Action, Query, HTMLPreElement>
     ) => void
@@ -1296,7 +1296,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  progress(
+  PROGRESS(
     init?: (builder: HTMLProgressElementBuilder<State, Action, Query>) => void
   ): this {
     return initBuilder(
@@ -1305,7 +1305,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  q(
+  Q(
     init?: (builder: HTMLQuoteElementBuilder<State, Action, Query>) => void
   ): this {
     return initBuilder(
@@ -1314,7 +1314,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  rp(
+  RP(
     init?: (
       builder: HTMLElementBuilder<State, Action, Query, HTMLElement>
     ) => void
@@ -1325,7 +1325,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  rt(
+  RT(
     init?: (
       builder: HTMLElementBuilder<State, Action, Query, HTMLElement>
     ) => void
@@ -1336,7 +1336,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  ruby(
+  RUBY(
     init?: (
       builder: HTMLElementBuilder<State, Action, Query, HTMLElement>
     ) => void
@@ -1347,7 +1347,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  s(
+  S(
     init?: (
       builder: HTMLElementBuilder<State, Action, Query, HTMLElement>
     ) => void
@@ -1358,7 +1358,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  samp(
+  SAMP(
     init?: (
       builder: HTMLElementBuilder<State, Action, Query, HTMLElement>
     ) => void
@@ -1369,7 +1369,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  script(
+  SCRIPT(
     init?: (builder: HTMLScriptElementBuilder<State, Action, Query>) => void
   ): this {
     return initBuilder(
@@ -1378,7 +1378,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  section(
+  SECTION(
     init?: (
       builder: HTMLElementBuilder<State, Action, Query, HTMLElement>
     ) => void
@@ -1389,7 +1389,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  select(
+  SELECT(
     init?: (builder: HTMLSelectElementBuilder<State, Action, Query>) => void
   ): this {
     return initBuilder(
@@ -1398,7 +1398,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  slotEl(
+  SLOT(
     init?: (builder: HTMLSlotElementBuilder<State, Action, Query>) => void
   ): this {
     return initBuilder(
@@ -1407,7 +1407,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  small(
+  SMALL(
     init?: (
       builder: HTMLElementBuilder<State, Action, Query, HTMLElement>
     ) => void
@@ -1418,7 +1418,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  source(
+  SOURCE(
     init?: (builder: HTMLSourceElementBuilder<State, Action, Query>) => void
   ): this {
     return initBuilder(
@@ -1427,7 +1427,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  spanEl(
+  SPAN(
     init?: (
       builder: HTMLElementBuilder<State, Action, Query, HTMLSpanElement>
     ) => void
@@ -1438,7 +1438,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  strong(
+  STRONG(
     init?: (
       builder: HTMLElementBuilder<State, Action, Query, HTMLElement>
     ) => void
@@ -1449,7 +1449,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  styleEl(
+  STYLE(
     init?: (builder: HTMLStyleElementBuilder<State, Action, Query>) => void
   ): this {
     return initBuilder(
@@ -1458,7 +1458,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  sub(
+  SUB(
     init?: (
       builder: HTMLElementBuilder<State, Action, Query, HTMLElement>
     ) => void
@@ -1469,7 +1469,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  summary(
+  SUMMARY(
     init?: (
       builder: HTMLElementBuilder<State, Action, Query, HTMLElement>
     ) => void
@@ -1480,7 +1480,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  sup(
+  SUP(
     init?: (
       builder: HTMLElementBuilder<State, Action, Query, HTMLElement>
     ) => void
@@ -1491,7 +1491,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  svg(
+  SVG(
     init?: (builder: SVGSVGElementBuilder<State, Action, Query>) => void
   ): this {
     return initBuilder(
@@ -1500,7 +1500,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  table(
+  TABLE(
     init?: (
       builder: HTMLElementBuilder<State, Action, Query, HTMLTableElement>
     ) => void
@@ -1511,7 +1511,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  tbody(
+  TBODY(
     init?: (
       builder: HTMLElementBuilder<State, Action, Query, HTMLTableSectionElement>
     ) => void
@@ -1524,7 +1524,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  td(
+  TD(
     init?: (
       builder: HTMLTableDataCellElementBuilder<State, Action, Query>
     ) => void
@@ -1535,7 +1535,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  template(
+  TEMPLATE(
     init?: (
       builder: HTMLElementBuilder<State, Action, Query, HTMLTemplateElement>
     ) => void
@@ -1548,7 +1548,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  textarea(
+  TEXTAREA(
     init?: (builder: HTMLTextAreaElementBuilder<State, Action, Query>) => void
   ): this {
     return initBuilder(
@@ -1557,7 +1557,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  tfoot(
+  TFOOT(
     init?: (
       builder: HTMLElementBuilder<State, Action, Query, HTMLTableSectionElement>
     ) => void
@@ -1570,7 +1570,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  th(
+  TH(
     init?: (
       builder: HTMLTableHeaderCellElementBuilder<State, Action, Query>
     ) => void
@@ -1581,7 +1581,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  thead(
+  THEAD(
     init?: (
       builder: HTMLElementBuilder<State, Action, Query, HTMLElement>
     ) => void
@@ -1592,7 +1592,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  time(
+  TIME(
     init?: (builder: HTMLTimeElementBuilder<State, Action, Query>) => void
   ): this {
     return initBuilder(
@@ -1601,7 +1601,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  titleEl(
+  TITLE(
     init?: (
       builder: HTMLElementBuilder<State, Action, Query, HTMLTitleElement>
     ) => void
@@ -1612,7 +1612,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  tr(
+  TR(
     init?: (
       builder: HTMLElementBuilder<State, Action, Query, HTMLTableRowElement>
     ) => void
@@ -1623,7 +1623,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  track(
+  TRACK(
     init?: (builder: HTMLTrackElementBuilder<State, Action, Query>) => void
   ): this {
     return initBuilder(
@@ -1632,7 +1632,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  u(
+  U(
     init?: (
       builder: HTMLElementBuilder<State, Action, Query, HTMLElement>
     ) => void
@@ -1643,7 +1643,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  ul(
+  UL(
     init?: (
       builder: HTMLElementBuilder<State, Action, Query, HTMLUListElement>
     ) => void
@@ -1654,7 +1654,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  varEl(
+  VAR(
     init?: (
       builder: HTMLElementBuilder<State, Action, Query, HTMLElement>
     ) => void
@@ -1665,7 +1665,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  video(
+  VIDEO(
     init?: (builder: HTMLVideoElementBuilder<State, Action, Query>) => void
   ): this {
     return initBuilder(
@@ -1674,7 +1674,7 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
       this
     )
   }
-  wbr(
+  WBR(
     init?: (
       builder: HTMLElementBuilder<State, Action, Query, HTMLElement>
     ) => void
@@ -1758,7 +1758,7 @@ export type AriaRole =
   | 'treeitem'
 
 // dom generic
-export function el<State, Action, Query, El extends HTMLElement = HTMLElement>(
+export function El<State, Action, Query, El extends HTMLElement = HTMLElement>(
   tagName: string = 'div'
 ) {
   return new HTMLElementBuilder<State, Action, Query, El>(tagName)
@@ -1819,11 +1819,11 @@ export class HTMLElementBuilder<State, Action, Query, El extends HTMLElement>
     }
     return this
   }
-  lifecycle(makeLifecycle: MakeLifecycle<State, Action>): this {
+  Lifecycle(makeLifecycle: MakeLifecycle<State, Action>): this {
     this._lifecycle = makeLifecycle
     return this
   }
-  respond(
+  Respond(
     response: (query: Query, el: El, ctx: DOMContext<Action>) => void
   ): this {
     this._respond = response
@@ -2351,7 +2351,7 @@ function initBuilder<
   P extends BaseHTMLBuilder<any, any, any>
 >(builder: T, init: undefined | ((builder: T) => void), parent: P): P {
   init && init(builder)
-  return parent.append(builder.build())
+  return parent.Append(builder.build())
 }
 
 export type PreloadValue = 'none' | 'metadata' | 'auto'

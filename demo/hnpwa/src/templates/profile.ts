@@ -11,33 +11,33 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { section } from 'tempo-dom/lib/html'
+import { SECTION } from 'tempo-dom/lib/html'
 import { Profile } from '../state'
 import { Action } from '../action'
 import { unsafeHtml } from 'tempo-dom/lib/lifecycle/unsafe_html'
 
-export const profileTemplate = section<Profile, Action, unknown>($ =>
-  $.class('user-view').mapState(
+export const profileTemplate = SECTION<Profile, Action, unknown>($ =>
+  $.class('user-view').MapState(
     profile => profile.user,
     $ =>
-      $.table($ =>
-        $.tr($ =>
-          $.td($ => $.text('user:')).td($ => $.b($ => $.text(user => user.id)))
+      $.TABLE($ =>
+        $.TR($ =>
+          $.TD($ => $.text('user:')).TD($ => $.B($ => $.text(user => user.id)))
         )
-          .tr($ =>
-            $.td($ => $.text('created:')).td($ => $.text(user => user.created))
+          .TR($ =>
+            $.TD($ => $.text('created:')).TD($ => $.text(user => user.created))
           )
-          .tr($ =>
-            $.td($ => $.text('karma:')).td($ =>
+          .TR($ =>
+            $.TD($ => $.text('karma:')).TD($ =>
               $.text(user => String(user.karma))
             )
           )
-          .when(
+          .When(
             user => user.about !== undefined,
             $ =>
-              $.tr($ =>
-                $.td($ => $.text('about:')).td($ =>
-                  $.lifecycle(unsafeHtml(user => user.about))
+              $.TR($ =>
+                $.TD($ => $.text('about:')).TD($ =>
+                  $.Lifecycle(unsafeHtml(user => user.about))
                 )
               )
           )

@@ -11,7 +11,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { div } from 'tempo-dom/lib/html'
+import { DIV } from 'tempo-dom/lib/html'
 import { DOMChild } from 'tempo-dom/lib/template'
 import { IBuilder } from 'tempo-dom/lib/impl/dom_builder'
 
@@ -26,6 +26,6 @@ export const notification: <State, Action, Query>(
     | IBuilder<State, Action, Query>
   )[]
 ) =>
-  div<State, Action, Query>($ =>
-    $.class('notification').appendMany(...children)
+  DIV<State, Action, Query>($ =>
+    $.class('notification').AppendMany(...children)
   )

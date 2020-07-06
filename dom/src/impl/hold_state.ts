@@ -14,7 +14,7 @@ limitations under the License.
 import { DOMTemplate } from '../template'
 import { DOMContext } from '../context'
 import { IBuilder, childOrBuilderToTemplate } from './dom_builder'
-import { mapState } from '../html'
+import { MapState } from '../html'
 
 export type ReleaseF<
   StateA,
@@ -57,9 +57,9 @@ export class HoldStateTemplate<
         // const builder = new FragmentBuilder<StateC, Action, Query>()
         init(builder)
         const innerTemplate = builder.build()
-        return mapState<StateB, StateC, Action, Query>(
+        return MapState<StateB, StateC, Action, Query>(
           (b: StateB) => merge(this.localState, b),
-          $ => $.append(innerTemplate)
+          $ => $.Append(innerTemplate)
         ).build()
       })
     )

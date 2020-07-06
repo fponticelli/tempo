@@ -104,7 +104,7 @@ import { HoldF, HoldStateTemplate } from './hold_state'
 export { svgEl }
 
 // transform
-export function holdState<State, StateB, StateC, Action, Query>(
+export function HoldState<State, StateB, StateC, Action, Query>(
   holdf: HoldF<
     State,
     StateB,
@@ -118,7 +118,7 @@ export function holdState<State, StateB, StateC, Action, Query>(
   return new HoldStateTemplate(holdf, builder)
 }
 
-export function forEach<State, Action, Query>(
+export function ForEach<State, Action, Query>(
   init: (
     builder: UntilSVGBuilder<
       State,
@@ -128,7 +128,7 @@ export function forEach<State, Action, Query>(
     >
   ) => void
 ) {
-  return until(
+  return Until(
     ({
       state,
       index
@@ -140,7 +140,7 @@ export function forEach<State, Action, Query>(
   )
 }
 
-export function portal<State, Action, Query>(
+export function Portal<State, Action, Query>(
   appendChild: (doc: Document) => Element,
   init: (builder: PortalSVGBuilder<State, Action, Query>) => void
 ) {
@@ -149,11 +149,11 @@ export function portal<State, Action, Query>(
   return builder
 }
 
-export function portalWithSelector<State, Action, Query>(
+export function PortalWithSelector<State, Action, Query>(
   selector: string,
   init: (builder: PortalSVGBuilder<State, Action, Query>) => void
 ) {
-  return portal(doc => {
+  return Portal(doc => {
     const el = doc.querySelector(selector)
     if (!el) {
       throw new Error(`selector doesn't match any element: "${selector}"`)
@@ -162,19 +162,19 @@ export function portalWithSelector<State, Action, Query>(
   }, init)
 }
 
-export function headPortal<State, Action, Query>(
+export function HeadPortal<State, Action, Query>(
   init: (builder: PortalSVGBuilder<State, Action, Query>) => void
 ) {
-  return portal(doc => doc.head, init)
+  return Portal(doc => doc.head, init)
 }
 
-export function bodyPortal<State, Action, Query>(
+export function BodyPortal<State, Action, Query>(
   init: (builder: PortalSVGBuilder<State, Action, Query>) => void
 ) {
-  return portal(doc => doc.body, init)
+  return Portal(doc => doc.body, init)
 }
 
-// simpleComponent(
+// SimpleComponent(
 //   init: (builder: SimpleComponentBuilder<State, Query>) => void
 // ) {
 //   const builder = new SimpleComponentBuilder<State, Query>()
@@ -183,21 +183,21 @@ export function bodyPortal<State, Action, Query>(
 // }
 
 // derived children
-export function a<State, Action, Query>(
+export function A<State, Action, Query>(
   init?: (builder: SVGAnchorElementBuilder<State, Action, Query>) => void
 ) {
   const builder = new SVGAnchorElementBuilder<State, Action, Query>()
   if (init !== undefined) init(builder)
   return builder
 }
-export function circle<State, Action, Query>(
+export function CIRCLE<State, Action, Query>(
   init?: (builder: SVGCircleElementBuilder<State, Action, Query>) => void
 ) {
   const builder = new SVGCircleElementBuilder<State, Action, Query>()
   if (init !== undefined) init(builder)
   return builder
 }
-export function clipPathEl<State, Action, Query>(
+export function CLIP_PATH<State, Action, Query>(
   init?: (
     builder: SVGElementBuilder<State, Action, Query, SVGClipPathElement>
   ) => void
@@ -211,7 +211,7 @@ export function clipPathEl<State, Action, Query>(
   if (init !== undefined) init(builder)
   return builder
 }
-export function defs<State, Action, Query>(
+export function DEFS<State, Action, Query>(
   init?: (
     builder: SVGElementBuilder<State, Action, Query, SVGDefsElement>
   ) => void
@@ -222,7 +222,7 @@ export function defs<State, Action, Query>(
   if (init !== undefined) init(builder)
   return builder
 }
-export function desc<State, Action, Query>(
+export function DESC<State, Action, Query>(
   init?: (
     builder: SVGElementBuilder<State, Action, Query, SVGDescElement>
   ) => void
@@ -233,28 +233,28 @@ export function desc<State, Action, Query>(
   if (init !== undefined) init(builder)
   return builder
 }
-export function ellipse<State, Action, Query>(
+export function ELLIPSE<State, Action, Query>(
   init?: (builder: SVGEllipseElementBuilder<State, Action, Query>) => void
 ) {
   const builder = new SVGEllipseElementBuilder<State, Action, Query>()
   if (init !== undefined) init(builder)
   return builder
 }
-export function feBlend<State, Action, Query>(
+export function FE_BLEND<State, Action, Query>(
   init?: (builder: SVGFEBlendElementBuilder<State, Action, Query>) => void
 ) {
   const builder = new SVGFEBlendElementBuilder<State, Action, Query>()
   if (init !== undefined) init(builder)
   return builder
 }
-export function feColorMatrix<State, Action, Query>(
+export function FE_COLOR_MATRIX<State, Action, Query>(
   init?: (builder: SVGFEColorMatrixElementBuilder<State, Action, Query>) => void
 ) {
   const builder = new SVGFEColorMatrixElementBuilder<State, Action, Query>()
   if (init !== undefined) init(builder)
   return builder
 }
-export function feComponentTransfer<State, Action, Query>(
+export function FE_COMPONENT_TRANSFER<State, Action, Query>(
   init?: (
     builder: SVGFEComponentTransferElementBuilder<State, Action, Query>
   ) => void
@@ -267,14 +267,14 @@ export function feComponentTransfer<State, Action, Query>(
   if (init !== undefined) init(builder)
   return builder
 }
-export function feComposite<State, Action, Query>(
+export function FE_COMPOSITE<State, Action, Query>(
   init?: (builder: SVGFeCompositeElementBuilder<State, Action, Query>) => void
 ) {
   const builder = new SVGFeCompositeElementBuilder<State, Action, Query>()
   if (init !== undefined) init(builder)
   return builder
 }
-export function feConvolveMatrix<State, Action, Query>(
+export function FE_CONVOLVE_MATRIX<State, Action, Query>(
   init?: (
     builder: SVGFEConvolveMatrixElementBuilder<State, Action, Query>
   ) => void
@@ -283,7 +283,7 @@ export function feConvolveMatrix<State, Action, Query>(
   if (init !== undefined) init(builder)
   return builder
 }
-export function feDiffuseLighting<State, Action, Query>(
+export function FE_DIFFUSE_LIGHTING<State, Action, Query>(
   init?: (
     builder: SVGFEDiffuseLightingElementBuilder<State, Action, Query>
   ) => void
@@ -292,7 +292,7 @@ export function feDiffuseLighting<State, Action, Query>(
   if (init !== undefined) init(builder)
   return builder
 }
-export function feDisplacementMap<State, Action, Query>(
+export function FE_DISPLACEMENT_MAP<State, Action, Query>(
   init?: (
     builder: SVGFEDisplacementMapElementBuilder<State, Action, Query>
   ) => void
@@ -301,7 +301,7 @@ export function feDisplacementMap<State, Action, Query>(
   if (init !== undefined) init(builder)
   return builder
 }
-export function feDistantLight<State, Action, Query>(
+export function FE_DISTANT_LIGHT<State, Action, Query>(
   init?: (
     builder: SVGFEDistantLightElementBuilder<State, Action, Query>
   ) => void
@@ -310,42 +310,42 @@ export function feDistantLight<State, Action, Query>(
   if (init !== undefined) init(builder)
   return builder
 }
-export function feFlood<State, Action, Query>(
+export function FE_FLOOD<State, Action, Query>(
   init?: (builder: SVGFEFloodElementBuilder<State, Action, Query>) => void
 ) {
   const builder = new SVGFEFloodElementBuilder<State, Action, Query>()
   if (init !== undefined) init(builder)
   return builder
 }
-export function feFuncA<State, Action, Query>(
+export function FE_FUNC_A<State, Action, Query>(
   init?: (builder: SVGFEFuncAElementBuilder<State, Action, Query>) => void
 ) {
   const builder = new SVGFEFuncAElementBuilder<State, Action, Query>()
   if (init !== undefined) init(builder)
   return builder
 }
-export function feFuncB<State, Action, Query>(
+export function FE_FUNC_B<State, Action, Query>(
   init?: (builder: SVGFEFuncBElementBuilder<State, Action, Query>) => void
 ) {
   const builder = new SVGFEFuncBElementBuilder<State, Action, Query>()
   if (init !== undefined) init(builder)
   return builder
 }
-export function feFuncG<State, Action, Query>(
+export function FE_FUNC_G<State, Action, Query>(
   init?: (builder: SVGFEFuncGElementBuilder<State, Action, Query>) => void
 ) {
   const builder = new SVGFEFuncGElementBuilder<State, Action, Query>()
   if (init !== undefined) init(builder)
   return builder
 }
-export function feFuncR<State, Action, Query>(
+export function FE_FUNC_R<State, Action, Query>(
   init?: (builder: SVGFEFuncRElementBuilder<State, Action, Query>) => void
 ) {
   const builder = new SVGFEFuncRElementBuilder<State, Action, Query>()
   if (init !== undefined) init(builder)
   return builder
 }
-export function feGaussianBlur<State, Action, Query>(
+export function FE_GAUSSIAN_BLUR<State, Action, Query>(
   init?: (
     builder: SVGFEGaussianBlurElementBuilder<State, Action, Query>
   ) => void
@@ -354,50 +354,49 @@ export function feGaussianBlur<State, Action, Query>(
   if (init !== undefined) init(builder)
   return builder
 }
-export function feImage<State, Action, Query>(
+export function FE_IMAGE<State, Action, Query>(
   init?: (builder: SVGFEImageElementBuilder<State, Action, Query>) => void
 ) {
   const builder = new SVGFEImageElementBuilder<State, Action, Query>()
   if (init !== undefined) init(builder)
   return builder
 }
-export function feMerge<State, Action, Query>(
+export function FE_MERGE<State, Action, Query>(
   init?: (builder: SVGFEMergeElementBuilder<State, Action, Query>) => void
 ) {
   const builder = new SVGFEMergeElementBuilder<State, Action, Query>()
   if (init !== undefined) init(builder)
   return builder
 }
-export function feMergeNode<State, Action, Query>(
+export function FE_MERGE_NODE<State, Action, Query>(
   init?: (builder: SVGFEMergeNodeElementBuilder<State, Action, Query>) => void
 ) {
   const builder = new SVGFEMergeNodeElementBuilder<State, Action, Query>()
   if (init !== undefined) init(builder)
   return builder
 }
-export function feMorphology<State, Action, Query>(
+export function FE_MORPHOLOGY<State, Action, Query>(
   init?: (builder: SVGFEMorphologyElementBuilder<State, Action, Query>) => void
 ) {
   const builder = new SVGFEMorphologyElementBuilder<State, Action, Query>()
   if (init !== undefined) init(builder)
   return builder
 }
-export function feOffset<State, Action, Query>(
+export function FE_OFFSET<State, Action, Query>(
   init?: (builder: SVGFEOffsetElementBuilder<State, Action, Query>) => void
 ) {
   const builder = new SVGFEOffsetElementBuilder<State, Action, Query>()
   if (init !== undefined) init(builder)
   return builder
 }
-export function fePointLight<State, Action, Query>(
+export function FE_POINTLIGHT<State, Action, Query>(
   init?: (builder: SVGFEPointLightElementBuilder<State, Action, Query>) => void
 ) {
   const builder = new SVGFEPointLightElementBuilder<State, Action, Query>()
   if (init !== undefined) init(builder)
   return builder
 }
-export function feSpecularLighting<State, Action, Query>(
-  // TODO
+export function FE_SPECULAR_LIGHTING<State, Action, Query>(
   init?: (
     builder: SVGFESpecularLightingElementBuilder<State, Action, Query>
   ) => void
@@ -410,68 +409,63 @@ export function feSpecularLighting<State, Action, Query>(
   if (init !== undefined) init(builder)
   return builder
 }
-export function feSpotLight<State, Action, Query>(
+export function FE_SPOTLIGHT<State, Action, Query>(
   init?: (builder: SVGFESpotLightElementBuilder<State, Action, Query>) => void
 ) {
   const builder = new SVGFESpotLightElementBuilder<State, Action, Query>()
   if (init !== undefined) init(builder)
   return builder
 }
-export function feTile<State, Action, Query>(
+export function FE_TILE<State, Action, Query>(
   init?: (builder: SVGFETileElementBuilder<State, Action, Query>) => void
 ) {
   const builder = new SVGFETileElementBuilder<State, Action, Query>()
   if (init !== undefined) init(builder)
   return builder
 }
-export function feTurbulence<State, Action, Query>(
+export function FE_TURBULENCE<State, Action, Query>(
   init?: (builder: SVGFETurbulenceElementBuilder<State, Action, Query>) => void
 ) {
   const builder = new SVGFETurbulenceElementBuilder<State, Action, Query>()
   if (init !== undefined) init(builder)
   return builder
 }
-export function filterEl<State, Action, Query>(
-  // TODO https://developer.mozilla.org/en-US/docs/Web/SVG/Element/filter
+export function FILTER<State, Action, Query>(
   init?: (builder: SVGFilterElementBuilder<State, Action, Query>) => void
 ) {
   const builder = new SVGFilterElementBuilder<State, Action, Query>()
   if (init !== undefined) init(builder)
   return builder
 }
-export function foreignObject<State, Action, Query>(
-  // TODO https://developer.mozilla.org/en-US/docs/Web/SVG/Element/foreignObject
+export function FOREIGN_OBJECT<State, Action, Query>(
   init?: (builder: SVGForeignObjectElementBuilder<State, Action, Query>) => void
 ) {
   const builder = new SVGForeignObjectElementBuilder<State, Action, Query>()
   if (init !== undefined) init(builder)
   return builder
 }
-export function g<State, Action, Query>(
+export function G<State, Action, Query>(
   init?: (builder: SVGGElementBuilder<State, Action, Query>) => void
 ) {
   const builder = new SVGGElementBuilder<State, Action, Query>()
   if (init !== undefined) init(builder)
   return builder
 }
-export function image<State, Action, Query>(
-  // TODO https://developer.mozilla.org/en-US/docs/Web/SVG/Element/image
+export function IMAGE<State, Action, Query>(
   init?: (builder: SVGImageElementBuilder<State, Action, Query>) => void
 ) {
   const builder = new SVGImageElementBuilder<State, Action, Query>()
   if (init !== undefined) init(builder)
   return builder
 }
-export function line<State, Action, Query>(
-  // TODO https://developer.mozilla.org/en-US/docs/Web/SVG/Element/line
+export function LINE<State, Action, Query>(
   init?: (builder: SVGLineElementBuilder<State, Action, Query>) => void
 ) {
   const builder = new SVGLineElementBuilder<State, Action, Query>()
   if (init !== undefined) init(builder)
   return builder
 }
-export function linearGradient<State, Action, Query>(
-  // TODO https://developer.mozilla.org/en-US/docs/Web/SVG/Element/linearGradient
+export function LINEAR_GRADIENT<State, Action, Query>(
   init?: (
     builder: SVGLinearGradientElementBuilder<State, Action, Query>
   ) => void
@@ -480,63 +474,56 @@ export function linearGradient<State, Action, Query>(
   if (init !== undefined) init(builder)
   return builder
 }
-export function marker<State, Action, Query>(
-  // TODO
+export function MARKER<State, Action, Query>(
   init?: (builder: SVGMarkerElementBuilder<State, Action, Query>) => void
 ) {
   const builder = new SVGMarkerElementBuilder<State, Action, Query>()
   if (init !== undefined) init(builder)
   return builder
 }
-export function maskEl<State, Action, Query>(
-  // TODO
+export function MASK<State, Action, Query>(
   init?: (builder: SVGMaskElementBuilder<State, Action, Query>) => void
 ) {
   const builder = new SVGMaskElementBuilder<State, Action, Query>()
   if (init !== undefined) init(builder)
   return builder
 }
-export function metadata<State, Action, Query>(
+export function METADATA<State, Action, Query>(
   init?: (builder: SVGMetadataElementBuilder<State, Action, Query>) => void
 ) {
   const builder = new SVGMetadataElementBuilder<State, Action, Query>()
   if (init !== undefined) init(builder)
   return builder
 }
-export function pathEl<State, Action, Query>(
-  // TODO
+export function PATH<State, Action, Query>(
   init?: (builder: SVGPathElementBuilder<State, Action, Query>) => void
 ) {
   const builder = new SVGPathElementBuilder<State, Action, Query>()
   if (init !== undefined) init(builder)
   return builder
 }
-export function pattern<State, Action, Query>(
-  // TODO
+export function PATTERN<State, Action, Query>(
   init?: (builder: SVGPatternElementBuilder<State, Action, Query>) => void
 ) {
   const builder = new SVGPatternElementBuilder<State, Action, Query>()
   if (init !== undefined) init(builder)
   return builder
 }
-export function polygon<State, Action, Query>(
-  // TODO
+export function POLYGON<State, Action, Query>(
   init?: (builder: SVGPolygonElementBuilder<State, Action, Query>) => void
 ) {
   const builder = new SVGPolygonElementBuilder<State, Action, Query>()
   if (init !== undefined) init(builder)
   return builder
 }
-export function polyline<State, Action, Query>(
-  // TODO
+export function POLYLINE<State, Action, Query>(
   init?: (builder: SVGPolylineElementBuilder<State, Action, Query>) => void
 ) {
   const builder = new SVGPolylineElementBuilder<State, Action, Query>()
   if (init !== undefined) init(builder)
   return builder
 }
-export function radialGradient<State, Action, Query>(
-  // TODO
+export function RADIAL_GRADIENT<State, Action, Query>(
   init?: (
     builder: SVGRadialGradientElementBuilder<State, Action, Query>
   ) => void
@@ -545,100 +532,91 @@ export function radialGradient<State, Action, Query>(
   if (init !== undefined) init(builder)
   return builder
 }
-export function rect<State, Action, Query>(
+export function RECT<State, Action, Query>(
   init?: (builder: SVGRectElementBuilder<State, Action, Query>) => void
 ) {
   const builder = new SVGRectElementBuilder<State, Action, Query>()
   if (init !== undefined) init(builder)
   return builder
 }
-export function script<State, Action, Query>(
+export function SCRIPT<State, Action, Query>(
   init?: (builder: SVGScriptElementBuilder<State, Action, Query>) => void
 ) {
   const builder = new SVGScriptElementBuilder<State, Action, Query>()
   if (init !== undefined) init(builder)
   return builder
 }
-export function stop<State, Action, Query>(
-  // TODO
+export function STOP<State, Action, Query>(
   init?: (builder: SVGStopElementBuilder<State, Action, Query>) => void
 ) {
   const builder = new SVGStopElementBuilder<State, Action, Query>()
   if (init !== undefined) init(builder)
   return builder
 }
-export function styleEl<State, Action, Query>(
-  // TODO
+export function STYLE<State, Action, Query>(
   init?: (builder: SVGStyleElementBuilder<State, Action, Query>) => void
 ) {
   const builder = new SVGStyleElementBuilder<State, Action, Query>()
   if (init !== undefined) init(builder)
   return builder
 }
-export function svg<State, Action, Query>(
+export function SVG<State, Action, Query>(
   init?: (builder: SVGSVGElementBuilder<State, Action, Query>) => void
 ) {
   const builder = new SVGSVGElementBuilder<State, Action, Query>()
   if (init !== undefined) init(builder)
   return builder
 }
-export function switchEl<State, Action, Query>(
-  // TODO
+export function SWITCH<State, Action, Query>(
   init?: (builder: SVGSwitchElementBuilder<State, Action, Query>) => void
 ) {
   const builder = new SVGSwitchElementBuilder<State, Action, Query>()
   if (init !== undefined) init(builder)
   return builder
 }
-export function symbol<State, Action, Query>(
-  // TODO https://developer.mozilla.org/en-US/docs/Web/SVG/Element/symbol
+export function SYMBOL<State, Action, Query>(
   init?: (builder: SVGSymbolElementBuilder<State, Action, Query>) => void
 ) {
   const builder = new SVGSymbolElementBuilder<State, Action, Query>()
   if (init !== undefined) init(builder)
   return builder
 }
-export function textEl<State, Action, Query>(
-  // TODO
+export function TEXT<State, Action, Query>(
   init?: (builder: SVGTextElementBuilder<State, Action, Query>) => void
 ) {
   const builder = new SVGTextElementBuilder<State, Action, Query>()
   if (init !== undefined) init(builder)
   return builder
 }
-export function textPath<State, Action, Query>(
-  // TODO
+export function TEXT_PATH<State, Action, Query>(
   init?: (builder: SVGTextPathElementBuilder<State, Action, Query>) => void
 ) {
   const builder = new SVGTextPathElementBuilder<State, Action, Query>()
   if (init !== undefined) init(builder)
   return builder
 }
-export function titleEl<State, Action, Query>(
+export function TITLE<State, Action, Query>(
   init?: (builder: SVGTitleElementBuilder<State, Action, Query>) => void
 ) {
   const builder = new SVGTitleElementBuilder<State, Action, Query>()
   if (init !== undefined) init(builder)
   return builder
 }
-export function tspan<State, Action, Query>(
-  // TODO
+export function TSPAN<State, Action, Query>(
   init?: (builder: SVGTSpanElementBuilder<State, Action, Query>) => void
 ) {
   const builder = new SVGTSpanElementBuilder<State, Action, Query>()
   if (init !== undefined) init(builder)
   return builder
 }
-export function use<State, Action, Query>(
-  // TODO
+export function USE<State, Action, Query>(
   init?: (builder: SVGUseElementBuilder<State, Action, Query>) => void
 ) {
   const builder = new SVGUseElementBuilder<State, Action, Query>()
   if (init !== undefined) init(builder)
   return builder
 }
-export function view<State, Action, Query>(
-  // TODO https://developer.mozilla.org/en-US/docs/Web/SVG/Element/view
+export function VIEW<State, Action, Query>(
   init?: (builder: SVGViewElementBuilder<State, Action, Query>) => void
 ) {
   const builder = new SVGViewElementBuilder<State, Action, Query>()
@@ -647,7 +625,7 @@ export function view<State, Action, Query>(
 }
 
 // transforms
-export function adapter<State, StateB, Action, ActionB, Query>(props: {
+export function Adapter<State, StateB, Action, ActionB, Query>(props: {
   bootstrapState: (outer: State) => StateB
   mergeStates?: Attribute<
     {
@@ -667,7 +645,7 @@ export function adapter<State, StateB, Action, ActionB, Query>(props: {
   )
 }
 
-export function localAdapter<State, Action, Query>(props: {
+export function LocalAdapter<State, Action, Query>(props: {
   propagate?: (args: PropagateArg<State, State, Action, Action>) => void
   child: ComponentTemplate<State, Action, Query>
 }) {
@@ -679,7 +657,7 @@ export function localAdapter<State, Action, Query>(props: {
   )
 }
 
-export function component<State, Action, Query>(
+export function Component<State, Action, Query>(
   reducer: (state: State, action: Action) => State,
   init: (builder: ComponentSVGBuilder<State, Action, Query>) => void
 ) {
@@ -688,7 +666,7 @@ export function component<State, Action, Query>(
   return builder
 }
 
-export function iterate<State, Items extends any[], Action, Query>(
+export function Iterate<State, Items extends any[], Action, Query>(
   map: DerivedValue<State, Items>,
   init: (
     builder: UntilSVGBuilder<
@@ -699,13 +677,13 @@ export function iterate<State, Items extends any[], Action, Query>(
     >
   ) => void
 ) {
-  return mapState<State, [Items, State], Action, Query>(
+  return MapState<State, [Items, State], Action, Query>(
     (outer: State): [Items, State] | undefined => {
       const items = resolveAttribute(map)(outer)
       return items !== undefined ? [items, outer] : undefined
     },
     n => {
-      n.until<[Items[number], State, number]>(
+      n.Until<[Items[number], State, number]>(
         ({ state: [items, state], index }) =>
           items[index] && [items[index], state, index],
         init
@@ -714,7 +692,7 @@ export function iterate<State, Items extends any[], Action, Query>(
   )
 }
 
-export function mapState<State, StateB, Action, Query>(
+export function MapState<State, StateB, Action, Query>(
   map: (state: State) => StateB | undefined,
   init: (builder: MapStateSVGBuilder<State, StateB, Action, Query>) => void
 ) {
@@ -723,7 +701,7 @@ export function mapState<State, StateB, Action, Query>(
   return builder
 }
 
-export function mapField<
+export function MapField<
   State,
   Action,
   Query,
@@ -732,19 +710,19 @@ export function mapField<
   field: K,
   init: (builder: MapStateSVGBuilder<State, State[K], Action, Query>) => void
 ) {
-  return mapState<State, State[K], Action, Query>(
+  return MapState<State, State[K], Action, Query>(
     (v: State): State[K] => v[field],
     init
   )
 }
 
-export function mapStateAndKeep<State, StateB, Action, Query>(
+export function MapStateAndKeep<State, StateB, Action, Query>(
   map: (state: State) => StateB | undefined,
   init: (
     builder: MapStateSVGBuilder<State, [StateB, State], Action, Query>
   ) => void
 ) {
-  return mapState<State, [StateB, State], Action, Query>((state: State) => {
+  return MapState<State, [StateB, State], Action, Query>((state: State) => {
     const inner = resolveAttribute(map)(state)
     if (inner !== undefined) {
       return [inner, state]
@@ -754,7 +732,7 @@ export function mapStateAndKeep<State, StateB, Action, Query>(
   }, init)
 }
 
-export function mapAction<State, Action, ActionB, Query>(
+export function MapAction<State, Action, ActionB, Query>(
   map: DerivedValue<ActionB, Action>,
   init: (builder: MapActionSVGBuilder<State, Action, ActionB, Query>) => void
 ) {
@@ -763,7 +741,7 @@ export function mapAction<State, Action, ActionB, Query>(
   return builder
 }
 
-export function mapQuery<State, Action, Query, QueryB>(
+export function MapQuery<State, Action, Query, QueryB>(
   map: DerivedValue<Query, QueryB>,
   init: (builder: MapQuerySVGBuilder<State, Action, Query, QueryB>) => void
 ) {
@@ -772,7 +750,7 @@ export function mapQuery<State, Action, Query, QueryB>(
   return builder
 }
 
-export function match<
+export function Match<
   Path extends IndexType[],
   State extends ObjectWithPath<Path, any>,
   Action,
@@ -791,7 +769,7 @@ export function match<
   )
 }
 
-export function matchKind<
+export function MatchKind<
   State extends ObjectWithField<'kind', any>,
   Action,
   Query = unknown
@@ -802,13 +780,13 @@ export function matchKind<
       | IBuilder<DifferentiateAt<['kind'], State, k>, Action, Query>
   }
 ): DOMTemplate<State, Action, Query> {
-  return match<['kind'], State, Action, Query>({
+  return Match<['kind'], State, Action, Query>({
     path: ['kind'],
     matcher
   })
 }
 
-export function matchBool<State, Action, Query = unknown>(props: {
+export function MatchBool<State, Action, Query = unknown>(props: {
   condition: Attribute<State, boolean>
   true: DOMChild<State, Action, Query> | IBuilder<State, Action, Query>
   false: DOMChild<State, Action, Query> | IBuilder<State, Action, Query>
@@ -820,7 +798,7 @@ export function matchBool<State, Action, Query = unknown>(props: {
   )
 }
 
-export function matchValue<
+export function MatchValue<
   Path extends IndexType[],
   State extends ObjectWithPath<Path, string>,
   Action,
@@ -841,59 +819,59 @@ export function matchValue<
   )
 }
 
-export function matchOption<State, Action, Query = unknown>(props: {
+export function MatchOption<State, Action, Query = unknown>(props: {
   Some: DOMChild<State, Action, Query> | IBuilder<State, Action, Query>
   None: DOMChild<unknown, Action, Query> | IBuilder<unknown, Action, Query>
 }): DOMTemplate<Option<State>, Action, Query> {
-  return matchKind({
-    Some: mapField('value', n => n.append(props.Some)),
-    None: mapState(
+  return MatchKind({
+    Some: MapField('value', n => n.Append(props.Some)),
+    None: MapState(
       () => null,
-      n => n.append(props.None)
+      n => n.Append(props.None)
     )
   })
 }
 
-export function matchMaybe<State, Action, Query = unknown>(props: {
+export function MatchMaybe<State, Action, Query = unknown>(props: {
   Just: DOMChild<State, Action, Query> | IBuilder<State, Action, Query>
   Nothing?: DOMChild<unknown, Action, Query> | IBuilder<State, Action, Query>
 }): DOMTemplate<Maybe<State>, Action, Query> {
   return new MatchBoolTemplate<Maybe<State>, Action, Query>(
     v => v !== undefined,
-    mapState(
+    MapState(
       (opt: Maybe<State>) => opt as Just<State>,
-      n => n.append(props.Just)
+      n => n.Append(props.Just)
     ),
     props.Nothing as DOMChild<unknown, Action, Query>
   )
 }
 
-export function matchResult<State, Error, Action, Query = unknown>(props: {
+export function MatchResult<State, Error, Action, Query = unknown>(props: {
   Success: DOMChild<State, Action, Query> | IBuilder<State, Action, Query>
   Failure: DOMChild<Error, Action, Query> | IBuilder<Error, Action, Query>
 }): DOMTemplate<Result<State, Error>, Action, Query> {
-  return matchKind({
-    Success: mapField('value', n => n.append(props.Success)),
-    Failure: mapField('error', n => n.append(props.Failure))
+  return MatchKind({
+    Success: MapField('value', n => n.Append(props.Success)),
+    Failure: MapField('error', n => n.Append(props.Failure))
   })
 }
 
-export function matchAsync<State, Progress, Action, Query = unknown>(props: {
+export function MatchAsync<State, Progress, Action, Query = unknown>(props: {
   Outcome: DOMChild<State, Action, Query> | IBuilder<State, Action, Query>
   NotAsked: DOMChild<unknown, Action, Query> | IBuilder<unknown, Action, Query>
   Loading: DOMChild<Progress, Action, Query> | IBuilder<Progress, Action, Query>
 }): DOMTemplate<Async<State, Progress>, Action, Query> {
-  return matchKind({
-    Outcome: mapField('value', n => n.append(props.Outcome)),
-    Loading: mapField('progress', n => n.append(props.Loading)),
-    NotAsked: mapState(
+  return MatchKind({
+    Outcome: MapField('value', n => n.Append(props.Outcome)),
+    Loading: MapField('progress', n => n.Append(props.Loading)),
+    NotAsked: MapState(
       () => null,
-      n => n.append(props.NotAsked)
+      n => n.Append(props.NotAsked)
     )
   })
 }
 
-export function matchAsyncResult<
+export function MatchAsyncResult<
   State,
   Error,
   Progress,
@@ -905,26 +883,26 @@ export function matchAsyncResult<
   NotAsked: DOMChild<unknown, Action, Query> | IBuilder<unknown, Action, Query>
   Loading: DOMChild<Progress, Action, Query> | IBuilder<Progress, Action, Query>
 }): DOMTemplate<AsyncResult<State, Error, Progress>, Action, Query> {
-  return matchKind<AsyncResult<State, Error, Progress>, Action, Query>({
-    Outcome: mapState(
+  return MatchKind<AsyncResult<State, Error, Progress>, Action, Query>({
+    Outcome: MapState(
       (o: Outcome<Result<State, Error>>) => o.value,
       n =>
-        n.append(
-          matchResult<State, Error, Action, Query>({
+        n.Append(
+          MatchResult<State, Error, Action, Query>({
             Success: props.Success,
             Failure: props.Failure
           })
         )
     ),
-    Loading: mapField('progress', n => n.append(props.Loading)),
-    NotAsked: mapState(
+    Loading: MapField('progress', n => n.Append(props.Loading)),
+    NotAsked: MapState(
       () => null,
-      n => n.append(props.NotAsked)
+      n => n.Append(props.NotAsked)
     )
   })
 }
 
-export function lazy<State, Action, Query>(
+export function Lazy<State, Action, Query>(
   lazyf: () =>
     | DOMTemplate<State, Action, Query>
     | IBuilder<State, Action, Query>
@@ -932,7 +910,7 @@ export function lazy<State, Action, Query>(
   return new LazyTemplate(lazyf)
 }
 
-export function fragment<State, Action, Query>(
+export function Fragment<State, Action, Query>(
   init: (builder: FragmentSVGBuilder<State, Action, Query>) => void
 ) {
   const builder = new FragmentSVGBuilder<State, Action, Query>()
@@ -940,7 +918,7 @@ export function fragment<State, Action, Query>(
   return builder
 }
 
-// export function portal<State, Action, Query>(
+// export function Portal<State, Action, Query>(
 //   appendChild: (doc: Document, node: Node) => void,
 //   init: (builder: PortalBuilder<State, Action, Query>) => void
 // ) {
@@ -949,11 +927,11 @@ export function fragment<State, Action, Query>(
 //   return builder
 // }
 
-// export function portalWithSelector<State, Action, Query>(
+// export function PortalWithSelector<State, Action, Query>(
 //   selector: string,
 //   init: (builder: PortalBuilder<State, Action, Query>) => void
 // ) {
-//   return portal((doc: HTMLDocument, node: Node) => {
+//   return Portal((doc: HTMLDocument, node: Node) => {
 //     const el = doc.querySelector(selector)
 //     if (!el) {
 //       throw new Error(`selector doesn't match any element: "${selector}"`)
@@ -962,7 +940,7 @@ export function fragment<State, Action, Query>(
 //   }, init)
 // }
 
-export function simpleComponent<State, Query>(
+export function SimpleComponent<State, Query>(
   init: (builder: SimpleComponentSVGBuilder<State, Query>) => void
 ) {
   const builder = new SimpleComponentSVGBuilder<State, Query>()
@@ -970,14 +948,14 @@ export function simpleComponent<State, Query>(
   return builder
 }
 
-export function unless<State, Action, Query>(
+export function Unless<State, Action, Query>(
   condition: DerivedValue<State, boolean>,
   init: (builder: MapStateSVGBuilder<State, State, Action, Query>) => void
 ) {
-  return when(s => !condition(s), init)
+  return When(s => !condition(s), init)
 }
 
-export function until<State, StateB, Action, Query>(
+export function Until<State, StateB, Action, Query>(
   next: DerivedValue<{ state: State; index: number }, StateB>,
   init: (builder: UntilSVGBuilder<State, StateB, Action, Query>) => void
 ) {
@@ -986,7 +964,7 @@ export function until<State, StateB, Action, Query>(
   return builder
 }
 
-export function when<State, Action, Query>(
+export function When<State, Action, Query>(
   condition: DerivedValue<State, boolean>,
   init: (builder: MapStateSVGBuilder<State, State, Action, Query>) => void
 ) {

@@ -1,22 +1,22 @@
 import { unsafeHtml } from 'tempo-dom/lib/lifecycle/unsafe_html'
 import { Action } from '../action'
-import { fragment } from 'tempo-dom/lib/html'
+import { Fragment } from 'tempo-dom/lib/html'
 
-export const htmlContent = fragment<
+export const htmlContent = Fragment<
   { title: string | undefined; html: string; path: string | undefined },
   Action,
   unknown
 >($ =>
-  $.when(
+  $.When(
     s => typeof s.path === 'string',
     $ =>
-      $.div($ =>
-        $.class('top-right').a($ => $.href(s => s.path).text('✏️ edit me'))
+      $.DIV($ =>
+        $.class('top-right').A($ => $.href(s => s.path).text('✏️ edit me'))
       )
   )
-    .when(
+    .When(
       s => typeof s === 'string',
       $ => $.text(s => s.title)
     )
-    .article($ => $.class('content').lifecycle(unsafeHtml(s => s.html)))
+    .ARTICLE($ => $.class('content').Lifecycle(unsafeHtml(s => s.html)))
 )

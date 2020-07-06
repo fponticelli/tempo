@@ -1,6 +1,6 @@
 import { Action } from '../action'
 import { ProjectRef } from '../toc'
-import { article } from 'tempo-dom/lib/html'
+import { ARTICLE } from 'tempo-dom/lib/html'
 import { Route } from '../route'
 import { link } from './link'
 import { unsafeHtml } from 'tempo-dom/lib/lifecycle/unsafe_html'
@@ -9,29 +9,29 @@ function renamePackage(s: string) {
   return s
 }
 
-export const projectContent = article<ProjectRef, Action, unknown>($ =>
-  $.class('content').h1($ =>
+export const projectContent = ARTICLE<ProjectRef, Action, unknown>($ =>
+  $.class('content').H1($ =>
     $.class('title')
       .text(s => s.title)
-      .p($ => $.class('subtitile').text(s => s.description))
-      .mapField('keywords', $ =>
-        $.when(
+      .P($ => $.class('subtitile').text(s => s.description))
+      .MapField('keywords', $ =>
+        $.When(
           tags => tags.length > 0,
           $ =>
-            $.div($ =>
-              $.class('tags').forEach($ =>
-                $.spanEl($ => $.class('tag').text(s => s))
+            $.DIV($ =>
+              $.class('tags').ForEach($ =>
+                $.SPAN($ => $.class('tag').text(s => s))
               )
             )
         )
       )
-      .p($ =>
+      .P($ =>
         $.class('version')
-          .a($ =>
+          .A($ =>
             $.href(
               s =>
                 `https://www.npmjs.com/package/tempo-${renamePackage(s.name)}`
-            ).img($ =>
+            ).IMG($ =>
               $.src(
                 s =>
                   `https://img.shields.io/npm/v/tempo-${renamePackage(
@@ -40,9 +40,9 @@ export const projectContent = article<ProjectRef, Action, unknown>($ =>
               ).alt(s => `npm tempo ${s.name}`)
             )
           )
-          .br()
-          .a($ =>
-            $.append(
+          .BR()
+          .A($ =>
+            $.Append(
               link({
                 label: 'change log',
                 route: p => Route.changelog(p.name)
@@ -50,6 +50,6 @@ export const projectContent = article<ProjectRef, Action, unknown>($ =>
             )
           )
       )
-      .div($ => $.lifecycle(unsafeHtml(s => s.content)))
+      .DIV($ => $.Lifecycle(unsafeHtml(s => s.content)))
   )
 )
