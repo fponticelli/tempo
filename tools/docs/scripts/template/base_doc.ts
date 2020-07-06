@@ -14,9 +14,9 @@ import { highlight } from '../utils/highlight'
 export const description = MapField<BaseDoc, unknown, unknown, 'description'>(
   'description',
   $ =>
-    $.append(
+    $.Append(
       MatchOption({
-        Some: DIV($ => $.lifecycle(unsafeHtml(s => markdown(s, s => s)))),
+        Some: DIV($ => $.Lifecycle(unsafeHtml(s => markdown(s, s => s)))),
         None: ''
       })
     )
@@ -80,7 +80,7 @@ export const tags = MapState<
       $ =>
         $.DIV($ =>
           $.class('tags').ForEach($ =>
-            $.spanEl($ => $.class(s => `tag is-${s.type}`).text(s => s.name))
+            $.SPAN($ => $.class(s => `tag is-${s.type}`).text(s => s.name))
           )
         )
     )

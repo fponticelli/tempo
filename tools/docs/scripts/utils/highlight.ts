@@ -4,5 +4,9 @@ const loadLanguages: any = require('prismjs/components/')
 loadLanguages(['typescript'])
 
 export const highlight = (code: string) => {
-  return Prism.highlight(code, Prism.languages.typescript, 'typescript')
+  return Prism.highlight(
+    code,
+    (Prism.languages as any).typescript,
+    'typescript'
+  )
 }
