@@ -1,6 +1,6 @@
 {
   "name": "tempo-dom",
-  "version": "0.25.0",
+  "version": "0.26.0",
   "priority": 1,
   "description": "Fully-typed frontend framework alternative to React and Angular",
   "keywords": [

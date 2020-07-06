@@ -18,7 +18,7 @@
   "dependencies": {
     "dom": "0.0.3",
     "tempo-core": "^1.7.1",
-    "tempo-dom": "^0.25.0"
+    "tempo-dom": "^0.26.0"
   },
   "devDependencies": {
     "babel-types": "^6.26.0",

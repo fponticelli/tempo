@@ -1,6 +1,14 @@
 # Change Log - tempo-dom
 
-This log was last generated on Wed, 17 Jun 2020 02:04:09 GMT and should not be manually modified.
+This log was last generated on Mon, 06 Jul 2020 01:53:04 GMT and should not be manually modified.
+
+## 0.26.0
+Mon, 06 Jul 2020 01:53:04 GMT
+
+### Minor changes
+
+- Full redesign of the DOM DSL and simplified some types.
+- Removed T and El type parameters from DOMElement.
 
 ## 0.25.0
 Wed, 17 Jun 2020 02:04:09 GMT
