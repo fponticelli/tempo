@@ -83,6 +83,11 @@
       >
     </li>
     <li>
+      <a class="is-family-monospace" href="#/api/dom/impl/html.html#BodyPortal"
+        >BodyPortal</a
+      >
+    </li>
+    <li>
       <a class="is-family-monospace" href="#/api/dom/impl/html.html#BR">BR</a>
     </li>
     <li>
@@ -193,6 +198,11 @@
       >
     </li>
     <li>
+      <a class="is-family-monospace" href="#/api/dom/impl/html.html#ForEach"
+        >ForEach</a
+      >
+    </li>
+    <li>
       <a class="is-family-monospace" href="#/api/dom/impl/html.html#FORM"
         >FORM</a
       >
@@ -228,6 +238,11 @@
     <li>
       <a class="is-family-monospace" href="#/api/dom/impl/html.html#HEADER"
         >HEADER</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/dom/impl/html.html#HeadPortal"
+        >HeadPortal</a
       >
     </li>
     <li>
@@ -954,6 +969,28 @@
 <pre
   class="import-code ts language-ts"
 ><span class="token keyword">import</span> <span class="token punctuation">{</span> <span class="token constant">BODY</span> <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/html.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="BodyPortal">
+  BodyPortal<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> BodyPortal<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  <span class="token function-variable function">init</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">builder<span class="token operator">:</span> PortalHTMLBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> PortalHTMLBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html.ts#L1529"
+    >dom/src/impl/html.ts at line 1529</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> BodyPortal <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/html.ts'</span></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="BR">
   BR<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
     >function</span
@@ -1526,6 +1563,39 @@
 <pre
   class="import-code ts language-ts"
 ><span class="token keyword">import</span> <span class="token punctuation">{</span> <span class="token constant">FOOTER</span> <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/html.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="ForEach">
+  ForEach<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> ForEach<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  init<span class="token operator">:</span> <span class="token punctuation">(</span>
+    builder<span class="token operator">:</span> UntilHTMLBuilder<span class="token operator">&lt;</span>
+      State<span class="token punctuation">,</span>
+      State <span class="token keyword">extends</span> <span class="token class-name">any</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">?</span> State<span class="token punctuation">[</span><span class="token builtin">number</span><span class="token punctuation">]</span> <span class="token operator">:</span> <span class="token builtin">never</span><span class="token punctuation">,</span>
+      Action<span class="token punctuation">,</span>
+      Query
+    <span class="token operator">&gt;</span>
+  <span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> UntilHTMLBuilder<span class="token operator">&lt;</span>
+  State<span class="token punctuation">,</span>
+  State <span class="token keyword">extends</span> <span class="token class-name">any</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">?</span> State<span class="token punctuation">[</span><span class="token builtin">number</span><span class="token punctuation">]</span> <span class="token operator">:</span> <span class="token builtin">never</span><span class="token punctuation">,</span>
+  Action<span class="token punctuation">,</span>
+  Query
+<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html.ts#L1479"
+    >dom/src/impl/html.ts at line 1479</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> ForEach <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/html.ts'</span></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="FORM">
   FORM<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
     >function</span
@@ -1752,6 +1822,28 @@
 <pre
   class="import-code ts language-ts"
 ><span class="token keyword">import</span> <span class="token punctuation">{</span> <span class="token constant">HEADER</span> <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/html.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="HeadPortal">
+  HeadPortal<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >function</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">function</span> HeadPortal<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  <span class="token function-variable function">init</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">builder<span class="token operator">:</span> PortalHTMLBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> PortalHTMLBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html.ts#L1523"
+    >dom/src/impl/html.ts at line 1523</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> HeadPortal <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/html.ts'</span></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="HGROUP">
   HGROUP<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
     >function</span
@@ -2797,14 +2889,14 @@
   class="ts language-ts signature"
 ><span class="token keyword">function</span> Portal<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">(</span>
   <span class="token function-variable function">appendChild</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">doc<span class="token operator">:</span> Document<span class="token punctuation">,</span> node<span class="token operator">:</span> Node</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span><span class="token punctuation">,</span>
-  <span class="token function-variable function">init</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">builder<span class="token operator">:</span> PortalBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
-<span class="token punctuation">)</span><span class="token operator">:</span> PortalBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+  <span class="token function-variable function">init</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">builder<span class="token operator">:</span> PortalHTMLBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> PortalHTMLBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
 </pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html.ts#L1479"
-    >dom/src/impl/html.ts at line 1479</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html.ts#L1501"
+    >dom/src/impl/html.ts at line 1501</a
   >
 </p>
 <pre
@@ -2820,14 +2912,14 @@
   class="ts language-ts signature"
 ><span class="token keyword">function</span> PortalWithSelector<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">(</span>
   selector<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span>
-  <span class="token function-variable function">init</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">builder<span class="token operator">:</span> PortalBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
-<span class="token punctuation">)</span><span class="token operator">:</span> PortalBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+  <span class="token function-variable function">init</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">builder<span class="token operator">:</span> PortalHTMLBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> PortalHTMLBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
 </pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html.ts#L1488"
-    >dom/src/impl/html.ts at line 1488</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html.ts#L1510"
+    >dom/src/impl/html.ts at line 1510</a
   >
 </p>
 <pre
@@ -3093,8 +3185,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html.ts#L1501"
-    >dom/src/impl/html.ts at line 1501</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html.ts#L1535"
+    >dom/src/impl/html.ts at line 1535</a
   >
 </p>
 <pre
@@ -3632,8 +3724,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html.ts#L1509"
-    >dom/src/impl/html.ts at line 1509</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html.ts#L1543"
+    >dom/src/impl/html.ts at line 1543</a
   >
 </p>
 <pre
@@ -3654,8 +3746,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html.ts#L1516"
-    >dom/src/impl/html.ts at line 1516</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html.ts#L1550"
+    >dom/src/impl/html.ts at line 1550</a
   >
 </p>
 <pre
@@ -3743,8 +3835,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html.ts#L1525"
-    >dom/src/impl/html.ts at line 1525</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html.ts#L1559"
+    >dom/src/impl/html.ts at line 1559</a
   >
 </p>
 <pre

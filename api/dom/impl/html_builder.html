@@ -521,8 +521,8 @@
     <li>
       <a
         class="is-family-monospace"
-        href="#/api/dom/impl/html_builder.html#PortalBuilder"
-        >PortalBuilder</a
+        href="#/api/dom/impl/html_builder.html#PortalHTMLBuilder"
+        >PortalHTMLBuilder</a
       >
     </li>
     <li>
@@ -845,15 +845,19 @@
     <span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
   <span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">this</span>
   <span class="token function">Portal</span><span class="token punctuation">(</span>
-    <span class="token function-variable function">appendChild</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">doc<span class="token operator">:</span> Document</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Element<span class="token punctuation">,</span>
-    <span class="token function-variable function">init</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">builder<span class="token operator">:</span> PortalBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+    <span class="token function-variable function">appendChild</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">doc<span class="token operator">:</span> Document<span class="token punctuation">,</span> node<span class="token operator">:</span> Node</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span><span class="token punctuation">,</span>
+    <span class="token function-variable function">init</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">builder<span class="token operator">:</span> PortalHTMLBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
   <span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">this</span>
   <span class="token function">PortalWithSelector</span><span class="token punctuation">(</span>
     selector<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span>
-    <span class="token function-variable function">init</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">builder<span class="token operator">:</span> PortalBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+    <span class="token function-variable function">init</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">builder<span class="token operator">:</span> PortalHTMLBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
   <span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">this</span>
-  <span class="token function">HeadPortal</span><span class="token punctuation">(</span><span class="token function-variable function">init</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">builder<span class="token operator">:</span> PortalBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">this</span>
-  <span class="token function">BodyPortal</span><span class="token punctuation">(</span><span class="token function-variable function">init</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">builder<span class="token operator">:</span> PortalBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">this</span>
+  <span class="token function">HeadPortal</span><span class="token punctuation">(</span>
+    <span class="token function-variable function">init</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">builder<span class="token operator">:</span> PortalHTMLBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+  <span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">this</span>
+  <span class="token function">BodyPortal</span><span class="token punctuation">(</span>
+    <span class="token function-variable function">init</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">builder<span class="token operator">:</span> PortalHTMLBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+  <span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">this</span>
   <span class="token function">Unless</span><span class="token punctuation">(</span>
     condition<span class="token operator">:</span> DerivedValue<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> <span class="token builtin">boolean</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
     <span class="token function-variable function">init</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">builder<span class="token operator">:</span> MapStateHTMLBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
@@ -3903,15 +3907,15 @@
 <pre
   class="import-code ts language-ts"
 ><span class="token keyword">import</span> <span class="token punctuation">{</span> OLTypeValue <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/html_builder.ts'</span></pre>
-<h3 class="is-family-monospace has-text-grey-dark" id="PortalBuilder">
-  PortalBuilder<span
+<h3 class="is-family-monospace has-text-grey-dark" id="PortalHTMLBuilder">
+  PortalHTMLBuilder<span
     class="kind is-family-sans-serif has-text-grey-light is-size-6"
     >class</span
   >
 </h3>
 <pre
   class="ts language-ts signature"
-><span class="token keyword">declare</span> <span class="token keyword">class</span> <span class="token class-name">PortalBuilder</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+><span class="token keyword">declare</span> <span class="token keyword">class</span> <span class="token class-name">PortalHTMLBuilder</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
   <span class="token keyword">extends</span> <span class="token class-name">BaseHTMLBuilder</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
   <span class="token keyword">implements</span> <span class="token class-name">IBuilder</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span> <span class="token punctuation">{</span>
   <span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="token keyword">readonly</span> <span class="token function-variable function">appendChild</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">doc<span class="token operator">:</span> Document<span class="token punctuation">,</span> node<span class="token operator">:</span> Node</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span><span class="token punctuation">)</span>
@@ -3928,7 +3932,7 @@
 </p>
 <pre
   class="import-code ts language-ts"
-><span class="token keyword">import</span> <span class="token punctuation">{</span> PortalBuilder <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/html_builder.ts'</span></pre>
+><span class="token keyword">import</span> <span class="token punctuation">{</span> PortalHTMLBuilder <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/html_builder.ts'</span></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="PreloadValue">
   PreloadValue<span
     class="kind is-family-sans-serif has-text-grey-light is-size-6"

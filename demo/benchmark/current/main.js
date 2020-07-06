@@ -2288,19 +2288,19 @@ var BaseSVGBuilder = /** @class */ (function (_super) {
         return this.Append(builder.build());
     };
     BaseSVGBuilder.prototype.PortalWithSelector = function (selector, init) {
-        return this.Portal(function (doc) {
+        return this.Portal(function (doc, node) {
             var el = doc.querySelector(selector);
             if (!el) {
                 throw new Error("selector doesn't match any element: \"" + selector + "\"");
             }
-            return el;
+            el.appendChild(node);
         }, init);
     };
     BaseSVGBuilder.prototype.HeadPortal = function (init) {
-        return this.Portal(function (doc) { return doc.head; }, init);
+        return this.Portal(function (doc, node) { return doc.head.appendChild(node); }, init);
     };
     BaseSVGBuilder.prototype.BodyPortal = function (init) {
-        return this.Portal(function (doc) { return doc.body; }, init);
+        return this.Portal(function (doc, node) { return doc.body.appendChild(node); }, init);
     };
     // SimpleComponent(
     //   init: (builder: SimpleComponentBuilder<State, Query>) => void
@@ -4234,7 +4234,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UntilHTMLBuilder = exports.SimpleComponentHTMLBuilder = exports.PortalBuilder = exports.MapStateHTMLBuilder = exports.MapQueryHTMLBuilder = exports.MapActionHTMLBuilder = exports.FragmentHTMLBuilder = exports.ComponentHTMLBuilder = exports.HTMLVideoElementBuilder = exports.HTMLTrackElementBuilder = exports.HTMLTimeElementBuilder = exports.HTMLTextAreaElementBuilder = exports.HTMLTableHeaderCellElementBuilder = exports.HTMLTableDataCellElementBuilder = exports.HTMLTableColElementBuilder = exports.HTMLStyleElementBuilder = exports.HTMLSourceElementBuilder = exports.HTMLSlotElementBuilder = exports.HTMLSelectElementBuilder = exports.HTMLScriptElementBuilder = exports.HTMLQuoteElementBuilder = exports.HTMLProgressElementBuilder = exports.HTMLPictureElementBuilder = exports.HTMLParamElementBuilder = exports.HTMLOutputElementBuilder = exports.HTMLOptionElementBuilder = exports.HTMLOptGroupElementBuilder = exports.HTMLOListElementBuilder = exports.HTMLObjectElementBuilder = exports.HTMLModElementBuilder = exports.HTMLMeterElementBuilder = exports.HTMLMetaElementBuilder = exports.HTMLMapElementBuilder = exports.HTMLLinkElementBuilder = exports.HTMLLIElementBuilder = exports.HTMLLabelElementBuilder = exports.HTMLInputUrlElementBuilder = exports.InputTextElementBuilder = exports.HTMLInputTelElementBuilder = exports.HTMLInputSubmitElementBuilder = exports.HTMLInputSearchElementBuilder = exports.HTMLInputPasswordElementBuilder = exports.HTMLInputNumberElementBuilder = exports.HTMLInputImageElementBuilder = exports.HTMLInputFileElementBuilder = exports.HTMLInputEmailElementBuilder = exports.HTMLInputDateElementBuilder = exports.HTMLInputCheckedElementBuilder = exports.HTMLInputElementBuilder = exports.HTMLImageElementBuilder = exports.HTMLIFrameElementBuilder = exports.HTMLHtmlElementBuilder = exports.HTMLFormElementBuilder = exports.HTMLFieldSetElementBuilder = exports.HTMLEmbedElementBuilder = exports.HTMLDialogElementBuilder = exports.HTMLDetailsElementBuilder = exports.HTMLDataElementBuilder = exports.HTMLCanvasElementBuilder = exports.HTMLButtonElementBuilder = exports.HTMLBaseElementBuilder = exports.HTMLAudioElementBuilder = exports.HTMLAreaElementBuilder = exports.HTMLAnchorElementBuilder = exports.HTMLMediaElementBuilder = exports.HTMLElementBuilder = exports.El = exports.BaseHTMLBuilder = void 0;
+exports.UntilHTMLBuilder = exports.SimpleComponentHTMLBuilder = exports.PortalHTMLBuilder = exports.MapStateHTMLBuilder = exports.MapQueryHTMLBuilder = exports.MapActionHTMLBuilder = exports.FragmentHTMLBuilder = exports.ComponentHTMLBuilder = exports.HTMLVideoElementBuilder = exports.HTMLTrackElementBuilder = exports.HTMLTimeElementBuilder = exports.HTMLTextAreaElementBuilder = exports.HTMLTableHeaderCellElementBuilder = exports.HTMLTableDataCellElementBuilder = exports.HTMLTableColElementBuilder = exports.HTMLStyleElementBuilder = exports.HTMLSourceElementBuilder = exports.HTMLSlotElementBuilder = exports.HTMLSelectElementBuilder = exports.HTMLScriptElementBuilder = exports.HTMLQuoteElementBuilder = exports.HTMLProgressElementBuilder = exports.HTMLPictureElementBuilder = exports.HTMLParamElementBuilder = exports.HTMLOutputElementBuilder = exports.HTMLOptionElementBuilder = exports.HTMLOptGroupElementBuilder = exports.HTMLOListElementBuilder = exports.HTMLObjectElementBuilder = exports.HTMLModElementBuilder = exports.HTMLMeterElementBuilder = exports.HTMLMetaElementBuilder = exports.HTMLMapElementBuilder = exports.HTMLLinkElementBuilder = exports.HTMLLIElementBuilder = exports.HTMLLabelElementBuilder = exports.HTMLInputUrlElementBuilder = exports.InputTextElementBuilder = exports.HTMLInputTelElementBuilder = exports.HTMLInputSubmitElementBuilder = exports.HTMLInputSearchElementBuilder = exports.HTMLInputPasswordElementBuilder = exports.HTMLInputNumberElementBuilder = exports.HTMLInputImageElementBuilder = exports.HTMLInputFileElementBuilder = exports.HTMLInputEmailElementBuilder = exports.HTMLInputDateElementBuilder = exports.HTMLInputCheckedElementBuilder = exports.HTMLInputElementBuilder = exports.HTMLImageElementBuilder = exports.HTMLIFrameElementBuilder = exports.HTMLHtmlElementBuilder = exports.HTMLFormElementBuilder = exports.HTMLFieldSetElementBuilder = exports.HTMLEmbedElementBuilder = exports.HTMLDialogElementBuilder = exports.HTMLDetailsElementBuilder = exports.HTMLDataElementBuilder = exports.HTMLCanvasElementBuilder = exports.HTMLButtonElementBuilder = exports.HTMLBaseElementBuilder = exports.HTMLAudioElementBuilder = exports.HTMLAreaElementBuilder = exports.HTMLAnchorElementBuilder = exports.HTMLMediaElementBuilder = exports.HTMLElementBuilder = exports.El = exports.BaseHTMLBuilder = void 0;
 var dom_1 = require("./dom");
 var text_1 = require("./text");
 var value_1 = require("../value");
@@ -4349,24 +4349,24 @@ var BaseHTMLBuilder = /** @class */ (function (_super) {
         });
     };
     BaseHTMLBuilder.prototype.Portal = function (appendChild, init) {
-        var builder = new PortalBuilder(appendChild);
+        var builder = new PortalHTMLBuilder(appendChild);
         init(builder);
         return this.Append(builder.build());
     };
     BaseHTMLBuilder.prototype.PortalWithSelector = function (selector, init) {
-        return this.Portal(function (doc) {
+        return this.Portal(function (doc, node) {
             var el = doc.querySelector(selector);
             if (!el) {
                 throw new Error("selector doesn't match any element: \"" + selector + "\"");
             }
-            return el;
+            el.appendChild(node);
         }, init);
     };
     BaseHTMLBuilder.prototype.HeadPortal = function (init) {
-        return this.Portal(function (doc) { return doc.head; }, init);
+        return this.Portal(function (doc, node) { return doc.head.appendChild(node); }, init);
     };
     BaseHTMLBuilder.prototype.BodyPortal = function (init) {
-        return this.Portal(function (doc) { return doc.body; }, init);
+        return this.Portal(function (doc, node) { return doc.body.appendChild(node); }, init);
     };
     // SimpleComponent(
     //   init: (builder: SimpleComponentBuilder<State, Query>) => void
@@ -6622,19 +6622,19 @@ var MapStateHTMLBuilder = /** @class */ (function (_super) {
     return MapStateHTMLBuilder;
 }(BaseHTMLBuilder));
 exports.MapStateHTMLBuilder = MapStateHTMLBuilder;
-var PortalBuilder = /** @class */ (function (_super) {
-    __extends(PortalBuilder, _super);
-    function PortalBuilder(appendChild) {
+var PortalHTMLBuilder = /** @class */ (function (_super) {
+    __extends(PortalHTMLBuilder, _super);
+    function PortalHTMLBuilder(appendChild) {
         var _this = _super.call(this) || this;
         _this.appendChild = appendChild;
         return _this;
     }
-    PortalBuilder.prototype.build = function () {
+    PortalHTMLBuilder.prototype.build = function () {
         return new portal_1.PortalTemplate(this.appendChild, this._children);
     };
-    return PortalBuilder;
+    return PortalHTMLBuilder;
 }(BaseHTMLBuilder));
-exports.PortalBuilder = PortalBuilder;
+exports.PortalHTMLBuilder = PortalHTMLBuilder;
 var SimpleComponentHTMLBuilder = /** @class */ (function (_super) {
     __extends(SimpleComponentHTMLBuilder, _super);
     function SimpleComponentHTMLBuilder() {
@@ -6796,7 +6796,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.When = exports.Until = exports.Unless = exports.SimpleComponent = exports.PortalWithSelector = exports.Portal = exports.Fragment = exports.Lazy = exports.MatchAsyncResult = exports.MatchAsync = exports.MatchResult = exports.MatchMaybe = exports.MatchOption = exports.MatchValue = exports.MatchBool = exports.MatchKind = exports.Match = exports.MapQuery = exports.MapAction = exports.MapStateAndKeep = exports.MapField = exports.MapState = exports.Iterate = exports.Component = exports.LocalAdapter = exports.Adapter = exports.WBR = exports.VIDEO = exports.VAR = exports.UL = exports.U = exports.TRACK = exports.TR = exports.TITLE = exports.TIME = exports.THEAD = exports.TH = exports.TFOOT = exports.TEXTAREA = exports.TEMPLATE = exports.TD = exports.TBODY = exports.TABLE = exports.SUP = exports.SUMMARY = exports.SUB = exports.STYLE = exports.STRONG = exports.SPAN = exports.SOURCE = exports.SMALL = exports.SLOT = exports.SELECT = exports.SECTION = exports.SCRIPT = exports.SAMP = exports.S = exports.RUBY = exports.RT = exports.RP = exports.Q = exports.PROGRESS = exports.PRE = exports.PICTURE = exports.PARAM = exports.P = exports.OUTPUT = exports.OPTION = exports.OPTGROUP = exports.OL = exports.OBJECT = exports.NOSCRIPT = exports.NAV = exports.METER = exports.META = exports.MARK = exports.MAP = exports.MAIN = exports.LINK = exports.LI = exports.LEGEND = exports.LABEL = exports.KBD = exports.INS = exports.INPUT = exports.IMG = exports.IFRAME = exports.I = exports.HTML = exports.HR = exports.HGROUP = exports.HEADER = exports.HEAD = exports.H6 = exports.H5 = exports.H4 = exports.H3 = exports.H2 = exports.H1 = exports.FORM = exports.FOOTER = exports.FIGURE = exports.FIGCAPTION = exports.FIELDSET = exports.EMBED = exports.EM = exports.DT = exports.DL = exports.DIV = exports.DIALOG = exports.DFN = exports.DETAILS = exports.DEL = exports.DD = exports.DATALIST = exports.DATA = exports.COLGROUP = exports.COL = exports.CODE = exports.CITE = exports.CAPTION = exports.CANVAS = exports.BUTTON = exports.BR = exports.BODY = exports.BLOCKQUOTE = exports.BDO = exports.BDI = exports.BASE = exports.B = exports.AUDIO = exports.ASIDE = exports.ARTICLE = exports.AREA = exports.ADDRESS = exports.ABBR = exports.A = exports.El = void 0;
+exports.When = exports.Until = exports.Unless = exports.SimpleComponent = exports.BodyPortal = exports.HeadPortal = exports.PortalWithSelector = exports.Portal = exports.ForEach = exports.Fragment = exports.Lazy = exports.MatchAsyncResult = exports.MatchAsync = exports.MatchResult = exports.MatchMaybe = exports.MatchOption = exports.MatchValue = exports.MatchBool = exports.MatchKind = exports.Match = exports.MapQuery = exports.MapAction = exports.MapStateAndKeep = exports.MapField = exports.MapState = exports.Iterate = exports.Component = exports.LocalAdapter = exports.Adapter = exports.WBR = exports.VIDEO = exports.VAR = exports.UL = exports.U = exports.TRACK = exports.TR = exports.TITLE = exports.TIME = exports.THEAD = exports.TH = exports.TFOOT = exports.TEXTAREA = exports.TEMPLATE = exports.TD = exports.TBODY = exports.TABLE = exports.SUP = exports.SUMMARY = exports.SUB = exports.STYLE = exports.STRONG = exports.SPAN = exports.SOURCE = exports.SMALL = exports.SLOT = exports.SELECT = exports.SECTION = exports.SCRIPT = exports.SAMP = exports.S = exports.RUBY = exports.RT = exports.RP = exports.Q = exports.PROGRESS = exports.PRE = exports.PICTURE = exports.PARAM = exports.P = exports.OUTPUT = exports.OPTION = exports.OPTGROUP = exports.OL = exports.OBJECT = exports.NOSCRIPT = exports.NAV = exports.METER = exports.META = exports.MARK = exports.MAP = exports.MAIN = exports.LINK = exports.LI = exports.LEGEND = exports.LABEL = exports.KBD = exports.INS = exports.INPUT = exports.IMG = exports.IFRAME = exports.I = exports.HTML = exports.HR = exports.HGROUP = exports.HEADER = exports.HEAD = exports.H6 = exports.H5 = exports.H4 = exports.H3 = exports.H2 = exports.H1 = exports.FORM = exports.FOOTER = exports.FIGURE = exports.FIGCAPTION = exports.FIELDSET = exports.EMBED = exports.EM = exports.DT = exports.DL = exports.DIV = exports.DIALOG = exports.DFN = exports.DETAILS = exports.DEL = exports.DD = exports.DATALIST = exports.DATA = exports.COLGROUP = exports.COL = exports.CODE = exports.CITE = exports.CAPTION = exports.CANVAS = exports.BUTTON = exports.BR = exports.BODY = exports.BLOCKQUOTE = exports.BDO = exports.BDI = exports.BASE = exports.B = exports.AUDIO = exports.ASIDE = exports.ARTICLE = exports.AREA = exports.ADDRESS = exports.ABBR = exports.A = exports.El = void 0;
 var html_builder_1 = require("./html_builder");
 Object.defineProperty(exports, "El", { enumerable: true, get: function () { return html_builder_1.El; } });
 var value_1 = require("../value");
@@ -7714,8 +7714,15 @@ function Fragment(init) {
     return builder;
 }
 exports.Fragment = Fragment;
+function ForEach(init) {
+    return Until(function (_a) {
+        var state = _a.state, index = _a.index;
+        return state[index];
+    }, init);
+}
+exports.ForEach = ForEach;
 function Portal(appendChild, init) {
-    var builder = new html_builder_1.PortalBuilder(appendChild);
+    var builder = new html_builder_1.PortalHTMLBuilder(appendChild);
     init(builder);
     return builder;
 }
@@ -7730,6 +7737,14 @@ function PortalWithSelector(selector, init) {
     }, init);
 }
 exports.PortalWithSelector = PortalWithSelector;
+function HeadPortal(init) {
+    return Portal(function (doc, node) { return doc.head.appendChild(node); }, init);
+}
+exports.HeadPortal = HeadPortal;
+function BodyPortal(init) {
+    return Portal(function (doc, node) { return doc.body.appendChild(node); }, init);
+}
+exports.BodyPortal = BodyPortal;
 function SimpleComponent(init) {
     var builder = new html_builder_1.SimpleComponentHTMLBuilder();
     init(builder);
@@ -7785,9 +7800,9 @@ exports.list = void 0;
 
 var html_1 = require("tempo-dom/lib/html");
 
-exports.list = html_1.ul(function ($) {
-  return $.forEach(function ($) {
-    return $.li(function ($) {
+exports.list = html_1.UL(function ($) {
+  return $.ForEach(function ($) {
+    return $.LI(function ($) {
       return $.class(String).text(String);
     });
   });
@@ -7802,27 +7817,27 @@ exports.deep = void 0;
 
 var html_1 = require("tempo-dom/lib/html");
 
-exports.deep = html_1.div(function ($) {
+exports.deep = html_1.DIV(function ($) {
   return $.id(function (s) {
     return s.id;
-  }).div(function ($) {
-    return $.h1(function ($) {
+  }).DIV(function ($) {
+    return $.H1(function ($) {
       return $.text('Welcome ').text(function (s) {
         return s.name;
       });
-    }).address(function ($) {
-      return $.div(function ($) {
+    }).ADDRESS(function ($) {
+      return $.DIV(function ($) {
         return $.text('Address: ');
-      }).div(function ($) {
+      }).DIV(function ($) {
         return $.text(function (s) {
           return s.address.line1;
         });
-      }).div(function ($) {
+      }).DIV(function ($) {
         return $.text(function (s) {
           return s.address.line2;
         });
       });
-    }).article(function ($) {
+    }).ARTICLE(function ($) {
       return $.text(function (s) {
         return s.paragraph;
       });
@@ -7903,7 +7918,7 @@ exports.attribute = void 0;
 
 var html_1 = require("tempo-dom/lib/html");
 
-exports.attribute = html_1.div(function ($) {
+exports.attribute = html_1.DIV(function ($) {
   return $.id(function (s) {
     return s.id;
   }).class(function (s) {
@@ -7922,8 +7937,8 @@ exports.style = void 0;
 
 var html_1 = require("tempo-dom/lib/html");
 
-exports.style = html_1.div(function ($) {
-  return $.style('backgroundColor', function (s) {
+exports.style = html_1.DIV(function ($) {
+  return $.style('background-color', function (s) {
     return s.backgroundColor;
   }).style('color', function (s) {
     return s.color;
@@ -7941,7 +7956,7 @@ exports.event = void 0;
 
 var html_1 = require("tempo-dom/lib/html");
 
-exports.event = html_1.button(function ($) {
+exports.event = html_1.BUTTON(function ($) {
   return $.onClick(function (s) {
     return s;
   }).text('click me');
@@ -7956,7 +7971,7 @@ exports.property = void 0;
 
 var html_1 = require("tempo-dom/lib/html");
 
-exports.property = html_1.input(function ($) {
+exports.property = html_1.INPUT(function ($) {
   return $.value(function (s) {
     return s.value;
   }).disabled(function (s) {
