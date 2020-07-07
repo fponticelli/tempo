@@ -89,6 +89,7 @@ import { Result } from 'tempo-std/lib/result'
 import { Async, Outcome } from 'tempo-std/lib/async'
 import { AsyncResult } from 'tempo-std/lib/async_result'
 import { LazyTemplate } from './lazy'
+import { HoldF, HoldStateTemplate } from './hold_state'
 
 export { El }
 
@@ -1222,6 +1223,20 @@ export function Component<State, Action, Query>(
   const builder = new ComponentHTMLBuilder<State, Action, Query>(reducer)
   init(builder)
   return builder
+}
+
+export function HoldState<State, StateB, StateC, Action, Query>(
+  holdf: HoldF<
+    State,
+    StateB,
+    StateC,
+    Action,
+    Query,
+    FragmentHTMLBuilder<StateC, Action, Query>
+  >
+) {
+  const builder = new FragmentHTMLBuilder<StateC, Action, Query>()
+  return new HoldStateTemplate(holdf, builder)
 }
 
 export function Iterate<State, Items extends any[], Action, Query>(

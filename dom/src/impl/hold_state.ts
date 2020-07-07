@@ -26,7 +26,7 @@ export type ReleaseF<
 > = (
   merge: (a: StateA, b: StateB) => StateC,
   init: (builder: Builder) => void
-) => DOMTemplate<StateB, Action, Query>
+) => DOMTemplate<StateB, Action, Query> | IBuilder<StateB, Action, Query>
 export type HoldF<
   StateA,
   StateB,
@@ -46,33 +46,36 @@ export class HoldStateTemplate<
   Query,
   Builder extends IBuilder<StateC, Action, Query>
 > implements DOMTemplate<StateA, Action, Query> {
-  private template: DOMTemplate<StateA, Action, Query>
-  private localState!: StateA
+  private template!: DOMTemplate<StateA, Action, Query>
   constructor(
     readonly holdf: HoldF<StateA, StateB, StateC, Action, Query, Builder>,
-    builder: Builder
-  ) {
-    this.template = childOrBuilderToTemplate(
-      this.holdf((merge, init) => {
-        // const builder = new FragmentBuilder<StateC, Action, Query>()
-        init(builder)
-        const innerTemplate = builder.build()
-        return MapState<StateB, StateC, Action, Query>(
-          (b: StateB) => merge(this.localState, b),
-          $ => $.Append(innerTemplate)
-        ).build()
-      })
-    )
-  }
+    readonly builder: Builder
+  ) {}
   render(ctx: DOMContext<Action>, state: StateA) {
-    const self = this
-    self.localState = state
+    let localState = state
+    if (this.template === undefined) {
+      this.template = childOrBuilderToTemplate(
+        this.holdf((merge, init) => {
+          init(this.builder)
+          return MapState<StateB, StateC, Action, Query>(
+            (b: StateB) => merge(localState, b),
+            $ =>
+              $
+                // .Equals(() => {
+                //   console.log('COMPARING')
+                //   return false
+                // }) // not sure why this would be necessary, requires investigation
+                .Append(this.builder)
+          )
+        })
+      )
+    }
 
-    const view = this.template.render(ctx, self.localState)
+    const view = this.template.render(ctx, localState)
     return {
       change(state: StateA) {
-        self.localState = state
-        view.change(self.localState)
+        localState = state
+        view.change(localState)
       },
       request(query: Query) {
         view.request(query)

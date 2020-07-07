@@ -37,23 +37,18 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      inject: false,
-      // template: require('html-webpack-template'),
-      title: 'Tempo',
+      inject: true,
+      title: 'Tempo Docs',
+      template: 'index.html',
       googleAnalytics: {
         trackingId: 'UA-589893-23',
         pageViewOnLoad: true
       },
       meta: [
-        {
-          name: 'description',
-          content: 'Documentation site for Tempo libraries.'
-        }
+        { viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no' },
+        { description: 'Documentation site for Tempo libraries.' }
       ],
-      favicon: '../../pages/assets/icon-512x512.png',
-      mobile: true,
-      lang: 'en-US',
-      inlineManifestWebpackName: 'webpackManifest'
+      favicon: '../../pages/assets/icon-512x512.png'
     }),
     new MiniCssExtractPlugin({
       filename: '[name].css',

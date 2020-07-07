@@ -18,6 +18,7 @@ import { removeNode } from './dom'
 import { map as mapArray } from 'tempo-std/lib/arrays'
 import { Attribute, resolveAttribute } from '../value'
 import { IBuilder, childOrBuilderToTemplate } from './dom_builder'
+// import { strictEqual } from 'tempo-std/lib/equals'
 
 export class MapStateTemplate<OuterState, InnerState, Action, Query>
   implements DOMTemplate<OuterState, Action, Query> {
@@ -25,7 +26,7 @@ export class MapStateTemplate<OuterState, InnerState, Action, Query>
   constructor(
     readonly map: Attribute<OuterState, InnerState>,
     readonly orElse: DOMTemplate<OuterState, Action, Query>,
-    readonly equals: (a: InnerState, b: InnerState) => boolean,
+    readonly equals: undefined | ((a: InnerState, b: InnerState) => boolean),
     children: (
       | DOMChild<InnerState, Action, Query>
       | IBuilder<InnerState, Action, Query>
@@ -35,7 +36,8 @@ export class MapStateTemplate<OuterState, InnerState, Action, Query>
   }
 
   render(ctx: DOMContext<Action>, state: OuterState): View<OuterState, Query> {
-    const { children, map, orElse, equals } = this
+    const { children, map, orElse } = this
+    // const equals = this.equals ?? strictEqual
 
     let views: View<InnerState | OuterState, Query>[] = []
 
@@ -63,7 +65,8 @@ export class MapStateTemplate<OuterState, InnerState, Action, Query>
             destroy()
             current = next
             views = mapArray(children, c => c.render(newCtx, next))
-          } else if (!equals(current, next)) {
+          } else {
+            // if (!equals(current, next)) { // TODO remporarely removed
             current = next
             for (const view of views) view.change(next)
           }

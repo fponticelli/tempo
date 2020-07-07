@@ -4,7 +4,6 @@ import {
   IBuilder,
   extractLiterals,
   extractDerived,
-  childOrBuilderToTemplate,
   booleanToString,
   ListOrRecordValue,
   listOrRecordToSpaceSeparated,
@@ -1672,16 +1671,28 @@ export class SVGGraphicsElementBuilder<
 export class ComponentSVGBuilder<State, Action, Query>
   extends BaseSVGBuilder<State, Action, Query>
   implements IBuilder<State, Action, Query> {
-  public delayed = false
-  public equals: (a: State, b: State) => boolean = (a, b) => a === b
+  private _delayed = false
+  private _equals: undefined | ((a: State, b: State) => boolean)
   constructor(readonly reducer: (state: State, action: Action) => State) {
     super()
   }
+  Equals(equals: undefined | ((a: State, b: State) => boolean)) {
+    if (equals !== undefined) {
+      this._equals = equals
+    }
+    return this
+  }
+  Delayed(delayed: undefined | boolean) {
+    if (delayed !== undefined) {
+      this._delayed = delayed
+    }
+    return this
+  }
   build() {
     return new ComponentTemplate<State, Action, Query>(
-      this.delayed,
+      this._delayed,
       this.reducer,
-      this.equals,
+      this._equals,
       this._children
     )
   }
@@ -1726,19 +1737,27 @@ export class MapQuerySVGBuilder<State, Action, Query, QueryB>
 export class MapStateSVGBuilder<State, StateB, Action, Query>
   extends BaseSVGBuilder<StateB, Action, Query>
   implements IBuilder<State, Action, Query> {
-  public orElse:
-    | DOMChild<State, Action, Query>
-    | IBuilder<State, Action, Query>
-    | undefined
-  public equals: (a: StateB, b: StateB) => boolean = (a, b) => a === b
+  private _orElse: FragmentSVGBuilder<State, Action, Query> | undefined
+  private _equals: undefined | ((a: StateB, b: StateB) => boolean)
   constructor(protected map: Attribute<State, StateB>) {
     super()
+  }
+  Equals(equals: undefined | ((a: StateB, b: StateB) => boolean)) {
+    if (equals !== undefined) {
+      this._equals = equals
+    }
+    return this
+  }
+  OrElse(init: (builder: FragmentSVGBuilder<State, Action, Query>) => void) {
+    this._orElse = new FragmentSVGBuilder<State, Action, Query>()
+    init(this._orElse!)
+    return this
   }
   build() {
     return new MapStateTemplate<State, StateB, Action, Query>(
       this.map,
-      childOrBuilderToTemplate(this.orElse),
-      this.equals,
+      (this._orElse && this._orElse.build()) ?? text(''),
+      this._equals,
       this._children
     )
   }
@@ -1761,13 +1780,19 @@ export class PortalSVGBuilder<State, Action, Query>
 export class SimpleComponentSVGBuilder<State, Query>
   extends BaseSVGBuilder<State, State, Query>
   implements IBuilder<State, State, Query> {
-  public delayed = false
+  public _delayed = false
   constructor() {
     super()
   }
+  Delayed(delayed: undefined | boolean) {
+    if (delayed !== undefined) {
+      this._delayed = delayed
+    }
+    return this
+  }
   build() {
     return new SimpleComponentTemplate<State, Query>(
-      this.delayed,
+      this._delayed,
       this._children
     )
   }

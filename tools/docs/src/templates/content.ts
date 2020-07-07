@@ -14,7 +14,7 @@ import { demosContent } from './demos_content'
 import { projectContent } from './project_content'
 import { loader } from './loader'
 
-export const content = Fragment<
+export const contentTemplate = Fragment<
   AsyncResult<Content, HttpError, unknown>,
   Action,
   unknown
@@ -27,7 +27,7 @@ export const content = Fragment<
         )
       ),
       Loading: loader,
-      NotAsked: '',
+      NotAsked: loader,
       Success: MatchKind<Content, Action, unknown>({
         HtmlPage: htmlContent,
         Demos: MapField('demos', $ => $.Append(demosContent)),

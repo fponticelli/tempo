@@ -15,7 +15,7 @@ export const htmlContent = Fragment<
       )
   )
     .When(
-      s => typeof s === 'string',
+      s => typeof s.title === 'string',
       $ => $.text(s => s.title)
     )
     .ARTICLE($ => $.class('content').Lifecycle(unsafeHtml(s => s.html)))

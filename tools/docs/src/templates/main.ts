@@ -8,7 +8,7 @@ import {
 import { State, Content } from '../state'
 import { Action } from '../action'
 import { Toc } from '../toc'
-import { content } from './content'
+import { contentTemplate } from './content'
 import { HttpError } from '../request'
 import { link, maybeLink } from './link'
 import { Route, sameRoute } from '../route'
@@ -26,7 +26,6 @@ const toggleMenu = (
   const main = document.querySelector('.main-column')!
 
   function close() {
-    // console.log('CLOSE')
     element.classList.remove('is-active')
     side.classList.remove('is-active')
     main.removeEventListener('mouseup', close, true)
@@ -42,7 +41,7 @@ const toggleMenu = (
   return undefined
 }
 
-export const template = DIV<State, Action, unknown>($ =>
+export const mainTemplate = DIV<State, Action, unknown>($ =>
   $.class('app')
     .NAV($ =>
       $.class('navbar has-shadow')
@@ -51,7 +50,7 @@ export const template = DIV<State, Action, unknown>($ =>
         .DIV($ =>
           $.class('container')
             .DIV($ =>
-              $.class('navabar-brand')
+              $.class('navbar-brand')
                 .A($ =>
                   $.role('button')
                     .class('navbar-burger burger')
@@ -78,7 +77,7 @@ export const template = DIV<State, Action, unknown>($ =>
             .DIV($ =>
               $.class('navbar-menu')
                 .DIV($ =>
-                  $.class('navabar-start').Append(
+                  $.class('navbar-start').Append(
                     link({
                       label: 'Tempo',
                       route: Route.home,
@@ -87,7 +86,7 @@ export const template = DIV<State, Action, unknown>($ =>
                   )
                 )
                 .DIV($ =>
-                  $.class('navabar-end')
+                  $.class('navbar-end')
                     .A($ =>
                       $.class('navbar-item')
                         .href('https://github.com/fponticelli/tempo')
@@ -158,11 +157,13 @@ export const template = DIV<State, Action, unknown>($ =>
             NotAsked: '',
             Loading: loader,
             Success: Release(
-              (state, toc) => ({
-                route: state.route,
-                content: state.content,
-                toc
-              }),
+              (state, toc) => {
+                return {
+                  route: state.route,
+                  content: state.content,
+                  toc
+                }
+              },
               $ =>
                 $.MAIN($ =>
                   $.class('container').DIV($ =>
@@ -175,7 +176,7 @@ export const template = DIV<State, Action, unknown>($ =>
                       .DIV($ =>
                         $.class('column scrollable main-column').MapState(
                           ({ content }) => content,
-                          $ => $.Append(content)
+                          $ => $.Append(contentTemplate)
                         )
                       )
                   )

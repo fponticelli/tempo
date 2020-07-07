@@ -26,7 +26,6 @@ import { MatchBoolTemplate } from './match_bool_template'
 import { HoldF, HoldStateTemplate } from './hold_state'
 import {
   IBuilder,
-  childOrBuilderToTemplate,
   extractLiterals,
   extractDerived,
   ListOrRecordValue,
@@ -3897,16 +3896,28 @@ export class HTMLVideoElementBuilder<
 export class ComponentHTMLBuilder<State, Action, Query>
   extends BaseHTMLBuilder<State, Action, Query>
   implements IBuilder<State, Action, Query> {
-  public delayed = false
-  public equals: (a: State, b: State) => boolean = (a, b) => a === b
+  private _delayed = false
+  private _equals: undefined | ((a: State, b: State) => boolean)
   constructor(readonly reducer: (state: State, action: Action) => State) {
     super()
   }
+  Equals(equals: undefined | ((a: State, b: State) => boolean)) {
+    if (equals !== undefined) {
+      this._equals = equals
+    }
+    return this
+  }
+  Delayed(delayed: undefined | boolean) {
+    if (delayed !== undefined) {
+      this._delayed = delayed
+    }
+    return this
+  }
   build() {
     return new ComponentTemplate<State, Action, Query>(
-      this.delayed,
+      this._delayed,
       this.reducer,
-      this.equals,
+      this._equals,
       this._children
     )
   }
@@ -3951,19 +3962,27 @@ export class MapQueryHTMLBuilder<State, Action, Query, QueryB>
 export class MapStateHTMLBuilder<State, StateB, Action, Query>
   extends BaseHTMLBuilder<StateB, Action, Query>
   implements IBuilder<State, Action, Query> {
-  public orElse:
-    | DOMChild<State, Action, Query>
-    | IBuilder<State, Action, Query>
-    | undefined
-  public equals: (a: StateB, b: StateB) => boolean = (a, b) => a === b
+  private _orElse: FragmentHTMLBuilder<State, Action, Query> | undefined
+  private _equals: undefined | ((a: StateB, b: StateB) => boolean)
   constructor(protected map: Attribute<State, StateB>) {
     super()
+  }
+  OrElse(init: (builder: FragmentHTMLBuilder<State, Action, Query>) => void) {
+    this._orElse = new FragmentHTMLBuilder<State, Action, Query>()
+    init(this._orElse!)
+    return this
+  }
+  Equals(equals: undefined | ((a: StateB, b: StateB) => boolean)) {
+    if (equals !== undefined) {
+      this._equals = equals
+    }
+    return this
   }
   build() {
     return new MapStateTemplate<State, StateB, Action, Query>(
       this.map,
-      childOrBuilderToTemplate(this.orElse),
-      this.equals,
+      (this._orElse && this._orElse.build()) ?? text(''),
+      this._equals,
       this._children
     )
   }
@@ -3986,13 +4005,19 @@ export class PortalHTMLBuilder<State, Action, Query>
 export class SimpleComponentHTMLBuilder<State, Query>
   extends BaseHTMLBuilder<State, State, Query>
   implements IBuilder<State, State, Query> {
-  public delayed = false
+  private _delayed = false
   constructor() {
     super()
   }
+  Delayed(delayed: undefined | boolean) {
+    if (delayed !== undefined) {
+      this._delayed = delayed
+    }
+    return this
+  }
   build() {
     return new SimpleComponentTemplate<State, Query>(
-      this.delayed,
+      this._delayed,
       this._children
     )
   }

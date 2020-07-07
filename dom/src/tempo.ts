@@ -67,9 +67,7 @@ export const Tempo = {
   }): TempoView<State, Action, Query> {
     const { el, state, reducer, equal, document, template, delayed } = options
     const comp = Component(reducer, $ => {
-      if (equal !== undefined) $.equals = equal
-      if (delayed !== undefined) $.delayed = delayed
-      $.Append(template)
+      $.Equals(equal).Delayed(delayed).Append(template)
     })
     return Tempo.renderComponent({ el, component: comp, state, document })
   },

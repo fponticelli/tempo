@@ -7,7 +7,12 @@ import { forEach } from 'tempo-std/lib/async_result'
 import { Toc } from './toc'
 import { HttpError } from './request'
 import { Result, map } from 'tempo-std/lib/result'
-import { toContentUrl, contentFromRoute, sameRoute, toUrlForAnalytics } from './route'
+import {
+  toContentUrl,
+  contentFromRoute,
+  sameRoute,
+  toUrlForAnalytics
+} from './route'
 import { each } from 'tempo-std/lib/option'
 import { splitOnLast } from 'tempo-std/lib/strings'
 
@@ -42,35 +47,31 @@ export const middleware = (store: Store<State, Action>) => (
   action: Action,
   prev: State
 ) => {
-  // console.log(state)
+  // console.log(state, action)
   switch (action.kind) {
     case 'RequestToc':
-      loadJson('toc.json')
-        .then((json) => {
-          const toc = map(
-            json as Result<Toc, HttpError>,
-              t => ({
-              ...t,
-              pages: t.pages.filter(p => p.path !== 'index.html')
-            })
-          )
-          store.process(Action.loadedToc(outcome(toc)))
-        }) // TODO parse Toc
+      loadJson('toc.json').then(json => {
+        const toc = map(json as Result<Toc, HttpError>, t => ({
+          ...t,
+          pages: t.pages.filter(p => p.path !== 'index.html')
+        }))
+        store.process(Action.loadedToc(outcome(toc)))
+      }) // TODO parse Toc
       break
     case 'RequestPageContent':
-      each(
-        (url: string) => {
-          loadText(url).then(
-            (htmlResult: Result<string, HttpError>) =>
-              store.process(Action.loadedContent(outcome(map(
-                htmlResult,
-                h => Content.htmlPage(undefined, h, urlToGitHubContent(url))
-              )))
+      each((url: string) => {
+        loadText(url).then((htmlResult: Result<string, HttpError>) =>
+          store.process(
+            Action.loadedContent(
+              outcome(
+                map(htmlResult, h =>
+                  Content.htmlPage(undefined, h, urlToGitHubContent(url))
+                )
+              )
             )
           )
-        },
-        toContentUrl(state.route)
-      )
+        )
+      }, toContentUrl(state.route))
       break
     case 'LoadedContent':
       scrollTo()
@@ -82,10 +83,7 @@ export const middleware = (store: Store<State, Action>) => (
           ga('set', 'page', path)
           ga('send', 'pageview')
         }
-        forEach(
-          state.toc,
-          toc => contentFromRoute(store, toc, action.route)
-        )
+        forEach(state.toc, toc => contentFromRoute(store, toc, action.route))
       } else {
         scrollTo()
       }

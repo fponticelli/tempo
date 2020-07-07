@@ -7,18 +7,20 @@ function demoSrc(path: string) {
 }
 
 const demo = DIV<DemoRef, Action, unknown>($ =>
-  $.class('tile is-parent tile-width')
-    .DIV($ =>
-      $.class('tile is-child box').P($ =>
+  $.class('tile is-parent tile-width').DIV($ =>
+    $.class('tile is-child box')
+      .P($ =>
         $.class('title is-5').A($ =>
           $.href(s => `demo/${s.path}/`).text(s => s.title)
         )
       )
-    )
-    .P($ => $.class('description').text(s => s.description))
-    .P($ =>
-      $.class('source').A($ => $.href(s => demoSrc(s.path)).text('source code'))
-    )
+      .P($ => $.class('description').text(s => s.description))
+      .P($ =>
+        $.class('source').A($ =>
+          $.href(s => demoSrc(s.path)).text('source code')
+        )
+      )
+  )
 )
 
 export const demosContent = DIV<DemoRef[], Action, unknown>($ =>
