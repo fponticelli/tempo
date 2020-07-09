@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "tempo-core",
+      "comment": "Moved `reducer` functions into `tempo-core`.",
+      "type": "patch"
+    }
+  ],
+  "packageName": "tempo-core",
+  "email": "franco.ponticelli@gmail.com"
+}
