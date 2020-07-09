@@ -2,6 +2,23 @@
   "name": "tempo-store",
   "entries": [
     {
+      "version": "1.3.0",
+      "tag": "tempo-store_v1.3.0",
+      "date": "Thu, 09 Jul 2020 01:32:44 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Moved `reducer` functions into `te"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"tempo-core\" from `^1.7.1` to `^1.7.2`"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.2.4",
       "tag": "tempo-store_v1.2.4",
       "date": "Mon, 08 Jun 2020 23:05:13 GMT",

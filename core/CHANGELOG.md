@@ -1,6 +1,13 @@
 # Change Log - tempo-core
 
-This log was last generated on Mon, 08 Jun 2020 23:05:13 GMT and should not be manually modified.
+This log was last generated on Thu, 09 Jul 2020 01:32:44 GMT and should not be manually modified.
+
+## 1.7.2
+Thu, 09 Jul 2020 01:32:44 GMT
+
+### Patches
+
+- Moved `reducer` functions into `tempo-core`.
 
 ## 1.7.1
 Mon, 08 Jun 2020 23:05:13 GMT

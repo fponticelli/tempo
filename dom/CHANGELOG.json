@@ -2,6 +2,23 @@
   "name": "tempo-dom",
   "entries": [
     {
+      "version": "0.27.0",
+      "tag": "tempo-dom_v0.27.0",
+      "date": "Thu, 09 Jul 2020 01:32:44 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Removed dependency on tempo-store."
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"tempo-core\" from `^1.7.1` to `^1.7.2`"
+          }
+        ]
+      }
+    },
+    {
       "version": "0.26.0",
       "tag": "tempo-dom_v0.26.0",
       "date": "Mon, 06 Jul 2020 01:53:04 GMT",

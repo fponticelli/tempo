@@ -1,6 +1,13 @@
 # Change Log - tempo-store
 
-This log was last generated on Mon, 08 Jun 2020 23:05:13 GMT and should not be manually modified.
+This log was last generated on Thu, 09 Jul 2020 01:32:44 GMT and should not be manually modified.
+
+## 1.3.0
+Thu, 09 Jul 2020 01:32:44 GMT
+
+### Minor changes
+
+- Moved `reducer` functions into `te
 
 ## 1.2.4
 Mon, 08 Jun 2020 23:05:13 GMT

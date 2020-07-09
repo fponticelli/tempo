@@ -1,6 +1,13 @@
 # Change Log - tempo-dom
 
-This log was last generated on Mon, 06 Jul 2020 01:53:04 GMT and should not be manually modified.
+This log was last generated on Thu, 09 Jul 2020 01:32:44 GMT and should not be manually modified.
+
+## 0.27.0
+Thu, 09 Jul 2020 01:32:44 GMT
+
+### Minor changes
+
+- Removed dependency on tempo-store.
 
 ## 0.26.0
 Mon, 06 Jul 2020 01:53:04 GMT
