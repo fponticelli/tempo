@@ -11,13 +11,11 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { Store } from 'tempo-store/lib/store'
-import { ComponentTemplate } from './impl/component'
+import { ComponentTemplate, ComponentView } from './impl/component'
 import { DOMContext } from './context'
 import { DOMChild } from './template'
-import { View } from 'tempo-core/lib/view'
 import { SimpleComponent } from './impl/simple_component'
-import { Reducer } from 'tempo-store/lib/reducer'
+import { Reducer } from 'tempo-core/lib/reducer'
 import {
   SimpleComponentHTMLBuilder,
   ComponentHTMLBuilder
@@ -25,10 +23,13 @@ import {
 import { IBuilder, childOrBuilderToTemplate } from './impl/dom_builder'
 import { Component } from './impl/html'
 
-export type TempoView<State, Action, Query> = Readonly<{
-  view: View<State, Query>
-  store: Store<State, Action>
-}>
+export type Middleware<State, Action> = (
+  dispatch: (action: Action) => void
+) => (state: State, action: Action, previous: State) => void
+
+export type SimpleMiddlware<State> = (
+  dispatch: (state: State) => void
+) => (state: State, previous: State) => void
 
 export const Tempo = {
   renderComponent<State, Action, Query = unknown>(options: {
@@ -38,8 +39,10 @@ export const Tempo = {
       | ComponentTemplate<State, Action, Query>
       | ComponentHTMLBuilder<State, Action, Query>
     document?: Document
-  }): TempoView<State, Action, Query> {
-    const { el: maybeElement, component, state } = options
+    middleware?: Middleware<State, Action>
+  }): ComponentView<State, Action, Query> {
+    const { el: maybeElement, component } = options
+    let localState = options.state
     const doc = options.document || document
     const el = maybeElement || doc.body
     const append = (node: Node) => el.appendChild(node)
@@ -48,12 +51,23 @@ export const Tempo = {
       Action,
       Query
     >
-    const view = template.render(new DOMContext(doc, append, () => {}), state)
 
-    return {
-      view,
-      store: view.store
-    }
+    const appliedMiddleware =
+      options.middleware !== undefined
+        ? options.middleware((action: Action) => {
+            view.dispatch(action)
+          })
+        : () => {}
+
+    const view = template.render(
+      new DOMContext(doc, append, (action: Action) => {
+        appliedMiddleware(view.state, action, localState)
+        localState = view.state
+      }),
+      localState
+    )
+
+    return view
   },
 
   render<State, Action, Query = unknown>(options: {
@@ -64,12 +78,28 @@ export const Tempo = {
     equal?: (a: State, b: State) => boolean
     document?: Document
     delayed?: boolean
-  }): TempoView<State, Action, Query> {
-    const { el, state, reducer, equal, document, template, delayed } = options
-    const comp = Component(reducer, $ => {
+    middleware?: Middleware<State, Action>
+  }): ComponentView<State, Action, Query> {
+    const {
+      el,
+      state,
+      reducer,
+      equal,
+      document,
+      template,
+      delayed,
+      middleware
+    } = options
+    const component = Component(reducer, $ => {
       $.Equals(equal).Delayed(delayed).Append(template)
     })
-    return Tempo.renderComponent({ el, component: comp, state, document })
+    return Tempo.renderComponent({
+      el,
+      component,
+      state,
+      document,
+      middleware
+    })
   },
 
   renderSimple<State, Query = unknown>(options: {
@@ -79,22 +109,28 @@ export const Tempo = {
       | SimpleComponentHTMLBuilder<State, Query>
     state: State
     document?: Document
+    middleware?: SimpleMiddlware<State>
   }) {
-    const { el: maybeElement, component, state } = options
+    const { el: maybeElement, component } = options
+    let localState = options.state
     const doc = options.document || document
     const el = maybeElement || doc.body
     const append = (node: Node) => el.appendChild(node)
-    const onChange = (state: State) => {}
     const template = childOrBuilderToTemplate(component)
+
+    const appliedMiddleware =
+      options.middleware !== undefined
+        ? options.middleware((state: State) => result.change(state))
+        : () => {}
 
     const result = {
       ...template.render(
         new DOMContext(doc, append, (state: State) => {
-          result.onChange(state)
+          appliedMiddleware(state, localState)
+          localState = state
         }),
-        state
-      ),
-      onChange
+        localState
+      )
     }
 
     return result

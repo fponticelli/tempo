@@ -20,7 +20,5 @@ import { middleware } from './middleware'
 export const createApp = (state: State) => {
   const el = document.getElementById('app')!
 
-  const app = Tempo.render({ state, template, reducer, el })
-
-  app.store.observable.on(middleware(app))
+  Tempo.render({ state, template, reducer, el, middleware })
 }

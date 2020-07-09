@@ -1,9 +1,8 @@
 import { State, Content } from './state'
 import { Action } from './action'
 import { loadJson, loadText } from './request'
-import { Store } from 'tempo-store/lib/store'
 import { outcome } from 'tempo-std/lib/async'
-import { forEach } from 'tempo-std/lib/async_result'
+import { forEach, isSuccess } from 'tempo-std/lib/async_result'
 import { Toc } from './toc'
 import { HttpError } from './request'
 import { Result, map } from 'tempo-std/lib/result'
@@ -15,6 +14,7 @@ import {
 } from './route'
 import { each } from 'tempo-std/lib/option'
 import { splitOnLast } from 'tempo-std/lib/strings'
+import { Middleware } from 'tempo-dom/lib/tempo'
 
 declare const ga: any
 
@@ -42,26 +42,29 @@ const urlToGitHubContent = (url: string) => {
   }
 }
 
-export const middleware = (store: Store<State, Action>) => (
-  state: State,
-  action: Action,
-  prev: State
-) => {
+export const middleware: Middleware<State, Action> = (
+  dispatch: (action: Action) => void
+) => (state: State, action: Action, prev: State) => {
   // console.log(state, action)
   switch (action.kind) {
+    case 'LoadedToc':
+      if (isSuccess(action.toc)) {
+        contentFromRoute(dispatch, action.toc.value.value, state.route)
+      }
+      break
     case 'RequestToc':
       loadJson('toc.json').then(json => {
         const toc = map(json as Result<Toc, HttpError>, t => ({
           ...t,
           pages: t.pages.filter(p => p.path !== 'index.html')
         }))
-        store.process(Action.loadedToc(outcome(toc)))
+        dispatch(Action.loadedToc(outcome(toc)))
       }) // TODO parse Toc
       break
     case 'RequestPageContent':
       each((url: string) => {
         loadText(url).then((htmlResult: Result<string, HttpError>) =>
-          store.process(
+          dispatch(
             Action.loadedContent(
               outcome(
                 map(htmlResult, h =>
@@ -83,7 +86,7 @@ export const middleware = (store: Store<State, Action>) => (
           ga('set', 'page', path)
           ga('send', 'pageview')
         }
-        forEach(state.toc, toc => contentFromRoute(store, toc, action.route))
+        forEach(state.toc, toc => contentFromRoute(dispatch, toc, action.route))
       } else {
         scrollTo()
       }

@@ -11,8 +11,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+import { Reducer } from 'tempo-core/lib/reducer'
 import { Property } from './property'
-import { Reducer } from './reducer'
 import { Observable4 } from './observable'
 import { Emitter, Emitter4 } from './emitter'
 

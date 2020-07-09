@@ -13,15 +13,18 @@ limitations under the License.
 
 import { State, getSelectedTests } from './state'
 import { Action } from './action'
-import { TempoView } from 'tempo-dom/lib/tempo'
+import { Middleware } from 'tempo-dom/lib/tempo'
 import { runTests } from './test_runner'
 import { tests as testDescriptions } from './tests'
 
-export const middleware = (app: TempoView<State, Action, unknown>) => (state: State, action: Action) => {
+export const middleware: Middleware<State, Action> = dispatch => (
+  state: State,
+  action: Action
+) => {
   switch (action.kind) {
     case 'ExecuteSelectedTests':
       const { tests, versions } = getSelectedTests(state)
-      app.store.process(Action.executeTests(versions, tests))
+      dispatch(Action.executeTests(versions, tests))
       return
     case 'ExecuteTests':
       const { versionIds, testIds } = action
@@ -34,13 +37,17 @@ export const middleware = (app: TempoView<State, Action, unknown>) => (state: St
           versionIds,
           testsToRun,
           options,
-          (runnerId: string, testId: string, target: TestResult | undefined) => {
-            app.store.process(Action.updateResult(runnerId, testId, target))
+          (
+            runnerId: string,
+            testId: string,
+            target: TestResult | undefined
+          ) => {
+            dispatch(Action.updateResult(runnerId, testId, target))
           }
-        ).then(() => app.store.process(Action.testsExecuted()))
+        ).then(() => dispatch(Action.testsExecuted()))
       }, 1)
       return
     default:
-      // do nothing
+    // do nothing
   }
 }

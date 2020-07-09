@@ -27,7 +27,7 @@ describe('portal', () => {
         $.SPAN($ => $.class((s: string) => s))
       )
     )
-    const { view, store } = Tempo.renderComponent({
+    const view = Tempo.renderComponent({
       el: ctx.doc.getElementById('main')!,
       component: comp,
       document: ctx.doc,
@@ -36,7 +36,7 @@ describe('portal', () => {
     expect(ctx.doc.body.innerHTML).toEqual(
       '<div id="main"></div><div id="container"><span class="hello"></span></div>'
     )
-    store.process('foo')
+    view.dispatch('foo')
     expect(ctx.doc.body.innerHTML).toEqual(
       '<div id="main"></div><div id="container"><span class="foo"></span></div>'
     )
@@ -73,7 +73,7 @@ describe('portal', () => {
     const comp = Component(reducer, $ =>
       $.HeadPortal($ => $.STYLE($ => $.text(s => s)))
     )
-    const { view, store } = Tempo.renderComponent({
+    const view = Tempo.renderComponent({
       el: ctx.doc.body!,
       component: comp,
       document: ctx.doc,
@@ -82,7 +82,7 @@ describe('portal', () => {
     expect(ctx.doc.head.innerHTML).toEqual(
       '<style>background-color: red</style>'
     )
-    store.process('color: black')
+    view.dispatch('color: black')
     expect(ctx.doc.head.innerHTML).toEqual('<style>color: black</style>')
     view.destroy()
     expect(ctx.doc.head.innerHTML).toEqual('')
@@ -95,7 +95,7 @@ describe('portal', () => {
     const comp = Component(reducer, $ =>
       $.BodyPortal($ => $.STYLE($ => $.text(s => s)))
     )
-    const { view, store } = Tempo.renderComponent({
+    const view = Tempo.renderComponent({
       el: ctx.doc.body!,
       component: comp,
       document: ctx.doc,
@@ -104,7 +104,7 @@ describe('portal', () => {
     expect(ctx.doc.body.innerHTML).toEqual(
       '<style>background-color: red</style>'
     )
-    store.process('color: black')
+    view.dispatch('color: black')
     expect(ctx.doc.body.innerHTML).toEqual('<style>color: black</style>')
     view.destroy()
     expect(ctx.doc.body.innerHTML).toEqual('')

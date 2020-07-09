@@ -16,7 +16,7 @@ export function setAttribute(
   name: string,
   value: string | undefined
 ) {
-  if (value == null) {
+  if (value == null || value === '') {
     el.removeAttribute(name)
   } else {
     el.setAttribute(name, value)

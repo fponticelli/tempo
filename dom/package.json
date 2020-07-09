@@ -36,8 +36,7 @@
   },
   "dependencies": {
     "tempo-core": "^1.7.1",
-    "tempo-std": "^0.5.5",
-    "tempo-store": "^1.2.4"
+    "tempo-std": "^0.5.5"
   },
   "devDependencies": {
     "@types/jest": "^25.2.3",

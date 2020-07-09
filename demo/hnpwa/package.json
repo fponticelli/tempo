@@ -13,7 +13,6 @@
     "tempo-core": "^1.7.1",
     "tempo-dom": "^0.26.0",
     "tempo-std": "^0.5.5",
-    "tempo-store": "^1.2.4",
     "@ts-stack/markdown": "^1.2.0"
   },
   "devDependencies": {

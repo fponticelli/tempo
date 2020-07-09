@@ -24,10 +24,6 @@ export class AdapterTemplate<
   InnerAction,
   Query
 > implements DOMTemplate<OuterState, OuterAction, Query> {
-  private dispatchPropagate:
-    | undefined
-    | ((state: InnerState, action: InnerAction) => void)
-
   constructor(
     readonly bootstrapState: (outer: OuterState) => InnerState,
     readonly mergeStates: Attribute<
@@ -44,48 +40,41 @@ export class AdapterTemplate<
     ctx: DOMContext<OuterAction>,
     outerState: OuterState
   ): View<OuterState, Query> {
-    const innerState = this.bootstrapState(outerState)
-    const mergedState =
+    let innerState = this.bootstrapState(outerState)
+    innerState =
       resolveAttribute(this.mergeStates)({
         outerState,
         innerState
       }) ?? innerState
 
-    const viewComponent = this.child.render(
-      ctx.withDispatch(() => {
-        /* COMPONENT IS DETACHED FROM CONTAINER AND DOESN'T PROPAGATE */
-      }),
-      mergedState
+    const newCtx = ctx.withDispatch((action: InnerAction) =>
+      dispatchPropagate(viewComponent.state, action)
     )
 
-    const store = viewComponent.store
+    const viewComponent = this.child.render(newCtx, innerState)
 
-    this.dispatchPropagate = (state: InnerState, action: InnerAction) => {
+    const dispatchPropagate = (innerState: InnerState, action: InnerAction) => {
       this.propagate({
         action,
-        innerState: state,
+        innerState,
         outerState,
-        dispatchInner: (action: InnerAction) => store.process(action),
-        dispatchOuter: ctx.dispatch
+        dispatchInner: (action: InnerAction) => viewComponent.dispatch(action),
+        dispatchOuter: (action: OuterAction) => ctx.dispatch(action)
       })
     }
 
-    store.observable.on(this.dispatchPropagate)
-
     return {
-      change: (state: OuterState) => {
-        const innerState = store.property.get()
+      change: (outerState: OuterState) => {
         const newState = resolveAttribute(this.mergeStates)({
-          outerState: state,
-          innerState
+          outerState,
+          innerState: viewComponent.state
         })
-        if (newState !== undefined) viewComponent.change(newState)
+        if (newState !== undefined) {
+          viewComponent.change(newState)
+        }
       },
       destroy: () => {
         viewComponent.destroy()
-        if (this.dispatchPropagate !== undefined) {
-          store.observable.off(this.dispatchPropagate)
-        }
       },
       request: (query: Query) => {
         viewComponent.request(query)

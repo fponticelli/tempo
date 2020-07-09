@@ -11,16 +11,17 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { Store } from 'tempo-store/lib/store'
 import { DOMTemplate, DOMChild } from '../template'
 import { DOMContext } from '../context'
 import { map } from 'tempo-std/lib/arrays'
 import { View } from 'tempo-core/lib/view'
 import { IBuilder, childOrBuilderToTemplate } from './dom_builder'
+import { strictEqual } from 'tempo-std/lib/equals'
 
 export interface ComponentView<State, Action, Query>
   extends View<State, Query> {
-  store: Store<State, Action>
+  dispatch: (action: Action) => void
+  state: State
 }
 
 export class ComponentTemplate<State, Action, Query>
@@ -42,53 +43,53 @@ export class ComponentTemplate<State, Action, Query>
     ctx: DOMContext<Action>,
     state: State
   ): ComponentView<State, Action, Query> {
+    const equals = this.equal ?? strictEqual
     let update: (state: State) => void
     if (this.delayed) {
       let shouldRender = true
       update = (state: State) => {
+        view.state = state
         if (shouldRender) {
           shouldRender = false
           setTimeout(() => {
-            view.change(state)
+            view.change(view.state)
             shouldRender = true
           })
         }
       }
     } else {
       update = (state: State) => {
+        view.state = state
         view.change(state)
       }
     }
-    const store = Store.ofState({
-      state,
-      reducer: this.reducer,
-      equal: this.equal
-    })
-    const { property } = store
 
-    property.observable.on(update)
     const innerDispatch = (action: Action) => {
-      store.process(action)
+      const newState = this.reducer(view.state, action)
+      if (!equals(newState, view.state)) {
+        // view.state = newState
+        update(newState)
+      }
+      ctx.dispatch(action)
     }
-    const newCtx = ctx.withInterceptDispatch(innerDispatch)
-    const views = map(this.children, child =>
-      child.render(newCtx, property.get())
-    )
+    const newCtx = ctx.withDispatch(innerDispatch)
+    const views = map(this.children, child => child.render(newCtx, state))
     const view = {
       change: (state: State) => {
-        store.property.set(state)
+        view.state = state
         for (const view of views) view.change(state)
       },
       destroy: () => {
-        property.observable.off(update)
         for (const view of views) view.destroy()
       },
       request: (query: Query) => {
         for (const view of views) view.request(query)
       },
-      store
+      state,
+      dispatch: (action: Action) => {
+        innerDispatch(action)
+      }
     }
-    property.set(state)
     return view
   }
 }

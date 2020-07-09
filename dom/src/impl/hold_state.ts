@@ -59,13 +59,7 @@ export class HoldStateTemplate<
           init(this.builder)
           return MapState<StateB, StateC, Action, Query>(
             (b: StateB) => merge(localState, b),
-            $ =>
-              $
-                // .Equals(() => {
-                //   console.log('COMPARING')
-                //   return false
-                // }) // not sure why this would be necessary, requires investigation
-                .Append(this.builder)
+            $ => $.Append(this.builder)
           )
         })
       )

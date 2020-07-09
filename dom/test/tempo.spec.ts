@@ -22,7 +22,7 @@ describe('Tempo', () => {
     const state = 'hello'
 
     const comp = Component(reducer, $ => $.DIV($ => $.text(a => a)))
-    const { view, store } = Tempo.renderComponent({
+    const view = Tempo.renderComponent({
       el: ctx.doc.body,
       component: comp,
       document: ctx.doc,
@@ -30,9 +30,9 @@ describe('Tempo', () => {
     })
 
     expect(ctx.doc.body.innerHTML).toEqual('<div>hello</div>')
-    store.property.set('world')
+    view.change('world')
     expect(ctx.doc.body.innerHTML).toEqual('<div>world</div>')
-    store.process('foo')
+    view.dispatch('foo')
     expect(ctx.doc.body.innerHTML).toEqual('<div>foo</div>')
     view.destroy()
     expect(ctx.doc.body.innerHTML).toEqual('')
@@ -45,25 +45,24 @@ describe('Tempo', () => {
     const state = 'hello'
     const reducer = (state: string, action: string) => action.toUpperCase()
 
-    const middleware = (s: string, a: string) => {
+    const middleware = () => (s: string, a: string) => {
       result[0] = s
       result[1] = a
     }
 
     const comp = Component(reducer, $ => $.DIV($ => $.text(a => a)))
 
-    const { store } = Tempo.renderComponent({
+    const view = Tempo.renderComponent({
       el: ctx.doc.body,
       component: comp,
       document: ctx.doc,
-      state
+      state,
+      middleware
     })
-
-    store.observable.on(middleware)
 
     expect(result[0]).toEqual('')
     expect(result[1]).toEqual('')
-    store.process('foo')
+    view.dispatch('foo')
     expect(result[0]).toEqual('FOO')
     expect(result[1]).toEqual('foo')
   })

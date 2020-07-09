@@ -24,8 +24,8 @@ describe('compose', () => {
 
 describe('reduceOnKind', () => {
   it('works just like reduce', () => {
-    type A = { kind: 'A', a: string }
-    type B = { kind: 'B', b: string }
+    type A = { kind: 'A'; a: string }
+    type B = { kind: 'B'; b: string }
     type AB = A | B
     const red = reduceOnKind<string, AB>({
       A: (state, action) => state + ':' + action.a,

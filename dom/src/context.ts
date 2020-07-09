@@ -73,8 +73,8 @@ export class DOMContext<Action> {
 
   withInterceptDispatch(dispatch: (action: Action) => void) {
     return new DOMContext<Action>(this.doc, this.append, (action: Action) => {
-      this.dispatch(action)
       dispatch(action)
+      this.dispatch(action)
     })
   }
 }

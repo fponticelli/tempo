@@ -25,16 +25,14 @@ const route = Route.fromUrl(getCurrentPath())
 const state = createState(Route.root, Page.loading)
 
 document.body.innerHTML = ''
-const { store } = Tempo.render({ state, reducer, template })
+
+const { dispatch } = Tempo.render({ state, reducer, template, middleware })
 
 setTitle(state)
 
-store.property.observable.on(setTitle)
-store.observable.on(middleware(store))
-
-store.process(Action.linkClicked(route))
+dispatch(Action.linkClicked(route))
 
 window.addEventListener('popstate', event => {
   const route = Route.fromUrl(getCurrentPath())
-  store.process(Action.linkClicked(route))
+  dispatch(Action.linkClicked(route))
 })
