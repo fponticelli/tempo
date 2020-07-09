@@ -28,10 +28,10 @@
     "typescript": "^3.9.5"
   },
   "scripts": {
-    "compile:test": "parcel build test/main.ts --no-minify --public-url . --out-dir ./build/current/",
-    "compile:html": "parcel build src/index.html --no-minify --public-url . --out-dir ./build/ --experimental-scope-hoisting",
+    "compile:test": "parcel build test/main.ts --no-minify --public-url . --out-dir ./dist/current/",
+    "compile:html": "parcel build src/index.html --no-minify --public-url . --out-dir ./dist/",
     "compile": "NODE_ENV=production && npx tsc --noEmit && npm run compile:test && npm run compile:html && node tools/create_config.js",
-    "clean": "rm -f ./build/current/* && rm -f ./build/*.css && rm -f ./build/*.js* && rm -f ./build/*.html",
+    "clean": "rm -f ./dist/current/* && rm -f ./dist/*.css && rm -f ./dist/*.js* && rm -f ./dist/*.html",
     "build": "npm run clean && npm run compile",
     "start": "parcel src/index.html --out-dir ./build/",
     "prettier": "prettier -c src/**/*.ts",

@@ -31,7 +31,7 @@
     "babel-types": "^6.26.0"
   },
   "scripts": {
-    "compile": "NODE_ENV=production && npx tsc --noEmit && parcel build src/index.html --public-url . --out-dir ./dist --experimental-scope-hoisting --no-minify",
+    "compile": "NODE_ENV=production && npx tsc --noEmit && parcel build src/index.html --public-url . --out-dir ./dist --no-minify",
     "clean": "rm -rf dist/* && rm -rf ./build/*",
     "build": "npm run clean && npm run compile",
     "start": "parcel src/index.html",
