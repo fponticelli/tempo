@@ -5,6 +5,50 @@
 </div>
 <h1>module 'tempo'</h1>
 <nav></nav>
+<h3 class="is-family-monospace has-text-grey-dark" id="Middleware">
+  Middleware<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >type alias</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">type</span> Middleware<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">(</span>
+  <span class="token function-variable function">dispatch</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">action<span class="token operator">:</span> Action</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">(</span><span class="token parameter">state<span class="token operator">:</span> State<span class="token punctuation">,</span> action<span class="token operator">:</span> Action<span class="token punctuation">,</span> previous<span class="token operator">:</span> State</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/tempo.ts#L26"
+    >dom/src/tempo.ts at line 26</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> Middleware <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/tempo.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="SimpleMiddlware">
+  SimpleMiddlware<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >type alias</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">type</span> SimpleMiddlware<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">(</span>
+  <span class="token function-variable function">dispatch</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">state<span class="token operator">:</span> State</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">(</span><span class="token parameter">state<span class="token operator">:</span> State<span class="token punctuation">,</span> previous<span class="token operator">:</span> State</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/tempo.ts#L30"
+    >dom/src/tempo.ts at line 30</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> SimpleMiddlware <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/tempo.ts'</span></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="Tempo">
   Tempo<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
     >variable</span
@@ -20,7 +64,8 @@
       <span class="token operator">|</span> ComponentTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
       <span class="token operator">|</span> ComponentHTMLBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
     document<span class="token operator">?</span><span class="token operator">:</span> Document <span class="token operator">|</span> <span class="token keyword">undefined</span>
-  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token operator">:</span> Readonly<span class="token operator">&lt;</span><span class="token punctuation">{</span> view<span class="token operator">:</span> View<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">;</span> store<span class="token operator">:</span> Store<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token operator">&gt;</span> <span class="token punctuation">}</span><span class="token operator">&gt;</span>
+    middleware<span class="token operator">?</span><span class="token operator">:</span> Middleware<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token operator">&gt;</span> <span class="token operator">|</span> <span class="token keyword">undefined</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token operator">:</span> ComponentView<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
   render<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>options<span class="token operator">:</span> <span class="token punctuation">{</span>
     el<span class="token operator">?</span><span class="token operator">:</span> HTMLElement <span class="token operator">|</span> <span class="token keyword">undefined</span>
     template<span class="token operator">:</span>
@@ -34,7 +79,8 @@
     equal<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> State<span class="token punctuation">,</span> b<span class="token operator">:</span> State</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">boolean</span><span class="token punctuation">)</span> <span class="token operator">|</span> <span class="token keyword">undefined</span>
     document<span class="token operator">?</span><span class="token operator">:</span> Document <span class="token operator">|</span> <span class="token keyword">undefined</span>
     delayed<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">boolean</span> <span class="token operator">|</span> <span class="token keyword">undefined</span>
-  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token operator">:</span> Readonly<span class="token operator">&lt;</span><span class="token punctuation">{</span> view<span class="token operator">:</span> View<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span><span class="token punctuation">;</span> store<span class="token operator">:</span> Store<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token operator">&gt;</span> <span class="token punctuation">}</span><span class="token operator">&gt;</span>
+    middleware<span class="token operator">?</span><span class="token operator">:</span> Middleware<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token operator">&gt;</span> <span class="token operator">|</span> <span class="token keyword">undefined</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token operator">:</span> ComponentView<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
   renderSimple<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Query <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>options<span class="token operator">:</span> <span class="token punctuation">{</span>
     el<span class="token operator">?</span><span class="token operator">:</span> HTMLElement <span class="token operator">|</span> <span class="token keyword">undefined</span>
     component<span class="token operator">:</span>
@@ -42,8 +88,8 @@
       <span class="token operator">|</span> SimpleComponentHTMLBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
     state<span class="token operator">:</span> State
     document<span class="token operator">?</span><span class="token operator">:</span> Document <span class="token operator">|</span> <span class="token keyword">undefined</span>
+    middleware<span class="token operator">?</span><span class="token operator">:</span> SimpleMiddlware<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span> <span class="token operator">|</span> <span class="token keyword">undefined</span>
   <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token punctuation">{</span>
-    <span class="token function-variable function">onChange</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">state<span class="token operator">:</span> State</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
     <span class="token function">change</span><span class="token punctuation">(</span>value<span class="token operator">:</span> State<span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">void</span>
     <span class="token function">destroy</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">void</span>
     <span class="token function">request</span><span class="token punctuation">(</span>query<span class="token operator">:</span> Query<span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">void</span>
@@ -53,32 +99,10 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/tempo.ts#L33"
-    >dom/src/tempo.ts at line 33</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/tempo.ts#L34"
+    >dom/src/tempo.ts at line 34</a
   >
 </p>
 <pre
   class="import-code ts language-ts"
 ><span class="token keyword">import</span> <span class="token punctuation">{</span> Tempo <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/tempo.ts'</span></pre>
-<h3 class="is-family-monospace has-text-grey-dark" id="TempoView">
-  TempoView<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
-    >type alias</span
-  >
-</h3>
-<pre
-  class="ts language-ts signature"
-><span class="token keyword">type</span> TempoView<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span> <span class="token operator">=</span> Readonly<span class="token operator">&lt;</span><span class="token punctuation">{</span>
-  view<span class="token operator">:</span> View<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
-  store<span class="token operator">:</span> Store<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token operator">&gt;</span>
-<span class="token punctuation">}</span><span class="token operator">&gt;</span>
-</pre>
-<p class="defined-in">
-  defined in
-  <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/tempo.ts#L28"
-    >dom/src/tempo.ts at line 28</a
-  >
-</p>
-<pre
-  class="import-code ts language-ts"
-><span class="token keyword">import</span> <span class="token punctuation">{</span> TempoView <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/tempo.ts'</span></pre>

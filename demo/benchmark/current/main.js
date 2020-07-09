@@ -134,7 +134,7 @@ limitations under the License.
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.setBoolProperty = exports.setProperty = exports.setNumberProperty = exports.setAttribute = void 0;
 function setAttribute(el, name, value) {
-    if (value == null) {
+    if (value == null || value === '') {
         el.removeAttribute(name);
     }
     else {
@@ -560,330 +560,7 @@ function resolveAttribute(attr) {
 }
 exports.resolveAttribute = resolveAttribute;
 
-},{"tempo-std/lib/objects":"g3Xg"}],"doSR":[function(require,module,exports) {
-"use strict";
-/*
-Copyright 2019 Google LLC
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-    https://www.apache.org/licenses/LICENSE-2.0
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-*/
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.nextFrame = exports.debounce = exports.Emitter = void 0;
-var Emitter = /** @class */ (function () {
-    function Emitter() {
-        this.listeners = [];
-    }
-    Emitter.ofOne = function () {
-        return new Emitter();
-    };
-    Emitter.ofTwo = function () {
-        return new Emitter();
-    };
-    Emitter.ofThree = function () {
-        return new Emitter();
-    };
-    Emitter.ofFour = function () {
-        return new Emitter();
-    };
-    Emitter.ofFive = function () {
-        return new Emitter();
-    };
-    Emitter.ofSix = function () {
-        return new Emitter();
-    };
-    Emitter.prototype.emit = function () {
-        var value = [];
-        for (var _i = 0; _i < arguments.length; _i++) {
-            value[_i] = arguments[_i];
-        }
-        for (var _a = 0, _b = this.listeners; _a < _b.length; _a++) {
-            var l = _b[_a];
-            l.apply(void 0, value);
-        }
-    };
-    Emitter.prototype.on = function (listener) {
-        this.listeners.push(listener);
-    };
-    Emitter.prototype.off = function (listener) {
-        var index = this.listeners.indexOf(listener);
-        if (index < 0)
-            return false;
-        this.listeners.splice(index, 1);
-        return true;
-    };
-    Emitter.prototype.once = function (listener) {
-        var _this = this;
-        var wrapper = function () {
-            var values = [];
-            for (var _i = 0; _i < arguments.length; _i++) {
-                values[_i] = arguments[_i];
-            }
-            _this.off(wrapper);
-            listener.apply(void 0, values);
-        };
-        this.on(wrapper);
-    };
-    return Emitter;
-}());
-exports.Emitter = Emitter;
-function debounce(delay) {
-    return function (listener) {
-        var running = false;
-        var acc;
-        return function () {
-            var values = [];
-            for (var _i = 0; _i < arguments.length; _i++) {
-                values[_i] = arguments[_i];
-            }
-            acc = values;
-            if (running)
-                return;
-            running = true;
-            setTimeout(function () {
-                running = false;
-                listener.apply(void 0, acc);
-            }, delay);
-        };
-    };
-}
-exports.debounce = debounce;
-function nextFrame(listener) {
-    var running = false;
-    var acc;
-    return function () {
-        var values = [];
-        for (var _i = 0; _i < arguments.length; _i++) {
-            values[_i] = arguments[_i];
-        }
-        acc = values;
-        if (running)
-            return;
-        running = true;
-        requestAnimationFrame(function () {
-            running = false;
-            listener.apply(void 0, acc);
-        });
-    };
-}
-exports.nextFrame = nextFrame;
-
-},{}],"SHCY":[function(require,module,exports) {
-"use strict";
-/*
-Copyright 2019 Google LLC
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-    https://www.apache.org/licenses/LICENSE-2.0
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-*/
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.deepEqual = exports.strictEqual = void 0;
-function strictEqual(a, b) {
-    return a === b || (a !== a && b !== b);
-}
-exports.strictEqual = strictEqual;
-function deepEqual(a, b) {
-    if (strictEqual(a, b))
-        return true;
-    if (a == null || b == null)
-        return false;
-    var aIsArr = Array.isArray(a);
-    var bIsArr = Array.isArray(b);
-    if (aIsArr !== bIsArr)
-        return false;
-    if (aIsArr) {
-        var aArr = a;
-        var bArr = b;
-        var aLength = aArr.length;
-        if (aLength !== bArr.length)
-            return false;
-        for (var i = 0; i < aLength; i++) {
-            if (!deepEqual(aArr[i], bArr[i]))
-                return false;
-        }
-        return true;
-    }
-    var aIsDate = a instanceof Date;
-    var bIsDate = b instanceof Date;
-    if (aIsDate !== bIsDate)
-        return false;
-    if (aIsDate) {
-        var aDate = a;
-        var bDate = b;
-        return +aDate === +bDate;
-    }
-    var aIsSet = a instanceof Set;
-    var bIsSet = b instanceof Set;
-    if (aIsSet !== bIsSet)
-        return false;
-    if (aIsSet) {
-        var aSet = a;
-        var bSet = b;
-        if (aSet.size !== bSet.size)
-            return false;
-        var it_1 = aSet.keys();
-        while (true) {
-            var curr = it_1.next();
-            if (curr.done)
-                break;
-            if (!bSet.has(curr.value))
-                return false;
-        }
-        return true;
-    }
-    var aIsMap = a instanceof Map;
-    var bIsMap = b instanceof Map;
-    if (aIsMap !== bIsMap)
-        return false;
-    if (aIsMap) {
-        var aMap = a;
-        var bMap = b;
-        var aMapLength = aMap.size;
-        if (aMapLength !== bMap.size)
-            return false;
-        var it_2 = aMap.keys();
-        while (true) {
-            var curr = it_2.next();
-            if (curr.done)
-                break;
-            if (!deepEqual(aMap.get(curr.value), bMap.get(curr.value)))
-                return false;
-        }
-        return true;
-    }
-    var aIsObj = typeof a === 'object';
-    var bIsObj = typeof b === 'object';
-    if (aIsObj !== bIsObj)
-        return false;
-    if (aIsObj) {
-        var aObj = a;
-        var bObj = b;
-        var aFields = Object.keys(aObj);
-        var bFields = Object.keys(bObj);
-        var aLength = aFields.length;
-        if (aLength !== bFields.length)
-            return false;
-        for (var i = 0; i < aLength; i++) {
-            var field = aFields[i];
-            if (!bObj.hasOwnProperty(field))
-                return false;
-            if (!deepEqual(aObj[field], bObj[field]))
-                return false;
-        }
-        return true;
-    }
-    return false;
-}
-exports.deepEqual = deepEqual;
-
-},{}],"IHZt":[function(require,module,exports) {
-"use strict";
-/*
-Copyright 2019 Google LLC
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-    https://www.apache.org/licenses/LICENSE-2.0
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-*/
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.Property = void 0;
-var emitter_1 = require("./emitter");
-var equals_1 = require("tempo-std/lib/equals");
-var Property = /** @class */ (function () {
-    function Property(value, equal) {
-        if (equal === void 0) { equal = equals_1.strictEqual; }
-        this.value = value;
-        this.equal = equal;
-        this.observable = this.emitter = emitter_1.Emitter.ofOne();
-    }
-    Property.prototype.set = function (value) {
-        if (this.equal(this.value, value)) {
-            return false;
-        }
-        this.value = value;
-        this.emit(this.value);
-        return true;
-    };
-    Property.prototype.get = function () {
-        return this.value;
-    };
-    Property.prototype.emit = function (value) {
-        this.emitter.emit(value);
-    };
-    return Property;
-}());
-exports.Property = Property;
-
-},{"./emitter":"doSR","tempo-std/lib/equals":"SHCY"}],"KBwC":[function(require,module,exports) {
-"use strict";
-/*
-Copyright 2019 Google LLC
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-    https://www.apache.org/licenses/LICENSE-2.0
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-*/
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.Store = void 0;
-var property_1 = require("./property");
-var emitter_1 = require("./emitter");
-var Store = /** @class */ (function () {
-    function Store(property, reducer) {
-        this.property = property;
-        this.reducer = reducer;
-        this.observable = this.emitter = emitter_1.Emitter.ofFour();
-    }
-    Store.ofState = function (options) {
-        return new Store(new property_1.Property(options.state, options.equal), options.reducer);
-    };
-    Store.prototype.process = function (action) {
-        var curr = this.property.get();
-        var value = this.reducer(curr, action);
-        var result = this.property.set(value);
-        this.emitter.emit(value, action, curr, result);
-        return result;
-    };
-    Store.prototype.processMany = function () {
-        var _this = this;
-        var actions = [];
-        for (var _i = 0; _i < arguments.length; _i++) {
-            actions[_i] = arguments[_i];
-        }
-        return actions.reduce(function (changed, action) {
-            var newResult = _this.process(action);
-            if (changed || newResult)
-                return true;
-            else
-                return false;
-        }, false);
-    };
-    return Store;
-}());
-exports.Store = Store;
-
-},{"./property":"IHZt","./emitter":"doSR"}],"pwth":[function(require,module,exports) {
+},{"tempo-std/lib/objects":"g3Xg"}],"pwth":[function(require,module,exports) {
 "use strict";
 /*
 Copyright 2019 Google LLC
@@ -1250,7 +927,121 @@ var DOMBuilder = /** @class */ (function () {
 }());
 exports.DOMBuilder = DOMBuilder;
 
-},{"./text":"H1te","tempo-std/lib/objects":"g3Xg"}],"eDHy":[function(require,module,exports) {
+},{"./text":"H1te","tempo-std/lib/objects":"g3Xg"}],"w1ev":[function(require,module,exports) {
+"use strict";
+/*
+Copyright 2019 Google LLC
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+    https://www.apache.org/licenses/LICENSE-2.0
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.deepEqual = exports.strictEqual = void 0;
+function strictEqual(a, b) {
+    return a === b || (a !== a && b !== b);
+}
+exports.strictEqual = strictEqual;
+function deepEqual(a, b) {
+    if (strictEqual(a, b))
+        return true;
+    if (a == null || b == null)
+        return false;
+    var aIsArr = Array.isArray(a);
+    var bIsArr = Array.isArray(b);
+    if (aIsArr !== bIsArr)
+        return false;
+    if (aIsArr) {
+        var aArr = a;
+        var bArr = b;
+        var aLength = aArr.length;
+        if (aLength !== bArr.length)
+            return false;
+        for (var i = 0; i < aLength; i++) {
+            if (!deepEqual(aArr[i], bArr[i]))
+                return false;
+        }
+        return true;
+    }
+    var aIsDate = a instanceof Date;
+    var bIsDate = b instanceof Date;
+    if (aIsDate !== bIsDate)
+        return false;
+    if (aIsDate) {
+        var aDate = a;
+        var bDate = b;
+        return +aDate === +bDate;
+    }
+    var aIsSet = a instanceof Set;
+    var bIsSet = b instanceof Set;
+    if (aIsSet !== bIsSet)
+        return false;
+    if (aIsSet) {
+        var aSet = a;
+        var bSet = b;
+        if (aSet.size !== bSet.size)
+            return false;
+        var it_1 = aSet.keys();
+        while (true) {
+            var curr = it_1.next();
+            if (curr.done)
+                break;
+            if (!bSet.has(curr.value))
+                return false;
+        }
+        return true;
+    }
+    var aIsMap = a instanceof Map;
+    var bIsMap = b instanceof Map;
+    if (aIsMap !== bIsMap)
+        return false;
+    if (aIsMap) {
+        var aMap = a;
+        var bMap = b;
+        var aMapLength = aMap.size;
+        if (aMapLength !== bMap.size)
+            return false;
+        var it_2 = aMap.keys();
+        while (true) {
+            var curr = it_2.next();
+            if (curr.done)
+                break;
+            if (!deepEqual(aMap.get(curr.value), bMap.get(curr.value)))
+                return false;
+        }
+        return true;
+    }
+    var aIsObj = typeof a === 'object';
+    var bIsObj = typeof b === 'object';
+    if (aIsObj !== bIsObj)
+        return false;
+    if (aIsObj) {
+        var aObj = a;
+        var bObj = b;
+        var aFields = Object.keys(aObj);
+        var bFields = Object.keys(bObj);
+        var aLength = aFields.length;
+        if (aLength !== bFields.length)
+            return false;
+        for (var i = 0; i < aLength; i++) {
+            var field = aFields[i];
+            if (!bObj.hasOwnProperty(field))
+                return false;
+            if (!deepEqual(aObj[field], bObj[field]))
+                return false;
+        }
+        return true;
+    }
+    return false;
+}
+exports.deepEqual = deepEqual;
+
+},{}],"eDHy":[function(require,module,exports) {
 "use strict";
 /*
 Copyright 2019 Google LLC
@@ -1266,9 +1057,9 @@ limitations under the License.
 */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ComponentTemplate = void 0;
-var store_1 = require("tempo-store/lib/store");
 var arrays_1 = require("tempo-std/lib/arrays");
 var dom_builder_1 = require("./dom_builder");
+var equals_1 = require("tempo-std/lib/equals");
 var ComponentTemplate = /** @class */ (function () {
     function ComponentTemplate(delayed, reducer, equal, children) {
         this.delayed = delayed;
@@ -1277,14 +1068,18 @@ var ComponentTemplate = /** @class */ (function () {
         this.children = children.map(dom_builder_1.childOrBuilderToTemplate);
     }
     ComponentTemplate.prototype.render = function (ctx, state) {
+        var _this = this;
+        var _a;
+        var equals = (_a = this.equal) !== null && _a !== void 0 ? _a : equals_1.strictEqual;
         var update;
         if (this.delayed) {
             var shouldRender_1 = true;
             update = function (state) {
+                view.state = state;
                 if (shouldRender_1) {
                     shouldRender_1 = false;
                     setTimeout(function () {
-                        view.change(state);
+                        view.change(view.state);
                         shouldRender_1 = true;
                     });
                 }
@@ -1292,33 +1087,29 @@ var ComponentTemplate = /** @class */ (function () {
         }
         else {
             update = function (state) {
+                view.state = state;
                 view.change(state);
             };
         }
-        var store = store_1.Store.ofState({
-            state: state,
-            reducer: this.reducer,
-            equal: this.equal
-        });
-        var property = store.property;
-        property.observable.on(update);
         var innerDispatch = function (action) {
-            store.process(action);
+            var newState = _this.reducer(view.state, action);
+            if (!equals(newState, view.state)) {
+                // view.state = newState
+                update(newState);
+            }
+            ctx.dispatch(action);
         };
-        var newCtx = ctx.withInterceptDispatch(innerDispatch);
-        var views = arrays_1.map(this.children, function (child) {
-            return child.render(newCtx, property.get());
-        });
+        var newCtx = ctx.withDispatch(innerDispatch);
+        var views = arrays_1.map(this.children, function (child) { return child.render(newCtx, state); });
         var view = {
             change: function (state) {
-                store.property.set(state);
+                view.state = state;
                 for (var _i = 0, views_1 = views; _i < views_1.length; _i++) {
                     var view_1 = views_1[_i];
                     view_1.change(state);
                 }
             },
             destroy: function () {
-                property.observable.off(update);
                 for (var _i = 0, views_2 = views; _i < views_2.length; _i++) {
                     var view_2 = views_2[_i];
                     view_2.destroy();
@@ -1330,16 +1121,18 @@ var ComponentTemplate = /** @class */ (function () {
                     view_3.request(query);
                 }
             },
-            store: store
+            state: state,
+            dispatch: function (action) {
+                innerDispatch(action);
+            }
         };
-        property.set(state);
         return view;
     };
     return ComponentTemplate;
 }());
 exports.ComponentTemplate = ComponentTemplate;
 
-},{"tempo-store/lib/store":"KBwC","tempo-std/lib/arrays":"LAOm","./dom_builder":"yiha"}],"uV5V":[function(require,module,exports) {
+},{"tempo-std/lib/arrays":"LAOm","./dom_builder":"yiha","tempo-std/lib/equals":"w1ev"}],"uV5V":[function(require,module,exports) {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.focusElement = exports.makeEmptyLifecycle = exports.compose = void 0;
@@ -1511,6 +1304,7 @@ var dom_1 = require("./dom");
 var arrays_1 = require("tempo-std/lib/arrays");
 var value_1 = require("../value");
 var dom_builder_1 = require("./dom_builder");
+// import { strictEqual } from 'tempo-std/lib/equals'
 var MapStateTemplate = /** @class */ (function () {
     function MapStateTemplate(map, orElse, equals, children) {
         this.map = map;
@@ -1519,7 +1313,8 @@ var MapStateTemplate = /** @class */ (function () {
         this.children = children.map(dom_builder_1.childOrBuilderToTemplate);
     }
     MapStateTemplate.prototype.render = function (ctx, state) {
-        var _a = this, children = _a.children, map = _a.map, orElse = _a.orElse, equals = _a.equals;
+        var _a = this, children = _a.children, map = _a.map, orElse = _a.orElse;
+        // const equals = this.equals ?? strictEqual
         var views = [];
         var _b = ctx.withAppendToReference(), newCtx = _b.ctx, ref = _b.ref;
         var current = undefined;
@@ -1546,7 +1341,8 @@ var MapStateTemplate = /** @class */ (function () {
                         current = next;
                         views = arrays_1.map(children, function (c) { return c.render(newCtx, next); });
                     }
-                    else if (!equals(current, next)) {
+                    else {
+                        // if (!equals(current, next)) { // TODO remporarely removed
                         current = next;
                         for (var _i = 0, views_2 = views; _i < views_2.length; _i++) {
                             var view = views_2[_i];
@@ -2055,23 +1851,23 @@ var dom_builder_1 = require("./dom_builder");
 var html_1 = require("../html");
 var HoldStateTemplate = /** @class */ (function () {
     function HoldStateTemplate(holdf, builder) {
-        var _this = this;
         this.holdf = holdf;
-        this.template = dom_builder_1.childOrBuilderToTemplate(this.holdf(function (merge, init) {
-            // const builder = new FragmentBuilder<StateC, Action, Query>()
-            init(builder);
-            var innerTemplate = builder.build();
-            return html_1.MapState(function (b) { return merge(_this.localState, b); }, function ($) { return $.Append(innerTemplate); }).build();
-        }));
+        this.builder = builder;
     }
     HoldStateTemplate.prototype.render = function (ctx, state) {
-        var self = this;
-        self.localState = state;
-        var view = this.template.render(ctx, self.localState);
+        var _this = this;
+        var localState = state;
+        if (this.template === undefined) {
+            this.template = dom_builder_1.childOrBuilderToTemplate(this.holdf(function (merge, init) {
+                init(_this.builder);
+                return html_1.MapState(function (b) { return merge(localState, b); }, function ($) { return $.Append(_this.builder); });
+            }));
+        }
+        var view = this.template.render(ctx, localState);
         return {
             change: function (state) {
-                self.localState = state;
-                view.change(self.localState);
+                localState = state;
+                view.change(localState);
             },
             request: function (query) {
                 view.request(query);
@@ -2113,39 +1909,35 @@ var AdapterTemplate = /** @class */ (function () {
         var _this = this;
         var _a;
         var innerState = this.bootstrapState(outerState);
-        var mergedState = (_a = value_1.resolveAttribute(this.mergeStates)({
+        innerState = (_a = value_1.resolveAttribute(this.mergeStates)({
             outerState: outerState,
             innerState: innerState
         })) !== null && _a !== void 0 ? _a : innerState;
-        var viewComponent = this.child.render(ctx.withDispatch(function () {
-            /* COMPONENT IS DETACHED FROM CONTAINER AND DOESN'T PROPAGATE */
-        }), mergedState);
-        var store = viewComponent.store;
-        this.dispatchPropagate = function (state, action) {
+        var newCtx = ctx.withDispatch(function (action) {
+            return dispatchPropagate(viewComponent.state, action);
+        });
+        var viewComponent = this.child.render(newCtx, innerState);
+        var dispatchPropagate = function (innerState, action) {
             _this.propagate({
                 action: action,
-                innerState: state,
+                innerState: innerState,
                 outerState: outerState,
-                dispatchInner: function (action) { return store.process(action); },
-                dispatchOuter: ctx.dispatch
+                dispatchInner: function (action) { return viewComponent.dispatch(action); },
+                dispatchOuter: function (action) { return ctx.dispatch(action); }
             });
         };
-        store.observable.on(this.dispatchPropagate);
         return {
-            change: function (state) {
-                var innerState = store.property.get();
+            change: function (outerState) {
                 var newState = value_1.resolveAttribute(_this.mergeStates)({
-                    outerState: state,
-                    innerState: innerState
+                    outerState: outerState,
+                    innerState: viewComponent.state
                 });
-                if (newState !== undefined)
+                if (newState !== undefined) {
                     viewComponent.change(newState);
+                }
             },
             destroy: function () {
                 viewComponent.destroy();
-                if (_this.dispatchPropagate !== undefined) {
-                    store.observable.off(_this.dispatchPropagate);
-                }
             },
             request: function (query) {
                 viewComponent.request(query);
@@ -3057,12 +2849,23 @@ var ComponentSVGBuilder = /** @class */ (function (_super) {
     function ComponentSVGBuilder(reducer) {
         var _this = _super.call(this) || this;
         _this.reducer = reducer;
-        _this.delayed = false;
-        _this.equals = function (a, b) { return a === b; };
+        _this._delayed = false;
         return _this;
     }
+    ComponentSVGBuilder.prototype.Equals = function (equals) {
+        if (equals !== undefined) {
+            this._equals = equals;
+        }
+        return this;
+    };
+    ComponentSVGBuilder.prototype.Delayed = function (delayed) {
+        if (delayed !== undefined) {
+            this._delayed = delayed;
+        }
+        return this;
+    };
     ComponentSVGBuilder.prototype.build = function () {
-        return new component_1.ComponentTemplate(this.delayed, this.reducer, this.equals, this._children);
+        return new component_1.ComponentTemplate(this._delayed, this.reducer, this._equals, this._children);
     };
     return ComponentSVGBuilder;
 }(BaseSVGBuilder));
@@ -3109,11 +2912,22 @@ var MapStateSVGBuilder = /** @class */ (function (_super) {
     function MapStateSVGBuilder(map) {
         var _this = _super.call(this) || this;
         _this.map = map;
-        _this.equals = function (a, b) { return a === b; };
         return _this;
     }
+    MapStateSVGBuilder.prototype.Equals = function (equals) {
+        if (equals !== undefined) {
+            this._equals = equals;
+        }
+        return this;
+    };
+    MapStateSVGBuilder.prototype.OrElse = function (init) {
+        this._orElse = new FragmentSVGBuilder();
+        init(this._orElse);
+        return this;
+    };
     MapStateSVGBuilder.prototype.build = function () {
-        return new map_state_1.MapStateTemplate(this.map, dom_builder_1.childOrBuilderToTemplate(this.orElse), this.equals, this._children);
+        var _a;
+        return new map_state_1.MapStateTemplate(this.map, (_a = (this._orElse && this._orElse.build())) !== null && _a !== void 0 ? _a : text_1.text(''), this._equals, this._children);
     };
     return MapStateSVGBuilder;
 }(BaseSVGBuilder));
@@ -3135,11 +2949,17 @@ var SimpleComponentSVGBuilder = /** @class */ (function (_super) {
     __extends(SimpleComponentSVGBuilder, _super);
     function SimpleComponentSVGBuilder() {
         var _this = _super.call(this) || this;
-        _this.delayed = false;
+        _this._delayed = false;
         return _this;
     }
+    SimpleComponentSVGBuilder.prototype.Delayed = function (delayed) {
+        if (delayed !== undefined) {
+            this._delayed = delayed;
+        }
+        return this;
+    };
     SimpleComponentSVGBuilder.prototype.build = function () {
-        return new simple_component_1.SimpleComponentTemplate(this.delayed, this._children);
+        return new simple_component_1.SimpleComponentTemplate(this._delayed, this._children);
     };
     return SimpleComponentSVGBuilder;
 }(BaseSVGBuilder));
@@ -6561,12 +6381,23 @@ var ComponentHTMLBuilder = /** @class */ (function (_super) {
     function ComponentHTMLBuilder(reducer) {
         var _this = _super.call(this) || this;
         _this.reducer = reducer;
-        _this.delayed = false;
-        _this.equals = function (a, b) { return a === b; };
+        _this._delayed = false;
         return _this;
     }
+    ComponentHTMLBuilder.prototype.Equals = function (equals) {
+        if (equals !== undefined) {
+            this._equals = equals;
+        }
+        return this;
+    };
+    ComponentHTMLBuilder.prototype.Delayed = function (delayed) {
+        if (delayed !== undefined) {
+            this._delayed = delayed;
+        }
+        return this;
+    };
     ComponentHTMLBuilder.prototype.build = function () {
-        return new component_1.ComponentTemplate(this.delayed, this.reducer, this.equals, this._children);
+        return new component_1.ComponentTemplate(this._delayed, this.reducer, this._equals, this._children);
     };
     return ComponentHTMLBuilder;
 }(BaseHTMLBuilder));
@@ -6613,11 +6444,22 @@ var MapStateHTMLBuilder = /** @class */ (function (_super) {
     function MapStateHTMLBuilder(map) {
         var _this = _super.call(this) || this;
         _this.map = map;
-        _this.equals = function (a, b) { return a === b; };
         return _this;
     }
+    MapStateHTMLBuilder.prototype.OrElse = function (init) {
+        this._orElse = new FragmentHTMLBuilder();
+        init(this._orElse);
+        return this;
+    };
+    MapStateHTMLBuilder.prototype.Equals = function (equals) {
+        if (equals !== undefined) {
+            this._equals = equals;
+        }
+        return this;
+    };
     MapStateHTMLBuilder.prototype.build = function () {
-        return new map_state_1.MapStateTemplate(this.map, dom_builder_1.childOrBuilderToTemplate(this.orElse), this.equals, this._children);
+        var _a;
+        return new map_state_1.MapStateTemplate(this.map, (_a = (this._orElse && this._orElse.build())) !== null && _a !== void 0 ? _a : text_1.text(''), this._equals, this._children);
     };
     return MapStateHTMLBuilder;
 }(BaseHTMLBuilder));
@@ -6639,11 +6481,17 @@ var SimpleComponentHTMLBuilder = /** @class */ (function (_super) {
     __extends(SimpleComponentHTMLBuilder, _super);
     function SimpleComponentHTMLBuilder() {
         var _this = _super.call(this) || this;
-        _this.delayed = false;
+        _this._delayed = false;
         return _this;
     }
+    SimpleComponentHTMLBuilder.prototype.Delayed = function (delayed) {
+        if (delayed !== undefined) {
+            this._delayed = delayed;
+        }
+        return this;
+    };
     SimpleComponentHTMLBuilder.prototype.build = function () {
-        return new simple_component_1.SimpleComponentTemplate(this.delayed, this._children);
+        return new simple_component_1.SimpleComponentTemplate(this._delayed, this._children);
     };
     return SimpleComponentHTMLBuilder;
 }(BaseHTMLBuilder));
@@ -6796,7 +6644,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.When = exports.Until = exports.Unless = exports.SimpleComponent = exports.BodyPortal = exports.HeadPortal = exports.PortalWithSelector = exports.Portal = exports.ForEach = exports.Fragment = exports.Lazy = exports.MatchAsyncResult = exports.MatchAsync = exports.MatchResult = exports.MatchMaybe = exports.MatchOption = exports.MatchValue = exports.MatchBool = exports.MatchKind = exports.Match = exports.MapQuery = exports.MapAction = exports.MapStateAndKeep = exports.MapField = exports.MapState = exports.Iterate = exports.Component = exports.LocalAdapter = exports.Adapter = exports.WBR = exports.VIDEO = exports.VAR = exports.UL = exports.U = exports.TRACK = exports.TR = exports.TITLE = exports.TIME = exports.THEAD = exports.TH = exports.TFOOT = exports.TEXTAREA = exports.TEMPLATE = exports.TD = exports.TBODY = exports.TABLE = exports.SUP = exports.SUMMARY = exports.SUB = exports.STYLE = exports.STRONG = exports.SPAN = exports.SOURCE = exports.SMALL = exports.SLOT = exports.SELECT = exports.SECTION = exports.SCRIPT = exports.SAMP = exports.S = exports.RUBY = exports.RT = exports.RP = exports.Q = exports.PROGRESS = exports.PRE = exports.PICTURE = exports.PARAM = exports.P = exports.OUTPUT = exports.OPTION = exports.OPTGROUP = exports.OL = exports.OBJECT = exports.NOSCRIPT = exports.NAV = exports.METER = exports.META = exports.MARK = exports.MAP = exports.MAIN = exports.LINK = exports.LI = exports.LEGEND = exports.LABEL = exports.KBD = exports.INS = exports.INPUT = exports.IMG = exports.IFRAME = exports.I = exports.HTML = exports.HR = exports.HGROUP = exports.HEADER = exports.HEAD = exports.H6 = exports.H5 = exports.H4 = exports.H3 = exports.H2 = exports.H1 = exports.FORM = exports.FOOTER = exports.FIGURE = exports.FIGCAPTION = exports.FIELDSET = exports.EMBED = exports.EM = exports.DT = exports.DL = exports.DIV = exports.DIALOG = exports.DFN = exports.DETAILS = exports.DEL = exports.DD = exports.DATALIST = exports.DATA = exports.COLGROUP = exports.COL = exports.CODE = exports.CITE = exports.CAPTION = exports.CANVAS = exports.BUTTON = exports.BR = exports.BODY = exports.BLOCKQUOTE = exports.BDO = exports.BDI = exports.BASE = exports.B = exports.AUDIO = exports.ASIDE = exports.ARTICLE = exports.AREA = exports.ADDRESS = exports.ABBR = exports.A = exports.El = void 0;
+exports.When = exports.Until = exports.Unless = exports.SimpleComponent = exports.BodyPortal = exports.HeadPortal = exports.PortalWithSelector = exports.Portal = exports.ForEach = exports.Fragment = exports.Lazy = exports.MatchAsyncResult = exports.MatchAsync = exports.MatchResult = exports.MatchMaybe = exports.MatchOption = exports.MatchValue = exports.MatchBool = exports.MatchKind = exports.Match = exports.MapQuery = exports.MapAction = exports.MapStateAndKeep = exports.MapField = exports.MapState = exports.Iterate = exports.HoldState = exports.Component = exports.LocalAdapter = exports.Adapter = exports.WBR = exports.VIDEO = exports.VAR = exports.UL = exports.U = exports.TRACK = exports.TR = exports.TITLE = exports.TIME = exports.THEAD = exports.TH = exports.TFOOT = exports.TEXTAREA = exports.TEMPLATE = exports.TD = exports.TBODY = exports.TABLE = exports.SUP = exports.SUMMARY = exports.SUB = exports.STYLE = exports.STRONG = exports.SPAN = exports.SOURCE = exports.SMALL = exports.SLOT = exports.SELECT = exports.SECTION = exports.SCRIPT = exports.SAMP = exports.S = exports.RUBY = exports.RT = exports.RP = exports.Q = exports.PROGRESS = exports.PRE = exports.PICTURE = exports.PARAM = exports.P = exports.OUTPUT = exports.OPTION = exports.OPTGROUP = exports.OL = exports.OBJECT = exports.NOSCRIPT = exports.NAV = exports.METER = exports.META = exports.MARK = exports.MAP = exports.MAIN = exports.LINK = exports.LI = exports.LEGEND = exports.LABEL = exports.KBD = exports.INS = exports.INPUT = exports.IMG = exports.IFRAME = exports.I = exports.HTML = exports.HR = exports.HGROUP = exports.HEADER = exports.HEAD = exports.H6 = exports.H5 = exports.H4 = exports.H3 = exports.H2 = exports.H1 = exports.FORM = exports.FOOTER = exports.FIGURE = exports.FIGCAPTION = exports.FIELDSET = exports.EMBED = exports.EM = exports.DT = exports.DL = exports.DIV = exports.DIALOG = exports.DFN = exports.DETAILS = exports.DEL = exports.DD = exports.DATALIST = exports.DATA = exports.COLGROUP = exports.COL = exports.CODE = exports.CITE = exports.CAPTION = exports.CANVAS = exports.BUTTON = exports.BR = exports.BODY = exports.BLOCKQUOTE = exports.BDO = exports.BDI = exports.BASE = exports.B = exports.AUDIO = exports.ASIDE = exports.ARTICLE = exports.AREA = exports.ADDRESS = exports.ABBR = exports.A = exports.El = void 0;
 var html_builder_1 = require("./html_builder");
 Object.defineProperty(exports, "El", { enumerable: true, get: function () { return html_builder_1.El; } });
 var value_1 = require("../value");
@@ -6805,6 +6653,7 @@ var match_template_1 = require("./match_template");
 var match_bool_template_1 = require("./match_bool_template");
 var match_value_template_1 = require("./match_value_template");
 var lazy_1 = require("./lazy");
+var hold_state_1 = require("./hold_state");
 // dom specific
 function A(init) {
     var builder = new html_builder_1.HTMLAnchorElementBuilder('a');
@@ -7600,6 +7449,11 @@ function Component(reducer, init) {
     return builder;
 }
 exports.Component = Component;
+function HoldState(holdf) {
+    var builder = new html_builder_1.FragmentHTMLBuilder();
+    return new hold_state_1.HoldStateTemplate(holdf, builder);
+}
+exports.HoldState = HoldState;
 function Iterate(map, init) {
     return MapState(function (outer) {
         var items = value_1.resolveAttribute(map)(outer);
@@ -7775,7 +7629,7 @@ function When(condition, init) {
 }
 exports.When = When;
 
-},{"./html_builder":"eyJE","../value":"nFed","./adapter":"kWOh","./match_template":"HSRy","./match_bool_template":"ZVXL","./match_value_template":"oCpq","./lazy":"hzRP"}],"zQMt":[function(require,module,exports) {
+},{"./html_builder":"eyJE","../value":"nFed","./adapter":"kWOh","./match_template":"HSRy","./match_bool_template":"ZVXL","./match_value_template":"oCpq","./lazy":"hzRP","./hold_state":"fYSr"}],"zQMt":[function(require,module,exports) {
 "use strict";
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
@@ -7900,8 +7754,8 @@ var DOMContext = /** @class */ (function () {
     DOMContext.prototype.withInterceptDispatch = function (dispatch) {
         var _this = this;
         return new DOMContext(this.doc, this.append, function (action) {
-            _this.dispatch(action);
             dispatch(action);
+            _this.dispatch(action);
         });
     };
     return DOMContext;

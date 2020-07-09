@@ -4,7 +4,7 @@
       "name": "dom",
       "title": "tempo-dom",
       "description": "Fully-typed frontend framework alternative to React and Angular",
-      "version": "0.26.0",
+      "version": "0.27.0",
       "keywords": [
         "tempo",
         "ui",
@@ -33,7 +33,7 @@
       "name": "core",
       "title": "tempo-core",
       "description": "Core types for Tempo. The tempo architecture encourages a unilateral flow in a practical way.",
-      "version": "1.7.1",
+      "version": "1.7.2",
       "keywords": [
         "tempo",
         "framework",
@@ -46,7 +46,7 @@
       "name": "store",
       "title": "tempo-store",
       "description": "Super simple state management library",
-      "version": "1.2.4",
+      "version": "1.3.0",
       "keywords": [
         "tempo",
         "unidirectional-flow",
@@ -101,6 +101,12 @@
   "sections": {},
   "apis": {
     "core": [
+      {
+        "path": "reducer.html",
+        "id": "reducer.html",
+        "title": "reducer",
+        "type": "module"
+      },
       {
         "path": "template.html",
         "id": "template.html",
@@ -519,12 +525,6 @@
         "path": "property.html",
         "id": "property.html",
         "title": "property",
-        "type": "module"
-      },
-      {
-        "path": "reducer.html",
-        "id": "reducer.html",
-        "title": "reducer",
         "type": "module"
       },
       {

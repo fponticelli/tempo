@@ -821,7 +821,7 @@ var $dDaf$export$setBoolProperty = ($dDaf$export$setProperty = ($dDaf$export$set
 $dDaf$exports.setBoolProperty = $dDaf$export$setBoolProperty;
 
 function $dDaf$var$setAttribute(el, name, value) {
-  if (value == null) {
+  if (value == null || value === '') {
     el.removeAttribute(name);
   } else {
     el.setAttribute(name, value);
@@ -1245,348 +1245,6 @@ function $nFed$var$resolveAttribute(attr) {
 
 $nFed$export$resolveAttribute = $nFed$var$resolveAttribute;
 $nFed$exports.resolveAttribute = $nFed$export$resolveAttribute; //# sourceMappingURL=value.js.map
-
-// ASSET: ../node_modules/tempo-dom/node_modules/tempo-store/lib/emitter.js
-var $doSR$exports = {};
-Object.defineProperty($doSR$exports, "__esModule", {
-  value: true
-});
-var $doSR$export$nextFrame = ($doSR$export$debounce = ($doSR$export$Emitter = void 0, $doSR$exports.Emitter = $doSR$export$Emitter), $doSR$exports.debounce = $doSR$export$debounce);
-$doSR$exports.nextFrame = $doSR$export$nextFrame;
-
-var $doSR$var$Emitter =
-/** @class */
-function () {
-  function Emitter() {
-    this.listeners = [];
-  }
-
-  Emitter.ofOne = function () {
-    return new Emitter();
-  };
-
-  Emitter.ofTwo = function () {
-    return new Emitter();
-  };
-
-  Emitter.ofThree = function () {
-    return new Emitter();
-  };
-
-  Emitter.ofFour = function () {
-    return new Emitter();
-  };
-
-  Emitter.ofFive = function () {
-    return new Emitter();
-  };
-
-  Emitter.ofSix = function () {
-    return new Emitter();
-  };
-
-  Emitter.prototype.emit = function () {
-    var value = [];
-
-    for (var _i = 0; _i < arguments.length; _i++) {
-      value[_i] = arguments[_i];
-    }
-
-    for (var _a = 0, _b = this.listeners; _a < _b.length; _a++) {
-      var l = _b[_a];
-      l.apply(void 0, value);
-    }
-  };
-
-  Emitter.prototype.on = function (listener) {
-    this.listeners.push(listener);
-  };
-
-  Emitter.prototype.off = function (listener) {
-    var index = this.listeners.indexOf(listener);
-    if (index < 0) return false;
-    this.listeners.splice(index, 1);
-    return true;
-  };
-
-  Emitter.prototype.once = function (listener) {
-    var _this = this;
-
-    var wrapper = function () {
-      var values = [];
-
-      for (var _i = 0; _i < arguments.length; _i++) {
-        values[_i] = arguments[_i];
-      }
-
-      _this.off(wrapper);
-
-      listener.apply(void 0, values);
-    };
-
-    this.on(wrapper);
-  };
-
-  return Emitter;
-}();
-
-var $doSR$export$Emitter = $doSR$var$Emitter;
-$doSR$exports.Emitter = $doSR$export$Emitter;
-
-function $doSR$var$debounce(delay) {
-  return function (listener) {
-    var running = false;
-    var acc;
-    return function () {
-      var values = [];
-
-      for (var _i = 0; _i < arguments.length; _i++) {
-        values[_i] = arguments[_i];
-      }
-
-      acc = values;
-      if (running) return;
-      running = true;
-      setTimeout(function () {
-        running = false;
-        listener.apply(void 0, acc);
-      }, delay);
-    };
-  };
-}
-
-var $doSR$export$debounce = $doSR$var$debounce;
-$doSR$exports.debounce = $doSR$export$debounce;
-
-function $doSR$var$nextFrame(listener) {
-  var running = false;
-  var acc;
-  return function () {
-    var values = [];
-
-    for (var _i = 0; _i < arguments.length; _i++) {
-      values[_i] = arguments[_i];
-    }
-
-    acc = values;
-    if (running) return;
-    running = true;
-    requestAnimationFrame(function () {
-      running = false;
-      listener.apply(void 0, acc);
-    });
-  };
-}
-
-$doSR$export$nextFrame = $doSR$var$nextFrame;
-$doSR$exports.nextFrame = $doSR$export$nextFrame; //# sourceMappingURL=emitter.js.map
-
-// ASSET: ../node_modules/tempo-dom/node_modules/tempo-store/node_modules/tempo-std/lib/equals.js
-var $SHCY$exports = {};
-Object.defineProperty($SHCY$exports, "__esModule", {
-  value: true
-});
-var $SHCY$export$deepEqual = ($SHCY$export$strictEqual = void 0, $SHCY$exports.strictEqual = $SHCY$export$strictEqual);
-$SHCY$exports.deepEqual = $SHCY$export$deepEqual;
-
-function $SHCY$var$strictEqual(a, b) {
-  return a === b || a !== a && b !== b;
-}
-
-var $SHCY$export$strictEqual = $SHCY$var$strictEqual;
-$SHCY$exports.strictEqual = $SHCY$export$strictEqual;
-
-function $SHCY$var$deepEqual(a, b) {
-  if ($SHCY$var$strictEqual(a, b)) return true;
-  if (a == null || b == null) return false;
-  var aIsArr = Array.isArray(a);
-  var bIsArr = Array.isArray(b);
-  if (aIsArr !== bIsArr) return false;
-
-  if (aIsArr) {
-    var aArr = a;
-    var bArr = b;
-    var aLength = aArr.length;
-    if (aLength !== bArr.length) return false;
-
-    for (var i = 0; i < aLength; i++) {
-      if (!$SHCY$var$deepEqual(aArr[i], bArr[i])) return false;
-    }
-
-    return true;
-  }
-
-  var aIsDate = a instanceof Date;
-  var bIsDate = b instanceof Date;
-  if (aIsDate !== bIsDate) return false;
-
-  if (aIsDate) {
-    var aDate = a;
-    var bDate = b;
-    return +aDate === +bDate;
-  }
-
-  var aIsSet = a instanceof Set;
-  var bIsSet = b instanceof Set;
-  if (aIsSet !== bIsSet) return false;
-
-  if (aIsSet) {
-    var aSet = a;
-    var bSet = b;
-    if (aSet.size !== bSet.size) return false;
-    var it_1 = aSet.keys();
-
-    while (true) {
-      var curr = it_1.next();
-      if (curr.done) break;
-      if (!bSet.has(curr.value)) return false;
-    }
-
-    return true;
-  }
-
-  var aIsMap = a instanceof Map;
-  var bIsMap = b instanceof Map;
-  if (aIsMap !== bIsMap) return false;
-
-  if (aIsMap) {
-    var aMap = a;
-    var bMap = b;
-    var aMapLength = aMap.size;
-    if (aMapLength !== bMap.size) return false;
-    var it_2 = aMap.keys();
-
-    while (true) {
-      var curr = it_2.next();
-      if (curr.done) break;
-      if (!$SHCY$var$deepEqual(aMap.get(curr.value), bMap.get(curr.value))) return false;
-    }
-
-    return true;
-  }
-
-  var aIsObj = typeof a === 'object';
-  var bIsObj = typeof b === 'object';
-  if (aIsObj !== bIsObj) return false;
-
-  if (aIsObj) {
-    var aObj = a;
-    var bObj = b;
-    var aFields = Object.keys(aObj);
-    var bFields = Object.keys(bObj);
-    var aLength = aFields.length;
-    if (aLength !== bFields.length) return false;
-
-    for (var i = 0; i < aLength; i++) {
-      var field = aFields[i];
-      if (!bObj.hasOwnProperty(field)) return false;
-      if (!$SHCY$var$deepEqual(aObj[field], bObj[field])) return false;
-    }
-
-    return true;
-  }
-
-  return false;
-}
-
-$SHCY$export$deepEqual = $SHCY$var$deepEqual;
-$SHCY$exports.deepEqual = $SHCY$export$deepEqual; //# sourceMappingURL=equals.js.map
-
-// ASSET: ../node_modules/tempo-dom/node_modules/tempo-store/lib/property.js
-var $IHZt$exports = {};
-Object.defineProperty($IHZt$exports, "__esModule", {
-  value: true
-});
-var $IHZt$export$Property = void 0;
-$IHZt$exports.Property = $IHZt$export$Property;
-
-var $IHZt$var$Property =
-/** @class */
-function () {
-  function Property(value, equal) {
-    if (equal === void 0) {
-      equal = $SHCY$export$strictEqual;
-    }
-
-    this.value = value;
-    this.equal = equal;
-    this.observable = this.emitter = $doSR$export$Emitter.ofOne();
-  }
-
-  Property.prototype.set = function (value) {
-    if (this.equal(this.value, value)) {
-      return false;
-    }
-
-    this.value = value;
-    this.emit(this.value);
-    return true;
-  };
-
-  Property.prototype.get = function () {
-    return this.value;
-  };
-
-  Property.prototype.emit = function (value) {
-    this.emitter.emit(value);
-  };
-
-  return Property;
-}();
-
-$IHZt$export$Property = $IHZt$var$Property;
-$IHZt$exports.Property = $IHZt$export$Property; //# sourceMappingURL=property.js.map
-
-// ASSET: ../node_modules/tempo-dom/node_modules/tempo-store/lib/store.js
-var $KBwC$exports = {};
-Object.defineProperty($KBwC$exports, "__esModule", {
-  value: true
-});
-var $KBwC$export$Store = void 0;
-$KBwC$exports.Store = $KBwC$export$Store;
-
-var $KBwC$var$Store =
-/** @class */
-function () {
-  function Store(property, reducer) {
-    this.property = property;
-    this.reducer = reducer;
-    this.observable = this.emitter = $doSR$export$Emitter.ofFour();
-  }
-
-  Store.ofState = function (options) {
-    return new Store(new $IHZt$export$Property(options.state, options.equal), options.reducer);
-  };
-
-  Store.prototype.process = function (action) {
-    var curr = this.property.get();
-    var value = this.reducer(curr, action);
-    var result = this.property.set(value);
-    this.emitter.emit(value, action, curr, result);
-    return result;
-  };
-
-  Store.prototype.processMany = function () {
-    var _this = this;
-
-    var actions = [];
-
-    for (var _i = 0; _i < arguments.length; _i++) {
-      actions[_i] = arguments[_i];
-    }
-
-    return actions.reduce(function (changed, action) {
-      var newResult = _this.process(action);
-
-      if (changed || newResult) return true;else return false;
-    }, false);
-  };
-
-  return Store;
-}();
-
-$KBwC$export$Store = $KBwC$var$Store;
-$KBwC$exports.Store = $KBwC$export$Store; //# sourceMappingURL=store.js.map
 
 // ASSET: ../node_modules/tempo-dom/node_modules/tempo-std/lib/maybe.js
 var $pwth$exports = {};
@@ -2085,6 +1743,117 @@ function () {
 $yiha$export$DOMBuilder = $yiha$var$DOMBuilder;
 $yiha$exports.DOMBuilder = $yiha$export$DOMBuilder; //# sourceMappingURL=dom_builder.js.map
 
+// ASSET: ../node_modules/tempo-dom/node_modules/tempo-std/lib/equals.js
+var $w1ev$exports = {};
+Object.defineProperty($w1ev$exports, "__esModule", {
+  value: true
+});
+var $w1ev$export$deepEqual = ($w1ev$export$strictEqual = void 0, $w1ev$exports.strictEqual = $w1ev$export$strictEqual);
+$w1ev$exports.deepEqual = $w1ev$export$deepEqual;
+
+function $w1ev$var$strictEqual(a, b) {
+  return a === b || a !== a && b !== b;
+}
+
+var $w1ev$export$strictEqual = $w1ev$var$strictEqual;
+$w1ev$exports.strictEqual = $w1ev$export$strictEqual;
+
+function $w1ev$var$deepEqual(a, b) {
+  if ($w1ev$var$strictEqual(a, b)) return true;
+  if (a == null || b == null) return false;
+  var aIsArr = Array.isArray(a);
+  var bIsArr = Array.isArray(b);
+  if (aIsArr !== bIsArr) return false;
+
+  if (aIsArr) {
+    var aArr = a;
+    var bArr = b;
+    var aLength = aArr.length;
+    if (aLength !== bArr.length) return false;
+
+    for (var i = 0; i < aLength; i++) {
+      if (!$w1ev$var$deepEqual(aArr[i], bArr[i])) return false;
+    }
+
+    return true;
+  }
+
+  var aIsDate = a instanceof Date;
+  var bIsDate = b instanceof Date;
+  if (aIsDate !== bIsDate) return false;
+
+  if (aIsDate) {
+    var aDate = a;
+    var bDate = b;
+    return +aDate === +bDate;
+  }
+
+  var aIsSet = a instanceof Set;
+  var bIsSet = b instanceof Set;
+  if (aIsSet !== bIsSet) return false;
+
+  if (aIsSet) {
+    var aSet = a;
+    var bSet = b;
+    if (aSet.size !== bSet.size) return false;
+    var it_1 = aSet.keys();
+
+    while (true) {
+      var curr = it_1.next();
+      if (curr.done) break;
+      if (!bSet.has(curr.value)) return false;
+    }
+
+    return true;
+  }
+
+  var aIsMap = a instanceof Map;
+  var bIsMap = b instanceof Map;
+  if (aIsMap !== bIsMap) return false;
+
+  if (aIsMap) {
+    var aMap = a;
+    var bMap = b;
+    var aMapLength = aMap.size;
+    if (aMapLength !== bMap.size) return false;
+    var it_2 = aMap.keys();
+
+    while (true) {
+      var curr = it_2.next();
+      if (curr.done) break;
+      if (!$w1ev$var$deepEqual(aMap.get(curr.value), bMap.get(curr.value))) return false;
+    }
+
+    return true;
+  }
+
+  var aIsObj = typeof a === 'object';
+  var bIsObj = typeof b === 'object';
+  if (aIsObj !== bIsObj) return false;
+
+  if (aIsObj) {
+    var aObj = a;
+    var bObj = b;
+    var aFields = Object.keys(aObj);
+    var bFields = Object.keys(bObj);
+    var aLength = aFields.length;
+    if (aLength !== bFields.length) return false;
+
+    for (var i = 0; i < aLength; i++) {
+      var field = aFields[i];
+      if (!bObj.hasOwnProperty(field)) return false;
+      if (!$w1ev$var$deepEqual(aObj[field], bObj[field])) return false;
+    }
+
+    return true;
+  }
+
+  return false;
+}
+
+$w1ev$export$deepEqual = $w1ev$var$deepEqual;
+$w1ev$exports.deepEqual = $w1ev$export$deepEqual; //# sourceMappingURL=equals.js.map
+
 // ASSET: ../node_modules/tempo-dom/lib/impl/component.js
 var $eDHy$exports = {};
 Object.defineProperty($eDHy$exports, "__esModule", {
@@ -2104,45 +1873,52 @@ function () {
   }
 
   ComponentTemplate.prototype.render = function (ctx, state) {
+    var _this = this;
+
+    var _a;
+
+    var equals = (_a = this.equal) !== null && _a !== void 0 ? _a : $w1ev$export$strictEqual;
     var update;
 
     if (this.delayed) {
       var shouldRender_1 = true;
 
       update = function (state) {
+        view.state = state;
+
         if (shouldRender_1) {
           shouldRender_1 = false;
           setTimeout(function () {
-            view.change(state);
+            view.change(view.state);
             shouldRender_1 = true;
           });
         }
       };
     } else {
       update = function (state) {
+        view.state = state;
         view.change(state);
       };
     }
 
-    var store = $KBwC$export$Store.ofState({
-      state: state,
-      reducer: this.reducer,
-      equal: this.equal
-    });
-    var property = store.property;
-    property.observable.on(update);
-
     var innerDispatch = function (action) {
-      store.process(action);
+      var newState = _this.reducer(view.state, action);
+
+      if (!equals(newState, view.state)) {
+        // view.state = newState
+        update(newState);
+      }
+
+      ctx.dispatch(action);
     };
 
-    var newCtx = ctx.withInterceptDispatch(innerDispatch);
+    var newCtx = ctx.withDispatch(innerDispatch);
     var views = $LAOm$export$map(this.children, function (child) {
-      return child.render(newCtx, property.get());
+      return child.render(newCtx, state);
     });
     var view = {
       change: function (state) {
-        store.property.set(state);
+        view.state = state;
 
         for (var _i = 0, views_1 = views; _i < views_1.length; _i++) {
           var view_1 = views_1[_i];
@@ -2150,8 +1926,6 @@ function () {
         }
       },
       destroy: function () {
-        property.observable.off(update);
-
         for (var _i = 0, views_2 = views; _i < views_2.length; _i++) {
           var view_2 = views_2[_i];
           view_2.destroy();
@@ -2163,9 +1937,11 @@ function () {
           view_3.request(query);
         }
       },
-      store: store
+      state: state,
+      dispatch: function (action) {
+        innerDispatch(action);
+      }
     };
-    property.set(state);
     return view;
   };
 
@@ -2240,7 +2016,9 @@ Object.defineProperty($X9Ob$exports, "__esModule", {
 var $X9Ob$export$DOMElement = void 0;
 $X9Ob$exports.DOMElement = $X9Ob$export$DOMElement;
 
-var $X9Ob$var$DOMElement = function () {
+var $X9Ob$var$DOMElement =
+/** @class */
+function () {
   function DOMElement(createElement, literalAttrs, derivedAttrs, literalStyles, derivedStyles, handlers, makeLifecycle, respond, children) {
     this.createElement = createElement;
     this.literalAttrs = literalAttrs;
@@ -2363,6 +2141,7 @@ Object.defineProperty($kpTJ$exports, "__esModule", {
 var $kpTJ$export$MapStateTemplate = void 0;
 $kpTJ$exports.MapStateTemplate = $kpTJ$export$MapStateTemplate;
 
+// import { strictEqual } from 'tempo-std/lib/equals'
 var $kpTJ$var$MapStateTemplate =
 /** @class */
 function () {
@@ -2377,8 +2156,8 @@ function () {
     var _a = this,
         children = _a.children,
         map = _a.map,
-        orElse = _a.orElse,
-        equals = _a.equals;
+        orElse = _a.orElse; // const equals = this.equals ?? strictEqual
+
 
     var views = [];
 
@@ -2416,7 +2195,8 @@ function () {
             views = $LAOm$export$map(children, function (c) {
               return c.render(newCtx, next);
             });
-          } else if (!equals(current, next)) {
+          } else {
+            // if (!equals(current, next)) { // TODO remporarely removed
             current = next;
 
             for (var _i = 0, views_2 = views; _i < views_2.length; _i++) {
@@ -2944,29 +2724,31 @@ var $fYSr$var$HoldStateTemplate =
 /** @class */
 function () {
   function HoldStateTemplate(holdf, builder) {
-    var _this = this;
-
     this.holdf = holdf;
-    this.template = $yiha$export$childOrBuilderToTemplate(this.holdf(function (merge, init) {
-      // const builder = new FragmentBuilder<StateC, Action, Query>()
-      init(builder);
-      var innerTemplate = builder.build();
-      return $zQMt$exports.MapState(function (b) {
-        return merge(_this.localState, b);
-      }, function ($) {
-        return $.Append(innerTemplate);
-      }).build();
-    }));
+    this.builder = builder;
   }
 
   HoldStateTemplate.prototype.render = function (ctx, state) {
-    var self = this;
-    self.localState = state;
-    var view = this.template.render(ctx, self.localState);
+    var _this = this;
+
+    var localState = state;
+
+    if (this.template === undefined) {
+      this.template = $yiha$export$childOrBuilderToTemplate(this.holdf(function (merge, init) {
+        init(_this.builder);
+        return $zQMt$exports.MapState(function (b) {
+          return merge(localState, b);
+        }, function ($) {
+          return $.Append(_this.builder);
+        });
+      }));
+    }
+
+    var view = this.template.render(ctx, localState);
     return {
       change: function (state) {
-        self.localState = state;
-        view.change(self.localState);
+        localState = state;
+        view.change(localState);
       },
       request: function (query) {
         view.request(query);
@@ -2981,8 +2763,7 @@ function () {
 }();
 
 $fYSr$export$HoldStateTemplate = $fYSr$var$HoldStateTemplate;
-$fYSr$exports.HoldStateTemplate = $fYSr$export$HoldStateTemplate; //# sourceMappingURL=hold_state.js.map
-
+$fYSr$exports.HoldStateTemplate = $fYSr$export$HoldStateTemplate;
 // ASSET: ../node_modules/tempo-dom/lib/impl/adapter.js
 var $kWOh$exports = {};
 Object.defineProperty($kWOh$exports, "__esModule", {
@@ -3007,43 +2788,42 @@ function () {
     var _a;
 
     var innerState = this.bootstrapState(outerState);
-    var mergedState = (_a = $nFed$export$resolveAttribute(this.mergeStates)({
+    innerState = (_a = $nFed$export$resolveAttribute(this.mergeStates)({
       outerState: outerState,
       innerState: innerState
     })) !== null && _a !== void 0 ? _a : innerState;
-    var viewComponent = this.child.render(ctx.withDispatch(function () {
-      /* COMPONENT IS DETACHED FROM CONTAINER AND DOESN'T PROPAGATE */
-    }), mergedState);
-    var store = viewComponent.store;
+    var newCtx = ctx.withDispatch(function (action) {
+      return dispatchPropagate(viewComponent.state, action);
+    });
+    var viewComponent = this.child.render(newCtx, innerState);
 
-    this.dispatchPropagate = function (state, action) {
+    var dispatchPropagate = function (innerState, action) {
       _this.propagate({
         action: action,
-        innerState: state,
+        innerState: innerState,
         outerState: outerState,
         dispatchInner: function (action) {
-          return store.process(action);
+          return viewComponent.dispatch(action);
         },
-        dispatchOuter: ctx.dispatch
+        dispatchOuter: function (action) {
+          return ctx.dispatch(action);
+        }
       });
     };
 
-    store.observable.on(this.dispatchPropagate);
     return {
-      change: function (state) {
-        var innerState = store.property.get();
+      change: function (outerState) {
         var newState = $nFed$export$resolveAttribute(_this.mergeStates)({
-          outerState: state,
-          innerState: innerState
+          outerState: outerState,
+          innerState: viewComponent.state
         });
-        if (newState !== undefined) viewComponent.change(newState);
+
+        if (newState !== undefined) {
+          viewComponent.change(newState);
+        }
       },
       destroy: function () {
         viewComponent.destroy();
-
-        if (_this.dispatchPropagate !== undefined) {
-          store.observable.off(_this.dispatchPropagate);
-        }
       },
       request: function (query) {
         viewComponent.request(query);
@@ -4257,17 +4037,28 @@ function (_super) {
     var _this = _super.call(this) || this;
 
     _this.reducer = reducer;
-    _this.delayed = false;
-
-    _this.equals = function (a, b) {
-      return a === b;
-    };
-
+    _this._delayed = false;
     return _this;
   }
 
+  ComponentSVGBuilder.prototype.Equals = function (equals) {
+    if (equals !== undefined) {
+      this._equals = equals;
+    }
+
+    return this;
+  };
+
+  ComponentSVGBuilder.prototype.Delayed = function (delayed) {
+    if (delayed !== undefined) {
+      this._delayed = delayed;
+    }
+
+    return this;
+  };
+
   ComponentSVGBuilder.prototype.build = function () {
-    return new $eDHy$export$ComponentTemplate(this.delayed, this.reducer, this.equals, this._children);
+    return new $eDHy$export$ComponentTemplate(this._delayed, this.reducer, this._equals, this._children);
   };
 
   return ComponentSVGBuilder;
@@ -4348,16 +4139,27 @@ function (_super) {
     var _this = _super.call(this) || this;
 
     _this.map = map;
-
-    _this.equals = function (a, b) {
-      return a === b;
-    };
-
     return _this;
   }
 
+  MapStateSVGBuilder.prototype.Equals = function (equals) {
+    if (equals !== undefined) {
+      this._equals = equals;
+    }
+
+    return this;
+  };
+
+  MapStateSVGBuilder.prototype.OrElse = function (init) {
+    this._orElse = new $bl4t$var$FragmentSVGBuilder();
+    init(this._orElse);
+    return this;
+  };
+
   MapStateSVGBuilder.prototype.build = function () {
-    return new $kpTJ$export$MapStateTemplate(this.map, $yiha$export$childOrBuilderToTemplate(this.orElse), this.equals, this._children);
+    var _a;
+
+    return new $kpTJ$export$MapStateTemplate(this.map, (_a = this._orElse && this._orElse.build()) !== null && _a !== void 0 ? _a : $H1te$export$text(''), this._equals, this._children);
   };
 
   return MapStateSVGBuilder;
@@ -4396,12 +4198,20 @@ function (_super) {
   function SimpleComponentSVGBuilder() {
     var _this = _super.call(this) || this;
 
-    _this.delayed = false;
+    _this._delayed = false;
     return _this;
   }
 
+  SimpleComponentSVGBuilder.prototype.Delayed = function (delayed) {
+    if (delayed !== undefined) {
+      this._delayed = delayed;
+    }
+
+    return this;
+  };
+
   SimpleComponentSVGBuilder.prototype.build = function () {
-    return new $LSkL$export$SimpleComponentTemplate(this.delayed, this._children);
+    return new $LSkL$export$SimpleComponentTemplate(this._delayed, this._children);
   };
 
   return SimpleComponentSVGBuilder;
@@ -9431,17 +9241,28 @@ function (_super) {
     var _this = _super.call(this) || this;
 
     _this.reducer = reducer;
-    _this.delayed = false;
-
-    _this.equals = function (a, b) {
-      return a === b;
-    };
-
+    _this._delayed = false;
     return _this;
   }
 
+  ComponentHTMLBuilder.prototype.Equals = function (equals) {
+    if (equals !== undefined) {
+      this._equals = equals;
+    }
+
+    return this;
+  };
+
+  ComponentHTMLBuilder.prototype.Delayed = function (delayed) {
+    if (delayed !== undefined) {
+      this._delayed = delayed;
+    }
+
+    return this;
+  };
+
   ComponentHTMLBuilder.prototype.build = function () {
-    return new $eDHy$export$ComponentTemplate(this.delayed, this.reducer, this.equals, this._children);
+    return new $eDHy$export$ComponentTemplate(this._delayed, this.reducer, this._equals, this._children);
   };
 
   return ComponentHTMLBuilder;
@@ -9522,16 +9343,27 @@ function (_super) {
     var _this = _super.call(this) || this;
 
     _this.map = map;
-
-    _this.equals = function (a, b) {
-      return a === b;
-    };
-
     return _this;
   }
 
+  MapStateHTMLBuilder.prototype.OrElse = function (init) {
+    this._orElse = new $eyJE$var$FragmentHTMLBuilder();
+    init(this._orElse);
+    return this;
+  };
+
+  MapStateHTMLBuilder.prototype.Equals = function (equals) {
+    if (equals !== undefined) {
+      this._equals = equals;
+    }
+
+    return this;
+  };
+
   MapStateHTMLBuilder.prototype.build = function () {
-    return new $kpTJ$export$MapStateTemplate(this.map, $yiha$export$childOrBuilderToTemplate(this.orElse), this.equals, this._children);
+    var _a;
+
+    return new $kpTJ$export$MapStateTemplate(this.map, (_a = this._orElse && this._orElse.build()) !== null && _a !== void 0 ? _a : $H1te$export$text(''), this._equals, this._children);
   };
 
   return MapStateHTMLBuilder;
@@ -9570,12 +9402,20 @@ function (_super) {
   function SimpleComponentHTMLBuilder() {
     var _this = _super.call(this) || this;
 
-    _this.delayed = false;
+    _this._delayed = false;
     return _this;
   }
 
+  SimpleComponentHTMLBuilder.prototype.Delayed = function (delayed) {
+    if (delayed !== undefined) {
+      this._delayed = delayed;
+    }
+
+    return this;
+  };
+
   SimpleComponentHTMLBuilder.prototype.build = function () {
-    return new $LSkL$export$SimpleComponentTemplate(this.delayed, this._children);
+    return new $LSkL$export$SimpleComponentTemplate(this._delayed, this._children);
   };
 
   return SimpleComponentHTMLBuilder;
@@ -9756,7 +9596,7 @@ limitations under the License.
 Object.defineProperty($aXl4$exports, "__esModule", {
   value: true
 });
-var $aXl4$export$When = ($aXl4$export$Until = ($aXl4$export$Unless = ($aXl4$export$SimpleComponent = ($aXl4$export$BodyPortal = ($aXl4$export$HeadPortal = ($aXl4$export$PortalWithSelector = ($aXl4$export$Portal = ($aXl4$export$ForEach = ($aXl4$export$Fragment = ($aXl4$export$Lazy = ($aXl4$export$MatchAsyncResult = ($aXl4$export$MatchAsync = ($aXl4$export$MatchResult = ($aXl4$export$MatchMaybe = ($aXl4$export$MatchOption = ($aXl4$export$MatchValue = ($aXl4$export$MatchBool = ($aXl4$export$MatchKind = ($aXl4$export$Match = ($aXl4$export$MapQuery = ($aXl4$export$MapAction = ($aXl4$export$MapStateAndKeep = ($aXl4$export$MapField = ($aXl4$export$MapState = ($aXl4$export$Iterate = ($aXl4$export$Component = ($aXl4$export$LocalAdapter = ($aXl4$export$Adapter = ($aXl4$export$WBR = ($aXl4$export$VIDEO = ($aXl4$export$VAR = ($aXl4$export$UL = ($aXl4$export$U = ($aXl4$export$TRACK = ($aXl4$export$TR = ($aXl4$export$TITLE = ($aXl4$export$TIME = ($aXl4$export$THEAD = ($aXl4$export$TH = ($aXl4$export$TFOOT = ($aXl4$export$TEXTAREA = ($aXl4$export$TEMPLATE = ($aXl4$export$TD = ($aXl4$export$TBODY = ($aXl4$export$TABLE = ($aXl4$export$SUP = ($aXl4$export$SUMMARY = ($aXl4$export$SUB = ($aXl4$export$STYLE = ($aXl4$export$STRONG = ($aXl4$export$SPAN = ($aXl4$export$SOURCE = ($aXl4$export$SMALL = ($aXl4$export$SLOT = ($aXl4$export$SELECT = ($aXl4$export$SECTION = ($aXl4$export$SCRIPT = ($aXl4$export$SAMP = ($aXl4$export$S = ($aXl4$export$RUBY = ($aXl4$export$RT = ($aXl4$export$RP = ($aXl4$export$Q = ($aXl4$export$PROGRESS = ($aXl4$export$PRE = ($aXl4$export$PICTURE = ($aXl4$export$PARAM = ($aXl4$export$P = ($aXl4$export$OUTPUT = ($aXl4$export$OPTION = ($aXl4$export$OPTGROUP = ($aXl4$export$OL = ($aXl4$export$OBJECT = ($aXl4$export$NOSCRIPT = ($aXl4$export$NAV = ($aXl4$export$METER = ($aXl4$export$META = ($aXl4$export$MARK = ($aXl4$export$MAP = ($aXl4$export$MAIN = ($aXl4$export$LINK = ($aXl4$export$LI = ($aXl4$export$LEGEND = ($aXl4$export$LABEL = ($aXl4$export$KBD = ($aXl4$export$INS = ($aXl4$export$INPUT = ($aXl4$export$IMG = ($aXl4$export$IFRAME = ($aXl4$export$I = ($aXl4$export$HTML = ($aXl4$export$HR = ($aXl4$export$HGROUP = ($aXl4$export$HEADER = ($aXl4$export$HEAD = ($aXl4$export$H6 = ($aXl4$export$H5 = ($aXl4$export$H4 = ($aXl4$export$H3 = ($aXl4$export$H2 = ($aXl4$export$H1 = ($aXl4$export$FORM = ($aXl4$export$FOOTER = ($aXl4$export$FIGURE = ($aXl4$export$FIGCAPTION = ($aXl4$export$FIELDSET = ($aXl4$export$EMBED = ($aXl4$export$EM = ($aXl4$export$DT = ($aXl4$export$DL = ($aXl4$export$DIV = ($aXl4$export$DIALOG = ($aXl4$export$DFN = ($aXl4$export$DETAILS = ($aXl4$export$DEL = ($aXl4$export$DD = ($aXl4$export$DATALIST = ($aXl4$export$DATA = ($aXl4$export$COLGROUP = ($aXl4$export$COL = ($aXl4$export$CODE = ($aXl4$export$CITE = ($aXl4$export$CAPTION = ($aXl4$export$CANVAS = ($aXl4$export$BUTTON = ($aXl4$export$BR = ($aXl4$export$BODY = ($aXl4$export$BLOCKQUOTE = ($aXl4$export$BDO = ($aXl4$export$BDI = ($aXl4$export$BASE = ($aXl4$export$B = ($aXl4$export$AUDIO = ($aXl4$export$ASIDE = ($aXl4$export$ARTICLE = ($aXl4$export$AREA = ($aXl4$export$ADDRESS = ($aXl4$export$ABBR = ($aXl4$export$A = ($aXl4$export$El = void 0, $aXl4$exports.El = $aXl4$export$El), $aXl4$exports.A = $aXl4$export$A), $aXl4$exports.ABBR = $aXl4$export$ABBR), $aXl4$exports.ADDRESS = $aXl4$export$ADDRESS), $aXl4$exports.AREA = $aXl4$export$AREA), $aXl4$exports.ARTICLE = $aXl4$export$ARTICLE), $aXl4$exports.ASIDE = $aXl4$export$ASIDE), $aXl4$exports.AUDIO = $aXl4$export$AUDIO), $aXl4$exports.B = $aXl4$export$B), $aXl4$exports.BASE = $aXl4$export$BASE), $aXl4$exports.BDI = $aXl4$export$BDI), $aXl4$exports.BDO = $aXl4$export$BDO), $aXl4$exports.BLOCKQUOTE = $aXl4$export$BLOCKQUOTE), $aXl4$exports.BODY = $aXl4$export$BODY), $aXl4$exports.BR = $aXl4$export$BR), $aXl4$exports.BUTTON = $aXl4$export$BUTTON), $aXl4$exports.CANVAS = $aXl4$export$CANVAS), $aXl4$exports.CAPTION = $aXl4$export$CAPTION), $aXl4$exports.CITE = $aXl4$export$CITE), $aXl4$exports.CODE = $aXl4$export$CODE), $aXl4$exports.COL = $aXl4$export$COL), $aXl4$exports.COLGROUP = $aXl4$export$COLGROUP), $aXl4$exports.DATA = $aXl4$export$DATA), $aXl4$exports.DATALIST = $aXl4$export$DATALIST), $aXl4$exports.DD = $aXl4$export$DD), $aXl4$exports.DEL = $aXl4$export$DEL), $aXl4$exports.DETAILS = $aXl4$export$DETAILS), $aXl4$exports.DFN = $aXl4$export$DFN), $aXl4$exports.DIALOG = $aXl4$export$DIALOG), $aXl4$exports.DIV = $aXl4$export$DIV), $aXl4$exports.DL = $aXl4$export$DL), $aXl4$exports.DT = $aXl4$export$DT), $aXl4$exports.EM = $aXl4$export$EM), $aXl4$exports.EMBED = $aXl4$export$EMBED), $aXl4$exports.FIELDSET = $aXl4$export$FIELDSET), $aXl4$exports.FIGCAPTION = $aXl4$export$FIGCAPTION), $aXl4$exports.FIGURE = $aXl4$export$FIGURE), $aXl4$exports.FOOTER = $aXl4$export$FOOTER), $aXl4$exports.FORM = $aXl4$export$FORM), $aXl4$exports.H1 = $aXl4$export$H1), $aXl4$exports.H2 = $aXl4$export$H2), $aXl4$exports.H3 = $aXl4$export$H3), $aXl4$exports.H4 = $aXl4$export$H4), $aXl4$exports.H5 = $aXl4$export$H5), $aXl4$exports.H6 = $aXl4$export$H6), $aXl4$exports.HEAD = $aXl4$export$HEAD), $aXl4$exports.HEADER = $aXl4$export$HEADER), $aXl4$exports.HGROUP = $aXl4$export$HGROUP), $aXl4$exports.HR = $aXl4$export$HR), $aXl4$exports.HTML = $aXl4$export$HTML), $aXl4$exports.I = $aXl4$export$I), $aXl4$exports.IFRAME = $aXl4$export$IFRAME), $aXl4$exports.IMG = $aXl4$export$IMG), $aXl4$exports.INPUT = $aXl4$export$INPUT), $aXl4$exports.INS = $aXl4$export$INS), $aXl4$exports.KBD = $aXl4$export$KBD), $aXl4$exports.LABEL = $aXl4$export$LABEL), $aXl4$exports.LEGEND = $aXl4$export$LEGEND), $aXl4$exports.LI = $aXl4$export$LI), $aXl4$exports.LINK = $aXl4$export$LINK), $aXl4$exports.MAIN = $aXl4$export$MAIN), $aXl4$exports.MAP = $aXl4$export$MAP), $aXl4$exports.MARK = $aXl4$export$MARK), $aXl4$exports.META = $aXl4$export$META), $aXl4$exports.METER = $aXl4$export$METER), $aXl4$exports.NAV = $aXl4$export$NAV), $aXl4$exports.NOSCRIPT = $aXl4$export$NOSCRIPT), $aXl4$exports.OBJECT = $aXl4$export$OBJECT), $aXl4$exports.OL = $aXl4$export$OL), $aXl4$exports.OPTGROUP = $aXl4$export$OPTGROUP), $aXl4$exports.OPTION = $aXl4$export$OPTION), $aXl4$exports.OUTPUT = $aXl4$export$OUTPUT), $aXl4$exports.P = $aXl4$export$P), $aXl4$exports.PARAM = $aXl4$export$PARAM), $aXl4$exports.PICTURE = $aXl4$export$PICTURE), $aXl4$exports.PRE = $aXl4$export$PRE), $aXl4$exports.PROGRESS = $aXl4$export$PROGRESS), $aXl4$exports.Q = $aXl4$export$Q), $aXl4$exports.RP = $aXl4$export$RP), $aXl4$exports.RT = $aXl4$export$RT), $aXl4$exports.RUBY = $aXl4$export$RUBY), $aXl4$exports.S = $aXl4$export$S), $aXl4$exports.SAMP = $aXl4$export$SAMP), $aXl4$exports.SCRIPT = $aXl4$export$SCRIPT), $aXl4$exports.SECTION = $aXl4$export$SECTION), $aXl4$exports.SELECT = $aXl4$export$SELECT), $aXl4$exports.SLOT = $aXl4$export$SLOT), $aXl4$exports.SMALL = $aXl4$export$SMALL), $aXl4$exports.SOURCE = $aXl4$export$SOURCE), $aXl4$exports.SPAN = $aXl4$export$SPAN), $aXl4$exports.STRONG = $aXl4$export$STRONG), $aXl4$exports.STYLE = $aXl4$export$STYLE), $aXl4$exports.SUB = $aXl4$export$SUB), $aXl4$exports.SUMMARY = $aXl4$export$SUMMARY), $aXl4$exports.SUP = $aXl4$export$SUP), $aXl4$exports.TABLE = $aXl4$export$TABLE), $aXl4$exports.TBODY = $aXl4$export$TBODY), $aXl4$exports.TD = $aXl4$export$TD), $aXl4$exports.TEMPLATE = $aXl4$export$TEMPLATE), $aXl4$exports.TEXTAREA = $aXl4$export$TEXTAREA), $aXl4$exports.TFOOT = $aXl4$export$TFOOT), $aXl4$exports.TH = $aXl4$export$TH), $aXl4$exports.THEAD = $aXl4$export$THEAD), $aXl4$exports.TIME = $aXl4$export$TIME), $aXl4$exports.TITLE = $aXl4$export$TITLE), $aXl4$exports.TR = $aXl4$export$TR), $aXl4$exports.TRACK = $aXl4$export$TRACK), $aXl4$exports.U = $aXl4$export$U), $aXl4$exports.UL = $aXl4$export$UL), $aXl4$exports.VAR = $aXl4$export$VAR), $aXl4$exports.VIDEO = $aXl4$export$VIDEO), $aXl4$exports.WBR = $aXl4$export$WBR), $aXl4$exports.Adapter = $aXl4$export$Adapter), $aXl4$exports.LocalAdapter = $aXl4$export$LocalAdapter), $aXl4$exports.Component = $aXl4$export$Component), $aXl4$exports.Iterate = $aXl4$export$Iterate), $aXl4$exports.MapState = $aXl4$export$MapState), $aXl4$exports.MapField = $aXl4$export$MapField), $aXl4$exports.MapStateAndKeep = $aXl4$export$MapStateAndKeep), $aXl4$exports.MapAction = $aXl4$export$MapAction), $aXl4$exports.MapQuery = $aXl4$export$MapQuery), $aXl4$exports.Match = $aXl4$export$Match), $aXl4$exports.MatchKind = $aXl4$export$MatchKind), $aXl4$exports.MatchBool = $aXl4$export$MatchBool), $aXl4$exports.MatchValue = $aXl4$export$MatchValue), $aXl4$exports.MatchOption = $aXl4$export$MatchOption), $aXl4$exports.MatchMaybe = $aXl4$export$MatchMaybe), $aXl4$exports.MatchResult = $aXl4$export$MatchResult), $aXl4$exports.MatchAsync = $aXl4$export$MatchAsync), $aXl4$exports.MatchAsyncResult = $aXl4$export$MatchAsyncResult), $aXl4$exports.Lazy = $aXl4$export$Lazy), $aXl4$exports.Fragment = $aXl4$export$Fragment), $aXl4$exports.ForEach = $aXl4$export$ForEach), $aXl4$exports.Portal = $aXl4$export$Portal), $aXl4$exports.PortalWithSelector = $aXl4$export$PortalWithSelector), $aXl4$exports.HeadPortal = $aXl4$export$HeadPortal), $aXl4$exports.BodyPortal = $aXl4$export$BodyPortal), $aXl4$exports.SimpleComponent = $aXl4$export$SimpleComponent), $aXl4$exports.Unless = $aXl4$export$Unless), $aXl4$exports.Until = $aXl4$export$Until);
+var $aXl4$export$When = ($aXl4$export$Until = ($aXl4$export$Unless = ($aXl4$export$SimpleComponent = ($aXl4$export$BodyPortal = ($aXl4$export$HeadPortal = ($aXl4$export$PortalWithSelector = ($aXl4$export$Portal = ($aXl4$export$ForEach = ($aXl4$export$Fragment = ($aXl4$export$Lazy = ($aXl4$export$MatchAsyncResult = ($aXl4$export$MatchAsync = ($aXl4$export$MatchResult = ($aXl4$export$MatchMaybe = ($aXl4$export$MatchOption = ($aXl4$export$MatchValue = ($aXl4$export$MatchBool = ($aXl4$export$MatchKind = ($aXl4$export$Match = ($aXl4$export$MapQuery = ($aXl4$export$MapAction = ($aXl4$export$MapStateAndKeep = ($aXl4$export$MapField = ($aXl4$export$MapState = ($aXl4$export$Iterate = ($aXl4$export$HoldState = ($aXl4$export$Component = ($aXl4$export$LocalAdapter = ($aXl4$export$Adapter = ($aXl4$export$WBR = ($aXl4$export$VIDEO = ($aXl4$export$VAR = ($aXl4$export$UL = ($aXl4$export$U = ($aXl4$export$TRACK = ($aXl4$export$TR = ($aXl4$export$TITLE = ($aXl4$export$TIME = ($aXl4$export$THEAD = ($aXl4$export$TH = ($aXl4$export$TFOOT = ($aXl4$export$TEXTAREA = ($aXl4$export$TEMPLATE = ($aXl4$export$TD = ($aXl4$export$TBODY = ($aXl4$export$TABLE = ($aXl4$export$SUP = ($aXl4$export$SUMMARY = ($aXl4$export$SUB = ($aXl4$export$STYLE = ($aXl4$export$STRONG = ($aXl4$export$SPAN = ($aXl4$export$SOURCE = ($aXl4$export$SMALL = ($aXl4$export$SLOT = ($aXl4$export$SELECT = ($aXl4$export$SECTION = ($aXl4$export$SCRIPT = ($aXl4$export$SAMP = ($aXl4$export$S = ($aXl4$export$RUBY = ($aXl4$export$RT = ($aXl4$export$RP = ($aXl4$export$Q = ($aXl4$export$PROGRESS = ($aXl4$export$PRE = ($aXl4$export$PICTURE = ($aXl4$export$PARAM = ($aXl4$export$P = ($aXl4$export$OUTPUT = ($aXl4$export$OPTION = ($aXl4$export$OPTGROUP = ($aXl4$export$OL = ($aXl4$export$OBJECT = ($aXl4$export$NOSCRIPT = ($aXl4$export$NAV = ($aXl4$export$METER = ($aXl4$export$META = ($aXl4$export$MARK = ($aXl4$export$MAP = ($aXl4$export$MAIN = ($aXl4$export$LINK = ($aXl4$export$LI = ($aXl4$export$LEGEND = ($aXl4$export$LABEL = ($aXl4$export$KBD = ($aXl4$export$INS = ($aXl4$export$INPUT = ($aXl4$export$IMG = ($aXl4$export$IFRAME = ($aXl4$export$I = ($aXl4$export$HTML = ($aXl4$export$HR = ($aXl4$export$HGROUP = ($aXl4$export$HEADER = ($aXl4$export$HEAD = ($aXl4$export$H6 = ($aXl4$export$H5 = ($aXl4$export$H4 = ($aXl4$export$H3 = ($aXl4$export$H2 = ($aXl4$export$H1 = ($aXl4$export$FORM = ($aXl4$export$FOOTER = ($aXl4$export$FIGURE = ($aXl4$export$FIGCAPTION = ($aXl4$export$FIELDSET = ($aXl4$export$EMBED = ($aXl4$export$EM = ($aXl4$export$DT = ($aXl4$export$DL = ($aXl4$export$DIV = ($aXl4$export$DIALOG = ($aXl4$export$DFN = ($aXl4$export$DETAILS = ($aXl4$export$DEL = ($aXl4$export$DD = ($aXl4$export$DATALIST = ($aXl4$export$DATA = ($aXl4$export$COLGROUP = ($aXl4$export$COL = ($aXl4$export$CODE = ($aXl4$export$CITE = ($aXl4$export$CAPTION = ($aXl4$export$CANVAS = ($aXl4$export$BUTTON = ($aXl4$export$BR = ($aXl4$export$BODY = ($aXl4$export$BLOCKQUOTE = ($aXl4$export$BDO = ($aXl4$export$BDI = ($aXl4$export$BASE = ($aXl4$export$B = ($aXl4$export$AUDIO = ($aXl4$export$ASIDE = ($aXl4$export$ARTICLE = ($aXl4$export$AREA = ($aXl4$export$ADDRESS = ($aXl4$export$ABBR = ($aXl4$export$A = ($aXl4$export$El = void 0, $aXl4$exports.El = $aXl4$export$El), $aXl4$exports.A = $aXl4$export$A), $aXl4$exports.ABBR = $aXl4$export$ABBR), $aXl4$exports.ADDRESS = $aXl4$export$ADDRESS), $aXl4$exports.AREA = $aXl4$export$AREA), $aXl4$exports.ARTICLE = $aXl4$export$ARTICLE), $aXl4$exports.ASIDE = $aXl4$export$ASIDE), $aXl4$exports.AUDIO = $aXl4$export$AUDIO), $aXl4$exports.B = $aXl4$export$B), $aXl4$exports.BASE = $aXl4$export$BASE), $aXl4$exports.BDI = $aXl4$export$BDI), $aXl4$exports.BDO = $aXl4$export$BDO), $aXl4$exports.BLOCKQUOTE = $aXl4$export$BLOCKQUOTE), $aXl4$exports.BODY = $aXl4$export$BODY), $aXl4$exports.BR = $aXl4$export$BR), $aXl4$exports.BUTTON = $aXl4$export$BUTTON), $aXl4$exports.CANVAS = $aXl4$export$CANVAS), $aXl4$exports.CAPTION = $aXl4$export$CAPTION), $aXl4$exports.CITE = $aXl4$export$CITE), $aXl4$exports.CODE = $aXl4$export$CODE), $aXl4$exports.COL = $aXl4$export$COL), $aXl4$exports.COLGROUP = $aXl4$export$COLGROUP), $aXl4$exports.DATA = $aXl4$export$DATA), $aXl4$exports.DATALIST = $aXl4$export$DATALIST), $aXl4$exports.DD = $aXl4$export$DD), $aXl4$exports.DEL = $aXl4$export$DEL), $aXl4$exports.DETAILS = $aXl4$export$DETAILS), $aXl4$exports.DFN = $aXl4$export$DFN), $aXl4$exports.DIALOG = $aXl4$export$DIALOG), $aXl4$exports.DIV = $aXl4$export$DIV), $aXl4$exports.DL = $aXl4$export$DL), $aXl4$exports.DT = $aXl4$export$DT), $aXl4$exports.EM = $aXl4$export$EM), $aXl4$exports.EMBED = $aXl4$export$EMBED), $aXl4$exports.FIELDSET = $aXl4$export$FIELDSET), $aXl4$exports.FIGCAPTION = $aXl4$export$FIGCAPTION), $aXl4$exports.FIGURE = $aXl4$export$FIGURE), $aXl4$exports.FOOTER = $aXl4$export$FOOTER), $aXl4$exports.FORM = $aXl4$export$FORM), $aXl4$exports.H1 = $aXl4$export$H1), $aXl4$exports.H2 = $aXl4$export$H2), $aXl4$exports.H3 = $aXl4$export$H3), $aXl4$exports.H4 = $aXl4$export$H4), $aXl4$exports.H5 = $aXl4$export$H5), $aXl4$exports.H6 = $aXl4$export$H6), $aXl4$exports.HEAD = $aXl4$export$HEAD), $aXl4$exports.HEADER = $aXl4$export$HEADER), $aXl4$exports.HGROUP = $aXl4$export$HGROUP), $aXl4$exports.HR = $aXl4$export$HR), $aXl4$exports.HTML = $aXl4$export$HTML), $aXl4$exports.I = $aXl4$export$I), $aXl4$exports.IFRAME = $aXl4$export$IFRAME), $aXl4$exports.IMG = $aXl4$export$IMG), $aXl4$exports.INPUT = $aXl4$export$INPUT), $aXl4$exports.INS = $aXl4$export$INS), $aXl4$exports.KBD = $aXl4$export$KBD), $aXl4$exports.LABEL = $aXl4$export$LABEL), $aXl4$exports.LEGEND = $aXl4$export$LEGEND), $aXl4$exports.LI = $aXl4$export$LI), $aXl4$exports.LINK = $aXl4$export$LINK), $aXl4$exports.MAIN = $aXl4$export$MAIN), $aXl4$exports.MAP = $aXl4$export$MAP), $aXl4$exports.MARK = $aXl4$export$MARK), $aXl4$exports.META = $aXl4$export$META), $aXl4$exports.METER = $aXl4$export$METER), $aXl4$exports.NAV = $aXl4$export$NAV), $aXl4$exports.NOSCRIPT = $aXl4$export$NOSCRIPT), $aXl4$exports.OBJECT = $aXl4$export$OBJECT), $aXl4$exports.OL = $aXl4$export$OL), $aXl4$exports.OPTGROUP = $aXl4$export$OPTGROUP), $aXl4$exports.OPTION = $aXl4$export$OPTION), $aXl4$exports.OUTPUT = $aXl4$export$OUTPUT), $aXl4$exports.P = $aXl4$export$P), $aXl4$exports.PARAM = $aXl4$export$PARAM), $aXl4$exports.PICTURE = $aXl4$export$PICTURE), $aXl4$exports.PRE = $aXl4$export$PRE), $aXl4$exports.PROGRESS = $aXl4$export$PROGRESS), $aXl4$exports.Q = $aXl4$export$Q), $aXl4$exports.RP = $aXl4$export$RP), $aXl4$exports.RT = $aXl4$export$RT), $aXl4$exports.RUBY = $aXl4$export$RUBY), $aXl4$exports.S = $aXl4$export$S), $aXl4$exports.SAMP = $aXl4$export$SAMP), $aXl4$exports.SCRIPT = $aXl4$export$SCRIPT), $aXl4$exports.SECTION = $aXl4$export$SECTION), $aXl4$exports.SELECT = $aXl4$export$SELECT), $aXl4$exports.SLOT = $aXl4$export$SLOT), $aXl4$exports.SMALL = $aXl4$export$SMALL), $aXl4$exports.SOURCE = $aXl4$export$SOURCE), $aXl4$exports.SPAN = $aXl4$export$SPAN), $aXl4$exports.STRONG = $aXl4$export$STRONG), $aXl4$exports.STYLE = $aXl4$export$STYLE), $aXl4$exports.SUB = $aXl4$export$SUB), $aXl4$exports.SUMMARY = $aXl4$export$SUMMARY), $aXl4$exports.SUP = $aXl4$export$SUP), $aXl4$exports.TABLE = $aXl4$export$TABLE), $aXl4$exports.TBODY = $aXl4$export$TBODY), $aXl4$exports.TD = $aXl4$export$TD), $aXl4$exports.TEMPLATE = $aXl4$export$TEMPLATE), $aXl4$exports.TEXTAREA = $aXl4$export$TEXTAREA), $aXl4$exports.TFOOT = $aXl4$export$TFOOT), $aXl4$exports.TH = $aXl4$export$TH), $aXl4$exports.THEAD = $aXl4$export$THEAD), $aXl4$exports.TIME = $aXl4$export$TIME), $aXl4$exports.TITLE = $aXl4$export$TITLE), $aXl4$exports.TR = $aXl4$export$TR), $aXl4$exports.TRACK = $aXl4$export$TRACK), $aXl4$exports.U = $aXl4$export$U), $aXl4$exports.UL = $aXl4$export$UL), $aXl4$exports.VAR = $aXl4$export$VAR), $aXl4$exports.VIDEO = $aXl4$export$VIDEO), $aXl4$exports.WBR = $aXl4$export$WBR), $aXl4$exports.Adapter = $aXl4$export$Adapter), $aXl4$exports.LocalAdapter = $aXl4$export$LocalAdapter), $aXl4$exports.Component = $aXl4$export$Component), $aXl4$exports.HoldState = $aXl4$export$HoldState), $aXl4$exports.Iterate = $aXl4$export$Iterate), $aXl4$exports.MapState = $aXl4$export$MapState), $aXl4$exports.MapField = $aXl4$export$MapField), $aXl4$exports.MapStateAndKeep = $aXl4$export$MapStateAndKeep), $aXl4$exports.MapAction = $aXl4$export$MapAction), $aXl4$exports.MapQuery = $aXl4$export$MapQuery), $aXl4$exports.Match = $aXl4$export$Match), $aXl4$exports.MatchKind = $aXl4$export$MatchKind), $aXl4$exports.MatchBool = $aXl4$export$MatchBool), $aXl4$exports.MatchValue = $aXl4$export$MatchValue), $aXl4$exports.MatchOption = $aXl4$export$MatchOption), $aXl4$exports.MatchMaybe = $aXl4$export$MatchMaybe), $aXl4$exports.MatchResult = $aXl4$export$MatchResult), $aXl4$exports.MatchAsync = $aXl4$export$MatchAsync), $aXl4$exports.MatchAsyncResult = $aXl4$export$MatchAsyncResult), $aXl4$exports.Lazy = $aXl4$export$Lazy), $aXl4$exports.Fragment = $aXl4$export$Fragment), $aXl4$exports.ForEach = $aXl4$export$ForEach), $aXl4$exports.Portal = $aXl4$export$Portal), $aXl4$exports.PortalWithSelector = $aXl4$export$PortalWithSelector), $aXl4$exports.HeadPortal = $aXl4$export$HeadPortal), $aXl4$exports.BodyPortal = $aXl4$export$BodyPortal), $aXl4$exports.SimpleComponent = $aXl4$export$SimpleComponent), $aXl4$exports.Unless = $aXl4$export$Unless), $aXl4$exports.Until = $aXl4$export$Until);
 $aXl4$exports.When = $aXl4$export$When;
 Object.defineProperty($aXl4$exports, "El", {
   enumerable: true,
@@ -10797,6 +10637,14 @@ function $aXl4$var$Component(reducer, init) {
 var $aXl4$export$Component = $aXl4$var$Component;
 $aXl4$exports.Component = $aXl4$export$Component;
 
+function $aXl4$var$HoldState(holdf) {
+  var builder = new $eyJE$export$FragmentHTMLBuilder();
+  return new $fYSr$export$HoldStateTemplate(holdf, builder);
+}
+
+var $aXl4$export$HoldState = $aXl4$var$HoldState;
+$aXl4$exports.HoldState = $aXl4$export$HoldState;
+
 function $aXl4$var$Iterate(map, init) {
   return $aXl4$var$MapState(function (outer) {
     var items = $nFed$export$resolveAttribute(map)(outer);
@@ -11478,9 +11326,9 @@ function () {
     var _this = this;
 
     return new DOMContext(this.doc, this.append, function (action) {
-      _this.dispatch(action);
-
       dispatch(action);
+
+      _this.dispatch(action);
     });
   };
 
@@ -11515,8 +11363,8 @@ $UPGL$exports.Tempo = $UPGL$export$Tempo;
 $UPGL$export$Tempo = {
   renderComponent: function (options) {
     var maybeElement = options.el,
-        component = options.component,
-        state = options.state;
+        component = options.component;
+    var localState = options.state;
     var doc = options.document || document;
     var el = maybeElement || doc.body;
 
@@ -11525,11 +11373,14 @@ $UPGL$export$Tempo = {
     };
 
     var template = $yiha$export$childOrBuilderToTemplate(component);
-    var view = template.render(new $OJrv$export$DOMContext(doc, append, function () {}), state);
-    return {
-      view: view,
-      store: view.store
-    };
+    var appliedMiddleware = options.middleware !== undefined ? options.middleware(function (action) {
+      view.dispatch(action);
+    }) : function () {};
+    var view = template.render(new $OJrv$export$DOMContext(doc, append, function (action) {
+      appliedMiddleware(view.state, action, localState);
+      localState = view.state;
+    }), localState);
+    return view;
   },
   render: function (options) {
     var el = options.el,
@@ -11538,23 +11389,23 @@ $UPGL$export$Tempo = {
         equal = options.equal,
         document = options.document,
         template = options.template,
-        delayed = options.delayed;
-    var comp = $aXl4$export$Component(reducer, function ($) {
-      if (equal !== undefined) $.equals = equal;
-      if (delayed !== undefined) $.delayed = delayed;
-      $.Append(template);
+        delayed = options.delayed,
+        middleware = options.middleware;
+    var component = $aXl4$export$Component(reducer, function ($) {
+      $.Equals(equal).Delayed(delayed).Append(template);
     });
     return $UPGL$export$Tempo.renderComponent({
       el: el,
-      component: comp,
+      component: component,
       state: state,
-      document: document
+      document: document,
+      middleware: middleware
     });
   },
   renderSimple: function (options) {
     var maybeElement = options.el,
-        component = options.component,
-        state = options.state;
+        component = options.component;
+    var localState = options.state;
     var doc = options.document || document;
     var el = maybeElement || doc.body;
 
@@ -11562,14 +11413,14 @@ $UPGL$export$Tempo = {
       return el.appendChild(node);
     };
 
-    var onChange = function (state) {};
-
     var template = $yiha$export$childOrBuilderToTemplate(component);
-    var result = $UPGL$var$__assign($UPGL$var$__assign({}, template.render(new $OJrv$export$DOMContext(doc, append, function (state) {
-      result.onChange(state);
-    }), state)), {
-      onChange: onChange
-    });
+    var appliedMiddleware = options.middleware !== undefined ? options.middleware(function (state) {
+      return result.change(state);
+    }) : function () {};
+    var result = $UPGL$var$__assign({}, template.render(new $OJrv$export$DOMContext(doc, append, function (state) {
+      appliedMiddleware(state, localState);
+      localState = state;
+    }), localState));
     return result;
   }
 };
@@ -11707,7 +11558,7 @@ Object.defineProperty($GrqS$exports, "__esModule", {
 var $GrqS$export$middleware = void 0;
 $GrqS$exports.middleware = $GrqS$export$middleware;
 
-$GrqS$export$middleware = function (app) {
+$GrqS$export$middleware = function (dispatch) {
   return function (state, action) {
     switch (action.kind) {
       case 'ExecuteSelectedTests':
@@ -11715,7 +11566,7 @@ $GrqS$export$middleware = function (app) {
             tests = _a.tests,
             versions = _a.versions;
 
-        app.store.process($FLek$export$Action.executeTests(versions, tests));
+        dispatch($FLek$export$Action.executeTests(versions, tests));
         return;
 
       case 'ExecuteTests':
@@ -11728,9 +11579,9 @@ $GrqS$export$middleware = function (app) {
         });
         setTimeout(function () {
           $MWVc$export$runTests(versionIds_1, testsToRun_1, options_1, function (runnerId, testId, target) {
-            app.store.process($FLek$export$Action.updateResult(runnerId, testId, target));
+            dispatch($FLek$export$Action.updateResult(runnerId, testId, target));
           }).then(function () {
-            return app.store.process($FLek$export$Action.testsExecuted());
+            return dispatch($FLek$export$Action.testsExecuted());
           });
         }, 1);
         return;
@@ -11751,13 +11602,13 @@ $ZMBm$exports.createApp = $ZMBm$export$createApp;
 
 $ZMBm$export$createApp = function (state) {
   var el = document.getElementById('app');
-  var app = $UPGL$export$Tempo.render({
+  $UPGL$export$Tempo.render({
     state: state,
     template: $ywMA$export$template,
     reducer: $pSX2$export$reducer,
-    el: el
+    el: el,
+    middleware: $GrqS$export$middleware
   });
-  app.store.observable.on($GrqS$export$middleware(app));
 };
 
 $ZMBm$exports.createApp = $ZMBm$export$createApp;
