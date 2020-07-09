@@ -11,20 +11,21 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-const fs = require('fs');
-const path = require('path');
+const fs = require('fs')
+const path = require('path')
 
-const distFolder = path.join(__dirname, '../history');
+const distFolder = path.join(__dirname, '../history')
 const directoryNames = fs.readdirSync(distFolder).filter(file => {
-  const stat = fs.statSync(path.join(distFolder, file));
-  return stat.isDirectory() && file !== '.' && file !== '..';
-});
+  const stat = fs.statSync(path.join(distFolder, file))
+  return stat.isDirectory() && file !== '.' && file !== '..'
+})
 
-const configPath = path.join(__dirname, '../build', 'config.json');
+const configPath = path.join(__dirname, '../dist', 'config.json')
 
 const content = {
   versions: ['current', ...directoryNames]
-};
+}
 
-fs.writeFileSync(configPath, JSON.stringify(content, null, 2), 'utf8');
-
+// console.log(configPath)
+// console.log(JSON.stringify(content, null, 2))
+fs.writeFileSync(configPath, JSON.stringify(content, null, 2), 'utf8')
