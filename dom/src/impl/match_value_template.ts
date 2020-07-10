@@ -35,7 +35,7 @@ export class MatchValueTemplate<State, Action, Query>
   ) {
     this.matcher = keys(matcher).reduce(
       (acc, key) => {
-        acc[key] = childOrBuilderToTemplate(this.matcher[key])
+        acc[key] = childOrBuilderToTemplate(matcher[key])
         return acc
       },
       {} as {
