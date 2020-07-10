@@ -11,7 +11,7 @@
     "dompurify": "^2.0.7",
     "partsing": "^0.7.3",
     "tempo-core": "^1.7.2",
-    "tempo-dom": "^0.27.0",
+    "tempo-dom": "^0.27.1",
     "tempo-std": "^0.5.5",
     "@ts-stack/markdown": "^1.2.0"
   },

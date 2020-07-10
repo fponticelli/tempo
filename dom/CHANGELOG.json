@@ -2,6 +2,18 @@
   "name": "tempo-dom",
   "entries": [
     {
+      "version": "0.27.1",
+      "tag": "tempo-dom_v0.27.1",
+      "date": "Fri, 10 Jul 2020 03:06:06 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "fix bug in MatchValueTemplate"
+          }
+        ]
+      }
+    },
+    {
       "version": "0.27.0",
       "tag": "tempo-dom_v0.27.0",
       "date": "Thu, 09 Jul 2020 01:32:44 GMT",

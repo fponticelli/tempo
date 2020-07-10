@@ -1,6 +1,13 @@
 # Change Log - tempo-dom
 
-This log was last generated on Thu, 09 Jul 2020 01:32:44 GMT and should not be manually modified.
+This log was last generated on Fri, 10 Jul 2020 03:06:06 GMT and should not be manually modified.
+
+## 0.27.1
+Fri, 10 Jul 2020 03:06:06 GMT
+
+### Patches
+
+- fix bug in MatchValueTemplate
 
 ## 0.27.0
 Thu, 09 Jul 2020 01:32:44 GMT
