@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "tempo-std",
+      "comment": "Update implementation of AsyncResult.",
+      "type": "patch"
+    }
+  ],
+  "packageName": "tempo-std",
+  "email": "franco.ponticelli@gmail.com"
+}
