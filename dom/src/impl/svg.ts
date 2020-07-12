@@ -30,7 +30,7 @@ import { MatchValueTemplate } from './match_value_template'
 import { Option } from 'tempo-std/lib/option'
 import { Maybe, Just } from 'tempo-std/lib/maybe'
 import { Result } from 'tempo-std/lib/result'
-import { Async, Outcome } from 'tempo-std/lib/async'
+import { Async } from 'tempo-std/lib/async'
 import { AsyncResult } from 'tempo-std/lib/async_result'
 import { LazyTemplate } from './lazy'
 import {
@@ -884,16 +884,8 @@ export function MatchAsyncResult<
   Loading: DOMChild<Progress, Action, Query> | IBuilder<Progress, Action, Query>
 }): DOMTemplate<AsyncResult<State, Error, Progress>, Action, Query> {
   return MatchKind<AsyncResult<State, Error, Progress>, Action, Query>({
-    Outcome: MapState(
-      (o: Outcome<Result<State, Error>>) => o.value,
-      n =>
-        n.Append(
-          MatchResult<State, Error, Action, Query>({
-            Success: props.Success,
-            Failure: props.Failure
-          })
-        )
-    ),
+    Failure: MapField('error', n => n.Append(props.Failure)),
+    Success: MapField('value', n => n.Append(props.Success)),
     Loading: MapField('progress', n => n.Append(props.Loading)),
     NotAsked: MapState(
       () => null,

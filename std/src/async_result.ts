@@ -11,36 +11,44 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { Maybe, nothing } from './maybe'
+import { Maybe, nothing, just } from './maybe'
 import { map as mapArray } from './arrays'
 import { Fun2, Fun3, Fun4, Fun5, Fun6 } from './types/functions'
-import { Option, none } from './option'
-import { Result, success as successR, failure as failureR, map as mapR, mapN as mapNR, Success, Failure,
-getOrElse as getOrElseR, getOrThrow as getOrThrowR, getOrElseLazy as getOrElseLazyR, toArray as toArrayR,
-cata as cataR, cataLazy as cataLazyR, toOption as toOptionR, toMaybe as toMaybeR, recover as recoverR,
-foldLeft as foldLeftR, any as anyR, each as eachR, all as allR, forEach as forEachR } from './result'
-import { Async, outcome, map as mapA, mapN as mapNA, Outcome, Loading, NotAsked } from './async'
+import { Option, none, some } from './option'
 
-export type AsyncResult<T, E, P = unknown> = Async<Result<T, E>, P>
+export type Success<T> = { kind: 'Success'; value: T }
+export type Failure<E> = { kind: 'Failure'; error: E }
+export type NotAsked = { kind: 'NotAsked' }
+export type Loading<P> = { kind: 'Loading'; progress: P }
+
+export type AsyncResult<T, E, P = unknown> =
+  | Success<T>
+  | Failure<E>
+  | NotAsked
+  | Loading<P>
 
 export function success<T, E, P = unknown>(value: T): AsyncResult<T, E, P> {
-  return outcome(successR(value))
+  return { kind: 'Success', value }
 }
 export function failure<T, E, P = unknown>(error: E): AsyncResult<T, E, P> {
-  return outcome(failureR(error))
+  return { kind: 'Failure', error }
 }
 export const notAsked = { kind: 'NotAsked' } as AsyncResult<never, never>
 export function loading<T, E, P = unknown>(progress: P): AsyncResult<T, E, P> {
   return { kind: 'Loading', progress }
 }
 
-export function forEach<A, Err>(result: AsyncResult<A, Err>, f: (a: A) => void): void {
+export function forEach<A, Err>(
+  result: AsyncResult<A, Err>,
+  f: (a: A) => void
+): void {
   switch (result.kind) {
     case 'Loading':
     case 'NotAsked':
+    case 'Failure':
       return
-    case 'Outcome':
-      forEachR(result.value, f)
+    case 'Success':
+      f(result.value)
   }
 }
 
@@ -52,18 +60,29 @@ export function match<A, B, Err, Prog = unknown>(
   fProg: (p: Prog) => B
 ): B {
   switch (result.kind) {
-    case 'Loading': return fProg(result.progress)
-    case 'NotAsked': return notAsked
-    case 'Outcome':
-      switch (result.value.kind) {
-        case 'Success': return f(result.value.value)
-        case 'Failure': return fErr(result.value.error)
-      }
+    case 'Loading':
+      return fProg(result.progress)
+    case 'NotAsked':
+      return notAsked
+    case 'Success':
+      return f(result.value)
+    case 'Failure':
+      return fErr(result.error)
   }
 }
 
-export function map<A, B, Err, Prog>(async: AsyncResult<A, Err, Prog>, f: (a: A) => B): AsyncResult<B, Err, Prog> {
-  return mapA(async, r => mapR(r, f))
+export function map<A, B, Err, Prog>(
+  result: AsyncResult<A, Err, Prog>,
+  f: (a: A) => B
+): AsyncResult<B, Err, Prog> {
+  switch (result.kind) {
+    case 'Loading':
+    case 'NotAsked':
+    case 'Failure':
+      return result
+    case 'Success':
+      return success(f(result.value))
+  }
 }
 
 export function mapN<A, B, C, Err, Prog>(
@@ -101,11 +120,19 @@ export function mapN<A, B, C, D, E, F, G, Err, Prog>(
   g: AsyncResult<F, Err, Prog>,
   f: Fun6<A, B, C, D, E, F, G>
 ): AsyncResult<G, Err, Prog>
-export function mapN<Err, Prog, Ret>(
-  ...args: any[]
+export function mapN<Args extends any[], Err, Prog, Ret>(
+  ...args: Args
 ): AsyncResult<Ret, Err, Prog> {
   const f = args.pop()
-  return (mapNA as Function)((...r: any[]) => (mapNR as Function)(f, ...r), ...args)
+  for (const a of args) {
+    if (a.kind === 'Failure' || a.kind === 'Loading' || a.kind === 'NotAsked')
+      return a
+  }
+  const results = mapArray(
+    args as { kind: 'Success'; value: any }[],
+    a => a.value
+  )
+  return success(f(...(results as Args)))
 }
 
 export function flatMap<A, B, Err, Prog>(
@@ -114,14 +141,12 @@ export function flatMap<A, B, Err, Prog>(
 ): AsyncResult<B, Err, Prog> {
   switch (async.kind) {
     case 'NotAsked':
-    case 'Loading': return async
-    case 'Outcome':
-      switch (async.value.kind) {
-        case 'Success':
-          return f(async.value.value)
-        case 'Failure':
-          return failure(async.value.error)
-      }
+    case 'Loading':
+      return async
+    case 'Success':
+      return f(async.value)
+    case 'Failure':
+      return failure(async.error)
   }
 }
 
@@ -165,140 +190,210 @@ export function flatMapN<Args extends any[], Err, Prog, Ret>(
 ): AsyncResult<Ret, Err, Prog> {
   const f = args.pop()
   for (const a of args) {
-    if (a.kind === 'Loading' || a.kind === 'NotAsked') {
+    if (a.kind === 'Loading' || a.kind === 'NotAsked' || a.kind === 'Failure') {
       return a
     }
   }
-  const results = mapArray(args as { kind: 'Outcome', value: any }[], a => a.value)
-  return f(...results as Args)
+  const results = mapArray(
+    args as { kind: 'Success'; value: any }[],
+    a => a.value
+  )
+  return f(...(results as Args))
 }
 
-export function isSuccess<T, E, P>(async: AsyncResult<T, E, P>): async is Outcome<Success<T>> {
-  return async.kind === 'Outcome' && async.value.kind === 'Success'
+export function isSuccess<T, E, P>(
+  async: AsyncResult<T, E, P>
+): async is Success<T> {
+  return async.kind === 'Success'
 }
-export function isFailure<T, E, P>(async: AsyncResult<T, E, P>): async is Outcome<Failure<E>> {
-  return async.kind === 'Outcome' && async.value.kind === 'Failure'
+export function isFailure<T, E, P>(
+  async: AsyncResult<T, E, P>
+): async is Failure<E> {
+  return async.kind === 'Failure'
 }
-export function isLoading<T, E, P>(async: AsyncResult<T, E, P>): async is Loading<P> {
+export function isLoading<T, E, P>(
+  async: AsyncResult<T, E, P>
+): async is Loading<P> {
   return async.kind === 'Loading'
 }
-export function isNotAsked<T, E, P>(async: AsyncResult<T, E, P>): async is NotAsked {
+export function isNotAsked<T, E, P>(
+  async: AsyncResult<T, E, P>
+): async is NotAsked {
   return async.kind === 'NotAsked'
 }
 
 export function getOrThrow<T, P>(async: AsyncResult<T, P>): Maybe<T> {
   switch (async.kind) {
-    case 'NotAsked': throw 'Can\'t retrieve value from NotAsked'
-    case 'Loading': throw 'Can\'t retrieve value from Loading: ' + async.progress
-    case 'Outcome': return getOrThrowR(async.value)
+    case 'NotAsked':
+      throw "Can't retrieve value from NotAsked"
+    case 'Loading':
+      throw "Can't retrieve value from Loading: " + async.progress
+    case 'Failure':
+      throw "Can't retrieve value from Failure: " + async.error
+    case 'Success':
+      return async.value
   }
 }
 
 export function getOrElse<T, P>(async: AsyncResult<T, P>, alt: T): T {
   switch (async.kind) {
     case 'NotAsked':
-    case 'Loading': return alt
-    case 'Outcome': return getOrElseR(async.value, alt)
+    case 'Loading':
+    case 'Failure':
+      return alt
+    case 'Success':
+      return async.value
   }
 }
 
 export function getOrElseLazy<T, P>(async: AsyncResult<T, P>, alt: () => T): T {
   switch (async.kind) {
     case 'NotAsked':
-    case 'Loading': return alt()
-    case 'Outcome': return getOrElseLazyR(async.value, alt)
+    case 'Loading':
+    case 'Failure':
+      return alt()
+    case 'Success':
+      return async.value
   }
 }
 
 export function toArray<T, P>(async: AsyncResult<T, P>): T[] {
   switch (async.kind) {
     case 'NotAsked':
-    case 'Loading': return []
-    case 'Outcome': return toArrayR(async.value)
+    case 'Loading':
+    case 'Failure':
+      return []
+    case 'Success':
+      return [async.value]
   }
 }
 
 export function toMaybe<T, P>(async: AsyncResult<T, P>): Maybe<T> {
   switch (async.kind) {
     case 'NotAsked':
-    case 'Loading': return nothing
-    case 'Outcome': return toMaybeR(async.value)
+    case 'Loading':
+    case 'Failure':
+      return nothing
+    case 'Success':
+      return just(async.value)
   }
 }
 
 export function toOption<T, P>(async: AsyncResult<T, P>): Option<T> {
   switch (async.kind) {
     case 'NotAsked':
-    case 'Loading': return none
-    case 'Outcome': return toOptionR(async.value)
+    case 'Loading':
+    case 'Failure':
+      return none
+    case 'Success':
+      return some(async.value)
   }
 }
 
-export function flatten<T, E, P>(async: AsyncResult<AsyncResult<T, E, P>, E, P>): AsyncResult<T, E, P> {
-  switch (async.kind) {
-    case 'NotAsked': return notAsked as AsyncResult<T, E, P>
-    case 'Loading': return loading<T, E, P>(async.progress)
-    case 'Outcome':
-      if (async.value.kind === 'Success' && async.value.value.kind === 'Outcome' && async.value.value.value.kind === 'Success') {
-        return async.value.value
-      } else {
-        return async as AsyncResult<T, E, P>
-      }
+export function flatten<T, E, P>(
+  result: AsyncResult<AsyncResult<T, E, P>, E, P>
+): AsyncResult<T, E, P> {
+  switch (result.kind) {
+    case 'NotAsked':
+      return notAsked as AsyncResult<T, E, P>
+    case 'Loading':
+      return loading<T, E, P>(result.progress)
+    case 'Failure':
+      return failure<T, E, P>(result.error)
+    case 'Success':
+      return result.value as AsyncResult<T, E, P>
   }
 }
 
-export function cata<A, B, Prog>(async: AsyncResult<A, Prog>, f: (a: A) => B, ifNotOutcome: B): B {
+export function cata<A, B, E, Prog>(
+  result: AsyncResult<A, E, Prog>,
+  f: (a: A) => B,
+  ifNot: B
+): B {
+  switch (result.kind) {
+    case 'NotAsked':
+    case 'Loading':
+    case 'Failure':
+      return ifNot
+    case 'Success':
+      return f(result.value)
+  }
+}
+
+export function cataLazy<A, B, Prog>(
+  async: AsyncResult<A, Prog>,
+  f: (a: A) => B,
+  ifNot: () => B
+): B {
   switch (async.kind) {
     case 'NotAsked':
-    case 'Loading': return ifNotOutcome
-    case 'Outcome': return cataR(async.value, f, ifNotOutcome)
+    case 'Loading':
+    case 'Failure':
+      return ifNot()
+    case 'Success':
+      return f(async.value)
   }
 }
 
-export function cataLazy<A, B, Prog>(async: AsyncResult<A, Prog>, f: (a: A) => B, ifNotOutcome: () => B): B {
+export function foldLeft<T, B, Prog>(
+  async: AsyncResult<T, Prog>,
+  f: (acc: B, curr: T) => B,
+  b: B
+): B {
   switch (async.kind) {
     case 'NotAsked':
-    case 'Loading': return ifNotOutcome()
-    case 'Outcome': return cataLazyR(async.value, f, ifNotOutcome)
+    case 'Loading':
+    case 'Failure':
+      return b
+    case 'Success':
+      return f(b, async.value)
   }
 }
 
-export function foldLeft<T, B, Prog>(async: AsyncResult<T, Prog>, f: (acc: B, curr: T) => B, b: B): B {
+export function all<T, P>(
+  async: AsyncResult<T, P>,
+  f: (v: T) => boolean
+): boolean {
   switch (async.kind) {
     case 'NotAsked':
-    case 'Loading': return b
-    case 'Outcome': return foldLeftR(async.value, f, b)
+    case 'Loading':
+    case 'Failure':
+      return true
+    case 'Success':
+      return f(async.value)
   }
 }
 
-export function all<T, P>(async: AsyncResult<T, P>, f: (v: T) => boolean): boolean {
+export function any<T, P>(
+  async: AsyncResult<T, P>,
+  f: (v: T) => boolean
+): boolean {
   switch (async.kind) {
     case 'NotAsked':
-    case 'Loading': return true
-    case 'Outcome': return allR(async.value, f)
-  }
-}
-
-export function any<T, P>(async: AsyncResult<T, P>, f: (v: T) => boolean): boolean {
-  switch (async.kind) {
-    case 'NotAsked':
-    case 'Loading': return false
-    case 'Outcome': return anyR(async.value, f)
+    case 'Loading':
+    case 'Failure':
+      return false
+    case 'Success':
+      return f(async.value)
   }
 }
 
 export function each<T, P>(async: AsyncResult<T, P>, f: (v: T) => void): void {
   switch (async.kind) {
     case 'NotAsked':
-    case 'Loading': return
-    case 'Outcome': return eachR(async.value, f)
+    case 'Loading':
+    case 'Failure':
+      return
+    case 'Success':
+      return f(async.value)
   }
 }
 
-export function firstSuccess<A, Prog>(...args: AsyncResult<A, Prog>[]): AsyncResult<A, Prog> {
+export function firstSuccess<A, Prog>(
+  ...args: AsyncResult<A, Prog>[]
+): AsyncResult<A, Prog> {
   for (const a of args) {
-    if (isSuccess(a))
-      return a
+    if (isSuccess(a)) return a
   }
   for (const a of args) {
     return a
@@ -306,11 +401,17 @@ export function firstSuccess<A, Prog>(...args: AsyncResult<A, Prog>[]): AsyncRes
   throw 'cannot use `firstSuccess` with empty argument list'
 }
 
-export function recover<T, E, P>(async: AsyncResult<T, E, P>, whenNoOutcome: T): AsyncResult<T, E, P> {
+export function recover<T, E, P>(
+  async: AsyncResult<T, E, P>,
+  whenNoResult: T
+): AsyncResult<T, E, P> {
   switch (async.kind) {
     case 'NotAsked':
-    case 'Loading': return success(whenNoOutcome)
-    case 'Outcome': return outcome(recoverR(async.value, whenNoOutcome))
+    case 'Loading':
+    case 'Failure':
+      return success(whenNoResult)
+    case 'Success':
+      return success(async.value)
   }
 }
 
