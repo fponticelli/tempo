@@ -2,6 +2,23 @@
   "name": "tempo-dom",
   "entries": [
     {
+      "version": "0.27.2",
+      "tag": "tempo-dom_v0.27.2",
+      "date": "Sun, 12 Jul 2020 03:32:19 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Update implementation of AsyncResult."
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"tempo-std\" from `^0.5.5` to `^0.5.6`"
+          }
+        ]
+      }
+    },
+    {
       "version": "0.27.1",
       "tag": "tempo-dom_v0.27.1",
       "date": "Fri, 10 Jul 2020 03:06:06 GMT",

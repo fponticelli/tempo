@@ -1,6 +1,13 @@
 # Change Log - tempo-dom
 
-This log was last generated on Fri, 10 Jul 2020 03:06:06 GMT and should not be manually modified.
+This log was last generated on Sun, 12 Jul 2020 03:32:19 GMT and should not be manually modified.
+
+## 0.27.2
+Sun, 12 Jul 2020 03:32:19 GMT
+
+### Patches
+
+- Update implementation of AsyncResult.
 
 ## 0.27.1
 Fri, 10 Jul 2020 03:06:06 GMT

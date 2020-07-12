@@ -1,6 +1,13 @@
 # Change Log - tempo-std
 
-This log was last generated on Mon, 08 Jun 2020 23:05:13 GMT and should not be manually modified.
+This log was last generated on Sun, 12 Jul 2020 03:32:19 GMT and should not be manually modified.
+
+## 0.5.6
+Sun, 12 Jul 2020 03:32:19 GMT
+
+### Patches
+
+- Update implementation of AsyncResult.
 
 ## 0.5.5
 Mon, 08 Jun 2020 23:05:13 GMT
