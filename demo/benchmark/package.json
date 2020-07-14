@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "tempo-core": "^1.7.2",
-    "tempo-dom": "^0.27.2",
+    "tempo-dom": "^0.27.3",
     "tslib": "^2.0.0"
   },
   "devDependencies": {

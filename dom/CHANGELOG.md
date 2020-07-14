@@ -1,6 +1,13 @@
 # Change Log - tempo-dom
 
-This log was last generated on Sun, 12 Jul 2020 03:32:19 GMT and should not be manually modified.
+This log was last generated on Tue, 14 Jul 2020 02:28:46 GMT and should not be manually modified.
+
+## 0.27.3
+Tue, 14 Jul 2020 02:28:46 GMT
+
+### Patches
+
+- Added CaptureState.
 
 ## 0.27.2
 Sun, 12 Jul 2020 03:32:19 GMT

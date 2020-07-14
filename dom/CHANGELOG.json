@@ -2,6 +2,18 @@
   "name": "tempo-dom",
   "entries": [
     {
+      "version": "0.27.3",
+      "tag": "tempo-dom_v0.27.3",
+      "date": "Tue, 14 Jul 2020 02:28:46 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Added CaptureState."
+          }
+        ]
+      }
+    },
+    {
       "version": "0.27.2",
       "tag": "tempo-dom_v0.27.2",
       "date": "Sun, 12 Jul 2020 03:32:19 GMT",
