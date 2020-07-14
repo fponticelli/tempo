@@ -38,6 +38,7 @@ import {
 } from './dom_builder'
 import { AdapterTemplate, PropagateArg } from './adapter'
 import { SVGSVGElementBuilder } from './svg_builder'
+import { StateHook, CaptureStateTemplate } from './capture_state'
 
 export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
   State,
@@ -102,6 +103,28 @@ export class BaseHTMLBuilder<State, Action, Query> extends DOMBuilder<
         props.propagate || (() => undefined),
         props.child
       )
+    )
+  }
+
+  CaptureState(
+    capture: (
+      hook: StateHook<State>,
+      builder: FragmentHTMLBuilder<State, Action, Query>
+    ) => void
+  ) {
+    return this.Append(new CaptureStateTemplate<State, Action, Query>(capture))
+  }
+
+  ReleaseState<StateA, StateC>(
+    hook: StateHook<StateA>,
+    merge: (a: StateA, b: State) => StateC,
+    init: (builder: FragmentHTMLBuilder<StateC, Action, Query>) => void
+  ) {
+    const builder = new FragmentHTMLBuilder<StateC, Action, Query>()
+    init(builder)
+    return this.MapState(
+      b => merge(hook(), b),
+      $ => $.Append(builder)
     )
   }
 

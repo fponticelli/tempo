@@ -90,6 +90,7 @@ import { AsyncResult } from 'tempo-std/lib/async_result'
 import { LazyTemplate } from './lazy'
 import { HoldF, HoldStateTemplate } from './hold_state'
 import { Async } from 'tempo-std/lib/async'
+import { StateHook, CaptureStateTemplate } from './capture_state'
 
 export { El }
 
@@ -1223,6 +1224,28 @@ export function Component<State, Action, Query>(
   const builder = new ComponentHTMLBuilder<State, Action, Query>(reducer)
   init(builder)
   return builder
+}
+
+export function CaptureState<State, Action, Query>(
+  capture: (
+    hook: StateHook<State>,
+    builder: FragmentHTMLBuilder<State, Action, Query>
+  ) => void
+) {
+  return new CaptureStateTemplate<State, Action, Query>(capture)
+}
+
+export function ReleaseState<StateA, StateB, StateC, Action, Query>(
+  hook: StateHook<StateA>,
+  merge: (a: StateA, b: StateB) => StateC,
+  init: (builder: FragmentHTMLBuilder<StateC, Action, Query>) => void
+) {
+  const builder = new FragmentHTMLBuilder<StateC, Action, Query>()
+  init(builder)
+  return MapState<StateB, StateC, Action, Query>(
+    (b: StateB) => merge(hook(), b),
+    $ => $.Append(builder)
+  )
 }
 
 export function HoldState<State, StateB, StateC, Action, Query>(
