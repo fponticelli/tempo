@@ -46,6 +46,11 @@
       >
     </li>
     <li>
+      <a class="is-family-monospace" href="#/api/std/async_result.html#Failure"
+        >Failure</a
+      >
+    </li>
+    <li>
       <a
         class="is-family-monospace"
         href="#/api/std/async_result.html#firstSuccess"
@@ -132,6 +137,11 @@
       >
     </li>
     <li>
+      <a class="is-family-monospace" href="#/api/std/async_result.html#Loading"
+        >Loading</a
+      >
+    </li>
+    <li>
       <a class="is-family-monospace" href="#/api/std/async_result.html#map"
         >map</a
       >
@@ -147,6 +157,11 @@
       >
     </li>
     <li>
+      <a class="is-family-monospace" href="#/api/std/async_result.html#NotAsked"
+        >NotAsked</a
+      >
+    </li>
+    <li>
       <a class="is-family-monospace" href="#/api/std/async_result.html#notAsked"
         >notAsked</a
       >
@@ -159,6 +174,11 @@
     <li>
       <a class="is-family-monospace" href="#/api/std/async_result.html#success"
         >success</a
+      >
+    </li>
+    <li>
+      <a class="is-family-monospace" href="#/api/std/async_result.html#Success"
+        >Success</a
       >
     </li>
     <li>
@@ -193,8 +213,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/async_result.ts#L274"
-    >std/src/async_result.ts at line 274</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/async_result.ts#L353"
+    >std/src/async_result.ts at line 353</a
   >
 </p>
 <pre
@@ -212,8 +232,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/async_result.ts#L282"
-    >std/src/async_result.ts at line 282</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/async_result.ts#L367"
+    >std/src/async_result.ts at line 367</a
   >
 </p>
 <pre
@@ -227,7 +247,11 @@
 </h3>
 <pre
   class="ts language-ts signature"
-><span class="token keyword">type</span> AsyncResult<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">P</span> <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span> <span class="token operator">=</span> Async<span class="token operator">&lt;</span>Result<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> <span class="token constant">P</span><span class="token operator">&gt;</span>
+><span class="token keyword">type</span> AsyncResult<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">P</span> <span class="token operator">=</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span> <span class="token operator">=</span>
+  <span class="token operator">|</span> Success<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span>
+  <span class="token operator">|</span> Failure<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token operator">&gt;</span>
+  <span class="token operator">|</span> NotAsked
+  <span class="token operator">|</span> Loading<span class="token operator">&lt;</span><span class="token constant">P</span><span class="token operator">&gt;</span>
 </pre>
 <p class="defined-in">
   defined in
@@ -246,17 +270,17 @@
 </h3>
 <pre
   class="ts language-ts signature"
-><span class="token keyword">function</span> cata<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  <span class="token keyword">async</span><span class="token operator">:</span> AsyncResult<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+><span class="token keyword">function</span> cata<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+  result<span class="token operator">:</span> AsyncResult<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   <span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token constant">A</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">B</span><span class="token punctuation">,</span>
-  ifNotOutcome<span class="token operator">:</span> <span class="token constant">B</span>
+  ifNot<span class="token operator">:</span> <span class="token constant">B</span>
 <span class="token punctuation">)</span><span class="token operator">:</span> <span class="token constant">B</span>
 </pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/async_result.ts#L250"
-    >std/src/async_result.ts at line 250</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/async_result.ts#L308"
+    >std/src/async_result.ts at line 308</a
   >
 </p>
 <pre
@@ -272,14 +296,14 @@
 ><span class="token keyword">function</span> cataLazy<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">(</span>
   <span class="token keyword">async</span><span class="token operator">:</span> AsyncResult<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   <span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token constant">A</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">B</span><span class="token punctuation">,</span>
-  <span class="token function-variable function">ifNotOutcome</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">B</span>
+  <span class="token function-variable function">ifNot</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">B</span>
 <span class="token punctuation">)</span><span class="token operator">:</span> <span class="token constant">B</span>
 </pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/async_result.ts#L258"
-    >std/src/async_result.ts at line 258</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/async_result.ts#L323"
+    >std/src/async_result.ts at line 323</a
   >
 </p>
 <pre
@@ -297,8 +321,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/async_result.ts#L290"
-    >std/src/async_result.ts at line 290</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/async_result.ts#L381"
+    >std/src/async_result.ts at line 381</a
   >
 </p>
 <pre
@@ -316,13 +340,32 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/async_result.ts#L29"
-    >std/src/async_result.ts at line 29</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/async_result.ts#L33"
+    >std/src/async_result.ts at line 33</a
   >
 </p>
 <pre
   class="import-code ts language-ts"
 ><span class="token keyword">import</span> <span class="token punctuation">{</span> failure <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/async_result.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="Failure">
+  Failure<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >type alias</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">type</span> Failure<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">{</span> kind<span class="token operator">:</span> <span class="token string">'Failure'</span><span class="token punctuation">;</span> error<span class="token operator">:</span> <span class="token constant">E</span> <span class="token punctuation">}</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/async_result.ts#L20"
+    >std/src/async_result.ts at line 20</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> Failure <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/async_result.ts'</span></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="firstSuccess">
   firstSuccess<span
     class="kind is-family-sans-serif has-text-grey-light is-size-6"
@@ -338,8 +381,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/async_result.ts#L298"
-    >std/src/async_result.ts at line 298</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/async_result.ts#L392"
+    >std/src/async_result.ts at line 392</a
   >
 </p>
 <pre
@@ -360,8 +403,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/async_result.ts#L111"
-    >std/src/async_result.ts at line 111</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/async_result.ts#L138"
+    >std/src/async_result.ts at line 138</a
   >
 </p>
 <pre
@@ -425,8 +468,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/async_result.ts#L128"
-    >std/src/async_result.ts at line 128</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/async_result.ts#L153"
+    >std/src/async_result.ts at line 153</a
   >
 </p>
 <pre
@@ -440,14 +483,14 @@
 <pre
   class="ts language-ts signature"
 ><span class="token keyword">function</span> flatten<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">P</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  <span class="token keyword">async</span><span class="token operator">:</span> AsyncResult<span class="token operator">&lt;</span>AsyncResult<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">P</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">P</span><span class="token operator">&gt;</span>
+  result<span class="token operator">:</span> AsyncResult<span class="token operator">&lt;</span>AsyncResult<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">P</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">P</span><span class="token operator">&gt;</span>
 <span class="token punctuation">)</span><span class="token operator">:</span> AsyncResult<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">P</span><span class="token operator">&gt;</span>
 </pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/async_result.ts#L237"
-    >std/src/async_result.ts at line 237</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/async_result.ts#L293"
+    >std/src/async_result.ts at line 293</a
   >
 </p>
 <pre
@@ -469,8 +512,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/async_result.ts#L266"
-    >std/src/async_result.ts at line 266</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/async_result.ts#L338"
+    >std/src/async_result.ts at line 338</a
   >
 </p>
 <pre
@@ -488,8 +531,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/async_result.ts#L37"
-    >std/src/async_result.ts at line 37</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/async_result.ts#L41"
+    >std/src/async_result.ts at line 41</a
   >
 </p>
 <pre
@@ -507,8 +550,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/async_result.ts#L197"
-    >std/src/async_result.ts at line 197</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/async_result.ts#L238"
+    >std/src/async_result.ts at line 238</a
   >
 </p>
 <pre
@@ -527,8 +570,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/async_result.ts#L205"
-    >std/src/async_result.ts at line 205</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/async_result.ts#L249"
+    >std/src/async_result.ts at line 249</a
   >
 </p>
 <pre
@@ -547,8 +590,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/async_result.ts#L189"
-    >std/src/async_result.ts at line 189</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/async_result.ts#L225"
+    >std/src/async_result.ts at line 225</a
   >
 </p>
 <pre
@@ -561,15 +604,13 @@
 </h3>
 <pre
   class="ts language-ts signature"
-><span class="token keyword">function</span> isFailure<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">P</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  <span class="token keyword">async</span><span class="token operator">:</span> AsyncResult<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">P</span><span class="token operator">&gt;</span>
-<span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">async</span> <span class="token keyword">is</span> Outcome<span class="token operator">&lt;</span>Failure<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token operator">&gt;&gt;</span>
+><span class="token keyword">function</span> isFailure<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">P</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token keyword">async</span><span class="token operator">:</span> AsyncResult<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">P</span><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">async</span> <span class="token keyword">is</span> Failure<span class="token operator">&lt;</span><span class="token constant">E</span><span class="token operator">&gt;</span>
 </pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/async_result.ts#L179"
-    >std/src/async_result.ts at line 179</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/async_result.ts#L209"
+    >std/src/async_result.ts at line 209</a
   >
 </p>
 <pre
@@ -587,8 +628,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/async_result.ts#L182"
-    >std/src/async_result.ts at line 182</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/async_result.ts#L214"
+    >std/src/async_result.ts at line 214</a
   >
 </p>
 <pre
@@ -607,8 +648,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/async_result.ts#L185"
-    >std/src/async_result.ts at line 185</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/async_result.ts#L219"
+    >std/src/async_result.ts at line 219</a
   >
 </p>
 <pre
@@ -621,15 +662,13 @@
 </h3>
 <pre
   class="ts language-ts signature"
-><span class="token keyword">function</span> isSuccess<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">P</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  <span class="token keyword">async</span><span class="token operator">:</span> AsyncResult<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">P</span><span class="token operator">&gt;</span>
-<span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">async</span> <span class="token keyword">is</span> Outcome<span class="token operator">&lt;</span>Success<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;&gt;</span>
+><span class="token keyword">function</span> isSuccess<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">P</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token keyword">async</span><span class="token operator">:</span> AsyncResult<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">P</span><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">async</span> <span class="token keyword">is</span> Success<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span>
 </pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/async_result.ts#L176"
-    >std/src/async_result.ts at line 176</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/async_result.ts#L204"
+    >std/src/async_result.ts at line 204</a
   >
 </p>
 <pre
@@ -647,13 +686,32 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/async_result.ts#L33"
-    >std/src/async_result.ts at line 33</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/async_result.ts#L37"
+    >std/src/async_result.ts at line 37</a
   >
 </p>
 <pre
   class="import-code ts language-ts"
 ><span class="token keyword">import</span> <span class="token punctuation">{</span> loading <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/async_result.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="Loading">
+  Loading<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >type alias</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">type</span> Loading<span class="token operator">&lt;</span><span class="token constant">P</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">{</span> kind<span class="token operator">:</span> <span class="token string">'Loading'</span><span class="token punctuation">;</span> progress<span class="token operator">:</span> <span class="token constant">P</span> <span class="token punctuation">}</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/async_result.ts#L22"
+    >std/src/async_result.ts at line 22</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> Loading <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/async_result.ts'</span></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="map">
   map<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
     >function</span
@@ -662,15 +720,15 @@
 <pre
   class="ts language-ts signature"
 ><span class="token keyword">function</span> map<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  <span class="token keyword">async</span><span class="token operator">:</span> AsyncResult<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Err<span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  result<span class="token operator">:</span> AsyncResult<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> Err<span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   <span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> <span class="token constant">A</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">B</span>
 <span class="token punctuation">)</span><span class="token operator">:</span> AsyncResult<span class="token operator">&lt;</span><span class="token constant">B</span><span class="token punctuation">,</span> Err<span class="token punctuation">,</span> Prog<span class="token operator">&gt;</span>
 </pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/async_result.ts#L65"
-    >std/src/async_result.ts at line 65</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/async_result.ts#L74"
+    >std/src/async_result.ts at line 74</a
   >
 </p>
 <pre
@@ -734,8 +792,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/async_result.ts#L69"
-    >std/src/async_result.ts at line 69</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/async_result.ts#L88"
+    >std/src/async_result.ts at line 88</a
   >
 </p>
 <pre
@@ -759,13 +817,32 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/async_result.ts#L47"
-    >std/src/async_result.ts at line 47</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/async_result.ts#L55"
+    >std/src/async_result.ts at line 55</a
   >
 </p>
 <pre
   class="import-code ts language-ts"
 ><span class="token keyword">import</span> <span class="token punctuation">{</span> match <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/async_result.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="NotAsked">
+  NotAsked<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >type alias</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">type</span> NotAsked <span class="token operator">=</span> <span class="token punctuation">{</span> kind<span class="token operator">:</span> <span class="token string">'NotAsked'</span> <span class="token punctuation">}</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/async_result.ts#L21"
+    >std/src/async_result.ts at line 21</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> NotAsked <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/async_result.ts'</span></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="notAsked">
   notAsked<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
     >variable</span
@@ -773,13 +850,13 @@
 </h3>
 <pre
   class="ts language-ts signature"
-><span class="token keyword">const</span> notAsked<span class="token operator">:</span> Async<span class="token operator">&lt;</span>Result<span class="token operator">&lt;</span><span class="token builtin">never</span><span class="token punctuation">,</span> <span class="token builtin">never</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span>
+><span class="token keyword">const</span> notAsked<span class="token operator">:</span> AsyncResult<span class="token operator">&lt;</span><span class="token builtin">never</span><span class="token punctuation">,</span> <span class="token builtin">never</span><span class="token punctuation">,</span> <span class="token builtin">unknown</span><span class="token operator">&gt;</span>
 </pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/async_result.ts#L32"
-    >std/src/async_result.ts at line 32</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/async_result.ts#L36"
+    >std/src/async_result.ts at line 36</a
   >
 </p>
 <pre
@@ -794,14 +871,14 @@
   class="ts language-ts signature"
 ><span class="token keyword">function</span> recover<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">P</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
   <span class="token keyword">async</span><span class="token operator">:</span> AsyncResult<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">P</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  whenNoOutcome<span class="token operator">:</span> <span class="token constant">T</span>
+  whenNoResult<span class="token operator">:</span> <span class="token constant">T</span>
 <span class="token punctuation">)</span><span class="token operator">:</span> AsyncResult<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">E</span><span class="token punctuation">,</span> <span class="token constant">P</span><span class="token operator">&gt;</span>
 </pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/async_result.ts#L309"
-    >std/src/async_result.ts at line 309</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/async_result.ts#L404"
+    >std/src/async_result.ts at line 404</a
   >
 </p>
 <pre
@@ -819,13 +896,32 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/async_result.ts#L26"
-    >std/src/async_result.ts at line 26</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/async_result.ts#L30"
+    >std/src/async_result.ts at line 30</a
   >
 </p>
 <pre
   class="import-code ts language-ts"
 ><span class="token keyword">import</span> <span class="token punctuation">{</span> success <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/async_result.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="Success">
+  Success<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >type alias</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">type</span> Success<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">{</span> kind<span class="token operator">:</span> <span class="token string">'Success'</span><span class="token punctuation">;</span> value<span class="token operator">:</span> <span class="token constant">T</span> <span class="token punctuation">}</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/async_result.ts#L19"
+    >std/src/async_result.ts at line 19</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> Success <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/async_result.ts'</span></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="T">
   T<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
     >type alias</span
@@ -838,8 +934,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/async_result.ts#L317"
-    >std/src/async_result.ts at line 317</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/async_result.ts#L418"
+    >std/src/async_result.ts at line 418</a
   >
 </p>
 <pre
@@ -857,8 +953,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/async_result.ts#L213"
-    >std/src/async_result.ts at line 213</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/async_result.ts#L260"
+    >std/src/async_result.ts at line 260</a
   >
 </p>
 <pre
@@ -876,8 +972,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/async_result.ts#L221"
-    >std/src/async_result.ts at line 221</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/async_result.ts#L271"
+    >std/src/async_result.ts at line 271</a
   >
 </p>
 <pre
@@ -895,8 +991,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/async_result.ts#L229"
-    >std/src/async_result.ts at line 229</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/async_result.ts#L282"
+    >std/src/async_result.ts at line 282</a
   >
 </p>
 <pre

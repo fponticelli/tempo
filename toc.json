@@ -4,7 +4,7 @@
       "name": "dom",
       "title": "tempo-dom",
       "description": "Fully-typed frontend framework alternative to React and Angular",
-      "version": "0.27.0",
+      "version": "0.27.3",
       "keywords": [
         "tempo",
         "ui",
@@ -20,7 +20,7 @@
       "name": "std",
       "title": "tempo-std",
       "description": "Std library for TypeScript. Natural complement to the tempo libs.",
-      "version": "0.5.5",
+      "version": "0.5.6",
       "keywords": [
         "tempo",
         "framework",
@@ -179,6 +179,12 @@
         "path": "impl/attributes_mapper.html",
         "id": "impl/attributes_mapper.html",
         "title": "impl/attributes_mapper",
+        "type": "module"
+      },
+      {
+        "path": "impl/capture_state.html",
+        "id": "impl/capture_state.html",
+        "title": "impl/capture_state",
         "type": "module"
       },
       {

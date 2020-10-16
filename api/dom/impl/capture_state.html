@@ -1,0 +1,67 @@
+<div class="top-right">
+  <a
+    href="https://github.com/fponticelli/tempo/edit/master/dom/src/impl/capture_state.ts"
+    >✏️ edit me</a
+  >
+</div>
+<h1>module 'impl/capture_state'</h1>
+<nav></nav>
+<h3 class="is-family-monospace has-text-grey-dark" id="CaptureStateTemplate">
+  CaptureStateTemplate<span
+    class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >class</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">declare</span> <span class="token keyword">class</span> <span class="token class-name">CaptureStateTemplate</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
+  <span class="token keyword">implements</span> <span class="token class-name">DOMTemplate</span><span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">constructor</span><span class="token punctuation">(</span>
+    <span class="token function-variable function">capture</span><span class="token operator">:</span> <span class="token punctuation">(</span>
+      <span class="token parameter">hook<span class="token operator">:</span> StateHook<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+      builder<span class="token operator">:</span> FragmentHTMLBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></span>
+    <span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+  <span class="token punctuation">)</span>
+  <span class="token keyword">readonly</span> <span class="token function-variable function">capture</span><span class="token operator">:</span> <span class="token punctuation">(</span>
+    <span class="token parameter">hook<span class="token operator">:</span> StateHook<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+    builder<span class="token operator">:</span> FragmentHTMLBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></span>
+  <span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+  <span class="token function">render</span><span class="token punctuation">(</span>
+    ctx<span class="token operator">:</span> DOMContext<span class="token operator">&lt;</span>Action<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+    state<span class="token operator">:</span> State
+  <span class="token punctuation">)</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token function">change</span><span class="token punctuation">(</span>state<span class="token operator">:</span> State<span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">void</span>
+    <span class="token function">request</span><span class="token punctuation">(</span>query<span class="token operator">:</span> Query<span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">void</span>
+    <span class="token function">destroy</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">void</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/capture_state.ts#L20"
+    >dom/src/impl/capture_state.ts at line 20</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> CaptureStateTemplate <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/capture_state.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="StateHook">
+  StateHook<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >type alias</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">type</span> StateHook<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">T</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/capture_state.ts#L18"
+    >dom/src/impl/capture_state.ts at line 18</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> StateHook <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-dom/lib/impl/capture_state.ts'</span></pre>

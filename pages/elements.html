@@ -1,18 +1,69 @@
 <h1 id="elements">Elements</h1>
-<p>A template is built by assembling elements together. <code>@tempo/dom/lib/web</code> contains all the definitions for all HTML and SVG elements. The are then special elements described below.</p>
-<h2 id="tempo_attributes">tempo_attributes</h2>
-<p>Each DOM element has four additional special attributes:</p>
-<pre class="language-ts"><code class="ts language-ts">afterrender<span class="token operator">?</span><span class="token operator">:</span>   <span class="token punctuation">(</span><span class="token parameter">state<span class="token operator">:</span> State<span class="token punctuation">,</span> el<span class="token operator">:</span> El<span class="token punctuation">,</span> ctx<span class="token operator">:</span> DOMContext<span class="token operator">&lt;</span>Action<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">T</span> <span class="token operator">|</span> <span class="token keyword">undefined</span>
-beforechange<span class="token operator">?</span><span class="token operator">:</span>  <span class="token punctuation">(</span><span class="token parameter">state<span class="token operator">:</span> State<span class="token punctuation">,</span> el<span class="token operator">:</span> El<span class="token punctuation">,</span> ctx<span class="token operator">:</span> DOMContext<span class="token operator">&lt;</span>Action<span class="token operator">&gt;</span><span class="token punctuation">,</span> value<span class="token operator">:</span> <span class="token constant">T</span> <span class="token operator">|</span> <span class="token keyword">undefined</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">T</span> <span class="token operator">|</span> <span class="token keyword">undefined</span>
-afterchange<span class="token operator">?</span><span class="token operator">:</span>   <span class="token punctuation">(</span><span class="token parameter">state<span class="token operator">:</span> State<span class="token punctuation">,</span> el<span class="token operator">:</span> El<span class="token punctuation">,</span> ctx<span class="token operator">:</span> DOMContext<span class="token operator">&lt;</span>Action<span class="token operator">&gt;</span><span class="token punctuation">,</span> value<span class="token operator">:</span> <span class="token constant">T</span> <span class="token operator">|</span> <span class="token keyword">undefined</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">T</span> <span class="token operator">|</span> <span class="token keyword">undefined</span>
-beforedestroy<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">el<span class="token operator">:</span> El<span class="token punctuation">,</span> ctx<span class="token operator">:</span> DOMContext<span class="token operator">&lt;</span>Action<span class="token operator">&gt;</span><span class="token punctuation">,</span> value<span class="token operator">:</span> <span class="token constant">T</span> <span class="token operator">|</span> <span class="token keyword">undefined</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span><span class="token punctuation">)</span>
+<p>A template is built by assembling elements together. <code>@tempo/dom/lib/html</code> contains all the definitions for all HTML SVG elements (<code>@tempo/dom/lib/svg</code> for SVG elements).</p>
+<h2 id="htmldsl">HTML DSL</h2>
+<p>The best way to describe a Tempo template is to use the provided HTML builders. Each element and transform operation is described both as a function or as a method of the builder to allow chaining and nesting.</p>
+<p>For example to create a <code>&lt;div&gt;</code> element there is an equivalent <code>DIV()</code> function. If you want to have two sibbling <code>&lt;div&gt;</code> elements you can chain them using <code>DIV().DIV()</code>. To nest elements and attributes you can use an <code>init</code> function:</p>
+<pre class="language-ts"><code class="ts language-ts"><span class="token constant">DIV</span><span class="token punctuation">(</span>
+  <span class="token parameter">$</span> <span class="token operator">=&gt;</span> $<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">(</span><span class="token string">'header'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token constant">H1</span><span class="token punctuation">(</span><span class="token parameter">$</span> <span class="token operator">=&gt;</span> $<span class="token punctuation">.</span><span class="token function">text</span><span class="token punctuation">(</span><span class="token string">'Title'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">)</span>
+<span class="token punctuation">.</span><span class="token constant">DIV</span><span class="token punctuation">(</span><span class="token parameter">$</span> <span class="token operator">=&gt;</span> $<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">(</span>'body<span class="token punctuation">)</span><span class="token punctuation">)</span>
 </code></pre>
-<p>These special attributes are used to control the life-cycle of the current element. These can be used to mount/update/destroy widgets that are not defined in Tempo and that need to be embedded in your app. The functions receive a reference to the current element.</p>
+<p>This generates the following HTML:</p>
+<pre><code class="html language-html">&lt;div class="header"&gt;
+  &lt;h1&gt;Title&lt;/h1&gt;
+&lt;/div&gt;
+&lt;div class="body"&gt;&lt;/div&gt;
+</code></pre>
+<p>The Tempo DSL uses a few name conventions to make it simpler to distinguish between the composing members and to avoid name conflicts between attribute, elements and transform methods.</p>
+<p>The DSL uses</p>
+<ul>
+<li>all capital-case names for native HTML (and SVG) elements.</li>
+<li>all lower-case names for element attributes and for the special <code>text</code> attribute.</li>
+<li>capitalized names prefixed with <code>on</code> for event handling.</li>
+<li>capitalized names for lifecycle and transform functions/methods.</li>
+</ul>
+<p>Almost all values in the DSL can be either literal values or functions from State to a literal value.</p>
+<h2 id="tempolifecycle">Tempo Lifecycle</h2>
+<p>Each DOM element has four additional special attributes:</p>
+<p>TODO</p>
+<h2 id="transformelements">Transform Elements</h2>
+<p>TODO</p>
 <h2 id="mapstateandaction">Map state and action</h2>
-<p>We already saw <code>mapState</code> above. Its counter part <code>mapAction</code> is used to transform an <code>action</code> from a sub-element up to its ancestors.</p>
-<h2 id="foreach">forEach</h2>
-<p>The <code>forEach</code> element takes a state whose shape is an array (<code>State extends any[]</code>) and applies individually each element in the array to the children nodes. This is useful for lists or tables.</p>
-<h2 id="portal">portal</h2>
+<p>TODO</p>
+<h2 id="iterate">Iterate</h2>
+<p>TODO</p>
+<p>Adapter
+LocalAdapter
+Component
+CaptureState
+ReleaseState
+Iterate
+MapState
+MapStateAndKeep
+MapAction
+MapQuery
+Match
+MatchKind
+MatchBool
+MatchValue
+MatchOption
+MatchResult
+MatchAsync
+MatchAsyncResult
+Lazy
+Fragment
+ForEach
+Portal
+PortalWithSelector
+HeadPortal
+BodyPortal
+SimpleComponent
+Unless
+Until
+When</p>
+<h2 id="foreach">ForEach</h2>
+<p>The <code>ForEach</code> element takes a state whose shape is an array (<code>State extends any[]</code>) and applies individually each element in the array to the children nodes. This is useful for lists or tables.</p>
+<h2 id="portal">Portal</h2>
 <p>A <code>portal</code> allows to mount a node outside of the natural nesting. The portal module provides the following nodes:</p>
 <pre class="language-ts"><code class="ts language-ts"><span class="token keyword">const</span> portal <span class="token operator">=</span> <span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token operator">&gt;</span><span class="token punctuation">(</span>
   options<span class="token operator">:</span> <span class="token punctuation">{</span>

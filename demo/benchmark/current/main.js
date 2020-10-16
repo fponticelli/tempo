@@ -1954,7 +1954,7 @@ var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
             ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
         return extendStatics(d, b);
     };
     return function (d, b) {
@@ -4038,13 +4038,58 @@ var SVGRectElementBuilder = /** @class */ (function (_super) {
 }(SVGElementBuilder));
 exports.SVGRectElementBuilder = SVGRectElementBuilder;
 
-},{"./hold_state":"fYSr","./dom_builder":"yiha","../value":"nFed","../lifecycle":"uV5V","./dom":"lbKn","tempo-std/lib/objects":"g3Xg","./element":"X9Ob","./fragment":"aQMP","./adapter":"kWOh","./component":"eDHy","./map_action":"KxWc","./map_query":"wbDd","./map_state":"kpTJ","./portal":"koeo","./simple_component":"LSkL","./until":"Ttvv","./match_bool_template":"ZVXL","./lazy":"hzRP","./text":"H1te"}],"eyJE":[function(require,module,exports) {
+},{"./hold_state":"fYSr","./dom_builder":"yiha","../value":"nFed","../lifecycle":"uV5V","./dom":"lbKn","tempo-std/lib/objects":"g3Xg","./element":"X9Ob","./fragment":"aQMP","./adapter":"kWOh","./component":"eDHy","./map_action":"KxWc","./map_query":"wbDd","./map_state":"kpTJ","./portal":"koeo","./simple_component":"LSkL","./until":"Ttvv","./match_bool_template":"ZVXL","./lazy":"hzRP","./text":"H1te"}],"YmhL":[function(require,module,exports) {
+"use strict";
+/*
+Copyright 2019 Google LLC
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+    https://www.apache.org/licenses/LICENSE-2.0
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.CaptureStateTemplate = void 0;
+var html_builder_1 = require("./html_builder");
+var CaptureStateTemplate = /** @class */ (function () {
+    function CaptureStateTemplate(capture) {
+        this.capture = capture;
+    }
+    CaptureStateTemplate.prototype.render = function (ctx, state) {
+        var localState = state;
+        var builder = new html_builder_1.FragmentHTMLBuilder();
+        var hook = function () { return localState; };
+        this.capture(hook, builder);
+        var template = builder.build();
+        var view = template.render(ctx, localState);
+        return {
+            change: function (state) {
+                localState = state;
+                view.change(localState);
+            },
+            request: function (query) {
+                view.request(query);
+            },
+            destroy: function () {
+                view.destroy();
+            }
+        };
+    };
+    return CaptureStateTemplate;
+}());
+exports.CaptureStateTemplate = CaptureStateTemplate;
+
+},{"./html_builder":"eyJE"}],"eyJE":[function(require,module,exports) {
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
             ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
         return extendStatics(d, b);
     };
     return function (d, b) {
@@ -4075,6 +4120,7 @@ var hold_state_1 = require("./hold_state");
 var dom_builder_1 = require("./dom_builder");
 var adapter_1 = require("./adapter");
 var svg_builder_1 = require("./svg_builder");
+var capture_state_1 = require("./capture_state");
 var BaseHTMLBuilder = /** @class */ (function (_super) {
     __extends(BaseHTMLBuilder, _super);
     function BaseHTMLBuilder() {
@@ -4105,6 +4151,14 @@ var BaseHTMLBuilder = /** @class */ (function (_super) {
             var outerState = _a.outerState;
             return outerState;
         }, props.propagate || (function () { return undefined; }), props.child));
+    };
+    BaseHTMLBuilder.prototype.CaptureState = function (capture) {
+        return this.Append(new capture_state_1.CaptureStateTemplate(capture));
+    };
+    BaseHTMLBuilder.prototype.ReleaseState = function (hook, merge, init) {
+        var builder = new FragmentHTMLBuilder();
+        init(builder);
+        return this.MapState(function (b) { return merge(hook(), b); }, function ($) { return $.Append(builder); });
     };
     BaseHTMLBuilder.prototype.HoldState = function (holdf) {
         return this.Append(new hold_state_1.HoldStateTemplate(holdf, new FragmentHTMLBuilder()));
@@ -6510,7 +6564,7 @@ var UntilHTMLBuilder = /** @class */ (function (_super) {
 }(BaseHTMLBuilder));
 exports.UntilHTMLBuilder = UntilHTMLBuilder;
 
-},{"./dom":"lbKn","./text":"H1te","../value":"nFed","./component":"eDHy","tempo-std/lib/objects":"g3Xg","../lifecycle":"uV5V","./element":"X9Ob","./map_state":"kpTJ","./fragment":"aQMP","./map_action":"KxWc","./map_query":"wbDd","./until":"Ttvv","./simple_component":"LSkL","./portal":"koeo","./lazy":"hzRP","./match_bool_template":"ZVXL","./hold_state":"fYSr","./dom_builder":"yiha","./adapter":"kWOh","./svg_builder":"bl4t"}],"HSRy":[function(require,module,exports) {
+},{"./dom":"lbKn","./text":"H1te","../value":"nFed","./component":"eDHy","tempo-std/lib/objects":"g3Xg","../lifecycle":"uV5V","./element":"X9Ob","./map_state":"kpTJ","./fragment":"aQMP","./map_action":"KxWc","./map_query":"wbDd","./until":"Ttvv","./simple_component":"LSkL","./portal":"koeo","./lazy":"hzRP","./match_bool_template":"ZVXL","./hold_state":"fYSr","./dom_builder":"yiha","./adapter":"kWOh","./svg_builder":"bl4t","./capture_state":"YmhL"}],"HSRy":[function(require,module,exports) {
 "use strict";
 /*
 Copyright 2019 Google LLC
@@ -6588,10 +6642,9 @@ var dom_builder_1 = require("./dom_builder");
 var objects_1 = require("tempo-std/lib/objects");
 var MatchValueTemplate = /** @class */ (function () {
     function MatchValueTemplate(path, matcher, orElse) {
-        var _this = this;
         this.path = path;
         this.matcher = objects_1.keys(matcher).reduce(function (acc, key) {
-            acc[key] = dom_builder_1.childOrBuilderToTemplate(_this.matcher[key]);
+            acc[key] = dom_builder_1.childOrBuilderToTemplate(matcher[key]);
             return acc;
         }, {});
         this.orElse = dom_builder_1.childOrBuilderToTemplate(orElse);
@@ -6644,7 +6697,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.When = exports.Until = exports.Unless = exports.SimpleComponent = exports.BodyPortal = exports.HeadPortal = exports.PortalWithSelector = exports.Portal = exports.ForEach = exports.Fragment = exports.Lazy = exports.MatchAsyncResult = exports.MatchAsync = exports.MatchResult = exports.MatchMaybe = exports.MatchOption = exports.MatchValue = exports.MatchBool = exports.MatchKind = exports.Match = exports.MapQuery = exports.MapAction = exports.MapStateAndKeep = exports.MapField = exports.MapState = exports.Iterate = exports.HoldState = exports.Component = exports.LocalAdapter = exports.Adapter = exports.WBR = exports.VIDEO = exports.VAR = exports.UL = exports.U = exports.TRACK = exports.TR = exports.TITLE = exports.TIME = exports.THEAD = exports.TH = exports.TFOOT = exports.TEXTAREA = exports.TEMPLATE = exports.TD = exports.TBODY = exports.TABLE = exports.SUP = exports.SUMMARY = exports.SUB = exports.STYLE = exports.STRONG = exports.SPAN = exports.SOURCE = exports.SMALL = exports.SLOT = exports.SELECT = exports.SECTION = exports.SCRIPT = exports.SAMP = exports.S = exports.RUBY = exports.RT = exports.RP = exports.Q = exports.PROGRESS = exports.PRE = exports.PICTURE = exports.PARAM = exports.P = exports.OUTPUT = exports.OPTION = exports.OPTGROUP = exports.OL = exports.OBJECT = exports.NOSCRIPT = exports.NAV = exports.METER = exports.META = exports.MARK = exports.MAP = exports.MAIN = exports.LINK = exports.LI = exports.LEGEND = exports.LABEL = exports.KBD = exports.INS = exports.INPUT = exports.IMG = exports.IFRAME = exports.I = exports.HTML = exports.HR = exports.HGROUP = exports.HEADER = exports.HEAD = exports.H6 = exports.H5 = exports.H4 = exports.H3 = exports.H2 = exports.H1 = exports.FORM = exports.FOOTER = exports.FIGURE = exports.FIGCAPTION = exports.FIELDSET = exports.EMBED = exports.EM = exports.DT = exports.DL = exports.DIV = exports.DIALOG = exports.DFN = exports.DETAILS = exports.DEL = exports.DD = exports.DATALIST = exports.DATA = exports.COLGROUP = exports.COL = exports.CODE = exports.CITE = exports.CAPTION = exports.CANVAS = exports.BUTTON = exports.BR = exports.BODY = exports.BLOCKQUOTE = exports.BDO = exports.BDI = exports.BASE = exports.B = exports.AUDIO = exports.ASIDE = exports.ARTICLE = exports.AREA = exports.ADDRESS = exports.ABBR = exports.A = exports.El = void 0;
+exports.When = exports.Until = exports.Unless = exports.SimpleComponent = exports.BodyPortal = exports.HeadPortal = exports.PortalWithSelector = exports.Portal = exports.ForEach = exports.Fragment = exports.Lazy = exports.MatchAsyncResult = exports.MatchAsync = exports.MatchResult = exports.MatchMaybe = exports.MatchOption = exports.MatchValue = exports.MatchBool = exports.MatchKind = exports.Match = exports.MapQuery = exports.MapAction = exports.MapStateAndKeep = exports.MapField = exports.MapState = exports.Iterate = exports.HoldState = exports.ReleaseState = exports.CaptureState = exports.Component = exports.LocalAdapter = exports.Adapter = exports.WBR = exports.VIDEO = exports.VAR = exports.UL = exports.U = exports.TRACK = exports.TR = exports.TITLE = exports.TIME = exports.THEAD = exports.TH = exports.TFOOT = exports.TEXTAREA = exports.TEMPLATE = exports.TD = exports.TBODY = exports.TABLE = exports.SUP = exports.SUMMARY = exports.SUB = exports.STYLE = exports.STRONG = exports.SPAN = exports.SOURCE = exports.SMALL = exports.SLOT = exports.SELECT = exports.SECTION = exports.SCRIPT = exports.SAMP = exports.S = exports.RUBY = exports.RT = exports.RP = exports.Q = exports.PROGRESS = exports.PRE = exports.PICTURE = exports.PARAM = exports.P = exports.OUTPUT = exports.OPTION = exports.OPTGROUP = exports.OL = exports.OBJECT = exports.NOSCRIPT = exports.NAV = exports.METER = exports.META = exports.MARK = exports.MAP = exports.MAIN = exports.LINK = exports.LI = exports.LEGEND = exports.LABEL = exports.KBD = exports.INS = exports.INPUT = exports.IMG = exports.IFRAME = exports.I = exports.HTML = exports.HR = exports.HGROUP = exports.HEADER = exports.HEAD = exports.H6 = exports.H5 = exports.H4 = exports.H3 = exports.H2 = exports.H1 = exports.FORM = exports.FOOTER = exports.FIGURE = exports.FIGCAPTION = exports.FIELDSET = exports.EMBED = exports.EM = exports.DT = exports.DL = exports.DIV = exports.DIALOG = exports.DFN = exports.DETAILS = exports.DEL = exports.DD = exports.DATALIST = exports.DATA = exports.COLGROUP = exports.COL = exports.CODE = exports.CITE = exports.CAPTION = exports.CANVAS = exports.BUTTON = exports.BR = exports.BODY = exports.BLOCKQUOTE = exports.BDO = exports.BDI = exports.BASE = exports.B = exports.AUDIO = exports.ASIDE = exports.ARTICLE = exports.AREA = exports.ADDRESS = exports.ABBR = exports.A = exports.El = void 0;
 var html_builder_1 = require("./html_builder");
 Object.defineProperty(exports, "El", { enumerable: true, get: function () { return html_builder_1.El; } });
 var value_1 = require("../value");
@@ -6654,6 +6707,7 @@ var match_bool_template_1 = require("./match_bool_template");
 var match_value_template_1 = require("./match_value_template");
 var lazy_1 = require("./lazy");
 var hold_state_1 = require("./hold_state");
+var capture_state_1 = require("./capture_state");
 // dom specific
 function A(init) {
     var builder = new html_builder_1.HTMLAnchorElementBuilder('a');
@@ -7449,6 +7503,16 @@ function Component(reducer, init) {
     return builder;
 }
 exports.Component = Component;
+function CaptureState(capture) {
+    return new capture_state_1.CaptureStateTemplate(capture);
+}
+exports.CaptureState = CaptureState;
+function ReleaseState(hook, merge, init) {
+    var builder = new html_builder_1.FragmentHTMLBuilder();
+    init(builder);
+    return MapState(function (b) { return merge(hook(), b); }, function ($) { return $.Append(builder); });
+}
+exports.ReleaseState = ReleaseState;
 function HoldState(holdf) {
     var builder = new html_builder_1.FragmentHTMLBuilder();
     return new hold_state_1.HoldStateTemplate(holdf, builder);
@@ -7547,12 +7611,8 @@ function MatchAsync(props) {
 exports.MatchAsync = MatchAsync;
 function MatchAsyncResult(props) {
     return MatchKind({
-        Outcome: MapState(function (o) { return o.value; }, function (n) {
-            return n.Append(MatchResult({
-                Success: props.Success,
-                Failure: props.Failure
-            }));
-        }),
+        Failure: MapField('error', function ($) { return $.Append(props.Failure); }),
+        Success: MapField('value', function ($) { return $.Append(props.Success); }),
         Loading: MapField('progress', function ($) { return $.Append(props.Loading); }),
         NotAsked: MapState(function () { return null; }, function (n) { return n.Append(props.NotAsked); })
     });
@@ -7629,7 +7689,7 @@ function When(condition, init) {
 }
 exports.When = When;
 
-},{"./html_builder":"eyJE","../value":"nFed","./adapter":"kWOh","./match_template":"HSRy","./match_bool_template":"ZVXL","./match_value_template":"oCpq","./lazy":"hzRP","./hold_state":"fYSr"}],"zQMt":[function(require,module,exports) {
+},{"./html_builder":"eyJE","../value":"nFed","./adapter":"kWOh","./match_template":"HSRy","./match_bool_template":"ZVXL","./match_value_template":"oCpq","./lazy":"hzRP","./hold_state":"fYSr","./capture_state":"YmhL"}],"zQMt":[function(require,module,exports) {
 "use strict";
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
@@ -7639,7 +7699,7 @@ var __createBinding = (this && this.__createBinding) || (Object.create ? (functi
     o[k2] = m[k];
 }));
 var __exportStar = (this && this.__exportStar) || function(m, exports) {
-    for (var p in m) if (p !== "default" && !exports.hasOwnProperty(p)) __createBinding(exports, m, p);
+    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./impl/html"), exports);

@@ -656,8 +656,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L1689"
-    >dom/src/impl/html_builder.ts at line 1689</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L1712"
+    >dom/src/impl/html_builder.ts at line 1712</a
   >
 </p>
 <pre
@@ -730,8 +730,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L2843"
-    >dom/src/impl/html_builder.ts at line 2843</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L2866"
+    >dom/src/impl/html_builder.ts at line 2866</a
   >
 </p>
 <pre
@@ -776,6 +776,17 @@
     propagate<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">args<span class="token operator">:</span> PropagateArg<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Action<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
     child<span class="token operator">:</span> ComponentTemplate<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span>
   <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">this</span>
+  <span class="token function">CaptureState</span><span class="token punctuation">(</span>
+    <span class="token function-variable function">capture</span><span class="token operator">:</span> <span class="token punctuation">(</span>
+      <span class="token parameter">hook<span class="token operator">:</span> StateHook<span class="token operator">&lt;</span>State<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+      builder<span class="token operator">:</span> FragmentHTMLBuilder<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></span>
+    <span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+  <span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">this</span>
+  ReleaseState<span class="token operator">&lt;</span>StateA<span class="token punctuation">,</span> StateC<span class="token operator">&gt;</span><span class="token punctuation">(</span>
+    hook<span class="token operator">:</span> StateHook<span class="token operator">&lt;</span>StateA<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+    <span class="token function-variable function">merge</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> StateA<span class="token punctuation">,</span> b<span class="token operator">:</span> State</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> StateC<span class="token punctuation">,</span>
+    <span class="token function-variable function">init</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">builder<span class="token operator">:</span> FragmentHTMLBuilder<span class="token operator">&lt;</span>StateC<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> Query<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+  <span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">this</span>
   HoldState<span class="token operator">&lt;</span>StateB<span class="token punctuation">,</span> StateC<span class="token operator">&gt;</span><span class="token punctuation">(</span>
     holdf<span class="token operator">:</span> HoldF<span class="token operator">&lt;</span>
       State<span class="token punctuation">,</span>
@@ -1419,8 +1430,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L42"
-    >dom/src/impl/html_builder.ts at line 42</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L43"
+    >dom/src/impl/html_builder.ts at line 43</a
   >
 </p>
 <pre
@@ -1447,8 +1458,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3896"
-    >dom/src/impl/html_builder.ts at line 3896</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3919"
+    >dom/src/impl/html_builder.ts at line 3919</a
   >
 </p>
 <pre
@@ -1467,8 +1478,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L2798"
-    >dom/src/impl/html_builder.ts at line 2798</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L2821"
+    >dom/src/impl/html_builder.ts at line 2821</a
   >
 </p>
 <pre
@@ -1488,8 +1499,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L1760"
-    >dom/src/impl/html_builder.ts at line 1760</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L1783"
+    >dom/src/impl/html_builder.ts at line 1783</a
   >
 </p>
 <pre
@@ -1511,8 +1522,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L2544"
-    >dom/src/impl/html_builder.ts at line 2544</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L2567"
+    >dom/src/impl/html_builder.ts at line 2567</a
   >
 </p>
 <pre
@@ -1531,8 +1542,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L2549"
-    >dom/src/impl/html_builder.ts at line 2549</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L2572"
+    >dom/src/impl/html_builder.ts at line 2572</a
   >
 </p>
 <pre
@@ -1555,8 +1566,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3926"
-    >dom/src/impl/html_builder.ts at line 3926</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3949"
+    >dom/src/impl/html_builder.ts at line 3949</a
   >
 </p>
 <pre
@@ -1590,8 +1601,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L2463"
-    >dom/src/impl/html_builder.ts at line 2463</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L2486"
+    >dom/src/impl/html_builder.ts at line 2486</a
   >
 </p>
 <pre
@@ -1624,8 +1635,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L2491"
-    >dom/src/impl/html_builder.ts at line 2491</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L2514"
+    >dom/src/impl/html_builder.ts at line 2514</a
   >
 </p>
 <pre
@@ -1648,8 +1659,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L2525"
-    >dom/src/impl/html_builder.ts at line 2525</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L2548"
+    >dom/src/impl/html_builder.ts at line 2548</a
   >
 </p>
 <pre
@@ -1675,8 +1686,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L2531"
-    >dom/src/impl/html_builder.ts at line 2531</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L2554"
+    >dom/src/impl/html_builder.ts at line 2554</a
   >
 </p>
 <pre
@@ -1714,8 +1725,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L2551"
-    >dom/src/impl/html_builder.ts at line 2551</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L2574"
+    >dom/src/impl/html_builder.ts at line 2574</a
   >
 </p>
 <pre
@@ -1744,8 +1755,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L2600"
-    >dom/src/impl/html_builder.ts at line 2600</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L2623"
+    >dom/src/impl/html_builder.ts at line 2623</a
   >
 </p>
 <pre
@@ -1770,8 +1781,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L2613"
-    >dom/src/impl/html_builder.ts at line 2613</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L2636"
+    >dom/src/impl/html_builder.ts at line 2636</a
   >
 </p>
 <pre
@@ -1799,8 +1810,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L2623"
-    >dom/src/impl/html_builder.ts at line 2623</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L2646"
+    >dom/src/impl/html_builder.ts at line 2646</a
   >
 </p>
 <pre
@@ -1828,8 +1839,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L2633"
-    >dom/src/impl/html_builder.ts at line 2633</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L2656"
+    >dom/src/impl/html_builder.ts at line 2656</a
   >
 </p>
 <pre
@@ -2115,8 +2126,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L1766"
-    >dom/src/impl/html_builder.ts at line 1766</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L1789"
+    >dom/src/impl/html_builder.ts at line 1789</a
   >
 </p>
 <pre
@@ -2144,8 +2155,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L2643"
-    >dom/src/impl/html_builder.ts at line 2643</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L2666"
+    >dom/src/impl/html_builder.ts at line 2666</a
   >
 </p>
 <pre
@@ -2175,8 +2186,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L2662"
-    >dom/src/impl/html_builder.ts at line 2662</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L2685"
+    >dom/src/impl/html_builder.ts at line 2685</a
   >
 </p>
 <pre
@@ -2209,8 +2220,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L2681"
-    >dom/src/impl/html_builder.ts at line 2681</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L2704"
+    >dom/src/impl/html_builder.ts at line 2704</a
   >
 </p>
 <pre
@@ -2235,8 +2246,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L2721"
-    >dom/src/impl/html_builder.ts at line 2721</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L2744"
+    >dom/src/impl/html_builder.ts at line 2744</a
   >
 </p>
 <pre
@@ -2300,8 +2311,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L2731"
-    >dom/src/impl/html_builder.ts at line 2731</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L2754"
+    >dom/src/impl/html_builder.ts at line 2754</a
   >
 </p>
 <pre
@@ -2336,8 +2347,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L2800"
-    >dom/src/impl/html_builder.ts at line 2800</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L2823"
+    >dom/src/impl/html_builder.ts at line 2823</a
   >
 </p>
 <pre
@@ -2365,8 +2376,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L2975"
-    >dom/src/impl/html_builder.ts at line 2975</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L2998"
+    >dom/src/impl/html_builder.ts at line 2998</a
   >
 </p>
 <pre
@@ -2396,8 +2407,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L2985"
-    >dom/src/impl/html_builder.ts at line 2985</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3008"
+    >dom/src/impl/html_builder.ts at line 3008</a
   >
 </p>
 <pre
@@ -2433,8 +2444,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L2923"
-    >dom/src/impl/html_builder.ts at line 2923</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L2946"
+    >dom/src/impl/html_builder.ts at line 2946</a
   >
 </p>
 <pre
@@ -2463,8 +2474,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3001"
-    >dom/src/impl/html_builder.ts at line 3001</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3024"
+    >dom/src/impl/html_builder.ts at line 3024</a
   >
 </p>
 <pre
@@ -2494,8 +2505,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3017"
-    >dom/src/impl/html_builder.ts at line 3017</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3040"
+    >dom/src/impl/html_builder.ts at line 3040</a
   >
 </p>
 <pre
@@ -2531,8 +2542,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3039"
-    >dom/src/impl/html_builder.ts at line 3039</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3062"
+    >dom/src/impl/html_builder.ts at line 3062</a
   >
 </p>
 <pre
@@ -2563,8 +2574,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3073"
-    >dom/src/impl/html_builder.ts at line 3073</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3096"
+    >dom/src/impl/html_builder.ts at line 3096</a
   >
 </p>
 <pre
@@ -2596,8 +2607,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3092"
-    >dom/src/impl/html_builder.ts at line 3092</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3115"
+    >dom/src/impl/html_builder.ts at line 3115</a
   >
 </p>
 <pre
@@ -2628,8 +2639,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3114"
-    >dom/src/impl/html_builder.ts at line 3114</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3137"
+    >dom/src/impl/html_builder.ts at line 3137</a
   >
 </p>
 <pre
@@ -2661,8 +2672,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3133"
-    >dom/src/impl/html_builder.ts at line 3133</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3156"
+    >dom/src/impl/html_builder.ts at line 3156</a
   >
 </p>
 <pre
@@ -2694,8 +2705,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3158"
-    >dom/src/impl/html_builder.ts at line 3158</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3181"
+    >dom/src/impl/html_builder.ts at line 3181</a
   >
 </p>
 <pre
@@ -2725,8 +2736,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3205"
-    >dom/src/impl/html_builder.ts at line 3205</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3228"
+    >dom/src/impl/html_builder.ts at line 3228</a
   >
 </p>
 <pre
@@ -2751,8 +2762,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3221"
-    >dom/src/impl/html_builder.ts at line 3221</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3244"
+    >dom/src/impl/html_builder.ts at line 3244</a
   >
 </p>
 <pre
@@ -2777,8 +2788,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3231"
-    >dom/src/impl/html_builder.ts at line 3231</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3254"
+    >dom/src/impl/html_builder.ts at line 3254</a
   >
 </p>
 <pre
@@ -2828,8 +2839,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3241"
-    >dom/src/impl/html_builder.ts at line 3241</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3264"
+    >dom/src/impl/html_builder.ts at line 3264</a
   >
 </p>
 <pre
@@ -2854,8 +2865,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3297"
-    >dom/src/impl/html_builder.ts at line 3297</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3320"
+    >dom/src/impl/html_builder.ts at line 3320</a
   >
 </p>
 <pre
@@ -2924,8 +2935,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L2358"
-    >dom/src/impl/html_builder.ts at line 2358</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L2381"
+    >dom/src/impl/html_builder.ts at line 2381</a
   >
 </p>
 <pre
@@ -2953,8 +2964,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3314"
-    >dom/src/impl/html_builder.ts at line 3314</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3337"
+    >dom/src/impl/html_builder.ts at line 3337</a
   >
 </p>
 <pre
@@ -2985,8 +2996,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3333"
-    >dom/src/impl/html_builder.ts at line 3333</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3356"
+    >dom/src/impl/html_builder.ts at line 3356</a
   >
 </p>
 <pre
@@ -3012,8 +3023,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3361"
-    >dom/src/impl/html_builder.ts at line 3361</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3384"
+    >dom/src/impl/html_builder.ts at line 3384</a
   >
 </p>
 <pre
@@ -3048,8 +3059,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3374"
-    >dom/src/impl/html_builder.ts at line 3374</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3397"
+    >dom/src/impl/html_builder.ts at line 3397</a
   >
 </p>
 <pre
@@ -3076,8 +3087,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3407"
-    >dom/src/impl/html_builder.ts at line 3407</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3430"
+    >dom/src/impl/html_builder.ts at line 3430</a
   >
 </p>
 <pre
@@ -3106,8 +3117,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3426"
-    >dom/src/impl/html_builder.ts at line 3426</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3449"
+    >dom/src/impl/html_builder.ts at line 3449</a
   >
 </p>
 <pre
@@ -3138,8 +3149,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3442"
-    >dom/src/impl/html_builder.ts at line 3442</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3465"
+    >dom/src/impl/html_builder.ts at line 3465</a
   >
 </p>
 <pre
@@ -3169,8 +3180,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3467"
-    >dom/src/impl/html_builder.ts at line 3467</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3490"
+    >dom/src/impl/html_builder.ts at line 3490</a
   >
 </p>
 <pre
@@ -3196,8 +3207,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3483"
-    >dom/src/impl/html_builder.ts at line 3483</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3506"
+    >dom/src/impl/html_builder.ts at line 3506</a
   >
 </p>
 <pre
@@ -3223,8 +3234,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3496"
-    >dom/src/impl/html_builder.ts at line 3496</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3519"
+    >dom/src/impl/html_builder.ts at line 3519</a
   >
 </p>
 <pre
@@ -3273,8 +3284,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3504"
-    >dom/src/impl/html_builder.ts at line 3504</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3527"
+    >dom/src/impl/html_builder.ts at line 3527</a
   >
 </p>
 <pre
@@ -3299,8 +3310,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3545"
-    >dom/src/impl/html_builder.ts at line 3545</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3568"
+    >dom/src/impl/html_builder.ts at line 3568</a
   >
 </p>
 <pre
@@ -3348,8 +3359,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3555"
-    >dom/src/impl/html_builder.ts at line 3555</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3578"
+    >dom/src/impl/html_builder.ts at line 3578</a
   >
 </p>
 <pre
@@ -3386,8 +3397,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3604"
-    >dom/src/impl/html_builder.ts at line 3604</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3627"
+    >dom/src/impl/html_builder.ts at line 3627</a
   >
 </p>
 <pre
@@ -3415,8 +3426,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3650"
-    >dom/src/impl/html_builder.ts at line 3650</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3673"
+    >dom/src/impl/html_builder.ts at line 3673</a
   >
 </p>
 <pre
@@ -3448,8 +3459,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3665"
-    >dom/src/impl/html_builder.ts at line 3665</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3688"
+    >dom/src/impl/html_builder.ts at line 3688</a
   >
 </p>
 <pre
@@ -3477,8 +3488,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3687"
-    >dom/src/impl/html_builder.ts at line 3687</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3710"
+    >dom/src/impl/html_builder.ts at line 3710</a
   >
 </p>
 <pre
@@ -3506,8 +3517,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3706"
-    >dom/src/impl/html_builder.ts at line 3706</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3729"
+    >dom/src/impl/html_builder.ts at line 3729</a
   >
 </p>
 <pre
@@ -3537,8 +3548,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3716"
-    >dom/src/impl/html_builder.ts at line 3716</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3739"
+    >dom/src/impl/html_builder.ts at line 3739</a
   >
 </p>
 <pre
@@ -3570,8 +3581,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3737"
-    >dom/src/impl/html_builder.ts at line 3737</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3760"
+    >dom/src/impl/html_builder.ts at line 3760</a
   >
 </p>
 <pre
@@ -3614,8 +3625,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3765"
-    >dom/src/impl/html_builder.ts at line 3765</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3788"
+    >dom/src/impl/html_builder.ts at line 3788</a
   >
 </p>
 <pre
@@ -3640,8 +3651,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3829"
-    >dom/src/impl/html_builder.ts at line 3829</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3852"
+    >dom/src/impl/html_builder.ts at line 3852</a
   >
 </p>
 <pre
@@ -3673,8 +3684,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3846"
-    >dom/src/impl/html_builder.ts at line 3846</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3869"
+    >dom/src/impl/html_builder.ts at line 3869</a
   >
 </p>
 <pre
@@ -3702,8 +3713,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3873"
-    >dom/src/impl/html_builder.ts at line 3873</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3896"
+    >dom/src/impl/html_builder.ts at line 3896</a
   >
 </p>
 <pre
@@ -3727,8 +3738,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3307"
-    >dom/src/impl/html_builder.ts at line 3307</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3330"
+    >dom/src/impl/html_builder.ts at line 3330</a
   >
 </p>
 <pre
@@ -3758,8 +3769,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3180"
-    >dom/src/impl/html_builder.ts at line 3180</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3203"
+    >dom/src/impl/html_builder.ts at line 3203</a
   >
 </p>
 <pre
@@ -3800,8 +3811,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L2899"
-    >dom/src/impl/html_builder.ts at line 2899</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L2922"
+    >dom/src/impl/html_builder.ts at line 2922</a
   >
 </p>
 <pre
@@ -3825,8 +3836,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3934"
-    >dom/src/impl/html_builder.ts at line 3934</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3957"
+    >dom/src/impl/html_builder.ts at line 3957</a
   >
 </p>
 <pre
@@ -3850,8 +3861,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3948"
-    >dom/src/impl/html_builder.ts at line 3948</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3971"
+    >dom/src/impl/html_builder.ts at line 3971</a
   >
 </p>
 <pre
@@ -3879,8 +3890,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3962"
-    >dom/src/impl/html_builder.ts at line 3962</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3985"
+    >dom/src/impl/html_builder.ts at line 3985</a
   >
 </p>
 <pre
@@ -3899,8 +3910,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3405"
-    >dom/src/impl/html_builder.ts at line 3405</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3428"
+    >dom/src/impl/html_builder.ts at line 3428</a
   >
 </p>
 <pre
@@ -3925,8 +3936,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3991"
-    >dom/src/impl/html_builder.ts at line 3991</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L4014"
+    >dom/src/impl/html_builder.ts at line 4014</a
   >
 </p>
 <pre
@@ -3945,8 +3956,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L2356"
-    >dom/src/impl/html_builder.ts at line 2356</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L2379"
+    >dom/src/impl/html_builder.ts at line 2379</a
   >
 </p>
 <pre
@@ -3974,8 +3985,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L4005"
-    >dom/src/impl/html_builder.ts at line 4005</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L4028"
+    >dom/src/impl/html_builder.ts at line 4028</a
   >
 </p>
 <pre
@@ -3994,8 +4005,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3762"
-    >dom/src/impl/html_builder.ts at line 3762</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3785"
+    >dom/src/impl/html_builder.ts at line 3785</a
   >
 </p>
 <pre
@@ -4014,8 +4025,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3735"
-    >dom/src/impl/html_builder.ts at line 3735</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3758"
+    >dom/src/impl/html_builder.ts at line 3758</a
   >
 </p>
 <pre
@@ -4039,8 +4050,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3839"
-    >dom/src/impl/html_builder.ts at line 3839</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3862"
+    >dom/src/impl/html_builder.ts at line 3862</a
   >
 </p>
 <pre
@@ -4067,8 +4078,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L4026"
-    >dom/src/impl/html_builder.ts at line 4026</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L4049"
+    >dom/src/impl/html_builder.ts at line 4049</a
   >
 </p>
 <pre
@@ -4086,8 +4097,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3763"
-    >dom/src/impl/html_builder.ts at line 3763</a
+    href="https://github.com/fponticelli/tempo/blob/master/dom/src/impl/html_builder.ts#L3786"
+    >dom/src/impl/html_builder.ts at line 3786</a
   >
 </p>
 <pre

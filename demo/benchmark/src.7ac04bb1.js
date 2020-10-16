@@ -117,7 +117,972 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"dDaf":[function(require,module,exports) {
+})({"L0ny":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.createManyProperties = exports.createProperties = exports.createManyStyles = exports.randomBoolean = exports.createStyles = exports.randomValueOrNull = exports.randomOrNull = exports.randomInt = exports.createManyAttributes = exports.randomColor = exports.createAttributes = exports.createDeep = exports.createWordsBetween = exports.createWords = exports.createRandomWord = exports.createWord = exports.createRanges = exports.repeatfWithNulls = exports.repeatf = exports.repeat = exports.createRange = exports.createArray = void 0;
+var alphabet = 'abcdefghijklmnopqrstuvwxyz';
+
+exports.createArray = function (num) {
+  var res = [];
+
+  for (var i = 0; i < num; i++) {
+    res.push(i);
+  }
+
+  return res;
+};
+
+exports.createRange = function (num) {
+  return exports.createArray(num).map(function (_) {
+    return Math.floor(Math.random() * num);
+  });
+};
+
+exports.repeat = function (times, f) {
+  return exports.createArray(times).map(f);
+};
+
+exports.repeatf = function (f) {
+  return function (times) {
+    return exports.createArray(times).map(f);
+  };
+};
+
+exports.repeatfWithNulls = function (f) {
+  return function (ratio, times) {
+    return exports.createArray(times).map(function (i) {
+      if (Math.random() < ratio) {
+        return f(i);
+      } else {
+        return null;
+      }
+    });
+  };
+};
+
+exports.createRanges = function (values) {
+  return values.map(exports.createRange);
+};
+
+exports.createWord = function (num) {
+  var w = '';
+
+  for (var i = 0; i < num; i++) {
+    w += alphabet[Math.floor(alphabet.length * Math.random())];
+  }
+
+  return w;
+};
+
+exports.createRandomWord = function (min, max) {
+  var length = min + Math.round((max - min) * Math.random());
+  return exports.createWord(length);
+};
+
+exports.createWords = function (num, min, max) {
+  return exports.createArray(num).map(function (_) {
+    return exports.createRandomWord(min, max);
+  }).join(' ');
+};
+
+exports.createWordsBetween = function (minWords, maxWords, minLength, maxLentgh) {
+  var num = exports.randomInt(minWords, maxWords);
+  return exports.createArray(num).map(function (_) {
+    return exports.createRandomWord(minLength, maxLentgh);
+  }).join(' ');
+};
+
+exports.createDeep = function () {
+  return {
+    id: exports.createWord(8),
+    name: exports.createRandomWord(4, 12),
+    address: {
+      line1: exports.createWords(3, 4, 6),
+      line2: exports.createWords(2, 4, 6)
+    },
+    paragraph: exports.createWords(30, 1, 8)
+  };
+};
+
+exports.createAttributes = function () {
+  return {
+    id: exports.randomValueOrNull(0.4, exports.createRandomWord(2, 8)),
+    className: exports.randomValueOrNull(0.4, exports.createWordsBetween(1, 4, 2, 8)),
+    title: exports.randomValueOrNull(0.4, exports.createWordsBetween(1, 6, 2, 8))
+  };
+};
+
+var hexAlphabet = '0123456789ABCDEF';
+
+exports.randomColor = function () {
+  function randomHex() {
+    var pos = Math.floor(Math.random() * hexAlphabet.length);
+    return hexAlphabet[pos];
+  }
+
+  return "#" + randomHex() + randomHex() + randomHex() + randomHex() + randomHex() + randomHex();
+};
+
+exports.createManyAttributes = exports.repeatf(exports.createAttributes);
+
+exports.randomInt = function (min, max) {
+  return Math.floor(Math.random() * (max - min)) + min;
+};
+
+exports.randomOrNull = function (ratio, f) {
+  if (Math.random() <= ratio) return f();else return null;
+};
+
+exports.randomValueOrNull = function (ratio, v) {
+  if (Math.random() <= ratio) return v;else return null;
+};
+
+exports.createStyles = function () {
+  return {
+    backgroundColor: exports.randomOrNull(0.4, exports.randomColor),
+    color: exports.randomOrNull(0.4, exports.randomColor),
+    border: exports.randomOrNull(0.4, function () {
+      return exports.randomInt(1, 4) + "px solid " + exports.randomColor();
+    })
+  };
+};
+
+exports.randomBoolean = function () {
+  if (Math.random() <= 0.5) return true;else return false;
+};
+
+exports.createManyStyles = exports.repeatf(exports.createStyles);
+
+exports.createProperties = function () {
+  return {
+    value: exports.randomValueOrNull(0.4, exports.createWordsBetween(1, 6, 2, 8)),
+    disabled: exports.randomOrNull(0.4, exports.randomBoolean)
+  };
+};
+
+exports.createManyProperties = exports.repeatf(exports.createProperties);
+},{}],"cibo":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.availableTests = exports.tests = void 0;
+
+var generator_1 = require("./generator");
+
+exports.tests = [{
+  id: 'render-list-50',
+  name: 'Render List (50)',
+  fn: 'renderListElements',
+  args: generator_1.createRange(50),
+  selected: false
+}, {
+  id: 'render-list-500',
+  name: 'Render List (500)',
+  fn: 'renderListElements',
+  args: generator_1.createRange(500),
+  selected: true
+}, {
+  id: 'render-destroy-list-500',
+  name: 'Render List & Destroy (500)',
+  fn: 'renderListElementsAndDestroy',
+  args: generator_1.createRange(500),
+  selected: false
+}, {
+  id: 'render-update-list',
+  name: 'Render List & Update',
+  fn: 'renderListAndUpdate',
+  args: generator_1.createRanges([200, 100, 50, 20, 0, 20, 50, 100, 200]),
+  selected: true
+}, {
+  id: 'render-update-deep',
+  name: 'Render Deep & Update',
+  fn: 'renderDeepAndUpdate',
+  args: generator_1.repeat(1000, generator_1.createDeep),
+  selected: true
+}, {
+  id: 'update-attributes',
+  name: 'Update Attributes',
+  fn: 'updateAttributes',
+  args: generator_1.createManyAttributes(1000),
+  selected: true
+}, {
+  id: 'update-properties',
+  name: 'Update Properties',
+  fn: 'updateProperty',
+  args: generator_1.createManyProperties(1000),
+  selected: true
+}, {
+  id: 'update-styles',
+  name: 'Update Styles',
+  fn: 'updateStyles',
+  args: generator_1.createManyStyles(500),
+  selected: true
+}, {
+  id: 'trigger-events',
+  name: 'Update and Trigger Events',
+  fn: 'updateAndTriggerEvents',
+  args: generator_1.createWords(100, 3, 6),
+  selected: true
+}];
+
+exports.availableTests = function () {
+  return exports.tests.map(function (test) {
+    return {
+      id: test.id,
+      name: test.name,
+      selected: test.selected
+    };
+  });
+};
+},{"./generator":"L0ny"}],"mIWh":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.hasSelectedTests = exports.countSelectedTests = exports.countAllTests = exports.getSelectedTests = exports.createState = exports.unpackTestRunId = exports.makeTestRunId = void 0;
+
+var tests_1 = require("./tests");
+
+exports.makeTestRunId = function (versionId, testId) {
+  return versionId + ":" + testId;
+};
+
+exports.unpackTestRunId = function (testRunId) {
+  var parts = testRunId.split(':');
+  return {
+    versionId: parts[0],
+    testId: parts[1]
+  };
+};
+
+var sortVersionIds = function sortVersionIds(a, b) {
+  if (a === 'current' || a > b) {
+    return -1;
+  } else if (a < b) {
+    return 1;
+  } else {
+    return 0;
+  }
+};
+
+exports.createState = function (versionIds) {
+  var tests = tests_1.availableTests();
+  var versions = versionIds.sort(sortVersionIds).map(function (id, i) {
+    return {
+      id: id,
+      selected: i < 2 || i === versionIds.length - 1
+    };
+  });
+  return {
+    versions: versions,
+    tests: tests,
+    options: {
+      maxTime: 0.2
+    },
+    results: {},
+    processing: new Set(),
+    stats: {}
+  };
+};
+
+exports.getSelectedTests = function (state) {
+  return {
+    tests: state.tests.filter(function (t) {
+      return t.selected;
+    }).map(function (t) {
+      return t.id;
+    }),
+    versions: state.versions.filter(function (t) {
+      return t.selected;
+    }).map(function (t) {
+      return t.id;
+    })
+  };
+};
+
+exports.countAllTests = function (state) {
+  return state.tests.length * state.versions.length;
+};
+
+exports.countSelectedTests = function (state) {
+  var _a = exports.getSelectedTests(state),
+      tests = _a.tests,
+      versions = _a.versions;
+
+  return tests.length * versions.length;
+};
+
+exports.hasSelectedTests = function (state) {
+  return exports.countSelectedTests(state) > 0;
+};
+},{"./tests":"cibo"}],"vCxL":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.__extends = __extends;
+exports.__rest = __rest;
+exports.__decorate = __decorate;
+exports.__param = __param;
+exports.__metadata = __metadata;
+exports.__awaiter = __awaiter;
+exports.__generator = __generator;
+exports.__exportStar = __exportStar;
+exports.__values = __values;
+exports.__read = __read;
+exports.__spread = __spread;
+exports.__spreadArrays = __spreadArrays;
+exports.__await = __await;
+exports.__asyncGenerator = __asyncGenerator;
+exports.__asyncDelegator = __asyncDelegator;
+exports.__asyncValues = __asyncValues;
+exports.__makeTemplateObject = __makeTemplateObject;
+exports.__importStar = __importStar;
+exports.__importDefault = __importDefault;
+exports.__classPrivateFieldGet = __classPrivateFieldGet;
+exports.__classPrivateFieldSet = __classPrivateFieldSet;
+exports.__createBinding = exports.__assign = void 0;
+
+/*! *****************************************************************************
+Copyright (c) Microsoft Corporation.
+
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+PERFORMANCE OF THIS SOFTWARE.
+***************************************************************************** */
+
+/* global Reflect, Promise */
+var extendStatics = function (d, b) {
+  extendStatics = Object.setPrototypeOf || {
+    __proto__: []
+  } instanceof Array && function (d, b) {
+    d.__proto__ = b;
+  } || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+  };
+
+  return extendStatics(d, b);
+};
+
+function __extends(d, b) {
+  extendStatics(d, b);
+
+  function __() {
+    this.constructor = d;
+  }
+
+  d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+}
+
+var __assign = function () {
+  exports.__assign = __assign = Object.assign || function __assign(t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+      s = arguments[i];
+
+      for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+    }
+
+    return t;
+  };
+
+  return __assign.apply(this, arguments);
+};
+
+exports.__assign = __assign;
+
+function __rest(s, e) {
+  var t = {};
+
+  for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0) t[p] = s[p];
+
+  if (s != null && typeof Object.getOwnPropertySymbols === "function") for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+    if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i])) t[p[i]] = s[p[i]];
+  }
+  return t;
+}
+
+function __decorate(decorators, target, key, desc) {
+  var c = arguments.length,
+      r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+      d;
+  if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+  return c > 3 && r && Object.defineProperty(target, key, r), r;
+}
+
+function __param(paramIndex, decorator) {
+  return function (target, key) {
+    decorator(target, key, paramIndex);
+  };
+}
+
+function __metadata(metadataKey, metadataValue) {
+  if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(metadataKey, metadataValue);
+}
+
+function __awaiter(thisArg, _arguments, P, generator) {
+  function adopt(value) {
+    return value instanceof P ? value : new P(function (resolve) {
+      resolve(value);
+    });
+  }
+
+  return new (P || (P = Promise))(function (resolve, reject) {
+    function fulfilled(value) {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    }
+
+    function rejected(value) {
+      try {
+        step(generator["throw"](value));
+      } catch (e) {
+        reject(e);
+      }
+    }
+
+    function step(result) {
+      result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
+    }
+
+    step((generator = generator.apply(thisArg, _arguments || [])).next());
+  });
+}
+
+function __generator(thisArg, body) {
+  var _ = {
+    label: 0,
+    sent: function () {
+      if (t[0] & 1) throw t[1];
+      return t[1];
+    },
+    trys: [],
+    ops: []
+  },
+      f,
+      y,
+      t,
+      g;
+  return g = {
+    next: verb(0),
+    "throw": verb(1),
+    "return": verb(2)
+  }, typeof Symbol === "function" && (g[Symbol.iterator] = function () {
+    return this;
+  }), g;
+
+  function verb(n) {
+    return function (v) {
+      return step([n, v]);
+    };
+  }
+
+  function step(op) {
+    if (f) throw new TypeError("Generator is already executing.");
+
+    while (_) try {
+      if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+      if (y = 0, t) op = [op[0] & 2, t.value];
+
+      switch (op[0]) {
+        case 0:
+        case 1:
+          t = op;
+          break;
+
+        case 4:
+          _.label++;
+          return {
+            value: op[1],
+            done: false
+          };
+
+        case 5:
+          _.label++;
+          y = op[1];
+          op = [0];
+          continue;
+
+        case 7:
+          op = _.ops.pop();
+
+          _.trys.pop();
+
+          continue;
+
+        default:
+          if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) {
+            _ = 0;
+            continue;
+          }
+
+          if (op[0] === 3 && (!t || op[1] > t[0] && op[1] < t[3])) {
+            _.label = op[1];
+            break;
+          }
+
+          if (op[0] === 6 && _.label < t[1]) {
+            _.label = t[1];
+            t = op;
+            break;
+          }
+
+          if (t && _.label < t[2]) {
+            _.label = t[2];
+
+            _.ops.push(op);
+
+            break;
+          }
+
+          if (t[2]) _.ops.pop();
+
+          _.trys.pop();
+
+          continue;
+      }
+
+      op = body.call(thisArg, _);
+    } catch (e) {
+      op = [6, e];
+      y = 0;
+    } finally {
+      f = t = 0;
+    }
+
+    if (op[0] & 5) throw op[1];
+    return {
+      value: op[0] ? op[1] : void 0,
+      done: true
+    };
+  }
+}
+
+var __createBinding = Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function () {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+};
+
+exports.__createBinding = __createBinding;
+
+function __exportStar(m, exports) {
+  for (var p in m) if (p !== "default" && !exports.hasOwnProperty(p)) __createBinding(exports, m, p);
+}
+
+function __values(o) {
+  var s = typeof Symbol === "function" && Symbol.iterator,
+      m = s && o[s],
+      i = 0;
+  if (m) return m.call(o);
+  if (o && typeof o.length === "number") return {
+    next: function () {
+      if (o && i >= o.length) o = void 0;
+      return {
+        value: o && o[i++],
+        done: !o
+      };
+    }
+  };
+  throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
+}
+
+function __read(o, n) {
+  var m = typeof Symbol === "function" && o[Symbol.iterator];
+  if (!m) return o;
+  var i = m.call(o),
+      r,
+      ar = [],
+      e;
+
+  try {
+    while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
+  } catch (error) {
+    e = {
+      error: error
+    };
+  } finally {
+    try {
+      if (r && !r.done && (m = i["return"])) m.call(i);
+    } finally {
+      if (e) throw e.error;
+    }
+  }
+
+  return ar;
+}
+
+function __spread() {
+  for (var ar = [], i = 0; i < arguments.length; i++) ar = ar.concat(__read(arguments[i]));
+
+  return ar;
+}
+
+function __spreadArrays() {
+  for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
+
+  for (var r = Array(s), k = 0, i = 0; i < il; i++) for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++) r[k] = a[j];
+
+  return r;
+}
+
+;
+
+function __await(v) {
+  return this instanceof __await ? (this.v = v, this) : new __await(v);
+}
+
+function __asyncGenerator(thisArg, _arguments, generator) {
+  if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
+  var g = generator.apply(thisArg, _arguments || []),
+      i,
+      q = [];
+  return i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () {
+    return this;
+  }, i;
+
+  function verb(n) {
+    if (g[n]) i[n] = function (v) {
+      return new Promise(function (a, b) {
+        q.push([n, v, a, b]) > 1 || resume(n, v);
+      });
+    };
+  }
+
+  function resume(n, v) {
+    try {
+      step(g[n](v));
+    } catch (e) {
+      settle(q[0][3], e);
+    }
+  }
+
+  function step(r) {
+    r.value instanceof __await ? Promise.resolve(r.value.v).then(fulfill, reject) : settle(q[0][2], r);
+  }
+
+  function fulfill(value) {
+    resume("next", value);
+  }
+
+  function reject(value) {
+    resume("throw", value);
+  }
+
+  function settle(f, v) {
+    if (f(v), q.shift(), q.length) resume(q[0][0], q[0][1]);
+  }
+}
+
+function __asyncDelegator(o) {
+  var i, p;
+  return i = {}, verb("next"), verb("throw", function (e) {
+    throw e;
+  }), verb("return"), i[Symbol.iterator] = function () {
+    return this;
+  }, i;
+
+  function verb(n, f) {
+    i[n] = o[n] ? function (v) {
+      return (p = !p) ? {
+        value: __await(o[n](v)),
+        done: n === "return"
+      } : f ? f(v) : v;
+    } : f;
+  }
+}
+
+function __asyncValues(o) {
+  if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
+  var m = o[Symbol.asyncIterator],
+      i;
+  return m ? m.call(o) : (o = typeof __values === "function" ? __values(o) : o[Symbol.iterator](), i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () {
+    return this;
+  }, i);
+
+  function verb(n) {
+    i[n] = o[n] && function (v) {
+      return new Promise(function (resolve, reject) {
+        v = o[n](v), settle(resolve, reject, v.done, v.value);
+      });
+    };
+  }
+
+  function settle(resolve, reject, d, v) {
+    Promise.resolve(v).then(function (v) {
+      resolve({
+        value: v,
+        done: d
+      });
+    }, reject);
+  }
+}
+
+function __makeTemplateObject(cooked, raw) {
+  if (Object.defineProperty) {
+    Object.defineProperty(cooked, "raw", {
+      value: raw
+    });
+  } else {
+    cooked.raw = raw;
+  }
+
+  return cooked;
+}
+
+;
+
+var __setModuleDefault = Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+};
+
+function __importStar(mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+
+  __setModuleDefault(result, mod);
+
+  return result;
+}
+
+function __importDefault(mod) {
+  return mod && mod.__esModule ? mod : {
+    default: mod
+  };
+}
+
+function __classPrivateFieldGet(receiver, privateMap) {
+  if (!privateMap.has(receiver)) {
+    throw new TypeError("attempted to get private field on non-instance");
+  }
+
+  return privateMap.get(receiver);
+}
+
+function __classPrivateFieldSet(receiver, privateMap, value) {
+  if (!privateMap.has(receiver)) {
+    throw new TypeError("attempted to set private field on non-instance");
+  }
+
+  privateMap.set(receiver, value);
+  return value;
+}
+},{}],"C9JJ":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.loadConfig = void 0;
+
+var tslib_1 = require("tslib");
+
+exports.loadConfig = function () {
+  return tslib_1.__awaiter(void 0, void 0, Promise, function () {
+    var response;
+    return tslib_1.__generator(this, function (_a) {
+      switch (_a.label) {
+        case 0:
+          return [4, fetch('./config.json')];
+
+        case 1:
+          response = _a.sent();
+          return [2, response.json()];
+      }
+    });
+  });
+};
+},{"tslib":"vCxL"}],"pSX2":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.reducer = void 0;
+
+var tslib_1 = require("tslib");
+
+var state_1 = require("./state");
+
+exports.reducer = function (state, action) {
+  var _a;
+
+  switch (action.kind) {
+    case 'ChangeOptionMaxTime':
+      var options = tslib_1.__assign(tslib_1.__assign({}, state.options), {
+        maxTime: action.value
+      });
+
+      return tslib_1.__assign(tslib_1.__assign({}, state), {
+        options: options
+      });
+
+    case 'ToggleTest':
+      var tests1 = state.tests.map(function (test) {
+        if (test.id === action.id) {
+          return tslib_1.__assign(tslib_1.__assign({}, test), {
+            selected: action.selected
+          });
+        } else {
+          return test;
+        }
+      });
+      return tslib_1.__assign(tslib_1.__assign({}, state), {
+        tests: tests1
+      });
+
+    case 'ToggleAllTests':
+      var selected1_1 = state.tests.filter(function (test) {
+        return test.selected;
+      }).length !== state.tests.length;
+      var tests2 = state.tests.map(function (test) {
+        return tslib_1.__assign(tslib_1.__assign({}, test), {
+          selected: selected1_1
+        });
+      });
+      return tslib_1.__assign(tslib_1.__assign({}, state), {
+        tests: tests2
+      });
+
+    case 'ToggleVersion':
+      return tslib_1.__assign(tslib_1.__assign({}, state), {
+        versions: state.versions.map(function (v) {
+          if (v.id === action.id) return {
+            id: v.id,
+            selected: action.selected
+          };else return v;
+        })
+      });
+
+    case 'ToggleAllVersions':
+      var selected2_1 = state.versions.filter(function (v) {
+        return v.selected;
+      }).length !== state.versions.length;
+      var versions2 = state.versions.map(function (v) {
+        return tslib_1.__assign(tslib_1.__assign({}, v), {
+          selected: selected2_1
+        });
+      }, {});
+      return tslib_1.__assign(tslib_1.__assign({}, state), {
+        versions: versions2
+      });
+
+    case 'ExecuteSelectedTests':
+      return state;
+
+    case 'ExecuteTests':
+      var ids = action.versionIds.reduce(function (acc, versionId) {
+        return action.testIds.reduce(function (acc, testId) {
+          return acc.concat([state_1.makeTestRunId(versionId, testId)]);
+        }, acc);
+      }, []);
+      var processing_1 = new Set(state.processing);
+      ids.forEach(function (id) {
+        return processing_1.add(id);
+      });
+      return tslib_1.__assign(tslib_1.__assign({}, state), {
+        processing: processing_1
+      });
+
+    case 'TestsExecuted':
+      return state;
+
+    case 'UpdateResult':
+      var runnerId = action.runnerId,
+          testId = action.testId,
+          result = action.target;
+      var processing2 = new Set(state.processing);
+      var id = state_1.makeTestRunId(runnerId, testId);
+      processing2.delete(id);
+
+      if (result) {
+        var results2 = tslib_1.__assign(tslib_1.__assign({}, state.results), (_a = {}, _a[id] = result, _a));
+
+        var stats = calculateMinMax(results2, state.tests);
+        return tslib_1.__assign(tslib_1.__assign({}, state), {
+          results: results2,
+          processing: processing2,
+          stats: tslib_1.__assign(tslib_1.__assign({}, state.stats), stats)
+        });
+      } else {
+        return tslib_1.__assign(tslib_1.__assign({}, state), {
+          processing: processing2
+        });
+      }
+
+    default:
+      throw "unhandled case " + action;
+  }
+};
+
+var calculateMinMaxForTest = function calculateMinMaxForTest(results, test) {
+  var count = 0;
+  var min = Infinity;
+  var max = -Infinity;
+
+  for (var _i = 0, _a = Object.keys(results); _i < _a.length; _i++) {
+    var testRunId = _a[_i];
+    var testId = state_1.unpackTestRunId(testRunId).testId;
+    if (testId !== test.id) continue;
+    var result = results[testRunId];
+
+    if (result) {
+      if (result.hz < min) min = result.hz;
+      if (result.hz > max) max = result.hz;
+      count++;
+    }
+  }
+
+  if (count > 1) return {
+    min: min,
+    max: max
+  };else return undefined;
+};
+
+var calculateMinMax = function calculateMinMax(results, tests) {
+  return tests.reduce(function (acc, test) {
+    var _a;
+
+    var stats = calculateMinMaxForTest(results, test);
+
+    if (stats) {
+      return tslib_1.__assign(tslib_1.__assign({}, acc), (_a = {}, _a[test.id] = stats, _a));
+    } else {
+      return acc;
+    }
+  }, {});
+};
+},{"tslib":"vCxL","./state":"mIWh"}],"dDaf":[function(require,module,exports) {
 "use strict";
 /*
 Copyright 2019 Google LLC
@@ -313,71 +1278,7 @@ function setElStyle(el, name, value) {
 }
 exports.setElStyle = setElStyle;
 
-},{"./attributes_mapper":"b01c","./set_attribute":"dDaf"}],"OJrv":[function(require,module,exports) {
-"use strict";
-/*
-Copyright 2019 Google LLC
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-    https://www.apache.org/licenses/LICENSE-2.0
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-*/
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.DOMContext = void 0;
-var dom_1 = require("./impl/dom");
-var DOMContext = /** @class */ (function () {
-    function DOMContext(doc, append, dispatch) {
-        this.doc = doc;
-        this.append = append;
-        this.dispatch = dispatch;
-    }
-    DOMContext.fromElement = function (element, dispatch) {
-        return new DOMContext(element.ownerDocument || (window && window.document), function (node) { return element.appendChild(node); }, dispatch);
-    };
-    DOMContext.prototype.mapAction = function (f) {
-        var _this = this;
-        return new DOMContext(this.doc, this.append, function (action) { return _this.dispatch(f(action)); });
-    };
-    DOMContext.prototype.conditionalMapAction = function (f) {
-        var _this = this;
-        return new DOMContext(this.doc, this.append, function (action) {
-            var newAction = f(action);
-            if (newAction !== undefined) {
-                _this.dispatch(newAction);
-            }
-        });
-    };
-    DOMContext.prototype.withAppendToReference = function () {
-        var ref = this.doc.createTextNode('');
-        this.append(ref);
-        return {
-            ctx: this.withAppend(dom_1.insertFBefore(ref)),
-            ref: ref
-        };
-    };
-    DOMContext.prototype.withAppend = function (append) {
-        return new DOMContext(this.doc, append, this.dispatch);
-    };
-    DOMContext.prototype.withDispatch = function (dispatch) {
-        return new DOMContext(this.doc, this.append, dispatch);
-    };
-    DOMContext.prototype.withInterceptDispatch = function (dispatch) {
-        var _this = this;
-        return new DOMContext(this.doc, this.append, function (action) {
-            dispatch(action);
-            _this.dispatch(action);
-        });
-    };
-    return DOMContext;
-}());
-exports.DOMContext = DOMContext;
-
-},{"./impl/dom":"lbKn"}],"H1te":[function(require,module,exports) {
+},{"./attributes_mapper":"b01c","./set_attribute":"dDaf"}],"H1te":[function(require,module,exports) {
 "use strict";
 /*
 Copyright 2019 Google LLC
@@ -484,136 +1385,7 @@ function merge(a, b) {
 }
 exports.merge = merge;
 
-},{}],"yiha":[function(require,module,exports) {
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.DOMBuilder = exports.toggleToString = exports.booleanToString = exports.stylesToString = exports.lostOrRecordToCommaSeparated = exports.listOrRecordToSpaceSeparated = exports.numberPairsListToString = exports.numbersListToString = exports.listOrRecordToString = exports.extractDerived = exports.extractLiterals = exports.childOrBuilderToTemplate = void 0;
-var text_1 = require("./text");
-var objects_1 = require("tempo-std/lib/objects");
-function childOrBuilderToTemplate(src) {
-    if (src === undefined) {
-        return text_1.text('');
-    }
-    else if (typeof src.build === 'function') {
-        return src.build();
-    }
-    else if (typeof src === 'string' || typeof src === 'function') {
-        return text_1.text(src);
-    }
-    else {
-        return src;
-    }
-}
-exports.childOrBuilderToTemplate = childOrBuilderToTemplate;
-function extractLiterals(record) {
-    return objects_1.keys(record).reduce(function (list, name) {
-        if (typeof record[name] === 'string') {
-            list.push({ name: name, value: record[name] });
-        }
-        return list;
-    }, []);
-}
-exports.extractLiterals = extractLiterals;
-function extractDerived(record) {
-    return objects_1.keys(record).reduce(function (list, name) {
-        if (typeof record[name] === 'function') {
-            list.push({
-                name: name,
-                resolve: record[name]
-            });
-        }
-        return list;
-    }, []);
-}
-exports.extractDerived = extractDerived;
-function listOrRecordToString(src, separator) {
-    if (typeof src === 'string') {
-        return src;
-    }
-    else if (src == null) {
-        return undefined;
-    }
-    else if (Array.isArray(src)) {
-        return src.join(separator);
-    }
-    else {
-        return objects_1.keys(src)
-            .reduce(function (list, key) {
-            if (src[key])
-                list.push(key);
-            return list;
-        }, [])
-            .join(separator);
-    }
-}
-exports.listOrRecordToString = listOrRecordToString;
-function numbersListToString(src) {
-    src = Array.isArray(src) ? src : [src];
-    return src.join(' ');
-}
-exports.numbersListToString = numbersListToString;
-function numberPairsListToString(src) {
-    return src.map(function (_a) {
-        var a = _a[0], b = _a[1];
-        return a + "," + b;
-    }).join(' ');
-}
-exports.numberPairsListToString = numberPairsListToString;
-function listOrRecordToSpaceSeparated(src) {
-    return listOrRecordToString(src, ' ');
-}
-exports.listOrRecordToSpaceSeparated = listOrRecordToSpaceSeparated;
-function lostOrRecordToCommaSeparated(src) {
-    return listOrRecordToString(src, ', ');
-}
-exports.lostOrRecordToCommaSeparated = lostOrRecordToCommaSeparated;
-function stylesToString(src) {
-    if (typeof src === 'string') {
-        return src;
-    }
-    else {
-        return objects_1.keys(src)
-            .reduce(function (list, key) {
-            if (src[key])
-                list.push(key + ": " + src[key] + ";");
-            return list;
-        }, [])
-            .join(' ');
-    }
-}
-exports.stylesToString = stylesToString;
-function booleanToString(src) {
-    return "" + src;
-}
-exports.booleanToString = booleanToString;
-function toggleToString(name) {
-    return function (src) { return (src ? name : ''); };
-}
-exports.toggleToString = toggleToString;
-var DOMBuilder = /** @class */ (function () {
-    function DOMBuilder() {
-        this._children = [];
-        // transform
-    }
-    // children
-    DOMBuilder.prototype.Append = function (el) {
-        this._children.push(childOrBuilderToTemplate(el));
-        return this;
-    };
-    DOMBuilder.prototype.AppendMany = function () {
-        var _a;
-        var els = [];
-        for (var _i = 0; _i < arguments.length; _i++) {
-            els[_i] = arguments[_i];
-        }
-        (_a = this._children).push.apply(_a, els.map(childOrBuilderToTemplate));
-        return this;
-    };
-    return DOMBuilder;
-}());
-exports.DOMBuilder = DOMBuilder;
-
-},{"./text":"H1te","tempo-std/lib/objects":"g3Xg"}],"nFed":[function(require,module,exports) {
+},{}],"nFed":[function(require,module,exports) {
 "use strict";
 /*
 Copyright 2019 Google LLC
@@ -991,7 +1763,136 @@ function ofIterableIterator(it) {
 }
 exports.ofIterableIterator = ofIterableIterator;
 
-},{"./maybe":"pwth","./objects":"g3Xg"}],"w1ev":[function(require,module,exports) {
+},{"./maybe":"pwth","./objects":"g3Xg"}],"yiha":[function(require,module,exports) {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.DOMBuilder = exports.toggleToString = exports.booleanToString = exports.stylesToString = exports.lostOrRecordToCommaSeparated = exports.listOrRecordToSpaceSeparated = exports.numberPairsListToString = exports.numbersListToString = exports.listOrRecordToString = exports.extractDerived = exports.extractLiterals = exports.childOrBuilderToTemplate = void 0;
+var text_1 = require("./text");
+var objects_1 = require("tempo-std/lib/objects");
+function childOrBuilderToTemplate(src) {
+    if (src === undefined) {
+        return text_1.text('');
+    }
+    else if (typeof src.build === 'function') {
+        return src.build();
+    }
+    else if (typeof src === 'string' || typeof src === 'function') {
+        return text_1.text(src);
+    }
+    else {
+        return src;
+    }
+}
+exports.childOrBuilderToTemplate = childOrBuilderToTemplate;
+function extractLiterals(record) {
+    return objects_1.keys(record).reduce(function (list, name) {
+        if (typeof record[name] === 'string') {
+            list.push({ name: name, value: record[name] });
+        }
+        return list;
+    }, []);
+}
+exports.extractLiterals = extractLiterals;
+function extractDerived(record) {
+    return objects_1.keys(record).reduce(function (list, name) {
+        if (typeof record[name] === 'function') {
+            list.push({
+                name: name,
+                resolve: record[name]
+            });
+        }
+        return list;
+    }, []);
+}
+exports.extractDerived = extractDerived;
+function listOrRecordToString(src, separator) {
+    if (typeof src === 'string') {
+        return src;
+    }
+    else if (src == null) {
+        return undefined;
+    }
+    else if (Array.isArray(src)) {
+        return src.join(separator);
+    }
+    else {
+        return objects_1.keys(src)
+            .reduce(function (list, key) {
+            if (src[key])
+                list.push(key);
+            return list;
+        }, [])
+            .join(separator);
+    }
+}
+exports.listOrRecordToString = listOrRecordToString;
+function numbersListToString(src) {
+    src = Array.isArray(src) ? src : [src];
+    return src.join(' ');
+}
+exports.numbersListToString = numbersListToString;
+function numberPairsListToString(src) {
+    return src.map(function (_a) {
+        var a = _a[0], b = _a[1];
+        return a + "," + b;
+    }).join(' ');
+}
+exports.numberPairsListToString = numberPairsListToString;
+function listOrRecordToSpaceSeparated(src) {
+    return listOrRecordToString(src, ' ');
+}
+exports.listOrRecordToSpaceSeparated = listOrRecordToSpaceSeparated;
+function lostOrRecordToCommaSeparated(src) {
+    return listOrRecordToString(src, ', ');
+}
+exports.lostOrRecordToCommaSeparated = lostOrRecordToCommaSeparated;
+function stylesToString(src) {
+    if (typeof src === 'string') {
+        return src;
+    }
+    else {
+        return objects_1.keys(src)
+            .reduce(function (list, key) {
+            if (src[key])
+                list.push(key + ": " + src[key] + ";");
+            return list;
+        }, [])
+            .join(' ');
+    }
+}
+exports.stylesToString = stylesToString;
+function booleanToString(src) {
+    return "" + src;
+}
+exports.booleanToString = booleanToString;
+function toggleToString(name) {
+    return function (src) { return (src ? name : ''); };
+}
+exports.toggleToString = toggleToString;
+var DOMBuilder = /** @class */ (function () {
+    function DOMBuilder() {
+        this._children = [];
+        // transform
+    }
+    // children
+    DOMBuilder.prototype.Append = function (el) {
+        this._children.push(childOrBuilderToTemplate(el));
+        return this;
+    };
+    DOMBuilder.prototype.AppendMany = function () {
+        var _a;
+        var els = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            els[_i] = arguments[_i];
+        }
+        (_a = this._children).push.apply(_a, els.map(childOrBuilderToTemplate));
+        return this;
+    };
+    return DOMBuilder;
+}());
+exports.DOMBuilder = DOMBuilder;
+
+},{"./text":"H1te","tempo-std/lib/objects":"g3Xg"}],"w1ev":[function(require,module,exports) {
 "use strict";
 /*
 Copyright 2019 Google LLC
@@ -1895,22 +2796,7 @@ var MatchBoolTemplate = /** @class */ (function () {
 }());
 exports.MatchBoolTemplate = MatchBoolTemplate;
 
-},{"./dom":"lbKn","../value":"nFed","./dom_builder":"yiha"}],"zQMt":[function(require,module,exports) {
-"use strict";
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __exportStar = (this && this.__exportStar) || function(m, exports) {
-    for (var p in m) if (p !== "default" && !exports.hasOwnProperty(p)) __createBinding(exports, m, p);
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-__exportStar(require("./impl/html"), exports);
-
-},{"./impl/html":"aXl4"}],"fYSr":[function(require,module,exports) {
+},{"./dom":"lbKn","../value":"nFed","./dom_builder":"yiha"}],"fYSr":[function(require,module,exports) {
 "use strict";
 /*
 Copyright 2019 Google LLC
@@ -2033,7 +2919,7 @@ var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
             ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
         return extendStatics(d, b);
     };
     return function (d, b) {
@@ -4117,13 +5003,58 @@ var SVGRectElementBuilder = /** @class */ (function (_super) {
 }(SVGElementBuilder));
 exports.SVGRectElementBuilder = SVGRectElementBuilder;
 
-},{"./hold_state":"fYSr","./dom_builder":"yiha","../value":"nFed","../lifecycle":"uV5V","./dom":"lbKn","tempo-std/lib/objects":"g3Xg","./element":"X9Ob","./fragment":"aQMP","./adapter":"kWOh","./component":"eDHy","./map_action":"KxWc","./map_query":"wbDd","./map_state":"kpTJ","./portal":"koeo","./simple_component":"LSkL","./until":"Ttvv","./match_bool_template":"ZVXL","./lazy":"hzRP","./text":"H1te"}],"eyJE":[function(require,module,exports) {
+},{"./hold_state":"fYSr","./dom_builder":"yiha","../value":"nFed","../lifecycle":"uV5V","./dom":"lbKn","tempo-std/lib/objects":"g3Xg","./element":"X9Ob","./fragment":"aQMP","./adapter":"kWOh","./component":"eDHy","./map_action":"KxWc","./map_query":"wbDd","./map_state":"kpTJ","./portal":"koeo","./simple_component":"LSkL","./until":"Ttvv","./match_bool_template":"ZVXL","./lazy":"hzRP","./text":"H1te"}],"YmhL":[function(require,module,exports) {
+"use strict";
+/*
+Copyright 2019 Google LLC
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+    https://www.apache.org/licenses/LICENSE-2.0
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.CaptureStateTemplate = void 0;
+var html_builder_1 = require("./html_builder");
+var CaptureStateTemplate = /** @class */ (function () {
+    function CaptureStateTemplate(capture) {
+        this.capture = capture;
+    }
+    CaptureStateTemplate.prototype.render = function (ctx, state) {
+        var localState = state;
+        var builder = new html_builder_1.FragmentHTMLBuilder();
+        var hook = function () { return localState; };
+        this.capture(hook, builder);
+        var template = builder.build();
+        var view = template.render(ctx, localState);
+        return {
+            change: function (state) {
+                localState = state;
+                view.change(localState);
+            },
+            request: function (query) {
+                view.request(query);
+            },
+            destroy: function () {
+                view.destroy();
+            }
+        };
+    };
+    return CaptureStateTemplate;
+}());
+exports.CaptureStateTemplate = CaptureStateTemplate;
+
+},{"./html_builder":"eyJE"}],"eyJE":[function(require,module,exports) {
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
             ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
         return extendStatics(d, b);
     };
     return function (d, b) {
@@ -4154,6 +5085,7 @@ var hold_state_1 = require("./hold_state");
 var dom_builder_1 = require("./dom_builder");
 var adapter_1 = require("./adapter");
 var svg_builder_1 = require("./svg_builder");
+var capture_state_1 = require("./capture_state");
 var BaseHTMLBuilder = /** @class */ (function (_super) {
     __extends(BaseHTMLBuilder, _super);
     function BaseHTMLBuilder() {
@@ -4184,6 +5116,14 @@ var BaseHTMLBuilder = /** @class */ (function (_super) {
             var outerState = _a.outerState;
             return outerState;
         }, props.propagate || (function () { return undefined; }), props.child));
+    };
+    BaseHTMLBuilder.prototype.CaptureState = function (capture) {
+        return this.Append(new capture_state_1.CaptureStateTemplate(capture));
+    };
+    BaseHTMLBuilder.prototype.ReleaseState = function (hook, merge, init) {
+        var builder = new FragmentHTMLBuilder();
+        init(builder);
+        return this.MapState(function (b) { return merge(hook(), b); }, function ($) { return $.Append(builder); });
     };
     BaseHTMLBuilder.prototype.HoldState = function (holdf) {
         return this.Append(new hold_state_1.HoldStateTemplate(holdf, new FragmentHTMLBuilder()));
@@ -6589,7 +7529,7 @@ var UntilHTMLBuilder = /** @class */ (function (_super) {
 }(BaseHTMLBuilder));
 exports.UntilHTMLBuilder = UntilHTMLBuilder;
 
-},{"./dom":"lbKn","./text":"H1te","../value":"nFed","./component":"eDHy","tempo-std/lib/objects":"g3Xg","../lifecycle":"uV5V","./element":"X9Ob","./map_state":"kpTJ","./fragment":"aQMP","./map_action":"KxWc","./map_query":"wbDd","./until":"Ttvv","./simple_component":"LSkL","./portal":"koeo","./lazy":"hzRP","./match_bool_template":"ZVXL","./hold_state":"fYSr","./dom_builder":"yiha","./adapter":"kWOh","./svg_builder":"bl4t"}],"HSRy":[function(require,module,exports) {
+},{"./dom":"lbKn","./text":"H1te","../value":"nFed","./component":"eDHy","tempo-std/lib/objects":"g3Xg","../lifecycle":"uV5V","./element":"X9Ob","./map_state":"kpTJ","./fragment":"aQMP","./map_action":"KxWc","./map_query":"wbDd","./until":"Ttvv","./simple_component":"LSkL","./portal":"koeo","./lazy":"hzRP","./match_bool_template":"ZVXL","./hold_state":"fYSr","./dom_builder":"yiha","./adapter":"kWOh","./svg_builder":"bl4t","./capture_state":"YmhL"}],"HSRy":[function(require,module,exports) {
 "use strict";
 /*
 Copyright 2019 Google LLC
@@ -6667,10 +7607,9 @@ var dom_builder_1 = require("./dom_builder");
 var objects_1 = require("tempo-std/lib/objects");
 var MatchValueTemplate = /** @class */ (function () {
     function MatchValueTemplate(path, matcher, orElse) {
-        var _this = this;
         this.path = path;
         this.matcher = objects_1.keys(matcher).reduce(function (acc, key) {
-            acc[key] = dom_builder_1.childOrBuilderToTemplate(_this.matcher[key]);
+            acc[key] = dom_builder_1.childOrBuilderToTemplate(matcher[key]);
             return acc;
         }, {});
         this.orElse = dom_builder_1.childOrBuilderToTemplate(orElse);
@@ -6723,7 +7662,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.When = exports.Until = exports.Unless = exports.SimpleComponent = exports.BodyPortal = exports.HeadPortal = exports.PortalWithSelector = exports.Portal = exports.ForEach = exports.Fragment = exports.Lazy = exports.MatchAsyncResult = exports.MatchAsync = exports.MatchResult = exports.MatchMaybe = exports.MatchOption = exports.MatchValue = exports.MatchBool = exports.MatchKind = exports.Match = exports.MapQuery = exports.MapAction = exports.MapStateAndKeep = exports.MapField = exports.MapState = exports.Iterate = exports.HoldState = exports.Component = exports.LocalAdapter = exports.Adapter = exports.WBR = exports.VIDEO = exports.VAR = exports.UL = exports.U = exports.TRACK = exports.TR = exports.TITLE = exports.TIME = exports.THEAD = exports.TH = exports.TFOOT = exports.TEXTAREA = exports.TEMPLATE = exports.TD = exports.TBODY = exports.TABLE = exports.SUP = exports.SUMMARY = exports.SUB = exports.STYLE = exports.STRONG = exports.SPAN = exports.SOURCE = exports.SMALL = exports.SLOT = exports.SELECT = exports.SECTION = exports.SCRIPT = exports.SAMP = exports.S = exports.RUBY = exports.RT = exports.RP = exports.Q = exports.PROGRESS = exports.PRE = exports.PICTURE = exports.PARAM = exports.P = exports.OUTPUT = exports.OPTION = exports.OPTGROUP = exports.OL = exports.OBJECT = exports.NOSCRIPT = exports.NAV = exports.METER = exports.META = exports.MARK = exports.MAP = exports.MAIN = exports.LINK = exports.LI = exports.LEGEND = exports.LABEL = exports.KBD = exports.INS = exports.INPUT = exports.IMG = exports.IFRAME = exports.I = exports.HTML = exports.HR = exports.HGROUP = exports.HEADER = exports.HEAD = exports.H6 = exports.H5 = exports.H4 = exports.H3 = exports.H2 = exports.H1 = exports.FORM = exports.FOOTER = exports.FIGURE = exports.FIGCAPTION = exports.FIELDSET = exports.EMBED = exports.EM = exports.DT = exports.DL = exports.DIV = exports.DIALOG = exports.DFN = exports.DETAILS = exports.DEL = exports.DD = exports.DATALIST = exports.DATA = exports.COLGROUP = exports.COL = exports.CODE = exports.CITE = exports.CAPTION = exports.CANVAS = exports.BUTTON = exports.BR = exports.BODY = exports.BLOCKQUOTE = exports.BDO = exports.BDI = exports.BASE = exports.B = exports.AUDIO = exports.ASIDE = exports.ARTICLE = exports.AREA = exports.ADDRESS = exports.ABBR = exports.A = exports.El = void 0;
+exports.When = exports.Until = exports.Unless = exports.SimpleComponent = exports.BodyPortal = exports.HeadPortal = exports.PortalWithSelector = exports.Portal = exports.ForEach = exports.Fragment = exports.Lazy = exports.MatchAsyncResult = exports.MatchAsync = exports.MatchResult = exports.MatchMaybe = exports.MatchOption = exports.MatchValue = exports.MatchBool = exports.MatchKind = exports.Match = exports.MapQuery = exports.MapAction = exports.MapStateAndKeep = exports.MapField = exports.MapState = exports.Iterate = exports.HoldState = exports.ReleaseState = exports.CaptureState = exports.Component = exports.LocalAdapter = exports.Adapter = exports.WBR = exports.VIDEO = exports.VAR = exports.UL = exports.U = exports.TRACK = exports.TR = exports.TITLE = exports.TIME = exports.THEAD = exports.TH = exports.TFOOT = exports.TEXTAREA = exports.TEMPLATE = exports.TD = exports.TBODY = exports.TABLE = exports.SUP = exports.SUMMARY = exports.SUB = exports.STYLE = exports.STRONG = exports.SPAN = exports.SOURCE = exports.SMALL = exports.SLOT = exports.SELECT = exports.SECTION = exports.SCRIPT = exports.SAMP = exports.S = exports.RUBY = exports.RT = exports.RP = exports.Q = exports.PROGRESS = exports.PRE = exports.PICTURE = exports.PARAM = exports.P = exports.OUTPUT = exports.OPTION = exports.OPTGROUP = exports.OL = exports.OBJECT = exports.NOSCRIPT = exports.NAV = exports.METER = exports.META = exports.MARK = exports.MAP = exports.MAIN = exports.LINK = exports.LI = exports.LEGEND = exports.LABEL = exports.KBD = exports.INS = exports.INPUT = exports.IMG = exports.IFRAME = exports.I = exports.HTML = exports.HR = exports.HGROUP = exports.HEADER = exports.HEAD = exports.H6 = exports.H5 = exports.H4 = exports.H3 = exports.H2 = exports.H1 = exports.FORM = exports.FOOTER = exports.FIGURE = exports.FIGCAPTION = exports.FIELDSET = exports.EMBED = exports.EM = exports.DT = exports.DL = exports.DIV = exports.DIALOG = exports.DFN = exports.DETAILS = exports.DEL = exports.DD = exports.DATALIST = exports.DATA = exports.COLGROUP = exports.COL = exports.CODE = exports.CITE = exports.CAPTION = exports.CANVAS = exports.BUTTON = exports.BR = exports.BODY = exports.BLOCKQUOTE = exports.BDO = exports.BDI = exports.BASE = exports.B = exports.AUDIO = exports.ASIDE = exports.ARTICLE = exports.AREA = exports.ADDRESS = exports.ABBR = exports.A = exports.El = void 0;
 var html_builder_1 = require("./html_builder");
 Object.defineProperty(exports, "El", { enumerable: true, get: function () { return html_builder_1.El; } });
 var value_1 = require("../value");
@@ -6733,6 +7672,7 @@ var match_bool_template_1 = require("./match_bool_template");
 var match_value_template_1 = require("./match_value_template");
 var lazy_1 = require("./lazy");
 var hold_state_1 = require("./hold_state");
+var capture_state_1 = require("./capture_state");
 // dom specific
 function A(init) {
     var builder = new html_builder_1.HTMLAnchorElementBuilder('a');
@@ -7528,6 +8468,16 @@ function Component(reducer, init) {
     return builder;
 }
 exports.Component = Component;
+function CaptureState(capture) {
+    return new capture_state_1.CaptureStateTemplate(capture);
+}
+exports.CaptureState = CaptureState;
+function ReleaseState(hook, merge, init) {
+    var builder = new html_builder_1.FragmentHTMLBuilder();
+    init(builder);
+    return MapState(function (b) { return merge(hook(), b); }, function ($) { return $.Append(builder); });
+}
+exports.ReleaseState = ReleaseState;
 function HoldState(holdf) {
     var builder = new html_builder_1.FragmentHTMLBuilder();
     return new hold_state_1.HoldStateTemplate(holdf, builder);
@@ -7626,12 +8576,8 @@ function MatchAsync(props) {
 exports.MatchAsync = MatchAsync;
 function MatchAsyncResult(props) {
     return MatchKind({
-        Outcome: MapState(function (o) { return o.value; }, function (n) {
-            return n.Append(MatchResult({
-                Success: props.Success,
-                Failure: props.Failure
-            }));
-        }),
+        Failure: MapField('error', function ($) { return $.Append(props.Failure); }),
+        Success: MapField('value', function ($) { return $.Append(props.Success); }),
         Loading: MapField('progress', function ($) { return $.Append(props.Loading); }),
         NotAsked: MapState(function () { return null; }, function (n) { return n.Append(props.NotAsked); })
     });
@@ -7708,7 +8654,418 @@ function When(condition, init) {
 }
 exports.When = When;
 
-},{"./html_builder":"eyJE","../value":"nFed","./adapter":"kWOh","./match_template":"HSRy","./match_bool_template":"ZVXL","./match_value_template":"oCpq","./lazy":"hzRP","./hold_state":"fYSr"}],"UPGL":[function(require,module,exports) {
+},{"./html_builder":"eyJE","../value":"nFed","./adapter":"kWOh","./match_template":"HSRy","./match_bool_template":"ZVXL","./match_value_template":"oCpq","./lazy":"hzRP","./hold_state":"fYSr","./capture_state":"YmhL"}],"zQMt":[function(require,module,exports) {
+"use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __exportStar = (this && this.__exportStar) || function(m, exports) {
+    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+__exportStar(require("./impl/html"), exports);
+
+},{"./impl/html":"aXl4"}],"FLek":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Action = void 0;
+exports.Action = {
+  changeOptionMaxTime: function changeOptionMaxTime(value) {
+    return {
+      kind: 'ChangeOptionMaxTime',
+      value: value
+    };
+  },
+  toggleVersion: function toggleVersion(id, selected) {
+    return {
+      kind: 'ToggleVersion',
+      id: id,
+      selected: selected
+    };
+  },
+  toggleAllVersions: function toggleAllVersions() {
+    return {
+      kind: 'ToggleAllVersions'
+    };
+  },
+  toggleTest: function toggleTest(id, selected) {
+    return {
+      kind: 'ToggleTest',
+      id: id,
+      selected: selected
+    };
+  },
+  toggleAllTests: function toggleAllTests() {
+    return {
+      kind: 'ToggleAllTests'
+    };
+  },
+  executeTests: function executeTests(versionIds, testIds) {
+    return {
+      kind: 'ExecuteTests',
+      versionIds: versionIds,
+      testIds: testIds
+    };
+  },
+  executeSelectedTests: function executeSelectedTests() {
+    return {
+      kind: 'ExecuteSelectedTests'
+    };
+  },
+  testsExecuted: function testsExecuted() {
+    return {
+      kind: 'TestsExecuted'
+    };
+  },
+  updateResult: function updateResult(runnerId, testId, target) {
+    return {
+      kind: 'UpdateResult',
+      runnerId: runnerId,
+      testId: testId,
+      target: target
+    };
+  }
+};
+},{}],"JiXW":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.optionsSelection = void 0;
+
+var html_1 = require("tempo-dom/lib/html");
+
+var action_1 = require("../action");
+
+exports.optionsSelection = html_1.DIV(function ($) {
+  return $.TABLE(function ($) {
+    return $.TR(function ($) {
+      return $.TH(function ($) {
+        return $.LABEL(function ($) {
+          return $.for('options_max_time').text('max execution time');
+        });
+      }).TD(function ($) {
+        return $.class('option-value').INPUT_NUMBER(function ($) {
+          return $.id('options_max_time').min(0).value(function (s) {
+            return s.maxTime;
+          }).onChange(function (_s, _ev, el) {
+            return action_1.Action.changeOptionMaxTime(el.valueAsNumber);
+          });
+        });
+      });
+    });
+  });
+});
+},{"tempo-dom/lib/html":"zQMt","../action":"FLek"}],"Seec":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.tableView = void 0;
+
+var html_1 = require("tempo-dom/lib/html");
+
+var action_1 = require("../action");
+
+var state_1 = require("../state");
+
+var resultToOpsPerSec = function resultToOpsPerSec(r) {
+  return r.hz.toFixed(r.hz < 100 ? 2 : 0);
+};
+
+var resultToSamples = function resultToSamples(r) {
+  var size = r.stats.sample.length;
+  return "error \xB1" + r.stats.rme.toFixed(2) + "%, " + size + " sample" + (size === 1 ? '' : 's');
+};
+
+var colHeader = html_1.Fragment(function ($) {
+  return $.When(function (s) {
+    return s.id === 'current';
+  }, function ($) {
+    return $.text('current').BR().text(function (s) {
+      return s.selected ? '✅' : '⛔️';
+    });
+  }).When(function (s) {
+    return s.id !== 'current';
+  }, function ($) {
+    return $.MapState(function (s) {
+      var parts = s.id.split('-');
+      var dates = parts[0];
+      var year = Number(dates.substring(0, 4));
+      var month = Number(dates.substring(4, 6)) - 1;
+      var day = Number(dates.substring(6, 8));
+      var date = new Date(year, month, day);
+      var commit = parts[1];
+      return {
+        date: date,
+        commit: commit,
+        selected: s.selected
+      };
+    }, function ($) {
+      return $.DIV(function ($) {
+        return $.class('date').text(function (s) {
+          return s.date.toDateString();
+        });
+      }).SPAN(function ($) {
+        return $.class('commit').text(function (s) {
+          return s.commit;
+        });
+      }).text(' ').text(function (s) {
+        return s.selected ? '✅' : '⛔️';
+      });
+    });
+  });
+});
+exports.tableView = html_1.TABLE(function ($) {
+  return $.TR(function ($) {
+    return $.class('header-row').TH(function ($) {
+      return $.When(function (s) {
+        return s.processing.size > 0;
+      }, function ($) {
+        return $.SPAN(function ($) {
+          return $.class('details').text(function (s) {
+            return " running " + s.processing.size + " tests";
+          }).BR();
+        });
+      }).BUTTON(function ($) {
+        return $.onClick(function () {
+          return action_1.Action.executeSelectedTests();
+        }).text('execute selected tests');
+      });
+    }).TH().MapState(function (s) {
+      return s.versions;
+    }, function ($) {
+      return $.ForEach(function ($) {
+        return $.TH(function ($) {
+          return $.class('version-header').A(function ($) {
+            return $.href('#').onClick(function (s) {
+              return action_1.Action.toggleVersion(s.id, !s.selected);
+            }).Append(colHeader);
+          });
+        });
+      });
+    });
+  }).TR(function ($) {
+    return $.class('header-row').TH(function ($) {
+      return $.text('toggle: ').A(function ($) {
+        return $.href('#').onClick(function () {
+          return action_1.Action.toggleAllTests();
+        }).text('tests');
+      }).text(', ').A(function ($) {
+        return $.href('#').onClick(function () {
+          return action_1.Action.toggleAllVersions();
+        }).text('versions');
+      });
+    }).TH().MapState(function (state) {
+      return state.versions.map(function (version) {
+        return {
+          version: version,
+          tests: state.tests.map(function (t) {
+            return t.id;
+          })
+        };
+      });
+    }, function ($) {
+      return $.ForEach(function ($) {
+        return $.TH(function ($) {
+          return $.class('hand').A(function ($) {
+            return $.href('#').onClick(function (s) {
+              return action_1.Action.executeTests([s.version.id], s.tests);
+            }).text('👇');
+          });
+        });
+      });
+    });
+  }).MapState(function (state) {
+    return state.tests.map(function (test) {
+      return {
+        test: test,
+        state: state
+      };
+    });
+  }, function ($) {
+    return $.ForEach(function ($) {
+      return $.TR(function ($) {
+        return $.TH(function ($) {
+          return $.class('header-col').A(function ($) {
+            return $.href('#').onClick(function (s) {
+              return action_1.Action.toggleTest(s.test.id, !s.test.selected);
+            }).text(function (item) {
+              return (item.test.selected ? '✅' : '⛔️') + ' ' + item.test.name;
+            });
+          });
+        }).TH(function ($) {
+          return $.class('hand').A(function ($) {
+            return $.href('#').onClick(function (s) {
+              return action_1.Action.executeTests(s.state.versions.map(function (v) {
+                return v.id;
+              }), [s.test.id]);
+            }).text('👉');
+          });
+        }).MapState(function (item) {
+          var testId = item.test.id;
+          var results = item.state.results;
+          var stats = item.state.stats[testId];
+          return item.state.versions.map(function (v) {
+            var id = state_1.makeTestRunId(v.id, testId);
+            var result = results[id] || null;
+            return {
+              result: result,
+              selected: v.selected && item.test.selected,
+              test: item.test.id,
+              version: v.id,
+              stats: stats,
+              processing: item.state.processing.has(id),
+              faster: result && stats && result.hz / stats.min - 1
+            };
+          });
+        }, function ($) {
+          return $.ForEach(function ($) {
+            return $.TD(function ($) {
+              return $.class(function (s) {
+                var buff = [];
+                if (s.selected) buff.push('selected');
+                if (s.processing) buff.push('processing');
+                return buff.join(' ');
+              }).When(function (s) {
+                return s.result != null;
+              }, function ($) {
+                return $.text(function (s) {
+                  return resultToOpsPerSec(s.result);
+                }).SPAN(function ($) {
+                  return $.class('details').title(function (s) {
+                    return resultToSamples(s.result);
+                  }).text(' ops/sec');
+                }).BR().When(function (s) {
+                  return !!s.faster && s.faster >= 0.05;
+                }, function ($) {
+                  return $.SPAN(function ($) {
+                    return $.class('details').B(function ($) {
+                      return $.text(function (s) {
+                        return (s.faster * 100).toFixed(0) + "% faster";
+                      });
+                    });
+                  });
+                }).When(function (s) {
+                  return !s.processing;
+                }, function ($) {
+                  return $.A(function ($) {
+                    return $.href('#').onClick(function (s) {
+                      return action_1.Action.executeTests([s.version], [s.test]);
+                    }).text('▶️');
+                  });
+                });
+              }).When(function (s) {
+                return s.result == null && !s.processing;
+              }, function ($) {
+                return $.A(function ($) {
+                  return $.href('#').onClick(function (s) {
+                    return action_1.Action.executeTests([s.version], [s.test]);
+                  }).text('▶️');
+                });
+              });
+            });
+          });
+        });
+      });
+    });
+  });
+});
+},{"tempo-dom/lib/html":"zQMt","../action":"FLek","../state":"mIWh"}],"ywMA":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.template = void 0;
+
+var html_1 = require("tempo-dom/lib/html");
+
+var options_selection_1 = require("./template/options_selection");
+
+var table_view_1 = require("./template/table_view");
+
+exports.template = html_1.DIV(function ($) {
+  return $.class('display_test').MapState(function (s) {
+    return s.options;
+  }, function ($) {
+    return $.Append(options_selection_1.optionsSelection);
+  }).Append(table_view_1.tableView);
+});
+},{"tempo-dom/lib/html":"zQMt","./template/options_selection":"JiXW","./template/table_view":"Seec"}],"OJrv":[function(require,module,exports) {
+"use strict";
+/*
+Copyright 2019 Google LLC
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+    https://www.apache.org/licenses/LICENSE-2.0
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.DOMContext = void 0;
+var dom_1 = require("./impl/dom");
+var DOMContext = /** @class */ (function () {
+    function DOMContext(doc, append, dispatch) {
+        this.doc = doc;
+        this.append = append;
+        this.dispatch = dispatch;
+    }
+    DOMContext.fromElement = function (element, dispatch) {
+        return new DOMContext(element.ownerDocument || (window && window.document), function (node) { return element.appendChild(node); }, dispatch);
+    };
+    DOMContext.prototype.mapAction = function (f) {
+        var _this = this;
+        return new DOMContext(this.doc, this.append, function (action) { return _this.dispatch(f(action)); });
+    };
+    DOMContext.prototype.conditionalMapAction = function (f) {
+        var _this = this;
+        return new DOMContext(this.doc, this.append, function (action) {
+            var newAction = f(action);
+            if (newAction !== undefined) {
+                _this.dispatch(newAction);
+            }
+        });
+    };
+    DOMContext.prototype.withAppendToReference = function () {
+        var ref = this.doc.createTextNode('');
+        this.append(ref);
+        return {
+            ctx: this.withAppend(dom_1.insertFBefore(ref)),
+            ref: ref
+        };
+    };
+    DOMContext.prototype.withAppend = function (append) {
+        return new DOMContext(this.doc, append, this.dispatch);
+    };
+    DOMContext.prototype.withDispatch = function (dispatch) {
+        return new DOMContext(this.doc, this.append, dispatch);
+    };
+    DOMContext.prototype.withInterceptDispatch = function (dispatch) {
+        var _this = this;
+        return new DOMContext(this.doc, this.append, function (action) {
+            dispatch(action);
+            _this.dispatch(action);
+        });
+    };
+    return DOMContext;
+}());
+exports.DOMContext = DOMContext;
+
+},{"./impl/dom":"lbKn"}],"UPGL":[function(require,module,exports) {
 "use strict";
 /*
 Copyright 2019 Google LLC
@@ -7788,1727 +9145,219 @@ exports.Tempo = {
     }
 };
 
-},{"./context":"OJrv","./impl/dom_builder":"yiha","./impl/html":"aXl4"}],"o25q":[function(require,module,exports) {
+},{"./context":"OJrv","./impl/dom_builder":"yiha","./impl/html":"aXl4"}],"MWVc":[function(require,module,exports) {
 "use strict";
-/*
-Copyright 2019 Google LLC
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-    https://www.apache.org/licenses/LICENSE-2.0
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-*/
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.ofIterableIterator = exports.remove = exports.distinctByPredicate = exports.distinctPrimitive = exports.fill = exports.numbersRange = exports.range = exports.sort = exports.makeCompare = exports.concat = exports.each = exports.any = exports.all = exports.foldLeft = exports.flatten = exports.filter = exports.hasValues = exports.isEmpty = exports.makeEquals = exports.equals = exports.tail = exports.head = exports.flatMap = exports.map = void 0;
-/**
- * Utility functions to manipulate `Array` values.
- */
-var maybe_1 = require("./maybe");
-var objects_1 = require("./objects");
-function map(arr, f) {
-    var length = arr.length;
-    var buff = new Array(length);
-    for (var i = 0; i < length; i++) {
-        buff[i] = f(arr[i]);
-    }
-    return buff;
-}
-exports.map = map;
-function flatMap(arr, f) {
-    var buff = new Array();
-    for (var _i = 0, arr_1 = arr; _i < arr_1.length; _i++) {
-        var el = arr_1[_i];
-        buff.push.apply(buff, f(el));
-    }
-    return buff;
-}
-exports.flatMap = flatMap;
-function head(arr) {
-    return arr.length > 0 ? arr[0] : maybe_1.nothing;
-}
-exports.head = head;
-function tail(arr) {
-    return arr.slice(1);
-}
-exports.tail = tail;
-function equals(a, b, predicate) {
-    if (a.length !== b.length)
-        return false;
-    else {
-        for (var i = 0; i < a.length; i++) {
-            if (!predicate(a[i], b[i]))
-                return false;
-        }
-        return true;
-    }
-}
-exports.equals = equals;
-function makeEquals(predicate) {
-    return function (a, b) {
-        return equals(a, b, predicate);
-    };
-}
-exports.makeEquals = makeEquals;
-function isEmpty(arr) {
-    return arr.length === 0;
-}
-exports.isEmpty = isEmpty;
-function hasValues(arr) {
-    return arr.length > 0;
-}
-exports.hasValues = hasValues;
-function filter(arr, predicate) {
-    var buff = [];
-    for (var _i = 0, arr_2 = arr; _i < arr_2.length; _i++) {
-        var a = arr_2[_i];
-        if (predicate(a))
-            buff.push(a);
-    }
-    return buff;
-}
-exports.filter = filter;
-function flatten(arr) {
-    var _a;
-    return (_a = []).concat.apply(_a, arr);
-}
-exports.flatten = flatten;
-function foldLeft(arr, f, b) {
-    for (var _i = 0, arr_3 = arr; _i < arr_3.length; _i++) {
-        var a = arr_3[_i];
-        b = f(b, a);
-    }
-    return b;
-}
-exports.foldLeft = foldLeft;
-function all(arr, predicate) {
-    for (var _i = 0, arr_4 = arr; _i < arr_4.length; _i++) {
-        var a = arr_4[_i];
-        if (!predicate(a)) {
-            return false;
-        }
-    }
-    return true;
-}
-exports.all = all;
-function any(arr, predicate) {
-    for (var _i = 0, arr_5 = arr; _i < arr_5.length; _i++) {
-        var a = arr_5[_i];
-        if (predicate(a)) {
-            return true;
-        }
-    }
-    return false;
-}
-exports.any = any;
-function each(arr, f) {
-    for (var _i = 0, arr_6 = arr; _i < arr_6.length; _i++) {
-        var a = arr_6[_i];
-        f(a);
-    }
-}
-exports.each = each;
-function concat() {
-    var _a;
-    var arrs = [];
-    for (var _i = 0; _i < arguments.length; _i++) {
-        arrs[_i] = arguments[_i];
-    }
-    return (_a = []).concat.apply(_a, arrs);
-}
-exports.concat = concat;
-function makeCompare(comparef, shorterFirst) {
-    if (shorterFirst === void 0) { shorterFirst = true; }
-    return function (a, b) {
-        if (a.length < b.length) {
-            return -1 * (shorterFirst ? 1 : -1);
-        }
-        else if (a.length > b.length) {
-            return 1 * (shorterFirst ? 1 : -1);
-        }
-        for (var i = 0; i < a.length; i++) {
-            var ord = comparef(a[i], b[i]);
-            if (ord !== 0)
-                return ord;
-        }
-        return 0;
-    };
-}
-exports.makeCompare = makeCompare;
-function sort(compare, arr) {
-    return arr.slice().sort(compare);
-}
-exports.sort = sort;
-function range(length, f) {
-    var buff = new Array(length);
-    for (var i = 0; i < length; i++)
-        buff[i] = f(i);
-    return buff;
-}
-exports.range = range;
-function numbersRange(length, startAt) {
-    if (startAt === void 0) { startAt = 0; }
-    return range(length, function (i) { return startAt + i; });
-}
-exports.numbersRange = numbersRange;
-function fill(length, value) {
-    return range(length, function () { return value; });
-}
-exports.fill = fill;
-function distinctPrimitive(values) {
-    return Array.from(new Set(values));
-}
-exports.distinctPrimitive = distinctPrimitive;
-function distinctByPredicate(values, predicate) {
-    var map = {};
-    values.forEach(function (v) {
-        map[predicate(v)] = v;
-    });
-    return objects_1.keys(map).map(function (k) { return map[k]; });
-}
-exports.distinctByPredicate = distinctByPredicate;
-function remove(arr, item, predicate) {
-    var index;
-    if (predicate !== undefined) {
-        index = arr.findIndex(predicate);
-    }
-    else {
-        index = arr.indexOf(item);
-    }
-    if (index < 0) {
-        return false;
-    }
-    else {
-        arr.splice(index, 1);
-        return true;
-    }
-}
-exports.remove = remove;
-function ofIterableIterator(it) {
-    var buff = [];
-    for (var r = it.next(); !r.done; r = it.next()) {
-        buff.push(r.value);
-    }
-    return buff;
-}
-exports.ofIterableIterator = ofIterableIterator;
-
-},{"./maybe":"pwth","./objects":"g3Xg"}],"NUZN":[function(require,module,exports) {
-"use strict";
-/*
-Copyright 2019 Google LLC
-Licensed under the Apache License, Version 2.0 (the "License")
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-    https://www.apache.org/licenses/LICENSE-2.0
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-*/
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.spread = exports.combine = exports.swap = exports.recoverFromError = exports.recover = exports.firstSuccess = exports.each = exports.any = exports.all = exports.foldLeft = exports.cataLazy = exports.cata = exports.match = exports.flatten = exports.toOption = exports.toMaybe = exports.toArray = exports.toBoolean = exports.getOrElseLazy = exports.getOrElse = exports.getOrThrow = exports.filterLazy = exports.filter = exports.isSuccess = exports.isFailure = exports.makeEquals = exports.equals = exports.flatMapNWithCombine = exports.flatMapN = exports.flatMap = exports.mapNWithCombine = exports.mapN = exports.mapError = exports.map = exports.forEach = exports.apNWithCombine = exports.apN = exports.ap = exports.ofNullable = exports.failure = exports.success = void 0;
-var maybe_1 = require("./maybe");
-var arrays_1 = require("./arrays");
-var option_1 = require("./option");
-function success(value) { return { kind: 'Success', value: value }; }
-exports.success = success;
-function failure(error) { return { kind: 'Failure', error: error }; }
-exports.failure = failure;
-function ofNullable(value, error) {
-    if (value == null)
-        return failure(error);
-    else
-        return success(value);
-}
-exports.ofNullable = ofNullable;
-function ap(result, resultf) {
-    return flatten(map(resultf, function (f) { return map(result, function (v) { return f(v); }); }));
-}
-exports.ap = ap;
-function apN() {
-    var args = [];
-    for (var _i = 0; _i < arguments.length; _i++) {
-        args[_i] = arguments[_i];
-    }
-    var f = args.pop();
-    if (f.kind === 'Failure')
-        return f;
-    for (var _a = 0, args_1 = args; _a < args_1.length; _a++) {
-        var a = args_1[_a];
-        if (a.kind === 'Failure')
-            return a;
-    }
-    var results = arrays_1.map(args, function (a) { return a.value; });
-    return success(f.value.apply(f, results));
-}
-exports.apN = apN;
-function apNWithCombine() {
-    var _a;
-    var args = [];
-    for (var _i = 0; _i < arguments.length; _i++) {
-        args[_i] = arguments[_i];
-    }
-    var combineErrors = args.pop();
-    var f = args.pop();
-    var err = null;
-    if (f.kind === 'Failure')
-        err = f.error;
-    for (var _b = 0, args_2 = args; _b < args_2.length; _b++) {
-        var a = args_2[_b];
-        if (a.kind === 'Failure') {
-            if (err !== null) {
-                err = combineErrors(err, a.error);
-            }
-            else {
-                err = a.error;
-            }
-        }
-    }
-    if (err !== null) {
-        return failure(err);
-    }
-    else {
-        var results = arrays_1.map(args, function (a) { return a.value; });
-        return success((_a = f).value.apply(_a, results));
-    }
-}
-exports.apNWithCombine = apNWithCombine;
-function forEach(result, f) {
-    switch (result.kind) {
-        case 'Failure': return;
-        case 'Success': f(result.value);
-    }
-}
-exports.forEach = forEach;
-function map(result, f) {
-    switch (result.kind) {
-        case 'Failure': return result;
-        case 'Success': return success(f(result.value));
-    }
-}
-exports.map = map;
-function mapError(result, f) {
-    switch (result.kind) {
-        case 'Failure': return failure(f(result.error));
-        case 'Success': return success(result.value);
-    }
-}
-exports.mapError = mapError;
-function mapN() {
-    var args = [];
-    for (var _i = 0; _i < arguments.length; _i++) {
-        args[_i] = arguments[_i];
-    }
-    var f = args.pop();
-    for (var _a = 0, args_3 = args; _a < args_3.length; _a++) {
-        var a = args_3[_a];
-        if (a.kind === 'Failure')
-            return a;
-    }
-    var results = arrays_1.map(args, function (a) { return a.value; });
-    return success(f.apply(void 0, results));
-}
-exports.mapN = mapN;
-function mapNWithCombine() {
-    var args = [];
-    for (var _i = 0; _i < arguments.length; _i++) {
-        args[_i] = arguments[_i];
-    }
-    var combineErrors = args.pop();
-    var f = args.pop();
-    var error = null;
-    for (var _a = 0, args_4 = args; _a < args_4.length; _a++) {
-        var a = args_4[_a];
-        if (a.kind === 'Failure') {
-            if (error !== null)
-                error = combineErrors(error, a.error);
-            else
-                error = a.error;
-        }
-    }
-    if (error !== null) {
-        return failure(error);
-    }
-    else {
-        var results = arrays_1.map(args, function (a) { return a.value; });
-        return success(f.apply(void 0, results));
-    }
-}
-exports.mapNWithCombine = mapNWithCombine;
-function flatMap(result, f) {
-    switch (result.kind) {
-        case 'Failure': return result;
-        case 'Success': return f(result.value);
-    }
-}
-exports.flatMap = flatMap;
-function flatMapN() {
-    var args = [];
-    for (var _i = 0; _i < arguments.length; _i++) {
-        args[_i] = arguments[_i];
-    }
-    var f = args.pop();
-    for (var _a = 0, args_5 = args; _a < args_5.length; _a++) {
-        var a = args_5[_a];
-        if (a.kind === 'Failure') {
-            return a;
-        }
-    }
-    var results = arrays_1.map(args, function (a) { return a.value; });
-    return f.apply(void 0, results);
-}
-exports.flatMapN = flatMapN;
-function flatMapNWithCombine() {
-    var args = [];
-    for (var _i = 0; _i < arguments.length; _i++) {
-        args[_i] = arguments[_i];
-    }
-    var combineErrors = args.pop();
-    var f = args.pop();
-    var error = null;
-    for (var _a = 0, args_6 = args; _a < args_6.length; _a++) {
-        var a = args_6[_a];
-        if (a.kind === 'Failure') {
-            if (error !== null)
-                error = combineErrors(error, a.error);
-            else
-                error = a.error;
-        }
-    }
-    if (error !== null) {
-        return failure(error);
-    }
-    else {
-        var results = arrays_1.map(args, function (a) { return a.value; });
-        return f.apply(void 0, results);
-    }
-}
-exports.flatMapNWithCombine = flatMapNWithCombine;
-function equals(a, b, predicate) {
-    if (a.kind !== b.kind)
-        return false;
-    else if (a.kind === 'Failure' && b.kind === 'Failure')
-        return true;
-    else
-        return predicate(a.value, b.value);
-}
-exports.equals = equals;
-function makeEquals(predicate) {
-    return function (a, b) {
-        return equals(a, b, predicate);
-    };
-}
-exports.makeEquals = makeEquals;
-function isFailure(result) {
-    return result.kind === 'Failure';
-}
-exports.isFailure = isFailure;
-function isSuccess(result) {
-    return result.kind === 'Success';
-}
-exports.isSuccess = isSuccess;
-function filter(result, predicate, error) {
-    switch (result.kind) {
-        case 'Failure': return result;
-        case 'Success':
-            if (predicate(result.value)) {
-                return result;
-            }
-            else {
-                return failure(error);
-            }
-    }
-}
-exports.filter = filter;
-function filterLazy(result, predicate, errorf) {
-    switch (result.kind) {
-        case 'Failure': return result;
-        case 'Success':
-            if (predicate(result.value)) {
-                return result;
-            }
-            else {
-                return failure(errorf());
-            }
-    }
-}
-exports.filterLazy = filterLazy;
-function getOrThrow(result) {
-    switch (result.kind) {
-        case 'Failure': throw result.error;
-        case 'Success': return result.value;
-    }
-}
-exports.getOrThrow = getOrThrow;
-function getOrElse(result, alt) {
-    switch (result.kind) {
-        case 'Failure': return alt;
-        case 'Success': return result.value;
-    }
-}
-exports.getOrElse = getOrElse;
-function getOrElseLazy(result, alt) {
-    switch (result.kind) {
-        case 'Failure': return alt();
-        case 'Success': return result.value;
-    }
-}
-exports.getOrElseLazy = getOrElseLazy;
-function toBoolean(result) {
-    switch (result.kind) {
-        case 'Failure': return false;
-        case 'Success': return true;
-    }
-}
-exports.toBoolean = toBoolean;
-function toArray(result) {
-    switch (result.kind) {
-        case 'Failure': return [];
-        case 'Success': return [result.value];
-    }
-}
-exports.toArray = toArray;
-function toMaybe(result) {
-    switch (result.kind) {
-        case 'Failure': return maybe_1.nothing;
-        case 'Success': return maybe_1.just(result.value);
-    }
-}
-exports.toMaybe = toMaybe;
-function toOption(result) {
-    switch (result.kind) {
-        case 'Failure': return option_1.none;
-        case 'Success': return option_1.some(result.value);
-    }
-}
-exports.toOption = toOption;
-function flatten(result) {
-    switch (result.kind) {
-        case 'Failure': return failure(result.error);
-        case 'Success': return result.value;
-    }
-}
-exports.flatten = flatten;
-function match(result, f, fErr) {
-    switch (result.kind) {
-        case 'Success': return f(result.value);
-        case 'Failure': return fErr(result.error);
-    }
-}
-exports.match = match;
-function cata(result, f, ifNone) {
-    switch (result.kind) {
-        case 'Failure': return ifNone;
-        case 'Success': return f(result.value);
-    }
-}
-exports.cata = cata;
-function cataLazy(result, f, ifNone) {
-    switch (result.kind) {
-        case 'Failure': return ifNone();
-        case 'Success': return f(result.value);
-    }
-}
-exports.cataLazy = cataLazy;
-function foldLeft(result, f, b) {
-    switch (result.kind) {
-        case 'Failure': return b;
-        case 'Success': return f(b, result.value);
-    }
-}
-exports.foldLeft = foldLeft;
-function all(result, f) {
-    switch (result.kind) {
-        case 'Failure': return true;
-        case 'Success': return f(result.value);
-    }
-}
-exports.all = all;
-function any(result, f) {
-    switch (result.kind) {
-        case 'Failure': return false;
-        case 'Success': return f(result.value);
-    }
-}
-exports.any = any;
-function each(result, f) {
-    switch (result.kind) {
-        case 'Failure': return;
-        case 'Success': return f(result.value);
-    }
-}
-exports.each = each;
-function firstSuccess() {
-    var args = [];
-    for (var _i = 0; _i < arguments.length; _i++) {
-        args[_i] = arguments[_i];
-    }
-    for (var _a = 0, args_7 = args; _a < args_7.length; _a++) {
-        var a = args_7[_a];
-        if (isSuccess(a))
-            return a;
-    }
-    for (var _b = 0, args_8 = args; _b < args_8.length; _b++) {
-        var a = args_8[_b];
-        return a;
-    }
-    throw 'cannot use `firstSuccess` with empty argument list';
-}
-exports.firstSuccess = firstSuccess;
-function recover(result, whenFailure) {
-    switch (result.kind) {
-        case 'Failure': return success(whenFailure);
-        case 'Success': return result;
-    }
-}
-exports.recover = recover;
-function recoverFromError(result, whenFailuref) {
-    switch (result.kind) {
-        case 'Failure': return success(whenFailuref(result.error));
-        case 'Success': return result;
-    }
-}
-exports.recoverFromError = recoverFromError;
-function swap(result) {
-    switch (result.kind) {
-        case 'Failure': return success(result.error);
-        case 'Success': return failure(result.value);
-    }
-}
-exports.swap = swap;
-function combine(a, b) {
-    return mapN(a, b, function (a, b) { return [a, b]; });
-}
-exports.combine = combine;
-function spread(f, v) {
-    return map(v, function (t) { return f(t[0], t[1]); });
-}
-exports.spread = spread;
-
-},{"./maybe":"pwth","./arrays":"o25q","./option":"pF3E"}],"pF3E":[function(require,module,exports) {
-"use strict";
-/*
-Copyright 2019 Google LLC
-Licensed under the Apache License, Version 2.0 (the "License")
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-    https://www.apache.org/licenses/LICENSE-2.0
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-*/
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.spread = exports.combine = exports.recoverLazy = exports.recover = exports.firstSome = exports.each = exports.any = exports.all = exports.foldLeft = exports.cataLazy = exports.cata = exports.flatten = exports.toResultLazy = exports.toResult = exports.toArray = exports.toBoolean = exports.getOrElseLazy = exports.getOrElse = exports.getUnsafe = exports.toMaybe = exports.getOrThrow = exports.filter = exports.isSome = exports.isNone = exports.makeEquals = exports.equals = exports.flatMapN = exports.flatMap = exports.mapN = exports.map = exports.apN = exports.ap = exports.ofValue = exports.none = exports.some = void 0;
-var arrays_1 = require("./arrays");
-var result_1 = require("./result");
-function some(value) {
-    return { kind: 'Some', value: value };
-}
-exports.some = some;
-exports.none = { kind: 'None' };
-function ofValue(value) {
-    if (value == null)
-        return exports.none;
-    else
-        return some(value);
-}
-exports.ofValue = ofValue;
-function ap(opt, optf) {
-    return flatten(map(optf, function (f) { return map(opt, function (v) { return f(v); }); }));
-}
-exports.ap = ap;
-function apN() {
-    var args = [];
-    for (var _i = 0; _i < arguments.length; _i++) {
-        args[_i] = arguments[_i];
-    }
-    var f = args.pop();
-    if (f.kind === 'None')
-        return exports.none;
-    for (var _a = 0, args_1 = args; _a < args_1.length; _a++) {
-        var a = args_1[_a];
-        if (a.kind === 'None')
-            return exports.none;
-    }
-    var results = arrays_1.map(args, function (a) { return a.value; });
-    return some(f.value.apply(f, results));
-}
-exports.apN = apN;
-function map(opt, f) {
-    switch (opt.kind) {
-        case 'None': return opt;
-        case 'Some': return some(f(opt.value));
-    }
-}
-exports.map = map;
-function mapN() {
-    var args = [];
-    for (var _i = 0; _i < arguments.length; _i++) {
-        args[_i] = arguments[_i];
-    }
-    var f = args.pop();
-    for (var _a = 0, args_2 = args; _a < args_2.length; _a++) {
-        var a = args_2[_a];
-        if (a.kind === 'None')
-            return exports.none;
-    }
-    var results = arrays_1.map(args, function (a) { return a.value; });
-    return some(f.apply(void 0, results));
-}
-exports.mapN = mapN;
-function flatMap(opt, f) {
-    switch (opt.kind) {
-        case 'None': return opt;
-        case 'Some': return f(opt.value);
-    }
-}
-exports.flatMap = flatMap;
-function flatMapN() {
-    var args = [];
-    for (var _i = 0; _i < arguments.length; _i++) {
-        args[_i] = arguments[_i];
-    }
-    var f = args.pop();
-    for (var _a = 0, args_3 = args; _a < args_3.length; _a++) {
-        var a = args_3[_a];
-        if (a.kind === 'None')
-            return exports.none;
-    }
-    var results = arrays_1.map(args, function (a) { return a.value; });
-    return f.apply(void 0, results);
-}
-exports.flatMapN = flatMapN;
-function equals(a, b, predicate) {
-    if (a.kind !== b.kind)
-        return false;
-    else if (a.kind === 'None' && b.kind === 'None')
-        return true;
-    else
-        return predicate(a.value, b.value);
-}
-exports.equals = equals;
-function makeEquals(predicate) {
-    return function (a, b) {
-        return equals(a, b, predicate);
-    };
-}
-exports.makeEquals = makeEquals;
-function isNone(option) {
-    return option.kind === 'None';
-}
-exports.isNone = isNone;
-function isSome(option) {
-    return option.kind === 'Some';
-}
-exports.isSome = isSome;
-function filter(option, predicate) {
-    switch (option.kind) {
-        case 'None': return exports.none;
-        case 'Some':
-            if (predicate(option.value)) {
-                return option;
-            }
-            else {
-                return exports.none;
-            }
-    }
-}
-exports.filter = filter;
-function getOrThrow(option, exception) {
-    switch (option.kind) {
-        case 'None': throw exception;
-        case 'Some': return option.value;
-    }
-}
-exports.getOrThrow = getOrThrow;
-function toMaybe(option) {
-    switch (option.kind) {
-        case 'None': return undefined;
-        case 'Some': return option.value;
-    }
-}
-exports.toMaybe = toMaybe;
-function getUnsafe(option) {
-    return getOrThrow(option, 'unable to extract value from None');
-}
-exports.getUnsafe = getUnsafe;
-function getOrElse(option, alt) {
-    switch (option.kind) {
-        case 'None': return alt;
-        case 'Some': return option.value;
-    }
-}
-exports.getOrElse = getOrElse;
-function getOrElseLazy(option, alt) {
-    switch (option.kind) {
-        case 'None': return alt();
-        case 'Some': return option.value;
-    }
-}
-exports.getOrElseLazy = getOrElseLazy;
-function toBoolean(option) {
-    switch (option.kind) {
-        case 'None': return false;
-        case 'Some': return true;
-    }
-}
-exports.toBoolean = toBoolean;
-function toArray(option) {
-    switch (option.kind) {
-        case 'None': return [];
-        case 'Some': return [option.value];
-    }
-}
-exports.toArray = toArray;
-function toResult(option, error) {
-    switch (option.kind) {
-        case 'None': return result_1.failure(error);
-        case 'Some': return result_1.success(option.value);
-    }
-}
-exports.toResult = toResult;
-function toResultLazy(option, errorf) {
-    switch (option.kind) {
-        case 'None': return result_1.failure(errorf());
-        case 'Some': return result_1.success(option.value);
-    }
-}
-exports.toResultLazy = toResultLazy;
-function flatten(option) {
-    switch (option.kind) {
-        case 'None': return exports.none;
-        case 'Some': return option.value;
-    }
-}
-exports.flatten = flatten;
-function cata(f, option, ifNone) {
-    switch (option.kind) {
-        case 'None': return ifNone;
-        case 'Some': return f(option.value);
-    }
-}
-exports.cata = cata;
-function cataLazy(f, option, ifNone) {
-    switch (option.kind) {
-        case 'None': return ifNone();
-        case 'Some': return f(option.value);
-    }
-}
-exports.cataLazy = cataLazy;
-function foldLeft(f, option, b) {
-    switch (option.kind) {
-        case 'None': return b;
-        case 'Some': return f(b, option.value);
-    }
-}
-exports.foldLeft = foldLeft;
-function all(f, option) {
-    switch (option.kind) {
-        case 'None': return true;
-        case 'Some': return f(option.value);
-    }
-}
-exports.all = all;
-function any(f, option) {
-    switch (option.kind) {
-        case 'None': return false;
-        case 'Some': return f(option.value);
-    }
-}
-exports.any = any;
-function each(f, option) {
-    switch (option.kind) {
-        case 'None': return;
-        case 'Some': return f(option.value);
-    }
-}
-exports.each = each;
-function firstSome() {
-    var args = [];
-    for (var _i = 0; _i < arguments.length; _i++) {
-        args[_i] = arguments[_i];
-    }
-    for (var _a = 0, args_4 = args; _a < args_4.length; _a++) {
-        var a = args_4[_a];
-        if (isSome(a))
-            return a;
-    }
-    return exports.none;
-}
-exports.firstSome = firstSome;
-function recover(result, whenFailure) {
-    switch (result.kind) {
-        case 'None': return some(whenFailure);
-        case 'Some': return result;
-    }
-}
-exports.recover = recover;
-function recoverLazy(result, whenFailuref) {
-    switch (result.kind) {
-        case 'None': return some(whenFailuref());
-        case 'Some': return result;
-    }
-}
-exports.recoverLazy = recoverLazy;
-function combine(a, b) {
-    return mapN(a, b, function (a, b) { return [a, b]; });
-}
-exports.combine = combine;
-function spread(f, v) {
-    return map(v, function (t) { return f(t[0], t[1]); });
-}
-exports.spread = spread;
-
-},{"./arrays":"o25q","./result":"NUZN"}],"fPXN":[function(require,module,exports) {
-"use strict";
-/*
-Copyright 2019 Google LLC
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-    https://www.apache.org/licenses/LICENSE-2.0
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-*/
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.NewtypeClass = void 0;
-/**
- * Usage:
- *
- * ```ts
- * export interface Int extends Newtype<
- *   number,
- *   { readonly Int: unique symbol }
- * > {}
- *
- * export const Int = new class extends NewtypeClass<Int> {
- *   isValid(v: number) { return Number.isInteger(v) }
- * }()
- * ```
- */
-var option_1 = require("./option");
-var NewtypeClass = /** @class */ (function () {
-    function NewtypeClass() {
-    }
-    NewtypeClass.prototype.unsafeOf = function (v) {
-        return v;
-    };
-    NewtypeClass.prototype.of = function (v) {
-        return option_1.ofValue(this.maybeOf(v));
-    };
-    NewtypeClass.prototype.maybeOf = function (v) {
-        return this.isValid(v) ? v : undefined;
-    };
-    NewtypeClass.prototype.get = function (v) {
-        return v;
-    };
-    NewtypeClass.prototype.maybeModify = function (f) {
-        var _this = this;
-        return function (value) { return _this.maybeOf(f(_this.get(value))); };
-    };
-    NewtypeClass.prototype.modify = function (f) {
-        var mf = this.maybeModify(f);
-        return function (value) { return option_1.ofValue(mf(value)); };
-    };
-    NewtypeClass.prototype.unsafeModify = function (f) {
-        var _this = this;
-        return function (value) { return _this.unsafeOf(f(_this.get(value))); };
-    };
-    return NewtypeClass;
-}());
-exports.NewtypeClass = NewtypeClass;
-
-},{"./option":"pF3E"}],"MFoz":[function(require,module,exports) {
-"use strict";
-/*
-Copyright 2019 Google LLC
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-    https://www.apache.org/licenses/LICENSE-2.0
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-*/
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.toString = exports.UUID = exports.create = void 0;
-/**
- * Helper functions to generate and validate [UUID](http://en.wikipedia.org/wiki/Universally_unique_identifier)
- * strings (version 4).
- */
-var newtype_1 = require("./newtype");
-var random = function (max) { return Math.floor(Math.random() * max); };
-var srandom = function () { return '0123456789abcdef'.charAt(random(0x10)); };
-/**
- * `Uuid.create()` returns a string value representing a random UUID string.
- */
-function create() {
-    var s = [];
-    var i = 0;
-    for (i = 0; i < 8; i++)
-        s[i] = srandom();
-    s[8] = '-';
-    for (i = 9; i < 13; i++)
-        s[i] = srandom();
-    s[13] = '-';
-    s[14] = '4';
-    for (i = 15; i < 18; i++)
-        s[i] = srandom();
-    s[18] = '-';
-    s[19] = '89AB'.charAt(random(0x3));
-    for (i = 20; i < 23; i++)
-        s[i] = srandom();
-    s[23] = '-';
-    for (i = 24; i < 36; i++)
-        s[i] = srandom();
-    return exports.UUID.unsafeOf(s.join(''));
-}
-exports.create = create;
-var pattern = /^[0123456789abcdef]{8}-[0123456789abcdef]{4}-4[0123456789abcdef]{3}-[89ab][0123456789abcdef]{3}-[0123456789abcdef]{12}$/i;
-exports.UUID = new /** @class */ (function (_super) {
-    __extends(class_1, _super);
-    function class_1() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    class_1.prototype.isValid = function (uuid) { return pattern.test(uuid); };
-    return class_1;
-}(newtype_1.NewtypeClass))();
-function toString(uuid) {
-    return exports.UUID.get(uuid);
-}
-exports.toString = toString;
-
-},{"./newtype":"fPXN"}],"mIWh":[function(require,module,exports) {
-"use strict";
-/*
-Copyright 2019 Google LLC
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-    https://www.apache.org/licenses/LICENSE-2.0
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-*/
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.emptyState = exports.createTodo = exports.Filter = void 0;
+exports.runTests = void 0;
 
-var uuid_1 = require("tempo-std/lib/uuid");
+var tslib_1 = require("tslib");
 
-function makeUUID() {
-  return uuid_1.UUID.get(uuid_1.create());
+function setup() {}
+
+function teardown() {
+  document.getElementById('test').innerHTML = '';
 }
 
-var Filter;
+var loadScript = function loadScript(runnerId) {
+  return new Promise(function (resolve, reject) {
+    try {
+      var script_1 = document.createElement('script');
 
-(function (Filter) {
-  Filter[Filter["All"] = 0] = "All";
-  Filter[Filter["Active"] = 1] = "Active";
-  Filter[Filter["Completed"] = 2] = "Completed";
-})(Filter = exports.Filter || (exports.Filter = {}));
+      script_1.onload = function () {
+        console.log("loaded tests for '" + runnerId + "', executing now ...");
+        var anyWin = window;
+        var mod = anyWin.__tests__;
+        delete anyWin.__tests__;
+        document.body.removeChild(script_1);
+        resolve(mod);
+      };
 
-exports.createTodo = function (title) {
-  return {
-    id: makeUUID(),
-    title: title,
-    completed: false
-  };
-};
-
-exports.emptyState = function () {
-  return {
-    filter: Filter.All,
-    filtered: [],
-    todos: [],
-    completed: 0,
-    adding: undefined,
-    editing: undefined
-  };
-};
-},{"tempo-std/lib/uuid":"MFoz"}],"pSX2":[function(require,module,exports) {
-"use strict";
-/*
-Copyright 2019 Google LLC
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-    https://www.apache.org/licenses/LICENSE-2.0
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-*/
-
-var __assign = this && this.__assign || function () {
-  __assign = Object.assign || function (t) {
-    for (var s, i = 1, n = arguments.length; i < n; i++) {
-      s = arguments[i];
-
-      for (var p in s) {
-        if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
-      }
+      script_1.src = "./" + runnerId + "/main.js";
+      document.body.appendChild(script_1);
+    } catch (e) {
+      reject(e);
     }
-
-    return t;
-  };
-
-  return __assign.apply(this, arguments);
+  });
 };
 
-var __spreadArrays = this && this.__spreadArrays || function () {
-  for (var s = 0, i = 0, il = arguments.length; i < il; i++) {
-    s += arguments[i].length;
-  }
-
-  for (var r = Array(s), k = 0, i = 0; i < il; i++) {
-    for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++) {
-      r[k] = a[j];
-    }
-  }
-
-  return r;
-};
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.reducer = void 0;
-
-var state_1 = require("./state");
-
-var arrays_1 = require("tempo-std/lib/arrays");
-
-var filterF = function filterF(filter) {
-  if (filter === state_1.Filter.All) {
-    return function (_) {
-      return true;
-    };
-  } else if (filter === state_1.Filter.Completed) {
-    return function (todo) {
-      return todo.completed;
-    };
-  } else {
-    return function (todo) {
-      return !todo.completed;
-    };
-  }
-};
-
-var filterTodos = function filterTodos(todos, filter) {
-  return todos.filter(filterF(filter));
-};
-
-exports.reducer = function (state, action) {
-  switch (action.kind) {
-    case 'adding-todo':
-      if (action.title) {
-        return __assign(__assign({}, state), {
-          adding: action.title
-        });
-      } else {
-        return __assign(__assign({}, state), {
-          adding: undefined
-        });
-      }
-
-    case 'create-todo':
-      if (action.title) {
-        var todos_1 = state.todos.concat([state_1.createTodo(action.title)]);
-        var filtered_1 = filterTodos(todos_1, state.filter);
-        return __assign(__assign({}, state), {
-          todos: todos_1,
-          filtered: filtered_1,
-          completed: todos_1.filter(function (todo) {
-            return todo.completed;
-          }).length,
-          adding: undefined
-        });
-      } else {
-        return __assign(__assign({}, state), {
-          adding: undefined
-        });
-      }
-
-    case 'editing-todo':
-      return __assign(__assign({}, state), {
-        editing: {
-          id: action.id,
-          title: action.title
-        }
-      });
-
-    case 'cancel-adding-todo':
-      return __assign(__assign({}, state), {
-        adding: undefined
-      });
-
-    case 'cancel-editing-todo':
-      return __assign(__assign({}, state), {
-        editing: undefined
-      });
-
-    case 'clear-completed':
-      var todos = state.todos.filter(function (v) {
-        return !v.completed;
-      });
-      var filtered = filterTodos(todos, state.filter);
-      return __assign(__assign({}, state), {
-        completed: 0,
-        filtered: filtered,
-        todos: todos
-      });
-
-    case 'remove-todo':
-      var todos2 = state.todos.filter(function (v) {
-        return v.id !== action.id;
-      });
-      var filtered2 = filterTodos(todos2, state.filter);
-      return __assign(__assign({}, state), {
-        completed: todos2.filter(function (todo) {
-          return todo.completed;
-        }).length,
-        todos: todos2,
-        filtered: filtered2
-      });
-
-    case 'toggle-completed':
-      var index = state.todos.findIndex(function (v) {
-        return v.id === action.id;
-      });
-      var current = state.todos[index];
-
-      var todo = __assign(__assign({}, current), {
-        completed: !current.completed
-      });
-
-      var todos3 = __spreadArrays(state.todos.slice(0, index), [todo], state.todos.slice(index + 1));
-
-      var filtered3 = filterTodos(todos3, state.filter);
-      return __assign(__assign({}, state), {
-        completed: todos3.filter(function (todo) {
-          return todo.completed;
-        }).length,
-        todos: todos3,
-        filtered: filtered3
-      });
-
-    case 'toggle-all-todo':
-      var allCompleted_1 = state.completed === state.todos.length;
-      var todos4 = arrays_1.map(state.todos, function (todo) {
-        if (todo.completed !== allCompleted_1) {
-          return todo;
-        } else {
-          return __assign(__assign({}, todo), {
-            completed: !allCompleted_1
-          });
-        }
-      });
-      var filtered4 = filterTodos(todos4, state.filter);
-      return __assign(__assign({}, state), {
-        todos: todos4,
-        filtered: filtered4,
-        completed: allCompleted_1 ? 0 : state.todos.length
-      });
-
-    case 'toggle-filter':
-      var filtered5 = filterTodos(state.todos, action.filter);
-      return __assign(__assign({}, state), {
-        filtered: filtered5,
-        filter: action.filter
-      });
-
-    case 'update-todo':
-      var index2 = state.todos.findIndex(function (o) {
-        return o.id === action.id;
-      });
-
-      if (index2 >= 0) {
-        var updated = {
-          id: action.id,
-          title: action.title,
-          completed: state.todos[index2].completed
-        };
-
-        var todos_2 = __spreadArrays(state.todos.slice(0, index2), [updated], state.todos.slice(index2 + 1));
-
-        var filtered_2 = filterTodos(todos_2, state.filter);
-        return __assign(__assign({}, state), {
-          editing: undefined,
-          completed: todos_2.filter(function (todo) {
-            return todo.completed;
-          }).length,
-          todos: todos_2,
-          filtered: filtered_2
-        });
-      } else {
-        return __assign(__assign({}, state), {
-          editing: undefined
-        });
-      }
-
-    default:
-      throw 'unreacheable code';
-  }
-};
-},{"./state":"mIWh","tempo-std/lib/arrays":"o25q"}],"FLek":[function(require,module,exports) {
-"use strict";
-/*
-Copyright 2019 Google LLC
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-    https://www.apache.org/licenses/LICENSE-2.0
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-*/
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.Action = exports.UpdateTodo = exports.ToggleAllTodo = exports.ToggleTodo = exports.ToggleFilter = exports.RemoveTodo = exports.EditingTodo = exports.ClearCompleted = exports.CancelEditingTodo = exports.CancelAddingTodo = exports.CreateTodo = exports.AddingTodo = void 0;
-
-var AddingTodo =
-/** @class */
-function () {
-  function AddingTodo(title) {
-    this.title = title;
-    this.kind = 'adding-todo';
-  }
-
-  return AddingTodo;
-}();
-
-exports.AddingTodo = AddingTodo;
-
-var CreateTodo =
-/** @class */
-function () {
-  function CreateTodo(title) {
-    this.title = title;
-    this.kind = 'create-todo';
-  }
-
-  return CreateTodo;
-}();
-
-exports.CreateTodo = CreateTodo;
-
-var CancelAddingTodo =
-/** @class */
-function () {
-  function CancelAddingTodo() {
-    this.kind = 'cancel-adding-todo';
-  }
-
-  return CancelAddingTodo;
-}();
-
-exports.CancelAddingTodo = CancelAddingTodo;
-
-var CancelEditingTodo =
-/** @class */
-function () {
-  function CancelEditingTodo() {
-    this.kind = 'cancel-editing-todo';
-  }
-
-  return CancelEditingTodo;
-}();
-
-exports.CancelEditingTodo = CancelEditingTodo;
-
-var ClearCompleted =
-/** @class */
-function () {
-  function ClearCompleted() {
-    this.kind = 'clear-completed';
-  }
-
-  return ClearCompleted;
-}();
-
-exports.ClearCompleted = ClearCompleted;
-
-var EditingTodo =
-/** @class */
-function () {
-  function EditingTodo(id, title) {
-    this.id = id;
-    this.title = title;
-    this.kind = 'editing-todo';
-  }
-
-  return EditingTodo;
-}();
-
-exports.EditingTodo = EditingTodo;
-
-var RemoveTodo =
-/** @class */
-function () {
-  function RemoveTodo(id) {
-    this.id = id;
-    this.kind = 'remove-todo';
-  }
-
-  return RemoveTodo;
-}();
-
-exports.RemoveTodo = RemoveTodo;
-
-var ToggleFilter =
-/** @class */
-function () {
-  function ToggleFilter(filter) {
-    this.filter = filter;
-    this.kind = 'toggle-filter';
-  }
-
-  return ToggleFilter;
-}();
-
-exports.ToggleFilter = ToggleFilter;
-
-var ToggleTodo =
-/** @class */
-function () {
-  function ToggleTodo(id) {
-    this.id = id;
-    this.kind = 'toggle-completed';
-  }
-
-  return ToggleTodo;
-}();
-
-exports.ToggleTodo = ToggleTodo;
-
-var ToggleAllTodo =
-/** @class */
-function () {
-  function ToggleAllTodo() {
-    this.kind = 'toggle-all-todo';
-  }
-
-  return ToggleAllTodo;
-}();
-
-exports.ToggleAllTodo = ToggleAllTodo;
-
-var UpdateTodo =
-/** @class */
-function () {
-  function UpdateTodo(id, title) {
-    this.id = id;
-    this.title = title;
-    this.kind = 'update-todo';
-  }
-
-  return UpdateTodo;
-}();
-
-exports.UpdateTodo = UpdateTodo;
-exports.Action = {
-  adddingTodo: function adddingTodo(title) {
-    return new AddingTodo(title);
-  },
-  createTodo: function createTodo(title) {
-    return new CreateTodo(title);
-  },
-  cancelAddingTodo: new CancelAddingTodo(),
-  cancelEditingTodo: new CancelEditingTodo(),
-  clearCompleted: new ClearCompleted(),
-  editingTodo: function editingTodo(id, title) {
-    return new EditingTodo(id, title);
-  },
-  removeTodo: function removeTodo(id) {
-    return new RemoveTodo(id);
-  },
-  toggleTodo: function toggleTodo(id) {
-    return new ToggleTodo(id);
-  },
-  toggleAllTodo: new ToggleAllTodo(),
-  toggleFilter: function toggleFilter(filter) {
-    return new ToggleFilter(filter);
-  },
-  updateTodo: function updateTodo(id, title) {
-    return new UpdateTodo(id, title);
-  }
-};
-},{}],"yo0O":[function(require,module,exports) {
-"use strict";
-/*
-Copyright 2019 Google LLC
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-    https://www.apache.org/licenses/LICENSE-2.0
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-*/
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.template = void 0;
-
-var html_1 = require("tempo-dom/lib/html");
-
-var action_1 = require("./action");
-
-var state_1 = require("./state");
-
-var changeF = function changeF(filter) {
-  return function (state) {
-    return state.filter === filter ? undefined : action_1.Action.toggleFilter(filter);
-  };
-};
-
-var selectedF = function selectedF(filter) {
-  return function (state) {
-    return state.filter === filter ? 'selected' : undefined;
-  };
-};
-
-var isEditing = function isEditing(state, todo) {
-  return state.editing && state.editing.id === todo.id || false;
-};
-
-exports.template = html_1.Fragment(function ($) {
-  return $.SECTION(function ($) {
-    return $.class('todoapp').DIV(function ($) {
-      return $.HEADER(function ($) {
-        return $.class('header').H1(function ($) {
-          return $.text('todos');
-        }).INPUT_TEXT(function ($) {
-          return $.class('new-todo').placeholder('What needs to be done?').autoFocus(function (s) {
-            return s.editing == null;
-          }).value(function (s) {
-            return s.adding;
-          }).onKeyDown(function (_, ev, input) {
-            if (ev.keyCode === 13) {
-              return action_1.Action.createTodo(input.value.trim());
-            } else if (ev.keyCode === 27) {
-              return action_1.Action.cancelAddingTodo;
-            } else {
-              return action_1.Action.adddingTodo(input.value);
-            }
-          });
-        });
-      }).SECTION(function ($) {
-        return $.class('main').style('visibility', function (s) {
-          return s.todos.length === 0 ? 'hidden' : '';
-        }).INPUT_CHECKBOX(function ($) {
-          return $.id('toggle-all').class('toggle-all').checked(function (s) {
-            return s.completed === s.todos.length;
-          }).onClick(function () {
-            return action_1.Action.toggleAllTodo;
-          });
-        }).LABEL(function ($) {
-          return $.for('toggle-all').text('Mark all as complete');
-        }).UL(function ($) {
-          return $.class('todo-list').Iterate(function (s) {
-            return s.filtered;
-          }, function ($) {
-            return $.LI(function ($) {
-              return $.class(function (_a) {
-                var todo = _a[0],
-                    state = _a[1];
-                return {
-                  completed: todo.completed,
-                  editing: isEditing(state, todo)
-                };
-              }).DIV(function ($) {
-                return $.class('view').INPUT_CHECKBOX(function ($) {
-                  return $.class('toggle').checked(function (_a) {
-                    var todo = _a[0];
-                    return todo.completed;
-                  }).onChange(function (_a) {
-                    var todo = _a[0];
-                    return action_1.Action.toggleTodo(todo.id);
-                  });
-                }).LABEL(function ($) {
-                  return $.onDblClick(function (_a) {
-                    var todo = _a[0];
-                    return action_1.Action.editingTodo(todo.id, todo.title);
-                  }).text(function (_a) {
-                    var todo = _a[0];
-                    return todo.title;
-                  });
-                }).BUTTON(function ($) {
-                  return $.class('destroy').onClick(function (_a) {
-                    var todo = _a[0];
-                    return action_1.Action.removeTodo(todo.id);
-                  });
-                });
-              }).When(function (_a) {
-                var todo = _a[0],
-                    state = _a[1];
-                return isEditing(state, todo);
-              }, function ($) {
-                return $.INPUT_TEXT(function ($) {
-                  return $.class('edit').value(function (_a) {
-                    var _ = _a[0],
-                        state = _a[1];
-                    return state.editing && state.editing.title;
-                  }).onKeyDown(function (_a, ev, input) {
-                    var todo = _a[0];
-
-                    if (ev.keyCode === 13) {
-                      var value = input.value.trim();
-
-                      if (value !== '') {
-                        return action_1.Action.updateTodo(todo.id, value);
-                      } else {
-                        return action_1.Action.removeTodo(todo.id);
-                      }
-                    } else if (ev.keyCode === 27) {
-                      return action_1.Action.cancelEditingTodo;
-                    } else {
-                      return action_1.Action.editingTodo(todo.id, input.value);
-                    }
-                  }).onBlur(function (_a, _, el) {
-                    var todo = _a[0];
-                    var input = el;
-                    var value = input.value.trim();
-
-                    if (value !== '') {
-                      return action_1.Action.updateTodo(todo.id, value);
-                    } else {
-                      return action_1.Action.removeTodo(todo.id);
-                    }
-                  });
-                });
+var makeSuite = function makeSuite(runnerId, testDescriptions, options, dispatch) {
+  return new Promise(function (resolve) {
+    return tslib_1.__awaiter(void 0, void 0, void 0, function () {
+      var mod, suite, _loop_1, _i, testDescriptions_1, test;
+
+      return tslib_1.__generator(this, function (_a) {
+        switch (_a.label) {
+          case 0:
+            return [4, loadScript(runnerId)];
+
+          case 1:
+            mod = _a.sent();
+            suite = new Benchmark.Suite();
+
+            _loop_1 = function _loop_1(test) {
+              if (!mod[test.fn]) {
+                console.log("skip (no implementation): " + runnerId + ": " + test.id);
+                dispatch(runnerId, test.id, undefined);
+                return "continue";
+              }
+
+              suite.add({
+                id: test.id,
+                async: true,
+                fn: function fn() {
+                  mod[test.fn](test.args);
+                },
+                name: test.name,
+                setup: setup,
+                teardown: teardown,
+                maxTime: options.maxTime
               });
-            });
-          });
-        });
-      });
-    }).FOOTER(function ($) {
-      return $.class('footer').style('display', function (s) {
-        return s.todos.length === 0 ? 'none' : 'block';
-      }).SPAN(function ($) {
-        return $.class('todo-count').text(function (s) {
-          var left = s.todos.length - s.completed;
+            };
 
-          if (left === 1) {
-            return '1 item left';
-          } else {
-            return left + " items left";
-          }
-        });
-      }).UL(function ($) {
-        return $.class('filters').LI(function ($) {
-          return $.A(function ($) {
-            return $.href('#/').class(selectedF(state_1.Filter.All)).onClick(changeF(state_1.Filter.All)).text('All');
-          });
-        }).LI(function ($) {
-          return $.A(function ($) {
-            return $.href('#/active').class(selectedF(state_1.Filter.Active)).onClick(changeF(state_1.Filter.Active)).text('Active');
-          });
-        }).LI(function ($) {
-          return $.A(function ($) {
-            return $.href('#/completed').class(selectedF(state_1.Filter.Completed)).onClick(changeF(state_1.Filter.Completed)).text('Completed');
-          });
-        });
-      }).When(function (s) {
-        return s.completed > 0;
-      }, function ($) {
-        return $.BUTTON(function ($) {
-          return $.class('clear-completed').onClick(function () {
-            return action_1.Action.clearCompleted;
-          }).text('Clear completed');
-        });
-      });
-    });
-  }).FOOTER(function ($) {
-    return $.class('info').P(function ($) {
-      return $.text('Double-click to edit a todo');
-    }).P(function ($) {
-      return $.text('Created by ').A(function ($) {
-        return $.href('http://github.com/fponticelli');
-      }).text('Franco Ponticelli');
-    }).P(function ($) {
-      return $.text('Part of ').A(function ($) {
-        return $.href('http://todomvc.com').text('TodoMVC');
+            for (_i = 0, testDescriptions_1 = testDescriptions; _i < testDescriptions_1.length; _i++) {
+              test = testDescriptions_1[_i];
+
+              _loop_1(test);
+            }
+
+            suite.on('cycle', function (event) {
+              console.log(runnerId + ": " + String(event.target));
+              dispatch(runnerId, event.target.id, event.target);
+            });
+            suite.on('complete', resolve);
+            suite.run({
+              async: true,
+              queued: true
+            });
+            return [2];
+        }
       });
     });
   });
-});
-},{"tempo-dom/lib/html":"zQMt","./action":"FLek","./state":"mIWh"}],"ZCfc":[function(require,module,exports) {
+};
+
+exports.runTests = function (runnerIds, testDescriptions, options, dispatch) {
+  return tslib_1.__awaiter(void 0, void 0, void 0, function () {
+    var _i, runnerIds_1, id;
+
+    return tslib_1.__generator(this, function (_a) {
+      switch (_a.label) {
+        case 0:
+          _i = 0, runnerIds_1 = runnerIds;
+          _a.label = 1;
+
+        case 1:
+          if (!(_i < runnerIds_1.length)) return [3, 4];
+          id = runnerIds_1[_i];
+          return [4, makeSuite(id, testDescriptions, options, dispatch)];
+
+        case 2:
+          _a.sent();
+
+          _a.label = 3;
+
+        case 3:
+          _i++;
+          return [3, 1];
+
+        case 4:
+          return [2];
+      }
+    });
+  });
+};
+},{"tslib":"vCxL"}],"GrqS":[function(require,module,exports) {
 "use strict";
-/*
-Copyright 2019 Google LLC
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-    https://www.apache.org/licenses/LICENSE-2.0
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-*/
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.middleware = void 0;
+
+var state_1 = require("./state");
+
+var action_1 = require("./action");
+
+var test_runner_1 = require("./test_runner");
+
+var tests_1 = require("./tests");
+
+exports.middleware = function (dispatch) {
+  return function (state, action) {
+    switch (action.kind) {
+      case 'ExecuteSelectedTests':
+        var _a = state_1.getSelectedTests(state),
+            tests = _a.tests,
+            versions = _a.versions;
+
+        dispatch(action_1.Action.executeTests(versions, tests));
+        return;
+
+      case 'ExecuteTests':
+        var versionIds_1 = action.versionIds,
+            testIds = action.testIds;
+        var options_1 = state.options;
+        var set_1 = new Set(testIds);
+        var testsToRun_1 = tests_1.tests.filter(function (test) {
+          return set_1.has(test.id);
+        });
+        setTimeout(function () {
+          test_runner_1.runTests(versionIds_1, testsToRun_1, options_1, function (runnerId, testId, target) {
+            dispatch(action_1.Action.updateResult(runnerId, testId, target));
+          }).then(function () {
+            return dispatch(action_1.Action.testsExecuted());
+          });
+        }, 1);
+        return;
+
+      default:
+    }
+  };
+};
+},{"./state":"mIWh","./action":"FLek","./test_runner":"MWVc","./tests":"cibo"}],"ZMBm":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.createApp = void 0;
+
+var reducer_1 = require("./reducer");
+
+var template_1 = require("./template");
+
+var tempo_1 = require("tempo-dom/lib/tempo");
+
+var middleware_1 = require("./middleware");
+
+exports.createApp = function (state) {
+  var el = document.getElementById('app');
+  tempo_1.Tempo.render({
+    state: state,
+    template: template_1.template,
+    reducer: reducer_1.reducer,
+    el: el,
+    middleware: middleware_1.middleware
+  });
+};
+},{"./reducer":"pSX2","./template":"ywMA","tempo-dom/lib/tempo":"UPGL","./middleware":"GrqS"}],"QCba":[function(require,module,exports) {
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var tempo_1 = require("tempo-dom/lib/tempo"); // import { debounce } from 'tempo-store/lib/emitter'
-// import { DataStore } from './data_store'
+var state_1 = require("./state");
 
+var config_1 = require("./config");
 
-var reducer_1 = require("./reducer");
+var create_app_1 = require("./create_app");
 
-var app_template_1 = require("./app_template");
-
-var state_1 = require("./state"); // const state = DataStore.get()
-// const saveToDataStore = debounce(250)((state: State) => DataStore.set(state))
-// store.property.observable.on(saveToDataStore)
-// store.observable.on(console.log)
-
-
-tempo_1.Tempo.render({
-  state: state_1.emptyState(),
-  reducer: reducer_1.reducer,
-  template: app_template_1.template,
-  delayed: false
+config_1.loadConfig().then(function (config) {
+  return create_app_1.createApp(state_1.createState(config.versions));
 });
-},{"tempo-dom/lib/tempo":"UPGL","./reducer":"pSX2","./app_template":"yo0O","./state":"mIWh"}]},{},["ZCfc"], null)
-//# sourceMappingURL=main.f3e5527c.js.map
+},{"./state":"mIWh","./config":"C9JJ","./create_app":"ZMBm"}]},{},["QCba"], null)
+//# sourceMappingURL=src.7ac04bb1.js.map
