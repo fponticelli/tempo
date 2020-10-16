@@ -25,7 +25,7 @@ export class MatchTemplate<
   State extends ObjectWithPath<Path, any>,
   Action,
   Query
-> implements DOMTemplate<State, Action, Query> {
+  > implements DOMTemplate<State, Action, Query> {
   readonly matcher: {
     [k in TypeAtPath<Path, State>]: DOMTemplate<
       DifferentiateAt<Path, State, k>,
@@ -37,22 +37,16 @@ export class MatchTemplate<
     readonly path: Path,
     matcher: {
       [k in TypeAtPath<Path, State>]:
-        | DOMChild<DifferentiateAt<Path, State, k>, Action, Query>
-        | IBuilder<DifferentiateAt<Path, State, k>, Action, Query>
+      | DOMChild<DifferentiateAt<Path, State, k>, Action, Query>
+      | IBuilder<DifferentiateAt<Path, State, k>, Action, Query>
     }
   ) {
     this.matcher = keys(matcher).reduce(
-      (acc, key) => {
-        acc[key] = childOrBuilderToTemplate(matcher[key])
+      (acc: any, key: string) => {
+        acc[key] = childOrBuilderToTemplate(matcher[key as keyof typeof matcher])
         return acc
       },
-      {} as {
-        [k in TypeAtPath<Path, State>]: DOMTemplate<
-          DifferentiateAt<Path, State, k>,
-          Action,
-          Query
-        >
-      }
+      {}
     )
   }
   render(ctx: DOMContext<Action>, state: State) {

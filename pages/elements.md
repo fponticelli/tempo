@@ -5,30 +5,94 @@ order: 2
 
 # Elements
 
-A template is built by assembling elements together. `@tempo/dom/lib/web` contains all the definitions for all HTML and SVG elements. The are then special elements described below.
+A template is built by assembling elements together. `@tempo/dom/lib/html` contains all the definitions for all HTML SVG elements (`@tempo/dom/lib/svg` for SVG elements).
 
-## tempo_attributes
+## HTML DSL
+
+The best way to describe a Tempo template is to use the provided HTML builders. Each element and transform operation is described both as a function or as a method of the builder to allow chaining and nesting.
+
+For example to create a `<div>` element there is an equivalent `DIV()` function. If you want to have two sibbling `<div>` elements you can chain them using `DIV().DIV()`. To nest elements and attributes you can use an `init` function:
+
+```ts
+DIV(
+  $ => $.class('header').H1($ => $.text('Title'))
+)
+.DIV($ => $.class('body))
+```
+
+This generates the following HTML:
+
+```html
+<div class="header">
+  <h1>Title</h1>
+</div>
+<div class="body"></div>
+```
+
+The Tempo DSL uses a few name conventions to make it simpler to distinguish between the composing members and to avoid name conflicts between attribute, elements and transform methods.
+
+The DSL uses
+
+* all capital-case names for native HTML (and SVG) elements.
+* all lower-case names for element attributes and for the special `text` attribute.
+* capitalized names prefixed with `on` for event handling.
+* capitalized names for lifecycle and transform functions/methods.
+
+Almost all values in the DSL can be either literal values or functions from State to a literal value.
+
+## Tempo Lifecycle
 
 Each DOM element has four additional special attributes:
 
-```ts
-afterrender?:   (state: State, el: El, ctx: DOMContext<Action>) => T | undefined
-beforechange?:  (state: State, el: El, ctx: DOMContext<Action>, value: T | undefined) => T | undefined
-afterchange?:   (state: State, el: El, ctx: DOMContext<Action>, value: T | undefined) => T | undefined
-beforedestroy?: ((el: El, ctx: DOMContext<Action>, value: T | undefined) => void)
-```
+TODO
 
-These special attributes are used to control the life-cycle of the current element. These can be used to mount/update/destroy widgets that are not defined in Tempo and that need to be embedded in your app. The functions receive a reference to the current element.
+## Transform Elements
+
+TODO
 
 ## Map state and action
 
-We already saw `mapState` above. Its counter part `mapAction` is used to transform an `action` from a sub-element up to its ancestors.
+TODO
 
-## forEach
+## Iterate
 
-The `forEach` element takes a state whose shape is an array (`State extends any[]`) and applies individually each element in the array to the children nodes. This is useful for lists or tables.
+TODO
 
-## portal
+Adapter
+LocalAdapter
+Component
+CaptureState
+ReleaseState
+Iterate
+MapState
+MapStateAndKeep
+MapAction
+MapQuery
+Match
+MatchKind
+MatchBool
+MatchValue
+MatchOption
+MatchResult
+MatchAsync
+MatchAsyncResult
+Lazy
+Fragment
+ForEach
+Portal
+PortalWithSelector
+HeadPortal
+BodyPortal
+SimpleComponent
+Unless
+Until
+When
+
+## ForEach
+
+The `ForEach` element takes a state whose shape is an array (`State extends any[]`) and applies individually each element in the array to the children nodes. This is useful for lists or tables.
+
+## Portal
 
 A `portal` allows to mount a node outside of the natural nesting. The portal module provides the following nodes:
 

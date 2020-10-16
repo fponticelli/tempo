@@ -8,10 +8,10 @@ export const reducer = reduceOnKind<State, Action>({
   GoTo: (state, action) => {
     let content = state.content
 
-    if (state.toc.kind === 'Outcome' && state.toc.value.kind === 'Success') {
+    if (state.toc.kind === 'Success') {
       if (action.route.kind === 'Demos') {
         content = success<Content, HttpError>(
-          Content.demos(state.toc.value.value.demos)
+          Content.demos(state.toc.value.demos)
         )
       } else if (action.route.kind === 'Api') {
       }

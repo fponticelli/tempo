@@ -40,20 +40,18 @@ export type Reverse<T extends any[]> = ReverseImpl<T, [], []>
 
 export type Head<T extends any[]> = T extends [infer H, ...any[]] ? H : never
 
-export type Last<T extends any[]> = {
-  n: Last<Tail<T>>
-  one: T extends [infer H] ? H : never
-  empty: never
-}[T extends [] ? 'empty' : T extends [any] ? 'one' : 'n']
+export type Last<T extends any[]> =
+  {
+    n: Last<Tail<T>>
+    one: T extends [infer H] ? H : never
+    empty: never
+  }[T extends [] ? 'empty' : T extends [any] ? 'one' : 'n']
 
 export type TupleToUnion<T extends any[]> = T[number]
 
-export type Prepend<Insert, Tail extends any[]> = ((
-  i: Insert,
-  ...tail: Tail
-) => void) extends (...tuple: infer Tuple) => void
-  ? Tuple
-  : never
+export type Prepend<Insert, Tail extends any[]> = [Insert, ...Tail]
+
+export type Append<Tuple extends any[], Element> = [...Tuple, Element]
 
 export type Length<T extends any[]> = T['length']
 
@@ -68,6 +66,26 @@ export type LoseLastImpl<A extends any[], B extends any[]> = {
   empty: A
   next: LoseLastImpl<Prepend<B[0], A>, Tail<B>>
 }[B extends [] ? 'empty' : B extends [any] ? 'empty' : 'next']
+
+export type UnionToIntersection<U> =
+  (U extends any ? (k: U) => void : never) extends ((k: infer I) => void) ? I : never
+
+type LastOf<T> =
+  UnionToIntersection<T extends any ? () => T : never> extends () => (infer R) ? R : never
+
+export type Push<T extends any[], V> = [...T, V];
+
+export type UnionToTuple<T, L = LastOf<T>, N = [T] extends [never] ? true : false> = true extends N ? [] : Push<UnionToTuple1<Exclude<T, L>>, L>
+type UnionToTuple1<T, L = LastOf<T>, N = [T] extends [never] ? true : false> = true extends N ? [] : Push<UnionToTuple2<Exclude<T, L>>, L>
+type UnionToTuple2<T, L = LastOf<T>, N = [T] extends [never] ? true : false> = true extends N ? [] : Push<UnionToTuple3<Exclude<T, L>>, L>
+type UnionToTuple3<T, L = LastOf<T>, N = [T] extends [never] ? true : false> = true extends N ? [] : Push<UnionToTuple4<Exclude<T, L>>, L>
+type UnionToTuple4<T, L = LastOf<T>, N = [T] extends [never] ? true : false> = true extends N ? [] : Push<UnionToTuple5<Exclude<T, L>>, L>
+type UnionToTuple5<T, L = LastOf<T>, N = [T] extends [never] ? true : false> = true extends N ? [] : Push<UnionToTuple6<Exclude<T, L>>, L>
+type UnionToTuple6<T, L = LastOf<T>, N = [T] extends [never] ? true : false> = true extends N ? [] : Push<UnionToTuple7<Exclude<T, L>>, L>
+type UnionToTuple7<T, L = LastOf<T>, N = [T] extends [never] ? true : false> = true extends N ? [] : Push<UnionToTuple8<Exclude<T, L>>, L>
+type UnionToTuple8<T, L = LastOf<T>, N = [T] extends [never] ? true : false> = true extends N ? [] : Push<UnionToTuple9<Exclude<T, L>>, L>
+type UnionToTuple9<T, L = LastOf<T>, N = [T] extends [never] ? true : false> = true extends N ? [] : Push<UnionToTupleX<Exclude<T, L>>, L>
+type UnionToTupleX<T> = never
 
 // export type LoseLast<A extends any[]> = Reverse<LoseLastImpl<[], A>>
 
@@ -85,6 +103,9 @@ type _tuple_to_union_of_empty_is_never = Assert<Equals<TupleToUnion<[]>, never>>
 type _tuple_to_union_of_not_empty_is_list = Assert<
   Equals<TupleToUnion<[string, 1]>, string | 1>
 >
+type _union_to_tuple_of_not_empty_set_is_list = Assert<
+  Equals<UnionToTuple<string | 1>, [string, 1]>
+>
 type _prepend_works_on_empty_tail = Assert<
   Equals<Prepend<string, []>, [string]>
 >
@@ -93,6 +114,18 @@ type _prepend_works_on_non_empty_tail = Assert<
 >
 type _prepend_fails_on_mismatching_types = Assert<
   NotEquals<Prepend<string, [boolean]>, [string, number]>
+>
+type _append_works_on_empty_list = Assert<
+  Equals<Append<[], string>, [string]>
+>
+type _append_works_on_non_empty_list = Assert<
+  Equals<Append<[number], string>, [number, string]>
+>
+type _append_works_on_non_empty_list2 = Assert<
+  Equals<Append<[number, boolean], string>, [number, boolean, string]>
+>
+type _append_fails_on_mismatching_types = Assert<
+  NotEquals<Append<[boolean], string>, [string, number]>
 >
 type _length_works_with_empty = Assert<Equals<Length<[]>, 0>>
 type _length_works_with_one = Assert<Equals<Length<[1]>, 1>>
@@ -133,9 +166,14 @@ type _TESTS_ =
   | _last_is_not_string
   | _tuple_to_union_of_empty_is_never
   | _tuple_to_union_of_not_empty_is_list
+  | _union_to_tuple_of_not_empty_set_is_list
   | _prepend_works_on_empty_tail
   | _prepend_works_on_non_empty_tail
   | _prepend_fails_on_mismatching_types
+  | _append_works_on_empty_list
+  | _append_works_on_non_empty_list
+  | _append_works_on_non_empty_list2
+  | _append_fails_on_mismatching_types
   | _length_works_with_empty
   | _length_works_with_one
   | _length_works_with_tewo

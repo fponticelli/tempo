@@ -15,6 +15,14 @@ import { Maybe, nothing, just } from './maybe'
 import { map as mapArray } from './arrays'
 import { Fun2, Fun3, Fun4, Fun5, Fun6 } from './types/functions'
 import { Option, none, some } from './option'
+import {
+  AsyncResult,
+  notAsked as arNotAsked,
+  success as arSuccess,
+  failure as arFailure,
+  loading as arLoading
+} from './async_result'
+import { Result } from './result'
 
 export type Outcome<T> = { kind: 'Outcome', value: T }
 export type NotAsked = { kind: 'NotAsked' }
@@ -25,9 +33,9 @@ export type Async<T, P> =
   | NotAsked
   | Loading<P>
 
-export function outcome<T, P>(value: T): Async<T, P> { return { kind: 'Outcome', value }}
+export function outcome<T, P>(value: T): Async<T, P> { return { kind: 'Outcome', value } }
 export const notAsked = { kind: 'NotAsked' } as Async<never, never>
-export function loading<T, P>(progress: P): Async<T, P> { return { kind: 'Loading', progress }}
+export function loading<T, P>(progress: P): Async<T, P> { return { kind: 'Loading', progress } }
 
 export function match<A, B, Prog = unknown>(
   result: Async<A, Prog>,
@@ -36,9 +44,9 @@ export function match<A, B, Prog = unknown>(
   fProg: (p: Prog) => B
 ): B {
   switch (result.kind) {
-    case 'Loading':  return fProg(result.progress)
+    case 'Loading': return fProg(result.progress)
     case 'NotAsked': return notAsked
-    case 'Outcome':  return f(result.value)
+    case 'Outcome': return f(result.value)
   }
 }
 
@@ -218,6 +226,18 @@ export function toOption<T, P>(async: Async<T, P>): Option<T> {
     case 'NotAsked':
     case 'Loading': return none
     case 'Outcome': return some(async.value)
+  }
+}
+
+export function toAsyncResult<T, E, P>(async: Async<Result<T, E>, P>): AsyncResult<T, E, P> {
+  switch (async.kind) {
+    case 'Outcome':
+      switch (async.value.kind) {
+        case 'Success': return arSuccess(async.value.value)
+        case 'Failure': return arFailure(async.value.error)
+      }
+    case 'NotAsked': return arNotAsked as AsyncResult<T, E, P>
+    case 'Loading': return arLoading(async.progress)
   }
 }
 

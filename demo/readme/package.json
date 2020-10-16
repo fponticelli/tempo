@@ -25,7 +25,7 @@
     "cssnano": "^4.1.10",
     "parcel-bundler": "^1.12.4",
     "prettier": "^2.0.5",
-    "typescript": "^3.9.5"
+    "typescript": "^4.0.3"
   },
   "scripts": {
     "compile": "NODE_ENV=production && npx tsc --noEmit && parcel build src/index.html --public-url . --out-dir ./dist",

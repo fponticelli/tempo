@@ -1,7 +1,7 @@
 import { State, Content } from './state'
 import { Action } from './action'
 import { loadJson, loadText } from './request'
-import { outcome } from 'tempo-std/lib/async'
+import { outcome, toAsyncResult } from 'tempo-std/lib/async'
 import { forEach, isSuccess } from 'tempo-std/lib/async_result'
 import { Toc } from './toc'
 import { HttpError } from './request'
@@ -49,7 +49,7 @@ export const middleware: Middleware<State, Action> = (
   switch (action.kind) {
     case 'LoadedToc':
       if (isSuccess(action.toc)) {
-        contentFromRoute(dispatch, action.toc.value.value, state.route)
+        contentFromRoute(dispatch, action.toc.value, state.route)
       }
       break
     case 'RequestToc':
@@ -58,7 +58,7 @@ export const middleware: Middleware<State, Action> = (
           ...t,
           pages: t.pages.filter(p => p.path !== 'index.html')
         }))
-        dispatch(Action.loadedToc(outcome(toc)))
+        dispatch(Action.loadedToc(toAsyncResult(outcome(toc))))
       }) // TODO parse Toc
       break
     case 'RequestPageContent':
@@ -66,9 +66,11 @@ export const middleware: Middleware<State, Action> = (
         loadText(url).then((htmlResult: Result<string, HttpError>) =>
           dispatch(
             Action.loadedContent(
-              outcome(
-                map(htmlResult, h =>
-                  Content.htmlPage(undefined, h, urlToGitHubContent(url))
+              toAsyncResult(
+                outcome(
+                  map(htmlResult, h =>
+                    Content.htmlPage(undefined, h, urlToGitHubContent(url))
+                  )
                 )
               )
             )
