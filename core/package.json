@@ -3,7 +3,7 @@
   "license": "Apache-2.0",
   "priority": 20,
   "description": "Core types for Tempo. The tempo architecture encourages a unilateral flow in a practical way.",
-  "version": "1.7.2",
+  "version": "1.8.0",
   "keywords": [
     "tempo",
     "framework",

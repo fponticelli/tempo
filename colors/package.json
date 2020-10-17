@@ -3,7 +3,7 @@
   "license": "Apache-2.0",
   "priority": 10,
   "description": "Colors library for TypeScript.",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "keywords": [
     "tempo",
     "colors",

@@ -1,6 +1,6 @@
 {
   "name": "tempo-store",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "priority": 20,
   "description": "Super simple state management library",
   "license": "Apache-2.0",

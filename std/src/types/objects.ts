@@ -25,38 +25,38 @@ export type ObjectWithPath<Path extends IndexType[], V> = Path extends []
   ? {}
   : Path extends [infer T]
   ? T extends IndexType
-    ? { [_ in T]: V }
-    : never
+  ? { [_ in T]: V }
+  : never
   : Path extends [infer K, ...any[]]
   ? K extends IndexType
-    ? Tail<Path> extends infer Rest
-      ? Rest extends IndexType[]
-        ? { [_ in K]: ObjectWithPath<Rest, V> }
-        : never
-      : never
-    : never
+  ? Tail<Path> extends infer Rest
+  ? Rest extends IndexType[]
+  ? { [_ in K]: ObjectWithPath<Rest, V> }
+  : never
+  : never
+  : never
   : never
 
 export type TypeAtPath<Path extends IndexType[], O> = {
   next: Path extends [infer K, ...any[]]
-    ? K extends IndexType
-      ? Tail<Path> extends infer Rest
-        ? O extends Record<IndexType, any>
-          ? Rest extends IndexType[]
-            ? TypeAtPath<Rest, O[K]>
-            : never
-          : never
-        : never
-      : never
-    : never
+  ? K extends IndexType
+  ? Tail<Path> extends infer Rest
+  ? O extends Record<IndexType, any>
+  ? Rest extends IndexType[]
+  ? TypeAtPath<Rest, O[K]>
+  : never
+  : never
+  : never
+  : never
+  : never
   empty: O
   done: O extends Record<IndexType, any>
-    ? Path extends [infer K]
-      ? K extends IndexType
-        ? O[K]
-        : never
-      : never
-    : never
+  ? Path extends [infer K]
+  ? K extends IndexType
+  ? O[K]
+  : never
+  : never
+  : never
 }[Path extends [] ? 'empty' : Path extends [any] ? 'done' : 'next']
 
 export type WritableKeys<T> = {
@@ -75,6 +75,8 @@ export type ReadonlyKeys<T> = {
     P
   >
 }[keyof T]
+
+export type Id<T> = {} & { [P in keyof T]: T[P] }
 
 export type KeysWithFieldType<T, Condition> = {
   [K in keyof T]: WhenEquals<T[K], Condition, K>
@@ -95,19 +97,19 @@ export type ExcludeFunctionFields<T> = Pick<
   KeysWithoutFieldType<T, AnyFunction>
 >
 
-// TODO express as literal object but preserve readonly/optional
-export type Merge<A, B> = A & B
-// {
-//   [K in keyof A | keyof B]: K extends keyof B
-//     ? B[K]
-//     : K extends keyof A
-//     ? A[K]
-//     : never
-// }
+export type Merge<A, B> = Id<A & B>
 
 // TYPE TESTS
 import { Assert, Equals, AssertNot } from './assert'
 import { WhenEquals } from './generic'
+
+type _merged_ = Merge<{ a: string, c?: number }, { b?: boolean }>
+type _merge_two_object_types_ = Assert<
+  Equals<
+    _merged_,
+    { a: string, b?: boolean, c?: number }
+  >
+>
 
 type _object_with_field_has_field = Assert<
   Equals<{ a: number }, ObjectWithField<'a', number>>
@@ -181,6 +183,7 @@ type _RemoveNullableFromFields_matches = Assert<
 
 // @ts-ignore
 type _TESTS_ =
+  | _merge_two_object_types_
   | _object_with_field_has_field
   | _object_with_field_has_no_field
   | _object_with_empty_path_is_empty_object
