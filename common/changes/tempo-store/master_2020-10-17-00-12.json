@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "tempo-store",
+      "comment": "Update TS version",
+      "type": "minor"
+    }
+  ],
+  "packageName": "tempo-store",
+  "email": "franco.ponticelli@gmail.com"
+}

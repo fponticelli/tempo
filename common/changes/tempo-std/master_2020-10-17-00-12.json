@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "tempo-std",
+      "comment": "Update TS version and added a few more type helpers",
+      "type": "minor"
+    }
+  ],
+  "packageName": "tempo-std",
+  "email": "franco.ponticelli@gmail.com"
+}
