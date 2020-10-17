@@ -4,7 +4,7 @@
       "name": "dom",
       "title": "tempo-dom",
       "description": "Fully-typed frontend framework alternative to React and Angular",
-      "version": "0.27.3",
+      "version": "0.29.0",
       "keywords": [
         "tempo",
         "ui",
@@ -20,7 +20,7 @@
       "name": "std",
       "title": "tempo-std",
       "description": "Std library for TypeScript. Natural complement to the tempo libs.",
-      "version": "0.5.6",
+      "version": "0.7.0",
       "keywords": [
         "tempo",
         "framework",
@@ -33,7 +33,7 @@
       "name": "core",
       "title": "tempo-core",
       "description": "Core types for Tempo. The tempo architecture encourages a unilateral flow in a practical way.",
-      "version": "1.7.2",
+      "version": "1.9.0",
       "keywords": [
         "tempo",
         "framework",
@@ -46,7 +46,7 @@
       "name": "store",
       "title": "tempo-store",
       "description": "Super simple state management library",
-      "version": "1.3.0",
+      "version": "1.5.0",
       "keywords": [
         "tempo",
         "unidirectional-flow",

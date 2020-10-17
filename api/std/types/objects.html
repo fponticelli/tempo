@@ -16,6 +16,11 @@
       >
     </li>
     <li>
+      <a class="is-family-monospace" href="#/api/std/types/objects.html#Id"
+        >Id</a
+      >
+    </li>
+    <li>
       <a
         class="is-family-monospace"
         href="#/api/std/types/objects.html#KeysWithFieldType"
@@ -105,13 +110,32 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/types/objects.ts#L93"
-    >std/src/types/objects.ts at line 93</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/types/objects.ts#L95"
+    >std/src/types/objects.ts at line 95</a
   >
 </p>
 <pre
   class="import-code ts language-ts"
 ><span class="token keyword">import</span> <span class="token punctuation">{</span> ExcludeFunctionFields <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/types/objects.ts'</span></pre>
+<h3 class="is-family-monospace has-text-grey-dark" id="Id">
+  Id<span class="kind is-family-sans-serif has-text-grey-light is-size-6"
+    >type alias</span
+  >
+</h3>
+<pre
+  class="ts language-ts signature"
+><span class="token keyword">type</span> Id<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span> <span class="token operator">&amp;</span> <span class="token punctuation">{</span> <span class="token punctuation">[</span><span class="token constant">P</span> <span class="token keyword">in</span> <span class="token keyword">keyof</span> <span class="token constant">T</span><span class="token punctuation">]</span><span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token constant">P</span><span class="token punctuation">]</span> <span class="token punctuation">}</span>
+</pre>
+<p class="defined-in">
+  defined in
+  <a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/types/objects.ts#L79"
+    >std/src/types/objects.ts at line 79</a
+  >
+</p>
+<pre
+  class="import-code ts language-ts"
+><span class="token keyword">import</span> <span class="token punctuation">{</span> Id <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tempo-std/lib/types/objects.ts'</span></pre>
 <h3 class="is-family-monospace has-text-grey-dark" id="KeysWithFieldType">
   KeysWithFieldType<span
     class="kind is-family-sans-serif has-text-grey-light is-size-6"
@@ -127,8 +151,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/types/objects.ts#L79"
-    >std/src/types/objects.ts at line 79</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/types/objects.ts#L81"
+    >std/src/types/objects.ts at line 81</a
   >
 </p>
 <pre
@@ -149,8 +173,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/types/objects.ts#L83"
-    >std/src/types/objects.ts at line 83</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/types/objects.ts#L85"
+    >std/src/types/objects.ts at line 85</a
   >
 </p>
 <pre
@@ -163,13 +187,13 @@
 </h3>
 <pre
   class="ts language-ts signature"
-><span class="token keyword">type</span> Merge<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token constant">A</span> <span class="token operator">&amp;</span> <span class="token constant">B</span>
+><span class="token keyword">type</span> Merge<span class="token operator">&lt;</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token constant">B</span><span class="token operator">&gt;</span> <span class="token operator">=</span> Id<span class="token operator">&lt;</span><span class="token constant">A</span> <span class="token operator">&amp;</span> <span class="token constant">B</span><span class="token operator">&gt;</span>
 </pre>
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/types/objects.ts#L99"
-    >std/src/types/objects.ts at line 99</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/types/objects.ts#L100"
+    >std/src/types/objects.ts at line 100</a
   >
 </p>
 <pre
@@ -242,8 +266,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/types/objects.ts#L92"
-    >std/src/types/objects.ts at line 92</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/types/objects.ts#L94"
+    >std/src/types/objects.ts at line 94</a
   >
 </p>
 <pre
@@ -294,8 +318,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/types/objects.ts#L87"
-    >std/src/types/objects.ts at line 87</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/types/objects.ts#L89"
+    >std/src/types/objects.ts at line 89</a
   >
 </p>
 <pre
@@ -354,8 +378,8 @@
 <p class="defined-in">
   defined in
   <a
-    href="https://github.com/fponticelli/tempo/blob/master/std/src/types/objects.ts#L91"
-    >std/src/types/objects.ts at line 91</a
+    href="https://github.com/fponticelli/tempo/blob/master/std/src/types/objects.ts#L93"
+    >std/src/types/objects.ts at line 93</a
   >
 </p>
 <pre
