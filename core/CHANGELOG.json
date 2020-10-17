@@ -2,6 +2,18 @@
   "name": "tempo-core",
   "entries": [
     {
+      "version": "1.9.0",
+      "tag": "tempo-core_v1.9.0",
+      "date": "Sat, 17 Oct 2020 00:13:17 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Update TS version"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.7.2",
       "tag": "tempo-core_v1.7.2",
       "date": "Thu, 09 Jul 2020 01:32:44 GMT",

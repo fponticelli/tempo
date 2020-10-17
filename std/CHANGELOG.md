@@ -1,6 +1,13 @@
 # Change Log - tempo-std
 
-This log was last generated on Sun, 12 Jul 2020 03:32:19 GMT and should not be manually modified.
+This log was last generated on Sat, 17 Oct 2020 00:13:17 GMT and should not be manually modified.
+
+## 0.7.0
+Sat, 17 Oct 2020 00:13:17 GMT
+
+### Minor changes
+
+- Update TS version and added a few more type helpers
 
 ## 0.5.6
 Sun, 12 Jul 2020 03:32:19 GMT

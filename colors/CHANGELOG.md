@@ -1,6 +1,13 @@
 # Change Log - tempo-colors
 
-This log was last generated on Mon, 08 Jun 2020 23:05:13 GMT and should not be manually modified.
+This log was last generated on Sat, 17 Oct 2020 00:13:17 GMT and should not be manually modified.
+
+## 0.3.0
+Sat, 17 Oct 2020 00:13:17 GMT
+
+### Minor changes
+
+- Updated TS version
 
 ## 0.1.2
 Mon, 08 Jun 2020 23:05:13 GMT

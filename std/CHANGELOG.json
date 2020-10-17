@@ -2,6 +2,18 @@
   "name": "tempo-std",
   "entries": [
     {
+      "version": "0.7.0",
+      "tag": "tempo-std_v0.7.0",
+      "date": "Sat, 17 Oct 2020 00:13:17 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Update TS version and added a few more type helpers"
+          }
+        ]
+      }
+    },
+    {
       "version": "0.5.6",
       "tag": "tempo-std_v0.5.6",
       "date": "Sun, 12 Jul 2020 03:32:19 GMT",

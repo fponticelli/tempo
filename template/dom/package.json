@@ -13,9 +13,9 @@
   ],
   "main": "index.js",
   "dependencies": {
-    "tempo-core": "^1.7.2",
-    "tempo-dom": "^0.27.3",
-    "tempo-std": "^0.5.6"
+    "tempo-core": "^1.9.0",
+    "tempo-dom": "^0.29.0",
+    "tempo-std": "^0.7.0"
   },
   "devDependencies": {
     "@types/jest": "^25.2.3",
