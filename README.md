@@ -7,7 +7,7 @@
 
 [Project Homepage](https://tempots.com/)
 
-Tempo is a framework to build dynamic front end applications.
+Tempo is a framework to build dynamic frontend applications.
 
 This is not an officially supported Google product.
 
